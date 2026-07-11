@@ -307,30 +307,6 @@ Then `npm run lint` and re‑render. (Requires `pip install edge-tts` and intern
   caches, `.env*`. All regenerated locally — nothing required to run is left out.
 - **First run only:** Remotion downloads Chromium once and fetches Google Fonts over the network.
 
-## Push this repo to your own GitHub
-
-This is a fresh project (no git history yet). To publish under your account:
-
-```bash
-git init
-git branch -M main
-git config user.name  "your-name"
-git config user.email "you@users.noreply.github.com"   # your GitHub noreply email
-git add -A
-git status                # verify node_modules/, out/, *.zip are NOT listed
-git commit -m "Initial commit: iAuteur"
-git remote add origin https://github.com/<your-username>/iauteur.git
-git push -u origin main
-```
-
-If your machine's git is signed into a **different** (e.g. work) account, authenticate this push as your
-personal account without disturbing that: create a **fine‑grained Personal Access Token** (repo → Contents:
-Read/Write) on GitHub, then either push with a fresh credential prompt
-(`git -c credential.helper= -c credential.interactive=always push -u origin main` → username + paste the token
-as the password), or embed it once (`git push "https://<user>:<TOKEN>@github.com/<user>/iauteur.git" main`)
-and then scrub it (`git remote set-url origin https://github.com/<user>/iauteur.git`). Never commit
-a token or a `.env`.
-
 ## Troubleshooting
 
 - **`npm run render` can't find the composition** — run `npm run gen-index` (regenerates `src/topicsIndex.ts`
