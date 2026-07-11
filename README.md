@@ -1,8 +1,16 @@
 <p align="center">
-  <img src="brand/iauteur-lockup.svg" alt="iAuteur" width="300" />
+  <img src="brand/iauteur-banner.png" alt="iAuteur — topic in, film out" width="820" />
 </p>
 
-# iAuteur — a JSON‑driven video factory (Remotion)
+<p align="center">
+  <a href="https://remotion.dev"><img alt="Built with Remotion" src="https://img.shields.io/badge/built%20with-Remotion-0B84F3"></a>
+  <img alt="Node >= 18" src="https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs&logoColor=white">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white">
+  <img alt="136 components" src="https://img.shields.io/badge/components-136-E8A22E">
+  <img alt="30 design packs" src="https://img.shields.io/badge/design%20packs-30-E8A22E">
+  <img alt="42 themes" src="https://img.shields.io/badge/themes-42-E8A22E">
+  <img alt="Works with any LLM" src="https://img.shields.io/badge/works%20with-any%20LLM-8957E5">
+</p>
 
 Turn a **topic** into a finished tech‑explainer video. You (or any LLM) describe the video as a
 **JSON spec**; [Remotion](https://remotion.dev) renders it to MP4 — 16:9 long‑form **and** 9:16 shorts,
@@ -20,6 +28,7 @@ Copilot, Claude, Cursor, or a **local LLM** (Ollama / LM Studio) equally. See [W
 ---
 
 ## Table of contents
+- [Showcase](#showcase)
 - [What this project is](#what-this-project-is)
 - [How it works (architecture)](#how-it-works-architecture)
 - [Prerequisites](#prerequisites)
@@ -36,6 +45,29 @@ Copilot, Claude, Cursor, or a **local LLM** (Ollama / LM Studio) equally. See [W
 - [Troubleshooting](#troubleshooting)
 - [Repository conventions](#repository-conventions)
 - [Credits & attribution](#credits--attribution)
+
+---
+
+## Showcase
+
+A handful of the **136 components**, rendered straight from JSON specs across different design packs
+(finance in `corptrust`, science in `organic`) — dark themes shown:
+
+<table>
+<tr>
+<td align="center"><img src="docs/media/ticker-tape.png" width="270" alt="TICKER_TAPE"/><br/><code>TICKER_TAPE</code></td>
+<td align="center"><img src="docs/media/candlestick.png" width="270" alt="CANDLESTICK"/><br/><code>CANDLESTICK</code></td>
+<td align="center"><img src="docs/media/sankey.png" width="270" alt="SANKEY"/><br/><code>SANKEY</code></td>
+</tr>
+<tr>
+<td align="center"><img src="docs/media/vector-field.png" width="270" alt="VECTOR_FIELD"/><br/><code>VECTOR_FIELD</code></td>
+<td align="center"><img src="docs/media/radar.png" width="270" alt="RADAR"/><br/><code>RADAR</code></td>
+<td align="center"><img src="docs/media/dna-helix.png" width="270" alt="DNA_HELIX"/><br/><code>DNA_HELIX</code></td>
+</tr>
+</table>
+
+Each is one deterministic component that reskins across all 30 design packs and dark/light. Browse the whole
+library live with `npm run dev` — open any `<design>-wide` composition and scrub.
 
 ---
 
