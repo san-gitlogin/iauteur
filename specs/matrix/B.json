@@ -1,0 +1,703 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "PHOTO-min",
+      "type": "PHOTO",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "photo": {
+          "asset": "img:network.jpg",
+          "caption": "a scene",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "PHOTO-max",
+      "type": "PHOTO",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "photo": {
+          "asset": "img:server-racks.jpg",
+          "kicker": "INSIDE THE DATACENTER",
+          "caption": "Inside a live production data center at full capacity",
+          "pan": "in",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "IMAGE_SCENE-min",
+      "type": "IMAGE_SCENE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "image": {
+          "asset": "img:network.jpg",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "IMAGE_SCENE-max",
+      "type": "IMAGE_SCENE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "image": {
+          "variant": "pip",
+          "asset": "img:server-racks.jpg",
+          "caption": "A pip inset over the main image here",
+          "pip": {
+            "asset": "img:network.jpg",
+            "label": "inset detail view"
+          },
+          "color": "purple",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "IMAGE_SCENE-maxPolaroid",
+      "type": "IMAGE_SCENE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "image": {
+          "variant": "polaroid",
+          "asset": "img:datacenter.jpg",
+          "caption": "A tilted polaroid at the cap now",
+          "color": "orange",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "GALLERY-min",
+      "type": "GALLERY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "gallery": {
+          "tiles": [
+            {
+              "asset": "lucide:box",
+              "label": "One"
+            },
+            {
+              "asset": "lucide:star",
+              "label": "Two"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "GALLERY-max",
+      "type": "GALLERY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "gallery": {
+          "variant": "grid",
+          "columns": 3,
+          "tiles": [
+            {
+              "asset": "lucide:layout-dashboard",
+              "label": "Dashboard view",
+              "color": "blue"
+            },
+            {
+              "asset": "lucide:bar-chart",
+              "label": "Analytics panel",
+              "color": "purple"
+            },
+            {
+              "asset": "lucide:file-text",
+              "label": "Reporting suite",
+              "color": "green"
+            },
+            {
+              "asset": "lucide:settings",
+              "label": "Settings screen",
+              "color": "orange"
+            },
+            {
+              "asset": "lucide:user",
+              "label": "Profile editor",
+              "color": "red"
+            },
+            {
+              "asset": "lucide:credit-card",
+              "label": "Billing center",
+              "color": "yellow"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "GALLERY-maxClips",
+      "type": "GALLERY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [clips] grid at cap",
+        "headlineColor": "orange",
+        "gallery": {
+          "variant": "clips",
+          "tiles": [
+            {
+              "src": "assets/video/demo_ui.mp4",
+              "label": "Interface tour",
+              "color": "orange",
+              "atWord": 1
+            },
+            {
+              "src": "assets/video/demo_flow.mp4",
+              "label": "Dataflow demo",
+              "color": "blue",
+              "atWord": 2
+            },
+            {
+              "src": "assets/video/demo_grid.mp4",
+              "label": "Layout engine",
+              "color": "green",
+              "atWord": 3
+            },
+            {
+              "src": "assets/network.jpg",
+              "kind": "image",
+              "label": "Static tile too",
+              "color": "purple",
+              "atWord": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PHOTO_STACK-min",
+      "type": "PHOTO_STACK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "photoStack": {
+          "cards": [
+            {
+              "asset": "img:network.jpg",
+              "label": "A",
+              "atWord": 1
+            },
+            {
+              "asset": "img:server.jpg",
+              "label": "B",
+              "atWord": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PHOTO_STACK-max",
+      "type": "PHOTO_STACK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "photoStack": {
+          "cards": [
+            {
+              "asset": "img:server-racks.jpg",
+              "label": "Q1 revenue snapshot report",
+              "color": "blue",
+              "atWord": 1
+            },
+            {
+              "asset": "img:network.jpg",
+              "label": "Network topology overview",
+              "color": "purple",
+              "atWord": 2
+            },
+            {
+              "asset": "img:datacenter.jpg",
+              "label": "Facility floor plan detail",
+              "color": "green",
+              "atWord": 3
+            },
+            {
+              "asset": "img:server.jpg",
+              "label": "Rack elevation diagram",
+              "color": "orange",
+              "atWord": 4
+            },
+            {
+              "asset": "img:network.jpg",
+              "label": "Cabling schematic layout",
+              "color": "red",
+              "atWord": 5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAROUSEL-min",
+      "type": "CAROUSEL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "carousel": {
+          "items": [
+            {
+              "label": "One",
+              "sub": "first",
+              "asset": "lucide:box",
+              "color": "blue"
+            },
+            {
+              "label": "Two",
+              "sub": "second",
+              "asset": "lucide:star",
+              "color": "green"
+            }
+          ],
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "CAROUSEL-max",
+      "type": "CAROUSEL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "carousel": {
+          "atWord": 1,
+          "items": [
+            {
+              "label": "Ingestion layer",
+              "sub": "collect raw events",
+              "asset": "lucide:download",
+              "color": "blue"
+            },
+            {
+              "label": "Processing core",
+              "sub": "transform + enrich",
+              "asset": "lucide:cpu",
+              "color": "purple"
+            },
+            {
+              "label": "Storage engine",
+              "sub": "durable persistence",
+              "asset": "lucide:database",
+              "color": "green"
+            },
+            {
+              "label": "Analytics suite",
+              "sub": "query + aggregate",
+              "asset": "lucide:bar-chart",
+              "color": "orange"
+            },
+            {
+              "label": "Delivery layer",
+              "sub": "serve + cache",
+              "asset": "lucide:send",
+              "color": "red"
+            },
+            {
+              "label": "Monitoring hub",
+              "sub": "observe + alert",
+              "asset": "lucide:activity",
+              "color": "yellow"
+            },
+            {
+              "label": "Security gate",
+              "sub": "authn + authz",
+              "asset": "lucide:shield",
+              "color": "blue"
+            },
+            {
+              "label": "Governance API",
+              "sub": "policy + audit",
+              "asset": "lucide:scale",
+              "color": "purple"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "COMPARISON_SLIDER-min",
+      "type": "COMPARISON_SLIDER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "comparison": {
+          "before": {
+            "label": "Before",
+            "color": "red"
+          },
+          "after": {
+            "label": "After",
+            "color": "green"
+          },
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "COMPARISON_SLIDER-max",
+      "type": "COMPARISON_SLIDER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "comparison": {
+          "atWord": 1,
+          "before": {
+            "asset": "img:network.jpg",
+            "label": "Legacy design",
+            "caption": "thirty-char caption at cap",
+            "color": "red"
+          },
+          "after": {
+            "asset": "img:server-racks.jpg",
+            "label": "Refreshed build",
+            "caption": "thirty-char caption at cap",
+            "color": "green"
+          }
+        }
+      }
+    },
+    {
+      "id": "FLIP_CARD-min",
+      "type": "FLIP_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "flip": {
+          "front": {
+            "label": "Myth",
+            "text": "a short myth"
+          },
+          "back": {
+            "label": "Fact",
+            "text": "the real fact"
+          },
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "FLIP_CARD-max",
+      "type": "FLIP_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "flip": {
+          "atWord": 1,
+          "front": {
+            "label": "The common myth here",
+            "text": "Front-face text stressed right up to the eighty character contract cap!",
+            "color": "red"
+          },
+          "back": {
+            "label": "The actual fact now",
+            "text": "Back-face text also pushed up to the eighty character contract cap here",
+            "color": "green"
+          }
+        }
+      }
+    },
+    {
+      "id": "SOUND_WAVE-min",
+      "type": "SOUND_WAVE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "wave": {
+          "label": "audio",
+          "color": "purple",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "SOUND_WAVE-max",
+      "type": "SOUND_WAVE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Now [listen] closely.",
+        "wave": {
+          "label": "episode twelve podcast",
+          "color": "purple",
+          "bars": 40,
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "LOGO_REVEAL-min",
+      "type": "LOGO_REVEAL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "logo": {
+          "name": "ACME",
+          "asset": "lucide:hexagon",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "LOGO_REVEAL-max",
+      "type": "LOGO_REVEAL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "logo": {
+          "name": "ACME Intelligence Inc",
+          "tagline": "shipping intelligence at scale everyday",
+          "asset": "lucide:hexagon",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "LOCATION_MAP-min",
+      "type": "LOCATION_MAP",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "locationMap": {
+          "location": "Berlin",
+          "coordinates": "52.52 N",
+          "status": "Live",
+          "color": "green",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "LOCATION_MAP-max",
+      "type": "LOCATION_MAP",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "locationMap": {
+          "location": "San Francisco California USA",
+          "coordinates": "37.7749 N, 122.4194 W approx",
+          "status": "Streaming",
+          "color": "green",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "ACTIVITY_CARD-min",
+      "type": "ACTIVITY_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "activity": {
+          "title": "Activity",
+          "value": "21h",
+          "color": "blue",
+          "trendColor": "green",
+          "atWord": 1,
+          "data": [
+            {
+              "day": "M",
+              "value": 8
+            },
+            {
+              "day": "T",
+              "value": 12
+            },
+            {
+              "day": "W",
+              "value": 9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ACTIVITY_CARD-max",
+      "type": "ACTIVITY_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "activity": {
+          "title": "Weekly active minutes",
+          "value": "128.5h",
+          "trend": "+42% versus the prior week now",
+          "range": "Last 9 days",
+          "color": "blue",
+          "trendColor": "green",
+          "atWord": 1,
+          "data": [
+            {
+              "day": "Mon",
+              "value": 82
+            },
+            {
+              "day": "Tue",
+              "value": 120
+            },
+            {
+              "day": "Wed",
+              "value": 95
+            },
+            {
+              "day": "Thu",
+              "value": 44
+            },
+            {
+              "day": "Fri",
+              "value": 140
+            },
+            {
+              "day": "Sat",
+              "value": 61
+            },
+            {
+              "day": "Sun",
+              "value": 33
+            },
+            {
+              "day": "M+7",
+              "value": 108
+            },
+            {
+              "day": "T+7",
+              "value": 127
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CHAT_MOCKUP-min",
+      "type": "CHAT_MOCKUP",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "source": "illustrative",
+        "panelLabel": "AI",
+        "messages": [
+          {
+            "from": "user",
+            "text": "What is my refund window?",
+            "atWord": 1
+          },
+          {
+            "from": "agent",
+            "text": "Thirty days.",
+            "atWord": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "CHAT_MOCKUP-max",
+      "type": "CHAT_MOCKUP",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "source": "illustrative",
+        "headline": "Confident, instant — [and wrong.]",
+        "headlineColor": "red",
+        "panelLabel": "AI SUPPORT AGENT",
+        "panelColor": "purple",
+        "messages": [
+          {
+            "from": "user",
+            "text": "How long do I have to request a refund on my recent order?",
+            "atWord": 1
+          },
+          {
+            "from": "agent",
+            "text": "You have thirty days from the delivery date to request a refund.",
+            "color": "purple",
+            "atWord": 2
+          },
+          {
+            "from": "user",
+            "text": "That does not match the policy document you were given.",
+            "atWord": 3
+          },
+          {
+            "from": "agent",
+            "text": "You're right — the file says fourteen days. I never opened it.",
+            "color": "red",
+            "atWord": 4
+          }
+        ]
+      }
+    }
+  ]
+}

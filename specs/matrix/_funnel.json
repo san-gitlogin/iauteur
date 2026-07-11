@@ -1,0 +1,13 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "FUNNEL-min", "type": "FUNNEL", "narration": "A tiny two stage funnel from visits to signups here now today for the demo.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "A tiny [funnel].", "headlineColor": "blue", "funnel": {"color": "blue", "stages": [{"label": "Visits", "value": 1000, "atWord": 1}, {"label": "Signups", "value": 320, "atWord": 3}]}}},
+    {"id": "FUNNEL-max", "type": "FUNNEL", "narration": "The full six stage conversion funnel from a million visits down to the paid customers who convert.", "durationFrames": 240, "background": "zoneA", "data": {"headline": "The [conversion] funnel at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE FUNNEL DATA", "funnel": {"color": "blue", "stages": [
+      {"label": "Site visits at the cap ok", "value": 1000000, "color": "blue", "atWord": 1},
+      {"label": "Product page views now", "value": 420000, "color": "purple", "atWord": 2},
+      {"label": "Added to cart totals", "value": 145000, "color": "green", "atWord": 3},
+      {"label": "Began the checkout flow", "value": 61000, "color": "orange", "atWord": 4},
+      {"label": "Entered payment details", "value": 24000, "color": "red", "atWord": 5},
+      {"label": "Completed the purchase", "value": 9800, "color": "yellow", "atWord": 6}]}}}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "TICKER_TAPE-min", "type": "TICKER_TAPE", "narration": "Three names on the tape right now, two up and one down as the strip scrolls by.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [tape.]", "headlineColor": "blue", "source": "ILLUSTRATIVE", "ticker": {"color": "blue", "rows": 1, "entries": [
+      {"symbol": "AAPL", "price": "$226.10", "change": 0.84},
+      {"symbol": "TSLA", "price": "$251.30", "change": -1.45},
+      {"symbol": "MSFT", "price": "$438.90", "change": 1.12}]}}},
+    {"id": "TICKER_TAPE-max", "type": "TICKER_TAPE", "narration": "A full board at cap: sixteen tickers across three scrolling bands with Bitcoin featured up top, greens and reds sweeping past.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "Sixteen tickers at [cap]", "headlineColor": "orange", "source": "ILLUSTRATIVE", "ticker": {"color": "orange", "featured": "BTC", "rows": 3, "entries": [
+      {"symbol": "BTC", "price": "$97.8k", "change": 2.08},
+      {"symbol": "ETH", "price": "$3,410", "change": -1.12},
+      {"symbol": "NVDA", "price": "$182.40", "change": 3.21},
+      {"symbol": "AAPL", "price": "$226.10", "change": 0.84},
+      {"symbol": "MSFT", "price": "$438.90", "change": 1.12},
+      {"symbol": "TSLA", "price": "$251.30", "change": -1.45},
+      {"symbol": "AMZN", "price": "$201.70", "change": 0.56},
+      {"symbol": "GOOGL", "price": "$174.20", "change": -0.32},
+      {"symbol": "META", "price": "$602.10", "change": 1.88},
+      {"symbol": "AMD", "price": "$164.90", "change": -2.04},
+      {"symbol": "SOL", "price": "$198.30", "change": 4.12},
+      {"symbol": "NFLX", "price": "$712.50", "change": 0.22},
+      {"symbol": "JPM", "price": "$243.80", "change": -0.61},
+      {"symbol": "XRP", "price": "$2.34", "change": 5.77},
+      {"symbol": "INTC", "price": "$24.10", "change": -3.40},
+      {"symbol": "BABA", "price": "$88.60", "change": 1.03}]}}}
+  ]
+}

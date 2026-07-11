@@ -1,0 +1,2 @@
+Generate real voiceover + sync for a topic. Expect $ARGUMENTS = <slug> [voice].
+Run: `npm run voiceover -- <slug>`, then `python scripts/voiceover.py topics/<slug>/long.json <slug>_long [voice]` and the shorts equivalent, then sync both via scripts/sync.mjs, then `npm run lint`. If python/edge-tts is missing, give the one-line install and stop. Report per-scene durations and remind the user to verify one scene's A/V sync in Studio before batch rendering.

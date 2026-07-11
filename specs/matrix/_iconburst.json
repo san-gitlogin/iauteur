@@ -1,0 +1,20 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "ICON_BURST-min", "type": "ICON_BURST", "narration": "A core with three connections radiating out to the tools around it right now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [core].", "headlineColor": "blue", "iconBurst": {"color": "blue", "center": {"icon": "lucide:box", "label": "Core"}, "spokes": [
+      {"icon": "si:slack", "label": "Slack", "color": "green"},
+      {"icon": "si:github", "label": "GitHub", "color": "blue"},
+      {"icon": "si:figma", "label": "Figma", "color": "orange"}]}}},
+    {"id": "ICON_BURST-max", "type": "ICON_BURST", "narration": "The full integration hub, ten tools radiating from the platform core around the whole circle at once.", "durationFrames": 280, "background": "zoneA", "data": {"headline": "The [hub] at cap", "headlineColor": "purple", "source": "ILLUSTRATIVE INTEGRATIONS", "iconBurst": {"color": "purple", "center": {"icon": "lucide:box", "label": "Platform"}, "spokes": [
+      {"icon": "si:slack", "label": "Slack", "color": "green"},
+      {"icon": "si:github", "label": "GitHub", "color": "blue"},
+      {"icon": "si:figma", "label": "Figma", "color": "orange"},
+      {"icon": "si:notion", "label": "Notion", "color": "red"},
+      {"icon": "si:linear", "label": "Linear", "color": "purple"},
+      {"icon": "si:zapier", "label": "Zapier", "color": "yellow"},
+      {"icon": "si:stripe", "label": "Stripe", "color": "blue"},
+      {"icon": "si:jira", "label": "Jira", "color": "blue"},
+      {"icon": "si:asana", "label": "Asana", "color": "red"},
+      {"icon": "si:vercel", "label": "Vercel", "color": "green"}]}}}
+  ]
+}

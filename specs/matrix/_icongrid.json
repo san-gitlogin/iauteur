@@ -1,0 +1,22 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "ICON_GRID-min", "type": "ICON_GRID", "narration": "Three core tools power it, typescript react and node working together now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [core] three.", "headlineColor": "blue", "iconGrid": {"color": "blue", "items": [
+      {"icon": "si:typescript", "label": "TypeScript", "color": "blue", "atWord": 1},
+      {"icon": "si:react", "label": "React", "color": "purple", "atWord": 2},
+      {"icon": "si:nodedotjs", "label": "Node.js", "color": "green", "atWord": 3}]}}},
+    {"id": "ICON_GRID-max", "type": "ICON_GRID", "narration": "The full stack, twelve tools across languages frameworks databases infrastructure and tooling, each in its own tile.", "durationFrames": 280, "background": "zoneA", "data": {"headline": "The whole [stack] at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE STACK", "iconGrid": {"color": "blue", "items": [
+      {"icon": "si:typescript", "label": "TypeScript", "color": "blue", "atWord": 1},
+      {"icon": "si:react", "label": "React", "color": "purple", "atWord": 1},
+      {"icon": "si:nodedotjs", "label": "Node.js", "color": "green", "atWord": 2},
+      {"icon": "si:postgresql", "label": "PostgreSQL", "color": "blue", "atWord": 2},
+      {"icon": "si:redis", "label": "Redis", "color": "red", "atWord": 3},
+      {"icon": "si:docker", "label": "Docker", "color": "orange", "atWord": 3},
+      {"icon": "si:kubernetes", "label": "Kubernetes", "color": "blue", "atWord": 4},
+      {"icon": "si:graphql", "label": "GraphQL", "color": "purple", "atWord": 4},
+      {"icon": "si:tailwindcss", "label": "Tailwind", "color": "blue", "atWord": 5},
+      {"icon": "si:vite", "label": "Vite", "color": "yellow", "atWord": 5},
+      {"icon": "si:jest", "label": "Jest", "color": "red", "atWord": 6},
+      {"icon": "si:githubactions", "label": "Actions", "color": "green", "atWord": 6}]}}}
+  ]
+}

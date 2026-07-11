@@ -1,0 +1,17 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "CIRCUIT_FLOW-min", "type": "CIRCUIT_FLOW", "narration": "The simplest loop right now: a battery driving a single bulb around one wire.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The simplest [loop.]", "headlineColor": "orange", "circuitFlow": {"color": "orange", "currentLabel": "current", "components": [
+      {"kind": "battery", "label": "1.5V", "color": "orange"},
+      {"kind": "bulb", "label": "Lamp", "color": "yellow"}]}}},
+    {"id": "CIRCUIT_FLOW-max", "type": "CIRCUIT_FLOW", "narration": "A full board at cap: battery, switch, two resistors, a capacitor, an LED, a bulb and a junction node all wired in one loop with the current sweeping past every one.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "Eight parts on one [loop] at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE", "circuitFlow": {"color": "blue", "currentLabel": "electron flow", "components": [
+      {"kind": "battery", "label": "12V", "color": "orange"},
+      {"kind": "switch", "label": "SW1", "color": "blue"},
+      {"kind": "resistor", "label": "1kΩ", "color": "purple"},
+      {"kind": "capacitor", "label": "10µF", "color": "green"},
+      {"kind": "resistor", "label": "470Ω", "color": "purple"},
+      {"kind": "led", "label": "LED", "color": "red"},
+      {"kind": "bulb", "label": "Lamp", "color": "yellow"},
+      {"kind": "node", "label": "J1", "color": "blue"}]}}}
+  ]
+}

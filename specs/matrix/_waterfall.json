@@ -1,0 +1,14 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "WATERFALL-min", "type": "WATERFALL", "narration": "A tiny bridge from a starting balance with a single growth step added on top now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "A tiny [bridge].", "headlineColor": "blue", "waterfallChart": {"color": "blue", "bars": [{"label": "Start", "value": 100, "isTotal": true, "atWord": 1}, {"label": "Growth", "value": 40, "color": "green", "atWord": 3}]}}},
+    {"id": "WATERFALL-max", "type": "WATERFALL", "narration": "Open with five hundred, add new sales and upsell, subtract churn refunds and discounts, and land on net revenue.", "durationFrames": 260, "background": "zoneA", "data": {"headline": "The [revenue] bridge at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE REVENUE BRIDGE", "waterfallChart": {"color": "blue", "unit": "k", "bars": [
+      {"label": "Opening balance", "value": 500, "isTotal": true, "atWord": 1},
+      {"label": "New sales", "value": 320, "color": "green", "atWord": 2},
+      {"label": "Upsell revenue", "value": 90, "color": "green", "atWord": 3},
+      {"label": "Churned accounts", "value": -140, "color": "red", "atWord": 4},
+      {"label": "Refunds issued", "value": -45, "color": "red", "atWord": 5},
+      {"label": "Discounts given", "value": -60, "color": "red", "atWord": 6},
+      {"label": "Net revenue", "value": 0, "isTotal": true, "atWord": 7}]}}}
+  ]
+}

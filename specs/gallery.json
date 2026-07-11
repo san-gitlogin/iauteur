@@ -1,0 +1,985 @@
+{
+  "meta": {
+    "topic": "Why AI agents make things up \u2014 grounding, explained (studio showcase)",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "Agents guess from training data unless you ground them in your own facts.",
+    "topicAxes": [
+      "entity-novelty",
+      "sovereignty"
+    ]
+  },
+  "brand": {
+    "theme": "studio"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Your AI agent just gave a customer the wrong refund policy. Confidently. Here's why, and the fix.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "CONFIDENT. INSTANT. WRONG.",
+        "subtext": "why agents make things up",
+        "heroAsset": "lucide:bot",
+        "headlineAtWord": 1,
+        "heroAtWord": 4
+      }
+    },
+    {
+      "id": "s02",
+      "type": "CHAT_MOCKUP",
+      "narration": "Ask an ungrounded agent about your refund window. It says thirty days. Your actual policy file, which it never opened, says fourteen.",
+      "durationFrames": 300,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Confident, instant \u2014 [and wrong.]",
+        "headlineColor": "red",
+        "panelLabel": "AI AGENT",
+        "panelColor": "purple",
+        "messages": [
+          {
+            "from": "user",
+            "text": "What's our refund window?",
+            "atWord": 4
+          },
+          {
+            "from": "agent",
+            "text": "About [30 days], I think.",
+            "color": "red",
+            "atWord": 10
+          }
+        ],
+        "sideCard": {
+          "kicker": "NEVER OPENED",
+          "lines": [
+            {
+              "text": "refund-policy.md"
+            },
+            {
+              "text": "refund_window: 14 days",
+              "color": "blue"
+            }
+          ],
+          "atWord": 15
+        },
+        "source": "AN UNGROUNDED AGENT ANSWERS FROM TRAINING \u2014 NOT FROM YOUR FACTS"
+      }
+    },
+    {
+      "id": "s03",
+      "type": "STEP_FLOW",
+      "narration": "The fix everyone reaches for is RAG. Your docs get split into chunks, embedded as vectors, and stored in a vector database searched by meaning.",
+      "durationFrames": 320,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The fix everyone reached for: [RAG.]",
+        "headlineColor": "blue",
+        "steps": [
+          {
+            "kicker": "STEP 1",
+            "title": "DOCS",
+            "sub": "everything you own",
+            "atWord": 8
+          },
+          {
+            "kicker": "STEP 2",
+            "title": "CHUNKS",
+            "sub": "split into pieces",
+            "atWord": 13
+          },
+          {
+            "kicker": "STEP 3",
+            "title": "VECTORS",
+            "sub": "embedded as numbers",
+            "atWord": 16
+          },
+          {
+            "kicker": "STEP 4",
+            "title": "VECTOR DB",
+            "sub": "searched by meaning",
+            "color": "blue",
+            "atWord": 21
+          }
+        ],
+        "caption": {
+          "text": "ask \u2192 pull closest \u2192 answer",
+          "color": "orange",
+          "atWord": 24
+        },
+        "source": "RETRIEVAL-AUGMENTED GENERATION \u2014 THE STANDARD KNOWLEDGE PIPELINE"
+      }
+    },
+    {
+      "id": "s04",
+      "type": "STAT_PANELS",
+      "narration": "And no, you can't just dump everything into a one million token context. Answer quality degrades, and you burn many times the tokens. Selective retrieval wins.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Myth: [\u201cjust use 1M context.\u201d]",
+        "headlineColor": "red",
+        "gridVisual": {
+          "kicker": "CONTEXT WINDOW \u00b7 1M",
+          "legendA": "mostly irrelevant",
+          "legendB": "relevant",
+          "atWord": 8
+        },
+        "stats": [
+          {
+            "kicker": "ANSWER QUALITY",
+            "value": "\u2193 degraded",
+            "color": "red",
+            "atWord": 16
+          },
+          {
+            "kicker": "TOKEN COST",
+            "value": "18\u00d7",
+            "note": "burned",
+            "color": "yellow",
+            "atWord": 21
+          }
+        ],
+        "verdict": {
+          "text": "selective, routed retrieval wins",
+          "color": "green",
+          "atWord": 25
+        },
+        "source": "IRRELEVANT CONTEXT DEGRADES THE ANSWER AND BURNS TOKENS"
+      }
+    },
+    {
+      "id": "s05",
+      "type": "QUOTE_SPOTLIGHT",
+      "narration": "As one staff engineer put it: context you engineer by hand, a wiki the model reads, matters as much as the model itself.",
+      "durationFrames": 280,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Grounding is [engineering], not magic.",
+        "headlineColor": "blue",
+        "person": {
+          "name": "Priya N.",
+          "role": "STAFF AI ENGINEER",
+          "asset": null
+        },
+        "quote": "Context you [engineer by hand] \u2014 a wiki the model reads \u2014 matters as much as the model itself.",
+        "atWord": 7,
+        "transformation": {
+          "from": "per-tool docs",
+          "to": "ONE SHARED SPEC",
+          "color": "blue",
+          "atWord": 18
+        },
+        "source": "CONTEXT ENGINEERING \u2014 THE SKILL BEHIND RELIABLE AGENTS"
+      }
+    },
+    {
+      "id": "s06",
+      "type": "SPLIT_PATHS",
+      "narration": "The pro setup: one agent, two paths. Canonical questions hit your curated facts and return the policy, linked. Open ended questions search forty thousand tickets by meaning.",
+      "durationFrames": 340,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "One agent, [two paths.]",
+        "headlineColor": "orange",
+        "left": {
+          "title": "\u201cWhat's our refund window?\u201d",
+          "badge": {
+            "text": "canonical \u2192 facts",
+            "color": "blue"
+          },
+          "lines": [
+            {
+              "text": "\u2713 14 days \u00b7 policy linked",
+              "color": "green"
+            }
+          ],
+          "color": "green",
+          "atWord": 8
+        },
+        "center": {
+          "kicker": "SUPPORT AGENT",
+          "title": "one router",
+          "color": "purple",
+          "atWord": 5
+        },
+        "right": {
+          "title": "\u201cAnyone hit this billing bug before?\u201d",
+          "badge": {
+            "text": "open-ended \u2192 RAG",
+            "color": "blue"
+          },
+          "lines": [
+            {
+              "text": "40,000 tickets searched",
+              "color": "blue"
+            },
+            {
+              "text": "\u2713 3 similar found",
+              "color": "green"
+            }
+          ],
+          "color": "green",
+          "atWord": 20
+        },
+        "source": "A SUPPORT AGENT \u2014 ONE CANONICAL, ONE OPEN-ENDED QUESTION"
+      }
+    },
+    {
+      "id": "s6b",
+      "type": "BAR_COMPARE",
+      "narration": "And the benchmarks back it up. The open model scores eighty two point four, edging past last year's closed flagship, though the newest one still leads.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The flagship hits [82.4.]",
+        "headlineColor": "orange",
+        "bars": [
+          {
+            "label": "Open \u00b7 397B",
+            "sub": "open weights",
+            "value": 82.4,
+            "display": "82.4",
+            "color": "orange",
+            "atWord": 6
+          },
+          {
+            "label": "Closed 4.7",
+            "sub": "closed",
+            "value": 80.8,
+            "display": "80.8",
+            "color": "blue",
+            "atWord": 14
+          },
+          {
+            "label": "Closed 4.8",
+            "sub": "still ahead",
+            "value": 85.1,
+            "display": "85.1",
+            "atWord": 21
+          }
+        ],
+        "maxValue": 100,
+        "source": "ILLUSTRATIVE BENCHMARK \u2014 GALLERY DEMO DATA"
+      }
+    },
+    {
+      "id": "s6c",
+      "type": "CHANNEL_CARD",
+      "narration": "This is the branded subscribe card. Logo, handle, and your tagline, all pulled from the channel profile.",
+      "durationFrames": 260,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "atWord": 1,
+        "handle": "@your-handle",
+        "tagline": "one system, explained weekly"
+      }
+    },
+    {
+      "id": "s6d",
+      "type": "LINE_CHART",
+      "narration": "Adoption climbed fast. Weekly active users tripled across three quarters while churn kept sliding.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Adoption [tripled] in three quarters.",
+        "headlineColor": "green",
+        "lineChart": {
+          "series": [
+            {"label": "Users", "color": "green", "values": [12, 20, 34, 52]},
+            {"label": "Churn", "color": "red", "values": [40, 32, 26, 18]}
+          ],
+          "xAxis": ["Q1", "Q2", "Q3", "Q4"],
+          "yMax": 60,
+          "area": true,
+          "atWord": 1
+        },
+        "source": "ILLUSTRATIVE TREND — GALLERY DEMO DATA"
+      }
+    },
+    {
+      "id": "s6e",
+      "type": "DONUT",
+      "narration": "Where does the token budget go? Retrieval takes half, generation a third, and overhead the rest.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "Where the [tokens] go.",
+        "headlineColor": "purple",
+        "donut": {
+          "segments": [
+            {"label": "Retrieval", "value": 50, "color": "blue", "atWord": 7},
+            {"label": "Generation", "value": 33, "color": "purple", "atWord": 10},
+            {"label": "Overhead", "value": 17, "color": "orange", "atWord": 14}
+          ],
+          "centerValue": "100%",
+          "centerLabel": "tokens"
+        },
+        "source": "ILLUSTRATIVE TOKEN SPLIT — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e2",
+      "type": "FUNNEL",
+      "narration": "Of everyone who lands, a fraction sign up, fewer activate, and only a slice convert to paid.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [conversion] funnel.",
+        "headlineColor": "blue",
+        "funnel": {
+          "color": "blue",
+          "stages": [
+            {"label": "Visited", "value": 100000, "color": "blue", "atWord": 4},
+            {"label": "Signed up", "value": 28000, "color": "purple", "atWord": 7},
+            {"label": "Activated", "value": 12000, "color": "green", "atWord": 10},
+            {"label": "Converted to paid", "value": 3400, "color": "orange", "atWord": 13}
+          ]
+        },
+        "source": "ILLUSTRATIVE FUNNEL — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e3",
+      "type": "WATERFALL",
+      "narration": "Start with last quarter, add new sales and upsell, subtract churn and refunds, and you land on net.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "The [revenue] bridge.",
+        "headlineColor": "green",
+        "waterfallChart": {
+          "color": "green",
+          "unit": "k",
+          "bars": [
+            {"label": "Last quarter", "value": 500, "isTotal": true, "atWord": 2},
+            {"label": "New sales", "value": 320, "color": "green", "atWord": 5},
+            {"label": "Churn", "value": -140, "color": "red", "atWord": 8},
+            {"label": "Refunds", "value": -45, "color": "red", "atWord": 10},
+            {"label": "Net", "value": 0, "isTotal": true, "atWord": 13}
+          ]
+        },
+        "source": "ILLUSTRATIVE REVENUE BRIDGE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e4",
+      "type": "PICTOGRAM",
+      "narration": "Picture it in people: nine in ten teams ship weekly, but only four in ten deploy every day.",
+      "durationFrames": 230,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Teams, [in people].",
+        "headlineColor": "purple",
+        "pictogram": {
+          "color": "purple",
+          "icon": "lucide:users",
+          "rows": [
+            {"label": "Ship weekly", "value": 9, "color": "green", "atWord": 4},
+            {"label": "Deploy daily", "value": 4, "color": "orange", "atWord": 9}
+          ]
+        },
+        "source": "ILLUSTRATIVE PICTOGRAM — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e5",
+      "type": "RADAR",
+      "narration": "Across performance, reliability, security, cost, and support, the two platforms trace very different shapes.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Two [platforms], compared.",
+        "headlineColor": "blue",
+        "radar": {
+          "color": "blue",
+          "max": 100,
+          "axes": ["Performance", "Reliability", "Security", "Cost fit", "Support"],
+          "series": [
+            {"name": "Alpha", "values": [90, 72, 84, 55, 68], "color": "blue", "atWord": 3},
+            {"name": "Beta", "values": [62, 90, 70, 82, 88], "color": "purple", "atWord": 8}
+          ]
+        },
+        "source": "ILLUSTRATIVE SCORECARD — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e6",
+      "type": "CANDLESTICK",
+      "narration": "The price opens, tests a high and a low, and closes — green when it rises, red when it falls — while the average trends up.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "Reading the [candles].",
+        "headlineColor": "green",
+        "candlestick": {
+          "color": "blue",
+          "prefix": "$",
+          "candles": [
+            {"open": 100, "high": 108, "low": 96, "close": 106, "label": "Mon"},
+            {"open": 106, "high": 110, "low": 101, "close": 103, "label": "Tue"},
+            {"open": 103, "high": 114, "low": 102, "close": 112, "label": "Wed"},
+            {"open": 112, "high": 118, "low": 108, "close": 110, "label": "Thu"},
+            {"open": 110, "high": 122, "low": 109, "close": 120, "label": "Fri"}
+          ],
+          "ma": [102, 104, 107, 110, 113]
+        },
+        "source": "ILLUSTRATIVE PRICE ACTION — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e7",
+      "type": "BOX_PLOT",
+      "narration": "Averages hide the spread — v2's box is tighter and lower, so its worst case is far better than v1's.",
+      "durationFrames": 230,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [spread] matters.",
+        "headlineColor": "green",
+        "boxPlot": {
+          "color": "blue",
+          "unit": "ms",
+          "boxes": [
+            {"label": "API v1", "min": 20, "q1": 45, "median": 62, "q3": 88, "max": 140, "outliers": [190], "color": "orange", "atWord": 2},
+            {"label": "API v2", "min": 14, "q1": 28, "median": 40, "q3": 56, "max": 92, "color": "green", "atWord": 6}
+          ]
+        },
+        "source": "ILLUSTRATIVE LATENCY — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e8",
+      "type": "TREEMAP",
+      "narration": "Compute dominates the bill, storage and networking follow, and a long tail of smaller lines fills the rest.",
+      "durationFrames": 230,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Where the [budget] goes.",
+        "headlineColor": "blue",
+        "treemap": {
+          "color": "blue",
+          "unit": "k",
+          "items": [
+            {"label": "Compute", "value": 320, "color": "blue", "atWord": 2},
+            {"label": "Storage", "value": 180, "color": "purple", "atWord": 5},
+            {"label": "Networking", "value": 120, "color": "green", "atWord": 7},
+            {"label": "Databases", "value": 90, "color": "orange", "atWord": 9},
+            {"label": "Everything else", "value": 70, "color": "yellow", "atWord": 11}
+          ]
+        },
+        "source": "ILLUSTRATIVE COST BREAKDOWN — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e9",
+      "type": "SANKEY",
+      "narration": "Visitors split by channel, then flow onward — some to a trial, some straight to paid, and some churn away.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "How traffic [flows].",
+        "headlineColor": "blue",
+        "sankey": {
+          "color": "blue",
+          "unit": "k",
+          "nodes": [
+            {"id": "all", "label": "Visitors", "col": 0, "color": "blue"},
+            {"id": "org", "label": "Organic", "col": 1, "color": "green"},
+            {"id": "paid", "label": "Paid", "col": 1, "color": "orange"},
+            {"id": "trial", "label": "Trial", "col": 2, "color": "yellow"},
+            {"id": "won", "label": "Paid plan", "col": 2, "color": "green"},
+            {"id": "lost", "label": "Churned", "col": 2, "color": "red"}
+          ],
+          "links": [
+            {"source": "all", "target": "org", "value": 180},
+            {"source": "all", "target": "paid", "value": 120},
+            {"source": "org", "target": "trial", "value": 110},
+            {"source": "org", "target": "lost", "value": 70},
+            {"source": "paid", "target": "trial", "value": 60},
+            {"source": "paid", "target": "won", "value": 60}
+          ]
+        },
+        "source": "ILLUSTRATIVE FLOW — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e10",
+      "type": "ICON_GRID",
+      "narration": "The stack at a glance — the languages, frameworks, and services that power the whole thing.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "The [stack].",
+        "headlineColor": "blue",
+        "iconGrid": {
+          "color": "blue",
+          "items": [
+            {"icon": "si:typescript", "label": "TypeScript", "color": "blue", "atWord": 2},
+            {"icon": "si:react", "label": "React", "color": "purple", "atWord": 3},
+            {"icon": "si:nodedotjs", "label": "Node.js", "color": "green", "atWord": 4},
+            {"icon": "si:postgresql", "label": "Postgres", "color": "blue", "atWord": 5},
+            {"icon": "si:docker", "label": "Docker", "color": "orange", "atWord": 6},
+            {"icon": "si:redis", "label": "Redis", "color": "red", "atWord": 7}
+          ]
+        },
+        "source": "ILLUSTRATIVE STACK — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e11",
+      "type": "ICON_CALLOUT",
+      "narration": "One idea to hold onto: everything is deterministic — same input, same frame, same pixel, every single render.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "iconCallout": {
+          "color": "green",
+          "icon": "lucide:shield-check",
+          "heading": "Deterministic by design",
+          "sub": "Every render is byte-for-byte identical.",
+          "points": ["Seeded randomness only", "No wall-clock time", "Frame-driven motion"],
+          "atWord": 3
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e12",
+      "type": "ICON_BURST",
+      "narration": "One core, many integrations — the platform reaches out to every tool your team already uses.",
+      "durationFrames": 230,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "One [hub], many tools.",
+        "headlineColor": "purple",
+        "iconBurst": {
+          "color": "purple",
+          "center": {"icon": "lucide:box", "label": "Platform"},
+          "spokes": [
+            {"icon": "si:slack", "label": "Slack", "color": "green"},
+            {"icon": "si:github", "label": "GitHub", "color": "blue"},
+            {"icon": "si:figma", "label": "Figma", "color": "orange"},
+            {"icon": "si:notion", "label": "Notion", "color": "red"},
+            {"icon": "si:linear", "label": "Linear", "color": "purple"},
+            {"icon": "si:zapier", "label": "Zapier", "color": "yellow"}
+          ]
+        },
+        "source": "ILLUSTRATIVE INTEGRATIONS — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e13",
+      "type": "LOGO_WALL",
+      "narration": "Teams at every scale build on it — from startups to the largest engineering orgs in the world.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "[Trusted] by teams.",
+        "headlineColor": "blue",
+        "logoWall": {
+          "logos": [
+            {"icon": "si:google", "atWord": 2},
+            {"icon": "si:amazon", "atWord": 2},
+            {"icon": "si:netflix", "atWord": 3},
+            {"icon": "si:spotify", "atWord": 3},
+            {"icon": "si:airbnb", "atWord": 4},
+            {"icon": "si:uber", "atWord": 4},
+            {"icon": "si:stripe", "atWord": 5},
+            {"icon": "si:shopify", "atWord": 5}
+          ]
+        },
+        "source": "ILLUSTRATIVE LOGO WALL — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e14",
+      "type": "LOGO_VERSUS",
+      "narration": "It comes down to two: the incumbent everyone knows, versus the challenger everyone's switching to.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "The [showdown].",
+        "headlineColor": "orange",
+        "logoVersus": {
+          "color": "orange",
+          "left": {"icon": "si:jira", "name": "Jira", "tagline": "The incumbent", "color": "blue"},
+          "right": {"icon": "si:linear", "name": "Linear", "tagline": "The challenger", "color": "purple"},
+          "winner": "right"
+        },
+        "source": "ILLUSTRATIVE VERSUS — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e15",
+      "type": "LOGO_TIMELINE",
+      "narration": "The stack evolved fast — jQuery gave way to Angular, then React, then the meta-framework era with Next.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "How the [frontend] evolved.",
+        "headlineColor": "blue",
+        "logoTimeline": {
+          "color": "blue",
+          "entries": [
+            {"icon": "si:jquery", "label": "jQuery era", "date": "2006", "color": "blue", "atWord": 3},
+            {"icon": "si:angular", "label": "Angular", "date": "2010", "color": "red", "atWord": 6},
+            {"icon": "si:react", "label": "React", "date": "2013", "color": "purple", "atWord": 9},
+            {"icon": "si:nextdotjs", "label": "Next.js", "date": "2016", "color": "green", "atWord": 13}
+          ]
+        },
+        "source": "ILLUSTRATIVE TIMELINE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e16",
+      "type": "FORMULA",
+      "narration": "Mass and energy are the same thing: energy equals mass times the speed of light squared.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "The most famous [equation].",
+        "headlineColor": "purple",
+        "formula": {
+          "color": "purple",
+          "parts": [
+            {"text": "E", "kind": "var", "atWord": 1},
+            {"text": "=", "kind": "op", "atWord": 2},
+            {"text": "m", "kind": "var", "atWord": 3},
+            {"text": "c", "kind": "var", "sup": "2", "highlight": true, "atWord": 4}
+          ],
+          "label": "Einstein's mass\u2013energy equivalence"
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e17",
+      "type": "MOLECULE",
+      "narration": "Water is beautifully simple: one oxygen atom bonded to two hydrogens, bent at about a hundred and five degrees.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "The [water] molecule.",
+        "headlineColor": "blue",
+        "molecule": {
+          "color": "blue",
+          "atoms": [
+            {"label": "O", "x": 0.5, "y": 0.35},
+            {"label": "H", "x": 0.28, "y": 0.68},
+            {"label": "H", "x": 0.72, "y": 0.68}
+          ],
+          "bonds": [{"from": 0, "to": 1, "order": 1}, {"from": 0, "to": 2, "order": 1}],
+          "name": "H\u2082O — water",
+          "atWord": 2
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e18",
+      "type": "DNA_HELIX",
+      "narration": "DNA is a twisted ladder: two sugar-phosphate backbones with base pairs as the rungs — A with T, G with C.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [double helix].",
+        "headlineColor": "blue",
+        "dnaHelix": {
+          "color": "blue",
+          "pairs": [
+            {"left": "A", "right": "T"}, {"left": "G", "right": "C"}, {"left": "T", "right": "A"},
+            {"left": "C", "right": "G"}, {"left": "A", "right": "T"}, {"left": "G", "right": "C"},
+            {"left": "T", "right": "A"}, {"left": "A", "right": "T"}
+          ],
+          "atWord": 2
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e19",
+      "type": "LABELED_FIGURE",
+      "narration": "Every rocket shares the same anatomy: payload up top, guidance below it, then the fuel and oxidizer tanks, and the engines at the base.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Anatomy of a [rocket].",
+        "headlineColor": "orange",
+        "labeledFigure": {
+          "color": "orange",
+          "subject": "lucide:rocket",
+          "callouts": [
+            {"label": "Payload fairing", "x": 0.55, "y": 0.16, "color": "blue"},
+            {"label": "Guidance", "x": 0.46, "y": 0.34, "color": "purple"},
+            {"label": "Oxidizer tank", "x": 0.5, "y": 0.52, "color": "green"},
+            {"label": "Fuel tank", "x": 0.5, "y": 0.68, "color": "orange"},
+            {"label": "Engines", "x": 0.5, "y": 0.86, "color": "red"}
+          ]
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e20",
+      "type": "VECTOR_FIELD",
+      "narration": "Four forces act on a plane in flight: lift up, weight down, thrust forward, and drag pulling back.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Forces on a [plane.]",
+        "headlineColor": "blue",
+        "vectorField": {
+          "mode": "freebody",
+          "color": "blue",
+          "body": "lucide:plane",
+          "bodyLabel": "Aircraft",
+          "forces": [
+            {"label": "Lift", "angle": 90, "magnitude": 0.9, "color": "green"},
+            {"label": "Weight", "angle": 270, "magnitude": 0.8, "color": "red"},
+            {"label": "Thrust", "angle": 0, "magnitude": 0.85, "color": "blue"},
+            {"label": "Drag", "angle": 180, "magnitude": 0.55, "color": "orange"}
+          ],
+          "atWord": 2
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e21",
+      "type": "CIRCUIT_FLOW",
+      "narration": "A simple series circuit: a nine volt battery pushes current through a resistor and lights an LED, with a switch to close the loop.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "A series [circuit.]",
+        "headlineColor": "green",
+        "circuitFlow": {
+          "color": "green",
+          "currentLabel": "conventional current",
+          "components": [
+            {"kind": "battery", "label": "9V", "color": "orange"},
+            {"kind": "switch", "label": "SW1", "color": "blue"},
+            {"kind": "resistor", "label": "220Ω", "color": "purple"},
+            {"kind": "led", "label": "LED", "color": "green"}
+          ],
+          "atWord": 2
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e22",
+      "type": "TICKER_TAPE",
+      "narration": "Markets on the move today: the majors mostly up, with Nvidia leading the pack and a couple of names in the red.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Markets [today.]",
+        "headlineColor": "green",
+        "ticker": {
+          "color": "green",
+          "featured": "NVDA",
+          "entries": [
+            {"symbol": "NVDA", "price": "$182.40", "change": 3.21},
+            {"symbol": "AAPL", "price": "$226.10", "change": 0.84},
+            {"symbol": "MSFT", "price": "$438.90", "change": 1.12},
+            {"symbol": "TSLA", "price": "$251.30", "change": -1.45},
+            {"symbol": "AMZN", "price": "$201.70", "change": 0.56},
+            {"symbol": "GOOGL", "price": "$174.20", "change": -0.32},
+            {"symbol": "BTC", "price": "$97.8k", "change": 2.08}
+          ],
+          "atWord": 1
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6e23",
+      "type": "MAP_RADAR",
+      "narration": "Our monitors sweep the whole fleet, pinging each node in turn: two healthy, one warning to the north-east, and a critical alert due south.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Scanning the [fleet.]",
+        "headlineColor": "green",
+        "mapRadar": {
+          "color": "green",
+          "rings": 4,
+          "sweepLabel": "scanning…",
+          "ringLabels": ["1", "2", "3", "4"],
+          "blips": [
+            {"label": "US-East", "angle": 45, "range": 0.6, "color": "orange"},
+            {"label": "EU-West", "angle": 180, "range": 0.8, "color": "red"},
+            {"label": "AP-South", "angle": 300, "range": 0.45, "color": "green"},
+            {"label": "US-West", "angle": 120, "range": 0.35, "color": "green"}
+          ],
+          "atWord": 1
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6f",
+      "type": "PROGRESS",
+      "narration": "Coverage is nearly there. Retrieval accuracy hit ninety two, latency budget eighty, cost efficiency seventy four.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Almost [production-ready.]",
+        "headlineColor": "green",
+        "progress": {
+          "variant": "ring",
+          "items": [
+            {"label": "Accuracy", "value": 92, "display": "92%", "color": "green", "atWord": 6},
+            {"label": "Latency", "value": 80, "display": "80%", "color": "blue", "atWord": 10},
+            {"label": "Cost eff.", "value": 74, "display": "74%", "color": "orange", "atWord": 13}
+          ]
+        },
+        "source": "ILLUSTRATIVE READINESS — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6g",
+      "type": "TIMELINE",
+      "narration": "The path here was quick. Prototype in March, private beta in May, general availability in July.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Prototype to [GA] in four months.",
+        "headlineColor": "blue",
+        "timeline": {
+          "milestones": [
+            {"date": "MAR", "title": "Prototype", "color": "blue", "atWord": 6},
+            {"date": "MAY", "title": "Private beta", "color": "purple", "atWord": 10},
+            {"date": "JUL", "title": "GA", "color": "green", "atWord": 14}
+          ]
+        },
+        "source": "ILLUSTRATIVE ROADMAP — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6h",
+      "type": "QUADRANT",
+      "narration": "Plot the options. High value easy wins go top right; expensive experiments sit bottom left.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "Where each [bet] pays off.",
+        "headlineColor": "orange",
+        "quadrant": {
+          "xAxis": {"left": "Hard", "right": "Easy"},
+          "yAxis": {"bottom": "Low value", "top": "High value"},
+          "points": [
+            {"label": "RAG", "x": 0.72, "y": 0.8, "color": "green", "atWord": 7},
+            {"label": "Prompt tune", "x": 0.85, "y": 0.55, "color": "blue", "atWord": 9},
+            {"label": "Fine-tune", "x": 0.3, "y": 0.38, "color": "orange", "atWord": 12}
+          ]
+        },
+        "source": "ILLUSTRATIVE PRIORITISATION — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s6i",
+      "type": "CODE_WINDOW",
+      "narration": "In practice it's a few lines. Embed the query, search the index, return the top match with its score.",
+      "durationFrames": 260,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "code": {
+          "filename": "search.py",
+          "language": "py",
+          "atWord": 7,
+          "lines": [
+            {"text": "query = embed(user_question)"},
+            {"text": "hits = index.search(query, k=3)"},
+            {"text": "return hits[0].text, hits[0].score"}
+          ],
+          "runLabel": "python search.py",
+          "output": [
+            {"text": "→ '14 day refund window'  score=0.94", "color": "green"}
+          ]
+        },
+        "source": "ILLUSTRATIVE SNIPPET — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s07",
+      "type": "RECAP",
+      "narration": "So remember. Ungrounded agents guess. Retrieval grounds them in your facts. And routing between curated answers and search is what makes it reliable.",
+      "durationFrames": 300,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "heading": "What to remember",
+        "points": [
+          {
+            "text": "Ungrounded agents guess from training",
+            "atWord": 3
+          },
+          {
+            "text": "Retrieval grounds answers in YOUR facts",
+            "atWord": 8
+          },
+          {
+            "text": "Route: curated for policy, search for the rest",
+            "atWord": 15
+          }
+        ]
+      }
+    },
+    {
+      "id": "s08",
+      "type": "OUTRO_CTA",
+      "narration": "If your agent should stop guessing, subscribe. One AI concept, grounded properly, every week.",
+      "durationFrames": 200,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "Stop letting your agent guess.",
+        "sub": "subscribe for grounded AI, weekly"
+      }
+    }
+  ],
+  "thumbnail": {
+    "title": "Component Gallery",
+    "badge": "STUDIO",
+    "asset": "lucide:layout-grid"
+  }
+}

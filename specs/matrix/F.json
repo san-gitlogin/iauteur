@@ -1,0 +1,661 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "WINDOW_FRAME-min",
+      "type": "WINDOW_FRAME",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "window": {
+          "variant": "browser",
+          "url": "https://example.com",
+          "title": "example.com",
+          "content": {
+            "kind": "empty",
+            "message": "No results yet",
+            "icon": "lucide:inbox"
+          }
+        }
+      }
+    },
+    {
+      "id": "WINDOW_FRAME-browser",
+      "type": "WINDOW_FRAME",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "window": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "variant": "browser",
+          "color": "blue",
+          "url": "https://app.acme.io/dashboard/reports",
+          "title": "Acme · Reports",
+          "content": {
+            "kind": "cardGrid",
+            "title": "Monthly reports",
+            "cards": [
+              {
+                "title": "Revenue",
+                "sub": "up 12% this month",
+                "color": "green"
+              },
+              {
+                "title": "Signups",
+                "sub": "2,481 new users",
+                "color": "blue"
+              },
+              {
+                "title": "Churn",
+                "sub": "down to 1.8%",
+                "color": "orange"
+              },
+              {
+                "title": "MRR",
+                "sub": "$128.4k recurring",
+                "color": "purple"
+              },
+              {
+                "title": "Refunds",
+                "sub": "14 this week",
+                "color": "red"
+              },
+              {
+                "title": "NPS",
+                "sub": "score of 62",
+                "color": "green"
+              }
+            ]
+          },
+          "devtools": {
+            "open": true,
+            "panel": "network",
+            "requests": [
+              {
+                "name": "reports.json",
+                "phases": [
+                  {
+                    "phase": "ttfb",
+                    "ms": 120
+                  },
+                  {
+                    "phase": "download",
+                    "ms": 60
+                  }
+                ],
+                "status": "200"
+              },
+              {
+                "name": "user.json",
+                "phases": [
+                  {
+                    "phase": "dns",
+                    "ms": 10
+                  },
+                  {
+                    "phase": "ttfb",
+                    "ms": 40
+                  }
+                ],
+                "status": "200"
+              },
+              {
+                "name": "avatar.png",
+                "phases": [
+                  {
+                    "phase": "connect",
+                    "ms": 20
+                  },
+                  {
+                    "phase": "download",
+                    "ms": 90
+                  }
+                ],
+                "status": "200"
+              },
+              {
+                "name": "flags.json",
+                "phases": [
+                  {
+                    "phase": "blocked",
+                    "ms": 8
+                  },
+                  {
+                    "phase": "ttfb",
+                    "ms": 30
+                  }
+                ],
+                "status": "404"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "WINDOW_FRAME-mac",
+      "type": "WINDOW_FRAME",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "window": {
+          "headline": "A [mac] window frame at cap",
+          "variant": "mac",
+          "color": "purple",
+          "title": "Create account",
+          "content": {
+            "kind": "form",
+            "title": "Create your account",
+            "submit": "Create account",
+            "fields": [
+              {
+                "label": "Full name",
+                "value": "Ada Lovelace",
+                "focus": true
+              },
+              {
+                "label": "Work email",
+                "value": "ada@acme.io"
+              },
+              {
+                "label": "Password",
+                "value": "••••••••••"
+              },
+              {
+                "label": "Company",
+                "value": "Acme Inc"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "WINDOW_FRAME-windows",
+      "type": "WINDOW_FRAME",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "window": {
+          "headline": "A [windows] window at cap",
+          "variant": "windows",
+          "color": "green",
+          "title": "System Monitor",
+          "content": {
+            "kind": "metric",
+            "value": "99.98%",
+            "label": "uptime this qtr",
+            "trend": "+0.2%"
+          },
+          "devtools": {
+            "open": true,
+            "panel": "console",
+            "logs": [
+              {
+                "level": "info",
+                "tag": "boot",
+                "text": "service worker registered ok"
+              },
+              {
+                "level": "debug",
+                "tag": "net",
+                "text": "prefetched 4 routes in 82ms"
+              },
+              {
+                "level": "warn",
+                "tag": "perf",
+                "text": "main thread blocked for 240ms"
+              },
+              {
+                "level": "error",
+                "tag": "api",
+                "text": "GET /flags failed with 404 status"
+              },
+              {
+                "level": "info",
+                "tag": "net",
+                "text": "retry succeeded on attempt 2"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "WINDOW_FRAME-linux",
+      "type": "WINDOW_FRAME",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "window": {
+          "headline": "A [linux] window frame ok",
+          "variant": "linux",
+          "color": "orange",
+          "title": "gedit — release.md",
+          "content": {
+            "kind": "text",
+            "title": "Release notes — v2.4",
+            "body": "Smaller bundles, faster cold starts, a brand-new dark theme, and dozens of small bug fixes across the app."
+          }
+        }
+      }
+    },
+    {
+      "id": "AUTOMATION_RUN-min",
+      "type": "AUTOMATION_RUN",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "auto": {
+          "runner": "playwright",
+          "url": "example.com",
+          "steps": [
+            {
+              "action": "goto",
+              "target": "/",
+              "status": "pass"
+            }
+          ],
+          "content": {
+            "kind": "text",
+            "title": "Home",
+            "body": "Welcome to the site"
+          }
+        }
+      }
+    },
+    {
+      "id": "AUTOMATION_RUN-max",
+      "type": "AUTOMATION_RUN",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "auto": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "runner": "playwright",
+          "color": "blue",
+          "url": "app.acme.io/checkout",
+          "content": {
+            "kind": "form",
+            "title": "Checkout",
+            "submit": "Pay $128.40",
+            "fields": [
+              {
+                "label": "Email",
+                "value": "ada@acme.io",
+                "focus": true
+              },
+              {
+                "label": "Card",
+                "value": "4242 4242 4242"
+              },
+              {
+                "label": "Expiry",
+                "value": "12 / 29"
+              },
+              {
+                "label": "CVC",
+                "value": "123"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": "goto",
+              "target": "/checkout",
+              "status": "pass"
+            },
+            {
+              "action": "type",
+              "target": "#email",
+              "value": "ada@acme.io",
+              "status": "pass"
+            },
+            {
+              "action": "click",
+              "target": "#pay-button",
+              "status": "pass"
+            },
+            {
+              "action": "assert",
+              "target": ".confirmation",
+              "status": "fail",
+              "reason": "expected .confirmation visible within 5s"
+            },
+            {
+              "action": "hover",
+              "target": ".retry-link",
+              "status": "running"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DEVICE_FRAME-min",
+      "type": "DEVICE_FRAME",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "device": {
+          "os": "ios",
+          "content": {
+            "kind": "text",
+            "title": "Notes",
+            "body": "Buy milk on the way home"
+          }
+        }
+      }
+    },
+    {
+      "id": "DEVICE_FRAME-max",
+      "type": "DEVICE_FRAME",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "device": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "os": "android",
+          "color": "green",
+          "content": {
+            "kind": "cardGrid",
+            "title": "Today",
+            "cards": [
+              {
+                "title": "Steps",
+                "sub": "8,204 today",
+                "color": "green"
+              },
+              {
+                "title": "Sleep",
+                "sub": "7h 20m last night",
+                "color": "blue"
+              },
+              {
+                "title": "Heart",
+                "sub": "62 bpm resting",
+                "color": "red"
+              },
+              {
+                "title": "Water",
+                "sub": "5 of 8 glasses",
+                "color": "purple"
+              }
+            ]
+          },
+          "notification": {
+            "app": "Messages",
+            "text": "Sarah: are we still on for lunch today?"
+          }
+        }
+      }
+    },
+    {
+      "id": "DOM_INSPECT-min",
+      "type": "DOM_INSPECT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "dom": {
+          "selector": "div.card",
+          "nodes": [
+            {
+              "tag": "div",
+              "attr": ".card",
+              "depth": 0
+            },
+            {
+              "tag": "span",
+              "attr": ".title",
+              "depth": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DOM_INSPECT-max",
+      "type": "DOM_INSPECT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "dom": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "selector": "main section.hero h1.title span",
+          "highlight": 4,
+          "nodes": [
+            {
+              "tag": "main",
+              "attr": "role=main",
+              "depth": 0
+            },
+            {
+              "tag": "section",
+              "attr": ".hero",
+              "depth": 1
+            },
+            {
+              "tag": "div",
+              "attr": ".container",
+              "depth": 2
+            },
+            {
+              "tag": "h1",
+              "attr": ".title",
+              "depth": 3
+            },
+            {
+              "tag": "span",
+              "attr": ".highlight",
+              "depth": 4
+            },
+            {
+              "tag": "a",
+              "attr": "href=/get-started",
+              "depth": 4
+            },
+            {
+              "tag": "button",
+              "attr": ".cta primary",
+              "depth": 3
+            },
+            {
+              "tag": "footer",
+              "attr": ".legal small",
+              "depth": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NETWORK_WATERFALL-min",
+      "type": "NETWORK_WATERFALL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "waterfall": {
+          "requests": [
+            {
+              "name": "index.html",
+              "phases": [
+                {
+                  "phase": "dns",
+                  "ms": 12
+                },
+                {
+                  "phase": "ttfb",
+                  "ms": 80
+                },
+                {
+                  "phase": "download",
+                  "ms": 40
+                }
+              ],
+              "status": "200"
+            },
+            {
+              "name": "app.js",
+              "phases": [
+                {
+                  "phase": "connect",
+                  "ms": 20
+                },
+                {
+                  "phase": "download",
+                  "ms": 120
+                }
+              ],
+              "status": "200"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NETWORK_WATERFALL-max",
+      "type": "NETWORK_WATERFALL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "waterfall": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "totalMs": 2100,
+          "requests": [
+            {
+              "name": "document",
+              "phases": [
+                {
+                  "phase": "blocked",
+                  "ms": 8
+                },
+                {
+                  "phase": "dns",
+                  "ms": 14
+                },
+                {
+                  "phase": "connect",
+                  "ms": 22
+                },
+                {
+                  "phase": "ttfb",
+                  "ms": 120
+                },
+                {
+                  "phase": "download",
+                  "ms": 40
+                }
+              ],
+              "status": "200"
+            },
+            {
+              "name": "app.bundle.js",
+              "phases": [
+                {
+                  "phase": "queue",
+                  "ms": 6
+                },
+                {
+                  "phase": "ttfb",
+                  "ms": 60
+                },
+                {
+                  "phase": "download",
+                  "ms": 210
+                }
+              ],
+              "status": "200"
+            },
+            {
+              "name": "styles.css",
+              "phases": [
+                {
+                  "phase": "ttfb",
+                  "ms": 40
+                },
+                {
+                  "phase": "download",
+                  "ms": 90
+                }
+              ],
+              "status": "200"
+            },
+            {
+              "name": "api/user",
+              "phases": [
+                {
+                  "phase": "blocked",
+                  "ms": 12
+                },
+                {
+                  "phase": "ttfb",
+                  "ms": 180
+                }
+              ],
+              "status": "200"
+            },
+            {
+              "name": "avatar.png",
+              "phases": [
+                {
+                  "phase": "connect",
+                  "ms": 20
+                },
+                {
+                  "phase": "download",
+                  "ms": 140
+                }
+              ],
+              "status": "200"
+            },
+            {
+              "name": "analytics.js",
+              "phases": [
+                {
+                  "phase": "blocked",
+                  "ms": 30
+                },
+                {
+                  "phase": "ttfb",
+                  "ms": 24
+                }
+              ],
+              "status": "404"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

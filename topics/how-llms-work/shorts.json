@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "topic": "How Large Language Models Work",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "An LLM is a next-token predictor: split text into tokens, weigh them with attention, guess the next piece - repeat.",
+    "openLoop": "How can a pile of math finish your sentence?",
+    "analogy": "It's autocomplete at planetary scale."
+  },
+  "brand": {
+    "theme": "neobrutalism",
+    "design": "neobrutalism",
+    "themeLight": "brutalist",
+    "background": "plain",
+    "channel": "YOUR CHANNEL"
+  },
+  "cover": {
+    "title": "How LLMs Work",
+    "badge": "60s",
+    "asset": "lucide:brain-circuit",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "How does a machine finish your sentence? One idea, at massive scale.",
+      "durationFrames": 168,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "HOW LLMs WORK",
+        "subtext": "in 60 seconds",
+        "heroAsset": "lucide:brain-circuit",
+        "headlineAtWord": 1,
+        "heroAtWord": 6,
+        "anim": "scale"
+      }
+    },
+    {
+      "id": "s02",
+      "type": "KINETIC_TEXT",
+      "narration": "At its core a model does one thing: predict the next token.",
+      "durationFrames": 180,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "fade",
+      "data": {
+        "kinetic": {"fx": "typewriter", "text": "Predict the next token.", "sub": "that's the whole trick", "color": "blue", "atWord": 8}
+      }
+    },
+    {
+      "id": "s03",
+      "type": "DIAGRAM",
+      "narration": "Your text becomes tokens, the model weighs them with attention, and it picks the most likely next token.",
+      "durationFrames": 300,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "The [pipeline.]",
+        "headlineColor": "blue",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "text", "label": "Your text", "asset": "lucide:type", "color": "blue", "atWord": 2},
+            {"id": "tok", "label": "Tokens", "asset": "lucide:scissors", "color": "purple", "atWord": 4},
+            {"id": "att", "label": "Attention", "asset": "lucide:eye", "color": "orange", "atWord": 8},
+            {"id": "next", "label": "Next token", "asset": "lucide:sparkles", "color": "green", "atWord": 15}
+          ],
+          "edges": [
+            {"from": "text", "to": "tok", "atWord": 4},
+            {"from": "tok", "to": "att", "atWord": 8},
+            {"from": "att", "to": "next", "atWord": 15}
+          ]
+        },
+        "source": "THE INFERENCE PIPELINE"
+      }
+    },
+    {
+      "id": "s04",
+      "type": "REVEAL",
+      "narration": "So remember this: it doesn't know things. It predicts what comes next.",
+      "durationFrames": 234,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "zoom",
+      "fx": "burst",
+      "data": {
+        "headline": "It doesn't [know.]",
+        "reveal": {"kicker": "THE TAKEAWAY", "sub": "it predicts what comes next, nothing more", "color": "green", "atWord": 6},
+        "source": "PREDICTION, NOT KNOWLEDGE"
+      }
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "Follow YOUR CHANNEL for the full breakdown.",
+      "durationFrames": 168,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "Prediction, all the way down",
+        "sub": "follow YOUR CHANNEL"
+      }
+    }
+  ]
+}

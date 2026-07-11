@@ -1,0 +1,1148 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "TEST_RUNNER-min",
+      "type": "TEST_RUNNER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "testRunner": {
+          "headline": "A tiny [suite]",
+          "color": "green",
+          "passed": 1,
+          "failed": 0,
+          "nodes": [
+            {
+              "name": "auth",
+              "depth": 0,
+              "kind": "describe"
+            },
+            {
+              "name": "logs in",
+              "depth": 1,
+              "kind": "it",
+              "status": "pass",
+              "ms": "3ms"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TEST_RUNNER-max",
+      "type": "TEST_RUNNER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "testRunner": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "green",
+          "passed": 5,
+          "failed": 1,
+          "failIndex": 5,
+          "expected": "account locked after five failed attempts",
+          "actual": "account still active and unlocked here",
+          "nodes": [
+            {
+              "name": "authentication and session lifecycle",
+              "depth": 0,
+              "kind": "describe"
+            },
+            {
+              "name": "accepts a valid username + password",
+              "depth": 1,
+              "kind": "it",
+              "status": "pass",
+              "ms": "124ms"
+            },
+            {
+              "name": "rejects an incorrect password",
+              "depth": 1,
+              "kind": "it",
+              "status": "pass",
+              "ms": "88ms"
+            },
+            {
+              "name": "rate limiting on repeated logins",
+              "depth": 1,
+              "kind": "describe"
+            },
+            {
+              "name": "locks account after five failed tries",
+              "depth": 2,
+              "kind": "it",
+              "status": "fail",
+              "ms": "312ms"
+            },
+            {
+              "name": "resets counter after a cooldown",
+              "depth": 2,
+              "kind": "it",
+              "status": "skip"
+            },
+            {
+              "name": "audit logging of security events",
+              "depth": 1,
+              "kind": "it",
+              "status": "run",
+              "ms": "—"
+            },
+            {
+              "name": "writes an entry for every lockout event",
+              "depth": 3,
+              "kind": "it",
+              "status": "pass",
+              "ms": "9ms"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TEST_MATRIX-min",
+      "type": "TEST_MATRIX",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "testMatrix": {
+          "headline": "A small [grid]",
+          "color": "blue",
+          "rows": [
+            "Chrome",
+            "Safari"
+          ],
+          "cols": [
+            "Login",
+            "Pay"
+          ],
+          "cells": [
+            {
+              "r": 0,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 1,
+              "status": "fail"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TEST_MATRIX-max",
+      "type": "TEST_MATRIX",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "testMatrix": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "emphasize": {
+            "r": 2,
+            "c": 3
+          },
+          "rows": [
+            "Chrome 129",
+            "Firefox 131",
+            "Safari 18.1",
+            "Edge 129",
+            "Mobile WK"
+          ],
+          "cols": [
+            "Sign in",
+            "Search",
+            "Cart",
+            "Checkout",
+            "Refund"
+          ],
+          "cells": [
+            {
+              "r": 0,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 2,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 3,
+              "status": "flaky"
+            },
+            {
+              "r": 0,
+              "c": 4,
+              "status": "fail"
+            },
+            {
+              "r": 1,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 2,
+              "status": "flaky"
+            },
+            {
+              "r": 1,
+              "c": 3,
+              "status": "fail"
+            },
+            {
+              "r": 1,
+              "c": 4,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 1,
+              "status": "flaky"
+            },
+            {
+              "r": 2,
+              "c": 2,
+              "status": "fail"
+            },
+            {
+              "r": 2,
+              "c": 3,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 4,
+              "status": "pass"
+            },
+            {
+              "r": 3,
+              "c": 0,
+              "status": "flaky"
+            },
+            {
+              "r": 3,
+              "c": 1,
+              "status": "fail"
+            },
+            {
+              "r": 3,
+              "c": 2,
+              "status": "pass"
+            },
+            {
+              "r": 3,
+              "c": 3,
+              "status": "pass"
+            },
+            {
+              "r": 3,
+              "c": 4,
+              "status": "pass"
+            },
+            {
+              "r": 4,
+              "c": 0,
+              "status": "fail"
+            },
+            {
+              "r": 4,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 4,
+              "c": 2,
+              "status": "pass"
+            },
+            {
+              "r": 4,
+              "c": 3,
+              "status": "pass"
+            },
+            {
+              "r": 4,
+              "c": 4,
+              "status": "flaky"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CONTEXT_METER-min",
+      "type": "CONTEXT_METER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "context": {
+          "headline": "A small [window]",
+          "windowTokens": 8000,
+          "verdict": "4k / 8k used",
+          "segments": [
+            {
+              "label": "system",
+              "tokens": 2000,
+              "kind": "system"
+            },
+            {
+              "label": "free",
+              "tokens": 6000,
+              "kind": "free"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CONTEXT_METER-max",
+      "type": "CONTEXT_METER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "context": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "windowTokens": 1000000,
+          "verdict": "812k of 1,000k tokens already consumed",
+          "segments": [
+            {
+              "label": "system prompt xx",
+              "tokens": 24000,
+              "kind": "system"
+            },
+            {
+              "label": "tool definitions",
+              "tokens": 96000,
+              "kind": "tools"
+            },
+            {
+              "label": "recalled history",
+              "tokens": 512000,
+              "kind": "history"
+            },
+            {
+              "label": "retrieved chunks",
+              "tokens": 180000,
+              "kind": "history"
+            },
+            {
+              "label": "remaining space",
+              "tokens": 188000,
+              "kind": "free"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "AGENT_HARNESS-min",
+      "type": "AGENT_HARNESS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "harness": {
+          "headline": "A bare [agent]",
+          "agent": "LLM",
+          "color": "blue",
+          "rings": [
+            {
+              "label": "Information",
+              "chips": [
+                "memory"
+              ]
+            },
+            {
+              "label": "Execution",
+              "chips": [
+                "tools"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "AGENT_HARNESS-max",
+      "type": "AGENT_HARNESS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "harness": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "agent": "orchestrator",
+          "color": "blue",
+          "rings": [
+            {
+              "label": "Information xxx",
+              "chips": [
+                "retrieval",
+                "memory store"
+              ]
+            },
+            {
+              "label": "Execution core",
+              "chips": [
+                "code sandbox",
+                "shell tools"
+              ]
+            },
+            {
+              "label": "Feedback loop",
+              "chips": [
+                "evaluators",
+                "guardrails"
+              ]
+            }
+          ],
+          "guardrail": {
+            "label": "rm -rf / --no-root",
+            "ring": 2,
+            "reason": "blocked by safety policy"
+          }
+        }
+      }
+    },
+    {
+      "id": "KNOWLEDGE_GRAPH-min",
+      "type": "KNOWLEDGE_GRAPH",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "kg": {
+          "headline": "A tiny [graph]",
+          "color": "blue",
+          "seed": 1,
+          "queryPath": [
+            "a",
+            "b"
+          ],
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Ada",
+              "kind": "entity"
+            },
+            {
+              "id": "b",
+              "label": "Person",
+              "kind": "class"
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "b",
+              "label": "is a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "KNOWLEDGE_GRAPH-max",
+      "type": "KNOWLEDGE_GRAPH",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "kg": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "seed": 7,
+          "queryPath": [
+            "ada",
+            "analyticalengine",
+            "computing"
+          ],
+          "nodes": [
+            {
+              "id": "ada",
+              "label": "Ada Lovelace xx",
+              "kind": "entity"
+            },
+            {
+              "id": "person",
+              "label": "Person (class)",
+              "kind": "class"
+            },
+            {
+              "id": "london",
+              "label": "London, England",
+              "kind": "entity"
+            },
+            {
+              "id": "y1815",
+              "label": "10 Dec 1815",
+              "kind": "literal"
+            },
+            {
+              "id": "ae",
+              "label": "Analytical Engine",
+              "kind": "entity"
+            },
+            {
+              "id": "cs",
+              "label": "Computer Science",
+              "kind": "class"
+            },
+            {
+              "id": "babbage",
+              "label": "Charles Babbage",
+              "kind": "entity"
+            },
+            {
+              "id": "note",
+              "label": "Note G (program)",
+              "kind": "literal"
+            },
+            {
+              "id": "poet",
+              "label": "Lord Byron xxx",
+              "kind": "entity"
+            },
+            {
+              "id": "math",
+              "label": "Mathematics",
+              "kind": "class"
+            }
+          ],
+          "edges": [
+            {
+              "from": "ada",
+              "to": "person",
+              "label": "is a"
+            },
+            {
+              "from": "ada",
+              "to": "london",
+              "label": "born in"
+            },
+            {
+              "from": "ada",
+              "to": "y1815",
+              "label": "born on"
+            },
+            {
+              "from": "ada",
+              "to": "ae",
+              "label": "worked on"
+            },
+            {
+              "from": "ae",
+              "to": "cs",
+              "label": "foundational to"
+            },
+            {
+              "from": "babbage",
+              "to": "ae",
+              "label": "designed"
+            },
+            {
+              "from": "ada",
+              "to": "note",
+              "label": "wrote"
+            },
+            {
+              "from": "poet",
+              "to": "ada",
+              "label": "father of"
+            },
+            {
+              "from": "ada",
+              "to": "math",
+              "label": "studied"
+            },
+            {
+              "from": "babbage",
+              "to": "person",
+              "label": "is a"
+            },
+            {
+              "from": "note",
+              "to": "ae",
+              "label": "runs on"
+            },
+            {
+              "from": "cs",
+              "to": "math",
+              "label": "branch of"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "RETRIEVAL_RANK-min",
+      "type": "RETRIEVAL_RANK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "retrieval": {
+          "headline": "A short [rank]",
+          "color": "blue",
+          "rerankAtWord": 3,
+          "fuseAtWord": 5,
+          "chunks": [
+            {
+              "label": "Doc A",
+              "scoreA": 0.7,
+              "scoreFinal": 0.9,
+              "vec": 0.6,
+              "bm25": 0.8
+            },
+            {
+              "label": "Doc B",
+              "scoreA": 0.8,
+              "scoreFinal": 0.6,
+              "vec": 0.5,
+              "bm25": 0.7
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "RETRIEVAL_RANK-max",
+      "type": "RETRIEVAL_RANK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "retrieval": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "rerankAtWord": 3,
+          "fuseAtWord": 5,
+          "chunks": [
+            {
+              "label": "Doc A — enterprise pricing and add-ons",
+              "scoreA": 0.72,
+              "scoreFinal": 0.91,
+              "vec": 0.68,
+              "bm25": 0.8
+            },
+            {
+              "label": "Doc B — refund and cancellation policy",
+              "scoreA": 0.81,
+              "scoreFinal": 0.62,
+              "vec": 0.55,
+              "bm25": 0.7
+            },
+            {
+              "label": "Doc C — service level agreement terms",
+              "scoreA": 0.64,
+              "scoreFinal": 0.78,
+              "vec": 0.72,
+              "bm25": 0.6
+            },
+            {
+              "label": "Doc D — data processing and privacy dpa",
+              "scoreA": 0.59,
+              "scoreFinal": 0.7,
+              "vec": 0.61,
+              "bm25": 0.58
+            },
+            {
+              "label": "Doc E — onboarding and migration guide",
+              "scoreA": 0.66,
+              "scoreFinal": 0.55,
+              "vec": 0.5,
+              "bm25": 0.64
+            },
+            {
+              "label": "Doc F — regions and data residency map",
+              "scoreA": 0.52,
+              "scoreFinal": 0.48,
+              "vec": 0.44,
+              "bm25": 0.53
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "MODEL_STAGES-min",
+      "type": "MODEL_STAGES",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "modelStages": {
+          "headline": "A short [ladder]",
+          "prompt": "Say hi.",
+          "color": "purple",
+          "stages": [
+            {
+              "label": "Pre-train",
+              "method": "raw",
+              "reply": "hi hi hi hi hi"
+            },
+            {
+              "label": "RLHF",
+              "method": "aligned",
+              "reply": "Hello! How can I help you today?"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "MODEL_STAGES-max",
+      "type": "MODEL_STAGES",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "modelStages": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "prompt": "Write a short haiku about the deep and restless sea today.",
+          "color": "purple",
+          "stages": [
+            {
+              "label": "Pre-training xx",
+              "method": "raw text",
+              "reply": "and the sea and the sea and the sea and"
+            },
+            {
+              "label": "Supervised FT",
+              "method": "supervised",
+              "reply": "Blue waves meet the shore at quiet dawn"
+            },
+            {
+              "label": "RLHF alignment",
+              "method": "aligned rl",
+              "reply": "Of course — here is your ocean haiku"
+            },
+            {
+              "label": "Tool-use tune",
+              "method": "tools rl",
+              "reply": "I searched and drafted three haiku"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CONFIDENCE_GATE-min",
+      "type": "CONFIDENCE_GATE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "confidence": {
+          "headline": "A quick [gate]",
+          "value": 82,
+          "threshold": 70,
+          "mode": "pass",
+          "style": "linear",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "CONFIDENCE_GATE-max",
+      "type": "CONFIDENCE_GATE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "confidence": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "value": 41,
+          "threshold": 70,
+          "mode": "block",
+          "style": "linear",
+          "reason": "insufficient grounding evidence",
+          "color": "red"
+        }
+      }
+    },
+    {
+      "id": "CONFIDENCE_GATE-maxGauge",
+      "type": "CONFIDENCE_GATE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "confidence": {
+          "headline": "The gauge [confidence] gate at the very limit",
+          "value": 63,
+          "threshold": 70,
+          "mode": "block",
+          "style": "gauge",
+          "reason": "below the decision threshold",
+          "color": "orange"
+        }
+      }
+    },
+    {
+      "id": "SANDBOX_BOX-min",
+      "type": "SANDBOX_BOX",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "sandbox": {
+          "headline": "A small [box]",
+          "label": "sandbox",
+          "color": "orange",
+          "allowed": [
+            "read file"
+          ],
+          "blocked": [
+            "rm -rf /"
+          ]
+        }
+      }
+    },
+    {
+      "id": "SANDBOX_BOX-max",
+      "type": "SANDBOX_BOX",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "sandbox": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "label": "restricted sandbox",
+          "color": "orange",
+          "allowed": [
+            "read local file",
+            "fetch https api",
+            "query database"
+          ],
+          "blocked": [
+            "rm -rf / --root",
+            "spawn a subshell",
+            "open raw socket"
+          ]
+        }
+      }
+    },
+    {
+      "id": "DRILL_IN-min",
+      "type": "DRILL_IN",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "drillIn": {
+          "headline": "A small [drill]",
+          "color": "blue",
+          "focusId": "api",
+          "pushAtWord": 3,
+          "overview": {
+            "layout": "flow",
+            "direction": "horizontal",
+            "nodes": [
+              {
+                "id": "client",
+                "label": "Client"
+              },
+              {
+                "id": "api",
+                "label": "API"
+              }
+            ],
+            "edges": [
+              {
+                "from": "client",
+                "to": "api"
+              }
+            ]
+          },
+          "detail": {
+            "layout": "flow",
+            "direction": "horizontal",
+            "nodes": [
+              {
+                "id": "router",
+                "label": "Router"
+              },
+              {
+                "id": "handler",
+                "label": "Handler"
+              }
+            ],
+            "edges": [
+              {
+                "from": "router",
+                "to": "handler"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "DRILL_IN-max",
+      "type": "DRILL_IN",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "drillIn": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "focusId": "api",
+          "pushAtWord": 3,
+          "overview": {
+            "layout": "flow",
+            "direction": "horizontal",
+            "nodes": [
+              {
+                "id": "client",
+                "label": "Web Client"
+              },
+              {
+                "id": "cdn",
+                "label": "CDN Edge"
+              },
+              {
+                "id": "lb",
+                "label": "Load Balancer"
+              },
+              {
+                "id": "api",
+                "label": "API Gateway",
+                "color": "blue"
+              },
+              {
+                "id": "cache",
+                "label": "Redis Cache"
+              },
+              {
+                "id": "db",
+                "label": "Postgres DB"
+              },
+              {
+                "id": "queue",
+                "label": "Job Queue"
+              },
+              {
+                "id": "worker",
+                "label": "Worker Pool"
+              }
+            ],
+            "edges": [
+              {
+                "from": "client",
+                "to": "cdn"
+              },
+              {
+                "from": "cdn",
+                "to": "lb"
+              },
+              {
+                "from": "lb",
+                "to": "api"
+              },
+              {
+                "from": "api",
+                "to": "cache"
+              },
+              {
+                "from": "api",
+                "to": "db"
+              },
+              {
+                "from": "api",
+                "to": "queue"
+              },
+              {
+                "from": "queue",
+                "to": "worker"
+              }
+            ]
+          },
+          "detail": {
+            "layout": "flow",
+            "direction": "horizontal",
+            "nodes": [
+              {
+                "id": "router",
+                "label": "Router"
+              },
+              {
+                "id": "auth",
+                "label": "Auth Middleware",
+                "color": "purple"
+              },
+              {
+                "id": "valid",
+                "label": "Validator"
+              },
+              {
+                "id": "handler",
+                "label": "Handler",
+                "color": "green"
+              },
+              {
+                "id": "orm",
+                "label": "ORM Layer"
+              },
+              {
+                "id": "pool",
+                "label": "Conn Pool"
+              }
+            ],
+            "edges": [
+              {
+                "from": "router",
+                "to": "auth"
+              },
+              {
+                "from": "auth",
+                "to": "valid"
+              },
+              {
+                "from": "valid",
+                "to": "handler"
+              },
+              {
+                "from": "handler",
+                "to": "orm"
+              },
+              {
+                "from": "orm",
+                "to": "pool"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "EVAL_DASHBOARD-min",
+      "type": "EVAL_DASHBOARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "evalDash": {
+          "headline": "A short [eval]",
+          "metrics": [
+            {
+              "label": "Accuracy",
+              "value": 94,
+              "target": 90,
+              "unit": "%",
+              "color": "green"
+            },
+            {
+              "label": "Latency",
+              "value": 72,
+              "target": 80,
+              "degrading": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "EVAL_DASHBOARD-max",
+      "type": "EVAL_DASHBOARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "evalDash": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "metrics": [
+            {
+              "label": "Answer accuracy xx",
+              "value": 94,
+              "target": 90,
+              "unit": "%",
+              "color": "green"
+            },
+            {
+              "label": "Faithfulness score",
+              "value": 88,
+              "target": 85,
+              "unit": "%",
+              "color": "blue"
+            },
+            {
+              "label": "Latency p95 (ms)",
+              "value": 72,
+              "target": 80,
+              "degrading": true
+            },
+            {
+              "label": "Cost per query xx",
+              "value": 63,
+              "target": 70,
+              "color": "purple"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

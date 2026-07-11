@@ -1,0 +1,12 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "DNA_HELIX-min", "type": "DNA_HELIX", "narration": "A short stretch of the double helix, three base pairs twisting around now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [helix].", "headlineColor": "blue", "dnaHelix": {"color": "blue", "pairs": [
+      {"left": "A", "right": "T"}, {"left": "G", "right": "C"}, {"left": "T", "right": "A"}], "atWord": 1}}},
+    {"id": "DNA_HELIX-max", "type": "DNA_HELIX", "narration": "Fourteen base pairs of the double helix, the sugar phosphate backbones winding around a full ladder of A-T and G-C rungs.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "The [double helix] at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE", "dnaHelix": {"color": "blue", "pairs": [
+      {"left": "A", "right": "T"}, {"left": "G", "right": "C"}, {"left": "T", "right": "A"}, {"left": "C", "right": "G"},
+      {"left": "A", "right": "T"}, {"left": "G", "right": "C"}, {"left": "T", "right": "A"}, {"left": "A", "right": "T"},
+      {"left": "C", "right": "G"}, {"left": "G", "right": "C"}, {"left": "T", "right": "A"}, {"left": "A", "right": "T"},
+      {"left": "G", "right": "C"}, {"left": "C", "right": "G"}], "atWord": 1}}}
+  ]
+}

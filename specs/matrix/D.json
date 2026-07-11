@@ -1,0 +1,735 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "DIAGRAM-min",
+      "type": "DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A tiny [flow]",
+        "headlineColor": "blue",
+        "diagram": {
+          "layout": "flow",
+          "direction": "horizontal",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Input",
+              "asset": "lucide:type"
+            },
+            {
+              "id": "b",
+              "label": "Output",
+              "asset": "lucide:sparkles",
+              "color": "green"
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "b",
+              "label": "run"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DIAGRAM-maxFlow",
+      "type": "DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "headlineColor": "blue",
+        "diagram": {
+          "layout": "flow",
+          "direction": "horizontal",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Ingest source",
+              "sub": "raw documents",
+              "asset": "lucide:download",
+              "color": "blue"
+            },
+            {
+              "id": "b",
+              "label": "Chunk & clean",
+              "sub": "split + normalise",
+              "asset": "lucide:scissors",
+              "color": "purple"
+            },
+            {
+              "id": "c",
+              "label": "Embed vectors",
+              "sub": "to the index",
+              "asset": "lucide:brain-circuit",
+              "color": "green"
+            },
+            {
+              "id": "d",
+              "label": "Retrieve top-k",
+              "sub": "by similarity",
+              "asset": "lucide:search",
+              "color": "orange"
+            },
+            {
+              "id": "e",
+              "label": "Rerank hits",
+              "sub": "cross-encoder",
+              "asset": "lucide:list-filter",
+              "color": "yellow"
+            },
+            {
+              "id": "f",
+              "label": "Generate reply",
+              "sub": "grounded answer",
+              "asset": "lucide:sparkles",
+              "color": "green"
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "b"
+            },
+            {
+              "from": "b",
+              "to": "c"
+            },
+            {
+              "from": "c",
+              "to": "d"
+            },
+            {
+              "from": "d",
+              "to": "e"
+            },
+            {
+              "from": "e",
+              "to": "f"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DIAGRAM-maxHub",
+      "type": "DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [hub] layout with a full spoke count ok",
+        "headlineColor": "purple",
+        "diagram": {
+          "layout": "hub",
+          "nodes": [
+            {
+              "id": "core",
+              "label": "Orchestrator",
+              "sub": "the planner",
+              "asset": "lucide:cpu",
+              "color": "purple"
+            },
+            {
+              "id": "s1",
+              "label": "Researcher",
+              "asset": "lucide:search",
+              "color": "blue"
+            },
+            {
+              "id": "s2",
+              "label": "Coder",
+              "asset": "lucide:code",
+              "color": "green"
+            },
+            {
+              "id": "s3",
+              "label": "Critic",
+              "asset": "lucide:shield",
+              "color": "orange"
+            },
+            {
+              "id": "s4",
+              "label": "Retriever",
+              "asset": "lucide:database",
+              "color": "yellow"
+            },
+            {
+              "id": "s5",
+              "label": "Summariser",
+              "asset": "lucide:file-text",
+              "color": "red"
+            },
+            {
+              "id": "s6",
+              "label": "Verifier",
+              "asset": "lucide:check",
+              "color": "blue"
+            }
+          ],
+          "edges": [
+            {
+              "from": "core",
+              "to": "s1"
+            },
+            {
+              "from": "core",
+              "to": "s2"
+            },
+            {
+              "from": "core",
+              "to": "s3"
+            },
+            {
+              "from": "core",
+              "to": "s4"
+            },
+            {
+              "from": "core",
+              "to": "s5"
+            },
+            {
+              "from": "core",
+              "to": "s6"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DIAGRAM-maxTree",
+      "type": "DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [tree] layout at the node cap here",
+        "headlineColor": "green",
+        "diagram": {
+          "layout": "tree",
+          "direction": "vertical",
+          "nodes": [
+            {
+              "id": "root",
+              "label": "Root request",
+              "asset": "lucide:git-branch",
+              "color": "blue"
+            },
+            {
+              "id": "a",
+              "label": "Auth service",
+              "asset": "lucide:lock",
+              "color": "purple"
+            },
+            {
+              "id": "b",
+              "label": "Data service",
+              "asset": "lucide:database",
+              "color": "green"
+            },
+            {
+              "id": "a1",
+              "label": "Token check",
+              "color": "purple"
+            },
+            {
+              "id": "a2",
+              "label": "Role lookup",
+              "color": "purple"
+            },
+            {
+              "id": "b1",
+              "label": "Cache read",
+              "color": "green"
+            },
+            {
+              "id": "b2",
+              "label": "DB query",
+              "color": "green"
+            }
+          ],
+          "edges": [
+            {
+              "from": "root",
+              "to": "a"
+            },
+            {
+              "from": "root",
+              "to": "b"
+            },
+            {
+              "from": "a",
+              "to": "a1"
+            },
+            {
+              "from": "a",
+              "to": "a2"
+            },
+            {
+              "from": "b",
+              "to": "b1"
+            },
+            {
+              "from": "b",
+              "to": "b2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DIAGRAM-maxSeq",
+      "type": "DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [sequence] layout with messages ok",
+        "headlineColor": "orange",
+        "diagram": {
+          "layout": "sequence",
+          "nodes": [
+            {
+              "id": "user",
+              "label": "User",
+              "asset": "lucide:user",
+              "color": "blue"
+            },
+            {
+              "id": "app",
+              "label": "App server",
+              "asset": "lucide:server",
+              "color": "green"
+            },
+            {
+              "id": "db",
+              "label": "Database",
+              "asset": "lucide:database",
+              "color": "purple"
+            }
+          ],
+          "edges": [
+            {
+              "from": "user",
+              "to": "app",
+              "label": "POST /order"
+            },
+            {
+              "from": "app",
+              "to": "db",
+              "label": "INSERT row"
+            },
+            {
+              "from": "db",
+              "to": "app",
+              "label": "ok, id=42"
+            },
+            {
+              "from": "app",
+              "to": "user",
+              "label": "201 Created"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DIAGRAM-maxBlock",
+      "type": "DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [block] grid layout at capacity",
+        "headlineColor": "blue",
+        "diagram": {
+          "layout": "block",
+          "nodes": [
+            {
+              "id": "lb",
+              "label": "Load balancer",
+              "asset": "lucide:network",
+              "color": "blue"
+            },
+            {
+              "id": "w1",
+              "label": "Web 1",
+              "asset": "lucide:server",
+              "color": "green"
+            },
+            {
+              "id": "w2",
+              "label": "Web 2",
+              "asset": "lucide:server",
+              "color": "green"
+            },
+            {
+              "id": "cache",
+              "label": "Redis cache",
+              "asset": "lucide:zap",
+              "color": "orange"
+            },
+            {
+              "id": "db",
+              "label": "Primary DB",
+              "asset": "lucide:database",
+              "color": "purple"
+            },
+            {
+              "id": "rep",
+              "label": "Read replica",
+              "asset": "lucide:database",
+              "color": "purple"
+            }
+          ],
+          "edges": [
+            {
+              "from": "lb",
+              "to": "w1"
+            },
+            {
+              "from": "lb",
+              "to": "w2"
+            },
+            {
+              "from": "w1",
+              "to": "cache"
+            },
+            {
+              "from": "w2",
+              "to": "cache"
+            },
+            {
+              "from": "w1",
+              "to": "db"
+            },
+            {
+              "from": "db",
+              "to": "rep"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CONCEPT_DIAGRAM-min",
+      "type": "CONCEPT_DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Client and [server]",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Client",
+            "asset": "lucide:monitor"
+          },
+          {
+            "id": "b",
+            "label": "Server",
+            "asset": "lucide:server"
+          }
+        ],
+        "edges": [
+          {
+            "from": "a",
+            "to": "b"
+          }
+        ]
+      }
+    },
+    {
+      "id": "CONCEPT_DIAGRAM-max",
+      "type": "CONCEPT_DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Browser client",
+            "asset": "lucide:monitor"
+          },
+          {
+            "id": "b",
+            "label": "API gateway",
+            "asset": "lucide:network"
+          },
+          {
+            "id": "c",
+            "label": "App server",
+            "asset": "lucide:server"
+          },
+          {
+            "id": "d",
+            "label": "Database",
+            "asset": "lucide:database"
+          }
+        ],
+        "edges": [
+          {
+            "from": "a",
+            "to": "b"
+          },
+          {
+            "from": "b",
+            "to": "c"
+          },
+          {
+            "from": "c",
+            "to": "d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "STEP_FLOW-min",
+      "type": "STEP_FLOW",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Two [steps]",
+        "steps": [
+          {
+            "kicker": "STEP 1",
+            "title": "DO THIS",
+            "sub": "first thing"
+          },
+          {
+            "kicker": "STEP 2",
+            "title": "THEN THAT",
+            "sub": "second thing",
+            "color": "green"
+          }
+        ],
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "STEP_FLOW-max",
+      "type": "STEP_FLOW",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "steps": [
+          {
+            "kicker": "STEP 1",
+            "title": "DOCS",
+            "sub": "everything you own"
+          },
+          {
+            "kicker": "STEP 2",
+            "title": "CHUNKS",
+            "sub": "split into pieces"
+          },
+          {
+            "kicker": "STEP 3",
+            "title": "VECTORS",
+            "sub": "embedded as numbers"
+          },
+          {
+            "kicker": "STEP 4",
+            "title": "INDEX",
+            "sub": "stored for search",
+            "color": "blue"
+          },
+          {
+            "kicker": "STEP 5",
+            "title": "RETRIEVE",
+            "sub": "closest by meaning",
+            "color": "green"
+          }
+        ],
+        "caption": {
+          "text": "ask → pull closest → answer",
+          "color": "orange"
+        },
+        "source": "illustrative five-step pipeline at the cap"
+      }
+    },
+    {
+      "id": "SPLIT_PATHS-min",
+      "type": "SPLIT_PATHS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Two [paths]",
+        "left": {
+          "title": "Path A",
+          "badge": {
+            "text": "simple",
+            "color": "blue"
+          },
+          "lines": [
+            {
+              "text": "✓ fast",
+              "color": "green"
+            }
+          ],
+          "color": "green"
+        },
+        "center": {
+          "kicker": "ROUTER",
+          "title": "choose",
+          "color": "purple"
+        },
+        "right": {
+          "title": "Path B",
+          "badge": {
+            "text": "complex",
+            "color": "orange"
+          },
+          "lines": [
+            {
+              "text": "✓ flexible",
+              "color": "green"
+            }
+          ],
+          "color": "green"
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "SPLIT_PATHS-max",
+      "type": "SPLIT_PATHS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "left": {
+          "title": "\"What is our refund window?\"",
+          "badge": {
+            "text": "canonical → facts",
+            "color": "blue"
+          },
+          "lines": [
+            {
+              "text": "✓ 14 days · policy linked",
+              "color": "green"
+            },
+            {
+              "text": "exact, cited answer",
+              "color": "blue"
+            }
+          ],
+          "color": "green"
+        },
+        "center": {
+          "kicker": "SUPPORT AGENT",
+          "title": "one router",
+          "color": "purple"
+        },
+        "right": {
+          "title": "\"Anyone hit this billing bug?\"",
+          "badge": {
+            "text": "open-ended → RAG",
+            "color": "blue"
+          },
+          "lines": [
+            {
+              "text": "40,000 tickets searched",
+              "color": "blue"
+            },
+            {
+              "text": "✓ 3 similar found",
+              "color": "green"
+            }
+          ],
+          "color": "green"
+        },
+        "source": "illustrative two-path router at the cap"
+      }
+    },
+    {
+      "id": "LIST_BUILD-min",
+      "type": "LIST_BUILD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "heading": "Two ideas",
+        "items": [
+          {
+            "icon": "lucide:scissors",
+            "text": "Tokenize",
+            "detail": "split the text"
+          },
+          {
+            "icon": "lucide:sparkles",
+            "text": "Predict",
+            "detail": "the next token"
+          }
+        ]
+      }
+    },
+    {
+      "id": "LIST_BUILD-max",
+      "type": "LIST_BUILD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "heading": "Five things that make retrieval work well",
+        "items": [
+          {
+            "icon": "lucide:scissors",
+            "text": "Chunk documents at semantic boundaries",
+            "detail": "not fixed windows"
+          },
+          {
+            "icon": "lucide:brain-circuit",
+            "text": "Embed with a domain-tuned model",
+            "detail": "better recall"
+          },
+          {
+            "icon": "lucide:search",
+            "text": "Retrieve with hybrid vector plus keyword",
+            "detail": "catches both"
+          },
+          {
+            "icon": "lucide:list-filter",
+            "text": "Rerank the candidates with a cross-encoder",
+            "detail": "precision boost"
+          },
+          {
+            "icon": "lucide:shield-check",
+            "text": "Ground the answer and cite every source",
+            "detail": "no hallucinations"
+          }
+        ]
+      }
+    }
+  ]
+}

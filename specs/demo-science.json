@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "topic": "Science, visualized: eight ideas that explain the world",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "The same visual grammar can teach physics, chemistry, biology and electronics in seconds.",
+    "screenplay": "explainer",
+    "topicAxes": ["abstraction", "scale"]
+  },
+  "brand": {"theme": "midnight", "design": "organic", "themeLight": "paper"},
+  "scenes": [
+    {
+      "id": "s01", "type": "HOOK", "narration": "Science looks intimidating on paper. But almost every idea becomes obvious the moment you can see it move.",
+      "durationFrames": 210, "timingSource": "estimated", "background": "zoneA", "transition": "fade",
+      "data": {"headline": "SEE THE SCIENCE", "subtext": "eight ideas, visualized", "heroAsset": "lucide:flask-conical", "headlineAtWord": 1, "heroAtWord": 6}
+    },
+    {
+      "id": "s02", "type": "FORMULA", "narration": "Start with the most famous equation: energy equals mass times the speed of light squared.",
+      "durationFrames": 210, "timingSource": "estimated", "background": "zoneB", "transition": "slide",
+      "data": {"headline": "Mass is [energy].", "headlineColor": "purple", "formula": {"color": "purple", "parts": [
+        {"text": "E", "kind": "var", "atWord": 3}, {"text": "=", "kind": "op", "atWord": 4}, {"text": "m", "kind": "var", "atWord": 5}, {"text": "c", "kind": "var", "sup": "2", "highlight": true, "atWord": 8}
+      ], "label": "Einstein's mass\u2013energy equivalence"}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s03", "type": "MOLECULE", "narration": "Zoom into matter and you find structure: water is one oxygen atom bonded to two hydrogens.",
+      "durationFrames": 220, "timingSource": "estimated", "background": "zoneC", "transition": "push",
+      "data": {"headline": "The [water] molecule.", "headlineColor": "blue", "molecule": {"color": "blue", "atoms": [
+        {"label": "O", "x": 0.5, "y": 0.35}, {"label": "H", "x": 0.28, "y": 0.68}, {"label": "H", "x": 0.72, "y": 0.68}
+      ], "bonds": [{"from": 0, "to": 1, "order": 1}, {"from": 0, "to": 2, "order": 1}], "name": "H\u2082O — water", "atWord": 6}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s04", "type": "DNA_HELIX", "narration": "Life stores its code the same way in every cell: a twisted ladder of paired bases.",
+      "durationFrames": 220, "timingSource": "estimated", "background": "zoneA", "transition": "wipe",
+      "data": {"headline": "The [double helix].", "headlineColor": "green", "dnaHelix": {"color": "green", "pairs": [
+        {"left": "A", "right": "T"}, {"left": "G", "right": "C"}, {"left": "T", "right": "A"}, {"left": "C", "right": "G"},
+        {"left": "A", "right": "T"}, {"left": "G", "right": "C"}, {"left": "T", "right": "A"}, {"left": "A", "right": "T"}
+      ], "atWord": 3}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s05", "type": "LABELED_FIGURE", "narration": "Scale up to a machine and the trick is the same: name the parts and point at each one.",
+      "durationFrames": 230, "timingSource": "estimated", "background": "zoneB", "transition": "morph",
+      "data": {"headline": "Anatomy of a [rocket].", "headlineColor": "orange", "source": "ILLUSTRATIVE", "labeledFigure": {"color": "orange", "subject": "lucide:rocket", "callouts": [
+        {"label": "Payload", "x": 0.55, "y": 0.16, "color": "blue"},
+        {"label": "Guidance", "x": 0.46, "y": 0.34, "color": "purple"},
+        {"label": "Oxidizer", "x": 0.5, "y": 0.52, "color": "green"},
+        {"label": "Fuel tank", "x": 0.5, "y": 0.68, "color": "orange"},
+        {"label": "Engines", "x": 0.5, "y": 0.86, "color": "red"}
+      ]}}
+    },
+    {
+      "id": "s06", "type": "VECTOR_FIELD", "narration": "Why does that rocket climb? Four forces: thrust up, weight down, plus drag and control.",
+      "durationFrames": 230, "timingSource": "estimated", "background": "zoneC", "transition": "zoom",
+      "data": {"headline": "Forces on a [rocket].", "headlineColor": "blue", "source": "ILLUSTRATIVE", "vectorField": {"mode": "freebody", "color": "blue", "body": "lucide:rocket", "bodyLabel": "Rocket", "forces": [
+        {"label": "Thrust", "angle": 90, "magnitude": 0.95, "color": "green"},
+        {"label": "Weight", "angle": 270, "magnitude": 0.8, "color": "red"},
+        {"label": "Drag", "angle": 300, "magnitude": 0.5, "color": "orange"},
+        {"label": "Control", "angle": 20, "magnitude": 0.45, "color": "purple"}
+      ], "atWord": 5}}
+    },
+    {
+      "id": "s07", "type": "CIRCUIT_FLOW", "narration": "Electronics runs on the same logic: a battery pushes current through a resistor to light an LED.",
+      "durationFrames": 220, "timingSource": "estimated", "background": "zoneA", "transition": "slide",
+      "data": {"headline": "A simple [circuit.]", "headlineColor": "green", "circuitFlow": {"color": "green", "currentLabel": "conventional current", "components": [
+        {"kind": "battery", "label": "9V", "color": "orange"},
+        {"kind": "switch", "label": "SW", "color": "blue"},
+        {"kind": "resistor", "label": "220\u03a9", "color": "purple"},
+        {"kind": "led", "label": "LED", "color": "green"}
+      ], "atWord": 6}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s08", "type": "RADAR", "narration": "To compare materials, plot every property at once and read the shape each one traces.",
+      "durationFrames": 230, "timingSource": "estimated", "background": "zoneB", "transition": "push",
+      "data": {"headline": "Two [materials], compared.", "headlineColor": "purple", "radar": {"color": "purple", "max": 100, "axes": ["Strength", "Weight", "Cost", "Heat", "Flex"], "series": [
+        {"name": "Steel", "values": [92, 40, 70, 88, 30], "color": "blue", "atWord": 3},
+        {"name": "Carbon fiber", "values": [80, 92, 45, 70, 60], "color": "orange", "atWord": 3}
+      ]}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s09", "type": "PICTOGRAM", "narration": "And proportions land best as pictures: about four in five of the air you breathe is nitrogen.",
+      "durationFrames": 220, "timingSource": "estimated", "background": "zoneC", "transition": "iris",
+      "data": {"headline": "The air, [in parts].", "headlineColor": "blue", "pictogram": {"color": "blue", "icon": "lucide:wind", "rows": [
+        {"label": "Nitrogen", "value": 8, "color": "blue", "atWord": 9},
+        {"label": "Oxygen", "value": 2, "color": "green", "atWord": 9}
+      ]}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s10", "type": "OUTRO_CTA", "narration": "Formula, molecule, force, circuit — one visual grammar for all of science. Subscribe for more.",
+      "durationFrames": 190, "timingSource": "estimated", "background": "zoneA", "transition": "fade",
+      "data": {"message": "See the science.", "sub": "subscribe for visual explainers"}
+    }
+  ],
+  "thumbnail": {"title": "See The Science", "badge": "SCIENCE", "asset": "lucide:flask-conical"}
+}

@@ -1,0 +1,897 @@
+{
+  "meta": {
+    "topic": "How the Internet Works: the complete journey of one web request, from keystroke to painted pixels (evergreen explainer)",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "Every page load is a five-stage relay - DNS, connection, encryption, response, render - that crosses the planet in a few hundred milliseconds.",
+    "openLoop": "What actually crosses the planet between your keystroke and the pixels on screen?",
+    "analogy": "A web request is a relay race: each runner (DNS, TCP, TLS, HTTP, the browser) hands off to the next.",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "mechanism-depth",
+      "everyday-magic"
+    ]
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "aurora-grid",
+    "channel": "YOUR CHANNEL"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "You hit enter, and a page appears in a heartbeat. What crosses the planet in between?",
+      "durationFrames": 222,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "THE INTERNET, EXPLAINED",
+        "subtext": "from keystroke to pixels",
+        "heroAsset": "lucide:globe",
+        "headlineAtWord": 1,
+        "heroAtWord": 6,
+        "anim": "scale"
+      }
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "This is the complete journey of one web request, every stage in order, from your keyboard to the finished page.",
+      "durationFrames": 270,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "wipe",
+      "data": {
+        "title": "How the Internet Works",
+        "subtitle": "one request, end to end"
+      }
+    },
+    {
+      "id": "s03",
+      "type": "DIAGRAM",
+      "narration": "At the highest level, four players hand off the work: your browser asks the internet, which finds the right server, which sends a page back to be drawn.",
+      "durationFrames": 366,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "The [big picture.]",
+        "headlineColor": "blue",
+        "anim": "rise",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "browser", "label": "Browser", "asset": "lucide:monitor", "color": "blue", "atWord": 12},
+            {"id": "net", "label": "Internet", "asset": "lucide:globe", "color": "purple", "atWord": 15},
+            {"id": "server", "label": "Server", "asset": "lucide:server", "color": "orange", "atWord": 20},
+            {"id": "page", "label": "Rendered page", "asset": "lucide:layout", "color": "green", "atWord": 28}
+          ],
+          "edges": [
+            {"from": "browser", "to": "net", "atWord": 13},
+            {"from": "net", "to": "server", "atWord": 17},
+            {"from": "server", "to": "page", "atWord": 22}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s04",
+      "type": "LIST_BUILD",
+      "narration": "We'll trace it in five stages: the request itself, finding the server through DNS, opening the connection, locking it down with encryption, and finally the response your browser paints.",
+      "durationFrames": 378,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "heading": "What we'll cover",
+        "anim": "slideLeft",
+        "items": [
+          {"icon": "lucide:mouse-pointer-click", "text": "The request", "detail": "you press enter", "atWord": 7},
+          {"icon": "lucide:search", "text": "Finding the server", "detail": "the DNS lookup", "atWord": 10},
+          {"icon": "lucide:link", "text": "The connection", "detail": "TCP and routing", "atWord": 15},
+          {"icon": "lucide:lock", "text": "Locking it down", "detail": "the TLS handshake", "atWord": 18},
+          {"icon": "lucide:file-code", "text": "The response", "detail": "HTML to pixels", "atWord": 25}
+        ]
+      }
+    },
+    {
+      "id": "s04b",
+      "type": "TIMELINE",
+      "narration": "Before we trace a request, a quick origin story. It grew over decades: ARPANET in sixty-nine, TCP/IP in eighty-three, the World Wide Web in ninety-one, and encrypted browsing by the mid-nineties.",
+      "durationFrames": 390,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "How we [got here.]",
+        "headlineColor": "yellow",
+        "timeline": {
+          "milestones": [
+            {"date": "1969", "title": "ARPANET", "color": "blue", "atWord": 12},
+            {"date": "1983", "title": "TCP/IP", "color": "purple", "atWord": 15},
+            {"date": "1991", "title": "The Web", "color": "green", "atWord": 22},
+            {"date": "1990s", "title": "HTTPS", "color": "orange", "atWord": 26}
+          ]
+        },
+        "source": "A BRIEF HISTORY OF THE INTERNET"
+      }
+    },
+    {
+      "id": "s05",
+      "type": "CHAPTER",
+      "narration": "Chapter one. It all begins the instant you press enter.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "01", "title": "The Request", "subtitle": "you press enter", "color": "blue"}
+      }
+    },
+    {
+      "id": "s06",
+      "type": "CONCEPT_DIAGRAM",
+      "narration": "Every request is a conversation between two roles. Your browser is the client, the one that asks. Somewhere far away, a server waits to answer.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "headline": "Client meets [server.]",
+        "headlineColor": "blue",
+        "anim": "rise",
+        "nodes": [
+          {"id": "client", "label": "Your browser", "asset": "lucide:monitor", "atWord": 10},
+          {"id": "wire", "label": "The internet", "asset": "lucide:globe", "atWord": 5},
+          {"id": "server", "label": "Web server", "asset": "lucide:server", "atWord": 22}
+        ],
+        "edges": [
+          {"from": "client", "to": "wire", "atWord": 13},
+          {"from": "wire", "to": "server", "atWord": 22}
+        ]
+      }
+    },
+    {
+      "id": "s06b",
+      "type": "PHOTO",
+      "narration": "And that server isn't abstract. It's a real machine in a real building, humming in a data center somewhere on Earth.",
+      "durationFrames": 282,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "photo": {"asset": "img:datacenter.jpg", "kicker": "THE SERVER", "caption": "A real machine in a real building", "color": "blue", "pan": "in", "atWord": 1},
+        "source": "PHOTO: LOREM PICSUM (FREE)"
+      }
+    },
+    {
+      "id": "s07",
+      "type": "CODE_WINDOW",
+      "narration": "But where is somewhere? The address bar holds the answer. A URL bundles three things: the protocol to speak, the domain to find, and the path to the exact page.",
+      "durationFrames": 390,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "code": {
+          "filename": "url.txt",
+          "language": "bash",
+          "atWord": 11,
+          "lines": [
+            {"text": "https://        protocol - how to talk"},
+            {"text": "example.com     domain   - which server"},
+            {"text": "/blog/how-dns   path     - which page"}
+          ],
+          "output": [
+            {"text": "one address, three instructions", "color": "green"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s08",
+      "type": "STEP_FLOW",
+      "narration": "Before touching the network, your browser checks what it already knows: its own cache, then the operating system's, then it finally asks a DNS resolver out on the internet.",
+      "durationFrames": 378,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "wipe",
+      "data": {
+        "headline": "Check before you [ask.]",
+        "headlineColor": "blue",
+        "steps": [
+          {"kicker": "FIRST", "title": "BROWSER", "sub": "its own cache", "color": "blue", "atWord": 12},
+          {"kicker": "THEN", "title": "OS CACHE", "sub": "the system remembers", "color": "purple", "atWord": 16},
+          {"kicker": "FINALLY", "title": "RESOLVER", "sub": "ask the internet", "color": "orange", "atWord": 22}
+        ],
+        "caption": {"text": "closest answer wins", "color": "green", "atWord": 29},
+        "source": "BROWSER CACHE, THEN OS, THEN RESOLVER"
+      }
+    },
+    {
+      "id": "s09",
+      "type": "LOWER_THIRD",
+      "narration": "Quick definition, because we'll use it a lot. The client is simply whatever makes the request, here, your web browser.",
+      "durationFrames": 270,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "iris",
+      "data": {
+        "lowerThird": {"kicker": "KEY TERM", "title": "Client", "subtitle": "the program that makes requests", "color": "blue", "asset": "lucide:monitor", "atWord": 9}
+      }
+    },
+    {
+      "id": "s10",
+      "type": "STAT_CALLOUT",
+      "narration": "And here's the wild part. This entire journey, every step we're about to unpack, usually completes in just a few hundred milliseconds.",
+      "durationFrames": 294,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "value": 300,
+        "suffix": "ms",
+        "label": "a typical full round trip",
+        "atWord": 21,
+        "source": "ILLUSTRATIVE - TYPICAL WEB LATENCY"
+      }
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "narration": "Chapter two. Your browser has a name to find, but the network only speaks in numbers.",
+      "durationFrames": 222,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "02", "title": "Finding the Server", "subtitle": "the DNS lookup", "color": "purple"}
+      }
+    },
+    {
+      "id": "s12",
+      "type": "SPLIT_PATHS",
+      "narration": "We remember names like example dot com. But machines route by numbers, an IP address, the internet's equivalent of a phone number for every server.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "slide",
+      "data": {
+        "headline": "Names vs [numbers.]",
+        "headlineColor": "orange",
+        "center": {"kicker": "SAME SERVER", "title": "example.com", "color": "blue", "atWord": 5},
+        "left": {
+          "title": "Humans",
+          "badge": {"text": "NAMES", "color": "green"},
+          "lines": [{"text": "example.com", "color": "green"}, {"text": "easy to remember", "color": "blue"}],
+          "color": "green",
+          "atWord": 1
+        },
+        "right": {
+          "title": "Machines",
+          "badge": {"text": "NUMBERS", "color": "orange"},
+          "lines": [{"text": "192.0.2.10", "color": "orange"}, {"text": "an example IP", "color": "blue"}],
+          "color": "orange",
+          "atWord": 8
+        },
+        "source": "DNS MAPS NAMES TO IP ADDRESSES"
+      }
+    },
+    {
+      "id": "s13",
+      "type": "DIAGRAM",
+      "narration": "Translating that name is a relay of lookups. Your resolver asks a root server, which points to the dot-com registry, which points to the domain's own name server, which finally returns the IP.",
+      "durationFrames": 426,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "push",
+      "data": {
+        "headline": "How DNS [resolves.]",
+        "headlineColor": "purple",
+        "diagram": {
+          "layout": "sequence",
+          "nodes": [
+            {"id": "res", "label": "Resolver", "asset": "lucide:search", "color": "blue", "atWord": 9},
+            {"id": "root", "label": "Root", "asset": "lucide:globe", "color": "purple", "atWord": 13},
+            {"id": "tld", "label": ".com", "asset": "lucide:folder", "color": "orange", "atWord": 20},
+            {"id": "ns", "label": "Name srv", "asset": "lucide:server", "color": "green", "atWord": 28}
+          ],
+          "edges": [
+            {"from": "res", "to": "root", "label": "com?", "atWord": 13, "color": "blue"},
+            {"from": "root", "to": "res", "label": "ask .com", "atWord": 16, "color": "purple"},
+            {"from": "res", "to": "tld", "label": "example.com?", "atWord": 20, "color": "blue"},
+            {"from": "tld", "to": "res", "label": "ask name srv", "atWord": 24, "color": "orange"},
+            {"from": "res", "to": "ns", "label": "A record?", "atWord": 28, "color": "blue"},
+            {"from": "ns", "to": "res", "label": "192.0.2.10", "atWord": 31, "color": "green"}
+          ]
+        },
+        "source": "DNS RESOLUTION: ROOT -> TLD -> NAME SERVER"
+      }
+    },
+    {
+      "id": "s14",
+      "type": "STAT_CALLOUT",
+      "narration": "This whole system is anchored by a surprisingly small foundation: just thirteen logical root server clusters, labeled A through M, sit at the very top of DNS.",
+      "durationFrames": 354,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "iris",
+      "data": {
+        "value": 13,
+        "label": "root server clusters, A through M",
+        "atWord": 12,
+        "source": "13 DNS ROOT SERVER CLUSTERS (A-M)"
+      }
+    },
+    {
+      "id": "s15",
+      "type": "CHAT_MOCKUP",
+      "narration": "You won't repeat that whole relay every time. Once resolved, the answer is cached, so the second time you visit, the lookup is essentially instant.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "messages": [
+          {"from": "user", "text": "Where is example.com?", "atWord": 1},
+          {"from": "agent", "text": "Resolving... it's 192.0.2.10", "color": "blue", "atWord": 10},
+          {"from": "user", "text": "Where is example.com again?", "atWord": 16},
+          {"from": "agent", "text": "Cached - instant answer.", "color": "green", "atWord": 22}
+        ],
+        "source": "DNS ANSWERS ARE CACHED LOCALLY"
+      }
+    },
+    {
+      "id": "s16",
+      "type": "LOWER_THIRD",
+      "narration": "That memory doesn't last forever. Each record carries a TTL, a time to live, that says how long it's safe to reuse before checking again.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "wipe",
+      "data": {
+        "lowerThird": {"kicker": "KEY TERM", "title": "TTL", "subtitle": "how long a record can be reused", "color": "purple", "asset": "lucide:timer", "atWord": 10}
+      }
+    },
+    {
+      "id": "s17",
+      "type": "CHAPTER",
+      "narration": "Chapter three. We finally have an address. Now two computers need to open a reliable line between them.",
+      "durationFrames": 246,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "03", "title": "The Connection", "subtitle": "TCP and routing", "color": "green"}
+      }
+    },
+    {
+      "id": "s18",
+      "type": "DIAGRAM",
+      "narration": "TCP opens the line with a three-way handshake. The client sends SYN, can we talk? The server replies SYN-ACK, yes, can you? The client answers ACK, and the channel is live.",
+      "durationFrames": 402,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "wipe",
+      "data": {
+        "headline": "The [three-way handshake.]",
+        "headlineColor": "green",
+        "diagram": {
+          "layout": "sequence",
+          "nodes": [
+            {"id": "c", "label": "Client", "asset": "lucide:monitor", "color": "blue", "atWord": 2},
+            {"id": "s", "label": "Server", "asset": "lucide:server", "color": "green", "atWord": 2}
+          ],
+          "edges": [
+            {"from": "c", "to": "s", "label": "SYN", "atWord": 11, "color": "blue"},
+            {"from": "s", "to": "c", "label": "SYN-ACK", "atWord": 18, "color": "purple"},
+            {"from": "c", "to": "s", "label": "ACK", "atWord": 25, "color": "green"}
+          ]
+        },
+        "source": "TCP HANDSHAKE: SYN, SYN-ACK, ACK"
+      }
+    },
+    {
+      "id": "s19",
+      "type": "DIAGRAM",
+      "narration": "Your data doesn't travel as one blob. It's split into packets, and each one independently hops from router to router, taking whatever path is fastest right now, then reassembles at the far end.",
+      "durationFrames": 426,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "push",
+      "data": {
+        "headline": "Packets find [their way.]",
+        "headlineColor": "blue",
+        "anim": "rise",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "you", "label": "Your device", "asset": "lucide:smartphone", "color": "blue", "atWord": 8},
+            {"id": "r1", "label": "Router", "asset": "lucide:router", "color": "purple", "atWord": 18},
+            {"id": "r2", "label": "Router", "asset": "lucide:router", "color": "orange", "atWord": 20},
+            {"id": "dest", "label": "Server", "asset": "lucide:server", "color": "green", "atWord": 29}
+          ],
+          "edges": [
+            {"from": "you", "to": "r1", "atWord": 18},
+            {"from": "r1", "to": "r2", "atWord": 20},
+            {"from": "r2", "to": "dest", "atWord": 29}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s20",
+      "type": "STAT_CALLOUT",
+      "narration": "A single web page might arrive as dozens or even hundreds of separate packets, each finding its own way and arriving out of order.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "iris",
+      "data": {
+        "value": 100,
+        "suffix": "+",
+        "label": "packets can make up one page",
+        "atWord": 9,
+        "source": "ILLUSTRATIVE - PACKETS PER PAGE"
+      }
+    },
+    {
+      "id": "s21",
+      "type": "CODE_WINDOW",
+      "narration": "You can actually watch those hops. A traceroute prints each router your packets pass through on the way to a destination, one line per hop.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "wipe",
+      "data": {
+        "code": {
+          "filename": "traceroute",
+          "language": "bash",
+          "atWord": 7,
+          "lines": [
+            {"text": "$ traceroute example.com"},
+            {"text": "1  home-router      2 ms"},
+            {"text": "2  isp-gateway      9 ms"},
+            {"text": "3  backbone-core   21 ms"},
+            {"text": "4  example.com     38 ms", "color": "green"}
+          ],
+          "output": [
+            {"text": "4 hops across the internet", "color": "blue"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s22",
+      "type": "QUADRANT",
+      "narration": "Not every app wants that reliability. TCP guarantees delivery but costs time; UDP skips the guarantees for raw speed. Your choice depends on whether you'd rather be correct or be fast.",
+      "durationFrames": 402,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "Reliable or [fast?]",
+        "headlineColor": "orange",
+        "quadrant": {
+          "xAxis": {"left": "Slower", "right": "Faster"},
+          "yAxis": {"bottom": "Best-effort", "top": "Guaranteed"},
+          "points": [
+            {"label": "TCP", "x": 0.35, "y": 0.9, "color": "blue", "atWord": 7},
+            {"label": "UDP", "x": 0.9, "y": 0.2, "color": "orange", "atWord": 13},
+            {"label": "Web page", "x": 0.4, "y": 0.82, "color": "green", "atWord": 8},
+            {"label": "Live call", "x": 0.85, "y": 0.25, "color": "yellow", "atWord": 19}
+          ]
+        },
+        "source": "TCP = RELIABLE - UDP = FAST"
+      }
+    },
+    {
+      "id": "s23",
+      "type": "QUOTE_SPOTLIGHT",
+      "narration": "This resilience isn't an accident, it follows a founding maxim of internet design, one that still guides good protocols today.",
+      "durationFrames": 270,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "dip",
+      "data": {
+        "person": {"name": "Postel's Law", "role": "The Robustness Principle"},
+        "quote": "Be conservative in what you send, be liberal in what you accept.",
+        "source": "A FOUNDING MAXIM OF INTERNET PROTOCOLS"
+      }
+    },
+    {
+      "id": "s24",
+      "type": "CHAPTER",
+      "narration": "Chapter four. The line is open, but wide open. Anyone in between could be listening. Time to encrypt.",
+      "durationFrames": 246,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "04", "title": "Locking It Down", "subtitle": "the TLS handshake", "color": "orange"}
+      }
+    },
+    {
+      "id": "s25",
+      "type": "SPLIT_PATHS",
+      "narration": "Plain HTTP sends everything as readable text, including passwords. HTTPS wraps that same traffic in TLS, so anyone snooping sees only meaningless scrambled bytes.",
+      "durationFrames": 318,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "slide",
+      "data": {
+        "headline": "Open vs [encrypted.]",
+        "headlineColor": "orange",
+        "center": {"kicker": "THE MESSAGE", "title": "your password", "color": "blue", "atWord": 9},
+        "left": {
+          "title": "HTTP",
+          "badge": {"text": "READABLE", "color": "red"},
+          "lines": [{"text": "pass=hunter2", "color": "red"}, {"text": "anyone can read it", "color": "orange"}],
+          "color": "red",
+          "atWord": 1
+        },
+        "right": {
+          "title": "HTTPS",
+          "badge": {"text": "ENCRYPTED", "color": "green"},
+          "lines": [{"text": "x9f!kap#2vQ8", "color": "green"}, {"text": "only the server reads", "color": "blue"}],
+          "color": "green",
+          "atWord": 10
+        },
+        "source": "HTTPS = HTTP OVER TLS"
+      }
+    },
+    {
+      "id": "s26",
+      "type": "CODE_WINDOW",
+      "narration": "Setting that up is the TLS handshake, a quick exchange before any real data flows. The two sides greet, verify a certificate, agree on a secret key, and switch to encrypted mode.",
+      "durationFrames": 414,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "wipe",
+      "data": {
+        "code": {
+          "filename": "tls-handshake.log",
+          "language": "bash",
+          "atWord": 8,
+          "lines": [
+            {"text": "client -> hello (supported ciphers)"},
+            {"text": "server -> certificate + public key"},
+            {"text": "client -> certificate valid [OK]", "color": "green"},
+            {"text": "both   -> derive shared secret key"},
+            {"text": "both   -> switch to encrypted"}
+          ],
+          "output": [
+            {"text": "connection now private", "color": "green"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s27",
+      "type": "DIAGRAM",
+      "narration": "But why trust that certificate? Because a certificate authority signed it, and that authority chains back to a root your device already trusts out of the box.",
+      "durationFrames": 354,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "headline": "A chain of [trust.]",
+        "headlineColor": "blue",
+        "anim": "rise",
+        "diagram": {
+          "layout": "tree",
+          "nodes": [
+            {"id": "root", "label": "Root CA", "asset": "lucide:shield-check", "color": "green", "atWord": 19},
+            {"id": "inter", "label": "Intermediate", "asset": "lucide:shield", "color": "blue", "atWord": 14, "parent": "root"},
+            {"id": "site", "label": "The website", "asset": "lucide:globe", "color": "purple", "atWord": 5, "parent": "inter"}
+          ]
+        },
+        "source": "CERTIFICATE CHAIN OF TRUST"
+      }
+    },
+    {
+      "id": "s28",
+      "type": "CHAT_MOCKUP",
+      "narration": "Say an attacker sits in the middle and swaps the certificate. Your browser checks the signature, sees it doesn't chain to a trusted root, and refuses to connect.",
+      "durationFrames": 366,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "messages": [
+          {"from": "agent", "text": "Here's my certificate!", "color": "orange", "atWord": 9},
+          {"from": "user", "text": "Checking the signature...", "atWord": 14},
+          {"from": "user", "text": "This doesn't chain to a trusted root.", "color": "red", "atWord": 20},
+          {"from": "user", "text": "Connection refused.", "color": "red", "atWord": 26}
+        ],
+        "source": "BROWSERS REJECT UNTRUSTED CERTIFICATES"
+      }
+    },
+    {
+      "id": "s29",
+      "type": "LIST_BUILD",
+      "narration": "Encryption buys you three guarantees at once: privacy, so no one reads it; integrity, so no one alters it; and authenticity, so you know you're really talking to the right server.",
+      "durationFrames": 402,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "heading": "What TLS guarantees",
+        "anim": "slideLeft",
+        "items": [
+          {"icon": "lucide:eye-off", "text": "Privacy", "detail": "no one can read it", "atWord": 8},
+          {"icon": "lucide:shield", "text": "Integrity", "detail": "no one can alter it", "atWord": 14},
+          {"icon": "lucide:badge-check", "text": "Authenticity", "detail": "it's really the right server", "atWord": 21}
+        ]
+      }
+    },
+    {
+      "id": "s30",
+      "type": "STAT_CALLOUT",
+      "narration": "And the encryption itself is staggeringly strong. A modern key has so many possible combinations that brute-forcing it would outlast the sun.",
+      "durationFrames": 294,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "iris",
+      "data": {
+        "value": 256,
+        "suffix": "-bit",
+        "label": "keys - effectively unbreakable",
+        "atWord": 10,
+        "source": "AES-256 KEY SPACE = 2^256"
+      }
+    },
+    {
+      "id": "s31",
+      "type": "CHAPTER",
+      "narration": "Chapter five. The tunnel is secure. At last, the server can send the page, and your browser can turn code into something you can see.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "05", "title": "The Response", "subtitle": "HTML to pixels", "color": "blue"}
+      }
+    },
+    {
+      "id": "s32",
+      "type": "CODE_WINDOW",
+      "narration": "Now the real conversation. Your browser sends a GET request naming the page it wants. The server replies with a status line, two hundred OK, followed by the page's HTML.",
+      "durationFrames": 390,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "wipe",
+      "data": {
+        "code": {
+          "filename": "GET /",
+          "language": "http",
+          "atWord": 7,
+          "lines": [
+            {"text": "GET /index.html HTTP/1.1"},
+            {"text": "Host: example.com"},
+            {"text": "HTTP/1.1 200 OK", "color": "green"},
+            {"text": "Content-Type: text/html"}
+          ],
+          "output": [
+            {"text": "<html> ... </html>", "color": "blue"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s33",
+      "type": "LIST_BUILD",
+      "narration": "That status number tells the whole story in three digits. Two hundred means here's your page. Three-oh-one means it moved. Four-oh-four means it's missing. Five hundred means the server itself broke.",
+      "durationFrames": 402,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "push",
+      "data": {
+        "heading": "Reading status codes",
+        "anim": "bounce",
+        "items": [
+          {"icon": "lucide:check-circle", "text": "200 - OK", "detail": "here's your page", "atWord": 11},
+          {"icon": "lucide:corner-up-right", "text": "301 - Moved", "detail": "it lives elsewhere now", "atWord": 17},
+          {"icon": "lucide:x-circle", "text": "404 - Not found", "detail": "no such page", "atWord": 21},
+          {"icon": "lucide:alert-triangle", "text": "500 - Server error", "detail": "the server broke", "atWord": 25}
+        ]
+      }
+    },
+    {
+      "id": "s34",
+      "type": "SPLIT_PATHS",
+      "narration": "Not every page is prebuilt. Static pages are served as-is from a file; dynamic pages are assembled on the fly by code and a database, then sent.",
+      "durationFrames": 354,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "slide",
+      "data": {
+        "headline": "Static or [dynamic?]",
+        "headlineColor": "purple",
+        "center": {"kicker": "THE PAGE", "title": "what you requested", "color": "blue", "atWord": 3},
+        "left": {
+          "title": "Static",
+          "badge": {"text": "PREBUILT", "color": "green"},
+          "lines": [{"text": "read from a file", "color": "green"}, {"text": "same for everyone", "color": "blue"}],
+          "color": "green",
+          "atWord": 6
+        },
+        "right": {
+          "title": "Dynamic",
+          "badge": {"text": "ON THE FLY", "color": "orange"},
+          "lines": [{"text": "built by code + DB", "color": "orange"}, {"text": "personalized", "color": "purple"}],
+          "color": "orange",
+          "atWord": 14
+        },
+        "source": "STATIC = FILE - DYNAMIC = GENERATED"
+      }
+    },
+    {
+      "id": "s35",
+      "type": "STEP_FLOW",
+      "narration": "HTML alone isn't a page yet. The browser parses it into a tree, applies the CSS for color and layout, runs the JavaScript for behavior, then paints the final pixels to your screen.",
+      "durationFrames": 426,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "wipe",
+      "data": {
+        "headline": "From code to [pixels.]",
+        "headlineColor": "green",
+        "steps": [
+          {"kicker": "PARSE", "title": "DOM TREE", "sub": "HTML becomes structure", "color": "blue", "atWord": 9},
+          {"kicker": "STYLE", "title": "CSS", "sub": "color and layout", "color": "purple", "atWord": 14},
+          {"kicker": "SCRIPT", "title": "JS", "sub": "behavior runs", "color": "orange", "atWord": 21},
+          {"kicker": "PAINT", "title": "PIXELS", "sub": "the page appears", "color": "green", "atWord": 27}
+        ],
+        "caption": {"text": "parse - style - script - paint", "color": "green", "atWord": 33},
+        "source": "BROWSER RENDER: PARSE, STYLE, SCRIPT, PAINT"
+      }
+    },
+    {
+      "id": "s36",
+      "type": "STAT_CALLOUT",
+      "narration": "But distance still charges a toll. Even at the speed of light through fiber, data crossing an ocean and back needs tens of milliseconds, a limit no engineering can beat.",
+      "durationFrames": 390,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "iris",
+      "data": {
+        "value": 50,
+        "suffix": "ms",
+        "label": "just to cross an ocean and back",
+        "atWord": 22,
+        "source": "BOUNDED BY THE SPEED OF LIGHT"
+      }
+    },
+    {
+      "id": "s37",
+      "type": "DIAGRAM",
+      "narration": "So we defeat distance by moving the page closer. A CDN keeps cached copies in cities worldwide, so most requests are answered by an edge server just down the road, not the distant origin.",
+      "durationFrames": 438,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "push",
+      "data": {
+        "headline": "Bring it [closer.]",
+        "headlineColor": "yellow",
+        "diagram": {
+          "layout": "hub",
+          "nodes": [
+            {"id": "origin", "label": "Origin", "asset": "lucide:database", "color": "blue", "atWord": 11},
+            {"id": "tokyo", "label": "Tokyo", "asset": "lucide:server", "color": "green", "atWord": 16},
+            {"id": "london", "label": "London", "asset": "lucide:server", "color": "purple", "atWord": 16},
+            {"id": "nyc", "label": "New York", "asset": "lucide:server", "color": "orange", "atWord": 17},
+            {"id": "you", "label": "You", "asset": "lucide:user", "color": "yellow", "atWord": 25}
+          ]
+        },
+        "source": "CDN: EDGE CACHES NEAR EVERY USER"
+      }
+    },
+    {
+      "id": "s38",
+      "type": "BAR_COMPARE",
+      "narration": "And the difference is dramatic. Fetching from a distant origin might take two hundred milliseconds; fetching the same page from a nearby edge can take just twenty.",
+      "durationFrames": 354,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "headline": "Near beats [far.]",
+        "headlineColor": "green",
+        "bars": [
+          {"label": "Distant origin", "value": 200, "display": "200ms", "color": "orange", "atWord": 9},
+          {"label": "Nearby edge", "value": 20, "display": "20ms", "color": "green", "atWord": 22}
+        ],
+        "maxValue": 200,
+        "source": "ILLUSTRATIVE - EDGE VS ORIGIN LATENCY"
+      }
+    },
+    {
+      "id": "s38b",
+      "type": "LOWER_THIRD",
+      "narration": "That gap has a name you'll hear constantly: latency, the delay before data starts arriving.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "wipe",
+      "data": {
+        "lowerThird": {"kicker": "KEY TERM", "title": "Latency", "subtitle": "the delay before data arrives", "color": "yellow", "asset": "lucide:timer", "atWord": 9}
+      }
+    },
+    {
+      "id": "s39",
+      "type": "DONUT",
+      "narration": "Add it all up, and here's roughly where those milliseconds go: a slice for the DNS lookup, a slice for connecting and encrypting, and the largest share for transferring and rendering the page.",
+      "durationFrames": 426,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "Where the time [goes.]",
+        "headlineColor": "blue",
+        "donut": {
+          "segments": [
+            {"label": "DNS lookup", "value": 15, "color": "purple", "atWord": 16},
+            {"label": "Connect + TLS", "value": 25, "color": "orange", "atWord": 21},
+            {"label": "Transfer", "value": 30, "color": "blue", "atWord": 29},
+            {"label": "Render", "value": 30, "color": "green", "atWord": 31}
+          ],
+          "centerLabel": "the round trip"
+        },
+        "source": "ILLUSTRATIVE TIME BUDGET OF A REQUEST"
+      }
+    },
+    {
+      "id": "s41",
+      "type": "RECAP",
+      "narration": "So that's the whole journey. A name becomes an address. A handshake opens the line. Encryption locks it down. The server responds, and your browser paints, all in the blink of an eye.",
+      "durationFrames": 426,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "heading": "The journey, recapped",
+        "points": [
+          {"text": "Name to IP, through DNS", "atWord": 6},
+          {"text": "TCP opens a reliable line", "atWord": 11},
+          {"text": "TLS encrypts everything", "atWord": 16},
+          {"text": "HTTP responds, browser paints", "atWord": 20}
+        ]
+      }
+    },
+    {
+      "id": "s42",
+      "type": "REVEAL",
+      "narration": "Every single time you open a page, this entire relay runs end to end, and finishes before you've even finished blinking.",
+      "durationFrames": 282,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "zoom",
+      "data": {
+        "headline": "Before you can [blink.]",
+        "reveal": {"kicker": "THE WHOLE TRIP", "sub": "keystroke to painted page, about 300 ms", "color": "green", "atWord": 8},
+        "source": "ILLUSTRATIVE END-TO-END LATENCY"
+      }
+    },
+    {
+      "id": "s43",
+      "type": "OUTRO_CTA",
+      "narration": "Now you know exactly what happens when you hit enter. If that was satisfying, subscribe to YOUR CHANNEL.",
+      "durationFrames": 258,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "It's all just a conversation",
+        "sub": "subscribe to YOUR CHANNEL"
+      }
+    }
+  ],
+  "thumbnail": {
+    "title": "How the Internet Works",
+    "badge": "EXPLAINED",
+    "asset": "lucide:globe"
+  }
+}

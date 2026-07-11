@@ -1,0 +1,613 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "BITS-min",
+      "type": "BITS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "bits": {
+          "value": 5,
+          "bits": 4,
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "BITS-max",
+      "type": "BITS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "bits": {
+          "value": 54235,
+          "bits": 16,
+          "label": "One byte with place values shown",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "MEMORY-min",
+      "type": "MEMORY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "memory": {
+          "cells": [
+            {
+              "addr": "0x00",
+              "value": "00"
+            },
+            {
+              "addr": "0x01",
+              "value": "FF"
+            }
+          ],
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "MEMORY-max",
+      "type": "MEMORY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "memory": {
+          "label": "Addressable memory cells with a pointer",
+          "pointerLabel": "PTR→0x1F",
+          "color": "purple",
+          "cols": 4,
+          "highlight": 6,
+          "cells": [
+            {
+              "addr": "0x00",
+              "value": "00"
+            },
+            {
+              "addr": "0x04",
+              "value": "25"
+            },
+            {
+              "addr": "0x08",
+              "value": "4A"
+            },
+            {
+              "addr": "0x0C",
+              "value": "6F"
+            },
+            {
+              "addr": "0x10",
+              "value": "94"
+            },
+            {
+              "addr": "0x14",
+              "value": "B9"
+            },
+            {
+              "addr": "0x18",
+              "value": "DE",
+              "color": "red"
+            },
+            {
+              "addr": "0x1C",
+              "value": "03"
+            },
+            {
+              "addr": "0x20",
+              "value": "28"
+            },
+            {
+              "addr": "0x24",
+              "value": "4D"
+            },
+            {
+              "addr": "0x28",
+              "value": "72"
+            },
+            {
+              "addr": "0x2C",
+              "value": "97"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PACKET-min",
+      "type": "PACKET",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "packet": {
+          "hops": [
+            {
+              "label": "client"
+            },
+            {
+              "label": "server"
+            }
+          ],
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "PACKET-max",
+      "type": "PACKET",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "packet": {
+          "packetLabel": "GET /index.html HTTP/1.1",
+          "color": "orange",
+          "hops": [
+            {
+              "label": "client-browser-1"
+            },
+            {
+              "label": "edge-cdn-node-01"
+            },
+            {
+              "label": "core-switch-fabric"
+            },
+            {
+              "label": "origin-load-bal"
+            },
+            {
+              "label": "app-server-pool",
+              "color": "red"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NUMBER_BASE-min",
+      "type": "NUMBER_BASE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "numberBase": {
+          "value": 5,
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "NUMBER_BASE-max",
+      "type": "NUMBER_BASE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "numberBase": {
+          "value": 65535,
+          "label": "Max sixteen bit integer",
+          "color": "purple"
+        }
+      }
+    },
+    {
+      "id": "POINTER_DIAGRAM-min",
+      "type": "POINTER_DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pointers": {
+          "headLabel": "head",
+          "nodes": [
+            {
+              "label": "a",
+              "value": "1",
+              "next": 1
+            },
+            {
+              "label": "b",
+              "value": "2"
+            }
+          ],
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "POINTER_DIAGRAM-max",
+      "type": "POINTER_DIAGRAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pointers": {
+          "headLabel": "head pointer",
+          "color": "green",
+          "nodes": [
+            {
+              "label": "node-alpha",
+              "value": "0xFF0011",
+              "next": 1
+            },
+            {
+              "label": "node-bravo",
+              "value": "0xFF0022",
+              "next": 2
+            },
+            {
+              "label": "node-charl",
+              "value": "0xFF0033",
+              "next": 3
+            },
+            {
+              "label": "node-delta",
+              "value": "0xFF0044",
+              "next": 4
+            },
+            {
+              "label": "node-echo0",
+              "value": "0xFF0055",
+              "next": 5
+            },
+            {
+              "label": "node-final",
+              "value": "0xFF0066",
+              "color": "red"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ENCRYPTION-min",
+      "type": "ENCRYPTION",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "encryption": {
+          "plaintext": "hi",
+          "ciphertext": "X9#mK2",
+          "keyLabel": "key",
+          "mode": "encrypt",
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "ENCRYPTION-max",
+      "type": "ENCRYPTION",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "encryption": {
+          "plaintext": "attack at dawn tomorrow!",
+          "ciphertext": "Xj9#mK2$pL7@qR4!vB6&nH1%wE8^tC3*yU5)zA0(",
+          "keyLabel": "AES-256-GCM session",
+          "mode": "encrypt",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "BOOLEAN_LOGIC_GATES-min",
+      "type": "BOOLEAN_LOGIC_GATES",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "logic": {
+          "gates": [
+            {
+              "type": "AND",
+              "a": 1,
+              "b": 0,
+              "label": "AND"
+            }
+          ],
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "BOOLEAN_LOGIC_GATES-max",
+      "type": "BOOLEAN_LOGIC_GATES",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "logic": {
+          "color": "green",
+          "gates": [
+            {
+              "type": "AND",
+              "a": 1,
+              "b": 1,
+              "label": "carry gate"
+            },
+            {
+              "type": "XOR",
+              "a": 1,
+              "b": 0,
+              "label": "sum gate"
+            },
+            {
+              "type": "NAND",
+              "a": 0,
+              "b": 1,
+              "label": "latch set"
+            },
+            {
+              "type": "NOR",
+              "a": 0,
+              "b": 0,
+              "label": "latch reset"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "HASH_FUNCTION-min",
+      "type": "HASH_FUNCTION",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "hash": {
+          "input": "hi",
+          "algo": "MD5",
+          "digest": "49f68a5c8493ec2c0bf489821c21fc3b",
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "HASH_FUNCTION-max",
+      "type": "HASH_FUNCTION",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "hash": {
+          "input": "hello world example okay",
+          "algo": "SHA-256",
+          "digest": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+          "color": "purple"
+        }
+      }
+    },
+    {
+      "id": "SORTING_VISUAL-min",
+      "type": "SORTING_VISUAL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "sort": {
+          "values": [
+            5,
+            2,
+            8
+          ],
+          "label": "Sort three",
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "SORTING_VISUAL-max",
+      "type": "SORTING_VISUAL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "sort": {
+          "values": [
+            42,
+            17,
+            88,
+            3,
+            61,
+            29,
+            74,
+            9,
+            53,
+            96,
+            21,
+            68
+          ],
+          "label": "Unsorted to sorted",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "CLOCK_SIGNAL-min",
+      "type": "CLOCK_SIGNAL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "clock": {
+          "cycles": 3,
+          "label": "Three cycles",
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "CLOCK_SIGNAL-max",
+      "type": "CLOCK_SIGNAL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "clock": {
+          "cycles": 8,
+          "label": "Rising edge triggers",
+          "color": "orange"
+        }
+      }
+    },
+    {
+      "id": "QUEUE-min",
+      "type": "QUEUE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "queue": {
+          "items": [
+            {
+              "label": "A"
+            },
+            {
+              "label": "B"
+            }
+          ],
+          "frontLabel": "front",
+          "backLabel": "back",
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "QUEUE-max",
+      "type": "QUEUE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "queue": {
+          "frontLabel": "front (dequeue)",
+          "backLabel": "back (enqueue)",
+          "color": "green",
+          "items": [
+            {
+              "label": "job-01"
+            },
+            {
+              "label": "job-02"
+            },
+            {
+              "label": "job-03"
+            },
+            {
+              "label": "job-04"
+            },
+            {
+              "label": "job-05"
+            },
+            {
+              "label": "job-06"
+            },
+            {
+              "label": "job-07",
+              "color": "red"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CALL_STACK-min",
+      "type": "CALL_STACK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "callStack": {
+          "mode": "stack",
+          "frames": [
+            {
+              "fn": "main()",
+              "sub": "entry point"
+            },
+            {
+              "fn": "run()",
+              "sub": "top of stack"
+            }
+          ],
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "CALL_STACK-max",
+      "type": "CALL_STACK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "callStack": {
+          "mode": "stack",
+          "color": "purple",
+          "frames": [
+            {
+              "fn": "main(argc, argv)",
+              "sub": "program entry point"
+            },
+            {
+              "fn": "parseConfiguration()",
+              "sub": "read the config from disk"
+            },
+            {
+              "fn": "connectToDatabasePool()",
+              "sub": "open the connection pool"
+            },
+            {
+              "fn": "runMigrationBatchNow()",
+              "sub": "apply pending migrations"
+            },
+            {
+              "fn": "executeSingleStatement()",
+              "sub": "run one SQL statement here"
+            },
+            {
+              "fn": "raiseUnhandledException()",
+              "sub": "top frame — throws here",
+              "color": "red"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

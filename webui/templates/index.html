@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iAuteur — Studio Console</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="{{ url_for('static', filename='favicon.svg') }}" alt="" width="30" height="30" style="border-radius:7px;display:block" />
+      <h1>iAuteur</h1>
+      <span class="tag">brief builder · design preview · local pipeline</span>
+    </div>
+    <div class="hint">No AI here — this builds the brief you hand to Claude / Copilot in chat.</div>
+  </header>
+
+  <main class="layout">
+    <!-- LEFT: brief form -->
+    <section class="panel form">
+      <h2>1 · Configure</h2>
+
+      <label>Topic <span class="req">*</span>
+        <input id="topic" type="text" placeholder="e.g. How HTTPS keeps the web secure" />
+      </label>
+
+      <label>Source material <span class="muted">(paste the article — facts are grounded ONLY in this)</span>
+        <textarea id="source" rows="6" placeholder="Paste the press release / article / notes here. Leave blank for evergreen conceptual topics."></textarea>
+      </label>
+
+      <div class="row">
+        <label>Format
+          <select id="format"></select>
+        </label>
+        <label>Screenplay
+          <select id="preset"></select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Audience
+          <select id="audience"></select>
+        </label>
+        <label>Target length (min) <span class="muted">documentary</span>
+          <input id="minutes" type="number" min="1" max="15" placeholder="e.g. 9" />
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Light twin
+          <select id="themeLight"></select>
+        </label>
+        <label>Background
+          <select id="background"></select>
+        </label>
+      </div>
+
+      <label>Channel
+        <input id="channel" type="text" />
+      </label>
+
+      <label>Notes / constraints <span class="muted">(optional)</span>
+        <textarea id="notes" rows="2" placeholder="tone, must-include points, things to avoid…"></textarea>
+      </label>
+
+      <label class="check">
+        <input id="scaffold" type="checkbox" />
+        Scaffold the topic folder now (runs <code>new-topic</code>)
+      </label>
+
+      <button id="genBtn" class="primary">Generate brief →</button>
+    </section>
+
+    <!-- CENTER: design gallery -->
+    <section class="panel gallery">
+      <h2>2 · Pick a design <span id="picked" class="picked"></span></h2>
+      <p class="muted small">Thumbnails are the same scene rendered in each pack. Selecting one sets
+        <code>brand.design</code> + <code>brand.theme</code>.</p>
+      <div id="designGrid" class="grid"></div>
+    </section>
+
+    <!-- RIGHT: output / actions -->
+    <section class="panel output">
+      <h2>3 · Hand to AI, then render</h2>
+
+      <div id="briefBox" class="hidden">
+        <div class="chatline">
+          <strong>Paste this in chat:</strong>
+          <code id="chatMsg"></code>
+          <button class="mini" data-copy="chatMsg">copy</button>
+        </div>
+        <details>
+          <summary>Full brief (saved to <code id="briefPath"></code>)</summary>
+          <pre id="briefText"></pre>
+          <button class="mini" data-copy="briefText">copy full brief</button>
+        </details>
+      </div>
+
+      <div class="actions">
+        <h3>Local pipeline <span class="muted small">(after the AI writes the spec)</span></h3>
+        <div class="actionrow">
+          <input id="actionSlug" type="text" placeholder="topic slug" />
+          <select id="topicPick" title="existing topics"></select>
+        </div>
+        <div class="btnrow">
+          <button data-action="lint">Lint</button>
+          <button data-action="critique">Critique</button>
+          <button data-action="render-wide-dark" class="accent">Render wide-dark</button>
+          <button data-action="render-short-dark">Render short-dark</button>
+          <button data-action="studio">Open Studio</button>
+          <button id="refreshOut">Refresh outputs</button>
+        </div>
+      </div>
+
+      <div id="console" class="console"><span class="muted">console…</span></div>
+
+      <div id="outputs" class="outputs"></div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "topic": "How a RAG pipeline works end-to-end",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "RAG grounds an LLM by retrieving your facts and gating low-confidence answers.",
+    "topicAxes": ["entity-novelty", "sovereignty"]
+  },
+  "brand": {"theme": "midnight", "themeLight": "daylight"},
+  "scenes": [
+    {
+      "id": "s01", "type": "HOOK", "narration": "Your chatbot keeps making things up. Retrieval-augmented generation is how you finally ground it in real facts.", "durationFrames": 210, "timingSource": "estimated", "background": "zoneA", "transition": "fade",
+      "data": {"headline": "STOP THE HALLUCINATIONS", "subtext": "how RAG grounds an LLM", "heroAsset": "lucide:search-check", "headlineAtWord": 1, "heroAtWord": 5}
+    },
+    {
+      "id": "s02", "type": "CONTEXT_METER", "narration": "A model can only see a fixed context window, shared between the system prompt, tools, and conversation history.", "durationFrames": 220, "timingSource": "estimated", "background": "zoneB", "transition": "slide",
+      "data": {"context": {"headline": "The [context] window", "atWord": 1, "windowTokens": 128000, "verdict": "only 36k tokens free for your data", "segments": [{"label": "system", "tokens": 4000, "kind": "system"}, {"label": "tools", "tokens": 12000, "kind": "tools"}, {"label": "history", "tokens": 76000, "kind": "history"}, {"label": "free", "tokens": 36000, "kind": "free"}]}}
+    },
+    {
+      "id": "s03", "type": "DIAGRAM", "narration": "So RAG adds a step: retrieve the most relevant facts, then let the model answer using only those.", "durationFrames": 220, "timingSource": "estimated", "background": "zoneC", "transition": "push",
+      "data": {"headline": "The [RAG] pipeline", "headlineColor": "blue", "diagram": {"layout": "flow", "direction": "horizontal", "nodes": [{"id": "q", "label": "Query", "asset": "lucide:message-square", "color": "blue", "atWord": 1}, {"id": "r", "label": "Retriever", "asset": "lucide:search", "color": "purple", "atWord": 4}, {"id": "l", "label": "LLM", "asset": "lucide:brain-circuit", "color": "green", "atWord": 8}, {"id": "a", "label": "Answer", "asset": "lucide:check-circle", "color": "green", "atWord": 12}], "edges": [{"from": "q", "to": "r", "atWord": 4}, {"from": "r", "to": "l", "label": "context", "atWord": 8}, {"from": "l", "to": "a", "atWord": 12}]}}
+    },
+    {
+      "id": "s04", "type": "CLOUD_ARCH", "narration": "In production the retriever, an embedding service and a vector database live together inside your cloud.", "durationFrames": 230, "timingSource": "estimated", "background": "zoneA", "transition": "morph",
+      "data": {"cloud": {"headline": "Where [RAG] runs", "provider": "aws", "color": "blue", "atWord": 1, "boundaries": [{"id": "reg", "label": "us-east-1", "kind": "region", "atWord": 1}, {"id": "vpc", "label": "vpc-rag", "kind": "vpc", "parent": "reg", "atWord": 2}], "nodes": [{"id": "embed", "label": "Embedder", "asset": "lucide:cpu", "boundary": "vpc", "color": "purple", "atWord": 4}, {"id": "vdb", "label": "Vector DB", "sub": "arn:aws:aoss:index", "asset": "lucide:database", "boundary": "vpc", "color": "blue", "atWord": 6}, {"id": "llm", "label": "LLM API", "asset": "lucide:brain-circuit", "boundary": "reg", "color": "green", "atWord": 9}], "edges": [{"from": "embed", "to": "vdb", "label": "upsert", "atWord": 6}, {"from": "vdb", "to": "llm", "label": "context", "atWord": 9}]}}
+    },
+    {
+      "id": "s05", "type": "TOKENIZER", "narration": "First your documents are split into chunks and embedded into vectors the database can search.", "durationFrames": 210, "timingSource": "estimated", "background": "zoneB", "transition": "wipe",
+      "data": {"tokenizer": {"headline": "Chunk, then [embed]", "text": "Refunds are issued within 30 days.", "showVectors": true, "atWord": 1, "tokens": [{"text": "Refunds", "id": "1", "color": "blue"}, {"text": "are", "id": "2", "color": "blue"}, {"text": "issued", "id": "3", "color": "purple"}, {"text": "within", "id": "4", "color": "purple"}, {"text": "30", "id": "5", "color": "green"}, {"text": "days", "id": "6", "color": "green"}]}}
+    },
+    {
+      "id": "s06", "type": "DRILL_IN", "narration": "Zoom into the retriever and you find three steps: embed the query, search the index, and rerank the hits.", "durationFrames": 250, "timingSource": "estimated", "background": "zoneC", "transition": "zoom",
+      "data": {"drillIn": {"headline": "Inside the [retriever]", "color": "purple", "focusId": "Retriever", "pushAtWord": 8, "atWord": 1,
+        "overview": {"layout": "flow", "direction": "horizontal", "nodes": [{"id": "query", "label": "Query", "asset": "lucide:message-square", "atWord": 1}, {"id": "retr", "label": "Retriever", "asset": "lucide:search", "color": "purple", "atWord": 3}, {"id": "gen", "label": "LLM", "asset": "lucide:brain-circuit", "atWord": 5}], "edges": [{"from": "query", "to": "retr", "atWord": 3}, {"from": "retr", "to": "gen", "atWord": 5}]},
+        "detail": {"layout": "flow", "direction": "horizontal", "nodes": [{"id": "emb", "label": "Embed", "asset": "lucide:cpu", "color": "purple", "atWord": 1}, {"id": "srch", "label": "Search", "asset": "lucide:search", "color": "blue", "atWord": 1}, {"id": "rr", "label": "Rerank", "asset": "lucide:list-ordered", "color": "green", "atWord": 1}], "edges": [{"from": "emb", "to": "srch", "atWord": 1}, {"from": "srch", "to": "rr", "atWord": 1}]}}}
+    },
+    {
+      "id": "s07", "type": "RETRIEVAL_RANK", "narration": "The reranker reorders the candidates so the truly relevant chunk rises to the top before the model sees it.", "durationFrames": 240, "timingSource": "estimated", "background": "zoneA", "transition": "slide",
+      "data": {"retrieval": {"headline": "[Rerank] the hits", "color": "purple", "atWord": 1, "rerankAtWord": 5, "fuseAtWord": 11, "chunks": [{"label": "Refund policy: 30 days", "scoreA": 0.71, "scoreFinal": 0.93, "vec": 0.68, "bm25": 0.82}, {"label": "Shipping terms", "scoreA": 0.80, "scoreFinal": 0.61, "vec": 0.58, "bm25": 0.66}, {"label": "Pricing tiers", "scoreA": 0.63, "scoreFinal": 0.75, "vec": 0.70, "bm25": 0.58}]}}
+    },
+    {
+      "id": "s08", "type": "CONFIDENCE_GATE", "narration": "If the best match is still too weak, a confidence gate stops the model from answering at all.", "durationFrames": 220, "timingSource": "estimated", "background": "zoneB", "transition": "iris",
+      "data": {"confidence": {"headline": "The [confidence] gate", "value": 44, "threshold": 70, "mode": "block", "reason": "no grounded source", "style": "linear", "color": "red", "atWord": 1}}
+    },
+    {
+      "id": "s09", "type": "LOG_STREAM", "narration": "Every request leaves a trace: the query embeds, the search returns, and the gate logs its decision.", "durationFrames": 220, "timingSource": "estimated", "background": "zoneC", "transition": "blinds",
+      "data": {"logs": {"headline": "The [request] trace", "color": "blue", "atWord": 1, "highlight": 3, "rate": "1.2k/s", "lines": [{"level": "info", "tag": "embed", "text": "query embedded in 18ms"}, {"level": "info", "tag": "search", "text": "8 candidates from vector db"}, {"level": "info", "tag": "rerank", "text": "top score 0.93"}, {"level": "warn", "tag": "gate", "text": "confidence 0.44 < 0.70 threshold"}, {"level": "error", "tag": "gate", "text": "answer blocked: no grounded source"}]}}
+    },
+    {
+      "id": "s10", "type": "TEST_RUNNER", "narration": "You keep it honest with an eval suite that checks whether answers actually stay faithful to the sources.", "durationFrames": 230, "timingSource": "estimated", "background": "zoneA", "transition": "push",
+      "data": {"testRunner": {"headline": "The [eval] suite", "color": "green", "atWord": 1, "passed": 3, "failed": 1, "failIndex": 3, "expected": "cites a source", "actual": "no citation", "nodes": [{"name": "faithfulness", "depth": 0, "kind": "describe"}, {"name": "answer cites a source", "depth": 1, "kind": "it", "status": "pass", "ms": "40ms"}, {"name": "refuses when ungrounded", "depth": 1, "kind": "it", "status": "pass", "ms": "22ms"}, {"name": "no invented figures", "depth": 1, "kind": "it", "status": "fail", "ms": "51ms"}, {"name": "relevance", "depth": 0, "kind": "describe"}, {"name": "returns the right chunk", "depth": 1, "kind": "it", "status": "pass", "ms": "12ms"}]}}
+    },
+    {
+      "id": "s11", "type": "EVAL_DASHBOARD", "narration": "Tracked over time, faithfulness and accuracy stay high while retrieval latency quietly creeps up.", "durationFrames": 220, "timingSource": "estimated", "background": "zoneB", "transition": "morph",
+      "data": {"evalDash": {"headline": "The [quality] dashboard", "atWord": 1, "metrics": [{"label": "Faithfulness", "value": 92, "target": 90, "unit": "%", "color": "green"}, {"label": "Accuracy", "value": 88, "target": 85, "unit": "%", "color": "blue"}, {"label": "Recall@5", "value": 81, "target": 80, "unit": "%", "color": "purple"}, {"label": "Latency p95", "value": 68, "target": 80, "degrading": true}]}}
+    },
+    {
+      "id": "s12", "type": "OUTRO_CTA", "narration": "Retrieve, rerank, gate, and evaluate — that is RAG end to end. Subscribe for more grounded AI.", "durationFrames": 200, "timingSource": "estimated", "background": "zoneA", "transition": "fade",
+      "data": {"message": "Ground your AI in real facts.", "sub": "subscribe for grounded AI, weekly"}
+    }
+  ],
+  "thumbnail": {"title": "How RAG Works", "badge": "AI SYSTEMS", "asset": "lucide:search-check"}
+}

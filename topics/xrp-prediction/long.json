@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "topic": "AI XRP price prediction: Claude Fable 5's end-of-2026 scenarios (via 247wallst.com, Jul 4 2026)",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "One AI model maps XRP's year-end into three priced scenarios with odds - and names the two events that decide which one happens.",
+    "openLoop": "What price did the AI put on XRP - and what has to happen for it?",
+    "analogy": "A weather forecast: not a promise, a map with probabilities.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ]
+  },
+  "brand": {
+    "theme": "studio"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "An AI just put a price on XRP's year end. Three scenarios, with odds. Here's the map.",
+      "durationFrames": 240,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "AI PRICED XRP'S YEAR END",
+        "subtext": "three scenarios, with odds",
+        "heroAsset": "si:xrp",
+        "headlineAtWord": 1,
+        "heroAtWord": 8
+      }
+    },
+    {
+      "id": "s02",
+      "type": "CHAT_MOCKUP",
+      "narration": "24/7 Wall Street fed the latest market data to Claude's Fable Five model and asked one question. Where does XRP end the year? But remember: last month, another AI missed badly.",
+      "durationFrames": 400,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "We asked the [newest model.]",
+        "headlineColor": "blue",
+        "panelLabel": "CLAUDE FABLE 5",
+        "panelColor": "purple",
+        "messages": [
+          {
+            "from": "user",
+            "text": "Where does XRP end 2026?",
+            "atWord": 15
+          },
+          {
+            "from": "agent",
+            "text": "I see [three scenarios.]",
+            "color": "purple",
+            "atWord": 18
+          }
+        ],
+        "sideCard": {
+          "kicker": "AI TRACK RECORD",
+          "kickerColor": "yellow",
+          "lines": [
+            {
+              "text": "3 weeks ago: '$1.24 by July'",
+              "color": "yellow"
+            },
+            {
+              "text": "reality: $1.05",
+              "color": "red"
+            }
+          ],
+          "atWord": 24
+        },
+        "source": "24/7 WALL ST FED FABLE 5 THE LATEST XRP MARKET DATA"
+      }
+    },
+    {
+      "id": "s03",
+      "type": "STAT_PANELS",
+      "narration": "First, the damage. XRP peaked at two dollars forty in January, crashed to a dollar two by late June, and just bounced ten percent back to one fifteen.",
+      "durationFrames": 370,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "First, [the damage.]",
+        "headlineColor": "red",
+        "stats": [
+          {
+            "kicker": "JANUARY PEAK",
+            "value": "$2.40",
+            "color": "blue",
+            "atWord": 5
+          },
+          {
+            "kicker": "JUNE LOW",
+            "value": "$1.02",
+            "color": "red",
+            "atWord": 12
+          },
+          {
+            "kicker": "THIS WEEK",
+            "value": "$1.15",
+            "note": "+10%",
+            "color": "green",
+            "atWord": 22
+          }
+        ],
+        "source": "XRP 2026: $2.40 JAN PEAK, $1.02 JUNE LOW, $1.15 NOW"
+      }
+    },
+    {
+      "id": "s04",
+      "type": "STEP_FLOW",
+      "narration": "Why? The Iran conflict spiked oil. Inflation fear killed rate cuts. Bitcoin sank from ninety thousand to under sixty. And XRP got dragged down with it.",
+      "durationFrames": 350,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Why 2026 [hurt.]",
+        "headlineColor": "red",
+        "steps": [
+          {
+            "kicker": "STEP 1",
+            "title": "WAR",
+            "sub": "Iran conflict, oil spike",
+            "color": "red",
+            "atWord": 3
+          },
+          {
+            "kicker": "STEP 2",
+            "title": "INFLATION",
+            "sub": "rate cuts off the table",
+            "color": "yellow",
+            "atWord": 7
+          },
+          {
+            "kicker": "STEP 3",
+            "title": "BITCOIN",
+            "sub": "$90K to under $60K",
+            "color": "orange",
+            "atWord": 12
+          },
+          {
+            "kicker": "STEP 4",
+            "title": "XRP FLOOR",
+            "sub": "dragged to $1.02",
+            "color": "red",
+            "atWord": 21
+          }
+        ],
+        "source": "FEB TO JUNE: WAR, STICKY INFLATION, BITCOIN UNDER $60K"
+      }
+    },
+    {
+      "id": "s05",
+      "type": "STAT_PANELS",
+      "narration": "Fable Five gave three answers. Base case: one seventy, fifty percent odds. Bull case: two eighty, thirty percent. Bear case: eighty cents, twenty percent odds.",
+      "durationFrames": 340,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The AI's answer: [three prices.]",
+        "headlineColor": "blue",
+        "stats": [
+          {
+            "kicker": "BASE - 50% ODDS",
+            "value": "$1.70",
+            "color": "blue",
+            "atWord": 6
+          },
+          {
+            "kicker": "BULL - 30% ODDS",
+            "value": "$2.80",
+            "color": "green",
+            "atWord": 13
+          },
+          {
+            "kicker": "BEAR - 20% ODDS",
+            "value": "$0.80",
+            "color": "red",
+            "atWord": 19
+          }
+        ],
+        "verdict": {
+          "text": "base range: $1.50 to $1.90",
+          "color": "blue",
+          "atWord": 24
+        },
+        "source": "FABLE 5 SCENARIOS: BASE $1.70, BULL $2.80, BEAR $0.80"
+      }
+    },
+    {
+      "id": "s06",
+      "type": "SPLIT_PATHS",
+      "narration": "Two binaries decide everything. If the CLARITY Act passes and the Fed cuts twice, the bull case opens. If both stall and the one dollar floor breaks, eighty cents is next.",
+      "durationFrames": 410,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "One coin, [two futures.]",
+        "headlineColor": "orange",
+        "center": {
+          "kicker": "THE DECIDERS",
+          "title": "two binaries",
+          "color": "purple",
+          "atWord": 1
+        },
+        "left": {
+          "title": "Everything goes right",
+          "badge": {
+            "text": "CLARITY + 2 cuts",
+            "color": "green"
+          },
+          "lines": [
+            {
+              "text": "BTC back over $80K",
+              "color": "green"
+            },
+            {
+              "text": "ETF inflows surge weekly",
+              "color": "green"
+            }
+          ],
+          "color": "green",
+          "atWord": 5
+        },
+        "right": {
+          "title": "The floor breaks",
+          "badge": {
+            "text": "no Act, no cuts",
+            "color": "red"
+          },
+          "lines": [
+            {
+              "text": "$1 support fails",
+              "color": "red"
+            },
+            {
+              "text": "few buyers below $1",
+              "color": "red"
+            }
+          ],
+          "color": "red",
+          "atWord": 19
+        },
+        "source": "SWING FACTORS: CLARITY ACT TIMING AND FED RATE CUTS"
+      }
+    },
+    {
+      "id": "s07",
+      "type": "STAT_CALLOUT",
+      "narration": "A forty eight percent move sounds wild. But XRP quadrupled in late twenty twenty four. For this coin, that's a normal swing.",
+      "durationFrames": 300,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "value": 48,
+        "suffix": "%",
+        "label": "the move from $1.15 to $1.70 - normal for XRP",
+        "atWord": 2
+      }
+    },
+    {
+      "id": "s08",
+      "type": "RECAP",
+      "narration": "So remember. The base call is one seventy at fifty percent. Watch the CLARITY Act and the Fed. And if one dollar breaks, the bear case takes over.",
+      "durationFrames": 370,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "heading": "What to remember",
+        "points": [
+          {
+            "text": "Base case $1.70 - 50% odds",
+            "atWord": 3
+          },
+          {
+            "text": "Watch: CLARITY Act and Fed cuts",
+            "atWord": 12
+          },
+          {
+            "text": "Below $1, the bear case takes over",
+            "atWord": 19
+          }
+        ]
+      }
+    },
+    {
+      "id": "s09",
+      "type": "OUTRO_CTA",
+      "narration": "None of this is financial advice, just one model's map. If it helped, subscribe for more AI market breakdowns.",
+      "durationFrames": 260,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "One model's map. Not advice.",
+        "sub": "subscribe for AI market breakdowns"
+      }
+    }
+  ],
+  "thumbnail": {
+    "title": "AI Priced XRP",
+    "badge": "3 SCENARIOS",
+    "asset": "si:xrp"
+  }
+}

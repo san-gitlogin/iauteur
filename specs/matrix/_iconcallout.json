@@ -1,0 +1,7 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "ICON_CALLOUT-min", "type": "ICON_CALLOUT", "narration": "One idea, a single icon and a heading, nothing else on screen right now.", "durationFrames": 200, "background": "zoneA", "data": {"iconCallout": {"color": "blue", "icon": "lucide:zap", "heading": "Fast by default", "atWord": 1}}},
+    {"id": "ICON_CALLOUT-max", "type": "ICON_CALLOUT", "narration": "The key idea with a hero icon, a heading, a supporting sentence, and four crisp points revealing one after another.", "durationFrames": 260, "background": "zoneA", "data": {"headline": "The [big] idea.", "headlineColor": "green", "source": "ILLUSTRATIVE", "iconCallout": {"color": "green", "icon": "lucide:shield-check", "heading": "Deterministic by design", "sub": "Every render is byte-for-byte identical, so review once and trust forever.", "points": ["Seeded randomness only", "No wall-clock time reads", "Frame-driven motion curves", "Byte-identical re-renders"], "atWord": 1}}}
+  ]
+}

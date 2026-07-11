@@ -1,0 +1,14 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "BAR_COMPARE-base", "type": "BAR_COMPARE", "narration": "The base bar compare still renders exactly as before, static labelled benchmark bars in spec order.", "durationFrames": 220, "background": "zoneA", "data": {"headline": "The [base] bars.", "headlineColor": "orange", "maxValue": 100, "bars": [
+      {"label": "Model A", "sub": "baseline", "value": 62, "display": "62", "color": "blue", "atWord": 1},
+      {"label": "Model B", "sub": "tuned", "value": 88, "display": "88", "color": "green", "atWord": 2},
+      {"label": "Model C", "sub": "legacy", "value": 41, "display": "41", "color": "red", "atWord": 3}]}},
+    {"id": "BAR_COMPARE-race", "type": "BAR_COMPARE", "narration": "The race variant lets the bars grow and then settle into rank order, the leader rising to the top with a number one chip.", "durationFrames": 260, "background": "zoneA", "data": {"headline": "The [race].", "headlineColor": "orange", "barsVariant": "race", "maxValue": 100, "bars": [
+      {"label": "Framework A", "value": 54, "display": "54", "color": "blue", "atWord": 1},
+      {"label": "Framework B", "value": 91, "display": "91", "color": "green", "atWord": 2},
+      {"label": "Framework C", "value": 33, "display": "33", "color": "orange", "atWord": 3},
+      {"label": "Framework D", "value": 72, "display": "72", "color": "purple", "atWord": 4}]}}
+  ]
+}

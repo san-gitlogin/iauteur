@@ -1,0 +1,21 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "FORMULA-min", "type": "FORMULA", "narration": "Energy equals mass times the speed of light squared, four terms right now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [equation].", "headlineColor": "purple", "formula": {"color": "purple", "parts": [
+      {"text": "E", "kind": "var", "atWord": 1},
+      {"text": "=", "kind": "op", "atWord": 1},
+      {"text": "m", "kind": "var", "atWord": 2},
+      {"text": "c", "kind": "var", "sup": "2", "highlight": true, "atWord": 3}], "label": "Mass\u2013energy equivalence"}}},
+    {"id": "FORMULA-max", "type": "FORMULA", "narration": "The compound interest formula in full, principal times one plus rate over n, all raised to n times t, with every factor spelled out.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "[Compound] interest at cap", "headlineColor": "green", "source": "ILLUSTRATIVE", "formula": {"color": "green", "parts": [
+      {"text": "A", "kind": "var", "atWord": 1},
+      {"text": "=", "kind": "op", "atWord": 1},
+      {"text": "P", "kind": "var", "atWord": 2},
+      {"text": "(", "kind": "op", "atWord": 2},
+      {"text": "1", "kind": "num", "atWord": 3},
+      {"text": "+", "kind": "op", "atWord": 3},
+      {"text": "r", "kind": "var", "sub": "n", "atWord": 4},
+      {"text": "/", "kind": "op", "atWord": 4},
+      {"text": "n", "kind": "var", "atWord": 5},
+      {"text": ")", "kind": "op", "sup": "nt", "highlight": true, "atWord": 6}], "label": "Future value with n compounding periods per year over t years"}}}
+  ]
+}

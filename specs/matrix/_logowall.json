@@ -1,0 +1,15 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "LOGO_WALL-min", "type": "LOGO_WALL", "narration": "Three household names build on it, google amazon and netflix right now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "[Trusted] by three.", "headlineColor": "blue", "logoWall": {"logos": [
+      {"icon": "si:google", "label": "Google", "atWord": 1},
+      {"icon": "si:amazon", "label": "Amazon", "atWord": 2},
+      {"icon": "si:netflix", "label": "Netflix", "atWord": 3}]}}},
+    {"id": "LOGO_WALL-max", "type": "LOGO_WALL", "narration": "Fifteen of the biggest engineering organizations in the world, from search and commerce to streaming payments and design, all build on the platform.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "The whole [ecosystem] at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE LOGO WALL", "logoWall": {"logos": [
+      {"icon": "si:google", "atWord": 1}, {"icon": "si:amazon", "atWord": 1}, {"icon": "si:netflix", "atWord": 1},
+      {"icon": "si:spotify", "atWord": 2}, {"icon": "si:airbnb", "atWord": 2}, {"icon": "si:uber", "atWord": 2},
+      {"icon": "si:stripe", "atWord": 3}, {"icon": "si:shopify", "atWord": 3}, {"icon": "si:meta", "atWord": 3},
+      {"icon": "si:figma", "atWord": 4}, {"icon": "si:slack", "atWord": 4}, {"icon": "si:notion", "atWord": 4},
+      {"icon": "si:github", "atWord": 5}, {"icon": "si:linear", "atWord": 5}, {"icon": "si:vercel", "atWord": 5}]}}}
+  ]
+}

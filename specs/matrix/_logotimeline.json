@@ -1,0 +1,15 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "LOGO_TIMELINE-min", "type": "LOGO_TIMELINE", "narration": "Two milestones on the rail, react then next, a couple of years apart now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [shift].", "headlineColor": "blue", "logoTimeline": {"color": "blue", "entries": [
+      {"icon": "si:react", "label": "React", "date": "2013", "color": "purple", "atWord": 1},
+      {"icon": "si:nextdotjs", "label": "Next.js", "date": "2016", "color": "green", "atWord": 3}]}}},
+    {"id": "LOGO_TIMELINE-max", "type": "LOGO_TIMELINE", "narration": "Six milestones across two decades of frontend, from jQuery through Angular react and vue to the Next and Svelte era.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "Two decades of [frontend] at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE TIMELINE", "logoTimeline": {"color": "blue", "entries": [
+      {"icon": "si:jquery", "label": "jQuery", "date": "2006", "color": "blue", "atWord": 1},
+      {"icon": "si:angular", "label": "Angular", "date": "2010", "color": "red", "atWord": 2},
+      {"icon": "si:react", "label": "React", "date": "2013", "color": "purple", "atWord": 3},
+      {"icon": "si:vuedotjs", "label": "Vue", "date": "2014", "color": "green", "atWord": 4},
+      {"icon": "si:nextdotjs", "label": "Next.js", "date": "2016", "color": "blue", "atWord": 5},
+      {"icon": "si:svelte", "label": "Svelte", "date": "2019", "color": "orange", "atWord": 6}]}}}
+  ]
+}

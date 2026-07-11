@@ -1,0 +1,23 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "SANKEY-min", "type": "SANKEY", "narration": "Traffic splits two ways, most bounce and a smaller share sign up, the ribbon widths showing the split now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [split].", "headlineColor": "blue", "sankey": {"color": "blue", "unit": "k", "nodes": [
+      {"id": "a", "label": "Traffic", "col": 0, "color": "blue"},
+      {"id": "b", "label": "Signups", "col": 1, "color": "green"},
+      {"id": "c", "label": "Bounced", "col": 1, "color": "red"}],
+      "links": [{"source": "a", "target": "b", "value": 40}, {"source": "a", "target": "c", "value": 60}]}}},
+    {"id": "SANKEY-max", "type": "SANKEY", "narration": "All visitors split by channel into organic paid and referral, then each flows onward into trials paid plans or churn across three stages.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "The whole [flow] at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE FLOW", "sankey": {"color": "blue", "unit": "k", "nodes": [
+      {"id": "src", "label": "All visitors", "col": 0, "color": "blue"},
+      {"id": "org", "label": "Organic", "col": 1, "color": "green"},
+      {"id": "paid", "label": "Paid", "col": 1, "color": "orange"},
+      {"id": "ref", "label": "Referral", "col": 1, "color": "purple"},
+      {"id": "trial", "label": "Trial", "col": 2, "color": "yellow"},
+      {"id": "paidplan", "label": "Paid plan", "col": 2, "color": "green"},
+      {"id": "churn", "label": "Churned", "col": 2, "color": "red"}],
+      "links": [
+        {"source": "src", "target": "org", "value": 220}, {"source": "src", "target": "paid", "value": 140}, {"source": "src", "target": "ref", "value": 90},
+        {"source": "org", "target": "trial", "value": 120}, {"source": "org", "target": "churn", "value": 100},
+        {"source": "paid", "target": "trial", "value": 80}, {"source": "paid", "target": "paidplan", "value": 60},
+        {"source": "ref", "target": "trial", "value": 40}, {"source": "ref", "target": "paidplan", "value": 30}, {"source": "ref", "target": "churn", "value": 20}]}}}
+  ]
+}

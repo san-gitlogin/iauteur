@@ -1,0 +1,799 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "TOKENIZER-min",
+      "type": "TOKENIZER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "tokenizer": {
+          "headline": "A tiny [split]",
+          "color": "blue",
+          "text": "Hello world.",
+          "tokens": [
+            {
+              "text": "Hello",
+              "id": 15496
+            },
+            {
+              "text": " world",
+              "id": 995
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TOKENIZER-max",
+      "type": "TOKENIZER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "tokenizer": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "showVectors": true,
+          "text": "Tokenization maps every piece of text to integer ids.",
+          "tokens": [
+            {
+              "text": "Token",
+              "id": 15496
+            },
+            {
+              "text": "ization",
+              "id": 1634
+            },
+            {
+              "text": " maps",
+              "id": 34349
+            },
+            {
+              "text": " every",
+              "id": 790
+            },
+            {
+              "text": " piece",
+              "id": 6710
+            },
+            {
+              "text": " of",
+              "id": 286
+            },
+            {
+              "text": " text",
+              "id": 2420
+            },
+            {
+              "text": " to",
+              "id": 284
+            },
+            {
+              "text": " ids",
+              "id": 220
+            },
+            {
+              "text": ".",
+              "id": 13
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "FILE_TREE-min",
+      "type": "FILE_TREE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "fileTree": {
+          "headline": "A tiny [tree]",
+          "color": "orange",
+          "highlight": 1,
+          "nodes": [
+            {
+              "name": "src",
+              "depth": 0,
+              "kind": "folder"
+            },
+            {
+              "name": "index.ts",
+              "depth": 1,
+              "kind": "file"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "FILE_TREE-max",
+      "type": "FILE_TREE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "fileTree": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "orange",
+          "highlight": 5,
+          "nodes": [
+            {
+              "name": "my-application",
+              "depth": 0,
+              "kind": "folder"
+            },
+            {
+              "name": "src",
+              "depth": 1,
+              "kind": "folder"
+            },
+            {
+              "name": "components",
+              "depth": 2,
+              "kind": "folder"
+            },
+            {
+              "name": "Button",
+              "depth": 3,
+              "kind": "folder"
+            },
+            {
+              "name": "Button.tsx",
+              "depth": 4,
+              "kind": "file",
+              "color": "orange"
+            },
+            {
+              "name": "Button.test.tsx",
+              "depth": 4,
+              "kind": "file"
+            },
+            {
+              "name": "index.ts",
+              "depth": 2,
+              "kind": "file"
+            },
+            {
+              "name": "utils",
+              "depth": 2,
+              "kind": "folder"
+            },
+            {
+              "name": "format.ts",
+              "depth": 3,
+              "kind": "file"
+            },
+            {
+              "name": "package.json",
+              "depth": 1,
+              "kind": "file"
+            },
+            {
+              "name": "tsconfig.json",
+              "depth": 1,
+              "kind": "file"
+            },
+            {
+              "name": "README.md",
+              "depth": 1,
+              "kind": "file"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DATABASE_TABLE-min",
+      "type": "DATABASE_TABLE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "database": {
+          "headline": "A tiny [query]",
+          "tableName": "users",
+          "query": "WHERE id = 1",
+          "color": "green",
+          "columns": [
+            "id",
+            "name"
+          ],
+          "rows": [
+            [
+              "1",
+              "Ada"
+            ],
+            [
+              "2",
+              "Linus"
+            ]
+          ],
+          "highlight": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "id": "DATABASE_TABLE-max",
+      "type": "DATABASE_TABLE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "database": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "tableName": "transactions",
+          "query": "WHERE amount > 100 AND status = ok",
+          "color": "green",
+          "columns": [
+            "id",
+            "account",
+            "amount",
+            "status"
+          ],
+          "rows": [
+            [
+              "1001",
+              "acct_alpha",
+              "$1,240.00",
+              "settled"
+            ],
+            [
+              "1002",
+              "acct_beta_x",
+              "$88.50",
+              "pending"
+            ],
+            [
+              "1003",
+              "acct_gamma",
+              "$4,300.10",
+              "settled"
+            ],
+            [
+              "1004",
+              "acct_delta",
+              "$12.00",
+              "failed"
+            ],
+            [
+              "1005",
+              "acct_epsl",
+              "$920.75",
+              "settled"
+            ],
+            [
+              "1006",
+              "acct_zeta_",
+              "$305.20",
+              "settled"
+            ]
+          ],
+          "highlight": [
+            0,
+            2,
+            4,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "id": "GIT_BRANCH-min",
+      "type": "GIT_BRANCH",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "git": {
+          "headline": "A tiny [branch]",
+          "color": "blue",
+          "lanes": [
+            "main",
+            "feat"
+          ],
+          "commits": [
+            {
+              "lane": 0,
+              "label": "init"
+            },
+            {
+              "lane": 1,
+              "label": "work"
+            },
+            {
+              "lane": 0,
+              "label": "merge"
+            }
+          ],
+          "links": [
+            {
+              "from": 0,
+              "to": 1
+            },
+            {
+              "from": 1,
+              "to": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "GIT_BRANCH-max",
+      "type": "GIT_BRANCH",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "git": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "lanes": [
+            "main",
+            "feature",
+            "hotfix"
+          ],
+          "commits": [
+            {
+              "lane": 0,
+              "label": "init"
+            },
+            {
+              "lane": 0,
+              "label": "setup"
+            },
+            {
+              "lane": 1,
+              "label": "feat A"
+            },
+            {
+              "lane": 1,
+              "label": "feat B"
+            },
+            {
+              "lane": 2,
+              "label": "hotfix"
+            },
+            {
+              "lane": 0,
+              "label": "patch"
+            },
+            {
+              "lane": 1,
+              "label": "feat C"
+            },
+            {
+              "lane": 0,
+              "label": "release"
+            }
+          ],
+          "links": [
+            {
+              "from": 1,
+              "to": 2
+            },
+            {
+              "from": 1,
+              "to": 4
+            },
+            {
+              "from": 3,
+              "to": 6
+            },
+            {
+              "from": 4,
+              "to": 5
+            },
+            {
+              "from": 6,
+              "to": 7
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "STATE_MACHINE-min",
+      "type": "STATE_MACHINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "stateMachine": {
+          "headline": "A tiny [FSM]",
+          "color": "green",
+          "active": 1,
+          "states": [
+            {
+              "label": "Off",
+              "color": "red"
+            },
+            {
+              "label": "On",
+              "color": "green"
+            }
+          ],
+          "transitions": [
+            {
+              "from": 0,
+              "to": 1,
+              "label": "flip"
+            },
+            {
+              "from": 1,
+              "to": 0,
+              "label": "flip"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "STATE_MACHINE-max",
+      "type": "STATE_MACHINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "stateMachine": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "active": 1,
+          "states": [
+            {
+              "label": "Idle",
+              "color": "blue"
+            },
+            {
+              "label": "Loading",
+              "color": "orange"
+            },
+            {
+              "label": "Success",
+              "color": "green"
+            },
+            {
+              "label": "Error",
+              "color": "red"
+            },
+            {
+              "label": "Retry",
+              "color": "purple"
+            }
+          ],
+          "transitions": [
+            {
+              "from": 0,
+              "to": 1,
+              "label": "fetch"
+            },
+            {
+              "from": 1,
+              "to": 2,
+              "label": "resolve"
+            },
+            {
+              "from": 1,
+              "to": 3,
+              "label": "reject"
+            },
+            {
+              "from": 3,
+              "to": 4,
+              "label": "retry"
+            },
+            {
+              "from": 4,
+              "to": 1,
+              "label": "re-fetch"
+            },
+            {
+              "from": 2,
+              "to": 0,
+              "label": "reset"
+            },
+            {
+              "from": 3,
+              "to": 0,
+              "label": "give up"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "STATE_MACHINE-maxLifecycle",
+      "type": "STATE_MACHINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "stateMachine": {
+          "headline": "A [lifecycle] line at the six-state cap",
+          "variant": "lifecycle",
+          "color": "orange",
+          "states": [
+            {
+              "label": "New",
+              "atWord": 1
+            },
+            {
+              "label": "Triaged",
+              "atWord": 1
+            },
+            {
+              "label": "In Progress",
+              "atWord": 1,
+              "color": "blue"
+            },
+            {
+              "label": "Fixed",
+              "atWord": 1
+            },
+            {
+              "label": "Verified",
+              "atWord": 1
+            },
+            {
+              "label": "Closed",
+              "atWord": 1
+            }
+          ],
+          "transitions": [
+            {
+              "from": 0,
+              "to": 1
+            },
+            {
+              "from": 1,
+              "to": 2
+            },
+            {
+              "from": 2,
+              "to": 3
+            },
+            {
+              "from": 3,
+              "to": 4
+            },
+            {
+              "from": 4,
+              "to": 5
+            },
+            {
+              "from": 4,
+              "to": 2,
+              "dashed": true,
+              "color": "orange",
+              "label": "reopen"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "EMBEDDING_SPACE-min",
+      "type": "EMBEDDING_SPACE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "embedding": {
+          "headline": "A tiny [space]",
+          "color": "blue",
+          "axisX": "dim 1",
+          "axisY": "dim 2",
+          "clusters": [
+            "a",
+            "b"
+          ],
+          "points": [
+            {
+              "label": "cat",
+              "x": 0.2,
+              "y": 0.7,
+              "cluster": 0
+            },
+            {
+              "label": "gpu",
+              "x": 0.7,
+              "y": 0.3,
+              "cluster": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "EMBEDDING_SPACE-max",
+      "type": "EMBEDDING_SPACE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "embedding": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "axisX": "semantic dimension 1",
+          "axisY": "semantic dimension 2",
+          "clusters": [
+            "animals",
+            "royalty",
+            "technology",
+            "food & drink"
+          ],
+          "points": [
+            {
+              "label": "cat",
+              "x": 0.16,
+              "y": 0.72,
+              "cluster": 0
+            },
+            {
+              "label": "dog",
+              "x": 0.24,
+              "y": 0.8,
+              "cluster": 0
+            },
+            {
+              "label": "wolf",
+              "x": 0.12,
+              "y": 0.62,
+              "cluster": 0
+            },
+            {
+              "label": "fox",
+              "x": 0.2,
+              "y": 0.68,
+              "cluster": 0
+            },
+            {
+              "label": "king",
+              "x": 0.72,
+              "y": 0.78,
+              "cluster": 1
+            },
+            {
+              "label": "queen",
+              "x": 0.8,
+              "y": 0.72,
+              "cluster": 1
+            },
+            {
+              "label": "throne",
+              "x": 0.68,
+              "y": 0.86,
+              "cluster": 1
+            },
+            {
+              "label": "crown",
+              "x": 0.78,
+              "y": 0.82,
+              "cluster": 1
+            },
+            {
+              "label": "gpu",
+              "x": 0.5,
+              "y": 0.2,
+              "cluster": 2
+            },
+            {
+              "label": "server",
+              "x": 0.6,
+              "y": 0.28,
+              "cluster": 2
+            },
+            {
+              "label": "chip",
+              "x": 0.44,
+              "y": 0.14,
+              "cluster": 2
+            },
+            {
+              "label": "router",
+              "x": 0.56,
+              "y": 0.22,
+              "cluster": 2
+            },
+            {
+              "label": "pizza",
+              "x": 0.32,
+              "y": 0.34,
+              "cluster": 3
+            },
+            {
+              "label": "sushi",
+              "x": 0.4,
+              "y": 0.4,
+              "cluster": 3
+            },
+            {
+              "label": "coffee",
+              "x": 0.28,
+              "y": 0.28,
+              "cluster": 3
+            },
+            {
+              "label": "bread",
+              "x": 0.36,
+              "y": 0.3,
+              "cluster": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "API_REQUEST_RESPONSE-min",
+      "type": "API_REQUEST_RESPONSE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "api": {
+          "headline": "A tiny [request]",
+          "color": "blue",
+          "method": "GET",
+          "path": "/ping",
+          "status": "200",
+          "statusText": "OK",
+          "responseLines": [
+            "{ \"ok\": true }"
+          ]
+        }
+      }
+    },
+    {
+      "id": "API_REQUEST_RESPONSE-max",
+      "type": "API_REQUEST_RESPONSE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "api": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "method": "POST",
+          "path": "/api/v2/orders/checkout",
+          "clientLabel": "Mobile client",
+          "serverLabel": "Orders service",
+          "requestLines": [
+            "Authorization: Bearer …",
+            "Content-Type: app/json",
+            "{ \"cart\": 42, \"pay\": 1 }"
+          ],
+          "status": "201",
+          "statusText": "Created",
+          "responseLines": [
+            "{ \"orderId\": \"ord_8f2a\",",
+            "  \"total\": 128.40,",
+            "  \"status\": \"confirmed\" }"
+          ]
+        }
+      }
+    }
+  ]
+}

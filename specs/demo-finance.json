@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "topic": "How money moves: a markets explainer",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "Prices, trends, bridges and flows each have their own chart — pick the shape that fits the story.",
+    "screenplay": "explainer",
+    "topicAxes": ["risk", "time-horizon"]
+  },
+  "brand": {"theme": "luxe", "design": "corptrust", "themeLight": "daylight"},
+  "scenes": [
+    {
+      "id": "s01", "type": "HOOK", "narration": "The market throws a wall of numbers at you every day. Here is how to actually read them.",
+      "durationFrames": 200, "timingSource": "estimated", "background": "zoneA", "transition": "fade",
+      "data": {"headline": "READ THE MARKET", "subtext": "five charts, one story", "heroAsset": "lucide:trending-up", "headlineAtWord": 1, "heroAtWord": 4}
+    },
+    {
+      "id": "s02", "type": "TICKER_TAPE", "narration": "It starts as noise: symbols, prices, and percentage moves scrolling past, greens up and reds down.",
+      "durationFrames": 220, "timingSource": "estimated", "background": "zoneB", "transition": "slide",
+      "data": {"headline": "Markets [today.]", "headlineColor": "green", "ticker": {"color": "green", "featured": "NVDA", "entries": [
+        {"symbol": "NVDA", "price": "$182.40", "change": 3.21}, {"symbol": "AAPL", "price": "$226.10", "change": 0.84},
+        {"symbol": "MSFT", "price": "$438.90", "change": 1.12}, {"symbol": "TSLA", "price": "$251.30", "change": -1.45},
+        {"symbol": "AMZN", "price": "$201.70", "change": 0.56}, {"symbol": "BTC", "price": "$97.8k", "change": 2.08}
+      ], "atWord": 1}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s03", "type": "CANDLESTICK", "narration": "Zoom into one name and each day becomes a candle: open, high, low, close, with the average trending up.",
+      "durationFrames": 230, "timingSource": "estimated", "background": "zoneC", "transition": "push",
+      "data": {"headline": "Reading the [candles].", "headlineColor": "blue", "candlestick": {"color": "blue", "prefix": "$", "candles": [
+        {"open": 100, "high": 108, "low": 96, "close": 106, "label": "Mon"},
+        {"open": 106, "high": 110, "low": 101, "close": 103, "label": "Tue"},
+        {"open": 103, "high": 114, "low": 102, "close": 112, "label": "Wed"},
+        {"open": 112, "high": 118, "low": 108, "close": 110, "label": "Thu"},
+        {"open": 110, "high": 122, "low": 109, "close": 120, "label": "Fri"}
+      ], "ma": [102, 104, 107, 110, 113]}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s04", "type": "LINE_CHART", "narration": "Pull back to quarters and the trend is clear: revenue climbing while costs stay flat.",
+      "durationFrames": 210, "timingSource": "estimated", "background": "zoneA", "transition": "morph",
+      "data": {"headline": "Revenue [outran] costs.", "headlineColor": "green", "lineChart": {"series": [
+        {"label": "Revenue", "color": "green", "values": [12, 20, 34, 52]},
+        {"label": "Costs", "color": "red", "values": [18, 22, 24, 27]}
+      ], "xAxis": ["Q1", "Q2", "Q3", "Q4"], "yMax": 60, "area": true, "atWord": 1}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s05", "type": "STAT_CALLOUT", "narration": "Add it up and the headline number is a big one: nineteen billion dollars in contracted revenue.",
+      "durationFrames": 190, "timingSource": "estimated", "background": "zoneB", "transition": "wipe",
+      "data": {"value": 19, "prefix": "$", "suffix": "B", "label": "contracted revenue over the term", "atWord": 11}
+    },
+    {
+      "id": "s06", "type": "WATERFALL", "narration": "But gross is not net: start at revenue, add upsell, subtract churn and refunds, and land on the bottom line.",
+      "durationFrames": 240, "timingSource": "estimated", "background": "zoneC", "transition": "push",
+      "data": {"headline": "The [revenue] bridge.", "headlineColor": "green", "waterfallChart": {"color": "green", "unit": "k", "bars": [
+        {"label": "Revenue", "value": 500, "isTotal": true, "atWord": 4},
+        {"label": "Upsell", "value": 220, "color": "green", "atWord": 7},
+        {"label": "Churn", "value": -140, "color": "red", "atWord": 9},
+        {"label": "Refunds", "value": -45, "color": "red", "atWord": 11},
+        {"label": "Net", "value": 0, "isTotal": true, "atWord": 15}
+      ]}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s07", "type": "SANKEY", "narration": "Follow the cash and it splits: some to salaries, some to growth, and the rest to profit.",
+      "durationFrames": 240, "timingSource": "estimated", "background": "zoneA", "transition": "slide",
+      "data": {"headline": "Where the [money] goes.", "headlineColor": "blue", "sankey": {"color": "blue", "unit": "k", "nodes": [
+        {"id": "rev", "label": "Revenue", "col": 0, "color": "blue"},
+        {"id": "ops", "label": "Operations", "col": 1, "color": "orange"},
+        {"id": "grow", "label": "Growth", "col": 1, "color": "purple"},
+        {"id": "sal", "label": "Salaries", "col": 2, "color": "orange"},
+        {"id": "mkt", "label": "Marketing", "col": 2, "color": "purple"},
+        {"id": "profit", "label": "Profit", "col": 2, "color": "green"}
+      ], "links": [
+        {"source": "rev", "target": "ops", "value": 320},
+        {"source": "rev", "target": "grow", "value": 180},
+        {"source": "ops", "target": "sal", "value": 220},
+        {"source": "ops", "target": "profit", "value": 100},
+        {"source": "grow", "target": "mkt", "value": 180}
+      ]}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s08", "type": "FUNNEL", "narration": "For customers it is a funnel: many visit, fewer sign up, fewer activate, and a slice pays.",
+      "durationFrames": 220, "timingSource": "estimated", "background": "zoneB", "transition": "iris",
+      "data": {"headline": "The [conversion] funnel.", "headlineColor": "blue", "funnel": {"color": "blue", "stages": [
+        {"label": "Visited", "value": 100000, "color": "blue", "atWord": 5},
+        {"label": "Signed up", "value": 28000, "color": "purple", "atWord": 8},
+        {"label": "Activated", "value": 12000, "color": "green", "atWord": 11},
+        {"label": "Paid", "value": 3400, "color": "orange", "atWord": 14}
+      ]}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s09", "type": "LOGO_VERSUS", "narration": "And often it comes down to two: the incumbent everyone knows against the challenger everyone is switching to.",
+      "durationFrames": 210, "timingSource": "estimated", "background": "zoneC", "transition": "zoom",
+      "data": {"headline": "The [showdown].", "headlineColor": "orange", "logoVersus": {"color": "orange", "left": {"icon": "si:visa", "name": "Visa", "tagline": "The incumbent", "color": "blue"}, "right": {"icon": "si:stripe", "name": "Stripe", "tagline": "The challenger", "color": "purple"}, "winner": "right"}, "source": "ILLUSTRATIVE — DEMO"}
+    },
+    {
+      "id": "s10", "type": "OUTRO_CTA", "narration": "Ticker, candles, bridge, funnel, flow — match the chart to the story. Subscribe for more markets.",
+      "durationFrames": 190, "timingSource": "estimated", "background": "zoneA", "transition": "fade",
+      "data": {"message": "Match the chart to the story.", "sub": "subscribe for markets, explained"}
+    }
+  ],
+  "thumbnail": {"title": "Read The Market", "badge": "MARKETS", "asset": "lucide:trending-up"}
+}

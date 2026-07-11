@@ -1,0 +1,21 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "TREEMAP-min", "type": "TREEMAP", "narration": "Two slices of the whole, compute the larger and storage the smaller, sized by their share now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "Two [slices].", "headlineColor": "blue", "treemap": {"color": "blue", "unit": "%", "items": [
+      {"label": "Compute", "value": 62, "atWord": 1},
+      {"label": "Storage", "value": 38, "color": "green", "atWord": 1}]}}},
+    {"id": "TREEMAP-max", "type": "TREEMAP", "narration": "Twelve budget lines laid out by weight, compute dominating, a long tail of smaller costs filling in around it.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "The [budget], all of it", "headlineColor": "blue", "source": "ILLUSTRATIVE COST BREAKDOWN", "treemap": {"color": "blue", "unit": "M", "items": [
+      {"label": "Cloud compute", "value": 320, "color": "blue", "atWord": 1},
+      {"label": "Data storage", "value": 210, "color": "purple", "atWord": 1},
+      {"label": "Networking", "value": 140, "color": "green", "atWord": 1},
+      {"label": "Databases", "value": 120, "color": "orange", "atWord": 1},
+      {"label": "ML training", "value": 95, "color": "red", "atWord": 1},
+      {"label": "Observability", "value": 70, "color": "yellow", "atWord": 1},
+      {"label": "Security", "value": 55, "color": "blue", "atWord": 1},
+      {"label": "CDN", "value": 40, "color": "purple", "atWord": 1},
+      {"label": "Backups", "value": 30, "color": "green", "atWord": 1},
+      {"label": "Support", "value": 22, "color": "orange", "atWord": 1},
+      {"label": "Licenses", "value": 16, "color": "red", "atWord": 1},
+      {"label": "Misc", "value": 10, "color": "yellow", "atWord": 1}]}}}
+  ]
+}

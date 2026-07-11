@@ -1,0 +1,13 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "PICTOGRAM-min", "type": "PICTOGRAM", "narration": "Two small teams side by side, three people on one and seven on the other now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "Two [teams].", "headlineColor": "blue", "pictogram": {"color": "blue", "icon": "lucide:user", "rows": [{"label": "Team A", "value": 3, "atWord": 1}, {"label": "Team B", "value": 7, "color": "green", "atWord": 3}]}}},
+    {"id": "PICTOGRAM-max", "type": "PICTOGRAM", "narration": "Monthly active users lead, weekly and daily trail, paid subscribers enterprise seats and churn each a smaller share.", "durationFrames": 280, "background": "zoneA", "data": {"headline": "Users, [in people].", "headlineColor": "blue", "source": "ILLUSTRATIVE PICTOGRAM", "pictogram": {"color": "blue", "unit": "M", "icon": "lucide:users", "rows": [
+      {"label": "Monthly active users now", "value": 250, "color": "blue", "atWord": 1},
+      {"label": "Weekly active accounts", "value": 180, "color": "purple", "atWord": 2},
+      {"label": "Daily active sessions ok", "value": 120, "color": "green", "atWord": 3},
+      {"label": "Paying subscribers total", "value": 75, "color": "orange", "atWord": 4},
+      {"label": "Enterprise seats sold", "value": 40, "color": "red", "atWord": 5},
+      {"label": "Churned last quarter", "value": 15, "color": "yellow", "atWord": 6}]}}}
+  ]
+}

@@ -1,0 +1,1284 @@
+{
+  "generatedAt": "2026-07-10T15:18:29.535Z",
+  "counts": {
+    "types": 136,
+    "registry": 135,
+    "dynamic": 110,
+    "variantsDeclared": 33,
+    "showcaseDemos": 146,
+    "sceneLibRows": 136
+  },
+  "rows": [
+    {
+      "type": "HOOK",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TITLE_CARD",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CONCEPT_DIAGRAM",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DIAGRAM",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "KINETIC_TEXT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "PHOTO",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SOUND_WAVE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "REVEAL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LOGO_REVEAL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CAROUSEL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CREDITS_ROLL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SUBSCRIBE_REMINDER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LIST_BUILD",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "STAT_CALLOUT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "RECAP",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "OUTRO_CTA",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "STEP_FLOW",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CHAT_MOCKUP",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "STAT_PANELS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "QUOTE_SPOTLIGHT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SPLIT_PATHS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "BAR_COMPARE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [
+        "race"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CHANNEL_CARD",
+      "inRegistry": false,
+      "specialRender": true,
+      "inDynamic": false,
+      "variants": [
+        "card",
+        "chip"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LINE_CHART",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [
+        "sparkline",
+        "dualaxis",
+        "compound"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DONUT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "FUNNEL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "WATERFALL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "PICTOGRAM",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "RADAR",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CANDLESTICK",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "BOX_PLOT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TREEMAP",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SANKEY",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "ICON_GRID",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "ICON_CALLOUT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "ICON_BURST",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LOGO_WALL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LOGO_VERSUS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LOGO_TIMELINE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "FORMULA",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "MOLECULE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DNA_HELIX",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LABELED_FIGURE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "VECTOR_FIELD",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "field",
+        "freebody"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CIRCUIT_FLOW",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TICKER_TAPE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "MAP_RADAR",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "PROGRESS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TIMELINE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "QUADRANT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CODE_WINDOW",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LOWER_THIRD",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CHAPTER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "NOTIFICATION",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "COUNTDOWN",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "FLIP_CARD",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "GALLERY",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "grid",
+        "clips"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "COMPARISON_SLIDER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "PHOTO_STACK",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": false,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "IMAGE_SCENE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "ACTIVITY_CARD",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LOCATION_MAP",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "BITS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "MEMORY",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "PACKET",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "PIPELINE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "flow",
+        "ci",
+        "boot",
+        "serverless",
+        "journey"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LAYERED_STACK",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "GRID_ARRAY",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SPEC_COMPARE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DIE_SHOT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "NEURAL_NET",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DATACENTER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TRANSFORMER_BLOCK",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CACHE_PYRAMID",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CALL_STACK",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "stack",
+        "trace"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TOKENIZER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "FILE_TREE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DATABASE_TABLE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "GIT_BRANCH",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "STATE_MACHINE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "EMBEDDING_SPACE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "QUEUE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "API_REQUEST_RESPONSE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "BOOLEAN_LOGIC_GATES",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "HASH_FUNCTION",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SORTING_VISUAL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CLOCK_SIGNAL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "GPU_CLUSTER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "ZOOM_SCALE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "ENCRYPTION",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "encrypt",
+        "decrypt"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "POINTER_DIAGRAM",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "NUMBER_BASE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CODE_EDITOR",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "editor",
+        "split"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TERMINAL_SESSION",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "LOG_STREAM",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CODE_DIFF",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "ERROR_TRACE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "WINDOW_FRAME",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "browser",
+        "mac",
+        "windows",
+        "linux"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "AUTOMATION_RUN",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DOM_INSPECT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "NETWORK_WATERFALL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DEVICE_FRAME",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CLOUD_ARCH",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "K8S_CLUSTER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "schedule",
+        "scale",
+        "selfheal",
+        "rollout"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "COST_METER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SLO_GAUGE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "IAC_PLAN",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "ERD",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "PROCESS_TABLE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "KERNEL_BOUNDARY",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TEST_RUNNER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TEST_MATRIX",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CONTEXT_METER",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "AGENT_HARNESS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "KNOWLEDGE_GRAPH",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "RETRIEVAL_RANK",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "MODEL_STAGES",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CONFIDENCE_GATE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "pass",
+        "block"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SANDBOX_BOX",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "DRILL_IN",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "EVAL_DASHBOARD",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "VIDEO_HERO",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "VIDEO_SPOTLIGHT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "MEDIA_CALLOUT",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "MEDIA_COMPARE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [
+        "split",
+        "wipe"
+      ],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "MEDIA_STAT_OVERLAY",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SCREENSHOT_CASCADE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "FLOATING_QUOTE_PILL",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "OVERLAY_SPLIT_DEFINITIONS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CYCLE_LOOP",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "STEP_STACK_OVERLAY",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TITLE_BANNER_FOCUS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "TALKING_POINTS",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "SLIDE_BULLETS_PIP",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "CAPTION_KINETIC_OVERLAY",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    },
+    {
+      "type": "PHOTO_TIMELINE",
+      "inRegistry": true,
+      "specialRender": false,
+      "inDynamic": true,
+      "variants": [],
+      "hasShowcase": true,
+      "hasSceneLibRow": true
+    }
+  ],
+  "defects": []
+}

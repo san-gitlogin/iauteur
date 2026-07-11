@@ -1,0 +1,10 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "RADAR-min", "type": "RADAR", "narration": "One model scored on three axes, speed power and range, a small clean triangle now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "One [model].", "headlineColor": "blue", "radar": {"color": "blue", "max": 100, "axes": ["Speed", "Power", "Range"], "series": [{"name": "Model A", "values": [80, 55, 40], "atWord": 1}]}}},
+    {"id": "RADAR-max", "type": "RADAR", "narration": "Three platforms scored across eight dimensions each trace a distinct shape over performance reliability security scalability usability cost support and ecosystem.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "Three [platforms] at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE SCORECARD", "radar": {"color": "blue", "max": 100, "axes": ["Performance", "Reliability", "Security", "Scalability", "Usability", "Cost fit", "Support", "Ecosystem"], "series": [
+      {"name": "Platform Alpha", "values": [90, 75, 82, 68, 88, 55, 70, 84], "color": "blue", "atWord": 1},
+      {"name": "Platform Beta", "values": [60, 92, 70, 85, 64, 78, 88, 62], "color": "purple", "atWord": 2},
+      {"name": "Platform Gamma", "values": [72, 66, 95, 74, 80, 90, 60, 76], "color": "green", "atWord": 3}]}}}
+  ]
+}

@@ -1,0 +1,19 @@
+# Normalize line endings so the repo is byte-consistent on every OS (LF in the repo).
+* text=auto eol=lf
+
+# Binary assets — never normalize or line-diff these.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.mp4  binary
+*.webm binary
+*.mp3  binary
+*.wav  binary
+*.zip  binary
+*.woff  binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary

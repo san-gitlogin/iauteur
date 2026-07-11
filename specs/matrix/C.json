@@ -1,0 +1,689 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "DONUT-min",
+      "type": "DONUT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A tiny [donut]",
+        "donut": {
+          "segments": [
+            {
+              "label": "Yes",
+              "value": 70,
+              "color": "green"
+            },
+            {
+              "label": "No",
+              "value": 30,
+              "color": "red"
+            }
+          ],
+          "centerValue": "70%",
+          "centerLabel": "yes"
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "DONUT-max",
+      "type": "DONUT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "donut": {
+          "segments": [
+            {
+              "label": "Retrieval layer",
+              "value": 26,
+              "color": "blue"
+            },
+            {
+              "label": "Generation core",
+              "value": 22,
+              "color": "purple"
+            },
+            {
+              "label": "Overhead & misc",
+              "value": 18,
+              "color": "orange"
+            },
+            {
+              "label": "Network egress x",
+              "value": 14,
+              "color": "green"
+            },
+            {
+              "label": "Cold-start init",
+              "value": 12,
+              "color": "yellow"
+            },
+            {
+              "label": "Logging & trace",
+              "value": 8,
+              "color": "red"
+            }
+          ],
+          "centerValue": "1.2M",
+          "centerLabel": "total tokens"
+        },
+        "source": "illustrative demo data at the cap"
+      }
+    },
+    {
+      "id": "DONUT-maxPie",
+      "type": "DONUT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The pie [variant] pushed to the six-slice limit",
+        "donut": {
+          "variant": "pie",
+          "segments": [
+            {
+              "label": "North America xx",
+              "value": 34,
+              "color": "blue"
+            },
+            {
+              "label": "Europe (EMEA)",
+              "value": 26,
+              "color": "purple"
+            },
+            {
+              "label": "Asia Pacific xx",
+              "value": 20,
+              "color": "green"
+            },
+            {
+              "label": "Latin America",
+              "value": 10,
+              "color": "orange"
+            },
+            {
+              "label": "Middle East xx",
+              "value": 6,
+              "color": "yellow"
+            },
+            {
+              "label": "Africa region",
+              "value": 4,
+              "color": "red"
+            }
+          ]
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "PROGRESS-min",
+      "type": "PROGRESS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A tiny [ring]",
+        "progress": {
+          "variant": "ring",
+          "items": [
+            {
+              "label": "Coverage",
+              "value": 64,
+              "display": "64%",
+              "color": "blue"
+            }
+          ]
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "PROGRESS-max",
+      "type": "PROGRESS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "progress": {
+          "variant": "ring",
+          "items": [
+            {
+              "label": "Retrieval accuracy",
+              "value": 92,
+              "display": "92%",
+              "color": "green"
+            },
+            {
+              "label": "Latency budget xxx",
+              "value": 80,
+              "display": "80%",
+              "color": "blue"
+            },
+            {
+              "label": "Cost efficiency xx",
+              "value": 74,
+              "display": "74%",
+              "color": "orange"
+            },
+            {
+              "label": "Coverage of tests",
+              "value": 61,
+              "display": "61%",
+              "color": "purple"
+            }
+          ]
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "PROGRESS-maxBar",
+      "type": "PROGRESS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The bar [variant] with four full-width rows here",
+        "progress": {
+          "variant": "bar",
+          "items": [
+            {
+              "label": "Retrieval accuracy",
+              "value": 92,
+              "display": "92%",
+              "color": "green"
+            },
+            {
+              "label": "Latency budget xxx",
+              "value": 80,
+              "display": "80%",
+              "color": "blue"
+            },
+            {
+              "label": "Cost efficiency xx",
+              "value": 74,
+              "display": "74%",
+              "color": "orange"
+            },
+            {
+              "label": "Coverage of tests",
+              "value": 61,
+              "display": "61%",
+              "color": "purple"
+            }
+          ]
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "LINE_CHART-min",
+      "type": "LINE_CHART",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A tiny [line]",
+        "lineChart": {
+          "series": [
+            {
+              "label": "Users",
+              "color": "blue",
+              "values": [
+                12,
+                20,
+                34
+              ]
+            }
+          ],
+          "xAxis": [
+            "Q1",
+            "Q2",
+            "Q3"
+          ],
+          "yMax": 40
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "LINE_CHART-max",
+      "type": "LINE_CHART",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "lineChart": {
+          "area": true,
+          "xAxis": [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug"
+          ],
+          "yMax": 100,
+          "series": [
+            {
+              "label": "Active users",
+              "color": "green",
+              "values": [
+                12,
+                20,
+                34,
+                45,
+                58,
+                66,
+                78,
+                88
+              ]
+            },
+            {
+              "label": "Churn rate x",
+              "color": "red",
+              "values": [
+                40,
+                36,
+                30,
+                26,
+                22,
+                19,
+                15,
+                11
+              ]
+            },
+            {
+              "label": "Revenue $M",
+              "color": "blue",
+              "values": [
+                8,
+                14,
+                22,
+                30,
+                41,
+                52,
+                64,
+                79
+              ]
+            }
+          ]
+        },
+        "source": "illustrative dense series at the cap"
+      }
+    },
+    {
+      "id": "LINE_CHART-maxForecast",
+      "type": "LINE_CHART",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A [forecast] with history solid, future dashed band",
+        "lineChart": {
+          "forecastFrom": 5,
+          "bandPct": 0.22,
+          "nowLabel": "now",
+          "xAxis": [
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+            "Q5",
+            "Q6",
+            "Q7",
+            "Q8"
+          ],
+          "yMax": 120,
+          "series": [
+            {
+              "label": "Growth",
+              "color": "blue",
+              "values": [
+                12,
+                22,
+                34,
+                50,
+                68,
+                84,
+                100,
+                116
+              ]
+            }
+          ]
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "BAR_COMPARE-min",
+      "type": "BAR_COMPARE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A tiny [bar] pair",
+        "bars": [
+          {
+            "label": "Before",
+            "sub": "baseline",
+            "value": 42,
+            "display": "42",
+            "color": "red"
+          },
+          {
+            "label": "After",
+            "sub": "optimised",
+            "value": 88,
+            "display": "88",
+            "color": "green"
+          }
+        ],
+        "maxValue": 100,
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "BAR_COMPARE-max",
+      "type": "BAR_COMPARE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "bars": [
+          {
+            "label": "Open model 397B",
+            "sub": "open weights xx",
+            "value": 82.4,
+            "display": "82.4",
+            "color": "orange"
+          },
+          {
+            "label": "Closed flagship",
+            "sub": "prior leader x",
+            "value": 80.8,
+            "display": "80.8",
+            "color": "blue"
+          },
+          {
+            "label": "Prev-gen model x",
+            "sub": "last year xxxx",
+            "value": 71.2,
+            "display": "71.2",
+            "color": "purple"
+          },
+          {
+            "label": "Baseline system",
+            "sub": "reference xxxx",
+            "value": 63.5,
+            "display": "63.5",
+            "color": "red"
+          }
+        ],
+        "maxValue": 100,
+        "source": "illustrative benchmark at the cap"
+      }
+    },
+    {
+      "id": "STAT_PANELS-min",
+      "type": "STAT_PANELS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A tiny [stat] pair",
+        "stats": [
+          {
+            "kicker": "UPTIME",
+            "value": "99.9%",
+            "note": "this month",
+            "color": "green"
+          },
+          {
+            "kicker": "ERRORS",
+            "value": "12",
+            "note": "down 40%",
+            "color": "blue"
+          }
+        ],
+        "source": "illustrative demo data"
+      }
+    },
+    {
+      "id": "STAT_PANELS-max",
+      "type": "STAT_PANELS",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "stats": [
+          {
+            "kicker": "ANSWER QUALITY",
+            "value": "↓ 34%",
+            "note": "degraded on long context",
+            "color": "red"
+          },
+          {
+            "kicker": "TOKEN COST",
+            "value": "18×",
+            "note": "burned per query",
+            "color": "yellow"
+          },
+          {
+            "kicker": "LATENCY P95",
+            "value": "2.4 s",
+            "note": "slower than budget",
+            "color": "orange"
+          },
+          {
+            "kicker": "MONTHLY SPEND",
+            "value": "$14.2k",
+            "note": "well over budget",
+            "color": "purple"
+          }
+        ],
+        "verdict": {
+          "text": "selective, routed retrieval wins",
+          "color": "green"
+        },
+        "source": "illustrative four-panel stat wall at the cap"
+      }
+    },
+    {
+      "id": "QUADRANT-min",
+      "type": "QUADRANT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A tiny [quadrant]",
+        "quadrant": {
+          "xAxis": {
+            "left": "Hard",
+            "right": "Easy"
+          },
+          "yAxis": {
+            "top": "High value",
+            "bottom": "Low value"
+          },
+          "points": [
+            {
+              "label": "Quick win",
+              "x": 0.8,
+              "y": 0.8,
+              "color": "green"
+            },
+            {
+              "label": "Money pit",
+              "x": 0.2,
+              "y": 0.2,
+              "color": "red"
+            }
+          ]
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "QUADRANT-max",
+      "type": "QUADRANT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "quadrant": {
+          "xAxis": {
+            "left": "Hard to build",
+            "right": "Easy to build"
+          },
+          "yAxis": {
+            "top": "High value",
+            "bottom": "Low value"
+          },
+          "points": [
+            {
+              "label": "RAG pipeline xx",
+              "x": 0.72,
+              "y": 0.82,
+              "color": "green"
+            },
+            {
+              "label": "Prompt tuning",
+              "x": 0.88,
+              "y": 0.6,
+              "color": "blue"
+            },
+            {
+              "label": "Fine-tuning xx",
+              "x": 0.28,
+              "y": 0.44,
+              "color": "orange"
+            },
+            {
+              "label": "Distillation",
+              "x": 0.35,
+              "y": 0.7,
+              "color": "purple"
+            },
+            {
+              "label": "Quantization",
+              "x": 0.8,
+              "y": 0.3,
+              "color": "yellow"
+            },
+            {
+              "label": "Speculative",
+              "x": 0.18,
+              "y": 0.24,
+              "color": "red"
+            }
+          ]
+        },
+        "source": "illustrative six-point map at the cap"
+      }
+    },
+    {
+      "id": "TIMELINE-min",
+      "type": "TIMELINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A tiny [timeline]",
+        "timeline": {
+          "milestones": [
+            {
+              "date": "MAR",
+              "title": "Prototype",
+              "color": "blue"
+            },
+            {
+              "date": "JUL",
+              "title": "GA",
+              "color": "green"
+            }
+          ]
+        },
+        "source": "illustrative"
+      }
+    },
+    {
+      "id": "TIMELINE-max",
+      "type": "TIMELINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A hostile [headline] stressed to the very limit ok",
+        "timeline": {
+          "milestones": [
+            {
+              "date": "Q1 2025",
+              "title": "Prototype build",
+              "sub": "internal spike, two devs",
+              "color": "blue"
+            },
+            {
+              "date": "Q2 2025",
+              "title": "Private beta xx",
+              "sub": "ten design partners on",
+              "color": "purple"
+            },
+            {
+              "date": "Q3 2025",
+              "title": "Public preview",
+              "sub": "waitlist opens to all x",
+              "color": "orange"
+            },
+            {
+              "date": "Q4 2025",
+              "title": "General avail.",
+              "sub": "SLA-backed, paid tiers",
+              "color": "green"
+            },
+            {
+              "date": "Q1 2026",
+              "title": "Enterprise GA",
+              "sub": "SSO, audit, residency x",
+              "color": "blue"
+            }
+          ]
+        },
+        "source": "illustrative five-milestone track at the cap"
+      }
+    }
+  ]
+}

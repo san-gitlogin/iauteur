@@ -1,0 +1,785 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "CLOUD_ARCH-min",
+      "type": "CLOUD_ARCH",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "cloud": {
+          "headline": "A tiny [region]",
+          "provider": "aws",
+          "color": "blue",
+          "boundaries": [
+            {
+              "id": "reg",
+              "label": "us-east-1",
+              "kind": "region"
+            }
+          ],
+          "nodes": [
+            {
+              "id": "api",
+              "label": "API",
+              "asset": "lucide:server",
+              "boundary": "reg",
+              "color": "green"
+            }
+          ],
+          "edges": []
+        }
+      }
+    },
+    {
+      "id": "CLOUD_ARCH-max",
+      "type": "CLOUD_ARCH",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "cloud": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "provider": "aws",
+          "color": "blue",
+          "boundaries": [
+            {
+              "id": "reg",
+              "label": "us-east-1",
+              "kind": "region"
+            },
+            {
+              "id": "vpc",
+              "label": "vpc-prod",
+              "kind": "vpc",
+              "parent": "reg"
+            },
+            {
+              "id": "sn",
+              "label": "subnet-private",
+              "kind": "subnet",
+              "parent": "vpc"
+            }
+          ],
+          "nodes": [
+            {
+              "id": "cdn",
+              "label": "CloudFront CDN",
+              "asset": "lucide:globe",
+              "boundary": "reg",
+              "color": "blue"
+            },
+            {
+              "id": "alb",
+              "label": "Load Balancer",
+              "asset": "lucide:network",
+              "boundary": "vpc",
+              "color": "blue"
+            },
+            {
+              "id": "api",
+              "label": "API service",
+              "asset": "lucide:server",
+              "boundary": "sn",
+              "color": "green"
+            },
+            {
+              "id": "worker",
+              "label": "Worker pool",
+              "asset": "lucide:cog",
+              "boundary": "sn",
+              "color": "green"
+            },
+            {
+              "id": "cache",
+              "label": "Redis cache",
+              "asset": "lucide:zap",
+              "boundary": "sn",
+              "color": "orange"
+            },
+            {
+              "id": "db",
+              "label": "Postgres",
+              "sub": "arn:aws:rds:db-prod",
+              "asset": "lucide:database",
+              "boundary": "sn",
+              "color": "purple"
+            },
+            {
+              "id": "queue",
+              "label": "SQS queue",
+              "asset": "lucide:layers",
+              "boundary": "vpc",
+              "color": "yellow"
+            },
+            {
+              "id": "s3",
+              "label": "S3 bucket",
+              "asset": "lucide:box",
+              "boundary": "reg",
+              "color": "red"
+            }
+          ],
+          "edges": [
+            {
+              "from": "cdn",
+              "to": "alb",
+              "label": "HTTPS"
+            },
+            {
+              "from": "alb",
+              "to": "api",
+              "label": "REST"
+            },
+            {
+              "from": "api",
+              "to": "db",
+              "label": "SQL"
+            },
+            {
+              "from": "api",
+              "to": "cache"
+            },
+            {
+              "from": "api",
+              "to": "queue",
+              "label": "enqueue"
+            },
+            {
+              "from": "queue",
+              "to": "worker"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "K8S_CLUSTER-min",
+      "type": "K8S_CLUSTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "k8s": {
+          "headline": "A tiny [cluster]",
+          "mode": "schedule",
+          "controlPlane": "kube-apiserver",
+          "color": "blue",
+          "nodes": [
+            {
+              "label": "node-1",
+              "pods": [
+                {
+                  "version": "v1"
+                }
+              ]
+            },
+            {
+              "label": "node-2",
+              "pods": [
+                {
+                  "version": "v1"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "K8S_CLUSTER-max",
+      "type": "K8S_CLUSTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "k8s": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "mode": "rollout",
+          "controlPlane": "kube-apiserver",
+          "color": "green",
+          "nodes": [
+            {
+              "label": "worker-node-01",
+              "pods": [
+                {
+                  "version": "v1"
+                },
+                {
+                  "version": "v1"
+                },
+                {
+                  "version": "v2"
+                },
+                {
+                  "version": "v2"
+                },
+                {
+                  "version": "v1"
+                },
+                {
+                  "version": "v2"
+                }
+              ]
+            },
+            {
+              "label": "worker-node-02",
+              "pods": [
+                {
+                  "version": "v1"
+                },
+                {
+                  "version": "v2"
+                },
+                {
+                  "version": "v1"
+                },
+                {
+                  "version": "v2"
+                },
+                {
+                  "version": "v1"
+                },
+                {
+                  "version": "v2"
+                }
+              ]
+            },
+            {
+              "label": "worker-node-03",
+              "pods": [
+                {
+                  "version": "v2"
+                },
+                {
+                  "version": "v2"
+                },
+                {
+                  "version": "v1"
+                },
+                {
+                  "version": "v1"
+                }
+              ]
+            },
+            {
+              "label": "worker-node-04",
+              "pods": [
+                {
+                  "version": "v1"
+                },
+                {
+                  "version": "v2"
+                },
+                {
+                  "version": "v2"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "COST_METER-min",
+      "type": "COST_METER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "cost": {
+          "headline": "A tiny [bill]",
+          "value": 800,
+          "budget": 1000,
+          "unit": "$",
+          "period": "this month",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "COST_METER-max",
+      "type": "COST_METER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "cost": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "value": 14280,
+          "budget": 12000,
+          "unit": "$",
+          "period": "this billing cycle",
+          "color": "yellow"
+        }
+      }
+    },
+    {
+      "id": "SLO_GAUGE-min",
+      "type": "SLO_GAUGE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "slo": {
+          "headline": "A tiny [SLO]",
+          "availability": 99.9,
+          "target": 99.5,
+          "budgetSpent": 0.3,
+          "period": "7-day window",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "SLO_GAUGE-max",
+      "type": "SLO_GAUGE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "slo": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "availability": 99.95,
+          "target": 99.9,
+          "budgetSpent": 0.62,
+          "period": "30-day rolling window",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "IAC_PLAN-min",
+      "type": "IAC_PLAN",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "iac": {
+          "headline": "A tiny [plan]",
+          "color": "orange",
+          "rows": [
+            {
+              "action": "add",
+              "resource": "aws_s3_bucket.assets",
+              "type": "s3"
+            },
+            {
+              "action": "destroy",
+              "resource": "aws_instance.legacy",
+              "type": "ec2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "IAC_PLAN-max",
+      "type": "IAC_PLAN",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "iac": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "orange",
+          "rows": [
+            {
+              "action": "add",
+              "resource": "aws_s3_bucket.static_assets_bucket_prod",
+              "type": "s3"
+            },
+            {
+              "action": "add",
+              "resource": "aws_cloudfront_distribution.cdn_edge",
+              "type": "cloudfront"
+            },
+            {
+              "action": "change",
+              "resource": "aws_iam_role.execution_role_for_lambda",
+              "type": "iam"
+            },
+            {
+              "action": "change",
+              "resource": "aws_security_group.web_ingress_rules",
+              "type": "security_group"
+            },
+            {
+              "action": "destroy",
+              "resource": "aws_instance.legacy_batch_worker_node",
+              "type": "ec2"
+            },
+            {
+              "action": "destroy",
+              "resource": "aws_db_instance.old_replica_us_west",
+              "type": "rds"
+            },
+            {
+              "action": "noop",
+              "resource": "aws_vpc.production_network_main",
+              "type": "vpc"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ERD-min",
+      "type": "ERD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "erd": {
+          "headline": "A tiny [schema]",
+          "color": "blue",
+          "tables": [
+            {
+              "id": "u",
+              "name": "users",
+              "color": "blue",
+              "columns": [
+                {
+                  "name": "id",
+                  "type": "uuid",
+                  "key": "pk"
+                },
+                {
+                  "name": "email",
+                  "type": "text"
+                }
+              ]
+            },
+            {
+              "id": "o",
+              "name": "orders",
+              "color": "green",
+              "columns": [
+                {
+                  "name": "id",
+                  "type": "uuid",
+                  "key": "pk"
+                },
+                {
+                  "name": "user_id",
+                  "type": "uuid",
+                  "key": "fk"
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "from": "u",
+              "to": "o",
+              "label": "places",
+              "fromCard": "1",
+              "toCard": "N"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ERD-max",
+      "type": "ERD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "erd": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "tables": [
+            {
+              "id": "users",
+              "name": "users",
+              "color": "blue",
+              "columns": [
+                {
+                  "name": "id",
+                  "type": "uuid",
+                  "key": "pk"
+                },
+                {
+                  "name": "email",
+                  "type": "text"
+                },
+                {
+                  "name": "name",
+                  "type": "text"
+                },
+                {
+                  "name": "created_at",
+                  "type": "timestamp"
+                }
+              ]
+            },
+            {
+              "id": "orders",
+              "name": "orders",
+              "color": "green",
+              "columns": [
+                {
+                  "name": "id",
+                  "type": "uuid",
+                  "key": "pk"
+                },
+                {
+                  "name": "user_id",
+                  "type": "uuid",
+                  "key": "fk"
+                },
+                {
+                  "name": "total",
+                  "type": "numeric"
+                },
+                {
+                  "name": "status",
+                  "type": "text"
+                }
+              ]
+            },
+            {
+              "id": "items",
+              "name": "order_items",
+              "color": "orange",
+              "columns": [
+                {
+                  "name": "id",
+                  "type": "uuid",
+                  "key": "pk"
+                },
+                {
+                  "name": "order_id",
+                  "type": "uuid",
+                  "key": "fk"
+                },
+                {
+                  "name": "product_id",
+                  "type": "uuid",
+                  "key": "fk"
+                },
+                {
+                  "name": "qty",
+                  "type": "int"
+                }
+              ]
+            },
+            {
+              "id": "products",
+              "name": "products",
+              "color": "purple",
+              "columns": [
+                {
+                  "name": "id",
+                  "type": "uuid",
+                  "key": "pk"
+                },
+                {
+                  "name": "sku",
+                  "type": "text"
+                },
+                {
+                  "name": "price",
+                  "type": "numeric"
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "from": "users",
+              "to": "orders",
+              "label": "places",
+              "fromCard": "1",
+              "toCard": "N"
+            },
+            {
+              "from": "orders",
+              "to": "items",
+              "label": "contains",
+              "fromCard": "1",
+              "toCard": "N"
+            },
+            {
+              "from": "products",
+              "to": "items",
+              "label": "in",
+              "fromCard": "1",
+              "toCard": "N"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PROCESS_TABLE-min",
+      "type": "PROCESS_TABLE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "proc": {
+          "headline": "A tiny [top]",
+          "sortBy": "cpu",
+          "color": "blue",
+          "rows": [
+            {
+              "pid": "1",
+              "name": "systemd",
+              "cpu": 1,
+              "mem": 2
+            },
+            {
+              "pid": "842",
+              "name": "chrome",
+              "cpu": 22,
+              "mem": 34
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PROCESS_TABLE-max",
+      "type": "PROCESS_TABLE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "proc": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "sortBy": "cpu",
+          "color": "blue",
+          "rows": [
+            {
+              "pid": "33901",
+              "name": "ffmpeg transcode worker",
+              "cpu": 96,
+              "mem": 41,
+              "runaway": true
+            },
+            {
+              "pid": "8421",
+              "name": "chrome --renderer",
+              "cpu": 42,
+              "mem": 34
+            },
+            {
+              "pid": "12037",
+              "name": "node build-server.js",
+              "cpu": 28,
+              "mem": 22
+            },
+            {
+              "pid": "25170",
+              "name": "postgres: writer process",
+              "cpu": 18,
+              "mem": 30
+            },
+            {
+              "pid": "3390",
+              "name": "dockerd",
+              "cpu": 9,
+              "mem": 12
+            },
+            {
+              "pid": "1204",
+              "name": "containerd-shim-runc",
+              "cpu": 4,
+              "mem": 6
+            },
+            {
+              "pid": "1",
+              "name": "systemd",
+              "cpu": 1,
+              "mem": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "KERNEL_BOUNDARY-min",
+      "type": "KERNEL_BOUNDARY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "kernel": {
+          "headline": "A tiny [syscall]",
+          "userLabel": "User space",
+          "kernelLabel": "Kernel",
+          "syscall": "read()",
+          "result": "bytes",
+          "userChips": [
+            "your app"
+          ],
+          "color": "purple",
+          "steps": [
+            {
+              "label": "read disk"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "KERNEL_BOUNDARY-max",
+      "type": "KERNEL_BOUNDARY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "kernel": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "userLabel": "User-space process",
+          "kernelLabel": "Kernel space",
+          "syscall": "read(fd, buf, n)",
+          "result": "bytes copied",
+          "userChips": [
+            "your app",
+            "libc",
+            "runtime"
+          ],
+          "color": "purple",
+          "steps": [
+            {
+              "label": "check permissions"
+            },
+            {
+              "label": "locate inode block"
+            },
+            {
+              "label": "read from disk"
+            },
+            {
+              "label": "copy to user buffer"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

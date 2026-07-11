@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "topic": "How the Internet Works - Shorts cut (evergreen explainer)",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "Every page load is a hidden relay - find, connect, respond - that finishes in milliseconds.",
+    "topicAxes": [
+      "mechanism-depth",
+      "everyday-magic"
+    ]
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "aurora-grid",
+    "channel": "YOUR CHANNEL"
+  },
+  "cover": {
+    "title": "THE HIDDEN RELAY",
+    "badge": "INTERNET",
+    "asset": "lucide:globe",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "You hit enter, and a page loads in a blink. Here's the hidden relay race.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "THE HIDDEN RELAY",
+        "subtext": "what happens when you hit enter",
+        "heroAsset": "lucide:globe",
+        "headlineAtWord": 1,
+        "heroAtWord": 3,
+        "anim": "scale"
+      }
+    },
+    {
+      "id": "s02",
+      "type": "STEP_FLOW",
+      "narration": "Your browser finds the server, opens a secure connection, and gets the page back, all in milliseconds.",
+      "durationFrames": 234,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "push",
+      "data": {
+        "headline": "Three steps, [milliseconds.]",
+        "headlineColor": "blue",
+        "steps": [
+          {"kicker": "1", "title": "FIND", "sub": "DNS gets the IP", "color": "blue", "atWord": 3},
+          {"kicker": "2", "title": "CONNECT", "sub": "TCP + TLS", "color": "purple", "atWord": 6},
+          {"kicker": "3", "title": "RESPOND", "sub": "HTML to pixels", "color": "green", "atWord": 11}
+        ],
+        "caption": {"text": "find - connect - respond", "color": "green", "atWord": 17},
+        "source": "DNS -> TCP/TLS -> HTTP"
+      }
+    },
+    {
+      "id": "s03",
+      "type": "STAT_CALLOUT",
+      "narration": "The whole trip usually finishes in under three hundred milliseconds.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "iris",
+      "data": {
+        "value": 300,
+        "suffix": "ms",
+        "label": "keystroke to painted page",
+        "atWord": 8,
+        "source": "ILLUSTRATIVE END-TO-END LATENCY"
+      }
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "narration": "Follow YOUR CHANNEL for the full breakdown.",
+      "durationFrames": 126,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "It's all a conversation",
+        "sub": "follow YOUR CHANNEL"
+      }
+    }
+  ]
+}

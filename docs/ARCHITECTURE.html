@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Video Factory — How It Works</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root{
+    --bg:#0A0A0B; --panel:#141416; --border:#26262B; --text:#F5F5F7; --muted:#8A8A93;
+    --accent:#FF8A3D; --blue:#58A6FF; --green:#3FB950; --red:#FF6B6B; --purple:#BC8CFF; --yellow:#E3B341;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:'Space Grotesk',Inter,system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;
+    background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+    background-size:64px 64px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 28px 120px}
+  header.hero{padding:40px 0 24px;border-bottom:1px solid var(--border);margin-bottom:36px}
+  .kicker{font-family:var(--mono);letter-spacing:.28em;text-transform:uppercase;font-size:12px;color:var(--accent)}
+  h1{font-size:44px;line-height:1.08;margin:.3em 0 .2em;letter-spacing:-.02em}
+  h2{font-size:30px;margin:56px 0 14px;letter-spacing:-.02em;padding-top:10px;border-top:1px dashed var(--border)}
+  h3{font-size:20px;margin:28px 0 8px;color:var(--text)}
+  p,li{color:#D9D9DE}
+  .lead{font-size:19px;color:var(--muted);max-width:80ch}
+  code{font-family:var(--mono);font-size:.86em;background:#1d1d20;border:1px solid var(--border);padding:1px 6px;border-radius:6px;color:#ffd9b8}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin:16px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media(max-width:820px){.grid,.grid3{grid-template-columns:1fr}}
+  .tag{display:inline-block;font-family:var(--mono);font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid;margin:2px 4px 2px 0}
+  .t-blue{color:var(--blue);border-color:#2b4a6f;background:rgba(88,166,255,.08)}
+  .t-green{color:var(--green);border-color:#2e5a37;background:rgba(63,185,80,.08)}
+  .t-red{color:var(--red);border-color:#6f3030;background:rgba(255,107,107,.08)}
+  .t-purple{color:var(--purple);border-color:#4a3a6f;background:rgba(188,140,255,.08)}
+  .t-yellow{color:var(--yellow);border-color:#6f5f2b;background:rgba(227,179,65,.08)}
+  .t-muted{color:var(--muted);border-color:var(--border);background:rgba(255,255,255,.03)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  td code{white-space:nowrap}
+  .mermaid{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;margin:18px 0;overflow-x:auto}
+  .note{border-left:3px solid var(--accent);padding:10px 16px;background:rgba(255,138,61,.06);border-radius:0 10px 10px 0;margin:16px 0}
+  .warn{border-left:3px solid var(--red);background:rgba(255,107,107,.06)}
+  .ok{border-left:3px solid var(--green);background:rgba(63,185,80,.06)}
+  .file{font-family:var(--mono);font-size:.85em;color:var(--blue)}
+  ol.steps{counter-reset:s;list-style:none;padding-left:0}
+  ol.steps>li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px solid var(--border)}
+  ol.steps>li::before{content:counter(s);position:absolute;left:0;top:10px;width:30px;height:30px;border-radius:8px;
+    background:rgba(255,138,61,.12);border:1px solid #6f4a2b;color:var(--accent);font-family:var(--mono);
+    display:flex;align-items:center;justify-content:center;font-size:14px}
+  .toc{columns:2;font-family:var(--mono);font-size:13px}
+  .toc a{color:var(--muted);text-decoration:none}
+  .toc a:hover{color:var(--accent)}
+  .legend span{margin-right:16px;font-size:13px;font-family:var(--mono)}
+  hr{border:0;border-top:1px dashed var(--border);margin:40px 0}
+  .small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">YOUR CHANNEL · SYSTEM MAP</div>
+  <h1>The Video Factory<br>How a topic becomes a rendered video</h1>
+  <p class="lead">This is a Remotion (React) "video factory". You never hand-draw frames. You write a <b>JSON spec</b> that describes scenes; Remotion turns that JSON into 1920×1080 and 1080×1920 video. This page explains every moving part, how the Studio timeline appears, where the 30 designs live, and what we plan to build next.</p>
+</header>
+
+<div class="card">
+  <b>Table of contents</b>
+  <div class="toc">
+    <a href="#mental">1 · The mental model</a>
+    <a href="#pipeline">2 · Topic → video pipeline</a>
+    <a href="#sequence">3 · How Studio builds the timeline</a>
+    <a href="#render">4 · Render sequence diagram</a>
+    <a href="#layers">5 · The four layers of "look"</a>
+    <a href="#designs">6 · What the design/ folder does</a>
+    <a href="#scene">7 · Anatomy of one scene</a>
+    <a href="#files">8 · File-by-file knowledge map</a>
+    <a href="#gaps">9 · Why videos still feel same-y</a>
+    <a href="#plan">10 · The plan (what we build next)</a>
+  </div>
+</div>
+
+<h2 id="mental">1 · The mental model</h2>
+<p>Three sentences hold the whole system together:</p>
+<div class="grid3">
+  <div class="card"><span class="tag t-blue">CONTENT</span><p><b>The JSON is the movie.</b> A spec in <code>topics/&lt;slug&gt;/long.json</code> lists scenes, each with a <code>type</code>, <code>narration</code>, a <code>durationFrames</code>, and a <code>data</code> object. Change the JSON → change the video.</p></div>
+  <div class="card"><span class="tag t-purple">LOOK</span><p><b>The theme + design pack skin it.</b> <code>brand.theme</code> picks colors/fonts; <code>brand.design</code> picks a component "grammar". The same JSON renders in 30+ looks without changing a word.</p></div>
+  <div class="card"><span class="tag t-green">MOTION</span><p><b>Everything is a function of the frame.</b> No timers, no CSS animation. Given frame&nbsp;N, every pixel is deterministic — that's what makes it renderable and reproducible.</p></div>
+</div>
+<div class="note">The key insight for your bigger goal: <b>AI is the director + editor.</b> It picks the topic's angle, writes narration, chooses scenes, times them to words, and picks a look. The <em>components</em> are its vocabulary. Richer components + richer animation = the AI can compose more varied "films" — which is exactly what phase 2 (this task) is about.</div>
+
+<h2 id="pipeline">2 · Topic → video pipeline</h2>
+<p>The daily loop only touches <code>topics/</code>, <code>public/assets/</code>, and <code>out/</code>. The engine (<code>src/</code>) is built once and reused forever.</p>
+<div class="mermaid">
+flowchart LR
+  A["Topic idea<br/>(user + web search)"] --> B["new-topic.mjs<br/>scaffolds topics/&lt;slug&gt;/"]
+  B --> C["AI Director fills<br/>long.json + shorts.json"]
+  C --> D{"lint-all.mjs<br/>the automated critic"}
+  D -- "REJECTED" --> C
+  D -- "PASSED" --> E["npm run dev<br/>Remotion Studio"]
+  E --> F["voiceover.py (TTS)<br/>+ sync.mjs re-times to audio"]
+  F --> D
+  E --> G["proof.mjs<br/>stills in out/proof/"]
+  G --> H["render-topic.mjs<br/>final mp4 in topics/&lt;slug&gt;/out/"]
+  H --> I["package-video.mjs<br/>standalone zip (optional)"]
+  style D fill:#1d1d20,stroke:#FF8A3D,color:#F5F5F7
+  style C fill:#1d1d20,stroke:#BC8CFF,color:#F5F5F7
+  style E fill:#1d1d20,stroke:#58A6FF,color:#F5F5F7
+</div>
+<p class="small">The linter (<span class="file">scripts/lint-spec.mjs</span>) is the gate: it enforces text budgets, semantic-color rules, timing sanity, valid scene types, and asset existence. <b>Nothing renders until it passes.</b> This is the "tester rejects the build" discipline.</p>
+
+<h2 id="sequence">3 · How the Studio timeline appears in the browser</h2>
+<p>When you run <code>npm run dev</code>, Remotion Studio opens at <code>localhost:3000</code>. The timeline you see is <b>not</b> hand-authored — it is generated at load time from your topic JSON. Here is the chain that produces it:</p>
+<div class="mermaid">
+sequenceDiagram
+  autonumber
+  participant Dev as You (npm run dev)
+  participant R as Root.tsx (RemotionRoot)
+  participant TI as topicsIndex.ts (auto-gen)
+  participant MC as MainComposition
+  participant TP as ThemeProvider
+  participant IN as Inner (scene loop)
+  participant SC as Scene component
+  Dev->>R: Studio boots, reads RemotionRoot
+  R->>TI: import topics[] (slug, long, shorts)
+  loop for every topic
+    R->>R: register &lt;Composition&gt; wide-dark / wide-light / short-dark / short-light + thumb/cover stills
+  end
+  R->>R: also register Gallery + showcase-&lt;design&gt; (one topic under all 30 packs)
+  Note over R: Studio's left panel = this list of Compositions
+  Dev->>MC: click a composition → Remotion mounts it at frame 0
+  MC->>TP: apply themeOverride (dark/light) + background override
+  MC->>IN: render Inner(spec)
+  IN->>IN: walk scenes[], accumulate "from" = running frame offset
+  loop each scene
+    IN->>IN: wrap in &lt;Sequence from=offset durationInFrames=scene.durationFrames&gt;
+    IN->>SC: resolveScene(design,type) ?? registry[type] ?? Unknown
+    SC-->>IN: draws using useCurrentFrame() (LOCAL to the Sequence)
+  end
+  IN->>IN: overlay Watermark + design Chrome above all scenes
+  Note over IN: The timeline bar = concatenated Sequences.<br/>Each Sequence's width = its durationFrames.
+</div>
+<div class="note">The timeline is literally <b>a stack of <code>&lt;Sequence&gt;</code> blocks laid end to end</b>. Scene 1 occupies frames 0…d1, scene 2 occupies d1…d1+d2, and so on (<code>specDuration</code> sums them, plus the optional cover). Inside a Sequence, <code>useCurrentFrame()</code> resets to 0, so each scene animates relative to its own start. Word anchors (<code>atWord</code>) become frames via <code>wordToFrame = (word-1)×12</code> at 150&nbsp;wpm.</div>
+
+<h2 id="render">4 · What happens on a render</h2>
+<div class="mermaid">
+flowchart TB
+  subgraph BROWSER["Headless Chromium (one per frame)"]
+    F0["frame N"] --> MC2["MainComposition renders React tree"]
+    MC2 --> BG["Background(zone) gradient/grid/aurora"]
+    MC2 --> SEQ["active Sequence(s) for frame N"]
+    SEQ --> COMP["scene component computes styles<br/>= pure fn(N)"]
+    MC2 --> OV["design Chrome overlay + watermark"]
+  end
+  MC2 --> PNG["screenshot → PNG"]
+  PNG --> ENC["ffmpeg stitches PNGs + audio → mp4"]
+  style BROWSER fill:#101012,stroke:#26262B,color:#F5F5F7
+</div>
+<p class="small">Because every frame is a pure function of its frame number, Remotion can render frames in parallel and always get identical output. That determinism is why "no CSS keyframes / no timers / no Math.random without a seed" is a hard rule.</p>
+
+<h2 id="layers">5 · The four layers that decide "how it looks"</h2>
+<table>
+  <tr><th>Layer</th><th>Set by</th><th>What it controls</th><th>Where it lives</th></tr>
+  <tr><td><b>Theme</b> (dark skin)</td><td><code>brand.theme</code></td><td>Colors, semantic palette, fonts, corner radius, glow, background style</td><td><span class="file">src/themes.ts</span></td></tr>
+  <tr><td><b>Light twin</b></td><td><code>brand.themeLight</code></td><td>The auto-rendered light variant (daylight/paper/brutalist)</td><td><span class="file">src/themes.ts</span></td></tr>
+  <tr><td><b>Design pack</b> (grammar)</td><td><code>brand.design</code></td><td>Overrides <em>how</em> 5 scene types are drawn + a full-frame chrome overlay</td><td><span class="file">src/designs/&lt;pack&gt;/</span></td></tr>
+  <tr><td><b>Background</b></td><td><code>brand.background</code></td><td>aurora / grid / aurora-grid / plain per video</td><td><span class="file">src/Background.tsx</span></td></tr>
+</table>
+<div class="warn note"><b>By law:</b> <code>brand.theme</code> must be a DARK theme; the light variant is produced automatically. The list of valid dark themes is duplicated in <b>two</b> places that must stay in sync: <span class="file">src/Root.tsx</span> (<code>DARK_THEMES</code>) and <span class="file">scripts/lint-spec.mjs</span> (<code>DARK_THEMES</code>).</div>
+
+<h2 id="designs">6 · What the <span class="file">src/designs/</span> folder actually does</h2>
+<p>A <b>design pack</b> is a genuinely different <em>component grammar</em> — not just recolored. Each of the 30 packs is a folder with three files:</p>
+<div class="grid3">
+  <div class="card"><code>primitives.tsx</code><p class="small">Pack-specific building blocks (e.g. cyberpunk's chamfered neon <code>CyberPanel</code>, <code>GlitchHeadline</code>) <b>plus</b> a full-frame <code>*Chrome</code> overlay (scanlines, grain, vignette, corner ticks).</p></div>
+  <div class="card"><code>scenes.tsx</code><p class="small">Re-implements up to 5 scene types in the pack's style, reading the <b>same</b> theme tokens (<code>useTheme</code>), scale (<code>useScale</code>), semantics (<code>useSem</code>) and word anchors as core.</p></div>
+  <div class="card"><code>index.ts</code><p class="small">Exports a <code>registry</code> (type → component) and the Chrome. Both are wired into <span class="file">src/designs/index.ts</span>.</p></div>
+</div>
+<h3>The resolution order (in <span class="file">MainComposition.tsx</span>)</h3>
+<div class="mermaid">
+flowchart LR
+  S["scene.type"] --> R1{"resolveScene<br/>(design, type)?"}
+  R1 -- "pack overrides it" --> P["pack component"]
+  R1 -- "no override" --> R2{"registry[type]?"}
+  R2 -- "yes" --> C["core scene component"]
+  R2 -- "no" --> U["UnknownScene"]
+  P --> OUT["render + Chrome overlay on top"]
+  C --> OUT
+  style P fill:#1d1d20,stroke:#BC8CFF,color:#F5F5F7
+  style C fill:#1d1d20,stroke:#58A6FF,color:#F5F5F7
+</div>
+<div class="warn note"><b>The core limitation this project set out to fix:</b> every one of the 30 packs overrides <em>only these 5</em> scene types —
+<span class="tag t-purple">HOOK</span><span class="tag t-purple">STAT_PANELS</span><span class="tag t-purple">STEP_FLOW</span><span class="tag t-purple">LIST_BUILD</span><span class="tag t-purple">STAT_CALLOUT</span>.
+The other 9 types <em>always fall back to the identical core component</em>, only recolored:
+<span class="tag t-muted">TITLE_CARD</span><span class="tag t-muted">CONCEPT_DIAGRAM</span><span class="tag t-muted">RECAP</span><span class="tag t-muted">OUTRO_CTA</span><span class="tag t-muted">CHAT_MOCKUP</span><span class="tag t-muted">QUOTE_SPOTLIGHT</span><span class="tag t-muted">SPLIT_PATHS</span><span class="tag t-muted">BAR_COMPARE</span><span class="tag t-muted">CHANNEL_CARD</span>.
+So diagrams, quotes, the only bar chart, and chat mockups look the same in all 30 designs.</div>
+
+<h2 id="scene">7 · Anatomy of one scene (real example)</h2>
+<div class="grid">
+  <div class="card">
+  <b>The JSON the AI writes</b>
+<pre style="overflow-x:auto;font-family:var(--mono);font-size:12.5px;color:#cfe">{
+  "id": "s03",
+  "type": "SPLIT_PATHS",
+  "narration": "Old search hands you
+     a list of blue links...",
+  "durationFrames": 354,
+  "background": "zoneA",
+  "data": {
+    "headline": "One query, [two results.]",
+    "headlineColor": "orange",
+    "center": {"title":"your search",
+               "color":"blue","atWord":2},
+    "left":  { "title":"Old search", ... },
+    "right": { "title":"AI search", ... },
+    "source": "Semrush, Mar 2026"
+  }
+}</pre>
+  </div>
+  <div class="card">
+  <b>How it becomes pixels</b>
+  <ol class="steps">
+    <li><code>type</code> → resolveScene picks the component (core <code>SplitPaths</code> here — no pack overrides it).</li>
+    <li><code>data.*</code> → fills the component's slots (headline, two path cards, center node, source footer).</li>
+    <li><code>[two results.]</code> → the bracketed phrase gets the accent color (exactly one per headline).</li>
+    <li><code>atWord:2</code> → element enters at frame <code>(2-1)×12 = 12</code> — "show it when you say it".</li>
+    <li><code>headlineColor:"orange"</code> → semantic meaning (tension/choice), mapped to the theme's hue via <code>useSem</code>.</li>
+    <li><code>durationFrames:354</code> → the Sequence width; ≈ words×12+30.</li>
+  </ol>
+  </div>
+</div>
+<p class="legend"><b>Semantic colors mean things:</b>
+<span style="color:var(--green)">green=works</span>
+<span style="color:var(--red)">red=broken</span>
+<span style="color:var(--blue)">blue=info/tech</span>
+<span style="color:var(--purple)">purple=AI/agent</span>
+<span style="color:var(--accent)">orange=tension</span>
+<span style="color:var(--yellow)">yellow=cost</span></p>
+
+<h2 id="files">8 · File-by-file knowledge map (the engine)</h2>
+<table>
+  <tr><th>File</th><th>Exports / role</th><th>Status</th></tr>
+  <tr><td class="file">src/types.ts</td><td>The data contract. <code>SceneData</code> (one big optional-field interface), <code>Scene</code>, <code>VideoSpec</code>, <code>BrandConfig</code>, <code>SemColor</code></td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">src/themes.ts</td><td>~40 <code>VideoTheme</code> objects + font loads + <code>ThemeProvider</code>, <code>useTheme</code>, <code>wordToFrame</code>, <code>FRAMES_PER_WORD</code></td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">src/anim.ts</td><td>Animation helpers — <b>only 4</b>: <code>fadeUp</code>, <code>springPop</code>, <code>stackIn</code>, <code>counterValue</code></td><td><span class="tag t-yellow">expand</span></td></tr>
+  <tr><td class="file">src/ui.tsx</td><td>Primitives: <code>useScale</code>, <code>useSem</code>, <code>hexA</code>, <code>Kicker</code>, <code>Panel</code>, <code>Pill</code>, <code>SourceFooter</code>, <code>Headline</code>, <code>DottedConnector</code>, <code>AccentSpan</code></td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">src/MainComposition.tsx</td><td>The renderer: registry, <code>resolveScene</code>/<code>resolveOverlay</code>, <code>SceneFade</code>, <code>Watermark</code>, <code>coverFrames</code>, <code>specDuration</code>, theme/design overrides</td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">src/Root.tsx</td><td>Registers every Composition + Still. Holds a <code>DARK_THEMES</code> copy</td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">src/topicsIndex.ts</td><td>AUTO-GENERATED map of topics → specs. Never hand-edit</td><td><span class="tag t-blue">generated</span></td></tr>
+  <tr><td class="file">src/scenes/*.tsx</td><td>23 core scene components (fallback for every pack) — now incl. <code>DIAGRAM</code> (flow/sequence/block/tree/hub), <code>KINETIC_TEXT</code> (8 FX), <code>PHOTO</code>, <code>SOUND_WAVE</code>, <code>REVEAL</code>, <code>LOGO_REVEAL</code>, <code>CAROUSEL</code>, <code>CREDITS_ROLL</code>, <code>SUBSCRIBE_REMINDER</code></td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">src/designs/&lt;pack&gt;/*</td><td>30 packs × {primitives, scenes, index}; each overrides 5 types + a Chrome</td><td><span class="tag t-yellow">extend</span></td></tr>
+  <tr><td class="file">src/Background.tsx</td><td>Per-scene gradient + optional grid / top-glow / aurora blobs (drift = sin(frame/90)) + animated effects incl. <code>matrix-rain</code> and <code>noise</code></td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">src/SceneFx.tsx</td><td>Opt-in cinematic wrapper via <code>scene.fx</code>: <code>letterbox</code> · <code>vignette</code> · <code>shake</code> · <code>burst</code> (one-shot particle explosion). Deterministic overlays</td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">src/AssetIcon.tsx · Connector · CoverCard · Thumbnail</td><td>Icon resolver (lucide:/si:/img:), connectors, cover/thumbnail stills</td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">scripts/lint-spec.mjs</td><td>The critic: budgets, semantics, timing, anchors, asset existence. Holds a <code>DARK_THEMES</code> copy</td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">scripts/*.mjs</td><td>new-topic, lint-all, render-topic, proof, gen-index, gen-chapters, gen-voiceover, sync, archive, package-video</td><td><span class="tag t-green">live</span></td></tr>
+  <tr><td class="file">.claude/skills/tech-video-director/</td><td>The creative law: SKILL.md + 12 references (scene_library, text_budgets, critic_checklist, design_contract, stage_workflow, channel_playbook…)</td><td><span class="tag t-green">live</span></td></tr>
+</table>
+
+<h2 id="gaps">9 · Why two videos still feel like the same film</h2>
+<div class="ok note"><b>Update — largely resolved.</b> The gaps below were the original diagnosis. Since then the core scene library grew from 14 to 23 types: real <b>diagrams</b> (flow/sequence/block/tree/hub with animated connectors + arrowheads), <b>dynamic text</b> (<code>KINETIC_TEXT</code>, 8 FX), <b>media</b> (<code>PHOTO</code> Ken-Burns with real sourced images, <code>SOUND_WAVE</code>, <code>CAROUSEL</code>), plus <code>REVEAL</code>, <code>LOGO_REVEAL</code>, <code>CREDITS_ROLL</code> and <code>SUBSCRIBE_REMINDER</code>. A <code>scene.fx</code> layer adds letterbox / vignette / shake / particle-burst, and two animated backgrounds (matrix-rain, noise) joined the set. The linter + critic now enforce an anti-monotony law. Proof: the <span class="file">how-llms-work</span> video below leans on all of it.</div>
+<div class="grid">
+  <div class="card warn note"><b>a · Scene variety is shallow.</b> 5 of ~14 scene types are pack-aware; 9 are identical everywhere. Charts, diagrams, quotes, chat all render one way.</div>
+  <div class="card warn note"><b>b · The motion vocabulary is tiny.</b> Four helpers (fadeUp / springPop / stackIn / counterValue) + one cross-fade. Every entrance, emphasis and transition looks the same regardless of design or topic.</div>
+  <div class="card warn note"><b>c · No data-viz, no code window.</b> The only "chart" is BAR_COMPARE. There is no line/area/donut/progress-ring/timeline/quadrant, and no editor/terminal that types code and shows output — a huge miss for technical topics.</div>
+  <div class="card warn note"><b>d · The screenplay is fixed.</b> Scene order & pacing are effectively one template per format, so timelines feel stamped from a mold instead of edited.</div>
+</div>
+
+<h2 id="plan">10 · The plan — what we build next</h2>
+<p>All of it is <b>reusable template infrastructure</b>, respecting the Design Contract (Three Guards, ×scale, both-aspect proofs, deterministic motion). Proposed in five workstreams:</p>
+
+<div class="card">
+  <span class="tag t-purple">WS-1</span> <b>Motion library</b> — grow <span class="file">src/anim.ts</span> into <span class="file">src/motion/</span>: entrances (slide, mask-wipe, clip-reveal, blur-in, scale-pop), emphasis (pulse, shake, highlight-sweep), text reveals (typewriter, word/char stagger), number odometer & count-up variants, path-draw, camera push/parallax, and stagger utilities. Theme-aware, ×scale-safe, clamped.
+</div>
+<div class="card">
+  <span class="tag t-blue">WS-2</span> <b>Chart / data-viz primitives</b> — a <span class="file">src/charts/</span> kit: animated line, area, grouped/stacked bars, bar-over-time (race), donut/pie, progress rings, comparison/before-after, timeline, scatter/quadrant. New <code>SceneData</code> fields + new scene types (e.g. <code>LINE_CHART</code>, <code>DONUT</code>, <code>TIMELINE</code>, <code>QUADRANT</code>), fully theme-colored and budget-linted. Reference grammar borrowed from the 81-template RVE library (chart set) but rebuilt to our contract.
+</div>
+<div class="card">
+  <span class="tag t-green">WS-3</span> <b>Code-window component</b> — a realistic editor/terminal scene (<code>CODE_WINDOW</code>): typed code with theme-driven syntax colors, a run/output state, and a typing animation. Great for technical topics; styled per theme (mock-window chrome for moderndark, phosphor for terminalcli, etc.).
+</div>
+<div class="card">
+  <span class="tag t-yellow">WS-4</span> <b>Deepen the packs</b> — give the currently-core-only scene types pack-aware variety where it matters most (CONCEPT_DIAGRAM, QUOTE_SPOTLIGHT, BAR_COMPARE) and add new scene archetypes so the screenplay has more building blocks.
+</div>
+<div class="card">
+  <span class="tag t-red">WS-5</span> <b>Screenplay system</b> — presets for scene order + pacing (e.g. "explainer", "listicle", "versus", "deep-dive", "hype-launch") the director can pick from, plus rhythm/emphasis-beat guidance. Enables different component mixes per video and per pack, so no two timelines feel templated.
+</div>
+
+<div class="ok note"><b>Verification at every step:</b> <code>tsc --noEmit</code> clean · <code>lint-all.mjs</code> green · proof stills at BOTH 1920×1080 and 1080×1920 · existing renders never broken (additive first). New themes/design names get added to <code>DARK_THEMES</code> in <em>both</em> Root.tsx and lint-spec.mjs.</div>
+
+<h2 id="coverage">11 · The 81-template coverage + the critic</h2>
+<p>All 81 real <code>.tsx</code> files were read (not just the README), and each mapped in <span class="file">scripts/catalog.mjs</span> (<code>RVE_81</code>). Their distinctive techniques were ported faithfully into our deterministic, theme-aware contract — note: 7 of the originals use <code>Math.random()</code> or CSS <code>@keyframes</code> (non-deterministic / Next.js-only) and were reauthored as pure <code>useCurrentFrame</code> functions. <b>The library is complete</b> — every high- and medium-value template is built and proofed in both aspects; only two purely-decorative one-offs (subscribe-reminder overlap, film-burn) are optional, and even subscribe-reminder now ships as a scene.</p>
+<div class="grid3">
+  <div class="card"><span class="tag t-green">core · 13</span><p class="small">Already a scene type (bar, stat-counter, list, title, end-card, quote…).</p></div>
+  <div class="card"><span class="tag t-blue">added · 33</span><p class="small">New scene types + transitions + backgrounds (charts, code, widgets, diagrams, media scenes, 11 transitions, animated backgrounds incl. matrix-rain + noise).</p></div>
+  <div class="card"><span class="tag t-purple">motion · 30</span><p class="small">Reusable helpers in <span class="file">src/motion/</span> (typewriter, glitch, ken-burns, parallax, spotlight, bounce, particle burst, sound-wave…).</p></div>
+  <div class="card"><span class="tag t-green">carousel + credits + burst · built</span><p class="small">Previously deferred — now shipped as <code>CAROUSEL</code> (3D depth ring), <code>CREDITS_ROLL</code>, and the <code>burst</code> particle FX.</p></div>
+  <div class="card"><span class="tag t-yellow">deferred · ~1</span><p class="small">Only film-burn remains, an off-grammar decorative overlay with a stated reason.</p></div>
+  <div class="card"><span class="tag t-muted">= 81 considered</span><p class="small">Run <code>npm run critique</code> to print the live tally + a full per-scene review.</p></div>
+</div>
+<h3>The critic — a design review for every scene</h3>
+<p><span class="file">scripts/critique.mjs</span> reads a spec and reviews each scene on ten dimensions — the same ones a design manager would ask about:</p>
+<table>
+  <tr><th>Dimension</th><th>What it checks</th></tr>
+  <tr><td>Context</td><td>Is this the right component for the beat's intent (chart-by-intent)?</td></tr>
+  <tr><td>Display</td><td>Middle-band layout: headline top, content centred, source bottom, edges clear.</td></tr>
+  <tr><td>Aspect</td><td>How it reflows wide (1920×1080) vs vertical (1080×1920).</td></tr>
+  <tr><td>Colour</td><td>Semantic meaning; adapts to dark theme AND light twin via <code>useSem</code>.</td></tr>
+  <tr><td>Fonts</td><td>display / body / mono roles; ≤3 families per frame.</td></tr>
+  <tr><td>Motion</td><td>Entrances 12–18f, anchored to <code>atWord</code>, one focus per frame.</td></tr>
+  <tr><td>Assets</td><td>Every icon/logo/image + its licensed source; <code>img:</code> present or MISSING.</td></tr>
+  <tr><td>Align</td><td>Fits parent; known overflow/overlay traps flagged.</td></tr>
+  <tr><td>Timing</td><td>durationFrames vs words; anchors ≤ word count.</td></tr>
+  <tr><td>Neighbours</td><td>Previous/next scene; no same-type or same-widget back-to-back.</td></tr>
+</table>
+<p class="small">It runs alongside the hard-budget linter: <code>npm run lint</code> is the pass/fail gate, <code>npm run critique</code> is the qualitative review the director reads before shipping. Both are now referenced in the <span class="file">tech-video-director</span> skill (steps 4 &amp; 6).</p>
+
+<hr>
+<p class="small">Generated as a comprehension aid for the creative-range expansion phase. Diagrams render via Mermaid (needs internet on first open). Nothing in the engine was changed to produce this document.</p>
+</div>
+<script>
+  mermaid.initialize({startOnLoad:true,theme:'dark',themeVariables:{
+    primaryColor:'#141416',primaryTextColor:'#F5F5F7',primaryBorderColor:'#26262B',
+    lineColor:'#8A8A93',fontFamily:'Space Grotesk, Inter, sans-serif',fontSize:'14px'
+  }});
+</script>
+</body>
+</html>

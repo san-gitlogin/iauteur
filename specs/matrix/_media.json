@@ -1,0 +1,176 @@
+{
+  "meta": {"topic": "media family proof", "format": "long", "fps": 30},
+  "brand": {"theme": "creatorGlow", "background": "ember"},
+  "scenes": [
+    {
+      "id": "vh-min",
+      "type": "VIDEO_HERO",
+      "narration": "A missing clip becomes a designed placeholder, never a black frame.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"videoHero": {"kicker": "NO SOURCE", "headline": "No clip yet — a designed placeholder here", "color": "orange", "treatment": "scrim", "atWord": 2}}
+    },
+    {
+      "id": "vh-max",
+      "type": "VIDEO_HERO",
+      "narration": "The product, in motion, carries the whole headline in a band.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"videoHero": {"src": "assets/video/demo_ui.mp4", "kicker": "LIVE PRODUCT DEMO", "headline": "Everything you need to know, in one moving clip", "sub": "an italic secondary line for roles and attribution stays inside", "color": "red", "treatment": "focus", "zoom": true, "atWord": 3}},
+      "pip": {"src": "assets/video/demo_webcam.mp4", "position": "br", "size": "md", "label": "HOST", "atWord": 1, "color": "orange"}
+    },
+    {
+      "id": "vh-mix",
+      "type": "VIDEO_HERO",
+      "narration": "A scrim treatment keeps the headline legible over live footage.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"videoHero": {"src": "assets/video/demo_flow.mp4", "headline": "Legible over live footage", "sub": "muted false ducks the clip under narration", "color": "blue", "treatment": "scrim", "muted": false, "atWord": 2}}
+    },
+    {
+      "id": "vh-pip",
+      "type": "TITLE_CARD",
+      "narration": "The scene level pip slot rides above any component as one overlay.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"title": "PiP over any scene", "subtitle": "one shared overlay layer"},
+      "pip": {"src": "assets/video/demo_webcam.mp4", "position": "left-third", "size": "sm", "label": "CREATOR", "atWord": 1, "color": "red"}
+    },
+    {
+      "id": "vs-min",
+      "type": "VIDEO_SPOTLIGHT",
+      "narration": "A missing spotlight clip falls back to a framed webcam placeholder.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"videoSpotlight": {"kicker": "GUEST", "name": "No Clip Placeholder Name Here", "role": "a framed webcam placeholder, never a black rectangle", "color": "orange", "atWord": 1}}
+    },
+    {
+      "id": "vs-max",
+      "type": "VIDEO_SPOTLIGHT",
+      "narration": "The spotlight frames a guest with their name and italic role below.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"videoSpotlight": {"src": "assets/video/demo_webcam.mp4", "kicker": "SPECIAL GUEST", "name": "Alex Rivera Montgomery", "role": "Principal Engineer, Platform Reliability & Observability", "color": "red", "muted": false, "audioGaps": [[40, 80]], "atWord": 1}}
+    },
+    {
+      "id": "mc-min",
+      "type": "MEDIA_CALLOUT",
+      "narration": "A callout with no clip still points at a region over the placeholder.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"mediaCallout": {"headline": "One pin, no clip", "color": "orange", "callouts": [{"x": 0.4, "y": 0.5, "label": "right here", "color": "orange", "side": "right", "atWord": 2}]}}
+    },
+    {
+      "id": "mc-max",
+      "type": "MEDIA_CALLOUT",
+      "narration": "Five callouts track fixed regions of the clip with pins and a highlight.",
+      "durationFrames": 240,
+      "background": "zoneB",
+      "data": {"mediaCallout": {"src": "assets/video/demo_ui.mp4", "headline": "Everything, annotated clearly", "color": "red", "treatment": "scrim", "muted": false, "audioGaps": [[50, 95]], "callouts": [{"x": 0.22, "y": 0.28, "label": "the top-left control", "color": "orange", "side": "right", "atWord": 1}, {"x": 0.78, "y": 0.3, "label": "the status readout here", "color": "blue", "side": "left", "hw": 0.24, "hh": 0.12, "atWord": 2}, {"x": 0.3, "y": 0.72, "label": "the input field", "color": "green", "side": "up", "atWord": 3}, {"x": 0.72, "y": 0.74, "label": "the submit action", "color": "purple", "side": "up", "atWord": 4}, {"x": 0.5, "y": 0.5, "label": "the focal center point", "color": "yellow", "side": "down", "atWord": 5}]}}
+    },
+    {
+      "id": "mc-mix",
+      "type": "MEDIA_CALLOUT",
+      "narration": "The same callouts work over a still image, not just a clip.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"mediaCallout": {"src": "assets/server-racks.jpg", "kind": "image", "headline": "Works over an image too", "color": "blue", "treatment": "scrim", "callouts": [{"x": 0.32, "y": 0.4, "label": "a rack unit", "color": "blue", "side": "right", "hw": 0.18, "hh": 0.3, "atWord": 2}, {"x": 0.7, "y": 0.55, "label": "the cabling", "color": "orange", "side": "left", "atWord": 4}]}}
+    },
+    {
+      "id": "mp-min",
+      "type": "MEDIA_COMPARE",
+      "narration": "With no clips the compare falls back to two designed placeholders.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"mediaCompare": {"headline": "No clips yet — placeholders", "color": "orange", "vs": true, "atWord": 1, "a": {"label": "Left Side Placeholder"}, "b": {"label": "Right Side Placeholder"}}}
+    },
+    {
+      "id": "mp-max",
+      "type": "MEDIA_COMPARE",
+      "narration": "Two clips compare side by side with labels captions and a versus badge.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"mediaCompare": {"headline": "The old flow versus the new", "color": "red", "vs": true, "mode": "split", "atWord": 1, "a": {"src": "assets/video/demo_grid.mp4", "label": "Before Change", "caption": "the previous checkerboard flow", "color": "blue"}, "b": {"src": "assets/video/demo_flow.mp4", "label": "After Change", "caption": "the new plasma flow, smoother", "color": "green"}}}
+    },
+    {
+      "id": "mp-mix",
+      "type": "MEDIA_COMPARE",
+      "narration": "A wipe divider reveals one image over another, image to image.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"mediaCompare": {"mode": "wipe", "color": "orange", "atWord": 1, "a": {"src": "assets/network.jpg", "kind": "image", "label": "Network", "color": "blue"}, "b": {"src": "assets/server-racks.jpg", "kind": "image", "label": "Racks", "color": "orange"}}}
+    },
+    {
+      "id": "ms-min",
+      "type": "MEDIA_STAT_OVERLAY",
+      "narration": "With no clip one stat still lands over the placeholder backdrop.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"mediaStat": {"headline": "One stat, no clip", "color": "orange", "stats": [{"value": 42, "suffix": "%", "label": "no clip fallback", "color": "orange", "atWord": 1}]}}
+    },
+    {
+      "id": "ms-max",
+      "type": "MEDIA_STAT_OVERLAY",
+      "narration": "Three big numbers count up over the footage in glass cards with labels.",
+      "durationFrames": 240,
+      "background": "zoneB",
+      "data": {"mediaStat": {"src": "assets/video/demo_flow.mp4", "headline": "The numbers that matter most", "color": "red", "treatment": "scrim", "muted": false, "audioGaps": [[50, 95]], "stats": [{"value": 1500000000, "label": "requests per day", "color": "orange", "atWord": 1}, {"value": 99, "suffix": "%", "label": "measured uptime", "color": "green", "atWord": 2}, {"value": 12500, "prefix": "$", "label": "saved monthly", "color": "blue", "atWord": 3}]}}
+    },
+    {
+      "id": "ms-mix",
+      "type": "MEDIA_STAT_OVERLAY",
+      "narration": "The same stat band works over a still image, not just a clip.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"mediaStat": {"src": "assets/datacenter.jpg", "kind": "image", "headline": "Over an image too", "color": "blue", "treatment": "scrim", "stats": [{"value": 8400000, "label": "cores online", "color": "blue", "atWord": 1}, {"value": 3, "suffix": "ms", "label": "p50 latency", "color": "green", "atWord": 3}]}}
+    },
+    {
+      "id": "vd-clip",
+      "type": "DEVICE_FRAME",
+      "narration": "A live app demo clip plays inside the phone screen surface.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"device": {"headline": "The app in motion", "os": "ios", "color": "orange", "content": {"kind": "clip", "src": "assets/video/demo_ui.mp4", "label": "App Demo"}}}
+    },
+    {
+      "id": "vd-img",
+      "type": "DEVICE_FRAME",
+      "narration": "A screenshot image fills the same phone screen, src agnostic.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"device": {"headline": "A screenshot fills it", "os": "android", "color": "blue", "content": {"kind": "clip", "mediaKind": "image", "src": "assets/server.jpg", "label": "Screenshot"}}}
+    },
+    {
+      "id": "vd-base",
+      "type": "DEVICE_FRAME",
+      "narration": "The original device frame card grid and notification are unchanged.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"device": {"headline": "Base regression check", "os": "ios", "color": "green", "content": {"kind": "cardGrid", "cards": [{"title": "Inbox", "sub": "3 new", "asset": "lucide:mail", "color": "blue"}, {"title": "Calendar", "sub": "2 events", "asset": "lucide:calendar", "color": "green"}, {"title": "Tasks", "sub": "5 due", "asset": "lucide:square-check", "color": "orange"}]}, "notification": {"app": "Messages", "text": "Ada sent you a photo", "atWord": 4}}}
+    },
+    {
+      "id": "cg-clips",
+      "type": "GALLERY",
+      "narration": "Four short clips reveal one after another in a grid with captions.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"headline": "The clips grid", "headlineColor": "orange", "gallery": {"variant": "clips", "tiles": [{"src": "assets/video/demo_ui.mp4", "label": "Interface", "color": "orange", "atWord": 1}, {"src": "assets/video/demo_flow.mp4", "label": "Dataflow", "color": "blue", "atWord": 2}, {"src": "assets/video/demo_grid.mp4", "label": "Layout", "color": "green", "atWord": 3}, {"src": "assets/video/demo_webcam.mp4", "label": "Camera", "color": "purple", "atWord": 4}]}}
+    },
+    {
+      "id": "cg-img",
+      "type": "GALLERY",
+      "narration": "The same clip grid works with still images as tiles.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"headline": "Image tiles too", "headlineColor": "blue", "gallery": {"variant": "clips", "tiles": [{"src": "assets/network.jpg", "kind": "image", "label": "Network", "color": "blue", "atWord": 1}, {"src": "assets/server-racks.jpg", "kind": "image", "label": "Racks", "color": "orange", "atWord": 2}, {"src": "assets/datacenter.jpg", "kind": "image", "label": "Center", "color": "green", "atWord": 3}]}}
+    },
+    {
+      "id": "cg-base",
+      "type": "GALLERY",
+      "narration": "The original icon tile gallery still renders unchanged as a regression.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"headline": "Base gallery regression", "headlineColor": "green", "gallery": {"tiles": [{"asset": "si:react", "label": "React", "color": "blue", "atWord": 1}, {"asset": "si:typescript", "label": "TypeScript", "color": "blue", "atWord": 2}, {"asset": "si:nodedotjs", "label": "Node", "color": "green", "atWord": 3}, {"asset": "si:python", "label": "Python", "color": "orange", "atWord": 4}]}}
+    }
+  ]
+}

@@ -1,0 +1,534 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "CODE_WINDOW-min",
+      "type": "CODE_WINDOW",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "code": {
+          "filename": "hello.js",
+          "language": "js",
+          "lines": [
+            {
+              "text": "console.log('hi');"
+            }
+          ],
+          "runLabel": "node hello.js"
+        }
+      }
+    },
+    {
+      "id": "CODE_WINDOW-max",
+      "type": "CODE_WINDOW",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "code": {
+          "filename": "src/server/http-listener.ts",
+          "language": "ts",
+          "runLabel": "node dist/server/http-listener.js",
+          "lines": [
+            {
+              "text": "import http from 'node:http';"
+            },
+            {
+              "text": "const PORT = process.env.PORT ?? 8080;"
+            },
+            {
+              "text": "const server = http.createServer((req, res) => {"
+            },
+            {
+              "text": "  const url = new URL(req.url, 'http://x');"
+            },
+            {
+              "text": "  if (url.pathname === '/health') {",
+              "color": "blue"
+            },
+            {
+              "text": "    res.writeHead(200, {'x':'application/json'});"
+            },
+            {
+              "text": "    return res.end('{ ok: true }');"
+            },
+            {
+              "text": "  }"
+            },
+            {
+              "text": "  res.writeHead(404);"
+            },
+            {
+              "text": "  res.end('not found');"
+            },
+            {
+              "text": "});"
+            },
+            {
+              "text": "server.listen(PORT, onReady);"
+            }
+          ],
+          "output": [
+            {
+              "text": "> node server.js"
+            },
+            {
+              "text": "listening on http://localhost:8080",
+              "color": "green"
+            },
+            {
+              "text": "GET /health 200 3ms"
+            },
+            {
+              "text": "GET /users 404 1ms",
+              "color": "orange"
+            },
+            {
+              "text": "GET /favicon.ico 404 0ms",
+              "color": "orange"
+            },
+            {
+              "text": "^C  server closed cleanly"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CODE_EDITOR-min",
+      "type": "CODE_EDITOR",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "editor": {
+          "lang": "py",
+          "lines": [
+            "print('hi')"
+          ]
+        }
+      }
+    },
+    {
+      "id": "CODE_EDITOR-max",
+      "type": "CODE_EDITOR",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "editor": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "lang": "typescript",
+          "tabs": [
+            {
+              "name": "server.ts",
+              "active": true
+            },
+            {
+              "name": "routes.ts"
+            },
+            {
+              "name": "db.ts"
+            }
+          ],
+          "highlight": {
+            "from": 5,
+            "to": 5,
+            "color": "red"
+          },
+          "squiggle": {
+            "line": 5,
+            "message": "'NotFound' is not defined (ts2304)"
+          },
+          "lines": [
+            "export function handler(req) {",
+            "  const id = req.params.id;",
+            "  const user = db.find(id);",
+            "  if (!user) {",
+            "    throw new NotFound(id);",
+            "  }",
+            "  return json(user);",
+            "}",
+            "// end of request handler here",
+            "export default handler;"
+          ]
+        }
+      }
+    },
+    {
+      "id": "CODE_EDITOR-split",
+      "type": "CODE_EDITOR",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "editor": {
+          "headline": "A [split] IDE with a terminal pane",
+          "color": "green",
+          "variant": "split",
+          "lang": "python",
+          "tabs": [
+            {
+              "name": "main.py",
+              "active": true
+            }
+          ],
+          "lines": [
+            "def main() -> int:",
+            "    data = load('input.json')",
+            "    total = sum(x.value for x in data)",
+            "    print(f'total = {total}')",
+            "    return 0"
+          ],
+          "terminal": {
+            "promptLabel": "app",
+            "cmd": "python main.py",
+            "output": [
+              "total = 4212",
+              "process finished, exit code 0"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "CODE_DIFF-min",
+      "type": "CODE_DIFF",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "diff": {
+          "fileName": "README.md",
+          "rows": [
+            {
+              "kind": "del",
+              "text": "old getting-started line"
+            },
+            {
+              "kind": "add",
+              "text": "new getting-started line"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CODE_DIFF-max",
+      "type": "CODE_DIFF",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "diff": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "green",
+          "fileName": "src/api/rate-limiter.ts",
+          "stat": {
+            "plus": 5,
+            "minus": 2
+          },
+          "rows": [
+            {
+              "kind": "ctx",
+              "text": "export function limit(key, max, windowMs) {"
+            },
+            {
+              "kind": "ctx",
+              "text": "  const now = Date.now();"
+            },
+            {
+              "kind": "del",
+              "text": "  const hits = store.get(key) || [];"
+            },
+            {
+              "kind": "add",
+              "text": "  const hits = (store.get(key) ?? []).slice();"
+            },
+            {
+              "kind": "ctx",
+              "text": "  const fresh = hits.filter(t => t > cut);"
+            },
+            {
+              "kind": "del",
+              "text": "  if (fresh.length >= max) return false;"
+            },
+            {
+              "kind": "add",
+              "text": "  if (fresh.length >= max) {"
+            },
+            {
+              "kind": "add",
+              "text": "    log.warn('rate limit hit for ' + key);"
+            },
+            {
+              "kind": "add",
+              "text": "    return false;"
+            },
+            {
+              "kind": "add",
+              "text": "  }"
+            },
+            {
+              "kind": "ctx",
+              "text": "  fresh.push(now);"
+            },
+            {
+              "kind": "ctx",
+              "text": "  return true;"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TERMINAL_SESSION-min",
+      "type": "TERMINAL_SESSION",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "terminal": {
+          "commands": [
+            {
+              "cmd": "whoami",
+              "output": [
+                "root"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TERMINAL_SESSION-max",
+      "type": "TERMINAL_SESSION",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "terminal": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "green",
+          "promptLabel": "deploy@prod-web-01",
+          "cwd": "/srv/app/current",
+          "commands": [
+            {
+              "cmd": "git pull --rebase origin main",
+              "output": [
+                "Updating a1b2c3d..e4f5g6h",
+                "Fast-forward, 12 files changed"
+              ],
+              "exitCode": 0
+            },
+            {
+              "cmd": "npm ci && npm run build",
+              "output": [
+                "added 812 packages in 21s",
+                "build complete in 34.2s"
+              ],
+              "exitCode": 0
+            },
+            {
+              "cmd": "pm2 reload ecosystem.config.js --update-env",
+              "output": [
+                "[PM2] Applying action reloadProcessId",
+                "[PM2] web online  (pid 20481)"
+              ],
+              "exitCode": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "LOG_STREAM-min",
+      "type": "LOG_STREAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "logs": {
+          "lines": [
+            {
+              "level": "info",
+              "tag": "app",
+              "text": "server started"
+            },
+            {
+              "level": "info",
+              "tag": "app",
+              "text": "ready on :3000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "LOG_STREAM-max",
+      "type": "LOG_STREAM",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "logs": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "orange",
+          "rate": "4.2k lines/s",
+          "highlight": 6,
+          "lines": [
+            {
+              "level": "info",
+              "tag": "gateway",
+              "text": "request GET /v1/checkout received"
+            },
+            {
+              "level": "debug",
+              "tag": "auth",
+              "text": "token verified for user 48213"
+            },
+            {
+              "level": "info",
+              "tag": "cart",
+              "text": "loaded 3 items, subtotal 128.40 USD"
+            },
+            {
+              "level": "info",
+              "tag": "payment",
+              "text": "charge intent created pi_3Nk..."
+            },
+            {
+              "level": "warn",
+              "tag": "payment",
+              "text": "gateway latency 1840ms over budget"
+            },
+            {
+              "level": "warn",
+              "tag": "inventory",
+              "text": "stock low for sku 77-A (2 left)"
+            },
+            {
+              "level": "error",
+              "tag": "payment",
+              "text": "declined: insufficient_funds (402)"
+            },
+            {
+              "level": "info",
+              "tag": "cart",
+              "text": "rolled back reservation for order"
+            },
+            {
+              "level": "debug",
+              "tag": "gateway",
+              "text": "response 402 in 2103ms"
+            },
+            {
+              "level": "info",
+              "tag": "metrics",
+              "text": "emitted 6 spans to collector"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ERROR_TRACE-min",
+      "type": "ERROR_TRACE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "callStack": {
+          "mode": "trace",
+          "exception": "Error: boom",
+          "frames": [
+            {
+              "fn": "main",
+              "file": "app.js",
+              "line": 3
+            },
+            {
+              "fn": "boot",
+              "file": "app.js",
+              "line": 9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ERROR_TRACE-max",
+      "type": "ERROR_TRACE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "callStack": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "red",
+          "mode": "trace",
+          "culprit": 2,
+          "exception": "TypeError: undefined is not a function here",
+          "frames": [
+            {
+              "fn": "renderInvoice",
+              "sub": "invoice = orders[idx]",
+              "file": "invoice.tsx",
+              "line": 88
+            },
+            {
+              "fn": "mapOrdersToRows",
+              "sub": "rows.map(renderInvoice)",
+              "file": "table.tsx",
+              "line": 142
+            },
+            {
+              "fn": "InvoiceTable.render",
+              "sub": "props.orders (undefined)",
+              "file": "table.tsx",
+              "line": 37,
+              "color": "red"
+            },
+            {
+              "fn": "renderWithHooks",
+              "sub": "current = workInProgress",
+              "file": "react-dom.js",
+              "line": 15008
+            },
+            {
+              "fn": "mountIndeterminate",
+              "sub": "fiber = workInProgress",
+              "file": "react-dom.js",
+              "line": 19212
+            },
+            {
+              "fn": "workLoopSync",
+              "sub": "flushWork(deadline)",
+              "file": "scheduler.js",
+              "line": 2634
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

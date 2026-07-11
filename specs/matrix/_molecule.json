@@ -1,0 +1,28 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "MOLECULE-min", "type": "MOLECULE", "narration": "Water, one oxygen and two hydrogens bent at an angle right now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [water] molecule.", "headlineColor": "blue", "molecule": {"color": "blue", "atoms": [
+      {"label": "O", "x": 0.5, "y": 0.35},
+      {"label": "H", "x": 0.28, "y": 0.68},
+      {"label": "H", "x": 0.72, "y": 0.68}], "bonds": [{"from": 0, "to": 1, "order": 1}, {"from": 0, "to": 2, "order": 1}], "name": "H\u2082O \u2014 water", "atWord": 1}}},
+    {"id": "MOLECULE-max", "type": "MOLECULE", "narration": "A benzene ring, six carbons in a hexagon with alternating double bonds and a hydrogen on each, the classic aromatic structure.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "The [benzene] ring at cap", "headlineColor": "purple", "source": "ILLUSTRATIVE", "molecule": {"color": "purple", "atoms": [
+      {"label": "C", "x": 0.5, "y": 0.16},
+      {"label": "C", "x": 0.78, "y": 0.34},
+      {"label": "C", "x": 0.78, "y": 0.66},
+      {"label": "C", "x": 0.5, "y": 0.84},
+      {"label": "C", "x": 0.22, "y": 0.66},
+      {"label": "C", "x": 0.22, "y": 0.34},
+      {"label": "H", "x": 0.5, "y": 0.02},
+      {"label": "H", "x": 0.95, "y": 0.25},
+      {"label": "H", "x": 0.95, "y": 0.75},
+      {"label": "H", "x": 0.5, "y": 0.98},
+      {"label": "H", "x": 0.05, "y": 0.75},
+      {"label": "H", "x": 0.05, "y": 0.25}],
+      "bonds": [
+      {"from": 0, "to": 1, "order": 2}, {"from": 1, "to": 2, "order": 1}, {"from": 2, "to": 3, "order": 2},
+      {"from": 3, "to": 4, "order": 1}, {"from": 4, "to": 5, "order": 2}, {"from": 5, "to": 0, "order": 1},
+      {"from": 0, "to": 6, "order": 1}, {"from": 1, "to": 7, "order": 1}, {"from": 2, "to": 8, "order": 1},
+      {"from": 3, "to": 9, "order": 1}, {"from": 4, "to": 10, "order": 1}, {"from": 5, "to": 11, "order": 1}],
+      "name": "C\u2086H\u2086 \u2014 benzene", "atWord": 1}}}
+  ]
+}

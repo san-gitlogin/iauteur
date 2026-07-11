@@ -1,0 +1,128 @@
+{
+  "meta": {"topic": "variant proof", "format": "long", "fps": 30},
+  "brand": {"theme": "creatorGlow", "background": "ember", "channel": "Demo Channel", "logo": "lucide:tv"},
+  "scenes": [
+    {
+      "id": "sub-max",
+      "type": "CHANNEL_CARD",
+      "narration": "A subscribe chip with avatar name handle and button slides in over the clip.",
+      "durationFrames": 200,
+      "background": "zoneB",
+      "data": {"subChip": {"src": "assets/video/demo_flow.mp4", "name": "Tech Explained Daily", "handle": "@techexplaineddaily", "avatar": "lucide:cpu", "buttonLabel": "SUBSCRIBE", "color": "red", "atWord": 1}}
+    },
+    {
+      "id": "sub-img",
+      "type": "CHANNEL_CARD",
+      "narration": "The subscribe chip works over a still image backdrop too.",
+      "durationFrames": 200,
+      "background": "zoneC",
+      "data": {"subChip": {"src": "assets/network.jpg", "kind": "image", "name": "Network Notes", "handle": "@networknotes", "avatar": "lucide:network", "color": "blue", "atWord": 1}}
+    },
+    {
+      "id": "sub-base",
+      "type": "CHANNEL_CARD",
+      "narration": "The original full subscribe card still renders unchanged as a regression.",
+      "durationFrames": 200,
+      "background": "zoneA",
+      "data": {"handle": "@yourchannel", "tagline": "New videos every week", "atWord": 1}
+    },
+    {
+      "id": "tp-min",
+      "type": "TALKING_POINTS",
+      "narration": "With no clip the placeholder frame sits beside two talking points.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"talkingPoints": {"media": "left", "headline": "Two points", "lead": "even with no clip the layout holds", "color": "orange", "points": [{"text": "The first key talking point here", "color": "blue", "atWord": 1}, {"text": "The second key talking point here", "color": "green", "atWord": 3}]}}
+    },
+    {
+      "id": "tp-max",
+      "type": "TALKING_POINTS",
+      "narration": "A framed clip on the left sits beside a lead line and five accent bullets.",
+      "durationFrames": 240,
+      "background": "zoneB",
+      "data": {"talkingPoints": {"src": "assets/video/demo_ui.mp4", "media": "left", "headline": "Why this matters most", "lead": "five reasons this approach changes the game entirely", "color": "red", "muted": false, "audioGaps": [[50, 95]], "points": [{"text": "It runs in a single deterministic pass", "color": "blue", "atWord": 1}, {"text": "It is fully reproducible every time", "color": "green", "atWord": 2}, {"text": "It scales to billions of requests", "color": "purple", "atWord": 3}, {"text": "It cuts cost by an order of magnitude", "color": "orange", "atWord": 4}, {"text": "It ships today with zero migration", "color": "yellow", "atWord": 5}]}}
+    },
+    {
+      "id": "tp-img",
+      "type": "TALKING_POINTS",
+      "narration": "The framed image sits on the right beside the points.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"talkingPoints": {"src": "assets/server-racks.jpg", "kind": "image", "media": "right", "headline": "Image on the right", "color": "blue", "points": [{"text": "The image frames the subject", "color": "blue", "atWord": 1}, {"text": "Points read on the left", "color": "orange", "atWord": 3}]}}
+    },
+    {
+      "id": "sb-min",
+      "type": "SLIDE_BULLETS_PIP",
+      "narration": "A slide with a heading and two bullets and no pip.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"slideBullets": {"heading": "Two bullet slide", "color": "orange", "bullets": [{"text": "The first top level bullet point here", "color": "blue", "atWord": 1}, {"text": "The second top level bullet point here", "color": "green", "atWord": 3}]}}
+    },
+    {
+      "id": "sb-max",
+      "type": "SLIDE_BULLETS_PIP",
+      "narration": "A full slide reveals nested bullets word by word with a corner webcam pip.",
+      "durationFrames": 240,
+      "background": "zoneB",
+      "data": {"slideBullets": {"heading": "The six point slide deck", "color": "red", "bullets": [{"text": "First the top level idea lands clearly", "color": "blue", "atWord": 1}, {"text": "a supporting detail nested underneath it", "level": 1, "color": "blue", "atWord": 2}, {"text": "Then the second big idea arrives", "color": "green", "atWord": 3}, {"text": "with its own nested clarifying note", "level": 1, "color": "green", "atWord": 4}, {"text": "Finally the third idea closes it", "color": "orange", "atWord": 5}, {"text": "and a last nested takeaway line", "level": 1, "color": "orange", "atWord": 6}]}},
+      "pip": {"src": "assets/video/demo_webcam.mp4", "position": "br", "size": "sm", "label": "HOST", "atWord": 1, "color": "orange"}
+    },
+    {
+      "id": "sb-vid",
+      "type": "SLIDE_BULLETS_PIP",
+      "narration": "The slide also works over a dimmed video backdrop.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"slideBullets": {"heading": "Slide over footage", "src": "assets/video/demo_flow.mp4", "color": "blue", "bullets": [{"text": "Bullets stay legible over the dimmed clip", "color": "blue", "atWord": 1}, {"text": "the backdrop is softly blurred", "level": 1, "color": "blue", "atWord": 3}, {"text": "and the divider still glows", "color": "green", "atWord": 5}]}}
+    },
+    {
+      "id": "ck-min",
+      "type": "CAPTION_KINETIC_OVERLAY",
+      "narration": "With no clip the caption lands word by word over the placeholder.",
+      "durationFrames": 200,
+      "background": "zoneA",
+      "data": {"captionKinetic": {"caption": "No clip but the [caption] still lands", "color": "orange", "position": "bottom", "atWord": 1}}
+    },
+    {
+      "id": "ck-max",
+      "type": "CAPTION_KINETIC_OVERLAY",
+      "narration": "A big lower caption stacks word by word over the moving footage with an accent phrase.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"captionKinetic": {"src": "assets/video/demo_flow.mp4", "caption": "This one idea changes [absolutely everything] you thought", "color": "red", "position": "bottom", "muted": false, "audioGaps": [[40, 80]], "atWord": 1}},
+      "pip": {"src": "assets/video/demo_webcam.mp4", "position": "tl", "size": "sm", "label": "HOST", "atWord": 1, "color": "orange"}
+    },
+    {
+      "id": "ck-img",
+      "type": "CAPTION_KINETIC_OVERLAY",
+      "narration": "A centered caption lands over a still image backdrop.",
+      "durationFrames": 200,
+      "background": "zoneC",
+      "data": {"captionKinetic": {"src": "assets/datacenter.jpg", "kind": "image", "caption": "Scale you can [barely imagine]", "color": "blue", "position": "center", "atWord": 1}}
+    },
+    {
+      "id": "pht-min",
+      "type": "PHOTO_TIMELINE",
+      "narration": "Two placeholder thumbnails reveal along the timeline rail.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"photoTimeline": {"headline": "Two moments", "color": "orange", "entries": [{"label": "First moment", "date": "2020", "color": "blue", "atWord": 1}, {"label": "Second moment", "date": "2024", "color": "green", "atWord": 3}]}}
+    },
+    {
+      "id": "pht-max",
+      "type": "PHOTO_TIMELINE",
+      "narration": "Five image thumbnails reveal one date at a time along the rail.",
+      "durationFrames": 240,
+      "background": "zoneB",
+      "data": {"photoTimeline": {"headline": "The full history so far", "color": "red", "entries": [{"src": "assets/network.jpg", "kind": "image", "label": "The network", "date": "2008", "color": "blue", "atWord": 1}, {"src": "assets/datacenter.jpg", "kind": "image", "label": "The data center", "date": "2012", "color": "orange", "atWord": 2}, {"src": "assets/server-racks.jpg", "kind": "image", "label": "The racks", "date": "2016", "color": "green", "atWord": 3}, {"src": "assets/network.jpg", "kind": "image", "label": "The edge", "date": "2020", "color": "purple", "atWord": 4}, {"src": "assets/datacenter.jpg", "kind": "image", "label": "The cloud", "date": "2024", "color": "yellow", "atWord": 5}]}}
+    },
+    {
+      "id": "pht-clip",
+      "type": "PHOTO_TIMELINE",
+      "narration": "Clip thumbnails also work along the timeline.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"photoTimeline": {"headline": "Clips on a timeline", "color": "blue", "entries": [{"src": "assets/video/demo_ui.mp4", "kind": "video", "label": "The interface", "date": "v1", "color": "blue", "atWord": 1}, {"src": "assets/video/demo_flow.mp4", "kind": "video", "label": "The dataflow", "date": "v2", "color": "orange", "atWord": 3}, {"src": "assets/video/demo_grid.mp4", "kind": "video", "label": "The layout", "date": "v3", "color": "green", "atWord": 5}]}}
+    }
+  ]
+}

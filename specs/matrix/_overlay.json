@@ -1,0 +1,176 @@
+{
+  "meta": {"topic": "creator-overlay proof", "format": "long", "fps": 30},
+  "brand": {"theme": "creatorGlow", "background": "ember"},
+  "scenes": [
+    {
+      "id": "sc-min",
+      "type": "SCREENSHOT_CASCADE",
+      "narration": "With no sources two placeholder windows still cascade with depth.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"screenshotCascade": {"headline": "Two windows, no source", "color": "blue", "shots": [{"label": "first.tsx", "color": "blue", "atWord": 1}, {"label": "second.tsx", "color": "orange", "atWord": 2}]}}
+    },
+    {
+      "id": "sc-max",
+      "type": "SCREENSHOT_CASCADE",
+      "narration": "Four screenshots cascade and a highlight marks the important region.",
+      "durationFrames": 240,
+      "background": "zoneB",
+      "data": {"screenshotCascade": {"headline": "Four screenshots, one highlight", "color": "orange", "shots": [{"src": "assets/video/demo_ui.mp4", "label": "dashboard.tsx — the main view", "color": "blue", "atWord": 1}, {"src": "assets/video/demo_grid.mp4", "label": "grid.tsx", "color": "orange", "highlight": {"x": 0.28, "y": 0.3, "w": 0.44, "h": 0.24}, "atWord": 2}, {"src": "assets/video/demo_flow.mp4", "label": "flow.tsx", "color": "green", "atWord": 3}, {"src": "assets/video/demo_webcam.mp4", "label": "cam.tsx", "color": "purple", "atWord": 4}]}}
+    },
+    {
+      "id": "sc-img",
+      "type": "SCREENSHOT_CASCADE",
+      "narration": "The cascade works with still image screenshots too, not just clips.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"screenshotCascade": {"headline": "Image screenshots too", "color": "green", "shots": [{"src": "assets/network.jpg", "kind": "image", "label": "network.png", "color": "blue", "highlight": {"x": 0.3, "y": 0.35, "w": 0.4, "h": 0.3}, "atWord": 1}, {"src": "assets/datacenter.jpg", "kind": "image", "label": "datacenter.png", "color": "orange", "atWord": 2}, {"src": "assets/server-racks.jpg", "kind": "image", "label": "racks.png", "color": "green", "atWord": 3}]}}
+    },
+    {
+      "id": "fq-min",
+      "type": "FLOATING_QUOTE_PILL",
+      "narration": "With no clip the quote pill floats over the placeholder backdrop.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"floatingQuote": {"quote": "No clip? The glass quote pill still reads over the designed backdrop.", "color": "orange", "atWord": 1}}
+    },
+    {
+      "id": "fq-max",
+      "type": "FLOATING_QUOTE_PILL",
+      "narration": "A long key question floats in a glass pill over the moving footage with attribution.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"floatingQuote": {"src": "assets/video/demo_flow.mp4", "quote": "What if the entire retrieval and ranking pipeline could run in a single deterministic pass?", "attribution": "— the question this video answers", "color": "red", "muted": false, "audioGaps": [[40, 80]], "atWord": 1}}
+    },
+    {
+      "id": "fq-img",
+      "type": "FLOATING_QUOTE_PILL",
+      "narration": "The quote pill floats over a still image backdrop too.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"floatingQuote": {"src": "assets/datacenter.jpg", "kind": "image", "quote": "Every rack here answers a thousand requests a second.", "attribution": "— scale, visualized", "color": "blue", "atWord": 1}}
+    },
+    {
+      "id": "osd-min",
+      "type": "OVERLAY_SPLIT_DEFINITIONS",
+      "narration": "With no clip the two boxless columns still flank the placeholder backdrop.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"splitDefs": {"color": "orange", "left": {"header": "Left Term", "body": "a short boxless definition on the left, clearing the centre", "color": "blue", "atWord": 1}, "right": {"header": "Right Term", "body": "a short boxless definition on the right, clearing the centre", "color": "green", "atWord": 3}}}
+    },
+    {
+      "id": "osd-max",
+      "type": "OVERLAY_SPLIT_DEFINITIONS",
+      "narration": "Two definitions flank the speaker who sits centre in the picture in picture.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"splitDefs": {"src": "assets/video/demo_ui.mp4", "color": "red", "left": {"header": "Precision", "body": "the fraction of retrieved items that are actually relevant here", "color": "blue", "atWord": 1}, "right": {"header": "Recall", "body": "the fraction of all relevant items that were successfully retrieved", "color": "green", "atWord": 3}}},
+      "pip": {"src": "assets/video/demo_webcam.mp4", "position": "br", "size": "sm", "label": "HOST", "atWord": 1, "color": "orange"}
+    },
+    {
+      "id": "osd-img",
+      "type": "OVERLAY_SPLIT_DEFINITIONS",
+      "narration": "The flanking columns work over a still image too.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"splitDefs": {"src": "assets/network.jpg", "kind": "image", "color": "blue", "left": {"header": "Ingress", "body": "traffic entering the network from the outside", "color": "orange", "atWord": 1}, "right": {"header": "Egress", "body": "traffic leaving the network toward the outside", "color": "green", "atWord": 3}}}
+    },
+    {
+      "id": "cl-min",
+      "type": "CYCLE_LOOP",
+      "narration": "Three stages form a closed loop with dashed arrows over the theme background.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"cycleLoop": {"headline": "The three-step loop", "color": "orange", "nodes": [{"label": "Plan", "sub": "decide", "color": "blue", "atWord": 1}, {"label": "Build", "sub": "make it", "color": "green", "atWord": 2}, {"label": "Review", "sub": "and loop", "color": "orange", "atWord": 3}]}}
+    },
+    {
+      "id": "cl-max",
+      "type": "CYCLE_LOOP",
+      "narration": "Five stages loop over a heavily blurred clip joined by dashed curved arrows.",
+      "durationFrames": 240,
+      "background": "zoneB",
+      "data": {"cycleLoop": {"headline": "The five-stage feedback loop", "src": "assets/video/demo_flow.mp4", "color": "red", "nodes": [{"label": "Collect", "sub": "data in", "color": "blue", "atWord": 1}, {"label": "Train", "sub": "the model", "color": "purple", "atWord": 2}, {"label": "Evaluate", "sub": "quality", "color": "orange", "atWord": 3}, {"label": "Deploy", "sub": "to prod", "color": "green", "atWord": 4}, {"label": "Measure", "sub": "and repeat", "color": "yellow", "atWord": 5}]}}
+    },
+    {
+      "id": "cl-img",
+      "type": "CYCLE_LOOP",
+      "narration": "The loop also works over a blurred still image backdrop.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"cycleLoop": {"headline": "Loop over an image", "src": "assets/datacenter.jpg", "kind": "image", "color": "blue", "nodes": [{"label": "Request", "color": "blue", "atWord": 1}, {"label": "Process", "color": "orange", "atWord": 2}, {"label": "Respond", "color": "green", "atWord": 3}, {"label": "Cache", "color": "purple", "atWord": 4}]}}
+    },
+    {
+      "id": "ss-min",
+      "type": "STEP_STACK_OVERLAY",
+      "narration": "Three numbered steps stack on the left over the placeholder backdrop.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"stepStack": {"headline": "Three steps", "chip": "filled", "dock": "left", "color": "orange", "steps": [{"label": "First do this thing here", "sub": "step one", "color": "blue", "atWord": 1}, {"label": "Then do the second", "sub": "step two", "color": "green", "atWord": 2}, {"label": "Finally the third", "sub": "step three", "color": "orange", "atWord": 3}]}}
+    },
+    {
+      "id": "ss-max",
+      "type": "STEP_STACK_OVERLAY",
+      "narration": "Five steps with ring chips dock to the right leaving the speaker clear on the left.",
+      "durationFrames": 240,
+      "background": "zoneB",
+      "data": {"stepStack": {"src": "assets/video/demo_grid.mp4", "headline": "The full five steps", "chip": "ring", "dock": "right", "color": "red", "muted": false, "audioGaps": [[50, 95]], "steps": [{"label": "Collect the raw data", "sub": "ingest", "color": "blue", "atWord": 1}, {"label": "Clean and normalize it", "sub": "prep", "color": "purple", "atWord": 2}, {"label": "Train the model on it", "sub": "fit", "color": "orange", "atWord": 3}, {"label": "Evaluate on holdout", "sub": "score", "color": "green", "atWord": 4}, {"label": "Deploy to production", "sub": "ship", "color": "yellow", "atWord": 5}]}}
+    },
+    {
+      "id": "ss-img",
+      "type": "STEP_STACK_OVERLAY",
+      "narration": "Filled chips dock left over a still image backdrop.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"stepStack": {"src": "assets/network.jpg", "kind": "image", "headline": "Over an image", "chip": "filled", "dock": "left", "color": "blue", "steps": [{"label": "Packet enters ingress", "color": "blue", "atWord": 1}, {"label": "Routed through core", "color": "orange", "atWord": 2}, {"label": "Delivered at egress", "color": "green", "atWord": 3}]}}
+    },
+    {
+      "id": "tb-min",
+      "type": "TITLE_BANNER_FOCUS",
+      "narration": "With no clip the glass title banner lands over the placeholder backdrop.",
+      "durationFrames": 210,
+      "background": "zoneA",
+      "data": {"titleBanner": {"kicker": "NO SOURCE", "title": "The title, no clip yet", "subtitle": "the banner still reads over the designed backdrop", "color": "orange", "atWord": 1}}
+    },
+    {
+      "id": "tb-max",
+      "type": "TITLE_BANNER_FOCUS",
+      "narration": "The big title moment lands in a glass banner over a heavily blurred clip.",
+      "durationFrames": 210,
+      "background": "zoneB",
+      "data": {"titleBanner": {"src": "assets/video/demo_ui.mp4", "kicker": "CHAPTER ONE", "title": "How the whole thing works", "subtitle": "a title moment with total focus while keeping footage continuity", "color": "red", "muted": false, "audioGaps": [[40, 80]], "atWord": 1}},
+      "pip": {"src": "assets/video/demo_webcam.mp4", "position": "br", "size": "sm", "label": "HOST", "atWord": 1, "color": "orange"}
+    },
+    {
+      "id": "tb-img",
+      "type": "TITLE_BANNER_FOCUS",
+      "narration": "The banner also lands over a blurred still image.",
+      "durationFrames": 210,
+      "background": "zoneC",
+      "data": {"titleBanner": {"src": "assets/datacenter.jpg", "kind": "image", "kicker": "SCALE", "title": "Inside the data center", "subtitle": "over a blurred image backdrop", "color": "blue", "atWord": 1}}
+    },
+    {
+      "id": "sub-max",
+      "type": "CHANNEL_CARD",
+      "narration": "A subscribe chip with avatar name handle and button slides in over the clip.",
+      "durationFrames": 200,
+      "background": "zoneB",
+      "data": {"subChip": {"src": "assets/video/demo_flow.mp4", "name": "Tech Explained Daily", "handle": "@techexplaineddaily", "avatar": "lucide:cpu", "buttonLabel": "SUBSCRIBE", "color": "red", "atWord": 1}}
+    },
+    {
+      "id": "sub-img",
+      "type": "CHANNEL_CARD",
+      "narration": "The subscribe chip works over a still image backdrop too.",
+      "durationFrames": 200,
+      "background": "zoneC",
+      "data": {"subChip": {"src": "assets/network.jpg", "kind": "image", "name": "Network Notes", "handle": "@networknotes", "avatar": "lucide:network", "color": "blue", "atWord": 1}}
+    },
+    {
+      "id": "sub-base",
+      "type": "CHANNEL_CARD",
+      "narration": "The original full subscribe card still renders unchanged as a regression.",
+      "durationFrames": 200,
+      "background": "zoneA",
+      "data": {"handle": "@yourchannel", "tagline": "New videos every week", "atWord": 1}
+    }
+  ]
+}

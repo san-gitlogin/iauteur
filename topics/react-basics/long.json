@@ -1,0 +1,351 @@
+{
+  "meta": {
+    "topic": "React Basics: components, JSX, props and state - how React actually works, explained fast (beginner explainer)",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "React builds UIs from reusable components that hold state; change the state and React re-renders only what changed.",
+    "openLoop": "How do millions of apps update the screen constantly and still stay fast?",
+    "analogy": "A React app is like LEGO: small reusable pieces (components) snapped into a tree.",
+    "screenplay": "deep-dive",
+    "topicAxes": [
+      "mechanism-depth",
+      "beginner-friendly"
+    ]
+  },
+  "brand": {
+    "theme": "material",
+    "design": "material",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "YOUR CHANNEL"
+  },
+  "thumbnail": {
+    "title": "React Basics",
+    "badge": "3 MIN",
+    "asset": "lucide:atom"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Millions of websites are built with it. In just a few minutes, you'll actually understand React.",
+      "durationFrames": 216,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "REACT, EXPLAINED",
+        "subtext": "the basics, fast",
+        "heroAsset": "lucide:atom",
+        "headlineAtWord": 1,
+        "heroAtWord": 8,
+        "anim": "scale"
+      }
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "React is a JavaScript library for building user interfaces, one small piece at a time.",
+      "durationFrames": 216,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "wipe",
+      "data": {
+        "title": "React Basics",
+        "subtitle": "a UI, piece by piece"
+      }
+    },
+    {
+      "id": "s03",
+      "type": "KINETIC_TEXT",
+      "narration": "The one big idea behind all of React: build your interface out of components.",
+      "durationFrames": 198,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "fade",
+      "data": {
+        "kinetic": {"fx": "typewriter", "text": "Build UIs from components.", "sub": "the one big idea", "color": "blue", "atWord": 9}
+      }
+    },
+    {
+      "id": "s04",
+      "type": "DIAGRAM",
+      "narration": "A React app is a tree of components. One App holds a header, the main content, and a footer, and each of those is its own reusable piece.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "An app is a [tree.]",
+        "headlineColor": "blue",
+        "anim": "rise",
+        "diagram": {
+          "layout": "tree",
+          "nodes": [
+            {"id": "app", "label": "App", "asset": "lucide:atom", "color": "blue", "atWord": 6},
+            {"id": "header", "label": "Header", "asset": "lucide:panel-top", "color": "purple", "atWord": 12, "parent": "app"},
+            {"id": "main", "label": "Content", "asset": "lucide:layout", "color": "orange", "atWord": 14, "parent": "app"},
+            {"id": "footer", "label": "Footer", "asset": "lucide:panel-bottom", "color": "green", "atWord": 16, "parent": "app"}
+          ]
+        },
+        "source": "A REACT APP: A TREE OF COMPONENTS"
+      }
+    },
+    {
+      "id": "s05",
+      "type": "CHAPTER",
+      "narration": "Chapter one. Components, the building blocks.",
+      "durationFrames": 138,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "01", "title": "Components", "subtitle": "the building blocks", "color": "blue"}
+      }
+    },
+    {
+      "id": "s06",
+      "type": "CODE_WINDOW",
+      "narration": "A component is just a function that returns what the user interface should look like.",
+      "durationFrames": 300,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "code": {
+          "filename": "Welcome.jsx",
+          "language": "jsx",
+          "atWord": 1,
+          "lines": [
+            {"text": "function Welcome() {"},
+            {"text": "  return <h1>Hello!</h1>;"},
+            {"text": "}"}
+          ],
+          "output": [
+            {"text": "a component returns UI", "color": "green"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "narration": "Chapter two. That HTML-looking syntax has a name: JSX.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "02", "title": "JSX", "subtitle": "markup in JavaScript", "color": "purple"}
+      }
+    },
+    {
+      "id": "s08",
+      "type": "CODE_WINDOW",
+      "narration": "JSX lets you write markup right inside JavaScript, and drop in any value with curly braces.",
+      "durationFrames": 306,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "code": {
+          "filename": "greeting.jsx",
+          "language": "jsx",
+          "atWord": 1,
+          "lines": [
+            {"text": "const name = \"Sam\";"},
+            {"text": "const el = <h1>Hello, {name}!</h1>;"}
+          ],
+          "output": [
+            {"text": "markup and JavaScript, together", "color": "green"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "narration": "Chapter three. Props, passing data in.",
+      "durationFrames": 138,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "03", "title": "Props", "subtitle": "passing data in", "color": "orange"}
+      }
+    },
+    {
+      "id": "s10",
+      "type": "DIAGRAM",
+      "narration": "Data flows one way: a parent passes props down to its children, and never back up.",
+      "durationFrames": 288,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "slide",
+      "data": {
+        "headline": "Data flows [down.]",
+        "headlineColor": "orange",
+        "diagram": {
+          "layout": "flow",
+          "direction": "horizontal",
+          "nodes": [
+            {"id": "parent", "label": "Parent", "asset": "lucide:box", "color": "blue", "atWord": 6},
+            {"id": "child", "label": "Child", "asset": "lucide:box", "color": "purple", "atWord": 9},
+            {"id": "grand", "label": "Grandchild", "asset": "lucide:box", "color": "green", "atWord": 11}
+          ],
+          "edges": [
+            {"from": "parent", "to": "child", "label": "props", "atWord": 8, "color": "blue"},
+            {"from": "child", "to": "grand", "label": "props", "atWord": 10, "color": "purple"}
+          ]
+        },
+        "source": "ONE-WAY DATA FLOW: PARENT TO CHILD"
+      }
+    },
+    {
+      "id": "s11",
+      "type": "CODE_WINDOW",
+      "narration": "You pass a prop like an attribute, then read it inside the component through the props object.",
+      "durationFrames": 312,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "push",
+      "data": {
+        "code": {
+          "filename": "App.jsx",
+          "language": "jsx",
+          "atWord": 1,
+          "lines": [
+            {"text": "<Welcome name=\"Sam\" />"},
+            {"text": ""},
+            {"text": "function Welcome(props) {"},
+            {"text": "  return <h1>Hi, {props.name}</h1>;"},
+            {"text": "}"}
+          ],
+          "output": [
+            {"text": "props.name is \"Sam\"", "color": "green"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "narration": "Chapter four. State, data that changes.",
+      "durationFrames": 138,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "04", "title": "State", "subtitle": "data that changes", "color": "green"}
+      }
+    },
+    {
+      "id": "s13",
+      "type": "CODE_WINDOW",
+      "narration": "State is a component's own memory. The useState hook hands you a value and a function to update it.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "code": {
+          "filename": "Counter.jsx",
+          "language": "jsx",
+          "atWord": 1,
+          "lines": [
+            {"text": "const [count, setCount] = useState(0);"},
+            {"text": ""},
+            {"text": "<button onClick={() => setCount(count + 1)}>"},
+            {"text": "  Clicked {count} times"},
+            {"text": "</button>"}
+          ],
+          "output": [
+            {"text": "click updates state, UI follows", "color": "green"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s14",
+      "type": "DIAGRAM",
+      "narration": "And here's the magic. When state changes, React re-renders that component and updates what you see on screen.",
+      "durationFrames": 300,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "State drives the [screen.]",
+        "headlineColor": "green",
+        "diagram": {
+          "layout": "flow",
+          "direction": "horizontal",
+          "nodes": [
+            {"id": "set", "label": "setState", "asset": "lucide:mouse-pointer-click", "color": "orange", "atWord": 6},
+            {"id": "render", "label": "Re-render", "asset": "lucide:refresh-cw", "color": "blue", "atWord": 10},
+            {"id": "ui", "label": "Update UI", "asset": "lucide:monitor", "color": "green", "atWord": 13}
+          ],
+          "edges": [
+            {"from": "set", "to": "render", "atWord": 10},
+            {"from": "render", "to": "ui", "atWord": 13}
+          ]
+        },
+        "source": "STATE CHANGE TRIGGERS A RE-RENDER"
+      }
+    },
+    {
+      "id": "s15",
+      "type": "KINETIC_TEXT",
+      "narration": "But React doesn't redraw the whole page. It compares, and updates only what actually changed.",
+      "durationFrames": 216,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "fade",
+      "data": {
+        "kinetic": {"fx": "highlight", "text": "It updates only what [changed].", "sub": "fast by design", "color": "blue", "atWord": 8}
+      }
+    },
+    {
+      "id": "s16",
+      "type": "REVEAL",
+      "narration": "Strip everything away, and React is really just this: components that hold state and describe your UI.",
+      "durationFrames": 252,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "zoom",
+      "fx": "burst",
+      "data": {
+        "headline": "Components + [state.]",
+        "reveal": {"kicker": "THAT'S REACT", "sub": "components hold state and describe the UI", "color": "blue", "atWord": 9}
+      }
+    },
+    {
+      "id": "s17",
+      "type": "RECAP",
+      "narration": "So that's the core. Components build the UI, JSX describes it, props pass data down, and state makes it interactive.",
+      "durationFrames": 342,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "heading": "React, recapped",
+        "points": [
+          {"text": "Components build the UI", "atWord": 5},
+          {"text": "JSX describes it", "atWord": 10},
+          {"text": "Props pass data down", "atWord": 14},
+          {"text": "State makes it interactive", "atWord": 18}
+        ]
+      }
+    },
+    {
+      "id": "s18",
+      "type": "OUTRO_CTA",
+      "narration": "Now you actually get React. For more dev explainers like this, subscribe to YOUR CHANNEL.",
+      "durationFrames": 234,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "You get React now",
+        "sub": "subscribe to YOUR CHANNEL"
+      }
+    }
+  ]
+}

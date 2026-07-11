@@ -1,0 +1,40 @@
+{
+  "name": "iauteur",
+  "version": "1.0.0",
+  "private": true,
+  "description": "iAuteur — an AI-directed, JSON-driven Remotion video factory: a topic becomes a spec, any LLM directs it, and it renders as tech-explainer video (136 components, 30 design packs, dark/light).",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "remotion studio",
+    "lint": "node scripts/lint-all.mjs",
+    "critique": "node scripts/critique.mjs",
+    "new-topic": "node scripts/new-topic.mjs",
+    "gen-index": "node scripts/gen-index.mjs",
+    "voiceover": "node scripts/gen-voiceover.mjs",
+    "render": "node scripts/render-topic.mjs",
+    "typecheck": "tsc --noEmit",
+    "package": "node scripts/package-video.mjs",
+    "chapters": "node scripts/gen-chapters.mjs",
+    "audit": "node scripts/audit-census.mjs && node scripts/audit-census-selftest.mjs && tsc --noEmit && node scripts/lint-all.mjs && node scripts/audio-check.mjs && node scripts/audit-determinism.mjs material",
+    "audit:census": "node scripts/audit-census.mjs && node scripts/audit-census-selftest.mjs",
+    "audit:census-selftest": "node scripts/audit-census-selftest.mjs",
+    "audit:determinism": "node scripts/audit-determinism.mjs",
+    "audio-check": "node scripts/audio-check.mjs"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@remotion/google-fonts": "^4.0.484",
+    "@remotion/layout-utils": "^4.0.484",
+    "lucide-react": "^0.462.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.0",
+    "simple-icons": "^13.21.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "typescript": "^5.6.3"
+  }
+}

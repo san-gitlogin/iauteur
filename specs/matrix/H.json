@@ -1,0 +1,1152 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "PIPELINE-min",
+      "type": "PIPELINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pipeline": {
+          "headline": "A tiny [flow]",
+          "tokenLabel": "job",
+          "color": "blue",
+          "stages": [
+            {
+              "label": "Start",
+              "sub": "begin"
+            },
+            {
+              "label": "End",
+              "sub": "done",
+              "color": "green"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PIPELINE-max",
+      "type": "PIPELINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pipeline": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "tokenLabel": "the instruction",
+          "color": "blue",
+          "stages": [
+            {
+              "label": "Fetch",
+              "sub": "read from cache",
+              "asset": "lucide:download"
+            },
+            {
+              "label": "Decode",
+              "sub": "read the opcode",
+              "asset": "lucide:binary"
+            },
+            {
+              "label": "Execute",
+              "sub": "run the ALU",
+              "asset": "lucide:cpu"
+            },
+            {
+              "label": "Memory",
+              "sub": "load / store",
+              "asset": "lucide:database"
+            },
+            {
+              "label": "Write-back",
+              "sub": "update register",
+              "asset": "lucide:save"
+            },
+            {
+              "label": "Retire",
+              "sub": "commit result",
+              "asset": "lucide:check"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PIPELINE-maxCi",
+      "type": "PIPELINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pipeline": {
+          "headline": "The [CI] run stressed to the stage cap here",
+          "variant": "ci",
+          "color": "blue",
+          "stages": [
+            {
+              "label": "Lint",
+              "status": "pass",
+              "ms": "4.2 s"
+            },
+            {
+              "label": "Typecheck",
+              "status": "pass",
+              "ms": "11 s"
+            },
+            {
+              "label": "Build",
+              "status": "pass",
+              "ms": "38 s"
+            },
+            {
+              "label": "Unit tests",
+              "status": "fail",
+              "ms": "12 s",
+              "reason": "expected 200, got 500 on /health check"
+            },
+            {
+              "label": "E2E tests",
+              "status": "pending",
+              "ms": "--"
+            },
+            {
+              "label": "Deploy",
+              "status": "pending",
+              "ms": "--"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PIPELINE-maxJourney",
+      "type": "PIPELINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pipeline": {
+          "headline": "The [checkout] journey at the cap",
+          "variant": "journey",
+          "color": "green",
+          "tokenLabel": "New user",
+          "stages": [
+            {
+              "label": "Login",
+              "badge": "auth",
+              "status": "pass"
+            },
+            {
+              "label": "Search",
+              "badge": "search",
+              "status": "pass"
+            },
+            {
+              "label": "Product",
+              "badge": "catalog",
+              "status": "pass"
+            },
+            {
+              "label": "Add to cart",
+              "badge": "cart",
+              "status": "pass"
+            },
+            {
+              "label": "Checkout",
+              "badge": "orders",
+              "status": "pass"
+            },
+            {
+              "label": "Pay",
+              "badge": "payments",
+              "status": "fail",
+              "reason": "gateway timeout after 30 seconds"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "PIPELINE-maxBoot",
+      "type": "PIPELINE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pipeline": {
+          "headline": "The [boot] sequence rail at the cap",
+          "variant": "boot",
+          "color": "orange",
+          "stages": [
+            {
+              "label": "Firmware",
+              "ms": "120 ms",
+              "color": "orange"
+            },
+            {
+              "label": "Bootloader",
+              "ms": "40 ms",
+              "color": "orange"
+            },
+            {
+              "label": "Kernel",
+              "ms": "310 ms",
+              "color": "blue"
+            },
+            {
+              "label": "Init system",
+              "ms": "80 ms",
+              "color": "blue"
+            },
+            {
+              "label": "Drivers",
+              "ms": "210 ms",
+              "color": "blue"
+            },
+            {
+              "label": "Services",
+              "ms": "1.2 s",
+              "color": "green"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "LAYERED_STACK-min",
+      "type": "LAYERED_STACK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "stack": {
+          "headline": "A tiny [stack]",
+          "signal": "down",
+          "color": "green",
+          "layers": [
+            {
+              "label": "App",
+              "sub": "top"
+            },
+            {
+              "label": "Wire",
+              "sub": "bottom",
+              "color": "blue"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "LAYERED_STACK-max",
+      "type": "LAYERED_STACK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "stack": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "signal": "down",
+          "color": "green",
+          "layers": [
+            {
+              "label": "Application",
+              "sub": "HTTP · DNS · TLS",
+              "color": "green"
+            },
+            {
+              "label": "Presentation",
+              "sub": "encoding · encryption",
+              "color": "blue"
+            },
+            {
+              "label": "Session",
+              "sub": "connection state",
+              "color": "purple"
+            },
+            {
+              "label": "Transport",
+              "sub": "TCP · UDP ports",
+              "color": "orange"
+            },
+            {
+              "label": "Network",
+              "sub": "IP addressing · routing",
+              "color": "yellow"
+            },
+            {
+              "label": "Data link",
+              "sub": "Ethernet · Wi-Fi MAC",
+              "color": "red"
+            },
+            {
+              "label": "Physical",
+              "sub": "bits on the wire",
+              "color": "blue"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "LAYERED_STACK-maxImage",
+      "type": "LAYERED_STACK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "stack": {
+          "headline": "The [image] build cache at the cap",
+          "variant": "imageLayers",
+          "totalSize": "512 MB",
+          "color": "blue",
+          "layers": [
+            {
+              "label": "FROM node:20-alpine",
+              "size": "142 MB",
+              "cached": true
+            },
+            {
+              "label": "RUN apk add build-base",
+              "size": "88 MB",
+              "cached": true
+            },
+            {
+              "label": "COPY package.json .",
+              "size": "2 MB",
+              "cached": true
+            },
+            {
+              "label": "RUN npm ci",
+              "size": "210 MB",
+              "rebuilt": true
+            },
+            {
+              "label": "COPY . .",
+              "size": "68 MB",
+              "rebuilt": true
+            },
+            {
+              "label": "RUN npm run build",
+              "size": "2 MB"
+            },
+            {
+              "label": "CMD npm start",
+              "size": "0 B"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "GRID_ARRAY-min",
+      "type": "GRID_ARRAY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "grid": {
+          "headline": "A tiny [grid]",
+          "rows": 3,
+          "cols": 4,
+          "mode": "wave",
+          "label": "a small array",
+          "legendA": "on",
+          "legendB": "off",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "GRID_ARRAY-max",
+      "type": "GRID_ARRAY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "grid": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "rows": 12,
+          "cols": 16,
+          "mode": "wave",
+          "label": "Thousands of cores computing in a parallel sweep",
+          "legendA": "active",
+          "legendB": "idle",
+          "color": "green"
+        }
+      }
+    },
+    {
+      "id": "GRID_ARRAY-maxHeat",
+      "type": "GRID_ARRAY",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "grid": {
+          "headline": "The [attention] heatmap at density",
+          "rows": 14,
+          "cols": 14,
+          "mode": "heatmap",
+          "label": "attention weights across tokens",
+          "legendA": "high",
+          "legendB": "low",
+          "color": "purple"
+        }
+      }
+    },
+    {
+      "id": "SPEC_COMPARE-min",
+      "type": "SPEC_COMPARE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "source": "illustrative",
+        "compare": {
+          "headline": "A tiny [versus]",
+          "a": {
+            "name": "Before",
+            "color": "red"
+          },
+          "b": {
+            "name": "After",
+            "color": "green"
+          },
+          "rows": [
+            {
+              "label": "Speed",
+              "a": "slow",
+              "b": "fast",
+              "winner": "b"
+            },
+            {
+              "label": "Cost",
+              "a": "high",
+              "b": "low",
+              "winner": "b"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "SPEC_COMPARE-max",
+      "type": "SPEC_COMPARE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "source": "illustrative",
+        "compare": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "a": {
+            "name": "GeForce RTX",
+            "color": "green",
+            "asset": "si:nvidia"
+          },
+          "b": {
+            "name": "Radeon RX",
+            "color": "red",
+            "asset": "si:amd"
+          },
+          "rows": [
+            {
+              "label": "Shader cores",
+              "a": "16,384",
+              "b": "6,144",
+              "winner": "a"
+            },
+            {
+              "label": "Memory",
+              "a": "24 GB",
+              "b": "20 GB",
+              "winner": "a"
+            },
+            {
+              "label": "Bandwidth",
+              "a": "1 TB/s",
+              "b": "960 GB/s",
+              "winner": "a"
+            },
+            {
+              "label": "Boost clock",
+              "a": "2.52 GHz",
+              "b": "2.42 GHz",
+              "winner": "a"
+            },
+            {
+              "label": "Board power",
+              "a": "450 W",
+              "b": "355 W",
+              "winner": "b"
+            },
+            {
+              "label": "Launch price",
+              "a": "$1,599",
+              "b": "$999",
+              "winner": "b"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DIE_SHOT-min",
+      "type": "DIE_SHOT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "die": {
+          "headline": "A tiny [chip]",
+          "chipLabel": "SoC",
+          "cols": 2,
+          "rows": 2,
+          "color": "blue",
+          "blocks": [
+            {
+              "label": "CPU",
+              "x": 1,
+              "y": 1,
+              "w": 1,
+              "h": 2,
+              "color": "blue"
+            },
+            {
+              "label": "GPU",
+              "x": 2,
+              "y": 1,
+              "w": 1,
+              "h": 2,
+              "color": "green"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DIE_SHOT-max",
+      "type": "DIE_SHOT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "die": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "chipLabel": "Apple M-series Max",
+          "cols": 4,
+          "rows": 4,
+          "color": "blue",
+          "blocks": [
+            {
+              "label": "P-cores",
+              "sub": "performance",
+              "x": 1,
+              "y": 1,
+              "w": 2,
+              "h": 1,
+              "color": "blue"
+            },
+            {
+              "label": "E-cores",
+              "sub": "efficiency",
+              "x": 1,
+              "y": 2,
+              "w": 2,
+              "h": 1,
+              "color": "blue"
+            },
+            {
+              "label": "GPU cores",
+              "sub": "40-core",
+              "x": 3,
+              "y": 1,
+              "w": 2,
+              "h": 2,
+              "color": "green"
+            },
+            {
+              "label": "Neural Engine",
+              "sub": "16-core",
+              "x": 1,
+              "y": 3,
+              "w": 1,
+              "h": 1,
+              "color": "purple"
+            },
+            {
+              "label": "Media engine",
+              "sub": "encode",
+              "x": 2,
+              "y": 3,
+              "w": 1,
+              "h": 1,
+              "color": "orange"
+            },
+            {
+              "label": "Cache",
+              "sub": "48 MB",
+              "x": 3,
+              "y": 3,
+              "w": 1,
+              "h": 1,
+              "color": "yellow"
+            },
+            {
+              "label": "Fabric",
+              "sub": "ring bus",
+              "x": 4,
+              "y": 3,
+              "w": 1,
+              "h": 1,
+              "color": "red"
+            },
+            {
+              "label": "Unified Memory",
+              "sub": "LPDDR5",
+              "x": 1,
+              "y": 4,
+              "w": 4,
+              "h": 1,
+              "color": "orange"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NEURAL_NET-min",
+      "type": "NEURAL_NET",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "net": {
+          "headline": "A tiny [net]",
+          "color": "purple",
+          "layers": [
+            2,
+            3,
+            1
+          ],
+          "labels": [
+            "In",
+            "Hidden",
+            "Out"
+          ]
+        }
+      }
+    },
+    {
+      "id": "NEURAL_NET-max",
+      "type": "NEURAL_NET",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "net": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "purple",
+          "layers": [
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "labels": [
+            "Input",
+            "Hidden 1",
+            "Hidden 2",
+            "Hidden 3",
+            "Output"
+          ]
+        }
+      }
+    },
+    {
+      "id": "DATACENTER-min",
+      "type": "DATACENTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "datacenter": {
+          "headline": "A tiny [hall]",
+          "variant": "hall",
+          "spineLabel": "Spine",
+          "color": "blue",
+          "highlight": 1,
+          "racks": [
+            {
+              "label": "Web"
+            },
+            {
+              "label": "DB",
+              "color": "red"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DATACENTER-max",
+      "type": "DATACENTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "datacenter": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "variant": "hall",
+          "spineLabel": "Spine · core switch fabric",
+          "color": "blue",
+          "highlight": 3,
+          "racks": [
+            {
+              "label": "Web"
+            },
+            {
+              "label": "App"
+            },
+            {
+              "label": "Cache"
+            },
+            {
+              "label": "Queue"
+            },
+            {
+              "label": "Storage"
+            },
+            {
+              "label": "Database",
+              "color": "red"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DATACENTER-maxRack",
+      "type": "DATACENTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "datacenter": {
+          "headline": "One [rack], unit by unit at the cap",
+          "variant": "rack",
+          "rackLabel": "Rack 07 · row B",
+          "color": "blue",
+          "highlight": 1,
+          "units": [
+            {
+              "label": "Compute",
+              "sub": "16 servers",
+              "u": 2,
+              "color": "blue"
+            },
+            {
+              "label": "GPU",
+              "sub": "8x H100",
+              "u": 2,
+              "color": "green"
+            },
+            {
+              "label": "Storage",
+              "sub": "2 PB NVMe",
+              "u": 1,
+              "color": "orange"
+            },
+            {
+              "label": "Network",
+              "sub": "leaf switch",
+              "u": 1,
+              "color": "purple"
+            },
+            {
+              "label": "Cooling",
+              "sub": "liquid CDU",
+              "u": 1,
+              "color": "yellow"
+            },
+            {
+              "label": "Battery",
+              "sub": "BBU",
+              "u": 1,
+              "color": "red"
+            },
+            {
+              "label": "Power",
+              "sub": "dual PDU",
+              "u": 1,
+              "color": "blue"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRANSFORMER_BLOCK-min",
+      "type": "TRANSFORMER_BLOCK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "transformer": {
+          "headline": "A tiny [block]",
+          "color": "purple",
+          "blocks": [
+            {
+              "label": "Input",
+              "kind": "io"
+            },
+            {
+              "label": "Attention",
+              "kind": "attn"
+            },
+            {
+              "label": "Output",
+              "kind": "io"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRANSFORMER_BLOCK-max",
+      "type": "TRANSFORMER_BLOCK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "transformer": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "purple",
+          "repeatFrom": 2,
+          "repeatTo": 5,
+          "repeatLabel": "x 96",
+          "blocks": [
+            {
+              "label": "Token embeddings",
+              "sub": "vocab lookup",
+              "kind": "io"
+            },
+            {
+              "label": "Multi-Head Attention",
+              "sub": "96 heads",
+              "kind": "attn"
+            },
+            {
+              "label": "Add & Norm",
+              "sub": "residual",
+              "kind": "norm"
+            },
+            {
+              "label": "Feed Forward",
+              "sub": "4x MLP",
+              "kind": "ffn"
+            },
+            {
+              "label": "Add & Norm",
+              "sub": "residual",
+              "kind": "norm"
+            },
+            {
+              "label": "Output projection",
+              "sub": "to logits",
+              "kind": "io"
+            },
+            {
+              "label": "Softmax",
+              "sub": "probabilities",
+              "kind": "io"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CACHE_PYRAMID-min",
+      "type": "CACHE_PYRAMID",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pyramid": {
+          "headline": "A tiny [hierarchy]",
+          "axisTop": "fast",
+          "axisBottom": "big",
+          "tiers": [
+            {
+              "label": "Cache",
+              "speed": "1 ns",
+              "size": "64 KB",
+              "color": "orange"
+            },
+            {
+              "label": "RAM",
+              "speed": "80 ns",
+              "size": "32 GB",
+              "color": "blue"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CACHE_PYRAMID-max",
+      "type": "CACHE_PYRAMID",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pyramid": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "axisTop": "faster · smaller · costly",
+          "axisBottom": "bigger · slower · cheap",
+          "tiers": [
+            {
+              "label": "Registers",
+              "speed": "~0.3 ns",
+              "size": "1 KB",
+              "color": "red"
+            },
+            {
+              "label": "L1 cache",
+              "speed": "~1 ns",
+              "size": "64 KB",
+              "color": "orange"
+            },
+            {
+              "label": "L2 cache",
+              "speed": "~4 ns",
+              "size": "512 KB",
+              "color": "yellow"
+            },
+            {
+              "label": "L3 cache",
+              "speed": "~12 ns",
+              "size": "32 MB",
+              "color": "green"
+            },
+            {
+              "label": "Main memory",
+              "speed": "~80 ns",
+              "size": "64 GB",
+              "color": "blue"
+            },
+            {
+              "label": "NVMe SSD",
+              "speed": "~100 us",
+              "size": "4 TB",
+              "color": "purple"
+            },
+            {
+              "label": "Cold storage",
+              "speed": "~10 ms",
+              "size": "1 PB",
+              "color": "blue"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CACHE_PYRAMID-maxPyramid",
+      "type": "CACHE_PYRAMID",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "pyramid": {
+          "headline": "The [test] pyramid at the tier cap",
+          "variant": "pyramid",
+          "color": "green",
+          "axisTop": "few · slow · costly",
+          "axisBottom": "many · fast · cheap",
+          "tiers": [
+            {
+              "label": "Manual QA",
+              "stat": "slowest",
+              "color": "red"
+            },
+            {
+              "label": "E2E",
+              "stat": "slow",
+              "color": "orange"
+            },
+            {
+              "label": "Integration",
+              "stat": "medium",
+              "color": "yellow"
+            },
+            {
+              "label": "Unit",
+              "stat": "fast · cheap",
+              "color": "green"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "GPU_CLUSTER-min",
+      "type": "GPU_CLUSTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "gpuCluster": {
+          "headline": "A tiny [cluster]",
+          "color": "green",
+          "nodes": 2,
+          "gpusPerNode": 2,
+          "interconnect": "NVLink",
+          "totalLabel": "GPUs"
+        }
+      }
+    },
+    {
+      "id": "GPU_CLUSTER-max",
+      "type": "GPU_CLUSTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "gpuCluster": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "green",
+          "nodes": 8,
+          "gpusPerNode": 8,
+          "interconnect": "NVLink · InfiniBand HDR",
+          "totalLabel": "GPUs training together"
+        }
+      }
+    },
+    {
+      "id": "ZOOM_SCALE-min",
+      "type": "ZOOM_SCALE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "zoomScale": {
+          "headline": "A tiny [zoom]",
+          "color": "blue",
+          "levels": [
+            {
+              "label": "Atom",
+              "sub": "tiny",
+              "asset": "lucide:atom",
+              "scale": "0.1 nm"
+            },
+            {
+              "label": "Chip",
+              "sub": "the SoC",
+              "asset": "lucide:cpu",
+              "scale": "1 cm"
+            },
+            {
+              "label": "Rack",
+              "sub": "servers",
+              "asset": "lucide:server",
+              "scale": "2 m"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ZOOM_SCALE-max",
+      "type": "ZOOM_SCALE",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "zoomScale": {
+          "headline": "A hostile [headline] stressed to the very limit ok",
+          "color": "blue",
+          "levels": [
+            {
+              "label": "Transistor",
+              "sub": "a switch",
+              "asset": "lucide:toggle-left",
+              "scale": "3 nm",
+              "color": "blue"
+            },
+            {
+              "label": "Core",
+              "sub": "billions",
+              "asset": "lucide:cpu",
+              "scale": "1 mm",
+              "color": "purple"
+            },
+            {
+              "label": "Chip",
+              "sub": "the SoC",
+              "asset": "lucide:square-stack",
+              "scale": "1 cm",
+              "color": "green"
+            },
+            {
+              "label": "Board",
+              "sub": "a server",
+              "asset": "lucide:server",
+              "scale": "0.5 m",
+              "color": "orange"
+            },
+            {
+              "label": "Rack",
+              "sub": "many servers",
+              "asset": "lucide:columns-3",
+              "scale": "2 m",
+              "color": "yellow"
+            },
+            {
+              "label": "Data center",
+              "sub": "the cloud",
+              "asset": "lucide:building-2",
+              "scale": "100 m",
+              "color": "red"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

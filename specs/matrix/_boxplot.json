@@ -1,0 +1,17 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "BOX_PLOT-min", "type": "BOX_PLOT", "narration": "Two services latency spread side by side, one wider one tighter, median line inside each box now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "Two [services].", "headlineColor": "blue", "boxPlot": {"color": "blue", "unit": "ms", "boxes": [
+      {"label": "API v1", "min": 20, "q1": 40, "median": 55, "q3": 70, "max": 110, "atWord": 1},
+      {"label": "API v2", "min": 15, "q1": 30, "median": 42, "q3": 58, "max": 90, "color": "green", "atWord": 3}]}}},
+    {"id": "BOX_PLOT-max", "type": "BOX_PLOT", "narration": "Eight services compared by latency distribution, whiskers to the extremes, boxes for the middle half, medians marked, a few outliers flagged.", "durationFrames": 300, "background": "zoneA", "data": {"headline": "Eight [services] at cap", "headlineColor": "blue", "source": "ILLUSTRATIVE LATENCY", "boxPlot": {"color": "blue", "unit": "ms", "boxes": [
+      {"label": "Gateway", "min": 20, "q1": 45, "median": 60, "q3": 85, "max": 140, "outliers": [180, 210], "color": "blue", "atWord": 1},
+      {"label": "Auth svc", "min": 12, "q1": 28, "median": 38, "q3": 52, "max": 88, "color": "purple", "atWord": 2},
+      {"label": "Search svc", "min": 40, "q1": 70, "median": 95, "q3": 130, "max": 200, "outliers": [260], "color": "green", "atWord": 3},
+      {"label": "Cache svc", "min": 4, "q1": 8, "median": 12, "q3": 18, "max": 30, "color": "orange", "atWord": 4},
+      {"label": "Payments", "min": 60, "q1": 90, "median": 120, "q3": 160, "max": 240, "color": "red", "atWord": 5},
+      {"label": "Recommender", "min": 30, "q1": 55, "median": 78, "q3": 105, "max": 170, "color": "yellow", "atWord": 6},
+      {"label": "Notifier", "min": 8, "q1": 16, "median": 24, "q3": 36, "max": 60, "color": "blue", "atWord": 7},
+      {"label": "Analytics", "min": 50, "q1": 85, "median": 115, "q3": 150, "max": 220, "outliers": [300], "color": "purple", "atWord": 8}]}}}
+  ]
+}

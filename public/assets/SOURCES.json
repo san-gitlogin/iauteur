@@ -1,0 +1,62 @@
+[
+  {
+    "file": "datacenter.jpg",
+    "url": "https://picsum.photos/seed/nbx-datacenter/1600/1000",
+    "note": "Lorem Picsum - free stock, no attribution required",
+    "bytes": 87675,
+    "contentType": "image/jpeg",
+    "fetchedAt": "2026-07-07T09:08:26.642Z"
+  },
+  {
+    "file": "network.jpg",
+    "url": "https://picsum.photos/seed/nbx-network/1600/1000",
+    "note": "Lorem Picsum - free stock, no attribution required",
+    "bytes": 192838,
+    "contentType": "image/jpeg",
+    "fetchedAt": "2026-07-07T09:08:27.459Z"
+  },
+  {
+    "file": "server.jpg",
+    "url": "https://picsum.photos/seed/nbx-server/1200/1200",
+    "note": "Lorem Picsum - free stock, no attribution required",
+    "bytes": 104595,
+    "contentType": "image/jpeg",
+    "fetchedAt": "2026-07-07T09:08:28.249Z"
+  },
+  {
+    "file": "server-racks.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/8B1A0797.jpg/1920px-8B1A0797.jpg",
+    "note": "Wikimedia Commons File:8B1A0797.jpg - server rack in a data center. Author: Virtuo Doc. License: CC BY-SA 4.0 (attribution + share-alike).",
+    "bytes": 227084,
+    "contentType": "image/jpeg",
+    "fetchedAt": "2026-07-07T12:08:55.193Z"
+  },
+  {
+    "file": "video/demo_ui.mp4",
+    "url": "synthetic (scripts/_genclips.mjs)",
+    "note": "SYNTHETIC demo clip — deterministic PNG frames (moving accent bands) + WAV tone, hand-encoded in Node and muxed via Remotion's bundled ffmpeg (libx264/aac). 100% generated, no copyright, no real footage/faces. Used only as a media-family fixture/showcase placeholder; real user media arrives via props.",
+    "contentType": "video/mp4",
+    "fetchedAt": "2026-07-09"
+  },
+  {
+    "file": "video/demo_flow.mp4",
+    "url": "synthetic (scripts/_genclips.mjs)",
+    "note": "SYNTHETIC demo clip — deterministic plasma sinusoid, hand-encoded PNG frames via ffmpeg libx264. No audio. No copyright.",
+    "contentType": "video/mp4",
+    "fetchedAt": "2026-07-09"
+  },
+  {
+    "file": "video/demo_grid.mp4",
+    "url": "synthetic (scripts/_genclips.mjs)",
+    "note": "SYNTHETIC demo clip — deterministic shifting checkerboard, hand-encoded PNG frames via ffmpeg libx264. No audio. No copyright.",
+    "contentType": "video/mp4",
+    "fetchedAt": "2026-07-09"
+  },
+  {
+    "file": "video/demo_webcam.mp4",
+    "url": "synthetic (scripts/_genclips.mjs)",
+    "note": "SYNTHETIC talking-head PLACEHOLDER — a warm radial vignette (NOT a real face), deterministic PNG frames + WAV tone via ffmpeg libx264/aac. Stands in for a creator webcam PiP in fixtures/showcase; real user webcam arrives via props. No copyright, no likeness.",
+    "contentType": "video/mp4",
+    "fetchedAt": "2026-07-09"
+  }
+]

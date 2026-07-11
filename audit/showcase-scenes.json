@@ -1,0 +1,972 @@
+[
+  {
+    "index": 0,
+    "id": "sc01",
+    "type": "HOOK",
+    "durationFrames": 220,
+    "startFrame": 0,
+    "midFrame": 121
+  },
+  {
+    "index": 1,
+    "id": "sc02",
+    "type": "CHAT_MOCKUP",
+    "durationFrames": 300,
+    "startFrame": 220,
+    "midFrame": 385
+  },
+  {
+    "index": 2,
+    "id": "sc03",
+    "type": "STEP_FLOW",
+    "durationFrames": 320,
+    "startFrame": 520,
+    "midFrame": 696
+  },
+  {
+    "index": 3,
+    "id": "sc04",
+    "type": "STAT_PANELS",
+    "durationFrames": 330,
+    "startFrame": 840,
+    "midFrame": 1021
+  },
+  {
+    "index": 4,
+    "id": "sc05",
+    "type": "QUOTE_SPOTLIGHT",
+    "durationFrames": 280,
+    "startFrame": 1170,
+    "midFrame": 1324
+  },
+  {
+    "index": 5,
+    "id": "sc06",
+    "type": "SPLIT_PATHS",
+    "durationFrames": 340,
+    "startFrame": 1450,
+    "midFrame": 1637
+  },
+  {
+    "index": 6,
+    "id": "sc07",
+    "type": "BAR_COMPARE",
+    "durationFrames": 330,
+    "startFrame": 1790,
+    "midFrame": 1971
+  },
+  {
+    "index": 7,
+    "id": "sc08",
+    "type": "CHANNEL_CARD",
+    "durationFrames": 260,
+    "startFrame": 2120,
+    "midFrame": 2263
+  },
+  {
+    "index": 8,
+    "id": "sc09",
+    "type": "LINE_CHART",
+    "durationFrames": 210,
+    "startFrame": 2380,
+    "midFrame": 2495
+  },
+  {
+    "index": 9,
+    "id": "sc10",
+    "type": "DONUT",
+    "durationFrames": 220,
+    "startFrame": 2590,
+    "midFrame": 2711
+  },
+  {
+    "index": 10,
+    "id": "sc11",
+    "type": "PROGRESS",
+    "durationFrames": 220,
+    "startFrame": 2810,
+    "midFrame": 2931
+  },
+  {
+    "index": 11,
+    "id": "sc12",
+    "type": "TIMELINE",
+    "durationFrames": 220,
+    "startFrame": 3030,
+    "midFrame": 3151
+  },
+  {
+    "index": 12,
+    "id": "sc13",
+    "type": "QUADRANT",
+    "durationFrames": 210,
+    "startFrame": 3250,
+    "midFrame": 3365
+  },
+  {
+    "index": 13,
+    "id": "sc14",
+    "type": "CODE_WINDOW",
+    "durationFrames": 260,
+    "startFrame": 3460,
+    "midFrame": 3603
+  },
+  {
+    "index": 14,
+    "id": "sc15",
+    "type": "RECAP",
+    "durationFrames": 300,
+    "startFrame": 3720,
+    "midFrame": 3885
+  },
+  {
+    "index": 15,
+    "id": "sc16",
+    "type": "OUTRO_CTA",
+    "durationFrames": 200,
+    "startFrame": 4020,
+    "midFrame": 4130
+  },
+  {
+    "index": 16,
+    "id": "sc17",
+    "type": "TITLE_CARD",
+    "durationFrames": 150,
+    "startFrame": 4220,
+    "midFrame": 4302
+  },
+  {
+    "index": 17,
+    "id": "sc18",
+    "type": "KINETIC_TEXT",
+    "durationFrames": 150,
+    "startFrame": 4370,
+    "midFrame": 4452
+  },
+  {
+    "index": 18,
+    "id": "sc19",
+    "type": "KINETIC_TEXT",
+    "durationFrames": 140,
+    "startFrame": 4520,
+    "midFrame": 4597
+  },
+  {
+    "index": 19,
+    "id": "sc20",
+    "type": "KINETIC_TEXT",
+    "durationFrames": 140,
+    "startFrame": 4660,
+    "midFrame": 4737
+  },
+  {
+    "index": 20,
+    "id": "sc21",
+    "type": "DIAGRAM",
+    "durationFrames": 220,
+    "startFrame": 4800,
+    "midFrame": 4921
+  },
+  {
+    "index": 21,
+    "id": "sc22",
+    "type": "CONCEPT_DIAGRAM",
+    "durationFrames": 180,
+    "startFrame": 5020,
+    "midFrame": 5119
+  },
+  {
+    "index": 22,
+    "id": "sc23",
+    "type": "BITS",
+    "durationFrames": 200,
+    "startFrame": 5200,
+    "midFrame": 5310
+  },
+  {
+    "index": 23,
+    "id": "sc24",
+    "type": "MEMORY",
+    "durationFrames": 200,
+    "startFrame": 5400,
+    "midFrame": 5510
+  },
+  {
+    "index": 24,
+    "id": "sc25",
+    "type": "PACKET",
+    "durationFrames": 240,
+    "startFrame": 5600,
+    "midFrame": 5732
+  },
+  {
+    "index": 25,
+    "id": "sc26",
+    "type": "PIPELINE",
+    "durationFrames": 210,
+    "startFrame": 5840,
+    "midFrame": 5955
+  },
+  {
+    "index": 26,
+    "id": "sc27",
+    "type": "PIPELINE",
+    "variant": "ci",
+    "durationFrames": 200,
+    "startFrame": 6050,
+    "midFrame": 6160
+  },
+  {
+    "index": 27,
+    "id": "sc28",
+    "type": "PIPELINE",
+    "variant": "boot",
+    "durationFrames": 200,
+    "startFrame": 6250,
+    "midFrame": 6360
+  },
+  {
+    "index": 28,
+    "id": "sc29",
+    "type": "PIPELINE",
+    "variant": "serverless",
+    "durationFrames": 200,
+    "startFrame": 6450,
+    "midFrame": 6560
+  },
+  {
+    "index": 29,
+    "id": "sc30",
+    "type": "PIPELINE",
+    "variant": "journey",
+    "durationFrames": 200,
+    "startFrame": 6650,
+    "midFrame": 6760
+  },
+  {
+    "index": 30,
+    "id": "sc31",
+    "type": "LAYERED_STACK",
+    "durationFrames": 210,
+    "startFrame": 6850,
+    "midFrame": 6965
+  },
+  {
+    "index": 31,
+    "id": "sc32",
+    "type": "GRID_ARRAY",
+    "durationFrames": 200,
+    "startFrame": 7060,
+    "midFrame": 7170
+  },
+  {
+    "index": 32,
+    "id": "sc33",
+    "type": "SPEC_COMPARE",
+    "durationFrames": 210,
+    "startFrame": 7260,
+    "midFrame": 7375
+  },
+  {
+    "index": 33,
+    "id": "sc34",
+    "type": "DIE_SHOT",
+    "durationFrames": 210,
+    "startFrame": 7470,
+    "midFrame": 7585
+  },
+  {
+    "index": 34,
+    "id": "sc35",
+    "type": "NEURAL_NET",
+    "durationFrames": 200,
+    "startFrame": 7680,
+    "midFrame": 7790
+  },
+  {
+    "index": 35,
+    "id": "sc36",
+    "type": "DATACENTER",
+    "durationFrames": 210,
+    "startFrame": 7880,
+    "midFrame": 7995
+  },
+  {
+    "index": 36,
+    "id": "sc37",
+    "type": "DATACENTER",
+    "durationFrames": 210,
+    "startFrame": 8090,
+    "midFrame": 8205
+  },
+  {
+    "index": 37,
+    "id": "sc38",
+    "type": "TRANSFORMER_BLOCK",
+    "durationFrames": 210,
+    "startFrame": 8300,
+    "midFrame": 8415
+  },
+  {
+    "index": 38,
+    "id": "sc39",
+    "type": "CACHE_PYRAMID",
+    "durationFrames": 200,
+    "startFrame": 8510,
+    "midFrame": 8620
+  },
+  {
+    "index": 39,
+    "id": "sc40",
+    "type": "CALL_STACK",
+    "durationFrames": 200,
+    "startFrame": 8710,
+    "midFrame": 8820
+  },
+  {
+    "index": 40,
+    "id": "sc41",
+    "type": "TOKENIZER",
+    "durationFrames": 210,
+    "startFrame": 8910,
+    "midFrame": 9025
+  },
+  {
+    "index": 41,
+    "id": "sc42",
+    "type": "FILE_TREE",
+    "durationFrames": 200,
+    "startFrame": 9120,
+    "midFrame": 9230
+  },
+  {
+    "index": 42,
+    "id": "sc43",
+    "type": "DATABASE_TABLE",
+    "durationFrames": 210,
+    "startFrame": 9320,
+    "midFrame": 9435
+  },
+  {
+    "index": 43,
+    "id": "sc44",
+    "type": "GIT_BRANCH",
+    "durationFrames": 210,
+    "startFrame": 9530,
+    "midFrame": 9645
+  },
+  {
+    "index": 44,
+    "id": "sc45",
+    "type": "STATE_MACHINE",
+    "durationFrames": 200,
+    "startFrame": 9740,
+    "midFrame": 9850
+  },
+  {
+    "index": 45,
+    "id": "sc46",
+    "type": "EMBEDDING_SPACE",
+    "durationFrames": 200,
+    "startFrame": 9940,
+    "midFrame": 10050
+  },
+  {
+    "index": 46,
+    "id": "sc47",
+    "type": "QUEUE",
+    "durationFrames": 190,
+    "startFrame": 10140,
+    "midFrame": 10244
+  },
+  {
+    "index": 47,
+    "id": "sc48",
+    "type": "API_REQUEST_RESPONSE",
+    "durationFrames": 200,
+    "startFrame": 10330,
+    "midFrame": 10440
+  },
+  {
+    "index": 48,
+    "id": "sc49",
+    "type": "BOOLEAN_LOGIC_GATES",
+    "durationFrames": 200,
+    "startFrame": 10530,
+    "midFrame": 10640
+  },
+  {
+    "index": 49,
+    "id": "sc50",
+    "type": "HASH_FUNCTION",
+    "durationFrames": 200,
+    "startFrame": 10730,
+    "midFrame": 10840
+  },
+  {
+    "index": 50,
+    "id": "sc51",
+    "type": "SORTING_VISUAL",
+    "durationFrames": 200,
+    "startFrame": 10930,
+    "midFrame": 11040
+  },
+  {
+    "index": 51,
+    "id": "sc52",
+    "type": "CLOCK_SIGNAL",
+    "durationFrames": 200,
+    "startFrame": 11130,
+    "midFrame": 11240
+  },
+  {
+    "index": 52,
+    "id": "sc53",
+    "type": "GPU_CLUSTER",
+    "durationFrames": 200,
+    "startFrame": 11330,
+    "midFrame": 11440
+  },
+  {
+    "index": 53,
+    "id": "sc54",
+    "type": "ZOOM_SCALE",
+    "durationFrames": 210,
+    "startFrame": 11530,
+    "midFrame": 11645
+  },
+  {
+    "index": 54,
+    "id": "sc55",
+    "type": "ENCRYPTION",
+    "variant": "encrypt",
+    "durationFrames": 200,
+    "startFrame": 11740,
+    "midFrame": 11850
+  },
+  {
+    "index": 55,
+    "id": "sc56",
+    "type": "POINTER_DIAGRAM",
+    "durationFrames": 200,
+    "startFrame": 11940,
+    "midFrame": 12050
+  },
+  {
+    "index": 56,
+    "id": "sc57",
+    "type": "NUMBER_BASE",
+    "durationFrames": 200,
+    "startFrame": 12140,
+    "midFrame": 12250
+  },
+  {
+    "index": 57,
+    "id": "sc58",
+    "type": "CODE_EDITOR",
+    "durationFrames": 200,
+    "startFrame": 12340,
+    "midFrame": 12450
+  },
+  {
+    "index": 58,
+    "id": "sc59",
+    "type": "CODE_EDITOR",
+    "variant": "split",
+    "durationFrames": 200,
+    "startFrame": 12540,
+    "midFrame": 12650
+  },
+  {
+    "index": 59,
+    "id": "sc60",
+    "type": "TERMINAL_SESSION",
+    "durationFrames": 200,
+    "startFrame": 12740,
+    "midFrame": 12850
+  },
+  {
+    "index": 60,
+    "id": "sc61",
+    "type": "LOG_STREAM",
+    "durationFrames": 200,
+    "startFrame": 12940,
+    "midFrame": 13050
+  },
+  {
+    "index": 61,
+    "id": "sc62",
+    "type": "CODE_DIFF",
+    "durationFrames": 200,
+    "startFrame": 13140,
+    "midFrame": 13250
+  },
+  {
+    "index": 62,
+    "id": "sc63",
+    "type": "ERROR_TRACE",
+    "durationFrames": 200,
+    "startFrame": 13340,
+    "midFrame": 13450
+  },
+  {
+    "index": 63,
+    "id": "sc64",
+    "type": "WINDOW_FRAME",
+    "variant": "browser",
+    "durationFrames": 200,
+    "startFrame": 13540,
+    "midFrame": 13650
+  },
+  {
+    "index": 64,
+    "id": "sc65",
+    "type": "WINDOW_FRAME",
+    "variant": "mac",
+    "durationFrames": 200,
+    "startFrame": 13740,
+    "midFrame": 13850
+  },
+  {
+    "index": 65,
+    "id": "sc66",
+    "type": "AUTOMATION_RUN",
+    "durationFrames": 210,
+    "startFrame": 13940,
+    "midFrame": 14055
+  },
+  {
+    "index": 66,
+    "id": "sc67",
+    "type": "DOM_INSPECT",
+    "durationFrames": 200,
+    "startFrame": 14150,
+    "midFrame": 14260
+  },
+  {
+    "index": 67,
+    "id": "sc68",
+    "type": "NETWORK_WATERFALL",
+    "durationFrames": 200,
+    "startFrame": 14350,
+    "midFrame": 14460
+  },
+  {
+    "index": 68,
+    "id": "sc69",
+    "type": "DEVICE_FRAME",
+    "durationFrames": 200,
+    "startFrame": 14550,
+    "midFrame": 14660
+  },
+  {
+    "index": 69,
+    "id": "sc70",
+    "type": "CLOUD_ARCH",
+    "durationFrames": 220,
+    "startFrame": 14750,
+    "midFrame": 14871
+  },
+  {
+    "index": 70,
+    "id": "sc71",
+    "type": "K8S_CLUSTER",
+    "variant": "rollout",
+    "durationFrames": 220,
+    "startFrame": 14970,
+    "midFrame": 15091
+  },
+  {
+    "index": 71,
+    "id": "sc72",
+    "type": "COST_METER",
+    "durationFrames": 190,
+    "startFrame": 15190,
+    "midFrame": 15294
+  },
+  {
+    "index": 72,
+    "id": "sc73",
+    "type": "SLO_GAUGE",
+    "durationFrames": 200,
+    "startFrame": 15380,
+    "midFrame": 15490
+  },
+  {
+    "index": 73,
+    "id": "sc74",
+    "type": "IAC_PLAN",
+    "durationFrames": 210,
+    "startFrame": 15580,
+    "midFrame": 15695
+  },
+  {
+    "index": 74,
+    "id": "sc75",
+    "type": "ERD",
+    "durationFrames": 210,
+    "startFrame": 15790,
+    "midFrame": 15905
+  },
+  {
+    "index": 75,
+    "id": "sc76",
+    "type": "LAYERED_STACK",
+    "variant": "imageLayers",
+    "durationFrames": 210,
+    "startFrame": 16000,
+    "midFrame": 16115
+  },
+  {
+    "index": 76,
+    "id": "sc77",
+    "type": "PACKET",
+    "variant": "container",
+    "durationFrames": 210,
+    "startFrame": 16210,
+    "midFrame": 16325
+  },
+  {
+    "index": 77,
+    "id": "sc78",
+    "type": "DIAGRAM",
+    "variant": "mesh",
+    "durationFrames": 210,
+    "startFrame": 16420,
+    "midFrame": 16535
+  },
+  {
+    "index": 78,
+    "id": "sc79",
+    "type": "PROCESS_TABLE",
+    "durationFrames": 210,
+    "startFrame": 16630,
+    "midFrame": 16745
+  },
+  {
+    "index": 79,
+    "id": "sc80",
+    "type": "KERNEL_BOUNDARY",
+    "durationFrames": 220,
+    "startFrame": 16840,
+    "midFrame": 16961
+  },
+  {
+    "index": 80,
+    "id": "sc81",
+    "type": "BITS",
+    "variant": "permissions",
+    "durationFrames": 210,
+    "startFrame": 17060,
+    "midFrame": 17175
+  },
+  {
+    "index": 81,
+    "id": "sc82",
+    "type": "TEST_RUNNER",
+    "durationFrames": 220,
+    "startFrame": 17270,
+    "midFrame": 17391
+  },
+  {
+    "index": 82,
+    "id": "sc83",
+    "type": "TEST_MATRIX",
+    "durationFrames": 210,
+    "startFrame": 17490,
+    "midFrame": 17605
+  },
+  {
+    "index": 83,
+    "id": "sc84",
+    "type": "CACHE_PYRAMID",
+    "variant": "pyramid",
+    "durationFrames": 210,
+    "startFrame": 17700,
+    "midFrame": 17815
+  },
+  {
+    "index": 84,
+    "id": "sc85",
+    "type": "STATE_MACHINE",
+    "variant": "lifecycle",
+    "durationFrames": 230,
+    "startFrame": 17910,
+    "midFrame": 18036
+  },
+  {
+    "index": 85,
+    "id": "sc86",
+    "type": "CONTEXT_METER",
+    "durationFrames": 210,
+    "startFrame": 18140,
+    "midFrame": 18255
+  },
+  {
+    "index": 86,
+    "id": "sc87",
+    "type": "AGENT_HARNESS",
+    "durationFrames": 230,
+    "startFrame": 18350,
+    "midFrame": 18476
+  },
+  {
+    "index": 87,
+    "id": "sc88",
+    "type": "KNOWLEDGE_GRAPH",
+    "durationFrames": 220,
+    "startFrame": 18580,
+    "midFrame": 18701
+  },
+  {
+    "index": 88,
+    "id": "sc89",
+    "type": "RETRIEVAL_RANK",
+    "durationFrames": 230,
+    "startFrame": 18800,
+    "midFrame": 18926
+  },
+  {
+    "index": 89,
+    "id": "sc90",
+    "type": "MODEL_STAGES",
+    "durationFrames": 220,
+    "startFrame": 19030,
+    "midFrame": 19151
+  },
+  {
+    "index": 90,
+    "id": "sc91",
+    "type": "CONFIDENCE_GATE",
+    "variant": "block",
+    "durationFrames": 200,
+    "startFrame": 19250,
+    "midFrame": 19360
+  },
+  {
+    "index": 91,
+    "id": "sc92",
+    "type": "SANDBOX_BOX",
+    "durationFrames": 210,
+    "startFrame": 19450,
+    "midFrame": 19565
+  },
+  {
+    "index": 92,
+    "id": "sc93",
+    "type": "DRILL_IN",
+    "durationFrames": 240,
+    "startFrame": 19660,
+    "midFrame": 19792
+  },
+  {
+    "index": 93,
+    "id": "sc94",
+    "type": "EVAL_DASHBOARD",
+    "durationFrames": 210,
+    "startFrame": 19900,
+    "midFrame": 20015
+  },
+  {
+    "index": 94,
+    "id": "sc95",
+    "type": "DIAGRAM",
+    "variant": "agentMesh",
+    "durationFrames": 210,
+    "startFrame": 20110,
+    "midFrame": 20225
+  },
+  {
+    "index": 95,
+    "id": "sc96",
+    "type": "LINE_CHART",
+    "durationFrames": 210,
+    "startFrame": 20320,
+    "midFrame": 20435
+  },
+  {
+    "index": 96,
+    "id": "sc97",
+    "type": "DIAGRAM",
+    "variant": "auth",
+    "durationFrames": 220,
+    "startFrame": 20530,
+    "midFrame": 20651
+  },
+  {
+    "index": 97,
+    "id": "sc98",
+    "type": "REVEAL",
+    "durationFrames": 200,
+    "startFrame": 20750,
+    "midFrame": 20860
+  },
+  {
+    "index": 98,
+    "id": "sc99",
+    "type": "LIST_BUILD",
+    "durationFrames": 220,
+    "startFrame": 20950,
+    "midFrame": 21071
+  },
+  {
+    "index": 99,
+    "id": "sc100",
+    "type": "STAT_CALLOUT",
+    "durationFrames": 150,
+    "startFrame": 21170,
+    "midFrame": 21252
+  },
+  {
+    "index": 100,
+    "id": "sc101",
+    "type": "CAROUSEL",
+    "durationFrames": 200,
+    "startFrame": 21320,
+    "midFrame": 21430
+  },
+  {
+    "index": 101,
+    "id": "sc102",
+    "type": "ACTIVITY_CARD",
+    "durationFrames": 180,
+    "startFrame": 21520,
+    "midFrame": 21619
+  },
+  {
+    "index": 102,
+    "id": "sc103",
+    "type": "LOCATION_MAP",
+    "durationFrames": 220,
+    "startFrame": 21700,
+    "midFrame": 21821
+  },
+  {
+    "index": 103,
+    "id": "sc104",
+    "type": "SOUND_WAVE",
+    "durationFrames": 150,
+    "startFrame": 21920,
+    "midFrame": 22002
+  },
+  {
+    "index": 104,
+    "id": "sc105",
+    "type": "LOGO_REVEAL",
+    "durationFrames": 170,
+    "startFrame": 22070,
+    "midFrame": 22163
+  },
+  {
+    "index": 105,
+    "id": "sc106",
+    "type": "PHOTO",
+    "durationFrames": 180,
+    "startFrame": 22240,
+    "midFrame": 22339
+  },
+  {
+    "index": 106,
+    "id": "sc107",
+    "type": "SUBSCRIBE_REMINDER",
+    "durationFrames": 150,
+    "startFrame": 22420,
+    "midFrame": 22502
+  },
+  {
+    "index": 107,
+    "id": "sc108",
+    "type": "CREDITS_ROLL",
+    "durationFrames": 200,
+    "startFrame": 22570,
+    "midFrame": 22680
+  },
+  {
+    "index": 108,
+    "id": "sc109",
+    "type": "LOWER_THIRD",
+    "durationFrames": 186,
+    "startFrame": 22770,
+    "midFrame": 22872
+  },
+  {
+    "index": 109,
+    "id": "sc110",
+    "type": "CHAPTER",
+    "durationFrames": 180,
+    "startFrame": 22956,
+    "midFrame": 23055
+  },
+  {
+    "index": 110,
+    "id": "sc111",
+    "type": "NOTIFICATION",
+    "durationFrames": 190,
+    "startFrame": 23136,
+    "midFrame": 23240
+  },
+  {
+    "index": 111,
+    "id": "sc112",
+    "type": "COUNTDOWN",
+    "durationFrames": 190,
+    "startFrame": 23326,
+    "midFrame": 23430
+  },
+  {
+    "index": 112,
+    "id": "sc113",
+    "type": "FLIP_CARD",
+    "durationFrames": 210,
+    "startFrame": 23516,
+    "midFrame": 23631
+  },
+  {
+    "index": 113,
+    "id": "sc114",
+    "type": "GALLERY",
+    "durationFrames": 220,
+    "startFrame": 23726,
+    "midFrame": 23847
+  },
+  {
+    "index": 114,
+    "id": "sc115",
+    "type": "COMPARISON_SLIDER",
+    "durationFrames": 200,
+    "startFrame": 23946,
+    "midFrame": 24056
+  },
+  {
+    "index": 115,
+    "id": "sc116",
+    "type": "PHOTO_STACK",
+    "durationFrames": 200,
+    "startFrame": 24146,
+    "midFrame": 24256
+  },
+  {
+    "index": 116,
+    "id": "sc117",
+    "type": "IMAGE_SCENE",
+    "durationFrames": 180,
+    "startFrame": 24346,
+    "midFrame": 24445
+  },
+  {
+    "index": 117,
+    "id": "sc118",
+    "type": "IMAGE_SCENE",
+    "durationFrames": 180,
+    "startFrame": 24526,
+    "midFrame": 24625
+  },
+  {
+    "index": 118,
+    "id": "sc119",
+    "type": "OUTRO_CTA",
+    "durationFrames": 200,
+    "startFrame": 24706,
+    "midFrame": 24816
+  }
+]

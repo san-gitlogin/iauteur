@@ -1,0 +1,344 @@
+<p align="center">
+  <img src="brand/iauteur-lockup.svg" alt="iAuteur" width="300" />
+</p>
+
+# iAuteur — a JSON‑driven video factory (Remotion)
+
+Turn a **topic** into a finished tech‑explainer video. You (or any LLM) describe the video as a
+**JSON spec**; [Remotion](https://remotion.dev) renders it to MP4 — 16:9 long‑form **and** 9:16 shorts,
+each in **dark and light**. The project ships a large, audited component library (**136 scene types**)
+that automatically reskins across **30 design packs** and **42 themes**.
+
+> **The JSON is the movie.** `topics/<slug>/long.json` + `shorts.json` → Remotion renders exactly what
+> the spec says. Scene components are deterministic and read theme tokens, so one spec looks native in
+> every design pack and in dark or light with zero extra work.
+
+**Model‑agnostic by design:** the "director" that writes the JSON is *any* LLM following a plain‑Markdown
+skill (`.claude/skills/tech-video-director/`). Nothing in this repo calls a model — so it works with GitHub
+Copilot, Claude, Cursor, or a **local LLM** (Ollama / LM Studio) equally. See [Working with any LLM](#working-with-any-llm-including-local).
+
+---
+
+## Table of contents
+- [What this project is](#what-this-project-is)
+- [How it works (architecture)](#how-it-works-architecture)
+- [Prerequisites](#prerequisites)
+- [Quick start](#quick-start)
+- [Make a video from a topic](#make-a-video-from-a-topic)
+- [Working with any LLM (including local)](#working-with-any-llm-including-local)
+- [The optional Web Console (`webui/`)](#the-optional-web-console-webui)
+- [Command reference](#command-reference)
+- [Project structure](#project-structure)
+- [The component library](#the-component-library)
+- [Voiceover & rendering](#voiceover--rendering)
+- [Reproducibility — what's committed](#reproducibility--whats-committed)
+- [Push this repo to your own GitHub](#push-this-repo-to-your-own-github)
+- [Troubleshooting](#troubleshooting)
+- [Repository conventions](#repository-conventions)
+- [Credits & attribution](#credits--attribution)
+
+---
+
+## What this project is
+
+A pipeline that converts a **tech topic** (a bare idea, a title, or a source article) into **renderable
+video**. It has three layers:
+
+1. **A spec format** — a JSON document (`meta` + `brand` + `scenes[]` + `thumbnail`/`cover`) that fully
+   describes a video. This is the contract between "the idea" and "the pixels."
+2. **A render engine** — a Remotion (React) project that maps each `scene.type` to a component, applies a
+   theme + design pack, and renders deterministic frames. Same spec → 4 deliverables (wide/short × dark/light).
+3. **A director skill** — a Markdown instruction set (`.claude/skills/tech-video-director/`) that teaches an
+   LLM how to turn a topic into a valid spec: pick a theme, write a tight script, choose the right components,
+   place word‑anchored animations, and pass the linter.
+
+The creative step (topic → spec) is done by an LLM; the mechanical steps (validate, preview, render) are
+deterministic scripts. The two never mix — which is what makes the whole thing portable across any AI tool.
+
+## How it works (architecture)
+
+```mermaid
+flowchart LR
+  T[Topic / article] -->|LLM reads the director skill| S[JSON spec<br/>topics/&lt;slug&gt;/long.json + shorts.json]
+  S -->|npm run lint| L{Linter gate<br/>budgets · anti-monotony · structure}
+  L -->|pass| R[Remotion]
+  R --> W[wide-dark / wide-light .mp4]
+  R --> H[short-dark / short-light .mp4]
+  R --> TH[thumbnail / cover .png]
+  L -->|fail| S
+```
+
+- **Entry:** `src/index.ts` → `src/Root.tsx` registers every Studio composition.
+  - Per topic: `<slug>-wide-dark`, `<slug>-wide-light`, `<slug>-short-dark`, `<slug>-short-light`,
+    `<slug>-thumb` (1280×720 still), `<slug>-cover` (1080×1920 still).
+  - Per design pack: `<design>-wide` / `-short` (the full component showcase) and `<design>-new-wide` / `-new-short` (a focused reel of the newest components).
+- **Renderer:** `src/MainComposition.tsx` holds the `scene.type → component` registry. For each scene it
+  composes `Background → SceneTransition → SceneFx → the component (+ optional picture‑in‑picture)`.
+- **Themes vs design packs:** `brand.theme` is the **dark skin**; its light twin (`brand.themeLight`,
+  default `daylight`) renders automatically. `brand.design` optionally selects one of the 30 **design packs**,
+  which can override specific components *and* reskins everything else via theme tokens.
+
+## Prerequisites
+
+- **Node.js ≥ 18** (LTS 20 or 22 recommended). `.nvmrc` pins **22** — run `nvm use` if you use nvm.
+- **~2 GB free disk** for `node_modules` + Remotion's headless Chromium (auto‑downloaded on the first render).
+- **Network on first run** — Remotion fetches Google Fonts and, once, a Chromium binary; both are cached after.
+- **Optional — voiceover:** Python 3.9+ and `pip install edge-tts` (only if you want narrated audio).
+- **Optional — Web Console:** Python 3.9+ and `pip install -r webui/requirements.txt` (just Flask).
+
+Everything core runs through `npm` scripts — no global installs required.
+
+## Quick start
+
+```bash
+git clone https://github.com/san-gitlogin/iauteur.git
+cd iauteur
+npm install          # restores exact versions from package-lock.json
+npm run dev          # opens Remotion Studio at http://localhost:3000
+```
+
+In Studio's left sidebar you'll see the **topic videos** (e.g. `how-llms-work-wide-dark`) and the
+**design showcases** (e.g. `material-wide`, `cyberpunk-new-wide`). Press play, scrub the timeline, flip
+designs. Editing any `topics/<slug>/*.json` hot‑reloads instantly.
+
+## Make a video from a topic
+
+The end‑to‑end flow. Steps 1 and 3 are done by an LLM (the "director"); the rest are deterministic commands.
+
+**1. Scaffold the topic folder.**
+```bash
+npm run new-topic -- how-dns-works "How DNS Resolves a Domain"
+# creates topics/how-dns-works/{long.json, shorts.json, out/} with empty stub specs
+```
+
+**2. Hand the topic to an LLM as "the director."** Point your AI assistant at the skill and ask it to
+fill the specs (see [Working with any LLM](#working-with-any-llm-including-local) for exact prompts). The
+director follows `.claude/skills/tech-video-director/SKILL.md`, which walks it through:
+- pick an **angle** + audience and a **screenplay** preset (explainer / listicle / versus / deep‑dive / documentary / hype‑launch);
+- choose a **theme** (rotated so no two videos look alike) and background;
+- write a tight, sound‑off‑legible **script** (~150 wpm; `durationFrames ≈ words × 12 + 30`);
+- map each beat to the **right component by intent** (a trend → `LINE_CHART`, a comparison → `BAR_COMPARE`, an equation → `FORMULA`, a company → `LOGO_WALL`, …) while obeying the **anti‑monotony law**;
+- set **word anchors** (`atWord`) so each element animates in exactly when the narration names it;
+- add a `thumbnail` (long) / `cover` (shorts) block;
+- run a silent **critic pass** before emitting.
+
+The result is written to `topics/how-dns-works/long.json` and `shorts.json`.
+
+**3. Validate — the render gate.**
+```bash
+npm run lint            # hard budgets, structure, anti-monotony (nothing renders until this passes)
+npm run critique        # optional: qualitative per-scene review
+```
+Fix the **spec** (never the linter) until it passes.
+
+**4. Preview.**
+```bash
+npm run dev             # then open how-dns-works-wide-dark, -short-dark, etc.
+```
+
+**5. (Optional) Add narration.** See [Voiceover & rendering](#voiceover--rendering).
+
+**6. Render the finished files.**
+```bash
+npm run render -- how-dns-works wide-dark     # → topics/how-dns-works/out/wide-dark.mp4
+npm run render -- how-dns-works short-dark    # → .../out/short-dark.mp4
+npm run render -- how-dns-works thumb         # → .../out/thumb.png
+```
+Variants: `wide-dark` · `wide-light` · `short-dark` · `short-light` · `thumb` · `cover`.
+
+**7. (Optional) Package a standalone bundle** you can zip and hand off:
+```bash
+npm run package -- how-dns-works              # → dist/how-dns-works-video/ (+ .zip)
+```
+
+## Working with any LLM (including local)
+
+**This repo contains no model calls.** The "AI" is whatever assistant you already use — it reads a
+plain‑Markdown skill and writes JSON. That makes the director role fully portable:
+
+**The one thing any LLM needs:** access to `.claude/skills/tech-video-director/SKILL.md` and its
+`references/` files (especially `scene_library.md` = the component catalog, `text_budgets.md`, and
+`screenplays.md`). A good universal prompt is:
+
+> "Read `.claude/skills/tech-video-director/SKILL.md` and the files it references, then write
+> `topics/<slug>/long.json` and `shorts.json` for the topic: **<your topic>**. Follow every law
+> (theme rotation, text budgets, anti‑monotony, word anchors, truth). When done, I'll run `npm run lint`
+> and paste any errors back for you to fix."
+
+Tool‑specific notes:
+- **GitHub Copilot / Claude / Cursor / Cody / Windsurf:** open the repo and use the prompt above in chat. The
+  agent reads the skill and edits the JSON files directly. Iterate against `npm run lint`.
+- **Local LLM (Ollama, LM Studio, llama.cpp):** use a local‑model coding front‑end (e.g. Continue.dev, Aider,
+  or Cline pointed at your local endpoint) and the same prompt. A capable local model (e.g. a 30B‑class coder)
+  can follow the skill; smaller models do better if you paste `scene_library.md` + `text_budgets.md` inline and
+  work **one scene at a time**, re‑linting after each chunk (the skill's `stage_workflow.md` describes this
+  staged approach).
+
+**How a local LLM helps, precisely (and what's not built):** today the loop is *LLM writes JSON → `npm run
+lint` verifies → LLM fixes*. The linter, critic, and renderer are deterministic and need no model, so a local
+LLM slots directly into the authoring step with zero cloud dependency. There is **no built‑in automation** that
+calls a local model for you — the repo deliberately leaves that slot to your assistant. If you want to automate
+it, the natural place is the Web Console (below): it already builds the brief and runs lint/render, so a small
+custom step could POST the brief to a local endpoint (e.g. `http://localhost:11434/api/chat`) and write the
+returned JSON — but that code is **not included** here.
+
+## The optional Web Console (`webui/`)
+
+A small local **Flask** control panel that streamlines the manual parts. **It does not call any AI** — it
+builds a **brief** you hand to your LLM, then runs the deterministic pipeline for you.
+
+```bash
+pip install -r webui/requirements.txt   # just Flask
+python webui/app.py                      # http://127.0.0.1:5000
+```
+
+It lets you: enter a topic + source + options, browse the 30 design thumbnails, click **Generate brief**
+(writes `briefs/<slug>.md` + a "paste this into your AI chat" line), optionally scaffold the topic, and then
+run **Lint / Critique / Render / Open Studio** as buttons. The design thumbnails come from
+`out/proof/designs/` — generate them once with `node scripts/preview-designs.mjs` if the gallery is empty.
+
+## Command reference
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Remotion Studio (live preview) at :3000 |
+| `npm run new-topic -- <slug> "Title"` | Scaffold `topics/<slug>/` + regenerate the index (refuses existing slugs) |
+| `npm run lint` | Validate every spec — budgets, anti‑monotony, structure. **The render gate.** |
+| `npm run critique -- <spec>` | Qualitative per‑scene design review (no arg → all topics + gallery) |
+| `npm run render -- <slug> <variant>` | Render one variant → `topics/<slug>/out/`. Variant = `wide-dark`\|`wide-light`\|`short-dark`\|`short-light`\|`thumb`\|`cover` |
+| `npm run package -- <slug>` | Build a self‑contained `dist/<slug>-video/` bundle + zip |
+| `npm run chapters -- <slug>` | Generate YouTube chapters from scene durations |
+| `npm run voiceover -- <slug>` | Generate voiceover **text** (`sceneId\|narration`) from the spec (never hand‑written) |
+| `npm run gen-index` | Regenerate `src/topicsIndex.ts` from the `topics/` folders |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run audit` | Full library gate: census → self‑test → tsc → lint → audio‑check → determinism |
+
+`npm run render` calls `npx remotion render <slug>-<variant>` under the hood; the first render downloads a
+headless Chromium automatically.
+
+## Project structure
+
+```
+topics/<slug>/          One folder per video: long.json + shorts.json (+ out/ renders). Immutable once shipped.
+specs/gallery.json      Component showcase (every type demoed) — feeds the design-preview compositions.
+specs/demo-*.json       Finance + science demo videos that exercise the full library.
+src/
+  index.ts · Root.tsx   Remotion entry + composition registration (topics + design showcases).
+  MainComposition.tsx   Scene registry: maps scene.type → component (136 types).
+  types.ts              The spec schema (VideoSpec, Scene, BrandConfig, SceneData…).
+  themes.ts             42 themes (38 dark + 4 light) — all colour/font/scale tokens.
+  designs/<pack>/       The 30 design packs (per-pack component overrides + chrome + chart kit).
+  scenes/               The 134 scene component files.
+  charts/ diagrams/ motion/   Chart bodies · the DIAGRAM engine · the animation library.
+  ui.tsx · kit.tsx      Shared primitives (Headline, Panel, useScale, useSem, GaugeRing, ChromeFrame…).
+  topicsIndex.ts        AUTO-GENERATED by gen-index — never edit by hand.
+scripts/                Tooling: lint, render, new-topic, package, chapters, voiceover, audit, gen-index…
+.claude/skills/         tech-video-director (the authoring contract) + 30 design-* skills.
+webui/                  Optional Flask console (brief builder + pipeline runner).
+audit/                  census.json · matrix.md · register.md — the library's audit state.
+docs/                   ARCHITECTURE.html.  PROGRAM_3_FINAL.md — component-library build report.
+CLAUDE.md · PROJECT_RULES.md   Repo laws and the topic lifecycle (read before large changes).
+```
+
+## The component library
+
+**136 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
+RECAP, OUTRO_CTA…), charts (LINE_CHART, BAR_COMPARE, DONUT, FUNNEL, WATERFALL, RADAR, CANDLESTICK, SANKEY,
+TREEMAP, BOX_PLOT, PICTOGRAM…), diagrams & engines (DIAGRAM, PIPELINE, NEURAL_NET, STATE_MACHINE,
+KNOWLEDGE_GRAPH…), code/cloud/AI surfaces (CODE_EDITOR, TERMINAL_SESSION, CLOUD_ARCH, K8S_CLUSTER,
+AGENT_HARNESS, RETRIEVAL_RANK…), icons/logos (ICON_GRID, LOGO_WALL, LOGO_VERSUS…), topic‑general set‑pieces
+(FORMULA, MOLECULE, DNA_HELIX, CIRCUIT_FLOW, VECTOR_FIELD, TICKER_TAPE, MAP_RADAR…), and a media / creator‑
+overlay family (VIDEO_HERO, CAPTION_KINETIC_OVERLAY, PHOTO_TIMELINE…).
+
+The authoritative, always‑current catalog is `.claude/skills/tech-video-director/references/scene_library.md`
+(the "USE WHEN" table + the data shape for each type). `PROGRAM_3_FINAL.md` summarises how the library was
+built and audited. To browse them visually, run `npm run dev` and open any `<design>-wide` composition.
+
+## Voiceover & rendering
+
+Specs render silently by default. To add narration (optional, three steps — the last two are run manually
+because they need Python/network):
+
+```bash
+npm run voiceover -- <slug>                                   # 1. derive voiceover_*.txt from the spec
+python scripts/voiceover.py topics/<slug>/long.json <slug>_long   # 2. edge-tts → public/audio/*.mp3 + out/tts/*_timestamps.json
+node scripts/sync.mjs topics/<slug>/long.json out/tts/<slug>_long_timestamps.json <slug>_long  # 3. rewrite anchors to exact frames
+```
+Then `npm run lint` and re‑render. (Requires `pip install edge-tts` and internet for step 2.)
+
+## Reproducibility — what's committed
+
+- **Committed:** all source, specs, topics, design packs, skills, docs, `public/assets/` (images + demo clips
+  that specs reference), and `package-lock.json` (exact dependency versions). A fresh `npm install` reproduces
+  the toolchain exactly on any machine.
+- **Ignored** (see `.gitignore`): `node_modules/`, render outputs (`out/`, `dist/`, `*.zip`), logs, Python
+  caches, `.env*`. All regenerated locally — nothing required to run is left out.
+- **First run only:** Remotion downloads Chromium once and fetches Google Fonts over the network.
+
+## Push this repo to your own GitHub
+
+This is a fresh project (no git history yet). To publish under your account:
+
+```bash
+git init
+git branch -M main
+git config user.name  "your-name"
+git config user.email "you@users.noreply.github.com"   # your GitHub noreply email
+git add -A
+git status                # verify node_modules/, out/, *.zip are NOT listed
+git commit -m "Initial commit: iAuteur"
+git remote add origin https://github.com/<your-username>/iauteur.git
+git push -u origin main
+```
+
+If your machine's git is signed into a **different** (e.g. work) account, authenticate this push as your
+personal account without disturbing that: create a **fine‑grained Personal Access Token** (repo → Contents:
+Read/Write) on GitHub, then either push with a fresh credential prompt
+(`git -c credential.helper= -c credential.interactive=always push -u origin main` → username + paste the token
+as the password), or embed it once (`git push "https://<user>:<TOKEN>@github.com/<user>/iauteur.git" main`)
+and then scrub it (`git remote set-url origin https://github.com/<user>/iauteur.git`). Never commit
+a token or a `.env`.
+
+## Troubleshooting
+
+- **`npm run render` can't find the composition** — run `npm run gen-index` (regenerates `src/topicsIndex.ts`
+  so new topics register), then retry. Confirm the spec passes `npm run lint`.
+- **A spec won't render / lint fails** — the linter prints the exact budget or structure error; fix the spec,
+  never the linter. Text over budget → shorten the idea, don't shrink the font.
+- **Studio shows a webpack "Restoring failed … Expected end of object" warning** — a stale build cache; it's
+  discarded and rebuilt automatically. Harmless. Delete `node_modules/.cache` to silence it.
+- **Fonts or Chromium fail to download** — you're offline; connect once so Remotion can cache them.
+- **Design gallery empty in the Web Console** — run `node scripts/preview-designs.mjs` to generate the
+  thumbnails into `out/proof/designs/`.
+
+## Repository conventions
+
+- **Topics are immutable** once shipped — `new-topic` refuses existing slugs; create a new one instead.
+- **`brand.theme` must be a dark theme**; the light twin renders automatically. Rotate themes across videos.
+- **Truth first** — facts come only from a provided source or a live search; never invent stats, quotes, or dates.
+- **Text budgets are law**, enforced by the linter. Deterministic motion only (no unseeded randomness).
+- Building or changing a **component** is a code job that follows
+  `.claude/skills/tech-video-director/references/component_authoring.md` (six wiring files + both‑aspect proofs).
+- `CLAUDE.md` and `PROJECT_RULES.md` hold the full working rules — read them before large changes.
+
+## Credits & attribution
+
+This project was built **on top of** the work below, using AI assistance (Claude / Claude Code). The
+scene components and motion in `src/` are original, deterministic re‑implementations, but the ideas,
+template vocabulary, and design languages were learned and adapted from these sources — full credit to them:
+
+- **[Remotion](https://remotion.dev)** — the React video‑rendering engine this whole project runs on.
+  Note Remotion's own [license](https://remotion.dev/license) (free for individuals & small teams; larger
+  companies need a paid licence).
+- **ReactVideoEditor (RVE) — Remotion Templates** · <https://github.com/reactvideoeditor/remotion-templates>
+  (demos: <https://www.reactvideoeditor.com/remotion-templates>). RVE's collection of 81 free Remotion
+  templates is where this project's animation/component vocabulary was learned and built on top of.
+- **DesignPrompts** · <https://www.designprompts.dev/> — source of the 30 design‑language prompts in
+  `design_variations_prompts/`, which the 30 design packs (`src/designs/`) and `design-*` skills are adapted from.
+- **Icons & logos** — [Lucide](https://lucide.dev) (ISC) for glyphs and [Simple Icons](https://simpleicons.org)
+  (CC0) for brand logos, rendered via `src/AssetIcon.tsx`. Brand logos are used nominatively; see
+  `.claude/skills/tech-video-director/references/asset_rules.md`.
+- **AI assistance** — scaffolding, components, and docs were developed with Claude / Claude Code.
+
+Trademarks and brand logos belong to their respective owners. If you redistribute this repository, keep this
+section and honour each upstream project's licence.

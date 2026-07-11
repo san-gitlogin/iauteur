@@ -1,0 +1,235 @@
+{
+  "meta": {
+    "topic": "Widget showcase — media/intro/content wave",
+    "format": "showcase",
+    "fps": 30
+  },
+  "brand": {
+    "theme": "studio",
+    "background": "aurora-grid"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Six new building blocks just landed. Lower thirds, chapters, alerts, countdowns, and flip cards.",
+      "durationFrames": 200,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "SIX NEW WIDGETS",
+        "subtext": "more variety, less boredom",
+        "heroAsset": "lucide:layout-grid",
+        "anim": "slideLeft",
+        "headlineAtWord": 1,
+        "heroAtWord": 4
+      }
+    },
+    {
+      "id": "s02",
+      "type": "LOWER_THIRD",
+      "transition": "wipe",
+      "narration": "First, a lower third slides in to introduce anyone or anything by name.",
+      "durationFrames": 186,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "lowerThird": {
+          "kicker": "NEW TOOL",
+          "title": "Vector Search",
+          "subtitle": "similarity, not keywords",
+          "asset": "lucide:search",
+          "color": "blue",
+          "atWord": 3
+        }
+      }
+    },
+    {
+      "id": "s03",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "narration": "Next, a chapter divider breaks a long video into clean, numbered parts.",
+      "durationFrames": 180,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "How it works",
+          "subtitle": "the retrieval pipeline",
+          "color": "orange"
+        }
+      }
+    },
+    {
+      "id": "s04",
+      "type": "NOTIFICATION",
+      "transition": "blinds",
+      "narration": "Then notifications stack up, popping in one by one like real alerts arriving.",
+      "durationFrames": 190,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The reactions [poured in.]",
+        "headlineColor": "purple",
+        "notifications": [
+          {"app": "GitHub", "icon": "si:github", "title": "New star on your repo", "color": "green", "atWord": 1},
+          {"app": "Slack", "icon": "si:slack", "title": "3 replies in #launch", "color": "purple", "atWord": 5},
+          {"app": "Email", "icon": "lucide:mail", "title": "Investor wants a call", "color": "orange", "atWord": 9}
+        ]
+      }
+    },
+    {
+      "id": "s05",
+      "type": "COUNTDOWN",
+      "narration": "A countdown builds tension, ticking from three, two, one, down to go.",
+      "durationFrames": 190,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "countdown": {
+          "from": 3,
+          "label": "LAUNCH IN",
+          "go": "GO",
+          "color": "green",
+          "atWord": 5
+        }
+      }
+    },
+    {
+      "id": "s06",
+      "type": "FLIP_CARD",
+      "narration": "And a flip card overturns a myth, rotating to reveal the fact behind it.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Myth, meet [the facts.]",
+        "headlineColor": "orange",
+        "flip": {
+          "front": {"label": "MYTH", "text": "Bigger context always wins", "color": "red"},
+          "back": {"label": "FACT", "text": "Selective retrieval wins", "color": "green"},
+          "atWord": 8
+        }
+      }
+    },
+    {
+      "id": "s07",
+      "type": "GALLERY",
+      "transition": "pixel",
+      "narration": "A gallery grids up the logos of every tool you support, revealing them one by one.",
+      "durationFrames": 220,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "The tools we [support.]",
+        "headlineColor": "blue",
+        "gallery": {
+          "tiles": [
+            {"asset": "si:openai", "label": "OpenAI"},
+            {"asset": "si:anthropic", "label": "Anthropic"},
+            {"asset": "si:google", "label": "Google"},
+            {"asset": "si:meta", "label": "Meta"},
+            {"asset": "si:huggingface", "label": "Hugging Face"},
+            {"asset": "si:ollama", "label": "Ollama"}
+          ]
+        },
+        "source": "ILLUSTRATIVE — GALLERY DEMO"
+      }
+    },
+    {
+      "id": "s08",
+      "type": "COMPARISON_SLIDER",
+      "narration": "A comparison slider wipes from the old dashboard across to the redesigned one.",
+      "durationFrames": 200,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Old to [new] in one wipe.",
+        "headlineColor": "orange",
+        "comparison": {
+          "before": {"asset": "lucide:layout", "label": "Old UI", "caption": "cluttered", "color": "red"},
+          "after": {"asset": "lucide:sparkles", "label": "New UI", "caption": "focused", "color": "green"},
+          "atWord": 4
+        },
+        "source": "ILLUSTRATIVE — COMPARISON DEMO"
+      }
+    },
+    {
+      "id": "s09",
+      "type": "PHOTO_STACK",
+      "narration": "And a photo stack fans out a pile of receipts, screenshots, and proof.",
+      "durationFrames": 200,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "The receipts, [stacked.]",
+        "headlineColor": "purple",
+        "photoStack": {
+          "cards": [
+            {"asset": "lucide:receipt", "label": "Receipt", "color": "blue", "atWord": 5},
+            {"asset": "lucide:image", "label": "Screenshot", "color": "purple", "atWord": 6},
+            {"asset": "lucide:file-check", "label": "Proof", "color": "green", "atWord": 8}
+          ]
+        },
+        "source": "ILLUSTRATIVE — PHOTO STACK DEMO"
+      }
+    },
+    {
+      "id": "s10",
+      "type": "IMAGE_SCENE",
+      "narration": "A polaroid frames a single screenshot with a handwritten note underneath.",
+      "durationFrames": 180,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "One shot, [framed.]",
+        "headlineColor": "blue",
+        "image": {
+          "variant": "polaroid",
+          "asset": "si:react",
+          "caption": "shipped it!",
+          "color": "blue",
+          "atWord": 2
+        }
+      }
+    },
+    {
+      "id": "s11",
+      "type": "IMAGE_SCENE",
+      "narration": "Or picture in picture puts a webcam bubble over your screen recording.",
+      "durationFrames": 180,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Screen, plus [you.]",
+        "headlineColor": "green",
+        "image": {
+          "variant": "pip",
+          "asset": "lucide:monitor",
+          "caption": "screen.mp4",
+          "pip": {"asset": "lucide:video", "label": "cam"},
+          "color": "blue",
+          "atWord": 2
+        }
+      }
+    },
+    {
+      "id": "s12",
+      "type": "OUTRO_CTA",
+      "narration": "That's the widget wave. More variety, so no two videos ever feel the same.",
+      "durationFrames": 200,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "More widgets, more variety.",
+        "sub": "so no two videos feel the same"
+      }
+    }
+  ],
+  "thumbnail": {
+    "title": "New Widgets",
+    "badge": "WAVE 1",
+    "asset": "lucide:layout-grid"
+  }
+}

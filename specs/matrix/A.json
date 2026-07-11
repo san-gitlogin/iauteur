@@ -1,0 +1,549 @@
+{
+  "brand": {
+    "theme": "studio",
+    "design": "material"
+  },
+  "scenes": [
+    {
+      "id": "HOOK-min",
+      "type": "HOOK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "A short hook",
+        "headlineAtWord": 1
+      }
+    },
+    {
+      "id": "HOOK-max",
+      "type": "HOOK",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "THE FULL THIRTY CHAR HEADLINE!",
+        "subtext": "a subtext line under the hook",
+        "heroAsset": "lucide:brain-circuit",
+        "headlineAtWord": 1,
+        "heroAtWord": 3,
+        "anim": "scale"
+      }
+    },
+    {
+      "id": "TITLE_CARD-min",
+      "type": "TITLE_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "title": "Title",
+        "subtitle": "a subtitle"
+      }
+    },
+    {
+      "id": "TITLE_CARD-max",
+      "type": "TITLE_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "title": "The Section Title At Cap!!",
+        "subtitle": "a subtitle under the title cap"
+      }
+    },
+    {
+      "id": "KINETIC_TEXT-min",
+      "type": "KINETIC_TEXT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "kinetic": {
+          "fx": "typewriter",
+          "text": "Hello",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "KINETIC_TEXT-max",
+      "type": "KINETIC_TEXT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "kinetic": {
+          "fx": "typewriter",
+          "text": "Kinetic text stressed to forty eight chars ok!",
+          "sub": "kinetic subtitle at the forty char cap!",
+          "color": "purple",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "REVEAL-min",
+      "type": "REVEAL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [idea].",
+        "reveal": {
+          "kicker": "REVEAL",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "REVEAL-max",
+      "type": "REVEAL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "The [big idea] revealed at the headline!",
+        "reveal": {
+          "kicker": "THE CINEMATIC REVEAL OK",
+          "sub": "a cinematic statement stressed to the sixty character cap",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "LOWER_THIRD-min",
+      "type": "LOWER_THIRD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "lowerThird": {
+          "title": "Jane Smith",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "LOWER_THIRD-max",
+      "type": "LOWER_THIRD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "lowerThird": {
+          "kicker": "GUEST SPEAKER NOW",
+          "title": "Dr Jane Alexander Smith",
+          "subtitle": "Principal Research Scientist, ACME",
+          "color": "purple",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "STAT_CALLOUT-min",
+      "type": "STAT_CALLOUT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "value": 42,
+        "label": "a small number",
+        "atWord": 1
+      }
+    },
+    {
+      "id": "STAT_CALLOUT-max",
+      "type": "STAT_CALLOUT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "value": 1500000000,
+        "suffix": "+",
+        "label": "tokens in a typical vocabulary",
+        "atWord": 1,
+        "source": "ILLUSTRATIVE VOCABULARY SIZE"
+      }
+    },
+    {
+      "id": "QUOTE_SPOTLIGHT-min",
+      "type": "QUOTE_SPOTLIGHT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "quote": "Less is more.",
+        "source": "A SAYING"
+      }
+    },
+    {
+      "id": "QUOTE_SPOTLIGHT-max",
+      "type": "QUOTE_SPOTLIGHT",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "person": {
+          "name": "Vaswani et al., 2017",
+          "role": "The Transformer paper authors"
+        },
+        "quote": "Attention is all you need, and a quote stressed close to the one hundred and twenty character contract cap ok",
+        "source": "THE PAPER THAT INTRODUCED THE TRANSFORMER MODEL"
+      }
+    },
+    {
+      "id": "CHAPTER-min",
+      "type": "CHAPTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "1",
+          "title": "The Start",
+          "color": "blue"
+        }
+      }
+    },
+    {
+      "id": "CHAPTER-max",
+      "type": "CHAPTER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "Attention Is The Engine Now!",
+          "subtitle": "the transformer is the machine here",
+          "color": "purple"
+        }
+      }
+    },
+    {
+      "id": "RECAP-min",
+      "type": "RECAP",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "heading": "Recap",
+        "points": [
+          {
+            "text": "First point",
+            "atWord": 1
+          },
+          {
+            "text": "Second point",
+            "atWord": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "RECAP-max",
+      "type": "RECAP",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "heading": "The whole machine, recapped",
+        "points": [
+          {
+            "text": "Text becomes tokens at the cap ok",
+            "atWord": 1
+          },
+          {
+            "text": "Tokens become vectors at the cap now",
+            "atWord": 2
+          },
+          {
+            "text": "Attention weighs their meaning fully",
+            "atWord": 3
+          },
+          {
+            "text": "Training tunes the weights over time",
+            "atWord": 4
+          },
+          {
+            "text": "Generation predicts the next token",
+            "atWord": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "OUTRO_CTA-min",
+      "type": "OUTRO_CTA",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "Thanks for watching",
+        "sub": "subscribe"
+      }
+    },
+    {
+      "id": "OUTRO_CTA-max",
+      "type": "OUTRO_CTA",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "It's prediction all the way down now",
+        "sub": "subscribe to YOUR CHANNEL channel"
+      }
+    },
+    {
+      "id": "SUBSCRIBE_REMINDER-min",
+      "type": "SUBSCRIBE_REMINDER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "subscribe": {
+          "text": "Subscribe",
+          "color": "red",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "SUBSCRIBE_REMINDER-max",
+      "type": "SUBSCRIBE_REMINDER",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "subscribe": {
+          "text": "Subscribe for a new video weekly!",
+          "sub": "deep-dives into how the machines really work",
+          "handle": "@yourchannel",
+          "color": "red",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "CREDITS_ROLL-min",
+      "type": "CREDITS_ROLL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "credits": {
+          "title": "Credits",
+          "color": "blue",
+          "rows": [
+            {
+              "role": "Director",
+              "name": "Your Studio"
+            },
+            {
+              "role": "Music",
+              "name": "Public Domain"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CREDITS_ROLL-max",
+      "type": "CREDITS_ROLL",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "credits": {
+          "title": "How The Whole System Works Fully",
+          "color": "blue",
+          "rows": [
+            {
+              "role": "THE INPUT LAYER",
+              "name": "Tokens & Embeddings Pipeline"
+            },
+            {
+              "role": "THE CORE ENGINE",
+              "name": "Multi-Head Self Attention"
+            },
+            {
+              "role": "THE MACHINE ITSELF",
+              "name": "The Transformer Architecture"
+            },
+            {
+              "role": "THE LEARNING LOOP",
+              "name": "Training & Backpropagation"
+            },
+            {
+              "role": "THE FINAL OUTPUT",
+              "name": "Autoregressive Generation"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "COUNTDOWN-min",
+      "type": "COUNTDOWN",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "countdown": {
+          "from": 3,
+          "go": "GO",
+          "color": "blue",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "COUNTDOWN-max",
+      "type": "COUNTDOWN",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "countdown": {
+          "from": 10,
+          "label": "launching the whole thing in",
+          "go": "LIFTOFF!",
+          "color": "orange",
+          "atWord": 1
+        }
+      }
+    },
+    {
+      "id": "NOTIFICATION-min",
+      "type": "NOTIFICATION",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "notifications": [
+          {
+            "app": "Mail",
+            "title": "One new message",
+            "atWord": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "NOTIFICATION-max",
+      "type": "NOTIFICATION",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "notifications": [
+          {
+            "app": "Payments",
+            "title": "You received a new payment",
+            "body": "A customer just paid the full invoice amount now",
+            "color": "green",
+            "atWord": 1
+          },
+          {
+            "app": "Security Center",
+            "title": "New sign-in from a device",
+            "body": "A new device signed into your account from abroad",
+            "color": "red",
+            "atWord": 2
+          },
+          {
+            "app": "Calendar",
+            "title": "Standup starts in five minutes",
+            "body": "Daily engineering standup with the whole platform team",
+            "color": "blue",
+            "atWord": 3
+          },
+          {
+            "app": "Deploy Bot",
+            "title": "Production deploy succeeded",
+            "body": "Release v4.2.0 is now live across every region ok",
+            "color": "purple",
+            "atWord": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "CHANNEL_CARD-min",
+      "type": "CHANNEL_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "handle": "@channel",
+        "atWord": 1
+      }
+    },
+    {
+      "id": "CHANNEL_CARD-max",
+      "type": "CHANNEL_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "handle": "@yourchannel",
+        "tagline": "deep-dives into how it works",
+        "atWord": 1
+      }
+    },
+    {
+      "id": "CHANNEL_CARD-maxChip",
+      "type": "CHANNEL_CARD",
+      "narration": "A stress fixture with hostile content pushed to the contract cap here now.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "subChip": {
+          "src": "assets/video/demo_flow.mp4",
+          "name": "Tech Explained Daily",
+          "handle": "@techexplaineddaily",
+          "avatar": "lucide:cpu",
+          "buttonLabel": "SUBSCRIBE",
+          "color": "orange",
+          "atWord": 1
+        }
+      }
+    }
+  ]
+}

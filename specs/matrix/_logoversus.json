@@ -1,0 +1,7 @@
+{
+  "brand": {"theme": "studio", "design": "material"},
+  "scenes": [
+    {"id": "LOGO_VERSUS-min", "type": "LOGO_VERSUS", "narration": "Two brands, side by side, no winner called yet just the matchup right now.", "durationFrames": 200, "background": "zoneA", "data": {"headline": "The [matchup].", "headlineColor": "blue", "logoVersus": {"color": "blue", "left": {"icon": "si:jira", "name": "Jira", "color": "blue"}, "right": {"icon": "si:linear", "name": "Linear", "color": "purple"}}}},
+    {"id": "LOGO_VERSUS-max", "type": "LOGO_VERSUS", "narration": "The incumbent everyone knows against the challenger everyone is switching to, taglines and all, and the challenger takes it.", "durationFrames": 260, "background": "zoneA", "data": {"headline": "The [showdown] at cap", "headlineColor": "orange", "source": "ILLUSTRATIVE VERSUS", "logoVersus": {"color": "orange", "left": {"icon": "si:jira", "name": "Jira", "tagline": "The incumbent everyone knows", "color": "blue"}, "right": {"icon": "si:linear", "name": "Linear", "tagline": "The challenger everyone wants", "color": "purple"}, "winner": "right"}}}
+  ]
+}
