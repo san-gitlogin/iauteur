@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "topic": "How password managers actually keep your secrets safe",
+    "format": "long",
+    "resolution": "1920x1080",
+    "screenplay": "explainer",
+    "audience": "general",
+    "channel": "YOUR CHANNEL"
+  },
+  "brand": { "design": "corptrust", "theme": "corptrust", "themeLight": "daylight" },
+  "thumbnail": { "title": "Your Passwords Are Leaked", "subtitle": "Here is the fix", "asset": "lucide:shield-check" },
+  "scenes": [
+    { "component": "HOOK", "narration": "One data breach exposes millions of reused passwords instantly.", "data": { "headline": "ONE BREACH. ALL LOCKS OPEN.", "subtext": "The danger of password reuse", "heroAsset": "lucide:unlock", "headlineAtWord": 3, "heroAtWord": 7 }, "transition": "fade" },
+    { "component": "TITLE_CARD", "narration": "This is how a password manager actually protects you.", "data": { "title": "The Vault Mechanism", "subtitle": "Zero-knowledge encryption explained" }, "transition": "slide" },
+    { "component": "CONCEPT_DIAGRAM", "narration": "Your master password creates a local key that encrypts data before it ever leaves your device.", "data": { "nodes": [ { "id": "n1", "label": "Master Key", "asset": "lucide:key", "atWord": 2 }, { "id": "n2", "label": "Local Encrypt", "asset": "lucide:lock", "atWord": 6 }, { "id": "n3", "label": "Cloud Vault", "asset": "lucide:cloud", "atWord": 10 } ], "edges": [ { "from": "n1", "to": "n2", "atWord": 5 }, { "from": "n2", "to": "n3", "atWord": 9 } ] }, "transition": "morph" },
+    { "component": "STAT_PANELS", "narration": "Without a manager, you likely reuse passwords across ten or more sites, creating massive vulnerability.", "data": { "stats": [ { "kicker": "Average User", "value": "130+", "note": "accounts managed", "color": "orange", "atWord": 4 }, { "kicker": "Reuse Rate", "value": "65%", "note": "of passwords repeated", "color": "red", "atWord": 8 } ], "verdict": { "text": "High risk of cascade failure", "color": "red", "atWord": 11 }, "source": "NordPass Security Report, 2025" }, "transition": "push" },
+    { "component": "STEP_FLOW", "narration": "When you save a login, the app generates a unique complex string and stores it in the encrypted vault.", "data": { "steps": [ { "title": "Generate", "sub": "20+ char random string", "atWord": 4 }, { "title": "Encrypt", "sub": "AES-256 locally", "color": "blue", "atWord": 7 }, { "title": "Sync", "sub": "Scrambled data to cloud", "atWord": 10 } ], "source": "NIST Encryption Standards" }, "transition": "wipe" },
+    { "component": "CHAT_MOCKUP", "narration": "Even if the cloud provider is hacked, attackers only see gibberish because they lack your local master key.", "data": { "panelLabel": "Hacker View", "messages": [ { "from": "agent", "text": "Accessing database...", "atWord": 3 }, { "from": "agent", "text": "Data retrieved: Xy9#mP2!qL...", "color": "red", "atWord": 6 }, { "from": "user", "text": "Decryption failed: No key", "color": "green", "atWord": 9 } ], "source": "Zero-Knowledge Architecture Principle" }, "transition": "glitch" },
+    { "component": "FLIP_CARD", "narration": "People fear putting all eggs in one basket, but reusing weak passwords is actually the bigger risk.", "data": { "flip": { "front": { "label": "The Myth", "text": "One vault is a single point of failure", "color": "orange" }, "back": { "label": "The Reality", "text": "Unique keys isolate every account breach", "color": "green" }, "atWord": 8 } }, "transition": "zoom" },
+    { "component": "RECAP", "narration": "So remember: local encryption, unique passwords, and zero knowledge keep your digital life secure.", "data": { "heading": "The Security Trinity", "points": [ { "text": "Encryption happens on your device", "atWord": 3 }, { "text": "Every site gets a unique password", "atWord": 6 }, { "text": "Providers cannot read your data", "atWord": 9 } ] }, "transition": "fade" },
+    { "component": "OUTRO_CTA", "narration": "Start using a reputable password manager today to stop credential stuffing attacks.", "data": { "message": "Secure your digital identity now", "sub": "Link to top-rated managers in description" }, "transition": "dip" }
+  ]
+}

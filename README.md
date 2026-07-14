@@ -41,7 +41,6 @@ Copilot, Claude, Cursor, or a **local LLM** (Ollama / LM Studio) equally. See [W
 - [The component library](#the-component-library)
 - [Voiceover & rendering](#voiceover--rendering)
 - [Reproducibility — what's committed](#reproducibility--whats-committed)
-- [Push this repo to your own GitHub](#push-this-repo-to-your-own-github)
 - [Troubleshooting](#troubleshooting)
 - [Repository conventions](#repository-conventions)
 - [Credits & attribution](#credits--attribution)
@@ -242,11 +241,32 @@ run **Lint / Critique / Render / Open Studio** as buttons. The design thumbnails
 | `npm run chapters -- <slug>` | Generate YouTube chapters from scene durations |
 | `npm run voiceover -- <slug>` | Generate voiceover **text** (`sceneId\|narration`) from the spec (never hand‑written) |
 | `npm run gen-index` | Regenerate `src/topicsIndex.ts` from the `topics/` folders |
+| `npm run schema` | Regenerate `specs/video.schema.json` from the component manifest |
+| `npm run template -- T1,T2,…` | Print a starter spec skeleton (manifest examples) for the given scene types |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run audit` | Full library gate: census → self‑test → tsc → lint → audio‑check → determinism |
 
 `npm run render` calls `npx remotion render <slug>-<variant>` under the hood; the first render downloads a
 headless Chromium automatically.
+
+## Spec schema (the editor floor)
+
+`specs/video.schema.json` is a draft‑07 JSON Schema **derived from the component manifest**
+(`scripts/lib/manifest.mjs`) by `npm run schema`. `.vscode/settings.json` binds it to every
+`topics/*/long.json`, `topics/*/shorts.json` and `specs/gallery.json`, so the editor gives you
+**autocomplete and inline validation** as you author a spec — one source (the manifest) feeds the
+LLM prompt, the normalizer, the field validator **and** this schema.
+
+It is a **floor, not the whole law.** The schema checks:
+
+- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 136 types);
+- **enums** — `brand.theme` (dark skins), `themeLight`, `background`, each scene `transition`/`anim`/`background`, `meta.format`;
+- **string budgets** — `maxLength` on every text field, mirrored from the linter.
+
+It does **not** check required‑ness, counts, adjacency or cross‑field rules — those belong to the
+linter (`npm run lint`). So **schema‑green ≠ lint‑green**: a spec can satisfy the schema and still be
+rejected by the linter's deeper rules, but a schema failure is always a real shape/enum/budget error.
+`npm run gate` runs `gen-schema --check` to guarantee the committed schema never drifts from the manifest.
 
 ## Project structure
 

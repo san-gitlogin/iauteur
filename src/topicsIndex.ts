@@ -2,24 +2,36 @@
 import {VideoSpec} from './types';
 import long0 from '../topics/ai-search-trends-2026/long.json';
 import shorts0 from '../topics/ai-search-trends-2026/shorts.json';
-import long1 from '../topics/how-llms-work/long.json';
-import shorts1 from '../topics/how-llms-work/shorts.json';
-import long2 from '../topics/how-the-internet-works/long.json';
-import shorts2 from '../topics/how-the-internet-works/shorts.json';
-import long3 from '../topics/react-basics/long.json';
-import shorts3 from '../topics/react-basics/shorts.json';
-import long4 from '../topics/terawulf-anthropic-lease/long.json';
-import shorts4 from '../topics/terawulf-anthropic-lease/shorts.json';
-import long5 from '../topics/xrp-prediction/long.json';
-import shorts5 from '../topics/xrp-prediction/shorts.json';
+import long1 from '../topics/fluence-energy/long.json';
+import shorts1 from '../topics/fluence-energy/shorts.json';
+import long2 from '../topics/how-gps-knows-where-you-are/long.json';
+import shorts2 from '../topics/how-gps-knows-where-you-are/shorts.json';
+import long3 from '../topics/how-llms-work/long.json';
+import shorts3 from '../topics/how-llms-work/shorts.json';
+import long4 from '../topics/how-the-internet-works/long.json';
+import shorts4 from '../topics/how-the-internet-works/shorts.json';
+import long5 from '../topics/instagram-s-newest-ai-tool-didn-t-survive-the-week/long.json';
+import shorts5 from '../topics/instagram-s-newest-ai-tool-didn-t-survive-the-week/shorts.json';
+import long6 from '../topics/palette-136-tour/long.json';
+import shorts6 from '../topics/palette-136-tour/shorts.json';
+import long7 from '../topics/react-basics/long.json';
+import shorts7 from '../topics/react-basics/shorts.json';
+import long8 from '../topics/terawulf-anthropic-lease/long.json';
+import shorts8 from '../topics/terawulf-anthropic-lease/shorts.json';
+import long9 from '../topics/xrp-prediction/long.json';
+import shorts9 from '../topics/xrp-prediction/shorts.json';
 
 export interface TopicEntry {slug: string; long: VideoSpec; shorts: VideoSpec | null;}
 
 export const topics: TopicEntry[] = [
   {slug: 'ai-search-trends-2026', long: long0 as unknown as VideoSpec, shorts: shorts0 as unknown as VideoSpec},
-  {slug: 'how-llms-work', long: long1 as unknown as VideoSpec, shorts: shorts1 as unknown as VideoSpec},
-  {slug: 'how-the-internet-works', long: long2 as unknown as VideoSpec, shorts: shorts2 as unknown as VideoSpec},
-  {slug: 'react-basics', long: long3 as unknown as VideoSpec, shorts: shorts3 as unknown as VideoSpec},
-  {slug: 'terawulf-anthropic-lease', long: long4 as unknown as VideoSpec, shorts: shorts4 as unknown as VideoSpec},
-  {slug: 'xrp-prediction', long: long5 as unknown as VideoSpec, shorts: shorts5 as unknown as VideoSpec},
+  {slug: 'fluence-energy', long: long1 as unknown as VideoSpec, shorts: shorts1 as unknown as VideoSpec},
+  {slug: 'how-gps-knows-where-you-are', long: long2 as unknown as VideoSpec, shorts: shorts2 as unknown as VideoSpec},
+  {slug: 'how-llms-work', long: long3 as unknown as VideoSpec, shorts: shorts3 as unknown as VideoSpec},
+  {slug: 'how-the-internet-works', long: long4 as unknown as VideoSpec, shorts: shorts4 as unknown as VideoSpec},
+  {slug: 'instagram-s-newest-ai-tool-didn-t-survive-the-week', long: long5 as unknown as VideoSpec, shorts: shorts5 as unknown as VideoSpec},
+  {slug: 'palette-136-tour', long: long6 as unknown as VideoSpec, shorts: shorts6 as unknown as VideoSpec},
+  {slug: 'react-basics', long: long7 as unknown as VideoSpec, shorts: shorts7 as unknown as VideoSpec},
+  {slug: 'terawulf-anthropic-lease', long: long8 as unknown as VideoSpec, shorts: shorts8 as unknown as VideoSpec},
+  {slug: 'xrp-prediction', long: long9 as unknown as VideoSpec, shorts: shorts9 as unknown as VideoSpec},
 ];

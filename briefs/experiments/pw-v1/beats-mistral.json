@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "topic": "How password managers actually keep your secrets safe",
+    "onePayoff": "Never remember another password—safely.",
+    "openLoop": "What if one hack exposes all your passwords?",
+    "analogy": "A vault with a master key only you possess.",
+    "screenplay": "explainer",
+    "topicAxes": ["economic-pain", "sovereignty"]
+  },
+  "beats": [
+    { "id": "s01", "type": "HOOK", "intent": "the stake", "narration": "One hack could expose all your passwords." },
+    { "id": "s02", "type": "TITLE_CARD", "intent": "name the topic", "narration": "How password managers keep your secrets safe" },
+    { "id": "s03", "type": "CONCEPT_DIAGRAM", "intent": "explain encryption flow", "narration": "Your master password unlocks a vault of encrypted data." },
+    { "id": "s04", "type": "STEP_FLOW", "intent": "show password creation process", "narration": "Generate, encrypt, store, autofill—all in seconds.", "source": "NIST guidelines" },
+    { "id": "s05", "type": "FLIP_CARD", "intent": "myth vs fact", "narration": "Myth: Password managers are a single point of failure." },
+    { "id": "s06", "type": "STAT_PANELS", "intent": "compare security methods", "narration": "90% of people reuse passwords. Managers cut breach risk by 80%.", "source": "Google/Harris Poll 2023" },
+    { "id": "s07", "type": "CHAT_MOCKUP", "intent": "show autofill in action", "narration": "Log in instantly—without typing a single character.", "source": "Bitwarden demo" },
+    { "id": "s08", "type": "LIST_BUILD", "intent": "enumerate benefits", "narration": "Strong passwords, no reuse, breach alerts, cross-device sync." },
+    { "id": "s09", "type": "RECAP", "intent": "close the loop", "narration": "One master key. Zero memorized passwords. Total security." },
+    { "id": "s10", "type": "OUTRO_CTA", "intent": "final call to action", "narration": "Try a password manager today." }
+  ]
+}

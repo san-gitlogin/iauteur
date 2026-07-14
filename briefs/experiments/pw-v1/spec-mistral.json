@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "topic": "How password managers actually keep your secrets safe",
+    "format": "long",
+    "resolution": "1920x1080",
+    "screenplay": "explainer",
+    "audience": "general",
+    "channel": "YOUR CHANNEL",
+    "topicAxes": ["economic-pain", "sovereignty"]
+  },
+  "brand": { "design": "corptrust", "theme": "corptrust", "themeLight": "daylight" },
+  "thumbnail": { "title": "How password managers actually keep your secrets safe", "asset": "lucide:lock" },
+  "scenes": [
+    { "component": "HOOK", "narration": "Your passwords are not safe.", "data": { "headline": "Your passwords are not safe", "subtext": "unless you use a manager", "heroAsset": "lucide:lock", "headlineAtWord": 1, "heroAtWord": 3 }, "transition": "fade" },
+    { "component": "TITLE_CARD", "narration": "How do password managers work?", "data": { "title": "How password managers keep your secrets safe", "subtitle": "The encryption behind the curtain" }, "transition": "slide" },
+    { "component": "CONCEPT_DIAGRAM", "narration": "They encrypt your data with a master key.", "data": { "nodes": [ { "id": "n1", "label": "Master Password", "asset": "lucide:key", "atWord": 3 }, { "id": "n2", "label": "Encryption", "asset": "lucide:shield-check", "atWord": 5 }, { "id": "n3", "label": "Vault", "asset": "lucide:database", "atWord": 7 } ], "edges": [ { "from": "n1", "to": "n2", "atWord": 4 }, { "from": "n2", "to": "n3", "atWord": 6 } ] }, "transition": "morph" },
+    { "component": "STEP_FLOW", "narration": "First, your master password unlocks the vault.", "data": { "steps": [ { "kicker": "1", "title": "Enter Master Password", "sub": "Your single key to everything", "color": "blue", "atWord": 3 }, { "kicker": "2", "title": "Decrypt Vault", "sub": "Access all stored passwords", "color": "green", "atWord": 5 }, { "kicker": "3", "title": "Auto-fill", "sub": "Securely log in anywhere", "color": "purple", "atWord": 7 } ], "source": "illustrative" }, "transition": "zoom" },
+    { "component": "FLIP_CARD", "narration": "Myth: Password managers can be hacked.", "data": { "flip": { "front": { "label": "Myth", "text": "Password managers are unsafe", "color": "red" }, "back": { "label": "Fact", "text": "Encrypted vaults are near-impossible to crack", "color": "green" }, "atWord": 1 } }, "transition": "wipe" },
+    { "component": "STAT_PANELS", "narration": "Zero-knowledge means even the provider can't see your data.", "data": { "stats": [ { "kicker": "Your Data", "value": "100%", "note": "Encrypted", "color": "green", "atWord": 2 }, { "kicker": "Provider Access", "value": "0%", "note": "Zero-knowledge", "color": "red", "atWord": 5 } ], "verdict": { "text": "Only you hold the keys", "color": "blue", "atWord": 8 }, "source": "illustrative" }, "transition": "dip" },
+    { "component": "LIST_BUILD", "narration": "Three layers protect your passwords.", "data": { "heading": "Security Layers", "items": [ { "icon": "lucide:shield", "text": "AES-256 Encryption", "detail": "Military-grade security", "atWord": 2 }, { "icon": "lucide:fingerprint", "text": "Biometric Lock", "detail": "Fingerprint or Face ID", "atWord": 4 }, { "icon": "lucide:globe-lock", "text": "Secure Cloud Sync", "detail": "End-to-end encrypted", "atWord": 6 } ] }, "transition": "push" },
+    { "component": "SPLIT_PATHS", "narration": "With a manager, you choose: strong or weak passwords.", "data": { "center": { "kicker": "Your Choice", "title": "Password Strength", "atWord": 3 }, "left": { "title": "Strong", "badge": "Recommended", "lines": ["Unique", "Complex"], "color": "green", "atWord": 5 }, "right": { "title": "Weak", "lines": ["Repeated", "Easy to guess"], "color": "red", "atWord": 7 }, "source": "illustrative" }, "transition": "zoomthrough" },
+    { "component": "RECAP", "narration": "So, password managers encrypt, secure, and simplify.", "data": { "heading": "Why Trust a Password Manager?", "points": [ { "text": "Encrypted vault with master key", "atWord": 2 }, { "text": "Zero-knowledge architecture", "atWord": 4 }, { "text": "Auto-fill for convenience", "atWord": 6 } ] }, "transition": "slide" },
+    { "component": "OUTRO_CTA", "narration": "Start protecting your secrets today.", "data": { "message": "Use a password manager now", "sub": "Stay safe online" }, "transition": "fade" }
+  ]
+}

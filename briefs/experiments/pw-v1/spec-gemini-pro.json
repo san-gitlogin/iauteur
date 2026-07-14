@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "title": "How Password Managers Actually Keep Your Secrets Safe",
+    "topicAxes": ["sovereignty", "economic-pain"]
+  },
+  "brand": { "design": "corptrust", "theme": "corptrust", "themeLight": "daylight" },
+  "thumbnail": { "title": "Unbreakable", "subtitle": "Password Math" },
+  "scenes": [
+    { "component": "HOOK", "transition": "push", "narration": "Reusing your passwords? You are one data breach away from total digital ruin.", "data": { "headline": "ONE BREACH AWAY", "subtext": "from digital ruin", "heroAsset": "lucide:shield-alert", "headlineAtWord": 5, "heroAtWord": 10 } },
+    { "component": "TITLE_CARD", "transition": "slide", "narration": "Here is the exact math that makes password managers infinitely safer than your brain.", "data": { "title": "Zero-Knowledge", "subtitle": "how managers keep secrets safe" } },
+    { "component": "FLIP_CARD", "transition": "zoom", "narration": "People think putting everything in one basket is reckless. But these baskets are built differently.", "data": { "flip": { "front": { "label": "The Fear", "text": "They have all my keys", "color": "orange" }, "back": { "label": "The Math", "text": "Zero-knowledge encryption", "color": "green" }, "atWord": 13 } } },
+    { "component": "CONCEPT_DIAGRAM", "transition": "fade", "narration": "Your own device locks the vault locally, long before it ever reaches the internet.", "data": { "nodes": [ { "id": "n1", "label": "Your Device", "asset": "lucide:smartphone", "atWord": 2 }, { "id": "n2", "label": "AES-256", "asset": "lucide:lock", "atWord": 4 }, { "id": "n3", "label": "Cloud Vault", "asset": "lucide:cloud", "atWord": 12 } ], "edges": [ { "from": "n1", "to": "n2", "atWord": 4 }, { "from": "n2", "to": "n3", "atWord": 12 } ] } },
+    { "component": "STEP_FLOW", "transition": "wipe", "narration": "Your master password generates a local key, encrypts your data, and only uploads scrambled cyphertext.", "data": { "steps": [ { "title": "Hash", "sub": "master password", "atWord": 3 }, { "title": "Encrypt", "sub": "local vault", "atWord": 8 }, { "title": "Upload", "sub": "as gibberish", "atWord": 14 } ], "source": "Standard AES-256 Architecture (illustrative)" } },
+    { "component": "SPLIT_PATHS", "transition": "blinds", "narration": "If a cloud server gets breached, hackers do not find your passwords, just useless mathematical noise.", "data": { "center": { "title": "Server Breach", "color": "orange", "atWord": 4 }, "left": { "title": "Your Vault", "badge": "Safe", "color": "green", "atWord": 9 }, "right": { "title": "Without Manager", "badge": "Stolen", "color": "red", "atWord": 16 }, "source": "illustrative" } },
+    { "component": "LIST_BUILD", "transition": "morph", "narration": "Plus, they stop you from falling for fake websites, automatically generating complex passwords everywhere.", "data": { "heading": "Beyond storage", "items": [ { "icon": "lucide:shield-check", "text": "Phishing defense", "detail": "won't autofill fakes", "atWord": 4 }, { "icon": "lucide:dices", "text": "Unique keys", "detail": "for every site", "atWord": 12 }, { "icon": "lucide:refresh-cw", "text": "Seamless sync", "detail": "across all devices", "atWord": 14 } ] } },
+    { "component": "OUTRO_CTA", "transition": "push", "narration": "Reclaim your digital sovereignty today. Subscribe to YOUR CHANNEL for more technology demystified.", "data": { "message": "Reclaim your digital sovereignty.", "sub": "Subscribe to YOUR CHANNEL." } }
+  ]
+}

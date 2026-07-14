@@ -158,6 +158,34 @@ export const AssetIcon: React.FC<{
     }
   }
 
+  // needed:<key> — an asset the spec DECLARED (assetsNeeded) but that hasn't been
+  // resolved to a real file yet. Render a deliberate "pending" placeholder (dashed
+  // frame + muted image glyph) so the scene reads as intentional, never a blank or
+  // a random monogram. Theme-token styled only (design contract): panel bg, muted
+  // glyph guarded for contrast, corner radius × the theme's factor.
+  if (asset.startsWith('needed:')) {
+    const Pending = (lucide as Record<string, any>).ImageOff ?? (lucide as Record<string, any>).Image ?? (lucide as Record<string, any>).HelpCircle;
+    const bg = bare ? on ?? t.colors.panel : t.colors.panel;
+    const glyph = ensureContrast(tint ?? t.colors.muted, bg);
+    if (bare) return <Pending size={size} color={glyph} strokeWidth={1.8} />;
+    return (
+      <div
+        style={{
+          width: size,
+          height: size,
+          borderRadius: size * 0.22 * t.style.cornerRadius,
+          background: t.colors.panel,
+          border: `${Math.max(1.5, size * 0.02)}px dashed ${t.colors.panelBorder}`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Pending size={size * 0.5} color={glyph} strokeWidth={1.8} />
+      </div>
+    );
+  }
+
   const label = asset.replace(/^(si:|lucide:|img:)/, '').slice(0, 2).toUpperCase();
   if (bare) {
     const color = ensureContrast(tint ?? t.colors.accent, on ?? t.colors.bg);

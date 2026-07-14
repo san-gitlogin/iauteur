@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "topic": "Instagram's newest AI tool didn't survive the week",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "Meta's attempt to use public IG posts for AI images was crushed by immediate backlash.",
+    "openLoop": "How did Meta's newest AI tool die in just 3 days?",
+    "analogy": "A product launch that turned into a digital fire drill.",
+    "screenplay": "explainer"
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "channel": "YOUR CHANNEL"
+  },
+  "thumbnail": {
+    "title": "DEAD IN 3 DAYS",
+    "badge": "Meta Backlash",
+    "asset": "lucide:alert-triangle"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Instagram's brand new AI tool survived exactly three days before Meta completely killed it.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Dead in 3 Days",
+        "kicker": "META AI",
+        "heroAsset": "lucide:skull",
+        "atWord": 10
+      }
+    },
+    {
+      "id": "s02",
+      "type": "CONCEPT_DIAGRAM",
+      "transition": "slide",
+      "narration": "Muse Image tried letting users generate AI images from anyone's public Instagram posts.",
+      "durationFrames": 198,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "title": "The Flawed Idea",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Public Posts",
+            "asset": "lucide:image"
+          },
+          {
+            "id": "n2",
+            "label": "Muse Image",
+            "asset": "lucide:bot"
+          },
+          {
+            "id": "n3",
+            "label": "AI Gen",
+            "asset": "lucide:wand-2"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "from": "n2",
+            "to": "n3"
+          }
+        ],
+        "atWord": 4
+      }
+    },
+    {
+      "id": "s03",
+      "type": "NOTIFICATION",
+      "transition": "pop",
+      "narration": "Users immediately panicked on X and Reddit, terrified of deepfakes and privacy violations.",
+      "durationFrames": 198,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "title": "Massive Backlash",
+        "notifications": [
+          {
+            "title": "Privacy",
+            "message": "Violating consent!",
+            "icon": "lucide:shield-off"
+          },
+          {
+            "title": "Creators",
+            "message": "Deepfake nightmare",
+            "icon": "lucide:alert-circle"
+          }
+        ],
+        "atWord": 3
+      }
+    },
+    {
+      "id": "s04",
+      "type": "STAT_CALLOUT",
+      "transition": "whippan",
+      "narration": "Even SAG-AFTRA's hundred and sixty thousand members stepped in, calling it an utter miscalculation.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "statValue": "160K",
+        "statLabel": "Union Members",
+        "kicker": "SAG-AFTRA Response",
+        "atWord": 3
+      }
+    },
+    {
+      "id": "s05",
+      "type": "QUOTE_SPOTLIGHT",
+      "transition": "fade",
+      "narration": "By Friday, Meta surrendered, admitting the feature quote missed the mark.",
+      "durationFrames": 174,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "quote": "This feature missed the mark, so it's no longer available.",
+        "author": "Meta",
+        "role": "Instagram Blog",
+        "person": {
+          "asset": "si:meta"
+        },
+        "atWord": 8
+      }
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "slideUp",
+      "narration": "Subscribe to YOUR CHANNEL for more fast tech breakdowns.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "headline": "Stay Informed",
+        "subhead": "Subscribe for daily AI news",
+        "buttonText": "Subscribe",
+        "atWord": 1
+      }
+    }
+  ]
+}

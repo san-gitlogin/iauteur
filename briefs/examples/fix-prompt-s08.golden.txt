@@ -1,0 +1,51 @@
+You are fixing a few scenes of an iAuteur video spec that the validator REJECTED.
+Correct ONLY the scenes below. Keep each scene’s "id" and "narration" unchanged.
+Return ONLY a JSON array of the corrected scene objects — do NOT touch or include any other scene.
+
+## Scene s08 — TIMELINE
+Validator said:
+  - milestone title "SAG-AFTRA & CAA Revolt" > 18 chars
+
+Schema (`!`=required · `?`=optional · `≤N`=max chars · at:"word" = a word from this scene’s narration):
+    TIMELINE — Ordered dated milestones (history/roadmap).
+        USE: A sequence of dates matters.
+        data.timeline: { milestones!:items — × {date, title, sub?, color?, atWord} }
+        ex: {"timeline":{"milestones":[{"date":"Tue","title":"Launched","at":"launched"},{"date":"Wed","title":"Backlash","at":"backlash"},{"date":"Fri","title":"Killed","color":"red","at":"killed"}]}}
+
+Current scene (fix the flagged problem, keep everything else):
+```json
+{
+  "id": "s08",
+  "type": "TIMELINE",
+  "transition": "slide",
+  "narration": "By Friday, Meta surrendered. They released a blog post admitting the feature missed the mark and shut it down.",
+  "durationFrames": 258,
+  "timingSource": "estimated",
+  "background": "zoneB",
+  "data": {
+    "atWord": 4,
+    "timeline": {
+      "milestones": [
+        {
+          "date": "Tuesday",
+          "title": "Launched via PR",
+          "atWord": 1
+        },
+        {
+          "date": "Mid-Week",
+          "title": "SAG-AFTRA & CAA Revolt",
+          "atWord": 2
+        },
+        {
+          "date": "Friday",
+          "title": "Feature Killed",
+          "atWord": 3
+        }
+      ]
+    }
+  }
+}
+```
+
+## OUTPUT
+Return ONLY a JSON array of the 1 corrected scene object(s): [ { "id": "s08", ... } ]

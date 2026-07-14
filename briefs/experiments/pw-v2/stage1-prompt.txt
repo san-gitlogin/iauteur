@@ -1,0 +1,58 @@
+You are the DIRECTOR of iAuteur, a video factory. STAGE 1 of 2: plan the BEAT SHEET only.
+Output ONLY the JSON described in OUTPUT — no prose, no spec data yet.
+
+## BRIEF
+- Topic: How password managers actually keep your secrets safe
+- Format: long (1920×1080 landscape)
+- Screenplay: explainer  ·  Audience: general  ·  Channel: YOUR CHANNEL
+- Look: brand.design="corptrust", brand.theme="corptrust", brand.themeLight="daylight"
+
+## TRUTH (most important)
+For an evergreen/conceptual topic, definitional facts are fine. Do NOT invent
+time-sensitive numbers (prices, "current/latest" X); if needed, write `MISSING: <fact>`
+and mark illustrative numbers with data.source "illustrative".
+
+## STRUCTURAL LAWS (the linter enforces these exact numbers)
+1. Scene 1 is HOOK; the last scene is OUTRO_CTA (or RECAP).
+2. Scene count for "explainer": 7–10 (a long video).
+3. Anti-monotony: never two same-family components adjacent; use ≥ min(8, round(N/2)) DISTINCT types; no single type > ~35% of scenes.
+3b. These count as ONE family - NEVER place two adjacent: diagram = CONCEPT_DIAGRAM, STEP_FLOW, SPLIT_PATHS; data = STAT_CALLOUT, STAT_PANELS; mockup = CHAT_MOCKUP, NOTIFICATION; chart = BAR_COMPARE, TIMELINE.
+4. HOOK narration ≤ 17 words (it must fit ≤8s). One clear idea per scene; spoken, ≤20-word sentences.
+5. Studio components (CHAT_MOCKUP, STEP_FLOW, STAT_PANELS, QUOTE_SPOTLIGHT, SPLIT_PATHS) MUST include a factual "source" ≤64 chars.
+6. Semantic colors MEAN: green=works, red=broken, blue=info, purple=AI, orange=tension, yellow=cost.
+7. Assets: lucide: (glyphs) · si: (brand logos) · img: (only files that exist). Never invent files.
+
+## topicAxes — pick ≥2 (channel strategy):
+`entity-novelty` · `economic-pain` · `sovereignty` · `tribal-conflict`
+
+## COMPONENT MENU (choose types from THIS list only — 17 available)
+- HOOK — First ≤8s. State the stake so the viewer cannot scroll. (Always scene 1.)
+- TITLE_CARD — Name the topic for 2-3s after the hook. (Right after HOOK.)
+- CONCEPT_DIAGRAM — How-it-works chain of 2-4 nodes + edges. (Explain a mechanism/flow.)
+- KINETIC_TEXT — A single line as a dynamic moment (8 FX). (A punch, breather, or statement where static text would feel flat.)
+- STEP_FLOW — Pipeline of 3-5 named stages. (A sequential process (RAG, CI/CD).)
+- LIST_BUILD — "N things this changes" — icon list, two-tier rows. (Enumerate 3-5 points.)
+- RECAP — Close the hook loop: 3-4 points. (Penultimate scene.)
+- STAT_CALLOUT — ONE hero number counting up (+ optional logo strip). (A single number is the story.)
+- OUTRO_CTA — Final ≤5s, one CTA, centered. (Last scene.)
+- QUOTE_SPOTLIGHT — An insight/quote anchors the argument. (A person or principle carries weight.)
+- STAT_PANELS — Myth-bust / tradeoff: 2-3 metrics + verdict. (Compare metrics with a conclusion.)
+- CHAT_MOCKUP — Show a conversation/failure happening. (AI answer, support thread, DM.)
+- SPLIT_PATHS — One system, two behaviours (router, hit/miss). (Branching / either-or.)
+- BAR_COMPARE — Benchmarks/rankings: 2-4 horizontal bars. (Compare magnitudes with values.)
+- NOTIFICATION — Stack of toast notifications popping in (reactions, alerts). (Show reactions/alerts/DMs arriving.)
+- FLIP_CARD — Card flips 180° to reveal its back (myth→fact, before→after). (Overturn a claim / reveal the twist.)
+- TIMELINE — Ordered dated milestones (history/roadmap). (A sequence of dates matters.)
+
+## OUTPUT (one JSON object)
+```json
+{
+  "meta": { "topic": "...", "onePayoff": "...", "openLoop": "...", "analogy": "...",
+           "screenplay": "explainer", "topicAxes": ["...", "..."] },
+  "beats": [
+    { "id": "s01", "type": "HOOK", "intent": "the stake", "narration": "the exact spoken line" }
+    // 7–10 beats; last is OUTRO_CTA or RECAP
+  ]
+}
+```
+Write natural narration now. STAGE 2 will fill each beat’s visual data.

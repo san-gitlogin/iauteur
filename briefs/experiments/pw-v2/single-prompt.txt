@@ -1,0 +1,137 @@
+You are the DIRECTOR of iAuteur, a video factory. Produce a complete spec JSON in ONE response.
+First think a beat sheet, then output ONLY the final spec JSON (no prose).
+
+## BRIEF
+- Topic: How password managers actually keep your secrets safe
+- Format: long (1920×1080 landscape)
+- Screenplay: explainer  ·  Audience: general  ·  Channel: YOUR CHANNEL
+- Look: brand.design="corptrust", brand.theme="corptrust", brand.themeLight="daylight"
+
+## TRUTH (most important)
+For an evergreen/conceptual topic, definitional facts are fine. Do NOT invent
+time-sensitive numbers (prices, "current/latest" X); if needed, write `MISSING: <fact>`
+and mark illustrative numbers with data.source "illustrative".
+
+## STRUCTURAL LAWS (the linter enforces these exact numbers)
+1. Scene 1 is HOOK; the last scene is OUTRO_CTA (or RECAP).
+2. Scene count for "explainer": 7–10 (a long video).
+3. Anti-monotony: never two same-family components adjacent; use ≥ min(8, round(N/2)) DISTINCT types; no single type > ~35% of scenes.
+3b. These count as ONE family - NEVER place two adjacent: diagram = CONCEPT_DIAGRAM, STEP_FLOW, SPLIT_PATHS; data = STAT_CALLOUT, STAT_PANELS; mockup = CHAT_MOCKUP, NOTIFICATION; chart = BAR_COMPARE, TIMELINE.
+4. HOOK narration ≤ 17 words (it must fit ≤8s). One clear idea per scene; spoken, ≤20-word sentences.
+5. Studio components (CHAT_MOCKUP, STEP_FLOW, STAT_PANELS, QUOTE_SPOTLIGHT, SPLIT_PATHS) MUST include a factual "source" ≤64 chars.
+6. Semantic colors MEAN: green=works, red=broken, blue=info, purple=AI, orange=tension, yellow=cost.
+7. Assets: lucide: (glyphs) · si: (brand logos) · img: (only files that exist). Never invent files.
+
+## ONE COMPLETE EXAMPLE SCENE (copy these envelope keys EXACTLY)
+```json
+{ "type": "STAT_CALLOUT", "narration": "Modern vaults wrap every secret in 256-bit AES encryption.",
+  "transition": "fade",
+  "data": { "value": 256, "suffix": "-bit", "label": "AES vault encryption", "at": "encryption", "source": "illustrative" } }
+```
+Per-scene keys: `type`, `narration`, `transition` (optional), `data`. NOTHING else — no id / durationFrames / fps.
+
+## topicAxes — pick ≥2:
+`entity-novelty` · `economic-pain` · `sovereignty` · `tribal-conflict`
+
+## COMPONENT PALETTE (17 types — use ONLY these; each with its exact data schema)
+(`!`=required · `?`=optional · `≤N`=max chars · anchors: `at:"word"` copied from the scene’s narration)
+
+HOOK — First ≤8s. State the stake so the viewer cannot scroll.
+    USE: Always scene 1.
+    data: { headline!≤30:string — the big line, subtext?≤48:string, heroAsset?:asset — usually lucide: naming the topic, headlineAt?:"word from narration", heroAt?:"word from narration" }
+    ex: {"headline":"DEAD IN 3 DAYS","subtext":"a 72-hour lifespan","heroAsset":"lucide:skull","headlineAt":"dead","heroAt":"dead"}
+
+TITLE_CARD — Name the topic for 2-3s after the hook.
+    USE: Right after HOOK.
+    data: { title!≤48:string, subtitle?≤48:string }
+    ex: {"title":"Muse Image","subtitle":"the 72-hour lifespan"}
+
+CONCEPT_DIAGRAM — How-it-works chain of 2-4 nodes + edges.
+    USE: Explain a mechanism/flow.
+    data: { nodes!:items — 2-4 × {id, label≤18, asset?, atWord}, edges?:items — {from, to, atWord} }
+    ex: {"nodes":[{"id":"n1","label":"Public posts","asset":"lucide:image","at":"public"},{"id":"n2","label":"AI model","asset":"lucide:cpu","at":"ai"}],"edges":[{"from":"n1","to":"n2","at":"here"}]}
+
+KINETIC_TEXT — A single line as a dynamic moment (8 FX).
+    USE: A punch, breather, or statement where static text would feel flat.
+    data.kinetic: { text!≤48:string, fx?:string — typewriter|glitch|split|char-spin|highlight|bounce|wave|outline|pop|pulse|slide, sub?≤40:string, color?:string, at?:"word from narration" }
+    ex: {"kinetic":{"text":"Predict the next token.","fx":"typewriter","sub":"that's the whole trick","color":"blue","at":"predict"}}
+
+STEP_FLOW — Pipeline of 3-5 named stages.
+    USE: A sequential process (RAG, CI/CD).
+    data: { steps!:items — 3-5 × {kicker?, title≤14, sub?≤30, color?, atWord}, source?≤64:string }
+    ex: {"steps":[{"title":"Ingest","sub":"load docs","at":"ingest"},{"title":"Embed","sub":"to vectors","at":"embed"},{"title":"Answer","sub":"grounded","at":"answer"}],"source":"illustrative"}
+
+LIST_BUILD — "N things this changes" — icon list, two-tier rows.
+    USE: Enumerate 3-5 points.
+    data: { heading?≤48:string, items!:items — 3-5 × {icon?, text≤44, detail?, atWord} }
+    ex: {"heading":"A familiar pattern","items":[{"icon":"lucide:video","text":"OpenAI Sora 2","detail":"shut down 2025","at":"openai"},{"icon":"lucide:copyright","text":"Trademark issues","detail":"studios angered","at":"trademark"}]}
+
+RECAP — Close the hook loop: 3-4 points.
+    USE: Penultimate scene.
+    data: { heading?≤48:string, points!:items — 3-4 × {text≤46, atWord} }
+    ex: {"heading":"The short life of Muse Image","points":[{"text":"Launched Tuesday","at":"launched"},{"text":"Privacy panic","at":"privacy"},{"text":"Killed by Friday","at":"killed"}]}
+
+STAT_CALLOUT — ONE hero number counting up (+ optional logo strip).
+    USE: A single number is the story.
+    data: { value!:number — numeric only — it counts up; '160K' as a string never animates, prefix?≤4:string, suffix?≤4:string — e.g. K, %, ms, x, label!≤44:string, at?:"word from narration", source?≤64:string — credibility footer, logos?≤6:asset[] — si: brand marks }
+    ex: {"value":160,"suffix":"K","label":"Entertainment professionals","at":"entertainment","source":"SAG-AFTRA, 2025 (illustrative)"}
+
+OUTRO_CTA — Final ≤5s, one CTA, centered.
+    USE: Last scene.
+    data: { message!≤64:string, sub?≤48:string }
+    ex: {"message":"Subscribe for more breakdowns","sub":"new videos weekly"}
+
+QUOTE_SPOTLIGHT — An insight/quote anchors the argument.
+    USE: A person or principle carries weight.
+    data: { quote!≤120:string, person?:object — {name, role, asset?}, source?≤64:string, at?:"word from narration" }
+    ex: {"quote":"This feature missed the mark.","person":{"name":"Meta","role":"Instagram Blog","asset":"si:meta"},"source":"Instagram Blog, 2025","at":"here"}
+
+STAT_PANELS — Myth-bust / tradeoff: 2-3 metrics + verdict.
+    USE: Compare metrics with a conclusion.
+    data: { stats!:items — 2-3 × {kicker, value, note?, color?, atWord}, verdict?:object — {text, color?, atWord}, source?≤64:string }
+    ex: {"stats":[{"kicker":"Before","value":"4.2s","at":"before"},{"kicker":"After","value":"0.8s","color":"green","at":"after"}],"verdict":{"text":"5× faster","color":"green","at":"5"},"source":"illustrative"}
+
+CHAT_MOCKUP — Show a conversation/failure happening.
+    USE: AI answer, support thread, DM.
+    data: { panelLabel?≤44:string, messages!:items — × {from:'user'|'agent', text≤64, color?, atWord}, source?≤64:string }
+    ex: {"panelLabel":"Support","messages":[{"from":"user","text":"How do I opt out?","at":"how"},{"from":"agent","text":"You cannot, yet.","color":"red","at":"you"}],"source":"illustrative"}
+
+SPLIT_PATHS — One system, two behaviours (router, hit/miss).
+    USE: Branching / either-or.
+    data: { center?:object — {kicker?, title, color?, atWord}, left!:object — PathCard {title, badge?, lines?, color?, atWord}, right!:object — PathCard, source?≤64:string }
+    ex: {"center":{"title":"Cache?","at":"cache"},"left":{"title":"Hit","color":"green","at":"hit"},"right":{"title":"Miss","color":"orange","at":"miss"},"source":"illustrative"}
+
+BAR_COMPARE — Benchmarks/rankings: 2-4 horizontal bars.
+    USE: Compare magnitudes with values.
+    data: { bars!:items — 2-4 × {label, sub?, value:number, display?, color?, atWord}, maxValue?:number, source?≤64:string }
+    ex: {"bars":[{"label":"Before","value":42,"display":"42%","at":"before"},{"label":"After","value":88,"display":"88%","color":"green","at":"after"}],"source":"illustrative"}
+
+NOTIFICATION — Stack of toast notifications popping in (reactions, alerts).
+    USE: Show reactions/alerts/DMs arriving.
+    data: { notifications!:items — × {app?, icon?, title, body?, color?, atWord} }
+    ex: {"notifications":[{"app":"Reddit","icon":"si:reddit","title":"r/privacy","body":"How do I opt out?!","at":"rprivacy"},{"app":"X","icon":"si:x","title":"@creator","body":"Deepfake nightmare","color":"red","at":"creator"}]}
+
+FLIP_CARD — Card flips 180° to reveal its back (myth→fact, before→after).
+    USE: Overturn a claim / reveal the twist.
+    data.flip: { front!:object — FlipFace {label, text, color?}, back!:object — FlipFace {label, text, color?}, at?:"word from narration" }
+    ex: {"flip":{"front":{"label":"Meta's approach","text":"Opt-out only","color":"orange"},"back":{"label":"Union demand","text":"Clear opt-in","color":"green"},"at":"here"}}
+
+TIMELINE — Ordered dated milestones (history/roadmap).
+    USE: A sequence of dates matters.
+    data.timeline: { milestones!:items — × {date, title, sub?, color?, atWord} }
+    ex: {"timeline":{"milestones":[{"date":"Tue","title":"Launched","at":"launched"},{"date":"Wed","title":"Backlash","at":"backlash"},{"date":"Fri","title":"Killed","color":"red","at":"killed"}]}}
+
+## RULES
+- Do NOT write durationFrames, timingSource, fps, or scene id — the app owns those.
+- `transition` is a SCENE CUT: fade, slide, push, zoom, morph, wipe, iris, clock, dip, blinds, pixel, whippan, zoomthrough, letterbox, filmburn, glitch. (Entrance animations live inside a component’s data, never as a transition.)
+
+## OUTPUT — the console owns the envelope (topic/format/design/theme/channel are added by the app).
+Return ONE JSON object with EXACTLY these keys — NO meta, NO brand:
+```json
+{
+  "onePayoff": "...", "openLoop": "...", "analogy": "...", "topicAxes": ["...","..."],
+  "thumbnail": { "title": "...", "badge": "...", "asset": "lucide:..." },
+  "scenes": [ { "type": "HOOK", "narration": "...", "transition": "fade", "data": { /* per schema */ } } ]
+}
+```
+Output only the JSON.

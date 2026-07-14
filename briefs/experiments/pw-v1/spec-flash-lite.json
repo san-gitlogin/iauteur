@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "How Password Managers Keep Secrets Safe",
+    "description": "An explainer on the encryption architecture behind secure password management.",
+    "topicAxes": ["entity-novelty", "sovereignty"]
+  },
+  "brand": { "design": "corptrust", "theme": "corptrust", "themeLight": "daylight" },
+  "thumbnail": { "headline": "HOW SECRETS STAY SAFE", "heroAsset": "lucide:lock" },
+  "scenes": [
+    { "type": "HOOK", "transition": "fade", "data": { "headline": "THE VAULT IS OPEN", "subtext": "but your keys stay hidden.", "heroAsset": "lucide:lock", "headlineAtWord": 3, "heroAtWord": 1 } },
+    { "type": "TITLE_CARD", "transition": "slide", "data": { "title": "Password Manager Security", "subtitle": "Encryption at the Core" } },
+    { "type": "CONCEPT_DIAGRAM", "transition": "morph", "data": { "nodes": [ { "id": "n1", "label": "Master Password", "asset": "lucide:key", "atWord": 2 }, { "id": "n2", "label": "Encryption Key", "asset": "lucide:cpu", "atWord": 5 }, { "id": "n3", "label": "Encrypted Data", "asset": "lucide:shield", "atWord": 8 } ], "edges": [ { "from": "n1", "to": "n2", "atWord": 4 }, { "from": "n2", "to": "n3", "atWord": 7 } ] } },
+    { "type": "STEP_FLOW", "transition": "slide", "data": { "steps": [ { "title": "Derive", "sub": "PBKDF2 key hashing", "atWord": 2 }, { "title": "Encrypt", "sub": "AES-256 standard", "atWord": 4 }, { "title": "Store", "sub": "Zero-knowledge cloud", "atWord": 6 } ], "source": "NIST SP 800-132 (illustrative)" } },
+    { "type": "STAT_PANELS", "transition": "glitch", "data": { "stats": [ { "kicker": "Local Encryption", "value": "100%", "color": "green", "atWord": 2 }, { "kicker": "Server Access", "value": "0%", "color": "blue", "atWord": 5 } ], "verdict": { "text": "Zero-Knowledge Model", "color": "green", "atWord": 8 }, "source": "Security Architecture Standard (illustrative)" } },
+    { "type": "FLIP_CARD", "transition": "flip", "data": { "flip": { "front": { "label": "The Risk", "text": "Server breach exposure", "color": "orange" }, "back": { "label": "The Reality", "text": "Ciphertext is useless without key", "color": "green" }, "atWord": 4 } } },
+    { "type": "KINETIC_TEXT", "transition": "fade", "data": { "kinetic": { "text": "Your master key never travels.", "fx": "highlight", "color": "green", "atWord": 1 } } },
+    { "type": "RECAP", "transition": "zoom", "data": { "heading": "Security Pillars", "points": [ { "text": "Master key stays local", "atWord": 2 }, { "text": "AES-256 encryption standard", "atWord": 5 }, { "text": "Zero-knowledge architecture", "atWord": 7 } ] } },
+    { "type": "OUTRO_CTA", "transition": "fade", "data": { "message": "Subscribe for more security insights", "sub": "Protect your digital sovereignty" } }
+  ]
+}

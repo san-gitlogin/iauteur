@@ -1,0 +1,18 @@
+[
+  {
+    "id": "s08",
+    "type": "TIMELINE",
+    "transition": "slide",
+    "narration": "By Friday, Meta surrendered. They released a blog post admitting the feature missed the mark and shut it down.",
+    "background": "zoneB",
+    "data": {
+      "timeline": {
+        "milestones": [
+          { "date": "Tuesday", "title": "Launched via PR", "atWord": 1 },
+          { "date": "Mid-Week", "title": "SAG-AFTRA revolt", "atWord": 2 },
+          { "date": "Friday", "title": "Feature Killed", "atWord": 3 }
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "topic": "How password managers actually keep your secrets safe",
+    "onePayoff": "Your master password never leaves your device; only encrypted gibberish travels to the cloud.",
+    "openLoop": "If the company gets hacked, why don't thieves get your passwords?",
+    "analogy": "A digital safe deposit box where you hold the only key.",
+    "screenplay": "explainer",
+    "topicAxes": ["sovereignty", "economic-pain"]
+  },
+  "beats": [
+    { "id": "s01", "type": "HOOK", "intent": "the stake", "narration": "One breach exposes every account you own. Unless you use this." },
+    { "id": "s02", "type": "TITLE_CARD", "intent": "name the topic", "narration": "The Zero-Knowledge Architecture." },
+    { "id": "s03", "type": "CONCEPT_DIAGRAM", "intent": "explain local encryption", "narration": "Your data is encrypted locally before it ever touches the internet." },
+    { "id": "s04", "type": "SPLIT_PATHS", "intent": "contrast storage methods", "narration": "Old way: plain text on servers. New way: scrambled data only you can read." },
+    { "id": "s05", "type": "STEP_FLOW", "intent": "show the login process", "narration": "Enter master password. Derive key. Decrypt vault. Access granted." },
+    { "id": "s06", "type": "QUOTE_SPOTLIGHT", "intent": "anchor trust principle", "narration": "Zero-knowledge means the provider literally cannot see your secrets." },
+    { "id": "s07", "type": "FLIP_CARD", "intent": "myth vs fact", "narration": "Myth: They store your master password. Fact: It never leaves your device." },
+    { "id": "s08", "type": "RECAP", "intent": "close the loop", "narration": "Local encryption. Zero-knowledge servers. You hold the only key." },
+    { "id": "s09", "type": "OUTRO_CTA", "intent": "final call to action", "narration": "Secure your digital life today." }
+  ]
+}

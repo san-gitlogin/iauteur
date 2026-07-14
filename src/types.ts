@@ -1,3 +1,9 @@
+// Per-type scene typing (Phase 7) is generated from the component manifest.
+// `Scene.type` below is narrowed to the 136-literal SceneTypeName union, and the
+// opt-in narrowing helpers are re-exported so callers can use SceneOf<'BITS'>.
+import type {SceneTypeName, SceneOf, TypedScene, SceneByType} from './sceneTypes.generated';
+export type {SceneTypeName, SceneOf, TypedScene, SceneByType};
+
 export type Zone = 'zoneA' | 'zoneB' | 'zoneC';
 
 export type SemColor = 'blue' | 'green' | 'red' | 'orange' | 'purple' | 'yellow';
@@ -2165,7 +2171,7 @@ export interface CodeWindowData {
 export interface Scene {
   audio?: string; // e.g. 'audio/long_s01.mp3' (set by sync script)
   id: string;
-  type: string;
+  type: SceneTypeName;
   narration: string;
   durationFrames: number;
   timingSource?: string;

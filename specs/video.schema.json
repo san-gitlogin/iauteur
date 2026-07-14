@@ -1,0 +1,6033 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://tech-video-starter/video.schema.json",
+  "title": "Tech Video Spec",
+  "description": "Derived from scripts/lib/manifest.mjs by scripts/gen-schema.mjs — do not edit by hand. A FLOOR check (shape + enums + string budgets); scripts/lint-spec.mjs owns the deeper rules.",
+  "type": "object",
+  "required": [
+    "meta",
+    "brand",
+    "scenes"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": [
+        "topic"
+      ],
+      "properties": {
+        "topic": {
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "long",
+            "short"
+          ]
+        },
+        "fps": {
+          "type": "number"
+        },
+        "screenplay": {
+          "type": "string"
+        },
+        "onePayoff": {
+          "type": "string"
+        },
+        "openLoop": {
+          "type": "string"
+        },
+        "analogy": {
+          "type": "string"
+        },
+        "topicAxes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "brand": {
+      "type": "object",
+      "properties": {
+        "theme": {
+          "enum": [
+            "studio",
+            "neonGrid",
+            "midnight",
+            "terminal",
+            "linear",
+            "vapor",
+            "luxe",
+            "cyberpunk",
+            "swiss",
+            "neobrutalism",
+            "vaporwave",
+            "bauhaus",
+            "luxury",
+            "terminalcli",
+            "retro",
+            "material",
+            "neumorphism",
+            "artdeco",
+            "monochrome",
+            "academia",
+            "newsprint",
+            "clay",
+            "organic",
+            "industrial",
+            "playgeo",
+            "maximalism",
+            "simpledark",
+            "flatdesign",
+            "sketch",
+            "kinetic",
+            "crypto",
+            "corptrust",
+            "businessdeck",
+            "techstyle",
+            "boldtype",
+            "botanical",
+            "moderndark",
+            "creatorGlow"
+          ],
+          "description": "the DARK skin (light variant renders automatically)"
+        },
+        "themeLight": {
+          "enum": [
+            "daylight",
+            "paper",
+            "brutalist",
+            "creatorGlowLight"
+          ]
+        },
+        "design": {
+          "type": "string"
+        },
+        "background": {
+          "enum": [
+            "aurora",
+            "grid",
+            "aurora-grid",
+            "plain",
+            "bokeh",
+            "starfield",
+            "grid-pulse",
+            "wave",
+            "ripple",
+            "gradient",
+            "geo",
+            "matrix-rain",
+            "noise",
+            "ember"
+          ]
+        },
+        "channel": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        }
+      }
+    },
+    "thumbnail": {
+      "type": "object"
+    },
+    "assetsNeeded": {
+      "type": "array",
+      "description": "Asset-request protocol: declare a needed asset instead of inventing a URL. A media field then references it as \"needed:<key>\".",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "kind",
+          "query"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "image",
+              "video",
+              "logo"
+            ]
+          },
+          "query": {
+            "type": "string",
+            "description": "what to search for — never a URL"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mustShow": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "HOOK",
+              "TITLE_CARD",
+              "CONCEPT_DIAGRAM",
+              "DIAGRAM",
+              "KINETIC_TEXT",
+              "PHOTO",
+              "SOUND_WAVE",
+              "REVEAL",
+              "LOGO_REVEAL",
+              "CAROUSEL",
+              "CREDITS_ROLL",
+              "SUBSCRIBE_REMINDER",
+              "LIST_BUILD",
+              "STAT_CALLOUT",
+              "RECAP",
+              "OUTRO_CTA",
+              "STEP_FLOW",
+              "CHAT_MOCKUP",
+              "STAT_PANELS",
+              "QUOTE_SPOTLIGHT",
+              "SPLIT_PATHS",
+              "BAR_COMPARE",
+              "CHANNEL_CARD",
+              "LINE_CHART",
+              "DONUT",
+              "FUNNEL",
+              "WATERFALL",
+              "PICTOGRAM",
+              "RADAR",
+              "CANDLESTICK",
+              "BOX_PLOT",
+              "TREEMAP",
+              "SANKEY",
+              "ICON_GRID",
+              "ICON_CALLOUT",
+              "ICON_BURST",
+              "LOGO_WALL",
+              "LOGO_VERSUS",
+              "LOGO_TIMELINE",
+              "FORMULA",
+              "MOLECULE",
+              "DNA_HELIX",
+              "LABELED_FIGURE",
+              "VECTOR_FIELD",
+              "CIRCUIT_FLOW",
+              "TICKER_TAPE",
+              "MAP_RADAR",
+              "PROGRESS",
+              "TIMELINE",
+              "QUADRANT",
+              "CODE_WINDOW",
+              "LOWER_THIRD",
+              "CHAPTER",
+              "NOTIFICATION",
+              "COUNTDOWN",
+              "FLIP_CARD",
+              "GALLERY",
+              "COMPARISON_SLIDER",
+              "PHOTO_STACK",
+              "IMAGE_SCENE",
+              "ACTIVITY_CARD",
+              "LOCATION_MAP",
+              "BITS",
+              "MEMORY",
+              "PACKET",
+              "PIPELINE",
+              "LAYERED_STACK",
+              "GRID_ARRAY",
+              "SPEC_COMPARE",
+              "DIE_SHOT",
+              "NEURAL_NET",
+              "DATACENTER",
+              "TRANSFORMER_BLOCK",
+              "CACHE_PYRAMID",
+              "CALL_STACK",
+              "TOKENIZER",
+              "FILE_TREE",
+              "DATABASE_TABLE",
+              "GIT_BRANCH",
+              "STATE_MACHINE",
+              "EMBEDDING_SPACE",
+              "QUEUE",
+              "API_REQUEST_RESPONSE",
+              "BOOLEAN_LOGIC_GATES",
+              "HASH_FUNCTION",
+              "SORTING_VISUAL",
+              "CLOCK_SIGNAL",
+              "GPU_CLUSTER",
+              "ZOOM_SCALE",
+              "ENCRYPTION",
+              "POINTER_DIAGRAM",
+              "NUMBER_BASE",
+              "CODE_EDITOR",
+              "TERMINAL_SESSION",
+              "LOG_STREAM",
+              "CODE_DIFF",
+              "ERROR_TRACE",
+              "WINDOW_FRAME",
+              "AUTOMATION_RUN",
+              "DOM_INSPECT",
+              "NETWORK_WATERFALL",
+              "DEVICE_FRAME",
+              "CLOUD_ARCH",
+              "K8S_CLUSTER",
+              "COST_METER",
+              "SLO_GAUGE",
+              "IAC_PLAN",
+              "ERD",
+              "PROCESS_TABLE",
+              "KERNEL_BOUNDARY",
+              "TEST_RUNNER",
+              "TEST_MATRIX",
+              "CONTEXT_METER",
+              "AGENT_HARNESS",
+              "KNOWLEDGE_GRAPH",
+              "RETRIEVAL_RANK",
+              "MODEL_STAGES",
+              "CONFIDENCE_GATE",
+              "SANDBOX_BOX",
+              "DRILL_IN",
+              "EVAL_DASHBOARD",
+              "VIDEO_HERO",
+              "VIDEO_SPOTLIGHT",
+              "MEDIA_CALLOUT",
+              "MEDIA_COMPARE",
+              "MEDIA_STAT_OVERLAY",
+              "SCREENSHOT_CASCADE",
+              "FLOATING_QUOTE_PILL",
+              "OVERLAY_SPLIT_DEFINITIONS",
+              "CYCLE_LOOP",
+              "STEP_STACK_OVERLAY",
+              "TITLE_BANNER_FOCUS",
+              "TALKING_POINTS",
+              "SLIDE_BULLETS_PIP",
+              "CAPTION_KINETIC_OVERLAY",
+              "PHOTO_TIMELINE"
+            ]
+          },
+          "narration": {
+            "type": "string"
+          },
+          "durationFrames": {
+            "type": "number"
+          },
+          "timingSource": {
+            "enum": [
+              "estimated",
+              "measured",
+              "tts"
+            ]
+          },
+          "background": {
+            "enum": [
+              "zoneA",
+              "zoneB",
+              "zoneC"
+            ]
+          },
+          "transition": {
+            "enum": [
+              "fade",
+              "slide",
+              "push",
+              "zoom",
+              "morph",
+              "wipe",
+              "iris",
+              "clock",
+              "dip",
+              "blinds",
+              "pixel",
+              "whippan",
+              "zoomthrough",
+              "letterbox",
+              "filmburn",
+              "glitch"
+            ]
+          },
+          "anim": {
+            "enum": [
+              "fadeUp",
+              "rise",
+              "blur",
+              "pop",
+              "scale",
+              "bounce",
+              "bubble",
+              "spin",
+              "stack",
+              "slideLeft",
+              "slideRight",
+              "slideUp",
+              "slideDown",
+              "clip",
+              "wipe"
+            ]
+          },
+          "data": {
+            "type": "object"
+          },
+          "pip": {
+            "type": "object"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "HOOK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "headline": {
+                      "type": "string",
+                      "maxLength": 30,
+                      "description": "the big line"
+                    },
+                    "subtext": {
+                      "type": "string",
+                      "maxLength": 48
+                    },
+                    "heroAsset": {
+                      "type": "string",
+                      "description": "usually lucide: naming the topic"
+                    },
+                    "headlineAtWord": {
+                      "type": "number"
+                    },
+                    "heroAtWord": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TITLE_CARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "maxLength": 48
+                    },
+                    "subtitle": {
+                      "type": "string",
+                      "maxLength": 48
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CONCEPT_DIAGRAM"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "nodes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "2-4 × {id, label≤18, asset?, atWord}"
+                    },
+                    "edges": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "{from, to, atWord}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "KINETIC_TEXT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "kinetic": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "fx": {
+                          "type": "string",
+                          "description": "typewriter|glitch|split|char-spin|highlight|bounce|wave|outline|pop|pulse|slide"
+                        },
+                        "sub": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "STEP_FLOW"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "steps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "3-5 × {kicker?, title≤14, sub?≤30, color?, atWord}"
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LIST_BUILD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "heading": {
+                      "type": "string",
+                      "maxLength": 48
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "3-5 × {icon?, text≤44, detail?, atWord}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RECAP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "heading": {
+                      "type": "string",
+                      "maxLength": 48
+                    },
+                    "points": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "3-4 × {text≤46, atWord}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "STAT_CALLOUT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "number",
+                      "description": "numeric only — it counts up; '160K' as a string never animates"
+                    },
+                    "prefix": {
+                      "type": "string",
+                      "maxLength": 4
+                    },
+                    "suffix": {
+                      "type": "string",
+                      "maxLength": 4,
+                      "description": "e.g. K, %, ms, x"
+                    },
+                    "label": {
+                      "type": "string",
+                      "maxLength": 44
+                    },
+                    "atWord": {
+                      "type": "number"
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 64,
+                      "description": "credibility footer"
+                    },
+                    "logos": {
+                      "description": "si: brand marks"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "OUTRO_CTA"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "maxLength": 64
+                    },
+                    "sub": {
+                      "type": "string",
+                      "maxLength": 48
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "QUOTE_SPOTLIGHT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string",
+                      "maxLength": 120
+                    },
+                    "person": {
+                      "type": "object",
+                      "description": "{name, role, asset?}"
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 64
+                    },
+                    "atWord": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "STAT_PANELS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "stats": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "2-3 × {kicker, value, note?, color?, atWord}"
+                    },
+                    "verdict": {
+                      "type": "object",
+                      "description": "{text, color?, atWord}"
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CHAT_MOCKUP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "panelLabel": {
+                      "type": "string",
+                      "maxLength": 44
+                    },
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "× {from:'user'|'agent', text≤64, color?, atWord}"
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SPLIT_PATHS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "center": {
+                      "type": "object",
+                      "description": "{kicker?, title, color?, atWord}"
+                    },
+                    "left": {
+                      "type": "object",
+                      "description": "PathCard {title, badge?, lines?, color?, atWord}"
+                    },
+                    "right": {
+                      "type": "object",
+                      "description": "PathCard"
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BAR_COMPARE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "bars": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "2-4 × {label, sub?, value:number, display?, color?, atWord}"
+                    },
+                    "maxValue": {
+                      "type": "number"
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "NOTIFICATION"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "notifications": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "description": "× {app?, icon?, title, body?, color?, atWord}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FLIP_CARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "flip": {
+                      "type": "object",
+                      "properties": {
+                        "front": {
+                          "type": "object",
+                          "description": "FlipFace {label, text, color?}"
+                        },
+                        "back": {
+                          "type": "object",
+                          "description": "FlipFace {label, text, color?}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TIMELINE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "timeline": {
+                      "type": "object",
+                      "properties": {
+                        "milestones": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "× {date, title, sub?, color?, atWord}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "REVEAL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "reveal": {
+                      "type": "object",
+                      "properties": {
+                        "statement": {
+                          "type": "string",
+                          "maxLength": 60,
+                          "description": "the line that irises in"
+                        },
+                        "kicker": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "sub": {
+                          "type": "string",
+                          "maxLength": 60
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LOWER_THIRD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "lowerThird": {
+                      "type": "object",
+                      "properties": {
+                        "kicker": {
+                          "type": "string",
+                          "maxLength": 18
+                        },
+                        "title": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "subtitle": {
+                          "type": "string",
+                          "maxLength": 34
+                        },
+                        "asset": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CHAPTER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "chapter": {
+                      "type": "object",
+                      "properties": {
+                        "number": {
+                          "type": "string",
+                          "maxLength": 4
+                        },
+                        "title": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "subtitle": {
+                          "type": "string",
+                          "maxLength": 40
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "COUNTDOWN"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "countdown": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "number",
+                          "description": "1-10; counts down to the go word"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 30
+                        },
+                        "go": {
+                          "type": "string",
+                          "maxLength": 10
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CREDITS_ROLL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "credits": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "× {role?, name}"
+                        },
+                        "speed": {
+                          "type": "number",
+                          "description": "scroll multiplier"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SUBSCRIBE_REMINDER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "subscribe": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "sub": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "handle": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LINE_CHART"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "lineChart": {
+                      "type": "object",
+                      "properties": {
+                        "series": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-3 × {label≤14, values:[≤8 numbers], color?}"
+                        },
+                        "xAxis": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "labels ≤6 chars, align to values by index"
+                        },
+                        "yMax": {
+                          "type": "number"
+                        },
+                        "yUnit": {
+                          "type": "string",
+                          "maxLength": 6
+                        },
+                        "area": {
+                          "type": "boolean",
+                          "description": "fill under the line"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DONUT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "donut": {
+                      "type": "object",
+                      "properties": {
+                        "segments": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {label≤16, value:number, color?, atWord}"
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "donut|pie"
+                        },
+                        "centerValue": {
+                          "type": "string",
+                          "maxLength": 6
+                        },
+                        "centerLabel": {
+                          "type": "string",
+                          "maxLength": 14
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PROGRESS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "progress": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 × {label≤18, value:number(0..max), max?, display?≤6, color?, atWord}"
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "ring|bar"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "QUADRANT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "quadrant": {
+                      "type": "object",
+                      "properties": {
+                        "xAxis": {
+                          "type": "object",
+                          "description": "{left≤14, right≤14}"
+                        },
+                        "yAxis": {
+                          "type": "object",
+                          "description": "{bottom≤14, top≤14}"
+                        },
+                        "points": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {label≤16, x:0..1, y:0..1, color?, atWord}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FUNNEL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "funnel": {
+                      "type": "object",
+                      "properties": {
+                        "stages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {label≤20, value:number, color?, atWord}"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 6,
+                          "description": "appended to each value, e.g. % or k"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "WATERFALL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "waterfallChart": {
+                      "type": "object",
+                      "properties": {
+                        "bars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-7 × {label≤18, value:number(signed), isTotal?, color?, atWord}"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 6
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DIAGRAM"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "diagram": {
+                      "type": "object",
+                      "properties": {
+                        "layout": {
+                          "type": "string",
+                          "description": "flow|sequence|block|hub (prefer these; tree is limited)"
+                        },
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-8 × {id, label≤18, sub?≤22, asset?, color?, atWord}"
+                        },
+                        "edges": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "× {from, to, label?≤16, kind?:curve|ortho|straight, color?, atWord}"
+                        },
+                        "direction": {
+                          "type": "string",
+                          "description": "auto|horizontal|vertical (flow only)"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PIPELINE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "pipeline": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "stages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {label≤18, sub?≤28, asset?, status?≤12, badge?≤14, ms?≤8, reason?≤40, color?}"
+                        },
+                        "tokenLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what flows through"
+                        },
+                        "loop": {
+                          "type": "boolean"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LAYERED_STACK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "stack": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "layers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-7 × {label≤26, sub?≤30, color?}"
+                        },
+                        "signal": {
+                          "type": "string",
+                          "description": "down|up|none"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "GRID_ARRAY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "grid": {
+                      "type": "object",
+                      "properties": {
+                        "rows": {
+                          "type": "number",
+                          "description": "2-16"
+                        },
+                        "cols": {
+                          "type": "number",
+                          "description": "2-16"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "wave|parallel|heatmap"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "legendA": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "legendB": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SPEC_COMPARE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "compare": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "a": {
+                          "type": "object",
+                          "description": "{name≤16, asset?, color?}"
+                        },
+                        "b": {
+                          "type": "object",
+                          "description": "{name≤16, asset?, color?}"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {label≤22, a≤14, b≤14, winner?:'a'|'b'|'tie'}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "NEURAL_NET"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "net": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "layers": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "2-5 layers, each 1-6 nodes, e.g. [3,5,5,1]"
+                        },
+                        "labels": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "per-layer captions, each ≤16"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PICTOGRAM"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "pictogram": {
+                      "type": "object",
+                      "properties": {
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {label≤20, value:number≥0, icon?, color?, atWord}"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "description": "shared icon for all rows (lucide:/si:)"
+                        },
+                        "perIcon": {
+                          "type": "number",
+                          "description": "units per icon (auto if omitted)"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 6
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RADAR"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "radar": {
+                      "type": "object",
+                      "properties": {
+                        "axes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "3-8 axis labels, each ≤14"
+                        },
+                        "series": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-3 × {name≤18, values:[one per axis], color?, atWord}"
+                        },
+                        "max": {
+                          "type": "number"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 6
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CANDLESTICK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "candlestick": {
+                      "type": "object",
+                      "properties": {
+                        "candles": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-30 × {open, high, low, close, label?≤8} (high≥low)"
+                        },
+                        "ma": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "moving-average, one per candle"
+                        },
+                        "prefix": {
+                          "type": "string",
+                          "maxLength": 3
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 6
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BOX_PLOT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "boxPlot": {
+                      "type": "object",
+                      "properties": {
+                        "boxes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-8 × {label≤14, min≤q1≤median≤q3≤max, outliers?, color?, atWord}"
+                        },
+                        "prefix": {
+                          "type": "string",
+                          "maxLength": 3
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 6
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TREEMAP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "treemap": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-12 × {label≤18, value:number≥0, color?, atWord}"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 6
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SANKEY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "sankey": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-10 × {id, label≤16, col:0-2, value?, color?}"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-16 × {source:id, target:id, value:number≥0, color?}"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 6
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ICON_GRID"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "iconGrid": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-12 × {icon:lucide:|si:, label≤18, color?, atWord}"
+                        },
+                        "cols": {
+                          "type": "number",
+                          "description": "1-6"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ICON_CALLOUT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "iconCallout": {
+                      "type": "object",
+                      "properties": {
+                        "icon": {
+                          "type": "string",
+                          "description": "lucide:|si:"
+                        },
+                        "heading": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "sub": {
+                          "type": "string",
+                          "maxLength": 90
+                        },
+                        "points": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "0-4, each ≤40"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ICON_BURST"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "iconBurst": {
+                      "type": "object",
+                      "properties": {
+                        "center": {
+                          "type": "object",
+                          "description": "{icon:lucide:|si:, label?≤16}"
+                        },
+                        "spokes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-10 × {icon:lucide:|si:, label?≤16, color?}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LOGO_WALL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "logoWall": {
+                      "type": "object",
+                      "properties": {
+                        "logos": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-15 × {icon:si:|lucide:, label?≤16, atWord} — IP: brand logos are si: only"
+                        },
+                        "cols": {
+                          "type": "number",
+                          "description": "1-6"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LOGO_VERSUS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "logoVersus": {
+                      "type": "object",
+                      "properties": {
+                        "left": {
+                          "type": "object",
+                          "description": "{icon:si:|lucide:, name≤20, tagline?≤40, color?}"
+                        },
+                        "right": {
+                          "type": "object",
+                          "description": "{icon:si:|lucide:, name≤20, tagline?≤40, color?}"
+                        },
+                        "winner": {
+                          "type": "string",
+                          "description": "left|right"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LOGO_TIMELINE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "logoTimeline": {
+                      "type": "object",
+                      "properties": {
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {icon:si:|lucide:, label≤16, date≤10, color?, atWord}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CODE_WINDOW"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤12 × {text≤52, color?}"
+                        },
+                        "output": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤6 × {text≤52, color?}"
+                        },
+                        "filename": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "language": {
+                          "type": "string",
+                          "description": "js/ts/py/bash/json"
+                        },
+                        "runLabel": {
+                          "type": "string",
+                          "maxLength": 36
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CODE_EDITOR"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "editor": {
+                      "type": "object",
+                      "properties": {
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "≤10 lines, each ≤38 chars (tabs = 2 spaces)"
+                        },
+                        "tabs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤3 × {name≤22, active?}"
+                        },
+                        "lang": {
+                          "type": "string",
+                          "maxLength": 12
+                        },
+                        "highlight": {
+                          "type": "object",
+                          "description": "{from, to, color?}"
+                        },
+                        "squiggle": {
+                          "type": "object",
+                          "description": "{line, message≤44}"
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "editor|split"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TERMINAL_SESSION"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "terminal": {
+                      "type": "object",
+                      "properties": {
+                        "commands": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-3 × {cmd≤48, output?:[≤4 lines ≤52], exitCode?, atWord}"
+                        },
+                        "promptLabel": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "cwd": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LOG_STREAM"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "logs": {
+                      "type": "object",
+                      "properties": {
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-10 × {level?:debug|info|warn|error, tag?≤14, text≤44}"
+                        },
+                        "highlight": {
+                          "type": "number",
+                          "description": "index of the pinned line"
+                        },
+                        "rate": {
+                          "type": "string",
+                          "maxLength": 12
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CODE_DIFF"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "diff": {
+                      "type": "object",
+                      "properties": {
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-12 × {kind:'add'|'del'|'ctx', text≤52}"
+                        },
+                        "fileName": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "stat": {
+                          "type": "object",
+                          "description": "{plus, minus}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ERROR_TRACE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "callStack": {
+                      "type": "object",
+                      "properties": {
+                        "frames": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {fn≤26, sub?≤30, file?≤22, line?, color?}"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "must be 'trace' for ERROR_TRACE"
+                        },
+                        "exception": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "culprit": {
+                          "type": "number",
+                          "description": "index of the highlighted frame"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "WINDOW_FRAME"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "window": {
+                      "type": "object",
+                      "properties": {
+                        "content": {
+                          "type": "object",
+                          "description": "ContentSlot {kind:'text'|'form'|'cardGrid'|'metric'|'empty'|'notification', …}"
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "browser|mac|windows|linux"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string",
+                          "maxLength": 30
+                        },
+                        "devtools": {
+                          "type": "object",
+                          "description": "{open?, panel:console|network, logs?≤5, requests?≤4}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "AUTOMATION_RUN"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "auto": {
+                      "type": "object",
+                      "properties": {
+                        "content": {
+                          "type": "object",
+                          "description": "ContentSlot (the page under test)"
+                        },
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤5 × {action:'click'|'type'|'hover'|'assert'|'goto', target≤22, value?≤20, status?:pass|fail|running, reason?≤40}"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "runner": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "playwright/selenium"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DOM_INSPECT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "dom": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-8 × {tag≤12, attr?≤20, depth:0-5}"
+                        },
+                        "selector": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "highlight": {
+                          "type": "number",
+                          "description": "index of the picked node"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "NETWORK_WATERFALL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "waterfall": {
+                      "type": "object",
+                      "properties": {
+                        "requests": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {name≤22, phases:[{phase:'blocked'|'queue'|'dns'|'connect'|'ttfb'|'download', ms}], status?}"
+                        },
+                        "totalMs": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DEVICE_FRAME"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "device": {
+                      "type": "object",
+                      "properties": {
+                        "content": {
+                          "type": "object",
+                          "description": "ContentSlot (the phone screen)"
+                        },
+                        "os": {
+                          "type": "string",
+                          "description": "ios|android"
+                        },
+                        "notification": {
+                          "type": "object",
+                          "description": "{app≤14, text≤40}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CLOUD_ARCH"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "cloud": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤8 × {id, label≤22, sub?≤30, asset?:si:|lucide:, boundary?}"
+                        },
+                        "boundaries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤3 deep × {id, label≤24, kind?:region|vpc|subnet, parent?}"
+                        },
+                        "edges": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "× {from, to, label?≤16}"
+                        },
+                        "provider": {
+                          "type": "string",
+                          "description": "aws|gcp|azure|generic"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "K8S_CLUSTER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "k8s": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 × {label≤20, pods:[≤6 × {label, status?, version?}]}"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "schedule|scale|selfheal|rollout"
+                        },
+                        "controlPlane": {
+                          "type": "string",
+                          "maxLength": 22
+                        },
+                        "fromReplicas": {
+                          "type": "number"
+                        },
+                        "toReplicas": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "KERNEL_BOUNDARY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "kernel": {
+                      "type": "object",
+                      "properties": {
+                        "userLabel": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "kernelLabel": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "syscall": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "crossing-down arrow, e.g. read()"
+                        },
+                        "result": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "returning-up arrow, e.g. bytes"
+                        },
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤4 × {label≤20} kernel work chips"
+                        },
+                        "userChips": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "≤3, each ≤20"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "COST_METER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "cost": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number",
+                          "description": "spend"
+                        },
+                        "budget": {
+                          "type": "number",
+                          "description": "threshold"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 4,
+                          "description": "$, k, /mo…"
+                        },
+                        "period": {
+                          "type": "string",
+                          "maxLength": 18
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SLO_GAUGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "slo": {
+                      "type": "object",
+                      "properties": {
+                        "availability": {
+                          "type": "number",
+                          "description": "0-100, e.g. 99.95"
+                        },
+                        "target": {
+                          "type": "number",
+                          "description": "SLO target, e.g. 99.9"
+                        },
+                        "budgetSpent": {
+                          "type": "number",
+                          "description": "0..1 fraction of error budget used"
+                        },
+                        "period": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ERD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "erd": {
+                      "type": "object",
+                      "properties": {
+                        "tables": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤4 × {id, name≤18, columns:[≤6 × {name≤18, type?≤12, key?:'pk'|'fk'}], col?, row?}"
+                        },
+                        "relations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "× {from:id, to:id, label?≤16, fromCard?:'1'|'N', toCard?:'1'|'N'}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "IAC_PLAN"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "iac": {
+                      "type": "object",
+                      "properties": {
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-7 × {action:'add'|'change'|'destroy'|'noop', resource≤44, type?≤22}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "AGENT_HARNESS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "harness": {
+                      "type": "object",
+                      "properties": {
+                        "rings": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-3 × {label≤16, chips?:[≤2, each≤16]}"
+                        },
+                        "agent": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "core label"
+                        },
+                        "guardrail": {
+                          "type": "object",
+                          "description": "{label≤18, ring, reason?≤24} — the bouncing action"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "KNOWLEDGE_GRAPH"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "kg": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤10 × {id, label≤18, kind?:'entity'|'class'|'literal'}"
+                        },
+                        "edges": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤12 × {from:id, to:id, label?≤16 (predicate)}"
+                        },
+                        "queryPath": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "node ids lit in sequence"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RETRIEVAL_RANK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "retrieval": {
+                      "type": "object",
+                      "properties": {
+                        "chunks": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {label≤40, scoreA:0..1, scoreFinal:0..1, vec?, bm25?}"
+                        },
+                        "rerankAtWord": {
+                          "type": "number"
+                        },
+                        "fuseAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MODEL_STAGES"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "modelStages": {
+                      "type": "object",
+                      "properties": {
+                        "prompt": {
+                          "type": "string",
+                          "maxLength": 60,
+                          "description": "the shared question"
+                        },
+                        "stages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 × {label≤16, method?≤12, reply≤40}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CONFIDENCE_GATE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "confidence": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number",
+                          "description": "0..100"
+                        },
+                        "threshold": {
+                          "type": "number",
+                          "description": "0..100"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "pass|block"
+                        },
+                        "reason": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "shown on block"
+                        },
+                        "style": {
+                          "type": "string",
+                          "description": "gauge|linear"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SANDBOX_BOX"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "sandbox": {
+                      "type": "object",
+                      "properties": {
+                        "allowed": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "chips that cross (each ≤18)"
+                        },
+                        "blocked": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "chips that bounce (each ≤18); allowed+blocked total 2-6"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "inside-zone label"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FORMULA"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "formula": {
+                      "type": "object",
+                      "properties": {
+                        "parts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-16 × {text≤14, sup?, sub?, kind?:'var'|'op'|'num'|'fn', highlight?}"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 60,
+                          "description": "caption below"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MOLECULE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "molecule": {
+                      "type": "object",
+                      "properties": {
+                        "atoms": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-12 × {label≤3 (element), x:0..1, y:0..1, color?}"
+                        },
+                        "bonds": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-16 × {from:index, to:index, order?:1|2|3}"
+                        },
+                        "name": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DNA_HELIX"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "dnaHelix": {
+                      "type": "object",
+                      "properties": {
+                        "pairs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-14 × {left≤2, right≤2, color?} (base letters)"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LABELED_FIGURE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "labeledFigure": {
+                      "type": "object",
+                      "properties": {
+                        "subject": {
+                          "type": "string",
+                          "description": "lucide:|si:|img: (never redrawn)"
+                        },
+                        "callouts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-8 × {label≤22, x:0..1, y:0..1, color?}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "VECTOR_FIELD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "vectorField": {
+                      "type": "object",
+                      "properties": {
+                        "mode": {
+                          "type": "string",
+                          "description": "field (default) | freebody"
+                        },
+                        "cols": {
+                          "type": "number",
+                          "description": "field: 3-12"
+                        },
+                        "rows": {
+                          "type": "number",
+                          "description": "field: 3-8"
+                        },
+                        "pattern": {
+                          "type": "string",
+                          "description": "field: flow|radial|converge|rotational|diagonal|shear"
+                        },
+                        "legend": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "body": {
+                          "type": "string",
+                          "description": "freebody: lucide:|si:|img:"
+                        },
+                        "bodyLabel": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "forces": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "freebody: 2-6 × {label≤20, angle(deg, 0=right/90=up), magnitude?:0..1, color?}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CIRCUIT_FLOW"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "circuitFlow": {
+                      "type": "object",
+                      "properties": {
+                        "components": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-8 × {kind:'battery'|'resistor'|'led'|'capacitor'|'bulb'|'switch'|'node', label?≤8, color?}"
+                        },
+                        "currentLabel": {
+                          "type": "string",
+                          "maxLength": 30
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BITS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "bits": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number",
+                          "description": "0 ≤ value < 2^bits"
+                        },
+                        "bits": {
+                          "type": "number",
+                          "description": "4-16 (default 8)"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 32
+                        },
+                        "showPlaceValues": {
+                          "type": "boolean"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MEMORY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "memory": {
+                      "type": "object",
+                      "properties": {
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-12 × {addr?≤8, value≤8, color?}"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "columns": {
+                          "type": "number"
+                        },
+                        "highlight": {
+                          "type": "number",
+                          "description": "index being read/written"
+                        },
+                        "pointerLabel": {
+                          "type": "string",
+                          "maxLength": 10
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PACKET"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "packet": {
+                      "type": "object",
+                      "properties": {
+                        "hops": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 × {label≤18, asset?, color?}"
+                        },
+                        "packetLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "e.g. GET /index.html"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "NUMBER_BASE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "numberBase": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number",
+                          "description": "0 … 65535"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "POINTER_DIAGRAM"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "pointers": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {label?≤10, value≤8, next?:index|null, color?}"
+                        },
+                        "headLabel": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "default \"head\""
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ENCRYPTION"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "encryption": {
+                      "type": "object",
+                      "properties": {
+                        "plaintext": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "ciphertext": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "keyLabel": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "encrypt|decrypt"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CALL_STACK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "callStack": {
+                      "type": "object",
+                      "properties": {
+                        "frames": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {fn≤26, sub?≤30, color?} (frames[0]=base, last=top/current)"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "'stack' (default) | 'trace' (=ERROR_TRACE, reads downward)"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "QUEUE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "queue": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-7 × {label≤8, color?}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "frontLabel": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "default \"front · out\""
+                        },
+                        "backLabel": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "default \"back · in\""
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BOOLEAN_LOGIC_GATES"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "logic": {
+                      "type": "object",
+                      "properties": {
+                        "gates": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-4 × {type:'AND'|'OR'|'NOT'|'XOR'|'NAND'|'NOR', a?:0|1, b?:0|1, label?≤12}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "HASH_FUNCTION"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "hash": {
+                      "type": "object",
+                      "properties": {
+                        "input": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "algo": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "e.g. SHA-256"
+                        },
+                        "digest": {
+                          "type": "string",
+                          "maxLength": 72,
+                          "description": "hex digest"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SORTING_VISUAL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "sort": {
+                      "type": "object",
+                      "properties": {
+                        "values": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "3-12 numbers"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CLOCK_SIGNAL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "clock": {
+                      "type": "object",
+                      "properties": {
+                        "cycles": {
+                          "type": "number",
+                          "description": "3-8 (default 4)"
+                        },
+                        "label": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DATACENTER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "datacenter": {
+                      "type": "object",
+                      "properties": {
+                        "variant": {
+                          "type": "string",
+                          "description": "'hall' (default) | 'rack'"
+                        },
+                        "racks": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "hall: 2-6 × {label≤16, color?}"
+                        },
+                        "units": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "rack: 2-7 × {label≤20, sub?≤20, color?}"
+                        },
+                        "spineLabel": {
+                          "type": "string",
+                          "maxLength": 26
+                        },
+                        "rackLabel": {
+                          "type": "string",
+                          "maxLength": 26
+                        },
+                        "highlight": {
+                          "type": "number"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TRANSFORMER_BLOCK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "transformer": {
+                      "type": "object",
+                      "properties": {
+                        "blocks": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-7 × {label≤22, sub?≤22, kind?:'io'|'attn'|'norm'|'ffn', color?} (bottom=input, top=output)"
+                        },
+                        "repeatFrom": {
+                          "type": "number"
+                        },
+                        "repeatTo": {
+                          "type": "number"
+                        },
+                        "repeatLabel": {
+                          "type": "string",
+                          "maxLength": 10,
+                          "description": "e.g. \"× 12\""
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CACHE_PYRAMID"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "pyramid": {
+                      "type": "object",
+                      "properties": {
+                        "tiers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-7 × {label≤20, speed?≤12, size?≤12, stat?, color?} (top=fastest/smallest)"
+                        },
+                        "axisTop": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "axisBottom": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "'cache' (default) | 'pyramid' (=TEST_PYRAMID)"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "'normal' | 'antipattern' (inverted)"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "GPU_CLUSTER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "gpuCluster": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "number",
+                          "description": "2-8 server nodes"
+                        },
+                        "gpusPerNode": {
+                          "type": "number",
+                          "description": "2-8 GPUs each"
+                        },
+                        "interconnect": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "e.g. NVLink · InfiniBand"
+                        },
+                        "totalLabel": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ZOOM_SCALE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "zoomScale": {
+                      "type": "object",
+                      "properties": {
+                        "levels": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 × {label≤16, sub?≤18, asset?, scale?≤10, color?}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DIE_SHOT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "die": {
+                      "type": "object",
+                      "properties": {
+                        "cols": {
+                          "type": "number"
+                        },
+                        "rows": {
+                          "type": "number"
+                        },
+                        "blocks": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-12 × {label≤18, sub?≤14, x,y,w,h (1-based grid, must fit cols×rows), color?}"
+                        },
+                        "chipLabel": {
+                          "type": "string",
+                          "maxLength": 26
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TOKENIZER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "tokenizer": {
+                      "type": "object",
+                      "properties": {
+                        "tokens": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-10 × {text≤12, id?, color?}"
+                        },
+                        "text": {
+                          "type": "string",
+                          "maxLength": 90,
+                          "description": "the original sentence (caption above)"
+                        },
+                        "showVectors": {
+                          "type": "boolean"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FILE_TREE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "fileTree": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-12 × {name≤28, depth 0-4, kind?:'folder'|'file', color?}"
+                        },
+                        "highlight": {
+                          "type": "number",
+                          "description": "index of the emphasized node"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DATABASE_TABLE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "database": {
+                      "type": "object",
+                      "properties": {
+                        "columns": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-4 columns, each ≤14"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 rows × cells ≤16"
+                        },
+                        "tableName": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "query": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "e.g. WHERE active = true"
+                        },
+                        "highlight": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "indices of matched rows"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "GIT_BRANCH"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "git": {
+                      "type": "object",
+                      "properties": {
+                        "lanes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-3 lane names, each ≤14"
+                        },
+                        "commits": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-8 × {lane:index, label?≤14, color?} (time order)"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "{from:index, to:index} extra branch/merge curves"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "STATE_MACHINE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "stateMachine": {
+                      "type": "object",
+                      "properties": {
+                        "states": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 states (ring) / ≤6 (lifecycle) × {label≤12, color?}"
+                        },
+                        "transitions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-7 × {from:index, to:index, label?≤14, dashed?, color?}"
+                        },
+                        "active": {
+                          "type": "number",
+                          "description": "highlighted state index"
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "'ring' | 'lifecycle'"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "EMBEDDING_SPACE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "embedding": {
+                      "type": "object",
+                      "properties": {
+                        "points": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-16 × {label?≤16, x:0..1, y:0..1, cluster?:index}"
+                        },
+                        "clusters": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "cluster names (≤4, each ≤18)"
+                        },
+                        "axisX": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "axisY": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "API_REQUEST_RESPONSE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "api": {
+                      "type": "object",
+                      "properties": {
+                        "method": {
+                          "type": "string",
+                          "maxLength": 7,
+                          "description": "GET / POST / …"
+                        },
+                        "path": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "requestLines": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "≤3 lines, each ≤26"
+                        },
+                        "status": {
+                          "type": "string",
+                          "maxLength": 4
+                        },
+                        "statusText": {
+                          "type": "string",
+                          "maxLength": 16
+                        },
+                        "responseLines": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "≤3 lines, each ≤26"
+                        },
+                        "clientLabel": {
+                          "type": "string",
+                          "maxLength": 16
+                        },
+                        "serverLabel": {
+                          "type": "string",
+                          "maxLength": 16
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PROCESS_TABLE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "proc": {
+                      "type": "object",
+                      "properties": {
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-7 × {pid≤8, name≤28, cpu 0-100, mem 0-100, runaway?, atWord?}"
+                        },
+                        "sortBy": {
+                          "type": "string",
+                          "description": "'cpu' | 'mem' | 'pid'"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TEST_MATRIX"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "testMatrix": {
+                      "type": "object",
+                      "properties": {
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-5 row labels, each ≤14"
+                        },
+                        "cols": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-5 col labels, each ≤10"
+                        },
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "× {r:index, c:index, status:'pass'|'fail'|'skip'|'flaky'}"
+                        },
+                        "emphasize": {
+                          "type": "object",
+                          "description": "{r, c} the single narrated cell"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TEST_RUNNER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "testRunner": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-8 × {name≤40, depth 0-3, kind?:'describe'|'it', status?:'pass'|'fail'|'skip'|'run', ms?, atWord?}"
+                        },
+                        "passed": {
+                          "type": "number"
+                        },
+                        "failed": {
+                          "type": "number"
+                        },
+                        "failIndex": {
+                          "type": "number",
+                          "description": "node that expands its expected/actual pair"
+                        },
+                        "expected": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "actual": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CONTEXT_METER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "context": {
+                      "type": "object",
+                      "properties": {
+                        "segments": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 × {label≤16, tokens:number, kind:'system'|'tools'|'history'|'free'}"
+                        },
+                        "windowTokens": {
+                          "type": "number",
+                          "description": "total window (for the used/total verdict)"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DRILL_IN"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "drillIn": {
+                      "type": "object",
+                      "properties": {
+                        "overview": {
+                          "type": "object",
+                          "description": "a legal ≤8-node DIAGRAM (layout/nodes/edges) shown first"
+                        },
+                        "focusId": {
+                          "type": "string",
+                          "description": "id of the overview node to push into"
+                        },
+                        "detail": {
+                          "type": "object",
+                          "description": "the internal DIAGRAM revealed"
+                        },
+                        "pushAtWord": {
+                          "type": "number",
+                          "description": "when the camera pushes"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TICKER_TAPE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {
+                      "type": "object",
+                      "properties": {
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-16 × {symbol 1-6, price≤12, change:number (signed %)}"
+                        },
+                        "featured": {
+                          "type": "string",
+                          "description": "a symbol to feature as a hero card (must match an entry)"
+                        },
+                        "rows": {
+                          "type": "number",
+                          "description": "scrolling bands 1-3"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MAP_RADAR"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mapRadar": {
+                      "type": "object",
+                      "properties": {
+                        "blips": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-10 × {label?≤16, angle:deg (0=north, CW), range 0-1, color?}"
+                        },
+                        "rings": {
+                          "type": "number",
+                          "description": "concentric rings 2-5"
+                        },
+                        "ringLabels": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "sweepLabel": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "EVAL_DASHBOARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "evalDash": {
+                      "type": "object",
+                      "properties": {
+                        "metrics": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 × {label≤18, value:number, target?, unit?, degrading? (only ONE), color?}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CHANNEL_CARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "handle": {
+                      "type": "string",
+                      "maxLength": 22,
+                      "description": "e.g. @yourchannel"
+                    },
+                    "tagline": {
+                      "type": "string",
+                      "maxLength": 36
+                    },
+                    "atWord": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PHOTO"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "photo": {
+                      "type": "object",
+                      "properties": {
+                        "asset": {
+                          "type": "string",
+                          "description": "img:<file> from public/assets"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 60
+                        },
+                        "kicker": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "pan": {
+                          "type": "string",
+                          "description": "'in'|'out'|'left'|'right'|'up'|'down'"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SOUND_WAVE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "wave": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "bars": {
+                          "type": "number",
+                          "description": "bar count"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LOGO_REVEAL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "logo": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "maxLength": 24
+                        },
+                        "tagline": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "asset": {
+                          "type": "string",
+                          "description": "lucide/img mark"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CAROUSEL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "carousel": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "≤8 × {label≤18, sub?≤22, asset?, color?}"
+                        },
+                        "speed": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "GALLERY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "gallery": {
+                      "type": "object",
+                      "properties": {
+                        "tiles": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 tiles (2-4 for variant:'clips') × {asset (or src), kind?:'video'|'image', label≤18, color?}"
+                        },
+                        "columns": {
+                          "type": "number"
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "'grid' | 'clips' (CLIP_GRID, 16:9 media tiles)"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "COMPARISON_SLIDER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "comparison": {
+                      "type": "object",
+                      "properties": {
+                        "before": {
+                          "type": "object",
+                          "description": "{label≤18, caption?≤30, asset?, color?}"
+                        },
+                        "after": {
+                          "type": "object",
+                          "description": "{label≤18, caption?≤30, asset?, color?}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PHOTO_STACK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "photoStack": {
+                      "type": "object",
+                      "properties": {
+                        "cards": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 × {label?≤30, asset?, color?, atWord}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "IMAGE_SCENE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "image": {
+                      "type": "object",
+                      "properties": {
+                        "asset": {
+                          "type": "string"
+                        },
+                        "variant": {
+                          "type": "string",
+                          "description": "'polaroid' | 'pip'"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "pip": {
+                          "type": "object",
+                          "description": "pip mode: {asset, label≤18}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ACTIVITY_CARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "activity": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "maxLength": 8,
+                          "description": "big headline value, e.g. \"21h\" / \"1.2M\""
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-9 × {day≤4, value:number}"
+                        },
+                        "title": {
+                          "type": "string",
+                          "maxLength": 22
+                        },
+                        "trend": {
+                          "type": "string",
+                          "maxLength": 32
+                        },
+                        "trendColor": {
+                          "type": "string"
+                        },
+                        "range": {
+                          "type": "string",
+                          "maxLength": 12
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LOCATION_MAP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "locationMap": {
+                      "type": "object",
+                      "properties": {
+                        "location": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "coordinates": {
+                          "type": "string",
+                          "maxLength": 32
+                        },
+                        "status": {
+                          "type": "string",
+                          "maxLength": 10,
+                          "description": "chip text, default \"Live\""
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "VIDEO_HERO"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "videoHero": {
+                      "type": "object",
+                      "properties": {
+                        "src": {
+                          "type": "string",
+                          "description": "clip path (public/), e.g. assets/video/demo.mp4 (missing → designed placeholder)"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 60
+                        },
+                        "kicker": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "sub": {
+                          "type": "string",
+                          "maxLength": 90
+                        },
+                        "treatment": {
+                          "type": "string",
+                          "description": "'clean' | 'scrim' | 'focus'"
+                        },
+                        "zoom": {
+                          "type": "boolean"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "VIDEO_SPOTLIGHT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "videoSpotlight": {
+                      "type": "object",
+                      "properties": {
+                        "src": {
+                          "type": "string",
+                          "description": "clip/image path (missing → GlowFrame webcam placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        },
+                        "name": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "role": {
+                          "type": "string",
+                          "maxLength": 60
+                        },
+                        "kicker": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MEDIA_CALLOUT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mediaCallout": {
+                      "type": "object",
+                      "properties": {
+                        "callouts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-5 × {x:0..1, y:0..1, label≤32, side?:'left'|'right'|'up'|'down', hw?, hh?, color?, atWord?}"
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder backdrop)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "treatment": {
+                          "type": "string",
+                          "description": "'clean' | 'scrim'"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MEDIA_COMPARE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mediaCompare": {
+                      "type": "object",
+                      "properties": {
+                        "a": {
+                          "type": "object",
+                          "description": "{src?, kind?, label≤22, caption?≤60, color?}"
+                        },
+                        "b": {
+                          "type": "object",
+                          "description": "{src?, kind?, label≤22, caption?≤60, color?}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "'split' | 'wipe'"
+                        },
+                        "vs": {
+                          "type": "boolean"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MEDIA_STAT_OVERLAY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mediaStat": {
+                      "type": "object",
+                      "properties": {
+                        "stats": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-3 × {value:number, prefix?≤3, suffix?≤6, label≤20, color?, atWord?}"
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "treatment": {
+                          "type": "string",
+                          "description": "'clean' | 'scrim'"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SCREENSHOT_CASCADE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "screenshotCascade": {
+                      "type": "object",
+                      "properties": {
+                        "shots": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 × {src?, kind?:video|image, label≤40, color?, atWord?, highlight?:{x,y,w,h in 0..1}}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FLOATING_QUOTE_PILL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "floatingQuote": {
+                      "type": "object",
+                      "properties": {
+                        "quote": {
+                          "type": "string",
+                          "maxLength": 140
+                        },
+                        "attribution": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "OVERLAY_SPLIT_DEFINITIONS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "splitDefs": {
+                      "type": "object",
+                      "properties": {
+                        "left": {
+                          "type": "object",
+                          "description": "{header≤24, body≤90, color?, atWord?}"
+                        },
+                        "right": {
+                          "type": "object",
+                          "description": "{header≤24, body≤90, color?, atWord?}"
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CYCLE_LOOP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "cycleLoop": {
+                      "type": "object",
+                      "properties": {
+                        "nodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 × {label≤20, sub?≤18, color?, atWord?}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "STEP_STACK_OVERLAY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "stepStack": {
+                      "type": "object",
+                      "properties": {
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 × {label≤28, sub?≤20, color?, atWord?}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "chip": {
+                          "type": "string",
+                          "description": "'filled' | 'ring'"
+                        },
+                        "dock": {
+                          "type": "string",
+                          "description": "'left' | 'right'"
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TITLE_BANNER_FOCUS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "titleBanner": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "kicker": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "subtitle": {
+                          "type": "string",
+                          "maxLength": 70
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TALKING_POINTS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "talkingPoints": {
+                      "type": "object",
+                      "properties": {
+                        "points": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 × {text≤56, color?, atWord?}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "lead": {
+                          "type": "string",
+                          "maxLength": 70
+                        },
+                        "media": {
+                          "type": "string",
+                          "description": "'left' | 'right'"
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SLIDE_BULLETS_PIP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "slideBullets": {
+                      "type": "object",
+                      "properties": {
+                        "heading": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "bullets": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-6 × {text≤64, level?:0|1, color?, atWord?}"
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "optional dimmed video/image backdrop"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CAPTION_KINETIC_OVERLAY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "captionKinetic": {
+                      "type": "object",
+                      "properties": {
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 90,
+                          "description": "wrap ONE accent phrase in [brackets]"
+                        },
+                        "position": {
+                          "type": "string",
+                          "description": "'bottom' | 'center'"
+                        },
+                        "src": {
+                          "type": "string",
+                          "description": "clip or image (missing → placeholder)"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'video' | 'image'"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PHOTO_TIMELINE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "photoTimeline": {
+                      "type": "object",
+                      "properties": {
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 × {label≤24, date?≤16, src?, kind?:video|image, color?, atWord?}"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 44
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

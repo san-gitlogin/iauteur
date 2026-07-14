@@ -8,117 +8,272 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
+  <!-- ===== top bar ===== -->
   <header class="topbar">
     <div class="brand">
-      <img src="{{ url_for('static', filename='favicon.svg') }}" alt="" width="30" height="30" style="border-radius:7px;display:block" />
+      <img src="{{ url_for('static', filename='favicon.svg') }}" alt="" width="28" height="28" />
       <h1>iAuteur</h1>
-      <span class="tag">brief builder · design preview · local pipeline</span>
+      <span class="tag">Studio Console</span>
     </div>
-    <div class="hint">No AI here — this builds the brief you hand to Claude / Copilot in chat.</div>
+    <div class="ctx">
+      <span class="chip"><span class="k">topic</span><b id="ctxTopic">—</b></span>
+      <span class="chip" id="ctxSlugChip"><span class="k">slug</span><b id="ctxSlug">—</b></span>
+    </div>
+    <span class="spacer"></span>
+    <span id="statusPill" class="statuspill"><span class="d"></span><span id="statusText">Empty</span></span>
+    <button id="resetBtn" class="btn sm ghost" title="Start a brand-new project">Reset</button>
   </header>
 
-  <main class="layout">
-    <!-- LEFT: brief form -->
-    <section class="panel form">
-      <h2>1 · Configure</h2>
+  <div class="shell">
+    <!-- ===== stepper rail ===== -->
+    <nav class="rail" id="rail">
+      <div class="railhead">Pipeline</div>
+      <!-- step items injected by JS -->
+    </nav>
 
-      <label>Topic <span class="req">*</span>
-        <input id="topic" type="text" placeholder="e.g. How HTTPS keeps the web secure" />
-      </label>
+    <!-- ===== main ===== -->
+    <main class="main" id="main">
 
-      <label>Source material <span class="muted">(paste the article — facts are grounded ONLY in this)</span>
-        <textarea id="source" rows="6" placeholder="Paste the press release / article / notes here. Leave blank for evergreen conceptual topics."></textarea>
-      </label>
-
-      <div class="row">
-        <label>Format
-          <select id="format"></select>
-        </label>
-        <label>Screenplay
-          <select id="preset"></select>
-        </label>
-      </div>
-
-      <div class="row">
-        <label>Audience
-          <select id="audience"></select>
-        </label>
-        <label>Target length (min) <span class="muted">documentary</span>
-          <input id="minutes" type="number" min="1" max="15" placeholder="e.g. 9" />
-        </label>
-      </div>
-
-      <div class="row">
-        <label>Light twin
-          <select id="themeLight"></select>
-        </label>
-        <label>Background
-          <select id="background"></select>
-        </label>
-      </div>
-
-      <label>Channel
-        <input id="channel" type="text" />
-      </label>
-
-      <label>Notes / constraints <span class="muted">(optional)</span>
-        <textarea id="notes" rows="2" placeholder="tone, must-include points, things to avoid…"></textarea>
-      </label>
-
-      <label class="check">
-        <input id="scaffold" type="checkbox" />
-        Scaffold the topic folder now (runs <code>new-topic</code>)
-      </label>
-
-      <button id="genBtn" class="primary">Generate brief →</button>
-    </section>
-
-    <!-- CENTER: design gallery -->
-    <section class="panel gallery">
-      <h2>2 · Pick a design <span id="picked" class="picked"></span></h2>
-      <p class="muted small">Thumbnails are the same scene rendered in each pack. Selecting one sets
-        <code>brand.design</code> + <code>brand.theme</code>.</p>
-      <div id="designGrid" class="grid"></div>
-    </section>
-
-    <!-- RIGHT: output / actions -->
-    <section class="panel output">
-      <h2>3 · Hand to AI, then render</h2>
-
-      <div id="briefBox" class="hidden">
-        <div class="chatline">
-          <strong>Paste this in chat:</strong>
-          <code id="chatMsg"></code>
-          <button class="mini" data-copy="chatMsg">copy</button>
+      <!-- STEP 1 — TOPIC -->
+      <section class="step-panel" data-step="1">
+        <div class="panelhead"><div class="kick">Step 1</div><h2>What's the video about?</h2>
+          <p>Give it a topic. Paste source material if the facts must come from a specific article
+             (leave blank for evergreen/conceptual topics).</p></div>
+        <div class="card">
+          <label class="field">Topic <span class="req">*</span>
+            <input id="topic" type="text" placeholder="e.g. How HTTPS keeps the web secure" />
+          </label>
+          <label class="field">Source material <span class="muted">— facts are grounded only in this</span>
+            <textarea id="source" rows="5" placeholder="Paste the press release / article / notes. Leave blank for evergreen topics."></textarea>
+          </label>
+          <label class="field">Notes / constraints <span class="muted">(optional)</span>
+            <textarea id="notes" rows="2" placeholder="tone, must-include points, things to avoid…"></textarea>
+          </label>
         </div>
-        <details>
-          <summary>Full brief (saved to <code id="briefPath"></code>)</summary>
-          <pre id="briefText"></pre>
-          <button class="mini" data-copy="briefText">copy full brief</button>
-        </details>
-      </div>
-
-      <div class="actions">
-        <h3>Local pipeline <span class="muted small">(after the AI writes the spec)</span></h3>
-        <div class="actionrow">
-          <input id="actionSlug" type="text" placeholder="topic slug" />
-          <select id="topicPick" title="existing topics"></select>
+        <div class="stepnav">
+          <span class="spacer"></span>
+          <button class="btn primary" data-next>Continue to design →</button>
         </div>
-        <div class="btnrow">
-          <button data-action="lint">Lint</button>
-          <button data-action="critique">Critique</button>
-          <button data-action="render-wide-dark" class="accent">Render wide-dark</button>
-          <button data-action="render-short-dark">Render short-dark</button>
-          <button data-action="studio">Open Studio</button>
-          <button id="refreshOut">Refresh outputs</button>
+      </section>
+
+      <!-- STEP 2 — DESIGN + FORMAT -->
+      <section class="step-panel hidden" data-step="2">
+        <div class="panelhead"><div class="kick">Step 2</div><h2>Pick the look &amp; format</h2>
+          <p>Choose a design pack (this sets the theme) and the video's shape. Match the mood to the topic.</p></div>
+        <div class="card">
+          <h3>Format</h3>
+          <div class="cardsub">How long, what screenplay shape, who it's for.</div>
+          <div class="grid3">
+            <label class="field">Format<select id="format"></select></label>
+            <label class="field">Screenplay<select id="preset"></select></label>
+            <label class="field">Audience<select id="audience"></select></label>
+            <label class="field">Length (min)<input id="minutes" type="number" min="1" max="15" placeholder="e.g. 9" /></label>
+            <label class="field">Light twin<select id="themeLight"></select></label>
+            <label class="field">Background<select id="background"></select></label>
+          </div>
+          <label class="field">Channel<input id="channel" type="text" /></label>
         </div>
-      </div>
+        <div class="card">
+          <h3>Design pack <span id="pickedLabel" class="muted small"></span></h3>
+          <div class="cardsub">The same scene rendered in each pack. Selecting one sets
+            <code>brand.design</code> + <code>brand.theme</code>.</div>
+          <div id="designGrid" class="gallery"></div>
+        </div>
+        <div class="stepnav">
+          <button class="btn ghost" data-back>← Back</button>
+          <span class="spacer"></span>
+          <button class="btn primary" data-next>Continue to authoring →</button>
+        </div>
+      </section>
 
-      <div id="console" class="console"><span class="muted">console…</span></div>
+      <!-- STEP 3 — AUTHOR -->
+      <section class="step-panel hidden" data-step="3">
+        <div class="panelhead"><div class="kick">Step 3</div><h2>Author the spec</h2>
+          <p>The console builds the prompt; your LLM writes the scenes; the console validates and saves them.
+             Nothing here calls AI — you paste to and from your own chat.</p></div>
 
-      <div id="outputs" class="outputs"></div>
-    </section>
-  </main>
+        <div id="dirtyBanner" class="banner warn hidden">
+          <span class="bico">⚠</span>
+          <div class="bbody"><b>Your topic or design changed since this draft.</b>
+            <div class="muted small">Regenerate the prompt so the spec matches your new settings, or discard the draft and start over.</div>
+            <div class="bactions"><button id="discardDraft" class="btn sm danger">Discard draft &amp; restart</button>
+              <button id="keepDraft" class="btn sm ghost">Keep it</button></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Authoring mode</h3>
+          <div class="cardsub">Two-paste is robust with any LLM. Single-paste is one shot for frontier models.</div>
+          <div class="seg" id="modeSeg">
+            <button data-mode="two" class="on">Two-paste</button>
+            <button data-mode="single">Single-paste</button>
+          </div>
+
+          <!-- TWO-PASTE -->
+          <div id="twoFlow">
+            <div class="substep" id="ss-a1">
+              <div class="slabel"><span class="sdot">1</span> Beat-sheet prompt</div>
+              <button id="stage1Btn" class="btn accent">Generate beat-sheet prompt</button>
+              <div id="stage1Box" class="promptblock hidden">
+                <div class="copyline"><span>Paste into your LLM</span><button class="btn sm" data-copy="stage1Text">copy</button></div>
+                <pre id="stage1Text" class="code"></pre>
+              </div>
+            </div>
+            <div class="substep" id="ss-a2">
+              <div class="slabel"><span class="sdot">2</span> Paste the beat sheet → validate</div>
+              <textarea id="beatsJson" rows="4" class="mono-ta" placeholder="paste the beat-sheet JSON the LLM returned"></textarea>
+              <button id="validateBtn" class="btn accent" style="margin-top:10px">Validate beats</button>
+              <div id="beatVerdict"></div>
+            </div>
+            <div class="substep hidden" id="beatReview">
+              <div class="slabel"><span class="sdot">3</span> Review narration <span class="muted small">types are fixed; meters turn red over budget</span></div>
+              <div id="beatRows" class="rows"></div>
+            </div>
+            <div class="substep hidden" id="ss-a4">
+              <div class="slabel"><span class="sdot">4</span> Fill prompt</div>
+              <button id="stage2Btn" class="btn accent">Generate fill prompt</button>
+              <div id="stage2Box" class="promptblock hidden">
+                <div class="copyline"><span>Paste into your LLM</span><button class="btn sm" data-copy="stage2Text">copy</button></div>
+                <pre id="stage2Text" class="code"></pre>
+              </div>
+            </div>
+            <div class="substep" id="ss-a5">
+              <div class="slabel"><span class="sdot">5</span> Paste the reply → assemble</div>
+              <textarea id="replyJson" rows="5" class="mono-ta" placeholder="paste the model's reply JSON"></textarea>
+              <button id="assembleBtn" class="btn accent" style="margin-top:10px">Assemble → normalize → lint</button>
+            </div>
+          </div>
+
+          <!-- SINGLE-PASTE -->
+          <div id="singleFlow" class="hidden">
+            <div class="substep">
+              <div class="slabel"><span class="sdot">1</span> One complete prompt</div>
+              <button id="promptBtn" class="btn accent">Generate single-paste prompt</button>
+              <div id="promptBox" class="promptblock hidden">
+                <div class="copyline"><span>Copy the whole prompt into your LLM (add nothing else)</span><button class="btn sm" data-copy="promptText">copy</button></div>
+                <pre id="promptText" class="code"></pre>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="slabel"><span class="sdot">2</span> Paste the reply → assemble</div>
+              <textarea id="replyJsonSingle" rows="5" class="mono-ta" placeholder="paste the model's reply JSON"></textarea>
+              <button id="assembleSingleBtn" class="btn accent" style="margin-top:10px">Assemble → normalize → lint</button>
+            </div>
+          </div>
+
+          <div id="assembleResult"></div>
+
+          <div id="fixWrap" class="substep hidden">
+            <div class="slabel"><span class="sdot">!</span> One fix round</div>
+            <div class="copyline"><span>Paste this fix-prompt to the model</span><button class="btn sm" data-copy="fixText">copy</button></div>
+            <pre id="fixText" class="code"></pre>
+            <textarea id="patchJson" rows="3" class="mono-ta" placeholder="paste the corrected scenes / narrations array" style="margin-top:10px"></textarea>
+            <button id="applyfixBtn" class="btn accent" style="margin-top:10px">Apply fix → re-lint</button>
+          </div>
+
+          <div id="sceneEditor" class="substep hidden">
+            <div class="slabel"><span class="sdot">✓</span> Per-scene budgets <span class="muted small">edit narration inline</span></div>
+            <div id="sceneMeters" class="rows"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Save target</h3>
+          <div class="cardsub">Where the spec is written. Slug auto-fills from the topic.</div>
+          <div class="grid2">
+            <label class="field">Topic slug<input id="slug" type="text" placeholder="auto-filled" /></label>
+            <label class="field">…or load an existing topic<select id="topicPick"></select></label>
+          </div>
+          <details>
+            <summary class="muted small" style="cursor:pointer;margin-bottom:8px">Advanced: paste full long.json / shorts.json directly</summary>
+            <label class="field">long.json<textarea id="longJson" rows="4" class="mono-ta" placeholder="paste a full long-form spec JSON"></textarea></label>
+            <label class="field">shorts.json <span class="muted">(optional)</span><textarea id="shortsJson" rows="3" class="mono-ta" placeholder="paste the shorts spec JSON, if any"></textarea></label>
+            <button id="intakeBtn" class="btn accent">Validate &amp; save</button>
+          </details>
+        </div>
+
+        <div class="stepnav">
+          <button class="btn ghost" data-back>← Back</button>
+          <span class="spacer"></span>
+          <button id="saveTwoBtn" class="btn primary" disabled>Save spec to topic →</button>
+        </div>
+      </section>
+
+      <!-- STEP 4 — VOICEOVER -->
+      <section class="step-panel hidden" data-step="4">
+        <div class="panelhead"><div class="kick">Step 4 · optional</div><h2>Voiceover</h2>
+          <p>Edge-TTS narration, millisecond-synced to the script and baked into the render.
+             Needs internet + Edge-TTS installed once. Skip it for a silent render.</p></div>
+        <div id="voGate" class="banner info hidden"><span class="bico">ℹ</span>
+          <div class="bbody">Save a spec in Step 3 first — voiceover needs a topic on disk.</div></div>
+        <div class="card">
+          <h3>Generate narration</h3>
+          <div class="cardsub">Pick a language, then a voice — the full Edge-TTS catalogue (320+ voices).</div>
+          <div class="controls">
+            <select id="voKind"><option value="long">long</option><option value="shorts">shorts</option></select>
+            <select id="voLang" title="Language / locale"></select>
+            <select id="voVoice" title="Voice"></select>
+            <button id="voBtn" class="btn accent">Generate voiceover</button>
+            <button id="voSetup" class="btn ghost">Install / upgrade Edge-TTS</button>
+          </div>
+        </div>
+        <div class="stepnav">
+          <button class="btn ghost" data-back>← Back</button>
+          <span class="spacer"></span>
+          <button class="btn primary" data-next>Continue to render →</button>
+        </div>
+      </section>
+
+      <!-- STEP 5 — RENDER -->
+      <section class="step-panel hidden" data-step="5">
+        <div class="panelhead"><div class="kick">Step 5</div><h2>Render &amp; preview</h2>
+          <p>Produce the video. Watch progress live in the console at the bottom; the finished file appears here.</p></div>
+        <div id="renderGate" class="banner info hidden"><span class="bico">ℹ</span>
+          <div class="bbody">Save a spec in Step 3 first — there's nothing to render yet.</div></div>
+        <div class="card">
+          <h3>Checks</h3>
+          <div class="cardsub">Optional, but a green lint means it will render.</div>
+          <div class="btnrow">
+            <button class="btn" data-action="lint">Lint</button>
+            <button class="btn" data-action="critique">Critique</button>
+            <button class="btn ghost" data-action="studio">Open Remotion Studio</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Render a variant</h3>
+          <div class="cardsub">Landscape (16:9) or vertical Shorts (9:16), dark or light theme.</div>
+          <div class="renderGrid">
+            <button class="btn primary rbtn" data-action="render-wide-dark">Render wide · dark<small>16:9 · the main video</small></button>
+            <button class="btn rbtn" data-action="render-wide-light">Render wide · light<small>16:9 · light theme</small></button>
+            <button class="btn rbtn" data-action="render-short-dark">Render short · dark<small>9:16 · Shorts/Reels</small></button>
+            <button class="btn rbtn" data-action="render-short-light">Render short · light<small>9:16 · light theme</small></button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Outputs <button id="refreshOut" class="btn sm ghost" style="margin-left:8px">refresh</button></h3>
+          <div id="outputs" class="outputs"></div>
+        </div>
+        <div class="stepnav"><button class="btn ghost" data-back>← Back</button></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===== console drawer ===== -->
+  <div class="console collapsed" id="console">
+    <div class="chead" id="consoleHead">
+      <span class="ctitle"><span id="liveBadge" class="livebadge hidden"></span>Console</span>
+      <span class="cstat" id="consoleStat">idle</span>
+      <span class="cbtns">
+        <button class="btn sm ghost" id="clearLog">clear</button>
+        <button class="btn sm ghost" id="toggleLog">▲ show</button>
+      </span>
+    </div>
+    <div class="cbody" id="consoleBody"></div>
+  </div>
+
+  <!-- ===== toasts ===== -->
+  <div class="toasts" id="toasts"></div>
 
   <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>

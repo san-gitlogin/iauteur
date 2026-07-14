@@ -1,0 +1,31 @@
+Instagram's newest AI tool didn't survive the week — Gemini output, lint result
+=================================================================================
+This is a REAL failure case: the JSON below was produced by Google Gemini from the
+iAuteur "Generate LLM prompt" output, pasted back into the console, and REJECTED by
+the linter. It is kept verbatim as evidence for the Fable brief.
+
+── lint long.json ──
+⚠ WARNINGS (3)
+  • 11 scenes — likely too long for explainer (expected ≤10); split into parts or set meta.screenplay:"documentary" for long-form
+  • meta.topicAxes has <2 strategy axes (entity-novelty/economic-pain/sovereignty/tribal-conflict) — historically this profile lands ~50-300 views; see channel_playbook.md §1
+  • s05: studio scene without a "source" footer — the credibility strip is part of the look
+
+✗ REJECTED (3 errors)
+  • s01: HOOK is 8.6s — must be ≤8s
+  • s04: transition "pop" unknown. Known: fade, slide, push, zoom, morph, wipe, iris, clock, dip, blinds, pixel, whippan, zoomthrough, letterbox, filmburn, glitch
+  • s06: transition "slideUp" unknown. Known: fade, slide, push, zoom, morph, wipe, iris, clock, dip, blinds, pixel, whippan, zoomthrough, letterbox, filmburn, glitch
+
+── lint shorts.json ──
+⚠ WARNINGS (1)
+  • s05: studio scene without a "source" footer — the credibility strip is part of the look
+
+✗ REJECTED (2 errors)
+  • s03: transition "pop" unknown. Known: fade, slide, push, zoom, morph, wipe, iris, clock, dip, blinds, pixel, whippan, zoomthrough, letterbox, filmburn, glitch
+  • s06: transition "slideUp" unknown. Known: fade, slide, push, zoom, morph, wipe, iris, clock, dip, blinds, pixel, whippan, zoomthrough, letterbox, filmburn, glitch
+
+DEEPER (linter did NOT catch these — data field-name mismatches that render blank/wrong):
+  • s06 STAT_CALLOUT used statValue:"160K"/statLabel/kicker → real fields are numeric value + label + prefix/suffix (a string "160K" never counts up).
+  • s11 OUTRO_CTA used headline/subhead/buttonText → real fields are message/sub.
+  • s10 RECAP used title + points:[strings] → real fields are heading + points:ListItem[] (objects).
+  • s01 HOOK used kicker + atWord → real fields are subtext + headlineAtWord/heroAtWord (HOOK has no kicker).
+  • CONCEPT_DIAGRAM nodes lacked per-node atWord; a "title" field is not read by that component.

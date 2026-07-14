@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "topic": "How password managers actually keep your secrets safe",
+    "onePayoff": "Understanding zero-knowledge encryption and why server breaches do not expose actual passwords.",
+    "openLoop": "If a password manager gets hacked, are all your digital accounts instantly compromised?",
+    "analogy": "It is like mailing a locked safe; the delivery company carries the box but never has the key.",
+    "screenplay": "explainer",
+    "topicAxes": ["economic-pain", "sovereignty"]
+  },
+  "beats": [
+    { "id": "s01", "type": "HOOK", "intent": "State the high-stakes paradox of password managers", "narration": "If a hacker breaches your password manager, they still cannot see your passwords. Here is why." },
+    { "id": "s02", "type": "TITLE_CARD", "intent": "Name the underlying technology", "narration": "It all comes down to a brilliantly simple concept called zero-knowledge architecture." },
+    { "id": "s03", "type": "FLIP_CARD", "intent": "Bust the biggest myth about master passwords", "narration": "You might assume the provider verifies your master password. But they literally never receive it." },
+    { "id": "s04", "type": "CONCEPT_DIAGRAM", "intent": "Explain local encryption before transmission", "narration": "Instead, your password mathematically generates a secure key, locking your vault right on your device." },
+    { "id": "s05", "type": "CHAT_MOCKUP", "intent": "Show what a hacker actually sees during a breach", "narration": "If attackers breach the company servers, they only walk away with an unreadable, scrambled mess." },
+    { "id": "s06", "type": "STEP_FLOW", "intent": "Explain how syncing across devices remains secure", "narration": "When syncing a new phone, the scrambled vault downloads first, then your local key decrypts it." },
+    { "id": "s07", "type": "LIST_BUILD", "intent": "Summarize the ultimate benefits to the user", "narration": "This guarantees absolute privacy, prevents remote theft, and gives you total sovereignty over your digital identity." },
+    { "id": "s08", "type": "OUTRO_CTA", "intent": "Call to action", "narration": "Secure your digital life today. Subscribe to YOUR CHANNEL for more deep dives." }
+  ]
+}

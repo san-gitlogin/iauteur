@@ -5,54 +5,12 @@
 
 import fs from 'node:fs';
 import {SCREENPLAY_NAMES, SCREENPLAYS} from './screenplays.mjs';
+import {resolveSi} from './lib/si-resolve.mjs';
 
-const DARK_THEMES = ['studio', 'neonGrid', 'midnight', 'terminal', 'linear', 'vapor', 'luxe', 'cyberpunk', 'swiss', 'neobrutalism', 'vaporwave', 'bauhaus', 'luxury', 'terminalcli', 'retro', 'material', 'neumorphism', 'artdeco', 'monochrome', 'academia', 'newsprint', 'clay', 'organic', 'industrial', 'playgeo', 'maximalism', 'simpledark', 'flatdesign', 'sketch', 'kinetic', 'crypto', 'corptrust', 'businessdeck', 'techstyle', 'boldtype', 'botanical', 'moderndark', 'creatorGlow'];
-const LIGHT_THEMES = ['daylight', 'paper', 'brutalist', 'creatorGlowLight'];
-const THEMES = [...DARK_THEMES, ...LIGHT_THEMES];
-const TYPES = [
-  'HOOK', 'TITLE_CARD', 'CONCEPT_DIAGRAM', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'SOUND_WAVE', 'REVEAL', 'LOGO_REVEAL', 'CAROUSEL', 'CREDITS_ROLL', 'SUBSCRIBE_REMINDER', 'LIST_BUILD', 'STAT_CALLOUT', 'RECAP', 'OUTRO_CTA',
-  'STEP_FLOW', 'CHAT_MOCKUP', 'STAT_PANELS', 'QUOTE_SPOTLIGHT', 'SPLIT_PATHS', 'BAR_COMPARE', 'CHANNEL_CARD',
-  'LINE_CHART', 'DONUT', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'PROGRESS', 'TIMELINE', 'QUADRANT', 'CODE_WINDOW',
-  'LOWER_THIRD', 'CHAPTER', 'NOTIFICATION', 'COUNTDOWN', 'FLIP_CARD',
-  'GALLERY', 'COMPARISON_SLIDER', 'PHOTO_STACK', 'IMAGE_SCENE',
-  'ACTIVITY_CARD', 'LOCATION_MAP', 'BITS', 'MEMORY', 'PACKET',
-  'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET',
-  'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK',
-  'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH',
-  'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE',
-  'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL',
-  'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE',
-  'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE',
-  'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME',
-  'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD',
-  'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX',
-  'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD',
-  'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE',
-];
-const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];
-const ZONES = ['zoneA', 'zoneB', 'zoneC'];
-const TRANSITIONS = ['fade', 'slide', 'push', 'zoom', 'morph', 'wipe', 'iris', 'clock', 'dip', 'blinds', 'pixel', 'whippan', 'zoomthrough', 'letterbox', 'filmburn', 'glitch'];
-const ANIMS = ['fadeUp', 'rise', 'blur', 'pop', 'scale', 'bounce', 'bubble', 'spin', 'stack', 'slideLeft', 'slideRight', 'slideUp', 'slideDown', 'clip', 'wipe'];
+import {DARK_THEMES, LIGHT_THEMES, THEMES, TYPES, SEM, ZONES, TRANSITIONS, ANIMS, BUDGET, BACKGROUNDS, HOOK_MAX_FRAMES, FAMILY, CONSOLIDATED} from './lib/constants.mjs';
 
-// TEXT BUDGETS — every limit exists because overflow past it broke a layout once.
-const BUDGET = {
-  hookHeadline: 30,
-  headline: 48,
-  pill: 36,          // caption / verdict / transformation.to (wide contexts)
-  badgeInCard: 24,   // badge INSIDE a path card (~470px) — half the space, half the budget
-  kicker: 18,
-  stepTitle: 14,
-  stepSub: 30,
-  message: 64,
-  monoLine: 34,
-  listItem: 44,
-  recapPoint: 46,
-  source: 64,
-  quote: 120,
-  coverTitle: 26,
-  statValue: 12,
-  panelTitle: 44,    // ChatMockup/SplitPaths card titles
-};
+// TEXT BUDGETS + all enums now live in scripts/lib/constants.mjs (imported above,
+// shared with scripts/gen-prompt.mjs so the linter and the prompt can never disagree).
 
 const IMG_DIR = 'public/assets';
 const errors = [];
@@ -80,7 +38,7 @@ if (spec.brand?.themeLight && !LIGHT_THEMES.includes(spec.brand.themeLight))
 if (spec.meta?.screenplay && !SCREENPLAY_NAMES.includes(spec.meta.screenplay))
   W(`meta.screenplay "${spec.meta.screenplay}" unknown. Known: ${SCREENPLAY_NAMES.join(', ')}`);
 const bgv = spec.brand?.background;
-if (bgv && !['aurora', 'grid', 'aurora-grid', 'plain', 'bokeh', 'starfield', 'grid-pulse', 'wave', 'ripple', 'gradient', 'geo', 'matrix-rain', 'noise', 'ember'].includes(bgv))
+if (bgv && !BACKGROUNDS.includes(bgv))
   E(`brand.background "${bgv}" unknown. Known: aurora, grid, aurora-grid, plain, bokeh, starfield, grid-pulse, wave, ripple, gradient, geo, matrix-rain, noise, ember (omit for theme default)`);
 if (!spec.scenes?.length) E('no scenes');
 const n = spec.scenes?.length ?? 0;
@@ -100,8 +58,8 @@ if (last && !['OUTRO_CTA', 'RECAP'].includes(last)) W(`last scene is ${last}; ex
 // the same family are rejected even if their variants differ, and the whole
 // family is capped so a video can't visually repeat one skeleton behind different
 // chips. A TYPE+VARIANT pair is a distinct SUB-TYPE for the count/cap below.
-const FAMILY = {PIPELINE: 'PIPELINE', COST_METER: 'gauge-surface', SLO_GAUGE: 'gauge-surface', CONFIDENCE_GATE: 'gauge-surface', EVAL_DASHBOARD: 'gauge-surface', CODE_WINDOW: 'code-surface', CODE_EDITOR: 'code-surface', CODE_DIFF: 'code-surface', TERMINAL_SESSION: 'stream-surface', LOG_STREAM: 'stream-surface', WINDOW_FRAME: 'framed-surface', AUTOMATION_RUN: 'framed-surface', DEVICE_FRAME: 'framed-surface', CLOUD_ARCH: 'node-graph', KNOWLEDGE_GRAPH: 'node-graph', DRILL_IN: 'node-graph', ERD: 'node-graph', K8S_CLUSTER: 'zone-surface', KERNEL_BOUNDARY: 'zone-surface', SANDBOX_BOX: 'zone-surface', DATABASE_TABLE: 'row-list', PROCESS_TABLE: 'row-list', IAC_PLAN: 'row-list', TEST_RUNNER: 'row-list'};
-const CONSOLIDATED = new Set(['PIPELINE', 'gauge-surface', 'code-surface', 'stream-surface', 'framed-surface', 'node-graph', 'zone-surface', 'row-list']);
+// FAMILY + CONSOLIDATED are the SINGLE SOURCE in scripts/lib/constants.mjs (Phase 3
+// unification — the linter no longer keeps a private copy that could drift).
 // family membership is by TYPE (C1): a VARIANT is the same scene type with a
 // different data.variant, so it inherits its type's family automatically and can
 // never silently escape it (SPLIT_IDE is CODE_EDITOR → code-surface). ONE
@@ -201,6 +159,46 @@ for (const img of collectImgAssets(spec)) {
     E(`asset "img:${img}" not found in ${IMG_DIR}/ — drop the file there first (see PROJECT_RULES.md §Assets)`);
 }
 
+// ── ASSET-REQUEST PROTOCOL (Phase 5, mechanism 1) ─────────────────────────
+// A spec may DECLARE an asset it needs instead of inventing a URL (R3/truth):
+//   "assetsNeeded": [{key, kind:'image'|'video'|'logo', query, sources?, mustShow?}]
+// and a media field then references it as "needed:<key>". The console/resolver
+// fetches candidates (Wikimedia/press-kit/CC0/si:), a human picks one, and the
+// "needed:<key>" is swapped for the resolved "img:<file>". Until then the scene
+// degrades to a component-icon monogram (AssetIcon fallback), never a blank.
+const collectNeeded = (obj, out = []) => {
+  if (typeof obj === 'string') {
+    // an asset reference is EXACTLY `needed:<identifier>` — anchor the match so
+    // prose that merely contains the English word "needed:" (e.g. a topic or
+    // narration line) is never mistaken for an asset request.
+    const m = /^needed:([A-Za-z0-9_-]+)$/.exec(obj.trim());
+    if (m) out.push(m[1]);
+  } else if (obj && typeof obj === 'object') {
+    for (const v of Object.values(obj)) collectNeeded(v, out);
+  }
+  return out;
+};
+const ASSET_KINDS = ['image', 'video', 'logo'];
+const declaredNeeds = new Map();
+if (spec.assetsNeeded != null) {
+  if (!Array.isArray(spec.assetsNeeded)) E('assetsNeeded must be an array of {key, kind, query, sources?, mustShow?}');
+  else for (const a of spec.assetsNeeded) {
+    if (!a || typeof a !== 'object') { E('assetsNeeded entry must be an object'); continue; }
+    if (!a.key || typeof a.key !== 'string') E(`assetsNeeded entry needs a string "key" (got ${JSON.stringify(a.key)})`);
+    if (declaredNeeds.has(a.key)) E(`assetsNeeded duplicate key "${a.key}"`);
+    if (!ASSET_KINDS.includes(a.kind)) E(`assetsNeeded "${a.key}" kind must be ${ASSET_KINDS.join('/')} (got "${a.kind}")`);
+    if (!a.query || typeof a.query !== 'string') E(`assetsNeeded "${a.key}" needs a string "query" (what to search for — never a URL)`);
+    if (a.sources != null && !Array.isArray(a.sources)) E(`assetsNeeded "${a.key}" sources must be an array of source names`);
+    if (a.key) declaredNeeds.set(a.key, {used: false});
+  }
+}
+for (const key of collectNeeded(spec)) {
+  const d = declaredNeeds.get(key);
+  if (!d) E(`asset "needed:${key}" has no matching assetsNeeded[] entry — declare {key:"${key}", kind, query} at the spec top level (never invent a URL)`);
+  else d.used = true;
+}
+for (const [key, d] of declaredNeeds) if (!d.used) W(`assetsNeeded "${key}" is declared but never referenced as "needed:${key}" — remove it or wire it into a scene`);
+
 const checkAccent = (sceneId, field, text) => {
   if (!text) return;
   const opens = (text.match(/\[/g) ?? []).length;
@@ -230,7 +228,7 @@ for (const s of spec.scenes ?? []) {
   const expected = wc * 12 + 30;
   if (s.timingSource !== 'tts' && s.durationFrames && Math.abs(s.durationFrames - expected) > Math.max(60, expected * 0.4))
     W(`${id}: durationFrames=${s.durationFrames} vs ~${expected} expected for ${wc} words — check pacing`);
-  if (s.type === 'HOOK' && s.durationFrames > 8 * 30)
+  if (s.type === 'HOOK' && s.durationFrames > HOOK_MAX_FRAMES)
     E(`${id}: HOOK is ${(s.durationFrames / 30).toFixed(1)}s — must be ≤8s`);
 
   // anchors within narration (skipped after TTS sync: anchors become fractional frames)
@@ -1780,6 +1778,30 @@ for (const s of spec.scenes ?? []) {
       if (e.date && len(e.date) > 16) E(`${id}: PHOTO_TIMELINE date "${e.date}" > 16 chars`);
       if (e.kind && !['video', 'image'].includes(e.kind)) E(`${id}: PHOTO_TIMELINE entry kind must be video|image`);
     }
+  }
+}
+
+// ── si: BRAND-SLUG VALIDATION (Phase 5, mechanism 2) ──────────────────────
+// Validate every si:<slug> against the LOCAL simple-icons catalog. A typo gets
+// a fuzzy correction; a slug with no brand at all is told to use a lucide glyph
+// or a real logo. No network — the catalog ships in node_modules.
+const collectSiAssets = (obj, out = []) => {
+  if (typeof obj === 'string') {
+    if (obj.startsWith('si:')) out.push(obj.slice(3));
+  } else if (obj && typeof obj === 'object') {
+    for (const v of Object.values(obj)) collectSiAssets(v, out);
+  }
+  return out;
+};
+const _siSlugs = [...new Set(collectSiAssets(spec))];
+if (_siSlugs.length) {
+  for (const slug of _siSlugs) {
+    const r = await resolveSi('si:' + slug);
+    if (r.ok) continue;
+    if (r.kind === 'corrected')
+      E(`asset "si:${slug}" is not a simple-icons slug — did you mean "si:${r.suggestion}"?`);
+    else
+      E(`asset "si:${slug}" is not a known brand in simple-icons — use a valid si: slug, a lucide: glyph, or a real logo (img:/needed:)`);
   }
 }
 

@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "topic": "How password managers actually keep your secrets safe",
+    "onePayoff": "One strong master password unlocks a vault that encrypts everything else.",
+    "openLoop": "If it stores all your passwords, what stops one breach from exposing them all?",
+    "analogy": "A single key to a safe whose contents are already shredded to anyone without it.",
+    "screenplay": "explainer",
+    "topicAxes": ["sovereignty", "economic-pain"]
+  },
+  "beats": [
+    { "id": "s01", "type": "HOOK", "intent": "stake", "narration": "You reuse one password everywhere, and a single leak hands attackers your whole life." },
+    { "id": "s02", "type": "TITLE_CARD", "intent": "name it", "narration": "Here is how password managers actually keep your secrets safe." },
+    { "id": "s03", "type": "CONCEPT_DIAGRAM", "intent": "mechanism", "narration": "A manager locks every password inside one strongly encrypted vault." },
+    { "id": "s04", "type": "STEP_FLOW", "intent": "process", "narration": "It works in three steps: a master key, then derive, then encrypt." },
+    { "id": "s05", "type": "STAT_CALLOUT", "intent": "scale", "narration": "A good vault protects data with two hundred fifty six bit encryption." },
+    { "id": "s06", "type": "QUOTE_SPOTLIGHT", "intent": "authority", "narration": "As security teams put it, you should only ever memorize one strong password." },
+    { "id": "s07", "type": "RECAP", "intent": "close loop", "narration": "So one master key unlocks a vault that encrypts absolutely everything else." },
+    { "id": "s08", "type": "OUTRO_CTA", "intent": "cta", "narration": "Subscribe for more plain English security explainers." }
+  ]
+}

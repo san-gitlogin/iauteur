@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "topic": "How password managers actually keep your secrets safe",
+    "onePayoff": "Password managers secure your credentials by encrypting them locally with a master key.",
+    "openLoop": "Why does your sensitive data remain unreadable even if the service provider is hacked?",
+    "analogy": "A physical vault where only you hold the key, and the vault manufacturer has no copy.",
+    "screenplay": "explainer",
+    "topicAxes": ["entity-novelty", "sovereignty"]
+  },
+  "beats": [
+    { "id": "s01", "type": "HOOK", "intent": "the stake", "narration": "Using one password for every site is an open door; here is how managers lock it." },
+    { "id": "s02", "type": "TITLE_CARD", "intent": "introduce topic", "narration": "How Password Managers Protect Your Digital Life" },
+    { "id": "s03", "type": "CHAT_MOCKUP", "intent": "show the common failure", "narration": "Most people reuse passwords, creating a single point of failure that hackers easily exploit." },
+    { "id": "s04", "type": "CONCEPT_DIAGRAM", "intent": "explain encryption mechanism", "narration": "Your data is scrambled into unreadable text using strong encryption before it ever leaves your device." },
+    { "id": "s05", "type": "SPLIT_PATHS", "intent": "zero-knowledge explanation", "narration": "The provider holds your encrypted blob, but only you hold the key to unlock it." },
+    { "id": "s06", "type": "STEP_FLOW", "intent": "decryption workflow", "narration": "The process happens entirely on your machine, ensuring the provider never sees your actual master password." },
+    { "id": "s07", "type": "STAT_PANELS", "intent": "myth-bust safety", "narration": "While no system is perfect, local encryption makes a massive breach virtually useless to attackers." },
+    { "id": "s08", "type": "RECAP", "intent": "close the loop", "narration": "They use local encryption, hold zero knowledge of your secrets, and eliminate your password reuse habit." },
+    { "id": "s09", "type": "OUTRO_CTA", "intent": "final action", "narration": "Start using a manager today to secure your digital sovereignty. Subscribe for more." }
+  ]
+}

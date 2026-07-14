@@ -1119,6 +1119,486 @@ audit/census.json now: TYPES 114 · A-census 0 · variantsDeclared 27.
 |---|---|---|---|---|---|---|
 | L-BK-1 | P2 (bookkeeping) | audit/census.mjs → census.json → matrix.md | GALLERY:clips (CLIP_GRID) and MEDIA_COMPARE:wipe had NO matrix cell → CLIP_GRID's sweep verdict could not be pointed to on disk (a seal bookkeeping hole per Session-11 rule 3) | the census variant-detector regex accepted only `/`-separated enum lists (`[a-z/]+`), but several lint messages use `|` (`GALLERY variant must be grid|clips`, `MEDIA_COMPARE ... split|wipe`) → every variant after the first `|` was silently dropped — the same class as the K8S digit-regex blind spot | census regex → `([a-z/|]+)` + `split(/[/|]/)`; regenerated census (variants 25→27: +GALLERY:clips, +MEDIA_COMPARE:wipe) + matrix (rows now present); MEDIA_COMPARE:wipe flipped PASS (mp-mix build-view); GALLERY:clips left UNVIEWED-pending-family-B with its media verdict in the ledger above | FIXED |
 
+---
+
+# iAUTEUR FINAL PROGRAM — DECISION REGISTER (Session 7, 2026-07-12)
+
+The authoring/prompt program (distinct from the Program-3 component library above). Full run history:
+`/memories/repo/iauteur-webui.md`. Resume state: `HANDOFF.md` (repo root). Contracts: `MANIFEST_MATRIX.md`
+(Phase 2), `ASSET_MATRIX.md` (Phase 5). Charter quality laws Q1–Q6 + standing rules R1–R9 govern.
+
+## DECISIONS (each with a one-line rationale)
+- **D-CH-1 · Phase 0 SKIPPED.** No pw-v2 model outputs were attached with the charter. Rationale: the charter says
+  "If no outputs are provided, skip — do not block on the human." Resume hook recorded in HANDOFF (experiment.mjs spec
+  auto-assembles lean replies; append v1→v2 error-class diff to EXPERIMENT_REPORT when outputs arrive).
+- **D-CH-2 · Phase 2 denominator derived by script (R8).** `scripts/derive-manifest-matrix.mjs` reads the linter
+  `TYPES` registry (constants.mjs, 136) minus `MANIFEST_TYPES` (17) → MANIFEST_MATRIX.md, 119 remaining rows, all
+  UNVIEWED, re-run preserves sealed rows. Rationale: the burn-down list must be scripted, never hand-listed.
+- **D-CH-3 · Durable state stood up before phase work.** Created repo-root HANDOFF.md (charter resume + burn-downs),
+  MANIFEST_MATRIX.md, ASSET_MATRIX.md; this register section. Rationale: the RESUME protocol depends on HANDOFF +
+  burn-downs existing; a forced stop must land on a clean resume point.
+- **D-CH-4 · Phase 1 sealed via a scripted flow walkthrough, not a pixel review.** The Phase-1 acceptance is a
+  "scripted walkthrough with canned fixtures [covering] every screen and every failure path" + the four pw-v1 outputs
+  driving the flow end-to-end. Rationale: the flow LOGIC lives in already-tested .mjs scripts; the webui layer wires
+  them. The seal is a Flask test-client harness exercising every endpoint/path with the pw-v1 fixtures. Pixel-level
+  visual review of the HTML screens is a named honest gap (a human eyeballs the rendered console), not a flow blocker.
+
+## PHASE 2 — MANIFEST 17 → 136 (burn-down)
+Batches of 5–8 rows. Each row seals only with: CLASS logged · INTERFACE_READ (types.ts, R1) · ENTRY in
+scripts/lib/manifest.mjs · GATE (check-manifest green) · STILL (a viewed _sceneproof render, Q3). Tooling:
+`scripts/_manifestproof.mjs TYPE1,TYPE2,… out.json` builds a lint-valid spec whose scenes ARE the manifest
+examples → `scripts/_proof.mjs <spec> material <tag>` renders a still per scene → view at full res. Re-run
+`scripts/derive-manifest-matrix.mjs` to refresh MANIFEST_MATRIX.md (manifested types leave the remaining list).
+
+### BATCH 1 ✓ SEALED (Session 7) — 6 family-A structure/text types, all EXISTS-pattern (data_key, established notation)
+REVEAL · LOWER_THIRD · CHAPTER · COUNTDOWN · CREDITS_ROLL · SUBSCRIBE_REMINDER. Interfaces read in src/types.ts
+(RevealData/LowerThirdData/ChapterData/CountdownData/CreditsData+CreditsRow/SubscribeData); each attaches via a
+named SceneData key (reveal/lowerThird/chapter/countdown/credits/subscribe) → data_key entries. check-manifest
+green (every field exists in types.ts). **Manifest maxes ALIGNED to the linter's actual budgets** (the linter is
+the judge): LOWER_THIRD kicker≤18/title≤28/subtitle≤34, CHAPTER title≤28/subtitle≤40, COUNTDOWN from 1-10/label≤30/
+go≤10, SUBSCRIBE text≤40, REVEAL sub≤60 — caught because my first COUNTDOWN example (label 32) tripped the linter's
+≤30; fixed the example + the max. STILLS: built out/tmp/mb1.json (8 scenes HOOK+6+OUTRO, lints PASS) → rendered
+material wide+vert (16 stills, out/proof/mb1/) → VIEWED wide s02–s07 full-res: REVEAL ("Your vault is math, not
+magic."), LOWER_THIRD (STANDARD/AES-256/the vault cipher + lock), CHAPTER (01/Inside the vault), COUNTDOWN (GUESSES
+TO CRACK A PASSWORD + big digit), CREDITS_ROLL ("Built with" + ENCRYPTION/AES-256 scroll), SUBSCRIBE_REMINDER (bell +
+More security breakdowns + SUBSCRIBE + @handle). ALL real content, zero defects. Manifest 17→23. Gate 6/6 green;
+drift-check green (gen-prompt palette auto-grew to 23). §5 LESSON: mirror the linter's budgets in the manifest max
+values — a manifest max looser than the linter's lets the model emit content the linter then rejects (drift); the
+proof-spec lint is what catches it. VIEWING PROTOCOL (truthful): wide stills per-cell opened; vert rendered on disk
+(not each opened) — these 6 are mature family-A components already sealed both-aspects in Program 3, so the Phase-2
+proof is entry-validity, which the wide views + lint confirm.
+
+### BATCH 2 ✓ SEALED (Session 7) — 6 chart types (family 'chart', RESTRICTED), all EXISTS-pattern (data_key)
+LINE_CHART · DONUT · PROGRESS · QUADRANT · FUNNEL · WATERFALL. Interfaces read in src/types.ts (LineChartData+
+ChartSeries / DonutData+DonutSegment / ProgressData+ProgressItem / QuadrantData+QuadrantPoint / FunnelData+FunnelStage
+/ WaterfallChartData+WaterfallChartBar); attach via SceneData keys lineChart/donut/progress/quadrant/funnel/
+waterfallChart. Maxes mirrored to linter budgets (grepped lint-spec.mjs L284-331/625-657): series label≤14/≤8pts/≤3
+series, donut seg≤16/centerValue≤6/centerLabel≤14, progress label≤18/display≤6/≤4 items, quadrant caps≤14/label≤16/
+x,y 0..1/≤6 pts, funnel label≤20/unit≤6/2-6 stages, waterfall label≤18/unit≤6/2-7 bars. check-manifest green. STILLS:
+out/tmp/mb2.json (8 scenes, lints PASS — note: 'chart' family is NOT in the linter's CONSOLIDATED adjacency set, so 6
+charts adjacent is allowed in the final-spec linter; validate-beats would flag it at beat stage, but the proof spec is
+a render vehicle, not a screenplay) → rendered material wide+vert (out/proof/mb2/) → VIEWED wide s02-s07 full-res:
+LINE_CHART (Breaches area line Jan-Apr), DONUT (73% Reused ring + legend), PROGRESS (entropy 92% green / reuse 20% red
+bars), QUADRANT (WEAK-STRONG × SLOW-FAST map, 2 points placed), FUNNEL (1000→420 42%→130 31% tapering), WATERFALL
+(100 → -40 → +35 → 95 bridge w/ connectors). ALL real content, zero defects. Manifest 23→29. Gate 6/6 green; drift-check
+green (palette auto-grew to 29). VIEWING PROTOCOL: wide per-cell opened; vert rendered on disk (charts are family-C,
+already sealed both-aspects in Program 3 — Phase-2 proof is entry-validity).
+
+### BATCH 3 ✓ SEALED (Session 7) — 6 diagram/flow types, all EXISTS-pattern (data_key)
+DIAGRAM · PIPELINE · LAYERED_STACK · GRID_ARRAY · SPEC_COMPARE · NEURAL_NET. Interfaces read in src/types.ts
+(DiagramData+DiagramSpecNode/Edge / PipelineData+PipelineStage / StackData+StackLayer / GridArrayData / SpecCompareData+
+SpecSide+SpecRow / NeuralNetData); attach via SceneData keys diagram/pipeline/stack/grid/compare/net. Maxes mirrored to
+lint (L673-946): diagram node label≤18/sub≤22/edge label≤16/layout∈flow,sequence,block,tree,hub, pipeline stage label≤18/
+sub≤28/badge≤14/ms≤8/reason≤40/tokenLabel≤22/2-6 stages, stack layer≤26/sub≤30/2-7, grid rows,cols 2-16/label≤40/legend≤20,
+compare name≤16/row label≤22/a,b≤14/2-6 rows, net 2-5 layers each 1-6/labels≤16. DIAGRAM manifest steers to flow|sequence|
+block|hub (tree is the D-1 known-limited layout). check-manifest green. STILLS: out/tmp/mb3.json (lints PASS) → material
+wide+vert (out/proof/mb3/) → VIEWED wide s02-s07: DIAGRAM (Master password→Key derivation→Vault unlocked flow), PIPELINE
+("How a login is checked" 3 stages + token chip), LAYERED_STACK ("The security stack" 3 layers + signal + green active),
+GRID_ARRAY (8×8 heatmap + tried/untried legend), SPEC_COMPARE (Reuse vs manager, 3 rows + winner pills), NEURAL_NET
+("Deriving the vault key" 3-5-5-1 + layer labels). ALL real content, zero defects. Manifest 29→35. Gate 6/6 green;
+drift-check green (palette auto-grew to 35). VIEWING PROTOCOL: wide per-cell opened; these are family-H/A components
+already sealed both-aspects in Program 3.
+
+### BATCH 4 ✓ SEALED (Session 7) — 6 remaining chart types (family 'chart'), all EXISTS-pattern (data_key)
+PICTOGRAM · RADAR · CANDLESTICK · BOX_PLOT · TREEMAP · SANKEY. Interfaces read in src/types.ts (PictogramData+
+PictogramRow / RadarData+RadarSeries / CandlestickData+Candle / BoxPlotData+BoxPlotBox / TreeMapData+TreeMapItem /
+SankeyData+SankeyNode+SankeyLink); attach via SceneData keys pictogram/radar/candlestick/boxPlot/treemap/sankey. Maxes
+mirrored to lint (L333-377/574-624): pictogram row label≤20/2-6, radar axes≤14/3-8/series name≤18/1-3/values==axes,
+candlestick 2-30/label≤8/high≥low/prefix≤3, boxPlot 2-8/label≤14/min≤q1≤median≤q3≤max, treemap 2-12/label≤18, sankey
+nodes 2-10/label≤16/col:0-2, links 1-16/source&target must be node ids. check-manifest green. STILLS: out/tmp/mb4.json
+(lints PASS) → material wide+vert (out/proof/mb4/; first render stalled at s03 on a transient headless-browser timeout —
+re-ran clean, the standing env flakiness) → VIEWED wide s02-s07: PICTOGRAM (key-icon runs 65%/35% + legend), RADAR
+(pentagon Weak vs Strong polygons), CANDLESTICK ($ OHLC Mon-Thu), BOX_PLOT (Weak vs Managed boxes, chars axis), TREEMAP
+(Email/Banking/Social/Shopping squarified), SANKEY (All accounts→Weak/Strong→Breached ribbons). ALL real content, zero
+defects. Manifest 35→41. Gate 6/6 green; drift-check green (palette auto-grew to 41). ★ PHASE-2 CHARTS COMPLETE (all 12
+chart types now manifested: LINE_CHART/DONUT/PROGRESS/QUADRANT/FUNNEL/WATERFALL + PICTOGRAM/RADAR/CANDLESTICK/BOX_PLOT/
+TREEMAP/SANKEY + BAR_COMPARE/TIMELINE from earlier). Session-7 total: 4 batches, 24 types (17→41).
+
+### BATCH 5 ✓ SEALED (Session 7) — 6 icon/logo types (icon + branding families), all EXISTS-pattern (data_key)
+ICON_GRID · ICON_CALLOUT · ICON_BURST · LOGO_WALL · LOGO_VERSUS · LOGO_TIMELINE. Interfaces read (IconGridData+
+IconGridItem / IconCalloutData / IconBurstData+IconBurstSpoke / LogoWallData+LogoWallItem / LogoVersusData+LogoVersusSide
+/ LogoTimelineData+LogoTimelineEntry); keys iconGrid/iconCallout/iconBurst/logoWall/logoVersus/logoTimeline. Maxes mirrored
+to lint (L379-451): icon/logo assets MUST match /^(lucide:|si:)/ (the HARD IP rule — brand logos from simple-icons only,
+never redrawn), iconGrid 3-12/label≤18/cols 1-6, iconCallout heading≤48/sub≤90/points≤4 each≤40, iconBurst center+3-10
+spokes/label≤16, logoWall 3-15/label≤16, logoVersus name≤20/tagline≤40/winner left|right, logoTimeline 2-6/label≤16/date≤10.
+Manifest families: ICON_* = 'icon', LOGO_* = 'branding' (both free, not RESTRICTED). check-manifest green. STILLS:
+out/tmp/mb5.json (lints PASS) → material wide (out/proof/mb5/; render needed a re-run — the standing headless-browser
+flakiness) → VIEWED wide s02-s07: ICON_GRID (4 lucide feature tiles), ICON_CALLOUT (lock + heading + 3 points), ICON_BURST
+(vault hub + 4 spokes), LOGO_WALL (**real si: brand logos render** — 1Password/Bitwarden/Proton/Dashlane on white tiles),
+LOGO_VERSUS (Bitwarden WINNER ring vs 1Password, VS badge, taglines), LOGO_TIMELINE (KeePass 2003→LastPass 2008→Bitwarden
+2016 rail). ALL real content, zero defects — the si: simple-icons pipeline renders brand logos correctly. Manifest 41→47.
+Gate 6/6 green; drift-check green. Session-7 total: 5 batches, 30 types (17→47).
+
+### BATCH 6 ✓ SEALED (Session 7) — 6 code-surface types (code + stream families), all EXISTS-pattern (data_key)
+CODE_WINDOW · CODE_EDITOR · TERMINAL_SESSION · LOG_STREAM · CODE_DIFF · ERROR_TRACE. Interfaces read (CodeWindowData+
+CodeLine / CodeEditorData / TerminalSessionData+TerminalCommand / LogStreamData+LogLine / CodeDiffData+DiffRow /
+CallStackData+StackFrame). Keys: code/editor/terminal/logs/diff/callStack — note LOG_STREAM=`logs` (NOT logStream) and
+ERROR_TRACE renders via `callStack` with mode:'trace' (data_key callStack). Maxes mirrored to lint (L657-671/1000-1012/
+1199-1258): code line≤52/≤12 lines, editor lines≤10 **each ≤38 (vertical budget, tabs=2sp)** + tabs≤3/lang≤12/squiggle
+msg≤44, terminal cmd≤48/promptLabel≤20/cwd≤24/1-3 cmds, logs 2-10/tag≤14/text≤44, diff 2-12/kind add|del|ctx/text≤52,
+callStack frames 2-6/fn≤26/file≤22/exception≤48. check-manifest green. DEFECT (caught at proof-lint): CODE_EDITOR line 1
+was 40 chars > the 38-char vertical budget (a stricter per-line cap than the interface implies) → shortened the example +
+added the ≤38 note (the §5 batch-1 lesson in action — the proof-spec lint catches manifest-vs-linter drift). STILLS:
+out/tmp/mb6.json — code-surface is CONSOLIDATED in the linter (code-surface{CODE_WINDOW,CODE_EDITOR,CODE_DIFF},
+stream-surface{TERMINAL_SESSION,LOG_STREAM}), so the proof scenes are INTERLEAVED code/stream/code/stream/code/free to
+avoid same-family adjacency (lints PASS) → material wide (out/proof/mb6/) → VIEWED wide s02-s07: CODE_WINDOW (unlock.ts
+syntax + run output green), TERMINAL_SESSION (pass show github + EXIT 0 chip), CODE_EDITOR (tabs + highlight + squiggle
+tooltip), LOG_STREAM (LIVE·LOGS INFO/WARN/ERROR, error line pinned+glowing), CODE_DIFF (auth.ts +1-1 red/green rows),
+ERROR_TRACE (TypeError stack, deriveKey culprit "RAISED HERE" glow). ALL real content, zero defects. Manifest 47→53.
+Gate 6/6 green; drift-check green. Session-7 total: 6 batches, 36 types (17→53). NOTE for Phase 3: the linter enforces
+code-surface/stream-surface adjacency but RESTRICTED_FAMILIES (beat validator + prompt 3b) does NOT include them — a
+known gap to unify when Phase 3 puts the linter on the shared FAMILY/CONSOLIDATED constants.
+
+### BATCH 7 ✓ SEALED (Session 7b, 2026-07-13) — 6 framed/systems types, all EXISTS-pattern (data_key)
+WINDOW_FRAME · DOM_INSPECT · AUTOMATION_RUN · NETWORK_WATERFALL · DEVICE_FRAME · CLOUD_ARCH. Interfaces read
+(WindowFrameData/AutomationRunData/DomInspectData/NetworkWaterfallData/DeviceFrameData/CloudArchData + SlotContent/
+checkSlot). Keys window/auto/dom/waterfall/device/cloud. Families: framed (WINDOW_FRAME/AUTOMATION_RUN/DOM_INSPECT/
+NETWORK_WATERFALL/DEVICE_FRAME), diagram (CLOUD_ARCH). Maxes mirrored to lint (L1261-1360 + checkSlot L1261-1279):
+ContentSlot kind∈text|form|cardGrid|skeleton|metric|empty|notification|clip, form fields≤4/label≤14, cards≤6/title≤16/
+sub≤22, window title≤30/devtools logs≤5, auto steps≤5/target≤22/value≤20, dom nodes 2-8/tag≤12/attr≤20/depth 0-5, waterfall
+2-6/name≤22/phase enum, device notif app≤14/text≤40, cloud nodes≤8/label≤22/sub≤30/boundaries≤3-deep/edge label≤16.
+check-manifest + proof-lint + full 6-gate GREEN. STILLS: out/tmp/mb7.json (framed types INTERLEAVED with DOM/WATERFALL/
+CLOUD to avoid framed-surface adjacency) → material wide (out/proof/mb7/) → VIEWED wide s02-s07: WINDOW_FRAME (browser
+vault.app/settings + change-password form + Update), DOM_INSPECT (DOM tree div.vault▸ul▸li.entry.active▸span + highlighted
+element + selector chip), AUTOMATION_RUN (login form + cursor + PLAYWRIGHT step rail type/click/assert ✓), NETWORK_WATERFALL
+(520ms total, vault.json/keys.enc phase-segmented bars + ✓200 + legend), DEVICE_FRAME (iOS phone 9:41 + cardGrid Vault/
+Banking/Work + notification), CLOUD_ARCH (US-EAST-1▸VPC-PROD nested boundaries + Vault API→Encrypted DB edge). ALL real
+content, zero defects. Manifest 53→59. Gate 6/6 green; drift-check green (palette auto-grew to 59). Session-7 total: 7
+batches, 42 types (17→59).
+NOTE — RENDER-STILL ENVIRONMENT (the Session-7→7b saga, §5 lesson): batch 7's stills were BLOCKED for two turns by a
+`[NetworkError: A network error occurred.]` — Remotion `_proof.mjs` fetches Google-Fonts over the network per render and
+DIES on s02+ when the connection is degraded (s01/HOOK always rendered, proving spec+pipeline fine). Repeated retries
+LEAKED ~27 stuck node/Chromium processes that compounded the hang. RESOLUTION when network returned: `Get-Process node |
+Stop-Process -Force` to clear leaks, then a single `_proof.mjs` run completed all 16 stills. LESSONS: (a) a stalled render
+is almost always the network font-fetch, not the spec — s01 rendering is the tell; (b) ALWAYS kill stray node before
+retrying a stalled render; (c) `_proof.mjs` needs network for fonts — offline/degraded = no stills (a Program-4 candidate:
+pre-bundle/cache the design fonts so renders are offline-safe).
+
+### BATCH 8 ✓ SEALED (Session 7b) — 6 systems-engine types, all EXISTS-pattern (data_key)
+K8S_CLUSTER · KERNEL_BOUNDARY · COST_METER · SLO_GAUGE · ERD · IAC_PLAN. Interfaces read (K8sClusterData+K8sNode+K8sPod /
+KernelBoundaryData / CostMeterData / SloGaugeData / ErdData+ErdTable+ErdColumn+ErdRelation / IacPlanData+IacRow). Keys
+k8s/kernel/cost/slo/erd/iac. Families: zone (K8S/KERNEL), gauge (COST/SLO), diagram (ERD=node-graph), data (IAC=row-list).
+Maxes mirrored to lint (L1365-1443): k8s 2-4 nodes/≤6 pods/mode enum/controlPlane≤22, kernel userLabel/kernelLabel≤20/
+syscall/result≤18/steps≤4/userChips≤3, cost value+budget req/unit≤4/period≤18, slo availability 0-100/budgetSpent 0-1/
+period≤20, erd ≤4 tables/name≤18/≤6 cols/key pk|fk/relation card 1|N, iac 2-7 rows/action enum/resource≤44/type≤22.
+check-manifest + proof-lint + full 6-gate GREEN. STILLS: out/tmp/mb8.json (families INTERLEAVED zone/gauge/zone/gauge/
+node-graph/row-list to avoid CONSOLIDATED adjacency) → material wide (out/proof/mb8/) → VIEWED wide s02-s07: K8S_CLUSTER
+(control-plane + node-1/node-2 rollout pods), COST_METER (820$/1000 gauge UNDER BUDGET), KERNEL_BOUNDARY (user/kernel bands
++ read() down / bytes up + syscall boundary + kernel step chips), SLO_GAUGE (99.95% + target 99.9% + 40%-spent error
+budget bar), ERD (users▸owns▸vaults, PK/FK, crow's-foot), IAC_PLAN (terraform +kms/~rds/-s3, "1 to add 1 to change 1 to
+destroy"). ALL real content, zero defects. Manifest 59→65. Gate 6/6 green; drift-check green. Session-7 total: 8 batches,
+48 types (17→65).
+
+### BATCH 9 ✓ SEALED (Session 7b) — 6 AI-agent types, all EXISTS-pattern (data_key)
+AGENT_HARNESS · KNOWLEDGE_GRAPH · RETRIEVAL_RANK · MODEL_STAGES · CONFIDENCE_GATE · SANDBOX_BOX. Interfaces read
+(AgentHarnessData+HarnessRing / KnowledgeGraphData+KgNode+KgEdge / RetrievalRankData+RetrievalChunk / ModelStagesData+
+ModelStage / ConfidenceGateData / SandboxBoxData). Keys harness/kg(NOT knowledgeGraph)/retrieval/modelStages/confidence/
+sandbox. Families: diagram (AGENT_HARNESS, KNOWLEDGE_GRAPH=node-graph), data (RETRIEVAL_RANK, MODEL_STAGES), gauge
+(CONFIDENCE_GATE), zone (SANDBOX_BOX). Maxes mirrored to lint (L1483-1545): harness 2-3 rings/≤2 chips-per-ring/agent≤16/
+guardrail label≤18/reason≤24, kg ≤10 nodes/label≤18/kind enum/≤12 edges/edge label≤16, retrieval 2-6 chunks/label≤40/
+scoreA+scoreFinal, modelStages prompt≤60/2-4 stages/label≤16/method≤12/reply≤40, confidence value+threshold/mode pass|block/
+style gauge|linear/reason≤30, sandbox allowed+blocked total 2-6/each≤18/label≤20. check-manifest + proof-lint + full 6-gate
+GREEN. STILLS: out/tmp/mb9.json (families INTERLEAVED free/gauge/node-graph/zone/free/free) → material wide (out/proof/mb9/)
+→ VIEWED wide s02-s07: AGENT_HARNESS (Agent + Reason/Act rings + "delete files" guardrail BLOCKED BY POLICY stamp),
+CONFIDENCE_GATE (92% gauge PROCEED), KNOWLEDGE_GRAPH (User→owns→Password→stored in→Vault triples), SANDBOX_BOX (SANDBOX
+zone: read files/fetch url inside green, delete disk/network scan ✗ BLOCKED bouncing), RETRIEVAL_RANK (AES-256 0.90 reranked
+top / entropy 0.50), MODEL_STAGES (prompt "Is 1234 a good password?" Base:pretrain vs Aligned:RLHF replies). ALL real
+content, zero defects. Manifest 65→71 (past halfway). Gate 6/6 green; drift-check green. Session-7 total: 9 batches, 54
+types (17→71).
+
+### BATCH 10 ✓ SEALED (Session 7b) — 6 topic-general types, all EXISTS-pattern (data_key)
+FORMULA · MOLECULE · DNA_HELIX · LABELED_FIGURE · VECTOR_FIELD · CIRCUIT_FLOW. Interfaces read (FormulaData+FormulaPart /
+MoleculeData+MoleculeAtom+MoleculeBond / DnaHelixData+DnaPair / LabeledFigureData+FigureCallout / VectorFieldData+
+ForceVector / CircuitFlowData+CircuitComponent). Keys formula/molecule/dnaHelix/labeledFigure/vectorField/circuitFlow.
+Families: text (FORMULA), diagram (rest). Maxes mirrored to lint (L452-545): formula 1-16 parts/text≤14/kind enum/label≤60,
+molecule 2-12 atoms/label≤3/x,y 0..1/bonds≤16/order 1|2|3, dnaHelix 3-14 pairs/left,right≤2, labeledFigure subject IP-regex/
+2-8 callouts/label≤22/x,y 0..1, vectorField mode field|freebody/field cols 3-12 rows 3-8 pattern enum/freebody body IP+2-6
+forces/label≤20/magnitude 0..1, circuit 2-8 components/kind enum/label≤8/currentLabel≤30. check-manifest + proof-lint +
+full 6-gate GREEN. STILLS: out/tmp/mb10.json (these are family-O topic-general, not in lint FAMILY → no adjacency) →
+material wide (out/proof/mb10/) → VIEWED wide s02-s07: FORMULA (H = L·log₂R entropy, syntax-colored + highlight), MOLECULE
+(Water H2O, red O + 2 H angular), DNA_HELIX (double sine backbones + colored base rungs), LABELED_FIGURE (key icon + 3
+leader callouts 256-bit/Random bytes/Never reused), VECTOR_FIELD (freebody Vault + Attacker←red / Encryption→green forces),
+CIRCUIT_FLOW (9V→switch→220Ω→green LED loop + current pulse). ALL real content, zero defects. Manifest 71→77. Gate 6/6
+green; drift-check green. Session-7 total: 10 batches, 60 types (17→77).
+
+### BATCH 11 ✓ SEALED (Session 7b) — 6 ground-zero types, all EXISTS-pattern (data_key)
+BITS · MEMORY · PACKET · NUMBER_BASE · POINTER_DIAGRAM · ENCRYPTION. Interfaces read (BitsData / MemoryData+MemoryCell /
+PacketData+PacketHop / NumberBaseData / PointerDiagramData+PointerNode / EncryptionData). Keys bits/memory/packet/
+numberBase/pointers/encryption. Families: data (BITS/NUMBER_BASE), diagram (rest). Maxes mirrored to lint (L837-865/
+1173-1197): bits value req/bits 4-16/label≤32, memory 2-12 cells/value≤8/addr≤8/label≤40/pointerLabel≤10, packet 2-5 hops/
+label≤18/packetLabel≤24, numberBase value 0-65535/label≤24, pointers 2-6 nodes/value≤8/label≤10/next-index/headLabel≤12,
+encryption plaintext≤24/ciphertext≤40/keyLabel≤20/mode encrypt|decrypt. check-manifest green. DEFECT (caught at proof-lint):
+NUMBER_BASE example label 'The same number, three ways' (27) > 24 → shortened to 'One number, three bases' (the §5 lesson
+again). STILLS: out/tmp/mb11.json (family-G, not in lint FAMILY → no adjacency) → material wide (out/proof/mb11/) → VIEWED
+wide s02-s07: BITS (11010010 = 210 byte + place values), MEMORY (stack cells 0x41/0x42/0x00 + SP pointer), PACKET (device→
+router→server + GET /vault chip), NUMBER_BASE (DEC 2026 / HEX 0x7EA / BIN 011111101010), POINTER_DIAGRAM (linked list
+0x41→0x42→0x00→∅), ENCRYPTION (plaintext "password123" → lock AES-256 → ciphertext). ALL real content, zero defects.
+Manifest 77→83. Gate 6/6 green; drift-check green. Session-7 total: 11 batches, 66 types (17→83).
+
+### BATCH 12 ✓ SEALED (Session 7c) — 6 fundamentals, all EXISTS-pattern (data_key)
+CALL_STACK · QUEUE · BOOLEAN_LOGIC_GATES · HASH_FUNCTION · SORTING_VISUAL · CLOCK_SIGNAL. Interfaces read (CallStackData+
+StackFrame / QueueData+QueueItem / LogicGatesData+LogicGate / HashFunctionData / SortingData / ClockSignalData). Keys
+callStack/queue/logic/hash/sort/clock. Families: code (CALL_STACK), diagram (QUEUE/logic/hash/clock), data (SORTING_VISUAL);
+none in lint FAMILY → no adjacency constraint, free order. Maxes mirrored to lint (L1001-1156) + generic headline=48
+(constants BUDGET.headline): callStack frames 2-6/fn≤26/sub≤30, queue 2-7 items/label≤8/front·back≤16, logic 1-4 gates/
+type∈{AND,OR,NOT,XOR,NAND,NOR}/a·b∈0|1/label≤12, hash input≤24/algo≤12/digest≤72, sort 3-12 values/label≤20, clock cycles
+3-8/label≤20. check-manifest green (89 types, 343 fields). ZERO drift this batch (all budgets mirrored on first pass). STILLS:
+out/tmp/mb12.json → material wide (out/proof/mb12/) → VIEWED wide s02-s07: CALL_STACK (factorial recursion stack, top pointer,
+main() BASE), QUEUE (job 1/2/3, front·out / back·in), BOOLEAN_LOGIC_GATES (AND 1,0→0 "both on?" · OR 1,0→1 · XOR 1,1→0, real
+gate glyphs), HASH_FUNCTION ("hunter2" → SHA-256 # → f52fbd… digest), SORTING_VISUAL (bars sorted 1·2·3·5·7·8·9 + ✓ ascending),
+CLOCK_SIGNAL (5-cycle square wave, 1 Hz, scan line + tick counter 5). ALL real content, zero defects. Manifest 83→89. Gate 6/6
+green; drift-check green. Session-7 total: 12 batches, 72 types (17→89).
+
+### BATCH 13 ✓ SEALED (Session 7d) — 6 systems types, all EXISTS-pattern (data_key)
+DATACENTER · TRANSFORMER_BLOCK · CACHE_PYRAMID · GPU_CLUSTER · ZOOM_SCALE · DIE_SHOT. Interfaces read (DataCenterData+DcRack/
+DcUnit / TransformerData+TransformerSubBlock / CachePyramidData+PyramidTier / GpuClusterData / ZoomScaleData+ZoomLevel /
+DieData+DieBlock). Keys datacenter/transformer/pyramid/gpuCluster/zoomScale/die. Family: all 'systems' (descriptive); none in
+lint FAMILY → free order. Maxes mirrored to lint (L920-1171) + generic headline=48: datacenter hall 2-6 racks/label≤16 or rack
+2-7 units/label·sub≤20/spine·rackLabel≤26, transformer 3-7 blocks/label·sub≤22/kind∈{io,attn,norm,ffn}/repeatLabel≤10, pyramid
+2-7 tiers/label≤20/speed·size≤12/axis≤24, gpuCluster nodes·gpusPerNode 2-8/interconnect≤24/totalLabel≤28, zoomScale 3-6
+levels/label≤16/sub≤18/scale≤10, die cols·rows req/2-12 blocks/label≤18/sub≤14/x·y·w·h fit grid/chipLabel≤26. check-manifest
+green (95 types, 379 fields). ZERO drift this batch. STILLS: out/tmp/mb13.json → material wide (out/proof/mb13/) → VIEWED wide
+s02-s07: DATACENTER (hall, Hot Aisle spine, 3 racks, A2 green), TRANSFORMER_BLOCK (input→attn→ffn→output + ×12 repeat bracket),
+CACHE_PYRAMID (Registers/L1/RAM/Disk w/ speed+size, faster·smaller↑/bigger·slower↓), GPU_CLUSTER (4 nodes × 8 GPUs, NVLink·
+InfiniBand, 32 GPUs total), ZOOM_SCALE (Transistor 5nm→CPU 10mm→rack 2m→Datacenter 100m), DIE_SHOT (Apple M-series: CPU 10c /
+GPU 16c / Neural Engine bento grid). ALL real content, zero defects. Manifest 89→95. Gate 6/6 green; drift-check green.
+Session-7 total: 13 batches, 78 types (17→95).
+
+### BATCH 14 ✓ SEALED (Session 7e) — 6 tables/data-cs types, all EXISTS-pattern (data_key)
+TOKENIZER · FILE_TREE · DATABASE_TABLE · GIT_BRANCH · STATE_MACHINE · EMBEDDING_SPACE. Interfaces read (TokenizerData+Token /
+FileTreeData+FileNode / DatabaseData / GitBranchData+GitCommit / StateMachineData+FsmState+FsmTransition / EmbeddingSpaceData+
+EmbeddingPoint). Keys tokenizer/fileTree/database/git/stateMachine/embedding. DATABASE_TABLE is lint row-list family (only one
+in batch → no adjacency issue); rest free. Maxes mirrored to lint (L1015-1094) + headline=48: tokenizer 2-10 tokens/text≤12/
+sentence≤90, fileTree 2-12 nodes/name≤28/depth 0-4/kind∈{folder,file}, database 2-4 cols≤14/2-6 rows/cell≤16/tableName≤20/
+query≤40, git 2-3 lanes≤14/2-8 commits/label≤14/links{from,to}, stateMachine 2-5(6 lifecycle) states/label≤12/1-7 trans/
+label≤14/variant ring|lifecycle, embedding 2-16 points/label≤16/x·y 0-1/≤4 clusters≤18/axis≤20. check-manifest green (101
+types, 412 fields). ZERO drift this batch. STILLS: out/tmp/mb14.json → material wide (out/proof/mb14/) → VIEWED wide s02-s07:
+TOKENIZER ("The cat sat." → 4 tokens w/ ids 464/3797/3332/13), FILE_TREE (src/ → App.tsx green / index.ts / package.json),
+DATABASE_TABLE (users, WHERE active=true, rows 1·3 highlighted), GIT_BRANCH (main/feature, init→setup→add form→merge curves),
+STATE_MACHINE (traffic-light ring Green→Yellow→Red, all "timer", Green active), EMBEDDING_SPACE (animals cat·dog / vehicles
+car·truck clusters + axes + legend). ALL real content, zero defects. Manifest 95→101. Gate 6/6 green; drift-check green.
+Session-7 total: 14 batches, 84 types (17→101).
+
+### BATCH 15 ✓ SEALED (Session 7f) — 6 data-cs types, all EXISTS-pattern (DRILL_IN nests 2 diagrams)
+API_REQUEST_RESPONSE · PROCESS_TABLE · TEST_MATRIX · TEST_RUNNER · CONTEXT_METER · DRILL_IN. Interfaces read (ApiData /
+ProcessTableData+ProcRow / TestMatrixData+TestCell / TestRunnerData+TestNode / ContextMeterData+ContextSegment / DrillInData
+nesting 2× DiagramData). Keys api/proc/testMatrix/testRunner/context/drillIn. ADJACENCY: PROCESS_TABLE+TEST_RUNNER both lint
+row-list, DRILL_IN node-graph, CONTEXT_METER gauge → proof order API·PROCESS_TABLE·TEST_MATRIX·TEST_RUNNER·CONTEXT_METER·
+DRILL_IN separates the two row-lists with TEST_MATRIX. Maxes mirrored to lint (L1421-1549) + headline=48: api method≤7/path≤28/
+status≤4/statusText≤16/req·resp ≤3 lines≤26, proc 2-7 rows/pid≤8/name≤28/cpu·mem 0-100, testMatrix 2-5×2-5/row≤14/col≤10/status
+∈{pass,fail,skip,flaky}, testRunner 2-8 nodes/name≤40/depth 0-3/expected·actual≤44, context 2-5 segs/label≤16/kind∈{system,
+tools,history,free}/verdict≤44, drillIn overview·detail ≤8-node DIAGRAMs + focusId. check-manifest green (107 types, 451
+fields). ZERO drift. STILLS: out/tmp/mb15.json → material wide (out/proof/mb15/) → VIEWED wide s02-s07: API (Client→Server GET
+/api/users/42 → 200 OK JSON), PROCESS_TABLE (chrome 92% runaway red, node/systemd, MEM bars), TEST_MATRIX (auth/api/ui ×
+node18/20/22, api·node20 flaky ~, ui·node22 fail X, legend), TEST_RUNNER (auth suite, pass 12ms + fail 8ms w/ expected 401 /
+actual 200 diff), CONTEXT_METER (system·tools·history·free segmented bar, locked colours, 7000/8000 tokens), DRILL_IN (detail
+diagram Master key→AES-256→Encrypted blob at 55% push). ALL real content, zero defects. Manifest 101→107. Gate 6/6 green;
+drift-check green. Session-7 total: 15 batches, 90 types (17→107).
+
+### BATCH 16 ✓ SEALED (Session 7g) — 6 topic-general + core types (first media types)
+TICKER_TAPE · MAP_RADAR · EVAL_DASHBOARD · CHANNEL_CARD · PHOTO · SOUND_WAVE. Interfaces read (TickerTapeData+TickerEntry /
+MapRadarData+RadarBlip / EvalDashboardData+EvalMetric / ChannelCard root fields / PhotoData / WaveData). Keys ticker/mapRadar/
+evalDash + CHANNEL_CARD is data_root (handle/tagline; name from brand.channel) + photo/wave. EVAL_DASHBOARD is lint gauge-
+surface (only one → no adjacency). Maxes mirrored to lint (L279-281 handle≤22/tagline≤pill=36, L545-571 ticker/mapRadar,
+L701-709 photo/wave, L1551-1561 evalDash): ticker 3-16 entries/symbol 1-6/price≤12/change:num/featured must match/rows 1-3,
+mapRadar 1-10 blips/angle:num/range 0-1/label≤16/rings 2-5/sweepLabel≤24, evalDash 2-4 metrics/label≤18/ONE degrading, photo
+asset img:*/caption≤60/kicker≤24/pan∈6, wave label≤24. PHOTO asset=img:server.jpg (public/assets; coastal stock image —
+component wiring proven regardless of content). check-manifest green (113 types, 474 fields). ZERO drift. STILLS: out/tmp/
+mb16.json → material wide (out/proof/mb16/) → VIEWED wide s02-s07: TICKER_TAPE (BTC $67,420 hero +2.4% + ETH/XRP/SOL band),
+MAP_RADAR (4-ring scope, sweep, Threat/Ally/Unknown blips, scanning…), EVAL_DASHBOARD (Accuracy 94% / Latency 210ms degrading
+pulse / Cost 0.8¢), CHANNEL_CARD (avatar + channel + @techexplained + bell + tagline pill), PHOTO (full-bleed Ken Burns +
+kicker + caption), SOUND_WAVE (blue/purple waveform bars + LISTENING…). ALL real content, zero defects. Manifest 107→113.
+Gate 6/6 green; drift-check green. Session-7 total: 16 batches, 96 types (17→113).
+
+### BATCH 17 ✓ SEALED (Session 7h) — 6 core media types, all EXISTS-pattern (data_key)
+LOGO_REVEAL · CAROUSEL · GALLERY · COMPARISON_SLIDER · PHOTO_STACK · IMAGE_SCENE. Interfaces read (LogoData / CarouselData+
+CarouselItem / GalleryData+GalleryTile / ComparisonData+ComparisonSide / PhotoStackData+PhotoCard / ImageSceneData). Keys logo/
+carousel/gallery/comparison/photoStack/image. NOTE: GalleryData + PhotoStackData have NO root atWord (omitted from entries —
+would fail check-manifest). None in lint FAMILY → free order. Maxes mirrored to lint (L711-802): logo name≤24/tagline≤40,
+carousel ≤8 items/label≤18/sub≤22, gallery 2-6 tiles (2-4 clips)/label≤18/variant grid|clips, comparison before·after/label≤18/
+caption≤30, photoStack 2-5 cards/label≤30, image asset req/variant polaroid|pip/caption≤40/pip.label≤18. Assets: lucide icons
+(logo/carousel) + img:server/network/datacenter/server-racks.jpg (gallery/comparison/photoStack/image). check-manifest green
+(119 types, 493 fields). ZERO drift. STILLS: out/tmp/mb17.json → material wide (out/proof/mb17/) → VIEWED wide s02-s07:
+LOGO_REVEAL (hex mark + box icon + ACME CLOUD + tagline), CAROUSEL (React/Vue/Svelte/Solid rotating cards w/ subs), GALLERY
+(4 image tiles + labels, grid), COMPARISON_SLIDER (before/after wipe, After·Cloud region), PHOTO_STACK (3 fanned cards, "The
+hall"), IMAGE_SCENE (tilted polaroid + handwritten "The hall at night"). ALL real content, zero defects. Manifest 113→119.
+Gate 6/6 green; drift-check green. Session-7 total: 17 batches, 102 types (17→119).
+
+### BATCH 18 ✓ SEALED (Session 7i) — 6 media types, video-backed (reused showcaseSpec src refs)
+ACTIVITY_CARD · LOCATION_MAP · VIDEO_HERO · VIDEO_SPOTLIGHT · MEDIA_CALLOUT · MEDIA_COMPARE. Interfaces read (ActivityCardData+
+ActivityBar / LocationMapData / VideoHeroData / VideoSpotlightData / MediaCalloutData+MediaCallout / MediaCompareData+
+MediaCompareSide). Keys activity/locationMap/videoHero/videoSpotlight/mediaCallout/mediaCompare. DEFECT (caught at check-
+manifest): declared MEDIA_CALLOUT.atWord but MediaCalloutData has NO root atWord (per-callout only) → removed. Video assets
+assets/video/demo_ui|webcam|grid.mp4 (public/assets/video, reused from showcaseSpec.ts/specs/matrix). Maxes mirrored to lint
+(L779-835 activity/location, L1563-1600 video/media): activity value≤8/3-9 bars/day≤4/title≤22/trend≤32/range≤12, location
+≤28/coords≤32/status≤10, videoHero headline≤60/kicker≤20/sub≤90/treatment clean|scrim|focus, videoSpotlight name≤40/role≤60/
+kicker≤20, mediaCallout 1-5 callouts/label≤32/x·y 0-1/side, mediaCompare a·b/label≤22/caption≤60/mode split|wipe. check-
+manifest green (125 types, 528 fields). STILLS: out/tmp/mb18.json → material wide (out/proof/mb18/) → VIEWED wide s02-s07:
+ACTIVITY_CARD (Focus time 21h +12% Mon-Fri bars), LOCATION_MAP (SF street grid + green pin + LIVE), VIDEO_HERO (full-bleed clip
++ LIVE DEMO band), VIDEO_SPOTLIGHT (GlowFrame + Alex Rivera + italic role), MEDIA_CALLOUT (clip + "the control"/"the readout"
+leader pins), MEDIA_COMPARE (split OLD UI vs NEW UI + VS badge). ALL real content, zero defects. Manifest 119→125. Gate 6/6
+green; drift-check green. Session-7 total: 18 batches, 108 types (17→125).
+
+### BATCH 19 ✓ SEALED (Session 7j) — 6 overlay types, video-backed (reused _overlay.json shapes)
+MEDIA_STAT_OVERLAY · SCREENSHOT_CASCADE · FLOATING_QUOTE_PILL · OVERLAY_SPLIT_DEFINITIONS · CYCLE_LOOP · STEP_STACK_OVERLAY.
+Interfaces read (MediaStatOverlayData+MediaStat / ScreenshotCascadeData+ScreenshotShot / FloatingQuotePillData / Overlay
+SplitDefinitionsData+SplitDef / CycleLoopData+CycleNode / StepStackOverlayData). Keys mediaStat/screenshotCascade/floatingQuote/
+splitDefs/cycleLoop/stepStack. Root atWord only on FLOATING_QUOTE_PILL (others per-item only → omitted). Maxes mirrored to lint
+(L1604-1682): mediaStat 1-3 stats/value/label≤20/suffix≤6/prefix≤3, screenshotCascade 2-4 shots/label≤40/highlight{x,y,w,h},
+floatingQuote quote≤140/attribution≤40, splitDefs left·right{header≤24, body≤90}, cycleLoop 3-5 nodes/label≤20/sub≤18/
+headline≤44, stepStack 3-5 steps/label≤28/sub≤20/headline≤40/chip filled|ring/dock left|right. Video src assets/video/demo_*.
+mp4. check-manifest green (131 types, 554 fields). ZERO drift. STILLS: out/tmp/mb19.json → material wide (out/proof/mb19/) →
+VIEWED wide s02-s07: MEDIA_STAT_OVERLAY (clip + 99% uptime / <12ms / 3M req band), SCREENSHOT_CASCADE (3 window screens
+cascading), FLOATING_QUOTE_PILL (glass pill quote + attribution over clip), OVERLAY_SPLIT_DEFINITIONS (Precision | Recall boxless
+columns), CYCLE_LOOP (Collect→Train→Evaluate→Deploy→Measure ring w/ dashed arrows), STEP_STACK_OVERLAY (5 ring-chip steps docked
+right over clip). ALL real content, zero defects. Manifest 125→131. Gate 6/6 green; drift-check green. Session-7 total: 19
+batches, 114 types (17→131).
+
+### BATCH 20 ✓ SEALED (Session 7k) — LAST 5 types → PHASE 2 COMPLETE (136/136)
+TITLE_BANNER_FOCUS · TALKING_POINTS · SLIDE_BULLETS_PIP · CAPTION_KINETIC_OVERLAY · PHOTO_TIMELINE. Interfaces read
+(TitleBannerFocusData / TalkingPointsData+TalkingPoint / SlideBulletsPipData+SlideBullet / CaptionKineticOverlayData /
+PhotoTimelineData+PhotoTimelineEntry). Keys titleBanner/talkingPoints/slideBullets/captionKinetic/photoTimeline. Root atWord on
+titleBanner/talkingPoints/captionKinetic; NOT on slideBullets/photoTimeline (omitted). Maxes mirrored to lint (L1682-1740):
+titleBanner title≤48/subtitle≤70/kicker≤20, talkingPoints 2-5 points/text≤56/headline≤44/lead≤70/media left|right, slideBullets
+heading≤44/2-6 bullets/text≤64/level 0-1, captionKinetic caption≤90 (brackets stripped)/position bottom|center, photoTimeline
+2-5 entries/label≤24/date≤16. Video/img src assets/video/demo_*.mp4 + assets/*.jpg. check-manifest green (136 types, 578
+fields). ZERO drift. STILLS: out/tmp/mb20.json → material wide (out/proof/mb20/) → VIEWED wide s02-s06: TITLE_BANNER_FOCUS
+(glass CHAPTER ONE banner over blur), TALKING_POINTS (framed clip left + lead + 3 bullets), SLIDE_BULLETS_PIP (heading + glow
+divider + nested word-reveal bullets), CAPTION_KINETIC_OVERLAY (big caption w/ coral [accent] over blurred clip), PHOTO_TIMELINE
+(3 dated image thumbs on a rail). ALL real content, zero defects. Manifest 131→136. Gate 6/6 green; drift-check green.
+
+## ★★★ PHASE 2 COMPLETE — MANIFEST 17 → 136 (136/136, 0 remaining) ★★★
+20 batches sealed this session (Session 7). Every type: INTERFACE_READ (types.ts, R1) · ENTRY (maxes mirrored to linter) ·
+GATE (check-manifest green) · STILL (a viewed _sceneproof wide render showing real content — Q3 "no still, no seal"). Manifest
+grew 17→136 (+119). check-manifest verifies 578 fields against types.ts. `npm run gate` 6/6 green + drift-check green after
+every batch. Two drifts caught+fixed at proof-time (NUMBER_BASE label b11, MEDIA_CALLOUT root atWord b18). MANIFEST_MATRIX.md =
+0 remaining. NEXT = Phase 3 (unify linter onto shared constants.mjs FAMILY/CONSOLIDATED, R6 fleet before/after), then 4-7.
+Session-7 total: 20 batches, 119 types (17→136).
+
+## ★ PHASE 3 COMPLETE — LINTER UNIFIED ONTO SHARED CONSTANTS (Session 7l)
+Goal: FAMILY + CONSOLIDATED (anti-monotony shape-families) defined ONCE, not duplicated. Before: scripts/lint-spec.mjs kept its
+own private `const FAMILY` + `const CONSOLIDATED` (L58-61) while scripts/lib/constants.mjs exported an identical pair (added
+earlier as "mirror of the linter") — two copies that could silently drift. Change: lint-spec.mjs now imports {FAMILY,
+CONSOLIDATED} from ./lib/constants.mjs and the local duplicates are deleted (comment notes the single source). Verified the two
+were byte-identical in content+order before deleting (24 type→family entries; 8-member CONSOLIDATED set). R6 EVIDENCE: captured
+a full fleet lint (all topics/*/*.json + specs/*.json + specs/matrix/*.json → out/tmp/fleet_before.txt, 1173 lines) BEFORE, then
+re-linted AFTER → Compare-Object = "R6 IDENTICAL: fleet lint unchanged" (zero behaviour change; pure refactor). Gate 6/6 green +
+drift-check green. Grep confirms constants.mjs is now the ONLY definition site (lint-spec.familyOf + validate-beats.familyOf are
+functions, not copies). FINDING (logged, NOT changed — would alter behaviour, needs a decision): the beat validator +
+stage-1 prompt group by the COARSE manifest `family` (structure/diagram/data/media/code/gauge/systems) / RESTRICTED_FAMILIES,
+which does NOT mirror the linter's FINE CONSOLIDATED adjacency (code-surface/stream-surface/etc.) — so the model is not warned
+pre-render about two adjacent code-surfaces the linter will reject. Candidate Phase-3.1 / Program-4 improvement.
+
+## ★ PHASE 4 — per-video JSON Schema + template mode (Session 7l)
+Built scripts/gen-schema.mjs: derives specs/video.schema.json (draft-07) from the MANIFEST — one source now feeds the LLM
+prompt, the normalizer, the field validator AND a JSON Schema. Modes: default (write schema), `--check` (CI staleness guard),
+`--template T1,T2,…` (print a starter spec skeleton from manifest examples). Per-type `data` shape via allOf if/then over all
+136 types (if type==X then data matches X's fields). Validates SHAPE (field types), ENUMS (theme/themeLight/background/
+transition/anim/format) and string BUDGETS (maxLength mirrored from the manifest). Wired: npm scripts schema/schema-check/
+template; `.vscode/settings.json` binds the schema to topics/*/{long,shorts}.json + specs/gallery.json (editor autocomplete +
+inline validation); README "Spec schema (the editor floor)" section; **gate extended 6→7** (gen-schema --check joins so the
+committed schema can never drift). DESIGN: schema is a FLOOR — it does NOT enforce required-ness/counts/adjacency (the linter's
+job), so schema-green ≠ lint-green but a schema-fail is always a real error. Proven against the whole fleet with AJV: all
+lint-CLEAN specs pass the schema (ZERO false positives — no schemaFAIL on a lintPASS spec); the 3 schemaFAIL are all real
+defects in already-lint-broken specs (instagram long+shorts transition 'pop'/'slideUp' not in TRANSITIONS; xrp/long STAT_CALLOUT
+label >44); 1 schemaPASS/lintFAIL (ai-search/long — a deeper lint-only rule, the acceptable floor direction). TWO FINDINGS the
+schema surfaced + handled: (1) manifest `req` flags are AUTHORING hints, not hard interface requirements (REVEAL renders from
+kicker+sub with no `statement`; shipped specs omit "required" fields via aliases/fallbacks) → schema drops field-level required,
+stays a pure shape/enum/budget floor; (2) meta.format enum is 'long'|'short' (singular), not 'shorts'. Gate 7/7 green.
+
+## ★ PHASE 5 — asset-request protocol (Mechanism 1 SEALED; resolvers 2-5 DEFERRED) (Session 7m)
+Decision (autonomy R): Phase 5 has 5 mechanisms; #2-5 are LIVE-NETWORK/catalog resolvers (simple-icons walk, Wikimedia Commons
+API, press-kit registry, CC0 stock) with a HUMAN-in-the-loop pick — they cannot be sealed by an offline autonomous run (need
+network + a human click), so they're DESIGNED in ASSET_MATRIX.md and DEFERRED with an explicit seal condition (a fixture-test
+per resolver hitting its source). Built + SEALED the deterministic FOUNDATION they all plug into — Mechanism 1, the R3/truth
+declaration protocol: a spec DECLARES an asset need instead of inventing a URL. Spec shape: top-level `assetsNeeded:[{key,
+kind:image|video|logo, query, sources?, mustShow?}]` + media fields reference `needed:<key>`. LINTER (scripts/lint-spec.mjs):
+every needed:<key> must have a matching assetsNeeded entry; each entry needs string key (unique) + valid kind + string query
+(never a URL); sources must be array; dangling key warns. Zero impact on existing specs (proven by zero-diff fleet re-lint — no
+spec uses the fields). SCHEMA: assetsNeeded added to video.schema.json (shape-checked + autocompleted). PROMPT: gen-prompt rule 7
+now teaches DECLARE-don't-fabricate (text only → drift-check still green). RENDER: unresolved needed:<key> → AssetIcon monogram
+fallback, never blank (dedicated placeholder glyph = noted component follow-up, needs design-contract+proofs+approval). FIXTURE-
+TEST scripts/test-asset-protocol.mjs (7/7): valid pair passes · undeclared rejected · bad kind rejected · missing query rejected
+· dangling warns · missing img: still rejected (regression guard) · non-array rejected. **GATE EXTENDED 7→8** (test-asset-
+protocol joins). Gate 8/8 green. ASSET_MATRIX.md updated (M1 sealed, M2-5 designed/deferred + seal conditions).
+
+## ★ PHASE 6 — new-topic experiment in the enlarged 136-palette (Session 7n)
+Proved the wider library is AUTHORABLE end-to-end, not just manifested. `node scripts/new-topic.mjs palette-136-tour "How Your
+Computer Runs a Program"` (index → 8 topics). Authored a lint-clean 13-scene DOCUMENTARY long.json touring 11 NEWLY-manifested
+types (theme rotated to academia/paper per LAW 2, away from recent neobrutalism): HOOK · BITS · NUMBER_BASE · CLOCK_SIGNAL ·
+BOOLEAN_LOGIC_GATES · MEMORY · CACHE_PYRAMID · CALL_STACK · POINTER_DIAGRAM · PROCESS_TABLE · SORTING_VISUAL · RECAP · OUTRO_CTA
+(+ a clean 5-scene shorts.json). DEFECT (caught at lint): every scene needs a background zone (zoneA/B/C) → added, rotated.
+Both specs LINT PASSED (13 + 5 scenes) AND pass the Phase-4 JSON schema. Rendered out/proof/palettetour/ via material design
+(26 stills) → VIEWED wide s01 HOOK ("IT'S ALL SWITCHES" + cpu glyph), s02 BITS ("ONE BYTE = 8 BITS" place-value cells), s10
+PROCESS_TABLE ("What is eating the CPU?" chrome 92% runaway red + htop bars) — all real content, zero defects, in the academia
+serif skin. FULL GATE 8/8 GREEN WITH the new topic in the fleet (FLEET GATE = no regressions). Proves: scaffold → author →
+lint → schema → render works across the enlarged palette. (Env note: the persistent PowerShell wedged after the 26-still
+render; async-mode run_in_terminal revived it — lesson logged.)
+
+## ★ PHASE 7 — types.ts discriminated-union regen PROPOSAL (Session 7n) — HUMAN GATE, NOT EXECUTED
+Wrote audit/PHASE7_TYPES_UNION_PROPOSAL.md: the charter's single human-approval gate (R4). PROPOSAL ONLY — no code changed.
+Documents: current SceneData bag-of-~100-optionals (correctness enforced at RUNTIME by linter/validator/check-manifest, not the
+compiler); proposed discriminated union `Scene = {type:'BITS', data:{bits:BitsData}} | …` keyed on `type` (per-type narrowing);
+how to GENERATE it from the now-complete manifest (data_root→flat, data_key→wrapped; payload interfaces unchanged, only the
+Scene surface regenerated) via a proposed scripts/gen-types.mjs + `--check` in the gate (mirrors the Phase-4 schema pipeline);
+risks (≈40 components read scene.data → narrowing edits; runtime gate UNAFFECTED since it's JSON-only; low lock-in); and a
+3-step incremental adoption (A additive SceneOf<T> new file, B opt-in per-component migration, C flip) each gate-guarded and
+revertible. Recommendation: adopt incrementally, gated on sign-off. NOT executed — this doc IS the approval request.
+
+### PHASE 7 — APPROVED + EXECUTED (Step A + conservative apply) (Session 7o)
+User approved Phase 7 with proof gates. EXECUTED: (1) Step A — scripts/gen-types.mjs derives src/sceneTypes.generated.ts
+(additive; 136 per-type scene arms + SceneOf<T> + TypedScene + SceneByType), `--check` added to the gate (mirrors gen-schema
+pipeline). tsc --noEmit exit 0 with the additive file. (2) CONSERVATIVE APPLY — narrowed src/types.ts `Scene.type: string` →
+`type: SceneTypeName` (the 136-literal union) and re-exported the narrowing helpers; kept SceneData so all ~40 components
+compile unchanged. tsc --noEmit exit 0 across the whole project (showcaseSpec/fixtures/components). BOTH PROOF GATES GREEN:
+(a) full fleet re-lint verdicts BYTE-IDENTICAL before-vs-after (toggled the change off/on, Compare-Object empty — 17 specs);
+(b) re-rendered the 13 newly-typed real scenes (palette-136-tour via material) → MD5 vs the pre-Phase-7 baseline = **26/26
+stills IDENTICAL, 0 changed, 0 blank** (also confirms Remotion determinism). The full-136 double-sweep was represented by this
+13-type byte-identical subset + the type-erasure invariant (Remotion's esbuild strips types; the linter never imports types.ts —
+so runtime is provably unaffected) + the Phase-2 sweep (all 136 already rendered+viewed). DEFERRED by design (documented Steps
+B/C, need per-component migration + re-validation): the deeper flip where `Scene.data` itself narrows per arm. Change is trivially
+revertible (delete generated file + restore `type: string`). GATE EXTENDED 8→9 (gen-types --check). Gate 9/9 green.
+
+### ITEM 2 — si: brand-slug validator (Session 7o) ✓ SEALED
+Correction accepted (simple-icons is LOCAL in node_modules — no network/human). Built scripts/lib/si-resolve.mjs: lazy-loads
+the 3,296-icon catalog; resolveSi('si:<slug>') → ok / corrected (fuzzy Levenshtein within a small edit distance, or exact title
+match node.js→nodedotjs) / fallback (lucide:). Linter (lint-spec.mjs) now validates every si:<slug>: typo REJECTED with the
+fuzzy suggestion, unknown brand REJECTED with lucide guidance. All 22 shipped slugs resolve → zero fleet impact. Fixture
+scripts/test-si-resolver.mjs (11/11) in the gate. ASSET_MATRIX mechanism-2 row SEALED. GATE 9→10.
+
+### ITEM 3 — beat-validator fine-grained adjacency (Session 7o) ✓
+validate-beats.mjs now imports FAMILY+CONSOLIDATED from constants.mjs (the SAME source as the linter) and enforces the linter's
+CONSOLIDATED adjacency (two adjacent code-surface/stream-surface/node-graph/etc. beats are rejected pre-render for the same
+reason the linter would reject the assembled spec) — in addition to the coarse RESTRICTED_FAMILIES guard. drift-check.mjs
+EXTENDED: asserts (structurally) that both lint-spec.mjs and validate-beats.mjs import FAMILY+CONSOLIDATED from constants.mjs,
+AND (functionally) that the beat validator rejects two adjacent CODE_WINDOW/CODE_EDITOR beats with "consolidated-family
+adjacency". Gate green.
+
+### ITEM 4 — needed: placeholder glyph in AssetIcon (Session 7o) ✓ + design-contract proof
+AssetIcon.tsx: added a `needed:<key>` branch BEFORE the monogram fallback — renders a deliberate PENDING placeholder (dashed
+frame + muted lucide ImageOff glyph), theme-token styled only (t.colors.panel/panelBorder/muted, corner radius × t.style factor,
+contrast-guarded, ×scale via size), honouring both bare (diagram node) and framed modes. tsc exit 0. SCENEPROOF (both aspects,
+out/proof/neededglyph/): VIEWED wide s01 = HOOK framed "ASSET PENDING" circle w/ dashed image-off glyph + "declared, not yet
+resolved" pill; wide s02 = two diagram nodes "Pending logo"/"Pending photo" each with the bare pending glyph, linked. Real,
+intentional, never blank — zero defects. BONUS BUG FOUND+FIXED by the proof: the Phase-5 collectNeeded() matched ANY string
+starting "needed:" (so prose like meta.topic "needed: a clear plan" false-triggered a missing-asset error) → anchored to
+`^needed:[A-Za-z0-9_-]+$` (an asset ref is exactly needed:<identifier>); added a prose-regression assertion to
+test-asset-protocol (now 8/8). Gate 10/10 + tsc green.
+
+## ★★★ SESSION 7o COMPLETE — all 4 approved items shipped, GATE 10/10 + tsc green ★★★
+Phase 7 (Step A + conservative apply, both proofs green) · si: resolver (sealed) · beat-validator fine adjacency (+ drift-check
+assertion) · needed: placeholder glyph (design-contract proof). Gate grew 8→10 checks (gen-types --check, test-si-resolver).
+DEFERRED by the user's instruction: Phase 7 deeper data-arm flip (Steps B/C); Phase 5 resolvers 3-5 (Wikimedia/press-kit/CC0 —
+networked, "until I ask"). All quality laws + standing rules held.
+
+## ★★★ iAUTEUR FINAL PROGRAM COMPLETE (Phases 1-7) — Session 7 ★★★
+Phase 1 UI two-paste flow ✓ · Phase 2 manifest 17→136 (20 batches, every type proven by a viewed still) ✓ · Phase 3 linter
+unified onto shared constants (R6 zero-diff) ✓ · Phase 4 per-video JSON Schema + template + gate check ✓ · Phase 5 asset-request
+protocol M1 sealed (resolvers 2-5 designed/deferred) ✓ · Phase 6 new-topic experiment in 136-palette (rendered, gate green) ✓ ·
+Phase 7 types-union PROPOSAL (human gate, not executed) ✓. Gate grew 6→8 checks, all green. QUALITY LAWS honoured: Q1 nothing
+removed · Q2 palette grew to all 136 · Q3 every manifest entry has a viewed still · Q4 model contract only grew · Q5 no meaning-
+bearing truncation · Q6 gate green after every batch. One human gate remains open by design (Phase 7 execution).
+
 
 
 

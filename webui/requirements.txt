@@ -1,1 +1,4 @@
-Flask>=3.0
+Flask
+# Voiceover (Edge-TTS). Pinned to the 7.x line; the console's
+# "Install / upgrade Edge-TTS" button upgrades within this range.
+edge-tts

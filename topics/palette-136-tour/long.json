@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "topic": "How Your Computer Runs a Program",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "A running program is just bits moving through logic, memory, and code — layer by layer.",
+    "openLoop": "How does a pile of on/off switches end up running your favourite app?",
+    "analogy": "A computer is a factory floor: bits are parts, gates are machines, memory is the warehouse.",
+    "screenplay": "documentary",
+    "topicAxes": ["mechanism-depth", "everyday-magic"]
+  },
+  "brand": {
+    "theme": "academia",
+    "design": "academia",
+    "themeLight": "paper",
+    "background": "plain",
+    "channel": "YOUR CHANNEL"
+  },
+  "thumbnail": {
+    "title": "How Computers Run Code",
+    "badge": "EXPLAINER",
+    "asset": "lucide:cpu"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "background": "zoneA",
+      "narration": "Every app you open is really just billions of tiny switches flipping on and off.",
+      "durationFrames": 180,
+      "data": {"headline": "IT'S ALL SWITCHES", "subtext": "billions of them, every second", "heroAsset": "lucide:cpu", "headlineAtWord": 1, "heroAtWord": 8}
+    },
+    {
+      "id": "s02",
+      "type": "BITS",
+      "background": "zoneB",
+      "narration": "At the very bottom, everything is bits — and eight bits make one byte.",
+      "durationFrames": 156,
+      "transition": "fade",
+      "data": {"bits": {"value": 210, "bits": 8, "label": "One byte = 8 bits", "showPlaceValues": true, "atWord": 7}}
+    },
+    {
+      "id": "s03",
+      "type": "NUMBER_BASE",
+      "background": "zoneC",
+      "narration": "The same value reads three ways: decimal, hexadecimal, and raw binary.",
+      "durationFrames": 132,
+      "transition": "slide",
+      "data": {"numberBase": {"value": 2026, "label": "One number, three bases", "atWord": 5}}
+    },
+    {
+      "id": "s04",
+      "type": "CLOCK_SIGNAL",
+      "background": "zoneA",
+      "narration": "A clock ticks millions of times a second, driving every single step forward.",
+      "durationFrames": 156,
+      "transition": "push",
+      "data": {"clock": {"cycles": 5, "label": "1 Hz", "headline": "Every tick, one step", "atWord": 2}}
+    },
+    {
+      "id": "s05",
+      "type": "BOOLEAN_LOGIC_GATES",
+      "background": "zoneB",
+      "narration": "Logic gates turn those bits into decisions using and, or, and exclusive-or.",
+      "durationFrames": 150,
+      "transition": "zoom",
+      "data": {"logic": {"headline": "Gates make decisions", "gates": [{"type": "AND", "a": 1, "b": 0, "label": "both on?"}, {"type": "OR", "a": 1, "b": 0}, {"type": "XOR", "a": 1, "b": 1}], "atWord": 2}}
+    },
+    {
+      "id": "s06",
+      "type": "MEMORY",
+      "background": "zoneC",
+      "narration": "Your program and its data live in memory, each cell at its own address.",
+      "durationFrames": 168,
+      "transition": "morph",
+      "data": {"memory": {"label": "The stack in RAM", "cells": [{"addr": "0x00", "value": "0x41"}, {"addr": "0x01", "value": "0x42"}, {"addr": "0x02", "value": "0x00", "color": "green"}], "highlight": 2, "pointerLabel": "SP", "atWord": 6}}
+    },
+    {
+      "id": "s07",
+      "type": "CACHE_PYRAMID",
+      "background": "zoneA",
+      "narration": "Faster memory sits closer to the core, but there is far less of it.",
+      "durationFrames": 168,
+      "transition": "wipe",
+      "data": {"pyramid": {"headline": "Fast on top, big below", "tiers": [{"label": "Registers", "speed": "~1 ns", "size": "1 KB", "color": "green"}, {"label": "L1 cache", "speed": "~4 ns", "size": "64 KB"}, {"label": "RAM", "speed": "~100 ns", "size": "32 GB"}, {"label": "Disk", "speed": "~10 ms", "size": "2 TB"}], "axisTop": "faster · smaller", "axisBottom": "bigger · slower", "atWord": 2}}
+    },
+    {
+      "id": "s08",
+      "type": "CALL_STACK",
+      "background": "zoneB",
+      "narration": "When functions call other functions, they stack up and then unwind one by one.",
+      "durationFrames": 168,
+      "transition": "iris",
+      "data": {"callStack": {"headline": "Recursion builds a stack", "frames": [{"fn": "main()"}, {"fn": "factorial(3)", "sub": "n = 3"}, {"fn": "factorial(2)", "sub": "n = 2", "color": "blue"}], "mode": "stack", "atWord": 3}}
+    },
+    {
+      "id": "s09",
+      "type": "POINTER_DIAGRAM",
+      "background": "zoneC",
+      "narration": "Data points to more data through pointers, forming chains that wind through memory.",
+      "durationFrames": 156,
+      "transition": "dip",
+      "data": {"pointers": {"nodes": [{"value": "0x41", "next": 1}, {"value": "0x42", "next": 2}, {"value": "0x00", "next": null, "color": "green"}], "headLabel": "head", "atWord": 2}}
+    },
+    {
+      "id": "s10",
+      "type": "PROCESS_TABLE",
+      "background": "zoneA",
+      "narration": "The operating system juggles dozens of processes, each one fighting for the CPU.",
+      "durationFrames": 156,
+      "transition": "fade",
+      "data": {"proc": {"headline": "What is eating the CPU?", "sortBy": "cpu", "rows": [{"pid": "4821", "name": "chrome", "cpu": 92, "mem": 38, "runaway": true}, {"pid": "112", "name": "node", "cpu": 14, "mem": 21}, {"pid": "9", "name": "systemd", "cpu": 1, "mem": 3}], "atWord": 2}}
+    },
+    {
+      "id": "s11",
+      "type": "SORTING_VISUAL",
+      "background": "zoneB",
+      "narration": "And clever algorithms bring order to chaos, one comparison at a time.",
+      "durationFrames": 144,
+      "transition": "slide",
+      "data": {"sort": {"headline": "From chaos to order", "values": [5, 2, 8, 1, 9, 3, 7], "label": "ascending", "atWord": 3}}
+    },
+    {
+      "id": "s12",
+      "type": "RECAP",
+      "background": "zoneC",
+      "narration": "So that is the whole stack: bits, logic, memory, and the code that ties them together.",
+      "durationFrames": 192,
+      "transition": "push",
+      "data": {"heading": "The whole machine", "points": [{"text": "Bits become numbers", "atWord": 7}, {"text": "Gates make choices", "atWord": 8}, {"text": "Memory holds state", "atWord": 9}, {"text": "Code ties it together", "atWord": 12}]}
+    },
+    {
+      "id": "s13",
+      "type": "OUTRO_CTA",
+      "background": "zoneA",
+      "narration": "Subscribe for more deep dives into how your machine really works.",
+      "durationFrames": 132,
+      "transition": "fade",
+      "data": {"message": "Subscribe for more breakdowns", "sub": "new videos weekly"}
+    }
+  ]
+}

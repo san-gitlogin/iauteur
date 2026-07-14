@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "topic": "How GPS Knows Where You Are",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "GPS is just distance from four atomic clocks in orbit: measure the delay of each signal, and where the ranges cross is you.",
+    "openLoop": "How does a phone with no map inside it know exactly where you are?",
+    "analogy": "GPS is a game of Marco Polo with satellites: each shout tells you how far away it is, and four shouts pin you down.",
+    "screenplay": "explainer",
+    "topicAxes": ["entity-novelty", "sovereignty"]
+  },
+  "brand": {
+    "theme": "swiss",
+    "design": "swiss",
+    "themeLight": "paper",
+    "background": "grid",
+    "channel": "YOUR CHANNEL"
+  },
+  "thumbnail": {
+    "title": "How GPS Works",
+    "badge": "EXPLAINER",
+    "asset": "lucide:satellite"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "background": "zoneA",
+      "narration": "Your phone can find you anywhere on Earth, using clocks flying in space.",
+      "durationFrames": 156,
+      "data": {"headline": "FOUND FROM SPACE", "subtext": "accurate to a few metres", "heroAsset": "lucide:satellite", "headlineAtWord": 1, "heroAtWord": 10}
+    },
+    {
+      "id": "s02",
+      "type": "MAP_RADAR",
+      "background": "zoneB",
+      "narration": "High above you, a fleet of satellites is always sweeping the sky.",
+      "durationFrames": 144,
+      "transition": "slide",
+      "data": {"mapRadar": {"blips": [{"label": "SAT 12", "angle": 40, "range": 0.6, "color": "blue"}, {"label": "SAT 24", "angle": 150, "range": 0.85}, {"label": "SAT 07", "angle": 250, "range": 0.5, "color": "green"}, {"label": "SAT 19", "angle": 320, "range": 0.95}], "rings": 4, "sweepLabel": "tracking\u2026", "atWord": 2}}
+    },
+    {
+      "id": "s03",
+      "type": "CONCEPT_DIAGRAM",
+      "background": "zoneC",
+      "narration": "Every satellite constantly broadcasts its exact position and the precise time.",
+      "durationFrames": 132,
+      "transition": "fade",
+      "data": {"nodes": [{"id": "sat", "label": "Satellite", "asset": "lucide:satellite", "atWord": 2}, {"id": "signal", "label": "Position + time", "asset": "lucide:radio", "atWord": 7}, {"id": "phone", "label": "Your phone", "asset": "lucide:smartphone", "atWord": 11}], "edges": [{"from": "sat", "to": "signal", "atWord": 4}, {"from": "signal", "to": "phone", "atWord": 11}]}
+    },
+    {
+      "id": "s04",
+      "type": "STAT_CALLOUT",
+      "background": "zoneA",
+      "narration": "The core network is twenty-four satellites, orbiting twenty thousand kilometres up.",
+      "durationFrames": 132,
+      "transition": "push",
+      "data": {"value": 24, "label": "satellites orbit ~20,200 km up", "atWord": 5, "source": "US GPS baseline constellation (24 slots)"}
+    },
+    {
+      "id": "s05",
+      "type": "CLOCK_SIGNAL",
+      "background": "zoneB",
+      "narration": "Each one carries an atomic clock, ticking billions of times each second.",
+      "durationFrames": 144,
+      "transition": "morph",
+      "data": {"clock": {"cycles": 6, "label": "atomic clock", "headline": "Timing is everything", "atWord": 5}}
+    },
+    {
+      "id": "s06",
+      "type": "STEP_FLOW",
+      "background": "zoneC",
+      "narration": "Your phone times each signal, turns delay into distance, and finds where they cross.",
+      "durationFrames": 168,
+      "transition": "wipe",
+      "data": {"steps": [{"title": "Hear signals", "sub": "from several satellites", "color": "blue", "atWord": 5}, {"title": "Measure delay", "sub": "time = distance", "color": "orange", "atWord": 7}, {"title": "Draw ranges", "sub": "one per satellite", "color": "purple", "atWord": 9}, {"title": "Find the cross", "sub": "that is you", "color": "green", "atWord": 12}], "source": "GPS trilateration (illustrative)"}
+    },
+    {
+      "id": "s07",
+      "type": "TIMELINE",
+      "background": "zoneA",
+      "narration": "GPS went from a military tool to the map in everyone's pocket.",
+      "durationFrames": 144,
+      "transition": "slide",
+      "data": {"timeline": {"milestones": [{"date": "1978", "title": "First satellite", "sub": "the system begins", "color": "blue", "atWord": 1}, {"date": "1995", "title": "Full coverage", "sub": "24 satellites live", "color": "purple", "atWord": 2}, {"date": "2000", "title": "Full accuracy", "sub": "civilian signal unlocked", "color": "orange", "atWord": 6}, {"date": "Today", "title": "In your pocket", "sub": "phones, cars, watches", "color": "green", "atWord": 11}]}}
+    },
+    {
+      "id": "s08",
+      "type": "RECAP",
+      "background": "zoneB",
+      "narration": "So GPS is really just distance from four clocks in the sky.",
+      "durationFrames": 144,
+      "transition": "push",
+      "data": {"heading": "How GPS finds you", "points": [{"text": "Satellites broadcast time", "atWord": 2}, {"text": "Your phone measures delay", "atWord": 6}, {"text": "Delay becomes distance", "atWord": 6}, {"text": "Four ranges pinpoint you", "atWord": 8}]}
+    },
+    {
+      "id": "s09",
+      "type": "OUTRO_CTA",
+      "background": "zoneC",
+      "narration": "Follow for more of the invisible tech running your world.",
+      "durationFrames": 120,
+      "transition": "fade",
+      "data": {"message": "Follow for more hidden tech", "sub": "new explainers weekly"}
+    }
+  ]
+}

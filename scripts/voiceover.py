@@ -10,6 +10,14 @@ NOTE: needs internet (Microsoft Edge TTS endpoint). Run on your machine.
 import asyncio, json, os, sys
 import edge_tts
 
+# Windows consoles default to cp1252, which cannot encode the arrows/bullets we
+# print (\u2192 etc.) -> force UTF-8 so the script never dies on a status line.
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 async def main():
     spec_path, prefix = sys.argv[1], sys.argv[2]
     voice = sys.argv[3] if len(sys.argv) > 3 else "en-US-ChristopherNeural"
