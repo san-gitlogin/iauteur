@@ -9,6 +9,16 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {schemaDSL} from './lib/schema-dsl.mjs';
+import {advertised} from './lib/constants.mjs';
+
+// The schema block already shows advertised budgets; the linter's verbatim message
+// still quotes the REAL limit. Rewrite those numbers to advertised so the fix loop
+// teaches the SAME target the original prompt did — otherwise a model "fixes"
+// 45→43 and hits enforcement-boundary roulette on the next field. Only touches
+// char-budget numbers (the "…chars…" patterns), never counts or ids.
+const advMsg = (m) => m
+  .replace(/> (\d+) chars/g, (_, n) => `> ${advertised(+n)} chars`)
+  .replace(/(\d+) chars > (\d+)/g, (_, a, b) => `${a} chars > ${advertised(+b)}`);
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const NODE = process.execPath;
@@ -67,7 +77,7 @@ for (const id of ids) {
   if (!sc) continue;
   L.push(`## Scene ${id} — ${sc.type}`);
   L.push('Validator said:');
-  for (const msg of sceneErr[id]) L.push(`  - ${msg}`);
+  for (const msg of sceneErr[id]) L.push(`  - ${advMsg(msg)}`);
   L.push('');
   L.push('Schema (`!`=required · `?`=optional · `\u2264N`=max chars · at:"word" = a word from this scene\u2019s narration):');
   L.push('    ' + schemaDSL(sc.type).split('\n').join('\n    '));
@@ -80,7 +90,7 @@ for (const id of ids) {
 }
 if (globalErr.length) {
   L.push('## Spec-level issues to also respect');
-  for (const g of globalErr) L.push(`  - ${g}`);
+  for (const g of globalErr) L.push(`  - ${advMsg(g)}`);
   L.push('');
 }
 L.push('## OUTPUT');

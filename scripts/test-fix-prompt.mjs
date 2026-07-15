@@ -18,7 +18,8 @@ const gen = ex(['scripts/gen-fix-prompt.mjs', 'briefs/examples/fix-input-long.js
 const golden = fs.readFileSync('briefs/examples/fix-prompt-s08.golden.txt', 'utf8');
 check('fix-prompt matches golden', gen === golden, 'regenerate: node scripts/gen-fix-prompt.mjs briefs/examples/fix-input-long.json');
 check('fix-prompt is scoped to s08 only', gen.includes('## Scene s08 — TIMELINE') && !/## Scene s0[1-79]/.test(gen));
-check('fix-prompt carries the verbatim linter message', gen.includes('milestone title "SAG-AFTRA & CAA Revolt" > 18 chars'));
+check('fix-prompt states the ADVERTISED linter limit', gen.includes('milestone title "SAG-AFTRA & CAA Revolt" > 15 chars'));
+check('fix-prompt leaks no RAW budget value', !gen.includes('> 18 chars'));
 check('fix-prompt carries the TIMELINE schema', gen.includes('data.timeline: {') && gen.includes('milestones!'));
 
 // (2) ingest round-trip: apply canned reply → normalize → lint PASS

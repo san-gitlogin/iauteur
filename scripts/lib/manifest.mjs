@@ -526,8 +526,8 @@ export const MANIFEST = {
     purpose: 'Editor/terminal that types code then shows output.',
     use_when: 'Show a short snippet running.',
     fields: {
-      lines: {t: 'items', req: true, note: '≤12 × {text≤52, color?}'},
-      output: {t: 'items', note: '≤6 × {text≤52, color?}'},
+      lines: {t: 'items', req: true, preserveWs: true, note: '≤12 × {text≤52, color?}'},
+      output: {t: 'items', preserveWs: true, note: '≤6 × {text≤52, color?}'},
       filename: {t: 'string', max: 28}, language: {t: 'string', note: 'js/ts/py/bash/json'},
       runLabel: {t: 'string', max: 36}, atWord: {t: 'anchor'},
     },
@@ -538,7 +538,7 @@ export const MANIFEST = {
     purpose: 'Code in a real editor: tabs, gutter, one highlight band, optional squiggle.',
     use_when: 'Point at a specific line/change in context.',
     fields: {
-      lines: {t: 'string[]', req: true, note: '≤10 lines, each ≤38 chars (tabs = 2 spaces)'},
+      lines: {t: 'string[]', req: true, preserveWs: true, note: '≤10 lines, each ≤38 chars (tabs = 2 spaces)'},
       tabs: {t: 'items', note: '≤3 × {name≤22, active?}'}, lang: {t: 'string', max: 12},
       highlight: {t: 'object', note: '{from, to, color?}'},
       squiggle: {t: 'object', note: '{line, message≤44}'},
@@ -551,7 +551,7 @@ export const MANIFEST = {
     purpose: 'A command runs: prompt → command types → output → exit chip.',
     use_when: 'Show a CLI action and its result.',
     fields: {
-      commands: {t: 'items', req: true, note: '1-3 × {cmd≤48, output?:[≤4 lines ≤52], exitCode?, atWord}'},
+      commands: {t: 'items', req: true, preserveWs: true, note: '1-3 × {cmd≤48, output?:[≤4 lines ≤52], exitCode?, atWord}'},
       promptLabel: {t: 'string', max: 20}, cwd: {t: 'string', max: 24}, atWord: {t: 'anchor'},
     },
     example: {terminal: {promptLabel: 'you@laptop', cwd: '~/vault', commands: [{cmd: 'pass show github', output: ['copied to clipboard (45s)'], exitCode: 0, atWord: 3}], atWord: 3}},
@@ -561,7 +561,7 @@ export const MANIFEST = {
     purpose: 'Structured logs scrolling; one matched line pins + glows.',
     use_when: 'Show events/telemetry arriving.',
     fields: {
-      lines: {t: 'items', req: true, note: '2-10 × {level?:debug|info|warn|error, tag?≤14, text≤44}'},
+      lines: {t: 'items', req: true, preserveWs: true, note: '2-10 × {level?:debug|info|warn|error, tag?≤14, text≤44}'},
       highlight: {t: 'number', note: 'index of the pinned line'}, rate: {t: 'string', max: 12}, atWord: {t: 'anchor'},
     },
     example: {logs: {lines: [{level: 'info', tag: 'auth', text: 'vault unlocked for user'}, {level: 'warn', tag: 'auth', text: '3 failed master attempts'}, {level: 'error', tag: 'auth', text: 'account locked for 5 min'}], highlight: 2, rate: '1.2k/s', atWord: 2}},
@@ -571,7 +571,7 @@ export const MANIFEST = {
     purpose: 'Before/after a change, PR-style +/- rows.',
     use_when: 'Show a fix/edit as a diff.',
     fields: {
-      rows: {t: 'items', req: true, note: "2-12 × {kind:'add'|'del'|'ctx', text≤52}"},
+      rows: {t: 'items', req: true, preserveWs: true, note: "2-12 × {kind:'add'|'del'|'ctx', text≤52}"},
       fileName: {t: 'string', max: 28}, stat: {t: 'object', note: '{plus, minus}'}, atWord: {t: 'anchor'},
     },
     example: {diff: {fileName: 'auth.ts', rows: [{kind: 'ctx', text: 'function check(pw) {'}, {kind: 'del', text: '  return pw === stored'}, {kind: 'add', text: '  return verifyHash(pw, stored)'}, {kind: 'ctx', text: '}'}], stat: {plus: 1, minus: 1}, atWord: 2}},
@@ -1118,8 +1118,8 @@ export const MANIFEST = {
     use_when: 'Show a request/response / an API call.',
     fields: {
       method: {t: 'string', max: 7, note: 'GET / POST / \u2026'}, path: {t: 'string', max: 28},
-      requestLines: {t: 'string[]', note: '\u22643 lines, each \u226426'}, status: {t: 'string', max: 4}, statusText: {t: 'string', max: 16},
-      responseLines: {t: 'string[]', note: '\u22643 lines, each \u226426'}, clientLabel: {t: 'string', max: 16}, serverLabel: {t: 'string', max: 16},
+      requestLines: {t: 'string[]', preserveWs: true, note: '\u22643 lines, each \u226426'}, status: {t: 'string', max: 4}, statusText: {t: 'string', max: 16},
+      responseLines: {t: 'string[]', preserveWs: true, note: '\u22643 lines, each \u226426'}, clientLabel: {t: 'string', max: 16}, serverLabel: {t: 'string', max: 16},
       headline: {t: 'string', max: 48}, atWord: {t: 'anchor'},
     },
     example: {api: {headline: 'Ask, and receive', method: 'GET', path: '/api/users/42', requestLines: ['Authorization: Bearer \u2026'], status: '200', statusText: 'OK', responseLines: ['{ "id": 42,', '  "name": "Ada" }'], clientLabel: 'Client', serverLabel: 'Server', atWord: 2}},

@@ -1,0 +1,309 @@
+{
+  "meta": {
+    "topic": "How password managers actually keep your secrets safe",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "Password managers lock every secret behind one key.",
+    "openLoop": "But how do they keep that one key safe?",
+    "analogy": "A vault only you can open.",
+    "screenplay": "explainer",
+    "topicAxes": [
+      "economic-pain",
+      "sovereignty"
+    ]
+  },
+  "brand": {
+    "theme": "corptrust",
+    "design": "corptrust",
+    "themeLight": "daylight",
+    "channel": "YOUR CHANNEL"
+  },
+  "thumbnail": {
+    "title": "Password Managers",
+    "badge": "Explained",
+    "asset": "lucide:lock"
+  },
+  "scenes": [
+    {
+      "type": "HOOK",
+      "narration": "Your passwords are not safe.",
+      "data": {
+        "headline": "Your passwords are not safe",
+        "subtext": "unless you use a manager",
+        "heroAsset": "lucide:lock",
+        "headlineAtWord": 1,
+        "heroAtWord": 3
+      },
+      "transition": "fade",
+      "id": "s01",
+      "timingSource": "tts",
+      "durationFrames": 97,
+      "background": "zoneA",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s01.mp3"
+    },
+    {
+      "type": "TITLE_CARD",
+      "narration": "How do password managers work?",
+      "data": {
+        "title": "How password managers work",
+        "subtitle": "The encryption behind the curtain"
+      },
+      "transition": "slide",
+      "id": "s02",
+      "timingSource": "tts",
+      "durationFrames": 99,
+      "background": "zoneB",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s02.mp3"
+    },
+    {
+      "type": "CONCEPT_DIAGRAM",
+      "narration": "They encrypt your data with a master key.",
+      "data": {
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Master Password",
+            "asset": "lucide:key",
+            "atWord": 2.833
+          },
+          {
+            "id": "n2",
+            "label": "Encryption",
+            "asset": "lucide:shield-check",
+            "atWord": 4.75
+          },
+          {
+            "id": "n3",
+            "label": "Vault",
+            "asset": "lucide:database",
+            "atWord": 6.583
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2",
+            "atWord": 3.75
+          },
+          {
+            "from": "n2",
+            "to": "n3",
+            "atWord": 5.667
+          }
+        ]
+      },
+      "transition": "morph",
+      "id": "s03",
+      "timingSource": "tts",
+      "durationFrames": 110,
+      "background": "zoneC",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s03.mp3"
+    },
+    {
+      "type": "STEP_FLOW",
+      "narration": "First, your master password unlocks the vault.",
+      "data": {
+        "steps": [
+          {
+            "kicker": "1",
+            "title": "Master Key",
+            "sub": "Your single key",
+            "color": "blue",
+            "atWord": 3.5
+          },
+          {
+            "kicker": "2",
+            "title": "Decrypt",
+            "sub": "Access passwords",
+            "color": "green",
+            "atWord": 6
+          },
+          {
+            "kicker": "3",
+            "title": "Auto-fill",
+            "sub": "Log in anywhere",
+            "color": "purple",
+            "atWord": 8.5
+          }
+        ],
+        "source": "illustrative"
+      },
+      "transition": "zoom",
+      "id": "s04",
+      "timingSource": "tts",
+      "durationFrames": 126,
+      "background": "zoneA",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s04.mp3"
+    },
+    {
+      "type": "FLIP_CARD",
+      "narration": "Myth: Password managers can be hacked.",
+      "data": {
+        "flip": {
+          "front": {
+            "label": "Myth",
+            "text": "Managers are unsafe",
+            "color": "red"
+          },
+          "back": {
+            "label": "Fact",
+            "text": "Encrypted vaults resist cracking",
+            "color": "green"
+          },
+          "atWord": 1
+        }
+      },
+      "transition": "wipe",
+      "id": "s05",
+      "timingSource": "tts",
+      "durationFrames": 118,
+      "background": "zoneB",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s05.mp3"
+    },
+    {
+      "type": "STAT_PANELS",
+      "narration": "Zero-knowledge means the provider cannot see your data.",
+      "data": {
+        "stats": [
+          {
+            "kicker": "Your Data",
+            "value": "100%",
+            "note": "Encrypted",
+            "color": "green",
+            "atWord": 2.083
+          },
+          {
+            "kicker": "Provider",
+            "value": "0%",
+            "note": "Zero access",
+            "color": "red",
+            "atWord": 5.333
+          }
+        ],
+        "verdict": {
+          "text": "Only you hold the keys",
+          "color": "blue",
+          "atWord": 8.583
+        },
+        "source": "illustrative"
+      },
+      "transition": "dip",
+      "id": "s06",
+      "timingSource": "tts",
+      "durationFrames": 125,
+      "background": "zoneC",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s06.mp3"
+    },
+    {
+      "type": "LIST_BUILD",
+      "narration": "Three layers protect your passwords.",
+      "data": {
+        "heading": "Security Layers",
+        "items": [
+          {
+            "icon": "lucide:shield",
+            "text": "AES-256 encryption",
+            "detail": "Strong security",
+            "atWord": 2.417
+          },
+          {
+            "icon": "lucide:fingerprint",
+            "text": "Biometric lock",
+            "detail": "Face or fingerprint",
+            "atWord": 5.167
+          },
+          {
+            "icon": "lucide:globe-lock",
+            "text": "Encrypted sync",
+            "detail": "End to end",
+            "atWord": 6.583
+          }
+        ]
+      },
+      "transition": "push",
+      "id": "s07",
+      "timingSource": "tts",
+      "durationFrames": 105,
+      "background": "zoneA",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s07.mp3"
+    },
+    {
+      "type": "SPLIT_PATHS",
+      "narration": "With a manager, you choose strong or weak passwords.",
+      "data": {
+        "center": {
+          "kicker": "Your Choice",
+          "title": "Strength",
+          "atWord": 3.167
+        },
+        "left": {
+          "title": "Strong",
+          "badge": "Best",
+          "lines": [
+            "Unique",
+            "Complex"
+          ],
+          "color": "green",
+          "atWord": 5.333
+        },
+        "right": {
+          "title": "Weak",
+          "lines": [
+            "Repeated",
+            "Guessable"
+          ],
+          "color": "red",
+          "atWord": 7.5
+        },
+        "source": "illustrative"
+      },
+      "transition": "zoomthrough",
+      "id": "s08",
+      "timingSource": "tts",
+      "durationFrames": 138,
+      "background": "zoneB",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s08.mp3"
+    },
+    {
+      "type": "RECAP",
+      "narration": "So, password managers encrypt, secure, and simplify.",
+      "data": {
+        "heading": "Why trust a manager?",
+        "points": [
+          {
+            "text": "Encrypted vault",
+            "atWord": 2.667
+          },
+          {
+            "text": "Zero-knowledge",
+            "atWord": 6
+          },
+          {
+            "text": "Convenient auto-fill",
+            "atWord": 9.333
+          }
+        ]
+      },
+      "transition": "slide",
+      "id": "s09",
+      "timingSource": "tts",
+      "durationFrames": 161,
+      "background": "zoneC",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s09.mp3"
+    },
+    {
+      "type": "OUTRO_CTA",
+      "narration": "Start protecting your secrets today.",
+      "data": {
+        "message": "Use a password manager now",
+        "sub": "Stay safe online"
+      },
+      "transition": "fade",
+      "id": "s10",
+      "timingSource": "tts",
+      "durationFrames": 103,
+      "background": "zoneA",
+      "audio": "audio/how-password-managers-actually-keep-your-secrets-safe_long_s10.mp3"
+    }
+  ]
+}

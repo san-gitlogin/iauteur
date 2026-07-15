@@ -2,8 +2,16 @@
 // Used by scripts/gen-prompt.mjs (stage 2 / single) AND scripts/gen-fix-prompt.mjs
 // so a scene's schema reads identically wherever it appears.
 import {MANIFEST} from './manifest.mjs';
+import {advertised} from './constants.mjs';
 
 export const anchorName = (k) => k.replace(/Word$/, ''); // headlineAtWord → headlineAt
+
+// Every char budget the model SEES is the advertised (headroom) value; the linter
+// still enforces the real one (constants.mjs advertised()). Note strings carry
+// nested budgets as `field≤N` / `field?≤N` — transform only that attached form so
+// count-style limits (`≤6 ×`, `[≤8 numbers`) and ordering (`min≤q1`) are untouched.
+const advertiseNote = (s) => s.replace(/([A-Za-z0-9_]\??)≤(\d+)/g, (_, pre, n) => `${pre}≤${advertised(+n)}`);
+
 
 // Examples must demonstrate the AUTHORING form (at:"word"), because this corpus
 // proves models copy examples, not prose. Convert any numeric *AtWord in an
@@ -28,8 +36,8 @@ export const toAuthoringAnchors = (v) => {
 
 export function fieldDSL([k, f]) {
   if (f.t === 'anchor') return `${anchorName(k)}${f.req ? '!' : '?'}:"word from narration"`;
-  const bud = f.max ? `\u2264${f.max}` : '';
-  const note = f.note ? ` \u2014 ${f.note}` : '';
+  const bud = f.max ? `\u2264${advertised(f.max)}` : '';
+  const note = f.note ? ` \u2014 ${advertiseNote(f.note)}` : '';
   const entrance = k === 'anim' ? ' (entrance, NOT a scene transition)' : '';
   return `${k}${f.req ? '!' : '?'}${bud}:${f.t}${entrance}${note}`;
 }

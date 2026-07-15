@@ -29,17 +29,36 @@ async def main():
         sid, text = scene["id"], scene["narration"]
         mp3 = f"public/audio/{prefix}_{sid}.mp3"
         words = []
-        last_end = 0.0
+        speech_end = 0.0
+        audio_bytes = 0
         comm = edge_tts.Communicate(text, voice, rate="+8%")
         with open(mp3, "wb") as f:
             async for chunk in comm.stream():
-                if chunk["type"] == "audio":
+                ctype = chunk["type"]
+                if ctype == "audio":
                     f.write(chunk["data"])
-                elif chunk["type"] == "WordBoundary":
-                    t_sec = chunk["offset"] / 10_000_000  # 100ns units → seconds
-                    words.append(round(t_sec, 3))
-                    last_end = t_sec + chunk["duration"] / 10_000_000
-        result[sid] = {"duration": round(last_end + 0.35, 3), "words": words}
+                    audio_bytes += len(chunk["data"])
+                # edge-tts 7.x often sends only SentenceBoundary (no WordBoundary);
+                # both carry offset+duration (100ns units) — take the latest end as
+                # the real speech length so a missing word stream can't collapse it.
+                elif ctype in ("WordBoundary", "SentenceBoundary"):
+                    t_sec = chunk["offset"] / 10_000_000
+                    end = t_sec + chunk["duration"] / 10_000_000
+                    if end > speech_end:
+                        speech_end = end
+                    if ctype == "WordBoundary":
+                        words.append(round(t_sec, 3))
+        # Hard floor: edge-tts default output is 48 kbit/s mono MP3, so the audio's
+        # own length is recoverable from its byte size even if NO boundary events
+        # arrive — this is what stops scenes from collapsing to ~0.35s.
+        mp3_est = (audio_bytes * 8) / 48000 if audio_bytes else 0.0
+        speech_end = max(speech_end, mp3_est)
+        # No per-word boundaries → synthesize evenly-spaced word starts across the
+        # measured speech so `atWord` anchors still land on the voice, not frame 0.
+        if not words and speech_end > 0:
+            n = max(1, len(text.split()))
+            words = [round(i / n * speech_end, 3) for i in range(n)]
+        result[sid] = {"duration": round(speech_end + 0.35, 3), "words": words}
         print(f"  {sid}: {len(words)} words, {result[sid]['duration']}s → {mp3}")
     out = f"out/tts/{prefix}_timestamps.json"
     json.dump(result, open(out, "w"), indent=2)

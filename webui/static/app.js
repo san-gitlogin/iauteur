@@ -382,7 +382,7 @@ async function onApplyFix() {
   const res = await withBtn($("applyfixBtn"), "Applying…", () => jpost("/api/flow/applyfix", { cfg: cfg(), spec: S.spec, patch }));
   if (res.error) { toast(res.error, "err"); return; }
   S.spec = res.spec; S.lintOk = res.ok;
-  renderAssemble({ ok: res.ok, firstTry: false, errBefore: "-", errAfter: res.ok ? 0 : "?", changes: [], warnings: [], lint: res.lint, fixPrompt: res.fixPrompt });
+  renderAssemble({ ok: res.ok, firstTry: false, errBefore: "-", errAfter: res.ok ? 0 : "?", changes: [], warnings: [], lint: res.lint, fixPrompt: res.fixPrompt, spec: res.spec });
   render();
 }
 

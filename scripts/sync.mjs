@@ -28,7 +28,10 @@ const retarget = (obj, words) => {
 for (const scene of spec.scenes) {
   const t = ts[scene.id];
   if (!t) { console.warn(`! no timestamps for ${scene.id}, keeping estimate`); continue; }
-  retarget(scene.data, t.words);
+  // Only retarget anchors when we actually have per-word times — otherwise
+  // words[idx] is undefined and every anchor would become NaN → null.
+  if (Array.isArray(t.words) && t.words.length) retarget(scene.data, t.words);
+  else console.warn(`! ${scene.id}: no word times, keeping anchors (duration still synced)`);
   scene.durationFrames = Math.ceil(t.duration * FPS) + 10;
   scene.audio = `audio/${prefix}_${scene.id}.mp3`;
   scene.timingSource = 'tts';

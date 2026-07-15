@@ -8,18 +8,22 @@ import long2 from '../topics/how-gps-knows-where-you-are/long.json';
 import shorts2 from '../topics/how-gps-knows-where-you-are/shorts.json';
 import long3 from '../topics/how-llms-work/long.json';
 import shorts3 from '../topics/how-llms-work/shorts.json';
-import long4 from '../topics/how-the-internet-works/long.json';
-import shorts4 from '../topics/how-the-internet-works/shorts.json';
-import long5 from '../topics/instagram-s-newest-ai-tool-didn-t-survive-the-week/long.json';
-import shorts5 from '../topics/instagram-s-newest-ai-tool-didn-t-survive-the-week/shorts.json';
-import long6 from '../topics/palette-136-tour/long.json';
-import shorts6 from '../topics/palette-136-tour/shorts.json';
-import long7 from '../topics/react-basics/long.json';
-import shorts7 from '../topics/react-basics/shorts.json';
-import long8 from '../topics/terawulf-anthropic-lease/long.json';
-import shorts8 from '../topics/terawulf-anthropic-lease/shorts.json';
-import long9 from '../topics/xrp-prediction/long.json';
-import shorts9 from '../topics/xrp-prediction/shorts.json';
+import long4 from '../topics/how-password-managers-actually-keep-your-secrets-safe/long.json';
+import shorts4 from '../topics/how-password-managers-actually-keep-your-secrets-safe/shorts.json';
+import long5 from '../topics/how-the-internet-works/long.json';
+import shorts5 from '../topics/how-the-internet-works/shorts.json';
+import long6 from '../topics/instagram-s-newest-ai-tool-didn-t-survive-the-week/long.json';
+import shorts6 from '../topics/instagram-s-newest-ai-tool-didn-t-survive-the-week/shorts.json';
+import long7 from '../topics/palette-136-tour/long.json';
+import shorts7 from '../topics/palette-136-tour/shorts.json';
+import long8 from '../topics/react-basics/long.json';
+import shorts8 from '../topics/react-basics/shorts.json';
+import long9 from '../topics/terawulf-anthropic-lease/long.json';
+import shorts9 from '../topics/terawulf-anthropic-lease/shorts.json';
+import long10 from '../topics/the-biggest-ai-stories-of-july-2026/long.json';
+import shorts10 from '../topics/the-biggest-ai-stories-of-july-2026/shorts.json';
+import long11 from '../topics/xrp-prediction/long.json';
+import shorts11 from '../topics/xrp-prediction/shorts.json';
 
 export interface TopicEntry {slug: string; long: VideoSpec; shorts: VideoSpec | null;}
 
@@ -28,10 +32,12 @@ export const topics: TopicEntry[] = [
   {slug: 'fluence-energy', long: long1 as unknown as VideoSpec, shorts: shorts1 as unknown as VideoSpec},
   {slug: 'how-gps-knows-where-you-are', long: long2 as unknown as VideoSpec, shorts: shorts2 as unknown as VideoSpec},
   {slug: 'how-llms-work', long: long3 as unknown as VideoSpec, shorts: shorts3 as unknown as VideoSpec},
-  {slug: 'how-the-internet-works', long: long4 as unknown as VideoSpec, shorts: shorts4 as unknown as VideoSpec},
-  {slug: 'instagram-s-newest-ai-tool-didn-t-survive-the-week', long: long5 as unknown as VideoSpec, shorts: shorts5 as unknown as VideoSpec},
-  {slug: 'palette-136-tour', long: long6 as unknown as VideoSpec, shorts: shorts6 as unknown as VideoSpec},
-  {slug: 'react-basics', long: long7 as unknown as VideoSpec, shorts: shorts7 as unknown as VideoSpec},
-  {slug: 'terawulf-anthropic-lease', long: long8 as unknown as VideoSpec, shorts: shorts8 as unknown as VideoSpec},
-  {slug: 'xrp-prediction', long: long9 as unknown as VideoSpec, shorts: shorts9 as unknown as VideoSpec},
+  {slug: 'how-password-managers-actually-keep-your-secrets-safe', long: long4 as unknown as VideoSpec, shorts: shorts4 as unknown as VideoSpec},
+  {slug: 'how-the-internet-works', long: long5 as unknown as VideoSpec, shorts: shorts5 as unknown as VideoSpec},
+  {slug: 'instagram-s-newest-ai-tool-didn-t-survive-the-week', long: long6 as unknown as VideoSpec, shorts: shorts6 as unknown as VideoSpec},
+  {slug: 'palette-136-tour', long: long7 as unknown as VideoSpec, shorts: shorts7 as unknown as VideoSpec},
+  {slug: 'react-basics', long: long8 as unknown as VideoSpec, shorts: shorts8 as unknown as VideoSpec},
+  {slug: 'terawulf-anthropic-lease', long: long9 as unknown as VideoSpec, shorts: shorts9 as unknown as VideoSpec},
+  {slug: 'the-biggest-ai-stories-of-july-2026', long: long10 as unknown as VideoSpec, shorts: shorts10 as unknown as VideoSpec},
+  {slug: 'xrp-prediction', long: long11 as unknown as VideoSpec, shorts: shorts11 as unknown as VideoSpec},
 ];

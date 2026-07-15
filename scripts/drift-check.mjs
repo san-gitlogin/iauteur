@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
-import {BUDGET, HOOK_MAX_WORDS, TOPIC_AXES, TRANSITIONS, STUDIO_SOURCE_TYPES, RESTRICTED_FAMILIES} from './lib/constants.mjs';
+import {BUDGET, HOOK_MAX_WORDS, TOPIC_AXES, TRANSITIONS, STUDIO_SOURCE_TYPES, RESTRICTED_FAMILIES, advertised} from './lib/constants.mjs';
 import {MANIFEST, MANIFEST_TYPES} from './lib/manifest.mjs';
 import {SCREENPLAYS} from './screenplays.mjs';
 
@@ -21,10 +21,16 @@ const stage1 = gen('stage1'), single = gen('single'), both = stage1 + '\n' + sin
 
 const miss = [];
 const must = (text, token, label) => { if (!text.includes(token)) miss.push(`${label}: prompt is missing "${token}"`); };
+const mustNot = (text, token, label) => { if (text.includes(token)) miss.push(`${label}: prompt leaks RAW "${token}" (should be advertised)`); };
 
 must(both, `\u2264 ${HOOK_MAX_WORDS} words`, 'HOOK word budget');
-must(both, `\u2264${BUDGET.source}`, 'source budget');
-must(single, `\u2264${BUDGET.hookHeadline}`, 'hook headline budget');
+// Budgets are ADVERTISED with headroom (constants.advertised); the linter still
+// enforces the raw BUDGET. Assert the prompt prints advertised(), never the raw
+// value — the relationship stays single-source and drift-proof.
+must(both, `\u2264${advertised(BUDGET.source)}`, 'source budget (advertised)');
+must(single, `\u2264${advertised(BUDGET.hookHeadline)}`, 'hook headline budget (advertised)');
+mustNot(both, `"source" \u2264${BUDGET.source} chars`, 'source budget');
+mustNot(single, `headline!\u2264${BUDGET.hookHeadline}`, 'hook headline schema');
 const sc = SCREENPLAYS.explainer?.scenes;
 if (sc) must(stage1, `${sc[0]}\u2013${sc[1]}`, 'explainer scene range');
 for (const a of TOPIC_AXES) must(stage1, a, 'topicAxes');
@@ -64,4 +70,4 @@ fs.rmSync(beatsFile, {force: true});
 
 fs.rmSync(cfgFile, {force: true});
 if (miss.length) { console.log('✗ DRIFT DETECTED (prompt disagrees with shared constants):'); for (const m of miss) console.log('  • ' + m); console.log('\n✗ DRIFT CHECK FAILED'); process.exit(1); }
-console.log('✓ DRIFT CHECK PASSED (every number in the prompt equals the linter\u2019s shared constant)');
+console.log('✓ DRIFT CHECK PASSED (every budget in the prompt equals advertised() of the linter\u2019s shared constant)');

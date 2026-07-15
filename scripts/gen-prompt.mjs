@@ -15,7 +15,7 @@ import {MANIFEST, MANIFEST_TYPES} from './lib/manifest.mjs';
 import {schemaDSL, menuLine} from './lib/schema-dsl.mjs';
 import {
   DESIGN_PACKS, CORE_SKINS, LIGHT_THEMES, BACKGROUNDS, TRANSITIONS, TOPIC_AXES,
-  BUDGET, HOOK_MAX_WORDS, STUDIO_SOURCE_TYPES, RESTRICTED_FAMILIES,
+  BUDGET, HOOK_MAX_WORDS, STUDIO_SOURCE_TYPES, RESTRICTED_FAMILIES, advertised,
 } from './lib/constants.mjs';
 import {SCREENPLAYS, SCREENPLAY_NAMES} from './screenplays.mjs';
 
@@ -56,6 +56,26 @@ const exampleScene = [
   'Per-scene keys: `type`, `narration`, `transition` (optional), `data`. NOTHING else \u2014 no id / durationFrames / fps.',
 ].join('\n');
 
+// The ONE global budget instruction — placed right after the `≤N` legend, where
+// the model learns what `≤N` means (attention), not repeated per-field. The "3–6
+// words" clause changes PHRASING behaviour (word counts models track) rather than
+// demanding character arithmetic (which they can't do).
+const BUDGET_LAW = '`\u2264N` is a COUNTED limit \u2014 N+1 characters is rejected outright, so never write up to it. Use the shortest natural phrasing: labels, list items, and step titles read best at 3\u20136 words. If something doesn\u2019t fit naturally, rephrase it \u2014 never pad, never squeeze.';
+
+// VOICE — narration is spoken by Edge-TTS, whose prosody is driven ENTIRELY by
+// punctuation. Flat, comma-less sentences sound robotic; this block makes the
+// script breathe. Applies to every narration the model writes (stage 1 + single).
+const NARRATION_VOICE = [
+  '## VOICE \u2014 write narration to be SPOKEN, not read',
+  'The narration is fed to a neural TTS voice; its rhythm comes ONLY from your punctuation.',
+  '- Use commas for natural breath pauses, and em-dashes (\u2014) for a beat or an aside.',
+  '- Ask real questions (?) to lift intonation; use the occasional short punch. Not everything!',
+  '- Use contractions (it\u2019s, they\u2019re, that\u2019s) and vary sentence length \u2014 a long line, then a short one.',
+  '- Open scenes like a host continuing a story (\u201cBut here\u2019s the twist\u2026\u201d, \u201cAnd that\u2019s when\u2026\u201d), not a textbook.',
+  '- Read each line aloud in your head: if it sounds stiff or listy, rewrite it until it flows.',
+  '- Never stack three flat declaratives in a row; that is what makes TTS sound like a robot.',
+].join('\n');
+
 // ---- shared blocks -----------------------------------------------------------
 const truth = source
   ? ['## TRUTH (most important)', 'Ground EVERY fact ONLY in the SOURCE below. Never invent numbers, dates,',
@@ -72,7 +92,7 @@ const laws = [
   `3. Anti-monotony: never two same-family components adjacent; use \u2265 min(8, round(N/2)) DISTINCT types; no single type > ~35% of scenes.`,
   `3b. These count as ONE family - NEVER place two adjacent: ${familyGroups()}.`,
   `4. HOOK narration \u2264 ${HOOK_MAX_WORDS} words (it must fit \u22648s). One clear idea per scene; spoken, \u226420-word sentences.`,
-  `5. Studio components (${STUDIO_SOURCE_TYPES.join(', ')}) MUST include a factual "source" \u2264${BUDGET.source} chars.`,
+  `5. Studio components (${STUDIO_SOURCE_TYPES.join(', ')}) MUST include a factual "source" \u2264${advertised(BUDGET.source)} chars.`,
   `6. Semantic colors MEAN: green=works, red=broken, blue=info, purple=AI, orange=tension, yellow=cost.`,
   `7. Assets: lucide: (glyphs) · si: (brand logos) · img: (only files that exist). Never invent files. If a media scene needs a real photo/clip/logo you don't have, DECLARE it: add {key, kind, query} to a top-level "assetsNeeded" list and reference it as "needed:<key>" — never fabricate a URL.`,
 ].join('\n');
@@ -92,6 +112,7 @@ function stage1() {
     'You are the DIRECTOR of iAuteur, a video factory. STAGE 1 of 2: plan the BEAT SHEET only.',
     'Output ONLY the JSON described in OUTPUT — no prose, no spec data yet.', '',
     brief, '', truth, '', laws, '',
+    NARRATION_VOICE, '',
     '## topicAxes — pick \u22652 (channel strategy):', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
     `## COMPONENT MENU (choose types from THIS list only — ${MANIFEST_TYPES.length} available)`,
     MANIFEST_TYPES.map(menuLine).join('\n'), '',
@@ -123,13 +144,14 @@ function stage2() {
     '## The beat sheet (fixed):', beatList, '',
     exampleScene, '',
     '## SCHEMAS for the component types you must fill',
-    '(`!`=required · `?`=optional · `\u2264N`=max chars · anchors: `at:"word"` = a word copied from THIS scene\u2019s narration)', '',
+    '(`!`=required · `?`=optional · `\u2264N`=max chars · anchors: `at:"word"` = a word copied from THIS scene\u2019s narration)',
+    BUDGET_LAW, '',
     chosen.map(schemaDSL).join('\n\n'), '',
     '## RULES',
     '- Do NOT write durationFrames, timingSource, fps, or scene id \u2014 the app owns those.',
     '- `transition` (optional) is a SCENE CUT, one of: ' + TRANSITIONS.join(', ') + '.',
     '- background (optional): zoneA|zoneB|zoneC or a named background.',
-    `- Studio components need a "source". HOOK headline \u2264${BUDGET.hookHeadline}.`, '',
+    `- Studio components need a "source". HOOK headline \u2264${advertised(BUDGET.hookHeadline)}.`, '',
     '## OUTPUT \u2014 story & look already come from the beat sheet + console. Return ONLY:',
     '```json',
     '{',
@@ -148,9 +170,11 @@ function single() {
     'You are the DIRECTOR of iAuteur, a video factory. Produce a complete spec JSON in ONE response.',
     'First think a beat sheet, then output ONLY the final spec JSON (no prose).', '',
     brief, '', truth, '', laws, '', exampleScene, '',
+    NARRATION_VOICE, '',
     '## topicAxes — pick \u22652:', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
     `## COMPONENT PALETTE (${MANIFEST_TYPES.length} types — use ONLY these; each with its exact data schema)`,
-    '(`!`=required · `?`=optional · `\u2264N`=max chars · anchors: `at:"word"` copied from the scene\u2019s narration)', '',
+    '(`!`=required · `?`=optional · `\u2264N`=max chars · anchors: `at:"word"` copied from the scene\u2019s narration)',
+    BUDGET_LAW, '',
     MANIFEST_TYPES.map(schemaDSL).join('\n\n'), '',
     '## RULES',
     '- Do NOT write durationFrames, timingSource, fps, or scene id \u2014 the app owns those.',

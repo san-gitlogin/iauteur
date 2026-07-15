@@ -35,6 +35,36 @@ const setPath = (obj, dotted, val) => {
   for (let i = 0; i < parts.length - 1; i++) { o[parts[i]] = o[parts[i]] && typeof o[parts[i]] === 'object' ? o[parts[i]] : {}; o = o[parts[i]]; }
   o[parts[parts.length - 1]] = val;
 };
+
+// WHITESPACE COLLAPSE (meaning-free): trim + turn any run of whitespace into one
+// space. Rescues the near-miss overflows caused by a stray double space or a
+// trailing blank. Fields flagged preserveWs in the manifest (code lines, terminal
+// output, diffs, request/response bodies — where indentation is meaningful) are
+// skipped whole, so it never mangles significant spacing. Idempotent.
+const collapseWs = (s) => s.replace(/\s+/g, ' ').trim();
+const deepCollapseWs = (node, log, tag, at) => {
+  if (Array.isArray(node)) node.forEach((v, i) => {
+    if (typeof v === 'string') { const c = collapseWs(v); if (c !== v) { node[i] = c; log(`${tag} whitespace collapsed ${at}[${i}]`); } }
+    else if (v && typeof v === 'object') deepCollapseWs(v, log, tag, `${at}[${i}]`);
+  });
+  else if (node && typeof node === 'object') for (const k of Object.keys(node)) {
+    const v = node[k];
+    if (typeof v === 'string') { const c = collapseWs(v); if (c !== v) { node[k] = c; log(`${tag} whitespace collapsed ${at}.${k}`); } }
+    else if (v && typeof v === 'object') deepCollapseWs(v, log, tag, `${at}.${k}`);
+  }
+};
+const collapseDataWs = (d, man, log, tag) => {
+  const fields = man?.fields || {};
+  const container = (man?.data_key && d[man.data_key] && typeof d[man.data_key] === 'object') ? d[man.data_key] : d;
+  if (!container || typeof container !== 'object') return;
+  const base = container === d ? 'data' : `data.${man.data_key}`;
+  for (const k of Object.keys(container)) {
+    if (fields[k]?.preserveWs) continue; // significant indentation — leave untouched
+    const v = container[k];
+    if (typeof v === 'string') { const c = collapseWs(v); if (c !== v) { container[k] = c; log(`${tag} whitespace collapsed ${base}.${k}`); } }
+    else if (v && typeof v === 'object') deepCollapseWs(v, log, tag, `${base}.${k}`);
+  }
+};
 // "160K" / "1,500,000" / "88%" -> {n, suffix}
 const parseNum = (v) => {
   if (typeof v === 'number') return {n: v, suffix: ''};
@@ -220,6 +250,8 @@ export function normalizeSpec(spec) {
       // BAR_COMPARE / STAT_PANELS numeric item values
       if (Array.isArray(d.bars)) for (const bar of d.bars) if (typeof bar.value === 'string') { const p = parseNum(bar.value); if (p) { if (!bar.display) bar.display = bar.value; bar.value = p.n; } }
     }
+    // 4b · whitespace collapse (meaning-free; rescues stray double-space overflows)
+    collapseDataWs(d, man, log, tag);
     // 5 · resolve anchor phrases (at:"word"→atWord), then clamp to narration length
     if (!isTts) { resolveAnchors(d, sc.narration, wc, log, warn, tag); clampAnchors(d, wc, log, tag); }
   });

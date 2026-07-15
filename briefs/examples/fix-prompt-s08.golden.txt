@@ -4,7 +4,7 @@ Return ONLY a JSON array of the corrected scene objects — do NOT touch or incl
 
 ## Scene s08 — TIMELINE
 Validator said:
-  - milestone title "SAG-AFTRA & CAA Revolt" > 18 chars
+  - milestone title "SAG-AFTRA & CAA Revolt" > 15 chars
 
 Schema (`!`=required · `?`=optional · `≤N`=max chars · at:"word" = a word from this scene’s narration):
     TIMELINE — Ordered dated milestones (history/roadmap).

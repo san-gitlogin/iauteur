@@ -59,6 +59,20 @@ export const BUDGET = {
   panelTitle: 44,
 };
 
+// ADVERTISED BUDGET (headroom). Models can't count characters, so "≤N" registers
+// as style pressure, not arithmetic — they land CENTERED on N (overshooting by
+// 1–5, rarely 15). So we don't teach counting; we move the number they aim at.
+// The prompt/fix-loop advertise advertised(N); the linter still ENFORCES the real
+// BUDGET. The model's "land on the number ±5" now lands inside the enforced limit.
+//   advertised(N) = N − clamp(ceil(N × 0.12), 2, 6)
+// Headroom applies ONLY to prose-class budgets (N ≥ 14). Tiny structural budgets
+// (element symbols ≤3, DNA base letters ≤2, short codes/values ≤12) are NOT
+// free text the model overshoots — headroom there would corrupt content, so they
+// keep their real limit. This is the ONE tuning knob: raise 0.12 if 1–2-char
+// overflows persist; do not reach for anything heavier.
+export const advertised = (N) =>
+  (typeof N === 'number' && N >= 14) ? N - Math.min(Math.max(Math.ceil(N * 0.12), 2), 6) : N;
+
 // Timing (30fps). The console OWNS these — the LLM never sets them.
 export const FPS = 30;
 export const FPW = 12;               // frames-per-word estimate for durationFrames
