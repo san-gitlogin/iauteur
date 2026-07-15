@@ -17,6 +17,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {assembleSpec} from './lib/assemble.mjs';
 import {normalizeSpec} from './lib/normalize-spec.mjs';
+import {MANIFEST_TYPES} from './lib/manifest.mjs';
 import {BUDGET, HOOK_MAX_WORDS, TRANSITIONS} from './lib/constants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -77,7 +78,25 @@ if (cmd === 'stage1' || cmd === 'single') {
   const after = lint(sf);
   const out = {ok: after.code === 0, firstTry, errBefore: errCount(before.out), errAfter: errCount(after.out),
     spec, changes: [...asm, ...norm], warnings, lint: after.out.trim(), fixPrompt: ''};
-  if (!out.ok) out.fixPrompt = run('scripts/gen-fix-prompt.mjs', [sf]).out.trim();
+  if (!out.ok) {
+    // PREFLIGHT: if the model ignored the palette (most scenes are not real
+    // component types), the normal per-scene fix-prompt would be a wall of noise.
+    // Emit ONE concise contract reminder instead — the cheap fix for a model that
+    // reverted to a generic “video JSON” prior instead of using our types.
+    const nsc = (spec.scenes || []).length;
+    const unknown = (spec.scenes || []).filter((s) => !MANIFEST_TYPES.includes(s.type));
+    if (nsc && unknown.length >= Math.max(2, Math.ceil(nsc * 0.5))) {
+      out.contractMiss = true;
+      out.fixPrompt = [
+        `CONTRACT NOT FOLLOWED: ${unknown.length} of ${nsc} scenes use a component type that is not in the palette.`,
+        'You must use ONLY the offered component types (e.g. HOOK, STAT_CALLOUT, BAR_COMPARE, DIAGRAM, DEVICE_FRAME, LIST_BUILD, QUOTE_SPOTLIGHT, RECAP, OUTRO_CTA — see the palette).',
+        'Each scene MUST be shaped: { "type": "<PALETTE_TYPE>", "narration": "...", "data": { /* that type’s schema */ } } — never "scene"/"props", never invent type names.',
+        'Return the SAME story, re-mapped onto real palette types, as the single JSON object the OUTPUT section specifies (no meta, no brand).',
+      ].join('\n');
+    } else {
+      out.fixPrompt = run('scripts/gen-fix-prompt.mjs', [sf]).out.trim();
+    }
+  }
   emit(out);
 } else if (cmd === 'applyfix') {
   // arg2 = the (assembled) spec on disk shape; arg3 = the model's corrected-scenes patch

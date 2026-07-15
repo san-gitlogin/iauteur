@@ -13,8 +13,8 @@
     ]
   },
   "brand": {
-    "theme": "techstyle",
-    "design": "techstyle",
+    "theme": "moderndark",
+    "design": "moderndark",
     "themeLight": "daylight",
     "channel": "YOUR CHANNEL"
   },
@@ -36,9 +36,10 @@
       },
       "transition": "fade",
       "id": "s01",
-      "timingSource": "estimated",
-      "durationFrames": 186,
-      "background": "zoneA"
+      "timingSource": "tts",
+      "durationFrames": 216,
+      "background": "zoneA",
+      "audio": "audio/the-biggest-ai-stories-of-july-2026_shorts_s01.mp3"
     },
     {
       "type": "ICON_BURST",
@@ -71,14 +72,15 @@
               "color": "red"
             }
           ],
-          "atWord": 2
+          "atWord": 2.25
         }
       },
       "transition": "zoom",
       "id": "s02",
-      "timingSource": "estimated",
-      "durationFrames": 174,
-      "background": "zoneB"
+      "timingSource": "tts",
+      "durationFrames": 207,
+      "background": "zoneB",
+      "audio": "audio/the-biggest-ai-stories-of-july-2026_shorts_s02.mp3"
     },
     {
       "type": "STAT_CALLOUT",
@@ -89,13 +91,14 @@
         "suffix": "B",
         "label": "SK Hynix IPO, a US record",
         "source": "TechCrunch, Jul 2026",
-        "atWord": 3
+        "atWord": 2.833
       },
       "transition": "wipe",
       "id": "s03",
-      "timingSource": "estimated",
-      "durationFrames": 210,
-      "background": "zoneC"
+      "timingSource": "tts",
+      "durationFrames": 189,
+      "background": "zoneC",
+      "audio": "audio/the-biggest-ai-stories-of-july-2026_shorts_s03.mp3"
     },
     {
       "type": "LOGO_VERSUS",
@@ -114,14 +117,15 @@
             "tagline": "the defendant",
             "color": "red"
           },
-          "atWord": 3
+          "atWord": 3.5
         }
       },
       "transition": "push",
       "id": "s04",
-      "timingSource": "estimated",
-      "durationFrames": 174,
-      "background": "zoneA"
+      "timingSource": "tts",
+      "durationFrames": 200,
+      "background": "zoneA",
+      "audio": "audio/the-biggest-ai-stories-of-july-2026_shorts_s04.mp3"
     },
     {
       "type": "LIST_BUILD",
@@ -139,27 +143,28 @@
             "icon": "lucide:banknote",
             "text": "Huge money",
             "detail": "billions raised",
-            "atWord": 2
+            "atWord": 2.083
           },
           {
             "icon": "lucide:scale",
             "text": "Courtroom fights",
             "detail": "Apple, NYT",
-            "atWord": 3
+            "atWord": 3.083
           },
           {
             "icon": "lucide:house",
             "text": "AI at home",
             "detail": "everyday apps",
-            "atWord": 4
+            "atWord": 4.167
           }
         ]
       },
       "transition": "slide",
       "id": "s05",
-      "timingSource": "estimated",
-      "durationFrames": 198,
-      "background": "zoneB"
+      "timingSource": "tts",
+      "durationFrames": 199,
+      "background": "zoneB",
+      "audio": "audio/the-biggest-ai-stories-of-july-2026_shorts_s05.mp3"
     },
     {
       "type": "OUTRO_CTA",
@@ -170,9 +175,10 @@
       },
       "transition": "fade",
       "id": "s06",
-      "timingSource": "estimated",
-      "durationFrames": 162,
-      "background": "zoneC"
+      "timingSource": "tts",
+      "durationFrames": 174,
+      "background": "zoneC",
+      "audio": "audio/the-biggest-ai-stories-of-july-2026_shorts_s06.mp3"
     }
   ]
 }

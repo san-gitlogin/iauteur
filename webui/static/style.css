@@ -75,9 +75,9 @@ code{font-family:var(--mono);font-size:.85em;background:#0c1017;border:1px solid
 .stepitem .lbl{display:block;font-size:13.5px;font-weight:600;line-height:1.25}
 .stepitem .sub{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 .stepitem .tick{margin-left:auto;color:var(--good);font-weight:800;font-size:13px}
-/* continuous connector line, dead-centre through the badges */
-.stepitem:not(:last-child)::after{content:"";position:absolute;left:25px;top:24px;width:2px;
-  height:calc(100% + 4px);background:var(--border);transform:translateX(-1px);z-index:0;border-radius:2px}
+/* connector line runs only in the gap between badges, never through them */
+.stepitem:not(:last-child)::after{content:"";position:absolute;left:25px;top:37px;width:2px;
+  height:calc(100% - 26px);background:var(--border);transform:translateX(-1px);z-index:0;border-radius:2px}
 .stepitem.done:not(:last-child)::after{background:var(--good)}
 
 /* ---- main -----------------------------------------------------------------*/

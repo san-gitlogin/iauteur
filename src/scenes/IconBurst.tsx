@@ -52,10 +52,17 @@ export const IconBurst: React.FC<{scene: Scene}> = ({scene}) => {
               const nx = cx + Math.cos(a) * R;
               const ny = cy + Math.sin(a) * R;
               const sv = spring({frame: frame - start - 6 - i * 3, fps, config: {damping: 200}});
-              const ex = cx + (nx - cx) * sv;
-              const ey = cy + (ny - cy) * sv;
+              // Anchor the connector to the EDGES of the hub (circle) and the node
+              // (rounded square) so it never runs inside the transparent badges.
+              const nodeReach = (node / 2) / Math.max(Math.abs(Math.cos(a)), Math.abs(Math.sin(a)));
+              const x1 = cx + Math.cos(a) * (hub / 2);
+              const y1 = cy + Math.sin(a) * (hub / 2);
+              const x2 = nx - Math.cos(a) * nodeReach;
+              const y2 = ny - Math.sin(a) * nodeReach;
+              const ex = x1 + (x2 - x1) * sv;
+              const ey = y1 + (y2 - y1) * sv;
               const c = sem(s.color ?? CYCLE[i % CYCLE.length]);
-              return <line key={i} x1={cx} y1={cy} x2={ex} y2={ey} stroke={hexA(c, 0.5)} strokeWidth={3 * scale} strokeLinecap="round" />;
+              return <line key={i} x1={x1} y1={y1} x2={ex} y2={ey} stroke={hexA(c, 0.5)} strokeWidth={3 * scale} strokeLinecap="round" />;
             })}
           </svg>
           {/* spoke nodes + labels */}

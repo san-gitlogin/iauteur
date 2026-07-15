@@ -39,7 +39,22 @@ for (const m of ['gemini-pro', 'flash-lite', 'qwen', 'mistral']) {
   if (v.ok) ok(v.reask === '', `validate ${m}: PASS (no re-ask)`);
   else ok(v.reask.includes('rejected') && v.verdict.length > 0, `validate ${m}: REJECT → deterministic re-ask text`);
 }
-ok(Object.values(beatVerdicts).some((v) => v.ok) && Object.values(beatVerdicts).some((v) => !v.ok),
+// REJECT path: a synthetic beat sheet with a real, linter-consistent violation —
+// two CONSOLIDATED code-surface beats adjacent (CODE_EDITOR then CODE_DIFF) — must
+// trigger the deterministic re-ask. (Coarse manifest-family adjacency is advisory
+// only, since it over-rejects relative to the final linter; the reject path is
+// exercised by the FINE gate the linter actually enforces — see validate-beats.mjs.)
+const rejectBeats = {meta: {screenplay: 'explainer', topicAxes: ['entity-novelty', 'sovereignty']}, beats: [
+  {id: 's01', type: 'HOOK', narration: 'the stake in one line'},
+  {id: 's02', type: 'CODE_EDITOR', narration: 'the editor pane'},
+  {id: 's03', type: 'CODE_DIFF', narration: 'a diff right after the editor'},
+  {id: 's04', type: 'OUTRO_CTA', narration: 'that is a wrap'},
+]};
+const rbf = path.join(TMP, 'beats-reject.json');
+fs.writeFileSync(rbf, JSON.stringify(rejectBeats));
+const vReject = flow('validate', CFG, rbf);
+ok(!vReject.ok && vReject.reask.includes('rejected') && vReject.verdict.length > 0, 'validate REJECT (consolidated adjacency) → deterministic re-ask text');
+ok(Object.values(beatVerdicts).some((v) => v.ok) && !vReject.ok,
   'validate screen exercises BOTH the pass path and the reject/re-ask path');
 
 // ---- SCREEN 4: stage-2 fill-prompt from an accepted beat sheet --------------

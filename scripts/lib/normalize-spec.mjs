@@ -16,6 +16,17 @@ const ANIM_TO_TRANSITION = {
 };
 // tasteful rotation for a scene that omits its transition (console-owned rhythm)
 const TRANS_ROTATE = ['fade', 'slide', 'push', 'zoom', 'wipe', 'dip', 'morph', 'iris'];
+// near-miss / generic-template TYPE names an LLM invents → the real palette type.
+// Only consulted when sc.type is not already a real component (valid specs never
+// hit this). Complements the edit-distance snap (which catches 1-2 char typos like
+// TALKINGPOINTS→TALKING_POINTS) with the semantic renames it can't reach.
+const TYPE_ALIASES = {
+  STAT_CARDS: 'STAT_PANELS', STAT_CARD: 'STAT_CALLOUT', KEY_NUMBERS: 'STAT_PANELS', BIG_NUMBER: 'STAT_CALLOUT', NUMBERS: 'STAT_PANELS',
+  ICON_POINTS: 'ICON_GRID', ICONPOINTS: 'ICON_GRID', ICON_LIST: 'ICON_GRID', BULLETS: 'LIST_BUILD', BULLET_LIST: 'LIST_BUILD',
+  TWO_COLUMN: 'SPEC_COMPARE', TWOCOLUMN: 'SPEC_COMPARE', COMPARISON: 'SPEC_COMPARE', VERSUS: 'SPEC_COMPARE',
+  CALL_TO_ACTION: 'OUTRO_CTA', CTA: 'OUTRO_CTA', END_TITLE: 'OUTRO_CTA', ENDTITLE: 'OUTRO_CTA', ENDCARD: 'OUTRO_CTA', OUTRO: 'OUTRO_CTA',
+  STATEMENT: 'KINETIC_TEXT', TEXT: 'KINETIC_TEXT', CODE: 'CODE_WINDOW', QUOTE: 'QUOTE_SPOTLIGHT', TITLE: 'TITLE_CARD',
+};
 const lev = (a, b) => {
   const m = a.length, n = b.length; const d = Array.from({length: m + 1}, (_, i) => [i, ...Array(n).fill(0)]);
   for (let j = 0; j <= n; j++) d[0][j] = j;
@@ -151,6 +162,21 @@ const resolveAnchors = (node, narration, wc, log, warn, tag) => {
       else { node[target] = node[target] ?? Math.max(1, Math.round(wc / 2)); warn(`${tag} anchor phrase "${node[key]}" not found in narration — placed at ~middle`); }
       delete node[key];
     }
+    // a *AtWord / atWord field GIVEN A STRING instead of an index. Models often
+    // write atWord:"reasoning" (the word) rather than the index — left as a string
+    // it reaches spring()/interpolate() as NaN and CRASHES the render (lint can't
+    // see it). Resolve the word to an index, else place ~middle. Numeric strings
+    // ("3") coerce to the number.
+    else if (/atWord$/i.test(key) && typeof node[key] === 'string') {
+      const raw = node[key];
+      if (raw.trim() !== '' && !isNaN(Number(raw))) {
+        node[key] = Math.min(Math.max(1, Math.round(Number(raw))), Math.max(1, wc));
+      } else {
+        const idx = wordIndexOf(narration, raw);
+        node[key] = idx != null ? Math.min(Math.max(1, idx), Math.max(1, wc)) : Math.max(1, Math.round(wc / 2));
+        log(`${tag} ${key}:"${raw}"→${node[key]} (word→index; was a string, would render NaN)`);
+      }
+    }
   }
   for (const v of Object.values(node)) if (v && typeof v === 'object') resolveAnchors(v, narration, wc, log, warn, tag);
 };
@@ -197,6 +223,13 @@ export function normalizeSpec(spec) {
     // console-owned fields
     sc.id = `s${String(i + 1).padStart(2, '0')}`;
     if (sc.component && !sc.type) { sc.type = sc.component; delete sc.component; log(`${tag} component→type`); }
+    // unknown TYPE name → real palette type (alias table, then edit-distance snap).
+    // Fires ONLY for a type the palette doesn't contain, so valid specs are untouched.
+    if (sc.type && !MANIFEST[sc.type]) {
+      const up = String(sc.type).toUpperCase().replace(/[\s-]+/g, '_');
+      const mapped = (MANIFEST[up] ? up : TYPE_ALIASES[up]) || snap(up, Object.keys(MANIFEST), 2);
+      if (mapped && MANIFEST[mapped]) { log(`${tag} type "${sc.type}"→"${mapped}"`); sc.type = mapped; }
+    }
     const wc = wordCount(sc.narration);
     const isTts = sc.timingSource === 'tts';
     if (!isTts) {
@@ -224,6 +257,13 @@ export function normalizeSpec(spec) {
 
     // data normalization, manifest-driven
     const d = sc.data || (sc.data = {});
+    // DIAGRAM layout must be one of the 5 engine layouts; snap an invented one
+    // (e.g. "comparison") to the nearest, else default to flow (never a hard reject).
+    if (d.diagram && d.diagram.layout && !['flow', 'sequence', 'block', 'tree', 'hub'].includes(d.diagram.layout)) {
+      const s = snap(d.diagram.layout, ['flow', 'sequence', 'block', 'tree', 'hub'], 3) || 'flow';
+      log(`${tag} diagram layout "${d.diagram.layout}"→"${s}"`);
+      d.diagram.layout = s;
+    }
     const man = MANIFEST[sc.type];
     if (man) {
       // 1 · structural rewrites

@@ -45,6 +45,44 @@ function familyGroups() {
   return Object.entries(g).filter(([, ts]) => ts.length > 1).map(([f, ts]) => `${f} = ${ts.join(', ')}`).join('; ');
 }
 
+// Present the palette GROUPED BY INTENT (not the raw Object.keys order). A flat
+// 136-line dump buries the specialized components after the core editorial ones,
+// so models anchor on the head of the list; grouping by what each does makes the
+// long tail discoverable and defeats that primacy bias.
+const CATEGORY_ORDER = [
+  ['structure', 'STRUCTURE — the spine (open, name, chapter, recap, close)'],
+  ['text', 'TEXT MOMENTS — a single line as a beat'],
+  ['list', 'LISTS'],
+  ['editorial', 'EDITORIAL — quote / flip'],
+  ['data', 'DATA & NUMBERS'],
+  ['chart', 'CHARTS — choose by the SHAPE of the data'],
+  ['diagram', 'DIAGRAMS, FLOWS & MECHANISMS'],
+  ['icon', 'ICONS'],
+  ['branding', 'LOGOS & BRAND (si: only)'],
+  ['mockup', 'MOCKUPS — chat / notification'],
+  ['media', 'MEDIA — photo / video / overlays'],
+  ['code', 'CODE'],
+  ['stream', 'TERMINAL & LOGS'],
+  ['framed', 'DEVICES, BROWSERS & WINDOWS'],
+  ['gauge', 'GAUGES & METERS'],
+  ['zone', 'SYSTEM ZONES'],
+  ['systems', 'HARDWARE & SYSTEMS'],
+];
+function groupedPalette(render, sep) {
+  const byCat = {};
+  for (const t of MANIFEST_TYPES) { const c = MANIFEST[t].category || 'other'; (byCat[c] ||= []).push(t); }
+  const seen = new Set();
+  const out = [];
+  for (const [cat, title] of CATEGORY_ORDER) {
+    const ts = byCat[cat]; if (!ts || !ts.length) continue;
+    ts.forEach((t) => seen.add(t));
+    out.push(`### ${title}`, ts.map(render).join(sep));
+  }
+  const rest = MANIFEST_TYPES.filter((t) => !seen.has(t)); // safety net: never drop a type
+  if (rest.length) out.push('### OTHER', rest.map(render).join(sep));
+  return out.join('\n');
+}
+
 // ONE literal example scene — teaches the exact envelope keys the app expects.
 const exampleScene = [
   '## ONE COMPLETE EXAMPLE SCENE (copy these envelope keys EXACTLY)',
@@ -76,6 +114,26 @@ const NARRATION_VOICE = [
   '- Never stack three flat declaratives in a row; that is what makes TTS sound like a robot.',
 ].join('\n');
 
+// REACH-FOR — the missing POSITIVE pressure. The palette teaches WHAT each
+// component is; this teaches WHEN to reach for it from a content signal, so the
+// model stops collapsing every topic onto HOOK/TITLE_CARD/STAT_CALLOUT/LIST_BUILD/
+// STEP_FLOW/RECAP/OUTRO. A number is NOT automatically a STAT_CALLOUT; a
+// comparison is NOT automatically a list. Ported from the director skill (4b).
+const REACH_FOR = [
+  '## REACH FOR THE RIGHT SHAPE (match the component to what the narration NAMES \u2014 do not default to text/lists)',
+  'When a line names one of these, use the component built for it:',
+  '- a company / product / tool / brand \u2192 LOGO_WALL (a set / \u201ctrusted by\u201d), LOGO_VERSUS (X vs Y), LOGO_TIMELINE (evolution), or ICON_CALLOUT (one hero). Brand logos via si: only.',
+  '- a tech stack / feature set / \u201cwhat\u2019s included\u201d \u2192 ICON_GRID; \u201cconnects to everything\u201d / an ecosystem hub \u2192 ICON_BURST.',
+  '- data BY SHAPE: trend over time \u2192 LINE_CHART; share of a whole \u2192 DONUT or PICTOGRAM; ranking / magnitude \u2192 BAR_COMPARE; conversion / drop-off \u2192 FUNNEL; cumulative +/\u2212 bridge \u2192 WATERFALL; multi-axis profile \u2192 RADAR; price / OHLC \u2192 CANDLESTICK; spread / variance \u2192 BOX_PLOT; nested sizes \u2192 TREEMAP; flow of value \u2192 SANKEY; ONE hero number \u2192 STAT_CALLOUT; a few numbers \u2192 STAT_PANELS.',
+  '- a market / stock / crypto / live prices \u2192 TICKER_TAPE.',
+  '- a mechanism / architecture / how-it-works \u2192 DIAGRAM (sequence=handshake, tree=hierarchy, block=architecture, hub=one-to-many, flow=pipeline) or CONCEPT_DIAGRAM; a numbered / sequential process \u2192 STEP_FLOW or PIPELINE; two forking outcomes \u2192 SPLIT_PATHS.',
+  '- a phone / app / device / UI \u2192 DEVICE_FRAME, WINDOW_FRAME, or CHAT_MOCKUP; code / a terminal \u2192 CODE_WINDOW, CODE_EDITOR, or TERMINAL_SESSION.',
+  '- bits / bytes / memory / quantization \u2192 BITS, MEMORY, or NUMBER_BASE; encryption \u2192 ENCRYPTION; a data structure \u2192 POINTER_DIAGRAM, QUEUE, or CALL_STACK.',
+  '- set-pieces: an equation \u2192 FORMULA; chemistry \u2192 MOLECULE; genetics \u2192 DNA_HELIX; \u201clabel the parts\u201d \u2192 LABELED_FIGURE; physics forces \u2192 VECTOR_FIELD; a circuit \u2192 CIRCUIT_FLOW; monitoring / scanning \u2192 MAP_RADAR.',
+  '- a punch / breather / one-line statement \u2192 KINETIC_TEXT; a person or principle that carries weight \u2192 QUOTE_SPOTLIGHT; a dated sequence \u2192 TIMELINE.',
+  'Every video needs at least one genuinely VISUAL moment (a diagram, chart, device, media, or kinetic beat). A spec built only from HOOK / TITLE_CARD / STAT_CALLOUT / LIST_BUILD / STEP_FLOW / RECAP / OUTRO_CTA is under-directed and will be REJECTED \u2014 those are the connective tissue, not the whole video. These are cues, not quotas: still obey the anti-monotony law and one idea per scene.',
+].join('\n');
+
 // ---- shared blocks -----------------------------------------------------------
 const truth = source
   ? ['## TRUTH (most important)', 'Ground EVERY fact ONLY in the SOURCE below. Never invent numbers, dates,',
@@ -90,7 +148,7 @@ const laws = [
   `1. Scene 1 is HOOK; the last scene is OUTRO_CTA (or RECAP).`,
   `2. Scene count for "${preset}": ${sceneRange[0]}\u2013${sceneRange[1]} (a ${format} video).`,
   `3. Anti-monotony: never two same-family components adjacent; use \u2265 min(8, round(N/2)) DISTINCT types; no single type > ~35% of scenes.`,
-  `3b. These count as ONE family - NEVER place two adjacent: ${familyGroups()}.`,
+  `3b. Vary the skeleton — avoid placing two of the same shape-family back-to-back (they read as one look): ${familyGroups()}.`,
   `4. HOOK narration \u2264 ${HOOK_MAX_WORDS} words (it must fit \u22648s). One clear idea per scene; spoken, \u226420-word sentences.`,
   `5. Studio components (${STUDIO_SOURCE_TYPES.join(', ')}) MUST include a factual "source" \u2264${advertised(BUDGET.source)} chars.`,
   `6. Semantic colors MEAN: green=works, red=broken, blue=info, purple=AI, orange=tension, yellow=cost.`,
@@ -111,11 +169,11 @@ function stage1() {
   return [
     'You are the DIRECTOR of iAuteur, a video factory. STAGE 1 of 2: plan the BEAT SHEET only.',
     'Output ONLY the JSON described in OUTPUT — no prose, no spec data yet.', '',
-    brief, '', truth, '', laws, '',
+    brief, '', truth, '', laws, '', REACH_FOR, '',
     NARRATION_VOICE, '',
     '## topicAxes — pick \u22652 (channel strategy):', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
-    `## COMPONENT MENU (choose types from THIS list only — ${MANIFEST_TYPES.length} available)`,
-    MANIFEST_TYPES.map(menuLine).join('\n'), '',
+    `## COMPONENT MENU (choose types from THIS list only — ${MANIFEST_TYPES.length} available, grouped by what they do)`,
+    groupedPalette(menuLine, '\n'), '',
     '## OUTPUT (one JSON object)',
     '```json',
     '{',
@@ -151,7 +209,8 @@ function stage2() {
     '- Do NOT write durationFrames, timingSource, fps, or scene id \u2014 the app owns those.',
     '- `transition` (optional) is a SCENE CUT, one of: ' + TRANSITIONS.join(', ') + '.',
     '- background (optional): zoneA|zoneB|zoneC or a named background.',
-    `- Studio components need a "source". HOOK headline \u2264${advertised(BUDGET.hookHeadline)}.`, '',
+    `- Studio components need a "source". HOOK headline ≤${advertised(BUDGET.hookHeadline)}.`,
+    `- ${format === 'short' ? 'cover' : 'thumbnail'}.title ≤ ${advertised(BUDGET.coverTitle)} chars — a SHORT punch (3–4 words), NOT the full topic; badge ≤ ${advertised(BUDGET.badgeInCard)}.`, '',
     '## OUTPUT \u2014 story & look already come from the beat sheet + console. Return ONLY:',
     '```json',
     '{',
@@ -169,16 +228,17 @@ function single() {
   return [
     'You are the DIRECTOR of iAuteur, a video factory. Produce a complete spec JSON in ONE response.',
     'First think a beat sheet, then output ONLY the final spec JSON (no prose).', '',
-    brief, '', truth, '', laws, '', exampleScene, '',
+    brief, '', truth, '', laws, '', REACH_FOR, '', exampleScene, '',
     NARRATION_VOICE, '',
     '## topicAxes — pick \u22652:', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
-    `## COMPONENT PALETTE (${MANIFEST_TYPES.length} types — use ONLY these; each with its exact data schema)`,
-    '(`!`=required · `?`=optional · `\u2264N`=max chars · anchors: `at:"word"` copied from the scene\u2019s narration)',
+    `## COMPONENT PALETTE (${MANIFEST_TYPES.length} types — use ONLY these; grouped by what they do; each with its exact data schema)`,
+    '(`!`=required · `?`=optional · `\u2264N`=max chars · anchors: `at:"word"` copied from the scene’s narration)',
     BUDGET_LAW, '',
-    MANIFEST_TYPES.map(schemaDSL).join('\n\n'), '',
+    groupedPalette(schemaDSL, '\n\n'), '',
     '## RULES',
     '- Do NOT write durationFrames, timingSource, fps, or scene id \u2014 the app owns those.',
-    '- `transition` is a SCENE CUT: ' + TRANSITIONS.join(', ') + '. (Entrance animations live inside a component\u2019s data, never as a transition.)', '',
+    '- `transition` is a SCENE CUT: ' + TRANSITIONS.join(', ') + '. (Entrance animations live inside a component’s data, never as a transition.)',
+    `- ${format === 'short' ? 'cover' : 'thumbnail'}.title ≤ ${advertised(BUDGET.coverTitle)} chars — a SHORT punch (3–4 words), NOT the full topic; badge ≤ ${advertised(BUDGET.badgeInCard)}.`, '',
     '## OUTPUT \u2014 the console owns the envelope (topic/format/design/theme/channel are added by the app).',
     'Return ONE JSON object with EXACTLY these keys \u2014 NO meta, NO brand:',
     '```json',

@@ -38,10 +38,14 @@ for (const b of beats) {
 }
 
 for (let i = 1; i < n; i++) {
+  // Coarse manifest-family adjacency is ADVISORY only: the FINAL linter enforces
+  // just the fine CONSOLIDATED set (below), so erroring here would false-reject a
+  // beat sheet the assembled spec would pass (e.g. CONCEPT_DIAGRAM then STEP_FLOW,
+  // two visually-distinct diagram-category beats). Keep it as a nudge, not a gate.
   const fa = familyOf(beats[i].type);
   if (fa === familyOf(beats[i - 1].type) && RESTRICTED_FAMILIES.includes(fa))
-    E(`same-family adjacency: beats ${i} and ${i + 1} are both ${fa}-family — vary the skeleton (a different component)`);
-  // fine-grained: mirror the linter's CONSOLIDATED adjacency exactly.
+    W(`beats ${i} and ${i + 1} are both ${fa}-family — varying the skeleton usually reads better (advisory; not enforced)`);
+  // fine-grained: mirror the linter's CONSOLIDATED adjacency exactly (this IS a gate).
   const lfa = linterFamilyOf(beats[i].type);
   if (lfa === linterFamilyOf(beats[i - 1].type) && CONSOLIDATED.has(lfa))
     E(`consolidated-family adjacency: beats ${i} and ${i + 1} are both ${lfa} — the linter will reject this; reach for a different skeleton (see references/scene_library.md)`);
