@@ -27,7 +27,44 @@ Copilot, Claude, Cursor, or a **local LLM** (Ollama / LM Studio) equally. See [W
 
 ---
 
+## 🎬 Make your first video — the simple way
+
+New here? Follow these steps in order. You do **not** need to understand code. You type a few
+lines once, then mostly click buttons and copy‑paste.
+
+**What you need first (one‑time, ~10 minutes):**
+1. Install **Node.js** — go to [nodejs.org](https://nodejs.org), download the big green "LTS" button, click through the installer.
+2. Install **Python** — go to [python.org/downloads](https://www.python.org/downloads/), download, install (on Windows, tick **"Add Python to PATH"** during install).
+3. You also need an AI chat you already use — like **Claude** (claude.ai) or **GitHub Copilot Chat**. That's the "writer."
+
+**Set it up (type these once):** open the project folder in a terminal, then type each line and press Enter:
+```
+npm install
+pip install -r webui/requirements.txt
+```
+
+**Now make a video.** Start the control panel — type `python webui/app.py`, then open
+**http://127.0.0.1:5000** in your browser. The page walks you through **5 numbered steps** across the
+top (Topic → Design → Author → Voiceover → Render). Follow them left to right:
+
+1. **Step 1 · Topic.** Type your video idea (e.g. *"How Wi‑Fi works"*) and choose **Long**, **Shorts**, or **Both**. Click Next.
+2. **Step 2 · Design.** Click the look you like from the row of preview pictures. Click Next.
+3. **Step 3 · Author** (this is where the AI writes it):
+   - Under **Authoring mode**, click **Single‑paste** (the simplest).
+   - Click **Generate single‑paste prompt**, then click **copy**.
+   - Paste that into your AI chat (Claude / Copilot) and send. The AI replies with a block of text that starts with `{` (that's the "JSON"). Copy the AI's **whole** reply.
+   - Back in the console, paste it into the box labelled **paste the model's reply JSON**, then click **Assemble → normalize → lint**.
+   - If it turns **green** (“Lint PASS”), you're good. If it shows a **red** error, paste that error back to your AI, get a corrected reply, and paste again.
+4. **Step 4 · Voiceover** (optional). Pick a voice and click generate to have it read the script aloud.
+5. **Step 5 · Render.** Click **Render wide · dark** (the main 16:9 video) — or any of *Render wide · light*, *Render short · dark*, *Render short · light*. Watch progress in the **Console** at the bottom; when it says ✓ done, your finished `.mp4` appears under **Outputs**. 🎉
+
+> The whole loop: **type your idea → Generate prompt → copy → your AI writes it → paste it back → Assemble → Render.**
+> Everything below in this README is the detailed/advanced version for people who want the terminal.
+
+---
+
 ## Table of contents
+- [🎬 Make your first video — the simple way](#-make-your-first-video--the-simple-way)
 - [Showcase](#showcase)
 - [What this project is](#what-this-project-is)
 - [How it works (architecture)](#how-it-works-architecture)

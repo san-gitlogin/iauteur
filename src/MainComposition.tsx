@@ -143,11 +143,13 @@ import {TalkingPoints} from './scenes/TalkingPoints';
 import {SlideBulletsPip} from './scenes/SlideBulletsPip';
 import {CaptionKineticOverlay} from './scenes/CaptionKineticOverlay';
 import {PhotoTimeline} from './scenes/PhotoTimeline';
+import {TradeoffScale} from './scenes/TradeoffScale';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
   HOOK: Hook,
   TITLE_CARD: TitleCard,
+  TRADEOFF_SCALE: TradeoffScale,
   CONCEPT_DIAGRAM: ConceptDiagram,
   DIAGRAM: Diagram,
   KINETIC_TEXT: KineticText,

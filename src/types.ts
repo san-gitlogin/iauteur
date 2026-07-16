@@ -1169,6 +1169,22 @@ export interface NumberBaseData {
   atWord?: number;
 }
 
+export interface TradeoffSide {
+  label?: string;
+  sub?: string;
+  asset?: string;
+  color?: SemColor;
+}
+export interface TradeoffScaleData {
+  headline?: string;
+  left?: TradeoffSide;
+  right?: TradeoffSide;
+  lean?: number; // -1..1 — negative favours LEFT (left pan sinks), positive favours RIGHT, 0 balanced
+  caption?: string;
+  atWord?: number;
+  source?: string;
+}
+
 export interface SceneData {
   // HOOK
   headline?: string;
@@ -1192,6 +1208,8 @@ export interface SceneData {
   wave?: WaveData;
   reveal?: RevealData;
   logo?: LogoData;
+  // TRADEOFF_SCALE
+  tradeoff?: TradeoffScaleData;
   // CAROUSEL / CREDITS_ROLL / SUBSCRIBE_REMINDER
   carousel?: CarouselData;
   credits?: CreditsData;

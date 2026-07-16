@@ -5,13 +5,13 @@ import {selectComposition, renderStill} from '@remotion/renderer';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const [specPath, design = 'moderndark', aspect = 'vert', tag = 'sceneproof', list = ''] = process.argv.slice(2);
+const [specPath, design = 'moderndark', aspect = 'vert', tag = 'sceneproof', list = '', theme = design] = process.argv.slice(2);
 const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 const want = new Map(list.split(',').filter(Boolean).map((p) => { const [id, f] = p.split(':'); return [id, parseFloat(f || '0.6')]; }));
 const outDir = `out/proof/${tag}`;
 fs.mkdirSync(outDir, {recursive: true});
 const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts')});
-const inputProps = {spec, themeOverride: design, designOverride: design};
+const inputProps = {spec, themeOverride: theme, designOverride: design};
 const comp = aspect === 'wide' ? `${design}-wide` : `${design}-short`;
 const c = await selectComposition({serveUrl, id: comp, inputProps, timeoutInMilliseconds: 180000});
 

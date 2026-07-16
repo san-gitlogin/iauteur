@@ -24,8 +24,10 @@ import long10 from '../topics/terawulf-anthropic-lease/long.json';
 import shorts10 from '../topics/terawulf-anthropic-lease/shorts.json';
 import long11 from '../topics/the-biggest-ai-stories-of-july-2026/long.json';
 import shorts11 from '../topics/the-biggest-ai-stories-of-july-2026/shorts.json';
-import long12 from '../topics/xrp-prediction/long.json';
-import shorts12 from '../topics/xrp-prediction/shorts.json';
+import long12 from '../topics/why-computers-get-0-1-plus-0-2-wrong/long.json';
+import shorts12 from '../topics/why-computers-get-0-1-plus-0-2-wrong/shorts.json';
+import long13 from '../topics/xrp-prediction/long.json';
+import shorts13 from '../topics/xrp-prediction/shorts.json';
 
 export interface TopicEntry {slug: string; long: VideoSpec; shorts: VideoSpec | null;}
 
@@ -42,5 +44,6 @@ export const topics: TopicEntry[] = [
   {slug: 'react-basics', long: long9 as unknown as VideoSpec, shorts: shorts9 as unknown as VideoSpec},
   {slug: 'terawulf-anthropic-lease', long: long10 as unknown as VideoSpec, shorts: shorts10 as unknown as VideoSpec},
   {slug: 'the-biggest-ai-stories-of-july-2026', long: long11 as unknown as VideoSpec, shorts: shorts11 as unknown as VideoSpec},
-  {slug: 'xrp-prediction', long: long12 as unknown as VideoSpec, shorts: shorts12 as unknown as VideoSpec},
+  {slug: 'why-computers-get-0-1-plus-0-2-wrong', long: long12 as unknown as VideoSpec, shorts: shorts12 as unknown as VideoSpec},
+  {slug: 'xrp-prediction', long: long13 as unknown as VideoSpec, shorts: shorts13 as unknown as VideoSpec},
 ];

@@ -100,18 +100,43 @@ const exampleScene = [
 // demanding character arithmetic (which they can't do).
 const BUDGET_LAW = '`\u2264N` is a COUNTED limit \u2014 N+1 characters is rejected outright, so never write up to it. Use the shortest natural phrasing: labels, list items, and step titles read best at 3\u20136 words. If something doesn\u2019t fit naturally, rephrase it \u2014 never pad, never squeeze.';
 
-// VOICE — narration is spoken by Edge-TTS, whose prosody is driven ENTIRELY by
-// punctuation. Flat, comma-less sentences sound robotic; this block makes the
-// script breathe. Applies to every narration the model writes (stage 1 + single).
+// VOICE — two layers. (1) NARRATIVE CRAFT: the script must sound like a human who
+// KNOWS the topic explaining it to one friend — a point of view, an open loop, one
+// carried analogy, a fair cold-water beat, a real takeaway. This is the "soul" that
+// separates a genuine explainer from a Wikipedia read-aloud. (2) SPOKEN RHYTHM: the
+// narration is read by a neural TTS voice whose prosody is driven ENTIRELY by
+// punctuation, so the writing must physically breathe. Applies to every narration
+// the model writes (stage 1 + single). The scene narrations, read top to bottom,
+// are ONE continuous spoken monologue — write them to flow into each other.
 const NARRATION_VOICE = [
-  '## VOICE \u2014 write narration to be SPOKEN, not read',
-  'The narration is fed to a neural TTS voice; its rhythm comes ONLY from your punctuation.',
-  '- Use commas for natural breath pauses, and em-dashes (\u2014) for a beat or an aside.',
-  '- Ask real questions (?) to lift intonation; use the occasional short punch. Not everything!',
-  '- Use contractions (it\u2019s, they\u2019re, that\u2019s) and vary sentence length \u2014 a long line, then a short one.',
-  '- Open scenes like a host continuing a story (\u201cBut here\u2019s the twist\u2026\u201d, \u201cAnd that\u2019s when\u2026\u201d), not a textbook.',
+  '## VOICE \u2014 write like a human who KNOWS this, talking to ONE friend (not a textbook, not a press release)',
+  'Read the scene narrations top-to-bottom as ONE continuous spoken monologue \u2014 each line should flow into the next, not restart.',
+  '- Open on what the viewer already believes or has \u201cheard a hundred times,\u201d then complicate it. Take a clear STANCE in the first breath (\u201cThe honest answer? No \u2014 and also, kind of yes.\u201d).',
+  '- Plant ONE open loop early (\u201clet me show you exactly what broke\u201d) and pay it off before the end. Use callbacks \u2014 reference something you said earlier so the video feels authored, not assembled.',
+  '- Carry ONE analogy the whole way through; don\u2019t start a fresh metaphor every scene.',
+  '- Be fair to the other side before you make your case (\u201csome fairness \u2014 I genuinely like X\u201d) and include ONE honest limitation or cold-water beat. Nuance reads as authority; cheerleading reads as an ad.',
+  '- Prefer the concrete over the abstract: a real product the viewer uses, a moment they remember, a named example \u2014 never \u201ca certain framework.\u201d',
+  '- Land on a real TAKEAWAY: what the viewer should now DO or believe \u2014 not a summary of what you just said.',
+  '',
+  '## SPOKEN RHYTHM \u2014 the narration is read by a neural TTS voice; its rhythm comes ONLY from your punctuation',
+  '- Commas for natural breath pauses; em-dashes (\u2014) for a beat or an aside; real questions (?) to lift intonation.',
+  '- Use contractions (it\u2019s, they\u2019re, that\u2019s) and vary sentence length \u2014 a long line, then a short punch. Not everything is a full sentence.',
   '- Read each line aloud in your head: if it sounds stiff or listy, rewrite it until it flows.',
-  '- Never stack three flat declaratives in a row; that is what makes TTS sound like a robot.',
+  '- Never stack three flat declaratives in a row \u2014 that is exactly what makes TTS sound like a robot.',
+].join('\n');
+
+// RESEARCH — a bare topic is a starting point, not the script. This block makes the
+// model MINE the topic for concrete, real specifics (named companies/products/
+// versions/events/numbers) instead of paraphrasing the one line it was handed. It is
+// written to coexist with the TRUTH block: research means pulling in VERIFIABLE
+// specifics, never inventing time-sensitive facts.
+const RESEARCH_DEPTH = [
+  '## RESEARCH THE TOPIC \u2014 go BEYOND the one line you were given',
+  'A topic is where you START, not what you write. A knowledgeable person doesn\u2019t summarize a headline \u2014 they reach for the specifics that prove they actually understand it.',
+  '- If you can browse or search, do it NOW and pull CONCRETE specifics: the named companies, products, versions, dates, and real numbers an expert would cite (e.g. \u201cFigma\u2019s canvas is C++ compiled to WebAssembly,\u201d \u201cBlazor is roughly 42% of live WASM\u201d). Specifics are what separate an expert from a summary.',
+  '- Find the ONE surprising, non-obvious truth underneath the headline \u2014 the thing most explainers miss \u2014 and build the whole video around it.',
+  '- Show who ACTUALLY wins today and where the hype breaks down; a real, current landscape beats a vague overview.',
+  '- TRUTH still governs everything (see above): never fabricate a number, quote, version, or date. If you can\u2019t verify a time-sensitive fact, write `MISSING: <fact>` and mark illustrative figures with data.source "illustrative". Well-established evergreen facts you are confident about are fine.',
 ].join('\n');
 
 // REACH-FOR — the missing POSITIVE pressure. The palette teaches WHAT each
@@ -169,7 +194,7 @@ function stage1() {
   return [
     'You are the DIRECTOR of iAuteur, a video factory. STAGE 1 of 2: plan the BEAT SHEET only.',
     'Output ONLY the JSON described in OUTPUT — no prose, no spec data yet.', '',
-    brief, '', truth, '', laws, '', REACH_FOR, '',
+    brief, '', truth, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '',
     NARRATION_VOICE, '',
     '## topicAxes — pick \u22652 (channel strategy):', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
     `## COMPONENT MENU (choose types from THIS list only — ${MANIFEST_TYPES.length} available, grouped by what they do)`,
@@ -228,7 +253,7 @@ function single() {
   return [
     'You are the DIRECTOR of iAuteur, a video factory. Produce a complete spec JSON in ONE response.',
     'First think a beat sheet, then output ONLY the final spec JSON (no prose).', '',
-    brief, '', truth, '', laws, '', REACH_FOR, '', exampleScene, '',
+    brief, '', truth, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '', exampleScene, '',
     NARRATION_VOICE, '',
     '## topicAxes — pick \u22652:', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
     `## COMPONENT PALETTE (${MANIFEST_TYPES.length} types — use ONLY these; grouped by what they do; each with its exact data schema)`,

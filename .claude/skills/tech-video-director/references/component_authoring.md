@@ -253,10 +253,67 @@ which is the whole point of this library.
 
 ---
 
+---
+
+## 5b. VISUAL CRAFT LAWS — a component that compiles is NOT done; a component is done when it is BEAUTIFUL
+
+A scaffold gives you a token-driven, `×scale`, both-aspect skeleton. That is the START. The
+laws below are what turn a skeleton into a broadcast-quality scene, and they are checked in the
+render-proof (view the stills against each). If a still fails one of these, fix the component.
+
+### Typography & calligraphy
+- **Font ROLES, never a literal family.** `t.fonts.display` = headings / hero lines (heavy, use
+  `t.style.displayWeight` + `t.style.displayTracking`); `t.fonts.body` = prose, labels, subs;
+  `t.fonts.mono` = numbers, code, ids, addresses, kickers (tabular figures); `t.fonts.accent` =
+  a script/serif flourish ONLY (a kicker or one short aside) — never body text, never data.
+- **Hierarchy: one dominant size per frame.** Step sizes on a ratio (~1.25–1.5), never two
+  competing large texts. The eye must know where to land first.
+- **Weight & tracking:** big display gets slightly TIGHT tracking; uppercase mono kickers get
+  POSITIVE letter-spacing (~2–3×scale); body stays default. Line-height: display 1.05–1.12,
+  body 1.3–1.45 — never cramped, never airy.
+- **Calligraphy/accent fonts are seasoning:** ≤1 short accent-font phrase per frame; if it must
+  be READ at a glance, it is body/display, not script.
+
+### Alignment & visual perfection
+- **Align via STRUCTURE (grid / flex / SVG math), never magic offsets.** Labels pinned to a shape
+  live in that shape's own SVG coord space (see §5 lessons) so they never drift.
+- **One optical center, generous safe margins.** Content sits in the middle band; nothing touches
+  edges (≥48×scale wide, more on vertical). Numerals tabular; icon+label share a baseline.
+- **One spacing rhythm.** Pick a gap scale (e.g. 6/12/20/28×scale) and reuse it — no one-off gaps.
+- **One focal point per frame.** Exactly one glow/emphasis; everything else recedes. Two focal
+  points = no focal point.
+
+### Transparency, opacity & blur (the most common "looks broken" bug)
+- **Anything that must be READ sits on an OPAQUE surface** (`t.colors.panel` + border, shadow gated
+  on `t.style.glow`). Tooltips, popovers, labels over content/code, callout cards = opaque. A
+  translucent panel over text/code reads as a broken overlap (a real, paid-for catch — §5).
+- **Alpha (`hexA`) is for DE-EMPHASIS only** — faint gridlines, inactive edges, glow halos, a scrim
+  behind a hero. Never put legible text on a semi-transparent fill over a busy background.
+- **Blur is conditional.** `backdrop-blur` only when the backdrop is busy AND the foreground stays
+  high-contrast; on flat themes (`t.style.glow === 0`, e.g. neobrutalism) prefer a SOLID fill over
+  blur/glass. Never leave an element at rest at partial opacity — fade interpolations clamp 0→1.
+
+### Colour theory & dark/light (recap of §0 — verify in the proof)
+- Semantic colours MEAN (green=works, red=broken, blue=info, purple=AI, orange=tension, yellow=cost);
+  an active element glows in ITS OWN semantic colour, not the global accent.
+- Contrast: text = `t.colors.text`/`muted`; glyph on a coloured fill = `t.colors.onAccent`; icons via
+  `AssetIcon on={bg}` (luminance guard). Verify on a LIGHT twin (daylight/paper) AND dark.
+
+### Motion
+- Entrances 12–18f, staggered by index; deterministic (pure function of frame); clamp both sides;
+  content animates AFTER its frame/chrome settles. No `whiteSpace:'nowrap'` without a `maxWidth`.
+
+---
+
 ## 6. Definition of done (all must be true)
 [ ] tokens + `×scale` only — zero hardcoded colours/fonts/radii/px
 [ ] wide AND vertical layouts defined and render-proven (stills viewed)
 [ ] proven in material (rounded+glow) AND neobrutalism (flat+sharp+grid) — adaptation confirmed
+[ ] proven on a LIGHT twin (daylight/paper) too — contrast holds, no invisible text
+[ ] TYPOGRAPHY: display/body/mono/accent roles correct; one dominant size; tracking + line-height tuned
+[ ] ALIGNMENT: structural (grid/flex/SVG), one optical centre, one spacing rhythm, safe margins, one focal point
+[ ] TRANSPARENCY: read-text on OPAQUE surfaces; alpha/blur only for de-emphasis; nothing stuck at partial opacity
+[ ] COLOUR: semantic colours carry meaning; active element glows in its own colour; contrast verified both modes
 [ ] Three Guards on every bounded text; budgets added to `lint-spec.mjs`
 [ ] all six wiring files updated (types, scene, registry, linter TYPES+DYNAMIC+budgets, scene_library, showcaseSpec)
 [ ] `tsc` clean; `lint-all` clean apart from known immutable-topic rejections

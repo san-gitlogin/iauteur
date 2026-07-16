@@ -76,6 +76,7 @@ export type SceneTypeName =
   | 'CONFIDENCE_GATE'
   | 'SANDBOX_BOX'
   | 'FORMULA'
+  | 'TRADEOFF_SCALE'
   | 'MOLECULE'
   | 'DNA_HELIX'
   | 'LABELED_FIGURE'
@@ -756,6 +757,18 @@ export type FormulaScene = SceneCommon<'FORMULA'> & { data: {
     formula: {
       parts: Array<Record<string, unknown>>;
       label?: string;
+    };
+  } };
+
+export type TradeoffScaleScene = SceneCommon<'TRADEOFF_SCALE'> & { data: {
+    tradeoff: {
+      headline?: string;
+      left: Record<string, unknown>;
+      right: Record<string, unknown>;
+      lean?: number;
+      caption?: string;
+      atWord?: number;
+      source?: string;
     };
   } };
 
@@ -1456,6 +1469,7 @@ export interface SceneByType {
   CONFIDENCE_GATE: ConfidenceGateScene;
   SANDBOX_BOX: SandboxBoxScene;
   FORMULA: FormulaScene;
+  TRADEOFF_SCALE: TradeoffScaleScene;
   MOLECULE: MoleculeScene;
   DNA_HELIX: DnaHelixScene;
   LABELED_FIGURE: LabeledFigureScene;
@@ -1599,6 +1613,7 @@ export type TypedScene =
   | ConfidenceGateScene
   | SandboxBoxScene
   | FormulaScene
+  | TradeoffScaleScene
   | MoleculeScene
   | DnaHelixScene
   | LabeledFigureScene

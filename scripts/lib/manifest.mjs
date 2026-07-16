@@ -798,6 +798,21 @@ export const MANIFEST = {
     },
     example: {formula: {parts: [{text: 'H', kind: 'var'}, {text: '=', kind: 'op'}, {text: 'L', kind: 'var'}, {text: '\u00b7', kind: 'op'}, {text: 'log', kind: 'fn', sub: '2'}, {text: 'R', kind: 'var', highlight: true}], label: 'Password entropy in bits'}},
   },
+  TRADEOFF_SCALE: {
+    category: 'diagram', family: 'diagram', data_key: 'tradeoff',
+    purpose: 'A balance beam that tilts toward the favoured of two options.',
+    use_when: 'A genuine tradeoff between exactly two choices (speed vs safety, cost vs quality).',
+    fields: {
+      headline: {t: 'string', max: 48, note: 'one [accent] phrase allowed'},
+      left: {t: 'object', req: true, note: '{label≤20, sub?≤30, asset?:lucide:, color?}'},
+      right: {t: 'object', req: true, note: '{label≤20, sub?≤30, asset?:lucide:, color?}'},
+      lean: {t: 'number', note: '-1..1 — negative favours LEFT (left sinks), positive favours RIGHT, 0 balanced'},
+      caption: {t: 'string', max: 48, note: 'the tradeoff being weighed'},
+      atWord: {t: 'anchor'},
+      source: {t: 'string', max: 64},
+    },
+    example: {tradeoff: {headline: 'Speed vs [safety]', left: {label: 'Move fast', sub: 'ship daily', asset: 'lucide:rabbit', color: 'orange'}, right: {label: 'Stay safe', sub: 'review everything', asset: 'lucide:shield', color: 'blue'}, lean: 0.4, caption: 'Every team picks a point on this beam', atWord: 1, source: 'illustrative'}},
+  },
   MOLECULE: {
     category: 'diagram', family: 'diagram', data_key: 'molecule',
     purpose: 'Atoms (labelled nodes) + bonds (single/double/triple).',

@@ -321,7 +321,8 @@
               "TALKING_POINTS",
               "SLIDE_BULLETS_PIP",
               "CAPTION_KINETIC_OVERLAY",
-              "PHOTO_TIMELINE"
+              "PHOTO_TIMELINE",
+              "TRADEOFF_SCALE"
             ]
           },
           "narration": {
@@ -3218,6 +3219,58 @@
                           "type": "string",
                           "maxLength": 60,
                           "description": "caption below"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TRADEOFF_SCALE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "tradeoff": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "left": {
+                          "type": "object",
+                          "description": "{label≤20, sub?≤30, asset?:lucide:, color?}"
+                        },
+                        "right": {
+                          "type": "object",
+                          "description": "{label≤20, sub?≤30, asset?:lucide:, color?}"
+                        },
+                        "lean": {
+                          "type": "number",
+                          "description": "-1..1 — negative favours LEFT (left sinks), positive favours RIGHT, 0 balanced"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "the tradeoff being weighed"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64
                         }
                       }
                     }
