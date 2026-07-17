@@ -89,7 +89,7 @@ One background per video. New backgrounds (e.g. converted from 21st.dev) get add
 | COUNTDOWN | A numeric countdown moment (launch, "in 3…2…1", deadline) | countdown{from,label,color,atWord} |
 | FLIP_CARD | A card that flips front→back to reveal an answer/definition (Q→A, term→meaning) | flip{front,back,color,atWord} |
 | CAROUSEL | A 3D ring of option cards spinning past (choices, tools, options) — a dynamic breather | carousel{items[{label,sub,asset,color}],atWord} |
-| TIMELINE | A chronological sequence of dated milestones (history, roadmap, evolution) | timeline{events[{date,label,sub,color,atWord}]} |
+| TIMELINE | A chronological sequence of dated milestones (history, roadmap, evolution) | timeline{milestones[{date,title,sub,color,atWord}]} |
 | QUADRANT | A 2×2 positioning matrix (competitor/tradeoff map, axes labelled) | quadrant{axisX,axisY,points[{label,x,y,color,atWord}]} |
 | DONUT · variant:"donut"/"pie" | Parts of a whole; donut = ring + optional centre number, pie = solid wedges | donut{segments[{label,value,color,atWord}],variant,centerValue,centerLabel} |
 | FUNNEL | A conversion funnel: 2–6 tapering bands (width ∝ value) with a label gutter, the value inside each band, and the drop-off % from the prior stage. Reach for it when narration walks a drop-off (visits→signups→activation→paid, applicants→hires, leads→deals). Left-aligned taper; value font fits narrow bands | funnel{stages[{label(≤20),value,color,atWord}](2–6),color,unit} |
