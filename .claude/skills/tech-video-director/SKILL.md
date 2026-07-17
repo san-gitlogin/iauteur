@@ -44,8 +44,21 @@ The Remotion project renders exactly what the JSON says — the JSON is the movi
 
 ## Hard rules — THEME & VARIETY LAW
 - `brand.theme` is BY LAW a DARK skin; the 7 core skins are studio|neonGrid|midnight|terminal|linear|vapor|luxe, and every design pack also ships a dark theme twin (neobrutalism, cyberpunk, material, … — 38 dark themes total; the authoritative list is `DARK_THEMES` in `scripts/lint-spec.mjs`). Light variants render automatically; `brand.themeLight` (daylight|paper|brutalist) picks the light twin. Never set a light theme as brand.theme — the linter rejects it.
-- ROTATION IS MANDATORY: list every existing topics/*/long.json brand.theme first; never repeat the most recent; vary the background variant too, and vary the scene MIX (don't open every video HOOK→TITLE_CARD→STEP_FLOW). Two consecutive same-looking videos = defect.
+- ROTATION: **moderndark is the channel's standing default and MAY repeat** when the user picks no design (differentiate consecutive moderndark videos via background variant + screenplay + scene mix). For any non-default choice, list every existing topics/*/long.json brand.theme first and never repeat the most recent. Don't open every video HOOK→TITLE_CARD→STEP_FLOW. Two consecutive same-looking videos = defect.
 - 42 render-ready themes exist today (38 dark + 4 light) spanning the 30 design packs; for genuinely new looks, propose 2-3 from references/design_index.md (30 design skills) — conversion is a one-time approved Claude Code job under design_contract.md.
+
+## Hard rules — SPECIALIST VARIETY QUOTA (added 2026-07-17 after shipped videos came out flat)
+- The core editorial set (HOOK / TITLE_CARD / CHAPTER / LIST_BUILD / STAT_CALLOUT / STAT_PANELS / ICON_GRID / ICON_CALLOUT / KINETIC_TEXT / REVEAL / SPLIT_PATHS / BAR_COMPARE / COUNTDOWN / NOTIFICATION / QUOTE_SPOTLIGHT / FLIP_CARD / RECAP / OUTRO_CTA) is the COMFORT ZONE. Fifteen all-distinct types from this set is NOT variety. A long video pulls **≥¼ of its scenes from the specialist families**: charts beyond BAR_COMPARE (SANKEY, RADAR, TREEMAP, FUNNEL, WATERFALL, PICTOGRAM, DONUT, LINE_CHART), the DIAGRAM engine, tech set-pieces (NEURAL_NET, GRID_ARRAY, TRANSFORMER_BLOCK, TOKENIZER, EMBEDDING_SPACE, GPU_CLUSTER, DIE_SHOT, LAYERED_STACK, PACKET, PIPELINE, TIMELINE, TICKER_TAPE, MAP_RADAR, FORMULA), brand components (LOGO_WALL, LOGO_VERSUS, LOGO_TIMELINE), and the media/overlay family. The linter warns below quota — **treat that warning as a rejection and rework the spec**.
+- MATCH THE SHAPE, not the surface: an MoE model → NEURAL_NET or GRID_ARRAY (896 experts = a grid lighting up); a release date or history → TIMELINE; brand vs brand → LOGO_VERSUS; money/traffic flow → SANKEY; a market → TICKER_TAPE; an architecture → DIAGRAM/CLOUD_ARCH. If a beat's subject has a purpose-built component and you used a generic text card instead, that is a DEFECT.
+- SCENE LENGTH CAP: ~15s (≈450 frames) per scene. A 25-second narration is TWO beats — split it into two scenes with two different components. Long single-component scenes are the #1 cause of "nothing is happening on screen"; the linter flags every scene over 16s.
+- TRANSITIONS: ≥5 distinct `scene.transition` kinds per long video (16 exist), drawn from the screenplay preset's suggested set; vary `data.anim` entrances between adjacent scenes.
+
+## Hard rules — THUMBNAIL ART (never a generic icon when something better exists)
+Priority order for `thumbnail.asset` (long) and `cover.asset` (shorts):
+1. The subject's real brand logo via `si:<slug>` — VERIFY it exists first: `node -e "const si=require('simple-icons');console.log(Object.keys(si).filter(k=>/<name>/i.test(k)))"`.
+2. A user-supplied topic/press image in `public/assets/` via `img:` — ask for one in the interview when the topic is a brand with no si: logo.
+3. A topical set-piece still (render a proof frame of the video's strongest scene as the art).
+`lucide:` glyphs are the LAST resort, never the default. The channel logo (`public/assets/channel_logo.png`) is for branding scenes (CHANNEL_CARD / LOGO_REVEAL), not the thumbnail subject.
 
 ## Hard rules — TRUTH LAW
 - Today's date comes from the runtime environment, never from training memory.

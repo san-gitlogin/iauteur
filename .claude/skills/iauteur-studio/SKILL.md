@@ -21,11 +21,17 @@ themes, budgets, critic pass, upload kit) and — when building components — t
 
 The console is a form with defaults. Reproduce that feel:
 
-1. **Interview once, up front.** When the user asks for a video (or "use the console"),
-   ask the configuration questions in ONE batched round — do not drip them out.
+1. **Interview once, up front — a HARD GATE, not a suggestion.** When the user asks
+   for a video (or "use the console"), your FIRST action is one batched
+   AskUserQuestion round (format · minutes · design · voice/voiceover · thumbnail
+   art) — BEFORE new-topic, before research, before any authoring. Recorded
+   failure 2026-07-17: a session silently self-picked design, format, and voice and
+   only asked about voiceover at the end. Do not repeat that. Skip only questions
+   the user's message already answered.
 2. **Every question carries a DEFAULT.** Show it. If the user says "use defaults",
    "you pick", "just go", or answers only some, fill the rest from the defaults table
-   below and STATE what you chose. Never block waiting on an optional answer.
+   below and STATE what you chose. Never block waiting on an optional answer — but
+   the ASK itself (rule 1) is never skipped.
 3. **Override any time.** "make it cyberpunk", "shorts only", "British voice",
    "target 8 minutes" — re-apply and continue. Config is data, not a gate.
 4. **Only TRUTH and immutability are hard gates** (see the director skill): never
@@ -43,7 +49,7 @@ Ask these; anything unanswered takes the default. These mirror `webui/app.py` ex
 | **topic** | free text | — (required) | the only mandatory answer |
 | **slug** | kebab-case | derived from topic | `node scripts/new-topic.mjs` refuses duplicates |
 | **format** | both · long · shorts | **both** | long = 1920×1080, shorts = 1080×1920 |
-| **design** | 30 packs (see list) | **rotate** | pick by mood; obey the ROTATION LAW below |
+| **design** | 30 packs (see list) | **moderndark** | the user's standing default; see ROTATION LAW below |
 | **theme** | a DARK theme | = the design's dark twin | never a light theme (linter rejects) |
 | **themeLight** | daylight · paper · brutalist | **daylight** | the auto light variant |
 | **background** | theme default · aurora · grid · aurora-grid · plain · bokeh · starfield · grid-pulse · wave · ripple · gradient · geo | **theme default** | vary across videos, never within |
@@ -60,10 +66,11 @@ terminalcli, retro, material, neumorphism, artdeco, monochrome, academia, newspr
 clay, organic, industrial, playgeo, maximalism, simpledark, flatdesign, sketch,
 kinetic, crypto, corptrust, businessdeck, techstyle, boldtype, botanical, moderndark.
 
-**ROTATION LAW (mandatory).** Before proposing a design/theme, list existing choices:
-`Get-ChildItem topics -Recurse -Filter long.json | Get-Content -Raw | Select-String '"theme"'`
-(or read each `topics/*/long.json` `brand.theme`). Never repeat the most recent; vary the
-background too. Two consecutive same-looking videos is a defect.
+**ROTATION LAW.** **moderndark is the standing default and MAY repeat** when the user
+picks no design — differentiate consecutive moderndark videos via background variant +
+screenplay + scene mix instead. When proposing any NON-default design, list existing
+choices first (read each `topics/*/long.json` `brand.theme`) and never repeat the most
+recent. Two consecutive same-looking videos is a defect.
 
 ---
 

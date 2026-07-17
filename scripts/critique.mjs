@@ -12,7 +12,28 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {CATALOG, RVE_81, classifyAsset, rveSummary} from './catalog.mjs';
+import {MANIFEST} from './lib/manifest.mjs';
 import {SCREENPLAYS, inferScreenplay} from './screenplays.mjs';
+
+// The hand-written CATALOG covers the original ~39 types; every newer component
+// lives in the manifest (the single source of truth for all 136+). Fall back to
+// a manifest-derived entry so no real type is ever reported UNKNOWN.
+const catFor = (type) => {
+  if (CATALOG[type]) return CATALOG[type];
+  const m = MANIFEST[type];
+  if (!m) return undefined;
+  return {
+    category: m.category ?? m.family ?? 'component',
+    purpose: m.purpose ?? '(see scene_library.md)',
+    useWhen: m.use_when ?? '(see scene_library.md USE WHEN column)',
+    aspect: {wide: 'per component — token-driven layout', vertical: 'auto-reflows (both aspects proven at authoring)'},
+    color: 'theme tokens only — dark & light render automatically.',
+    fonts: 'theme fonts (display/body/mono per component).',
+    motion: 'deterministic, word-anchored entrances (@atWord).',
+    layout: 'centered; heading top · source bottom.',
+    assets: {slots: [], note: `data key: ${m.data_key ?? '—'} — see scene_library.md for budgets.`},
+  };
+};
 
 const IMG_DIR = 'public/assets';
 const bar = (s = 74) => '─'.repeat(s);
@@ -39,7 +60,7 @@ const countAnchors = (obj, n = 0) => {
 };
 
 function critiqueScene(scene, prev, next, brand) {
-  const cat = CATALOG[scene.type];
+  const cat = catFor(scene.type);
   const lines = [];
   const warns = [];
   const d = scene.data ?? {};
@@ -98,7 +119,7 @@ function critiqueScene(scene, prev, next, brand) {
   const nb = [];
   if (prev) {
     nb.push(`prev ${prev.type}${prev.type === scene.type ? ' ⚠ SAME TYPE twice in a row (repetition)' : ' ✓'}`);
-    const pc = CATALOG[prev.type]?.category, cc = cat.category;
+    const pc = catFor(prev.type)?.category, cc = cat.category;
     if (pc && cc && pc === cc && ['chart', 'data'].includes(cc)) nb.push('⚠ two data/chart scenes back-to-back — vary the widget between them');
     if (prev.type === scene.type) warns.push(`${scene.id}: same type as previous (${scene.type})`);
   } else {
@@ -127,7 +148,7 @@ function critiqueSpec(file) {
   console.log(`\n  SCREENPLAY: ${order.join(' → ')}`);
   const dupes = order.filter((t, i) => i > 0 && order[i - 1] === t);
   if (dupes.length) console.log(`  ⚠ consecutive repeats: ${[...new Set(dupes)].join(', ')}`);
-  const cats = scenes.map((s) => CATALOG[s.type]?.category ?? '?');
+  const cats = scenes.map((s) => catFor(s.type)?.category ?? '?');
   console.log(`  RHYTHM: ${cats.join(' · ')}`);
 
   // shape-family monotony guard (what let 12 box+arrow flows slip through before)

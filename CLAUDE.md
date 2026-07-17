@@ -2,6 +2,19 @@
 
 This repo is a video factory: JSON specs in `topics/<slug>/` → Remotion renders them. You (Claude) write specs and run scripts. You NEVER hand-edit component code during video production, never hand-write derived files, never overwrite an existing topic.
 
+## LAW 0 — THE INTERVIEW GATE (recorded failure 2026-07-17: a session skipped this and self-picked everything)
+When the user asks for a video — ANY phrasing — your FIRST action, before scaffolding, research, or writing a single scene, is ONE batched AskUserQuestion round covering everything their message didn't already answer:
+1. **format** — long / shorts / both (default: both)
+2. **target minutes** (default: 4–5 for long)
+3. **design pack** (default: **moderndark** — the user's standing default; vary the background + scene mix between consecutive videos so they don't look identical)
+4. **voiceover** — yes/no + voice (default: **en-US-ChristopherNeural**, the user's confirmed favourite)
+5. **thumbnail art** — real brand logo via `si:` / user-supplied image / set-piece still (NEVER default to a generic lucide glyph)
+Show the default on every option. "Use defaults" fills the rest — but the user must be ASKED, never silently defaulted. Skip only the questions their request already answered.
+
+## STANDING DEFAULTS (the user's own — override only if they say so)
+- Channel: **YOUR CHANNEL** · logo: `public/assets/channel_logo.png` (source files in `logo/`)
+- Design/theme when unspecified: **moderndark** · Voice: **en-US-ChristopherNeural** (edge-tts)
+
 ## Map
 - `topics/<slug>/long.json + shorts.json` — one folder per video topic, IMMUTABLE once rendered. Outputs land in `topics/<slug>/out/`.
 - `src/scenes/` components · `src/themes.ts` (10 themes) · `src/ui.tsx` primitives · `src/topicsIndex.ts` AUTO-GENERATED (never edit).
@@ -21,7 +34,7 @@ This repo is a video factory: JSON specs in `topics/<slug>/` → Remotion render
 
 ## Laws (violations = defects)
 1. `brand.theme` is a DARK skin — the 7 core skins are studio|neonGrid|midnight|terminal|linear|vapor|luxe, and each of the 30 design packs also has a dark theme twin (38 dark themes total; authoritative list = `DARK_THEMES` in scripts/lint-spec.mjs). Light variants render automatically (`brand.themeLight`: daylight|paper|brutalist, default daylight). The linter enforces this.
-2. THEME ROTATION IS MANDATORY: before choosing, list existing `topics/*/long.json` brand.theme values; never repeat the most recent one; vary background variants too. Same-looking consecutive videos are a defect.
+2. THEME ROTATION: when the user picks no design, **moderndark is the standing default (LAW 0) and MAY repeat** — differentiate consecutive moderndark videos via background variant + screenplay + scene mix instead. When proposing a non-default design, list existing `topics/*/long.json` brand.theme values and avoid repeating the most recent. Same-looking consecutive videos are a defect.
 3. TRUTH: facts come ONLY from the user's source or live web search. Today's date comes from your environment, never from training memory. Anything time-sensitive (prices, versions, releases, "current X") without a fresh source → search the web or output `MISSING: <fact>`. Inventing stats, quotes, or dates is the worst possible failure.
 4. Stage gates survive interruptions: if the user asked for Stage 1 only, session limits or "continue" do NOT authorize later stages — re-confirm.
 5. Budgets are counted, not estimated. The linter is the judge; fix specs, never rules.

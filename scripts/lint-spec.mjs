@@ -122,8 +122,23 @@ if (n >= 8) {
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
-  if (distinctTrans < 3)
-    W(`only ${distinctTrans} transition kind(s) used — vary scene.transition (16 available) so the cutting has rhythm.`);
+  if (distinctTrans < 5)
+    W(`only ${distinctTrans} transition kind(s) used — a long video needs ≥5 distinct scene.transition kinds (16 available) so the cutting has rhythm.`);
+  // SPECIALIST QUOTA (2026-07-17) — shipped videos kept passing the palette gate
+  // with 15 all-distinct EDITORIAL types while NEURAL_NET/GRID_ARRAY/SANKEY/…
+  // never got reached for. Distinctness is not variety: a quarter of a long
+  // video must come from OUTSIDE the comfort-zone set below.
+  const COMFORT = ['HOOK', 'TITLE_CARD', 'CHAPTER', 'LIST_BUILD', 'STAT_CALLOUT', 'STAT_PANELS', 'RECAP', 'OUTRO_CTA', 'KINETIC_TEXT', 'REVEAL', 'ICON_CALLOUT', 'ICON_GRID', 'SPLIT_PATHS', 'BAR_COMPARE', 'COUNTDOWN', 'NOTIFICATION', 'LOWER_THIRD', 'QUOTE_SPOTLIGHT', 'FLIP_CARD', 'SUBSCRIBE_REMINDER', 'CHANNEL_CARD', 'CONCEPT_DIAGRAM', 'STEP_FLOW', 'TALKING_POINTS', 'TITLE_BANNER_FOCUS'];
+  const specialist = types.filter((t) => !COMFORT.includes(t)).length;
+  const needSpec = Math.max(2, Math.round(n * 0.25));
+  if (specialist < needSpec)
+    W(`COMFORT-ZONE PALETTE: only ${specialist} of ${n} scenes reach beyond the core editorial set (need ≥${needSpec}). Match the SHAPE of each beat to a specialist component — an MoE model → NEURAL_NET/GRID_ARRAY, a date → TIMELINE, brand-vs-brand → LOGO_VERSUS, a flow → SANKEY/DIAGRAM, a market → TICKER_TAPE… (scene_library.md §REACH-FOR). Treat this warning as a rejection when authoring.`);
+}
+// STATIC-SCENE GUARD (2026-07-17) — a 20-30s narration parked on ONE component
+// is the #1 cause of "nothing is happening on screen". Split long beats.
+for (const s of spec.scenes ?? []) {
+  if ((s.durationFrames ?? 0) > 480)
+    W(`${s.id}: ${(s.durationFrames / 30).toFixed(1)}s on a single ${s.type} — scenes over ~16s feel static. Split the narration into two beats with different components.`);
 }
 
 const ids = new Set();
