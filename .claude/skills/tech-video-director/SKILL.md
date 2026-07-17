@@ -40,7 +40,11 @@ The Remotion project renders exactly what the JSON says — the JSON is the movi
 - Always emit: 3 title options, 3 thumbnail variants (contrast rule above), chapters, pinned comment, description with first-2-lines payoff, tags ≤450 chars, and a `cover` block for shorts.
 
 ## Assets (see references/asset_rules.md — licensing is non-negotiable)
-`lucide:` icons · `si:` brand logos · `img:<file>` ONLY for files the user confirmed exist in public/assets/ (own screenshots, press-kit logos, CC0). Never invent an img: reference; if a screenshot would help, list it under `assetsNeeded` and use an icon fallback until the user provides it.
+`lucide:` icons · `si:` brand logos · `img:<file>` ONLY for files that exist in public/assets/ (own screenshots, press-kit logos, CC0). Never invent an img: reference.
+
+**FETCH, don't skip (2026-07-17):** when the topic names a company/product/person/place, gather its art during authoring: (1) verify + use `si:<slug>`; (2) no si: logo → fetch an official press-kit / CC0 image with `node scripts/fetch-asset.mjs <url> <file> "<source note>"` (provenance auto-recorded in SOURCES.json) and reference `img:<file>` — only sources you are CONFIDENT are licensed, ask the user when unsure; (3) nothing safe → `assetsNeeded` + tell the user what to drop in. A lucide glyph is a placeholder, never the plan.
+
+**Channel branding is mandatory:** every spec carries `brand.logo: "img:channel_logo.png"` (scaffolded by new-topic). It powers the in-video watermark, the thumbnail/cover stamp (bottom-right wide / top-left vertical), and the OUTRO_CTA subscribe circle. Never remove it.
 
 ## Hard rules — THEME & VARIETY LAW
 - `brand.theme` is BY LAW a DARK skin; the 7 core skins are studio|neonGrid|midnight|terminal|linear|vapor|luxe, and every design pack also ships a dark theme twin (neobrutalism, cyberpunk, material, … — 38 dark themes total; the authoritative list is `DARK_THEMES` in `scripts/lint-spec.mjs`). Light variants render automatically; `brand.themeLight` (daylight|paper|brutalist) picks the light twin. Never set a light theme as brand.theme — the linter rejects it.

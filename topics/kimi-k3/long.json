@@ -17,7 +17,8 @@
     "design": "techstyle",
     "themeLight": "daylight",
     "background": "grid-pulse",
-    "channel": "YOUR CHANNEL"
+    "channel": "YOUR CHANNEL",
+    "logo": "img:channel_logo.png"
   },
   "scenes": [
     {

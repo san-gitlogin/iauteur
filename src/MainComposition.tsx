@@ -358,6 +358,8 @@ const Inner: React.FC<{spec: VideoSpec}> = ({spec}) => {
               <SceneFx fx={scene.fx}>
                 {scene.type === 'CHANNEL_CARD' ? (
                   <ChannelCard scene={scene} brand={spec.brand} />
+                ) : scene.type === 'OUTRO_CTA' ? (
+                  <OutroCta scene={scene} brand={spec.brand} />
                 ) : (
                   Comp ? <Comp scene={scene} /> : null
                 )}

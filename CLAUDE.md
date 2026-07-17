@@ -14,6 +14,13 @@ Show the default on every option. "Use defaults" fills the rest — but the user
 ## STANDING DEFAULTS (the user's own — override only if they say so)
 - Channel: **YOUR CHANNEL** · logo: `public/assets/channel_logo.png` (source files in `logo/`)
 - Design/theme when unspecified: **moderndark** · Voice: **en-US-ChristopherNeural** (edge-tts)
+- **`brand.logo: "img:channel_logo.png"` in EVERY spec** — it drives the in-video watermark (bottom-right wide / top-left vertical), the thumbnail + cover stamp, and the OUTRO_CTA subscribe circle. new-topic scaffolds it; never delete it.
+
+## LAW 0b — TOPIC ASSETS ARE FETCHED, NOT SKIPPED
+When the topic names a company / product / person / place, gather its art DURING authoring — don't ship icon-only videos:
+1. Brand logos: verify + use `si:<slug>` (`node -e "const si=require('simple-icons');console.log(Object.keys(si).filter(k=>/name/i.test(k)))"`).
+2. No si: logo? Fetch an OFFICIAL press-kit / CC0 image: `node scripts/fetch-asset.mjs <url> <file> "<source note>"` → lands in `public/assets/` with provenance in SOURCES.json; reference it as `img:<file>`. Only sources you are CONFIDENT are licensed for reuse — when unsure, ask the user instead of fetching.
+3. Nothing safe found? Declare it under `assetsNeeded` and tell the user exactly what to drop into `public/assets/` — a lucide glyph is the placeholder, never the plan.
 
 ## Map
 - `topics/<slug>/long.json + shorts.json` — one folder per video topic, IMMUTABLE once rendered. Outputs land in `topics/<slug>/out/`.

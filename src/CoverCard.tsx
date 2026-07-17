@@ -73,14 +73,21 @@ export const CoverCard: React.FC<{cover: CoverConfig}> = ({cover}) => {
   );
 };
 
-// Standalone Still wrapper (theme provided via props, since a Still has no spec)
+// Standalone Still wrapper (theme provided via props, since a Still has no spec).
+// `logo` (brand.logo) stamps the channel mark top-left — Shorts UI owns bottom/right.
 export const ThemedCover: React.FC<{
   themeName: string;
   title: string;
   badge: string;
   asset: string;
-}> = ({themeName, title, badge, asset}) => (
+  logo?: string;
+}> = ({themeName, title, badge, asset, logo}) => (
   <ThemeProvider themeName={themeName}>
     <CoverCard cover={{title, badge, asset}} />
+    {logo ? (
+      <div style={{position: 'absolute', top: 48, left: 44, opacity: 0.9}}>
+        <AssetIcon asset={logo} size={104} bare />
+      </div>
+    ) : null}
   </ThemeProvider>
 );

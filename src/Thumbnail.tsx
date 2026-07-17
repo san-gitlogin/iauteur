@@ -5,10 +5,12 @@ import {Background} from './Background';
 import {AssetIcon} from './AssetIcon';
 
 // Long-form thumbnail (1280x720). Rule: ≤4 words, one focal icon, readable at 120px.
-const ThumbInner: React.FC<{title: string; badge: string; asset: string}> = ({
+// `logo` (brand.logo) stamps the channel mark bottom-right — every thumbnail carries it.
+const ThumbInner: React.FC<{title: string; badge: string; asset: string; logo?: string}> = ({
   title,
   badge,
   asset,
+  logo,
 }) => {
   const t = useTheme();
   return (
@@ -58,6 +60,11 @@ const ThumbInner: React.FC<{title: string; badge: string; asset: string}> = ({
         </div>
         <AssetIcon asset={asset} size={300} />
       </AbsoluteFill>
+      {logo ? (
+        <div style={{position: 'absolute', bottom: 26, right: 30, opacity: 0.9}}>
+          <AssetIcon asset={logo} size={96} bare />
+        </div>
+      ) : null}
     </AbsoluteFill>
   );
 };
@@ -67,6 +74,7 @@ export const Thumbnail: React.FC<{
   title: string;
   badge: string;
   asset: string;
+  logo?: string;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>
     <ThumbInner {...props} />

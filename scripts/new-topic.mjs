@@ -18,7 +18,7 @@ if (fs.existsSync(dir)) {
 fs.mkdirSync(`${dir}/out`, {recursive: true});
 const stub = (format) => ({
   meta: {topic: title, format, fps: 30, onePayoff: 'TODO', openLoop: 'TODO', analogy: 'TODO'},
-  brand: {theme: 'CHOOSE_DARK_THEME', channel: 'TODO'},
+  brand: {theme: 'CHOOSE_DARK_THEME', channel: 'YOUR CHANNEL', logo: 'img:channel_logo.png'},
   ...(format === 'long' ? {thumbnail: {title: 'TODO', badge: 'TODO', asset: 'lucide:sparkles'}} : {cover: {title: 'TODO', badge: 'TODO', asset: 'lucide:sparkles', frames: 2}}),
   scenes: [],
 });

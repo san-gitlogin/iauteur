@@ -1,13 +1,15 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
-import {Scene} from '../types';
+import {Scene, VideoSpec} from '../types';
 import {useTheme} from '../themes';
 import {fadeUp, springPop} from '../anim';
 import {entranceStyle} from '../motion';
+import {AssetIcon} from '../AssetIcon';
 import {Bell} from 'lucide-react';
 
 // Long-form: keep key content CENTERED — YouTube end screens own the corners.
-export const OutroCta: React.FC<{scene: Scene}> = ({scene}) => {
+// When brand.logo is set, the subscribe circle shows the CHANNEL LOGO (Bell is the fallback).
+export const OutroCta: React.FC<{scene: Scene; brand?: VideoSpec['brand']}> = ({scene, brand}) => {
   const frame = useCurrentFrame();
   const {fps, width, height} = useVideoConfig();
   const t = useTheme();
@@ -25,14 +27,19 @@ export const OutroCta: React.FC<{scene: Scene}> = ({scene}) => {
             width: 110 * scale,
             height: 110 * scale,
             borderRadius: '50%',
-            background: t.colors.accent,
+            background: brand?.logo ? 'transparent' : t.colors.accent,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            overflow: 'hidden',
             boxShadow: t.style.glow > 0 ? `0 0 ${70 * t.style.glow}px ${t.colors.glowSoft}` : '0 12px 30px rgba(0,0,0,0.2)',
           }}
         >
-          <Bell size={56 * scale} color={t.colors.onAccent} strokeWidth={2.4} />
+          {brand?.logo ? (
+            <AssetIcon asset={brand.logo} size={110 * scale} bare />
+          ) : (
+            <Bell size={56 * scale} color={t.colors.onAccent} strokeWidth={2.4} />
+          )}
         </div>
       </div>
       <div
