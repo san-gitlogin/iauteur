@@ -16,6 +16,9 @@ Show the default on every option. "Use defaults" fills the rest — but the user
 - Design/theme when unspecified: **moderndark** · Voice: **en-US-ChristopherNeural** (edge-tts)
 - **`brand.logo: "img:channel_logo.png"` in EVERY spec** — it drives the in-video watermark (bottom-right wide / top-left vertical), the thumbnail + cover stamp, and the OUTRO_CTA subscribe circle. new-topic scaffolds it; never delete it.
 
+## LAW 0c — COMPONENTS ARE CAST PER BEAT, NEVER ONE-SHOT
+Scene types are chosen via the CASTING BOARD, one beat at a time — never in a single pass from memory (measured result of one-shot: 81 of 137 components never used, picks biased to the top of the catalog). Flow: beat map → `node scripts/cast.mjs <beats.json>` → pick per beat with a stated reason into `topics/<slug>/casting.md` (≥2 ★NEVER-USED picks when honest fits exist) → only then write scenes. `node scripts/snap.mjs <url> <file> "<note>"` captures reference-page screenshots so the media components are usable. For long videos, cast per chapter with a fresh subagent per act reporting to the master. Full recipe: director skill §4.
+
 ## LAW 0b — TOPIC ASSETS ARE FETCHED, NOT SKIPPED
 When the topic names a company / product / person / place, gather its art DURING authoring — don't ship icon-only videos:
 1. Brand logos: verify + use `si:<slug>` (`node -e "const si=require('simple-icons');console.log(Object.keys(si).filter(k=>/name/i.test(k)))"`).

@@ -58,5 +58,12 @@
     "note": "SYNTHETIC talking-head PLACEHOLDER — a warm radial vignette (NOT a real face), deterministic PNG frames + WAV tone via ffmpeg libx264/aac. Stands in for a creator webcam PiP in fixtures/showcase; real user webcam arrives via props. No copyright, no likeness.",
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-09"
+  },
+  {
+    "file": "snap-selftest.png",
+    "url": "https://example.com",
+    "note": "screenshot for commentary — self-test",
+    "bytes": 14723,
+    "capturedAt": "2026-07-17T16:55:53.921Z"
   }
 ]
