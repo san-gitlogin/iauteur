@@ -87,7 +87,7 @@ One background per video. New backgrounds (e.g. converted from 21st.dev) get add
 | LOWER_THIRD | A name/label strip that slides in over other content (speaker, source, location) | lowerThird{title,sub,color,atWord} |
 | NOTIFICATION | A single toast/notification sliding in (alert, message, event) — distinct from DEVICE_FRAME's phone banner | notification{app,title,text,color,atWord} |
 | COUNTDOWN | A numeric countdown moment (launch, "in 3…2…1", deadline) | countdown{from,label,color,atWord} |
-| FLIP_CARD | A card that flips front→back to reveal an answer/definition (Q→A, term→meaning) | flip{front,back,color,atWord} |
+| FLIP_CARD | A card that flips front→back to reveal an answer/definition (Q→A, term→meaning) | flip{front{label,text,color},back{label,text,color},atWord} |
 | CAROUSEL | A 3D ring of option cards spinning past (choices, tools, options) — a dynamic breather | carousel{items[{label,sub,asset,color}],atWord} |
 | TIMELINE | A chronological sequence of dated milestones (history, roadmap, evolution) | timeline{milestones[{date,title,sub,color,atWord}]} |
 | QUADRANT | A 2×2 positioning matrix (competitor/tradeoff map, axes labelled) | quadrant{axisX,axisY,points[{label,x,y,color,atWord}]} |

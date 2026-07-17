@@ -13,8 +13,8 @@
     ]
   },
   "brand": {
-    "theme": "techstyle",
-    "design": "techstyle",
+    "theme": "moderndark",
+    "design": "moderndark",
     "themeLight": "daylight",
     "background": "grid-pulse",
     "channel": "YOUR CHANNEL",
@@ -51,7 +51,7 @@
           "from": 10,
           "label": "Days To Full Release",
           "color": "purple",
-          "atWord": 4.417
+          "atWord": 3.583
         }
       },
       "audio": "audio/kimi-k3_long_s02.mp3"
@@ -73,8 +73,8 @@
     {
       "id": "s04",
       "type": "CHAPTER",
-      "narration": "Part one: the machine itself. What exactly did Moonshot build here?",
-      "durationFrames": 185,
+      "narration": "So what exactly did Moonshot build? Let's open up the machine.",
+      "durationFrames": 169,
       "timingSource": "tts",
       "transition": "dip",
       "background": "zoneA",
@@ -123,7 +123,7 @@
           "legendA": "Active (16)",
           "legendB": "Idle (880)",
           "color": "purple",
-          "atWord": 13.5
+          "atWord": 12.667
         },
         "source": "Moonshot AI, Kimi K3 release, Jul 2026"
       },
@@ -178,13 +178,13 @@
               "icon": "lucide:type",
               "label": "Text",
               "color": "purple",
-              "atWord": 20.083
+              "atWord": 18.25
             },
             {
               "icon": "lucide:image",
               "label": "Vision Input",
               "color": "purple",
-              "atWord": 23.75
+              "atWord": 21.917
             }
           ],
           "cols": 3,
@@ -203,9 +203,16 @@
       "background": "zoneC",
       "data": {
         "flip": {
-          "front": "Kimi Delta Attention",
-          "back": "Hybrid linear attention — fast, light",
-          "color": "purple",
+          "front": {
+            "label": "Invention No. 1",
+            "text": "Kimi Delta Attention",
+            "color": "purple"
+          },
+          "back": {
+            "label": "What it does",
+            "text": "Hybrid linear attention — fast and light",
+            "color": "green"
+          },
           "atWord": 9.417
         }
       },
@@ -237,8 +244,8 @@
     {
       "id": "s11",
       "type": "CHAPTER",
-      "narration": "Part two: the scores. A big model means nothing until it performs.",
-      "durationFrames": 194,
+      "narration": "A model this big means nothing until it performs. So — the scores.",
+      "durationFrames": 196,
       "timingSource": "tts",
       "transition": "letterbox",
       "background": "zoneB",
@@ -269,7 +276,7 @@
             "value": 1815,
             "display": "1815",
             "color": "blue",
-            "atWord": 29.833
+            "atWord": 34.833
           },
           {
             "label": "GPT-5.6 Sol Max",
@@ -283,14 +290,14 @@
             "value": 1687,
             "display": "1687",
             "color": "purple",
-            "atWord": 19.833
+            "atWord": 24.833
           },
           {
             "label": "Opus 4.8",
             "value": 1600,
             "display": "1600",
             "color": "blue",
-            "atWord": 26.083
+            "atWord": 32.333
           }
         ],
         "maxValue": 1815,
@@ -402,28 +409,28 @@
               "x": 0.15,
               "y": 0.95,
               "color": "blue",
-              "atWord": 7.25
+              "atWord": 6.417
             },
             {
               "label": "Sol Max",
               "x": 0.22,
               "y": 0.85,
               "color": "blue",
-              "atWord": 7.25
+              "atWord": 6.417
             },
             {
               "label": "Opus 4.8",
               "x": 0.18,
               "y": 0.6,
               "color": "blue",
-              "atWord": 7.25
+              "atWord": 6.417
             },
             {
               "label": "Kimi K3",
               "x": 0.88,
               "y": 0.78,
               "color": "purple",
-              "atWord": 19.833
+              "atWord": 18.083
             }
           ]
         },
@@ -434,8 +441,8 @@
     {
       "id": "s17",
       "type": "CHAPTER",
-      "narration": "Part three: the fallout — money, timing, and a nervous Washington.",
-      "durationFrames": 172,
+      "narration": "And then there's the fallout: the money, the timing, and a very nervous Washington.",
+      "durationFrames": 179,
       "timingSource": "tts",
       "transition": "dip",
       "background": "zoneB",
@@ -523,19 +530,19 @@
             "kicker": "Input / 1M tokens",
             "value": "$3",
             "color": "blue",
-            "atWord": 5.5
+            "atWord": 6.667
           },
           {
             "kicker": "Output / 1M tokens",
             "value": "$15",
             "color": "orange",
-            "atWord": 12.333
+            "atWord": 13.417
           }
         ],
         "verdict": {
           "text": "Priced like a frontier product",
           "color": "orange",
-          "atWord": 21.417
+          "atWord": 23.667
         },
         "source": "VentureBeat, Jul 2026"
       },
@@ -590,7 +597,7 @@
           "kicker": "KIMI K3",
           "title": "Open Weights",
           "color": "purple",
-          "atWord": 3.5
+          "atWord": 4.75
         },
         "left": {
           "title": "For Builders",
@@ -603,7 +610,7 @@
             "Frontier-grade access"
           ],
           "color": "green",
-          "atWord": 7.167
+          "atWord": 8.417
         },
         "right": {
           "title": "For Washington",
@@ -616,7 +623,7 @@
             "Frontier goes open"
           ],
           "color": "orange",
-          "atWord": 19.583
+          "atWord": 24.5
         },
         "source": "Reactions per Axios, VentureBeat, Jul 2026"
       },
@@ -625,8 +632,8 @@
     {
       "id": "s23",
       "type": "RECAP",
-      "narration": "The recap: two-point-eight trillion parameters, sixteen experts at a time. Benchmarks beside the American frontier. And the whole thing goes public July twenty-seventh.",
-      "durationFrames": 367,
+      "narration": "So here's where we landed: two-point-eight trillion parameters, sixteen experts at a time. Benchmarks beside the American frontier. And the whole thing goes public July twenty-seventh.",
+      "durationFrames": 383,
       "timingSource": "tts",
       "transition": "fade",
       "background": "zoneB",
@@ -635,15 +642,15 @@
         "points": [
           {
             "text": "2.8T params, 16 experts a time",
-            "atWord": 3.5
+            "atWord": 4.5
           },
           {
             "text": "Scores beside the US frontier",
-            "atWord": 14.833
+            "atWord": 17.25
           },
           {
             "text": "Fully open on July 27",
-            "atWord": 23.583
+            "atWord": 27.667
           }
         ]
       },

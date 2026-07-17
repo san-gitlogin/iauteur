@@ -22,25 +22,34 @@ export const OutroCta: React.FC<{scene: Scene; brand?: VideoSpec['brand']}> = ({
       style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 34 * scale}}
     >
       <div style={{...springPop(frame, 0, fps)}}>
-        <div
-          style={{
-            width: 110 * scale,
-            height: 110 * scale,
-            borderRadius: '50%',
-            background: brand?.logo ? 'transparent' : t.colors.accent,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflow: 'hidden',
-            boxShadow: t.style.glow > 0 ? `0 0 ${70 * t.style.glow}px ${t.colors.glowSoft}` : '0 12px 30px rgba(0,0,0,0.2)',
-          }}
-        >
-          {brand?.logo ? (
-            <AssetIcon asset={brand.logo} size={110 * scale} bare />
-          ) : (
+        {brand?.logo ? (
+          // The channel logo IS the end-card hero — large, uncropped, natural.
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              filter: t.style.glow > 0 ? `drop-shadow(0 0 ${40 * t.style.glow}px ${t.colors.glowSoft})` : 'drop-shadow(0 12px 30px rgba(0,0,0,0.35))',
+            }}
+          >
+            <AssetIcon asset={brand.logo} size={280 * scale} bare />
+          </div>
+        ) : (
+          <div
+            style={{
+              width: 110 * scale,
+              height: 110 * scale,
+              borderRadius: '50%',
+              background: t.colors.accent,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: t.style.glow > 0 ? `0 0 ${70 * t.style.glow}px ${t.colors.glowSoft}` : '0 12px 30px rgba(0,0,0,0.2)',
+            }}
+          >
             <Bell size={56 * scale} color={t.colors.onAccent} strokeWidth={2.4} />
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div
         style={{

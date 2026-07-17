@@ -7,6 +7,7 @@ Maximum clarity per second. Concretely:
 - Concrete beats abstract: real product names, real numbers, real commands — never "a certain framework".
 - Humor is seasoning: one dry aside per video maximum, never at anyone's expense, never forced.
 - Speed comes from cutting words, not talking fast. If a sentence survives without a word, cut the word.
+- NEVER speak structural labels: no "Part one", "Chapter two", "The recap:", "In this video". Chapters and recaps are VISUAL (the CHAPTER/RECAP components show them); the VOICE transitions like a human ("So what did they actually build?"). The linter warns on violations.
 - End with the viewer able to DO something, not just know something.
 
 ## Audience calibration (decide in Stage 1, changes everything)

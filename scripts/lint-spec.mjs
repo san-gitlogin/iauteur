@@ -246,6 +246,11 @@ for (const s of spec.scenes ?? []) {
   if (s.type === 'HOOK' && s.durationFrames > HOOK_MAX_FRAMES)
     E(`${id}: HOOK is ${(s.durationFrames / 30).toFixed(1)}s — must be ≤8s`);
 
+  // HUMAN-VOICE GUARD (2026-07-17) — narration must never SPEAK structural labels;
+  // chapters are visual, the voice transitions naturally ("So what did they build?").
+  if (/^\s*(part|chapter|section)\s+(one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b/i.test(s.narration ?? '') || /^\s*(the\s+)?recap\b\s*[:,]/i.test(s.narration ?? ''))
+    W(`${id}: narration speaks a structural label ("${(s.narration ?? '').slice(0, 30)}…") — sounds robotic. Chapters/recaps are VISUAL; write a natural spoken transition instead.`);
+
   // anchors within narration (skipped after TTS sync: anchors become fractional frames)
   if (s.timingSource !== 'tts') {
     for (const a of collectAnchors(s.data)) {
@@ -840,7 +845,7 @@ for (const s of spec.scenes ?? []) {
   if (d.flip) {
     for (const side of ['front', 'back']) {
       const f = d.flip[side];
-      if (!f) { E(`${id}: FLIP_CARD needs ${side}{label,text}`); continue; }
+      if (!f || typeof f !== 'object' || !f.text) { E(`${id}: FLIP_CARD ${side} must be an OBJECT {label,text,color} — a bare string renders an EMPTY card (defect found 2026-07-17)`); continue; }
       if (len(f.label) > 20) E(`${id}: flip ${side}.label > 20 chars`);
       if (len(f.text) > 80) E(`${id}: flip ${side}.text > 80 chars`);
       checkColor(id, `flip.${side}.color`, f.color);
