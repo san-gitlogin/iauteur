@@ -1,0 +1,410 @@
+{
+  "meta": {
+    "topic": "Kimi K3: The 2.8 Trillion-Parameter Model Rattling Washington",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "Moonshot AI released Kimi K3, a 2.8-trillion-parameter open-weight model that rivals top US frontier AI on real benchmarks.",
+    "openLoop": "What if the world's most powerful open AI model was suddenly free to download?",
+    "analogy": "It's like the recipe from a guarded frontier lab suddenly being handed out as a free download.",
+    "screenplay": "hype-launch",
+    "topicAxes": [
+      "frontier-ai",
+      "geopolitics"
+    ]
+  },
+  "brand": {
+    "theme": "techstyle",
+    "design": "techstyle",
+    "themeLight": "daylight",
+    "background": "grid-pulse",
+    "channel": "YOUR CHANNEL"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "What if the world's most powerful open AI model was suddenly free to download?",
+      "durationFrames": 169,
+      "timingSource": "tts",
+      "transition": "zoom",
+      "background": "zoneA",
+      "data": {
+        "headline": "A FREE FRONTIER MODEL",
+        "subtext": "China's biggest open AI release yet",
+        "heroAsset": "lucide:unlock",
+        "headlineAtWord": 1,
+        "heroAtWord": 12
+      },
+      "audio": "audio/kimi-k3_long_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "COUNTDOWN",
+      "narration": "Moonshot says the complete model weights will drop in just ten days, right on schedule for late July.",
+      "durationFrames": 207,
+      "timingSource": "tts",
+      "transition": "pixel",
+      "background": "zoneB",
+      "data": {
+        "countdown": {
+          "from": 10,
+          "label": "Days To Full Release",
+          "color": "purple",
+          "atWord": 9.583
+        }
+      },
+      "audio": "audio/kimi-k3_long_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "narration": "Meet Kimi K3 — Moonshot AI's massive new open-weight model, built to go toe-to-toe with America's best.",
+      "durationFrames": 240,
+      "timingSource": "tts",
+      "transition": "blinds",
+      "background": "zoneC",
+      "data": {
+        "title": "Kimi K3",
+        "subtitle": "Moonshot AI's open challenge to the US"
+      },
+      "audio": "audio/kimi-k3_long_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "STAT_CALLOUT",
+      "narration": "It packs two-point-eight trillion parameters in total — the largest open-weight model ever released by any lab. That's bigger than every major model that came before it, Chinese or American. It's the kind of scale that used to exist only behind closed doors at labs like OpenAI and Anthropic.",
+      "durationFrames": 547,
+      "timingSource": "tts",
+      "transition": "whippan",
+      "background": "zoneA",
+      "data": {
+        "value": 2.8,
+        "suffix": "Trillion",
+        "label": "Total Parameters",
+        "atWord": 2.75
+      },
+      "audio": "audio/kimi-k3_long_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "ICON_GRID",
+      "narration": "It also reads across one million tokens of context — roughly a whole codebase or a full book in one pass. And it's multimodal, so it can reason over text and images in the very same conversation.",
+      "durationFrames": 390,
+      "timingSource": "tts",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "iconGrid": {
+          "items": [
+            {
+              "icon": "lucide:file-text",
+              "label": "1M Tokens",
+              "color": "blue",
+              "atWord": 5.167
+            },
+            {
+              "icon": "lucide:type",
+              "label": "Text",
+              "color": "purple",
+              "atWord": 24.333
+            },
+            {
+              "icon": "lucide:image",
+              "label": "Vision Input",
+              "color": "purple",
+              "atWord": 25.917
+            }
+          ],
+          "cols": 3,
+          "color": "blue"
+        }
+      },
+      "audio": "audio/kimi-k3_long_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "STAT_PANELS",
+      "narration": "But size alone isn't the trick. K3 only activates sixteen of its eight-hundred-ninety-six experts for any single token. Think of it as a huge staff where only a small task force clocks in for each job. That keeps the compute bill sane even at this scale. It lets Moonshot ship something this big without needing an entire data center just to answer one question.",
+      "durationFrames": 704,
+      "timingSource": "tts",
+      "transition": "wipe",
+      "background": "zoneC",
+      "data": {
+        "headline": "[Sparse] By Design",
+        "headlineColor": "purple",
+        "gridVisual": {
+          "kicker": "Mixture of Experts",
+          "legendA": "Active",
+          "legendB": "Idle",
+          "atWord": 8.083
+        },
+        "stats": [
+          {
+            "kicker": "Total Experts",
+            "value": "896",
+            "color": "blue",
+            "atWord": 11.667
+          },
+          {
+            "kicker": "Active per Token",
+            "value": "16",
+            "color": "green",
+            "atWord": 9
+          }
+        ],
+        "verdict": {
+          "text": "Huge capacity, light compute",
+          "color": "green",
+          "atWord": 35.667
+        },
+        "source": "Moonshot AI, Kimi K3 technical report, Jul 2026"
+      },
+      "audio": "audio/kimi-k3_long_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "LIST_BUILD",
+      "narration": "Under the hood, two new ideas make this possible. Kimi Delta Attention is a hybrid linear-attention design that keeps long contexts fast and memory-light. Attention Residuals replaces the model's residual connections, giving it steadier gains as it scales up. Both were built in-house at Moonshot. Together, they're why K3 can be this large and still run at a usable speed.",
+      "durationFrames": 736,
+      "timingSource": "tts",
+      "transition": "glitch",
+      "background": "zoneA",
+      "data": {
+        "heading": "Two New Engineering Bets",
+        "items": [
+          {
+            "icon": "lucide:git-branch",
+            "text": "Kimi Delta Attention — hybrid attn",
+            "atWord": 9.917
+          },
+          {
+            "icon": "lucide:layers",
+            "text": "Attention Residuals — scaling boost",
+            "atWord": 24.833
+          }
+        ]
+      },
+      "audio": "audio/kimi-k3_long_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "narration": "So Moonshot built something huge. But does it actually perform? Let's check the scores.",
+      "durationFrames": 236,
+      "timingSource": "tts",
+      "transition": "dip",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": 2,
+          "title": "Does It Perform?",
+          "sub": "The benchmarks",
+          "color": "blue",
+          "atWord": 12.5
+        }
+      },
+      "audio": "audio/kimi-k3_long_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "BAR_COMPARE",
+      "narration": "On GDPval-AA v2 — a benchmark covering real tasks across forty-four occupations and nine industries — K3 scored sixteen-eighty-seven. That puts it third overall, just behind Fable 5 Max and GPT-5.6 Sol Max, and ahead of Claude Opus 4.8. For an open-weight model, that's remarkably close to the very top of the field. It's the strongest showing yet from an openly released model, closing a gap that used to be measured in years, not points.",
+      "durationFrames": 915,
+      "timingSource": "tts",
+      "transition": "zoomthrough",
+      "background": "zoneC",
+      "data": {
+        "headline": "GDPval-AA v2 Score",
+        "bars": [
+          {
+            "label": "Fable 5 Max",
+            "value": 1815,
+            "display": "1815",
+            "color": "blue",
+            "atWord": 24.833
+          },
+          {
+            "label": "GPT-5.6 Sol Max",
+            "value": 1747.8,
+            "display": "1748",
+            "color": "blue",
+            "atWord": 28.833
+          },
+          {
+            "label": "Kimi K3",
+            "value": 1687,
+            "display": "1687",
+            "color": "purple",
+            "atWord": 14.917
+          },
+          {
+            "label": "Opus 4.8",
+            "value": 1600,
+            "display": "1600",
+            "color": "blue",
+            "atWord": 35.75
+          }
+        ],
+        "maxValue": 1815,
+        "source": "GDPval-AA v2 benchmark, Jul 2026"
+      },
+      "audio": "audio/kimi-k3_long_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "REVEAL",
+      "narration": "It gets more striking in blind testing. On LMArena, developers preferred K3's front-end code over Fable 5 and GPT-5.6 Sol — the current leaders. And on Arena's broader text ranking, K3 beat standard Opus 4.8 outright and tied Sol. A model from Moonshot, out-coding the best in Silicon Valley. For a lab that most Americans hadn't heard of two years ago, that's a genuinely uncomfortable result for the incumbents.",
+      "durationFrames": 888,
+      "timingSource": "tts",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "headlineColor": "purple",
+        "reveal": {
+          "kicker": "Blind Arena Testing",
+          "sub": "Preferred over Fable 5 & GPT-5.6 Sol for code",
+          "color": "purple",
+          "atWord": 10.417
+        },
+        "source": "LMArena, Jul 2026",
+        "statement": "[Developers] Picked K3"
+      },
+      "audio": "audio/kimi-k3_long_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "KINETIC_TEXT",
+      "narration": "Full weights land July twenty-seventh. Moonshot timed it just before the World AI Conference in Shanghai — a deliberate flex, right before the industry's biggest stage.",
+      "durationFrames": 341,
+      "timingSource": "tts",
+      "transition": "pixel",
+      "background": "zoneB",
+      "data": {
+        "kinetic": {
+          "text": "JULY 27",
+          "fx": "pop",
+          "color": "purple",
+          "sub": "Timed for WAIC Shanghai",
+          "atWord": 4.083
+        }
+      },
+      "audio": "audio/kimi-k3_long_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "ICON_CALLOUT",
+      "narration": "Pricing jumped too. K3 costs three dollars per million input tokens and fifteen for output — squarely in Claude Sonnet's tier. That's a real jump from Moonshot's earlier, dirt-cheap releases, and a sign the company knows exactly what it's built. Still cheap by frontier standards, but it shows Moonshot isn't racing to the bottom on price anymore — it's racing to the top on capability.",
+      "durationFrames": 735,
+      "timingSource": "tts",
+      "transition": "blinds",
+      "background": "zoneC",
+      "data": {
+        "iconCallout": {
+          "icon": "lucide:dollar-sign",
+          "heading": "Not The Bargain Price Anymore",
+          "sub": "$3 in / $15 out per million tokens",
+          "points": [
+            "Sonnet-tier pricing",
+            "Pricier than earlier Moonshot models"
+          ],
+          "color": "orange",
+          "atWord": 5.583
+        }
+      },
+      "audio": "audio/kimi-k3_long_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "SPLIT_PATHS",
+      "narration": "That leaves two very different reactions. For developers, it's a free, inspectable, frontier-grade model to build on right away. For Washington and Silicon Valley, it's proof the US lead in frontier AI just got a lot thinner. The next breakthrough might not come from a lab they control. Open-weight doesn't mean small anymore — it means frontier-grade, and it means anyone with the hardware can now run it themselves.",
+      "durationFrames": 789,
+      "timingSource": "tts",
+      "transition": "whippan",
+      "background": "zoneA",
+      "data": {
+        "headline": "One Release, [Two Reactions]",
+        "headlineColor": "orange",
+        "center": {
+          "kicker": "KIMI K3",
+          "title": "Open Weights",
+          "color": "purple",
+          "atWord": 2.833
+        },
+        "left": {
+          "title": "For Builders",
+          "badge": {
+            "text": "Open",
+            "color": "green"
+          },
+          "lines": [
+            "Free, inspectable",
+            "Frontier-grade access"
+          ],
+          "color": "green",
+          "atWord": 7.5
+        },
+        "right": {
+          "title": "For Washington",
+          "badge": {
+            "text": "Alarm",
+            "color": "orange"
+          },
+          "lines": [
+            "US lead narrows",
+            "Frontier goes open"
+          ],
+          "color": "orange",
+          "atWord": 19.5
+        },
+        "source": "Reactions per Axios, VentureBeat, Jul 2026"
+      },
+      "audio": "audio/kimi-k3_long_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "RECAP",
+      "narration": "So: a two-point-eight trillion parameter, sparsely-activated model. Benchmarks that sit right beside the American frontier. Full weights landing July twenty-seventh, free for anyone to download. Kimi K3 didn't just launch a model — it launched a question about who leads next. It's the moment open source caught up to the frontier.",
+      "durationFrames": 668,
+      "timingSource": "tts",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "heading": "The Recap",
+        "points": [
+          {
+            "text": "2.8T params, sparse by design",
+            "atWord": 3.083
+          },
+          {
+            "text": "Benchmarks rival the US frontier",
+            "atWord": 14.75
+          },
+          {
+            "text": "Fully open on July 27",
+            "atWord": 20
+          }
+        ]
+      },
+      "audio": "audio/kimi-k3_long_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "OUTRO_CTA",
+      "narration": "Kimi K3 is changing who owns the AI frontier. Follow YOUR CHANNEL to see exactly how this story unfolds.",
+      "durationFrames": 277,
+      "timingSource": "tts",
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "message": "Kimi K3 changes who owns the frontier.",
+        "sub": "Follow YOUR CHANNEL for what's next."
+      },
+      "audio": "audio/kimi-k3_long_s15.mp3"
+    }
+  ],
+  "thumbnail": {
+    "title": "KIMI K3 vs THE US",
+    "badge": "2.8T Open Model",
+    "asset": "lucide:cpu"
+  }
+}

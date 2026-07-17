@@ -16,18 +16,20 @@ import long6 from '../topics/how-the-internet-works/long.json';
 import shorts6 from '../topics/how-the-internet-works/shorts.json';
 import long7 from '../topics/instagram-s-newest-ai-tool-didn-t-survive-the-week/long.json';
 import shorts7 from '../topics/instagram-s-newest-ai-tool-didn-t-survive-the-week/shorts.json';
-import long8 from '../topics/palette-136-tour/long.json';
-import shorts8 from '../topics/palette-136-tour/shorts.json';
-import long9 from '../topics/react-basics/long.json';
-import shorts9 from '../topics/react-basics/shorts.json';
-import long10 from '../topics/terawulf-anthropic-lease/long.json';
-import shorts10 from '../topics/terawulf-anthropic-lease/shorts.json';
-import long11 from '../topics/the-biggest-ai-stories-of-july-2026/long.json';
-import shorts11 from '../topics/the-biggest-ai-stories-of-july-2026/shorts.json';
-import long12 from '../topics/why-computers-get-0-1-plus-0-2-wrong/long.json';
-import shorts12 from '../topics/why-computers-get-0-1-plus-0-2-wrong/shorts.json';
-import long13 from '../topics/xrp-prediction/long.json';
-import shorts13 from '../topics/xrp-prediction/shorts.json';
+import long8 from '../topics/kimi-k3/long.json';
+import shorts8 from '../topics/kimi-k3/shorts.json';
+import long9 from '../topics/palette-136-tour/long.json';
+import shorts9 from '../topics/palette-136-tour/shorts.json';
+import long10 from '../topics/react-basics/long.json';
+import shorts10 from '../topics/react-basics/shorts.json';
+import long11 from '../topics/terawulf-anthropic-lease/long.json';
+import shorts11 from '../topics/terawulf-anthropic-lease/shorts.json';
+import long12 from '../topics/the-biggest-ai-stories-of-july-2026/long.json';
+import shorts12 from '../topics/the-biggest-ai-stories-of-july-2026/shorts.json';
+import long13 from '../topics/why-computers-get-0-1-plus-0-2-wrong/long.json';
+import shorts13 from '../topics/why-computers-get-0-1-plus-0-2-wrong/shorts.json';
+import long14 from '../topics/xrp-prediction/long.json';
+import shorts14 from '../topics/xrp-prediction/shorts.json';
 
 export interface TopicEntry {slug: string; long: VideoSpec; shorts: VideoSpec | null;}
 
@@ -40,10 +42,11 @@ export const topics: TopicEntry[] = [
   {slug: 'how-password-managers-actually-keep-your-secrets-safe', long: long5 as unknown as VideoSpec, shorts: shorts5 as unknown as VideoSpec},
   {slug: 'how-the-internet-works', long: long6 as unknown as VideoSpec, shorts: shorts6 as unknown as VideoSpec},
   {slug: 'instagram-s-newest-ai-tool-didn-t-survive-the-week', long: long7 as unknown as VideoSpec, shorts: shorts7 as unknown as VideoSpec},
-  {slug: 'palette-136-tour', long: long8 as unknown as VideoSpec, shorts: shorts8 as unknown as VideoSpec},
-  {slug: 'react-basics', long: long9 as unknown as VideoSpec, shorts: shorts9 as unknown as VideoSpec},
-  {slug: 'terawulf-anthropic-lease', long: long10 as unknown as VideoSpec, shorts: shorts10 as unknown as VideoSpec},
-  {slug: 'the-biggest-ai-stories-of-july-2026', long: long11 as unknown as VideoSpec, shorts: shorts11 as unknown as VideoSpec},
-  {slug: 'why-computers-get-0-1-plus-0-2-wrong', long: long12 as unknown as VideoSpec, shorts: shorts12 as unknown as VideoSpec},
-  {slug: 'xrp-prediction', long: long13 as unknown as VideoSpec, shorts: shorts13 as unknown as VideoSpec},
+  {slug: 'kimi-k3', long: long8 as unknown as VideoSpec, shorts: shorts8 as unknown as VideoSpec},
+  {slug: 'palette-136-tour', long: long9 as unknown as VideoSpec, shorts: shorts9 as unknown as VideoSpec},
+  {slug: 'react-basics', long: long10 as unknown as VideoSpec, shorts: shorts10 as unknown as VideoSpec},
+  {slug: 'terawulf-anthropic-lease', long: long11 as unknown as VideoSpec, shorts: shorts11 as unknown as VideoSpec},
+  {slug: 'the-biggest-ai-stories-of-july-2026', long: long12 as unknown as VideoSpec, shorts: shorts12 as unknown as VideoSpec},
+  {slug: 'why-computers-get-0-1-plus-0-2-wrong', long: long13 as unknown as VideoSpec, shorts: shorts13 as unknown as VideoSpec},
+  {slug: 'xrp-prediction', long: long14 as unknown as VideoSpec, shorts: shorts14 as unknown as VideoSpec},
 ];
