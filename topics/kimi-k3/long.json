@@ -16,7 +16,6 @@
     "theme": "moderndark",
     "design": "moderndark",
     "themeLight": "daylight",
-    "background": "grid-pulse",
     "channel": "YOUR CHANNEL",
     "logo": "img:channel_logo.png"
   },

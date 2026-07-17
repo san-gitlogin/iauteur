@@ -100,6 +100,11 @@ export const SpecCompare: React.FC<{scene: Scene}> = ({scene}) => {
         <SideHead side={d.a} c={ca} />
         <div
           style={{
+            // justifySelf keeps the pill at content width, centered in the label
+            // column — without it the grid stretches it to the widest row label
+            // and the text sits flush left.
+            justifySelf: 'center',
+            textAlign: 'center',
             fontFamily: t.fonts.mono,
             fontWeight: 700,
             fontSize: (vertical ? 26 : 28) * scale,
