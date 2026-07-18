@@ -240,6 +240,9 @@ for (const s of spec.scenes ?? []) {
   if (!s.narration) E(`${id}: missing narration`);
   const wc = words(s.narration);
 
+  // Remotion requires integer frame counts — a fractional duration crashes every render.
+  if (s.durationFrames != null && !Number.isInteger(s.durationFrames))
+    E(`${id}: durationFrames ${s.durationFrames} is not an integer — Remotion rejects fractional durations`);
   // timing sanity: duration should track narration length (150wpm = 12 f/word)
   const expected = wc * 12 + 30;
   if (s.timingSource !== 'tts' && s.durationFrames && Math.abs(s.durationFrames - expected) > Math.max(60, expected * 0.4))

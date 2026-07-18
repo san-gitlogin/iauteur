@@ -57,7 +57,8 @@ for (const scene of spec.scenes) {
   else console.warn(`! ${scene.id}: no word times, keeping anchors (duration still synced)`);
   const base = Math.ceil(t.duration * FPS) + 10;
   const cap = scene.type === 'HOOK' ? 240 : 480;
-  const settled = Math.min(maxAnchorFrame(scene.data) + SETTLE, cap);
+  // ceil: anchors are fractional frames after retargeting; durationFrames must be an integer.
+  const settled = Math.min(Math.ceil(maxAnchorFrame(scene.data)) + SETTLE, cap);
   scene.durationFrames = Math.max(base, settled);
   scene.audio = `audio/${prefix}_${scene.id}.mp3`;
   scene.timingSource = 'tts';
