@@ -136,6 +136,8 @@ const RESEARCH_DEPTH = [
   '- If you can browse or search, do it NOW and pull CONCRETE specifics: the named companies, products, versions, dates, and real numbers an expert would cite (e.g. \u201cFigma\u2019s canvas is C++ compiled to WebAssembly,\u201d \u201cBlazor is roughly 42% of live WASM\u201d). Specifics are what separate an expert from a summary.',
   '- Find the ONE surprising, non-obvious truth underneath the headline \u2014 the thing most explainers miss \u2014 and build the whole video around it.',
   '- Show who ACTUALLY wins today and where the hype breaks down; a real, current landscape beats a vague overview.',
+  '- RESPECT THE SOURCE: every stat / chart / studio scene carries a REAL attribution in its data.source \u2014 outlet + date ("Reuters, Jul 2026"), the paper, or the vendor\u2019s own announcement. "illustrative" is the exception you consciously choose for made-up example numbers, never the default for facts you were too lazy to attribute.',
+  '- RESPECT THE VIEWER with earned depth: include at least one fun fact people will repeat to a friend, and one harsh reality / cold-water beat the fans won\u2019t like. Specifics over vibes \u2014 a video that only flatters its topic is an ad, not an explainer.',
   '- TRUTH still governs everything (see above): never fabricate a number, quote, version, or date. If you can\u2019t verify a time-sensitive fact, write `MISSING: <fact>` and mark illustrative figures with data.source "illustrative". Well-established evergreen facts you are confident about are fine.',
 ].join('\n');
 
@@ -178,6 +180,8 @@ const laws = [
   `5. Studio components (${STUDIO_SOURCE_TYPES.join(', ')}) MUST include a factual "source" \u2264${advertised(BUDGET.source)} chars.`,
   `6. Semantic colors MEAN: green=works, red=broken, blue=info, purple=AI, orange=tension, yellow=cost.`,
   `7. Assets: lucide: (glyphs) · si: (brand logos) · img: (only files that exist). Never invent files. If a media scene needs a real photo/clip/logo you don't have, DECLARE it: add {key, kind, query} to a top-level "assetsNeeded" list and reference it as "needed:<key>" — never fabricate a URL.`,
+  `8. PAYOFF EARLY (animation timing): the word that names each scene's visual payoff must land in the FIRST ~70% of that narration — the element animates in AT that word, and it needs on-screen time to be absorbed. Spend the closing words on meaning ("…and that changes everything"), never on the first mention of the reveal. A payoff named on the final word animates with zero time to breathe (linted).`,
+  `9. READ THE WHOLE PALETTE BEFORE CASTING: scan ALL component types below — every category, down to the last group — BEFORE assigning any type. For each beat weigh at least TWO candidates from DIFFERENT categories and keep the better-fitting shape. Never settle for the first plausible match near the top of the list; the specialist families at the bottom exist because a purpose-built shape beats a generic card (also linted).`,
 ].join('\n');
 
 const brief = [

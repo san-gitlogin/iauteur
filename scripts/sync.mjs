@@ -17,14 +17,37 @@ const ts = JSON.parse(fs.readFileSync(tsPath, 'utf8'));
 const retarget = (obj, words) => {
   if (!obj || typeof obj !== 'object') return;
   for (const [k, v] of Object.entries(obj)) {
-    if (k === 'atWord' && typeof v === 'number') {
+    // `atWord` plus suffixed variants (heroAtWord, headlineAtWord…) — all are
+    // word anchors read via wordToFrame, so all must be retargeted to real audio.
+    if (/atword$/i.test(k) && typeof v === 'number') {
       const idx = Math.min(Math.max(1, Math.round(v)), words.length) - 1;
       const frame = Math.round(words[idx] * FPS);
-      obj.atWord = +(frame / FPW + 1).toFixed(3); // fractional anchor = exact frame
+      obj[k] = +(frame / FPW + 1).toFixed(3); // fractional anchor = exact frame
     } else retarget(v, words);
   }
 };
 
+// The deepest frame any anchored element starts animating at in this scene.
+const maxAnchorFrame = (obj) => {
+  let m = 0;
+  const walk = (o) => {
+    if (!o || typeof o !== 'object') return;
+    for (const [k, v] of Object.entries(o)) {
+      if (/atword$/i.test(k) && typeof v === 'number') m = Math.max(m, (v - 1) * FPW);
+      else walk(v);
+    }
+  };
+  walk(obj);
+  return m;
+};
+
+// SETTLE TAIL (2026-07-18): a payoff anchored to a late word used to animate into
+// a 10-frame tail — the reveal got cut mid-draw with zero processing time. Every
+// scene now ends no earlier than lastAnchor + SETTLE frames (animation ~45f + the
+// human beat to absorb it), capped so a late anchor can't stretch a scene past its
+// pacing budget (HOOK ≤8s, any scene ≤16s). The real fix for a very late anchor is
+// naming the payoff earlier in the narration — the linter now flags that.
+const SETTLE = 75; // 2.5s @30fps
 for (const scene of spec.scenes) {
   const t = ts[scene.id];
   if (!t) { console.warn(`! no timestamps for ${scene.id}, keeping estimate`); continue; }
@@ -32,7 +55,10 @@ for (const scene of spec.scenes) {
   // words[idx] is undefined and every anchor would become NaN → null.
   if (Array.isArray(t.words) && t.words.length) retarget(scene.data, t.words);
   else console.warn(`! ${scene.id}: no word times, keeping anchors (duration still synced)`);
-  scene.durationFrames = Math.ceil(t.duration * FPS) + 10;
+  const base = Math.ceil(t.duration * FPS) + 10;
+  const cap = scene.type === 'HOOK' ? 240 : 480;
+  const settled = Math.min(maxAnchorFrame(scene.data) + SETTLE, cap);
+  scene.durationFrames = Math.max(base, settled);
   scene.audio = `audio/${prefix}_${scene.id}.mp3`;
   scene.timingSource = 'tts';
 }
