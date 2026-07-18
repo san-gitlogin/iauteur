@@ -305,8 +305,10 @@ const UnknownScene: React.FC<{scene: Scene}> = ({scene}) => {
 export const coverFrames = (spec: VideoSpec): number =>
   spec.cover ? (spec.cover.frames ?? 2) : 0;
 
+// Min 1: a freshly scaffolded stub has no scenes, and a 0-duration composition
+// makes Remotion reject the whole bundle — breaking renders for EVERY topic.
 export const specDuration = (spec: VideoSpec): number =>
-  coverFrames(spec) + spec.scenes.reduce((sum, s) => sum + s.durationFrames, 0);
+  Math.max(1, coverFrames(spec) + spec.scenes.reduce((sum, s) => sum + s.durationFrames, 0));
 
 const Watermark: React.FC<{logo: string}> = ({logo}) => {
   const {scale, vertical} = useScale();
