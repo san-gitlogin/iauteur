@@ -200,7 +200,7 @@ export function normalizeSpec(spec) {
   if (b.background && !BACKGROUNDS.includes(b.background)) { const s = snap(b.background, BACKGROUNDS); if (s) { log(`brand.background "${b.background}"→"${s}"`); b.background = s; } else { delete b.background; } }
 
   // ENVELOPE absorptions — the console owns the envelope; models drift on it.
-  const META_KEEP = ['topic', 'format', 'fps', 'onePayoff', 'openLoop', 'analogy', 'screenplay', 'topicAxes'];
+  const META_KEEP = ['topic', 'format', 'fps', 'onePayoff', 'openLoop', 'analogy', 'screenplay', 'topicAxes', 'seo'];
   if (spec.meta && typeof spec.meta === 'object') {
     if (spec.meta.title && !spec.meta.topic) { spec.meta.topic = spec.meta.title; log('meta.title→meta.topic'); }
     if (spec.meta.channel && !b.channel) { b.channel = spec.meta.channel; log('meta.channel→brand.channel'); }

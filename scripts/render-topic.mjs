@@ -30,3 +30,9 @@ const cmd = variant === 'thumb' || variant === 'cover'
   : `npx remotion render ${id} ${out}`;
 console.log('→ ' + cmd);
 execSync(cmd, {stdio: 'inherit'});
+
+// Every rendered video ships with its YouTube title + description (out/upload.md),
+// assembled in the channel's house pattern from the spec + meta.seo.
+if (variant !== 'thumb' && variant !== 'cover') {
+  execSync(`node scripts/gen-upload-kit.mjs ${slug}`, {stdio: 'inherit'});
+}

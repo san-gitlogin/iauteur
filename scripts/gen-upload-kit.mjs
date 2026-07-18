@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+// Assembles topics/<slug>/out/upload.md — YouTube title + description in the
+// channel's house pattern (hook question → "In this video, YOUR CHANNEL breaks
+// down …" → ⏱️ chapters → 🔗 sources → subscribe → User Queries → hashtags).
+// Deterministic where it must be: timestamps come from spec frames, sources from
+// the scenes' data.source fields. Creative fields come from meta.seo (authored at
+// spec time) with graceful fallbacks to meta.openLoop / meta.onePayoff.
+// Runs automatically after every video render (see render-topic.mjs).
+// Usage: node scripts/gen-upload-kit.mjs <slug>
+import fs from 'node:fs';
+
+const slug = process.argv[2];
+if (!slug) { console.error('Usage: node scripts/gen-upload-kit.mjs <slug>'); process.exit(2); }
+const spec = JSON.parse(fs.readFileSync(`topics/${slug}/long.json`, 'utf8'));
+const seo = spec.meta?.seo ?? {};
+const channel = spec.brand?.channel ?? 'YOUR CHANNEL';
+const mmss = (f) => { const s = Math.floor(f / 30); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+
+// scene start frames (cover still first, like MainComposition)
+let offset = spec.cover ? (spec.cover.frames ?? 2) : 0;
+const starts = {};
+for (const sc of spec.scenes) { starts[sc.id] = offset; offset += sc.durationFrames; }
+
+// chapters: authored seo.chapters [{id,title}] > CHAPTER scenes > per-scene labels
+const marks = [];
+if (Array.isArray(seo.chapters) && seo.chapters.length) {
+  for (const c of seo.chapters) if (starts[c.id] != null) marks.push(`${mmss(starts[c.id])} - ${c.title}`);
+} else {
+  const chapterScenes = spec.scenes.filter((s) => s.type === 'CHAPTER');
+  if (chapterScenes.length >= 2) {
+    marks.push(`${mmss(starts[spec.scenes[0].id])} - ${seo.hookChapter ?? 'The Hook'}`);
+    for (const sc of chapterScenes) {
+      const ch = sc.data?.chapter ?? {};
+      marks.push(`${mmss(starts[sc.id])} - ${ch.title ?? 'Chapter'}${ch.subtitle ? ': ' + ch.subtitle : ''}`);
+    }
+    const recap = spec.scenes.find((s) => s.type === 'RECAP');
+    if (recap) marks.push(`${mmss(starts[recap.id])} - The Recap`);
+  } else {
+    for (const sc of spec.scenes) {
+      const label = String(sc.data?.headline ?? sc.data?.heading ?? sc.data?.title ?? sc.type).replace(/[\[\]]/g, '');
+      marks.push(`${mmss(starts[sc.id])} - ${label}`);
+    }
+  }
+}
+
+// sources: unique factual data.source values (illustrative-only notes excluded)
+const sources = [...new Set(spec.scenes.map((s) => s.data?.source).filter(Boolean))]
+  .filter((s) => !/^\s*illustrative\s*$/i.test(s));
+
+const title = seo.title ?? spec.meta?.topic ?? slug;
+const altTitles = Array.isArray(seo.altTitles) ? seo.altTitles : [];
+const hook = seo.hook ?? spec.meta?.openLoop ?? '';
+const breakdown = seo.breakdown ?? spec.meta?.onePayoff ?? '';
+const queries = Array.isArray(seo.queries) ? seo.queries : [];
+const hashtags = Array.isArray(seo.hashtags) ? seo.hashtags : [];
+
+const md = [
+  '# TITLE',
+  title,
+  ...(altTitles.length ? ['', '## Alternate titles', ...altTitles.map((t) => `- ${t}`)] : []),
+  '',
+  '# DESCRIPTION',
+  '',
+  hook,
+  '',
+  `In this video, ${channel} breaks down ${breakdown}`,
+  '',
+  '⏱️ CHAPTERS',
+  ...marks,
+  '',
+  ...(sources.length ? ['🔗 SOURCES & REFERENCES', ...sources.map((s) => `- ${s}`), ''] : []),
+  '👇 SUBSCRIBE & WATCH NEXT',
+  `If this saved you a search, subscribe to ${channel} — new tech breakdowns every week.`,
+  '',
+  ...(seo.pinned ? ['📌 PINNED COMMENT', seo.pinned, ''] : []),
+  ...(queries.length ? ['User Queries:', ...queries, ''] : []),
+  hashtags.join(' '),
+].join('\n');
+
+fs.mkdirSync(`topics/${slug}/out`, {recursive: true});
+fs.writeFileSync(`topics/${slug}/out/upload.md`, md.trim() + '\n');
+console.log(`✓ topics/${slug}/out/upload.md (title + description · ${marks.length} chapters · ${sources.length} sources)`);

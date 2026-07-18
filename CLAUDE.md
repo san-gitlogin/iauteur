@@ -40,7 +40,7 @@ When the topic names a company / product / person / place, gather its art DURING
 - Preview: `npm run dev` (Studio shows `<slug>-wide-dark|wide-light|short-dark|short-light` + stills per topic)
 - Proof stills: `node scripts/proof.mjs <slug>-wide-dark topics/<slug>/long.json`
 - Package standalone: `npm run package -- <slug>` (self-contained dist/<slug>-video/ + zip: extract → npm install → npm run dev)
-- Render: `npm run render -- <slug> wide-dark|wide-light|short-dark|short-light|thumb|cover`
+- Render: `npm run render -- <slug> wide-dark|wide-light|short-dark|short-light|thumb|cover` — video renders auto-generate `topics/<slug>/out/upload.md` (YouTube title + description, house pattern) via `scripts/gen-upload-kit.mjs`; author the creative fields as `meta.seo` in the spec (see director skill §8b). Chapters/timestamps/sources are machine-derived from the spec — never hand-written.
 
 ## Laws (violations = defects)
 1. `brand.theme` is a DARK skin — the 7 core skins are studio|neonGrid|midnight|terminal|linear|vapor|luxe, and each of the 30 design packs also has a dark theme twin (38 dark themes total; authoritative list = `DARK_THEMES` in scripts/lint-spec.mjs). Light variants render automatically (`brand.themeLight`: daylight|paper|brutalist, default daylight). The linter enforces this.

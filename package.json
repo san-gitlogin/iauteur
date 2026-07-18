@@ -18,6 +18,7 @@
     "typecheck": "tsc --noEmit",
     "package": "node scripts/package-video.mjs",
     "chapters": "node scripts/gen-chapters.mjs",
+    "upload-kit": "node scripts/gen-upload-kit.mjs",
     "audit": "node scripts/audit-census.mjs && node scripts/audit-census-selftest.mjs && tsc --noEmit && node scripts/lint-all.mjs && node scripts/audio-check.mjs && node scripts/audit-determinism.mjs material",
     "audit:census": "node scripts/audit-census.mjs && node scripts/audit-census-selftest.mjs",
     "audit:census-selftest": "node scripts/audit-census-selftest.mjs",
