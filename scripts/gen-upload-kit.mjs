@@ -54,6 +54,16 @@ const breakdown = seo.breakdown ?? spec.meta?.onePayoff ?? '';
 const queries = Array.isArray(seo.queries) ? seo.queries : [];
 const hashtags = Array.isArray(seo.hashtags) ? seo.hashtags : [];
 
+// YouTube tags: comma-separated, hard-capped at 500 chars (YouTube's limit).
+// Truncates at the last whole tag that fits — never a cut-off fragment.
+const tagList = Array.isArray(seo.tags) ? seo.tags : [];
+let tags = '';
+for (const tg of tagList) {
+  const next = tags ? `${tags}, ${tg}` : tg;
+  if (next.length > 500) break;
+  tags = next;
+}
+
 const md = [
   '# TITLE',
   title,
@@ -75,6 +85,7 @@ const md = [
   ...(seo.pinned ? ['📌 PINNED COMMENT', seo.pinned, ''] : []),
   ...(queries.length ? ['User Queries:', ...queries, ''] : []),
   hashtags.join(' '),
+  ...(tags ? ['', '# TAGS (comma-separated, ≤500 chars — paste into YouTube tags field)', tags] : []),
 ].join('\n');
 
 fs.mkdirSync(`topics/${slug}/out`, {recursive: true});
