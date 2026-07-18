@@ -21,7 +21,7 @@ export const CachePyramid: React.FC<{scene: Scene}> = ({scene}) => {
 
   const tiers = (d.tiers ?? []).slice(0, 7);
   const n = tiers.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
 
   const maxW = (vertical ? 940 : 1180) * scale;

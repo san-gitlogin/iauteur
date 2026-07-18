@@ -22,7 +22,7 @@ export const LayeredStack: React.FC<{scene: Scene}> = ({scene}) => {
 
   const layers = (d.layers ?? []).slice(0, 7);
   const n = layers.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const signal = d.signal ?? 'down';
 

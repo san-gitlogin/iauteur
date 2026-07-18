@@ -34,7 +34,7 @@ export const DnaHelix: React.FC<{scene: Scene}> = ({scene}) => {
   const axis = vertical ? H : W;
   const pad = 60 * scale;
   const cross = (vertical ? W : H) / 2;
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
 
   // position along axis (u in 0..1) → screen point on strand s (0 or 1)
   const along = (u: number) => pad + u * (axis - 2 * pad);

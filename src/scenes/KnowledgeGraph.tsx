@@ -43,7 +43,7 @@ export const KnowledgeGraph: React.FC<{scene: Scene}> = ({scene}) => {
     const a = start0 + (i * 2 * Math.PI) / n;
     pos[nd.id] = {x: cx + R * Math.cos(a), y: cy + R * Math.sin(a)};
   });
-  const base = wordToFrame(d.atWord ?? 1) + 6;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 6;
 
   // query path: node ids lit sequentially
   const qp = d.queryPath ?? [];

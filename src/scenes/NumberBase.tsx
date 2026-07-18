@@ -19,7 +19,7 @@ export const NumberBase: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill />;
 
   const value = Math.max(0, Math.min(65535, Math.round(d.value ?? 0)));
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
 
   const bitsNeeded = Math.max(8, Math.ceil((value.toString(2).length) / 4) * 4);

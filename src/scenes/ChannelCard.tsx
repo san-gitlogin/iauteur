@@ -58,7 +58,7 @@ export const ChannelCard: React.FC<{scene: Scene; brand?: VideoSpec['brand']}> =
     );
   }
 
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const ringPulse = 1 + Math.sin(frame / 18) * 0.03;
 
   return (

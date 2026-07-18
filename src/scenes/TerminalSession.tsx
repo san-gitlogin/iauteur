@@ -30,7 +30,7 @@ export const TerminalSession: React.FC<{scene: Scene}> = ({scene}) => {
 
   // sequential timing per command
   const starts: number[] = [];
-  let cursor = wordToFrame(cmds[0]?.atWord ?? d.atWord ?? 1) + 6;
+  let cursor = Math.min(wordToFrame(cmds[0]?.atWord ?? d.atWord ?? 1), 38) + 6;
   for (let i = 0; i < cmds.length; i++) {
     starts.push(cursor);
     const typeDur = (cmds[i].cmd.length / cps) * fps;

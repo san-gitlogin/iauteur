@@ -24,7 +24,7 @@ export const TestRunner: React.FC<{scene: Scene}> = ({scene}) => {
   const cardW = (vertical ? 980 : 1180) * scale;
   const rowH = (vertical ? 60 : 54) * scale;
   const indentW = 34 * scale;
-  const base = wordToFrame(d.atWord ?? 1) + 8;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const per = 9;
   const statusColor = (s?: string) => (s === 'pass' ? sem('green') : s === 'fail' ? sem('red') : s === 'run' ? sem('blue') : t.colors.muted);
 

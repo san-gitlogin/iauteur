@@ -20,7 +20,7 @@ export const HashFunction: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.hash;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const green = sem('green');
   const digest = (d.digest ?? '').toLowerCase();

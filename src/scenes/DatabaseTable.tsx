@@ -21,7 +21,7 @@ export const DatabaseTable: React.FC<{scene: Scene}> = ({scene}) => {
   const nc = columns.length;
   const rows = (d.rows ?? []).slice(0, 6);
   const nr = rows.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const highlight = new Set(d.highlight ?? []);
 

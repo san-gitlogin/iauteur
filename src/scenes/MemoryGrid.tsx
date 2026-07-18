@@ -18,7 +18,7 @@ export const MemoryGrid: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.memory;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const cells = (d.cells ?? []).slice(0, 12);
   const cols = d.columns ?? (vertical ? Math.min(3, cells.length) : Math.min(4, cells.length));
   const accent = sem(d.color ?? 'blue');

@@ -26,7 +26,7 @@ export const GitBranch: React.FC<{scene: Scene}> = ({scene}) => {
   const commits = (d.commits ?? []).slice(0, 8);
   const nc = commits.length;
   const links = d.links ?? [];
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
 
   const graphW = (vertical ? 780 : 1480) * scale;
   const graphH = (vertical ? 1000 : 520) * scale;

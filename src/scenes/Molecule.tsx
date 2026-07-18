@@ -41,7 +41,7 @@ export const Molecule: React.FC<{scene: Scene}> = ({scene}) => {
     return {fill: t.colors.panel, text: t.colors.text};
   };
 
-  const bondStart = wordToFrame(d.atWord ?? 1);
+  const bondStart = Math.min(wordToFrame(d.atWord ?? 1), 38);
 
   return (
     <AbsoluteFill>

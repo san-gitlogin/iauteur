@@ -18,7 +18,7 @@ export const SloGauge: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.slo;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const nines = `${d.availability.toFixed(2)}%`;
   const met = d.target == null || d.availability >= d.target;
   const spent = Math.min(1, Math.max(0, d.budgetSpent ?? 0));

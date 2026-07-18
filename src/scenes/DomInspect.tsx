@@ -21,7 +21,7 @@ export const DomInspect: React.FC<{scene: Scene}> = ({scene}) => {
 
   const nodes = (d.nodes ?? []).slice(0, 8);
   const n = nodes.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const blue = sem('blue');
   const indent = 34 * scale;
   const rowH = (vertical ? 68 : 60) * scale;

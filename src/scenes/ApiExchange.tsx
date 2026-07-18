@@ -19,7 +19,7 @@ export const ApiExchange: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.api;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const statusOk = (d.status ?? '2').trim().startsWith('2');
   const respColor = statusOk ? sem('green') : sem('red');

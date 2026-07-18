@@ -24,7 +24,7 @@ export const Bits: React.FC<{scene: Scene}> = ({scene}) => {
   // octal chip resolves digit-by-digit, path in mono middle-truncated.
   if (d.variant === 'permissions') {
     const perms = (d.perms ?? 'rwxr-xr--').padEnd(9, '-').slice(0, 9);
-    const base = wordToFrame(d.atWord ?? 1) + 6;
+    const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 6;
     const groups = ['owner', 'group', 'other'];
     const rwx = ['r', 'w', 'x'];
     const cell = (vertical ? 96 : 90) * scale;

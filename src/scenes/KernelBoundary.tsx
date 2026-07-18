@@ -23,7 +23,7 @@ export const KernelBoundary: React.FC<{scene: Scene}> = ({scene}) => {
   const bandH = (vertical ? 260 : 240) * scale;
   const steps = (d.steps ?? []).slice(0, 4);
   const userChips = (d.userChips ?? []).slice(0, 3);
-  const base = wordToFrame(d.atWord ?? 1) + 8;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const syscallStart = base;
   const stepsStart = base + 20;
   const resultStart = stepsStart + steps.length * 12 + 14;

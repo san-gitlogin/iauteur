@@ -32,7 +32,7 @@ export const CodeWindowView: React.FC<{scene: Scene; chrome?: CodeChrome}> = ({s
 
   const lines: CodeLine[] = d.lines;
   const cps = d.typeSpeed ?? 42;
-  const start = wordToFrame(d.atWord);
+  const start = Math.min(wordToFrame(d.atWord), 38);
   const elapsed = Math.max(0, frame - start);
   const charsShown = Math.floor((elapsed / fps) * cps);
 

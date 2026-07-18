@@ -23,7 +23,7 @@ export const PacketFlow: React.FC<{scene: Scene}> = ({scene}) => {
 
   const hops = (d.hops ?? []).slice(0, 5);
   const n = hops.length;
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const accent = sem(d.color ?? 'blue');
   const horiz = !vertical;
   const container = d.variant === 'container'; // CONTAINER_LIFECYCLE: image chip Dockerfile→registry→host

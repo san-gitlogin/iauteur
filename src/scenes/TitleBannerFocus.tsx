@@ -20,7 +20,7 @@ export const TitleBannerFocus: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill style={{background: t.colors.bg}} />;
 
   const accent = d.color ?? 'orange';
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const rv = spring({frame: frame - start, fps, config: {damping: 200}});
   const enterY = (1 - rv) * 26 * scale;
 

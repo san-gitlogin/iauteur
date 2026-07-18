@@ -16,7 +16,7 @@ export const EvalDashboard: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill />;
 
   const metrics = (d.metrics ?? []).slice(0, 4);
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const cols = vertical ? Math.min(metrics.length, 2) : Math.min(metrics.length, 4);
   const size = vertical ? 300 : 260;
 

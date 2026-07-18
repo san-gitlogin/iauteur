@@ -22,7 +22,7 @@ export const GpuCluster: React.FC<{scene: Scene}> = ({scene}) => {
 
   const nodes = Math.max(2, Math.min(8, Math.round(d.nodes ?? 4)));
   const gpus = Math.max(2, Math.min(8, Math.round(d.gpusPerNode ?? 4)));
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'green');
   const total = nodes * gpus;
 

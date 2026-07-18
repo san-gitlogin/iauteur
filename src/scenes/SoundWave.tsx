@@ -16,7 +16,7 @@ export const SoundWave: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.wave ?? {};
   const accent = sem(d.color ?? 'blue');
   const count = d.bars ?? (vertical ? 28 : 44);
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const maxH = (vertical ? 460 : 340) * scale;
   const bw = 12 * scale;
 

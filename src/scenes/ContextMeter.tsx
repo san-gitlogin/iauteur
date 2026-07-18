@@ -23,7 +23,7 @@ export const ContextMeter: React.FC<{scene: Scene}> = ({scene}) => {
   const totalTokens = d.windowTokens ?? segs.reduce((a, s) => a + s.tokens, 0);
   const barW = (vertical ? 960 : 1500) * scale;
   const barH = (vertical ? 110 : 96) * scale;
-  const base = wordToFrame(d.atWord ?? 1) + 8;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const step = 12;
   const kindColor = (k: string) => (k === 'system' ? sem('blue') : k === 'tools' ? sem('purple') : k === 'history' ? sem('orange') : t.colors.muted);
   const used = segs.filter((s) => s.kind !== 'free').reduce((a, s) => a + s.tokens, 0);

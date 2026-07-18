@@ -21,7 +21,7 @@ export const CallStack: React.FC<{scene: Scene}> = ({scene}) => {
 
   const frames = (d.frames ?? []).slice(0, 6);
   const n = frames.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'purple');
   const per = 20;
   const mode = d.mode ?? (scene.type === 'ERROR_TRACE' ? 'trace' : 'stack');

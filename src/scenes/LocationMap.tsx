@@ -19,7 +19,7 @@ export const LocationMap: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.locationMap;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const f = frame - start;
   const pin = sem(d.color ?? 'green');
   const road = t.colors.text;

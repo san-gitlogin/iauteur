@@ -21,7 +21,7 @@ export const ProcessTable: React.FC<{scene: Scene}> = ({scene}) => {
   const rows = (d.rows ?? []).slice(0, vertical ? 5 : 7);
   const cardW = (vertical ? 1000 : 1280) * scale;
   const rowH = (vertical ? 68 : 60) * scale;
-  const base = wordToFrame(d.atWord ?? 1) + 8;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const per = 8;
   const sortBy = d.sortBy ?? 'cpu';
   const pidW = 110 * scale;

@@ -23,9 +23,12 @@ export const TransformerBlock: React.FC<{scene: Scene}> = ({scene}) => {
 
   const blocks = (d.blocks ?? []).slice(0, 7);
   const n = blocks.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  // Base ≤38f: the stack is on screen while the narration describes it. The
+  // anchor word times the PAYOFF (repeat bracket + × N tag), never the diagram.
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'purple');
   const per = 12;
+  const emph = Math.max(wordToFrame(d.atWord ?? 1), start + n * per + 6);
 
   const cardW = (vertical ? 720 : 560) * scale;
   const gap = 10 * scale;
@@ -71,7 +74,8 @@ export const TransformerBlock: React.FC<{scene: Scene}> = ({scene}) => {
   const topPart = desc.filter((di) => di > rTo);
   const midPart = desc.filter((di) => di >= rFrom && di <= rTo);
   const botPart = desc.filter((di) => di < rFrom);
-  const midRevealed = hasRepeat && frame >= start + rFrom * per + 6;
+  const bracketIn = interpolate(frame - emph, [0, 12], [0, 1], clamp);
+  const tagIn = interpolate(frame - emph, [4, 16], [0, 1], clamp);
 
   return (
     <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', padding: 70 * scale}}>
@@ -95,11 +99,18 @@ export const TransformerBlock: React.FC<{scene: Scene}> = ({scene}) => {
               alignItems: 'center',
               gap,
               padding: `${16 * scale}px ${16 * scale}px`,
-              border: `${2 * scale}px dashed ${hexA(accent, 0.6)}`,
-              borderRadius: (rad + 6 * scale),
-              opacity: interpolate(frame - (start + rFrom * per), [0, 12], [0, 1], clamp),
             }}
           >
+            {/* bracket is a separate overlay so its anchor-timed fade never hides the blocks */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                border: `${2 * scale}px dashed ${hexA(accent, 0.6)}`,
+                borderRadius: (rad + 6 * scale),
+                opacity: bracketIn,
+              }}
+            />
             {midPart.map((di) => <Block key={di} di={di} />)}
             {/* × N tag */}
             <div
@@ -118,7 +129,7 @@ export const TransformerBlock: React.FC<{scene: Scene}> = ({scene}) => {
                 padding: `${6 * scale}px ${14 * scale}px`,
                 whiteSpace: 'nowrap',
                 boxShadow: t.style.glow > 0 ? `0 0 ${18 * scale * t.style.glow}px ${hexA(accent, 0.4)}` : undefined,
-                opacity: midRevealed ? 1 : 0,
+                opacity: tagIn,
               }}
             >
               {d.repeatLabel ?? '\u00D7 N'}

@@ -28,7 +28,7 @@ export const AgentHarness: React.FC<{scene: Scene}> = ({scene}) => {
   const cy = box / 2;
   const maxR = box * 0.44;
   const coreR = maxR * 0.17;
-  const base = wordToFrame(d.atWord ?? 1) + 8;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const ringR = (i: number) => coreR + (maxR - coreR) * ((i + 1) / nr);
   const polar = (r: number, deg: number) => ({x: cx + r * Math.cos((deg * Math.PI) / 180), y: cy + r * Math.sin((deg * Math.PI) / 180)});
 

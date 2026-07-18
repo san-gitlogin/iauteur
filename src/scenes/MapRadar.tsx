@@ -24,7 +24,7 @@ export const MapRadar: React.FC<{scene: Scene}> = ({scene}) => {
   if (blips.length < 1) return <AbsoluteFill style={{background: t.colors.bg}} />;
   const accent = sem(d.color ?? 'green');
   const glow = t.style.glow;
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const rings = Math.max(2, Math.min(5, d.rings ?? 4));
 
   const R = (vertical ? 380 : 320) * scale;

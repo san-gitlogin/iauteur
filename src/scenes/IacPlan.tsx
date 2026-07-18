@@ -24,7 +24,7 @@ export const IacPlan: React.FC<{scene: Scene}> = ({scene}) => {
   const rows = (d.rows ?? []).slice(0, vertical ? 5 : 7);
   const cardW = (vertical ? 960 : 1180) * scale;
   const rowH = (vertical ? 66 : 58) * scale;
-  const base = wordToFrame(d.atWord ?? 1) + 8;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const per = 9;
 
   const counts = {add: 0, change: 0, destroy: 0};

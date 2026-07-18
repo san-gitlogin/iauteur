@@ -23,7 +23,7 @@ export const Tokenizer: React.FC<{scene: Scene}> = ({scene}) => {
 
   const tokens = (d.tokens ?? []).slice(0, 10);
   const n = tokens.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const split = interpolate(frame, [start + 10, start + 26], [0, 1], clamp);
   const gap = split * 16 * scale;

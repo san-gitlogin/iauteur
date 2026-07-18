@@ -20,7 +20,7 @@ export const SortingVisual: React.FC<{scene: Scene}> = ({scene}) => {
 
   const values = (d.values ?? []).slice(0, 12);
   const n = values.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const maxV = Math.max(...values, 1);
 

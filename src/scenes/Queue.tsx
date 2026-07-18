@@ -20,7 +20,7 @@ export const Queue: React.FC<{scene: Scene}> = ({scene}) => {
 
   const items = (d.items ?? []).slice(0, 7);
   const n = items.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const row = !vertical;
   const per = 10;

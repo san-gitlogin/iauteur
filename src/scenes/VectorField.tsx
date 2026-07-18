@@ -44,7 +44,7 @@ export const VectorField: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill style={{background: t.colors.bg}} />;
 
   const accent = sem(d.color ?? 'blue');
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const glow = t.style.glow;
 
   // shared arrowhead builder (tip at [tx,ty], pointing along angle a, size hs)

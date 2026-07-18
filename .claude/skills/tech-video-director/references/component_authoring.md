@@ -94,6 +94,17 @@ Then: `get_errors` (or `node node_modules/typescript/bin/tsc --noEmit`) must be 
   unseeded (use a `Math.sin(i*..)` hash for "random-looking" but stable values), NO CSS
   `@keyframes`/transitions.
 - **Entrances 12–18 frames; ONE glow/emphasis focus per frame.** Stagger children by index.
+- **BASE ≤38 FRAMES — never dead-screen until a late anchor (user-reported defect, 2026-07-18).**
+  A component's base visual (the diagram, board, frame, stack — whatever the narration is
+  describing) must be on screen within 38 frames of scene start. A lone scene-level anchor
+  (`d.atWord`) may only time an EMPHASIS payoff (a bracket, tag, verdict, highlight), never the
+  whole render tree. Idiom: `const start = Math.min(wordToFrame(d.atWord ?? 1), 38);` for the
+  base; `wordToFrame(d.atWord)` un-clamped only for the payoff element. Per-item anchors
+  (bars/rows/logos popping at their naming words) are the GOOD pattern and stay un-clamped, as
+  do genuine twist components where withholding IS the design (REVEAL's iris, FLIP_CARD's flip
+  — which must still show a front/cover from frame 0). All 73 existing base-gated sites were
+  clamped in the 2026-07-18 sweep (incl. the pack CODE_WINDOWs' typing start); new components
+  must ship with this contract from day one.
 - **Alignment via structure, not magic numbers.** Use CSS grid / flexbox / SVG maths so cells
   cannot drift. For labels pinned to a shape, render them INSIDE the same SVG as `<text>` (or
   anchored to the same element) — never as an absolutely-positioned div whose coordinates

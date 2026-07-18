@@ -21,7 +21,7 @@ export const TalkingPoints: React.FC<{scene: Scene}> = ({scene}) => {
   const accent = d.color ?? 'orange';
   const points = (d.points ?? []).slice(0, 5);
   const mediaSide = d.media ?? 'left';
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const mediaRv = spring({frame: frame - start, fps, config: {damping: 200}});
 
   const frameW = vertical ? width * 0.8 : width * 0.4;
