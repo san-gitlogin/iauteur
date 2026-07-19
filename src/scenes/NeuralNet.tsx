@@ -20,7 +20,7 @@ export const NeuralNet: React.FC<{scene: Scene}> = ({scene}) => {
 
   const layers = (d.layers ?? []).slice(0, 5).map((c) => Math.max(1, Math.min(6, Math.round(c))));
   const L = layers.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
 
   const graphW = (vertical ? 680 : 1400) * scale;

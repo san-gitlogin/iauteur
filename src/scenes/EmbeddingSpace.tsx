@@ -21,7 +21,7 @@ export const EmbeddingSpace: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill />;
 
   const points = (d.points ?? []).slice(0, 16);
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const clusters = (d.clusters ?? []).slice(0, 4);
   const plot = (vertical ? 900 : 680) * scale;
   const pad = 40 * scale;

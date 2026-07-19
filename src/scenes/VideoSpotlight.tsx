@@ -21,7 +21,7 @@ export const VideoSpotlight: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill style={{background: t.colors.bg}} />;
 
   const tint = d.color ?? 'orange';
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
 
   // frame box = a fraction of the real canvas (16:9), leaving room for the caption
   const frameW = width * (vertical ? 0.84 : 0.56);

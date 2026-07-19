@@ -65,5 +65,33 @@
     "note": "screenshot for commentary — self-test",
     "bytes": 14723,
     "capturedAt": "2026-07-17T16:55:53.921Z"
+  },
+  {
+    "file": "kimi-k3-docs.png",
+    "url": "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+    "note": "screenshot for commentary — Kimi K3 quickstart docs, platform.kimi.ai, snapped 2026-07-17",
+    "bytes": 250852,
+    "capturedAt": "2026-07-17T17:30:19.211Z"
+  },
+  {
+    "file": "kimi-home.png",
+    "url": "https://www.kimi.com",
+    "note": "screenshot for commentary — Kimi homepage branding, kimi.com, snapped 2026-07-17",
+    "bytes": 59453,
+    "capturedAt": "2026-07-17T17:30:28.247Z"
+  },
+  {
+    "file": "aa-models.png",
+    "url": "https://artificialanalysis.ai/models",
+    "note": "screenshot for commentary — Artificial Analysis model leaderboard, snapped 2026-07-17",
+    "bytes": 191744,
+    "capturedAt": "2026-07-17T17:30:32.436Z"
+  },
+  {
+    "file": "market-cap-top.png",
+    "url": "https://companiesmarketcap.com/",
+    "note": "screenshot for commentary — companiesmarketcap.com global market cap leaderboard, snapped 2026-07-18 — Apple vs Nvidia crown evidence",
+    "bytes": 156880,
+    "capturedAt": "2026-07-18T16:22:52.518Z"
   }
 ]

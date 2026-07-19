@@ -23,7 +23,7 @@ export const K8sCluster: React.FC<{scene: Scene}> = ({scene}) => {
 
   const mode = d.mode ?? 'schedule';
   const nodes = (d.nodes ?? []).slice(0, 4);
-  const base = wordToFrame(d.atWord ?? 1) + 10;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 10;
   const cell = (vertical ? 62 : 66) * scale;
   const gap = 12 * scale;
 

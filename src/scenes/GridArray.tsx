@@ -27,7 +27,7 @@ export const GridArray: React.FC<{scene: Scene}> = ({scene}) => {
   const rows = Math.max(2, Math.min(16, Math.round(d.rows)));
   const cols = Math.max(2, Math.min(16, Math.round(d.cols)));
   const mode = d.mode ?? 'wave';
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
 
   const wBudget = (vertical ? 940 : 1080) * scale;

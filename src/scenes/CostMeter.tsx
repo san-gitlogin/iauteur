@@ -18,7 +18,7 @@ export const CostMeter: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.cost;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const max = Math.max(d.budget, d.value) * 1.18;
   const over = d.value > d.budget;
   const verdict = over ? 'over budget' : 'under budget';

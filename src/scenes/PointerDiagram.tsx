@@ -21,7 +21,7 @@ export const PointerDiagram: React.FC<{scene: Scene}> = ({scene}) => {
 
   const nodes = (d.nodes ?? []).slice(0, 6);
   const n = nodes.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const row = !vertical;
 

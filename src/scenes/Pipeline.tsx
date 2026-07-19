@@ -23,7 +23,7 @@ export const Pipeline: React.FC<{scene: Scene}> = ({scene}) => {
 
   const stages = (d.stages ?? []).slice(0, 6);
   const n = stages.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const row = !vertical;
   // status system: the per-stage status/badge/ms/reason fields activate the CI /

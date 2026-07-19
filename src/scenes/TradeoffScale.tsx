@@ -25,7 +25,7 @@ export const TradeoffScale: React.FC<{scene: Scene}> = ({scene}) => {
   const right = d.right ?? {};
   const leftColor = sem(left.color ?? 'blue');
   const rightColor = sem(right.color ?? 'orange');
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const f = frame - start;
 
   // lean: negative → LEFT sinks, positive → RIGHT sinks. Clamp to [-1, 1].

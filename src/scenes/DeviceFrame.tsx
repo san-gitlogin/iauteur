@@ -20,7 +20,7 @@ export const DeviceFrame: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.device;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const accent = sem(d.color ?? 'blue');
   const phoneH = (vertical ? 1360 : 720) * scale;
   const phoneW = phoneH * 0.475; // fixed natural proportion — never stretched

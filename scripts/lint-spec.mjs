@@ -155,7 +155,8 @@ if (spec.cover && len(spec.cover.title) > BUDGET.coverTitle)
 const collectAnchors = (obj, out = []) => {
   if (obj && typeof obj === 'object') {
     for (const [k, v] of Object.entries(obj)) {
-      if (k === 'atWord' && typeof v === 'number') out.push(v);
+      // anchors are `atWord` plus the suffixed variants (heroAtWord, headlineAtWord…)
+      if (/atword$/i.test(k) && typeof v === 'number') out.push(v);
       else collectAnchors(v, out);
     }
   }
@@ -239,6 +240,9 @@ for (const s of spec.scenes ?? []) {
   if (!s.narration) E(`${id}: missing narration`);
   const wc = words(s.narration);
 
+  // Remotion requires integer frame counts — a fractional duration crashes every render.
+  if (s.durationFrames != null && !Number.isInteger(s.durationFrames))
+    E(`${id}: durationFrames ${s.durationFrames} is not an integer — Remotion rejects fractional durations`);
   // timing sanity: duration should track narration length (150wpm = 12 f/word)
   const expected = wc * 12 + 30;
   if (s.timingSource !== 'tts' && s.durationFrames && Math.abs(s.durationFrames - expected) > Math.max(60, expected * 0.4))
@@ -257,6 +261,21 @@ for (const s of spec.scenes ?? []) {
       if (a < 1) E(`${id}: atWord ${a} < 1 (anchors are 1-indexed)`);
       if (a > wc) E(`${id}: atWord ${a} exceeds narration word count (${wc}) — element would never appear`);
     }
+    // PAYOFF TIMING (2026-07-18): a payoff named in the narration's final words
+    // animates into the scene tail — the viewer gets no time to process it. The
+    // sync step adds a settle tail, but the real fix is naming the payoff earlier.
+    if (wc >= 8) {
+      const late = collectAnchors(s.data).filter((a) => a > Math.ceil(wc * 0.85));
+      if (late.length)
+        W(`${id}: anchor at word ${Math.max(...late)} of ${wc} — payoff lands in the last 15% of the narration. Restructure the line so the reveal is NAMED early and the closing words carry meaning, not the payoff.`);
+    }
+  } else {
+    // post-sync: anchors are exact frames — verify the last payoff actually gets
+    // settle time on screen before the scene ends (sync guarantees it unless the
+    // scene hit its pacing cap, which means the narration names the payoff too late).
+    const maxA = Math.max(0, ...collectAnchors(s.data).map((a) => (a - 1) * 12));
+    if (maxA > 0 && s.durationFrames && s.durationFrames - maxA < 55)
+      W(`${id}: last anchor fires ${((s.durationFrames - maxA) / 30).toFixed(1)}s before the scene ends — the payoff has no settle time. Name it earlier in the narration and re-run TTS + sync.`);
   }
 
   const d = s.data ?? {};

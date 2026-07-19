@@ -22,7 +22,7 @@ export const SandboxBox: React.FC<{scene: Scene}> = ({scene}) => {
     ...(d.allowed ?? []).map((label) => ({label, blocked: false})),
     ...(d.blocked ?? []).map((label) => ({label, blocked: true})),
   ].slice(0, 6);
-  const base = wordToFrame(d.atWord ?? 1) + 8;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const CW = (vertical ? 980 : 1400) * scale;
   const chipH = 56 * scale;
   const gap = 40 * scale;

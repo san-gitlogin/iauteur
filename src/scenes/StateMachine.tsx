@@ -22,7 +22,7 @@ export const StateMachine: React.FC<{scene: Scene}> = ({scene}) => {
   const states = (d.states ?? []).slice(0, 5);
   const ns = states.length;
   const transitions = (d.transitions ?? []).slice(0, 7);
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const active = d.active ?? -1;
 

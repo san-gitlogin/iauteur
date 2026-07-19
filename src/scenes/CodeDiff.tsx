@@ -20,7 +20,7 @@ export const CodeDiff: React.FC<{scene: Scene}> = ({scene}) => {
 
   const rows = (d.rows ?? []).slice(0, 12);
   const n = rows.length;
-  const start = wordToFrame(d.atWord ?? 1) + 6;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 6;
   const green = sem('green');
   const red = sem('red');
   const mono = t.fonts.mono;

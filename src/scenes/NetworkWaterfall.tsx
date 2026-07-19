@@ -22,7 +22,7 @@ export const NetworkWaterfall: React.FC<{scene: Scene}> = ({scene}) => {
 
   const reqs = (d.requests ?? []).slice(0, vertical ? 4 : 6);
   const n = reqs.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const totals = reqs.map((r) => (r.phases ?? []).reduce((a, p) => a + p.ms, 0));
   const maxMs = Math.max(1, ...totals);
   const slowest = totals.indexOf(Math.max(...totals, 0));

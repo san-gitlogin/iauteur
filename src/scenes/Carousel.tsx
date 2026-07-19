@@ -17,7 +17,7 @@ export const Carousel: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill />;
   const items = d.items ?? [];
   const n = items.length || 1;
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const spin = (frame - start) * (d.speed ?? 0.018);
   const radius = (vertical ? 232 : 340) * scale;
   const cardW = (vertical ? 300 : 210) * scale;

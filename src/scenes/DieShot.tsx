@@ -22,7 +22,7 @@ export const DieShot: React.FC<{scene: Scene}> = ({scene}) => {
   const blocks = (d.blocks ?? []).slice(0, 12);
   const cols = Math.max(1, Math.round(d.cols));
   const rows = Math.max(1, Math.round(d.rows));
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
 
   // die frame sized to the aspect, blocks fill it via the grid

@@ -21,7 +21,7 @@ export const LogStream: React.FC<{scene: Scene}> = ({scene}) => {
 
   const lines = (d.lines ?? []).slice(0, 10);
   const n = lines.length;
-  const start = wordToFrame(d.atWord ?? 1) + 6;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 6;
   const accent = sem(d.color ?? 'blue');
   const hi = d.highlight ?? -1;
 

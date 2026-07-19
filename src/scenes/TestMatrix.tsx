@@ -23,7 +23,7 @@ export const TestMatrix: React.FC<{scene: Scene}> = ({scene}) => {
   const cols = (d.cols ?? []).slice(0, 5);
   const nr = rows.length;
   const nc = cols.length;
-  const base = wordToFrame(d.atWord ?? 1) + 8;
+  const base = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const gap = 10 * scale;
   // Cell size caps: (1) fixed max, (2) fit the width, (3) fit the HEIGHT so that even
   // when the whole grid is vertically CENTERED it clears the headline zone — the grid

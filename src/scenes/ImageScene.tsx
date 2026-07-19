@@ -16,7 +16,7 @@ export const ImageScene: React.FC<{scene: Scene}> = ({scene}) => {
   const {scale, vertical} = useScale();
   const d = scene.data.image;
   if (!d) return <AbsoluteFill />;
-  const start = wordToFrame(d.atWord);
+  const start = Math.min(wordToFrame(d.atWord), 38);
   const c = sem(d.color ?? 'blue');
   const variant = d.variant ?? 'polaroid';
 

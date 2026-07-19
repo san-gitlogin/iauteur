@@ -95,7 +95,7 @@ export const CircuitFlow: React.FC<{scene: Scene}> = ({scene}) => {
   if (n < 2) return <AbsoluteFill style={{background: t.colors.bg}} />;
   const accent = sem(d.color ?? 'blue');
   const glow = t.style.glow;
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
 
   const W = (vertical ? 1000 : 1640) * scale;
   const H = (vertical ? 1180 : 660) * scale;

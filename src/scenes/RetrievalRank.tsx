@@ -20,7 +20,7 @@ export const RetrievalRank: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill />;
 
   const chunks = (d.chunks ?? []).slice(0, 6);
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const rerankStart = wordToFrame(d.rerankAtWord ?? d.atWord ?? 1) + 4;
   const fuseStart = d.fuseAtWord != null ? wordToFrame(d.fuseAtWord) + 4 : Infinity;
   const cardW = (vertical ? 940 : 1120) * scale;

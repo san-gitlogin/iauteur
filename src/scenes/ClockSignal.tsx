@@ -19,7 +19,7 @@ export const ClockSignal: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill />;
 
   const cycles = Math.max(3, Math.min(8, Math.round(d.cycles ?? 5)));
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
 
   const W = (vertical ? 920 : 1360) * scale;

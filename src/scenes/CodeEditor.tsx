@@ -22,7 +22,7 @@ export const CodeEditor: React.FC<{scene: Scene}> = ({scene}) => {
 
   const split = d.variant === 'split';
   const rawLines = (d.lines ?? []).slice(0, vertical ? 10 : 14).map((l) => l.replace(/\t/g, '  '));
-  const start = wordToFrame(d.atWord ?? 1) + 6;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 6;
   const accent = sem(d.color ?? 'blue');
   const mono = t.fonts.mono;
   const fsz = (vertical ? 26 : 26) * scale;

@@ -19,7 +19,7 @@ export const ActivityCard: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.activity;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const accent = sem(d.color ?? 'blue');
   const trendC = sem(d.trendColor ?? 'green');
   const bars = d.data ?? [];

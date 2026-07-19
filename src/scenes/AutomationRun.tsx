@@ -29,7 +29,7 @@ export const AutomationRun: React.FC<{scene: Scene}> = ({scene}) => {
 
   const steps = (d.steps ?? []).slice(0, 5);
   const n = steps.length;
-  const start = wordToFrame(d.atWord ?? 1) + 14; // page settles first
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 14; // page settles first
   const accent = sem(d.color ?? 'purple');
   const failIdx = steps.findIndex((s) => s.status === 'fail');
   const lastStep = failIdx >= 0 ? failIdx : n - 1;

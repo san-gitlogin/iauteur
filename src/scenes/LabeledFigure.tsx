@@ -33,7 +33,7 @@ export const LabeledFigure: React.FC<{scene: Scene}> = ({scene}) => {
   const gutterL = (vertical ? 30 : 40) * scale;
   const gutterR = W - gutterL;
   const labelW = (vertical ? 240 : 300) * scale;
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const fv = spring({frame: frame - start, fps, config: {damping: 200}});
 
   // split by anchor x, sort each side by anchor y, distribute evenly down the gutter

@@ -21,7 +21,7 @@ export const FileTree: React.FC<{scene: Scene}> = ({scene}) => {
 
   const nodes = (d.nodes ?? []).slice(0, 12);
   const n = nodes.length;
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'blue');
   const highlight = d.highlight ?? -1;
 

@@ -34,7 +34,7 @@ export const TickerTape: React.FC<{scene: Scene}> = ({scene}) => {
   const up = sem('green');
   const down = sem('red');
   const glow = t.style.glow;
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const nBands = Math.max(1, Math.min(3, d.rows ?? (vertical ? 3 : 2)));
   const featured = d.featured ? entries.find((e) => e.symbol === d.featured) : undefined;
 

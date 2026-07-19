@@ -20,7 +20,7 @@ export const SpecCompare: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill />;
 
   const rows = (d.rows ?? []).slice(0, 6);
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const ca = sem(d.a.color ?? 'blue');
   const cb = sem(d.b.color ?? 'orange');
 

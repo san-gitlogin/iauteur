@@ -20,7 +20,7 @@ export const Encryption: React.FC<{scene: Scene}> = ({scene}) => {
   const d = scene.data.encryption;
   if (!d) return <AbsoluteFill />;
 
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const accent = sem(d.color ?? 'purple');
   const green = sem('green');
   const decrypt = d.mode === 'decrypt';

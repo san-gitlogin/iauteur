@@ -22,7 +22,7 @@ export const LogoVersus: React.FC<{scene: Scene}> = ({scene}) => {
 
   const accent = sem(d.color ?? 'blue');
   const tile = (vertical ? 300 : 320) * scale;
-  const start = wordToFrame(d.atWord ?? 1);
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const lv = spring({frame: frame - start, fps, config: {damping: 200}});
   const rv = spring({frame: frame - start - 6, fps, config: {damping: 200}});
   const vv = spring({frame: frame - start - 12, fps, config: {damping: 180}});

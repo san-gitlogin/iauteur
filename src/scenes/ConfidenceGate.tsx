@@ -20,7 +20,7 @@ export const ConfidenceGate: React.FC<{scene: Scene}> = ({scene}) => {
   if (!d) return <AbsoluteFill />;
 
   const block = d.mode === 'block';
-  const start = wordToFrame(d.atWord ?? 1) + 8;
+  const start = Math.min(wordToFrame(d.atWord ?? 1), 38) + 8;
   const c = block ? sem('red') : sem('green');
   const style = d.style ?? (vertical ? 'gauge' : 'linear');
 
