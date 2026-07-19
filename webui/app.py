@@ -26,7 +26,10 @@ from pathlib import Path
 from flask import Flask, jsonify, request, send_from_directory, render_template, Response
 
 ROOT = Path(__file__).resolve().parent.parent          # repo root
-PREVIEW_DIR = ROOT / "out" / "proof" / "designs"        # 30 design thumbnails
+# Tracked design thumbnails (committed, so a fresh clone shows them too). The
+# old location (out/proof/designs) is git-ignored, which left the gallery blank
+# on any machine that had not rendered previews locally.
+PREVIEW_DIR = ROOT / "webui" / "static" / "design-previews"  # 30 design thumbnails (tracked)
 BRIEFS_DIR = ROOT / "briefs"
 TOPICS_DIR = ROOT / "topics"
 
@@ -120,7 +123,7 @@ def preview_map() -> dict[str, str]:
     out: dict[str, str] = {}
     if PREVIEW_DIR.is_dir():
         for fn in os.listdir(PREVIEW_DIR):
-            if not fn.lower().endswith(".png"):
+            if not fn.lower().endswith((".png", ".jpg", ".jpeg")):
                 continue
             stem = fn.rsplit(".", 1)[0]
             key = stem.split("_", 1)[1] if "_" in stem else stem
