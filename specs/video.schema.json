@@ -2433,7 +2433,7 @@
                       "properties": {
                         "content": {
                           "type": "object",
-                          "description": "ContentSlot {kind:'text'|'form'|'cardGrid'|'metric'|'empty'|'notification', …}"
+                          "description": "ContentSlot — pick a kind + its fields (every kind allows title≤40): text{body≤120} · form{fields≤4:[{label≤14,value,focus?}],submit?} · cardGrid{cards≤6:[{title≤16,sub≤22,status?,meta?,asset?}]} · metric{value≤8,label≤18} · notification{app≤14,text≤40} · empty{message≤40}"
                         },
                         "variant": {
                           "type": "string",
@@ -2478,7 +2478,7 @@
                       "properties": {
                         "content": {
                           "type": "object",
-                          "description": "ContentSlot (the page under test)"
+                          "description": "ContentSlot (page under test) — a kind + fields (title≤40): text{body≤120} · form{fields≤4:[{label≤14,value,focus?}],submit?} · cardGrid{cards≤6:[{title≤16,sub≤22,status?,meta?,asset?}]} · metric{value≤8,label≤18} · empty{message≤40}"
                         },
                         "steps": {
                           "type": "array",
@@ -2600,7 +2600,7 @@
                       "properties": {
                         "content": {
                           "type": "object",
-                          "description": "ContentSlot (the phone screen)"
+                          "description": "ContentSlot (phone screen) — a kind + fields (title≤40): text{body≤120} · form{fields≤4:[{label≤14,value,focus?}],submit?} · cardGrid{cards≤6:[{title≤16,sub≤22,status?,meta?,asset?}]} · metric{value≤8,label≤18} · notification{app≤14,text≤40} · empty{message≤40}"
                         },
                         "os": {
                           "type": "string",

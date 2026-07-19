@@ -593,7 +593,7 @@ export const MANIFEST = {
     purpose: 'A browser/OS window around a ContentSlot; optional devtools drawer.',
     use_when: 'Show a UI/app screen in a real window.',
     fields: {
-      content: {t: 'object', req: true, note: "ContentSlot {kind:'text'|'form'|'cardGrid'|'metric'|'empty'|'notification', …}"},
+      content: {t: 'object', req: true, note: "ContentSlot — pick a kind + its fields (every kind allows title≤40): text{body≤120} · form{fields≤4:[{label≤14,value,focus?}],submit?} · cardGrid{cards≤6:[{title≤16,sub≤22,status?,meta?,asset?}]} · metric{value≤8,label≤18} · notification{app≤14,text≤40} · empty{message≤40}"},
       variant: {t: 'string', note: 'browser|mac|windows|linux'},
       url: {t: 'string'}, title: {t: 'string', max: 30},
       devtools: {t: 'object', note: '{open?, panel:console|network, logs?≤5, requests?≤4}'}, atWord: {t: 'anchor'},
@@ -605,7 +605,7 @@ export const MANIFEST = {
     purpose: 'Scripted browser test: a cursor acts, steps stamp pass/fail.',
     use_when: 'Show an E2E/automation run.',
     fields: {
-      content: {t: 'object', req: true, note: 'ContentSlot (the page under test)'},
+      content: {t: 'object', req: true, note: "ContentSlot (page under test) — a kind + fields (title≤40): text{body≤120} · form{fields≤4:[{label≤14,value,focus?}],submit?} · cardGrid{cards≤6:[{title≤16,sub≤22,status?,meta?,asset?}]} · metric{value≤8,label≤18} · empty{message≤40}"},
       steps: {t: 'items', req: true, note: "≤5 × {action:'click'|'type'|'hover'|'assert'|'goto', target≤22, value?≤20, status?:pass|fail|running, reason?≤40}"},
       url: {t: 'string'}, runner: {t: 'string', max: 14, note: 'playwright/selenium'}, atWord: {t: 'anchor'},
     },
@@ -636,7 +636,7 @@ export const MANIFEST = {
     purpose: 'A phone frame around a ContentSlot, optional notification drop.',
     use_when: 'Show a mobile app screen.',
     fields: {
-      content: {t: 'object', req: true, note: 'ContentSlot (the phone screen)'},
+      content: {t: 'object', req: true, note: "ContentSlot (phone screen) — a kind + fields (title≤40): text{body≤120} · form{fields≤4:[{label≤14,value,focus?}],submit?} · cardGrid{cards≤6:[{title≤16,sub≤22,status?,meta?,asset?}]} · metric{value≤8,label≤18} · notification{app≤14,text≤40} · empty{message≤40}"},
       os: {t: 'string', note: 'ios|android'},
       notification: {t: 'object', note: '{app≤14, text≤40}'}, atWord: {t: 'anchor'},
     },
