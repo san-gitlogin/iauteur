@@ -67,8 +67,17 @@ if (cmd === 'stage1' || cmd === 'single') {
   fs.writeFileSync(bf, JSON.stringify(readJSON(arg2)));
   emit({mode: 'two-paste (stage 2 — fill)', prompt: gen(cfgArg, 'stage2', bf)});
 } else if (cmd === 'assemble') {
+  // GUARD: a BEAT SHEET (has `beats`, no `scenes`) pasted into the fill/assemble box
+  // would assemble to 0 scenes, then the fix-prompt path emits a nonsensical "fix 0
+  // scenes / id: undefined" prompt. Stop early with a clear instruction instead.
+  const _reply = readJSON(arg2);
+  if (!Array.isArray(_reply.scenes) && Array.isArray(_reply.beats)) {
+    emit({ok: false, firstTry: false, spec: null, changes: [], warnings: [], lint: '', fixPrompt: '',
+      error: 'That looks like a BEAT SHEET (it has "beats", not "scenes"). In the two-paste flow: validate the beat sheet, generate the Stage-2 "fill" prompt, then paste the FILLED reply here — a fill reply has a top-level "scenes" array.'});
+    process.exit(0);
+  }
   // console owns the envelope; the model reply supplies story + thumbnail + scenes
-  const {spec, changes: asm} = assembleSpec(readJSON(arg2), cfg);
+  const {spec, changes: asm} = assembleSpec(_reply, cfg);
   const sf = scratch('spec.json');
   fs.writeFileSync(sf, JSON.stringify(spec, null, 2));
   const before = lint(sf);
