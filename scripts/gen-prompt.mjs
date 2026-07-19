@@ -161,6 +161,21 @@ const REACH_FOR = [
   'Every video needs at least one genuinely VISUAL moment (a diagram, chart, device, media, or kinetic beat). A spec built only from HOOK / TITLE_CARD / STAT_CALLOUT / LIST_BUILD / STEP_FLOW / RECAP / OUTRO_CTA is under-directed and will be REJECTED \u2014 those are the connective tissue, not the whole video. These are cues, not quotas: still obey the anti-monotony law and one idea per scene.',
 ].join('\n');
 
+// CASTING PROTOCOL — the mechanism that stops autopilot. Teaching the palette is
+// not enough: a model (especially a small one) still grabs the same familiar cards
+// unless it is forced to SHOW ITS WORK per beat. So every beat carries a worksheet
+// — shape (from a closed vocabulary) → three candidates from DIFFERENT groups → the
+// most specific type, chosen LAST. Writing the deliberation IS the deliberation.
+// This is local to each beat (no cross-video memory) and is dropped before render.
+const CASTING_PROTOCOL = [
+  '## CAST EVERY BEAT DELIBERATELY — the single most important rule',
+  'The #1 failure is autopilot: reaching for the same few cards (STAT_CALLOUT, SPLIT_PATHS, TIMELINE, SPEC_COMPARE, LIST_BUILD, STEP_FLOW, QUOTE_SPOTLIGHT) on every topic. You will NOT do that. For EVERY beat you fill a tiny worksheet FIRST and pick the component LAST:',
+  '1. shape — in a few words, what is this beat’s content ACTUALLY? Choose from: cold-open stake · name/title · chapter turn · one hero number · a few numbers · trend over time · proportion of a whole · ranking / magnitude · flow / drop-off · brand-vs-brand · a set of brands · mechanism / architecture · step-by-step process · fork / either-or · dated sequence · quote / principle · device / app / UI · code / terminal · data structure / bits / memory · set-piece (formula / molecule / circuit / DNA / label) · monitoring / scan · one-line punch · recap · close / CTA. Decide the shape from the NARRATION, BEFORE you look at any component.',
+  '2. considered — name THREE candidate components that could carry that shape, EACH FROM A DIFFERENT GROUP in the menu, with one short clause each on why. Scan the WHOLE menu, every group top to bottom — not just the first few; the specialist families near the end exist because a purpose-built shape beats a generic card. At least ONE of the three MUST be a specialist (a chart, a diagram, a device, a media, or a set-piece) unless the beat is genuinely a bare HOOK / title / recap / CTA. If the shape has an obvious purpose-built match (brand-vs-brand → LOGO_VERSUS; trend → LINE_CHART; architecture → DIAGRAM; proportion → DONUT; dated sequence → TIMELINE), it MUST be one of the three.',
+  '3. type — pick the MOST SPECIFIC fit of your three. If you choose a generic card (LIST_BUILD / STAT_CALLOUT / STEP_FLOW / CONCEPT_DIAGRAM / TITLE_CARD) over a specialist you listed, add one clause saying why the specialist did NOT fit. “It’s simpler” or “it’s cleaner” is NOT a valid reason.',
+  'Take your time — a small or fast model is NEVER an excuse to skip the worksheet. The worksheet IS how you think, written down. Never jump straight to a type.',
+].join('\n');
+
 // ---- shared blocks -----------------------------------------------------------
 const truth = source
   ? ['## TRUTH (most important)', 'Ground EVERY fact ONLY in the SOURCE below. Never invent numbers, dates,',
@@ -181,7 +196,7 @@ const laws = [
   `6. Semantic colors MEAN: green=works, red=broken, blue=info, purple=AI, orange=tension, yellow=cost.`,
   `7. Assets: lucide: (glyphs) · si: (brand logos) · img: (only files that exist). Never invent files. If a media scene needs a real photo/clip/logo you don't have, DECLARE it: add {key, kind, query} to a top-level "assetsNeeded" list and reference it as "needed:<key>" — never fabricate a URL.`,
   `8. PAYOFF EARLY (animation timing): the word that names each scene's visual payoff must land in the FIRST ~70% of that narration — the element animates in AT that word, and it needs on-screen time to be absorbed. Spend the closing words on meaning ("…and that changes everything"), never on the first mention of the reveal. A payoff named on the final word animates with zero time to breathe (linted).`,
-  `9. READ THE WHOLE PALETTE BEFORE CASTING: scan ALL component types below — every category, down to the last group — BEFORE assigning any type. For each beat weigh at least TWO candidates from DIFFERENT categories and keep the better-fitting shape. Never settle for the first plausible match near the top of the list; the specialist families at the bottom exist because a purpose-built shape beats a generic card (also linted).`,
+  `9. CAST EVERY BEAT VIA THE WORKSHEET (see “CAST EVERY BEAT DELIBERATELY” above): shape → three candidates from DIFFERENT groups → the most specific type, in that order. NEVER assign a component without it. Scan the whole menu below, every group to the last — the specialist families exist because a purpose-built shape beats a generic card (also linted).`,
 ].join('\n');
 
 const brief = [
@@ -199,6 +214,7 @@ function stage1() {
     'You are the DIRECTOR of iAuteur, a video factory. STAGE 1 of 2: plan the BEAT SHEET only.',
     'Output ONLY the JSON described in OUTPUT — no prose, no spec data yet.', '',
     brief, '', truth, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '',
+    CASTING_PROTOCOL, '',
     NARRATION_VOICE, '',
     '## topicAxes — pick \u22652 (channel strategy):', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
     `## COMPONENT MENU (choose types from THIS list only — ${MANIFEST_TYPES.length} available, grouped by what they do)`,
@@ -209,8 +225,8 @@ function stage1() {
     '  "meta": { "topic": "...", "onePayoff": "...", "openLoop": "...", "analogy": "...",',
     `           "screenplay": "${preset}", "topicAxes": ["...", "..."] },`,
     '  "beats": [',
-    '    { "id": "s01", "type": "HOOK", "intent": "the stake", "narration": "the exact spoken line" }',
-    `    // ${sceneRange[0]}\u2013${sceneRange[1]} beats; last is OUTRO_CTA or RECAP`,
+    '    { "id": "s01", "shape": "cold-open stake", "considered": [ {"t":"HOOK","why":"scene 1 stake"}, {"t":"REVEAL","why":"one dramatic line"}, {"t":"KINETIC_TEXT","why":"a punch"} ], "type": "HOOK", "intent": "the stake", "narration": "the exact spoken line" }',
+    `    // ${sceneRange[0]}\u2013${sceneRange[1]} beats. EVERY beat carries shape + considered (3, each from a DIFFERENT group) + type, decided in that order. First beat is HOOK; last is OUTRO_CTA or RECAP.`,
     '  ]',
     '}',
     '```',
@@ -257,7 +273,8 @@ function single() {
   return [
     'You are the DIRECTOR of iAuteur, a video factory. Produce a complete spec JSON in ONE response.',
     'First think a beat sheet, then output ONLY the final spec JSON (no prose).', '',
-    brief, '', truth, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '', exampleScene, '',
+    brief, '', truth, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '',
+    CASTING_PROTOCOL, '', exampleScene, '',
     NARRATION_VOICE, '',
     '## topicAxes — pick \u22652:', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
     `## COMPONENT PALETTE (${MANIFEST_TYPES.length} types — use ONLY these; grouped by what they do; each with its exact data schema)`,
@@ -269,14 +286,16 @@ function single() {
     '- `transition` is a SCENE CUT: ' + TRANSITIONS.join(', ') + '. (Entrance animations live inside a component’s data, never as a transition.)',
     `- ${format === 'short' ? 'cover' : 'thumbnail'}.title ≤ ${advertised(BUDGET.coverTitle)} chars — a SHORT punch (3–4 words), NOT the full topic; badge ≤ ${advertised(BUDGET.badgeInCard)}.`, '',
     '## OUTPUT \u2014 the console owns the envelope (topic/format/design/theme/channel are added by the app).',
-    'Return ONE JSON object with EXACTLY these keys \u2014 NO meta, NO brand:',
+    'Return ONE JSON object with EXACTLY these keys \u2014 NO meta, NO brand. Fill `casting` FIRST (one worksheet row per scene, same order as scenes), then `scenes`:',
     '```json',
     '{',
     '  "onePayoff": "...", "openLoop": "...", "analogy": "...", "topicAxes": ["...","..."],',
+    '  "casting": [ { "id": "s01", "shape": "cold-open stake", "considered": [ {"t":"HOOK","why":"scene 1 stake"}, {"t":"REVEAL","why":"dramatic line"}, {"t":"KINETIC_TEXT","why":"a punch"} ], "type": "HOOK" } ],',
     `  "${format === 'short' ? 'cover' : 'thumbnail'}": { "title": "...", "badge": "...", "asset": "lucide:..." },`,
     '  "scenes": [ { "type": "HOOK", "narration": "...", "transition": "fade", "data": { /* per schema */ } } ]',
     '}',
     '```',
+    'The `casting` array is your visible thinking \u2014 the app reads it to confirm you deliberated, then DROPS it; the video is built from `scenes`. There must be one casting row per scene, in order, and `scenes[i].type` MUST equal `casting[i].type`.',
     'Output only the JSON.',
   ].join('\n');
 }
