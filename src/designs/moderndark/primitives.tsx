@@ -65,10 +65,10 @@ export const MdChrome: React.FC = () => {
   const H = (vertical ? 1920 : 1080) * scale;
   return (
     <div style={{position: 'absolute', inset: 0, zIndex: 20, pointerEvents: 'none'}}>
-      <div style={{position: 'absolute', left: -0.16 * W + d1, top: -0.14 * H, width: 0.62 * W, height: 0.62 * W, borderRadius: '50%', background: 'radial-gradient(circle, rgba(94,106,210,0.18) 0%, transparent 62%)', filter: `blur(${60 * scale}px)`}} />
-      <div style={{position: 'absolute', right: -0.16 * W - d2, bottom: -0.16 * H, width: 0.56 * W, height: 0.56 * W, borderRadius: '50%', background: 'radial-gradient(circle, rgba(156,135,224,0.14) 0%, transparent 62%)', filter: `blur(${60 * scale}px)`}} />
-      <div style={{position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(255,255,255,0.5) ${1 * scale}px, transparent ${1.1 * scale}px)`, backgroundSize: `${3 * scale}px ${3 * scale}px`, mixBlendMode: 'overlay', opacity: 0.03}} />
-      <div style={{position: 'absolute', inset: 0, boxShadow: `inset 0 0 ${240 * scale}px rgba(0,0,0,0.6)`}} />
+      <div style={{position: 'absolute', left: -0.12 * W + d1, top: -0.12 * H, width: 0.74 * W, height: 0.74 * W, borderRadius: '50%', background: 'radial-gradient(circle, rgba(94,106,210,0.34) 0%, rgba(94,106,210,0.12) 40%, transparent 70%)', filter: `blur(${64 * scale}px)`}} />
+      <div style={{position: 'absolute', right: -0.12 * W - d2, bottom: -0.13 * H, width: 0.68 * W, height: 0.68 * W, borderRadius: '50%', background: 'radial-gradient(circle, rgba(156,135,224,0.26) 0%, rgba(156,135,224,0.09) 40%, transparent 70%)', filter: `blur(${64 * scale}px)`}} />
+      <div style={{position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(255,255,255,0.5) ${1 * scale}px, transparent ${1.1 * scale}px)`, backgroundSize: `${3 * scale}px ${3 * scale}px`, mixBlendMode: 'overlay', opacity: 0.035}} />
+      <div style={{position: 'absolute', inset: 0, boxShadow: `inset 0 0 ${200 * scale}px rgba(0,0,0,0.42)`}} />
     </div>
   );
 };

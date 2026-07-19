@@ -256,6 +256,94 @@
         <div class="stepnav"><button class="btn ghost" data-back>← Back</button></div>
       </section>
 
+      <!-- COMPONENT CREATOR (drawer — opened per-beat from the Author step) -->
+      <section id="componentCreator" class="creatorDrawer hidden" aria-hidden="true">
+        <div class="drawerhead">
+          <div><div class="kick">Component Creator</div><h2 id="creatorTitle">New component</h2></div>
+          <button id="creatorClose" class="btn ghost sm">✕ Close</button>
+        </div>
+        <div class="drawerbody">
+        <div class="panelhead"><p id="creatorBeatNote" class="muted small hidden"></p>
+          <p>Two pastes — like authoring a spec, but you get back a React component. It's validated,
+             auto-wired into every design, type-checked, and rolled back automatically if anything fails.</p></div>
+
+        <div class="card">
+          <h3>1 · Describe the component</h3>
+          <div class="cardsub">What must it show? The more concrete, the better the result.</div>
+          <label class="field">What it must show / do <span class="req">*</span>
+            <textarea id="compNeed" rows="3" placeholder="e.g. A GitHub-style contribution heatmap: a grid of squares (weeks × days) where colour intensity encodes an activity count, with a title and a Less→More legend."></textarea>
+          </label>
+          <label class="field">The segment / narration it serves <span class="muted">(optional)</span>
+            <input id="compSegment" type="text" placeholder="e.g. Consistency compounds — a year of showing up." />
+          </label>
+          <label class="field">Example content <span class="muted">(optional)</span>
+            <textarea id="compExample" rows="2" placeholder="e.g. 365 daily commit counts as a 53-week × 7-day grid, greener = more."></textarea>
+          </label>
+          <details class="adv"><summary>Advanced — naming &amp; grouping (optional)</summary>
+            <div class="grid2">
+              <label class="field">Type <span class="muted">UPPER_SNAKE</span><input id="compType" type="text" placeholder="CONTRIB_HEATMAP" /></label>
+              <label class="field">Name <span class="muted">PascalCase</span><input id="compName" type="text" placeholder="ContribHeatmap" /></label>
+              <label class="field">Data key <span class="muted">camelCase</span><input id="compDataKey" type="text" placeholder="heatmap" /></label>
+              <label class="field">Category<input id="compCategory" type="text" placeholder="chart" /></label>
+              <label class="field">Family<input id="compFamily" type="text" placeholder="chart" /></label>
+              <label class="field ck"><input id="compDynamic" type="checkbox" checked /> Animated / visual moment</label>
+            </div>
+          </details>
+        </div>
+
+        <div class="card">
+          <h3>2 · Design the data contract <span class="muted">— Stage 1</span></h3>
+          <div class="cardsub">Generate a prompt, paste it into your LLM, paste the config JSON it returns back here.</div>
+          <div class="btnrow"><button id="compStage1Btn" class="btn primary">Generate contract prompt</button></div>
+          <div id="compStage1Box" class="promptblock hidden">
+            <div class="copyline"><span>Stage 1 prompt</span><button class="btn sm ghost" data-copy="compStage1Text">copy</button></div>
+            <pre id="compStage1Text" class="code"></pre>
+          </div>
+          <label class="field">Config JSON from your LLM
+            <textarea id="compConfigJson" rows="5" placeholder='{ "type": "…", "name": "…", "dataKey": "…", "fields": [ … ], "example": { … } }'></textarea>
+          </label>
+          <div class="btnrow"><button id="compValidateBtn" class="btn">Validate config</button></div>
+          <div id="compValidateVerdict"></div>
+        </div>
+
+        <div id="compStage2Card" class="card hidden">
+          <h3>3 · Write the component <span class="muted">— Stage 2</span></h3>
+          <div class="cardsub">The contract is fixed. Generate the build prompt, paste it into your LLM, paste the .tsx it returns back.</div>
+          <div class="btnrow"><button id="compStage2Btn" class="btn primary">Generate component prompt</button></div>
+          <div id="compStage2Box" class="promptblock hidden">
+            <div class="copyline"><span>Stage 2 prompt</span><button class="btn sm ghost" data-copy="compStage2Text">copy</button></div>
+            <pre id="compStage2Text" class="code"></pre>
+          </div>
+          <label class="field">Component .tsx from your LLM
+            <textarea id="compTsx" rows="6" placeholder="import React from 'react'; … export const … : React.FC&lt;{scene: Scene}&gt; = …"></textarea>
+          </label>
+          <div class="btnrow"><button id="compAssembleBtn" class="btn primary">Assemble → auto-wire → verify</button></div>
+          <div id="compAssembleResult"></div>
+        </div>
+
+        <div id="compProofCard" class="card hidden">
+          <h3>4 · Proof <span class="muted">— see it render</span></h3>
+          <div class="cardsub">Render stills across material (rounded+glow) and neo-brutalism (flat+sharp) to prove theme adaptation. This bundles the project, so it takes a minute.</div>
+          <div class="btnrow">
+            <button id="compProofBtn" class="btn">Render proof stills</button>
+            <button class="btn ghost" data-action="studio">Open Remotion Studio</button>
+          </div>
+          <div id="compProof" class="outputs"></div>
+        </div>
+
+        <div class="card">
+          <h3>Remove a component <span class="muted">— reverse-wire</span></h3>
+          <div class="cardsub">Fully un-wires a component from every file and type-checks; rolls back if anything breaks. For a mistaken or unwanted type.</div>
+          <div class="btnrow">
+            <input id="compRemoveType" type="text" placeholder="TYPE_TO_REMOVE" style="max-width:260px" />
+            <button id="compRemoveBtn" class="btn ghost">Remove</button>
+          </div>
+          <div id="compRemoveResult"></div>
+        </div>
+
+        </div><!-- /drawerbody -->
+      </section>
+
     </main>
   </div>
 

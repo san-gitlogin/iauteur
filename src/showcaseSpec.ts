@@ -14,6 +14,7 @@ const gallery = galleryJson as unknown as VideoSpec;
 const widgets = widgetsJson as unknown as VideoSpec;
 
 const extra = [
+  {id: 'x-pipelinegantt', type: 'PIPELINE_GANTT', narration: "A pipeline gantt demo scene shows this component.", durationFrames: 200, timingSource: 'estimated', background: 'zoneA', data: {pipelineGantt: {"atWord":3,"caption":"One instruction finishes every cycle","color":"blue","count":4,"headline":"Five stages, [overlapped]","source":"illustrative","stages":["IF","ID","EX","MEM","WB"]}}},
   {id: 'x-title', type: 'TITLE_CARD', narration: 'A title card opens the section, in this design.', durationFrames: 150, timingSource: 'estimated', background: 'zoneA', data: {title: 'Every Component', subtitle: 'in every design'}},
   {id: 'x-tradeoff', type: 'TRADEOFF_SCALE', narration: 'Every engineering choice is a tradeoff on a balance beam.', durationFrames: 200, timingSource: 'estimated', background: 'zoneB', data: {tradeoff: {headline: 'Speed vs [safety]', left: {label: 'Move fast', sub: 'ship daily', asset: 'lucide:rabbit', color: 'orange'}, right: {label: 'Stay safe', sub: 'review everything', asset: 'lucide:shield', color: 'blue'}, lean: 0.4, caption: 'Every team picks a point on this beam', atWord: 6, source: 'illustrative'}}},
   {id: 'x-kt1', type: 'KINETIC_TEXT', narration: 'Kinetic text types itself out on the screen.', durationFrames: 150, timingSource: 'estimated', background: 'zoneB', data: {kinetic: {fx: 'typewriter', text: 'Predict the next token.', sub: 'kinetic typewriter', color: 'blue', atWord: 1}}},

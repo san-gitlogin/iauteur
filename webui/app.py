@@ -682,6 +682,131 @@ def api_flow_applyfix():
     return jsonify(_flow("applyfix", cfg, {"spec": spec, "patch": patch}))
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# COMPONENT LAB — create a brand-new Remotion scene component via the user's LLM.
+# Mirrors the spec two-paste flow (_flow) but drives scripts/component-flow.mjs.
+# ─────────────────────────────────────────────────────────────────────────────
+def _component(subcmd: str, brief: dict, config=None, tsx: str = None, timeout: int = 90) -> dict:
+    """Write the brief (+ config, + tsx) to temp files, run component-flow.mjs, parse its JSON."""
+    tmp = ROOT / "out" / "tmp"
+    tmp.mkdir(parents=True, exist_ok=True)
+    files = []
+    brieffile = tmp / "complab_brief.json"
+    brieffile.write_text(json.dumps(brief), encoding="utf-8")
+    files.append(brieffile)
+    args = [node_exe(), "scripts/component-flow.mjs", subcmd, str(brieffile)]
+    if subcmd in ("validate", "stage2", "assemble", "proof"):
+        cf = tmp / "complab_config.json"
+        cf.write_text(json.dumps(config or {}), encoding="utf-8")
+        files.append(cf)
+        args.append(str(cf))
+    if subcmd == "assemble":
+        tf = tmp / "complab_tsx.txt"
+        tf.write_text(tsx or "", encoding="utf-8")
+        files.append(tf)
+        args.append(str(tf))
+    try:
+        proc = subprocess.run(args, cwd=str(ROOT), env=run_env(), capture_output=True,
+                              text=True, encoding="utf-8", errors="replace", timeout=timeout)
+        if proc.returncode != 0:
+            return {"error": (proc.stderr or proc.stdout or "")[-6000:]}
+        return json.loads(proc.stdout)
+    except Exception as e:
+        return {"error": str(e)}
+    finally:
+        for f in files:
+            try:
+                f.unlink()
+            except OSError:
+                pass
+
+
+@app.route("/api/component/stage1", methods=["POST"])
+def api_component_stage1():
+    brief = dict(request.get_json(force=True) or {})
+    if not (brief.get("need") or "").strip():
+        return jsonify({"error": "Describe what the component must show (the 'need')."}), 400
+    return jsonify(_component("stage1", brief, timeout=60))
+
+
+@app.route("/api/component/validate", methods=["POST"])
+def api_component_validate():
+    body = request.get_json(force=True) or {}
+    brief = dict(body.get("brief") or {})
+    try:
+        config = _parse_json_field(body, "config")
+    except json.JSONDecodeError as e:
+        return jsonify({"error": f"Config is not valid JSON: {e}"}), 400
+    if config is None:
+        return jsonify({"error": "Paste the config JSON the model returned in Stage 1."}), 400
+    return jsonify(_component("validate", brief, config=config, timeout=60))
+
+
+@app.route("/api/component/stage2", methods=["POST"])
+def api_component_stage2():
+    body = request.get_json(force=True) or {}
+    brief = dict(body.get("brief") or {})
+    try:
+        config = _parse_json_field(body, "config")
+    except json.JSONDecodeError as e:
+        return jsonify({"error": f"Config is not valid JSON: {e}"}), 400
+    if config is None:
+        return jsonify({"error": "Provide the validated config."}), 400
+    return jsonify(_component("stage2", brief, config=config, timeout=60))
+
+
+@app.route("/api/component/assemble", methods=["POST"])
+def api_component_assemble():
+    body = request.get_json(force=True) or {}
+    brief = dict(body.get("brief") or {})
+    try:
+        config = _parse_json_field(body, "config")
+    except json.JSONDecodeError as e:
+        return jsonify({"error": f"Config is not valid JSON: {e}"}), 400
+    tsx = body.get("tsx") or ""
+    if config is None:
+        return jsonify({"error": "Missing config."}), 400
+    if not str(tsx).strip():
+        return jsonify({"error": "Paste the component .tsx the model returned in Stage 2."}), 400
+    return jsonify(_component("assemble", brief, config=config, tsx=tsx, timeout=600))
+
+
+@app.route("/api/component/proof", methods=["POST"])
+def api_component_proof():
+    body = request.get_json(force=True) or {}
+    brief = dict(body.get("brief") or {})
+    try:
+        config = _parse_json_field(body, "config")
+    except json.JSONDecodeError as e:
+        return jsonify({"error": f"Config is not valid JSON: {e}"}), 400
+    if config is None:
+        return jsonify({"error": "Missing config."}), 400
+    return jsonify(_component("proof", brief, config=config, timeout=600))
+
+
+@app.route("/api/component/remove", methods=["POST"])
+def api_component_remove():
+    body = request.get_json(force=True) or {}
+    typ = (body.get("type") or "").strip()
+    if not typ:
+        return jsonify({"error": "Enter the component TYPE to remove (UPPER_SNAKE)."}), 400
+    return jsonify(_component("remove", {"type": typ}, timeout=600))
+
+
+@app.route("/api/component/preview", methods=["POST"])
+def api_component_preview():
+    body = request.get_json(force=True) or {}
+    brief = dict(body.get("brief") or {})
+    if not (brief.get("type") or "").strip():
+        return jsonify({"error": "Preview needs a scene type."}), 400
+    return jsonify(_component("preview", brief, timeout=600))
+
+
+@app.route("/proof-img/<path:fn>")
+def proof_img(fn):
+    return send_from_directory(str(ROOT / "out" / "proof" / "complab"), fn)
+
+
 if __name__ == "__main__":
     print("Video Studio Console  ->  http://127.0.0.1:5000")
     app.run(host="127.0.0.1", port=5000, debug=False, threaded=True)

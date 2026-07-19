@@ -1185,7 +1185,17 @@ export interface TradeoffScaleData {
   source?: string;
 }
 
+export interface PipelineGanttData {
+  headline?: string;
+  stages?: string[];
+  count?: number;
+  color?: SemColor;
+  caption?: string;
+  atWord?: number;
+  source?: string;
+}
 export interface SceneData {
+  pipelineGantt?: PipelineGanttData;
   // HOOK
   headline?: string;
   subtext?: string;

@@ -144,9 +144,11 @@ import {SlideBulletsPip} from './scenes/SlideBulletsPip';
 import {CaptionKineticOverlay} from './scenes/CaptionKineticOverlay';
 import {PhotoTimeline} from './scenes/PhotoTimeline';
 import {TradeoffScale} from './scenes/TradeoffScale';
+import {PipelineGantt} from './scenes/PipelineGantt';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  PIPELINE_GANTT: PipelineGantt,
   HOOK: Hook,
   TITLE_CARD: TitleCard,
   TRADEOFF_SCALE: TradeoffScale,

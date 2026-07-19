@@ -209,6 +209,36 @@ pre.code{background:#080b11;border:1px solid var(--border);border-radius:0 0 var
 .outputs .filerow{display:flex;flex-wrap:wrap;gap:8px}
 .outputs .filerow a{font-size:12px;border:1px solid var(--border);border-radius:8px;padding:6px 11px;background:var(--surface-2)}
 
+/* ---- Component Lab --------------------------------------------------------*/
+.adv{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
+.adv summary{cursor:pointer;font-size:12.5px;color:var(--muted);font-weight:600}
+.adv .grid2{margin-top:12px}
+.field.ck{flex-direction:row;align-items:center;gap:9px;font-size:13px}
+.field.ck input{width:auto;margin:0}
+#compProof{grid-template-columns:1fr 1fr}
+@media(max-width:640px){#compProof{grid-template-columns:1fr}}
+.proofshot{margin:0}
+.proofshot img{width:100%;border-radius:var(--r);border:1px solid var(--border);background:#000;display:block}
+.proofshot figcaption{margin-top:6px;font-size:11px;color:var(--muted);font-family:var(--mono);text-align:center}
+
+/* ---- component creator drawer + per-beat controls -------------------------*/
+.creatorDrawer{position:fixed;top:0;right:0;bottom:0;width:min(600px,94vw);z-index:60;
+  background:var(--surface);border-left:1px solid var(--border);box-shadow:-14px 0 44px rgba(0,0,0,.5);
+  overflow-y:auto;display:flex;flex-direction:column}
+.creatorDrawer.hidden{display:none}
+.creatorDrawer .drawerhead{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border)}
+.creatorDrawer .drawerhead h2{margin:2px 0 0;font-size:18px}
+.creatorDrawer .drawerbody{padding:18px 20px 60px}
+.beatbtns{display:flex;gap:6px;align-items:center;flex:none;padding-top:4px}
+.beatbtns .btn.sm{height:28px;padding:0 10px;font-size:11px}
+.beat-custom{color:var(--accent-2);font-weight:700}
+.beatprev{margin:6px 0 2px}
+.beatprev video{width:100%;max-width:520px;border-radius:var(--r);border:1px solid var(--border);background:#000;display:block}
+.beatprev .cap{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:4px}
+.beatdata{margin-top:6px}
+.beatdata textarea{width:100%;min-height:90px;font-family:var(--mono);font-size:11px}
+
 /* ---- console drawer -------------------------------------------------------*/
 .console{position:fixed;left:0;right:0;bottom:0;z-index:45;background:rgba(9,11,17,.94);
   backdrop-filter:blur(10px);border-top:1px solid var(--border);transition:transform .2s;box-shadow:0 -8px 30px rgba(0,0,0,.4)}

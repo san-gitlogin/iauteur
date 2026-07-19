@@ -17,6 +17,21 @@
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
 export const MANIFEST = {
+  PIPELINE_GANTT: {
+    category: "diagram", family: "diagram", data_key: "pipelineGantt",
+    purpose: "A pipeline timing diagram: instructions (rows) flow diagonally through stages across clock cycles (columns).",
+    use_when: "Show how a pipeline overlaps work — one instruction entering a new stage each cycle.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      stages: {t: 'string[]', req: true, note: "3-6 stage names in order, e.g. IF ID EX MEM WB (each short, <=4 chars)"},
+      count: {t: 'number', note: "number of instructions/rows, 2-6 (default 4)"},
+      color: {t: 'string', note: "blue|green|red|orange|purple|yellow"},
+      caption: {t: 'string', max: 48, note: "what the overlap shows"},
+      atWord: {t: 'anchor'},
+      source: {t: 'string', max: 64},
+    },
+    example: {pipelineGantt: {"atWord":3,"caption":"One instruction finishes every cycle","color":"blue","count":4,"headline":"Five stages, [overlapped]","source":"illustrative","stages":["IF","ID","EX","MEM","WB"]}},
+  },
   HOOK: {
     category: 'structure', family: 'structure', data_root: true,
     purpose: 'First ≤8s. State the stake so the viewer cannot scroll.',

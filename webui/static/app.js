@@ -27,6 +27,10 @@ const S = {
   voiced: false, rendered: false,
   dirty: false,             // topic/design changed after a draft was started
   snapshot: null,           // {topic,design,format} captured when authoring began
+  compConfig: null,         // Component Lab: the validated new-component config
+  componentCreated: false,  // Component Lab: a component was wired successfully
+  activeBeatIndex: null,    // which beat the creator drawer is bound to (per-beat)
+  customComponents: {},     // type -> config for components created this session
 };
 
 // ==== boot ==================================================================
@@ -41,12 +45,14 @@ async function boot() {
   fillSelect($("background"), CONFIG.backgrounds, "(theme default)");
   $("channel").value = CONFIG.channelDefault || "";
   await populateVoices();
+  const restored = loadState();
   buildDesignGrid();
   buildTopicPicker();
   buildRail();
   wireEvents();
+  if (restored) restoreViews();
   render();
-  log("Console ready. Start at Step 1.", "muted");
+  log(restored ? "Restored your previous session." : "Console ready. Start at Step 1.", "muted");
 }
 
 function fillSelect(sel, values, current) {
@@ -96,7 +102,8 @@ function render() {
     const n = +el.dataset.step;
     el.classList.toggle("active", n === S.step);
     const done = (n === 1 && !!topic) || (n === 2 && S.step > 2) ||
-      (n === 3 && S.saved) || (n === 4 && S.voiced) || (n === 5 && S.rendered);
+      (n === 3 && S.saved) || (n === 4 && S.voiced) || (n === 5 && S.rendered) ||
+      (n === 6 && S.componentCreated);
     el.classList.toggle("done", done);
     const locked = (n === 4 || n === 5) && !S.saved;
     el.classList.toggle("locked", locked);
@@ -116,6 +123,7 @@ function render() {
 
   // dirty / loss-prevention banner
   $("dirtyBanner").classList.toggle("hidden", !(S.dirty && (S.beats || S.spec)));
+  saveState();
 }
 function stepReached(n) { return true; } // step 2 "done" once a design is chosen (always defaulted)
 
@@ -123,6 +131,202 @@ function setStep(n) {
   if ((n === 4 || n === 5) && !S.saved) { toast("Save a spec first (Step 3).", "warn"); return; }
   S.step = n; render();
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ==== Component Lab =========================================================
+function compBrief() {
+  return {
+    need: $("compNeed").value.trim(),
+    segment: $("compSegment").value.trim(),
+    example: $("compExample").value.trim(),
+    dynamic: $("compDynamic").checked,
+    typeName: $("compType").value.trim(),
+    name: $("compName").value.trim(),
+    dataKey: $("compDataKey").value.trim(),
+    categoryHint: $("compCategory").value.trim(),
+    familyHint: $("compFamily").value.trim(),
+    design: S.design, theme: S.design,
+  };
+}
+
+async function onCompStage1() {
+  if (!$("compNeed").value.trim()) { toast("Describe what the component must show.", "warn"); return; }
+  const btn = $("compStage1Btn"); btn.disabled = true; btn.textContent = "Generating…";
+  const res = await jpost("/api/component/stage1", compBrief());
+  btn.disabled = false; btn.textContent = "Generate contract prompt";
+  if (res.error || !res.ok) { toast(res.error || "Failed to generate.", "err"); return; }
+  $("compStage1Text").textContent = res.prompt;
+  $("compStage1Box").classList.remove("hidden");
+  toast("Stage 1 prompt ready — paste it into your LLM.", "ok");
+}
+
+async function onCompValidate() {
+  let config;
+  try { config = JSON.parse($("compConfigJson").value); }
+  catch (e) { toast("Config JSON is invalid: " + e.message, "err"); return; }
+  const res = await jpost("/api/component/validate", { brief: compBrief(), config });
+  const box = $("compValidateVerdict");
+  if (res.error) { toast(res.error, "err"); return; }
+  if (res.ok) {
+    S.compConfig = res.config;
+    box.innerHTML = `<div class="banner ok"><span class="bico">✓</span><div class="bbody">Config is valid — <b>${res.config.type}</b> (${res.config.name}). Continue to Stage 2.</div></div>`;
+    $("compStage2Card").classList.remove("hidden");
+    toast("Config validated.", "ok");
+  } else {
+    S.compConfig = null;
+    box.innerHTML = `<div class="banner warn"><span class="bico">!</span><div class="bbody">Fix these, then re-validate:<ul>${(res.errors || []).map((e) => `<li>${e}</li>`).join("")}</ul></div></div>`;
+  }
+}
+
+async function onCompStage2() {
+  if (!S.compConfig) { toast("Validate the config first.", "warn"); return; }
+  const btn = $("compStage2Btn"); btn.disabled = true; btn.textContent = "Generating…";
+  const res = await jpost("/api/component/stage2", { brief: compBrief(), config: S.compConfig });
+  btn.disabled = false; btn.textContent = "Generate component prompt";
+  if (res.error || !res.ok) { toast(res.error || "Failed to generate.", "err"); return; }
+  $("compStage2Text").textContent = res.prompt;
+  $("compStage2Box").classList.remove("hidden");
+  toast("Stage 2 prompt ready — paste it into your LLM.", "ok");
+}
+
+async function onCompAssemble() {
+  if (!S.compConfig) { toast("Validate the config first.", "warn"); return; }
+  const tsx = $("compTsx").value;
+  if (!tsx.trim()) { toast("Paste the component .tsx from Stage 2.", "warn"); return; }
+  const btn = $("compAssembleBtn"); btn.disabled = true; btn.textContent = "Wiring & verifying…";
+  log(`▶ assemble ${S.compConfig.type}`, "cmd"); openConsole();
+  const res = await jpost("/api/component/assemble", { brief: compBrief(), config: S.compConfig, tsx });
+  btn.disabled = false; btn.textContent = "Assemble → auto-wire → verify";
+  const box = $("compAssembleResult");
+  if (res.error) { toast(res.error, "err"); log(res.error, "err"); return; }
+  log(res.output || "", res.ok ? "ok" : "err");
+  if (res.ok) {
+    S.componentCreated = true;
+    if (S.activeBeatIndex != null && S.beats && S.beats[S.activeBeatIndex]) {
+      const bd = S.beats[S.activeBeatIndex]; const ex = (S.compConfig && S.compConfig.example) || {};
+      bd.type = res.type; bd.custom = true; bd.dataKey = S.compConfig.dataKey;
+      bd.data = (ex && ex[S.compConfig.dataKey]) ? ex : { [S.compConfig.dataKey]: ex };
+      S.customComponents[res.type] = S.compConfig;
+      renderBeatReview(S.beats);
+      toast(`Bound ${res.type} to beat ${bd.id || (S.activeBeatIndex + 1)} — preview it in the Author list.`, "ok");
+    }
+    box.innerHTML = `<div class="banner ok"><span class="bico">✓</span><div class="bbody"><b>${res.type}</b> wired into the library and type-checked. Render a proof below, or use it in a video spec.</div></div>`;
+    $("compProofCard").classList.remove("hidden");
+    toast(`${res.type} created ✓`, "ok"); render();
+  } else {
+    box.innerHTML = `<div class="banner warn"><span class="bico">!</span><div class="bbody">Assembly failed — <b>all changes were rolled back</b>. See the console. Fix the component and paste again.</div></div>`;
+    toast("Assembly failed — rolled back.", "err");
+  }
+}
+
+async function onCompProof() {
+  if (!S.compConfig) { toast("Create the component first.", "warn"); return; }
+  const btn = $("compProofBtn"); btn.disabled = true; btn.textContent = "Rendering…"; setLive(true, "rendering proof stills…");
+  const res = await jpost("/api/component/proof", { brief: compBrief(), config: S.compConfig });
+  btn.disabled = false; btn.textContent = "Render proof stills"; setLive(false);
+  if (res.error) { toast(res.error, "err"); return; }
+  if (!res.ok) { toast("Proof render failed — see console.", "err"); log(res.output || "", "err"); return; }
+  const box = $("compProof"); box.innerHTML = "";
+  for (const s of res.stills || []) {
+    const fn = s.split("/").pop();
+    const fig = document.createElement("figure"); fig.className = "proofshot";
+    fig.innerHTML = `<img src="/proof-img/${fn}?t=${Date.now()}" alt="${fn}" /><figcaption>${fn.replace(/^[A-Z_]+_/, "").replace(/\.png$/, "")}</figcaption>`;
+    box.appendChild(fig);
+  }
+  toast(`Rendered ${(res.stills || []).length} proof stills.`, "ok");
+}
+
+async function onCompRemove() {
+  const type = $("compRemoveType").value.trim();
+  if (!type) { toast("Enter the TYPE to remove.", "warn"); return; }
+  if (!confirm(`Remove component ${type}? This un-wires it from every file.`)) return;
+  const btn = $("compRemoveBtn"); btn.disabled = true; btn.textContent = "Removing…";
+  log(`▶ remove ${type}`, "cmd"); openConsole();
+  const res = await jpost("/api/component/remove", { type });
+  btn.disabled = false; btn.textContent = "Remove";
+  const box = $("compRemoveResult");
+  if (res.error) { toast(res.error, "err"); return; }
+  log(res.output || "", res.ok ? "ok" : "err");
+  if (res.ok) {
+    box.innerHTML = `<div class="banner ok"><span class="bico">✓</span><div class="bbody"><b>${res.type}</b> removed and type-checked clean.</div></div>`;
+    toast(`${res.type} removed.`, "ok");
+  } else {
+    box.innerHTML = `<div class="banner warn"><span class="bico">!</span><div class="bbody">Remove failed — <b>rolled back</b>. See the console.</div></div>`;
+    toast("Remove failed — rolled back.", "err");
+  }
+}
+
+// ==== per-beat creation drawer + preview + persistence ======================
+function openCreatorForBeat(i) {
+  S.activeBeatIndex = i;
+  const b = (S.beats && S.beats[i]) || {};
+  $("creatorTitle").textContent = `New component · beat ${b.id || "s" + (i + 1)}`;
+  const note = $("creatorBeatNote"); note.classList.remove("hidden");
+  note.textContent = `Beat ${b.id || ""} (${b.type || ""}): “${b.narration || b.intent || ""}”`;
+  if (!$("compNeed").value.trim()) $("compNeed").value = b.intent || b.narration || "";
+  $("compSegment").value = b.narration || "";
+  const drawer = $("componentCreator"); drawer.classList.remove("hidden"); drawer.setAttribute("aria-hidden", "false");
+  drawer.scrollTop = 0; saveState();
+}
+function closeCreator() {
+  const drawer = $("componentCreator"); drawer.classList.add("hidden"); drawer.setAttribute("aria-hidden", "true");
+  S.activeBeatIndex = null; saveState();
+}
+async function previewBeat(item, prevBox, btn) {
+  if (!item.type || !item.data) { toast("This beat has no component data to preview yet.", "warn"); return; }
+  const orig = btn.textContent; btn.disabled = true; btn.textContent = "rendering…"; setLive(true, "rendering preview…");
+  const vertical = $("format").value === "shorts";
+  const res = await jpost("/api/component/preview", { brief: {
+    type: item.type, sceneData: item.data, design: S.design, theme: S.design,
+    format: vertical ? "short" : "long", durationFrames: item.durationFrames || 150 } });
+  btn.disabled = false; btn.textContent = orig; setLive(false);
+  if (res.error || !res.ok) { toast(res.error || "Preview render failed.", "err"); if (res.output) log(res.output, "err"); return; }
+  prevBox.innerHTML = `<video src="/proof-img/${res.file}?t=${Date.now()}" controls autoplay loop muted playsinline></video>`
+    + `<div class="cap">${escapeHtml(item.type)} · ${escapeHtml(S.design)} · scrub the timeline to see the animation</div>`;
+}
+function overlayCustomBeats() {
+  if (!S.spec || !S.beats) return;
+  for (const b of S.beats) if (b.custom && b.type && b.data) {
+    const sc = (S.spec.scenes || []).find((s) => s.id === b.id);
+    if (sc) { sc.type = b.type; sc.data = b.data; }
+  }
+}
+const LS_KEY = "iauteur_console_v1";
+function saveState() {
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      step: S.step, design: S.design, mode: S.mode,
+      beats: S.beats, spec: S.spec, saved: S.saved, voiced: S.voiced, rendered: S.rendered, lintOk: S.lintOk,
+      customComponents: S.customComponents,
+      form: {
+        topic: $("topic").value, source: $("source").value, notes: $("notes").value,
+        format: $("format").value, preset: $("preset").value, audience: $("audience").value, minutes: $("minutes").value,
+        themeLight: $("themeLight").value, background: $("background").value, channel: $("channel").value,
+        slug: $("slug").value, beatsJson: $("beatsJson").value, replyJson: $("replyJson").value,
+      },
+    }));
+  } catch (e) { /* localStorage full / disabled — non-fatal */ }
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem(LS_KEY); if (!raw) return false;
+    const s = JSON.parse(raw);
+    S.step = s.step || 1; S.design = s.design || S.design; S.mode = s.mode || "two";
+    S.beats = s.beats || null; S.spec = s.spec || null;
+    S.saved = !!s.saved; S.voiced = !!s.voiced; S.rendered = !!s.rendered; S.lintOk = !!s.lintOk;
+    S.customComponents = s.customComponents || {};
+    const f = s.form || {};
+    for (const k of Object.keys(f)) { const el = $(k); if (el != null && f[k] != null) el.value = f[k]; }
+    return true;
+  } catch (e) { return false; }
+}
+function restoreViews() {
+  $$("#modeSeg button").forEach((x) => x.classList.toggle("on", x.dataset.mode === S.mode));
+  $("twoFlow").classList.toggle("hidden", S.mode !== "two");
+  $("singleFlow").classList.toggle("hidden", S.mode !== "single");
+  if (S.beats) { renderBeatReview(S.beats); $("beatReview").classList.remove("hidden"); $("ss-a4").classList.remove("hidden"); }
+  if (S.spec && S.spec.scenes) { renderMeterRows($("sceneMeters"), S.spec.scenes, { kind: "scene" }); $("sceneEditor").classList.remove("hidden"); }
+  if (!S.snapshot && (S.beats || S.spec)) snapshotAuthoring();
 }
 
 // ==== rail ==================================================================
@@ -238,6 +442,15 @@ function wireEvents() {
   $("saveTwoBtn").onclick = onSave;
   $("intakeBtn").onclick = onIntake;
 
+  // Component Lab handlers
+  $("compStage1Btn").onclick = onCompStage1;
+  $("compValidateBtn").onclick = onCompValidate;
+  $("compStage2Btn").onclick = onCompStage2;
+  $("compAssembleBtn").onclick = onCompAssemble;
+  $("compProofBtn").onclick = onCompProof;
+  $("compRemoveBtn").onclick = onCompRemove;
+  $("creatorClose").onclick = closeCreator;
+
   // voiceover
   $("voBtn").onclick = onVoiceover;
   $("voSetup").onclick = onVoiceSetup;
@@ -251,7 +464,7 @@ function wireEvents() {
   $("resetBtn").onclick = () => {
     if (!armed) { armed = true; $("resetBtn").textContent = "Click to confirm"; $("resetBtn").classList.add("danger");
       t = setTimeout(() => { armed = false; $("resetBtn").textContent = "Reset"; $("resetBtn").classList.remove("danger"); }, 2500); return; }
-    clearTimeout(t); location.reload();
+    clearTimeout(t); try { localStorage.removeItem("iauteur_console_v1"); } catch (e) {} location.reload();
   };
 
   // console drawer
@@ -308,16 +521,35 @@ async function onValidate() {
   render();
 }
 
-function renderBeatReview(beats) { renderMeterRows($("beatRows"), beats); }
-function renderMeterRows(box, items) {
+function renderBeatReview(beats) { renderMeterRows($("beatRows"), beats, { kind: "beat" }); }
+function renderMeterRows(box, items, opts = {}) {
+  const kind = opts.kind || "scene";
   box.innerHTML = "";
   items.forEach((b, i) => {
     const row = document.createElement("div"); row.className = "beatrow";
-    row.innerHTML = `<span class="btype" title="${escapeHtml(b.id || "s" + (i + 1))} · ${escapeHtml(b.type)}">${escapeHtml(b.id || "s" + (i + 1))} · ${escapeHtml(b.type)}</span>`;
+    const id = b.id || "s" + (i + 1);
+    const typeLabel = b.custom ? `<span class="beat-custom">★ ${escapeHtml(b.type)}</span>` : escapeHtml(b.type);
+    const btype = document.createElement("span"); btype.className = "btype"; btype.title = `${id} · ${b.type}`;
+    btype.innerHTML = `${escapeHtml(id)} · ${typeLabel}`;
     const ta = document.createElement("textarea"); ta.rows = 1; ta.value = b.narration || "";
     const m = document.createElement("span"); m.className = "meter";
-    ta.oninput = () => { b.narration = ta.value; meter(ta, m, b.type === "HOOK"); };
-    row.appendChild(ta); row.appendChild(m); box.appendChild(row); meter(ta, m, b.type === "HOOK");
+    ta.oninput = () => { b.narration = ta.value; meter(ta, m, b.type === "HOOK"); saveState(); };
+    const prevBox = document.createElement("div"); prevBox.className = "beatprev";
+    const btns = document.createElement("div"); btns.className = "beatbtns";
+    if (kind === "beat") {
+      const nc = document.createElement("button"); nc.className = "btn sm ghost";
+      nc.textContent = b.custom ? "↺ recreate" : "＋ component";
+      nc.onclick = () => openCreatorForBeat(i);
+      btns.appendChild(nc);
+    }
+    if (b.data && Object.keys(b.data).length) {
+      const pv = document.createElement("button"); pv.className = "btn sm"; pv.textContent = "▶ preview";
+      pv.onclick = () => previewBeat(b, prevBox, pv);
+      btns.appendChild(pv);
+    }
+    row.appendChild(btype); row.appendChild(ta); row.appendChild(m); row.appendChild(btns);
+    box.appendChild(row); box.appendChild(prevBox);
+    meter(ta, m, b.type === "HOOK");
   });
 }
 function meter(ta, m, isHook) {
@@ -353,6 +585,7 @@ async function doAssemble(replyId) {
   const res = await withBtn(btn, "Assembling…", () => jpost("/api/flow/assemble", { cfg: cfg(), reply }));
   if (res.error) { toast(res.error, "err"); return; }
   S.spec = res.spec; S.lintOk = res.ok; S.dirty = false; snapshotAuthoring();
+  overlayCustomBeats();
   renderAssemble(res); render();
 }
 
@@ -365,7 +598,7 @@ function renderAssemble(res) {
     <pre>${escapeHtml(res.lint || "")}</pre></div></div>`;
   if (res.ok) {
     $("fixWrap").classList.add("hidden");
-    renderMeterRows($("sceneMeters"), res.spec.scenes || []); $("sceneEditor").classList.remove("hidden");
+    renderMeterRows($("sceneMeters"), res.spec.scenes || [], { kind: "scene" }); $("sceneEditor").classList.remove("hidden");
     toast("Spec assembled and lints clean. Save it to continue.", "ok");
   } else {
     $("fixWrap").classList.remove("hidden"); $("fixText").textContent = res.fixPrompt || ""; $("patchJson").value = "";

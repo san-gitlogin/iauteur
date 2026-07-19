@@ -322,7 +322,8 @@
               "SLIDE_BULLETS_PIP",
               "CAPTION_KINETIC_OVERLAY",
               "PHOTO_TIMELINE",
-              "TRADEOFF_SCALE"
+              "TRADEOFF_SCALE",
+              "PIPELINE_GANTT"
             ]
           },
           "narration": {
@@ -392,6 +393,61 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PIPELINE_GANTT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "pipelineGantt": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "stages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "3-6 stage names in order, e.g. IF ID EX MEM WB (each short, <=4 chars)"
+                        },
+                        "count": {
+                          "type": "number",
+                          "description": "number of instructions/rows, 2-6 (default 4)"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "blue|green|red|orange|purple|yellow"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "what the overlap shows"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {
