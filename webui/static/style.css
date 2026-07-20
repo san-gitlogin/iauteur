@@ -198,7 +198,7 @@ pre.code{background:#080b11;border:1px solid var(--border);border-radius:0 0 var
 .beatrow{display:flex;align-items:flex-start;gap:11px}
 .beatrow .btype{flex:none;width:172px;font-size:11px;color:var(--accent-2);font-family:var(--mono);
   padding-top:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.beatrow textarea{flex:1;min-height:38px;margin-top:0}
+.beatrow textarea{flex:1;min-height:38px;margin-top:0;resize:none}
 .beatrow .meter{flex:none;width:64px;text-align:right;font-size:11px;padding-top:10px;font-family:var(--mono)}
 .meter.okm{color:var(--good)} .meter.over{color:var(--bad);font-weight:700}
 
