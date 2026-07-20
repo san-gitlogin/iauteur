@@ -285,35 +285,6 @@ Timing: base visual on screen within 38 frames — \`const start = Math.min(word
 (only an emphasis payoff may use the un-clamped \`wordToFrame(d.atWord)\`).
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-## ⚠ NON-NEGOTIABLE — ONE FILE, REUSABLE ACROSS ALL 38 THEMES
-The SAME component file is rendered under every theme (studio, neonGrid, terminal, luxe, cyberpunk,
-neobrutalism, moderndark, swiss, luxury, …) and both light twins. It is previewed now under the user's
-CHOSEN theme, but the theme can change at any time and the component must re-skin itself with ZERO edits.
-Build it theme-agnostic, driven entirely by the tokens above:
-1. **No hardcoded visual constants — ever.** Not one hex colour, px font-size, fixed radius, shadow, or
-   font-family literal. EVERY colour = \`t.colors.*\`; EVERY font-size = a base number \`× scale\`; EVERY radius
-   = base \`× t.style.cornerRadius\`; EVERY glow/shadow gated on \`t.style.glow > 0\` and scaled by it; fonts =
-   \`t.fonts.*\`. A single \`#\`, a \`px\` font-size, or an \`'Inter'\`-style literal is a DEFECT — it would look
-   wrong the instant the theme changes.
-2. **Text MUST fit — in every theme AND both aspects.** Themes swap fonts wildly (condensed sans vs wide
-   slab vs mono), so the same string is far wider in some themes. Prevent overflow, never assume it fits:
-   • respect the per-field CHARACTER budgets in the contract (sized for the narrow vertical frame);
-   • give every text box a bounded width + an overflow strategy — line-clamp
-     (\`display:'-webkit-box',WebkitLineClamp:N,WebkitBoxOrient:'vertical',overflow:'hidden'\`) or ellipsis
-     (\`whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'\`);
-   • prefer a FLUID size that steps down for long content (e.g. shrink the font when the string is long)
-     so a long label in a wide-font theme shrinks instead of spilling. Text overflowing its card or the
-     frame in ANY theme is a defect.
-3. **Animation adapts to the theme.** Take motion feel from tokens where present (durations/easing on
-   \`t.style\`/\`t.motion\`); otherwise use clamped \`interpolate\` curves. Keep the base visual on screen within
-   38 frames (the clamp above); only the emphasis payoff may land later; exits are faster than entrances;
-   motion is a pure function of \`frame\` — never \`Date.now()\`/\`Math.random()\`.
-4. **Spacing is token-scaled.** Every padding/gap/line-height \`× scale\`; never hardcode a pixel metric.
-SELF-CHECK before you output: scan your own code — ZERO \`#\` hex, ZERO \`px\` font-sizes, ZERO font-family
-literals; every text node has an overflow strategy; and you can picture it legible UNCHANGED in both
-neobrutalism (sharp, no glow, heavy condensed type) and luxe (serif, soft glow).
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ## THE AUTHORING LAW (this repo's non-negotiable contract — obey every rule)
 ${authoring}
 
@@ -359,10 +330,6 @@ Return ONLY the complete contents of \`src/scenes/${Name}.tsx\` in a single \`\`
   (the repo wires the real type into SceneData afterward).
 - Define BOTH the wide (row / left→right) and vertical (column / top→bottom) layout, branching on \`vertical\`.
 - Every px \`× scale\`; tokens only; every \`interpolate\` clamps both sides; motion is a pure function of frame.
-- REUSABLE ACROSS ALL 38 THEMES: zero \`#\` hex, zero \`px\` font-sizes, zero font-family literals — colours/fonts/
-  radii/shadows come only from tokens, so the file re-skins under any theme unchanged.
-- TEXT NEVER OVERFLOWS in any theme or aspect: honour the field budgets and give every text node an overflow
-  strategy (line-clamp / ellipsis / fluid step-down sizing). Spilling text is a defect.
 - Anim entrance vocabulary if you reference one: ${ANIMS.join(', ')} (these are NOT scene transitions).
 No prose outside the code block.`;
 }
