@@ -31,7 +31,19 @@ const S = {
   componentCreated: false,  // Component Lab: a component was wired successfully
   activeBeatIndex: null,    // which beat the creator drawer is bound to (per-beat)
   customComponents: {},     // type -> config for components created this session
+  busy: false,              // a render/preview/save/voiceover job is in flight
 };
+
+// Every button that kicks off a backend job. While one job runs, ALL of these are
+// hard-disabled (setBusy) so a stray click can't start a second job and clobber
+// shared state or preview files.
+const JOB_BTN_SEL = [
+  '[data-action]', '#stage1Btn', '#validateBtn', '#stage2Btn', '#assembleBtn',
+  '#assembleSingleBtn', '#promptBtn', '#applyfixBtn', '#saveTwoBtn', '#intakeBtn',
+  '#compStage1Btn', '#compValidateBtn', '#compStage2Btn', '#compAssembleBtn',
+  '#compProofBtn', '#compRemoveBtn', '#voBtn', '#voSetup', '#refreshOut',
+  '.beatbtns button',
+].join(', ');
 
 // ==== boot ==================================================================
 async function boot() {
@@ -52,6 +64,7 @@ async function boot() {
   wireEvents();
   if (restored) restoreViews();
   render();
+  checkSlugStatus();
   log(restored ? "Restored your previous session." : "Console ready. Start at Step 1.", "muted");
 }
 
@@ -133,6 +146,22 @@ function setStep(n) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+// ---- global job lock (hard-disable other actions while one job runs) -------
+function setBusy(on, label) {
+  S.busy = !!on;
+  document.body.classList.toggle("busy", S.busy);
+  $$(JOB_BTN_SEL).forEach((b) => {
+    if (on) { if (!b.disabled) b.dataset.wasEnabled = "1"; b.disabled = true; }
+    else if (b.dataset.wasEnabled) { delete b.dataset.wasEnabled; b.disabled = false; }
+  });
+  setLive(!!on, label);
+  if (!on) render(); // re-apply state-based gating (some buttons stay disabled by rules)
+}
+function guardBusy() {
+  if (S.busy) { toast("A job is already running — wait for it to finish.", "warn"); return true; }
+  return false;
+}
+
 // ==== Component Lab =========================================================
 function compBrief() {
   return {
@@ -151,6 +180,7 @@ function compBrief() {
 
 async function onCompStage1() {
   if (!$("compNeed").value.trim()) { toast("Describe what the component must show.", "warn"); return; }
+  if (guardBusy()) return;
   const btn = $("compStage1Btn"); btn.disabled = true; btn.textContent = "Generating…";
   const res = await jpost("/api/component/stage1", compBrief());
   btn.disabled = false; btn.textContent = "Generate contract prompt";
@@ -164,6 +194,7 @@ async function onCompValidate() {
   let config;
   try { config = JSON.parse($("compConfigJson").value); }
   catch (e) { toast("Config JSON is invalid: " + e.message, "err"); return; }
+  if (guardBusy()) return;
   const res = await jpost("/api/component/validate", { brief: compBrief(), config });
   const box = $("compValidateVerdict");
   if (res.error) { toast(res.error, "err"); return; }
@@ -180,6 +211,7 @@ async function onCompValidate() {
 
 async function onCompStage2() {
   if (!S.compConfig) { toast("Validate the config first.", "warn"); return; }
+  if (guardBusy()) return;
   const btn = $("compStage2Btn"); btn.disabled = true; btn.textContent = "Generating…";
   const res = await jpost("/api/component/stage2", { brief: compBrief(), config: S.compConfig });
   btn.disabled = false; btn.textContent = "Generate component prompt";
@@ -193,12 +225,16 @@ async function onCompAssemble() {
   if (!S.compConfig) { toast("Validate the config first.", "warn"); return; }
   const tsx = $("compTsx").value;
   if (!tsx.trim()) { toast("Paste the component .tsx from Stage 2.", "warn"); return; }
-  const btn = $("compAssembleBtn"); btn.disabled = true; btn.textContent = "Wiring & verifying…";
+  if (guardBusy()) return;
+  const btn = $("compAssembleBtn"); btn.textContent = "Wiring & verifying…";
   log(`▶ assemble ${S.compConfig.type}`, "cmd"); openConsole();
-  const res = await jpost("/api/component/assemble", { brief: compBrief(), config: S.compConfig, tsx });
-  btn.disabled = false; btn.textContent = "Assemble → auto-wire → verify";
+  setBusy(true, "wiring & verifying…");
+  let res;
+  try { res = await jpost("/api/component/assemble", { brief: compBrief(), config: S.compConfig, tsx }); }
+  catch (e) { res = { error: e.message }; }
+  setBusy(false); btn.textContent = "Assemble → auto-wire → verify";
   const box = $("compAssembleResult");
-  if (res.error) { toast(res.error, "err"); log(res.error, "err"); return; }
+  if (!res || res.error) { toast((res && res.error) || "assemble failed", "err"); if (res && res.error) log(res.error, "err"); return; }
   log(res.output || "", res.ok ? "ok" : "err");
   if (res.ok) {
     S.componentCreated = true;
@@ -221,20 +257,24 @@ async function onCompAssemble() {
 
 async function onCompPreview() {
   if (!S.compConfig) { toast("Create the component first.", "warn"); return; }
+  if (guardBusy()) return;
   const cfg = S.compConfig;
   const ex = (cfg.example && cfg.example[cfg.dataKey]) ? cfg.example : { [cfg.dataKey]: cfg.example || {} };
   const vertical = $("format").value === "shorts";
-  const btn = $("compProofBtn"); btn.disabled = true; btn.textContent = "Rendering…"; setLive(true, "rendering preview…");
+  const ab = (S.activeBeatIndex != null && S.beats) ? S.beats[S.activeBeatIndex] : null;
+  const durationFrames = (ab && ab.durationFrames) || 150;
+  const btn = $("compProofBtn"); btn.textContent = "Rendering…";
   const prog = $("compPreviewProgress"), bar = $("compPreviewBar"), pct = $("compPreviewPct");
   prog.classList.remove("hidden"); bar.style.width = "0%"; pct.textContent = "starting…";
   const box = $("compProof"); box.innerHTML = "";
+  setBusy(true, "rendering preview…");
   let done = null;
   try {
     const r = await fetch("/api/component/preview-stream", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ brief: {
         type: cfg.type, sceneData: ex[cfg.dataKey], design: S.design, theme: S.design,
-        format: vertical ? "short" : "long", durationFrames: 150 } }),
+        format: vertical ? "short" : "long", durationFrames } }),
     });
     const reader = r.body.getReader(), dec = new TextDecoder(); let buf = "";
     for (;;) {
@@ -259,7 +299,9 @@ async function onCompPreview() {
     if (done && done.ok && done.url) {
       bar.style.width = "100%"; pct.textContent = "done ✓";
       box.innerHTML = `<video src="${done.url}?t=${Date.now()}" controls autoplay loop muted playsinline></video>`
-        + `<div class="cap">${escapeHtml(cfg.type)} · ${escapeHtml(S.design)} · rendered preview</div>`;
+        + `<div class="cap"><b>${escapeHtml(cfg.type)}</b> · ${escapeHtml(S.design)} · <span class="untimed">visual check — untimed</span>. `
+        + `The final video re-renders this scene timed to your voiceover &amp; segment length.</div>`;
+      if (ab) { ab.preview = { status: "done", url: done.url, ts: Date.now(), design: S.design }; saveState(); }
       toast("Preview rendered ✓", "ok");
     } else {
       prog.classList.add("hidden");
@@ -269,7 +311,7 @@ async function onCompPreview() {
   } catch (e) {
     prog.classList.add("hidden"); toast("Preview stream failed: " + e.message, "err");
   } finally {
-    btn.disabled = false; btn.textContent = "▶ Render preview"; setLive(false);
+    setBusy(false); btn.textContent = "▶ Render preview";
   }
 }
 
@@ -277,12 +319,16 @@ async function onCompRemove() {
   const type = $("compRemoveType").value.trim();
   if (!type) { toast("Enter the TYPE to remove.", "warn"); return; }
   if (!confirm(`Remove component ${type}? This un-wires it from every file.`)) return;
-  const btn = $("compRemoveBtn"); btn.disabled = true; btn.textContent = "Removing…";
+  if (guardBusy()) return;
+  const btn = $("compRemoveBtn"); btn.textContent = "Removing…";
   log(`▶ remove ${type}`, "cmd"); openConsole();
-  const res = await jpost("/api/component/remove", { type });
-  btn.disabled = false; btn.textContent = "Remove";
+  setBusy(true, "removing component…");
+  let res;
+  try { res = await jpost("/api/component/remove", { type }); }
+  catch (e) { res = { error: e.message }; }
+  setBusy(false); btn.textContent = "Remove";
   const box = $("compRemoveResult");
-  if (res.error) { toast(res.error, "err"); return; }
+  if (!res || res.error) { toast((res && res.error) || "remove failed", "err"); return; }
   log(res.output || "", res.ok ? "ok" : "err");
   if (res.ok) {
     box.innerHTML = `<div class="banner ok"><span class="bico">✓</span><div class="bbody"><b>${res.type}</b> removed and type-checked clean.</div></div>`;
@@ -311,15 +357,38 @@ function closeCreator() {
 }
 async function previewBeat(item, prevBox, btn) {
   if (!item.type || !item.data) { toast("This beat has no component data to preview yet.", "warn"); return; }
-  const orig = btn.textContent; btn.disabled = true; btn.textContent = "rendering…"; setLive(true, "rendering preview…");
+  if (guardBusy()) return;
+  const orig = btn.textContent; btn.textContent = "rendering…";
+  item.preview = { status: "rendering" }; paintBeatPreview(prevBox, item);
+  setBusy(true, "rendering preview…");
   const vertical = $("format").value === "shorts";
-  const res = await jpost("/api/component/preview", { brief: {
-    type: item.type, sceneData: item.data, design: S.design, theme: S.design,
-    format: vertical ? "short" : "long", durationFrames: item.durationFrames || 150 } });
-  btn.disabled = false; btn.textContent = orig; setLive(false);
-  if (res.error || !res.ok) { toast(res.error || "Preview render failed.", "err"); if (res.output) log(res.output, "err"); return; }
-  prevBox.innerHTML = `<video src="/proof-img/${res.file}?t=${Date.now()}" controls autoplay loop muted playsinline></video>`
-    + `<div class="cap">${escapeHtml(item.type)} · ${escapeHtml(S.design)} · scrub the timeline to see the animation</div>`;
+  let res;
+  try {
+    res = await jpost("/api/component/preview", { brief: {
+      type: item.type, sceneData: item.data, design: S.design, theme: S.design,
+      format: vertical ? "short" : "long", durationFrames: item.durationFrames || 150 } });
+  } catch (e) { res = { error: e.message }; }
+  setBusy(false); btn.textContent = orig;
+  if (!res || res.error || !res.ok) {
+    item.preview = { status: "error" }; paintBeatPreview(prevBox, item);
+    toast((res && res.error) || "Preview render failed.", "err"); if (res && res.output) log(res.output, "err");
+    saveState(); return;
+  }
+  item.preview = { status: "done", url: "/proof-img/" + res.file, ts: Date.now(), design: S.design };
+  paintBeatPreview(prevBox, item); btn.textContent = "↺ re-preview"; saveState();
+}
+
+// Paint a beat's preview box from its persisted preview state (idle/rendering/error/done).
+// Called both after a fresh render AND when rebuilding rows on reload, so previews survive.
+function paintBeatPreview(prevBox, item) {
+  const p = item.preview;
+  if (!p || p.status === "idle") { prevBox.innerHTML = ""; return; }
+  if (p.status === "rendering") { prevBox.innerHTML = `<div class="prevpending"><span class="spin"></span> rendering preview…</div>`; return; }
+  if (p.status === "error") { prevBox.innerHTML = `<div class="prevpending err">preview failed — click preview to retry</div>`; return; }
+  prevBox.innerHTML =
+    `<video src="${p.url}?t=${p.ts}" controls loop muted playsinline></video>`
+    + `<div class="cap"><b>${escapeHtml(item.type)}</b> · ${escapeHtml(p.design || S.design)} · <span class="untimed">visual check — untimed</span>. `
+    + `The final video re-renders this scene timed to your voiceover &amp; segment length.</div>`;
 }
 function overlayCustomBeats() {
   if (!S.spec || !S.beats) return;
@@ -350,6 +419,9 @@ function loadState() {
     const s = JSON.parse(raw);
     S.step = s.step || 1; S.design = s.design || S.design; S.mode = s.mode || "two";
     S.beats = s.beats || null; S.spec = s.spec || null;
+    // A preview that was mid-render when the tab closed can't be trusted — drop it
+    // so the beat just offers its preview button again.
+    if (Array.isArray(S.beats)) for (const b of S.beats) if (b && b.preview && b.preview.status !== "done") delete b.preview;
     S.saved = !!s.saved; S.voiced = !!s.voiced; S.rendered = !!s.rendered; S.lintOk = !!s.lintOk;
     S.customComponents = s.customComponents || {};
     const f = s.form || {};
@@ -364,6 +436,28 @@ function restoreViews() {
   if (S.beats) { renderBeatReview(S.beats); $("beatReview").classList.remove("hidden"); $("ss-a4").classList.remove("hidden"); }
   if (S.spec && S.spec.scenes) { renderMeterRows($("sceneMeters"), S.spec.scenes, { kind: "scene" }); $("sceneEditor").classList.remove("hidden"); }
   if (!S.snapshot && (S.beats || S.spec)) snapshotAuthoring();
+}
+
+// ---- early immutability guard: warn (with a free-slug suggestion) the moment the
+// chosen slug is an already-rendered topic, instead of failing only at save. ------
+let _slugTimer = null;
+function scheduleSlugCheck() { clearTimeout(_slugTimer); _slugTimer = setTimeout(checkSlugStatus, 300); }
+async function checkSlugStatus() {
+  const warn = $("slugWarn"); if (!warn) return;
+  const slug = $("slug").value.trim();
+  if (!slug) { warn.classList.add("hidden"); warn.innerHTML = ""; return; }
+  let st;
+  try { st = await (await fetch("/api/slug-status?slug=" + encodeURIComponent(slug))).json(); }
+  catch (e) { warn.classList.add("hidden"); return; }
+  if ($("slug").value.trim() !== slug) return; // slug changed while awaiting
+  if (st && st.rendered) {
+    warn.classList.remove("hidden");
+    warn.innerHTML = `<span class="bico">⚠</span><div class="bbody"><b>${escapeHtml(slug)}</b> is already a rendered video — topics are immutable, so saving here will be refused. `
+      + (st.suggestion ? `<button type="button" class="btn sm" id="useSuggestSlug">Use ${escapeHtml(st.suggestion)}</button>` : "Pick a new slug.")
+      + `</div>`;
+    const b = $("useSuggestSlug");
+    if (b) b.onclick = () => { $("slug").value = st.suggestion; S.slugAuto = false; render(); checkSlugStatus(); };
+  } else { warn.classList.add("hidden"); warn.innerHTML = ""; }
 }
 
 // ==== rail ==================================================================
@@ -444,10 +538,10 @@ function wireEvents() {
   $$("[data-back]").forEach((b) => b.onclick = () => setStep(Math.max(1, S.step - 1)));
 
   // config change tracking (loss prevention + slug sync)
-  $("topic").addEventListener("input", () => { checkDirty(); render(); });
+  $("topic").addEventListener("input", () => { checkDirty(); render(); scheduleSlugCheck(); });
   ["format", "preset", "audience", "minutes", "themeLight", "background", "channel"].forEach((id) =>
     $(id).addEventListener("change", () => { checkDirty(); render(); }));
-  $("slug").addEventListener("input", () => { S.slugAuto = false; render(); });
+  $("slug").addEventListener("input", () => { S.slugAuto = false; render(); scheduleSlugCheck(); });
 
   // mode toggle
   $$("#modeSeg button").forEach((b) => b.onclick = () => {
@@ -518,8 +612,10 @@ function toggleConsole(force) {
 
 // ==== authoring: two-paste ==================================================
 async function withBtn(btn, label, fn) {
+  if (guardBusy()) return { error: "busy" };
   const orig = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spin"></span>${label}`;
-  try { return await fn(); } finally { btn.disabled = false; btn.innerHTML = orig; }
+  setBusy(true, label);
+  try { return await fn(); } finally { setBusy(false); btn.disabled = false; btn.innerHTML = orig; }
 }
 async function jpost(url, body) {
   const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -580,12 +676,14 @@ function renderMeterRows(box, items, opts = {}) {
       btns.appendChild(nc);
     }
     if (b.data && Object.keys(b.data).length) {
-      const pv = document.createElement("button"); pv.className = "btn sm"; pv.textContent = "▶ preview";
+      const pv = document.createElement("button"); pv.className = "btn sm";
+      pv.textContent = (b.preview && b.preview.status === "done") ? "↺ re-preview" : "▶ preview";
       pv.onclick = () => previewBeat(b, prevBox, pv);
       btns.appendChild(pv);
     }
     row.appendChild(btype); row.appendChild(ta); row.appendChild(m); row.appendChild(btns);
     box.appendChild(row); box.appendChild(prevBox);
+    paintBeatPreview(prevBox, b);
     meter(ta, m, b.type === "HOOK");
   });
 }
@@ -728,16 +826,14 @@ async function runAction(action) {
     if (res.url) { log("↗ " + res.url, "ok"); toast("Remotion Studio launching at " + res.url, "info"); }
     return;
   }
+  if (guardBusy()) return;
 
-  const actionBtns = $$('[data-action]');
-  actionBtns.forEach((b) => b.disabled = true);
-  openConsole(); setLive(true, `${action} running…`);
+  openConsole(); setBusy(true, `${action} running…`);
   log(`▶ ${action} ${slug}`, "cmd");
   const es = new EventSource(`/api/run-stream?action=${encodeURIComponent(action)}&slug=${encodeURIComponent(slug)}`);
   es.onmessage = (e) => log(e.data);
   es.addEventListener("done", (e) => {
-    es.close(); actionBtns.forEach((b) => b.disabled = false); setLive(false);
-    render(); // re-applies gating (buttons re-enabled per state)
+    es.close(); setBusy(false);
     let r = {}; try { r = JSON.parse(e.data); } catch {}
     if (r.ok) {
       log(`✓ ${action} done${r.file ? ` → ${r.file} (${(r.size / 1e6).toFixed(1)} MB)` : ""}`, "ok");
@@ -748,7 +844,7 @@ async function runAction(action) {
       toast(`${action} failed — see console.`, "err");
     }
   });
-  es.onerror = () => { es.close(); actionBtns.forEach((b) => b.disabled = false); setLive(false); log("✗ stream ended unexpectedly.", "err"); };
+  es.onerror = () => { es.close(); setBusy(false); log("✗ stream ended unexpectedly.", "err"); };
 }
 
 async function refreshOutputs() {

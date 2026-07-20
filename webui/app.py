@@ -451,6 +451,34 @@ def _is_rendered(slug: str) -> bool:
     return outdir.is_dir() and any(f.suffix == ".mp4" for f in outdir.iterdir())
 
 
+@app.route("/api/slug-status")
+def api_slug_status():
+    """Report whether a slug is free, already authored, or an immutable (rendered)
+    topic — and if rendered, suggest the next free '-vN' slug. Lets the UI warn at
+    the slug field instead of failing only at save time."""
+    slug = (request.args.get("slug") or "").strip()
+    if not SLUG_RE.match(slug):
+        return jsonify({"slug": slug, "valid": False, "exists": False,
+                        "rendered": False, "suggestion": ""})
+    exists = (TOPICS_DIR / slug).exists()
+    rendered = _is_rendered(slug)
+    suggestion = ""
+    if rendered:
+        base, start = slug, 2
+        m = re.match(r"^(.*?)-v(\d+)$", slug)
+        if m:
+            base, start = m.group(1), int(m.group(2)) + 1
+        n = start
+        while n <= 999:
+            cand = f"{base}-v{n}"
+            if not _is_rendered(cand):
+                suggestion = cand
+                break
+            n += 1
+    return jsonify({"slug": slug, "valid": True, "exists": exists,
+                    "rendered": rendered, "suggestion": suggestion})
+
+
 @app.route("/api/intake", methods=["POST"])
 def api_intake():
     """Accept the JSON the user's LLM produced, save it into the topic, lint it."""

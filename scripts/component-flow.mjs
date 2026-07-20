@@ -16,6 +16,7 @@
 // tsx      = the component source the LLM returned in Stage 2 (raw, or {tsx:"..."}).
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {TYPES} from './lib/constants.mjs';
@@ -397,8 +398,14 @@ if (sub === 'preview') {
     ]};
     const compId = `${design}-${vertical ? 'short' : 'wide'}`;
     const outDir = P('out/proof/complab'); fs.mkdirSync(outDir, {recursive: true});
+    // Hash the CONTENT (data + duration + aspect) so two beats of the same type but
+    // different data get distinct preview files instead of clobbering one another;
+    // identical content reuses the same file (cheap re-open, no wasted render).
+    const hash = crypto.createHash('sha1')
+      .update(JSON.stringify(sceneData) + '|' + durationFrames + '|' + (vertical ? 's' : 'w') + '|' + design)
+      .digest('hex').slice(0, 10);
     const safe = (type + '_' + design + (vertical ? '_short' : '_wide')).replace(/[^A-Za-z0-9_]/g, '');
-    const outfile = path.join(outDir, `preview_${safe}.mp4`);
+    const outfile = path.join(outDir, `preview_${safe}_${hash}.mp4`);
     try {
       let lastBundle = -1;
       const serveUrl = await bundle({entryPoint: P('src/index.ts'), onProgress: (p) => {

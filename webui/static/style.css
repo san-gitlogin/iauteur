@@ -230,6 +230,21 @@ pre.code{background:#080b11;border:1px solid var(--border);border-radius:0 0 var
 .previewPlayer video{width:100%;border-radius:var(--r);border:1px solid var(--border);background:#000;display:block}
 .previewPlayer .cap{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:6px}
 
+/* ---- preview state + untimed note + busy lock + immutable-slug warning -----*/
+.untimed{color:var(--accent-2,#f0b);font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:.04em;font-size:10px}
+.beatprev .cap{line-height:1.5}
+.prevpending{display:flex;align-items:center;gap:8px;padding:14px 14px;border:1px dashed var(--border);border-radius:var(--r);
+  color:var(--muted);font-family:var(--mono);font-size:12px;background:var(--surface-2);max-width:520px}
+.prevpending.err{border-color:#c0504a;color:#e88}
+body.busy{cursor:progress}
+body.busy .btn:disabled{opacity:.45}
+.slugwarn{display:flex;gap:10px;align-items:flex-start;margin-top:10px;padding:10px 12px;border-radius:var(--r);
+  border:1px solid #b8892a;background:rgba(184,137,42,.12);color:#f2d9a6;font-size:12.5px;line-height:1.5}
+.slugwarn.hidden{display:none}
+.slugwarn .bico{font-size:14px;line-height:1.2}
+.slugwarn .bbody b{color:#ffe9bf}
+.slugwarn .btn.sm{margin-left:4px;vertical-align:middle}
+
 /* ---- component creator drawer + per-beat controls -------------------------*/
 .creatorDrawer{position:fixed;top:0;right:0;bottom:0;width:min(600px,94vw);z-index:60;
   background:var(--surface);border-left:1px solid var(--border);box-shadow:-14px 0 44px rgba(0,0,0,.5);
