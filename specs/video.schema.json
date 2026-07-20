@@ -323,7 +323,8 @@
               "CAPTION_KINETIC_OVERLAY",
               "PHOTO_TIMELINE",
               "TRADEOFF_SCALE",
-              "PIPELINE_GANTT"
+              "PIPELINE_GANTT",
+              "BATCH_SWEEP"
             ]
           },
           "narration": {
@@ -393,6 +394,53 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BATCH_SWEEP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "batchSweep": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase"
+                        },
+                        "rows": {
+                          "type": "number",
+                          "description": "record count in each lane, 5-9"
+                        },
+                        "slow": {
+                          "type": "object",
+                          "description": "{label≤20, stat≤12 (e.g. '3h 20m'), color?}"
+                        },
+                        "fast": {
+                          "type": "object",
+                          "description": "{label≤20, stat≤12 (e.g. '12s'), color?}"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

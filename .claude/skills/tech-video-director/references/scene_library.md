@@ -348,3 +348,4 @@ all 30 designs automatically.
 STAT_CALLOUT extra: `logos: ["si:youtube", ...]` (≤8) renders a logo strip under the stat — dark themes show mono white glyphs automatically.
 QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet list (photo via person.asset = img:file.png).
 | PIPELINE_GANTT | Show how a pipeline overlaps work — one instruction entering a new stage each cycle. | headline≤48, stages, count, color, caption≤48, atWord, source≤64 |
+| BATCH_SWEEP | Contrast one-at-a-time repetition against an all-at-once batch action (hours vs seconds). | headline≤48, rows, slow, fast, atWord, source≤64 |

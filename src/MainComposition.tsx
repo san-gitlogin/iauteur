@@ -8,6 +8,7 @@ import {Background} from './Background';
 import {CoverCard} from './CoverCard';
 import {SceneTransition} from './SceneTransition';
 import {SceneFx} from './SceneFx';
+import {CameraRig} from './camera/CameraRig';
 import {Hook} from './scenes/Hook';
 import {TitleCard} from './scenes/TitleCard';
 import {ConceptDiagram} from './scenes/ConceptDiagram';
@@ -145,9 +146,11 @@ import {CaptionKineticOverlay} from './scenes/CaptionKineticOverlay';
 import {PhotoTimeline} from './scenes/PhotoTimeline';
 import {TradeoffScale} from './scenes/TradeoffScale';
 import {PipelineGantt} from './scenes/PipelineGantt';
+import {BatchSweep} from './scenes/BatchSweep';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  BATCH_SWEEP: BatchSweep,
   PIPELINE_GANTT: PipelineGantt,
   HOOK: Hook,
   TITLE_CARD: TitleCard,
@@ -360,13 +363,15 @@ const Inner: React.FC<{spec: VideoSpec}> = ({spec}) => {
             {scene.audio ? <Audio src={staticFile(scene.audio)} /> : null}
             <SceneTransition kind={scene.transition} durationFrames={scene.durationFrames}>
               <SceneFx fx={scene.fx}>
-                {scene.type === 'CHANNEL_CARD' ? (
-                  <ChannelCard scene={scene} brand={spec.brand} />
-                ) : scene.type === 'OUTRO_CTA' ? (
-                  <OutroCta scene={scene} brand={spec.brand} />
-                ) : (
-                  Comp ? <Comp scene={scene} /> : null
-                )}
+                <CameraRig camera={scene.camera}>
+                  {scene.type === 'CHANNEL_CARD' ? (
+                    <ChannelCard scene={scene} brand={spec.brand} />
+                  ) : scene.type === 'OUTRO_CTA' ? (
+                    <OutroCta scene={scene} brand={spec.brand} />
+                  ) : (
+                    Comp ? <Comp scene={scene} /> : null
+                  )}
+                </CameraRig>
               </SceneFx>
             </SceneTransition>
             {scene.pip ? <ScenePipLayer pip={scene.pip} /> : null}

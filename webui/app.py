@@ -802,6 +802,66 @@ def api_component_preview():
     return jsonify(_component("preview", brief, timeout=600))
 
 
+@app.route("/api/component/preview-stream", methods=["POST"])
+def api_component_preview_stream():
+    """Render ONE scene to an MP4 and STREAM the render progress (SSE), ending
+    with a 'done' event carrying the playable file url — so the console can show
+    a progress bar and then the video inline (no Remotion Studio needed)."""
+    body = request.get_json(force=True) or {}
+    brief = dict(body.get("brief") or {})
+    if not (brief.get("type") or "").strip():
+        return jsonify({"error": "Preview needs a scene type."}), 400
+
+    tmp = ROOT / "out" / "tmp"
+    tmp.mkdir(parents=True, exist_ok=True)
+    brieffile = tmp / "complab_preview_brief.json"
+    brieffile.write_text(json.dumps(brief), encoding="utf-8")
+    args = [node_exe(), "scripts/component-flow.mjs", "preview", str(brieffile)]
+
+    def sse(data, event=None):
+        head = f"event: {event}\n" if event else ""
+        return f"{head}data: {data}\n\n"
+
+    def stream():
+        yield sse("\u25b6 rendering preview \u2026")
+        try:
+            proc = subprocess.Popen(args, cwd=str(ROOT), env=run_env(),
+                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                    text=True, encoding="utf-8", errors="replace", bufsize=1)
+        except Exception as e:
+            yield sse(json.dumps({"ok": False, "output": str(e)}), "done")
+            return
+        final = None
+        for raw in iter(proc.stdout.readline, ""):
+            for piece in raw.replace("\r", "\n").split("\n"):
+                piece = piece.rstrip()
+                if not piece:
+                    continue
+                # component-flow.mjs prints its final result as ONE JSON line on stdout;
+                # everything else (bundling%/rendering%) is live progress.
+                if piece.startswith("{") and '"ok"' in piece:
+                    try:
+                        final = json.loads(piece)
+                        continue
+                    except json.JSONDecodeError:
+                        pass
+                yield sse(piece)
+        proc.stdout.close()
+        code = proc.wait()
+        try:
+            brieffile.unlink()
+        except OSError:
+            pass
+        if final is None:
+            final = {"ok": code == 0, "output": f"preview exited with code {code}"}
+        if final.get("ok") and final.get("file"):
+            final["url"] = "/proof-img/" + final["file"]
+        yield sse(json.dumps(final), "done")
+
+    return Response(stream(), mimetype="text/event-stream",
+                    headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
 @app.route("/proof-img/<path:fn>")
 def proof_img(fn):
     return send_from_directory(str(ROOT / "out" / "proof" / "complab"), fn)

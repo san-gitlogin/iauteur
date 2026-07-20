@@ -3,6 +3,7 @@
 // opt-in narrowing helpers are re-exported so callers can use SceneOf<'BITS'>.
 import type {SceneTypeName, SceneOf, TypedScene, SceneByType} from './sceneTypes.generated';
 export type {SceneTypeName, SceneOf, TypedScene, SceneByType};
+import type {CameraConfig} from './camera/moves';
 
 export type Zone = 'zoneA' | 'zoneB' | 'zoneC';
 
@@ -1194,7 +1195,16 @@ export interface PipelineGanttData {
   atWord?: number;
   source?: string;
 }
+export interface BatchSweepData {
+  headline?: string;
+  rows?: number;
+  slow?: Record<string, unknown>;
+  fast?: Record<string, unknown>;
+  atWord?: number;
+  source?: string;
+}
 export interface SceneData {
+  batchSweep?: BatchSweepData;
   pipelineGantt?: PipelineGanttData;
   // HOOK
   headline?: string;
@@ -2212,6 +2222,9 @@ export interface Scene {
   // Placement respects safe zones — on Shorts, platform UI owns right/bottom, so a
   // `br`/`bl` request auto-relocates to the top on vertical.
   pip?: ScenePip;
+  // Optional camera move/shake wrapping this scene's content (see src/camera).
+  // Additive: absent → CameraRig renders the scene pixel-identically.
+  camera?: CameraConfig;
 }
 
 export interface ScenePip {

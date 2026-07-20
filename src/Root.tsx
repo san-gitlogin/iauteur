@@ -6,6 +6,7 @@ import {showcaseSpec, newShowcaseSpec} from './showcaseSpec';
 import {topics} from './topicsIndex';
 import {Thumbnail} from './Thumbnail';
 import {ThemedCover} from './CoverCard';
+import {CameraShowcase, CAMERA_SHOWCASE_FRAMES} from './camera/CameraShowcase';
 
 // STUDIO ROOT — two groups of compositions:
 //
@@ -142,6 +143,17 @@ export const RemotionRoot: React.FC = () => {
           />
         </React.Fragment>
       ))}
+
+      {/* ---------- CAMERA SYSTEM SHOWCASE (standalone demo) ---------- */}
+      <Composition
+        id="camera-showcase"
+        component={CameraShowcase}
+        durationInFrames={CAMERA_SHOWCASE_FRAMES}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{themeName: 'moderndark'}}
+      />
     </>
   );
 };

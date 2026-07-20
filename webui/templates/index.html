@@ -322,13 +322,16 @@
         </div>
 
         <div id="compProofCard" class="card hidden">
-          <h3>4 · Proof <span class="muted">— see it render</span></h3>
-          <div class="cardsub">Render stills across material (rounded+glow) and neo-brutalism (flat+sharp) to prove theme adaptation. This bundles the project, so it takes a minute.</div>
+          <h3>4 · Preview <span class="muted">— see it render</span></h3>
+          <div class="cardsub">Render this component to a short video in your chosen design and watch it play right here — no Remotion Studio needed. The first render bundles the project, so it takes a minute.</div>
           <div class="btnrow">
-            <button id="compProofBtn" class="btn">Render proof stills</button>
-            <button class="btn ghost" data-action="studio">Open Remotion Studio</button>
+            <button id="compProofBtn" class="btn primary">▶ Render preview</button>
           </div>
-          <div id="compProof" class="outputs"></div>
+          <div id="compPreviewProgress" class="previewProgress hidden">
+            <div class="pbar"><div id="compPreviewBar" class="pfill"></div></div>
+            <span id="compPreviewPct" class="muted small">starting…</span>
+          </div>
+          <div id="compProof" class="previewPlayer"></div>
         </div>
 
         <div class="card">

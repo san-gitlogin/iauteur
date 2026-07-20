@@ -400,11 +400,17 @@ if (sub === 'preview') {
     const safe = (type + '_' + design + (vertical ? '_short' : '_wide')).replace(/[^A-Za-z0-9_]/g, '');
     const outfile = path.join(outDir, `preview_${safe}.mp4`);
     try {
-      const serveUrl = await bundle({entryPoint: P('src/index.ts'), onProgress: () => {}});
+      let lastBundle = -1;
+      const serveUrl = await bundle({entryPoint: P('src/index.ts'), onProgress: (p) => {
+        const pct = Math.round(p); if (pct !== lastBundle) { lastBundle = pct; process.stderr.write(`bundling ${pct}%\n`); }
+      }});
       const inputProps = {spec, themeOverride: theme, designOverride: design};
       const composition = await selectComposition({serveUrl, id: compId, inputProps});
+      let lastRender = -1;
       await renderMedia({composition, serveUrl, codec: 'h264', outputLocation: outfile,
-        inputProps, frameRange: [0, durationFrames - 1], overwrite: true});
+        inputProps, frameRange: [0, durationFrames - 1], overwrite: true, onProgress: ({progress}) => {
+          const pct = Math.round((progress || 0) * 100); if (pct !== lastRender) { lastRender = pct; process.stderr.write(`rendering ${pct}%\n`); }
+        }});
       out({ok: true, clip: 'out/proof/complab/' + path.basename(outfile), file: path.basename(outfile)});
     } catch (e) { out({ok: false, output: 'preview render failed: ' + (e.stack || e.message)}); }
   })();

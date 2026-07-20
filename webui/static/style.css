@@ -221,6 +221,15 @@ pre.code{background:#080b11;border:1px solid var(--border);border-radius:0 0 var
 .proofshot img{width:100%;border-radius:var(--r);border:1px solid var(--border);background:#000;display:block}
 .proofshot figcaption{margin-top:6px;font-size:11px;color:var(--muted);font-family:var(--mono);text-align:center}
 
+/* ---- component preview (render progress + inline video player) ------------*/
+.previewProgress{display:flex;align-items:center;gap:10px;margin-top:12px}
+.previewProgress.hidden{display:none}
+.previewProgress .pbar{flex:1;height:8px;border-radius:6px;background:var(--surface-2);border:1px solid var(--border);overflow:hidden}
+.previewProgress .pfill{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+.previewPlayer{margin-top:14px}
+.previewPlayer video{width:100%;border-radius:var(--r);border:1px solid var(--border);background:#000;display:block}
+.previewPlayer .cap{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:6px}
+
 /* ---- component creator drawer + per-beat controls -------------------------*/
 .creatorDrawer{position:fixed;top:0;right:0;bottom:0;width:min(600px,94vw);z-index:60;
   background:var(--surface);border-left:1px solid var(--border);box-shadow:-14px 0 44px rgba(0,0,0,.5);

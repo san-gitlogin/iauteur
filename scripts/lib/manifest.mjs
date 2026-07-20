@@ -17,6 +17,20 @@
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
 export const MANIFEST = {
+  BATCH_SWEEP: {
+    category: "diagram", family: "diagram", data_key: "batchSweep",
+    purpose: "Two lanes over the same record list: a single-record modal opening/closing over and over (a climbing context-switch counter) vs one multi-select sweep that checks all rows and fires once.",
+    use_when: "Contrast one-at-a-time repetition against an all-at-once batch action (hours vs seconds).",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase"},
+      rows: {t: 'number', note: "record count in each lane, 5-9"},
+      slow: {t: 'object', req: true, note: "{label≤20, stat≤12 (e.g. '3h 20m'), color?}"},
+      fast: {t: 'object', req: true, note: "{label≤20, stat≤12 (e.g. '12s'), color?}"},
+      atWord: {t: 'anchor'},
+      source: {t: 'string', max: 64},
+    },
+    example: {batchSweep: {"atWord":4,"fast":{"color":"green","label":"Multi-select","stat":"12s"},"headline":"One at a time, or [all at once]","rows":7,"slow":{"color":"red","label":"Single-record modal","stat":"3h 20m"},"source":"illustrative"}},
+  },
   PIPELINE_GANTT: {
     category: "diagram", family: "diagram", data_key: "pipelineGantt",
     purpose: "A pipeline timing diagram: instructions (rows) flow diagonally through stages across clock cycles (columns).",

@@ -210,7 +210,7 @@ async function onCompAssemble() {
       renderBeatReview(S.beats);
       toast(`Bound ${res.type} to beat ${bd.id || (S.activeBeatIndex + 1)} — preview it in the Author list.`, "ok");
     }
-    box.innerHTML = `<div class="banner ok"><span class="bico">✓</span><div class="bbody"><b>${res.type}</b> wired into the library and type-checked. Render a proof below, or use it in a video spec.</div></div>`;
+    box.innerHTML = `<div class="banner ok"><span class="bico">✓</span><div class="bbody"><b>${res.type}</b> wired into the library and type-checked. Render a preview below, or use it in a video spec.</div></div>`;
     $("compProofCard").classList.remove("hidden");
     toast(`${res.type} created ✓`, "ok"); render();
   } else {
@@ -219,21 +219,58 @@ async function onCompAssemble() {
   }
 }
 
-async function onCompProof() {
+async function onCompPreview() {
   if (!S.compConfig) { toast("Create the component first.", "warn"); return; }
-  const btn = $("compProofBtn"); btn.disabled = true; btn.textContent = "Rendering…"; setLive(true, "rendering proof stills…");
-  const res = await jpost("/api/component/proof", { brief: compBrief(), config: S.compConfig });
-  btn.disabled = false; btn.textContent = "Render proof stills"; setLive(false);
-  if (res.error) { toast(res.error, "err"); return; }
-  if (!res.ok) { toast("Proof render failed — see console.", "err"); log(res.output || "", "err"); return; }
+  const cfg = S.compConfig;
+  const ex = (cfg.example && cfg.example[cfg.dataKey]) ? cfg.example : { [cfg.dataKey]: cfg.example || {} };
+  const vertical = $("format").value === "shorts";
+  const btn = $("compProofBtn"); btn.disabled = true; btn.textContent = "Rendering…"; setLive(true, "rendering preview…");
+  const prog = $("compPreviewProgress"), bar = $("compPreviewBar"), pct = $("compPreviewPct");
+  prog.classList.remove("hidden"); bar.style.width = "0%"; pct.textContent = "starting…";
   const box = $("compProof"); box.innerHTML = "";
-  for (const s of res.stills || []) {
-    const fn = s.split("/").pop();
-    const fig = document.createElement("figure"); fig.className = "proofshot";
-    fig.innerHTML = `<img src="/proof-img/${fn}?t=${Date.now()}" alt="${fn}" /><figcaption>${fn.replace(/^[A-Z_]+_/, "").replace(/\.png$/, "")}</figcaption>`;
-    box.appendChild(fig);
+  let done = null;
+  try {
+    const r = await fetch("/api/component/preview-stream", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ brief: {
+        type: cfg.type, sceneData: ex[cfg.dataKey], design: S.design, theme: S.design,
+        format: vertical ? "short" : "long", durationFrames: 150 } }),
+    });
+    const reader = r.body.getReader(), dec = new TextDecoder(); let buf = "";
+    for (;;) {
+      const { value, done: fin } = await reader.read(); if (fin) break;
+      buf += dec.decode(value, { stream: true });
+      let idx;
+      while ((idx = buf.indexOf("\n\n")) >= 0) {
+        const frame = buf.slice(0, idx); buf = buf.slice(idx + 2);
+        let ev = null, data = "";
+        for (const line of frame.split("\n")) {
+          if (line.startsWith("event:")) ev = line.slice(6).trim();
+          else if (line.startsWith("data:")) data += line.slice(5).trim();
+        }
+        if (ev === "done") { try { done = JSON.parse(data); } catch (e) { done = { ok: false }; } }
+        else if (data) {
+          const m = data.match(/(bundling|rendering)\s+(\d+)%/i);
+          if (m) { const p = +m[2]; bar.style.width = p + "%"; pct.textContent = `${m[1].toLowerCase()} ${p}%`; }
+          log(data, "out");
+        }
+      }
+    }
+    if (done && done.ok && done.url) {
+      bar.style.width = "100%"; pct.textContent = "done ✓";
+      box.innerHTML = `<video src="${done.url}?t=${Date.now()}" controls autoplay loop muted playsinline></video>`
+        + `<div class="cap">${escapeHtml(cfg.type)} · ${escapeHtml(S.design)} · rendered preview</div>`;
+      toast("Preview rendered ✓", "ok");
+    } else {
+      prog.classList.add("hidden");
+      const msg = (done && (done.output || done.error)) || "Preview render failed — see console.";
+      toast(msg, "err"); if (done && (done.output || done.error)) log(done.output || done.error, "err");
+    }
+  } catch (e) {
+    prog.classList.add("hidden"); toast("Preview stream failed: " + e.message, "err");
+  } finally {
+    btn.disabled = false; btn.textContent = "▶ Render preview"; setLive(false);
   }
-  toast(`Rendered ${(res.stills || []).length} proof stills.`, "ok");
 }
 
 async function onCompRemove() {
@@ -447,7 +484,7 @@ function wireEvents() {
   $("compValidateBtn").onclick = onCompValidate;
   $("compStage2Btn").onclick = onCompStage2;
   $("compAssembleBtn").onclick = onCompAssemble;
-  $("compProofBtn").onclick = onCompProof;
+  $("compProofBtn").onclick = onCompPreview;
   $("compRemoveBtn").onclick = onCompRemove;
   $("creatorClose").onclick = closeCreator;
 

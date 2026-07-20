@@ -104,10 +104,41 @@ because none of the existing types fit a specific segment.
 
 ${briefBlock()}
 
-## Step A — first, make sure no existing type already fits
-Scan the library below. If an existing type (or a close pairing) already covers this need, STOP and
-reply with exactly: \`REUSE: <TYPE_NAME> — <one-line reason>\` instead of a config. Only invent a new
-component when nothing here is honest.
+## Step A — DECIDE: BUILD (default) or REUSE (rare). Follow these steps in order. Do not skip.
+The director already decided the library is MISSING something for this beat, so **your default answer is BUILD**.
+You may only reply REUSE if the beat passes ALL THREE tests below. If in any doubt, BUILD.
+
+Do this literally:
+1. From the menu below, name the ONE existing type that looks closest to this beat. Call it CLOSEST.
+2. Answer these three questions about CLOSEST with yes or no:
+   - **T1 (same picture?)** Does CLOSEST draw the *exact objects/shapes* this beat needs — not just a related
+     topic? (e.g. the beat's actual items, the actual thing that changes.)
+   - **T2 (same motion?)** Does CLOSEST already *move the way this beat needs* — e.g. a repeating loop, a sweep
+     across many items, a count-up, a before→after transformation, a fill/drain?
+   - **T3 (fields fit?)** Could you fill CLOSEST's existing fields with this beat's content WITHOUT wishing for
+     a field it does not have?
+3. Decide:
+   - If **any** answer is **no** → **BUILD**. Skip to Step B and emit a config. (This is the common case.)
+   - Only if **all three are yes** → reply with exactly ONE line and nothing else:
+     \`REUSE: <TYPE_NAME> — <the exact objects + motion that type already draws that match this beat>\`
+
+### Worked example — copy this reasoning, do NOT copy this beat
+Beat: "Single-record modals force endless context switches, while multi-select turns hours into seconds."
+CLOSEST = SPLIT_PATHS (it draws two labelled path cards, a router hit/miss).
+- T1 = **no** — SPLIT_PATHS draws two static cards; this beat needs a *repeating modal loop* on one side and a
+  *multi-select checkbox sweep* on the other. Different objects.
+- T2 = **no** — SPLIT_PATHS has no repetition, no sweep, no "hours → seconds" payoff. Different motion.
+- One "no" is enough → **BUILD**. Emit a config in Step B.
+- (A reply of \`REUSE: SPLIT_PATHS — two behaviours\` would be WRONG and is rejected. "Two-sided" is not a match.)
+
+### Worked example 2 — when the answer IS reuse (do NOT over-build)
+Beat: "The new format gives you three wins: faster to parse, smaller on disk, and human-readable."
+CLOSEST = LIST_BUILD (it builds an icon list of N short points, one per row).
+- T1 = **yes** — three short benefit rows is exactly what LIST_BUILD draws.
+- T2 = **yes** — LIST_BUILD staggers the rows in; that is all this beat needs.
+- T3 = **yes** — each win fits a row (label + icon), no missing field.
+- All three yes → **REUSE**. Reply: \`REUSE: LIST_BUILD — an icon list of three short benefit rows, staggered in\`
+- (Inventing a new THREE_WINS here would be WRONG: a plain list of points is not a new picture.)
 
 ${componentMenu()}
 
@@ -129,7 +160,8 @@ Return a single JSON object in the EXACT shape below (this is consumed by the re
     // one entry per data field. t = the field type:
     //   "string"  plain text (give a "max" CHARACTER budget sized to the NARROW vertical frame)
     //   "number"  numeric (counts up / drives geometry)
-    //   "anchor"  a word-timing anchor (e.g. "atWord"): the narration word this element animates in on
+    //   "anchor"  a word-timing anchor (e.g. "atWord"). Its VALUE IS A NUMBER — the 1-based position of the
+    //             narration word this element animates in on (the 6th word → 6). NEVER the word's text.
     //   "asset"   a single "lucide:icon" | "si:brand" | "img:file" reference
     //   "asset[]" an array of asset strings
     //   "items"   an array of objects (describe the item shape in "note", with per-field budgets)
@@ -147,12 +179,17 @@ Return a single JSON object in the EXACT shape below (this is consumed by the re
 - Every text field needs a \`max\` char budget sized to the **narrow (vertical 1080-wide) frame** — short.
   Headlines ≤48, labels ≤20, subs ≤30, captions ≤48, sources ≤64, tiny values/codes ≤12. Be strict.
 - Include exactly ONE \`anchor\` field (usually \`atWord\`) if anything animates in on a spoken word.
+  In \`example\`, an anchor's value is a NUMBER — the 1-based index of that word in the segment (e.g. \`"atWord": 6\`),
+  NEVER the word's text.
 - Colour fields use one of: ${SEM.join(', ')} (semantic colours that MEAN something).
 - Keep it small: 3–7 fields is typical. A component that needs 15 fields is two components.
 - The \`example\` must be complete and realistic — it becomes the showcase demo and a stress fixture.
 
-## OUTPUT
-Reply with ONLY the JSON config object (or a single \`REUSE:\` line). No prose, no code fences beyond the JSON.`;
+## OUTPUT — obey exactly
+Your reply MUST be ONE of these two, with nothing before or after it:
+- a BUILD config: the reply's **first character is \`{\`** and its **last character is \`}\`** (raw JSON, no code fences, no prose); OR
+- a REUSE line: the reply starts with the word **\`REUSE:\`** and is a single line.
+Do not write any explanation, greeting, reasoning, or markdown. Just the object or the one line.`;
 }
 
 // ---- STAGE 2 : write the component ------------------------------------------
