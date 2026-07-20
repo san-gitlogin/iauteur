@@ -66,6 +66,7 @@ async function boot() {
   render();
   measureTopbar();
   try { new ResizeObserver(measureTopbar).observe(document.querySelector(".topbar")); } catch (e) { /* older browser */ }
+  initOnboarding();
   checkSlugStatus();
   log(restored ? "Restored your previous session." : "Console ready. Start at Step 1.", "muted");
 }
@@ -171,6 +172,16 @@ function measureTopbar() {
   if (!tb) return;
   const h = Math.round(tb.getBoundingClientRect().height);
   if (h > 0) document.documentElement.style.setProperty("--topbar-h", h + "px");
+}
+
+// First-run orientation card (dismissal remembered). A 'Reset' clears it too.
+const ONBOARD_KEY = "iauteur_onboard_seen_v1";
+function initOnboarding() {
+  const card = $("onboard"); if (!card) return;
+  let seen = false; try { seen = localStorage.getItem(ONBOARD_KEY) === "1"; } catch (e) {}
+  card.classList.toggle("hidden", seen);
+  const x = $("onboardClose");
+  if (x) x.onclick = () => { card.classList.add("hidden"); try { localStorage.setItem(ONBOARD_KEY, "1"); } catch (e) {} };
 }
 
 // ==== Component Lab =========================================================
@@ -394,12 +405,70 @@ async function previewBeat(item, prevBox, btn) {
 function paintBeatPreview(prevBox, item) {
   const p = item.preview;
   if (!p || p.status === "idle") { prevBox.innerHTML = ""; return; }
-  if (p.status === "rendering") { prevBox.innerHTML = `<div class="prevpending"><span class="spin"></span> rendering preview…</div>`; return; }
+  if (p.status === "rendering") { prevBox.innerHTML = `<div class="prevpending"><span class="spin"></span> ${escapeHtml(p.stage || "rendering preview…")}</div>`; return; }
   if (p.status === "error") { prevBox.innerHTML = `<div class="prevpending err">preview failed — click preview to retry</div>`; return; }
+  if (p.voiced) {
+    prevBox.innerHTML =
+      `<video src="${p.url}?t=${p.ts}" controls loop playsinline></video>`
+      + `<div class="cap"><b>${escapeHtml(item.type)}</b> · ${escapeHtml(p.design || S.design)} · <span class="voiced">with voiceover</span> · timed to the narration. Press play to hear it; the final render keeps this timing.</div>`;
+    return;
+  }
   prevBox.innerHTML =
     `<video src="${p.url}?t=${p.ts}" controls loop muted playsinline></video>`
     + `<div class="cap"><b>${escapeHtml(item.type)}</b> · ${escapeHtml(p.design || S.design)} · <span class="untimed">visual check — untimed</span>. `
     + `The final video re-renders this scene timed to your voiceover &amp; segment length.</div>`;
+}
+
+// Preview a single beat WITH voiceover (edge-TTS + word-sync + audio), streamed.
+async function previewBeatVoice(item, prevBox, btn) {
+  if (!item.type || !item.data) { toast("This beat has no component data to preview yet.", "warn"); return; }
+  const narration = (item.narration || "").trim();
+  if (!narration) { toast("Add narration to this beat first — there's nothing to voice.", "warn"); return; }
+  if (guardBusy()) return;
+  const orig = btn.textContent; btn.textContent = "voicing…";
+  item.preview = { status: "rendering", stage: "generating voiceover…" }; paintBeatPreview(prevBox, item);
+  setBusy(true, "voiceover preview…");
+  const vertical = $("format").value === "shorts";
+  const voice = ($("voVoice") && $("voVoice").value || "").trim();
+  let done = null;
+  try {
+    const r = await fetch("/api/component/preview-voiceover", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ brief: {
+        type: item.type, sceneData: item.data, narration, voice,
+        design: S.design, theme: S.design, format: vertical ? "short" : "long" } }),
+    });
+    const reader = r.body.getReader(), dec = new TextDecoder(); let buf = "";
+    for (;;) {
+      const { value, done: fin } = await reader.read(); if (fin) break;
+      buf += dec.decode(value, { stream: true }); let idx;
+      while ((idx = buf.indexOf("\n\n")) >= 0) {
+        const frame = buf.slice(0, idx); buf = buf.slice(idx + 2);
+        let ev = null, data = "";
+        for (const line of frame.split("\n")) {
+          if (line.startsWith("event:")) ev = line.slice(6).trim();
+          else if (line.startsWith("data:")) data += line.slice(5).trim();
+        }
+        if (ev === "done") { try { done = JSON.parse(data); } catch (e) { done = { ok: false }; } }
+        else if (data) {
+          const m = data.match(/(bundling|rendering)\s+(\d+)%/i);
+          item.preview = { status: "rendering", stage: m ? `${m[1].toLowerCase()} ${m[2]}%` : data.replace(/^\u25b6\s*/, "") };
+          paintBeatPreview(prevBox, item);
+          log(data, "out");
+        }
+      }
+    }
+  } catch (e) { done = { ok: false, output: e.message }; }
+  setBusy(false); btn.textContent = orig;
+  if (!done || !done.ok || !done.url) {
+    item.preview = { status: "error" }; paintBeatPreview(prevBox, item);
+    toast((done && (done.output || done.error)) || "Voiceover preview failed.", "err");
+    if (done && (done.output || done.error)) log(done.output || done.error, "err");
+    saveState(); return;
+  }
+  item.preview = { status: "done", url: done.url, ts: Date.now(), design: S.design, voiced: true };
+  paintBeatPreview(prevBox, item); saveState();
+  toast("Voiceover preview ready — press play.", "ok");
 }
 function overlayCustomBeats() {
   if (!S.spec || !S.beats) return;
@@ -692,6 +761,13 @@ function renderMeterRows(box, items, opts = {}) {
       pv.textContent = (b.preview && b.preview.status === "done") ? "↺ re-preview" : "▶ preview";
       pv.onclick = () => previewBeat(b, prevBox, pv);
       btns.appendChild(pv);
+      if (kind === "beat") {
+        const pvv = document.createElement("button"); pvv.className = "btn sm ghost";
+        pvv.textContent = "▶ +voice";
+        pvv.title = "Render this beat WITH voiceover (uses the voice from the Voiceover step) and time it to the narration.";
+        pvv.onclick = () => previewBeatVoice(b, prevBox, pvv);
+        btns.appendChild(pvv);
+      }
     }
     row.appendChild(btype); row.appendChild(ta); row.appendChild(m); row.appendChild(btns);
     box.appendChild(row); box.appendChild(prevBox);

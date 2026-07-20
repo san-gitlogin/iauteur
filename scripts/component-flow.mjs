@@ -383,9 +383,17 @@ if (sub === 'preview') {
   const design = (brief.design || 'moderndark').trim();
   const theme = (brief.theme || design).trim();
   const vertical = /short/i.test(brief.format || '');
-  const type = (brief.type || '').trim();
-  const sceneData = brief.sceneData || {};
-  const durationFrames = Math.max(30, Math.min(600, brief.durationFrames || 150));
+  // specFile: a ready 1-scene spec (already voiced + timed by voiceover.py/sync.mjs).
+  // When present we render IT as-is so the beat's <Audio> and real durationFrames apply.
+  const specFile = (brief.specFile || '').trim();
+  let preSpec = null;
+  if (specFile) { try { preSpec = readJson(specFile); } catch (e) { die('cannot read specFile: ' + e.message); } }
+  const s0 = preSpec && preSpec.scenes && preSpec.scenes[0];
+  const type = specFile ? ((s0 && s0.type) || '').trim() : (brief.type || '').trim();
+  const sceneData = specFile ? (s0 && s0.data) || {} : brief.sceneData || {};
+  const durationFrames = specFile
+    ? Math.max(30, Math.min(1800, (s0 && s0.durationFrames) || 150))
+    : Math.max(30, Math.min(600, brief.durationFrames || 150));
   if (!type) die('preview needs a scene `type` in the brief');
   (async () => {
     let bundle, selectComposition, renderMedia;
@@ -393,18 +401,18 @@ if (sub === 'preview') {
       ({bundle} = await import('file://' + P('node_modules/@remotion/bundler/dist/index.js').replace(/\\/g, '/')));
       ({selectComposition, renderMedia} = await import('file://' + P('node_modules/@remotion/renderer/dist/index.js').replace(/\\/g, '/')));
     } catch (e) { out({ok: false, output: 'renderer/bundler not available: ' + e.message}); return; }
-    const spec = {meta: {topic: type, format: vertical ? 'shorts' : 'long', fps: 30}, scenes: [
+    const spec = preSpec || {meta: {topic: type, format: vertical ? 'shorts' : 'long', fps: 30}, scenes: [
       {id: 's01', type, narration: 'preview', durationFrames, timingSource: 'estimated', background: 'zoneA', data: sceneData},
     ]};
     const compId = `${design}-${vertical ? 'short' : 'wide'}`;
     const outDir = P('out/proof/complab'); fs.mkdirSync(outDir, {recursive: true});
-    // Hash the CONTENT (data + duration + aspect) so two beats of the same type but
+    // Hash the CONTENT (data + duration + aspect + voiced?) so two beats of the same type but
     // different data get distinct preview files instead of clobbering one another;
     // identical content reuses the same file (cheap re-open, no wasted render).
     const hash = crypto.createHash('sha1')
-      .update(JSON.stringify(sceneData) + '|' + durationFrames + '|' + (vertical ? 's' : 'w') + '|' + design)
+      .update(JSON.stringify(sceneData) + '|' + durationFrames + '|' + (vertical ? 's' : 'w') + '|' + design + '|' + (specFile ? 'vo' : ''))
       .digest('hex').slice(0, 10);
-    const safe = (type + '_' + design + (vertical ? '_short' : '_wide')).replace(/[^A-Za-z0-9_]/g, '');
+    const safe = (type + '_' + design + (vertical ? '_short' : '_wide') + (specFile ? '_vo' : '')).replace(/[^A-Za-z0-9_]/g, '');
     const outfile = path.join(outDir, `preview_${safe}_${hash}.mp4`);
     try {
       let lastBundle = -1;

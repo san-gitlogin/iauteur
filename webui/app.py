@@ -882,12 +882,120 @@ def api_component_preview_stream():
             pass
         if final is None:
             final = {"ok": code == 0, "output": f"preview exited with code {code}"}
+    return Response(stream(), mimetype="text/event-stream",
+                    headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@app.route("/api/component/preview-voiceover", methods=["POST"])
+def api_component_preview_voiceover():
+    """Preview ONE beat WITH voiceover: edge-TTS the narration, sync the timing to
+    the real audio, then render the scene with that audio muxed in. Streamed (SSE)
+    with staged progress; ends with a 'done' event carrying the playable url."""
+    import hashlib
+    body = request.get_json(force=True) or {}
+    brief = dict(body.get("brief") or {})
+    if not (brief.get("type") or "").strip():
+        return jsonify({"error": "Preview needs a scene type."}), 400
+    narration = (brief.get("narration") or "").strip()
+    if not narration:
+        return jsonify({"error": "This beat has no narration to voice — add narration first."}), 400
+    voice = (brief.get("voice") or "").strip()
+    vertical = "short" in (brief.get("format") or "")
+    design = (brief.get("design") or "moderndark").strip()
+
+    key = json.dumps({"t": brief.get("type"), "d": brief.get("sceneData"), "n": narration,
+                      "v": voice, "a": vertical, "g": design}, sort_keys=True)
+    prefix = "voprev_" + hashlib.sha1(key.encode()).hexdigest()[:10]
+    tmp = ROOT / "out" / "tmp"
+    tmp.mkdir(parents=True, exist_ok=True)
+    specfile = tmp / f"{prefix}.json"
+    rel_spec = f"out/tmp/{prefix}.json"
+    spec = {"meta": {"topic": brief.get("type"), "format": "shorts" if vertical else "long", "fps": 30},
+            "scenes": [{"id": "s01", "type": brief.get("type"), "narration": narration,
+                        "durationFrames": 150, "timingSource": "estimated",
+                        "background": "zoneA", "data": brief.get("sceneData") or {}}]}
+    specfile.write_text(json.dumps(spec), encoding="utf-8")
+
+    def sse(data, event=None):
+        head = f"event: {event}\n" if event else ""
+        return f"{head}data: {data}\n\n"
+
+    def stream():
+        # 1 · edge-TTS the single beat
+        yield sse("\u25b6 generating voiceover" + (f" ({voice})" if voice else "") + " \u2026")
+        vargs = [python_exe(), "scripts/voiceover.py", rel_spec, prefix]
+        if voice:
+            vargs.append(voice)
+        try:
+            r1 = subprocess.run(vargs, cwd=str(ROOT), env=run_env(), capture_output=True,
+                                text=True, encoding="utf-8", errors="replace", timeout=900)
+        except Exception as e:
+            yield sse(json.dumps({"ok": False, "output": str(e)}), "done")
+            return
+        if r1.returncode != 0:
+            low = (r1.stdout + r1.stderr).lower()
+            hint = ""
+            if "no module named" in low or "edge_tts" in low:
+                hint = "  \u2014 Edge-TTS isn't installed: open the Voiceover step and click Install."
+            elif "getaddrinfo" in low or "timed out" in low or "connect" in low:
+                hint = "  \u2014 Edge-TTS needs internet (Microsoft endpoint)."
+            yield sse(json.dumps({"ok": False, "output": (r1.stderr or r1.stdout)[-2000:] + hint}), "done")
+            return
+        # 2 · re-time the scene from the real audio
+        yield sse("\u25b6 syncing timing to the audio \u2026")
+        try:
+            r2 = subprocess.run([node_exe(), "scripts/sync.mjs", rel_spec,
+                                 f"out/tts/{prefix}_timestamps.json", prefix],
+                                cwd=str(ROOT), env=run_env(), capture_output=True,
+                                text=True, encoding="utf-8", errors="replace", timeout=120)
+        except Exception as e:
+            yield sse(json.dumps({"ok": False, "output": str(e)}), "done")
+            return
+        if r2.returncode != 0:
+            yield sse(json.dumps({"ok": False, "output": (r2.stderr or r2.stdout)[-2000:]}), "done")
+            return
+        # 3 · render the synced 1-scene spec (its <Audio> is baked in)
+        yield sse("\u25b6 rendering with voiceover \u2026")
+        brieffile = tmp / f"{prefix}_brief.json"
+        brieffile.write_text(json.dumps({"specFile": rel_spec, "design": design,
+                                         "theme": design, "format": "short" if vertical else "long"}),
+                             encoding="utf-8")
+        args = [node_exe(), "scripts/component-flow.mjs", "preview", f"out/tmp/{prefix}_brief.json"]
+        try:
+            proc = subprocess.Popen(args, cwd=str(ROOT), env=run_env(),
+                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                    text=True, encoding="utf-8", errors="replace", bufsize=1)
+        except Exception as e:
+            yield sse(json.dumps({"ok": False, "output": str(e)}), "done")
+            return
+        final = None
+        for raw in iter(proc.stdout.readline, ""):
+            for piece in raw.replace("\r", "\n").split("\n"):
+                piece = piece.rstrip()
+                if not piece:
+                    continue
+                if piece.startswith("{") and '"ok"' in piece:
+                    try:
+                        final = json.loads(piece)
+                        continue
+                    except json.JSONDecodeError:
+                        pass
+                yield sse(piece)
+        proc.stdout.close()
+        code = proc.wait()
+        try:
+            brieffile.unlink()
+        except OSError:
+            pass
+        if final is None:
+            final = {"ok": code == 0, "output": f"render exited with code {code}"}
         if final.get("ok") and final.get("file"):
             final["url"] = "/proof-img/" + final["file"]
         yield sse(json.dumps(final), "done")
 
     return Response(stream(), mimetype="text/event-stream",
                     headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
 
 
 @app.route("/proof-img/<path:fn>")

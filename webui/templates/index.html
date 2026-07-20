@@ -39,6 +39,21 @@
         <div class="panelhead"><div class="kick">Step 1</div><h2>What's the video about?</h2>
           <p>Give it a topic. Paste source material if the facts must come from a specific article
              (leave blank for evergreen/conceptual topics).</p></div>
+        <div id="onboard" class="onboard hidden">
+          <button id="onboardClose" class="onboard-x" title="Dismiss">✕</button>
+          <h3>How iAuteur works <span class="muted small">— 60-second orientation</span></h3>
+          <p class="muted small">iAuteur doesn't call an AI for you. It writes carefully-built <b>prompts</b> that you
+             paste into your own chat (ChatGPT, Claude, Gemini…), then you paste the answer back and it validates,
+             previews and renders. You stay in control of the model.</p>
+          <ol class="onboard-steps">
+            <li><b>Topic</b> — say what the video is about.</li>
+            <li><b>Design</b> — pick a look; it sets the theme for every scene.</li>
+            <li><b>Author</b> — click <i>Generate prompt</i>, paste it into your LLM, paste the JSON it returns back, and Validate.</li>
+            <li><b>Voiceover</b> <span class="muted">(optional)</span> — pick a voice; narration is synced to the script.</li>
+            <li><b>Render</b> — produce the 16:9 or 9:16 video.</li>
+          </ol>
+          <p class="muted small">Tip: renders and previews take a minute or two — watch the progress bar, it isn't stuck.</p>
+        </div>
         <div class="card">
           <label class="field">Topic <span class="req">*</span>
             <input id="topic" type="text" placeholder="e.g. How HTTPS keeps the web secure" />
@@ -65,10 +80,10 @@
           <div class="cardsub">How long, what screenplay shape, who it's for.</div>
           <div class="grid3">
             <label class="field">Format<select id="format"></select></label>
-            <label class="field">Screenplay<select id="preset"></select></label>
+            <label class="field" title="The narrative shape/pacing — e.g. explainer, documentary, listicle.">Screenplay<select id="preset"></select></label>
             <label class="field">Audience<select id="audience"></select></label>
             <label class="field">Length (min)<input id="minutes" type="number" min="1" max="15" placeholder="e.g. 9" /></label>
-            <label class="field">Light twin<select id="themeLight"></select></label>
+            <label class="field" title="The light-mode counterpart of your dark theme, used when rendering the 'light' variants.">Light twin<select id="themeLight"></select></label>
             <label class="field">Background<select id="background"></select></label>
           </div>
           <label class="field">Channel<input id="channel" type="text" /></label>
@@ -105,8 +120,8 @@
           <h3>Authoring mode</h3>
           <div class="cardsub">Two-paste is robust with any LLM. Single-paste is one shot for frontier models.</div>
           <div class="seg" id="modeSeg">
-            <button data-mode="two" class="on">Two-paste</button>
-            <button data-mode="single">Single-paste</button>
+            <button data-mode="two" class="on" title="Safest choice. Two small prompts (a beat sheet, then the full scenes) — works reliably with any LLM.">Two-paste</button>
+            <button data-mode="single" title="One big prompt for strong frontier models (GPT-4-class, Claude, Gemini). Fewer steps, but needs a capable model.">Single-paste</button>
           </div>
 
           <!-- TWO-PASTE -->
@@ -235,9 +250,9 @@
           <h3>Checks</h3>
           <div class="cardsub">Optional, but a green lint means it will render.</div>
           <div class="btnrow">
-            <button class="btn" data-action="lint">Lint</button>
-            <button class="btn" data-action="critique">Critique</button>
-            <button class="btn ghost" data-action="studio">Open Remotion Studio</button>
+            <button class="btn" data-action="lint" title="Checks the spec against the rules (text length, timing, structure). Green = it will render.">Lint</button>
+            <button class="btn" data-action="critique" title="An automated review that flags pacing/clarity issues before you render.">Critique</button>
+            <button class="btn ghost" data-action="studio" title="Opens Remotion Studio — the advanced timeline editor. Optional; not needed for normal use.">Open Remotion Studio</button>
           </div>
         </div>
         <div class="card">
