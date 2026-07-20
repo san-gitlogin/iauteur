@@ -64,6 +64,8 @@ async function boot() {
   wireEvents();
   if (restored) restoreViews();
   render();
+  measureTopbar();
+  try { new ResizeObserver(measureTopbar).observe(document.querySelector(".topbar")); } catch (e) { /* older browser */ }
   checkSlugStatus();
   log(restored ? "Restored your previous session." : "Console ready. Start at Step 1.", "muted");
 }
@@ -160,6 +162,15 @@ function setBusy(on, label) {
 function guardBusy() {
   if (S.busy) { toast("A job is already running — wait for it to finish.", "warn"); return true; }
   return false;
+}
+
+// Keep --topbar-h in sync with the real (wrap-aware) topbar height so the sticky
+// step rail pins flush beneath it — no gap, no overlap — at any window width.
+function measureTopbar() {
+  const tb = document.querySelector(".topbar");
+  if (!tb) return;
+  const h = Math.round(tb.getBoundingClientRect().height);
+  if (h > 0) document.documentElement.style.setProperty("--topbar-h", h + "px");
 }
 
 // ==== Component Lab =========================================================
@@ -536,6 +547,7 @@ function wireEvents() {
   // step nav buttons
   $$("[data-next]").forEach((b) => b.onclick = () => setStep(Math.min(5, S.step + 1)));
   $$("[data-back]").forEach((b) => b.onclick = () => setStep(Math.max(1, S.step - 1)));
+  window.addEventListener("resize", measureTopbar);
 
   // config change tracking (loss prevention + slug sync)
   $("topic").addEventListener("input", () => { checkDirty(); render(); scheduleSlugCheck(); });

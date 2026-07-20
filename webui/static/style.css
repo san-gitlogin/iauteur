@@ -14,8 +14,16 @@
   --sh:0 12px 34px rgba(0,0,0,.34); --sh-sm:0 4px 14px rgba(0,0,0,.28);
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
   --sans:"Inter",system-ui,"Segoe UI",Roboto,sans-serif;
+  --topbar-h:58px; /* live height of the sticky topbar, measured in JS */
 }
 *{box-sizing:border-box}
+/* neat, theme-adapted scrollbars everywhere (replaces the chunky default) */
+*{scrollbar-width:thin;scrollbar-color:var(--surface-3) transparent}
+*::-webkit-scrollbar{width:10px;height:10px}
+*::-webkit-scrollbar-track{background:transparent}
+*::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:8px;border:2px solid transparent;background-clip:content-box}
+*::-webkit-scrollbar-thumb:hover{background:var(--border);background-clip:content-box}
+*::-webkit-scrollbar-corner{background:transparent}
 html,body{height:100%}
 body{
   margin:0; color:var(--text); font:14.5px/1.55 var(--sans);
@@ -56,11 +64,11 @@ code{font-family:var(--mono);font-size:.85em;background:#0c1017;border:1px solid
 
 /* ---- shell: rail + main ---------------------------------------------------*/
 .shell{display:grid;grid-template-columns:256px 1fr;gap:0;max-width:1440px;margin:0 auto;
-  min-height:calc(100vh - 58px)}
+  min-height:calc(100vh - var(--topbar-h))}
 
 /* ---- stepper rail ---------------------------------------------------------*/
-.rail{padding:22px 16px;border-right:1px solid var(--border);position:sticky;top:58px;
-  align-self:start;height:calc(100vh - 58px);overflow:auto}
+.rail{padding:22px 16px;border-right:1px solid var(--border);position:sticky;top:var(--topbar-h);
+  align-self:start;height:calc(100vh - var(--topbar-h));overflow:auto}
 .rail .railhead{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);
   margin:2px 10px 14px}
 .stepitem{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border-radius:var(--r);
@@ -303,7 +311,7 @@ body.busy .btn:disabled{opacity:.45}
 /* --- stacked: rail becomes a horizontal step strip pinned under the topbar --- */
 @media(max-width:860px){
   .shell{grid-template-columns:1fr;align-content:start}
-  .rail{position:sticky;top:57px;z-index:30;align-self:start;height:auto;max-height:none;
+  .rail{position:sticky;top:var(--topbar-h);z-index:30;align-self:start;height:auto;max-height:none;
     overflow-x:auto;overflow-y:hidden;border-right:none;border-bottom:1px solid var(--border);
     background:var(--bg);display:flex;align-items:center;gap:8px;padding:10px 14px;scrollbar-width:none}
   .rail::-webkit-scrollbar{display:none}
@@ -324,7 +332,7 @@ body.busy .btn:disabled{opacity:.45}
   .topbar .brand .tag{display:none}
   .topbar .ctx{order:5;flex-basis:100%;margin-left:0}
   .chip{flex:1 1 0;max-width:none}
-  .rail{position:static}
+  .rail{top:var(--topbar-h)}
   .main{padding:16px 14px 150px}
   .card{padding:16px}
   .panelhead h2{font-size:19px}
