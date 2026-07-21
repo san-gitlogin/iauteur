@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {parseVariantEnums} from './lib/parse-variants.mjs';
+import {TYPES as CONST_TYPES} from './lib/constants.mjs';
 
 const read = (p) => fs.readFileSync(path.resolve(p), 'utf8');
 const uniq = (a) => [...new Set(a)];
@@ -22,7 +23,9 @@ const grab = (src, marker) => {
   const j = src.indexOf('];', i);
   return uniq([...src.slice(i, j).matchAll(/'([A-Z0-9_]+)'/g)].map((m) => m[1]));
 };
-const TYPES = grab(lint, 'const TYPES = [');
+// TYPES is the authoritative allow-list; it lives in scripts/lib/constants.mjs
+// (imported by the linter too). Read it from SOURCE, never re-parse lint-spec.
+const TYPES = uniq(CONST_TYPES);
 const DYNAMIC = uniq([...lint.slice(lint.indexOf('const DYNAMIC = [')).slice(0, 4000).matchAll(/'([A-Z0-9_]+)'/g)].map((m) => m[1]));
 
 // ── 2. registry (MainComposition) — map entries + scene.type special-cases ──

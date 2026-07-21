@@ -87,7 +87,7 @@ in **16:9** and **9:16**, in **material** + **neobrutalism** + a rotating third 
 still at a meaningful frame (entrance settle / emphasis / exit start). Re-running PRESERVES
 existing verdicts + the viewing log; new (type×variant) rows enter as UNVIEWED.
 
-Rows: 136 types → 156 sub-type rows.
+Rows: 140 types → 160 sub-type rows.
 Cells per row: 3 props × 2 aspects × 3 packs = 18.
 
 
@@ -317,7 +317,16 @@ Cells per row: 3 props × 2 aspects × 3 packs = 18.
 | `TICKER_TAPE` | PASS | PASS | PASS | PASS | PASS | PASS |
 | `MAP_RADAR` | PASS | PASS | PASS | PASS | PASS | PASS |
 
+## FAMILY Z · misc  ·  third pack: monochrome
+
+| sub-type | MIN 16:9 | MIN 9:16 | MAX 16:9 | MAX 9:16 | MIX 16:9 | MIX 9:16 |
+|---|---|---|---|---|---|---|
+| `STICKY_NOTE` | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED |
+| `TRADEOFF_SCALE` | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED |
+| `PIPELINE_GANTT` | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED |
+| `BATCH_SWEEP` | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED | UNVIEWED |
+
 ---
 
-**Total cells (props×aspect×pack): 2808.** Verdicts + viewing log preserved across re-runs.
+**Total cells (props×aspect×pack): 2880.** Verdicts + viewing log preserved across re-runs.
 Packs are collapsed per printed cell; a cell flips to PASS only when material+neobrutalism+third are all viewed clean for that (prop,aspect). A defect names the pack: e.g. `DEFECT-3 (neo 9:16)`.
