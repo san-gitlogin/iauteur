@@ -16,6 +16,7 @@ export type SceneTypeName =
   | 'STAT_CALLOUT'
   | 'OUTRO_CTA'
   | 'QUOTE_SPOTLIGHT'
+  | 'STICKY_NOTE'
   | 'STAT_PANELS'
   | 'CHAT_MOCKUP'
   | 'SPLIT_PATHS'
@@ -244,6 +245,17 @@ export type QuoteSpotlightScene = SceneCommon<'QUOTE_SPOTLIGHT'> & { data: {
     person?: Record<string, unknown>;
     source?: string;
     atWord?: number;
+  } };
+
+export type StickyNoteScene = SceneCommon<'STICKY_NOTE'> & { data: {
+    stickyNote: {
+      notes: Array<Record<string, unknown>>;
+      color?: string;
+      columns?: number;
+      headline?: string;
+      atWord?: number;
+      source?: string;
+    };
   } };
 
 export type StatPanelsScene = SceneCommon<'STAT_PANELS'> & { data: {
@@ -1434,6 +1446,7 @@ export interface SceneByType {
   STAT_CALLOUT: StatCalloutScene;
   OUTRO_CTA: OutroCtaScene;
   QUOTE_SPOTLIGHT: QuoteSpotlightScene;
+  STICKY_NOTE: StickyNoteScene;
   STAT_PANELS: StatPanelsScene;
   CHAT_MOCKUP: ChatMockupScene;
   SPLIT_PATHS: SplitPathsScene;
@@ -1580,6 +1593,7 @@ export type TypedScene =
   | StatCalloutScene
   | OutroCtaScene
   | QuoteSpotlightScene
+  | StickyNoteScene
   | StatPanelsScene
   | ChatMockupScene
   | SplitPathsScene

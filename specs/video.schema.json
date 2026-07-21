@@ -206,6 +206,7 @@
               "CHAT_MOCKUP",
               "STAT_PANELS",
               "QUOTE_SPOTLIGHT",
+              "STICKY_NOTE",
               "SPLIT_PATHS",
               "BAR_COMPARE",
               "CHANNEL_CARD",
@@ -818,6 +819,56 @@
                     },
                     "atWord": {
                       "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "STICKY_NOTE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "stickyNote": {
+                      "type": "object",
+                      "properties": {
+                        "notes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-6 notes; each {title?<=28, tag?<=20, body<=180, highlight? (a verbatim phrase inside body, <=70), asset? (lucide:/si:/img:), color?, atWord?}"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "default paper tone: blue|green|red|orange|purple|yellow"
+                        },
+                        "columns": {
+                          "type": "number",
+                          "description": "board columns override (else responsive by count + aspect)"
+                        },
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "optional [accent] phrase above the board"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64
+                        }
+                      }
                     }
                   }
                 }

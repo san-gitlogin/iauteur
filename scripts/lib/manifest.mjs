@@ -153,6 +153,20 @@ export const MANIFEST = {
     aliases: {author: 'person.name', role: 'person.role', name: 'person.name'},
     example: {quote: 'This feature missed the mark.', person: {name: 'Meta', role: 'Instagram Blog', asset: 'si:meta'}, source: 'Instagram Blog, 2025', atWord: 5},
   },
+  STICKY_NOTE: {
+    category: 'editorial', family: 'editorial', data_key: 'stickyNote',
+    purpose: 'One neat sticky note, or a small pinned board of 1-6 — a highlighted aside, tip, quote, takeaway or reaction on coloured paper, optionally with a taped photo/icon.',
+    use_when: 'Drop a short human note/tip/quote/callout, or a board of 2-6 reactions/takeaways/tips; one phrase per note can be marker-highlighted.',
+    fields: {
+      notes: {t: 'items', req: true, note: '1-6 notes; each {title?<=28, tag?<=20, body<=180, highlight? (a verbatim phrase inside body, <=70), asset? (lucide:/si:/img:), color?, atWord?}'},
+      color: {t: 'string', note: 'default paper tone: blue|green|red|orange|purple|yellow'},
+      columns: {t: 'number', note: 'board columns override (else responsive by count + aspect)'},
+      headline: {t: 'string', max: 48, note: 'optional [accent] phrase above the board'},
+      atWord: {t: 'anchor'},
+      source: {t: 'string', max: 64},
+    },
+    example: {stickyNote: {color: 'yellow', headline: 'What the team [said]', notes: [{tag: 'QA', title: 'Priya', body: 'The new flow cut our test time in half.', highlight: 'cut our test time in half', color: 'yellow', atWord: 2}, {tag: 'Backend', title: 'Marco', body: 'Cleanest migration we have ever shipped.', highlight: 'Cleanest migration', color: 'green', atWord: 4}], atWord: 1, source: 'illustrative'}},
+  },
   STAT_PANELS: {
     category: 'data', family: 'data', data_root: true,
     purpose: 'Myth-bust / tradeoff: 2-3 metrics + verdict.',

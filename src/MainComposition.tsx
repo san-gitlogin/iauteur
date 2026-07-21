@@ -29,6 +29,7 @@ import {StepFlow} from './scenes/StepFlow';
 import {ChatMockup} from './scenes/ChatMockup';
 import {StatPanels} from './scenes/StatPanels';
 import {QuoteSpotlight} from './scenes/QuoteSpotlight';
+import {StickyNote} from './scenes/StickyNote';
 import {SplitPaths} from './scenes/SplitPaths';
 import {BarCompare} from './scenes/BarCompare';
 import {ChannelCard} from './scenes/ChannelCard';
@@ -173,6 +174,7 @@ const registry: Record<string, React.FC<{scene: Scene}>> = {
   CHAT_MOCKUP: ChatMockup,
   STAT_PANELS: StatPanels,
   QUOTE_SPOTLIGHT: QuoteSpotlight,
+  STICKY_NOTE: StickyNote,
   SPLIT_PATHS: SplitPaths,
   BAR_COMPARE: BarCompare,
   LINE_CHART: LineChartScene,

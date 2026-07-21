@@ -1377,6 +1377,7 @@ export interface SceneData {
   videoHero?: VideoHeroData;       // VIDEO_HERO
   videoSpotlight?: VideoSpotlightData; // VIDEO_SPOTLIGHT
   mediaCallout?: MediaCalloutData;  // MEDIA_CALLOUT
+  stickyNote?: StickyNoteData;      // STICKY_NOTE
   mediaCompare?: MediaCompareData;  // MEDIA_COMPARE
   mediaStat?: MediaStatOverlayData; // MEDIA_STAT_OVERLAY
   screenshotCascade?: ScreenshotCascadeData; // SCREENSHOT_CASCADE
@@ -1620,6 +1621,27 @@ export interface MediaCallout {
   hw?: number;      // optional highlight region width (0..1) → MarkerHighlight
   hh?: number;      // optional highlight region height (0..1)
 }
+// STICKY_NOTE — one neat note, or a small pinned board of 1–6. Paper tone comes
+// from a semantic token (recolours per theme); ink is luminance-picked; one body
+// phrase can be marker-highlighted. Optional taped photo/icon.
+export interface StickyNote {
+  title?: string;      // author / heading (accent flourish font) ≤28
+  tag?: string;        // small uppercase tag / role / category ≤20
+  body?: string;       // the note text ≤180
+  highlight?: string;  // a verbatim phrase within body to marker-highlight ≤70
+  asset?: string;      // optional taped photo/icon: lucide: | si: | img:
+  color?: SemColor;    // per-note paper tone (default StickyNoteData.color)
+  atWord?: number;     // per-note reveal anchor (staggered)
+}
+export interface StickyNoteData {
+  notes: StickyNote[];   // 1–6 (1 = single centred note, optionally with a taped photo)
+  color?: SemColor;      // default paper tone for all notes
+  columns?: number;      // board columns override (else responsive by count/aspect)
+  headline?: string;     // optional Headline above the board
+  atWord?: number;       // base reveal anchor
+  source?: string;       // optional footer citation
+}
+
 export interface MediaCalloutData {
   src?: string;                 // clip or image (missing → placeholder backdrop)
   kind?: 'video' | 'image';

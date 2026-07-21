@@ -75,6 +75,7 @@ One background per video. New backgrounds (e.g. converted from 21st.dev) get add
 | STEP_FLOW | Pipelines with 3–5 named stages (RAG, CI/CD, request path) | headline, steps[{kicker,title,sub,color,atWord}](≤5), caption{text,color,atWord}, source |
 | STAT_PANELS | Myth-busting/tradeoffs; 2–3 metrics + verdict | headline, gridVisual{kicker,legendA,legendB,atWord}, stats[{kicker,value,note,color,atWord}], verdict{text,color,atWord}, source |
 | QUOTE_SPOTLIGHT | An insight anchors the argument (real words only, or fictional persona) | headline, person{name,role,asset}, quote, atWord, transformation{from,to,color,atWord}, source |
+| STICKY_NOTE | A neat sticky note or a small pinned board (1–6) — a tip/aside/quote/reaction on coloured paper; one phrase per note can be marker-highlighted; optional taped photo/icon | notes[{title≤28,tag≤20,body≤180,highlight (verbatim phrase in body ≤70),asset (lucide:/si:/img:),color,atWord}], color, columns, headline, atWord, source |
 | BAR_COMPARE | Benchmarks/rankings: 2–4 horizontal bars with values (label ≤16, display ≤8) | headline, bars[{label,sub,value,display,color,atWord}], maxValue, source |
 | CHANNEL_CARD | Branded subscribe moment (uses brand.logo/channel) | atWord, handle(≤22), tagline(≤36) |
 | SPLIT_PATHS | One system, two behaviors (router, cache hit/miss, sync/async) | headline, center{kicker,title,color,atWord}, left/right{title,badge{text,color},lines[{text,color}],color,atWord}, source |
