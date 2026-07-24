@@ -1079,14 +1079,14 @@ function logAutoEvent(data) {
   // while run_start.formats is an array).
   const M = {
     starting: () => `⚡ Starting “${o.topic}” (${o.mode})`,
-    run_start: () => `▶ Plan: ${(Array.isArray(o.formats) ? o.formats : Object.keys(o.formats || {})).join(", ")} · mode ${o.mode} · ${o.intake ? "will save" : "no save"}`,
+    run_start: () => `▶ Plan: ${(Array.isArray(o.formats) ? o.formats : Object.keys(o.formats || {})).join(", ")} · mode ${o.mode} · ${o.intake ? "will save" : "no save"}${o.model ? ` · model: ${o.model}` : ""}${o.buildComponents ? ` · up to ${o.buildComponents} component build(s), ${o.componentFixCap} fix round(s) each` : ""}`,
     format_start: () => `— ${o.format}: authoring (${o.mode})`,
     ai_call: () => `  ↑ asking your AI (${o.tag}, ${o.prompt_chars} chars)`,
     ai_reply: () => `  ↓ AI replied (${o.tag})`,
     reask: () => `  ↻ beats rejected — re-asking (attempt ${o.attempt})`,
     components_start: () => `  ✚ inventing up to ${o.cap} bespoke component(s) for ${o.format}…`,
     component_try: () => `    · beat ${o.beat}: trying (${o.currentType})`,
-    component_built: () => `    ✚ beat ${o.beat}: built new ${o.type} (was ${o.oldType})`,
+    component_built: () => `    ✚ beat ${o.beat}: built new ${o.type} (was ${o.oldType})${o.fixRounds ? ` — after ${o.fixRounds} compiler-fix round(s)` : " — first try"}`,
     component_reused: () => `    ↺ beat ${o.beat}: reused ${o.type} (honest fit)`,
     component_fix: () => `    ⟳ beat ${o.beat}: component didn't compile — fixing (round ${o.round})`,
     component_skip: () => `    ⊘ beat ${o.beat}: kept original — ${(o.reason || "").slice(0, 120)}`,
@@ -1098,8 +1098,16 @@ function logAutoEvent(data) {
     run_done: () => {
       const f = o.formats || {};
       const per = Object.keys(f).map((k) => `${k}:${f[k] ? "ok" : "stopped"}`).join(", ");
-      const built = (o.builtComponents && o.builtComponents.length) ? ` · built ${o.builtComponents.join(", ")}` : "";
-      return `■ Finished — ${per || "no formats"}${built}. ${o.next || ""}`;
+      const rep = Array.isArray(o.componentReport) ? o.componentReport : [];
+      const built = rep.filter((r) => r.outcome === "built");
+      const kept = rep.filter((r) => r.outcome === "kept-existing");
+      const reused = rep.filter((r) => r.outcome === "reused");
+      const parts = [`■ Finished — ${per || "no formats"}${o.model ? ` · model: ${o.model}` : ""}.`];
+      if (built.length) parts.push(`Built ${built.length} new component(s): ${built.map((r) => `${r.type}${r.fixRounds ? ` (${r.fixRounds} fix round${r.fixRounds > 1 ? "s" : ""})` : " (first try)"}`).join(", ")}.`);
+      if (kept.length) parts.push(`Kept an existing component on ${kept.length} beat(s) after ${kept.map((r) => r.attempts).join("/")} build attempt(s) didn't compile — the video still ships correctly, nothing broken is ever wired.`);
+      if (reused.length) parts.push(`Reused a fitting existing component on ${reused.length} beat(s).`);
+      parts.push(o.next || "");
+      return parts.filter(Boolean).join(" ");
     },
   };
   const kind = /block|refused/.test(e || "") ? "err"

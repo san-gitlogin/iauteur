@@ -95,6 +95,7 @@ class AutoPipeline:
         self.build_components = max(0, int(build_components))
         self.component_fix_cap = max(0, int(component_fix_cap))
         self.built: list[str] = []          # new component TYPES wired this run
+        self.component_report: list[dict] = []  # honest per-beat build outcomes
         self.node = node or find_node()
         self.slug = slugify(self.cfg.get("topic", ""))
         self._emit = emit or (lambda o: (sys.stdout.write(json.dumps(o) + "\n"), sys.stdout.flush()))
@@ -285,12 +286,19 @@ class AutoPipeline:
                 self.emit("component_skip", beat=b.get("id"), reason=str(e)[:200])
                 continue
             if r.get("ok") and r.get("type") and not r.get("reused"):
-                self.emit("component_built", beat=b.get("id"), type=r["type"], oldType=b.get("type"))
+                self.emit("component_built", beat=b.get("id"), type=r["type"], oldType=b.get("type"),
+                          fixRounds=r.get("fixRounds", 0))
+                self.component_report.append({"beat": b.get("id"), "outcome": "built",
+                                              "type": r["type"], "was": b.get("type"), "fixRounds": r.get("fixRounds", 0)})
                 b["type"] = r["type"]; made += 1
             elif r.get("reused"):
                 self.emit("component_reused", beat=b.get("id"), type=r.get("type"))
+                self.component_report.append({"beat": b.get("id"), "outcome": "reused", "type": r.get("type")})
             else:
-                self.emit("component_skip", beat=b.get("id"), reason=(r.get("error") or "")[:200])
+                self.emit("component_skip", beat=b.get("id"), reason=(r.get("error") or "")[:200],
+                          fixRounds=r.get("fixRounds", 0))
+                self.component_report.append({"beat": b.get("id"), "outcome": "kept-existing",
+                                              "was": b.get("type"), "attempts": 1 + int(r.get("fixRounds", 0))})
         return made > 0
 
     def remove_component(self, type_name: str) -> dict:
@@ -378,8 +386,13 @@ class AutoPipeline:
 
     # ---- top level ----------------------------------------------------------
     def run(self, formats: list[str]) -> dict:
+        try:
+            self.model_label = P.describe().get("model") or P.describe().get("label") or ""
+        except Exception:
+            self.model_label = ""
         self.emit("run_start", slug=self.slug, formats=formats, mode=self.mode,
-                  intake=self.do_intake)
+                  intake=self.do_intake, model=self.model_label,
+                  buildComponents=self.build_components, componentFixCap=self.component_fix_cap)
         results = {}
         for fmt in formats:
             try:
@@ -389,9 +402,11 @@ class AutoPipeline:
                 results[fmt] = {"ok": False, "format": fmt, "stage": "ai", "detail": str(e)}
         overall = all(r.get("ok") for r in results.values()) if results else False
         self.emit("run_done", ok=overall, formats={k: v.get("ok") for k, v in results.items()},
-                  builtComponents=self.built,
+                  model=getattr(self, "model_label", ""),
+                  builtComponents=self.built, componentReport=self.component_report,
                   next="Review the topic, then render explicitly (this pipeline stops before render).")
-        return {"ok": overall, "slug": self.slug, "results": results, "built": self.built}
+        return {"ok": overall, "slug": self.slug, "results": results, "built": self.built,
+                "componentReport": self.component_report}
 
 
 # --------------------------------------------------------------------------- CLI
