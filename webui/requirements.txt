@@ -2,3 +2,9 @@ Flask
 # Voiceover (Edge-TTS). Pinned to the 7.x line; the console's
 # "Install / upgrade Edge-TTS" button upgrades within this range.
 edge-tts
+# AI automation (optional): the core provider adapter (scripts/ai/provider.py)
+# talks to Azure OpenAI + any OpenAI-compatible endpoint (OpenAI, Hugging Face
+# router, Groq, Together, OpenRouter, Ollama, local) using ONLY the Python
+# stdlib — no package required. Install litellm ONLY if you want the exotic,
+# non-OpenAI-shaped providers (Bedrock, Vertex, Anthropic-native, Cohere, …).
+# litellm

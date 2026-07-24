@@ -315,6 +315,19 @@ body.busy .btn:disabled{opacity:.45}
 .toast .tico{font-weight:800}
 .toast.ok .tico{color:var(--good)} .toast.err .tico{color:var(--bad)} .toast.warn .tico{color:var(--warn)} .toast.info .tico{color:var(--accent-2)}
 
+/* ---- AI automation panel --------------------------------------------------*/
+.card.aiAuto{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-soft),transparent 60%)}
+.card.aiAuto h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.aiFields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.aiFields .field{margin:0}
+.autoRunRow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}
+.autoRunRow .chk{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
+.autoRunRow #autoRunBtn{margin-left:auto}
+.chip.ok{border-color:var(--good);color:var(--good)}
+.okc{color:var(--good);font-weight:700}
+.errc{color:var(--bad);font-weight:700}
+@media(max-width:640px){.aiFields{grid-template-columns:1fr}.autoRunRow #autoRunBtn{margin-left:0;width:100%}}
+
 /* ============================================================================
    RESPONSIVE  (kept at end so it wins over base rules — media queries add no
    specificity, so source order decides).

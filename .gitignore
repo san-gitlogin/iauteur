@@ -44,8 +44,10 @@ webui/static/tmp/
 # env / secrets — never commit
 .env
 .env.*
+!.env.example
 *.local
 pat.txt
+pat*.txt
 *.pat
 *token*.txt
 

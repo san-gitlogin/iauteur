@@ -107,6 +107,7 @@ ${briefBlock()}
 ## Step A — DECIDE: BUILD (default) or REUSE (rare). Follow these steps in order. Do not skip.
 The director already decided the library is MISSING something for this beat, so **your default answer is BUILD**.
 You may only reply REUSE if the beat passes ALL THREE tests below. If in any doubt, BUILD.
+${brief.preferBuild ? '**This is an automated run with a connected AI: prefer BUILD to give this beat a purpose-built, more vivid visual. Only REUSE when an existing type depicts this beat literally and completely.**\n' : ''}
 
 Do this literally:
 1. From the menu below, name the ONE existing type that looks closest to this beat. Call it CLOSEST.

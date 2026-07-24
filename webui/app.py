@@ -415,6 +415,163 @@ def outputs(slug, fn):
     return send_from_directory(TOPICS_DIR / slug / "out", fn)
 
 
+# ---- AI automation: connect an API key → run the whole flow hands-free ------
+# The provider adapter (scripts/ai/provider.py) + orchestrator
+# (scripts/auto_pipeline.py) do the work; these routes are thin wrappers. Keys
+# are written ONLY to the gitignored .env and are NEVER echoed back to the client.
+ENV_FILE = ROOT / ".env"
+AI_PROVIDERS_FILE = ROOT / "webui" / "ai_providers.json"
+_ENV_KEY_RE = re.compile(r"^[A-Z][A-Z0-9_]*$")
+
+
+def _py_ai(args: list[str], timeout: int) -> dict:
+    """Run scripts/ai/provider.py with the app's interpreter; parse its JSON."""
+    r = _proc([python_exe(), "scripts/ai/provider.py", *args], timeout)
+    try:
+        return json.loads(r["output"] or "{}")
+    except json.JSONDecodeError:
+        return {"ok": False, "error": r["output"][:400] or "no output"}
+
+
+def write_env(updates: dict) -> None:
+    """Merge key=value pairs into the gitignored .env, preserving other lines.
+    Rejects malformed keys and strips newlines from values (no .env injection)."""
+    clean: dict[str, str] = {}
+    for k, v in (updates or {}).items():
+        k = str(k).strip()
+        if not _ENV_KEY_RE.match(k):
+            continue
+        clean[k] = str(v).replace("\r", "").replace("\n", "").strip()
+    lines = ENV_FILE.read_text(encoding="utf-8").splitlines() if ENV_FILE.exists() else []
+    seen = set()
+    out: list[str] = []
+    for line in lines:
+        m = re.match(r"^([A-Z][A-Z0-9_]*)=", line)
+        if m and m.group(1) in clean:
+            key = m.group(1)
+            out.append(f"{key}={clean[key]}")
+            seen.add(key)
+        else:
+            out.append(line)
+    for k, v in clean.items():
+        if k not in seen:
+            out.append(f"{k}={v}")
+    ENV_FILE.write_text("\n".join(out) + "\n", encoding="utf-8")
+
+
+@app.route("/api/ai/providers")
+def api_ai_providers():
+    """Non-secret provider presets for the settings form."""
+    try:
+        return jsonify(json.loads(AI_PROVIDERS_FILE.read_text(encoding="utf-8")))
+    except OSError:
+        return jsonify({"providers": []})
+
+
+@app.route("/api/ai/status")
+def api_ai_status():
+    """Resolved provider config (NO key value; only key_present + a masked hint)."""
+    return jsonify(_py_ai(["--status"], 30))
+
+
+@app.route("/api/ai/save", methods=["POST"])
+def api_ai_save():
+    """Write the provider credentials to the gitignored .env. Key never returns."""
+    body = request.get_json(force=True) or {}
+    env = body.get("env") or {}
+    if not isinstance(env, dict) or not env:
+        return jsonify({"ok": False, "error": "No settings provided."}), 400
+    try:
+        write_env(env)
+    except OSError as e:
+        return jsonify({"ok": False, "error": f"Could not write .env: {e}"}), 500
+    # Re-read status so the UI can confirm what got saved (still no key value).
+    return jsonify({"ok": True, "status": _py_ai(["--status"], 30)})
+
+
+@app.route("/api/ai/test", methods=["POST"])
+def api_ai_test():
+    """One-token connectivity ping through the configured provider."""
+    return jsonify(_py_ai(["--test"], 60))
+
+
+@app.route("/api/auto/run")
+def api_auto_run():
+    """Run the FULL author pipeline with the connected AI, streamed as SSE.
+    Stops before render (project law). Each line the orchestrator emits becomes a
+    'data:' frame; the terminal 'run_done' also fires a 'done' SSE event."""
+    q = request.args
+    cfg = {
+        "topic": (q.get("topic") or "").strip(),
+        "design": q.get("design") or "moderndark",
+        "theme": q.get("theme") or q.get("design") or "moderndark",
+        "themeLight": q.get("themeLight") or "daylight",
+        "format": q.get("format") or "long",
+        "preset": q.get("preset") or "explainer",
+        "audience": q.get("audience") or "general",
+        "channel": q.get("channel") or "YOUR CHANNEL",
+    }
+    if q.get("notes"):
+        cfg["notes"] = q.get("notes")
+    if q.get("source"):
+        cfg["source"] = q.get("source")
+    if not cfg["topic"]:
+        return jsonify({"ok": False, "output": "A topic is required."}), 400
+
+    mode = "single" if q.get("mode") == "single" else "two-paste"
+    formats = q.get("formats") or None
+    intake = q.get("intake", "1") not in ("0", "false", "no")
+    try:
+        build = max(0, int(q.get("build") or 0))
+    except ValueError:
+        build = 0
+
+    scratch = ROOT / "out" / "tmp" / "auto"
+    scratch.mkdir(parents=True, exist_ok=True)
+    cfg_file = scratch / f"webcfg-{slugify(cfg['topic'])}.json"
+    cfg_file.write_text(json.dumps(cfg, indent=2), encoding="utf-8")
+
+    args = [python_exe(), "scripts/auto_pipeline.py", str(cfg_file), "--mode", mode]
+    if formats:
+        args += ["--formats", formats]
+    if not intake:
+        args.append("--no-intake")
+    if build > 0 and mode == "two-paste":
+        args += ["--build-components", str(build)]
+
+    def sse(data, event=None):
+        head = f"event: {event}\n" if event else ""
+        return f"{head}data: {data}\n\n"
+
+    def stream():
+        yield sse(json.dumps({"event": "starting", "topic": cfg["topic"], "mode": mode}))
+        try:
+            proc = subprocess.Popen(args, cwd=str(ROOT), env=run_env(),
+                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                    text=True, encoding="utf-8", errors="replace", bufsize=1)
+        except Exception as e:
+            yield sse(json.dumps({"ok": False, "event": "error", "detail": str(e)}), "done")
+            return
+        final = {"ok": False, "event": "run_done"}
+        for raw in iter(proc.stdout.readline, ""):
+            piece = raw.rstrip()
+            if not piece:
+                continue
+            yield sse(piece)
+            if '"event": "run_done"' in piece or '"event":"run_done"' in piece:
+                try:
+                    final = json.loads(piece)
+                except json.JSONDecodeError:
+                    pass
+        proc.stdout.close()
+        code = proc.wait()
+        final.setdefault("ok", code == 0)
+        yield sse(json.dumps(final), "done")
+
+    return Response(stream(), mimetype="text/event-stream",
+                    headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
 # ---- guided pipeline: LLM prompt → JSON intake → voiceover ------------------
 @app.route("/api/prompt", methods=["POST"])
 def api_prompt():

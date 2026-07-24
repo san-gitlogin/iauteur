@@ -1,0 +1,98 @@
+{
+  "_comment": "NON-SECRET provider presets for the iAuteur automation settings panel. Keys are NEVER stored here — they live only in a gitignored .env. Field names map to .env variables the adapter (scripts/ai/provider.py) reads.",
+  "providers": [
+    {
+      "id": "azure",
+      "label": "Azure OpenAI (classic)",
+      "engine": "azure",
+      "fields": [
+        {"env": "AZURE_OPENAI_ENDPOINT", "label": "Endpoint", "placeholder": "https://your-resource.openai.azure.com", "required": true},
+        {"env": "AZURE_OPENAI_DEPLOYMENT_NAME", "label": "Deployment (model)", "placeholder": "gpt-4o", "required": true},
+        {"env": "AZURE_OPENAI_API_VERSION", "label": "API version", "placeholder": "2024-12-01-preview", "required": true},
+        {"env": "AZURE_OPENAI_API_KEY", "label": "API key", "secret": true, "required": true},
+        {"env": "AZURE_OPENAI_MAX_TOKENS", "label": "Max tokens", "placeholder": "4000"},
+        {"env": "AZURE_OPENAI_TEMPERATURE", "label": "Temperature", "placeholder": "0.3"},
+        {"env": "AZURE_OPENAI_TIMEOUT", "label": "Timeout (s)", "placeholder": "120"}
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "engine": "openai",
+      "base_url": "https://api.openai.com/v1",
+      "fields": [
+        {"env": "IAUTEUR_AI_MODEL", "label": "Model", "placeholder": "gpt-4o", "required": true},
+        {"env": "OPENAI_API_KEY", "label": "API key", "secret": true, "required": true}
+      ]
+    },
+    {
+      "id": "huggingface",
+      "label": "Hugging Face (router — 15+ providers, one token)",
+      "engine": "openai",
+      "base_url": "https://router.huggingface.co/v1",
+      "fields": [
+        {"env": "IAUTEUR_AI_MODEL", "label": "Model", "placeholder": "openai/gpt-oss-120b:fastest", "required": true},
+        {"env": "HF_TOKEN", "label": "HF token", "secret": true, "required": true}
+      ]
+    },
+    {
+      "id": "groq",
+      "label": "Groq",
+      "engine": "openai",
+      "base_url": "https://api.groq.com/openai/v1",
+      "fields": [
+        {"env": "IAUTEUR_AI_MODEL", "label": "Model", "placeholder": "llama-3.3-70b-versatile", "required": true},
+        {"env": "GROQ_API_KEY", "label": "API key", "secret": true, "required": true}
+      ]
+    },
+    {
+      "id": "together",
+      "label": "Together AI",
+      "engine": "openai",
+      "base_url": "https://api.together.xyz/v1",
+      "fields": [
+        {"env": "IAUTEUR_AI_MODEL", "label": "Model", "placeholder": "meta-llama/Llama-3.3-70B-Instruct-Turbo", "required": true},
+        {"env": "TOGETHER_API_KEY", "label": "API key", "secret": true, "required": true}
+      ]
+    },
+    {
+      "id": "openrouter",
+      "label": "OpenRouter",
+      "engine": "openai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "fields": [
+        {"env": "IAUTEUR_AI_MODEL", "label": "Model", "placeholder": "openai/gpt-4o", "required": true},
+        {"env": "OPENROUTER_API_KEY", "label": "API key", "secret": true, "required": true}
+      ]
+    },
+    {
+      "id": "ollama",
+      "label": "Ollama (local)",
+      "engine": "openai",
+      "base_url": "http://localhost:11434/v1",
+      "fields": [
+        {"env": "IAUTEUR_AI_MODEL", "label": "Model", "placeholder": "llama3.1", "required": true}
+      ]
+    },
+    {
+      "id": "custom",
+      "label": "Custom OpenAI-compatible endpoint",
+      "engine": "openai",
+      "fields": [
+        {"env": "IAUTEUR_AI_BASE_URL", "label": "Base URL (…/v1)", "placeholder": "https://host/v1", "required": true},
+        {"env": "IAUTEUR_AI_MODEL", "label": "Model", "required": true},
+        {"env": "IAUTEUR_AI_API_KEY", "label": "API key", "secret": true}
+      ]
+    },
+    {
+      "id": "litellm",
+      "label": "LiteLLM (100+ providers — needs 'pip install litellm')",
+      "engine": "litellm",
+      "fields": [
+        {"env": "IAUTEUR_AI_MODEL", "label": "Model string", "placeholder": "bedrock/anthropic.claude-3-5-sonnet", "required": true},
+        {"env": "IAUTEUR_AI_API_KEY", "label": "API key", "secret": true},
+        {"env": "IAUTEUR_AI_BASE_URL", "label": "API base (optional)"}
+      ]
+    }
+  ]
+}

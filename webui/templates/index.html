@@ -42,13 +42,14 @@
         <div id="onboard" class="onboard hidden">
           <button id="onboardClose" class="onboard-x" title="Dismiss">✕</button>
           <h3>How iAuteur works <span class="muted small">— 60-second orientation</span></h3>
-          <p class="muted small">iAuteur doesn't call an AI for you. It writes carefully-built <b>prompts</b> that you
-             paste into your own chat (ChatGPT, Claude, Gemini…), then you paste the answer back and it validates,
-             previews and renders. You stay in control of the model.</p>
+          <p class="muted small">Two ways to make a video. <b>Manual:</b> iAuteur writes carefully-built <b>prompts</b>
+             that you paste into your own chat (ChatGPT, Claude, Gemini…), then paste the answer back and it validates,
+             previews and renders. <b>Automatic:</b> connect your own AI key in Step 3 and it runs that whole loop for
+             you, stopping before render. Either way you stay in control of the model and the facts.</p>
           <ol class="onboard-steps">
             <li><b>Topic</b> — say what the video is about.</li>
             <li><b>Design</b> — pick a look; it sets the theme for every scene.</li>
-            <li><b>Author</b> — click <i>Generate prompt</i>, paste it into your LLM, paste the JSON it returns back, and Validate.</li>
+            <li><b>Author</b> — paste prompts to/from your LLM, <i>or</i> connect an AI key to automate it.</li>
             <li><b>Voiceover</b> <span class="muted">(optional)</span> — pick a voice; narration is synced to the script.</li>
             <li><b>Render</b> — produce the 16:9 or 9:16 video.</li>
           </ol>
@@ -104,8 +105,9 @@
       <!-- STEP 3 — AUTHOR -->
       <section class="step-panel hidden" data-step="3">
         <div class="panelhead"><div class="kick">Step 3</div><h2>Author the spec</h2>
-          <p>The console builds the prompt; your LLM writes the scenes; the console validates and saves them.
-             Nothing here calls AI — you paste to and from your own chat.</p></div>
+          <p>Two ways to author: connect your own AI below to run the whole flow automatically, or use the
+             manual two-paste flow — the console builds each prompt, your LLM writes the scenes, and the console
+             validates and saves them. Either way, the linter is the judge.</p></div>
 
         <div id="dirtyBanner" class="banner warn hidden">
           <span class="bico">⚠</span>
@@ -114,6 +116,36 @@
             <div class="bactions"><button id="discardDraft" class="btn sm danger">Discard draft &amp; restart</button>
               <button id="keepDraft" class="btn sm ghost">Keep it</button></div>
           </div>
+        </div>
+
+        <div class="card aiAuto">
+          <h3>⚡ Automate with your AI <span class="muted small">optional — connect a key and the console runs the whole flow for you</span></h3>
+          <div class="cardsub">Uses <b>your</b> provider &amp; key (Azure OpenAI, OpenAI, Hugging Face, Groq, Together, OpenRouter, Ollama, or any OpenAI-compatible endpoint). Keys are written only to a local <code>.env</code> and never leave your machine. This authors + lints + saves the topic and <b>stops before render</b>.</div>
+
+          <details id="aiSettings">
+            <summary class="muted small" style="cursor:pointer;margin-bottom:10px">AI provider settings <span id="aiStatusChip" class="chip">not connected</span></summary>
+            <div class="grid2">
+              <label class="field">Provider<select id="aiProvider"></select></label>
+              <div class="field"><span class="muted small">Keys stay in <code>.env</code> (gitignored). Rotate any key you have pasted elsewhere.</span></div>
+            </div>
+            <div id="aiFields" class="aiFields"></div>
+            <div class="bactions" style="margin-top:8px">
+              <button id="aiSaveBtn" class="btn sm accent" type="button">Save settings</button>
+              <button id="aiTestBtn" class="btn sm ghost" type="button">Test connection</button>
+            </div>
+            <div id="aiTestResult" class="muted small" style="margin-top:8px"></div>
+          </details>
+
+          <div class="autoRunRow">
+            <div class="seg" id="aiModeSeg">
+              <button data-aimode="two" class="on" type="button" title="Two small prompts — robust with any model.">Two-paste</button>
+              <button data-aimode="single" type="button" title="One prompt — for strong frontier models.">Single-paste</button>
+            </div>
+            <label class="chk"><input type="checkbox" id="aiIntake" checked /> Save to topic after linting</label>
+            <label class="chk" title="Two-paste only. When a beat needs a visual no existing component depicts, the AI builds a new one (auto-wired, tsc/lint-gated, rolled back if it doesn't compile). Needs a capable model + higher max-tokens."><input type="checkbox" id="aiBuildComponents" /> Let AI build new components <span class="muted small">(advanced)</span></label>
+            <button id="autoRunBtn" class="btn primary" type="button">Run automatically →</button>
+          </div>
+          <div class="muted small" style="margin-top:6px">Every step streams into the console below. Content it can't verify or that overflows a budget stops the run for your review — it never invents facts.</div>
         </div>
 
         <div class="card">

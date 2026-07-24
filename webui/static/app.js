@@ -32,6 +32,7 @@ const S = {
   activeBeatIndex: null,    // which beat the creator drawer is bound to (per-beat)
   customComponents: {},     // type -> config for components created this session
   busy: false,              // a render/preview/save/voiceover job is in flight
+  aiMode: "two",            // AI automation: two-paste (default) | single
 };
 
 // Every button that kicks off a backend job. While one job runs, ALL of these are
@@ -42,6 +43,7 @@ const JOB_BTN_SEL = [
   '#assembleSingleBtn', '#promptBtn', '#applyfixBtn', '#saveTwoBtn', '#intakeBtn',
   '#compStage1Btn', '#compValidateBtn', '#compStage2Btn', '#compAssembleBtn',
   '#compProofBtn', '#compRemoveBtn', '#voBtn', '#voSetup', '#refreshOut',
+  '#autoRunBtn', '#aiSaveBtn', '#aiTestBtn',
   '.beatbtns button',
 ].join(', ');
 
@@ -62,6 +64,7 @@ async function boot() {
   buildTopicPicker();
   buildRail();
   wireEvents();
+  initAiPanel();
   if (restored) restoreViews();
   render();
   measureTopbar();
@@ -956,8 +959,7 @@ async function refreshOutputs() {
 }
 
 // ==== console + toasts ======================================================
-function openConsole() { toggleConsole(false); }
-function setLive(on, msg) {
+function openConsole() { toggleConsole(false); }function setLive(on, msg) {
   $("liveBadge").classList.toggle("hidden", !on);
   $("consoleStat").textContent = on ? (msg || "running…") : "idle";
 }
@@ -979,5 +981,158 @@ function toast(text, kind = "info") {
   setTimeout(() => { el.style.opacity = "0"; el.style.transform = "translateX(12px)"; setTimeout(() => el.remove(), 250); }, 3800);
 }
 function escapeHtml(s) { return (s || "").replace(/[&<>]/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m])); }
+
+// ==== AI automation panel ===================================================
+let AI_PROVIDERS = [];
+
+async function initAiPanel() {
+  const sel = $("aiProvider");
+  if (!sel) return;                          // template without the panel — skip
+  try { AI_PROVIDERS = ((await (await fetch("/api/ai/providers")).json()).providers) || []; }
+  catch { AI_PROVIDERS = []; }
+  sel.innerHTML = "";
+  for (const p of AI_PROVIDERS) {
+    const o = document.createElement("option");
+    o.value = p.id; o.textContent = p.label || p.id; sel.appendChild(o);
+  }
+  sel.onchange = renderAiFields;
+  $("aiSaveBtn").onclick = saveAi;
+  $("aiTestBtn").onclick = testAi;
+  $("autoRunBtn").onclick = autoRun;
+  $$("#aiModeSeg button").forEach((b) => b.onclick = () => {
+    S.aiMode = b.dataset.aimode; $$("#aiModeSeg button").forEach((x) => x.classList.toggle("on", x === b));
+  });
+  await refreshAiStatus();      // preselects the saved provider + shows key state
+  renderAiFields();
+}
+
+function renderAiFields() {
+  const p = AI_PROVIDERS.find((x) => x.id === $("aiProvider").value);
+  const box = $("aiFields"); box.innerHTML = "";
+  if (!p) return;
+  for (const f of (p.fields || [])) {
+    const lab = document.createElement("label"); lab.className = "field";
+    lab.textContent = f.label + (f.required ? " *" : "");
+    const inp = document.createElement("input");
+    inp.type = f.secret ? "password" : "text";
+    inp.placeholder = f.placeholder || "";
+    inp.dataset.env = f.env; inp.autocomplete = "off"; inp.spellcheck = false;
+    lab.appendChild(inp); box.appendChild(lab);
+  }
+}
+
+async function refreshAiStatus() {
+  let st = {};
+  try { st = await (await fetch("/api/ai/status")).json(); } catch { return; }
+  applyAiStatus(st);
+  if (st.provider && AI_PROVIDERS.some((p) => p.id === st.provider)) {
+    $("aiProvider").value = st.provider;
+  }
+}
+
+function applyAiStatus(st) {
+  const chip = $("aiStatusChip"); if (!chip || !st) return;
+  if (st.key_present) {
+    chip.textContent = `${st.provider || "?"} · ${st.model || "?"} ✓`;
+    chip.className = "chip ok";
+  } else {
+    chip.textContent = "not connected";
+    chip.className = "chip";
+  }
+}
+
+async function saveAi() {
+  const provider = $("aiProvider").value;
+  const env = { IAUTEUR_AI_PROVIDER: provider };
+  for (const inp of $$("#aiFields input")) {
+    if (inp.value.trim()) env[inp.dataset.env] = inp.value.trim();
+  }
+  const r = await jpost("/api/ai/save", { env });
+  if (r.ok) {
+    toast("AI settings saved to .env.", "ok");
+    log("AI provider saved: " + provider, "ok");
+    applyAiStatus(r.status);
+  } else {
+    toast(r.error || "Could not save settings.", "err");
+  }
+}
+
+async function testAi() {
+  const box = $("aiTestResult"); box.textContent = "Testing connection…";
+  const r = await jpost("/api/ai/test", {});
+  if (r.ok) {
+    box.innerHTML = `<span class="okc">✓ connected</span> — ${escapeHtml(r.model || "")} · ${r.latency_ms || "?"} ms · reply “${escapeHtml((r.reply || "").slice(0, 30))}”`;
+    $("aiStatusChip").className = "chip ok";
+    toast("AI connection OK.", "ok");
+  } else {
+    const msg = r.error || (r.errors || []).join("; ") || "connection failed";
+    box.innerHTML = `<span class="errc">✗ ${escapeHtml(msg)}</span>`;
+    toast("AI connection failed.", "err");
+  }
+}
+
+function logAutoEvent(data) {
+  let o; try { o = JSON.parse(data); } catch { log(data); return; }
+  const e = o.event;
+  const M = {
+    starting: `⚡ Starting “${o.topic}” (${o.mode})`,
+    run_start: `▶ Plan: ${(o.formats || []).join(", ")} · mode ${o.mode} · ${o.intake ? "will save" : "no save"}`,
+    format_start: `— ${o.format}: authoring (${o.mode})`,
+    ai_call: `  ↑ asking your AI (${o.tag}, ${o.prompt_chars} chars)`,
+    ai_reply: `  ↓ AI replied (${o.tag})`,
+    reask: `  ↻ beats rejected — re-asking (attempt ${o.attempt})`,
+    components_start: `  ✚ inventing up to ${o.cap} bespoke component(s) for ${o.format}…`,
+    component_try: `    · beat ${o.beat}: trying (${o.currentType})`,
+    component_built: `    ✚ beat ${o.beat}: built new ${o.type} (was ${o.oldType})`,
+    component_reused: `    ↺ beat ${o.beat}: reused ${o.type} (honest fit)`,
+    component_fix: `    ⟳ beat ${o.beat}: component didn't compile — fixing (round ${o.round})`,
+    component_skip: `    ⊘ beat ${o.beat}: kept original — ${(o.reason || "").slice(0, 120)}`,
+    fix: `  ✎ lint fix round ${o.attempt}${o.contractMiss ? " (contract reminder)" : ""}`,
+    assembled: `  ▣ ${o.format}: ${o.ok ? "lint OK" : "lint issues"} · ${o.changes} auto-fixes · ${o.warnings} warnings`,
+    intake: `  💾 saved topics/${o.slug}/${o.kind}.json — lint ${o.ok ? "PASS" : "FAIL"}`,
+    intake_refused: `  ⚠ ${o.reason}`,
+    format_blocked: `  ✗ ${o.format} stopped at ${o.stage}: ${(o.detail || "").slice(0, 200)}`,
+    run_done: `■ Finished — ${JSON.stringify(o.formats || {})}. ${o.next || ""}`,
+  };
+  const kind = /block|refused/.test(e || "") ? "err"
+    : (e === "intake" || e === "assembled" || e === "run_done") ? "ok" : undefined;
+  log(M[e] || data, kind);
+}
+
+function autoRun() {
+  const c = cfg();
+  if (!c.topic) { toast("Enter a topic in Step 1 first.", "warn"); return; }
+  if (guardBusy()) return;
+  const mode = S.aiMode === "single" ? "single" : "two-paste";
+  const intake = $("aiIntake").checked ? "1" : "0";
+  const build = ($("aiBuildComponents") && $("aiBuildComponents").checked && mode === "two-paste") ? "2" : "0";
+  const params = new URLSearchParams({
+    topic: c.topic, design: S.design, theme: S.design,
+    themeLight: c.themeLight || "daylight", format: c.format || "long",
+    preset: c.preset || "explainer", audience: c.audience || "general",
+    channel: c.channel || "", mode, intake, build,
+  });
+  if (c.notes) params.set("notes", c.notes);
+  if (c.source) params.set("source", c.source);
+
+  openConsole(); setBusy(true, "AI authoring…"); setLive(true, "AI authoring…");
+  log(`⚡ Auto-run “${c.topic}” (${mode}, ${intake === "1" ? "save" : "no-save"}${build !== "0" ? ", +build" : ""})`, "cmd");
+  const es = new EventSource("/api/auto/run?" + params.toString());
+  es.onmessage = (ev) => logAutoEvent(ev.data);
+  es.addEventListener("done", (ev) => {
+    es.close(); setBusy(false); setLive(false);
+    let r = {}; try { r = JSON.parse(ev.data); } catch {}
+    logAutoEvent(ev.data);
+    if (r.ok) {
+      toast("AI authored your video. Review it, then render.", "ok");
+      S.saved = true;
+      if (r.slug) { S.slugAuto = false; $("slug").value = r.slug; }
+      render(); refreshOutputs();
+    } else {
+      toast("Auto-run stopped for your review — see the console.", "warn");
+    }
+  });
+  es.onerror = () => { es.close(); setBusy(false); setLive(false); log("✗ auto-run stream ended.", "err"); };
+}
 
 boot();
