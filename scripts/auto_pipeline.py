@@ -84,7 +84,7 @@ class PipelineStop(RuntimeError):
 class AutoPipeline:
     def __init__(self, cfg: dict, complete, *, mode: str = "two-paste",
                  fix_cap: int = 2, reask_cap: int = 1, do_intake: bool = True,
-                 build_components: int = 0, component_fix_cap: int = 2,
+                 build_components: int = 0, component_fix_cap: int = 3,
                  node: str | None = None, emit=None):
         self.cfg = dict(cfg)
         self.complete = complete            # callable(prompt:str, system:str|None)->str
@@ -413,8 +413,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--reask-cap", type=int, default=1)
     ap.add_argument("--build-components", type=int, default=0,
                     help="two-paste only: attempt up to N bespoke component builds for visual beats (each miss rolls back)")
-    ap.add_argument("--component-fix-cap", type=int, default=2,
-                    help="how many times to feed a compiler error back for a corrected component (default 2)")
+    ap.add_argument("--component-fix-cap", type=int, default=3,
+                    help="how many times to feed a compiler error back for a corrected component (default 3)")
     ap.add_argument("--no-intake", action="store_true")
     ap.add_argument("--dry-run", action="store_true",
                     help="print the first prompt per format; make NO AI call")

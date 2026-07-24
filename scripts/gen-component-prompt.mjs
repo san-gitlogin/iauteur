@@ -40,6 +40,41 @@ const R = (p) => {
   try { return fs.readFileSync(path.join(ROOT, p), 'utf8'); } catch { return ''; }
 };
 
+// EXACT prop signatures of the shared primitives, extracted LIVE from source so
+// they can NEVER drift. The #1 cause of a generated component failing tsc is the
+// model inventing a prop that doesn't exist (e.g. `accentColor` on <Headline>);
+// giving it the ground-truth signatures removes the guesswork.
+function primitiveSignatures() {
+  const want = [
+    ['src/ui.tsx', ['Headline', 'SourceFooter', 'Panel', 'Pill', 'Kicker', 'AccentSpan']],
+    ['src/AssetIcon.tsx', ['AssetIcon']],
+  ];
+  const lines = [];
+  for (const [file, names] of want) {
+    const src = R(file);
+    for (const name of names) {
+      const anchor = `export const ${name}: React.FC<`;
+      const at = src.indexOf(anchor);
+      if (at < 0) continue;
+      // balance <...> starting at the '<' after React.FC to grab the props type
+      let i = src.indexOf('<', at + `export const ${name}: React.FC`.length);
+      let depth = 0, end = -1;
+      for (let j = i; j < src.length; j++) {
+        if (src[j] === '<') depth++;
+        else if (src[j] === '>') { depth--; if (depth === 0) { end = j; break; } }
+      }
+      if (end < 0) continue;
+      let props = src.slice(i + 1, end)
+        .replace(/\/\/[^\n]*/g, '')          // strip // comments
+        .replace(/\s+/g, ' ')                // collapse whitespace
+        .replace(/;\s*}/g, ' }')
+        .trim();
+      lines.push(`<${name} ${props} />`);
+    }
+  }
+  return lines.join('\n');
+}
+
 const briefPath = process.argv[2];
 const stage = (process.argv[3] || 'stage1').trim();
 const configPath = process.argv[4];
@@ -284,6 +319,23 @@ wordToFrame(n)                         // the frame a 1-based narration word is 
 Guard: \`const d = scene.data.${dataKey}; if (!d) return <AbsoluteFill />;\`
 Timing: base visual on screen within 38 frames — \`const start = Math.min(wordToFrame(d.atWord ?? 1), 38);\`
 (only an emphasis payoff may use the un-clamped \`wordToFrame(d.atWord)\`).
+
+### ⛔ EXACT PRIMITIVE SIGNATURES — these are the ONLY props each accepts
+Passing ANY prop not listed here is a COMPILE ERROR (this is the #1 cause of a rejected
+component — e.g. there is no \`accentColor\`/\`accent\`/\`title\`/\`label\` on \`<Headline>\`; it takes
+\`text\` + optional \`color\` (a SemColor) only). Do NOT invent props. To colour something, use a
+\`SemColor\` where the signature allows \`color\`, or style your OWN \`<div>\`/\`<svg>\` with tokens.
+\`\`\`tsx
+${primitiveSignatures()}
+\`\`\`
+- \`<AssetIcon>\` renders icons/logos/images ONLY: \`asset\`=\`"lucide:name"\` | \`"si:brand"\` | \`"img:file"\`.
+- \`SemColor\` = \`'blue'|'green'|'red'|'orange'|'purple'|'yellow'\` — NOTHING else (not '#hex', not 'gray', not 'accent').
+  Any prop typed \`color?: SemColor\` accepts ONLY those six. If your data carries a semantic colour, declare that
+  field as \`SemColor\` (NOT \`string\`) in your local \`${Name}Data\` type, so it passes straight into a \`color=\` prop
+  with no cast. To use a colour outside those six, style your OWN \`<div>\`/\`<svg>\` with \`t.colors.*\` tokens — do NOT
+  pass a bare \`string\` to a \`color=\` prop (that is a \`TS2322: string is not assignable to SemColor\` compile error).
+  \`useSem()\` and \`sem(...)\` also take ONLY a \`SemColor\`.
+- For anything these primitives don't cover, build it from raw \`<div>\`/\`<svg>\` + \`useTheme()\` tokens × \`scale\`.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ## THE AUTHORING LAW (this repo's non-negotiable contract — obey every rule)
