@@ -1074,29 +1074,39 @@ async function testAi() {
 function logAutoEvent(data) {
   let o; try { o = JSON.parse(data); } catch { log(data); return; }
   const e = o.event;
+  // Lazy per-event builders: only the matching event's template runs, so one
+  // event's field shape can't break another's (e.g. run_done.formats is an object
+  // while run_start.formats is an array).
   const M = {
-    starting: `⚡ Starting “${o.topic}” (${o.mode})`,
-    run_start: `▶ Plan: ${(o.formats || []).join(", ")} · mode ${o.mode} · ${o.intake ? "will save" : "no save"}`,
-    format_start: `— ${o.format}: authoring (${o.mode})`,
-    ai_call: `  ↑ asking your AI (${o.tag}, ${o.prompt_chars} chars)`,
-    ai_reply: `  ↓ AI replied (${o.tag})`,
-    reask: `  ↻ beats rejected — re-asking (attempt ${o.attempt})`,
-    components_start: `  ✚ inventing up to ${o.cap} bespoke component(s) for ${o.format}…`,
-    component_try: `    · beat ${o.beat}: trying (${o.currentType})`,
-    component_built: `    ✚ beat ${o.beat}: built new ${o.type} (was ${o.oldType})`,
-    component_reused: `    ↺ beat ${o.beat}: reused ${o.type} (honest fit)`,
-    component_fix: `    ⟳ beat ${o.beat}: component didn't compile — fixing (round ${o.round})`,
-    component_skip: `    ⊘ beat ${o.beat}: kept original — ${(o.reason || "").slice(0, 120)}`,
-    fix: `  ✎ lint fix round ${o.attempt}${o.contractMiss ? " (contract reminder)" : ""}`,
-    assembled: `  ▣ ${o.format}: ${o.ok ? "lint OK" : "lint issues"} · ${o.changes} auto-fixes · ${o.warnings} warnings`,
-    intake: `  💾 saved topics/${o.slug}/${o.kind}.json — lint ${o.ok ? "PASS" : "FAIL"}`,
-    intake_refused: `  ⚠ ${o.reason}`,
-    format_blocked: `  ✗ ${o.format} stopped at ${o.stage}: ${(o.detail || "").slice(0, 200)}`,
-    run_done: `■ Finished — ${JSON.stringify(o.formats || {})}. ${o.next || ""}`,
+    starting: () => `⚡ Starting “${o.topic}” (${o.mode})`,
+    run_start: () => `▶ Plan: ${(Array.isArray(o.formats) ? o.formats : Object.keys(o.formats || {})).join(", ")} · mode ${o.mode} · ${o.intake ? "will save" : "no save"}`,
+    format_start: () => `— ${o.format}: authoring (${o.mode})`,
+    ai_call: () => `  ↑ asking your AI (${o.tag}, ${o.prompt_chars} chars)`,
+    ai_reply: () => `  ↓ AI replied (${o.tag})`,
+    reask: () => `  ↻ beats rejected — re-asking (attempt ${o.attempt})`,
+    components_start: () => `  ✚ inventing up to ${o.cap} bespoke component(s) for ${o.format}…`,
+    component_try: () => `    · beat ${o.beat}: trying (${o.currentType})`,
+    component_built: () => `    ✚ beat ${o.beat}: built new ${o.type} (was ${o.oldType})`,
+    component_reused: () => `    ↺ beat ${o.beat}: reused ${o.type} (honest fit)`,
+    component_fix: () => `    ⟳ beat ${o.beat}: component didn't compile — fixing (round ${o.round})`,
+    component_skip: () => `    ⊘ beat ${o.beat}: kept original — ${(o.reason || "").slice(0, 120)}`,
+    fix: () => `  ✎ lint fix round ${o.attempt}${o.contractMiss ? " (contract reminder)" : ""}`,
+    assembled: () => `  ▣ ${o.format}: ${o.ok ? "lint OK" : "lint issues"} · ${o.changes} auto-fixes · ${o.warnings} warnings`,
+    intake: () => `  💾 saved topics/${o.slug}/${o.kind}.json — lint ${o.ok ? "PASS" : "FAIL"}`,
+    intake_refused: () => `  ⚠ ${o.reason}`,
+    format_blocked: () => `  ✗ ${o.format} stopped at ${o.stage}: ${(o.detail || "").slice(0, 200)}`,
+    run_done: () => {
+      const f = o.formats || {};
+      const per = Object.keys(f).map((k) => `${k}:${f[k] ? "ok" : "stopped"}`).join(", ");
+      const built = (o.builtComponents && o.builtComponents.length) ? ` · built ${o.builtComponents.join(", ")}` : "";
+      return `■ Finished — ${per || "no formats"}${built}. ${o.next || ""}`;
+    },
   };
   const kind = /block|refused/.test(e || "") ? "err"
     : (e === "intake" || e === "assembled" || e === "run_done") ? "ok" : undefined;
-  log(M[e] || data, kind);
+  let line = data;
+  try { if (M[e]) line = M[e](); } catch (err) { line = data; }
+  log(line, kind);
 }
 
 function autoRun() {
