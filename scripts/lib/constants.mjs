@@ -38,6 +38,7 @@ export const TYPES = [
   'CAST_BOARD',
   'LAB_ASSEMBLY',
   'BUDGET_METER_ROW',
+  'WORD_ANCHOR_RAIL',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

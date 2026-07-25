@@ -16,7 +16,23 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {
+export const MANIFEST = {  WORD_ANCHOR_RAIL: {
+    category: "diagram", family: "zone-surface", data_key: "anchorRail",
+    purpose: "A line of narration with a playhead moving through it, and marks that fire exactly at the words they are anchored to.",
+    use_when: "The point is that timing is tied to specific spoken words, not to a stopwatch.",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
+      words: {t: 'string[]', req: true, note: "4-8 words of the narration line, one per token, each <=10 chars"},
+      marks: {t: 'items', req: true, note: "1-3 x {label<=18 (what fires), atWord (1-based index into words[])}"},
+      playhead: {t: 'number', note: "1-based word the playhead has reached; defaults to the last mark"},
+      footNote: {t: 'string', max: 40, note: "the takeaway under the rail"},
+      color: {t: 'string', note: "semantic colour for the playhead and fired marks"},
+      source: {t: 'string', max: 64, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "times the footnote only; the rail and words are base"},
+    },
+    example: {anchorRail: {"headline":"The payoff lands on the [word]","words":["sixty","percent","Bitcoin,","twenty","Ethereum,","twenty","Solana"],"marks":[{"label":"slice 1 draws","atWord":1},{"label":"slice 2 draws","atWord":4},{"label":"slice 3 draws","atWord":6}],"playhead":4,"footNote":"anchored to words, not to a stopwatch","color":"orange","atWord":5}},
+  },
+
   BUDGET_METER_ROW: {
     category: "chart", family: "gauge-surface", data_key: "budgetMeter",
     purpose: "Lines of text measured against a shared word budget, each with a fill meter — the ones inside the cap pass, the one over it is marked rejected.",

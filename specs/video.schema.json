@@ -329,7 +329,8 @@
               "SPEC_TO_FRAME",
               "CAST_BOARD",
               "LAB_ASSEMBLY",
-              "BUDGET_METER_ROW"
+              "BUDGET_METER_ROW",
+              "WORD_ANCHOR_RAIL"
             ]
           },
           "narration": {
@@ -399,6 +400,70 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "WORD_ANCHOR_RAIL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "anchorRail": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "words": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "4-8 words of the narration line, one per token, each <=10 chars"
+                        },
+                        "marks": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-3 x {label<=18 (what fires), atWord (1-based index into words[])}"
+                        },
+                        "playhead": {
+                          "type": "number",
+                          "description": "1-based word the playhead has reached; defaults to the last mark"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "the takeaway under the rail"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the playhead and fired marks"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the footnote only; the rail and words are base"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

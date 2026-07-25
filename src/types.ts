@@ -1274,7 +1274,28 @@ export interface BudgetMeterRowData {
   source?: string;
   atWord?: number;
 }
+export interface WordAnchorRailItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface WordAnchorRailData {
+  headline?: string;
+  words?: string[];
+  marks?: WordAnchorRailItem[];
+  playhead?: number;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  anchorRail?: WordAnchorRailData;
   budgetMeter?: BudgetMeterRowData;
   labAssembly?: LabAssemblyData;
   castBoard?: CastBoardData;
