@@ -94,12 +94,31 @@ can be regenerated instead of rotting.
 - Remotion renders fetch Google Fonts per render. On a bad connection later scenes throw
   `[NetworkError]`. Kill leaked processes (`Get-Process node | Stop-Process -Force`) and retry.
 
-### 2026-07-25 · demo-video components (in flight)
-**All 8 built, gated and pushed** — `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`,
-`BUDGET_METER_ROW`, `WORD_ANCHOR_RAIL`, `RESKIN_CAROUSEL`, `ASPECT_TWIN`, `PIPELINE_GATE`.
-Component count 140 → **148**. The 10-beat sheet now validates (`✓ BEAT SHEET OK`). Next up is
-Phase 9: authoring the scene data.
-Progress and the full recipe live in [`docs/DEMO_VIDEO_PLAN.md`](DEMO_VIDEO_PLAN.md).
+### 2026-07-25 · demo video — SHIPPED
+"iAuteur explaining itself" is written, voiced, rendered and embedded at the top of the README.
+`topics/iauteur-explains-itself/out/` holds `wide-dark.mp4` (67.5s, 10 scenes), `short-dark.mp4`
+(42.5s, 7 scenes), `thumb.png` and `cover.png`; a 1.5 MB web copy + poster live in `docs/media/`
+(tracked — `topics/` is not). All 8 middle components were built for it: `SPEC_TO_FRAME`,
+`CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `WORD_ANCHOR_RAIL`, `RESKIN_CAROUSEL`,
+`ASPECT_TWIN`, `PIPELINE_GATE`. Component count 140 → **148**. Casting reasons, including why each
+near-miss existing component was rejected, are in `topics/iauteur-explains-itself/casting.md`
+(untracked with `topics/`). Full recipe: [`docs/DEMO_VIDEO_PLAN.md`](DEMO_VIDEO_PLAN.md).
+
+**Authoring it through the real console surfaced four bugs no gate could see** (commit `c02dbee`):
+
+1. `assembleSpec` never wrote `brand.logo`, so **every** console-authored spec rendered with no
+   watermark, no thumbnail stamp and no OUTRO circle — 29 shipped specs across 16 topics. Nothing
+   required the field. Now defaulted + `cfg.logo` override + linter warning + a console picker.
+2. Stage 1 collects `onePayoff/openLoop/analogy/topicAxes`; Stage 2 never passed them on, so all
+   four were dropped on every two-paste video. `flow.mjs assemble` now takes the beat sheet as an
+   optional extra payload (identified by shape, not argument position).
+3. `SPEC_TO_FRAME.specLines` documented preserved indentation but lacked `preserveWs`, so normalize
+   flattened the JSON before the component saw it. `check-manifest.mjs` now fails any field whose
+   note promises significant whitespace without the flag.
+4. **`sync.mjs` rescales every `atWord` to a FRACTIONAL value** (3 → 2.917) to re-time onto the real
+   audio. `WORD_ANCHOR_RAIL` used `atWord` as both a time *and* an integer position key, so every
+   mark silently vanished from TTS-synced renders. If a component uses `atWord` as an index, round
+   for position and keep the raw value for timing. It was the only one that did — check any new one.
 
 Two things `component-flow.mjs assemble` does **not** do, which cost time every single build:
 
@@ -119,16 +138,17 @@ types`) or the gate goes red.
 
 ## Open threads
 
-- **Demo video** — "iAuteur explaining itself", made *by* iAuteur, for the README + LinkedIn.
-  LAW 0 interview is **done** and every decision is locked in **[`docs/DEMO_VIDEO_PLAN.md`](DEMO_VIDEO_PLAN.md)**
-  — that file is the source of truth for the job and carries a resume block + progress checkboxes, so
-  pick it up there. Headline: 10 beats (`HOOK` + 8 newly-built components + `OUTRO_CTA`, because the
-  validator pins the first and last types), moderndark, ChristopherNeural, iAuteur's own logo as the
-  watermark. When it ships the component count goes 140 → 148.
+- **Demo video** — done, see the dated entry above. One thing outstanding: GitHub does not play a
+  repo-relative `<video>` inline, so the README currently shows the poster linked to the mp4. For
+  true inline playback the owner can drag `docs/media/iauteur-explains-itself.mp4` into any GitHub
+  issue comment and swap the resulting `user-attachments` URL into a `<video src=…>` tag.
+- **The back catalogue has no watermark.** 29 specs across 16 topics predate the `brand.logo` fix and
+  now warn on lint. Re-rendering them would stamp the logo; nothing was changed for them
+  automatically because `topics/` is the owner's content, not repo code.
 - **Repo going public** — the owner intends to publish. Note that `channel_profile.md`, `CLAUDE.md`,
   `public/assets/channel_logo.png`, `scripts/gen-upload-kit.mjs` and `briefs/` name a specific
   YouTube channel in plain text. `topics/*` is gitignored, so no actual video content is exposed.
   Decision pending on whether to neutralise the channel references.
 - `HANDOFF.md` is a stale program tracker (Session 7, 2026-07-12; still says "manifest 17→136", now
-  140) and references `/memories/repo/*` paths that don't exist outside one machine. Treat this
+  148) and references `/memories/repo/*` paths that don't exist outside one machine. Treat this
   file as current instead.

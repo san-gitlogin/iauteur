@@ -31,10 +31,17 @@ export const WordAnchorRail: React.FC<{scene: Scene}> = ({scene}) => {
 
   const radius = 12 * scale * t.style.cornerRadius;
   const glow = t.style.glow;
+  // A mark's atWord is BOTH a position (which word it sits above) and a time (when it
+  // fires). sync.mjs rescales every atWord onto the real audio's word axis, so after a
+  // voiceover pass they arrive FRACTIONAL — 3 becomes 2.917. Keying the position off the
+  // raw value silently dropped every mark from every TTS-synced render, because no
+  // fractional key ever matched an integer word index. Round for the position, keep the
+  // raw value for the timing.
+  const slot = (v: number | undefined) => Math.max(1, Math.min(words.length, Math.round(v ?? 1)));
   // playhead defaults to the last mark, so the still always shows the mechanism working
-  const headWord = Math.max(1, Math.min(words.length, d.playhead ?? (marks.length ? Math.max(...marks.map((m) => m.atWord ?? 1)) : 1)));
-  const markAt = new Map<number, string>();
-  for (const m of marks) markAt.set(Math.max(1, Math.min(words.length, m.atWord ?? 1)), m.label ?? '');
+  const headWord = Math.max(1, Math.min(words.length, Math.round(d.playhead ?? (marks.length ? Math.max(...marks.map((m) => m.atWord ?? 1)) : 1))));
+  const markAt = new Map<number, {label: string; at: number}>();
+  for (const m of marks) markAt.set(slot(m.atWord), {label: m.label ?? '', at: m.atWord ?? 1});
 
   const wordFont = (vertical ? 30 : 34) * scale;
 
@@ -64,10 +71,12 @@ export const WordAnchorRail: React.FC<{scene: Scene}> = ({scene}) => {
           >
             {words.map((w, i) => {
               const idx = i + 1;
-              const label = markAt.get(idx);
+              const mark = markAt.get(idx);
+              const label = mark?.label;
               const passed = idx <= headWord;
               const isHead = idx === headWord;
-              const fire = label ? ease(wordToFrame(idx), 12) : 0;
+              // fire on the mark's OWN (possibly re-timed) anchor, not on the slot index
+              const fire = mark ? ease(wordToFrame(mark.at), 12) : 0;
               return (
                 <div key={i} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 * scale}}>
                   {/* the mark sits ABOVE its own word so the association is structural */}

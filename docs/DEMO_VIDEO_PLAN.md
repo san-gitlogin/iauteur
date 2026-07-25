@@ -84,7 +84,8 @@ Tick only after inspecting the real artifact. One phase at a time (LAW 10).
       Sheet lives at `out/tmp/flow/iauteur-explains-itself-beats.json` (72.4s total runtime).
 - [x] Adjacency risk cleared: `linterFamilyOf = FAMILY[t] || t`, and `assemble` never writes to
       `FAMILY`, so each new type is its own family and the CONSOLIDATED hard gate cannot trip
-- [ ] Casting note recorded in `topics/iauteur-explains-itself/casting.md` — one stated reason per beat
+- [x] Casting note recorded in `topics/iauteur-explains-itself/casting.md` — one stated reason per beat,
+      plus the near-miss component each new one had to beat, and the truth notes (LAW 3)
 
 ### Phase 1–8 · build the 8 components (one per phase, in table order)
 For each of `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `WORD_ANCHOR_RAIL`,
@@ -103,27 +104,48 @@ Per-component audit, every time: assemble reports ok · `npm run typecheck` clea
 still 0 · a proof still viewed in **both** aspects · looks right in `moderndark` **and** one other
 pack (proves tokens, not hardcoding) · appears in `src/showcaseSpec.ts`.
 
-> **NEXT SESSION STARTS HERE.** All 8 components are built, gated and pushed; the beat sheet
-> validates. Phase 9 is writing the actual scene data for the 10 beats. Nothing above needs redoing.
+### Phase 9 · author the spec — DONE
+- [x] Scenes written for all 10 beats **through the console's own HTTP API** — `/api/flow/validate`
+      → `/api/flow/stage2` (fill prompt) → fill reply → `/api/flow/assemble` → `/api/intake`, exactly
+      the calls the browser makes. `shorts.json` authored the same way, 7 beats
+- [x] `brand.logo: "img:iauteur_logo.png"` present · `brand.design: "moderndark"` — this needed a
+      product fix first: **assemble never wrote `brand.logo` at all** (see the bug list below)
+- [x] `npm run lint` passes for both, with **zero warnings** (the fleet has 13 pre-existing rejections
+      in older topics, untouched by this job)
+- [x] No anchor in the last 15% of any scene — every anchor lands inside the first 55%
 
-### Phase 9 · author the spec
-- [ ] Scenes written for all 10 beats via the console's authoring flow (prompts pasted, as a user would)
-- [ ] `brand.logo: "img:iauteur_logo.png"` present · `brand.design: "moderndark"`
-- [ ] `npm run lint` passes for both `long.json` and `shorts.json`
-- [ ] No anchor in the last 15% of any scene (linter warns — treat as rejection)
+### Phase 10 · voice + render — DONE
+- [x] Voiceover generated (`en-US-ChristopherNeural`, the script's own default) and `sync.mjs`
+      re-timed both specs to real audio (`timingSource: tts`; 72.0s → **67.5s**, 43.8s → **42.5s**)
+- [x] Every beat reviewed as a rendered still in both aspects — that is what caught the s06 defect
+- [x] `wide-dark` rendered and watched end to end (frames pulled at every cut in *and* cut out)
+- [x] `short-dark` rendered and watched the same way
+- [x] `thumb` + `cover` rendered; the thumbnail uses the real iAuteur logo, not a lucide glyph
 
-### Phase 10 · voice + render
-- [ ] Voiceover generated (`en-US-ChristopherNeural`) and `sync.mjs` re-timed the spec to real audio
-- [ ] Per-beat voiced preview checked for all 10 beats in the console before full render
-- [ ] `wide-dark` rendered and **watched end to end**
-- [ ] `short-dark` rendered and watched
-- [ ] `thumb` + `cover` rendered; thumbnail uses real art, not a bare lucide glyph (LAW 0b)
+### Phase 11 · ship — DONE
+- [x] Video embedded at the top of `README.md` above the badges (poster linked to the mp4 — GitHub
+      will not play a repo-relative `<video>` inline; see the note in `docs/STATE.md`)
+- [x] `docs/STATE.md` updated with the shipped video and the four bugs the job surfaced
+- [x] Counts refreshed from the manifest (`MANIFEST_TYPES.length` = 148), 6 places in `README.md`
+- [x] Committed and pushed to `main`
 
-### Phase 11 · ship
-- [ ] Video embedded at the top of `README.md`, replacing the banner-only opener
-- [ ] `docs/STATE.md` updated: demo video done, 8 new components → component count is now **148**
-- [ ] Counts refreshed everywhere (README badge + body); verify with the manifest, never by hand
-- [ ] Committed and pushed to `main`
+---
+
+## WHAT DOGFOODING FOUND (the real return on this job)
+
+Authoring through the console instead of by hand surfaced four defects that every gate was blind to.
+All four are fixed and pinned by tests in commit `c02dbee` (plus the `WORD_ANCHOR_RAIL` fix after).
+
+| # | Defect | Blast radius |
+|---|---|---|
+| 1 | `assembleSpec` never wrote `brand.logo` | **29 specs across 16 topics** rendered with no watermark, no thumbnail stamp, no OUTRO circle |
+| 2 | Stage-2 dropped `onePayoff`/`openLoop`/`analogy`/`topicAxes` | every two-paste video lost all four and warned on `topicAxes` |
+| 3 | `specLines` promised preserved indent but lacked `preserveWs` | `SPEC_TO_FRAME`'s JSON always drew flush-left |
+| 4 | `sync.mjs` makes `atWord` fractional; `WORD_ANCHOR_RAIL` keyed a position off it | every mark vanished from any TTS-synced render |
+
+Nº4 is the one worth remembering: **the proof stills were rendered before the voiceover pass and
+looked perfect.** The defect only existed after `sync.mjs`, so it took extracting frames from the
+finished mp4 to see it. Proof before sync is not proof.
 
 ---
 
