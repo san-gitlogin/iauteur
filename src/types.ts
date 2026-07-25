@@ -1337,7 +1337,28 @@ export interface PipelineGateData {
   source?: string;
   atWord?: number;
 }
+export interface TopicIntakeItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface TopicIntakeData {
+  headline?: string;
+  fieldLabel?: string;
+  typed?: string;
+  choices?: TopicIntakeItem[];
+  caption?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  topicIntake?: TopicIntakeData;
   pipelineGate?: PipelineGateData;
   aspectTwin?: AspectTwinData;
   reskin?: ReskinCarouselData;

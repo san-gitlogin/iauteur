@@ -333,7 +333,8 @@
               "WORD_ANCHOR_RAIL",
               "RESKIN_CAROUSEL",
               "ASPECT_TWIN",
-              "PIPELINE_GATE"
+              "PIPELINE_GATE",
+              "TOPIC_INTAKE"
             ]
           },
           "narration": {
@@ -403,6 +404,69 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TOPIC_INTAKE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "topicIntake": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "fieldLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the input's own label, e.g. 'What's it about?'"
+                        },
+                        "typed": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "the text that types itself into the field, character by character"
+                        },
+                        "choices": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-3 x {label<=12 (the setting), detail<=16 (what you picked), atWord}"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 38,
+                          "description": "the takeaway under the form"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the active field"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 58,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word from narration the typing starts on"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

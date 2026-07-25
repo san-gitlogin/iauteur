@@ -16,7 +16,23 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  PIPELINE_GATE: {
+export const MANIFEST = {  TOPIC_INTAKE: {
+    category: "device", family: "topic-intake", data_key: "topicIntake",
+    purpose: "The first step of an authoring tool, shown honestly: a title being TYPED into a real input field, with the two or three other choices sitting beside it — the argument is how little you have to fill in.",
+    use_when: "The point is that the input is trivially small. Show the form, not the output.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      fieldLabel: {t: 'string', req: true, max: 20, note: "the input's own label, e.g. 'What's it about?'"},
+      typed: {t: 'string', req: true, max: 44, note: "the text that types itself into the field, character by character"},
+      choices: {t: 'items', note: "2-3 x {label<=12 (the setting), detail<=16 (what you picked), atWord}"},
+      caption: {t: 'string', max: 38, note: "the takeaway under the form"},
+      color: {t: 'string', note: "semantic colour for the active field"},
+      source: {t: 'string', max: 58, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "word from narration the typing starts on"},
+    },
+    example: {topicIntake: {"headline":"You fill in [one line]","fieldLabel":"What's it about?","typed":"How your money actually moves","choices":[{"label":"Look","detail":"Modern dark","atWord":4},{"label":"Length","detail":"Two minutes","atWord":6},{"label":"Voice","detail":"Ava","atWord":8}],"caption":"that is the whole form","color":"blue","atWord":2}},
+  },
+  PIPELINE_GATE: {
     category: "diagram", family: "PIPELINE", data_key: "pipelineGate",
     purpose: "A proposal meeting a hard gate: what passes continues to the output, what fails is turned back along a visible return path instead of shipping.",
     use_when: "The point is that a check has AUTHORITY — the rejection loop is the content, not an error state.",

@@ -42,6 +42,7 @@ export const TYPES = [
   'RESKIN_CAROUSEL',
   'ASPECT_TWIN',
   'PIPELINE_GATE',
+  'TOPIC_INTAKE',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

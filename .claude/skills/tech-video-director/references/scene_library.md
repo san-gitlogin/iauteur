@@ -358,3 +358,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | RESKIN_CAROUSEL | The point is that ONE input yields many looks — the tiles must differ from each other, not just be labelled differently. | headline≤48, sourceLabel≤24, packs, tileTitle≤18, footNote≤40, source≤64, atWord |
 | ASPECT_TWIN | The point is that several finished files come from ONE input without re-authoring. | headline≤48, sourceLabel≤22, wideLabel≤20, tallLabel≤20, variantLabels, countLabel≤26, color, source≤64, atWord |
 | PIPELINE_GATE | The point is that a check has AUTHORITY — the rejection loop is the content, not an error state. | headline≤48, proposerLabel≤20, gateLabel≤18, outputLabel≤20, passLabel≤16, rejectLabel≤24, checks, footNote≤40, color, source≤64, atWord |
+| TOPIC_INTAKE | The point is that the input is trivially small. Show the form, not the output. | headline≤48, fieldLabel≤20, typed≤44, choices, caption≤38, color, source≤58, atWord |
