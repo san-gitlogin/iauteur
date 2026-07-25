@@ -79,10 +79,9 @@ Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 - [x] `public/assets/iauteur_logo.png` exists (copied from `brand/iauteur-icon-512.png`), provenance in `public/assets/SOURCES.json`
 - [x] `npm run new-topic -- iauteur-explains-itself "iAuteur — explaining itself"` scaffolded
 - [x] Beat sheet written — 10 beats, all within budget, **72.4s** total runtime (`out/tmp/flow/iauteur-explains-itself-beats.json`)
-- [ ] `validate-beats.mjs` passes — **DEFERRED TO PHASE 9 BY NECESSITY.** The validator rejects any
-      type absent from the manifest, so it cannot pass until all 8 components are built. Structural
-      rules were verified by hand instead: HOOK first, OUTRO_CTA last, 10 beats inside the explainer
-      7–10 range, every beat within its word budget.
+- [x] `validate-beats.mjs` **PASSES** — `✓ BEAT SHEET OK (10 beats)`, zero warnings. Had to wait
+      until all 8 components existed, since the validator rejects any type absent from the manifest.
+      Sheet lives at `out/tmp/flow/iauteur-explains-itself-beats.json` (72.4s total runtime).
 - [x] Adjacency risk cleared: `linterFamilyOf = FAMILY[t] || t`, and `assemble` never writes to
       `FAMILY`, so each new type is its own family and the CONSOLIDATED hard gate cannot trip
 - [ ] Casting note recorded in `topics/iauteur-explains-itself/casting.md` — one stated reason per beat
@@ -103,6 +102,9 @@ For each of `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `
 Per-component audit, every time: assemble reports ok · `npm run typecheck` clean · `npm run gate`
 still 0 · a proof still viewed in **both** aspects · looks right in `moderndark` **and** one other
 pack (proves tokens, not hardcoding) · appears in `src/showcaseSpec.ts`.
+
+> **NEXT SESSION STARTS HERE.** All 8 components are built, gated and pushed; the beat sheet
+> validates. Phase 9 is writing the actual scene data for the 10 beats. Nothing above needs redoing.
 
 ### Phase 9 · author the spec
 - [ ] Scenes written for all 10 beats via the console's authoring flow (prompts pasted, as a user would)

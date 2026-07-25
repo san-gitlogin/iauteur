@@ -25,7 +25,7 @@ On Windows, prefix Python with `PYTHONIOENCODING=utf-8` or the seals crash on `�
 | Path | What |
 |---|---|
 | `topics/<slug>/long.json` + `shorts.json` | one folder per video. **Gitignored** — local content, not repo code |
-| `src/scenes/` | the 140 scene components |
+| `src/scenes/` | the 148 scene components |
 | `src/designs/<pack>/` | 30 design packs (layout/motion overrides) |
 | `src/themes.ts` | 42 themes (38 dark + 4 light) |
 | `scripts/lib/manifest.mjs` | **the single source of truth** for every component's data contract + a valid `example` |
@@ -95,9 +95,10 @@ can be regenerated instead of rotting.
   `[NetworkError]`. Kill leaked processes (`Get-Process node | Stop-Process -Force`) and retry.
 
 ### 2026-07-25 · demo-video components (in flight)
-Building the 8 new components for the self-explaining demo, one per commit, each gated. **5 of 8
-done** — `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `WORD_ANCHOR_RAIL`.
-Remaining: `RESKIN_CAROUSEL`, `ASPECT_TWIN`, `PIPELINE_GATE`. Component count 140 → **145**.
+**All 8 built, gated and pushed** — `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`,
+`BUDGET_METER_ROW`, `WORD_ANCHOR_RAIL`, `RESKIN_CAROUSEL`, `ASPECT_TWIN`, `PIPELINE_GATE`.
+Component count 140 → **148**. The 10-beat sheet now validates (`✓ BEAT SHEET OK`). Next up is
+Phase 9: authoring the scene data.
 Progress and the full recipe live in [`docs/DEMO_VIDEO_PLAN.md`](DEMO_VIDEO_PLAN.md).
 
 Two things `component-flow.mjs assemble` does **not** do, which cost time every single build:
