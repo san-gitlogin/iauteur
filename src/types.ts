@@ -1313,7 +1313,19 @@ export interface ReskinCarouselData {
   source?: string;
   atWord?: number;
 }
+export interface AspectTwinData {
+  headline?: string;
+  sourceLabel?: string;
+  wideLabel?: string;
+  tallLabel?: string;
+  variantLabels?: string[];
+  countLabel?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  aspectTwin?: AspectTwinData;
   reskin?: ReskinCarouselData;
   anchorRail?: WordAnchorRailData;
   budgetMeter?: BudgetMeterRowData;

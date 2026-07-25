@@ -40,6 +40,7 @@ export const TYPES = [
   'BUDGET_METER_ROW',
   'WORD_ANCHOR_RAIL',
   'RESKIN_CAROUSEL',
+  'ASPECT_TWIN',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

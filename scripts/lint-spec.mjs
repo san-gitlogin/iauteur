@@ -118,7 +118,7 @@ if (n >= 8) {
   const cap = Math.max(4, Math.ceil(n * 0.35));
   for (const [st, c] of Object.entries(counts))
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
-  const DYNAMIC = ['RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -393,6 +393,22 @@ for (const s of spec.scenes ?? []) {
     if (d.lineChart.variant === 'dualaxis' && (d.lineChart.series ?? []).length < 2) E(`${id}: LINE_CHART dualaxis needs 2 series`);
     if (len(d.lineChart.y2Unit) > 6) E(`${id}: LINE_CHART y2Unit > 6 chars`);
   }
+  if (d.aspectTwin) {
+    const at = d.aspectTwin;
+    if (len(at.headline) > 48) E(`${id}: aspectTwin headline > 48 chars`);
+    if (!at.sourceLabel) E(`${id}: ASPECT_TWIN needs sourceLabel`);
+    if (len(at.sourceLabel) > 22) E(`${id}: aspectTwin sourceLabel > 22 chars`);
+    if (!at.wideLabel) E(`${id}: ASPECT_TWIN needs wideLabel`);
+    if (len(at.wideLabel) > 20) E(`${id}: aspectTwin wideLabel > 20 chars`);
+    if (!at.tallLabel) E(`${id}: ASPECT_TWIN needs tallLabel`);
+    if (len(at.tallLabel) > 20) E(`${id}: aspectTwin tallLabel > 20 chars`);
+    if (len(at.countLabel) > 26) E(`${id}: aspectTwin countLabel > 26 chars`);
+    const vl = at.variantLabels ?? [];
+    if (vl.length && vl.length !== 2) E(`${id}: aspectTwin.variantLabels must be exactly 2 (got ${vl.length})`);
+    for (const v of vl) if (len(v) > 8) E(`${id}: aspectTwin variant label "${v}" > 8 chars`);
+    checkColor(id, 'aspectTwin.color', at.color);
+  }
+
   if (d.reskin) {
     const rk = d.reskin;
     const pk = rk.packs ?? [];

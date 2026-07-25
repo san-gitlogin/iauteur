@@ -331,7 +331,8 @@
               "LAB_ASSEMBLY",
               "BUDGET_METER_ROW",
               "WORD_ANCHOR_RAIL",
-              "RESKIN_CAROUSEL"
+              "RESKIN_CAROUSEL",
+              "ASPECT_TWIN"
             ]
           },
           "narration": {
@@ -401,6 +402,74 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ASPECT_TWIN"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "aspectTwin": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "sourceLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the single input, e.g. 'long.json'"
+                        },
+                        "wideLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "caption under the 16:9 pair"
+                        },
+                        "tallLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "caption under the 9:16 pair"
+                        },
+                        "variantLabels": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "exactly 2: the dark and light variant names, each <=8 chars"
+                        },
+                        "countLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the tally, e.g. 'four files, one spec'"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the fan-out"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the tally only, never the frames"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

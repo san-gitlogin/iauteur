@@ -16,7 +16,24 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  RESKIN_CAROUSEL: {
+export const MANIFEST = {  ASPECT_TWIN: {
+    category: "diagram", family: "node-graph", data_key: "aspectTwin",
+    purpose: "One source document fanning out into its deliverables — true-proportion frames in both aspect ratios, each in a dark and a light variant.",
+    use_when: "The point is that several finished files come from ONE input without re-authoring.",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
+      sourceLabel: {t: 'string', req: true, max: 22, note: "the single input, e.g. 'long.json'"},
+      wideLabel: {t: 'string', req: true, max: 20, note: "caption under the 16:9 pair"},
+      tallLabel: {t: 'string', req: true, max: 20, note: "caption under the 9:16 pair"},
+      variantLabels: {t: 'string[]', note: "exactly 2: the dark and light variant names, each <=8 chars"},
+      countLabel: {t: 'string', max: 26, note: "the tally, e.g. 'four files, one spec'"},
+      color: {t: 'string', note: "semantic colour for the fan-out"},
+      source: {t: 'string', max: 64, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "times the tally only, never the frames"},
+    },
+    example: {aspectTwin: {"headline":"One spec, [four] deliverables","sourceLabel":"long.json","wideLabel":"16:9 widescreen","tallLabel":"9:16 vertical","variantLabels":["dark","light"],"countLabel":"four files, one spec","color":"blue","atWord":3}},
+  },
+  RESKIN_CAROUSEL: {
     category: "diagram", family: "framed-surface", data_key: "reskin",
     purpose: "The same scene shown simultaneously in several design languages, each tile a miniature of one pack, proving one document re-skins rather than being re-authored.",
     use_when: "The point is that ONE input yields many looks — the tiles must differ from each other, not just be labelled differently.",
