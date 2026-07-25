@@ -94,6 +94,28 @@ can be regenerated instead of rotting.
 - Remotion renders fetch Google Fonts per render. On a bad connection later scenes throw
   `[NetworkError]`. Kill leaked processes (`Get-Process node | Stop-Process -Force`) and retry.
 
+### 2026-07-25 · demo-video components (in flight)
+Building the 8 new components for the self-explaining demo, one per commit, each gated. **5 of 8
+done** — `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `WORD_ANCHOR_RAIL`.
+Remaining: `RESKIN_CAROUSEL`, `ASPECT_TWIN`, `PIPELINE_GATE`. Component count 140 → **145**.
+Progress and the full recipe live in [`docs/DEMO_VIDEO_PLAN.md`](DEMO_VIDEO_PLAN.md).
+
+Two things `component-flow.mjs assemble` does **not** do, which cost time every single build:
+
+1. **It never writes text budgets to `lint-spec.mjs`** — only `DYNAMIC`. Without a hand-written
+   validation block an overfull scene renders. Add one per component, sized to the NARROW
+   (vertical) container.
+2. **Its generated `<Name>Item` interface is fixed** (`label/text/title/sub/detail/color/asset/atWord`).
+   Anything else per item — a boolean flag, a number — must move to a top-level field
+   (`chosenIndex`, `used[]`), which is usually better data design anyway since the linter can then
+   enforce it.
+
+The recurring defect across all five: **the Fit guard truncating what the Budget guard allows.**
+Every component so far shipped with a cell narrower than its own budget until the MAX fixture was
+rendered and *looked at*. Size cells from the budget arithmetic, not by eye. And editing
+`manifest.mjs` by hand desyncs `specs/video.schema.json` — regenerate (`npm run schema && npm run
+types`) or the gate goes red.
+
 ## Open threads
 
 - **Demo video** — "iAuteur explaining itself", made *by* iAuteur, for the README + LinkedIn.
