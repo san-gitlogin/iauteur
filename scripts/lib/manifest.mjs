@@ -16,7 +16,25 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  PROMPT_HANDOFF: {
+export const MANIFEST = {  CHECK_SWEEP: {
+    category: "diagram", family: "check-sweep", data_key: "checkSweep",
+    purpose: "A run of checks sweeping down a piece of work, ticking one by one, where exactly one catches a problem and is then FIXED rather than shipped — the recovery is the content, not the failure.",
+    use_when: "The point is that quality is enforced automatically before anyone sees the result, and that a caught problem is repaired, not reported.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      subjectLabel: {t: 'string', req: true, max: 22, note: "what is being checked, e.g. 'the answer that came back'"},
+      checks: {t: 'items', req: true, note: "3-5 x {label<=26 (what is being checked, in plain words), atWord}"},
+      caughtIndex: {t: 'number', note: "0-based index of the ONE check that catches a problem; omit for an all-clear"},
+      caughtNote: {t: 'string', max: 26, note: "what was wrong, in plain words, e.g. 'too many words'"},
+      fixNote: {t: 'string', max: 30, note: "what happened next, e.g. 'rewritten, then passed'"},
+      verdict: {t: 'string', max: 24, note: "the stamp once the sweep completes"},
+      color: {t: 'string', note: "semantic colour for a passing check"},
+      source: {t: 'string', max: 58, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "word from narration the verdict lands on"},
+    },
+    example: {checkSweep: {"headline":"It checks its own [work]","subjectLabel":"the answer","checks":[{"label":"Is anything missing?","atWord":3},{"label":"Will it fit the screen?","atWord":5},{"label":"Is it too crowded?","atWord":7},{"label":"Does it read in time?","atWord":9}],"caughtIndex":2,"caughtNote":"too many words","fixNote":"rewritten, then passed","verdict":"ready","color":"green","atWord":11}},
+  },
+  PROMPT_HANDOFF: {
     category: "diagram", family: "prompt-handoff", data_key: "promptHandoff",
     purpose: "A round trip to an assistant you already use: a question is copied out, handed to any one of several named assistants, and the answer travels back and is pasted in. The LOOP is the content — the point is that the tool is not tied to one provider.",
     use_when: "The point is portability and a copy-out / paste-back hand-off, not a conversation and not a wire protocol.",

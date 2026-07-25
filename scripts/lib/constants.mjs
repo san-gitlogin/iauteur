@@ -44,6 +44,7 @@ export const TYPES = [
   'PIPELINE_GATE',
   'TOPIC_INTAKE',
   'PROMPT_HANDOFF',
+  'CHECK_SWEEP',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

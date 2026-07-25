@@ -1378,7 +1378,30 @@ export interface PromptHandoffData {
   source?: string;
   atWord?: number;
 }
+export interface CheckSweepItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CheckSweepData {
+  headline?: string;
+  subjectLabel?: string;
+  checks?: CheckSweepItem[];
+  caughtIndex?: number;
+  caughtNote?: string;
+  fixNote?: string;
+  verdict?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  checkSweep?: CheckSweepData;
   promptHandoff?: PromptHandoffData;
   topicIntake?: TopicIntakeData;
   pipelineGate?: PipelineGateData;

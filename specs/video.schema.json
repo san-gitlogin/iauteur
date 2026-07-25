@@ -335,7 +335,8 @@
               "ASPECT_TWIN",
               "PIPELINE_GATE",
               "TOPIC_INTAKE",
-              "PROMPT_HANDOFF"
+              "PROMPT_HANDOFF",
+              "CHECK_SWEEP"
             ]
           },
           "narration": {
@@ -405,6 +406,78 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CHECK_SWEEP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "checkSweep": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "subjectLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what is being checked, e.g. 'the answer that came back'"
+                        },
+                        "checks": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 x {label<=26 (what is being checked, in plain words), atWord}"
+                        },
+                        "caughtIndex": {
+                          "type": "number",
+                          "description": "0-based index of the ONE check that catches a problem; omit for an all-clear"
+                        },
+                        "caughtNote": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what was wrong, in plain words, e.g. 'too many words'"
+                        },
+                        "fixNote": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "what happened next, e.g. 'rewritten, then passed'"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the stamp once the sweep completes"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for a passing check"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 58,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word from narration the verdict lands on"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

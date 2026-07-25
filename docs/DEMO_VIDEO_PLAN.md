@@ -125,10 +125,12 @@ Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 - [x] Three neutral proof clips cut and stamped
 - [ ] Beat sheet written for slug `iauteur-what-you-get` and `validate-beats.mjs` passes
 
+**Component count is now 151.**
+
 ### Phase B · build the 3 new components (one per phase, fully audited before the next)
-- [ ] 1 · `TOPIC_INTAKE` — assembled · budgets in `lint-spec.mjs` · MIN/MAX/MIX · both aspects viewed · a second pack viewed · `tsc` clean · gate 0
-- [ ] 2 · `PROMPT_HANDOFF` — same audit
-- [ ] 3 · `CHECK_SWEEP` — same audit
+- [x] 1 · `TOPIC_INTAKE` — assembled first try · budgets in `lint-spec.mjs` · MIN/MAX/MIX viewed wide + vertical + neobrutalism · chip row given its own width after MAX wrapped the third chip
+- [x] 2 · `PROMPT_HANDOFF` — assembled first try · **rebuilt as a true loop** after drawing the app box at both ends read as two apps in a pipeline · leg sized from the label budget · courier fixed (was pinned to the lane midpoint in vertical)
+- [x] 3 · `CHECK_SWEEP` — assembled first try · budgets in `lint-spec.mjs` · MIN/MAX/MIX wide + vertical · caught state verified by rendering the exact frame inside its problem window, not just the midpoint · repair delay 16→28 frames so the amber state is readable
 
 ### Phase C · author
 - [ ] All 12 scenes written through the console API (validate → stage2 → assemble → intake)

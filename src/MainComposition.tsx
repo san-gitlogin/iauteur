@@ -158,9 +158,11 @@ import {AspectTwin} from './scenes/AspectTwin';
 import {PipelineGate} from './scenes/PipelineGate';
 import {TopicIntake} from './scenes/TopicIntake';
 import {PromptHandoff} from './scenes/PromptHandoff';
+import {CheckSweep} from './scenes/CheckSweep';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  CHECK_SWEEP: CheckSweep,
   PROMPT_HANDOFF: PromptHandoff,
   TOPIC_INTAKE: TopicIntake,
   PIPELINE_GATE: PipelineGate,
