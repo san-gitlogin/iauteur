@@ -82,6 +82,16 @@ can be regenerated instead of rotting.
 
 ## Gotchas that cost real time
 
+- **DEPICT, DON'T DIAGRAM — the rule that cost two re-shoots of the demo.** v1 was written for people
+  who already knew the jargon; v2 fixed the words but drew a step of the flow as two labelled boxes
+  with arrows between them, and the owner's reaction was "what does it even describe?" A viewer
+  decodes a picture of a screen instantly and an abstract graph slowly, if at all. Prefer the
+  component that draws the REAL screen/object/document; never demo an output with a component built
+  for something else (a video needs a player). This is now enforced in the prompt itself — the
+  `DIRECTION` block in `gen-prompt.mjs`, emitted in stage1, stage2 AND single-paste — and written up
+  as the LAW OF DEPICTION at the top of the director skill's `scene_library.md`. Audience vocabulary
+  too: **shorts / reels / devices**, never "phone".
+
 - **Trust the artifact, not the exit code.** A green test proved the drawer preview "worked" while
   it was rendering an empty donut. Extract a frame (`ffmpeg -vf "select=eq(n\,140)"`) and *look*.
 - **The console hard-disables every job button while one job runs** (`setBusy` + `JOB_BTN_SEL`,

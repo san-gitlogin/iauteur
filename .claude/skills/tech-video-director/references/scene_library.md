@@ -1,5 +1,34 @@
 # Scene Library + Themes (living catalog — grows with every addition)
 
+## LAW OF DEPICTION — read before casting a single beat
+
+**Draw the real thing. Do not draw a diagram of the real thing.**
+
+A viewer decodes a picture of a screen instantly. They decode labelled boxes joined by arrows
+slowly, if at all — and in a video they do not get to pause. Narration cannot rescue a picture
+that does not carry its own idea.
+
+Worked counter-example, from this project's own demo (v2, rejected):
+
+> The beat said "hand the question to whichever assistant you already use, and paste the answer
+> back." It was drawn as a box marked `iAuteur`, a box listing `ChatGPT / Claude / Gemini`, and two
+> arrows between them labelled *your question* and *the answer*. Technically correct, cleanly
+> composed, and the owner's reaction was: **"what does it even describe?"**
+>
+> What it should have been: a window showing the actual prompt with a **Copy** button being clicked,
+> then three assistant windows with that prompt pasted into them and an answer coming back.
+
+Three tests before you cast a beat:
+
+1. **Is there a component that draws the literal screen / object / document?** Use that one.
+   Reach for a flow diagram only when the subject genuinely *is* an abstract relationship.
+2. **Would a viewer who muted the audio still get it?** If not, the picture is a caption, not a scene.
+3. **Are you demonstrating an OUTPUT?** Then the component must be shaped like that output —
+   a video needs a player, an app needs a window. A near-enough component makes the claim itself
+   look unconvincing.
+
+Say the words the audience says. For vertical video: **shorts**, **reels**, **devices** — never "phone".
+
 ## Themes (set "brand": {"theme": X}; choose by topic mood; vary ACROSS videos)
 | Theme | Mood | Use for |
 |---|---|---|

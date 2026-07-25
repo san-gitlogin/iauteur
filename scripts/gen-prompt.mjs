@@ -185,6 +185,23 @@ const truth = source
      'time-sensitive numbers (prices, "current/latest" X); if needed, write `MISSING: <fact>`',
      'and mark illustrative numbers with data.source "illustrative".'].join('\n');
 
+// AUDIENCE + DEPICTION — the two directing failures that cost this project two whole
+// re-shoots of its own demo, neither of which any linter could catch. Both are now
+// stated for EVERY video, not carried in one person's head.
+//   v1: written for people who already knew the jargon. "What the hell would a 40-50
+//       year old understand?"
+//   v2: jargon removed, but a step of the flow was drawn as two labelled boxes with
+//       arrows between them. "What does it even describe… the visual doesn't correlate
+//       or is not easy to grasp that fast."
+const DIRECTION = [
+  '## WHO IS WATCHING, AND WHAT THEY SEE',
+  `- Audience: **${audience}**. Write every line for THEM. If a person in that audience would not say a word at dinner, it does not belong in the narration OR on screen. Product and file names, formats, and internal machinery are the worst offenders.`,
+  '- Narration is SPOKEN ENGLISH, not compressed telegram. Two natural sentences beat one clipped one. Read each line aloud in your head; if it does not sound like a person talking, rewrite it.',
+  '- **DEPICT, DO NOT DIAGRAM.** The picture has to carry the idea on its own, in the seconds it is on screen — the narration is not a rescue. Prefer the component that draws the REAL THING (a window, a screen, a player, a document) over the one that draws a *diagram of* the thing (labelled boxes joined by arrows). A viewer decodes a picture of a screen instantly and an abstract graph slowly, if at all.',
+  '- Corollary: never demonstrate an OUTPUT with a component built for something else. Showing a video? Use a player. Showing an app? Use a window. A near-enough component makes the claim itself look unconvincing.',
+  '- Say the word your audience uses. For vertical video that is "shorts", "reels" or "devices" — never "phone".',
+].join('\n');
+
 const laws = [
   '## STRUCTURAL LAWS (the linter enforces these exact numbers)',
   `1. Scene 1 is HOOK; the last scene is OUTRO_CTA (or RECAP).`,
@@ -213,7 +230,7 @@ function stage1() {
   return [
     'You are the DIRECTOR of iAuteur, a video factory. STAGE 1 of 2: plan the BEAT SHEET only.',
     'Output ONLY the JSON described in OUTPUT — no prose, no spec data yet.', '',
-    brief, '', truth, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '',
+    brief, '', truth, '', DIRECTION, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '',
     CASTING_PROTOCOL, '',
     NARRATION_VOICE, '',
     '## topicAxes — pick \u22652 (channel strategy):', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
@@ -244,6 +261,10 @@ function stage2() {
     'You are the DIRECTOR of iAuteur. STAGE 2 of 2: FILL each beat\u2019s visual data.',
     'Output ONLY the final spec JSON. Keep the narration and order from the beat sheet unchanged.', '',
     truth, '',
+    // Stage 2 is where the ON-SCREEN words are written — the place the audience rule
+    // actually bites. A jargon-free narration paired with `tsc clean` on screen is
+    // still a jargon-heavy scene.
+    DIRECTION, '',
     '## The beat sheet (fixed):', beatList, '',
     exampleScene, '',
     '## SCHEMAS for the component types you must fill',
@@ -274,7 +295,7 @@ function single() {
   return [
     'You are the DIRECTOR of iAuteur, a video factory. Produce a complete spec JSON in ONE response.',
     'First think a beat sheet, then output ONLY the final spec JSON (no prose).', '',
-    brief, '', truth, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '',
+    brief, '', truth, '', DIRECTION, '', RESEARCH_DEPTH, '', laws, '', REACH_FOR, '',
     CASTING_PROTOCOL, '', exampleScene, '',
     NARRATION_VOICE, '',
     '## topicAxes — pick \u22652:', TOPIC_AXES.map((a) => `\`${a}\``).join(' · '), '',
