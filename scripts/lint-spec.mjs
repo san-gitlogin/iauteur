@@ -123,7 +123,7 @@ if (n >= 8) {
   const cap = Math.max(4, Math.ceil(n * 0.35));
   for (const [st, c] of Object.entries(counts))
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
-  const DYNAMIC = ['VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -398,6 +398,29 @@ for (const s of spec.scenes ?? []) {
     if (d.lineChart.variant === 'dualaxis' && (d.lineChart.series ?? []).length < 2) E(`${id}: LINE_CHART dualaxis needs 2 series`);
     if (len(d.lineChart.y2Unit) > 6) E(`${id}: LINE_CHART y2Unit > 6 chars`);
   }
+  if (d.sceneForge) {
+    const sf = d.sceneForge;
+    const rw = sf.rows ?? [];
+    const st = sf.stages ?? [];
+    if (len(sf.headline) > 48) E(`${id}: sceneForge headline > 48 chars`);
+    if (rw.length < 3) E(`${id}: SCENE_FORGE needs ≥3 rows — the list around the target is what makes it "for THIS one"`);
+    if (rw.length > 5) E(`${id}: SCENE_FORGE max 5 rows (got ${rw.length})`);
+    for (const r of rw) {
+      if (len(r.label) > 10) E(`${id}: sceneForge row label "${r.label}" > 10 chars`);
+      if (len(r.text) > 26) E(`${id}: sceneForge row text "${r.text}" > 26 chars`);
+      checkColor(id, 'sceneForge.row.color', r.color);
+    }
+    if (typeof sf.targetIndex !== 'number') E(`${id}: SCENE_FORGE needs targetIndex`);
+    else if (sf.targetIndex < 0 || sf.targetIndex >= rw.length)
+      E(`${id}: sceneForge.targetIndex ${sf.targetIndex} out of range (0-${rw.length - 1})`);
+    if (len(sf.askLabel) > 34) E(`${id}: sceneForge askLabel > 34 chars`);
+    if (st.length > 4) E(`${id}: SCENE_FORGE max 4 stages (got ${st.length})`);
+    for (const s of st) if (len(s) > 14) E(`${id}: sceneForge stage "${s}" > 14 chars`);
+    if (len(sf.doneLabel) > 20) E(`${id}: sceneForge doneLabel > 20 chars`);
+    if (len(sf.footNote) > 42) E(`${id}: sceneForge footNote > 42 chars`);
+    checkColor(id, 'sceneForge.color', sf.color);
+  }
+
   if (d.videoPlayer) {
     const vp = d.videoPlayer;
     const cl = vp.clips ?? [];

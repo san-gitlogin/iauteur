@@ -1478,7 +1478,30 @@ export interface VideoPlayerData {
   source?: string;
   atWord?: number;
 }
+export interface SceneForgeItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface SceneForgeData {
+  headline?: string;
+  rows?: SceneForgeItem[];
+  targetIndex?: number;
+  askLabel?: string;
+  stages?: string[];
+  doneLabel?: string;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  sceneForge?: SceneForgeData;
   videoPlayer?: VideoPlayerData;
   chatTrio?: ChatTrioData;
   promptHandout?: PromptHandoutData;

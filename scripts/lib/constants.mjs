@@ -49,6 +49,7 @@ export const TYPES = [
   'PROMPT_HANDOUT',
   'CHAT_TRIO',
   'VIDEO_PLAYER',
+  'SCENE_FORGE',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

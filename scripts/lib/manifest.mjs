@@ -16,7 +16,25 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  VIDEO_PLAYER: {
+export const MANIFEST = {  SCENE_FORGE: {
+    category: "framed", family: "scene-forge", data_key: "sceneForge",
+    purpose: "A piece being made for ONE named row of a running list: the row is picked out, a short description is written against it, the piece is drawn, and it lands back in that row finished. The row it belongs to stays visible the whole time, which is what makes it 'for THIS one' rather than a generic build.",
+    use_when: "The point is that something bespoke gets made for a specific item, not that a build pipeline exists.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      rows: {t: 'items', req: true, note: "3-5 x {label<=10 (the row's name), text<=26 (what that row shows), atWord}"},
+      targetIndex: {t: 'number', req: true, note: "0-based index of the row the new piece is being made for"},
+      askLabel: {t: 'string', max: 34, note: "what you asked for, in your own words"},
+      stages: {t: 'string[]', note: "2-4 short stage names, each <=14 chars, ticked in order"},
+      doneLabel: {t: 'string', max: 20, note: "the stamp on the finished piece"},
+      footNote: {t: 'string', max: 42, note: "the takeaway under the list"},
+      color: {t: 'string', note: "semantic colour for the targeted row"},
+      source: {t: 'string', max: 58, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "word from narration the finished piece lands on"},
+    },
+    example: {sceneForge: {"headline":"Made for [this one scene]","rows":[{"label":"Scene 3","text":"the opening question","atWord":2},{"label":"Scene 4","text":"where the money goes","atWord":3},{"label":"Scene 5","text":"nothing fits this one","atWord":4},{"label":"Scene 6","text":"the closing line","atWord":5}],"targetIndex":2,"askLabel":"a dial that fills as it counts","stages":["drawn","wired","checked"],"doneLabel":"ready in this scene","footNote":"every scene can have its own","color":"green","atWord":8}},
+  },
+  VIDEO_PLAYER: {
     category: "media", family: "video-player", data_key: "videoPlayer",
     purpose: "One to three real video players — chrome, a play control, a scrubber that actually advances and a running clock — each playing an actual clip. THE way to show a finished video, because a player is what a viewer recognises a video by.",
     use_when: "You are demonstrating video OUTPUT. Never show finished video through a screenshot stack, a device bezel or a full-bleed clip with no player.",

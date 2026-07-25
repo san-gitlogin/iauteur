@@ -163,9 +163,11 @@ import {AppWindow} from './scenes/AppWindow';
 import {PromptHandout} from './scenes/PromptHandout';
 import {ChatTrio} from './scenes/ChatTrio';
 import {VideoPlayer} from './scenes/VideoPlayer';
+import {SceneForge} from './scenes/SceneForge';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  SCENE_FORGE: SceneForge,
   VIDEO_PLAYER: VideoPlayer,
   CHAT_TRIO: ChatTrio,
   PROMPT_HANDOUT: PromptHandout,

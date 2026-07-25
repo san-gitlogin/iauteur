@@ -340,7 +340,8 @@
               "APP_WINDOW",
               "PROMPT_HANDOUT",
               "CHAT_TRIO",
-              "VIDEO_PLAYER"
+              "VIDEO_PLAYER",
+              "SCENE_FORGE"
             ]
           },
           "narration": {
@@ -410,6 +411,80 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SCENE_FORGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "sceneForge": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 x {label<=10 (the row's name), text<=26 (what that row shows), atWord}"
+                        },
+                        "targetIndex": {
+                          "type": "number",
+                          "description": "0-based index of the row the new piece is being made for"
+                        },
+                        "askLabel": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "what you asked for, in your own words"
+                        },
+                        "stages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-4 short stage names, each <=14 chars, ticked in order"
+                        },
+                        "doneLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the stamp on the finished piece"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 42,
+                          "description": "the takeaway under the list"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the targeted row"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 58,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word from narration the finished piece lands on"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

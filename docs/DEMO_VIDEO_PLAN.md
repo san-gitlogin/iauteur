@@ -126,11 +126,11 @@ Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 - [x] `docs/STATE.md` records the rule under Gotchas, so Copilot/Cursor/a fresh clone picks it up too
 
 ### Phase B · build the 5 new components (one per phase, fully audited before the next)
-- [ ] 1 · `APP_WINDOW` — assembled · budgets in `lint-spec.mjs` · MIN/MAX/MIX · both aspects · a second pack · `tsc` clean · gate 0
-- [ ] 2 · `PROMPT_HANDOUT` — same audit
-- [ ] 3 · `CHAT_TRIO` — same audit
-- [ ] 4 · `VIDEO_PLAYER` — same audit
-- [ ] 5 · `SCENE_FORGE` — same audit
+- [x] 1 · `APP_WINDOW` — assembled first try · the button confirmed BEFORE the field it submits finished typing (fixed: click waits on typing end) · vertical step rail ellipsised every name at 190px, sized from the budget now
+- [x] 2 · `PROMPT_HANDOUT` — assembled after the manifest gate caught `assemble` silently dropping `preserveWs`; fixed in component-flow.mjs so indentation survives
+- [x] 3 · `CHAT_TRIO` — assembled first try · answers land staggered so the eye follows across
+- [x] 4 · `VIDEO_PLAYER` — assembled first try · scrubber, clock and play glyph all driven off one play head · missing clip falls back to a designed placeholder
+- [x] 5 · `SCENE_FORGE` — assembled first try · the forged piece enlarged after MAX showed it as weedy stubs
 
 ### Phase C · author
 - [ ] Beat sheet for `iauteur-how-easy`, validates clean
