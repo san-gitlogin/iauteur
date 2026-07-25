@@ -17,6 +17,21 @@
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
 export const MANIFEST = {
+  LAB_ASSEMBLY: {
+    category: "diagram", family: "stream-surface", data_key: "labAssembly",
+    purpose: "A build pipeline advancing stage by stage with a verdict at the end — a described component becoming wired, compiled code.",
+    use_when: "The point is that an automated multi-stage build ran and PASSED (or rolled back), not what the code says.",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
+      stages: {t: 'items', req: true, note: "3-5 x {label<=16 (stage), detail<=22 (what it produced), atWord}"},
+      verdict: {t: 'string', max: 24, note: "the stamp on the final gate, e.g. 'tsc clean'"},
+      rollbackNote: {t: 'string', max: 34, note: "the safety net line under the rail"},
+      color: {t: 'string', note: "semantic colour for the advancing rail"},
+      source: {t: 'string', max: 64, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "times the final verdict stamp only, never the rail"},
+    },
+    example: {labAssembly: {"headline":"Describe it, and it gets [built]","stages":[{"label":"contract","detail":"fields + budgets","atWord":2},{"label":"code","detail":"one .tsx","atWord":3},{"label":"wired","detail":"six files","atWord":4},{"label":"gate","detail":"type-checked","atWord":5}],"verdict":"tsc clean","rollbackNote":"fails to compile? rolled back","color":"green","atWord":5}},
+  },
   CAST_BOARD: {
     category: "diagram", family: "row-list", data_key: "castBoard",
     purpose: "A casting decision made visible: for one beat, several candidate components are weighed and exactly one is chosen, with the reason stated.",

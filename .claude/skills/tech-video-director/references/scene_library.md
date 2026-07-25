@@ -352,3 +352,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | BATCH_SWEEP | Contrast one-at-a-time repetition against an all-at-once batch action (hours vs seconds). | headline≤48, rows, slow, fast, atWord, source≤64 |
 | SPEC_TO_FRAME | The point is that a declarative document, not a timeline, is the source of the picture. | headline≤48, specLines, frameLabel≤22, frameBars, specCaption≤18, frameCaption≤18, color, source≤64, atWord |
 | CAST_BOARD | The point is that a choice was reasoned, not defaulted — showing the rejected options is the content. | headline≤48, beatLabel≤26, candidates, chosenIndex, verdict≤30, color, source≤64, atWord |
+| LAB_ASSEMBLY | The point is that an automated multi-stage build ran and PASSED (or rolled back), not what the code says. | headline≤48, stages, verdict≤24, rollbackNote≤34, color, source≤64, atWord |

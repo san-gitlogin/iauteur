@@ -36,6 +36,7 @@ export const TYPES = [
   'BATCH_SWEEP',
   'SPEC_TO_FRAME',
   'CAST_BOARD',
+  'LAB_ASSEMBLY',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

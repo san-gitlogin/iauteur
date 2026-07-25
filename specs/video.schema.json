@@ -327,7 +327,8 @@
               "PIPELINE_GANTT",
               "BATCH_SWEEP",
               "SPEC_TO_FRAME",
-              "CAST_BOARD"
+              "CAST_BOARD",
+              "LAB_ASSEMBLY"
             ]
           },
           "narration": {
@@ -397,6 +398,64 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LAB_ASSEMBLY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "labAssembly": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "stages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 x {label<=16 (stage), detail<=22 (what it produced), atWord}"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the stamp on the final gate, e.g. 'tsc clean'"
+                        },
+                        "rollbackNote": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the safety net line under the rail"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the advancing rail"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the final verdict stamp only, never the rail"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

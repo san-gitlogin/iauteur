@@ -1234,7 +1234,27 @@ export interface CastBoardData {
   source?: string;
   atWord?: number;
 }
+export interface LabAssemblyItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface LabAssemblyData {
+  headline?: string;
+  stages?: LabAssemblyItem[];
+  verdict?: string;
+  rollbackNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  labAssembly?: LabAssemblyData;
   castBoard?: CastBoardData;
   specToFrame?: SpecToFrameData;
   batchSweep?: BatchSweepData;
