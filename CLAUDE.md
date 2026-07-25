@@ -2,6 +2,12 @@
 
 This repo is a video factory: JSON specs in `topics/<slug>/` → Remotion renders them. You (Claude) write specs and run scripts. You NEVER hand-edit component code during video production, never hand-write derived files, never overwrite an existing topic.
 
+> **Then read [`docs/STATE.md`](docs/STATE.md).** This file is the LAWS (what you must always do);
+> STATE.md is the CURRENT SITUATION (what exists today, where it lives, which gotchas have already
+> cost time, and what's in flight). Update STATE.md in the same commit as the work it describes —
+> that is what makes the next session, on any machine or tool, cheap. Copilot users:
+> `.github/copilot-instructions.md` points here.
+
 ## LAW 0 — THE INTERVIEW GATE (recorded failure 2026-07-17: a session skipped this and self-picked everything)
 When the user asks for a video — ANY phrasing — your FIRST action, before scaffolding, research, or writing a single scene, is ONE batched AskUserQuestion round covering everything their message didn't already answer:
 1. **format** — long / shorts / both (default: both)
