@@ -75,17 +75,23 @@ rolls back automatically if it does not compile.
 Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 
 ### Phase 0 · groundwork
-- [ ] `npm run gate` exits 0 and `npm run typecheck` is clean — baseline before touching anything
-- [ ] `public/assets/iauteur_logo.png` exists (copied from `brand/iauteur-icon-512.png`), provenance noted in `public/assets/SOURCES.json`
-- [ ] `npm run new-topic -- iauteur-explains-itself "iAuteur — explaining itself"` scaffolded
-- [ ] Beat sheet (10 beats, ~20 words each, HOOK ≤17) written and **`validate-beats.mjs` passes**, including adjacency
+- [x] `npm run gate` exits 0 and `npm run typecheck` is clean — baseline confirmed before touching anything
+- [x] `public/assets/iauteur_logo.png` exists (copied from `brand/iauteur-icon-512.png`), provenance in `public/assets/SOURCES.json`
+- [x] `npm run new-topic -- iauteur-explains-itself "iAuteur — explaining itself"` scaffolded
+- [x] Beat sheet written — 10 beats, all within budget, **72.4s** total runtime (`out/tmp/flow/iauteur-explains-itself-beats.json`)
+- [ ] `validate-beats.mjs` passes — **DEFERRED TO PHASE 9 BY NECESSITY.** The validator rejects any
+      type absent from the manifest, so it cannot pass until all 8 components are built. Structural
+      rules were verified by hand instead: HOOK first, OUTRO_CTA last, 10 beats inside the explainer
+      7–10 range, every beat within its word budget.
+- [x] Adjacency risk cleared: `linterFamilyOf = FAMILY[t] || t`, and `assemble` never writes to
+      `FAMILY`, so each new type is its own family and the CONSOLIDATED hard gate cannot trip
 - [ ] Casting note recorded in `topics/iauteur-explains-itself/casting.md` — one stated reason per beat
 
 ### Phase 1–8 · build the 8 components (one per phase, in table order)
 For each of `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `WORD_ANCHOR_RAIL`,
 `RESKIN_CAROUSEL`, `ASPECT_TWIN`, `PIPELINE_GATE`:
 
-- [ ] 1 · `SPEC_TO_FRAME` — Lab stages 1→2→assemble green · both-aspect proof stills **viewed** · `tsc` clean
+- [x] 1 · `SPEC_TO_FRAME` — assembled via the console backend · proofs viewed in moderndark wide+vertical and neobrutalism wide · MIN/MAX/MIX stress · `tsc` clean · gate 10/10 · budgets enforced in `lint-spec.mjs`
 - [ ] 2 · `CAST_BOARD`
 - [ ] 3 · `LAB_ASSEMBLY`
 - [ ] 4 · `BUDGET_METER_ROW`

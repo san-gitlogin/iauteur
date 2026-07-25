@@ -325,7 +325,8 @@
               "PHOTO_TIMELINE",
               "TRADEOFF_SCALE",
               "PIPELINE_GANTT",
-              "BATCH_SWEEP"
+              "BATCH_SWEEP",
+              "SPEC_TO_FRAME"
             ]
           },
           "narration": {
@@ -395,6 +396,76 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SPEC_TO_FRAME"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "specToFrame": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "specLines": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-6 lines of the spec, each <=30 chars, shown mono; leading spaces are preserved for indent"
+                        },
+                        "frameLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the headline drawn INSIDE the rendered frame"
+                        },
+                        "frameBars": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "2-5 values 0-100; drawn as a mini chart inside the frame to imply real content"
+                        },
+                        "specCaption": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "label under the spec side, e.g. 'long.json'"
+                        },
+                        "frameCaption": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "label under the frame side, e.g. '1920x1080'"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the frame side accent"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the resolve payoff (connector sweep + frame lighting up), not the base"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

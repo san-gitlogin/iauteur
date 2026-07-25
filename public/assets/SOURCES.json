@@ -93,5 +93,13 @@
     "note": "screenshot for commentary — companiesmarketcap.com global market cap leaderboard, snapped 2026-07-18 — Apple vs Nvidia crown evidence",
     "bytes": 156880,
     "capturedAt": "2026-07-18T16:22:52.518Z"
+  },
+  {
+    "file": "iauteur_logo.png",
+    "url": "local:brand/iauteur-icon-512.png",
+    "note": "iAuteur's own project mark - first-party asset, copied from brand/. Used as brand.logo for the self-explaining demo video so the watermark reads iAuteur, not a channel.",
+    "bytes": 23819,
+    "contentType": "image/png",
+    "fetchedAt": "2026-07-25T09:27:41.770Z"
   }
 ]

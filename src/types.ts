@@ -1203,7 +1203,19 @@ export interface BatchSweepData {
   atWord?: number;
   source?: string;
 }
+export interface SpecToFrameData {
+  headline?: string;
+  specLines?: string[];
+  frameLabel?: string;
+  frameBars?: number[];
+  specCaption?: string;
+  frameCaption?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  specToFrame?: SpecToFrameData;
   batchSweep?: BatchSweepData;
   pipelineGantt?: PipelineGanttData;
   // HOOK

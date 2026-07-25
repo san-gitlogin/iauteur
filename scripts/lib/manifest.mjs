@@ -17,6 +17,23 @@
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
 export const MANIFEST = {
+  SPEC_TO_FRAME: {
+    category: "diagram", family: "code-surface", data_key: "specToFrame",
+    purpose: "A JSON scene spec on one side resolving into the rendered frame it produces on the other — 'the spec IS the movie' made literal.",
+    use_when: "The point is that a declarative document, not a timeline, is the source of the picture.",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
+      specLines: {t: 'string[]', req: true, note: "2-6 lines of the spec, each <=30 chars, shown mono; leading spaces are preserved for indent"},
+      frameLabel: {t: 'string', req: true, max: 22, note: "the headline drawn INSIDE the rendered frame"},
+      frameBars: {t: 'number[]', note: "2-5 values 0-100; drawn as a mini chart inside the frame to imply real content"},
+      specCaption: {t: 'string', max: 18, note: "label under the spec side, e.g. 'long.json'"},
+      frameCaption: {t: 'string', max: 18, note: "label under the frame side, e.g. '1920x1080'"},
+      color: {t: 'string', note: "semantic colour for the frame side accent"},
+      source: {t: 'string', max: 64, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "times the resolve payoff (connector sweep + frame lighting up), not the base"},
+    },
+    example: {specToFrame: {"headline":"The [JSON] is the movie","specLines":["{","  \"type\": \"DONUT\",","  \"narration\": \"...\",","  \"data\": { ... }","}"],"frameLabel":"Portfolio split","frameBars":[62,21,17],"specCaption":"long.json","frameCaption":"1920 x 1080","color":"blue","atWord":4}},
+  },
   BATCH_SWEEP: {
     category: "diagram", family: "diagram", data_key: "batchSweep",
     purpose: "Two lanes over the same record list: a single-record modal opening/closing over and over (a climbing context-switch counter) vs one multi-select sweep that checks all rows and fires once.",

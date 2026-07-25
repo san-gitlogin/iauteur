@@ -34,6 +34,7 @@ export const TYPES = [
   'TRADEOFF_SCALE',
   'PIPELINE_GANTT',
   'BATCH_SWEEP',
+  'SPEC_TO_FRAME',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

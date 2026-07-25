@@ -148,9 +148,11 @@ import {PhotoTimeline} from './scenes/PhotoTimeline';
 import {TradeoffScale} from './scenes/TradeoffScale';
 import {PipelineGantt} from './scenes/PipelineGantt';
 import {BatchSweep} from './scenes/BatchSweep';
+import {SpecToFrame} from './scenes/SpecToFrame';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  SPEC_TO_FRAME: SpecToFrame,
   BATCH_SWEEP: BatchSweep,
   PIPELINE_GANTT: PipelineGantt,
   HOOK: Hook,
