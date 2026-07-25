@@ -9,7 +9,9 @@
 //   flow.mjs single   <cfg.json>                 → { mode, prompt }
 //   flow.mjs validate <cfg.json> <beats.json>    → { ok, verdict, reask, beats }
 //   flow.mjs stage2   <cfg.json> <beats.json>    → { mode, prompt }
-//   flow.mjs assemble <cfg.json> <reply.json>    → { ok, firstTry, spec, changes, warnings, lint, fixPrompt }
+//   flow.mjs assemble <cfg.json> <reply.json> [beats.json] → { ok, firstTry, spec, changes, warnings, lint, fixPrompt }
+//     (beats is optional and order-independent — it carries the Stage-1 story fields
+//      onePayoff/openLoop/analogy/topicAxes, which the Stage-2 reply never contains)
 //   flow.mjs applyfix <cfg.json> <spec.json> <patch.json> → { ok, lint, spec, fixPrompt }
 import fs from 'node:fs';
 import path from 'node:path';
@@ -75,14 +77,21 @@ if (cmd === 'stage1' || cmd === 'single') {
   // GUARD: a BEAT SHEET (has `beats`, no `scenes`) pasted into the fill/assemble box
   // would assemble to 0 scenes, then the fix-prompt path emits a nonsensical "fix 0
   // scenes / id: undefined" prompt. Stop early with a clear instruction instead.
-  const _reply = readJSON(arg2);
+  // Two payloads may arrive (fill reply + the accepted beat sheet) and the console
+  // writes them in a fixed key order, so identify each by SHAPE rather than position:
+  // a fill reply has `scenes`, a beat sheet has `beats`.
+  const _p1 = readJSON(arg2);
+  const _p2 = arg3 ? readJSON(arg3) : null;
+  const _isBeats = (o) => o && !Array.isArray(o.scenes) && Array.isArray(o.beats);
+  const _reply = _isBeats(_p1) && _p2 ? _p2 : _p1;
+  const _beats = _isBeats(_p1) ? _p1 : (_isBeats(_p2) ? _p2 : null);
   if (!Array.isArray(_reply.scenes) && Array.isArray(_reply.beats)) {
     emit({ok: false, firstTry: false, spec: null, changes: [], warnings: [], lint: '', fixPrompt: '',
       error: 'That looks like a BEAT SHEET (it has "beats", not "scenes"). In the two-paste flow: validate the beat sheet, generate the Stage-2 "fill" prompt, then paste the FILLED reply here — a fill reply has a top-level "scenes" array.'});
     process.exit(0);
   }
   // console owns the envelope; the model reply supplies story + thumbnail + scenes
-  const {spec, changes: asm} = assembleSpec(_reply, cfg);
+  const {spec, changes: asm} = assembleSpec(_reply, cfg, _beats);
   const sf = scratch('spec.json');
   fs.writeFileSync(sf, JSON.stringify(spec, null, 2));
   const before = lint(sf);

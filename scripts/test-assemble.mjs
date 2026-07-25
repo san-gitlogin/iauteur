@@ -43,6 +43,30 @@ ok(asm2.some((c) => /ignored model-emitted meta/.test(c)), 'rogue meta ignored-w
 ok(asm2.some((c) => /ignored model-emitted brand/.test(c)), 'rogue brand ignored-with-log');
 ok(s2.meta.topic === cfg.topic && s2.brand.design === cfg.design, 'cfg overrides rogue envelope');
 
+// 2b) THE WATERMARK. brand.logo drives the in-video watermark, the thumbnail/cover
+// stamp and the OUTRO_CTA circle, and nothing else in the pipeline requires it — so
+// when the assembler dropped it, every console-authored video rendered unbranded and
+// no gate noticed. Both the house default and a cfg override are pinned here.
+ok(spec.brand.logo === 'img:channel_logo.png', 'brand.logo defaults to the house logo (watermark is never silently lost)');
+const {spec: sLogo} = assembleSpec(lean, {...cfg, logo: 'img:iauteur_logo.png'});
+ok(sLogo.brand.logo === 'img:iauteur_logo.png', 'cfg.logo overrides the watermark');
+
+// 2c) STORY FIELDS SURVIVE STAGE 2. Stage 1 collects onePayoff/openLoop/analogy/
+// topicAxes on the beat sheet; the Stage-2 fill reply never carries them, so without
+// the beat sheet reaching the assembler all four were lost on every two-paste video
+// (and meta.topicAxes warned on every render).
+const sheet = {meta: {onePayoff: 'the payoff', openLoop: 'the loop', analogy: 'the analogy',
+  topicAxes: ['entity-novelty', 'sovereignty']}, beats: [{id: 's01', type: 'HOOK', narration: 'x'}]};
+// a real Stage-2 fill reply: thumbnail + scenes only, no story fields
+const fill = {thumbnail: lean.thumbnail, scenes: lean.scenes};
+const {spec: s2b, changes: asm2b} = assembleSpec(fill, cfg, sheet);
+ok(JSON.stringify(s2b.meta.topicAxes) === JSON.stringify(sheet.meta.topicAxes), 'topicAxes carried from the beat sheet');
+ok(s2b.meta.onePayoff === 'the payoff' && s2b.meta.openLoop === 'the loop' && s2b.meta.analogy === 'the analogy',
+  'onePayoff / openLoop / analogy carried from the beat sheet');
+ok(asm2b.some((c) => /carried .* from the accepted beat sheet/.test(c)), 'the carry-forward is logged');
+const {spec: s2c} = assembleSpec({...fill, onePayoff: 'reply wins'}, cfg, sheet);
+ok(s2c.meta.onePayoff === 'reply wins', 'a story field in the reply outranks the beat sheet');
+
 // 3) missing narration → narration-only fix-prompt
 const blanked = JSON.parse(JSON.stringify(spec));
 blanked.scenes[2].narration = '';

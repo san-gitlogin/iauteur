@@ -138,7 +138,7 @@ export const MANIFEST = {  PIPELINE_GATE: {
     use_when: "The point is that a declarative document, not a timeline, is the source of the picture.",
     fields: {
       headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
-      specLines: {t: 'string[]', req: true, note: "2-6 lines of the spec, each <=30 chars, shown mono; leading spaces are preserved for indent"},
+      specLines: {t: 'string[]', req: true, preserveWs: true, note: "2-6 lines of the spec, each <=30 chars, shown mono; leading spaces are preserved for indent"},
       frameLabel: {t: 'string', req: true, max: 22, note: "the headline drawn INSIDE the rendered frame"},
       frameBars: {t: 'number[]', note: "2-5 values 0-100; drawn as a mini chart inside the frame to imply real content"},
       specCaption: {t: 'string', max: 18, note: "label under the spec side, e.g. 'long.json'"},

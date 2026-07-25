@@ -59,6 +59,7 @@ async function boot() {
   fillSelect($("themeLight"), CONFIG.themeLights, "daylight");
   fillSelect($("background"), CONFIG.backgrounds, "(theme default)");
   $("channel").value = CONFIG.channelDefault || "";
+  fillSelect($("logo"), CONFIG.logos || ["channel_logo.png"], "channel_logo.png");
   await populateVoices();
   const restored = loadState();
   buildDesignGrid();
@@ -92,6 +93,9 @@ function cfg() {
     audience: $("audience").value, minutes: $("minutes").value,
     themeLight: $("themeLight").value, background: $("background").value,
     channel: $("channel").value, notes: $("notes").value,
+    // brand.logo — the watermark. Sent as an img: reference so the assembler can
+    // put it in the spec; without it a console-authored video renders unbranded.
+    logo: $("logo").value ? "img:" + $("logo").value : "",
     design: S.design, theme: S.design,
   };
 }
@@ -670,7 +674,7 @@ function saveState() {
         topic: $("topic").value, source: $("source").value, notes: $("notes").value,
         format: $("format").value, preset: $("preset").value, audience: $("audience").value, minutes: $("minutes").value,
         themeLight: $("themeLight").value, background: $("background").value, channel: $("channel").value,
-        slug: $("slug").value, beatsJson: $("beatsJson").value, replyJson: $("replyJson").value,
+        logo: $("logo").value, slug: $("slug").value, beatsJson: $("beatsJson").value, replyJson: $("replyJson").value,
       },
     }));
   } catch (e) { /* localStorage full / disabled — non-fatal */ }
@@ -811,7 +815,7 @@ function wireEvents() {
 
   // config change tracking (loss prevention + slug sync)
   $("topic").addEventListener("input", () => { checkDirty(); render(); scheduleSlugCheck(); });
-  ["format", "preset", "audience", "minutes", "themeLight", "background", "channel"].forEach((id) =>
+  ["format", "preset", "audience", "minutes", "themeLight", "background", "channel", "logo"].forEach((id) =>
     $(id).addEventListener("change", () => { checkDirty(); render(); }));
   $("slug").addEventListener("input", () => { S.slugAuto = false; render(); scheduleSlugCheck(); });
 
@@ -1014,7 +1018,15 @@ async function doAssemble(replyId) {
   try { reply = JSON.parse($(replyId).value); }
   catch (e) { toast("Reply JSON is invalid: " + e.message, "err"); return; }
   const btn = replyId === "replyJson" ? $("assembleBtn") : $("assembleSingleBtn");
-  const res = await withBtn(btn, "Assembling…", () => jpost("/api/flow/assemble", { cfg: cfg(), reply }));
+  // send the accepted beat sheet too when we have one — it holds the Stage-1 story
+  // fields (onePayoff/openLoop/analogy/topicAxes) that the fill reply never carries
+  const body = { cfg: cfg(), reply };
+  // read it from the paste box, which still holds the Stage-1 `meta` block that
+  // S.beats (a bare array of beats) does not
+  const pasted = (() => { try { return JSON.parse($("beatsJson").value); } catch { return null; } })();
+  if (pasted && (pasted.meta || pasted.beats)) body.beats = pasted;
+  else if (S.beats) body.beats = { beats: S.beats };
+  const res = await withBtn(btn, "Assembling…", () => jpost("/api/flow/assemble", body));
   if (res.error) { toast(res.error, "err"); return; }
   S.spec = res.spec; S.lintOk = res.ok; S.dirty = false; snapshotAuthoring();
   overlayCustomBeats();
@@ -1340,7 +1352,7 @@ function autoRun() {
     topic: c.topic, design: S.design, theme: S.design,
     themeLight: c.themeLight || "daylight", format: c.format || "long",
     preset: c.preset || "explainer", audience: c.audience || "general",
-    channel: c.channel || "", mode, intake, build,
+    channel: c.channel || "", logo: c.logo || "", mode, intake, build,
   });
   if (c.notes) params.set("notes", c.notes);
   if (c.source) params.set("source", c.source);

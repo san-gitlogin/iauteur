@@ -49,6 +49,14 @@ for (const [type, man] of Object.entries(MANIFEST)) {
       misses.push(`${type}.${field} — not in ${targetIface} (found elsewhere; verify mapping)`, );
   }
   if (man.data_key && !targetIface) misses.push(`${type} — data_key "${man.data_key}" has no matching SceneData interface mapping`);
+  // A field whose NOTE promises indentation is honoured must also be flagged
+  // preserveWs, or normalize's whitespace collapse silently strips the leading
+  // spaces before the component ever sees them (this is exactly how SPEC_TO_FRAME's
+  // specLines shipped documented-but-broken).
+  for (const [field, f] of Object.entries(man.fields || {})) {
+    if (/indent|indentation|leading space|whitespace|tabs =/i.test(f.note || '') && !f.preserveWs)
+      misses.push(`${type}.${field} — note promises significant whitespace but the field is not preserveWs:true (normalize will collapse it)`);
+  }
 }
 
 console.log(`MANIFEST CHECK: ${Object.keys(MANIFEST).length} types, ${checked} field(s) verified against src/types.ts.`);

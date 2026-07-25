@@ -131,6 +131,19 @@ def preview_map() -> dict[str, str]:
     return out
 
 
+def asset_images() -> list[str]:
+    """Images in public/assets/ offerable as brand.logo, house logo first."""
+    d = ROOT / "public" / "assets"
+    if not d.is_dir():
+        return ["channel_logo.png"]
+    names = sorted(f.name for f in d.iterdir()
+                   if f.is_file() and f.suffix.lower() in (".png", ".jpg", ".jpeg", ".svg", ".webp"))
+    if "channel_logo.png" in names:
+        names.remove("channel_logo.png")
+        names.insert(0, "channel_logo.png")
+    return names
+
+
 def existing_topics() -> list[dict]:
     rows = []
     if TOPICS_DIR.is_dir():
@@ -187,6 +200,9 @@ def api_config():
         "formats": FORMATS,
         "voices": VOICES,
         "channelDefault": CHANNEL_DEFAULT,
+        # watermark candidates — every image already sitting in public/assets/, so the
+        # console can point brand.logo at one without hand-editing the spec
+        "logos": asset_images(),
         "topics": existing_topics(),
         # per-type drawability contract, so a beat row can label its preview
         # ("your content" vs "sample content") without a round-trip per row
@@ -532,6 +548,7 @@ def api_auto_run():
         "preset": q.get("preset") or "explainer",
         "audience": q.get("audience") or "general",
         "channel": q.get("channel") or "YOUR CHANNEL",
+        "logo": q.get("logo") or "img:channel_logo.png",
     }
     if q.get("notes"):
         cfg["notes"] = q.get("notes")
@@ -872,7 +889,16 @@ def api_flow_assemble():
         return jsonify({"error": f"Invalid reply JSON: {e}"}), 400
     if reply is None:
         return jsonify({"error": "Paste the model's reply JSON."}), 400
-    return jsonify(_flow("assemble", cfg, {"reply": reply}))
+    payloads = {"reply": reply}
+    # the accepted beat sheet, when the console still has it: it carries the Stage-1
+    # story fields (onePayoff/openLoop/analogy/topicAxes) that a fill reply never has
+    try:
+        beats = _parse_json_field(body, "beats")
+    except json.JSONDecodeError:
+        beats = None
+    if beats is not None:
+        payloads["beats"] = beats
+    return jsonify(_flow("assemble", cfg, payloads))
 
 
 @app.route("/api/flow/applyfix", methods=["POST"])

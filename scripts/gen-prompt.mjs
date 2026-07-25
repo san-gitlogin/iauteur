@@ -253,6 +253,7 @@ function stage2() {
     '## RULES',
     '- Do NOT write durationFrames, timingSource, fps, or scene id \u2014 the app owns those.',
     '- `transition` (optional) is a SCENE CUT, one of: ' + TRANSITIONS.join(', ') + '.',
+    ...(format === 'short' ? [] : ['- Vary the cutting: a long video needs at least 5 DISTINCT transition kinds, chosen for the beat (a diagram assembling → push/morph; a set of tiles → slide; a verdict → dip). Reusing only fade/slide/push is linted.']),
     '- background (optional): zoneA|zoneB|zoneC or a named background.',
     `- Studio components need a "source". HOOK headline ≤${advertised(BUDGET.hookHeadline)}.`,
     `- ${format === 'short' ? 'cover' : 'thumbnail'}.title ≤ ${advertised(BUDGET.coverTitle)} chars — a SHORT punch (3–4 words), NOT the full topic; badge ≤ ${advertised(BUDGET.badgeInCard)}.`, '',

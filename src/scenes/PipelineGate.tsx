@@ -162,7 +162,11 @@ export const PipelineGate: React.FC<{scene: Scene}> = ({scene}) => {
               justifyContent: 'center',
               // room beneath for the return path to travel without touching the boxes
               paddingBottom: (vertical ? 0 : 92) * scale,
-              paddingRight: vertical ? 120 * scale : 0,
+              // Reserve exactly the width the return loop occupies to the right of the
+              // boxes (loopX - boxW = 60), so the boxes+loop composition centres as a
+              // whole. Reserving more than the loop needs pushes the boxes visibly off
+              // centre against the centred headline and footnote.
+              paddingRight: vertical ? (loopX - boxW) : 0,
             }}
           >
             {box(d.proposerLabel ?? '', t.colors.muted, false)}

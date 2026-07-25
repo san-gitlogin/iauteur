@@ -37,6 +37,11 @@ if (spec.brand?.themeLight && !LIGHT_THEMES.includes(spec.brand.themeLight))
   E(`brand.themeLight "${spec.brand.themeLight}" must be one of: ${LIGHT_THEMES.join(', ')}`);
 if (spec.meta?.screenplay && !SCREENPLAY_NAMES.includes(spec.meta.screenplay))
   W(`meta.screenplay "${spec.meta.screenplay}" unknown. Known: ${SCREENPLAY_NAMES.join(', ')}`);
+// brand.logo drives the watermark, the thumbnail/cover stamp and the OUTRO_CTA
+// subscribe circle. It is silent when absent — the video simply renders unbranded —
+// so nothing caught the console flow dropping it. Warn, don't error: a spec may
+// legitimately be authored before the asset lands in public/assets.
+if (!spec.brand?.logo) W('brand.logo missing — the video will render with NO watermark, and the thumbnail/cover get no logo stamp. Set e.g. "img:channel_logo.png".');
 const bgv = spec.brand?.background;
 if (bgv && !BACKGROUNDS.includes(bgv))
   E(`brand.background "${bgv}" unknown. Known: aurora, grid, aurora-grid, plain, bokeh, starfield, grid-pulse, wave, ripple, gradient, geo, matrix-rain, noise, ember (omit for theme default)`);
