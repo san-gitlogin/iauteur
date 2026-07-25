@@ -44,9 +44,9 @@ export const TopicIntake: React.FC<{scene: Scene}> = ({scene}) => {
   const glow = t.style.glow;
   // Sized FROM the budgets: 44 mono glyphs at ~0.6em must fit inside the field with
   // its padding, in the NARROW (vertical) container too.
-  const typeFont = (vertical ? 25 : 34) * scale;
-  const fieldW = (vertical ? 880 : 1040) * scale;
-  const chipFont = (vertical ? 20 : 21) * scale;
+  const typeFont = (vertical ? 25 : 37) * scale;
+  const fieldW = (vertical ? 900 : 1160) * scale;
+  const chipFont = (vertical ? 21 : 24) * scale;
 
   return (
     <AbsoluteFill>

@@ -105,24 +105,24 @@
   {
     "file": "video/sample_market.mp4",
     "url": "(self-generated)",
-    "note": "5s clip cut from this project's own render of apple-overtakes-nvidia @149s, scaled to 1280x720, silent. The channel watermark is fully covered by public/assets/iauteur_logo.png so the clip carries no channel branding. Own work; no third-party rights.",
-    "bytes": 89353,
+    "note": "5s clip cut from this project's own render of the topic named below, cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark at full bleed. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "bytes": 97094,
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-25T14:53:40.646493Z"
   },
   {
     "file": "video/sample_product.mp4",
     "url": "(self-generated)",
-    "note": "5s clip cut from this project's own render of gpt-live-full-duplex-voice @39s, scaled to 1280x720, silent. The channel watermark is fully covered by public/assets/iauteur_logo.png so the clip carries no channel branding. Own work; no third-party rights.",
-    "bytes": 192063,
+    "note": "5s clip cut from this project's own render of the topic named below, cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark at full bleed. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "bytes": 206022,
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-25T14:53:40.646493Z"
   },
   {
     "file": "video/sample_tech.mp4",
     "url": "(self-generated)",
-    "note": "5s clip cut from this project's own render of kimi-k3-deep-dive @179s, scaled to 1280x720, silent. The channel watermark is fully covered by public/assets/iauteur_logo.png so the clip carries no channel branding. Own work; no third-party rights.",
-    "bytes": 171666,
+    "note": "5s clip cut from this project's own render of the topic named below, cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark at full bleed. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "bytes": 183134,
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-25T14:53:40.646493Z"
   }

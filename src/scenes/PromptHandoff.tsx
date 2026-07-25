@@ -35,8 +35,8 @@ export const PromptHandoff: React.FC<{scene: Scene}> = ({scene}) => {
   const radius = 14 * scale * t.style.cornerRadius;
   const glow = t.style.glow;
   // Sized FROM the budgets: appLabel 16 glyphs and assistant labels 14 glyphs at mono.
-  const appW = (vertical ? 300 : 320) * scale;
-  const appH = (vertical ? 92 : 104) * scale;
+  const appW = (vertical ? 320 : 400) * scale;
+  const appH = (vertical ? 98 : 120) * scale;
   // Sized FROM the label budget, not by eye: a 20-glyph path label at 18px mono is
   // ~216px, and a leg shorter than its own label lets the text spill over the boxes
   // at both ends. This is the Fit-guard-vs-Budget-guard conflict that has bitten
@@ -44,7 +44,7 @@ export const PromptHandoff: React.FC<{scene: Scene}> = ({scene}) => {
   // Both lanes run HORIZONTALLY in either aspect (in vertical the app sits above the
   // assistants and the lanes bridge them), so the length is bounded by frame width in
   // both — 260px comfortably clears a 20-glyph label at 18px mono.
-  const legLen = (vertical ? 260 : 250) * scale;
+  const legLen = (vertical ? 280 : 340) * scale;
 
   // one travelling document per lane — a small page that slides along its path.
   // Lanes are horizontal in BOTH aspects, so this is always an x-axis journey; the
@@ -140,7 +140,7 @@ export const PromptHandoff: React.FC<{scene: Scene}> = ({scene}) => {
       <span
         style={{
           fontFamily: t.fonts.mono,
-          fontSize: 27 * scale,
+          fontSize: 30 * scale,
           color: t.colors.text,
           whiteSpace: 'nowrap',
           overflow: 'hidden',
@@ -206,10 +206,10 @@ export const PromptHandoff: React.FC<{scene: Scene}> = ({scene}) => {
                     key={i}
                     style={{
                       fontFamily: t.fonts.mono,
-                      fontSize: 21 * scale,
+                      fontSize: 23 * scale,
                       color: t.colors.text,
                       padding: `${7 * scale}px ${16 * scale}px`,
-                      minWidth: (vertical ? 200 : 190) * scale,
+                      minWidth: (vertical ? 230 : 240) * scale,
                       textAlign: 'center',
                       background: hexA(t.colors.panel, 0.9),
                       border: `1.5px solid ${hexA(t.colors.panelBorder, 0.4 + 0.5 * lit)}`,

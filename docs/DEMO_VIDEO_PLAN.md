@@ -123,9 +123,11 @@ Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 - [x] `LAB_ASSEMBLY` connector alignment fixed — legs sat on the row's top edge instead of the node centre line
 - [x] All 8 v1 components confirmed wired: in the `MainComposition` registry, in `showcaseSpec.ts`, zero hardcoded colours (all 30 packs reskin them)
 - [x] Three neutral proof clips cut and stamped
-- [ ] Beat sheet written for slug `iauteur-what-you-get` and `validate-beats.mjs` passes
+- [x] Beat sheet written for slug `iauteur-what-you-get` — validates (one advisory: beats 7+8 are both media-family, kept deliberately because that adjacency IS the proof montage)
 
 **Component count is now 151.**
+
+**Final runtimes:** wide 98.3s / vertical 44.0s. Ava reads ~3 words/sec, well ahead of the 12-frames-per-word estimate, so 293 written words came in under the 2-minute target. Padding further would have cost the ad its pace.
 
 ### Phase B · build the 3 new components (one per phase, fully audited before the next)
 - [x] 1 · `TOPIC_INTAKE` — assembled first try · budgets in `lint-spec.mjs` · MIN/MAX/MIX viewed wide + vertical + neobrutalism · chip row given its own width after MAX wrapped the third chip
@@ -133,21 +135,21 @@ Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 - [x] 3 · `CHECK_SWEEP` — assembled first try · budgets in `lint-spec.mjs` · MIN/MAX/MIX wide + vertical · caught state verified by rendering the exact frame inside its problem window, not just the midpoint · repair delay 16→28 frames so the amber state is readable
 
 ### Phase C · author
-- [ ] All 12 scenes written through the console API (validate → stage2 → assemble → intake)
-- [ ] **Read every narration line aloud.** Any line that isn't natural English gets rewritten
-- [ ] Zero banned words on screen or in narration (grep the spec for: json, lint, budget, anchor, tsc, .tsx, spec)
-- [ ] `npm run lint` passes with zero warnings for both formats
+- [x] All 12 scenes written through the console API (validate → stage2 → assemble → intake)
+- [x] Narration rewritten twice for breath — the first pass was still clipped and ran only 88s
+- [x] Zero banned words — grepped the assembled spec, narration and on-screen text both clean
+- [x] `npm run lint` passes with zero warnings for both formats
 
 ### Phase D · voice + render
-- [ ] Voiceover with `en-US-AvaMultilingualNeural`, `sync.mjs` re-timed
-- [ ] Stills reviewed for all 12 beats **after** the voiceover pass, not before (v1 lesson — see below)
-- [ ] `wide-dark` rendered and watched end to end; `short-dark` too
-- [ ] `thumb` + `cover` with real art
+- [x] Voiceover with `en-US-AvaMultilingualNeural`, `sync.mjs` re-timed both formats
+- [x] Stills reviewed for all 12 beats after the voiceover pass — caught the double-logo on the full-bleed hero
+- [x] `wide-dark` (98.3s) and `short-dark` (44.0s) rendered and watched frame by frame
+- [x] `thumb` + `cover` rendered with the real iAuteur logo
 
 ### Phase E · ship
-- [ ] README embed replaced with v2; `docs/media/` refreshed
-- [ ] `docs/STATE.md` updated
-- [ ] Committed and pushed to `main`
+- [x] README embed replaced with v2; `docs/media/` refreshed, v1 media removed
+- [x] `docs/STATE.md` updated
+- [x] Committed and pushed to `main`
 
 ---
 

@@ -25,7 +25,7 @@ On Windows, prefix Python with `PYTHONIOENCODING=utf-8` or the seals crash on `�
 | Path | What |
 |---|---|
 | `topics/<slug>/long.json` + `shorts.json` | one folder per video. **Gitignored** — local content, not repo code |
-| `src/scenes/` | the 148 scene components |
+| `src/scenes/` | the 151 scene components |
 | `src/designs/<pack>/` | 30 design packs (layout/motion overrides) |
 | `src/themes.ts` | 42 themes (38 dark + 4 light) |
 | `scripts/lib/manifest.mjs` | **the single source of truth** for every component's data contract + a valid `example` |
@@ -94,7 +94,28 @@ can be regenerated instead of rotting.
 - Remotion renders fetch Google Fonts per render. On a bad connection later scenes throw
   `[NetworkError]`. Kill leaked processes (`Get-Process node | Stop-Process -Force`) and retry.
 
-### 2026-07-25 · demo video — SHIPPED
+### 2026-07-25 · demo video v2 — SHIPPED (v1 superseded)
+
+**`topics/iauteur-what-you-get/`** — 98s wide (12 scenes) + 44s vertical (8 scenes), moderndark,
+`en-US-AvaMultilingualNeural`. This is what the README embeds. v1 (`iauteur-explains-itself`, 67s)
+still exists on disk but is superseded.
+
+**v1 was rejected on DIRECTION, not craft.** It explained how the tool works to someone who already
+knows what a linter is, with `tsc clean` and `long.json` on screen. v2 is a product ad about what you
+GET, for anyone who needs videos — zero jargon, real proof clips, the code-driven part demoted to a
+payoff. The full brief and the banned-word list live in [`docs/DEMO_VIDEO_PLAN.md`](DEMO_VIDEO_PLAN.md).
+
+**Three components were built for it**, depicting the real console flow: `TOPIC_INTAKE` (a title
+typing into a field), `PROMPT_HANDOFF` (the round trip to whichever assistant you already use) and
+`CHECK_SWEEP` (checks sweeping the answer, one catching a problem and repairing it). Count 148 → **151**.
+
+**Project-wide default voice is now `en-US-AvaMultilingualNeural`** — Christopher "sounds like an AI".
+
+Proof clips: `public/assets/video/sample_{market,product,tech}.mp4`, cut from this project's own
+renders and cropped to remove the channel watermark. Covering it with the iAuteur logo was the first
+attempt and produced TWO logos at full bleed; cropping to 1780×1001 (still 16:9) removes it entirely.
+
+### 2026-07-25 · demo video v1
 "iAuteur explaining itself" is written, voiced, rendered and embedded at the top of the README.
 `topics/iauteur-explains-itself/out/` holds `wide-dark.mp4` (67.5s, 10 scenes), `short-dark.mp4`
 (42.5s, 7 scenes), `thumb.png` and `cover.png`; a 1.5 MB web copy + poster live in `docs/media/`
