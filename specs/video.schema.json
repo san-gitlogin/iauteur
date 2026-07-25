@@ -425,7 +425,7 @@
                           "items": {
                             "type": "object"
                           },
-                          "description": "2-4 x {label<=14 (scene id), text<=40 (the line being measured), atWord}"
+                          "description": "2-4 x {label<=8 (scene id), text<=40 (the line being measured), atWord}"
                         },
                         "used": {
                           "type": "array",
