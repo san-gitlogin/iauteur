@@ -9,7 +9,7 @@ UPLOAD CADENCE: <fill: e.g. 2 long + 3 shorts weekly>
 CTA VOICE: warm, zero begging: "if this saved you a search, subscribe"
 SIGNATURE SIGN-OFF: <optional>
 DEFAULT DESIGN PACK: moderndark        # standing default when the user doesn't specify; MAY repeat — vary background/screenplay/scene mix instead
-DEFAULT VOICE: en-US-ChristopherNeural # edge-tts; the user's confirmed favourite
+DEFAULT VOICE: en-US-AvaMultilingualNeural # edge-tts; the user's confirmed favourite
 BRANDED ANCHOR PHRASE: "In this video, YOUR CHANNEL breaks down"   # verbatim opener of description paragraph 2, every video
 SLOGAN: <fill: fixed subscribe-CTA slogan>
 WATCH_NEXT: <fill: URL/title of current best performer — UPDATE whenever a video validates>

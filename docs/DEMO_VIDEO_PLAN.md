@@ -1,15 +1,42 @@
-# DEMO VIDEO PLAN — "iAuteur explaining itself"
+# DEMO VIDEO PLAN — v2 · "iAuteur explaining itself"
 
 The video that markets iAuteur, **made by iAuteur**, for the README embed and a LinkedIn post.
-Every scene is a component built for this video. The whole job is dogfooded **through the console**
-(`python webui/app.py`) — Component Lab for the builds, the 5-step flow for the spec, console render —
-because "you can do this in the product" is the claim being made.
 
-> **RESUME BLOCK.** This file is the source of truth for this job and survives context loss.
-> On pickup: (1) `npm run gate` must exit 0, (2) read LOCKED DECISIONS below — they were settled in
-> the LAW 0 interview and must not be re-litigated, (3) find the first unchecked box in PROGRESS,
-> (4) work ONE phase, audit it against real artifacts per CLAUDE.md LAW 10, tick the box, commit,
-> then continue. Never tick a box you have not verified by looking at the actual output.
+> **RESUME BLOCK.** This file is the source of truth and survives context loss.
+> On pickup: (1) `npm run gate` must exit 0, (2) read LOCKED DECISIONS — settled with the owner, do
+> not re-litigate, do not re-ask, (3) find the first unchecked box in PROGRESS, (4) work ONE phase,
+> audit it against real artifacts per CLAUDE.md LAW 10, tick the box, commit, continue.
+> Never tick a box you have not verified by looking at the actual output.
+
+---
+
+## WHY THERE IS A v2 (read this before writing a single line)
+
+v1 shipped (67s, commit `7aa7e31`) and the owner rejected the **direction**, not the craft:
+
+> "think of it like a 40-50 year old person sees the video, what the hell would he understand… you
+> should have directed the video for general audiences… what will another third person understand
+> just by seeing JSON, lint, etc… direct the video like an apple ad and not like a technical
+> tutorial. This needs extreme rework!"
+
+**What v1 got wrong.** It explained *how iAuteur works* to someone who already knows what a linter
+is. Narration was clipped to fit budgets until it stopped being English. On-screen text said `tsc
+clean`, `long.json`, `the linter`, `budgets`, `word anchors`.
+
+**What v2 must be.** A product ad about *what you get*, for anyone who needs videos — creators,
+teachers, marketers, founders. Emotional open, real proof, then the reveal. **The fact that it is
+code-driven is a payoff, not the premise.**
+
+### Hard rules for every line of v2
+
+1. **Zero jargon.** Banned on screen and in narration: JSON, spec, lint/linter, budget, anchor,
+   render, component, type-check, `.tsx`, file names, `tsc`. If a 50-year-old would not say it at
+   dinner, it does not go in.
+2. **Narration is spoken English**, not compressed telegram. Two natural sentences beat one clipped
+   one. Read every line aloud before accepting it.
+3. **Show the outcome before the mechanism.** Real videos on screen before any explanation of how.
+4. **The reveal lands last** and is *spoken*, expressively: everything you just watched, this video
+   included, was made this way.
 
 ---
 
@@ -17,56 +44,73 @@ because "you can do this in the product" is the claim being made.
 
 | | Decision |
 |---|---|
-| **Topic** | iAuteur explaining itself — the tool documents itself |
-| **Beats** | **10** = `HOOK` + **8 new components** + `OUTRO_CTA` (see the structural note below) |
-| **Components** | **All 8 middle beats are newly built.** Owner reaffirmed this after being shown the cost |
-| **Format** | both — `long.json` 16:9 ~90s (README) + `shorts.json` 9:16 ~60s (LinkedIn) |
-| **Design pack** | `moderndark` — the standing default; vary background + scene mix, not the pack |
-| **Voiceover** | yes — `en-US-ChristopherNeural` (drives word-anchored timing) |
-| **Watermark** | **iAuteur's own logo, NOT the channel logo.** Copy `brand/iauteur-icon-512.png` → `public/assets/iauteur_logo.png`, set `brand.logo: "img:iauteur_logo.png"`. No render-code change needed |
-| **Slug** | `iauteur-explains-itself` |
+| **Length** | **~2 minutes** (owner's pick over 60s / 90s) |
+| **Audience** | **Anyone who needs videos** — creators, teachers, marketers, founders. Not developers |
+| **Proof footage** | **Real clips from already-rendered videos, made neutral.** Owner's pick over raw clips or mockups |
+| **Beats** | **12** — the most `deep-dive` allows (9–12) without a scene-count warning |
+| **New components** | **3**, depicting the REAL console flow (owner's explicit ask, see below) |
+| **Voice** | **en-US-AvaMultilingualNeural** — now the project-wide default. Christopher "sounds like an AI" |
+| **Design pack** | `moderndark` · light twin `daylight` |
+| **Watermark** | iAuteur's own logo — `brand.logo: "img:iauteur_logo.png"` |
 
-### Structural note — why 10 beats and not 8
+### The owner's ask for the three new components
 
-`scripts/validate-beats.mjs` **errors** (does not warn) if beat 1 is not `HOOK` (line 30) or the last
-beat is not `OUTRO_CTA`/`RECAP` (line 32). Those two slots cannot be new components. The `explainer`
-screenplay allows 7–10 beats, so 10 beats yields exactly **8 new components in slots 2–9** while
-passing the gate. Do not "fix" this by editing the validator — CLAUDE.md LAW 5: fix specs, never rules.
+> "I wanna show them how easy it is, maybe create new components that accurately depict what we have
+> as flow in iAuteur. The title putting, content, then how we can ask any LLM anything, we get the
+> response, we just paste it here and do some validations. Those steps must be clear with newly
+> generated components, and animations."
 
-### Budget arithmetic (why ~20 words per beat)
+So the middle of the video is the **actual three-step flow**, animated, in plain words:
 
-90s × 30fps = 2700 frames. Duration is `max(60, words×FPW+30)` with `FPW=12`, so
-`(2700 − 10×30) / 12 ≈ 200 words` across 10 beats ≈ **20 words per beat** — exactly
-`sentenceMaxWords`. HOOK is capped at 17 words / 240 frames. Meters turn red past this; treat red as
-rejection.
+| # | TYPE | dataKey | Shows | Must NOT look like |
+|---|---|---|---|---|
+| 1 | `TOPIC_INTAKE` | `topicIntake` | Step 1 — a title being **typed** into a real field, plus the two or three choices beside it | `CODE_EDITOR`, `CHAT_MOCKUP`, any generic form |
+| 2 | `PROMPT_HANDOFF` | `promptHandoff` | Step 2 — copy the question → hand it to **any** AI you already use → the answer comes back and is pasted in. The round trip IS the content | `API_REQUEST_RESPONSE` (a wire protocol), `CHAT_MOCKUP` (a conversation) |
+| 3 | `CHECK_SWEEP` | `checkSweep` | Step 3 — the checks run down the answer, tick by tick; one catches a problem and it is fixed, not shipped | `TEST_RUNNER` (a CI log), `PIPELINE_GATE` (already exists, single gate) |
+
+`PROMPT_HANDOFF` carries the "**works with the AI you already pay for**" argument, which is one of
+the strongest selling points and appears nowhere in v1.
 
 ---
 
-## THE 8 NEW COMPONENTS
+## THE 12 BEATS
 
-Each earns its slot by demonstrating one specific claim, and each must be **visually distinct** from
-the existing type listed as its near-miss — a rename of something that already exists is a defect.
+| # | TYPE | Beat does | Jargon risk to watch |
+|---|---|---|---|
+| s01 | `HOOK` | You have something worth explaining; making a video shouldn't cost you a week | — |
+| s02 | `LIST_BUILD` | What it takes today: script, design every slide, record, edit, then do it again vertical | keep every item a plain verb phrase |
+| s03 | `TITLE_CARD` | The name lands: **iAuteur** | — |
+| s04 | `TOPIC_INTAKE` ★new | Step 1 — you type what it's about. That's the hard part done | never show a filename |
+| s05 | `PROMPT_HANDOFF` ★new | Step 2 — hand the question to any AI you already use; paste the answer back | say "the answer", never "the JSON" |
+| s06 | `CHECK_SWEEP` ★new | Step 3 — it checks the answer and fixes what's off before you ever see it | say "too crowded", never "over budget" |
+| s07 | `VIDEO_HERO` | And out comes **this** — a real video, full bleed | — |
+| s08 | `SCREENSHOT_CASCADE` | And these. Three real videos, three different subjects | — |
+| s09 | `WORD_ANCHOR_RAIL` | Every picture appears exactly when you say the word | plain words in `words[]`, plain mark labels |
+| s10 | `LAB_ASSEMBLY` | Need a picture that doesn't exist yet? It gets made for you | stages must be plain: designed / built / checked |
+| s11 | `ASPECT_TWIN` | One description. Big screen, phone, dark, light. No extra work | captions in plain English |
+| s12 | `OUTRO_CTA` | **The reveal**, spoken: everything you just watched — this video included | — |
 
-| # | Beat | TYPE | dataKey | Demonstrates | Must NOT look like |
-|---|---|---|---|---|---|
-| 1 | s02 | `SPEC_TO_FRAME` | `specToFrame` | The thesis: JSON resolves into a rendered frame | `SPEC_COMPARE` (a diff), `WINDOW_FRAME` |
-| 2 | s03 | `CAST_BOARD` | `castBoard` | A component is chosen per beat, with a stated reason | any plain row-list |
-| 3 | s04 | `LAB_ASSEMBLY` | `labAssembly` | The Component Lab: contract → code → wired → tsc ✓ | `CODE_EDITOR`, `CODE_DIFF` |
-| 4 | s05 | `BUDGET_METER_ROW` | `budgetMeter` | The linter counts words and refuses an overfull scene | `COST_METER`, `CONTEXT_METER` |
-| 5 | s06 | `WORD_ANCHOR_RAIL` | `anchorRail` | Payoffs land on the spoken word | any generic timeline |
-| 6 | s07 | `RESKIN_CAROUSEL` | `reskin` | One scene, many design packs | `CAROUSEL` (generic slides) |
-| 7 | s08 | `ASPECT_TWIN` | `aspectTwin` | One spec → 16:9 and 9:16, dark and light | `DEVICE_FRAME` |
-| 8 | s09 | `PIPELINE_GATE` | `pipelineGate` | The linter is the judge; a reject bounces back | `PIPELINE`, `PIPELINE_GANTT`, `CONFIDENCE_GATE` |
+Not in v2 (kept in the README, where the technical story belongs): `SPEC_TO_FRAME`, `CAST_BOARD`,
+`BUDGET_METER_ROW`, `RESKIN_CAROUSEL`, `PIPELINE_GATE`. They are good components; they are not what
+sells the product to this audience.
 
-**Adjacency is a hard gate.** No two adjacent beats may share a CONSOLIDATED family:
-`PIPELINE · gauge-surface · code-surface · stream-surface · framed-surface · node-graph ·
-zone-surface · row-list`. Assign each new component's `category`/`family` with this in mind and prove
-it with `node scripts/validate-beats.mjs <beats.json>` before writing any scene.
+**Word budget.** 12 beats × ~20 words ≈ 3,400 frames ≈ 113s before TTS re-timing. HOOK caps at 17
+words. Adjacency is safe: every new type is its own CONSOLIDATED family (`FAMILY[t] || t`).
 
-**Every build follows** `.claude/skills/tech-video-director/references/component_authoring.md` — six
-wiring files, theme tokens only (never hardcode colour/font/radius/px, so all 30 packs reskin it),
-BASE ≤38 frames, both-aspect render proofs, `tsc` gate, entry in `src/showcaseSpec.ts`. Assemble
-rolls back automatically if it does not compile.
+**Slug.** v1 is rendered, and topics are IMMUTABLE once rendered (`/api/intake` returns 409). v2
+goes to a fresh slug: **`iauteur-what-you-get`**.
+
+---
+
+## THE PROOF CLIPS (done)
+
+`public/assets/video/sample_{market,product,tech}.mp4` — 5s each, 1280×720, silent.
+
+Cut from already-rendered videos, then made neutral: those renders carry the **channel** watermark,
+so the iAuteur logo is composited exactly over it at 76px, fully covering it. Nothing traces back to
+the channel. Sources: `apple-overtakes-nvidia` @149s (green install-base grid),
+`gpt-live-full-duplex-voice` @39s (speed-vs-depth scale), `kimi-k3-deep-dive` @179s (sparse-expert
+grid). Originals untouched — `topics/*` is immutable once rendered.
 
 ---
 
@@ -74,94 +118,58 @@ rolls back automatically if it does not compile.
 
 Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 
-### Phase 0 · groundwork
-- [x] `npm run gate` exits 0 and `npm run typecheck` is clean — baseline confirmed before touching anything
-- [x] `public/assets/iauteur_logo.png` exists (copied from `brand/iauteur-icon-512.png`), provenance in `public/assets/SOURCES.json`
-- [x] `npm run new-topic -- iauteur-explains-itself "iAuteur — explaining itself"` scaffolded
-- [x] Beat sheet written — 10 beats, all within budget, **72.4s** total runtime (`out/tmp/flow/iauteur-explains-itself-beats.json`)
-- [x] `validate-beats.mjs` **PASSES** — `✓ BEAT SHEET OK (10 beats)`, zero warnings. Had to wait
-      until all 8 components existed, since the validator rejects any type absent from the manifest.
-      Sheet lives at `out/tmp/flow/iauteur-explains-itself-beats.json` (72.4s total runtime).
-- [x] Adjacency risk cleared: `linterFamilyOf = FAMILY[t] || t`, and `assemble` never writes to
-      `FAMILY`, so each new type is its own family and the CONSOLIDATED hard gate cannot trip
-- [x] Casting note recorded in `topics/iauteur-explains-itself/casting.md` — one stated reason per beat,
-      plus the near-miss component each new one had to beat, and the truth notes (LAW 3)
+### Phase A · groundwork
+- [x] Default voice switched to `en-US-AvaMultilingualNeural` across app.py, voiceover.py, app.js, CLAUDE.md, both skills
+- [x] `LAB_ASSEMBLY` connector alignment fixed — legs sat on the row's top edge instead of the node centre line
+- [x] All 8 v1 components confirmed wired: in the `MainComposition` registry, in `showcaseSpec.ts`, zero hardcoded colours (all 30 packs reskin them)
+- [x] Three neutral proof clips cut and stamped
+- [ ] Beat sheet written for slug `iauteur-what-you-get` and `validate-beats.mjs` passes
 
-### Phase 1–8 · build the 8 components (one per phase, in table order)
-For each of `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `WORD_ANCHOR_RAIL`,
-`RESKIN_CAROUSEL`, `ASPECT_TWIN`, `PIPELINE_GATE`:
+### Phase B · build the 3 new components (one per phase, fully audited before the next)
+- [ ] 1 · `TOPIC_INTAKE` — assembled · budgets in `lint-spec.mjs` · MIN/MAX/MIX · both aspects viewed · a second pack viewed · `tsc` clean · gate 0
+- [ ] 2 · `PROMPT_HANDOFF` — same audit
+- [ ] 3 · `CHECK_SWEEP` — same audit
 
-- [x] 1 · `SPEC_TO_FRAME` — assembled via the console backend · proofs viewed in moderndark wide+vertical and neobrutalism wide · MIN/MAX/MIX stress · `tsc` clean · gate 10/10 · budgets enforced in `lint-spec.mjs`
-- [x] 2 · `CAST_BOARD` — assembled · proofs viewed moderndark wide + neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · `chosenIndex` replaces a per-item `chosen` flag (the generated Item interface is fixed) · at-budget label fit corrected
-- [x] 3 · `LAB_ASSEMBLY` — assembled first try · proofs viewed moderndark wide + vertical, neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · layout re-sized FROM the budgets after MAX ellipsised every label, detail and the verdict in both aspects
-- [x] 4 · `BUDGET_METER_ROW` — assembled first try · proofs viewed moderndark wide + vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · row-id budget tightened 14→8 (a scene id is `s01`; reserving a 200px gutter to fit 14 was the wrong trade)
-- [x] 5 · `WORD_ANCHOR_RAIL` — assembled first try · proofs viewed moderndark wide + neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · word budget tightened 10→8 words / 14→10 chars so the rail stays a true single-line word axis instead of wrapping under a misleading linear bar
-- [x] 6 · `RESKIN_CAROUSEL` — assembled first try · proofs viewed moderndark wide (5 packs) + vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · per-tile corner/border personas so the tiles genuinely diverge rather than being recoloured clones
-- [x] 7 · `ASPECT_TWIN` — assembled first try · proofs viewed moderndark wide + neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · dark/light drawn as genuinely inverted surfaces rather than captioned · shared frame-row baseline so the two groups' captions align
-- [x] 8 · `PIPELINE_GATE` — assembled first try · proofs viewed moderndark wide + vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · return-path elbow rebuilt from positioned divs after a scaled SVG drew it as disconnected stubs; the vertical elbow needed the same treatment separately
+### Phase C · author
+- [ ] All 12 scenes written through the console API (validate → stage2 → assemble → intake)
+- [ ] **Read every narration line aloud.** Any line that isn't natural English gets rewritten
+- [ ] Zero banned words on screen or in narration (grep the spec for: json, lint, budget, anchor, tsc, .tsx, spec)
+- [ ] `npm run lint` passes with zero warnings for both formats
 
-Per-component audit, every time: assemble reports ok · `npm run typecheck` clean · `npm run gate`
-still 0 · a proof still viewed in **both** aspects · looks right in `moderndark` **and** one other
-pack (proves tokens, not hardcoding) · appears in `src/showcaseSpec.ts`.
+### Phase D · voice + render
+- [ ] Voiceover with `en-US-AvaMultilingualNeural`, `sync.mjs` re-timed
+- [ ] Stills reviewed for all 12 beats **after** the voiceover pass, not before (v1 lesson — see below)
+- [ ] `wide-dark` rendered and watched end to end; `short-dark` too
+- [ ] `thumb` + `cover` with real art
 
-### Phase 9 · author the spec — DONE
-- [x] Scenes written for all 10 beats **through the console's own HTTP API** — `/api/flow/validate`
-      → `/api/flow/stage2` (fill prompt) → fill reply → `/api/flow/assemble` → `/api/intake`, exactly
-      the calls the browser makes. `shorts.json` authored the same way, 7 beats
-- [x] `brand.logo: "img:iauteur_logo.png"` present · `brand.design: "moderndark"` — this needed a
-      product fix first: **assemble never wrote `brand.logo` at all** (see the bug list below)
-- [x] `npm run lint` passes for both, with **zero warnings** (the fleet has 13 pre-existing rejections
-      in older topics, untouched by this job)
-- [x] No anchor in the last 15% of any scene — every anchor lands inside the first 55%
-
-### Phase 10 · voice + render — DONE
-- [x] Voiceover generated (`en-US-ChristopherNeural`, the script's own default) and `sync.mjs`
-      re-timed both specs to real audio (`timingSource: tts`; 72.0s → **67.5s**, 43.8s → **42.5s**)
-- [x] Every beat reviewed as a rendered still in both aspects — that is what caught the s06 defect
-- [x] `wide-dark` rendered and watched end to end (frames pulled at every cut in *and* cut out)
-- [x] `short-dark` rendered and watched the same way
-- [x] `thumb` + `cover` rendered; the thumbnail uses the real iAuteur logo, not a lucide glyph
-
-### Phase 11 · ship — DONE
-- [x] Video embedded at the top of `README.md` above the badges (poster linked to the mp4 — GitHub
-      will not play a repo-relative `<video>` inline; see the note in `docs/STATE.md`)
-- [x] `docs/STATE.md` updated with the shipped video and the four bugs the job surfaced
-- [x] Counts refreshed from the manifest (`MANIFEST_TYPES.length` = 148), 6 places in `README.md`
-- [x] Committed and pushed to `main`
+### Phase E · ship
+- [ ] README embed replaced with v2; `docs/media/` refreshed
+- [ ] `docs/STATE.md` updated
+- [ ] Committed and pushed to `main`
 
 ---
 
-## WHAT DOGFOODING FOUND (the real return on this job)
+## PAID-FOR LESSONS (v1 — all of these cost real time)
 
-Authoring through the console instead of by hand surfaced four defects that every gate was blind to.
-All four are fixed and pinned by tests in commit `c02dbee` (plus the `WORD_ANCHOR_RAIL` fix after).
+- **`tsc` and the gate never caught a single visual defect.** Every one was found by rendering a
+  still and looking at it.
+- **Proof before the voiceover pass is not proof.** `sync.mjs` rescales every `atWord` to a
+  *fractional* value to re-time onto real audio. A component that uses `atWord` as an integer
+  position key silently breaks — `WORD_ANCHOR_RAIL` lost every mark and the pre-sync stills looked
+  perfect. Round for position, keep the raw value for timing.
+- **`component-flow.mjs assemble` never writes text budgets** to `lint-spec.mjs` (only `DYNAMIC`).
+  Hand-write a validation block per component, sized to the NARROW (vertical) container.
+- **Its generated `<Name>Item` interface is fixed** (`label/text/title/sub/detail/color/asset/atWord`).
+  Anything else per item moves to a top-level field — usually better design anyway.
+- **The Fit guard truncates what the Budget guard allows.** Size cells from budget arithmetic, not
+  by eye, then render the MAX fixture and look.
+- **A flex row aligned `flex-start` puts a 4px connector on the row's top edge**, not on the node
+  centre line — offset it by `(nodeD - thickness) / 2`. This shipped in v1's `LAB_ASSEMBLY`.
+- Editing `manifest.mjs` by hand desyncs `specs/video.schema.json` — `npm run schema && npm run types`.
+- Chain commands with `&&`, never `;` — a v1 commit landed on a red gate that way.
 
-| # | Defect | Blast radius |
-|---|---|---|
-| 1 | `assembleSpec` never wrote `brand.logo` | **29 specs across 16 topics** rendered with no watermark, no thumbnail stamp, no OUTRO circle |
-| 2 | Stage-2 dropped `onePayoff`/`openLoop`/`analogy`/`topicAxes` | every two-paste video lost all four and warned on `topicAxes` |
-| 3 | `specLines` promised preserved indent but lacked `preserveWs` | `SPEC_TO_FRAME`'s JSON always drew flush-left |
-| 4 | `sync.mjs` makes `atWord` fractional; `WORD_ANCHOR_RAIL` keyed a position off it | every mark vanished from any TTS-synced render |
+## OPEN (does not block)
 
-Nº4 is the one worth remembering: **the proof stills were rendered before the voiceover pass and
-looked perfect.** The defect only existed after `sync.mjs`, so it took extracting frames from the
-finished mp4 to see it. Proof before sync is not proof.
-
----
-
-## OPEN QUESTION (does not block Phase 0–8)
-
-**Channel references, before the repo goes public.** The owner will publish this repo and post the
-video on LinkedIn, but does not want the YouTube channel connected to it. These tracked files name it
-in plain text: `.claude/skills/tech-video-director/references/channel_profile.md`, `CLAUDE.md`,
-`public/assets/channel_logo.png`, `scripts/gen-upload-kit.mjs`, `briefs/fable-brief.md` and 4 example
-JSONs. `topics/*` is gitignored, so no actual video content is exposed. Decide before flipping
-visibility; the demo video itself is already unaffected because it uses the iAuteur logo.
-
-## RISK ACCEPTED
-
-Eight brand-new, never-battle-tested components in the video that represents the project publicly is
-the highest-risk configuration available. It was recommended to build 3 and cast 5 from never-used
-existing components; the owner chose all-new after seeing that trade-off, which is recorded here so
-the decision is not silently revisited. Mitigation: build them **one at a time**, each fully audited
-and committed before the next, so a bad component is caught in isolation rather than at render time.
+**Channel references before the repo goes public.** `channel_profile.md`, `CLAUDE.md`,
+`public/assets/channel_logo.png`, `scripts/gen-upload-kit.mjs` and `briefs/` name YOUR CHANNEL in
+plain text. `topics/*` is gitignored so no video content is exposed. Decide before flipping visibility.

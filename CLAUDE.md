@@ -13,13 +13,13 @@ When the user asks for a video — ANY phrasing — your FIRST action, before sc
 1. **format** — long / shorts / both (default: both)
 2. **target minutes** (default: 4–5 for long)
 3. **design pack** (default: **moderndark** — the user's standing default; vary the background + scene mix between consecutive videos so they don't look identical)
-4. **voiceover** — yes/no + voice (default: **en-US-ChristopherNeural**, the user's confirmed favourite)
+4. **voiceover** — yes/no + voice (default: **en-US-AvaMultilingualNeural**, the user's confirmed favourite — it reads as a person, not a synthesiser)
 5. **thumbnail art** — real brand logo via `si:` / user-supplied image / set-piece still (NEVER default to a generic lucide glyph)
 Show the default on every option. "Use defaults" fills the rest — but the user must be ASKED, never silently defaulted. Skip only the questions their request already answered.
 
 ## STANDING DEFAULTS (the user's own — override only if they say so)
 - Channel: **YOUR CHANNEL** · logo: `public/assets/channel_logo.png` (source files in `logo/`)
-- Design/theme when unspecified: **moderndark** · Voice: **en-US-ChristopherNeural** (edge-tts)
+- Design/theme when unspecified: **moderndark** · Voice: **en-US-AvaMultilingualNeural** (edge-tts)
 - **`brand.logo: "img:channel_logo.png"` in EVERY spec** — it drives the in-video watermark (bottom-right wide / top-left vertical), the thumbnail + cover stamp, and the OUTRO_CTA subscribe circle. new-topic scaffolds it; never delete it.
 
 ## LAW 0c — COMPONENTS ARE CAST PER BEAT, NEVER ONE-SHOT

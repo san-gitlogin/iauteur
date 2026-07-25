@@ -59,7 +59,7 @@ Ask these; anything unanswered takes the default. These mirror `webui/app.py` ex
 | **minutes** | number | — (optional) | 8+ min → documentary + chapters |
 | **notes** | free text | — (optional) | constraints, must-haves |
 | **source** | pasted article / URL text | — (optional) | TRUTH grounding; no source → evergreen facts only or `MISSING:` |
-| **voice** (voiceover) | any edge-tts voice | **en-US-ChristopherNeural** | 320+ voices, all languages, see Voiceover |
+| **voice** (voiceover) | any edge-tts voice | **en-US-AvaMultilingualNeural** | 320+ voices, all languages, see Voiceover |
 
 **The 30 design packs:** cyberpunk, swiss, neobrutalism, vaporwave, bauhaus, luxury,
 terminalcli, retro, material, neumorphism, artdeco, monochrome, academia, newsprint,
@@ -131,7 +131,7 @@ Fix every linter error and address every critique warning by editing the SPEC (n
 ### 6 · Voiceover  (UI: voice + kind + Install/Generate) — edge-tts, optional
 Install once (UI "Install / upgrade Edge-TTS"):  `py -m pip install --upgrade "edge-tts>=7,<8"`
 List voices (UI dropdown, 320+ across every language): `py -c "import asyncio,edge_tts;print('\n'.join(sorted(v['ShortName'] for v in asyncio.run(edge_tts.list_voices()))))"`
-Then, per format (`<kind>` = long | shorts; voice optional, default en-US-ChristopherNeural):
+Then, per format (`<kind>` = long | shorts; voice optional, default en-US-AvaMultilingualNeural):
 ```
 py scripts/voiceover.py topics/<slug>/<kind>.json <slug>_<kind> [voice]
 node scripts/sync.mjs topics/<slug>/<kind>.json out/tts/<slug>_<kind>_timestamps.json <slug>_<kind>

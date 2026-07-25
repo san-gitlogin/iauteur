@@ -1091,7 +1091,7 @@ async function populateVoices() {
   let voices = null;
   try { voices = (await (await fetch("/api/voices")).json()).voices; } catch { voices = null; }
   if (!voices || !voices.length)
-    voices = (CONFIG.voices || ["en-US-ChristopherNeural"]).map((n) => ({ name: n, locale: n.split("-").slice(0, 2).join("-"), gender: "" }));
+    voices = (CONFIG.voices || ["en-US-AvaMultilingualNeural"]).map((n) => ({ name: n, locale: n.split("-").slice(0, 2).join("-"), gender: "" }));
   VOICES_ALL = voices;
   const langs = [...new Set(voices.map((v) => v.locale))].sort();
   const ordered = [...langs.filter((l) => l.startsWith("en")), ...langs.filter((l) => !l.startsWith("en"))];
@@ -1111,7 +1111,7 @@ function renderVoiceOptions() {
   // name sorts first. The full edge-tts list is alphabetical, so the default was
   // landing on en-US-AnaNeural — and a voiced beat preview speaks through THIS
   // control, so a wrong default is heard, not just displayed.
-  const preferred = (CONFIG && CONFIG.voices && CONFIG.voices[0]) || "en-US-ChristopherNeural";
+  const preferred = (CONFIG && CONFIG.voices && CONFIG.voices[0]) || "en-US-AvaMultilingualNeural";
   if ([...sel.options].some((o) => o.value === preferred)) sel.value = preferred;
 }
 async function onVoiceover() {

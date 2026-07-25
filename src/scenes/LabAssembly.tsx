@@ -137,8 +137,11 @@ export const LabAssembly: React.FC<{scene: Scene}> = ({scene}) => {
         position: 'relative',
         overflow: 'hidden',
         flex: 'none',
-        // in vertical the rail runs under the node column, not the labels
+        // The row is flex-start aligned so every label block shares one baseline — which
+        // means a 4px leg would sit level with the TOP of the circles instead of joining
+        // their centres. Offset it onto the node's centre line in each direction.
         marginLeft: vertical ? (nodeD - 4 * scale) / 2 : 0,
+        marginTop: vertical ? 0 : (nodeD - 4 * scale) / 2,
       }}
     >
       <div

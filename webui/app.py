@@ -61,7 +61,7 @@ CHANNEL_DEFAULT = "YOUR CHANNEL"
 # the network is down); the console fetches the FULL 320+ catalogue (every
 # language) live via all_edge_voices() below.
 VOICES = [
-    "en-US-ChristopherNeural", "en-US-AriaNeural", "en-US-GuyNeural",
+    "en-US-AvaMultilingualNeural", "en-US-ChristopherNeural", "en-US-AriaNeural", "en-US-GuyNeural",
     "en-US-JennyNeural", "en-US-EricNeural", "en-GB-RyanNeural",
     "en-GB-SoniaNeural", "en-IN-PrabhatNeural", "en-IN-NeerjaNeural",
     "en-AU-WilliamNeural",

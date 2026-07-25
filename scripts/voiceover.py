@@ -2,7 +2,7 @@
 """Voiceover generation with word-level timestamps via edge-tts (free).
 Setup once:  pip install edge-tts
 Usage:       python scripts/voiceover.py specs/long.json long [voice]
-Voices:      en-US-ChristopherNeural (default) · en-IN-PrabhatNeural · en-US-AriaNeural
+Voices:      en-US-AvaMultilingualNeural (default) · en-US-ChristopherNeural · en-IN-PrabhatNeural
              list all: edge-tts --list-voices
 Outputs:     public/audio/<prefix>_<sceneId>.mp3  +  out/tts/<prefix>_timestamps.json
 NOTE: needs internet (Microsoft Edge TTS endpoint). Run on your machine.
@@ -20,7 +20,7 @@ for _s in (sys.stdout, sys.stderr):
 
 async def main():
     spec_path, prefix = sys.argv[1], sys.argv[2]
-    voice = sys.argv[3] if len(sys.argv) > 3 else "en-US-ChristopherNeural"
+    voice = sys.argv[3] if len(sys.argv) > 3 else "en-US-AvaMultilingualNeural"
     spec = json.load(open(spec_path, encoding="utf-8"))
     os.makedirs("public/audio", exist_ok=True)
     os.makedirs("out/tts", exist_ok=True)
