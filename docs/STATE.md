@@ -96,10 +96,12 @@ can be regenerated instead of rotting.
 
 ## Open threads
 
-- **Demo video** — "iAuteur explaining itself", to be made *by* iAuteur, for the README + LinkedIn.
-  Decided: iAuteur's own logo as the watermark (`brand/iauteur-icon-512.png` → `public/assets/`),
-  **not** the channel logo. Needs the CLAUDE.md LAW 0 interview before scaffolding. See
-  `docs/DEMO_VIDEO_PLAN.md`.
+- **Demo video** — "iAuteur explaining itself", made *by* iAuteur, for the README + LinkedIn.
+  LAW 0 interview is **done** and every decision is locked in **[`docs/DEMO_VIDEO_PLAN.md`](DEMO_VIDEO_PLAN.md)**
+  — that file is the source of truth for the job and carries a resume block + progress checkboxes, so
+  pick it up there. Headline: 10 beats (`HOOK` + 8 newly-built components + `OUTRO_CTA`, because the
+  validator pins the first and last types), moderndark, ChristopherNeural, iAuteur's own logo as the
+  watermark. When it ships the component count goes 140 → 148.
 - **Repo going public** — the owner intends to publish. Note that `channel_profile.md`, `CLAUDE.md`,
   `public/assets/channel_logo.png`, `scripts/gen-upload-kit.mjs` and `briefs/` name a specific
   YouTube channel in plain text. `topics/*` is gitignored, so no actual video content is exposed.
