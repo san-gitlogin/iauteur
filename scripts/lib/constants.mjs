@@ -47,6 +47,7 @@ export const TYPES = [
   'CHECK_SWEEP',
   'APP_WINDOW',
   'PROMPT_HANDOUT',
+  'CHAT_TRIO',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

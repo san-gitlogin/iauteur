@@ -16,7 +16,24 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  PROMPT_HANDOUT: {
+export const MANIFEST = {  CHAT_TRIO: {
+    category: "mockup", family: "chat-trio", data_key: "chatTrio",
+    purpose: "Two to three assistant windows side by side, each receiving the SAME pasted message, thinking, and returning an answer — the literal screens, showing that any one of them will do.",
+    use_when: "The point is that the work is portable across assistants. Show the three windows doing it, never an arrow to a box labelled with brand names.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      assistants: {t: 'items', req: true, note: "2-3 x {label<=14 (the assistant's name), atWord}"},
+      pasted: {t: 'string', req: true, max: 34, note: "the message pasted into each window"},
+      answerLabel: {t: 'string', max: 22, note: "what comes back, e.g. 'your video, written'"},
+      answerLines: {t: 'number', note: "2-5 lines drawn in the returned answer block"},
+      footNote: {t: 'string', max: 42, note: "the takeaway under the windows"},
+      color: {t: 'string', note: "semantic colour for the returned answer"},
+      source: {t: 'string', max: 58, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "word from narration the answers come back on"},
+    },
+    example: {chatTrio: {"headline":"Any one of them [will do]","assistants":[{"label":"ChatGPT","atWord":2},{"label":"Claude","atWord":3},{"label":"Gemini","atWord":4}],"pasted":"Make a two minute video about…","answerLabel":"your video, written","answerLines":4,"footNote":"the one you already pay for is fine","color":"green","atWord":7}},
+  },
+  PROMPT_HANDOUT: {
     category: "framed", family: "prompt-handout", data_key: "promptHandout",
     purpose: "A block of text an app hands you to take somewhere else, with a real Copy button that clicks, confirms, and leaves the text selected — the literal moment of copying, not a diagram of a hand-off.",
     use_when: "Someone has to carry something out of one tool and into another. Show the panel and the button, never an arrow between two boxes.",

@@ -338,7 +338,8 @@
               "PROMPT_HANDOFF",
               "CHECK_SWEEP",
               "APP_WINDOW",
-              "PROMPT_HANDOUT"
+              "PROMPT_HANDOUT",
+              "CHAT_TRIO"
             ]
           },
           "narration": {
@@ -408,6 +409,73 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CHAT_TRIO"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "chatTrio": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "assistants": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-3 x {label<=14 (the assistant's name), atWord}"
+                        },
+                        "pasted": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the message pasted into each window"
+                        },
+                        "answerLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what comes back, e.g. 'your video, written'"
+                        },
+                        "answerLines": {
+                          "type": "number",
+                          "description": "2-5 lines drawn in the returned answer block"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 42,
+                          "description": "the takeaway under the windows"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the returned answer"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 58,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word from narration the answers come back on"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

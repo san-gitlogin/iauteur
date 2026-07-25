@@ -1436,7 +1436,29 @@ export interface PromptHandoutData {
   source?: string;
   atWord?: number;
 }
+export interface ChatTrioItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface ChatTrioData {
+  headline?: string;
+  assistants?: ChatTrioItem[];
+  pasted?: string;
+  answerLabel?: string;
+  answerLines?: number;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  chatTrio?: ChatTrioData;
   promptHandout?: PromptHandoutData;
   appWindow?: AppWindowData;
   checkSweep?: CheckSweepData;

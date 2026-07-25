@@ -161,9 +161,11 @@ import {PromptHandoff} from './scenes/PromptHandoff';
 import {CheckSweep} from './scenes/CheckSweep';
 import {AppWindow} from './scenes/AppWindow';
 import {PromptHandout} from './scenes/PromptHandout';
+import {ChatTrio} from './scenes/ChatTrio';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  CHAT_TRIO: ChatTrio,
   PROMPT_HANDOUT: PromptHandout,
   APP_WINDOW: AppWindow,
   CHECK_SWEEP: CheckSweep,
