@@ -27,7 +27,8 @@ Three tests before you cast a beat:
    a video needs a player, an app needs a window. A near-enough component makes the claim itself
    look unconvincing.
 
-Say the words the audience says. For vertical video: **shorts**, **reels**, **devices** — never "phone".
+Name outputs the way the audience names them. The vertical cut is **shorts content / shorts / reels**
+— never "a video for phones". Naming an output after hardware loses the creators you are talking to.
 
 ## Themes (set "brand": {"theme": X}; choose by topic mood; vary ACROSS videos)
 | Theme | Mood | Use for |
@@ -390,3 +391,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | TOPIC_INTAKE | The point is that the input is trivially small. Show the form, not the output. | headline≤48, fieldLabel≤20, typed≤44, choices, caption≤38, color, source≤58, atWord |
 | PROMPT_HANDOFF | The point is portability and a copy-out / paste-back hand-off, not a conversation and not a wire protocol. | headline≤48, outLabel≤20, backLabel≤20, assistants, appLabel≤16, footNote≤40, color, source≤58, atWord |
 | CHECK_SWEEP | The point is that quality is enforced automatically before anyone sees the result, and that a caught problem is repaired, not reported. | headline≤48, subjectLabel≤22, checks, caughtIndex, caughtNote≤26, fixNote≤30, verdict≤24, color, source≤58, atWord |
+| APP_WINDOW | You are showing a step someone performs IN an app. Always prefer this over an abstract flow diagram of the same step. | headline≤48, windowTitle≤26, steps, activeStep, screenTitle≤26, fields, typeIndex, button≤18, buttonDone≤18, caption≤40, color, source≤58, atWord |

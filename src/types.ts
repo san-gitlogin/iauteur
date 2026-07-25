@@ -1400,7 +1400,33 @@ export interface CheckSweepData {
   source?: string;
   atWord?: number;
 }
+export interface AppWindowItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface AppWindowData {
+  headline?: string;
+  windowTitle?: string;
+  steps?: string[];
+  activeStep?: number;
+  screenTitle?: string;
+  fields?: AppWindowItem[];
+  typeIndex?: number;
+  button?: string;
+  buttonDone?: string;
+  caption?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  appWindow?: AppWindowData;
   checkSweep?: CheckSweepData;
   promptHandoff?: PromptHandoffData;
   topicIntake?: TopicIntakeData;

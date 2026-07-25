@@ -45,6 +45,7 @@ export const TYPES = [
   'TOPIC_INTAKE',
   'PROMPT_HANDOFF',
   'CHECK_SWEEP',
+  'APP_WINDOW',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

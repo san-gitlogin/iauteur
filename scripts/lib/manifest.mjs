@@ -16,7 +16,28 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  CHECK_SWEEP: {
+export const MANIFEST = {  APP_WINDOW: {
+    category: "framed", family: "app-window", data_key: "appWindow",
+    purpose: "A real application window doing one real thing: title bar, a numbered step rail down the side with one step active, and a content area of labelled fields — one of which types itself in — plus a button that visibly clicks. Shows the actual screen a person uses, not a diagram of the workflow.",
+    use_when: "You are showing a step someone performs IN an app. Always prefer this over an abstract flow diagram of the same step.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      windowTitle: {t: 'string', req: true, max: 26, note: "the app's own title bar text"},
+      steps: {t: 'string[]', note: "2-5 step names for the rail, each <=13 chars"},
+      activeStep: {t: 'number', note: "1-based index of the step being shown"},
+      screenTitle: {t: 'string', max: 26, note: "the heading inside the content area"},
+      fields: {t: 'items', req: true, note: "1-3 x {label<=16 (the field), text<=38 (its value), atWord}"},
+      typeIndex: {t: 'number', note: "0-based index of the field whose value TYPES itself in; omit for none"},
+      button: {t: 'string', max: 18, note: "a button that visibly clicks at the scene anchor"},
+      buttonDone: {t: 'string', max: 18, note: "what the button says after the click"},
+      caption: {t: 'string', max: 40, note: "the takeaway under the window"},
+      color: {t: 'string', note: "semantic colour for the active step and the button"},
+      source: {t: 'string', max: 58, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "word from narration the typing finishes and the button clicks on"},
+    },
+    example: {appWindow: {"headline":"Step one: [say what it's about]","windowTitle":"iAuteur","steps":["Topic","Design","Script","Voice","Render"],"activeStep":1,"screenTitle":"What's your video about?","fields":[{"label":"Title","text":"How your money actually moves","atWord":3},{"label":"In a line","text":"For people who never studied it","atWord":6}],"typeIndex":0,"button":"Continue","buttonDone":"Saved","caption":"that is the whole of step one","color":"blue","atWord":9}},
+  },
+  CHECK_SWEEP: {
     category: "diagram", family: "check-sweep", data_key: "checkSweep",
     purpose: "A run of checks sweeping down a piece of work, ticking one by one, where exactly one catches a problem and is then FIXED rather than shipped — the recovery is the content, not the failure.",
     use_when: "The point is that quality is enforced automatically before anyone sees the result, and that a caught problem is repaired, not reported.",

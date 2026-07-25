@@ -199,7 +199,7 @@ const DIRECTION = [
   '- Narration is SPOKEN ENGLISH, not compressed telegram. Two natural sentences beat one clipped one. Read each line aloud in your head; if it does not sound like a person talking, rewrite it.',
   '- **DEPICT, DO NOT DIAGRAM.** The picture has to carry the idea on its own, in the seconds it is on screen — the narration is not a rescue. Prefer the component that draws the REAL THING (a window, a screen, a player, a document) over the one that draws a *diagram of* the thing (labelled boxes joined by arrows). A viewer decodes a picture of a screen instantly and an abstract graph slowly, if at all.',
   '- Corollary: never demonstrate an OUTPUT with a component built for something else. Showing a video? Use a player. Showing an app? Use a window. A near-enough component makes the claim itself look unconvincing.',
-  '- Say the word your audience uses. For vertical video that is "shorts", "reels" or "devices" — never "phone".',
+  '- Name outputs the way the audience names them. The vertical cut is **shorts content / shorts / reels** — never "a video for phones". Naming an output after hardware loses the creators you are talking to.',
 ].join('\n');
 
 const laws = [

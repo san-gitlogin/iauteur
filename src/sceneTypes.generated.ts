@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'APP_WINDOW'
   | 'CHECK_SWEEP'
   | 'PROMPT_HANDOFF'
   | 'TOPIC_INTAKE'
@@ -169,6 +170,24 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type AppWindowScene = SceneCommon<'APP_WINDOW'> & { data: {
+    appWindow: {
+      headline?: string;
+      windowTitle: string;
+      steps?: string[];
+      activeStep?: number;
+      screenTitle?: string;
+      fields: Array<Record<string, unknown>>;
+      typeIndex?: number;
+      button?: string;
+      buttonDone?: string;
+      caption?: string;
+      color?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
 
 export type CheckSweepScene = SceneCommon<'CHECK_SWEEP'> & { data: {
     checkSweep: {
@@ -1595,6 +1614,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  APP_WINDOW: AppWindowScene;
   CHECK_SWEEP: CheckSweepScene;
   PROMPT_HANDOFF: PromptHandoffScene;
   TOPIC_INTAKE: TopicIntakeScene;
@@ -1753,6 +1773,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | AppWindowScene
   | CheckSweepScene
   | PromptHandoffScene
   | TopicIntakeScene

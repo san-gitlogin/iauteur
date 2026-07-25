@@ -34,8 +34,9 @@ Corollaries, all of them hard rules:
 1. **Never demo the product's output with a component built for something else.** v2 showed the
    sample videos through `SCREENSHOT_CASCADE` (a screenshot stack). *"The clarity breaks over there,
    that is a clear no when we are showing a demo of what we get."* A video needs a **player**.
-2. **Never say "phone."** Say **devices**, **shorts**, **reels**. The audience includes creators who
-   want shorts out of one idea, and that word is what attracts them.
+2. **Never call the vertical cut "a video for phones."** That output is **shorts content**, **shorts**
+   or **reels** — the words creators actually use, and what attracts them. (The word "phone" is fine
+   when it genuinely means the device; it is the OUTPUT that must never be named after hardware.)
 3. **Zero developer jargon** on screen or in narration: JSON, spec, lint, budget, anchor, render,
    component, type-check, `.tsx`, file names, `tsc`.
 4. **Narration alone is not the deliverable.** If the picture doesn't carry the same idea in the
@@ -88,7 +89,7 @@ component the owner called out.
 | s07 | `VIDEO_PLAYER` ★new | Preview any single scene right there, before rendering anything | — |
 | s08 | `SCENE_FORGE` ★new | Nothing fits this scene? One gets made **for that scene** — every scene can have its own | — |
 | s09 | `APP_WINDOW` ★new | Pick the voice, hear it | — |
-| s10 | `ASPECT_TWIN` | Render → widescreen and vertical, dark and light. **Shorts and reels from the same idea** | existing; relabel to devices/shorts/reels |
+| s10 | `ASPECT_TWIN` | Render → widescreen and vertical, dark and light. **Shorts and reels from the same idea** | existing; captions say "shorts" / "reels", never "for phones" |
 | s11 | `VIDEO_PLAYER` ★new | The real videos, playing in a real player | the samples, done properly this time |
 | s12 | `OUTRO_CTA` | The reveal, spoken | — |
 
@@ -134,7 +135,7 @@ Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 ### Phase C · author
 - [ ] Beat sheet for `iauteur-how-easy`, validates clean
 - [ ] All 12 scenes through the console API (validate → stage2 → assemble → intake)
-- [ ] Grep the spec: zero jargon **and zero occurrences of "phone"**
+- [ ] Grep the spec: zero jargon, and the vertical output is called **shorts/reels**, never "for phones"
 - [ ] `npm run lint` passes with zero warnings, both formats
 
 ### Phase D · voice + render
