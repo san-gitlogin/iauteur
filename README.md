@@ -6,7 +6,7 @@
   <a href="https://remotion.dev"><img alt="Built with Remotion" src="https://img.shields.io/badge/built%20with-Remotion-0B84F3"></a>
   <img alt="Node" src="https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white">
-  <img alt="136 components" src="https://img.shields.io/badge/components-136-E8A22E">
+  <img alt="140 components" src="https://img.shields.io/badge/components-140-E8A22E">
   <img alt="30 design packs" src="https://img.shields.io/badge/design%20packs-30-E8A22E">
   <img alt="42 themes" src="https://img.shields.io/badge/themes-42-E8A22E">
   <img alt="Works with any LLM" src="https://img.shields.io/badge/works%20with-any%20LLM-8957E5">
@@ -14,65 +14,122 @@
 
 Turn a **topic** into a finished tech‑explainer video. You (or any LLM) describe the video as a
 **JSON spec**; [Remotion](https://remotion.dev) renders it to MP4 — 16:9 long‑form **and** 9:16 shorts,
-each in **dark and light**. The project ships a large, audited component library (**136 scene types**)
+each in **dark and light**. The project ships a large, audited component library (**140 scene types**)
 that automatically reskins across **30 design packs** and **42 themes**.
 
 > **The JSON is the movie.** `topics/<slug>/long.json` + `shorts.json` → Remotion renders exactly what
 > the spec says. Scene components are deterministic and read theme tokens, so one spec looks native in
 > every design pack and in dark or light with zero extra work.
 
-**Model‑agnostic by design:** the "director" that writes the JSON is *any* LLM following a plain‑Markdown
-skill (`.claude/skills/tech-video-director/`). Nothing in this repo calls a model — so it works with GitHub
-Copilot, Claude, Cursor, or a **local LLM** (Ollama / LM Studio) equally. See [Working with any LLM](#working-with-any-llm-including-local).
+**This is not a stock‑footage generator.** Every scene is a real, hand‑built animated component — charts,
+diagrams, device mockups, timelines — that reads theme tokens and re‑skins itself. A linter counts your
+words against per‑component budgets and refuses to render an overfull scene, and animations are anchored
+to individual **words** of the narration, so the payoff lands exactly when it's spoken.
+
+**Bring your own model.** The director that writes the JSON is *any* LLM. Point the console at your own
+API key (OpenAI, Azure, Groq, OpenRouter, Together, Hugging Face, or a **local Ollama**) and it runs the
+whole authoring loop for you — or use no key at all and paste prompts into whatever chat you already have
+open. Both paths are first‑class; see [the two ways to author](#the-two-ways-to-author).
 
 ---
 
-## 🎬 Make your first video — the simple way
+## 🎬 Make your first video
 
-New here? Follow these steps in order. You do **not** need to understand code. You type a few
-lines once, then mostly click buttons and copy‑paste.
+You do **not** need to understand code. Install two things, run one command, then mostly click buttons.
 
-**What you need first (one‑time, ~10 minutes):**
-1. Install **Node.js** — go to [nodejs.org](https://nodejs.org), download the big green "LTS" button, click through the installer.
-2. Install **Python** — go to [python.org/downloads](https://www.python.org/downloads/), download, install (on Windows, tick **"Add Python to PATH"** during install).
-3. You also need an AI chat you already use — like **Claude** (claude.ai) or **GitHub Copilot Chat**. That's the "writer."
+### 1 · Install the two prerequisites (once, ~10 minutes)
 
-**Set it up (type these once):** open the project folder in a terminal, then type each line and press Enter:
-```
+| | What | Where |
+|---|---|---|
+| 1 | **Node.js** — click the big green **LTS** button and run the installer | [nodejs.org](https://nodejs.org) |
+| 2 | **Python** — on Windows, tick **"Add Python to PATH"** during install | [python.org/downloads](https://www.python.org/downloads/) |
+
+Then, in a terminal opened at the project folder, run these two lines once:
+
+```bash
 npm install
 pip install -r webui/requirements.txt
 ```
 
-**Now make a video.** Start the control panel — type `python webui/app.py`, then open
-**http://127.0.0.1:5000** in your browser. The page walks you through **5 numbered steps** across the
-top (Topic → Design → Author → Voiceover → Render). Follow them left to right:
+### 2 · Start the console
 
-1. **Step 1 · Topic.** Type your video idea (e.g. *"How Wi‑Fi works"*) and choose **Long**, **Shorts**, or **Both**. Click Next.
-2. **Step 2 · Design.** Click the look you like from the row of preview pictures. Click Next.
-3. **Step 3 · Author** (this is where the AI writes it):
-   - Under **Authoring mode**, click **Single‑paste** (the simplest).
-   - Click **Generate single‑paste prompt**, then click **copy**.
-   - Paste that into your AI chat (Claude / Copilot) and send. The AI replies with a block of text that starts with `{` (that's the "JSON"). Copy the AI's **whole** reply.
-   - Back in the console, paste it into the box labelled **paste the model's reply JSON**, then click **Assemble → normalize → lint**.
-   - If it turns **green** (“Lint PASS”), you're good. If it shows a **red** error, paste that error back to your AI, get a corrected reply, and paste again.
-4. **Step 4 · Voiceover** (optional). Pick a voice and click generate to have it read the script aloud.
-5. **Step 5 · Render.** Click **Render wide · dark** (the main 16:9 video) — or any of *Render wide · light*, *Render short · dark*, *Render short · light*. Watch progress in the **Console** at the bottom; when it says ✓ done, your finished `.mp4` appears under **Outputs**. 🎉
+```bash
+python webui/app.py
+```
 
-> The whole loop: **type your idea → Generate prompt → copy → your AI writes it → paste it back → Assemble → Render.**
-> Everything below in this README is the detailed/advanced version for people who want the terminal.
+Open **http://127.0.0.1:5000**. You'll see five numbered steps down the left — go top to bottom.
+
+### Step 1 · Topic — say what the video is about
+
+Type your idea (e.g. *"How Wi‑Fi works"*). Paste an article into **Source material** if the facts must come
+from a specific source; leave it blank for evergreen topics.
+
+<img src="docs/img/01-topic.png" alt="Step 1 — entering the topic" width="100%">
+
+### Step 2 · Design — pick the look
+
+Click a design pack. Each thumbnail is the *same scene* rendered in that pack, so you're comparing like for
+like. This one choice sets the theme for every scene in the video.
+
+<img src="docs/img/02-design.png" alt="Step 2 — choosing a design pack" width="100%">
+
+### Step 3 · Author — write the script
+
+This is where the video actually gets written, and there are **two ways to do it**:
+
+**Automatic** — open **AI automation**, paste in an API key (or point it at a local Ollama), and click run.
+It writes the beat sheet, fills in every scene, validates, and stops before rendering so you can review.
+
+**Manual (no API key)** — click **Generate beat‑sheet prompt**, **copy**, paste it into ChatGPT / Claude /
+Copilot, and paste the reply back. Then do the same for the fill prompt. Slower, but costs nothing and
+works with any chat you already pay for.
+
+Either way you land here, with the script laid out beat by beat. The meters count your words against each
+component's budget and turn **red** when a line is too long to fit on screen:
+
+<img src="docs/img/03-author.png" alt="Step 3 — reviewing narration beat by beat" width="100%">
+
+**Preview any beat before committing to a full render.** Click **▶ preview** on any row and it asks once
+whether you want narration, then renders just that beat and plays it inline:
+
+<img src="docs/img/04-preview-ask.png" alt="Preview asking whether the beat needs narration" width="100%">
+
+A beat you haven't filled in yet still previews — it uses that component's own sample content and labels it
+`SAMPLE`, so you can check the look and motion before writing a single number.
+
+### Step 4 · Voiceover (optional)
+
+Pick a voice and generate. The narration is spoken, then the scene timings are re‑synced to the **real
+audio** — so what you saw in the preview is what you get in the render.
+
+<img src="docs/img/05-voiceover.png" alt="Step 4 — choosing a voice" width="100%">
+
+### Step 5 · Render
+
+Click **Render — wide · dark** for the main 16:9 video. The same spec also gives you a light version and
+both 9:16 vertical cuts, with no extra work. Progress streams in the console at the bottom; finished files
+land under **Outputs** and in `topics/<slug>/out/`.
+
+<img src="docs/img/06-render.png" alt="Step 5 — rendering the four variants" width="100%">
+
+> **Renders take a few minutes.** The first one also downloads a headless Chromium and fonts. Watch the
+> progress bar — it isn't stuck.
+
+<sub>Screenshots are generated from the running app by <code>python scripts/docs_shots.py</code>, so they
+stay in step with the UI.</sub>
 
 ---
 
 ## Table of contents
-- [🎬 Make your first video — the simple way](#-make-your-first-video--the-simple-way)
+- [🎬 Make your first video](#-make-your-first-video)
 - [Showcase](#showcase)
 - [What this project is](#what-this-project-is)
 - [How it works (architecture)](#how-it-works-architecture)
 - [Prerequisites](#prerequisites)
 - [Quick start](#quick-start)
 - [Make a video from a topic](#make-a-video-from-a-topic)
-- [Working with any LLM (including local)](#working-with-any-llm-including-local)
-- [The optional Web Console (`webui/`)](#the-optional-web-console-webui)
+- [The two ways to author](#the-two-ways-to-author)
+- [The Web Console (`webui/`)](#the-web-console-webui)
 - [Command reference](#command-reference)
 - [Project structure](#project-structure)
 - [The component library](#the-component-library)
@@ -86,7 +143,7 @@ top (Topic → Design → Author → Voiceover → Render). Follow them left to 
 
 ## Showcase
 
-A handful of the **136 components**, rendered straight from JSON specs across different design packs
+A handful of the **140 components**, rendered straight from JSON specs across different design packs
 (finance in `corptrust`, science in `organic`) — dark themes shown:
 
 <table>
@@ -151,8 +208,10 @@ flowchart LR
 - **Node.js ≥ 18** (LTS 20 or 22 recommended). `.nvmrc` pins **22** — run `nvm use` if you use nvm.
 - **~2 GB free disk** for `node_modules` + Remotion's headless Chromium (auto‑downloaded on the first render).
 - **Network on first run** — Remotion fetches Google Fonts and, once, a Chromium binary; both are cached after.
-- **Optional — voiceover:** Python 3.9+ and `pip install edge-tts` (only if you want narrated audio).
-- **Optional — Web Console:** Python 3.9+ and `pip install -r webui/requirements.txt` (just Flask).
+- **Web Console + voiceover:** Python 3.9+ and `pip install -r webui/requirements.txt`
+  (Flask + edge‑tts). Optional for the pure‑CLI path, required for the five‑step console above.
+- **Optional — AI automation:** an API key from any supported provider, *or* a local Ollama. The provider
+  adapter needs no extra package; `litellm` is only for Bedrock / Vertex / Anthropic‑native endpoints.
 
 Everything core runs through `npm` scripts — no global installs required.
 
@@ -180,7 +239,7 @@ npm run new-topic -- how-dns-works "How DNS Resolves a Domain"
 ```
 
 **2. Hand the topic to an LLM as "the director."** Point your AI assistant at the skill and ask it to
-fill the specs (see [Working with any LLM](#working-with-any-llm-including-local) for exact prompts). The
+fill the specs (see [the two ways to author](#the-two-ways-to-author) for exact prompts). The
 director follows `.claude/skills/tech-video-director/SKILL.md`, which walks it through:
 - pick an **angle** + audience and a **screenplay** preset (explainer / listicle / versus / deep‑dive / documentary / hype‑launch);
 - choose a **theme** (rotated so no two videos look alike) and background;
@@ -219,51 +278,70 @@ Variants: `wide-dark` · `wide-light` · `short-dark` · `short-light` · `thumb
 npm run package -- how-dns-works              # → dist/how-dns-works-video/ (+ .zip)
 ```
 
-## Working with any LLM (including local)
+## The two ways to author
 
-**This repo contains no model calls.** The "AI" is whatever assistant you already use — it reads a
-plain‑Markdown skill and writes JSON. That makes the director role fully portable:
+The creative step (topic → spec) needs a language model. The mechanical steps (validate, preview, render)
+are deterministic scripts that need no model at all. You choose how the creative step happens.
 
-**The one thing any LLM needs:** access to `.claude/skills/tech-video-director/SKILL.md` and its
-`references/` files (especially `scene_library.md` = the component catalog, `text_budgets.md`, and
-`screenplays.md`). A good universal prompt is:
+### A · Automatic — the console drives your model
+
+Open **AI automation** in Step 3, paste an API key, pick a model, and run. The console writes the beat
+sheet, casts a component per beat, fills every scene, re‑lints, and applies fix rounds — streaming each
+step into the console — then **stops before rendering** so you review before spending render time.
+
+Nine provider shapes are supported out of the box (`webui/ai_providers.json`):
+
+| | Providers |
+|---|---|
+| **Hosted** | OpenAI · Azure OpenAI · Groq · Together · OpenRouter · Hugging Face |
+| **Local** | **Ollama** — point it at `http://localhost:11434`, no key, nothing leaves your machine |
+| **Other** | any OpenAI‑compatible endpoint (`custom`), or `litellm` for Bedrock / Vertex / Anthropic‑native |
+
+The adapter (`scripts/ai/provider.py`) uses only the Python standard library — `litellm` is an optional
+install needed solely for the non‑OpenAI‑shaped providers.
+
+**Your key stays local.** It's written to a gitignored `.env` and used only by the Flask app on your own
+machine. There is no hosted iAuteur service and nothing is sent anywhere except to the provider you chose.
+
+### B · Manual — no key, any chat you already have
+
+The console generates carefully‑built prompts; you paste them into ChatGPT, Claude, Copilot, Gemini,
+whatever you use, and paste the reply back. Two prompts (beat sheet, then fill) or one combined prompt for
+stronger models. Costs nothing beyond the subscription you already pay for.
+
+This also works entirely outside the console, with a coding agent that can read the repo:
 
 > "Read `.claude/skills/tech-video-director/SKILL.md` and the files it references, then write
 > `topics/<slug>/long.json` and `shorts.json` for the topic: **<your topic>**. Follow every law
 > (theme rotation, text budgets, anti‑monotony, word anchors, truth). When done, I'll run `npm run lint`
 > and paste any errors back for you to fix."
 
-Tool‑specific notes:
-- **GitHub Copilot / Claude / Cursor / Cody / Windsurf:** open the repo and use the prompt above in chat. The
-  agent reads the skill and edits the JSON files directly. Iterate against `npm run lint`.
-- **Local LLM (Ollama, LM Studio, llama.cpp):** use a local‑model coding front‑end (e.g. Continue.dev, Aider,
-  or Cline pointed at your local endpoint) and the same prompt. A capable local model (e.g. a 30B‑class coder)
-  can follow the skill; smaller models do better if you paste `scene_library.md` + `text_budgets.md` inline and
-  work **one scene at a time**, re‑linting after each chunk (the skill's `stage_workflow.md` describes this
-  staged approach).
+Works with Copilot, Claude Code, Cursor, Cline, Aider, or a local model behind Continue.dev. Smaller local
+models do better if you paste `scene_library.md` + `text_budgets.md` inline and work **one scene at a
+time**, re‑linting after each chunk.
 
-**How a local LLM helps, precisely (and what's not built):** today the loop is *LLM writes JSON → `npm run
-lint` verifies → LLM fixes*. The linter, critic, and renderer are deterministic and need no model, so a local
-LLM slots directly into the authoring step with zero cloud dependency. There is **no built‑in automation** that
-calls a local model for you — the repo deliberately leaves that slot to your assistant. If you want to automate
-it, the natural place is the Web Console (below): it already builds the brief and runs lint/render, so a small
-custom step could POST the brief to a local endpoint (e.g. `http://localhost:11434/api/chat`) and write the
-returned JSON — but that code is **not included** here.
+### Whichever you pick, the guarantees are the same
 
-## The optional Web Console (`webui/`)
+The model only ever proposes JSON. The linter is the judge — budgets, anti‑monotony, structure, and word
+anchors are all enforced by deterministic code, so a bad generation fails loudly instead of rendering an
+ugly video.
 
-A small local **Flask** control panel that streamlines the manual parts. **It does not call any AI** — it
-builds a **brief** you hand to your LLM, then runs the deterministic pipeline for you.
+## The Web Console (`webui/`)
+
+A local **Flask** control panel — the recommended way to drive the whole pipeline.
 
 ```bash
-pip install -r webui/requirements.txt   # just Flask
+pip install -r webui/requirements.txt
 python webui/app.py                      # http://127.0.0.1:5000
 ```
 
-It lets you: enter a topic + source + options, browse the 30 design thumbnails, click **Generate brief**
-(writes `briefs/<slug>.md` + a "paste this into your AI chat" line), optionally scaffold the topic, and then
-run **Lint / Critique / Render / Open Studio** as buttons. The design thumbnails come from
-`out/proof/designs/` — generate them once with `node scripts/preview-designs.mjs` if the gallery is empty.
+It gives you the five‑step flow shown [above](#-make-your-first-video): topic and source, the 30 design
+packs as visual choices, authoring (automatic or manual), per‑beat preview, voiceover, and one‑click
+renders — with a live log of every command it runs. It also carries a **Component Lab** for building an
+entirely new scene component and wiring it in, type‑checked, with rollback if it doesn't compile.
+
+Design thumbnails come from `out/proof/designs/`; if the gallery is empty, generate them once with
+`node scripts/preview-designs.mjs`.
 
 ## Command reference
 
@@ -296,7 +374,7 @@ LLM prompt, the normalizer, the field validator **and** this schema.
 
 It is a **floor, not the whole law.** The schema checks:
 
-- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 136 types);
+- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 140 types);
 - **enums** — `brand.theme` (dark skins), `themeLight`, `background`, each scene `transition`/`anim`/`background`, `meta.format`;
 - **string budgets** — `maxLength` on every text field, mirrored from the linter.
 
@@ -313,7 +391,7 @@ specs/gallery.json      Component showcase (every type demoed) — feeds the des
 specs/demo-*.json       Finance + science demo videos that exercise the full library.
 src/
   index.ts · Root.tsx   Remotion entry + composition registration (topics + design showcases).
-  MainComposition.tsx   Scene registry: maps scene.type → component (136 types).
+  MainComposition.tsx   Scene registry: maps scene.type → component (140 types).
   types.ts              The spec schema (VideoSpec, Scene, BrandConfig, SceneData…).
   themes.ts             42 themes (38 dark + 4 light) — all colour/font/scale tokens.
   designs/<pack>/       The 30 design packs (per-pack component overrides + chrome + chart kit).
@@ -331,7 +409,7 @@ CLAUDE.md · PROJECT_RULES.md   Repo laws and the topic lifecycle (read before l
 
 ## The component library
 
-**136 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
+**140 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
 RECAP, OUTRO_CTA…), charts (LINE_CHART, BAR_COMPARE, DONUT, FUNNEL, WATERFALL, RADAR, CANDLESTICK, SANKEY,
 TREEMAP, BOX_PLOT, PICTOGRAM…), diagrams & engines (DIAGRAM, PIPELINE, NEURAL_NET, STATE_MACHINE,
 KNOWLEDGE_GRAPH…), code/cloud/AI surfaces (CODE_EDITOR, TERMINAL_SESSION, CLOUD_ARCH, K8S_CLUSTER,
