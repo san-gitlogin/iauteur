@@ -30,7 +30,8 @@ def load(name):
 home = client.get("/")
 html = home.get_data(as_text=True)
 ok(home.status_code == 200, "GET / renders the console (200)")
-ok('id="twoPasteFlow"' in html and 'name="authmode"' in html, "two-paste flow + mode selector in the page")
+ok('id="twoFlow"' in html and 'id="modeSeg"' in html and 'data-mode="single"' in html,
+   "two-paste flow + mode selector in the page")
 ok('id="stage1Btn"' in html and 'id="assembleBtn"' in html and 'id="sceneMeters"' in html,
    "stage-1 / assemble / per-scene-meter screens present")
 
@@ -47,8 +48,18 @@ ok("single-paste" in sg.get("mode", ""), "/api/flow/single → single-paste mode
 # validate: PASS + REJECT paths
 vg = client.post("/api/flow/validate", json={"cfg": CFG, "beats": load("beats-gemini-pro.json")}).get_json()
 ok(vg.get("ok") and vg.get("reask") == "", "/api/flow/validate gemini-pro → PASS")
-vf = client.post("/api/flow/validate", json={"cfg": CFG, "beats": load("beats-flash-lite.json")}).get_json()
-ok(not vf.get("ok") and "rejected" in (vf.get("reask") or ""), "/api/flow/validate flash-lite → REJECT + re-ask")
+# REJECT path: the flash-lite fixture no longer trips a gate (validate-beats.mjs
+# deliberately downgraded COARSE manifest-family adjacency to advisory), so assert
+# against a sheet that violates a gate still enforced — the CONSOLIDATED adjacency
+# (two code-surfaces back to back), which the final linter would also reject.
+REJECT_BEATS = {"meta": {"screenplay": "explainer", "topicAxes": ["entity-novelty", "sovereignty"]},
+                "beats": [{"id": "s01", "type": "HOOK", "narration": "the stake in one line"},
+                          {"id": "s02", "type": "CODE_EDITOR", "narration": "the editor pane"},
+                          {"id": "s03", "type": "CODE_DIFF", "narration": "a diff right after the editor"},
+                          {"id": "s04", "type": "OUTRO_CTA", "narration": "that is a wrap"}]}
+vf = client.post("/api/flow/validate", json={"cfg": CFG, "beats": REJECT_BEATS}).get_json()
+ok(not vf.get("ok") and "rejected" in (vf.get("reask") or "").lower(),
+   "/api/flow/validate consolidated-adjacency → REJECT + re-ask")
 
 # stage-2 from an accepted beat sheet
 s2 = client.post("/api/flow/stage2", json={"cfg": CFG, "beats": load("beats-gemini-pro.json")}).get_json()

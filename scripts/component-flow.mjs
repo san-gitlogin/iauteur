@@ -10,6 +10,8 @@
 //   stage2   <cfg> <config>              -> { ok, prompt }           (write the component)
 //   assemble <cfg> <config> <tsx>        -> { ok, output, wired[], type, name }  (write + AUTO-WIRE + tsc + gate, ROLLBACK on fail)
 //   proof    <cfg> <config>              -> { ok, output, stills[] } (render material/neo stills of the new component)
+//   example  <TYPE> [dataFile]           -> { ok, type, dataKey, data, sample } (the beat's data if it can draw, else the manifest's sample)
+//   shapes                               -> { ok, shapes: {TYPE:{dataKey,req[],fields[]}} } (so the console can judge drawability itself)
 //
 // cfg      = the Stage-1 brief json (see gen-component-prompt.mjs).
 // config   = the new-component config json the LLM returned in Stage 1.
@@ -31,7 +33,64 @@ const die = (msg) => out({ok: false, error: msg});
 
 const sub = (process.argv[2] || '').trim();
 const cfgPath = process.argv[3];
-if (!sub || !cfgPath) die('usage: component-flow <subcmd> <cfg> [config] [tsx]');
+// `shapes` is the only subcommand that reads nothing — it just reports the manifest.
+if (!sub || (!cfgPath && sub !== 'shapes')) die('usage: component-flow <subcmd> <cfg> [config] [tsx]');
+
+// `example` takes a TYPE, not a cfg file — it answers "what is this component
+// MEANT to show?" from the manifest's own verified sample, so a beat that has no
+// authored data yet can still be previewed (Stage 1 beats carry no `data`; that
+// only arrives at Stage 2). Handled before the cfg read for that reason.
+// The sample is for LOOKING ONLY — callers must never persist it into a spec.
+// The drawability contract for every type, so the console can label a beat's
+// preview ("real content" vs "sample") without a round-trip per row, using the
+// SAME rule the example subcommand applies. Manifest stays the only source.
+if (sub === 'shapes') {
+  const {MANIFEST, MANIFEST_TYPES} = await import('./lib/manifest.mjs');
+  const shapes = {};
+  for (const t of MANIFEST_TYPES) {
+    const m = MANIFEST[t]; if (!m) continue;
+    shapes[t] = {
+      dataKey: m.data_key || null,
+      req: Object.entries(m.fields || {}).filter(([, f]) => f.req).map(([k]) => k),
+      fields: Object.keys(m.fields || {}),
+    };
+  }
+  out({ok: true, shapes});
+}
+
+if (sub === 'example') {
+  const type = cfgPath.trim().toUpperCase();
+  const {MANIFEST} = await import('./lib/manifest.mjs');
+  const entry = MANIFEST[type];
+  if (!entry) die(`unknown scene type "${type}"`);
+  if (!entry.example) die(`${type} has no manifest example`);
+  // Optional 2nd arg: the beat's own `data`. Judge whether it can actually DRAW —
+  // a beat sheet often carries a stub like {"source":"illustrative"} which is
+  // non-empty yet has none of the fields the component reads, so rendering it
+  // yields an EMPTY scene. Non-empty is not the same as usable, so decide here
+  // (where the manifest lives) rather than trusting a key count in the browser.
+  let own = null;
+  const dataFile = process.argv[4];
+  if (dataFile) { try { own = readJson(dataFile); } catch { own = null; } }
+  const dk = entry.data_key || null;
+  const req = Object.entries(entry.fields || {}).filter(([, f]) => f.req).map(([k]) => k);
+  const drawable = (d) => {
+    if (!d || typeof d !== 'object') return false;
+    const root = dk ? d[dk] : d;                       // where the component reads from
+    if (!root || typeof root !== 'object') return false;
+    const keys = Object.keys(root);
+    if (!keys.length) return false;
+    // Needs every REQUIRED field the component reads; when the manifest declares
+    // none, any field the component actually reads will do.
+    if (req.length) return req.every((k) => root[k] != null);
+    return keys.some((k) => k in (entry.fields || {}));
+  };
+  const usable = drawable(own);
+  out({ok: true, type, dataKey: dk, purpose: entry.purpose || '',
+    data: usable ? own : entry.example, sample: !usable,
+    ...(own && !usable ? {rejected: `the beat's data has none of the fields ${type} draws from`} : {})});
+}
+
 let brief;
 try { brief = readJson(cfgPath); } catch (e) { die('cannot read cfg: ' + e.message); }
 
@@ -465,6 +524,6 @@ if (sub === 'proof') {
       out({ok: true, stills, output: `Rendered ${stills.length} proof stills for ${cfg.type}.`});
     } catch (e) { out({ok: false, output: 'proof render failed: ' + (e.stack || e.message), stills}); }
   })();
-} else if (!['stage1', 'validate', 'stage2', 'assemble', 'remove', 'preview'].includes(sub)) {
+} else if (!['stage1', 'validate', 'stage2', 'assemble', 'remove', 'preview', 'example', 'shapes'].includes(sub)) {
   die('unknown subcommand: ' + sub);
 }

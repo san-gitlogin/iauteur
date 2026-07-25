@@ -33,6 +33,7 @@ const S = {
   customComponents: {},     // type -> config for components created this session
   busy: false,              // a render/preview/save/voiceover job is in flight
   aiMode: "two",            // AI automation: two-paste (default) | single
+  previewVoice: null,       // remembered per-beat preview choice: null=ask, true=voiced, false=silent
 };
 
 // Every button that kicks off a backend job. While one job runs, ALL of these are
@@ -268,8 +269,15 @@ async function onCompAssemble() {
       bd.type = res.type; bd.custom = true; bd.dataKey = S.compConfig.dataKey;
       bd.data = (ex && ex[S.compConfig.dataKey]) ? ex : { [S.compConfig.dataKey]: ex };
       S.customComponents[res.type] = S.compConfig;
+      // The beat now draws a DIFFERENT component, so any preview on it shows the old
+      // one. Drop it rather than leave a video that no longer matches the beat.
+      delete bd.preview;
+      // Teach the shape map the new type so beatCanDraw judges it by its real field
+      // contract, exactly like a manifest type — otherwise a brand-new component is
+      // the one case the console has to guess about.
+      registerCustomShape(res.type, S.compConfig);
       renderBeatReview(S.beats);
-      toast(`Bound ${res.type} to beat ${bd.id || (S.activeBeatIndex + 1)} — preview it in the Author list.`, "ok");
+      toast(`Bound ${res.type} to beat ${bd.id || (S.activeBeatIndex + 1)} — preview it on that beat in the Author list.`, "ok");
     }
     box.innerHTML = `<div class="banner ok"><span class="bico">✓</span><div class="bbody"><b>${res.type}</b> wired into the library and type-checked. Render a preview below, or use it in a video spec.</div></div>`;
     $("compProofCard").classList.remove("hidden");
@@ -284,10 +292,17 @@ async function onCompPreview() {
   if (!S.compConfig) { toast("Create the component first.", "warn"); return; }
   if (guardBusy()) return;
   const cfg = S.compConfig;
-  const ex = (cfg.example && cfg.example[cfg.dataKey]) ? cfg.example : { [cfg.dataKey]: cfg.example || {} };
+  // The renderer wants the whole scene `data` — the component reads
+  // scene.data.<dataKey>, so passing the UNWRAPPED inner object renders an empty
+  // scene. `example` may arrive either already wrapped ({donut:{…}}) or bare
+  // ({segments:[…]}); normalise to wrapped, and leave data_root types alone.
+  const sceneData = !cfg.dataKey ? (cfg.example || {})
+    : (cfg.example && cfg.example[cfg.dataKey]) ? cfg.example
+    : { [cfg.dataKey]: cfg.example || {} };
   const vertical = $("format").value === "shorts";
   const ab = (S.activeBeatIndex != null && S.beats) ? S.beats[S.activeBeatIndex] : null;
-  const durationFrames = (ab && ab.durationFrames) || 150;
+  // Run the length the beat will actually run, so the build-in isn't cut off.
+  const durationFrames = ab ? estimateBeatFrames(ab) : 150;
   const btn = $("compProofBtn"); btn.textContent = "Rendering…";
   const prog = $("compPreviewProgress"), bar = $("compPreviewBar"), pct = $("compPreviewPct");
   prog.classList.remove("hidden"); bar.style.width = "0%"; pct.textContent = "starting…";
@@ -295,49 +310,36 @@ async function onCompPreview() {
   setBusy(true, "rendering preview…");
   let done = null;
   try {
-    const r = await fetch("/api/component/preview-stream", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ brief: {
-        type: cfg.type, sceneData: ex[cfg.dataKey], design: S.design, theme: S.design,
-        format: vertical ? "short" : "long", durationFrames } }),
+    // Same streaming reader the per-beat previews use, so progress reporting and
+    // bundler-noise filtering behave identically in both places.
+    done = await streamPreview("/api/component/preview-stream", {
+      type: cfg.type, sceneData, design: S.design, theme: S.design,
+      format: vertical ? "short" : "long", durationFrames,
+    }, (stage) => {
+      pct.textContent = stage;
+      bar.style.width = stagePct(stage) + "%";
     });
-    const reader = r.body.getReader(), dec = new TextDecoder(); let buf = "";
-    for (;;) {
-      const { value, done: fin } = await reader.read(); if (fin) break;
-      buf += dec.decode(value, { stream: true });
-      let idx;
-      while ((idx = buf.indexOf("\n\n")) >= 0) {
-        const frame = buf.slice(0, idx); buf = buf.slice(idx + 2);
-        let ev = null, data = "";
-        for (const line of frame.split("\n")) {
-          if (line.startsWith("event:")) ev = line.slice(6).trim();
-          else if (line.startsWith("data:")) data += line.slice(5).trim();
-        }
-        if (ev === "done") { try { done = JSON.parse(data); } catch (e) { done = { ok: false }; } }
-        else if (data) {
-          const m = data.match(/(bundling|rendering)\s+(\d+)%/i);
-          if (m) { const p = +m[2]; bar.style.width = p + "%"; pct.textContent = `${m[1].toLowerCase()} ${p}%`; }
-          log(data, "out");
-        }
-      }
-    }
-    if (done && done.ok && done.url) {
-      bar.style.width = "100%"; pct.textContent = "done ✓";
-      box.innerHTML = `<video src="${done.url}?t=${Date.now()}" controls autoplay loop muted playsinline></video>`
-        + `<div class="cap"><b>${escapeHtml(cfg.type)}</b> · ${escapeHtml(S.design)} · <span class="untimed">visual check — untimed</span>. `
-        + `The final video re-renders this scene timed to your voiceover &amp; segment length.</div>`;
-      if (ab) { ab.preview = { status: "done", url: done.url, ts: Date.now(), design: S.design }; saveState(); }
-      toast("Preview rendered ✓", "ok");
-    } else {
-      prog.classList.add("hidden");
-      const msg = (done && (done.output || done.error)) || "Preview render failed — see console.";
-      toast(msg, "err"); if (done && (done.output || done.error)) log(done.output || done.error, "err");
-    }
-  } catch (e) {
-    prog.classList.add("hidden"); toast("Preview stream failed: " + e.message, "err");
-  } finally {
-    setBusy(false); btn.textContent = "▶ Render preview";
+  } catch (e) { done = { ok: false, output: e.message }; }
+  setBusy(false); btn.textContent = "▶ Render preview";
+
+  if (!done || !done.ok || !done.url) {
+    prog.classList.add("hidden");
+    const msg = (done && (done.output || done.error)) || "Preview render failed — see console.";
+    toast(msg, "err"); if (done && (done.output || done.error)) log(done.output || done.error, "err");
+    return;
   }
+  bar.style.width = "100%"; pct.textContent = "done ✓";
+  box.innerHTML = `<video src="${done.url}?t=${Date.now()}" controls autoplay loop muted playsinline></video>`
+    + `<div class="cap"><b>${escapeHtml(cfg.type)}</b> · ${escapeHtml(S.design)} · <span class="untimed">untimed</span> · `
+    + `the final video re-times this scene to your voiceover.</div>`;
+  // Give the BEAT the same result, so the drawer and the beat row never disagree
+  // about what the newly built component looks like.
+  if (ab) {
+    ab.preview = { status: "done", url: done.url, ts: Date.now(), design: S.design,
+                   voiced: false, sample: false, frames: durationFrames };
+    saveState(); rerenderRows();
+  }
+  toast("Preview rendered ✓", "ok");
 }
 
 async function onCompRemove() {
@@ -380,99 +382,276 @@ function closeCreator() {
   const drawer = $("componentCreator"); drawer.classList.add("hidden"); drawer.setAttribute("aria-hidden", "true");
   S.activeBeatIndex = null; saveState();
 }
-async function previewBeat(item, prevBox, btn) {
-  if (!item.type || !item.data) { toast("This beat has no component data to preview yet.", "warn"); return; }
-  if (guardBusy()) return;
-  const orig = btn.textContent; btn.textContent = "rendering…";
-  item.preview = { status: "rendering" }; paintBeatPreview(prevBox, item);
-  setBusy(true, "rendering preview…");
-  const vertical = $("format").value === "shorts";
-  let res;
-  try {
-    res = await jpost("/api/component/preview", { brief: {
-      type: item.type, sceneData: item.data, design: S.design, theme: S.design,
-      format: vertical ? "short" : "long", durationFrames: item.durationFrames || 150 } });
-  } catch (e) { res = { error: e.message }; }
-  setBusy(false); btn.textContent = orig;
-  if (!res || res.error || !res.ok) {
-    item.preview = { status: "error" }; paintBeatPreview(prevBox, item);
-    toast((res && res.error) || "Preview render failed.", "err"); if (res && res.output) log(res.output, "err");
-    saveState(); return;
-  }
-  item.preview = { status: "done", url: "/proof-img/" + res.file, ts: Date.now(), design: S.design };
-  paintBeatPreview(prevBox, item); btn.textContent = "↺ re-preview"; saveState();
+// How long this beat will actually run. Same formula normalize-spec.mjs applies
+// (max(60, words*FPW+30), HOOK capped at 8s) so a preview lasts what the real
+// render will — a flat guess truncates the scene's build-in and reads as broken.
+function estimateBeatFrames(item) {
+  if (item.durationFrames) return Math.max(30, Math.min(600, item.durationFrames));
+  const fpw = (BUDGETS && BUDGETS.fpw) || 12;
+  const hookMax = (BUDGETS && BUDGETS.hookMaxFrames) || 240;
+  const words = ((item.narration || "").trim().match(/\S+/g) || []).length;
+  let d = words * fpw + 30;
+  if (item.type === "HOOK") d = Math.min(d, hookMax);
+  return Math.max(60, Math.min(600, d));
 }
 
-// Paint a beat's preview box from its persisted preview state (idle/rendering/error/done).
-// Called both after a fresh render AND when rebuilding rows on reload, so previews survive.
+// The `data` a preview should render. Real authored data when the beat has it;
+// otherwise the manifest's own sample for that type — "what this component is
+// MEANT to show" — so every beat is previewable at the Author step, where beats
+// carry narration but no data yet (real data only arrives at Stage 2).
+//
+// The sample is returned for LOOKING ONLY and is deliberately NOT written onto
+// the beat: persisting it would let placeholder numbers ride into Stage 2 and the
+// saved spec disguised as authored facts (LAW 3 — TRUTH).
+// Can this beat's own data actually DRAW its component? "Has data" is not the same
+// as "can draw": beat sheets often carry a stub like {"source":"illustrative"} —
+// non-empty, but with none of the fields the component reads, so rendering it gives
+// an EMPTY scene. Mirrors the rule component-flow applies, off the shape map the
+// manifest exports (CONFIG.sceneShapes), so row labels and renders never disagree.
+// A component built this session isn't in the manifest yet (its shape map was sent
+// at page load), so add its contract from the config the Component Lab validated.
+// Restored on reload too — S.customComponents persists.
+function registerCustomShape(type, config) {
+  if (!type || !config || !CONFIG) return;
+  CONFIG.sceneShapes = CONFIG.sceneShapes || {};
+  const fields = Array.isArray(config.fields) ? config.fields : [];
+  CONFIG.sceneShapes[type] = {
+    dataKey: config.dataKey || null,
+    req: fields.filter((f) => f && f.req).map((f) => f.name),
+    fields: fields.map((f) => f && f.name).filter(Boolean),
+  };
+}
+
+function beatCanDraw(item) {
+  const shape = CONFIG && CONFIG.sceneShapes && CONFIG.sceneShapes[item.type];
+  const d = item.data;
+  if (!d || typeof d !== "object" || !Object.keys(d).length) return false;
+  if (!shape) return Object.keys(d).length > 0;   // shape map unavailable — trust it, server re-checks
+  const root = shape.dataKey ? d[shape.dataKey] : d;
+  if (!root || typeof root !== "object") return false;
+  const keys = Object.keys(root);
+  if (!keys.length) return false;
+  if (shape.req && shape.req.length) return shape.req.every((k) => root[k] != null);
+  return keys.some((k) => (shape.fields || []).includes(k));
+}
+
+// The server decides, because "has data" is not the same as "can draw": beat sheets
+// often carry a stub like {"source":"illustrative"} — non-empty, but with none of
+// the fields the component reads, so rendering it produces an EMPTY scene. Only the
+// manifest knows which fields matter, so it makes the call and returns whichever
+// data will actually draw, plus whether that was the sample.
+async function resolvePreviewData(item) {
+  const res = await jpost("/api/scene-example", { type: item.type, data: item.data || null });
+  if (!res || res.error || !res.ok) throw new Error(res && res.error ? res.error : `No sample content for ${item.type}.`);
+  if (res.rejected) log(`preview: ${item.id || item.type} — ${res.rejected}; using sample content`, "out");
+  return { data: res.data, sample: !!res.sample, purpose: res.purpose || "" };
+}
+
+// Set when a session-wide preview choice changes mid-render; consumed once the
+// render completes (see the note at its assignment).
+let pendingRowRefresh = false;
+
+// ONE preview entry point for every beat/scene row. `voiced` decides which backend
+// it streams; both report progress inline under the beat and end in a player.
+async function runBeatPreview(item, prevBox, btn, voiced) {
+  if (!item.type) { toast("This beat has no scene type yet.", "warn"); return; }
+  if (voiced && !(item.narration || "").trim()) {
+    toast("Add narration to this beat first — there's nothing to voice.", "warn"); return;
+  }
+  if (guardBusy()) return;
+  const orig = btn.textContent;
+  btn.textContent = voiced ? "voicing…" : "rendering…";
+  item.preview = { status: "rendering", stage: "resolving scene content…" };
+  paintBeatPreview(prevBox, item);
+  setBusy(true, voiced ? "voiceover preview…" : "rendering preview…");
+
+  // Every exit path below must restore the button, clear busy, persist, and settle
+  // any deferred row refresh — a preview that dies without doing so leaves the whole
+  // console hard-disabled (setBusy locks every job button).
+  const finish = (msg, kind) => {
+    setBusy(false); btn.textContent = orig;
+    paintBeatPreview(prevBox, item); saveState();
+    if (msg) toast(msg, kind || "ok");
+    if (pendingRowRefresh) { pendingRowRefresh = false; rerenderRows(); }
+  };
+
+  let resolved;
+  try { resolved = await resolvePreviewData(item); }
+  catch (e) {
+    item.preview = { status: "error", msg: e.message };
+    finish(e.message, "err"); return;
+  }
+
+  const vertical = $("format").value === "shorts";
+  const durationFrames = estimateBeatFrames(item);
+  const url = voiced ? "/api/component/preview-voiceover" : "/api/component/preview-stream";
+  const brief = voiced
+    ? { type: item.type, sceneData: resolved.data, narration: (item.narration || "").trim(),
+        voice: ($("voVoice") && $("voVoice").value || "").trim(),
+        design: S.design, theme: S.design, format: vertical ? "short" : "long" }
+    : { type: item.type, sceneData: resolved.data, design: S.design, theme: S.design,
+        format: vertical ? "short" : "long", durationFrames };
+
+  let done = null;
+  try {
+    done = await streamPreview(url, brief, (stage) => {
+      item.preview = { status: "rendering", stage }; paintBeatProgress(prevBox, item);
+    });
+  } catch (e) { done = { ok: false, output: e.message }; }
+
+  if (!done || !done.ok || !done.url) {
+    const msg = (done && (done.output || done.error)) || "Preview render failed.";
+    item.preview = { status: "error", msg };
+    if (done && (done.output || done.error)) log(done.output || done.error, "err");
+    finish(msg, "err"); return;
+  }
+  item.preview = { status: "done", url: done.url, ts: Date.now(), design: S.design,
+                   voiced: !!voiced, sample: resolved.sample, purpose: resolved.purpose || "",
+                   frames: durationFrames };
+  finish(voiced ? "Voiceover preview ready — press play." : "Preview ready.", "ok");
+}
+
+// Read one SSE preview stream, forwarding human-readable progress to `onStage`
+// and resolving with the final 'done' payload.
+async function streamPreview(url, brief, onStage) {
+  const r = await fetch(url, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ brief }),
+  });
+  if (!r.ok || !r.body) {
+    let msg = `preview request failed (${r.status})`;
+    try { const j = await r.json(); if (j && j.error) msg = j.error; } catch { /* not json */ }
+    return { ok: false, output: msg };
+  }
+  const reader = r.body.getReader(), dec = new TextDecoder();
+  let buf = "", done = null;
+  for (;;) {
+    const { value, done: fin } = await reader.read(); if (fin) break;
+    buf += dec.decode(value, { stream: true });
+    let idx;
+    while ((idx = buf.indexOf("\n\n")) >= 0) {
+      const frame = buf.slice(0, idx); buf = buf.slice(idx + 2);
+      let ev = null, data = "";
+      for (const line of frame.split("\n")) {
+        if (line.startsWith("event:")) ev = line.slice(6).trim();
+        else if (line.startsWith("data:")) data += line.slice(5).trim();
+      }
+      if (ev === "done") { try { done = JSON.parse(data); } catch { done = { ok: false }; } }
+      else if (data) {
+        log(data, "out");                       // console gets everything, verbatim
+        // The beat's one-line status gets only real progress. The bundler also emits
+        // ANSI-coloured font warnings and other long noise; showing those where the
+        // user expects "rendering 42%" reads like a failure.
+        const m = data.match(/(bundling|rendering)\s+(\d+)%/i);
+        if (m) { onStage(`${m[1].toLowerCase()} ${m[2]}%`); continue; }
+        const clean = data.replace(/\[[0-9;]*m/g, "").replace(/^▶\s*/, "").trim();
+        if (clean && clean.length <= 60 && !/^Tab \d|network requests|Consider loading/i.test(clean)) onStage(clean);
+      }
+    }
+  }
+  return done;
+}
+
+// Paint a beat's preview box from its persisted preview state
+// (idle / choosing / rendering / error / done). Called after a fresh render AND when
+// rebuilding rows on reload, so previews survive a refresh.
 function paintBeatPreview(prevBox, item) {
   const p = item.preview;
   if (!p || p.status === "idle") { prevBox.innerHTML = ""; return; }
-  if (p.status === "rendering") { prevBox.innerHTML = `<div class="prevpending"><span class="spin"></span> ${escapeHtml(p.stage || "rendering preview…")}</div>`; return; }
-  if (p.status === "error") { prevBox.innerHTML = `<div class="prevpending err">preview failed — click preview to retry</div>`; return; }
-  if (p.voiced) {
+  if (p.status === "rendering") {
+    const pct = stagePct(p.stage);
     prevBox.innerHTML =
-      `<video src="${p.url}?t=${p.ts}" controls loop playsinline></video>`
-      + `<div class="cap"><b>${escapeHtml(item.type)}</b> · ${escapeHtml(p.design || S.design)} · <span class="voiced">with voiceover</span> · timed to the narration. Press play to hear it; the final render keeps this timing.</div>`;
+      `<div class="prevrender">`
+      + `<div class="prevstage"><span class="spin"></span><span class="stagetxt">${escapeHtml(p.stage || "starting…")}</span></div>`
+      + `<div class="previewProgress"><div class="pbar"><div class="pfill" style="width:${pct}%"></div></div></div>`
+      + `</div>`;
     return;
   }
+  if (p.status === "error") {
+    prevBox.innerHTML = `<div class="prevpending err">preview failed — ${escapeHtml(p.msg || "click preview to retry")}</div>`;
+    return;
+  }
+  // done → player + a caption that states exactly what is being shown, so sample
+  // content can never be mistaken for the beat's real content.
+  const secs = p.frames ? ` · ${(p.frames / ((BUDGETS && BUDGETS.fps) || 30)).toFixed(1)}s` : "";
+  const what = p.sample
+    ? `<span class="samplebadge">sample content</span> — this is what <b>${escapeHtml(item.type)}</b> shows; your numbers land after the fill prompt`
+    : `<span class="realbadge">your content</span>`;
+  const timing = p.voiced
+    ? `<span class="voiced">with voiceover</span> · timed to the narration — the final render keeps this timing`
+    : `<span class="untimed">untimed</span> · the final video re-times this scene to your voiceover`;
   prevBox.innerHTML =
-    `<video src="${p.url}?t=${p.ts}" controls loop muted playsinline></video>`
-    + `<div class="cap"><b>${escapeHtml(item.type)}</b> · ${escapeHtml(p.design || S.design)} · <span class="untimed">visual check — untimed</span>. `
-    + `The final video re-renders this scene timed to your voiceover &amp; segment length.</div>`;
+    `<video src="${p.url}?t=${p.ts}" controls loop playsinline ${p.voiced ? "" : "muted"}></video>`
+    + `<div class="cap"><b>${escapeHtml(item.type)}</b> · ${escapeHtml(p.design || S.design)}${secs} · ${what}<br>${timing}.</div>`;
 }
 
-// Preview a single beat WITH voiceover (edge-TTS + word-sync + audio), streamed.
-async function previewBeatVoice(item, prevBox, btn) {
-  if (!item.type || !item.data) { toast("This beat has no component data to preview yet.", "warn"); return; }
-  const narration = (item.narration || "").trim();
-  if (!narration) { toast("Add narration to this beat first — there's nothing to voice.", "warn"); return; }
-  if (guardBusy()) return;
-  const orig = btn.textContent; btn.textContent = "voicing…";
-  item.preview = { status: "rendering", stage: "generating voiceover…" }; paintBeatPreview(prevBox, item);
-  setBusy(true, "voiceover preview…");
-  const vertical = $("format").value === "shorts";
-  const voice = ($("voVoice") && $("voVoice").value || "").trim();
-  let done = null;
-  try {
-    const r = await fetch("/api/component/preview-voiceover", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ brief: {
-        type: item.type, sceneData: item.data, narration, voice,
-        design: S.design, theme: S.design, format: vertical ? "short" : "long" } }),
-    });
-    const reader = r.body.getReader(), dec = new TextDecoder(); let buf = "";
-    for (;;) {
-      const { value, done: fin } = await reader.read(); if (fin) break;
-      buf += dec.decode(value, { stream: true }); let idx;
-      while ((idx = buf.indexOf("\n\n")) >= 0) {
-        const frame = buf.slice(0, idx); buf = buf.slice(idx + 2);
-        let ev = null, data = "";
-        for (const line of frame.split("\n")) {
-          if (line.startsWith("event:")) ev = line.slice(6).trim();
-          else if (line.startsWith("data:")) data += line.slice(5).trim();
-        }
-        if (ev === "done") { try { done = JSON.parse(data); } catch (e) { done = { ok: false }; } }
-        else if (data) {
-          const m = data.match(/(bundling|rendering)\s+(\d+)%/i);
-          item.preview = { status: "rendering", stage: m ? `${m[1].toLowerCase()} ${m[2]}%` : data.replace(/^\u25b6\s*/, "") };
-          paintBeatPreview(prevBox, item);
-          log(data, "out");
-        }
-      }
-    }
-  } catch (e) { done = { ok: false, output: e.message }; }
-  setBusy(false); btn.textContent = orig;
-  if (!done || !done.ok || !done.url) {
-    item.preview = { status: "error" }; paintBeatPreview(prevBox, item);
-    toast((done && (done.output || done.error)) || "Voiceover preview failed.", "err");
-    if (done && (done.output || done.error)) log(done.output || done.error, "err");
-    saveState(); return;
-  }
-  item.preview = { status: "done", url: done.url, ts: Date.now(), design: S.design, voiced: true };
-  paintBeatPreview(prevBox, item); saveState();
-  toast("Voiceover preview ready — press play.", "ok");
+// Pull a percentage out of a "bundling 42%" / "rendering 88%" stage line. Bundling
+// and rendering are two sequential passes, so map them onto one 0-100 bar
+// (bundle = first 30%) instead of letting it rewind at the handover.
+function stagePct(stage) {
+  const m = (stage || "").match(/(bundling|rendering)\s+(\d+)%/i);
+  if (!m) return 4;
+  const p = Math.max(0, Math.min(100, +m[2]));
+  return /bundling/i.test(m[1]) ? Math.round(p * 0.3) : 30 + Math.round(p * 0.7);
 }
+
+// Update the bar/label in place while streaming. Rewriting innerHTML every tick
+// would restart the CSS width transition and make the bar stutter.
+function paintBeatProgress(prevBox, item) {
+  const bar = prevBox.querySelector(".pfill"), txt = prevBox.querySelector(".stagetxt");
+  if (!bar || !txt) { paintBeatPreview(prevBox, item); return; }
+  const p = item.preview || {};
+  bar.style.width = stagePct(p.stage) + "%";
+  txt.textContent = p.stage || "working…";
+}
+
+// Clicking preview asks ONE question — does this beat need narration? — right where
+// the beat is, then renders below it. Voiced costs a TTS round-trip and needs
+// narration, so it is never assumed; the answer is remembered for the session so a
+// 10-beat pass is not 10 identical questions.
+// "en-US-ChristopherNeural" → "Christopher (en-US)" — the voice has to be readable
+// in the choice row, not just in a tooltip, since it is what you will hear.
+function voiceLabel(name) {
+  const m = (name || "").match(/^([a-z]{2}-[A-Z]{2})-(.+?)(Neural)?$/);
+  return m ? `${m[2]} (${m[1]})` : (name || "the chosen voice");
+}
+
+function askPreviewChoice(item, prevBox, btn) {
+  if (S.previewVoice !== null && S.previewVoice !== undefined) {
+    runBeatPreview(item, prevBox, btn, S.previewVoice); return;
+  }
+  const hasNarration = !!(item.narration || "").trim();
+  const voice = ($("voVoice") && $("voVoice").value || "").trim() || "the chosen voice";
+  prevBox.innerHTML =
+    `<div class="prevask">`
+    + `<div class="askq">Preview this beat with narration?</div>`
+    + `<div class="askbtns">`
+    +   `<button class="btn sm" data-pick="silent">▶ silent — faster</button>`
+    +   `<button class="btn sm accent" data-pick="voiced" ${hasNarration ? "" : "disabled"} `
+    +     `title="${hasNarration ? `Speaks the narration with ${escapeHtml(voice)} and times the scene to the real audio.` : "This beat has no narration yet."}">`
+    +     `♪ with voiceover</button>`
+    +   `<button class="btn sm ghost" data-pick="cancel">cancel</button>`
+    + `</div>`
+    + `<label class="askremember"><input type="checkbox" id="askRemember" /> remember for this session</label>`
+    + `<div class="askhint">${hasNarration
+        ? `Voiced speaks with <b>${escapeHtml(voiceLabel(voice))}</b> and re-times the scene to the real audio, so you hear and see the final pacing.`
+        : "Voiceover needs narration — add some above to enable it."}</div>`
+    + `</div>`;
+  prevBox.querySelectorAll("[data-pick]").forEach((b) => {
+    b.onclick = () => {
+      const pick = b.getAttribute("data-pick");
+      if (pick === "cancel") { prevBox.innerHTML = ""; return; }
+      const voiced = pick === "voiced";
+      const remember = prevBox.querySelector("#askRemember");
+      // Rebuild the rows only AFTER this render finishes — rerenderRows() replaces
+      // the DOM, and prevBox is where the render is currently painting. The finished
+      // video survives the rebuild because paintBeatPreview restores it from state.
+      if (remember && remember.checked) { S.previewVoice = voiced; saveState(); pendingRowRefresh = true; }
+      runBeatPreview(item, prevBox, btn, voiced);
+    };
+  });
+}
+
 function overlayCustomBeats() {
   if (!S.spec || !S.beats) return;
   for (const b of S.beats) if (b.custom && b.type && b.data) {
@@ -486,7 +665,7 @@ function saveState() {
     localStorage.setItem(LS_KEY, JSON.stringify({
       step: S.step, design: S.design, mode: S.mode,
       beats: S.beats, spec: S.spec, saved: S.saved, voiced: S.voiced, rendered: S.rendered, lintOk: S.lintOk,
-      customComponents: S.customComponents,
+      customComponents: S.customComponents, previewVoice: S.previewVoice,
       form: {
         topic: $("topic").value, source: $("source").value, notes: $("notes").value,
         format: $("format").value, preset: $("preset").value, audience: $("audience").value, minutes: $("minutes").value,
@@ -503,10 +682,19 @@ function loadState() {
     S.step = s.step || 1; S.design = s.design || S.design; S.mode = s.mode || "two";
     S.beats = s.beats || null; S.spec = s.spec || null;
     // A preview that was mid-render when the tab closed can't be trusted — drop it
-    // so the beat just offers its preview button again.
-    if (Array.isArray(S.beats)) for (const b of S.beats) if (b && b.preview && b.preview.status !== "done") delete b.preview;
+    // so the row just offers its preview button again. Applies to BOTH lists, since
+    // assembled scenes are previewable too.
+    const dropPending = (arr) => {
+      if (Array.isArray(arr)) for (const b of arr) if (b && b.preview && b.preview.status !== "done") delete b.preview;
+    };
+    dropPending(S.beats);
+    dropPending(S.spec && S.spec.scenes);
     S.saved = !!s.saved; S.voiced = !!s.voiced; S.rendered = !!s.rendered; S.lintOk = !!s.lintOk;
     S.customComponents = s.customComponents || {};
+    // Components built in an earlier session are wired into the library but absent
+    // from the shape map the server just sent, so re-teach their contracts.
+    for (const [type, cfg] of Object.entries(S.customComponents)) registerCustomShape(type, cfg);
+    S.previewVoice = (s.previewVoice === true || s.previewVoice === false) ? s.previewVoice : null;
     const f = s.form || {};
     for (const k of Object.keys(f)) { const el = $(k); if (el != null && f[k] != null) el.value = f[k]; }
     return true;
@@ -739,6 +927,14 @@ async function onValidate() {
 }
 
 function renderBeatReview(beats) { renderMeterRows($("beatRows"), beats, { kind: "beat" }); }
+
+// Rebuild whichever meter lists are on screen, keeping each row's persisted preview
+// (paintBeatPreview restores it from state). Used when a session-wide preview
+// setting changes, so every row's buttons agree.
+function rerenderRows() {
+  if (S.beats) renderBeatReview(S.beats);
+  if (S.spec && S.spec.scenes) renderMeterRows($("sceneMeters"), S.spec.scenes, { kind: "scene" });
+}
 function renderMeterRows(box, items, opts = {}) {
   const kind = opts.kind || "scene";
   box.innerHTML = "";
@@ -759,18 +955,28 @@ function renderMeterRows(box, items, opts = {}) {
       nc.onclick = () => openCreatorForBeat(i);
       btns.appendChild(nc);
     }
-    if (b.data && Object.keys(b.data).length) {
-      const pv = document.createElement("button"); pv.className = "btn sm";
-      pv.textContent = (b.preview && b.preview.status === "done") ? "↺ re-preview" : "▶ preview";
-      pv.onclick = () => previewBeat(b, prevBox, pv);
-      btns.appendChild(pv);
-      if (kind === "beat") {
-        const pvv = document.createElement("button"); pvv.className = "btn sm ghost";
-        pvv.textContent = "▶ +voice";
-        pvv.title = "Render this beat WITH voiceover (uses the voice from the Voiceover step) and time it to the narration.";
-        pvv.onclick = () => previewBeatVoice(b, prevBox, pvv);
-        btns.appendChild(pvv);
-      }
+    // EVERY row gets a preview. A beat with authored `data` previews its real
+    // content; one without (Stage-1 beats carry narration only) previews the
+    // manifest's sample for its type — the component IS already decided, so its
+    // look, motion, theme and framing are all checkable now. The caption states
+    // which of the two you are looking at.
+    const hasData = beatCanDraw(b);
+    const pv = document.createElement("button"); pv.className = "btn sm";
+    pv.textContent = (b.preview && b.preview.status === "done") ? "↺ re-preview" : "▶ preview";
+    pv.title = hasData
+      ? "Render just this beat so you can see it before committing to a full video."
+      : `Render this beat using what ${b.type} is designed to show (sample content — your data arrives at Stage 2).`;
+    pv.onclick = () => askPreviewChoice(b, prevBox, pv);
+    btns.appendChild(pv);
+    if (!hasData) { const s = document.createElement("span"); s.className = "samplehint"; s.textContent = "sample"; s.title = "No authored data yet — preview uses this component's sample content."; btns.appendChild(s); }
+    // Once a choice is remembered, show it here so the mode is never invisible —
+    // and let it be flipped back to asking without hunting through settings.
+    if (S.previewVoice !== null && S.previewVoice !== undefined) {
+      const vt = document.createElement("button"); vt.className = "btn sm ghost voicetog";
+      vt.textContent = S.previewVoice ? "♪ voice on" : "voice off";
+      vt.title = "Preview mode for this session — click to be asked again.";
+      vt.onclick = () => { S.previewVoice = null; saveState(); rerenderRows(); };
+      btns.appendChild(vt);
     }
     row.appendChild(btype); row.appendChild(ta); row.appendChild(m); row.appendChild(btns);
     box.appendChild(row); box.appendChild(prevBox);
@@ -889,6 +1095,12 @@ function renderVoiceOptions() {
     o.value = v.name; o.textContent = v.name.replace(lang + "-", "").replace("Neural", "") + (v.gender ? ` · ${v.gender}` : "");
     sel.appendChild(o);
   }
+  // Select the channel's configured voice (CONFIG.voices[0]) rather than whichever
+  // name sorts first. The full edge-tts list is alphabetical, so the default was
+  // landing on en-US-AnaNeural — and a voiced beat preview speaks through THIS
+  // control, so a wrong default is heard, not just displayed.
+  const preferred = (CONFIG && CONFIG.voices && CONFIG.voices[0]) || "en-US-ChristopherNeural";
+  if ([...sel.options].some((o) => o.value === preferred)) sel.value = preferred;
 }
 async function onVoiceover() {
   const slug = $("slug").value.trim(); if (!slug) { toast("Save a spec first.", "warn"); return; }

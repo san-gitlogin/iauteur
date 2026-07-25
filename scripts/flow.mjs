@@ -18,7 +18,7 @@ import {execFileSync} from 'node:child_process';
 import {assembleSpec} from './lib/assemble.mjs';
 import {normalizeSpec} from './lib/normalize-spec.mjs';
 import {MANIFEST_TYPES} from './lib/manifest.mjs';
-import {BUDGET, HOOK_MAX_WORDS, TRANSITIONS} from './lib/constants.mjs';
+import {BUDGET, HOOK_MAX_WORDS, TRANSITIONS, FPS, FPW, HOOK_MAX_FRAMES} from './lib/constants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const NODE = process.execPath;
@@ -41,7 +41,12 @@ const errCount = (out) => Number((out.match(/REJECTED \((\d+)/) || [, '0'])[1]);
 
 const [cmd, cfgArg, arg2, arg3] = process.argv.slice(2);
 if (cmd === 'budgets') {   // for the console's per-scene meters (single source: constants.mjs)
-  emit({budget: BUDGET, hookMaxWords: HOOK_MAX_WORDS, sentenceMaxWords: 20, transitions: TRANSITIONS});
+  // fps/fpw/hookMaxFrames let the console estimate a beat's duration with the SAME
+  // formula normalize-spec uses (max(60, words*FPW+30), HOOK capped), so a per-beat
+  // preview runs the length the real render will — not a flat guess that truncates
+  // the scene's build-in and looks broken.
+  emit({budget: BUDGET, hookMaxWords: HOOK_MAX_WORDS, sentenceMaxWords: 20, transitions: TRANSITIONS,
+    fps: FPS, fpw: FPW, hookMaxFrames: HOOK_MAX_FRAMES});
   process.exit(0);
 }
 if (!cmd || !cfgArg) { console.error('usage: flow.mjs <stage1|single|validate|stage2|assemble|applyfix|budgets> <cfg.json> [beats|reply|spec] [patch]'); process.exit(2); }

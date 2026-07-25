@@ -289,6 +289,37 @@ body.busy .btn:disabled{opacity:.45}
 .beatdata{margin-top:6px}
 .beatdata textarea{width:100%;min-height:90px;font-family:var(--mono);font-size:11px}
 
+/* ---- per-beat preview: voice choice → progress → player -------------------*/
+/* All three states live in .beatprev, the block that expands directly under the
+   beat's row, so the beat you clicked is the beat you are looking at. */
+.samplehint{font-size:9px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;
+  color:var(--muted);border:1px dashed var(--border);border-radius:4px;padding:2px 5px;cursor:help}
+.beatbtns .voicetog{opacity:.85}
+
+/* the one question: does this beat need narration? */
+.prevask{border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r);
+  padding:12px 14px;background:var(--surface-2);max-width:520px}
+.prevask .askq{font-size:12px;font-weight:600;margin-bottom:9px}
+.prevask .askbtns{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.prevask .askbtns .btn.sm{height:28px;padding:0 11px;font-size:11px}
+.prevask .askremember{display:flex;align-items:center;gap:6px;margin-top:10px;
+  font-size:11px;color:var(--muted);cursor:pointer}
+.prevask .askremember input{margin:0;cursor:pointer}
+.prevask .askhint{font-size:10.5px;color:var(--muted);margin-top:7px;line-height:1.5}
+
+/* render progress, expanded in place */
+.prevrender{border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;
+  background:var(--surface-2);max-width:520px}
+.prevrender .prevstage{display:flex;align-items:center;gap:8px;font-size:11px;
+  font-family:var(--mono);color:var(--muted);margin-bottom:9px}
+.prevrender .previewProgress{margin-top:0}
+
+/* what am I looking at — real content or the component's sample */
+.samplebadge{color:var(--warn,#e0a33e);font-weight:700;font-family:var(--mono);
+  text-transform:uppercase;letter-spacing:.04em;font-size:10px}
+.realbadge{color:var(--good);font-weight:700;font-family:var(--mono);
+  text-transform:uppercase;letter-spacing:.04em;font-size:10px}
+
 /* ---- console drawer -------------------------------------------------------*/
 .console{position:fixed;left:0;right:0;bottom:0;z-index:45;background:rgba(9,11,17,.94);
   backdrop-filter:blur(10px);border-top:1px solid var(--border);transition:transform .2s;box-shadow:0 -8px 30px rgba(0,0,0,.4)}

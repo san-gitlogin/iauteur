@@ -151,6 +151,25 @@ def index():
     return render_template("index.html")
 
 
+_SHAPES_CACHE: dict | None = None
+
+
+def scene_shapes() -> dict:
+    """{TYPE: {dataKey, req[], fields[]}} from the manifest — which fields each scene
+    component actually reads. Lets the console tell authored data from an undrawable
+    stub using the same rule the server applies. Cached: the manifest is static."""
+    global _SHAPES_CACHE
+    if _SHAPES_CACHE is None:
+        try:
+            proc = subprocess.run([node_exe(), "scripts/component-flow.mjs", "shapes"],
+                                  cwd=str(ROOT), env=run_env(), capture_output=True,
+                                  text=True, encoding="utf-8", errors="replace", timeout=30)
+            _SHAPES_CACHE = json.loads(proc.stdout).get("shapes") or {}
+        except Exception:
+            _SHAPES_CACHE = {}   # console falls back to asking per preview
+    return _SHAPES_CACHE
+
+
 @app.route("/api/config")
 def api_config():
     pv = preview_map()
@@ -169,6 +188,9 @@ def api_config():
         "voices": VOICES,
         "channelDefault": CHANNEL_DEFAULT,
         "topics": existing_topics(),
+        # per-type drawability contract, so a beat row can label its preview
+        # ("your content" vs "sample content") without a round-trip per row
+        "sceneShapes": scene_shapes(),
     })
 
 
@@ -1039,8 +1061,59 @@ def api_component_preview_stream():
             pass
         if final is None:
             final = {"ok": code == 0, "output": f"preview exited with code {code}"}
+        # The client waits on this 'done' frame for the playable url — without it a
+        # SUCCESSFUL render still reports failure (the browser only ever sees
+        # progress lines, then EOF). Mirrors preview-voiceover's ending exactly.
+        if final.get("ok") and final.get("file"):
+            final["url"] = "/proof-img/" + final["file"]
+        yield sse(json.dumps(final), "done")
+
     return Response(stream(), mimetype="text/event-stream",
                     headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@app.route("/api/scene-example", methods=["POST"])
+def api_scene_example():
+    """The manifest's own valid sample `data` for a scene type — what that component
+    is MEANT to show. Lets ANY beat be previewed at the Author step, where beats
+    carry narration but no `data` yet (real data only arrives at Stage 2).
+
+    The caller renders this for LOOKING ONLY and labels it as sample content; it
+    must never be persisted onto the beat, or Stage 2 would inherit placeholder
+    numbers as though they were authored."""
+    body = request.get_json(force=True) or {}
+    typ = (body.get("type") or "").strip()
+    if not typ:
+        return jsonify({"error": "Need a scene type."}), 400
+    # Pass the beat's own data along so component-flow (which has the manifest) can
+    # judge whether it is DRAWABLE and hand back either it or the sample — one
+    # authoritative answer instead of a key-count guess in the browser.
+    tmp = ROOT / "out" / "tmp"
+    tmp.mkdir(parents=True, exist_ok=True)
+    args = [node_exe(), "scripts/component-flow.mjs", "example", typ]
+    datafile = None
+    own = body.get("data")
+    if isinstance(own, dict) and own:
+        datafile = tmp / f"sceneexample_{slugify(typ) or 't'}.json"
+        datafile.write_text(json.dumps(own), encoding="utf-8")
+        args.append(str(datafile))
+    # component-flow prints ONE json line and always exits 0 (ok:false carries the
+    # reason), so parse stdout rather than trusting the exit code.
+    try:
+        proc = subprocess.run(args, cwd=str(ROOT), env=run_env(), capture_output=True,
+                              text=True, encoding="utf-8", errors="replace", timeout=30)
+        r = json.loads(proc.stdout)
+    except Exception as e:
+        return jsonify({"error": f"sample lookup failed: {e}"}), 500
+    finally:
+        if datafile is not None:
+            try:
+                datafile.unlink()
+            except OSError:
+                pass
+    if not r.get("ok"):
+        return jsonify({"error": r.get("error") or f"no sample data for {typ}."}), 400
+    return jsonify(r)
 
 
 @app.route("/api/component/preview-voiceover", methods=["POST"])
