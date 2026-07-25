@@ -92,7 +92,7 @@ For each of `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `
 `RESKIN_CAROUSEL`, `ASPECT_TWIN`, `PIPELINE_GATE`:
 
 - [x] 1 · `SPEC_TO_FRAME` — assembled via the console backend · proofs viewed in moderndark wide+vertical and neobrutalism wide · MIN/MAX/MIX stress · `tsc` clean · gate 10/10 · budgets enforced in `lint-spec.mjs`
-- [ ] 2 · `CAST_BOARD`
+- [x] 2 · `CAST_BOARD` — assembled · proofs viewed moderndark wide + neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · `chosenIndex` replaces a per-item `chosen` flag (the generated Item interface is fixed) · at-budget label fit corrected
 - [ ] 3 · `LAB_ASSEMBLY`
 - [ ] 4 · `BUDGET_METER_ROW`
 - [ ] 5 · `WORD_ANCHOR_RAIL`

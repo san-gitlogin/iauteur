@@ -326,7 +326,8 @@
               "TRADEOFF_SCALE",
               "PIPELINE_GANTT",
               "BATCH_SWEEP",
-              "SPEC_TO_FRAME"
+              "SPEC_TO_FRAME",
+              "CAST_BOARD"
             ]
           },
           "narration": {
@@ -396,6 +397,68 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CAST_BOARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "castBoard": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "beatLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the beat being cast, e.g. 's04 · the split'"
+                        },
+                        "candidates": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label<=18 (the TYPE), detail<=34 (the reason), atWord}"
+                        },
+                        "chosenIndex": {
+                          "type": "number",
+                          "description": "0-based index of the candidate that was cast; exactly one"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the takeaway stamped under the board"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the chosen row"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the verdict stamp only, never the board"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

@@ -35,6 +35,7 @@ export const TYPES = [
   'PIPELINE_GANTT',
   'BATCH_SWEEP',
   'SPEC_TO_FRAME',
+  'CAST_BOARD',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

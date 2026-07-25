@@ -149,9 +149,11 @@ import {TradeoffScale} from './scenes/TradeoffScale';
 import {PipelineGantt} from './scenes/PipelineGantt';
 import {BatchSweep} from './scenes/BatchSweep';
 import {SpecToFrame} from './scenes/SpecToFrame';
+import {CastBoard} from './scenes/CastBoard';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  CAST_BOARD: CastBoard,
   SPEC_TO_FRAME: SpecToFrame,
   BATCH_SWEEP: BatchSweep,
   PIPELINE_GANTT: PipelineGantt,

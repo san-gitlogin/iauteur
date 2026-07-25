@@ -351,3 +351,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | PIPELINE_GANTT | Show how a pipeline overlaps work — one instruction entering a new stage each cycle. | headline≤48, stages, count, color, caption≤48, atWord, source≤64 |
 | BATCH_SWEEP | Contrast one-at-a-time repetition against an all-at-once batch action (hours vs seconds). | headline≤48, rows, slow, fast, atWord, source≤64 |
 | SPEC_TO_FRAME | The point is that a declarative document, not a timeline, is the source of the picture. | headline≤48, specLines, frameLabel≤22, frameBars, specCaption≤18, frameCaption≤18, color, source≤64, atWord |
+| CAST_BOARD | The point is that a choice was reasoned, not defaulted — showing the rejected options is the content. | headline≤48, beatLabel≤26, candidates, chosenIndex, verdict≤30, color, source≤64, atWord |

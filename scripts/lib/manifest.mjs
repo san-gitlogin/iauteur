@@ -17,6 +17,22 @@
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
 export const MANIFEST = {
+  CAST_BOARD: {
+    category: "diagram", family: "row-list", data_key: "castBoard",
+    purpose: "A casting decision made visible: for one beat, several candidate components are weighed and exactly one is chosen, with the reason stated.",
+    use_when: "The point is that a choice was reasoned, not defaulted — showing the rejected options is the content.",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
+      beatLabel: {t: 'string', req: true, max: 26, note: "the beat being cast, e.g. 's04 · the split'"},
+      candidates: {t: 'items', req: true, note: "2-4 x {label<=18 (the TYPE), detail<=34 (the reason), atWord}"},
+      chosenIndex: {t: 'number', req: true, note: "0-based index of the candidate that was cast; exactly one"},
+      verdict: {t: 'string', max: 30, note: "the takeaway stamped under the board"},
+      color: {t: 'string', note: "semantic colour for the chosen row"},
+      source: {t: 'string', max: 64, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "times the verdict stamp only, never the board"},
+    },
+    example: {castBoard: {"headline":"Cast [per beat], never in bulk","beatLabel":"s05 · the two ways in","candidates":[{"label":"SPLIT_PATHS","detail":"one system, two behaviours","atWord":2},{"label":"LOGO_VERSUS","detail":"each side is a pair, not a brand","atWord":3},{"label":"TERMINAL_SESSION","detail":"loses the second half","atWord":4}],"verdict":"chosen with a reason","color":"green","atWord":2,"chosenIndex":0}},
+  },
   SPEC_TO_FRAME: {
     category: "diagram", family: "code-surface", data_key: "specToFrame",
     purpose: "A JSON scene spec on one side resolving into the rendered frame it produces on the other — 'the spec IS the movie' made literal.",

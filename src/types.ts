@@ -1214,7 +1214,28 @@ export interface SpecToFrameData {
   source?: string;
   atWord?: number;
 }
+export interface CastBoardItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CastBoardData {
+  headline?: string;
+  beatLabel?: string;
+  candidates?: CastBoardItem[];
+  chosenIndex?: number;
+  verdict?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  castBoard?: CastBoardData;
   specToFrame?: SpecToFrameData;
   batchSweep?: BatchSweepData;
   pipelineGantt?: PipelineGanttData;
