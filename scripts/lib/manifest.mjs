@@ -16,7 +16,22 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  WORD_ANCHOR_RAIL: {
+export const MANIFEST = {  RESKIN_CAROUSEL: {
+    category: "diagram", family: "framed-surface", data_key: "reskin",
+    purpose: "The same scene shown simultaneously in several design languages, each tile a miniature of one pack, proving one document re-skins rather than being re-authored.",
+    use_when: "The point is that ONE input yields many looks — the tiles must differ from each other, not just be labelled differently.",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
+      sourceLabel: {t: 'string', req: true, max: 24, note: "the single input every tile shares, e.g. 'one scene'"},
+      packs: {t: 'items', req: true, note: "3-5 x {label<=14 (pack name), color (its accent), atWord}"},
+      tileTitle: {t: 'string', req: true, max: 18, note: "the headline drawn inside every tile — identical in all of them, that IS the point"},
+      footNote: {t: 'string', max: 40, note: "the takeaway under the tiles"},
+      source: {t: 'string', max: 64, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "times the footnote only, never the tiles"},
+    },
+    example: {reskin: {"headline":"One scene, [thirty] design languages","sourceLabel":"one scene","packs":[{"label":"moderndark","color":"blue","atWord":2},{"label":"neobrutal","color":"yellow","atWord":3},{"label":"terminalcli","color":"green","atWord":4},{"label":"vaporwave","color":"purple","atWord":5}],"tileTitle":"Portfolio split","footNote":"nothing reads a hardcoded colour","atWord":5}},
+  },
+  WORD_ANCHOR_RAIL: {
     category: "diagram", family: "zone-surface", data_key: "anchorRail",
     purpose: "A line of narration with a playhead moving through it, and marks that fire exactly at the words they are anchored to.",
     use_when: "The point is that timing is tied to specific spoken words, not to a stopwatch.",

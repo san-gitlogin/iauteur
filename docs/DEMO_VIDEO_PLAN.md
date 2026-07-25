@@ -96,7 +96,7 @@ For each of `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `
 - [x] 3 · `LAB_ASSEMBLY` — assembled first try · proofs viewed moderndark wide + vertical, neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · layout re-sized FROM the budgets after MAX ellipsised every label, detail and the verdict in both aspects
 - [x] 4 · `BUDGET_METER_ROW` — assembled first try · proofs viewed moderndark wide + vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · row-id budget tightened 14→8 (a scene id is `s01`; reserving a 200px gutter to fit 14 was the wrong trade)
 - [x] 5 · `WORD_ANCHOR_RAIL` — assembled first try · proofs viewed moderndark wide + neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · word budget tightened 10→8 words / 14→10 chars so the rail stays a true single-line word axis instead of wrapping under a misleading linear bar
-- [ ] 6 · `RESKIN_CAROUSEL`
+- [x] 6 · `RESKIN_CAROUSEL` — assembled first try · proofs viewed moderndark wide (5 packs) + vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · per-tile corner/border personas so the tiles genuinely diverge rather than being recoloured clones
 - [ ] 7 · `ASPECT_TWIN`
 - [ ] 8 · `PIPELINE_GATE`
 

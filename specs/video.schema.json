@@ -330,7 +330,8 @@
               "CAST_BOARD",
               "LAB_ASSEMBLY",
               "BUDGET_METER_ROW",
-              "WORD_ANCHOR_RAIL"
+              "WORD_ANCHOR_RAIL",
+              "RESKIN_CAROUSEL"
             ]
           },
           "narration": {
@@ -400,6 +401,65 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RESKIN_CAROUSEL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "reskin": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "sourceLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the single input every tile shares, e.g. 'one scene'"
+                        },
+                        "packs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 x {label<=14 (pack name), color (its accent), atWord}"
+                        },
+                        "tileTitle": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "the headline drawn inside every tile — identical in all of them, that IS the point"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "the takeaway under the tiles"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the footnote only, never the tiles"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

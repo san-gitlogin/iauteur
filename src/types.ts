@@ -1294,7 +1294,27 @@ export interface WordAnchorRailData {
   source?: string;
   atWord?: number;
 }
+export interface ReskinCarouselItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface ReskinCarouselData {
+  headline?: string;
+  sourceLabel?: string;
+  packs?: ReskinCarouselItem[];
+  tileTitle?: string;
+  footNote?: string;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  reskin?: ReskinCarouselData;
   anchorRail?: WordAnchorRailData;
   budgetMeter?: BudgetMeterRowData;
   labAssembly?: LabAssemblyData;

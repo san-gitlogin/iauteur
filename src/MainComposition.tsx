@@ -153,9 +153,11 @@ import {CastBoard} from './scenes/CastBoard';
 import {LabAssembly} from './scenes/LabAssembly';
 import {BudgetMeterRow} from './scenes/BudgetMeterRow';
 import {WordAnchorRail} from './scenes/WordAnchorRail';
+import {ReskinCarousel} from './scenes/ReskinCarousel';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  RESKIN_CAROUSEL: ReskinCarousel,
   WORD_ANCHOR_RAIL: WordAnchorRail,
   BUDGET_METER_ROW: BudgetMeterRow,
   LAB_ASSEMBLY: LabAssembly,

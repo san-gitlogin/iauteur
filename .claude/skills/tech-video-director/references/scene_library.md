@@ -355,3 +355,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | LAB_ASSEMBLY | The point is that an automated multi-stage build ran and PASSED (or rolled back), not what the code says. | headline≤48, stages, verdict≤24, rollbackNote≤34, color, source≤64, atWord |
 | BUDGET_METER_ROW | The point is that a hard limit is being counted and enforced, and you want the failure visible next to the passes. | headline≤48, rows, used, cap, capLabel≤20, rejectNote≤34, color, source≤64, atWord |
 | WORD_ANCHOR_RAIL | The point is that timing is tied to specific spoken words, not to a stopwatch. | headline≤48, words, marks, playhead, footNote≤40, color, source≤64, atWord |
+| RESKIN_CAROUSEL | The point is that ONE input yields many looks — the tiles must differ from each other, not just be labelled differently. | headline≤48, sourceLabel≤24, packs, tileTitle≤18, footNote≤40, source≤64, atWord |

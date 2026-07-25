@@ -39,6 +39,7 @@ export const TYPES = [
   'LAB_ASSEMBLY',
   'BUDGET_METER_ROW',
   'WORD_ANCHOR_RAIL',
+  'RESKIN_CAROUSEL',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];
