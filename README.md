@@ -3,23 +3,23 @@
 </p>
 
 <p align="center">
-  <a href="docs/media/iauteur-what-you-get.mp4">
-    <img src="docs/media/iauteur-what-you-get-poster.png" width="820"
-         alt="Watch: nobody filmed this — a 98-second film this project made about itself" />
+  <a href="docs/media/iauteur-how-easy.mp4">
+    <img src="docs/media/iauteur-how-easy-poster.png" width="820"
+         alt="Watch: nobody filmed this — the whole workflow, screen by screen, in 2 minutes 38" />
   </a>
 </p>
 
 <p align="center">
-  <b><a href="docs/media/iauteur-what-you-get.mp4">▶&nbsp; Nobody filmed this · 98s</a></b><br>
-  <sub>Described in one line, voiced by edge-tts, rendered by the pipeline below. The clips inside it
-  are real videos this project made. Spec: <code>topics/iauteur-what-you-get/</code>.</sub>
+  <b><a href="docs/media/iauteur-how-easy.mp4">▶&nbsp; Nobody filmed this · 2:38</a></b><br>
+  <sub>The whole thing, screen by screen: type one line, copy the question it writes, paste it into
+  whichever assistant you already use, paste the answer back, preview, and out come four finished
+  videos. Made by this project, about this project. Spec: <code>topics/iauteur-how-easy/</code>.</sub>
 </p>
-
 <p align="center">
   <a href="https://remotion.dev"><img alt="Built with Remotion" src="https://img.shields.io/badge/built%20with-Remotion-0B84F3"></a>
   <img alt="Node" src="https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white">
-  <img alt="151 components" src="https://img.shields.io/badge/components-151-E8A22E">
+  <img alt="156 components" src="https://img.shields.io/badge/components-156-E8A22E">
   <img alt="30 design packs" src="https://img.shields.io/badge/design%20packs-30-E8A22E">
   <img alt="42 themes" src="https://img.shields.io/badge/themes-42-E8A22E">
   <img alt="Works with any LLM" src="https://img.shields.io/badge/works%20with-any%20LLM-8957E5">
@@ -27,7 +27,7 @@
 
 Turn a **topic** into a finished tech‑explainer video. You (or any LLM) describe the video as a
 **JSON spec**; [Remotion](https://remotion.dev) renders it to MP4 — 16:9 long‑form **and** 9:16 shorts,
-each in **dark and light**. The project ships a large, audited component library (**151 scene types**)
+each in **dark and light**. The project ships a large, audited component library (**156 scene types**)
 that automatically reskins across **30 design packs** and **42 themes**.
 
 > **The JSON is the movie.** `topics/<slug>/long.json` + `shorts.json` → Remotion renders exactly what
@@ -156,7 +156,7 @@ stay in step with the UI.</sub>
 
 ## Showcase
 
-A handful of the **151 components**, rendered straight from JSON specs across different design packs
+A handful of the **156 components**, rendered straight from JSON specs across different design packs
 (finance in `corptrust`, science in `organic`) — dark themes shown:
 
 <table>
@@ -387,7 +387,7 @@ LLM prompt, the normalizer, the field validator **and** this schema.
 
 It is a **floor, not the whole law.** The schema checks:
 
-- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 151 types);
+- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 156 types);
 - **enums** — `brand.theme` (dark skins), `themeLight`, `background`, each scene `transition`/`anim`/`background`, `meta.format`;
 - **string budgets** — `maxLength` on every text field, mirrored from the linter.
 
@@ -404,7 +404,7 @@ specs/gallery.json      Component showcase (every type demoed) — feeds the des
 specs/demo-*.json       Finance + science demo videos that exercise the full library.
 src/
   index.ts · Root.tsx   Remotion entry + composition registration (topics + design showcases).
-  MainComposition.tsx   Scene registry: maps scene.type → component (151 types).
+  MainComposition.tsx   Scene registry: maps scene.type → component (156 types).
   types.ts              The spec schema (VideoSpec, Scene, BrandConfig, SceneData…).
   themes.ts             42 themes (38 dark + 4 light) — all colour/font/scale tokens.
   designs/<pack>/       The 30 design packs (per-pack component overrides + chrome + chart kit).
@@ -422,7 +422,7 @@ CLAUDE.md · PROJECT_RULES.md   Repo laws and the topic lifecycle (read before l
 
 ## The component library
 
-**151 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
+**156 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
 RECAP, OUTRO_CTA…), charts (LINE_CHART, BAR_COMPARE, DONUT, FUNNEL, WATERFALL, RADAR, CANDLESTICK, SANKEY,
 TREEMAP, BOX_PLOT, PICTOGRAM…), diagrams & engines (DIAGRAM, PIPELINE, NEURAL_NET, STATE_MACHINE,
 KNOWLEDGE_GRAPH…), code/cloud/AI surfaces (CODE_EDITOR, TERMINAL_SESSION, CLOUD_ARCH, K8S_CLUSTER,

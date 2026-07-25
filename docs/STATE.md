@@ -25,7 +25,7 @@ On Windows, prefix Python with `PYTHONIOENCODING=utf-8` or the seals crash on `�
 | Path | What |
 |---|---|
 | `topics/<slug>/long.json` + `shorts.json` | one folder per video. **Gitignored** — local content, not repo code |
-| `src/scenes/` | the 151 scene components |
+| `src/scenes/` | the 156 scene components |
 | `src/designs/<pack>/` | 30 design packs (layout/motion overrides) |
 | `src/themes.ts` | 42 themes (38 dark + 4 light) |
 | `scripts/lib/manifest.mjs` | **the single source of truth** for every component's data contract + a valid `example` |
@@ -104,7 +104,24 @@ can be regenerated instead of rotting.
 - Remotion renders fetch Google Fonts per render. On a bad connection later scenes throw
   `[NetworkError]`. Kill leaked processes (`Get-Process node | Stop-Process -Force`) and retry.
 
-### 2026-07-25 · demo video v2 — SHIPPED (v1 superseded)
+### 2026-07-26 · demo video v3 — SHIPPED (v1 + v2 superseded)
+
+**`topics/iauteur-how-easy/`** — 2:38 wide (12 scenes) + vertical (10 scenes), moderndark, Ava.
+This is what the README embeds.
+
+**v2 was rejected on VISUAL LANGUAGE.** The narration was fine; a step of the flow was drawn as two
+labelled boxes with arrows between them and the owner's reaction was *"what does it even describe?"*
+v3 is one REAL SCREEN per beat: the console with a title typing in, the Copy button clicking, three
+assistant windows taking the paste, the answer pasted back, the review rewriting a line, a scene
+previewed in a player, a component forged for one row, the voice picked, then the outputs.
+
+**Five components built for it** — `APP_WINDOW`, `PROMPT_HANDOUT`, `CHAT_TRIO`, `VIDEO_PLAYER`,
+`SCENE_FORGE`. Count 151 → **156**. `PROMPT_HANDOFF` (the v2 box diagram) stays in the library but
+is retired from the demo.
+
+**The rule is now in the product, not just this video** — see DEPICT-DON'T-DIAGRAM under Gotchas.
+
+### 2026-07-25 · demo video v2 (superseded)
 
 **`topics/iauteur-what-you-get/`** — 98s wide (12 scenes) + 44s vertical (8 scenes), moderndark,
 `en-US-AvaMultilingualNeural`. This is what the README embeds. v1 (`iauteur-explains-itself`, 67s)

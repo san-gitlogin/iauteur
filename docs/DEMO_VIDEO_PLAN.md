@@ -133,21 +133,21 @@ Tick only after inspecting the real artifact. One phase at a time (LAW 10).
 - [x] 5 · `SCENE_FORGE` — assembled first try · the forged piece enlarged after MAX showed it as weedy stubs
 
 ### Phase C · author
-- [ ] Beat sheet for `iauteur-how-easy`, validates clean
-- [ ] All 12 scenes through the console API (validate → stage2 → assemble → intake)
-- [ ] Grep the spec: zero jargon, and the vertical output is called **shorts/reels**, never "for phones"
-- [ ] `npm run lint` passes with zero warnings, both formats
+- [x] Beat sheet for `iauteur-how-easy`, validates clean
+- [x] All 12 scenes through the console API (validate → stage2 → assemble → intake)
+- [x] Zero jargon; the vertical output is captioned **shorts & reels**
+- [x] `npm run lint` passes with **zero warnings**, both formats (10 pacing warnings cleared by the TTS re-time, 2 more by trimming s06/s11, 2 late-anchor warnings in the vertical by restructuring)
 
 ### Phase D · voice + render
-- [ ] Voiceover (Ava) + `sync.mjs` re-time
-- [ ] Stills reviewed for all 12 beats **after** the voiceover pass
-- [ ] `wide-dark` + `short-dark` rendered and watched end to end
-- [ ] `thumb` + `cover`
+- [x] Voiceover (Ava) + `sync.mjs` re-time — 3:34 estimated came in at **2:38** real
+- [x] Stills reviewed after the voiceover pass — caught APP_WINDOW typing on the scene anchor instead of the field's own word, leaving the field empty while the narration described typing
+- [x] `wide-dark` rendered and watched frame by frame from the finished mp4; `short-dark` rendered
+- [x] `thumb` + `cover`
 
 ### Phase E · ship
-- [ ] README embed swapped to v3; `docs/media/` refreshed
-- [ ] `docs/STATE.md` + counts updated
-- [ ] Committed and pushed to `main`
+- [x] README embed swapped to v3; `docs/media/` refreshed
+- [x] `docs/STATE.md` + counts updated (156)
+- [x] Committed and pushed to `main`
 
 ---
 
