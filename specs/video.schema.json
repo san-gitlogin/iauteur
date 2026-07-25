@@ -334,7 +334,8 @@
               "RESKIN_CAROUSEL",
               "ASPECT_TWIN",
               "PIPELINE_GATE",
-              "TOPIC_INTAKE"
+              "TOPIC_INTAKE",
+              "PROMPT_HANDOFF"
             ]
           },
           "narration": {
@@ -404,6 +405,74 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PROMPT_HANDOFF"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "promptHandoff": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "outLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "what leaves, e.g. 'the question'"
+                        },
+                        "backLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "what comes back, e.g. 'the answer'"
+                        },
+                        "assistants": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 x {label<=14 (the assistant), atWord} — the whole row is the argument"
+                        },
+                        "appLabel": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "the tool the trip starts and ends at"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "the takeaway under the loop"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the outbound path"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 58,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word from narration the answer travels back on"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

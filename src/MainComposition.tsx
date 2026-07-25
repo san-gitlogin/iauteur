@@ -157,9 +157,11 @@ import {ReskinCarousel} from './scenes/ReskinCarousel';
 import {AspectTwin} from './scenes/AspectTwin';
 import {PipelineGate} from './scenes/PipelineGate';
 import {TopicIntake} from './scenes/TopicIntake';
+import {PromptHandoff} from './scenes/PromptHandoff';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  PROMPT_HANDOFF: PromptHandoff,
   TOPIC_INTAKE: TopicIntake,
   PIPELINE_GATE: PipelineGate,
   ASPECT_TWIN: AspectTwin,

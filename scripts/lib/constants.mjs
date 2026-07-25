@@ -43,6 +43,7 @@ export const TYPES = [
   'ASPECT_TWIN',
   'PIPELINE_GATE',
   'TOPIC_INTAKE',
+  'PROMPT_HANDOFF',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

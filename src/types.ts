@@ -1357,7 +1357,29 @@ export interface TopicIntakeData {
   source?: string;
   atWord?: number;
 }
+export interface PromptHandoffItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface PromptHandoffData {
+  headline?: string;
+  outLabel?: string;
+  backLabel?: string;
+  assistants?: PromptHandoffItem[];
+  appLabel?: string;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  promptHandoff?: PromptHandoffData;
   topicIntake?: TopicIntakeData;
   pipelineGate?: PipelineGateData;
   aspectTwin?: AspectTwinData;

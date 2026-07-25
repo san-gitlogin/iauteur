@@ -16,7 +16,24 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  TOPIC_INTAKE: {
+export const MANIFEST = {  PROMPT_HANDOFF: {
+    category: "diagram", family: "prompt-handoff", data_key: "promptHandoff",
+    purpose: "A round trip to an assistant you already use: a question is copied out, handed to any one of several named assistants, and the answer travels back and is pasted in. The LOOP is the content — the point is that the tool is not tied to one provider.",
+    use_when: "The point is portability and a copy-out / paste-back hand-off, not a conversation and not a wire protocol.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      outLabel: {t: 'string', req: true, max: 20, note: "what leaves, e.g. 'the question'"},
+      backLabel: {t: 'string', req: true, max: 20, note: "what comes back, e.g. 'the answer'"},
+      assistants: {t: 'items', note: "2-5 x {label<=14 (the assistant), atWord} — the whole row is the argument"},
+      appLabel: {t: 'string', max: 16, note: "the tool the trip starts and ends at"},
+      footNote: {t: 'string', max: 40, note: "the takeaway under the loop"},
+      color: {t: 'string', note: "semantic colour for the outbound path"},
+      source: {t: 'string', max: 58, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "word from narration the answer travels back on"},
+    },
+    example: {promptHandoff: {"headline":"Use the assistant [you already pay for]","outLabel":"the question","backLabel":"the answer","assistants":[{"label":"ChatGPT","atWord":3},{"label":"Claude","atWord":4},{"label":"Gemini","atWord":5},{"label":"your own","atWord":6}],"appLabel":"iAuteur","footNote":"copy out, paste back. that is it","color":"blue","atWord":8}},
+  },
+  TOPIC_INTAKE: {
     category: "device", family: "topic-intake", data_key: "topicIntake",
     purpose: "The first step of an authoring tool, shown honestly: a title being TYPED into a real input field, with the two or three other choices sitting beside it — the argument is how little you have to fill in.",
     use_when: "The point is that the input is trivially small. Show the form, not the output.",

@@ -359,3 +359,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | ASPECT_TWIN | The point is that several finished files come from ONE input without re-authoring. | headline≤48, sourceLabel≤22, wideLabel≤20, tallLabel≤20, variantLabels, countLabel≤26, color, source≤64, atWord |
 | PIPELINE_GATE | The point is that a check has AUTHORITY — the rejection loop is the content, not an error state. | headline≤48, proposerLabel≤20, gateLabel≤18, outputLabel≤20, passLabel≤16, rejectLabel≤24, checks, footNote≤40, color, source≤64, atWord |
 | TOPIC_INTAKE | The point is that the input is trivially small. Show the form, not the output. | headline≤48, fieldLabel≤20, typed≤44, choices, caption≤38, color, source≤58, atWord |
+| PROMPT_HANDOFF | The point is portability and a copy-out / paste-back hand-off, not a conversation and not a wire protocol. | headline≤48, outLabel≤20, backLabel≤20, assistants, appLabel≤16, footNote≤40, color, source≤58, atWord |
