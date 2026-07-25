@@ -41,6 +41,7 @@ export const TYPES = [
   'WORD_ANCHOR_RAIL',
   'RESKIN_CAROUSEL',
   'ASPECT_TWIN',
+  'PIPELINE_GATE',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

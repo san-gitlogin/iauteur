@@ -332,7 +332,8 @@
               "BUDGET_METER_ROW",
               "WORD_ANCHOR_RAIL",
               "RESKIN_CAROUSEL",
-              "ASPECT_TWIN"
+              "ASPECT_TWIN",
+              "PIPELINE_GATE"
             ]
           },
           "narration": {
@@ -402,6 +403,84 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PIPELINE_GATE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "pipelineGate": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "proposerLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "who proposes, e.g. 'any model'"
+                        },
+                        "gateLabel": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "the judge, e.g. 'the linter'"
+                        },
+                        "outputLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "what passing produces, e.g. 'rendered video'"
+                        },
+                        "passLabel": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "the pass edge label (<=12 so it fits the edge without spilling)"
+                        },
+                        "rejectLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the return-path label"
+                        },
+                        "checks": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "1-4 chips of what the gate enforces, each <=16 chars"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "the takeaway under the diagram"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the pass path"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the reject loop only; the pipeline is base"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

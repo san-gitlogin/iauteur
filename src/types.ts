@@ -1324,7 +1324,21 @@ export interface AspectTwinData {
   source?: string;
   atWord?: number;
 }
+export interface PipelineGateData {
+  headline?: string;
+  proposerLabel?: string;
+  gateLabel?: string;
+  outputLabel?: string;
+  passLabel?: string;
+  rejectLabel?: string;
+  checks?: string[];
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  pipelineGate?: PipelineGateData;
   aspectTwin?: AspectTwinData;
   reskin?: ReskinCarouselData;
   anchorRail?: WordAnchorRailData;

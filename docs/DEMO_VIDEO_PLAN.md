@@ -98,7 +98,7 @@ For each of `SPEC_TO_FRAME`, `CAST_BOARD`, `LAB_ASSEMBLY`, `BUDGET_METER_ROW`, `
 - [x] 5 · `WORD_ANCHOR_RAIL` — assembled first try · proofs viewed moderndark wide + neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · word budget tightened 10→8 words / 14→10 chars so the rail stays a true single-line word axis instead of wrapping under a misleading linear bar
 - [x] 6 · `RESKIN_CAROUSEL` — assembled first try · proofs viewed moderndark wide (5 packs) + vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · per-tile corner/border personas so the tiles genuinely diverge rather than being recoloured clones
 - [x] 7 · `ASPECT_TWIN` — assembled first try · proofs viewed moderndark wide + neobrutalism vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · dark/light drawn as genuinely inverted surfaces rather than captioned · shared frame-row baseline so the two groups' captions align
-- [ ] 8 · `PIPELINE_GATE`
+- [x] 8 · `PIPELINE_GATE` — assembled first try · proofs viewed moderndark wide + vertical · MIN/MAX/MIX · budgets in `lint-spec.mjs` · return-path elbow rebuilt from positioned divs after a scaled SVG drew it as disconnected stubs; the vertical elbow needed the same treatment separately
 
 Per-component audit, every time: assemble reports ok · `npm run typecheck` clean · `npm run gate`
 still 0 · a proof still viewed in **both** aspects · looks right in `moderndark` **and** one other

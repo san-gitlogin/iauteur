@@ -16,7 +16,26 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  ASPECT_TWIN: {
+export const MANIFEST = {  PIPELINE_GATE: {
+    category: "diagram", family: "PIPELINE", data_key: "pipelineGate",
+    purpose: "A proposal meeting a hard gate: what passes continues to the output, what fails is turned back along a visible return path instead of shipping.",
+    use_when: "The point is that a check has AUTHORITY — the rejection loop is the content, not an error state.",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
+      proposerLabel: {t: 'string', req: true, max: 20, note: "who proposes, e.g. 'any model'"},
+      gateLabel: {t: 'string', req: true, max: 18, note: "the judge, e.g. 'the linter'"},
+      outputLabel: {t: 'string', req: true, max: 20, note: "what passing produces, e.g. 'rendered video'"},
+      passLabel: {t: 'string', max: 16, note: "the pass edge label (<=12 so it fits the edge without spilling)"},
+      rejectLabel: {t: 'string', max: 24, note: "the return-path label"},
+      checks: {t: 'string[]', note: "1-4 chips of what the gate enforces, each <=16 chars"},
+      footNote: {t: 'string', max: 40, note: "the takeaway under the diagram"},
+      color: {t: 'string', note: "semantic colour for the pass path"},
+      source: {t: 'string', max: 64, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "times the reject loop only; the pipeline is base"},
+    },
+    example: {pipelineGate: {"headline":"The model proposes, the linter [judges]","proposerLabel":"any model","gateLabel":"the linter","outputLabel":"rendered video","passLabel":"passes","rejectLabel":"rejected, sent back","checks":["budgets","structure","word anchors"],"footNote":"bad output fails loudly, never quietly","color":"green","atWord":5}},
+  },
+  ASPECT_TWIN: {
     category: "diagram", family: "node-graph", data_key: "aspectTwin",
     purpose: "One source document fanning out into its deliverables — true-proportion frames in both aspect ratios, each in a dark and a light variant.",
     use_when: "The point is that several finished files come from ONE input without re-authoring.",
