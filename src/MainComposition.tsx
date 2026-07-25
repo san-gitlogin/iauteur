@@ -160,9 +160,11 @@ import {TopicIntake} from './scenes/TopicIntake';
 import {PromptHandoff} from './scenes/PromptHandoff';
 import {CheckSweep} from './scenes/CheckSweep';
 import {AppWindow} from './scenes/AppWindow';
+import {PromptHandout} from './scenes/PromptHandout';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  PROMPT_HANDOUT: PromptHandout,
   APP_WINDOW: AppWindow,
   CHECK_SWEEP: CheckSweep,
   PROMPT_HANDOFF: PromptHandoff,

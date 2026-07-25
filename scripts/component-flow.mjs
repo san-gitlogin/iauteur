@@ -154,6 +154,10 @@ function buildManifestEntry(cfg) {
   const fieldLines = cfg.fields.map((f) => {
     const bits = [`t: '${f.t}'`];
     if (f.req) bits.push('req: true');
+    // preserveWs was accepted in the config and silently dropped here, so a field whose
+    // note promised preserved indentation had it collapsed by normalize before the
+    // component ever saw it (exactly how SPEC_TO_FRAME shipped documented-but-broken).
+    if (f.preserveWs) bits.push('preserveWs: true');
     if (f.max) bits.push(`max: ${f.max}`);
     if (f.note) bits.push(`note: ${JSON.stringify(f.note)}`);
     return `      ${f.name}: {${bits.join(', ')}},`;

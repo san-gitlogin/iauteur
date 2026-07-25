@@ -1425,7 +1425,19 @@ export interface AppWindowData {
   source?: string;
   atWord?: number;
 }
+export interface PromptHandoutData {
+  headline?: string;
+  panelTitle?: string;
+  lines?: string[];
+  copyLabel?: string;
+  copiedLabel?: string;
+  hint?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  promptHandout?: PromptHandoutData;
   appWindow?: AppWindowData;
   checkSweep?: CheckSweepData;
   promptHandoff?: PromptHandoffData;

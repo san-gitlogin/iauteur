@@ -16,7 +16,24 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  APP_WINDOW: {
+export const MANIFEST = {  PROMPT_HANDOUT: {
+    category: "framed", family: "prompt-handout", data_key: "promptHandout",
+    purpose: "A block of text an app hands you to take somewhere else, with a real Copy button that clicks, confirms, and leaves the text selected — the literal moment of copying, not a diagram of a hand-off.",
+    use_when: "Someone has to carry something out of one tool and into another. Show the panel and the button, never an arrow between two boxes.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      panelTitle: {t: 'string', req: true, max: 24, note: "the panel's own heading, e.g. 'Your question'"},
+      lines: {t: 'string[]', req: true, preserveWs: true, note: "2-6 lines of the text being handed over, each <=46 chars; leading spaces preserved"},
+      copyLabel: {t: 'string', max: 14, note: "the button before the click, e.g. 'Copy'"},
+      copiedLabel: {t: 'string', max: 16, note: "the button after the click, e.g. 'Copied!'"},
+      hint: {t: 'string', max: 40, note: "where it goes next, under the panel"},
+      color: {t: 'string', note: "semantic colour for the button and selection"},
+      source: {t: 'string', max: 58, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "word from narration the Copy button clicks on"},
+    },
+    example: {promptHandout: {"headline":"It writes [the question] for you","panelTitle":"Your question","lines":["Make a two minute video about","how money actually moves.","Twelve scenes. Plain English.","Return it as one answer."],"copyLabel":"Copy","copiedLabel":"Copied!","hint":"now take it to any assistant","color":"blue","atWord":6}},
+  },
+  APP_WINDOW: {
     category: "framed", family: "app-window", data_key: "appWindow",
     purpose: "A real application window doing one real thing: title bar, a numbered step rail down the side with one step active, and a content area of labelled fields — one of which types itself in — plus a button that visibly clicks. Shows the actual screen a person uses, not a diagram of the workflow.",
     use_when: "You are showing a step someone performs IN an app. Always prefer this over an abstract flow diagram of the same step.",

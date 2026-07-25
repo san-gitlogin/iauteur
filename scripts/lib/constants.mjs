@@ -46,6 +46,7 @@ export const TYPES = [
   'PROMPT_HANDOFF',
   'CHECK_SWEEP',
   'APP_WINDOW',
+  'PROMPT_HANDOUT',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

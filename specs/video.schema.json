@@ -337,7 +337,8 @@
               "TOPIC_INTAKE",
               "PROMPT_HANDOFF",
               "CHECK_SWEEP",
-              "APP_WINDOW"
+              "APP_WINDOW",
+              "PROMPT_HANDOUT"
             ]
           },
           "narration": {
@@ -407,6 +408,74 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PROMPT_HANDOUT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "promptHandout": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "panelTitle": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the panel's own heading, e.g. 'Your question'"
+                        },
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-6 lines of the text being handed over, each <=46 chars; leading spaces preserved"
+                        },
+                        "copyLabel": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "the button before the click, e.g. 'Copy'"
+                        },
+                        "copiedLabel": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "the button after the click, e.g. 'Copied!'"
+                        },
+                        "hint": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "where it goes next, under the panel"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the button and selection"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 58,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word from narration the Copy button clicks on"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {
