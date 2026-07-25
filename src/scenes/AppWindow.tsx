@@ -37,7 +37,11 @@ export const AppWindow: React.FC<{scene: Scene}> = ({scene}) => {
   // with a long value the field is still filling when the anchor lands.
   const typedVal = (typeIdxSafe >= 0 ? fields[typeIdxSafe]?.text ?? '' : '');
   const typeDur = Math.max(16, Math.min(52, typedVal.length * 1.6));
-  const typeFrom = Math.max(base + 6, payoff - typeDur);
+  // The field types on ITS OWN anchored word — the moment the narration says you type
+  // something — not on the scene anchor. Deriving it from the scene anchor left the
+  // field visibly empty through most of the beat when the button click was anchored
+  // late, which is the opposite of what the line is describing.
+  const typeFrom = Math.max(base + 6, typeIdxSafe >= 0 ? wordToFrame(fields[typeIdxSafe]?.atWord ?? 1) : base + 6);
   const typeEnd = typeFrom + typeDur;
   const clickAt = Math.max(payoff, typeEnd + 2);
   const ease = (from: number, dur: number) =>
