@@ -1253,7 +1253,29 @@ export interface LabAssemblyData {
   source?: string;
   atWord?: number;
 }
+export interface BudgetMeterRowItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface BudgetMeterRowData {
+  headline?: string;
+  rows?: BudgetMeterRowItem[];
+  used?: number[];
+  cap?: number;
+  capLabel?: string;
+  rejectNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  budgetMeter?: BudgetMeterRowData;
   labAssembly?: LabAssemblyData;
   castBoard?: CastBoardData;
   specToFrame?: SpecToFrameData;

@@ -328,7 +328,8 @@
               "BATCH_SWEEP",
               "SPEC_TO_FRAME",
               "CAST_BOARD",
-              "LAB_ASSEMBLY"
+              "LAB_ASSEMBLY",
+              "BUDGET_METER_ROW"
             ]
           },
           "narration": {
@@ -398,6 +399,75 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BUDGET_METER_ROW"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "budgetMeter": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label<=14 (scene id), text<=40 (the line being measured), atWord}"
+                        },
+                        "used": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "words used per row, parallel to rows[]"
+                        },
+                        "cap": {
+                          "type": "number",
+                          "description": "the shared budget every row is measured against"
+                        },
+                        "capLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "what the cap is, e.g. 'words per scene'"
+                        },
+                        "rejectNote": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the consequence line under the rows"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for rows within budget"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the reject stamp only, never the rows"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

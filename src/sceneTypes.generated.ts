@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'BUDGET_METER_ROW'
   | 'LAB_ASSEMBLY'
   | 'CAST_BOARD'
   | 'SPEC_TO_FRAME'
@@ -161,6 +162,20 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type BudgetMeterRowScene = SceneCommon<'BUDGET_METER_ROW'> & { data: {
+    budgetMeter: {
+      headline: string;
+      rows: Array<Record<string, unknown>>;
+      used: number[];
+      cap: number;
+      capLabel?: string;
+      rejectNote?: string;
+      color?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
 
 export type LabAssemblyScene = SceneCommon<'LAB_ASSEMBLY'> & { data: {
     labAssembly: {
@@ -1476,6 +1491,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  BUDGET_METER_ROW: BudgetMeterRowScene;
   LAB_ASSEMBLY: LabAssemblyScene;
   CAST_BOARD: CastBoardScene;
   SPEC_TO_FRAME: SpecToFrameScene;
@@ -1626,6 +1642,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | BudgetMeterRowScene
   | LabAssemblyScene
   | CastBoardScene
   | SpecToFrameScene

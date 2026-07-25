@@ -17,6 +17,23 @@
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
 export const MANIFEST = {
+  BUDGET_METER_ROW: {
+    category: "chart", family: "gauge-surface", data_key: "budgetMeter",
+    purpose: "Lines of text measured against a shared word budget, each with a fill meter — the ones inside the cap pass, the one over it is marked rejected.",
+    use_when: "The point is that a hard limit is being counted and enforced, and you want the failure visible next to the passes.",
+    fields: {
+      headline: {t: 'string', req: true, max: 48, note: "one [accent] phrase allowed"},
+      rows: {t: 'items', req: true, note: "2-4 x {label<=8 (scene id), text<=40 (the line being measured), atWord}"},
+      used: {t: 'number[]', req: true, note: "words used per row, parallel to rows[]"},
+      cap: {t: 'number', req: true, note: "the shared budget every row is measured against"},
+      capLabel: {t: 'string', max: 20, note: "what the cap is, e.g. 'words per scene'"},
+      rejectNote: {t: 'string', max: 34, note: "the consequence line under the rows"},
+      color: {t: 'string', note: "semantic colour for rows within budget"},
+      source: {t: 'string', max: 64, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "times the reject stamp only, never the rows"},
+    },
+    example: {budgetMeter: {"headline":"Counted, not [estimated]","rows":[{"label":"s03","text":"A topic becomes a JSON spec","atWord":2},{"label":"s04","text":"One hundred forty components","atWord":3},{"label":"s05","text":"This line runs well past what fits","atWord":4}],"used":[12,17,27],"cap":20,"capLabel":"words per scene","rejectNote":"over budget? it will not render","color":"green","atWord":4}},
+  },
   LAB_ASSEMBLY: {
     category: "diagram", family: "stream-surface", data_key: "labAssembly",
     purpose: "A build pipeline advancing stage by stage with a verdict at the end — a described component becoming wired, compiled code.",

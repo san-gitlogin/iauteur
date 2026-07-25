@@ -353,3 +353,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | SPEC_TO_FRAME | The point is that a declarative document, not a timeline, is the source of the picture. | headline≤48, specLines, frameLabel≤22, frameBars, specCaption≤18, frameCaption≤18, color, source≤64, atWord |
 | CAST_BOARD | The point is that a choice was reasoned, not defaulted — showing the rejected options is the content. | headline≤48, beatLabel≤26, candidates, chosenIndex, verdict≤30, color, source≤64, atWord |
 | LAB_ASSEMBLY | The point is that an automated multi-stage build ran and PASSED (or rolled back), not what the code says. | headline≤48, stages, verdict≤24, rollbackNote≤34, color, source≤64, atWord |
+| BUDGET_METER_ROW | The point is that a hard limit is being counted and enforced, and you want the failure visible next to the passes. | headline≤48, rows, used, cap, capLabel≤20, rejectNote≤34, color, source≤64, atWord |

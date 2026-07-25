@@ -151,9 +151,11 @@ import {BatchSweep} from './scenes/BatchSweep';
 import {SpecToFrame} from './scenes/SpecToFrame';
 import {CastBoard} from './scenes/CastBoard';
 import {LabAssembly} from './scenes/LabAssembly';
+import {BudgetMeterRow} from './scenes/BudgetMeterRow';
 import {ScenePipLayer} from './video';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  BUDGET_METER_ROW: BudgetMeterRow,
   LAB_ASSEMBLY: LabAssembly,
   CAST_BOARD: CastBoard,
   SPEC_TO_FRAME: SpecToFrame,

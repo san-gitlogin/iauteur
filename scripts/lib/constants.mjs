@@ -37,6 +37,7 @@ export const TYPES = [
   'SPEC_TO_FRAME',
   'CAST_BOARD',
   'LAB_ASSEMBLY',
+  'BUDGET_METER_ROW',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];
