@@ -123,7 +123,7 @@ if (n >= 8) {
   const cap = Math.max(4, Math.ceil(n * 0.35));
   for (const [st, c] of Object.entries(counts))
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
-  const DYNAMIC = ['CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -398,6 +398,26 @@ for (const s of spec.scenes ?? []) {
     if (d.lineChart.variant === 'dualaxis' && (d.lineChart.series ?? []).length < 2) E(`${id}: LINE_CHART dualaxis needs 2 series`);
     if (len(d.lineChart.y2Unit) > 6) E(`${id}: LINE_CHART y2Unit > 6 chars`);
   }
+  if (d.videoPlayer) {
+    const vp = d.videoPlayer;
+    const cl = vp.clips ?? [];
+    if (len(vp.headline) > 48) E(`${id}: videoPlayer headline > 48 chars`);
+    if (!cl.length) E(`${id}: VIDEO_PLAYER needs ≥1 clip`);
+    if (cl.length > 3) E(`${id}: VIDEO_PLAYER max 3 clips (got ${cl.length})`);
+    for (const c of cl) {
+      if (len(c.label) > 28) E(`${id}: videoPlayer clip label "${c.label}" > 28 chars`);
+      checkColor(id, 'videoPlayer.clip.color', c.color);
+    }
+    if (len(vp.runtime) > 8) E(`${id}: videoPlayer runtime > 8 chars`);
+    if (vp.runtime && !/^\d{1,2}:\d{2}$/.test(String(vp.runtime)))
+      E(`${id}: videoPlayer runtime "${vp.runtime}" must read as a clock, e.g. "2:14"`);
+    if (vp.startAt != null && (vp.startAt < 0 || vp.startAt > 0.9))
+      E(`${id}: videoPlayer.startAt must be 0-0.9 (a play head starting at the end has nowhere to travel)`);
+    if (len(vp.badge) > 16) E(`${id}: videoPlayer badge > 16 chars`);
+    if (len(vp.footNote) > 42) E(`${id}: videoPlayer footNote > 42 chars`);
+    checkColor(id, 'videoPlayer.color', vp.color);
+  }
+
   if (d.chatTrio) {
     const ct = d.chatTrio;
     const as = ct.assistants ?? [];

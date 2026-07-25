@@ -48,6 +48,7 @@ export const TYPES = [
   'APP_WINDOW',
   'PROMPT_HANDOUT',
   'CHAT_TRIO',
+  'VIDEO_PLAYER',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

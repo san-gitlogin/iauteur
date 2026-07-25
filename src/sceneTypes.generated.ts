@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'VIDEO_PLAYER'
   | 'CHAT_TRIO'
   | 'PROMPT_HANDOUT'
   | 'APP_WINDOW'
@@ -172,6 +173,20 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type VideoPlayerScene = SceneCommon<'VIDEO_PLAYER'> & { data: {
+    videoPlayer: {
+      headline?: string;
+      clips: Array<Record<string, unknown>>;
+      runtime?: string;
+      startAt?: number;
+      badge?: string;
+      footNote?: string;
+      color?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
 
 export type ChatTrioScene = SceneCommon<'CHAT_TRIO'> & { data: {
     chatTrio: {
@@ -1644,6 +1659,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  VIDEO_PLAYER: VideoPlayerScene;
   CHAT_TRIO: ChatTrioScene;
   PROMPT_HANDOUT: PromptHandoutScene;
   APP_WINDOW: AppWindowScene;
@@ -1805,6 +1821,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | VideoPlayerScene
   | ChatTrioScene
   | PromptHandoutScene
   | AppWindowScene

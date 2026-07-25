@@ -1457,7 +1457,29 @@ export interface ChatTrioData {
   source?: string;
   atWord?: number;
 }
+export interface VideoPlayerItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface VideoPlayerData {
+  headline?: string;
+  clips?: VideoPlayerItem[];
+  runtime?: string;
+  startAt?: number;
+  badge?: string;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  videoPlayer?: VideoPlayerData;
   chatTrio?: ChatTrioData;
   promptHandout?: PromptHandoutData;
   appWindow?: AppWindowData;

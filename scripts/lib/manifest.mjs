@@ -16,7 +16,24 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  CHAT_TRIO: {
+export const MANIFEST = {  VIDEO_PLAYER: {
+    category: "media", family: "video-player", data_key: "videoPlayer",
+    purpose: "One to three real video players — chrome, a play control, a scrubber that actually advances and a running clock — each playing an actual clip. THE way to show a finished video, because a player is what a viewer recognises a video by.",
+    use_when: "You are demonstrating video OUTPUT. Never show finished video through a screenshot stack, a device bezel or a full-bleed clip with no player.",
+    fields: {
+      headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
+      clips: {t: 'items', req: true, note: "1-3 x {label<=28 (the video's title, shown in the player bar), asset (clip path, e.g. assets/video/x.mp4), atWord}"},
+      runtime: {t: 'string', max: 8, note: "the total time on the clock, e.g. '2:14'"},
+      startAt: {t: 'number', note: "0-1, where the scrubber starts; it advances across the scene"},
+      badge: {t: 'string', max: 16, note: "a chip over the player, e.g. 'PREVIEW' or 'FINISHED'"},
+      footNote: {t: 'string', max: 42, note: "the takeaway under the players"},
+      color: {t: 'string', note: "semantic colour for the played portion and the badge"},
+      source: {t: 'string', max: 58, note: "optional attribution footer"},
+      atWord: {t: 'anchor', note: "word from narration the play head starts moving on"},
+    },
+    example: {videoPlayer: {"headline":"This is what [comes out]","clips":[{"label":"How money actually moves","asset":"assets/video/sample_market.mp4","atWord":3}],"runtime":"2:14","startAt":0.15,"badge":"FINISHED","footNote":"nobody filmed a second of it","color":"blue","atWord":5}},
+  },
+  CHAT_TRIO: {
     category: "mockup", family: "chat-trio", data_key: "chatTrio",
     purpose: "Two to three assistant windows side by side, each receiving the SAME pasted message, thinking, and returning an answer — the literal screens, showing that any one of them will do.",
     use_when: "The point is that the work is portable across assistants. Show the three windows doing it, never an arrow to a box labelled with brand names.",

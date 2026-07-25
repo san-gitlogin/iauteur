@@ -339,7 +339,8 @@
               "CHECK_SWEEP",
               "APP_WINDOW",
               "PROMPT_HANDOUT",
-              "CHAT_TRIO"
+              "CHAT_TRIO",
+              "VIDEO_PLAYER"
             ]
           },
           "narration": {
@@ -409,6 +410,73 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "VIDEO_PLAYER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "videoPlayer": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "clips": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-3 x {label<=28 (the video's title, shown in the player bar), asset (clip path, e.g. assets/video/x.mp4), atWord}"
+                        },
+                        "runtime": {
+                          "type": "string",
+                          "maxLength": 8,
+                          "description": "the total time on the clock, e.g. '2:14'"
+                        },
+                        "startAt": {
+                          "type": "number",
+                          "description": "0-1, where the scrubber starts; it advances across the scene"
+                        },
+                        "badge": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "a chip over the player, e.g. 'PREVIEW' or 'FINISHED'"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 42,
+                          "description": "the takeaway under the players"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the played portion and the badge"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 58,
+                          "description": "optional attribution footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word from narration the play head starts moving on"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {
