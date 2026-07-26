@@ -18,7 +18,9 @@ When the user asks for a video — ANY phrasing — your FIRST action, before sc
 Show the default on every option. "Use defaults" fills the rest — but the user must be ASKED, never silently defaulted. Skip only the questions their request already answered.
 
 ## STANDING DEFAULTS (the user's own — override only if they say so)
-- Channel: **YOUR CHANNEL** · logo: `public/assets/channel_logo.png` (source files in `logo/`)
+- Channel: whatever `references/channel_profile.md` says (unfilled default: **YOUR CHANNEL**) · logo:
+  `public/assets/channel_logo.png` — ships as iAuteur's own mark; drop your own PNG in at that path to rebrand
+  every video at once
 - Design/theme when unspecified: **moderndark** · Voice: **en-US-AvaMultilingualNeural** (edge-tts)
 - **`brand.logo: "img:channel_logo.png"` in EVERY spec** — it drives the in-video watermark (bottom-right wide / top-left vertical), the thumbnail + cover stamp, and the OUTRO_CTA subscribe circle. new-topic scaffolds it; never delete it.
 

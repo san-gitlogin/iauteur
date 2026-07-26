@@ -155,6 +155,7 @@ stay in step with the UI.</sub>
 - [Troubleshooting](#troubleshooting)
 - [Repository conventions](#repository-conventions)
 - [Credits & attribution](#credits--attribution)
+- [Licence](#licence)
 
 ---
 
@@ -508,3 +509,18 @@ template vocabulary, and design languages were learned and adapted from these so
 
 Trademarks and brand logos belong to their respective owners. If you redistribute this repository, keep this
 section and honour each upstream project's licence.
+
+## Licence
+
+This project's own source is **[MIT](LICENSE)** — use it, fork it, ship things with it.
+
+One thing to check before you do that commercially: **Remotion, the engine that does the rendering, is
+not MIT.** It is free for individuals and small teams, but companies above a certain size need a paid
+licence — read <https://remotion.dev/license>. The MIT licence here covers this repository's code and
+cannot relicense Remotion, so that obligation is yours, not this project's.
+
+Bundled glyphs are [Lucide](https://lucide.dev) (ISC) and brand logos are [Simple Icons](https://simpleicons.org)
+(CC0), used nominatively. `public/assets/` also contains reference images fetched during authoring, each with
+its provenance recorded in `public/assets/SOURCES.json` — check that file before reusing one.
+
+Drop your own logo in as `public/assets/channel_logo.png` and every spec's `brand.logo` picks it up.

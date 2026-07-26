@@ -273,10 +273,26 @@ of a family adjacent. 7 distinct transition kinds (need ≥5).
 
 ---
 
-## OPEN — needs the owner, do not action unilaterally
+## RESOLVED — the open-sourcing pass (2026-07-26)
 
-**Channel references before the repo goes public.** `references/channel_profile.md`, `CLAUDE.md`,
-`public/assets/channel_logo.png`, `scripts/gen-upload-kit.mjs` and `briefs/` name YOUR CHANNEL in
-plain text. `topics/*` is gitignored, so no video content is exposed. The owner will make the repo
-public and post the video on LinkedIn as their work, but said *"ill never mention ill use it for my
-youtube channel"* — so this needs their decision before visibility is flipped.
+**Channel references are gone.** The owner decided to strip the channel identity rather than publish
+it, so: `logo/` (11 brand-mark PNG/SVGs) deleted and purged from history; `public/assets/channel_logo.png`
+replaced with iAuteur's own clapperboard mark, which is what the slot now ships as; the channel name
+neutralised to `YOUR CHANNEL` across 32 files (configs, briefs, fixtures, `webui/app.py`,
+`scripts/new-topic.mjs`, `gen-upload-kit.mjs`, `CLAUDE.md`, docs), along with the example `@handle`, the
+newsprint pack's masthead default, the terminal-cli pack's prompt hostname and the asset-fetch
+User-Agent; `channel_profile.md` now ships as an unfilled template. `topics/*` was already gitignored, so no video
+content was ever exposed.
+
+**Deliberately left alone.** `public/assets/SOURCES.json` still records `picsum.photos/seed/nbx-*` URLs.
+Those are a provenance record of what was actually fetched — rewriting them would make the record untrue,
+and a picsum seed string carries no brand signal. `package-lock.json` has one `nbx` substring inside a
+base64 integrity hash; it is a coincidence, not a name.
+
+**Licence.** MIT (`LICENSE`), with an explicit note that it cannot relicense Remotion — free for
+individuals and small teams, paid above a size threshold, so that obligation stays with the user.
+`package.json` gained `license`/`repository`/`homepage`/`bugs`/`keywords` and keeps `private: true` to
+prevent an accidental npm publish.
+
+**Left for the owner:** the `LICENSE` copyright line reads `san-gitlogin (https://github.com/san-gitlogin)`.
+Swap in a legal name if the copyright should be attributable.

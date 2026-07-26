@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Assembles topics/<slug>/out/upload.md — YouTube title + description in the
-// channel's house pattern (hook question → "In this video, YOUR CHANNEL breaks
+// channel's house pattern (hook question → "In this video, <channel> breaks
 // down …" → ⏱️ chapters → 🔗 sources → subscribe → User Queries → hashtags).
+// <channel> is spec.brand.channel; set it once in your channel_profile.md.
 // Deterministic where it must be: timestamps come from spec frames, sources from
 // the scenes' data.source fields. Creative fields come from meta.seo (authored at
 // spec time) with graceful fallbacks to meta.openLoop / meta.onePayoff.
