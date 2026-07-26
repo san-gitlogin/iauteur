@@ -309,4 +309,5 @@ You are equally welcome to ignore all of that and write TypeScript by hand.
 Open an issue. A question is a valid issue — if something was unclear enough to ask about, the answer
 belongs in the docs, and "I got stuck at step 3" is genuinely useful information.
 
-Be kind to other contributors. That's the whole code of conduct.
+Be kind. Assume the other person is trying. Critique the work, not the person. That's the substance of
+it; [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) covers what happens if that isn't enough.
