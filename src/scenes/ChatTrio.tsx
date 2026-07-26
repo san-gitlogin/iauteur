@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {Scene, SemColor} from '../types';
 import {Headline, SourceFooter, useScale, useSem, hexA} from '../ui';
+import {JsonLine, JsonFileChip} from '../jsonInk';
 import {useTheme, wordToFrame} from '../themes';
 
 // CHAT_TRIO — two or three assistant windows side by side, each receiving the SAME
@@ -27,6 +28,9 @@ export const ChatTrio: React.FC<{scene: Scene}> = ({scene}) => {
   const assistants = (d.assistants ?? []).slice(0, 3);
   const n = Math.max(1, assistants.length);
   const answerLines = Math.max(2, Math.min(5, Math.round(d.answerLines ?? 3)));
+  // Real JSON wins over ruled lines whenever the spec supplies it.
+  const json = (d.answerJson ?? []).slice(0, 7);
+  const hasJson = json.length > 0;
 
   const base = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const reply = wordToFrame(d.atWord ?? 1);
@@ -38,7 +42,11 @@ export const ChatTrio: React.FC<{scene: Scene}> = ({scene}) => {
   const glow = t.style.glow;
   // Sized FROM the budgets: a 34-glyph pasted line at 17px mono is ~347px, so a window
   // must clear that plus padding — in the NARROW container too, where they stack.
-  const winW = (vertical ? 860 : n >= 3 ? 470 : 560) * scale;
+  // Widened for the JSON block: 40 glyphs at 15px mono is ~360px, and the block
+  // sits inside the window's padding at 92% width. Three of these still clear the
+  // wide frame (3×520 + 2×22 = 1604).
+  const winW = (vertical ? 860 : n >= 3 ? 520 : 580) * scale;
+  const jsonFont = (vertical ? 17 : 15) * scale;
   const barH = 38 * scale;
 
   return (
@@ -133,7 +141,7 @@ export const ChatTrio: React.FC<{scene: Scene}> = ({scene}) => {
                       </span>
                     </div>
 
-                    {/* thinking → the answer block, drawn as real ruled lines */}
+                    {/* thinking → the answer: a real JSON file, streamed line by line */}
                     <div
                       style={{
                         alignSelf: 'flex-start',
@@ -145,12 +153,49 @@ export const ChatTrio: React.FC<{scene: Scene}> = ({scene}) => {
                         borderRadius: 10 * scale * t.style.cornerRadius,
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'center',
+                        justifyContent: hasJson && answered >= 0.35 ? 'flex-start' : 'center',
                         gap: 8 * scale,
                         boxSizing: 'border-box',
+                        overflow: 'hidden',
                       }}
                     >
-                      {answered < 0.35 ? (
+                      {answered >= 0.35 && hasJson ? (
+                        // The JSON arrives the way it really does: line after line,
+                        // with a caret at the growing edge. This is the whole point of
+                        // the beat — what comes back is a FILE, and you can see it.
+                        <>
+                          {d.answerFile ? (
+                            <JsonFileChip
+                              name={d.answerFile}
+                              size={jsonFont * 0.86}
+                              opacity={ease(reply + i * 6 + 2, 8)}
+                            />
+                          ) : null}
+                          {json.map((ln, k) => {
+                            const at = reply + i * 6 + 5 + k * 4;
+                            const on = ease(at, 6);
+                            const isEdge = ease(at + 6, 1) > 0.5 && ease(at + 10, 1) < 0.5;
+                            return (
+                              <div key={k} style={{display: 'flex', alignItems: 'center', minWidth: 0}}>
+                                <div style={{minWidth: 0, flex: 1}}>
+                                  <JsonLine line={ln} size={jsonFont} opacity={on} />
+                                </div>
+                                {isEdge ? (
+                                  <span
+                                    style={{
+                                      width: 2 * scale,
+                                      height: jsonFont,
+                                      background: accent,
+                                      flex: 'none',
+                                      marginLeft: 2 * scale,
+                                    }}
+                                  />
+                                ) : null}
+                              </div>
+                            );
+                          })}
+                        </>
+                      ) : answered < 0.35 ? (
                         // three dots, sized off `think` so each window pulses on its own word
                         <div style={{display: 'flex', gap: 7 * scale, alignItems: 'center', justifyContent: 'center'}}>
                           {[0, 1, 2].map((k) => (

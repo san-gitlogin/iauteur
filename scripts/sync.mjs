@@ -53,12 +53,16 @@ for (const scene of spec.scenes) {
   if (!t) { console.warn(`! no timestamps for ${scene.id}, keeping estimate`); continue; }
   // Only retarget anchors when we actually have per-word times — otherwise
   // words[idx] is undefined and every anchor would become NaN → null.
-  if (Array.isArray(t.words) && t.words.length) retarget(scene.data, t.words);
+  // Walk the WHOLE scene, not just `data`: scene-level layers carry anchors too
+  // (stepRail, pip). Retargeting only `data` left those anchors as raw word
+  // indices while every other anchor became an exact frame — the same class of
+  // bug that silently emptied WORD_ANCHOR_RAIL after a sync.
+  if (Array.isArray(t.words) && t.words.length) retarget(scene, t.words);
   else console.warn(`! ${scene.id}: no word times, keeping anchors (duration still synced)`);
   const base = Math.ceil(t.duration * FPS) + 10;
   const cap = scene.type === 'HOOK' ? 240 : 480;
   // ceil: anchors are fractional frames after retargeting; durationFrames must be an integer.
-  const settled = Math.min(Math.ceil(maxAnchorFrame(scene.data)) + SETTLE, cap);
+  const settled = Math.min(Math.ceil(maxAnchorFrame(scene)) + SETTLE, cap);
   scene.durationFrames = Math.max(base, settled);
   scene.audio = `audio/${prefix}_${scene.id}.mp3`;
   scene.timingSource = 'tts';

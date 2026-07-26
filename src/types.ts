@@ -1409,6 +1409,12 @@ export interface AppWindowItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // A field that is PASTED lands whole, with a key chip and a flash — it must never
+  // be animated as typing. Showing a paste as a typewriter contradicts the narration
+  // and misrepresents the workflow (user-reported defect, 2026-07-26).
+  mode?: 'type' | 'paste';
+  // A multi-line JSON block instead of a single value. Indentation is content.
+  lines?: string[];
 }
 export interface AppWindowData {
   headline?: string;
@@ -1452,6 +1458,11 @@ export interface ChatTrioData {
   pasted?: string;
   answerLabel?: string;
   answerLines?: number;
+  // The actual JSON the assistants hand back, streamed line by line. When present
+  // it REPLACES the abstract ruled lines: a viewer must be able to see that what
+  // comes back is a structured file, not an unnamed blob of prose.
+  answerJson?: string[];
+  answerFile?: string; // the file chip above the block, e.g. "scenes.json"
   footNote?: string;
   color?: SemColor;
   source?: string;
@@ -1466,6 +1477,9 @@ export interface VideoPlayerItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Length of the clip file in SECONDS. The player loops it, so a short proof clip
+  // never runs dry and leaves a dead frame inside the screen.
+  seconds?: number;
 }
 export interface VideoPlayerData {
   headline?: string;
@@ -1500,7 +1514,35 @@ export interface SceneForgeData {
   source?: string;
   atWord?: number;
 }
+export interface ProductionGrindItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface ProductionGrindData {
+  headline?: string;
+  windowTitle?: string;
+  takeLabel?: string;
+  chores?: ProductionGrindItem[];
+  tracks?: string[];
+  totalLabel?: string;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  productionGrind?: ProductionGrindData;
   sceneForge?: SceneForgeData;
   videoPlayer?: VideoPlayerData;
   chatTrio?: ChatTrioData;
@@ -2557,9 +2599,24 @@ export interface Scene {
   // Placement respects safe zones — on Shorts, platform UI owns right/bottom, so a
   // `br`/`bl` request auto-relocates to the top on vertical.
   pip?: ScenePip;
+  // Scene-level STEP RAIL: the app's progress chrome, rendered ONCE by the shell
+  // over whatever component the beat casts. A workflow video that cuts between
+  // components loses the viewer unless every shot says where in the workflow it is
+  // (user-reported defect, 2026-07-26: "the connection is lost, at what step we
+  // are"). This is how two components share one screen without nesting.
+  stepRail?: SceneStepRail;
   // Optional camera move/shake wrapping this scene's content (see src/camera).
   // Additive: absent → CameraRig renders the scene pixel-identically.
   camera?: CameraConfig;
+}
+
+export interface SceneStepRail {
+  steps: string[];        // 3–6 step names, ≤11 glyphs each
+  active: number;         // 1-based index of the step this beat is inside
+  app?: string;           // the app's name at the head of the rail
+  note?: string;          // the sub-state within the active step, ≤34 glyphs
+  color?: SemColor;
+  atWord?: number;        // when the active step lights up (rail itself is immediate)
 }
 
 export interface ScenePip {

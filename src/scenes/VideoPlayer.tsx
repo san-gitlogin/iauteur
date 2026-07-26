@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Scene, SemColor} from '../types';
 import {Headline, SourceFooter, useScale, useSem, hexA} from '../ui';
 import {ClipVideo} from '../video';
@@ -20,6 +20,7 @@ export const VideoPlayer: React.FC<{scene: Scene}> = ({scene}) => {
   const sem = useSem();
   const {scale, vertical} = useScale();
   const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
   const d = scene.data.videoPlayer;
   if (!d) return <AbsoluteFill />;
 
@@ -41,8 +42,11 @@ export const VideoPlayer: React.FC<{scene: Scene}> = ({scene}) => {
 
   const radius = 14 * scale * t.style.cornerRadius;
   const glow = t.style.glow;
-  // 16:9 screens sized so three still fit the wide frame and one fills it confidently
-  const screenW = (vertical ? 900 : n >= 3 ? 560 : n === 2 ? 780 : 1080) * scale;
+  // 16:9 screens sized so three still fit the wide frame and one fills it confidently.
+  // Vertical stacks them, so three at 900 overran the frame and clipped the last
+  // label (and collided with the step rail): three players + labels + gaps must fit
+  // 1770px of usable height, which 700 does with ~30px to spare.
+  const screenW = (vertical ? (n >= 3 ? 700 : 900) : n >= 3 ? 560 : n === 2 ? 780 : 1080) * scale;
   const screenH = screenW * (9 / 16);
   const barH = (vertical ? 46 : 52) * scale;
 
@@ -73,7 +77,7 @@ export const VideoPlayer: React.FC<{scene: Scene}> = ({scene}) => {
               flexDirection: vertical ? 'column' : 'row',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: (vertical ? 18 : 26) * scale,
+              gap: (vertical ? (n >= 3 ? 14 : 18) : 26) * scale,
             }}
           >
             {clips.map((c, i) => {
@@ -93,7 +97,17 @@ export const VideoPlayer: React.FC<{scene: Scene}> = ({scene}) => {
                   >
                     {/* the screen */}
                     <div style={{position: 'relative', width: '100%', height: screenH, background: '#000'}}>
-                      <ClipVideo src={c.asset} fit="cover" muted placeholderLabel="YOUR VIDEO" />
+                      {/* Looped: a 10–14s proof clip has to cover a 20s beat without
+                          running dry. A player showing a dead frame is worse than no
+                          player at all — it makes the output itself look broken. */}
+                      <ClipVideo
+                        src={c.asset}
+                        fit="cover"
+                        muted
+                        endAt={Math.round(Math.max(1, c.seconds ?? 10) * fps)}
+                        endBehavior="loop"
+                        placeholderLabel="YOUR VIDEO"
+                      />
                       {d.badge ? (
                         <div
                           style={{

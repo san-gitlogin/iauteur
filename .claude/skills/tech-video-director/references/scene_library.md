@@ -30,6 +30,33 @@ Three tests before you cast a beat:
 Name outputs the way the audience names them. The vertical cut is **shorts content / shorts / reels**
 — never "a video for phones". Naming an output after hardware loses the creators you are talking to.
 
+### Four more, paid for by v3 (rejected 2026-07-26)
+
+v3 obeyed everything above — real windows, a real player, no box diagrams — and was still rejected.
+Depiction is necessary, not sufficient. What it got wrong:
+
+4. **Show the ARTIFACT, not a signal that one arrived.** The assistants handed back four anonymous
+   green bars. Owner: *"the AI chats will give back a JSON, and that must be clear."* A viewer who
+   cannot name what appeared has learned nothing. If the thing is a file, draw the file — the
+   shared `JsonLine`/`JsonFileChip` ink in `src/jsonInk.tsx` is there so JSON always looks like JSON.
+5. **The GESTURE must match the words.** The paste-back beat animated the JSON *typing itself in*
+   while the narration said "paste it back". Owner: *"you show that you are typing the answer
+   instead of pasting the JSON."* `APP_WINDOW` fields now take `mode: 'paste'` — use it whenever
+   the sentence says paste. A visual that contradicts its own sentence costs you the viewer's trust.
+6. **A proof clip must be cut from a MOVING, fully-drawn moment — and must never run dry.** The
+   preview players showed a bare title on an empty frame because every clip was cut from the first
+   seconds of a scene, before its visual had drawn. Owner: *"all i see is some title blank."* Cut
+   from the dense middle, and always give `seconds` so the player loops instead of freezing.
+7. **Never lose the thread.** Nine beats, nine different components, no way to tell which step of
+   the product any of them belonged to. Owner: *"the connection is lost, at what step we are… the
+   steps must be visible."* Put `stepRail` (scene-level, drawn by the shell over any component) on
+   every beat inside the product. That is the sanctioned way to get two components onto one screen —
+   never nest one component inside another.
+
+And two on content, not craft: **open on the pain before the product** (PRODUCTION_GRIND draws the
+evening someone loses to an editing timeline), and **credit the foundation out loud** — this project
+renders through Remotion, and saying so once turns a claim into a fact.
+
 ## Themes (set "brand": {"theme": X}; choose by topic mood; vary ACROSS videos)
 | Theme | Mood | Use for |
 |---|---|---|
@@ -396,3 +423,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | CHAT_TRIO | The point is that the work is portable across assistants. Show the three windows doing it, never an arrow to a box labelled with brand names. | headline≤48, assistants, pasted≤34, answerLabel≤22, answerLines, footNote≤42, color, source≤58, atWord |
 | VIDEO_PLAYER | You are demonstrating video OUTPUT. Never show finished video through a screenshot stack, a device bezel or a full-bleed clip with no player. | headline≤48, clips, runtime≤8, startAt, badge≤16, footNote≤42, color, source≤58, atWord |
 | SCENE_FORGE | The point is that something bespoke gets made for a specific item, not that a build pipeline exists. | headline≤48, rows, targetIndex, askLabel≤34, stages, doneLabel≤20, footNote≤42, color, source≤58, atWord |
+| PRODUCTION_GRIND | The BEFORE beat of a tooling video - show the toil a viewer already recognises (storyboard, record, cut, animate, re-record) before the product appears. It is a picture of the evening someone actually spends, never a diagram of a process. Not PIPELINE (abstract stages), not PIPELINE_GANTT (a real project schedule), not COST_METER (money). | headline≤48, windowTitle≤30, takeLabel≤14, chores, tracks, totalLabel≤26, footNote≤60, color, source, atWord |

@@ -16,7 +16,25 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  SCENE_FORGE: {
+export const MANIFEST = {  PRODUCTION_GRIND: {
+    category: "workflow", family: "workflow", data_key: "productionGrind",
+    purpose: "The old way of making one video, drawn as the editing project it really is: a chore list that keeps growing, hours that keep adding up, and a timeline crowded with clips and keyframes under a crawling playhead.",
+    use_when: "The BEFORE beat of a tooling video - show the toil a viewer already recognises (storyboard, record, cut, animate, re-record) before the product appears. It is a picture of the evening someone actually spends, never a diagram of a process. Not PIPELINE (abstract stages), not PIPELINE_GANTT (a real project schedule), not COST_METER (money).",
+    fields: {
+      headline: {t: 'string', max: 48, note: "the beat's headline; one accented phrase in [brackets]"},
+      windowTitle: {t: 'string', req: true, max: 30, note: "the editing project's name, e.g. 'one 3-minute explainer'"},
+      takeLabel: {t: 'string', max: 14, note: "the retake counter in the project bar, e.g. 'take 14'"},
+      chores: {t: 'items', req: true, note: "3-6 chores. label <=22 glyphs (the chore), detail <=26 glyphs (sits inside the bar), value = HOURS (drives the bar length and the running total), atWord (each chore lands on its own word)"},
+      tracks: {t: 'string[]', note: "2-5 timeline track names, <=14 glyphs each, e.g. 'voice','b-roll','titles','music'"},
+      totalLabel: {t: 'string', max: 26, note: "what the big number means, e.g. 'hours, for one video'"},
+      footNote: {t: 'string', max: 60, note: "the line under the window"},
+      color: {t: 'string', note: "semantic accent; default orange (toil)"},
+      source: {t: 'string', note: "optional source footer"},
+      atWord: {t: 'anchor', note: "times the TOTAL landing - the payoff. Chores use their own atWord."},
+    },
+    example: {productionGrind: {"headline":"The old way took [a whole evening]","windowTitle":"one 3-minute explainer","takeLabel":"take 14","chores":[{"label":"Write and storyboard","detail":"twelve scenes, by hand","atWord":3,"value":3},{"label":"Record the voice","detail":"again, and again","atWord":6,"value":2.5},{"label":"Cut it together","detail":"clip by clip","atWord":9,"value":4},{"label":"Animate every scene","detail":"keyframe by keyframe","atWord":12,"value":6},{"label":"Do it all in vertical","detail":"the whole thing, twice","atWord":15,"value":3.5}],"tracks":["voice","b-roll","titles","music"],"totalLabel":"hours, for one video","footNote":"and that is if nothing goes wrong","color":"orange","atWord":18}},
+  },
+  SCENE_FORGE: {
     category: "framed", family: "scene-forge", data_key: "sceneForge",
     purpose: "A piece being made for ONE named row of a running list: the row is picked out, a short description is written against it, the piece is drawn, and it lands back in that row finished. The row it belongs to stays visible the whole time, which is what makes it 'for THIS one' rather than a generic build.",
     use_when: "The point is that something bespoke gets made for a specific item, not that a build pipeline exists.",
@@ -40,7 +58,7 @@ export const MANIFEST = {  SCENE_FORGE: {
     use_when: "You are demonstrating video OUTPUT. Never show finished video through a screenshot stack, a device bezel or a full-bleed clip with no player.",
     fields: {
       headline: {t: 'string', max: 48, note: "one [accent] phrase allowed"},
-      clips: {t: 'items', req: true, note: "1-3 x {label<=28 (the video's title, shown in the player bar), asset (clip path, e.g. assets/video/x.mp4), atWord}"},
+      clips: {t: 'items', req: true, note: "1-3 x {label<=28 (the video's title, shown in the player bar), asset (clip path, e.g. assets/video/x.mp4), seconds (the FILE's length — the player loops it so it never runs dry mid-beat), atWord}. Cut the clip from a dense, MOVING part of the source: a segment starting at the top of a scene shows a bare title over an empty frame and makes the output look broken."},
       runtime: {t: 'string', max: 8, note: "the total time on the clock, e.g. '2:14'"},
       startAt: {t: 'number', note: "0-1, where the scrubber starts; it advances across the scene"},
       badge: {t: 'string', max: 16, note: "a chip over the player, e.g. 'PREVIEW' or 'FINISHED'"},
@@ -60,13 +78,15 @@ export const MANIFEST = {  SCENE_FORGE: {
       assistants: {t: 'items', req: true, note: "2-3 x {label<=14 (the assistant's name), atWord}"},
       pasted: {t: 'string', req: true, max: 34, note: "the message pasted into each window"},
       answerLabel: {t: 'string', max: 22, note: "what comes back, e.g. 'your video, written'"},
-      answerLines: {t: 'number', note: "2-5 lines drawn in the returned answer block"},
+      answerLines: {t: 'number', note: "FALLBACK only: 2-5 anonymous ruled lines, used when answerJson is absent"},
+      answerJson: {t: 'string[]', preserveWs: true, note: "the ACTUAL JSON handed back, <=7 lines, <=40 glyphs each, leading spaces preserved as indentation. Always prefer this: ruled lines say 'something arrived' and nothing more"},
+      answerFile: {t: 'string', max: 18, note: "the file chip above the JSON, e.g. 'scenes.json'"},
       footNote: {t: 'string', max: 42, note: "the takeaway under the windows"},
       color: {t: 'string', note: "semantic colour for the returned answer"},
       source: {t: 'string', max: 58, note: "optional attribution footer"},
       atWord: {t: 'anchor', note: "word from narration the answers come back on"},
     },
-    example: {chatTrio: {"headline":"Any one of them [will do]","assistants":[{"label":"ChatGPT","atWord":2},{"label":"Claude","atWord":3},{"label":"Gemini","atWord":4}],"pasted":"Make a two minute video about…","answerLabel":"your video, written","answerLines":4,"footNote":"the one you already pay for is fine","color":"green","atWord":7}},
+    example: {chatTrio: {"headline":"Any one of them [will do]","assistants":[{"label":"ChatGPT","atWord":2},{"label":"Claude","atWord":3},{"label":"Gemini","atWord":4}],"pasted":"Make a two minute video about…","answerLabel":"your video, written","answerFile":"scenes.json","answerJson":["{","  \"scenes\": [","    { \"id\": \"s01\", \"say\": \"…\" },","    { \"id\": \"s02\", \"say\": \"…\" }","  ]","}"],"footNote":"the one you already pay for is fine","color":"green","atWord":7}},
   },
   PROMPT_HANDOUT: {
     category: "framed", family: "prompt-handout", data_key: "promptHandout",
@@ -95,8 +115,8 @@ export const MANIFEST = {  SCENE_FORGE: {
       steps: {t: 'string[]', note: "2-5 step names for the rail, each <=13 chars"},
       activeStep: {t: 'number', note: "1-based index of the step being shown"},
       screenTitle: {t: 'string', max: 26, note: "the heading inside the content area"},
-      fields: {t: 'items', req: true, note: "1-3 x {label<=16 (the field), text<=38 (its value), atWord}"},
-      typeIndex: {t: 'number', note: "0-based index of the field whose value TYPES itself in; omit for none"},
+      fields: {t: 'items', req: true, preserveWs: true, note: "1-3 x {label<=16 (the field), text<=38 (its value), mode ('type'|'paste'), lines (<=6 JSON lines, <=38 glyphs each, indentation preserved — use instead of text for a pasted block), atWord}. A field the narration says is PASTED must be mode:'paste' — it lands whole with a Ctrl+V chip, never as a typewriter."},
+      typeIndex: {t: 'number', note: "0-based index of the field whose value TYPES itself in; omit for none. Never point it at a mode:'paste' field"},
       button: {t: 'string', max: 18, note: "a button that visibly clicks at the scene anchor"},
       buttonDone: {t: 'string', max: 18, note: "what the button says after the click"},
       caption: {t: 'string', max: 40, note: "the takeaway under the window"},

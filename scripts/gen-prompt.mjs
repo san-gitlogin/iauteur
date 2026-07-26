@@ -200,6 +200,11 @@ const DIRECTION = [
   '- **DEPICT, DO NOT DIAGRAM.** The picture has to carry the idea on its own, in the seconds it is on screen — the narration is not a rescue. Prefer the component that draws the REAL THING (a window, a screen, a player, a document) over the one that draws a *diagram of* the thing (labelled boxes joined by arrows). A viewer decodes a picture of a screen instantly and an abstract graph slowly, if at all.',
   '- Corollary: never demonstrate an OUTPUT with a component built for something else. Showing a video? Use a player. Showing an app? Use a window. A near-enough component makes the claim itself look unconvincing.',
   '- Name outputs the way the audience names them. The vertical cut is **shorts content / shorts / reels** — never "a video for phones". Naming an output after hardware loses the creators you are talking to.',
+  '- **SHOW THE ARTIFACT, NOT A SIGNAL THAT ONE ARRIVED.** When a step produces a thing — a file, a document, a script, an image — that thing must be on screen and identifiable. Anonymous bars, ticks and glows say "something happened" and nothing more, and the viewer is left guessing what they just watched. If the answer is JSON, show JSON.',
+  '- **THE GESTURE MUST MATCH THE WORDS.** If the narration says pasted, the component pastes — it does not type. If it says pressed, something presses. A visual that contradicts the sentence over it is worse than no visual, because the viewer trusts their eyes and concludes the narration is wrong.',
+  '- **NEVER LOSE THE THREAD.** A workflow explained across many components reads as many unrelated screens unless every shot says where it is. Put a `stepRail` on every beat that happens inside the product — same steps, same order, active step moving, `note` naming the sub-state. Two components on one screen is the point, not a compromise.',
+  '- **OPEN ON THE PAIN, NOT THE PRODUCT.** The first beats belong to the thing the audience already lives with (the evening lost to editing, the take done fourteen times). Earn the product by showing what it replaces. PRODUCTION_GRIND exists for exactly this.',
+  '- **CREDIT WHAT IT IS BUILT ON.** Name the real foundation once, out loud (this project renders through **Remotion**). It costs one sentence and it is the difference between a claim and a fact.',
 ].join('\n');
 
 const laws = [

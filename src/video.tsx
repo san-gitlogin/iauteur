@@ -189,6 +189,9 @@ export const ClipVideo: React.FC<ClipVideoProps> = ({
   //  · freeze→ OffthreadVideo holds its last decoded frame past its duration
   //  · trim  → play once, trimmed to [startFrom,endAt] (the default)
   const clipLen = endAt != null ? endAt - (startFrom ?? 0) : null;
+  // A clip shorter than the scene it sits in runs dry and leaves a dead frame on
+  // screen — the exact failure that made a preview player look broken. `loop` is
+  // how a short proof clip covers a long beat.
   if (endBehavior === 'loop' && clipLen && clipLen > 0) {
     return <Loop durationInFrames={clipLen}>{vid}</Loop>;
   }

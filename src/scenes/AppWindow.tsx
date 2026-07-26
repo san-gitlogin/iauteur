@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {Scene, SemColor} from '../types';
 import {Headline, SourceFooter, useScale, useSem, hexA} from '../ui';
+import {JsonLine} from '../jsonInk';
 import {useTheme, wordToFrame} from '../themes';
 
 // APP_WINDOW — the real screen someone uses, drawn as a real window: traffic-light
@@ -43,7 +44,12 @@ export const AppWindow: React.FC<{scene: Scene}> = ({scene}) => {
   // late, which is the opposite of what the line is describing.
   const typeFrom = Math.max(base + 6, typeIdxSafe >= 0 ? wordToFrame(fields[typeIdxSafe]?.atWord ?? 1) : base + 6);
   const typeEnd = typeFrom + typeDur;
-  const clickAt = Math.max(payoff, typeEnd + 2);
+  // A pasted field drops whole at its own word — no typewriter. The button must wait
+  // for the LAST arrival of either kind, or it confirms an empty form.
+  const pasteEnds = fields
+    .filter((f) => f.mode === 'paste')
+    .map((f) => Math.max(base + 6, wordToFrame(f.atWord ?? 1)) + 14);
+  const clickAt = Math.max(payoff, typeEnd + 2, ...(pasteEnds.length ? pasteEnds.map((e) => e + 2) : []));
   const ease = (from: number, dur: number) =>
     interpolate(frame, [from, from + dur], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   const baseIn = ease(base, 14);
@@ -212,60 +218,113 @@ export const AppWindow: React.FC<{scene: Scene}> = ({scene}) => {
                 ) : null}
 
                 {fields.map((f, i) => {
-                  const isTyping = i === typeIdxSafe;
+                  const isPaste = f.mode === 'paste';
+                  const isTyping = !isPaste && i === typeIdxSafe;
                   const val = f.text ?? '';
-                  const from = isTyping ? typeFrom : wordToFrame(f.atWord ?? 1);
-                  const p = ease(from, isTyping ? typeDur : 12);
+                  const lines = (f.lines ?? []).slice(0, 6);
+                  // A paste is instant by nature: the key goes down, and the whole
+                  // value is simply THERE. `p` ramps over 6 frames only so it does not
+                  // pop, and the border flashes once to mark the arrival.
+                  const pasteFrom = Math.max(base + 6, wordToFrame(f.atWord ?? 1));
+                  const from = isTyping ? typeFrom : isPaste ? pasteFrom : wordToFrame(f.atWord ?? 1);
+                  const p = ease(from, isTyping ? typeDur : isPaste ? 6 : 12);
+                  const flash = isPaste ? ease(from, 5) * (1 - ease(from + 6, 12)) : 0;
                   const shown = isTyping ? val.slice(0, Math.floor(p * val.length)) : val;
                   const caretOn = isTyping && (p < 1 || Math.floor(frame / 10) % 2 === 0);
+                  const lit = isTyping || isPaste;
+                  const border = isPaste
+                    ? 0.3 + 0.5 * p + 0.5 * flash
+                    : isTyping
+                      ? 0.3 + 0.5 * p
+                      : 0.7;
                   return (
                     <div key={i} style={{display: 'flex', flexDirection: 'column', gap: 7 * scale}}>
-                      <span
-                        style={{
-                          fontFamily: t.fonts.mono,
-                          fontSize: 17 * scale,
-                          letterSpacing: 0.06 * 17 * scale,
-                          color: hexA(t.colors.muted, 0.9),
-                          textTransform: 'uppercase',
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        {f.label}
-                      </span>
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          minHeight: (vertical ? 54 : 60) * scale,
-                          padding: `${10 * scale}px ${16 * scale}px`,
-                          background: t.colors.panel,
-                          border: `2px solid ${hexA(isTyping ? accent : t.colors.panelBorder, isTyping ? 0.3 + 0.5 * p : 0.7)}`,
-                          borderRadius: 10 * scale * t.style.cornerRadius,
-                          boxSizing: 'border-box',
-                        }}
-                      >
+                      <div style={{display: 'flex', alignItems: 'center', gap: 10 * scale}}>
                         <span
                           style={{
                             fontFamily: t.fonts.mono,
-                            fontSize: valFont,
-                            color: t.colors.text,
-                            whiteSpace: 'pre',
+                            fontSize: 17 * scale,
+                            letterSpacing: 0.06 * 17 * scale,
+                            color: hexA(t.colors.muted, 0.9),
+                            textTransform: 'uppercase',
+                            whiteSpace: 'nowrap',
                             overflow: 'hidden',
-                            opacity: isTyping ? 1 : p,
+                            textOverflow: 'ellipsis',
                           }}
                         >
-                          {shown}
+                          {f.label}
                         </span>
-                        <span
-                          style={{
-                            display: 'inline-block',
-                            width: 3 * scale,
-                            height: valFont * 1.15,
-                            marginLeft: 3 * scale,
-                            background: caretOn ? accent : 'transparent',
-                            flex: 'none',
-                          }}
-                        />
+                        {/* the keystroke itself — so the gesture reads as PASTE, not typing */}
+                        {isPaste ? (
+                          <span
+                            style={{
+                              fontFamily: t.fonts.mono,
+                              fontSize: 15 * scale,
+                              color: p > 0.5 ? accent : hexA(t.colors.muted, 0.9),
+                              background: hexA(p > 0.5 ? accent : t.colors.panelBorder, p > 0.5 ? 0.18 : 0.5),
+                              border: `1px solid ${hexA(p > 0.5 ? accent : t.colors.panelBorder, p > 0.5 ? 0.5 : 0.8)}`,
+                              borderRadius: 6 * scale * t.style.cornerRadius,
+                              padding: `${3 * scale}px ${8 * scale}px`,
+                              whiteSpace: 'nowrap',
+                              flex: 'none',
+                              transform: `translateY(${(1 - Math.abs(0.5 - p) * 2) * 1.5 * scale}px)`,
+                            }}
+                          >
+                            {p > 0.5 ? '✓ pasted' : 'Ctrl+V'}
+                          </span>
+                        ) : null}
+                      </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: lines.length ? 'stretch' : 'center',
+                          flexDirection: lines.length ? 'column' : 'row',
+                          minHeight: (vertical ? 54 : 60) * scale,
+                          padding: `${10 * scale}px ${16 * scale}px`,
+                          background: t.colors.panel,
+                          border: `2px solid ${hexA(lit ? accent : t.colors.panelBorder, border)}`,
+                          borderRadius: 10 * scale * t.style.cornerRadius,
+                          boxSizing: 'border-box',
+                          overflow: 'hidden',
+                          boxShadow:
+                            glow > 0 && flash > 0.01
+                              ? `0 0 ${26 * scale * glow}px ${hexA(accent, 0.45 * flash * glow)}`
+                              : undefined,
+                        }}
+                      >
+                        {lines.length ? (
+                          // a JSON block: what actually gets pasted back into the app
+                          <div style={{display: 'flex', flexDirection: 'column', minWidth: 0, opacity: p}}>
+                            {lines.map((ln, k) => (
+                              <JsonLine key={k} line={ln} size={(vertical ? 19 : 21) * scale} />
+                            ))}
+                          </div>
+                        ) : (
+                          <>
+                            <span
+                              style={{
+                                fontFamily: t.fonts.mono,
+                                fontSize: valFont,
+                                color: t.colors.text,
+                                whiteSpace: 'pre',
+                                overflow: 'hidden',
+                                opacity: isTyping ? 1 : p,
+                              }}
+                            >
+                              {shown}
+                            </span>
+                            <span
+                              style={{
+                                display: 'inline-block',
+                                width: 3 * scale,
+                                height: valFont * 1.15,
+                                marginLeft: 3 * scale,
+                                background: caretOn ? accent : 'transparent',
+                                flex: 'none',
+                              }}
+                            />
+                          </>
+                        )}
                       </div>
                     </div>
                   );

@@ -50,6 +50,7 @@ export const TYPES = [
   'CHAT_TRIO',
   'VIDEO_PLAYER',
   'SCENE_FORGE',
+  'PRODUCTION_GRIND',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

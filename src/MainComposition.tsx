@@ -164,9 +164,12 @@ import {PromptHandout} from './scenes/PromptHandout';
 import {ChatTrio} from './scenes/ChatTrio';
 import {VideoPlayer} from './scenes/VideoPlayer';
 import {SceneForge} from './scenes/SceneForge';
+import {ProductionGrind} from './scenes/ProductionGrind';
 import {ScenePipLayer} from './video';
+import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  PRODUCTION_GRIND: ProductionGrind,
   SCENE_FORGE: SceneForge,
   VIDEO_PLAYER: VideoPlayer,
   CHAT_TRIO: ChatTrio,
@@ -409,6 +412,9 @@ const Inner: React.FC<{spec: VideoSpec}> = ({spec}) => {
               </SceneFx>
             </SceneTransition>
             {scene.pip ? <ScenePipLayer pip={scene.pip} /> : null}
+            {/* Outside SceneTransition on purpose: the rail is the one thing that
+                must stay put while the beats cut past it. */}
+            {scene.stepRail ? <SceneStepRailLayer rail={scene.stepRail} /> : null}
           </Sequence>
         );
       })}

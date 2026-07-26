@@ -139,6 +139,11 @@ function buildInterface(cfg) {
   title?: string;
   sub?: string;
   detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
   color?: SemColor;
   asset?: string;
   atWord?: number;

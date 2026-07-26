@@ -92,6 +92,26 @@ can be regenerated instead of rotting.
   as the LAW OF DEPICTION at the top of the director skill's `scene_library.md`. Audience vocabulary
   too: **shorts / reels / devices**, never "phone".
 
+- **DEPICTION IS NOT ENOUGH — the four defects that cost a third re-shoot (v3, 2026-07-26).** v3
+  obeyed DEPICT-DON'T-DIAGRAM completely and was still rejected, because a real screen can still fail
+  to say what the viewer is looking at:
+  1. **Show the artifact.** The assistants handed back anonymous ruled bars. If a step produces a
+     file, draw the file — `CHAT_TRIO.answerJson` + `src/jsonInk.tsx` (the one shared JSON ink).
+  2. **The gesture must match the words.** The paste beat animated the answer *typing itself in*.
+     `APP_WINDOW` fields take `mode:'paste'`; the linter errors if a field is typed AND pasted.
+  3. **Proof clips must be cut from the dense MIDDLE of a scene and looped.** Every clip was cut from
+     a scene's first seconds, so the player showed a bare title on an empty frame. `VIDEO_PLAYER`
+     clips now carry `seconds` and loop; the linter warns when one doesn't.
+  4. **Never lose the thread.** Nine components, no way to tell which step of the product any of them
+     belonged to. `scene.stepRail` is a scene-level layer the shell draws over ANY component — the
+     sanctioned way to get two components onto one screen. Never nest one component inside another.
+
+- **Scene-level anchors were invisible to `sync.mjs` until 2026-07-26.** It retargeted `scene.data`
+  only, so `stepRail.atWord` (and `pip.atWord`, latent since PiP shipped) survived TTS as a raw word
+  index while every other anchor became an exact frame. It now walks the whole scene. If you add
+  another scene-level layer, its anchors are already covered — but check `sceneAnchorRoot()` in
+  `lint-spec.mjs` too.
+
 - **Trust the artifact, not the exit code.** A green test proved the drawer preview "worked" while
   it was rendering an empty donut. Extract a frame (`ffmpeg -vf "select=eq(n\,140)"`) and *look*.
 - **The console hard-disables every job button while one job runs** (`setBusy` + `JOB_BTN_SEL`,
@@ -104,10 +124,30 @@ can be regenerated instead of rotting.
 - Remotion renders fetch Google Fonts per render. On a bad connection later scenes throw
   `[NetworkError]`. Kill leaked processes (`Get-Process node | Stop-Process -Force`) and retry.
 
-### 2026-07-26 · demo video v3 — SHIPPED (v1 + v2 superseded)
+### 2026-07-26 · demo video v4 — SHIPPED (v1–v3 superseded)
+
+**`topics/iauteur-made-easy/`** — 13 scenes wide + 8 vertical, moderndark on an `aurora` background,
+Ava. This is what the README embeds.
+
+**v3 was rejected on four specific defects, all of them "I can't tell what I'm looking at":** the
+assistants' reply was anonymous bars instead of the JSON it really is; the paste-back beat *typed*
+the answer; the preview players showed a bare title over an empty frame; and across nine components
+there was no way to tell which step of the product any beat belonged to. All four are written up
+under Gotchas and are now enforced by the linter, the manifest and the shell.
+
+**One new component + one new scene-level layer.** `PRODUCTION_GRIND` (the evening lost to an editing
+timeline — the video now opens on the pain, before iAuteur appears) takes the count 156 → **157**.
+`scene.stepRail` (`src/StepRail.tsx`) is not a scene type: it is drawn by the shell over whatever the
+beat cast, so all 157 types compose with it for free. The video also credits **Remotion** out loud.
+
+**The component lab gained a numeric item slot.** `buildInterface` emitted an all-strings
+`<Name>Item`, so PRODUCTION_GRIND could not be assembled at all (its chores carry hours). Items now
+get `value?: number`.
+
+### 2026-07-26 · demo video v3 (superseded)
 
 **`topics/iauteur-how-easy/`** — 2:38 wide (12 scenes) + vertical (10 scenes), moderndark, Ava.
-This is what the README embeds.
+Superseded by v4; its web copy has been removed from `docs/media/`.
 
 **v2 was rejected on VISUAL LANGUAGE.** The narration was fine; a step of the flow was drawn as two
 labelled boxes with arrows between them and the owner's reaction was *"what does it even describe?"*

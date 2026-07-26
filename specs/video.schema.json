@@ -341,7 +341,8 @@
               "PROMPT_HANDOUT",
               "CHAT_TRIO",
               "VIDEO_PLAYER",
-              "SCENE_FORGE"
+              "SCENE_FORGE",
+              "PRODUCTION_GRIND"
             ]
           },
           "narration": {
@@ -411,6 +412,80 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PRODUCTION_GRIND"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "productionGrind": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "the beat's headline; one accented phrase in [brackets]"
+                        },
+                        "windowTitle": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the editing project's name, e.g. 'one 3-minute explainer'"
+                        },
+                        "takeLabel": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "the retake counter in the project bar, e.g. 'take 14'"
+                        },
+                        "chores": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 chores. label <=22 glyphs (the chore), detail <=26 glyphs (sits inside the bar), value = HOURS (drives the bar length and the running total), atWord (each chore lands on its own word)"
+                        },
+                        "tracks": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-5 timeline track names, <=14 glyphs each, e.g. 'voice','b-roll','titles','music'"
+                        },
+                        "totalLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what the big number means, e.g. 'hours, for one video'"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 60,
+                          "description": "the line under the window"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic accent; default orange (toil)"
+                        },
+                        "source": {
+                          "type": "string",
+                          "description": "optional source footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "times the TOTAL landing - the payoff. Chores use their own atWord."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {
@@ -511,7 +586,7 @@
                           "items": {
                             "type": "object"
                           },
-                          "description": "1-3 x {label<=28 (the video's title, shown in the player bar), asset (clip path, e.g. assets/video/x.mp4), atWord}"
+                          "description": "1-3 x {label<=28 (the video's title, shown in the player bar), asset (clip path, e.g. assets/video/x.mp4), seconds (the FILE's length — the player loops it so it never runs dry mid-beat), atWord}. Cut the clip from a dense, MOVING part of the source: a segment starting at the top of a scene shows a bare title over an empty frame and makes the output look broken."
                         },
                         "runtime": {
                           "type": "string",
@@ -592,7 +667,19 @@
                         },
                         "answerLines": {
                           "type": "number",
-                          "description": "2-5 lines drawn in the returned answer block"
+                          "description": "FALLBACK only: 2-5 anonymous ruled lines, used when answerJson is absent"
+                        },
+                        "answerJson": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "the ACTUAL JSON handed back, <=7 lines, <=40 glyphs each, leading spaces preserved as indentation. Always prefer this: ruled lines say 'something arrived' and nothing more"
+                        },
+                        "answerFile": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "the file chip above the JSON, e.g. 'scenes.json'"
                         },
                         "footNote": {
                           "type": "string",
@@ -734,11 +821,11 @@
                           "items": {
                             "type": "object"
                           },
-                          "description": "1-3 x {label<=16 (the field), text<=38 (its value), atWord}"
+                          "description": "1-3 x {label<=16 (the field), text<=38 (its value), mode ('type'|'paste'), lines (<=6 JSON lines, <=38 glyphs each, indentation preserved — use instead of text for a pasted block), atWord}. A field the narration says is PASTED must be mode:'paste' — it lands whole with a Ctrl+V chip, never as a typewriter."
                         },
                         "typeIndex": {
                           "type": "number",
-                          "description": "0-based index of the field whose value TYPES itself in; omit for none"
+                          "description": "0-based index of the field whose value TYPES itself in; omit for none. Never point it at a mode:'paste' field"
                         },
                         "button": {
                           "type": "string",

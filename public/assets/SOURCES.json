@@ -105,25 +105,25 @@
   {
     "file": "video/sample_market.mp4",
     "url": "(self-generated)",
-    "note": "5s clip cut from this project's own render of the topic named below, cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark at full bleed. Scaled to 1280x720, silent. Own work; no third-party rights.",
-    "bytes": 97094,
+    "note": "Cut from this project's own render of apple-overtakes-nvidia, starting at 141s for 14s — a segment picked because the 2.5-billion-screens device grid, fully drawn and still filling. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "bytes": 649882,
     "contentType": "video/mp4",
-    "fetchedAt": "2026-07-25T14:53:40.646493Z"
+    "fetchedAt": "2026-07-26T04:54:57.991Z"
   },
   {
     "file": "video/sample_product.mp4",
     "url": "(self-generated)",
-    "note": "5s clip cut from this project's own render of the topic named below, cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark at full bleed. Scaled to 1280x720, silent. Own work; no third-party rights.",
-    "bytes": 206022,
+    "note": "Cut from this project's own render of gpt-live-full-duplex-voice, starting at 47s for 12s — a segment picked because the two-stream exchange with both arrows and packet chips on screen. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "bytes": 566697,
     "contentType": "video/mp4",
-    "fetchedAt": "2026-07-25T14:53:40.646493Z"
+    "fetchedAt": "2026-07-26T04:54:58.145Z"
   },
   {
     "file": "video/sample_tech.mp4",
     "url": "(self-generated)",
-    "note": "5s clip cut from this project's own render of the topic named below, cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark at full bleed. Scaled to 1280x720, silent. Own work; no third-party rights.",
-    "bytes": 183134,
+    "note": "Cut from this project's own render of kimi-k3-deep-dive, starting at 178s for 10s — a segment picked because the sparse-expert activation grid at full density. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "bytes": 706896,
     "contentType": "video/mp4",
-    "fetchedAt": "2026-07-25T14:53:40.646493Z"
+    "fetchedAt": "2026-07-26T04:54:58.145Z"
   }
 ]

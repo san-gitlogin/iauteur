@@ -123,7 +123,7 @@ if (n >= 8) {
   const cap = Math.max(4, Math.ceil(n * 0.35));
   for (const [st, c] of Object.entries(counts))
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
-  const DYNAMIC = ['SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -167,6 +167,9 @@ const collectAnchors = (obj, out = []) => {
   }
   return out;
 };
+// Anchors live on the scene's DATA and on its scene-level layers (stepRail, pip).
+// Checking only `data` let a scene-level anchor point past the narration unnoticed.
+const sceneAnchorRoot = (s) => ({data: s.data, stepRail: s.stepRail, pip: s.pip});
 const collectImgAssets = (obj, out = []) => {
   if (typeof obj === 'string') {
     if (obj.startsWith('img:')) out.push(obj.slice(4));
@@ -245,6 +248,21 @@ for (const s of spec.scenes ?? []) {
   if (!s.narration) E(`${id}: missing narration`);
   const wc = words(s.narration);
 
+  // SCENE-LEVEL STEP RAIL — the workflow chrome the shell draws over any component.
+  if (s.stepRail) {
+    const sr = s.stepRail;
+    const st = sr.steps ?? [];
+    if (st.length < 3) E(`${id}: stepRail needs ≥3 steps — fewer does not read as progress`);
+    if (st.length > 6) E(`${id}: stepRail max 6 steps (got ${st.length})`);
+    for (const x of st) if (len(x) > 11) E(`${id}: stepRail step "${x}" > 11 chars`);
+    if (sr.active == null) E(`${id}: stepRail needs an "active" step — a rail with no current step tells the viewer nothing`);
+    else if (sr.active < 1 || sr.active > Math.max(1, st.length))
+      E(`${id}: stepRail.active ${sr.active} outside steps (1-${st.length})`);
+    if (len(sr.app) > 10) E(`${id}: stepRail app > 10 chars`);
+    if (len(sr.note) > 34) E(`${id}: stepRail note > 34 chars`);
+    checkColor(id, 'stepRail.color', sr.color);
+  }
+
   // Remotion requires integer frame counts — a fractional duration crashes every render.
   if (s.durationFrames != null && !Number.isInteger(s.durationFrames))
     E(`${id}: durationFrames ${s.durationFrames} is not an integer — Remotion rejects fractional durations`);
@@ -262,7 +280,7 @@ for (const s of spec.scenes ?? []) {
 
   // anchors within narration (skipped after TTS sync: anchors become fractional frames)
   if (s.timingSource !== 'tts') {
-    for (const a of collectAnchors(s.data)) {
+    for (const a of collectAnchors(sceneAnchorRoot(s))) {
       if (a < 1) E(`${id}: atWord ${a} < 1 (anchors are 1-indexed)`);
       if (a > wc) E(`${id}: atWord ${a} exceeds narration word count (${wc}) — element would never appear`);
     }
@@ -270,7 +288,7 @@ for (const s of spec.scenes ?? []) {
     // animates into the scene tail — the viewer gets no time to process it. The
     // sync step adds a settle tail, but the real fix is naming the payoff earlier.
     if (wc >= 8) {
-      const late = collectAnchors(s.data).filter((a) => a > Math.ceil(wc * 0.85));
+      const late = collectAnchors(sceneAnchorRoot(s)).filter((a) => a > Math.ceil(wc * 0.85));
       if (late.length)
         W(`${id}: anchor at word ${Math.max(...late)} of ${wc} — payoff lands in the last 15% of the narration. Restructure the line so the reveal is NAMED early and the closing words carry meaning, not the payoff.`);
     }
@@ -278,7 +296,7 @@ for (const s of spec.scenes ?? []) {
     // post-sync: anchors are exact frames — verify the last payoff actually gets
     // settle time on screen before the scene ends (sync guarantees it unless the
     // scene hit its pacing cap, which means the narration names the payoff too late).
-    const maxA = Math.max(0, ...collectAnchors(s.data).map((a) => (a - 1) * 12));
+    const maxA = Math.max(0, ...collectAnchors(sceneAnchorRoot(s)).map((a) => (a - 1) * 12));
     if (maxA > 0 && s.durationFrames && s.durationFrames - maxA < 55)
       W(`${id}: last anchor fires ${((s.durationFrames - maxA) / 30).toFixed(1)}s before the scene ends — the payoff has no settle time. Name it earlier in the narration and re-run TTS + sync.`);
   }
@@ -429,6 +447,13 @@ for (const s of spec.scenes ?? []) {
     if (cl.length > 3) E(`${id}: VIDEO_PLAYER max 3 clips (got ${cl.length})`);
     for (const c of cl) {
       if (len(c.label) > 28) E(`${id}: videoPlayer clip label "${c.label}" > 28 chars`);
+      // A clip shorter than its beat runs dry and freezes/blanks the screen mid-scene
+      // — the defect that made the finished output itself look broken. `seconds` is how
+      // the player knows where to loop, so a clip without it is a defect waiting to ship.
+      if (c.asset && c.seconds == null)
+        W(`${id}: videoPlayer clip "${c.label ?? c.asset}" has no seconds — the player cannot loop it, so it runs dry if the beat is longer than the file`);
+      if (c.seconds != null && (typeof c.seconds !== 'number' || c.seconds <= 0))
+        E(`${id}: videoPlayer clip seconds must be a positive number (got ${c.seconds})`);
       checkColor(id, 'videoPlayer.clip.color', c.color);
     }
     if (len(vp.runtime) > 8) E(`${id}: videoPlayer runtime > 8 chars`);
@@ -439,6 +464,33 @@ for (const s of spec.scenes ?? []) {
     if (len(vp.badge) > 16) E(`${id}: videoPlayer badge > 16 chars`);
     if (len(vp.footNote) > 42) E(`${id}: videoPlayer footNote > 42 chars`);
     checkColor(id, 'videoPlayer.color', vp.color);
+  }
+
+  if (d.productionGrind) {
+    const pg = d.productionGrind;
+    const ch = pg.chores ?? [];
+    if (len(pg.headline) > 48) E(`${id}: productionGrind headline > 48 chars`);
+    if (!pg.windowTitle) E(`${id}: PRODUCTION_GRIND needs windowTitle — the project has to be a real one`);
+    if (len(pg.windowTitle) > 30) E(`${id}: productionGrind windowTitle > 30 chars`);
+    if (len(pg.takeLabel) > 14) E(`${id}: productionGrind takeLabel > 14 chars`);
+    if (ch.length < 3) E(`${id}: PRODUCTION_GRIND needs ≥3 chores — fewer does not read as toil`);
+    if (ch.length > 6) E(`${id}: PRODUCTION_GRIND max 6 chores (got ${ch.length})`);
+    for (const c of ch) {
+      if (len(c.label) > 22) E(`${id}: productionGrind chore "${c.label}" > 22 chars`);
+      if (len(c.detail) > 26) E(`${id}: productionGrind chore detail "${c.detail}" > 26 chars`);
+      // The bar length and the running total are both read off `value`. A chore
+      // without one draws a zero-length bar and adds nothing to the punchline.
+      if (c.value == null) E(`${id}: productionGrind chore "${c.label}" has no value (hours) — its bar would be empty`);
+      else if (typeof c.value !== 'number' || c.value <= 0)
+        E(`${id}: productionGrind chore "${c.label}" value must be a positive number (got ${c.value})`);
+      checkColor(id, 'productionGrind.chore.color', c.color);
+    }
+    const tr = pg.tracks ?? [];
+    if (tr.length > 5) E(`${id}: PRODUCTION_GRIND max 5 tracks (got ${tr.length})`);
+    for (const t of tr) if (len(t) > 14) E(`${id}: productionGrind track "${t}" > 14 chars`);
+    if (len(pg.totalLabel) > 26) E(`${id}: productionGrind totalLabel > 26 chars`);
+    if (len(pg.footNote) > 60) E(`${id}: productionGrind footNote > 60 chars`);
+    checkColor(id, 'productionGrind.color', pg.color);
   }
 
   if (d.chatTrio) {
@@ -456,6 +508,17 @@ for (const s of spec.scenes ?? []) {
     if (len(ct.answerLabel) > 22) E(`${id}: chatTrio answerLabel > 22 chars`);
     if (ct.answerLines != null && (ct.answerLines < 2 || ct.answerLines > 5))
       E(`${id}: chatTrio.answerLines must be 2-5 (got ${ct.answerLines})`);
+    // The ANSWER is the point of the beat: a viewer must see WHAT came back.
+    // Anonymous ruled lines say "something arrived" and nothing more.
+    const aj = ct.answerJson ?? [];
+    if (aj.length > 7) E(`${id}: chatTrio answerJson max 7 lines (got ${aj.length})`);
+    // 40 glyphs at 15px mono is ~372px — the block's width inside a 3-up wide window.
+    for (const ln of aj) if (len(ln) > 40) E(`${id}: chatTrio answerJson line "${ln}" > 40 chars`);
+    if (len(ct.answerFile) > 18) E(`${id}: chatTrio answerFile > 18 chars`);
+    if (ct.answerFile && !aj.length)
+      E(`${id}: chatTrio has answerFile but no answerJson — a filename over abstract bars names nothing`);
+    if (!aj.length)
+      W(`${id}: CHAT_TRIO has no answerJson — the reply renders as anonymous ruled lines, so the viewer never sees WHAT the assistants hand back`);
     if (len(ct.footNote) > 42) E(`${id}: chatTrio footNote > 42 chars`);
     checkColor(id, 'chatTrio.color', ct.color);
   }
@@ -490,9 +553,22 @@ for (const s of spec.scenes ?? []) {
     if (len(aw.screenTitle) > 26) E(`${id}: appWindow screenTitle > 26 chars`);
     if (!fl.length) E(`${id}: APP_WINDOW needs ≥1 field — an empty screen shows nothing`);
     if (fl.length > 3) E(`${id}: APP_WINDOW max 3 fields (got ${fl.length})`);
-    for (const f of fl) {
+    for (const [fi, f] of fl.entries()) {
       if (len(f.label) > 16) E(`${id}: appWindow field label "${f.label}" > 16 chars`);
       if (len(f.text) > 38) E(`${id}: appWindow field text "${f.text}" > 38 chars`);
+      if (f.mode && !['type', 'paste'].includes(f.mode))
+        E(`${id}: appWindow field mode "${f.mode}" unknown — use "type" or "paste"`);
+      const fLines = f.lines ?? [];
+      if (fLines.length > 6) E(`${id}: appWindow field lines max 6 (got ${fLines.length})`);
+      // 38 glyphs at 21px mono is ~490px — the field's inner width in the VERTICAL frame.
+      for (const ln of fLines) if (len(ln) > 38) E(`${id}: appWindow field line "${ln}" > 38 chars`);
+      if (fLines.length && f.text) E(`${id}: appWindow field ${fi} has both text and lines — pick one`);
+      if (fLines.length && f.mode !== 'paste')
+        W(`${id}: appWindow field ${fi} is a JSON block but not mode:"paste" — a block that types itself contradicts the gesture`);
+      // The typing field cannot also be the pasted one; the component resolves this
+      // in favour of paste, so a spec that says both is stating something untrue.
+      if (f.mode === 'paste' && aw.typeIndex === fi)
+        E(`${id}: appWindow field ${fi} is typeIndex AND mode:"paste" — it cannot be typed and pasted`);
       checkColor(id, 'appWindow.field.color', f.color);
     }
     if (aw.typeIndex != null && (aw.typeIndex < 0 || aw.typeIndex >= fl.length))

@@ -1,4 +1,4 @@
-# DEMO VIDEO PLAN — v3 · "how easy this is"
+# DEMO VIDEO PLAN — v4 · "made easy"
 
 The video that markets iAuteur, **made by iAuteur**, for the README embed, LinkedIn and YouTube.
 
@@ -8,173 +8,146 @@ The video that markets iAuteur, **made by iAuteur**, for the README embed, Linke
 > ONE phase, audit it against real artifacts per CLAUDE.md LAW 10, tick the box, commit, continue.
 > Never tick a box you have not verified by looking at the actual output.
 
----
-
-## WHY THERE IS A v3 — THE ONE RULE THAT MATTERS
-
-v2 shipped (98s, commit `7803f48`). The owner liked the film and the voiceover — and rejected the
-**visual language**:
-
-> "you see we have a box flowing from iAuteur to ChatGPT and back, what does it even describe… you
-> are explaining neat, but the visual doesn't correlate or is not easy to grasp that fast."
-
-### THE RULE: depict it LITERALLY, screen by screen. No abstract diagrams.
-
-An arrow between two labelled boxes is a *description* of the flow. What the owner wants is the flow
-itself: **a browser window with the real iAuteur UI in it, a title being typed, a Copy button being
-clicked, three assistant windows with the prompt pasted into them, the answer coming back, the paste,
-the preview, the review, the re-paste, a component being built, the voice being picked, the render
-finishing.** One beat per real screen, each animated.
-
-> "This level of granularity, with perfect components that matches the design and with proper clear
-> smooth animations is what I wanted. That's how people understand."
-
-Corollaries, all of them hard rules:
-
-1. **Never demo the product's output with a component built for something else.** v2 showed the
-   sample videos through `SCREENSHOT_CASCADE` (a screenshot stack). *"The clarity breaks over there,
-   that is a clear no when we are showing a demo of what we get."* A video needs a **player**.
-2. **Never call the vertical cut "a video for phones."** That output is **shorts content**, **shorts**
-   or **reels** — the words creators actually use, and what attracts them. (The word "phone" is fine
-   when it genuinely means the device; it is the OUTPUT that must never be named after hardware.)
-3. **Zero developer jargon** on screen or in narration: JSON, spec, lint, budget, anchor, render,
-   component, type-check, `.tsx`, file names, `tsc`.
-4. **Narration alone is not the deliverable.** If the picture doesn't carry the same idea in the
-   seconds it is on screen, the beat has failed regardless of how good the line is.
+Topic folder: `topics/iauteur-made-easy/` · 13 beats long, 8 beats shorts.
+Predecessors (immutable, still on disk): `iauteur-explains-itself` (v1), `iauteur-what-you-get` (v2),
+`iauteur-how-easy` (v3).
 
 ---
 
-## LOCKED DECISIONS (settled — do not re-ask)
+## THE FOUR RULES, IN THE ORDER THEY WERE PAID FOR
 
-| | Decision |
-|---|---|
-| **Length** | **3–4 minutes.** Explicitly unconstrained: *"I don't care how long it goes"* — granularity wins |
-| **Audience** | Anyone who needs videos — creators (shorts/reels), teachers, marketers, founders |
-| **Depiction** | **Literal screens, never abstract diagrams** (see THE RULE above) |
-| **Beats** | **12** — the most `deep-dive` allows (9–12) with no scene-count warning; each beat runs longer |
-| **New components** | **5** (see the table). Existing ones are reused only where they already draw a real screen |
-| **Voice** | `en-US-AvaMultilingualNeural` (project-wide default) |
-| **Design pack** | `moderndark` · light twin `daylight` · watermark `img:iauteur_logo.png` |
-| **Slug** | **`iauteur-how-easy`** (v2 is rendered, and topics are immutable once rendered) |
+Each one came from a rejection. Each is now enforced somewhere a future session cannot miss it.
+
+### 1. Write for the audience (v1 rejected)
+General audience — creators, teachers, marketers, founders. If a person in that audience wouldn't
+say a word at dinner, it doesn't belong in the narration. Enforced in the `DIRECTION` block of
+`scripts/gen-prompt.mjs`, emitted with every generated prompt (stage1, stage2, single).
+
+### 2. Depict, don't diagram (v2 rejected)
+> "you see we have a box flowing from iAuteur to ChatGPT and back, what does it even describe…"
+
+Draw the real screen, not a picture of the relationship between screens. Enforced in
+`references/scene_library.md` (LAW OF DEPICTION, opens the file) and the same `DIRECTION` block.
+
+### 3. Depiction is necessary, not sufficient (v3 rejected — this version)
+v3 obeyed rules 1 and 2 completely and was still rejected. Four separate defects:
+
+| What the owner saw | The rule | Where it now lives |
+|---|---|---|
+| Assistants returned four anonymous green bars | **Show the artifact.** If the answer is a file, draw the file | `src/jsonInk.tsx` + `CHAT_TRIO.answerJson`; linter **warns** when a CHAT_TRIO has none |
+| The paste-back beat *typed* the answer in | **The gesture must match the words** | `APP_WINDOW` field `mode:'paste'`; linter **errors** if a field is both typed and pasted |
+| Preview players showed a bare title on an empty frame | **Cut proof clips from the dense middle, and loop them** | `VIDEO_PLAYER` clip `seconds` + `endBehavior:'loop'`; linter **warns** on a clip with no `seconds` |
+| Nine components, no idea which step any of them was | **Never lose the thread** | `scene.stepRail` — a scene-level layer the shell draws over *any* component |
+
+> "the connection is lost, at what step we are… when you are animating and showing our steps in the
+> iauteur, the steps must be visible. This brings to a new implementation of multi-components in a
+> single screen."
+
+`stepRail` is that implementation. It is deliberately **not** component nesting: the shell mounts it
+beside the beat's component (exactly how `ScenePipLayer` works), so it composes with all 157 types
+and cannot break any of their layouts.
+
+### 4. Two content rules, same round
+- **Open on the pain, not the product.** *"you can show the tiring production process… tired of
+  creating tutorial videos for an organization, making youtube videos, animating them."* → the new
+  `PRODUCTION_GRIND` component draws the evening someone loses to an editing timeline. It is beat 2,
+  before iAuteur appears at all.
+- **Say it's powered by Remotion.** Beat 11, out loud, in the narration.
 
 ---
 
-## THE FIVE NEW COMPONENTS
+## LOCKED DECISIONS — do not re-ask
 
-Every one of these draws a **real screen**, not a metaphor for one.
-
-| # | TYPE | dataKey | Draws | Must NOT look like |
-|---|---|---|---|---|
-| 1 | `APP_WINDOW` | `appWindow` | A real app window: traffic-light title bar, the 5-step rail down the left with one step active, and a content area of labelled fields — one of which types itself in, with a button that visibly clicks. Data-driven so it can be the intake screen, the paste-back screen or the voice screen | `TOPIC_INTAKE` (a bare field, no app around it), `CODE_EDITOR`, `DEVICE_FRAME` |
-| 2 | `PROMPT_HANDOUT` | `promptHandout` | The prompt the console hands you, as a real block of text with a **Copy** button that clicks and confirms | `CODE_WINDOW`, `PROMPT_HANDOFF` (the v2 abstract loop — this replaces it) |
-| 3 | `CHAT_TRIO` | `chatTrio` | Three assistant windows side by side. The prompt pastes into each, a thinking pulse runs, an answer block comes back | `CHAT_MOCKUP` (one conversation), `LOGO_WALL` (just brands) |
-| 4 | `VIDEO_PLAYER` | `videoPlayer` | A real player: chrome, play control, a scrubber that actually advances, a running time, the clip inside. **This is how output is shown, always** | `SCREENSHOT_CASCADE`, `DEVICE_FRAME`, `VIDEO_HERO` (full-bleed, no player) |
-| 5 | `SCENE_FORGE` | `sceneForge` | A component being made **for one specific scene** — described, drawn, wired, then rendering live in the row it belongs to. Shows that each scene can get its own unique piece | `LAB_ASSEMBLY` (a generic build rail with no scene attached) |
-
-`PROMPT_HANDOFF` (v2) stays in the library but is **not used again in the demo** — it is the exact
-component the owner called out.
+- **Design**: moderndark + daylight light twin. Background `aurora` (v3 used the default — LAW 2
+  wants consecutive moderndark videos differentiated by background + scene mix).
+- **Voice**: `en-US-AvaMultilingualNeural`. Non-negotiable; Christopher "sounds like an AI".
+- **Watermark**: `img:iauteur_logo.png` — the iAuteur mark, not the channel mark, because the video
+  is about the product.
+- **Length**: 3–4 minutes is explicitly fine. Granularity earns it.
+- **Vocabulary**: the vertical cut is **shorts content / shorts / reels** — never "a video for
+  phones". "Phone" is fine when it genuinely means the device; the *output* is never named after
+  hardware.
+- **Jargon**: none in the narration — no "JSON", "spec", "lint", "component", "render", ".tsx".
+  **The JSON is SHOWN, never named.** The narration calls it "a file" and "the answer". Showing the
+  artifact (rule 3) and not speaking jargon (rule 1) are not in conflict: the eye reads the file,
+  the ear hears plain English.
+- **Both aspects ship.** Wide for YouTube/README, tall for shorts and reels.
 
 ---
 
-## THE 12 BEATS — one real screen each
+## THE 13 BEATS
 
-| # | TYPE | The screen | Notes |
+Rail = the `stepRail` state carried on that beat. Beats without one sit outside the product.
+
+| # | Type | Rail | What it shows |
 |---|---|---|---|
-| s01 | `HOOK` | the human problem | — |
-| s02 | `APP_WINDOW` ★new | **Step 1.** The console, Topic screen. The title types itself in, then the description | never show a filename |
-| s03 | `PROMPT_HANDOUT` ★new | **Step 2.** The question it wrote for you, and the Copy button clicking | say "the question" |
-| s04 | `CHAT_TRIO` ★new | Paste it into ChatGPT, Claude or Gemini — whichever you already pay for. The answer comes back | say "the answer" |
-| s05 | `APP_WINDOW` ★new | Back in the console: paste the answer in, the scenes appear | — |
-| s06 | `CHECK_SWEEP` | It reviews every line and rewrites what doesn't fit — and that is why you sometimes paste once more | existing; already a literal screen |
-| s07 | `VIDEO_PLAYER` ★new | Preview any single scene right there, before rendering anything | — |
-| s08 | `SCENE_FORGE` ★new | Nothing fits this scene? One gets made **for that scene** — every scene can have its own | — |
-| s09 | `APP_WINDOW` ★new | Pick the voice, hear it | — |
-| s10 | `ASPECT_TWIN` | Render → widescreen and vertical, dark and light. **Shorts and reels from the same idea** | existing; captions say "shorts" / "reels", never "for phones" |
-| s11 | `VIDEO_PLAYER` ★new | The real videos, playing in a real player | the samples, done properly this time |
-| s12 | `OUTRO_CTA` | The reveal, spoken | — |
+| s01 | HOOK | — | a whole week, for one three-minute video |
+| s02 | PRODUCTION_GRIND | — | the old way: 5 chores, a crowded timeline, 21 hours |
+| s03 | APP_WINDOW | 1 Topic · *saying what it's about* | one line, who it's for, the look |
+| s04 | PROMPT_HANDOUT | 3 Script · *it writes the brief for you* | the brief it wrote, Copy pressed |
+| s05 | CHAT_TRIO | 3 Script · *pasted into your assistant* | **the JSON coming back**, in three windows |
+| s06 | APP_WINDOW | 3 Script · *pasting the answer back in* | **the JSON pasted**, Ctrl+V, 12 scenes in |
+| s07 | CHECK_SWEEP | 3 Script · *reading it back for you* | it catches a crowded line and rewrites it |
+| s08 | VIDEO_PLAYER | 3 Script · *previewing one scene* | one scene, previewed, really playing |
+| s09 | SCENE_FORGE | 3 Script · *building a piece that didn't exist* | a component made for one row |
+| s10 | APP_WINDOW | 4 Voice · *picking a voice* | Ava, listen, timed to the words |
+| s11 | ASPECT_TWIN | 5 Render · *rendered with Remotion* | one description → four videos |
+| s12 | VIDEO_PLAYER | — | three finished videos, really playing |
+| s13 | OUTRO_CTA | — | including this one |
 
-**Adjacency + reuse are already checked:** `APP_WINDOW` runs at s02/s05/s09 (3 uses, cap is 5 for 12
-beats, none adjacent); `VIDEO_PLAYER` at s07/s11 (not adjacent). Every new type is its own
-CONSOLIDATED family (`FAMILY[t] || t`), so nothing can trip the hard gate.
+Palette: 10 distinct types across 13 beats (need ≥7). APP_WINDOW ×3 (cap 5), VIDEO_PLAYER ×2, no two
+of a family adjacent. 7 distinct transition kinds (need ≥5).
 
-**Length.** Ava reads ~3 words/sec. 3.5 minutes ≈ 210s ≈ **630 words over 12 beats ≈ 50 words per
-beat** — roughly three spoken sentences each, every sentence ≤20 words. That is far more room than v2
-had, and it is what buys the granularity.
-
----
-
-## DOES THIS FLOW BACK INTO THE PRODUCT?
-
-The owner's question: *"I hope however you did this, is all part of the prompts/system prompts that we
-have in iAuteur that flows through AI so that we get the right output every time."*
-
-Honest answer: **partly, and the gap is being closed.** Already enforced for every video by machine —
-the component contracts and per-field budgets (`manifest.mjs` → `gen-prompt.mjs` → `lint-spec.mjs`),
-the casting protocol, payoff-early timing, the ≥5-transition rule. What was **not** encoded, and is
-being added in Phase A, is the *direction*: audience-first language, no jargon, and depict literally
-rather than diagrammatically.
+**Accepted warnings** (deliberate, not defects):
+- *13 scenes vs deep-dive's ≤12* — every beat is a real step; dropping one breaks the walkthrough.
+- *s02 17.3s / s11 17.0s "feels static"* — the rule assumes a still frame. The grind's playhead
+  crawls the entire beat and five bars land on five different words; the aspect twin builds four
+  outputs. Neither is static.
 
 ---
 
 ## PROGRESS
 
-Tick only after inspecting the real artifact. One phase at a time (LAW 10).
-
-### Phase A · make the direction part of the product, not just this video
-- [x] `gen-prompt.mjs`: a `DIRECTION` block (WHO IS WATCHING, AND WHAT THEY SEE) emitted in **stage1, stage2 and single-paste** — audience-first language, DEPICT-DON'T-DIAGRAM, the output-needs-its-own-shape corollary, and shorts/reels/devices over "phone". Verified by generating a prompt and reading it back
-- [x] Director skill: **LAW OF DEPICTION** at the top of `scene_library.md`, with the v2 box-diagram written up as the worked counter-example and three tests to apply before casting a beat
-- [x] `docs/STATE.md` records the rule under Gotchas, so Copilot/Cursor/a fresh clone picks it up too
-
-### Phase B · build the 5 new components (one per phase, fully audited before the next)
-- [x] 1 · `APP_WINDOW` — assembled first try · the button confirmed BEFORE the field it submits finished typing (fixed: click waits on typing end) · vertical step rail ellipsised every name at 190px, sized from the budget now
-- [x] 2 · `PROMPT_HANDOUT` — assembled after the manifest gate caught `assemble` silently dropping `preserveWs`; fixed in component-flow.mjs so indentation survives
-- [x] 3 · `CHAT_TRIO` — assembled first try · answers land staggered so the eye follows across
-- [x] 4 · `VIDEO_PLAYER` — assembled first try · scrubber, clock and play glyph all driven off one play head · missing clip falls back to a designed placeholder
-- [x] 5 · `SCENE_FORGE` — assembled first try · the forged piece enlarged after MAX showed it as weedy stubs
-
-### Phase C · author
-- [x] Beat sheet for `iauteur-how-easy`, validates clean
-- [x] All 12 scenes through the console API (validate → stage2 → assemble → intake)
-- [x] Zero jargon; the vertical output is captioned **shorts & reels**
-- [x] `npm run lint` passes with **zero warnings**, both formats (10 pacing warnings cleared by the TTS re-time, 2 more by trimming s06/s11, 2 late-anchor warnings in the vertical by restructuring)
-
-### Phase D · voice + render
-- [x] Voiceover (Ava) + `sync.mjs` re-time — 3:34 estimated came in at **2:38** real
-- [x] Stills reviewed after the voiceover pass — caught APP_WINDOW typing on the scene anchor instead of the field's own word, leaving the field empty while the narration described typing
-- [x] `wide-dark` rendered and watched frame by frame from the finished mp4; `short-dark` rendered
-- [x] `thumb` + `cover`
-
-### Phase E · ship
-- [x] README embed swapped to v3; `docs/media/` refreshed
-- [x] `docs/STATE.md` + counts updated (156)
-- [x] Committed and pushed to `main`
+- [x] **A · Clips.** Re-cut all three proof clips from the dense middle of a scene (market @141s,
+      product @47s, tech @178s), 10–14s, watermark cropped out entirely. `VIDEO_PLAYER` loops them.
+      *Audit: contact sheets of the source renders, then the rendered players — all three show
+      fully-drawn, moving content.*
+- [x] **B · CHAT_TRIO returns JSON.** `answerJson` + `answerFile`, streamed line by line with a
+      caret, coloured by `src/jsonInk.tsx`. Falls back to ruled lines when absent (back-compat).
+      *Audit: proof stills, both aspects, material + neobrutalism.*
+- [x] **C · APP_WINDOW pastes.** `mode:'paste'` (lands whole, Ctrl+V chip, border flash) and
+      multi-line JSON `lines`. The button waits for the paste before confirming. *Audit: same stills.*
+- [x] **D · Step rail.** `scene.stepRail` + `src/StepRail.tsx`, mounted by the shell. **Also fixed a
+      latent bug it exposed**: `sync.mjs` only retargeted `scene.data`, so any scene-level anchor
+      (`stepRail`, and `pip` before it) survived TTS as a raw word index. It now walks the whole
+      scene. *Audit: proof stills + the synced spec shows fractional rail anchors.*
+- [x] **E · PRODUCTION_GRIND.** New component, wired through `component-flow assemble`. Needed a
+      numeric slot on the generic item template (`value`), which the lab now provides for everyone.
+      *Audit: MIN + MAX fixtures × both aspects × 2 designs; gate green at 157 types.*
+- [x] **F · Author + voice.** Both specs lint clean; TTS with Ava; synced.
+- [ ] **G · Render, verify every beat from the finished mp4, ship.**
 
 ---
 
-## PAID-FOR LESSONS (v1 + v2 — all of these cost real time)
+## PAID-FOR LESSONS
 
-- **An abstract beat the audience cannot decode is a failed beat.** The v2 `PROMPT_HANDOFF` loop was
-  technically correct, well composed, and communicated nothing.
-- **`tsc` and the gate never caught a single visual defect.** Every one was found by rendering a still
-  and looking at it.
-- **Proof before the voiceover pass is not proof.** `sync.mjs` rescales every `atWord` to a
-  *fractional* value. A component using `atWord` as an integer position key silently breaks —
-  `WORD_ANCHOR_RAIL` lost every mark and the pre-sync stills looked perfect.
-- **Re-running `/api/intake` after `sync.mjs` reverts the spec to estimated timings.** Sync last, or
-  sync again after saving.
-- **`component-flow.mjs assemble` never writes text budgets** to `lint-spec.mjs` (only `DYNAMIC`).
-  Hand-write a validation block per component, sized to the NARROW (vertical) container.
-- **Its generated `<Name>Item` interface is fixed** (`label/text/title/sub/detail/color/asset/atWord`).
-  Anything else per item moves to a top-level field.
-- **The Fit guard truncates what the Budget guard allows.** Size cells from budget arithmetic, then
-  render the MAX fixture and look.
-- **A flex row aligned `flex-start` puts a connector on the row's top edge**, not the node centre line
-  — offset by `(nodeD - thickness) / 2`.
-- Editing `manifest.mjs` by hand desyncs `specs/video.schema.json` — `npm run schema && npm run types`.
-- Chain commands with `&&`, never `;` — a v1 commit landed on a red gate that way.
+1. **`tsc` and the gate have never caught a single visual defect.** Every one was found by rendering
+   a still and looking at it. Both are necessary; neither is sufficient.
+2. **Proof before the voiceover pass is not proof.** Anchors move when real audio arrives.
+3. **The narrow aspect is where layouts break.** Three stacked players overran the vertical frame and
+   clipped the last label — invisible in wide, obvious in tall.
+4. **A component that fails the gate rolls back atomically.** Read the tsc error; it is usually
+   telling you the data contract is wrong, not the code.
+5. **A rejection that names four defects is usually naming one cause.** Here it was: the viewer could
+   not tell what they were looking at. Artifact, gesture, motion and place are four ways of fixing
+   that, and all four were needed.
 
-## OPEN (does not block)
+---
 
-**Channel references before the repo goes public.** `channel_profile.md`, `CLAUDE.md`,
+## OPEN — needs the owner, do not action unilaterally
+
+**Channel references before the repo goes public.** `references/channel_profile.md`, `CLAUDE.md`,
 `public/assets/channel_logo.png`, `scripts/gen-upload-kit.mjs` and `briefs/` name YOUR CHANNEL in
-plain text. `topics/*` is gitignored so no video content is exposed.
+plain text. `topics/*` is gitignored, so no video content is exposed. The owner will make the repo
+public and post the video on LinkedIn as their work, but said *"ill never mention ill use it for my
+youtube channel"* — so this needs their decision before visibility is flipped.
