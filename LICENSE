@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 san-gitlogin (https://github.com/san-gitlogin)
+Copyright (c) 2026 san-gitlogin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,22 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-NOTE ON DEPENDENCIES
-
-The MIT licence above covers this repository's own source. It does not, and
-cannot, relicense the projects this one is built on. Two in particular have
-their own terms you must honour:
-
-  * Remotion (https://remotion.dev) — the rendering engine. Free for
-    individuals and small teams; companies above a certain size need a paid
-    licence. See https://remotion.dev/license before using this in a
-    commercial setting.
-
-  * Bundled icons and brand logos — Lucide (ISC) and Simple Icons (CC0).
-    Third-party brand logos are used nominatively; the trademarks remain the
-    property of their owners.
-
-The README's "Credits & attribution" section lists every upstream project.

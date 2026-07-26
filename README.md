@@ -523,4 +523,6 @@ Bundled glyphs are [Lucide](https://lucide.dev) (ISC) and brand logos are [Simpl
 (CC0), used nominatively. `public/assets/` also contains reference images fetched during authoring, each with
 its provenance recorded in `public/assets/SOURCES.json` — check that file before reusing one.
 
+**[`NOTICE.md`](NOTICE.md) has the full third-party picture** — read it before shipping anything commercial.
+
 Drop your own logo in as `public/assets/channel_logo.png` and every spec's `brand.logo` picks it up.
