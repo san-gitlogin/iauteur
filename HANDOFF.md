@@ -1,5 +1,17 @@
 # HANDOFF — iAUTEUR FINAL PROGRAM
 
+> ## ⚠️ STALE — historical record, do not follow
+>
+> This file is a snapshot from **Session 7, 2026-07-12** and has drifted. Its component counts are
+> wrong (it says "manifest 17→136"; there are now **162**), and it references `/memories/repo/*`
+> paths that only ever existed on one machine.
+>
+> **Use [`docs/STATE.md`](docs/STATE.md) instead** — that is the current, maintained orientation
+> document. New here? Start at [`README.md`](README.md), then
+> [`CONTRIBUTING.md`](CONTRIBUTING.md).
+>
+> Kept only because it records how the authoring system was built.
+
 Durable resume state for the charter that completes the iAuteur authoring system.
 Full run history: `/memories/repo/iauteur-webui.md`. Component-library history:
 `/memories/repo/HANDOFF.md` (Program 3, complete). Decisions/defects: `audit/register.md`.

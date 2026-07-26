@@ -20,6 +20,8 @@
   <code>topics/iauteur-introducing/</code>.</sub>
 </p>
 <p align="center">
+  <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-green"></a>
+  <a href="CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen"></a>
   <a href="https://remotion.dev"><img alt="Built with Remotion" src="https://img.shields.io/badge/built%20with-Remotion-0B84F3"></a>
   <img alt="Node" src="https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white">
@@ -154,6 +156,7 @@ stay in step with the UI.</sub>
 - [Reproducibility — what's committed](#reproducibility--whats-committed)
 - [Troubleshooting](#troubleshooting)
 - [Repository conventions](#repository-conventions)
+- [Contributing](#contributing)
 - [Credits & attribution](#credits--attribution)
 - [Licence](#licence)
 
@@ -487,6 +490,31 @@ Then `npm run lint` and re‑render. (Requires `pip install edge-tts` and intern
 - Building or changing a **component** is a code job that follows
   `.claude/skills/tech-video-director/references/component_authoring.md` (six wiring files + both‑aspect proofs).
 - `CLAUDE.md` and `PROJECT_RULES.md` hold the full working rules — read them before large changes.
+
+## Contributing
+
+**Contributions are wanted, at any size.** A typo fix, a bug report with a screenshot, a whole new
+scene component — you don't need permission to start.
+
+Start with **[CONTRIBUTING.md](CONTRIBUTING.md)**. It covers setup, the health check that tells your
+breakage apart from pre-existing breakage, the rules that decide whether a PR gets merged, and the
+six-file recipe for adding a scene component (plus the tool that wires those six files for you and
+rolls back cleanly if a gate fails).
+
+The most useful contributions right now:
+
+| | |
+|---|---|
+| **Make a video and say what confused you** | No code needed. The docs were written by someone who already knows the answers, so fresh confusion is real information |
+| **A scene that looks wrong** | Send the still, the component type, the design pack, and the aspect. Most visual bugs live in one pack or one aspect only |
+| **A new scene component** | There are 162 and the library is nowhere near done. This is the flagship contribution |
+| **A design pack** | A whole visual language every component inherits automatically |
+
+One warning worth repeating from the contributor guide: **`tsc` and the gate have never once caught a
+visual defect in this repo.** Every one was found by rendering a still and looking at it. If you change
+a component, please look at it — in both aspects, and in a flat design as well as a glowing one.
+
+Fork it and do something strange with it, too. That needs no issue and no permission.
 
 ## Credits & attribution
 

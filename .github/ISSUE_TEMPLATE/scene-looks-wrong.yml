@@ -1,0 +1,60 @@
+name: A scene looks wrong
+description: Text clipped, elements overlapping, something invisible, motion stuttering
+labels: [bug, visual]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Visual bugs in this repo are usually specific to one design pack or one aspect ratio — the
+        same component can be perfect in wide and broken in vertical. The four fields below are what
+        make it reproducible. Thanks for taking the time.
+
+  - type: textarea
+    id: still
+    attributes:
+      label: The still
+      description: Drag the screenshot or rendered PNG in here. This is the most useful part of the report.
+      placeholder: Paste or drag an image.
+    validations:
+      required: true
+
+  - type: input
+    id: component
+    attributes:
+      label: Which component
+      description: The scene `type` from the spec.
+      placeholder: e.g. BEAT_BOARD
+    validations:
+      required: true
+
+  - type: dropdown
+    id: aspect
+    attributes:
+      label: Aspect
+      options:
+        - wide (16:9)
+        - vertical (9:16)
+        - both
+    validations:
+      required: true
+
+  - type: input
+    id: design
+    attributes:
+      label: Design pack and theme
+      description: From `brand.design` / `brand.theme`, and whether it was the dark or light render.
+      placeholder: e.g. neobrutalism, light
+    validations:
+      required: true
+
+  - type: textarea
+    id: spec
+    attributes:
+      label: The scene's JSON, if you have it
+      description: A few lines that reproduce it is the best possible bug report.
+      render: json
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead

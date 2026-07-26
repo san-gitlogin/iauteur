@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How to contribute
+    url: https://github.com/san-gitlogin/iauteur/blob/main/CONTRIBUTING.md
+    about: Setup, the rules that get a PR merged, and how to add a scene component.
+  - name: Report a security issue privately
+    url: https://github.com/san-gitlogin/iauteur/security/advisories/new
+    about: For anything exploitable — especially a code path that could leak an API key.
+  - name: Remotion licensing
+    url: https://remotion.dev/license
+    about: Remotion is not MIT. Free for individuals and small teams; larger companies need a paid licence.

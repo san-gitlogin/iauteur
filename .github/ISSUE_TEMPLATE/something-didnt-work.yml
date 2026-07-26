@@ -1,0 +1,51 @@
+name: Something didn't work / I got stuck
+description: Setup failed, a script errored, a step in the docs was unclear, or you have a question
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A question is a valid issue. If something was unclear enough to ask about, the answer belongs
+        in the docs — so "I got stuck at step 3" is genuinely useful, not a bother.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What you were trying to do
+      placeholder: e.g. Following the README's first-video walkthrough, at the render step.
+    validations:
+      required: true
+
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+      description: Paste the full error if there is one, including the command you ran.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: e.g. Windows 11 / macOS 15 / Ubuntu 24.04
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Node and Python versions
+      description: "`node -v` and `python --version`"
+      placeholder: e.g. node v20.11.0, Python 3.12.1
+
+  - type: checkboxes
+    id: gate
+    attributes:
+      label: Did you run the health check?
+      description: "`npm run gate` and `npm run typecheck` — these tell your breakage apart from pre-existing breakage."
+      options:
+        - label: "`npm run gate` exits 0"
+        - label: "`npm run typecheck` is clean"
+        - label: I couldn't get far enough to run them

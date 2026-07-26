@@ -59,24 +59,38 @@ voice. Prefer them over hand-rolled headers/cards.
 
 ---
 
-## 1. The wiring checklist — SIX files, every time (a new type touches all six)
+## 1. The wiring checklist — EIGHT touchpoints, every time
 
-1. **`src/types.ts`** — add the `<Name>Data` interface (+ any sub-interfaces) next to its
+`node scripts/component-flow.mjs assemble` wires all eight for you, runs tsc + the gate, and rolls
+back atomically if anything fails — prefer it. Doing it by hand means all of these:
+
+1. **`scripts/lib/constants.mjs`** — add `'TYPE_KEY'` to the `TYPES` array, else the linter rejects
+   the type. (Corrected 2026-07-26: `TYPES` used to live in `lint-spec.mjs`, which now imports it
+   from here. An older revision of this checklist sent people to the wrong file.)
+2. **`scripts/lib/manifest.mjs`** — the type's data contract plus a **valid `example`**. This is the
+   SINGLE SOURCE OF TRUTH for every component's shape; `check-manifest` fails the gate if the
+   manifest and `types.ts` disagree, and the schema/types generators read from here.
+3. **`src/types.ts`** — add the `<Name>Data` interface (+ any sub-interfaces) next to its
    siblings, and add ONE optional field to `SceneData` (e.g. `pipeline?: PipelineData;`).
-2. **`src/scenes/<Name>.tsx`** — the component. `React.FC<{scene: Scene}>`, read
+4. **`src/scenes/<Name>.tsx`** — the component. `React.FC<{scene: Scene}>`, read
    `scene.data.<field>`, guard `if (!d) return <AbsoluteFill />;`. Tokens + `×scale` only.
-3. **`src/MainComposition.tsx`** — `import {<Name>}` and add `TYPE_KEY: <Name>` to `registry`.
-4. **`scripts/lint-spec.mjs`** — THREE edits:
-   - add `'TYPE_KEY'` to the `TYPES` array (else the linter rejects the type);
+5. **`src/MainComposition.tsx`** — `import {<Name>}` and add `TYPE_KEY: <Name>` to `registry`.
+6. **`scripts/lint-spec.mjs`** — TWO edits:
    - if the component is visual/animated, add `'TYPE_KEY'` to the `DYNAMIC` array (anti-monotony);
    - add a validation block (`if (d.<field>) { … }`) with a **character budget for every text
      field** sized to the NARROWEST (vertical) container, plus count/enum/index-range checks.
-5. **`references/scene_library.md`** — add a row: `| TYPE_KEY | USE-WHEN intent | data-shape with budgets |`.
-6. **`src/showcaseSpec.ts`** — add an `x-<name>` demo scene to the `extra[]` array so the component
+7. **`references/scene_library.md`** — add a row: `| TYPE_KEY | USE-WHEN intent | data-shape with budgets |`.
+8. **`src/showcaseSpec.ts`** — add an `x-<name>` demo scene to the `extra[]` array so the component
    shows up in EVERY design composition (the review surface) and gets a smoke render for free.
 
-Then: `get_errors` (or `node node_modules/typescript/bin/tsc --noEmit`) must be clean, and
-`node scripts/lint-all.mjs` must show only pre-existing known rejections.
+Then regenerate the derived files (`node scripts/gen-schema.mjs`, `node scripts/gen-types.mjs` — never
+hand-edit `specs/video.schema.json` or `src/sceneTypes.generated.ts`), confirm
+`node node_modules/typescript/bin/tsc --noEmit` is clean, `node scripts/lint-all.mjs` shows only
+pre-existing known rejections, and `npm run gate` exits 0.
+
+**Removing a type:** `node scripts/component-flow.mjs remove <TYPE>` reverse-wires all eight cleanly —
+but it only strips the type from `DYNAMIC`, so **delete your hand-written validation block in
+`lint-spec.mjs` yourself** and grep for residue.
 
 ---
 

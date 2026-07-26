@@ -1,0 +1,57 @@
+name: Propose a new scene component
+description: A shape of explanation the 162 existing components can't draw
+labels: [component, enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Components are the heart of this project, and the library is nowhere near finished. Before
+        proposing one, it's worth skimming [scene_library.md](https://github.com/san-gitlogin/iauteur/blob/main/.claude/skills/tech-video-director/references/scene_library.md) —
+        with 162 types, the shape you need sometimes already exists under a name you wouldn't guess.
+
+  - type: input
+    id: name
+    attributes:
+      label: Proposed type name
+      description: SCREAMING_SNAKE_CASE, like the existing ones.
+      placeholder: e.g. STATE_MACHINE
+    validations:
+      required: true
+
+  - type: textarea
+    id: usewhen
+    attributes:
+      label: Use when…
+      description: What kind of narration beat does this draw? One sentence, the way a director would pick it.
+      placeholder: "When the narration walks through states and the transitions between them."
+    validations:
+      required: true
+
+  - type: textarea
+    id: existing
+    attributes:
+      label: Why an existing component won't do
+      description: Which ones you considered, and what they can't express.
+    validations:
+      required: true
+
+  - type: textarea
+    id: data
+    attributes:
+      label: What data would it hold
+      description: A rough shape. Text fields will need character budgets sized to the vertical container.
+      render: json
+
+  - type: textarea
+    id: sketch
+    attributes:
+      label: A sketch, reference, or description of the motion
+      description: Anything visual helps — a screenshot of something similar, a napkin drawing, or just words.
+
+  - type: checkboxes
+    id: building
+    attributes:
+      label: Are you up for building it?
+      options:
+        - label: I'd like to build it myself (see CONTRIBUTING.md — there's a tool that wires it for you)
+        - label: I'm proposing the idea for someone else to pick up

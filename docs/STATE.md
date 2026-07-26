@@ -44,6 +44,32 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-07-26 · contributor-facing docs (public repo, part 2)
+The repo is public, so a stranger now has to be able to get in. Added:
+
+- **`CONTRIBUTING.md`** — the mental model ("the JSON is the movie"), setup, the health check that
+  separates your breakage from pre-existing breakage, a difficulty-labelled list of ways to help, the
+  **eight rules that decide whether a PR merges** (each traced to a real defect), both routes for adding
+  a component, the definition of done (MIN/MAX/MIX × both aspects × material + neobrutalism), and how
+  to file a visual bug so it's reproducible.
+- **`SECURITY.md`** — private advisory reporting, and the three risks that actually exist here (a
+  leaked provider key, prompt injection via pasted source material, and the fact that rendering runs
+  a browser so a stranger's spec is untrusted input).
+- **`.github/`** — PR template carrying the gate checklist, and three issue forms: *a scene looks
+  wrong* (forces still + type + design pack + aspect, without which a visual bug is unreproducible),
+  *propose a component*, *something didn't work*.
+- README: MIT + PRs-welcome badges, a Contributing section, TOC entry.
+- **`HANDOFF.md` now carries a STALE banner** pointing here. It was misinforming readers with a
+  136-component count and `/memories/repo/*` paths that never existed off one machine.
+
+**A real doc bug surfaced while writing this, now fixed:** `component_authoring.md` described the
+wiring as "SIX files" and told you to add `TYPES` in `lint-spec.mjs`. `TYPES` actually lives in
+`scripts/lib/constants.mjs` (lint-spec imports it), and `scripts/lib/manifest.mjs` is a required
+touchpoint the list omitted entirely — so **the canonical by-hand recipe was wrong and would have
+failed the gate.** It is now an accurate eight-touchpoint checklist in both that file and
+CONTRIBUTING.md, with the correction noted inline so nobody "restores" the old six. Verified against
+`component-flow.mjs`'s own `targets` map, which wires exactly those seven files plus the component.
+
 ### 2026-07-26 · OPEN-SOURCED — MIT licence + channel identity removed (commit `e746553`)
 The repo is prepared to go public. Two decisions by the owner drove it: licence **MIT**, and the
 channel identity **stripped rather than published**.
