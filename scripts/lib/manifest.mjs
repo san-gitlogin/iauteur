@@ -16,7 +16,20 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  REPO_CTA: {
+export const MANIFEST = {  INTRO_CARD: {
+    category: "structure", family: "intro-card", data_key: "introCard",
+    purpose: "One short beat that says the name and nothing else: a small letterspaced kicker, the product name enormous underneath, and an accent rule sweeping out from the centre as it lands.",
+    use_when: "The turn from problem to product, straight after the pain beats and before the first step of the walkthrough. Keep it to 3-5 seconds. Deliberately carries no mark, no promise and no feature chips - those belong to the beats that follow, and crowding them in blunts the only moment the name gets the frame to itself. Not TITLE_CARD (a topic label), not LOGO_REVEAL (a mark being drawn).",
+    fields: {
+      kicker: {t: 'string', max: 16, note: "the small line above, e.g. 'introducing'"},
+      name: {t: 'string', req: true, max: 20, note: "the product name, set as the largest thing in the film"},
+      color: {t: 'string', note: "semantic accent; default blue"},
+      source: {t: 'string', note: "optional source footer"},
+      atWord: {t: 'anchor', note: "word the rule sweeps on. The name itself lands early (base <=38f)."},
+    },
+    example: {introCard: {"kicker":"introducing","name":"iAuteur","color":"blue","atWord":3}},
+  },
+  REPO_CTA: {
     category: "structure", family: "repo-cta", data_key: "repoCta",
     purpose: "The closing go-and-get-it: a real repository card with the host's own mark, owner/name, what it is, verifiable facts, and the URL written out large enough to read off the screen.",
     use_when: "The viewer has to carry ONE thing away - the address. A line of text saying 'it is on GitHub' is a claim; a repo card is the thing itself. Put it just before the outro. Every fact on it must be verifiable (LAW 3) - never invented stars, forks or downloads.",

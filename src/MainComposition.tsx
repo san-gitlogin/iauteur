@@ -169,10 +169,12 @@ import {BeatBoard} from './scenes/BeatBoard';
 import {ComponentLab} from './scenes/ComponentLab';
 import {AutoRun} from './scenes/AutoRun';
 import {RepoCta} from './scenes/RepoCta';
+import {IntroCard} from './scenes/IntroCard';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  INTRO_CARD: IntroCard,
   REPO_CTA: RepoCta,
   AUTO_RUN: AutoRun,
   COMPONENT_LAB: ComponentLab,

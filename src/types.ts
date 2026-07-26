@@ -1659,7 +1659,15 @@ export interface RepoCtaData {
   source?: string;
   atWord?: number;
 }
+export interface IntroCardData {
+  kicker?: string;
+  name?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  introCard?: IntroCardData;
   repoCta?: RepoCtaData;
   autoRun?: AutoRunData;
   componentLab?: ComponentLabData;

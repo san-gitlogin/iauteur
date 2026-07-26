@@ -132,10 +132,33 @@ can be regenerated instead of rotting.
 - Remotion renders fetch Google Fonts per render. On a bad connection later scenes throw
   `[NetworkError]`. Kill leaked processes (`Get-Process node | Stop-Process -Force`) and retry.
 
-### 2026-07-26 · demo video v5 — SHIPPED (v1–v4 superseded)
+### 2026-07-26 · demo video v6 — SHIPPED (v1–v5 superseded)
+
+**`topics/iauteur-introducing/`** — 17 scenes wide (3:38) + 13 vertical (1:33), moderndark on
+`aurora`, Ava. This is what the README embeds.
+
+**v5 was rejected on two things: it never introduced the product, and the script was full of
+unnamed "it"s.** *"Before the step 1 we need to have an intro to our app."* and *"I see so many
+places you are describing 'it'. What is it bro. You should be specific."*
+
+**One new component, count 161 → 162 — with a build-then-scrap in between.** First attempt was
+`PRODUCT_INTRO`, a full pivot beat (kicker, mark, name, promise line, feature chips) — rejected on
+sight for being too heavy and removed cleanly via `component-flow.mjs remove` (verified: grep for
+residue, tsc clean). Replaced with `INTRO_CARD`: kicker, the name at 150px, a rule sweeping out from
+centre, nothing else, 3–5 seconds. Linter warns if a spec sets `data.headline` on it (the name IS
+the headline) or lets it run past ~6.7s (it holds one line; longer than that it stops landing and
+starts pausing).
+
+**Every line of narration was rewritten to name its subject.** No bare "it" for iAuteur, an
+assistant, a file, a component, or a key anywhere in either spec — verified with a regex scan
+(`it (writes|reads|renders|builds|checks|works|fits|drops|wires|plays|hands|rewrites)`) across every
+scene of both specs, zero matches. This is a narration-craft rule with no automated gate (a bare
+"it" is sometimes correct grammar) — re-read the full script aloud before voicing.
+
+### 2026-07-26 · demo video v5 (superseded)
 
 **`topics/iauteur-try-it-yourself/`** — 16 scenes wide + 11 vertical, moderndark on `aurora`, Ava.
-This is what the README embeds.
+Superseded by v6; its web copy has been removed from `docs/media/`.
 
 **v4 was rejected on the component-generation beat and the ending.** It compressed "every scene has
 its own build button" and "here is what that button does" into a single scene with one workbench

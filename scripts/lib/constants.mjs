@@ -55,6 +55,7 @@ export const TYPES = [
   'COMPONENT_LAB',
   'AUTO_RUN',
   'REPO_CTA',
+  'INTRO_CARD',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

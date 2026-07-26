@@ -346,7 +346,8 @@
               "BEAT_BOARD",
               "COMPONENT_LAB",
               "AUTO_RUN",
-              "REPO_CTA"
+              "REPO_CTA",
+              "INTRO_CARD"
             ]
           },
           "narration": {
@@ -416,6 +417,51 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "INTRO_CARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "introCard": {
+                      "type": "object",
+                      "properties": {
+                        "kicker": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "the small line above, e.g. 'introducing'"
+                        },
+                        "name": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the product name, set as the largest thing in the film"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic accent; default blue"
+                        },
+                        "source": {
+                          "type": "string",
+                          "description": "optional source footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word the rule sweeps on. The name itself lands early (base <=38f)."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

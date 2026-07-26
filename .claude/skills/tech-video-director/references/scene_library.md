@@ -75,6 +75,23 @@ log that writes itself), and **end on a real address**, not a claim. REPO_CTA dr
 card with the host's mark and the URL big enough to read off the screen; every stat on it must be
 verifiable (LAW 3) — a repo card is exactly where invented star counts get added.
 
+### Two more, paid for by v5 (rejected 2026-07-26)
+
+10. **Name the product before you use its name, but keep the naming beat SHORT.** v5 opened on the
+    pain, then jumped straight into "you open iAuteur" with no beat that had ever said what iAuteur
+    *is*. Owner: *"Before the step 1 we need to have an intro to our app. Introducing 'iAuteur'!"*
+    The first attempt (a full pivot beat with a mark, a promise line and feature chips) was rejected
+    on sight: *"I dont want you to use the product intro component. design your own, i need it to be
+    short, just saying introducing iauteur."* INTRO_CARD is the answer — kicker, the name at its
+    largest size in the film, a rule sweeping out from centre, nothing else, 3–5 seconds. A naming
+    beat that tries to also sell the product isn't a naming beat anymore.
+11. **Every sentence names its subject.** Owner: *"I see so many places you are describing 'it'. What
+    is it bro. You should be specific. Either component, iauteur, LLM API Keys, etc. You are just
+    scripting a way that nobody would understand."* A narration line is not allowed a bare "it" for
+    iAuteur, an assistant, a file, a component, or a key — say which one, every time. This is a
+    craft rule with no linter check (a bare "it" is sometimes correct grammar), so re-read the full
+    script aloud, subject by subject, before voicing.
+
 ## Themes (set "brand": {"theme": X}; choose by topic mood; vary ACROSS videos)
 | Theme | Mood | Use for |
 |---|---|---|
@@ -446,3 +463,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | COMPONENT_LAB | The DETAIL beat that BEAT_BOARD hands off to - what actually happens when a per-item build button is pressed. Use the pair; compressing both into one scene makes the capability illegible. Not PIPELINE_GATE (abstract stages), not LAB_ASSEMBLY (parts joining). | headline≤48, drawerTitle≤26, forScene≤30, askLabel≤34, ask≤38, askAtWord, stages, gates, doneLabel≤30, footNote≤52, color, source, atWord |
 | AUTO_RUN | The claim is 'you do not have to do any of this yourself'. The LOG is the proof - a viewer believes a list of steps that wrote itself far more than an arrow labelled 'automated'. Not LOG_STREAM (raw server output), not AUTOMATION_RUN (a CI job), not PIPELINE (abstract stages). | headline≤48, keyLabel≤20, keyMask≤30, modelLabel≤22, toggles, runLabel≤22, runningLabel≤22, runAtWord, steps, doneLabel≤34, footNote≤52, color, source, atWord |
 | REPO_CTA | The viewer has to carry ONE thing away - the address. A line of text saying 'it is on GitHub' is a claim; a repo card is the thing itself. Put it just before the outro. Every fact on it must be verifiable (LAW 3) - never invented stars, forks or downloads. | headline≤48, mark, owner≤24, repo≤22, description≤110, facts, url≤42, footNote≤52, color, source, atWord |
+| INTRO_CARD | The turn from problem to product, straight after the pain beats and before the first step of the walkthrough. Keep it to 3-5 seconds. Deliberately carries no mark, no promise and no feature chips - those belong to the beats that follow, and crowding them in blunts the only moment the name gets the frame to itself. Not TITLE_CARD (a topic label), not LOGO_REVEAL (a mark being drawn). | kicker≤16, name≤20, color, source, atWord |

@@ -3,27 +3,27 @@
 </p>
 
 <p align="center">
-  <a href="docs/media/iauteur-try-it-yourself.mp4">
-    <img src="docs/media/iauteur-try-it-yourself-poster.png" width="820"
-         alt="Watch: nobody filmed this — the whole workflow, screen by screen" />
+  <a href="docs/media/iauteur-introducing.mp4">
+    <img src="docs/media/iauteur-introducing-poster.png" width="820"
+         alt="Watch: introducing iAuteur — the whole workflow, screen by screen" />
   </a>
 </p>
 
 <p align="center">
-  <b><a href="docs/media/iauteur-try-it-yourself.mp4">▶&nbsp; Nobody filmed this</a></b><br>
-  <sub>Twenty-one hours of editing, or this: type one line, copy the question it writes, paste it
-  into whichever assistant you already use, paste the answer back, preview a scene, press the button
-  on the one scene that needs a picture nobody has built yet, pick a voice — and out come four
-  finished videos. Then the same thing again with an API key, one button and no pasting at all.
-  Every step on screen, with the app's own progress rail running underneath so you always know where
-  you are. Made by this project, about this project. Spec:
-  <code>topics/iauteur-try-it-yourself/</code>.</sub>
+  <b><a href="docs/media/iauteur-introducing.mp4">▶&nbsp; Introducing iAuteur</a></b><br>
+  <sub>Twenty-one hours of editing, or this: type one line into iAuteur, copy the brief iAuteur
+  writes, paste it into whichever assistant you already use, paste the file back, preview a scene,
+  press the button on the one scene that needs a picture nobody has built yet, pick a voice — and
+  out come four finished videos. Then the same thing again with your own AI key, one button and no
+  pasting at all. Every step on screen, with iAuteur's own progress rail running underneath so you
+  always know where you are. Made by iAuteur, about iAuteur. Spec:
+  <code>topics/iauteur-introducing/</code>.</sub>
 </p>
 <p align="center">
   <a href="https://remotion.dev"><img alt="Built with Remotion" src="https://img.shields.io/badge/built%20with-Remotion-0B84F3"></a>
   <img alt="Node" src="https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white">
-  <img alt="161 components" src="https://img.shields.io/badge/components-161-E8A22E">
+  <img alt="162 components" src="https://img.shields.io/badge/components-162-E8A22E">
   <img alt="30 design packs" src="https://img.shields.io/badge/design%20packs-30-E8A22E">
   <img alt="42 themes" src="https://img.shields.io/badge/themes-42-E8A22E">
   <img alt="Works with any LLM" src="https://img.shields.io/badge/works%20with-any%20LLM-8957E5">
@@ -31,7 +31,7 @@
 
 Turn a **topic** into a finished tech‑explainer video. You (or any LLM) describe the video as a
 **JSON spec**; [Remotion](https://remotion.dev) renders it to MP4 — 16:9 long‑form **and** 9:16 shorts,
-each in **dark and light**. The project ships a large, audited component library (**161 scene types**)
+each in **dark and light**. The project ships a large, audited component library (**162 scene types**)
 that automatically reskins across **30 design packs** and **42 themes**.
 
 > **The JSON is the movie.** `topics/<slug>/long.json` + `shorts.json` → Remotion renders exactly what
@@ -160,7 +160,7 @@ stay in step with the UI.</sub>
 
 ## Showcase
 
-A handful of the **161 components**, rendered straight from JSON specs across different design packs
+A handful of the **162 components**, rendered straight from JSON specs across different design packs
 (finance in `corptrust`, science in `organic`) — dark themes shown:
 
 <table>
@@ -391,7 +391,7 @@ LLM prompt, the normalizer, the field validator **and** this schema.
 
 It is a **floor, not the whole law.** The schema checks:
 
-- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 161 types);
+- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 162 types);
 - **enums** — `brand.theme` (dark skins), `themeLight`, `background`, each scene `transition`/`anim`/`background`, `meta.format`;
 - **string budgets** — `maxLength` on every text field, mirrored from the linter.
 
@@ -408,7 +408,7 @@ specs/gallery.json      Component showcase (every type demoed) — feeds the des
 specs/demo-*.json       Finance + science demo videos that exercise the full library.
 src/
   index.ts · Root.tsx   Remotion entry + composition registration (topics + design showcases).
-  MainComposition.tsx   Scene registry: maps scene.type → component (161 types).
+  MainComposition.tsx   Scene registry: maps scene.type → component (162 types).
   types.ts              The spec schema (VideoSpec, Scene, BrandConfig, SceneData…).
   themes.ts             42 themes (38 dark + 4 light) — all colour/font/scale tokens.
   designs/<pack>/       The 30 design packs (per-pack component overrides + chrome + chart kit).
@@ -426,7 +426,7 @@ CLAUDE.md · PROJECT_RULES.md   Repo laws and the topic lifecycle (read before l
 
 ## The component library
 
-**161 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
+**162 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
 RECAP, OUTRO_CTA…), charts (LINE_CHART, BAR_COMPARE, DONUT, FUNNEL, WATERFALL, RADAR, CANDLESTICK, SANKEY,
 TREEMAP, BOX_PLOT, PICTOGRAM…), diagrams & engines (DIAGRAM, PIPELINE, NEURAL_NET, STATE_MACHINE,
 KNOWLEDGE_GRAPH…), code/cloud/AI surfaces (CODE_EDITOR, TERMINAL_SESSION, CLOUD_ARCH, K8S_CLUSTER,
@@ -434,11 +434,11 @@ AGENT_HARNESS, RETRIEVAL_RANK…), icons/logos (ICON_GRID, LOGO_WALL, LOGO_VERSU
 (FORMULA, MOLECULE, DNA_HELIX, CIRCUIT_FLOW, VECTOR_FIELD, TICKER_TAPE, MAP_RADAR…), and a media / creator‑
 overlay family (VIDEO_HERO, CAPTION_KINETIC_OVERLAY, PHOTO_TIMELINE…), plus a workflow family that draws
 real software rather than diagrams of it (APP_WINDOW, PROMPT_HANDOUT, CHAT_TRIO, VIDEO_PLAYER,
-BEAT_BOARD, COMPONENT_LAB, AUTO_RUN, SCENE_FORGE, CHECK_SWEEP, PRODUCTION_GRIND, REPO_CTA).
+BEAT_BOARD, COMPONENT_LAB, AUTO_RUN, SCENE_FORGE, CHECK_SWEEP, PRODUCTION_GRIND, REPO_CTA, INTRO_CARD).
 
 Separately from the scene types, a scene can carry a **`stepRail`** — the app-progress chrome drawn by
 the shell *over* whatever component the beat uses, so a multi-step walkthrough never loses the viewer.
-It composes with all 161 types without any of them knowing about it.
+It composes with all 162 types without any of them knowing about it.
 
 The authoritative, always‑current catalog is `.claude/skills/tech-video-director/references/scene_library.md`
 (the "USE WHEN" table + the data shape for each type). `PROGRAM_3_FINAL.md` summarises how the library was

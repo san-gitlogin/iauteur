@@ -1,4 +1,4 @@
-# DEMO VIDEO PLAN — v5 · "try it yourself"
+# DEMO VIDEO PLAN — v6 · "introducing"
 
 The video that markets iAuteur, **made by iAuteur**, for the README embed, LinkedIn and YouTube.
 
@@ -8,13 +8,13 @@ The video that markets iAuteur, **made by iAuteur**, for the README embed, Linke
 > ONE phase, audit it against real artifacts per CLAUDE.md LAW 10, tick the box, commit, continue.
 > Never tick a box you have not verified by looking at the actual output.
 
-Topic folder: `topics/iauteur-try-it-yourself/` · 16 beats long, 11 beats shorts.
+Topic folder: `topics/iauteur-introducing/` · 17 beats long, 13 beats shorts.
 Predecessors (immutable, still on disk): `iauteur-explains-itself` (v1), `iauteur-what-you-get` (v2),
-`iauteur-how-easy` (v3), `iauteur-made-easy` (v4).
+`iauteur-how-easy` (v3), `iauteur-made-easy` (v4), `iauteur-try-it-yourself` (v5).
 
 ---
 
-## THE FOUR RULES, IN THE ORDER THEY WERE PAID FOR
+## THE RULES, IN THE ORDER THEY WERE PAID FOR
 
 Each one came from a rejection. Each is now enforced somewhere a future session cannot miss it.
 
@@ -78,7 +78,43 @@ Same round, two more:
   creating tutorial videos for an organization, making youtube videos, animating them."* → the new
   `PRODUCTION_GRIND` component draws the evening someone loses to an editing timeline. It is beat 2,
   before iAuteur appears at all.
-- **Say it's powered by Remotion.** Beat 11, out loud, in the narration.
+- **Say it's powered by Remotion.** Out loud, in the narration.
+
+### 6. Name the product before you use its name (v5 rejected — this version)
+v5 opened on the pain, then jumped straight into "you open iAuteur" without ever having introduced
+what iAuteur *is*.
+
+> "Before the step 1 we need to have a intro to our app. Introducing 'iAuteur' ! Your one stop
+> solution to build videos with no extra efforts or something that is catchy."
+
+First build attempt (`PRODUCT_INTRO`) was a full pivot beat — kicker, mark, name, promise line,
+feature chips. Rejected on sight for being too heavy:
+
+> "I dont want you to use the product intro component. design your own, i need it to be short, just
+> saying introducing iauteur."
+
+`PRODUCT_INTRO` was removed via `component-flow.mjs remove` (clean reverse-wire, verified with a
+residue grep + `tsc`) and replaced with `INTRO_CARD` — a 3–5s punctuation beat: kicker, the name at
+150px, a rule that sweeps out from centre. Nothing else. It is now beat 3, directly after the pain
+and before the first step of the walkthrough. Constraint enforced in the linter: a spec that sets
+`data.headline` on an `INTRO_CARD` gets a warning (the name IS the headline here), and a duration
+over ~6.7s (200 frames) gets a warning too — it holds one line, so past that it stops landing and
+starts pausing.
+
+### 7. Every sentence names its subject (v5 rejected — same round)
+> "I see so many places you are describing 'it'. What is it bro. You should be specific. Either
+> component, iauteur, LLM API Keys, etc., You are just scripting a way that nobody would understand."
+
+The whole v5 script was rewritten. Every "it" that meant iAuteur now says **iAuteur**; every "it"
+that meant the assistant says **the assistant** (or names it: ChatGPT/Claude/Gemini); every "it"
+that meant the JSON says **the file**; every "it" that meant a new component says **the component**;
+"put in a key" became **"paste in your own AI key"**. Headlines changed to match: "It writes the
+question for you" → *"iAuteur writes the brief for you"*; "It reads it back" → *"iAuteur reads it
+back, line by line"*; "You say it. It gets built." → *"You say it. iAuteur builds it."* This is a
+narration-craft rule, not a mechanical one — there is no linter check for it (a bare "it" is
+sometimes correct English), so re-reading the full script aloud before voicing is the gate. Recorded
+in `references/scene_library.md` and personal memory `iauteur-video-direction.md` as a standing
+instruction for every future spec.
 
 ---
 
@@ -98,41 +134,47 @@ Same round, two more:
   artifact (rule 3) and not speaking jargon (rule 1) are not in conflict: the eye reads the file,
   the ear hears plain English.
 - **Both aspects ship.** Wide for YouTube/README, tall for shorts and reels.
+- **Every sentence names its subject.** No bare "it" doing duty for iAuteur, the assistant, the
+  file, a component, or your AI key — the narration says which one. See rule 5 below.
 
 ---
 
-## THE 16 BEATS
+## THE 17 BEATS
 
 Rail = the `stepRail` state carried on that beat. Beats without one sit outside the product — and
-`AUTO_RUN` deliberately has none, because it is the beat that skips the whole rail.
+`AUTO_RUN` deliberately has none, because it is the beat that skips the whole rail. Every rail note
+and headline below is the ACTUAL narration, post rule-7 rewrite: iAuteur, the assistant, the file,
+the component, your AI key — never a bare "it".
 
 | # | Type | Rail | What it shows |
 |---|---|---|---|
 | s01 | HOOK | — | a whole week, for one three-minute video |
 | s02 | PRODUCTION_GRIND | — | the old way: 5 chores, a crowded timeline, 21 hours |
-| s03 | APP_WINDOW | 1 Topic · *saying what it's about* | one line, who it's for, the look |
-| s04 | PROMPT_HANDOUT | 3 Script · *it writes the brief for you* | the brief it wrote, Copy pressed |
-| s05 | CHAT_TRIO | 3 Script · *pasted into your assistant* | **the JSON coming back**, in three windows |
-| s06 | APP_WINDOW | 3 Script · *pasting the answer back in* | **the JSON pasted**, Ctrl+V, 12 scenes in |
-| s07 | CHECK_SWEEP | 3 Script · *reading it back for you* | it catches a crowded line and rewrites it |
-| s08 | VIDEO_PLAYER | 3 Script · *previewing one scene* | one scene, previewed, really playing |
-| s09 | **BEAT_BOARD** | 3 Script · *one button per scene* | **every row with its own ＋ component**, one pressed |
-| s10 | **COMPONENT_LAB** | 3 Script · *building the piece it needs* | **the ask, the stages, the gates, it lands in s05** |
-| s11 | APP_WINDOW | 4 Voice · *picking a voice* | Ava, listen, timed to the words |
-| s12 | ASPECT_TWIN | 5 Render · *rendered with Remotion* | one description → four videos |
-| s13 | **AUTO_RUN** | — | **a masked key, one button, a log that writes itself** |
-| s14 | VIDEO_PLAYER | — | three finished videos, really playing |
-| s15 | **REPO_CTA** | — | **the GitHub mark, san-gitlogin/iauteur, the URL** |
-| s16 | OUTRO_CTA | — | including this one · sub carries the URL again |
+| s03 | **INTRO_CARD** | — | **"introducing" · iAuteur, at 150px, underlined** |
+| s04 | APP_WINDOW | 1 Topic · *saying what it's about* | one line, who it's for, the look |
+| s05 | PROMPT_HANDOUT | 3 Script · *iAuteur writes the brief* | the brief iAuteur wrote, Copy pressed |
+| s06 | CHAT_TRIO | 3 Script · *the brief goes to an assistant* | **the file coming back**, in three windows |
+| s07 | APP_WINDOW | 3 Script · *the file goes back to iAuteur* | **the file pasted**, Ctrl+V, 12 scenes in |
+| s08 | CHECK_SWEEP | 3 Script · *iAuteur reads the file back* | iAuteur catches a crowded line and rewrites it |
+| s09 | VIDEO_PLAYER | 3 Script · *previewing one scene* | one scene, previewed, really playing |
+| s10 | BEAT_BOARD | 3 Script · *one button per scene* | every row with its own ＋ component, one pressed |
+| s11 | COMPONENT_LAB | 3 Script · *iAuteur builds the component* | the ask, the stages, the gates, lands in s05 |
+| s12 | APP_WINDOW | 4 Voice · *picking a voice* | Ava, listen, timed to the words |
+| s13 | ASPECT_TWIN | 5 Render · *rendered through Remotion* | one description → four videos |
+| s14 | AUTO_RUN | — | **"your own AI key"**, one button, a log that writes itself |
+| s15 | VIDEO_PLAYER | — | three finished videos, really playing |
+| s16 | REPO_CTA | — | the GitHub mark, san-gitlogin/iauteur, the URL |
+| s17 | OUTRO_CTA | — | including this one · sub carries the URL again |
 
-Palette: 14 distinct types across 16 beats (need ≥8). APP_WINDOW ×3 (cap 6), VIDEO_PLAYER ×2, no two
+Palette: 15 distinct types across 17 beats (need ≥9). APP_WINDOW ×3 (cap 6), VIDEO_PLAYER ×2, no two
 of a family adjacent. 7 distinct transition kinds (need ≥5).
 
 **Accepted warnings** (deliberate, not defects):
-- *16 scenes vs deep-dive's ≤12* — every beat is a real step; dropping one breaks the walkthrough.
-- *s02 17.3s "feels static"* — the rule assumes a still frame. The grind's playhead crawls the entire
-  beat and five bars land on five different words. It is the busiest frame in the video.
-- *shorts: 11 scenes vs explainer's ≤10* — same reason; the vertical cut carries the same story.
+- *17 scenes vs deep-dive's ≤12* — every beat is a real step; dropping one breaks the walkthrough.
+- *s02 / s13 / s14 "feels static" (16–17s)* — the rule assumes a still frame. The grind's playhead
+  crawls the entire beat; the aspect twin builds four outputs; the auto-run log writes itself line by
+  line. None of them are static.
+- *shorts: 13 scenes vs explainer's ≤10* — same reason; the vertical cut carries the same story.
 
 ---
 
@@ -187,6 +229,32 @@ of a family adjacent. 7 distinct transition kinds (need ≥5).
       contact-sheet downscale, not the render (checked at full resolution across the beat). Web copy
       at `docs/media/iauteur-try-it-yourself.mp4` (4.9 MB) + poster, embedded at the top of README;
       v4's web copy deleted. Gate 11/11, tsc clean, both specs pass.*
+
+### v6 phases
+
+- [x] **N · INTRO_CARD.** Built and wired as `PRODUCT_INTRO` first — a full pivot beat (kicker, mark,
+      name, promise, feature chips) — then removed whole via `component-flow.mjs remove` when the
+      owner asked for something short instead. *Audit of the removal: grep for residue (none), tsc
+      clean, gate green.* Rebuilt as `INTRO_CARD`: kicker, the name at 150px, a centre-out rule, and
+      nothing else. Linter warns if a spec sets `data.headline` on it (redundant — the name IS the
+      headline) or lets it run past ~6.7s (200 frames; it holds one line, so beyond that it stops
+      landing and starts pausing). *Audit: MIN (no kicker) + MAX (20-glyph name) × both aspects ×
+      material + neobrutalism. One real fix: the gap between kicker/name/rule was too tight under a
+      long name (14→26px at the narrow aspect, sized to clear the display font's descender box).*
+- [x] **O · Script rewrite — name every subject.** Full pass over both specs: no bare "it" stands in
+      for iAuteur, an assistant, the file, a component, or an AI key anywhere narration or headline
+      speaks a claim. Verified with a regex scan for `it (writes|reads|renders|builds|checks|works|
+      fits|drops|wires|plays|hands|rewrites)` across every scene of both specs — zero matches.
+- [x] **P · Author + voice.** 17 beats long (INTRO_CARD inserted as s03, everything after renumbered),
+      13 shorts. Both lint clean after sync (4 and 1 accepted warnings — see THE 17 BEATS).
+- [x] **Q · Render, verify, ship.** `wide-dark.mp4` 3:38 (52.4 MB, video+audio confirmed),
+      `short-dark.mp4` 1:33 (19.4 MB), `thumb.png`, `cover.png`, `upload.md` (17 authored chapters).
+      *Audit: a frame pulled at ~80% of every beat FROM THE FINISHED MP4 — all 17 wide and all 13
+      vertical verified by eye. One frame flagged as a possible dead screen on the voice-pick beat in
+      the vertical cut turned out to be an early sample inside a 5.2s beat, before the panel had
+      animated in — resampled mid-beat and confirmed correct. Web copy at
+      `docs/media/iauteur-introducing.mp4` (5.1 MB) + poster, embedded at the top of README; v5's
+      web copy deleted. Gate green, tsc clean, both specs pass.*
 
 ---
 

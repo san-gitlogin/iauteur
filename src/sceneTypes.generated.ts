@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'INTRO_CARD'
   | 'REPO_CTA'
   | 'AUTO_RUN'
   | 'COMPONENT_LAB'
@@ -179,6 +180,16 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type IntroCardScene = SceneCommon<'INTRO_CARD'> & { data: {
+    introCard: {
+      kicker?: string;
+      name: string;
+      color?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
 
 export type RepoCtaScene = SceneCommon<'REPO_CTA'> & { data: {
     repoCta: {
@@ -1767,6 +1778,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  INTRO_CARD: IntroCardScene;
   REPO_CTA: RepoCtaScene;
   AUTO_RUN: AutoRunScene;
   COMPONENT_LAB: ComponentLabScene;
@@ -1935,6 +1947,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | IntroCardScene
   | RepoCtaScene
   | AutoRunScene
   | ComponentLabScene

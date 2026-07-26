@@ -208,6 +208,8 @@ const DIRECTION = [
   '- **A PER-ITEM CONTROL BELONGS ON EVERY ITEM.** If the product puts a button on every row, draw every row with its button and press ONE of them. A single control beside a list reads as one global action and destroys the whole claim (BEAT_BOARD exists for this).',
   '- **ONE CAPABILITY, ONE BEAT.** A scene that shows both the affordance AND what it does lands neither. Two screens in the product means two beats in the video — the affordance, then the detail (BEAT_BOARD → COMPONENT_LAB).',
   '- **END ON A REAL ADDRESS, NOT A CLAIM.** If the thing can be got, put the repository/site card on screen with the host mark and the URL big enough to read off the frame (REPO_CTA). Every stat on that card must be verifiable — never invented stars, forks or downloads.',
+  '- **NAME THE PRODUCT BEFORE YOU USE ITS NAME — BRIEFLY.** If the video is ABOUT a named product, give it one short beat (3-5s) right after the pain and before the first step: a kicker, the name at its largest size in the film, nothing else (INTRO_CARD). Do not turn it into a pitch — a promise line or feature chips there is a different beat, not this one.',
+  '- **EVERY SENTENCE NAMES ITS SUBJECT.** Never let "it" stand in for the product, an assistant, a file, a component, or a key — say which one, every time. A viewer who cannot tell what "it" refers to has not understood the sentence, however clear it sounded to the writer.',
 ].join('\n');
 
 const laws = [
