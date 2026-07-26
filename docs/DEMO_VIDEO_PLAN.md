@@ -125,7 +125,12 @@ of a family adjacent. 7 distinct transition kinds (need ≥5).
       numeric slot on the generic item template (`value`), which the lab now provides for everyone.
       *Audit: MIN + MAX fixtures × both aspects × 2 designs; gate green at 157 types.*
 - [x] **F · Author + voice.** Both specs lint clean; TTS with Ava; synced.
-- [ ] **G · Render, verify every beat from the finished mp4, ship.**
+- [x] **G · Render, verify, ship.** `wide-dark.mp4` 2:51 (41.8 MB, video+audio confirmed),
+      `short-dark.mp4` 0:57 (12.1 MB), `thumb.png`, `cover.png`, `upload.md` (13 authored chapters).
+      *Audit: a frame pulled at ~78% of every beat FROM THE FINISHED MP4 — all 13 wide and all 8
+      vertical verified by eye. Web copy at `docs/media/iauteur-made-easy.mp4` (4.0 MB) + poster,
+      embedded at the top of README; v3's web copy deleted. Gate 10/10, tsc clean, both specs pass.
+      Commit `b491947`, pushed to main.*
 
 ---
 
