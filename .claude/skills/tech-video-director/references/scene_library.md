@@ -57,6 +57,24 @@ And two on content, not craft: **open on the pain before the product** (PRODUCTI
 evening someone loses to an editing timeline), and **credit the foundation out loud** — this project
 renders through Remotion, and saying so once turns a claim into a fact.
 
+### Two more, paid for by v4 (rejected 2026-07-26)
+
+8. **A PER-ITEM control must be drawn on every item.** v4 showed "any scene can have a component
+   built for it" as one workbench hanging off a list (SCENE_FORGE). Owner: *"it should be like how we
+   see in iAuteur — we see individual scenes, and we have individual buttons to create a new
+   component for the scenes."* A single control beside a list reads as one global action. Draw the
+   list the way the product draws it, with the control repeated on every row and one of them pressed
+   — that is BEAT_BOARD.
+9. **A capability worth selling gets its own beat.** The same scene tried to show both the button AND
+   what the button does, and neither landed. Owner: *"another component and scene that just says how
+   we get new component generated in detail."* Split it: BEAT_BOARD is the affordance, COMPONENT_LAB
+   is the detail. Two screens in the product means two beats in the video.
+
+And one on content again: **show the fully automatic path too** (AUTO_RUN — a key, one button, and a
+log that writes itself), and **end on a real address**, not a claim. REPO_CTA draws the repository
+card with the host's mark and the URL big enough to read off the screen; every stat on it must be
+verifiable (LAW 3) — a repo card is exactly where invented star counts get added.
+
 ## Themes (set "brand": {"theme": X}; choose by topic mood; vary ACROSS videos)
 | Theme | Mood | Use for |
 |---|---|---|
@@ -424,3 +442,7 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | VIDEO_PLAYER | You are demonstrating video OUTPUT. Never show finished video through a screenshot stack, a device bezel or a full-bleed clip with no player. | headline≤48, clips, runtime≤8, startAt, badge≤16, footNote≤42, color, source≤58, atWord |
 | SCENE_FORGE | The point is that something bespoke gets made for a specific item, not that a build pipeline exists. | headline≤48, rows, targetIndex, askLabel≤34, stages, doneLabel≤20, footNote≤42, color, source≤58, atWord |
 | PRODUCTION_GRIND | The BEFORE beat of a tooling video - show the toil a viewer already recognises (storyboard, record, cut, animate, re-record) before the product appears. It is a picture of the evening someone actually spends, never a diagram of a process. Not PIPELINE (abstract stages), not PIPELINE_GANTT (a real project schedule), not COST_METER (money). | headline≤48, windowTitle≤30, takeLabel≤14, chores, tracks, totalLabel≤26, footNote≤60, color, source, atWord |
+| BEAT_BOARD | The point is that a control exists PER ITEM in a list — every scene can have its own component built for it, independently. Drawing that as one workbench beside a list makes it read as a single global action, which is wrong. Hand off the DETAIL of what the button does to COMPONENT_LAB. Not SCENE_FORGE (one workbench, one row), not LIST_BUILD (no controls). | headline≤48, panelTitle≤30, rows, targetIndex, newLabel≤14, previewLabel≤12, customLabel≤20, doneLabel≤12, footNote≤52, color, source, atWord |
+| COMPONENT_LAB | The DETAIL beat that BEAT_BOARD hands off to - what actually happens when a per-item build button is pressed. Use the pair; compressing both into one scene makes the capability illegible. Not PIPELINE_GATE (abstract stages), not LAB_ASSEMBLY (parts joining). | headline≤48, drawerTitle≤26, forScene≤30, askLabel≤34, ask≤38, askAtWord, stages, gates, doneLabel≤30, footNote≤52, color, source, atWord |
+| AUTO_RUN | The claim is 'you do not have to do any of this yourself'. The LOG is the proof - a viewer believes a list of steps that wrote itself far more than an arrow labelled 'automated'. Not LOG_STREAM (raw server output), not AUTOMATION_RUN (a CI job), not PIPELINE (abstract stages). | headline≤48, keyLabel≤20, keyMask≤30, modelLabel≤22, toggles, runLabel≤22, runningLabel≤22, runAtWord, steps, doneLabel≤34, footNote≤52, color, source, atWord |
+| REPO_CTA | The viewer has to carry ONE thing away - the address. A line of text saying 'it is on GitHub' is a claim; a repo card is the thing itself. Put it just before the outro. Every fact on it must be verifiable (LAW 3) - never invented stars, forks or downloads. | headline≤48, mark, owner≤24, repo≤22, description≤110, facts, url≤42, footNote≤52, color, source, atWord |

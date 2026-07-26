@@ -123,7 +123,7 @@ if (n >= 8) {
   const cap = Math.max(4, Math.ceil(n * 0.35));
   for (const [st, c] of Object.entries(counts))
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
-  const DYNAMIC = ['PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -464,6 +464,111 @@ for (const s of spec.scenes ?? []) {
     if (len(vp.badge) > 16) E(`${id}: videoPlayer badge > 16 chars`);
     if (len(vp.footNote) > 42) E(`${id}: videoPlayer footNote > 42 chars`);
     checkColor(id, 'videoPlayer.color', vp.color);
+  }
+
+  if (d.beatBoard) {
+    const bb = d.beatBoard;
+    const rw = bb.rows ?? [];
+    if (len(bb.headline) > 48) E(`${id}: beatBoard headline > 48 chars`);
+    if (len(bb.panelTitle) > 30) E(`${id}: beatBoard panelTitle > 30 chars`);
+    if (rw.length < 3) E(`${id}: BEAT_BOARD needs ≥3 rows — fewer does not read as a list of scenes`);
+    if (rw.length > 6) E(`${id}: BEAT_BOARD max 6 rows (got ${rw.length})`);
+    for (const r of rw) {
+      if (len(r.label) > 22) E(`${id}: beatBoard row label "${r.label}" > 22 chars`);
+      if (len(r.text) > 44) E(`${id}: beatBoard row text "${r.text}" > 44 chars`);
+      if (r.value != null && (typeof r.value !== 'number' || r.value < 0))
+        E(`${id}: beatBoard row "${r.label}" value must be a non-negative word count`);
+      checkColor(id, 'beatBoard.row.color', r.color);
+    }
+    if (bb.targetIndex != null && (bb.targetIndex < 0 || bb.targetIndex >= rw.length))
+      E(`${id}: beatBoard.targetIndex ${bb.targetIndex} out of range (0-${rw.length - 1})`);
+    if (len(bb.newLabel) > 14) E(`${id}: beatBoard newLabel > 14 chars`);
+    if (len(bb.previewLabel) > 12) E(`${id}: beatBoard previewLabel > 12 chars`);
+    if (len(bb.customLabel) > 20) E(`${id}: beatBoard customLabel > 20 chars`);
+    if (len(bb.doneLabel) > 12) E(`${id}: beatBoard doneLabel > 12 chars`);
+    // The row flips to the custom type when its button is pressed; without a label
+    // for what it became, the press has no visible consequence.
+    if (!bb.customLabel) W(`${id}: BEAT_BOARD has no customLabel — the pressed row never visibly becomes anything`);
+    if (len(bb.footNote) > 52) E(`${id}: beatBoard footNote > 52 chars`);
+    checkColor(id, 'beatBoard.color', bb.color);
+  }
+
+  if (d.componentLab) {
+    const cl = d.componentLab;
+    const st = cl.stages ?? [];
+    if (len(cl.headline) > 48) E(`${id}: componentLab headline > 48 chars`);
+    if (len(cl.drawerTitle) > 26) E(`${id}: componentLab drawerTitle > 26 chars`);
+    if (len(cl.forScene) > 30) E(`${id}: componentLab forScene > 30 chars`);
+    if (len(cl.askLabel) > 34) E(`${id}: componentLab askLabel > 34 chars`);
+    if (!cl.ask) E(`${id}: COMPONENT_LAB needs an "ask" — the whole claim is that you say it in your own words`);
+    if (len(cl.ask) > 38) E(`${id}: componentLab ask "${cl.ask}" > 38 chars`);
+    if (st.length < 2) E(`${id}: COMPONENT_LAB needs ≥2 stages`);
+    if (st.length > 4) E(`${id}: COMPONENT_LAB max 4 stages (got ${st.length})`);
+    for (const s of st) {
+      if (len(s.label) > 34) E(`${id}: componentLab stage "${s.label}" > 34 chars`);
+      if (len(s.detail) > 30) E(`${id}: componentLab stage detail "${s.detail}" > 30 chars`);
+      checkColor(id, 'componentLab.stage.color', s.color);
+    }
+    const gt = cl.gates ?? [];
+    if (gt.length > 5) E(`${id}: COMPONENT_LAB max 5 gates (got ${gt.length})`);
+    for (const g of gt) if (len(g) > 16) E(`${id}: componentLab gate "${g}" > 16 chars`);
+    if (len(cl.doneLabel) > 30) E(`${id}: componentLab doneLabel > 30 chars`);
+    if (len(cl.footNote) > 52) E(`${id}: componentLab footNote > 52 chars`);
+    checkColor(id, 'componentLab.color', cl.color);
+  }
+
+  if (d.autoRun) {
+    const ar = d.autoRun;
+    const st = ar.steps ?? [];
+    if (len(ar.headline) > 48) E(`${id}: autoRun headline > 48 chars`);
+    if (len(ar.keyLabel) > 20) E(`${id}: autoRun keyLabel > 20 chars`);
+    if (len(ar.keyMask) > 30) E(`${id}: autoRun keyMask > 30 chars`);
+    // LAW 11 — a spec must never carry a real credential, not even to draw one.
+    // A mask is bullets/asterisks; anything with a long run of key-shaped characters
+    // is treated as a live secret and rejected outright.
+    if (ar.keyMask && /(sk|pk|api|ghp|xox|AIza)[-_a-z]*[-_][A-Za-z0-9]{12,}/i.test(String(ar.keyMask)))
+      E(`${id}: autoRun.keyMask looks like a REAL credential — LAW 11: mask it (e.g. "sk-••••••••") and rotate the key if it was ever live`);
+    if (len(ar.modelLabel) > 22) E(`${id}: autoRun modelLabel > 22 chars`);
+    const tg = ar.toggles ?? [];
+    if (tg.length > 3) E(`${id}: AUTO_RUN max 3 toggles (got ${tg.length})`);
+    for (const x of tg) if (len(x) > 26) E(`${id}: autoRun toggle "${x}" > 26 chars`);
+    if (len(ar.runLabel) > 22) E(`${id}: autoRun runLabel > 22 chars`);
+    if (len(ar.runningLabel) > 22) E(`${id}: autoRun runningLabel > 22 chars`);
+    if (ar.runningLabel && !ar.runLabel) E(`${id}: AUTO_RUN has runningLabel but no runLabel to press`);
+    if (st.length < 3) E(`${id}: AUTO_RUN needs ≥3 log steps — a shorter log does not read as work being done`);
+    if (st.length > 7) E(`${id}: AUTO_RUN max 7 log steps (got ${st.length})`);
+    for (const s of st) {
+      if (len(s.label) > 40) E(`${id}: autoRun step "${s.label}" > 40 chars`);
+      if (len(s.detail) > 16) E(`${id}: autoRun step detail "${s.detail}" > 16 chars`);
+      checkColor(id, 'autoRun.step.color', s.color);
+    }
+    if (len(ar.doneLabel) > 34) E(`${id}: autoRun doneLabel > 34 chars`);
+    if (len(ar.footNote) > 52) E(`${id}: autoRun footNote > 52 chars`);
+    checkColor(id, 'autoRun.color', ar.color);
+  }
+
+  if (d.repoCta) {
+    const rc = d.repoCta;
+    if (len(rc.headline) > 48) E(`${id}: repoCta headline > 48 chars`);
+    if (len(rc.owner) > 24) E(`${id}: repoCta owner > 24 chars`);
+    if (len(rc.repo) > 22) E(`${id}: repoCta repo > 22 chars`);
+    if (len(rc.description) > 110) E(`${id}: repoCta description > 110 chars`);
+    if (!rc.url) E(`${id}: REPO_CTA needs a url — it is the one thing the viewer has to carry away`);
+    if (len(rc.url) > 42) E(`${id}: repoCta url > 42 chars — it must stay readable at a glance`);
+    // A CTA that sends people to a bad address is the worst possible defect here.
+    if (rc.url && !/^[a-z0-9.-]+\.[a-z]{2,}\/[\w.\-/]+$/i.test(String(rc.url)))
+      E(`${id}: repoCta url "${rc.url}" is not a bare host/path (write it the way a viewer would type it, e.g. "github.com/owner/repo" — no scheme, no trailing slash)`);
+    const fx = rc.facts ?? [];
+    if (fx.length > 4) E(`${id}: REPO_CTA max 4 facts (got ${fx.length})`);
+    for (const f of fx) {
+      if (len(f.label) > 22) E(`${id}: repoCta fact "${f.label}" > 22 chars`);
+      // LAW 3 — a repo card is exactly where invented social proof gets added.
+      if (/\b\d[\d.,]*\s*(k|m)?\s*(star|fork|download|contributor|user)s?\b/i.test(String(f.label ?? '')))
+        W(`${id}: repoCta fact "${f.label}" states a popularity count — LAW 3: only ship it if it is verified today, otherwise cut it`);
+      checkColor(id, 'repoCta.fact.color', f.color);
+    }
+    if (len(rc.footNote) > 52) E(`${id}: repoCta footNote > 52 chars`);
+    checkColor(id, 'repoCta.color', rc.color);
   }
 
   if (d.productionGrind) {

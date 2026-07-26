@@ -106,6 +106,14 @@ can be regenerated instead of rotting.
      belonged to. `scene.stepRail` is a scene-level layer the shell draws over ANY component — the
      sanctioned way to get two components onto one screen. Never nest one component inside another.
 
+- **A PER-ITEM CONTROL MUST BE DRAWN ON EVERY ITEM (v4 rejected, 2026-07-26).** "Any scene can have a
+  component built for it" was drawn as one workbench hanging off a list. Owner: *"it should be like
+  how we see in iAuteur — we see individual scenes, and we have individual buttons."* A single control
+  beside a list reads as ONE GLOBAL ACTION. Draw the list the way the product draws it, control
+  repeated on every row, one of them pressed — `BEAT_BOARD`. And **one capability, one beat**: the
+  affordance and the detail are two screens in the product, so they are two beats
+  (`BEAT_BOARD` → `COMPONENT_LAB`). A scene trying to be both lands neither.
+
 - **Scene-level anchors were invisible to `sync.mjs` until 2026-07-26.** It retargeted `scene.data`
   only, so `stepRail.atWord` (and `pip.atWord`, latent since PiP shipped) survived TTS as a raw word
   index while every other anchor became an exact frame. It now walks the whole scene. If you add
@@ -124,10 +132,34 @@ can be regenerated instead of rotting.
 - Remotion renders fetch Google Fonts per render. On a bad connection later scenes throw
   `[NetworkError]`. Kill leaked processes (`Get-Process node | Stop-Process -Force`) and retry.
 
-### 2026-07-26 · demo video v4 — SHIPPED (v1–v3 superseded)
+### 2026-07-26 · demo video v5 — SHIPPED (v1–v4 superseded)
+
+**`topics/iauteur-try-it-yourself/`** — 16 scenes wide + 11 vertical, moderndark on `aurora`, Ava.
+This is what the README embeds.
+
+**v4 was rejected on the component-generation beat and the ending.** It compressed "every scene has
+its own build button" and "here is what that button does" into a single scene with one workbench
+beside a list, and it never told anyone where to get the thing.
+
+**Four new components, count 157 → 161:**
+- `BEAT_BOARD` — the console's real beat list: `s04 · DONUT` + narration + `12/20w` + **its own**
+  `＋ component` and `▶ preview` on every row; one is pressed and that row becomes `★ SPEND_DIAL`.
+- `COMPONENT_LAB` — the creator drawer in detail: the ask typed in plain words, stages completing on
+  their own anchors, the gate chips (checked / wired in / type-checked / undone if wrong), and the
+  piece landing in the scene it was built for.
+- `AUTO_RUN` — the hands-off path: a **masked** key (LAW 11; the linter rejects anything key-shaped
+  in `keyMask`), one button, and a log that writes itself. The log is the proof.
+- `REPO_CTA` — the closing address: `si:github`, `san-gitlogin/iauteur`, verifiable facts only, and
+  the URL at 34px. The linter warns on any fact that reads as a popularity count (LAW 3) and rejects
+  a URL that is not a bare host/path.
+
+`SCENE_FORGE` stays in the library but is retired from the demo — `BEAT_BOARD` + `COMPONENT_LAB`
+replace it.
+
+### 2026-07-26 · demo video v4 (superseded)
 
 **`topics/iauteur-made-easy/`** — 13 scenes wide + 8 vertical, moderndark on an `aurora` background,
-Ava. This is what the README embeds.
+Ava. Superseded by v5; its web copy has been removed from `docs/media/`.
 
 **v3 was rejected on four specific defects, all of them "I can't tell what I'm looking at":** the
 assistants' reply was anonymous bars instead of the JSON it really is; the paste-back beat *typed*
@@ -164,8 +196,8 @@ is retired from the demo.
 ### 2026-07-25 · demo video v2 (superseded)
 
 **`topics/iauteur-what-you-get/`** — 98s wide (12 scenes) + 44s vertical (8 scenes), moderndark,
-`en-US-AvaMultilingualNeural`. This is what the README embeds. v1 (`iauteur-explains-itself`, 67s)
-still exists on disk but is superseded.
+`en-US-AvaMultilingualNeural`. Superseded. v1 (`iauteur-explains-itself`, 67s) still exists on disk
+but is superseded too.
 
 **v1 was rejected on DIRECTION, not craft.** It explained how the tool works to someone who already
 knows what a linter is, with `tsc clean` and `long.json` on screen. v2 is a product ad about what you

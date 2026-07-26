@@ -51,6 +51,10 @@ export const TYPES = [
   'VIDEO_PLAYER',
   'SCENE_FORGE',
   'PRODUCTION_GRIND',
+  'BEAT_BOARD',
+  'COMPONENT_LAB',
+  'AUTO_RUN',
+  'REPO_CTA',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

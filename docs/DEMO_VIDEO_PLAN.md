@@ -1,4 +1,4 @@
-# DEMO VIDEO PLAN — v4 · "made easy"
+# DEMO VIDEO PLAN — v5 · "try it yourself"
 
 The video that markets iAuteur, **made by iAuteur**, for the README embed, LinkedIn and YouTube.
 
@@ -8,9 +8,9 @@ The video that markets iAuteur, **made by iAuteur**, for the README embed, Linke
 > ONE phase, audit it against real artifacts per CLAUDE.md LAW 10, tick the box, commit, continue.
 > Never tick a box you have not verified by looking at the actual output.
 
-Topic folder: `topics/iauteur-made-easy/` · 13 beats long, 8 beats shorts.
+Topic folder: `topics/iauteur-try-it-yourself/` · 16 beats long, 11 beats shorts.
 Predecessors (immutable, still on disk): `iauteur-explains-itself` (v1), `iauteur-what-you-get` (v2),
-`iauteur-how-easy` (v3).
+`iauteur-how-easy` (v3), `iauteur-made-easy` (v4).
 
 ---
 
@@ -47,7 +47,33 @@ v3 obeyed rules 1 and 2 completely and was still rejected. Four separate defects
 beside the beat's component (exactly how `ScenePipLayer` works), so it composes with all 157 types
 and cannot break any of their layouts.
 
-### 4. Two content rules, same round
+### 4. A per-item control belongs on every item (v4 rejected — this version)
+v4 drew "any scene can have a component built for it" as one workbench hanging off a list.
+
+> "the per component generation based on beats needs a lot of rework — right now you just have that
+> under one scene, where it's just not good or easy to understand. It should be like how we see in
+> iAuteur: we see individual scenes, and we have individual buttons to create a new component for
+> the scenes, where we shall have another component and scene that just says how we get a new
+> component generated in detail."
+
+Two rules, both now in the `DIRECTION` block and `scene_library.md`:
+- **Draw the control on EVERY item.** A single control beside a list reads as one global action,
+  which is the opposite of what the product does. `BEAT_BOARD` draws the console's real beat list —
+  every row with its own `＋ component` and `▶ preview`, and one of them pressed.
+- **One capability, one beat.** A scene showing both the affordance *and* what it does lands neither.
+  `BEAT_BOARD` is the affordance; `COMPONENT_LAB` is the detail — the ask in plain words, the stages,
+  the gates it must survive, and the piece landing back in that scene.
+
+Same round, two more:
+- **Show the fully automatic path.** *"add a new scene that just describes how easy it is to automate
+  it entirely when we have an AI API."* → `AUTO_RUN`: a masked key, one button, and a log that writes
+  itself. The log is the proof; an arrow labelled "automated" is not.
+- **End on a real address.** *"you must show check out at github with proper github logo and the repo
+  link."* → `REPO_CTA`: the GitHub mark, `san-gitlogin/iauteur`, and the URL set large enough to read
+  off the frame. Every fact on the card is verifiable — the linter warns on anything that looks like
+  an invented star/fork/download count (LAW 3).
+
+### 5. Two content rules, from v3
 - **Open on the pain, not the product.** *"you can show the tiring production process… tired of
   creating tutorial videos for an organization, making youtube videos, animating them."* → the new
   `PRODUCTION_GRIND` component draws the evening someone loses to an editing timeline. It is beat 2,
@@ -75,9 +101,10 @@ and cannot break any of their layouts.
 
 ---
 
-## THE 13 BEATS
+## THE 16 BEATS
 
-Rail = the `stepRail` state carried on that beat. Beats without one sit outside the product.
+Rail = the `stepRail` state carried on that beat. Beats without one sit outside the product — and
+`AUTO_RUN` deliberately has none, because it is the beat that skips the whole rail.
 
 | # | Type | Rail | What it shows |
 |---|---|---|---|
@@ -89,20 +116,23 @@ Rail = the `stepRail` state carried on that beat. Beats without one sit outside 
 | s06 | APP_WINDOW | 3 Script · *pasting the answer back in* | **the JSON pasted**, Ctrl+V, 12 scenes in |
 | s07 | CHECK_SWEEP | 3 Script · *reading it back for you* | it catches a crowded line and rewrites it |
 | s08 | VIDEO_PLAYER | 3 Script · *previewing one scene* | one scene, previewed, really playing |
-| s09 | SCENE_FORGE | 3 Script · *building a piece that didn't exist* | a component made for one row |
-| s10 | APP_WINDOW | 4 Voice · *picking a voice* | Ava, listen, timed to the words |
-| s11 | ASPECT_TWIN | 5 Render · *rendered with Remotion* | one description → four videos |
-| s12 | VIDEO_PLAYER | — | three finished videos, really playing |
-| s13 | OUTRO_CTA | — | including this one |
+| s09 | **BEAT_BOARD** | 3 Script · *one button per scene* | **every row with its own ＋ component**, one pressed |
+| s10 | **COMPONENT_LAB** | 3 Script · *building the piece it needs* | **the ask, the stages, the gates, it lands in s05** |
+| s11 | APP_WINDOW | 4 Voice · *picking a voice* | Ava, listen, timed to the words |
+| s12 | ASPECT_TWIN | 5 Render · *rendered with Remotion* | one description → four videos |
+| s13 | **AUTO_RUN** | — | **a masked key, one button, a log that writes itself** |
+| s14 | VIDEO_PLAYER | — | three finished videos, really playing |
+| s15 | **REPO_CTA** | — | **the GitHub mark, san-gitlogin/iauteur, the URL** |
+| s16 | OUTRO_CTA | — | including this one · sub carries the URL again |
 
-Palette: 10 distinct types across 13 beats (need ≥7). APP_WINDOW ×3 (cap 5), VIDEO_PLAYER ×2, no two
+Palette: 14 distinct types across 16 beats (need ≥8). APP_WINDOW ×3 (cap 6), VIDEO_PLAYER ×2, no two
 of a family adjacent. 7 distinct transition kinds (need ≥5).
 
 **Accepted warnings** (deliberate, not defects):
-- *13 scenes vs deep-dive's ≤12* — every beat is a real step; dropping one breaks the walkthrough.
-- *s02 17.3s / s11 17.0s "feels static"* — the rule assumes a still frame. The grind's playhead
-  crawls the entire beat and five bars land on five different words; the aspect twin builds four
-  outputs. Neither is static.
+- *16 scenes vs deep-dive's ≤12* — every beat is a real step; dropping one breaks the walkthrough.
+- *s02 17.3s "feels static"* — the rule assumes a still frame. The grind's playhead crawls the entire
+  beat and five bars land on five different words. It is the busiest frame in the video.
+- *shorts: 11 scenes vs explainer's ≤10* — same reason; the vertical cut carries the same story.
 
 ---
 
@@ -131,6 +161,32 @@ of a family adjacent. 7 distinct transition kinds (need ≥5).
       vertical verified by eye. Web copy at `docs/media/iauteur-made-easy.mp4` (4.0 MB) + poster,
       embedded at the top of README; v3's web copy deleted. Gate 10/10, tsc clean, both specs pass.
       Commit `b491947`, pushed to main.*
+
+### v5 phases
+
+- [x] **H · BEAT_BOARD.** The console's real beat list: every row with `＋ component` and `▶ preview`,
+      one pressed, that row flipping to `★ SPEND_DIAL` / `↺ recreate`. *Audit: MIN + MAX × both
+      aspects × material + neobrutalism. Fixed a Fit-vs-Budget miss — real type names
+      ("s04 · DONUT_BREAKDOWN", 21 glyphs) ellipsised at a 210px column; sized from a 22-glyph budget.*
+- [x] **I · COMPONENT_LAB.** The creator drawer: which scene it is for, the ask typing itself in,
+      three stages completing on their own words with progress bars, the gate chips going green, and
+      the piece landing in scene 5. *Audit: same matrix, MIN (2 stages, no gates) included.*
+- [x] **J · AUTO_RUN.** Masked key (LAW 11 — the linter rejects anything key-shaped in `keyMask`),
+      the model, the ticked options, one button, and a six-line log that writes itself. *Audit: same
+      matrix.*
+- [x] **K · REPO_CTA.** The GitHub mark via `si:github`, `san-gitlogin/iauteur`, the description,
+      three verifiable facts and the URL at 34px. *Audit: same matrix, MIN (no facts, no description)
+      included. Linter warns on any fact that reads as a popularity count (LAW 3) and rejects a URL
+      that is not a bare host/path.*
+- [x] **L · Author + voice.** 16 beats long, 11 shorts; both lint clean after sync (2 and 1 accepted
+      warnings). TTS with Ava.
+- [x] **M · Render, verify, ship.** `wide-dark.mp4` 3:24 (49.8 MB, video+audio confirmed),
+      `short-dark.mp4` 1:18 (16.5 MB), `thumb.png`, `cover.png`, `upload.md` (16 authored chapters).
+      *Audit: a frame pulled at ~80% of every beat FROM THE FINISHED MP4 — all 16 wide and all 11
+      vertical verified by eye. Chased one suspected dim frame in the closing tech clip; it was the
+      contact-sheet downscale, not the render (checked at full resolution across the beat). Web copy
+      at `docs/media/iauteur-try-it-yourself.mp4` (4.9 MB) + poster, embedded at the top of README;
+      v4's web copy deleted. Gate 11/11, tsc clean, both specs pass.*
 
 ---
 

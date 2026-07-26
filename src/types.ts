@@ -1541,7 +1541,129 @@ export interface ProductionGrindData {
   source?: string;
   atWord?: number;
 }
+export interface BeatBoardItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface BeatBoardData {
+  headline?: string;
+  panelTitle?: string;
+  rows?: BeatBoardItem[];
+  targetIndex?: number;
+  newLabel?: string;
+  previewLabel?: string;
+  customLabel?: string;
+  doneLabel?: string;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
+export interface ComponentLabItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface ComponentLabData {
+  headline?: string;
+  drawerTitle?: string;
+  forScene?: string;
+  askLabel?: string;
+  ask?: string;
+  askAtWord?: number;
+  stages?: ComponentLabItem[];
+  gates?: string[];
+  doneLabel?: string;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
+export interface AutoRunItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface AutoRunData {
+  headline?: string;
+  keyLabel?: string;
+  keyMask?: string;
+  modelLabel?: string;
+  toggles?: string[];
+  runLabel?: string;
+  runningLabel?: string;
+  runAtWord?: number;
+  steps?: AutoRunItem[];
+  doneLabel?: string;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
+export interface RepoCtaItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface RepoCtaData {
+  headline?: string;
+  mark?: string;
+  owner?: string;
+  repo?: string;
+  description?: string;
+  facts?: RepoCtaItem[];
+  url?: string;
+  footNote?: string;
+  color?: SemColor;
+  source?: string;
+  atWord?: number;
+}
 export interface SceneData {
+  repoCta?: RepoCtaData;
+  autoRun?: AutoRunData;
+  componentLab?: ComponentLabData;
+  beatBoard?: BeatBoardData;
   productionGrind?: ProductionGrindData;
   sceneForge?: SceneForgeData;
   videoPlayer?: VideoPlayerData;

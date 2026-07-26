@@ -205,6 +205,9 @@ const DIRECTION = [
   '- **NEVER LOSE THE THREAD.** A workflow explained across many components reads as many unrelated screens unless every shot says where it is. Put a `stepRail` on every beat that happens inside the product — same steps, same order, active step moving, `note` naming the sub-state. Two components on one screen is the point, not a compromise.',
   '- **OPEN ON THE PAIN, NOT THE PRODUCT.** The first beats belong to the thing the audience already lives with (the evening lost to editing, the take done fourteen times). Earn the product by showing what it replaces. PRODUCTION_GRIND exists for exactly this.',
   '- **CREDIT WHAT IT IS BUILT ON.** Name the real foundation once, out loud (this project renders through **Remotion**). It costs one sentence and it is the difference between a claim and a fact.',
+  '- **A PER-ITEM CONTROL BELONGS ON EVERY ITEM.** If the product puts a button on every row, draw every row with its button and press ONE of them. A single control beside a list reads as one global action and destroys the whole claim (BEAT_BOARD exists for this).',
+  '- **ONE CAPABILITY, ONE BEAT.** A scene that shows both the affordance AND what it does lands neither. Two screens in the product means two beats in the video — the affordance, then the detail (BEAT_BOARD → COMPONENT_LAB).',
+  '- **END ON A REAL ADDRESS, NOT A CLAIM.** If the thing can be got, put the repository/site card on screen with the host mark and the URL big enough to read off the frame (REPO_CTA). Every stat on that card must be verifiable — never invented stars, forks or downloads.',
 ].join('\n');
 
 const laws = [

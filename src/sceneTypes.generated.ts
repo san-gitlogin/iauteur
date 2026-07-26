@@ -4,6 +4,10 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'REPO_CTA'
+  | 'AUTO_RUN'
+  | 'COMPONENT_LAB'
+  | 'BEAT_BOARD'
   | 'PRODUCTION_GRIND'
   | 'SCENE_FORGE'
   | 'VIDEO_PLAYER'
@@ -175,6 +179,76 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type RepoCtaScene = SceneCommon<'REPO_CTA'> & { data: {
+    repoCta: {
+      headline?: string;
+      mark?: string;
+      owner?: string;
+      repo?: string;
+      description?: string;
+      facts?: Array<Record<string, unknown>>;
+      url: string;
+      footNote?: string;
+      color?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
+
+export type AutoRunScene = SceneCommon<'AUTO_RUN'> & { data: {
+    autoRun: {
+      headline?: string;
+      keyLabel?: string;
+      keyMask?: string;
+      modelLabel?: string;
+      toggles?: string[];
+      runLabel?: string;
+      runningLabel?: string;
+      runAtWord?: number;
+      steps: Array<Record<string, unknown>>;
+      doneLabel?: string;
+      footNote?: string;
+      color?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
+
+export type ComponentLabScene = SceneCommon<'COMPONENT_LAB'> & { data: {
+    componentLab: {
+      headline?: string;
+      drawerTitle?: string;
+      forScene?: string;
+      askLabel?: string;
+      ask?: string;
+      askAtWord?: number;
+      stages: Array<Record<string, unknown>>;
+      gates?: string[];
+      doneLabel?: string;
+      footNote?: string;
+      color?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
+
+export type BeatBoardScene = SceneCommon<'BEAT_BOARD'> & { data: {
+    beatBoard: {
+      headline?: string;
+      panelTitle?: string;
+      rows: Array<Record<string, unknown>>;
+      targetIndex?: number;
+      newLabel?: string;
+      previewLabel?: string;
+      customLabel?: string;
+      doneLabel?: string;
+      footNote?: string;
+      color?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
 
 export type ProductionGrindScene = SceneCommon<'PRODUCTION_GRIND'> & { data: {
     productionGrind: {
@@ -1693,6 +1767,10 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  REPO_CTA: RepoCtaScene;
+  AUTO_RUN: AutoRunScene;
+  COMPONENT_LAB: ComponentLabScene;
+  BEAT_BOARD: BeatBoardScene;
   PRODUCTION_GRIND: ProductionGrindScene;
   SCENE_FORGE: SceneForgeScene;
   VIDEO_PLAYER: VideoPlayerScene;
@@ -1857,6 +1935,10 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | RepoCtaScene
+  | AutoRunScene
+  | ComponentLabScene
+  | BeatBoardScene
   | ProductionGrindScene
   | SceneForgeScene
   | VideoPlayerScene

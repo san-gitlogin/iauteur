@@ -342,7 +342,11 @@
               "CHAT_TRIO",
               "VIDEO_PLAYER",
               "SCENE_FORGE",
-              "PRODUCTION_GRIND"
+              "PRODUCTION_GRIND",
+              "BEAT_BOARD",
+              "COMPONENT_LAB",
+              "AUTO_RUN",
+              "REPO_CTA"
             ]
           },
           "narration": {
@@ -412,6 +416,344 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "REPO_CTA"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "repoCta": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "mark": {
+                          "type": "string",
+                          "description": "the host's brand mark, e.g. 'si:github'"
+                        },
+                        "owner": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the owner segment of the path"
+                        },
+                        "repo": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the repository name, set large"
+                        },
+                        "description": {
+                          "type": "string",
+                          "maxLength": 110,
+                          "description": "what it is, in the audience's words"
+                        },
+                        "facts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-4 chips, label <=22 glyphs each, each on its own atWord. VERIFIABLE ONLY - no invented counts"
+                        },
+                        "url": {
+                          "type": "string",
+                          "maxLength": 42,
+                          "description": "the address, the one thing the viewer carries away"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "the line under the card"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic accent; default blue"
+                        },
+                        "source": {
+                          "type": "string",
+                          "description": "optional source footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word the URL lights on - the payoff"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "AUTO_RUN"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "autoRun": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "keyLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the label beside the key field"
+                        },
+                        "keyMask": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "a MASK, never a key (LAW 11). Use bullets, e.g. 'sk-****************'. The linter rejects anything that looks like a real token."
+                        },
+                        "modelLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "which model is driving the run"
+                        },
+                        "toggles": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "1-3 already-ticked options, <=26 glyphs each"
+                        },
+                        "runLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the one button that starts everything"
+                        },
+                        "runningLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what it says once it is going"
+                        },
+                        "runAtWord": {
+                          "type": "number",
+                          "description": "word the button is pressed on; defaults to the scene anchor"
+                        },
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-7 log lines. label <=40 glyphs (what it did), detail <=16 glyphs (the right-hand note), atWord (each lands on its own word)"
+                        },
+                        "doneLabel": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "what fell out of the bottom"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "the takeaway under the panel"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic accent; default purple"
+                        },
+                        "source": {
+                          "type": "string",
+                          "description": "optional source footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word the finished result appears on - the payoff"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "COMPONENT_LAB"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "componentLab": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "drawerTitle": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the drawer's own name, e.g. 'component creator'"
+                        },
+                        "forScene": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "which item it is being built for, e.g. 'for s05 - the spend split'"
+                        },
+                        "askLabel": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the field label above the ask"
+                        },
+                        "ask": {
+                          "type": "string",
+                          "maxLength": 38,
+                          "description": "what you want to see, in your own words - it TYPES itself in"
+                        },
+                        "askAtWord": {
+                          "type": "number",
+                          "description": "word the ask starts typing on; defaults to the scene anchor"
+                        },
+                        "stages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 stages. label <=34 glyphs, detail <=30 glyphs (the line under it), atWord (each completes on its own word)"
+                        },
+                        "gates": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-5 chips it must pass, <=16 glyphs each, e.g. 'checked','wired in','type-checked'"
+                        },
+                        "doneLabel": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "where the finished piece lands"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "the takeaway under the drawer"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic accent; default purple"
+                        },
+                        "source": {
+                          "type": "string",
+                          "description": "optional source footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word the gates go green and the piece lands on - the payoff"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BEAT_BOARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "beatBoard": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "one [accent] phrase allowed"
+                        },
+                        "panelTitle": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the list's own header, e.g. 'your scenes'"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 rows. label <=22 glyphs (the id and type, e.g. 's04 · DONUT_BREAKDOWN'), text <=44 glyphs (that scene's narration), value = its word count (rendered as n/20w), atWord"
+                        },
+                        "targetIndex": {
+                          "type": "number",
+                          "description": "0-based row whose button gets pressed"
+                        },
+                        "newLabel": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "the per-row build button, e.g. '+ component'"
+                        },
+                        "previewLabel": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "the per-row preview button, e.g. 'preview'"
+                        },
+                        "customLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the type the target row becomes, shown starred"
+                        },
+                        "doneLabel": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "what the pressed button says afterwards, e.g. 'recreate'"
+                        },
+                        "footNote": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "the takeaway under the panel"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic accent; default green"
+                        },
+                        "source": {
+                          "type": "string",
+                          "description": "optional source footer"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "word the target row's button is pressed on - the payoff"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

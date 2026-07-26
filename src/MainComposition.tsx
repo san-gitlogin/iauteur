@@ -165,10 +165,18 @@ import {ChatTrio} from './scenes/ChatTrio';
 import {VideoPlayer} from './scenes/VideoPlayer';
 import {SceneForge} from './scenes/SceneForge';
 import {ProductionGrind} from './scenes/ProductionGrind';
+import {BeatBoard} from './scenes/BeatBoard';
+import {ComponentLab} from './scenes/ComponentLab';
+import {AutoRun} from './scenes/AutoRun';
+import {RepoCta} from './scenes/RepoCta';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  REPO_CTA: RepoCta,
+  AUTO_RUN: AutoRun,
+  COMPONENT_LAB: ComponentLab,
+  BEAT_BOARD: BeatBoard,
   PRODUCTION_GRIND: ProductionGrind,
   SCENE_FORGE: SceneForge,
   VIDEO_PLAYER: VideoPlayer,
