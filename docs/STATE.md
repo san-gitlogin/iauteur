@@ -25,7 +25,7 @@ On Windows, prefix Python with `PYTHONIOENCODING=utf-8` or the seals crash on `�
 | Path | What |
 |---|---|
 | `topics/<slug>/long.json` + `shorts.json` | one folder per video. **Gitignored** — local content, not repo code |
-| `src/scenes/` | the 156 scene components |
+| `src/scenes/` | the 162 scene components |
 | `src/designs/<pack>/` | 30 design packs (layout/motion overrides) |
 | `src/themes.ts` | 42 themes (38 dark + 4 light) |
 | `scripts/lib/manifest.mjs` | **the single source of truth** for every component's data contract + a valid `example` |
@@ -43,6 +43,39 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 ```
 
 ## Recent work
+
+### 2026-07-26 · OPEN-SOURCED — MIT licence + channel identity removed (commit `e746553`)
+The repo is prepared to go public. Two decisions by the owner drove it: licence **MIT**, and the
+channel identity **stripped rather than published**.
+
+- **`LICENSE`** (MIT) at the root. It says explicitly that it cannot relicense **Remotion** — free for
+  individuals and small teams, paid above a size threshold (<https://remotion.dev/license>) — so that
+  obligation sits with whoever clones this, not with the project. `package.json` gained
+  `license`/`repository`/`homepage`/`bugs`/`keywords` and **keeps `private: true`** so nobody publishes
+  it to npm by accident. README has a Licence section.
+- **Channel identity gone.** `logo/` deleted (11 brand marks). `public/assets/channel_logo.png` is now
+  iAuteur's own clapperboard mark, so the `brand.logo` slot still resolves and no spec or script changed
+  behaviour — **drop your own square PNG in at that path to rebrand every video at once.** The channel
+  name became `YOUR CHANNEL` across 32 files, along with the example `@handle`, the newsprint pack's
+  masthead default, the terminal-cli pack's prompt hostname, and the asset-fetch User-Agent.
+  `channel_profile.md` now ships as an unfilled, self-explaining template.
+- **History rewritten**, because the name was in 19 commits' content and 3 commit messages — dropping the
+  `logo/` paths alone would have left it greppable. `git filter-repo --invert-paths --path logo/
+  --replace-text --replace-message` over all 81 commits: 4.5s, history structure and all 81 commits
+  preserved, `.git` 55MB → 39MB, force-pushed to `main`. Pre-rewrite backup bundle was taken first.
+
+**Deliberately NOT scrubbed** (both verified as safe, don't "fix" them):
+`public/assets/SOURCES.json` still records `picsum.photos/seed/nbx-*` — it is a provenance record of URLs
+actually fetched, and rewriting it would make the record untrue; a picsum seed carries no brand signal.
+`package-lock.json` has one match inside a base64 integrity hash — coincidence, not a name.
+
+**Gotcha worth keeping:** grep could not have caught the real risk here. The tracked demo video is a
+rendered artifact, so a channel logo baked into its frames would have shipped invisibly. It was clean only
+because that spec used `img:iauteur_logo.png`, and `brand.channel` renders through **`CHANNEL_CARD` only**
+— which neither cut uses. **Check rendered media, not just source, before publishing.**
+
+**Verified:** tsc clean · `npm run gate` 10/10, exit 0, 162 types · shipped topic lints (17 scenes /
+4 known warnings) · every touched `.py`/`.js`/`.mjs`/`.json` parses · 648 tracked files.
 
 ### 2026-07-25 · per-beat preview (commit `2fe5bcc`)
 Preview is offered on **every** beat and every assembled scene, not only ones carrying `data`.
@@ -288,10 +321,15 @@ types`) or the gate goes red.
 - **The back catalogue has no watermark.** 29 specs across 16 topics predate the `brand.logo` fix and
   now warn on lint. Re-rendering them would stamp the logo; nothing was changed for them
   automatically because `topics/` is the owner's content, not repo code.
-- **Repo going public** — the owner intends to publish. Note that `channel_profile.md`, `CLAUDE.md`,
-  `public/assets/channel_logo.png`, `scripts/gen-upload-kit.mjs` and `briefs/` name a specific
-  YouTube channel in plain text. `topics/*` is gitignored, so no actual video content is exposed.
-  Decision pending on whether to neutralise the channel references.
+- **Repo going public** — the code side is DONE (MIT licence, channel identity stripped and purged from
+  history; see the dated entry above). What remains is not a code task: **flipping visibility on GitHub**,
+  which only the owner should do. Two notes for whoever picks this up. (1) Force-pushing rewritten history
+  leaves the old objects unreachable but not instantly destroyed on GitHub's side; they can persist until
+  GitHub garbage-collects, and on a public repo an unreachable object is still fetchable **by exact SHA**.
+  Nobody has those SHAs — the repo was private with no forks, clones, issues or PRs — so the practical risk
+  is very low, but the airtight option is to delete and recreate the repo from the clean local history
+  before going public. (2) The `LICENSE` copyright line reads `san-gitlogin (https://github.com/san-gitlogin)`;
+  swap in a legal name if the copyright should be attributable to a person.
 - `HANDOFF.md` is a stale program tracker (Session 7, 2026-07-12; still says "manifest 17→136", now
   148) and references `/memories/repo/*` paths that don't exist outside one machine. Treat this
   file as current instead.
