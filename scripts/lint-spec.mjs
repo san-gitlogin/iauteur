@@ -274,6 +274,45 @@ if (narrations.length >= 6) {
   const contractions = (allText.match(/\b\w+['’](t|s|re|ll|ve|d|m)\b/gi) ?? []).length;
   if (wordTotal >= 250 && contractions / wordTotal < 0.012)
     W(`NO CONTRACTIONS: ${contractions} in ${wordTotal} words. Say "you'll", "it's", "don't", "here's" — written-out forms sound like a manual being read aloud.`);
+
+  // 5. FRAGMENTS. Guard 1 (burstiness) backfired into clipping everything: measured
+  //    45-57% fragments across four shipped episodes — "Three tools today." · "Six
+  //    seconds each." Owner: *"that's just a blunt sentence with no grammar."* A short
+  //    sentence is good; a caption read off a slide is not. Vary LENGTH, keep GRAMMAR.
+  const FINITE = /\b(is|are|was|were|am|be|been|being|get|gets|got|have|has|had|do|does|did|can|could|will|would|should|must|may|might|run|runs|ran|make|makes|made|take|takes|took|see|sees|saw|say|says|said|need|needs|want|wants|know|knows|knew|go|goes|went|live|lives|open|opens|give|gives|gave|hand|hands|come|comes|came|work|works|mean|means|meant|keep|keeps|kept|stop|stops|land|lands|fail|fails|pass|passes|start|starts|write|writes|wrote|read|reads|show|shows|sit|sits|cost|costs|climb|climbs|fire|fires|hold|holds|let|lets|put|puts|turn|turns|use|uses|used|find|finds|found|call|calls|tell|tells|told|think|thinks|look|looks|wait|waits|add|adds|set|sets|pick|picks|drop|drops|walk|walks|watch|watches|spend|spends|save|saves|break|breaks|broke|build|builds|built|check|checks|happen|happens|arrive|arrives|expect|expects|welcome|remember|notice|imagine|forget|suppose|picture|listen|meet|ask|asks|try|tries|load|loads|type|types|click|clicks|fill|fills|appear|appears|close|closes|return|returns|send|sends|receive|receives|fire|fires|light|lights|move|moves|grab|grabs|catch|catches|hit|hits|point|points|name|names|queue|queues|pay|pays|walk|walks|flip|flips|steal|steals|record|records|freeze|freezes|stop|stops|answer|answers|matter|matters|help|helps)\b/i;
+  // A fragment is a MISSING VERB, not brevity: "The page loads." is three words and a
+  // perfectly good sentence, while "Three tools today." is four words and a caption.
+  // Scoped deliberately: a verb WHITELIST can never be complete, so applying it to
+  // long sentences just manufactures false positives, and a guard you learn to ignore
+  // is worse than no guard. The thing being caught is the CAPTION -- short, verbless,
+  // read off a slide ("Three tools today." / "In the sidebar.") -- so only short
+  // sentences are judged on the verb test.
+  const frags = sentences.filter((x) => {
+    const w = x.split(/\s+/).length;
+    return w < 3 || (w < 6 && !FINITE.test(x));
+  });
+  if (sentences.length >= 20 && frags.length / sentences.length > 0.22)
+    W(`FRAGMENTS ${Math.round((frags.length / sentences.length) * 100)}%: ${frags.length} of ${sentences.length} "sentences" have no verb or are under four words (e.g. ${frags.slice(0, 2).map((x) => `"${x}"`).join(', ')}). Burstiness means varying LENGTH, not dropping grammar — "There are three tools I want to show you" is short AND a sentence.`);
+
+  // 6. PRONOUN DENSITY. The opener check below catches only sentence-INITIAL pronouns
+  //    and so missed almost all of them: measured ~54 bare pronouns per episode while
+  //    the actual subject was named 1-5 times in 880 words. Owner: *"when you say IT,
+  //    what is IT?"* Naming the subject repeatedly is clarity, not repetition.
+  const bare = (allText.match(/\b(it|its|it's|this|that|they|them|those|these)\b/gi) ?? []).length;
+  if (wordTotal >= 250 && bare / wordTotal > 0.045)
+    W(`PRONOUN DENSITY ${(bare / wordTotal * 100).toFixed(1)}%: ${bare} bare it/this/that/they in ${wordTotal} words — roughly one every ${Math.round(wordTotal / bare)}. Name the subject instead: Playwright, the locator, your test, that trace file. Repeating a NAME is clarity.`);
+
+  // 7. VAGUE POINTING. The other failure mode of "stop saying it" — swapping one empty
+  //    reference for a wordier one. "The one you see" tells the listener nothing.
+  const vague = (allText.match(/\b(the (one|thing|bit|part) (you see|that's highlighted|highlighted|here|there|on screen)|this thing here|that thing there)\b/gi) ?? []);
+  if (vague.length)
+    W(`VAGUE POINTING: ${vague.length}× (e.g. "${vague[0]}"). Pointing at the screen in words is not naming — say WHAT it is.`);
+
+  // 8. REASONING CONNECTIVES. A teacher carries the WHY inside the sentence; a narrator
+  //    lists true statements. This is the cheapest measurable proxy for the difference.
+  const because = (allText.match(/\b(because|which means|so that|otherwise|that's why|the reason|which is why|meaning)\b/gi) ?? []).length;
+  if (wordTotal >= 400 && because / wordTotal < 0.008)
+    W(`FEW REASONS: only ${because} reasoning connectives (because / which means / otherwise / that's why) in ${wordTotal} words. A list of true statements is not an explanation — carry the WHY inside the sentence (LAW 0f rule 8).`);
 }
 
 // STATIC-SCENE GUARD (2026-07-17) — a 20-30s narration parked on ONE component is

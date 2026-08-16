@@ -106,16 +106,44 @@ something a person would actually say out loud:
    say *the locator*, *that zip*, *your test*, *Playwright*. The listener has no scrollback.
 2. **CONTRACTIONS.** "you'll", "here's", "don't", "that's". edge-tts speaks them perfectly.
    Written-out forms are the single loudest tell.
-3. **BURSTINESS.** Swing hard: three-word jabs next to 25-word runs. *"That's it."* then a long
-   winding clause. Even metering is what makes a script sound generated.
-4. **VARY THE WAY IN.** Not every sentence starts "And" / "So" / "The". Open on an adverb, a
-   question, a fragment, a dependent clause, a mid-thought observation.
+3. **BURSTINESS — BUT WRITE SENTENCES.** Swing the LENGTH: a short sentence next to a 25-word run.
+   *"That's it."* then a long winding clause. **This is not a licence to clip everything.**
+   ⚠ **RECORDED BACKFIRE (2026-08-16):** this rule as originally written produced **45-57%
+   fragments** across four episodes — *"Three tools today."* · *"Six seconds each."* · *"In the
+   sidebar."* Owner: *"that's just a blunt sentence with no grammar."* A short sentence still has
+   a subject and a verb. *"There are three tools I want to show you today"* is short AND a
+   sentence; *"Three tools today"* is a caption someone read off a slide. **Cap fragments at
+   ~1 in 5, and make every one of them deliberate.**
+4. **VARY THE WAY IN — NOT THE SUBJECT'S NAME.** Not every sentence starts "And" / "So" / "The".
+   Open on an adverb, a question, a dependent clause, a mid-thought observation.
+   ⚠ **RECORDED BACKFIRE (2026-08-16):** read as "avoid repetition" generally, this rule made me
+   duck the subject's own name — measured **~54 bare pronouns per episode against "Playwright"
+   said 1-5 times in 880 words.** Owner: *"your usage of IT is hell of a lot. When you say IT,
+   what is IT?"* **Repeating a subject noun is not repetition, it is clarity.** Say *Playwright*,
+   *the locator*, *your test*, *that trace file* as often as the sentence needs. Vary the
+   sentence OPENERS and the connective tissue; never vary away from naming the thing.
+   And note the trap on the other side: *"the one you see"*, *"the thing that's highlighted"* are
+   just as useless as "it" — vague pointing is not naming.
 5. **ASIDES AND QUIRKS.** Em-dash asides, parentheticals, a rhetorical question, the occasional
    deliberate fragment. Small redundancies are human. *"Be honest — have you ever watched one?"*
 6. **CONCRETE OVER GENERIC.** "three in the morning", "a hundred green tests", "one crime scene
    photo" — not "in certain situations" or "various artifacts".
 7. **NEVER FORCE IT.** Sprinkled slang reads worse than plain prose. The test is simple: read the
    scene aloud. If you would not say the sentence to a colleague, rewrite it.
+8. **TEACH — DO NOT NARRATE.** (owner, 2026-08-16: *"you are teaching, not just explaining
+   concepts. Like a human, you are sharing your experience, in a beautiful way which hits harder
+   to the listener. The scripts are just like narration and not like teaching."*) A narrator
+   states what is true. A teacher makes you *feel why it matters* before handing you the
+   mechanism, and stays with you through the part that trips people. Concretely:
+   - **Motivation before mechanism.** Why you'd ever want this, then what it is. Not the reverse.
+   - **Carry the reasoning in the sentence.** *because* · *which means* · *so* · *otherwise* ·
+     *and that's why*. A list of true statements is not an explanation.
+   - **Share the experience.** *"I've lost an afternoon to this."* *"The first time I saw this I
+     didn't believe it."* Earned, specific, never invented for effect.
+   - **Anticipate the confusion.** *"And if you're wondering why that underscore is there — and
+     you should be —"*. Answering the question the learner already has is what teaching IS.
+   - **Say the consequence.** What actually happens if they get it wrong, in their week.
+   - **Land it.** End the beat on the sentence you'd want them to repeat to a colleague.
 
 **This is enforced.** `scripts/lint-spec.mjs` runs a HUMAN-VOICE GUARD over the whole spec —
 sentence-length standard deviation, pronoun-opener share, repeated openers, contraction rate — and
