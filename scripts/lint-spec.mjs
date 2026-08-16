@@ -231,7 +231,13 @@ if (longFmt && (spec.scenes ?? []).length >= 6) {
 // MOVING-BACKGROUND GUARD (LAW 0h, owner 2026-08-16 on a pulsing ring shipped behind
 // four episodes: *"very distracting"*). A background that moves competes with the thing
 // the viewer is meant to read. Variety belongs in the scene mix, not the wallpaper.
-const MOVING_BG = ['grid-pulse', 'ripple', 'wave', 'matrix-rain', 'ember'];
+// Where the line sits, and why it is not "anything that animates": Act I shipped seven
+// episodes on `aurora` (two large, very slow blobs) and the owner never once objected.
+// What he DID object to was a rhythmic pulse. So the test is not "does it use frame" —
+// nearly every look does — it is whether the motion is RHYTHMIC or MULTI-OBJECT enough
+// to pull the eye off the teaching. `bokeh` is 14 blobs drifting on sin/cos; that is a
+// different thing from two slow ones.
+const MOVING_BG = ['grid-pulse', 'ripple', 'wave', 'matrix-rain', 'ember', 'bokeh', 'starfield'];
 if (MOVING_BG.includes(String(spec.brand?.background ?? '')))
   W(`MOVING BACKGROUND "${spec.brand.background}": a background that animates sits BEHIND the teaching and competes with it. Use a still look (grid, aurora, plain, gradient) and get your variety from the scene mix (LAW 0h).`);
 
