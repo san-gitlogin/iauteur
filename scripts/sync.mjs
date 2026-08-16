@@ -41,6 +41,22 @@ const maxAnchorFrame = (obj) => {
   return m;
 };
 
+// How many DISTINCT anchored elements this scene steps through. A stepping scene
+// (CODE_RUN, BROWSER_STEP, CHANGE_RIPPLE…) is not static, so its settle cap is
+// earned rather than flat — see the STATIC-SCENE GUARD note in lint-spec.mjs.
+const anchorCount = (obj) => {
+  const seen = new Set();
+  const walk = (o) => {
+    if (!o || typeof o !== 'object') return;
+    for (const [k, v] of Object.entries(o)) {
+      if (/atword$/i.test(k) && typeof v === 'number') seen.add(v);
+      else walk(v);
+    }
+  };
+  walk(obj);
+  return seen.size;
+};
+
 // SETTLE TAIL (2026-07-18): a payoff anchored to a late word used to animate into
 // a 10-frame tail — the reveal got cut mid-draw with zero processing time. Every
 // scene now ends no earlier than lastAnchor + SETTLE frames (animation ~45f + the
@@ -60,7 +76,12 @@ for (const scene of spec.scenes) {
   if (Array.isArray(t.words) && t.words.length) retarget(scene, t.words);
   else console.warn(`! ${scene.id}: no word times, keeping anchors (duration still synced)`);
   const base = Math.ceil(t.duration * FPS) + 10;
-  const cap = scene.type === 'HOOK' ? 240 : 480;
+  // The cap only limits how far a LATE anchor may stretch a scene past its audio —
+  // `base` below always wins, so a long read is never truncated. Amended 2026-08-15:
+  // a stepping scene earns 4s per anchored element (matching lint-spec.mjs's
+  // sceneCeiling), so the last taught line of a 6-line CODE_RUN still gets its settle.
+  const steps = anchorCount(scene);
+  const cap = scene.type === 'HOOK' ? 240 : steps < 2 ? 480 : Math.max(480, Math.min(900, 120 * steps + 120));
   // ceil: anchors are fractional frames after retargeting; durationFrames must be an integer.
   const settled = Math.min(Math.ceil(maxAnchorFrame(scene)) + SETTLE, cap);
   scene.durationFrames = Math.max(base, settled);

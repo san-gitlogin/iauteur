@@ -280,6 +280,43 @@ which is the whole point of this library.
 
 ---
 
+## 5a. Lessons paid for building 18 components for one course (2026-08-15/16)
+
+**Layout traps that only appear at MAX, or only in VERTICAL — check both, always:**
+- **`flex: 1` across a horizontal lane is an aspect trap.** Five step-pills sharing a lane look
+  fine at 1920 wide and truncate every label to three words at 1080. Use
+  `flexWrap: 'wrap'` with an aspect-aware `flex: 1 1 <basis>px` so vertical wraps to two rows
+  instead of shrinking each pill into uselessness. (`BACKSTAGE_PHONE`)
+- **`marginLeft` on a full-width child pushes it past the body edge** and spills its contents
+  outside the frame. An indented/nested level must ALSO set `width: bodyW - indent*i` — which, in
+  a component about narrowing scope, is the very thing it exists to show. (`SEARCH_NARROW`)
+- **A collapsing element must keep a visible outline.** A half-truncated word with no container
+  around it reads as a rendering glitch; an empty stub reads as "walked past". (`SEARCH_NARROW`)
+- **A count rendered as `{n} {label}` must read in the SINGULAR.** A shipped frame printed
+  "1 locators matched". The linter now warns when a `countLabel` cannot survive n=1.
+
+**Make the component enforce its own EDITORIAL contract, not just its field lengths.** The most
+valuable rules written this round were the semantic ones, and each caught a real authoring bug:
+- `BACKSTAGE_PHONE` rejects `hopAtWord >= the last step` — a race where the fast route wins *after*
+  the slow one finishes is not a race, it is two lists that happen to be stacked.
+- `SEALED_BOX` requires ≥1 piercing probe and at most 1 blocked — all-blocked reads as a wall (the
+  opposite lesson), several blocked reads as a general barrier rather than one exception.
+- `SET_LOGIC` rejects an operator that keeps everything or nothing — a predicate with no rejects is
+  a list, one with no survivors teaches nothing about the operator.
+- `ORDER_ROULETTE` rejects an all-fail or all-pass roulette — one failing run reads as a bug
+  somebody can fix, and the entire lesson is that there is nothing fixed to fix.
+- `FROZEN_FRAME` rejects a freeze on the first line (nothing has moved, so there is no stillness to
+  see) or the last (nothing left to step into).
+- `RECORD_DRAFT` rejects a draft with nothing dropped — that sells generated output as a finished
+  test, the exact defect the component exists to show.
+
+**The "should I build it?" test is SEMANTIC, not visual.** `FRAME_BOUNDARY` and a shadow-DOM beat
+look alike — a document inside a document — but `FRAME_BOUNDARY`'s model is "blocked until you make
+an explicit crossing call", and shadow DOM needs no such call. Reusing it would have sent viewers
+hunting for a `shadow_locator()` that does not exist. Likewise `TRACE_SCRUB` (a recording of a run
+that finished) must not stand in for `page.pause()` (a live run you can still interact with).
+**Ask what the component ASSERTS about the world, not what it looks like.**
+
 ## 5b. VISUAL CRAFT LAWS — a component that compiles is NOT done; a component is done when it is BEAUTIFUL
 
 A scaffold gives you a token-driven, `×scale`, both-aspect skeleton. That is the START. The

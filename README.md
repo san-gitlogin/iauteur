@@ -25,7 +25,7 @@
   <a href="https://remotion.dev"><img alt="Built with Remotion" src="https://img.shields.io/badge/built%20with-Remotion-0B84F3"></a>
   <img alt="Node" src="https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white">
-  <img alt="162 components" src="https://img.shields.io/badge/components-162-E8A22E">
+  <img alt="195 components" src="https://img.shields.io/badge/components-195-E8A22E">
   <img alt="30 design packs" src="https://img.shields.io/badge/design%20packs-30-E8A22E">
   <img alt="42 themes" src="https://img.shields.io/badge/themes-42-E8A22E">
   <img alt="Works with any LLM" src="https://img.shields.io/badge/works%20with-any%20LLM-8957E5">
@@ -33,7 +33,7 @@
 
 Turn a **topic** into a finished tech‑explainer video. You (or any LLM) describe the video as a
 **JSON spec**; [Remotion](https://remotion.dev) renders it to MP4 — 16:9 long‑form **and** 9:16 shorts,
-each in **dark and light**. The project ships a large, audited component library (**162 scene types**)
+each in **dark and light**. The project ships a large, audited component library (**195 scene types**)
 that automatically reskins across **30 design packs** and **42 themes**.
 
 > **The JSON is the movie.** `topics/<slug>/long.json` + `shorts.json` → Remotion renders exactly what
@@ -121,6 +121,13 @@ A beat you haven't filled in yet still previews — it uses that component's own
 Pick a voice and generate. The narration is spoken, then the scene timings are re‑synced to the **real
 audio** — so what you saw in the preview is what you get in the render.
 
+> **Write it to be said, not read.** The linter runs a *human-voice guard* over every spec before
+> you get here: it measures how much your sentence lengths vary, how often a sentence opens with
+> "It" or "This", how many sentences start the same way, and whether you use contractions at all.
+> Flat, evenly-metered, pronoun-heavy prose is the thing that makes a good-looking video sound
+> machine-made — name the subject, use "you'll" and "here's", and let some sentences run long while
+> others land in three words.
+
 <img src="docs/img/05-voiceover.png" alt="Step 4 — choosing a voice" width="100%">
 
 ### Step 5 · Render
@@ -158,13 +165,14 @@ stay in step with the UI.</sub>
 - [Repository conventions](#repository-conventions)
 - [Contributing](#contributing)
 - [Credits & attribution](#credits--attribution)
+- [Changelog](CHANGELOG.md)
 - [Licence](#licence)
 
 ---
 
 ## Showcase
 
-A handful of the **162 components**, rendered straight from JSON specs across different design packs
+A handful of the **195 components**, rendered straight from JSON specs across different design packs
 (finance in `corptrust`, science in `organic`) — dark themes shown:
 
 <table>
@@ -385,6 +393,20 @@ Design thumbnails come from `out/proof/designs/`; if the gallery is empty, gener
 `npm run render` calls `npx remotion render <slug>-<variant>` under the hood; the first render downloads a
 headless Chromium automatically.
 
+### Upload kits (generated, never hand-written)
+
+Every video render also writes the publishing metadata, so it can never drift from the spec:
+
+| File | Contains |
+|---|---|
+| `out/upload.md` | Long-cut title and description in the channel's house pattern, **⏱️ chapters with timestamps derived from scene frames**, 🔗 sources collected from `data.source`, subscribe line, and a ≤500-char tags block. |
+| `out/upload-shorts.md` | The short's own title and description, a **▶️ FULL EPISODE** pointer naming the long cut, source credit, `#Shorts`, and tags. No chapters — a sub-60s vertical has nothing to chapter. |
+
+Creative fields come from `meta.seo` (authored at spec time, with fallbacks to `meta.openLoop` /
+`meta.onePayoff`); timestamps and sources are machine-derived. Where an episode's on-screen
+`data.source` values are all illustrative, `meta.seo.sources` supplies a render-invisible credit so
+the description still attributes properly without adding a footer to a finished video.
+
 ## Spec schema (the editor floor)
 
 `specs/video.schema.json` is a draft‑07 JSON Schema **derived from the component manifest**
@@ -395,7 +417,7 @@ LLM prompt, the normalizer, the field validator **and** this schema.
 
 It is a **floor, not the whole law.** The schema checks:
 
-- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 162 types);
+- **shape** — each scene's `data` matches its type (via a per‑type `if type == X then …` branch, all 195 types);
 - **enums** — `brand.theme` (dark skins), `themeLight`, `background`, each scene `transition`/`anim`/`background`, `meta.format`;
 - **string budgets** — `maxLength` on every text field, mirrored from the linter.
 
@@ -403,6 +425,24 @@ It does **not** check required‑ness, counts, adjacency or cross‑field rules 
 linter (`npm run lint`). So **schema‑green ≠ lint‑green**: a spec can satisfy the schema and still be
 rejected by the linter's deeper rules, but a schema failure is always a real shape/enum/budget error.
 `npm run gate` runs `gen-schema --check` to guarantee the committed schema never drifts from the manifest.
+
+### What the linter checks that a schema cannot
+
+Beyond shape and budgets, `lint-spec.mjs` enforces the craft rules that decide whether a video
+actually teaches. These were each learned by shipping something that did not, and they are the
+reason a spec can be schema-valid and still rejected:
+
+| Guard | What it measures | Why |
+|---|---|---|
+| **Human voice** | sentence-length σ, pronoun-opener share, repeated openers, contraction rate | A script with zero contractions and evenly-metered sentences reads as a machine reading a manual, and no amount of good visuals rescues it. Measured across a whole spec, never per scene. |
+| **Opening contract** | branding in scene 1 (error), missing greeting, title/thumbnail words absent from the opening, no question in the first four beats | A viewer arrives carrying an expectation set by what they clicked. Leading with branding is the most-documented way to lose the first 30 seconds; opening a curiosity loop and then satisfying it is the difference between a click promise and clickbait. |
+| **Motion-earned ceiling** | scene seconds vs anchored elements (4s each past the first, hard stop 30s) | A flat cap throttles explanation. A long scene is an invitation to *step something more*, not to trim the teaching. |
+| **Teaching density** | ≥4s per taught code line; `CODE_RUN` needs ≥2 distinct anchors | Narrating *about* code is not teaching it. Below that rate nobody can read along. |
+| **Moving backgrounds** | `grid-pulse`, `ripple`, `wave`, `matrix-rain`, `ember` | A background that animates sits behind the teaching and competes with it. |
+| **Per-component semantics** | e.g. a race whose fast route wins after the slow one finishes; a "one exception" picture with no exception; a predicate that rejects nothing | The most valuable rules are the editorial ones. A component should refuse to draw a picture that argues the opposite of its own point. |
+
+Warnings are advisory to the linter and **rejections in practice** — fix them before voicing, since
+re-voicing costs a full build → voiceover → sync loop.
 
 ## Project structure
 
@@ -412,7 +452,7 @@ specs/gallery.json      Component showcase (every type demoed) — feeds the des
 specs/demo-*.json       Finance + science demo videos that exercise the full library.
 src/
   index.ts · Root.tsx   Remotion entry + composition registration (topics + design showcases).
-  MainComposition.tsx   Scene registry: maps scene.type → component (162 types).
+  MainComposition.tsx   Scene registry: maps scene.type → component (195 types).
   types.ts              The spec schema (VideoSpec, Scene, BrandConfig, SceneData…).
   themes.ts             42 themes (38 dark + 4 light) — all colour/font/scale tokens.
   designs/<pack>/       The 30 design packs (per-pack component overrides + chrome + chart kit).
@@ -430,7 +470,7 @@ CLAUDE.md · PROJECT_RULES.md   Repo laws and the topic lifecycle (read before l
 
 ## The component library
 
-**162 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
+**195 scene types** grouped into families — core editorial (HOOK, TITLE_CARD, LIST_BUILD, STAT_CALLOUT,
 RECAP, OUTRO_CTA…), charts (LINE_CHART, BAR_COMPARE, DONUT, FUNNEL, WATERFALL, RADAR, CANDLESTICK, SANKEY,
 TREEMAP, BOX_PLOT, PICTOGRAM…), diagrams & engines (DIAGRAM, PIPELINE, NEURAL_NET, STATE_MACHINE,
 KNOWLEDGE_GRAPH…), code/cloud/AI surfaces (CODE_EDITOR, TERMINAL_SESSION, CLOUD_ARCH, K8S_CLUSTER,
@@ -440,9 +480,21 @@ overlay family (VIDEO_HERO, CAPTION_KINETIC_OVERLAY, PHOTO_TIMELINE…), plus a 
 real software rather than diagrams of it (APP_WINDOW, PROMPT_HANDOUT, CHAT_TRIO, VIDEO_PLAYER,
 BEAT_BOARD, COMPONENT_LAB, AUTO_RUN, SCENE_FORGE, CHECK_SWEEP, PRODUCTION_GRIND, REPO_CTA, INTRO_CARD).
 
+A **teaching family** joined the library while producing a full tutorial course, and it is the one to
+reach for when a beat has to *explain* rather than present: `CODE_RUN` (a program taught line by line,
+each with a plain-English note and its own result), `BROWSER_STEP` (the page built from the steps),
+`FIXTURE_CREW`, `QUIZ_CARD`, `THEATER_STAGE`, `OVERLAY_BLOCK`, `FROZEN_FRAME` (a live run held
+mid-breath), `RECORD_DRAFT` (actions becoming code, then judged), `WORKER_SPREAD`, `ORDER_ROULETTE`,
+`SEARCH_NARROW`, `SET_LOGIC`, `SEALED_BOX`, `BACKSTAGE_PHONE`, `STAGE_HANDOFF`, `HAND_STAMP`,
+`SCOPE_LADDER`, `MAIL_ROOM`, `SAD_PATHS`, `TRACE_SCRUB`, `CHANGE_RIPPLE`, `RULE_TEST` and others.
+
+Most were built rather than reused, on purpose: **a card that only PRINTS an idea is not a visual —
+build the one that ENACTS it.** When a concept beat gets a generic card, the viewer is asked to build
+the picture themselves, and they build it from their own life rather than yours.
+
 Separately from the scene types, a scene can carry a **`stepRail`** — the app-progress chrome drawn by
 the shell *over* whatever component the beat uses, so a multi-step walkthrough never loses the viewer.
-It composes with all 162 types without any of them knowing about it.
+It composes with all 195 types without any of them knowing about it.
 
 The authoritative, always‑current catalog is `.claude/skills/tech-video-director/references/scene_library.md`
 (the "USE WHEN" table + the data shape for each type). `PROGRAM_3_FINAL.md` summarises how the library was
@@ -507,7 +559,7 @@ The most useful contributions right now:
 |---|---|
 | **Make a video and say what confused you** | No code needed. The docs were written by someone who already knows the answers, so fresh confusion is real information |
 | **A scene that looks wrong** | Send the still, the component type, the design pack, and the aspect. Most visual bugs live in one pack or one aspect only |
-| **A new scene component** | There are 162 and the library is nowhere near done. This is the flagship contribution |
+| **A new scene component** | There are 195 and the library is nowhere near done. This is the flagship contribution |
 | **A design pack** | A whole visual language every component inherits automatically |
 
 One warning worth repeating from the contributor guide: **`tsc` and the gate have never once caught a

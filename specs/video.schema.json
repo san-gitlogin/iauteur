@@ -347,7 +347,40 @@
               "COMPONENT_LAB",
               "AUTO_RUN",
               "REPO_CTA",
-              "INTRO_CARD"
+              "INTRO_CARD",
+              "THEATER_STAGE",
+              "QUIZ_CARD",
+              "CODE_RUN",
+              "BROWSER_STEP",
+              "OVERLAY_BLOCK",
+              "FIXTURE_CREW",
+              "CHANGE_RIPPLE",
+              "RULE_TEST",
+              "SAVED_SEARCH",
+              "RESPONSIBILITY_SPLIT",
+              "CROWD_MATCH",
+              "ROW_FILTER",
+              "INDEX_DRIFT",
+              "TRAP_TRIGGER",
+              "FRAME_BOUNDARY",
+              "DIALOG_GATE",
+              "PICKER_BYPASS",
+              "SHOT_SCOPE",
+              "FLAG_HARVEST",
+              "TRACE_SCRUB",
+              "MAIL_ROOM",
+              "SAD_PATHS",
+              "HAND_STAMP",
+              "SCOPE_LADDER",
+              "BACKSTAGE_PHONE",
+              "STAGE_HANDOFF",
+              "SEARCH_NARROW",
+              "SET_LOGIC",
+              "SEALED_BOX",
+              "WORKER_SPREAD",
+              "ORDER_ROULETTE",
+              "FROZEN_FRAME",
+              "RECORD_DRAFT"
             ]
           },
           "narration": {
@@ -417,6 +450,2319 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RECORD_DRAFT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "recordDraft": {
+                      "type": "object",
+                      "properties": {
+                        "sourceLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "what you are acting on, e.g. the real login page"
+                        },
+                        "outputLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "where the code lands, e.g. generated"
+                        },
+                        "actions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 x {label = what you did (<=24), text = the line it generated (<=38), title = 'keep' for the part worth taking or 'drop' for the part you rewrite, sub = why (<=24), atWord}"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 36,
+                          "description": "e.g. a source of locators, not tests"
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "word the judging begins - keeps light, drops grey out. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "missing": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "1-3 things the draft does NOT contain, each <=22, e.g. no assertions"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - both panes and their labels are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FROZEN_FRAME"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "frozenFrame": {
+                      "type": "object",
+                      "properties": {
+                        "filename": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the script being run"
+                        },
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 x {text = the code line (<=38), title = 'freeze' on the line that stops the run, sub = what the page did (<=24), atWord}"
+                        },
+                        "screenTitle": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the heading on the frozen page"
+                        },
+                        "pageItems": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "1-3 things visible on the page, each <=22 - the state that is left standing"
+                        },
+                        "inspectorLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "default 'Playwright Inspector'"
+                        },
+                        "stepLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what stepping forward does, e.g. step over one action"
+                        },
+                        "stepAtWord": {
+                          "type": "number",
+                          "description": "word the run advances ONE line past the freeze. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "note": {
+                          "type": "string",
+                          "maxLength": 32,
+                          "description": "e.g. the browser is still open"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the script, the empty page and the inspector shell are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ORDER_ROULETTE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "orderRoulette": {
+                      "type": "object",
+                      "properties": {
+                        "dependency": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "the assumption being made, e.g. test_edit assumes test_create ran"
+                        },
+                        "runs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label = the run (<=14), text = the order it happened in (<=26), title = 'pass' or 'fail', sub = why (<=22), atWord}"
+                        },
+                        "producer": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the test that makes the thing, e.g. test_create_profile"
+                        },
+                        "consumer": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the test that needs it, e.g. test_edit_profile"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "lands after the last run, e.g. not broken. a coin flip."
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "word the verdict lands. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "fix": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the way out, e.g. each test builds its own world"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the dependency, both test names and every empty run row are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "WORKER_SPREAD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "workerSpread": {
+                      "type": "object",
+                      "properties": {
+                        "queueLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "what is waiting, e.g. 100 tests"
+                        },
+                        "lanes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label = the worker (<=16), sub = what it ends up holding (<=20), detail = its finish time (<=8), atWord}"
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-6 sample items in the queue, each <=18 - the ones you actually watch get dealt"
+                        },
+                        "beforeLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the sequential wall time, e.g. 10m12s in one file"
+                        },
+                        "afterLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the parallel wall time, e.g. 2m41s across four"
+                        },
+                        "afterAtWord": {
+                          "type": "number",
+                          "description": "word the new total lands. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "note": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the condition that makes it legal, e.g. only because tests are isolated"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the queue, every empty lane and the sequential total are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SEALED_BOX"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "sealedBox": {
+                      "type": "object",
+                      "properties": {
+                        "boxLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the sealed thing, e.g. <fancy-datepicker>"
+                        },
+                        "wallLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the boundary itself, e.g. #shadow-root (open)"
+                        },
+                        "contents": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what is sealed inside, e.g. Departure date"
+                        },
+                        "probes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 x {label = the call (<=30), title = 'through' for one that pierces or 'blocked' for the exception, sub = the note beside it (<=24), atWord}"
+                        },
+                        "blockedNote": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "why the exception fails, e.g. cannot see shadow roots"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 32,
+                          "description": "lands after the last probe, e.g. no special call needed"
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "word the verdict lands. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the box, its wall, the contents and every waiting probe are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SET_LOGIC"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "setLogic": {
+                      "type": "object",
+                      "properties": {
+                        "op": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the operator being applied, e.g. and_ or or_ or has_not="
+                        },
+                        "opNote": {
+                          "type": "string",
+                          "maxLength": 32,
+                          "description": "what it means in English, e.g. both must be true"
+                        },
+                        "criteria": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "1-2 descriptions being combined, each <=24, e.g. is a button / titled Save"
+                        },
+                        "candidates": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 x {label = the element (<=22), sub = the properties it actually has (<=26), title = 'keep' for a survivor or 'drop' for a reject, atWord}"
+                        },
+                        "countLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what the survivor count is called, e.g. locators matched"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "lands when the last candidate resolves"
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "word the verdict lands. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the whole shelf of candidates and their properties are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SEARCH_NARROW"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "searchNarrow": {
+                      "type": "object",
+                      "properties": {
+                        "rootLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the widest scope, e.g. the whole page"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label = the call (<=34), text = the region it enters (<=20), sub = one sibling it ignores (<=20), detail = the plain-English direction (<=28), atWord}"
+                        },
+                        "target": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "what is found at the very bottom, e.g. Email alerts"
+                        },
+                        "targetAtWord": {
+                          "type": "number",
+                          "description": "word the target lands. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "targetAction": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "what happens to it, e.g. click"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the root scope and every level's siblings are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "STAGE_HANDOFF"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "stageHandoff": {
+                      "type": "object",
+                      "properties": {
+                        "testName": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the single job, e.g. test_delete_todo"
+                        },
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 x {label = the step (<=34), sub = what it costs or does (<=24), title = 'api' for the fast rail or 'ui' for the lit stage (default 'ui'), atWord}. All 'api' steps must come before the first 'ui' step."
+                        },
+                        "railLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "default 'setup · by API'"
+                        },
+                        "stageLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "default 'the test · by UI'"
+                        },
+                        "handoffLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the marker between the two, e.g. now open the page"
+                        },
+                        "handoffAtWord": {
+                          "type": "number",
+                          "description": "word the handoff fires. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "e.g. when it fails, you know why"
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "word the verdict lands"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the test name, both rails and their labels are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BACKSTAGE_PHONE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "backstagePhone": {
+                      "type": "object",
+                      "properties": {
+                        "question": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "what BOTH routes are trying to find out"
+                        },
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 x {label = a stage step (<=26), detail = the clock reading beside it (<=8), atWord}"
+                        },
+                        "hop": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the one direct call, e.g. api.get(\"/repos/...\")"
+                        },
+                        "hopAtWord": {
+                          "type": "number",
+                          "description": "word the direct call fires. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "hopTime": {
+                          "type": "string",
+                          "maxLength": 8,
+                          "description": "what the direct route cost, e.g. 0.61s"
+                        },
+                        "stageTime": {
+                          "type": "string",
+                          "maxLength": 8,
+                          "description": "what the long route cost, e.g. 6.8s"
+                        },
+                        "stageLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "default 'the whole play'"
+                        },
+                        "hopLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "default 'the backstage phone'"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the badge that drops when the hop lands, e.g. ~50x faster"
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "word the verdict badge lands"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - both empty lanes, the question and the labels are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SCOPE_LADDER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "scopeLadder": {
+                      "type": "object",
+                      "properties": {
+                        "fixtures": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-3 x {label = the fixture name (<=22), title = scope: 'session' | 'function', sub? = what it does (<=26), detail? = how many times it ran (<=18), color?, atWord}"
+                        },
+                        "tests": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "3-5 test names, each <=20"
+                        },
+                        "runLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "default 'one pytest run'"
+                        },
+                        "fileLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "where they live, e.g. conftest.py"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the run, every test and every fixture rail are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "HAND_STAMP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "handStamp": {
+                      "type": "object",
+                      "properties": {
+                        "toll": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what each one pays, e.g. log in (5s)"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "'everyone-pays' (default) = each test does it itself | 'stamped' = one does it, the rest show the stamp"
+                        },
+                        "tests": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 x {label = the test name (<=20), title = 'flaky' on the one that wobbles (everyone-pays only), atWord}"
+                        },
+                        "stampLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the saved stamp, e.g. auth.json"
+                        },
+                        "doorLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "default 'the login page'"
+                        },
+                        "totalLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the running cost verdict, e.g. 17 minutes of typing"
+                        },
+                        "flakyNote": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "why the wobbler failed, e.g. login hiccuped once"
+                        },
+                        "settleAtWord": {
+                          "type": "number",
+                          "description": "word the verdict lands. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the door, the queue and every waiting test are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SAD_PATHS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "sadPaths": {
+                      "type": "object",
+                      "properties": {
+                        "states": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-3 x {label = the state name (<=18, e.g. 500 error), title = kind: 'ok' | 'empty' | 'error', text = the mock line that causes it (<=32), sub? = what the user sees (<=22), color?, atWord}"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "1-3 rows the 'ok' state renders, each <=18"
+                        },
+                        "emptyText": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what the empty state shows (default 'Nothing here yet')"
+                        },
+                        "errorText": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what the error state shows (default 'Something went wrong')"
+                        },
+                        "screenTitle": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "the app screen's own heading"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - all the screens and their mock lines are on screen by frame 38; each LIGHTS at its own word"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MAIL_ROOM"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mailRoom": {
+                      "type": "object",
+                      "properties": {
+                        "pattern": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the route pattern, e.g. **/api/todos"
+                        },
+                        "requests": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label = the request line (<=24, e.g. GET /api/todos), title = fate: 'fulfill' | 'abort' | 'continue' | 'pass' (pass = did not match, sails by), sub? = what comes back (<=22), color?, atWord}"
+                        },
+                        "deskLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what the desk is, e.g. page.route(...)"
+                        },
+                        "serverLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "default 'the real server'"
+                        },
+                        "browserLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "default 'your page'"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the browser, the desk, the server and every waiting request are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TRACE_SCRUB"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "traceScrub": {
+                      "type": "object",
+                      "properties": {
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 x {label = the action (<=22), title = 'fail' on the step that broke, sub? = the console line for this step (<=30), detail? = the network call for this step (<=26), color?, atWord}. The playhead lands on each in turn."
+                        },
+                        "snapshot": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "2-4 elements of the page as it was, each <=20. The last one is what the failing step was looking for."
+                        },
+                        "traceFile": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "e.g. trace.zip"
+                        },
+                        "openWith": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the command that opens it, e.g. playwright show-trace trace.zip"
+                        },
+                        "consoleLabel": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "default 'console'"
+                        },
+                        "networkLabel": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "default 'network'"
+                        },
+                        "rewindAtWord": {
+                          "type": "number",
+                          "description": "word the playhead travels BACKWARDS to the failing step. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the timeline, every step and the snapshot pane are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FLAG_HARVEST"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "flagHarvest": {
+                      "type": "object",
+                      "properties": {
+                        "flag": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the switch, e.g. --screenshot only-on-failure"
+                        },
+                        "command": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "what it is appended to (default 'pytest')"
+                        },
+                        "tests": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 x {label = the test name (<=24), title = 'pass' or 'fail', atWord}. Verdicts land one at a time."
+                        },
+                        "artifacts": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "1-3 files produced per FAILING test, each <=26"
+                        },
+                        "folder": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "where they land, e.g. test-results/"
+                        },
+                        "quietNote": {
+                          "type": "string",
+                          "maxLength": 28,
+                          "description": "what the passing rows leave behind (default 'nothing kept')"
+                        },
+                        "harvestAtWord": {
+                          "type": "number",
+                          "description": "word the artifacts appear under the failures. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the command with its flag and every test row are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SHOT_SCOPE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "shotScope": {
+                      "type": "object",
+                      "properties": {
+                        "shots": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-3 x {label = the call (<=30), title = scope: 'viewport' | 'full' | 'element', sub = the file it writes (<=18), detail? = one plain-words note (<=26), color?, atWord}. Each lights in turn."
+                        },
+                        "blocks": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "3-6 page sections top to bottom, each <=18. Everything from foldAfter down is below the fold."
+                        },
+                        "foldAfter": {
+                          "type": "number",
+                          "description": "0-based index of the last block ABOVE the fold (default 2)"
+                        },
+                        "elementIndex": {
+                          "type": "number",
+                          "description": "0-based index of the block an 'element' shot frames"
+                        },
+                        "pageTitle": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "foldLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "default 'the fold'"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the page, every block and the fold line are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PICKER_BYPASS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "pickerBypass": {
+                      "type": "object",
+                      "properties": {
+                        "inputLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the file input on the page, e.g. Upload resume"
+                        },
+                        "pickerTitle": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the OS window's title bar, e.g. Open File"
+                        },
+                        "pickerItems": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "0-3 filenames inside the OS window, each <=18"
+                        },
+                        "files": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "1-3 files handed straight to the input, each <=18"
+                        },
+                        "call": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the line that does it, e.g. .set_input_files(\"resume.pdf\")"
+                        },
+                        "blockedNote": {
+                          "type": "string",
+                          "maxLength": 28,
+                          "description": "why the picker is unreachable (default 'not a web page')"
+                        },
+                        "landedNote": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the state of the input afterwards, e.g. 1 file attached"
+                        },
+                        "pageTitle": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "handAtWord": {
+                          "type": "number",
+                          "description": "word the file travels into the input. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the page, the empty input and the struck-out OS window are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DIALOG_GATE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "dialogGate": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "the dialog's text, e.g. Are you sure you want to delete?"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "'confirm' (default, two buttons) | 'alert' (one button) | 'prompt' (a field)"
+                        },
+                        "handler": {
+                          "type": "string",
+                          "description": "'none' (default - Playwright auto-dismisses) | 'accept' | 'dismiss'"
+                        },
+                        "handlerLine": {
+                          "type": "string",
+                          "maxLength": 36,
+                          "description": "the registration line, e.g. page.once(\"dialog\", accept)"
+                        },
+                        "trigger": {
+                          "type": "string",
+                          "maxLength": 32,
+                          "description": "the click that makes it knock, e.g. Delete account"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label = a row on the page behind (<=20), title = 'target' for the one the action would change, color?}"
+                        },
+                        "pageTitle": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "outcome": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the verdict once answered, e.g. nothing was deleted"
+                        },
+                        "knockAtWord": {
+                          "type": "number",
+                          "description": "word the dialog appears and the page freezes. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "answerAtWord": {
+                          "type": "number",
+                          "description": "word the dialog is answered. Must be after knockAtWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the page, its rows and the handler line are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FRAME_BOUNDARY"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "frameBoundary": {
+                      "type": "object",
+                      "properties": {
+                        "outerTitle": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the host page, e.g. checkout.shop.com"
+                        },
+                        "innerTitle": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the embedded document, e.g. Secure payment"
+                        },
+                        "outerItems": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "0-3 elements on the HOST page, each <=18"
+                        },
+                        "innerItems": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-3 x {label = element inside the frame (<=18), title = 'target' for the one being looked for, color?}"
+                        },
+                        "attempt": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the locator that FAILS, e.g. page.get_by_label(\"Card number\")"
+                        },
+                        "crossing": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the call that steps inside, e.g. page.frame_locator(\"iframe\")"
+                        },
+                        "failNote": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the stamp on the failed attempt (default 'TimeoutError')"
+                        },
+                        "okNote": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the stamp once it is found inside"
+                        },
+                        "crossAtWord": {
+                          "type": "number",
+                          "description": "word the crossing happens. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - both documents and every element are on screen by frame 38; the FAILED attempt starts sweeping from here too"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TRAP_TRIGGER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "trapTrigger": {
+                      "type": "object",
+                      "properties": {
+                        "listener": {
+                          "type": "string",
+                          "maxLength": 32,
+                          "description": "the arming call, e.g. with page.expect_popup()"
+                        },
+                        "trigger": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the action that causes the event, e.g. page.get_by_role(\"link\").click()"
+                        },
+                        "catcher": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "how you read the caught thing out, e.g. popup_info.value"
+                        },
+                        "caught": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what gets caught, e.g. a new page"
+                        },
+                        "caughtItems": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "0-3 lines shown inside the caught page card, each <=20"
+                        },
+                        "originLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the page you started on, e.g. the original tab"
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "'trap' (default) = listener first, event caught | 'missed' = action first, the event escapes"
+                        },
+                        "missNote": {
+                          "type": "string",
+                          "maxLength": 28,
+                          "description": "missed mode: the verdict, e.g. nobody was listening"
+                        },
+                        "armAtWord": {
+                          "type": "number",
+                          "description": "word the listener arms (trap mode) or the action fires (missed mode). Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "fireAtWord": {
+                          "type": "number",
+                          "description": "word the second of the two events happens. Must be after armAtWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the with-block bracket, both lines and the empty catcher are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "INDEX_DRIFT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "indexDrift": {
+                      "type": "object",
+                      "properties": {
+                        "before": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 x {label = the row's text (<=18), color?}. The list as it is today."
+                        },
+                        "after": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "the SAME labels re-ordered (and optionally one added), 3-6 entries each <=18. This is what the re-sort produces."
+                        },
+                        "target": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "the row you actually mean - must appear in both before and after"
+                        },
+                        "indexLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the positional reference, e.g. .nth(7)"
+                        },
+                        "meaningLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the semantic reference, e.g. filter(has_text=...)"
+                        },
+                        "causeLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what changed, e.g. someone adds a user"
+                        },
+                        "brokenNote": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the verdict on the index pointer after the shuffle"
+                        },
+                        "heldNote": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the verdict on the meaning pointer after the shuffle"
+                        },
+                        "shuffleAtWord": {
+                          "type": "number",
+                          "description": "word the list re-orders. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the list and BOTH pointers are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ROW_FILTER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "rowFilter": {
+                      "type": "object",
+                      "properties": {
+                        "condition": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the filter as written, e.g. .filter(has_text=\"Walk dog\")"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 x {label = the row's text (<=20), title = 'keep' for the survivor (everything else drops), sub? = the child control's name (<=14, default control), color?}. EXACTLY one row may be 'keep'."
+                        },
+                        "control": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "the child control every row carries, e.g. Delete"
+                        },
+                        "baseLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the locator before filtering, e.g. get_by_role(\"listitem\")"
+                        },
+                        "actLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the action taken inside the survivor, e.g. .click()"
+                        },
+                        "filterAtWord": {
+                          "type": "number",
+                          "description": "word the condition lands and the non-matches drop. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "actAtWord": {
+                          "type": "number",
+                          "description": "word the survivor's control is pressed. Must be after filterAtWord."
+                        },
+                        "pageTitle": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - every row and every child control are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CROWD_MATCH"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "crowdMatch": {
+                      "type": "object",
+                      "properties": {
+                        "query": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the locator as written, e.g. page.get_by_role(\"listitem\")"
+                        },
+                        "members": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 x {label = the element's text (<=20), color?}. ALL of them are matches - this component draws a set, not a search."
+                        },
+                        "readouts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-3 x {label = the call (<=22, e.g. count()), text = what it returns (<=30), atWord}. They land one at a time beside the set."
+                        },
+                        "countLabel": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "wording on the count badge (default 'matches')"
+                        },
+                        "pickIndex": {
+                          "type": "number",
+                          "description": "0-based member singled out AFTER the set resolves - for first/last/nth beats"
+                        },
+                        "pickLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "what singled it out, e.g. .nth(2)"
+                        },
+                        "pickAtWord": {
+                          "type": "number",
+                          "description": "word the single-out happens. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "strict": {
+                          "type": "boolean",
+                          "description": "true = stamp the set as illegal to ACT on (episode 4's strict-mode error) while still legal to ask about"
+                        },
+                        "strictNote": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the stamp wording, e.g. cannot click 5 things"
+                        },
+                        "pageTitle": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the query, the whole list and the count badge are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RESPONSIBILITY_SPLIT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "respSplit": {
+                      "type": "object",
+                      "properties": {
+                        "leftLabel": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "the left owner, e.g. Page object"
+                        },
+                        "rightLabel": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "the right owner, e.g. Test"
+                        },
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-6 x {text = the line being filed (<=32), title = 'left' or 'right' (which bin it lands in), sub? = why (<=22), color?, atWord}. One lands at a time."
+                        },
+                        "leftSub": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "one word for what the left owner holds, e.g. HOW"
+                        },
+                        "rightSub": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "one word for what the right owner holds, e.g. WHAT"
+                        },
+                        "pileLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "label over the unsorted pile (default 'everything you wrote')"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - both bins and the whole pile are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SAVED_SEARCH"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "savedSearch": {
+                      "type": "object",
+                      "properties": {
+                        "query": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "the query as written, e.g. page.get_by_label(\"Username\")"
+                        },
+                        "elements": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 x {label = what is on the page (<=16), title? = kind: field|button|text|link, color?}. Exactly one of them is the match."
+                        },
+                        "matchIndex": {
+                          "type": "number",
+                          "description": "0-based index of the element the query finds when it finally runs"
+                        },
+                        "trigger": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the call that makes it run, e.g. .fill(\"tomsmith\")"
+                        },
+                        "savedLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "chip before it runs (default 'saved, not run')"
+                        },
+                        "ranLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "chip after it runs (default 'run - 1 found')"
+                        },
+                        "pageTitle": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "heading on the page panel"
+                        },
+                        "runAtWord": {
+                          "type": "number",
+                          "description": "word the trigger fires and the scan sweeps. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the query card, its chip and the whole page are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RULE_TEST"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "ruleTest": {
+                      "type": "object",
+                      "properties": {
+                        "rule": {
+                          "type": "string",
+                          "maxLength": 62,
+                          "description": "the rule itself, stated once, in plain words"
+                        },
+                        "cases": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {text = the case being judged (<=38), title = 'ok' or 'no' (the verdict), sub = the one-line reason (<=30), color?, atWord}. Each is judged at its own word."
+                        },
+                        "kicker": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "small label over the plaque, e.g. remember this"
+                        },
+                        "okLabel": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "word on a passing badge (default 'follows it')"
+                        },
+                        "noLabel": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "word on a failing badge (default 'breaks it')"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the rule plaque and every case row are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CHANGE_RIPPLE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "changeRipple": {
+                      "type": "object",
+                      "properties": {
+                        "line": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the line that has to change, e.g. name=\"Login\""
+                        },
+                        "newLine": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "what it becomes, e.g. name=\"Sign in\""
+                        },
+                        "mode": {
+                          "type": "string",
+                          "description": "'scattered' (default) = the line is copied inside every card, fixed one at a time, one missed | 'central' = the line lives in ONE holder and the fix ripples out"
+                        },
+                        "cards": {
+                          "type": "number",
+                          "description": "how many dependent cards to draw, 4-12. The TRUE size of the fleet goes in countLabel."
+                        },
+                        "countLabel": {
+                          "type": "string",
+                          "maxLength": 20,
+                          "description": "the real fleet size, e.g. 50 test files"
+                        },
+                        "holder": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "central mode: the one file that owns the line, e.g. pages/login_page.py"
+                        },
+                        "fixLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "what the edit costs while it is happening, e.g. 50 files, by hand"
+                        },
+                        "doneLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the verdict once the ripple settles, e.g. 49 fixed. one missed."
+                        },
+                        "missIndex": {
+                          "type": "number",
+                          "description": "scattered only: index of the card you MISSED - it never turns green"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "the rename LANDS here. The grid, the cards and the old line are on screen by frame 38 regardless."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "FIXTURE_CREW"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "fixtureCrew": {
+                      "type": "object",
+                      "properties": {
+                        "testName": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the function that asks, e.g. test_successful_login"
+                        },
+                        "askFor": {
+                          "type": "string",
+                          "maxLength": 10,
+                          "description": "the argument name it asks for, e.g. page - this is what lands in the slot"
+                        },
+                        "stages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label <=14 (what the crew builds, e.g. browser), sub <=18 (what it is in plain words, e.g. the building), color?, atWord}. Built in order, torn down in REVERSE."
+                        },
+                        "crewLabel": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "who the crew is, e.g. pytest-playwright"
+                        },
+                        "bodyLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "what runs once the slot is filled, e.g. your 4 lines run"
+                        },
+                        "teardownLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the teardown caption, e.g. cleared, in reverse"
+                        },
+                        "handoffAtWord": {
+                          "type": "number",
+                          "description": "word the built thing travels UP into the slot. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i."
+                        },
+                        "teardownAtWord": {
+                          "type": "number",
+                          "description": "word the crew clears in reverse. Must be after handoffAtWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the function box, the empty slot and the crew rail are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "OVERLAY_BLOCK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "overlayBlock": {
+                      "type": "object",
+                      "properties": {
+                        "button": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "the target the pointer is trying to reach"
+                        },
+                        "overlayLabel": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "what the covering thing says, e.g. 'We use cookies'"
+                        },
+                        "overlayButton": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "the overlay's own button, e.g. 'Accept'"
+                        },
+                        "screenTitle": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the page heading behind the overlay"
+                        },
+                        "blockedNote": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "plain words for the bounce, e.g. 'the click hits the banner'"
+                        },
+                        "clearedNote": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "plain words for the landing, e.g. 'banner gone, click lands'"
+                        },
+                        "waitLabel": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "the pill shown while it waits, e.g. 'waiting...'"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "blockedAtWord": {
+                          "type": "number",
+                          "description": "word the pointer travels in and BOUNCES. Declared numeric because only ONE anchor-typed field is allowed; sync.mjs retimes any key matching /atword$/i anyway."
+                        },
+                        "clearedAtWord": {
+                          "type": "number",
+                          "description": "word the overlay clears and the click lands. Must be after blockedAtWord."
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the page, the button and the overlay are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BROWSER_STEP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "browserStep": {
+                      "type": "object",
+                      "properties": {
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 x {text = the code line (<=38), title = effect: goto|fill|click|check|assert (drives what appears on the page), label = plain-English for this step (<=26), detail = the element it acts on (<=16), sub = the value typed or the banner text (<=18), color?, atWord}. EVERY step needs atWord."
+                        },
+                        "url": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "address bar; middle-truncated if long"
+                        },
+                        "screenTitle": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the heading inside the page"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the browser and its empty form are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CODE_RUN"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "codeRun": {
+                      "type": "object",
+                      "properties": {
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-10 x {text = the code line (<=42, indentation preserved), detail = the plain-English note shown under the code while this line is lit (<=34), sub = what THIS line produces, appears in the result pane (<=30), label = result tag e.g. stdout/value/error (<=8), color?, atWord}. EVERY line needs atWord - stepping is the whole point."
+                        },
+                        "filename": {
+                          "type": "string",
+                          "maxLength": 26
+                        },
+                        "language": {
+                          "type": "string",
+                          "description": "py/js/ts/bash/json - colouring is shared with CODE_WINDOW via codeSyntax.ts"
+                        },
+                        "resultLabel": {
+                          "type": "string",
+                          "maxLength": 18,
+                          "description": "header over the result pane (default 'what happens')"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "one plain-words takeaway under the panes"
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - both panes and the dimmed code are on screen by frame 38 regardless of where this lands"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "QUIZ_CARD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "quiz": {
+                      "type": "object",
+                      "properties": {
+                        "question": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "readable in ~3s — shorten for video, the site can keep the long wording"
+                        },
+                        "options": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 × {text≤34, atWord?} — lettered A,B,C,D automatically"
+                        },
+                        "answerIndex": {
+                          "type": "number",
+                          "description": "0-based index of the correct option"
+                        },
+                        "why": {
+                          "type": "string",
+                          "maxLength": 70,
+                          "description": "one line, shown with the answer"
+                        },
+                        "revealAtWord": {
+                          "type": "number",
+                          "description": "word anchor for when the answer lights up — leave ~5s of narration silence before it. Declared numeric because the config allows only one 'anchor'-typed field; sync.mjs retimes ANY key matching /atword$/i, so it still becomes frame-exact."
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "THEATER_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "stage": {
+                      "type": "object",
+                      "properties": {
+                        "marquee": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the sign over the arch — usually the URL the curtain rises on"
+                        },
+                        "actors": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-5 × {label≤14, kind?:button|field|link|text, atWord?} — the elements standing on the stage"
+                        },
+                        "spotlightIndex": {
+                          "type": "number",
+                          "description": "0-based index of the actor the spotlight travels to and lights"
+                        },
+                        "curtain": {
+                          "type": "string",
+                          "description": "raising|up|falling — raising parts the curtains on entry, falling closes them at the end"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "one plain-words line under the boards"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

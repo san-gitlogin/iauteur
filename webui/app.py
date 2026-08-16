@@ -55,7 +55,36 @@ BACKGROUNDS = ["(theme default)", "aurora", "grid", "aurora-grid", "plain", "bok
 PRESETS = ["explainer", "listicle", "versus", "deep-dive", "documentary", "hype-launch"]
 AUDIENCES = ["general", "beginner", "dev"]
 FORMATS = ["both", "long", "shorts"]
-CHANNEL_DEFAULT = "YOUR CHANNEL"
+
+
+def _env_value(name: str, fallback: str) -> str:
+    """Read a NON-SECRET setting from the process env, else the gitignored .env.
+
+    Same precedence as scripts/ai/provider.py's load_env(): a real env var wins
+    over the file. Used for channel identity, which must not live in a tracked
+    file — this repo is public, so a fork would inherit the owner's brand.
+    """
+    val = os.environ.get(name)
+    if val:
+        return val.strip()
+    try:
+        text = (ROOT / ".env").read_text(encoding="utf-8")
+    except OSError:
+        return fallback
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, v = line.partition("=")
+        if key.strip() == name:
+            v = v.strip().strip('"').strip("'")
+            if v:
+                return v
+    return fallback
+
+
+CHANNEL_DEFAULT = _env_value("IAUTEUR_CHANNEL", "YOUR CHANNEL")
+LOGO_DEFAULT = _env_value("IAUTEUR_CHANNEL_LOGO", "img:channel_logo.png")
 
 # Edge-TTS voices. VOICES is only a FALLBACK (used if edge-tts isn't installed or
 # the network is down); the console fetches the FULL 320+ catalogue (every
@@ -547,8 +576,8 @@ def api_auto_run():
         "format": q.get("format") or "long",
         "preset": q.get("preset") or "explainer",
         "audience": q.get("audience") or "general",
-        "channel": q.get("channel") or "YOUR CHANNEL",
-        "logo": q.get("logo") or "img:channel_logo.png",
+        "channel": q.get("channel") or CHANNEL_DEFAULT,
+        "logo": q.get("logo") or LOGO_DEFAULT,
     }
     if q.get("notes"):
         cfg["notes"] = q.get("notes")

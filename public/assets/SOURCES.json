@@ -125,5 +125,42 @@
     "bytes": 706896,
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-26T04:54:58.145Z"
+  },
+  {
+    "file": "playwright_wordmark.svg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Playwright_Logo.svg",
+    "note": "Playwright wordmark from Wikimedia Commons (File:Playwright_Logo.svg). Licence: Apache-2.0, artist Microsoft, credit github.com/microsoft/playwright packages/recorder/public/playwright-logo.svg. Apache-2.0 sec.6 grants no trademark licence; used nominatively.",
+    "bytes": 11985,
+    "contentType": "image/svg+xml",
+    "fetchedAt": "2026-08-09T10:59:54.382Z"
+  },
+  {
+    "file": "playwright_logo_sq.svg",
+    "url": "(derived locally)",
+    "note": "Derived from playwright_wordmark.svg (Wikimedia Commons, Apache-2.0, artist Microsoft). Two changes, both recorded: (1) wrapped on a 952x952 square canvas with the wordmark centred at y=380, because AssetIcon renders img: assets in a square box with objectFit:cover and would otherwise crop a 5:1 wordmark; (2) the wordmark TEXT path fill #111111 recoloured to #FFFFFF for legibility on dark themes — this matches Playwright official dark-background usage on playwright.dev. Mask artwork and all mask colours unaltered.",
+    "bytes": 12020,
+    "contentType": "image/svg+xml",
+    "fetchedAt": "2026-08-09T11:01:33.840Z"
+  },
+  {
+    "file": "playwright_dojo_site.png",
+    "url": "https://san-gitlogin.github.io/playwright-dojo/",
+    "note": "screenshot for commentary — The Playwright Dojo course site (san-gitlogin.github.io/playwright-dojo) — the owner's own site, and the course these videos follow.",
+    "bytes": 189681,
+    "capturedAt": "2026-08-09T12:18:35.191Z"
+  },
+  {
+    "file": "the_internet_login.png",
+    "url": "https://the-internet.herokuapp.com/login",
+    "note": "screenshot for commentary — the-internet.herokuapp.com/login — the free automation practice site used by the Playwright Dojo lesson 5; captured for tutorial commentary",
+    "bytes": 46618,
+    "capturedAt": "2026-08-12T12:49:26.488Z"
+  },
+  {
+    "file": "the_internet_login_crop.png",
+    "url": "https://the-internet.herokuapp.com/login",
+    "note": "DERIVED from the_internet_login.png — cropped to the form area (crop=930:523:460:20) so the page content fills a 16:9 frame; no pixels altered. Screenshot used nominatively for tutorial commentary.",
+    "bytes": 29529,
+    "capturedAt": "2026-08-12T12:49:57.806Z"
   }
 ]

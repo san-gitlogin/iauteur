@@ -4,6 +4,39 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'RECORD_DRAFT'
+  | 'FROZEN_FRAME'
+  | 'ORDER_ROULETTE'
+  | 'WORKER_SPREAD'
+  | 'SEALED_BOX'
+  | 'SET_LOGIC'
+  | 'SEARCH_NARROW'
+  | 'STAGE_HANDOFF'
+  | 'BACKSTAGE_PHONE'
+  | 'SCOPE_LADDER'
+  | 'HAND_STAMP'
+  | 'SAD_PATHS'
+  | 'MAIL_ROOM'
+  | 'TRACE_SCRUB'
+  | 'FLAG_HARVEST'
+  | 'SHOT_SCOPE'
+  | 'PICKER_BYPASS'
+  | 'DIALOG_GATE'
+  | 'FRAME_BOUNDARY'
+  | 'TRAP_TRIGGER'
+  | 'INDEX_DRIFT'
+  | 'ROW_FILTER'
+  | 'CROWD_MATCH'
+  | 'RESPONSIBILITY_SPLIT'
+  | 'SAVED_SEARCH'
+  | 'RULE_TEST'
+  | 'CHANGE_RIPPLE'
+  | 'FIXTURE_CREW'
+  | 'OVERLAY_BLOCK'
+  | 'BROWSER_STEP'
+  | 'CODE_RUN'
+  | 'QUIZ_CARD'
+  | 'THEATER_STAGE'
   | 'INTRO_CARD'
   | 'REPO_CTA'
   | 'AUTO_RUN'
@@ -180,6 +213,500 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type RecordDraftScene = SceneCommon<'RECORD_DRAFT'> & { data: {
+    recordDraft: {
+      sourceLabel?: string;
+      outputLabel?: string;
+      actions: Array<Record<string, unknown>>;
+      verdict?: string;
+      verdictAtWord?: number;
+      missing?: string[];
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type FrozenFrameScene = SceneCommon<'FROZEN_FRAME'> & { data: {
+    frozenFrame: {
+      filename?: string;
+      lines: Array<Record<string, unknown>>;
+      screenTitle?: string;
+      pageItems?: string[];
+      inspectorLabel?: string;
+      stepLabel?: string;
+      stepAtWord?: number;
+      note?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type OrderRouletteScene = SceneCommon<'ORDER_ROULETTE'> & { data: {
+    orderRoulette: {
+      dependency: string;
+      runs: Array<Record<string, unknown>>;
+      producer?: string;
+      consumer?: string;
+      verdict?: string;
+      verdictAtWord?: number;
+      fix?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type WorkerSpreadScene = SceneCommon<'WORKER_SPREAD'> & { data: {
+    workerSpread: {
+      queueLabel?: string;
+      lanes: Array<Record<string, unknown>>;
+      items?: string[];
+      beforeLabel?: string;
+      afterLabel?: string;
+      afterAtWord?: number;
+      note?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type SealedBoxScene = SceneCommon<'SEALED_BOX'> & { data: {
+    sealedBox: {
+      boxLabel: string;
+      wallLabel?: string;
+      contents: string;
+      probes: Array<Record<string, unknown>>;
+      blockedNote?: string;
+      verdict?: string;
+      verdictAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type SetLogicScene = SceneCommon<'SET_LOGIC'> & { data: {
+    setLogic: {
+      op: string;
+      opNote?: string;
+      criteria?: string[];
+      candidates: Array<Record<string, unknown>>;
+      countLabel?: string;
+      verdict?: string;
+      verdictAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type SearchNarrowScene = SceneCommon<'SEARCH_NARROW'> & { data: {
+    searchNarrow: {
+      rootLabel: string;
+      links: Array<Record<string, unknown>>;
+      target: string;
+      targetAtWord?: number;
+      targetAction?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type StageHandoffScene = SceneCommon<'STAGE_HANDOFF'> & { data: {
+    stageHandoff: {
+      testName: string;
+      steps: Array<Record<string, unknown>>;
+      railLabel?: string;
+      stageLabel?: string;
+      handoffLabel?: string;
+      handoffAtWord?: number;
+      verdict?: string;
+      verdictAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type BackstagePhoneScene = SceneCommon<'BACKSTAGE_PHONE'> & { data: {
+    backstagePhone: {
+      question: string;
+      steps: Array<Record<string, unknown>>;
+      hop: string;
+      hopAtWord?: number;
+      hopTime?: string;
+      stageTime?: string;
+      stageLabel?: string;
+      hopLabel?: string;
+      verdict?: string;
+      verdictAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type ScopeLadderScene = SceneCommon<'SCOPE_LADDER'> & { data: {
+    scopeLadder: {
+      fixtures: Array<Record<string, unknown>>;
+      tests: string[];
+      runLabel?: string;
+      fileLabel?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type HandStampScene = SceneCommon<'HAND_STAMP'> & { data: {
+    handStamp: {
+      toll: string;
+      mode?: string;
+      tests: Array<Record<string, unknown>>;
+      stampLabel?: string;
+      doorLabel?: string;
+      totalLabel?: string;
+      flakyNote?: string;
+      settleAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type SadPathsScene = SceneCommon<'SAD_PATHS'> & { data: {
+    sadPaths: {
+      states: Array<Record<string, unknown>>;
+      rows?: string[];
+      emptyText?: string;
+      errorText?: string;
+      screenTitle?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type MailRoomScene = SceneCommon<'MAIL_ROOM'> & { data: {
+    mailRoom: {
+      pattern: string;
+      requests: Array<Record<string, unknown>>;
+      deskLabel?: string;
+      serverLabel?: string;
+      browserLabel?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type TraceScrubScene = SceneCommon<'TRACE_SCRUB'> & { data: {
+    traceScrub: {
+      steps: Array<Record<string, unknown>>;
+      snapshot: string[];
+      traceFile?: string;
+      openWith?: string;
+      consoleLabel?: string;
+      networkLabel?: string;
+      rewindAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type FlagHarvestScene = SceneCommon<'FLAG_HARVEST'> & { data: {
+    flagHarvest: {
+      flag: string;
+      command?: string;
+      tests: Array<Record<string, unknown>>;
+      artifacts: string[];
+      folder?: string;
+      quietNote?: string;
+      harvestAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type ShotScopeScene = SceneCommon<'SHOT_SCOPE'> & { data: {
+    shotScope: {
+      shots: Array<Record<string, unknown>>;
+      blocks: string[];
+      foldAfter?: number;
+      elementIndex?: number;
+      pageTitle?: string;
+      foldLabel?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type PickerBypassScene = SceneCommon<'PICKER_BYPASS'> & { data: {
+    pickerBypass: {
+      inputLabel: string;
+      pickerTitle?: string;
+      pickerItems?: string[];
+      files: string[];
+      call: string;
+      blockedNote?: string;
+      landedNote?: string;
+      pageTitle?: string;
+      handAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type DialogGateScene = SceneCommon<'DIALOG_GATE'> & { data: {
+    dialogGate: {
+      message: string;
+      kind?: string;
+      handler?: string;
+      handlerLine?: string;
+      trigger?: string;
+      rows: Array<Record<string, unknown>>;
+      pageTitle?: string;
+      outcome?: string;
+      knockAtWord?: number;
+      answerAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type FrameBoundaryScene = SceneCommon<'FRAME_BOUNDARY'> & { data: {
+    frameBoundary: {
+      outerTitle?: string;
+      innerTitle: string;
+      outerItems?: string[];
+      innerItems: Array<Record<string, unknown>>;
+      attempt: string;
+      crossing: string;
+      failNote?: string;
+      okNote?: string;
+      crossAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type TrapTriggerScene = SceneCommon<'TRAP_TRIGGER'> & { data: {
+    trapTrigger: {
+      listener: string;
+      trigger: string;
+      catcher?: string;
+      caught?: string;
+      caughtItems?: string[];
+      originLabel?: string;
+      mode?: string;
+      missNote?: string;
+      armAtWord?: number;
+      fireAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type IndexDriftScene = SceneCommon<'INDEX_DRIFT'> & { data: {
+    indexDrift: {
+      before: Array<Record<string, unknown>>;
+      after: string[];
+      target: string;
+      indexLabel?: string;
+      meaningLabel?: string;
+      causeLabel?: string;
+      brokenNote?: string;
+      heldNote?: string;
+      shuffleAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type RowFilterScene = SceneCommon<'ROW_FILTER'> & { data: {
+    rowFilter: {
+      condition: string;
+      rows: Array<Record<string, unknown>>;
+      control?: string;
+      baseLabel?: string;
+      actLabel?: string;
+      filterAtWord?: number;
+      actAtWord?: number;
+      pageTitle?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type CrowdMatchScene = SceneCommon<'CROWD_MATCH'> & { data: {
+    crowdMatch: {
+      query: string;
+      members: Array<Record<string, unknown>>;
+      readouts?: Array<Record<string, unknown>>;
+      countLabel?: string;
+      pickIndex?: number;
+      pickLabel?: string;
+      pickAtWord?: number;
+      strict?: boolean;
+      strictNote?: string;
+      pageTitle?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type ResponsibilitySplitScene = SceneCommon<'RESPONSIBILITY_SPLIT'> & { data: {
+    respSplit: {
+      leftLabel: string;
+      rightLabel: string;
+      lines: Array<Record<string, unknown>>;
+      leftSub?: string;
+      rightSub?: string;
+      pileLabel?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type SavedSearchScene = SceneCommon<'SAVED_SEARCH'> & { data: {
+    savedSearch: {
+      query: string;
+      elements: Array<Record<string, unknown>>;
+      matchIndex: number;
+      trigger?: string;
+      savedLabel?: string;
+      ranLabel?: string;
+      pageTitle?: string;
+      runAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type RuleTestScene = SceneCommon<'RULE_TEST'> & { data: {
+    ruleTest: {
+      rule: string;
+      cases: Array<Record<string, unknown>>;
+      kicker?: string;
+      okLabel?: string;
+      noLabel?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type ChangeRippleScene = SceneCommon<'CHANGE_RIPPLE'> & { data: {
+    changeRipple: {
+      line: string;
+      newLine: string;
+      mode?: string;
+      cards?: number;
+      countLabel?: string;
+      holder?: string;
+      fixLabel?: string;
+      doneLabel?: string;
+      missIndex?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type FixtureCrewScene = SceneCommon<'FIXTURE_CREW'> & { data: {
+    fixtureCrew: {
+      testName: string;
+      askFor: string;
+      stages: Array<Record<string, unknown>>;
+      crewLabel?: string;
+      bodyLabel?: string;
+      teardownLabel?: string;
+      handoffAtWord?: number;
+      teardownAtWord?: number;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type OverlayBlockScene = SceneCommon<'OVERLAY_BLOCK'> & { data: {
+    overlayBlock: {
+      button: string;
+      overlayLabel: string;
+      overlayButton?: string;
+      screenTitle?: string;
+      blockedNote?: string;
+      clearedNote?: string;
+      waitLabel?: string;
+      caption?: string;
+      color?: string;
+      blockedAtWord?: number;
+      clearedAtWord?: number;
+      atWord?: number;
+    };
+  } };
+
+export type BrowserStepScene = SceneCommon<'BROWSER_STEP'> & { data: {
+    browserStep: {
+      steps: Array<Record<string, unknown>>;
+      url?: string;
+      screenTitle?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type CodeRunScene = SceneCommon<'CODE_RUN'> & { data: {
+    codeRun: {
+      lines: Array<Record<string, unknown>>;
+      filename?: string;
+      language?: string;
+      resultLabel?: string;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type QuizCardScene = SceneCommon<'QUIZ_CARD'> & { data: {
+    quiz: {
+      question: string;
+      options: Array<Record<string, unknown>>;
+      answerIndex: number;
+      why?: string;
+      revealAtWord?: number;
+      atWord?: number;
+    };
+  } };
+
+export type TheaterStageScene = SceneCommon<'THEATER_STAGE'> & { data: {
+    stage: {
+      marquee?: string;
+      actors: Array<Record<string, unknown>>;
+      spotlightIndex?: number;
+      curtain?: string;
+      caption?: string;
+      atWord?: number;
+    };
+  } };
 
 export type IntroCardScene = SceneCommon<'INTRO_CARD'> & { data: {
     introCard: {
@@ -1778,6 +2305,39 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  RECORD_DRAFT: RecordDraftScene;
+  FROZEN_FRAME: FrozenFrameScene;
+  ORDER_ROULETTE: OrderRouletteScene;
+  WORKER_SPREAD: WorkerSpreadScene;
+  SEALED_BOX: SealedBoxScene;
+  SET_LOGIC: SetLogicScene;
+  SEARCH_NARROW: SearchNarrowScene;
+  STAGE_HANDOFF: StageHandoffScene;
+  BACKSTAGE_PHONE: BackstagePhoneScene;
+  SCOPE_LADDER: ScopeLadderScene;
+  HAND_STAMP: HandStampScene;
+  SAD_PATHS: SadPathsScene;
+  MAIL_ROOM: MailRoomScene;
+  TRACE_SCRUB: TraceScrubScene;
+  FLAG_HARVEST: FlagHarvestScene;
+  SHOT_SCOPE: ShotScopeScene;
+  PICKER_BYPASS: PickerBypassScene;
+  DIALOG_GATE: DialogGateScene;
+  FRAME_BOUNDARY: FrameBoundaryScene;
+  TRAP_TRIGGER: TrapTriggerScene;
+  INDEX_DRIFT: IndexDriftScene;
+  ROW_FILTER: RowFilterScene;
+  CROWD_MATCH: CrowdMatchScene;
+  RESPONSIBILITY_SPLIT: ResponsibilitySplitScene;
+  SAVED_SEARCH: SavedSearchScene;
+  RULE_TEST: RuleTestScene;
+  CHANGE_RIPPLE: ChangeRippleScene;
+  FIXTURE_CREW: FixtureCrewScene;
+  OVERLAY_BLOCK: OverlayBlockScene;
+  BROWSER_STEP: BrowserStepScene;
+  CODE_RUN: CodeRunScene;
+  QUIZ_CARD: QuizCardScene;
+  THEATER_STAGE: TheaterStageScene;
   INTRO_CARD: IntroCardScene;
   REPO_CTA: RepoCtaScene;
   AUTO_RUN: AutoRunScene;
@@ -1947,6 +2507,39 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | RecordDraftScene
+  | FrozenFrameScene
+  | OrderRouletteScene
+  | WorkerSpreadScene
+  | SealedBoxScene
+  | SetLogicScene
+  | SearchNarrowScene
+  | StageHandoffScene
+  | BackstagePhoneScene
+  | ScopeLadderScene
+  | HandStampScene
+  | SadPathsScene
+  | MailRoomScene
+  | TraceScrubScene
+  | FlagHarvestScene
+  | ShotScopeScene
+  | PickerBypassScene
+  | DialogGateScene
+  | FrameBoundaryScene
+  | TrapTriggerScene
+  | IndexDriftScene
+  | RowFilterScene
+  | CrowdMatchScene
+  | ResponsibilitySplitScene
+  | SavedSearchScene
+  | RuleTestScene
+  | ChangeRippleScene
+  | FixtureCrewScene
+  | OverlayBlockScene
+  | BrowserStepScene
+  | CodeRunScene
+  | QuizCardScene
+  | TheaterStageScene
   | IntroCardScene
   | RepoCtaScene
   | AutoRunScene

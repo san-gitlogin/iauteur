@@ -27,6 +27,164 @@ Show the default on every option. "Use defaults" fills the rest — but the user
 ## LAW 0c — COMPONENTS ARE CAST PER BEAT, NEVER ONE-SHOT
 Scene types are chosen via the CASTING BOARD, one beat at a time — never in a single pass from memory (measured result of one-shot: 81 of 137 components never used, picks biased to the top of the catalog). Flow: beat map → `node scripts/cast.mjs <beats.json>` → pick per beat with a stated reason into `topics/<slug>/casting.md` (≥2 ★NEVER-USED picks when honest fits exist) → only then write scenes. `node scripts/snap.mjs <url> <file> "<note>"` captures reference-page screenshots so the media components are usable. For long videos, cast per chapter with a fresh subagent per act reporting to the master. Full recipe: director skill §4.
 
+## LAW 0d — TEXT IS NOT A VISUAL; AN ANALOGY MUST BE DRAWN, NOT NAMED (2026-08-09)
+Styled words + narration is the WEAKEST beat you can ship — it makes the viewer build the picture,
+and they build it from their own life, not yours. Before casting any explanatory beat, answer three
+questions: (1) **would it still teach with the sound off?** (2) **could a viewer elsewhere in the
+world picture the wrong thing?** (3) **is anything moving, and is the motion the explanation?**
+Recorded defect: a course built on *browser = theatre, page = stage, locator = spotlight* rendered
+those as styled rows — but **"theatre" means a cinema hall in India and much of the world**, so the
+analogy silently inverts and every later lesson inherits the error. Any analogy resting on a
+cultural referent (theatre, baseball, diner, commute) must be DEPICTED — a live stage with curtains
+and a spotlight travelling to an actor — never merely captioned. When existing components can only
+render the idea as text, that is the trigger to BUILD one (LAW 6 + `component_authoring.md`), not to
+settle. Prefer animated, theme-token'd, voice-synced components over any static card. Full rule +
+the worked case: director skill `references/scene_library.md` → "A WORD ON SCREEN IS NOT A PICTURE".
+
+## LAW 0e — TEACH, DON'T NARRATE (owner verdict on a shipped course, 2026-08-13)
+For any TUTORIAL / course video, narrating *about* code is not teaching it. Measured failure across
+7 shipped episodes: 24 code beats, **not one explained a line**; a 12-line block ran at **1.0s per
+line**; output never sat beside the line that produced it; 46 sentences ran 22+ words in one breath;
+and `words × 9.5 + 30` left exactly **1 second** of silence per scene, so nothing was ever left on
+screen to look at. Binding rules:
+1. **INVENT FIRST, CAST SECOND.** The casting board opens by DESCRIBING the ideal component for the
+   beat, before looking at the library. Cast an existing type only if it matches ~90%; otherwise
+   build it (LAW 6 + `component_authoring.md`). Reuse from the previous episode needs a written
+   reason it is still the best shape — "it fits" is not one.
+2. **Code the viewer is asked to read is taught LINE BY LINE** — `CODE_RUN` (each line its own
+   anchor + a plain-English note + its result beside it), **≥4s per taught line**; the linter warns
+   below that. `CODE_WINDOW` is only for a block nobody is being asked to read.
+3. **Show the effect, not a description of it** — `BROWSER_STEP` (the page is built from the code
+   and visibly moves per line), `OVERLAY_BLOCK` (a click intercepted, bouncing off the thing on top).
+4. **Author silent look-at-it beats** (2-3s, no narration) when code or a picture lands. The
+   pipeline never creates them.
+5. **Write for the ear**: sentences ≤14 words (hard cap 18), everyday words, define a term the first
+   time in its own sentence, say the key sentence twice, address the viewer ("look at line three").
+6a. **RUNTIME HAS A FLOOR, NOT A CAP** (owner, 2026-08-16: *"the video length is becoming much
+   smaller than before, which is the opposite of what I asked"*). Measured regression: Act I ran
+   **5:02-6:06** (avg 5:20); EP08-11 fell to 4:50 → 3:52 → 3:16 → 3:16. Cause: the >=4s-per-line
+   rule plus the scene ceiling capped taught lines per scene at ~4, and I held the SCENE COUNT
+   constant instead of growing it — so total teaching shrank by 40%. **Budget SCENES, not words
+   per scene.** A long cut lands **>=5:00**; check the builder's pre-sync estimate BEFORE voicing
+   (sync lands within ~5% of it) and, if short, add the beats you were folding in — never padding.
+   Every lesson has more teachable ideas than the cut is using; go back to the source and count.
+6. **No runtime cap on a lesson**, and **no flat 16s cap on a beat** (amended 2026-08-15 —
+   *"our hard limitation on the seconds per beat is affecting how well we explain concepts"*).
+   The scene ceiling is now EARNED BY MOTION: a stepping scene gets 4s per anchored element up
+   to 30s; a static card still gets 16s. See the STATIC-SCENE GUARD in `scripts/lint-spec.mjs`
+   (mirrored by the settle `cap` in `sync.mjs`). Note `sync.mjs` never truncates below the real
+   audio, so a long read always played in full — it was the WARNING that was capping the teaching.
+7. **Judge twice before shipping**: as a school owner watching a teacher, and as an absolute
+   beginner. If the beginner cannot follow, it is a DEFECT.
+7b. **A SERIES TITLE FORMAT IS A CONTRACT.** Once a playlist establishes one, every later
+   episode keeps it. Recorded break: EP01-08 shipped `Playwright Python Tutorial #N — <context>`
+   and EP09-11 silently dropped the prefix, so the playlist stopped scanning as one course.
+   `meta.seo.title` is authored per episode — check it against the previous episode's, not against
+   what reads well alone. (Shorts keep their own convention: `<hook> #playwright #python`.)
+8. **Concept beats get a PURPOSE-BUILT component — reuse is the defect** (owner, 2026-08-15:
+   *"I am bored seeing all the same components again and again when you are explaining important
+   concepts"*). Named offenders: `STICKY_NOTE` (27 uses), `REVEAL`, `SPLIT_PATHS`, `ICON_GRID` —
+   the generic cards that got cast for the definition, the memory hook and the comparison in
+   every single episode. Exempt: structural furniture (`HOOK`, `TITLE_CARD`, `CHAPTER`, `RECAP`,
+   `OUTRO_CTA`, `QUIZ_CARD`) and `CODE_RUN`/`BROWSER_STEP`, which rule 2/3 mandate. Expect
+   **2–4 new components per episode**, not zero. A card that only PRINTS the idea is not a
+   visual — build the one that ENACTS it (RULE_TEST judges the rule; SAVED_SEARCH shows the
+   un-run query; RESPONSIBILITY_SPLIT files the real lines).
+Full case + the measurements: `docs/PLAYWRIGHT_DOJO_SERIES.md` §4c.
+
+## LAW 0f — WRITE FOR A MOUTH, NOT A PAGE (owner verdict, 2026-08-16)
+Owner: *"You often use IT, and you speak about something that's on the screen, but you forget
+what the context is about, and you start speaking in a very AI manner. Humans are not adaptable
+to that."* Measured across the shipped Playwright course: **0 contractions in 900+ words, every
+episode**; "And" opening 11-15 sentences in a single script; sentence lengths clustered within
+±3 words of the mean. That is a machine reading a manual, and no amount of good visuals rescues it.
+
+A voiceover is SPOKEN. Before any spec goes to `voiceover.py`, the narration must pass as
+something a person would actually say out loud:
+
+1. **NAME THE SUBJECT.** Never "it does X" when the screen holds a page, a locator and a file —
+   say *the locator*, *that zip*, *your test*, *Playwright*. The listener has no scrollback.
+2. **CONTRACTIONS.** "you'll", "here's", "don't", "that's". edge-tts speaks them perfectly.
+   Written-out forms are the single loudest tell.
+3. **BURSTINESS.** Swing hard: three-word jabs next to 25-word runs. *"That's it."* then a long
+   winding clause. Even metering is what makes a script sound generated.
+4. **VARY THE WAY IN.** Not every sentence starts "And" / "So" / "The". Open on an adverb, a
+   question, a fragment, a dependent clause, a mid-thought observation.
+5. **ASIDES AND QUIRKS.** Em-dash asides, parentheticals, a rhetorical question, the occasional
+   deliberate fragment. Small redundancies are human. *"Be honest — have you ever watched one?"*
+6. **CONCRETE OVER GENERIC.** "three in the morning", "a hundred green tests", "one crime scene
+   photo" — not "in certain situations" or "various artifacts".
+7. **NEVER FORCE IT.** Sprinkled slang reads worse than plain prose. The test is simple: read the
+   scene aloud. If you would not say the sentence to a colleague, rewrite it.
+
+**This is enforced.** `scripts/lint-spec.mjs` runs a HUMAN-VOICE GUARD over the whole spec —
+sentence-length standard deviation, pronoun-opener share, repeated openers, contraction rate — and
+warns on each. Warnings are rejections. Check the narration BEFORE voicing; re-voicing costs a
+full build → voiceover → sync loop.
+
+**Note on LAW 0e rule 5:** the "<=14 words" cap was written to stop 22-word unbroken breath
+chains. It caps a CLAUSE, not a sentence. A 25-word sentence with commas, an em-dash and a natural
+breath point is good spoken English; a 15-word sentence with no pause is not.
+
+## LAW 0g — THE FIRST THIRTY SECONDS ARE A CONTRACT (owner, 2026-08-16)
+Owner, twice: *"In all videos, greeting is missing… saying welcome to <channel>, then asking some
+questions and answering them with what we're gonna see today."* Then, sharpening it: *"you must
+look at how latest videos start, how they introduce suspense, how they increase curiosity, how they
+make sure the watcher relates to what they knew, or what they anticipated by clicking the video by
+looking at the title or thumbnail. Introducing doesn't always mean 'Hi welcome to channel name' —
+it must be absolutely different when and wherever possible."*
+
+Both are right, and the second is the important one. **A greeting is not an intro. The intro is a
+contract with a person who clicked something.** They arrived carrying an expectation set by your
+title and thumbnail, and the opening either confirms that expectation or loses them. Nineteen
+shipped episodes opened cold with no welcome AND no acknowledgement of why the viewer clicked.
+
+### The three phases (this is the shape, every episode)
+
+| Phase | Runs | Job |
+|---|---|---|
+| **1 · Confirm the click** | 0–5s | Continue the *exact* promise of the title and thumbnail, in the viewer's own words. They must know within a breath that they are in the right place. No welcome, no channel name, no logo — leading with branding is the single most-documented way to lose this window. |
+| **2 · Promise the payoff** | 5–15s | The one concrete thing they get for staying. This is where the greeting lives, woven in — an aside, not an announcement. |
+| **3 · Open the loop** | 15–30s | An information gap that only closes by watching: a question posed and deliberately not yet answered, a result shown before its method, a claim that sounds wrong. |
+
+### The rules
+
+1. **Echo the click promise in scene 1.** If the thumbnail says `NO BROWSER` and the title says
+   *API testing with no browser*, the first sentence is about a test running with no browser. A
+   viewer who cannot tell in five seconds that this is the video they clicked, leaves.
+2. **Create curiosity, then SATISFY it.** That is the whole difference between a click promise and
+   clickbait — both open a gap, only one closes it. Every loop opened in the first 30s must be
+   paid off in the body, and the RECAP is where you prove you did.
+3. **Relate to what they already know.** "You already know this one, actually" · "Remember the
+   fresh context from episode eight?" · "You've hit this and you know you have." Anchoring the new
+   thing to something they own is what makes a beginner feel capable instead of lost.
+4. **The greeting is never a formula.** "Hi, welcome to <channel>" 22 times is a jingle, and a
+   playlist binge makes it unbearable. Rotate the *form*, not just the words: a welcome; a
+   mid-thought aside that happens to name the channel; a question thrown at the viewer; a
+   confession; picking up a thread from last episode. **Some episodes should not greet at all** —
+   if the cold open is strong and the loop is tight, forcing a welcome in damages it.
+5. **Name the channel from `brand.channel`**, never a hardcoded string in shared code. The channel
+   name is local content (see the brand-identity note under STANDING DEFAULTS).
+6. **Never force enthusiasm.** "Let's gooo" reads worse than plain warmth. LAW 0f's test still
+   governs: would you say this sentence out loud, to a colleague?
+
+**Enforced.** `scripts/lint-spec.mjs` runs a GREETING GUARD on long specs: it REJECTS a welcome or
+channel name in scene 1, warns when the opening never echoes the title/thumbnail promise, warns
+when no question is posed in the opening beats (no loop opened), and warns on a second greeting.
+
+## LAW 0h — THE BACKGROUND MUST NOT MOVE (owner, 2026-08-16)
+Owner, on a pulsing ring shipped behind four episodes: *"I don't like the circular animation going
+on in the background, it's very distracting."* It was added purely to satisfy a "shift the
+background once per Act" plan — a plan is not a reason to put a large moving object behind the
+thing the viewer is meant to read.
+
+**Before choosing a background for any teaching video, ask whether it MOVES.** If it does, it is
+competing with the lesson, and the answer is no. Ambient gradients and still grids are fine;
+pulsing, sweeping, orbiting and drifting are not. Named offender: **`grid-pulse`**. Visual variety
+between consecutive episodes comes from the scene mix and the purpose-built components — which is
+where it actually lives — not from animating the wallpaper. `brand.background` is metadata: fixing
+it is an edit to the spec plus a re-render, with no re-voice and no re-sync.
+
 ## LAW 0b — TOPIC ASSETS ARE FETCHED, NOT SKIPPED
 When the topic names a company / product / person / place, gather its art DURING authoring — don't ship icon-only videos:
 1. Brand logos: verify + use `si:<slug>` (`node -e "const si=require('simple-icons');console.log(Object.keys(si).filter(k=>/name/i.test(k)))"`).

@@ -25,7 +25,7 @@ On Windows, prefix Python with `PYTHONIOENCODING=utf-8` or the seals crash on `�
 | Path | What |
 |---|---|
 | `topics/<slug>/long.json` + `shorts.json` | one folder per video. **Gitignored** — local content, not repo code |
-| `src/scenes/` | the 162 scene components |
+| `src/scenes/` | the 195 scene components |
 | `src/designs/<pack>/` | 30 design packs (layout/motion overrides) |
 | `src/themes.ts` | 42 themes (38 dark + 4 light) |
 | `scripts/lib/manifest.mjs` | **the single source of truth** for every component's data contract + a valid `example` |
@@ -43,6 +43,36 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 ```
 
 ## Recent work
+
+### 2026-08-16 — a 19-episode course shipped, and five laws came out of it
+
+Produced a full tutorial course end to end (spec → voice → sync → render → upload kit, ×19, plus
+19 shorts). The engine changes are in `CHANGELOG.md`; what matters for the next session is **why**
+they exist, because each was a measured failure first:
+
+| Law | The measurement that produced it |
+|---|---|
+| **0e** teach, don't narrate | 24 code beats across 7 episodes, *not one* explained a line; a 12-line block at 1.0s/line |
+| **0f** write for a mouth | **0 contractions in 900+ words, every episode**; "And" opening 11–15 sentences per script |
+| **0g** the opening is a contract | 19 episodes opened with no greeting AND no echo of the title/thumbnail the viewer clicked |
+| **0h** the background must not move | a pulsing ring shipped behind 4 episodes to satisfy a "vary the look per act" plan |
+| **0e r.6a** runtime floor | episodes slid 5:20 avg → 3:16 because the scene COUNT was held flat |
+
+**The transferable lesson: a rule written only in prose gets forgotten by the next session.** Every
+one of the above has a guard in `lint-spec.mjs` now, and that is why they will hold. When you learn
+something the hard way here, the work is not done until it is machine-checked.
+
+**Library 162 → 195 scene types.** 33 built for this course, all gated + proofed MIN/MAX/MIX ×
+both aspects × two design packs. The build-vs-reuse test that produced them is **semantic**: ask
+what a component ASSERTS about the world, not what it looks like. Two near-misses worth knowing —
+`FRAME_BOUNDARY` (blocked until an explicit crossing call) must not stand in for shadow DOM (needs
+no such call), and `TRACE_SCRUB` (a recording of a finished run) must not stand in for
+`page.pause()` (a live run you can still touch). Both would have taught the opposite of the truth.
+
+**`gen-upload-kit.mjs` now also emits `out/upload-shorts.md`** — shorts were rendering with no
+publishing metadata at all, because the generator only ever read `long.json`.
+
+
 
 ### 2026-07-26 · contributor-facing docs (public repo, part 2)
 The repo is public, so a stranger now has to be able to get in. Added:

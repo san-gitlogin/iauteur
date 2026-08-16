@@ -3,6 +3,7 @@
 // Usage: node scripts/new-topic.mjs <kebab-slug> "Topic title"
 import fs from 'node:fs';
 import {execSync} from 'node:child_process';
+import {channelName, channelLogo} from './lib/env.mjs';
 
 const [slug, ...titleParts] = process.argv.slice(2);
 const title = titleParts.join(' ') || slug;
@@ -18,7 +19,7 @@ if (fs.existsSync(dir)) {
 fs.mkdirSync(`${dir}/out`, {recursive: true});
 const stub = (format) => ({
   meta: {topic: title, format, fps: 30, onePayoff: 'TODO', openLoop: 'TODO', analogy: 'TODO'},
-  brand: {theme: 'CHOOSE_DARK_THEME', channel: 'YOUR CHANNEL', logo: 'img:channel_logo.png'},
+  brand: {theme: 'CHOOSE_DARK_THEME', channel: channelName(), logo: channelLogo()},
   ...(format === 'long' ? {thumbnail: {title: 'TODO', badge: 'TODO', asset: 'lucide:sparkles'}} : {cover: {title: 'TODO', badge: 'TODO', asset: 'lucide:sparkles', frames: 2}}),
   scenes: [],
 });

@@ -170,10 +170,76 @@ import {ComponentLab} from './scenes/ComponentLab';
 import {AutoRun} from './scenes/AutoRun';
 import {RepoCta} from './scenes/RepoCta';
 import {IntroCard} from './scenes/IntroCard';
+import {TheaterStage} from './scenes/TheaterStage';
+import {QuizCard} from './scenes/QuizCard';
+import {CodeRun} from './scenes/CodeRun';
+import {BrowserStep} from './scenes/BrowserStep';
+import {OverlayBlock} from './scenes/OverlayBlock';
+import {FixtureCrew} from './scenes/FixtureCrew';
+import {ChangeRipple} from './scenes/ChangeRipple';
+import {RuleTest} from './scenes/RuleTest';
+import {SavedSearch} from './scenes/SavedSearch';
+import {ResponsibilitySplit} from './scenes/ResponsibilitySplit';
+import {CrowdMatch} from './scenes/CrowdMatch';
+import {RowFilter} from './scenes/RowFilter';
+import {IndexDrift} from './scenes/IndexDrift';
+import {TrapTrigger} from './scenes/TrapTrigger';
+import {FrameBoundary} from './scenes/FrameBoundary';
+import {DialogGate} from './scenes/DialogGate';
+import {PickerBypass} from './scenes/PickerBypass';
+import {ShotScope} from './scenes/ShotScope';
+import {FlagHarvest} from './scenes/FlagHarvest';
+import {TraceScrub} from './scenes/TraceScrub';
+import {MailRoom} from './scenes/MailRoom';
+import {SadPaths} from './scenes/SadPaths';
+import {HandStamp} from './scenes/HandStamp';
+import {ScopeLadder} from './scenes/ScopeLadder';
+import {BackstagePhone} from './scenes/BackstagePhone';
+import {StageHandoff} from './scenes/StageHandoff';
+import {SearchNarrow} from './scenes/SearchNarrow';
+import {SetLogic} from './scenes/SetLogic';
+import {SealedBox} from './scenes/SealedBox';
+import {WorkerSpread} from './scenes/WorkerSpread';
+import {OrderRoulette} from './scenes/OrderRoulette';
+import {FrozenFrame} from './scenes/FrozenFrame';
+import {RecordDraft} from './scenes/RecordDraft';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  RECORD_DRAFT: RecordDraft,
+  FROZEN_FRAME: FrozenFrame,
+  ORDER_ROULETTE: OrderRoulette,
+  WORKER_SPREAD: WorkerSpread,
+  SEALED_BOX: SealedBox,
+  SET_LOGIC: SetLogic,
+  SEARCH_NARROW: SearchNarrow,
+  STAGE_HANDOFF: StageHandoff,
+  BACKSTAGE_PHONE: BackstagePhone,
+  SCOPE_LADDER: ScopeLadder,
+  HAND_STAMP: HandStamp,
+  SAD_PATHS: SadPaths,
+  MAIL_ROOM: MailRoom,
+  TRACE_SCRUB: TraceScrub,
+  FLAG_HARVEST: FlagHarvest,
+  SHOT_SCOPE: ShotScope,
+  PICKER_BYPASS: PickerBypass,
+  DIALOG_GATE: DialogGate,
+  FRAME_BOUNDARY: FrameBoundary,
+  TRAP_TRIGGER: TrapTrigger,
+  INDEX_DRIFT: IndexDrift,
+  ROW_FILTER: RowFilter,
+  CROWD_MATCH: CrowdMatch,
+  RESPONSIBILITY_SPLIT: ResponsibilitySplit,
+  SAVED_SEARCH: SavedSearch,
+  RULE_TEST: RuleTest,
+  CHANGE_RIPPLE: ChangeRipple,
+  FIXTURE_CREW: FixtureCrew,
+  OVERLAY_BLOCK: OverlayBlock,
+  BROWSER_STEP: BrowserStep,
+  CODE_RUN: CodeRun,
+  QUIZ_CARD: QuizCard,
+  THEATER_STAGE: TheaterStage,
   INTRO_CARD: IntroCard,
   REPO_CTA: RepoCta,
   AUTO_RUN: AutoRun,

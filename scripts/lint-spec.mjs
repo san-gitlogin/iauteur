@@ -123,7 +123,7 @@ if (n >= 8) {
   const cap = Math.max(4, Math.ceil(n * 0.35));
   for (const [st, c] of Object.entries(counts))
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
-  const DYNAMIC = ['INTRO_CARD', 'REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['RECORD_DRAFT', 'FROZEN_FRAME', 'ORDER_ROULETTE', 'WORKER_SPREAD', 'SEALED_BOX', 'SET_LOGIC', 'SEARCH_NARROW', 'STAGE_HANDOFF', 'BACKSTAGE_PHONE', 'SCOPE_LADDER', 'HAND_STAMP', 'SAD_PATHS', 'MAIL_ROOM', 'TRACE_SCRUB', 'FLAG_HARVEST', 'SHOT_SCOPE', 'PICKER_BYPASS', 'DIALOG_GATE', 'FRAME_BOUNDARY', 'TRAP_TRIGGER', 'INDEX_DRIFT', 'ROW_FILTER', 'CROWD_MATCH', 'RESPONSIBILITY_SPLIT', 'SAVED_SEARCH', 'RULE_TEST', 'CHANGE_RIPPLE', 'FIXTURE_CREW', 'OVERLAY_BLOCK', 'BROWSER_STEP', 'CODE_RUN', 'QUIZ_CARD', 'THEATER_STAGE', 'INTRO_CARD', 'REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -139,13 +139,6 @@ if (n >= 8) {
   if (specialist < needSpec)
     W(`COMFORT-ZONE PALETTE: only ${specialist} of ${n} scenes reach beyond the core editorial set (need ≥${needSpec}). Match the SHAPE of each beat to a specialist component — an MoE model → NEURAL_NET/GRID_ARRAY, a date → TIMELINE, brand-vs-brand → LOGO_VERSUS, a flow → SANKEY/DIAGRAM, a market → TICKER_TAPE… (scene_library.md §REACH-FOR). Treat this warning as a rejection when authoring.`);
 }
-// STATIC-SCENE GUARD (2026-07-17) — a 20-30s narration parked on ONE component
-// is the #1 cause of "nothing is happening on screen". Split long beats.
-for (const s of spec.scenes ?? []) {
-  if ((s.durationFrames ?? 0) > 480)
-    W(`${s.id}: ${(s.durationFrames / 30).toFixed(1)}s on a single ${s.type} — scenes over ~16s feel static. Split the narration into two beats with different components.`);
-}
-
 const ids = new Set();
 if (spec.meta?.format === 'long' && (!Array.isArray(spec.meta?.topicAxes) || spec.meta.topicAxes.length < 2))
   W('meta.topicAxes has <2 strategy axes (entity-novelty/economic-pain/sovereignty/tribal-conflict) — historically this profile lands ~50-300 views; see channel_playbook.md §1');
@@ -170,6 +163,151 @@ const collectAnchors = (obj, out = []) => {
 // Anchors live on the scene's DATA and on its scene-level layers (stepRail, pip).
 // Checking only `data` let a scene-level anchor point past the narration unnoticed.
 const sceneAnchorRoot = (s) => ({data: s.data, stepRail: s.stepRail, pip: s.pip});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HUMAN-VOICE GUARD (owner, 2026-08-16). Recorded complaint: *"you often use IT, and
+// you speak about something that's on the screen, but you forget what the context is
+// about, and you start speaking in a very AI manner. Humans are not adaptable to that."*
+//
+// A voiceover is SPOKEN. Flat, evenly-measured, pronoun-heavy prose reads as a machine
+// reading a manual, and no amount of good visuals rescues it. These four measures are
+// the ones that separate written-for-the-eye from said-out-loud, and every one of them
+// is cheap to fix in the builder. They are WARNINGS (this series treats them as
+// rejections) and they are measured over the WHOLE spec, never per scene — a chapter
+// card is meant to be four words long.
+// ─────────────────────────────────────────────────────────────────────────────
+// GREETING GUARD (LAW 0g, owner 2026-08-16: *"in all videos, greeting is missing"*).
+//
+// The fix is a greeting, but the ORDER is the whole rule. Retention research is blunt:
+// creators lose viewers in the first 30s precisely by opening with greeting + channel
+// branding, and tutorials retain best when the payoff comes first and the welcome
+// second. So scene 1 stays a cold open, and the greeting lands in the beats just after
+// it — usually folded into TITLE_CARD, costing no extra scene.
+const GREET = /\b(welcome (?:back )?(?:to|along)?|hello|hey there|good to see you|glad you(?:'re| are) here)\b/i;
+const longFmt = (spec.meta?.format ?? 'long') === 'long';
+const chan = String(spec.brand?.channel ?? '').trim();
+if (longFmt && (spec.scenes ?? []).length >= 6) {
+  const nar = (i) => String(spec.scenes[i]?.narration ?? '');
+  const s1 = nar(0);
+  // Leading with branding is the documented retention killer, so it is an ERROR.
+  if (GREET.test(s1))
+    E(`s01: the HOOK greets the viewer — a cold open must name the PAIN first. Move the welcome to scene 2-3 (LAW 0g).`);
+  if (chan && s1.toLowerCase().includes(chan.toLowerCase()))
+    E(`s01: the HOOK says the channel name — leading with branding is the single most-documented way to lose the first 30 seconds. Move it to scene 2-3 (LAW 0g).`);
+  // ...but having NO greeting anywhere is the thing the owner actually complained about.
+  const opening = [1, 2, 3].map(nar).join(' ');
+  const greeted = GREET.test(opening) || (chan && opening.toLowerCase().includes(chan.toLowerCase()));
+  if (!greeted)
+    W(`NO GREETING: scenes 2-4 never welcome the viewer or name the channel. After the cold open, weave one in as an aside — and vary the form between episodes (LAW 0g).`);
+  // A jingle repeated every episode reads as one on a binge; twice in ONE spec is worse.
+  const welcomes = (spec.scenes ?? []).filter((s) => GREET.test(String(s.narration ?? ''))).length;
+  if (welcomes > 1)
+    W(`GREETED ${welcomes} TIMES: one welcome per episode. A second reads as a jingle.`);
+
+  // CLICK-PROMISE CONGRUENCE. The viewer arrived carrying an expectation set by the
+  // title and the thumbnail. If the opening does not obviously continue it, they cannot
+  // tell this is the video they clicked, and they leave. Checked by looking for the
+  // distinctive words of the title/thumbnail in the first three narrations.
+  const STOP = new Set(['playwright', 'python', 'tutorial', 'the', 'and', 'for', 'with', 'your',
+                        'what', 'why', 'how', 'that', 'this', 'from', 'into', 'when', 'once',
+                        'every', 'you', 'not', 'but', 'all', 'its', 'a', 'an', 'of', 'in', 'on']);
+  const keyWords = (str) => String(str ?? '')
+    .toLowerCase().split(/[^a-z0-9_]+/).filter((w) => w.length > 3 && !STOP.has(w));
+  const promise = [...new Set([...keyWords(spec.meta?.seo?.title), ...keyWords(spec.thumbnail?.title)])];
+  if (promise.length) {
+    const openLower = (s1 + ' ' + opening).toLowerCase();
+    const hit = promise.filter((w) => openLower.includes(w));
+    if (!hit.length)
+      W(`CLICK PROMISE UNMET: the opening beats never mention ${promise.slice(0, 4).map((w) => `"${w}"`).join(', ')} — the words the viewer clicked. Echo the title/thumbnail promise in the first breath, or they cannot tell this is the video they picked (LAW 0g).`);
+  }
+
+  // AN OPEN LOOP IS A QUESTION. Phase 3 of the opening is an information gap the body
+  // closes. A spec that opens with only statements has nothing pulling the viewer through.
+  const openingAll = [0, 1, 2, 3].map(nar).join(' ');
+  if (!/\?/.test(openingAll))
+    W(`NO OPEN LOOP: the first four beats never ask anything. Pose a question the body answers — curiosity you then SATISFY is what separates a click promise from clickbait (LAW 0g).`);
+}
+
+// MOVING-BACKGROUND GUARD (LAW 0h, owner 2026-08-16 on a pulsing ring shipped behind
+// four episodes: *"very distracting"*). A background that moves competes with the thing
+// the viewer is meant to read. Variety belongs in the scene mix, not the wallpaper.
+const MOVING_BG = ['grid-pulse', 'ripple', 'wave', 'matrix-rain', 'ember'];
+if (MOVING_BG.includes(String(spec.brand?.background ?? '')))
+  W(`MOVING BACKGROUND "${spec.brand.background}": a background that animates sits BEHIND the teaching and competes with it. Use a still look (grid, aurora, plain, gradient) and get your variety from the scene mix (LAW 0h).`);
+
+const narrations = (spec.scenes ?? []).map((s) => (s.narration ?? '').trim()).filter(Boolean);
+if (narrations.length >= 6) {
+  const allText = narrations.join(' ');
+  const sentences = allText.split(/(?<=[.!?])\s+/).map((x) => x.trim()).filter((x) => x.split(/\s+/).length > 1);
+  const lens = sentences.map((x) => x.split(/\s+/).length);
+  const wordTotal = lens.reduce((a, b) => a + b, 0);
+
+  // 1. BURSTINESS. Humans swing between three-word jabs and long winding clauses.
+  //    A machine holds a steady 12-16 every time. Standard deviation catches it.
+  if (lens.length >= 8) {
+    const mean = wordTotal / lens.length;
+    const sd = Math.sqrt(lens.reduce((a, l) => a + (l - mean) ** 2, 0) / lens.length);
+    if (sd < 4.5)
+      W(`FLAT NARRATION: sentence lengths vary by only ±${sd.toFixed(1)} words (mean ${mean.toFixed(1)}). Real speech swings — mix 3-5 word jabs with 25+ word runs. Read it aloud; if it sounds metered, it is.`);
+  }
+
+  // 2. NAKED PRONOUN SUBJECTS. "It does X" — WHAT does X? On a screen full of a page,
+  //    a locator and a file, "it" is genuinely ambiguous, and the owner called this out
+  //    by name. Naming the subject is also what makes a sentence sound spoken.
+  const naked = sentences.filter((x) => /^(It|This|That|They|These|Those)\b/i.test(x)).length;
+  if (sentences.length && naked / sentences.length > 0.12)
+    W(`PRONOUN FOG: ${naked} of ${sentences.length} sentences open with It/This/That. Name the thing — "the locator", "that zip file", "your test" — or the listener loses the subject.`);
+
+  // 3. REPEATED OPENERS. "So …" three scenes running is the tell of a template.
+  const openers = {};
+  for (const x of sentences) {
+    const w0 = (x.split(/\s+/)[0] || '').toLowerCase().replace(/[^a-z']/g, '');
+    if (w0) openers[w0] = (openers[w0] ?? 0) + 1;
+  }
+  for (const [w0, n0] of Object.entries(openers)) {
+    if (n0 >= 5 && n0 / sentences.length > 0.1)
+      W(`REPEATED OPENER: ${n0} sentences begin with "${w0}". Vary the way in — an adverb, a question, a fragment, a dependent clause.`);
+  }
+
+  // 4. CONTRACTIONS. Nobody says "it is not" out loud. Zero contractions across a whole
+  //    script is the single loudest AI tell, and edge-tts speaks them perfectly well.
+  const contractions = (allText.match(/\b\w+['’](t|s|re|ll|ve|d|m)\b/gi) ?? []).length;
+  if (wordTotal >= 250 && contractions / wordTotal < 0.012)
+    W(`NO CONTRACTIONS: ${contractions} in ${wordTotal} words. Say "you'll", "it's", "don't", "here's" — written-out forms sound like a manual being read aloud.`);
+}
+
+// STATIC-SCENE GUARD (2026-07-17) — a 20-30s narration parked on ONE component is
+// the #1 cause of "nothing is happening on screen".
+//
+// AMENDED 2026-08-15, owner's direction: "our hard limitation on the seconds for the
+// content per beat is affecting how well we explain concepts." The flat 16s ceiling
+// assumed a scene shows ONE thing and then just sits there. A STEPPING component does
+// not: CODE_RUN lights a new line, a new plain-English note and a new result every few
+// seconds; BROWSER_STEP moves the page per step; CHANGE_RIPPLE crawls a repair card by
+// card. Combined with the >=4s-per-taught-line rule (LAW 0e), a flat 16s capped a code
+// beat at FOUR lines and forced real explanation out of the episode — the exact defect
+// LAW 0e exists to kill.
+//
+// So the ceiling is now EARNED BY MOTION. Every distinct internal anchor past the first
+// buys 4 more seconds, to a hard stop of 30s. A genuinely static card still gets 16s,
+// which is what the original guard was written for. Note this is a linter ceiling only:
+// sync.mjs never truncates a scene below its real audio length (`base`), so a long read
+// always plays in full — what this governs is whether the author gets warned.
+const STATIC_CEIL = 480;   // 16s — one thing on screen, not moving
+const HARD_CEIL = 900;     // 30s — nothing earns more than this
+const sceneCeiling = (s) => {
+  const steps = new Set(collectAnchors(sceneAnchorRoot(s))).size;
+  if (steps < 2) return STATIC_CEIL;
+  // 4s per stepped element + a 4s head/tail, never below the static ceiling
+  return Math.max(STATIC_CEIL, Math.min(HARD_CEIL, 120 * steps + 120));
+};
+for (const s of spec.scenes ?? []) {
+  const ceil = sceneCeiling(s);
+  if ((s.durationFrames ?? 0) > ceil) {
+    const steps = new Set(collectAnchors(sceneAnchorRoot(s))).size;
+    W(`${s.id}: ${(s.durationFrames / 30).toFixed(1)}s on a single ${s.type} with ${steps} stepped element(s) — that earns ${(ceil / 30).toFixed(0)}s. Either step something more (each anchored element buys 4s) or split the narration into two beats.`);
+  }
+}
 const collectImgAssets = (obj, out = []) => {
   if (typeof obj === 'string') {
     if (obj.startsWith('img:')) out.push(obj.slice(4));
@@ -1279,6 +1417,1038 @@ for (const s of spec.scenes ?? []) {
     if (len(d.code.filename) > 28) E(`${id}: code filename > 28 chars`);
     if (len(d.code.runLabel) > 36) E(`${id}: code runLabel > 36 chars`);
   }
+  if (d.codeRun) {
+    const cr = d.codeRun;
+    const rl = cr.lines ?? [];
+    if (rl.length < 2) E(`${id}: CODE_RUN needs >=2 lines`);
+    if (rl.length > 10) E(`${id}: CODE_RUN max 10 lines (got ${rl.length}) — split the beat`);
+    for (const l of rl) {
+      // budgets sized to the NARROWEST container (vertical, 980px pane, mono 25px)
+      if (len(l.text) > 42) E(`${id}: CODE_RUN line "${(l.text ?? '').slice(0, 24)}…" > 42 chars`);
+      if (len(l.detail) > 34) E(`${id}: CODE_RUN note "${(l.detail ?? '').slice(0, 24)}…" > 34 chars`);
+      if (len(l.sub) > 30) E(`${id}: CODE_RUN result "${(l.sub ?? '').slice(0, 24)}…" > 30 chars`);
+      if (len(l.label) > 8) E(`${id}: CODE_RUN result tag "${l.label}" > 8 chars`);
+      checkColor(id, 'codeRun.line.color', l.color);
+    }
+    if (len(cr.filename) > 26) E(`${id}: CODE_RUN filename > 26 chars`);
+    if (len(cr.resultLabel) > 18) E(`${id}: CODE_RUN resultLabel > 18 chars`);
+    if (len(cr.caption) > 40) E(`${id}: CODE_RUN caption > 40 chars`);
+    checkColor(id, 'codeRun.color', cr.color);
+    // The POINT of this component is stepping. Fewer than 2 distinct anchors means the
+    // block just sits there — that is CODE_WINDOW, and it should say so.
+    const anchors = [...new Set(rl.map((l) => l.atWord).filter((a) => a != null))];
+    if (anchors.length < 2)
+      E(`${id}: CODE_RUN has ${anchors.length} anchored line(s) — it is not stepping. Give each taught line its own atWord, or use CODE_WINDOW.`);
+    // TEACHING PACE (owner rule 2026-08-13): a taught line needs >=4s on screen.
+    // Continuation lines share their head's anchor, so measure DISTINCT anchors.
+    if (anchors.length && s.durationFrames) {
+      const perLine = s.durationFrames / anchors.length;
+      if (perLine < 120)
+        W(`${id}: CODE_RUN gives ${(perLine / 30).toFixed(1)}s per taught line (need >=4s). Explain fewer lines per beat, or say more about each.`);
+    }
+  }
+  if (d.handStamp) {
+    const hs = d.handStamp;
+    const ts3 = hs.tests ?? [];
+    const stamped = hs.mode === 'stamped';
+    if (!hs.toll) E(`${id}: HAND_STAMP needs a toll — what each one pays at the door`);
+    if (len(hs.toll) > 22) E(`${id}: HAND_STAMP toll > 22 chars`);
+    if (hs.mode != null && !['everyone-pays', 'stamped'].includes(hs.mode))
+      E(`${id}: HAND_STAMP mode must be 'everyone-pays' or 'stamped' (got "${hs.mode}")`);
+    if (len(hs.stampLabel) > 20) E(`${id}: HAND_STAMP stampLabel > 20 chars`);
+    if (len(hs.doorLabel) > 20) E(`${id}: HAND_STAMP doorLabel > 20 chars`);
+    if (len(hs.totalLabel) > 24) E(`${id}: HAND_STAMP totalLabel > 24 chars`);
+    if (len(hs.flakyNote) > 26) E(`${id}: HAND_STAMP flakyNote > 26 chars`);
+    if (len(hs.caption) > 44) E(`${id}: HAND_STAMP caption > 44 chars`);
+    checkColor(id, 'handStamp.color', hs.color);
+    if (ts3.length < 3) E(`${id}: HAND_STAMP needs >=3 tests — a queue of two shows no repetition`);
+    if (ts3.length > 5) E(`${id}: HAND_STAMP max 5 tests (got ${ts3.length})`);
+    let flaky = 0;
+    for (const tt of ts3) {
+      const k = (tt.title ?? '').toLowerCase();
+      if (k && k !== 'flaky') E(`${id}: HAND_STAMP test title "${tt.title}" must be 'flaky' or omitted`);
+      if (k === 'flaky') flaky++;
+      if (len(tt.label) > 20) E(`${id}: HAND_STAMP test "${tt.label}" > 20 chars`);
+      if (tt.atWord == null) E(`${id}: HAND_STAMP test "${tt.label}" needs atWord — the queue moves one at a time`);
+    }
+    if (flaky > 1) E(`${id}: HAND_STAMP marks ${flaky} tests flaky — one wobbler makes the point, more reads as a broken suite`);
+    // In 'stamped' mode nobody fails at the door — that IS the fix. A flaky marker there
+    // would say the stamp did not help, which is the opposite of the beat.
+    if (stamped && flaky) E(`${id}: HAND_STAMP 'stamped' mode cannot have a flaky test — the whole point is that nobody queues at the door`);
+    if (stamped && !hs.stampLabel) W(`${id}: HAND_STAMP 'stamped' mode without a stampLabel — name the saved file, it is the thing being reused.`);
+    if (hs.settleAtWord != null) {
+      const last = Math.max(...ts3.map((x) => x.atWord ?? 0));
+      if (hs.settleAtWord <= last)
+        E(`${id}: HAND_STAMP settleAtWord (${hs.settleAtWord}) must come after the LAST test (${last})`);
+    }
+  }
+  if (d.frozenFrame) {
+    const ff = d.frozenFrame;
+    const ls = ff.lines ?? [];
+    const pi = ff.pageItems ?? [];
+    if (len(ff.filename) > 26) E(`${id}: FROZEN_FRAME filename > 26 chars`);
+    if (len(ff.screenTitle) > 22) E(`${id}: FROZEN_FRAME screenTitle > 22 chars`);
+    if (len(ff.inspectorLabel) > 24) E(`${id}: FROZEN_FRAME inspectorLabel > 24 chars`);
+    if (len(ff.stepLabel) > 22) E(`${id}: FROZEN_FRAME stepLabel > 22 chars`);
+    if (len(ff.note) > 32) E(`${id}: FROZEN_FRAME note > 32 chars`);
+    if (len(ff.caption) > 44) E(`${id}: FROZEN_FRAME caption > 44 chars`);
+    checkColor(id, 'frozenFrame.color', ff.color);
+    if (ls.length < 3) E(`${id}: FROZEN_FRAME needs >=3 lines — a freeze needs something running before it and something waiting after`);
+    if (ls.length > 6) E(`${id}: FROZEN_FRAME max 6 lines (got ${ls.length})`);
+    if (pi.length > 3) E(`${id}: FROZEN_FRAME max 3 pageItems (got ${pi.length})`);
+    for (const x of pi) if (len(x) > 22) E(`${id}: FROZEN_FRAME page item "${x}" > 22 chars`);
+    let freeze = -1;
+    for (let i = 0; i < ls.length; i++) {
+      const k = (ls[i].title ?? '').toLowerCase();
+      if (k && k !== 'freeze') E(`${id}: FROZEN_FRAME line title "${ls[i].title}" must be 'freeze' or omitted`);
+      if (k === 'freeze') {
+        if (freeze >= 0) E(`${id}: FROZEN_FRAME marks two lines 'freeze' — the run stops once`);
+        freeze = i;
+      }
+      if (len(ls[i].text) > 38) E(`${id}: FROZEN_FRAME line "${ls[i].text}" > 38 chars`);
+      if (len(ls[i].sub) > 24) E(`${id}: FROZEN_FRAME line note "${ls[i].sub}" > 24 chars`);
+      if (ls[i].atWord == null) E(`${id}: FROZEN_FRAME line "${ls[i].text}" needs atWord — the playhead has to visibly move before it stops`);
+    }
+    // The stillness only reads if something was moving, and only matters if something is waiting.
+    if (freeze < 0) E(`${id}: FROZEN_FRAME has no 'freeze' line — without one this is just a script running, which CODE_RUN already does`);
+    if (freeze === 0) E(`${id}: FROZEN_FRAME freezes on the FIRST line — nothing has moved yet, so there is no stillness to see`);
+    if (freeze === ls.length - 1) E(`${id}: FROZEN_FRAME freezes on the LAST line — with nothing left waiting, stepping forward has nowhere to go`);
+    if (ff.stepAtWord != null && freeze >= 0) {
+      const fw = ls[freeze].atWord ?? 0;
+      if (ff.stepAtWord <= fw)
+        E(`${id}: FROZEN_FRAME stepAtWord (${ff.stepAtWord}) must come after the freeze line (${fw})`);
+    }
+  }
+  if (d.recordDraft) {
+    const rd = d.recordDraft;
+    const ac = rd.actions ?? [];
+    const ms = rd.missing ?? [];
+    if (len(rd.sourceLabel) > 24) E(`${id}: RECORD_DRAFT sourceLabel > 24 chars`);
+    if (len(rd.outputLabel) > 24) E(`${id}: RECORD_DRAFT outputLabel > 24 chars`);
+    if (len(rd.verdict) > 36) E(`${id}: RECORD_DRAFT verdict > 36 chars`);
+    if (len(rd.caption) > 44) E(`${id}: RECORD_DRAFT caption > 44 chars`);
+    checkColor(id, 'recordDraft.color', rd.color);
+    if (ac.length < 2) E(`${id}: RECORD_DRAFT needs >=2 actions — one action shows no recording`);
+    if (ac.length > 5) E(`${id}: RECORD_DRAFT max 5 actions (got ${ac.length})`);
+    if (ms.length > 3) E(`${id}: RECORD_DRAFT max 3 missing items (got ${ms.length})`);
+    for (const x of ms) if (len(x) > 22) E(`${id}: RECORD_DRAFT missing item "${x}" > 22 chars`);
+    let keeps = 0, drops = 0;
+    for (const x of ac) {
+      const k = (x.title ?? 'drop').toLowerCase();
+      if (!['keep', 'drop'].includes(k)) E(`${id}: RECORD_DRAFT action title "${x.title}" must be 'keep' or 'drop'`);
+      k === 'keep' ? keeps++ : drops++;
+      if (len(x.label) > 24) E(`${id}: RECORD_DRAFT action "${x.label}" > 24 chars`);
+      if (len(x.text) > 38) E(`${id}: RECORD_DRAFT generated line "${x.text}" > 38 chars`);
+      if (len(x.sub) > 24) E(`${id}: RECORD_DRAFT reason "${x.sub}" > 24 chars`);
+      if (x.atWord == null) E(`${id}: RECORD_DRAFT action "${x.label}" needs atWord — the code lands one line at a time`);
+    }
+    // The whole shape is "half of this is a gift, half you throw away". Either half missing
+    // turns the beat into an advert for the tool or a dismissal of it, and both are wrong.
+    if (!keeps) E(`${id}: RECORD_DRAFT keeps nothing — if none of the output is worth having, the tool is not worth a beat`);
+    if (!drops) E(`${id}: RECORD_DRAFT drops nothing — that sells the generated output as a finished test, which is the defect this component exists to show`);
+    if (rd.verdictAtWord != null) {
+      const last = Math.max(...ac.map((x) => x.atWord ?? 0));
+      if (rd.verdictAtWord <= last)
+        E(`${id}: RECORD_DRAFT verdictAtWord (${rd.verdictAtWord}) must come after the last action (${last}) — you cannot judge a draft mid-recording`);
+    }
+  }
+  if (d.workerSpread) {
+    const ws = d.workerSpread;
+    const ln = ws.lanes ?? [];
+    const it = ws.items ?? [];
+    if (len(ws.queueLabel) > 24) E(`${id}: WORKER_SPREAD queueLabel > 24 chars`);
+    if (len(ws.beforeLabel) > 22) E(`${id}: WORKER_SPREAD beforeLabel > 22 chars`);
+    if (len(ws.afterLabel) > 22) E(`${id}: WORKER_SPREAD afterLabel > 22 chars`);
+    if (len(ws.note) > 34) E(`${id}: WORKER_SPREAD note > 34 chars`);
+    if (len(ws.caption) > 44) E(`${id}: WORKER_SPREAD caption > 44 chars`);
+    checkColor(id, 'workerSpread.color', ws.color);
+    if (ln.length < 2) E(`${id}: WORKER_SPREAD needs >=2 lanes — one lane is not parallel`);
+    if (ln.length > 4) E(`${id}: WORKER_SPREAD max 4 lanes (got ${ln.length}) — they share one row and the pills stop being readable`);
+    for (const x of ln) {
+      if (len(x.label) > 16) E(`${id}: WORKER_SPREAD lane "${x.label}" > 16 chars`);
+      if (len(x.sub) > 20) E(`${id}: WORKER_SPREAD lane sub "${x.sub}" > 20 chars`);
+      if (len(x.detail) > 8) E(`${id}: WORKER_SPREAD lane finish time "${x.detail}" > 8 chars`);
+      if (x.atWord == null) E(`${id}: WORKER_SPREAD lane "${x.label}" needs atWord — the lanes open one at a time`);
+    }
+    if (it.length > 6) E(`${id}: WORKER_SPREAD max 6 items (got ${it.length}) — the queue is a sample, not the whole suite`);
+    for (const x of it) if (len(x) > 18) E(`${id}: WORKER_SPREAD queue item "${x}" > 18 chars`);
+    // The comparison is the beat. One number alone is a claim; two is an argument.
+    if (ws.afterLabel && !ws.beforeLabel)
+      E(`${id}: WORKER_SPREAD has an afterLabel with no beforeLabel — the collapse in wall time only reads against the sequential number`);
+    if (ws.afterAtWord != null) {
+      const last = Math.max(...ln.map((x) => x.atWord ?? 0));
+      if (ws.afterAtWord <= last)
+        E(`${id}: WORKER_SPREAD afterAtWord (${ws.afterAtWord}) must come after the last lane (${last}) — the total lands when the work is dealt`);
+    }
+    if (!ws.note)
+      W(`${id}: WORKER_SPREAD without a note — parallelism is only legal because the work is independent; say so, or the beat teaches a foot-gun.`);
+  }
+  if (d.orderRoulette) {
+    const or = d.orderRoulette;
+    const rs = or.runs ?? [];
+    if (!or.dependency) E(`${id}: ORDER_ROULETTE needs a dependency — the assumption being made`);
+    if (len(or.dependency) > 40) E(`${id}: ORDER_ROULETTE dependency > 40 chars`);
+    if (len(or.producer) > 22) E(`${id}: ORDER_ROULETTE producer > 22 chars`);
+    if (len(or.consumer) > 22) E(`${id}: ORDER_ROULETTE consumer > 22 chars`);
+    if (len(or.verdict) > 34) E(`${id}: ORDER_ROULETTE verdict > 34 chars`);
+    if (len(or.fix) > 34) E(`${id}: ORDER_ROULETTE fix > 34 chars`);
+    if (len(or.caption) > 44) E(`${id}: ORDER_ROULETTE caption > 44 chars`);
+    checkColor(id, 'orderRoulette.color', or.color);
+    if (rs.length < 2) E(`${id}: ORDER_ROULETTE needs >=2 runs — one run cannot show a roulette`);
+    if (rs.length > 4) E(`${id}: ORDER_ROULETTE max 4 runs (got ${rs.length})`);
+    let pass = 0, fail = 0;
+    for (const x of rs) {
+      const k = (x.title ?? 'fail').toLowerCase();
+      if (!['pass', 'fail'].includes(k)) E(`${id}: ORDER_ROULETTE run title "${x.title}" must be 'pass' or 'fail'`);
+      k === 'pass' ? pass++ : fail++;
+      if (len(x.label) > 14) E(`${id}: ORDER_ROULETTE run label "${x.label}" > 14 chars`);
+      if (len(x.text) > 26) E(`${id}: ORDER_ROULETTE run order "${x.text}" > 26 chars`);
+      if (len(x.sub) > 22) E(`${id}: ORDER_ROULETTE run note "${x.sub}" > 22 chars`);
+      if (x.atWord == null) E(`${id}: ORDER_ROULETTE run "${x.label}" needs atWord — the deals happen one after another`);
+    }
+    // A roulette that always lands the same way is not a roulette — it is a bug with a fix, which
+    // is the exact misreading this component exists to prevent.
+    if (!pass) E(`${id}: ORDER_ROULETTE has no passing run — all-fail reads as a broken test somebody can fix, not as a coin flip`);
+    if (!fail) E(`${id}: ORDER_ROULETTE has no failing run — with nothing going wrong there is no hazard being shown`);
+    if (or.verdictAtWord != null) {
+      const last = Math.max(...rs.map((x) => x.atWord ?? 0));
+      if (or.verdictAtWord <= last)
+        E(`${id}: ORDER_ROULETTE verdictAtWord (${or.verdictAtWord}) must come after the last run (${last})`);
+    }
+  }
+  if (d.searchNarrow) {
+    const sn = d.searchNarrow;
+    const lk = sn.links ?? [];
+    if (!sn.rootLabel) E(`${id}: SEARCH_NARROW needs a rootLabel — the widest scope you start from`);
+    if (len(sn.rootLabel) > 24) E(`${id}: SEARCH_NARROW rootLabel > 24 chars`);
+    if (!sn.target) E(`${id}: SEARCH_NARROW needs a target — the thing the chain finally lands on`);
+    if (len(sn.target) > 24) E(`${id}: SEARCH_NARROW target > 24 chars`);
+    if (len(sn.targetAction) > 16) E(`${id}: SEARCH_NARROW targetAction > 16 chars`);
+    if (len(sn.caption) > 44) E(`${id}: SEARCH_NARROW caption > 44 chars`);
+    checkColor(id, 'searchNarrow.color', sn.color);
+    if (lk.length < 2) E(`${id}: SEARCH_NARROW needs >=2 links — one link is not a chain`);
+    if (lk.length > 4) E(`${id}: SEARCH_NARROW max 4 links (got ${lk.length}) — each one indents, and the target runs off the edge`);
+    for (const x of lk) {
+      if (!x.text) E(`${id}: SEARCH_NARROW link "${x.label}" needs text — the region it enters`);
+      if (len(x.label) > 34) E(`${id}: SEARCH_NARROW link "${x.label}" > 34 chars`);
+      if (len(x.text) > 20) E(`${id}: SEARCH_NARROW region "${x.text}" > 20 chars`);
+      if (len(x.sub) > 20) E(`${id}: SEARCH_NARROW sibling "${x.sub}" > 20 chars`);
+      if (len(x.detail) > 28) E(`${id}: SEARCH_NARROW direction "${x.detail}" > 28 chars`);
+      if (x.atWord == null) E(`${id}: SEARCH_NARROW link "${x.label}" needs atWord — the narrowing happens one step at a time`);
+    }
+    // Links must fire in order or the indentation contradicts the voice: level 3 cannot open
+    // before the search has entered level 2.
+    for (let i = 1; i < lk.length; i++)
+      if ((lk[i].atWord ?? 0) <= (lk[i - 1].atWord ?? 0))
+        E(`${id}: SEARCH_NARROW link ${i + 1} fires at or before link ${i} — a chain narrows in order`);
+    if (sn.targetAtWord != null) {
+      const last = Math.max(...lk.map((x) => x.atWord ?? 0));
+      if (sn.targetAtWord <= last)
+        E(`${id}: SEARCH_NARROW targetAtWord (${sn.targetAtWord}) must come after the last link (${last})`);
+    }
+    if (!lk.some((x) => x.sub))
+      W(`${id}: SEARCH_NARROW with no siblings on any level — with nothing to walk past, the search never visibly narrows.`);
+  }
+  if (d.setLogic) {
+    const sl = d.setLogic;
+    const cd = sl.candidates ?? [];
+    if (!sl.op) E(`${id}: SET_LOGIC needs an op — the operator being applied`);
+    if (len(sl.op) > 22) E(`${id}: SET_LOGIC op > 22 chars`);
+    if (len(sl.opNote) > 32) E(`${id}: SET_LOGIC opNote > 32 chars`);
+    if (len(sl.countLabel) > 22) E(`${id}: SET_LOGIC countLabel > 22 chars`);
+    if (len(sl.verdict) > 30) E(`${id}: SET_LOGIC verdict > 30 chars`);
+    if (len(sl.caption) > 44) E(`${id}: SET_LOGIC caption > 44 chars`);
+    checkColor(id, 'setLogic.color', sl.color);
+    const cr = sl.criteria ?? [];
+    if (cr.length > 2) E(`${id}: SET_LOGIC max 2 criteria (got ${cr.length})`);
+    for (const c of cr) if (len(c) > 24) E(`${id}: SET_LOGIC criterion "${c}" > 24 chars`);
+    if (cd.length < 3) E(`${id}: SET_LOGIC needs >=3 candidates — a set of two shows no selection`);
+    if (cd.length > 6) E(`${id}: SET_LOGIC max 6 candidates (got ${cd.length})`);
+    let keeps = 0;
+    for (const x of cd) {
+      const k = (x.title ?? 'drop').toLowerCase();
+      if (!['keep', 'drop'].includes(k)) E(`${id}: SET_LOGIC candidate title "${x.title}" must be 'keep' or 'drop'`);
+      if (k === 'keep') keeps++;
+      if (len(x.label) > 22) E(`${id}: SET_LOGIC candidate "${x.label}" > 22 chars`);
+      if (len(x.sub) > 26) E(`${id}: SET_LOGIC candidate props "${x.sub}" > 26 chars`);
+      if (x.atWord == null) E(`${id}: SET_LOGIC candidate "${x.label}" needs atWord — they resolve one at a time`);
+    }
+    // An operator that keeps everything, or nothing, is not a selection — it is a list.
+    if (!keeps) E(`${id}: SET_LOGIC drops every candidate — nothing surviving teaches nothing about the operator`);
+    if (keeps === cd.length) E(`${id}: SET_LOGIC keeps every candidate — an operator that rejects nothing is not doing any work`);
+    // The count renders as a bare number followed by countLabel, so a plural label reads
+    // "1 locators matched" when exactly one survives. Caught on a shipped frame.
+    if (keeps === 1 && sl.countLabel) {
+      const head = sl.countLabel.trim().split(/\s+/)[0].toLowerCase();
+      if (/s$/.test(head) && !/(ss|is|was|has|less|this)$/.test(head))
+        W(`${id}: SET_LOGIC countLabel "${sl.countLabel}" reads as "1 ${sl.countLabel}" — one candidate survives, so the label must work in the singular.`);
+    }
+    if (sl.verdictAtWord != null) {
+      const last = Math.max(...cd.map((x) => x.atWord ?? 0));
+      if (sl.verdictAtWord <= last)
+        E(`${id}: SET_LOGIC verdictAtWord (${sl.verdictAtWord}) must come after the last candidate (${last})`);
+    }
+  }
+  if (d.sealedBox) {
+    const sb = d.sealedBox;
+    const pb = sb.probes ?? [];
+    if (!sb.boxLabel) E(`${id}: SEALED_BOX needs a boxLabel — the sealed thing`);
+    if (len(sb.boxLabel) > 24) E(`${id}: SEALED_BOX boxLabel > 24 chars`);
+    if (!sb.contents) E(`${id}: SEALED_BOX needs contents — what is sealed inside`);
+    if (len(sb.contents) > 26) E(`${id}: SEALED_BOX contents > 26 chars`);
+    if (len(sb.wallLabel) > 22) E(`${id}: SEALED_BOX wallLabel > 22 chars`);
+    if (len(sb.blockedNote) > 30) E(`${id}: SEALED_BOX blockedNote > 30 chars`);
+    if (len(sb.verdict) > 32) E(`${id}: SEALED_BOX verdict > 32 chars`);
+    if (len(sb.caption) > 44) E(`${id}: SEALED_BOX caption > 44 chars`);
+    checkColor(id, 'sealedBox.color', sb.color);
+    if (pb.length < 2) E(`${id}: SEALED_BOX needs >=2 probes — one probe cannot show a rule and its exception`);
+    if (pb.length > 5) E(`${id}: SEALED_BOX max 5 probes (got ${pb.length})`);
+    let through = 0, blocked = 0;
+    for (const x of pb) {
+      const k = (x.title ?? 'through').toLowerCase();
+      if (!['through', 'blocked'].includes(k)) E(`${id}: SEALED_BOX probe title "${x.title}" must be 'through' or 'blocked'`);
+      k === 'blocked' ? blocked++ : through++;
+      if (len(x.label) > 30) E(`${id}: SEALED_BOX probe "${x.label}" > 30 chars`);
+      if (len(x.sub) > 24) E(`${id}: SEALED_BOX probe note "${x.sub}" > 24 chars`);
+      if (x.atWord == null) E(`${id}: SEALED_BOX probe "${x.label}" needs atWord — they arrive one at a time`);
+    }
+    // The whole shape is "the rule, then the exception". Either half missing inverts the lesson:
+    // all-blocked reads as a wall you cannot get through, all-through as a boundary with no catch.
+    if (!through) E(`${id}: SEALED_BOX has no 'through' probe — with nothing piercing, the box reads as a wall, which is the opposite lesson`);
+    if (blocked > 1) E(`${id}: SEALED_BOX marks ${blocked} probes blocked — the point is ONE exception; more and it reads as a general barrier`);
+    if (!blocked) W(`${id}: SEALED_BOX with no 'blocked' probe — nothing is being excepted, so this is a beat about a boundary that does not matter.`);
+    if (sb.verdictAtWord != null) {
+      const last = Math.max(...pb.map((x) => x.atWord ?? 0));
+      if (sb.verdictAtWord <= last)
+        E(`${id}: SEALED_BOX verdictAtWord (${sb.verdictAtWord}) must come after the last probe (${last})`);
+    }
+  }
+  if (d.backstagePhone) {
+    const bp = d.backstagePhone;
+    const st = bp.steps ?? [];
+    if (!bp.question) E(`${id}: BACKSTAGE_PHONE needs a question — both routes must be answering the same thing`);
+    if (len(bp.question) > 40) E(`${id}: BACKSTAGE_PHONE question > 40 chars`);
+    if (!bp.hop) E(`${id}: BACKSTAGE_PHONE needs a hop — the one direct call`);
+    if (len(bp.hop) > 34) E(`${id}: BACKSTAGE_PHONE hop > 34 chars`);
+    if (len(bp.hopTime) > 8) E(`${id}: BACKSTAGE_PHONE hopTime > 8 chars`);
+    if (len(bp.stageTime) > 8) E(`${id}: BACKSTAGE_PHONE stageTime > 8 chars`);
+    if (len(bp.stageLabel) > 22) E(`${id}: BACKSTAGE_PHONE stageLabel > 22 chars`);
+    if (len(bp.hopLabel) > 22) E(`${id}: BACKSTAGE_PHONE hopLabel > 22 chars`);
+    if (len(bp.verdict) > 26) E(`${id}: BACKSTAGE_PHONE verdict > 26 chars`);
+    if (len(bp.caption) > 44) E(`${id}: BACKSTAGE_PHONE caption > 44 chars`);
+    checkColor(id, 'backstagePhone.color', bp.color);
+    if (st.length < 2) E(`${id}: BACKSTAGE_PHONE needs >=2 steps — one step is not "the long way round"`);
+    if (st.length > 5) E(`${id}: BACKSTAGE_PHONE max 5 steps (got ${st.length}) — they share one lane and get unreadable`);
+    for (const x of st) {
+      if (len(x.label) > 26) E(`${id}: BACKSTAGE_PHONE step "${x.label}" > 26 chars`);
+      if (len(x.detail) > 8) E(`${id}: BACKSTAGE_PHONE step detail "${x.detail}" > 8 chars — it is a clock reading`);
+      if (x.atWord == null) E(`${id}: BACKSTAGE_PHONE step "${x.label}" needs atWord — the queue is the point, it must move`);
+    }
+    // The race only reads if the hop fires while the slow lane is still going. Landing it
+    // after the last step turns the whole beat into two lists that happen to be stacked.
+    if (bp.hopAtWord != null) {
+      const lastStep = Math.max(...st.map((x) => x.atWord ?? 0));
+      if (bp.hopAtWord >= lastStep)
+        E(`${id}: BACKSTAGE_PHONE hopAtWord (${bp.hopAtWord}) must land BEFORE the last step (${lastStep}) — the phone winning mid-queue IS the beat`);
+    }
+    if (bp.verdictAtWord != null && bp.hopAtWord != null && bp.verdictAtWord <= bp.hopAtWord)
+      E(`${id}: BACKSTAGE_PHONE verdictAtWord (${bp.verdictAtWord}) must come after the hop lands (${bp.hopAtWord})`);
+    if (!bp.hopTime || !bp.stageTime)
+      W(`${id}: BACKSTAGE_PHONE without both hopTime and stageTime — the two clock readings are the whole argument.`);
+  }
+  if (d.stageHandoff) {
+    const sh = d.stageHandoff;
+    const st = sh.steps ?? [];
+    if (!sh.testName) E(`${id}: STAGE_HANDOFF needs a testName — it is one job on two transports`);
+    if (len(sh.testName) > 30) E(`${id}: STAGE_HANDOFF testName > 30 chars`);
+    if (len(sh.railLabel) > 24) E(`${id}: STAGE_HANDOFF railLabel > 24 chars`);
+    if (len(sh.stageLabel) > 24) E(`${id}: STAGE_HANDOFF stageLabel > 24 chars`);
+    if (len(sh.handoffLabel) > 26) E(`${id}: STAGE_HANDOFF handoffLabel > 26 chars`);
+    if (len(sh.verdict) > 34) E(`${id}: STAGE_HANDOFF verdict > 34 chars`);
+    if (len(sh.caption) > 44) E(`${id}: STAGE_HANDOFF caption > 44 chars`);
+    checkColor(id, 'stageHandoff.color', sh.color);
+    if (st.length < 3) E(`${id}: STAGE_HANDOFF needs >=3 steps — a handoff needs something on each side of it`);
+    if (st.length > 6) E(`${id}: STAGE_HANDOFF max 6 steps (got ${st.length})`);
+    const kinds = st.map((x) => (x.title ?? 'ui').toLowerCase());
+    for (let i = 0; i < st.length; i++) {
+      if (!['api', 'ui'].includes(kinds[i]))
+        E(`${id}: STAGE_HANDOFF step title "${st[i].title}" must be 'api' or 'ui'`);
+      if (len(st[i].label) > 34) E(`${id}: STAGE_HANDOFF step "${st[i].label}" > 34 chars`);
+      if (len(st[i].sub) > 24) E(`${id}: STAGE_HANDOFF step sub "${st[i].sub}" > 24 chars`);
+      if (st[i].atWord == null) E(`${id}: STAGE_HANDOFF step "${st[i].label}" needs atWord`);
+    }
+    // The component draws ONE rail then ONE stage. Interleaving them would silently reorder
+    // the steps on screen relative to the narration, which is worse than a hard failure here.
+    const firstUi = kinds.indexOf('ui');
+    if (firstUi >= 0 && kinds.slice(firstUi).includes('api'))
+      E(`${id}: STAGE_HANDOFF has an 'api' step after the handoff — every api step must come before the first ui step`);
+    if (!kinds.includes('api')) E(`${id}: STAGE_HANDOFF needs >=1 'api' step — the unlit rail is half the argument`);
+    if (!kinds.includes('ui')) E(`${id}: STAGE_HANDOFF needs >=1 'ui' step — the lit stage is the other half`);
+    if (sh.handoffAtWord != null && firstUi >= 0) {
+      const firstUiWord = st[firstUi].atWord ?? 0;
+      if (sh.handoffAtWord >= firstUiWord)
+        E(`${id}: STAGE_HANDOFF handoffAtWord (${sh.handoffAtWord}) must land before the first ui step (${firstUiWord})`);
+    }
+    if (sh.verdictAtWord != null) {
+      const last = Math.max(...st.map((x) => x.atWord ?? 0));
+      if (sh.verdictAtWord <= last)
+        E(`${id}: STAGE_HANDOFF verdictAtWord (${sh.verdictAtWord}) must come after the last step (${last})`);
+    }
+  }
+  if (d.scopeLadder) {
+    const sl = d.scopeLadder;
+    const fx = sl.fixtures ?? [];
+    const tn = sl.tests ?? [];
+    const SCOPES = ['session', 'function'];
+    if (tn.length < 3) E(`${id}: SCOPE_LADDER needs >=3 tests — "runs per test" needs enough tests to count`);
+    if (tn.length > 5) E(`${id}: SCOPE_LADDER max 5 tests (got ${tn.length})`);
+    for (const x of tn) if (len(x) > 20) E(`${id}: SCOPE_LADDER test "${x}" > 20 chars`);
+    if (fx.length < 2) E(`${id}: SCOPE_LADDER needs >=2 fixtures — one rail cannot contrast two rhythms`);
+    if (fx.length > 3) E(`${id}: SCOPE_LADDER max 3 fixtures (got ${fx.length})`);
+    const scopes = new Set();
+    for (const f of fx) {
+      const k = (f.title ?? 'function').toLowerCase();
+      if (!SCOPES.includes(k)) E(`${id}: SCOPE_LADDER scope "${f.title}" must be 'session' or 'function'`);
+      scopes.add(k);
+      if (len(f.label) > 22) E(`${id}: SCOPE_LADDER fixture "${f.label}" > 22 chars`);
+      if (len(f.sub) > 26) E(`${id}: SCOPE_LADDER fixture note "${f.sub}" > 26 chars`);
+      if (len(f.detail) > 18) E(`${id}: SCOPE_LADDER run count "${f.detail}" > 18 chars`);
+      if (f.atWord == null) E(`${id}: SCOPE_LADDER fixture "${f.label}" needs atWord — the rails fill one at a time`);
+      checkColor(id, 'scopeLadder.fixture.color', f.color);
+    }
+    // Two fixtures at the SAME scope draw two identical rails and teach nothing.
+    if (scopes.size < 2)
+      E(`${id}: SCOPE_LADDER uses only one scope — show a session AND a function fixture, or there is no contrast to see`);
+    if (len(sl.runLabel) > 20) E(`${id}: SCOPE_LADDER runLabel > 20 chars`);
+    if (len(sl.fileLabel) > 20) E(`${id}: SCOPE_LADDER fileLabel > 20 chars`);
+    if (len(sl.caption) > 44) E(`${id}: SCOPE_LADDER caption > 44 chars`);
+    checkColor(id, 'scopeLadder.color', sl.color);
+  }
+  if (d.mailRoom) {
+    const mr = d.mailRoom;
+    const rq = mr.requests ?? [];
+    const FATES = ['fulfill', 'abort', 'continue', 'pass'];
+    if (!mr.pattern) E(`${id}: MAIL_ROOM needs a pattern — what the desk is watching for`);
+    if (len(mr.pattern) > 30) E(`${id}: MAIL_ROOM pattern > 30 chars`);
+    if (len(mr.deskLabel) > 22) E(`${id}: MAIL_ROOM deskLabel > 22 chars`);
+    if (len(mr.serverLabel) > 20) E(`${id}: MAIL_ROOM serverLabel > 20 chars`);
+    if (len(mr.browserLabel) > 20) E(`${id}: MAIL_ROOM browserLabel > 20 chars`);
+    if (len(mr.caption) > 44) E(`${id}: MAIL_ROOM caption > 44 chars`);
+    checkColor(id, 'mailRoom.color', mr.color);
+    if (rq.length < 2) E(`${id}: MAIL_ROOM needs >=2 requests — one letter cannot show a choice of fates`);
+    if (rq.length > 4) E(`${id}: MAIL_ROOM max 4 requests (got ${rq.length})`);
+    const fates = new Set();
+    for (const r of rq) {
+      const f = (r.title ?? 'continue').toLowerCase();
+      if (!FATES.includes(f)) E(`${id}: MAIL_ROOM fate "${r.title}" must be one of ${FATES.join('/')}`);
+      fates.add(f);
+      if (len(r.label) > 24) E(`${id}: MAIL_ROOM request "${r.label}" > 24 chars`);
+      if (len(r.sub) > 22) E(`${id}: MAIL_ROOM result "${r.sub}" > 22 chars`);
+      if (r.atWord == null) E(`${id}: MAIL_ROOM request "${r.label}" needs atWord — letters reach the desk one at a time`);
+      checkColor(id, 'mailRoom.request.color', r.color);
+    }
+    // Every letter meeting the same fate makes the desk look like a pipe, not a choice.
+    if (fates.size < 2)
+      E(`${id}: MAIL_ROOM gives every request the same fate — show at least TWO different outcomes or the desk has no decision to make`);
+  }
+  if (d.sadPaths) {
+    const sp = d.sadPaths;
+    const stt = sp.states ?? [];
+    const KINDS = ['ok', 'empty', 'error'];
+    if (stt.length < 2) E(`${id}: SAD_PATHS needs >=2 states — one screen is not a contrast`);
+    if (stt.length > 3) E(`${id}: SAD_PATHS max 3 states (got ${stt.length})`);
+    const kinds = new Set();
+    let sad = 0;
+    for (const st of stt) {
+      const k = (st.title ?? 'ok').toLowerCase();
+      if (!KINDS.includes(k)) E(`${id}: SAD_PATHS kind "${st.title}" must be one of ${KINDS.join('/')}`);
+      kinds.add(k);
+      if (k !== 'ok') sad++;
+      if (len(st.label) > 18) E(`${id}: SAD_PATHS state "${st.label}" > 18 chars`);
+      if (len(st.text) > 32) E(`${id}: SAD_PATHS mock line "${st.text}" > 32 chars`);
+      if (len(st.sub) > 22) E(`${id}: SAD_PATHS note "${st.sub}" > 22 chars`);
+      if (!st.text) E(`${id}: SAD_PATHS state "${st.label}" needs text — the one line that caused it`);
+      if (st.atWord == null) E(`${id}: SAD_PATHS state "${st.label}" needs atWord — the screens light one at a time`);
+      checkColor(id, 'sadPaths.state.color', st.color);
+    }
+    // The component is named for the SAD paths; three happy screens teach nothing.
+    if (!sad) E(`${id}: SAD_PATHS has no 'empty' or 'error' state — the sad path IS the lesson`);
+    if (kinds.size < 2) E(`${id}: SAD_PATHS repeats one kind — each screen must show a DIFFERENT server reality`);
+    if (kinds.has('ok') && !(sp.rows ?? []).length)
+      E(`${id}: SAD_PATHS has an 'ok' state but no rows — the happy screen would render empty and look like the empty state`);
+    for (const r of (sp.rows ?? [])) if (len(r) > 18) E(`${id}: SAD_PATHS row "${r}" > 18 chars`);
+    if ((sp.rows ?? []).length > 3) E(`${id}: SAD_PATHS max 3 rows`);
+    if (len(sp.emptyText) > 22) E(`${id}: SAD_PATHS emptyText > 22 chars`);
+    if (len(sp.errorText) > 22) E(`${id}: SAD_PATHS errorText > 22 chars`);
+    if (len(sp.screenTitle) > 18) E(`${id}: SAD_PATHS screenTitle > 18 chars`);
+    if (len(sp.caption) > 44) E(`${id}: SAD_PATHS caption > 44 chars`);
+    checkColor(id, 'sadPaths.color', sp.color);
+    // TEACHING PACE: each screen is a state the viewer has to read.
+    if (stt.length && s.durationFrames) {
+      const per = s.durationFrames / stt.length;
+      if (per < 120)
+        W(`${id}: SAD_PATHS gives ${(per / 30).toFixed(1)}s per screen (need >=4s). Show fewer states, or say more about each.`);
+    }
+  }
+  if (d.shotScope) {
+    const ss = d.shotScope;
+    const sh = ss.shots ?? [];
+    const bl = ss.blocks ?? [];
+    const SCOPES = ['viewport', 'full', 'element'];
+    if (bl.length < 3) E(`${id}: SHOT_SCOPE needs >=3 blocks — a page with a fold has to look like one`);
+    if (bl.length > 6) E(`${id}: SHOT_SCOPE max 6 blocks (got ${bl.length})`);
+    for (const b of bl) if (len(b) > 18) E(`${id}: SHOT_SCOPE block "${b}" > 18 chars`);
+    if (sh.length < 2) E(`${id}: SHOT_SCOPE needs >=2 shots — one scope alone shows no contrast`);
+    if (sh.length > 3) E(`${id}: SHOT_SCOPE max 3 shots (got ${sh.length})`);
+    const seen = new Set();
+    for (const s2 of sh) {
+      const k = (s2.title ?? 'viewport').toLowerCase();
+      if (!SCOPES.includes(k)) E(`${id}: SHOT_SCOPE scope "${s2.title}" must be one of ${SCOPES.join('/')}`);
+      seen.add(k);
+      if (len(s2.label) > 30) E(`${id}: SHOT_SCOPE call "${s2.label}" > 30 chars`);
+      if (len(s2.sub) > 18) E(`${id}: SHOT_SCOPE file "${s2.sub}" > 18 chars`);
+      if (len(s2.detail) > 26) E(`${id}: SHOT_SCOPE note "${s2.detail}" > 26 chars`);
+      if (s2.atWord == null) E(`${id}: SHOT_SCOPE shot "${(s2.label ?? '').slice(0, 20)}…" needs atWord — they frame one at a time`);
+      checkColor(id, 'shotScope.shot.color', s2.color);
+    }
+    // two shots with the SAME scope draw the identical rectangle twice, which teaches
+    // the opposite of "these calls capture different things"
+    if (seen.size !== sh.length)
+      E(`${id}: SHOT_SCOPE repeats a scope — each shot must frame a DIFFERENT region or the contrast vanishes`);
+    if (ss.foldAfter != null && (ss.foldAfter < 0 || ss.foldAfter >= bl.length))
+      E(`${id}: SHOT_SCOPE foldAfter ${ss.foldAfter} is outside 0..${bl.length - 1}`);
+    if (ss.elementIndex != null && (ss.elementIndex < 0 || ss.elementIndex >= bl.length))
+      E(`${id}: SHOT_SCOPE elementIndex ${ss.elementIndex} is outside 0..${bl.length - 1}`);
+    // a 'full' shot only differs from 'viewport' if something is actually below the fold
+    if (seen.has('full') && seen.has('viewport') && (ss.foldAfter ?? 2) >= bl.length - 1)
+      E(`${id}: SHOT_SCOPE has nothing below the fold — full_page and viewport would frame the same rectangle`);
+    if (len(ss.pageTitle) > 20) E(`${id}: SHOT_SCOPE pageTitle > 20 chars`);
+    if (len(ss.foldLabel) > 20) E(`${id}: SHOT_SCOPE foldLabel > 20 chars`);
+    if (len(ss.caption) > 44) E(`${id}: SHOT_SCOPE caption > 44 chars`);
+    checkColor(id, 'shotScope.color', ss.color);
+  }
+  if (d.flagHarvest) {
+    const fh = d.flagHarvest;
+    const ts2 = fh.tests ?? [];
+    const ar = fh.artifacts ?? [];
+    if (!fh.flag) E(`${id}: FLAG_HARVEST needs a flag — the switch doing the work`);
+    if (len(fh.flag) > 34) E(`${id}: FLAG_HARVEST flag > 34 chars`);
+    if (len(fh.command) > 20) E(`${id}: FLAG_HARVEST command > 20 chars`);
+    if (len(fh.folder) > 26) E(`${id}: FLAG_HARVEST folder > 26 chars`);
+    if (len(fh.quietNote) > 28) E(`${id}: FLAG_HARVEST quietNote > 28 chars`);
+    if (len(fh.caption) > 44) E(`${id}: FLAG_HARVEST caption > 44 chars`);
+    checkColor(id, 'flagHarvest.color', fh.color);
+    if (ts2.length < 3) E(`${id}: FLAG_HARVEST needs >=3 tests — a run of two cannot show selectivity`);
+    // 4 not 5: at 3 artifacts per failure a 5-row run is taller than the frame and the
+    // block climbs under the headline (caught by the MAX fixture).
+    if (ts2.length > 4) E(`${id}: FLAG_HARVEST max 4 tests (got ${ts2.length}) — more overflows the frame once failures carry artifacts`);
+    let pass = 0, fail = 0;
+    for (const tt of ts2) {
+      const v = (tt.title ?? 'pass').toLowerCase();
+      if (!['pass', 'fail'].includes(v)) E(`${id}: FLAG_HARVEST verdict "${tt.title}" must be 'pass' or 'fail'`);
+      v === 'fail' ? fail++ : pass++;
+      if (len(tt.label) > 24) E(`${id}: FLAG_HARVEST test "${tt.label}" > 24 chars`);
+      if (tt.atWord == null) E(`${id}: FLAG_HARVEST test "${tt.label}" needs atWord — verdicts land one at a time`);
+    }
+    // the ASYMMETRY is the lesson: all-pass produces nothing, all-fail hides the point
+    if (!fail) E(`${id}: FLAG_HARVEST has no failing test — nothing would be harvested and the scene proves nothing`);
+    if (!pass) E(`${id}: FLAG_HARVEST has no passing test — without a quiet row the selectivity is invisible`);
+    if (ar.length < 1) E(`${id}: FLAG_HARVEST needs >=1 artifact`);
+    if (ar.length > 3) E(`${id}: FLAG_HARVEST max 3 artifacts (got ${ar.length})`);
+    for (const a of ar) if (len(a) > 26) E(`${id}: FLAG_HARVEST artifact "${a}" > 26 chars`);
+    // the verdicts must all have landed before anything is harvested
+    if (fh.harvestAtWord != null) {
+      const last = Math.max(...ts2.map((x) => x.atWord ?? 0));
+      if (fh.harvestAtWord <= last)
+        E(`${id}: FLAG_HARVEST harvestAtWord (${fh.harvestAtWord}) must come after the LAST verdict (${last})`);
+    }
+  }
+  if (d.traceScrub) {
+    const tr = d.traceScrub;
+    const st2 = tr.steps ?? [];
+    const snap = tr.snapshot ?? [];
+    if (st2.length < 3) E(`${id}: TRACE_SCRUB needs >=3 steps — a timeline of two is not a recording`);
+    if (st2.length > 6) E(`${id}: TRACE_SCRUB max 6 steps (got ${st2.length})`);
+    let fails = 0;
+    for (const s3 of st2) {
+      const k = (s3.title ?? '').toLowerCase();
+      if (k && k !== 'fail') E(`${id}: TRACE_SCRUB step title "${s3.title}" must be 'fail' or omitted`);
+      if (k === 'fail') fails++;
+      if (len(s3.label) > 22) E(`${id}: TRACE_SCRUB step "${s3.label}" > 22 chars`);
+      if (len(s3.sub) > 30) E(`${id}: TRACE_SCRUB console line "${s3.sub}" > 30 chars`);
+      if (len(s3.detail) > 26) E(`${id}: TRACE_SCRUB network line "${s3.detail}" > 26 chars`);
+      if (s3.atWord == null) E(`${id}: TRACE_SCRUB step "${s3.label}" needs atWord — the playhead lands on each in turn`);
+      checkColor(id, 'traceScrub.step.color', s3.color);
+    }
+    // scrubbing BACK to the failure is the payoff; with no failing step there is
+    // nowhere to rewind to and the component is just a list of actions
+    if (fails !== 1) E(`${id}: TRACE_SCRUB has ${fails} steps marked 'fail' — mark EXACTLY one, it is what the rewind lands on`);
+    if (snap.length < 2) E(`${id}: TRACE_SCRUB needs >=2 snapshot elements — the last one is what the failing step never found`);
+    if (snap.length > 4) E(`${id}: TRACE_SCRUB max 4 snapshot elements (got ${snap.length})`);
+    for (const sn of snap) if (len(sn) > 20) E(`${id}: TRACE_SCRUB snapshot element "${sn}" > 20 chars`);
+    if (len(tr.traceFile) > 26) E(`${id}: TRACE_SCRUB traceFile > 26 chars`);
+    if (len(tr.openWith) > 34) E(`${id}: TRACE_SCRUB openWith > 34 chars`);
+    if (len(tr.consoleLabel) > 16) E(`${id}: TRACE_SCRUB consoleLabel > 16 chars`);
+    if (len(tr.networkLabel) > 16) E(`${id}: TRACE_SCRUB networkLabel > 16 chars`);
+    if (len(tr.caption) > 44) E(`${id}: TRACE_SCRUB caption > 44 chars`);
+    checkColor(id, 'traceScrub.color', tr.color);
+    if (tr.rewindAtWord != null) {
+      const last = Math.max(...st2.map((x) => x.atWord ?? 0));
+      if (tr.rewindAtWord <= last)
+        E(`${id}: TRACE_SCRUB rewindAtWord (${tr.rewindAtWord}) must come after the LAST step (${last}) — you cannot rewind before you have played`);
+    }
+  }
+  if (d.dialogGate) {
+    const dg = d.dialogGate;
+    const rw = dg.rows ?? [];
+    const KINDS = ['confirm', 'alert', 'prompt'];
+    const HANDLERS = ['none', 'accept', 'dismiss'];
+    if (!dg.message) E(`${id}: DIALOG_GATE needs message — what the dialog says`);
+    if (len(dg.message) > 44) E(`${id}: DIALOG_GATE message > 44 chars`);
+    if (dg.kind != null && !KINDS.includes(dg.kind))
+      E(`${id}: DIALOG_GATE kind must be one of ${KINDS.join('/')} (got "${dg.kind}")`);
+    if (dg.handler != null && !HANDLERS.includes(dg.handler))
+      E(`${id}: DIALOG_GATE handler must be one of ${HANDLERS.join('/')} (got "${dg.handler}")`);
+    if (len(dg.handlerLine) > 36) E(`${id}: DIALOG_GATE handlerLine > 36 chars`);
+    if (len(dg.trigger) > 32) E(`${id}: DIALOG_GATE trigger > 32 chars`);
+    if (len(dg.pageTitle) > 20) E(`${id}: DIALOG_GATE pageTitle > 20 chars`);
+    if (len(dg.outcome) > 30) E(`${id}: DIALOG_GATE outcome > 30 chars`);
+    if (len(dg.caption) > 44) E(`${id}: DIALOG_GATE caption > 44 chars`);
+    checkColor(id, 'dialogGate.color', dg.color);
+    if (rw.length < 2) E(`${id}: DIALOG_GATE needs >=2 rows — the page behind has to look like a page`);
+    if (rw.length > 4) E(`${id}: DIALOG_GATE max 4 rows (got ${rw.length})`);
+    let targets = 0;
+    for (const r of rw) {
+      const k = (r.title ?? '').toLowerCase();
+      if (k && k !== 'target') E(`${id}: DIALOG_GATE row title "${r.title}" must be 'target' or omitted`);
+      if (k === 'target') targets++;
+      if (len(r.label) > 20) E(`${id}: DIALOG_GATE row "${r.label}" > 20 chars`);
+      checkColor(id, 'dialogGate.row.color', r.color);
+    }
+    // The target row is the EVIDENCE of which answer was given — without it the scene
+    // shows a dialog being answered and proves nothing about the consequence.
+    if (targets !== 1) E(`${id}: DIALOG_GATE has ${targets} rows marked 'target' — mark EXACTLY one, it is the proof of what the answer did`);
+    // A registered handler is what the whole lesson is about; declaring one and then
+    // leaving the handler at the auto-dismiss default says the opposite of the beat.
+    if (dg.handlerLine && (dg.handler ?? 'none') === 'none')
+      W(`${id}: DIALOG_GATE shows a handlerLine but handler is 'none' — the scene registers a handler and then ignores it.`);
+    if (dg.knockAtWord != null && dg.answerAtWord != null && dg.answerAtWord <= dg.knockAtWord)
+      E(`${id}: DIALOG_GATE answerAtWord (${dg.answerAtWord}) must come AFTER knockAtWord (${dg.knockAtWord})`);
+    // the frozen page has to be SEEN frozen before it is answered
+    if (dg.knockAtWord != null && dg.answerAtWord != null) {
+      const gap = (dg.answerAtWord - dg.knockAtWord) * 12;
+      if (gap < 75)
+        W(`${id}: DIALOG_GATE answers ${(gap / 30).toFixed(1)}s after the knock — hold the frozen page >=2.5s or "no locator can reach this" never registers.`);
+    }
+  }
+  if (d.pickerBypass) {
+    const pb = d.pickerBypass;
+    const fs2 = pb.files ?? [];
+    const pi = pb.pickerItems ?? [];
+    if (!pb.inputLabel) E(`${id}: PICKER_BYPASS needs inputLabel`);
+    if (!pb.call) E(`${id}: PICKER_BYPASS needs call — the line that hands the file over`);
+    if (len(pb.inputLabel) > 22) E(`${id}: PICKER_BYPASS inputLabel > 22 chars`);
+    if (len(pb.call) > 34) E(`${id}: PICKER_BYPASS call > 34 chars`);
+    if (len(pb.pickerTitle) > 22) E(`${id}: PICKER_BYPASS pickerTitle > 22 chars`);
+    if (len(pb.blockedNote) > 28) E(`${id}: PICKER_BYPASS blockedNote > 28 chars`);
+    if (len(pb.landedNote) > 26) E(`${id}: PICKER_BYPASS landedNote > 26 chars`);
+    if (len(pb.pageTitle) > 20) E(`${id}: PICKER_BYPASS pageTitle > 20 chars`);
+    if (len(pb.caption) > 44) E(`${id}: PICKER_BYPASS caption > 44 chars`);
+    checkColor(id, 'pickerBypass.color', pb.color);
+    if (pi.length > 3) E(`${id}: PICKER_BYPASS max 3 pickerItems (got ${pi.length})`);
+    for (const p of pi) if (len(p) > 18) E(`${id}: PICKER_BYPASS pickerItem "${p}" > 18 chars`);
+    if (fs2.length < 1) E(`${id}: PICKER_BYPASS needs >=1 file — something has to arrive in the input`);
+    if (fs2.length > 3) E(`${id}: PICKER_BYPASS max 3 files (got ${fs2.length})`);
+    for (const f of fs2) if (len(f) > 18) E(`${id}: PICKER_BYPASS file "${f}" > 18 chars`);
+    // The un-openable picker must be on screen before the bypass, or the scene shows a
+    // file arriving somewhere and never says what was avoided.
+    if (pb.handAtWord != null && pb.atWord != null) {
+      const gap = (pb.handAtWord - pb.atWord) * 12;
+      if (gap < 75)
+        W(`${id}: PICKER_BYPASS hands the file ${(gap / 30).toFixed(1)}s in — show the blocked picker for >=2.5s first, or the bypass has nothing to bypass.`);
+    }
+  }
+  if (d.frameBoundary) {
+    const fb = d.frameBoundary;
+    const inner = fb.innerItems ?? [];
+    const outer = fb.outerItems ?? [];
+    if (!fb.attempt) E(`${id}: FRAME_BOUNDARY needs attempt — the locator that FAILS`);
+    if (!fb.crossing) E(`${id}: FRAME_BOUNDARY needs crossing — the call that steps inside`);
+    if (!fb.innerTitle) E(`${id}: FRAME_BOUNDARY needs innerTitle — name the embedded document`);
+    if (len(fb.attempt) > 34) E(`${id}: FRAME_BOUNDARY attempt > 34 chars`);
+    if (len(fb.crossing) > 34) E(`${id}: FRAME_BOUNDARY crossing > 34 chars`);
+    if (len(fb.innerTitle) > 22) E(`${id}: FRAME_BOUNDARY innerTitle > 22 chars`);
+    if (len(fb.outerTitle) > 20) E(`${id}: FRAME_BOUNDARY outerTitle > 20 chars`);
+    if (len(fb.failNote) > 26) E(`${id}: FRAME_BOUNDARY failNote > 26 chars`);
+    if (len(fb.okNote) > 26) E(`${id}: FRAME_BOUNDARY okNote > 26 chars`);
+    if (len(fb.caption) > 44) E(`${id}: FRAME_BOUNDARY caption > 44 chars`);
+    checkColor(id, 'frameBoundary.color', fb.color);
+    if (outer.length > 3) E(`${id}: FRAME_BOUNDARY max 3 outerItems (got ${outer.length})`);
+    for (const o of outer) if (len(o) > 18) E(`${id}: FRAME_BOUNDARY outer item "${o}" > 18 chars`);
+    if (inner.length < 1) E(`${id}: FRAME_BOUNDARY needs >=1 innerItem — the frame has to contain the thing you cannot reach`);
+    if (inner.length > 3) E(`${id}: FRAME_BOUNDARY max 3 innerItems (got ${inner.length})`);
+    let targets = 0;
+    for (const el of inner) {
+      const k = (el.title ?? '').toLowerCase();
+      if (k && k !== 'target') E(`${id}: FRAME_BOUNDARY innerItem title "${el.title}" must be 'target' or omitted`);
+      if (k === 'target') targets++;
+      if (len(el.label) > 18) E(`${id}: FRAME_BOUNDARY innerItem "${el.label}" > 18 chars`);
+      checkColor(id, 'frameBoundary.innerItem.color', el.color);
+    }
+    // Without a marked target the crossing lands on nothing and the payoff is invisible.
+    if (targets !== 1) E(`${id}: FRAME_BOUNDARY has ${targets} innerItems marked 'target' — mark EXACTLY one, it is what the crossing finds`);
+    // The failed sweep has to be watched dying before the fix arrives, or the whole
+    // "I can see it but it times out" symptom never registers.
+    if (fb.crossAtWord != null && fb.atWord != null) {
+      const gap = (fb.crossAtWord - fb.atWord) * 12;
+      if (gap < 90)
+        W(`${id}: FRAME_BOUNDARY crosses ${(gap / 30).toFixed(1)}s after the base — let the failing attempt sit for >=3s or the symptom never lands.`);
+    }
+  }
+  if (d.trapTrigger) {
+    const tt = d.trapTrigger;
+    const missed = tt.mode === 'missed';
+    if (!tt.listener) E(`${id}: TRAP_TRIGGER needs listener — the arming call`);
+    if (!tt.trigger) E(`${id}: TRAP_TRIGGER needs trigger — the action that causes the event`);
+    if (tt.mode != null && !['trap', 'missed'].includes(tt.mode))
+      E(`${id}: TRAP_TRIGGER mode must be 'trap' or 'missed' (got "${tt.mode}")`);
+    if (len(tt.listener) > 32) E(`${id}: TRAP_TRIGGER listener > 32 chars`);
+    if (len(tt.trigger) > 34) E(`${id}: TRAP_TRIGGER trigger > 34 chars`);
+    if (len(tt.catcher) > 30) E(`${id}: TRAP_TRIGGER catcher > 30 chars`);
+    if (len(tt.caught) > 22) E(`${id}: TRAP_TRIGGER caught > 22 chars`);
+    if (len(tt.originLabel) > 20) E(`${id}: TRAP_TRIGGER originLabel > 20 chars`);
+    if (len(tt.missNote) > 28) E(`${id}: TRAP_TRIGGER missNote > 28 chars`);
+    if (len(tt.caption) > 44) E(`${id}: TRAP_TRIGGER caption > 44 chars`);
+    checkColor(id, 'trapTrigger.color', tt.color);
+    const ci = tt.caughtItems ?? [];
+    if (ci.length > 3) E(`${id}: TRAP_TRIGGER max 3 caughtItems (got ${ci.length})`);
+    for (const c of ci) if (len(c) > 20) E(`${id}: TRAP_TRIGGER caughtItem "${c}" > 20 chars`);
+    // caughtItems only ever render inside a caught thing — in 'missed' mode nothing is
+    // caught, so declaring them means the author expected a payoff that cannot appear.
+    if (missed && ci.length)
+      E(`${id}: TRAP_TRIGGER 'missed' mode cannot show caughtItems — nothing is caught`);
+    if (missed && tt.originLabel)
+      W(`${id}: TRAP_TRIGGER 'missed' mode ignores originLabel (it only renders beside a caught object).`);
+    if (tt.armAtWord != null && tt.fireAtWord != null && tt.fireAtWord <= tt.armAtWord)
+      E(`${id}: TRAP_TRIGGER fireAtWord (${tt.fireAtWord}) must come AFTER armAtWord (${tt.armAtWord}) — the ORDER is the lesson`);
+    // the two events must be far enough apart to read as a sequence, not a coincidence
+    if (tt.armAtWord != null && tt.fireAtWord != null) {
+      const gap = (tt.fireAtWord - tt.armAtWord) * 12;
+      if (gap < 75)
+        W(`${id}: TRAP_TRIGGER fires ${(gap / 30).toFixed(1)}s after arming — leave >=2.5s or the two steps read as one moment.`);
+    }
+  }
+  if (d.crowdMatch) {
+    const cm = d.crowdMatch;
+    const mem = cm.members ?? [];
+    const ro = cm.readouts ?? [];
+    if (!cm.query) E(`${id}: CROWD_MATCH needs a query`);
+    if (len(cm.query) > 34) E(`${id}: CROWD_MATCH query > 34 chars`);
+    // fewer than 3 does not read as a crowd; more than 6 will not fit the vertical list
+    if (mem.length < 3) E(`${id}: CROWD_MATCH needs >=3 members — two is a pair, not a crowd`);
+    if (mem.length > 6) E(`${id}: CROWD_MATCH max 6 members (got ${mem.length})`);
+    for (const m of mem) {
+      if (len(m.label) > 20) E(`${id}: CROWD_MATCH member "${m.label}" > 20 chars`);
+      checkColor(id, 'crowdMatch.member.color', m.color);
+    }
+    if (ro.length > 3) E(`${id}: CROWD_MATCH max 3 readouts (got ${ro.length})`);
+    for (const r of ro) {
+      if (len(r.label) > 22) E(`${id}: CROWD_MATCH readout call "${r.label}" > 22 chars`);
+      if (len(r.text) > 30) E(`${id}: CROWD_MATCH readout value "${r.text}" > 30 chars`);
+      if (r.atWord == null) E(`${id}: CROWD_MATCH readout "${r.label}" needs atWord — they land one at a time`);
+    }
+    if (len(cm.countLabel) > 18) E(`${id}: CROWD_MATCH countLabel > 18 chars`);
+    if (len(cm.pickLabel) > 20) E(`${id}: CROWD_MATCH pickLabel > 20 chars`);
+    if (len(cm.strictNote) > 30) E(`${id}: CROWD_MATCH strictNote > 30 chars`);
+    if (len(cm.pageTitle) > 20) E(`${id}: CROWD_MATCH pageTitle > 20 chars`);
+    if (len(cm.caption) > 44) E(`${id}: CROWD_MATCH caption > 44 chars`);
+    checkColor(id, 'crowdMatch.color', cm.color);
+    if (cm.pickIndex != null && (cm.pickIndex < 0 || cm.pickIndex >= mem.length))
+      E(`${id}: CROWD_MATCH pickIndex ${cm.pickIndex} is outside 0..${mem.length - 1}`);
+    if (cm.pickAtWord != null && cm.pickIndex == null)
+      E(`${id}: CROWD_MATCH has pickAtWord but no pickIndex — nothing would be singled out`);
+    // TEACHING PACE (owner rule 2026-08-13): each readout is a taught value.
+    if (ro.length && s.durationFrames) {
+      const per = s.durationFrames / ro.length;
+      if (per < 105)
+        W(`${id}: CROWD_MATCH gives ${(per / 30).toFixed(1)}s per readout (need >=3.5s). Show fewer group tools per beat.`);
+    }
+  }
+  if (d.rowFilter) {
+    const rf = d.rowFilter;
+    const rw = rf.rows ?? [];
+    if (!rf.condition) E(`${id}: ROW_FILTER needs a condition — the filter being applied`);
+    if (len(rf.condition) > 34) E(`${id}: ROW_FILTER condition > 34 chars`);
+    if (rw.length < 3) E(`${id}: ROW_FILTER needs >=3 rows — narrowing two rows to one is not a crowd`);
+    if (rw.length > 6) E(`${id}: ROW_FILTER max 6 rows (got ${rw.length})`);
+    let keeps = 0;
+    for (const r of rw) {
+      const k = (r.title ?? '').toLowerCase();
+      if (k && k !== 'keep') E(`${id}: ROW_FILTER row title "${r.title}" must be 'keep' or omitted`);
+      if (k === 'keep') keeps++;
+      if (len(r.label) > 20) E(`${id}: ROW_FILTER row "${r.label}" > 20 chars`);
+      if (len(r.sub) > 14) E(`${id}: ROW_FILTER row control "${r.sub}" > 14 chars`);
+      checkColor(id, 'rowFilter.row.color', r.color);
+    }
+    // The survivor is the whole point; zero or many makes the picture a lie.
+    if (keeps !== 1) E(`${id}: ROW_FILTER has ${keeps} rows marked 'keep' — a filter beat needs EXACTLY one survivor`);
+    if (len(rf.control) > 14) E(`${id}: ROW_FILTER control > 14 chars`);
+    if (len(rf.baseLabel) > 26) E(`${id}: ROW_FILTER baseLabel > 26 chars`);
+    if (len(rf.actLabel) > 26) E(`${id}: ROW_FILTER actLabel > 26 chars`);
+    if (len(rf.pageTitle) > 20) E(`${id}: ROW_FILTER pageTitle > 20 chars`);
+    if (len(rf.caption) > 44) E(`${id}: ROW_FILTER caption > 44 chars`);
+    checkColor(id, 'rowFilter.color', rf.color);
+    if (rf.filterAtWord != null && rf.actAtWord != null && rf.actAtWord <= rf.filterAtWord)
+      E(`${id}: ROW_FILTER actAtWord (${rf.actAtWord}) must come AFTER filterAtWord (${rf.filterAtWord})`);
+    // the survivor has to be SEEN standing alone before anything is done to it
+    if (rf.filterAtWord != null && rf.actAtWord != null) {
+      const gap = (rf.actAtWord - rf.filterAtWord) * 12;
+      if (gap < 75)
+        W(`${id}: ROW_FILTER acts ${(gap / 30).toFixed(1)}s after the narrowing — hold the lone survivor >=2.5s or the containment does not land.`);
+    }
+  }
+  if (d.indexDrift) {
+    const ix = d.indexDrift;
+    const bf = ix.before ?? [];
+    const af = ix.after ?? [];
+    if (bf.length < 3) E(`${id}: INDEX_DRIFT needs >=3 before rows`);
+    if (bf.length > 6) E(`${id}: INDEX_DRIFT max 6 before rows (got ${bf.length})`);
+    if (af.length < 3 || af.length > 6) E(`${id}: INDEX_DRIFT after must be 3-6 rows (got ${af.length})`);
+    for (const b of bf) {
+      if (len(b.label) > 18) E(`${id}: INDEX_DRIFT row "${b.label}" > 18 chars`);
+      checkColor(id, 'indexDrift.before.color', b.color);
+    }
+    for (const a of af) if (len(a) > 18) E(`${id}: INDEX_DRIFT after row "${a}" > 18 chars`);
+    if (!ix.target) E(`${id}: INDEX_DRIFT needs a target — the row you actually mean`);
+    if (len(ix.target) > 18) E(`${id}: INDEX_DRIFT target > 18 chars`);
+    // The target must survive the re-order in BOTH lists or the meaning pointer has
+    // nowhere to travel to and the component silently argues the opposite point.
+    const inBefore = bf.some((b) => b.label === ix.target);
+    const inAfter = af.includes(ix.target);
+    if (!inBefore) E(`${id}: INDEX_DRIFT target "${ix.target}" is not in before[] — the pointers start on nothing`);
+    if (!inAfter) E(`${id}: INDEX_DRIFT target "${ix.target}" is not in after[] — the meaning pointer would have nowhere to go`);
+    if (inBefore && inAfter) {
+      const iB = bf.findIndex((b) => b.label === ix.target);
+      const iA = af.indexOf(ix.target);
+      if (iB === iA)
+        E(`${id}: INDEX_DRIFT target stays at index ${iB} after the re-order — nothing drifts, so the scene proves the opposite of its point`);
+    }
+    if (len(ix.indexLabel) > 20) E(`${id}: INDEX_DRIFT indexLabel > 20 chars`);
+    if (len(ix.meaningLabel) > 24) E(`${id}: INDEX_DRIFT meaningLabel > 24 chars`);
+    if (len(ix.causeLabel) > 26) E(`${id}: INDEX_DRIFT causeLabel > 26 chars`);
+    if (len(ix.brokenNote) > 30) E(`${id}: INDEX_DRIFT brokenNote > 30 chars`);
+    if (len(ix.heldNote) > 30) E(`${id}: INDEX_DRIFT heldNote > 30 chars`);
+    if (len(ix.caption) > 44) E(`${id}: INDEX_DRIFT caption > 44 chars`);
+    checkColor(id, 'indexDrift.color', ix.color);
+    // the BEFORE state has to be read before it is destroyed
+    if (ix.shuffleAtWord != null && ix.atWord != null && ix.shuffleAtWord - ix.atWord < 8)
+      W(`${id}: INDEX_DRIFT re-orders ${(ix.shuffleAtWord - ix.atWord).toFixed(1)} words in — hold the original order ~3s (≈8 words) so the viewer knows what changed.`);
+  }
+  if (d.ruleTest) {
+    const rt = d.ruleTest;
+    const cs = rt.cases ?? [];
+    if (!rt.rule) E(`${id}: RULE_TEST needs a rule — the thing being applied`);
+    if (len(rt.rule) > 62) E(`${id}: RULE_TEST rule > 62 chars — it is a rule, not a paragraph`);
+    if (cs.length < 2) E(`${id}: RULE_TEST needs >=2 cases — one case is not a test, it is an example`);
+    if (cs.length > 4) E(`${id}: RULE_TEST max 4 cases (got ${cs.length})`);
+    let pass = 0, fail = 0;
+    for (const c of cs) {
+      const v = (c.title ?? '').toLowerCase();
+      if (!['ok', 'no'].includes(v)) E(`${id}: RULE_TEST case verdict "${c.title}" must be 'ok' or 'no'`);
+      v === 'no' ? fail++ : pass++;
+      if (len(c.text) > 38) E(`${id}: RULE_TEST case "${(c.text ?? '').slice(0, 20)}…" > 38 chars`);
+      if (len(c.sub) > 30) E(`${id}: RULE_TEST case reason "${c.sub}" > 30 chars`);
+      if (c.atWord == null) E(`${id}: RULE_TEST case "${(c.text ?? '').slice(0, 20)}…" needs atWord — judging one at a time is the point`);
+      checkColor(id, 'ruleTest.case.color', c.color);
+    }
+    // A rule that every case obeys teaches nothing — the boundary is only visible
+    // when the viewer sees something fall on the WRONG side of it.
+    if (cs.length >= 2 && (pass === 0 || fail === 0))
+      W(`${id}: RULE_TEST has ${pass} passing / ${fail} failing case(s) — show at least one of each, or the rule has no edge.`);
+    if (len(rt.kicker) > 22) E(`${id}: RULE_TEST kicker > 22 chars`);
+    if (len(rt.okLabel) > 14) E(`${id}: RULE_TEST okLabel > 14 chars`);
+    if (len(rt.noLabel) > 14) E(`${id}: RULE_TEST noLabel > 14 chars`);
+    if (len(rt.caption) > 44) E(`${id}: RULE_TEST caption > 44 chars`);
+    checkColor(id, 'ruleTest.color', rt.color);
+  }
+  if (d.savedSearch) {
+    const ss = d.savedSearch;
+    const els = ss.elements ?? [];
+    const KINDS = ['field', 'button', 'text', 'link'];
+    if (!ss.query) E(`${id}: SAVED_SEARCH needs a query`);
+    if (len(ss.query) > 34) E(`${id}: SAVED_SEARCH query > 34 chars`);
+    if (els.length < 2) E(`${id}: SAVED_SEARCH needs >=2 elements — one element cannot show a search finding the right one`);
+    if (els.length > 5) E(`${id}: SAVED_SEARCH max 5 elements (got ${els.length})`);
+    for (const e of els) {
+      if (e.title != null && !KINDS.includes((e.title ?? '').toLowerCase()))
+        E(`${id}: SAVED_SEARCH element kind "${e.title}" must be one of ${KINDS.join('/')}`);
+      if (len(e.label) > 16) E(`${id}: SAVED_SEARCH element "${e.label}" > 16 chars`);
+      checkColor(id, 'savedSearch.element.color', e.color);
+    }
+    if (ss.matchIndex == null) E(`${id}: SAVED_SEARCH needs matchIndex — which element the query eventually finds`);
+    else if (ss.matchIndex < 0 || ss.matchIndex >= els.length)
+      E(`${id}: SAVED_SEARCH matchIndex ${ss.matchIndex} is outside 0..${els.length - 1}`);
+    if (len(ss.trigger) > 26) E(`${id}: SAVED_SEARCH trigger > 26 chars`);
+    if (len(ss.savedLabel) > 20) E(`${id}: SAVED_SEARCH savedLabel > 20 chars`);
+    if (len(ss.ranLabel) > 20) E(`${id}: SAVED_SEARCH ranLabel > 20 chars`);
+    if (len(ss.pageTitle) > 20) E(`${id}: SAVED_SEARCH pageTitle > 20 chars`);
+    if (len(ss.caption) > 44) E(`${id}: SAVED_SEARCH caption > 44 chars`);
+    checkColor(id, 'savedSearch.color', ss.color);
+    // The UNRUN half is the lesson. If the scan fires immediately, the viewer never
+    // sees a page that nothing has touched, and the component argues the opposite.
+    if (ss.runAtWord != null && ss.atWord != null && ss.runAtWord - ss.atWord < 8)
+      W(`${id}: SAVED_SEARCH runs ${(ss.runAtWord - ss.atWord).toFixed(1)} words in — hold the un-run state ~3s (≈8 words) or the 'nothing happened yet' beat does not land.`);
+  }
+  if (d.respSplit) {
+    const rs = d.respSplit;
+    const ls = rs.lines ?? [];
+    if (!rs.leftLabel) E(`${id}: RESPONSIBILITY_SPLIT needs leftLabel`);
+    if (!rs.rightLabel) E(`${id}: RESPONSIBILITY_SPLIT needs rightLabel`);
+    if (len(rs.leftLabel) > 18) E(`${id}: RESPONSIBILITY_SPLIT leftLabel > 18 chars`);
+    if (len(rs.rightLabel) > 18) E(`${id}: RESPONSIBILITY_SPLIT rightLabel > 18 chars`);
+    if (len(rs.leftSub) > 24) E(`${id}: RESPONSIBILITY_SPLIT leftSub > 24 chars`);
+    if (len(rs.rightSub) > 24) E(`${id}: RESPONSIBILITY_SPLIT rightSub > 24 chars`);
+    if (len(rs.pileLabel) > 22) E(`${id}: RESPONSIBILITY_SPLIT pileLabel > 22 chars`);
+    if (len(rs.caption) > 44) E(`${id}: RESPONSIBILITY_SPLIT caption > 44 chars`);
+    checkColor(id, 'respSplit.color', rs.color);
+    if (ls.length < 3) E(`${id}: RESPONSIBILITY_SPLIT needs >=3 lines — two is a comparison, not a sort`);
+    if (ls.length > 6) E(`${id}: RESPONSIBILITY_SPLIT max 6 lines (got ${ls.length})`);
+    let left = 0, right = 0;
+    for (const l of ls) {
+      const side = (l.title ?? 'left').toLowerCase();
+      if (!['left', 'right'].includes(side)) E(`${id}: RESPONSIBILITY_SPLIT side "${l.title}" must be 'left' or 'right'`);
+      side === 'right' ? right++ : left++;
+      if (len(l.text) > 32) E(`${id}: RESPONSIBILITY_SPLIT line "${(l.text ?? '').slice(0, 20)}…" > 32 chars`);
+      if (len(l.sub) > 22) E(`${id}: RESPONSIBILITY_SPLIT reason "${l.sub}" > 22 chars`);
+      if (l.atWord == null) E(`${id}: RESPONSIBILITY_SPLIT line "${(l.text ?? '').slice(0, 20)}…" needs atWord — filing one at a time is the point`);
+      checkColor(id, 'respSplit.line.color', l.color);
+    }
+    // An empty bin is not a boundary, it is a list with a label next to it.
+    if (!left || !right)
+      E(`${id}: RESPONSIBILITY_SPLIT files every line into one bin (${left} left / ${right} right) — a split needs both sides`);
+    // TEACHING PACE (owner rule 2026-08-13): each filing has to be watched.
+    if (ls.length && s.durationFrames) {
+      const per = s.durationFrames / ls.length;
+      if (per < 90)
+        W(`${id}: RESPONSIBILITY_SPLIT gives ${(per / 30).toFixed(1)}s per line (need >=3s). File fewer lines per beat.`);
+    }
+  }
+  if (d.changeRipple) {
+    const cr = d.changeRipple;
+    const central = cr.mode === 'central';
+    if (!cr.line) E(`${id}: CHANGE_RIPPLE needs line (what has to change)`);
+    if (!cr.newLine) E(`${id}: CHANGE_RIPPLE needs newLine (what it becomes)`);
+    if (cr.mode != null && !['scattered', 'central'].includes(cr.mode))
+      E(`${id}: CHANGE_RIPPLE mode must be 'scattered' or 'central' (got "${cr.mode}")`);
+    // Budgets are sized to the VERTICAL card, which is the narrowest place these land.
+    if (len(cr.line) > 30) E(`${id}: CHANGE_RIPPLE line > 30 chars — it has to fit inside a card`);
+    if (len(cr.newLine) > 30) E(`${id}: CHANGE_RIPPLE newLine > 30 chars`);
+    if (len(cr.countLabel) > 20) E(`${id}: CHANGE_RIPPLE countLabel > 20 chars`);
+    if (len(cr.holder) > 24) E(`${id}: CHANGE_RIPPLE holder > 24 chars`);
+    if (len(cr.fixLabel) > 24) E(`${id}: CHANGE_RIPPLE fixLabel > 24 chars`);
+    if (len(cr.doneLabel) > 26) E(`${id}: CHANGE_RIPPLE doneLabel > 26 chars`);
+    if (len(cr.caption) > 44) E(`${id}: CHANGE_RIPPLE caption > 44 chars`);
+    checkColor(id, 'changeRipple.color', cr.color);
+    const n = cr.cards ?? 8;
+    if (n < 4 || n > 12) E(`${id}: CHANGE_RIPPLE cards must be 4-12 (got ${n}) — fewer reads as a handful, more is unreadable`);
+    if (cr.missIndex != null) {
+      if (central) E(`${id}: CHANGE_RIPPLE missIndex is a 'scattered' idea — in central mode nothing is missed`);
+      else if (cr.missIndex < 0 || cr.missIndex >= n) E(`${id}: CHANGE_RIPPLE missIndex ${cr.missIndex} is outside 0..${n - 1}`);
+    }
+    if (central && !cr.holder) W(`${id}: CHANGE_RIPPLE central mode without a holder — name the ONE file the line lives in, that is the whole point.`);
+    // TEACHING PACE (owner rule 2026-08-13): the repair has to be WATCHED, not inferred.
+    // scattered repairs one card every 11 frames after a 26-frame beat; central's wave
+    // settles ~9 frames per rank. Both need room AFTER the anchor fires.
+    if (cr.atWord != null && s.durationFrames) {
+      const needed = central ? 16 + 3 * 9 + 12 : 26 + n * 11 + 12;
+      const left = s.durationFrames - cr.atWord * 12;
+      if (left < needed)
+        W(`${id}: CHANGE_RIPPLE has ~${(left / 30).toFixed(1)}s after the rename lands but the ${cr.mode ?? 'scattered'} repair needs ${(needed / 30).toFixed(1)}s. Name the change earlier.`);
+    }
+  }
+  if (d.fixtureCrew) {
+    const fc = d.fixtureCrew;
+    const sg = fc.stages ?? [];
+    if (!fc.testName) E(`${id}: FIXTURE_CREW needs testName (the function that asks)`);
+    if (!fc.askFor) E(`${id}: FIXTURE_CREW needs askFor (the argument that lands in the slot)`);
+    if (sg.length < 2) E(`${id}: FIXTURE_CREW needs >=2 stages — one stage is not a crew`);
+    if (sg.length > 4) E(`${id}: FIXTURE_CREW max 4 stages (got ${sg.length})`);
+    for (const st of sg) {
+      if (len(st.label) > 14) E(`${id}: FIXTURE_CREW stage "${st.label}" > 14 chars`);
+      if (len(st.sub) > 18) E(`${id}: FIXTURE_CREW stage sub "${st.sub}" > 18 chars`);
+      checkColor(id, 'fixtureCrew.stage.color', st.color);
+    }
+    if (len(fc.testName) > 26) E(`${id}: FIXTURE_CREW testName > 26 chars`);
+    if (len(fc.askFor) > 10) E(`${id}: FIXTURE_CREW askFor > 10 chars`);
+    if (len(fc.crewLabel) > 18) E(`${id}: FIXTURE_CREW crewLabel > 18 chars`);
+    if (len(fc.bodyLabel) > 22) E(`${id}: FIXTURE_CREW bodyLabel > 22 chars`);
+    if (len(fc.teardownLabel) > 22) E(`${id}: FIXTURE_CREW teardownLabel > 22 chars`);
+    if (len(fc.caption) > 40) E(`${id}: FIXTURE_CREW caption > 40 chars`);
+    checkColor(id, 'fixtureCrew.color', fc.color);
+    // the handoff must precede the teardown or the animation plays backwards
+    if (fc.handoffAtWord != null && fc.teardownAtWord != null && fc.teardownAtWord <= fc.handoffAtWord)
+      E(`${id}: FIXTURE_CREW teardownAtWord (${fc.teardownAtWord}) must come AFTER handoffAtWord (${fc.handoffAtWord})`);
+    // the body running between handoff and teardown IS the point — give it room
+    if (fc.handoffAtWord != null && fc.teardownAtWord != null) {
+      const gap = (fc.teardownAtWord - fc.handoffAtWord) * 12;
+      if (gap < 90)
+        W(`${id}: FIXTURE_CREW gives ${(gap / 30).toFixed(1)}s between handoff and teardown — the test body needs >=3s to read as running.`);
+    }
+  }
+  if (d.overlayBlock) {
+    const ob = d.overlayBlock;
+    if (!ob.button) E(`${id}: OVERLAY_BLOCK needs a button (the target being covered)`);
+    if (!ob.overlayLabel) E(`${id}: OVERLAY_BLOCK needs overlayLabel (what is covering it)`);
+    if (len(ob.button) > 16) E(`${id}: OVERLAY_BLOCK button "${ob.button}" > 16 chars`);
+    if (len(ob.overlayLabel) > 24) E(`${id}: OVERLAY_BLOCK overlayLabel > 24 chars`);
+    if (len(ob.overlayButton) > 14) E(`${id}: OVERLAY_BLOCK overlayButton > 14 chars`);
+    if (len(ob.screenTitle) > 22) E(`${id}: OVERLAY_BLOCK screenTitle > 22 chars`);
+    if (len(ob.blockedNote) > 30) E(`${id}: OVERLAY_BLOCK blockedNote > 30 chars`);
+    if (len(ob.clearedNote) > 30) E(`${id}: OVERLAY_BLOCK clearedNote > 30 chars`);
+    if (len(ob.waitLabel) > 18) E(`${id}: OVERLAY_BLOCK waitLabel > 18 chars`);
+    if (len(ob.caption) > 40) E(`${id}: OVERLAY_BLOCK caption > 40 chars`);
+    checkColor(id, 'overlayBlock.color', ob.color);
+    // the bounce must happen BEFORE the clear, or the animation plays backwards
+    if (ob.blockedAtWord != null && ob.clearedAtWord != null && ob.clearedAtWord <= ob.blockedAtWord)
+      E(`${id}: OVERLAY_BLOCK clearedAtWord (${ob.clearedAtWord}) must come AFTER blockedAtWord (${ob.blockedAtWord})`);
+    // the wait between bounce and clear is the whole point — give it room to read
+    if (ob.blockedAtWord != null && ob.clearedAtWord != null) {
+      const gap = (ob.clearedAtWord - ob.blockedAtWord) * 12;
+      if (gap < 90)
+        W(`${id}: OVERLAY_BLOCK gives ${(gap / 30).toFixed(1)}s between the bounce and the clear — the wait is the lesson, give it >=3s.`);
+    }
+  }
+  if (d.browserStep) {
+    const bs = d.browserStep;
+    const st = bs.steps ?? [];
+    const KINDS = ['goto', 'fill', 'click', 'check', 'assert'];
+    if (st.length < 2) E(`${id}: BROWSER_STEP needs >=2 steps`);
+    if (st.length > 5) E(`${id}: BROWSER_STEP max 5 steps (got ${st.length})`);
+    let fills = 0;
+    for (const s of st) {
+      const kind = (s.title ?? '').toLowerCase();
+      if (!KINDS.includes(kind)) E(`${id}: BROWSER_STEP step kind "${s.title}" must be one of ${KINDS.join('/')}`);
+      if (kind === 'fill') fills++;
+      if (len(s.text) > 38) E(`${id}: BROWSER_STEP code "${(s.text ?? '').slice(0, 22)}…" > 38 chars`);
+      if (len(s.label) > 26) E(`${id}: BROWSER_STEP label "${s.label}" > 26 chars`);
+      if (len(s.detail) > 16) E(`${id}: BROWSER_STEP element "${s.detail}" > 16 chars`);
+      if (len(s.sub) > 18) E(`${id}: BROWSER_STEP value "${s.sub}" > 18 chars`);
+      if (s.atWord == null) E(`${id}: BROWSER_STEP step "${(s.text ?? '').slice(0, 22)}…" needs atWord — stepping is the point`);
+      checkColor(id, 'browserStep.step.color', s.color);
+    }
+    // the page is BUILT from the steps; more than 3 inputs overflows the form area
+    if (fills > 3) E(`${id}: BROWSER_STEP max 3 fill steps (the page form only holds 3)`);
+    if (len(bs.url) > 34) E(`${id}: BROWSER_STEP url > 34 chars`);
+    if (len(bs.screenTitle) > 22) E(`${id}: BROWSER_STEP screenTitle > 22 chars`);
+    if (len(bs.caption) > 40) E(`${id}: BROWSER_STEP caption > 40 chars`);
+    checkColor(id, 'browserStep.color', bs.color);
+    // TEACHING PACE (owner rule 2026-08-13)
+    if (st.length && s.durationFrames) {
+      const per = s.durationFrames / st.length;
+      if (per < 120)
+        W(`${id}: BROWSER_STEP gives ${(per / 30).toFixed(1)}s per step (need >=4s). Use fewer steps per beat.`);
+    }
+  }
   if (d.diagram) {
     const LAYOUTS = ['flow', 'sequence', 'block', 'tree', 'hub'];
     if (!LAYOUTS.includes(d.diagram.layout)) E(`${id}: DIAGRAM layout "${d.diagram.layout}" must be one of ${LAYOUTS.join('/')}`);
@@ -1306,6 +2476,49 @@ for (const s of spec.scenes ?? []) {
     if (len(d.reveal.kicker) > 24) E(`${id}: REVEAL kicker > 24 chars`);
     if (len(d.reveal.sub) > 60) E(`${id}: REVEAL sub > 60 chars`);
     checkColor(id, 'reveal.color', d.reveal.color);
+  }
+  // QUIZ_CARD — budgets sized to the NARROW (vertical) card. The question must be
+  // readable in ~3 seconds; the site keeps the long wording, the video shortens it.
+  if (d.quiz) {
+    const q = d.quiz;
+    if (len(q.question) > 64) E(`${id}: QUIZ_CARD question > 64 chars — shorten it for video, a quiz nobody can read in 3s costs more retention than it earns`);
+    if (len(q.why) > 70) E(`${id}: QUIZ_CARD why > 70 chars (one line under the options)`);
+    const opts = q.options ?? [];
+    if (opts.length < 2) E(`${id}: QUIZ_CARD needs ≥2 options`);
+    if (opts.length > 4) E(`${id}: QUIZ_CARD max 4 options (A-D)`);
+    opts.forEach((o, i) => {
+      if (len(o.text) > 34) E(`${id}: QUIZ_CARD option ${i + 1} "${o.text}" > 34 chars (vertical row width)`);
+    });
+    if (q.answerIndex == null) E(`${id}: QUIZ_CARD needs answerIndex`);
+    else if (q.answerIndex < 0 || q.answerIndex >= opts.length)
+      E(`${id}: QUIZ_CARD answerIndex ${q.answerIndex} is outside options[] (0-${opts.length - 1})`);
+    // The hold is the point. Reveal too early and the viewer never commits to an
+    // answer, which is the only reason the correction sticks. ~5s ≈ 12 words.
+    if (q.revealAtWord != null && q.atWord != null && q.revealAtWord - q.atWord < 8)
+      W(`${id}: QUIZ_CARD reveals ${(q.revealAtWord - q.atWord).toFixed(1)} words after the question — leave ~5s of silence (≈12 words) so the viewer actually answers.`);
+  }
+  // THEATER_STAGE — budgets sized to the NARROW (vertical) stage: the actor row
+  // is 5 cells wide at most, so a label over 14 glyphs collides with its neighbour.
+  if (d.stage) {
+    const st = d.stage;
+    if (len(st.marquee) > 26) E(`${id}: THEATER_STAGE marquee > 26 chars (it sits in one line over the arch)`);
+    if (len(st.caption) > 40) E(`${id}: THEATER_STAGE caption > 40 chars`);
+    const acts = st.actors ?? [];
+    if (acts.length < 2) E(`${id}: THEATER_STAGE needs ≥2 actors — one actor is not a stage, use REVEAL`);
+    if (acts.length > 5) E(`${id}: THEATER_STAGE max 5 actors (the row collides on vertical)`);
+    acts.forEach((a, i) => {
+      if (len(a.label) > 14) E(`${id}: THEATER_STAGE actor ${i + 1} label "${a.label}" > 14 chars (vertical cell width)`);
+      if (a.kind && !['button', 'field', 'link', 'text'].includes(a.kind))
+        E(`${id}: THEATER_STAGE actor ${i + 1} kind must be button|field|link|text`);
+    });
+    if (st.curtain && !['raising', 'up', 'falling'].includes(st.curtain))
+      E(`${id}: THEATER_STAGE curtain must be raising|up|falling`);
+    if (st.spotlightIndex != null && (st.spotlightIndex < 0 || st.spotlightIndex >= acts.length))
+      E(`${id}: THEATER_STAGE spotlightIndex ${st.spotlightIndex} is outside actors[] (0-${acts.length - 1})`);
+    // The spotlight ARRIVING is the payoff; if it is never aimed, the beat is a
+    // static picture of a stage and something else should carry it.
+    if (st.spotlightIndex == null && !st.curtain)
+      W(`${id}: THEATER_STAGE has neither spotlightIndex nor curtain — nothing happens on the stage. Aim the spotlight or move the curtain.`);
   }
   if (d.tradeoff) {
     const to = d.tradeoff;
