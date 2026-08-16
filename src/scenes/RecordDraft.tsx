@@ -66,6 +66,96 @@ export const RecordDraft: React.FC<{scene: Scene}> = ({scene}) => {
     </div>
   );
 
+  // One action you performed. Shared by both layouts so wide and vertical can never
+  // drift apart in styling — only in ARRANGEMENT, which is the thing that must differ.
+  const actionRow = (a: (typeof acts)[number], i: number) => {
+    const p = interpolate(frame, [startOf(i), startOf(i) + 12], [0, 1], clamp);
+    return (
+      <div
+        key={`a${i}`}
+        style={{
+          height: rowH,
+          boxSizing: 'border-box',
+          padding: `0 ${13 * scale}px`,
+          borderRadius: rad,
+          background: hexA(t.colors.panelBorder, 0.28 * p),
+          border: `${1.5 * scale}px solid ${hexA(t.colors.muted, 0.15 + 0.25 * p)}`,
+          display: 'flex',
+          alignItems: 'center',
+          overflow: 'hidden',
+          opacity: 0.25 + 0.75 * p,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: t.fonts.body,
+            fontSize: (vertical ? 21 : 22) * scale,
+            color: t.colors.text,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {a.label}
+        </span>
+      </div>
+    );
+  };
+
+  // The line that action generated. Lands a beat AFTER the action — that lag is what
+  // sells "this is recording you" rather than "here are two lists".
+  const codeRow = (a: (typeof acts)[number], i: number) => {
+    const p = interpolate(frame, [startOf(i) + 6, startOf(i) + 18], [0, 1], clamp);
+    const k = isKeep(i);
+    const c = judging ? (k ? keep : t.colors.muted) : accent;
+    return (
+      <div
+        key={`c${i}`}
+        style={{
+          height: rowH,
+          boxSizing: 'border-box',
+          padding: `0 ${13 * scale}px`,
+          borderRadius: rad,
+          background: judging && k ? hexA(keep, 0.14) : hexA(accent, 0.1 * p),
+          border: `${1.5 * scale}px solid ${hexA(c, judging ? (k ? 0.7 : 0.18) : 0.2 + 0.4 * p)}`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 10 * scale,
+          overflow: 'hidden',
+          opacity: judging && !k ? 0.42 : 0.25 + 0.75 * p,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: t.fonts.mono,
+            fontSize: (vertical ? 19 : 20) * scale,
+            color: c,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {a.text}
+        </span>
+        {a.sub ? (
+          <span
+            style={{
+              flexShrink: 0,
+              fontFamily: t.fonts.body,
+              fontSize: 17 * scale,
+              color: judging ? c : t.colors.muted,
+              opacity: judging ? 1 : 0,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {a.sub}
+          </span>
+        ) : null}
+      </div>
+    );
+  };
+
   return (
     <AbsoluteFill
       style={{
@@ -79,109 +169,36 @@ export const RecordDraft: React.FC<{scene: Scene}> = ({scene}) => {
       ) : null}
 
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 * scale, opacity: appear}}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: vertical ? 'column' : 'row',
-            gap: 14 * scale,
-            alignItems: 'flex-start',
-          }}
-        >
-          {/* ── what you did ── */}
-          <div style={{width: colW, display: 'flex', flexDirection: 'column', gap: 7 * scale}}>
-            {paneHead(d.sourceLabel ?? 'you, clicking', t.colors.muted, true)}
-            {acts.map((a, i) => {
-              const p = interpolate(frame, [startOf(i), startOf(i) + 12], [0, 1], clamp);
-              return (
-                <div
-                  key={i}
-                  style={{
-                    height: rowH,
-                    boxSizing: 'border-box',
-                    padding: `0 ${13 * scale}px`,
-                    borderRadius: rad,
-                    background: hexA(t.colors.panelBorder, 0.28 * p),
-                    border: `${1.5 * scale}px solid ${hexA(t.colors.muted, 0.15 + 0.25 * p)}`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    overflow: 'hidden',
-                    opacity: 0.25 + 0.75 * p,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: t.fonts.body,
-                      fontSize: (vertical ? 21 : 22) * scale,
-                      color: t.colors.text,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {a.label}
-                  </span>
-                </div>
-              );
-            })}
+        {/* WIDE lays the two panes side by side, so an action and the line it produced
+            sit on the same row and the correspondence is free. VERTICAL cannot do that
+            — stacking the panes turns ten near-identical rows into one undifferentiated
+            wall and the pairing, which IS the lesson, disappears. So vertical pairs them
+            instead: the action, then the line it generated indented beneath it. */}
+        {vertical ? (
+          <div style={{display: 'flex', flexDirection: 'column', gap: 16 * scale, width: colW}}>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'baseline'}}>
+              {paneHead(d.sourceLabel ?? 'you, clicking', t.colors.muted, true)}
+              {paneHead(d.outputLabel ?? 'generated', accent)}
+            </div>
+            {acts.map((a, i) => (
+              <div key={i} style={{display: 'flex', flexDirection: 'column', gap: 5 * scale}}>
+                {actionRow(a, i)}
+                <div style={{paddingLeft: 22 * scale}}>{codeRow(a, i)}</div>
+              </div>
+            ))}
           </div>
-
-          {/* ── what it wrote ── */}
-          <div style={{width: colW, display: 'flex', flexDirection: 'column', gap: 7 * scale}}>
-            {paneHead(d.outputLabel ?? 'generated', accent)}
-            {acts.map((a, i) => {
-              // the code lands a beat AFTER the action — that lag is what sells "it is recording you"
-              const p = interpolate(frame, [startOf(i) + 6, startOf(i) + 18], [0, 1], clamp);
-              const k = isKeep(i);
-              const c = judging ? (k ? keep : t.colors.muted) : accent;
-              return (
-                <div
-                  key={i}
-                  style={{
-                    height: rowH,
-                    boxSizing: 'border-box',
-                    padding: `0 ${13 * scale}px`,
-                    borderRadius: rad,
-                    background: judging && k ? hexA(keep, 0.14) : hexA(accent, 0.1 * p),
-                    border: `${1.5 * scale}px solid ${hexA(c, judging ? (k ? 0.7 : 0.18) : 0.2 + 0.4 * p)}`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: 10 * scale,
-                    overflow: 'hidden',
-                    opacity: judging && !k ? 0.42 : 0.25 + 0.75 * p,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: t.fonts.mono,
-                      fontSize: (vertical ? 19 : 20) * scale,
-                      color: c,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {a.text}
-                  </span>
-                  {a.sub ? (
-                    <span
-                      style={{
-                        flexShrink: 0,
-                        fontFamily: t.fonts.body,
-                        fontSize: 17 * scale,
-                        color: judging ? c : t.colors.muted,
-                        opacity: judging ? 1 : 0,
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {a.sub}
-                    </span>
-                  ) : null}
-                </div>
-              );
-            })}
+        ) : (
+          <div style={{display: 'flex', flexDirection: 'row', gap: 14 * scale, alignItems: 'flex-start'}}>
+            <div style={{width: colW, display: 'flex', flexDirection: 'column', gap: 7 * scale}}>
+              {paneHead(d.sourceLabel ?? 'you, clicking', t.colors.muted, true)}
+              {acts.map((a, i) => actionRow(a, i))}
+            </div>
+            <div style={{width: colW, display: 'flex', flexDirection: 'column', gap: 7 * scale}}>
+              {paneHead(d.outputLabel ?? 'generated', accent)}
+              {acts.map((a, i) => codeRow(a, i))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* ── what the draft simply does not contain ── */}
         {missing.length ? (

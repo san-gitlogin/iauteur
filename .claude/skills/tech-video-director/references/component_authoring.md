@@ -317,6 +317,40 @@ hunting for a `shadow_locator()` that does not exist. Likewise `TRACE_SCRUB` (a 
 that finished) must not stand in for `page.pause()` (a live run you can still interact with).
 **Ask what the component ASSERTS about the world, not what it looks like.**
 
+## 5a-2. BREATHING ROOM, AND WHY VERTICAL IS NOT A RESIZE (owner, 2026-08-16)
+
+Owner: *"make sure the component you create fits within the window with breathable space to
+visually see and understand — that quality is getting degraded as we improve our narration, and
+that quality should also be properly maintained."* Correct, and the failure has a shape.
+
+**A component's meaning often lives in a SPATIAL RELATIONSHIP, and stacking destroys it.**
+`RECORD_DRAFT` puts the action you performed beside the line it generated: in wide, the pairing is
+free, because the two sit on the same row. Switching `flexDirection` to `column` for vertical
+turned that into **ten near-identical rows in one undifferentiated wall** — every pairing gone,
+which is to say the entire lesson gone, while the frame simultaneously had huge dead space above
+and below. Cramped in the middle and empty at the edges is the worst of both.
+
+**So: wide → vertical is a RE-ARRANGEMENT, not a resize.** Ask what relationship the layout is
+carrying, then rebuild that relationship for the new aspect. `RECORD_DRAFT` now renders vertical as
+*pairs* — the action, then its generated line indented beneath it — so the correspondence survives.
+Share the row RENDERERS between both layouts (so styling can never drift) and branch only on
+ARRANGEMENT.
+
+**Checklist before calling a component done:**
+- [ ] **Look at the vertical MAX proof and ask what it MEANS**, not just whether it fits. If two
+      things belonged together in wide, prove they still read as belonging together stacked.
+- [ ] **Gaps scale with grouping.** Rows within a group ~5-7px; between groups ~16px+. Uniform
+      gaps are what turn a structure into a wall.
+- [ ] **Content should not exceed ~75% of frame height.** If it does, cut items or split the beat —
+      do not shrink type. A component that only fits by getting smaller has already failed.
+- [ ] **Dead space at top/bottom while the middle is dense** means the layout is wrong, not that
+      there is too much content.
+- [ ] **Anything that travels stays inside its container** — a moving element must never rely on
+      the frame edge to stop it (see the width-shrink + edge-dock note in §5a).
+- [ ] **Never let narration quality and visual quality trade against each other.** They degrade
+      together when a beat is over-stuffed; the fix for both is fewer ideas per beat, not smaller
+      type and faster words.
+
 ## 5b. VISUAL CRAFT LAWS — a component that compiles is NOT done; a component is done when it is BEAUTIFUL
 
 A scaffold gives you a token-driven, `×scale`, both-aspect skeleton. That is the START. The
