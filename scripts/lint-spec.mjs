@@ -2541,6 +2541,34 @@ for (const s of spec.scenes ?? []) {
     // answer, which is the only reason the correction sticks. ~5s ≈ 12 words.
     if (q.revealAtWord != null && q.atWord != null && q.revealAtWord - q.atWord < 8)
       W(`${id}: QUIZ_CARD reveals ${(q.revealAtWord - q.atWord).toFixed(1)} words after the question — leave ~5s of silence (≈12 words) so the viewer actually answers.`);
+    // ...but measuring from atWord (when the OPTIONS appear) is not enough, and a
+    // shipped episode proved it: a 20-word question followed immediately by
+    // "Ready? Option B" cleared the check above while giving the viewer literally
+    // no time to think. Owner: "there is no gap at all between you asking the
+    // question and the answer getting highlighted."
+    // What actually matters is the gap between the QUESTION ENDING and the reveal,
+    // and that gap has to be FILLED — a single TTS block has no silence in it, so
+    // the thinking time is bought with words that give nothing away. The pattern
+    // that worked for a dozen episodes: "...which check is reliable? Have a think,
+    // and pause the video if you want longer. Ready? It is C."
+    // Word-index maths only means anything BEFORE sync: afterwards revealAtWord holds
+    // a frame (encoded as frame/FPW+1), so rounding it would index a random word. This
+    // is the right moment to catch it anyway — pre-sync is when the narration can still
+    // be rewritten without a re-voice.
+    const qNar = String(s.narration ?? '');
+    if (q.revealAtWord != null && qNar && s.timingSource !== 'tts') {
+      const wds = qNar.trim().split(/\s+/);
+      const revIdx = Math.min(Math.max(1, Math.round(q.revealAtWord)), wds.length) - 1;
+      let lastQ = -1;
+      for (let i = 0; i < revIdx; i++) if (wds[i].includes('?')) lastQ = i;
+      if (lastQ >= 0) {
+        const gap = revIdx - lastQ;
+        const window = wds.slice(lastQ + 1, revIdx + 1).join(' ');
+        const cue = /\b(think|pause|guess|decide|commit|call it|no rush|take a (second|moment)|your (call|answer))\b/i.test(window);
+        if (gap < 9 || !cue)
+          W(`${id}: QUIZ_CARD gives ${gap} word(s) between the question and the reveal${cue ? '' : ', and no pause cue'} — the viewer gets no thinking time. Put an invitation between them ("Have a think, and pause if you want longer.") and anchor the reveal AFTER it.`);
+      }
+    }
   }
   // THEATER_STAGE — budgets sized to the NARROW (vertical) stage: the actor row
   // is 5 cells wide at most, so a label over 14 glyphs collides with its neighbour.

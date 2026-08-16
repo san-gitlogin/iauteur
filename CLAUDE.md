@@ -154,6 +154,30 @@ full build → voiceover → sync loop.
 chains. It caps a CLAUSE, not a sentence. A 25-word sentence with commas, an em-dash and a natural
 breath point is good spoken English; a 15-word sentence with no pause is not.
 
+## LAW 0e-q — A QUIZ WITHOUT A GAP IS NOT A QUIZ (owner, 2026-08-17)
+Owner, on a shipped episode: *"there is no gap at all between you asking the question and the
+answer getting highlighted."* Correct, and it made the quiz beat worthless — a viewer who is never
+given time to commit to an answer learns nothing from being told the right one.
+
+**Cause, and it is the same one twice now:** the quizzes were trimmed to fit a per-scene second
+ceiling, and the first thing cut was the thinking pause, because it is the only part that carries
+no information. Every squeeze finds the teaching first.
+
+**The gap has to be FILLED, not silent.** A scene's narration is one continuous TTS block, so
+there is no silence available inside it — the thinking time is bought with words that give nothing
+away. The pattern that worked for a dozen episodes:
+
+> "…which check is reliable here? **Have a think, and pause the video if you want longer.**
+> Ready? It is C, because expect keeps re-checking until that toast turns up."
+
+Question → **pause invitation (~4s)** → `Ready?` → answer + why, with `revealAtWord` anchored on
+`Ready?`. Never question → `Ready?` → answer, which is what a squeezed quiz collapses into.
+
+**Enforced.** `lint-spec.mjs` measures the words between the QUESTION MARK and the reveal, and
+requires both a real gap (≥9 words) and an actual pause cue. It runs PRE-SYNC, because afterwards
+`revealAtWord` holds a frame rather than a word index — and pre-sync is when the narration can
+still be rewritten without paying for a re-voice.
+
 ## LAW 0g — THE FIRST THIRTY SECONDS ARE A CONTRACT (owner, 2026-08-16)
 Owner, twice: *"In all videos, greeting is missing… saying welcome to <channel>, then asking some
 questions and answering them with what we're gonna see today."* Then, sharpening it: *"you must
