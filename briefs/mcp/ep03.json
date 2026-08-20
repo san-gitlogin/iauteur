@@ -129,10 +129,10 @@
    "codeTitle": "server.py",
    "premise": "You're building a notes manager. A Python dict is the data, and a decorator is how Claude finds it.",
    "durationFrames": 980,
-   "narration": "Four steps, and step one is boilerplate you copy once and forget. |FastMCP with a name gives you a server object. That's genuinely it, because FastMCP does the protocol work for you \u2014 the server exists now. |Step two is your data, and here it's an ordinary Python dictionary, because nothing about MCP requires a database. |Step three is the interesting one. The at mcp dot tool decorator registers the function below it, ^and the name you give is the name Claude will call, ^while the description is the sentence Claude reads when deciding whether this tool is the right one. |Then the function itself is completely ordinary Python \u2014 a lookup, an error if the note's missing, and a return. No MCP anywhere inside the body. |And step four runs it. One line at the bottom, and we'll come back to what stdio means in chapter ten.",
+   "narration": "Four steps, and step one is boilerplate you copy once and forget. |MCPServer with a name gives you a server object. That's genuinely it, because MCPServer does the protocol work for you \u2014 the server exists now. |Step two is your data, and here it's an ordinary Python dictionary, because nothing about MCP requires a database. |Step three is the interesting one. The at mcp dot tool decorator registers the function below it, ^and the name you give is the name Claude will call, ^while the description is the sentence Claude reads when deciding whether this tool is the right one. |Then the function itself is completely ordinary Python \u2014 a lookup, an error if the note's missing, and a return. No MCP anywhere inside the body. |And step four runs it. One line at the bottom, and we'll come back to what stdio means in chapter ten.",
    "lines": [
     {
-     "text": "from mcp.server.fastmcp import FastMCP"
+     "text": "from mcp.server.mcpserver import MCPServer"
     },
     {
      "text": "from pydantic import Field"
@@ -141,7 +141,7 @@
      "text": ""
     },
     {
-     "text": "mcp = FastMCP(\"NotesMCP\")",
+     "text": "mcp = MCPServer(\"NotesMCP\")",
      "detail": "The server exists now. That's step one.",
      "teach": true
     },
@@ -239,7 +239,7 @@
    "narration": "Now the piece everybody asks about. What is Field actually doing there? It isn't validating anything, and it isn't creating a database column. |Field with a description attaches a human sentence to that parameter, ^and MCP turns your whole function into a JSON schema that gets handed to Claude. ^The tool name goes in, ^the tool description goes in, ^and each parameter goes in with its own description. Strip the Field out and Claude still sees a parameter called note underscore i d, but with no idea what belongs there \u2014 so it guesses, and guessing is where bad tool calls come from. %It's a label for the AI, and nothing more.",
    "lines": [
     {
-     "text": "from mcp.server.fastmcp import FastMCP"
+     "text": "from mcp.server.mcpserver import MCPServer"
     },
     {
      "text": "from pydantic import Field"
@@ -248,7 +248,7 @@
      "text": ""
     },
     {
-     "text": "mcp = FastMCP(\"NotesMCP\")"
+     "text": "mcp = MCPServer(\"NotesMCP\")"
     },
     {
      "text": ""

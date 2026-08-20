@@ -522,7 +522,9 @@
               "MCP_PROGRESS",
               "MCP_TRANSPORT",
               "MCP_FLAGS",
-              "MCP_TERMINAL"
+              "MCP_TERMINAL",
+              "MCP_ELICIT",
+              "MCP_DEPRECATED"
             ]
           },
           "narration": {
@@ -592,6 +594,145 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MCP_DEPRECATED"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mcpDeprecated": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "description": "Scene headline, <=48 chars, one [accent] phrase."
+                        },
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-10 elements of the picture. label = what is written in it. sub = the gloss beside it. value = a number the beat states (a percentage, a dollar amount, a duration). owner = ai|code|user for the control board. dir = out|back for a protocol message. out = verbatim payload or output lines. text = a per-kind role: reg|flag|ask|remote|exit. color, atWord."
+                        },
+                        "ends": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-2 endpoint names for the wire and sampling pictures. label = the name on the pillar (<=12), e.g. CLIENT / SERVER."
+                        },
+                        "vars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord = the word it updates on."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "description": "Caption above the picture, <=30 chars, specific to THIS beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at and what stands for what. On screen for the whole beat, carries NO marker (LAW 0l)."
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "Word the rig appears on. Chrome is up within 38 frames regardless."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic colour: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MCP_ELICIT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mcpElicit": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "description": "Scene headline, <=48 chars, one [accent] phrase."
+                        },
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The code, one item per line. text = the line INCLUDING indentation (<=52). detail = the plain-English note shown under it while lit (<=120). atWord = the word it lights on; omit for lines not taught in this beat."
+                        },
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-10 elements of the picture. label = what is written in it. sub = the gloss beside it. value = a number the beat states (a percentage, a dollar amount, a duration). owner = ai|code|user for the control board. dir = out|back for a protocol message. out = verbatim payload or output lines. text = a per-kind role: reg|flag|ask|remote|exit. color, atWord."
+                        },
+                        "ends": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-2 endpoint names for the wire and sampling pictures. label = the name on the pillar (<=12), e.g. CLIENT / SERVER."
+                        },
+                        "vars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord = the word it updates on."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "description": "Caption above the picture, <=30 chars, specific to THIS beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at and what stands for what. On screen for the whole beat, carries NO marker (LAW 0l)."
+                        },
+                        "codeTitle": {
+                          "type": "string",
+                          "description": "Filename in the editor chrome, <=22 chars."
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "Word the rig appears on. Chrome is up within 38 frames regardless."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic colour: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

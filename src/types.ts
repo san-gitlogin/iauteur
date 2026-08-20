@@ -9165,7 +9165,123 @@ export interface McpTerminalData {
   atWord?: number;
   color?: SemColor;
 }
+export interface McpElicitItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpElicitData {
+  headline?: string;
+  lines?: McpElicitItem[];
+  cells?: McpElicitItem[];
+  ends?: McpElicitItem[];
+  vars?: McpElicitItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpDeprecatedItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpDeprecatedData {
+  headline?: string;
+  cells?: McpDeprecatedItem[];
+  ends?: McpDeprecatedItem[];
+  vars?: McpDeprecatedItem[];
+  caption?: string;
+  premise?: string;
+  atWord?: number;
+  color?: SemColor;
+}
 export interface SceneData {
+  mcpDeprecated?: McpDeprecatedData;
+  mcpElicit?: McpElicitData;
   mcpTerm?: McpTerminalData;
   mcpFlags?: McpFlagsData;
   mcpTransport?: McpTransportData;
@@ -10510,6 +10626,18 @@ export interface VideoSpec {
   };
   brand?: BrandConfig;
   cover?: CoverConfig;
-  thumbnail?: {title: string; badge: string; asset: string};
+  thumbnail?: {
+    title: string;
+    badge: string;
+    asset: string;
+    /** A ROW of brand marks under the title, rendered bare — glyph only, on the
+     *  background itself. No chip, no card, no tinted container behind a logo
+     *  (owner, 2026-08-20: *"no colorized container should hold the logos, the
+     *  logos must sit in transparent"*). Uniformly tinted, because three of the
+     *  six official marks are near-black and vanish on a dark ground. */
+    logos?: string[];
+    /** Optional per-row tint for those marks. Defaults to the theme's text colour. */
+    logoTint?: string;
+  };
   scenes: Scene[];
 }

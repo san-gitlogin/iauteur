@@ -250,6 +250,45 @@
    ]
   },
   {
+   "id": "s04d",
+   "type": "MCP_DEPRECATED",
+   "transition": "dip",
+   "background": "zoneB",
+   "key": "mcpDeprecated",
+   "headline": "Two corrections, [both important]",
+   "color": "red",
+   "caption": "status, honestly",
+   "premise": "Roots is deprecated \u2014 and it was never the access control the analogy suggests.",
+   "durationFrames": 880,
+   "narration": "Two corrections before you build anything on this, and the first one matters more than the deprecation. ^Roots is not access control. The specification says so directly: roots are informational guidance, and the protocol does not enforce that servers stay within them. A keycard that the hotel never checks is not a keycard \u2014 which is exactly why you write that path check yourself, and why leaving it out isn't a missing feature, it's an open door. ^Second, roots is deprecated as of the same twenty twenty six revision, alongside sampling. ^The migration is to pass the directories you care about as ordinary tool parameters, or as resource U R Is, or in the server's own configuration \u2014 all of which are explicit, visible, and don't pretend to be a security boundary.",
+   "cells": [
+    {
+     "label": "Roots is NOT access control",
+     "sub": "\u201cinformational guidance\u201d \u2014 the protocol enforces nothing",
+     "color": "red",
+     "text": "CORRECTION",
+     "mark": true
+    },
+    {
+     "label": "Roots",
+     "sub": "deprecated in spec 2026-07-28 (SEP-2577)",
+     "color": "red",
+     "mark": true,
+     "out": [
+      "still in the spec",
+      "for 12+ months"
+     ]
+    },
+    {
+     "label": "Migrate to",
+     "sub": "tool parameters, resource URIs, or server config",
+     "color": "green",
+     "text": "INSTEAD",
+     "mark": true
+    }
+   ]
+  },
+  {
    "id": "s05",
    "type": "QUIZ_CARD",
    "transition": "iris",

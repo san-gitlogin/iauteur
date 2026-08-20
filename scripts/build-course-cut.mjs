@@ -87,19 +87,41 @@ for (const [i, e] of eps.entries()) {
 }
 marks[0] = marks[0].replace(/^\d\d:\d\d:\d\d/, '00:00:00');
 
+
+// YouTube tags. Comma-separated, hard-capped at 500 chars — truncated at the last
+// whole tag that fits, never mid-word.
+const TAGS = [
+  'dsa', 'dsa patterns', 'data structures and algorithms', 'coding interview',
+  'leetcode', 'leetcode patterns', 'mangos', 'faang interview', 'maang',
+  'meta interview', 'google interview', 'nvidia interview', 'openai interview',
+  'anthropic interview', 'spacex interview', 'software engineering interview',
+  'two pointers', 'sliding window', 'binary search', 'hashmap', 'stack',
+  'bfs', 'dfs', 'backtracking', 'dynamic programming', 'greedy',
+  'fast and slow pointers', 'algorithms', 'python', 'interview preparation',
+  'coding interview preparation', 'tech interview', 'the nbx studio',
+];
+let tagLine = '';
+for (const tg of TAGS) {
+  const next = tagLine ? `${tagLine}, ${tg}` : tg;
+  if (next.length > 500) break;
+  tagLine = next;
+}
+
 const channel = eps[0].spec.brand?.channel ?? channelName();
 const md = [
   '# TITLE',
-  'The Complete DSA Pattern Dojo — 10 Patterns That Cover Almost Every Interview Question',
+  'The Complete DSA Pattern for cracking MANGOS - 10 Patterns That Cover Almost Every Interview Qn',
   '',
   '## Alternate titles',
-  '- Every DSA Pattern You Need For MAANG Interviews (Full Course)',
+  '- Crack MANGOS: 10 DSA Patterns That Cover Almost Every Interview Question',
   '- I Traced All 10 DSA Patterns Line By Line So You Never Memorise Another Solution',
-  '- The Only DSA Course You Need Before Your Next Interview',
+  '- The Only DSA Course You Need Before Meta, Anthropic, NVIDIA, Google, OpenAI or SpaceX',
   '',
   '# DESCRIPTION',
   '',
   'Most people fail coding interviews because they memorised two hundred solutions instead of ten patterns.',
+  '',
+  'MANGOS \u2014 Meta, Anthropic, NVIDIA, Google, OpenAI, SpaceX.',
   '',
   `In this video, ${channel} traces all ten interview patterns line by line — the signal words that give each one away, the code running on real data one step at a time, and the four problems to go and do after each. This is the whole course in one sitting.`,
   '',
@@ -126,7 +148,10 @@ const md = [
   'bfs dfs graph patterns interview',
   'coding interview preparation full course',
   '',
-  '#dsa #leetcode #codinginterview #faang #maang #algorithms #datastructures #thenbxstudio',
+  '#dsa #leetcode #codinginterview #faang #mangos #algorithms #datastructures #thenbxstudio',
+  '',
+  '# TAGS (comma-separated, \u2264500 chars \u2014 paste into YouTube tags field)',
+  tagLine,
 ].join('\n');
 
 fs.writeFileSync(`${OUT}/out/upload.md`, md.trim() + '\n');

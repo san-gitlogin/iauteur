@@ -84,7 +84,7 @@ export const RemotionRoot: React.FC = () => {
                 fps={30}
                 width={1280}
                 height={720}
-                defaultProps={{themeName: darkTheme, title: long.thumbnail.title, badge: long.thumbnail.badge, asset: long.thumbnail.asset, logo: long.brand?.logo}}
+                defaultProps={{themeName: darkTheme, title: long.thumbnail.title, badge: long.thumbnail.badge, asset: long.thumbnail.asset, logo: long.brand?.logo, logos: long.thumbnail.logos, logoTint: long.thumbnail.logoTint}}
               />
             ) : null}
             {shorts?.cover ? (

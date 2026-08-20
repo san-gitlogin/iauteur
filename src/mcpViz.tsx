@@ -762,6 +762,154 @@ export const ApiAnatomy: React.FC<McpVizProps> = ({items, accent}) => {
   );
 };
 
+
+
+/** ELICITATION — the current way a server asks the USER for something. Two modes,
+ *  and the difference is a security boundary, not a preference: form mode data
+ *  passes through the client, URL mode data never does, which is why the spec
+ *  FORBIDS asking for credentials in form mode. Drawn as an actual form with typed
+ *  fields, and a browser hand-off, because a bullet list cannot show a boundary. */
+export const ElicitModes: React.FC<McpVizProps> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const m = rowMetrics(v, items.length + 2);
+  const url = items.filter((i) => i.text === 'url');
+  const form = items.filter((i) => i.text !== 'url');
+  const actions = ['accept', 'decline', 'cancel'];
+  const chosen = items.find((i) => actions.includes(i.sub ?? ''));
+  return (
+    <Stack gap={Math.max(9, m.rowH * 0.14) * v.scale}>
+      {/* form mode: a real schema, rendered as the field the user actually sees */}
+      {form.length ? (
+        <div style={{
+          border: `${1.6 * v.scale}px solid ${hexA(v.a, 0.75)}`,
+          borderRadius: v.rad(10), background: hexA(v.a, 0.07),
+          padding: `${11 * v.scale}px ${13 * v.scale}px`,
+        }}>
+          <div style={{...v.mono(m.sub), letterSpacing: 1.1, fontWeight: 800,
+                       color: hexA(v.a, 0.98), marginBottom: 8 * v.scale}}>
+            FORM MODE · data passes through the client
+          </div>
+          {form.map((it, i) => {
+            const on = liveAt(frame, it.atWord, 10);
+            return (
+              <div key={i} style={{
+                display: 'flex', alignItems: 'center', gap: 10 * v.scale,
+                opacity: 0.28 + on * 0.72, marginBottom: 6 * v.scale,
+                padding: `${Math.max(6, m.rowH * 0.1) * v.scale}px ${11 * v.scale}px`,
+                borderRadius: v.rad(7),
+                border: `${1.3 * v.scale}px solid ${on > 0.4 ? hexA(v.a, 0.6) : hexA(v.t.colors.panelBorder, 0.6)}`,
+                background: hexA(v.t.colors.bg, 0.5),
+              }}>
+                <div style={{...v.mono(m.lab * 0.9), fontWeight: 700,
+                             color: on > 0.4 ? v.t.colors.text : v.dim, flex: '0 0 auto'}}>{it.label}</div>
+                <div style={{...v.body(m.sub), color: v.dim, flex: 1, minWidth: 0}}>{it.sub}</div>
+                {it.out?.length ? (
+                  <div style={{...v.mono(m.sub), color: hexA(v.sem('green'), 0.95), flex: '0 0 auto'}}>
+                    {it.out[0]}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
+
+      {/* url mode: the hand-off, drawn as leaving the client entirely */}
+      {url.map((it, i) => {
+        const on = liveAt(frame, it.atWord, 12);
+        return (
+          <div key={`u${i}`} style={{
+            border: `${1.8 * v.scale}px dashed ${hexA(v.sem('orange'), on > 0.4 ? 0.95 : 0.45)}`,
+            borderRadius: v.rad(10), background: hexA(v.sem('orange'), 0.08),
+            padding: `${11 * v.scale}px ${13 * v.scale}px`, opacity: 0.3 + on * 0.7,
+          }}>
+            <div style={{...v.mono(m.sub), letterSpacing: 1.1, fontWeight: 800,
+                         color: v.sem('orange'), marginBottom: 6 * v.scale}}>
+              URL MODE · data never touches the client
+            </div>
+            <div style={{...v.mono(m.lab * 0.92), color: v.t.colors.text, wordBreak: 'break-all'}}>
+              {it.label}
+            </div>
+            <div style={{...v.body(m.sub), color: v.dim, marginTop: 4 * v.scale}}>{it.sub}</div>
+          </div>
+        );
+      })}
+
+      {/* the three-action result model */}
+      <div style={{display: 'flex', gap: 8 * v.scale}}>
+        {actions.map((a) => {
+          const lit = chosen?.sub === a && liveAt(frame, chosen?.atWord, 12) > 0.5;
+          const col = a === 'accept' ? v.sem('green') : a === 'decline' ? v.sem('red') : v.t.colors.muted;
+          return (
+            <div key={a} style={{
+              flex: 1, textAlign: 'center',
+              padding: `${Math.max(7, m.rowH * 0.12) * v.scale}px ${8 * v.scale}px`,
+              borderRadius: v.rad(8),
+              border: `${1.5 * v.scale}px solid ${lit ? hexA(col, 0.95) : hexA(v.t.colors.panelBorder, 0.55)}`,
+              background: lit ? hexA(col, 0.16) : 'transparent',
+              ...v.mono(m.lab * 0.85), fontWeight: 800,
+              color: lit ? col : v.dim,
+            }}>{a}</div>
+          );
+        })}
+      </div>
+    </Stack>
+  );
+};
+
+/** DEPRECATION — a feature that still works, is still in the spec, and is on a
+ *  clock. Three of this course's chapters teach one, so the status is drawn rather
+ *  than mentioned: what it is, when it was deprecated, what replaces it, and the
+ *  date it becomes eligible for removal (LAW 3 — say the true thing, visibly). */
+export const DeprecationCard: React.FC<McpVizProps> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const m = rowMetrics(v, items.length + 1);
+  return (
+    <Stack gap={Math.max(9, m.rowH * 0.14) * v.scale}>
+      {items.map((it, i) => {
+        const on = liveAt(frame, it.atWord, 12);
+        const gone = it.color === 'red';
+        const col = gone ? v.sem('red') : it.color === 'green' ? v.sem('green') : v.a;
+        return (
+          <div key={i} style={{
+            display: 'flex', alignItems: 'center', gap: 12 * v.scale,
+            minHeight: m.rowH * v.scale, boxSizing: 'border-box',
+            padding: `${Math.max(8, m.rowH * 0.14) * v.scale}px ${14 * v.scale}px`,
+            borderRadius: v.rad(10), opacity: 0.3 + on * 0.7,
+            border: `${1.8 * v.scale}px ${gone ? 'dashed' : 'solid'} ${
+              on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.5)}`,
+            background: on > 0.4 ? hexA(col, 0.1) : 'transparent',
+          }}>
+            <div style={{
+              flex: '0 0 auto', padding: `${4 * v.scale}px ${10 * v.scale}px`, borderRadius: 999,
+              ...v.mono(m.sub * 0.95), fontWeight: 800,
+              background: on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.4),
+              color: on > 0.4 ? '#0b0b12' : v.dim, whiteSpace: 'nowrap',
+            }}>{gone ? 'DEPRECATED' : it.text ?? 'USE THIS'}</div>
+            <div style={{minWidth: 0, flex: 1}}>
+              <div style={{...v.mono(m.lab), fontWeight: 800,
+                           color: on > 0.4 ? v.t.colors.text : v.dim,
+                           textDecoration: gone && on > 0.5 ? 'line-through' : undefined}}>
+                {it.label}
+              </div>
+              <div style={{...v.body(m.sub), color: v.dim, marginTop: 2 * v.scale}}>{it.sub}</div>
+            </div>
+            {it.out?.length ? (
+              <div style={{flex: '0 0 auto', textAlign: 'right'}}>
+                {it.out.map((o, k) => (
+                  <div key={k} style={{...v.mono(m.sub * 0.95), color: hexA(v.t.colors.muted, 0.95)}}>{o}</div>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        );
+      })}
+    </Stack>
+  );
+};
+
 // ── dispatcher ───────────────────────────────────────────────────────────────
 const MCP_VIZ: Record<string, React.FC<McpVizProps>> = {
   'control-board': ControlBoard,
@@ -776,6 +924,8 @@ const MCP_VIZ: Record<string, React.FC<McpVizProps>> = {
   'uri-router': UriRouter,
   'mention-race': MentionRace,
   'api-anatomy': ApiAnatomy,
+  'elicit-modes': ElicitModes,
+  'deprecation': DeprecationCard,
 };
 export const McpViz: React.FC<McpVizProps & {kind: string}> = ({kind, ...p}) => {
   const R = MCP_VIZ[kind] ?? ControlBoard;

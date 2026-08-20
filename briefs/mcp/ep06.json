@@ -324,6 +324,44 @@
    ]
   },
   {
+   "id": "s05d",
+   "type": "MCP_DEPRECATED",
+   "transition": "dip",
+   "background": "zoneB",
+   "key": "mcpDeprecated",
+   "headline": "Still real, still [on a clock]",
+   "color": "purple",
+   "caption": "status, honestly",
+   "premise": "Sampling still works and stays in the spec for at least a year. It is also deprecated, and the spec says new code should not adopt it.",
+   "durationFrames": 880,
+   "narration": "Now the part the course you may have read doesn't cover, because the spec moved. ^As of protocol version twenty twenty six, dash oh seven, dash twenty eight, sampling is deprecated. It has not been removed \u2014 it stays in the specification for at least twelve months, and every existing client and server that uses it keeps working. ^But the official guidance is blunt: new implementations should not adopt it, and existing ones should migrate to calling an L L M provider's API directly. ^The earliest it becomes eligible for removal is a revision released on or after July twenty twenty seven. So why did we just spend a chapter on it? Because sampling is the clearest window into how this protocol thinks \u2014 a server that needs intelligence but refuses to hold a key \u2014 and because the code you inherit this year will be full of it. Learn it, recognise it, and don't start something new on it.",
+   "cells": [
+    {
+     "label": "Sampling",
+     "sub": "deprecated in spec 2026-07-28 (SEP-2577)",
+     "color": "red",
+     "mark": true,
+     "out": [
+      "still in the spec",
+      "for 12+ months"
+     ]
+    },
+    {
+     "label": "Migrate to",
+     "sub": "integrating directly with LLM provider APIs",
+     "color": "green",
+     "text": "INSTEAD",
+     "mark": true
+    },
+    {
+     "label": "Earliest removal",
+     "sub": "first revision on or after 2027-07-28",
+     "text": "TIMELINE",
+     "mark": true
+    }
+   ]
+  },
+  {
    "id": "s06",
    "type": "QUIZ_CARD",
    "transition": "iris",

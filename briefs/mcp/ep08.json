@@ -247,6 +247,41 @@
    ]
   },
   {
+   "id": "s04d",
+   "type": "MCP_DEPRECATED",
+   "transition": "dip",
+   "background": "zoneB",
+   "key": "mcpDeprecated",
+   "headline": "One half of this [is deprecated]",
+   "color": "blue",
+   "caption": "status, honestly",
+   "premise": "Progress is current. The logging half of this chapter is deprecated.",
+   "durationFrames": 880,
+   "narration": "One caveat, and it splits this chapter in two. ^Progress reporting is current, healthy, and listed in the spec as a core utility \u2014 report progress is not going anywhere. ^The logging half is deprecated, in the same twenty twenty six revision as sampling and roots. ^If you're on stdio, the guidance is to write to standard error instead, which the client already captures; and for anything you'd actually operate in production, use Open Telemetry, which is built for exactly this and gives you traces rather than loose strings. So keep report progress, and treat c t x dot info as something you'll meet in existing code rather than something to build on.",
+   "cells": [
+    {
+     "label": "report_progress()",
+     "sub": "current \u2014 a core utility in the spec",
+     "color": "green",
+     "text": "CURRENT",
+     "mark": true
+    },
+    {
+     "label": "Logging (ctx.info)",
+     "sub": "deprecated in spec 2026-07-28 (SEP-2577)",
+     "color": "red",
+     "mark": true
+    },
+    {
+     "label": "Migrate to",
+     "sub": "stderr on stdio; OpenTelemetry for observability",
+     "color": "green",
+     "text": "INSTEAD",
+     "mark": true
+    }
+   ]
+  },
+  {
    "id": "s05",
    "type": "RECAP",
    "transition": "dip",

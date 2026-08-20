@@ -103,10 +103,10 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 320,
-   "narration": "Everything from here is assembly. You've met every part already, so this is about seeing them run together. Learn MCP, on THE NBX STUDIO.",
+   "narration": "Everything from here is assembly \u2014 you've met every part already. But one thing this course has that most MCP material doesn't: an honest note about what's on its way out. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "EVERYTHING, TOGETHER",
-    "subtitle": "chapter eleven of eleven"
+    "subtitle": "chapter thirteen of thirteen"
    },
    "anchors": []
   },
@@ -157,6 +157,53 @@
      "label": "Notifications",
      "sub": "ctx.info and report_progress",
      "owner": "code",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s03b",
+   "type": "MCP_DEPRECATED",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpDeprecated",
+   "headline": "Current, and [on a clock]",
+   "color": "red",
+   "caption": "as of spec 2026-07-28",
+   "premise": "Everything here still works today. Three of them are scheduled for removal, and the spec says not to start anything new on them.",
+   "durationFrames": 920,
+   "narration": "Before you go and build, here's the state of play, because a lot of MCP writing online predates it. ^Tools, resources and prompts are current, and they're the spine of everything. ^Elicitation is current, and it's where the protocol is putting its weight now. ^Sampling is deprecated as of the twenty twenty six revision \u2014 migrate to calling a provider API directly. ^Roots is deprecated too \u2014 pass paths as tool parameters, resource U R Is, or server config instead. ^And logging is deprecated \u2014 standard error on stdio, Open Telemetry in production. None of those three vanish tomorrow. They stay in the spec for at least twelve months and the code you inherit will be full of them, which is exactly why you learnt them. Just don't start something new on a feature the specification has already told you it's retiring.",
+   "cells": [
+    {
+     "label": "Tools \u00b7 Resources \u00b7 Prompts",
+     "sub": "current \u2014 the spine of the protocol",
+     "color": "green",
+     "text": "CURRENT",
+     "mark": true
+    },
+    {
+     "label": "Elicitation",
+     "sub": "current \u2014 form mode and URL mode",
+     "color": "green",
+     "text": "CURRENT",
+     "mark": true
+    },
+    {
+     "label": "Sampling",
+     "sub": "\u2192 call a provider API directly",
+     "color": "red",
+     "mark": true
+    },
+    {
+     "label": "Roots",
+     "sub": "\u2192 tool parameters, resource URIs, or config",
+     "color": "red",
+     "mark": true
+    },
+    {
+     "label": "Logging",
+     "sub": "\u2192 stderr on stdio, OpenTelemetry in production",
+     "color": "red",
      "mark": true
     }
    ]
@@ -235,7 +282,7 @@
    "transition": "dip",
    "background": "zoneB",
    "durationFrames": 440,
-   "narration": "Three lines for the whole protocol. %Ask who is in control, and the primitive names itself. %Claude asks, and your code executes \u2014 always. %And whoever holds the key pays, which is the whole argument for sampling.",
+   "narration": "Three lines for the whole protocol. %Ask who is in control, and the primitive names itself. %Claude asks, and your code executes \u2014 always. %And check the spec's status before you build, because three of the features you just learnt are already on their way out.",
    "data": {
     "heading": "MCP, in three lines",
     "points": [
@@ -246,7 +293,7 @@
       "text": "Claude asks \u2014 your code executes"
      },
      {
-      "text": "Whoever holds the key pays"
+      "text": "Check the status before you build"
      }
     ]
    },

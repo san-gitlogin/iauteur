@@ -6,12 +6,10 @@ import {AssetIcon} from './AssetIcon';
 
 // Long-form thumbnail (1280x720). Rule: ≤4 words, one focal icon, readable at 120px.
 // `logo` (brand.logo) stamps the channel mark bottom-right — every thumbnail carries it.
-const ThumbInner: React.FC<{title: string; badge: string; asset: string; logo?: string}> = ({
-  title,
-  badge,
-  asset,
-  logo,
-}) => {
+const ThumbInner: React.FC<{
+  title: string; badge: string; asset: string; logo?: string;
+  logos?: string[]; logoTint?: string;
+}> = ({title, badge, asset, logo, logos, logoTint}) => {
   const t = useTheme();
   return (
     <AbsoluteFill>
@@ -21,10 +19,10 @@ const ThumbInner: React.FC<{title: string; badge: string; asset: string; logo?: 
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0 90px',
+          padding: logos?.length ? '0 90px 190px' : '0 90px',
         }}
       >
-        <div style={{display: 'flex', flexDirection: 'column', gap: 28, maxWidth: '62%'}}>
+        <div style={{display: 'flex', flexDirection: 'column', gap: 28, maxWidth: logos?.length ? '88%' : '62%'}}>
           <div
             style={{
               alignSelf: 'flex-start',
@@ -45,7 +43,7 @@ const ThumbInner: React.FC<{title: string; badge: string; asset: string; logo?: 
             style={{
               fontFamily: t.fonts.display,
               fontWeight: t.style.displayWeight,
-              fontSize: 108,
+              fontSize: logos?.length ? 132 : 108,
               lineHeight: 1.02,
               color: t.colors.text,
               letterSpacing: t.style.displayTracking,
@@ -58,8 +56,31 @@ const ThumbInner: React.FC<{title: string; badge: string; asset: string; logo?: 
             {title}
           </div>
         </div>
-        <AssetIcon asset={asset} size={300} />
+        {logos?.length ? null : <AssetIcon asset={asset} size={300} />}
       </AbsoluteFill>
+      {/* THE LOGO WALL. Bare glyphs on the background itself — no chip, no card, no
+          tinted container. Tinted uniformly: Anthropic (#191919), SpaceX (#000000)
+          and OpenAI (#412991) are near-black official marks and would disappear
+          entirely on a dark ground, so six clashing brand colours is not an option
+          that survives contact with the background. */}
+      {logos?.length ? (
+        <div
+          style={{
+            position: 'absolute',
+            left: 90,
+            // clear of the channel mark in the bottom-right corner
+            right: 210,
+            bottom: 58,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          {logos.map((a) => (
+            <AssetIcon key={a} asset={a} size={104} bare tint={logoTint ?? t.colors.text} />
+          ))}
+        </div>
+      ) : null}
       {logo ? (
         <div style={{position: 'absolute', bottom: 26, right: 30, opacity: 0.9}}>
           <AssetIcon asset={logo} size={96} bare />
@@ -75,6 +96,8 @@ export const Thumbnail: React.FC<{
   badge: string;
   asset: string;
   logo?: string;
+  logos?: string[];
+  logoTint?: string;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>
     <ThumbInner {...props} />

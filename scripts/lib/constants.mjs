@@ -230,6 +230,9 @@ export const TYPES = [
   'MCP_PROGRESS',
   'MCP_TRANSPORT',
   'MCP_FLAGS',
+  'MCP_TERMINAL',
+  'MCP_ELICIT',
+  'MCP_DEPRECATED',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

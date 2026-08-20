@@ -148,7 +148,7 @@
      "teach": true
     },
     {
-     "text": "    model=\"claude-sonnet-4-0\","
+     "text": "    model=\"claude-sonnet-5\","
     },
     {
      "text": "    max_tokens=1024,"

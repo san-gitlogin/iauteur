@@ -47,6 +47,10 @@ const DEFS = [
    what:'the two scary flags as switches, and the grid of features that visibly goes dark when one is thrown'},
   {type:'MCP_TERMINAL',    name:'McpTerminal',   key:'mcpTerm', viz:'wire', color:'green', term:true,
    what:'a real shell session — install, run, and the server actually starting — with verbatim output rather than an invented one-liner (LAW 0m)'},
+  {type:'MCP_ELICIT',      name:'McpElicit',     key:'mcpElicit', viz:'elicit-modes', color:'green',
+   what:'the current way a server asks the USER for something — a real form with typed fields for form mode, and a browser hand-off for URL mode, where the difference is a security boundary rather than a preference'},
+  {type:'MCP_DEPRECATED',  name:'McpDeprecated', key:'mcpDeprecated', viz:'deprecation', color:'red', solo:true,
+   what:'a feature that still works, is still in the spec, and is on a clock — what it is, when it was deprecated, what replaces it, and the date it becomes eligible for removal'},
 ];
 
 const fields = (d) => [

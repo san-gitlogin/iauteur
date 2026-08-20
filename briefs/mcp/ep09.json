@@ -159,25 +159,35 @@
    "color": "red",
    "caption": "read this twice",
    "codeTitle": "server.py",
-   "premise": "Both flags are set when you CREATE the server, and both trade features for scale. Nothing warns you.",
-   "durationFrames": 1000,
-   "narration": "Now the trap, and it's worth reading twice. Both flags are set when you create the server, not when you run it. |Stateless h t t p true means the server forgets each client between requests, ^which is exactly what you need behind a load balancer, because any instance can then answer any request. The cost is severe: sampling stops working, progress stops working, roots stop working, and subscriptions stop working \u2014 because every one of those needs the server to remember who you are. |Json response true means replies come back as plain JSON instead of a stream, ^which kills live progress and log messages, since streaming is the mechanism those arrive on. ^Notice what survives both: ordinary tool calls. So the rule of thumb is to start with both false, which is the default, and only reach for either one when you genuinely need horizontal scaling and can say out loud what you're giving up.",
+   "premise": "Both flags are passed to run(), not to the constructor. Both trade features for scale, and nothing warns you.",
+   "durationFrames": 1020,
+   "narration": "Now the trap, and it's worth reading twice. |First, where these flags actually live, because this catches anyone who learnt MCP a year ago: they are not constructor arguments. |You pass them to run, alongside the transport, and the server object itself knows nothing about them. |Stateless h t t p true means the server forgets each client between requests, ^which is exactly what you want behind a load balancer, because any instance can then answer any request. The cost is severe, though: sampling stops working, elicitation stops working, roots stop working, and subscriptions stop working \u2014 every one of those needs the server to remember who you are between calls. |Json response true means replies come back as plain JSON instead of a stream, ^which kills live progress and log messages, since streaming is the mechanism those travel on. ^Notice what survives both: ordinary tool calls. So start with both false, which is the default, and only reach for either when you genuinely need horizontal scaling and can say out loud what you're giving up.",
    "lines": [
     {
-     "text": "from mcp.server.fastmcp import FastMCP"
+     "text": "from mcp.server.mcpserver import MCPServer"
     },
     {
      "text": ""
     },
     {
-     "text": "mcp = FastMCP("
+     "text": "mcp = MCPServer(\"my-server\")",
+     "detail": "The constructor takes no transport flags.",
+     "teach": true
     },
     {
-     "text": "    \"my-server\","
+     "text": ""
+    },
+    {
+     "text": "mcp.run(",
+     "detail": "They belong to run(), with the transport.",
+     "teach": true
+    },
+    {
+     "text": "    transport=\"streamable-http\","
     },
     {
      "text": "    stateless_http=True,",
-     "detail": "Scales. Kills sampling, progress, roots, subscriptions.",
+     "detail": "Scales. Kills sampling, elicitation, roots, subscriptions.",
      "teach": true
     },
     {
@@ -187,9 +197,6 @@
     },
     {
      "text": ")"
-    },
-    {
-     "text": "mcp.run(transport=\"streamable-http\")"
     }
    ],
    "cells": [
@@ -200,7 +207,7 @@
      "mark": true,
      "out": [
       "sampling",
-      "progress",
+      "elicitation",
       "roots",
       "subscriptions"
      ]
@@ -219,13 +226,16 @@
      "label": "sampling"
     },
     {
-     "label": "progress"
+     "label": "elicitation"
     },
     {
      "label": "roots"
     },
     {
      "label": "subscriptions"
+    },
+    {
+     "label": "progress"
     },
     {
      "label": "log messages"

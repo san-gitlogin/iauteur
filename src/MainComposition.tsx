@@ -345,10 +345,14 @@ import {McpProgress} from './scenes/McpProgress';
 import {McpTransport} from './scenes/McpTransport';
 import {McpFlags} from './scenes/McpFlags';
 import {McpTerminal} from './scenes/McpTerminal';
+import {McpElicit} from './scenes/McpElicit';
+import {McpDeprecated} from './scenes/McpDeprecated';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  MCP_DEPRECATED: McpDeprecated,
+  MCP_ELICIT: McpElicit,
   MCP_TERMINAL: McpTerminal,
   MCP_FLAGS: McpFlags,
   MCP_TRANSPORT: McpTransport,
