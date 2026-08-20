@@ -195,17 +195,20 @@
     {
      "label": "the error names JSON",
      "sub": "a parse failure, mid-stream",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:file-warning"
     },
     {
      "label": "not the print",
      "sub": "nothing points at the real cause",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:eye-off"
     },
     {
      "label": "stderr is safe",
      "sub": "and is where the spec sends logs now",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:shield-check"
     }
    ]
   },

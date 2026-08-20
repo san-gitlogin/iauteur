@@ -420,17 +420,20 @@
     {
      "label": "1 tool",
      "sub": "read_note",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:wrench"
     },
     {
      "label": "1 parameter",
      "sub": "described for the model",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:tag"
     },
     {
      "label": "a real result",
      "sub": "and Claude isn't involved yet",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:corner-down-left"
     }
    ]
   },
