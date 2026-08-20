@@ -218,6 +218,18 @@ export const TYPES = [
   'DSA_SIGNALS',
   'DSA_COST',
   'DSA_FRAMEWORK',
+  'MCP_API_ANATOMY',
+  'MCP_CONTROL',
+  'MCP_WIRE',
+  'MCP_SCHEMA',
+  'MCP_LOOP',
+  'MCP_URI',
+  'MCP_MENTION',
+  'MCP_SAMPLING',
+  'MCP_ROOTS',
+  'MCP_PROGRESS',
+  'MCP_TRANSPORT',
+  'MCP_FLAGS',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

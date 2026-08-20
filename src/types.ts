@@ -21,6 +21,10 @@ export interface StepItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 
 export interface ChatMessage {
@@ -47,6 +51,10 @@ export interface StatPanelItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 
 export interface PathCard {
@@ -161,6 +169,10 @@ export interface CarouselItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CarouselData {
   items: CarouselItem[];
@@ -200,6 +212,10 @@ export interface ListItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 
 // ACTIVITY_CARD — a KPI dashboard card: big value + trend + staggered mini bars.
@@ -1071,6 +1087,10 @@ export interface QueueItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface QueueData {
   headline?: string;
@@ -1259,6 +1279,10 @@ export interface CastBoardItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CastBoardData {
   headline?: string;
@@ -1285,6 +1309,10 @@ export interface LabAssemblyItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface LabAssemblyData {
   headline?: string;
@@ -1310,6 +1338,10 @@ export interface BudgetMeterRowItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface BudgetMeterRowData {
   headline?: string;
@@ -1337,6 +1369,10 @@ export interface WordAnchorRailItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface WordAnchorRailData {
   headline?: string;
@@ -1363,6 +1399,10 @@ export interface ReskinCarouselItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ReskinCarouselData {
   headline?: string;
@@ -1412,6 +1452,10 @@ export interface TopicIntakeItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface TopicIntakeData {
   headline?: string;
@@ -1438,6 +1482,10 @@ export interface PromptHandoffItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface PromptHandoffData {
   headline?: string;
@@ -1465,6 +1513,10 @@ export interface CheckSweepItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CheckSweepData {
   headline?: string;
@@ -1499,6 +1551,10 @@ export interface AppWindowItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface AppWindowData {
   headline?: string;
@@ -1541,6 +1597,10 @@ export interface ChatTrioItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ChatTrioData {
   headline?: string;
@@ -1576,6 +1636,10 @@ export interface VideoPlayerItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface VideoPlayerData {
   headline?: string;
@@ -1603,6 +1667,10 @@ export interface SceneForgeItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface SceneForgeData {
   headline?: string;
@@ -1636,6 +1704,10 @@ export interface ProductionGrindItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ProductionGrindData {
   headline?: string;
@@ -1669,6 +1741,10 @@ export interface BeatBoardItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface BeatBoardData {
   headline?: string;
@@ -1704,6 +1780,10 @@ export interface ComponentLabItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ComponentLabData {
   headline?: string;
@@ -1740,6 +1820,10 @@ export interface AutoRunItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface AutoRunData {
   headline?: string;
@@ -1777,6 +1861,10 @@ export interface RepoCtaItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface RepoCtaData {
   headline?: string;
@@ -1823,6 +1911,10 @@ export interface TheaterStageItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface TheaterStageData {
   marquee?: string;
@@ -1852,6 +1944,10 @@ export interface QuizCardItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface QuizCardData {
   question?: string;
@@ -1881,6 +1977,10 @@ export interface CodeRunItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CodeRunData {
   lines?: CodeRunItem[];
@@ -1911,6 +2011,10 @@ export interface BrowserStepItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface BrowserStepData {
   steps?: BrowserStepItem[];
@@ -1954,6 +2058,10 @@ export interface FixtureCrewItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface FixtureCrewData {
   testName?: string;
@@ -2002,6 +2110,10 @@ export interface RuleTestItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface RuleTestData {
   rule?: string;
@@ -2033,6 +2145,10 @@ export interface SavedSearchItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface SavedSearchData {
   query?: string;
@@ -2067,6 +2183,10 @@ export interface ResponsibilitySplitItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ResponsibilitySplitData {
   leftLabel?: string;
@@ -2099,6 +2219,10 @@ export interface CrowdMatchItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CrowdMatchData {
   query?: string;
@@ -2135,6 +2259,10 @@ export interface RowFilterItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface RowFilterData {
   condition?: string;
@@ -2169,6 +2297,10 @@ export interface IndexDriftItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface IndexDriftData {
   before?: IndexDriftItem[];
@@ -2219,6 +2351,10 @@ export interface FrameBoundaryItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface FrameBoundaryData {
   outerTitle?: string;
@@ -2254,6 +2390,10 @@ export interface DialogGateItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DialogGateData {
   message?: string;
@@ -2304,6 +2444,10 @@ export interface ShotScopeItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ShotScopeData {
   shots?: ShotScopeItem[];
@@ -2336,6 +2480,10 @@ export interface FlagHarvestItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface FlagHarvestData {
   flag?: string;
@@ -2369,6 +2517,10 @@ export interface TraceScrubItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface TraceScrubData {
   steps?: TraceScrubItem[];
@@ -2402,6 +2554,10 @@ export interface MailRoomItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface MailRoomData {
   pattern?: string;
@@ -2433,6 +2589,10 @@ export interface SadPathsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface SadPathsData {
   states?: SadPathsItem[];
@@ -2464,6 +2624,10 @@ export interface HandStampItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface HandStampData {
   toll?: string;
@@ -2498,6 +2662,10 @@ export interface ScopeLadderItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ScopeLadderData {
   fixtures?: ScopeLadderItem[];
@@ -2528,6 +2696,10 @@ export interface BackstagePhoneItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface BackstagePhoneData {
   question?: string;
@@ -2564,6 +2736,10 @@ export interface StageHandoffItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface StageHandoffData {
   testName?: string;
@@ -2598,6 +2774,10 @@ export interface SearchNarrowItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface SearchNarrowData {
   rootLabel?: string;
@@ -2629,6 +2809,10 @@ export interface SetLogicItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface SetLogicData {
   op?: string;
@@ -2662,6 +2846,10 @@ export interface SealedBoxItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface SealedBoxData {
   boxLabel?: string;
@@ -2695,6 +2883,10 @@ export interface WorkerSpreadItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface WorkerSpreadData {
   queueLabel?: string;
@@ -2728,6 +2920,10 @@ export interface OrderRouletteItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface OrderRouletteData {
   dependency?: string;
@@ -2761,6 +2957,10 @@ export interface FrozenFrameItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface FrozenFrameData {
   filename?: string;
@@ -2795,6 +2995,10 @@ export interface RecordDraftItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface RecordDraftData {
   sourceLabel?: string;
@@ -2827,6 +3031,10 @@ export interface PathWalkItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface PathWalkData {
   headline?: string;
@@ -2855,6 +3063,10 @@ export interface ListingRowItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ListingRowData {
   headline?: string;
@@ -2883,6 +3095,10 @@ export interface LinkPairItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface LinkPairData {
   headline?: string;
@@ -2913,6 +3129,10 @@ export interface DeletionGuardItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DeletionGuardData {
   headline?: string;
@@ -2941,6 +3161,10 @@ export interface ToolBenchItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface ToolBenchData {
   headline?: string;
@@ -2982,6 +3206,10 @@ export interface CmdLsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdLsData {
   headline?: string;
@@ -3025,6 +3253,10 @@ export interface CmdCdItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdCdData {
   headline?: string;
@@ -3063,6 +3295,10 @@ export interface CmdPwdItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdPwdData {
   headline?: string;
@@ -3101,6 +3337,10 @@ export interface CmdMkdirItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdMkdirData {
   headline?: string;
@@ -3139,6 +3379,10 @@ export interface CmdCpItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdCpData {
   headline?: string;
@@ -3177,6 +3421,10 @@ export interface CmdMvItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdMvData {
   headline?: string;
@@ -3215,6 +3463,10 @@ export interface CmdRmItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdRmData {
   headline?: string;
@@ -3253,6 +3505,10 @@ export interface CmdLnItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdLnData {
   headline?: string;
@@ -3291,6 +3547,10 @@ export interface CmdClearItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdClearData {
   headline?: string;
@@ -3329,6 +3589,10 @@ export interface CmdTouchItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdTouchData {
   headline?: string;
@@ -3367,6 +3631,10 @@ export interface CmdCatItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdCatData {
   headline?: string;
@@ -3405,6 +3673,10 @@ export interface CmdTacItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdTacData {
   headline?: string;
@@ -3443,6 +3715,10 @@ export interface CmdMoreItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdMoreData {
   headline?: string;
@@ -3481,6 +3757,10 @@ export interface CmdLessItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdLessData {
   headline?: string;
@@ -3519,6 +3799,10 @@ export interface CmdTailItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdTailData {
   headline?: string;
@@ -3557,6 +3841,10 @@ export interface CmdViItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdViData {
   headline?: string;
@@ -3595,6 +3883,10 @@ export interface CmdDiffItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdDiffData {
   headline?: string;
@@ -3633,6 +3925,10 @@ export interface CmdFindItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdFindData {
   headline?: string;
@@ -3671,6 +3967,10 @@ export interface CmdLocateItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdLocateData {
   headline?: string;
@@ -3709,6 +4009,10 @@ export interface CmdGrepItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdGrepData {
   headline?: string;
@@ -3747,6 +4051,10 @@ export interface CmdAwkItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdAwkData {
   headline?: string;
@@ -3785,6 +4093,10 @@ export interface CmdSedItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdSedData {
   headline?: string;
@@ -3823,6 +4135,10 @@ export interface CmdXargsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdXargsData {
   headline?: string;
@@ -3861,6 +4177,10 @@ export interface CmdChmodItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdChmodData {
   headline?: string;
@@ -3899,6 +4219,10 @@ export interface CmdChownItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdChownData {
   headline?: string;
@@ -3937,6 +4261,10 @@ export interface CmdUmaskItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdUmaskData {
   headline?: string;
@@ -3975,6 +4303,10 @@ export interface CmdSudoItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdSudoData {
   headline?: string;
@@ -4013,6 +4345,10 @@ export interface CmdUseraddItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdUseraddData {
   headline?: string;
@@ -4051,6 +4387,10 @@ export interface CmdUsermodItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdUsermodData {
   headline?: string;
@@ -4089,6 +4429,10 @@ export interface CmdUserdelItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdUserdelData {
   headline?: string;
@@ -4127,6 +4471,10 @@ export interface CmdPasswdItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdPasswdData {
   headline?: string;
@@ -4165,6 +4513,10 @@ export interface CmdChpasswdItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdChpasswdData {
   headline?: string;
@@ -4203,6 +4555,10 @@ export interface CmdWItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdWData {
   headline?: string;
@@ -4241,6 +4597,10 @@ export interface CmdLastItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdLastData {
   headline?: string;
@@ -4279,6 +4639,10 @@ export interface CmdChrootItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdChrootData {
   headline?: string;
@@ -4317,6 +4681,10 @@ export interface CmdPsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdPsData {
   headline?: string;
@@ -4355,6 +4723,10 @@ export interface CmdPstreeItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdPstreeData {
   headline?: string;
@@ -4393,6 +4765,10 @@ export interface CmdTopItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdTopData {
   headline?: string;
@@ -4431,6 +4807,10 @@ export interface CmdHtopItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdHtopData {
   headline?: string;
@@ -4469,6 +4849,10 @@ export interface CmdBtopItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdBtopData {
   headline?: string;
@@ -4507,6 +4891,10 @@ export interface CmdAtopItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdAtopData {
   headline?: string;
@@ -4545,6 +4933,10 @@ export interface CmdGlancesItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdGlancesData {
   headline?: string;
@@ -4583,6 +4975,10 @@ export interface CmdNmonItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNmonData {
   headline?: string;
@@ -4621,6 +5017,10 @@ export interface CmdKillItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdKillData {
   headline?: string;
@@ -4659,6 +5059,10 @@ export interface CmdKillallItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdKillallData {
   headline?: string;
@@ -4697,6 +5101,10 @@ export interface CmdNohupItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNohupData {
   headline?: string;
@@ -4735,6 +5143,10 @@ export interface CmdSleepItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdSleepData {
   headline?: string;
@@ -4773,6 +5185,10 @@ export interface CmdWaitItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdWaitData {
   headline?: string;
@@ -4811,6 +5227,10 @@ export interface CmdLsofItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdLsofData {
   headline?: string;
@@ -4849,6 +5269,10 @@ export interface CmdStraceItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdStraceData {
   headline?: string;
@@ -4887,6 +5311,10 @@ export interface CmdUptimeItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdUptimeData {
   headline?: string;
@@ -4925,6 +5353,10 @@ export interface CmdFreeItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdFreeData {
   headline?: string;
@@ -4963,6 +5395,10 @@ export interface CmdVmstatItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdVmstatData {
   headline?: string;
@@ -5001,6 +5437,10 @@ export interface CmdIostatItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdIostatData {
   headline?: string;
@@ -5039,6 +5479,10 @@ export interface CmdIotopItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdIotopData {
   headline?: string;
@@ -5077,6 +5521,10 @@ export interface CmdDstatItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdDstatData {
   headline?: string;
@@ -5115,6 +5563,10 @@ export interface CmdSarItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdSarData {
   headline?: string;
@@ -5153,6 +5605,10 @@ export interface CmdWatchItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdWatchData {
   headline?: string;
@@ -5191,6 +5647,10 @@ export interface CmdDfItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdDfData {
   headline?: string;
@@ -5229,6 +5689,10 @@ export interface CmdDuItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdDuData {
   headline?: string;
@@ -5267,6 +5731,10 @@ export interface CmdNcduItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNcduData {
   headline?: string;
@@ -5305,6 +5773,10 @@ export interface CmdFdiskItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdFdiskData {
   headline?: string;
@@ -5343,6 +5815,10 @@ export interface CmdPartedItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdPartedData {
   headline?: string;
@@ -5381,6 +5857,10 @@ export interface CmdBlkidItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdBlkidData {
   headline?: string;
@@ -5419,6 +5899,10 @@ export interface CmdMkfsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdMkfsData {
   headline?: string;
@@ -5457,6 +5941,10 @@ export interface CmdFsckItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdFsckData {
   headline?: string;
@@ -5495,6 +5983,10 @@ export interface CmdMountItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdMountData {
   headline?: string;
@@ -5533,6 +6025,10 @@ export interface CmdUmountItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdUmountData {
   headline?: string;
@@ -5571,6 +6067,10 @@ export interface CmdDdItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdDdData {
   headline?: string;
@@ -5609,6 +6109,10 @@ export interface CmdIpItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdIpData {
   headline?: string;
@@ -5647,6 +6151,10 @@ export interface CmdPingItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdPingData {
   headline?: string;
@@ -5685,6 +6193,10 @@ export interface CmdTracerouteItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdTracerouteData {
   headline?: string;
@@ -5723,6 +6235,10 @@ export interface CmdMtrItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdMtrData {
   headline?: string;
@@ -5761,6 +6277,10 @@ export interface CmdNetstatItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNetstatData {
   headline?: string;
@@ -5799,6 +6319,10 @@ export interface CmdSsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdSsData {
   headline?: string;
@@ -5837,6 +6361,10 @@ export interface CmdNmcliItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNmcliData {
   headline?: string;
@@ -5875,6 +6403,10 @@ export interface CmdIftopItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdIftopData {
   headline?: string;
@@ -5913,6 +6445,10 @@ export interface CmdNethogsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNethogsData {
   headline?: string;
@@ -5951,6 +6487,10 @@ export interface CmdNloadItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNloadData {
   headline?: string;
@@ -5989,6 +6529,10 @@ export interface CmdDigItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdDigData {
   headline?: string;
@@ -6027,6 +6571,10 @@ export interface CmdHostItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdHostData {
   headline?: string;
@@ -6065,6 +6613,10 @@ export interface CmdNslookupItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNslookupData {
   headline?: string;
@@ -6103,6 +6655,10 @@ export interface CmdWhoisItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdWhoisData {
   headline?: string;
@@ -6141,6 +6697,10 @@ export interface CmdSshItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdSshData {
   headline?: string;
@@ -6179,6 +6739,10 @@ export interface CmdScpItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdScpData {
   headline?: string;
@@ -6217,6 +6781,10 @@ export interface CmdRsyncItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdRsyncData {
   headline?: string;
@@ -6255,6 +6823,10 @@ export interface CmdNcItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdNcData {
   headline?: string;
@@ -6293,6 +6865,10 @@ export interface CmdWgetItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdWgetData {
   headline?: string;
@@ -6331,6 +6907,10 @@ export interface CmdCurlItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdCurlData {
   headline?: string;
@@ -6369,6 +6949,10 @@ export interface CmdTarItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdTarData {
   headline?: string;
@@ -6407,6 +6991,10 @@ export interface CmdGzipItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdGzipData {
   headline?: string;
@@ -6445,6 +7033,10 @@ export interface CmdBzip2Item {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdBzip2Data {
   headline?: string;
@@ -6483,6 +7075,10 @@ export interface CmdZipItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdZipData {
   headline?: string;
@@ -6521,6 +7117,10 @@ export interface CmdCronItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdCronData {
   headline?: string;
@@ -6559,6 +7159,10 @@ export interface CmdCrontabItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdCrontabData {
   headline?: string;
@@ -6597,6 +7201,10 @@ export interface CmdBashscriptItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdBashscriptData {
   headline?: string;
@@ -6635,6 +7243,10 @@ export interface CmdAliasItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdAliasData {
   headline?: string;
@@ -6673,6 +7285,10 @@ export interface CmdEnvItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdEnvData {
   headline?: string;
@@ -6711,6 +7327,10 @@ export interface CmdHistoryItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdHistoryData {
   headline?: string;
@@ -6749,6 +7369,10 @@ export interface CmdScreenItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdScreenData {
   headline?: string;
@@ -6787,6 +7411,10 @@ export interface CmdTmuxItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdTmuxData {
   headline?: string;
@@ -6825,6 +7453,10 @@ export interface CmdSystemctlItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdSystemctlData {
   headline?: string;
@@ -6863,6 +7495,10 @@ export interface CmdJournalctlItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdJournalctlData {
   headline?: string;
@@ -6901,6 +7537,10 @@ export interface CmdDmesgItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdDmesgData {
   headline?: string;
@@ -6939,6 +7579,10 @@ export interface CmdManItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdManData {
   headline?: string;
@@ -6977,6 +7621,10 @@ export interface CmdAproposItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdAproposData {
   headline?: string;
@@ -7015,6 +7663,10 @@ export interface CmdTldrItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdTldrData {
   headline?: string;
@@ -7053,6 +7705,10 @@ export interface CmdCheatItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdCheatData {
   headline?: string;
@@ -7091,6 +7747,10 @@ export interface CmdLspciItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdLspciData {
   headline?: string;
@@ -7129,6 +7789,10 @@ export interface CmdLsusbItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface CmdLsusbData {
   headline?: string;
@@ -7172,6 +7836,10 @@ export interface DsaTracePtrsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTracePtrsData {
   headline?: string;
@@ -7214,6 +7882,10 @@ export interface DsaTraceWindowItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceWindowData {
   headline?: string;
@@ -7256,6 +7928,10 @@ export interface DsaTraceBsearchItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceBsearchData {
   headline?: string;
@@ -7298,6 +7974,10 @@ export interface DsaTraceHashItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceHashData {
   headline?: string;
@@ -7341,6 +8021,10 @@ export interface DsaTraceStackItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceStackData {
   headline?: string;
@@ -7384,6 +8068,10 @@ export interface DsaTraceGridItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceGridData {
   headline?: string;
@@ -7427,6 +8115,10 @@ export interface DsaTraceTreeItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceTreeData {
   headline?: string;
@@ -7470,6 +8162,10 @@ export interface DsaTraceDpItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceDpData {
   headline?: string;
@@ -7513,6 +8209,10 @@ export interface DsaTraceIntervalsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceIntervalsData {
   headline?: string;
@@ -7555,6 +8255,10 @@ export interface DsaTraceListItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaTraceListData {
   headline?: string;
@@ -7598,6 +8302,10 @@ export interface DsaSignalsItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaSignalsData {
   headline?: string;
@@ -7644,6 +8352,10 @@ export interface DsaCostItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaCostData {
   headline?: string;
@@ -7683,6 +8395,10 @@ export interface DsaFrameworkItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface DsaFrameworkData {
   headline?: string;
@@ -7697,7 +8413,709 @@ export interface DsaFrameworkData {
    *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
   premise?: string;
 }
+export interface McpApiAnatomyItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpApiAnatomyData {
+  headline?: string;
+  lines?: McpApiAnatomyItem[];
+  cells?: McpApiAnatomyItem[];
+  ends?: McpApiAnatomyItem[];
+  vars?: McpApiAnatomyItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpControlItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpControlData {
+  headline?: string;
+  cells?: McpControlItem[];
+  ends?: McpControlItem[];
+  vars?: McpControlItem[];
+  caption?: string;
+  premise?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpWireItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpWireData {
+  headline?: string;
+  lines?: McpWireItem[];
+  cells?: McpWireItem[];
+  ends?: McpWireItem[];
+  vars?: McpWireItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpSchemaItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpSchemaData {
+  headline?: string;
+  lines?: McpSchemaItem[];
+  cells?: McpSchemaItem[];
+  ends?: McpSchemaItem[];
+  vars?: McpSchemaItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpLoopItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpLoopData {
+  headline?: string;
+  lines?: McpLoopItem[];
+  cells?: McpLoopItem[];
+  ends?: McpLoopItem[];
+  vars?: McpLoopItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpUriItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpUriData {
+  headline?: string;
+  lines?: McpUriItem[];
+  cells?: McpUriItem[];
+  ends?: McpUriItem[];
+  vars?: McpUriItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpMentionItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpMentionData {
+  headline?: string;
+  cells?: McpMentionItem[];
+  ends?: McpMentionItem[];
+  vars?: McpMentionItem[];
+  caption?: string;
+  premise?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpSamplingItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpSamplingData {
+  headline?: string;
+  lines?: McpSamplingItem[];
+  cells?: McpSamplingItem[];
+  ends?: McpSamplingItem[];
+  vars?: McpSamplingItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpRootsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpRootsData {
+  headline?: string;
+  lines?: McpRootsItem[];
+  cells?: McpRootsItem[];
+  ends?: McpRootsItem[];
+  vars?: McpRootsItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpProgressItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpProgressData {
+  headline?: string;
+  lines?: McpProgressItem[];
+  cells?: McpProgressItem[];
+  ends?: McpProgressItem[];
+  vars?: McpProgressItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpTransportItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpTransportData {
+  headline?: string;
+  cells?: McpTransportItem[];
+  ends?: McpTransportItem[];
+  vars?: McpTransportItem[];
+  caption?: string;
+  premise?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface McpFlagsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+}
+export interface McpFlagsData {
+  headline?: string;
+  lines?: McpFlagsItem[];
+  cells?: McpFlagsItem[];
+  ends?: McpFlagsItem[];
+  vars?: McpFlagsItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+}
 export interface SceneData {
+  mcpFlags?: McpFlagsData;
+  mcpTransport?: McpTransportData;
+  mcpProgress?: McpProgressData;
+  mcpRoots?: McpRootsData;
+  mcpSampling?: McpSamplingData;
+  mcpMention?: McpMentionData;
+  mcpUri?: McpUriData;
+  mcpLoop?: McpLoopData;
+  mcpSchema?: McpSchemaData;
+  mcpWire?: McpWireData;
+  mcpControl?: McpControlData;
+  mcpApi?: McpApiAnatomyData;
   dsaFramework?: DsaFrameworkData;
   dsaCost?: DsaCostData;
   dsaSignals?: DsaSignalsData;
@@ -8449,6 +9867,10 @@ export interface NotificationItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 
 // COUNTDOWN — a numeric countdown from N to GO.
@@ -8626,6 +10048,10 @@ export interface TreeMapItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface TreeMapData {
   items: TreeMapItem[]; // 2–12
@@ -8667,6 +10093,10 @@ export interface IconGridItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface IconGridData {
   items: IconGridItem[]; // 3–12
@@ -8709,6 +10139,10 @@ export interface LogoWallItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 export interface LogoWallData {
   logos: LogoWallItem[]; // 3–15
@@ -8884,6 +10318,10 @@ export interface ProgressItem {
   series?: number[];
   unit?: string;
   threshold?: number;
+  // Control owner ('ai'|'code'|'user') and protocol direction ('out'|'back').
+  owner?: string;
+  dir?: string;
+  xLabels?: string[];
 }
 
 // PROGRESS — rings or bars filling to targets.

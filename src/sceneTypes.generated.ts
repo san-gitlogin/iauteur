@@ -4,6 +4,18 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'MCP_FLAGS'
+  | 'MCP_TRANSPORT'
+  | 'MCP_PROGRESS'
+  | 'MCP_ROOTS'
+  | 'MCP_SAMPLING'
+  | 'MCP_MENTION'
+  | 'MCP_URI'
+  | 'MCP_LOOP'
+  | 'MCP_SCHEMA'
+  | 'MCP_WIRE'
+  | 'MCP_CONTROL'
+  | 'MCP_API_ANATOMY'
   | 'DSA_FRAMEWORK'
   | 'DSA_COST'
   | 'DSA_SIGNALS'
@@ -342,6 +354,180 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type McpFlagsScene = SceneCommon<'MCP_FLAGS'> & { data: {
+    mcpFlags: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpTransportScene = SceneCommon<'MCP_TRANSPORT'> & { data: {
+    mcpTransport: {
+      headline?: string;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpProgressScene = SceneCommon<'MCP_PROGRESS'> & { data: {
+    mcpProgress: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpRootsScene = SceneCommon<'MCP_ROOTS'> & { data: {
+    mcpRoots: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpSamplingScene = SceneCommon<'MCP_SAMPLING'> & { data: {
+    mcpSampling: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpMentionScene = SceneCommon<'MCP_MENTION'> & { data: {
+    mcpMention: {
+      headline?: string;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpUriScene = SceneCommon<'MCP_URI'> & { data: {
+    mcpUri: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpLoopScene = SceneCommon<'MCP_LOOP'> & { data: {
+    mcpLoop: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpSchemaScene = SceneCommon<'MCP_SCHEMA'> & { data: {
+    mcpSchema: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpWireScene = SceneCommon<'MCP_WIRE'> & { data: {
+    mcpWire: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpControlScene = SceneCommon<'MCP_CONTROL'> & { data: {
+    mcpControl: {
+      headline?: string;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type McpApiAnatomyScene = SceneCommon<'MCP_API_ANATOMY'> & { data: {
+    mcpApi: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
 
 export type DsaFrameworkScene = SceneCommon<'DSA_FRAMEWORK'> & { data: {
     dsaFramework: {
@@ -4887,6 +5073,18 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  MCP_FLAGS: McpFlagsScene;
+  MCP_TRANSPORT: McpTransportScene;
+  MCP_PROGRESS: McpProgressScene;
+  MCP_ROOTS: McpRootsScene;
+  MCP_SAMPLING: McpSamplingScene;
+  MCP_MENTION: McpMentionScene;
+  MCP_URI: McpUriScene;
+  MCP_LOOP: McpLoopScene;
+  MCP_SCHEMA: McpSchemaScene;
+  MCP_WIRE: McpWireScene;
+  MCP_CONTROL: McpControlScene;
+  MCP_API_ANATOMY: McpApiAnatomyScene;
   DSA_FRAMEWORK: DsaFrameworkScene;
   DSA_COST: DsaCostScene;
   DSA_SIGNALS: DsaSignalsScene;
@@ -5218,6 +5416,18 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | McpFlagsScene
+  | McpTransportScene
+  | McpProgressScene
+  | McpRootsScene
+  | McpSamplingScene
+  | McpMentionScene
+  | McpUriScene
+  | McpLoopScene
+  | McpSchemaScene
+  | McpWireScene
+  | McpControlScene
+  | McpApiAnatomyScene
   | DsaFrameworkScene
   | DsaCostScene
   | DsaSignalsScene

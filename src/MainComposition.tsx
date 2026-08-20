@@ -332,10 +332,34 @@ import {DsaTraceList} from './scenes/DsaTraceList';
 import {DsaSignals} from './scenes/DsaSignals';
 import {DsaCost} from './scenes/DsaCost';
 import {DsaFramework} from './scenes/DsaFramework';
+import {McpApiAnatomy} from './scenes/McpApiAnatomy';
+import {McpControl} from './scenes/McpControl';
+import {McpWire} from './scenes/McpWire';
+import {McpSchema} from './scenes/McpSchema';
+import {McpLoop} from './scenes/McpLoop';
+import {McpUri} from './scenes/McpUri';
+import {McpMention} from './scenes/McpMention';
+import {McpSampling} from './scenes/McpSampling';
+import {McpRoots} from './scenes/McpRoots';
+import {McpProgress} from './scenes/McpProgress';
+import {McpTransport} from './scenes/McpTransport';
+import {McpFlags} from './scenes/McpFlags';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  MCP_FLAGS: McpFlags,
+  MCP_TRANSPORT: McpTransport,
+  MCP_PROGRESS: McpProgress,
+  MCP_ROOTS: McpRoots,
+  MCP_SAMPLING: McpSampling,
+  MCP_MENTION: McpMention,
+  MCP_URI: McpUri,
+  MCP_LOOP: McpLoop,
+  MCP_SCHEMA: McpSchema,
+  MCP_WIRE: McpWire,
+  MCP_CONTROL: McpControl,
+  MCP_API_ANATOMY: McpApiAnatomy,
   DSA_FRAMEWORK: DsaFramework,
   DSA_COST: DsaCost,
   DSA_SIGNALS: DsaSignals,

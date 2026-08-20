@@ -156,7 +156,7 @@ function buildInterface(cfg) {
   // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
   tag?: string;
   // REAL terminal output: one string per line, exactly as the command prints it,
-  // columns and header row included. `text`/`sub` gave at most two lines, so a
+  // columns and header row included. text/sub gave at most two lines, so a
   // narration saying "look at the third column" had no third column to look at
   // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
   // by line across the step's window.
@@ -170,6 +170,14 @@ function buildInterface(cfg) {
   unit?: string;
   // A horizontal reference line: capacity, a limit, a threshold worth naming.
   threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
 }
 ` : '';
   const body = cfg.fields.map((f) => `  ${f.name}?: ${tsType(Name, f)};`).join('\n');
