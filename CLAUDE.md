@@ -240,6 +240,37 @@ Seventeen lines in a Shorts pane forces ~12px, which is unreadable on a phone. C
 output until the type can stay large. Owner: *"viewability is professional and feasible (not too
 short for users to stare) ... dont care if length shoots up, the content must be right."*
 
+## LAW 0n — A REGISTERED TYPE IS NOT A PICTURE (owner verdict, 2026-08-21)
+Owner, on the MCP cut: *"ALL FUCKN VIDEOS have the same container, text, highlight, some arrows,
+highlights speak ... thats boring af. And its the same thing that I repeatedly asked not to do in
+the linux course, and you again started doing the same."* He was right, and it is the SECOND time:
+LAW 0j was written for exactly this and I reproduced the defect in a new repo area.
+
+The measurement: fifteen registered MCP scene types, and thirteen of them rendered the same
+archetype — **a bordered box containing rows of text that light up**. Different data, identical
+picture. Registering a scene TYPE, adding a data key and wiring eight touchpoints is plumbing; it is
+not a depiction.
+
+**The test, before you write the component:** name the OBJECT the viewer should see. If the answer
+is "a row that says X", stop — that is a caption. A protocol message is an envelope crossing between
+two machines. A file permission is a folder, a key, and a shield that stamps DENIED. A transport is
+a laptop and a cable, or a laptop and a globe and a server. A deprecation is a warning triangle, a
+clock, and an arrow to its replacement.
+
+**Use the icon libraries — they are already wired.** `AssetIcon` takes `lucide:<name>` and
+`si:<brand>`; items carry an `icon` field. A checklist of four things renders as four DIFFERENT
+recognisable objects (`si:python`, `lucide:package`, `si:anthropic`, `lucide:key-round`), never four
+copies of the same generic glyph. When every item falls back to the default box, that is the smell.
+
+Corollary — **scan for the fallback, do not eyeball it.** After wiring icons, six cells still
+rendered as a generic cube because nobody had named a glyph for them. One script over every
+control-board cell found all six; reviewing frames by eye had found two.
+
+Corollary — **the field-dropping bug is now three-for-three.** Scene components map cells
+explicitly, and each new field must be added to every mapping or it silently never arrives:
+`parent`/`links` on the DSA cut, `out`/`series` on the Linux cut, `icon` here. When you add a field
+to an item type, grep every `\.map((c) =>` in `src/scenes/` before you render anything.
+
 ## LAW 0f — WRITE FOR A MOUTH, NOT A PAGE (owner verdict, 2026-08-16)
 Owner: *"You often use IT, and you speak about something that's on the screen, but you forget
 what the context is about, and you start speaking in a very AI manner. Humans are not adaptable
