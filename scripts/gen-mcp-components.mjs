@@ -45,10 +45,18 @@ const DEFS = [
    what:'one machine passing notes through stdin and stdout, against two machines talking over HTTP, drawn as the physically different things they are'},
   {type:'MCP_FLAGS',       name:'McpFlags',      key:'mcpFlags', viz:'flag-matrix', color:'red',
    what:'the two scary flags as switches, and the grid of features that visibly goes dark when one is thrown'},
+  {type:'MCP_TERMINAL',    name:'McpTerminal',   key:'mcpTerm', viz:'wire', color:'green', term:true,
+   what:'a real shell session — install, run, and the server actually starting — with verbatim output rather than an invented one-liner (LAW 0m)'},
 ];
 
 const fields = (d) => [
   {name:'headline', t:'string', note:'Scene headline, <=48 chars, one [accent] phrase.'},
+  ...(d.term ? [
+    {name:'steps', t:'items', req:true, note:'Shell steps. label = the command exactly as typed. out = the REAL output, one string per line, header rows included. detail = the plain-English note under it. atWord = the word it is typed on.'},
+    {name:'promptLabel', t:'string', note:'Shell prompt owner, e.g. santhu@box.'},
+    {name:'cwd', t:'string', note:'Working directory shown in the chrome.'},
+    {name:'stageTitle', t:'string', note:'Caption over the right pane, <=30 chars.'},
+  ] : []),
   ...(d.solo ? [] : [{name:'lines', t:'items', req:true, preserveWs:true,
     note:'The code, one item per line. text = the line INCLUDING indentation (<=52). detail = the plain-English note shown under it while lit (<=120). atWord = the word it lights on; omit for lines not taught in this beat.'}]),
   {name:'cells', t:'items', note:'0-10 elements of the picture. label = what is written in it. sub = the gloss beside it. value = a number the beat states (a percentage, a dollar amount, a duration). owner = ai|code|user for the control board. dir = out|back for a protocol message. out = verbatim payload or output lines. text = a per-kind role: reg|flag|ask|remote|exit. color, atWord.'},
@@ -71,6 +79,66 @@ const example = (d) => {
   return {[d.key]: {...base, codeTitle:'server.py',
     lines:[{text:'@mcp.tool()',atWord:2},{text:'def read_note(note_id: str):',detail:'A normal Python function. The decorator did the registering.',atWord:4}]}};
 };
+
+const tsxTerm = (d) => `import React from 'react';
+import {AbsoluteFill} from 'remotion';
+import {Scene} from '../types';
+import {Headline, SourceFooter, useScale} from '../ui';
+import {CommandStage, CmdStep, useStageState} from '../CommandStage';
+import {McpViz, McpItem} from '../mcpViz';
+
+// ${d.type} — ${d.what}.
+// LEFT: a live shell that types each command on the word it is spoken and prints
+// the REAL output line by line. RIGHT: what the run produced.
+export const ${d.name}: React.FC<{scene: Scene}> = ({scene}) => {
+  const {scale, vertical} = useScale();
+  const d = scene.data.${d.key};
+  if (!d) return <AbsoluteFill />;
+  const raw = (d.steps ?? []).slice(0, 4);
+  const steps: CmdStep[] = raw.map((s) => ({
+    cmd: s.label ?? '',
+    output: (s.out?.length ? s.out : [s.text, s.sub].filter(Boolean)) as string[],
+    note: s.detail,
+    atWord: s.atWord,
+  }));
+  const state = useStageState(steps);
+  const cells: McpItem[] = (d.cells ?? []).map((c) => ({
+    label: c.label, sub: c.sub, value: c.value, color: c.color, atWord: c.atWord,
+    text: c.text, owner: c.owner, dir: c.dir, out: c.out,
+  }));
+  const accent = (d.color ?? ${JSON.stringify(d.color)}) as any;
+  if (!steps.length) return <AbsoluteFill />;
+
+  return (
+    <AbsoluteFill>
+      {d.headline ? <Headline text={d.headline} color={accent} /> : null}
+      <div
+        style={{
+          position: 'absolute',
+          top: (d.headline ? (vertical ? 340 : 212) : 90) * scale,
+          left: (vertical ? 52 : 72) * scale,
+          right: (vertical ? 52 : 72) * scale,
+          height: (vertical ? 1180 : 620) * scale,
+          display: 'flex',
+          minHeight: 0,
+        }}
+      >
+        <CommandStage
+          steps={steps}
+          state={state}
+          promptLabel={d.promptLabel}
+          cwd={d.cwd}
+          color={accent}
+          stageTitle={d.stageTitle ?? 'what the run produced'}
+        >
+          <McpViz kind="control-board" items={cells} accent={accent} />
+        </CommandStage>
+      </div>
+      {scene.data.source ? <SourceFooter text={scene.data.source} /> : null}
+    </AbsoluteFill>
+  );
+};
+`;
 
 const tsx = (d) => `import React from 'react';
 import {AbsoluteFill} from 'remotion';
@@ -125,15 +193,19 @@ ${d.solo ? '' : `
 };
 `;
 
-let ok = 0, fail = 0; const failures = [];
+// Re-runnable: assemble only what is not registered yet. `assemble` refuses an
+// existing type by design, so re-running the whole set would always report noise.
+const already = fs.readFileSync(path.join(ROOT, 'src/sceneTypes.generated.ts'), 'utf8');
+let ok = 0, fail = 0, skip = 0; const failures = [];
 for (const d of DEFS) {
+  if (already.includes(`'${d.type}'`) || already.includes(`"${d.type}"`)) { skip++; continue; }
   const cfg = {type:d.type, name:d.name, dataKey:d.key, dynamic:true,
     purpose:`One beat of an MCP lesson: ${d.what}. Every element is timed from its own atWord so the picture lands on the spoken word.`,
     fields: fields(d), example: example(d)};
   const cf = path.join(TMP, `${d.key}.config.json`);
   const tf = path.join(TMP, `${d.name}.tsx`);
   fs.writeFileSync(cf, JSON.stringify(cfg, null, 2));
-  fs.writeFileSync(tf, tsx(d));
+  fs.writeFileSync(tf, d.term ? tsxTerm(d) : tsx(d));
   let res;
   try {
     res = JSON.parse(execFileSync(process.execPath, [path.join(ROOT,'scripts/component-flow.mjs'),'assemble',cf,cf,tf],
@@ -142,5 +214,5 @@ for (const d of DEFS) {
   if (res.ok) { ok++; console.log(`  ✓ ${d.type}`); }
   else { fail++; failures.push([d.type, res.output ?? JSON.stringify(res).slice(0,300)]); console.log(`  ✗ ${d.type}`); }
 }
-console.log(`\n${ok} registered, ${fail} failed`);
+console.log(`\n${ok} registered, ${skip} already present, ${fail} failed`);
 for (const [t, out] of failures) console.log(`\n--- ${t} ---\n${out}`);

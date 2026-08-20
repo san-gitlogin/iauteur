@@ -1,0 +1,280 @@
+{
+ "meta": {
+  "topic": "Transport and the Two Flags",
+  "format": "long",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "stdio for development, HTTP for production \u2014 and two flags that trade features for scale without warning you.",
+  "openLoop": "Two settings that look like performance tuning. One of them silently kills sampling.",
+  "analogy": "THE SAME ROOM - passing notes across a desk, versus a phone call across the world.",
+  "topicAxes": [
+   "entity-novelty",
+   "sovereignty"
+  ],
+  "seo": {
+   "title": "MCP Transport \u2014 And The Two Flags That Break Everything",
+   "altTitles": [
+    "stateless_http Silently Kills Sampling. Here's Why.",
+    "stdio vs streamable-http, And The Trap In Between"
+   ],
+   "hook": "Two settings that look like tuning. One kills sampling.",
+   "breakdown": "stdio against streamable HTTP, and exactly which features stateless_http and json_response switch off",
+   "chapters": [
+    {
+     "id": "s01",
+     "title": "Two settings, one trap"
+    },
+    {
+     "id": "s03",
+     "title": "Same room, or a phone call"
+    },
+    {
+     "id": "s04",
+     "title": "What the flags turn off"
+    }
+   ],
+   "sources": [
+    "Course source: https://github.com/san-gitlogin/learn-mcp",
+    "Live course: https://san-gitlogin.github.io/learn-mcp/"
+   ],
+   "queries": [
+    "mcp stdio vs http",
+    "streamable http mcp",
+    "stateless_http mcp",
+    "json_response mcp",
+    "mcp transport explained",
+    "mcp production deployment",
+    "mcp scaling"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#python",
+    "#devops",
+    "#claude",
+    "#thenbxstudio"
+   ],
+   "tags": [
+    "mcp",
+    "model context protocol",
+    "transport",
+    "stdio",
+    "http",
+    "stateless",
+    "scaling",
+    "python",
+    "claude",
+    "anthropic",
+    "the nbx studio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "thumbnail": {
+  "title": "ONE FLAG KILLS IT",
+  "badge": "Transport",
+  "asset": "si:python"
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "Two settings in your server look like performance tuning. One of them silently switches off sampling.",
+   "data": {
+    "headline": "ONE FLAG KILLS IT",
+    "subtext": "transport, and the trap",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 10
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "TITLE_CARD",
+   "transition": "fade",
+   "background": "zoneB",
+   "durationFrames": 320,
+   "narration": "MCP messages are just JSON. How they travel is a separate decision, and it's a decision with consequences. Learn MCP, on THE NBX STUDIO.",
+   "data": {
+    "title": "TRANSPORT",
+    "subtitle": "chapter ten of eleven"
+   },
+   "anchors": []
+  },
+  {
+   "id": "s03",
+   "type": "MCP_TRANSPORT",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpTransport",
+   "headline": "Same room, or [a phone call]",
+   "color": "green",
+   "caption": "two transports",
+   "premise": "Both move identical JSON. The only difference is whether the two programs share a machine.",
+   "durationFrames": 860,
+   "narration": "There are two transports worth knowing, and they carry exactly the same JSON. ^Stdio means the client launches the server as a child process on the same machine and they talk over standard input and standard output \u2014 like two people at one desk passing notes. Every feature works, setup is nothing, and it only ever works locally. ^Streamable H T T P means the server runs somewhere else entirely and you reach it over the network, which is what you need the moment the server isn't on the user's laptop. That's the whole choice: stdio while you're developing, H T T P when you ship.",
+   "cells": [
+    {
+     "label": "stdio",
+     "sub": "development",
+     "mark": true,
+     "out": [
+      "full features",
+      "trivial setup",
+      "same machine only"
+     ]
+    },
+    {
+     "label": "streamable-http",
+     "sub": "production",
+     "text": "remote",
+     "mark": true,
+     "out": [
+      "remote servers",
+      "scales horizontally",
+      "some features limited"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "MCP_FLAGS",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpFlags",
+   "headline": "What the flags [turn off]",
+   "color": "red",
+   "caption": "read this twice",
+   "codeTitle": "server.py",
+   "premise": "Both flags are set when you CREATE the server, and both trade features for scale. Nothing warns you.",
+   "durationFrames": 1000,
+   "narration": "Now the trap, and it's worth reading twice. Both flags are set when you create the server, not when you run it. |Stateless h t t p true means the server forgets each client between requests, ^which is exactly what you need behind a load balancer, because any instance can then answer any request. The cost is severe: sampling stops working, progress stops working, roots stop working, and subscriptions stop working \u2014 because every one of those needs the server to remember who you are. |Json response true means replies come back as plain JSON instead of a stream, ^which kills live progress and log messages, since streaming is the mechanism those arrive on. ^Notice what survives both: ordinary tool calls. So the rule of thumb is to start with both false, which is the default, and only reach for either one when you genuinely need horizontal scaling and can say out loud what you're giving up.",
+   "lines": [
+    {
+     "text": "from mcp.server.fastmcp import FastMCP"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "mcp = FastMCP("
+    },
+    {
+     "text": "    \"my-server\","
+    },
+    {
+     "text": "    stateless_http=True,",
+     "detail": "Scales. Kills sampling, progress, roots, subscriptions.",
+     "teach": true
+    },
+    {
+     "text": "    json_response=True,",
+     "detail": "Simpler. Kills streaming progress and log messages.",
+     "teach": true
+    },
+    {
+     "text": ")"
+    },
+    {
+     "text": "mcp.run(transport=\"streamable-http\")"
+    }
+   ],
+   "cells": [
+    {
+     "label": "stateless_http=True",
+     "sub": "forgets clients between requests",
+     "text": "flag",
+     "mark": true,
+     "out": [
+      "sampling",
+      "progress",
+      "roots",
+      "subscriptions"
+     ]
+    },
+    {
+     "label": "json_response=True",
+     "sub": "plain JSON instead of SSE streams",
+     "text": "flag",
+     "mark": true,
+     "out": [
+      "progress",
+      "log messages"
+     ]
+    },
+    {
+     "label": "sampling"
+    },
+    {
+     "label": "progress"
+    },
+    {
+     "label": "roots"
+    },
+    {
+     "label": "subscriptions"
+    },
+    {
+     "label": "log messages"
+    },
+    {
+     "label": "tools",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "type": "RECAP",
+   "transition": "dip",
+   "background": "zoneB",
+   "durationFrames": 430,
+   "narration": "Three lines. %Stdio is for development, on one machine. %Streamable H T T P is for production, across the network. %And both flags default to false for a reason \u2014 turning either on trades features for scale.",
+   "data": {
+    "heading": "Transport, in three lines",
+    "points": [
+     {
+      "text": "stdio \u2014 one machine, every feature"
+     },
+     {
+      "text": "streamable-http \u2014 across the network"
+     },
+     {
+      "text": "Both flags default false for a reason"
+     }
+    ]
+   },
+   "anchors": [
+    "points.0.atWord",
+    "points.1.atWord",
+    "points.2.atWord"
+   ]
+  },
+  {
+   "id": "s06",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 290,
+   "narration": "One chapter left, and it's the one where we put the whole protocol back together.",
+   "data": {
+    "message": "Next: everything, together",
+    "sub": "and the final question"
+   },
+   "anchors": []
+  }
+ ]
+}

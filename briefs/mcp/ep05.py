@@ -1,0 +1,139 @@
+# -*- coding: utf-8 -*-
+# EP05 — Resources and prompts, and the @-mention trick. The "it's faster" claim is
+# raced on one clock rather than asserted (MCP_MENTION), because a claim the viewer
+# cannot check is a claim they won't keep.
+import json
+BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
+         "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
+SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
+       "Live course: https://san-gitlogin.github.io/learn-mcp/"]
+def L(t, det=None):
+    d={"text":t}
+    if det: d["detail"]=det; d["teach"]=True
+    return d
+
+T = {
+ "meta":{"topic":"Resources and Prompts","format":"long","fps":30,"screenplay":"explainer",
+  "onePayoff":"A resource lets your code put data in front of Claude before Claude ever asks for it.",
+  "openLoop":"Same note, same answer. One route makes Claude wait, and one doesn't.",
+  "analogy":"THE ROUTE - a URI is a road, and a braced segment is the turning that takes an argument.",
+  "topicAxes":["entity-novelty","economic-pain"],
+  "seo":{"title":"MCP Resources & Prompts — And The @-Mention Trick",
+   "altTitles":["Why Resources Are Faster Than Tools In MCP",
+                "MCP Resources, Prompts, And The Trick Nobody Explains"],
+   "hook":"Same note, same answer. One route makes Claude wait.",
+   "breakdown":"resource URIs as routes, prompts as user-triggered workflows, and why injecting a resource beats a tool round trip",
+   "chapters":[{"id":"s01","title":"One route makes Claude wait"},
+               {"id":"s03","title":"A URI is a route"},
+               {"id":"s04","title":"Prompts, and who triggers them"},
+               {"id":"s05","title":"The @ mention race"}],
+   "sources":SRC,
+   "queries":["mcp resources explained","mcp resource uri","mcp prompt decorator",
+     "mcp resource vs tool speed","mcp @ mention","read_resource mcp","dynamic resource uri mcp"],
+   "hashtags":["#mcp","#claude","#anthropic","#python","#thenbxstudio"],
+   "tags":["mcp","model context protocol","resources","prompts","claude","anthropic","python",
+     "uri","tutorial","the nbx studio"]}},
+ "brand":BRAND,
+ "thumbnail":{"title":"ONE ROUTE IS FASTER","badge":"Resources","asset":"si:python"},
+ "scenes":[
+  dict(id="s01", type="HOOK", background="zoneA", durationFrames=230, narration=
+   "The same note reaches Claude two different ways. One of them makes Claude wait. Which, and why?",
+   data={"headline":"ONE ROUTE IS FASTER","subtext":"resources and prompts","heroAsset":"si:python",
+         "headlineAtWord":1,"heroAtWord":10}, anchors=["headlineAtWord","heroAtWord"]),
+
+  dict(id="s02", type="TITLE_CARD", transition="fade", background="zoneB", durationFrames=330, narration=
+   "You already know tools, and the good news is that resources and prompts use the exact same decorator "
+   "pattern — only the decorator's name changes. Learn MCP, on THE NBX STUDIO.",
+   data={"title":"RESOURCES & PROMPTS","subtitle":"chapter six of eleven"}, anchors=[]),
+
+  dict(id="s03", type="MCP_URI", transition="wipe", background="zoneC", key="mcpUri",
+   headline="A URI is [a route]", color="orange", caption="static and dynamic",
+   codeTitle="server.py",
+   premise="A resource URI works like a URL. The scheme is yours to choose, and a braced segment becomes a function argument.",
+   durationFrames=920,
+   narration=
+   "A resource is data your own code fetches, and each one is addressed by a URI. "
+   "|Notes colon slash slash all is a static resource, ^which always returns the same kind of thing — "
+   "here, the list of every filename. The scheme at the front is yours to invent; MCP doesn't care whether "
+   "you call it notes or files or anything else. "
+   "|Notes colon slash slash, open brace, i d, close brace is the interesting one. "
+   "^That braced segment is a wildcard, and whatever the caller puts there arrives as the i d parameter of "
+   "your function, which is why the signature underneath takes i d as a string. "
+   "So one decorator gives you an endpoint for the whole collection, and another gives you an endpoint for "
+   "any single item, without you writing a router.",
+   lines=[L("@mcp.resource(\"notes://all\")","Static: no wildcards, no parameters."),
+          L("def list_all_notes():"),
+          L("    return list(notes.keys())"),
+          L(""),
+          L("@mcp.resource(\"notes://{id}\")","The braced part becomes an argument."),
+          L("def get_note(id: str):"),
+          L("    return notes[id]")],
+   cells=[{"label":"notes://all","sub":"static — the whole collection","mark":True,
+           "out":["todo.md","ideas.md"]},
+          {"label":"notes://{id}","sub":"dynamic — {id} arrives as a parameter","mark":True,
+           "out":["Buy groceries, call mom, fix the bug"]}]),
+
+  dict(id="s04", type="MCP_CONTROL", transition="push", background="zoneA", key="mcpControl",
+   headline="A prompt waits [for a person]", color="green", caption="the third primitive",
+   premise="A prompt is a pre-written instruction that does nothing at all until a person triggers it.",
+   durationFrames=800,
+   narration=
+   "Prompts are the third primitive, and the decorator looks identical again. "
+   "^The difference is entirely about who starts it: a prompt sits there doing nothing until a person "
+   "triggers it, usually by typing a slash command in your interface. "
+   "^What the function returns isn't a string, it's a list of messages — a conversation opener, pre-written "
+   "by you, that your app drops into the chat on the user's behalf. "
+   "^And because you wrote that opener in advance, you can be far more specific than a user typing in a hurry, "
+   "which is exactly why prompts exist: they're how you ship your own expertise as a button.",
+   cells=[{"label":"nothing runs until a person acts","sub":"a slash command, a menu item, a button","owner":"user","mark":True},
+          {"label":"it returns messages","sub":"a pre-written conversation opener, not a string","owner":"user","mark":True},
+          {"label":"your expertise, as a button","sub":"more precise than a user in a hurry","owner":"user","mark":True}]),
+
+  dict(id="s05", type="MCP_MENTION", transition="dip", background="zoneC", key="mcpMention",
+   headline="Fetched [before Claude looks]", color="green", caption="two routes, one clock",
+   premise="The user types @todo.md and asks a question. The note can reach Claude two ways — and only one of them makes Claude wait.",
+   durationFrames=940,
+   narration=
+   "Here's the trick the course calls at mentions, and it's the clearest example of why resources exist. "
+   "The user types at todo dot m d, then asks what's on my list. "
+   "^Route one: your app spots the at mention, calls read resource itself, and pastes the note's contents "
+   "straight into the prompt before sending it. Claude opens the message and the note is already there, "
+   "so Claude answers immediately — one hop. "
+   "^Route two is the tool version. Claude reads the question, realises it needs the note, asks your code "
+   "for it, waits while you fetch it, and only then answers. Three hops, and two of them are round trips "
+   "through the model. "
+   "Same note, same answer, and the difference is that in route one your code already knew what was needed, "
+   "because the user told it by typing that at sign.",
+   cells=[{"label":"@todo.md — your code fetches","sub":"1 hop · content is in the prompt already","value":34,"mark":True,
+           "out":["read_resource"]},
+          {"label":"tool call — Claude fetches","sub":"3 hops · ask, wait, then answer","value":100,"color":"red","mark":True,
+           "out":["Claude asks","you call","result back"]}]),
+
+  dict(id="s06", type="QUIZ_CARD", transition="iris", background="zoneC", durationFrames=820, narration=
+   "^From the course. Your app reads the note through a resource and injects it, and Claude responds "
+   "straight away. Why is that better than a tool? "
+   "^Because tools can't read documents. ^Or because it's faster — there's no extra round trip. "
+   "Have a think, and pause if you'd like a moment. "
+   "^Ready? It's faster. Tools can absolutely read documents, so the first option is just wrong — "
+   "the real difference is that your code already had the data before Claude ever saw the message.",
+   data={"quiz":{"question":"Why beat a tool by injecting a resource?",
+     "options":[{"text":"tools can't read documents"},{"text":"faster — no extra round trip"}],
+     "answerIndex":1,"why":"Tools can read documents. The win is skipping a round trip."}},
+   anchors=["quiz.atWord","quiz.options.0.atWord","quiz.options.1.atWord","quiz.revealAtWord"]),
+
+  dict(id="s07", type="RECAP", transition="fade", background="zoneB", durationFrames=430, narration=
+   "Three lines. %A resource is addressed by a URI, and a braced segment becomes a parameter. "
+   "%A prompt returns messages and waits for a person. "
+   "%And injecting a resource beats a tool call whenever your code already knows what's needed.",
+   data={"heading":"Chapter six, in three lines","points":[
+     {"text":"A URI is a route, {id} is a parameter"},{"text":"A prompt waits for a person"},
+     {"text":"Inject when your code already knows"}]},
+   anchors=["points.0.atWord","points.1.atWord","points.2.atWord"]),
+
+  dict(id="s08", type="OUTRO_CTA", transition="fade", background="zoneA", durationFrames=300, narration=
+   "Next is the strangest feature in the protocol, where the server turns round and asks your app to call "
+   "Claude on its behalf — and pay for it.",
+   data={"message":"Next: sampling","sub":"the server asks you"}, anchors=[]),
+ ]}
+json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep05.json','w'), indent=1)
+print("EP05:", len(T["scenes"]), "scenes")

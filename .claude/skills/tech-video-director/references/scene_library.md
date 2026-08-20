@@ -669,3 +669,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | MCP_PROGRESS |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
 | MCP_TRANSPORT |  | headline, cells, ends, vars, caption, premise, atWord, color |
 | MCP_FLAGS |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_TERMINAL |  | headline, steps, promptLabel, cwd, stageTitle, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |

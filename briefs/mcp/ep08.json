@@ -1,0 +1,290 @@
+{
+ "meta": {
+  "topic": "Notifications",
+  "format": "long",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "Two server calls and two client callbacks turn a frozen-looking tool into one that reports itself.",
+  "openLoop": "Thirty seconds of nothing. Is it working, or has it died?",
+  "analogy": "THE KITCHEN CALL-BACK - the chef shouting 'two minutes' so you know the order isn't lost.",
+  "topicAxes": [
+   "entity-novelty",
+   "economic-pain"
+  ],
+  "seo": {
+   "title": "MCP Notifications \u2014 Stop Your Tool Looking Frozen",
+   "altTitles": [
+    "ctx.info and report_progress, Explained",
+    "MCP Progress And Logging In One Chapter"
+   ],
+   "hook": "Thirty seconds of silence. Working, or dead?",
+   "breakdown": "the two server calls that report progress, the two client callbacks that catch them, and why they go in different places",
+   "chapters": [
+    {
+     "id": "s01",
+     "title": "Working, or dead?"
+    },
+    {
+     "id": "s03",
+     "title": "The server speaks up"
+    },
+    {
+     "id": "s04",
+     "title": "The client listens"
+    }
+   ],
+   "sources": [
+    "Course source: https://github.com/san-gitlogin/learn-mcp",
+    "Live course: https://san-gitlogin.github.io/learn-mcp/"
+   ],
+   "queries": [
+    "mcp notifications",
+    "ctx.report_progress",
+    "mcp logging_callback",
+    "mcp progress_callback",
+    "mcp ctx.info",
+    "long running mcp tool",
+    "mcp streaming progress"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#python",
+    "#claude",
+    "#anthropic",
+    "#thenbxstudio"
+   ],
+   "tags": [
+    "mcp",
+    "model context protocol",
+    "notifications",
+    "progress",
+    "logging",
+    "python",
+    "claude",
+    "anthropic",
+    "tutorial",
+    "the nbx studio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "thumbnail": {
+  "title": "WORKING, OR DEAD?",
+  "badge": "Notifications",
+  "asset": "si:python"
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 225,
+   "narration": "Your tool's been running for thirty seconds and printed nothing. Is it working, or has it died?",
+   "data": {
+    "headline": "WORKING, OR DEAD?",
+    "subtext": "logs and progress",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 10
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "TITLE_CARD",
+   "transition": "fade",
+   "background": "zoneB",
+   "durationFrames": 320,
+   "narration": "A tool call is silent by default, and silence is indistinguishable from a crash. Two calls fix that. Learn MCP, on THE NBX STUDIO.",
+   "data": {
+    "title": "NOTIFICATIONS",
+    "subtitle": "chapter nine of eleven"
+   },
+   "anchors": []
+  },
+  {
+   "id": "s03",
+   "type": "MCP_PROGRESS",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpProgress",
+   "headline": "The server [speaks up]",
+   "color": "blue",
+   "caption": "two calls",
+   "codeTitle": "server.py",
+   "premise": "A tool that takes thirty seconds is silent by default. These two calls are the only way the user learns anything is happening.",
+   "durationFrames": 920,
+   "narration": "On the server side there're exactly two calls worth knowing, and they do different jobs. |C t x dot info sends a log line \u2014 a human sentence about what's happening right now. ^Searching Wikipedia, for instance. |C t x dot report progress sends a number instead: how far through, out of how much. ^Thirty out of a hundred. |As the work moves on you send more of both, ^writing report, ^and eighty percent. Neither call changes what the tool returns, because they're side channels that travel while the tool is still running \u2014 which is exactly why they're useful.",
+   "lines": [
+    {
+     "text": "@mcp.tool()"
+    },
+    {
+     "text": "async def research(topic: str, ctx: Context):"
+    },
+    {
+     "text": "    await ctx.info(\"Searching Wikipedia...\")",
+     "detail": "A human sentence about right now.",
+     "teach": true
+    },
+    {
+     "text": "    await ctx.report_progress(30, 100)",
+     "detail": "A number: how far, out of how much.",
+     "teach": true
+    },
+    {
+     "text": "    data = await scrape(topic)"
+    },
+    {
+     "text": "    await ctx.info(\"Writing report...\")",
+     "detail": "More of both, as the work moves.",
+     "teach": true
+    },
+    {
+     "text": "    await ctx.report_progress(80, 100)"
+    },
+    {
+     "text": "    return summarize(data)"
+    }
+   ],
+   "cells": [
+    {
+     "label": "Searching Wikipedia\u2026",
+     "mark": true
+    },
+    {
+     "label": "30% done",
+     "value": 30,
+     "mark": true
+    },
+    {
+     "label": "Writing report\u2026",
+     "mark": true
+    },
+    {
+     "label": "80% done",
+     "value": 80,
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "MCP_PROGRESS",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpProgress",
+   "headline": "Two callbacks, [two places]",
+   "color": "blue",
+   "caption": "and this trips people",
+   "codeTitle": "client.py",
+   "premise": "A tool that takes thirty seconds is silent by default. These two calls are the only way the user learns anything is happening.",
+   "durationFrames": 900,
+   "narration": "On the client side you'll write two callbacks, and where each one's registered is the detail people get wrong. |The logging callback goes on the session, ^because log messages can arrive from anything the server's doing, not just the tool you happen to be waiting on. |The progress callback goes on the individual call tool, ^because progress belongs to one specific piece of work \u2014 thirty percent of what, otherwise? |Register them both and your interface can show a spinner with real text and a bar with a real number, %instead of a frozen window and a user reaching for the close button.",
+   "lines": [
+    {
+     "text": "async def logging_callback(params):"
+    },
+    {
+     "text": "    print(params.data)          # \"Searching Wikipedia...\""
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "async def progress_callback(progress, total, message):"
+    },
+    {
+     "text": "    print(f\"{progress / total:.0%}\")"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "ClientSession(read, write,",
+     "detail": "Session-wide: catches every log message.",
+     "teach": true
+    },
+    {
+     "text": "              logging_callback=logging_callback)"
+    },
+    {
+     "text": "await session.call_tool(\"research\", {...},",
+     "detail": "Per-call: progress belongs to THIS work.",
+     "teach": true
+    },
+    {
+     "text": "                        progress_callback=progress_callback)"
+    }
+   ],
+   "cells": [
+    {
+     "label": "logging_callback \u2192 the session",
+     "sub": "any log, from anything the server does",
+     "mark": true
+    },
+    {
+     "label": "progress_callback \u2192 the call",
+     "sub": "progress belongs to one piece of work",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "no more frozen window",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "type": "RECAP",
+   "transition": "dip",
+   "background": "zoneB",
+   "durationFrames": 420,
+   "narration": "Three lines. %The server sends c t x dot info for words, and report progress for numbers. %The logging callback's registered on the session. %And the progress callback's registered on the individual call.",
+   "data": {
+    "heading": "Notifications, in three lines",
+    "points": [
+     {
+      "text": "ctx.info for words, progress for numbers"
+     },
+     {
+      "text": "logging_callback \u2192 the session"
+     },
+     {
+      "text": "progress_callback \u2192 the call"
+     }
+    ]
+   },
+   "anchors": [
+    "points.0.atWord",
+    "points.1.atWord",
+    "points.2.atWord"
+   ]
+  },
+  {
+   "id": "s06",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 290,
+   "narration": "Next chapter's got a trap in it: two flags that quietly switch this entire feature off.",
+   "data": {
+    "message": "Next: transport",
+    "sub": "and two dangerous flags"
+   },
+   "anchors": []
+  }
+ ]
+}

@@ -1,0 +1,273 @@
+{
+ "meta": {
+  "topic": "Everything, Together",
+  "format": "long",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "Eleven chapters reduce to one mental model: who is in control, and who is paying.",
+  "openLoop": "You're building a public weather server that needs an LLM. One decision decides whether it bankrupts you.",
+  "analogy": "THE ASSEMBLED MACHINE - every part you met, running at once.",
+  "topicAxes": [
+   "entity-novelty",
+   "economic-pain"
+  ],
+  "seo": {
+   "title": "MCP, All Of It \u2014 The Final Checkpoint",
+   "altTitles": [
+    "Everything You Now Know About MCP, In One Chapter",
+    "The MCP Mental Model That Survives The Syntax"
+   ],
+   "hook": "Eleven chapters. One mental model.",
+   "breakdown": "the whole protocol reassembled, and the one question that decides how you build a public server",
+   "chapters": [
+    {
+     "id": "s01",
+     "title": "One decision left"
+    },
+    {
+     "id": "s03",
+     "title": "The whole machine"
+    },
+    {
+     "id": "s04",
+     "title": "The final question"
+    }
+   ],
+   "sources": [
+    "Course source: https://github.com/san-gitlogin/learn-mcp",
+    "Live course: https://san-gitlogin.github.io/learn-mcp/"
+   ],
+   "queries": [
+    "mcp summary",
+    "model context protocol recap",
+    "mcp cheat sheet",
+    "learn mcp course",
+    "mcp interview questions",
+    "mcp best practices"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ],
+   "tags": [
+    "mcp",
+    "model context protocol",
+    "claude",
+    "anthropic",
+    "python",
+    "summary",
+    "recap",
+    "tutorial",
+    "the nbx studio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "thumbnail": {
+  "title": "ALL OF MCP, IN ONE",
+  "badge": "Finale",
+  "asset": "si:anthropic"
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 235,
+   "narration": "You're shipping a public weather server that needs a language model. One decision decides whether it bankrupts you.",
+   "data": {
+    "headline": "ALL OF MCP, IN ONE",
+    "subtext": "the final checkpoint",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 12
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "TITLE_CARD",
+   "transition": "fade",
+   "background": "zoneB",
+   "durationFrames": 320,
+   "narration": "Everything from here is assembly. You've met every part already, so this is about seeing them run together. Learn MCP, on THE NBX STUDIO.",
+   "data": {
+    "title": "EVERYTHING, TOGETHER",
+    "subtitle": "chapter eleven of eleven"
+   },
+   "anchors": []
+  },
+  {
+   "id": "s03",
+   "type": "MCP_CONTROL",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpControl",
+   "headline": "The whole [machine]",
+   "color": "blue",
+   "caption": "every part, at once",
+   "premise": "Every piece of the protocol you've met, and the one question that tells them apart.",
+   "durationFrames": 940,
+   "narration": "Here's the whole thing on one screen. ^Tools are functions the model chooses, and Claude never runs them \u2014 your code does, in the loop. ^Resources are data your code fetches, and injecting one beats a tool call whenever you already know what's needed. ^Prompts are workflows a person triggers, which is how you ship your own expertise as a button. ^Sampling reverses the protocol so the client's key pays, which is what makes a public server affordable. ^Roots are file access control that the S D K hands you but never enforces. ^And notifications are how a slow tool proves it's alive. Underneath all six, one question keeps working: who is in control \u2014 and for sampling, who is paying.",
+   "cells": [
+    {
+     "label": "Tools",
+     "sub": "the model chooses \u00b7 your code runs",
+     "owner": "ai",
+     "mark": true
+    },
+    {
+     "label": "Resources",
+     "sub": "your code fetches \u00b7 inject to skip a round trip",
+     "owner": "code",
+     "mark": true
+    },
+    {
+     "label": "Prompts",
+     "sub": "a person triggers \u00b7 your expertise, as a button",
+     "owner": "user",
+     "mark": true
+    },
+    {
+     "label": "Sampling",
+     "sub": "the server asks \u00b7 the client's key pays",
+     "owner": "code",
+     "mark": true
+    },
+    {
+     "label": "Roots",
+     "sub": "handed to you \u00b7 enforced by you",
+     "owner": "code",
+     "mark": true
+    },
+    {
+     "label": "Notifications",
+     "sub": "ctx.info and report_progress",
+     "owner": "code",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "QUIZ_CARD",
+   "transition": "iris",
+   "background": "zoneC",
+   "durationFrames": 860,
+   "narration": "^The final question, straight from the course. You're building a public MCP server for a weather service, users connect from their own apps, and the server needs a language model to write the forecast in plain English. What's the smartest approach? ^Put your Anthropic key on the server and call Claude directly. ^Or use sampling, so each client calls Claude with its own key. Have a think, and pause if you'd like a moment. ^Ready? Sampling. Option one works beautifully until the day somebody shares your server, and then every forecast in the world is billed to you \u2014 which is precisely the corner sampling was invented to avoid.",
+   "data": {
+    "quiz": {
+     "question": "Public weather server, needs an LLM. Best?",
+     "options": [
+      {
+       "text": "your key on the server"
+      },
+      {
+       "text": "sampling \u2014 the client pays"
+      }
+     ],
+     "answerIndex": 1,
+     "why": "Otherwise every user's forecast is billed to you."
+    }
+   },
+   "anchors": [
+    "quiz.atWord",
+    "quiz.options.0.atWord",
+    "quiz.options.1.atWord",
+    "quiz.revealAtWord"
+   ]
+  },
+  {
+   "id": "s05",
+   "type": "LIST_BUILD",
+   "transition": "fade",
+   "background": "zoneB",
+   "durationFrames": 560,
+   "narration": "Four things to go and do, in this order. %Build the notes server from chapter four. %Add a resource and read it from a client. %Add a tool that reports progress, and watch the callback fire. And %make the server ask you to call Claude, which is sampling, and the moment it clicks.",
+   "data": {
+    "heading": "Do these four, in this order",
+    "items": [
+     {
+      "icon": "lucide:server",
+      "text": "The notes server",
+      "detail": "chapter four, from scratch"
+     },
+     {
+      "icon": "lucide:folder-open",
+      "text": "A resource",
+      "detail": "and read it from a client"
+     },
+     {
+      "icon": "lucide:activity",
+      "text": "report_progress",
+      "detail": "watch the callback fire"
+     },
+     {
+      "icon": "lucide:repeat",
+      "text": "Sampling",
+      "detail": "the moment it clicks"
+     }
+    ]
+   },
+   "anchors": [
+    "items.0.atWord",
+    "items.1.atWord",
+    "items.2.atWord",
+    "items.3.atWord"
+   ]
+  },
+  {
+   "id": "s06",
+   "type": "RECAP",
+   "transition": "dip",
+   "background": "zoneB",
+   "durationFrames": 440,
+   "narration": "Three lines for the whole protocol. %Ask who is in control, and the primitive names itself. %Claude asks, and your code executes \u2014 always. %And whoever holds the key pays, which is the whole argument for sampling.",
+   "data": {
+    "heading": "MCP, in three lines",
+    "points": [
+     {
+      "text": "Who is in control?"
+     },
+     {
+      "text": "Claude asks \u2014 your code executes"
+     },
+     {
+      "text": "Whoever holds the key pays"
+     }
+    ]
+   },
+   "anchors": [
+    "points.0.atWord",
+    "points.1.atWord",
+    "points.2.atWord"
+   ]
+  },
+  {
+   "id": "s07",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 310,
+   "narration": "That's the course. You've got the mental model now, and the syntax is a search away. The interactive version is linked below if you'd like to step through it yourself. Go and build something.",
+   "data": {
+    "message": "Learn MCP \u2014 the whole course",
+    "sub": "interactive version linked below"
+   },
+   "anchors": []
+  }
+ ]
+}

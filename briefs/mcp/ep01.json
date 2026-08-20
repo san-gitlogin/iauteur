@@ -1,0 +1,327 @@
+{
+ "meta": {
+  "topic": "What MCP Actually Is",
+  "format": "long",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "MCP is a standard socket, so the integration you need has probably already been written by somebody else.",
+  "openLoop": "Four services, four integrations, and none of them are your product. What if you didn't write any of them?",
+  "analogy": "THE DELIVERY PLATFORM - you don't sign every restaurant yourself; you plug into the one that already did.",
+  "topicAxes": [
+   "entity-novelty",
+   "economic-pain"
+  ],
+  "seo": {
+   "title": "What MCP Actually Is (And Why It Exists)",
+   "altTitles": [
+    "MCP Explained With One Analogy That Sticks",
+    "Stop Writing Integrations \u2014 What MCP Is Really For"
+   ],
+   "hook": "Four services. Four integrations. None of them are your product.",
+   "breakdown": "what the Model Context Protocol actually is, the problem it removes, and the exact messages a client and server exchange",
+   "chapters": [
+    {
+     "id": "s01",
+     "title": "Four integrations you didn't want"
+    },
+    {
+     "id": "s03",
+     "title": "The analogy that sticks"
+    },
+    {
+     "id": "s05",
+     "title": "Every arrow is one message"
+    },
+    {
+     "id": "s07",
+     "title": "Who writes the integration?"
+    }
+   ],
+   "sources": [
+    "Course source: https://github.com/san-gitlogin/learn-mcp",
+    "Live course: https://san-gitlogin.github.io/learn-mcp/"
+   ],
+   "queries": [
+    "what is mcp",
+    "model context protocol explained",
+    "mcp vs function calling",
+    "mcp server client",
+    "why use mcp",
+    "anthropic mcp tutorial",
+    "mcp json rpc"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#ai",
+    "#thenbxstudio"
+   ],
+   "tags": [
+    "mcp",
+    "model context protocol",
+    "claude",
+    "anthropic",
+    "ai tools",
+    "integration",
+    "json rpc",
+    "python",
+    "tutorial",
+    "the nbx studio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "thumbnail": {
+  "title": "STOP WRITING GLUE CODE",
+  "badge": "What is MCP",
+  "asset": "si:anthropic"
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "You want Claude to reach GitHub, Slack, and your database. That's three integrations, and none of them are your product.",
+   "data": {
+    "headline": "STOP WRITING INTEGRATIONS",
+    "subtext": "what MCP actually is",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 12
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "TITLE_CARD",
+   "transition": "fade",
+   "background": "zoneB",
+   "durationFrames": 340,
+   "narration": "Last time we found a hole in the API call: a tools list that somebody has to write. This is Learn MCP on THE NBX STUDIO, and today we meet the somebody.",
+   "data": {
+    "title": "WHAT IS MCP",
+    "subtitle": "chapter two of eleven"
+   },
+   "anchors": []
+  },
+  {
+   "id": "s03",
+   "type": "MCP_CONTROL",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpControl",
+   "headline": "The analogy that [sticks]",
+   "color": "blue",
+   "caption": "the delivery platform",
+   "premise": "Picture a food delivery app. You can sign every restaurant yourself, or plug into the platform that already signed them.",
+   "durationFrames": 800,
+   "narration": "Forget the jargon for a second and picture a food delivery app. ^You could partner with every restaurant one at a time \u2014 negotiate each menu, handle each payment, arrange each driver. That works, and it's your whole life. ^Or you plug into a platform that already did all of that, and you get every restaurant at once. ^MCP is the second one, for AI tools. Somebody has already written the GitHub connection, the Slack connection, the Postgres connection, and packaged each as a thing you plug into. That package is called an MCP server, and the part of your app that plugs in is called an MCP client. Those two words are the whole vocabulary.",
+   "cells": [
+    {
+     "label": "sign every restaurant",
+     "sub": "you write GitHub, Slack, Postgres yourself \u2014 forever",
+     "owner": "code",
+     "mark": true
+    },
+    {
+     "label": "plug into the platform",
+     "sub": "somebody already wrote them, you connect",
+     "owner": "code",
+     "mark": true
+    },
+    {
+     "label": "MCP",
+     "sub": "the platform, for AI tools",
+     "owner": "ai",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s03b",
+   "type": "MCP_CONTROL",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpControl",
+   "headline": "Why a standard [had to exist]",
+   "color": "orange",
+   "caption": "the multiplication",
+   "premise": "Every app that wants a tool, times every tool that exists. Without a standard, somebody writes each square.",
+   "durationFrames": 820,
+   "narration": "It's worth seeing why anyone bothered inventing a protocol, because the answer is a multiplication. ^Say there are four apps that want tool access \u2014 your editor, a chat client, an I D E, a terminal agent. ^And four services worth reaching: GitHub, Slack, Postgres, the filesystem. ^Without a standard, that's sixteen separate integrations, because every app writes its own version of every connection, and none of that work is shareable. ^With a standard, it's four servers and four clients \u2014 eight pieces instead of sixteen, and the numbers diverge fast as either side grows. That's the entire economic argument for MCP, and it's why the shape caught on so quickly.",
+   "cells": [
+    {
+     "label": "4 apps",
+     "sub": "editor \u00b7 chat \u00b7 IDE \u00b7 agent",
+     "owner": "code",
+     "mark": true
+    },
+    {
+     "label": "4 services",
+     "sub": "GitHub \u00b7 Slack \u00b7 Postgres \u00b7 files",
+     "owner": "code",
+     "mark": true
+    },
+    {
+     "label": "without a standard",
+     "sub": "4 \u00d7 4 = 16 integrations, none shared",
+     "owner": "code",
+     "mark": true
+    },
+    {
+     "label": "with MCP",
+     "sub": "4 servers + 4 clients = 8 pieces",
+     "owner": "ai",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "MCP_WIRE",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpWire",
+   "headline": "Server, client, [and a wire]",
+   "color": "blue",
+   "caption": "the two words",
+   "codeTitle": "client.py",
+   "premise": "Your app is the client. Somebody else's program is the server. Every arrow is one JSON-RPC message crossing between them.",
+   "ends": [
+    "YOUR APP",
+    "MCP SERVER"
+   ],
+   "durationFrames": 820,
+   "narration": "So concretely, here's the shape. Your app opens a connection to a server, |and the first thing your app asks is what can you do. ^The server answers with a list of tools, each carrying a name and a description. |Then when you want one of those tools run, your app calls it by name with arguments, ^and the server runs the function and hands back the result. That's the entire protocol at this level \u2014 a question, a list, a call, a result \u2014 which means everything else in this course hangs off those four messages. Everything else in this course is detail hanging off those four messages.",
+   "lines": [
+    {
+     "text": "async with stdio_client(params) as (r, w):"
+    },
+    {
+     "text": "    async with ClientSession(r, w) as client:"
+    },
+    {
+     "text": "        await client.initialize()"
+    },
+    {
+     "text": "        tools = await client.list_tools()",
+     "detail": "Ask the server what it can do.",
+     "teach": true
+    },
+    {
+     "text": "        result = await client.call_tool(",
+     "detail": "Run one, by name, with arguments.",
+     "teach": true
+    },
+    {
+     "text": "            \"read_note\", {\"note_id\": \"todo.md\"})"
+    }
+   ],
+   "cells": [
+    {
+     "label": "3 tools",
+     "sub": "read_note \u00b7 edit_note \u00b7 list_notes",
+     "dir": "back",
+     "mark": true,
+     "out": [
+      "{\"result\":{\"tools\":[",
+      "  {\"name\":\"read_note\",",
+      "   \"description\":\"Read a note\"}]}}"
+     ]
+    },
+    {
+     "label": "the note text",
+     "sub": "whatever the function returned",
+     "dir": "back",
+     "mark": true,
+     "out": [
+      "{\"result\":{\"content\":[",
+      "  {\"type\":\"text\",",
+      "   \"text\":\"Buy groceries...\"}]}}"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "type": "QUIZ_CARD",
+   "transition": "iris",
+   "background": "zoneC",
+   "durationFrames": 800,
+   "narration": "^Straight from the course. Your app wants to read GitHub repositories. With MCP, who writes the GitHub integration? ^You do, from scratch. ^Or the MCP server author already did. Have a think, and pause the video if you'd like a moment. ^Ready? The server author already did. That's the entire point \u2014 you install their server and connect to it, the same way you'd install a library rather than rewriting it.",
+   "data": {
+    "quiz": {
+     "question": "Who writes the GitHub integration?",
+     "options": [
+      {
+       "text": "you do, from scratch"
+      },
+      {
+       "text": "the MCP server author did"
+      }
+     ],
+     "answerIndex": 1,
+     "why": "You install their server, the way you'd install a library."
+    }
+   },
+   "anchors": [
+    "quiz.atWord",
+    "quiz.options.0.atWord",
+    "quiz.options.1.atWord",
+    "quiz.revealAtWord"
+   ]
+  },
+  {
+   "id": "s06",
+   "type": "RECAP",
+   "transition": "dip",
+   "background": "zoneB",
+   "durationFrames": 400,
+   "narration": "Three lines to keep. %An MCP server is somebody else's integration, packaged. %An MCP client is the piece of your app that plugs into a server. %And the wire between them carries four kinds of message, which we'll meet properly next chapter.",
+   "data": {
+    "heading": "Chapter two, in three lines",
+    "points": [
+     {
+      "text": "A server is a packaged integration"
+     },
+     {
+      "text": "A client is your end of the wire"
+     },
+     {
+      "text": "Four kinds of message cross it"
+     }
+    ]
+   },
+   "anchors": [
+    "points.0.atWord",
+    "points.1.atWord",
+    "points.2.atWord"
+   ]
+  },
+  {
+   "id": "s07",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 290,
+   "narration": "Next chapter is the most important idea in MCP, and it fits in one question: who's in control?",
+   "data": {
+    "message": "Next: the three superpowers",
+    "sub": "tools, resources and prompts"
+   },
+   "anchors": []
+  }
+ ]
+}

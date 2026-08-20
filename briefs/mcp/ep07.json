@@ -1,0 +1,322 @@
+{
+ "meta": {
+  "topic": "Roots",
+  "format": "long",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "Roots tell a server which folders it may touch \u2014 but the SDK never enforces it, so you write the check.",
+  "openLoop": "You handed the server two folders. What stops it reading a third?",
+  "analogy": "THE HOTEL KEYCARD - it opens your room and the gym, and nothing else.",
+  "topicAxes": [
+   "sovereignty",
+   "entity-novelty"
+  ],
+  "seo": {
+   "title": "MCP Roots \u2014 The Security Check Nobody Writes",
+   "altTitles": [
+    "MCP Doesn't Stop A Server Reading /etc/passwd. You Do.",
+    "Roots In MCP: The Part The SDK Leaves To You"
+   ],
+   "hook": "You handed the server two folders. What stops it reading a third?",
+   "breakdown": "how roots are declared by the client, why the SDK does not enforce them, and the check you have to write yourself",
+   "chapters": [
+    {
+     "id": "s01",
+     "title": "What stops it?"
+    },
+    {
+     "id": "s03",
+     "title": "The client hands over keys"
+    },
+    {
+     "id": "s04",
+     "title": "The check you write"
+    },
+    {
+     "id": "s05",
+     "title": "Watching a refusal"
+    }
+   ],
+   "sources": [
+    "Course source: https://github.com/san-gitlogin/learn-mcp",
+    "Live course: https://san-gitlogin.github.io/learn-mcp/"
+   ],
+   "queries": [
+    "mcp roots explained",
+    "list_roots callback",
+    "is_path_allowed mcp",
+    "mcp file access control",
+    "mcp security",
+    "mcp root uri file://",
+    "mcp server sandbox"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#security",
+    "#python",
+    "#claude",
+    "#thenbxstudio"
+   ],
+   "tags": [
+    "mcp",
+    "model context protocol",
+    "roots",
+    "security",
+    "file access",
+    "python",
+    "claude",
+    "anthropic",
+    "tutorial",
+    "the nbx studio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "thumbnail": {
+  "title": "MCP WON'T STOP IT",
+  "badge": "Roots",
+  "asset": "si:python"
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "You tell an MCP server it can use two folders. What actually stops it reading a third one?",
+   "data": {
+    "headline": "MCP WON'T STOP IT",
+    "subtext": "roots, and who enforces them",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 10
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "TITLE_CARD",
+   "transition": "fade",
+   "background": "zoneB",
+   "durationFrames": 330,
+   "narration": "Roots are how a client says you may look here, but not there. Think of a hotel keycard: it opens your room and the gym, and nothing else. Learn MCP, on THE NBX STUDIO.",
+   "data": {
+    "title": "ROOTS",
+    "subtitle": "chapter eight of eleven"
+   },
+   "anchors": []
+  },
+  {
+   "id": "s03",
+   "type": "MCP_ROOTS",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpRoots",
+   "headline": "The client hands [over the keys]",
+   "color": "red",
+   "caption": "declaring roots",
+   "codeTitle": "client.py",
+   "premise": "The client hands the server a list of allowed folders. Nothing stops the server looking elsewhere unless you write the check.",
+   "durationFrames": 920,
+   "narration": "The client decides which folders are allowed, and usually those paths come straight from the user \u2014 as command line arguments when the app launches, for instance. |Each path gets wrapped in a Root object with a file colon slash slash U R I, because the MCP spec requires that exact format rather than a bare path. ^So Movies is allowed, ^and Desktop is allowed. |Then you write a callback that returns the list, |and you register that callback when you open the session. The subtle part is that the server never receives the roots up front. The server asks for them, on demand, and your callback answers \u2014 which means the client stays in control of the list the whole time.",
+   "lines": [
+    {
+     "text": "root_paths = [\"/Users/me/Movies\", \"/Users/me/Desktop\"]"
+    },
+    {
+     "text": "roots = [Root(uri=FileUrl(f\"file://{Path(p).resolve()}\"),",
+     "detail": "MCP requires file:// URIs, not bare paths.",
+     "teach": true
+    },
+    {
+     "text": "              name=Path(p).name) for p in root_paths]"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "async def handle_list_roots(context):",
+     "detail": "The server asks; this answers.",
+     "teach": true
+    },
+    {
+     "text": "    return ListRootsResult(roots=roots)"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "ClientSession(read, write,",
+     "detail": "Registered when the session opens.",
+     "teach": true
+    },
+    {
+     "text": "              list_roots_callback=handle_list_roots)"
+    }
+   ],
+   "cells": [
+    {
+     "label": "/Users/me/Movies",
+     "sub": "granted by the client",
+     "mark": true
+    },
+    {
+     "label": "/Users/me/Desktop",
+     "sub": "granted by the client",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "MCP_ROOTS",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpRoots",
+   "headline": "The check [you write yourself]",
+   "color": "red",
+   "caption": "not in the SDK",
+   "codeTitle": "server.py",
+   "premise": "The client hands the server a list of allowed folders. Nothing stops the server looking elsewhere unless you write the check.",
+   "durationFrames": 980,
+   "narration": "Here's the part that surprises people, and it's the most important sentence in this chapter. Is path allowed is not part of the MCP library. You write it. |The S D K gives you c t x dot session dot list roots, which fires the client's callback and returns the allowed folders \u2014 that much is genuinely MCP's. |Comparing a requested path against that list is entirely your responsibility. |The trick is relative to, which raises a ValueError when the path isn't inside the folder, so a successful call means it's a child and an exception means it isn't. ^Movies slash clip dot m o v sits inside a granted root, so that one's allowed. |And if nothing matched by the end, you return False, ^which is how slash e t c slash passwd gets refused. Leave this function out and every tool you write can read anything the process can read.",
+   "lines": [
+    {
+     "text": "async def is_path_allowed(requested: Path, ctx: Context) -> bool:"
+    },
+    {
+     "text": "    roots = await ctx.session.list_roots()",
+     "detail": "This part IS from MCP.",
+     "teach": true
+    },
+    {
+     "text": "    if not requested.exists():",
+     "detail": "And this part is entirely yours.",
+     "teach": true
+    },
+    {
+     "text": "        return False"
+    },
+    {
+     "text": "    for root in roots.roots:"
+    },
+    {
+     "text": "        try:"
+    },
+    {
+     "text": "            requested.relative_to(file_url_to_path(root.uri))",
+     "detail": "Raises unless it's inside.",
+     "teach": true
+    },
+    {
+     "text": "            return True"
+    },
+    {
+     "text": "        except ValueError:"
+    },
+    {
+     "text": "            continue"
+    },
+    {
+     "text": "    return False",
+     "detail": "Nothing matched. Refuse.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "/Users/me/Movies/clip.mov",
+     "sub": "inside a granted root",
+     "text": "ask",
+     "mark": true
+    },
+    {
+     "label": "/etc/passwd",
+     "sub": "outside every root",
+     "text": "ask",
+     "color": "red",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "type": "QUIZ_CARD",
+   "transition": "iris",
+   "background": "zoneC",
+   "durationFrames": 830,
+   "narration": "^True or false, straight from the course. The MCP S D K automatically stops tools reading files outside the roots. ^True, MCP enforces it. ^Or false, you write is path allowed yourself. Have a think, and pause if you'd like a moment. ^Ready? False. MCP hands you the list and nothing more \u2014 the enforcement is code you write, and if you skip it there is no error and no warning, just a server that reads whatever it likes.",
+   "data": {
+    "quiz": {
+     "question": "Does the SDK enforce roots for you?",
+     "options": [
+      {
+       "text": "true \u2014 MCP enforces it"
+      },
+      {
+       "text": "false \u2014 you write the check"
+      }
+     ],
+     "answerIndex": 1,
+     "why": "MCP gives you the list. Enforcement is your code."
+    }
+   },
+   "anchors": [
+    "quiz.atWord",
+    "quiz.options.0.atWord",
+    "quiz.options.1.atWord",
+    "quiz.revealAtWord"
+   ]
+  },
+  {
+   "id": "s06",
+   "type": "RECAP",
+   "transition": "dip",
+   "background": "zoneB",
+   "durationFrames": 430,
+   "narration": "Three lines. %The client declares the roots, as file U R Is. %The server asks for them on demand, through list roots. %And the check against them is yours to write, every time.",
+   "data": {
+    "heading": "Roots, in three lines",
+    "points": [
+     {
+      "text": "The client declares them"
+     },
+     {
+      "text": "The server asks on demand"
+     },
+     {
+      "text": "You write the check"
+     }
+    ]
+   },
+   "anchors": [
+    "points.0.atWord",
+    "points.1.atWord",
+    "points.2.atWord"
+   ]
+  },
+  {
+   "id": "s07",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 290,
+   "narration": "Next: how a long-running tool tells the user it hasn't frozen.",
+   "data": {
+    "message": "Next: notifications",
+    "sub": "logs and progress"
+   },
+   "anchors": []
+  }
+ ]
+}

@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'MCP_TERMINAL'
   | 'MCP_FLAGS'
   | 'MCP_TRANSPORT'
   | 'MCP_PROGRESS'
@@ -354,6 +355,25 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type McpTerminalScene = SceneCommon<'MCP_TERMINAL'> & { data: {
+    mcpTerm: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      promptLabel?: string;
+      cwd?: string;
+      stageTitle?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
 
 export type McpFlagsScene = SceneCommon<'MCP_FLAGS'> & { data: {
     mcpFlags: {
@@ -5073,6 +5093,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  MCP_TERMINAL: McpTerminalScene;
   MCP_FLAGS: McpFlagsScene;
   MCP_TRANSPORT: McpTransportScene;
   MCP_PROGRESS: McpProgressScene;
@@ -5416,6 +5437,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | McpTerminalScene
   | McpFlagsScene
   | McpTransportScene
   | McpProgressScene

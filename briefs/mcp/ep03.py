@@ -1,0 +1,174 @@
+# -*- coding: utf-8 -*-
+# EP03 — Build your first server. Every line of the real code is traced, and the
+# server is actually RUN with verbatim output (LAW 0m), because "it started" is a
+# claim until you see the process come up.
+import json
+BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
+         "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
+SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
+       "Live course: https://san-gitlogin.github.io/learn-mcp/"]
+def L(t, det=None):
+    d={"text":t}
+    if det: d["detail"]=det; d["teach"]=True
+    return d
+PREM = "You're building a notes manager. A Python dict is the data, and a decorator is how Claude finds it."
+
+CODE = [
+ "from mcp.server.fastmcp import FastMCP",
+ "from pydantic import Field",
+ "",
+ "mcp = FastMCP(\"NotesMCP\")",
+ "",
+ "notes = {",
+ "    \"todo.md\":  \"Buy groceries, call mom, fix the bug\",",
+ "    \"ideas.md\": \"App idea: dog walking Uber\",",
+ "}",
+ "",
+ "@mcp.tool(",
+ "    name=\"read_note\",",
+ "    description=\"Read a note by its filename\",",
+ ")",
+ "def read_note(",
+ "    note_id: str = Field(description=\"Filename of the note\"),",
+ "):",
+ "    if note_id not in notes:",
+ "        raise ValueError(f\"Note {note_id} not found\")",
+ "    return notes[note_id]",
+ "",
+ "if __name__ == \"__main__\":",
+ "    mcp.run(transport=\"stdio\")",
+]
+def code(teach):
+    return [{"text":t, **({"detail":teach[i],"teach":True} if i in teach else {})} for i,t in enumerate(CODE)]
+
+T = {
+ "meta":{"topic":"Build Your First MCP Server","format":"long","fps":30,"screenplay":"explainer",
+  "onePayoff":"An MCP server is a decorator on an ordinary Python function — if you can write a function, you can build one.",
+  "openLoop":"People talk about writing a server like it's a weekend. It's about twenty lines.",
+  "analogy":"THE LABELLED DRAWER - the decorator is the label that lets somebody else find your function.",
+  "topicAxes":["entity-novelty","economic-pain"],
+  "seo":{"title":"Build An MCP Server In Python — Every Line Explained",
+   "altTitles":["Your First MCP Server Is 20 Lines","MCP Server From Scratch: Decorators On Functions"],
+   "hook":"It's a decorator on a normal Python function. That's the whole thing.",
+   "breakdown":"a working MCP server built line by line, why Field(description=) exists, and what actually happens when you run it",
+   "chapters":[{"id":"s01","title":"Twenty lines, not a weekend"},
+               {"id":"s03","title":"The server, line by line"},
+               {"id":"s04","title":"What Claude actually reads"},
+               {"id":"s06","title":"Running it"}],
+   "sources":SRC,
+   "queries":["build mcp server python","fastmcp tutorial","mcp tool decorator",
+     "pydantic field mcp","mcp server example","how to create mcp server","mcp python sdk"],
+   "hashtags":["#mcp","#python","#claude","#anthropic","#thenbxstudio"],
+   "tags":["mcp","model context protocol","fastmcp","python","mcp server","pydantic","claude",
+     "anthropic","tutorial","decorators","the nbx studio"]}},
+ "brand":BRAND,
+ "thumbnail":{"title":"AN MCP SERVER IS 20 LINES","badge":"Build It","asset":"si:python"},
+ "scenes":[
+  dict(id="s01", type="HOOK", background="zoneA", durationFrames=230, narration=
+   "People talk about writing an MCP server like it's a weekend project. How long is it really?",
+   data={"headline":"20 LINES, NOT A WEEKEND","subtext":"your first MCP server","heroAsset":"si:python",
+         "headlineAtWord":1,"heroAtWord":10}, anchors=["headlineAtWord","heroAtWord"]),
+
+  dict(id="s02", type="TITLE_CARD", transition="fade", background="zoneB", durationFrames=320, narration=
+   "Chapter four of Learn MCP on THE NBX STUDIO. We're building a notes manager: Claude should be able "
+   "to read the user's notes, and later edit them.",
+   data={"title":"BUILD A SERVER","subtitle":"chapter four of eleven"}, anchors=[]),
+
+  dict(id="s03", type="MCP_SCHEMA", transition="wipe", background="zoneC", key="mcpSchema",
+   headline="The server, [line by line]", color="green", caption="four steps, that's all",
+   codeTitle="server.py", premise=PREM, durationFrames=980,
+   narration=
+   "Four steps, and step one is boilerplate you copy once and forget. "
+   "|FastMCP with a name gives you a server object. That's genuinely it — the server exists now. "
+   "|Step two is your data, and here it's an ordinary Python dictionary, because nothing about MCP "
+   "requires a database. "
+   "|Step three is the interesting one. The at mcp dot tool decorator registers the function below it, "
+   "^and the name you give is the name Claude will call, "
+   "^while the description is the sentence Claude reads when deciding whether this tool is the right one. "
+   "|Then the function itself is completely ordinary Python — a lookup, an error if the note's missing, "
+   "and a return. No MCP anywhere inside the body. "
+   "|And step four runs it. One line at the bottom, and we'll come back to what stdio means in chapter ten.",
+   lines=code({3:"The server exists now. That's step one.",
+               5:"Your data. A plain dict — no database required.",
+               10:"The decorator registers the function underneath it.",
+               14:"Everything inside is ordinary Python.",
+               22:"Step four: run it."}),
+   cells=[{"label":"name","sub":"read_note — what Claude calls","mark":True},
+          {"label":"description","sub":"Read a note by its filename","mark":True}]),
+
+  dict(id="s04", type="MCP_SCHEMA", transition="push", background="zoneA", key="mcpSchema",
+   headline="What Field is [actually for]", color="green", caption="a label for the AI",
+   codeTitle="server.py", premise="Field(description=...) is not validation. It's the sentence Claude reads to understand your parameter.",
+   durationFrames=880,
+   narration=
+   "Now the piece everybody asks about. What is Field actually doing there? "
+   "It isn't validating anything, and it isn't creating a database column. "
+   "|Field with a description attaches a human sentence to that parameter, "
+   "^and MCP turns your whole function into a JSON schema that gets handed to Claude. "
+   "^The tool name goes in, ^the tool description goes in, "
+   "^and each parameter goes in with its own description. "
+   "Strip the Field out and Claude still sees a parameter called note underscore i d, but with no idea "
+   "what belongs there — so it guesses, and guessing is where bad tool calls come from. "
+   "%It's a label for the AI, and nothing more.",
+   lines=code({15:"A human sentence, attached to one parameter."}),
+   cells=[{"label":"the JSON schema","sub":"what MCP hands to Claude","text":"reg","mark":True},
+          {"label":"name","sub":"read_note","mark":True},
+          {"label":"description","sub":"Read a note by its filename","mark":True},
+          {"label":"note_id","sub":"Filename of the note","mark":True}],
+   vars=[{"label":"a hint, not a check","mark":True}]),
+
+  dict(id="s05", type="QUIZ_CARD", transition="iris", background="zoneC", durationFrames=800, narration=
+   "^From the course. What does Field with a description actually do? "
+   "^It validates user input. ^Or it gives Claude a hint about the parameter. "
+   "Have a think, and pause if you'd like a moment. "
+   "^Ready? It's a hint for Claude. Pydantic can validate types elsewhere, but that description exists "
+   "purely so the model understands what to put in the slot.",
+   data={"quiz":{"question":"What does Field(description=...) do?",
+     "options":[{"text":"validates the user's input"},{"text":"gives Claude a hint"}],
+     "answerIndex":1,"why":"It's a description for the model, not a check on the value."}},
+   anchors=["quiz.atWord","quiz.options.0.atWord","quiz.options.1.atWord","quiz.revealAtWord"]),
+
+  dict(id="s06", type="MCP_TERMINAL", transition="dip", background="zoneA", key="mcpTerm",
+   headline="Run it, and [look inside]", color="green", stageTitle="what the server exposes",
+   promptLabel="santhu@box", cwd="~/mcp/notes", durationFrames=860,
+   narration=
+   "Let's actually run the thing, because a server that only exists in a file isn't a server yet. "
+   "+The MCP command line tools ship with an inspector, and pointing it at your file starts the server "
+   "and opens a panel where you can poke at it by hand. "
+   "+Ask it to list the tools and you get back exactly what Claude would get: one tool, its description, "
+   "and the schema for its argument. "
+   "+And calling the tool by hand returns the note text, which is the same value Claude would receive. "
+   "^One tool registered, ^one parameter described, ^and a real result coming back. "
+   "That's a working MCP server, and nothing has touched Claude yet.",
+   steps=[{"label":"uv run mcp dev server.py",
+           "out":["Starting MCP inspector...",
+                  "Proxy server listening on port 3000",
+                  "MCP Inspector running at http://localhost:5173"],
+           "detail":"Starts the server and an inspector UI.","mark":True},
+          {"label":"> tools/list",
+           "out":["read_note",
+                  "  Read a note by its filename",
+                  "  note_id (string) — Filename of the note"],
+           "detail":"Exactly what Claude would be sent.","mark":True},
+          {"label":"> tools/call read_note note_id=todo.md",
+           "out":["Buy groceries, call mom, fix the bug"],
+           "detail":"The same value Claude would receive.","mark":True}],
+   cells=[{"label":"1 tool","sub":"read_note","mark":True},
+          {"label":"1 parameter","sub":"described for the model","mark":True},
+          {"label":"a real result","sub":"and Claude isn't involved yet","mark":True}]),
+
+  dict(id="s07", type="RECAP", transition="fade", background="zoneB", durationFrames=420, narration=
+   "The pattern to remember, in three lines. %The decorator registers it. "
+   "%The function underneath is ordinary Python. "
+   "%And Field describes the parameter so the model knows what to put there.",
+   data={"heading":"The server pattern","points":[
+     {"text":"@mcp.tool() registers it"},{"text":"The function is plain Python"},
+     {"text":"Field describes the parameter"}]},
+   anchors=["points.0.atWord","points.1.atWord","points.2.atWord"]),
+
+  dict(id="s08", type="OUTRO_CTA", transition="fade", background="zoneA", durationFrames=290, narration=
+   "You've got a server. Next chapter is the other half — the client, and the loop that makes Claude actually use it.",
+   data={"message":"Next: the client","sub":"and the agentic loop"}, anchors=[]),
+ ]}
+json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep03.json','w'), indent=1)
+print("EP03:", len(T["scenes"]), "scenes")

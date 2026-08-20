@@ -344,10 +344,12 @@ import {McpRoots} from './scenes/McpRoots';
 import {McpProgress} from './scenes/McpProgress';
 import {McpTransport} from './scenes/McpTransport';
 import {McpFlags} from './scenes/McpFlags';
+import {McpTerminal} from './scenes/McpTerminal';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  MCP_TERMINAL: McpTerminal,
   MCP_FLAGS: McpFlags,
   MCP_TRANSPORT: McpTransport,
   MCP_PROGRESS: McpProgress,
