@@ -657,3 +657,15 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | DSA_SIGNALS |  | headline, cells, vars, caption, atWord, color |
 | DSA_COST |  | headline, cells, vars, caption, atWord, color |
 | DSA_FRAMEWORK |  | headline, cells, vars, caption, atWord, color |
+| MCP_API_ANATOMY |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_CONTROL |  | headline, cells, ends, vars, caption, premise, atWord, color |
+| MCP_WIRE |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_SCHEMA |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_LOOP |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_URI |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_MENTION |  | headline, cells, ends, vars, caption, premise, atWord, color |
+| MCP_SAMPLING |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_ROOTS |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_PROGRESS |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
+| MCP_TRANSPORT |  | headline, cells, ends, vars, caption, premise, atWord, color |
+| MCP_FLAGS |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
