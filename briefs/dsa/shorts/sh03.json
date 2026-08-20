@@ -1,0 +1,482 @@
+{
+ "meta": {
+  "topic": "Binary Search",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "You can halve a sorted search space without ever writing an off-by-one bug.",
+  "openLoop": "A million names, and twenty guesses. Where do the rest go?",
+  "analogy": "THE GUESSING GAME - higher or lower, where every guess kills half the possibilities.",
+  "seo": {
+   "title": "Why Binary Search Finds Anything In 20 Guesses",
+   "hook": "A million names, and twenty guesses is enough. Every guess throws away half of what is lef",
+   "description": "You can halve a sorted search space without ever writing an off-by-one bug.",
+   "tags": [
+    "binary search",
+    "dsa",
+    "leetcode",
+    "coding interview",
+    "algorithms",
+    "python",
+    "faang"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "HALF, EVERY TIME",
+  "badge": "Binary Search",
+  "asset": "si:python",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "A million names, and twenty guesses is enough. Every guess throws away half of what is left.",
+   "data": {
+    "headline": "HALF, EVERY TIME",
+    "subtext": "binary search",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "DSA_TRACE_BSEARCH",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "dsaBsearch",
+   "headline": "Guess the [middle]",
+   "color": "purple",
+   "caption": "position four holds sixteen",
+   "codeTitle": "binary_search.py",
+   "narration": "|While left is less than or equal to right, keep guessing. That equals sign matters, because it lets the search look at a single remaining item. |Mid equals left plus right, integer-divided by two. Zero plus nine is nine, and nine halved rounding down is %four, because those two slashes mean divide and throw away the remainder. So >we look at position four, which holds ^sixteen. |Is sixteen our target? No, twenty-three is bigger. And because the list is sorted, everything left of sixteen is smaller still, so none of it can possibly be twenty-three.",
+   "lines": [
+    {
+     "text": "def binary_search(nums, target):"
+    },
+    {
+     "text": "    left = 0"
+    },
+    {
+     "text": "    right = len(nums) - 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while left <= right:",
+     "detail": "Keep guessing while the range still holds something.",
+     "teach": true
+    },
+    {
+     "text": "        mid = (left + right) // 2",
+     "detail": "The middle of what is left. // rounds down.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if nums[mid] == target:",
+     "detail": "Is the middle our target? Not this time.",
+     "teach": true
+    },
+    {
+     "text": "            return mid"
+    },
+    {
+     "text": "        elif nums[mid] < target:"
+    },
+    {
+     "text": "            left = mid + 1"
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            right = mid - 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return -1"
+    }
+   ],
+   "cells": [
+    {
+     "label": "2",
+     "mark": false
+    },
+    {
+     "label": "5",
+     "mark": false
+    },
+    {
+     "label": "8",
+     "mark": false
+    },
+    {
+     "label": "12",
+     "mark": false
+    },
+    {
+     "label": "16",
+     "mark": true
+    },
+    {
+     "label": "23",
+     "mark": false
+    },
+    {
+     "label": "38",
+     "mark": false
+    },
+    {
+     "label": "56",
+     "mark": false
+    },
+    {
+     "label": "72",
+     "mark": false
+    },
+    {
+     "label": "91",
+     "mark": false
+    }
+   ],
+   "pointers": [
+    {
+     "label": "LO",
+     "value": 0
+    },
+    {
+     "label": "MID",
+     "value": 4,
+     "color": "purple",
+     "mark": true
+    },
+    {
+     "label": "HI",
+     "value": 9,
+     "color": "yellow"
+    }
+   ],
+   "vars": [
+    {
+     "label": "mid=4",
+     "mark": true
+    }
+   ],
+   "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left."
+  },
+  {
+   "id": "s03",
+   "type": "DSA_TRACE_BSEARCH",
+   "transition": "push",
+   "background": "zoneB",
+   "key": "dsaBsearch",
+   "headline": "Guess again, [go left]",
+   "color": "purple",
+   "caption": "fifty-six is too big",
+   "codeTitle": "binary_search.py",
+   "narration": "|New middle: five plus nine is fourteen, halved and rounded down is %seven. >Position seven holds ^fifty-six, which is bigger than twenty-three. Same reasoning as before, mirrored: everything right of fifty-six is bigger than fifty-six, and fifty-six was already too big, so ^all of that can go too. |The else branch fires, right becomes mid minus one, and >the top edge drops to %six. Two guesses in, and eight of the ten are already out of the running.",
+   "lines": [
+    {
+     "text": "def binary_search(nums, target):"
+    },
+    {
+     "text": "    left = 0"
+    },
+    {
+     "text": "    right = len(nums) - 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while left <= right:"
+    },
+    {
+     "text": "        mid = (left + right) // 2",
+     "detail": "The middle of what is left: position seven.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if nums[mid] == target:"
+    },
+    {
+     "text": "            return mid"
+    },
+    {
+     "text": "        elif nums[mid] < target:"
+    },
+    {
+     "text": "            left = mid + 1"
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            right = mid - 1",
+     "detail": "Too big, so pull the top edge down to mid - 1.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return -1"
+    }
+   ],
+   "cells": [
+    {
+     "label": "2",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "5",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "8",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "12",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "16",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "23",
+     "mark": false
+    },
+    {
+     "label": "38",
+     "mark": false
+    },
+    {
+     "label": "56",
+     "text": "dropped",
+     "mark": true
+    },
+    {
+     "label": "72",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "91",
+     "text": "dropped",
+     "mark": true
+    }
+   ],
+   "pointers": [
+    {
+     "label": "LO",
+     "value": 5
+    },
+    {
+     "label": "MID",
+     "value": 7,
+     "color": "purple",
+     "mark": true
+    },
+    {
+     "label": "HI",
+     "value": 6,
+     "color": "yellow",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "mid=7",
+     "mark": true
+    },
+    {
+     "label": "right=6",
+     "mark": true
+    }
+   ],
+   "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left."
+  },
+  {
+   "id": "s04",
+   "type": "DSA_TRACE_BSEARCH",
+   "transition": "fade",
+   "background": "zoneA",
+   "key": "dsaBsearch",
+   "headline": "Found, in [three guesses]",
+   "color": "purple",
+   "caption": "position five",
+   "codeTitle": "binary_search.py",
+   "narration": "|Mid is five plus six halved, rounding down to %five. >Position five holds ^twenty-three. |That's our number, so we return the index, and %the answer's five. Three guesses for ten items. For a phone book with a million names that's about twenty, and for every page Google has indexed, somewhere around thirty-three. Doubling the data costs you one more guess. Every time, forever.",
+   "lines": [
+    {
+     "text": "def binary_search(nums, target):"
+    },
+    {
+     "text": "    left = 0"
+    },
+    {
+     "text": "    right = len(nums) - 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while left <= right:"
+    },
+    {
+     "text": "        mid = (left + right) // 2",
+     "detail": "The middle of the last two: position five.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if nums[mid] == target:"
+    },
+    {
+     "text": "            return mid",
+     "detail": "Found it. Hand back the position.",
+     "teach": true
+    },
+    {
+     "text": "        elif nums[mid] < target:"
+    },
+    {
+     "text": "            left = mid + 1"
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            right = mid - 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return -1"
+    }
+   ],
+   "cells": [
+    {
+     "label": "2",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "5",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "8",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "12",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "16",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "23",
+     "text": "done",
+     "mark": true
+    },
+    {
+     "label": "38",
+     "mark": false
+    },
+    {
+     "label": "56",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "72",
+     "text": "dropped",
+     "mark": false
+    },
+    {
+     "label": "91",
+     "text": "dropped",
+     "mark": false
+    }
+   ],
+   "pointers": [
+    {
+     "label": "MID",
+     "value": 5,
+     "color": "purple",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "mid=5",
+     "mark": true
+    },
+    {
+     "label": "return 5",
+     "mark": true
+    }
+   ],
+   "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left."
+  },
+  {
+   "id": "s05",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Sorted, and told to find something in log n. That is your signal. The full pattern is in the Dojo.",
+   "data": {
+    "message": "Binary Search, traced line by line",
+    "sub": "full pattern in the Dojo"
+   },
+   "anchors": []
+  }
+ ]
+}

@@ -1,0 +1,317 @@
+{
+ "meta": {
+  "topic": "Greedy",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "You can merge or schedule intervals in one pass, once you know what to sort by.",
+  "openLoop": "Four meetings, three rooms. The sort does most of the work \u2014 but which sort?",
+  "analogy": "THE MEETING ROOM - overlapping bookings collapsed into blocks.",
+  "seo": {
+   "title": "Greedy Algorithms: The Sort Key Is The Whole Puzzle",
+   "hook": "Four meetings, three blocks of time. The sort does most of the work. But which sort?",
+   "description": "You can merge or schedule intervals in one pass, once you know what to sort by.",
+   "tags": [
+    "greedy",
+    "merge intervals",
+    "scheduling",
+    "dsa",
+    "leetcode",
+    "coding interview",
+    "python"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "SORT. THEN DECIDE.",
+  "badge": "Greedy",
+  "asset": "si:python",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "Four meetings, three blocks of time. The sort does most of the work. But which sort?",
+   "data": {
+    "headline": "SORT. THEN DECIDE.",
+    "subtext": "greedy",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "DSA_TRACE_INTERVALS",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "dsaIntervals",
+   "headline": "Overlap, so [merge]",
+   "color": "orange",
+   "caption": "two into one",
+   "codeTitle": "merge_intervals.py",
+   "narration": "|The diary is sorted by start time, and the next booking is ^two to six. |Does its start come before the current block ends? Two is less than or equal to three, so yes, they overlap. |So we stretch the block's end to whichever end is later, which is six. ^One to three and two to six have become ^one to six. %One block now covers both meetings, and notice we never created anything new, we only widened what was already there.",
+   "lines": [
+    {
+     "text": "def merge_intervals(intervals):"
+    },
+    {
+     "text": "    intervals.sort(key=lambda x: x[0])"
+    },
+    {
+     "text": "    merged = [intervals[0]]"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    for start, end in intervals[1:]:",
+     "detail": "Walk the rest, in sorted order.",
+     "teach": true
+    },
+    {
+     "text": "        if start <= merged[-1][1]:",
+     "detail": "Does this one start before the block ends?",
+     "teach": true
+    },
+    {
+     "text": "            merged[-1][1] = max(merged[-1][1], end)",
+     "detail": "Then stretch the block to the later end.",
+     "teach": true
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            merged.append([start, end])"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return merged"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1-6",
+     "sub": "merged block",
+     "value": 18,
+     "text": "done",
+     "mark": true
+    },
+    {
+     "label": "2-6",
+     "sub": "absorbed",
+     "value": 18,
+     "text": "dropped",
+     "mark": true
+    },
+    {
+     "label": "8-10",
+     "sub": "meeting C",
+     "value": 18
+    },
+    {
+     "label": "15-18",
+     "sub": "meeting D",
+     "value": 18
+    }
+   ],
+   "vars": [
+    {
+     "label": "merged = [[1,6]]",
+     "mark": true
+    }
+   ],
+   "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash."
+  },
+  {
+   "id": "s03",
+   "type": "DSA_TRACE_INTERVALS",
+   "transition": "push",
+   "background": "zoneB",
+   "key": "dsaIntervals",
+   "headline": "A gap, so [start again]",
+   "color": "orange",
+   "caption": "a second block",
+   "codeTitle": "merge_intervals.py",
+   "narration": "|Next is ^eight to ten. Does eight come before six? It doesn't, so there's a gap. |The else branch runs and we append it as ^a separate block. %Two blocks now. That's the entire decision the algorithm ever makes: overlap means widen, gap means append. One comparison per booking, and it never revisits a decision it has already taken. That refusal to look back is exactly what the word greedy means.",
+   "lines": [
+    {
+     "text": "def merge_intervals(intervals):"
+    },
+    {
+     "text": "    intervals.sort(key=lambda x: x[0])"
+    },
+    {
+     "text": "    merged = [intervals[0]]"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    for start, end in intervals[1:]:"
+    },
+    {
+     "text": "        if start <= merged[-1][1]:",
+     "detail": "Eight does not start before six. No overlap.",
+     "teach": true
+    },
+    {
+     "text": "            merged[-1][1] = max(merged[-1][1], end)"
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            merged.append([start, end])",
+     "detail": "So this becomes a block of its own.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return merged"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1-6",
+     "sub": "block one",
+     "value": 18,
+     "text": "done"
+    },
+    {
+     "label": "8-10",
+     "sub": "block two",
+     "value": 18,
+     "mark": true
+    },
+    {
+     "label": "15-18",
+     "sub": "meeting D",
+     "value": 18
+    }
+   ],
+   "vars": [
+    {
+     "label": "merged = [[1,6],[8,10]]",
+     "mark": true
+    }
+   ],
+   "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash."
+  },
+  {
+   "id": "s04",
+   "type": "DSA_TRACE_INTERVALS",
+   "transition": "fade",
+   "background": "zoneB",
+   "key": "dsaIntervals",
+   "headline": "And the [last one]",
+   "color": "orange",
+   "caption": "three blocks, done",
+   "codeTitle": "merge_intervals.py",
+   "narration": "|Last booking, ^fifteen to eighteen. Fifteen is well past ten, so another gap, and it becomes ^a third block. |Return merged, and %the diary is three blocks instead of four bookings. The whole thing cost one sort plus one walk, which is n log n for the sort and n for the walk. The sort dominates, so the honest complexity to quote is n log n.",
+   "lines": [
+    {
+     "text": "def merge_intervals(intervals):"
+    },
+    {
+     "text": "    intervals.sort(key=lambda x: x[0])"
+    },
+    {
+     "text": "    merged = [intervals[0]]"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    for start, end in intervals[1:]:"
+    },
+    {
+     "text": "        if start <= merged[-1][1]:"
+    },
+    {
+     "text": "            merged[-1][1] = max(merged[-1][1], end)"
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            merged.append([start, end])",
+     "detail": "Another gap, another block.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return merged",
+     "detail": "Hand back the collapsed diary.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "1-6",
+     "sub": "block one",
+     "value": 18,
+     "text": "done"
+    },
+    {
+     "label": "8-10",
+     "sub": "block two",
+     "value": 18,
+     "text": "done"
+    },
+    {
+     "label": "15-18",
+     "sub": "block three",
+     "value": 18,
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "return 3 blocks",
+     "mark": true
+    }
+   ],
+   "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash."
+  },
+  {
+   "id": "s05",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Intervals, scheduling, or a minimum count. That is your signal, and the sort key is the trap. The full pattern is in the Dojo.",
+   "data": {
+    "message": "Greedy, traced line by line",
+    "sub": "full pattern in the Dojo"
+   },
+   "anchors": []
+  }
+ ]
+}

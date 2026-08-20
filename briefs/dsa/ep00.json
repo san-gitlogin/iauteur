@@ -1,0 +1,554 @@
+{
+ "meta": {
+  "topic": "The Six-Step Framework",
+  "format": "long",
+  "fps": 30,
+  "screenplay": "dojo",
+  "onePayoff": "You can take an unseen problem and reach the right pattern before you write a line.",
+  "openLoop": "You know ten patterns. The interview gives you a problem. What happens in between?",
+  "analogy": "THE DIAGNOSIS - reading the symptoms before reaching for a treatment.",
+  "topicAxes": [
+   "economic-pain",
+   "tribal-conflict"
+  ],
+  "seo": {
+   "title": "How To Actually Solve A Coding Interview Problem \u2014 6 Steps",
+   "altTitles": [
+    "The Six-Step Framework (DSA Pattern Dojo, Episode 0)",
+    "Stop Coding First \u2014 The Method Interviewers Are Grading"
+   ],
+   "hook": "You know the patterns. What happens between the question and the code?",
+   "breakdown": "the six-step method for turning an unseen problem into the right pattern, plus the signal table for all ten",
+   "chapters": [
+    {
+     "id": "s01",
+     "title": "Between the question and the code"
+    },
+    {
+     "id": "s03",
+     "title": "The six steps"
+    },
+    {
+     "id": "s04",
+     "title": "1 \u00b7 Read and draw"
+    },
+    {
+     "id": "s05",
+     "title": "2 \u00b7 Spot the signals"
+    },
+    {
+     "id": "s06",
+     "title": "3 \u00b7 Match the pattern"
+    },
+    {
+     "id": "s07",
+     "title": "4 \u00b7 Plan in plain English"
+    },
+    {
+     "id": "s09",
+     "title": "5 \u00b7 Code it clean"
+    },
+    {
+     "id": "s10",
+     "title": "6 \u00b7 Test and analyse"
+    },
+    {
+     "id": "s11",
+     "title": "The signal table"
+    }
+   ],
+   "queries": [
+    "how to solve coding interview problems",
+    "dsa problem solving framework",
+    "how to identify the pattern in a problem",
+    "coding interview approach step by step",
+    "what interviewers actually grade",
+    "how to explain your approach in an interview",
+    "leetcode study plan patterns",
+    "signal words dsa patterns",
+    "stuck in coding interview what to do",
+    "dsa patterns cheat sheet",
+    "faang interview preparation",
+    "technical interview method"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#faang",
+    "#thenbxstudio"
+   ],
+   "tags": [
+    "dsa",
+    "data structures and algorithms",
+    "coding interview",
+    "interview preparation",
+    "faang interview",
+    "leetcode",
+    "problem solving",
+    "algorithms",
+    "python",
+    "dsa patterns",
+    "software engineering interview",
+    "technical interview",
+    "the nbx studio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "thumbnail": {
+  "title": "DON'T CODE FIRST",
+  "badge": "The 6 Steps",
+  "asset": "si:python"
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "You know the patterns. The interview hands you a problem. Where does the method go?",
+   "data": {
+    "headline": "DON'T CODE FIRST",
+    "subtext": "what happens before line one",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "TITLE_CARD",
+   "transition": "dip",
+   "background": "zoneB",
+   "narration": "This is the Dojo, from THE NBX STUDIO, and this is the method the whole series runs on: six steps, in order, that take you from a question you've never seen to code you can defend.",
+   "data": {
+    "title": "THE SIX STEPS",
+    "subtitle": "before the patterns"
+   },
+   "anchors": []
+  },
+  {
+   "id": "s03",
+   "type": "DSA_FRAMEWORK",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "dsaFramework",
+   "headline": "Six steps, [in order]",
+   "color": "blue",
+   "caption": "the whole method",
+   "narration": "Here are all six, and the order genuinely matters. ^Read and draw. ^Spot the signals. ^Match the pattern. ^Plan in plain English. ^Code it clean. ^Test and analyse. Most candidates start at step five, because writing code feels like progress and staring at a problem feels like failing at it. But interviewers grade steps one to four at least as hard as the code, and often harder.",
+   "cells": [
+    {
+     "label": "Read and draw",
+     "sub": "three times, then sketch it",
+     "mark": true
+    },
+    {
+     "label": "Spot the signals",
+     "sub": "the words that give it away",
+     "mark": true
+    },
+    {
+     "label": "Match the pattern",
+     "sub": "one or two candidates",
+     "mark": true
+    },
+    {
+     "label": "Plan in plain English",
+     "sub": "before a line of code",
+     "mark": true
+    },
+    {
+     "label": "Code it clean",
+     "sub": "simple, named, unoptimised",
+     "mark": true
+    },
+    {
+     "label": "Test and analyse",
+     "sub": "trace it, then state the cost",
+     "mark": true
+    }
+   ],
+   "premise": "The six steps, run in order on any question you are handed. Read the symptoms first, choose the treatment second."
+  },
+  {
+   "id": "s04",
+   "type": "DSA_FRAMEWORK",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "dsaFramework",
+   "headline": "One \u00b7 [read and draw]",
+   "color": "blue",
+   "caption": "before anything else",
+   "narration": "^Read the problem three times, and I mean literally three. Not twice: people miss a constraint on the first pass and invent one on the second. ^Then draw the input and the output, physically, on paper. ^Write the edge cases down before you forget them: empty, single element, duplicates, negatives. ^Finish by saying what's being asked, in your own words. ^If you can't say that sentence, no amount of code will rescue you.",
+   "cells": [
+    {
+     "label": "read it three times",
+     "sub": "once is how you miss a constraint",
+     "mark": true
+    },
+    {
+     "label": "draw input and output",
+     "sub": "on paper, physically",
+     "mark": true
+    },
+    {
+     "label": "write the edge cases",
+     "sub": "empty, single, duplicates, negatives",
+     "mark": true
+    },
+    {
+     "label": "say it in your own words",
+     "sub": "out loud, in one sentence",
+     "mark": true
+    },
+    {
+     "label": "cannot say it?",
+     "sub": "then you cannot pick a pattern",
+     "mark": true
+    }
+   ],
+   "premise": "The six steps, run in order on any question you are handed. Read the symptoms first, choose the treatment second."
+  },
+  {
+   "id": "s05",
+   "type": "DSA_SIGNALS",
+   "transition": "iris",
+   "background": "zoneA",
+   "key": "dsaSignals",
+   "headline": "Two \u00b7 [spot the signals]",
+   "color": "yellow",
+   "caption": "the words are the cheat code",
+   "narration": "Step two is what this whole series is built around. Problems announce their own pattern, and the announcement is usually a single word. ^Sorted. ^Contiguous. ^All combinations. ^Shortest. ^Frequency. ^Nested. Read the question again with a pen and circle the nouns and adjectives that constrain the input, because those words carry the pattern. Verbs tell you what to return; constraints tell you how to get there.",
+   "cells": [
+    {
+     "label": "sorted",
+     "sub": "binary search, or two pointers",
+     "mark": true
+    },
+    {
+     "label": "contiguous",
+     "sub": "sliding window",
+     "mark": true
+    },
+    {
+     "label": "all combinations",
+     "sub": "backtracking",
+     "mark": true
+    },
+    {
+     "label": "shortest",
+     "sub": "BFS",
+     "mark": true
+    },
+    {
+     "label": "frequency",
+     "sub": "hash map",
+     "mark": true
+    },
+    {
+     "label": "nested",
+     "sub": "stack",
+     "mark": true
+    }
+   ],
+   "premise": "Words lifted straight out of the question, and the pattern each one points at. Red means the signal rules this pattern OUT."
+  },
+  {
+   "id": "s06",
+   "type": "DSA_FRAMEWORK",
+   "transition": "dip",
+   "background": "zoneB",
+   "key": "dsaFramework",
+   "headline": "Three \u00b7 [match the pattern]",
+   "color": "blue",
+   "caption": "one or two candidates, not ten",
+   "narration": "^From the signals, name one or two candidate patterns. Not ten, and not none. ^Then ask honestly whether that pattern's core idea applies here. Two pointers works only because sorted lets you eliminate a whole side; with nothing sorted, the reasoning collapses. ^Say your candidate out loud: this looks like a sliding window, because the question says contiguous. ^Wrong out loud is recoverable and invites a hint. ^Four silent minutes is not. Interviewers can't give you credit for thinking they never heard.",
+   "cells": [
+    {
+     "label": "name one or two",
+     "sub": "not ten, and not none",
+     "mark": true
+    },
+    {
+     "label": "does the core idea apply?",
+     "sub": "the honest question",
+     "mark": true
+    },
+    {
+     "label": "say it out loud",
+     "sub": "name the pattern and the signal",
+     "mark": true
+    },
+    {
+     "label": "wrong out loud",
+     "sub": "recoverable, and invites a hint",
+     "mark": true
+    },
+    {
+     "label": "silent for four minutes",
+     "sub": "neither of those",
+     "mark": true
+    }
+   ],
+   "premise": "The six steps, run in order on any question you are handed. Read the symptoms first, choose the treatment second."
+  },
+  {
+   "id": "s07",
+   "type": "DSA_FRAMEWORK",
+   "transition": "fade",
+   "background": "zoneB",
+   "key": "dsaFramework",
+   "headline": "Four \u00b7 [plan in plain English]",
+   "color": "blue",
+   "caption": "the step people skip",
+   "narration": "This is the step candidates skip, and it's the one that changes the outcome. ^Explain the approach in plain English before writing anything. ^Then walk your own example through it by hand, out loud. ^You'll catch half your bugs here, for free, because tracing an idea is faster than debugging code. ^An interviewer who heard a clear plan forgives a syntax error.",
+   "cells": [
+    {
+     "label": "explain it in plain English",
+     "sub": "before a single line",
+     "mark": true
+    },
+    {
+     "label": "walk your example by hand",
+     "sub": "out loud",
+     "mark": true
+    },
+    {
+     "label": "catch bugs while they are free",
+     "sub": "tracing beats debugging",
+     "mark": true
+    },
+    {
+     "label": "a heard plan buys forgiveness",
+     "sub": "silence does not",
+     "mark": true
+    }
+   ],
+   "premise": "The six steps, run in order on any question you are handed. Read the symptoms first, choose the treatment second."
+  },
+  {
+   "id": "s08",
+   "type": "QUIZ_CARD",
+   "transition": "iris",
+   "background": "zoneC",
+   "narration": "^Quick one. You've read the problem, the array is sorted, and it asks for a pair. What next? ^Start writing the two-pointer code. ^Say the pattern out loud and walk an example. ^Or check whether a hash map is faster. Have a think, and pause if you'd like. ^Ready? Say it and walk an example, because the plan is what's being graded and it's cheap to change.",
+   "data": {
+    "quiz": {
+     "question": "Sorted input, asking for a pair. Next move?",
+     "options": [
+      {
+       "text": "start writing the code"
+      },
+      {
+       "text": "say the pattern, walk an example"
+      },
+      {
+       "text": "check if a hash map is faster"
+      }
+     ],
+     "answerIndex": 1,
+     "why": "The plan is what is being graded, and it is cheap to change."
+    }
+   },
+   "anchors": [
+    "quiz.atWord",
+    "quiz.options.0.atWord",
+    "quiz.options.1.atWord",
+    "quiz.options.2.atWord",
+    "quiz.revealAtWord"
+   ]
+  },
+  {
+   "id": "s09",
+   "type": "DSA_FRAMEWORK",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "dsaFramework",
+   "headline": "Five \u00b7 [code it clean]",
+   "color": "blue",
+   "caption": "now, and not before",
+   "narration": "^Now you write it, and the goal is readable rather than clever. ^Use names a stranger could follow: left and right, not i and j, when left and right is what they actually mean. ^Start with the simple version that works. ^Don't optimise while you type, because premature optimisation reads as uncertainty, ^and speeding up correct code is far easier than correcting fast code.",
+   "cells": [
+    {
+     "label": "readable beats clever",
+     "sub": "a stranger has to follow it",
+     "mark": true
+    },
+    {
+     "label": "name things properly",
+     "sub": "left and right, not i and j",
+     "mark": true
+    },
+    {
+     "label": "simple version first",
+     "sub": "get it working",
+     "mark": true
+    },
+    {
+     "label": "do not optimise while typing",
+     "sub": "it reads as uncertainty",
+     "mark": true
+    },
+    {
+     "label": "speed up correct code",
+     "sub": "not the other way round",
+     "mark": true
+    }
+   ],
+   "premise": "The six steps, run in order on any question you are handed. Read the symptoms first, choose the treatment second."
+  },
+  {
+   "id": "s10",
+   "type": "DSA_FRAMEWORK",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "dsaFramework",
+   "headline": "Six \u00b7 [test and analyse]",
+   "color": "blue",
+   "caption": "finish properly",
+   "narration": "^Trace your own code with the example, out loud. Find your own bug rather than letting the interviewer find it, because one of those looks considerably better. ^Then run the edge cases from step one. ^State your time and space complexity without being asked. ^Ten seconds, ^and the difference between finished and abandoned. Say the two values and stop, because nobody wants a lecture at the end of an interview.",
+   "cells": [
+    {
+     "label": "trace it out loud",
+     "sub": "find your own bug",
+     "mark": true
+    },
+    {
+     "label": "run the edge cases",
+     "sub": "the ones from step one",
+     "mark": true
+    },
+    {
+     "label": "state time and space",
+     "sub": "without being asked",
+     "mark": true
+    },
+    {
+     "label": "ten seconds",
+     "sub": "that is all it costs",
+     "mark": true
+    },
+    {
+     "label": "finished vs abandoned",
+     "sub": "the difference it makes",
+     "mark": true
+    }
+   ],
+   "premise": "The six steps, run in order on any question you are handed. Read the symptoms first, choose the treatment second."
+  },
+  {
+   "id": "s11",
+   "type": "DSA_SIGNALS",
+   "transition": "dip",
+   "background": "zoneC",
+   "key": "dsaSignals",
+   "headline": "The whole [signal table]",
+   "color": "yellow",
+   "caption": "ten patterns, one page",
+   "narration": "Here's the table this whole series builds, and it's worth writing out by hand once. ^Sorted plus a pair means two pointers. ^Contiguous, or subarray, means sliding window. ^Sorted plus find means binary search. ^Frequency, or have I seen this, means a hash map. ^Nested, or brackets, means a stack. ^Shortest, or fewest steps, means breadth-first search. ^All combinations means backtracking. ^Number of ways, or minimum cost, is dynamic programming. ^Intervals or scheduling means sort, then greedy. ^And cycle, or the middle, means fast and slow pointers. Ten rows. Copy them onto one card and read the card before every practice session.",
+   "cells": [
+    {
+     "label": "sorted + pair",
+     "sub": "two pointers",
+     "mark": true
+    },
+    {
+     "label": "contiguous, subarray",
+     "sub": "sliding window",
+     "mark": true
+    },
+    {
+     "label": "sorted + find",
+     "sub": "binary search",
+     "mark": true
+    },
+    {
+     "label": "frequency, seen before",
+     "sub": "hash map",
+     "mark": true
+    },
+    {
+     "label": "nested, brackets",
+     "sub": "stack",
+     "mark": true
+    },
+    {
+     "label": "shortest, fewest steps",
+     "sub": "BFS",
+     "mark": true
+    },
+    {
+     "label": "all combinations",
+     "sub": "backtracking",
+     "mark": true
+    },
+    {
+     "label": "ways, min cost",
+     "sub": "dynamic programming",
+     "mark": true
+    },
+    {
+     "label": "intervals, schedule",
+     "sub": "sort, then greedy",
+     "mark": true
+    },
+    {
+     "label": "cycle, middle",
+     "sub": "fast and slow pointers",
+     "mark": true
+    }
+   ],
+   "premise": "Words lifted straight out of the question, and the pattern each one points at. Red means the signal rules this pattern OUT."
+  },
+  {
+   "id": "s12",
+   "type": "RECAP",
+   "transition": "fade",
+   "background": "zoneB",
+   "narration": "Three things to take with you. %Read before you reach, because a pattern chosen from half a problem is a wrong pattern. %The signals are in the question, and circling them is a real technique. And %say the plan out loud, because the plan is what's actually being graded.",
+   "data": {
+    "heading": "The method, in three lines",
+    "points": [
+     {
+      "text": "Read before you reach"
+     },
+     {
+      "text": "The signals are in the question"
+     },
+     {
+      "text": "Say the plan out loud"
+     }
+    ]
+   },
+   "anchors": [
+    "points.0.atWord",
+    "points.1.atWord",
+    "points.2.atWord"
+   ]
+  },
+  {
+   "id": "s13",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Next up is pattern one, two pointers, where fifteen checks become three. Ten patterns, one chapter each, and then five real problems solved with nothing but this method.",
+   "data": {
+    "message": "Ten patterns, one per episode",
+    "sub": "next: Two Pointers"
+   },
+   "anchors": []
+  }
+ ]
+}

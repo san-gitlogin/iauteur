@@ -1,0 +1,244 @@
+{
+ "meta": {
+  "topic": "Sliding Window",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "Repair the running total instead of rebuilding it, and a nested loop becomes one pass.",
+  "openLoop": "Six houses, or a million. Why does one of them take a billion steps?",
+  "analogy": "THE TRAIN WINDOW - a view of exactly three houses, sliding one at a time.",
+  "seo": {
+   "title": "The Sliding Window Trick Every Interview Wants",
+   "hook": "Stop recounting. Repair the total instead.",
+   "description": "One in, one out \u2014 the whole sliding window pattern in under a minute.",
+   "tags": [
+    "dsa",
+    "sliding window",
+    "leetcode",
+    "coding interview",
+    "algorithms",
+    "python",
+    "faang"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "ONE IN, ONE OUT",
+  "badge": "Sliding Window",
+  "asset": "si:python",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "Six houses, and you want the best three in a row. Recount every window and a million houses costs a billion steps.",
+   "data": {
+    "headline": "ONE IN, ONE OUT",
+    "subtext": "the sliding window",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 9
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "DSA_TRACE_WINDOW",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "dsaWindow",
+   "headline": "Count it [once]",
+   "color": "green",
+   "caption": "the only full count",
+   "codeTitle": "sliding_window.py",
+   "premise": "You are on a train. Each box is a house you pass, and the window shows exactly 3 at a time.",
+   "narration": "|Add the first three houses. ^Two, ^one and ^five make %eight. That is the only time you ever add a whole window up.",
+   "lines": [
+    {
+     "text": "window_sum = sum(nums[:k])",
+     "detail": "The first window. Counted the slow way, once.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "for i in range(k, len(nums)):"
+    },
+    {
+     "text": "    window_sum += nums[i]"
+    },
+    {
+     "text": "    window_sum -= nums[i - k]"
+    }
+   ],
+   "cells": [
+    {
+     "label": "2",
+     "text": "win",
+     "mark": true
+    },
+    {
+     "label": "1",
+     "text": "win",
+     "mark": true
+    },
+    {
+     "label": "5",
+     "text": "win",
+     "mark": true
+    },
+    {
+     "label": "1"
+    },
+    {
+     "label": "3"
+    },
+    {
+     "label": "2"
+    }
+   ],
+   "vars": [
+    {
+     "label": "window_sum=8",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "DSA_TRACE_WINDOW",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "dsaWindow",
+   "headline": "Then [repair it]",
+   "color": "green",
+   "caption": "the train moves one house",
+   "codeTitle": "sliding_window.py",
+   "premise": "You are on a train. Each box is a house you pass, and the window shows exactly 3 at a time.",
+   "narration": "Now slide. |The house >entering the window gets ^added, |and the house >leaving gets ^subtracted. %Seven, from two operations instead of three. The window moved, and you never recounted the middle.",
+   "lines": [
+    {
+     "text": "window_sum = sum(nums[:k])"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "for i in range(k, len(nums)):"
+    },
+    {
+     "text": "    window_sum += nums[i]",
+     "detail": "One house enters: add it.",
+     "teach": true
+    },
+    {
+     "text": "    window_sum -= nums[i - k]",
+     "detail": "One house leaves: subtract it.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "2",
+     "mark": true
+    },
+    {
+     "label": "1",
+     "text": "win"
+    },
+    {
+     "label": "5",
+     "text": "win"
+    },
+    {
+     "label": "1",
+     "text": "win",
+     "mark": true
+    },
+    {
+     "label": "3"
+    },
+    {
+     "label": "2"
+    }
+   ],
+   "pointers": [
+    {
+     "label": "IN",
+     "value": 3,
+     "mark": true
+    },
+    {
+     "label": "OUT",
+     "value": 0,
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "window_sum=7",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "DSA_COST",
+   "transition": "dip",
+   "background": "zoneB",
+   "key": "dsaCost",
+   "headline": "Why that [matters]",
+   "color": "blue",
+   "caption": "the same job, two prices",
+   "premise": "The same job priced two ways as the input grows. Longer bar means more work.",
+   "narration": "^Recounting a million houses costs a billion additions. ^Sliding costs two million. Same answer, and one of them finishes.",
+   "cells": [
+    {
+     "label": "recount, n=1M",
+     "sub": "1 billion additions",
+     "value": 100,
+     "text": "dropped",
+     "mark": true
+    },
+    {
+     "label": "slide, n=1M",
+     "sub": "2 million additions",
+     "value": 8,
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Subarray, substring, or a window of size k \u2014 that is your signal. The full pattern is in the Dojo.",
+   "data": {
+    "message": "Sliding Window, traced line by line",
+    "sub": "full pattern in the Dojo"
+   },
+   "anchors": []
+  }
+ ]
+}

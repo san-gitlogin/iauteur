@@ -1,0 +1,433 @@
+{
+ "meta": {
+  "topic": "BFS",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "You can find a shortest path without comparing any paths, because the order of exploration does it for you.",
+  "openLoop": "Five stations, and the first time you arrive is already the fastest way. Why?",
+  "analogy": "THE SUBWAY MAP - checking every station one stop away before any station two stops away.",
+  "seo": {
+   "title": "Why BFS Always Finds The Shortest Path",
+   "hook": "The first time breadth-first search reaches a station, that is already the fastest way the",
+   "description": "You can find a shortest path without comparing any paths, because the order of exploration does it for you.",
+   "tags": [
+    "bfs",
+    "breadth first search",
+    "graphs",
+    "dsa",
+    "leetcode",
+    "coding interview",
+    "python"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "FIRST ARRIVAL WINS",
+  "badge": "BFS",
+  "asset": "si:python",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "The first time breadth-first search reaches a station, that is already the fastest way there. Always.",
+   "data": {
+    "headline": "FIRST ARRIVAL WINS",
+    "subtext": "bfs",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "DSA_TRACE_GRID",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "dsaGrid",
+   "headline": "Everything [one stop away]",
+   "color": "blue",
+   "caption": "the first ring",
+   "codeTitle": "bfs_shortest.py",
+   "narration": "|Now the neighbours. A connects to B and to C. |For each one we ask whether we've seen it before, and neither of them has been. |So we mark them visited, |and push them onto the back of the queue, each carrying zero plus one, which is one stop. ^B goes on. ^C goes on. +The queue now holds B and C, +both at distance one. That's the first ring of the ripple, and nothing at distance two can be looked at until both of these have been.",
+   "lines": [
+    {
+     "text": "from collections import deque"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "def bfs_shortest(graph, start, end):"
+    },
+    {
+     "text": "    queue = deque([(start, 0)])"
+    },
+    {
+     "text": "    visited = {start}"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while queue:"
+    },
+    {
+     "text": "        node, dist = queue.popleft()"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if node == end:"
+    },
+    {
+     "text": "            return dist"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        for neighbor in graph[node]:",
+     "detail": "Look at everything this station connects to.",
+     "teach": true
+    },
+    {
+     "text": "            if neighbor not in visited:",
+     "detail": "Have we already queued it?",
+     "teach": true
+    },
+    {
+     "text": "                visited.add(neighbor)",
+     "detail": "Mark it, so nobody queues it again.",
+     "teach": true
+    },
+    {
+     "text": "                queue.append((neighbor, dist+1))",
+     "detail": "Push it on the BACK, one stop further out.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return -1"
+    }
+   ],
+   "cells": [
+    {
+     "label": "A",
+     "value": 0,
+     "sub": "seen"
+    },
+    {
+     "label": "B",
+     "value": 1,
+     "sub": "seen",
+     "mark": true,
+     "parent": "A"
+    },
+    {
+     "label": "C",
+     "value": 1,
+     "sub": "seen",
+     "mark": true,
+     "parent": "A",
+     "links": [
+      "D"
+     ]
+    },
+    {
+     "label": "D",
+     "value": 2,
+     "parent": "B"
+    },
+    {
+     "label": "E",
+     "value": 3,
+     "parent": "D"
+    }
+   ],
+   "aux": [
+    {
+     "label": "B",
+     "sub": "1 stop",
+     "mark": true
+    },
+    {
+     "label": "C",
+     "sub": "1 stop",
+     "mark": true
+    }
+   ],
+   "premise": "A subway map. Each circle is a station, each line a direct connection, and the badge on a station is how many stops it sits from A."
+  },
+  {
+   "id": "s03",
+   "type": "DSA_TRACE_GRID",
+   "transition": "push",
+   "background": "zoneB",
+   "key": "dsaGrid",
+   "headline": "Why [visited] matters",
+   "color": "blue",
+   "caption": "C finds D already taken",
+   "codeTitle": "bfs_shortest.py",
+   "narration": "|Now C comes off the front, ^also one stop out, and it isn't our destination either. C connects to D as well, and here the code does something that looks like nothing. |D is %already in the visited set, so we skip it. Without that skip D gets queued twice, and on a map with a loop the search never finishes.",
+   "lines": [
+    {
+     "text": "from collections import deque"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "def bfs_shortest(graph, start, end):"
+    },
+    {
+     "text": "    queue = deque([(start, 0)])"
+    },
+    {
+     "text": "    visited = {start}"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while queue:"
+    },
+    {
+     "text": "        node, dist = queue.popleft()",
+     "detail": "Take C from the front.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if node == end:"
+    },
+    {
+     "text": "            return dist"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        for neighbor in graph[node]:"
+    },
+    {
+     "text": "            if neighbor not in visited:",
+     "detail": "Already visited, so skip it. This is the guard.",
+     "teach": true
+    },
+    {
+     "text": "                visited.add(neighbor)"
+    },
+    {
+     "text": "                queue.append((neighbor, dist+1))"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return -1"
+    }
+   ],
+   "cells": [
+    {
+     "label": "A",
+     "value": 0,
+     "sub": "seen"
+    },
+    {
+     "label": "B",
+     "value": 1,
+     "sub": "seen",
+     "parent": "A"
+    },
+    {
+     "label": "C",
+     "value": 1,
+     "sub": "here",
+     "mark": true,
+     "parent": "A",
+     "links": [
+      "D"
+     ]
+    },
+    {
+     "label": "D",
+     "value": 2,
+     "sub": "seen",
+     "parent": "B"
+    },
+    {
+     "label": "E",
+     "value": 3,
+     "parent": "D"
+    }
+   ],
+   "aux": [
+    {
+     "label": "D",
+     "sub": "2 stops"
+    }
+   ],
+   "vars": [
+    {
+     "label": "D already visited",
+     "mark": true
+    }
+   ],
+   "premise": "A subway map. Each circle is a station, each line a direct connection, and the badge on a station is how many stops it sits from A."
+  },
+  {
+   "id": "s04",
+   "type": "DSA_TRACE_GRID",
+   "transition": "fade",
+   "background": "zoneA",
+   "key": "dsaGrid",
+   "headline": "Arrived, in [three stops]",
+   "color": "blue",
+   "caption": "the answer",
+   "codeTitle": "bfs_shortest.py",
+   "narration": "|E comes off the front, ^three stops out. Every station nearer than three has already been taken off and dealt with, |so when we ask whether E is our destination, and it is, we return the distance it carried: %three. We compared no routes at all, because the first arrival is the shortest arrival.",
+   "lines": [
+    {
+     "text": "from collections import deque"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "def bfs_shortest(graph, start, end):"
+    },
+    {
+     "text": "    queue = deque([(start, 0)])"
+    },
+    {
+     "text": "    visited = {start}"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while queue:"
+    },
+    {
+     "text": "        node, dist = queue.popleft()",
+     "detail": "Take E from the front.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if node == end:"
+    },
+    {
+     "text": "            return dist",
+     "detail": "Arrived. Return the distance it carried.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        for neighbor in graph[node]:"
+    },
+    {
+     "text": "            if neighbor not in visited:"
+    },
+    {
+     "text": "                visited.add(neighbor)"
+    },
+    {
+     "text": "                queue.append((neighbor, dist+1))"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return -1"
+    }
+   ],
+   "cells": [
+    {
+     "label": "A",
+     "value": 0,
+     "sub": "seen"
+    },
+    {
+     "label": "B",
+     "value": 1,
+     "sub": "seen",
+     "parent": "A"
+    },
+    {
+     "label": "C",
+     "value": 1,
+     "sub": "seen",
+     "parent": "A",
+     "links": [
+      "D"
+     ]
+    },
+    {
+     "label": "D",
+     "value": 2,
+     "sub": "seen",
+     "parent": "B"
+    },
+    {
+     "label": "E",
+     "value": 3,
+     "sub": "here",
+     "mark": true,
+     "parent": "D"
+    }
+   ],
+   "aux": [],
+   "vars": [
+    {
+     "label": "return 3",
+     "mark": true
+    }
+   ],
+   "premise": "A subway map. Each circle is a station, each line a direct connection, and the badge on a station is how many stops it sits from A."
+  },
+  {
+   "id": "s05",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Shortest, fewest steps, or level by level. That is your signal. The full pattern is in the Dojo.",
+   "data": {
+    "message": "BFS, traced line by line",
+    "sub": "full pattern in the Dojo"
+   },
+   "anchors": []
+  }
+ ]
+}

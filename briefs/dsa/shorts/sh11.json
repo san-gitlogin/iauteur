@@ -1,0 +1,221 @@
+{
+ "meta": {
+  "topic": "Five Problems, Live",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "You can read an unseen problem, name the pattern from its words, and justify the choice.",
+  "openLoop": "Five problems you have never seen. The method has to do the work now.",
+  "analogy": "THE DIAGNOSIS - symptoms first, treatment second.",
+  "seo": {
+   "title": "How To Spot The Pattern In A LeetCode Question",
+   "hook": "Read the signals before you write a line.",
+   "description": "You can read an unseen problem, name the pattern from its words, and justify the choice.",
+   "tags": [
+    "dsa",
+    "leetcode",
+    "coding interview",
+    "patterns",
+    "two pointers",
+    "faang",
+    "python"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "NAME THE PATTERN",
+  "badge": "Five Problems",
+  "asset": "si:python",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "Five problems you have never seen. Ten patterns you have. Which one, and how fast can you tell?",
+   "data": {
+    "headline": "NAME THE PATTERN",
+    "subtext": "before you write a line",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 10
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "DSA_SIGNALS",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "dsaSignals",
+   "headline": "One \u00b7 [Container With Most Water]",
+   "color": "yellow",
+   "caption": "reading the statement",
+   "narration": "An array of heights, each one a vertical line. Find the two lines that hold the most water between them. Circle the words. ^Two. ^Maximum. ^A pair of elements. ^An array. Two and pair together point straight at two pointers. ^But there's a catch worth noticing: this array isn't sorted, and sorted was our signal last time. So does the pattern still hold?",
+   "cells": [
+    {
+     "label": "two",
+     "sub": "exactly two lines",
+     "mark": true
+    },
+    {
+     "label": "maximum",
+     "sub": "we are optimising",
+     "mark": true
+    },
+    {
+     "label": "a pair of elements",
+     "sub": "the two-pointer shape",
+     "mark": true
+    },
+    {
+     "label": "an array",
+     "sub": "indexed, positional",
+     "mark": true
+    },
+    {
+     "label": "NOT sorted",
+     "sub": "so does it still work?",
+     "color": "red",
+     "mark": true
+    }
+   ],
+   "problem": "Given an array of heights, where each value is a vertical line, find the two lines that together with the x-axis hold the most water. Return that maximum area."
+  },
+  {
+   "id": "s03",
+   "type": "DSA_TRACE_PTRS",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "dsaPtrs",
+   "headline": "Yes, and [here is why]",
+   "color": "red",
+   "caption": "the widest container first",
+   "codeTitle": "max_area.py",
+   "narration": "It does hold, and the reasoning is worth having. |Start at the widest possible container: ^one line at each end. |The area is the shorter of the two heights, multiplied by the distance between them, because water spills over the lower side. |Now move the shorter line inward. Moving the taller one can never help, since the shorter side is what caps the volume and the width only shrinks. %Order of n, %constant space, and no sorting needed, because the elimination argument here's about height rather than order.",
+   "lines": [
+    {
+     "text": "def max_area(height):"
+    },
+    {
+     "text": "    left, right = 0, len(height) - 1",
+     "detail": "Start at the widest container.",
+     "teach": true
+    },
+    {
+     "text": "    best = 0"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while left < right:"
+    },
+    {
+     "text": "        h = min(height[left], height[right])",
+     "detail": "Water spills over the lower side.",
+     "teach": true
+    },
+    {
+     "text": "        best = max(best, h * (right - left))"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if height[left] < height[right]:",
+     "detail": "Move the SHORTER line. The taller one cannot help.",
+     "teach": true
+    },
+    {
+     "text": "            left += 1"
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            right -= 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return best"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1",
+     "mark": true
+    },
+    {
+     "label": "8"
+    },
+    {
+     "label": "6"
+    },
+    {
+     "label": "2"
+    },
+    {
+     "label": "5"
+    },
+    {
+     "label": "7"
+    }
+   ],
+   "pointers": [
+    {
+     "label": "LEFT",
+     "value": 0
+    },
+    {
+     "label": "RIGHT",
+     "value": 5,
+     "color": "yellow"
+    }
+   ],
+   "vars": [
+    {
+     "label": "O(n) time",
+     "mark": true
+    },
+    {
+     "label": "O(1) space",
+     "mark": true
+    }
+   ],
+   "premise": "Container With Most Water. Each box is the height of a vertical line; two pointers start at the outermost pair."
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Read the statement, circle the signals, name the pattern. All ten patterns, and five problems solved live, are in the Dojo.",
+   "data": {
+    "message": "Five problems, solved live",
+    "sub": "the full course in the Dojo"
+   },
+   "anchors": []
+  }
+ ]
+}

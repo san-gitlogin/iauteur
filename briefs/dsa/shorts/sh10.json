@@ -1,0 +1,358 @@
+{
+ "meta": {
+  "topic": "Fast and Slow Pointers",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "You can detect a loop, or find a midpoint, in one pass and with no extra memory at all.",
+  "openLoop": "Two runners on a track. If there's a loop, they must collide. Why must?",
+  "analogy": "THE RUNNING TRACK - a tortoise and a hare, and a bend you cannot see.",
+  "seo": {
+   "title": "Floyd's Cycle Detection, Explained Properly",
+   "hook": "Two runners on a track, one twice as fast. If there is a loop, they must collide. But why ",
+   "description": "You can detect a loop, or find a midpoint, in one pass and with no extra memory at all.",
+   "tags": [
+    "fast and slow pointers",
+    "floyd",
+    "linked list",
+    "cycle detection",
+    "dsa",
+    "leetcode",
+    "python"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "THEY MUST COLLIDE",
+  "badge": "Fast & Slow",
+  "asset": "si:python",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "Two runners on a track, one twice as fast. If there is a loop, they must collide. But why must?",
+   "data": {
+    "headline": "THEY MUST COLLIDE",
+    "subtext": "fast & slow",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "DSA_TRACE_LIST",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "dsaList",
+   "headline": "One step, [two steps]",
+   "color": "red",
+   "caption": "round one",
+   "codeTitle": "has_cycle.py",
+   "narration": "|While fast exists and fast dot next exists, keep running. That double check is the guard: if either is missing we've reached the end of the track, so there was no loop. |Slow moves to >node ^two. |Fast moves twice, to >node ^three. %The gap between them is one node now, where a moment ago it was zero.",
+   "lines": [
+    {
+     "text": "def has_cycle(head):"
+    },
+    {
+     "text": "    slow = fast = head"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while fast and fast.next:",
+     "detail": "Stop if the hare runs out of track.",
+     "teach": true
+    },
+    {
+     "text": "        slow = slow.next",
+     "detail": "Tortoise: one step.",
+     "teach": true
+    },
+    {
+     "text": "        fast = fast.next.next",
+     "detail": "Hare: two steps.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if slow == fast:"
+    },
+    {
+     "text": "            return True"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return False"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1"
+    },
+    {
+     "label": "2",
+     "mark": true
+    },
+    {
+     "label": "3",
+     "mark": true
+    },
+    {
+     "label": "4",
+     "links": [
+      "2"
+     ]
+    }
+   ],
+   "pointers": [
+    {
+     "label": "slow",
+     "value": 1,
+     "color": "blue",
+     "mark": true
+    },
+    {
+     "label": "fast",
+     "value": 2,
+     "color": "red",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "gap = 1",
+     "mark": true
+    }
+   ],
+   "premise": "A running track made of linked nodes. Both runners start together: the tortoise moves one node per round, the hare moves two."
+  },
+  {
+   "id": "s03",
+   "type": "DSA_TRACE_LIST",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "dsaList",
+   "headline": "Round two, [into the bend]",
+   "color": "red",
+   "caption": "the hare comes round",
+   "codeTitle": "has_cycle.py",
+   "narration": "|Slow moves to >node ^three. Fast moves two again: node three to node four, and then four points back to two, |so >the hare lands on ^node two. It has been round the bend, and it's now sitting behind the tortoise. %The gap is two. On a track with no loop the hare would have fallen off by now, and instead it's lapping.",
+   "lines": [
+    {
+     "text": "def has_cycle(head):"
+    },
+    {
+     "text": "    slow = fast = head"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while fast and fast.next:"
+    },
+    {
+     "text": "        slow = slow.next",
+     "detail": "Tortoise: one more step.",
+     "teach": true
+    },
+    {
+     "text": "        fast = fast.next.next",
+     "detail": "Hare: two more, and round the loop.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if slow == fast:"
+    },
+    {
+     "text": "            return True"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return False"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1"
+    },
+    {
+     "label": "2",
+     "mark": true
+    },
+    {
+     "label": "3",
+     "mark": true
+    },
+    {
+     "label": "4",
+     "links": [
+      "2"
+     ]
+    }
+   ],
+   "pointers": [
+    {
+     "label": "slow",
+     "value": 2,
+     "color": "blue",
+     "mark": true
+    },
+    {
+     "label": "fast",
+     "value": 1,
+     "color": "red",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "gap = 2",
+     "mark": true
+    }
+   ],
+   "premise": "A running track made of linked nodes. Both runners start together: the tortoise moves one node per round, the hare moves two."
+  },
+  {
+   "id": "s04",
+   "type": "DSA_TRACE_LIST",
+   "transition": "fade",
+   "background": "zoneA",
+   "key": "dsaList",
+   "headline": "And they [meet]",
+   "color": "red",
+   "caption": "both on node four",
+   "codeTitle": "has_cycle.py",
+   "narration": "|Slow steps to >node four. |Fast goes two: node two to node three, then three to four, so >it lands on ^node four as well. |Slow equals fast, so |we return True. There's a cycle. %One pass, %no extra memory, and no list of visited nodes anywhere.",
+   "lines": [
+    {
+     "text": "def has_cycle(head):"
+    },
+    {
+     "text": "    slow = fast = head"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while fast and fast.next:"
+    },
+    {
+     "text": "        slow = slow.next",
+     "detail": "Tortoise: one step, to node four.",
+     "teach": true
+    },
+    {
+     "text": "        fast = fast.next.next",
+     "detail": "Hare: two steps, also to node four.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if slow == fast:",
+     "detail": "Same node.",
+     "teach": true
+    },
+    {
+     "text": "            return True",
+     "detail": "So there is a cycle.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return False"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1"
+    },
+    {
+     "label": "2"
+    },
+    {
+     "label": "3"
+    },
+    {
+     "label": "4",
+     "mark": true,
+     "links": [
+      "2"
+     ]
+    }
+   ],
+   "pointers": [
+    {
+     "label": "slow",
+     "value": 3,
+     "color": "blue",
+     "mark": true
+    },
+    {
+     "label": "fast",
+     "value": 3,
+     "color": "red",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "return True",
+     "mark": true
+    },
+    {
+     "label": "O(1) space",
+     "mark": true
+    }
+   ],
+   "premise": "A running track made of linked nodes. Both runners start together: the tortoise moves one node per round, the hare moves two."
+  },
+  {
+   "id": "s05",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "A cycle, a middle, or constant space demanded. That is your signal. The full pattern is in the Dojo.",
+   "data": {
+    "message": "Fast and Slow Pointers, traced line by line",
+    "sub": "full pattern in the Dojo"
+   },
+   "anchors": []
+  }
+ ]
+}

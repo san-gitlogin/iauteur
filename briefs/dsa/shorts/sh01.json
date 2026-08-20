@@ -1,0 +1,402 @@
+{
+ "meta": {
+  "topic": "Two Pointers",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "You can read a problem statement and know, from the words alone, that two pointers is the tool.",
+  "openLoop": "Fifteen pairs to check, or three. Same array, same answer.",
+  "analogy": "THE SHELF - two friends walking a price-sorted shelf of books from opposite ends.",
+  "seo": {
+   "title": "The Two Pointer Trick That Kills Nested Loops",
+   "hook": "Fifteen pairs to check, or three. The array is sorted, and that one word changes everythin",
+   "description": "You can read a problem statement and know, from the words alone, that two pointers is the tool.",
+   "tags": [
+    "two pointers",
+    "dsa",
+    "leetcode",
+    "coding interview",
+    "algorithms",
+    "python",
+    "faang"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "BOTH ENDS AT ONCE",
+  "badge": "Two Pointers",
+  "asset": "si:python",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "Fifteen pairs to check, or three. The array is sorted, and that one word changes everything.",
+   "data": {
+    "headline": "BOTH ENDS AT ONCE",
+    "subtext": "two pointers",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "DSA_TRACE_PTRS",
+   "transition": "wipe",
+   "background": "zoneB",
+   "key": "dsaPtrs",
+   "headline": "Too big. So [who moves?]",
+   "color": "red",
+   "caption": "a tighter budget",
+   "codeTitle": "two_sum_sorted.py",
+   "narration": "A shelf of books sorted by price, and a gift card worth %eight pounds. You are holding the ^one at the cheap end, your friend the ^eleven at the dear end, so %current is twelve and we're four pounds over. Somebody has to change book, and this is the question the entire pattern turns on. Think it through with me. If you, on the cheap end, reach for something pricier, the total can only go up, and we're already too high. |So elif current is less than target is the branch we did not take this time. |We fall through to else, which is the too-big case, and the only person who can bring the total down is your friend.",
+   "lines": [
+    {
+     "text": "def two_sum_sorted(nums, target):"
+    },
+    {
+     "text": "    left = 0"
+    },
+    {
+     "text": "    right = len(nums) - 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while left < right:"
+    },
+    {
+     "text": "        current = nums[left] + nums[right]"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if current == target:"
+    },
+    {
+     "text": "            return [left, right]"
+    },
+    {
+     "text": "        elif current < target:",
+     "detail": "Too small? Then YOU trade up. Not this time.",
+     "teach": true
+    },
+    {
+     "text": "            left += 1"
+    },
+    {
+     "text": "        else:",
+     "detail": "Too big, so your friend has to come down.",
+     "teach": true
+    },
+    {
+     "text": "            right -= 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return []"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1",
+     "mark": true
+    },
+    {
+     "label": "3"
+    },
+    {
+     "label": "5"
+    },
+    {
+     "label": "7"
+    },
+    {
+     "label": "9"
+    },
+    {
+     "label": "11",
+     "mark": true
+    }
+   ],
+   "pointers": [
+    {
+     "label": "LEFT",
+     "value": 0
+    },
+    {
+     "label": "RIGHT",
+     "value": 5,
+     "color": "yellow"
+    }
+   ],
+   "vars": [
+    {
+     "label": "target=8",
+     "mark": true
+    },
+    {
+     "label": "current=12",
+     "mark": true
+    }
+   ],
+   "premise": "A shelf of books, already sorted cheapest to dearest. Each box is a price, and two friends start at opposite ends looking for a pair that adds up to the target."
+  },
+  {
+   "id": "s03",
+   "type": "DSA_TRACE_PTRS",
+   "transition": "push",
+   "background": "zoneB",
+   "key": "dsaPtrs",
+   "headline": "One step, [five pairs gone]",
+   "color": "red",
+   "caption": "right moves down",
+   "codeTitle": "two_sum_sorted.py",
+   "narration": "|Right minus equals one moves >your friend one place to the left, so they put the eleven back and pick up %nine. New total: one plus nine is %ten. Still over budget, so nothing is solved yet. But look what that single step quietly bought us. ^Every pair involving the eleven-pound book has just gone, all five of them, and we never looked at one. We didn't need to: the shelf is sorted, so if eleven was too dear beside ^the cheapest book, it's too dear beside every book. That is the trick; the rest is bookkeeping.",
+   "lines": [
+    {
+     "text": "def two_sum_sorted(nums, target):"
+    },
+    {
+     "text": "    left = 0"
+    },
+    {
+     "text": "    right = len(nums) - 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while left < right:"
+    },
+    {
+     "text": "        current = nums[left] + nums[right]"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if current == target:"
+    },
+    {
+     "text": "            return [left, right]"
+    },
+    {
+     "text": "        elif current < target:"
+    },
+    {
+     "text": "            left += 1"
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            right -= 1",
+     "detail": "Your friend moves one place down the shelf.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return []"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1",
+     "mark": true
+    },
+    {
+     "label": "3"
+    },
+    {
+     "label": "5"
+    },
+    {
+     "label": "7"
+    },
+    {
+     "label": "9"
+    },
+    {
+     "label": "11",
+     "text": "dropped",
+     "mark": true
+    }
+   ],
+   "pointers": [
+    {
+     "label": "LEFT",
+     "value": 0
+    },
+    {
+     "label": "RIGHT",
+     "value": 4,
+     "color": "yellow",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "right=4",
+     "mark": true
+    },
+    {
+     "label": "current=10",
+     "mark": true
+    }
+   ],
+   "premise": "A shelf of books, already sorted cheapest to dearest. Each box is a price, and two friends start at opposite ends looking for a pair that adds up to the target."
+  },
+  {
+   "id": "s04",
+   "type": "DSA_TRACE_PTRS",
+   "transition": "fade",
+   "background": "zoneA",
+   "key": "dsaPtrs",
+   "headline": "Three checks, [not fifteen]",
+   "color": "red",
+   "caption": "one plus seven",
+   "codeTitle": "two_sum_sorted.py",
+   "narration": "So >your friend steps down once more, putting back the nine and picking up %seven. |One plus seven is ^eight, the budget exactly, and |we return ^the two positions again. Count what we actually did: %three comparisons, on a shelf where checking every pair would have been fifteen. And the number that matters isn't three, it's the shape of it. Every single turn of that loop threw away a book for good, which means the work grows in step with the shelf instead of exploding. Double the books and you roughly double the checks. That is what big O of n means, and it's why this survives a million books when the obvious version doesn't.",
+   "lines": [
+    {
+     "text": "def two_sum_sorted(nums, target):"
+    },
+    {
+     "text": "    left = 0"
+    },
+    {
+     "text": "    right = len(nums) - 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    while left < right:"
+    },
+    {
+     "text": "        current = nums[left] + nums[right]",
+     "detail": "One plus seven is eight. That is the budget.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "        if current == target:"
+    },
+    {
+     "text": "            return [left, right]",
+     "detail": "Hand back the two positions and stop.",
+     "teach": true
+    },
+    {
+     "text": "        elif current < target:"
+    },
+    {
+     "text": "            left += 1"
+    },
+    {
+     "text": "        else:"
+    },
+    {
+     "text": "            right -= 1"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return []"
+    }
+   ],
+   "cells": [
+    {
+     "label": "1",
+     "text": "done",
+     "mark": true
+    },
+    {
+     "label": "3"
+    },
+    {
+     "label": "5"
+    },
+    {
+     "label": "7",
+     "text": "done",
+     "mark": true
+    },
+    {
+     "label": "9",
+     "text": "dropped"
+    },
+    {
+     "label": "11",
+     "text": "dropped"
+    }
+   ],
+   "pointers": [
+    {
+     "label": "LEFT",
+     "value": 0
+    },
+    {
+     "label": "RIGHT",
+     "value": 3,
+     "color": "yellow",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "current=8",
+     "mark": true
+    },
+    {
+     "label": "3 checks",
+     "mark": true
+    }
+   ],
+   "premise": "A shelf of books, already sorted cheapest to dearest. Each box is a price, and two friends start at opposite ends looking for a pair that adds up to the target."
+  },
+  {
+   "id": "s05",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Sorted, and you need a pair. That is your signal. The full pattern is in the Dojo.",
+   "data": {
+    "message": "Two Pointers, traced line by line",
+    "sub": "full pattern in the Dojo"
+   },
+   "anchors": []
+  }
+ ]
+}

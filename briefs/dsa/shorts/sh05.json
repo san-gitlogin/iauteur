@@ -1,0 +1,379 @@
+{
+ "meta": {
+  "topic": "Stack",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "You can recognise a nesting problem and answer it with the last thing you put down.",
+  "openLoop": "Shirt, jacket, scarf. Now take them off. Why is the order forced?",
+  "analogy": "GETTING DRESSED - the last thing you put on is the first thing you take off.",
+  "seo": {
+   "title": "Stacks Explained With Getting Dressed",
+   "hook": "Shirt, then jacket, then scarf. Now take them off. You do not get to choose the order.",
+   "description": "You can recognise a nesting problem and answer it with the last thing you put down.",
+   "tags": [
+    "stack",
+    "dsa",
+    "leetcode",
+    "valid parentheses",
+    "coding interview",
+    "python"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "LAST ON, FIRST OFF",
+  "badge": "Stack",
+  "asset": "si:python",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "Shirt, then jacket, then scarf. Now take them off. You do not get to choose the order.",
+   "data": {
+    "headline": "LAST ON, FIRST OFF",
+    "subtext": "stack",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "DSA_TRACE_STACK",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "dsaStack",
+   "headline": "An opener goes [on top]",
+   "color": "red",
+   "caption": "one layer deep",
+   "codeTitle": "valid_parentheses.py",
+   "narration": "First %character: ^an open brace. |Is that an opener? It is. Nothing gets checked here, because openers never need checking, and an opener is really just a promise that something will have to close further along. |Stack dot append puts it on top. In Python append adds to the end of a list, and because we always look at the end, the end behaves like the top of a pile. +One layer deep, and the promise is recorded. That's all an opener ever does in this algorithm.",
+   "lines": [
+    {
+     "text": "def valid_parentheses(s):"
+    },
+    {
+     "text": "    stack = []"
+    },
+    {
+     "text": "    pairs = {')':'(', '}':'{', ']':'['}"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    for char in s:"
+    },
+    {
+     "text": "        if char in '({[':",
+     "detail": "Is this an opener?",
+     "teach": true
+    },
+    {
+     "text": "            stack.append(char)",
+     "detail": "Then put it on top of the pile.",
+     "teach": true
+    },
+    {
+     "text": "        elif char in ')}]':"
+    },
+    {
+     "text": "            if not stack:"
+    },
+    {
+     "text": "                return False"
+    },
+    {
+     "text": "            if stack[-1] != pairs[char]:"
+    },
+    {
+     "text": "                return False"
+    },
+    {
+     "text": "            stack.pop()"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return len(stack) == 0"
+    }
+   ],
+   "cells": [
+    {
+     "label": "{",
+     "mark": true
+    },
+    {
+     "label": "["
+    },
+    {
+     "label": "("
+    },
+    {
+     "label": ")"
+    },
+    {
+     "label": "]"
+    },
+    {
+     "label": "}"
+    }
+   ],
+   "aux": [
+    {
+     "label": "{",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "char = {",
+     "mark": true
+    }
+   ],
+   "premise": "Checking brackets, using the getting-dressed rule: each box is one character of the input, and the stack beside it holds what still needs closing \u2014 last on, first off."
+  },
+  {
+   "id": "s03",
+   "type": "DSA_TRACE_STACK",
+   "transition": "push",
+   "background": "zoneB",
+   "key": "dsaStack",
+   "headline": "The first [closer]",
+   "color": "red",
+   "caption": "does the top match?",
+   "codeTitle": "valid_parentheses.py",
+   "narration": "Now ^a close round bracket. Closers are where the work happens. |Stack minus one means look at the top of the pile, because in Python minus one is the last item. %The top is an open round bracket. |Does it match? Our pairs dictionary says a close round belongs with an open round, so yes. |Stack dot pop takes it off. +Down to two layers. One matched pair has cancelled itself out, and the scarf is off.",
+   "lines": [
+    {
+     "text": "def valid_parentheses(s):"
+    },
+    {
+     "text": "    stack = []"
+    },
+    {
+     "text": "    pairs = {')':'(', '}':'{', ']':'['}"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    for char in s:"
+    },
+    {
+     "text": "        if char in '({[':"
+    },
+    {
+     "text": "            stack.append(char)"
+    },
+    {
+     "text": "        elif char in ')}]':"
+    },
+    {
+     "text": "            if not stack:"
+    },
+    {
+     "text": "                return False"
+    },
+    {
+     "text": "            if stack[-1] != pairs[char]:",
+     "detail": "Look at the top of the pile.",
+     "teach": true
+    },
+    {
+     "text": "                return False",
+     "detail": "If it does not match, the string is broken.",
+     "teach": true
+    },
+    {
+     "text": "            stack.pop()",
+     "detail": "It matches, so take it off.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return len(stack) == 0"
+    }
+   ],
+   "cells": [
+    {
+     "label": "{"
+    },
+    {
+     "label": "["
+    },
+    {
+     "label": "("
+    },
+    {
+     "label": ")",
+     "mark": true
+    },
+    {
+     "label": "]"
+    },
+    {
+     "label": "}"
+    }
+   ],
+   "aux": [
+    {
+     "label": "{"
+    },
+    {
+     "label": "["
+    },
+    {
+     "label": "(",
+     "text": "dropped",
+     "mark": true
+    }
+   ],
+   "vars": [
+    {
+     "label": "top = (",
+     "mark": true
+    }
+   ],
+   "premise": "Checking brackets, using the getting-dressed rule: each box is one character of the input, and the stack beside it holds what still needs closing \u2014 last on, first off."
+  },
+  {
+   "id": "s04",
+   "type": "DSA_TRACE_STACK",
+   "transition": "fade",
+   "background": "zoneA",
+   "key": "dsaStack",
+   "headline": "Empty means [valid]",
+   "color": "red",
+   "caption": "the final answer",
+   "codeTitle": "valid_parentheses.py",
+   "narration": "|Return len of stack equals zero. %An empty pile means ^every opener that went on ^came back off, which is precisely what balanced means. And if the pile still had something on it, that'd be an opener nobody ever closed, so the answer would be False. %True. One pass through the string, and every character was looked at exactly once.",
+   "lines": [
+    {
+     "text": "def valid_parentheses(s):"
+    },
+    {
+     "text": "    stack = []"
+    },
+    {
+     "text": "    pairs = {')':'(', '}':'{', ']':'['}"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    for char in s:"
+    },
+    {
+     "text": "        if char in '({[':"
+    },
+    {
+     "text": "            stack.append(char)"
+    },
+    {
+     "text": "        elif char in ')}]':"
+    },
+    {
+     "text": "            if not stack:"
+    },
+    {
+     "text": "                return False"
+    },
+    {
+     "text": "            if stack[-1] != pairs[char]:"
+    },
+    {
+     "text": "                return False"
+    },
+    {
+     "text": "            stack.pop()"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    return len(stack) == 0",
+     "detail": "Empty pile means every opener was closed.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "{",
+     "text": "done",
+     "mark": true
+    },
+    {
+     "label": "[",
+     "text": "done"
+    },
+    {
+     "label": "(",
+     "text": "done"
+    },
+    {
+     "label": ")",
+     "text": "done"
+    },
+    {
+     "label": "]",
+     "text": "done"
+    },
+    {
+     "label": "}",
+     "text": "done",
+     "mark": true
+    }
+   ],
+   "aux": [],
+   "vars": [
+    {
+     "label": "stack = []",
+     "mark": true
+    },
+    {
+     "label": "return True",
+     "mark": true
+    }
+   ],
+   "premise": "Checking brackets, using the getting-dressed rule: each box is one character of the input, and the stack beside it holds what still needs closing \u2014 last on, first off."
+  },
+  {
+   "id": "s05",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Nesting, matching, or an undo. That is your signal. The full pattern is in the Dojo.",
+   "data": {
+    "message": "Stack, traced line by line",
+    "sub": "full pattern in the Dojo"
+   },
+   "anchors": []
+  }
+ ]
+}
