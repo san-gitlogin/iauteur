@@ -1,0 +1,1357 @@
+[
+ {
+  "cmd": "cat",
+  "type": "CMD_CAT",
+  "name": "CmdCat",
+  "dataKey": "cmdCat",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "the whole file, at once",
+  "blurb": "a file's entire contents arriving in one go, and what that means for a large log.",
+  "example": {
+   "headline": "cat prints [everything], instantly",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/etc",
+   "steps": [
+    {
+     "label": "cat hosts",
+     "atWord": 2,
+     "text": "127.0.0.1 localhost",
+     "detail": "fine: 3 lines"
+    },
+    {
+     "label": "cat api.log",
+     "atWord": 9,
+     "text": "... 10,241 lines flew past",
+     "detail": "not fine: 10k lines"
+    }
+   ],
+   "stage": [
+    {
+     "label": "hosts",
+     "atWord": 4,
+     "sub": "3 lines",
+     "text": "readable",
+     "color": "green"
+    },
+    {
+     "label": "api.log",
+     "atWord": 11,
+     "sub": "10,241 lines",
+     "text": "unreadable",
+     "color": "red"
+    }
+   ],
+   "verdict": "cat has no brakes",
+   "verdictSub": "that is what less is for",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "tac",
+  "type": "CMD_TAC",
+  "name": "CmdTac",
+  "dataKey": "cmdTac",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "the same file, reversed",
+  "blurb": "the file's lines arriving bottom-up, newest entry first.",
+  "example": {
+   "headline": "tac is cat, [backwards]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "steps": [
+    {
+     "label": "cat api.log",
+     "atWord": 2,
+     "text": "09:01 started",
+     "detail": "oldest first"
+    },
+    {
+     "label": "tac api.log",
+     "atWord": 8,
+     "text": "09:47 crashed",
+     "detail": "newest first"
+    }
+   ],
+   "stage": [
+    {
+     "label": "09:47 crashed",
+     "atWord": 10,
+     "sub": "line 3",
+     "text": "first now",
+     "color": "green"
+    },
+    {
+     "label": "09:30 warning",
+     "atWord": 12,
+     "sub": "line 2"
+    },
+    {
+     "label": "09:01 started",
+     "atWord": 14,
+     "sub": "line 1",
+     "text": "last now"
+    }
+   ],
+   "verdict": "Newest first, no flags",
+   "verdictSub": "handy when the tail is what matters",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "more",
+  "type": "CMD_MORE",
+  "name": "CmdMore",
+  "dataKey": "cmdMore",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "a one-way window",
+  "blurb": "a long file shown a screen at a time, with no way to travel back up.",
+  "example": {
+   "headline": "more only goes [forward]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "steps": [
+    {
+     "label": "more api.log",
+     "atWord": 2,
+     "text": "--More--(24%)",
+     "detail": "space for the next screen"
+    }
+   ],
+   "stage": [
+    {
+     "label": "screen 1",
+     "atWord": 4,
+     "sub": "lines 1-40",
+     "text": "shown"
+    },
+    {
+     "label": "screen 2",
+     "atWord": 6,
+     "sub": "lines 41-80",
+     "text": "shown"
+    },
+    {
+     "label": "go back?",
+     "atWord": 9,
+     "sub": "not possible",
+     "text": "no",
+     "color": "red"
+    }
+   ],
+   "verdict": "Reaches the end and quits",
+   "verdictSub": "which is why less replaced it",
+   "verdictAtWord": 12
+  }
+ },
+ {
+  "cmd": "less",
+  "type": "CMD_LESS",
+  "name": "CmdLess",
+  "dataKey": "cmdLess",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "travel in both directions",
+  "blurb": "the same paging, now able to scroll back and search inside the file.",
+  "example": {
+   "headline": "less goes [both ways]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "highlight": "/",
+   "steps": [
+    {
+     "label": "less api.log",
+     "atWord": 2,
+     "detail": "arrow keys move freely"
+    },
+    {
+     "label": "/timeout",
+     "atWord": 8,
+     "text": "line 412 matched",
+     "detail": "slash searches inside"
+    }
+   ],
+   "stage": [
+    {
+     "label": "scroll down",
+     "atWord": 4,
+     "sub": "page forward",
+     "text": "yes",
+     "color": "green"
+    },
+    {
+     "label": "scroll up",
+     "atWord": 6,
+     "sub": "page back",
+     "text": "yes",
+     "color": "green"
+    },
+    {
+     "label": "/pattern",
+     "atWord": 10,
+     "sub": "search in file",
+     "text": "yes",
+     "color": "green"
+    }
+   ],
+   "verdict": "Never loads the whole file",
+   "verdictSub": "so it opens a 10GB log instantly",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "tail",
+  "type": "CMD_TAIL",
+  "name": "CmdTail",
+  "dataKey": "cmdTail",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "the live end of a log",
+  "blurb": "the last lines of a file, then new lines arriving as the service writes them.",
+  "example": {
+   "headline": "tail -f watches it [happen]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "highlight": "-f",
+   "steps": [
+    {
+     "label": "tail -n 20 api.log",
+     "atWord": 2,
+     "detail": "the last 20 lines"
+    },
+    {
+     "label": "tail -f api.log",
+     "atWord": 9,
+     "detail": "and now it stays open"
+    }
+   ],
+   "stage": [
+    {
+     "label": "GET /health 200",
+     "atWord": 11,
+     "text": "arrived"
+    },
+    {
+     "label": "POST /login 200",
+     "atWord": 13,
+     "text": "arrived"
+    },
+    {
+     "label": "upstream timeout",
+     "atWord": 15,
+     "text": "arrived",
+     "color": "red"
+    }
+   ],
+   "verdict": "The command you leave running",
+   "verdictSub": "while you reproduce the bug",
+   "verdictAtWord": 18
+  }
+ },
+ {
+  "cmd": "vi",
+  "type": "CMD_VI",
+  "name": "CmdVi",
+  "dataKey": "cmdVi",
+  "kind": "flow",
+  "color": "purple",
+  "stageTitle": "which mode you are in",
+  "blurb": "the two modes and the keys that move between them, including the way out.",
+  "example": {
+   "headline": "vi has [two modes]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "i",
+   "steps": [
+    {
+     "label": "vi notes.md",
+     "atWord": 2,
+     "detail": "opens in command mode"
+    },
+    {
+     "label": "i",
+     "atWord": 7,
+     "text": "-- INSERT --",
+     "detail": "now keys are text"
+    },
+    {
+     "label": ":wq",
+     "atWord": 13,
+     "detail": "write and quit"
+    }
+   ],
+   "stage": [
+    {
+     "label": "command mode",
+     "atWord": 4,
+     "sub": "keys are commands",
+     "text": "start"
+    },
+    {
+     "label": "press i",
+     "atWord": 9,
+     "sub": "keys become text",
+     "text": "insert",
+     "color": "green"
+    },
+    {
+     "label": "press Escape",
+     "atWord": 11,
+     "sub": "back to commands",
+     "text": "command"
+    },
+    {
+     "label": ":wq",
+     "atWord": 15,
+     "sub": "write, then quit",
+     "text": "out",
+     "color": "green"
+    }
+   ],
+   "verdict": "Escape, colon, w, q",
+   "verdictSub": "the sequence worth memorising once",
+   "verdictAtWord": 18
+  }
+ },
+ {
+  "cmd": "diff",
+  "type": "CMD_DIFF",
+  "name": "CmdDiff",
+  "dataKey": "cmdDiff",
+  "kind": "rows",
+  "color": "yellow",
+  "stageTitle": "only what changed",
+  "blurb": "two files compared line by line with just the differences surfacing.",
+  "example": {
+   "headline": "diff shows [only the change]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/etc/nginx",
+   "steps": [
+    {
+     "label": "diff old.conf new.conf",
+     "atWord": 2,
+     "text": "< listen 80;",
+     "detail": "> listen 443 ssl;"
+    }
+   ],
+   "stage": [
+    {
+     "label": "listen 80;",
+     "atWord": 5,
+     "sub": "removed",
+     "text": "-",
+     "color": "red"
+    },
+    {
+     "label": "listen 443 ssl;",
+     "atWord": 7,
+     "sub": "added",
+     "text": "+",
+     "color": "green"
+    },
+    {
+     "label": "everything else",
+     "atWord": 10,
+     "sub": "identical",
+     "text": "skipped"
+    }
+   ],
+   "verdict": "Two lines, not two files",
+   "verdictSub": "diff -u is what patches are made of",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "find",
+  "type": "CMD_FIND",
+  "name": "CmdFind",
+  "dataKey": "cmdFind",
+  "kind": "tree",
+  "color": "green",
+  "stageTitle": "what survives every test",
+  "blurb": "the tree being walked and each candidate tested against the criteria you gave.",
+  "example": {
+   "headline": "find [tests] every single file",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "highlight": "-mtime",
+   "steps": [
+    {
+     "label": "find . -name '*.log'",
+     "atWord": 2,
+     "detail": "by name"
+    },
+    {
+     "label": "find . -name '*.log' -mtime -2",
+     "atWord": 10,
+     "detail": "and by age"
+    }
+   ],
+   "stage": [
+    {
+     "label": "api.log",
+     "atWord": 5,
+     "sub": "1 hour old",
+     "color": "green",
+     "value": 0
+    },
+    {
+     "label": "web.log",
+     "atWord": 7,
+     "sub": "2 hours old",
+     "color": "green",
+     "value": 0
+    },
+    {
+     "label": "old.log",
+     "atWord": 12,
+     "sub": "90 days old",
+     "color": "red",
+     "value": 0
+    },
+    {
+     "label": "notes.md",
+     "atWord": 14,
+     "sub": "not a .log",
+     "color": "red",
+     "value": 0
+    }
+   ],
+   "verdict": "Slow because it really looks",
+   "verdictSub": "no index, no guessing",
+   "verdictAtWord": 17
+  }
+ },
+ {
+  "cmd": "locate",
+  "type": "CMD_LOCATE",
+  "name": "CmdLocate",
+  "dataKey": "cmdLocate",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "an index, not the disk",
+  "blurb": "an overnight database answering instantly while the real tree has already moved on.",
+  "example": {
+   "headline": "locate is fast, and can be [wrong]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "locate notes.md",
+     "atWord": 2,
+     "text": "/home/santhu/notes.md",
+     "detail": "instant"
+    },
+    {
+     "label": "locate new.md",
+     "atWord": 9,
+     "text": "(no results)",
+     "detail": "created an hour ago"
+    }
+   ],
+   "stage": [
+    {
+     "label": "index built",
+     "atWord": 4,
+     "sub": "03:00 last night",
+     "text": "9h ago"
+    },
+    {
+     "label": "notes.md",
+     "atWord": 6,
+     "sub": "in the index",
+     "text": "found",
+     "color": "green"
+    },
+    {
+     "label": "new.md",
+     "atWord": 11,
+     "sub": "made at 08:00",
+     "text": "missing",
+     "color": "red"
+    }
+   ],
+   "verdict": "Run updatedb to refresh",
+   "verdictSub": "or use find when it must be current",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "grep",
+  "type": "CMD_GREP",
+  "name": "CmdGrep",
+  "dataKey": "cmdGrep",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "every line that matches",
+  "blurb": "a pattern sweeping the file with matching lines lighting and the rest falling away.",
+  "example": {
+   "headline": "grep finds the [matching lines]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "highlight": "-v",
+   "steps": [
+    {
+     "label": "grep timeout api.log",
+     "atWord": 2,
+     "text": "412: upstream timeout",
+     "detail": "every matching line"
+    },
+    {
+     "label": "grep -c timeout api.log",
+     "atWord": 9,
+     "text": "4",
+     "detail": "just the count"
+    },
+    {
+     "label": "grep -v timeout api.log",
+     "atWord": 15,
+     "detail": "everything that does not match"
+    }
+   ],
+   "stage": [
+    {
+     "label": "-i",
+     "atWord": 5,
+     "sub": "ignore case",
+     "text": "flag"
+    },
+    {
+     "label": "-r",
+     "atWord": 7,
+     "sub": "walk directories",
+     "text": "flag"
+    },
+    {
+     "label": "-c",
+     "atWord": 11,
+     "sub": "count matches",
+     "text": "4",
+     "color": "green"
+    },
+    {
+     "label": "-v",
+     "atWord": 17,
+     "sub": "invert the match",
+     "text": "flag",
+     "color": "purple"
+    }
+   ],
+   "verdict": "-v is the one people forget",
+   "verdictSub": "show me everything except this",
+   "verdictAtWord": 20
+  }
+ },
+ {
+  "cmd": "awk",
+  "type": "CMD_AWK",
+  "name": "CmdAwk",
+  "dataKey": "cmdAwk",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "one column, pulled out",
+  "blurb": "each line splitting into numbered fields so a single column can be printed or summed.",
+  "example": {
+   "headline": "awk splits a line into [fields]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "df -h | awk '{print $3}'",
+     "atWord": 2,
+     "text": "28G",
+     "detail": "the third column only"
+    },
+    {
+     "label": "awk '{s+=$3} END {print s}'",
+     "atWord": 10,
+     "text": "119G",
+     "detail": "and the sum of it"
+    }
+   ],
+   "stage": [
+    {
+     "label": "$1 filesystem",
+     "atWord": 5,
+     "sub": "/dev/sda1"
+    },
+    {
+     "label": "$2 size",
+     "atWord": 7,
+     "sub": "40G"
+    },
+    {
+     "label": "$3 used",
+     "atWord": 9,
+     "sub": "28G",
+     "color": "green"
+    }
+   ],
+   "verdict": "Whitespace splits it for free",
+   "verdictSub": "no parsing code required",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "sed",
+  "type": "CMD_SED",
+  "name": "CmdSed",
+  "dataKey": "cmdSed",
+  "kind": "flow",
+  "color": "purple",
+  "stageTitle": "text changing as it passes",
+  "blurb": "a stream flowing through a substitution and coming out altered, one line at a time.",
+  "example": {
+   "headline": "sed edits the [stream]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "g",
+   "steps": [
+    {
+     "label": "sed 's/8080/443/' app.conf",
+     "atWord": 2,
+     "detail": "first match on each line"
+    },
+    {
+     "label": "sed 's/8080/443/g' app.conf",
+     "atWord": 10,
+     "detail": "g means every match"
+    }
+   ],
+   "stage": [
+    {
+     "label": "read a line",
+     "atWord": 4,
+     "sub": "from the file"
+    },
+    {
+     "label": "match s/8080/443/",
+     "atWord": 6,
+     "sub": "the pattern"
+    },
+    {
+     "label": "emit the change",
+     "atWord": 8,
+     "sub": "altered line",
+     "color": "green"
+    },
+    {
+     "label": "add g",
+     "atWord": 12,
+     "sub": "every match, not the first",
+     "color": "purple"
+    }
+   ],
+   "verdict": "-i edits the file in place",
+   "verdictSub": "without it, nothing is saved",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "xargs",
+  "type": "CMD_XARGS",
+  "name": "CmdXargs",
+  "dataKey": "cmdXargs",
+  "kind": "flow",
+  "color": "green",
+  "stageTitle": "a list becoming arguments",
+  "blurb": "names arriving on standard input being handed to a command that only reads arguments.",
+  "example": {
+   "headline": "xargs turns input into [arguments]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "steps": [
+    {
+     "label": "find . -name '*.log' | rm",
+     "atWord": 2,
+     "text": "rm: missing operand",
+     "detail": "rm reads arguments, not input"
+    },
+    {
+     "label": "find . -name '*.log' | xargs rm",
+     "atWord": 11,
+     "detail": "now the names become arguments"
+    }
+   ],
+   "stage": [
+    {
+     "label": "find prints names",
+     "atWord": 4,
+     "sub": "on standard input"
+    },
+    {
+     "label": "rm expects arguments",
+     "atWord": 6,
+     "sub": "nothing arrives",
+     "text": "fails",
+     "color": "red"
+    },
+    {
+     "label": "xargs converts",
+     "atWord": 13,
+     "sub": "input becomes arguments",
+     "color": "green"
+    },
+    {
+     "label": "rm a.log b.log",
+     "atWord": 15,
+     "sub": "one call, all names",
+     "text": "runs",
+     "color": "green"
+    }
+   ],
+   "verdict": "-print0 with -0 for odd names",
+   "verdictSub": "spaces in filenames break the naive form",
+   "verdictAtWord": 18
+  }
+ },
+ {
+  "cmd": "chmod",
+  "type": "CMD_CHMOD",
+  "name": "CmdChmod",
+  "dataKey": "cmdChmod",
+  "kind": "perms",
+  "color": "orange",
+  "stageTitle": "the nine switches",
+  "blurb": "the permission triples flipping and the octal digits resolving beneath them.",
+  "example": {
+   "headline": "chmod flips [nine switches]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~/bin",
+   "perms": "rwxr-xr-x",
+   "permsAtWord": 6,
+   "steps": [
+    {
+     "label": "chmod 755 deploy.sh",
+     "atWord": 2,
+     "detail": "numeric form"
+    },
+    {
+     "label": "chmod u=rwx,go=rx deploy.sh",
+     "atWord": 11,
+     "detail": "the same thing, spelled out"
+    }
+   ],
+   "stage": [],
+   "verdict": "7 is read plus write plus execute",
+   "verdictSub": "5 drops the write. That is all 755 means.",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "chown",
+  "type": "CMD_CHOWN",
+  "name": "CmdChown",
+  "dataKey": "cmdChown",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "who the file answers to",
+  "blurb": "the owner and group labels changing hands, and the access that follows them.",
+  "example": {
+   "headline": "chown hands the file [to someone]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "/srv",
+   "steps": [
+    {
+     "label": "chown deploy app.py",
+     "atWord": 2,
+     "detail": "new owner"
+    },
+    {
+     "label": "chown deploy:www app.py",
+     "atWord": 9,
+     "detail": "owner and group"
+    }
+   ],
+   "stage": [
+    {
+     "label": "owner",
+     "atWord": 4,
+     "sub": "was santhu",
+     "text": "now deploy",
+     "color": "green"
+    },
+    {
+     "label": "group",
+     "atWord": 11,
+     "sub": "was staff",
+     "text": "now www",
+     "color": "green"
+    },
+    {
+     "label": "the first rwx triple",
+     "atWord": 14,
+     "sub": "now applies to deploy",
+     "text": "moved"
+    }
+   ],
+   "verdict": "Permissions did not change",
+   "verdictSub": "but who they apply to did",
+   "verdictAtWord": 17
+  }
+ },
+ {
+  "cmd": "umask",
+  "type": "CMD_UMASK",
+  "name": "CmdUmask",
+  "dataKey": "cmdUmask",
+  "kind": "flow",
+  "color": "yellow",
+  "stageTitle": "what new files are born with",
+  "blurb": "the default bits meeting the mask, and the permissions that survive it.",
+  "example": {
+   "headline": "umask decides what [new files] get",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "umask",
+     "atWord": 2,
+     "text": "0022",
+     "detail": "your current mask"
+    },
+    {
+     "label": "touch fresh.txt",
+     "atWord": 8,
+     "text": "-rw-r--r--",
+     "detail": "644, not 666"
+    }
+   ],
+   "stage": [
+    {
+     "label": "666",
+     "atWord": 4,
+     "sub": "the default for a file",
+     "text": "start"
+    },
+    {
+     "label": "- 022",
+     "atWord": 6,
+     "sub": "your mask",
+     "text": "subtract"
+    },
+    {
+     "label": "= 644",
+     "atWord": 10,
+     "sub": "what you actually get",
+     "text": "result",
+     "color": "green"
+    }
+   ],
+   "verdict": "Directories start from 777",
+   "verdictSub": "so the same mask yields 755",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "sudo",
+  "type": "CMD_SUDO",
+  "name": "CmdSudo",
+  "dataKey": "cmdSudo",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "one command, borrowed power",
+  "blurb": "a single command carried past a rule check, with the log entry it leaves behind.",
+  "example": {
+   "headline": "sudo lends power for [one command]",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "systemctl restart nginx",
+     "atWord": 2,
+     "text": "Access denied",
+     "detail": "not privileged"
+    },
+    {
+     "label": "sudo systemctl restart nginx",
+     "atWord": 8,
+     "text": "[sudo] password for santhu:",
+     "detail": "checked against sudoers"
+    }
+   ],
+   "stage": [
+    {
+     "label": "the sudoers rule",
+     "atWord": 5,
+     "sub": "is santhu allowed?",
+     "text": "yes",
+     "color": "green"
+    },
+    {
+     "label": "the command",
+     "atWord": 10,
+     "sub": "runs as root",
+     "text": "once"
+    },
+    {
+     "label": "the audit log",
+     "atWord": 13,
+     "sub": "santhu ran this",
+     "text": "recorded",
+     "color": "orange"
+    }
+   ],
+   "verdict": "Power ends with the command",
+   "verdictSub": "you are not root afterwards",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "useradd",
+  "type": "CMD_USERADD",
+  "name": "CmdUseradd",
+  "dataKey": "cmdUseradd",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "everything it touches",
+  "blurb": "the four separate places a single account creation writes to.",
+  "example": {
+   "headline": "useradd writes to [four places]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "highlight": "-m",
+   "steps": [
+    {
+     "label": "useradd deploy",
+     "atWord": 2,
+     "detail": "account, but no home"
+    },
+    {
+     "label": "useradd -m -s /bin/bash deploy",
+     "atWord": 9,
+     "detail": "-m makes the home directory"
+    }
+   ],
+   "stage": [
+    {
+     "label": "/etc/passwd",
+     "atWord": 4,
+     "sub": "the account line",
+     "text": "written",
+     "color": "green"
+    },
+    {
+     "label": "/etc/shadow",
+     "atWord": 6,
+     "sub": "the password hash",
+     "text": "written",
+     "color": "green"
+    },
+    {
+     "label": "a primary group",
+     "atWord": 11,
+     "sub": "same name as the user",
+     "text": "created",
+     "color": "green"
+    },
+    {
+     "label": "/home/deploy",
+     "atWord": 13,
+     "sub": "only with -m",
+     "text": "conditional",
+     "color": "orange"
+    }
+   ],
+   "verdict": "No -m means no home directory",
+   "verdictSub": "and the first login lands in /",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "usermod",
+  "type": "CMD_USERMOD",
+  "name": "CmdUsermod",
+  "dataKey": "cmdUsermod",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "append, or replace",
+  "blurb": "the difference between adding a group and overwriting every group the user had.",
+  "example": {
+   "headline": "-aG appends. [-G replaces]",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "highlight": "-aG",
+   "steps": [
+    {
+     "label": "usermod -aG docker deploy",
+     "atWord": 2,
+     "detail": "appends docker"
+    },
+    {
+     "label": "usermod -G docker deploy",
+     "atWord": 9,
+     "detail": "replaces everything"
+    }
+   ],
+   "stage": [
+    {
+     "label": "before",
+     "atWord": 4,
+     "sub": "sudo, www, dev",
+     "text": "3 groups"
+    },
+    {
+     "label": "after -aG",
+     "atWord": 6,
+     "sub": "sudo, www, dev, docker",
+     "text": "4 groups",
+     "color": "green"
+    },
+    {
+     "label": "after -G",
+     "atWord": 11,
+     "sub": "docker",
+     "text": "1 group",
+     "color": "red"
+    }
+   ],
+   "verdict": "Forgetting the a locks people out",
+   "verdictSub": "including out of sudo",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "userdel",
+  "type": "CMD_USERDEL",
+  "name": "CmdUserdel",
+  "dataKey": "cmdUserdel",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "what gets left behind",
+  "blurb": "the account record disappearing while the home directory quietly stays.",
+  "example": {
+   "headline": "userdel leaves the [home directory]",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "/home",
+   "highlight": "-r",
+   "steps": [
+    {
+     "label": "userdel deploy",
+     "atWord": 2,
+     "detail": "account gone"
+    },
+    {
+     "label": "userdel -r deploy",
+     "atWord": 9,
+     "detail": "-r takes the home too"
+    }
+   ],
+   "stage": [
+    {
+     "label": "/etc/passwd entry",
+     "atWord": 4,
+     "sub": "removed",
+     "text": "gone",
+     "color": "green"
+    },
+    {
+     "label": "/home/deploy",
+     "atWord": 6,
+     "sub": "still on disk",
+     "text": "orphan",
+     "color": "orange"
+    },
+    {
+     "label": "with -r",
+     "atWord": 11,
+     "sub": "home removed too",
+     "text": "gone",
+     "color": "green"
+    }
+   ],
+   "verdict": "Orphaned folders owned by a number",
+   "verdictSub": "the user id outlives the name",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "passwd",
+  "type": "CMD_PASSWD",
+  "name": "CmdPasswd",
+  "dataKey": "cmdPasswd",
+  "kind": "flow",
+  "color": "green",
+  "stageTitle": "what actually gets stored",
+  "blurb": "a password becoming a one-way hash, with the plaintext never written anywhere.",
+  "example": {
+   "headline": "passwd stores a [hash], never the word",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "passwd",
+     "atWord": 2,
+     "text": "New password:",
+     "detail": "typed, never echoed"
+    }
+   ],
+   "stage": [
+    {
+     "label": "what you type",
+     "atWord": 5,
+     "sub": "hunter2",
+     "text": "plaintext"
+    },
+    {
+     "label": "one-way hash",
+     "atWord": 7,
+     "sub": "sha512-crypt",
+     "text": "transform"
+    },
+    {
+     "label": "what is saved",
+     "atWord": 9,
+     "sub": "$6$rounds$9fa3...",
+     "text": "in /etc/shadow",
+     "color": "green"
+    }
+   ],
+   "verdict": "Nobody can hand it back",
+   "verdictSub": "a reset is the only way in",
+   "verdictAtWord": 12
+  }
+ },
+ {
+  "cmd": "chpasswd",
+  "type": "CMD_CHPASSWD",
+  "name": "CmdChpasswd",
+  "dataKey": "cmdChpasswd",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "a hundred at once",
+  "blurb": "user and password pairs arriving on standard input and being set in bulk.",
+  "example": {
+   "headline": "chpasswd sets them [in bulk]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "cat users.txt | chpasswd",
+     "atWord": 2,
+     "detail": "one pair per line"
+    }
+   ],
+   "stage": [
+    {
+     "label": "deploy:s3cret",
+     "atWord": 4,
+     "sub": "line 1",
+     "text": "set",
+     "color": "green"
+    },
+    {
+     "label": "ci:b0tpass",
+     "atWord": 6,
+     "sub": "line 2",
+     "text": "set",
+     "color": "green"
+    },
+    {
+     "label": "...98 more",
+     "atWord": 8,
+     "text": "set",
+     "color": "green"
+    }
+   ],
+   "verdict": "Scriptable, unlike passwd",
+   "verdictSub": "passwd insists on a terminal",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "w",
+  "type": "CMD_W",
+  "name": "CmdW",
+  "dataKey": "cmdW",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "who is on the box now",
+  "blurb": "the current sessions with what each person is running right this second.",
+  "example": {
+   "headline": "w shows who is on [right now]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "w",
+     "atWord": 2,
+     "text": "santhu  pts/0  vim",
+     "detail": "one row per live session"
+    }
+   ],
+   "stage": [
+    {
+     "label": "santhu",
+     "atWord": 4,
+     "sub": "pts/0",
+     "text": "vim",
+     "color": "green"
+    },
+    {
+     "label": "deploy",
+     "atWord": 6,
+     "sub": "pts/1",
+     "text": "rsync",
+     "color": "green"
+    },
+    {
+     "label": "load average",
+     "atWord": 9,
+     "sub": "the header line",
+     "text": "0.42"
+    }
+   ],
+   "verdict": "Sessions, not accounts",
+   "verdictSub": "one person logged in twice is two rows",
+   "verdictAtWord": 12
+  }
+ },
+ {
+  "cmd": "last",
+  "type": "CMD_LAST",
+  "name": "CmdLast",
+  "dataKey": "cmdLast",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "who was here before",
+  "blurb": "login history read back from the wtmp record, reaching weeks into the past.",
+  "example": {
+   "headline": "last reads the [login history]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "last -n 5",
+     "atWord": 2,
+     "text": "root pts/0 Tue 03:12",
+     "detail": "from /var/log/wtmp"
+    }
+   ],
+   "stage": [
+    {
+     "label": "root",
+     "atWord": 4,
+     "sub": "Tue 03:12",
+     "text": "suspicious",
+     "color": "red"
+    },
+    {
+     "label": "santhu",
+     "atWord": 6,
+     "sub": "Mon 09:01",
+     "text": "normal"
+    },
+    {
+     "label": "reboot",
+     "atWord": 8,
+     "sub": "Sun 22:40",
+     "text": "system"
+    }
+   ],
+   "verdict": "First place to look after a breach",
+   "verdictSub": "and the first thing an attacker clears",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "chroot",
+  "type": "CMD_CHROOT",
+  "name": "CmdChroot",
+  "dataKey": "cmdChroot",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "what the process can see",
+  "blurb": "a false root that hides everything above it, and the caveat that root walks out.",
+  "example": {
+   "headline": "chroot is a fence, [not a wall]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "/mnt",
+   "steps": [
+    {
+     "label": "chroot /mnt/recovery /bin/bash",
+     "atWord": 2,
+     "detail": "a new root for this shell"
+    }
+   ],
+   "stage": [
+    {
+     "label": "ls /",
+     "atWord": 5,
+     "sub": "shows the jail only",
+     "text": "works",
+     "color": "green"
+    },
+    {
+     "label": "cd ..",
+     "atWord": 7,
+     "sub": "cannot climb out",
+     "text": "blocked",
+     "color": "green"
+    },
+    {
+     "label": "root escapes",
+     "atWord": 10,
+     "sub": "with the right syscalls",
+     "text": "possible",
+     "color": "red"
+    }
+   ],
+   "verdict": "Isolation, never security",
+   "verdictSub": "use containers when you mean security",
+   "verdictAtWord": 13
+  }
+ }
+]

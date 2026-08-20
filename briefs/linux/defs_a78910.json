@@ -1,0 +1,2258 @@
+[
+ {
+  "cmd": "ip",
+  "type": "CMD_IP",
+  "name": "CmdIp",
+  "dataKey": "cmdIp",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "addresses, links, routes",
+  "blurb": "the three questions one tool answers about this machine's networking.",
+  "example": {
+   "headline": "ip replaced [ifconfig]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "ip addr",
+     "atWord": 2,
+     "text": "inet 10.0.0.5/24",
+     "detail": "which addresses"
+    },
+    {
+     "label": "ip route",
+     "atWord": 9,
+     "text": "default via 10.0.0.1",
+     "detail": "and where traffic leaves"
+    }
+   ],
+   "stage": [
+    {
+     "label": "ip addr",
+     "atWord": 4,
+     "sub": "your addresses",
+     "text": "10.0.0.5",
+     "color": "green"
+    },
+    {
+     "label": "ip link",
+     "atWord": 6,
+     "sub": "the interfaces",
+     "text": "eth0 up"
+    },
+    {
+     "label": "ip route",
+     "atWord": 11,
+     "sub": "the way out",
+     "text": "via 10.0.0.1",
+     "color": "blue"
+    }
+   ],
+   "verdict": "One tool, three questions",
+   "verdictSub": "ifconfig cannot show modern routing",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "ping",
+  "type": "CMD_PING",
+  "name": "CmdPing",
+  "dataKey": "cmdPing",
+  "kind": "hops",
+  "color": "blue",
+  "stageTitle": "out, and back again",
+  "blurb": "an echo request leaving, arriving, and returning with the time it took.",
+  "example": {
+   "headline": "ping answers [two questions]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "token": "ICMP echo request",
+   "steps": [
+    {
+     "label": "ping -c 4 1.1.1.1",
+     "atWord": 2,
+     "text": "64 bytes  time=12.4 ms",
+     "detail": "four packets, then stop"
+    }
+   ],
+   "stage": [
+    {
+     "label": "your box",
+     "atWord": 4,
+     "text": "sent"
+    },
+    {
+     "label": "the gateway",
+     "atWord": 6,
+     "text": "forwarded"
+    },
+    {
+     "label": "1.1.1.1",
+     "atWord": 8,
+     "sub": "replied",
+     "text": "12.4 ms",
+     "color": "green"
+    },
+    {
+     "label": "packet 3",
+     "atWord": 11,
+     "sub": "never came back",
+     "text": "lost",
+     "color": "red"
+    }
+   ],
+   "verdict": "Alive, and how far away",
+   "verdictSub": "loss matters more than the average",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "traceroute",
+  "type": "CMD_TRACEROUTE",
+  "name": "CmdTraceroute",
+  "dataKey": "cmdTraceroute",
+  "kind": "hops",
+  "color": "blue",
+  "stageTitle": "every hop on the way",
+  "blurb": "packets expiring one step further each time, forcing each hop to answer.",
+  "example": {
+   "headline": "traceroute makes each hop [answer]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "token": "TTL 1, then 2, then 3",
+   "steps": [
+    {
+     "label": "traceroute 1.1.1.1",
+     "atWord": 2,
+     "text": "7  * * *",
+     "detail": "the stars are the problem"
+    }
+   ],
+   "stage": [
+    {
+     "label": "hop 1",
+     "atWord": 4,
+     "sub": "your router",
+     "text": "1 ms",
+     "color": "green"
+    },
+    {
+     "label": "hop 4",
+     "atWord": 6,
+     "sub": "your ISP",
+     "text": "9 ms",
+     "color": "green"
+    },
+    {
+     "label": "hop 7",
+     "atWord": 8,
+     "sub": "no reply",
+     "text": "* * *",
+     "color": "red"
+    },
+    {
+     "label": "hop 9",
+     "atWord": 10,
+     "sub": "destination",
+     "text": "14 ms",
+     "color": "green"
+    }
+   ],
+   "verdict": "Stars are not always a fault",
+   "verdictSub": "many routers simply refuse to reply",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "mtr",
+  "type": "CMD_MTR",
+  "name": "CmdMtr",
+  "dataKey": "cmdMtr",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "the same probe, forever",
+  "blurb": "traceroute rerun continuously so a flapping hop shows up as a column of loss.",
+  "example": {
+   "headline": "mtr keeps [probing]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "mtr 1.1.1.1",
+     "atWord": 2,
+     "text": "7. 10.2.0.1   38.2%",
+     "detail": "loss builds over time"
+    }
+   ],
+   "stage": [
+    {
+     "label": "hop 4",
+     "atWord": 4,
+     "sub": "0.0% loss",
+     "text": "stable",
+     "color": "green"
+    },
+    {
+     "label": "hop 7",
+     "atWord": 6,
+     "sub": "38.2% loss",
+     "text": "the culprit",
+     "color": "red"
+    },
+    {
+     "label": "hop 9",
+     "atWord": 8,
+     "sub": "0.0% loss",
+     "text": "fine",
+     "color": "green"
+    }
+   ],
+   "verdict": "One run can lie, a hundred cannot",
+   "verdictSub": "intermittent loss needs repetition to see",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "netstat",
+  "type": "CMD_NETSTAT",
+  "name": "CmdNetstat",
+  "dataKey": "cmdNetstat",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "the older socket view",
+  "blurb": "the legacy tool and the modern flags that replace each of its own.",
+  "example": {
+   "headline": "netstat still works, [ss is faster]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "netstat -tulpn",
+     "atWord": 2,
+     "text": "tcp 0 0 :::443 LISTEN",
+     "detail": "the classic incantation"
+    }
+   ],
+   "stage": [
+    {
+     "label": "netstat -tulpn",
+     "atWord": 4,
+     "sub": "reads /proc line by line",
+     "text": "slow",
+     "color": "orange"
+    },
+    {
+     "label": "ss -tulpn",
+     "atWord": 6,
+     "sub": "asks the kernel directly",
+     "text": "fast",
+     "color": "green"
+    },
+    {
+     "label": "same output",
+     "atWord": 8,
+     "sub": "the flags even match",
+     "text": "identical"
+    }
+   ],
+   "verdict": "Muscle memory still works",
+   "verdictSub": "but ss finishes on a busy box",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "ss",
+  "type": "CMD_SS",
+  "name": "CmdSs",
+  "dataKey": "cmdSs",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "what is listening",
+  "blurb": "sockets grouped by state, so listening and established read apart at a glance.",
+  "example": {
+   "headline": "ss shows [what is listening]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-l",
+   "steps": [
+    {
+     "label": "ss -tulpn",
+     "atWord": 2,
+     "text": "tcp LISTEN 0 511 *:443",
+     "detail": "every listening socket"
+    },
+    {
+     "label": "ss -t state established",
+     "atWord": 10,
+     "detail": "and the live connections"
+    }
+   ],
+   "stage": [
+    {
+     "label": "LISTEN :443",
+     "atWord": 4,
+     "sub": "nginx",
+     "text": "waiting",
+     "color": "green"
+    },
+    {
+     "label": "LISTEN :22",
+     "atWord": 6,
+     "sub": "sshd",
+     "text": "waiting",
+     "color": "green"
+    },
+    {
+     "label": "ESTABLISHED",
+     "atWord": 12,
+     "sub": "to 10.0.0.9",
+     "text": "active",
+     "color": "blue"
+    }
+   ],
+   "verdict": "LISTEN means it is up",
+   "verdictSub": "if nobody connects, look at the firewall",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "nmcli",
+  "type": "CMD_NMCLI",
+  "name": "CmdNmcli",
+  "dataKey": "cmdNmcli",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "profiles, not hardware",
+  "blurb": "a saved connection profile brought up and down independently of the device.",
+  "example": {
+   "headline": "A profile is not the [device]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "nmcli device status",
+     "atWord": 2,
+     "text": "eth0  connected  wired-1",
+     "detail": "device and profile"
+    },
+    {
+     "label": "nmcli con up wired-1",
+     "atWord": 10,
+     "text": "Connection activated",
+     "detail": "bring the profile up"
+    }
+   ],
+   "stage": [
+    {
+     "label": "eth0",
+     "atWord": 4,
+     "sub": "the physical device",
+     "text": "hardware"
+    },
+    {
+     "label": "wired-1",
+     "atWord": 6,
+     "sub": "a saved profile",
+     "text": "config",
+     "color": "green"
+    },
+    {
+     "label": "wired-backup",
+     "atWord": 12,
+     "sub": "another profile, same device",
+     "text": "config",
+     "color": "blue"
+    }
+   ],
+   "verdict": "One device, many profiles",
+   "verdictSub": "switch networks without touching hardware",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "iftop",
+  "type": "CMD_IFTOP",
+  "name": "CmdIftop",
+  "dataKey": "cmdIftop",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "by connection",
+  "blurb": "bandwidth broken down per connection pair, heaviest rising to the top.",
+  "example": {
+   "headline": "iftop sorts by [connection]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "iftop -i eth0",
+     "atWord": 2,
+     "text": "10.0.0.5 => 10.0.0.9  38Mb",
+     "detail": "live, per pair"
+    }
+   ],
+   "stage": [
+    {
+     "label": "=> 10.0.0.9",
+     "atWord": 4,
+     "sub": "the backup target",
+     "text": "38 Mb",
+     "color": "red"
+    },
+    {
+     "label": "=> 1.1.1.1",
+     "atWord": 6,
+     "sub": "dns",
+     "text": "0.1 Mb"
+    },
+    {
+     "label": "=> 10.0.0.2",
+     "atWord": 8,
+     "sub": "monitoring",
+     "text": "0.4 Mb"
+    }
+   ],
+   "verdict": "Tells you where, not who",
+   "verdictSub": "for the process, use nethogs",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "nethogs",
+  "type": "CMD_NETHOGS",
+  "name": "CmdNethogs",
+  "dataKey": "cmdNethogs",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "by process",
+  "blurb": "the same bandwidth attributed to the program actually responsible for it.",
+  "example": {
+   "headline": "nethogs blames a [process]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "nethogs eth0",
+     "atWord": 2,
+     "text": "4821 rsync  38.2 KB/s",
+     "detail": "per program, not per socket"
+    }
+   ],
+   "stage": [
+    {
+     "label": "rsync (4821)",
+     "atWord": 4,
+     "sub": "the backup job",
+     "text": "38 MB/s",
+     "color": "red"
+    },
+    {
+     "label": "nginx (1140)",
+     "atWord": 6,
+     "sub": "serving",
+     "text": "2 MB/s"
+    },
+    {
+     "label": "sshd (980)",
+     "atWord": 8,
+     "sub": "your session",
+     "text": "0.1 MB/s"
+    }
+   ],
+   "verdict": "The question you actually had",
+   "verdictSub": "which program is eating the line",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "nload",
+  "type": "CMD_NLOAD",
+  "name": "CmdNload",
+  "dataKey": "cmdNload",
+  "kind": "meters",
+  "color": "blue",
+  "stageTitle": "just the totals",
+  "blurb": "incoming and outgoing throughput, and nothing else at all.",
+  "example": {
+   "headline": "nload is [two numbers]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "nload eth0",
+     "atWord": 2,
+     "text": "Incoming 41 Mbit/s",
+     "detail": "in and out, that is it"
+    }
+   ],
+   "stage": [
+    {
+     "label": "incoming",
+     "atWord": 4,
+     "text": "41 Mbit/s",
+     "color": "green",
+     "value": 41
+    },
+    {
+     "label": "outgoing",
+     "atWord": 6,
+     "text": "88 Mbit/s",
+     "color": "orange",
+     "value": 88
+    }
+   ],
+   "verdict": "When you only need the shape",
+   "verdictSub": "is the pipe full, yes or no",
+   "verdictAtWord": 9
+  }
+ },
+ {
+  "cmd": "dig",
+  "type": "CMD_DIG",
+  "name": "CmdDig",
+  "dataKey": "cmdDig",
+  "kind": "hops",
+  "color": "green",
+  "stageTitle": "a name becoming an address",
+  "blurb": "the query travelling to a resolver and the typed record coming back.",
+  "example": {
+   "headline": "dig gives you the [whole answer]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "token": "example.com  A?",
+   "steps": [
+    {
+     "label": "dig example.com",
+     "atWord": 2,
+     "text": "example.com. 300 IN A 93.184.216.34",
+     "detail": "the ANSWER section"
+    },
+    {
+     "label": "dig +short example.com",
+     "atWord": 11,
+     "text": "93.184.216.34",
+     "detail": "just the address"
+    }
+   ],
+   "stage": [
+    {
+     "label": "your resolver",
+     "atWord": 4,
+     "sub": "1.1.1.1",
+     "text": "asked"
+    },
+    {
+     "label": "the answer",
+     "atWord": 6,
+     "sub": "A record",
+     "text": "93.184.216.34",
+     "color": "green"
+    },
+    {
+     "label": "TTL 300",
+     "atWord": 8,
+     "sub": "cache for 5 minutes",
+     "text": "timing"
+    }
+   ],
+   "verdict": "The tool that shows its working",
+   "verdictSub": "TTL, authority and all",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "host",
+  "type": "CMD_HOST",
+  "name": "CmdHost",
+  "dataKey": "cmdHost",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "one line, done",
+  "blurb": "the same lookup answered as briefly as possible.",
+  "example": {
+   "headline": "host is the [one-line] answer",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "host example.com",
+     "atWord": 2,
+     "text": "example.com has address 93.184.216.34",
+     "detail": "that is the whole output"
+    }
+   ],
+   "stage": [
+    {
+     "label": "host",
+     "atWord": 4,
+     "sub": "one readable line",
+     "text": "brief",
+     "color": "green"
+    },
+    {
+     "label": "dig",
+     "atWord": 6,
+     "sub": "the full record",
+     "text": "detailed"
+    },
+    {
+     "label": "dig +short",
+     "atWord": 8,
+     "sub": "just the value",
+     "text": "brief",
+     "color": "green"
+    }
+   ],
+   "verdict": "For a quick sanity check",
+   "verdictSub": "when you do not need the ceremony",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "nslookup",
+  "type": "CMD_NSLOOKUP",
+  "name": "CmdNslookup",
+  "dataKey": "cmdNslookup",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "the older one",
+  "blurb": "the interactive lookup, and why its output misleads about who answered.",
+  "example": {
+   "headline": "nslookup can [mislead] you",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "nslookup example.com",
+     "atWord": 2,
+     "text": "Non-authoritative answer:",
+     "detail": "that line confuses everyone"
+    }
+   ],
+   "stage": [
+    {
+     "label": "Server: 1.1.1.1",
+     "atWord": 4,
+     "sub": "who you asked",
+     "text": "fine"
+    },
+    {
+     "label": "Non-authoritative",
+     "atWord": 6,
+     "sub": "just means cached",
+     "text": "normal",
+     "color": "orange"
+    },
+    {
+     "label": "people read it as",
+     "atWord": 8,
+     "sub": "something is wrong",
+     "text": "untrue",
+     "color": "red"
+    }
+   ],
+   "verdict": "Non-authoritative is not an error",
+   "verdictSub": "it means the answer came from a cache",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "whois",
+  "type": "CMD_WHOIS",
+  "name": "CmdWhois",
+  "dataKey": "cmdWhois",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "who owns the name",
+  "blurb": "registrar, expiry and nameservers pulled from the registry record.",
+  "example": {
+   "headline": "whois tells you when it [expires]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "whois example.com",
+     "atWord": 2,
+     "text": "Registry Expiry Date: 2026-09-14",
+     "detail": "28 days away"
+    }
+   ],
+   "stage": [
+    {
+     "label": "registrar",
+     "atWord": 4,
+     "sub": "who it was bought from",
+     "text": "IANA"
+    },
+    {
+     "label": "expiry",
+     "atWord": 6,
+     "sub": "28 days away",
+     "text": "2026-09-14",
+     "color": "red"
+    },
+    {
+     "label": "nameservers",
+     "atWord": 8,
+     "sub": "who answers for it",
+     "text": "a.iana-servers"
+    }
+   ],
+   "verdict": "Certificates outlive domains",
+   "verdictSub": "an expired domain breaks everything at once",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "ssh",
+  "type": "CMD_SSH",
+  "name": "CmdSsh",
+  "dataKey": "cmdSsh",
+  "kind": "hops",
+  "color": "green",
+  "stageTitle": "which key goes where",
+  "blurb": "the key pair, with the public half living on the server and the private half never leaving.",
+  "example": {
+   "headline": "The [public] half goes on the server",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "token": "ed25519 key pair",
+   "steps": [
+    {
+     "label": "ssh-keygen -t ed25519",
+     "atWord": 2,
+     "detail": "makes both halves"
+    },
+    {
+     "label": "ssh-copy-id deploy@prod",
+     "atWord": 9,
+     "detail": "sends the public one"
+    },
+    {
+     "label": "ssh deploy@prod",
+     "atWord": 15,
+     "text": "Welcome to prod",
+     "detail": "no password"
+    }
+   ],
+   "stage": [
+    {
+     "label": "id_ed25519",
+     "atWord": 4,
+     "sub": "private \u2014 stays on your laptop",
+     "text": "never sent",
+     "color": "red"
+    },
+    {
+     "label": "id_ed25519.pub",
+     "atWord": 11,
+     "sub": "public \u2014 goes to the server",
+     "text": "copied",
+     "color": "green"
+    },
+    {
+     "label": "authorized_keys",
+     "atWord": 17,
+     "sub": "on prod",
+     "text": "matched",
+     "color": "green"
+    }
+   ],
+   "verdict": "Send the private key and you are done for",
+   "verdictSub": "the .pub suffix is the one that travels",
+   "verdictAtWord": 20
+  }
+ },
+ {
+  "cmd": "scp",
+  "type": "CMD_SCP",
+  "name": "CmdScp",
+  "dataKey": "cmdScp",
+  "kind": "flow",
+  "color": "green",
+  "stageTitle": "a file over that tunnel",
+  "blurb": "a file riding the encrypted channel ssh already established.",
+  "example": {
+   "headline": "scp rides the [ssh channel]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": ":",
+   "steps": [
+    {
+     "label": "scp dist.tar.gz prod:/srv/",
+     "atWord": 2,
+     "text": "dist.tar.gz  100%  41MB",
+     "detail": "the colon separates host from path"
+    }
+   ],
+   "stage": [
+    {
+     "label": "local file",
+     "atWord": 4,
+     "sub": "./dist.tar.gz"
+    },
+    {
+     "label": "encrypted channel",
+     "atWord": 6,
+     "sub": "same keys as ssh",
+     "text": "secure",
+     "color": "green"
+    },
+    {
+     "label": "prod:/srv/",
+     "atWord": 8,
+     "sub": "the remote path",
+     "text": "arrived",
+     "color": "green"
+    }
+   ],
+   "verdict": "Forget the colon and it copies locally",
+   "verdictSub": "you get a file literally named prod",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "rsync",
+  "type": "CMD_RSYNC",
+  "name": "CmdRsync",
+  "dataKey": "cmdRsync",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "only what changed",
+  "blurb": "a comparison first, then just the differences crossing the wire.",
+  "example": {
+   "headline": "rsync sends only the [difference]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "--dry-run",
+   "steps": [
+    {
+     "label": "rsync -av --dry-run ./src/ prod:/srv/",
+     "atWord": 2,
+     "detail": "always look first"
+    },
+    {
+     "label": "rsync -av ./src/ prod:/srv/",
+     "atWord": 11,
+     "text": "sent 2.1M  total 4.2G",
+     "detail": "0.05% of the data"
+    }
+   ],
+   "stage": [
+    {
+     "label": "14,208 files",
+     "atWord": 4,
+     "sub": "unchanged",
+     "text": "skipped",
+     "color": "green"
+    },
+    {
+     "label": "3 files",
+     "atWord": 6,
+     "sub": "modified",
+     "text": "sent",
+     "color": "orange"
+    },
+    {
+     "label": "1 file",
+     "atWord": 8,
+     "sub": "new",
+     "text": "sent",
+     "color": "orange"
+    },
+    {
+     "label": "total on the wire",
+     "atWord": 13,
+     "sub": "instead of 4.2 GB",
+     "text": "2.1 MB",
+     "color": "green"
+    }
+   ],
+   "verdict": "Trailing slash changes everything",
+   "verdictSub": "src/ copies contents, src copies the folder",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "nc",
+  "type": "CMD_NC",
+  "name": "CmdNc",
+  "dataKey": "cmdNc",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "does anything answer",
+  "blurb": "a raw socket opened to a port with no protocol in the way at all.",
+  "example": {
+   "headline": "nc asks one [blunt question]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-zv",
+   "steps": [
+    {
+     "label": "nc -zv prod 5432",
+     "atWord": 2,
+     "text": "succeeded!",
+     "detail": "open"
+    },
+    {
+     "label": "nc -zv prod 6379",
+     "atWord": 9,
+     "text": "Connection refused",
+     "detail": "closed"
+    }
+   ],
+   "stage": [
+    {
+     "label": "port 5432",
+     "atWord": 4,
+     "sub": "postgres",
+     "text": "open",
+     "color": "green"
+    },
+    {
+     "label": "port 6379",
+     "atWord": 11,
+     "sub": "nothing listening",
+     "text": "refused",
+     "color": "red"
+    },
+    {
+     "label": "no reply at all",
+     "atWord": 13,
+     "sub": "a firewall dropping it",
+     "text": "timeout",
+     "color": "orange"
+    }
+   ],
+   "verdict": "Refused and timeout differ",
+   "verdictSub": "refused means reached; timeout means blocked",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "wget",
+  "type": "CMD_WGET",
+  "name": "CmdWget",
+  "dataKey": "cmdWget",
+  "kind": "flow",
+  "color": "green",
+  "stageTitle": "fetch, and keep fetching",
+  "blurb": "a download that retries by itself and can walk a whole site of links.",
+  "example": {
+   "headline": "wget is built to [finish]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-c",
+   "steps": [
+    {
+     "label": "wget https://ex.com/big.iso",
+     "atWord": 2,
+     "detail": "one file"
+    },
+    {
+     "label": "wget -c https://ex.com/big.iso",
+     "atWord": 9,
+     "detail": "-c resumes where it stopped"
+    }
+   ],
+   "stage": [
+    {
+     "label": "connection drops",
+     "atWord": 4,
+     "sub": "at 61%",
+     "text": "interrupted",
+     "color": "red"
+    },
+    {
+     "label": "with -c",
+     "atWord": 11,
+     "sub": "resumes from 61%",
+     "text": "continues",
+     "color": "green"
+    },
+    {
+     "label": "-r",
+     "atWord": 13,
+     "sub": "follows links",
+     "text": "mirrors a site",
+     "color": "blue"
+    }
+   ],
+   "verdict": "Made for downloading things",
+   "verdictSub": "curl is made for talking to things",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "curl",
+  "type": "CMD_CURL",
+  "name": "CmdCurl",
+  "dataKey": "cmdCurl",
+  "kind": "flow",
+  "color": "green",
+  "stageTitle": "talking to an API",
+  "blurb": "a request assembled flag by flag and the status that comes back.",
+  "example": {
+   "headline": "curl is for [talking], not downloading",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-X",
+   "steps": [
+    {
+     "label": "curl https://api.ex.com/health",
+     "atWord": 2,
+     "text": "{\"ok\":true}",
+     "detail": "a plain GET"
+    },
+    {
+     "label": "curl -X POST -d '{}' api.ex.com/jobs",
+     "atWord": 10,
+     "text": "201 Created",
+     "detail": "method, headers and body"
+    }
+   ],
+   "stage": [
+    {
+     "label": "-X POST",
+     "atWord": 5,
+     "sub": "the method",
+     "text": "set",
+     "color": "green"
+    },
+    {
+     "label": "-H",
+     "atWord": 7,
+     "sub": "a header",
+     "text": "set",
+     "color": "green"
+    },
+    {
+     "label": "-d",
+     "atWord": 12,
+     "sub": "the body",
+     "text": "set",
+     "color": "green"
+    },
+    {
+     "label": "201 Created",
+     "atWord": 14,
+     "sub": "the response",
+     "color": "green"
+    }
+   ],
+   "verdict": "-i shows the headers too",
+   "verdictSub": "the fastest way to see what a server says",
+   "verdictAtWord": 17
+  }
+ },
+ {
+  "cmd": "tar",
+  "type": "CMD_TAR",
+  "name": "CmdTar",
+  "dataKey": "cmdTar",
+  "kind": "flow",
+  "color": "purple",
+  "stageTitle": "two jobs, not one",
+  "blurb": "files gathered into a single stream, and then that stream compressed.",
+  "example": {
+   "headline": "czvf is [four instructions]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-czvf",
+   "steps": [
+    {
+     "label": "tar -czvf logs.tar.gz /var/log",
+     "atWord": 2,
+     "detail": "create, gzip, verbose, file"
+    }
+   ],
+   "stage": [
+    {
+     "label": "c",
+     "atWord": 4,
+     "sub": "create an archive",
+     "text": "gather",
+     "color": "green"
+    },
+    {
+     "label": "z",
+     "atWord": 6,
+     "sub": "compress it with gzip",
+     "text": "shrink",
+     "color": "green"
+    },
+    {
+     "label": "v",
+     "atWord": 8,
+     "sub": "print each name",
+     "text": "verbose"
+    },
+    {
+     "label": "f logs.tar.gz",
+     "atWord": 10,
+     "sub": "name the output",
+     "text": "file",
+     "color": "green"
+    }
+   ],
+   "verdict": "x replaces c to extract",
+   "verdictSub": "the other three letters stay the same",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "gzip",
+  "type": "CMD_GZIP",
+  "name": "CmdGzip",
+  "dataKey": "cmdGzip",
+  "kind": "meters",
+  "color": "purple",
+  "stageTitle": "fast, and in place",
+  "blurb": "a file shrinking, and the surprise that the original is replaced.",
+  "example": {
+   "headline": "gzip [replaces] the original",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "highlight": "-k",
+   "steps": [
+    {
+     "label": "gzip api.log",
+     "atWord": 2,
+     "detail": "api.log is gone, api.log.gz remains"
+    },
+    {
+     "label": "gzip -k api.log",
+     "atWord": 10,
+     "detail": "-k keeps a copy"
+    }
+   ],
+   "stage": [
+    {
+     "label": "before",
+     "atWord": 4,
+     "sub": "api.log",
+     "text": "41 MB",
+     "value": 100
+    },
+    {
+     "label": "after",
+     "atWord": 6,
+     "sub": "api.log.gz",
+     "text": "6 MB",
+     "color": "green",
+     "value": 15
+    }
+   ],
+   "verdict": "Fast, and everywhere",
+   "verdictSub": "the default choice unless size is critical",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "bzip2",
+  "type": "CMD_BZIP2",
+  "name": "CmdBzip2",
+  "dataKey": "cmdBzip2",
+  "kind": "meters",
+  "color": "purple",
+  "stageTitle": "smaller, and slower",
+  "blurb": "the same file squeezed harder at the cost of time.",
+  "example": {
+   "headline": "bzip2 trades [time] for size",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "/var/log",
+   "steps": [
+    {
+     "label": "bzip2 api.log",
+     "atWord": 2,
+     "detail": "noticeably slower"
+    }
+   ],
+   "stage": [
+    {
+     "label": "gzip",
+     "atWord": 4,
+     "sub": "1.2 seconds",
+     "text": "6.0 MB",
+     "color": "green",
+     "value": 40
+    },
+    {
+     "label": "bzip2",
+     "atWord": 6,
+     "sub": "8.4 seconds",
+     "text": "4.4 MB",
+     "color": "orange",
+     "value": 29
+    }
+   ],
+   "verdict": "Worth it for archives, not logs",
+   "verdictSub": "you write once and read almost never",
+   "verdictAtWord": 9
+  }
+ },
+ {
+  "cmd": "zip",
+  "type": "CMD_ZIP",
+  "name": "CmdZip",
+  "dataKey": "cmdZip",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "the portable one",
+  "blurb": "an archive carrying its own directory, openable on any machine.",
+  "example": {
+   "headline": "zip is the [portable] one",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-r",
+   "steps": [
+    {
+     "label": "zip -r report.zip report/",
+     "atWord": 2,
+     "text": "adding: report/ (deflated 68%)",
+     "detail": "one step, not two"
+    }
+   ],
+   "stage": [
+    {
+     "label": "tar.gz",
+     "atWord": 4,
+     "sub": "needs tar to open",
+     "text": "Linux",
+     "color": "orange"
+    },
+    {
+     "label": "zip",
+     "atWord": 6,
+     "sub": "opens by double-click",
+     "text": "everywhere",
+     "color": "green"
+    },
+    {
+     "label": "its own index",
+     "atWord": 8,
+     "sub": "extract one file fast",
+     "text": "random access",
+     "color": "green"
+    }
+   ],
+   "verdict": "Send zip to people, tar.gz to servers",
+   "verdictSub": "tar cannot extract one file without scanning",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "cron",
+  "type": "CMD_CRON",
+  "name": "CmdCron",
+  "dataKey": "cmdCron",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "five fields, in order",
+  "blurb": "the schedule columns decoded one at a time against a real clock.",
+  "example": {
+   "headline": "cron is [five fields]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "30 2 * * 1 /opt/backup.sh",
+     "atWord": 2,
+     "detail": "every Monday at 02:30"
+    }
+   ],
+   "stage": [
+    {
+     "label": "30",
+     "atWord": 4,
+     "sub": "minute",
+     "text": "30",
+     "color": "green"
+    },
+    {
+     "label": "2",
+     "atWord": 6,
+     "sub": "hour",
+     "text": "02",
+     "color": "green"
+    },
+    {
+     "label": "*",
+     "atWord": 8,
+     "sub": "day of month",
+     "text": "any"
+    },
+    {
+     "label": "*",
+     "atWord": 10,
+     "sub": "month",
+     "text": "any"
+    },
+    {
+     "label": "1",
+     "atWord": 12,
+     "sub": "day of week",
+     "text": "Monday",
+     "color": "green"
+    }
+   ],
+   "verdict": "A star means every one of them",
+   "verdictSub": "five stars is every single minute",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "crontab",
+  "type": "CMD_CRONTAB",
+  "name": "CmdCrontab",
+  "dataKey": "cmdCrontab",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "your table, installed",
+  "blurb": "the per-user table opened, edited and installed as one operation.",
+  "example": {
+   "headline": "crontab -e, never [edit the file]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-e",
+   "steps": [
+    {
+     "label": "crontab -e",
+     "atWord": 2,
+     "detail": "opens your table in an editor"
+    },
+    {
+     "label": "crontab -l",
+     "atWord": 9,
+     "text": "30 2 * * 1 /opt/backup.sh",
+     "detail": "list what is installed"
+    }
+   ],
+   "stage": [
+    {
+     "label": "crontab -e",
+     "atWord": 4,
+     "sub": "validates before installing",
+     "text": "safe",
+     "color": "green"
+    },
+    {
+     "label": "editing the file",
+     "atWord": 6,
+     "sub": "no validation at all",
+     "text": "risky",
+     "color": "red"
+    },
+    {
+     "label": "crontab -l",
+     "atWord": 11,
+     "sub": "what is actually loaded",
+     "text": "truth",
+     "color": "green"
+    }
+   ],
+   "verdict": "A bad line silently skips the job",
+   "verdictSub": "crontab -e catches it, the file does not",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "bashscript",
+  "type": "CMD_BASHSCRIPT",
+  "name": "CmdBashscript",
+  "dataKey": "cmdBashscript",
+  "kind": "flow",
+  "color": "green",
+  "stageTitle": "a file becoming a program",
+  "blurb": "the interpreter line, the execute bit, and the path you invoke it by.",
+  "example": {
+   "headline": "Three lines and a [permission bit]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "+x",
+   "steps": [
+    {
+     "label": "./backup.sh",
+     "atWord": 2,
+     "text": "Permission denied",
+     "detail": "not executable yet"
+    },
+    {
+     "label": "chmod +x backup.sh",
+     "atWord": 8,
+     "detail": "now it can run"
+    },
+    {
+     "label": "./backup.sh",
+     "atWord": 13,
+     "text": "backup complete",
+     "detail": "./ because . is not in PATH"
+    }
+   ],
+   "stage": [
+    {
+     "label": "#!/usr/bin/env bash",
+     "atWord": 4,
+     "sub": "which interpreter",
+     "text": "shebang",
+     "color": "green"
+    },
+    {
+     "label": "chmod +x",
+     "atWord": 10,
+     "sub": "the execute bit",
+     "text": "set",
+     "color": "green"
+    },
+    {
+     "label": "./backup.sh",
+     "atWord": 15,
+     "sub": "the leading ./ matters",
+     "text": "runs",
+     "color": "green"
+    }
+   ],
+   "verdict": "The current folder is not in PATH",
+   "verdictSub": "deliberately \u2014 it is a security choice",
+   "verdictAtWord": 18
+  }
+ },
+ {
+  "cmd": "alias",
+  "type": "CMD_ALIAS",
+  "name": "CmdAlias",
+  "dataKey": "cmdAlias",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "a short name that sticks",
+  "blurb": "a long command bound to a short one, and the file that makes it survive.",
+  "example": {
+   "headline": "An alias dies unless you [save it]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "alias ll='ls -lah'",
+     "atWord": 2,
+     "detail": "works right now"
+    },
+    {
+     "label": "echo \"alias ll='ls -lah'\" >> ~/.bashrc",
+     "atWord": 10,
+     "detail": "and after a reboot"
+    }
+   ],
+   "stage": [
+    {
+     "label": "typed at the prompt",
+     "atWord": 4,
+     "sub": "this session only",
+     "text": "temporary",
+     "color": "orange"
+    },
+    {
+     "label": "in ~/.bashrc",
+     "atWord": 12,
+     "sub": "every new shell",
+     "text": "permanent",
+     "color": "green"
+    }
+   ],
+   "verdict": "Scripts do not see your aliases",
+   "verdictSub": "they run a non-interactive shell",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "env",
+  "type": "CMD_ENV",
+  "name": "CmdEnv",
+  "dataKey": "cmdEnv",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "what the command inherits",
+  "blurb": "the variables a process is handed, and one changed for a single run.",
+  "example": {
+   "headline": "env changes it for [one command]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "env",
+     "atWord": 2,
+     "text": "PATH=/usr/bin  HOME=/home/santhu",
+     "detail": "everything inherited"
+    },
+    {
+     "label": "env DEBUG=1 ./app",
+     "atWord": 9,
+     "detail": "just for this run"
+    }
+   ],
+   "stage": [
+    {
+     "label": "PATH",
+     "atWord": 4,
+     "sub": "where commands are found",
+     "text": "inherited"
+    },
+    {
+     "label": "HOME",
+     "atWord": 6,
+     "sub": "your home directory",
+     "text": "inherited"
+    },
+    {
+     "label": "DEBUG=1",
+     "atWord": 11,
+     "sub": "only inside this process",
+     "text": "temporary",
+     "color": "green"
+    }
+   ],
+   "verdict": "Nothing else on the box sees it",
+   "verdictSub": "the next command has no DEBUG at all",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "history",
+  "type": "CMD_HISTORY",
+  "name": "CmdHistory",
+  "dataKey": "cmdHistory",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "what you already typed",
+  "blurb": "the numbered command history and the two ways to run something again.",
+  "example": {
+   "headline": "history plus [Ctrl-R]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "history | tail -3",
+     "atWord": 2,
+     "text": "9410  rsync -av ./src/ prod:/srv/",
+     "detail": "numbered"
+    },
+    {
+     "label": "!9410",
+     "atWord": 9,
+     "detail": "runs 9410 again"
+    },
+    {
+     "label": "!!",
+     "atWord": 13,
+     "detail": "runs the last one"
+    }
+   ],
+   "stage": [
+    {
+     "label": "!9410",
+     "atWord": 5,
+     "sub": "by number",
+     "text": "reruns",
+     "color": "green"
+    },
+    {
+     "label": "!!",
+     "atWord": 11,
+     "sub": "the previous command",
+     "text": "reruns",
+     "color": "green"
+    },
+    {
+     "label": "Ctrl-R",
+     "atWord": 15,
+     "sub": "search backwards",
+     "text": "interactive",
+     "color": "green"
+    }
+   ],
+   "verdict": "sudo !! is the one you will use",
+   "verdictSub": "rerun the last command with privilege",
+   "verdictAtWord": 18
+  }
+ },
+ {
+  "cmd": "screen",
+  "type": "CMD_SCREEN",
+  "name": "CmdScreen",
+  "dataKey": "cmdScreen",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "the session outlives you",
+  "blurb": "a session that keeps running when the connection drops, waiting to be reattached.",
+  "example": {
+   "headline": "screen survives your [dropped wifi]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-r",
+   "steps": [
+    {
+     "label": "screen -S backup",
+     "atWord": 2,
+     "detail": "start a named session"
+    },
+    {
+     "label": "screen -r backup",
+     "atWord": 11,
+     "detail": "reattach after reconnecting"
+    }
+   ],
+   "stage": [
+    {
+     "label": "job starts",
+     "atWord": 4,
+     "sub": "inside the session",
+     "text": "running",
+     "color": "green"
+    },
+    {
+     "label": "connection drops",
+     "atWord": 6,
+     "sub": "session keeps going",
+     "text": "alive",
+     "color": "green"
+    },
+    {
+     "label": "screen -r",
+     "atWord": 13,
+     "sub": "you are back",
+     "text": "reattached",
+     "color": "green"
+    }
+   ],
+   "verdict": "Ctrl-A then d to detach",
+   "verdictSub": "closing the window would have been fine too",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "tmux",
+  "type": "CMD_TMUX",
+  "name": "CmdTmux",
+  "dataKey": "cmdTmux",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "panes inside the session",
+  "blurb": "one terminal split into panes and windows, all inside a surviving session.",
+  "example": {
+   "headline": "tmux adds [panes] to the same idea",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "attach",
+   "steps": [
+    {
+     "label": "tmux new -s work",
+     "atWord": 2,
+     "detail": "a named session"
+    },
+    {
+     "label": "tmux attach -t work",
+     "atWord": 10,
+     "detail": "come back to it"
+    }
+   ],
+   "stage": [
+    {
+     "label": "pane 1",
+     "atWord": 4,
+     "sub": "the editor",
+     "text": "split",
+     "color": "green"
+    },
+    {
+     "label": "pane 2",
+     "atWord": 6,
+     "sub": "the logs",
+     "text": "split",
+     "color": "green"
+    },
+    {
+     "label": "the session",
+     "atWord": 12,
+     "sub": "survives disconnect",
+     "text": "alive",
+     "color": "green"
+    }
+   ],
+   "verdict": "Ctrl-B is the prefix for everything",
+   "verdictSub": "screen uses Ctrl-A instead",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "systemctl",
+  "type": "CMD_SYSTEMCTL",
+  "name": "CmdSystemctl",
+  "dataKey": "cmdSystemctl",
+  "kind": "flow",
+  "color": "purple",
+  "stageTitle": "start, and enable",
+  "blurb": "two different transitions people constantly mistake for one.",
+  "example": {
+   "headline": "start is now. [enable] is after reboot",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "highlight": "enable",
+   "steps": [
+    {
+     "label": "systemctl start nginx",
+     "atWord": 2,
+     "detail": "running right now"
+    },
+    {
+     "label": "systemctl enable nginx",
+     "atWord": 8,
+     "text": "Created symlink...",
+     "detail": "and after a reboot"
+    },
+    {
+     "label": "systemctl status nginx",
+     "atWord": 15,
+     "text": "active (running)",
+     "detail": "check both"
+    }
+   ],
+   "stage": [
+    {
+     "label": "stopped",
+     "atWord": 4,
+     "sub": "nothing running",
+     "text": "before",
+     "color": "red"
+    },
+    {
+     "label": "start",
+     "atWord": 6,
+     "sub": "running now",
+     "text": "active",
+     "color": "green"
+    },
+    {
+     "label": "enable",
+     "atWord": 10,
+     "sub": "comes back on boot",
+     "text": "persistent",
+     "color": "green"
+    },
+    {
+     "label": "reboot",
+     "atWord": 17,
+     "sub": "only enabled survives",
+     "text": "proof",
+     "color": "orange"
+    }
+   ],
+   "verdict": "You almost always want both",
+   "verdictSub": "enable --now does the pair in one go",
+   "verdictAtWord": 20
+  }
+ },
+ {
+  "cmd": "journalctl",
+  "type": "CMD_JOURNALCTL",
+  "name": "CmdJournalctl",
+  "dataKey": "cmdJournalctl",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "the log, narrowed",
+  "blurb": "four filters composing until only the lines you need are left.",
+  "example": {
+   "headline": "journalctl is [filters], not scrolling",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "highlight": "-u",
+   "steps": [
+    {
+     "label": "journalctl -u nginx",
+     "atWord": 2,
+     "detail": "just that service"
+    },
+    {
+     "label": "journalctl -u nginx -b -p err",
+     "atWord": 9,
+     "detail": "this boot, errors only"
+    },
+    {
+     "label": "journalctl -u nginx -f",
+     "atWord": 16,
+     "detail": "and follow it live"
+    }
+   ],
+   "stage": [
+    {
+     "label": "-u nginx",
+     "atWord": 5,
+     "sub": "one service",
+     "text": "filter",
+     "color": "green"
+    },
+    {
+     "label": "-b",
+     "atWord": 11,
+     "sub": "since this boot",
+     "text": "filter",
+     "color": "green"
+    },
+    {
+     "label": "-p err",
+     "atWord": 13,
+     "sub": "errors and worse",
+     "text": "filter",
+     "color": "green"
+    },
+    {
+     "label": "-f",
+     "atWord": 18,
+     "sub": "follow live",
+     "text": "tail",
+     "color": "green"
+    }
+   ],
+   "verdict": "Compose them, do not scroll",
+   "verdictSub": "a journal is a database, not a file",
+   "verdictAtWord": 21
+  }
+ },
+ {
+  "cmd": "dmesg",
+  "type": "CMD_DMESG",
+  "name": "CmdDmesg",
+  "dataKey": "cmdDmesg",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "the kernel's own buffer",
+  "blurb": "a fixed-size ring where the oldest messages fall off the end.",
+  "example": {
+   "headline": "dmesg is a [ring buffer]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "highlight": "-T",
+   "steps": [
+    {
+     "label": "dmesg -T | tail",
+     "atWord": 2,
+     "text": "[Aug 17 09:14] usb 1-2: new device",
+     "detail": "-T makes the timestamps readable"
+    }
+   ],
+   "stage": [
+    {
+     "label": "newest",
+     "atWord": 4,
+     "sub": "just arrived",
+     "text": "in",
+     "color": "green"
+    },
+    {
+     "label": "older",
+     "atWord": 6,
+     "sub": "still here",
+     "text": "kept"
+    },
+    {
+     "label": "oldest",
+     "atWord": 8,
+     "sub": "pushed off the end",
+     "text": "lost",
+     "color": "red"
+    }
+   ],
+   "verdict": "Hardware trouble lands here first",
+   "verdictSub": "before any log file gets written",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "man",
+  "type": "CMD_MAN",
+  "name": "CmdMan",
+  "dataKey": "cmdMan",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "the numbered sections",
+  "blurb": "the same name living in two sections, meaning two different things.",
+  "example": {
+   "headline": "man passwd and man [5] passwd differ",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "5",
+   "steps": [
+    {
+     "label": "man passwd",
+     "atWord": 2,
+     "text": "PASSWD(1)",
+     "detail": "the command"
+    },
+    {
+     "label": "man 5 passwd",
+     "atWord": 9,
+     "text": "PASSWD(5)",
+     "detail": "the file format"
+    }
+   ],
+   "stage": [
+    {
+     "label": "section 1",
+     "atWord": 4,
+     "sub": "user commands",
+     "text": "the program",
+     "color": "green"
+    },
+    {
+     "label": "section 5",
+     "atWord": 11,
+     "sub": "file formats",
+     "text": "/etc/passwd",
+     "color": "green"
+    },
+    {
+     "label": "section 8",
+     "atWord": 13,
+     "sub": "admin commands",
+     "text": "root's tools"
+    }
+   ],
+   "verdict": "The number in brackets is the section",
+   "verdictSub": "man -k shows which sections exist",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "apropos",
+  "type": "CMD_APROPOS",
+  "name": "CmdApropos",
+  "dataKey": "cmdApropos",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "search by description",
+  "blurb": "the manual searched by what a command does rather than what it is called.",
+  "example": {
+   "headline": "apropos searches [descriptions]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "apropos \"disk usage\"",
+     "atWord": 2,
+     "text": "du (1) - estimate file space usage",
+     "detail": "found by meaning"
+    }
+   ],
+   "stage": [
+    {
+     "label": "you know",
+     "atWord": 4,
+     "sub": "the job",
+     "text": "disk usage"
+    },
+    {
+     "label": "you do not know",
+     "atWord": 6,
+     "sub": "the name",
+     "text": "?",
+     "color": "orange"
+    },
+    {
+     "label": "apropos finds",
+     "atWord": 8,
+     "sub": "du, df, ncdu",
+     "text": "answer",
+     "color": "green"
+    }
+   ],
+   "verdict": "man -k is the same command",
+   "verdictSub": "exactly the same tool, shorter to type",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "tldr",
+  "type": "CMD_TLDR",
+  "name": "CmdTldr",
+  "dataKey": "cmdTldr",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "examples, not prose",
+  "blurb": "the practical examples the manual buries under exhaustive detail.",
+  "example": {
+   "headline": "tldr gives you the [normal] usage",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "tldr tar",
+     "atWord": 2,
+     "text": "tar -czvf target.tar.gz file",
+     "detail": "five examples, that is all"
+    }
+   ],
+   "stage": [
+    {
+     "label": "man tar",
+     "atWord": 4,
+     "sub": "1,241 lines",
+     "text": "complete",
+     "color": "orange"
+    },
+    {
+     "label": "tldr tar",
+     "atWord": 6,
+     "sub": "8 lines",
+     "text": "practical",
+     "color": "green"
+    },
+    {
+     "label": "what you wanted",
+     "atWord": 8,
+     "sub": "the common case",
+     "text": "found",
+     "color": "green"
+    }
+   ],
+   "verdict": "man for truth, tldr for speed",
+   "verdictSub": "you need both, at different moments",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "cheat",
+  "type": "CMD_CHEAT",
+  "name": "CmdCheat",
+  "dataKey": "cmdCheat",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "the notes you wrote",
+  "blurb": "your own sheets, kept for the things you personally keep forgetting.",
+  "example": {
+   "headline": "cheat stores [your own] notes",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "cheat -e rsync",
+     "atWord": 2,
+     "detail": "edit your own sheet"
+    },
+    {
+     "label": "cheat rsync",
+     "atWord": 9,
+     "text": "rsync -av --dry-run src/ host:/dst/",
+     "detail": "recall it later"
+    }
+   ],
+   "stage": [
+    {
+     "label": "tldr",
+     "atWord": 4,
+     "sub": "community examples",
+     "text": "shared"
+    },
+    {
+     "label": "cheat",
+     "atWord": 11,
+     "sub": "your own notes",
+     "text": "personal",
+     "color": "green"
+    },
+    {
+     "label": "the flag you forget",
+     "atWord": 13,
+     "sub": "written down once",
+     "text": "solved",
+     "color": "green"
+    }
+   ],
+   "verdict": "Write it down the second time",
+   "verdictSub": "the third time will come",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "lspci",
+  "type": "CMD_LSPCI",
+  "name": "CmdLspci",
+  "dataKey": "cmdLspci",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "what is on the bus",
+  "blurb": "the hardware physically present, with the driver bound to each device.",
+  "example": {
+   "headline": "lspci shows the [driver] too",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-k",
+   "steps": [
+    {
+     "label": "lspci -k",
+     "atWord": 2,
+     "text": "00:02.0 VGA  Kernel driver in use: i915",
+     "detail": "-k adds the driver line"
+    }
+   ],
+   "stage": [
+    {
+     "label": "device present",
+     "atWord": 4,
+     "sub": "the card exists",
+     "text": "yes",
+     "color": "green"
+    },
+    {
+     "label": "driver in use",
+     "atWord": 6,
+     "sub": "i915",
+     "text": "bound",
+     "color": "green"
+    },
+    {
+     "label": "no driver line",
+     "atWord": 8,
+     "sub": "present but unusable",
+     "text": "the bug",
+     "color": "red"
+    }
+   ],
+   "verdict": "Present is not the same as working",
+   "verdictSub": "no driver means nothing will use it",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "lsusb",
+  "type": "CMD_LSUSB",
+  "name": "CmdLsusb",
+  "dataKey": "cmdLsusb",
+  "kind": "tree",
+  "color": "blue",
+  "stageTitle": "the USB tree",
+  "blurb": "devices nested by bus and port, exactly as they are physically plugged.",
+  "example": {
+   "headline": "lsusb shows the [tree]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-t",
+   "steps": [
+    {
+     "label": "lsusb -t",
+     "atWord": 2,
+     "detail": "-t draws the hierarchy"
+    }
+   ],
+   "stage": [
+    {
+     "label": "Bus 001",
+     "atWord": 4,
+     "sub": "the root hub",
+     "value": 0
+    },
+    {
+     "label": "Port 2: hub",
+     "atWord": 6,
+     "sub": "an external hub",
+     "value": 1
+    },
+    {
+     "label": "Port 2.1: keyboard",
+     "atWord": 8,
+     "sub": "through the hub",
+     "color": "green",
+     "value": 2
+    },
+    {
+     "label": "Port 2.2: drive",
+     "atWord": 10,
+     "sub": "sharing the bandwidth",
+     "color": "orange",
+     "value": 2
+    }
+   ],
+   "verdict": "A shared hub shares bandwidth",
+   "verdictSub": "which is why the drive slowed down",
+   "verdictAtWord": 13
+  }
+ }
+]

@@ -1,0 +1,1884 @@
+[
+ {
+  "id": "s01",
+  "type": "HOOK",
+  "background": "zoneA",
+  "narration": "Your server is down. The fix is one command. You just can't remember which one.",
+  "data": {
+   "headline": "THE FIX IS ONE COMMAND",
+   "subtext": "you just can't remember which",
+   "heroAsset": "si:linux",
+   "headlineAtWord": 1,
+   "heroAtWord": 6
+  },
+  "anchors": []
+ },
+ {
+  "id": "s02",
+  "type": "TITLE_CARD",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "That's the gap this video closes. Every command a Linux sysadmin actually types, all hundred and nine, each one running on screen. Welcome to THE NBX STUDIO.",
+  "data": {
+   "title": "109 LINUX COMMANDS",
+   "subtitle": "every one, running, explained"
+  },
+  "anchors": []
+ },
+ {
+  "id": "s03",
+  "type": "TOOL_BENCH",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "Here's how we'll keep a hundred and nine of anything straight. Your terminal is a |workbench, every command is a tool, and the tools live in ten drawers.",
+  "data": {
+   "toolBench": {
+    "headline": "One bench, [ten drawers]",
+    "color": "orange",
+    "atWord": 6,
+    "caption": "Learn the drawers, not the list.",
+    "drawers": [
+     {
+      "label": "files",
+      "value": 10
+     },
+     {
+      "label": "text",
+      "value": 13
+     },
+     {
+      "label": "permissions",
+      "value": 12
+     },
+     {
+      "label": "processes",
+      "value": 15
+     },
+     {
+      "label": "watching",
+      "value": 8
+     },
+     {
+      "label": "disks",
+      "value": 11
+     },
+     {
+      "label": "network",
+      "value": 10
+     },
+     {
+      "label": "remote",
+      "value": 10
+     },
+     {
+      "label": "jobs",
+      "value": 15
+     },
+     {
+      "label": "help",
+      "value": 6
+     }
+    ]
+   }
+  },
+  "anchors": [
+   "toolBench.atWord"
+  ]
+ },
+ {
+  "id": "s04",
+  "type": "REVEAL",
+  "transition": "iris",
+  "background": "zoneC",
+  "narration": "One warning first. Somewhere in these hundred and nine sits a command that wipes an |entire disk in four characters. No prompt, nothing in a bin. So which one is it? We'll get there.",
+  "data": {
+   "reveal": {
+    "statement": "One of them wipes a disk in four characters.",
+    "sub": "no prompt \u00b7 no undo",
+    "atWord": 9
+   }
+  },
+  "anchors": [
+   "reveal.atWord"
+  ]
+ },
+ {
+  "id": "s05",
+  "type": "LIST_BUILD",
+  "transition": "wipe",
+  "background": "zoneB",
+  "narration": "We'll work through the drawers in order. |Files and the text inside them. Then |who's allowed to touch what. Then the |processes running right now, and how you watch a machine properly. Then |disks and the network. And finally the |jobs and sessions that outlive you closing the laptop.",
+  "data": {
+   "heading": "Ten drawers, in order",
+   "items": [
+    {
+     "icon": "lucide:folder",
+     "text": "Files and text",
+     "detail": "drawers 1 and 2"
+    },
+    {
+     "icon": "lucide:shield",
+     "text": "Users and permissions",
+     "detail": "drawer 3"
+    },
+    {
+     "icon": "lucide:activity",
+     "text": "Processes and watching",
+     "detail": "drawers 4 and 5"
+    },
+    {
+     "icon": "lucide:hard-drive",
+     "text": "Disks and network",
+     "detail": "drawers 6 to 8"
+    },
+    {
+     "icon": "lucide:clock",
+     "text": "Jobs and sessions",
+     "detail": "drawers 9 and 10"
+    }
+   ]
+  },
+  "anchors": [
+   "items.0.atWord",
+   "items.1.atWord",
+   "items.2.atWord",
+   "items.3.atWord",
+   "items.4.atWord"
+  ]
+ },
+ {
+  "id": "s06",
+  "type": "CHAPTER",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Drawer one. Moving around, and handling files.",
+  "data": {
+   "chapter": {
+    "number": "01",
+    "title": "Moving around",
+    "subtitle": "and handling files",
+    "color": "blue"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s07",
+  "type": "CMD_CD",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "Your project lives a few folders deep and you want to work inside it. The command is |C D, short for change directory. One way in is an ^absolute path, which begins at the root slash, and the shell walks down it a level at a time: the ^root of the disk, into ^home, where every user's folder lives, into ^santhu, your own account, and finally into ^api. The other way is a ^relative path, which begins wherever you're standing. To reach the logs folder beside you, type |C D dot dot slash logs, where two dots mean ^up one level, and you drop into ^logs. ~None of those folders moved. Only where you're standing changed. So a path is just directions to a place which was already there, and cd walks them for you.",
+  "headline": "cd moves [you], not the files"
+ },
+ {
+  "id": "s08",
+  "type": "CMD_PWD",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Here's something which happens more often than people admit. You've been jumping between folders and you genuinely can't remember which one you're sitting in. The command which answers is |P W D, which stands for print working directory. P W D replies with the whole path, read top down: the ^root of the disk, then ^home, which holds every user's folder, then ^santhu, your own account, and finally ^api, where you're standing. Joined up, that's ^the full path. And it's ^the same answer no matter where you started from, because P W D will never hand you ^a relative path, and never ^a shortcut either. ~P W D answers from the root every single time. When a script needs to know where it is, pwd is the answer it can rely on.",
+  "headline": "pwd prints [where you stand]"
+ },
+ {
+  "id": "s09",
+  "type": "CMD_LS",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "You want to see what's inside a folder. |L S, short for list, gives you ^the names and nothing else, which is fine until you need detail. Add the dash L flag for long and you get |L S dash L, where every file becomes a full row. That row carries the ^permissions, saying who may read, write and run it, the ^owner, the account it belongs to, the ^size in bytes, and the ^date it last changed. ^Those raw byte counts are hard to read, so add an H for human and you get |L S dash L H, which turns ^four thousand and ninety six into a plain four kilobytes. ~Same directory each time. You're just asking for more of the truth. Reach for ls dash L H by default, because the extra columns cost you nothing.",
+  "headline": "ls shows names. [ls -l] shows the truth"
+ },
+ {
+  "id": "s10",
+  "type": "CMD_MKDIR",
+  "transition": "wipe",
+  "background": "zoneB",
+  "narration": "You need a new folder, so you reach for |make dir, short for make directory. Inside ^projects, which already exists, it drops ^api into place without fuss. Now try asking for ^a path three levels deep in a single command, and it refuses outright. Make dir only ever creates the last folder in a path, and here ^the middle level doesn't exist, so make dir has nowhere to put the bottom one. The fix is the dash P flag, short for parents, so you type |make dir dash P and make dir ^builds every level that's missing: ^src appears inside api, and then ^handlers appears inside src. ~Without dash P the parent has to exist first. Type mkdir dash P out of habit and you'll never meet that error again.",
+  "headline": "mkdir -p builds the [whole chain]"
+ },
+ {
+  "id": "s11",
+  "type": "CMD_TOUCH",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Touch looks like a command which does nothing at all, which is exactly why people skip straight past it. Start with ^a name that doesn't exist yet. Run |touch on it and Linux creates ^an empty file for you, zero bytes, no contents whatsoever. So far, so unremarkable. Now |run touch on that ^same file a second time. ^The contents don't change, because there are none, but two clocks attached to that file do move: the ^modify time, which records when the contents last changed, and the ^access time, which records when it was last read. And ^build tools watch those clocks. ~The content itself is never touched. Touch exists to move a clock forward, and which turns out to be worth a whole command.",
+  "headline": "touch sets [timestamps], not content"
+ },
+ {
+  "id": "s12",
+  "type": "CMD_CP",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "|C P, which is short for copy, makes a genuine second copy of a file. So ^the original stays exactly where it was, and ^a second file comes into existence holding its own bytes. If what you want is a whole folder and everything inside it, add ^the dash R flag, short for recursive, and |C P dash R walks the directory so that ^every file underneath is copied as well. Here's the part which matters. You now have ^two independent files that merely happen to hold the same contents. ^Edit the original and ^the copy doesn't follow, because nothing connects them. ~That seems obvious until the afternoon you edit the backup by mistake. Copy when you want two things. Move when you want one thing somewhere else.",
+  "headline": "cp makes a [second file]"
+ },
+ {
+  "id": "s13",
+  "type": "CMD_MV",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "|M V is short for move, and it's also how you rename things, because renaming really is just moving a file to a new name in the same folder. The trick is to watch the file rather than the name on it. You start with ^notes dot M D, and underneath, the disk knows it by ^a number called an inode. Rename it and you get ^a new name sitting on the very same inode. Now |move it into another folder and ^the path changes while that inode stays exactly as it was. ^No second copy was created, and ^not one byte was rewritten. The one exception is ^moving between two disks, and ^then the bytes really do travel. ~Inside one filesystem, nothing is copied. That's also why moving a file to another disk takes time when renaming it never does.",
+  "headline": "mv renames and moves \u2014 [same command]"
+ },
+ {
+  "id": "s14",
+  "type": "CMD_RM",
+  "transition": "iris",
+  "background": "zoneC",
+  "narration": "|R M is short for remove, and the first thing to understand is that ^Linux has no recycle bin waiting to catch your mistake. Point plain R M at a folder and R M ^refuses, because on its own it only deletes files. Add dash I for interactive and |R M dash I ^asks you to confirm ^every single file before it goes, which is slow but survivable. The combination people actually type, though, is dash R F, meaning recursive and force. Run |R M dash R F and ^it recurses into every folder underneath while force ^suppresses every question it'd have asked. ^Four hundred and twelve files, gone, without one confirmation. ~There's no undo here, and no command that brings them back. Type the path out in full before you press return, every single time.",
+  "headline": "Every guard on [rm] is opt-in"
+ },
+ {
+  "id": "s15",
+  "type": "CMD_LN",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "|L N, short for link, gives one file a second name. To see why which matters, look at ^the data itself, sitting in one place on the disk. A plain L N creates ^a hard link, a second name pointing straight at that data, and the ^link count, which counts the names attached, goes up to two. Now add dash S for symbolic and |L N dash S makes something quite different: ^a link which points at the name rather than at the data. The difference stays invisible until you |delete ^the original name. ^The hard link carries on working perfectly, because the data was never tied to that first name. ^The symbolic one is now pointing at nothing. ~The data survives until the last name goes. Use a hard link for a second real name, and a symlink when you want a pointer.",
+  "headline": "A hard link is a [second name]"
+ },
+ {
+  "id": "s16",
+  "type": "CMD_CLEAR",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Your terminal has turned into an unreadable mess, so you run |clear. ^The screen was full of output, and above it sat ^the scrollback, everything that had already scrolled off the top. ^After clear the screen looks empty, which is genuinely useful. But look at ^the scrollback, because it's entirely intact. ^Scroll up and every line you thought you removed is still there. If you want it properly gone, |reset is the heavier tool, and ^after reset the scrollback goes as well. ~Clear is cosmetic and reset is not, which matters on a machine somebody else can scroll back through. On somebody else's machine, assume clear removed nothing at all.",
+  "headline": "clear hides. [reset] forgets"
+ },
+ {
+  "id": "s17",
+  "type": "QUIZ_CARD",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "Quick check. You delete the original file. |Which link still works? Have a think, and pause here if you want longer. |Ready? The hard link, because it points at the data.",
+  "data": {
+   "quiz": {
+    "question": "Delete the original \u2014 which link still works?",
+    "options": [
+     {
+      "text": "The symbolic link"
+     },
+     {
+      "text": "The hard link"
+     },
+     {
+      "text": "Both of them"
+     },
+     {
+      "text": "Neither"
+     }
+    ],
+    "answerIndex": 1,
+    "why": "A hard link points at the data, not at the name.",
+    "atWord": 2,
+    "revealAtWord": 20
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s18",
+  "type": "RECAP",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Drawer one is your hands. |Move with C D, look with L S. |Build with make dir and touch. |Duplicate with C P, rename with M V. |Delete with R M, because there's no undo.",
+  "data": {
+   "heading": "Drawer one, on the bench",
+   "points": [
+    {
+     "text": "cd and ls to move and look"
+    },
+    {
+     "text": "mkdir and touch to build"
+    },
+    {
+     "text": "cp and mv to duplicate"
+    },
+    {
+     "text": "rm deletes with no undo"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s19",
+  "type": "CHAPTER",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Drawer two. Reading text, and finding it, because most of the job is reading.",
+  "data": {
+   "chapter": {
+    "number": "02",
+    "title": "Reading text",
+    "subtitle": "and finding it",
+    "color": "green"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s20",
+  "type": "CMD_CAT",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "|Cat is short for concatenate, and its actual job is to print a file straight to your screen. Point it at ^a small config file, three lines long, and you get ^the whole thing at once, which is exactly right. Now take ^a log file with ten thousand lines in it and |run cat on that instead. Cat does ^exactly the same thing, because printing everything is the only behaviour it has. ^The output scrolls past far faster than you can read, ^there's no way to pause it, and ^no way to scroll back to the top. ~Cat has no brakes, and that's precisely what less was written for. Use cat for a config file you can see all of, and less for anything bigger.",
+  "headline": "cat prints [everything], instantly"
+ },
+ {
+  "id": "s21",
+  "type": "CMD_TAC",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "|Cat prints a file from the top down, so you get ^line one, then ^line two, then ^line three, oldest first. That's the wrong way round for a log, where the line you care about is nearly always the last one written. Somebody noticed, and named the fix by spelling cat backwards. That tool is |tac, and tac reads the file ^from the bottom upwards. So ^the crash at nine forty seven arrives first, and ^the startup message from nine o'clock comes last. ^And the file itself is untouched; only the output order changed. ~No flags, no pipe, no arguments. In most logs the line you want is the final one. Tac is a one-word change from cat, and on a log it saves you a scroll every time.",
+  "headline": "tac is cat, [backwards]"
+ },
+ {
+  "id": "s22",
+  "type": "CMD_MORE",
+  "transition": "wipe",
+  "background": "zoneB",
+  "narration": "Before less existed this was the tool everybody used, and it's still on every machine you'll ever log into. You point |more at ^a file far longer than your screen, and more hands you ^the first forty lines or so. ^Press the space bar and it moves you ^down to the next forty. That much is genuinely useful. But now try to go back to something you just read, and ^you simply cannot, because more only ever travels forwards. ^Not even one line back. And once you ^reach the bottom it quits on you. ^And which is why less replaced it. ~One direction, then it exits, which is the frustration less was built to fix. You'll still meet more on a stripped-down system, so it's worth knowing why it annoys you.",
+  "headline": "more only goes [forward]"
+ },
+ {
+  "id": "s23",
+  "type": "CMD_LESS",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "|Less does everything more did, and then fixes what more got wrong. You can ^scroll down a page at a time, and crucially you can ^scroll back up, which more could never manage. Then there's the part which genuinely surprises people. Open ^a ten gigabyte log with less and it appears on screen instantly, because ^it never loads the whole file into memory; it reads only the piece you're looking at. And when you know roughly what you're hunting for, |press slash to ^search inside the file and it'll ^jump straight to the match. ~Which is why file size stops mattering. Less is the reader you should reach for by default, whatever the size of the file.",
+  "headline": "less goes [both ways]"
+ },
+ {
+  "id": "s24",
+  "type": "CMD_TAIL",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "In a log of thousands of lines, the ones you want sit at the bottom. |Tail gives you exactly that: ^the last twenty lines, nothing above them. That alone saves a lot of scrolling, and most of the time it's all you need. But the flag which genuinely matters here's dash F, for follow. Run |tail dash F and ^the file is held open, so new lines appear as the service writes them. ^A request comes in live. ^Then another. And then ^the upstream timeout you were waiting for. ^Tail never exits on its own; ^control C is how you let it go. ~Tail is the command you leave running while you reproduce the bug. Two windows, tail dash F in one of them, and the bug tells you about itself.",
+  "headline": "tail -f watches it [happen]"
+ },
+ {
+  "id": "s25",
+  "type": "CMD_VI",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "|V I traps more beginners than any other command on this list, and the reason is modes. When it opens you're in ^command mode, which means ^the keys are instructions rather than letters. Press J and you move down; you don't type a J. Which is why typing your name appears to do nothing sensible. |Press I, ^which stands for insert, and ^those very same keys now produce text on the page. When you're done, ^press Escape and they turn straight back into commands. To save and leave, type a colon, then |W to ^write the file, then Q to ^quit the editor. ~Escape, colon, W, Q. Memorise that one sequence and V I stops being frightening. And if you ever land in vi by accident, that same sequence is how you get out.",
+  "headline": "vi has [two modes]"
+ },
+ {
+  "id": "s26",
+  "type": "CMD_DIFF",
+  "transition": "iris",
+  "background": "zoneC",
+  "narration": "You've ^two config files which are almost identical, and something in one of them has broken the service. Rather than read both and trust your eyes, run |diff, which walks ^both files line by line at the same moment. ^Everything that matches is dimmed away, and ^nothing else is mentioned at all. What's left is the pair which genuinely differs: ^the old listen line on port eighty, marked as removed, and ^the new one on four four three, marked as added. Two entire files reduced to ^two lines. ^Add dash U for the unified format. ~That's what every patch you've ever applied is written in. Before you edit any config on a live server, diff it against the one that worked.",
+  "headline": "diff shows [only the change]"
+ },
+ {
+  "id": "s27",
+  "type": "CMD_FIND",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "|Find does exactly what the name says, and find does it the hard way. ^Find walks the entire tree beneath wherever you point it, folder by folder, testing every file against your conditions. Ask it for anything ending in dot log and ^api dot log matches, while ^notes dot M D is rejected because it's not a log. Conditions stack, so add |dash M time minus two and you're now also asking for ^files changed in the last two days. ^Web dot log is two hours old and stays, but ^old dot log is ninety days old and drops out. ^There's no index behind this. ~Find is slow because find genuinely looks. When correctness matters more than speed, find is the tool which will not lie to you.",
+  "headline": "find [tests] every single file"
+ },
+ {
+  "id": "s28",
+  "type": "CMD_LOCATE",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "|Locate answers the same question as find, but in a fraction of a second, and the reason is worth knowing. Somewhere on your machine sits ^a database of filenames, rebuilt in the small hours. ^Locate never touches your disk at all; it only searches that database. So ^a file you made last week is in the index and comes back ^instantly, with no walking at all. But |ask it for ^a file you created at eight this morning and you get nothing, because ^the index hasn't been rebuilt since three. ^Running updatedb rebuilds it on demand. ~Locate can be fast and wrong at the same time, so use find when it has to be current. Reach for locate when you're guessing, and find when you need to be certain.",
+  "headline": "locate is fast, and can be [wrong]"
+ },
+ {
+  "id": "s29",
+  "type": "CMD_GREP",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "|Grep searches inside files and prints ^every line containing what you asked for, which makes it the single most used tool on this list. The name comes from an old editor command, global regular expression print. A few flags carry most of the weight. ^Dash I ignores case, so timeout and Timeout both match. ^Dash R searches whole directories rather than one file. |Dash C, for count, gives you ^just the number of matching lines instead of the lines themselves. And |dash V, for invert, ^returns everything that doesn't match. ^That last one hides the noise. ~Dash V is the flag people forget they have. Grep is the tool you'll type more than any other, so the flags repay learning properly.",
+  "headline": "grep finds the [matching lines]"
+ },
+ {
+  "id": "s30",
+  "type": "CMD_AWK",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Awk is named after the three people who wrote it, and awk exists to pull columns out of text. Take ^one line of output. |Awk ^splits it on whitespace automatically, without you writing a single line of parsing code, and numbers the pieces. ^Dollar one is the filesystem, ^dollar two is the total size, ^dollar three is the amount used. So asking for ^dollar three pulls that column out of every row at once. And because awk runs your snippet on each line in turn, you can |keep a running total and ^add the column up as it goes past. ~Which is why awk beats writing a parser for a one-off question. Any time you catch yourself about to write a script to read columns, try awk first.",
+  "headline": "awk splits a line into [fields]"
+ },
+ {
+  "id": "s31",
+  "type": "CMD_SED",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "|Sed is short for stream editor, and sed edits text as that text flows past it. ^A line goes in, ^the pattern you gave it matches somewhere inside, and ^the altered line comes out the other side. There's a catch that bites everybody once: by default it changes ^only the first match on each line. ^Add a G on the end, for global, and it changes every one. And here's the bigger catch. Everything you've just watched printed to the screen, but ^the file on disk was never modified at all. |Add dash I, for in place, and ^now it genuinely is edited. ~Without dash I, sed only ever prints. Run it without dash I once, read the output, then run it again with dash I.",
+  "headline": "sed edits the [stream]"
+ },
+ {
+  "id": "s32",
+  "type": "CMD_XARGS",
+  "transition": "wipe",
+  "background": "zoneC",
+  "narration": "Here's a pipeline which looks completely reasonable and quietly does nothing at all. |Find ^prints its filenames down the pipe, exactly as you'd expect. But ^R M doesn't read from a pipe. Xargs reads arguments, the words you type after the command. So the names arrive, nothing is listening, and ^not a single file is deleted, with no error to tell you. |Xargs is the adapter that fixes it. ^Xargs sits in the middle, reads the incoming names, and ^hands them to R M as arguments instead, so ^the delete finally runs. ~If your filenames contain spaces, use dash print zero with dash zero. Whenever a pipe seems to do nothing at all, xargs is usually the missing piece.",
+  "headline": "xargs turns input into [arguments]"
+ },
+ {
+  "id": "s33",
+  "type": "QUIZ_CARD",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "Quick one. You want every line which does |not contain the word error. Which grep flag? Have a think, and pause here if you need longer. |Ready? Dash V, because dash V inverts the match.",
+  "data": {
+   "quiz": {
+    "question": "Every line WITHOUT \"error\" \u2014 which flag?",
+    "options": [
+     {
+      "text": "-i"
+     },
+     {
+      "text": "-r"
+     },
+     {
+      "text": "-v"
+     },
+     {
+      "text": "-c"
+     }
+    ],
+    "answerIndex": 2,
+    "why": "-v inverts the match, printing what does not match.",
+    "atWord": 2,
+    "revealAtWord": 22
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s34",
+  "type": "RECAP",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "Drawer two is your eyes. |Cat and less read, tail follows. |Find walks the disk, locate guesses. |Grep, awk and sed search and rewrite. |Xargs joins them, which is why pipes work.",
+  "data": {
+   "heading": "Drawer two, on the bench",
+   "points": [
+    {
+     "text": "cat, less, tail to read"
+    },
+    {
+     "text": "find walks, locate guesses"
+    },
+    {
+     "text": "grep, awk, sed to search and edit"
+    },
+    {
+     "text": "xargs chains them"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s35",
+  "type": "CHAPTER",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Drawer three. Who you are, and what you're allowed to touch.",
+  "data": {
+   "chapter": {
+    "number": "03",
+    "title": "Who you are",
+    "subtitle": "and what you may touch",
+    "color": "orange"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s36",
+  "type": "CMD_CHMOD",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "|Change mod, spelled C H M O D, is short for change mode, and a file's mode is really just @nine switches. They come in ^three banks of three. The first bank is ^the owner, the account the file belongs to. The second is ^the group, meaning everybody in the file's group. The third is ^other, which is literally everyone else. Each bank has read worth four, write worth two, and execute worth one, so ^seven is four plus two plus one, all three switches on, while ^five is four plus one, read and execute with the write left off. If numbers don't suit you, |the letter form sets ^exactly the same nine switches. ~Seven is all three. Five drops the write. Read any permission string in threes and the number stops being something you memorise.",
+  "headline": "chmod flips [nine switches]"
+ },
+ {
+  "id": "s37",
+  "type": "CMD_CHOWN",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "|Change own, spelled C H O W N, is short for change owner, and change own hands a file to somebody else. ^This file belonged to santhu, and after running that one short command ^it belongs to the deploy account instead. Files carry a group as well as an owner, and very often you want to set the two of them together in one go. So |add a colon and a second name, and ^you set both at once, making ^the group W W W. Now look carefully at what didn't happen. ^The nine permission switches haven't moved a millimetre. ^Read, write and execute are set exactly as they were before. What changed is that ^the first bank now describes a different person. ~Permissions describe a role rather than a person, which is precisely why ^these are two separate commands. So when a service can't read its own config, check the owner before you change the mode. Change the mode when the rules are wrong; change the owner when the person is.",
+  "headline": "chown hands the file [to someone]"
+ },
+ {
+  "id": "s38",
+  "type": "CMD_UMASK",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Here's a question almost nobody asks. When you make a new file, where do its permissions actually come from? The answer is |U mask, short for user file creation mask. Every new file starts life at ^six six six, read and write for everyone. Your mask, typically ^zero two two, lists the bits you never want handed out, and those switches are ^simply subtracted. What survives is ^six four four, which is exactly what you get when you |create a fresh file. Directories are slightly different: ^they start at seven seven seven, because you need execute permission to enter one at all, so ^the same mask leaves them at seven five five. And note that ^a mask never adds a single bit; ^it can only remove them, which is exactly what the word mask means. ~U mask can only take away. You'll rarely change your umask, but knowing it exists explains every new file you make. Run umask once on a machine you administer, and every new file afterwards makes sense.",
+  "headline": "umask decides what [new files] get"
+ },
+ {
+  "id": "s39",
+  "type": "CMD_SUDO",
+  "transition": "iris",
+  "background": "zoneA",
+  "narration": "|Restarting a service is something only an administrator may do, so run it as yourself and you get ^permission denied, which is the system working as intended. The obvious fix is to log in as root, and it's the wrong one, because then every command carries full power and nothing records who you were. What you want is to borrow that power once. So |put sudo in front, short for superuser do. First ^a rule file called sudoers is consulted to answer ^one question: is this user allowed to run this particular command? If the answer is yes, ^the command runs with full root privilege, and ^a line goes into the audit log naming you. And then ^the privilege is handed straight back, so ^the next thing you type runs as you again. ~Sudo lasted exactly one command, and that's the entire point. Use sudo for the command that needs it; staying yourself is the safer default.",
+  "headline": "sudo lends power for [one command]"
+ },
+ {
+  "id": "s40",
+  "type": "CMD_USERADD",
+  "transition": "wipe",
+  "background": "zoneB",
+  "narration": "|User add looks like one small command, and it's quietly doing four things at once. User add writes ^a line into etc passwd, which is the account itself. User add writes ^an entry into etc shadow, where the password hash will eventually live. User add creates ^a group with the same name as the user. And then it stops, because ^the home directory isn't created unless you ask. That's what |dash M is for, short for make home, and with it ^the folder finally appears. While you're there, ^dash S sets which shell they get. ^One short command, four separate changes. ~Forget dash M and that user logs straight into the root of the disk, owning nothing. Use useradd dash M dash S, or use adduser, which asks you the questions instead.",
+  "headline": "useradd writes to [four places]"
+ },
+ {
+  "id": "s41",
+  "type": "CMD_USERMOD",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "This user currently belongs to ^three groups, and you want to add a fourth. The command is |user mod, and the flag combination is dash A capital G. ^The A stands for append, meaning add to what's already there, so ^docker is added and the other three stay exactly where they were. Now watch what happens if you |forget that A. ^Capital G on its own doesn't mean add. User mod means replace the entire list with what follows, so ^sudo, W W W and dev are simply gone. And since sudo was one of them, ^that user is now locked out of administering the machine. And ^no warning is printed; the command reports success. ~One missing letter, and you've removed your own access. Read that flag out loud before you press return: dash A capital G, append.",
+  "headline": "-aG appends. [-G replaces]"
+ },
+ {
+  "id": "s42",
+  "type": "CMD_USERDEL",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "|User del removes an account, and user del does exactly what you asked and nothing more. ^The account line disappears from etc passwd, so that person can no longer log in. But look at the disk. ^Their home directory is still sitting there, every file intact. And because ^the name that owned it no longer exists, ^the owner is now displayed as a bare number. ^The name is gone, but the numeric user I D it was attached to is still stamped on every one of those files. |Add dash R and ^the home directory goes with the account. ~Which is why old servers are littered with folders owned by a number nobody recognises, and worse, ^a new account can be handed that same number later. If you're removing somebody properly, remove their files deliberately rather than leaving them behind.",
+  "headline": "userdel leaves the [home directory]"
+ },
+ {
+  "id": "s43",
+  "type": "CMD_PASSWD",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "Everybody has typed this command at some point in their life, and almost nobody stops to think about where that password actually ends up. The command everyone knows is |pass W D, and what it does next is the interesting part. ^What you type goes in one end. Pass W D passes through ^a one-way hash, maths that's easy forwards and effectively impossible backwards. ^The result is what gets written to the shadow file. ^What you typed is never stored anywhere. ^There's no route back along that arrow, by design. So when you log in later the system ^hashes your attempt and ^compares the two results, never the passwords themselves. So ^even a stolen shadow file gives up nobody's password, and ^that's the entire design. ~Nobody can give your password back, not even the administrator, which is why a reset is the only way in. So when somebody asks you to look up their password, the honest answer is that you can't.",
+  "headline": "passwd stores a [hash], never the word"
+ },
+ {
+  "id": "s44",
+  "type": "CMD_CHPASSWD",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Setting one password is fine. Setting a hundred of them by hand, on the morning a new team arrives and every account needs one, is not. Which is why |ch pass W D exists. You give it ^a file of pairs, each line a username and the password it should get, ^fed down a pipe one line at a time. Ch pass W D works through them: ^deploy is set, ^C I is set, and ^ninety eight more follow in one pass. Now, you couldn't do this with pass W D, because ^pass W D deliberately insists on being run at a real terminal so that a password is never sitting in a script or a shell history. ^A password should never sit in a script or a history file, and ^that restriction is deliberate. ~Ch pass W D is the one built to be automated instead. Use passwd for a person at a keyboard, and chpasswd for a machine doing it in bulk.",
+  "headline": "chpasswd sets them [in bulk]"
+ },
+ {
+  "id": "s45",
+  "type": "CMD_W",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "Somebody else is on this server, and you'd like to know who they're and what they're up to, before you restart anything. The command which answers is |W, which is the shortest on this whole list and covers both at once. ^Santhu is on P T S zero, in an editor. ^Deploy is on P T S one, running a sync. And here's ^santhu again on P T S two, because they opened a second connection. That's ^two rows for one person, which trips people up constantly. These are sessions, not accounts. ^The header line across the top carries the load average, so you get a sense of the machine at the same time. W shows ^what each session is running and ^how long it has been idle. ^Who gives names and stops; ^W goes further. ~These are sessions, not accounts. Run w before you reboot anything, because somebody else may be halfway through something. Two rows for one person is normal, so read the TTY column before you assume anything.",
+  "headline": "w shows who is on [right now]"
+ },
+ {
+  "id": "s46",
+  "type": "CMD_LAST",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "W tells you who's on the machine at this moment. The more useful question, once something has already gone wrong, is who was here earlier today, and |last answers exactly that, going back weeks. ^Root signed in ^at twelve minutes past three in the morning, and whether or not that's fine, it's the row you stop on. ^Santhu logged in on Monday morning, which looks completely ordinary. ^The machine rebooted on Sunday evening. All of this comes from ^a log file called W T M P, which is worth knowing for one uncomfortable reason: ^a file can be edited by anyone who has root. So ^it's evidence rather than proof, and ^you check it early, before anything else gets touched. ~Last's the first place to look after a breach, and the first thing a competent attacker clears. Read last early, save the output somewhere else, and then start investigating.",
+  "headline": "last reads the [login history]"
+ },
+ {
+  "id": "s47",
+  "type": "CMD_CHROOT",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "Sometimes you need a process to believe that one folder is the entire filesystem. The usual reason is repair: you've booted from a U S B stick and want to run commands as though you were inside the broken install. |Ch root, short for change root, takes ^a directory and declares it the root for one process. From inside, ^everything above that directory simply stops existing. Run ^L S on slash and you see only the jail. Try to ^climb out with dot dot and you cannot, because there's nothing above you to climb into. But ^a root user inside can break out with the right system calls, ^because it was never built to contain a hostile process. ^Containers do that job properly, using kernel namespaces. ^Rescue work is what ch root is genuinely for. ~Treat it as isolation, never as security. Keep chroot for rescue work, and let containers do the job it was never built for. Reach for chroot when repairing a system, and a container when isolating one.",
+  "headline": "chroot is a fence, [not a wall]"
+ },
+ {
+  "id": "s48",
+  "type": "QUIZ_CARD",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "Quick one. You change mod six four four a script, then |run it. What happens? Have a think, and pause here if you need longer. |Ready? It refuses. The execute bit is gone.",
+  "data": {
+   "quiz": {
+    "question": "chmod 644 on a script, then run it?",
+    "options": [
+     {
+      "text": "Runs normally"
+     },
+     {
+      "text": "Permission denied"
+     },
+     {
+      "text": "Runs as root"
+     },
+     {
+      "text": "Deletes it"
+     }
+    ],
+    "answerIndex": 1,
+    "why": "6 is read plus write. No execute bit, so it will not run.",
+    "atWord": 2,
+    "revealAtWord": 22
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s49",
+  "type": "RECAP",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "Drawer three is the lock. |Change mod and change own set access. |U mask shapes new files. |Sudo lends power and logs it. |The user tools manage the accounts behind it.",
+  "data": {
+   "heading": "Drawer three, on the bench",
+   "points": [
+    {
+     "text": "chmod and chown set access"
+    },
+    {
+     "text": "umask shapes new files"
+    },
+    {
+     "text": "sudo lends power, and logs it"
+    },
+    {
+     "text": "useradd, usermod, passwd"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s50",
+  "type": "CHAPTER",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "Drawer four. What's running, and how you stop it without losing work.",
+  "data": {
+   "chapter": {
+    "number": "04",
+    "title": "What's running",
+    "subtitle": "and how you stop it",
+    "color": "purple"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s51",
+  "type": "CMD_PS",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "|P S is short for process status, and P S hands you ^a snapshot of everything running at this exact instant. Not a live view, a still photograph. Each row is a process, so here's ^P I D four eight two one, which is node running your application, ^P I D one one four zero, which is engine X, and right at the top ^P I D one, systemd, the ancestor of every other process on the box. Of everything in that output, ^the P I D column is the one to find. |P S dash E F prints ^the same data in a different syntax, because ^two flavours of Unix disagreed about flags forty years ago and both won. ~Every other tool on this list will ask you for that number. Get comfortable finding a PID quickly, because almost everything after this needs one.",
+  "headline": "ps is a [snapshot], not a feed"
+ },
+ {
+  "id": "s52",
+  "type": "CMD_PSTREE",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "P S gives you a flat list, which hides the most useful fact about processes: every one of them was started by another one. |P S tree draws that instead. At the top sits ^systemd, process number one, which the kernel started before anything else. ^Engine X was started by systemd. ^A worker was started by engine X. ^Those connecting lines are real relationships, not decoration. Now ^kill a parent in the middle and the line to it snaps, but ^its children aren't killed along with it. Instead ^process one adopts them, immediately and automatically. ~Nothing is ever left without a parent, which is exactly how a job can outlive the shell that launched it. Whenever a process seems to have no parent, pstree shows you it was adopted rather than orphaned.",
+  "headline": "pstree shows [who started whom]"
+ },
+ {
+  "id": "s53",
+  "type": "CMD_TOP",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "P S shows you an instant. The question you usually have is what's happening now, and which needs something that moves, which is |top. Top shows ^the same processes, but ^it refreshes every couple of seconds instead of printing once. So ^node is climbing hard, ^postgres is steady and clearly not your problem, and ^engine X is almost idle. And crucially ^the rows re-sort as it goes, so whatever is busiest keeps rising to the top on its own. You don't read this output so much as watch it. ^Press Q to leave. ~Top's the first thing to open on a slow box, because top shows you the shape of a problem rather than a single number. Watch top for ten seconds before you conclude anything, because one frame tells you very little.",
+  "headline": "top re-sorts [as you watch]"
+ },
+ {
+  "id": "s54",
+  "type": "CMD_HTOP",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "Top works, but it makes you do arithmetic in your head, it'll not let you touch the mouse, and killing something means typing a number by hand. |H top is that tool with the edges filed off. Across the top you get ^one bar per processor core, so ^a load of four on eight cores looks like what it is. ^The colours in those bars separate kernel work from your own. Below, the process list is the same, except ^you can click a row with the mouse and ^press F nine to kill it, no P I D required. And ^you can scroll sideways for the full command line, or ^press F five for the tree view. ~Same numbers, far less squinting, and worth installing on every machine you look after. Install htop on any machine you'll spend real time on. You'll stop opening top entirely.",
+  "headline": "htop is top with [colour and a mouse]"
+ },
+ {
+  "id": "s55",
+  "type": "CMD_BTOP",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Top and H top both show this instant, refreshed every couple of seconds. Useful, but a number which keeps changing still only ever describes right now. |B top plots that same information over time, which changes what you can see. ^Processor use is drawn across the last minute, ^memory climbs steadily, and ^the network is flat. Compare that to what top would tell you. ^A number describes this second and nothing more. ^A line tells you where it's heading, which is nearly always what you needed. That steady climb isn't a value to worry about yet; ^it's a leak, and it'll matter within the hour. ^Disk throughput is plotted on that same timeline. ~A spike you can see coming beats a reading which only describes this second. Use btop when the question is where this is heading rather than where it is.",
+  "headline": "btop draws it [over time]"
+ },
+ {
+  "id": "s56",
+  "type": "CMD_ATOP",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "Here's the situation every one of these live tools fails at. The server was slow at twenty to three this afternoon. A top is fine now. What happened? |A top solves it, because ^it has been quietly writing all these numbers to disk the whole time. Replay yesterday and ^two o'clock looks entirely normal. Move forward and ^twenty to three is your spike, and critically ^it recorded which processes were running at that moment as well. By ^ten past three it had recovered on its own. ^Top can't answer any of that, because top only ever knows about now. ~These are the only questions you get after an outage, which makes a top the one worth enabling in advance. Install atop today, and the next outage will be one you can actually investigate.",
+  "headline": "atop already [recorded it]"
+ },
+ {
+  "id": "s57",
+  "type": "CMD_GLANCES",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Every tool so far assumes you already know what to look at. That's a fair assumption after ten years and a terrible one on your first week. |Glances puts every subsystem on a single screen and colours whichever is in trouble. ^Processor is fine. ^Memory is fine. ^Disk input and output is saturated, and it has gone red. ^Network is fine. You didn't have to know that the disk was the suspect, because ^glances applies the threshold for you, and ^the red panel finds you rather than the other way round. ~When you're new, not knowing which tool to open is the actual problem, and this is the honest answer to it. Glances is the one to reach for when you know something is wrong but not what.",
+  "headline": "glances shows [everything] at once"
+ },
+ {
+  "id": "s58",
+  "type": "CMD_NMON",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Every tool up to this point decided its own layout, and you either liked it or you did not. That's fine until the layout hides the one panel you need. |N mon works the other way round entirely: ^it starts almost empty and you assemble the view you want by pressing keys. ^Press C and a processor panel docks into place. ^Press M and memory joins it. ^D for disk, ^N for network. You build exactly the dashboard this problem needs, ^wasting nothing on panels you're not reading. But the reason it has survived since the nineteen nineties is the other mode. ^Dash F writes all of it to a file instead of drawing anything at all, so you can leave it overnight and ^graph it later in a spreadsheet. ~N mon was built for capture rather than watching, which is still unusual. Leave nmon recording overnight and you'll have a graph instead of a guess in the morning.",
+  "headline": "nmon builds the view [you want]"
+ },
+ {
+  "id": "s59",
+  "type": "CMD_KILL",
+  "transition": "iris",
+  "background": "zoneC",
+  "narration": "The name is misleading, so start here: ^kill doesn't destroy anything. Kill sends a signal, and a signal is a message. |Run it plainly and it sends ^sig term, which politely asks a process to stop. ^The process receives that message and gets to decide what to do about it, so typically ^it flushes what it was writing, closes its files and exits on its own terms. Now |dash nine is different. ^That's sig kill, and sig kill can't be caught or ignored, because ^the kernel removes the process without ever delivering the message. Kill never gets the chance to save, so ^whatever was in memory is gone. ~Send sig term first, every single time. If sig term hasn't worked after ten seconds, the process is stuck, and only then use dash nine.",
+  "headline": "kill sends a [signal], not a bullet"
+ },
+ {
+  "id": "s60",
+  "type": "CMD_KILLALL",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "Kill needs a process I D, and when eight copies of the same program are running, hunting down all eight of those numbers by hand gets old fast. |Kill all works ^by name instead, and that's the whole difference. So ^node running as four eight two one goes, ^node as four eight two two goes, and so does ^node as five three one zero, which a colleague started and is two hours into. ^All three matched the name, so all three were signalled, and ^it never asked you which ones you actually meant. On your own laptop this is a convenience. On a shared server it's genuinely dangerous, so ^P kill with a user filter is the habit worth building instead. ~Match on a name, and you match everybody's. On anything shared, find the PIDs and kill those. Naming them takes ten more seconds and costs nobody an afternoon.",
+  "headline": "killall hits [all of them]"
+ },
+ {
+  "id": "s61",
+  "type": "CMD_NOHUP",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "You start a long backup, close the laptop, come back, and the job died. Here's why. |Run something in the background normally, and when ^you close the terminal or the connection drops, ^a signal called hangup is sent to every job that terminal started. ^Your plain background job receives it and stops. The fix is in the name: |no hup is short for ^no hangup, and a job started under it simply ignores that signal, so ^it carries on running with the terminal long gone. One thing to expect: since there's no screen to print to any more, ^its output is written into a file called nohup dot out. ~That file is where people forget to look. Better still, use screen or tmux, which we'll get to, and you keep the output as well.",
+  "headline": "nohup ignores the [hangup]"
+ },
+ {
+  "id": "s62",
+  "type": "CMD_SLEEP",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "|Sleep pauses for a fixed time, and it's the least interesting command here until you look at how it does it. ^Your script runs down its lines, ^reaches the sleep and stops. ^Five seconds pass with nothing happening at all, and here's the part worth noticing: ^the processor sits at zero throughout, because sleep asks the kernel to wake it later and then genuinely stops running. Sleep is not counting in a loop. ^Then the next line runs, exactly where it left off. And you're not limited to seconds, since |it takes ^minutes, hours and days as well. ~Because it truly blocks, a sleep inside a retry loop costs you nothing. Sleep is what makes a retry loop polite instead of a machine hammering a server.",
+  "headline": "sleep pauses [the script]"
+ },
+ {
+  "id": "s63",
+  "type": "CMD_WAIT",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Two jobs, and you want them running at the same time. |Start ^job A, which takes three seconds, and ^job B, which takes seven, and put ^an ampersand after each to send them into the background. Now here's the bug, and it's subtle because nothing looks broken. ^The script carries straight on, ^reaches its end and exits, while job B still has four seconds of work left. Your C I run goes green on work which never finished. The fix is one word: |wait ^holds the script until every background child has completed, so ^its exit status finally means something. ~Without it, your script reports success on work that's still running. One word at the end of a script is the difference between a real result and a lie.",
+  "headline": "wait holds until [they finish]"
+ },
+ {
+  "id": "s64",
+  "type": "CMD_LSOF",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "You try to |unmount a disk and it refuses with ^target is busy, which tells you nothing useful. |L S O F, short for list open files, tells you who's responsible. ^Tail is holding a log file open on that disk. ^Vim is holding a config. ^Those two handles are the entire reason the unmount failed. Now the clever part. On Linux ^a network socket is a kind of file as well, genuinely, not by analogy. So |the same tool with dash I shows you ^engine X holding port four four three, which means ^one command answers both questions. ~The next time something says address already in use, this is the fastest way to find out what. Lsof is the tool which turns a useless error message into a process you can name.",
+  "headline": "lsof names the [holder]"
+ },
+ {
+  "id": "s65",
+  "type": "CMD_STRACE",
+  "transition": "wipe",
+  "background": "zoneC",
+  "narration": "A program fails with an error which makes no sense. |S trace shows you what it's actually doing, because ^every real thing a program does goes through the kernel. Opening a file, reading a socket, all of it. So ^open this file is a request you can watch, and ^the kernel answers no such file or directory. Meanwhile ^the program prints something about a database connection, which is why you were confused. The catch is that ^thousands of these scroll past. So |add dash E to ^filter down to just the calls you care about, and ^there it is, a config path that doesn't exist. ~S trace failed on a missing file, not on the thing it told you. Strace is a big hammer, so reach for it when the error message has already lied to you.",
+  "headline": "strace shows what it [really tried]"
+ },
+ {
+  "id": "s66",
+  "type": "QUIZ_CARD",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "Quick one. A process is |ignoring your kill entirely. Which signal can't be ignored? Have a think, and pause here if you need longer. |Ready? Sig kill, because the kernel delivers it.",
+  "data": {
+   "quiz": {
+    "question": "Which signal can a process NOT ignore?",
+    "options": [
+     {
+      "text": "SIGTERM (15)"
+     },
+     {
+      "text": "SIGHUP (1)"
+     },
+     {
+      "text": "SIGKILL (9)"
+     },
+     {
+      "text": "SIGINT (2)"
+     }
+    ],
+    "answerIndex": 2,
+    "why": "The kernel delivers SIGKILL. The program never gets a say.",
+    "atWord": 2,
+    "revealAtWord": 24
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s67",
+  "type": "RECAP",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "Drawer four is control. |P S and P S tree list them. |Top shows them moving. |Kill signals them politely. |L S O F and S trace find the cause, so nothing stays mysterious.",
+  "data": {
+   "heading": "Drawer four, on the bench",
+   "points": [
+    {
+     "text": "ps and pstree list them"
+    },
+    {
+     "text": "top and htop show it live"
+    },
+    {
+     "text": "kill sends a signal"
+    },
+    {
+     "text": "lsof and strace find the cause"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s68",
+  "type": "CHAPTER",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Drawer five. Watching the machine properly, so you're not guessing.",
+  "data": {
+   "chapter": {
+    "number": "05",
+    "title": "Watching",
+    "subtitle": "the machine, properly",
+    "color": "yellow"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s69",
+  "type": "CMD_UPTIME",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "Load average is the most consistently misread number in all of Linux, and it appears in almost every tool here, so let's fix it properly now. |Up time gives you ^three numbers rather than one, and the three are the point. The first is ^the last minute, the second is ^the last five minutes, and the third is ^the last fifteen. Read them together as a direction of travel. Now the part people get wrong. ^A load of four sounds alarming until you ask how many cores this machine has. On ^eight cores that's half busy: four slots working, four sitting free. On ^two cores, the very same figure means ^badly overloaded, with work queuing up behind. ~Always divide by your core count, because the number on its own tells you nothing. Load is a queue length, not a percentage, and that one sentence fixes most of the confusion.",
+  "headline": "Load is [three numbers], not one"
+ },
+ {
+  "id": "s70",
+  "type": "CMD_FREE",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "The first time you run this particular command on a perfectly healthy server, you'll be completely convinced the machine is about to fall over. |Free reports ^two hundred megabytes free on a server with thirty two gigabytes. ^That looks alarming, and it's completely fine. Here's why. ^Used is your programs, genuinely occupied. ^Cache is memory Linux borrowed to keep recently read files close by, and it'll hand every byte of it back the moment something needs it. ^Free is memory doing nothing whatsoever, which is memory being wasted. And ^available is the figure you actually wanted: what a new program could have right now. ^Ask for memory and the cache simply shrinks. ~Read available and ignore free. Free memory on a Linux box is wasted memory, and the kernel is doing you a favour.",
+  "headline": "Low free memory is [normal]"
+ },
+ {
+  "id": "s71",
+  "type": "CMD_VMSTAT",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "You want to know whether this machine is genuinely short of memory, and you want to watch it change rather than take a single reading. That tool is |V M stat. There's one trap to know about first. ^The very first row is an average since the machine booted, ^so ignore it completely; it's history, not a reading. ^The second row is the first real one, ^and one follows every second. The columns to watch are ^S I and S O, swap in and swap out, which count memory being pushed to disk and pulled back. ^Zero there's healthy. ^Anything above zero means the machine is genuinely short of memory. ~That's pressure, not just usage, and it's the difference between slow and about to fall over. Watch the swap columns for ten seconds, and you'll know whether memory is the real problem.",
+  "headline": "vmstat's first row is [since boot]"
+ },
+ {
+  "id": "s72",
+  "type": "CMD_IOSTAT",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "The processor is sitting almost idle and yet the whole machine feels like it's wading through treacle. Nine times out of ten that's the disk, and |I O stat is how you confirm it. I O stat reports per device, so you get ^reads in megabytes a second and ^writes, which are heavy here but expected for a database. ^On throughput alone this disk looks perfectly healthy, and that's exactly the trap. The column which matters is ^await, which measures ^how long each request sat waiting before the disk even started on it. ^A long queue is what slowness actually feels like from inside a program. So when await climbs while throughput stays modest, ^the disk is your bottleneck. ~Low throughput with high await means saturated, not idle. When the CPU looks idle and everything feels slow, await is the number to go and read.",
+  "headline": "await is the number [that matters]"
+ },
+ {
+  "id": "s73",
+  "type": "CMD_IOTOP",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "I O stat told you the disk is saturated, which is useful and immediately raises the obvious next question: saturated by what, exactly? |I O top answers that, because ^knowing a disk is busy without knowing who made it busy leaves you nowhere. Here ^postgres is writing eighty eight megabytes a second, which is your answer. ^R sync is doing twelve, which is the backup you scheduled and expected. ^Everything else is doing essentially nothing. The ^dash O flag shows only processes actually doing input and output, rather than filling the screen with idle ones. ^Now you've a process I D and a decision. ~Every monitoring tool tells you something is wrong; this one tells you who. Iostat and iotop are a pair: one finds the problem, the other names who caused it.",
+  "headline": "iotop names the [writer]"
+ },
+ {
+  "id": "s74",
+  "type": "CMD_DSTAT",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "The problem with running four monitoring tools in four separate windows is that none of them agree on when now actually is. |D stat fixes that by putting several subsystems on ^one line: processor split into user and system time, ^disk reads and writes, and ^network sent and received. Crucially ^they're all sampled at the same instant, on the same tick. Which means when you see ^a disk spike in this column, and ^a processor wait sitting in the very same column, you're looking at ^genuine correlation rather than two readings you're trying to line up by eye. ~One time axis for everything is how you stop guessing at cause and effect. Dstat is what you leave running while you reproduce something, because the columns line up.",
+  "headline": "dstat puts it [on one line]"
+ },
+ {
+  "id": "s75",
+  "type": "CMD_SAR",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "S A R is the tool that absolutely everybody forgets about, and it's also the one which will save you on the day it genuinely counts. |S A R, which is the system activity reporter, ^writes these numbers to disk every ten minutes of every day whether anyone is watching or not. So after an outage you can ^pick a day, even one from weeks ago, and simply read what happened. ^Two o'clock was normal. ^Twenty to three is your spike. ^By ten past three it had recovered. But here's the catch which catches everyone. ^Look at the days before you switched it on and they're empty, because ^you can't record the past retrospectively. ~Enable sysstat before you need it, because the outage always arrives before the monitoring does. Turn sysstat on across your machines this week, and thank yourself during the next incident.",
+  "headline": "sar already [wrote it down]"
+ },
+ {
+  "id": "s76",
+  "type": "CMD_WATCH",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "Sometimes the tool you need doesn't exist, and |watch is how you build it in about four seconds. Watch takes any command at all and ^runs it exactly as you typed it, ^shows you the output, then ^waits and runs it again. That's the whole idea. And it matters because ^a single reading of anything tells you almost nothing. |Add dash D and it'll ^highlight whatever changed since the previous run, so when ^a number creeps upward run after run, ^the leak becomes obvious without you installing anything. ~Watch turns any command into a live dashboard, which is why you rarely need a purpose-built tool for a one-off question. Any time you find yourself pressing up and return repeatedly, watch is the command you wanted.",
+  "headline": "watch turns anything [into a dashboard]"
+ },
+ {
+  "id": "s77",
+  "type": "QUIZ_CARD",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "Quick one. |Load reads four, on eight cores. Problem, or fine? Have a think, and pause here if you need longer. |Ready? Fine, because load counts against cores.",
+  "data": {
+   "quiz": {
+    "question": "Load 4.0 on an 8-core box?",
+    "options": [
+     {
+      "text": "Overloaded"
+     },
+     {
+      "text": "Roughly half busy"
+     },
+     {
+      "text": "Out of memory"
+     },
+     {
+      "text": "Disk is full"
+     }
+    ],
+    "answerIndex": 1,
+    "why": "Load is measured against core count. Four of eight is about half.",
+    "atWord": 2,
+    "revealAtWord": 22
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s78",
+  "type": "RECAP",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "Drawer five is your eyes on the machine. |Up time and free give the headline. |V M stat and I O stat give the detail. |S A R remembers yesterday. |Watch makes anything live, so you're never guessing.",
+  "data": {
+   "heading": "Drawer five, on the bench",
+   "points": [
+    {
+     "text": "uptime and free: the headline"
+    },
+    {
+     "text": "vmstat and iostat: the detail"
+    },
+    {
+     "text": "sar remembers yesterday"
+    },
+    {
+     "text": "watch makes anything live"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s79",
+  "type": "CHAPTER",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "Drawer six. Disks, filesystems, and the one command that deserves fear.",
+  "data": {
+   "chapter": {
+    "number": "06",
+    "title": "Disks",
+    "subtitle": "and one command to fear",
+    "color": "red"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s80",
+  "type": "CMD_DF",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "|D F is short for disk free, and dash H shows you ^how full each filesystem is. Sixty two percent, so there's plenty of room, ^which makes it very strange which writes are failing. Here's what's happening. ^Every single file on the disk needs an inode, a small record holding its permissions, owner and location. ^The number of inodes is fixed when the filesystem is created and it never grows. So run |D F dash I and ^inodes are at a hundred percent. ^Millions of tiny files, a session cache perhaps, consumed one inode each. ^The disk is full of names rather than of data. ~You've free space and nowhere to put anything. So when writes fail on a disk with space left, df dash I is the second thing you run.",
+  "headline": "df -i is the [trap] nobody checks"
+ },
+ {
+  "id": "s81",
+  "type": "CMD_DU",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "D F told you the disk is full. |D U, short for disk usage, tells you what filled it, because D U measures by directory rather than by filesystem. So at the top level ^var log is by far the biggest, ^home is twenty six gigabytes, ^user is eighteen. ^That's the difference between the two commands in one line. Now, don't guess from here. |Run it again one level deeper, pointed at ^var log itself, and ^var log engine X is the actual culprit, holding forty one gigabytes of access logs nobody rotated. ^Walk down one level at a time and the answer falls out. ~D F says it's full; D U says what filled it. Df then du then ncdu is the sequence, and it narrows the answer every step.",
+  "headline": "du finds [which directory] ate it"
+ },
+ {
+  "id": "s82",
+  "type": "CMD_NCDU",
+  "transition": "wipe",
+  "background": "zoneB",
+  "narration": "D U works, but in practice you end up typing the same command three times over, with a longer path on each attempt. |N C D U does that same walk and lets you move around inside the result. ^N C D U sorts as it scans, biggest first. ^Press enter on var log and it descends into it. ^Press enter again on engine X. And there's ^access dot log dot one, forty one gigabytes in a single file. That took ^three keystrokes, where ^D U needed three separate commands and you retyping the path each time. ~N C D U's the same walk underneath, but you can browse it, which is exactly why it's the one people actually end up installing. Install ncdu on every server. The first time a disk fills up, it pays for itself.",
+  "headline": "ncdu lets you [walk down] into it"
+ },
+ {
+  "id": "s83",
+  "type": "CMD_FDISK",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "|F disk dash L reads the partition table and prints it, so you can see that this disk carries ^S D A one, the boot partition, ^S D A two, the root filesystem, and ^S D A three, which is swap. ^With dash L it only looks; it changes nothing at all. That makes it completely safe to run on anything. Now |run it without dash L and you're in the editor proper, and this is the part which makes it approachable. ^Every change you make happens to a copy held in memory, not to the disk. Add partitions, delete them, change types. Nothing is real until ^you press W to write. And if you've made a mess, ^press Q and absolutely nothing happened. ~Which is why F disk is safer to explore than its reputation suggests. Because nothing is written until W, fdisk dash L is safe to run anywhere, any time.",
+  "headline": "fdisk writes [nothing] until you say w"
+ },
+ {
+  "id": "s84",
+  "type": "CMD_PARTED",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "You plug in a four terabyte disk and F disk gets awkward about it. Here's why. ^M B R, the old partition table format, uses ^thirty two bits to address blocks on the disk. That sounds like a lot, and with five hundred and twelve byte blocks ^it runs out at two terabytes. Not a policy, not a bug; the field is simply not wide enough to describe a larger disk. ^G P T is the replacement, and it uses ^sixty four bits instead, which is a difference so large it stops being worth discussing. So ^your four terabyte disk needs G P T, and |parted is the tool which writes one, since ^F disk was built for the older format. ~Over two terabytes, M B R physically cannot. Use parted for anything modern, and treat MBR as something you only meet on old disks.",
+  "headline": "parted handles [large disks]"
+ },
+ {
+  "id": "s85",
+  "type": "CMD_BLKID",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Here's a failure that ruins somebody's morning roughly once a year, and it's entirely avoidable once you know that this one small command exists. |Blk I D prints every block device with its filesystem type and its U U I D. Today this partition is ^slash dev slash S D B one. The trouble is that ^a name like that describes a position, not an identity. ^Plug a U S B stick in and ^reboot, and ^the names shuffle: what was S D B is now S D C. Anything in fstab pointing at the old name now points at the wrong disk. But ^the U U I D never changes, because ^it's written into the filesystem itself. ~So put U U I Ds in fstab, never device names. Anything you want mounted at boot goes in fstab by UUID, and it will still be there next year.",
+  "headline": "Use the [UUID] in fstab"
+ },
+ {
+  "id": "s86",
+  "type": "CMD_MKFS",
+  "transition": "iris",
+  "background": "zoneC",
+  "narration": "A partition is just a region of a disk; on its own it can't hold files at all. Something has to write the structure which turns it into a filesystem, and that something is |make F S. Before you run it ^the partition holds your data. As it runs ^it writes structure: inode tables, superblocks, the bookkeeping a filesystem needs to exist. Note what it doesn't do. ^Make F S doesn't erase your files. Make F S simply stops referring to them, which is why ^the old blocks become unreachable rather than destroyed, and why recovery tools sometimes work. What you're left with is ^an empty filesystem, ready to mount. And like most of this drawer, ^there's no confirmation prompt whatsoever. ~So ^read the device name twice before you press return. Read the device name out loud, check it against lsblk, and only then press return.",
+  "headline": "mkfs [erases] whatever was there"
+ },
+ {
+  "id": "s87",
+  "type": "CMD_FSCK",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "|F S C K, short for filesystem check, looks for damage and repairs it. Run it on a live disk and ^it warns you that the device is mounted. ^That warning isn't boilerplate, and people ignore it constantly. The reason it matters is this: ^the kernel is still writing to that filesystem while F S C K is reading it, so ^F S C K makes decisions from a picture that's already out of date, and ^repairs things which were never broken. That corrupts the disk you were trying to fix. So |unmount it first, always. ^Then it sweeps the inode table and the block map properly, and ^an orphaned inode gets reattached into lost plus found. ~Never run it on something mounted. Unmount, then check, then mount again. In that order, fsck is a repair rather than a risk.",
+  "headline": "fsck needs it [unmounted]"
+ },
+ {
+  "id": "s88",
+  "type": "CMD_MOUNT",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Windows gives every disk its own letter. Linux does something quite different: there's ^only ever one tree, and other disks are attached into it wherever you like. |Mount is how. You pick ^a folder, here M N T data, which is just an ordinary directory. ^The new disk is grafted onto that point, and ^its contents now appear there as though they always had. Now the part that confuses people. ^If that folder already had files in it, they're hidden underneath the mount. ^Hidden, not deleted, and completely untouched. ^Unmount the disk and they reappear exactly as they were. ~One tree, not one per disk, which is why Linux has no drive letters to remember. Mount an empty directory, always, and you'll never wonder where your files went.",
+  "headline": "mount [grafts] a second tree in"
+ },
+ {
+  "id": "s89",
+  "type": "CMD_UMOUNT",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "|Unmount refuses with ^target is busy, which sounds like an obstruction and is actually doing you a favour. ^Unmount only ever happens because something still holds a file open on that disk. So |L S O F names the culprit: ^tail is holding a log file open on that disk, and until that process lets go, nothing else is going to happen here. |Kill it and ^the handle closes, so ^the unmount works first time. What you shouldn't do is reach straight for ^dash F to force it, because there may be writes sitting in memory that haven't reached the disk yet, and forcing throws them away. If you genuinely can't stop the process, ^dash L is the gentler option; it detaches the filesystem and finishes the job once the last handle closes. ~The refusal is protecting data. When a disk won't unmount, lsof answers it in one command, so reach for that instead of force. Lsof first, kill second, unmount third. That order never loses a write.",
+  "headline": "umount refuses while [something holds it]"
+ },
+ {
+  "id": "s90",
+  "type": "CMD_DD",
+  "transition": "iris",
+  "background": "zoneA",
+  "narration": "And here's the answer to the question I opened with. |D D copies blocks and asks nothing of anybody. Two arguments do all the work: ^I F equals is the input, the thing you read from, and ^O F equals is the output, the thing you write over. Used properly it's excellent. ^Read your disk, write a file, and that's a genuine full backup. |Read ^the file back onto a spare disk and you've restored it. Now |swap ^one letter so the output is slash dev slash S D A, and ^that's your running system being overwritten while you watch. ^No prompt, no progress bar, no undo. ~Four characters. Add status equals progress so it at least tells you what it's doing. Read the of= argument twice, out loud, before you press return. Every single time.",
+  "headline": "dd is the [four characters]"
+ },
+ {
+  "id": "s91",
+  "type": "QUIZ_CARD",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "Quick one. |D F says space is free, but writes fail. What ran out? Have a think, and pause here if you need longer. |Ready? Inodes. Every file consumes one.",
+  "data": {
+   "quiz": {
+    "question": "Space free, but writes fail. What ran out?",
+    "options": [
+     {
+      "text": "Swap"
+     },
+     {
+      "text": "Inodes"
+     },
+     {
+      "text": "RAM"
+     },
+     {
+      "text": "File handles"
+     }
+    ],
+    "answerIndex": 1,
+    "why": "Every file consumes an inode. Run out and writes fail with space left.",
+    "atWord": 2,
+    "revealAtWord": 22
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s92",
+  "type": "RECAP",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Drawer six is the disk. |D F and D U find the space. |Mount and blk id attach it. |F disk and make F S prepare it. |D D destroys it if you mistype, so slow down here.",
+  "data": {
+   "heading": "Drawer six, on the bench",
+   "points": [
+    {
+     "text": "df and du find the space"
+    },
+    {
+     "text": "mount and blkid attach it"
+    },
+    {
+     "text": "fdisk and mkfs prepare it"
+    },
+    {
+     "text": "dd deserves your attention"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s93",
+  "type": "CHANNEL_CARD",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "Halfway. If this is landing, subscribing genuinely helps, and there's a lot more of it below.",
+  "data": {
+   "handle": "@thenbxstudio",
+   "tagline": "One idea, clearly, every week",
+   "atWord": 3
+  },
+  "anchors": []
+ },
+ {
+  "id": "s94",
+  "type": "CHAPTER",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "Drawer seven. The network, starting from this machine because that's where you debug.",
+  "data": {
+   "chapter": {
+    "number": "07",
+    "title": "The network",
+    "subtitle": "from this machine",
+    "color": "blue"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s95",
+  "type": "CMD_IP",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "Networking on a single machine is really three questions stacked on top of each other, and |I P answers all three of them. At the bottom, ^the link layer is the interfaces themselves: ^is there a cable in, and is the device up. Above that, |I P ^addr shows the addresses bound to those interfaces, so ^ten dot zero dot zero dot five is what this machine answers to. And above that again, |I P ^route decides where a packet goes when it leaves, which is why you see ^a default route saying anything not on this network goes to the gateway. ^Three layers, one tool. ~I P replaced ifconfig because ifconfig couldn't describe modern routing or multiple addresses on one interface. Learn ip addr, ip route and ip link, and you can describe any machine's networking.",
+  "headline": "ip replaced [ifconfig]"
+ },
+ {
+  "id": "s96",
+  "type": "CMD_PING",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "When something won't connect, this is the first thing anyone reaches for, and most people only ever read half of what it tells them. The command is |ping, and what it does is simple: ^a packet leaves your machine, ^crosses the gateway, and ^the far end replies, here in twelve milliseconds. Do it four times and you learn two separate things. The first is how far away it is. The second is more important. ^Watch packet three: it leaves and never comes back. ^That's loss, which is a completely different problem from slowness. ^One packet in four missing will make a connection feel broken even though ^the average time still looks perfectly healthy. ~So read the loss figure first, because the average hides it. Run ping with dash C four, read the loss line first, and the latency second.",
+  "headline": "ping answers [two questions]"
+ },
+ {
+  "id": "s97",
+  "type": "CMD_TRACEROUTE",
+  "transition": "wipe",
+  "background": "zoneB",
+  "narration": "Ping tells you whether the far end is reachable, but when it's not, it says nothing about where along the way things went wrong. |Trace route tells you the whole path, and the trick behind it's genuinely clever. ^Trace route sends a packet allowed to travel exactly one hop, ^which expires immediately and the router that killed it politely reports back. That gives you ^hop one, your own router. Then ^it allows two hops, then three, walking outward one at a time. So ^hop four is your internet provider, ^hop seven answers with nothing whatsoever, and ^hop nine is the destination. Now, about hop seven. ~Those stars aren't automatically a fault, because plenty of routers are configured never to reply, and your traffic passes straight through them regardless. Traceroute tells you where the path goes; it takes judgement to say where it breaks.",
+  "headline": "traceroute makes each hop [answer]"
+ },
+ {
+  "id": "s98",
+  "type": "CMD_MTR",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "Trace route has a real weakness: ^it runs once and then stops. If your problem is ^intermittent, a single pass will very often miss it entirely. |M T R is trace route and ping combined, so ^it keeps probing every hop, hundreds of times, and builds up statistics. Now the picture is much clearer. ^Hop four is dropping nothing. ^Hop seven is dropping thirty eight percent of packets. But look at ^hop nine, which is clean again, and that's the actual clue. ^If loss at one hop clears at the next, that router is almost certainly just rate limiting its own replies rather than dropping your traffic. ~One run can lie. A hundred runs cannot. Leave mtr running for a minute before you phone anybody about a network problem.",
+  "headline": "mtr keeps [probing]"
+ },
+ {
+  "id": "s99",
+  "type": "CMD_NETSTAT",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Almost every sysadmin alive has this exact flag block committed to memory without ever having sat down and decoded it, so let's decode it once. |Net stat, with dash T U L P N. ^Dash T is T C P, ^dash U adds U D P, ^dash L narrows it to listening sockets, and ^dash P shows which process owns each. The output is exactly what you want. The problem is how it gets it: ^net stat reads through the proc filesystem, one file per connection, and ^on a server with thousands of connections that's thousands of reads. ^S S asks the kernel directly, once, and prints output which matches flag for flag. ~The muscle memory still works, but S S is the one that finishes on a loaded machine. Learn the ss flags now, because netstat isn't installed by default on newer systems.",
+  "headline": "netstat still works, [ss is faster]"
+ },
+ {
+  "id": "s100",
+  "type": "CMD_SS",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "|S S is short for socket statistics, and S S shows you what this machine is currently prepared to talk to, and to whom. ^Port four four three is engine X listening, ^port twenty two is S S H listening. ^Listening means the service is genuinely up and accepting connections. That's what you check first when a service won't answer. Now |filter by state instead and ^the listeners drop away, leaving ^an established connection, which is a conversation actually in progress ^with a real peer at the other end. Here's the diagnostic that saves you an afternoon. If S S says a service is listening and yet nothing can reach it, ^the problem isn't the application; it's a firewall, a security group, or the address it bound to. ~Stop debugging the app. Ss dash T U L P N is worth memorising, because listening and reachable are two different claims and only one is the application's job.",
+  "headline": "ss shows [what is listening]"
+ },
+ {
+  "id": "s101",
+  "type": "CMD_NMCLI",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "|N M C L I manages networking from the command line, and there's one distinction that trips absolutely everybody the first time. ^Eth zero is a device: the physical port on the machine. ^Wired one is a profile, which is a saved bundle of settings, an address, D N S servers and routes. ^Wired backup is a second profile for that very same device. So ^a device is hardware and it doesn't change, while ^a profile is configuration and you can keep as many as you like. When you |bring a profile up, ^it snaps onto the device, and ^switching between them changes the machine's entire network identity without you touching a cable. ~One device, many profiles. Think of it as a device and a set of profiles, and nmcli stops being confusing.",
+  "headline": "A profile is not the [device]"
+ },
+ {
+  "id": "s102",
+  "type": "CMD_IFTOP",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "The link is completely saturated, everything on the box feels slow, and you'd very much like to know what exactly is filling it up. |If top gives you the first half of that answer, because ^it groups traffic by pair: this machine, and whoever is on the other end. So ^thirty eight megabits is going to ten dot zero dot zero dot nine, which is dominating the link. ^D N S is essentially nothing. ^Monitoring is essentially nothing. Now that's genuinely useful, because ^you now know where the traffic is heading. But notice what's missing: ^there's no process name anywhere on this screen, so you still can't say which program is responsible. ^That's the next tool. ~If top answers where, and never who. Iftop and nethogs together answer the whole question, so install both while you're there.",
+  "headline": "iftop sorts by [connection]"
+ },
+ {
+  "id": "s103",
+  "type": "CMD_NETHOGS",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "If top told you where the traffic was heading and then stopped just short of the genuinely useful part, which is what to do about it. |Net hogs tells you what's sending it, because ^it groups by process rather than by address. And the answer is immediate: ^R sync, process four eight two one, is eating the link. ^Engine X is serving normally. ^S S H D is your own session. ^Now you've a process I D, which means you've something you can actually act on: renice it, throttle it, or wait for it. ^If top answered where; net hogs answers who. ~And who's nearly always the question you walked in with, because ^you can't stop a destination, but you can certainly stop a process. Nethogs is the one that ends the argument about whose job is saturating the link.",
+  "headline": "nethogs blames a [process]"
+ },
+ {
+  "id": "s104",
+  "type": "CMD_NLOAD",
+  "transition": "wipe",
+  "background": "zoneC",
+  "narration": "Sometimes the only question you actually have is this one, and honestly nothing more than this: is the pipe full, yes or no? |N load strips everything else away and hands you two numbers. ^Incoming, forty one megabits a second. ^Outgoing, eighty eight. ^No addresses, ^no tables, nothing to interpret. Just ^the shape of the traffic over the last minute. And that's enough to answer the question, because ^if this link is a hundred megabit then outgoing is very nearly maxed out and you've found your ceiling. ~When you already know what you're asking, every extra column is one more thing standing between you and the answer, which is why a deliberately small tool earns its place. When you already know the question, a small tool beats a dashboard every time.",
+  "headline": "nload is [two numbers]"
+ },
+ {
+  "id": "s105",
+  "type": "QUIZ_CARD",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "Quick one. Your service is |listening on four four three, unreachable outside. Look where? Have a think, and pause here if you need longer. |Ready? The firewall, because the service already proved it's up.",
+  "data": {
+   "quiz": {
+    "question": "Listening on 443, unreachable outside. Look where?",
+    "options": [
+     {
+      "text": "The firewall"
+     },
+     {
+      "text": "Restart the service"
+     },
+     {
+      "text": "Reinstall nginx"
+     },
+     {
+      "text": "Reboot"
+     }
+    ],
+    "answerIndex": 0,
+    "why": "ss already proved it is listening, so the block is in between.",
+    "atWord": 2,
+    "revealAtWord": 26
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s106",
+  "type": "RECAP",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "Drawer seven is the wire. |I P says who you are. |Ping and trace route say what you reach. |S S says what's open. |The bandwidth tools say who's loud.",
+  "data": {
+   "heading": "Drawer seven, on the bench",
+   "points": [
+    {
+     "text": "ip: addresses, links, routes"
+    },
+    {
+     "text": "ping and traceroute: reachability"
+    },
+    {
+     "text": "ss: what is listening"
+    },
+    {
+     "text": "iftop and nethogs: who is loud"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s107",
+  "type": "CHAPTER",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Drawer eight. Reaching other machines, which is most of the job which matters.",
+  "data": {
+   "chapter": {
+    "number": "08",
+    "title": "Other machines",
+    "subtitle": "names, keys and copies",
+    "color": "green"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s108",
+  "type": "CMD_DIG",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "D N S turns a name into an address, and when it goes wrong you need to see the whole exchange. |Dig is short for domain information groper. ^You ask a resolver, here one dot one dot one dot one, and ^it answers. What comes back is ^an A record, which maps the name to an address. Alongside it sits ^a T T L of three hundred, meaning cache this answer for five minutes, ^which is exactly why a D N S change doesn't appear everywhere at once. If you only want the value, |plus short ^strips all of it away. ^But the full output is the point: it tells you who answered and how long that answer stays true. ~Which is why dig is the one to reach for. Dig is the tool to reach for the moment you suspect DNS, which is more often than you'd think.",
+  "headline": "dig gives you the [whole answer]"
+ },
+ {
+  "id": "s109",
+  "type": "CMD_HOST",
+  "transition": "push",
+  "background": "zoneB",
+  "narration": "Dig is thorough, and at half past two in the morning, thorough is sometimes considerably more than you actually want from a command. |Host answers that same question in ^one readable sentence. Put all three side by side and the choice is obvious. ^Dig gives you the full record with its T T L and which server was authoritative. ^Dig plus short gives you nothing but the bare value, which is what you want inside a script. ^Host sits in the middle, in plain English. ^Host's the right tool for a sanity check: does this name resolve, and roughly where? ^And the moment the answer surprises you, you switch to dig. ~Use the smallest tool which answers the question. Host for a quick yes or no, dig the moment that answer surprises you.",
+  "headline": "host is the [one-line] answer"
+ },
+ {
+  "id": "s110",
+  "type": "CMD_NSLOOKUP",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "This next one is older than dig and host, and it misleads people every single day because of two words in its output. The command is |N S lookup. N S lookup prints ^the server you asked, then the phrase ^non authoritative answer. ^Almost everybody reads that as a warning that something has gone wrong. ^N S lookup means nothing of the sort. N S lookup means this answer came out of a cache. ^The authoritative server is the one which actually owns the domain and holds the original record. ^Your resolver asked it at some point earlier, kept the answer for the length of its T T L, and handed you the copy. ^That's D N S working exactly as designed. ~Non authoritative is the normal case, not a fault. So if somebody sends you that output as evidence of a fault, it usually isn't one, because a cached answer is the normal case.",
+  "headline": "nslookup can [mislead] you"
+ },
+ {
+  "id": "s111",
+  "type": "CMD_WHOIS",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "This last one isn't really about your own machine at all, and it's very easy to skip straight past, but it'll save you an entire afternoon eventually. |Who's asks the registry who owns a domain. You get ^the registrar it was bought through, ^the expiry date, which here's twenty eight days away, and ^the nameservers that answer for it. That expiry date is the line which matters, because ^an expired domain doesn't fail gently; everything stops at once. ^Mail stops, because the M X records go with it. And here's the cruel part: ^your certificate can still be valid for another year, so nothing warns you. ^Monitoring that checks the site is up won't catch it either. So ^put that date in your own calendar; the renewal email lands in a mailbox nobody reads. ~Check expiry first. Put every domain you own in a calendar, because nobody reads the registrar's email. A domain quietly expiring will cost you a morning you could have spent on anything else.",
+  "headline": "whois tells you when it [expires]"
+ },
+ {
+  "id": "s112",
+  "type": "CMD_SSH",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "|S S H keygen makes ^a key pair, and the two halves aren't interchangeable. ^The private half, with no extension, ^never leaves your laptop under any circumstances. ^The public half, ending dot pub, ^is the one designed to travel; that's its entire purpose. So |S S H copy I D takes that public half and appends it to ^a file called authorized keys on the server. After that, |logging ^in needs no password, because the server sends a challenge only something holding the private half can answer. ~The dot pub suffix is the one that travels. Send the other and you've handed somebody your identity, which no password change will undo.",
+  "headline": "The [public] half goes on the server"
+ },
+ {
+  "id": "s113",
+  "type": "CMD_SCP",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "You've keys working, and now you actually need to get a build artefact from your own laptop onto that server without messing about. The tool is |S C P, short for secure copy, and there's nothing new to set up. ^Your local file rides ^the channel S S H already built, using ^the same keys, and lands at ^the remote path. Now, the detail which catches people. ^That colon is doing all of the work. S C P is the one character telling S C P that what follows is on another machine. ^Leave it out and the command still succeeds, except it was a local copy and ^you now have a file called prod sitting next to the original. ~No error, no warning. Just a deployment which never happened. Check the colon, then check the destination path, and scp will do exactly what you meant.",
+  "headline": "scp rides the [ssh channel]"
+ },
+ {
+  "id": "s114",
+  "type": "CMD_RSYNC",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "S C P sends everything, every time. |R sync is cleverer, because ^it compares the two sides before it sends anything at all. Here ^fourteen thousand files are identical and get skipped, ^three have changed so those go, and ^one is new so that goes too. The result is ^two megabytes on the wire instead of four gigabytes, which turns a twenty minute transfer into a two second one. Two habits worth building. ^Dash dash dry run shows you exactly what it'd do and changes nothing, and |the ^trailing slash matters enormously: source slash copies the contents, source without copies the folder itself. ~Dry run it first, every time. Dry run, read the plan, then run it properly. That habit will save you a restore.",
+  "headline": "rsync sends only the [difference]"
+ },
+ {
+  "id": "s115",
+  "type": "CMD_NC",
+  "transition": "wipe",
+  "background": "zoneB",
+  "narration": "Before you debug an application, it's worth proving you can even reach it. |N C, short for netcat, hands you a raw socket with no protocol in the way, which answers exactly that. ^Five four three two answers, so postgres is open and listening there, and that rules out one whole class of problem. Now |try ^six three seven nine instead, and ^it's refused straight away. That refusal is good news, because ^refused means you reached the machine and it told you nothing is listening. Compare that with ^nothing at all, just silence until it times out. ^That's a firewall dropping your packet without a word. ~Refused and timeout mean opposite things. One is an application problem, the other is a network problem. One nc command tells you whether to debug the application or the network, which saves an hour.",
+  "headline": "nc asks one [blunt question]"
+ },
+ {
+  "id": "s116",
+  "type": "CMD_WGET",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "|W get is short for web get, and it's built around one assumption: you want this file, and you want it even if the network is unreliable. So take ^a four gigabyte download on a shaky connection. ^W get drops at sixty one percent, which is infuriating. But ^the partial file is still sitting on your disk, so |add ^dash C, for continue, and ^it resumes from sixty one percent rather than starting again. W get goes further than that: ^dash R follows links and will mirror an entire site, and ^it retries on its own without you sitting there watching. ~W get is for downloading things. Curl, which is next, is for talking to them, and that distinction is worth keeping.",
+  "headline": "wget is built to [finish]"
+ },
+ {
+  "id": "s117",
+  "type": "CMD_CURL",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Where W get fetches a file and finishes, curl holds a conversation with a server. Start with |curl and ^a plain get, the default. For a quick health check that's genuinely all you need, and it's all most people ever use it for. The real value comes when you need to send something rather than just fetch it, and which means controlling three parts yourself: method, headers and body. |Build it up piece by piece. ^Dash X sets the method: post, not get. ^Dash H adds a header. ^Dash D carries the body. Send it and ^two hundred and one created comes back. Add ^dash I for the response headers, which is often where the clue hides. ^You're assembling it by hand, with ^no library to misreport the answer. ~Curl's the fastest way to see what a server really said. Curl is worth learning properly, because it's how you find out what a server truly returned.",
+  "headline": "curl is for [talking], not downloading"
+ },
+ {
+  "id": "s118",
+  "type": "QUIZ_CARD",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Quick one. |Resyncing a huge folder, barely anything changed. Which tool? Have a think, and pause here if you need longer. |Ready? R sync, because it sends only differences.",
+  "data": {
+   "quiz": {
+    "question": "Huge folder, tiny change. Which tool?",
+    "options": [
+     {
+      "text": "scp"
+     },
+     {
+      "text": "rsync"
+     },
+     {
+      "text": "wget"
+     },
+     {
+      "text": "nc"
+     }
+    ],
+    "answerIndex": 1,
+    "why": "rsync transfers only the differences.",
+    "atWord": 2,
+    "revealAtWord": 22
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s119",
+  "type": "RECAP",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "Drawer eight is everything past this box. |Dig resolves names. |S S H gets a shell. |S C P and R sync move files. |N C and curl test the far end.",
+  "data": {
+   "heading": "Drawer eight, on the bench",
+   "points": [
+    {
+     "text": "dig and whois resolve names"
+    },
+    {
+     "text": "ssh gets you a shell"
+    },
+    {
+     "text": "scp and rsync move files"
+    },
+    {
+     "text": "nc and curl test the far end"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s120",
+  "type": "CHAPTER",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Drawer nine. Archives, scheduled jobs, and sessions that survive because you won't.",
+  "data": {
+   "chapter": {
+    "number": "09",
+    "title": "Jobs and sessions",
+    "subtitle": "and archives",
+    "color": "purple"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s121",
+  "type": "CMD_TAR",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "Tar is the most googled command on this entire list, and honestly that's avoidable. The name is short for ^tape archive, from back when which was literal. Those four letters after the dash are four separate instructions wearing one coat, so let's take them apart. |C ^creates a new archive, gathering many files into one. ^Z compresses that archive using gzip. ^V is verbose, printing each name as it goes in. And ^F names the output file, which is why F always comes last: whatever follows it's the filename. Now the part that saves you. ^Swap the C for an X and the whole thing runs backwards and extracts, while ^the other three letters stay exactly as they were. ~X to extract, C to create. Tar dash X Z V F to extract, tar dash C Z V F to create, and you're done with tar.",
+  "headline": "czvf is [four instructions]"
+ },
+ {
+  "id": "s122",
+  "type": "CMD_GZIP",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "|Gzip, which is short for G N U zip, shrinks a single file, and it's very good at it: ^forty one megabytes of log goes in and ^six megabytes comes out. But there's a behaviour here which catches everybody exactly once. ^The original file is gone. Gzip didn't make a copy alongside it; it replaced it, and you now have only the compressed version. ^That surprises people every single time, particularly inside a script that expected to read the original afterwards. So |add ^dash K, for keep, and both files survive. And it's quick: ^that took about a second. ~Gzip replaces by default, so learn dash K before you need it rather than after. Use dash K whenever a script downstream still expects the original file to be there.",
+  "headline": "gzip [replaces] the original"
+ },
+ {
+  "id": "s123",
+  "type": "CMD_BZIP2",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "Gzip is fast, and for almost anything you compress it's good enough. Every so often you want the file as small as it'll go. That's when you reach for |B zip two. Run both against the same log. ^Gzip finishes in a second, giving six megabytes. ^B zip two takes eight and a half, giving four and a half. You're paying ^seven times the processor time for a megabyte and a half. Whether that's worth it depends on what happens next. ^For a log you rotate nightly, it's a waste. ^For an archive you keep for seven years, it's obviously right. ^Write once, read almost never, is where it pays. ^X Z goes further still. ^But gzip stays the default, because it's fast enough and ^always installed. ~Match the compressor to how often you pay the cost back. Gzip for anything you touch often, bzip2 or xz for anything you're storing and forgetting.",
+  "headline": "bzip2 trades [time] for size"
+ },
+ {
+  "id": "s124",
+  "type": "CMD_ZIP",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "You've an archive which needs to go to somebody who has quite honestly never opened a terminal window in their entire life. |Zip is what they can open, and the difference from tar dot gz is structural. ^A tar dot gz is a single compressed stream, so ^to reach one file in the middle you've to decompress everything before it. ^Zip compresses each file separately ^and keeps an index at the end of the archive. That means you can ^pull one file straight out without touching the rest. ^And it opens with a double click on any operating system. ~So the rule is really about who opens it. Send zip to people and tar dot gz to servers.",
+  "headline": "zip is the [portable] one"
+ },
+ {
+  "id": "s125",
+  "type": "CMD_CRON",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "Scheduling on Linux comes down to one line of five numbers, and almost everybody copies that line from somewhere else without ever reading it properly. |Cron is five fields in a fixed order, and that order is the whole trick. ^The first field is the minute, zero to fifty nine. ^The second is the hour, zero to twenty three. ^The third is the day of the month. ^The fourth is the month. ^The fifth is the day of the week, where zero is Sunday. Then ^a star simply means every one of whatever that field counts. So this line means ^half past two in the morning, on Mondays only. ~Five stars means every single minute of every day, which is how people take servers down by accident. Read the five fields left to right, and any cron line becomes plain English.",
+  "headline": "cron is [five fields]"
+ },
+ {
+  "id": "s126",
+  "type": "CMD_CRONTAB",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "Cron is the schedule; |crontab is how you edit it. ^Dash E opens your table in an editor, and the important bit is that ^it validates the file when you save. ^A syntax error is rejected there and then, with a message telling you. Now compare that with editing the crontab file directly on disk, which people do all the time. ^That skips the check completely, and ^cron will simply skip the broken job, silently, forever. No email, no log entry, nothing. Which is why |dash ^L matters: it prints what's actually loaded right now, and ^that's the only real proof your job exists. ~A schedule you never verified isn't a schedule. Always use crontab dash E, then crontab dash L to confirm what actually got installed.",
+  "headline": "crontab -e, never [edit the file]"
+ },
+ {
+  "id": "s127",
+  "type": "CMD_BASHSCRIPT",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "A script is just a file with commands in it, and yet |the first time you run one you get ^permission denied. Here's why. ^New files aren't created executable, because which would be a terrible default. So |change mod plus X ^flips exactly that one bit, and ^the very same command now works. Two more details. ^The first line of the script names the interpreter that should run it, and ^that line is called the shebang. And |you ^have to write dot slash in front of the name, because the current folder is deliberately not in your search path. ~That's a security decision: if it were, dropping a file called L S into a shared directory would hijack everyone's commands. Shebang, chmod plus X, then dot slash. Three things, and your script runs anywhere.",
+  "headline": "Three lines and a [permission bit]"
+ },
+ {
+  "id": "s128",
+  "type": "CMD_ALIAS",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "|Alias binds a long command to a short name, and the trap is about where that binding lives. ^Type it at the prompt and it works straight away, ^but only inside this one shell, and only until you close it. ^Open a new terminal and it has gone. If you want it to outlive the session, |append it to ^your bashrc, which every new shell reads on startup, and ^now it survives forever. But here's the one which catches people. ^A script still can't see your aliases, ^because a script runs a non-interactive shell and bashrc isn't read at all. ~Which is exactly why a command that works perfectly when you type it fails the moment cron runs the same line. Put your aliases in bashrc, and put the real command in your scripts.",
+  "headline": "An alias dies unless you [save it]"
+ },
+ {
+  "id": "s129",
+  "type": "CMD_ENV",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "|Env shows the variables a command inherits when it starts. ^Path tells the shell where to look for commands. ^Home is your home directory. And ^every process you start inherits a copy of this whole set, which is how configuration reaches a program without a config file. Now the genuinely useful trick here. |Put ^debug equals one in front of a command and you've set that variable ^for that process alone, and for anything it starts. ^The very next command you type has no debug at all. ^Nothing else on the machine ever saw it. ~That matters on a shared box, because exporting a secret into your shell leaves it sitting in the environment of everything you run afterwards. Setting a variable in front of a command is the safest way to try something once.",
+  "headline": "env changes it for [one command]"
+ },
+ {
+  "id": "s130",
+  "type": "CMD_HISTORY",
+  "transition": "wipe",
+  "background": "zoneB",
+  "narration": "|History keeps ^everything you've typed, numbered, and there are three ways to reach back into it. ^Bang followed by a number runs that exact line again. |Bang ^bang runs the previous command. And the one you'll genuinely use every day is this: you run something, it fails because it needed privilege, and rather than retype any of it you just run |sudo ^bang bang. Better still, ^control R searches backwards through your history as you type. One warning, though. ^All of this is written to a file in your home directory, ^so any password you ever typed as part of a command is sitting on disk in plain text. ~Which is a good reason never to put one on a command line. Sudo bang bang will save you more typing this year than any other two words here.",
+  "headline": "history plus [Ctrl-R]"
+ },
+ {
+  "id": "s131",
+  "type": "CMD_SCREEN",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "Start a long job over S S H and it dies when the connection drops, because ^your session belongs to that connection and ^when it closes, everything inside goes with it. |Screen fixes that properly. ^Dash capital S creates a session which lives on the server itself, and ^the job runs inside that session rather than inside your connection. So now ^your connection can drop, your laptop can sleep, and the work carries straight on. When you come back, |screen ^dash R reattaches you and everything is exactly where you left it. And ^control A then D detaches deliberately. ~The session belongs to the server, not to you, which is the whole point. Start anything long inside screen or tmux, and a dropped connection stops mattering.",
+  "headline": "screen survives your [dropped wifi]"
+ },
+ {
+  "id": "s132",
+  "type": "CMD_TMUX",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "|T mux does everything screen does, so you get ^the same survival across a dropped connection, ^and then T mux splits the terminal into panes. That sounds cosmetic until you use it. ^One pane holds your editor. ^Another holds the logs, live, as you work. ^T mux's one session holding both, so you're watching your change and its effect at the same time without switching windows. |Attach ^by name from any machine and the whole layout comes back. One practical note: ^control B is the prefix key for everything in T mux, where screen uses control A. ~The muscle memory doesn't transfer between them, so pick one and commit to it. Tmux is worth an afternoon of practice, because it changes how you work on servers.",
+  "headline": "tmux adds [panes] to the same idea"
+ },
+ {
+  "id": "s133",
+  "type": "CMD_SYSTEMCTL",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Here's the distinction which catches people out, and getting the two confused costs them an outage. A service has ^two separate switches, not one. Here it's stopped. |Start it and ^it's running right now, serving traffic, completely fine. ^But it'll not come back after a reboot, because that's the other switch. |Enable is the one that ^makes it start at boot, and it doesn't start it now. So ^reboot this machine and ^only the service you enabled comes back on its own. |Status ^shows you both states at once, which is why it's the command to run when something isn't behaving. ~You almost always want both, and enable dash dash now does the pair in one go. Systemctl enable dash dash now is the command you actually wanted, nearly every time.",
+  "headline": "start is now. [enable] is after reboot"
+ },
+ {
+  "id": "s134",
+  "type": "CMD_JOURNALCTL",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "The mistake with |journal C T L is treating it like a file and scrolling. ^Journal C T L's a database, and you query it. ^Dash U narrows to one service, which is usually the first thing you want. |Add ^dash B and you only see this boot, so yesterday's noise disappears. Add ^dash P err and you only see errors and worse. ^Three filters, and what's left is the thing you were looking for. And when you want to watch it happen, |dash ^F follows the journal live, exactly like tail dash F on a log file. ~The habit worth building is ^composing filters rather than scrolling, because every flag narrows the set and they stack. Compose the filters and journalctl goes from overwhelming to the fastest log tool you own.",
+  "headline": "journalctl is [filters], not scrolling"
+ },
+ {
+  "id": "s135",
+  "type": "CMD_DMESG",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "When a piece of hardware starts to fail, the kernel notices it long before anything gets written down in a log file anywhere. The command is |D mesg, and D mesg prints ^that buffer, which isn't a log file at all. ^D mesg's fixed in size and it's a ring, which means ^new messages come in one end and ^the oldest are pushed off the other and lost. ^Dash T makes timestamps readable; by default they're seconds since boot. Now why you care: ^a disk starting to fail, a cable going bad, memory throwing errors, all of it appears here first, ^long before anything writes it to a log file. ~So check it early. On a busy machine that buffer wraps, and the message that explained everything is simply gone. Dmesg dash T piped into tail is worth running whenever a machine behaves strangely.",
+  "headline": "dmesg is a [ring buffer]"
+ },
+ {
+  "id": "s136",
+  "type": "QUIZ_CARD",
+  "transition": "dip",
+  "background": "zoneB",
+  "narration": "Quick one. You |started a service, and a reboot killed it. What was missed? Have a think, and pause here if you need longer. |Ready? Enable, not just start.",
+  "data": {
+   "quiz": {
+    "question": "Service works, dies after reboot. Missed what?",
+    "options": [
+     {
+      "text": "systemctl enable"
+     },
+     {
+      "text": "systemctl reload"
+     },
+     {
+      "text": "systemctl mask"
+     },
+     {
+      "text": "systemctl status"
+     }
+    ],
+    "answerIndex": 0,
+    "why": "start runs it now. enable is what survives a reboot.",
+    "atWord": 2,
+    "revealAtWord": 24
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s137",
+  "type": "RECAP",
+  "transition": "fade",
+  "background": "zoneC",
+  "narration": "Drawer nine runs without you. |Tar and gzip package it. |Cron schedules it. |System C T L and journal C T L supervise it. |T mux keeps it alive while you sleep.",
+  "data": {
+   "heading": "Drawer nine, on the bench",
+   "points": [
+    {
+     "text": "tar and gzip package"
+    },
+    {
+     "text": "cron and crontab schedule"
+    },
+    {
+     "text": "systemctl and journalctl run it"
+    },
+    {
+     "text": "screen and tmux survive"
+    }
+   ]
+  },
+  "anchors": [
+   "points.0.atWord",
+   "points.1.atWord",
+   "points.2.atWord",
+   "points.3.atWord"
+  ]
+ },
+ {
+  "id": "s138",
+  "type": "CHAPTER",
+  "transition": "push",
+  "background": "zoneA",
+  "narration": "Drawer ten. What to do when you're stuck, which is why these exist.",
+  "data": {
+   "chapter": {
+    "number": "10",
+    "title": "When you're stuck",
+    "subtitle": "the tools about tools",
+    "color": "blue"
+   }
+  },
+  "anchors": []
+ },
+ {
+  "id": "s139",
+  "type": "CMD_MAN",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "The manual isn't one book, it's ^numbered sections, and knowing that changes how useful it is. ^Section one is user commands. ^Section five is file formats. ^Section eight is administration. ^The same word can appear on several of those shelves. So |man passwd gives you the command that changes a password. But |man five passwd gives you ^the format of the etc passwd file, a completely different page answering a completely different question. ^The number in brackets at the top of any page tells you which one you're reading. ~If a manual page seems to be answering the wrong question, you're almost certainly on the wrong shelf. When a manual page seems to answer the wrong question, check the section number first.",
+  "headline": "man passwd and man [5] passwd differ"
+ },
+ {
+  "id": "s140",
+  "type": "CMD_APROPOS",
+  "transition": "dip",
+  "background": "zoneC",
+  "narration": "Here's the situation the manual normally fails at. ^You know exactly what you want to do, but you don't know what the command is called, ^and man needs a name you don't have. |Apropos solves it, because ^it searches the one-line descriptions of every manual page rather than their names. So ask it about disk usage and back come ^D U, which estimates file space usage, ^D F, which reports filesystem space, and ^N C D U, the interactive one. Three tools, from three different sections, found by describing the job. ^Man dash K is the identical command with a shorter name. ~Apropos answers the question you actually have, which is usually what was that thing called. Apropos is the command to remember for the days you've forgotten every other one.",
+  "headline": "apropos searches [descriptions]"
+ },
+ {
+  "id": "s141",
+  "type": "CMD_TLDR",
+  "transition": "wipe",
+  "background": "zoneA",
+  "narration": "The manual is complete, and completeness isn't always what you need at four in the afternoon. ^The page for tar runs to twelve hundred and forty one lines. ^T L D R's thorough and entirely correct. |T L D R, which stands for too long, didn't read, gives you ^eight lines instead: ^the handful of things people actually do with the command, written as examples you can copy. ^And what you wanted was almost certainly one of them. These aren't competitors. ^The manual is the reference you go to when the detail genuinely matters and you need to be sure. ^T L D R is the reminder you want when you've done this before and simply can't recall the flag order. ~Keep both. Install tldr today. T L D R'll save you the twelve hundred lines you didn't want to read. The manual settles arguments; tldr just gets you back to work.",
+  "headline": "tldr gives you the [normal] usage"
+ },
+ {
+  "id": "s142",
+  "type": "CMD_CHEAT",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "There are three kinds of documentation and this is the third. ^The manual is written by the people who wrote the tool. ^T L D R is written by the community. |Cheat ^is written by you. ^Dash E opens your own sheet for a command, and ^whatever flag you keep forgetting gets written down once, ^then |recalled later exactly as you left it. That matters more than it sounds, because ^your notes can hold the details no general documentation ever will: your server names, your paths, the exact R sync incantation your deployment needs. ~Write it down the second time you look something up, because there's always a third time and you'll not remember then either. Your own notes, written once, beat re-reading somebody else's documentation three times.",
+  "headline": "cheat stores [your own] notes"
+ },
+ {
+  "id": "s143",
+  "type": "CMD_LSPCI",
+  "transition": "push",
+  "background": "zoneC",
+  "narration": "A graphics card is installed, the machine boots perfectly well, and yet absolutely nothing on the system appears to be using the thing at all. |L S P C I dash K is where you find out why, because L S P C I lists hardware on the bus with the driver bound to each piece. ^The device is present, so the bus can see it. ^A kernel driver is in use, here i nine one five. ^Both of those need to be true. When ^that driver line is missing entirely, the hardware is present and completely unusable, and ^nothing will tell you: no error, no warning, it simply isn't used. ^That's a missing driver, not broken hardware, ^which is where an evening disappears. ~Present isn't working. Present and working are two different states, and lspci dash K is what tells them apart. Check the driver line before blaming the card, because that's where the evening goes.",
+  "headline": "lspci shows the [driver] too"
+ },
+ {
+  "id": "s144",
+  "type": "CMD_LSUSB",
+  "transition": "dip",
+  "background": "zoneA",
+  "narration": "Everything you plug in over U S B forms a physical tree, whether or not you ever picture it that way, and that shape explains a problem that otherwise makes no sense. |L S U S B dash T draws the tree. At the top sits ^bus one, the root hub on the motherboard. Into one port you've plugged ^an external hub, and hanging off it are ^a keyboard and ^an external drive. Here's what which tells you. ^Those two share one link back to the machine. ^The keyboard needs almost none of it; the drive would use all of it. So when ^that drive runs slowly and nothing about the drive changed, the answer is in this tree. Move it to ^a port on the machine, which has a link of its own. ~Nothing was broken; it was sharing. Before you replace a slow drive, look at the tree and try a different port. USB bandwidth is shared per hub, so where you plug something in genuinely matters.",
+  "headline": "lsusb shows the [tree]"
+ },
+ {
+  "id": "s145",
+  "type": "QUIZ_CARD",
+  "transition": "fade",
+  "background": "zoneB",
+  "narration": "Last one. You |know the job, not the command name. What do you reach for? Have a think, and pause here if you need longer. |Ready? Apropos, because it searches the descriptions.",
+  "data": {
+   "quiz": {
+    "question": "Know the job, not the name. Reach for?",
+    "options": [
+     {
+      "text": "man"
+     },
+     {
+      "text": "apropos"
+     },
+     {
+      "text": "which"
+     },
+     {
+      "text": "whereis"
+     }
+    ],
+    "answerIndex": 1,
+    "why": "apropos searches descriptions, so the name is what it returns.",
+    "atWord": 2,
+    "revealAtWord": 22
+   }
+  },
+  "anchors": [
+   "quiz.atWord",
+   "quiz.revealAtWord"
+  ]
+ },
+ {
+  "id": "s146",
+  "type": "TOOL_BENCH",
+  "transition": "iris",
+  "background": "zoneC",
+  "narration": "And that's the bench, all |ten drawers filled. A hundred and nine tools, and you never have to memorise one, because you only need to know which drawer to open.",
+  "data": {
+   "toolBench": {
+    "headline": "Ten drawers, [all filled]",
+    "color": "orange",
+    "atWord": 6,
+    "caption": "You don't memorise tools. You learn the drawers.",
+    "drawers": [
+     {
+      "label": "files",
+      "value": 10
+     },
+     {
+      "label": "text",
+      "value": 13
+     },
+     {
+      "label": "permissions",
+      "value": 12
+     },
+     {
+      "label": "processes",
+      "value": 15
+     },
+     {
+      "label": "watching",
+      "value": 8
+     },
+     {
+      "label": "disks",
+      "value": 11
+     },
+     {
+      "label": "network",
+      "value": 10
+     },
+     {
+      "label": "remote",
+      "value": 10
+     },
+     {
+      "label": "jobs",
+      "value": 15
+     },
+     {
+      "label": "help",
+      "value": 6
+     }
+    ]
+   }
+  },
+  "anchors": [
+   "toolBench.atWord"
+  ]
+ },
+ {
+  "id": "s147",
+  "type": "OUTRO_CTA",
+  "transition": "fade",
+  "background": "zoneA",
+  "narration": "If one of these saved you a search, subscribing helps. And if you take one thing away, make it this: check what D D points at, twice, before you press enter.",
+  "data": {
+   "message": "Subscribe for more Linux, clearly",
+   "sub": "THE NBX STUDIO"
+  },
+  "anchors": []
+ }
+]

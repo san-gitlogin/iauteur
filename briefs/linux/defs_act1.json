@@ -1,0 +1,519 @@
+[
+ {
+  "cmd": "cd",
+  "type": "CMD_CD",
+  "name": "CmdCd",
+  "dataKey": "cmdCd",
+  "kind": "tree",
+  "color": "blue",
+  "stageTitle": "where you are now",
+  "blurb": "a directory tree with the you-are-here marker moving as each path is entered.",
+  "example": {
+   "headline": "cd moves [you], not the files",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "..",
+   "steps": [
+    {
+     "label": "cd /home/santhu/api",
+     "text": "",
+     "detail": "absolute: starts at /",
+     "atWord": 3
+    },
+    {
+     "label": "cd ../logs",
+     "text": "",
+     "detail": "relative: up one, then down",
+     "atWord": 10
+    }
+   ],
+   "stage": [
+    {
+     "label": "/",
+     "value": 0
+    },
+    {
+     "label": "home",
+     "value": 1
+    },
+    {
+     "label": "santhu",
+     "value": 2
+    },
+    {
+     "label": "api",
+     "value": 3,
+     "color": "blue",
+     "atWord": 5
+    },
+    {
+     "label": "logs",
+     "value": 3,
+     "color": "green",
+     "atWord": 12
+    }
+   ],
+   "verdict": "The tree never moved",
+   "verdictSub": "only your position in it did",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "pwd",
+  "type": "CMD_PWD",
+  "name": "CmdPwd",
+  "dataKey": "cmdPwd",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "the answer, assembled",
+  "blurb": "the full path built one segment at a time from the root down to where you stand.",
+  "example": {
+   "headline": "pwd prints [where you stand]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~/api",
+   "steps": [
+    {
+     "label": "pwd",
+     "text": "/home/santhu/api",
+     "detail": "always absolute",
+     "atWord": 2
+    }
+   ],
+   "stage": [
+    {
+     "label": "/",
+     "sub": "the root",
+     "atWord": 4
+    },
+    {
+     "label": "home",
+     "sub": "all users",
+     "atWord": 6
+    },
+    {
+     "label": "santhu",
+     "sub": "your account",
+     "atWord": 8
+    },
+    {
+     "label": "api",
+     "sub": "you are here",
+     "color": "green",
+     "atWord": 10
+    }
+   ],
+   "verdict": "Never a relative path",
+   "verdictSub": "pwd answers from the root, every time",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "mkdir",
+  "type": "CMD_MKDIR",
+  "name": "CmdMkdir",
+  "dataKey": "cmdMkdir",
+  "kind": "tree",
+  "color": "green",
+  "stageTitle": "the tree, growing",
+  "blurb": "new directories appearing in the tree, with -p creating a whole missing chain at once.",
+  "example": {
+   "headline": "mkdir -p builds the [whole chain]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~/projects",
+   "highlight": "-p",
+   "steps": [
+    {
+     "label": "mkdir api",
+     "text": "",
+     "detail": "one level only",
+     "atWord": 2
+    },
+    {
+     "label": "mkdir -p api/src/handlers",
+     "text": "",
+     "detail": "every missing level at once",
+     "atWord": 9
+    }
+   ],
+   "stage": [
+    {
+     "label": "projects",
+     "value": 0
+    },
+    {
+     "label": "api",
+     "value": 1,
+     "color": "green",
+     "atWord": 4
+    },
+    {
+     "label": "src",
+     "value": 2,
+     "color": "green",
+     "atWord": 11
+    },
+    {
+     "label": "handlers",
+     "value": 3,
+     "color": "green",
+     "atWord": 13
+    }
+   ],
+   "verdict": "Without -p it fails",
+   "verdictSub": "the parent has to exist first",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "touch",
+  "type": "CMD_TOUCH",
+  "name": "CmdTouch",
+  "dataKey": "cmdTouch",
+  "kind": "rows",
+  "color": "yellow",
+  "stageTitle": "the file's two clocks",
+  "blurb": "the access and modify timestamps moving, and an empty file appearing when there was none.",
+  "example": {
+   "headline": "touch sets [timestamps], not content",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~/api",
+   "steps": [
+    {
+     "label": "touch notes.md",
+     "text": "",
+     "detail": "file did not exist \u2014 created, empty",
+     "atWord": 2
+    },
+    {
+     "label": "touch notes.md",
+     "text": "",
+     "detail": "file existed \u2014 only the clock moved",
+     "atWord": 9
+    }
+   ],
+   "stage": [
+    {
+     "label": "notes.md",
+     "sub": "0 bytes",
+     "text": "created",
+     "color": "green",
+     "atWord": 4
+    },
+    {
+     "label": "mtime",
+     "sub": "last content change",
+     "text": "09:14",
+     "atWord": 11
+    },
+    {
+     "label": "atime",
+     "sub": "last read",
+     "text": "09:14",
+     "atWord": 13
+    }
+   ],
+   "verdict": "Content is never touched",
+   "verdictSub": "which is why make relies on it",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "cp",
+  "type": "CMD_CP",
+  "name": "CmdCp",
+  "dataKey": "cmdCp",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "two files from here on",
+  "blurb": "one file becoming two independent copies, then an edit landing on only one of them.",
+  "example": {
+   "headline": "cp makes a [second file]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~/api",
+   "highlight": "-r",
+   "steps": [
+    {
+     "label": "cp notes.md backup.md",
+     "text": "",
+     "detail": "one file, then two",
+     "atWord": 2
+    },
+    {
+     "label": "cp -r src/ src-old/",
+     "text": "",
+     "detail": "-r for a whole directory",
+     "atWord": 10
+    }
+   ],
+   "stage": [
+    {
+     "label": "notes.md",
+     "sub": "the original",
+     "text": "edited",
+     "color": "orange",
+     "atWord": 5
+    },
+    {
+     "label": "backup.md",
+     "sub": "the copy",
+     "text": "unchanged",
+     "color": "green",
+     "atWord": 7
+    }
+   ],
+   "verdict": "Separate from the moment of copy",
+   "verdictSub": "editing one never touches the other",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "mv",
+  "type": "CMD_MV",
+  "name": "CmdMv",
+  "dataKey": "cmdMv",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "the same file, renamed",
+  "blurb": "one file changing its name and place without a second copy ever existing.",
+  "example": {
+   "headline": "mv renames and moves \u2014 [same command]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~/api",
+   "steps": [
+    {
+     "label": "mv notes.md todo.md",
+     "text": "",
+     "detail": "renamed in place",
+     "atWord": 2
+    },
+    {
+     "label": "mv todo.md archive/",
+     "text": "",
+     "detail": "same command, new directory",
+     "atWord": 9
+    }
+   ],
+   "stage": [
+    {
+     "label": "notes.md",
+     "sub": "before",
+     "text": "gone",
+     "atWord": 4
+    },
+    {
+     "label": "todo.md",
+     "sub": "after: same inode",
+     "text": "same file",
+     "color": "green",
+     "atWord": 6
+    },
+    {
+     "label": "archive/todo.md",
+     "sub": "moved, still one file",
+     "text": "one copy",
+     "color": "blue",
+     "atWord": 11
+    }
+   ],
+   "verdict": "No copy is ever made",
+   "verdictSub": "unless it crosses a filesystem",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "rm",
+  "type": "CMD_RM",
+  "name": "CmdRm",
+  "dataKey": "cmdRm",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "what is left afterwards",
+  "blurb": "each guard flag meeting the delete, and the one form that walks straight through them.",
+  "example": {
+   "headline": "Every guard on [rm] is opt-in",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-rf",
+   "steps": [
+    {
+     "label": "rm projects",
+     "text": "rm: is a directory",
+     "detail": "refused outright",
+     "atWord": 2
+    },
+    {
+     "label": "rm -i -r projects",
+     "text": "remove projects/api.log?",
+     "detail": "asks, once per file",
+     "atWord": 8
+    },
+    {
+     "label": "rm -rf projects",
+     "text": "",
+     "detail": "no prompt, no bin, no undo",
+     "atWord": 15
+    }
+   ],
+   "stage": [
+    {
+     "label": "plain rm",
+     "sub": "refuses a directory",
+     "text": "safe",
+     "color": "green",
+     "atWord": 4
+    },
+    {
+     "label": "-i",
+     "sub": "prompts every time",
+     "text": "safe",
+     "color": "green",
+     "atWord": 10
+    },
+    {
+     "label": "-rf",
+     "sub": "asks nothing at all",
+     "text": "gone",
+     "color": "red",
+     "atWord": 17
+    }
+   ],
+   "verdict": "412 files, no confirmation",
+   "verdictSub": "there is no recycle bin on Linux",
+   "verdictAtWord": 20
+  }
+ },
+ {
+  "cmd": "ln",
+  "type": "CMD_LN",
+  "name": "CmdLn",
+  "dataKey": "cmdLn",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "what each name points at",
+  "blurb": "two names on one inode, and a symbolic link left dangling when its target disappears.",
+  "example": {
+   "headline": "A hard link is a [second name]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~/api",
+   "highlight": "-s",
+   "steps": [
+    {
+     "label": "ln notes.md backup.md",
+     "text": "",
+     "detail": "hard: points at the data",
+     "atWord": 2
+    },
+    {
+     "label": "ln -s notes.md latest.md",
+     "text": "",
+     "detail": "soft: points at the name",
+     "atWord": 9
+    },
+    {
+     "label": "rm notes.md",
+     "text": "",
+     "detail": "the original name is gone",
+     "atWord": 16
+    }
+   ],
+   "stage": [
+    {
+     "label": "backup.md",
+     "sub": "hard link",
+     "text": "still works",
+     "color": "green",
+     "atWord": 5
+    },
+    {
+     "label": "latest.md",
+     "sub": "symbolic link",
+     "text": "dangling",
+     "color": "red",
+     "atWord": 12
+    },
+    {
+     "label": "link count",
+     "sub": "names pointing at the data",
+     "text": "2 \u2192 1",
+     "atWord": 18
+    }
+   ],
+   "verdict": "Hard links survive deletion",
+   "verdictSub": "the data lives until the last name goes",
+   "verdictAtWord": 21
+  }
+ },
+ {
+  "cmd": "clear",
+  "type": "CMD_CLEAR",
+  "name": "CmdClear",
+  "dataKey": "cmdClear",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "what survives the wipe",
+  "blurb": "the visible screen emptying while the scrollback quietly stays, until reset removes it too.",
+  "example": {
+   "headline": "clear hides. [reset] forgets",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "clear",
+     "text": "",
+     "detail": "screen blank, scrollback intact",
+     "atWord": 2
+    },
+    {
+     "label": "reset",
+     "text": "",
+     "detail": "terminal reinitialised",
+     "atWord": 9
+    }
+   ],
+   "stage": [
+    {
+     "label": "visible screen",
+     "sub": "after clear",
+     "text": "empty",
+     "color": "green",
+     "atWord": 4
+    },
+    {
+     "label": "scrollback",
+     "sub": "after clear",
+     "text": "still there",
+     "color": "orange",
+     "atWord": 6
+    },
+    {
+     "label": "scrollback",
+     "sub": "after reset",
+     "text": "gone",
+     "color": "red",
+     "atWord": 11
+    }
+   ],
+   "verdict": "Scroll up and it is all there",
+   "verdictSub": "clear is cosmetic, reset is not",
+   "verdictAtWord": 14
+  }
+ }
+]

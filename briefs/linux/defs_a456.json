@@ -1,0 +1,1854 @@
+[
+ {
+  "cmd": "ps",
+  "type": "CMD_PS",
+  "name": "CmdPs",
+  "dataKey": "cmdPs",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "a frozen snapshot",
+  "blurb": "the process list as a single moment in time, with the PID every other tool needs.",
+  "example": {
+   "headline": "ps is a [snapshot], not a feed",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "ps aux",
+     "atWord": 2,
+     "text": "santhu 4821 63.2 node",
+     "detail": "BSD style"
+    },
+    {
+     "label": "ps -ef",
+     "atWord": 9,
+     "text": "santhu 4821 1 node",
+     "detail": "UNIX style, same data"
+    }
+   ],
+   "stage": [
+    {
+     "label": "PID 4821",
+     "atWord": 4,
+     "sub": "node",
+     "text": "63% cpu",
+     "color": "red"
+    },
+    {
+     "label": "PID 1140",
+     "atWord": 6,
+     "sub": "nginx",
+     "text": "8% cpu"
+    },
+    {
+     "label": "PID 1",
+     "atWord": 11,
+     "sub": "systemd",
+     "text": "0% cpu"
+    }
+   ],
+   "verdict": "The PID is what you need",
+   "verdictSub": "every other tool asks for that number",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "pstree",
+  "type": "CMD_PSTREE",
+  "name": "CmdPstree",
+  "dataKey": "cmdPstree",
+  "kind": "tree",
+  "color": "purple",
+  "stageTitle": "who started whom",
+  "blurb": "the same processes drawn as a lineage from PID 1 downward.",
+  "example": {
+   "headline": "pstree shows [who started whom]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "pstree -p",
+     "atWord": 2,
+     "text": "systemd(1)-+-nginx(1140)",
+     "detail": "the whole family"
+    }
+   ],
+   "stage": [
+    {
+     "label": "systemd (1)",
+     "atWord": 4,
+     "sub": "the ancestor of everything",
+     "value": 0
+    },
+    {
+     "label": "nginx (1140)",
+     "atWord": 6,
+     "sub": "started by systemd",
+     "value": 1
+    },
+    {
+     "label": "worker (1141)",
+     "atWord": 8,
+     "sub": "started by nginx",
+     "color": "green",
+     "value": 2
+    },
+    {
+     "label": "orphan",
+     "atWord": 11,
+     "sub": "reparented to PID 1",
+     "color": "orange",
+     "value": 1
+    }
+   ],
+   "verdict": "Kill a parent, PID 1 adopts",
+   "verdictSub": "children are never left without one",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "top",
+  "type": "CMD_TOP",
+  "name": "CmdTop",
+  "dataKey": "cmdTop",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "the list, re-sorting",
+  "blurb": "rows physically reordering as load moves, which is what separates it from ps.",
+  "example": {
+   "headline": "top re-sorts [as you watch]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "top",
+     "atWord": 2,
+     "detail": "press q to leave, M to sort by memory"
+    }
+   ],
+   "stage": [
+    {
+     "label": "node",
+     "atWord": 4,
+     "sub": "climbing",
+     "text": "94%",
+     "color": "red"
+    },
+    {
+     "label": "postgres",
+     "atWord": 6,
+     "sub": "steady",
+     "text": "31%"
+    },
+    {
+     "label": "nginx",
+     "atWord": 8,
+     "sub": "idle",
+     "text": "2%"
+    }
+   ],
+   "verdict": "The first thing you open",
+   "verdictSub": "when a box feels slow and you do not know why",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "htop",
+  "type": "CMD_HTOP",
+  "name": "CmdHtop",
+  "dataKey": "cmdHtop",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "the friendlier view",
+  "blurb": "the same numbers with colour, per-core bars and a mouse you can actually click.",
+  "example": {
+   "headline": "htop is top with [colour and a mouse]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "htop",
+     "atWord": 2,
+     "detail": "F9 kills, F6 sorts"
+    }
+   ],
+   "stage": [
+    {
+     "label": "per-core bars",
+     "atWord": 4,
+     "sub": "one per CPU",
+     "text": "visual",
+     "color": "green"
+    },
+    {
+     "label": "mouse support",
+     "atWord": 6,
+     "sub": "click to select",
+     "text": "yes",
+     "color": "green"
+    },
+    {
+     "label": "F9 to kill",
+     "atWord": 8,
+     "sub": "no PID typing",
+     "text": "yes",
+     "color": "green"
+    }
+   ],
+   "verdict": "Same data, far less squinting",
+   "verdictSub": "install it on every box you own",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "btop",
+  "type": "CMD_BTOP",
+  "name": "CmdBtop",
+  "dataKey": "cmdBtop",
+  "kind": "meters",
+  "color": "purple",
+  "stageTitle": "graphs over time",
+  "blurb": "rolling per-core and memory graphs rather than a single instant.",
+  "example": {
+   "headline": "btop draws it [over time]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "btop",
+     "atWord": 2,
+     "detail": "the modern rewrite"
+    }
+   ],
+   "stage": [
+    {
+     "label": "CPU",
+     "atWord": 4,
+     "sub": "last 60 seconds",
+     "color": "green",
+     "value": 72
+    },
+    {
+     "label": "memory",
+     "atWord": 6,
+     "sub": "climbing steadily",
+     "color": "orange",
+     "value": 64
+    },
+    {
+     "label": "network",
+     "atWord": 8,
+     "sub": "quiet",
+     "value": 12
+    }
+   ],
+   "verdict": "A spike you can see coming",
+   "verdictSub": "an instant reading hides the trend",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "atop",
+  "type": "CMD_ATOP",
+  "name": "CmdAtop",
+  "dataKey": "cmdAtop",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "yesterday, replayed",
+  "blurb": "the viewer that logged to disk, letting you scroll back to the incident.",
+  "example": {
+   "headline": "atop already [recorded it]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-r",
+   "steps": [
+    {
+     "label": "atop -r /var/log/atop/atop_20260817",
+     "atWord": 2,
+     "detail": "replay yesterday"
+    }
+   ],
+   "stage": [
+    {
+     "label": "14:00",
+     "atWord": 4,
+     "sub": "normal",
+     "text": "ok",
+     "color": "green"
+    },
+    {
+     "label": "14:40",
+     "atWord": 6,
+     "sub": "the spike",
+     "text": "found",
+     "color": "red"
+    },
+    {
+     "label": "15:10",
+     "atWord": 8,
+     "sub": "recovered",
+     "text": "ok",
+     "color": "green"
+    }
+   ],
+   "verdict": "Answers after the fact",
+   "verdictSub": "top can only ever show you now",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "glances",
+  "type": "CMD_GLANCES",
+  "name": "CmdGlances",
+  "dataKey": "cmdGlances",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "everything on one pane",
+  "blurb": "every subsystem at once, colouring the ones in trouble first.",
+  "example": {
+   "headline": "glances shows [everything] at once",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "glances",
+     "atWord": 2,
+     "detail": "one screen, all subsystems"
+    }
+   ],
+   "stage": [
+    {
+     "label": "CPU",
+     "atWord": 4,
+     "sub": "fine",
+     "text": "28%",
+     "color": "green"
+    },
+    {
+     "label": "memory",
+     "atWord": 6,
+     "sub": "fine",
+     "text": "41%",
+     "color": "green"
+    },
+    {
+     "label": "disk I/O",
+     "atWord": 8,
+     "sub": "saturated",
+     "text": "98%",
+     "color": "red"
+    },
+    {
+     "label": "network",
+     "atWord": 10,
+     "sub": "fine",
+     "text": "12%",
+     "color": "green"
+    }
+   ],
+   "verdict": "The red one finds you",
+   "verdictSub": "no need to know which tool to open",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "nmon",
+  "type": "CMD_NMON",
+  "name": "CmdNmon",
+  "dataKey": "cmdNmon",
+  "kind": "rows",
+  "color": "purple",
+  "stageTitle": "panels you switch on",
+  "blurb": "subsystem panels toggled by keypress until the view is the one you want.",
+  "example": {
+   "headline": "nmon builds the view [you want]",
+   "color": "purple",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "nmon",
+     "atWord": 2,
+     "detail": "then press c, m, d, n"
+    }
+   ],
+   "stage": [
+    {
+     "label": "press c",
+     "atWord": 4,
+     "sub": "CPU panel",
+     "text": "on",
+     "color": "green"
+    },
+    {
+     "label": "press m",
+     "atWord": 6,
+     "sub": "memory panel",
+     "text": "on",
+     "color": "green"
+    },
+    {
+     "label": "press d",
+     "atWord": 8,
+     "sub": "disk panel",
+     "text": "on",
+     "color": "green"
+    },
+    {
+     "label": "press n",
+     "atWord": 10,
+     "sub": "network panel",
+     "text": "on",
+     "color": "green"
+    }
+   ],
+   "verdict": "Built for capture, not just watching",
+   "verdictSub": "-f writes a file you can graph later",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "kill",
+  "type": "CMD_KILL",
+  "name": "CmdKill",
+  "dataKey": "cmdKill",
+  "kind": "hops",
+  "color": "red",
+  "stageTitle": "the signal arriving",
+  "blurb": "a signal travelling from your terminal through the kernel to the process.",
+  "example": {
+   "headline": "kill sends a [signal], not a bullet",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "token": "SIGTERM (15)",
+   "steps": [
+    {
+     "label": "kill 4821",
+     "atWord": 2,
+     "detail": "the default is SIGTERM"
+    },
+    {
+     "label": "kill -9 4821",
+     "atWord": 11,
+     "detail": "SIGKILL, when nothing else works"
+    }
+   ],
+   "stage": [
+    {
+     "label": "your terminal",
+     "atWord": 4,
+     "text": "sends"
+    },
+    {
+     "label": "the kernel",
+     "atWord": 6,
+     "text": "delivers"
+    },
+    {
+     "label": "node (4821)",
+     "atWord": 8,
+     "sub": "catches it, saves, exits",
+     "text": "clean",
+     "color": "green"
+    },
+    {
+     "label": "with -9",
+     "atWord": 13,
+     "sub": "no chance to clean up",
+     "text": "abrupt",
+     "color": "red"
+    }
+   ],
+   "verdict": "SIGTERM first, always",
+   "verdictSub": "-9 loses whatever was unsaved",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "killall",
+  "type": "CMD_KILLALL",
+  "name": "CmdKillall",
+  "dataKey": "cmdKillall",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "everything with that name",
+  "blurb": "one name resolving to every matching process at once.",
+  "example": {
+   "headline": "killall hits [all of them]",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "killall node",
+     "atWord": 2,
+     "detail": "by name, not by PID"
+    }
+   ],
+   "stage": [
+    {
+     "label": "node 4821",
+     "atWord": 4,
+     "sub": "yours",
+     "text": "killed",
+     "color": "red"
+    },
+    {
+     "label": "node 4822",
+     "atWord": 6,
+     "sub": "yours",
+     "text": "killed",
+     "color": "red"
+    },
+    {
+     "label": "node 5310",
+     "atWord": 8,
+     "sub": "a colleague's",
+     "text": "killed too",
+     "color": "red"
+    }
+   ],
+   "verdict": "Fine on a laptop",
+   "verdictSub": "genuinely dangerous on a shared server",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "nohup",
+  "type": "CMD_NOHUP",
+  "name": "CmdNohup",
+  "dataKey": "cmdNohup",
+  "kind": "rows",
+  "color": "green",
+  "stageTitle": "surviving the logout",
+  "blurb": "the hangup signal reaching every child except the one told to ignore it.",
+  "example": {
+   "headline": "nohup ignores the [hangup]",
+   "color": "green",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "./backup.sh &",
+     "atWord": 2,
+     "detail": "dies when you log out"
+    },
+    {
+     "label": "nohup ./backup.sh &",
+     "atWord": 9,
+     "text": "nohup: ignoring input",
+     "detail": "survives"
+    }
+   ],
+   "stage": [
+    {
+     "label": "you close the terminal",
+     "atWord": 4,
+     "sub": "SIGHUP is sent",
+     "text": "signal"
+    },
+    {
+     "label": "plain background job",
+     "atWord": 6,
+     "sub": "receives it",
+     "text": "dies",
+     "color": "red"
+    },
+    {
+     "label": "under nohup",
+     "atWord": 11,
+     "sub": "ignores it",
+     "text": "lives",
+     "color": "green"
+    }
+   ],
+   "verdict": "Output goes to nohup.out",
+   "verdictSub": "unless you redirect it yourself",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "sleep",
+  "type": "CMD_SLEEP",
+  "name": "CmdSleep",
+  "dataKey": "cmdSleep",
+  "kind": "flow",
+  "color": "blue",
+  "stageTitle": "a script, waiting",
+  "blurb": "the clock advancing inside a script while nothing else happens.",
+  "example": {
+   "headline": "sleep pauses [the script]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "sleep 5",
+     "atWord": 2,
+     "detail": "seconds by default"
+    },
+    {
+     "label": "sleep 2m",
+     "atWord": 8,
+     "detail": "m, h and d also work"
+    }
+   ],
+   "stage": [
+    {
+     "label": "start",
+     "atWord": 4,
+     "sub": "the script runs"
+    },
+    {
+     "label": "sleep 5",
+     "atWord": 6,
+     "sub": "nothing happens",
+     "text": "5s",
+     "color": "orange"
+    },
+    {
+     "label": "resume",
+     "atWord": 10,
+     "sub": "the next line",
+     "color": "green"
+    }
+   ],
+   "verdict": "Blocks, never busy-waits",
+   "verdictSub": "it costs no CPU at all",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "wait",
+  "type": "CMD_WAIT",
+  "name": "CmdWait",
+  "dataKey": "cmdWait",
+  "kind": "flow",
+  "color": "blue",
+  "stageTitle": "holding for the jobs",
+  "blurb": "background jobs finishing at their own pace while the script waits for the last one.",
+  "example": {
+   "headline": "wait holds until [they finish]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "./a.sh & ./b.sh &",
+     "atWord": 2,
+     "detail": "two jobs in the background"
+    },
+    {
+     "label": "wait",
+     "atWord": 9,
+     "detail": "hold here until both are done"
+    }
+   ],
+   "stage": [
+    {
+     "label": "job a",
+     "atWord": 4,
+     "sub": "running",
+     "text": "3s"
+    },
+    {
+     "label": "job b",
+     "atWord": 6,
+     "sub": "running",
+     "text": "7s"
+    },
+    {
+     "label": "without wait",
+     "atWord": 11,
+     "sub": "script exits early",
+     "text": "bug",
+     "color": "red"
+    },
+    {
+     "label": "with wait",
+     "atWord": 13,
+     "sub": "script waits for b",
+     "text": "correct",
+     "color": "green"
+    }
+   ],
+   "verdict": "Without it, the script lies",
+   "verdictSub": "it reports done while work is running",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "lsof",
+  "type": "CMD_LSOF",
+  "name": "CmdLsof",
+  "dataKey": "cmdLsof",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "who is holding it",
+  "blurb": "the file, every process holding it open, and the unmount that keeps failing.",
+  "example": {
+   "headline": "lsof names the [holder]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "/",
+   "highlight": "-i",
+   "steps": [
+    {
+     "label": "umount /mnt/data",
+     "atWord": 2,
+     "text": "target is busy",
+     "detail": "refused"
+    },
+    {
+     "label": "lsof /mnt/data",
+     "atWord": 8,
+     "text": "tail 4821 api.log",
+     "detail": "there is your culprit"
+    },
+    {
+     "label": "lsof -i :443",
+     "atWord": 14,
+     "text": "nginx 1140 LISTEN",
+     "detail": "works for ports too"
+    }
+   ],
+   "stage": [
+    {
+     "label": "tail (4821)",
+     "atWord": 5,
+     "sub": "holding api.log",
+     "text": "blocks unmount",
+     "color": "red"
+    },
+    {
+     "label": "vim (5102)",
+     "atWord": 10,
+     "sub": "holding conf",
+     "text": "blocks unmount",
+     "color": "red"
+    },
+    {
+     "label": "nginx (1140)",
+     "atWord": 16,
+     "sub": "holding port 443",
+     "text": "listening",
+     "color": "green"
+    }
+   ],
+   "verdict": "A socket counts as a file",
+   "verdictSub": "which is why -i finds port conflicts",
+   "verdictAtWord": 19
+  }
+ },
+ {
+  "cmd": "strace",
+  "type": "CMD_STRACE",
+  "name": "CmdStrace",
+  "dataKey": "cmdStrace",
+  "kind": "flow",
+  "color": "yellow",
+  "stageTitle": "the calls it really makes",
+  "blurb": "each system call crossing into the kernel and the answer that comes back.",
+  "example": {
+   "headline": "strace shows what it [really tried]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-e",
+   "steps": [
+    {
+     "label": "strace ./app",
+     "atWord": 2,
+     "detail": "thousands of lines"
+    },
+    {
+     "label": "strace -e openat ./app",
+     "atWord": 10,
+     "text": "openat(...) = -1 ENOENT",
+     "detail": "filtered to what matters"
+    }
+   ],
+   "stage": [
+    {
+     "label": "your program",
+     "atWord": 4,
+     "sub": "asks the kernel",
+     "text": "openat()"
+    },
+    {
+     "label": "the kernel",
+     "atWord": 6,
+     "sub": "looks for the path",
+     "text": "checking"
+    },
+    {
+     "label": "the answer",
+     "atWord": 12,
+     "sub": "no such file",
+     "text": "ENOENT",
+     "color": "red"
+    }
+   ],
+   "verdict": "It failed on a missing file",
+   "verdictSub": "not on the thing the error claimed",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "uptime",
+  "type": "CMD_UPTIME",
+  "name": "CmdUptime",
+  "dataKey": "cmdUptime",
+  "kind": "meters",
+  "color": "yellow",
+  "stageTitle": "three numbers, one trend",
+  "blurb": "load averaged over one, five and fifteen minutes, read against the core count.",
+  "example": {
+   "headline": "Load is [three numbers], not one",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "uptime",
+     "atWord": 2,
+     "text": "load average: 4.10, 3.20, 1.90",
+     "detail": "and the box has 8 cores"
+    }
+   ],
+   "stage": [
+    {
+     "label": "1 minute",
+     "atWord": 4,
+     "sub": "right now",
+     "text": "4.10",
+     "color": "orange",
+     "value": 51
+    },
+    {
+     "label": "5 minutes",
+     "atWord": 6,
+     "sub": "settling",
+     "text": "3.20",
+     "color": "green",
+     "value": 40
+    },
+    {
+     "label": "15 minutes",
+     "atWord": 8,
+     "sub": "was calm",
+     "text": "1.90",
+     "color": "green",
+     "value": 24
+    }
+   ],
+   "verdict": "4 on 8 cores is half busy",
+   "verdictSub": "the same 4 on 2 cores is on fire",
+   "verdictAtWord": 12
+  }
+ },
+ {
+  "cmd": "free",
+  "type": "CMD_FREE",
+  "name": "CmdFree",
+  "dataKey": "cmdFree",
+  "kind": "meters",
+  "color": "yellow",
+  "stageTitle": "why free looks alarming",
+  "blurb": "cache drawn as reclaimable, so the frightening number turns out to be fine.",
+  "example": {
+   "headline": "Low free memory is [normal]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-h",
+   "steps": [
+    {
+     "label": "free -h",
+     "atWord": 2,
+     "text": "free 312Mi  available 21Gi",
+     "detail": "two very different numbers"
+    }
+   ],
+   "stage": [
+    {
+     "label": "used",
+     "atWord": 4,
+     "sub": "real programs",
+     "color": "orange",
+     "value": 38
+    },
+    {
+     "label": "cache",
+     "atWord": 6,
+     "sub": "reclaimable instantly",
+     "color": "blue",
+     "value": 54
+    },
+    {
+     "label": "free",
+     "atWord": 8,
+     "sub": "genuinely unused",
+     "color": "red",
+     "value": 8
+    },
+    {
+     "label": "available",
+     "atWord": 11,
+     "sub": "what you can actually get",
+     "color": "green",
+     "value": 62
+    }
+   ],
+   "verdict": "Read available, ignore free",
+   "verdictSub": "Linux spends spare memory on purpose",
+   "verdictAtWord": 14
+  }
+ },
+ {
+  "cmd": "vmstat",
+  "type": "CMD_VMSTAT",
+  "name": "CmdVmstat",
+  "dataKey": "cmdVmstat",
+  "kind": "rows",
+  "color": "yellow",
+  "stageTitle": "sampled on an interval",
+  "blurb": "columns re-reading every second, with the first row being a lie about now.",
+  "example": {
+   "headline": "vmstat's first row is [since boot]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "vmstat 1",
+     "atWord": 2,
+     "detail": "one sample per second"
+    }
+   ],
+   "stage": [
+    {
+     "label": "row 1",
+     "atWord": 4,
+     "sub": "average since boot",
+     "text": "ignore",
+     "color": "red"
+    },
+    {
+     "label": "row 2",
+     "atWord": 6,
+     "sub": "the last second",
+     "text": "real",
+     "color": "green"
+    },
+    {
+     "label": "si / so",
+     "atWord": 8,
+     "sub": "swap in and out",
+     "text": "watch this",
+     "color": "orange"
+    }
+   ],
+   "verdict": "Non-zero swap is the red flag",
+   "verdictSub": "it means memory pressure, not just usage",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "iostat",
+  "type": "CMD_IOSTAT",
+  "name": "CmdIostat",
+  "dataKey": "cmdIostat",
+  "kind": "meters",
+  "color": "yellow",
+  "stageTitle": "per device, per second",
+  "blurb": "throughput and queue time for each disk, with await as the number that matters.",
+  "example": {
+   "headline": "await is the number [that matters]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-x",
+   "steps": [
+    {
+     "label": "iostat -x 1",
+     "atWord": 2,
+     "detail": "extended stats, once a second"
+    }
+   ],
+   "stage": [
+    {
+     "label": "sda read",
+     "atWord": 4,
+     "sub": "MB/s",
+     "color": "green",
+     "value": 22
+    },
+    {
+     "label": "sda write",
+     "atWord": 6,
+     "sub": "MB/s",
+     "color": "orange",
+     "value": 78
+    },
+    {
+     "label": "await",
+     "atWord": 9,
+     "sub": "ms per request",
+     "text": "41ms",
+     "color": "red",
+     "value": 82
+    }
+   ],
+   "verdict": "High await means queuing",
+   "verdictSub": "the disk is the bottleneck, not the CPU",
+   "verdictAtWord": 12
+  }
+ },
+ {
+  "cmd": "iotop",
+  "type": "CMD_IOTOP",
+  "name": "CmdIotop",
+  "dataKey": "cmdIotop",
+  "kind": "rows",
+  "color": "yellow",
+  "stageTitle": "which process is writing",
+  "blurb": "the write storm traced back to the single process responsible for it.",
+  "example": {
+   "headline": "iotop names the [writer]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "iotop -o",
+     "atWord": 2,
+     "text": "postgres 88 M/s",
+     "detail": "-o shows only active ones"
+    }
+   ],
+   "stage": [
+    {
+     "label": "postgres",
+     "atWord": 4,
+     "sub": "88 M/s",
+     "text": "the culprit",
+     "color": "red"
+    },
+    {
+     "label": "rsync",
+     "atWord": 6,
+     "sub": "12 M/s",
+     "text": "expected"
+    },
+    {
+     "label": "everything else",
+     "atWord": 8,
+     "sub": "~0",
+     "text": "idle"
+    }
+   ],
+   "verdict": "iostat says the disk is busy",
+   "verdictSub": "iotop says who made it busy",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "dstat",
+  "type": "CMD_DSTAT",
+  "name": "CmdDstat",
+  "dataKey": "cmdDstat",
+  "kind": "rows",
+  "color": "yellow",
+  "stageTitle": "several subsystems, one line",
+  "blurb": "CPU, disk and network sampled together instead of in three separate tools.",
+  "example": {
+   "headline": "dstat puts it [on one line]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "dstat -cdn",
+     "atWord": 2,
+     "detail": "cpu, disk, network"
+    }
+   ],
+   "stage": [
+    {
+     "label": "cpu",
+     "atWord": 4,
+     "sub": "user and system",
+     "text": "31%"
+    },
+    {
+     "label": "disk",
+     "atWord": 6,
+     "sub": "read and write",
+     "text": "74 M/s",
+     "color": "orange"
+    },
+    {
+     "label": "net",
+     "atWord": 8,
+     "sub": "send and receive",
+     "text": "12 M/s"
+    }
+   ],
+   "verdict": "Correlation in one glance",
+   "verdictSub": "disk spikes and CPU waits line up visibly",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "sar",
+  "type": "CMD_SAR",
+  "name": "CmdSar",
+  "dataKey": "cmdSar",
+  "kind": "rows",
+  "color": "yellow",
+  "stageTitle": "yesterday, on disk",
+  "blurb": "numbers recorded all day, recoverable long after the incident is over.",
+  "example": {
+   "headline": "sar already [wrote it down]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-f",
+   "steps": [
+    {
+     "label": "sar -u -f /var/log/sa/sa17",
+     "atWord": 2,
+     "text": "14:40  us 91.2",
+     "detail": "yesterday afternoon"
+    }
+   ],
+   "stage": [
+    {
+     "label": "14:00",
+     "atWord": 4,
+     "sub": "normal",
+     "text": "12%",
+     "color": "green"
+    },
+    {
+     "label": "14:40",
+     "atWord": 6,
+     "sub": "the spike",
+     "text": "91%",
+     "color": "red"
+    },
+    {
+     "label": "15:10",
+     "atWord": 8,
+     "sub": "recovered",
+     "text": "14%",
+     "color": "green"
+    }
+   ],
+   "verdict": "Enable sysstat before you need it",
+   "verdictSub": "you cannot record the past afterwards",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "watch",
+  "type": "CMD_WATCH",
+  "name": "CmdWatch",
+  "dataKey": "cmdWatch",
+  "kind": "flow",
+  "color": "yellow",
+  "stageTitle": "any command, on a loop",
+  "blurb": "a command rerun on a timer with the differences between passes highlighted.",
+  "example": {
+   "headline": "watch turns anything [into a dashboard]",
+   "color": "yellow",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-d",
+   "steps": [
+    {
+     "label": "watch -n 2 df -h",
+     "atWord": 2,
+     "detail": "every two seconds"
+    },
+    {
+     "label": "watch -d free -h",
+     "atWord": 9,
+     "detail": "-d highlights what changed"
+    }
+   ],
+   "stage": [
+    {
+     "label": "run",
+     "atWord": 4,
+     "sub": "the command"
+    },
+    {
+     "label": "show",
+     "atWord": 6,
+     "sub": "its output"
+    },
+    {
+     "label": "diff",
+     "atWord": 11,
+     "sub": "what changed",
+     "text": "highlighted",
+     "color": "green"
+    },
+    {
+     "label": "wait",
+     "atWord": 13,
+     "sub": "2 seconds, repeat"
+    }
+   ],
+   "verdict": "A slow leak becomes obvious",
+   "verdictSub": "one reading never shows a trend",
+   "verdictAtWord": 16
+  }
+ },
+ {
+  "cmd": "df",
+  "type": "CMD_DF",
+  "name": "CmdDf",
+  "dataKey": "cmdDf",
+  "kind": "meters",
+  "color": "red",
+  "stageTitle": "space, and the other limit",
+  "blurb": "fullness per filesystem, plus the inode gauge that fills independently.",
+  "example": {
+   "headline": "df -i is the [trap] nobody checks",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "santhu@box",
+   "cwd": "~",
+   "highlight": "-i",
+   "steps": [
+    {
+     "label": "df -h",
+     "atWord": 2,
+     "text": "/dev/sda1  62% used",
+     "detail": "plenty of room"
+    },
+    {
+     "label": "df -i",
+     "atWord": 9,
+     "text": "/dev/sda1  100% inodes",
+     "detail": "and yet writes fail"
+    }
+   ],
+   "stage": [
+    {
+     "label": "space used",
+     "atWord": 4,
+     "sub": "gigabytes",
+     "text": "62%",
+     "color": "green",
+     "value": 62
+    },
+    {
+     "label": "inodes used",
+     "atWord": 11,
+     "sub": "one per file",
+     "text": "100%",
+     "color": "red",
+     "value": 100
+    }
+   ],
+   "verdict": "Space free, writes failing",
+   "verdictSub": "millions of tiny files exhausted the inodes",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "du",
+  "type": "CMD_DU",
+  "name": "CmdDu",
+  "dataKey": "cmdDu",
+  "kind": "meters",
+  "color": "red",
+  "stageTitle": "which directory ate it",
+  "blurb": "sizes summed upward per directory until the offender is obvious.",
+  "example": {
+   "headline": "du finds [which directory] ate it",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "/",
+   "highlight": "-d 1",
+   "steps": [
+    {
+     "label": "du -sh /var/*",
+     "atWord": 2,
+     "text": "48G  /var/log",
+     "detail": "summed per directory"
+    },
+    {
+     "label": "du -h -d 1 /var/log",
+     "atWord": 10,
+     "text": "44G  /var/log/nginx",
+     "detail": "one level down"
+    }
+   ],
+   "stage": [
+    {
+     "label": "/var/log",
+     "atWord": 4,
+     "sub": "the biggest",
+     "text": "48G",
+     "color": "red",
+     "value": 88
+    },
+    {
+     "label": "/home",
+     "atWord": 6,
+     "text": "26G",
+     "color": "blue",
+     "value": 48
+    },
+    {
+     "label": "/usr",
+     "atWord": 8,
+     "text": "18G",
+     "value": 33
+    },
+    {
+     "label": "/var/log/nginx",
+     "atWord": 12,
+     "sub": "the real culprit",
+     "text": "44G",
+     "color": "red",
+     "value": 80
+    }
+   ],
+   "verdict": "Walk down, never guess",
+   "verdictSub": "df says full, du says why",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "ncdu",
+  "type": "CMD_NCDU",
+  "name": "CmdNcdu",
+  "dataKey": "cmdNcdu",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "browse it interactively",
+  "blurb": "the same walk, but navigable, so you descend into the biggest folder repeatedly.",
+  "example": {
+   "headline": "ncdu lets you [walk down] into it",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "/var",
+   "steps": [
+    {
+     "label": "ncdu /var",
+     "atWord": 2,
+     "detail": "arrow keys to descend, d to delete"
+    }
+   ],
+   "stage": [
+    {
+     "label": "/var/log",
+     "atWord": 4,
+     "sub": "press enter",
+     "text": "48G",
+     "color": "red"
+    },
+    {
+     "label": "/var/log/nginx",
+     "atWord": 6,
+     "sub": "press enter again",
+     "text": "44G",
+     "color": "red"
+    },
+    {
+     "label": "access.log.1",
+     "atWord": 8,
+     "sub": "the actual file",
+     "text": "41G",
+     "color": "red"
+    }
+   ],
+   "verdict": "Three keystrokes to the file",
+   "verdictSub": "du needs three separate commands",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "fdisk",
+  "type": "CMD_FDISK",
+  "name": "CmdFdisk",
+  "dataKey": "cmdFdisk",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "the partition table",
+  "blurb": "a raw disk being divided into numbered regions, written only on command.",
+  "example": {
+   "headline": "fdisk writes [nothing] until you say w",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "highlight": "-l",
+   "steps": [
+    {
+     "label": "fdisk -l /dev/sda",
+     "atWord": 2,
+     "detail": "just look"
+    },
+    {
+     "label": "fdisk /dev/sda",
+     "atWord": 9,
+     "text": "Command (m for help):",
+     "detail": "interactive"
+    }
+   ],
+   "stage": [
+    {
+     "label": "sda1",
+     "atWord": 4,
+     "sub": "boot",
+     "text": "512M"
+    },
+    {
+     "label": "sda2",
+     "atWord": 6,
+     "sub": "root",
+     "text": "64G",
+     "color": "green"
+    },
+    {
+     "label": "sda3",
+     "atWord": 8,
+     "sub": "swap",
+     "text": "8G"
+    },
+    {
+     "label": "press w",
+     "atWord": 11,
+     "sub": "now it is written",
+     "text": "committed",
+     "color": "red"
+    }
+   ],
+   "verdict": "Quit with q and nothing changed",
+   "verdictSub": "the table lives in memory until w",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "parted",
+  "type": "CMD_PARTED",
+  "name": "CmdParted",
+  "dataKey": "cmdParted",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "for the large disks",
+  "blurb": "the same job on disks too big for the old partition table format.",
+  "example": {
+   "headline": "parted handles [large disks]",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "parted /dev/sdb mklabel gpt",
+     "atWord": 2,
+     "detail": "GPT, not MBR"
+    }
+   ],
+   "stage": [
+    {
+     "label": "MBR limit",
+     "atWord": 4,
+     "sub": "the old format",
+     "text": "2 TB",
+     "color": "red"
+    },
+    {
+     "label": "GPT",
+     "atWord": 6,
+     "sub": "the modern one",
+     "text": "9.4 ZB",
+     "color": "green"
+    },
+    {
+     "label": "your 4TB disk",
+     "atWord": 8,
+     "sub": "needs GPT",
+     "text": "required",
+     "color": "orange"
+    }
+   ],
+   "verdict": "Over 2TB, MBR simply cannot",
+   "verdictSub": "the address field is not wide enough",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "blkid",
+  "type": "CMD_BLKID",
+  "name": "CmdBlkid",
+  "dataKey": "cmdBlkid",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "names move, UUIDs do not",
+  "blurb": "each device with its UUID and type, and why fstab should use the UUID.",
+  "example": {
+   "headline": "Use the [UUID] in fstab",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "blkid",
+     "atWord": 2,
+     "text": "/dev/sdb1: UUID=e5f6-a7b8 TYPE=xfs",
+     "detail": "identity, not position"
+    }
+   ],
+   "stage": [
+    {
+     "label": "/dev/sdb1",
+     "atWord": 4,
+     "sub": "today",
+     "text": "the name"
+    },
+    {
+     "label": "/dev/sdc1",
+     "atWord": 6,
+     "sub": "after a reboot",
+     "text": "moved",
+     "color": "red"
+    },
+    {
+     "label": "UUID e5f6-a7b8",
+     "atWord": 8,
+     "sub": "always the same disk",
+     "text": "stable",
+     "color": "green"
+    }
+   ],
+   "verdict": "Device names are not promises",
+   "verdictSub": "plug in a USB stick and they shuffle",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "mkfs",
+  "type": "CMD_MKFS",
+  "name": "CmdMkfs",
+  "dataKey": "cmdMkfs",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "the filesystem being written",
+  "blurb": "empty structure laid across a partition, erasing whatever lived there.",
+  "example": {
+   "headline": "mkfs [erases] whatever was there",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "steps": [
+    {
+     "label": "mkfs.ext4 /dev/sdb1",
+     "atWord": 2,
+     "text": "Creating journal...",
+     "detail": "no confirmation prompt"
+    }
+   ],
+   "stage": [
+    {
+     "label": "before",
+     "atWord": 4,
+     "sub": "your old data",
+     "text": "present"
+    },
+    {
+     "label": "mkfs runs",
+     "atWord": 6,
+     "sub": "structure written",
+     "color": "orange"
+    },
+    {
+     "label": "after",
+     "atWord": 8,
+     "sub": "an empty filesystem",
+     "text": "gone",
+     "color": "red"
+    }
+   ],
+   "verdict": "There is no undo here either",
+   "verdictSub": "check the device name twice",
+   "verdictAtWord": 11
+  }
+ },
+ {
+  "cmd": "fsck",
+  "type": "CMD_FSCK",
+  "name": "CmdFsck",
+  "dataKey": "cmdFsck",
+  "kind": "rows",
+  "color": "orange",
+  "stageTitle": "checks, then repairs",
+  "blurb": "the structure swept for damage, with one check catching a fault.",
+  "example": {
+   "headline": "fsck needs it [unmounted]",
+   "color": "orange",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "highlight": "-y",
+   "steps": [
+    {
+     "label": "fsck /dev/sdb1",
+     "atWord": 2,
+     "text": "is mounted. Really continue?",
+     "detail": "say no"
+    },
+    {
+     "label": "umount /dev/sdb1 && fsck -y /dev/sdb1",
+     "atWord": 10,
+     "detail": "now it is safe"
+    }
+   ],
+   "stage": [
+    {
+     "label": "inodes",
+     "atWord": 5,
+     "sub": "scanned",
+     "text": "ok",
+     "color": "green"
+    },
+    {
+     "label": "block map",
+     "atWord": 7,
+     "sub": "scanned",
+     "text": "ok",
+     "color": "green"
+    },
+    {
+     "label": "directory tree",
+     "atWord": 12,
+     "sub": "orphan found",
+     "text": "repaired",
+     "color": "orange"
+    }
+   ],
+   "verdict": "On a mounted disk it corrupts",
+   "verdictSub": "the kernel is writing while fsck reads",
+   "verdictAtWord": 15
+  }
+ },
+ {
+  "cmd": "mount",
+  "type": "CMD_MOUNT",
+  "name": "CmdMount",
+  "dataKey": "cmdMount",
+  "kind": "tree",
+  "color": "blue",
+  "stageTitle": "two trees becoming one",
+  "blurb": "another filesystem grafted into the tree, hiding whatever sat at that point.",
+  "example": {
+   "headline": "mount [grafts] a second tree in",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "/",
+   "steps": [
+    {
+     "label": "mount /dev/sdb1 /mnt/data",
+     "atWord": 2,
+     "detail": "attached at the mount point"
+    }
+   ],
+   "stage": [
+    {
+     "label": "/",
+     "atWord": 4,
+     "sub": "the root filesystem",
+     "value": 0
+    },
+    {
+     "label": "mnt",
+     "atWord": 6,
+     "value": 1
+    },
+    {
+     "label": "data",
+     "atWord": 8,
+     "sub": "now /dev/sdb1 lives here",
+     "color": "green",
+     "value": 2
+    },
+    {
+     "label": "old contents",
+     "atWord": 10,
+     "sub": "hidden, not deleted",
+     "color": "orange",
+     "value": 2
+    }
+   ],
+   "verdict": "Files under a mount point hide",
+   "verdictSub": "unmount and they reappear untouched",
+   "verdictAtWord": 13
+  }
+ },
+ {
+  "cmd": "umount",
+  "type": "CMD_UMOUNT",
+  "name": "CmdUmount",
+  "dataKey": "cmdUmount",
+  "kind": "rows",
+  "color": "blue",
+  "stageTitle": "why it refuses",
+  "blurb": "the unmount blocked by an open file, then succeeding once the holder lets go.",
+  "example": {
+   "headline": "umount refuses while [something holds it]",
+   "color": "blue",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "/",
+   "steps": [
+    {
+     "label": "umount /mnt/data",
+     "atWord": 2,
+     "text": "target is busy",
+     "detail": "blocked"
+    },
+    {
+     "label": "lsof /mnt/data",
+     "atWord": 8,
+     "text": "tail 4821",
+     "detail": "there it is"
+    },
+    {
+     "label": "kill 4821 && umount /mnt/data",
+     "atWord": 13,
+     "detail": "now it works"
+    }
+   ],
+   "stage": [
+    {
+     "label": "tail (4821)",
+     "atWord": 5,
+     "sub": "holding a file open",
+     "text": "blocks",
+     "color": "red"
+    },
+    {
+     "label": "kill it",
+     "atWord": 15,
+     "sub": "the handle closes",
+     "text": "released",
+     "color": "green"
+    },
+    {
+     "label": "umount",
+     "atWord": 17,
+     "text": "succeeds",
+     "color": "green"
+    }
+   ],
+   "verdict": "Never reach for -f first",
+   "verdictSub": "a forced unmount can lose writes",
+   "verdictAtWord": 20
+  }
+ },
+ {
+  "cmd": "dd",
+  "type": "CMD_DD",
+  "name": "CmdDd",
+  "dataKey": "cmdDd",
+  "kind": "rows",
+  "color": "red",
+  "stageTitle": "what happens to the target",
+  "blurb": "the block copy running with no confirmation, and one wrong letter erasing a disk.",
+  "example": {
+   "headline": "dd is the [four characters]",
+   "color": "red",
+   "atWord": 1,
+   "promptLabel": "root@box",
+   "cwd": "~",
+   "highlight": "of=",
+   "steps": [
+    {
+     "label": "dd if=/dev/sda of=backup.img",
+     "atWord": 2,
+     "detail": "reads the disk into a file"
+    },
+    {
+     "label": "dd if=backup.img of=/dev/sdb",
+     "atWord": 10,
+     "detail": "writes to the spare disk"
+    },
+    {
+     "label": "dd if=backup.img of=/dev/sda",
+     "atWord": 17,
+     "detail": "one letter wrong"
+    }
+   ],
+   "stage": [
+    {
+     "label": "if= is the source",
+     "atWord": 5,
+     "sub": "read from here",
+     "text": "safe",
+     "color": "green"
+    },
+    {
+     "label": "of= is the target",
+     "atWord": 12,
+     "sub": "written over",
+     "text": "careful",
+     "color": "orange"
+    },
+    {
+     "label": "/dev/sda",
+     "atWord": 19,
+     "sub": "your running system",
+     "text": "destroyed",
+     "color": "red"
+    }
+   ],
+   "verdict": "No prompt. No progress. No undo.",
+   "verdictSub": "status=progress at least shows you something",
+   "verdictAtWord": 22
+  }
+ }
+]
