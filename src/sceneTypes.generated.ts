@@ -4,6 +4,135 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'DSA_FRAMEWORK'
+  | 'DSA_COST'
+  | 'DSA_SIGNALS'
+  | 'DSA_TRACE_LIST'
+  | 'DSA_TRACE_INTERVALS'
+  | 'DSA_TRACE_DP'
+  | 'DSA_TRACE_TREE'
+  | 'DSA_TRACE_GRID'
+  | 'DSA_TRACE_STACK'
+  | 'DSA_TRACE_HASH'
+  | 'DSA_TRACE_BSEARCH'
+  | 'DSA_TRACE_WINDOW'
+  | 'DSA_TRACE_PTRS'
+  | 'CMD_LSUSB'
+  | 'CMD_LSPCI'
+  | 'CMD_CHEAT'
+  | 'CMD_TLDR'
+  | 'CMD_APROPOS'
+  | 'CMD_MAN'
+  | 'CMD_DMESG'
+  | 'CMD_JOURNALCTL'
+  | 'CMD_SYSTEMCTL'
+  | 'CMD_TMUX'
+  | 'CMD_SCREEN'
+  | 'CMD_HISTORY'
+  | 'CMD_ENV'
+  | 'CMD_ALIAS'
+  | 'CMD_BASHSCRIPT'
+  | 'CMD_CRONTAB'
+  | 'CMD_CRON'
+  | 'CMD_ZIP'
+  | 'CMD_BZIP2'
+  | 'CMD_GZIP'
+  | 'CMD_TAR'
+  | 'CMD_CURL'
+  | 'CMD_WGET'
+  | 'CMD_NC'
+  | 'CMD_RSYNC'
+  | 'CMD_SCP'
+  | 'CMD_SSH'
+  | 'CMD_WHOIS'
+  | 'CMD_NSLOOKUP'
+  | 'CMD_HOST'
+  | 'CMD_DIG'
+  | 'CMD_NLOAD'
+  | 'CMD_NETHOGS'
+  | 'CMD_IFTOP'
+  | 'CMD_NMCLI'
+  | 'CMD_SS'
+  | 'CMD_NETSTAT'
+  | 'CMD_MTR'
+  | 'CMD_TRACEROUTE'
+  | 'CMD_PING'
+  | 'CMD_IP'
+  | 'CMD_DD'
+  | 'CMD_UMOUNT'
+  | 'CMD_MOUNT'
+  | 'CMD_FSCK'
+  | 'CMD_MKFS'
+  | 'CMD_BLKID'
+  | 'CMD_PARTED'
+  | 'CMD_FDISK'
+  | 'CMD_NCDU'
+  | 'CMD_DU'
+  | 'CMD_DF'
+  | 'CMD_WATCH'
+  | 'CMD_SAR'
+  | 'CMD_DSTAT'
+  | 'CMD_IOTOP'
+  | 'CMD_IOSTAT'
+  | 'CMD_VMSTAT'
+  | 'CMD_FREE'
+  | 'CMD_UPTIME'
+  | 'CMD_STRACE'
+  | 'CMD_LSOF'
+  | 'CMD_WAIT'
+  | 'CMD_SLEEP'
+  | 'CMD_NOHUP'
+  | 'CMD_KILLALL'
+  | 'CMD_KILL'
+  | 'CMD_NMON'
+  | 'CMD_GLANCES'
+  | 'CMD_ATOP'
+  | 'CMD_BTOP'
+  | 'CMD_HTOP'
+  | 'CMD_TOP'
+  | 'CMD_PSTREE'
+  | 'CMD_PS'
+  | 'CMD_CHROOT'
+  | 'CMD_LAST'
+  | 'CMD_W'
+  | 'CMD_CHPASSWD'
+  | 'CMD_PASSWD'
+  | 'CMD_USERDEL'
+  | 'CMD_USERMOD'
+  | 'CMD_USERADD'
+  | 'CMD_SUDO'
+  | 'CMD_UMASK'
+  | 'CMD_CHOWN'
+  | 'CMD_CHMOD'
+  | 'CMD_XARGS'
+  | 'CMD_SED'
+  | 'CMD_AWK'
+  | 'CMD_GREP'
+  | 'CMD_LOCATE'
+  | 'CMD_FIND'
+  | 'CMD_DIFF'
+  | 'CMD_VI'
+  | 'CMD_TAIL'
+  | 'CMD_LESS'
+  | 'CMD_MORE'
+  | 'CMD_TAC'
+  | 'CMD_CAT'
+  | 'CMD_TOUCH'
+  | 'CMD_CLEAR'
+  | 'CMD_LN'
+  | 'CMD_RM'
+  | 'CMD_MV'
+  | 'CMD_CP'
+  | 'CMD_MKDIR'
+  | 'CMD_PWD'
+  | 'CMD_CD'
+  | 'CMD_LS'
+  | 'COPY_FORK'
+  | 'TOOL_BENCH'
+  | 'DELETION_GUARD'
+  | 'LINK_PAIR'
+  | 'LISTING_ROW'
+  | 'PATH_WALK'
   | 'RECORD_DRAFT'
   | 'FROZEN_FRAME'
   | 'ORDER_ROULETTE'
@@ -213,6 +342,2459 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type DsaFrameworkScene = SceneCommon<'DSA_FRAMEWORK'> & { data: {
+    dsaFramework: {
+      headline?: string;
+      cells?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaCostScene = SceneCommon<'DSA_COST'> & { data: {
+    dsaCost: {
+      premise?: string;
+      headline?: string;
+      cells?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaSignalsScene = SceneCommon<'DSA_SIGNALS'> & { data: {
+    dsaSignals: {
+      premise?: string;
+      problem?: string;
+      headline?: string;
+      cells?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceListScene = SceneCommon<'DSA_TRACE_LIST'> & { data: {
+    dsaList: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      aux?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceIntervalsScene = SceneCommon<'DSA_TRACE_INTERVALS'> & { data: {
+    dsaIntervals: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceDpScene = SceneCommon<'DSA_TRACE_DP'> & { data: {
+    dsaDp: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      aux?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceTreeScene = SceneCommon<'DSA_TRACE_TREE'> & { data: {
+    dsaTree: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      aux?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceGridScene = SceneCommon<'DSA_TRACE_GRID'> & { data: {
+    dsaGrid: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      aux?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceStackScene = SceneCommon<'DSA_TRACE_STACK'> & { data: {
+    dsaStack: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      aux?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceHashScene = SceneCommon<'DSA_TRACE_HASH'> & { data: {
+    dsaHash: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      aux?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceBsearchScene = SceneCommon<'DSA_TRACE_BSEARCH'> & { data: {
+    dsaBsearch: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTraceWindowScene = SceneCommon<'DSA_TRACE_WINDOW'> & { data: {
+    dsaWindow: {
+      premise?: string;
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DsaTracePtrsScene = SceneCommon<'DSA_TRACE_PTRS'> & { data: {
+    dsaPtrs: {
+      headline?: string;
+      lines: Array<Record<string, unknown>>;
+      cells?: Array<Record<string, unknown>>;
+      pointers?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      codeTitle?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdLsusbScene = SceneCommon<'CMD_LSUSB'> & { data: {
+    cmdLsusb: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdLspciScene = SceneCommon<'CMD_LSPCI'> & { data: {
+    cmdLspci: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdCheatScene = SceneCommon<'CMD_CHEAT'> & { data: {
+    cmdCheat: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdTldrScene = SceneCommon<'CMD_TLDR'> & { data: {
+    cmdTldr: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdAproposScene = SceneCommon<'CMD_APROPOS'> & { data: {
+    cmdApropos: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdManScene = SceneCommon<'CMD_MAN'> & { data: {
+    cmdMan: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdDmesgScene = SceneCommon<'CMD_DMESG'> & { data: {
+    cmdDmesg: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdJournalctlScene = SceneCommon<'CMD_JOURNALCTL'> & { data: {
+    cmdJournalctl: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdSystemctlScene = SceneCommon<'CMD_SYSTEMCTL'> & { data: {
+    cmdSystemctl: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdTmuxScene = SceneCommon<'CMD_TMUX'> & { data: {
+    cmdTmux: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdScreenScene = SceneCommon<'CMD_SCREEN'> & { data: {
+    cmdScreen: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdHistoryScene = SceneCommon<'CMD_HISTORY'> & { data: {
+    cmdHistory: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdEnvScene = SceneCommon<'CMD_ENV'> & { data: {
+    cmdEnv: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdAliasScene = SceneCommon<'CMD_ALIAS'> & { data: {
+    cmdAlias: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdBashscriptScene = SceneCommon<'CMD_BASHSCRIPT'> & { data: {
+    cmdBashscript: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdCrontabScene = SceneCommon<'CMD_CRONTAB'> & { data: {
+    cmdCrontab: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdCronScene = SceneCommon<'CMD_CRON'> & { data: {
+    cmdCron: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdZipScene = SceneCommon<'CMD_ZIP'> & { data: {
+    cmdZip: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdBzip2Scene = SceneCommon<'CMD_BZIP2'> & { data: {
+    cmdBzip2: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdGzipScene = SceneCommon<'CMD_GZIP'> & { data: {
+    cmdGzip: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdTarScene = SceneCommon<'CMD_TAR'> & { data: {
+    cmdTar: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdCurlScene = SceneCommon<'CMD_CURL'> & { data: {
+    cmdCurl: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdWgetScene = SceneCommon<'CMD_WGET'> & { data: {
+    cmdWget: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNcScene = SceneCommon<'CMD_NC'> & { data: {
+    cmdNc: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdRsyncScene = SceneCommon<'CMD_RSYNC'> & { data: {
+    cmdRsync: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdScpScene = SceneCommon<'CMD_SCP'> & { data: {
+    cmdScp: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdSshScene = SceneCommon<'CMD_SSH'> & { data: {
+    cmdSsh: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdWhoisScene = SceneCommon<'CMD_WHOIS'> & { data: {
+    cmdWhois: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNslookupScene = SceneCommon<'CMD_NSLOOKUP'> & { data: {
+    cmdNslookup: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdHostScene = SceneCommon<'CMD_HOST'> & { data: {
+    cmdHost: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdDigScene = SceneCommon<'CMD_DIG'> & { data: {
+    cmdDig: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNloadScene = SceneCommon<'CMD_NLOAD'> & { data: {
+    cmdNload: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNethogsScene = SceneCommon<'CMD_NETHOGS'> & { data: {
+    cmdNethogs: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdIftopScene = SceneCommon<'CMD_IFTOP'> & { data: {
+    cmdIftop: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNmcliScene = SceneCommon<'CMD_NMCLI'> & { data: {
+    cmdNmcli: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdSsScene = SceneCommon<'CMD_SS'> & { data: {
+    cmdSs: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNetstatScene = SceneCommon<'CMD_NETSTAT'> & { data: {
+    cmdNetstat: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdMtrScene = SceneCommon<'CMD_MTR'> & { data: {
+    cmdMtr: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdTracerouteScene = SceneCommon<'CMD_TRACEROUTE'> & { data: {
+    cmdTraceroute: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdPingScene = SceneCommon<'CMD_PING'> & { data: {
+    cmdPing: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdIpScene = SceneCommon<'CMD_IP'> & { data: {
+    cmdIp: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdDdScene = SceneCommon<'CMD_DD'> & { data: {
+    cmdDd: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdUmountScene = SceneCommon<'CMD_UMOUNT'> & { data: {
+    cmdUmount: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdMountScene = SceneCommon<'CMD_MOUNT'> & { data: {
+    cmdMount: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdFsckScene = SceneCommon<'CMD_FSCK'> & { data: {
+    cmdFsck: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdMkfsScene = SceneCommon<'CMD_MKFS'> & { data: {
+    cmdMkfs: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdBlkidScene = SceneCommon<'CMD_BLKID'> & { data: {
+    cmdBlkid: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdPartedScene = SceneCommon<'CMD_PARTED'> & { data: {
+    cmdParted: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdFdiskScene = SceneCommon<'CMD_FDISK'> & { data: {
+    cmdFdisk: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNcduScene = SceneCommon<'CMD_NCDU'> & { data: {
+    cmdNcdu: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdDuScene = SceneCommon<'CMD_DU'> & { data: {
+    cmdDu: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdDfScene = SceneCommon<'CMD_DF'> & { data: {
+    cmdDf: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdWatchScene = SceneCommon<'CMD_WATCH'> & { data: {
+    cmdWatch: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdSarScene = SceneCommon<'CMD_SAR'> & { data: {
+    cmdSar: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdDstatScene = SceneCommon<'CMD_DSTAT'> & { data: {
+    cmdDstat: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdIotopScene = SceneCommon<'CMD_IOTOP'> & { data: {
+    cmdIotop: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdIostatScene = SceneCommon<'CMD_IOSTAT'> & { data: {
+    cmdIostat: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdVmstatScene = SceneCommon<'CMD_VMSTAT'> & { data: {
+    cmdVmstat: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdFreeScene = SceneCommon<'CMD_FREE'> & { data: {
+    cmdFree: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdUptimeScene = SceneCommon<'CMD_UPTIME'> & { data: {
+    cmdUptime: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdStraceScene = SceneCommon<'CMD_STRACE'> & { data: {
+    cmdStrace: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdLsofScene = SceneCommon<'CMD_LSOF'> & { data: {
+    cmdLsof: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdWaitScene = SceneCommon<'CMD_WAIT'> & { data: {
+    cmdWait: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdSleepScene = SceneCommon<'CMD_SLEEP'> & { data: {
+    cmdSleep: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNohupScene = SceneCommon<'CMD_NOHUP'> & { data: {
+    cmdNohup: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdKillallScene = SceneCommon<'CMD_KILLALL'> & { data: {
+    cmdKillall: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdKillScene = SceneCommon<'CMD_KILL'> & { data: {
+    cmdKill: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdNmonScene = SceneCommon<'CMD_NMON'> & { data: {
+    cmdNmon: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdGlancesScene = SceneCommon<'CMD_GLANCES'> & { data: {
+    cmdGlances: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdAtopScene = SceneCommon<'CMD_ATOP'> & { data: {
+    cmdAtop: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdBtopScene = SceneCommon<'CMD_BTOP'> & { data: {
+    cmdBtop: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdHtopScene = SceneCommon<'CMD_HTOP'> & { data: {
+    cmdHtop: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdTopScene = SceneCommon<'CMD_TOP'> & { data: {
+    cmdTop: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdPstreeScene = SceneCommon<'CMD_PSTREE'> & { data: {
+    cmdPstree: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdPsScene = SceneCommon<'CMD_PS'> & { data: {
+    cmdPs: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdChrootScene = SceneCommon<'CMD_CHROOT'> & { data: {
+    cmdChroot: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdLastScene = SceneCommon<'CMD_LAST'> & { data: {
+    cmdLast: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdWScene = SceneCommon<'CMD_W'> & { data: {
+    cmdW: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdChpasswdScene = SceneCommon<'CMD_CHPASSWD'> & { data: {
+    cmdChpasswd: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdPasswdScene = SceneCommon<'CMD_PASSWD'> & { data: {
+    cmdPasswd: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdUserdelScene = SceneCommon<'CMD_USERDEL'> & { data: {
+    cmdUserdel: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdUsermodScene = SceneCommon<'CMD_USERMOD'> & { data: {
+    cmdUsermod: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdUseraddScene = SceneCommon<'CMD_USERADD'> & { data: {
+    cmdUseradd: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdSudoScene = SceneCommon<'CMD_SUDO'> & { data: {
+    cmdSudo: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdUmaskScene = SceneCommon<'CMD_UMASK'> & { data: {
+    cmdUmask: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdChownScene = SceneCommon<'CMD_CHOWN'> & { data: {
+    cmdChown: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdChmodScene = SceneCommon<'CMD_CHMOD'> & { data: {
+    cmdChmod: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdXargsScene = SceneCommon<'CMD_XARGS'> & { data: {
+    cmdXargs: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdSedScene = SceneCommon<'CMD_SED'> & { data: {
+    cmdSed: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdAwkScene = SceneCommon<'CMD_AWK'> & { data: {
+    cmdAwk: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdGrepScene = SceneCommon<'CMD_GREP'> & { data: {
+    cmdGrep: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdLocateScene = SceneCommon<'CMD_LOCATE'> & { data: {
+    cmdLocate: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdFindScene = SceneCommon<'CMD_FIND'> & { data: {
+    cmdFind: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdDiffScene = SceneCommon<'CMD_DIFF'> & { data: {
+    cmdDiff: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdViScene = SceneCommon<'CMD_VI'> & { data: {
+    cmdVi: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdTailScene = SceneCommon<'CMD_TAIL'> & { data: {
+    cmdTail: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdLessScene = SceneCommon<'CMD_LESS'> & { data: {
+    cmdLess: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdMoreScene = SceneCommon<'CMD_MORE'> & { data: {
+    cmdMore: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdTacScene = SceneCommon<'CMD_TAC'> & { data: {
+    cmdTac: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdCatScene = SceneCommon<'CMD_CAT'> & { data: {
+    cmdCat: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdTouchScene = SceneCommon<'CMD_TOUCH'> & { data: {
+    cmdTouch: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdClearScene = SceneCommon<'CMD_CLEAR'> & { data: {
+    cmdClear: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdLnScene = SceneCommon<'CMD_LN'> & { data: {
+    cmdLn: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdRmScene = SceneCommon<'CMD_RM'> & { data: {
+    cmdRm: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdMvScene = SceneCommon<'CMD_MV'> & { data: {
+    cmdMv: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdCpScene = SceneCommon<'CMD_CP'> & { data: {
+    cmdCp: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdMkdirScene = SceneCommon<'CMD_MKDIR'> & { data: {
+    cmdMkdir: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdPwdScene = SceneCommon<'CMD_PWD'> & { data: {
+    cmdPwd: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdCdScene = SceneCommon<'CMD_CD'> & { data: {
+    cmdCd: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      perms?: string;
+      permsAtWord?: number;
+      token?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      stageTitle?: string;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CmdLsScene = SceneCommon<'CMD_LS'> & { data: {
+    cmdLs: {
+      headline?: string;
+      steps: Array<Record<string, unknown>>;
+      files: Array<Record<string, unknown>>;
+      columns?: Array<Record<string, unknown>>;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type CopyForkScene = SceneCommon<'COPY_FORK'> & { data: {
+    copyFork: {
+      headline?: string;
+      command: string;
+      source: string;
+      copy: string;
+      before: string;
+      after?: string;
+      editSource?: boolean;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type ToolBenchScene = SceneCommon<'TOOL_BENCH'> & { data: {
+    toolBench: {
+      headline?: string;
+      drawers: Array<Record<string, unknown>>;
+      open?: number;
+      tools?: string[];
+      caption?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type DeletionGuardScene = SceneCommon<'DELETION_GUARD'> & { data: {
+    deletionGuard: {
+      headline?: string;
+      target: string;
+      attempts: Array<Record<string, unknown>>;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type LinkPairScene = SceneCommon<'LINK_PAIR'> & { data: {
+    linkPair: {
+      headline?: string;
+      inode: string;
+      links: Array<Record<string, unknown>>;
+      origin?: string;
+      breakOrigin?: boolean;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type ListingRowScene = SceneCommon<'LISTING_ROW'> & { data: {
+    listingRow: {
+      headline?: string;
+      row: string;
+      parts: Array<Record<string, unknown>>;
+      atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type PathWalkScene = SceneCommon<'PATH_WALK'> & { data: {
+    pathWalk: {
+      headline?: string;
+      nodes: Array<Record<string, unknown>>;
+      steps: Array<Record<string, unknown>>;
+      atWord?: number;
+      color?: string;
+    };
+  } };
 
 export type RecordDraftScene = SceneCommon<'RECORD_DRAFT'> & { data: {
     recordDraft: {
@@ -2305,6 +4887,135 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  DSA_FRAMEWORK: DsaFrameworkScene;
+  DSA_COST: DsaCostScene;
+  DSA_SIGNALS: DsaSignalsScene;
+  DSA_TRACE_LIST: DsaTraceListScene;
+  DSA_TRACE_INTERVALS: DsaTraceIntervalsScene;
+  DSA_TRACE_DP: DsaTraceDpScene;
+  DSA_TRACE_TREE: DsaTraceTreeScene;
+  DSA_TRACE_GRID: DsaTraceGridScene;
+  DSA_TRACE_STACK: DsaTraceStackScene;
+  DSA_TRACE_HASH: DsaTraceHashScene;
+  DSA_TRACE_BSEARCH: DsaTraceBsearchScene;
+  DSA_TRACE_WINDOW: DsaTraceWindowScene;
+  DSA_TRACE_PTRS: DsaTracePtrsScene;
+  CMD_LSUSB: CmdLsusbScene;
+  CMD_LSPCI: CmdLspciScene;
+  CMD_CHEAT: CmdCheatScene;
+  CMD_TLDR: CmdTldrScene;
+  CMD_APROPOS: CmdAproposScene;
+  CMD_MAN: CmdManScene;
+  CMD_DMESG: CmdDmesgScene;
+  CMD_JOURNALCTL: CmdJournalctlScene;
+  CMD_SYSTEMCTL: CmdSystemctlScene;
+  CMD_TMUX: CmdTmuxScene;
+  CMD_SCREEN: CmdScreenScene;
+  CMD_HISTORY: CmdHistoryScene;
+  CMD_ENV: CmdEnvScene;
+  CMD_ALIAS: CmdAliasScene;
+  CMD_BASHSCRIPT: CmdBashscriptScene;
+  CMD_CRONTAB: CmdCrontabScene;
+  CMD_CRON: CmdCronScene;
+  CMD_ZIP: CmdZipScene;
+  CMD_BZIP2: CmdBzip2Scene;
+  CMD_GZIP: CmdGzipScene;
+  CMD_TAR: CmdTarScene;
+  CMD_CURL: CmdCurlScene;
+  CMD_WGET: CmdWgetScene;
+  CMD_NC: CmdNcScene;
+  CMD_RSYNC: CmdRsyncScene;
+  CMD_SCP: CmdScpScene;
+  CMD_SSH: CmdSshScene;
+  CMD_WHOIS: CmdWhoisScene;
+  CMD_NSLOOKUP: CmdNslookupScene;
+  CMD_HOST: CmdHostScene;
+  CMD_DIG: CmdDigScene;
+  CMD_NLOAD: CmdNloadScene;
+  CMD_NETHOGS: CmdNethogsScene;
+  CMD_IFTOP: CmdIftopScene;
+  CMD_NMCLI: CmdNmcliScene;
+  CMD_SS: CmdSsScene;
+  CMD_NETSTAT: CmdNetstatScene;
+  CMD_MTR: CmdMtrScene;
+  CMD_TRACEROUTE: CmdTracerouteScene;
+  CMD_PING: CmdPingScene;
+  CMD_IP: CmdIpScene;
+  CMD_DD: CmdDdScene;
+  CMD_UMOUNT: CmdUmountScene;
+  CMD_MOUNT: CmdMountScene;
+  CMD_FSCK: CmdFsckScene;
+  CMD_MKFS: CmdMkfsScene;
+  CMD_BLKID: CmdBlkidScene;
+  CMD_PARTED: CmdPartedScene;
+  CMD_FDISK: CmdFdiskScene;
+  CMD_NCDU: CmdNcduScene;
+  CMD_DU: CmdDuScene;
+  CMD_DF: CmdDfScene;
+  CMD_WATCH: CmdWatchScene;
+  CMD_SAR: CmdSarScene;
+  CMD_DSTAT: CmdDstatScene;
+  CMD_IOTOP: CmdIotopScene;
+  CMD_IOSTAT: CmdIostatScene;
+  CMD_VMSTAT: CmdVmstatScene;
+  CMD_FREE: CmdFreeScene;
+  CMD_UPTIME: CmdUptimeScene;
+  CMD_STRACE: CmdStraceScene;
+  CMD_LSOF: CmdLsofScene;
+  CMD_WAIT: CmdWaitScene;
+  CMD_SLEEP: CmdSleepScene;
+  CMD_NOHUP: CmdNohupScene;
+  CMD_KILLALL: CmdKillallScene;
+  CMD_KILL: CmdKillScene;
+  CMD_NMON: CmdNmonScene;
+  CMD_GLANCES: CmdGlancesScene;
+  CMD_ATOP: CmdAtopScene;
+  CMD_BTOP: CmdBtopScene;
+  CMD_HTOP: CmdHtopScene;
+  CMD_TOP: CmdTopScene;
+  CMD_PSTREE: CmdPstreeScene;
+  CMD_PS: CmdPsScene;
+  CMD_CHROOT: CmdChrootScene;
+  CMD_LAST: CmdLastScene;
+  CMD_W: CmdWScene;
+  CMD_CHPASSWD: CmdChpasswdScene;
+  CMD_PASSWD: CmdPasswdScene;
+  CMD_USERDEL: CmdUserdelScene;
+  CMD_USERMOD: CmdUsermodScene;
+  CMD_USERADD: CmdUseraddScene;
+  CMD_SUDO: CmdSudoScene;
+  CMD_UMASK: CmdUmaskScene;
+  CMD_CHOWN: CmdChownScene;
+  CMD_CHMOD: CmdChmodScene;
+  CMD_XARGS: CmdXargsScene;
+  CMD_SED: CmdSedScene;
+  CMD_AWK: CmdAwkScene;
+  CMD_GREP: CmdGrepScene;
+  CMD_LOCATE: CmdLocateScene;
+  CMD_FIND: CmdFindScene;
+  CMD_DIFF: CmdDiffScene;
+  CMD_VI: CmdViScene;
+  CMD_TAIL: CmdTailScene;
+  CMD_LESS: CmdLessScene;
+  CMD_MORE: CmdMoreScene;
+  CMD_TAC: CmdTacScene;
+  CMD_CAT: CmdCatScene;
+  CMD_TOUCH: CmdTouchScene;
+  CMD_CLEAR: CmdClearScene;
+  CMD_LN: CmdLnScene;
+  CMD_RM: CmdRmScene;
+  CMD_MV: CmdMvScene;
+  CMD_CP: CmdCpScene;
+  CMD_MKDIR: CmdMkdirScene;
+  CMD_PWD: CmdPwdScene;
+  CMD_CD: CmdCdScene;
+  CMD_LS: CmdLsScene;
+  COPY_FORK: CopyForkScene;
+  TOOL_BENCH: ToolBenchScene;
+  DELETION_GUARD: DeletionGuardScene;
+  LINK_PAIR: LinkPairScene;
+  LISTING_ROW: ListingRowScene;
+  PATH_WALK: PathWalkScene;
   RECORD_DRAFT: RecordDraftScene;
   FROZEN_FRAME: FrozenFrameScene;
   ORDER_ROULETTE: OrderRouletteScene;
@@ -2507,6 +5218,135 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | DsaFrameworkScene
+  | DsaCostScene
+  | DsaSignalsScene
+  | DsaTraceListScene
+  | DsaTraceIntervalsScene
+  | DsaTraceDpScene
+  | DsaTraceTreeScene
+  | DsaTraceGridScene
+  | DsaTraceStackScene
+  | DsaTraceHashScene
+  | DsaTraceBsearchScene
+  | DsaTraceWindowScene
+  | DsaTracePtrsScene
+  | CmdLsusbScene
+  | CmdLspciScene
+  | CmdCheatScene
+  | CmdTldrScene
+  | CmdAproposScene
+  | CmdManScene
+  | CmdDmesgScene
+  | CmdJournalctlScene
+  | CmdSystemctlScene
+  | CmdTmuxScene
+  | CmdScreenScene
+  | CmdHistoryScene
+  | CmdEnvScene
+  | CmdAliasScene
+  | CmdBashscriptScene
+  | CmdCrontabScene
+  | CmdCronScene
+  | CmdZipScene
+  | CmdBzip2Scene
+  | CmdGzipScene
+  | CmdTarScene
+  | CmdCurlScene
+  | CmdWgetScene
+  | CmdNcScene
+  | CmdRsyncScene
+  | CmdScpScene
+  | CmdSshScene
+  | CmdWhoisScene
+  | CmdNslookupScene
+  | CmdHostScene
+  | CmdDigScene
+  | CmdNloadScene
+  | CmdNethogsScene
+  | CmdIftopScene
+  | CmdNmcliScene
+  | CmdSsScene
+  | CmdNetstatScene
+  | CmdMtrScene
+  | CmdTracerouteScene
+  | CmdPingScene
+  | CmdIpScene
+  | CmdDdScene
+  | CmdUmountScene
+  | CmdMountScene
+  | CmdFsckScene
+  | CmdMkfsScene
+  | CmdBlkidScene
+  | CmdPartedScene
+  | CmdFdiskScene
+  | CmdNcduScene
+  | CmdDuScene
+  | CmdDfScene
+  | CmdWatchScene
+  | CmdSarScene
+  | CmdDstatScene
+  | CmdIotopScene
+  | CmdIostatScene
+  | CmdVmstatScene
+  | CmdFreeScene
+  | CmdUptimeScene
+  | CmdStraceScene
+  | CmdLsofScene
+  | CmdWaitScene
+  | CmdSleepScene
+  | CmdNohupScene
+  | CmdKillallScene
+  | CmdKillScene
+  | CmdNmonScene
+  | CmdGlancesScene
+  | CmdAtopScene
+  | CmdBtopScene
+  | CmdHtopScene
+  | CmdTopScene
+  | CmdPstreeScene
+  | CmdPsScene
+  | CmdChrootScene
+  | CmdLastScene
+  | CmdWScene
+  | CmdChpasswdScene
+  | CmdPasswdScene
+  | CmdUserdelScene
+  | CmdUsermodScene
+  | CmdUseraddScene
+  | CmdSudoScene
+  | CmdUmaskScene
+  | CmdChownScene
+  | CmdChmodScene
+  | CmdXargsScene
+  | CmdSedScene
+  | CmdAwkScene
+  | CmdGrepScene
+  | CmdLocateScene
+  | CmdFindScene
+  | CmdDiffScene
+  | CmdViScene
+  | CmdTailScene
+  | CmdLessScene
+  | CmdMoreScene
+  | CmdTacScene
+  | CmdCatScene
+  | CmdTouchScene
+  | CmdClearScene
+  | CmdLnScene
+  | CmdRmScene
+  | CmdMvScene
+  | CmdCpScene
+  | CmdMkdirScene
+  | CmdPwdScene
+  | CmdCdScene
+  | CmdLsScene
+  | CopyForkScene
+  | ToolBenchScene
+  | DeletionGuardScene
+  | LinkPairScene
+  | ListingRowScene
+  | PathWalkScene
   | RecordDraftScene
   | FrozenFrameScene
   | OrderRouletteScene

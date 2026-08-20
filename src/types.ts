@@ -2501,7 +2501,4258 @@ export interface RecordDraftData {
   color?: SemColor;
   atWord?: number;
 }
+export interface PathWalkItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface PathWalkData {
+  headline?: string;
+  nodes?: PathWalkItem[];
+  steps?: PathWalkItem[];
+  atWord?: number;
+  color?: SemColor;
+}
+export interface ListingRowItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface ListingRowData {
+  headline?: string;
+  row?: string;
+  parts?: ListingRowItem[];
+  atWord?: number;
+  color?: SemColor;
+}
+export interface LinkPairItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface LinkPairData {
+  headline?: string;
+  inode?: string;
+  links?: LinkPairItem[];
+  origin?: string;
+  breakOrigin?: boolean;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface DeletionGuardItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface DeletionGuardData {
+  headline?: string;
+  target?: string;
+  attempts?: DeletionGuardItem[];
+  atWord?: number;
+  color?: SemColor;
+}
+export interface ToolBenchItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface ToolBenchData {
+  headline?: string;
+  drawers?: ToolBenchItem[];
+  open?: number;
+  tools?: string[];
+  caption?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CopyForkData {
+  headline?: string;
+  command?: string;
+  source?: string;
+  copy?: string;
+  before?: string;
+  after?: string;
+  editSource?: boolean;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdLsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdLsData {
+  headline?: string;
+  steps?: CmdLsItem[];
+  // `files`/`columns` were the hand-built shape from the first cut. CMD_LS now draws
+  // through the shared `stage` contract like the other 109 commands, so the picture
+  // comes from linuxViz rather than from geometry baked into this one component.
+  files?: CmdLsItem[];
+  columns?: CmdLsItem[];
+  stage?: CmdLsItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdCdItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdCdData {
+  headline?: string;
+  steps?: CmdCdItem[];
+  stage?: CmdCdItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdPwdItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdPwdData {
+  headline?: string;
+  steps?: CmdPwdItem[];
+  stage?: CmdPwdItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdMkdirItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdMkdirData {
+  headline?: string;
+  steps?: CmdMkdirItem[];
+  stage?: CmdMkdirItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdCpItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdCpData {
+  headline?: string;
+  steps?: CmdCpItem[];
+  stage?: CmdCpItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdMvItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdMvData {
+  headline?: string;
+  steps?: CmdMvItem[];
+  stage?: CmdMvItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdRmItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdRmData {
+  headline?: string;
+  steps?: CmdRmItem[];
+  stage?: CmdRmItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdLnItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdLnData {
+  headline?: string;
+  steps?: CmdLnItem[];
+  stage?: CmdLnItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdClearItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdClearData {
+  headline?: string;
+  steps?: CmdClearItem[];
+  stage?: CmdClearItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdTouchItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdTouchData {
+  headline?: string;
+  steps?: CmdTouchItem[];
+  stage?: CmdTouchItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdCatItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdCatData {
+  headline?: string;
+  steps?: CmdCatItem[];
+  stage?: CmdCatItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdTacItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdTacData {
+  headline?: string;
+  steps?: CmdTacItem[];
+  stage?: CmdTacItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdMoreItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdMoreData {
+  headline?: string;
+  steps?: CmdMoreItem[];
+  stage?: CmdMoreItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdLessItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdLessData {
+  headline?: string;
+  steps?: CmdLessItem[];
+  stage?: CmdLessItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdTailItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdTailData {
+  headline?: string;
+  steps?: CmdTailItem[];
+  stage?: CmdTailItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdViItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdViData {
+  headline?: string;
+  steps?: CmdViItem[];
+  stage?: CmdViItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdDiffItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdDiffData {
+  headline?: string;
+  steps?: CmdDiffItem[];
+  stage?: CmdDiffItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdFindItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdFindData {
+  headline?: string;
+  steps?: CmdFindItem[];
+  stage?: CmdFindItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdLocateItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdLocateData {
+  headline?: string;
+  steps?: CmdLocateItem[];
+  stage?: CmdLocateItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdGrepItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdGrepData {
+  headline?: string;
+  steps?: CmdGrepItem[];
+  stage?: CmdGrepItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdAwkItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdAwkData {
+  headline?: string;
+  steps?: CmdAwkItem[];
+  stage?: CmdAwkItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdSedItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdSedData {
+  headline?: string;
+  steps?: CmdSedItem[];
+  stage?: CmdSedItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdXargsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdXargsData {
+  headline?: string;
+  steps?: CmdXargsItem[];
+  stage?: CmdXargsItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdChmodItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdChmodData {
+  headline?: string;
+  steps?: CmdChmodItem[];
+  stage?: CmdChmodItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdChownItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdChownData {
+  headline?: string;
+  steps?: CmdChownItem[];
+  stage?: CmdChownItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdUmaskItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdUmaskData {
+  headline?: string;
+  steps?: CmdUmaskItem[];
+  stage?: CmdUmaskItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdSudoItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdSudoData {
+  headline?: string;
+  steps?: CmdSudoItem[];
+  stage?: CmdSudoItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdUseraddItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdUseraddData {
+  headline?: string;
+  steps?: CmdUseraddItem[];
+  stage?: CmdUseraddItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdUsermodItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdUsermodData {
+  headline?: string;
+  steps?: CmdUsermodItem[];
+  stage?: CmdUsermodItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdUserdelItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdUserdelData {
+  headline?: string;
+  steps?: CmdUserdelItem[];
+  stage?: CmdUserdelItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdPasswdItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdPasswdData {
+  headline?: string;
+  steps?: CmdPasswdItem[];
+  stage?: CmdPasswdItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdChpasswdItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdChpasswdData {
+  headline?: string;
+  steps?: CmdChpasswdItem[];
+  stage?: CmdChpasswdItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdWItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdWData {
+  headline?: string;
+  steps?: CmdWItem[];
+  stage?: CmdWItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdLastItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdLastData {
+  headline?: string;
+  steps?: CmdLastItem[];
+  stage?: CmdLastItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdChrootItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdChrootData {
+  headline?: string;
+  steps?: CmdChrootItem[];
+  stage?: CmdChrootItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdPsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdPsData {
+  headline?: string;
+  steps?: CmdPsItem[];
+  stage?: CmdPsItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdPstreeItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdPstreeData {
+  headline?: string;
+  steps?: CmdPstreeItem[];
+  stage?: CmdPstreeItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdTopItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdTopData {
+  headline?: string;
+  steps?: CmdTopItem[];
+  stage?: CmdTopItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdHtopItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdHtopData {
+  headline?: string;
+  steps?: CmdHtopItem[];
+  stage?: CmdHtopItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdBtopItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdBtopData {
+  headline?: string;
+  steps?: CmdBtopItem[];
+  stage?: CmdBtopItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdAtopItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdAtopData {
+  headline?: string;
+  steps?: CmdAtopItem[];
+  stage?: CmdAtopItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdGlancesItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdGlancesData {
+  headline?: string;
+  steps?: CmdGlancesItem[];
+  stage?: CmdGlancesItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNmonItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNmonData {
+  headline?: string;
+  steps?: CmdNmonItem[];
+  stage?: CmdNmonItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdKillItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdKillData {
+  headline?: string;
+  steps?: CmdKillItem[];
+  stage?: CmdKillItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdKillallItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdKillallData {
+  headline?: string;
+  steps?: CmdKillallItem[];
+  stage?: CmdKillallItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNohupItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNohupData {
+  headline?: string;
+  steps?: CmdNohupItem[];
+  stage?: CmdNohupItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdSleepItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdSleepData {
+  headline?: string;
+  steps?: CmdSleepItem[];
+  stage?: CmdSleepItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdWaitItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdWaitData {
+  headline?: string;
+  steps?: CmdWaitItem[];
+  stage?: CmdWaitItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdLsofItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdLsofData {
+  headline?: string;
+  steps?: CmdLsofItem[];
+  stage?: CmdLsofItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdStraceItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdStraceData {
+  headline?: string;
+  steps?: CmdStraceItem[];
+  stage?: CmdStraceItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdUptimeItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdUptimeData {
+  headline?: string;
+  steps?: CmdUptimeItem[];
+  stage?: CmdUptimeItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdFreeItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdFreeData {
+  headline?: string;
+  steps?: CmdFreeItem[];
+  stage?: CmdFreeItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdVmstatItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdVmstatData {
+  headline?: string;
+  steps?: CmdVmstatItem[];
+  stage?: CmdVmstatItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdIostatItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdIostatData {
+  headline?: string;
+  steps?: CmdIostatItem[];
+  stage?: CmdIostatItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdIotopItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdIotopData {
+  headline?: string;
+  steps?: CmdIotopItem[];
+  stage?: CmdIotopItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdDstatItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdDstatData {
+  headline?: string;
+  steps?: CmdDstatItem[];
+  stage?: CmdDstatItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdSarItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdSarData {
+  headline?: string;
+  steps?: CmdSarItem[];
+  stage?: CmdSarItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdWatchItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdWatchData {
+  headline?: string;
+  steps?: CmdWatchItem[];
+  stage?: CmdWatchItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdDfItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdDfData {
+  headline?: string;
+  steps?: CmdDfItem[];
+  stage?: CmdDfItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdDuItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdDuData {
+  headline?: string;
+  steps?: CmdDuItem[];
+  stage?: CmdDuItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNcduItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNcduData {
+  headline?: string;
+  steps?: CmdNcduItem[];
+  stage?: CmdNcduItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdFdiskItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdFdiskData {
+  headline?: string;
+  steps?: CmdFdiskItem[];
+  stage?: CmdFdiskItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdPartedItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdPartedData {
+  headline?: string;
+  steps?: CmdPartedItem[];
+  stage?: CmdPartedItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdBlkidItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdBlkidData {
+  headline?: string;
+  steps?: CmdBlkidItem[];
+  stage?: CmdBlkidItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdMkfsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdMkfsData {
+  headline?: string;
+  steps?: CmdMkfsItem[];
+  stage?: CmdMkfsItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdFsckItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdFsckData {
+  headline?: string;
+  steps?: CmdFsckItem[];
+  stage?: CmdFsckItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdMountItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdMountData {
+  headline?: string;
+  steps?: CmdMountItem[];
+  stage?: CmdMountItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdUmountItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdUmountData {
+  headline?: string;
+  steps?: CmdUmountItem[];
+  stage?: CmdUmountItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdDdItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdDdData {
+  headline?: string;
+  steps?: CmdDdItem[];
+  stage?: CmdDdItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdIpItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdIpData {
+  headline?: string;
+  steps?: CmdIpItem[];
+  stage?: CmdIpItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdPingItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdPingData {
+  headline?: string;
+  steps?: CmdPingItem[];
+  stage?: CmdPingItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdTracerouteItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdTracerouteData {
+  headline?: string;
+  steps?: CmdTracerouteItem[];
+  stage?: CmdTracerouteItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdMtrItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdMtrData {
+  headline?: string;
+  steps?: CmdMtrItem[];
+  stage?: CmdMtrItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNetstatItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNetstatData {
+  headline?: string;
+  steps?: CmdNetstatItem[];
+  stage?: CmdNetstatItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdSsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdSsData {
+  headline?: string;
+  steps?: CmdSsItem[];
+  stage?: CmdSsItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNmcliItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNmcliData {
+  headline?: string;
+  steps?: CmdNmcliItem[];
+  stage?: CmdNmcliItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdIftopItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdIftopData {
+  headline?: string;
+  steps?: CmdIftopItem[];
+  stage?: CmdIftopItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNethogsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNethogsData {
+  headline?: string;
+  steps?: CmdNethogsItem[];
+  stage?: CmdNethogsItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNloadItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNloadData {
+  headline?: string;
+  steps?: CmdNloadItem[];
+  stage?: CmdNloadItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdDigItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdDigData {
+  headline?: string;
+  steps?: CmdDigItem[];
+  stage?: CmdDigItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdHostItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdHostData {
+  headline?: string;
+  steps?: CmdHostItem[];
+  stage?: CmdHostItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNslookupItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNslookupData {
+  headline?: string;
+  steps?: CmdNslookupItem[];
+  stage?: CmdNslookupItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdWhoisItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdWhoisData {
+  headline?: string;
+  steps?: CmdWhoisItem[];
+  stage?: CmdWhoisItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdSshItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdSshData {
+  headline?: string;
+  steps?: CmdSshItem[];
+  stage?: CmdSshItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdScpItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdScpData {
+  headline?: string;
+  steps?: CmdScpItem[];
+  stage?: CmdScpItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdRsyncItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdRsyncData {
+  headline?: string;
+  steps?: CmdRsyncItem[];
+  stage?: CmdRsyncItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdNcItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdNcData {
+  headline?: string;
+  steps?: CmdNcItem[];
+  stage?: CmdNcItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdWgetItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdWgetData {
+  headline?: string;
+  steps?: CmdWgetItem[];
+  stage?: CmdWgetItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdCurlItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdCurlData {
+  headline?: string;
+  steps?: CmdCurlItem[];
+  stage?: CmdCurlItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdTarItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdTarData {
+  headline?: string;
+  steps?: CmdTarItem[];
+  stage?: CmdTarItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdGzipItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdGzipData {
+  headline?: string;
+  steps?: CmdGzipItem[];
+  stage?: CmdGzipItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdBzip2Item {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdBzip2Data {
+  headline?: string;
+  steps?: CmdBzip2Item[];
+  stage?: CmdBzip2Item[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdZipItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdZipData {
+  headline?: string;
+  steps?: CmdZipItem[];
+  stage?: CmdZipItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdCronItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdCronData {
+  headline?: string;
+  steps?: CmdCronItem[];
+  stage?: CmdCronItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdCrontabItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdCrontabData {
+  headline?: string;
+  steps?: CmdCrontabItem[];
+  stage?: CmdCrontabItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdBashscriptItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdBashscriptData {
+  headline?: string;
+  steps?: CmdBashscriptItem[];
+  stage?: CmdBashscriptItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdAliasItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdAliasData {
+  headline?: string;
+  steps?: CmdAliasItem[];
+  stage?: CmdAliasItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdEnvItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdEnvData {
+  headline?: string;
+  steps?: CmdEnvItem[];
+  stage?: CmdEnvItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdHistoryItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdHistoryData {
+  headline?: string;
+  steps?: CmdHistoryItem[];
+  stage?: CmdHistoryItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdScreenItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdScreenData {
+  headline?: string;
+  steps?: CmdScreenItem[];
+  stage?: CmdScreenItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdTmuxItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdTmuxData {
+  headline?: string;
+  steps?: CmdTmuxItem[];
+  stage?: CmdTmuxItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdSystemctlItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdSystemctlData {
+  headline?: string;
+  steps?: CmdSystemctlItem[];
+  stage?: CmdSystemctlItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdJournalctlItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdJournalctlData {
+  headline?: string;
+  steps?: CmdJournalctlItem[];
+  stage?: CmdJournalctlItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdDmesgItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdDmesgData {
+  headline?: string;
+  steps?: CmdDmesgItem[];
+  stage?: CmdDmesgItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdManItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdManData {
+  headline?: string;
+  steps?: CmdManItem[];
+  stage?: CmdManItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdAproposItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdAproposData {
+  headline?: string;
+  steps?: CmdAproposItem[];
+  stage?: CmdAproposItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdTldrItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdTldrData {
+  headline?: string;
+  steps?: CmdTldrItem[];
+  stage?: CmdTldrItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdCheatItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdCheatData {
+  headline?: string;
+  steps?: CmdCheatItem[];
+  stage?: CmdCheatItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdLspciItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdLspciData {
+  headline?: string;
+  steps?: CmdLspciItem[];
+  stage?: CmdLspciItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface CmdLsusbItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+export interface CmdLsusbData {
+  headline?: string;
+  steps?: CmdLsusbItem[];
+  stage?: CmdLsusbItem[];
+  perms?: string;
+  permsAtWord?: number;
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+export interface DsaTracePtrsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTracePtrsData {
+  headline?: string;
+  lines?: DsaTracePtrsItem[];
+  cells?: DsaTracePtrsItem[];
+  pointers?: DsaTracePtrsItem[];
+  vars?: DsaTracePtrsItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceWindowItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceWindowData {
+  headline?: string;
+  lines?: DsaTraceWindowItem[];
+  cells?: DsaTraceWindowItem[];
+  pointers?: DsaTraceWindowItem[];
+  vars?: DsaTraceWindowItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceBsearchItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceBsearchData {
+  headline?: string;
+  lines?: DsaTraceBsearchItem[];
+  cells?: DsaTraceBsearchItem[];
+  pointers?: DsaTraceBsearchItem[];
+  vars?: DsaTraceBsearchItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceHashItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceHashData {
+  headline?: string;
+  lines?: DsaTraceHashItem[];
+  cells?: DsaTraceHashItem[];
+  aux?: DsaTraceHashItem[];
+  pointers?: DsaTraceHashItem[];
+  vars?: DsaTraceHashItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceStackItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceStackData {
+  headline?: string;
+  lines?: DsaTraceStackItem[];
+  cells?: DsaTraceStackItem[];
+  aux?: DsaTraceStackItem[];
+  pointers?: DsaTraceStackItem[];
+  vars?: DsaTraceStackItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceGridItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceGridData {
+  headline?: string;
+  lines?: DsaTraceGridItem[];
+  cells?: DsaTraceGridItem[];
+  aux?: DsaTraceGridItem[];
+  pointers?: DsaTraceGridItem[];
+  vars?: DsaTraceGridItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceTreeItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceTreeData {
+  headline?: string;
+  lines?: DsaTraceTreeItem[];
+  cells?: DsaTraceTreeItem[];
+  aux?: DsaTraceTreeItem[];
+  pointers?: DsaTraceTreeItem[];
+  vars?: DsaTraceTreeItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceDpItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceDpData {
+  headline?: string;
+  lines?: DsaTraceDpItem[];
+  cells?: DsaTraceDpItem[];
+  aux?: DsaTraceDpItem[];
+  pointers?: DsaTraceDpItem[];
+  vars?: DsaTraceDpItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceIntervalsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceIntervalsData {
+  headline?: string;
+  lines?: DsaTraceIntervalsItem[];
+  cells?: DsaTraceIntervalsItem[];
+  pointers?: DsaTraceIntervalsItem[];
+  vars?: DsaTraceIntervalsItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaTraceListItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaTraceListData {
+  headline?: string;
+  lines?: DsaTraceListItem[];
+  cells?: DsaTraceListItem[];
+  aux?: DsaTraceListItem[];
+  pointers?: DsaTraceListItem[];
+  vars?: DsaTraceListItem[];
+  caption?: string;
+  codeTitle?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaSignalsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaSignalsData {
+  headline?: string;
+  cells?: DsaSignalsItem[];
+  vars?: DsaSignalsItem[];
+  caption?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The problem statement itself, shown ABOVE the signal words.
+   *  Without it this card lifts words out of a question the viewer has only heard
+   *  once and never sees — the narration even says "circle the words" while there
+   *  are no words on screen to circle (owner, 2026-08-19: *"you dont have the
+   *  question displayed ... thinking that user would memorize the question"*).
+   *  Present from the first frame: it is the thing being read FROM, not a beat. */
+  problem?: string;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaCostItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaCostData {
+  headline?: string;
+  cells?: DsaCostItem[];
+  vars?: DsaCostItem[];
+  caption?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
+export interface DsaFrameworkItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY — declared, never inferred from position (LAW 0k).
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+}
+export interface DsaFrameworkData {
+  headline?: string;
+  cells?: DsaFrameworkItem[];
+  vars?: DsaFrameworkItem[];
+  caption?: string;
+  atWord?: number;
+  color?: SemColor;
+  /** The standing setup line, shown above the animation for the whole beat.
+   *  One plain sentence naming what the viewer is looking at and what stands for
+   *  what — the frame around the beat, not a step inside it, so it carries no
+   *  marker. See StatePane.premise in dsaViz.tsx (LAW 0l). */
+  premise?: string;
+}
 export interface SceneData {
+  dsaFramework?: DsaFrameworkData;
+  dsaCost?: DsaCostData;
+  dsaSignals?: DsaSignalsData;
+  dsaList?: DsaTraceListData;
+  dsaIntervals?: DsaTraceIntervalsData;
+  dsaDp?: DsaTraceDpData;
+  dsaTree?: DsaTraceTreeData;
+  dsaGrid?: DsaTraceGridData;
+  dsaStack?: DsaTraceStackData;
+  dsaHash?: DsaTraceHashData;
+  dsaBsearch?: DsaTraceBsearchData;
+  dsaWindow?: DsaTraceWindowData;
+  dsaPtrs?: DsaTracePtrsData;
+  cmdLsusb?: CmdLsusbData;
+  cmdLspci?: CmdLspciData;
+  cmdCheat?: CmdCheatData;
+  cmdTldr?: CmdTldrData;
+  cmdApropos?: CmdAproposData;
+  cmdMan?: CmdManData;
+  cmdDmesg?: CmdDmesgData;
+  cmdJournalctl?: CmdJournalctlData;
+  cmdSystemctl?: CmdSystemctlData;
+  cmdTmux?: CmdTmuxData;
+  cmdScreen?: CmdScreenData;
+  cmdHistory?: CmdHistoryData;
+  cmdEnv?: CmdEnvData;
+  cmdAlias?: CmdAliasData;
+  cmdBashscript?: CmdBashscriptData;
+  cmdCrontab?: CmdCrontabData;
+  cmdCron?: CmdCronData;
+  cmdZip?: CmdZipData;
+  cmdBzip2?: CmdBzip2Data;
+  cmdGzip?: CmdGzipData;
+  cmdTar?: CmdTarData;
+  cmdCurl?: CmdCurlData;
+  cmdWget?: CmdWgetData;
+  cmdNc?: CmdNcData;
+  cmdRsync?: CmdRsyncData;
+  cmdScp?: CmdScpData;
+  cmdSsh?: CmdSshData;
+  cmdWhois?: CmdWhoisData;
+  cmdNslookup?: CmdNslookupData;
+  cmdHost?: CmdHostData;
+  cmdDig?: CmdDigData;
+  cmdNload?: CmdNloadData;
+  cmdNethogs?: CmdNethogsData;
+  cmdIftop?: CmdIftopData;
+  cmdNmcli?: CmdNmcliData;
+  cmdSs?: CmdSsData;
+  cmdNetstat?: CmdNetstatData;
+  cmdMtr?: CmdMtrData;
+  cmdTraceroute?: CmdTracerouteData;
+  cmdPing?: CmdPingData;
+  cmdIp?: CmdIpData;
+  cmdDd?: CmdDdData;
+  cmdUmount?: CmdUmountData;
+  cmdMount?: CmdMountData;
+  cmdFsck?: CmdFsckData;
+  cmdMkfs?: CmdMkfsData;
+  cmdBlkid?: CmdBlkidData;
+  cmdParted?: CmdPartedData;
+  cmdFdisk?: CmdFdiskData;
+  cmdNcdu?: CmdNcduData;
+  cmdDu?: CmdDuData;
+  cmdDf?: CmdDfData;
+  cmdWatch?: CmdWatchData;
+  cmdSar?: CmdSarData;
+  cmdDstat?: CmdDstatData;
+  cmdIotop?: CmdIotopData;
+  cmdIostat?: CmdIostatData;
+  cmdVmstat?: CmdVmstatData;
+  cmdFree?: CmdFreeData;
+  cmdUptime?: CmdUptimeData;
+  cmdStrace?: CmdStraceData;
+  cmdLsof?: CmdLsofData;
+  cmdWait?: CmdWaitData;
+  cmdSleep?: CmdSleepData;
+  cmdNohup?: CmdNohupData;
+  cmdKillall?: CmdKillallData;
+  cmdKill?: CmdKillData;
+  cmdNmon?: CmdNmonData;
+  cmdGlances?: CmdGlancesData;
+  cmdAtop?: CmdAtopData;
+  cmdBtop?: CmdBtopData;
+  cmdHtop?: CmdHtopData;
+  cmdTop?: CmdTopData;
+  cmdPstree?: CmdPstreeData;
+  cmdPs?: CmdPsData;
+  cmdChroot?: CmdChrootData;
+  cmdLast?: CmdLastData;
+  cmdW?: CmdWData;
+  cmdChpasswd?: CmdChpasswdData;
+  cmdPasswd?: CmdPasswdData;
+  cmdUserdel?: CmdUserdelData;
+  cmdUsermod?: CmdUsermodData;
+  cmdUseradd?: CmdUseraddData;
+  cmdSudo?: CmdSudoData;
+  cmdUmask?: CmdUmaskData;
+  cmdChown?: CmdChownData;
+  cmdChmod?: CmdChmodData;
+  cmdXargs?: CmdXargsData;
+  cmdSed?: CmdSedData;
+  cmdAwk?: CmdAwkData;
+  cmdGrep?: CmdGrepData;
+  cmdLocate?: CmdLocateData;
+  cmdFind?: CmdFindData;
+  cmdDiff?: CmdDiffData;
+  cmdVi?: CmdViData;
+  cmdTail?: CmdTailData;
+  cmdLess?: CmdLessData;
+  cmdMore?: CmdMoreData;
+  cmdTac?: CmdTacData;
+  cmdCat?: CmdCatData;
+  cmdTouch?: CmdTouchData;
+  cmdClear?: CmdClearData;
+  cmdLn?: CmdLnData;
+  cmdRm?: CmdRmData;
+  cmdMv?: CmdMvData;
+  cmdCp?: CmdCpData;
+  cmdMkdir?: CmdMkdirData;
+  cmdPwd?: CmdPwdData;
+  cmdCd?: CmdCdData;
+  cmdLs?: CmdLsData;
+  copyFork?: CopyForkData;
+  toolBench?: ToolBenchData;
+  deletionGuard?: DeletionGuardData;
+  linkPair?: LinkPairData;
+  listingRow?: ListingRowData;
+  pathWalk?: PathWalkData;
   recordDraft?: RecordDraftData;
   frozenFrame?: FrozenFrameData;
   orderRoulette?: OrderRouletteData;

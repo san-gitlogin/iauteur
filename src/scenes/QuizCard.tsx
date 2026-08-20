@@ -89,10 +89,21 @@ export const QuizCard: React.FC<{scene: Scene}> = ({scene}) => {
         <div style={{display: 'flex', flexDirection: 'column', gap: 12 * scale}}>
           {options.map((o, i) => {
             const isAnswer = i === answer;
-            const rowIn = interpolate(f, [6 + i * 4, 20 + i * 4], [0, 1], {
-              extrapolateLeft: 'clamp',
-              extrapolateRight: 'clamp',
-            });
+            // LAW 0i: an option lands on the word it is READ OUT, when the spec says
+            // so. The old fixed cadence (6 + i*4) put all four on screen inside a
+            // second regardless of how they were narrated — the same defect that
+            // desynced the command components. The interval survives only as a
+            // fallback for specs that do not anchor their options.
+            const rowIn =
+              o.atWord != null
+                ? interpolate(f, [wordToFrame(o.atWord), wordToFrame(o.atWord) + 10], [0, 1], {
+                    extrapolateLeft: 'clamp',
+                    extrapolateRight: 'clamp',
+                  })
+                : interpolate(f, [6 + i * 4, 20 + i * 4], [0, 1], {
+                    extrapolateLeft: 'clamp',
+                    extrapolateRight: 'clamp',
+                  });
             // on reveal: the right row lifts into green, the others recede
             const lift = isAnswer ? revealed : 0;
             const dim = isAnswer ? 1 : 1 - revealed * 0.62;
@@ -108,12 +119,31 @@ export const QuizCard: React.FC<{scene: Scene}> = ({scene}) => {
                   boxSizing: 'border-box',
                   borderRadius: radius,
                   background: t.colors.panel,
-                  border: `2px solid ${isAnswer ? hexA(green, 0.25 + 0.75 * lift) : t.colors.panelBorder}`,
+                  // EVERY row wears the neutral border until the reveal. This used to
+                  // be `hexA(green, 0.25 + 0.75 * lift)`, which at lift = 0 still put a
+                  // 25% green tint on the correct row while the others sat neutral —
+                  // the answer was quietly legible from the first frame, which defeats
+                  // the whole point of the thinking gap (LAW 0e-q). The green now
+                  // CROSSFADES in as a separate ring so there is no pop either.
+                  border: `2px solid ${t.colors.panelBorder}`,
                   opacity: rowIn * dim,
                   transform: `translateX(${(1 - rowIn) * 18 * scale}px)`,
                   boxShadow: lift > 0 && glow > 0 ? `0 0 ${26 * scale * glow * lift}px ${hexA(green, 0.32)}` : undefined,
+                  position: 'relative',
                 }}
               >
+                {isAnswer && lift > 0 ? (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: -2 * scale,
+                      borderRadius: radius,
+                      border: `2px solid ${hexA(green, 0.25 + 0.75 * lift)}`,
+                      opacity: lift,
+                      pointerEvents: 'none',
+                    }}
+                  />
+                ) : null}
                 <div
                   style={{
                     width: 46 * scale,

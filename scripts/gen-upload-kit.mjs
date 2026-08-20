@@ -16,7 +16,18 @@ if (!slug) { console.error('Usage: node scripts/gen-upload-kit.mjs <slug>'); pro
 const spec = JSON.parse(fs.readFileSync(`topics/${slug}/long.json`, 'utf8'));
 const seo = spec.meta?.seo ?? {};
 const channel = spec.brand?.channel ?? channelName();
-const mmss = (f) => { const s = Math.floor(f / 30); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+// Chapter stamps. YouTube parses M:SS / MM:SS / H:MM:SS / HH:MM:SS — it does NOT
+// parse a minute field past 59, so the old `${min}:${sec}` emitted "62:32" on an
+// 87-minute cut and silently broke every chapter after the one-hour mark.
+// (owner, 2026-08-19: *"it does not work like 62nd minute and all, it must be
+// 01:02:00 like that format"*.) The format is chosen ONCE per video from its total
+// length, so stamps never mix MM:SS and HH:MM:SS within one description.
+const stamp = (f, withHours) => {
+  const s = Math.floor(f / 30);
+  const mm = String(Math.floor(s / 60) % 60).padStart(2, '0');
+  const ss = String(s % 60).padStart(2, '0');
+  return withHours ? `${String(Math.floor(s / 3600)).padStart(2, '0')}:${mm}:${ss}` : `${mm}:${ss}`;
+};
 
 // scene start frames (cover still first, like MainComposition)
 let offset = spec.cover ? (spec.cover.frames ?? 2) : 0;
@@ -24,6 +35,9 @@ const starts = {};
 for (const sc of spec.scenes) { starts[sc.id] = offset; offset += sc.durationFrames; }
 
 // chapters: authored seo.chapters [{id,title}] > CHAPTER scenes > per-scene labels
+const totalFrames = (spec.scenes ?? []).reduce((a, sc) => a + (sc.durationFrames ?? 0), 0);
+const withHours = totalFrames / 30 >= 3600;
+const mmss = (f) => stamp(f, withHours);
 const marks = [];
 if (Array.isArray(seo.chapters) && seo.chapters.length) {
   for (const c of seo.chapters) if (starts[c.id] != null) marks.push(`${mmss(starts[c.id])} - ${c.title}`);
@@ -35,12 +49,32 @@ if (Array.isArray(seo.chapters) && seo.chapters.length) {
       const ch = sc.data?.chapter ?? {};
       marks.push(`${mmss(starts[sc.id])} - ${ch.title ?? 'Chapter'}${ch.subtitle ? ': ' + ch.subtitle : ''}`);
     }
-    const recap = spec.scenes.find((s) => s.type === 'RECAP');
+    // findLast, not find: a chaptered video carries a RECAP per act, so `find`
+    // returned the FIRST act's recap and emitted a timestamp that jumps BACKWARDS
+    // after the last chapter (playbook §7 counts an out-of-order mm:ss as a leak).
+    const recap = spec.scenes.findLast((s) => s.type === 'RECAP');
     if (recap) marks.push(`${mmss(starts[recap.id])} - The Recap`);
   } else {
+    // A component with a data_key nests its headline one level down
+    // (scene.data.dsaPtrs.headline), so the old lookup fell straight through to
+    // `sc.type` and printed DSA_TRACE_PTRS at the viewer. A raw type name is never a
+    // chapter title: if nothing readable is found, the scene simply does not get one.
+    const labelOf = (sc) => {
+      const d = sc.data ?? {};
+      const pick = (o) => o?.headline ?? o?.heading ?? o?.title ?? o?.message ?? null;
+      let t = pick(d);
+      if (!t) for (const v of Object.values(d)) if (v && typeof v === 'object') { t = pick(v); if (t) break; }
+      return t ? String(t).replace(/[\[\]]/g, '') : null;
+    };
+    // YouTube needs >=10s between chapters and ignores the lot if one is shorter, so
+    // a beat that lands too close to the previous mark is folded into it.
+    let lastF = -Infinity;
     for (const sc of spec.scenes) {
-      const label = String(sc.data?.headline ?? sc.data?.heading ?? sc.data?.title ?? sc.type).replace(/[\[\]]/g, '');
-      marks.push(`${mmss(starts[sc.id])} - ${label}`);
+      const f = starts[sc.id];
+      const label = labelOf(sc);
+      if (!label || f - lastF < 10 * 30) continue;
+      marks.push(`${mmss(f)} - ${label}`);
+      lastF = f;
     }
   }
 }

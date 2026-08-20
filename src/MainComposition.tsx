@@ -203,10 +203,268 @@ import {WorkerSpread} from './scenes/WorkerSpread';
 import {OrderRoulette} from './scenes/OrderRoulette';
 import {FrozenFrame} from './scenes/FrozenFrame';
 import {RecordDraft} from './scenes/RecordDraft';
+import {PathWalk} from './scenes/PathWalk';
+import {ListingRow} from './scenes/ListingRow';
+import {LinkPair} from './scenes/LinkPair';
+import {DeletionGuard} from './scenes/DeletionGuard';
+import {ToolBench} from './scenes/ToolBench';
+import {CopyFork} from './scenes/CopyFork';
+import {CmdLs} from './scenes/CmdLs';
+import {CmdCd} from './scenes/CmdCd';
+import {CmdPwd} from './scenes/CmdPwd';
+import {CmdMkdir} from './scenes/CmdMkdir';
+import {CmdCp} from './scenes/CmdCp';
+import {CmdMv} from './scenes/CmdMv';
+import {CmdRm} from './scenes/CmdRm';
+import {CmdLn} from './scenes/CmdLn';
+import {CmdClear} from './scenes/CmdClear';
+import {CmdTouch} from './scenes/CmdTouch';
+import {CmdCat} from './scenes/CmdCat';
+import {CmdTac} from './scenes/CmdTac';
+import {CmdMore} from './scenes/CmdMore';
+import {CmdLess} from './scenes/CmdLess';
+import {CmdTail} from './scenes/CmdTail';
+import {CmdVi} from './scenes/CmdVi';
+import {CmdDiff} from './scenes/CmdDiff';
+import {CmdFind} from './scenes/CmdFind';
+import {CmdLocate} from './scenes/CmdLocate';
+import {CmdGrep} from './scenes/CmdGrep';
+import {CmdAwk} from './scenes/CmdAwk';
+import {CmdSed} from './scenes/CmdSed';
+import {CmdXargs} from './scenes/CmdXargs';
+import {CmdChmod} from './scenes/CmdChmod';
+import {CmdChown} from './scenes/CmdChown';
+import {CmdUmask} from './scenes/CmdUmask';
+import {CmdSudo} from './scenes/CmdSudo';
+import {CmdUseradd} from './scenes/CmdUseradd';
+import {CmdUsermod} from './scenes/CmdUsermod';
+import {CmdUserdel} from './scenes/CmdUserdel';
+import {CmdPasswd} from './scenes/CmdPasswd';
+import {CmdChpasswd} from './scenes/CmdChpasswd';
+import {CmdW} from './scenes/CmdW';
+import {CmdLast} from './scenes/CmdLast';
+import {CmdChroot} from './scenes/CmdChroot';
+import {CmdPs} from './scenes/CmdPs';
+import {CmdPstree} from './scenes/CmdPstree';
+import {CmdTop} from './scenes/CmdTop';
+import {CmdHtop} from './scenes/CmdHtop';
+import {CmdBtop} from './scenes/CmdBtop';
+import {CmdAtop} from './scenes/CmdAtop';
+import {CmdGlances} from './scenes/CmdGlances';
+import {CmdNmon} from './scenes/CmdNmon';
+import {CmdKill} from './scenes/CmdKill';
+import {CmdKillall} from './scenes/CmdKillall';
+import {CmdNohup} from './scenes/CmdNohup';
+import {CmdSleep} from './scenes/CmdSleep';
+import {CmdWait} from './scenes/CmdWait';
+import {CmdLsof} from './scenes/CmdLsof';
+import {CmdStrace} from './scenes/CmdStrace';
+import {CmdUptime} from './scenes/CmdUptime';
+import {CmdFree} from './scenes/CmdFree';
+import {CmdVmstat} from './scenes/CmdVmstat';
+import {CmdIostat} from './scenes/CmdIostat';
+import {CmdIotop} from './scenes/CmdIotop';
+import {CmdDstat} from './scenes/CmdDstat';
+import {CmdSar} from './scenes/CmdSar';
+import {CmdWatch} from './scenes/CmdWatch';
+import {CmdDf} from './scenes/CmdDf';
+import {CmdDu} from './scenes/CmdDu';
+import {CmdNcdu} from './scenes/CmdNcdu';
+import {CmdFdisk} from './scenes/CmdFdisk';
+import {CmdParted} from './scenes/CmdParted';
+import {CmdBlkid} from './scenes/CmdBlkid';
+import {CmdMkfs} from './scenes/CmdMkfs';
+import {CmdFsck} from './scenes/CmdFsck';
+import {CmdMount} from './scenes/CmdMount';
+import {CmdUmount} from './scenes/CmdUmount';
+import {CmdDd} from './scenes/CmdDd';
+import {CmdIp} from './scenes/CmdIp';
+import {CmdPing} from './scenes/CmdPing';
+import {CmdTraceroute} from './scenes/CmdTraceroute';
+import {CmdMtr} from './scenes/CmdMtr';
+import {CmdNetstat} from './scenes/CmdNetstat';
+import {CmdSs} from './scenes/CmdSs';
+import {CmdNmcli} from './scenes/CmdNmcli';
+import {CmdIftop} from './scenes/CmdIftop';
+import {CmdNethogs} from './scenes/CmdNethogs';
+import {CmdNload} from './scenes/CmdNload';
+import {CmdDig} from './scenes/CmdDig';
+import {CmdHost} from './scenes/CmdHost';
+import {CmdNslookup} from './scenes/CmdNslookup';
+import {CmdWhois} from './scenes/CmdWhois';
+import {CmdSsh} from './scenes/CmdSsh';
+import {CmdScp} from './scenes/CmdScp';
+import {CmdRsync} from './scenes/CmdRsync';
+import {CmdNc} from './scenes/CmdNc';
+import {CmdWget} from './scenes/CmdWget';
+import {CmdCurl} from './scenes/CmdCurl';
+import {CmdTar} from './scenes/CmdTar';
+import {CmdGzip} from './scenes/CmdGzip';
+import {CmdBzip2} from './scenes/CmdBzip2';
+import {CmdZip} from './scenes/CmdZip';
+import {CmdCron} from './scenes/CmdCron';
+import {CmdCrontab} from './scenes/CmdCrontab';
+import {CmdBashscript} from './scenes/CmdBashscript';
+import {CmdAlias} from './scenes/CmdAlias';
+import {CmdEnv} from './scenes/CmdEnv';
+import {CmdHistory} from './scenes/CmdHistory';
+import {CmdScreen} from './scenes/CmdScreen';
+import {CmdTmux} from './scenes/CmdTmux';
+import {CmdSystemctl} from './scenes/CmdSystemctl';
+import {CmdJournalctl} from './scenes/CmdJournalctl';
+import {CmdDmesg} from './scenes/CmdDmesg';
+import {CmdMan} from './scenes/CmdMan';
+import {CmdApropos} from './scenes/CmdApropos';
+import {CmdTldr} from './scenes/CmdTldr';
+import {CmdCheat} from './scenes/CmdCheat';
+import {CmdLspci} from './scenes/CmdLspci';
+import {CmdLsusb} from './scenes/CmdLsusb';
+import {DsaTracePtrs} from './scenes/DsaTracePtrs';
+import {DsaTraceWindow} from './scenes/DsaTraceWindow';
+import {DsaTraceBsearch} from './scenes/DsaTraceBsearch';
+import {DsaTraceHash} from './scenes/DsaTraceHash';
+import {DsaTraceStack} from './scenes/DsaTraceStack';
+import {DsaTraceGrid} from './scenes/DsaTraceGrid';
+import {DsaTraceTree} from './scenes/DsaTraceTree';
+import {DsaTraceDp} from './scenes/DsaTraceDp';
+import {DsaTraceIntervals} from './scenes/DsaTraceIntervals';
+import {DsaTraceList} from './scenes/DsaTraceList';
+import {DsaSignals} from './scenes/DsaSignals';
+import {DsaCost} from './scenes/DsaCost';
+import {DsaFramework} from './scenes/DsaFramework';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  DSA_FRAMEWORK: DsaFramework,
+  DSA_COST: DsaCost,
+  DSA_SIGNALS: DsaSignals,
+  DSA_TRACE_LIST: DsaTraceList,
+  DSA_TRACE_INTERVALS: DsaTraceIntervals,
+  DSA_TRACE_DP: DsaTraceDp,
+  DSA_TRACE_TREE: DsaTraceTree,
+  DSA_TRACE_GRID: DsaTraceGrid,
+  DSA_TRACE_STACK: DsaTraceStack,
+  DSA_TRACE_HASH: DsaTraceHash,
+  DSA_TRACE_BSEARCH: DsaTraceBsearch,
+  DSA_TRACE_WINDOW: DsaTraceWindow,
+  DSA_TRACE_PTRS: DsaTracePtrs,
+  CMD_LSUSB: CmdLsusb,
+  CMD_LSPCI: CmdLspci,
+  CMD_CHEAT: CmdCheat,
+  CMD_TLDR: CmdTldr,
+  CMD_APROPOS: CmdApropos,
+  CMD_MAN: CmdMan,
+  CMD_DMESG: CmdDmesg,
+  CMD_JOURNALCTL: CmdJournalctl,
+  CMD_SYSTEMCTL: CmdSystemctl,
+  CMD_TMUX: CmdTmux,
+  CMD_SCREEN: CmdScreen,
+  CMD_HISTORY: CmdHistory,
+  CMD_ENV: CmdEnv,
+  CMD_ALIAS: CmdAlias,
+  CMD_BASHSCRIPT: CmdBashscript,
+  CMD_CRONTAB: CmdCrontab,
+  CMD_CRON: CmdCron,
+  CMD_ZIP: CmdZip,
+  CMD_BZIP2: CmdBzip2,
+  CMD_GZIP: CmdGzip,
+  CMD_TAR: CmdTar,
+  CMD_CURL: CmdCurl,
+  CMD_WGET: CmdWget,
+  CMD_NC: CmdNc,
+  CMD_RSYNC: CmdRsync,
+  CMD_SCP: CmdScp,
+  CMD_SSH: CmdSsh,
+  CMD_WHOIS: CmdWhois,
+  CMD_NSLOOKUP: CmdNslookup,
+  CMD_HOST: CmdHost,
+  CMD_DIG: CmdDig,
+  CMD_NLOAD: CmdNload,
+  CMD_NETHOGS: CmdNethogs,
+  CMD_IFTOP: CmdIftop,
+  CMD_NMCLI: CmdNmcli,
+  CMD_SS: CmdSs,
+  CMD_NETSTAT: CmdNetstat,
+  CMD_MTR: CmdMtr,
+  CMD_TRACEROUTE: CmdTraceroute,
+  CMD_PING: CmdPing,
+  CMD_IP: CmdIp,
+  CMD_DD: CmdDd,
+  CMD_UMOUNT: CmdUmount,
+  CMD_MOUNT: CmdMount,
+  CMD_FSCK: CmdFsck,
+  CMD_MKFS: CmdMkfs,
+  CMD_BLKID: CmdBlkid,
+  CMD_PARTED: CmdParted,
+  CMD_FDISK: CmdFdisk,
+  CMD_NCDU: CmdNcdu,
+  CMD_DU: CmdDu,
+  CMD_DF: CmdDf,
+  CMD_WATCH: CmdWatch,
+  CMD_SAR: CmdSar,
+  CMD_DSTAT: CmdDstat,
+  CMD_IOTOP: CmdIotop,
+  CMD_IOSTAT: CmdIostat,
+  CMD_VMSTAT: CmdVmstat,
+  CMD_FREE: CmdFree,
+  CMD_UPTIME: CmdUptime,
+  CMD_STRACE: CmdStrace,
+  CMD_LSOF: CmdLsof,
+  CMD_WAIT: CmdWait,
+  CMD_SLEEP: CmdSleep,
+  CMD_NOHUP: CmdNohup,
+  CMD_KILLALL: CmdKillall,
+  CMD_KILL: CmdKill,
+  CMD_NMON: CmdNmon,
+  CMD_GLANCES: CmdGlances,
+  CMD_ATOP: CmdAtop,
+  CMD_BTOP: CmdBtop,
+  CMD_HTOP: CmdHtop,
+  CMD_TOP: CmdTop,
+  CMD_PSTREE: CmdPstree,
+  CMD_PS: CmdPs,
+  CMD_CHROOT: CmdChroot,
+  CMD_LAST: CmdLast,
+  CMD_W: CmdW,
+  CMD_CHPASSWD: CmdChpasswd,
+  CMD_PASSWD: CmdPasswd,
+  CMD_USERDEL: CmdUserdel,
+  CMD_USERMOD: CmdUsermod,
+  CMD_USERADD: CmdUseradd,
+  CMD_SUDO: CmdSudo,
+  CMD_UMASK: CmdUmask,
+  CMD_CHOWN: CmdChown,
+  CMD_CHMOD: CmdChmod,
+  CMD_XARGS: CmdXargs,
+  CMD_SED: CmdSed,
+  CMD_AWK: CmdAwk,
+  CMD_GREP: CmdGrep,
+  CMD_LOCATE: CmdLocate,
+  CMD_FIND: CmdFind,
+  CMD_DIFF: CmdDiff,
+  CMD_VI: CmdVi,
+  CMD_TAIL: CmdTail,
+  CMD_LESS: CmdLess,
+  CMD_MORE: CmdMore,
+  CMD_TAC: CmdTac,
+  CMD_CAT: CmdCat,
+  CMD_TOUCH: CmdTouch,
+  CMD_CLEAR: CmdClear,
+  CMD_LN: CmdLn,
+  CMD_RM: CmdRm,
+  CMD_MV: CmdMv,
+  CMD_CP: CmdCp,
+  CMD_MKDIR: CmdMkdir,
+  CMD_PWD: CmdPwd,
+  CMD_CD: CmdCd,
+  CMD_LS: CmdLs,
+  COPY_FORK: CopyFork,
+  TOOL_BENCH: ToolBench,
+  DELETION_GUARD: DeletionGuard,
+  LINK_PAIR: LinkPair,
+  LISTING_ROW: ListingRow,
+  PATH_WALK: PathWalk,
   RECORD_DRAFT: RecordDraft,
   FROZEN_FRAME: FrozenFrame,
   ORDER_ROULETTE: OrderRoulette,

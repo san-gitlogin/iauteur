@@ -147,6 +147,14 @@ function buildInterface(cfg) {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
 }
 ` : '';
   const body = cfg.fields.map((f) => `  ${f.name}?: ${tsType(Name, f)};`).join('\n');
