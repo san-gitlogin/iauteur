@@ -86,7 +86,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 225,
-   "narration": "Your tool's been running for thirty seconds and printed nothing. Is it working, or has it died?",
+   "narration": "A tool that runs for thirty seconds and says nothing looks broken.",
    "data": {
     "headline": "WORKING, OR DEAD?",
     "subtext": "logs and progress",
@@ -105,7 +105,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 320,
-   "narration": "A tool call is silent by default, and silence is indistinguishable from a crash. Two calls fix that. Learn MCP, on THE NBX STUDIO.",
+   "narration": "Two calls fix that, one more lets the person stop it, and by the end you'll know which of them the spec has already deprecated. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "NOTIFICATIONS",
     "subtitle": "chapter nine of twelve"
@@ -242,6 +242,77 @@
    "vars": [
     {
      "label": "no more frozen window",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04b",
+   "type": "MCP_PROGRESS",
+   "transition": "fade",
+   "background": "zoneA",
+   "key": "mcpProgress",
+   "headline": "And letting them [stop it]",
+   "color": "blue",
+   "caption": "the other half",
+   "codeTitle": "server.py",
+   "premise": "Progress tells the user the work is alive. Cancellation lets them end it. A long tool needs both.",
+   "durationFrames": 900,
+   "narration": "Progress solves half the problem. Here's the other half, and the spec lists it as a core utility alongside progress: cancellation. |If a request can run for thirty seconds, the person watching needs a way to stop it \u2014 otherwise your only honest option is making them wait for something they no longer want. ^When the client cancels, your tool's async task is cancelled underneath you, |so the shape that saves you is an ordinary try and finally: ^clean up whatever you opened, then let the cancellation propagate. |Swallowing it is the mistake \u2014 ^catch and ignore, and you've built a tool nobody can stop. ^And if the work is genuinely long, minutes rather than seconds, that's what the Tasks extension is for: it hands back a durable handle you poll, instead of holding a request open and hoping.",
+   "lines": [
+    {
+     "text": "@mcp.tool()"
+    },
+    {
+     "text": "async def research(topic: str, ctx: Context):"
+    },
+    {
+     "text": "    try:",
+     "detail": "A long request must be stoppable.",
+     "teach": true
+    },
+    {
+     "text": "        await ctx.report_progress(30, 100)"
+    },
+    {
+     "text": "        return await scrape(topic)"
+    },
+    {
+     "text": "    finally:"
+    },
+    {
+     "text": "        await session.aclose()   # always runs",
+     "detail": "Clean up, then let the cancel propagate.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    # never: except asyncio.CancelledError: pass",
+     "detail": "That builds a tool nobody can stop.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "client cancels",
+     "sub": "your async task is cancelled underneath you",
+     "mark": true
+    },
+    {
+     "label": "try / finally",
+     "sub": "clean up, then let it propagate",
+     "mark": true
+    },
+    {
+     "label": "never swallow it",
+     "sub": "catch-and-ignore = unstoppable tool",
+     "mark": true
+    },
+    {
+     "label": "minutes, not seconds?",
+     "sub": "that is what the Tasks extension is for",
      "mark": true
     }
    ]

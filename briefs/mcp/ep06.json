@@ -94,7 +94,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 230,
-   "narration": "You publish a free MCP server. It goes viral. Now \u2014 who's paying for every Claude call it makes?",
+   "narration": "Publish an MCP server that needs a language model, and someone pays for every call.",
    "data": {
     "headline": "WHO PAYS THE BILL?",
     "subtext": "sampling, explained",
@@ -113,7 +113,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 340,
-   "narration": "This is the feature people find genuinely mind-bending the first time, and it exists for a very ordinary reason: money. Learn MCP, on THE NBX STUDIO.",
+   "narration": "This chapter is about making sure that someone isn't you. You'll see the protocol run backwards \u2014 and understand the one trick that keeps a public server cheap. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "SAMPLING",
     "subtitle": "chapter seven of twelve"
@@ -344,7 +344,8 @@
      "out": [
       "still in the spec",
       "for 12+ months"
-     ]
+     ],
+     "icon": "lucide:refresh-cw"
     },
     {
      "label": "Migrate to",

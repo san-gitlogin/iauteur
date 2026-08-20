@@ -90,7 +90,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 230,
-   "narration": "You want Claude to reach GitHub, Slack, and your database. That's three integrations, and none of them are your product.",
+   "narration": "You want Claude to reach your GitHub, your Slack, your database. That plumbing is weeks of work.",
    "data": {
     "headline": "STOP WRITING INTEGRATIONS",
     "subtext": "what MCP actually is",
@@ -109,7 +109,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 340,
-   "narration": "Last time we found a hole in the API call: a tools list that somebody has to write. This is Learn MCP on THE NBX STUDIO, and today we meet the somebody.",
+   "narration": "This chapter is about why you mostly don't have to write it. You'll leave knowing what an MCP server and client actually are, and the four messages that pass between them. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "WHAT IS MCP",
     "subtitle": "chapter two of twelve"
@@ -133,19 +133,22 @@
      "label": "sign every restaurant",
      "sub": "you write GitHub, Slack, Postgres yourself \u2014 forever",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:hammer"
     },
     {
      "label": "plug into the platform",
      "sub": "somebody already wrote them, you connect",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:plug"
     },
     {
      "label": "MCP",
      "sub": "the platform, for AI tools",
      "owner": "ai",
-     "mark": true
+     "mark": true,
+     "icon": "si:anthropic"
     }
    ]
   },
@@ -166,25 +169,29 @@
      "label": "4 apps",
      "sub": "editor \u00b7 chat \u00b7 IDE \u00b7 agent",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:layout-grid"
     },
     {
      "label": "4 services",
      "sub": "GitHub \u00b7 Slack \u00b7 Postgres \u00b7 files",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:cloud"
     },
     {
      "label": "without a standard",
      "sub": "4 \u00d7 4 = 16 integrations, none shared",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:git-fork"
     },
     {
      "label": "with MCP",
      "sub": "4 servers + 4 clients = 8 pieces",
      "owner": "ai",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:network"
     }
    ]
   },
@@ -251,6 +258,67 @@
       "  {\"type\":\"text\",",
       "   \"text\":\"Buy groceries...\"}]}}"
      ]
+    }
+   ]
+  },
+  {
+   "id": "s04b",
+   "type": "MCP_WIRE",
+   "transition": "fade",
+   "background": "zoneA",
+   "key": "mcpWire",
+   "headline": "First, they [agree what's possible]",
+   "color": "blue",
+   "caption": "the handshake",
+   "codeTitle": "client.py",
+   "premise": "Before any tool is listed, the two sides state what they each support. Nothing works that both sides did not agree to.",
+   "ends": [
+    "YOUR APP",
+    "MCP SERVER"
+   ],
+   "durationFrames": 880,
+   "narration": "One thing happens before any of that, and it explains a lot of confusing behaviour later. |Initialize is the handshake, and it's where both sides declare what they can do. ^Your client says which optional features it supports \u2014 whether it can handle elicitation, for example. ^The server answers with what it offers: tools, resources, prompts. And the rule that falls out is simple: a server must not send a request the client never said it could handle. So if you build a server that asks for user input and the client never declared elicitation, you don't get an error at that moment \u2014 you get a feature that silently never happens. ^Which is why, when something mysteriously does nothing, the handshake is the first place to look.",
+   "lines": [
+    {
+     "text": "async with ClientSession(read, write) as client:"
+    },
+    {
+     "text": "    await client.initialize()",
+     "detail": "Both sides declare what they support.",
+     "teach": true
+    },
+    {
+     "text": "    # only now can you list or call anything"
+    },
+    {
+     "text": "    tools = await client.list_tools()"
+    }
+   ],
+   "cells": [
+    {
+     "label": "client capabilities",
+     "sub": "what your app can handle \u2014 elicitation, and so on",
+     "dir": "out",
+     "mark": true,
+     "out": [
+      "{\"elicitation\":{\"form\":{}}}"
+     ]
+    },
+    {
+     "label": "server capabilities",
+     "sub": "what this server offers",
+     "dir": "back",
+     "mark": true,
+     "out": [
+      "{\"tools\":{},\"resources\":{},",
+      "  \"prompts\":{}}"
+     ]
+    },
+    {
+     "label": "never declared = never sent",
+     "sub": "the feature silently does nothing",
+     "dir": "back",
+     "mark": true
     }
    ]
   },

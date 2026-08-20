@@ -91,7 +91,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 240,
-   "narration": "Everyone says just call the API. But what's inside the envelope, and where does MCP plug in?",
+   "narration": "If you've only ever used Claude through a chat box, the API underneath is simpler than you think.",
    "data": {
     "headline": "WHAT'S IN THE ENVELOPE",
     "subtext": "one call, four arguments",
@@ -110,7 +110,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 330,
-   "narration": "Welcome to Learn MCP, here on THE NBX STUDIO. Before MCP can mean anything, you need to see what a plain Claude call actually looks like \u2014 because MCP is nothing more than a way of filling one argument in it.",
+   "narration": "By the end of this chapter you'll know exactly what a single Claude call contains, and precisely where MCP plugs into it \u2014 because MCP is really just a way of filling one argument. This is Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "HOW CLAUDE WORKS",
     "subtitle": "chapter one of twelve"
@@ -172,17 +172,20 @@
     {
      "label": "model=",
      "sub": "which Claude answers \u00b7 Sonnet is fast and cheap",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:cpu"
     },
     {
      "label": "max_tokens=",
      "sub": "a ceiling on the reply, not a target",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:ruler"
     },
     {
      "label": "messages=[\u2026]",
      "sub": "the conversation so far, each entry with a role",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:messages-square"
     }
    ]
   },
@@ -230,12 +233,14 @@
     {
      "label": "assistant",
      "sub": "what Claude said last time \u2014 you store it",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:bot"
     },
     {
      "label": "user",
      "sub": "your new question, appended on the end",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:user"
     }
    ],
    "vars": [
@@ -324,17 +329,20 @@
     {
      "label": "name",
      "sub": "what the function is called",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:tag"
     },
     {
      "label": "description",
      "sub": "how Claude decides it's the right one",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:text"
     },
     {
      "label": "input_schema",
      "sub": "the arguments, and their types",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:braces"
     }
    ],
    "vars": [
@@ -398,22 +406,26 @@
     {
      "label": "Python 3.10+",
      "sub": "the language",
-     "mark": true
+     "mark": true,
+     "icon": "si:python"
     },
     {
      "label": "uv",
      "sub": "the package manager",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:package"
     },
     {
      "label": "mcp[cli]",
      "sub": "the SDK and its tools",
-     "mark": true
+     "mark": true,
+     "icon": "si:anthropic"
     },
     {
      "label": "ANTHROPIC_API_KEY",
      "sub": "how Anthropic knows it's you",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:key-round"
     }
    ]
   },

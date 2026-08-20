@@ -23,6 +23,9 @@ export const McpTerminal: React.FC<{scene: Scene}> = ({scene}) => {
   const cells: McpItem[] = (d.cells ?? []).map((c) => ({
     label: c.label, sub: c.sub, value: c.value, color: c.color, atWord: c.atWord,
     text: c.text, owner: c.owner, dir: c.dir, out: c.out,
+    // icon MUST survive this mapping — dropping a new field here is the same defect
+    // that silently discarded parent/links on the DSA cut (LAW 0k corollary).
+    icon: c.icon,
   }));
   const accent = (d.color ?? "green") as any;
   if (!steps.length) return <AbsoluteFill />;

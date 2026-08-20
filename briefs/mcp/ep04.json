@@ -89,7 +89,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 230,
-   "narration": "Here's something that surprises people. Claude can't run your tool. So how does a tool ever get called?",
+   "narration": "Here's what confuses everyone at first: Claude can't run your tool. Your own code does.",
    "data": {
     "headline": "CLAUDE NEVER RUNS IT",
     "subtext": "your code does",
@@ -108,7 +108,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 330,
-   "narration": "You've got a server, so now you need the other half. Claude has no network access to that server and no way to execute anything, which means your app does every bit of the work. This is Learn MCP on THE NBX STUDIO.",
+   "narration": "Once you see the loop that makes that work, the whole protocol clicks \u2014 and you'll be able to write the client half yourself. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "THE CLIENT",
     "subtitle": "chapter five of twelve"

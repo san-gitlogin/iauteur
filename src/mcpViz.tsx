@@ -3,6 +3,7 @@ import {useCurrentFrame} from 'remotion';
 import {SemColor} from './types';
 import {hexA} from './ui';
 import {useViz, liveAt, pulseAt, stackBudget} from './dsaViz';
+import {AssetIcon} from './AssetIcon';
 
 // MCP depictions. MCP is a PROTOCOL, so what has to move on screen is a message,
 // a direction, and who is in control — not a data structure. None of the algorithm
@@ -28,6 +29,13 @@ export interface McpItem {
   dir?: string;
   /** Verbatim payload / output lines. */
   out?: string[];
+  /** A GLYPH standing for this thing: "lucide:folder-lock", "si:python".
+   *  Owner, 2026-08-21: *"ALL videos have the same container, text, highlight...
+   *  use lucide icons, or publicly available svgs or use relevant logos to be able
+   *  to cleanly depict whats going on."* He was right — fifteen registered types
+   *  were all rendering as a bordered box of text rows. An item that stands for a
+   *  THING names its glyph, and the depiction draws the thing. */
+  icon?: string;
 }
 export interface McpVizProps {
   items: McpItem[];
@@ -52,10 +60,10 @@ const rowMetrics = (v: ReturnType<typeof useViz>, n: number) => {
   };
 };
 
-const OWNERS: Record<string, {who: string; icon: string; col: SemColor}> = {
-  ai:   {who: 'THE AI DECIDES',   icon: '🤖', col: 'purple'},
-  code: {who: 'YOUR CODE DECIDES', icon: '💻', col: 'blue'},
-  user: {who: 'THE USER DECIDES',  icon: '👤', col: 'green'},
+const OWNERS: Record<string, {who: string; glyph: string; trigger: string; col: SemColor}> = {
+  ai:   {who: 'THE AI DECIDES',    glyph: 'lucide:bot',      trigger: 'lucide:sparkles',  col: 'purple'},
+  code: {who: 'YOUR CODE DECIDES', glyph: 'lucide:terminal', trigger: 'lucide:code',      col: 'blue'},
+  user: {who: 'THE USER DECIDES',  glyph: 'lucide:user',     trigger: 'lucide:mouse-pointer-click', col: 'green'},
 };
 
 /** THE 3 PRIMITIVES — one lane each, tagged with who actually pulls the trigger.
@@ -63,44 +71,69 @@ const OWNERS: Record<string, {who: string; icon: string; col: SemColor}> = {
 export const ControlBoard: React.FC<McpVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
-  const m = rowMetrics(v, items.length);
+  // Drawn as CARDS with a glyph each, laid out across the pane — not as rows of
+  // text in a box. Who holds the trigger is shown by the owner's own icon sitting
+  // on the card, so the distinction is a picture rather than a caption.
+  const n = Math.max(items.length, 1);
+  const wide = n <= 4;
+  const cardH = wide ? (v.vertical ? 300 : 232) : (v.vertical ? 160 : 132);
+  const glyph = wide ? (v.vertical ? 92 : 82) : (v.vertical ? 56 : 46);
+  const lab = wide ? (v.vertical ? 30 : 23) : (v.vertical ? 24 : 18);
+  const sub = wide ? (v.vertical ? 20 : 15) : (v.vertical ? 17 : 13);
+
   return (
-    <Stack gap={Math.max(8, m.rowH * 0.13) * v.scale}>
+    <div style={{
+      display: 'flex', flexWrap: 'wrap', gap: 14 * v.scale,
+      alignContent: 'center', alignItems: 'center', justifyContent: 'center',
+      width: '100%', flex: 1, minHeight: 0,
+    }}>
       {items.map((it, i) => {
         const on = liveAt(frame, it.atWord, 10);
         const p = pulseAt(frame, it.atWord);
         const o = OWNERS[it.owner ?? ''] ?? null;
         const col = o ? v.sem(o.col) : it.color ? v.sem(it.color) : v.a;
+        const icon = it.icon ?? (o ? o.glyph : 'lucide:box');
         return (
           <div key={i} style={{
-            display: 'flex', alignItems: 'center', gap: 14 * v.scale,
-            minHeight: m.rowH * v.scale, boxSizing: 'border-box',
-            padding: `${Math.max(8, m.rowH * 0.15) * v.scale}px ${16 * v.scale}px`,
-            borderRadius: v.rad(10),
-            border: `${1.8 * v.scale}px solid ${on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.5)}`,
-            background: on > 0.4 ? hexA(col, 0.12) : 'transparent',
-            opacity: 0.3 + on * 0.7,
-            transform: `translateX(${(1 - on) * 14 * v.scale}px) scale(${1 + p * 0.02})`,
+            flex: wide ? `1 1 ${100 / Math.min(n, 3) - 6}%` : '1 1 46%',
+            minWidth: 0, minHeight: cardH * v.scale, boxSizing: 'border-box',
+            display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
+            justifyContent: 'space-between', gap: 9 * v.scale,
+            padding: `${20 * v.scale}px ${18 * v.scale}px`,
+            borderRadius: v.rad(14),
+            border: `${2 * v.scale}px solid ${on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.45)}`,
+            background: on > 0.4
+              ? `linear-gradient(150deg, ${hexA(col, 0.2)}, ${hexA(col, 0.05)})`
+              : hexA(v.t.colors.panel, 0.3),
+            opacity: 0.32 + on * 0.68,
+            transform: `translateY(${(1 - on) * 16 * v.scale}px) scale(${1 + p * 0.025})`,
+            boxShadow: on > 0.6 && v.t.style.glow > 0
+              ? `0 0 ${34 * v.scale * v.t.style.glow}px ${hexA(col, 0.22)}` : undefined,
           }}>
-            <div style={{...v.mono(m.lab), fontWeight: 800, color: on > 0.4 ? col : v.dim, flex: '0 0 auto'}}>
-              {it.label}
+            <div style={{display: 'flex', flexDirection: 'column', gap: 9 * v.scale}}>
+              <AssetIcon asset={icon} size={glyph * v.scale} bare tint={on > 0.4 ? col : v.dim} />
+              <div style={{...v.mono(lab), fontWeight: 800, color: on > 0.4 ? v.t.colors.text : v.dim}}>
+                {it.label}
+              </div>
+              <div style={{...v.body(sub), color: v.dim, lineHeight: 1.4}}>{it.sub}</div>
             </div>
-            <div style={{...v.body(m.sub), color: v.dim, flex: 1, minWidth: 0}}>{it.sub}</div>
             {o ? (
               <div style={{
-                flex: '0 0 auto', display: 'flex', alignItems: 'center', gap: 7 * v.scale,
+                display: 'flex', alignItems: 'center', gap: 7 * v.scale,
                 padding: `${5 * v.scale}px ${11 * v.scale}px`, borderRadius: 999,
-                background: hexA(col, on > 0.4 ? 0.9 : 0.2),
-                ...v.mono(m.sub * 0.95), fontWeight: 800,
+                background: hexA(col, on > 0.4 ? 0.9 : 0.18),
+                ...v.mono(sub * 0.92), fontWeight: 800,
                 color: on > 0.4 ? '#0b0b12' : v.dim, whiteSpace: 'nowrap',
               }}>
-                <span>{o.icon}</span>{o.who}
+                <AssetIcon asset={o.trigger} size={sub * 1.2 * v.scale} bare
+                           tint={on > 0.4 ? '#0b0b12' : v.dim} />
+                {o.who}
               </div>
             ) : null}
           </div>
         );
       })}
-    </Stack>
+    </div>
   );
 };
 
@@ -110,51 +143,62 @@ export const WireExchange: React.FC<McpVizProps> = ({items, accent, ends}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const [L, R] = ends && ends.length >= 2 ? ends : ['CLIENT', 'SERVER'];
-  // Each message costs its label, its gloss AND its payload lines. Counting only
-  // the messages let three envelopes overflow the pane and clip the last one.
   const weight = items.reduce((n, it) => n + 1.6 + (it.out?.length ?? 0) * 0.7, 1);
   const m = rowMetrics(v, Math.ceil(weight));
-  const pillar = (name: string, lit: boolean) => (
+
+  // The two ends are MACHINES, drawn as machines. A labelled rectangle is a label.
+  const machine = (name: string, icon: string) => (
     <div style={{
-      flex: '0 0 auto', width: (v.vertical ? 150 : 116) * v.scale, textAlign: 'center',
-      padding: `${10 * v.scale}px ${8 * v.scale}px`, borderRadius: v.rad(9),
-      border: `${1.8 * v.scale}px solid ${lit ? hexA(v.a, 0.9) : hexA(v.t.colors.panelBorder, 0.7)}`,
-      background: lit ? hexA(v.a, 0.14) : hexA(v.t.colors.panel, 0.4),
-      ...v.mono(m.lab * 0.92), fontWeight: 800, color: lit ? v.a : v.dim,
-    }}>{name}</div>
+      flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center',
+      gap: 6 * v.scale, width: (v.vertical ? 168 : 128) * v.scale,
+    }}>
+      <div style={{
+        width: (v.vertical ? 108 : 92) * v.scale, height: (v.vertical ? 108 : 92) * v.scale,
+        borderRadius: v.rad(16), display: 'flex', alignItems: 'center', justifyContent: 'center',
+        border: `${2 * v.scale}px solid ${hexA(v.a, 0.75)}`,
+        background: `linear-gradient(150deg, ${hexA(v.a, 0.18)}, ${hexA(v.a, 0.05)})`,
+      }}>
+        <AssetIcon asset={icon} size={(v.vertical ? 60 : 52) * v.scale} bare tint={v.a} />
+      </div>
+      <div style={{...v.mono(m.sub), fontWeight: 800, color: v.a, whiteSpace: 'nowrap'}}>{name}</div>
+    </div>
   );
+
   return (
     <Stack gap={Math.max(7, m.rowH * 0.12) * v.scale}>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        {pillar(L, true)}
-        <div style={{...v.body(m.sub), color: v.dim}}>JSON-RPC 2.0</div>
-        {pillar(R, true)}
+        {machine(L, 'lucide:laptop')}
+        <div style={{...v.body(m.sub * 0.95), color: v.dim, textAlign: 'center'}}>JSON-RPC 2.0</div>
+        {machine(R, 'lucide:server')}
       </div>
+
       {items.map((it, i) => {
         const on = liveAt(frame, it.atWord, 12);
         const back = it.dir === 'back';
         const col = back ? v.sem('orange') : v.a;
         return (
           <div key={i} style={{opacity: 0.25 + on * 0.75}}>
-            {/* the travelling envelope */}
-            <div style={{
-              display: 'flex', flexDirection: back ? 'row-reverse' : 'row', alignItems: 'center',
-              gap: 10 * v.scale,
-            }}>
+            {/* an envelope that physically crosses the gap */}
+            <div style={{position: 'relative', height: (m.lab * 1.9) * v.scale}}>
               <div style={{
-                flex: 1, height: 2.5 * v.scale, borderRadius: 999,
-                background: `linear-gradient(${back ? 'to left' : 'to right'}, ${hexA(col, 0.9)} ${on * 100}%, ${hexA(v.t.colors.panelBorder, 0.45)} ${on * 100}%)`,
+                position: 'absolute', top: '50%', left: 0, right: 0, height: 2.5 * v.scale,
+                transform: 'translateY(-50%)', borderRadius: 999,
+                background: hexA(v.t.colors.panelBorder, 0.4),
               }} />
-              <div style={{...v.mono(m.lab * 0.9), color: col, fontWeight: 800, flex: '0 0 auto'}}>
-                {back ? '◀' : '▶'}
+              <div style={{
+                position: 'absolute', top: '50%',
+                left: back ? `${(1 - on) * 88}%` : `${on * 88}%`,
+                transform: 'translate(-50%, -50%)',
+                display: 'flex', alignItems: 'center', gap: 7 * v.scale,
+                padding: `${5 * v.scale}px ${11 * v.scale}px`, borderRadius: 999,
+                background: hexA(col, 0.9), whiteSpace: 'nowrap',
+              }}>
+                <AssetIcon asset={back ? 'lucide:mail-open' : 'lucide:mail'}
+                           size={m.lab * 0.9 * v.scale} bare tint="#0b0b12" />
+                <span style={{...v.mono(m.lab * 0.82), fontWeight: 800, color: '#0b0b12'}}>{it.label}</span>
               </div>
             </div>
-            <div style={{
-              marginTop: 5 * v.scale,
-              marginLeft: back ? 0 : 12 * v.scale, marginRight: back ? 12 * v.scale : 0,
-              textAlign: back ? 'right' : 'left',
-            }}>
-              <div style={{...v.mono(m.lab), fontWeight: 800, color: on > 0.4 ? col : v.dim}}>{it.label}</div>
+            <div style={{textAlign: back ? 'right' : 'left', marginTop: 2 * v.scale}}>
               {it.sub ? <div style={{...v.body(m.sub), color: v.dim}}>{it.sub}</div> : null}
               {it.out?.length ? (
                 <div style={{
@@ -323,53 +367,68 @@ export const RootGate: React.FC<McpVizProps> = ({items, accent}) => {
   const roots = items.filter((x) => x.text !== 'ask');
   const asks = items.filter((x) => x.text === 'ask');
   const m = rowMetrics(v, items.length + 1);
+  const g = m.lab * 1.25;
   return (
-    <Stack gap={Math.max(8, m.rowH * 0.13) * v.scale}>
-      <div style={{...v.mono(m.sub), letterSpacing: 1.2, color: hexA(v.a, 0.95), fontWeight: 800}}>
-        ALLOWED ROOTS
-      </div>
-      {roots.map((it, i) => {
-        const on = liveAt(frame, it.atWord, 10);
-        return (
-          <div key={`r${i}`} style={{
-            display: 'flex', alignItems: 'center', gap: 11 * v.scale,
-            padding: `${Math.max(7, m.rowH * 0.13) * v.scale}px ${13 * v.scale}px`,
-            borderRadius: v.rad(9), opacity: 0.3 + on * 0.7,
-            border: `${1.6 * v.scale}px solid ${on > 0.4 ? hexA(v.sem('green'), 0.85) : hexA(v.t.colors.panelBorder, 0.5)}`,
-            background: on > 0.4 ? hexA(v.sem('green'), 0.1) : 'transparent',
-          }}>
-            <span style={{...v.mono(m.lab)}}>🗝️</span>
-            <div style={{...v.mono(m.lab * 0.95), color: on > 0.4 ? v.t.colors.text : v.dim, minWidth: 0}}>
-              {it.label}
+    <Stack gap={Math.max(9, m.rowH * 0.13) * v.scale}>
+      {/* the granted folders, as folders */}
+      <div style={{display: 'flex', gap: 12 * v.scale, flexWrap: 'wrap'}}>
+        {roots.map((it, i) => {
+          const on = liveAt(frame, it.atWord, 10);
+          return (
+            <div key={`r${i}`} style={{
+              flex: '1 1 40%', minWidth: 0, display: 'flex', alignItems: 'center',
+              gap: 11 * v.scale, opacity: 0.3 + on * 0.7,
+              padding: `${13 * v.scale}px ${14 * v.scale}px`, borderRadius: v.rad(12),
+              border: `${1.8 * v.scale}px solid ${on > 0.4 ? hexA(v.sem('green'), 0.85) : hexA(v.t.colors.panelBorder, 0.45)}`,
+              background: on > 0.4 ? hexA(v.sem('green'), 0.1) : 'transparent',
+            }}>
+              <AssetIcon asset="lucide:folder-open" size={g * 1.5 * v.scale} bare
+                         tint={on > 0.4 ? v.sem('green') : v.dim} />
+              <div style={{minWidth: 0}}>
+                <div style={{...v.mono(m.lab * 0.9), color: on > 0.4 ? v.t.colors.text : v.dim}}>{it.label}</div>
+                <div style={{...v.body(m.sub), color: v.dim}}>{it.sub}</div>
+              </div>
+              <div style={{marginLeft: 'auto', flex: '0 0 auto'}}>
+                <AssetIcon asset="lucide:key-round" size={g * v.scale} bare
+                           tint={on > 0.4 ? hexA(v.sem('green'), 0.9) : v.dim} />
+              </div>
             </div>
-            <div style={{...v.body(m.sub), color: v.dim, marginLeft: 'auto'}}>{it.sub}</div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
+      {/* a requested path meeting the gate — shield-check or shield-off */}
       {asks.map((it, i) => {
         const on = liveAt(frame, it.atWord, 10);
         const denied = it.color === 'red';
         const col = denied ? v.sem('red') : v.sem('green');
         return (
           <div key={`a${i}`} style={{
-            display: 'flex', alignItems: 'center', gap: 12 * v.scale,
-            padding: `${Math.max(9, m.rowH * 0.16) * v.scale}px ${14 * v.scale}px`,
-            borderRadius: v.rad(10), opacity: 0.3 + on * 0.7,
-            border: `${2 * v.scale}px ${denied ? 'dashed' : 'solid'} ${on > 0.4 ? hexA(col, 0.95) : hexA(v.t.colors.panelBorder, 0.5)}`,
+            display: 'flex', alignItems: 'center', gap: 13 * v.scale,
+            padding: `${14 * v.scale}px ${15 * v.scale}px`, borderRadius: v.rad(12),
+            opacity: 0.3 + on * 0.7,
+            border: `${2 * v.scale}px ${denied ? 'dashed' : 'solid'} ${on > 0.4 ? hexA(col, 0.95) : hexA(v.t.colors.panelBorder, 0.45)}`,
             background: on > 0.4 ? hexA(col, 0.12) : 'transparent',
           }}>
-            <div style={{...v.body(m.sub), color: v.dim, flex: '0 0 auto'}}>tool asks for</div>
-            <div style={{...v.mono(m.lab * 0.95), color: on > 0.4 ? v.t.colors.text : v.dim,
-                         minWidth: 0, textDecoration: denied && on > 0.5 ? 'line-through' : undefined}}>
-              {it.label}
+            <AssetIcon asset={denied ? 'lucide:file-lock-2' : 'lucide:file-check-2'}
+                       size={g * 1.5 * v.scale} bare tint={on > 0.4 ? col : v.dim} />
+            <div style={{minWidth: 0, flex: 1}}>
+              <div style={{...v.mono(m.lab * 0.9), color: on > 0.4 ? v.t.colors.text : v.dim,
+                           textDecoration: denied && on > 0.5 ? 'line-through' : undefined}}>
+                {it.label}
+              </div>
+              <div style={{...v.body(m.sub), color: v.dim}}>{it.sub}</div>
             </div>
             <div style={{
-              marginLeft: 'auto', flex: '0 0 auto',
-              padding: `${4 * v.scale}px ${11 * v.scale}px`, borderRadius: 999,
-              background: on > 0.5 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.4),
+              flex: '0 0 auto', display: 'flex', alignItems: 'center', gap: 8 * v.scale,
+              padding: `${6 * v.scale}px ${13 * v.scale}px`, borderRadius: 999,
+              background: on > 0.5 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.35),
               ...v.mono(m.sub), fontWeight: 800, color: on > 0.5 ? '#0b0b12' : v.dim,
-            }}>{denied ? 'DENIED' : 'ALLOWED'}</div>
+            }}>
+              <AssetIcon asset={denied ? 'lucide:shield-off' : 'lucide:shield-check'}
+                         size={m.sub * 1.3 * v.scale} bare tint={on > 0.5 ? '#0b0b12' : v.dim} />
+              {denied ? 'DENIED' : 'ALLOWED'}
+            </div>
           </div>
         );
       })}
@@ -439,44 +498,62 @@ export const TransportSplit: React.FC<McpVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const m = rowMetrics(v, 4);
+  const g = (v.vertical ? 72 : 60) * v.scale;
   return (
-    <Stack gap={12 * v.scale}>
+    <Stack gap={14 * v.scale}>
       {items.map((it, i) => {
         const on = liveAt(frame, it.atWord, 12);
         const remote = it.text === 'remote';
         const col = remote ? v.sem('blue') : v.sem('green');
         return (
           <div key={i} style={{
-            borderRadius: v.rad(11), opacity: 0.3 + on * 0.7,
-            border: `${1.8 * v.scale}px solid ${on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.55)}`,
+            borderRadius: v.rad(13), opacity: 0.3 + on * 0.7,
+            border: `${2 * v.scale}px solid ${on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.45)}`,
             background: on > 0.4 ? hexA(col, 0.08) : 'transparent',
-            padding: `${11 * v.scale}px ${13 * v.scale}px`,
+            padding: `${14 * v.scale}px ${15 * v.scale}px`,
           }}>
-            <div style={{display: 'flex', alignItems: 'baseline', gap: 9 * v.scale}}>
+            <div style={{display: 'flex', alignItems: 'baseline', gap: 10 * v.scale}}>
               <div style={{...v.mono(m.lab), fontWeight: 800, color: on > 0.4 ? col : v.dim}}>{it.label}</div>
               <div style={{...v.body(m.sub), color: v.dim}}>{it.sub}</div>
             </div>
-            {/* one box, or two boxes with a network between them */}
-            <div style={{display: 'flex', alignItems: 'center', gap: 8 * v.scale, marginTop: 9 * v.scale}}>
+            {/* the physical arrangement: one box, or two with a network between */}
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center',
+                         gap: 16 * v.scale, marginTop: 12 * v.scale}}>
+              <AssetIcon asset="lucide:laptop" size={g} bare tint={on > 0.4 ? col : v.dim} />
               {remote ? (
                 <>
-                  <Box v={v} label="your machine" col={col} m={m} />
-                  <Pipe v={v} col={col} on={on} label="HTTP" dashed />
-                  <Box v={v} label="their server" col={col} m={m} />
+                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 * v.scale}}>
+                    <AssetIcon asset="lucide:globe" size={g * 0.72} bare tint={on > 0.4 ? col : v.dim} />
+                    <div style={{...v.mono(m.sub * 0.9), color: v.dim}}>HTTP</div>
+                  </div>
+                  <AssetIcon asset="lucide:server" size={g} bare tint={on > 0.4 ? col : v.dim} />
                 </>
               ) : (
-                <Box v={v} label="one machine · stdin ▸ stdout" col={col} m={m} wide />
+                <>
+                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 * v.scale}}>
+                    <AssetIcon asset="lucide:cable" size={g * 0.72} bare tint={on > 0.4 ? col : v.dim} />
+                    <div style={{...v.mono(m.sub * 0.9), color: v.dim}}>stdin ▸ stdout</div>
+                  </div>
+                  <AssetIcon asset="lucide:square-terminal" size={g} bare tint={on > 0.4 ? col : v.dim} />
+                  <div style={{...v.body(m.sub), color: v.dim, marginLeft: 6 * v.scale}}>one machine</div>
+                </>
               )}
             </div>
             {it.out?.length ? (
-              <div style={{marginTop: 8 * v.scale, display: 'flex', gap: 7 * v.scale, flexWrap: 'wrap'}}>
+              <div style={{marginTop: 10 * v.scale, display: 'flex', gap: 8 * v.scale,
+                           flexWrap: 'wrap', justifyContent: 'center'}}>
                 {it.out.map((o, k) => (
                   <span key={k} style={{
-                    ...v.mono(m.sub * 0.95),
-                    padding: `${3 * v.scale}px ${8 * v.scale}px`, borderRadius: 999,
+                    ...v.mono(m.sub), display: 'flex', alignItems: 'center', gap: 5 * v.scale,
+                    padding: `${4 * v.scale}px ${10 * v.scale}px`, borderRadius: 999,
                     border: `${1.2 * v.scale}px solid ${hexA(v.t.colors.panelBorder, 0.8)}`,
                     color: hexA(v.t.colors.text, 0.9),
-                  }}>{o}</span>
+                  }}>
+                    <AssetIcon asset={/only|limited/i.test(o) ? 'lucide:circle-slash' : 'lucide:check'}
+                               size={m.sub * 1.1 * v.scale} bare
+                               tint={/only|limited/i.test(o) ? v.sem('red') : v.sem('green')} />
+                    {o}
+                  </span>
                 ))}
               </div>
             ) : null}
@@ -866,28 +943,27 @@ export const DeprecationCard: React.FC<McpVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const m = rowMetrics(v, items.length + 1);
+  const g = m.lab * 1.5;
   return (
-    <Stack gap={Math.max(9, m.rowH * 0.14) * v.scale}>
+    <Stack gap={Math.max(10, m.rowH * 0.14) * v.scale}>
       {items.map((it, i) => {
         const on = liveAt(frame, it.atWord, 12);
         const gone = it.color === 'red';
-        const col = gone ? v.sem('red') : it.color === 'green' ? v.sem('green') : v.a;
+        const good = it.color === 'green';
+        const col = gone ? v.sem('red') : good ? v.sem('green') : v.a;
+        const icon = it.icon ?? (gone ? 'lucide:triangle-alert'
+                     : good ? 'lucide:arrow-right-circle' : 'lucide:calendar-clock');
         return (
           <div key={i} style={{
-            display: 'flex', alignItems: 'center', gap: 12 * v.scale,
+            display: 'flex', alignItems: 'center', gap: 14 * v.scale,
             minHeight: m.rowH * v.scale, boxSizing: 'border-box',
-            padding: `${Math.max(8, m.rowH * 0.14) * v.scale}px ${14 * v.scale}px`,
-            borderRadius: v.rad(10), opacity: 0.3 + on * 0.7,
-            border: `${1.8 * v.scale}px ${gone ? 'dashed' : 'solid'} ${
-              on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.5)}`,
+            padding: `${13 * v.scale}px ${15 * v.scale}px`,
+            borderRadius: v.rad(12), opacity: 0.3 + on * 0.7,
+            border: `${2 * v.scale}px ${gone ? 'dashed' : 'solid'} ${
+              on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.45)}`,
             background: on > 0.4 ? hexA(col, 0.1) : 'transparent',
           }}>
-            <div style={{
-              flex: '0 0 auto', padding: `${4 * v.scale}px ${10 * v.scale}px`, borderRadius: 999,
-              ...v.mono(m.sub * 0.95), fontWeight: 800,
-              background: on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.4),
-              color: on > 0.4 ? '#0b0b12' : v.dim, whiteSpace: 'nowrap',
-            }}>{gone ? 'DEPRECATED' : it.text ?? 'USE THIS'}</div>
+            <AssetIcon asset={icon} size={g * v.scale} bare tint={on > 0.4 ? col : v.dim} />
             <div style={{minWidth: 0, flex: 1}}>
               <div style={{...v.mono(m.lab), fontWeight: 800,
                            color: on > 0.4 ? v.t.colors.text : v.dim,
@@ -897,9 +973,16 @@ export const DeprecationCard: React.FC<McpVizProps> = ({items, accent}) => {
               <div style={{...v.body(m.sub), color: v.dim, marginTop: 2 * v.scale}}>{it.sub}</div>
             </div>
             {it.out?.length ? (
-              <div style={{flex: '0 0 auto', textAlign: 'right'}}>
+              <div style={{
+                flex: '0 0 auto', textAlign: 'right',
+                display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 * v.scale,
+              }}>
                 {it.out.map((o, k) => (
-                  <div key={k} style={{...v.mono(m.sub * 0.95), color: hexA(v.t.colors.muted, 0.95)}}>{o}</div>
+                  <div key={k} style={{...v.mono(m.sub * 0.95), color: hexA(v.t.colors.muted, 0.95),
+                                       display: 'flex', alignItems: 'center', gap: 5 * v.scale}}>
+                    {k === 0 ? <AssetIcon asset="lucide:clock" size={m.sub * v.scale} bare tint={v.dim} /> : null}
+                    {o}
+                  </div>
                 ))}
               </div>
             ) : null}

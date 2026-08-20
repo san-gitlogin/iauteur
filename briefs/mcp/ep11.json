@@ -91,7 +91,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 235,
-   "narration": "Your tool is halfway through and needs the user's API key. Asking for it in the chat is forbidden. So how?",
+   "narration": "Halfway through a tool, you need something only the person can give you.",
    "data": {
     "headline": "NEVER ASK IN CHAT",
     "subtext": "elicitation, both modes",
@@ -110,7 +110,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 340,
-   "narration": "Sampling let a server borrow the client's model. Elicitation lets a server borrow the client's user \u2014 and unlike sampling, this one is current, not deprecated. Learn MCP, on THE NBX STUDIO.",
+   "narration": "Maybe a choice, maybe an API key \u2014 and those two are not the same, because one of them the spec forbids you asking for in chat. This chapter is how you ask for both, properly. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "ELICITATION",
     "subtitle": "chapter eleven of twelve"

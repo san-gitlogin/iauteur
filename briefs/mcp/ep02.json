@@ -90,7 +90,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 230,
-   "narration": "Tools, resources, prompts. Three words that look interchangeable, and one question tells them apart.",
+   "narration": "Every MCP server exposes three kinds of thing, and people mix them up constantly.",
    "data": {
     "headline": "WHO PULLS THE TRIGGER?",
     "subtext": "the three primitives",
@@ -109,7 +109,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 330,
-   "narration": "Get this one right and the rest of the course is downhill, because every server you'll ever build is some mix of these three. You're watching Learn MCP on THE NBX STUDIO.",
+   "narration": "By the end of this you'll pick the right one in about five seconds, every time, using a single question. Get this chapter and the rest of the course is downhill. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "THE 3 SUPERPOWERS",
     "subtitle": "chapter three of twelve"
@@ -133,19 +133,22 @@
      "label": "Tools",
      "sub": "functions the model chooses to call",
      "owner": "ai",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:wrench"
     },
     {
      "label": "Resources",
      "sub": "data your code fetches for context",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:folder-open"
     },
     {
      "label": "Prompts",
      "sub": "workflows the person triggers",
      "owner": "user",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:sparkles"
     }
    ]
   },
@@ -166,19 +169,65 @@
      "label": "the kitchen",
      "sub": "the chef decides what to cook \u2192 TOOL",
      "owner": "ai",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:chef-hat"
     },
     {
      "label": "the menu board",
      "sub": "your app reads it to show options \u2192 RESOURCE",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:clipboard-list"
     },
     {
      "label": "the chef's special",
      "sub": "the customer presses it \u2192 PROMPT",
      "owner": "user",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:bell-ring"
+    }
+   ]
+  },
+  {
+   "id": "s04b",
+   "type": "MCP_CONTROL",
+   "transition": "dip",
+   "background": "zoneC",
+   "key": "mcpControl",
+   "headline": "The same job, [three ways]",
+   "color": "orange",
+   "caption": "when the answer flips",
+   "premise": "One job \u2014 'show me the release notes' \u2014 built three different ways. The code is nearly identical; the control is not.",
+   "durationFrames": 900,
+   "narration": "Here's the test that makes the rule stick. Take one job \u2014 show me the release notes \u2014 and notice that all three primitives can do it. The code is nearly identical. What changes is who starts it. ^As a tool, Claude decides. You ask a question, Claude reasons that release notes would help, and calls it unprompted. Good when the model should judge relevance. ^As a resource, your app decides. The user opens the releases screen, so your code fetches the notes and puts them in context before anyone asks. Good when you already know they're needed. ^As a prompt, the user decides. They type slash release notes, and your pre-written instruction runs. Good when you want the same careful workflow every time. ^Same data, same server, three different owners \u2014 and picking the wrong one shows up as a feature that fires when nobody wanted it, or never fires when everybody did.",
+   "cells": [
+    {
+     "label": "as a Tool",
+     "sub": "Claude calls it unprompted, when it judges it relevant",
+     "owner": "ai",
+     "mark": true,
+     "icon": "lucide:wrench"
+    },
+    {
+     "label": "as a Resource",
+     "sub": "your screen opened, so your code fetched it first",
+     "owner": "code",
+     "mark": true,
+     "icon": "lucide:folder-open"
+    },
+    {
+     "label": "as a Prompt",
+     "sub": "they typed /release-notes and got the same careful workflow",
+     "owner": "user",
+     "mark": true,
+     "icon": "lucide:sparkles"
+    },
+    {
+     "label": "pick wrong",
+     "sub": "it fires unasked, or never fires at all",
+     "owner": "ai",
+     "mark": true,
+     "icon": "lucide:triangle-alert"
     }
    ]
   },

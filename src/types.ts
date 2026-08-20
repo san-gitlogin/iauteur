@@ -25,6 +25,8 @@ export interface StepItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 
 export interface ChatMessage {
@@ -55,6 +57,8 @@ export interface StatPanelItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 
 export interface PathCard {
@@ -173,6 +177,8 @@ export interface CarouselItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CarouselData {
   items: CarouselItem[];
@@ -1091,6 +1097,8 @@ export interface QueueItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface QueueData {
   headline?: string;
@@ -1283,6 +1291,8 @@ export interface CastBoardItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CastBoardData {
   headline?: string;
@@ -1313,6 +1323,8 @@ export interface LabAssemblyItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface LabAssemblyData {
   headline?: string;
@@ -1342,6 +1354,8 @@ export interface BudgetMeterRowItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface BudgetMeterRowData {
   headline?: string;
@@ -1373,6 +1387,8 @@ export interface WordAnchorRailItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface WordAnchorRailData {
   headline?: string;
@@ -1403,6 +1419,8 @@ export interface ReskinCarouselItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ReskinCarouselData {
   headline?: string;
@@ -1456,6 +1474,8 @@ export interface TopicIntakeItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface TopicIntakeData {
   headline?: string;
@@ -1486,6 +1506,8 @@ export interface PromptHandoffItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface PromptHandoffData {
   headline?: string;
@@ -1517,6 +1539,8 @@ export interface CheckSweepItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CheckSweepData {
   headline?: string;
@@ -1555,6 +1579,8 @@ export interface AppWindowItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface AppWindowData {
   headline?: string;
@@ -1601,6 +1627,8 @@ export interface ChatTrioItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ChatTrioData {
   headline?: string;
@@ -1640,6 +1668,8 @@ export interface VideoPlayerItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface VideoPlayerData {
   headline?: string;
@@ -1671,6 +1701,8 @@ export interface SceneForgeItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface SceneForgeData {
   headline?: string;
@@ -1708,6 +1740,8 @@ export interface ProductionGrindItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ProductionGrindData {
   headline?: string;
@@ -1745,6 +1779,8 @@ export interface BeatBoardItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface BeatBoardData {
   headline?: string;
@@ -1784,6 +1820,8 @@ export interface ComponentLabItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ComponentLabData {
   headline?: string;
@@ -1824,6 +1862,8 @@ export interface AutoRunItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface AutoRunData {
   headline?: string;
@@ -1865,6 +1905,8 @@ export interface RepoCtaItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface RepoCtaData {
   headline?: string;
@@ -1915,6 +1957,8 @@ export interface TheaterStageItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface TheaterStageData {
   marquee?: string;
@@ -1948,6 +1992,8 @@ export interface QuizCardItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface QuizCardData {
   question?: string;
@@ -1981,6 +2027,8 @@ export interface CodeRunItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CodeRunData {
   lines?: CodeRunItem[];
@@ -2015,6 +2063,8 @@ export interface BrowserStepItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface BrowserStepData {
   steps?: BrowserStepItem[];
@@ -2062,6 +2112,8 @@ export interface FixtureCrewItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface FixtureCrewData {
   testName?: string;
@@ -2114,6 +2166,8 @@ export interface RuleTestItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface RuleTestData {
   rule?: string;
@@ -2149,6 +2203,8 @@ export interface SavedSearchItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface SavedSearchData {
   query?: string;
@@ -2187,6 +2243,8 @@ export interface ResponsibilitySplitItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ResponsibilitySplitData {
   leftLabel?: string;
@@ -2223,6 +2281,8 @@ export interface CrowdMatchItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CrowdMatchData {
   query?: string;
@@ -2263,6 +2323,8 @@ export interface RowFilterItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface RowFilterData {
   condition?: string;
@@ -2301,6 +2363,8 @@ export interface IndexDriftItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface IndexDriftData {
   before?: IndexDriftItem[];
@@ -2355,6 +2419,8 @@ export interface FrameBoundaryItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface FrameBoundaryData {
   outerTitle?: string;
@@ -2394,6 +2460,8 @@ export interface DialogGateItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DialogGateData {
   message?: string;
@@ -2448,6 +2516,8 @@ export interface ShotScopeItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ShotScopeData {
   shots?: ShotScopeItem[];
@@ -2484,6 +2554,8 @@ export interface FlagHarvestItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface FlagHarvestData {
   flag?: string;
@@ -2521,6 +2593,8 @@ export interface TraceScrubItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface TraceScrubData {
   steps?: TraceScrubItem[];
@@ -2558,6 +2632,8 @@ export interface MailRoomItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface MailRoomData {
   pattern?: string;
@@ -2593,6 +2669,8 @@ export interface SadPathsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface SadPathsData {
   states?: SadPathsItem[];
@@ -2628,6 +2706,8 @@ export interface HandStampItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface HandStampData {
   toll?: string;
@@ -2666,6 +2746,8 @@ export interface ScopeLadderItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ScopeLadderData {
   fixtures?: ScopeLadderItem[];
@@ -2700,6 +2782,8 @@ export interface BackstagePhoneItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface BackstagePhoneData {
   question?: string;
@@ -2740,6 +2824,8 @@ export interface StageHandoffItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface StageHandoffData {
   testName?: string;
@@ -2778,6 +2864,8 @@ export interface SearchNarrowItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface SearchNarrowData {
   rootLabel?: string;
@@ -2813,6 +2901,8 @@ export interface SetLogicItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface SetLogicData {
   op?: string;
@@ -2850,6 +2940,8 @@ export interface SealedBoxItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface SealedBoxData {
   boxLabel?: string;
@@ -2887,6 +2979,8 @@ export interface WorkerSpreadItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface WorkerSpreadData {
   queueLabel?: string;
@@ -2924,6 +3018,8 @@ export interface OrderRouletteItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface OrderRouletteData {
   dependency?: string;
@@ -2961,6 +3057,8 @@ export interface FrozenFrameItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface FrozenFrameData {
   filename?: string;
@@ -2999,6 +3097,8 @@ export interface RecordDraftItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface RecordDraftData {
   sourceLabel?: string;
@@ -3035,6 +3135,8 @@ export interface PathWalkItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface PathWalkData {
   headline?: string;
@@ -3067,6 +3169,8 @@ export interface ListingRowItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ListingRowData {
   headline?: string;
@@ -3099,6 +3203,8 @@ export interface LinkPairItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface LinkPairData {
   headline?: string;
@@ -3133,6 +3239,8 @@ export interface DeletionGuardItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DeletionGuardData {
   headline?: string;
@@ -3165,6 +3273,8 @@ export interface ToolBenchItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface ToolBenchData {
   headline?: string;
@@ -3210,6 +3320,8 @@ export interface CmdLsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdLsData {
   headline?: string;
@@ -3257,6 +3369,8 @@ export interface CmdCdItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdCdData {
   headline?: string;
@@ -3299,6 +3413,8 @@ export interface CmdPwdItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdPwdData {
   headline?: string;
@@ -3341,6 +3457,8 @@ export interface CmdMkdirItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdMkdirData {
   headline?: string;
@@ -3383,6 +3501,8 @@ export interface CmdCpItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdCpData {
   headline?: string;
@@ -3425,6 +3545,8 @@ export interface CmdMvItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdMvData {
   headline?: string;
@@ -3467,6 +3589,8 @@ export interface CmdRmItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdRmData {
   headline?: string;
@@ -3509,6 +3633,8 @@ export interface CmdLnItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdLnData {
   headline?: string;
@@ -3551,6 +3677,8 @@ export interface CmdClearItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdClearData {
   headline?: string;
@@ -3593,6 +3721,8 @@ export interface CmdTouchItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdTouchData {
   headline?: string;
@@ -3635,6 +3765,8 @@ export interface CmdCatItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdCatData {
   headline?: string;
@@ -3677,6 +3809,8 @@ export interface CmdTacItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdTacData {
   headline?: string;
@@ -3719,6 +3853,8 @@ export interface CmdMoreItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdMoreData {
   headline?: string;
@@ -3761,6 +3897,8 @@ export interface CmdLessItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdLessData {
   headline?: string;
@@ -3803,6 +3941,8 @@ export interface CmdTailItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdTailData {
   headline?: string;
@@ -3845,6 +3985,8 @@ export interface CmdViItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdViData {
   headline?: string;
@@ -3887,6 +4029,8 @@ export interface CmdDiffItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdDiffData {
   headline?: string;
@@ -3929,6 +4073,8 @@ export interface CmdFindItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdFindData {
   headline?: string;
@@ -3971,6 +4117,8 @@ export interface CmdLocateItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdLocateData {
   headline?: string;
@@ -4013,6 +4161,8 @@ export interface CmdGrepItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdGrepData {
   headline?: string;
@@ -4055,6 +4205,8 @@ export interface CmdAwkItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdAwkData {
   headline?: string;
@@ -4097,6 +4249,8 @@ export interface CmdSedItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdSedData {
   headline?: string;
@@ -4139,6 +4293,8 @@ export interface CmdXargsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdXargsData {
   headline?: string;
@@ -4181,6 +4337,8 @@ export interface CmdChmodItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdChmodData {
   headline?: string;
@@ -4223,6 +4381,8 @@ export interface CmdChownItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdChownData {
   headline?: string;
@@ -4265,6 +4425,8 @@ export interface CmdUmaskItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdUmaskData {
   headline?: string;
@@ -4307,6 +4469,8 @@ export interface CmdSudoItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdSudoData {
   headline?: string;
@@ -4349,6 +4513,8 @@ export interface CmdUseraddItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdUseraddData {
   headline?: string;
@@ -4391,6 +4557,8 @@ export interface CmdUsermodItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdUsermodData {
   headline?: string;
@@ -4433,6 +4601,8 @@ export interface CmdUserdelItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdUserdelData {
   headline?: string;
@@ -4475,6 +4645,8 @@ export interface CmdPasswdItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdPasswdData {
   headline?: string;
@@ -4517,6 +4689,8 @@ export interface CmdChpasswdItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdChpasswdData {
   headline?: string;
@@ -4559,6 +4733,8 @@ export interface CmdWItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdWData {
   headline?: string;
@@ -4601,6 +4777,8 @@ export interface CmdLastItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdLastData {
   headline?: string;
@@ -4643,6 +4821,8 @@ export interface CmdChrootItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdChrootData {
   headline?: string;
@@ -4685,6 +4865,8 @@ export interface CmdPsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdPsData {
   headline?: string;
@@ -4727,6 +4909,8 @@ export interface CmdPstreeItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdPstreeData {
   headline?: string;
@@ -4769,6 +4953,8 @@ export interface CmdTopItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdTopData {
   headline?: string;
@@ -4811,6 +4997,8 @@ export interface CmdHtopItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdHtopData {
   headline?: string;
@@ -4853,6 +5041,8 @@ export interface CmdBtopItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdBtopData {
   headline?: string;
@@ -4895,6 +5085,8 @@ export interface CmdAtopItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdAtopData {
   headline?: string;
@@ -4937,6 +5129,8 @@ export interface CmdGlancesItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdGlancesData {
   headline?: string;
@@ -4979,6 +5173,8 @@ export interface CmdNmonItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNmonData {
   headline?: string;
@@ -5021,6 +5217,8 @@ export interface CmdKillItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdKillData {
   headline?: string;
@@ -5063,6 +5261,8 @@ export interface CmdKillallItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdKillallData {
   headline?: string;
@@ -5105,6 +5305,8 @@ export interface CmdNohupItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNohupData {
   headline?: string;
@@ -5147,6 +5349,8 @@ export interface CmdSleepItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdSleepData {
   headline?: string;
@@ -5189,6 +5393,8 @@ export interface CmdWaitItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdWaitData {
   headline?: string;
@@ -5231,6 +5437,8 @@ export interface CmdLsofItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdLsofData {
   headline?: string;
@@ -5273,6 +5481,8 @@ export interface CmdStraceItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdStraceData {
   headline?: string;
@@ -5315,6 +5525,8 @@ export interface CmdUptimeItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdUptimeData {
   headline?: string;
@@ -5357,6 +5569,8 @@ export interface CmdFreeItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdFreeData {
   headline?: string;
@@ -5399,6 +5613,8 @@ export interface CmdVmstatItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdVmstatData {
   headline?: string;
@@ -5441,6 +5657,8 @@ export interface CmdIostatItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdIostatData {
   headline?: string;
@@ -5483,6 +5701,8 @@ export interface CmdIotopItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdIotopData {
   headline?: string;
@@ -5525,6 +5745,8 @@ export interface CmdDstatItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdDstatData {
   headline?: string;
@@ -5567,6 +5789,8 @@ export interface CmdSarItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdSarData {
   headline?: string;
@@ -5609,6 +5833,8 @@ export interface CmdWatchItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdWatchData {
   headline?: string;
@@ -5651,6 +5877,8 @@ export interface CmdDfItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdDfData {
   headline?: string;
@@ -5693,6 +5921,8 @@ export interface CmdDuItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdDuData {
   headline?: string;
@@ -5735,6 +5965,8 @@ export interface CmdNcduItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNcduData {
   headline?: string;
@@ -5777,6 +6009,8 @@ export interface CmdFdiskItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdFdiskData {
   headline?: string;
@@ -5819,6 +6053,8 @@ export interface CmdPartedItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdPartedData {
   headline?: string;
@@ -5861,6 +6097,8 @@ export interface CmdBlkidItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdBlkidData {
   headline?: string;
@@ -5903,6 +6141,8 @@ export interface CmdMkfsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdMkfsData {
   headline?: string;
@@ -5945,6 +6185,8 @@ export interface CmdFsckItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdFsckData {
   headline?: string;
@@ -5987,6 +6229,8 @@ export interface CmdMountItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdMountData {
   headline?: string;
@@ -6029,6 +6273,8 @@ export interface CmdUmountItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdUmountData {
   headline?: string;
@@ -6071,6 +6317,8 @@ export interface CmdDdItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdDdData {
   headline?: string;
@@ -6113,6 +6361,8 @@ export interface CmdIpItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdIpData {
   headline?: string;
@@ -6155,6 +6405,8 @@ export interface CmdPingItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdPingData {
   headline?: string;
@@ -6197,6 +6449,8 @@ export interface CmdTracerouteItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdTracerouteData {
   headline?: string;
@@ -6239,6 +6493,8 @@ export interface CmdMtrItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdMtrData {
   headline?: string;
@@ -6281,6 +6537,8 @@ export interface CmdNetstatItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNetstatData {
   headline?: string;
@@ -6323,6 +6581,8 @@ export interface CmdSsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdSsData {
   headline?: string;
@@ -6365,6 +6625,8 @@ export interface CmdNmcliItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNmcliData {
   headline?: string;
@@ -6407,6 +6669,8 @@ export interface CmdIftopItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdIftopData {
   headline?: string;
@@ -6449,6 +6713,8 @@ export interface CmdNethogsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNethogsData {
   headline?: string;
@@ -6491,6 +6757,8 @@ export interface CmdNloadItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNloadData {
   headline?: string;
@@ -6533,6 +6801,8 @@ export interface CmdDigItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdDigData {
   headline?: string;
@@ -6575,6 +6845,8 @@ export interface CmdHostItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdHostData {
   headline?: string;
@@ -6617,6 +6889,8 @@ export interface CmdNslookupItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNslookupData {
   headline?: string;
@@ -6659,6 +6933,8 @@ export interface CmdWhoisItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdWhoisData {
   headline?: string;
@@ -6701,6 +6977,8 @@ export interface CmdSshItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdSshData {
   headline?: string;
@@ -6743,6 +7021,8 @@ export interface CmdScpItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdScpData {
   headline?: string;
@@ -6785,6 +7065,8 @@ export interface CmdRsyncItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdRsyncData {
   headline?: string;
@@ -6827,6 +7109,8 @@ export interface CmdNcItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdNcData {
   headline?: string;
@@ -6869,6 +7153,8 @@ export interface CmdWgetItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdWgetData {
   headline?: string;
@@ -6911,6 +7197,8 @@ export interface CmdCurlItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdCurlData {
   headline?: string;
@@ -6953,6 +7241,8 @@ export interface CmdTarItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdTarData {
   headline?: string;
@@ -6995,6 +7285,8 @@ export interface CmdGzipItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdGzipData {
   headline?: string;
@@ -7037,6 +7329,8 @@ export interface CmdBzip2Item {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdBzip2Data {
   headline?: string;
@@ -7079,6 +7373,8 @@ export interface CmdZipItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdZipData {
   headline?: string;
@@ -7121,6 +7417,8 @@ export interface CmdCronItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdCronData {
   headline?: string;
@@ -7163,6 +7461,8 @@ export interface CmdCrontabItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdCrontabData {
   headline?: string;
@@ -7205,6 +7505,8 @@ export interface CmdBashscriptItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdBashscriptData {
   headline?: string;
@@ -7247,6 +7549,8 @@ export interface CmdAliasItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdAliasData {
   headline?: string;
@@ -7289,6 +7593,8 @@ export interface CmdEnvItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdEnvData {
   headline?: string;
@@ -7331,6 +7637,8 @@ export interface CmdHistoryItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdHistoryData {
   headline?: string;
@@ -7373,6 +7681,8 @@ export interface CmdScreenItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdScreenData {
   headline?: string;
@@ -7415,6 +7725,8 @@ export interface CmdTmuxItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdTmuxData {
   headline?: string;
@@ -7457,6 +7769,8 @@ export interface CmdSystemctlItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdSystemctlData {
   headline?: string;
@@ -7499,6 +7813,8 @@ export interface CmdJournalctlItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdJournalctlData {
   headline?: string;
@@ -7541,6 +7857,8 @@ export interface CmdDmesgItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdDmesgData {
   headline?: string;
@@ -7583,6 +7901,8 @@ export interface CmdManItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdManData {
   headline?: string;
@@ -7625,6 +7945,8 @@ export interface CmdAproposItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdAproposData {
   headline?: string;
@@ -7667,6 +7989,8 @@ export interface CmdTldrItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdTldrData {
   headline?: string;
@@ -7709,6 +8033,8 @@ export interface CmdCheatItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdCheatData {
   headline?: string;
@@ -7751,6 +8077,8 @@ export interface CmdLspciItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdLspciData {
   headline?: string;
@@ -7793,6 +8121,8 @@ export interface CmdLsusbItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface CmdLsusbData {
   headline?: string;
@@ -7840,6 +8170,8 @@ export interface DsaTracePtrsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTracePtrsData {
   headline?: string;
@@ -7886,6 +8218,8 @@ export interface DsaTraceWindowItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceWindowData {
   headline?: string;
@@ -7932,6 +8266,8 @@ export interface DsaTraceBsearchItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceBsearchData {
   headline?: string;
@@ -7978,6 +8314,8 @@ export interface DsaTraceHashItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceHashData {
   headline?: string;
@@ -8025,6 +8363,8 @@ export interface DsaTraceStackItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceStackData {
   headline?: string;
@@ -8072,6 +8412,8 @@ export interface DsaTraceGridItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceGridData {
   headline?: string;
@@ -8119,6 +8461,8 @@ export interface DsaTraceTreeItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceTreeData {
   headline?: string;
@@ -8166,6 +8510,8 @@ export interface DsaTraceDpItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceDpData {
   headline?: string;
@@ -8213,6 +8559,8 @@ export interface DsaTraceIntervalsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceIntervalsData {
   headline?: string;
@@ -8259,6 +8607,8 @@ export interface DsaTraceListItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaTraceListData {
   headline?: string;
@@ -8306,6 +8656,8 @@ export interface DsaSignalsItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaSignalsData {
   headline?: string;
@@ -8356,6 +8708,8 @@ export interface DsaCostItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaCostData {
   headline?: string;
@@ -8399,6 +8753,8 @@ export interface DsaFrameworkItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface DsaFrameworkData {
   headline?: string;
@@ -8458,6 +8814,8 @@ export interface McpApiAnatomyItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpApiAnatomyData {
   headline?: string;
@@ -8516,6 +8874,8 @@ export interface McpControlItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpControlData {
   headline?: string;
@@ -8572,6 +8932,8 @@ export interface McpWireItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpWireData {
   headline?: string;
@@ -8630,6 +8992,8 @@ export interface McpSchemaItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpSchemaData {
   headline?: string;
@@ -8688,6 +9052,8 @@ export interface McpLoopItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpLoopData {
   headline?: string;
@@ -8746,6 +9112,8 @@ export interface McpUriItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpUriData {
   headline?: string;
@@ -8804,6 +9172,8 @@ export interface McpMentionItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpMentionData {
   headline?: string;
@@ -8860,6 +9230,8 @@ export interface McpSamplingItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpSamplingData {
   headline?: string;
@@ -8918,6 +9290,8 @@ export interface McpRootsItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpRootsData {
   headline?: string;
@@ -8976,6 +9350,8 @@ export interface McpProgressItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpProgressData {
   headline?: string;
@@ -9034,6 +9410,8 @@ export interface McpTransportItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpTransportData {
   headline?: string;
@@ -9090,6 +9468,8 @@ export interface McpFlagsItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpFlagsData {
   headline?: string;
@@ -9148,6 +9528,8 @@ export interface McpTerminalItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpTerminalData {
   headline?: string;
@@ -9210,6 +9592,8 @@ export interface McpElicitItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpElicitData {
   headline?: string;
@@ -9268,6 +9652,8 @@ export interface McpDeprecatedItem {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface McpDeprecatedData {
   headline?: string;
@@ -10231,6 +10617,8 @@ export interface TreeMapItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 export interface TreeMapData {
   items: TreeMapItem[]; // 2–12
@@ -10501,6 +10889,8 @@ export interface ProgressItem {
   owner?: string;
   dir?: string;
   xLabels?: string[];
+  // A glyph for this item: "lucide:folder-lock", "si:python" (see LAW 0j).
+  icon?: string;
 }
 
 // PROGRESS — rings or bars filling to targets.

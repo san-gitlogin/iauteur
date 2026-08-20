@@ -91,7 +91,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 230,
-   "narration": "People talk about writing an MCP server like it's a weekend project. How long is it really?",
+   "narration": "Building an MCP server sounds like a weekend project. It's about twenty lines.",
    "data": {
     "headline": "20 LINES, NOT A WEEKEND",
     "subtext": "your first MCP server",
@@ -110,7 +110,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 320,
-   "narration": "Enough theory \u2014 we're building the thing. It's a notes manager, so Claude should be able to read the user's notes. Learn MCP, here on THE NBX STUDIO.",
+   "narration": "In the next few minutes you'll build a working server that Claude can genuinely call, and you'll understand every line \u2014 including the one everybody asks about. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "BUILD A SERVER",
     "subtitle": "chapter four of twelve"
@@ -215,12 +215,14 @@
     {
      "label": "name",
      "sub": "read_note \u2014 what Claude calls",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:tag"
     },
     {
      "label": "description",
      "sub": "Read a note by its filename",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:text"
     }
    ]
   },
@@ -320,12 +322,14 @@
     {
      "label": "name",
      "sub": "read_note",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:tag"
     },
     {
      "label": "description",
      "sub": "Read a note by its filename",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:text"
     },
     {
      "label": "note_id",

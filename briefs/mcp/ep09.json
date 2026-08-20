@@ -87,7 +87,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 230,
-   "narration": "Two settings in your server look like performance tuning. One of them silently switches off sampling.",
+   "narration": "Your server works on your laptop. Putting it on the internet takes one word.",
    "data": {
     "headline": "ONE FLAG KILLS IT",
     "subtext": "transport, and the trap",
@@ -106,7 +106,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 320,
-   "narration": "MCP messages are just JSON. How they travel is a separate decision, and it's a decision with consequences. Learn MCP, on THE NBX STUDIO.",
+   "narration": "It also takes two settings that quietly switch features off if you don't know what they do \u2014 and you'll leave knowing exactly which features, and where those settings actually live. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "TRANSPORT",
     "subtitle": "chapter ten of twelve"
@@ -146,6 +146,66 @@
       "scales horizontally",
       "some features limited"
      ]
+    }
+   ]
+  },
+  {
+   "id": "s03b",
+   "type": "MCP_TERMINAL",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpTerm",
+   "headline": "On stdio, stdout [is the wire]",
+   "color": "green",
+   "stageTitle": "what a stray print does",
+   "promptLabel": "santhu@box",
+   "cwd": "~/mcp/notes",
+   "durationFrames": 920,
+   "narration": "Stdio deserves a closer look, because how it works explains a bug almost everyone hits once. +The client doesn't connect to a running server. The client LAUNCHES the server as a child process, and then talks to it down that process's own standard input and standard output. So standard out isn't where your program prints \u2014 it is the wire. +Which means a stray print, left in from debugging, writes a line of plain text into the middle of a JSON-RPC stream, and the client fails to parse it. ^The error you get points at JSON, ^not at the print statement that caused it, ^which is why this one costs people an afternoon. +Print to standard error instead \u2014 the client leaves that alone, and you'll see it in your terminal. And now the logging deprecation from the last chapter makes sense: standard error is exactly where the spec is telling you to send logs.",
+   "steps": [
+    {
+     "label": "# the client runs this for you",
+     "out": [
+      "python server.py   \u2190 spawned as a child process",
+      "stdin  \u25b8 requests in",
+      "stdout \u25c2 responses out"
+     ],
+     "detail": "stdout is the protocol channel, not your console.",
+     "mark": true
+    },
+    {
+     "label": "print(\"debugging note\")",
+     "out": [
+      "Unexpected token 'd', \"debugging \"... is not valid JSON",
+      "MCP error -32700: Parse error"
+     ],
+     "detail": "One plain line, and the stream is corrupt.",
+     "mark": true
+    },
+    {
+     "label": "print(\"debugging note\", file=sys.stderr)",
+     "out": [
+      "debugging note   \u2190 visible to you, invisible to the protocol"
+     ],
+     "detail": "Where logs belong on stdio.",
+     "mark": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "the error names JSON",
+     "sub": "a parse failure, mid-stream",
+     "mark": true
+    },
+    {
+     "label": "not the print",
+     "sub": "nothing points at the real cause",
+     "mark": true
+    },
+    {
+     "label": "stderr is safe",
+     "sub": "and is where the spec sends logs now",
+     "mark": true
     }
    ]
   },

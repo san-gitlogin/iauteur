@@ -178,6 +178,10 @@ function buildInterface(cfg) {
   dir?: string;
   // Axis labels for a chart: first, middle, last sample.
   xLabels?: string[];
+  // A GLYPH for this item: "lucide:folder-lock", "si:python". A depiction made of
+  // labelled boxes is a list; a depiction made of recognisable objects is a picture
+  // (LAW 0j). Every item that stands for a THING should name one.
+  icon?: string;
 }
 ` : '';
   const body = cfg.fields.map((f) => `  ${f.name}?: ${tsType(Name, f)};`).join('\n');

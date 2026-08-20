@@ -123,16 +123,17 @@ export const TerminalPane: React.FC<{
     12 * scale,
     Math.min((vertical ? 26 : 25) * scale, AVAIL / Math.max(lineCount, 1) / 1.55)
   );
-  // Auto-scroll: keep the ACTIVE step's block at the top of the viewport once the
-  // transcript is taller than the pane, exactly as a real terminal does.
+  // NO SCROLLING. An earlier version scrolled the transcript once it outgrew the
+  // pane, and on a 3-step session that slid the first command up UNDER the title
+  // bar — which reads as a rendering bug, not as a terminal (owner, 2026-08-21:
+  // *"the first command kinda goes and hides below the title of the cmd window"*).
+  // Steps are capped at 4, so the whole session always fits: the type sizes to the
+  // transcript and nothing ever moves.
   const lineH = mono * 1.55;
   const blockLines = (st: CmdStep) => 1 + (st.output?.length ?? 0) + (st.note ? 1 : 0);
   const totalH = steps.reduce((h, st) => h + blockLines(st) * lineH + 15 * scale, 0);
   const overflows = totalH > AVAIL;
-  const before = steps
-    .slice(0, Math.max(state.active, 0))
-    .reduce((h, st) => h + blockLines(st) * lineH + 15 * scale, 0);
-  const scrollY = overflows ? Math.max(0, Math.min(before, Math.max(0, totalH - AVAIL))) : 0;
+  const scrollY = 0;
   const rad = 12 * scale * t.style.cornerRadius;
   const starts = stepStarts(steps);
   const caretOn = Math.floor(frame / 8) % 2 === 0;

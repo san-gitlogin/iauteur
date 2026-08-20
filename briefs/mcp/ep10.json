@@ -84,7 +84,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 235,
-   "narration": "You're shipping a public weather server that needs a language model. One decision decides whether it bankrupts you.",
+   "narration": "You've got all the pieces now.",
    "data": {
     "headline": "ALL OF MCP, IN ONE",
     "subtext": "the final checkpoint",
@@ -103,7 +103,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 320,
-   "narration": "Everything from here is assembly \u2014 you've met every part already. But one thing this course has that most MCP material doesn't: an honest note about what's on its way out. Learn MCP, on THE NBX STUDIO.",
+   "narration": "This is where they fit together into one mental model you can carry into real code \u2014 plus an honest list of what the specification has already deprecated, so you don't build on the wrong thing. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "EVERYTHING, TOGETHER",
     "subtitle": "chapter twelve of twelve"
@@ -127,37 +127,43 @@
      "label": "Tools",
      "sub": "the model chooses \u00b7 your code runs",
      "owner": "ai",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:wrench"
     },
     {
      "label": "Resources",
      "sub": "your code fetches \u00b7 inject to skip a round trip",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:folder-open"
     },
     {
      "label": "Prompts",
      "sub": "a person triggers \u00b7 your expertise, as a button",
      "owner": "user",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:sparkles"
     },
     {
      "label": "Sampling",
      "sub": "the server asks \u00b7 the client's key pays",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:refresh-cw"
     },
     {
      "label": "Roots",
      "sub": "handed to you \u00b7 enforced by you",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:folder-lock"
     },
     {
      "label": "Notifications",
      "sub": "ctx.info and report_progress",
      "owner": "code",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:bell"
     }
    ]
   },
@@ -179,32 +185,37 @@
      "sub": "current \u2014 the spine of the protocol",
      "color": "green",
      "text": "CURRENT",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:layers"
     },
     {
      "label": "Elicitation",
      "sub": "current \u2014 form mode and URL mode",
      "color": "green",
      "text": "CURRENT",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:message-square-plus"
     },
     {
      "label": "Sampling",
      "sub": "\u2192 call a provider API directly",
      "color": "red",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:refresh-cw"
     },
     {
      "label": "Roots",
      "sub": "\u2192 tool parameters, resource URIs, or config",
      "color": "red",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:folder-lock"
     },
     {
      "label": "Logging",
      "sub": "\u2192 stderr on stdio, OpenTelemetry in production",
      "color": "red",
-     "mark": true
+     "mark": true,
+     "icon": "lucide:scroll-text"
     }
    ]
   },

@@ -90,7 +90,7 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 230,
-   "narration": "You tell an MCP server it can use two folders. What actually stops it reading a third one?",
+   "narration": "You're about to let a server touch your file system.",
    "data": {
     "headline": "MCP WON'T STOP IT",
     "subtext": "roots, and who enforces them",
@@ -109,7 +109,7 @@
    "transition": "fade",
    "background": "zoneB",
    "durationFrames": 330,
-   "narration": "Roots are how a client says you may look here, but not there. Think of a hotel keycard: it opens your room and the gym, and nothing else. Learn MCP, on THE NBX STUDIO.",
+   "narration": "This is what MCP actually gives you for controlling that, and \u2014 more importantly \u2014 what it doesn't, because the guarantee most people assume here does not exist. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "ROOTS",
     "subtitle": "chapter eight of twelve"
@@ -277,7 +277,8 @@
      "out": [
       "still in the spec",
       "for 12+ months"
-     ]
+     ],
+     "icon": "lucide:folder-lock"
     },
     {
      "label": "Migrate to",
