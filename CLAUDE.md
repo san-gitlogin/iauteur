@@ -214,6 +214,32 @@ Dojo"* and close *"that's the end"* do not become a course when joined end to en
 written as CHAPTER openings ("Pattern two: Sliding Window …") which read correctly both standalone
 and in sequence, and cross-references say "the previous pattern", never "last episode".
 
+## LAW 0m — SHOW THE REAL ARTEFACT, WITH REAL DATA (owner verdict, 2026-08-20)
+Owner, on the shipped Linux masterclass: *"the commands you execute on the left, you show one line
+and one description, and that's it ... on the right you say third column, 4th column, on the left I
+just see the command executed and there is just one line displaying it."* And: *"you say spikes,
+chart, green, red — dude that doesn't even look like a chart, it just looks like a curvy line broken
+in middle. But where's the chart???"*
+
+Both are the same failure: a component drawing a PLACEHOLDER where the artefact belongs.
+
+1. **Terminal output is verbatim, and multi-line.** `ls -l`, `vmstat`, `ps`, `df` print a header row
+   and columns. If the narration says "the third column", the third column must be on screen to
+   point at. Items carry `out?: string[]` — the real shape, header included. Two lines of invented
+   output is not a mock, it is a placeholder.
+2. **A chart needs DECLARED data and the furniture of a chart.** Never synthesise a shape. A chart
+   is a bordered card with a title, a y-axis carrying real numbers and a unit, x-axis ticks,
+   gridlines, an optional named threshold, and a read-out. A path with none of that is a squiggle,
+   and the viewer can tell.
+3. **A depiction must depict the thing named.** The journal was twelve grey bars of random width;
+   owner: *"journalctl animation is shitty and not relevant and not understandable."* It is now real
+   journald lines, struck through as each filter excludes them, with the surviving count per flag.
+
+Corollary — **vertical holds far less than wide, and the answer is less content, not smaller type.**
+Seventeen lines in a Shorts pane forces ~12px, which is unreadable on a phone. Cut steps and trim
+output until the type can stay large. Owner: *"viewability is professional and feasible (not too
+short for users to stare) ... dont care if length shoots up, the content must be right."*
+
 ## LAW 0f — WRITE FOR A MOUTH, NOT A PAGE (owner verdict, 2026-08-16)
 Owner: *"You often use IT, and you speak about something that's on the screen, but you forget
 what the context is about, and you start speaking in a very AI manner. Humans are not adaptable

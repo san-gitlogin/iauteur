@@ -564,3 +564,22 @@ must quieten a build, keep stderr.
 show — anchors past the end of the narration, anchors past the scene's own length, panes with nothing to
 draw, missing premises. Then sweep stills at 25/55/88% of each scene and montage per episode; one still
 cannot reveal a motion glitch.
+
+## Real artefacts: terminal output and charts — added 2026-08-20
+
+**Terminal output** lives in `out?: string[]` on the step item, verbatim, header row included.
+`CommandStage` reveals it line by line, sizes the mono type to the whole transcript, and scrolls the
+active command into view once the session outgrows the pane. The old `[text, sub]` pair gave two
+lines and is now only the fallback for un-migrated scenes. If narration names a column, that column
+must exist in `out`.
+
+**Charts** use `MetricChart` (`kind="metric-chart"`), never a bare path. The item supplies
+`series: number[]` plus `unit`, optional `threshold`, and three `xLabels`. The card renders a titled
+header, y-axis ticks with real numbers, x-axis ticks, gridlines, the threshold as a labelled dashed
+rule, and a live read-out that counts up with the drawn line. Items without a series fall back to
+the sparkline, so nothing regresses — but a beat that talks about values must carry them.
+
+**Vertical budgets are not wide budgets.** The Shorts state pane is ~2.5x taller and the code/terminal
+pane is ~540, not the full stage. Every stacked list takes `stackBudget(v)`; `cellMetrics(n, big,
+vertical)` sizes rows. When content still will not fit at a readable size, remove content — trim to
+two command steps and three output lines — rather than shrinking the type.
