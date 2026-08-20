@@ -7,7 +7,10 @@
 import fs from 'node:fs';
 
 const FRAMES_PER_WORD = 12;
-const files = fs.readdirSync('topics').filter((d) => /^dsa-dojo-\d\d-/.test(d));
+// any course topic, not just the dojo
+const PREFIX = process.argv[2] ?? 'dsa-dojo';
+// fixtures are render-proof scaffolding, not shipping content
+const files = fs.readdirSync('topics').filter((d) => d.startsWith(PREFIX) && !d.endsWith('-proof') && fs.existsSync(`topics/${d}/long.json`));
 let faults = 0, warns = 0;
 
 for (const slug of files.sort()) {
@@ -44,7 +47,7 @@ for (const slug of files.sort()) {
       if (d.premise && d.premise.length > 190) say('!', `premise is ${d.premise.length} chars — it will crowd the picture`);
       if (d.problem && d.problem.length > 240) say('!', `problem is ${d.problem.length} chars`);
       // every trace pane should carry the standing setup
-      if (/^dsa(Ptrs|Window|Bsearch|Hash|Stack|Grid|Tree|Dp|Intervals|List)$/.test(key) && !d.premise)
+      if (/^(dsa(Ptrs|Window|Bsearch|Hash|Stack|Grid|Tree|Dp|Intervals|List)|mcp(Wire|Loop|Schema|Uri|Sampling|Roots|Progress|Flags|Elicit|Api))$/.test(key) && !d.premise)
         say('!', `${key} has no premise — the viewer is given no setup for this picture`);
     }
   }

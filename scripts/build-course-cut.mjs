@@ -15,13 +15,95 @@ import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {channelName} from './lib/env.mjs';
 
-const ORDER = [
-  'dsa-dojo-00-framework', 'dsa-dojo-01-two-pointers', 'dsa-dojo-02-sliding-window',
-  'dsa-dojo-03-binary-search', 'dsa-dojo-04-hashmap', 'dsa-dojo-05-stack',
-  'dsa-dojo-06-bfs', 'dsa-dojo-07-dfs', 'dsa-dojo-08-dp',
-  'dsa-dojo-09-greedy', 'dsa-dojo-10-fast-slow', 'dsa-dojo-11-problems',
+// Two courses share this compiler now, so the running order and the output folder
+// are named per course rather than hard-coded.
+const TAGS_DSA = [
+  'dsa', 'dsa patterns', 'data structures and algorithms', 'coding interview',
+  'leetcode', 'leetcode patterns', 'mangos', 'faang interview', 'maang',
+  'meta interview', 'google interview', 'nvidia interview', 'openai interview',
+  'anthropic interview', 'spacex interview', 'software engineering interview',
+  'two pointers', 'sliding window', 'binary search', 'hashmap', 'stack',
+  'bfs', 'dfs', 'backtracking', 'dynamic programming', 'greedy',
+  'fast and slow pointers', 'algorithms', 'python', 'interview preparation',
+  'coding interview preparation', 'tech interview', 'the nbx studio',
 ];
-const OUT = 'topics/dsa-dojo-course';
+const TAGS_MCP = [
+  'mcp', 'model context protocol', 'claude', 'anthropic', 'mcp server', 'mcp client',
+  'mcp tutorial', 'python', 'fastmcp', 'mcpserver', 'elicitation', 'mcp sampling',
+  'mcp roots', 'mcp transport', 'streamable http', 'stdio', 'json rpc', 'ai tools',
+  'llm tools', 'agentic', 'tool use', 'ai agents', 'anthropic api', 'claude api',
+  'mcp deprecated', 'mcp 2026', 'ai engineering', 'the nbx studio',
+];
+
+const COURSES = {
+  dsa: {
+    out: 'topics/dsa-dojo-course',
+    order: [
+      'dsa-dojo-00-framework', 'dsa-dojo-01-two-pointers', 'dsa-dojo-02-sliding-window',
+      'dsa-dojo-03-binary-search', 'dsa-dojo-04-hashmap', 'dsa-dojo-05-stack',
+      'dsa-dojo-06-bfs', 'dsa-dojo-07-dfs', 'dsa-dojo-08-dp',
+      'dsa-dojo-09-greedy', 'dsa-dojo-10-fast-slow', 'dsa-dojo-11-problems',
+    ],
+    numbered: (i) => i >= 1 && i <= 10,
+    label: (i, name) => `Pattern ${String(i).padStart(2, '0')} — ${name}`,
+    title: 'The Complete DSA Pattern for cracking MANGOS - 10 Patterns That Cover Almost Every Interview Qn',
+    alts: [
+      'Crack MANGOS: 10 DSA Patterns That Cover Almost Every Interview Question',
+      'I Traced All 10 DSA Patterns Line By Line So You Never Memorise Another Solution',
+      'The Only DSA Course You Need Before Meta, Anthropic, NVIDIA, Google, OpenAI or SpaceX',
+    ],
+    lede: 'Most people fail coding interviews because they memorised two hundred solutions instead of ten patterns.',
+    sub: 'MANGOS \u2014 Meta, Anthropic, NVIDIA, Google, OpenAI, SpaceX.',
+    body: (ch) => `In this video, ${ch} traces all ten interview patterns line by line — the signal words that give each one away, the code running on real data one step at a time, and the four problems to go and do after each. This is the whole course in one sitting.`,
+    sources: [
+      'Pattern set and problem lists: https://github.com/san-gitlogin/dsa-pattern-dojo',
+      'Interactive dojo: https://san-gitlogin.github.io/dsa-pattern-dojo/',
+    ],
+    next: (ch) => `Each pattern is also a standalone episode on ${ch} — start with whichever one you keep failing.`,
+    pinned: 'Do not watch this end to end and call it studying. Watch one pattern, then go and do its four problems before the next. The patterns only stick once your own code has failed at least once.',
+    queries: ['dsa patterns for coding interviews','complete dsa course for faang','leetcode patterns explained',
+      'how to prepare for maang interviews','two pointers sliding window binary search explained',
+      'dynamic programming for interviews','bfs dfs graph patterns interview','coding interview preparation full course'],
+    hashtags: '#dsa #leetcode #codinginterview #faang #mangos #algorithms #datastructures #thenbxstudio',
+    tags: TAGS_DSA,
+  },
+  mcp: {
+    out: 'topics/mcp-course',
+    order: [
+      'mcp-00-how-claude-works', 'mcp-01-what-is-mcp', 'mcp-02-three-primitives',
+      'mcp-03-build-a-server', 'mcp-04-client-and-loop', 'mcp-05-resources-prompts',
+      'mcp-06-sampling', 'mcp-07-roots', 'mcp-08-notifications',
+      'mcp-09-transport', 'mcp-11-elicitation', 'mcp-12-everything',
+    ],
+    numbered: () => true,
+    label: (i, name) => `Chapter ${String(i + 1).padStart(2, '0')} — ${name}`,
+    title: 'Learn MCP Properly — The Complete Model Context Protocol Course (2026 Spec)',
+    alts: [
+      'MCP From Scratch: Every Primitive, Traced Line By Line',
+      'The MCP Course That Tells You Which Features Are Already Deprecated',
+      'Model Context Protocol, Explained Properly — Tools, Resources, Prompts, Elicitation',
+    ],
+    lede: 'Most MCP tutorials online teach an SDK that no longer exists and three features the spec has already deprecated.',
+    sub: 'Checked against specification 2026-07-28 and the current Python SDK.',
+    body: (ch) => `In this course, ${ch} builds up the Model Context Protocol from a single Claude API call — the three primitives and who controls each, a server and client written line by line, the agentic loop, elicitation in both modes, and an honest account of what the specification has deprecated and what replaces it.`,
+    sources: [
+      'MCP specification 2026-07-28: https://modelcontextprotocol.io/specification/latest',
+      'Deprecated features registry: https://modelcontextprotocol.io/specification/2026-07-28/deprecated',
+      'Python SDK: https://github.com/modelcontextprotocol/python-sdk',
+      'Course inspiration: https://github.com/san-gitlogin/learn-mcp',
+    ],
+    next: (ch) => `Every chapter is also a standalone video on ${ch} — start wherever you are stuck.`,
+    pinned: 'Heads up: Sampling, Roots and Logging are all DEPRECATED as of spec 2026-07-28 (SEP-2577). They still work and stay in the spec for at least a year, which is why they are taught here — but do not start anything new on them. Each chapter says so, with the migration path.',
+    queries: ['what is mcp','model context protocol tutorial','mcp server python','mcp client python',
+      'mcp elicitation','mcp sampling deprecated','mcp roots','mcp transport stdio http','fastmcp mcpserver'],
+    hashtags: '#mcp #claude #anthropic #python #ai #thenbxstudio',
+    tags: TAGS_MCP,
+  },
+};
+const COURSE = COURSES[process.argv[2] ?? 'dsa'];
+if (!COURSE) { console.error(`usage: build-course-cut <${Object.keys(COURSES).join('|')}>`); process.exit(2); }
+const ORDER = COURSE.order;
+const OUT = COURSE.out;
 const FPS = 30;
 
 const hms = (f) => {
@@ -74,8 +156,7 @@ let off = 0;
 for (const [i, e] of eps.entries()) {
   const label = e.seo.courseChapter ?? e.spec.meta?.topic ?? e.slug;
   // 0 is the framework and 11 is the live problem set — neither is a numbered pattern
-  const isPattern = i >= 1 && i <= 10;
-  marks.push(`${hms(off)} - ${isPattern ? `Pattern ${String(i).padStart(2, '0')} — ${label}` : label}`);
+  marks.push(`${hms(off)} - ${COURSE.numbered(i) ? COURSE.label(i, label) : label}`);
   let last = off;
   for (const c of e.seo.chapters ?? []) {
     const f = off + (e.starts[c.id] ?? 0);
@@ -90,18 +171,8 @@ marks[0] = marks[0].replace(/^\d\d:\d\d:\d\d/, '00:00:00');
 
 // YouTube tags. Comma-separated, hard-capped at 500 chars — truncated at the last
 // whole tag that fits, never mid-word.
-const TAGS = [
-  'dsa', 'dsa patterns', 'data structures and algorithms', 'coding interview',
-  'leetcode', 'leetcode patterns', 'mangos', 'faang interview', 'maang',
-  'meta interview', 'google interview', 'nvidia interview', 'openai interview',
-  'anthropic interview', 'spacex interview', 'software engineering interview',
-  'two pointers', 'sliding window', 'binary search', 'hashmap', 'stack',
-  'bfs', 'dfs', 'backtracking', 'dynamic programming', 'greedy',
-  'fast and slow pointers', 'algorithms', 'python', 'interview preparation',
-  'coding interview preparation', 'tech interview', 'the nbx studio',
-];
 let tagLine = '';
-for (const tg of TAGS) {
+for (const tg of COURSE.tags) {
   const next = tagLine ? `${tagLine}, ${tg}` : tg;
   if (next.length > 500) break;
   tagLine = next;
@@ -110,47 +181,37 @@ for (const tg of TAGS) {
 const channel = eps[0].spec.brand?.channel ?? channelName();
 const md = [
   '# TITLE',
-  'The Complete DSA Pattern for cracking MANGOS - 10 Patterns That Cover Almost Every Interview Qn',
+  COURSE.title,
   '',
   '## Alternate titles',
-  '- Crack MANGOS: 10 DSA Patterns That Cover Almost Every Interview Question',
-  '- I Traced All 10 DSA Patterns Line By Line So You Never Memorise Another Solution',
-  '- The Only DSA Course You Need Before Meta, Anthropic, NVIDIA, Google, OpenAI or SpaceX',
+  ...COURSE.alts.map((t) => `- ${t}`),
   '',
   '# DESCRIPTION',
   '',
-  'Most people fail coding interviews because they memorised two hundred solutions instead of ten patterns.',
+  COURSE.lede,
   '',
-  'MANGOS \u2014 Meta, Anthropic, NVIDIA, Google, OpenAI, SpaceX.',
+  COURSE.sub,
   '',
-  `In this video, ${channel} traces all ten interview patterns line by line — the signal words that give each one away, the code running on real data one step at a time, and the four problems to go and do after each. This is the whole course in one sitting.`,
+  COURSE.body(channel),
   '',
   '⏱️ CHAPTERS',
   ...marks,
   '',
-  '🔗 SOURCE',
-  '- Pattern set and problem lists: https://github.com/san-gitlogin/dsa-pattern-dojo',
-  '- Interactive dojo: https://san-gitlogin.github.io/dsa-pattern-dojo/',
+  '🔗 SOURCES & REFERENCES',
+  ...COURSE.sources.map((x) => `- ${x}`),
   '',
   '👇 SUBSCRIBE & WATCH NEXT',
-  `Each pattern is also a standalone episode on ${channel} — start with whichever one you keep failing.`,
+  COURSE.next(channel),
   '',
   '📌 PINNED COMMENT',
-  'Do not watch this end to end and call it studying. Watch one pattern, then go and do its four problems before the next. The patterns only stick once your own code has failed at least once.',
+  COURSE.pinned,
   '',
   'User Queries:',
-  'dsa patterns for coding interviews',
-  'complete dsa course for faang',
-  'leetcode patterns explained',
-  'how to prepare for maang interviews',
-  'two pointers sliding window binary search explained',
-  'dynamic programming for interviews',
-  'bfs dfs graph patterns interview',
-  'coding interview preparation full course',
+  ...COURSE.queries,
   '',
-  '#dsa #leetcode #codinginterview #faang #mangos #algorithms #datastructures #thenbxstudio',
+  COURSE.hashtags,
   '',
-  '# TAGS (comma-separated, \u2264500 chars \u2014 paste into YouTube tags field)',
+  '# TAGS (comma-separated, \u2264500 chars — paste into YouTube tags field)',
   tagLine,
 ].join('\n');
 

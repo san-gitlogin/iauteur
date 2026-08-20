@@ -113,7 +113,7 @@
    "narration": "Sampling let a server borrow the client's model. Elicitation lets a server borrow the client's user \u2014 and unlike sampling, this one is current, not deprecated. Learn MCP, on THE NBX STUDIO.",
    "data": {
     "title": "ELICITATION",
-    "subtitle": "chapter twelve of thirteen"
+    "subtitle": "chapter eleven of twelve"
    },
    "anchors": []
   },

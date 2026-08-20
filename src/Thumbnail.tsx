@@ -73,7 +73,10 @@ const ThumbInner: React.FC<{
             bottom: 58,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            // space-between only reads as a wall when the row is full; two marks
+            // flung to opposite edges reads as a mistake.
+            justifyContent: (logos?.length ?? 0) > 3 ? 'space-between' : 'flex-start',
+            gap: (logos?.length ?? 0) > 3 ? 0 : 64,
           }}
         >
           {logos.map((a) => (
