@@ -32,6 +32,19 @@ export interface VizItem {
   value?: number;
   color?: SemColor;
   atWord?: number;
+  /** Chart data. A real measured series, one number per sample, in order — the
+   *  thing a chart component plots. Without it there is nothing to draw but a
+   *  fake shape, which is exactly what the old sparkline did (LAW 0m). */
+  series?: number[];
+  /** Unit shown on the axis and beside the live read-out ("MB/s", "%", "req/s"). */
+  unit?: string;
+  /** A reference line worth naming: capacity, a limit, a saturation point. */
+  threshold?: number;
+  /** Three x-axis labels: first, middle, last sample ("14:00", "14:40", "15:10"). */
+  xLabels?: string[];
+  /** Verbatim lines of real output, for depictions that show text rather than shape
+   *  (the journal, a listing). One string per line. */
+  out?: string[];
 }
 export interface VizProps {
   items: VizItem[];
@@ -1014,6 +1027,135 @@ export const GaugeBoard: React.FC<VizProps> = ({items, accent}) => {
   );
 };
 
+
+/** A REAL chart, not a sparkline. Owner, 2026-08-20: *"you say spikes, chart,
+ *  green, red — dude that doesn't even look like a chart, it just looks like a
+ *  curvy line broken in middle ... where's the chart?"* He was right: the old
+ *  GaugeBoard drew a 22px path from a synthetic sine wave, with no axes, no
+ *  gridlines, no tick numbers and no title, so nothing on screen matched a
+ *  narration talking about spikes and values.
+ *
+ *  This plots a DECLARED series inside a bordered card in the house style, with a
+ *  titled header, a y-axis carrying real numbers and the unit, x-axis time ticks,
+ *  gridlines, an optional threshold rule, and a live read-out of the current
+ *  sample. The line draws in across the beat and the read-out counts with it. */
+export const MetricChart: React.FC<VizProps> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const charts = items.filter((i) => (i.series?.length ?? 0) > 1);
+  if (!charts.length) return <GaugeBoard items={items} accent={accent} />;
+
+  const nice = (x: number) => {
+    if (x >= 1000) return `${Math.round(x / 100) / 10}k`;
+    if (x >= 100) return String(Math.round(x));
+    if (x >= 10) return String(Math.round(x * 10) / 10);
+    return String(Math.round(x * 100) / 100);
+  };
+
+  return (
+    <Stack gap={12 * v.scale}>
+      {charts.map((it, i) => {
+        const on = liveAt(frame, it.atWord, 14);
+        const pts = it.series as number[];
+        const thr = it.threshold;
+        const peak = Math.max(...pts, thr ?? -Infinity);
+        const top = peak <= 0 ? 1 : peak * 1.15;           // headroom above the peak
+        const hot = thr != null && Math.max(...pts) > thr;
+        const c = hot ? v.sem('red') : v.a;
+
+        // plot geometry, in viewBox units
+        const W = 100, H = 46, PL = 15, PR = 3, PT = 4, PB = 9;
+        const x = (k: number) => PL + (k / (pts.length - 1)) * (W - PL - PR);
+        const y = (val: number) => PT + (1 - val / top) * (H - PT - PB);
+        const drawn = Math.max(2, Math.round(pts.length * on));
+        const shown = pts.slice(0, drawn);
+        const line = shown.map((p, k) => `${k === 0 ? 'M' : 'L'}${x(k)},${y(p)}`).join(' ');
+        const area = `${line} L${x(drawn - 1)},${y(0)} L${x(0)},${y(0)} Z`;
+        const ticks = [0, top / 2, top];
+        const now = pts[Math.max(0, drawn - 1)];
+
+        return (
+          <div
+            key={i}
+            style={{
+              border: `${1.6 * v.scale}px solid ${hexA(v.t.colors.panelBorder, 0.95)}`,
+              borderRadius: v.rad(10),
+              background: hexA(v.t.colors.panel, 0.45),
+              overflow: 'hidden',
+              opacity: 0.35 + on * 0.65,
+            }}
+          >
+            {/* titled header, with the live value on the right */}
+            <div style={{
+              display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+              gap: 10 * v.scale,
+              padding: `${8 * v.scale}px ${12 * v.scale}px`,
+              borderBottom: `${1.2 * v.scale}px solid ${hexA(v.t.colors.panelBorder, 0.8)}`,
+              background: hexA(v.t.colors.panel, 0.55),
+            }}>
+              <div style={{...v.mono(v.vertical ? 20 : 15.5), fontWeight: 700, color: on > 0.4 ? c : v.dim}}>
+                {it.label}
+              </div>
+              <div style={{...v.body(v.vertical ? 16 : 12.5), color: v.dim, textAlign: 'right', minWidth: 0}}>
+                {it.sub}
+              </div>
+            </div>
+
+            <div style={{padding: `${8 * v.scale}px ${10 * v.scale}px ${4 * v.scale}px`}}>
+              <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none"
+                style={{width: '100%', height: (v.vertical ? 168 : 132) * v.scale, display: 'block'}}>
+                {/* gridlines + y ticks, with the actual numbers on them */}
+                {ticks.map((tv, k) => (
+                  <g key={k}>
+                    <line x1={PL} y1={y(tv)} x2={W - PR} y2={y(tv)}
+                      stroke={hexA(v.t.colors.panelBorder, k === 0 ? 0.95 : 0.5)} strokeWidth={0.35} />
+                    <text x={PL - 1.6} y={y(tv) + 1.4} textAnchor="end"
+                      fontSize={3.4} fontFamily={v.t.fonts.mono}
+                      fill={hexA(v.t.colors.muted, 0.95)}>{nice(tv)}</text>
+                  </g>
+                ))}
+                {/* the threshold worth naming — capacity, a limit, a saturation point */}
+                {thr != null ? (
+                  <>
+                    <line x1={PL} y1={y(thr)} x2={W - PR} y2={y(thr)}
+                      stroke={hexA(v.sem('red'), 0.85)} strokeWidth={0.45} strokeDasharray="2 1.6" />
+                    <text x={W - PR} y={y(thr) - 1.4} textAnchor="end" fontSize={3.2}
+                      fontFamily={v.t.fonts.mono} fill={hexA(v.sem('red'), 0.95)}>
+                      {it.unit ? `${nice(thr)} ${it.unit}` : nice(thr)}
+                    </text>
+                  </>
+                ) : null}
+                <path d={area} fill={hexA(c, 0.18)} />
+                <path d={line} fill="none" stroke={hexA(c, 0.98)} strokeWidth={0.8}
+                  strokeLinejoin="round" strokeLinecap="round" />
+                <circle cx={x(drawn - 1)} cy={y(now)} r={1.3} fill={c} />
+                {/* x axis: first, middle and last sample */}
+                {[0, Math.floor((pts.length - 1) / 2), pts.length - 1].map((k, j) => (
+                  <text key={j} x={x(k)} y={H - 2} textAnchor={j === 0 ? 'start' : j === 2 ? 'end' : 'middle'}
+                    fontSize={3.2} fontFamily={v.t.fonts.mono} fill={hexA(v.t.colors.muted, 0.85)}>
+                    {it.xLabels?.[j] ?? `t${k}`}
+                  </text>
+                ))}
+              </svg>
+              <div style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                marginTop: 2 * v.scale,
+              }}>
+                <div style={{...v.body(v.vertical ? 15 : 11.5), color: v.dim}}>
+                  {it.unit ? `measured in ${it.unit}` : ''}
+                </div>
+                <div style={{...v.mono(v.vertical ? 22 : 17), fontWeight: 800, color: c}}>
+                  {nice(now)}{it.unit ? ` ${it.unit}` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </Stack>
+  );
+};
+
 /** Load against real core slots — the same 4 fills half of eight and overflows two. */
 export const LoadCores: React.FC<VizProps> = ({items, accent}) => {
   const v = useViz(accent);
@@ -1987,38 +2129,69 @@ export const ServiceState: React.FC<VizProps> = ({items, accent}) => {
 export const LogFilter: React.FC<VizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
-  let narrowed = 0;
-  items.forEach((it) => { if (/^-/.test(it.label ?? '') && it.atWord != null && frame >= wordToFrame(it.atWord)) narrowed++; });
-  const rows = Math.max(2, 12 - narrowed * 3);
+  // Owner, 2026-08-20: *"journalctl animation is shitty and not relevant and not
+  // understandable."* It was twelve grey bars of random width standing in for log
+  // lines, shrinking as filters landed — nothing on screen read as a log, and
+  // nothing showed WHICH lines a filter removed.
+  //
+  // Now it shows the journal as journald actually prints it. Each filter chip
+  // carries the number of lines that survive it (`value`); as a chip lights, the
+  // lines it excludes strike through and fade, the survivors stay lit, and the
+  // running count is stated. The narrowing is the animation, on real text.
+  const lines = items.find((i) => (i.out?.length ?? 0) > 0)?.out ?? [];
+  const filters = items.filter((i) => i.out == null || i.out.length === 0);
+  const live = filters.filter((f) => f.atWord != null && frame >= wordToFrame(f.atWord));
+  const kept = live.reduce<number | null>((n, f) => (typeof f.value === 'number' ? f.value : n), null);
+  const keep = kept == null ? lines.length : Math.max(1, Math.min(lines.length, kept));
+
   return (
-    <div style={{display: 'flex', gap: 12 * v.scale, flex: 1, minHeight: 0}}>
-      <div style={{flex: '0 0 26%', display: 'flex', flexDirection: 'column', gap: 2 * v.scale, justifyContent: 'center'}}>
-        {Array.from({length: 12}).map((_, k) => (
-          <div key={k} style={{
-            height: 7 * v.scale, borderRadius: 999,
-            background: k < rows ? hexA(v.a, 0.7) : hexA(v.t.colors.panelBorder, 0.25),
-            width: `${60 + ((k * 37) % 40)}%`,
-          }} />
-        ))}
-      </div>
-      <div style={{flex: 1, minWidth: 0}}>
-        <Stack gap={5 * v.scale}>
-          {items.map((it, i) => {
-            const on = liveAt(frame, it.atWord);
+    <div style={{display: 'flex', flexDirection: 'column', gap: 10 * v.scale, flex: 1, minHeight: 0}}>
+      {/* the journal itself */}
+      {lines.length ? (
+        <div style={{
+          border: `${1.4 * v.scale}px solid ${hexA(v.t.colors.panelBorder, 0.9)}`,
+          borderRadius: v.rad(8), background: hexA(v.t.colors.bg, 0.55),
+          padding: `${8 * v.scale}px ${10 * v.scale}px`,
+        }}>
+          {lines.map((ln, k) => {
+            const survives = k < keep;
             return (
-              <div key={i} style={{display: 'flex', alignItems: 'baseline', gap: 8 * v.scale, opacity: 0.3 + on * 0.7}}>
-                <div style={{
-                  ...v.mono(13.5), fontWeight: 700, flex: '0 0 auto',
-                  color: on > 0.5 ? v.a : v.dim,
-                  border: `${1.3 * v.scale}px solid ${on > 0.5 ? hexA(v.a, 0.7) : hexA(v.t.colors.panelBorder, 0.5)}`,
-                  borderRadius: v.rad(4), padding: `${2 * v.scale}px ${6 * v.scale}px`,
-                }}>{it.label}</div>
-                <div style={{...v.body(12.5), color: v.dim, minWidth: 0}}>{it.sub}</div>
-              </div>
+              <div key={k} style={{
+                ...v.mono(v.vertical ? 17 : 12.5),
+                whiteSpace: 'pre', overflow: 'hidden', textOverflow: 'ellipsis',
+                lineHeight: 1.55,
+                color: survives ? v.t.colors.text : hexA(v.t.colors.muted, 0.45),
+                textDecoration: survives ? undefined : 'line-through',
+                opacity: survives ? 1 : 0.5,
+              }}>{ln}</div>
             );
           })}
-        </Stack>
-      </div>
+        </div>
+      ) : null}
+
+      {/* the filters, each with what it leaves behind */}
+      <Stack gap={5 * v.scale}>
+        {filters.map((it, i) => {
+          const on = liveAt(frame, it.atWord);
+          return (
+            <div key={i} style={{display: 'flex', alignItems: 'baseline', gap: 8 * v.scale, opacity: 0.3 + on * 0.7}}>
+              <div style={{
+                ...v.mono(v.vertical ? 19 : 13.5), fontWeight: 700, flex: '0 0 auto',
+                color: on > 0.5 ? v.a : v.dim,
+                border: `${1.3 * v.scale}px solid ${on > 0.5 ? hexA(v.a, 0.7) : hexA(v.t.colors.panelBorder, 0.5)}`,
+                borderRadius: v.rad(4), padding: `${2 * v.scale}px ${6 * v.scale}px`,
+              }}>{it.label}</div>
+              <div style={{...v.body(v.vertical ? 16 : 12.5), color: v.dim, minWidth: 0, flex: 1}}>{it.sub}</div>
+              {typeof it.value === 'number' ? (
+                <div style={{...v.mono(v.vertical ? 18 : 13), fontWeight: 800,
+                             color: on > 0.5 ? v.a : v.dim, flex: '0 0 auto'}}>
+                  {it.value.toLocaleString()} left
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </Stack>
     </div>
   );
 };
@@ -2116,7 +2289,7 @@ const REGISTRY: Record<string, React.FC<VizProps>> = {
   'hash-oneway': HashOneway, 'session-list': SessionList,
   'proc-table': ProcTable, 'proc-tree': ProcTree, 'proc-live': ProcLive, 'signal-path': SignalPath,
   'timeline-run': TimelineRun, 'handle-map': HandleMap, 'syscall-flow': SyscallFlow, 'pipe-flow': PipeFlow,
-  'gauge-board': GaugeBoard, 'load-cores': LoadCores, 'memory-bar': MemoryBar,
+  'gauge-board': GaugeBoard, 'metric-chart': MetricChart, 'load-cores': LoadCores, 'memory-bar': MemoryBar,
   'queue-meter': QueueMeter, 'repeat-loop': RepeatLoop,
   'disk-map': DiskMap, 'partition-map': PartitionMap, 'device-ids': DeviceIds,
   'net-path': NetPath, 'net-stack': NetStack, 'net-sockets': NetSockets,

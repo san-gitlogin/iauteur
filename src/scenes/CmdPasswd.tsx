@@ -21,7 +21,9 @@ export const CmdPasswd: React.FC<{scene: Scene}> = ({scene}) => {
   if (!raw.length) return <AbsoluteFill />;
   const steps: CmdStep[] = raw.map((s) => ({
     cmd: s.label ?? '',
-    output: [s.text, s.sub].filter(Boolean) as string[],
+    // Real multi-line output when the author supplied it; the old two-line
+    // text/sub pair remains the fallback for un-migrated scenes.
+    output: (s.out?.length ? s.out : [s.text, s.sub].filter(Boolean)) as string[],
     note: s.detail,
     atWord: s.atWord,
   }));

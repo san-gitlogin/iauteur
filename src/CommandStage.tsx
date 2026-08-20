@@ -112,7 +112,27 @@ export const TerminalPane: React.FC<{
   const {scale, vertical} = useScale();
   const frame = useCurrentFrame();
   const accent = sem(color);
-  const mono = (vertical ? 26 : 25) * scale;
+  // The pane SIZES TO ITS CONTENT. Real command output runs to eight or twelve
+  // lines (a header row plus rows of columns), and a fixed 25px would push the
+  // last of them out of a pane with `overflow: hidden`. Budget = every command
+  // line, every output line, and the note under the active step.
+  const lineCount =
+    steps.reduce((n, st) => n + 1 + (st.output?.length ?? 0) + (st.note ? 1 : 0), 0) + 1;
+  const AVAIL = (vertical ? 430 : 540) * scale;   // usable height inside the chrome
+  const mono = Math.max(
+    12 * scale,
+    Math.min((vertical ? 26 : 25) * scale, AVAIL / Math.max(lineCount, 1) / 1.55)
+  );
+  // Auto-scroll: keep the ACTIVE step's block at the top of the viewport once the
+  // transcript is taller than the pane, exactly as a real terminal does.
+  const lineH = mono * 1.55;
+  const blockLines = (st: CmdStep) => 1 + (st.output?.length ?? 0) + (st.note ? 1 : 0);
+  const totalH = steps.reduce((h, st) => h + blockLines(st) * lineH + 15 * scale, 0);
+  const overflows = totalH > AVAIL;
+  const before = steps
+    .slice(0, Math.max(state.active, 0))
+    .reduce((h, st) => h + blockLines(st) * lineH + 15 * scale, 0);
+  const scrollY = overflows ? Math.max(0, Math.min(before, Math.max(0, totalH - AVAIL))) : 0;
   const rad = 12 * scale * t.style.cornerRadius;
   const starts = stepStarts(steps);
   const caretOn = Math.floor(frame / 8) % 2 === 0;
@@ -157,18 +177,19 @@ export const TerminalPane: React.FC<{
         </span>
       </div>
 
-      {/* The session. Centred vertically inside the pane: a terminal reads
-          top-aligned, but a tall pane with three lines pinned to the top is the
-          "dense middle, dead edges" failure in component_authoring §5a-2. */}
+      {/* The session. Short sessions centre in the pane; once real output makes the
+          transcript taller than the pane, it SCROLLS like a terminal so the active
+          command and its output stay in view. Centring an overflowing column made
+          the first step's output ride up over the title bar and cut the last step
+          off the bottom (owner, 2026-08-20). */}
+      <div style={{flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column',
+                   justifyContent: overflows ? 'flex-start' : 'center', padding: `${18 * scale}px ${18 * scale}px`}}>
       <div
         style={{
-          flex: 1,
-          minHeight: 0,
-          padding: `${18 * scale}px ${18 * scale}px`,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
           gap: 15 * scale,
+          transform: `translateY(${-scrollY}px)`,
         }}
       >
         {steps.map((st, i) => {
@@ -254,6 +275,7 @@ export const TerminalPane: React.FC<{
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );

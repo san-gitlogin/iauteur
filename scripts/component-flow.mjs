@@ -155,6 +155,21 @@ function buildInterface(cfg) {
   links?: string[];
   // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. `text`/`sub` gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
 }
 ` : '';
   const body = cfg.fields.map((f) => `  ${f.name}?: ${tsType(Name, f)};`).join('\n');

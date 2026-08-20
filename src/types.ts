@@ -15,6 +15,12 @@ export interface StepItem {
   sub?: string;
   color?: SemColor;
   atWord: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 
 export interface ChatMessage {
@@ -35,6 +41,12 @@ export interface StatPanelItem {
   note?: string;
   color?: SemColor;
   atWord: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 
 export interface PathCard {
@@ -143,6 +155,12 @@ export interface CarouselItem {
   sub?: string;
   asset?: string | null;
   color?: SemColor;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CarouselData {
   items: CarouselItem[];
@@ -176,6 +194,12 @@ export interface ListItem {
   text: string;
   detail?: string; // muted second line (craft pattern: bold lead + quiet detail)
   atWord: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 
 // ACTIVITY_CARD — a KPI dashboard card: big value + trend + staggered mini bars.
@@ -1041,6 +1065,12 @@ export interface EmbeddingSpaceData {
 export interface QueueItem {
   label: string;
   color?: SemColor;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface QueueData {
   headline?: string;
@@ -1223,6 +1253,12 @@ export interface CastBoardItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CastBoardData {
   headline?: string;
@@ -1243,6 +1279,12 @@ export interface LabAssemblyItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface LabAssemblyData {
   headline?: string;
@@ -1262,6 +1304,12 @@ export interface BudgetMeterRowItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface BudgetMeterRowData {
   headline?: string;
@@ -1283,6 +1331,12 @@ export interface WordAnchorRailItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface WordAnchorRailData {
   headline?: string;
@@ -1303,6 +1357,12 @@ export interface ReskinCarouselItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ReskinCarouselData {
   headline?: string;
@@ -1346,6 +1406,12 @@ export interface TopicIntakeItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface TopicIntakeData {
   headline?: string;
@@ -1366,6 +1432,12 @@ export interface PromptHandoffItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface PromptHandoffData {
   headline?: string;
@@ -1387,6 +1459,12 @@ export interface CheckSweepItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CheckSweepData {
   headline?: string;
@@ -1415,6 +1493,12 @@ export interface AppWindowItem {
   mode?: 'type' | 'paste';
   // A multi-line JSON block instead of a single value. Indentation is content.
   lines?: string[];
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface AppWindowData {
   headline?: string;
@@ -1451,6 +1535,12 @@ export interface ChatTrioItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ChatTrioData {
   headline?: string;
@@ -1480,6 +1570,12 @@ export interface VideoPlayerItem {
   // Length of the clip file in SECONDS. The player loops it, so a short proof clip
   // never runs dry and leaves a dead frame inside the screen.
   seconds?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface VideoPlayerData {
   headline?: string;
@@ -1501,6 +1597,12 @@ export interface SceneForgeItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface SceneForgeData {
   headline?: string;
@@ -1528,6 +1630,12 @@ export interface ProductionGrindItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ProductionGrindData {
   headline?: string;
@@ -1555,6 +1663,12 @@ export interface BeatBoardItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface BeatBoardData {
   headline?: string;
@@ -1584,6 +1698,12 @@ export interface ComponentLabItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ComponentLabData {
   headline?: string;
@@ -1614,6 +1734,12 @@ export interface AutoRunItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface AutoRunData {
   headline?: string;
@@ -1645,6 +1771,12 @@ export interface RepoCtaItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface RepoCtaData {
   headline?: string;
@@ -1685,6 +1817,12 @@ export interface TheaterStageItem {
   // enums per item normally move to a top-level field — this one cannot).
   kind?: 'button' | 'field' | 'link' | 'text';
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface TheaterStageData {
   marquee?: string;
@@ -1708,6 +1846,12 @@ export interface QuizCardItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface QuizCardData {
   question?: string;
@@ -1731,6 +1875,12 @@ export interface CodeRunItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CodeRunData {
   lines?: CodeRunItem[];
@@ -1755,6 +1905,12 @@ export interface BrowserStepItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface BrowserStepData {
   steps?: BrowserStepItem[];
@@ -1792,6 +1948,12 @@ export interface FixtureCrewItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface FixtureCrewData {
   testName?: string;
@@ -1834,6 +1996,12 @@ export interface RuleTestItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface RuleTestData {
   rule?: string;
@@ -1859,6 +2027,12 @@ export interface SavedSearchItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface SavedSearchData {
   query?: string;
@@ -1887,6 +2061,12 @@ export interface ResponsibilitySplitItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ResponsibilitySplitData {
   leftLabel?: string;
@@ -1913,6 +2093,12 @@ export interface CrowdMatchItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CrowdMatchData {
   query?: string;
@@ -1943,6 +2129,12 @@ export interface RowFilterItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface RowFilterData {
   condition?: string;
@@ -1971,6 +2163,12 @@ export interface IndexDriftItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface IndexDriftData {
   before?: IndexDriftItem[];
@@ -2015,6 +2213,12 @@ export interface FrameBoundaryItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface FrameBoundaryData {
   outerTitle?: string;
@@ -2044,6 +2248,12 @@ export interface DialogGateItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DialogGateData {
   message?: string;
@@ -2088,6 +2298,12 @@ export interface ShotScopeItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ShotScopeData {
   shots?: ShotScopeItem[];
@@ -2114,6 +2330,12 @@ export interface FlagHarvestItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface FlagHarvestData {
   flag?: string;
@@ -2141,6 +2363,12 @@ export interface TraceScrubItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface TraceScrubData {
   steps?: TraceScrubItem[];
@@ -2168,6 +2396,12 @@ export interface MailRoomItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface MailRoomData {
   pattern?: string;
@@ -2193,6 +2427,12 @@ export interface SadPathsItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface SadPathsData {
   states?: SadPathsItem[];
@@ -2218,6 +2458,12 @@ export interface HandStampItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface HandStampData {
   toll?: string;
@@ -2246,6 +2492,12 @@ export interface ScopeLadderItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ScopeLadderData {
   fixtures?: ScopeLadderItem[];
@@ -2270,6 +2522,12 @@ export interface BackstagePhoneItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface BackstagePhoneData {
   question?: string;
@@ -2300,6 +2558,12 @@ export interface StageHandoffItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface StageHandoffData {
   testName?: string;
@@ -2328,6 +2592,12 @@ export interface SearchNarrowItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface SearchNarrowData {
   rootLabel?: string;
@@ -2353,6 +2623,12 @@ export interface SetLogicItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface SetLogicData {
   op?: string;
@@ -2380,6 +2656,12 @@ export interface SealedBoxItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface SealedBoxData {
   boxLabel?: string;
@@ -2407,6 +2689,12 @@ export interface WorkerSpreadItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface WorkerSpreadData {
   queueLabel?: string;
@@ -2434,6 +2722,12 @@ export interface OrderRouletteItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface OrderRouletteData {
   dependency?: string;
@@ -2461,6 +2755,12 @@ export interface FrozenFrameItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface FrozenFrameData {
   filename?: string;
@@ -2489,6 +2789,12 @@ export interface RecordDraftItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface RecordDraftData {
   sourceLabel?: string;
@@ -2515,6 +2821,12 @@ export interface PathWalkItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface PathWalkData {
   headline?: string;
@@ -2537,6 +2849,12 @@ export interface ListingRowItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ListingRowData {
   headline?: string;
@@ -2559,6 +2877,12 @@ export interface LinkPairItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface LinkPairData {
   headline?: string;
@@ -2583,6 +2907,12 @@ export interface DeletionGuardItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DeletionGuardData {
   headline?: string;
@@ -2605,6 +2935,12 @@ export interface ToolBenchItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface ToolBenchData {
   headline?: string;
@@ -2640,6 +2976,12 @@ export interface CmdLsItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdLsData {
   headline?: string;
@@ -2677,6 +3019,12 @@ export interface CmdCdItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdCdData {
   headline?: string;
@@ -2709,6 +3057,12 @@ export interface CmdPwdItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdPwdData {
   headline?: string;
@@ -2741,6 +3095,12 @@ export interface CmdMkdirItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdMkdirData {
   headline?: string;
@@ -2773,6 +3133,12 @@ export interface CmdCpItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdCpData {
   headline?: string;
@@ -2805,6 +3171,12 @@ export interface CmdMvItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdMvData {
   headline?: string;
@@ -2837,6 +3209,12 @@ export interface CmdRmItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdRmData {
   headline?: string;
@@ -2869,6 +3247,12 @@ export interface CmdLnItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdLnData {
   headline?: string;
@@ -2901,6 +3285,12 @@ export interface CmdClearItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdClearData {
   headline?: string;
@@ -2933,6 +3323,12 @@ export interface CmdTouchItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdTouchData {
   headline?: string;
@@ -2965,6 +3361,12 @@ export interface CmdCatItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdCatData {
   headline?: string;
@@ -2997,6 +3399,12 @@ export interface CmdTacItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdTacData {
   headline?: string;
@@ -3029,6 +3437,12 @@ export interface CmdMoreItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdMoreData {
   headline?: string;
@@ -3061,6 +3475,12 @@ export interface CmdLessItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdLessData {
   headline?: string;
@@ -3093,6 +3513,12 @@ export interface CmdTailItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdTailData {
   headline?: string;
@@ -3125,6 +3551,12 @@ export interface CmdViItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdViData {
   headline?: string;
@@ -3157,6 +3589,12 @@ export interface CmdDiffItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdDiffData {
   headline?: string;
@@ -3189,6 +3627,12 @@ export interface CmdFindItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdFindData {
   headline?: string;
@@ -3221,6 +3665,12 @@ export interface CmdLocateItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdLocateData {
   headline?: string;
@@ -3253,6 +3703,12 @@ export interface CmdGrepItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdGrepData {
   headline?: string;
@@ -3285,6 +3741,12 @@ export interface CmdAwkItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdAwkData {
   headline?: string;
@@ -3317,6 +3779,12 @@ export interface CmdSedItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdSedData {
   headline?: string;
@@ -3349,6 +3817,12 @@ export interface CmdXargsItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdXargsData {
   headline?: string;
@@ -3381,6 +3855,12 @@ export interface CmdChmodItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdChmodData {
   headline?: string;
@@ -3413,6 +3893,12 @@ export interface CmdChownItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdChownData {
   headline?: string;
@@ -3445,6 +3931,12 @@ export interface CmdUmaskItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdUmaskData {
   headline?: string;
@@ -3477,6 +3969,12 @@ export interface CmdSudoItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdSudoData {
   headline?: string;
@@ -3509,6 +4007,12 @@ export interface CmdUseraddItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdUseraddData {
   headline?: string;
@@ -3541,6 +4045,12 @@ export interface CmdUsermodItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdUsermodData {
   headline?: string;
@@ -3573,6 +4083,12 @@ export interface CmdUserdelItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdUserdelData {
   headline?: string;
@@ -3605,6 +4121,12 @@ export interface CmdPasswdItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdPasswdData {
   headline?: string;
@@ -3637,6 +4159,12 @@ export interface CmdChpasswdItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdChpasswdData {
   headline?: string;
@@ -3669,6 +4197,12 @@ export interface CmdWItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdWData {
   headline?: string;
@@ -3701,6 +4235,12 @@ export interface CmdLastItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdLastData {
   headline?: string;
@@ -3733,6 +4273,12 @@ export interface CmdChrootItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdChrootData {
   headline?: string;
@@ -3765,6 +4311,12 @@ export interface CmdPsItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdPsData {
   headline?: string;
@@ -3797,6 +4349,12 @@ export interface CmdPstreeItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdPstreeData {
   headline?: string;
@@ -3829,6 +4387,12 @@ export interface CmdTopItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdTopData {
   headline?: string;
@@ -3861,6 +4425,12 @@ export interface CmdHtopItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdHtopData {
   headline?: string;
@@ -3893,6 +4463,12 @@ export interface CmdBtopItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdBtopData {
   headline?: string;
@@ -3925,6 +4501,12 @@ export interface CmdAtopItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdAtopData {
   headline?: string;
@@ -3957,6 +4539,12 @@ export interface CmdGlancesItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdGlancesData {
   headline?: string;
@@ -3989,6 +4577,12 @@ export interface CmdNmonItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNmonData {
   headline?: string;
@@ -4021,6 +4615,12 @@ export interface CmdKillItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdKillData {
   headline?: string;
@@ -4053,6 +4653,12 @@ export interface CmdKillallItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdKillallData {
   headline?: string;
@@ -4085,6 +4691,12 @@ export interface CmdNohupItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNohupData {
   headline?: string;
@@ -4117,6 +4729,12 @@ export interface CmdSleepItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdSleepData {
   headline?: string;
@@ -4149,6 +4767,12 @@ export interface CmdWaitItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdWaitData {
   headline?: string;
@@ -4181,6 +4805,12 @@ export interface CmdLsofItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdLsofData {
   headline?: string;
@@ -4213,6 +4843,12 @@ export interface CmdStraceItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdStraceData {
   headline?: string;
@@ -4245,6 +4881,12 @@ export interface CmdUptimeItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdUptimeData {
   headline?: string;
@@ -4277,6 +4919,12 @@ export interface CmdFreeItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdFreeData {
   headline?: string;
@@ -4309,6 +4957,12 @@ export interface CmdVmstatItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdVmstatData {
   headline?: string;
@@ -4341,6 +4995,12 @@ export interface CmdIostatItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdIostatData {
   headline?: string;
@@ -4373,6 +5033,12 @@ export interface CmdIotopItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdIotopData {
   headline?: string;
@@ -4405,6 +5071,12 @@ export interface CmdDstatItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdDstatData {
   headline?: string;
@@ -4437,6 +5109,12 @@ export interface CmdSarItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdSarData {
   headline?: string;
@@ -4469,6 +5147,12 @@ export interface CmdWatchItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdWatchData {
   headline?: string;
@@ -4501,6 +5185,12 @@ export interface CmdDfItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdDfData {
   headline?: string;
@@ -4533,6 +5223,12 @@ export interface CmdDuItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdDuData {
   headline?: string;
@@ -4565,6 +5261,12 @@ export interface CmdNcduItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNcduData {
   headline?: string;
@@ -4597,6 +5299,12 @@ export interface CmdFdiskItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdFdiskData {
   headline?: string;
@@ -4629,6 +5337,12 @@ export interface CmdPartedItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdPartedData {
   headline?: string;
@@ -4661,6 +5375,12 @@ export interface CmdBlkidItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdBlkidData {
   headline?: string;
@@ -4693,6 +5413,12 @@ export interface CmdMkfsItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdMkfsData {
   headline?: string;
@@ -4725,6 +5451,12 @@ export interface CmdFsckItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdFsckData {
   headline?: string;
@@ -4757,6 +5489,12 @@ export interface CmdMountItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdMountData {
   headline?: string;
@@ -4789,6 +5527,12 @@ export interface CmdUmountItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdUmountData {
   headline?: string;
@@ -4821,6 +5565,12 @@ export interface CmdDdItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdDdData {
   headline?: string;
@@ -4853,6 +5603,12 @@ export interface CmdIpItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdIpData {
   headline?: string;
@@ -4885,6 +5641,12 @@ export interface CmdPingItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdPingData {
   headline?: string;
@@ -4917,6 +5679,12 @@ export interface CmdTracerouteItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdTracerouteData {
   headline?: string;
@@ -4949,6 +5717,12 @@ export interface CmdMtrItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdMtrData {
   headline?: string;
@@ -4981,6 +5755,12 @@ export interface CmdNetstatItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNetstatData {
   headline?: string;
@@ -5013,6 +5793,12 @@ export interface CmdSsItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdSsData {
   headline?: string;
@@ -5045,6 +5831,12 @@ export interface CmdNmcliItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNmcliData {
   headline?: string;
@@ -5077,6 +5869,12 @@ export interface CmdIftopItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdIftopData {
   headline?: string;
@@ -5109,6 +5907,12 @@ export interface CmdNethogsItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNethogsData {
   headline?: string;
@@ -5141,6 +5945,12 @@ export interface CmdNloadItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNloadData {
   headline?: string;
@@ -5173,6 +5983,12 @@ export interface CmdDigItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdDigData {
   headline?: string;
@@ -5205,6 +6021,12 @@ export interface CmdHostItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdHostData {
   headline?: string;
@@ -5237,6 +6059,12 @@ export interface CmdNslookupItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNslookupData {
   headline?: string;
@@ -5269,6 +6097,12 @@ export interface CmdWhoisItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdWhoisData {
   headline?: string;
@@ -5301,6 +6135,12 @@ export interface CmdSshItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdSshData {
   headline?: string;
@@ -5333,6 +6173,12 @@ export interface CmdScpItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdScpData {
   headline?: string;
@@ -5365,6 +6211,12 @@ export interface CmdRsyncItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdRsyncData {
   headline?: string;
@@ -5397,6 +6249,12 @@ export interface CmdNcItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdNcData {
   headline?: string;
@@ -5429,6 +6287,12 @@ export interface CmdWgetItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdWgetData {
   headline?: string;
@@ -5461,6 +6325,12 @@ export interface CmdCurlItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdCurlData {
   headline?: string;
@@ -5493,6 +6363,12 @@ export interface CmdTarItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdTarData {
   headline?: string;
@@ -5525,6 +6401,12 @@ export interface CmdGzipItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdGzipData {
   headline?: string;
@@ -5557,6 +6439,12 @@ export interface CmdBzip2Item {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdBzip2Data {
   headline?: string;
@@ -5589,6 +6477,12 @@ export interface CmdZipItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdZipData {
   headline?: string;
@@ -5621,6 +6515,12 @@ export interface CmdCronItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdCronData {
   headline?: string;
@@ -5653,6 +6553,12 @@ export interface CmdCrontabItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdCrontabData {
   headline?: string;
@@ -5685,6 +6591,12 @@ export interface CmdBashscriptItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdBashscriptData {
   headline?: string;
@@ -5717,6 +6629,12 @@ export interface CmdAliasItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdAliasData {
   headline?: string;
@@ -5749,6 +6667,12 @@ export interface CmdEnvItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdEnvData {
   headline?: string;
@@ -5781,6 +6705,12 @@ export interface CmdHistoryItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdHistoryData {
   headline?: string;
@@ -5813,6 +6743,12 @@ export interface CmdScreenItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdScreenData {
   headline?: string;
@@ -5845,6 +6781,12 @@ export interface CmdTmuxItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdTmuxData {
   headline?: string;
@@ -5877,6 +6819,12 @@ export interface CmdSystemctlItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdSystemctlData {
   headline?: string;
@@ -5909,6 +6857,12 @@ export interface CmdJournalctlItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdJournalctlData {
   headline?: string;
@@ -5941,6 +6895,12 @@ export interface CmdDmesgItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdDmesgData {
   headline?: string;
@@ -5973,6 +6933,12 @@ export interface CmdManItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdManData {
   headline?: string;
@@ -6005,6 +6971,12 @@ export interface CmdAproposItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdAproposData {
   headline?: string;
@@ -6037,6 +7009,12 @@ export interface CmdTldrItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdTldrData {
   headline?: string;
@@ -6069,6 +7047,12 @@ export interface CmdCheatItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdCheatData {
   headline?: string;
@@ -6101,6 +7085,12 @@ export interface CmdLspciItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdLspciData {
   headline?: string;
@@ -6133,6 +7123,12 @@ export interface CmdLsusbItem {
   color?: SemColor;
   asset?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface CmdLsusbData {
   headline?: string;
@@ -6170,6 +7166,12 @@ export interface DsaTracePtrsItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTracePtrsData {
   headline?: string;
@@ -6206,6 +7208,12 @@ export interface DsaTraceWindowItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceWindowData {
   headline?: string;
@@ -6242,6 +7250,12 @@ export interface DsaTraceBsearchItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceBsearchData {
   headline?: string;
@@ -6278,6 +7292,12 @@ export interface DsaTraceHashItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceHashData {
   headline?: string;
@@ -6315,6 +7335,12 @@ export interface DsaTraceStackItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceStackData {
   headline?: string;
@@ -6352,6 +7378,12 @@ export interface DsaTraceGridItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceGridData {
   headline?: string;
@@ -6389,6 +7421,12 @@ export interface DsaTraceTreeItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceTreeData {
   headline?: string;
@@ -6426,6 +7464,12 @@ export interface DsaTraceDpItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceDpData {
   headline?: string;
@@ -6463,6 +7507,12 @@ export interface DsaTraceIntervalsItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceIntervalsData {
   headline?: string;
@@ -6499,6 +7549,12 @@ export interface DsaTraceListItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaTraceListData {
   headline?: string;
@@ -6536,6 +7592,12 @@ export interface DsaSignalsItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaSignalsData {
   headline?: string;
@@ -6576,6 +7638,12 @@ export interface DsaCostItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaCostData {
   headline?: string;
@@ -6609,6 +7677,12 @@ export interface DsaFrameworkItem {
   links?: string[];
   // Short role label printed under the cell: LEFT, MID, +IN, -OUT, slow, fast.
   tag?: string;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface DsaFrameworkData {
   headline?: string;
@@ -7369,6 +8443,12 @@ export interface NotificationItem {
   body?: string;
   color?: SemColor;
   atWord: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 
 // COUNTDOWN — a numeric countdown from N to GO.
@@ -7540,6 +8620,12 @@ export interface TreeMapItem {
   value: number;
   color?: SemColor;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface TreeMapData {
   items: TreeMapItem[]; // 2–12
@@ -7575,6 +8661,12 @@ export interface IconGridItem {
   label: string;
   color?: SemColor;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface IconGridData {
   items: IconGridItem[]; // 3–12
@@ -7611,6 +8703,12 @@ export interface LogoWallItem {
   icon: string;   // si:slug (brand logo) or lucide: fallback
   label?: string;
   atWord?: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 export interface LogoWallData {
   logos: LogoWallItem[]; // 3–15
@@ -7780,6 +8878,12 @@ export interface ProgressItem {
   display?: string;    // e.g. "92%" — overrides the auto label
   color?: SemColor;
   atWord: number;
+  // Real terminal output, one string per line (see component-flow.mjs).
+  out?: string[];
+  // Chart data: a real measured series, its unit, and an optional reference line.
+  series?: number[];
+  unit?: string;
+  threshold?: number;
 }
 
 // PROGRESS — rings or bars filling to targets.
