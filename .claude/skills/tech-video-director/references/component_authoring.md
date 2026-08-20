@@ -415,3 +415,152 @@ render-proof (view the stills against each). If a still fails one of these, fix 
 [ ] `tsc` clean; `lint-all` clean apart from known immutable-topic rejections
 [ ] throwaway proof spec/script/stills deleted
 [ ] `references/scene_library.md` row added; this file's lessons honoured
+
+
+---
+
+## PAID-FOR LESSONS — the 109-command masterclass (2026-08-18)
+
+### 1. Multiply scale, never string-splice it
+Shipped for weeks, in the shared two-up stage:
+
+```js
+padding: `${vertical ? 22 : 26}px`.replace('px', `${scale}px`),   // WRONG
+```
+
+At `scale === 1` that is `"26px".replace("px","1px")` → **`"261px"`**. Every right-hand picture
+rendered crushed into a corner, in a cut the owner had already watched. The class of bug is
+building a CSS length by string surgery. Always compute it:
+
+```js
+padding: (vertical ? 22 : 26) * scale,                             // RIGHT
+```
+
+Grep any component you touch for `.replace('px'` and for template-literal arithmetic.
+
+### 2. Resolve anchor lists with a PURE function, not a hook
+A depiction usually lights a list of elements, each on its own anchor. Calling `useCurrentFrame()`
+inside `.map()` works only while the list length never changes and reads as a rules-of-hooks
+violation to every linter and reviewer. Read the frame once and pass it down:
+
+```tsx
+export const liveAt = (frame: number, atWord?: number, ramp = 9) =>
+  atWord == null ? 1 : interpolate(frame, [wordToFrame(atWord), wordToFrame(atWord) + ramp], [0, 1], clamp);
+```
+
+### 3. Proof stills BEFORE the long render, and pick frames that prove something
+A 90-minute render is two hours. Render a dozen stills first, one per new depiction, at ~78% of
+each scene. Two of the three real layout bugs in this build were caught this way and would
+otherwise have cost a full render.
+
+For a SYNC claim, compute the absolute frame of two adjacent anchors from the synced spec and
+render both: one where the later element must still be dark, one where it must be lit. "It looks
+right" is not a proof.
+
+### 4. A registered TYPE is not a new PICTURE
+110 components were assembled through the full eight-touchpoint flow and every one of them
+rendered through the same six generic archetypes. The wiring was correct and the work was still
+the defect the owner named (LAW 0j). Before assembling, write down what MOVES in this component
+and how that motion IS the explanation. If the answer is "the labels change", stop.
+
+### 5. Give every instance its own caption
+`stageTitle` (or whatever your component calls the caption above the picture) defaulted to one
+generic string across all 110 scenes. Author it per beat from that beat's subject — "where you are
+standing", "nine switches", "the delete gate", "two separate switches".
+
+### 6. When a data-driven component needs structure, pass the structure
+A tree renderer needs DEPTH. Deriving it from array index or from heuristics on the label text
+("does it contain a space?") produces a plausible-looking wrong tree. Add the explicit field
+(`value` as depth) and author it; where a beat list genuinely is not a hierarchy, render it as an
+honest single column rather than an empty tree beside a list.
+
+---
+
+## Drawing structures (trees, graphs, grids) — added 2026-08-19
+
+Recorded after the DSA cut shipped four visual-correctness defects the owner caught on sight.
+See LAW 0k in CLAUDE.md for the verdict; this is the how.
+
+**Declare the topology in the data.** `VizCell` carries `parent` (label of the parent node) and
+`links` (extra non-tree neighbours). Never derive adjacency from array position or from a `value`
+that happens to encode depth — that produced a complete bipartite graph between BFS levels, which
+looked plausible on the authored example and would be wrong on the next one. Where a brief is
+authored as an indented outline, `layoutTree` recovers parentage from the depth sequence (nearest
+preceding node one level shallower); an explicit `parent` always wins.
+
+**Lay a tree out like a tree.** Leaves take equal slots, a parent is centred on the midpoint of its
+children. Indenting rows by depth and drawing a small elbow renders a bulleted list, not a tree.
+
+**Strokes in user units.** `strokeWidth={0.5}` plus `vectorEffect="non-scaling-stroke"` is half a
+device pixel regardless of how large the drawing is. Drop the vector-effect and size the stroke in
+viewBox units so it scales; give the live edge the accent colour and the dormant one the text
+colour at ~0.3 alpha, never `panelBorder`, which disappears on a dark panel.
+
+**Size the viewBox to the content, including label width.** A vertical chain in a fixed 100-wide box
+gets `meet`-scaled down to a cluster of small pills. Compute the box from the actual extent, and add
+the widest node's half-width to each side or the outermost node is sliced by the panel edge. Add
+bottom room when any node carries a caption beneath it.
+
+**Nodes size to their label.** A node showing `[1,2,3]` is not a circle. Anything past two
+characters becomes a pill wide enough for its text.
+
+**The payload rides on the object.** If the algorithm computes a per-node value (a BFS distance, a
+DP cell, a count), draw it on the node. A legend along the bottom edge makes the viewer do a lookup
+while the narration moves on.
+
+**Everything that shows data is responsive.** Derive cell height and font size from the item count
+against the available panel, with a floor and a ceiling — never a fixed pixel height. The rule of
+thumb in `CellRow` / `DpTable`: `h = clamp(56, 660/n, 110)`, `font = clamp(19, h*0.34, 33)`. The
+code pane does the same against its line count, or a long listing loses its first and last lines to
+the top border and the note bar.
+
+**Verify with stills, not renders.** `npx remotion bundle src/index.ts --out-dir=<dir>` once, then
+`npx remotion still <dir> <slug>-wide-dark out.png --frame=N` per scene (~2s each). Montage them
+into contact sheets and read the sheets. A full 12-episode visual audit is four minutes; the same
+audit done by watching rendered mp4s is a day, which is why it did not happen.
+
+## Overlays, setup text, and the fields that must survive mapping — added 2026-08-20
+
+**An overlay measures itself from the thing it overlays.** Row geometry lives in `cellMetrics(n, big)`
+and `CELL_GAP` in `dsaViz.tsx`. The sliding-window frame and `PointerRail` both derive from it. Never
+restate a cell height or a gap in the overlay — when the row was made responsive and the frame kept
+`height: 74`, the window rendered *smaller than the boxes it contained*, and a percentage-based `left`
+that ignored the gaps drifted further off with every cell. Positions step by `(cellWidth + gap)`:
+
+```
+left: `calc((100% - ${gapsPx}px) / ${n} * ${i} + ${i * CELL_GAP * scale}px)`
+```
+
+**Every pane carries a `premise`.** One plain sentence above the picture, unanchored, constant for the
+episode: what the viewer is looking at and what stands for what. It is not the `caption` — that is a
+per-beat title. And it must describe *the picture actually on screen*: putting the episode's analogy on
+a signal-word card claims "each box is a house you pass" over boxes reading *subarray* and *contiguous*.
+Signal cards and cost charts get their own line.
+
+**Budget against the panel, and remember centred overflow goes both ways.** A flex column with
+`justifyContent: center` that is taller than its box overflows above *and* below — the first row rides
+up over the premise and the last is clipped. Size rows from a height budget:
+`barH = clamp(18, (AVAIL/n - LABEL)/1.42, 52)`.
+
+**Fields must survive the scene component's cell mapping.** Every `Dsa*.tsx` maps cells explicitly:
+
+```tsx
+const cells: VizCell[] = (d.cells ?? []).map((c) => ({
+  label: c.label, sub: c.sub, value: c.value, color: c.color, atWord: c.atWord, state: c.text,
+  parent: c.parent, links: c.links, tag: c.tag,   // ← or the topology never arrives
+}));
+```
+
+Omitting `parent`/`links` there means a declared edge is silently dropped and the shape falls back to a
+guess: BFS drew guessed edges for weeks, and a linked-list cycle described in the narration could not be
+drawn at all. When adding a field to `VizCell`, add it to the item template in `component-flow.mjs`
+**and** to all 13 mappings.
+
+**Never pipe a builder to /dev/null.** `build-dsa-spec.mjs` refuses on an anchor fault, and a refusal
+sent to `/dev/null` leaves the previous spec in place — the render then silently uses stale data. If you
+must quieten a build, keep stderr.
+
+**Gate: `node scripts/audit-dsa.mjs`, then three frames per scene.** The audit catches what no frame can
+show — anchors past the end of the narration, anchors past the scene's own length, panes with nothing to
+draw, missing premises. Then sweep stills at 25/55/88% of each scene and montage per episode; one still
+cannot reveal a motion glitch.

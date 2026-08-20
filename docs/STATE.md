@@ -44,6 +44,34 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-08-18 — `linux-commands-masterclass` shipped (87 min), and the rebuild that got it there
+The first cut (38 min) was rejected on three counts; all three turned out to be measurable defects
+rather than taste, and the fixes are now laws (0i, 0j, 0f-9, 12).
+
+- **Sync.** Components ignored per-element anchors and ran on fixed intervals; the spec builder
+  also consumed markers in a fixed order, so the terminal finished typing at a **median 11% of the
+  narration in 110 of 110 scenes**. Markers are now TYPED (`|` step, `^` picture, `@` perms,
+  `~` verdict) and interleave; `src/CommandStage.tsx` and `src/linuxViz.tsx` contain no fixed
+  interval. Proven with two stills from the synced spec.
+- **Depiction.** 110 components were routing through 6 generic archetypes → **`src/linuxViz.tsx`,
+  56 distinct depictions** + a per-beat caption on every scene.
+- **Script.** 5,657 → 16,161 words; 81 of 110 commands now expand their name; every beat ends on
+  an anchor-free landing line.
+- **Two linter rules were numerically inconsistent** and the conflict was invisible until a beat
+  tried to satisfy both: the scene ceiling granted a flat 4s head/tail while PAYOFF TIMING reserves
+  the final 15% of the narration for an anchor-free landing. On a 55s beat that is 8s. The ceiling
+  is now `180 × anchors + 120` (5s per depicted beat + a proportional tail), hard stop 70s. **When
+  a guard keeps rejecting well-formed work, check it against the OTHER guards before rewriting the
+  work.**
+- **Render:** 8 segments + `scripts/build-audio-track.mjs` + stream-copy mux (see LAW 12).
+  156,521 frames, 0ms audio drift, 967 MB.
+- Residual: one lint warning (global pronoun density 5.1% vs 4.5%). Reverted rather than shipped a
+  false claim — see LAW 0f rule 9.
+
+New/changed tooling: `scripts/build-audio-track.mjs` (new), `scripts/build-linux-spec.mjs` (typed
+markers), `scripts/gen-upload-kit.mjs` (HH:MM:SS chapters, `seo.tags`), `scripts/lint-spec.mjs`
+(ceiling), `src/linuxViz.tsx` (new), `src/CommandStage.tsx` (padding + pacing fixes).
+
 ### 2026-08-16 — a 19-episode course shipped, and five laws came out of it
 
 Produced a full tutorial course end to end (spec → voice → sync → render → upload kit, ×19, plus
@@ -367,6 +395,105 @@ Every component so far shipped with a cell narrower than its own budget until th
 rendered and *looked at*. Size cells from the budget arithmetic, not by eye. And editing
 `manifest.mjs` by hand desyncs `specs/video.schema.json` — regenerate (`npm run schema && npm run
 types`) or the gate goes red.
+
+## 2026-08-19 — DSA Dojo: the visual-correctness rebuild
+
+The 12-episode DSA Pattern Dojo series shipped once and the owner rejected the visuals on sight:
+*"few animations are lacking visual correctness and are complicated to understand ... when You show
+a tree, there must be lines visible right ... you are showing numbers at the very bottom very
+small ... I liked the first episode, then after that you are just in a hurry."* Every complaint was
+verifiable from a single still. See **LAW 0k** in CLAUDE.md.
+
+What was actually wrong, and why it survived to a render:
+
+- **The array family was rebuilt; nothing else was.** Two-pointers and sliding window use `CellRow`
+  and look right, which is exactly why episode 1 passed. Trees, graphs, DP tables and cost bars went
+  through generic primitives that were never designed to draw those shapes.
+- `TreeDFS` drew an indented list with a 14px elbow glyph. No parent→child edges at all.
+- `GridBFS` drew a complete bipartite graph between distance levels — not the graph being traced.
+  It matched by luck on the authored five-node example.
+- Every edge was `strokeWidth={0.5}` + `non-scaling-stroke` in `panelBorder` grey: invisible.
+- BFS distances — the whole output of the pattern — sat in a row of tiny pills along the bottom
+  edge instead of on the nodes.
+- `CellRow` (46px/19px), `DpTable` (42px/18px) and the cost bars were fixed-size, so a six-cell DP
+  table was a thin ribbon in a panel two-thirds empty.
+- `CodePane`'s fixed font silently clipped line 1 and line 18 of an 18-line listing.
+- The problem-intro cards in EP11 showed signal words lifted from a question that was never on
+  screen; the narration says *"circle the words"* over nothing to circle.
+
+Fixes: `VizCell` gained `parent` / `links`; `layoutTree` recovers parentage from an authored depth
+outline so existing briefs draw real trees unchanged; nodes size to their labels and the viewBox
+sizes to content plus label width; strokes moved to user units and accent colour; distances render
+as badges on the node; `CellRow` / `DpTable` / cost bars / `CodePane` all derive size from item
+count. `DSA_SIGNALS` gained `problem`.
+
+Two process lessons, both cheap and both skipped:
+
+1. **Audit by still.** `remotion bundle` once, then `remotion still <bundle> <comp> --frame=N` is
+   ~2s. 122 trace scenes across 12 episodes → contact sheets in four minutes. Every defect above is
+   obvious in the sheets. This is now the gate before any batch render.
+2. **Read the whole builder output.** `build-dsa-spec.mjs` had already printed
+   `needs 1 line marker(s), has 0` for two scenes; the run was checked with `tail -1`, which showed
+   only the summary line, and the scenes rendered with a dead code pane. Both builders now treat a
+   marker/anchor fault as **fatal** and refuse to write the spec (`✗ REFUSED`), so it cannot be
+   skimmed past. Verified against a deliberately broken brief.
+
+Also this session: EP09 and EP10 were ~4.5 min against a 6–7 min series average because each
+*named* its second technique in a bullet and never traced it (greedy's sort-by-END; fast/slow's
+find-the-middle and Floyd cycle-start). Both gained a full traced act and a second quiz — 7.4 and
+7.0 min. Source credit to the owner's repo was added to all 12 briefs so it survives a rebuild.
+
+## 2026-08-20 — DSA Dojo: setup text, overlay geometry, and a course that is actually continuous
+
+Second round of owner review on the same series. Four separate complaints, all correct, all
+reproducible from a single frame. See **LAW 0l** in CLAUDE.md.
+
+**1. The sliding-window frame was smaller than the boxes it contained.** A regression I introduced
+the day before: making `CellRow` responsive changed cell height to `clamp(56, 660/n, 110)` while the
+window overlay kept `height: 74` and `top: -8`. Its horizontal maths also used a plain percentage,
+ignoring the 6px gaps, so the frame drifted sideways as the window slid. Row geometry now lives in
+one exported `cellMetrics()` and `CELL_GAP`; the window frame and `PointerRail` both measure from
+it. Any overlay that restates a row's numbers will drift again — take them from there.
+
+**2. The narration used analogies before giving them.** Sliding Window's hook said *"same houses"*
+and its cost beat said *"six houses"*; the train and the houses were not introduced until `s05`.
+Hooks for EP01/02/06/08 rewritten to establish the picture first, and every trace beat now carries a
+`premise`: one standing sentence, unanchored, above the animation, saying what the viewer is looking
+at and what stands for what.
+
+A subtlety worth keeping: **the premise has to describe the picture actually on screen.** The first
+pass put the episode's analogy on every DSA beat, so a signal-word card claimed "each box is a house
+you pass" while its boxes held the words *subarray* and *contiguous*, and a cost chart said the same
+over a set of bars. Signals cards and cost charts now carry their own line. EP05 had the same fault
+in reverse — its premise said "each box is a garment" over boxes showing `{ [ ( ) ] }`.
+
+**3. The compiled cut was a concatenation, not a course.** Every episode opened *"welcome back to the
+Dojo"* and closed as if the video were ending. All 12 title cards rewritten as chapter openings
+("Pattern two of ten in the NBX Studio Dojo: Sliding Window …"), which also satisfies the LAW 0g
+greeting without planting a boundary; cross-references now say "the previous pattern", never "last
+episode". One set of renders serves both the standalone episodes and the course.
+
+**4. More visualiser faults, found by sweeping stills.** `LinkedRunners` was still fixed-size (44px
+nodes, 15px type) and — worse — **never drew the loop-back edge at all**, so the cycle the entire
+pattern is about was invisible while the narration described it. Rewritten as SVG with an arced
+back-edge. `BruteVsOpt` and `SignalMatch` overflowed their panes once a premise was added: a centred
+flex column taller than its box overflows in *both* directions, so the first row rode up over the
+premise and the last was clipped. Both now budget against the panel.
+
+**The bug behind several bugs:** every scene component mapped cells field-by-field
+(`{label, sub, value, color, atWord, state}`) and silently dropped `parent`, `links` and `tag`. So
+the declared topology never reached the renderer — BFS had been falling back to its guessed edges
+the whole time, and EP10's cycle could not be drawn no matter what the brief said. Fixed in all 13
+scene files, and the fields added to the generated item template in `component-flow.mjs` so new
+components inherit them.
+
+**Process, again.** `build-dsa-spec.mjs` refused EP10 with six anchor faults — but an earlier run of
+that same build had been piped to `>/dev/null 2>&1`, so the refusal was silent and the render used a
+stale spec. Suppressing a builder's output defeats the fatal guard added the day before. New tool:
+`scripts/audit-dsa.mjs` checks what no single frame can show (anchors past the end of the narration,
+anchors past the scene's own length, panes with nothing to draw, missing premises). Visual gate is
+now **three frames per scene** — 25/55/88% — because one still cannot reveal a motion glitch; 594
+frames across 12 episodes, montaged into per-episode contact sheets.
 
 ## Open threads
 

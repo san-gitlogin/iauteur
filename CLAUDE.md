@@ -92,6 +92,128 @@ screen to look at. Binding rules:
    un-run query; RESPONSIBILITY_SPLIT files the real lines).
 Full case + the measurements: `docs/PLAYWRIGHT_DOJO_SERIES.md` §4c.
 
+## LAW 0i — THE PICTURE MOVES WITH THE VOICE (owner verdict, 2026-08-17 → 2026-08-18)
+Owner, on a shipped 38-minute cut: *"The voice just narrates its content, but the actual
+animation on screen? Still going on. The next cut comes, voice speaks everything, animation
+is happening still. This happens for each and every scene cut."* Then, after the first fix:
+*"on the left you show a bunch of commands, your left side command animation just completes
+quicker, and you are still explaining the first command."*
+
+Two DIFFERENT defects, both measured, both structural:
+
+1. **Components that ignore their own anchors.** The first six command components read only the
+   SCENE-level `atWord` and then marched their elements on fixed intervals (`stepLen = 34`,
+   `per = 26`, `per = 30`). The per-element `atWord` values authored in the spec — which the
+   linter counted to grant the scene its runtime — were never read by the rendering code.
+   **Rule: no explanatory component may contain a fixed frame interval.** Every moment resolves
+   from an element's own anchor via `wordToFrame`. Resolve a whole list with the PURE helper
+   (`liveAt(frame, atWord)`), never a hook inside a `.map()`.
+2. **Anchors that all land in the first fifth.** The spec builder consumed markers in a fixed
+   ORDER (every terminal step, then every stage element), which forced the author to put all the
+   terminal anchors at the front of the sentence. Measured across the whole cut: the terminal
+   finished typing at a **median 11% of the narration** in **110 of 110** scenes, then sat frozen
+   for the remaining 89% while only the right pane moved. **Rule: markers are TYPED, not
+   positional** (`|` step, `^` picture beat, `@` perms, `~` verdict), so a beat can interleave —
+   type, draw what it did, type the next. The builder enforces a floor: on a multi-command beat
+   the last command lands at ≥50% of the TAUGHT portion (the words up to the last anchor, so a
+   proper landing line is not punished); on a single-command beat, ≥22%.
+
+**Prove it before you render.** Pick a scene, compute the absolute frame of two adjacent anchors
+from the SYNCED spec, render both stills, and confirm the element that should still be dark IS
+dark. A sync claim without two frames behind it is a guess.
+
+## LAW 0j — DEPICT THE MECHANISM, NOT A LABELLED CARD (owner verdict, 2026-08-18)
+Owner: *"This is lazy ass animation work, just displaying components and highlighting them while
+speaking about it. Does it help? Just showing text and highlighting it DOES NOT WORK AT ALL."*
+He was right, and the count is the proof: 110 purpose-registered components were all routing
+through **six generic archetypes** (rows, tree, meters, flow, perms, hops). Registering a new
+scene TYPE is not the same as building a new PICTURE — the rebuild shipped **56 distinct
+depictions** for the same 110 beats.
+
+LAW 0d says an analogy must be drawn rather than named. This extends it to every explanatory beat:
+**the thing being taught must be the thing that moves.** A folder tree where a YOU-ARE-HERE puck
+walks and the folders stay pinned. Nine permission switches that physically throw and count up to
+an octal digit. A signal packet the process catches and saves from, versus one the kernel delivers
+past it. Two service switches where a reboot kills only one. If your component would still make
+sense with the labels swapped for lorem, it is a card, not a depiction.
+
+Corollary: **the caption is per-beat.** A generic stage title repeated on every scene ("what
+happens", 110 of 110) is the same defect in miniature — it tells the viewer nothing and makes the
+set look templated. Author one caption per beat, from that beat's subject.
+
+## LAW 0k — DRAW THE STRUCTURE, AND PUT THE DATA ON IT (owner verdict, 2026-08-19)
+Owner, on the DSA cut: *"when You show a tree, there must be lines visible right, and there must be
+pointers pointing at right place showing the right data somewhat bigger, where in few episodes I
+see you are showing numbers at the very bottom very small ... I liked the first episode, then after
+that you are just in a hurry."* All of it was true. Four separate failures, one root cause: LAW 0j
+was satisfied for the ARRAY family and then generic primitives were reused for every other shape.
+
+1. **A topology must be declared, never inferred from position.** The graph renderer drew an edge
+   from every node in one level to every node in the next — a complete bipartite graph, not the
+   graph being traced. It happened to look right on a five-node example and would have been
+   silently wrong on the next one. Cells now carry `parent` / `links`; a tree recovers parentage
+   from the authored depth outline. Declared structure, drawn structure.
+2. **An edge has to be visible to be an edge.** The lines were `strokeWidth={0.5}` with
+   `vectorEffect="non-scaling-stroke"` in the muted panel-border grey: half a device pixel on a
+   dark panel, i.e. nothing. Strokes belong in user units so they scale with the drawing, and an
+   edge the voice is talking about takes the accent colour.
+3. **The answer goes ON the object, not in a legend.** BFS computes a distance per node; the
+   distances were a row of tiny pills along the bottom edge, so the viewer had to match node to
+   legend while being talked over. The number now rides on the node as a badge. If a beat has a
+   payload, the payload sits where the eye already is.
+4. **Components size to the space they are given.** `CellRow` was a fixed 46px cell with 19px type
+   and `DpTable` a fixed 42px — a six-cell DP table rendered as a thin ribbon of small numbers in a
+   panel with two-thirds of its height empty. Cell height and font are now derived from the item
+   count. Same for the cost bars, which stacked against the top edge, and for the code pane, whose
+   fixed font silently clipped the first and last lines of an 18-line listing.
+
+Corollary — **a card that quotes a source must show the source.** The problem-intro cards lifted
+signal words out of a question that was only ever spoken; the narration said *"circle the words"*
+with no words on screen to circle. Owner: *"You are just narrating it thinking that user would
+memorize the question or what?"* `DSA_SIGNALS` now takes a `problem` string, on screen unanchored
+for the whole beat.
+
+Corollary — **audit by still, not by render.** These shipped because episodes were reviewed as
+finished mp4s, one at a time, hours apart. Bundle once (`remotion bundle`), then
+`remotion still <bundle> <comp> --frame=N` costs ~2s: 122 trace scenes across 12 episodes became a
+set of contact sheets in four minutes, and every defect above is visible in them at a glance.
+Review the sheet BEFORE committing hours of render.
+
+## LAW 0l — GIVE THE PICTURE BEFORE YOU USE IT, AND KEEP IT ON SCREEN (owner, 2026-08-20)
+Owner: *"you start to speak about houses before you even say what you are actually gonna show. And
+there is no text that displays like consider you are in a train, and you are counting houses. You
+straight away speak like user already would know about the house concept which is wrong ... you are
+not displaying a text that user would often refer to and remember what we are speaking about."*
+
+Sliding Window's hook said *"same houses"* and its cost beat said *"six houses"* — the train and the
+houses were not introduced until two scenes later. The analogy was **used before it was given**, in
+almost every episode.
+
+Two rules, and they are separate:
+
+1. **Establish, then use.** The first time a beat leans on an analogy, the narration names it
+   outright: *"Picture a row of houses, each with a number painted on the door."* An analogy that
+   arrives after its own vocabulary is worse than no analogy — the viewer spends the beat working
+   out what a house is instead of following the point.
+2. **The setup stays on screen.** Every trace pane carries a `premise`: one plain sentence saying
+   what the viewer is looking at and what stands for what ("You are on a train. Each box is a house
+   you pass; the window shows exactly k = 3 at once"). It is unanchored and constant for the whole
+   episode, because its job is to be re-readable at any moment by someone who looked away. The
+   per-beat `caption` is a title; the `premise` is the frame. They are not the same field and one
+   does not substitute for the other.
+
+Corollary — **an overlay must measure itself from the thing it overlays.** The sliding-window frame
+hard-coded `height: 74` while the row beneath it had been made responsive, so the frame rendered
+*smaller than the boxes it was supposed to contain*, and its percentage maths ignored the gaps
+between cells so it drifted sideways as the window moved. Row geometry now lives in one exported
+`cellMetrics()`; the window frame and the pointer rail both measure from it. If you size something
+that sits on top of a row, take the numbers from there — never restate them.
+
+Corollary — **a course is not a concatenation.** Episodes that each open *"welcome back to the
+Dojo"* and close *"that's the end"* do not become a course when joined end to end. Title cards are
+written as CHAPTER openings ("Pattern two: Sliding Window …") which read correctly both standalone
+and in sequence, and cross-references say "the previous pattern", never "last episode".
+
 ## LAW 0f — WRITE FOR A MOUTH, NOT A PAGE (owner verdict, 2026-08-16)
 Owner: *"You often use IT, and you speak about something that's on the screen, but you forget
 what the context is about, and you start speaking in a very AI manner. Humans are not adaptable
@@ -144,6 +266,17 @@ something a person would actually say out loud:
      you should be —"*. Answering the question the learner already has is what teaching IS.
    - **Say the consequence.** What actually happens if they get it wrong, in their week.
    - **Land it.** End the beat on the sentence you'd want them to repeat to a colleague.
+
+9. **AN AUTOMATED REWRITE MAY NOT INVENT A CLAIM.** The voice guard is measurable, so it is
+   tempting to satisfy it with a bulk pass. Two recorded failures: (a) a contraction pass produced
+   *"Lost track of where you're?"* and shipped it, because it contracted a verb that ENDED its
+   clause — never contract when the second token carries clause punctuation; (b) a pass replacing
+   bare "it" with the subject's name produced **three false statements**, including *"open a ten
+   gigabyte log with less and less appears on screen"* (the LOG appears) and *"that's sig kill, and
+   kill can't be caught"* (SIGKILL cannot; `kill` obviously can). It also silently dropped a space
+   (`"andless"`). **Any bulk rewrite is AUDITED site by site before it ships, and a style metric is
+   never worth a wrong claim (LAW 3 outranks the guard).** If the audit is too large to do
+   honestly, revert the pass and report the residual warning instead.
 
 **This is enforced.** `scripts/lint-spec.mjs` runs a HUMAN-VOICE GUARD over the whole spec —
 sentence-length standard deviation, pronoun-opener share, repeated openers, contraction rate — and
@@ -271,3 +404,22 @@ When the topic names a company / product / person / place, gather its art DURING
 9. Component/theme changes follow the skill's design_contract.md (Three Guards, ×scale, both-aspect proofs) and require explicit user approval. Building or fixing a scene component is a defined job: follow `.claude/skills/tech-video-director/references/component_authoring.md` (the six wiring files, theme-token adaptation across all 30 designs, the render-proof loop, and the paid-for lessons). Never hardcode colours/fonts/radii/px — read theme tokens so every one of the 30 designs reskins the component automatically; add each new component to `src/showcaseSpec.ts` so it appears in every design composition for review.
 10. PHASE-GATED DELIVERY (user standing rule, 2026-07-24): for any multi-phase feature, work ONE phase at a time. After completing each phase you MUST (a) inspect the actual on-disk result, (b) run an audit — tests/gates/tsc/lint as applicable — against the real artifacts (never assume), (c) fix everything the audit surfaces, and only THEN (d) proceed to the next phase. Re-read the original requirement + the recorded plan before each phase so scope never drifts. Report the audit result per phase.
 11. SECRETS: never print, echo, log, or commit API keys/tokens. Keys live only in a gitignored `.env` (`.env.example` is the tracked template). If a user pastes a live secret in chat, flag it and tell them to rotate it.
+12. LONG-FORM DELIVERY (paid for on the 87-minute Linux cut, 2026-08-18). A feature-length
+   render does not behave like a 5-minute one, and both failures cost a full render each:
+   - **Remotion buffers every frame to disk before encoding.** Measured: 4.4 GB of scratch at 20%
+     of 156,521 frames, i.e. ~21 GB for the whole timeline, against 10 GB free. Render in
+     SEGMENTS (`--frames=START-END`), delete the temp dir between passes, then `ffmpeg -f concat
+     -c copy`. Peak scratch drops to one segment.
+   - **Remotion's audio mixer expands every scene mp3 to a full-timeline WAV.** At 147 scenes that
+     is unaffordable. Render `--muted`, build the track with `scripts/build-audio-track.mjs`
+     (pads each scene to its exact `durationFrames`), then stream-copy the two together. Verify
+     the mux: frame count must equal the spec's, and audio drift must be ~0ms (it was 0).
+   - **`kill <pid>` on a render does not stop it.** `npm exec` is a wrapper; the `node` child keeps
+     running and quietly competes for CPU and disk with whatever you start next. Kill the child
+     too and confirm with `pgrep -f "remotion render"` BEFORE launching a replacement.
+   - **Chapter stamps roll over.** YouTube cannot parse a minute field past 59, so `62:32` silently
+     broke every chapter after the one-hour mark. `gen-upload-kit.mjs` now picks `HH:MM:SS` vs
+     `MM:SS` once per video from its total length.
+   - **`seo.tags` is a separate field from `seo.queries`.** `queries` fills the description's User
+     Queries block; `tags` fills YouTube's tag box (comma-joined, hard-capped at 500 chars). A spec
+     with only `queries` ships an EMPTY tag box. Author both.
