@@ -271,6 +271,79 @@ explicitly, and each new field must be added to every mapping or it silently nev
 `parent`/`links` on the DSA cut, `out`/`series` on the Linux cut, `icon` here. When you add a field
 to an item type, grep every `\.map((c) =>` in `src/scenes/` before you render anything.
 
+## LAW 0o — THE PANE MEASURES ITSELF, AND NOTHING LEAVES IT (owner verdict, 2026-08-21)
+Owner, on the reworked MCP shorts: *"I see the top and bottom are getting overlapped with the
+content inside, there is no room to breathe."* And separately, on a Linux chart: *"the graph is
+kinda like a patty inside a burger."* And on the wire: *"the moment it moves, it just gets hidden
+behind the container."* Three complaints, three symptoms, **one cause**.
+
+`stackBudget()` returned the constant `vertical ? 960 : 430` — a guess at a pane's inner height
+that took no account of what was already in the pane. A three-line premise ate 120px and every
+depiction still sized itself to the full 960, so the surplus went out through the bottom border.
+The chart went the other way: a fixed 168px plot in a 700px card, floating.
+
+**The rules, all of them paid for:**
+
+1. **Measure, never assume.** A pane computes its own budget — stage height, less the caption bar,
+   less the WRAPPED premise, less the vars strip, less its own padding — and publishes it through
+   `BudgetCtx` / `PaneBudget`. Depictions read `stackBudget(v)` and get the truth. If you build a
+   new stage, it provides a budget or its children will overflow it.
+2. **A cap is not a layout.** Row heights capped at 156px against a 700px pane draw content in the
+   top half and leave the rest black — which reads as an unfinished slide. Rows take their real
+   share of the real budget; a ceiling exists only to stop a two-row beat becoming two billboards.
+3. **Fit BOTH axes.** `CodePane` sized its font by height alone, so in 9:16 a 52-character line
+   needed 1060px of a 976px pane and was sliced mid-token. Every fit has two budgets and the
+   smaller one wins.
+4. **`justify-content: center` overflows both ways.** Centred flex content that outgrows its box
+   pushes out of the TOP as well as the bottom. Use `safe center` everywhere content is centred in
+   a fixed box; it degrades to flex-start exactly when it would otherwise overflow.
+5. **Travel by your own width, never by half of it.** A pill positioned `left: pct%` with
+   `translateX(-50%)` has half of itself outside the track at both ends of its run. Use
+   `translateX(-pct%)`: left edge pinned at the start, right edge at the end, never a pixel outside.
+6. **Breathing room is not smaller type.** Owner: *"if you go too small with content for giving
+   breathable space, user wont see shit."* Space comes from carrying LESS on the beat, never from
+   shrinking what is there. In 9:16, growing the type and cutting a row is the correct trade.
+7. **A squashed viewBox squashes everything inside it.** `preserveAspectRatio="none"` distorts
+   strokes and, worse, TYPE. Pin strokes with `vectorEffect="non-scaling-stroke"` and lay every
+   label out as HTML over the plot. A circle in a squashed viewBox is an ellipse — position an HTML
+   dot instead.
+8. **One card per thing.** A titled effect pane holding a chart that draws its own titled card is a
+   box in a box with a gutter of dead space between them.
+
+Corollary — **the sweep is the only honest check.** Render 2-3 frames per scene at both aspects
+into a contact sheet before rendering a single video. Every fault above was invisible in the code
+and obvious in a still. And read the FULL still, not the thumbnail: a dark panel on a dark ground
+looks like empty space when it is scaled down, so measure content extents programmatically before
+concluding a pane is under-filled.
+
+## LAW 0p — ANSWER THE TITLE, AND ANSWER IT FOR A BEGINNER (owner verdict, 2026-08-21)
+Owner on MCP chapter one: *"mcp 00 is SHITTY AF. The title says whats claude and how claude works,
+and inside I see you start explaining about using anthropics claude as an API. Dude WTF. Is it even
+beginner friendly? Ask these questions often."*
+
+The chapter opened on `client.messages.create(...)` and its arguments. Every sentence was true and
+the whole thing answered a question a first-time viewer has not asked yet. A title is a promise;
+the first two minutes either pay it or the viewer leaves.
+
+**The check, on every chapter, before writing a single beat:**
+- Read the title as a stranger. What does it promise? Does beat one deliver THAT, or the mechanism
+  behind it?
+- Name the thing before you use it. "What Claude actually is, and what it genuinely cannot reach"
+  comes before any argument of any call.
+- A limitation is a better opening than a feature. The viewer has felt the limitation; they have
+  not yet felt the need for the feature.
+- Mechanism lands only once it is the ANSWER to a question the viewer is now holding.
+
+Corollary — **numbering with a hole is a defect.** The MCP series shipped as 00-09, 11, 12: twelve
+chapters, no chapter ten, because two slugs were typed from the brief index rather than the chapter
+index. Nobody reviewing the content would catch it; a viewer scanning the playlist catches it
+immediately. Check the sequence, not just the contents.
+
+Corollary — **a builder that is behind its output is a trap.** `briefs/mcp/ep01.json` carried two
+beats that `ep01_03.py` had never produced, because the JSON was patched directly in a later pass.
+Re-running the builder would have silently deleted them. Before you run a brief builder, diff its
+scene ids against the JSON it writes.
+
 ## LAW 0f — WRITE FOR A MOUTH, NOT A PAGE (owner verdict, 2026-08-16)
 Owner: *"You often use IT, and you speak about something that's on the screen, but you forget
 what the context is about, and you start speaking in a very AI manner. Humans are not adaptable

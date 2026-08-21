@@ -16,7 +16,39 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  MCP_DEPRECATED: {
+export const MANIFEST = {  MCP_MESH: {
+    category: "diagram", family: "diagram", data_key: "mcpMesh",
+    purpose: "One beat of an MCP lesson drawn as an M-by-N MESH: every client wired to every service, one wire at a time, until the count on screen is the argument; then a hub lands and the same job re-routes through M+N connections. The tally reads the wires actually drawn, so it can never disagree with the picture. Every element is timed from its own atWord so the picture lands on the spoken word.",
+    use_when: "a beat turns on how many integrations something costs, or on a hub replacing point-to-point wiring",
+    fields: {
+      headline: {t: 'string', max: 48, note: "Scene headline, <=48 chars, one [accent] phrase."},
+      cells: {t: 'items', note: "2-10 nodes. text = 'client' for a node on the left, 'server' for one on the right, 'hub' for the thing that collapses the mesh. label = its name (<=18). icon = its glyph, e.g. si:slack or lucide:database. atWord = the word its wires draw on."},
+      ends: {t: 'items', note: "unused by this picture; leave empty."},
+      vars: {t: 'items', note: "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."},
+      caption: {t: 'string', max: 30, note: "Caption above the picture, <=30 chars, specific to THIS beat."},
+      premise: {t: 'string', max: 150, note: "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at and what stands for what. Carries NO marker (LAW 0l)."},
+      color: {t: 'string', note: "Accent SemColor for the beat."},
+      atWord: {t: 'anchor', note: "The word the picture itself resolves on."},
+    },
+    example: {mcpMesh: {"headline":"Why a standard [had to exist]","caption":"the multiplication","premise":"Four apps on the left, four services on the right. Every line is an integration somebody has to write and maintain.","color":"orange","cells":[{"label":"editor","icon":"lucide:file-code","text":"client","atWord":5},{"label":"chat","icon":"lucide:message-square","text":"client","atWord":8},{"label":"GitHub","icon":"si:github","text":"server"},{"label":"Slack","icon":"si:slack","text":"server"},{"label":"MCP","icon":"lucide:git-fork","text":"hub","atWord":24}]}},
+  },
+  MCP_REACH: {
+    category: "diagram", family: "diagram", data_key: "mcpReach",
+    purpose: "One beat of an MCP lesson, drawn as a REACH BOUNDARY: the model sits on its own side of a hard line, the things in your world sit on the other, and each one is shown as reachable or out of reach. The bridge that crosses the line is your code. Use it for the beginner beats that have to establish what the model genuinely cannot touch on its own before any tool wiring makes sense. Every element is timed from its own atWord so the picture lands on the spoken word.",
+    use_when: "a beat turns on what the model can and cannot reach, or on the moment something out of reach becomes reachable",
+    fields: {
+      headline: {t: 'string', max: 48, note: "Scene headline, <=48 chars, one [accent] phrase."},
+      cells: {t: 'items', note: "0-8 things in your world. label = its name (<=22). sub = the gloss under it (<=44). icon = its glyph, e.g. lucide:folder or si:slack. text = 'out' when the model cannot reach it, 'in' once it can, 'bridge' for the crossing itself. atWord = the word it resolves on."},
+      ends: {t: 'items', note: "0-2 side names. label[0] = what stands on the model's side (<=16), label[1] = what stands on yours (<=16)."},
+      vars: {t: 'items', note: "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."},
+      caption: {t: 'string', max: 30, note: "Caption above the picture, <=30 chars, specific to THIS beat."},
+      premise: {t: 'string', max: 150, note: "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at and what stands for what. Carries NO marker (LAW 0l)."},
+      color: {t: 'string', note: "Accent SemColor for the beat."},
+      atWord: {t: 'anchor', note: "The word the picture itself resolves on."},
+    },
+    example: {mcpReach: {"headline":"What Claude [cannot touch]","caption":"the hard line","premise":"Claude runs on Anthropic's servers. Everything on the right is on YOUR machine, and the line between them is real.","color":"purple","ends":[{"label":"CLAUDE"},{"label":"YOUR MACHINE"}],"cells":[{"label":"your files","sub":"notes, code, todo.md","icon":"lucide:folder","text":"out","atWord":6},{"label":"your database","sub":"the rows behind your app","icon":"lucide:database","text":"out","atWord":12},{"label":"your code","sub":"the one thing that CAN reach both","icon":"lucide:terminal","text":"bridge","atWord":20}]}},
+  },
+  MCP_DEPRECATED: {
     category: "diagram", family: "diagram", data_key: "mcpDeprecated",
     purpose: "One beat of an MCP lesson: a feature that still works, is still in the spec, and is on a clock — what it is, when it was deprecated, what replaces it, and the date it becomes eligible for removal. Every element is timed from its own atWord so the picture lands on the spoken word.",
     use_when: "",

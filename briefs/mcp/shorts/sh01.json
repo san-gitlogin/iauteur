@@ -63,44 +63,70 @@
   },
   {
    "id": "s02",
-   "type": "MCP_CONTROL",
+   "type": "MCP_MESH",
    "transition": "wipe",
    "background": "zoneA",
-   "key": "mcpControl",
+   "key": "mcpMesh",
    "headline": "Why a standard [had to exist]",
    "color": "orange",
    "caption": "the multiplication",
-   "premise": "Every app that wants a tool, times every tool that exists. Without a standard, somebody writes each square.",
-   "durationFrames": 820,
-   "narration": "It's worth seeing why anyone bothered inventing a protocol, because the answer is a multiplication. ^Say there are four apps that want tool access \u2014 your editor, a chat client, an I D E, a terminal agent. ^And four services worth reaching: GitHub, Slack, Postgres, the filesystem. ^Without a standard, that's sixteen separate integrations, because every app writes its own version of every connection, and none of that work is shareable. ^With a standard, it's four servers and four clients \u2014 eight pieces instead of sixteen, and the numbers diverge fast as either side grows. That's the entire economic argument for MCP, and it's why the shape caught on so quickly.",
+   "premise": "Four apps on the left, four services on the right. Every line is an integration somebody has to write and then maintain.",
+   "durationFrames": 880,
+   "narration": "It's worth seeing why anyone bothered inventing a protocol, because the answer is a multiplication. Say four different apps want tool access \u2014 ^your editor, ^a chat client, ^an I D E, ^a terminal agent. And four services worth reaching \u2014 ^GitHub, ^Slack, ^Postgres, ^the filesystem. Without a standard, every app writes its own version of every connection, so watch what that actually costs. Sixteen separate integrations, and not one of them is shareable with anybody else. ^With a standard it's four servers and four clients \u2014 eight pieces instead of sixteen, and the gap widens fast as either side grows. That's the entire economic argument for MCP, and it's why the shape caught on as quickly as it did.",
    "cells": [
     {
-     "label": "4 apps",
-     "sub": "editor \u00b7 chat \u00b7 IDE \u00b7 agent",
-     "owner": "code",
-     "mark": true,
-     "icon": "lucide:layout-grid"
+     "label": "editor",
+     "icon": "lucide:file-code",
+     "text": "client",
+     "mark": true
     },
     {
-     "label": "4 services",
-     "sub": "GitHub \u00b7 Slack \u00b7 Postgres \u00b7 files",
-     "owner": "code",
-     "mark": true,
-     "icon": "lucide:cloud"
+     "label": "chat client",
+     "icon": "lucide:message-square",
+     "text": "client",
+     "mark": true
     },
     {
-     "label": "without a standard",
-     "sub": "4 \u00d7 4 = 16 integrations, none shared",
-     "owner": "code",
-     "mark": true,
-     "icon": "lucide:git-fork"
+     "label": "IDE",
+     "icon": "lucide:code-xml",
+     "text": "client",
+     "mark": true
     },
     {
-     "label": "with MCP",
-     "sub": "4 servers + 4 clients = 8 pieces",
-     "owner": "ai",
-     "mark": true,
-     "icon": "lucide:network"
+     "label": "agent",
+     "icon": "lucide:bot",
+     "text": "client",
+     "mark": true
+    },
+    {
+     "label": "GitHub",
+     "icon": "si:github",
+     "text": "server",
+     "mark": true
+    },
+    {
+     "label": "Slack",
+     "icon": "si:slack",
+     "text": "server",
+     "mark": true
+    },
+    {
+     "label": "Postgres",
+     "icon": "si:postgresql",
+     "text": "server",
+     "mark": true
+    },
+    {
+     "label": "files",
+     "icon": "lucide:folder",
+     "text": "server",
+     "mark": true
+    },
+    {
+     "label": "MCP",
+     "icon": "lucide:git-fork",
+     "text": "hub",
+     "mark": true
     }
    ]
   },

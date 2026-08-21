@@ -2,20 +2,27 @@ import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Scene} from '../types';
 import {Headline, SourceFooter, useScale} from '../ui';
-import {CodeStage, CodeLine} from '../dsaViz';
+import {SoloStage} from '../dsaViz';
 import {McpViz, McpItem} from '../mcpViz';
 
-// MCP_PROGRESS — log lines arriving at the client callback and a progress bar reporting the exact percentage the server sent.
-// LEFT: the code, lit line by line with its plain-English note beneath (LAW 0e rule 2).
-// RIGHT: the protocol moving, on the same words.
+// MCP_REACH — the reach boundary: the model on its own side of a hard line, the things
+// in your world on the other, each one reachable or not, and your code as the only
+// thing that crosses.
+//
+// Chapter one used to open on `client.messages.create(...)`. Owner, 2026-08-21: *"The
+// title says whats Claude and how Claude works, and inside I see you start explaining
+// about using anthropics claude as an API. Dude WTF. Is it even beginner friendly?"*
+// He is right — a beginner needs to see WHAT the thing is and what it cannot do before
+// a single argument means anything, and that is a picture, not a code listing. This is
+// that picture.
+//
+// No code pane: this beat has nothing to read line by line.
 // Timing: every element resolves from its own atWord (LAW 0i). No fixed intervals.
-export const McpProgress: React.FC<{scene: Scene}> = ({scene}) => {
+export const McpReach: React.FC<{scene: Scene}> = ({scene}) => {
   const {scale, vertical} = useScale();
-  const d = scene.data.mcpProgress;
+  const d = scene.data.mcpReach;
   if (!d) return <AbsoluteFill />;
 
-  const lines: CodeLine[] = (d.lines ?? []).map((l) => ({text: l.text ?? '', note: l.detail, atWord: l.atWord}));
-  if (!lines.length) return <AbsoluteFill />;
   const cells: McpItem[] = (d.cells ?? []).map((c) => ({
     label: c.label, sub: c.sub, value: c.value, color: c.color, atWord: c.atWord,
     text: c.text, owner: c.owner, dir: c.dir, out: c.out,
@@ -25,7 +32,7 @@ export const McpProgress: React.FC<{scene: Scene}> = ({scene}) => {
   }));
   const ends = (d.ends ?? []).map((e) => e.label ?? '');
   const vars = (d.vars ?? []).map((x) => ({label: x.label ?? '', sub: x.sub, atWord: x.atWord}));
-  const accent = (d.color ?? "blue") as any;
+  const accent = (d.color ?? 'purple') as any;
 
   return (
     <AbsoluteFill>
@@ -41,9 +48,9 @@ export const McpProgress: React.FC<{scene: Scene}> = ({scene}) => {
           minHeight: 0,
         }}
       >
-        <CodeStage lines={lines} accent={accent} caption={d.caption} codeTitle={d.codeTitle} vars={vars} premise={d.premise}>
-          <McpViz kind="progress-stream" items={cells} ends={ends} accent={accent} />
-        </CodeStage>
+        <SoloStage accent={accent} caption={d.caption} vars={vars} premise={d.premise}>
+          <McpViz kind="reach" items={cells} ends={ends} accent={accent} />
+        </SoloStage>
       </div>
       {scene.data.source ? <SourceFooter text={scene.data.source} /> : null}
     </AbsoluteFill>

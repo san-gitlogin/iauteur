@@ -233,6 +233,8 @@ export const TYPES = [
   'MCP_TERMINAL',
   'MCP_ELICIT',
   'MCP_DEPRECATED',
+  'MCP_REACH',
+  'MCP_MESH',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

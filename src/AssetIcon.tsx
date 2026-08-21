@@ -35,6 +35,16 @@ const readableOn = (bg: string): string => (lumOf(bg) > 0.5 ? '#111214' : '#F5F3
 const ensureContrast = (preferred: string, bg: string): string =>
   contrastRatio(preferred, bg) >= 2.2 ? preferred : readableOn(bg);
 
+// Lucide draws its 2px stroke for a 24px glyph. Scaled up to the 50-100px sizes a
+// diagram node uses, that 2px becomes a 6-8px marker-pen line and every icon reads
+// as a chunky sticker. Owner, 2026-08-21: *"The icon is also very thick, I want it
+// to be thin and follow the modern dark design pattern. Seeing it thick everywhere
+// seems weird."* So the stroke THINS as the glyph grows, holding the optical weight
+// roughly constant — the same thing an icon designer does by hand when they ship a
+// 48px cut of a 24px icon.
+const hairline = (size: number): number =>
+  Math.max(0.85, Math.min(2, 1.9 * Math.pow(24 / Math.max(size, 1), 0.55)));
+
 export const AssetIcon: React.FC<{
   asset?: string | null;
   size?: number;
@@ -137,7 +147,7 @@ export const AssetIcon: React.FC<{
     if (Comp) {
       const bg = bare ? on ?? t.colors.panel : t.colors.panel;
       const color = ensureContrast(tint ?? t.colors.accent2, bg);
-      if (bare) return <Comp size={size} color={color} strokeWidth={2} />;
+      if (bare) return <Comp size={size} color={color} strokeWidth={hairline(size)} />;
       return (
         <div
           style={{
@@ -152,7 +162,7 @@ export const AssetIcon: React.FC<{
             boxShadow: t.style.glow > 0 ? `0 0 ${20 * t.style.glow}px ${t.colors.glowSoft}` : undefined,
           }}
         >
-          <Comp size={size * 0.55} color={color} strokeWidth={2} />
+          <Comp size={size * 0.55} color={color} strokeWidth={hairline(size * 0.55)} />
         </div>
       );
     }
@@ -167,7 +177,7 @@ export const AssetIcon: React.FC<{
     const Pending = (lucide as Record<string, any>).ImageOff ?? (lucide as Record<string, any>).Image ?? (lucide as Record<string, any>).HelpCircle;
     const bg = bare ? on ?? t.colors.panel : t.colors.panel;
     const glyph = ensureContrast(tint ?? t.colors.muted, bg);
-    if (bare) return <Pending size={size} color={glyph} strokeWidth={1.8} />;
+    if (bare) return <Pending size={size} color={glyph} strokeWidth={hairline(size)} />;
     return (
       <div
         style={{
@@ -181,7 +191,7 @@ export const AssetIcon: React.FC<{
           justifyContent: 'center',
         }}
       >
-        <Pending size={size * 0.5} color={glyph} strokeWidth={1.8} />
+        <Pending size={size * 0.5} color={glyph} strokeWidth={hairline(size * 0.5)} />
       </div>
     );
   }

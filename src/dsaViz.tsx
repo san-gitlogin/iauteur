@@ -120,10 +120,22 @@ export const CodePane: React.FC<{
   // not the whole stage. Budgeting 1010 there meant `fit` never bound and the font
   // stayed at the small BASE while half the pane sat empty, which is why code was
   // unreadable at phone size. Correct budget, and a BASE that lets it grow.
-  const AVAIL = (v.vertical ? 540 : 500) * v.scale;    // pane height less chrome
+  //
+  // And it has to fit the WIDTH too. Height was the only constraint here, so in 9:16
+  // the font grew to 34px, a 52-character line needed ~1060px of a 976px pane, and
+  // every long line was sliced off at the right border mid-token — `call_tool("read_
+  // note", .` with the rest of the call simply gone (owner, 2026-08-21). A listing you
+  // cannot read the end of is not a listing. Both budgets bind now, and the smaller
+  // one wins.
+  const stageH = STAGE_H(v.vertical) * v.scale;
+  const AVAIL = (v.vertical ? stageH * 0.46 - 28 * v.scale : stageH) - (v.vertical ? 96 : 96) * v.scale;
   const BASE = (v.vertical ? 34 : 21) * v.scale;
-  const fit = (AVAIL / Math.max(lines.length, 1) - 4 * v.scale) / 1.5;
-  const mono = Math.max(11 * v.scale, Math.min(BASE, fit));
+  const fitH = (AVAIL / Math.max(lines.length, 1) - 4 * v.scale) / 1.5;
+  // pane width less the window padding and the line-number gutter; mono advance ≈ 0.6em
+  const paneW = (v.vertical ? 976 : 1776 * 0.48 - 14) * v.scale - (28 + 34) * v.scale;
+  const longest = Math.max(...lines.map((l) => (l.text ?? '').length), 1);
+  const fitW = paneW / (longest * 0.605);
+  const mono = Math.max(11 * v.scale, Math.min(BASE, fitH, fitW));
 
   // the line currently being taught = the last one whose word has been spoken
   let active = -1;
@@ -225,11 +237,24 @@ export const StatePane: React.FC<{
    *  would often refer to and remember what we are speaking about."* Unanchored on
    *  purpose: it is the frame around the beat, not a step inside it. */
   premise?: string;
+  /** Fraction of the scene's stage height this pane occupies — 1 when it is the whole
+   *  stage, 0.54 when it sits above the code pane in 9:16. The pane needs it to know
+   *  how much room it is really working with. */
+  share?: number;
   children: React.ReactNode;
-}> = ({caption, accent, vars, premise, children}) => {
+}> = ({caption, accent, vars, premise, share = 1, children}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
+
+  // What is left for the picture once every band of chrome has taken its cut.
+  const paneH = STAGE_H(v.vertical) * share - (share < 1 ? (v.vertical ? 20 : 28) : 0);
+  const capH = caption ? (v.vertical ? 18 : 17) * 1.4 + 20 + 1.5 : 0;
+  const varH = vars?.length ? 14.5 * 1.5 + 18 + 1.5 : 0;
+  const padH = (v.vertical ? 22 : 24) * 2;
+  const budget = Math.max(140, paneH - capH - premiseH(premise, v.vertical) - varH - padH);
+
   return (
+    <BudgetCtx.Provider value={budget}>
     <div
       style={{
         flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column',
@@ -265,7 +290,14 @@ export const StatePane: React.FC<{
           {premise}
         </div>
       ) : null}
-      <div style={{flex: 1, minHeight: 0, padding: (v.vertical ? 20 : 24) * v.scale, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14 * v.scale}}>
+      {/* `safe center`, not `center`. Centred flex content that outgrows its box
+          overflows BOTH ways, so in 9:16 the picture pushed up under the premise and
+          down through the bottom border — owner, 2026-08-21: *"the top and bottom are
+          getting overlapped with the content inside, there is no room to breathe."*
+          `safe` degrades to flex-start the moment it would overflow, so the top edge
+          is never crossed, and the depictions below size themselves to this box so
+          the bottom is not either. */}
+      <div style={{flex: 1, minHeight: 0, padding: (v.vertical ? 22 : 24) * v.scale, display: 'flex', flexDirection: 'column', justifyContent: 'safe center', gap: 14 * v.scale}}>
         {children}
       </div>
       {vars?.length ? (
@@ -299,6 +331,7 @@ export const StatePane: React.FC<{
         </div>
       ) : null}
     </div>
+    </BudgetCtx.Provider>
   );
 };
 
@@ -328,7 +361,8 @@ export const CodeStage: React.FC<{
         <CodePane lines={lines} accent={accent} title={codeTitle} />
       </div>
       <div style={{display: 'flex', flex: vertical ? '1 1 54%' : '1 1 52%', minHeight: 0}}>
-        <StatePane caption={caption} accent={accent} vars={vars} premise={premise}>{children}</StatePane>
+        <StatePane caption={caption} accent={accent} vars={vars} premise={premise}
+                   share={vertical ? 0.54 : 1}>{children}</StatePane>
       </div>
     </div>
   );
@@ -801,12 +835,48 @@ const layoutTree = (cells: VizCell[]) => {
   return {nodes, maxX, maxD, key, xOf, depth};
 };
 
-/** How much vertical room a stacked list actually has inside a StatePane, less the
- *  caption, the premise line and the chrome. The vertical pane is far taller than
- *  the wide one, and hard-coding the wide number left a six-row list occupying a
- *  third of a Shorts frame in type too small to read on a phone (owner, 2026-08-20:
- *  *"viewability is professional and feasible (not too short for users to stare)"*). */
-export const stackBudget = (v: ReturnType<typeof useViz>) => (v.vertical ? 960 : 430);
+/** How much vertical room a depiction actually has inside its StatePane.
+ *
+ *  This used to be the constant `vertical ? 960 : 430` — a guess at the pane's inner
+ *  height that took no account of what was ABOVE the picture. So a three-line premise
+ *  ate 120px of the pane and every depiction still sized itself to the full 960, and
+ *  the surplus went straight out through the bottom border. That is one bug wearing
+ *  four faces, and the owner sent all four on 2026-08-21: a premise sitting on top of
+ *  the machines in the relay short, a payload overrunning the vars strip, three cards
+ *  ballooning until the last one was cut off by the frame, and an elicitation pane
+ *  spilling over the code window beneath it.
+ *
+ *  The pane now MEASURES itself — stage height, less the caption bar, less the wrapped
+ *  premise, less the vars strip, less its own padding — and publishes the remainder
+ *  here. Every depiction that lays out by `stackBudget` gets the truth instead of a
+ *  guess, in both aspects, and the surplus stops existing. Design px, not device px:
+ *  callers scale it themselves. */
+const BudgetCtx = React.createContext<number | null>(null);
+export const stackBudget = (v: ReturnType<typeof useViz>) => {
+  const measured = React.useContext(BudgetCtx);
+  return measured ?? (v.vertical ? 960 : 430);
+};
+
+/** Publish a measured budget to the depictions inside a pane that is not a StatePane
+ *  — the Linux effect pane, for one. Same contract: design px. */
+export const PaneBudget: React.FC<{value: number; children: React.ReactNode}> = ({value, children}) => (
+  <BudgetCtx.Provider value={value}>{children}</BudgetCtx.Provider>
+);
+
+/** The stage every MCP and DSA scene declares for its two-up rig, in design px. If a
+ *  scene ever departs from it, it must pass its own height to the stage instead. */
+export const STAGE_H = (vertical: boolean) => (vertical ? 1364 : 620);
+
+/** Height of the premise block once it has wrapped, in design px. Estimated from the
+ *  character count against the pane's width — deterministic, which a DOM measurement
+ *  inside Remotion's still-by-still capture is not. */
+const premiseH = (text: string | undefined, vertical: boolean) => {
+  if (!text) return 0;
+  const perLine = vertical ? 44 : 60;
+  const lines = Math.max(1, Math.ceil(text.length / perLine));
+  const font = vertical ? 21 : 19.5;
+  return lines * font * 1.45 + (vertical ? 24 : 24) + (vertical ? 16 : 18);
+};
 
 /** BFS — the graph as rings around the start, with each node's DISTANCE on the node. */
 export const GridBFS: React.FC<DsaVizProps> = ({cells, accent}) => {

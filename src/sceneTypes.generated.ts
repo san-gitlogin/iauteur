@@ -4,6 +4,8 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'MCP_MESH'
+  | 'MCP_REACH'
   | 'MCP_DEPRECATED'
   | 'MCP_ELICIT'
   | 'MCP_TERMINAL'
@@ -357,6 +359,32 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type McpMeshScene = SceneCommon<'MCP_MESH'> & { data: {
+    mcpMesh: {
+      headline?: string;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type McpReachScene = SceneCommon<'MCP_REACH'> & { data: {
+    mcpReach: {
+      headline?: string;
+      cells?: Array<Record<string, unknown>>;
+      ends?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
 
 export type McpDeprecatedScene = SceneCommon<'MCP_DEPRECATED'> & { data: {
     mcpDeprecated: {
@@ -5123,6 +5151,8 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  MCP_MESH: McpMeshScene;
+  MCP_REACH: McpReachScene;
   MCP_DEPRECATED: McpDeprecatedScene;
   MCP_ELICIT: McpElicitScene;
   MCP_TERMINAL: McpTerminalScene;
@@ -5469,6 +5499,8 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | McpMeshScene
+  | McpReachScene
   | McpDeprecatedScene
   | McpElicitScene
   | McpTerminalScene

@@ -3,6 +3,7 @@ import {useCurrentFrame, interpolate, useVideoConfig} from 'remotion';
 import {useTheme, wordToFrame} from './themes';
 import {SemColor} from './types';
 import {useScale, useSem, hexA} from './ui';
+import {PaneBudget, STAGE_H} from './dsaViz';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -293,7 +294,18 @@ export const EffectPane: React.FC<{
   const {scale, vertical} = useScale();
   const accent = sem(color);
   const rad = 12 * scale * t.style.cornerRadius;
+  // What the depiction inside actually has to work with: the effect pane's share of
+  // the stage, less its title bar, its padding, and the verdict strip that sits under
+  // every stage. Without this a chart sized itself to a constant and floated in the
+  // middle of a card three times its height (owner, 2026-08-21: *"a patty inside a
+  // burger"*).
+  const budget = Math.max(150,
+    STAGE_H(vertical) * (vertical ? 0.66 : 1) - (vertical ? 22 : 0)
+    - (title ? (vertical ? 19 : 18) * 1.4 + 22 + 1.5 : 0)
+    - (vertical ? 22 : 26) * 2
+    - (vertical ? 96 : 74));
   return (
+    <PaneBudget value={budget}>
     <div
       style={{
         flex: 1,
@@ -333,7 +345,7 @@ export const EffectPane: React.FC<{
           padding: (vertical ? 22 : 26) * scale,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'safe center',
           gap: 14 * scale,
           minHeight: 0,
         }}
@@ -341,6 +353,7 @@ export const EffectPane: React.FC<{
         {children}
       </div>
     </div>
+    </PaneBudget>
   );
 };
 

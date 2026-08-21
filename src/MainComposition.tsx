@@ -347,10 +347,14 @@ import {McpFlags} from './scenes/McpFlags';
 import {McpTerminal} from './scenes/McpTerminal';
 import {McpElicit} from './scenes/McpElicit';
 import {McpDeprecated} from './scenes/McpDeprecated';
+import {McpReach} from './scenes/McpReach';
+import {McpMesh} from './scenes/McpMesh';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
 const registry: Record<string, React.FC<{scene: Scene}>> = {
+  MCP_MESH: McpMesh,
+  MCP_REACH: McpReach,
   MCP_DEPRECATED: McpDeprecated,
   MCP_ELICIT: McpElicit,
   MCP_TERMINAL: McpTerminal,

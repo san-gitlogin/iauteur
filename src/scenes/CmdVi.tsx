@@ -38,10 +38,10 @@ export const CmdVi: React.FC<{scene: Scene}> = ({scene}) => {
       <div
         style={{
           position: 'absolute',
-          top: (d.headline ? (vertical ? 340 : 212) : 90) * scale,
+          top: (d.headline ? (vertical ? 322 : 212) : 90) * scale,
           left: (vertical ? 52 : 72) * scale,
           right: (vertical ? 52 : 72) * scale,
-          height: (vertical ? 1180 : 620) * scale,
+          height: (vertical ? 1364 : 620) * scale,
           display: 'flex',
           minHeight: 0,
         }}

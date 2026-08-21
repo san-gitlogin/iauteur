@@ -73,7 +73,7 @@ const COURSES = {
       'mcp-00-how-claude-works', 'mcp-01-what-is-mcp', 'mcp-02-three-primitives',
       'mcp-03-build-a-server', 'mcp-04-client-and-loop', 'mcp-05-resources-prompts',
       'mcp-06-sampling', 'mcp-07-roots', 'mcp-08-notifications',
-      'mcp-09-transport', 'mcp-11-elicitation', 'mcp-12-everything',
+      'mcp-09-transport', 'mcp-10-elicitation', 'mcp-11-everything',
     ],
     numbered: () => true,
     label: (i, name) => `Chapter ${String(i + 1).padStart(2, '0')} — ${name}`,

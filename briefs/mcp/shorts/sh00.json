@@ -4,20 +4,20 @@
   "format": "short",
   "fps": 30,
   "screenplay": "explainer",
-  "onePayoff": "Every Claude app is one API call in a loop \u2014 and MCP is what fills that call with tools.",
-  "openLoop": "Everyone says 'call the API'. Nobody shows you what's actually in the envelope.",
-  "analogy": "THE ENVELOPE - you post a conversation, you get one reply back.",
+  "onePayoff": "Claude cannot reach anything on your machine. Your code can \u2014 and MCP is the agreed way to describe what your code is offering.",
+  "openLoop": "Claude will answer anything you ask, and then fail at 'check my calendar'. Why?",
+  "analogy": "THE HARD LINE - the model on one side, your machine on the other, your code the only crossing.",
   "seo": {
-   "title": "The Claude API In 90 Seconds (Before You Touch MCP)",
-   "hook": "If you've only used Claude through a chat box, the API underneath is simpler than you thin",
-   "description": "Every Claude app is one API call in a loop \u2014 and MCP is what fills that call with tools.",
+   "title": "Why Claude Can't Read Your Files (And What Does)",
+   "hook": "Claude will answer almost anything you ask it. Ask it to open one file on your laptop, and",
+   "description": "Claude cannot reach anything on your machine. Your code can \u2014 and MCP is the agreed way to describe what your code is offering.",
    "tags": [
-    "claude api",
+    "claude",
     "anthropic",
-    "python",
     "mcp",
+    "ai tools",
     "llm",
-    "api tutorial"
+    "beginner"
    ],
    "hashtags": [
     "#mcp",
@@ -37,8 +37,8 @@
   "logo": "img:channel_logo.png"
  },
  "cover": {
-  "title": "ONE CALL, FOUR ARGS",
-  "badge": "Claude's API",
+  "title": "IT CAN'T READ YOUR FILES",
+  "badge": "How Claude works",
   "asset": "si:anthropic",
   "frames": 2
  },
@@ -48,10 +48,10 @@
    "type": "HOOK",
    "background": "zoneA",
    "durationFrames": 230,
-   "narration": "If you've only used Claude through a chat box, the API underneath is simpler than you think.",
+   "narration": "Claude will answer almost anything you ask it. Ask it to open one file on your laptop, and it can't.",
    "data": {
-    "headline": "ONE CALL, FOUR ARGS",
-    "subtext": "claude's api",
+    "headline": "IT CAN'T READ YOUR FILES",
+    "subtext": "how claude works",
     "heroAsset": "si:anthropic",
     "headlineAtWord": 1,
     "heroAtWord": 8
@@ -63,145 +63,87 @@
   },
   {
    "id": "s02",
-   "type": "MCP_API_ANATOMY",
+   "type": "MCP_REACH",
    "transition": "wipe",
    "background": "zoneC",
-   "key": "mcpApi",
-   "headline": "The call, [taken apart]",
+   "key": "mcpReach",
+   "headline": "What Claude [cannot do]",
    "color": "purple",
-   "caption": "one API call",
-   "codeTitle": "first_call.py",
-   "premise": "Claude is an HTTP API. You send a list of messages, you get one message back. Nothing else is happening.",
-   "durationFrames": 900,
-   "narration": "Here's the whole thing. |You import the client and create it, and it quietly reads your key out of an environment variable, which is why you never see the key in the code. |Then messages dot create sends the conversation and waits. That single call is the entire API \u2014 everything else you'll ever write is arguments to it. ^Model picks which Claude answers, and Sonnet is the fast, affordable one. ^Max tokens is a ceiling on the reply, not a target, so a high ceiling costs nothing by itself. ^And messages is the conversation so far, where every entry carries a role, either user or assistant. |The reply comes back as a list of content blocks, which is why you index into it rather than printing the message directly.",
-   "lines": [
-    {
-     "text": "from anthropic import Anthropic"
-    },
-    {
-     "text": "client = Anthropic()",
-     "detail": "It reads ANTHROPIC_API_KEY from your environment.",
-     "teach": true
-    },
-    {
-     "text": ""
-    },
-    {
-     "text": "message = client.messages.create(",
-     "detail": "The whole API. Everything else is an argument.",
-     "teach": true
-    },
-    {
-     "text": "    model=\"claude-sonnet-5\","
-    },
-    {
-     "text": "    max_tokens=1024,"
-    },
-    {
-     "text": "    messages=[{\"role\": \"user\","
-    },
-    {
-     "text": "               \"content\": \"What is MCP?\"}],"
-    },
-    {
-     "text": ")"
-    },
-    {
-     "text": "print(message.content[0].text)",
-     "detail": "A list of blocks, so you index into it.",
-     "teach": true
-    }
+   "caption": "the hard line",
+   "premise": "Claude runs on Anthropic's machines. Everything on the right is on yours. The dashed line is real.",
+   "ends": [
+    "CLAUDE",
+    "YOUR MACHINE"
    ],
+   "durationFrames": 900,
+   "narration": "Let's start with the thing nobody says out loud. Claude is not a program sitting on your computer. It runs on Anthropic's machines, and you talk to it over the internet \u2014 you send text, it sends text back, and that is the entire relationship. Which means that on its own, ^it cannot open your files. ^It cannot read your database. ^It cannot see your calendar or post a message in your Slack. And none of that is a permission you forgot to switch on. There is simply no way for it to reach across that line.",
    "cells": [
     {
-     "label": "model=",
-     "sub": "which Claude answers \u00b7 Sonnet is fast and cheap",
-     "mark": true,
-     "icon": "lucide:cpu"
+     "label": "your files",
+     "sub": "notes, code, that todo.md on the desktop",
+     "icon": "lucide:folder",
+     "text": "out",
+     "mark": true
     },
     {
-     "label": "max_tokens=",
-     "sub": "a ceiling on the reply, not a target",
-     "mark": true,
-     "icon": "lucide:ruler"
+     "label": "your database",
+     "sub": "every row behind your app",
+     "icon": "lucide:database",
+     "text": "out",
+     "mark": true
     },
     {
-     "label": "messages=[\u2026]",
-     "sub": "the conversation so far, each entry with a role",
-     "mark": true,
-     "icon": "lucide:messages-square"
+     "label": "your calendar, your Slack",
+     "sub": "everything your team actually lives in",
+     "icon": "lucide:calendar",
+     "text": "out",
+     "mark": true
     }
    ]
   },
   {
    "id": "s03",
-   "type": "MCP_API_ANATOMY",
+   "type": "MCP_REACH",
    "transition": "push",
-   "background": "zoneC",
-   "key": "mcpApi",
-   "headline": "The argument [MCP fills]",
-   "color": "purple",
-   "caption": "where the course is going",
-   "codeTitle": "with_tools.py",
-   "premise": "Claude is an HTTP API. You send a list of messages, you get one message back. Nothing else is happening.",
-   "durationFrames": 780,
-   "narration": "One more argument, and it's the reason this whole course exists. |Alongside messages, the call takes tools \u2014 a list describing functions Claude is allowed to ask for. ^Each one is a name, ^a description Claude reads to decide when it's useful, ^and a schema saying what arguments it takes. Claude never runs those functions. Claude just replies saying which one it wants and with what inputs, and your code does the running. |So the question the rest of this course answers is simply: where does that list come from? Writing it by hand for GitHub, for Slack, for your database, forever, is the problem. %MCP is the answer, and now you know exactly which argument MCP is filling.",
-   "lines": [
-    {
-     "text": "client.messages.create("
-    },
-    {
-     "text": "    model=M, max_tokens=1024,"
-    },
-    {
-     "text": "    messages=messages,"
-    },
-    {
-     "text": "    tools=[{                        # <- the hole",
-     "detail": "A list of functions Claude may ask you to run.",
-     "teach": true
-    },
-    {
-     "text": "        \"name\": \"read_note\","
-    },
-    {
-     "text": "        \"description\": \"Read a note by filename\","
-    },
-    {
-     "text": "        \"input_schema\": {...},"
-    },
-    {
-     "text": "    }],"
-    },
-    {
-     "text": ")",
-     "detail": "Where does this list come from? That's MCP.",
-     "teach": true
-    }
+   "background": "zoneA",
+   "key": "mcpReach",
+   "headline": "The one thing [that crosses]",
+   "color": "green",
+   "caption": "your code, in the middle",
+   "premise": "Same line, same three things. The only difference is that your code is now standing in the gap.",
+   "ends": [
+    "CLAUDE",
+    "YOUR MACHINE"
    ],
+   "durationFrames": 880,
+   "narration": "So how does any AI app you have ever used actually do anything? ^Your code does it. Claude replies in ordinary text saying what it wants, and your code \u2014 which lives on your side of the line \u2014 goes and does the work, then hands the result back. ^Your files, ^your database, ^your calendar: all reachable now, but only ever through you. That is the whole trick, and every tool, every integration, every agent you have used works exactly this way. And MCP, the entire subject of this course, is nothing more than an agreed way of describing what sits on your side of that line, so that Claude can ask for it by name.",
    "cells": [
     {
-     "label": "name",
-     "sub": "what the function is called",
-     "mark": true,
-     "icon": "lucide:tag"
+     "label": "your code",
+     "sub": "the one thing standing on both sides",
+     "icon": "lucide:terminal",
+     "text": "bridge",
+     "mark": true
     },
     {
-     "label": "description",
-     "sub": "how Claude decides it's the right one",
-     "mark": true,
-     "icon": "lucide:text"
+     "label": "your files",
+     "sub": "read and written by you, on request",
+     "icon": "lucide:folder",
+     "text": "out",
+     "mark": true
     },
     {
-     "label": "input_schema",
-     "sub": "the arguments, and their types",
-     "mark": true,
-     "icon": "lucide:braces"
-    }
-   ],
-   "vars": [
+     "label": "your database",
+     "sub": "queried by you, never by Claude",
+     "icon": "lucide:database",
+     "text": "out",
+     "mark": true
+    },
     {
-     "label": "MCP fills tools=",
+     "label": "your calendar, your Slack",
+     "sub": "and every check you decide to run first",
+     "icon": "lucide:calendar",
+     "text": "out",
      "mark": true
     }
    ]
@@ -212,9 +154,9 @@
    "transition": "fade",
    "background": "zoneA",
    "durationFrames": 280,
-   "narration": "One call, four arguments \u2014 and MCP is what fills the last one. The full course is on the channel.",
+   "narration": "Claude asks, your code does it. That line is the whole reason MCP exists. Full course on the channel.",
    "data": {
-    "message": "How Claude actually works",
+    "message": "What Claude actually is",
     "sub": "chapter one of twelve"
    },
    "anchors": []

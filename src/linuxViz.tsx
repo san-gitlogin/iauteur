@@ -3,6 +3,7 @@ import {interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import {useTheme, wordToFrame} from './themes';
 import {SemColor} from './types';
 import {useScale, useSem, hexA} from './ui';
+import {stackBudget} from './dsaViz';
 
 // LINUX VIZ — the right-hand pictures for the 109-command masterclass.
 //
@@ -1052,6 +1053,16 @@ export const MetricChart: React.FC<VizProps> = ({items, accent}) => {
     return String(Math.round(x * 100) / 100);
   };
 
+  // The plot FILLS the card it is in. It used to be a fixed 168px band, so in a 9:16
+  // pane with 700px to play with the chart sat as a thin strip with dead space above
+  // and below it inside its own border — owner, 2026-08-21: *"the graph is kinda like
+  // a patty inside a burger."* Height now comes from the pane budget, split between
+  // however many charts the beat declares.
+  const headH = (v.vertical ? 20 : 15.5) * 1.4 + 17;
+  const footH = (v.vertical ? 22 : 17) * 1.5 + 6;
+  const plotH = Math.max(v.vertical ? 190 : 120,
+    stackBudget(v) / charts.length - headH - footH - 24 - (charts.length > 1 ? 12 : 0));
+
   return (
     <Stack gap={12 * v.scale}>
       {charts.map((it, i) => {
@@ -1078,9 +1089,13 @@ export const MetricChart: React.FC<VizProps> = ({items, accent}) => {
           <div
             key={i}
             style={{
-              border: `${1.6 * v.scale}px solid ${hexA(v.t.colors.panelBorder, 0.95)}`,
+              // One chart in a titled effect pane needs no border of its own — the pane
+              // IS its card. Drawing both put a box inside a box with a gutter of dead
+              // space between them.
+              border: charts.length > 1
+                ? `${1.6 * v.scale}px solid ${hexA(v.t.colors.panelBorder, 0.95)}` : 'none',
               borderRadius: v.rad(10),
-              background: hexA(v.t.colors.panel, 0.45),
+              background: charts.length > 1 ? hexA(v.t.colors.panel, 0.45) : 'transparent',
               overflow: 'hidden',
               opacity: 0.35 + on * 0.65,
             }}
@@ -1102,41 +1117,58 @@ export const MetricChart: React.FC<VizProps> = ({items, accent}) => {
             </div>
 
             <div style={{padding: `${8 * v.scale}px ${10 * v.scale}px ${4 * v.scale}px`}}>
+             {/* The plot box is stretched to the card, so the viewBox is squashed on
+                 one axis. Anything drawn INSIDE it inherits that squash — which is why
+                 the axis numbers used to render wide and smeared. Strokes are pinned
+                 with non-scaling-stroke and every label is HTML laid over the top, so
+                 the type stays the type it was set in. */}
+             <div style={{position: 'relative', height: plotH * v.scale}}>
               <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none"
-                style={{width: '100%', height: (v.vertical ? 168 : 132) * v.scale, display: 'block'}}>
+                style={{position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block'}}>
                 {/* gridlines + y ticks, with the actual numbers on them */}
                 {ticks.map((tv, k) => (
-                  <g key={k}>
-                    <line x1={PL} y1={y(tv)} x2={W - PR} y2={y(tv)}
-                      stroke={hexA(v.t.colors.panelBorder, k === 0 ? 0.95 : 0.5)} strokeWidth={0.35} />
-                    <text x={PL - 1.6} y={y(tv) + 1.4} textAnchor="end"
-                      fontSize={3.4} fontFamily={v.t.fonts.mono}
-                      fill={hexA(v.t.colors.muted, 0.95)}>{nice(tv)}</text>
-                  </g>
+                  <line key={k} x1={PL} y1={y(tv)} x2={W - PR} y2={y(tv)} vectorEffect="non-scaling-stroke"
+                    stroke={hexA(v.t.colors.panelBorder, k === 0 ? 0.95 : 0.5)} strokeWidth={1} />
                 ))}
                 {/* the threshold worth naming — capacity, a limit, a saturation point */}
                 {thr != null ? (
-                  <>
-                    <line x1={PL} y1={y(thr)} x2={W - PR} y2={y(thr)}
-                      stroke={hexA(v.sem('red'), 0.85)} strokeWidth={0.45} strokeDasharray="2 1.6" />
-                    <text x={W - PR} y={y(thr) - 1.4} textAnchor="end" fontSize={3.2}
-                      fontFamily={v.t.fonts.mono} fill={hexA(v.sem('red'), 0.95)}>
-                      {it.unit ? `${nice(thr)} ${it.unit}` : nice(thr)}
-                    </text>
-                  </>
+                  <line x1={PL} y1={y(thr)} x2={W - PR} y2={y(thr)} vectorEffect="non-scaling-stroke"
+                    stroke={hexA(v.sem('red'), 0.85)} strokeWidth={1.4} strokeDasharray="6 5" />
                 ) : null}
                 <path d={area} fill={hexA(c, 0.18)} />
-                <path d={line} fill="none" stroke={hexA(c, 0.98)} strokeWidth={0.8}
-                  strokeLinejoin="round" strokeLinecap="round" />
-                <circle cx={x(drawn - 1)} cy={y(now)} r={1.3} fill={c} />
-                {/* x axis: first, middle and last sample */}
-                {[0, Math.floor((pts.length - 1) / 2), pts.length - 1].map((k, j) => (
-                  <text key={j} x={x(k)} y={H - 2} textAnchor={j === 0 ? 'start' : j === 2 ? 'end' : 'middle'}
-                    fontSize={3.2} fontFamily={v.t.fonts.mono} fill={hexA(v.t.colors.muted, 0.85)}>
-                    {it.xLabels?.[j] ?? `t${k}`}
-                  </text>
-                ))}
+                <path d={line} fill="none" stroke={hexA(c, 0.98)} strokeWidth={2.6}
+                  vectorEffect="non-scaling-stroke" strokeLinejoin="round" strokeLinecap="round" />
               </svg>
+
+              {/* axis type, laid over the plot in real pixels */}
+              {ticks.map((tv, k) => (
+                <div key={`y${k}`} style={{
+                  position: 'absolute', left: 0, width: `${PL - 2}%`, textAlign: 'right',
+                  top: `${(y(tv) / H) * 100}%`, transform: 'translateY(-50%)',
+                  ...v.mono(v.vertical ? 15 : 11.5), color: hexA(v.t.colors.muted, 0.95),
+                }}>{nice(tv)}</div>
+              ))}
+              {thr != null ? (
+                <div style={{
+                  position: 'absolute', right: `${PR}%`, top: `${(y(thr) / H) * 100}%`,
+                  transform: 'translateY(-115%)', ...v.mono(v.vertical ? 14.5 : 11),
+                  color: hexA(v.sem('red'), 0.98), fontWeight: 700,
+                }}>{it.unit ? `${nice(thr)} ${it.unit}` : nice(thr)}</div>
+              ) : null}
+              {[0, Math.floor((pts.length - 1) / 2), pts.length - 1].map((k, j) => (
+                <div key={`x${j}`} style={{
+                  position: 'absolute', bottom: 0, left: `${x(k)}%`,
+                  transform: `translateX(${j === 0 ? '0' : j === 2 ? '-100%' : '-50%'})`,
+                  ...v.mono(v.vertical ? 14.5 : 11), color: hexA(v.t.colors.muted, 0.9),
+                }}>{it.xLabels?.[j] ?? `t${k}`}</div>
+              ))}
+              {/* the head of the trace, as a real circle rather than a squashed one */}
+              <div style={{
+                position: 'absolute', left: `${x(drawn - 1)}%`, top: `${(y(now) / H) * 100}%`,
+                transform: 'translate(-50%, -50%)', width: 9 * v.scale, height: 9 * v.scale,
+                borderRadius: 999, background: c, boxShadow: `0 0 ${10 * v.scale}px ${hexA(c, 0.8)}`,
+              }} />
+             </div>
               <div style={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
                 marginTop: 2 * v.scale,

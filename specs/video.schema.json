@@ -524,7 +524,9 @@
               "MCP_FLAGS",
               "MCP_TERMINAL",
               "MCP_ELICIT",
-              "MCP_DEPRECATED"
+              "MCP_DEPRECATED",
+              "MCP_REACH",
+              "MCP_MESH"
             ]
           },
           "narration": {
@@ -594,6 +596,140 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MCP_MESH"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mcpMesh": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "Scene headline, <=48 chars, one [accent] phrase."
+                        },
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-10 nodes. text = 'client' for a node on the left, 'server' for one on the right, 'hub' for the thing that collapses the mesh. label = its name (<=18). icon = its glyph, e.g. si:slack or lucide:database. atWord = the word its wires draw on."
+                        },
+                        "ends": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "unused by this picture; leave empty."
+                        },
+                        "vars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "Caption above the picture, <=30 chars, specific to THIS beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 150,
+                          "description": "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at and what stands for what. Carries NO marker (LAW 0l)."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Accent SemColor for the beat."
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "The word the picture itself resolves on."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MCP_REACH"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mcpReach": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48,
+                          "description": "Scene headline, <=48 chars, one [accent] phrase."
+                        },
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-8 things in your world. label = its name (<=22). sub = the gloss under it (<=44). icon = its glyph, e.g. lucide:folder or si:slack. text = 'out' when the model cannot reach it, 'in' once it can, 'bridge' for the crossing itself. atWord = the word it resolves on."
+                        },
+                        "ends": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-2 side names. label[0] = what stands on the model's side (<=16), label[1] = what stands on yours (<=16)."
+                        },
+                        "vars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "Caption above the picture, <=30 chars, specific to THIS beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 150,
+                          "description": "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at and what stands for what. Carries NO marker (LAW 0l)."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Accent SemColor for the beat."
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "The word the picture itself resolves on."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

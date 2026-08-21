@@ -672,3 +672,5 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | MCP_TERMINAL |  | headline, steps, promptLabel, cwd, stageTitle, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
 | MCP_ELICIT |  | headline, lines, cells, ends, vars, caption, premise, codeTitle, atWord, color |
 | MCP_DEPRECATED |  | headline, cells, ends, vars, caption, premise, atWord, color |
+| MCP_REACH | a beat turns on what the model can and cannot reach, or on the moment something out of reach becomes reachable | headline≤48, cells, ends, vars, caption≤30, premise≤150, color, atWord |
+| MCP_MESH | a beat turns on how many integrations something costs, or on a hub replacing point-to-point wiring | headline≤48, cells, ends, vars, caption≤30, premise≤150, color, atWord |

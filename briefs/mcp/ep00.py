@@ -16,16 +16,17 @@ def L(t, det=None, teach=False):
 
 T = {
  "meta": {"topic":"How Claude Works","format":"long","fps":30,"screenplay":"explainer",
-  "onePayoff":"Every Claude app is one API call in a loop — and MCP is what fills that call with tools.",
-  "openLoop":"Everyone says 'call the API'. Nobody shows you what's actually in the envelope.",
-  "analogy":"THE ENVELOPE - you post a conversation, you get one reply back.",
+  "onePayoff":"Claude cannot reach anything on your machine. Your code can — and MCP is the agreed way to describe what your code is offering.",
+  "openLoop":"Claude will answer anything you ask, and then fail at 'check my calendar'. Why?",
+  "analogy":"THE HARD LINE - the model on one side, your machine on the other, your code the only crossing.",
   "topicAxes":["entity-novelty","economic-pain"],
-  "seo":{"title":"How Claude Actually Works (Before You Touch MCP)",
-   "altTitles":["The Anthropic API in 6 Minutes — Every Argument Explained",
-                "Before MCP: What messages.create() Is Really Doing"],
-   "hook":"One API call. Four arguments. That's the whole thing.",
-   "breakdown":"the Anthropic API call argument by argument, and the four things you need installed before MCP makes any sense",
-   "chapters":[{"id":"s01","title":"What's actually in the envelope"},
+  "seo":{"title":"How Claude Actually Works — And What It Cannot Do",
+   "altTitles":["Why Claude Can't Read Your Files (And What To Do About It)",
+                "Before MCP: What Claude Is, In Plain English"],
+   "hook":"It can answer anything. It cannot open one file on your laptop.",
+   "breakdown":"what Claude actually is, what it genuinely cannot reach, the one call that talks to it, and the four things to install",
+   "chapters":[{"id":"s01","title":"The thing nobody says out loud"},
+               {"id":"s02b","title":"What Claude cannot do"},
                {"id":"s03","title":"The call, taken apart"},
                {"id":"s05","title":"Four things to install"},
                {"id":"s07","title":"Not using Claude?"}],
@@ -37,25 +38,70 @@ T = {
    "tags":["mcp","model context protocol","claude","anthropic","python","api","llm","tutorial",
      "claude api","anthropic sdk","the nbx studio"]}},
  "brand": BRAND,
- "thumbnail":{"title":"ONE CALL. FOUR ARGS.","badge":"Before MCP","asset":"si:python"},
+ "thumbnail":{"title":"IT CAN'T READ YOUR FILES","badge":"Chapter 1 · Learn MCP","asset":"si:python"},
  "scenes":[
 
- dict(id="s01", type="HOOK", background="zoneA", durationFrames=240, narration=
-  "Everybody says just call the API. But what's actually inside the envelope you're posting, and where exactly does MCP plug into it?",
-  data={"headline":"WHAT'S IN THE ENVELOPE","subtext":"one call, four arguments","heroAsset":"si:python",
-        "headlineAtWord":1,"heroAtWord":10},
+ dict(id="s01", type="HOOK", background="zoneA", durationFrames=230, narration=
+  "Ask Claude anything and it answers. Ask it to open one file on your laptop, and it simply can't.",
+  # HOOK is capped at 8s by the linter — the shorter read is also the better one.
+  data={"headline":"IT CAN'T REACH YOUR STUFF","subtext":"and that is not a bug","heroAsset":"lucide:lock",
+        "headlineAtWord":1,"heroAtWord":14},
   anchors=["headlineAtWord","heroAtWord"]),
 
  dict(id="s02", type="TITLE_CARD", transition="fade", background="zoneB", durationFrames=330, narration=
-  "This is Learn MCP, from THE NBX STUDIO, and this first chapter is the one everybody skips. "
-  "Before MCP can mean anything, you need to see what a plain Claude call actually looks like.",
-  data={"title":"HOW CLAUDE WORKS","subtitle":"chapter one of eleven"}, anchors=[]),
+  "This is Learn MCP, from THE NBX STUDIO. By the end of this chapter you'll know what Claude actually is, "
+  "what it genuinely cannot touch on its own, and which single part of a Claude call MCP goes on to fill. "
+  "No MCP code yet — just the shape of the thing, so that nothing later feels like magic.",
+  data={"title":"HOW CLAUDE WORKS","subtitle":"chapter one of twelve"}, anchors=[]),
+
+ # The beginner on-ramp. The chapter used to open straight onto messages.create(),
+ # which answers a question a first-time viewer has not asked yet. Owner, 2026-08-21:
+ # *"The title says whats claude and how claude works, and inside I see you start
+ # explaining about using anthropics claude as an API. Dude WTF. Is it even beginner
+ # friendly?"* This beat establishes the thing and its limits FIRST; every argument
+ # after it now has something to attach to.
+ dict(id="s02b", type="MCP_REACH", transition="wipe", background="zoneC", key="mcpReach",
+  headline="What Claude [cannot do]", color="purple", caption="the hard line",
+  premise="Claude runs on Anthropic's machines. Everything on the right is on yours. The dashed line is real.",
+  ends=["CLAUDE","YOUR MACHINE"], durationFrames=900,
+  narration=
+  "Let's start with the thing nobody says out loud. Claude is not a program sitting on your computer. "
+  "It runs on Anthropic's machines, and you talk to it over the internet — you send text, it sends text back, "
+  "and that is the entire relationship. "
+  "Which means that on its own, ^it cannot open your files. "
+  "^It cannot read your database. "
+  "^It cannot see your calendar or post a message in your Slack. "
+  "And none of that is a permission you forgot to switch on. "
+  "There is simply no way for it to reach across that line.",
+  cells=[{"label":"your files","sub":"notes, code, that todo.md on the desktop","icon":"lucide:folder","text":"out","mark":True},
+         {"label":"your database","sub":"every row behind your app","icon":"lucide:database","text":"out","mark":True},
+         {"label":"your calendar, your Slack","sub":"everything your team actually lives in","icon":"lucide:calendar","text":"out","mark":True}]),
+
+ # Second movement of the SAME picture: the limitation landed, now the crossing.
+ # Split out of s02b because 54s on one still picture earns a scene ceiling of 34s —
+ # and because the payoff reads better when the viewer has sat with the problem first.
+ dict(id="s02c", type="MCP_REACH", transition="push", background="zoneA", key="mcpReach",
+  headline="The one thing [that crosses]", color="green", caption="your code, in the middle",
+  premise="Same line, same three things. The only difference is that your code is now standing in the gap.",
+  ends=["CLAUDE","YOUR MACHINE"], durationFrames=880,
+  narration=
+  "So how does any AI app you have ever used actually do anything? "
+  "^Your code does it. Claude replies in ordinary text saying what it wants, and your code — which lives on your "
+  "side of the line — goes and does the work, then hands the result back. "
+  "^Your files, ^your database, ^your calendar: all reachable now, but only ever through you. "
+  "That is the whole trick, and every tool, every integration, every agent you have used works exactly this way. "
+  "And MCP, the entire subject of this course, is nothing more than an agreed way of describing what sits on your "
+  "side of that line, so that Claude can ask for it by name.",
+  cells=[{"label":"your code","sub":"the one thing standing on both sides","icon":"lucide:terminal","text":"bridge","mark":True},
+         {"label":"your files","sub":"read and written by you, on request","icon":"lucide:folder","text":"out","mark":True},
+         {"label":"your database","sub":"queried by you, never by Claude","icon":"lucide:database","text":"out","mark":True},
+         {"label":"your calendar, your Slack","sub":"and every check you decide to run first","icon":"lucide:calendar","text":"out","mark":True}]),
 
  dict(id="s03", type="MCP_API_ANATOMY", transition="wipe", background="zoneC", key="mcpApi",
   headline="The call, [taken apart]", color="purple", caption="one API call",
   codeTitle="first_call.py", premise=PREM, durationFrames=900,
   narration=
-  "Here's the whole thing. |You import the client and create it, and it quietly reads your key "
+  "So here is how you send that text. It is one function call, and this is all of it. |You import the client and create it, and it quietly reads your key "
   "out of an environment variable, which is why you never see the key in the code. "
   "|Then messages dot create sends the conversation and waits. That single call is the entire API — "
   "everything else you'll ever write is arguments to it. "
@@ -168,11 +214,12 @@ T = {
          {"label":"ANTHROPIC_API_KEY","sub":"how Anthropic knows it's you","mark":True}]),
 
  dict(id="s06", type="RECAP", transition="dip", background="zoneB", durationFrames=420, narration=
-  "Three things to carry forward. %Claude is an API call, not a program on your machine. "
-  "%One call takes a model, a token ceiling and the conversation. "
-  "%And the key lives in your environment, never in the file.",
+  "Three things to carry forward. %Claude runs on Anthropic's machines and cannot reach anything on yours. "
+  "%Your code is the only thing standing on both sides of that line. "
+  "%And the call that talks to it takes a model, a ceiling, the conversation — and a list of tools, "
+  "which is the argument MCP exists to fill.",
   data={"heading":"Chapter one, in three lines","points":[
-    {"text":"Claude is an API call"},{"text":"model + max_tokens + messages"},{"text":"the key lives in your environment"}]},
+    {"text":"Claude cannot reach your machine"},{"text":"your code is the only crossing"},{"text":"tools= is the hole MCP fills"}]},
   anchors=["points.0.atWord","points.1.atWord","points.2.atWord"]),
 
  dict(id="s07", type="OUTRO_CTA", transition="fade", background="zoneA", durationFrames=300, narration=

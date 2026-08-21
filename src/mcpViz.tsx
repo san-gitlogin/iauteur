@@ -44,19 +44,32 @@ export interface McpVizProps {
   ends?: string[];
 }
 
+// The stack OWNS the pane it is handed and spreads its blocks down it. Left to their
+// natural heights, a two-block beat drew in the top third and left the rest of a 9:16
+// pane black — which reads as an unfinished slide, not as breathing room. Now that
+// rowMetrics sizes rows from the real budget the blocks very nearly fill it anyway,
+// and this distributes whatever slack is left instead of pooling it at the bottom.
 const Stack: React.FC<{gap: number; children: React.ReactNode}> = ({gap, children}) => (
-  <div style={{display: 'flex', flexDirection: 'column', gap, width: '100%'}}>{children}</div>
+  <div style={{display: 'flex', flexDirection: 'column', gap, width: '100%',
+               flex: 1, minHeight: 0, justifyContent: 'space-evenly'}}>{children}</div>
 );
 
 /** Row height that fills the pane it is given, in either aspect. */
 const rowMetrics = (v: ReturnType<typeof useViz>, n: number) => {
   // Fill the pane. A 78px cap left three lanes using a third of a 620px stage with
   // the rest dead — the "dense middle, dead edges" failure again (LAW 0k rule 4).
-  const rowH = Math.max(40, Math.min(v.vertical ? 156 : 132, stackBudget(v) / Math.max(n, 1) - 8));
+  // Caps were 156/132 against a budget that was itself a constant, so a four-row beat
+  // in a 700px Shorts pane drew 4×156 = 624px of content and left the rest black —
+  // then the SAME caps starved the type, so it was small AND surrounded by nothing.
+  // Owner, 2026-08-21: *"if you go too small with content for giving breathable space,
+  // user wont see shit."* Rows take their real share of the real budget, and the type
+  // grows with them; the ceiling is only there to stop a two-row beat from becoming a
+  // pair of billboards.
+  const rowH = Math.max(40, Math.min(v.vertical ? 316 : 208, stackBudget(v) / Math.max(n, 1) - 8));
   return {
     rowH,
-    lab: Math.max(15, Math.min(v.vertical ? 32 : 22, rowH * 0.28)),
-    sub: Math.max(12, Math.min(v.vertical ? 21 : 15, rowH * 0.19)),
+    lab: Math.max(16, Math.min(v.vertical ? 38 : 25, rowH * 0.27)),
+    sub: Math.max(13, Math.min(v.vertical ? 26 : 17.5, rowH * 0.185)),
   };
 };
 
@@ -68,165 +81,610 @@ const OWNERS: Record<string, {who: string; glyph: string; trigger: string; col: 
 
 /** THE 3 PRIMITIVES — one lane each, tagged with who actually pulls the trigger.
  *  The whole lesson is "who is in control", so control is the visual variable. */
+/** THE CONTROL SWITCHBOARD — who pulls the trigger, drawn as wiring.
+ *
+ *  The first cut of this was a row of cards, each with a glyph and an owner pill
+ *  stapled to the corner. Owner, 2026-08-21: *"you are doing the same highlighting
+ *  with colours, animating it. Dude thats not what I meant... They show a component,
+ *  they connect dots between them, how they communicate."* He is right that a pill
+ *  reading THE AI DECIDES is a caption, not a depiction — and the pill was also
+ *  overrunning its own card's border in 9:16.
+ *
+ *  So control is now WIRED. The deciders stand in their own column, the primitives
+ *  in theirs, and a curve runs from each primitive back to whoever fires it. On the
+ *  beat, a charge travels down that curve from the decider to the thing it decides,
+ *  which is the sentence "the model chooses when to call a tool" as a picture. Two
+ *  primitives owned by the same actor visibly share a wire; that shared root is the
+ *  whole lesson and no arrangement of cards can show it. */
 export const ControlBoard: React.FC<McpVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
-  // Drawn as CARDS with a glyph each, laid out across the pane — not as rows of
-  // text in a box. Who holds the trigger is shown by the owner's own icon sitting
-  // on the card, so the distinction is a picture rather than a caption.
   const n = Math.max(items.length, 1);
-  const wide = n <= 4;
-  const cardH = wide ? (v.vertical ? 300 : 232) : (v.vertical ? 160 : 132);
-  const glyph = wide ? (v.vertical ? 92 : 82) : (v.vertical ? 56 : 46);
-  const lab = wide ? (v.vertical ? 30 : 23) : (v.vertical ? 24 : 18);
-  const sub = wide ? (v.vertical ? 20 : 15) : (v.vertical ? 17 : 13);
+  const actors = Array.from(new Set(items.map((it) => it.owner ?? '').filter((o) => OWNERS[o])));
+
+  const budget = stackBudget(v) * v.scale;
+  const rowPx = budget / n;
+  const lab = Math.max(14, Math.min(v.vertical ? 30 : 22, rowPx * 0.26)) * v.scale;
+  const sub = Math.max(11.5, Math.min(v.vertical ? 20 : 15, rowPx * 0.19)) * v.scale;
+  const glyph = Math.max(22, Math.min(v.vertical ? 62 : 48, rowPx * 0.44)) * v.scale;
+
+  // No declared deciders — this beat is a list of parts, not a question of control.
+  // Draw it as parts, and do NOT invent a switchboard with nothing plugged into it.
+  if (!actors.length) {
+    return (
+      <div style={{display: 'flex', flexDirection: 'column', gap: 10 * v.scale, width: '100%', flex: 1, minHeight: 0}}>
+        {items.map((it, i) => {
+          const on = liveAt(frame, it.atWord, 10);
+          const col = it.color ? v.sem(it.color) : v.a;
+          return (
+            <div key={i} style={{
+              flex: 1, minHeight: 0, display: 'flex', alignItems: 'center', gap: 14 * v.scale,
+              padding: `${8 * v.scale}px ${14 * v.scale}px`, borderRadius: v.rad(10),
+              borderLeft: `${3 * v.scale}px solid ${on > 0.4 ? hexA(col, 0.95) : hexA(v.t.colors.panelBorder, 0.5)}`,
+              background: on > 0.4 ? hexA(col, 0.1) : 'transparent',
+              opacity: 0.32 + on * 0.68,
+              transform: `translateX(${(1 - on) * 12 * v.scale}px)`,
+            }}>
+              <AssetIcon asset={it.icon ?? 'lucide:box'} size={glyph} bare tint={on > 0.4 ? col : v.dim} />
+              <div style={{minWidth: 0, flex: 1}}>
+                <div style={{...v.mono(lab / v.scale), fontWeight: 700,
+                             color: on > 0.4 ? v.t.colors.text : v.dim}}>{it.label}</div>
+                {it.sub ? <div style={{...v.body(sub / v.scale), color: v.dim, lineHeight: 1.35}}>{it.sub}</div> : null}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // percentage geometry: two columns, wired across the gap between them
+  const AW = v.vertical ? 30 : 27;   // right edge of the decider column
+  const PX = v.vertical ? 44 : 42;   // left edge of the primitive column
+  const ay = (i: number) => ((i + 0.5) / actors.length) * 100;
+  const py = (j: number) => ((j + 0.5) / n) * 100;
 
   return (
-    <div style={{
-      display: 'flex', flexWrap: 'wrap', gap: 14 * v.scale,
-      alignContent: 'center', alignItems: 'center', justifyContent: 'center',
-      width: '100%', flex: 1, minHeight: 0,
-    }}>
-      {items.map((it, i) => {
+    <div style={{position: 'relative', width: '100%', flex: 1, minHeight: 0}}>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"
+           style={{position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible'}}>
+        {items.map((it, j) => {
+          const ai = actors.indexOf(it.owner ?? '');
+          if (ai < 0) return null;
+          const on = liveAt(frame, it.atWord, 10);
+          const col = v.sem(OWNERS[it.owner!].col);
+          const y0 = ay(ai), y1 = py(j), mx = (AW + PX) / 2;
+          const d = `M ${AW} ${y0} C ${mx} ${y0}, ${mx} ${y1}, ${PX} ${y1}`;
+          return (
+            <g key={j}>
+              {/* non-scaling-stroke: the viewBox is squashed to the pane, so without
+                  it a "1 unit" line renders as a wedge — thick across, hairline down. */}
+              <path d={d} fill="none" stroke={hexA(col, 0.18 + on * 0.65)}
+                    strokeWidth={on > 0.4 ? 2.4 : 1.4} vectorEffect="non-scaling-stroke" />
+            </g>
+          );
+        })}
+      </svg>
+
+      {items.map((it, j) => {
+        const ai = actors.indexOf(it.owner ?? '');
         const on = liveAt(frame, it.atWord, 10);
-        const p = pulseAt(frame, it.atWord);
-        const o = OWNERS[it.owner ?? ''] ?? null;
-        const col = o ? v.sem(o.col) : it.color ? v.sem(it.color) : v.a;
-        const icon = it.icon ?? (o ? o.glyph : 'lucide:box');
+        if (ai < 0 || on <= 0.02 || on >= 0.995) return null;
+        const col = v.sem(OWNERS[it.owner!].col);
+        const y0 = ay(ai), y1 = py(j), mx = (AW + PX) / 2, t = on, u = 1 - t;
+        const bx = u * u * u * AW + 3 * u * u * t * mx + 3 * u * t * t * mx + t * t * t * PX;
+        const by = u * u * u * y0 + 3 * u * u * t * y0 + 3 * u * t * t * y1 + t * t * t * y1;
         return (
-          <div key={i} style={{
-            flex: v.vertical ? '1 1 100%' : (wide ? `1 1 ${100 / Math.min(n, 3) - 6}%` : '1 1 46%'),
-            minWidth: 0,
-            minHeight: (v.vertical ? Math.min(cardH, 900 / n) : cardH) * v.scale,
-            boxSizing: 'border-box',
-            display: 'flex',
-            flexDirection: v.vertical ? 'row' : 'column',
-            alignItems: v.vertical ? 'center' : 'flex-start',
-            justifyContent: v.vertical ? 'flex-start' : 'space-between',
-            gap: v.vertical ? 18 * v.scale : 9 * v.scale,
-            padding: `${20 * v.scale}px ${18 * v.scale}px`,
-            borderRadius: v.rad(14),
-            border: `${2 * v.scale}px solid ${on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.45)}`,
-            background: on > 0.4
-              ? `linear-gradient(150deg, ${hexA(col, 0.2)}, ${hexA(col, 0.05)})`
-              : hexA(v.t.colors.panel, 0.3),
-            opacity: 0.32 + on * 0.68,
-            transform: `translateY(${(1 - on) * 16 * v.scale}px) scale(${1 + p * 0.025})`,
-            boxShadow: on > 0.6 && v.t.style.glow > 0
-              ? `0 0 ${34 * v.scale * v.t.style.glow}px ${hexA(col, 0.22)}` : undefined,
+          <div key={`c${j}`} style={{
+            position: 'absolute', left: `${bx}%`, top: `${by}%`,
+            width: 9 * v.scale, height: 9 * v.scale, borderRadius: 999,
+            transform: 'translate(-50%, -50%)', background: col,
+            boxShadow: `0 0 ${12 * v.scale}px ${hexA(col, 0.85)}`,
+          }} />
+        );
+      })}
+
+      {actors.map((a, i) => {
+        const o = OWNERS[a];
+        const col = v.sem(o.col);
+        const lit = items.reduce((m, it) => it.owner === a ? Math.max(m, liveAt(frame, it.atWord, 10)) : m, 0);
+        return (
+          <div key={a} style={{
+            position: 'absolute', left: 0, width: `${AW}%`, top: `${ay(i)}%`,
+            transform: 'translateY(-50%)', boxSizing: 'border-box',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 * v.scale,
+            padding: `${9 * v.scale}px ${6 * v.scale}px`, borderRadius: v.rad(12),
+            border: `${1.4 * v.scale}px solid ${hexA(col, 0.25 + lit * 0.6)}`,
+            background: hexA(col, 0.05 + lit * 0.13),
+            boxShadow: lit > 0.5 && v.t.style.glow > 0
+              ? `0 0 ${26 * v.scale * v.t.style.glow}px ${hexA(col, 0.25)}` : undefined,
           }}>
-            <AssetIcon asset={icon} size={glyph * v.scale} bare tint={on > 0.4 ? col : v.dim} />
-            <div style={{display: 'flex', flexDirection: 'column', gap: 6 * v.scale,
-                         minWidth: 0, flex: v.vertical ? 1 : undefined}}>
-              <div style={{...v.mono(lab), fontWeight: 800, color: on > 0.4 ? v.t.colors.text : v.dim}}>
-                {it.label}
-              </div>
-              <div style={{...v.body(sub), color: v.dim, lineHeight: 1.4}}>{it.sub}</div>
-            </div>
-            {o ? (
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: 7 * v.scale,
-                padding: `${5 * v.scale}px ${11 * v.scale}px`, borderRadius: 999,
-                background: hexA(col, on > 0.4 ? 0.9 : 0.18),
-                ...v.mono(sub * 0.92), fontWeight: 800,
-                color: on > 0.4 ? '#0b0b12' : v.dim, whiteSpace: 'nowrap',
-              }}>
-                <AssetIcon asset={o.trigger} size={sub * 1.2 * v.scale} bare
-                           tint={on > 0.4 ? '#0b0b12' : v.dim} />
-                {o.who}
-              </div>
-            ) : null}
+            <AssetIcon asset={o.glyph} size={glyph * 0.92} bare tint={hexA(col, 0.5 + lit * 0.5)} />
+            <div style={{...v.mono(sub / v.scale * 0.92), fontWeight: 700, letterSpacing: 0.4,
+                         textAlign: 'center', lineHeight: 1.25,
+                         color: hexA(col, 0.55 + lit * 0.45)}}>{o.who.replace(' DECIDES', '')}</div>
           </div>
         );
       })}
-    </div>
-  );
-};
 
-/** THE WIRE — a JSON-RPC message physically crossing between two named endpoints.
- *  Direction is the point: `dir: 'out'` travels left→right, 'back' right→left. */
-export const WireExchange: React.FC<McpVizProps> = ({items, accent, ends}) => {
-  const v = useViz(accent);
-  const frame = useCurrentFrame();
-  const [L, R] = ends && ends.length >= 2 ? ends : ['CLIENT', 'SERVER'];
-  const weight = items.reduce((n, it) => n + 1.6 + (it.out?.length ?? 0) * 0.7, 1);
-  const m = rowMetrics(v, Math.ceil(weight));
-
-  // The two ends are MACHINES, drawn as machines. A labelled rectangle is a label.
-  const machine = (name: string, icon: string) => (
-    <div style={{
-      flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center',
-      gap: 6 * v.scale, width: (v.vertical ? 168 : 128) * v.scale,
-    }}>
-      <div style={{
-        width: (v.vertical ? 108 : 92) * v.scale, height: (v.vertical ? 108 : 92) * v.scale,
-        borderRadius: v.rad(16), display: 'flex', alignItems: 'center', justifyContent: 'center',
-        border: `${2 * v.scale}px solid ${hexA(v.a, 0.75)}`,
-        background: `linear-gradient(150deg, ${hexA(v.a, 0.18)}, ${hexA(v.a, 0.05)})`,
-      }}>
-        <AssetIcon asset={icon} size={(v.vertical ? 60 : 52) * v.scale} bare tint={v.a} />
-      </div>
-      <div style={{...v.mono(m.sub), fontWeight: 800, color: v.a, whiteSpace: 'nowrap'}}>{name}</div>
-    </div>
-  );
-
-  return (
-    <Stack gap={Math.max(7, m.rowH * 0.12) * v.scale}>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        {machine(L, 'lucide:laptop')}
-        <div style={{...v.body(m.sub * 0.95), color: v.dim, textAlign: 'center'}}>JSON-RPC 2.0</div>
-        {machine(R, 'lucide:server')}
-      </div>
-
-      {items.map((it, i) => {
-        const on = liveAt(frame, it.atWord, 12);
-        const back = it.dir === 'back';
-        const col = back ? v.sem('orange') : v.a;
+      {items.map((it, j) => {
+        const on = liveAt(frame, it.atWord, 10);
+        const p = pulseAt(frame, it.atWord);
+        const o = OWNERS[it.owner ?? ''];
+        const col = o ? v.sem(o.col) : v.a;
         return (
-          <div key={i} style={{opacity: 0.25 + on * 0.75}}>
-            {/* an envelope that physically crosses the gap */}
-            <div style={{position: 'relative', height: (m.lab * 1.9) * v.scale}}>
-              <div style={{
-                position: 'absolute', top: '50%', left: 0, right: 0, height: 2.5 * v.scale,
-                transform: 'translateY(-50%)', borderRadius: 999,
-                background: hexA(v.t.colors.panelBorder, 0.4),
-              }} />
-              <div style={{
-                position: 'absolute', top: '50%',
-                left: back ? `${(1 - on) * 88}%` : `${on * 88}%`,
-                transform: 'translate(-50%, -50%)',
-                display: 'flex', alignItems: 'center', gap: 7 * v.scale,
-                padding: `${5 * v.scale}px ${11 * v.scale}px`, borderRadius: 999,
-                background: hexA(col, 0.9), whiteSpace: 'nowrap',
-              }}>
-                <AssetIcon asset={back ? 'lucide:mail-open' : 'lucide:mail'}
-                           size={m.lab * 0.9 * v.scale} bare tint="#0b0b12" />
-                <span style={{...v.mono(m.lab * 0.82), fontWeight: 800, color: '#0b0b12'}}>{it.label}</span>
-              </div>
-            </div>
-            <div style={{textAlign: back ? 'right' : 'left', marginTop: 2 * v.scale}}>
-              {it.sub ? <div style={{...v.body(m.sub), color: v.dim}}>{it.sub}</div> : null}
-              {it.out?.length ? (
-                <div style={{
-                  marginTop: 5 * v.scale, display: 'inline-block', textAlign: 'left',
-                  border: `${1.2 * v.scale}px solid ${hexA(v.t.colors.panelBorder, 0.8)}`,
-                  borderRadius: v.rad(6), background: hexA(v.t.colors.bg, 0.6),
-                  padding: `${6 * v.scale}px ${9 * v.scale}px`,
-                }}>
-                  {it.out.map((ln, k) => (
-                    <div key={k} style={{...v.mono(m.sub * 0.95), color: hexA(v.t.colors.text, 0.9),
-                                         whiteSpace: 'pre', lineHeight: 1.5}}>{ln}</div>
-                  ))}
-                </div>
+          <div key={j} style={{
+            position: 'absolute', left: `${PX}%`, right: 0, top: `${py(j)}%`,
+            transform: `translateY(-50%) scale(${1 + p * 0.02})`, boxSizing: 'border-box',
+            display: 'flex', alignItems: 'center', gap: 12 * v.scale, minWidth: 0,
+            padding: `${9 * v.scale}px ${13 * v.scale}px`, borderRadius: v.rad(11),
+            border: `${1.4 * v.scale}px solid ${on > 0.4 ? hexA(col, 0.75) : hexA(v.t.colors.panelBorder, 0.4)}`,
+            background: on > 0.4
+              ? `linear-gradient(100deg, ${hexA(col, 0.17)}, ${hexA(col, 0.03)})`
+              : hexA(v.t.colors.panel, 0.28),
+            opacity: 0.34 + on * 0.66,
+          }}>
+            <AssetIcon asset={it.icon ?? (o ? o.trigger : 'lucide:box')} size={glyph}
+                       bare tint={on > 0.4 ? col : v.dim} />
+            <div style={{minWidth: 0, flex: 1}}>
+              <div style={{...v.mono(lab / v.scale), fontWeight: 700, lineHeight: 1.2,
+                           color: on > 0.4 ? v.t.colors.text : v.dim}}>{it.label}</div>
+              {it.sub ? (
+                <div style={{...v.body(sub / v.scale), color: v.dim, lineHeight: 1.35,
+                             marginTop: 2 * v.scale}}>{it.sub}</div>
               ) : null}
             </div>
           </div>
         );
       })}
-    </Stack>
+    </div>
   );
 };
 
+/** THE REACH BOUNDARY — what the model can and cannot touch, and the one thing that
+ *  crosses.
+ *
+ *  A beginner's first real question about Claude is not "what arguments does the call
+ *  take", it is "what IS this thing and why can't it just read my files?" That answer
+ *  is spatial: there is a hard line, the model is on one side of it, your world is on
+ *  the other, and nothing crosses unless your code carries it. So the line is drawn as
+ *  a line, the things out of reach carry a lock and sit greyed BEYOND it, and when the
+ *  bridge arrives you watch the same items light up as the crossing completes.
+ *
+ *  The point is that reachability is a POSITION here, not a colour. An item does not
+ *  merely turn green when it becomes reachable — the wire to it is drawn, and the lock
+ *  on it opens. Owner, 2026-08-21: *"you are doing the same highlighting with colours,
+ *  animating it. Dude thats not what I meant."* */
+export const ReachBoundary: React.FC<McpVizProps> = ({items, accent, ends}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const [L, R] = ends && ends.length >= 2 ? ends : ['THE MODEL', 'YOUR MACHINE'];
+  const things = items.filter((i) => i.text !== 'bridge');
+  const bridge = items.find((i) => i.text === 'bridge');
+  const bOn = bridge ? liveAt(frame, bridge.atWord, 18) : 0;
+  const n = Math.max(things.length, 1);
+
+  const budget = stackBudget(v) * v.scale;
+  const rowH = Math.max(52 * v.scale, Math.min((v.vertical ? 210 : 140) * v.scale, budget / n - 10 * v.scale));
+  const lab = Math.max(15, Math.min(v.vertical ? 32 : 22, rowH / v.scale * 0.24)) * v.scale;
+  const sub = Math.max(12.5, Math.min(v.vertical ? 22 : 15.5, rowH / v.scale * 0.165)) * v.scale;
+  const glyph = Math.max(24, Math.min(v.vertical ? 62 : 46, rowH / v.scale * 0.4)) * v.scale;
+
+  const modelW = (v.vertical ? 210 : 190) * v.scale;
+
+  return (
+    <div style={{display: 'flex', width: '100%', flex: 1, minHeight: 0, gap: 0}}>
+      {/* the model's side */}
+      <div style={{
+        flex: `0 0 ${modelW}px`, display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center', gap: 8 * v.scale,
+      }}>
+        <div style={{
+          width: glyph * 1.8, height: glyph * 1.8, borderRadius: v.rad(16),
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          border: `${1.5 * v.scale}px solid ${hexA(v.a, 0.75)}`,
+          background: `linear-gradient(150deg, ${hexA(v.a, 0.2)}, ${hexA(v.a, 0.04)})`,
+          boxShadow: v.t.style.glow > 0 ? `0 0 ${30 * v.scale * v.t.style.glow}px ${hexA(v.a, 0.28)}` : undefined,
+        }}>
+          <AssetIcon asset="lucide:brain" size={glyph * 1.05} bare tint={v.a} />
+        </div>
+        <div style={{...v.mono(lab / v.scale * 0.82), fontWeight: 800, color: v.a,
+                     textAlign: 'center', lineHeight: 1.2}}>{L}</div>
+        <div style={{...v.body(sub / v.scale * 0.88), color: v.dim, textAlign: 'center',
+                     lineHeight: 1.3, maxWidth: modelW * 0.9}}>text in, text out</div>
+      </div>
+
+      {/* THE LINE. Not a divider — the reason the lesson exists. */}
+      <div style={{
+        flex: '0 0 auto', width: (v.vertical ? 58 : 52) * v.scale, position: 'relative',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <div style={{
+          position: 'absolute', top: 0, bottom: 0, left: '50%', width: 2 * v.scale,
+          transform: 'translateX(-50%)',
+          background: `repeating-linear-gradient(180deg, ${hexA(v.sem('red'), 0.75)} 0 ${9 * v.scale}px, transparent ${9 * v.scale}px ${17 * v.scale}px)`,
+          opacity: 1 - bOn * 0.55,
+        }} />
+        {/* your code, once it exists, is the gate in the line */}
+        {bridge ? (
+          <div style={{
+            position: 'relative', opacity: bOn, transform: `scale(${0.75 + bOn * 0.25})`,
+            width: glyph * 1.25, height: glyph * 1.25, borderRadius: 999,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            border: `${1.5 * v.scale}px solid ${hexA(v.sem('green'), 0.9)}`,
+            background: v.t.colors.bg,
+            boxShadow: v.t.style.glow > 0 ? `0 0 ${24 * v.scale * v.t.style.glow}px ${hexA(v.sem('green'), 0.5)}` : undefined,
+          }}>
+            <AssetIcon asset={bridge.icon ?? 'lucide:terminal'} size={glyph * 0.62} bare tint={v.sem('green')} />
+          </div>
+        ) : null}
+      </div>
+
+      {/* your side */}
+      <div style={{flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 8 * v.scale}}>
+        <div style={{...v.mono(lab / v.scale * 0.7), fontWeight: 800, letterSpacing: 1.2,
+                     color: hexA(v.t.colors.text, 0.55), paddingLeft: 4 * v.scale}}>{R}</div>
+        <div style={{display: 'flex', flexDirection: 'column', gap: 9 * v.scale,
+                     flex: 1, minHeight: 0, justifyContent: 'space-evenly'}}>
+          {things.map((it, i) => {
+            const on = liveAt(frame, it.atWord, 12);
+            const reached = it.text === 'in' ? on : on * bOn;
+            const locked = 1 - reached;
+            const col = reached > 0.5 ? v.sem('green') : v.sem('red');
+            return (
+              <div key={i} style={{
+                display: 'flex', alignItems: 'center', gap: 12 * v.scale, minHeight: rowH,
+                boxSizing: 'border-box', padding: `${8 * v.scale}px ${13 * v.scale}px`,
+                borderRadius: v.rad(11), position: 'relative',
+                border: `${1.4 * v.scale}px ${reached > 0.5 ? 'solid' : 'dashed'} ${hexA(col, 0.2 + on * 0.55)}`,
+                background: reached > 0.5 ? hexA(col, 0.1) : hexA(v.t.colors.panel, 0.25),
+                opacity: 0.3 + on * 0.7,
+              }}>
+                {/* the wire from the gate to this thing — drawn only once it can be reached */}
+                <div style={{
+                  position: 'absolute', right: '100%', top: '50%', height: 2 * v.scale,
+                  width: `${reached * (v.vertical ? 30 : 27) * v.scale}px`,
+                  transform: 'translateY(-50%)', background: hexA(v.sem('green'), 0.85),
+                }} />
+                <AssetIcon asset={it.icon ?? 'lucide:box'} size={glyph} bare
+                           tint={reached > 0.5 ? v.t.colors.text : hexA(v.t.colors.text, 0.45)} />
+                <div style={{minWidth: 0, flex: 1}}>
+                  <div style={{...v.mono(lab / v.scale), fontWeight: 700, lineHeight: 1.2,
+                               color: reached > 0.5 ? v.t.colors.text : hexA(v.t.colors.text, 0.55),
+                               textDecoration: locked > 0.5 && on > 0.5 ? 'line-through' : 'none',
+                               textDecorationColor: hexA(v.sem('red'), 0.7)}}>{it.label}</div>
+                  {it.sub ? (
+                    <div style={{...v.body(sub / v.scale), color: v.dim, lineHeight: 1.35,
+                                 marginTop: 2 * v.scale}}>{it.sub}</div>
+                  ) : null}
+                </div>
+                {/* the verdict, in words. A lock alone at the far end of a 16:9 row left a
+                    metre of dead space between the label and the state it was in. */}
+                <div style={{display: 'flex', alignItems: 'center', gap: 8 * v.scale, flex: '0 0 auto',
+                             padding: `${5 * v.scale}px ${11 * v.scale}px`, borderRadius: 999,
+                             background: hexA(col, 0.12 + on * 0.1),
+                             border: `${1.2 * v.scale}px solid ${hexA(col, 0.2 + on * 0.5)}`}}>
+                  <AssetIcon asset={reached > 0.5 ? 'lucide:lock-open' : 'lucide:lock'}
+                             size={lab * 1.1} bare tint={hexA(col, 0.4 + on * 0.6)} />
+                  <span style={{...v.mono(sub / v.scale * 0.95), fontWeight: 700, whiteSpace: 'nowrap',
+                                color: hexA(col, 0.5 + on * 0.5)}}>
+                    {reached > 0.5 ? 'via your code' : 'out of reach'}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/** THE M×N MESH — the integration explosion, and the hub that collapses it.
+ *
+ *  This beat ("4 apps × 4 services = 16 integrations, and none of them are shared")
+ *  was being drawn by the control board: four look-alike cards, each captioned YOUR
+ *  CODE DECIDES, which is not what the beat is about and not a picture of anything.
+ *  Owner, 2026-08-21: *"Do you even know how explanatory videos look like? They show
+ *  a component, they connect dots between them, how they communicate."*
+ *
+ *  The number IS the point here, so the number is what is drawn. Every app wires to
+ *  every service, one line at a time, until sixteen wires cross the frame and the
+ *  mess is self-evident — you do not have to be told it is bad, you can see it. Then
+ *  the hub lands, the sixteen retract, and eight re-route through the middle. The
+ *  live count under the picture reads the wires actually on screen, so the arithmetic
+ *  and the drawing can never drift apart. */
+export const MnMesh: React.FC<McpVizProps> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const clients = items.filter((i) => i.text === 'client');
+  const servers = items.filter((i) => i.text === 'server');
+  const hub = items.find((i) => i.text === 'hub');
+  if (!clients.length || !servers.length) return null;
+
+  const hubOn = hub ? liveAt(frame, hub.atWord, 20) : 0;
+  const M = clients.length, N = servers.length;
+  const LX = 15, RX = 85, HX = 50, HY = 50;
+  const cy = (i: number, n: number) => 9 + ((i + 0.5) / n) * 82;
+  const on = (it: McpItem) => liveAt(frame, it.atWord, 14);
+
+  const budget = stackBudget(v) * v.scale;
+  const rowPx = budget / Math.max(M, N);
+  const glyph = Math.max(20, Math.min(v.vertical ? 46 : 36, rowPx * 0.4)) * v.scale;
+  const lab = Math.max(11, Math.min(v.vertical ? 20 : 15, rowPx * 0.2)) * v.scale;
+
+  // A wire needs BOTH ends to exist, so it draws when the client and the service have
+  // each been named. Naming four apps, then four services one at a time, walks the
+  // count 4, 8, 12, 16 — the multiplication happening in front of you rather than
+  // asserted at the end.
+  const pair = (c: McpItem, sv: McpItem) => on(c) * on(sv);
+  const meshLive = clients.reduce((t, c) => t + servers.filter((sv) => pair(c, sv) > 0.5).length, 0);
+  const shown = hubOn > 0.5 ? M + N : meshLive;
+  const via = hubOn > 0.5;
+
+  const node = (it: McpItem, x: number, y: number, lit: number, fallback: string) => (
+    <div key={`${x}-${y}`} style={{
+      position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 * v.scale,
+      width: (v.vertical ? 150 : 120) * v.scale,
+    }}>
+      <div style={{
+        width: glyph * 1.75, height: glyph * 1.75, borderRadius: v.rad(12),
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        border: `${1.4 * v.scale}px solid ${hexA(v.a, 0.25 + lit * 0.6)}`,
+        background: hexA(v.a, 0.04 + lit * 0.16),
+      }}>
+        <AssetIcon asset={it.icon ?? fallback} size={glyph} bare tint={hexA(v.a, 0.45 + lit * 0.55)} />
+      </div>
+      <div style={{...v.mono(lab / v.scale), fontWeight: 700, textAlign: 'center', lineHeight: 1.2,
+                   color: hexA(v.t.colors.text, 0.4 + lit * 0.6), whiteSpace: 'nowrap',
+                   overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%'}}>{it.label}</div>
+    </div>
+  );
+
+  // pathLength="1" makes the dash maths independent of the squashed viewBox, so a
+  // wire draws itself at an even rate whatever its length or angle.
+  const wire = (key: string, d: string, p: number, col: string, w: number) => (
+    <path key={key} d={d} fill="none" stroke={hexA(col, 0.15 + p * 0.7)} strokeWidth={w}
+          vectorEffect="non-scaling-stroke" pathLength={1}
+          strokeDasharray={1} strokeDashoffset={1 - p} strokeLinecap="round" />
+  );
+
+  return (
+    <div style={{position: 'relative', width: '100%', flex: 1, minHeight: 0}}>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"
+           style={{position: 'absolute', inset: 0, width: '100%', height: '100%'}}>
+        {clients.map((c, i) => servers.map((s, j) => {
+          const p = pair(c, s) * (1 - hubOn);
+          if (p < 0.01) return null;
+          return wire(`m${i}-${j}`, `M ${LX + 7} ${cy(i, M)} L ${RX - 7} ${cy(j, N)}`,
+                      p, v.sem('orange'), 1.3);
+        }))}
+        {hub ? (
+          <>
+            {clients.map((c, i) => wire(`hc${i}`, `M ${LX + 7} ${cy(i, M)} Q ${(LX + HX) / 2} ${cy(i, M)}, ${HX - 5} ${HY}`, hubOn, v.a, 2.4))}
+            {servers.map((s, j) => wire(`hs${j}`, `M ${HX + 5} ${HY} Q ${(HX + RX) / 2} ${cy(j, N)}, ${RX - 7} ${cy(j, N)}`, hubOn, v.a, 2.4))}
+          </>
+        ) : null}
+      </svg>
+
+      {clients.map((c, i) => node(c, LX, cy(i, M), on(c), 'lucide:app-window'))}
+      {servers.map((s, j) => node(s, RX, cy(j, N), on(s), 'lucide:database'))}
+
+      {hub ? (
+        <div style={{
+          position: 'absolute', left: `${HX}%`, top: `${HY}%`, transform: `translate(-50%, -50%) scale(${0.8 + hubOn * 0.2})`,
+          opacity: hubOn, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 * v.scale,
+        }}>
+          <div style={{
+            width: glyph * 2, height: glyph * 2, borderRadius: v.rad(14),
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            border: `${2 * v.scale}px solid ${hexA(v.a, 0.9)}`,
+            background: `linear-gradient(150deg, ${hexA(v.a, 0.3)}, ${hexA(v.a, 0.08)})`,
+            boxShadow: v.t.style.glow > 0 ? `0 0 ${34 * v.scale * v.t.style.glow}px ${hexA(v.a, 0.4)}` : undefined,
+          }}>
+            <AssetIcon asset={hub.icon ?? 'lucide:git-fork'} size={glyph * 1.15} bare tint={v.a} />
+          </div>
+          <div style={{...v.mono(lab / v.scale), fontWeight: 800, color: v.a, whiteSpace: 'nowrap'}}>{hub.label}</div>
+        </div>
+      ) : null}
+
+      {/* the live tally — reads the wires on screen, so it cannot lie about them */}
+      <div style={{
+        position: 'absolute', left: 0, right: 0, bottom: 0, display: 'flex', justifyContent: 'center',
+      }}>
+        <div style={{
+          display: 'flex', alignItems: 'baseline', gap: 8 * v.scale,
+          padding: `${4 * v.scale}px ${14 * v.scale}px`, borderRadius: 999,
+          background: hexA(via ? v.a : v.sem('orange'), 0.16),
+          border: `${1.3 * v.scale}px solid ${hexA(via ? v.a : v.sem('orange'), 0.7)}`,
+        }}>
+          <span style={{...v.mono(lab / v.scale * 1.5), fontWeight: 800,
+                        color: via ? v.a : v.sem('orange')}}>{shown}</span>
+          <span style={{...v.body(lab / v.scale), color: v.dim}}>
+            {via ? `${M} + ${N} pieces, each written once` : `${M} × ${N} integrations, none shared`}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/** THE WIRE — a sequence diagram that actually runs: two machines, two lifelines
+ *  hanging off them, and a JSON-RPC envelope walking the gap between them.
+ *
+ *  Owner, 2026-08-21: *"the animation you have kept on for some yellow thing to move
+ *  from left to right. See the moment it moves, it just gets hidden behind the
+ *  container."* He was right and the cause was arithmetic: the envelope was placed
+ *  at `left: pct%` with `translateX(-50%)`, so at both ends of its travel half of it
+ *  hung outside the pane and StatePane's `overflow: hidden` ate it. The fix is to
+ *  shift the pill by its OWN width in step with its progress — `translateX(-pct%)`
+ *  — which pins its left edge at the start rail and its right edge at the end rail
+ *  and never lets a single pixel leave the track. Same trick, no clipping, ever.
+ *
+ *  It also had to stop being decorative. He asked what an explanatory video looks
+ *  like: *"They show a component, they connect dots between them, how they
+ *  communicate, what happens behind the scenes."* So the two ends are now WIRED —
+ *  lifelines descend from each machine, the bright half of the wire is drawn behind
+ *  the envelope as it travels (you watch the message cross), the machine being
+ *  addressed lights up the instant it lands, and the payload docks to the side that
+ *  RECEIVED it, because the point of a reply is that the other end now holds it. */
+export const WireExchange: React.FC<McpVizProps> = ({items, accent, ends}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const [L, R] = ends && ends.length >= 2 ? ends : ['CLIENT', 'SERVER'];
+
+  const box = (v.vertical ? 92 : 74) * v.scale;
+  const nameF = (v.vertical ? 17 : 14.5) * v.scale;
+  const head = box + nameF * 2.4;
+
+  // Fit EVERY row, payload lines included. The previous cut sized the lanes only and
+  // let the JSON run off the bottom edge of the pane — the same "content overlaps the
+  // container" fault the owner called out in the shorts (LAW 0k rule 4).
+  const outN = items.reduce((n, it) => n + (it.out?.length ?? 0), 0);
+  const subN = items.filter((it) => it.sub).length;
+  const units = items.length * 2.5 + outN * 1.2 + subN * 1.05;
+  const avail = Math.max(150 * v.scale, stackBudget(v) * v.scale - head);
+  const unit = Math.max(11 * v.scale, Math.min(29 * v.scale, avail / Math.max(units, 1)));
+
+  const laneH = unit * 2.5;
+  const labF = Math.min(unit * 1.05, (v.vertical ? 23 : 18) * v.scale);
+  const subF = Math.min(unit * 0.9, (v.vertical ? 18 : 14.5) * v.scale);
+  const outF = Math.min(unit * 1.0, (v.vertical ? 17 : 13.5) * v.scale);
+  const rail = box / 2; // lifelines drop from the centre of each machine tile
+
+  // Which end is being addressed right now, so the machine can react to its mail.
+  const hit = (side: 'l' | 'r') => items.reduce((best, it) => {
+    const dest = it.dir === 'back' ? 'l' : 'r';
+    if (dest !== side) return best;
+    return Math.max(best, pulseAt(frame, it.atWord, 26));
+  }, 0);
+
+  const machine = (name: string, icon: string, lit: number) => (
+    <div style={{
+      flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center',
+      gap: 5 * v.scale, width: box,
+    }}>
+      <div style={{
+        width: box, height: box, borderRadius: v.rad(15),
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        border: `${1.5 * v.scale}px solid ${hexA(v.a, 0.35 + lit * 0.6)}`,
+        background: `linear-gradient(155deg, ${hexA(v.a, 0.06 + lit * 0.22)}, ${hexA(v.a, 0.02)})`,
+        boxShadow: lit > 0.05 && v.t.style.glow > 0
+          ? `0 0 ${30 * v.scale * lit * v.t.style.glow}px ${hexA(v.a, 0.35 * lit)}` : undefined,
+        transform: `scale(${1 + lit * 0.045})`,
+      }}>
+        <AssetIcon asset={icon} size={box * 0.54} bare tint={v.a} />
+      </div>
+      <div style={{...v.mono(nameF / v.scale), fontWeight: 700, letterSpacing: 0.6,
+                   color: hexA(v.a, 0.6 + lit * 0.4), whiteSpace: 'nowrap'}}>{name}</div>
+    </div>
+  );
+
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', width: '100%', flex: 1, minHeight: 0}}>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+        {machine(L, 'lucide:laptop', hit('l'))}
+        <div style={{...v.body(nameF / v.scale * 0.95), color: hexA(v.dim, 0.8),
+                     letterSpacing: 1.2, paddingTop: box * 0.42}}>JSON-RPC 2.0</div>
+        {machine(R, 'lucide:server', hit('r'))}
+      </div>
+
+      {/* the lifelines: the machines, extended downward, so every arrow visibly
+          starts and ends ON one of them instead of floating in the middle */}
+      <div style={{position: 'relative', flex: 1, minHeight: 0, marginTop: 2 * v.scale}}>
+        {[rail, null].map((_, s) => (
+          <div key={s} style={{
+            position: 'absolute', top: 0, bottom: 0, width: 0,
+            left: s === 0 ? rail : undefined, right: s === 0 ? undefined : rail,
+            borderLeft: `${1.4 * v.scale}px dashed ${hexA(v.a, 0.28)}`,
+          }} />
+        ))}
+
+        <div style={{display: 'flex', flexDirection: 'column', gap: unit * 0.35}}>
+          {items.map((it, i) => {
+            const on = liveAt(frame, it.atWord, 14);
+            const back = it.dir === 'back';
+            const col = back ? v.sem('orange') : v.a;
+            const landed = on > 0.97 ? 1 : 0;
+            return (
+              <div key={i} style={{opacity: 0.22 + on * 0.78}}>
+                {/* the gap between the two lifelines — the ONLY space the envelope
+                    is allowed to occupy, so it can never reach the pane's edge */}
+                <div style={{position: 'relative', height: laneH, marginLeft: rail, marginRight: rail}}>
+                  <div style={{
+                    position: 'absolute', top: '50%', left: 0, right: 0, height: 1.4 * v.scale,
+                    transform: 'translateY(-50%)', background: hexA(v.t.colors.panelBorder, 0.55),
+                  }} />
+                  {/* the bright stretch of wire already crossed: you watch it travel */}
+                  <div style={{
+                    position: 'absolute', top: '50%', height: 2.4 * v.scale,
+                    left: back ? undefined : 0, right: back ? 0 : undefined,
+                    width: `${on * 100}%`, transform: 'translateY(-50%)',
+                    background: `linear-gradient(${back ? 270 : 90}deg, ${hexA(col, 0.15)}, ${hexA(col, 0.95)})`,
+                  }} />
+                  {/* arrowhead, parked on the machine it is being delivered to */}
+                  <div style={{
+                    position: 'absolute', top: '50%', transform: 'translateY(-50%)',
+                    left: back ? 0 : undefined, right: back ? undefined : 0,
+                    width: 0, height: 0, opacity: landed,
+                    borderTop: `${6 * v.scale}px solid transparent`,
+                    borderBottom: `${6 * v.scale}px solid transparent`,
+                    [back ? 'borderRight' : 'borderLeft']: `${9 * v.scale}px solid ${col}`,
+                  } as React.CSSProperties} />
+                  {/* THE ENVELOPE. `translateX(-pct%)` — never `-50%` — is what keeps
+                      the whole pill between the rails at both ends of the run. */}
+                  <div style={{
+                    position: 'absolute', top: '50%', maxWidth: '100%',
+                    left: back ? `${100 - on * 100}%` : `${on * 100}%`,
+                    transform: `translate(${back ? (100 - on * 100) : -on * 100}%, -50%)`,
+                    display: 'flex', alignItems: 'center', gap: 6 * v.scale,
+                    padding: `${4 * v.scale}px ${10 * v.scale}px`, borderRadius: v.rad(7),
+                    background: hexA(col, 0.94), whiteSpace: 'nowrap',
+                    boxShadow: `0 ${3 * v.scale}px ${12 * v.scale}px ${hexA(v.t.colors.bg, 0.7)}`,
+                  }}>
+                    <AssetIcon asset={back ? 'lucide:mail-open' : 'lucide:mail'}
+                               size={labF * 0.95} bare tint="#0b0b12" />
+                    <span style={{...v.mono(labF / v.scale * 0.9), fontWeight: 700,
+                                  color: '#0b0b12', letterSpacing: 0.2}}>{it.label}</span>
+                  </div>
+                </div>
+
+                {/* what the receiving end now holds — docked to ITS side of the wire */}
+                {(it.sub || it.out?.length) ? (
+                  <div style={{
+                    display: 'flex', justifyContent: back ? 'flex-start' : 'flex-end',
+                    marginLeft: rail, marginRight: rail,
+                  }}>
+                    <div style={{maxWidth: '86%', textAlign: back ? 'left' : 'right', opacity: landed ? 1 : on}}>
+                      {it.sub ? (
+                        <div style={{...v.body(subF / v.scale), color: v.dim, lineHeight: 1.35}}>{it.sub}</div>
+                      ) : null}
+                      {it.out?.length ? (
+                        <div style={{
+                          marginTop: 3 * v.scale, display: 'inline-block', textAlign: 'left',
+                          borderLeft: `${2.5 * v.scale}px solid ${hexA(col, 0.8)}`,
+                          background: hexA(v.t.colors.bg, 0.55), borderRadius: v.rad(5),
+                          padding: `${4 * v.scale}px ${8 * v.scale}px`, maxWidth: '100%',
+                        }}>
+                          {it.out.map((ln, k) => (
+                            <div key={k} style={{...v.mono(outF / v.scale), color: hexA(v.t.colors.text, 0.92),
+                                                 whiteSpace: 'pre', lineHeight: 1.4,
+                                                 overflow: 'hidden', textOverflow: 'ellipsis'}}>{ln}</div>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
 /** THE AGENTIC LOOP — a cycle that actually cycles, with the exit condition named.
  *  A list of four bullets is not a loop; the ring returning to its start is. */
 export const AgenticLoop: React.FC<McpVizProps> = ({items, accent}) => {
@@ -1003,6 +1461,8 @@ export const DeprecationCard: React.FC<McpVizProps> = ({items, accent}) => {
 const MCP_VIZ: Record<string, React.FC<McpVizProps>> = {
   'control-board': ControlBoard,
   'wire': WireExchange,
+  'mn-mesh': MnMesh,
+  'reach': ReachBoundary,
   'agentic-loop': AgenticLoop,
   'sampling-flip': SamplingFlip,
   'root-gate': RootGate,
