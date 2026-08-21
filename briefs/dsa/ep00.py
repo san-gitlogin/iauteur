@@ -2,6 +2,9 @@
 # EP00 — The Six-Step Framework. Source: dsa-pattern-dojo, FRAMEWORK (all 6 steps)
 # plus the signal table assembled from all ten patterns.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 def steps(rows):
     return [{"label":l,"sub":s, **({"mark":True} if m else {})} for l,s,m in rows]
 
@@ -204,5 +207,5 @@ T = {
   "episode, and then five real problems solved with nothing but this method.",
   data={"message":"Ten patterns, one per episode","sub":"next: Two Pointers"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/ep00.json','w'), indent=1)
+write(T, 'dsa/ep00.json')
 print("EP00:", len(T["scenes"]), "scenes")

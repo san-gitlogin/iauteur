@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # EP05 — Stack. Source: dsa-pattern-dojo, pattern `stack` (all 8 steps + challenge).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 CODE = [
  "def valid_parentheses(s):",
  "    stack = []",
@@ -257,5 +260,5 @@ T = {
   "swap changes the answer from any path into the shortest path. Go and do Valid Parentheses first.",
   data={"message":"All ten patterns, one per episode","sub":"next: BFS"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/ep05.json','w'), indent=1)
+write(T, 'dsa/ep05.json')
 print("EP05:", len(T["scenes"]), "scenes")

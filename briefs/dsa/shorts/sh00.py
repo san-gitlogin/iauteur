@@ -5,6 +5,9 @@
 # its signal words are circled one at a time, the pattern is named from them, and
 # only then do the six rungs light. The method is DEMONSTRATED, then summarised.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+from _guard import write
 
 PROBLEM = "Given a sorted array of integers and a target, return the indices of the two numbers that add up to it."
 
@@ -78,5 +81,5 @@ T = {
   "Ten patterns run on this exact method, one per chapter, in the Dojo.",
   data={"message":"Ten patterns, one method","sub":"the full course in the Dojo"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/shorts/sh00.json','w'), indent=1)
+write(T, 'dsa/shorts/sh00.json')
 print("SH00:", len(T["scenes"]), "scenes")

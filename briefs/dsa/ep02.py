@@ -2,6 +2,9 @@
 # EP02 — Sliding Window. Source: dsa-pattern-dojo, pattern `sliding-window`
 # (all 6 steps + its challenge). Markers: | code  ^ cell  > pointer  % var
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 
 CODE = [
  "def max_sum_subarray(nums, k):",
@@ -248,5 +251,5 @@ T = {
   "we throw half of it away on every single step. Go and do Maximum Average Subarray first.",
   data={"message":"All ten patterns, one per episode","sub":"next: Binary Search"}, anchors=[]),
  ]}
-json.dump(T, open('briefs/dsa/ep02.json','w'), indent=1)
+write(T, 'dsa/ep02.json')
 print("EP02:", len(T["scenes"]), "scenes")

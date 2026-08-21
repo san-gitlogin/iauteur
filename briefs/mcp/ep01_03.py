@@ -3,6 +3,9 @@
 # the subject named rather than pronouned, the analogy GIVEN before it is used, and
 # a reason carried inside the sentence rather than asserted after it.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
@@ -116,5 +119,5 @@ EP01 = {
    "Next chapter is the most important idea in MCP, and it fits in one question: who's in control?",
    data={"message":"Next: the three superpowers","sub":"tools, resources and prompts"}, anchors=[]),
  ]}
-json.dump(EP01, open('/Users/santhu/iauteur/briefs/mcp/ep01.json','w'), indent=1)
+write(EP01, 'mcp/ep01.json')
 print("EP01:", len(EP01["scenes"]), "scenes")

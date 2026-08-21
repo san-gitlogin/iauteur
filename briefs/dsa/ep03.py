@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # EP03 — Binary Search. Source: dsa-pattern-dojo, pattern `binary-search` (all 8 steps + challenge).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 CODE = [
  "def binary_search(nums, target):",
  "    left = 0",
@@ -285,5 +288,5 @@ T = {
   "it would cost more than the search saves. Go and do Binary Search first.",
   data={"message":"All ten patterns, one per episode","sub":"next: HashMap"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/ep03.json','w'), indent=1)
+write(T, 'dsa/ep03.json')
 print("EP03:", len(T["scenes"]), "scenes")

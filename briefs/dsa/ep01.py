@@ -2,6 +2,9 @@
 # EP01 — Two Pointers. Source: san-gitlogin/dsa-pattern-dojo, pattern `two-pointers`
 # (all 8 steps, both built-in challenges). Markers: | code  ^ cell  > pointer  % var
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 
 CODE = [
  "def two_sum_sorted(nums, target):",
@@ -292,5 +295,5 @@ T = {
   "asking about a stretch. Go and do Two Sum Two now, while the shelf is still in your head.",
   data={"message":"All ten patterns, one per episode","sub":"next: Sliding Window"}, anchors=[]),
  ]}
-json.dump(T, open('briefs/dsa/ep01.json','w'), indent=1)
+write(T, 'dsa/ep01.json')
 print("EP01:", len(T["scenes"]), "scenes")

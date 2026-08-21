@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # EP10 — Fast and Slow Pointers. Source: dsa-pattern-dojo, pattern `fast-slow` (all 6 steps + challenge).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 CODE = [
  "def has_cycle(head):",
  "    slow = fast = head",
@@ -337,5 +340,5 @@ T = {
   "unseen problem and deciding which of these to reach for. Go and do Linked List Cycle first.",
   data={"message":"Ten patterns down","sub":"next: the six-step framework"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/ep10.json','w'), indent=1)
+write(T, 'dsa/ep10.json')
 print("EP10:", len(T["scenes"]), "scenes")

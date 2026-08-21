@@ -3,6 +3,9 @@
 # Each problem is solved with its OWN pattern's visualiser: the picture the viewer
 # already learned in that pattern's episode.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 def sig(rows):
     return [{"label":l,"sub":s, **({"color":c} if c else {}), "mark":True} for l,s,c in rows]
 
@@ -319,5 +322,5 @@ T = {
   "The interactive version is linked below if you want to step through these yourself. Good luck.",
   data={"message":"The whole Dojo, one playlist","sub":"interactive version linked below"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/ep11.json','w'), indent=1)
+write(T, 'dsa/ep11.json')
 print("EP11:", len(T["scenes"]), "scenes")

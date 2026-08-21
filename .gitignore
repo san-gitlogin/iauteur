@@ -56,3 +56,4 @@ pat*.txt
 Thumbs.db
 *.swp
 .vscode/
+*.candidate.json

@@ -3,6 +3,9 @@
 # server is actually RUN with verbatim output (LAW 0m), because "it started" is a
 # claim until you see the process come up.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
 SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
@@ -170,5 +173,5 @@ T = {
    "You've got a server. Next chapter is the other half — the client, and the loop that makes Claude actually use it.",
    data={"message":"Next: the client","sub":"and the agentic loop"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep03.json','w'), indent=1)
+write(T, 'mcp/ep03.json')
 print("EP03:", len(T["scenes"]), "scenes")

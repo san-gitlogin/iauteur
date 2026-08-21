@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # EP09 — Greedy. Source: dsa-pattern-dojo, pattern `greedy` (all 6 steps + challenge).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 CODE = [
  "def merge_intervals(intervals):",
  "    intervals.sort(key=lambda x: x[0])",
@@ -320,5 +323,5 @@ T = {
   "something no single pass ever could. Go and do Merge Intervals first.",
   data={"message":"All ten patterns, one per episode","sub":"next: Fast and Slow Pointers"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/ep09.json','w'), indent=1)
+write(T, 'dsa/ep09.json')
 print("EP09:", len(T["scenes"]), "scenes")

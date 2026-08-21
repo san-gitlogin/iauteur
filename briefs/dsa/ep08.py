@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # EP08 — Dynamic Programming. Source: dsa-pattern-dojo, pattern `dp` (all 7 steps + challenge).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 CODE = [
  "def climb_stairs(n):",
  "    if n <= 2: return n",
@@ -235,5 +238,5 @@ T = {
   "globally right one, and no table is needed at all. Go and do Climbing Stairs first.",
   data={"message":"All ten patterns, one per episode","sub":"next: Greedy"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/ep08.json','w'), indent=1)
+write(T, 'dsa/ep08.json')
 print("EP08:", len(T["scenes"]), "scenes")

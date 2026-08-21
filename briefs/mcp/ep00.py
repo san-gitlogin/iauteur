@@ -3,6 +3,9 @@
 # Source: learn-mcp lesson 1. Nothing is assumed: the analogy and the vocabulary
 # are given BEFORE they are used (LAW 0l), and the shell output is verbatim (LAW 0m).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
@@ -227,5 +230,5 @@ T = {
   "is model agnostic. Next chapter: what MCP actually is, and why it exists at all.",
   data={"message":"Next: what MCP actually is","sub":"and the problem it solves"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep00.json','w'), indent=1)
+write(T, 'mcp/ep00.json')
 print("EP00:", len(T["scenes"]), "scenes")

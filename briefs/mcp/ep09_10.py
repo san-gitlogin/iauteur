@@ -2,6 +2,9 @@
 # EP09 transport + the two flags. EP10 the finale. The flag matrix is the reason
 # these two share a chapter: the flags only make sense once HTTP is on the table.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
 SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
@@ -105,7 +108,7 @@ EP09 = {
    "One chapter left, and it's the one where we put the whole protocol back together.",
    data={"message":"Next: everything, together","sub":"and the final question"}, anchors=[]),
  ]}
-json.dump(EP09, open('/Users/santhu/iauteur/briefs/mcp/ep09.json','w'), indent=1)
+write(EP09, 'mcp/ep09.json')
 print("EP09:", len(EP09["scenes"]), "scenes")
 
 EP10 = {
@@ -202,5 +205,5 @@ EP10 = {
    "version is linked below if you'd like to step through it yourself. Go and build something.",
    data={"message":"Learn MCP — the whole course","sub":"interactive version linked below"}, anchors=[]),
  ]}
-json.dump(EP10, open('/Users/santhu/iauteur/briefs/mcp/ep10.json','w'), indent=1)
+write(EP10, 'mcp/ep10.json')
 print("EP10:", len(EP10["scenes"]), "scenes")

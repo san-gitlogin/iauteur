@@ -3,6 +3,9 @@
 # NOT enforce it — that misconception is the whole lesson, and the refusal has to be
 # something you watch happen (MCP_ROOTS) rather than a sentence you're told.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
 SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
@@ -125,7 +128,7 @@ EP07 = {
    "Next: how a long-running tool tells the user it hasn't frozen.",
    data={"message":"Next: notifications","sub":"logs and progress"}, anchors=[]),
  ]}
-json.dump(EP07, open('/Users/santhu/iauteur/briefs/mcp/ep07.json','w'), indent=1)
+write(EP07, 'mcp/ep07.json')
 print("EP07:", len(EP07["scenes"]), "scenes")
 
 NOTIF_PREM = "A tool that takes thirty seconds is silent by default. These two calls are the only way the user learns anything is happening."
@@ -224,5 +227,5 @@ EP08 = {
    "Next chapter has a trap in it: two flags that quietly switch this entire feature off.",
    data={"message":"Next: transport","sub":"and two dangerous flags"}, anchors=[]),
  ]}
-json.dump(EP08, open('/Users/santhu/iauteur/briefs/mcp/ep08.json','w'), indent=1)
+write(EP08, 'mcp/ep08.json')
 print("EP08:", len(EP08["scenes"]), "scenes")

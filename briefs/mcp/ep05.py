@@ -3,6 +3,9 @@
 # raced on one clock rather than asserted (MCP_MENTION), because a claim the viewer
 # cannot check is a claim they won't keep.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
 SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
@@ -135,5 +138,5 @@ T = {
    "Claude on its behalf — and pay for it.",
    data={"message":"Next: sampling","sub":"the server asks you"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep05.json','w'), indent=1)
+write(T, 'mcp/ep05.json')
 print("EP05:", len(T["scenes"]), "scenes")

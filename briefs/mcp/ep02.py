@@ -2,6 +2,9 @@
 # EP02 — The three primitives. The whole lesson is WHO IS IN CONTROL, so control is
 # the visual variable (MCP_CONTROL stamps every lane with who pulls the trigger).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
 SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
@@ -114,5 +117,5 @@ T = {
    "Next chapter we stop talking and build a server, and you'll see it's shorter than you expect.",
    data={"message":"Next: build your first server","sub":"it's decorators on functions"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep02.json','w'), indent=1)
+write(T, 'mcp/ep02.json')
 print("EP02:", len(T["scenes"]), "scenes")

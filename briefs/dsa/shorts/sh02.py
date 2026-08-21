@@ -3,6 +3,9 @@
 # never rebuild it. Written for ~55s, not trimmed from the long script: a short
 # has to land a single idea and send the viewer to the full pattern.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+from _guard import write
 CODE = [
  "window_sum = sum(nums[:k])",
  "",
@@ -74,5 +77,5 @@ T = {
   "Subarray, substring, or a window of size k — that is your signal. The full pattern is in the Dojo.",
   data={"message":"Sliding Window, traced line by line","sub":"full pattern in the Dojo"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/shorts/sh02.json','w'), indent=1)
+write(T, 'dsa/shorts/sh02.json')
 print("SH02:", len(T["scenes"]), "scenes")

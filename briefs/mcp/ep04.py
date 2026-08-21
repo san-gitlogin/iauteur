@@ -3,6 +3,9 @@
 # genuinely cycles, with the exit condition on the node that ends it, because a
 # four-bullet list is not a loop (LAW 0j).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
 SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
@@ -122,5 +125,5 @@ T = {
    "Next chapter: resources and prompts, and a trick that gets data to Claude before Claude even asks for it.",
    data={"message":"Next: resources and prompts","sub":"and the @ mention trick"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep04.json','w'), indent=1)
+write(T, 'mcp/ep04.json')
 print("EP04:", len(T["scenes"]), "scenes")

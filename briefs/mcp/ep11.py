@@ -3,6 +3,9 @@
 # headline client feature. API verified against the live Python SDK source:
 # Context.elicit(message, schema) and Context.elicit_url(message, url, elicitation_id).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
 SRC = ["MCP specification 2026-07-28: https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation",
@@ -152,5 +155,5 @@ T = {
    "One chapter left, where we put the whole protocol back together — and sort what's current from what's on its way out.",
    data={"message":"Next: everything, together","sub":"and what changed"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep11.json','w'), indent=1)
+write(T, 'mcp/ep11.json')
 print("EP11:", len(T["scenes"]), "scenes")

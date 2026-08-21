@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # EP07 — DFS / Backtracking. Source: dsa-pattern-dojo, pattern `dfs` (all 8 steps + challenge).
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 CODE = [
  "def subsets(nums):",
  "    result = []",
@@ -255,5 +258,5 @@ T = {
   "branch in it over and over. Go and do Subsets first, then Permutations.",
   data={"message":"All ten patterns, one per episode","sub":"next: Dynamic Programming"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/dsa/ep07.json','w'), indent=1)
+write(T, 'dsa/ep07.json')
 print("EP07:", len(T["scenes"]), "scenes")

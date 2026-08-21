@@ -3,6 +3,9 @@
 # billing argument at once. Both halves land in one picture (MCP_SAMPLING), and the
 # cost is a running meter rather than an assertion.
 import json
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from _guard import write
 BRAND = {"theme":"moderndark","design":"moderndark","themeLight":"daylight","background":"grid",
          "channel":"THE NBX STUDIO","logo":"img:channel_logo.png"}
 SRC = ["Course source: https://github.com/san-gitlogin/learn-mcp",
@@ -148,5 +151,5 @@ T = {
    "Next chapter: how you stop a server reading files it was never meant to touch.",
    data={"message":"Next: roots","sub":"file access control"}, anchors=[]),
  ]}
-json.dump(T, open('/Users/santhu/iauteur/briefs/mcp/ep06.json','w'), indent=1)
+write(T, 'mcp/ep06.json')
 print("EP06:", len(T["scenes"]), "scenes")
