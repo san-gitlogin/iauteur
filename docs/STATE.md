@@ -20,9 +20,15 @@ and what already exists so it does not get rebuilt.
 ```bash
 npm run gate                      # 10 seals; must exit 0
 npm run typecheck                 # tsc --noEmit
+npm run publish-safety            # staged changes: secrets / identity / machine paths
+npm run publish-safety:all        # same, over every tracked file
 python scripts/test-webui-http.py # 12 Flask endpoint checks
 python scripts/docs_shots.py      # regenerates docs/img/*.png from the live console
 ```
+
+**This repo is PUBLIC and pushing is the line.** `scripts/check-publish-safety.mjs` runs
+automatically on push via `.githooks/pre-push` — enable it once per clone with
+`git config core.hooksPath .githooks`. Working locally is free; a push is publication.
 
 On Windows, prefix Python with `PYTHONIOENCODING=utf-8` or the seals crash on `→` in cp1252.
 
@@ -634,6 +640,24 @@ now **three frames per scene** — 25/55/88% — because one still cannot reveal
 frames across 12 episodes, montaged into per-episode contact sheets.
 
 ## Open threads
+
+- **ACCEPTED RISK, decided 2026-08-21 — do not "fix" this.** The channel name appears in
+  **182 lines across 136 tracked files** (the briefs, every `topics/*/long.json`,
+  `channel_profile.md`, `docs/CONTINUE_HERE.md`, and hardcoded in `scripts/build-linux-spec.mjs`,
+  which does violate LAW 0g rule 5). A personal handle appears in **35** more as a sample home
+  directory and shell prompt in the Linux course content. Both re-entered when the specs and
+  briefs became tracked (`fa533ec`), partially undoing what `e746553` stripped.
+
+  **The owner's ruling was to leave it.** The channel is public on YouTube, so this is linkage
+  between the repo and a public brand rather than exposure of a secret; the handle is already
+  on screen in the shipped video. Scrubbing forward would leave it in history regardless, and a
+  history rewrite was judged disproportionate.
+
+  This is recorded in `.publish-safety-allow.json` with the reason, so the gate reports it as
+  **accepted** rather than failing forever. **It is a decision, not an oversight** — a future
+  session must not scrub it, and must not re-raise it as a discovery. Reopen only if the owner
+  asks. The related open question they have not been asked to settle: whether episode scripts
+  belong in a public repo at all.
 
 - **Demo video** — done, see the dated entry above. One thing outstanding: GitHub does not play a
   repo-relative `<video>` inline, so the README currently shows the poster linked to the mp4. For

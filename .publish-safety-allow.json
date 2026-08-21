@@ -1,0 +1,55 @@
+{
+  "_README": [
+    "Findings the owner has EXPLICITLY ACCEPTED. Read by scripts/check-publish-safety.mjs.",
+    "",
+    "Entries name a RULE and a PATH GLOB — never a value. A file that spells out the",
+    "string it is allowing would be the leak it is meant to document.",
+    "",
+    "Accepted is NOT hidden: the gate still prints a running count of accepted findings on",
+    "every run, so this list stays visible and can be revisited. Adding an entry needs an",
+    "owner decision and a reason, not a convenient silence.",
+    "",
+    "To see everything including accepted:  npm run publish-safety:all -- --show-accepted"
+  ],
+  "accept": [
+    {
+      "rule": "ENV:IAUTEUR_CHANNEL",
+      "paths": ["**"],
+      "decidedOn": "2026-08-21",
+      "decidedBy": "owner",
+      "reason": [
+        "The channel name is in 182 lines across 136 tracked files — the briefs, every",
+        "topics/*/long.json, channel_profile.md, docs/CONTINUE_HERE.md, and hardcoded in",
+        "scripts/build-linux-spec.mjs. It re-entered when the specs and briefs became",
+        "tracked (fa533ec), undoing part of what e746553 stripped.",
+        "",
+        "Owner ruling: LEAVE IT. The channel is public on YouTube, so this is linkage",
+        "between the repo and a public brand, not exposure of a secret. Scrubbing forward",
+        "would leave it in history anyway, and a rewrite was judged disproportionate.",
+        "",
+        "A future session must NOT 'helpfully' scrub this. It is a decision, not an",
+        "oversight. Reopen it only if the owner says so."
+      ]
+    },
+    {
+      "rule": "HOME_PATH",
+      "paths": [
+        "briefs/**",
+        "topics/**",
+        "scripts/lib/manifest.mjs",
+        "src/showcaseSpec.ts"
+      ],
+      "decidedOn": "2026-08-21",
+      "decidedBy": "owner",
+      "reason": [
+        "A personal handle is used as the sample home directory and shell prompt in the",
+        "Linux course content and in component fixtures — it is on screen in the shipped",
+        "video, so it is already public. Accepted under the same ruling as the channel name.",
+        "",
+        "Scoped deliberately to course content and fixtures: a real home path appearing in",
+        "docs/, webui/ or anywhere else still BLOCKS, because that would be new disclosure",
+        "rather than this accepted one."
+      ]
+    }
+  ]
+}
