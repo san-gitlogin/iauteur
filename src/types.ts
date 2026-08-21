@@ -11150,6 +11150,12 @@ export interface VideoSpec {
     logos?: string[];
     /** Optional per-row tint for those marks. Defaults to the theme's text colour. */
     logoTint?: string;
+    /** A tight sub-line under the title: a qualifier the title itself has no room
+     *  for ("INCLUDES CODING EXAMPLES"). Small, tracked, uppercase, flush to the
+     *  title's left edge and led by a short rule so it reads as attached to the
+     *  title rather than orphaned between it and the logo wall. Keep it short —
+     *  it is set on one line and does not wrap. */
+    note?: string;
   };
   scenes: Scene[];
 }

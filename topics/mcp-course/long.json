@@ -15,10 +15,12 @@
   "logo": "img:channel_logo.png"
  },
  "thumbnail": {
-  "title": "MCP, PROPERLY",
+  "title": "LEARN MCP IN UNDER AN HOUR",
   "badge": "Full Course \u00b7 2026 spec",
-  "asset": "si:anthropic",
+  "asset": "si:claude",
+  "note": "Includes coding examples",
   "logos": [
+   "si:claude",
    "si:anthropic",
    "si:python"
   ]
