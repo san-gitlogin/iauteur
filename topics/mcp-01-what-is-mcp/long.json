@@ -1,0 +1,470 @@
+{
+  "meta": {
+    "topic": "What MCP Actually Is",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "MCP is a standard socket, so the integration you need has probably already been written by somebody else.",
+    "openLoop": "Four services, four integrations, and none of them are your product. What if you didn't write any of them?",
+    "analogy": "THE DELIVERY PLATFORM - you don't sign every restaurant yourself; you plug into the one that already did.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "What MCP Actually Is (And Why It Exists)",
+      "altTitles": [
+        "MCP Explained With One Analogy That Sticks",
+        "Stop Writing Integrations — What MCP Is Really For"
+      ],
+      "hook": "Four services. Four integrations. None of them are your product.",
+      "breakdown": "what the Model Context Protocol actually is, the problem it removes, and the exact messages a client and server exchange",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "Four integrations you didn't want"
+        },
+        {
+          "id": "s03",
+          "title": "The analogy that sticks"
+        },
+        {
+          "id": "s05",
+          "title": "Every arrow is one message"
+        },
+        {
+          "id": "s07",
+          "title": "Who writes the integration?"
+        }
+      ],
+      "sources": [
+        "Course source: https://github.com/san-gitlogin/learn-mcp",
+        "Live course: https://san-gitlogin.github.io/learn-mcp/"
+      ],
+      "queries": [
+        "what is mcp",
+        "model context protocol explained",
+        "mcp vs function calling",
+        "mcp server client",
+        "why use mcp",
+        "anthropic mcp tutorial",
+        "mcp json rpc"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#ai",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "claude",
+        "anthropic",
+        "ai tools",
+        "integration",
+        "json rpc",
+        "python",
+        "tutorial",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "STOP WRITING GLUE CODE",
+    "badge": "What is MCP",
+    "asset": "si:anthropic"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 189,
+      "narration": "You want Claude to reach your GitHub, your Slack, your database. That plumbing is weeks of work.",
+      "data": {
+        "headline": "STOP WRITING INTEGRATIONS",
+        "subtext": "what MCP actually is",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 9.083
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp-01-what-is-mcp_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "durationFrames": 377,
+      "narration": "This chapter is about why you mostly don't have to write it. You'll leave knowing what an MCP server and client actually are, and the four messages that pass between them. Learn MCP, on THE NBX STUDIO.",
+      "data": {
+        "title": "WHAT IS MCP",
+        "subtitle": "chapter two of twelve"
+      },
+      "transition": "fade",
+      "background": "zoneB",
+      "anchors": [],
+      "audio": "audio/mcp-01-what-is-mcp_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_CONTROL",
+      "durationFrames": 1126,
+      "narration": "Forget the jargon for a second and picture a food delivery app. You could partner with every restaurant one at a time — negotiate each menu, handle each payment, arrange each driver. That works, and it's your whole life. Or you plug into a platform that already did all of that, and you get every restaurant at once. MCP is the second one, for AI tools. Somebody has already written the GitHub connection, the Slack connection, the Postgres connection, and packaged each as a thing you plug into. That package is called an MCP server, and the part of your app that plugs in is called an MCP client. Those two words are the whole vocabulary.",
+      "data": {
+        "mcpControl": {
+          "headline": "The analogy that [sticks]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the delivery platform",
+          "premise": "Picture a food delivery app. You can sign every restaurant yourself, or plug into the platform that already signed them.",
+          "cells": [
+            {
+              "label": "sign every restaurant",
+              "sub": "you write GitHub, Slack, Postgres yourself — forever",
+              "owner": "code",
+              "icon": "lucide:hammer",
+              "atWord": 9.5
+            },
+            {
+              "label": "plug into the platform",
+              "sub": "somebody already wrote them, you connect",
+              "owner": "code",
+              "icon": "lucide:plug",
+              "atWord": 31
+            },
+            {
+              "label": "MCP",
+              "sub": "the platform, for AI tools",
+              "owner": "ai",
+              "icon": "si:anthropic",
+              "atWord": 46.083
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp-01-what-is-mcp_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03b",
+      "type": "MCP_MESH",
+      "durationFrames": 1301,
+      "narration": "It's worth seeing why anyone bothered inventing a protocol, because the answer is a multiplication. Say four different apps want tool access — your editor, a chat client, an I D E, a terminal agent. And four services worth reaching — GitHub, Slack, Postgres, the filesystem. Without a standard, every app writes its own version of every connection, so watch what that actually costs. Sixteen separate integrations, and not one of them is shareable with anybody else. With a standard it's four servers and four clients — eight pieces instead of sixteen, and the gap widens fast as either side grows. That's the entire economic argument for MCP, and it's why the shape caught on as quickly as it did.",
+      "data": {
+        "mcpMesh": {
+          "headline": "Why a standard [had to exist]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the multiplication",
+          "premise": "Four apps on the left, four services on the right. Every line is an integration somebody has to write and then maintain.",
+          "cells": [
+            {
+              "label": "editor",
+              "icon": "lucide:file-code",
+              "text": "client",
+              "atWord": 20.417
+            },
+            {
+              "label": "chat client",
+              "icon": "lucide:message-square",
+              "text": "client",
+              "atWord": 22.25
+            },
+            {
+              "label": "IDE",
+              "icon": "lucide:code-xml",
+              "text": "client",
+              "atWord": 24.917
+            },
+            {
+              "label": "agent",
+              "icon": "lucide:bot",
+              "text": "client",
+              "atWord": 28.417
+            },
+            {
+              "label": "GitHub",
+              "icon": "si:github",
+              "text": "server",
+              "atWord": 36.417
+            },
+            {
+              "label": "Slack",
+              "icon": "si:slack",
+              "text": "server",
+              "atWord": 37.333
+            },
+            {
+              "label": "Postgres",
+              "icon": "si:postgresql",
+              "text": "server",
+              "atWord": 38.25
+            },
+            {
+              "label": "files",
+              "icon": "lucide:folder",
+              "text": "server",
+              "atWord": 39.083
+            },
+            {
+              "label": "MCP",
+              "icon": "lucide:git-fork",
+              "text": "hub",
+              "atWord": 68.417
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-01-what-is-mcp_s03b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "MCP_WIRE",
+      "durationFrames": 987,
+      "narration": "So concretely, here's the shape. Your app opens a connection to a server, and the first thing your app asks is what can you do. The server answers with a list of tools, each carrying a name and a description. Then when you want one of those tools run, your app calls it by name with arguments, and the server runs the function and hands back the result. That's the entire protocol at this level — a question, a list, a call, a result — which means everything else in this course hangs off those four messages. Everything else in this course is detail hanging off those four messages.",
+      "data": {
+        "mcpWire": {
+          "headline": "Server, client, [and a wire]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the two words",
+          "codeTitle": "client.py",
+          "premise": "Your app is the client. Somebody else's program is the server. Every arrow is one JSON-RPC message crossing between them.",
+          "ends": [
+            {
+              "label": "YOUR APP"
+            },
+            {
+              "label": "MCP SERVER"
+            }
+          ],
+          "lines": [
+            {
+              "text": "async with stdio_client(params) as (r, w):"
+            },
+            {
+              "text": "    async with ClientSession(r, w) as client:"
+            },
+            {
+              "text": "        await client.initialize()"
+            },
+            {
+              "text": "        tools = await client.list_tools()",
+              "detail": "Ask the server what it can do.",
+              "atWord": 9.583
+            },
+            {
+              "text": "        result = await client.call_tool(",
+              "detail": "Run one, by name, with arguments.",
+              "atWord": 29.5
+            },
+            {
+              "text": "            \"read_note\", {\"note_id\": \"todo.md\"})"
+            }
+          ],
+          "cells": [
+            {
+              "label": "3 tools",
+              "sub": "read_note · edit_note · list_notes",
+              "dir": "back",
+              "out": [
+                "{\"result\":{\"tools\":[",
+                "  {\"name\":\"read_note\",",
+                "   \"description\":\"Read a note\"}]}}"
+              ],
+              "atWord": 18.417
+            },
+            {
+              "label": "the note text",
+              "sub": "whatever the function returned",
+              "dir": "back",
+              "out": [
+                "{\"result\":{\"content\":[",
+                "  {\"type\":\"text\",",
+                "   \"text\":\"Buy groceries...\"}]}}"
+              ],
+              "atWord": 42.083
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-01-what-is-mcp_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04b",
+      "type": "MCP_WIRE",
+      "durationFrames": 1232,
+      "narration": "One thing happens before any of that, and it explains a lot of confusing behaviour later. Initialize is the handshake, and it's where both sides declare what they can do. Your client says which optional features it supports — whether it can handle elicitation, for example. The server answers with what it offers: tools, resources, prompts. And the rule that falls out is simple: a server must not send a request the client never said it could handle. So if you build a server that asks for user input and the client never declared elicitation, you don't get an error at that moment — you get a feature that silently never happens. Which is why, when something mysteriously does nothing, the handshake is the first place to look.",
+      "data": {
+        "mcpWire": {
+          "headline": "First, they [agree what's possible]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the handshake",
+          "codeTitle": "client.py",
+          "premise": "Before any tool is listed, the two sides state what they each support. Nothing works that both sides did not agree to.",
+          "ends": [
+            {
+              "label": "YOUR APP"
+            },
+            {
+              "label": "MCP SERVER"
+            }
+          ],
+          "lines": [
+            {
+              "text": "async with ClientSession(read, write) as client:"
+            },
+            {
+              "text": "    await client.initialize()",
+              "detail": "Both sides declare what they support.",
+              "atWord": 12.583
+            },
+            {
+              "text": "    # only now can you list or call anything"
+            },
+            {
+              "text": "    tools = await client.list_tools()"
+            }
+          ],
+          "cells": [
+            {
+              "label": "client capabilities",
+              "sub": "what your app can handle — elicitation, and so on",
+              "dir": "out",
+              "out": [
+                "{\"elicitation\":{\"form\":{}}}"
+              ],
+              "atWord": 23.667
+            },
+            {
+              "label": "server capabilities",
+              "sub": "what this server offers",
+              "dir": "back",
+              "out": [
+                "{\"tools\":{},\"resources\":{},",
+                "  \"prompts\":{}}"
+              ],
+              "atWord": 36.25
+            },
+            {
+              "label": "never declared = never sent",
+              "sub": "the feature silently does nothing",
+              "dir": "back",
+              "atWord": 88.333
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "audio": "audio/mcp-01-what-is-mcp_s04b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "QUIZ_CARD",
+      "durationFrames": 758,
+      "narration": "Straight from the course. Your app wants to read GitHub repositories. With MCP, who writes the GitHub integration? You do, from scratch. Or the MCP server author already did. Have a think, and pause the video if you'd like a moment. Ready? The server author already did. That's the entire point — you install their server and connect to it, the same way you'd install a library rather than rewriting it.",
+      "data": {
+        "quiz": {
+          "question": "Who writes the GitHub integration?",
+          "options": [
+            {
+              "text": "you do, from scratch",
+              "atWord": 15.583
+            },
+            {
+              "text": "the MCP server author did",
+              "atWord": 19
+            }
+          ],
+          "answerIndex": 1,
+          "why": "You install their server, the way you'd install a library.",
+          "atWord": 1,
+          "revealAtWord": 35.5
+        }
+      },
+      "transition": "iris",
+      "background": "zoneC",
+      "anchors": [
+        "quiz.atWord",
+        "quiz.options.0.atWord",
+        "quiz.options.1.atWord",
+        "quiz.revealAtWord"
+      ],
+      "audio": "audio/mcp-01-what-is-mcp_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "RECAP",
+      "durationFrames": 462,
+      "narration": "Three lines to keep. An MCP server is somebody else's integration, packaged. An MCP client is the piece of your app that plugs into a server. And the wire between them carries four kinds of message, which we'll meet properly next chapter.",
+      "data": {
+        "heading": "Chapter two, in three lines",
+        "points": [
+          {
+            "text": "A server is a packaged integration",
+            "atWord": 3.5
+          },
+          {
+            "text": "A client is your end of the wire",
+            "atWord": 10.5
+          },
+          {
+            "text": "Four kinds of message cross it",
+            "atWord": 22.75
+          }
+        ]
+      },
+      "transition": "dip",
+      "background": "zoneB",
+      "anchors": [
+        "points.0.atWord",
+        "points.1.atWord",
+        "points.2.atWord"
+      ],
+      "audio": "audio/mcp-01-what-is-mcp_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "OUTRO_CTA",
+      "durationFrames": 211,
+      "narration": "Next chapter is the most important idea in MCP, and it fits in one question: who's in control?",
+      "data": {
+        "message": "Next: the three superpowers",
+        "sub": "tools, resources and prompts"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp-01-what-is-mcp_s07.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

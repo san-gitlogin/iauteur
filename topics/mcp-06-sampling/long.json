@@ -1,0 +1,487 @@
+{
+  "meta": {
+    "topic": "Sampling",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Sampling reverses the protocol so the client's API key pays, which is what makes a public server affordable to run.",
+    "openLoop": "Your free server goes viral. Who gets the bill?",
+    "analogy": "THE BORROWED KITCHEN - we prepped the ingredients, but you cook it at your house, on your gas.",
+    "topicAxes": [
+      "economic-pain",
+      "entity-novelty"
+    ],
+    "seo": {
+      "title": "MCP Sampling — Your Server Goes Viral. Who Pays?",
+      "altTitles": [
+        "The MCP Feature That Stops Your Server Bankrupting You",
+        "Sampling Explained: When The Server Calls You Back"
+      ],
+      "hook": "Your free server goes viral. Congratulations — here's the bill.",
+      "breakdown": "why sampling exists, how the server asks the client to call an LLM, and who ends up paying",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "Who gets the bill"
+        },
+        {
+          "id": "s03",
+          "title": "The problem, in money"
+        },
+        {
+          "id": "s04",
+          "title": "The arrow turns around"
+        },
+        {
+          "id": "s05",
+          "title": "The server side"
+        },
+        {
+          "id": "s06",
+          "title": "The client side"
+        }
+      ],
+      "sources": [
+        "Course source: https://github.com/san-gitlogin/learn-mcp",
+        "Live course: https://san-gitlogin.github.io/learn-mcp/"
+      ],
+      "queries": [
+        "mcp sampling explained",
+        "ctx.session.create_message",
+        "mcp sampling callback",
+        "who pays for mcp sampling",
+        "mcp server llm call",
+        "sampling_callback python",
+        "reverse mcp request"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "sampling",
+        "claude",
+        "anthropic",
+        "python",
+        "api costs",
+        "createmessage",
+        "tutorial",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "WHO PAYS THE BILL?",
+    "badge": "Sampling",
+    "asset": "si:anthropic"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 200,
+      "narration": "Publish an MCP server that needs a language model, and someone pays for every call.",
+      "data": {
+        "headline": "WHO PAYS THE BILL?",
+        "subtext": "sampling, explained",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 9.917
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp06_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "durationFrames": 374,
+      "narration": "This chapter is about making sure that someone isn't you. You'll see the protocol run backwards — and understand the one trick that keeps a public server cheap. Learn MCP, on THE NBX STUDIO.",
+      "data": {
+        "title": "SAMPLING",
+        "subtitle": "chapter seven of twelve"
+      },
+      "transition": "fade",
+      "background": "zoneB",
+      "anchors": [],
+      "audio": "audio/mcp06_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_SAMPLING",
+      "durationFrames": 1114,
+      "narration": "Picture a public MCP server for research. Somebody asks it to research quantum computing, and the tool scrapes a pile of Wikipedia articles and gathers the raw material. Now the tool needs to turn that pile into a readable report, and summarising needs a language model. So the obvious move is to put your own Anthropic key on the server and call Claude right there. That works perfectly on day one, when the only user is you. But every user's request flows through your code, which means every single summarisation is billed to your key. Your server gets popular, and the bill arrives with the popularity. That's the corner sampling exists to get you out of.",
+      "data": {
+        "mcpSampling": {
+          "headline": "The problem, [in money]",
+          "color": "red",
+          "atWord": 1,
+          "caption": "a server that summarises",
+          "codeTitle": "research_server.py",
+          "premise": "Your server is public. Anyone can install it. Whoever holds the API key pays for every call it makes.",
+          "ends": [
+            {
+              "label": "CLIENT"
+            },
+            {
+              "label": "SERVER"
+            }
+          ],
+          "lines": [
+            {
+              "text": "@mcp.tool()"
+            },
+            {
+              "text": "async def research(topic: str):"
+            },
+            {
+              "text": "    data = await scrape_wikipedia(topic)",
+              "detail": "The easy part. No model needed.",
+              "atWord": 22
+            },
+            {
+              "text": "    # now summarise it — needs an LLM"
+            },
+            {
+              "text": "    client = Anthropic()        # YOUR key",
+              "detail": "Every user's request, billed to you.",
+              "atWord": 60.417
+            },
+            {
+              "text": "    return client.messages.create(...)"
+            }
+          ],
+          "cells": [
+            {
+              "label": "your key on the server",
+              "sub": "works fine when you're the only user",
+              "dir": "out",
+              "atWord": 36.083
+            },
+            {
+              "label": "every request, your bill",
+              "sub": "popularity is now a liability",
+              "dir": "back",
+              "value": 50000,
+              "atWord": 66.75
+            }
+          ],
+          "vars": [
+            {
+              "label": "cost scales with users",
+              "atWord": 83.25
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp06_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "MCP_SAMPLING",
+      "durationFrames": 1376,
+      "narration": "Sampling flips the direction. Normally the client asks the server to do things, and every arrow points one way. Here the server turns round mid-tool and asks the client: you call the model for me, and send me back what it says. The tool takes a c t x argument, which is the server's line back to whoever connected. The call that does the asking is c t x dot session dot create message, and the key detail is that the client is the one holding an API key, so the client is the one who pays. The course calls it reverse uno, and the restaurant version is nicer: we prepped your ingredients, but would you cook the last step at your house — you've got a kitchen, and your own gas bill. The generated text comes back as the result, so your server stays cheap to run no matter how popular it gets, because the expensive part never happens on your machine.",
+      "data": {
+        "mcpSampling": {
+          "headline": "The arrow [turns around]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "reverse uno",
+          "codeTitle": "research_server.py",
+          "premise": "Your server is public. Anyone can install it. Whoever holds the API key pays for every call it makes.",
+          "ends": [
+            {
+              "label": "CLIENT"
+            },
+            {
+              "label": "SERVER"
+            }
+          ],
+          "lines": [
+            {
+              "text": "@mcp.tool()"
+            },
+            {
+              "text": "async def summarize(text: str, ctx: Context):",
+              "detail": "ctx is the server's line back to the client.",
+              "atWord": 29.083
+            },
+            {
+              "text": "    result = await ctx.session.create_message(",
+              "detail": "\"Client — please call an LLM with this.\"",
+              "atWord": 40.833
+            },
+            {
+              "text": "        messages=[SamplingMessage("
+            },
+            {
+              "text": "            role=\"user\","
+            },
+            {
+              "text": "            content=TextContent(type=\"text\", text=text))],"
+            },
+            {
+              "text": "        max_tokens=4000,"
+            },
+            {
+              "text": "    )"
+            },
+            {
+              "text": "    return result.content.text",
+              "detail": "The generated text comes back here.",
+              "atWord": 92.167
+            }
+          ],
+          "cells": [
+            {
+              "label": "sampling/createMessage",
+              "sub": "server asks the client to call Claude",
+              "dir": "back",
+              "atWord": 13.167
+            },
+            {
+              "label": "the client's key pays",
+              "sub": "whoever calls the model holds the bill",
+              "dir": "out",
+              "atWord": 51.25
+            }
+          ],
+          "vars": [
+            {
+              "label": "server cost: unchanged",
+              "atWord": 97.667
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp06_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "MCP_SAMPLING",
+      "durationFrames": 1116,
+      "narration": "For that to work the client has to agree in advance, and agreeing is one function. You write a sampling callback, and the S D K calls that function automatically whenever a server asks for a generation. Inside it, the messages the server sent arrive as params dot messages, in MCP's own format, so you may need to convert them into whatever shape your model expects. Then you call Anthropic yourself — this is your code, your key, your bill. And you register the callback when you open the session, which is the moment you're consenting to the whole arrangement. Nothing happens without that callback, so a client that never registers one simply can't be asked.",
+      "data": {
+        "mcpSampling": {
+          "headline": "The client's half [of the deal]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "one callback",
+          "codeTitle": "client.py",
+          "premise": "Your server is public. Anyone can install it. Whoever holds the API key pays for every call it makes.",
+          "ends": [
+            {
+              "label": "CLIENT"
+            },
+            {
+              "label": "SERVER"
+            }
+          ],
+          "lines": [
+            {
+              "text": "async def sampling_callback(context, params):",
+              "detail": "The SDK calls this when a server asks.",
+              "atWord": 12.583
+            },
+            {
+              "text": "    text = await chat(params.messages)",
+              "detail": "YOUR function. Your key. Your bill.",
+              "atWord": 51.917
+            },
+            {
+              "text": "    return CreateMessageResult("
+            },
+            {
+              "text": "        role=\"assistant\", model=model,"
+            },
+            {
+              "text": "        content=TextContent(type=\"text\", text=text),"
+            },
+            {
+              "text": "    )"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "ClientSession(read, write,",
+              "detail": "Registering it is how you consent.",
+              "atWord": 62.917
+            },
+            {
+              "text": "              sampling_callback=sampling_callback)"
+            }
+          ],
+          "cells": [
+            {
+              "label": "params.messages",
+              "sub": "MCP format — convert to your model's shape",
+              "dir": "back",
+              "atWord": 29.083
+            },
+            {
+              "label": "no callback, no sampling",
+              "sub": "a client that never registers one can't be asked",
+              "dir": "out",
+              "atWord": 78.667
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "background": "zoneC",
+      "audio": "audio/mcp06_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05d",
+      "type": "MCP_DEPRECATED",
+      "durationFrames": 1498,
+      "narration": "Now the part the course you may have read doesn't cover, because the spec moved. As of protocol version twenty twenty six, dash oh seven, dash twenty eight, sampling is deprecated. It has not been removed — it stays in the specification for at least twelve months, and every existing client and server that uses it keeps working. But the official guidance is blunt: new implementations should not adopt it, and existing ones should migrate to calling an L L M provider's API directly. The earliest it becomes eligible for removal is a revision released on or after July twenty twenty seven. So why did we just spend a chapter on it? Because sampling is the clearest window into how this protocol thinks — a server that needs intelligence but refuses to hold a key — and because the code you inherit this year will be full of it. Learn it, recognise it, and don't start something new on it.",
+      "data": {
+        "mcpDeprecated": {
+          "headline": "Still real, still [on a clock]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "status, honestly",
+          "premise": "Sampling still works and stays in the spec for at least a year. It is also deprecated, and the spec says new code should not adopt it.",
+          "cells": [
+            {
+              "label": "Sampling",
+              "sub": "deprecated in spec 2026-07-28 (SEP-2577)",
+              "color": "red",
+              "out": [
+                "still in the spec",
+                "for 12+ months"
+              ],
+              "atWord": 11.583
+            },
+            {
+              "label": "Migrate to",
+              "sub": "integrating directly with LLM provider APIs",
+              "color": "green",
+              "text": "INSTEAD",
+              "atWord": 44.667
+            },
+            {
+              "label": "Earliest removal",
+              "sub": "first revision on or after 2027-07-28",
+              "text": "TIMELINE",
+              "atWord": 64.667
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "background": "zoneB",
+      "audio": "audio/mcp06_s05d.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "QUIZ_CARD",
+      "durationFrames": 688,
+      "narration": "The course asks it directly. In sampling, who pays for the Claude API call? The MCP server author. Or the client — whoever connected to the server. Have a think, and pause if you'd like a moment. Ready? The client pays, because the client is the one that actually makes the call with its own key. That's the entire reason sampling exists rather than being a curiosity.",
+      "data": {
+        "quiz": {
+          "question": "In sampling, who pays for the Claude call?",
+          "options": [
+            {
+              "text": "the MCP server author",
+              "atWord": 11.583
+            },
+            {
+              "text": "the client that connected",
+              "atWord": 14.917
+            }
+          ],
+          "answerIndex": 1,
+          "why": "The client makes the call, with its own key.",
+          "atWord": 1,
+          "revealAtWord": 30.667
+        }
+      },
+      "transition": "iris",
+      "background": "zoneC",
+      "anchors": [
+        "quiz.atWord",
+        "quiz.options.0.atWord",
+        "quiz.options.1.atWord",
+        "quiz.revealAtWord"
+      ],
+      "audio": "audio/mcp06_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "RECAP",
+      "durationFrames": 387,
+      "narration": "Three lines. Sampling reverses the protocol: the server asks the client. The client holds the key, so the client pays. And it takes one callback on the client and one c t x call on the server.",
+      "data": {
+        "heading": "Sampling, in three lines",
+        "points": [
+          {
+            "text": "The server asks the client",
+            "atWord": 1.667
+          },
+          {
+            "text": "The client's key pays",
+            "atWord": 9.083
+          },
+          {
+            "text": "One callback, one ctx call",
+            "atWord": 16.5
+          }
+        ]
+      },
+      "transition": "dip",
+      "background": "zoneB",
+      "anchors": [
+        "points.0.atWord",
+        "points.1.atWord",
+        "points.2.atWord"
+      ],
+      "audio": "audio/mcp06_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "OUTRO_CTA",
+      "durationFrames": 161,
+      "narration": "Next chapter: how you stop a server reading files it was never meant to touch.",
+      "data": {
+        "message": "Next: roots",
+        "sub": "file access control"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp06_s08.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

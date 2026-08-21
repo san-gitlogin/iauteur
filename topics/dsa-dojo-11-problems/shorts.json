@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "topic": "Five Problems, Live",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "You can read an unseen problem, name the pattern from its words, and justify the choice.",
+    "openLoop": "Five problems you have never seen. The method has to do the work now.",
+    "analogy": "THE DIAGNOSIS - symptoms first, treatment second.",
+    "seo": {
+      "title": "How To Spot The Pattern In A LeetCode Question",
+      "hook": "Read the signals before you write a line.",
+      "description": "You can read an unseen problem, name the pattern from its words, and justify the choice.",
+      "tags": [
+        "dsa",
+        "leetcode",
+        "coding interview",
+        "patterns",
+        "two pointers",
+        "faang",
+        "python"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#codinginterview",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Five problems you have never seen. Ten patterns you have. Which one, and how fast can you tell?",
+      "durationFrames": 217,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "NAME THE PATTERN",
+        "subtext": "before you write a line",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 8.167
+      },
+      "audio": "audio/sh11_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "DSA_SIGNALS",
+      "narration": "An array of heights, each one a vertical line. Find the two lines that hold the most water between them. Circle the words. Two. Maximum. A pair of elements. An array. Two and pair together point straight at two pointers. But there's a catch worth noticing: this array isn't sorted, and sorted was our signal last time. So does the pattern still hold?",
+      "durationFrames": 711,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaSignals": {
+          "headline": "One · [Container With Most Water]",
+          "color": "yellow",
+          "atWord": 1,
+          "caption": "reading the statement",
+          "problem": "Given an array of heights, where each value is a vertical line, find the two lines that together with the x-axis hold the most water. Return that maximum area.",
+          "cells": [
+            {
+              "label": "two",
+              "sub": "exactly two lines",
+              "atWord": 21
+            },
+            {
+              "label": "maximum",
+              "sub": "we are optimising",
+              "atWord": 21.917
+            },
+            {
+              "label": "a pair of elements",
+              "sub": "the two-pointer shape",
+              "atWord": 22.833
+            },
+            {
+              "label": "an array",
+              "sub": "indexed, positional",
+              "atWord": 26.5
+            },
+            {
+              "label": "NOT sorted",
+              "sub": "so does it still work?",
+              "color": "red",
+              "atWord": 36.5
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/sh11_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_TRACE_PTRS",
+      "narration": "It does hold, and the reasoning is worth having. Start at the widest possible container: one line at each end. The area is the shorter of the two heights, multiplied by the distance between them, because water spills over the lower side. Now move the shorter line inward. Moving the taller one can never help, since the shorter side is what caps the volume and the width only shrinks. Order of n, constant space, and no sorting needed, because the elimination argument here's about height rather than order.",
+      "durationFrames": 901,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaPtrs": {
+          "headline": "Yes, and [here is why]",
+          "color": "red",
+          "atWord": 1,
+          "caption": "the widest container first",
+          "codeTitle": "max_area.py",
+          "premise": "Container With Most Water. Each box is the height of a vertical line; two pointers start at the outermost pair.",
+          "lines": [
+            {
+              "text": "def max_area(height):"
+            },
+            {
+              "text": "    left, right = 0, len(height) - 1",
+              "detail": "Start at the widest container.",
+              "atWord": 7.5
+            },
+            {
+              "text": "    best = 0"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while left < right:"
+            },
+            {
+              "text": "        h = min(height[left], height[right])",
+              "detail": "Water spills over the lower side.",
+              "atWord": 16.667
+            },
+            {
+              "text": "        best = max(best, h * (right - left))"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if height[left] < height[right]:",
+              "detail": "Move the SHORTER line. The taller one cannot help.",
+              "atWord": 35
+            },
+            {
+              "text": "            left += 1"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            right -= 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return best"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1",
+              "atWord": 12.5
+            },
+            {
+              "label": "8"
+            },
+            {
+              "label": "6"
+            },
+            {
+              "label": "2"
+            },
+            {
+              "label": "5"
+            },
+            {
+              "label": "7"
+            }
+          ],
+          "pointers": [
+            {
+              "label": "LEFT",
+              "value": 0
+            },
+            {
+              "label": "RIGHT",
+              "value": 5,
+              "color": "yellow"
+            }
+          ],
+          "vars": [
+            {
+              "label": "O(n) time",
+              "atWord": 57.5
+            },
+            {
+              "label": "O(1) space",
+              "atWord": 60
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/sh11_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "narration": "Read the statement, circle the signals, name the pattern. All ten patterns, and five problems solved live, are in the Dojo.",
+      "durationFrames": 256,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "Five problems, solved live",
+        "sub": "the full course in the Dojo"
+      },
+      "transition": "fade",
+      "audio": "audio/sh11_s04.mp3"
+    }
+  ]
+}

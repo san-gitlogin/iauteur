@@ -1,0 +1,498 @@
+{
+  "meta": {
+    "topic": "Elicitation",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "A tool can stop mid-run and ask the user a question — and for anything sensitive it must hand off to a browser instead.",
+    "openLoop": "Your tool needs the user's API key. Asking for it in the chat is forbidden. So how?",
+    "analogy": "THE FORM AND THE SIDE DOOR - one asks in the room, one sends you out of it.",
+    "topicAxes": [
+      "entity-novelty",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "MCP Elicitation — How A Tool Asks The User Mid-Run",
+      "altTitles": [
+        "The MCP Feature That Replaced Sampling And Roots",
+        "Form Mode vs URL Mode: Never Ask For A Key In Chat"
+      ],
+      "hook": "Your tool needs an API key. Asking in the chat is forbidden.",
+      "breakdown": "elicitation's two modes, why URL mode exists as a security boundary, and the three-action result every server must handle",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "Asking mid-run"
+        },
+        {
+          "id": "s03",
+          "title": "Form mode"
+        },
+        {
+          "id": "s04",
+          "title": "URL mode, and why"
+        },
+        {
+          "id": "s05",
+          "title": "Accept, decline, cancel"
+        }
+      ],
+      "sources": [
+        "MCP specification 2026-07-28: https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation",
+        "Python SDK: https://github.com/modelcontextprotocol/python-sdk",
+        "Course source: https://github.com/san-gitlogin/learn-mcp"
+      ],
+      "queries": [
+        "mcp elicitation",
+        "elicitation/create",
+        "ctx.elicit python",
+        "mcp url mode elicitation",
+        "mcp ask user input",
+        "mcp form mode schema",
+        "mcp elicitation security"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "elicitation",
+        "claude",
+        "anthropic",
+        "python",
+        "security",
+        "oauth",
+        "tutorial",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "NEVER ASK IN CHAT",
+    "badge": "Elicitation",
+    "asset": "si:anthropic"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 162,
+      "narration": "Halfway through a tool, you need something only the person can give you.",
+      "data": {
+        "headline": "NEVER ASK IN CHAT",
+        "subtext": "elicitation, both modes",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 8.25
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp11_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "durationFrames": 403,
+      "narration": "Maybe a choice, maybe an API key — and those two are not the same, because one of them the spec forbids you asking for in chat. This chapter is how you ask for both, properly. Learn MCP, on THE NBX STUDIO.",
+      "data": {
+        "title": "ELICITATION",
+        "subtitle": "chapter eleven of twelve"
+      },
+      "transition": "fade",
+      "background": "zoneB",
+      "anchors": [],
+      "audio": "audio/mcp11_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_ELICIT",
+      "durationFrames": 1269,
+      "narration": "Form mode is the ordinary case. Your tool stops, describes what it needs, and hands over a schema. C t x dot elicit takes a message the person will read, and a Pydantic model describing the shape of the answer, so the client can render a real form with a labelled field instead of guessing from prose. The schema is deliberately restricted to flat, primitive fields — strings, numbers, booleans, enums — because every client has to be able to draw that form, and nobody draws an arbitrary nested object well. A string field with a title and a description becomes a labelled text input. An enum becomes a picker, which means the person can't mistype the answer. And what elicit returns carries an action, which is the field people forget to check.",
+      "data": {
+        "mcpElicit": {
+          "headline": "Form mode, [with a schema]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "asking in the room",
+          "codeTitle": "server.py",
+          "premise": "The tool is halfway through and needs something only the person can supply. Elicitation is how it asks.",
+          "lines": [
+            {
+              "text": "class RepoChoice(BaseModel):"
+            },
+            {
+              "text": "    repo: str = Field(description=\"Which repository?\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "@mcp.tool()"
+            },
+            {
+              "text": "async def open_pr(title: str, ctx: Context):"
+            },
+            {
+              "text": "    result = await ctx.elicit(",
+              "detail": "A message for the person, and a schema.",
+              "atWord": 14.083
+            },
+            {
+              "text": "        message=\"Which repo should this PR open against?\","
+            },
+            {
+              "text": "        schema=RepoChoice,"
+            },
+            {
+              "text": "    )"
+            },
+            {
+              "text": "    if result.action != \"accept\":",
+              "detail": "Always check the action first.",
+              "atWord": 92.333
+            },
+            {
+              "text": "        return \"Cancelled.\""
+            }
+          ],
+          "cells": [
+            {
+              "label": "a flat schema only",
+              "sub": "strings, numbers, booleans, enums — nothing nested",
+              "atWord": 31.25
+            },
+            {
+              "label": "repo",
+              "sub": "string · Which repository?",
+              "out": [
+                "octocat/hello"
+              ],
+              "atWord": 44.583
+            },
+            {
+              "label": "visibility",
+              "sub": "enum · public or private",
+              "out": [
+                "private"
+              ],
+              "atWord": 71.167
+            },
+            {
+              "label": "result.action",
+              "sub": "the field people forget to check",
+              "atWord": 82.167
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp11_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "MCP_ELICIT",
+      "durationFrames": 1091,
+      "narration": "Now the important one, and it's a rule rather than a preference. The specification says servers must not use form mode to ask for passwords, API keys, access tokens or payment details. Must not — because anything typed into a form travels back through the client, and through whatever happens to be logging there. So for those, you use URL mode: your tool hands back a link, the person opens it in a real browser, and the secret goes straight from them to you without ever crossing the client or the model's context. C t x dot elicit url takes the message, the U R L, and an id you'll use to track that particular hand-off.",
+      "data": {
+        "mcpElicit": {
+          "headline": "Never ask for a [secret in chat]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "sending them out of the room",
+          "codeTitle": "server.py",
+          "premise": "Form mode data passes through the client. URL mode data never does. That difference is the whole reason URL mode exists.",
+          "lines": [
+            {
+              "text": "@mcp.tool()"
+            },
+            {
+              "text": "async def connect_stripe(ctx: Context):"
+            },
+            {
+              "text": "    result = await ctx.elicit_url(",
+              "detail": "Message, URL, and an id to track it.",
+              "atWord": 71.5
+            },
+            {
+              "text": "        message=\"Connect your Stripe account to continue.\","
+            },
+            {
+              "text": "        url=\"https://mcp.example.com/connect/stripe\","
+            },
+            {
+              "text": "        elicitation_id=\"stripe-42\","
+            },
+            {
+              "text": "    )"
+            }
+          ],
+          "cells": [
+            {
+              "label": "passwords · API keys · tokens · payment",
+              "sub": "form mode is FORBIDDEN for these",
+              "atWord": 9.25
+            },
+            {
+              "label": "form data crosses the client",
+              "sub": "and whatever is logging there",
+              "atWord": 26.917
+            },
+            {
+              "label": "https://mcp.example.com/connect/stripe",
+              "text": "url",
+              "sub": "opens in a real browser · never touches the client or the model",
+              "atWord": 41.5
+            },
+            {
+              "label": "elicitation_id",
+              "sub": "how you track this one hand-off",
+              "atWord": 81.5
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp11_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04b",
+      "type": "MCP_ELICIT",
+      "durationFrames": 1299,
+      "narration": "There's a subtlety here that causes real bugs. What the client sends back only says the person consented to open the link — not that they finished whatever was on the other side. The interaction happens out of band, so the client genuinely doesn't know how it went, which is exactly why you passed an id: your server tracks that hand-off itself and decides when it's done. When it is done, you tell the client with send elicit complete, and the original call can carry on. This same shape is how third-party OAuth works in MCP: your server acts as an OAuth client to Stripe or GitHub, and the tokens it receives never touch the MCP client at all. The spec requires that, because a server passing someone else's token back through the client is a security hole with a name: token passthrough.",
+      "data": {
+        "mcpElicit": {
+          "headline": "Consent isn't [completion]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "who tracks what",
+          "codeTitle": "server.py",
+          "premise": "The client only tells you the person agreed to open the link. Whether they finished is yours to know.",
+          "lines": [
+            {
+              "text": "    # the browser part happens out of band"
+            },
+            {
+              "text": "    # your server decides when it is finished"
+            },
+            {
+              "text": "    await ctx.session.send_elicit_complete(\"stripe-42\")",
+              "detail": "Now the original call can continue.",
+              "atWord": 49.917
+            },
+            {
+              "text": "    token = store.get_token(user_id)"
+            },
+            {
+              "text": "    return await stripe_api(token)"
+            }
+          ],
+          "cells": [
+            {
+              "label": "action: accept",
+              "sub": "means “I’ll open it” — not “I finished”",
+              "atWord": 5.917
+            },
+            {
+              "label": "elicitation_id",
+              "sub": "your server tracks the hand-off itself",
+              "atWord": 35.75
+            },
+            {
+              "label": "third-party tokens",
+              "sub": "stay on your server · never sent to the client",
+              "atWord": 64.083
+            },
+            {
+              "label": "token passthrough",
+              "sub": "forbidden — the spec names it explicitly",
+              "atWord": 88.667
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "background": "zoneC",
+      "audio": "audio/mcp11_s04b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "MCP_ELICIT",
+      "durationFrames": 1347,
+      "narration": "Every elicitation can end three ways, and treating the result as a boolean is the bug people ship. Accept means the person filled the form in and submitted, and only then does result dot data hold anything at all. Decline means they explicitly said no — they read the request and refused. And cancel means they dismissed it: closed the dialog, pressed escape, clicked away. Those last two are genuinely different, and the difference changes what your tool should do next. A decline is an answer, so offering an alternative is reasonable. A cancel isn't an answer at all, so asking again later is reasonable. Handle all three explicitly, because a tool that reads a dismissed dialog as a refusal will quietly stop offering something the person actually wanted.",
+      "data": {
+        "mcpElicit": {
+          "headline": "Three answers, [not two]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "the result model",
+          "codeTitle": "server.py",
+          "premise": "The tool is halfway through and needs something only the person can supply. Elicitation is how it asks.",
+          "lines": [
+            {
+              "text": "match result.action:"
+            },
+            {
+              "text": "    case \"accept\":"
+            },
+            {
+              "text": "        repo = result.data.repo"
+            },
+            {
+              "text": "    case \"decline\":"
+            },
+            {
+              "text": "        return \"No problem — want me to use the default instead?\""
+            },
+            {
+              "text": "    case \"cancel\":",
+              "detail": "Dismissed is not the same as refused.",
+              "atWord": 89.917
+            },
+            {
+              "text": "        return \"I'll ask again when you're ready.\""
+            }
+          ],
+          "cells": [
+            {
+              "label": "accept",
+              "sub": "submitted — result.data is populated",
+              "atWord": 15.417
+            },
+            {
+              "label": "decline",
+              "sub": "explicitly refused — offer an alternative",
+              "atWord": 33.417
+            },
+            {
+              "label": "cancel",
+              "sub": "dismissed — ask again later",
+              "atWord": 44.5
+            },
+            {
+              "label": "decline → offer an alternative",
+              "atWord": 69.333
+            },
+            {
+              "label": "cancel → ask again later",
+              "atWord": 78.75
+            },
+            {
+              "label": "handled",
+              "sub": "accept",
+              "atWord": 93.333
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "background": "zoneC",
+      "audio": "audio/mcp11_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "QUIZ_CARD",
+      "durationFrames": 755,
+      "narration": "One to check you've got the rule. Your tool needs the user's Stripe secret key. Which mode? Form mode, with a string field marked secret. Or URL mode, sending them to a page you host. Have a think, and pause if you'd like a moment. Ready? URL mode, and it isn't a style choice — the spec says servers must not request credentials through form mode, because that data passes through the client on its way back to you.",
+      "data": {
+        "quiz": {
+          "question": "A tool needs the user's secret key. Which mode?",
+          "options": [
+            {
+              "text": "form mode, marked secret",
+              "atWord": 13.167
+            },
+            {
+              "text": "URL mode",
+              "atWord": 19.333
+            }
+          ],
+          "answerIndex": 1,
+          "why": "The spec forbids credentials in form mode.",
+          "atWord": 1,
+          "revealAtWord": 34.833
+        }
+      },
+      "transition": "iris",
+      "background": "zoneC",
+      "anchors": [
+        "quiz.atWord",
+        "quiz.options.0.atWord",
+        "quiz.options.1.atWord",
+        "quiz.revealAtWord"
+      ],
+      "audio": "audio/mcp11_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "RECAP",
+      "durationFrames": 450,
+      "narration": "Three lines. Form mode asks in the room, against a flat schema. URL mode sends them out of the room, and is mandatory for anything secret. And every answer is accept, decline or cancel — three, never two.",
+      "data": {
+        "heading": "Elicitation, in three lines",
+        "points": [
+          {
+            "text": "Form mode — a flat schema, in the room",
+            "atWord": 1.917
+          },
+          {
+            "text": "URL mode — mandatory for secrets",
+            "atWord": 11.333
+          },
+          {
+            "text": "accept · decline · cancel",
+            "atWord": 24.5
+          }
+        ]
+      },
+      "transition": "dip",
+      "background": "zoneB",
+      "anchors": [
+        "points.0.atWord",
+        "points.1.atWord",
+        "points.2.atWord"
+      ],
+      "audio": "audio/mcp11_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "OUTRO_CTA",
+      "durationFrames": 194,
+      "narration": "One chapter left, where we put the whole protocol back together — and sort what's current from what's on its way out.",
+      "data": {
+        "message": "Next: everything, together",
+        "sub": "and what changed"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp11_s08.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

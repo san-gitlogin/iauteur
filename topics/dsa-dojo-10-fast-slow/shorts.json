@@ -1,0 +1,374 @@
+{
+  "meta": {
+    "topic": "Fast and Slow Pointers",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "You can detect a loop, or find a midpoint, in one pass and with no extra memory at all.",
+    "openLoop": "Two runners on a track. If there's a loop, they must collide. Why must?",
+    "analogy": "THE RUNNING TRACK - a tortoise and a hare, and a bend you cannot see.",
+    "seo": {
+      "title": "Floyd's Cycle Detection, Explained Properly",
+      "hook": "Two runners on a track, one twice as fast. If there is a loop, they must collide. But why ",
+      "description": "You can detect a loop, or find a midpoint, in one pass and with no extra memory at all.",
+      "tags": [
+        "fast and slow pointers",
+        "floyd",
+        "linked list",
+        "cycle detection",
+        "dsa",
+        "leetcode",
+        "python"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#codinginterview",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Two runners on a track, one twice as fast. If there is a loop, they must collide. But why must?",
+      "durationFrames": 221,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "THEY MUST COLLIDE",
+        "subtext": "fast & slow",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 5.833
+      },
+      "audio": "audio/sh10_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "DSA_TRACE_LIST",
+      "narration": "While fast exists and fast dot next exists, keep running. That double check is the guard: if either is missing we've reached the end of the track, so there was no loop. Slow moves to node two. Fast moves twice, to node three. The gap between them is one node now, where a moment ago it was zero.",
+      "durationFrames": 526,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaList": {
+          "headline": "One step, [two steps]",
+          "color": "red",
+          "atWord": 1,
+          "caption": "round one",
+          "codeTitle": "has_cycle.py",
+          "premise": "A running track made of linked nodes. Both runners start together: the tortoise moves one node per round, the hare moves two.",
+          "lines": [
+            {
+              "text": "def has_cycle(head):"
+            },
+            {
+              "text": "    slow = fast = head"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while fast and fast.next:",
+              "detail": "Stop if the hare runs out of track.",
+              "atWord": 1
+            },
+            {
+              "text": "        slow = slow.next",
+              "detail": "Tortoise: one step.",
+              "atWord": 23.167
+            },
+            {
+              "text": "        fast = fast.next.next",
+              "detail": "Hare: two steps.",
+              "atWord": 26.833
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if slow == fast:"
+            },
+            {
+              "text": "            return True"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return False"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1"
+            },
+            {
+              "label": "2",
+              "atWord": 26.083
+            },
+            {
+              "label": "3",
+              "atWord": 30.417
+            },
+            {
+              "label": "4",
+              "links": [
+                "2"
+              ]
+            }
+          ],
+          "pointers": [
+            {
+              "label": "slow",
+              "value": 1,
+              "color": "blue",
+              "atWord": 25.417
+            },
+            {
+              "label": "fast",
+              "value": 2,
+              "color": "red",
+              "atWord": 29.75
+            }
+          ],
+          "vars": [
+            {
+              "label": "gap = 1",
+              "atWord": 31.167
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/sh10_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_TRACE_LIST",
+      "narration": "Slow moves to node three. Fast moves two again: node three to node four, and then four points back to two, so the hare lands on node two. It has been round the bend, and it's now sitting behind the tortoise. The gap is two. On a track with no loop the hare would have fallen off by now, and instead it's lapping.",
+      "durationFrames": 577,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaList": {
+          "headline": "Round two, [into the bend]",
+          "color": "red",
+          "atWord": 1,
+          "caption": "the hare comes round",
+          "codeTitle": "has_cycle.py",
+          "premise": "A running track made of linked nodes. Both runners start together: the tortoise moves one node per round, the hare moves two.",
+          "lines": [
+            {
+              "text": "def has_cycle(head):"
+            },
+            {
+              "text": "    slow = fast = head"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while fast and fast.next:"
+            },
+            {
+              "text": "        slow = slow.next",
+              "detail": "Tortoise: one more step.",
+              "atWord": 1
+            },
+            {
+              "text": "        fast = fast.next.next",
+              "detail": "Hare: two more, and round the loop.",
+              "atWord": 15.417
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if slow == fast:"
+            },
+            {
+              "text": "            return True"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return False"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1"
+            },
+            {
+              "label": "2",
+              "atWord": 2.917
+            },
+            {
+              "label": "3",
+              "atWord": 19.083
+            },
+            {
+              "label": "4",
+              "links": [
+                "2"
+              ]
+            }
+          ],
+          "pointers": [
+            {
+              "label": "slow",
+              "value": 2,
+              "color": "blue",
+              "atWord": 2.167
+            },
+            {
+              "label": "fast",
+              "value": 1,
+              "color": "red",
+              "atWord": 16.167
+            }
+          ],
+          "vars": [
+            {
+              "label": "gap = 2",
+              "atWord": 30.167
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/sh10_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_TRACE_LIST",
+      "narration": "Slow steps to node four. Fast goes two: node two to node three, then three to four, so it lands on node four as well. Slow equals fast, so we return True. There's a cycle. One pass, no extra memory, and no list of visited nodes anywhere.",
+      "durationFrames": 497,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaList": {
+          "headline": "And they [meet]",
+          "color": "red",
+          "atWord": 1,
+          "caption": "both on node four",
+          "codeTitle": "has_cycle.py",
+          "premise": "A running track made of linked nodes. Both runners start together: the tortoise moves one node per round, the hare moves two.",
+          "lines": [
+            {
+              "text": "def has_cycle(head):"
+            },
+            {
+              "text": "    slow = fast = head"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while fast and fast.next:"
+            },
+            {
+              "text": "        slow = slow.next",
+              "detail": "Tortoise: one step, to node four.",
+              "atWord": 1
+            },
+            {
+              "text": "        fast = fast.next.next",
+              "detail": "Hare: two steps, also to node four.",
+              "atWord": 4.25
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if slow == fast:",
+              "detail": "Same node.",
+              "atWord": 21.083
+            },
+            {
+              "text": "            return True",
+              "detail": "So there is a cycle.",
+              "atWord": 24.5
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return False"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1"
+            },
+            {
+              "label": "2"
+            },
+            {
+              "label": "3"
+            },
+            {
+              "label": "4",
+              "links": [
+                "2"
+              ],
+              "atWord": 17.75
+            }
+          ],
+          "pointers": [
+            {
+              "label": "slow",
+              "value": 3,
+              "color": "blue",
+              "atWord": 2.5
+            },
+            {
+              "label": "fast",
+              "value": 3,
+              "color": "red",
+              "atWord": 15.167
+            }
+          ],
+          "vars": [
+            {
+              "label": "return True",
+              "atWord": 29.5
+            },
+            {
+              "label": "O(1) space",
+              "atWord": 31.25
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/sh10_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "A cycle, a middle, or constant space demanded. That is your signal. The full pattern is in the Dojo.",
+      "durationFrames": 225,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "Fast and Slow Pointers, traced line by line",
+        "sub": "full pattern in the Dojo"
+      },
+      "transition": "fade",
+      "audio": "audio/sh10_s05.mp3"
+    }
+  ]
+}

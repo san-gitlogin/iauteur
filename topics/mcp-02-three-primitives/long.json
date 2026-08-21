@@ -1,0 +1,374 @@
+{
+  "meta": {
+    "topic": "The Three Primitives",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Tools, resources and prompts differ by one thing only — who pulls the trigger.",
+    "openLoop": "Three words that look interchangeable. Pick the wrong one and your feature fights you forever.",
+    "analogy": "THE RESTAURANT - the kitchen, the menu board, and the chef's special button.",
+    "topicAxes": [
+      "entity-novelty",
+      "tribal-conflict"
+    ],
+    "seo": {
+      "title": "Tools vs Resources vs Prompts — The Only Question That Matters",
+      "altTitles": [
+        "MCP's 3 Primitives, Settled With One Question",
+        "Stop Guessing: Tool, Resource, or Prompt?"
+      ],
+      "hook": "Three words that look interchangeable. One question separates them.",
+      "breakdown": "the three things an MCP server can expose, and the single question that tells you which one you need",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "Three words, one question"
+        },
+        {
+          "id": "s03",
+          "title": "Who pulls the trigger"
+        },
+        {
+          "id": "s04",
+          "title": "The restaurant"
+        },
+        {
+          "id": "s06",
+          "title": "Two scenarios to try"
+        }
+      ],
+      "sources": [
+        "Course source: https://github.com/san-gitlogin/learn-mcp",
+        "Live course: https://san-gitlogin.github.io/learn-mcp/"
+      ],
+      "queries": [
+        "mcp tools vs resources",
+        "mcp prompts explained",
+        "what is an mcp resource",
+        "mcp primitives",
+        "when to use mcp tool or resource",
+        "model context protocol tools"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#ai",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "tools",
+        "resources",
+        "prompts",
+        "claude",
+        "anthropic",
+        "ai",
+        "python",
+        "tutorial",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "WHO PULLS THE TRIGGER?",
+    "badge": "3 Primitives",
+    "asset": "si:anthropic"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 184,
+      "narration": "Every MCP server exposes three kinds of thing, and people mix them up constantly.",
+      "data": {
+        "headline": "WHO PULLS THE TRIGGER?",
+        "subtext": "the three primitives",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 7.75
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp02_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "durationFrames": 383,
+      "narration": "By the end of this you'll pick the right one in about five seconds, every time, using a single question. Get this chapter and the rest of the course is downhill. Learn MCP, on THE NBX STUDIO.",
+      "data": {
+        "title": "THE 3 SUPERPOWERS",
+        "subtitle": "chapter three of twelve"
+      },
+      "transition": "fade",
+      "background": "zoneB",
+      "anchors": [],
+      "audio": "audio/mcp02_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_CONTROL",
+      "durationFrames": 1200,
+      "narration": "Every MCP server can expose exactly three kinds of thing, and they're told apart by who decides when each one runs. A tool is a function Claude chooses to call. Claude reads the description, decides the tool is relevant, and asks for it. The model is in charge. A resource is data your own code fetches, because your app decided it needed context — a dropdown that needs filling, a file the user just opened. Your code is in charge. And a prompt is a workflow the person triggers, typically by typing a slash command. The user is in charge. Same server, same decorator style — but three different owners, which is why picking the wrong one makes a feature fight you.",
+      "data": {
+        "mcpControl": {
+          "headline": "Who pulls [the trigger]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the three primitives",
+          "premise": "One server, three kinds of thing it can expose. The only question that separates them is who decides when it runs.",
+          "cells": [
+            {
+              "label": "Tools",
+              "sub": "functions the model chooses to call",
+              "owner": "ai",
+              "icon": "lucide:wrench",
+              "atWord": 16.917
+            },
+            {
+              "label": "Resources",
+              "sub": "data your code fetches for context",
+              "owner": "code",
+              "icon": "lucide:folder-open",
+              "atWord": 38.667
+            },
+            {
+              "label": "Prompts",
+              "sub": "workflows the person triggers",
+              "owner": "user",
+              "icon": "lucide:sparkles",
+              "atWord": 64.417
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp02_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "MCP_CONTROL",
+      "durationFrames": 1064,
+      "narration": "If the abstract version won't stick, here are the same three primitives as a restaurant. The kitchen is your tools. An order arrives and the chef decides what to cook — you don't stand there instructing them, and that's exactly how Claude uses a tool. The menu board is your resources. Your app reads the board to show the customer what's available, and the board doesn't decide anything on its own. And the chef's special button is your prompts. Nothing happens until a customer presses it, and then a carefully designed sequence kicks off. The golden rule underneath all of that is one sentence: ask yourself who is in control.",
+      "data": {
+        "mcpControl": {
+          "headline": "The same three, [as a restaurant]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "if the words won't stick",
+          "premise": "A restaurant. The kitchen, the menu board on the wall, and the chef's special button on the counter.",
+          "cells": [
+            {
+              "label": "the kitchen",
+              "sub": "the chef decides what to cook → TOOL",
+              "owner": "ai",
+              "icon": "lucide:chef-hat",
+              "atWord": 11.833
+            },
+            {
+              "label": "the menu board",
+              "sub": "your app reads it to show options → RESOURCE",
+              "owner": "code",
+              "icon": "lucide:clipboard-list",
+              "atWord": 35.583
+            },
+            {
+              "label": "the chef's special",
+              "sub": "the customer presses it → PROMPT",
+              "owner": "user",
+              "icon": "lucide:bell-ring",
+              "atWord": 56.083
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp02_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04b",
+      "type": "MCP_CONTROL",
+      "durationFrames": 1489,
+      "narration": "Here's the test that makes the rule stick. Take one job — show me the release notes — and notice that all three primitives can do it. The code is nearly identical. What changes is who starts it. As a tool, Claude decides. You ask a question, Claude reasons that release notes would help, and calls it unprompted. Good when the model should judge relevance. As a resource, your app decides. The user opens the releases screen, so your code fetches the notes and puts them in context before anyone asks. Good when you already know they're needed. As a prompt, the user decides. They type slash release notes, and your pre-written instruction runs. Good when you want the same careful workflow every time. Same data, same server, three different owners — and picking the wrong one shows up as a feature that fires when nobody wanted it, or never fires when everybody did.",
+      "data": {
+        "mcpControl": {
+          "headline": "The same job, [three ways]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "when the answer flips",
+          "premise": "One job — 'show me the release notes' — built three different ways. The code is nearly identical; the control is not.",
+          "cells": [
+            {
+              "label": "as a Tool",
+              "sub": "Claude calls it unprompted, when it judges it relevant",
+              "owner": "ai",
+              "icon": "lucide:wrench",
+              "atWord": 30.167
+            },
+            {
+              "label": "as a Resource",
+              "sub": "your screen opened, so your code fetched it first",
+              "owner": "code",
+              "icon": "lucide:folder-open",
+              "atWord": 51.667
+            },
+            {
+              "label": "as a Prompt",
+              "sub": "they typed /release-notes and got the same careful workflow",
+              "owner": "user",
+              "icon": "lucide:sparkles",
+              "atWord": 77.833
+            },
+            {
+              "label": "pick wrong",
+              "sub": "it fires unasked, or never fires at all",
+              "owner": "ai",
+              "icon": "lucide:triangle-alert",
+              "atWord": 98.5
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "background": "zoneC",
+      "audio": "audio/mcp02_s04b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "QUIZ_CARD",
+      "durationFrames": 823,
+      "narration": "Scenario one, straight from the course. You're building a document editor, and you want a dropdown listing the available documents so the user can pick one. Which primitive? A tool, so Claude fetches the list. Or a resource, so your app fetches it. Have a think, and pause if you'd like a moment. Ready? A resource. Your app needs that list to draw its own dropdown, and Claude isn't involved in drawing a dropdown — so your code is the one deciding, which makes it a resource.",
+      "data": {
+        "quiz": {
+          "question": "A dropdown listing documents. Which primitive?",
+          "options": [
+            {
+              "text": "tool — Claude fetches it",
+              "atWord": 21.5
+            },
+            {
+              "text": "resource — your app fetches it",
+              "atWord": 26.917
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Your code needs the list to draw its own UI.",
+          "atWord": 1,
+          "revealAtWord": 40.75
+        }
+      },
+      "transition": "iris",
+      "background": "zoneC",
+      "anchors": [
+        "quiz.atWord",
+        "quiz.options.0.atWord",
+        "quiz.options.1.atWord",
+        "quiz.revealAtWord"
+      ],
+      "audio": "audio/mcp02_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "QUIZ_CARD",
+      "durationFrames": 746,
+      "narration": "Scenario two. A user types slash format, report dot p d f, and a pre-written instruction tells Claude exactly how to reformat that document. Which primitive? A tool. Or a prompt. Have a think, and pause if you'd like. Ready? A prompt. The giveaway is the user typed a command — nothing ran until a person triggered it, and the instruction was written in advance rather than decided by the model.",
+      "data": {
+        "quiz": {
+          "question": "A user types /format report.pdf. Which one?",
+          "options": [
+            {
+              "text": "tool",
+              "atWord": 22.167
+            },
+            {
+              "text": "prompt — the user triggered it",
+              "atWord": 23.833
+            }
+          ],
+          "answerIndex": 1,
+          "why": "A person triggered it, and the instruction was pre-written.",
+          "atWord": 1,
+          "revealAtWord": 33.167
+        }
+      },
+      "transition": "fade",
+      "background": "zoneC",
+      "anchors": [
+        "quiz.atWord",
+        "quiz.options.0.atWord",
+        "quiz.options.1.atWord",
+        "quiz.revealAtWord"
+      ],
+      "audio": "audio/mcp02_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "RECAP",
+      "durationFrames": 364,
+      "narration": "Three lines. If Claude decides when it runs, it's a tool. If your code decides, it's a resource. And if the user decides, it's a prompt. One question, asked every time.",
+      "data": {
+        "heading": "Ask who is in control",
+        "points": [
+          {
+            "text": "Claude decides → tool",
+            "atWord": 1.833
+          },
+          {
+            "text": "Your code decides → resource",
+            "atWord": 10.167
+          },
+          {
+            "text": "The user decides → prompt",
+            "atWord": 16.583
+          }
+        ]
+      },
+      "transition": "dip",
+      "background": "zoneB",
+      "anchors": [
+        "points.0.atWord",
+        "points.1.atWord",
+        "points.2.atWord"
+      ],
+      "audio": "audio/mcp02_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "OUTRO_CTA",
+      "durationFrames": 161,
+      "narration": "Next chapter we stop talking and build a server, and you'll see it's shorter than you expect.",
+      "data": {
+        "message": "Next: build your first server",
+        "sub": "it's decorators on functions"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp02_s08.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

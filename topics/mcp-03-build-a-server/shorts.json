@@ -1,0 +1,322 @@
+{
+  "meta": {
+    "topic": "Build Your First MCP Server",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "An MCP server is a decorator on an ordinary Python function — if you can write a function, you can build one.",
+    "openLoop": "People talk about writing a server like it's a weekend. It's about twenty lines.",
+    "analogy": "THE LABELLED DRAWER - the decorator is the label that lets somebody else find your function.",
+    "seo": {
+      "title": "An MCP Server Is 20 Lines Of Python",
+      "hook": "Building an MCP server sounds like a weekend project. It's about twenty lines.",
+      "description": "An MCP server is a decorator on an ordinary Python function — if you can write a function, you can build one.",
+      "tags": [
+        "mcp",
+        "mcp server",
+        "python",
+        "mcpserver",
+        "fastmcp",
+        "anthropic",
+        "tutorial"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "A SERVER IS 20 LINES",
+    "badge": "Build It",
+    "asset": "si:anthropic",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 185,
+      "narration": "Building an MCP server sounds like a weekend project. It's about twenty lines.",
+      "data": {
+        "headline": "A SERVER IS 20 LINES",
+        "subtext": "build it",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 7.333
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp-03-build-a-server-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "MCP_SCHEMA",
+      "durationFrames": 1504,
+      "narration": "Four steps, and step one is boilerplate you copy once and forget. MCPServer with a name gives you a server object. That's genuinely it, because MCPServer does the protocol work for you — the server exists now. Step two is your data, and here it's an ordinary Python dictionary, because nothing about MCP requires a database. Step three is the interesting one. The at mcp dot tool decorator registers the function below it, and the name you give is the name Claude will call, while the description is the sentence Claude reads when deciding whether this tool is the right one. Then the function itself is completely ordinary Python — a lookup, an error if the note's missing, and a return. No MCP anywhere inside the body. And step four runs it. One line at the bottom, and we'll come back to what stdio means in chapter ten.",
+      "data": {
+        "mcpSchema": {
+          "headline": "The server, [line by line]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "four steps, that's all",
+          "codeTitle": "server.py",
+          "premise": "You're building a notes manager. A Python dict is the data, and a decorator is how Claude finds it.",
+          "lines": [
+            {
+              "text": "from mcp.server.mcpserver import MCPServer"
+            },
+            {
+              "text": "from pydantic import Field"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "mcp = MCPServer(\"NotesMCP\")",
+              "detail": "The server exists now. That's step one.",
+              "atWord": 10
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "notes = {",
+              "detail": "Your data. A plain dict — no database required.",
+              "atWord": 30.917
+            },
+            {
+              "text": "    \"todo.md\":  \"Buy groceries, call mom, fix the bug\","
+            },
+            {
+              "text": "    \"ideas.md\": \"App idea: dog walking Uber\","
+            },
+            {
+              "text": "}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "@mcp.tool(",
+              "detail": "The decorator registers the function underneath it.",
+              "atWord": 46.75
+            },
+            {
+              "text": "    name=\"read_note\","
+            },
+            {
+              "text": "    description=\"Read a note by its filename\","
+            },
+            {
+              "text": ")"
+            },
+            {
+              "text": "def read_note(",
+              "detail": "Everything inside is ordinary Python.",
+              "atWord": 84.333
+            },
+            {
+              "text": "    note_id: str = Field(description=\"Filename of the note\"),"
+            },
+            {
+              "text": "):"
+            },
+            {
+              "text": "    if note_id not in notes:"
+            },
+            {
+              "text": "        raise ValueError(f\"Note {note_id} not found\")"
+            },
+            {
+              "text": "    return notes[note_id]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "if __name__ == \"__main__\":"
+            },
+            {
+              "text": "    mcp.run(transport=\"stdio\")",
+              "detail": "Step four: run it.",
+              "atWord": 106.083
+            }
+          ],
+          "cells": [
+            {
+              "label": "name",
+              "sub": "read_note — what Claude calls",
+              "icon": "lucide:tag",
+              "atWord": 61
+            },
+            {
+              "label": "description",
+              "sub": "Read a note by its filename",
+              "icon": "lucide:text",
+              "atWord": 70.167
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp-03-build-a-server-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_SCHEMA",
+      "durationFrames": 1024,
+      "narration": "Now the piece everybody asks about. What is Field actually doing there? It isn't validating anything, and it isn't creating a database column. Field with a description attaches a human sentence to that parameter, and MCP turns your whole function into a JSON schema that gets handed to Claude. The tool name goes in, the tool description goes in, and each parameter goes in with its own description. Strip the Field out and Claude still sees a parameter called note underscore i d, but with no idea what belongs there — so it guesses, and guessing is where bad tool calls come from. It's a label for the AI, and nothing more.",
+      "data": {
+        "mcpSchema": {
+          "headline": "What Field is [actually for]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "a label for the AI",
+          "codeTitle": "server.py",
+          "premise": "Field(description=...) is not validation. It's the sentence Claude reads to understand your parameter.",
+          "lines": [
+            {
+              "text": "from mcp.server.mcpserver import MCPServer"
+            },
+            {
+              "text": "from pydantic import Field"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "mcp = MCPServer(\"NotesMCP\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "notes = {"
+            },
+            {
+              "text": "    \"todo.md\":  \"Buy groceries, call mom, fix the bug\","
+            },
+            {
+              "text": "    \"ideas.md\": \"App idea: dog walking Uber\","
+            },
+            {
+              "text": "}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "@mcp.tool("
+            },
+            {
+              "text": "    name=\"read_note\","
+            },
+            {
+              "text": "    description=\"Read a note by its filename\","
+            },
+            {
+              "text": ")"
+            },
+            {
+              "text": "def read_note("
+            },
+            {
+              "text": "    note_id: str = Field(description=\"Filename of the note\"),",
+              "detail": "A human sentence, attached to one parameter.",
+              "atWord": 17.167
+            },
+            {
+              "text": "):"
+            },
+            {
+              "text": "    if note_id not in notes:"
+            },
+            {
+              "text": "        raise ValueError(f\"Note {note_id} not found\")"
+            },
+            {
+              "text": "    return notes[note_id]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "if __name__ == \"__main__\":"
+            },
+            {
+              "text": "    mcp.run(transport=\"stdio\")"
+            }
+          ],
+          "cells": [
+            {
+              "label": "the JSON schema",
+              "sub": "what MCP hands to Claude",
+              "text": "reg",
+              "atWord": 25.333
+            },
+            {
+              "label": "name",
+              "sub": "read_note",
+              "icon": "lucide:tag",
+              "atWord": 36.583
+            },
+            {
+              "label": "description",
+              "sub": "Read a note by its filename",
+              "icon": "lucide:text",
+              "atWord": 40.333
+            },
+            {
+              "label": "note_id",
+              "sub": "Filename of the note",
+              "atWord": 44
+            }
+          ],
+          "vars": [
+            {
+              "label": "a hint, not a check",
+              "atWord": 76.833
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-03-build-a-server-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "durationFrames": 192,
+      "narration": "A decorator on an ordinary function. That's the whole pattern. Full course on the channel.",
+      "data": {
+        "message": "Build an MCP server",
+        "sub": "every line explained"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp-03-build-a-server-short_s04.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

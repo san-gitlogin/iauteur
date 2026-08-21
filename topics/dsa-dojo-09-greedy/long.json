@@ -1,0 +1,1154 @@
+{
+  "meta": {
+    "topic": "Greedy",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "You can merge or schedule intervals in one pass, once you know what to sort by.",
+    "openLoop": "Four meetings, three rooms. The sort does most of the work — but which sort?",
+    "analogy": "THE MEETING ROOM - overlapping bookings collapsed into blocks.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "Greedy — Sort First, Then Never Look Back",
+      "altTitles": [
+        "Greedy Explained Until It Sticks (DSA Pattern 9)",
+        "Merge Intervals, And Why Sorting Is Half The Answer"
+      ],
+      "hook": "Four meetings, three blocks. The sort does the work.",
+      "breakdown": "the greedy interval pattern traced line by line, and how to know greedy is even safe",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "Four meetings, three blocks"
+        },
+        {
+          "id": "s03",
+          "title": "The words that give it away"
+        },
+        {
+          "id": "s04",
+          "title": "The meeting room"
+        },
+        {
+          "id": "s05",
+          "title": "Sort first, always"
+        },
+        {
+          "id": "s06",
+          "title": "Overlap, so merge"
+        },
+        {
+          "id": "s09",
+          "title": "A gap, so start again"
+        },
+        {
+          "id": "s09a",
+          "title": "Same pattern, new question"
+        },
+        {
+          "id": "s09d",
+          "title": "Sort by end, and win"
+        },
+        {
+          "id": "s11",
+          "title": "When greedy is actually safe"
+        },
+        {
+          "id": "s12",
+          "title": "The four problems to go and do"
+        }
+      ],
+      "sources": [
+        "Pattern set, steps and problem lists: https://github.com/san-gitlogin/dsa-pattern-dojo",
+        "Interactive dojo: https://san-gitlogin.github.io/dsa-pattern-dojo/"
+      ],
+      "queries": [
+        "greedy algorithm explained",
+        "merge intervals python",
+        "interval scheduling problem",
+        "when is greedy correct",
+        "greedy vs dynamic programming",
+        "sort by start or end time",
+        "non overlapping intervals",
+        "meeting rooms 2 solution",
+        "insert interval leetcode",
+        "dsa patterns for interviews",
+        "leetcode 56 merge intervals",
+        "faang interview dsa patterns"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#greedy",
+        "#codinginterview",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "dsa",
+        "data structures and algorithms",
+        "greedy",
+        "intervals",
+        "merge intervals",
+        "leetcode",
+        "coding interview",
+        "faang interview",
+        "python",
+        "algorithms",
+        "scheduling",
+        "sorting",
+        "interview preparation",
+        "dsa patterns",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "SORT. THEN DECIDE.",
+    "badge": "Greedy",
+    "asset": "si:python"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Four meetings, three blocks of time. The sort does most of the work. But which sort?",
+      "durationFrames": 178,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "SORT. THEN DECIDE.",
+        "subtext": "four meetings, three blocks",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 5.75
+      },
+      "audio": "audio/dsa09_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "Pattern nine of ten in the NBX Studio Dojo: Greedy. The shortest code in the whole series, and the one you're most likely to get wrong for a reason you can't see.",
+      "durationFrames": 305,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "title": "GREEDY",
+        "subtitle": "pattern nine of ten"
+      },
+      "transition": "fade",
+      "audio": "audio/dsa09_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_SIGNALS",
+      "narration": "Intervals is the loudest one, and it usually means meetings, bookings or ranges. Schedule, or rooms, or how many at once. Merge, or overlap. Minimum number of something, where you want the fewest. But if a choice now can ruin a choice later, greedy is unsafe and you want dynamic programming. And if you can't prove the local choice is always right, don't reach for greedy in an interview. Intervals plus a sort is the combination. The hard part is knowing what to sort by.",
+      "durationFrames": 874,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaSignals": {
+          "headline": "The words that [give it away]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "signals in the question",
+          "premise": "Words lifted straight out of the question, and the pattern each one points at. Red means the signal rules this pattern OUT.",
+          "cells": [
+            {
+              "label": "intervals",
+              "sub": "meetings, bookings, ranges",
+              "atWord": 1
+            },
+            {
+              "label": "schedule / rooms",
+              "sub": "how many at once",
+              "atWord": 10.917
+            },
+            {
+              "label": "merge, overlap",
+              "sub": "collapse them together",
+              "atWord": 17.583
+            },
+            {
+              "label": "minimum number of",
+              "sub": "you want the fewest",
+              "atWord": 20.083
+            },
+            {
+              "label": "a choice now hurts later",
+              "sub": "then greedy is unsafe",
+              "color": "red",
+              "atWord": 27.583
+            },
+            {
+              "label": "cannot prove it",
+              "sub": "then do not claim it",
+              "color": "red",
+              "atWord": 42.667
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/dsa09_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_TRACE_INTERVALS",
+      "narration": "You're coordinating a meeting room. Four bookings came in: one to three, two to six, eight to ten, and fifteen to eighteen. Some of those clash. The one that runs from two until six begins while the first meeting is still going, so those two are really one long block of time. Your job is to collapse the diary into the smallest set of blocks that covers everything.",
+      "durationFrames": 646,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "dsaIntervals": {
+          "headline": "Four bookings, [some clash]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the room diary",
+          "codeTitle": "merge_intervals.py",
+          "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash.",
+          "lines": [
+            {
+              "text": "def merge_intervals(intervals):"
+            },
+            {
+              "text": "    intervals.sort(key=lambda x: x[0])"
+            },
+            {
+              "text": "    merged = [intervals[0]]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for start, end in intervals[1:]:"
+            },
+            {
+              "text": "        if start <= merged[-1][1]:"
+            },
+            {
+              "text": "            merged[-1][1] = max(merged[-1][1], end)"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            merged.append([start, end])"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return merged"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1-3",
+              "sub": "meeting A",
+              "value": 18,
+              "atWord": 6.917
+            },
+            {
+              "label": "2-6",
+              "sub": "meeting B",
+              "value": 18,
+              "atWord": 9.167
+            },
+            {
+              "label": "8-10",
+              "sub": "meeting C",
+              "value": 18,
+              "atWord": 11.5
+            },
+            {
+              "label": "15-18",
+              "sub": "meeting D",
+              "value": 18,
+              "atWord": 14.583
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/dsa09_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "DSA_TRACE_INTERVALS",
+      "narration": "Intervals dot sort, keyed on x zero, sorts every booking by its start time. The lambda is Python's way of writing a throwaway function, and here it just grabs the first number out of each pair. Sorted by start. Now here's why that matters so much: once bookings are in start order, anything that overlaps the current block must be the very next one along. Sorting turns a question about every possible pair into a question about neighbours, and that's the whole reason this runs in one pass. Then merged starts holding just the first booking.",
+      "durationFrames": 976,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaIntervals": {
+          "headline": "Sort [first]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "by start time",
+          "codeTitle": "merge_intervals.py",
+          "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash.",
+          "lines": [
+            {
+              "text": "def merge_intervals(intervals):"
+            },
+            {
+              "text": "    intervals.sort(key=lambda x: x[0])",
+              "detail": "Sort by start time. Everything depends on this.",
+              "atWord": 1
+            },
+            {
+              "text": "    merged = [intervals[0]]",
+              "detail": "The first block is simply the earliest booking.",
+              "atWord": 73
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for start, end in intervals[1:]:"
+            },
+            {
+              "text": "        if start <= merged[-1][1]:"
+            },
+            {
+              "text": "            merged[-1][1] = max(merged[-1][1], end)"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            merged.append([start, end])"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return merged"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1-3",
+              "sub": "first block",
+              "value": 18,
+              "atWord": 76.333
+            },
+            {
+              "label": "2-6",
+              "sub": "meeting B",
+              "value": 18
+            },
+            {
+              "label": "8-10",
+              "sub": "meeting C",
+              "value": 18
+            },
+            {
+              "label": "15-18",
+              "sub": "meeting D",
+              "value": 18
+            }
+          ],
+          "vars": [
+            {
+              "label": "sorted by start",
+              "atWord": 29.833
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/dsa09_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "DSA_TRACE_INTERVALS",
+      "narration": "Next booking is two to six. Does its start come before the current block ends? Two is less than or equal to three, so yes, they overlap. So we stretch the block's end to whichever end is later, which is six. One to three and two to six have become one to six. One block now covers both meetings, and notice we never created anything new, we only widened what was already there.",
+      "durationFrames": 725,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaIntervals": {
+          "headline": "Overlap, so [merge]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "two into one",
+          "codeTitle": "merge_intervals.py",
+          "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash.",
+          "lines": [
+            {
+              "text": "def merge_intervals(intervals):"
+            },
+            {
+              "text": "    intervals.sort(key=lambda x: x[0])"
+            },
+            {
+              "text": "    merged = [intervals[0]]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for start, end in intervals[1:]:",
+              "detail": "Walk the rest, in sorted order.",
+              "atWord": 1
+            },
+            {
+              "text": "        if start <= merged[-1][1]:",
+              "detail": "Does this one start before the block ends?",
+              "atWord": 4.833
+            },
+            {
+              "text": "            merged[-1][1] = max(merged[-1][1], end)",
+              "detail": "Then stretch the block to the later end.",
+              "atWord": 21.667
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            merged.append([start, end])"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return merged"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1-6",
+              "sub": "merged block",
+              "value": 18,
+              "text": "done",
+              "atWord": 2.417
+            },
+            {
+              "label": "2-6",
+              "sub": "absorbed",
+              "value": 18,
+              "text": "dropped",
+              "atWord": 32.917
+            },
+            {
+              "label": "8-10",
+              "sub": "meeting C",
+              "value": 18
+            },
+            {
+              "label": "15-18",
+              "sub": "meeting D",
+              "value": 18
+            }
+          ],
+          "vars": [
+            {
+              "label": "merged = [[1,6]]",
+              "atWord": 42.583
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa09_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "QUIZ_CARD",
+      "narration": "Straight from the Dojo. One to three and two to six overlapped, because B started before A finished. So what about the block one to six, and the booking eight to ten? They overlap. Or they do not overlap, because eight starts after six ends. Have a think, and pause the video if you'd like a moment. Ready? They don't overlap. Eight comes after six, so there's a genuine gap between them, and a gap means a new block rather than a wider one.",
+      "durationFrames": 783,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "quiz": {
+          "question": "Block [1,6] and booking [8,10] — overlap?",
+          "options": [
+            {
+              "text": "yes, they overlap",
+              "atWord": 24.167
+            },
+            {
+              "text": "no — 8 starts after 6 ends",
+              "atWord": 25.667
+            }
+          ],
+          "answerIndex": 1,
+          "why": "A gap means a new block, not a wider one.",
+          "atWord": 1,
+          "revealAtWord": 43.083
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/dsa09_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "DSA_TRACE_INTERVALS",
+      "narration": "Next is eight to ten. Does eight come before six? It doesn't, so there's a gap. The else branch runs and we append it as a separate block. Two blocks now. That's the entire decision the algorithm ever makes: overlap means widen, gap means append. One comparison per booking, and it never revisits a decision it has already taken. That refusal to look back is exactly what the word greedy means.",
+      "durationFrames": 755,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaIntervals": {
+          "headline": "A gap, so [start again]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "a second block",
+          "codeTitle": "merge_intervals.py",
+          "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash.",
+          "lines": [
+            {
+              "text": "def merge_intervals(intervals):"
+            },
+            {
+              "text": "    intervals.sort(key=lambda x: x[0])"
+            },
+            {
+              "text": "    merged = [intervals[0]]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for start, end in intervals[1:]:"
+            },
+            {
+              "text": "        if start <= merged[-1][1]:",
+              "detail": "Eight does not start before six. No overlap.",
+              "atWord": 1
+            },
+            {
+              "text": "            merged[-1][1] = max(merged[-1][1], end)"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            merged.append([start, end])",
+              "detail": "So this becomes a block of its own.",
+              "atWord": 13.833
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return merged"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1-6",
+              "sub": "block one",
+              "value": 18,
+              "text": "done"
+            },
+            {
+              "label": "8-10",
+              "sub": "block two",
+              "value": 18,
+              "atWord": 1.75
+            },
+            {
+              "label": "15-18",
+              "sub": "meeting D",
+              "value": 18
+            }
+          ],
+          "vars": [
+            {
+              "label": "merged = [[1,6],[8,10]]",
+              "atWord": 24.167
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa09_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "DSA_TRACE_INTERVALS",
+      "narration": "Last booking, fifteen to eighteen. Fifteen is well past ten, so another gap, and it becomes a third block. Return merged, and the diary is three blocks instead of four bookings. The whole thing cost one sort plus one walk, which is n log n for the sort and n for the walk. The sort dominates, so the honest complexity to quote is n log n.",
+      "durationFrames": 675,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaIntervals": {
+          "headline": "And the [last one]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "three blocks, done",
+          "codeTitle": "merge_intervals.py",
+          "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash.",
+          "lines": [
+            {
+              "text": "def merge_intervals(intervals):"
+            },
+            {
+              "text": "    intervals.sort(key=lambda x: x[0])"
+            },
+            {
+              "text": "    merged = [intervals[0]]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for start, end in intervals[1:]:"
+            },
+            {
+              "text": "        if start <= merged[-1][1]:"
+            },
+            {
+              "text": "            merged[-1][1] = max(merged[-1][1], end)"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            merged.append([start, end])",
+              "detail": "Another gap, another block.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return merged",
+              "detail": "Hand back the collapsed diary.",
+              "atWord": 15.667
+            }
+          ],
+          "cells": [
+            {
+              "label": "1-6",
+              "sub": "block one",
+              "value": 18,
+              "text": "done"
+            },
+            {
+              "label": "8-10",
+              "sub": "block two",
+              "value": 18,
+              "text": "done"
+            },
+            {
+              "label": "15-18",
+              "sub": "block three",
+              "value": 18,
+              "atWord": 1.667
+            }
+          ],
+          "vars": [
+            {
+              "label": "return 3 blocks",
+              "atWord": 18.167
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa09_s09.mp3"
+    },
+    {
+      "id": "s09a",
+      "type": "DSA_TRACE_INTERVALS",
+      "narration": "Now change the question, and keep everything else. Three bookings this time: one to ten, two to three, and four to five. You can only be in one room at a time, and you want to attend as many meetings as you possibly can. Not merge them, not count the blocks. Attend the most. Same function shape as before, and watch what happens if you reach for the sort you already know.",
+      "durationFrames": 682,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "dsaIntervals": {
+          "headline": "Same pattern, [new question]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "attend the most meetings",
+          "codeTitle": "max_meetings.py",
+          "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash.",
+          "lines": [
+            {
+              "text": "def max_meetings(intervals):",
+              "detail": "Same shape as before. Different question.",
+              "atWord": 41.333
+            },
+            {
+              "text": "    intervals.sort(key=lambda x: x[1])"
+            },
+            {
+              "text": "    count, last_end = 0, float('-inf')"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for start, end in intervals:"
+            },
+            {
+              "text": "        if start >= last_end:"
+            },
+            {
+              "text": "            count += 1"
+            },
+            {
+              "text": "            last_end = end"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return count"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1-10",
+              "sub": "meeting A",
+              "value": 18,
+              "atWord": 9.167
+            },
+            {
+              "label": "2-3",
+              "sub": "meeting B",
+              "value": 18,
+              "atWord": 11.5
+            },
+            {
+              "label": "4-5",
+              "sub": "meeting C",
+              "value": 18,
+              "atWord": 14.5
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/dsa09_s09a.mp3"
+    },
+    {
+      "id": "s09b",
+      "type": "DSA_TRACE_INTERVALS",
+      "narration": "Sorted by start time, the earliest booking is one to ten, so greedy takes it and counts it. It began first, and taking it felt obviously right. But it runs all the way until ten, so two to three is gone, and four to five is gone with it. We return, and one meeting attended. And the painful part is that you could have attended two. The code ran, it returned a number, and the number is simply wrong. Nothing crashed to tell you.",
+      "durationFrames": 795,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaIntervals": {
+          "headline": "Sort by start, and [lose]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the greedy that goes wrong",
+          "codeTitle": "max_meetings.py",
+          "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash.",
+          "lines": [
+            {
+              "text": "def max_meetings(intervals):"
+            },
+            {
+              "text": "    intervals.sort(key=lambda x: x[1])",
+              "detail": "Sorted by x[0] — the start time. This is the mistake.",
+              "atWord": 1
+            },
+            {
+              "text": "    count, last_end = 0, float('-inf')"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for start, end in intervals:"
+            },
+            {
+              "text": "        if start >= last_end:",
+              "detail": "It starts earliest, so greedy takes it.",
+              "atWord": 8.417
+            },
+            {
+              "text": "            count += 1"
+            },
+            {
+              "text": "            last_end = end"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return count",
+              "detail": "One meeting. And two were possible.",
+              "atWord": 37.667
+            }
+          ],
+          "cells": [
+            {
+              "label": "1-10",
+              "sub": "taken first",
+              "value": 18,
+              "atWord": 6.167
+            },
+            {
+              "label": "2-3",
+              "sub": "blocked",
+              "value": 18,
+              "text": "dropped",
+              "atWord": 27.667
+            },
+            {
+              "label": "4-5",
+              "sub": "blocked",
+              "value": 18,
+              "text": "dropped",
+              "atWord": 32.25
+            }
+          ],
+          "vars": [
+            {
+              "label": "count = 1  (should be 2)",
+              "atWord": 39.917
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa09_s09b.mp3"
+    },
+    {
+      "id": "s09c",
+      "type": "QUIZ_CARD",
+      "narration": "So here is the question the whole pattern turns on. Sorting by start time just cost us a meeting. What should we sort by instead, to attend as many as possible? By how long each meeting lasts, shortest first. Or by end time, earliest finisher first. Have a think, and pause the video if you would like a moment. Ready? Sort by end time. Shortest-first sounds clever and it also fails, because a short meeting sat awkwardly in the middle can still block two others. What actually matters is who frees the room soonest.",
+      "durationFrames": 977,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "quiz": {
+          "question": "To attend the MOST meetings, sort by what?",
+          "options": [
+            {
+              "text": "duration, shortest first",
+              "atWord": 26.25
+            },
+            {
+              "text": "end time, earliest finisher",
+              "atWord": 33.083
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Finishing earliest leaves the most room for everything after it.",
+          "atWord": 1,
+          "revealAtWord": 50
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/dsa09_s09c.mp3"
+    },
+    {
+      "id": "s09d",
+      "type": "DSA_TRACE_INTERVALS",
+      "narration": "One character changes. X one instead of x zero, so we sort on the end time. Now the earliest finisher is two to three, and we take it. Start is at least last end, so count goes to one and last end becomes three. Next is four to five. Four is not before three, so it fits, and count goes to two. One to ten finishes last of all, so it is considered last, and by then the room is busy. Two meetings attended instead of one, from changing a single character.",
+      "durationFrames": 897,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaIntervals": {
+          "headline": "Sort by end, and [win]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "earliest finisher first",
+          "codeTitle": "max_meetings.py",
+          "premise": "A meeting-room diary. Each bar is one booking drawn on a shared timeline, so two bars that overlap are two meetings that clash.",
+          "lines": [
+            {
+              "text": "def max_meetings(intervals):"
+            },
+            {
+              "text": "    intervals.sort(key=lambda x: x[1])",
+              "detail": "x[1] is the END time. That one character is the fix.",
+              "atWord": 1
+            },
+            {
+              "text": "    count, last_end = 0, float('-inf')"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for start, end in intervals:"
+            },
+            {
+              "text": "        if start >= last_end:",
+              "detail": "Free room? Then take it and remember when we finish.",
+              "atWord": 12.667
+            },
+            {
+              "text": "            count += 1",
+              "detail": "Another one attended.",
+              "atWord": 22.167
+            },
+            {
+              "text": "            last_end = end"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return count"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2-3",
+              "sub": "attended",
+              "value": 18,
+              "text": "done",
+              "atWord": 16.667
+            },
+            {
+              "label": "4-5",
+              "sub": "attended",
+              "value": 18,
+              "text": "done",
+              "atWord": 36.5
+            },
+            {
+              "label": "1-10",
+              "sub": "no room left",
+              "value": 18,
+              "text": "dropped",
+              "atWord": 49.167
+            }
+          ],
+          "vars": [
+            {
+              "label": "count = 2",
+              "atWord": 27.75
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/dsa09_s09d.mp3"
+    },
+    {
+      "id": "s09e",
+      "type": "DSA_COST",
+      "narration": "It is worth knowing why that works, because an interviewer will ask. Whenever you take the meeting that finishes earliest, you leave the largest possible amount of time free for everything that comes after it. Any other first choice ends at the same time or later, so it can never leave you more room. Which means swapping in the earliest finisher never makes your answer worse, and that is the exchange argument, said in plain English. Say that sentence out loud in an interview and you have proved your greedy choice is safe.",
+      "durationFrames": 833,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaCost": {
+          "headline": "Why finishing [early wins]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the argument behind the key",
+          "premise": "The same job priced two ways as the input grows: the obvious method against the pattern. Longer bar means more work.",
+          "cells": [
+            {
+              "label": "take the earliest finisher",
+              "sub": "leaves the most time free",
+              "value": 95,
+              "atWord": 8.75
+            },
+            {
+              "label": "any other choice",
+              "sub": "ends the same or later",
+              "value": 45,
+              "atWord": 25.5
+            },
+            {
+              "label": "so swapping never hurts",
+              "sub": "the exchange argument",
+              "value": 80,
+              "atWord": 39.333
+            },
+            {
+              "label": "say it out loud",
+              "sub": "that is the proof they want",
+              "value": 70,
+              "atWord": 55.333
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/dsa09_s09e.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "DSA_SIGNALS",
+      "narration": "Here's the part that actually separates people, and it isn't the loop. Merging intervals? Sort by start time, because you want neighbours to be adjacent. Picking the most non-overlapping meetings? Sort by end time, because finishing early leaves the most room for everything after it. Minimum rooms needed? Sort the starts and ends separately and sweep through them. Same loop shape every time, and the sort key is what changes. Get the key wrong and the code still runs, still returns something, and is quietly incorrect. That's the failure mode to be afraid of here.",
+      "durationFrames": 1017,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaSignals": {
+          "headline": "What to [sort by]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the decision that decides everything",
+          "premise": "Words lifted straight out of the question, and the pattern each one points at. Red means the signal rules this pattern OUT.",
+          "cells": [
+            {
+              "label": "merge → sort by START",
+              "sub": "neighbours become adjacent",
+              "atWord": 10.5
+            },
+            {
+              "label": "max meetings → sort by END",
+              "sub": "finishing early leaves room",
+              "atWord": 21.833
+            },
+            {
+              "label": "min rooms → sweep both",
+              "sub": "starts and ends separately",
+              "atWord": 39.333
+            },
+            {
+              "label": "same loop, different key",
+              "sub": "the key is the puzzle",
+              "atWord": 50.667
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/dsa09_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "DSA_COST",
+      "narration": "Greedy is the easiest pattern to write and the easiest to be wrong about, so hold on to one test. Greedy is safe when a locally best choice can never block a better global outcome. Merging intervals passes that test, because widening a block never costs you anything later. Coin change with arbitrary coin values fails it, because grabbing the biggest coin first can strand you, which is precisely why that one is dynamic programming. So if you can't argue why the local choice is always safe, say so out loud and reach for DP instead.",
+      "durationFrames": 927,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "dsaCost": {
+          "headline": "When greedy is [actually safe]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the question to ask yourself",
+          "premise": "The same job priced two ways as the input grows: the obvious method against the pattern. Longer bar means more work.",
+          "cells": [
+            {
+              "label": "local best never blocks global",
+              "sub": "then greedy is safe",
+              "value": 90,
+              "atWord": 15.75
+            },
+            {
+              "label": "merge intervals",
+              "sub": "widening costs nothing later",
+              "value": 70,
+              "atWord": 27.5
+            },
+            {
+              "label": "coin change, odd coins",
+              "sub": "biggest first can strand you",
+              "value": 30,
+              "text": "dropped",
+              "atWord": 38.5
+            },
+            {
+              "label": "cannot argue it?",
+              "sub": "say so, and use DP",
+              "value": 50,
+              "atWord": 59
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/dsa09_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "LIST_BUILD",
+      "narration": "Four to go and do. Merge Intervals is the one we just wrote. Insert Interval is the same idea with one booking arriving late. Non-overlapping Intervals is where you must sort by end time instead. And Meeting Rooms Two is the sweep, and the one that gets asked most.",
+      "durationFrames": 506,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "heading": "Do these four, in this order",
+        "items": [
+          {
+            "icon": "lucide:merge",
+            "text": "LeetCode 56",
+            "detail": "Merge Intervals",
+            "atWord": 4.083
+          },
+          {
+            "icon": "lucide:plus-square",
+            "text": "LeetCode 57",
+            "detail": "Insert Interval",
+            "atWord": 10.75
+          },
+          {
+            "icon": "lucide:scissors",
+            "text": "LeetCode 435",
+            "detail": "Non-overlapping Intervals",
+            "atWord": 19.75
+          },
+          {
+            "icon": "lucide:users",
+            "text": "LeetCode 253",
+            "detail": "Meeting Rooms II",
+            "atWord": 29.667
+          }
+        ]
+      },
+      "transition": "fade",
+      "audio": "audio/dsa09_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "RECAP",
+      "narration": "Three things to take with you. The signal is intervals or scheduling. The move is sort first, then one pass with a single comparison. And the danger is the sort key, because the wrong one still runs and quietly lies to you.",
+      "durationFrames": 435,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "heading": "Greedy, in three lines",
+        "points": [
+          {
+            "text": "Intervals and scheduling",
+            "atWord": 7.417
+          },
+          {
+            "text": "Sort, then one pass",
+            "atWord": 12.333
+          },
+          {
+            "text": "The sort key is the trap",
+            "atWord": 23
+          }
+        ]
+      },
+      "transition": "fade",
+      "audio": "audio/dsa09_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "OUTRO_CTA",
+      "narration": "Last pattern next: fast and slow pointers, where two runners at different speeds tell you something no single pass ever could. Go and do Merge Intervals first.",
+      "durationFrames": 318,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "All ten patterns, one per episode",
+        "sub": "next: Fast and Slow Pointers"
+      },
+      "transition": "fade",
+      "audio": "audio/dsa09_s14.mp3"
+    }
+  ]
+}

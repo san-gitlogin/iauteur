@@ -1,0 +1,613 @@
+{
+  "meta": {
+    "topic": "How Claude Works",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Claude cannot reach anything on your machine. Your code can — and MCP is the agreed way to describe what your code is offering.",
+    "openLoop": "Claude will answer anything you ask, and then fail at 'check my calendar'. Why?",
+    "analogy": "THE HARD LINE - the model on one side, your machine on the other, your code the only crossing.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "How Claude Actually Works — And What It Cannot Do",
+      "altTitles": [
+        "Why Claude Can't Read Your Files (And What To Do About It)",
+        "Before MCP: What Claude Is, In Plain English"
+      ],
+      "hook": "It can answer anything. It cannot open one file on your laptop.",
+      "breakdown": "what Claude actually is, what it genuinely cannot reach, the one call that talks to it, and the four things to install",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "The thing nobody says out loud"
+        },
+        {
+          "id": "s02b",
+          "title": "What Claude cannot do"
+        },
+        {
+          "id": "s03",
+          "title": "The call, taken apart"
+        },
+        {
+          "id": "s05",
+          "title": "Four things to install"
+        },
+        {
+          "id": "s07",
+          "title": "Not using Claude?"
+        }
+      ],
+      "sources": [
+        "Course source: https://github.com/san-gitlogin/learn-mcp",
+        "Live course: https://san-gitlogin.github.io/learn-mcp/"
+      ],
+      "queries": [
+        "anthropic api python tutorial",
+        "how does claude api work",
+        "messages.create python",
+        "claude api key setup",
+        "what is mcp",
+        "anthropic sdk getting started",
+        "claude sonnet api example"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "claude",
+        "anthropic",
+        "python",
+        "api",
+        "llm",
+        "tutorial",
+        "claude api",
+        "anthropic sdk",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT CAN'T READ YOUR FILES",
+    "badge": "Chapter 1 · Learn MCP",
+    "asset": "si:python"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 206,
+      "narration": "Ask Claude anything and it answers. Ask it to open one file on your laptop, and it simply can't.",
+      "data": {
+        "headline": "IT CAN'T REACH YOUR STUFF",
+        "subtext": "and that is not a bug",
+        "heroAsset": "lucide:lock",
+        "headlineAtWord": 1,
+        "heroAtWord": 10.583
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp-00-how-claude-works_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "durationFrames": 533,
+      "narration": "This is Learn MCP, from THE NBX STUDIO. By the end of this chapter you'll know what Claude actually is, what it genuinely cannot touch on its own, and which single part of a Claude call MCP goes on to fill. No MCP code yet — just the shape of the thing, so that nothing later feels like magic.",
+      "data": {
+        "title": "HOW CLAUDE WORKS",
+        "subtitle": "chapter one of twelve"
+      },
+      "transition": "fade",
+      "background": "zoneB",
+      "anchors": [],
+      "audio": "audio/mcp-00-how-claude-works_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02b",
+      "type": "MCP_REACH",
+      "durationFrames": 783,
+      "narration": "Let's start with the thing nobody says out loud. Claude is not a program sitting on your computer. It runs on Anthropic's machines, and you talk to it over the internet — you send text, it sends text back, and that is the entire relationship. Which means that on its own, it cannot open your files. It cannot read your database. It cannot see your calendar or post a message in your Slack. And none of that is a permission you forgot to switch on. There is simply no way for it to reach across that line.",
+      "data": {
+        "mcpReach": {
+          "headline": "What Claude [cannot do]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "the hard line",
+          "premise": "Claude runs on Anthropic's machines. Everything on the right is on yours. The dashed line is real.",
+          "ends": [
+            {
+              "label": "CLAUDE"
+            },
+            {
+              "label": "YOUR MACHINE"
+            }
+          ],
+          "cells": [
+            {
+              "label": "your files",
+              "sub": "notes, code, that todo.md on the desktop",
+              "icon": "lucide:folder",
+              "text": "out",
+              "atWord": 33.417
+            },
+            {
+              "label": "your database",
+              "sub": "every row behind your app",
+              "icon": "lucide:database",
+              "text": "out",
+              "atWord": 36.667
+            },
+            {
+              "label": "your calendar, your Slack",
+              "sub": "everything your team actually lives in",
+              "icon": "lucide:calendar",
+              "text": "out",
+              "atWord": 39.917
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp-00-how-claude-works_s02b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02c",
+      "type": "MCP_REACH",
+      "durationFrames": 1046,
+      "narration": "So how does any AI app you have ever used actually do anything? Your code does it. Claude replies in ordinary text saying what it wants, and your code — which lives on your side of the line — goes and does the work, then hands the result back. Your files, your database, your calendar: all reachable now, but only ever through you. That is the whole trick, and every tool, every integration, every agent you have used works exactly this way. And MCP, the entire subject of this course, is nothing more than an agreed way of describing what sits on your side of that line, so that Claude can ask for it by name.",
+      "data": {
+        "mcpReach": {
+          "headline": "The one thing [that crosses]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "your code, in the middle",
+          "premise": "Same line, same three things. The only difference is that your code is now standing in the gap.",
+          "ends": [
+            {
+              "label": "CLAUDE"
+            },
+            {
+              "label": "YOUR MACHINE"
+            }
+          ],
+          "cells": [
+            {
+              "label": "your code",
+              "sub": "the one thing standing on both sides",
+              "icon": "lucide:terminal",
+              "text": "bridge",
+              "atWord": 9.583
+            },
+            {
+              "label": "your files",
+              "sub": "read and written by you, on request",
+              "icon": "lucide:folder",
+              "text": "out",
+              "atWord": 36.083
+            },
+            {
+              "label": "your database",
+              "sub": "queried by you, never by Claude",
+              "icon": "lucide:database",
+              "text": "out",
+              "atWord": 37.583
+            },
+            {
+              "label": "your calendar, your Slack",
+              "sub": "and every check you decide to run first",
+              "icon": "lucide:calendar",
+              "text": "out",
+              "atWord": 39
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-00-how-claude-works_s02c.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_API_ANATOMY",
+      "durationFrames": 1312,
+      "narration": "So here is how you send that text. It is one function call, and this is all of it. You import the client and create it, and it quietly reads your key out of an environment variable, which is why you never see the key in the code. Then messages dot create sends the conversation and waits. That single call is the entire API — everything else you'll ever write is arguments to it. Model picks which Claude answers, and Sonnet is the fast, affordable one. Max tokens is a ceiling on the reply, not a target, so a high ceiling costs nothing by itself. And messages is the conversation so far, where every entry carries a role, either user or assistant. The reply comes back as a list of content blocks, which is why you index into it rather than printing the message directly.",
+      "data": {
+        "mcpApi": {
+          "headline": "The call, [taken apart]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "one API call",
+          "codeTitle": "first_call.py",
+          "premise": "Claude is an HTTP API. You send a list of messages, you get one message back. Nothing else is happening.",
+          "lines": [
+            {
+              "text": "from anthropic import Anthropic"
+            },
+            {
+              "text": "client = Anthropic()",
+              "detail": "It reads ANTHROPIC_API_KEY from your environment.",
+              "atWord": 14.083
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "message = client.messages.create(",
+              "detail": "The whole API. Everything else is an argument.",
+              "atWord": 35.583
+            },
+            {
+              "text": "    model=\"claude-sonnet-4-0\","
+            },
+            {
+              "text": "    max_tokens=1024,"
+            },
+            {
+              "text": "    messages=[{\"role\": \"user\","
+            },
+            {
+              "text": "               \"content\": \"What is MCP?\"}],"
+            },
+            {
+              "text": ")"
+            },
+            {
+              "text": "print(message.content[0].text)",
+              "detail": "A list of blocks, so you index into it.",
+              "atWord": 90.5
+            }
+          ],
+          "cells": [
+            {
+              "label": "model=",
+              "sub": "which Claude answers · Sonnet is fast and cheap",
+              "atWord": 54.917
+            },
+            {
+              "label": "max_tokens=",
+              "sub": "a ceiling on the reply, not a target",
+              "atWord": 63.833
+            },
+            {
+              "label": "messages=[…]",
+              "sub": "the conversation so far, each entry with a role",
+              "atWord": 77.917
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp-00-how-claude-works_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03b",
+      "type": "MCP_API_ANATOMY",
+      "durationFrames": 1141,
+      "narration": "Here's the part that trips people up, and this one matters enormously later. The API is stateless. Claude doesn't remember your last message — there's no session on their side holding your conversation. So when you want a second turn, you send the whole thing again: your first message, Claude's reply, and your new question, all in one list. That's why the messages list keeps growing, and why a long chat costs more than a short one — you're re-sending the entire history on every single call. Three messages here, and all three go over the wire. Hold onto that, because in a few chapters you'll watch a loop append tool results to this exact list.",
+      "data": {
+        "mcpApi": {
+          "headline": "It forgets you [every time]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "why the list keeps growing",
+          "codeTitle": "conversation.py",
+          "premise": "Claude is an HTTP API. You send a list of messages, you get one message back. Nothing else is happening.",
+          "lines": [
+            {
+              "text": "messages = ["
+            },
+            {
+              "text": "    {\"role\": \"user\",      \"content\": \"What is MCP?\"},",
+              "detail": "Turn one: what you asked.",
+              "atWord": 26.583
+            },
+            {
+              "text": "    {\"role\": \"assistant\", \"content\": \"MCP is...\"},"
+            },
+            {
+              "text": "    {\"role\": \"user\",      \"content\": \"Show me a server\"},"
+            },
+            {
+              "text": "]"
+            },
+            {
+              "text": "client.messages.create(model=M, max_tokens=1024,"
+            },
+            {
+              "text": "                       messages=messages)",
+              "detail": "All of it, every call. Nothing is remembered.",
+              "atWord": 47.417
+            }
+          ],
+          "cells": [
+            {
+              "label": "assistant",
+              "sub": "what Claude said last time — you store it",
+              "atWord": 39.417
+            },
+            {
+              "label": "user",
+              "sub": "your new question, appended on the end",
+              "atWord": 41
+            }
+          ],
+          "vars": [
+            {
+              "label": "3 messages sent",
+              "atWord": 70
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-00-how-claude-works_s03b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "QUIZ_CARD",
+      "durationFrames": 684,
+      "narration": "Quick check before we go on. To run that file, what do you actually need? Just Python, because Claude is built in. Or the anthropic package and an API key. Have a think, and pause the video if you would like a moment. Ready? You need the package and a key. There's no model on your machine — that call goes over the internet to Anthropic's servers, and the key is how they know it's you.",
+      "data": {
+        "quiz": {
+          "question": "What do you need to run that file?",
+          "options": [
+            {
+              "text": "just Python — it's built in",
+              "atWord": 10.917
+            },
+            {
+              "text": "the anthropic package + a key",
+              "atWord": 16
+            }
+          ],
+          "answerIndex": 1,
+          "why": "There's no model on your machine. It's an HTTP call.",
+          "atWord": 1,
+          "revealAtWord": 31.25
+        }
+      },
+      "transition": "iris",
+      "background": "zoneC",
+      "anchors": [
+        "quiz.atWord",
+        "quiz.options.0.atWord",
+        "quiz.options.1.atWord",
+        "quiz.revealAtWord"
+      ],
+      "audio": "audio/mcp-00-how-claude-works_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04b",
+      "type": "MCP_API_ANATOMY",
+      "durationFrames": 1146,
+      "narration": "One more argument, and it's the reason this whole course exists. Alongside messages, the call takes tools — a list describing functions Claude is allowed to ask for. Each one is a name, a description Claude reads to decide when it's useful, and a schema saying what arguments it takes. Claude never runs those functions. Claude just replies saying which one it wants and with what inputs, and your code does the running. So the question the rest of this course answers is simply: where does that list come from? Writing it by hand for GitHub, for Slack, for your database, forever, is the problem. MCP is the answer, and now you know exactly which argument MCP is filling.",
+      "data": {
+        "mcpApi": {
+          "headline": "The argument [MCP fills]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "where the course is going",
+          "codeTitle": "with_tools.py",
+          "premise": "Claude is an HTTP API. You send a list of messages, you get one message back. Nothing else is happening.",
+          "lines": [
+            {
+              "text": "client.messages.create("
+            },
+            {
+              "text": "    model=M, max_tokens=1024,"
+            },
+            {
+              "text": "    messages=messages,"
+            },
+            {
+              "text": "    tools=[{                        # <- the hole",
+              "detail": "A list of functions Claude may ask you to run.",
+              "atWord": 8.667
+            },
+            {
+              "text": "        \"name\": \"read_note\","
+            },
+            {
+              "text": "        \"description\": \"Read a note by filename\","
+            },
+            {
+              "text": "        \"input_schema\": {...},"
+            },
+            {
+              "text": "    }],"
+            },
+            {
+              "text": ")",
+              "detail": "Where does this list come from? That's MCP.",
+              "atWord": 57.5
+            }
+          ],
+          "cells": [
+            {
+              "label": "name",
+              "sub": "what the function is called",
+              "atWord": 22.083
+            },
+            {
+              "label": "description",
+              "sub": "how Claude decides it's the right one",
+              "atWord": 26
+            },
+            {
+              "label": "input_schema",
+              "sub": "the arguments, and their types",
+              "atWord": 33.083
+            }
+          ],
+          "vars": [
+            {
+              "label": "MCP fills tools=",
+              "atWord": 82.667
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "background": "zoneC",
+      "audio": "audio/mcp-00-how-claude-works_s04b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "MCP_TERMINAL",
+      "durationFrames": 1080,
+      "narration": "Four things to install, and then we'll never do setup again. First, Python three point ten or newer, because the MCP SDK needs the newer typing features. Second, u v, which is a Python package manager that's dramatically faster than pip and is what the MCP docs assume you're using. Third, the SDK itself. Note the square brackets around c l i — that pulls in the command line tools as well as the library, and you'll want them. And fourth, your key, exported in the shell so the client can find it. Python, u v, the SDK, and a key. That's the whole list.",
+      "data": {
+        "mcpTerm": {
+          "headline": "Four things, [then you're set]",
+          "color": "green",
+          "atWord": 1,
+          "promptLabel": "santhu@box",
+          "cwd": "~/mcp",
+          "stageTitle": "what you end up with",
+          "cells": [
+            {
+              "label": "Python 3.10+",
+              "sub": "the language",
+              "atWord": 78.167
+            },
+            {
+              "label": "uv",
+              "sub": "the package manager",
+              "atWord": 79
+            },
+            {
+              "label": "mcp[cli]",
+              "sub": "the SDK and its tools",
+              "atWord": 80.667
+            },
+            {
+              "label": "ANTHROPIC_API_KEY",
+              "sub": "how Anthropic knows it's you",
+              "atWord": 82.417
+            }
+          ],
+          "steps": [
+            {
+              "label": "python --version",
+              "out": [
+                "Python 3.12.4"
+              ],
+              "detail": "3.10 or newer. The SDK needs it.",
+              "atWord": 9.25
+            },
+            {
+              "label": "pip install uv",
+              "out": [
+                "Successfully installed uv-0.5.11"
+              ],
+              "detail": "A much faster package manager.",
+              "atWord": 22.667
+            },
+            {
+              "label": "uv add \"mcp[cli]\"",
+              "out": [
+                "Resolved 41 packages in 210ms",
+                "Installed 12 packages in 84ms",
+                " + mcp==1.2.0",
+                " + pydantic==2.9.2"
+              ],
+              "detail": "The brackets pull in the CLI tools too.",
+              "atWord": 42
+            },
+            {
+              "label": "export ANTHROPIC_API_KEY=\"sk-ant-...\"",
+              "out": [
+                "(no output — that's correct)"
+              ],
+              "detail": "The client reads this automatically.",
+              "atWord": 66.417
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-00-how-claude-works_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "RECAP",
+      "durationFrames": 553,
+      "narration": "Three things to carry forward. Claude runs on Anthropic's machines and cannot reach anything on yours. Your code is the only thing standing on both sides of that line. And the call that talks to it takes a model, a ceiling, the conversation — and a list of tools, which is the argument MCP exists to fill.",
+      "data": {
+        "heading": "Chapter one, in three lines",
+        "points": [
+          {
+            "text": "Claude cannot reach your machine",
+            "atWord": 3.917
+          },
+          {
+            "text": "your code is the only crossing",
+            "atWord": 12.417
+          },
+          {
+            "text": "tools= is the hole MCP fills",
+            "atWord": 22.583
+          }
+        ]
+      },
+      "transition": "dip",
+      "background": "zoneB",
+      "anchors": [
+        "points.0.atWord",
+        "points.1.atWord",
+        "points.2.atWord"
+      ],
+      "audio": "audio/mcp-00-how-claude-works_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "OUTRO_CTA",
+      "durationFrames": 388,
+      "narration": "Not using Claude? The same ideas hold — every major model has an equivalent call, and MCP itself is model agnostic. Next chapter: what MCP actually is, and why it exists at all.",
+      "data": {
+        "message": "Next: what MCP actually is",
+        "sub": "and the problem it solves"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp-00-how-claude-works_s07.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,340 @@
+{
+  "meta": {
+    "topic": "Dynamic Programming",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "You can turn an exponential recursion into a loop by refusing to solve the same subproblem twice.",
+    "openLoop": "Stair forty: a hundred million recalculations, or forty additions.",
+    "analogy": "THE STAIRCASE - counting the ways up, where each stair is built from the two below it.",
+    "seo": {
+      "title": "Dynamic Programming Is Just Refusing To Repeat Yourself",
+      "hook": "A hundred million recalculations, or forty additions. Same staircase, same answer.",
+      "description": "You can turn an exponential recursion into a loop by refusing to solve the same subproblem twice.",
+      "tags": [
+        "dynamic programming",
+        "dp",
+        "climbing stairs",
+        "dsa",
+        "leetcode",
+        "coding interview",
+        "python"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#codinginterview",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "A hundred million recalculations, or forty additions. Same staircase, same answer.",
+      "durationFrames": 189,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "BUILT FROM BELOW",
+        "subtext": "dynamic programming",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 8.917
+      },
+      "audio": "audio/sh08_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "DSA_TRACE_DP",
+      "narration": "Prev2 equals one and prev1 equals two, and those are two sticky notes: prev2 remembers the stair two below, and prev1 remembers the stair one below. Why two notes and not a whole table? Because the recurrence never looks back further than two places, so anything older can be thrown away. Most people write this with a full array first, which is fine, but noticing you need only two variables is what drops the space to constant.",
+      "durationFrames": 793,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaDp": {
+          "headline": "Two [sticky notes]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "all the memory you need",
+          "codeTitle": "climb_stairs.py",
+          "premise": "A staircase of five steps. Each box is one stair, and the number written in it is how many different ways there are to reach that stair.",
+          "lines": [
+            {
+              "text": "def climb_stairs(n):"
+            },
+            {
+              "text": "    if n <= 2: return n"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    prev2, prev1 = 1, 2",
+              "detail": "Two sticky notes: one stair back, and two stairs back.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i in range(3, n + 1):"
+            },
+            {
+              "text": "        current = prev1 + prev2"
+            },
+            {
+              "text": "        prev2 = prev1"
+            },
+            {
+              "text": "        prev1 = current"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return prev1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1",
+              "sub": "stair 1",
+              "atWord": 12.5
+            },
+            {
+              "label": "2",
+              "sub": "stair 2",
+              "atWord": 18.417
+            },
+            {
+              "label": "·",
+              "sub": "stair 3"
+            },
+            {
+              "label": "·",
+              "sub": "stair 4"
+            },
+            {
+              "label": "·",
+              "sub": "stair 5"
+            }
+          ],
+          "vars": [
+            {
+              "label": "prev2 = 1",
+              "atWord": 10.833
+            },
+            {
+              "label": "prev1 = 2",
+              "atWord": 15.833
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/sh08_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_TRACE_DP",
+      "narration": "The loop starts at stair three, because one and two are already known. Current equals prev1 plus prev2, so two plus one is three ways to reach stair three. Then the notes slide forward: prev2 takes prev1's old value, and prev1 takes the answer we just computed. Prev2 is two now, and prev1 is three. That slide is where people slip, because the order matters: overwrite prev1 first and you've destroyed the number prev2 was about to take.",
+      "durationFrames": 905,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaDp": {
+          "headline": "Building stair [three]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "the first derived answer",
+          "codeTitle": "climb_stairs.py",
+          "premise": "A staircase of five steps. Each box is one stair, and the number written in it is how many different ways there are to reach that stair.",
+          "lines": [
+            {
+              "text": "def climb_stairs(n):"
+            },
+            {
+              "text": "    if n <= 2: return n"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    prev2, prev1 = 1, 2"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i in range(3, n + 1):",
+              "detail": "Start at three: one and two are already known.",
+              "atWord": 1
+            },
+            {
+              "text": "        current = prev1 + prev2",
+              "detail": "The new answer is the two below it, added.",
+              "atWord": 12.25
+            },
+            {
+              "text": "        prev2 = prev1",
+              "detail": "Slide the notes forward...",
+              "atWord": 27.417
+            },
+            {
+              "text": "        prev1 = current",
+              "detail": "...in this order, or you lose a value.",
+              "atWord": 36.833
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return prev1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1",
+              "sub": "stair 1"
+            },
+            {
+              "label": "2",
+              "sub": "stair 2"
+            },
+            {
+              "label": "3",
+              "sub": "stair 3",
+              "atWord": 21.75
+            },
+            {
+              "label": "·",
+              "sub": "stair 4"
+            },
+            {
+              "label": "·",
+              "sub": "stair 5"
+            }
+          ],
+          "vars": [
+            {
+              "label": "prev2 = 2",
+              "atWord": 44.417
+            },
+            {
+              "label": "prev1 = 3",
+              "atWord": 48.167
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/sh08_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_TRACE_DP",
+      "narration": "Look at the numbers we produced: one, two, three, five, eight. That's the Fibonacci sequence, and climbing stairs is Fibonacci wearing a hat. A surprising number of dynamic programming problems turn out to be a famous sequence in disguise, and spotting that's often faster than deriving anything. If you write out the first few answers by hand and the pattern looks familiar, trust it and check it.",
+      "durationFrames": 745,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaDp": {
+          "headline": "It was [Fibonacci] all along",
+          "color": "green",
+          "atWord": 1,
+          "caption": "one, two, three, five, eight",
+          "codeTitle": "climb_stairs.py",
+          "premise": "A staircase of five steps. Each box is one stair, and the number written in it is how many different ways there are to reach that stair.",
+          "lines": [
+            {
+              "text": "def climb_stairs(n):"
+            },
+            {
+              "text": "    if n <= 2: return n"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    prev2, prev1 = 1, 2"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i in range(3, n + 1):"
+            },
+            {
+              "text": "        current = prev1 + prev2"
+            },
+            {
+              "text": "        prev2 = prev1"
+            },
+            {
+              "text": "        prev1 = current"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return prev1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "1",
+              "sub": "stair 1",
+              "atWord": 5.417
+            },
+            {
+              "label": "2",
+              "sub": "stair 2",
+              "atWord": 6.333
+            },
+            {
+              "label": "3",
+              "sub": "stair 3",
+              "atWord": 7.167
+            },
+            {
+              "label": "5",
+              "sub": "stair 4",
+              "atWord": 8.083
+            },
+            {
+              "label": "8",
+              "sub": "stair 5",
+              "atWord": 9
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/sh08_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "Counting ways, or a best cost built from smaller inputs. That is your signal. The full pattern is in the Dojo.",
+      "durationFrames": 233,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "Dynamic Programming, traced line by line",
+        "sub": "full pattern in the Dojo"
+      },
+      "transition": "fade",
+      "audio": "audio/sh08_s05.mp3"
+    }
+  ]
+}

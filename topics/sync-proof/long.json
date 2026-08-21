@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "topic": "Sync Proof",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "proof",
+    "openLoop": "proof",
+    "analogy": "proof"
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "SYNC",
+    "badge": "proof",
+    "asset": "si:linux"
+  },
+  "scenes": [
+    {
+      "id": "s00",
+      "type": "HOOK",
+      "narration": "Sync proof.",
+      "durationFrames": 75,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "SYNC PROOF",
+        "subtext": "anchor test",
+        "heroAsset": "si:linux",
+        "headlineAtWord": 1
+      },
+      "audio": "audio/sync-proof_s00.mp3"
+    },
+    {
+      "id": "s01",
+      "type": "CMD_LS",
+      "narration": "Type L S and you get names, nothing more. Add dash L and the same directory turns into one row per file, with permissions, owner, size and date. Add dash H and those sizes finally read like sizes.",
+      "durationFrames": 418,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "cmdLs": {
+          "headline": "ls shows names. [ls -l] shows the truth",
+          "color": "green",
+          "atWord": 1,
+          "promptLabel": "santhu@box",
+          "cwd": "~/projects",
+          "highlight": "-l",
+          "steps": [
+            {
+              "label": "ls",
+              "text": "api.log  deploy.sh  notes.md",
+              "detail": "names only",
+              "atWord": 1
+            },
+            {
+              "label": "ls -l",
+              "text": "-rw-r--r-- 1 santhu 4096 Aug 17 api.log",
+              "sub": "-rwxr-xr-x 1 santhu 812 Aug 17 deploy.sh",
+              "detail": "one row per file",
+              "atWord": 7.833
+            },
+            {
+              "label": "ls -lh",
+              "text": "-rw-r--r-- 1 santhu 4.0K Aug 17 api.log",
+              "detail": "sizes a human can read",
+              "atWord": 24.333
+            }
+          ],
+          "files": [
+            {
+              "label": "api.log",
+              "sub": "-rw-r--r--",
+              "text": "4096",
+              "title": "Aug 17 09:14"
+            },
+            {
+              "label": "deploy.sh",
+              "sub": "-rwxr-xr-x",
+              "text": "812",
+              "title": "Aug 16 22:02",
+              "color": "green"
+            },
+            {
+              "label": "notes.md",
+              "sub": "-rw-r--r--",
+              "text": "1204",
+              "title": "Aug 15 08:40"
+            }
+          ],
+          "columns": [
+            {
+              "label": "perms",
+              "sub": "who may read, write, run",
+              "atWord": 20
+            },
+            {
+              "label": "owner",
+              "sub": "the user who owns it",
+              "atWord": 20.917
+            },
+            {
+              "label": "size",
+              "sub": "bytes, until you add -h",
+              "atWord": 21.75
+            },
+            {
+              "label": "date",
+              "sub": "when it last changed",
+              "atWord": 23.5
+            }
+          ]
+        }
+      },
+      "audio": "audio/sync-proof_s01.mp3"
+    }
+  ]
+}

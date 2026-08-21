@@ -1,0 +1,16 @@
+{
+ "meta": {
+  "topic": "vmstat",
+  "format": "long",
+  "fps": 30
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "scenes": []
+}

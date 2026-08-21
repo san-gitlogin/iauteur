@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "topic": "The Client and the Agentic Loop",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Your app relays between Claude and the server until Claude stops asking for tools — that loop is every MCP application.",
+    "openLoop": "Claude can't call a tool. So how does a tool ever get called?",
+    "analogy": "THE PHONE CALL - dial, ask what they can do, ask them to do one, hang up.",
+    "seo": {
+      "title": "Claude Can't Run Your Tool. Here's What Actually Happens.",
+      "hook": "Here's what confuses everyone at first: Claude can't run your tool. Your own code does.",
+      "description": "Your app relays between Claude and the server until Claude stops asking for tools — that loop is every MCP application.",
+      "tags": [
+        "mcp",
+        "agentic loop",
+        "tool use",
+        "claude",
+        "anthropic",
+        "python",
+        "mcp client"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "CLAUDE NEVER RUNS IT",
+    "badge": "The Loop",
+    "asset": "si:anthropic",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 184,
+      "narration": "Here's what confuses everyone at first: Claude can't run your tool. Your own code does.",
+      "data": {
+        "headline": "CLAUDE NEVER RUNS IT",
+        "subtext": "the loop",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 6.333
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp-04-client-and-loop-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "MCP_LOOP",
+      "durationFrames": 1289,
+      "narration": "Now the part that makes MCP feel alive. Your app runs a loop, and here's one lap of that loop. Your app loops, and you send Claude the user's question together with the tools from the server. Claude replies asking for read note with an argument — asking, not doing, and that distinction is the whole reason your app exists. Then comes the check that ends everything, and we'll come back to that line in a moment. Your code calls the tool through the client, which is the only place in this entire system where anything actually executes. Then you append the result to the messages list and send the whole conversation back to Claude, and round you go again. The loop ends when a reply carries no tool request at all, because at that point Claude is answering the person rather than asking your code for something.",
+      "data": {
+        "mcpLoop": {
+          "headline": "The loop, [going round]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the heartbeat",
+          "codeTitle": "loop.py",
+          "premise": "Your app sits in the middle. Claude is on one side, the MCP server on the other, and your code relays between them.",
+          "lines": [
+            {
+              "text": "while True:",
+              "detail": "One lap of the relay.",
+              "atWord": 14.25
+            },
+            {
+              "text": "    reply = claude(messages, tools=tools)"
+            },
+            {
+              "text": "    if not reply.tool_use:",
+              "detail": "The only exit. Not a counter.",
+              "atWord": 42.833
+            },
+            {
+              "text": "        break"
+            },
+            {
+              "text": "    out = await client.call_tool(...)",
+              "detail": "Your code executes. Claude never does.",
+              "atWord": 55
+            },
+            {
+              "text": "    messages.append(tool_result(out))",
+              "detail": "Hand the result back and go round.",
+              "atWord": 70
+            }
+          ],
+          "cells": [
+            {
+              "label": "send tools",
+              "sub": "+ the question",
+              "atWord": 17.167
+            },
+            {
+              "label": "tool_use",
+              "sub": "Claude asks",
+              "atWord": 26.417
+            },
+            {
+              "label": "call_tool",
+              "sub": "your code runs it",
+              "atWord": 60.667
+            },
+            {
+              "label": "send result",
+              "sub": "back to Claude",
+              "atWord": 77.083
+            },
+            {
+              "label": "no tool_use",
+              "sub": "done",
+              "text": "exit",
+              "atWord": 85.667
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneA",
+      "audio": "audio/mcp-04-client-and-loop-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_WIRE",
+      "durationFrames": 1217,
+      "narration": "Let's watch a real question go round, because one lap never shows you the point. The user asks: what's on my todo list, and add milk to it. That needs two tools, so it needs two laps. Lap one, Claude asks to read the note, your code runs read note, and the text comes back. You append that result and send everything back, which means Claude now knows what's on the list. Lap two, Claude asks for edit note with milk appended, because Claude can only decide the second step once it has seen the first result. And on lap three there's no tool request at all — just the sentence for the user — so the loop exits. Two tool calls, three trips to Claude, and the user typed one line.",
+      "data": {
+        "mcpWire": {
+          "headline": "Lap two, and [the answer]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "one question, two tools",
+          "codeTitle": "loop.py",
+          "premise": "One user question, and Claude needs two different tools before it can answer. Watch the relay go round twice.",
+          "ends": [
+            {
+              "label": "YOUR APP"
+            },
+            {
+              "label": "MCP SERVER"
+            }
+          ],
+          "lines": [
+            {
+              "text": "# lap 1",
+              "detail": "Claude asks to read. Your code runs it.",
+              "atWord": 27.917
+            },
+            {
+              "text": "reply = claude(messages, tools)"
+            },
+            {
+              "text": "out   = await client.call_tool(\"read_note\", ...)"
+            },
+            {
+              "text": "messages.append(tool_result(out))",
+              "detail": "Now Claude knows what's on the list.",
+              "atWord": 41.5
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# lap 2 — edit_note, decided from lap 1's result"
+            },
+            {
+              "text": "# lap 3 — no tool_use, so we break",
+              "detail": "Claude answers the person. Loop over.",
+              "atWord": 73.25
+            }
+          ],
+          "cells": [
+            {
+              "label": "read_note result",
+              "sub": "Buy groceries, call mom, fix the bug",
+              "dir": "back",
+              "out": [
+                "\"Buy groceries, call mom, fix the bug\""
+              ],
+              "atWord": 34
+            },
+            {
+              "label": "edit_note",
+              "sub": "Claude could only ask for this after seeing lap 1",
+              "dir": "out",
+              "out": [
+                "{\"name\":\"edit_note\",",
+                " \"arguments\":{\"note_id\":\"todo.md\",",
+                "  \"append\":\"milk\"}}"
+              ],
+              "atWord": 54.333
+            }
+          ],
+          "vars": [
+            {
+              "label": "2 tools · 3 trips",
+              "atWord": 89.833
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneC",
+      "audio": "audio/mcp-04-client-and-loop-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "durationFrames": 213,
+      "narration": "The loop runs until Claude stops asking. That's every MCP app. Full course on the channel.",
+      "data": {
+        "message": "The client and the agentic loop",
+        "sub": "who actually executes"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp-04-client-and-loop-short_s04.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

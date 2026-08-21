@@ -1,0 +1,151 @@
+{
+ "meta": {
+  "topic": "The Complete DSA Pattern Dojo",
+  "format": "long",
+  "fps": 30,
+  "screenplay": "dojo",
+  "onePayoff": "Ten patterns cover almost every coding interview question you will ever be asked.",
+  "openLoop": "Ten patterns. Two hundred problems. You only have to learn the ten.",
+  "analogy": "THE DIAGNOSIS - reading the symptoms before reaching for a treatment.",
+  "topicAxes": [
+   "economic-pain",
+   "tribal-conflict"
+  ],
+  "seo": {
+   "title": "How To Actually Solve A Coding Interview Problem \u2014 6 Steps",
+   "altTitles": [
+    "The Six-Step Framework (DSA Pattern Dojo, Episode 0)",
+    "Stop Coding First \u2014 The Method Interviewers Are Grading"
+   ],
+   "hook": "You know the patterns. What happens between the question and the code?",
+   "breakdown": "the six-step method for turning an unseen problem into the right pattern, plus the signal table for all ten",
+   "chapters": [
+    {
+     "id": "s01",
+     "title": "Between the question and the code"
+    },
+    {
+     "id": "s03",
+     "title": "The six steps"
+    },
+    {
+     "id": "s04",
+     "title": "1 \u00b7 Read and draw"
+    },
+    {
+     "id": "s05",
+     "title": "2 \u00b7 Spot the signals"
+    },
+    {
+     "id": "s06",
+     "title": "3 \u00b7 Match the pattern"
+    },
+    {
+     "id": "s07",
+     "title": "4 \u00b7 Plan in plain English"
+    },
+    {
+     "id": "s09",
+     "title": "5 \u00b7 Code it clean"
+    },
+    {
+     "id": "s10",
+     "title": "6 \u00b7 Test and analyse"
+    },
+    {
+     "id": "s11",
+     "title": "The signal table"
+    }
+   ],
+   "queries": [
+    "how to solve coding interview problems",
+    "dsa problem solving framework",
+    "how to identify the pattern in a problem",
+    "coding interview approach step by step",
+    "what interviewers actually grade",
+    "how to explain your approach in an interview",
+    "leetcode study plan patterns",
+    "signal words dsa patterns",
+    "stuck in coding interview what to do",
+    "dsa patterns cheat sheet",
+    "faang interview preparation",
+    "technical interview method"
+   ],
+   "hashtags": [
+    "#dsa",
+    "#leetcode",
+    "#codinginterview",
+    "#faang",
+    "#thenbxstudio"
+   ],
+   "tags": [
+    "dsa",
+    "data structures and algorithms",
+    "coding interview",
+    "interview preparation",
+    "faang interview",
+    "leetcode",
+    "problem solving",
+    "algorithms",
+    "python",
+    "dsa patterns",
+    "software engineering interview",
+    "technical interview",
+    "the nbx studio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "thumbnail": {
+  "title": "CRACK MANGOS",
+  "badge": "10 DSA Patterns",
+  "asset": "si:python",
+  "logos": [
+   "si:meta",
+   "si:anthropic",
+   "si:nvidia",
+   "si:google",
+   "si:openai",
+   "si:spacex"
+  ]
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "narration": "You know the patterns. The interview hands you a problem. Where does the method go?",
+   "durationFrames": 156,
+   "timingSource": "tts",
+   "background": "zoneA",
+   "data": {
+    "headline": "DON'T CODE FIRST",
+    "subtext": "what happens before line one",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 5.25
+   },
+   "audio": "audio/dsa00_s01.mp3"
+  },
+  {
+   "id": "s02",
+   "type": "TITLE_CARD",
+   "narration": "Welcome to the Dojo, and to THE NBX STUDIO. Before any of the ten patterns, this is the method that gets you from an unseen problem to the pattern that solves it.",
+   "durationFrames": 310,
+   "timingSource": "tts",
+   "background": "zoneB",
+   "data": {
+    "title": "THE SIX STEPS",
+    "subtitle": "before the patterns"
+   },
+   "transition": "dip",
+   "audio": "audio/dsa00_s02.mp3"
+  }
+ ]
+}

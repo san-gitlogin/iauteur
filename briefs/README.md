@@ -49,9 +49,24 @@ real read; `sync` rewrites every anchor against it. Rebuilding a spec after voic
 throws the real timings away, which is why `render-topic.mjs` refuses to render a spec
 that has narration and no `timingSource: "tts"`.
 
-`topics/` is gitignored — it is content, not code, and it holds 3.9 GB of renders. A
-fresh clone has no `topics/`, so run `node scripts/gen-index.mjs` after building the
-first spec (the `predev` hook and `render-topic` also self-heal it).
+### What is in git and what is not
+
+`topics/*/long.json` and `topics/*/shorts.json` **are tracked** — they are the authored
+work product, 1.3 MB for the whole channel, and a clone is useless without them.
+`topics/*/out/` is not: 3.9 GB of renders, thumbnails and upload kits, all
+regenerable. Neither is `public/audio/`.
+
+So a fresh clone has every spec but no audio and no video. Run
+`node scripts/gen-index.mjs` first (the `predev` hook and `render-topic` self-heal it
+too), then re-voice and re-sync anything you intend to render — the specs carry
+timings from audio that is not in the clone.
+
+`topics.map.json` records which brief produced which spec, recovered by matching
+narration because neither file ever recorded the other. Forty-six of the fifty-five
+specs trace back to a brief; the rest are the course cuts (derived by
+`scripts/build-course-cut.mjs`), the proofs, and the Linux masterclass, which came out
+of the `linux/` table pipeline rather than a single brief. Those are marked in the
+file rather than guessed at.
 
 `public/audio/` is gitignored too. Re-run `voiceover.py` after cloning; it needs
 `pip install edge-tts` and an internet connection.

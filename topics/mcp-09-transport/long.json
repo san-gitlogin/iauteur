@@ -1,0 +1,382 @@
+{
+  "meta": {
+    "topic": "Transport and the Two Flags",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "stdio for development, HTTP for production — and two flags that trade features for scale without warning you.",
+    "openLoop": "Two settings that look like performance tuning. One of them silently kills sampling.",
+    "analogy": "THE SAME ROOM - passing notes across a desk, versus a phone call across the world.",
+    "topicAxes": [
+      "entity-novelty",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "MCP Transport — And The Two Flags That Break Everything",
+      "altTitles": [
+        "stateless_http Silently Kills Sampling. Here's Why.",
+        "stdio vs streamable-http, And The Trap In Between"
+      ],
+      "hook": "Two settings that look like tuning. One kills sampling.",
+      "breakdown": "stdio against streamable HTTP, and exactly which features stateless_http and json_response switch off",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "Two settings, one trap"
+        },
+        {
+          "id": "s03",
+          "title": "Same room, or a phone call"
+        },
+        {
+          "id": "s04",
+          "title": "What the flags turn off"
+        }
+      ],
+      "sources": [
+        "Course source: https://github.com/san-gitlogin/learn-mcp",
+        "Live course: https://san-gitlogin.github.io/learn-mcp/"
+      ],
+      "queries": [
+        "mcp stdio vs http",
+        "streamable http mcp",
+        "stateless_http mcp",
+        "json_response mcp",
+        "mcp transport explained",
+        "mcp production deployment",
+        "mcp scaling"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#python",
+        "#devops",
+        "#claude",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "transport",
+        "stdio",
+        "http",
+        "stateless",
+        "scaling",
+        "python",
+        "claude",
+        "anthropic",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ONE FLAG KILLS IT",
+    "badge": "Transport",
+    "asset": "si:python"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 156,
+      "narration": "Your server works on your laptop. Putting it on the internet takes one word.",
+      "data": {
+        "headline": "ONE FLAG KILLS IT",
+        "subtext": "transport, and the trap",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 7.25
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp09_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "durationFrames": 374,
+      "narration": "It also takes two settings that quietly switch features off if you don't know what they do — and you'll leave knowing exactly which features, and where those settings actually live. Learn MCP, on THE NBX STUDIO.",
+      "data": {
+        "title": "TRANSPORT",
+        "subtitle": "chapter ten of twelve"
+      },
+      "transition": "fade",
+      "background": "zoneB",
+      "anchors": [],
+      "audio": "audio/mcp09_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_TRANSPORT",
+      "durationFrames": 1035,
+      "narration": "There are two transports worth knowing, and they carry exactly the same JSON. Stdio means the client launches the server as a child process on the same machine and they talk over standard input and standard output — like two people at one desk passing notes. Every feature works, setup is nothing, and it only ever works locally. Streamable H T T P means the server runs somewhere else entirely and you reach it over the network, which is what you need the moment the server isn't on the user's laptop. That's the whole choice: stdio while you're developing, H T T P when you ship.",
+      "data": {
+        "mcpTransport": {
+          "headline": "Same room, or [a phone call]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "two transports",
+          "premise": "Both move identical JSON. The only difference is whether the two programs share a machine.",
+          "cells": [
+            {
+              "label": "stdio",
+              "sub": "development",
+              "out": [
+                "full features",
+                "trivial setup",
+                "same machine only"
+              ],
+              "atWord": 10.333
+            },
+            {
+              "label": "streamable-http",
+              "sub": "production",
+              "text": "remote",
+              "out": [
+                "remote servers",
+                "scales horizontally",
+                "some features limited"
+              ],
+              "atWord": 46.25
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp09_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03b",
+      "type": "MCP_TERMINAL",
+      "durationFrames": 1382,
+      "narration": "Stdio deserves a closer look, because how it works explains a bug almost everyone hits once. The client doesn't connect to a running server. The client LAUNCHES the server as a child process, and then talks to it down that process's own standard input and standard output. So standard out isn't where your program prints — it is the wire. Which means a stray print, left in from debugging, writes a line of plain text into the middle of a JSON-RPC stream, and the client fails to parse it. The error you get points at JSON, not at the print statement that caused it, which is why this one costs people an afternoon. Print to standard error instead — the client leaves that alone, and you'll see it in your terminal. And now the logging deprecation from the last chapter makes sense: standard error is exactly where the spec is telling you to send logs.",
+      "data": {
+        "mcpTerm": {
+          "headline": "On stdio, stdout [is the wire]",
+          "color": "green",
+          "atWord": 1,
+          "promptLabel": "santhu@box",
+          "cwd": "~/mcp/notes",
+          "stageTitle": "what a stray print does",
+          "cells": [
+            {
+              "label": "the error names JSON",
+              "sub": "a parse failure, mid-stream",
+              "icon": "lucide:file-warning",
+              "atWord": 65.083
+            },
+            {
+              "label": "not the print",
+              "sub": "nothing points at the real cause",
+              "icon": "lucide:eye-off",
+              "atWord": 70.25
+            },
+            {
+              "label": "stderr is safe",
+              "sub": "and is where the spec sends logs now",
+              "icon": "lucide:shield-check",
+              "atWord": 76.083
+            }
+          ],
+          "steps": [
+            {
+              "label": "# the client runs this for you",
+              "out": [
+                "python server.py   ← spawned as a child process",
+                "stdin  ▸ requests in",
+                "stdout ◂ responses out"
+              ],
+              "detail": "stdout is the protocol channel, not your console.",
+              "atWord": 11.667
+            },
+            {
+              "label": "print(\"debugging note\")",
+              "out": [
+                "Unexpected token 'd', \"debugging \"... is not valid JSON",
+                "MCP error -32700: Parse error"
+              ],
+              "detail": "One plain line, and the stream is corrupt.",
+              "atWord": 43.917
+            },
+            {
+              "label": "print(\"debugging note\", file=sys.stderr)",
+              "out": [
+                "debugging note   ← visible to you, invisible to the protocol"
+              ],
+              "detail": "Where logs belong on stdio.",
+              "atWord": 82.667
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp09_s03b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "MCP_FLAGS",
+      "durationFrames": 1789,
+      "narration": "Now the trap, and it's worth reading twice. First, where these flags actually live, because this catches anyone who learnt MCP a year ago: they are not constructor arguments. You pass them to run, alongside the transport, and the server object itself knows nothing about them. Stateless h t t p true means the server forgets each client between requests, which is exactly what you want behind a load balancer, because any instance can then answer any request. The cost is severe, though: sampling stops working, elicitation stops working, roots stop working, and subscriptions stop working — every one of those needs the server to remember who you are between calls. Json response true means replies come back as plain JSON instead of a stream, which kills live progress and log messages, since streaming is the mechanism those travel on. Notice what survives both: ordinary tool calls. So start with both false, which is the default, and only reach for either when you genuinely need horizontal scaling and can say out loud what you're giving up.",
+      "data": {
+        "mcpFlags": {
+          "headline": "What the flags [turn off]",
+          "color": "red",
+          "atWord": 1,
+          "caption": "read this twice",
+          "codeTitle": "server.py",
+          "premise": "Both flags are passed to run(), not to the constructor. Both trade features for scale, and nothing warns you.",
+          "lines": [
+            {
+              "text": "from mcp.server.mcpserver import MCPServer"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "mcp = MCPServer(\"my-server\")",
+              "detail": "The constructor takes no transport flags.",
+              "atWord": 6.667
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "mcp.run(",
+              "detail": "They belong to run(), with the transport.",
+              "atWord": 24.25
+            },
+            {
+              "text": "    transport=\"streamable-http\","
+            },
+            {
+              "text": "    stateless_http=True,",
+              "detail": "Scales. Kills sampling, elicitation, roots, subscriptions.",
+              "atWord": 38.5
+            },
+            {
+              "text": "    json_response=True,",
+              "detail": "Simpler. Kills streaming progress and log messages.",
+              "atWord": 92.917
+            },
+            {
+              "text": ")"
+            }
+          ],
+          "cells": [
+            {
+              "label": "stateless_http=True",
+              "sub": "forgets clients between requests",
+              "text": "flag",
+              "out": [
+                "sampling",
+                "elicitation",
+                "roots",
+                "subscriptions"
+              ],
+              "atWord": 50.25
+            },
+            {
+              "label": "json_response=True",
+              "sub": "plain JSON instead of SSE streams",
+              "text": "flag",
+              "out": [
+                "progress",
+                "log messages"
+              ],
+              "atWord": 104.667
+            },
+            {
+              "label": "sampling"
+            },
+            {
+              "label": "elicitation"
+            },
+            {
+              "label": "roots"
+            },
+            {
+              "label": "subscriptions"
+            },
+            {
+              "label": "progress"
+            },
+            {
+              "label": "log messages"
+            },
+            {
+              "label": "tools",
+              "atWord": 117.25
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp09_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "RECAP",
+      "durationFrames": 421,
+      "narration": "Three lines. Stdio is for development, on one machine. Streamable H T T P is for production, across the network. And both flags default to false for a reason — turning either on trades features for scale.",
+      "data": {
+        "heading": "Transport, in three lines",
+        "points": [
+          {
+            "text": "stdio — one machine, every feature",
+            "atWord": 1.833
+          },
+          {
+            "text": "streamable-http — across the network",
+            "atWord": 8.083
+          },
+          {
+            "text": "Both flags default false for a reason",
+            "atWord": 18
+          }
+        ]
+      },
+      "transition": "dip",
+      "background": "zoneB",
+      "anchors": [
+        "points.0.atWord",
+        "points.1.atWord",
+        "points.2.atWord"
+      ],
+      "audio": "audio/mcp09_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "durationFrames": 148,
+      "narration": "One chapter left, and it's the one where we put the whole protocol back together.",
+      "data": {
+        "message": "Next: everything, together",
+        "sub": "and the final question"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp09_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

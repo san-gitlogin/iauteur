@@ -1,0 +1,201 @@
+{
+  "meta": {
+    "topic": "The Six-Step Framework",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Read the signals before you write anything, and the pattern names itself.",
+    "openLoop": "You know the patterns. So why does the blank editor still win?",
+    "analogy": "THE DIAGNOSIS - symptoms first, treatment second.",
+    "seo": {
+      "title": "How To Pick The Right DSA Pattern In 30 Seconds",
+      "hook": "Stop coding first. Read the signals first.",
+      "description": "The six-step method, run on a real interview question.",
+      "tags": [
+        "dsa",
+        "coding interview",
+        "leetcode",
+        "patterns",
+        "faang",
+        "algorithms",
+        "python"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#codinginterview",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "You know the patterns. The interview hands you a problem, and the blank editor still wins.",
+      "durationFrames": 178,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "READ IT FIRST",
+        "subtext": "then reach for a pattern",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 9
+      },
+      "audio": "audio/sh00_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "DSA_SIGNALS",
+      "narration": "Here is an actual question. Do not code yet. Read it, and circle the words that constrain you. Sorted, which is a precondition somebody chose to give you. A pair, so you are looking for two things, not one. Adds up to a target, which is the test each pair has to pass. And return the indices, so positions are the answer, not the values. Four words, and none of them are decoration.",
+      "durationFrames": 745,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "dsaSignals": {
+          "headline": "Circle the [words]",
+          "color": "yellow",
+          "atWord": 1,
+          "caption": "step one and two",
+          "problem": "Given a sorted array of integers and a target, return the indices of the two numbers that add up to it.",
+          "premise": "A real question, on screen. Every word that constrains the answer is a signal.",
+          "cells": [
+            {
+              "label": "\"sorted\"",
+              "sub": "a gift, not a detail",
+              "atWord": 14.917
+            },
+            {
+              "label": "\"two numbers\"",
+              "sub": "a pair, so two ends",
+              "atWord": 23.167
+            },
+            {
+              "label": "\"add up to target\"",
+              "sub": "the test to apply",
+              "atWord": 32.25
+            },
+            {
+              "label": "\"return the indices\"",
+              "sub": "positions, not values",
+              "atWord": 43.833
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/sh00_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_SIGNALS",
+      "narration": "Now match. Sorted plus a pair points at two pointers, one at each end. Unsorted plus a pair would have been a hash map instead. And a run of items sitting next to each other would have been a sliding window. Same question shape, three different answers, and the signal decides which.",
+      "durationFrames": 540,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaSignals": {
+          "headline": "The pattern [names itself]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "step three",
+          "premise": "Sorted plus a pair is a fingerprint. Only one pattern fits it.",
+          "cells": [
+            {
+              "label": "sorted + a pair",
+              "sub": "→ TWO POINTERS",
+              "color": "green",
+              "atWord": 1.667
+            },
+            {
+              "label": "unsorted + a pair",
+              "sub": "→ HASH MAP",
+              "atWord": 11.667
+            },
+            {
+              "label": "a contiguous run",
+              "sub": "→ SLIDING WINDOW",
+              "atWord": 20.833
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/sh00_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_FRAMEWORK",
+      "narration": "That was the first half of a method you can run on anything. Read it and draw one small example. Circle the signals. Match them to a pattern. Say the plan out loud in plain English before you type. Then code it. And finish by testing the edges and stating the complexity, because that is the part interviewers actually score.",
+      "durationFrames": 609,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaFramework": {
+          "headline": "The six steps, [in order]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "run them every time",
+          "premise": "What we just did was steps one to three. These are all six, in the order they run.",
+          "cells": [
+            {
+              "label": "1 · Read and draw",
+              "sub": "one tiny example",
+              "atWord": 10.583
+            },
+            {
+              "label": "2 · Circle the signals",
+              "sub": "the words that constrain",
+              "atWord": 16.333
+            },
+            {
+              "label": "3 · Match the pattern",
+              "sub": "signals point somewhere",
+              "atWord": 18.75
+            },
+            {
+              "label": "4 · Plan in plain English",
+              "sub": "before you type",
+              "atWord": 22.917
+            },
+            {
+              "label": "5 · Code it clean",
+              "sub": "now you may type",
+              "atWord": 31.833
+            },
+            {
+              "label": "6 · Test and analyse",
+              "sub": "edges, then Big-O",
+              "atWord": 34.333
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/sh00_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "Ten patterns run on this exact method, one per chapter, in the Dojo.",
+      "durationFrames": 159,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "Ten patterns, one method",
+        "sub": "the full course in the Dojo"
+      },
+      "transition": "fade",
+      "audio": "audio/sh00_s05.mp3"
+    }
+  ]
+}

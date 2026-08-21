@@ -1,0 +1,63 @@
+{
+ "meta": {
+  "topic": "Learn MCP \u2014 the whole course",
+  "format": "long",
+  "fps": 30,
+  "onePayoff": "The Model Context Protocol, built up from one API call and checked against the current spec.",
+  "openLoop": "Most MCP tutorials teach an SDK that no longer exists."
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "thumbnail": {
+  "title": "MCP, PROPERLY",
+  "badge": "Full Course \u00b7 2026 spec",
+  "asset": "si:anthropic",
+  "logos": [
+   "si:anthropic",
+   "si:python"
+  ]
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "durationFrames": 195,
+   "narration": "Everyone says just call the API. But what's inside the envelope, and where does MCP plug in?",
+   "data": {
+    "headline": "WHAT'S IN THE ENVELOPE",
+    "subtext": "one call, four arguments",
+    "heroAsset": "si:python",
+    "headlineAtWord": 1,
+    "heroAtWord": 7.667
+   },
+   "background": "zoneA",
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ],
+   "audio": "audio/mcp00_s01.mp3",
+   "timingSource": "tts"
+  },
+  {
+   "id": "s02",
+   "type": "TITLE_CARD",
+   "durationFrames": 393,
+   "narration": "Welcome to Learn MCP, here on THE NBX STUDIO. Before MCP can mean anything, you need to see what a plain Claude call actually looks like \u2014 because MCP is nothing more than a way of filling one argument in it.",
+   "data": {
+    "title": "HOW CLAUDE WORKS",
+    "subtitle": "chapter one of twelve"
+   },
+   "transition": "fade",
+   "background": "zoneB",
+   "anchors": [],
+   "audio": "audio/mcp00_s02.mp3",
+   "timingSource": "tts"
+  }
+ ]
+}

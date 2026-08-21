@@ -1,0 +1,260 @@
+{
+  "meta": {
+    "topic": "Sliding Window",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Repair the running total instead of rebuilding it, and a nested loop becomes one pass.",
+    "openLoop": "Six houses, or a million. Why does one of them take a billion steps?",
+    "analogy": "THE TRAIN WINDOW - a view of exactly three houses, sliding one at a time.",
+    "seo": {
+      "title": "The Sliding Window Trick Every Interview Wants",
+      "hook": "Stop recounting. Repair the total instead.",
+      "description": "One in, one out — the whole sliding window pattern in under a minute.",
+      "tags": [
+        "dsa",
+        "sliding window",
+        "leetcode",
+        "coding interview",
+        "algorithms",
+        "python",
+        "faang"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#codinginterview",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Six houses, and you want the best three in a row. Recount every window and a million houses costs a billion steps.",
+      "durationFrames": 231,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "ONE IN, ONE OUT",
+        "subtext": "the sliding window",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 6.333
+      },
+      "audio": "audio/sh02_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "DSA_TRACE_WINDOW",
+      "narration": "Add the first three houses. Two, one and five make eight. That is the only time you ever add a whole window up.",
+      "durationFrames": 254,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "dsaWindow": {
+          "headline": "Count it [once]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "the only full count",
+          "codeTitle": "sliding_window.py",
+          "premise": "You are on a train. Each box is a house you pass, and the window shows exactly 3 at a time.",
+          "lines": [
+            {
+              "text": "window_sum = sum(nums[:k])",
+              "detail": "The first window. Counted the slow way, once.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "for i in range(k, len(nums)):"
+            },
+            {
+              "text": "    window_sum += nums[i]"
+            },
+            {
+              "text": "    window_sum -= nums[i - k]"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "text": "win",
+              "atWord": 4.25
+            },
+            {
+              "label": "1",
+              "text": "win",
+              "atWord": 5.083
+            },
+            {
+              "label": "5",
+              "text": "win",
+              "atWord": 6.75
+            },
+            {
+              "label": "1"
+            },
+            {
+              "label": "3"
+            },
+            {
+              "label": "2"
+            }
+          ],
+          "vars": [
+            {
+              "label": "window_sum=8",
+              "atWord": 8.417
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/sh02_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_TRACE_WINDOW",
+      "narration": "Now slide. The house entering the window gets added, and the house leaving gets subtracted. Seven, from two operations instead of three. The window moved, and you never recounted the middle.",
+      "durationFrames": 380,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaWindow": {
+          "headline": "Then [repair it]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "the train moves one house",
+          "codeTitle": "sliding_window.py",
+          "premise": "You are on a train. Each box is a house you pass, and the window shows exactly 3 at a time.",
+          "lines": [
+            {
+              "text": "window_sum = sum(nums[:k])"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "for i in range(k, len(nums)):"
+            },
+            {
+              "text": "    window_sum += nums[i]",
+              "detail": "One house enters: add it.",
+              "atWord": 1.917
+            },
+            {
+              "text": "    window_sum -= nums[i - k]",
+              "detail": "One house leaves: subtract it.",
+              "atWord": 8.667
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 7.75
+            },
+            {
+              "label": "1",
+              "text": "win"
+            },
+            {
+              "label": "5",
+              "text": "win"
+            },
+            {
+              "label": "1",
+              "text": "win",
+              "atWord": 13.5
+            },
+            {
+              "label": "3"
+            },
+            {
+              "label": "2"
+            }
+          ],
+          "pointers": [
+            {
+              "label": "IN",
+              "value": 3,
+              "atWord": 3.833
+            },
+            {
+              "label": "OUT",
+              "value": 0,
+              "atWord": 11.583
+            }
+          ],
+          "vars": [
+            {
+              "label": "window_sum=7",
+              "atWord": 14.417
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/sh02_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_COST",
+      "narration": "Recounting a million houses costs a billion additions. Sliding costs two million. Same answer, and one of them finishes.",
+      "durationFrames": 267,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaCost": {
+          "headline": "Why that [matters]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the same job, two prices",
+          "premise": "The same job priced two ways as the input grows. Longer bar means more work.",
+          "cells": [
+            {
+              "label": "recount, n=1M",
+              "sub": "1 billion additions",
+              "value": 100,
+              "text": "dropped",
+              "atWord": 1
+            },
+            {
+              "label": "slide, n=1M",
+              "sub": "2 million additions",
+              "value": 8,
+              "atWord": 8.583
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/sh02_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "Subarray, substring, or a window of size k — that is your signal. The full pattern is in the Dojo.",
+      "durationFrames": 227,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "Sliding Window, traced line by line",
+        "sub": "full pattern in the Dojo"
+      },
+      "transition": "fade",
+      "audio": "audio/sh02_s05.mp3"
+    }
+  ]
+}

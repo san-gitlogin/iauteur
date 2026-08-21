@@ -1,0 +1,126 @@
+{
+ "dsa-dojo-00-framework": {
+  "long": "briefs/dsa/ep00.json",
+  "shorts": "briefs/dsa/shorts/sh00.json"
+ },
+ "dsa-dojo-01-two-pointers": {
+  "long": "briefs/dsa/ep01.json",
+  "shorts": "briefs/dsa/shorts/sh01.json"
+ },
+ "dsa-dojo-02-sliding-window": {
+  "long": "briefs/dsa/ep02.json",
+  "shorts": "briefs/dsa/shorts/sh02.json"
+ },
+ "dsa-dojo-03-binary-search": {
+  "long": "briefs/dsa/ep03.json",
+  "shorts": "briefs/dsa/shorts/sh03.json"
+ },
+ "dsa-dojo-04-hashmap": {
+  "long": "briefs/dsa/ep04.json",
+  "shorts": "briefs/dsa/shorts/sh04.json"
+ },
+ "dsa-dojo-05-stack": {
+  "long": "briefs/dsa/ep05.json",
+  "shorts": "briefs/dsa/shorts/sh05.json"
+ },
+ "dsa-dojo-06-bfs": {
+  "long": "briefs/dsa/ep06.json",
+  "shorts": "briefs/dsa/shorts/sh06.json"
+ },
+ "dsa-dojo-07-dfs": {
+  "long": "briefs/dsa/ep07.json",
+  "shorts": "briefs/dsa/shorts/sh07.json"
+ },
+ "dsa-dojo-08-dp": {
+  "long": "briefs/dsa/ep08.json",
+  "shorts": null,
+  "shorts_note": "no brief matched \u2014 spec is the only source"
+ },
+ "dsa-dojo-09-greedy": {
+  "long": "briefs/dsa/ep09.json",
+  "shorts": "briefs/dsa/shorts/sh09.json"
+ },
+ "dsa-dojo-10-fast-slow": {
+  "long": "briefs/dsa/ep10.json",
+  "shorts": "briefs/dsa/shorts/sh10.json"
+ },
+ "dsa-dojo-11-problems": {
+  "long": "briefs/dsa/ep11.json",
+  "shorts": "briefs/dsa/shorts/sh11.json"
+ },
+ "dsa-dojo-course": {
+  "long": null,
+  "long_note": "no brief matched \u2014 spec is the only source"
+ },
+ "linux-commands-masterclass": {
+  "long": null,
+  "long_note": "no brief matched \u2014 spec is the only source",
+  "shorts": null,
+  "shorts_note": "no brief matched \u2014 spec is the only source"
+ },
+ "linux-vmstat-swap": {
+  "shorts": null,
+  "shorts_note": "no brief matched \u2014 spec is the only source"
+ },
+ "mcp-00-how-claude-works": {
+  "long": "briefs/mcp/ep00.json",
+  "shorts": "briefs/mcp/shorts/sh00.json"
+ },
+ "mcp-01-what-is-mcp": {
+  "long": "briefs/mcp/ep01.json",
+  "shorts": "briefs/mcp/shorts/sh01.json"
+ },
+ "mcp-02-three-primitives": {
+  "long": "briefs/mcp/ep02.json",
+  "shorts": "briefs/mcp/shorts/sh02.json"
+ },
+ "mcp-03-build-a-server": {
+  "long": "briefs/mcp/ep03.json",
+  "shorts": null,
+  "shorts_note": "no brief matched \u2014 spec is the only source"
+ },
+ "mcp-04-client-and-loop": {
+  "long": "briefs/mcp/ep04.json",
+  "shorts": "briefs/mcp/shorts/sh04.json"
+ },
+ "mcp-05-resources-prompts": {
+  "long": "briefs/mcp/ep05.json",
+  "shorts": "briefs/mcp/shorts/sh05.json"
+ },
+ "mcp-06-sampling": {
+  "long": "briefs/mcp/ep06.json",
+  "shorts": "briefs/mcp/shorts/sh06.json"
+ },
+ "mcp-07-roots": {
+  "long": "briefs/mcp/ep07.json",
+  "shorts": "briefs/mcp/shorts/sh07.json"
+ },
+ "mcp-08-notifications": {
+  "long": "briefs/mcp/ep08.json",
+  "shorts": "briefs/mcp/shorts/sh08.json"
+ },
+ "mcp-09-transport": {
+  "long": "briefs/mcp/ep09.json",
+  "shorts": "briefs/mcp/shorts/sh09.json"
+ },
+ "mcp-10-elicitation": {
+  "long": "briefs/mcp/ep11.json",
+  "shorts": "briefs/mcp/shorts/sh11.json"
+ },
+ "mcp-11-everything": {
+  "long": "briefs/mcp/ep10.json",
+  "shorts": "briefs/mcp/shorts/sh10.json"
+ },
+ "mcp-course": {
+  "long": null,
+  "long_note": "no brief matched \u2014 spec is the only source"
+ },
+ "mcp-proof": {
+  "long": null,
+  "long_note": "no brief matched \u2014 spec is the only source"
+ },
+ "sync-proof": {
+  "long": null,
+  "long_note": "no brief matched \u2014 spec is the only source"
+ }
+}

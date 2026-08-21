@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "topic": "vmstat",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Sustained swap-out means you are short of memory, not short of CPU.",
+    "openLoop": "The CPU looks idle and the machine feels stuck. Why?",
+    "analogy": "THE WORKBENCH - every command is a tool in a drawer.",
+    "seo": {
+      "title": "The Linux Command That Explains A 'Slow' Server In 5 Seconds",
+      "hook": "CPU idle, machine stuck. Here is why.",
+      "description": "vmstat's si/so columns show memory being pushed to disk. Sustained swap-out means you need RAM, not CPU.",
+      "tags": [
+        "linux",
+        "vmstat",
+        "swap",
+        "memory",
+        "sysadmin",
+        "devops",
+        "performance",
+        "terminal"
+      ],
+      "hashtags": [
+        "#linux",
+        "#devops",
+        "#sysadmin",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "WHY IT FEELS STUCK",
+    "badge": "vmstat",
+    "asset": "si:linux",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "background": "zoneA",
+      "narration": "The C P U looks idle. The machine feels stuck. One command tells you why in about five seconds.",
+      "data": {
+        "headline": "WHY IT FEELS STUCK",
+        "subtext": "and the CPU looks fine",
+        "heroAsset": "si:linux",
+        "headlineAtWord": 1,
+        "heroAtWord": 7.917
+      },
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "durationFrames": 221,
+      "audio": "audio/shvm_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CMD_VMSTAT",
+      "transition": "wipe",
+      "background": "zoneC",
+      "narration": "|V M stat one prints one sample a second. ^The very first row is an average since the machine booted, so ignore it completely — it is history, not a reading of now. ~The columns that matter are S I and S O: swap in, and swap out. Zero there means memory is keeping up. ^Anything sustained above zero means the kernel is pushing memory to disk to stay alive, and disk is thousands of times slower than RAM. That climb is why the machine feels stuck while the C P U looks idle.",
+      "data": {
+        "cmdVmstat": {
+          "stageTitle": "swap out, per second",
+          "headline": "vmstat's first row is [since boot]",
+          "color": "yellow",
+          "promptLabel": "santhu@box",
+          "cwd": "~",
+          "atWord": 1,
+          "steps": [
+            {
+              "label": "vmstat 1",
+              "detail": "one sample per second. the FIRST row is history.",
+              "atWord": 6.25,
+              "out": [
+                "procs -----------memory---------- ---swap-- -----io----",
+                " r  b   swpd   free   buff  cache   si   so    bi    bo",
+                " 2  0      0 1284416  98304 512000    0    0    14    31",
+                " 1  0  20480  240128  41216 180224  128  512   210   980",
+                " 3  1  71680   88064  20480  96256  512 1840   640  2410"
+              ]
+            }
+          ],
+          "stage": [
+            {
+              "label": "so — swap out",
+              "sub": "memory pushed to disk, per second",
+              "atWord": 19.5,
+              "unit": "KB/s",
+              "threshold": 256,
+              "xLabels": [
+                "0s",
+                "5s",
+                "10s"
+              ],
+              "series": [
+                0,
+                0,
+                0,
+                0,
+                32,
+                128,
+                320,
+                512,
+                880,
+                1240,
+                1610,
+                1840
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 900,
+      "audio": "audio/shvm_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Sustained swap out means you are short of memory, not short of C P U. All hundred and nine commands are in the full video.",
+      "data": {
+        "message": "109 Linux commands, one video",
+        "sub": "every one running on screen"
+      },
+      "anchors": [],
+      "durationFrames": 252,
+      "audio": "audio/shvm_s03.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

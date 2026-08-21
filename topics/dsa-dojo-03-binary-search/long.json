@@ -1,0 +1,1403 @@
+{
+  "meta": {
+    "topic": "Binary Search",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "You can halve a sorted search space without ever writing an off-by-one bug.",
+    "openLoop": "A million names, and twenty guesses. Where do the rest go?",
+    "analogy": "THE GUESSING GAME - higher or lower, where every guess kills half the possibilities.",
+    "topicAxes": [
+      "economic-pain",
+      "entity-novelty"
+    ],
+    "seo": {
+      "title": "Binary Search — 1,000,000 Items in 20 Guesses",
+      "altTitles": [
+        "Binary Search Explained Until It Sticks (DSA Pattern 3)",
+        "Why mid + 1 And Not mid — Binary Search, Properly"
+      ],
+      "hook": "A million names, twenty guesses.",
+      "breakdown": "binary search traced line by line, including the two off-by-one bugs everybody writes",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "A million names, twenty guesses"
+        },
+        {
+          "id": "s03",
+          "title": "The words that give it away"
+        },
+        {
+          "id": "s04",
+          "title": "Why scanning hurts"
+        },
+        {
+          "id": "s05",
+          "title": "Higher or lower"
+        },
+        {
+          "id": "s06",
+          "title": "The boundaries"
+        },
+        {
+          "id": "s07",
+          "title": "The first guess"
+        },
+        {
+          "id": "s09",
+          "title": "Why mid plus one"
+        },
+        {
+          "id": "s12",
+          "title": "Found, in three guesses"
+        },
+        {
+          "id": "s14",
+          "title": "The two off-by-one bugs"
+        },
+        {
+          "id": "s15",
+          "title": "The four problems to go and do"
+        }
+      ],
+      "queries": [
+        "binary search explained",
+        "binary search python implementation",
+        "why mid + 1 binary search",
+        "binary search off by one",
+        "while left <= right explained",
+        "log n explained simply",
+        "binary search on answer",
+        "search in rotated sorted array",
+        "first bad version binary search",
+        "dsa patterns for interviews",
+        "leetcode binary search problems",
+        "faang interview dsa patterns"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#binarysearch",
+        "#codinginterview",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "dsa",
+        "data structures and algorithms",
+        "binary search",
+        "leetcode",
+        "coding interview",
+        "faang interview",
+        "python",
+        "algorithms",
+        "logarithmic time",
+        "sorted array",
+        "interview preparation",
+        "software engineering interview",
+        "dsa patterns",
+        "off by one",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "1,000,000 IN 20",
+    "badge": "Binary Search",
+    "asset": "si:python"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "A million names, and twenty guesses. So where do the other nine hundred thousand names go?",
+      "durationFrames": 184,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "1,000,000 IN 20",
+        "subtext": "twenty guesses, every time",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 5.917
+      },
+      "audio": "audio/dsa03_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "Pattern three of ten in the NBX Studio Dojo: Binary Search. The one where every single step throws away half of everything that's left.",
+      "durationFrames": 280,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "title": "BINARY SEARCH",
+        "subtitle": "pattern three of ten"
+      },
+      "transition": "fade",
+      "audio": "audio/dsa03_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_SIGNALS",
+      "narration": "Read the question first, as always. The input is sorted, which is the precondition, and without it none of this works. You're asked to find something, a value or a position. Or you want the first or last thing that satisfies a rule, which is the sneaky version. Or the kth smallest, which is that shape again. If log n appears in the required complexity, the interviewer has told you the answer outright. Not sorted? Then sort it first, or pick a different pattern. Sorted plus find is the pair to watch, because sorted is what makes elimination safe.",
+      "durationFrames": 969,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaSignals": {
+          "headline": "The words that [give it away]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "signals in the question",
+          "premise": "Words lifted straight out of the question, and the pattern each one points at. Red means the signal rules this pattern OUT.",
+          "cells": [
+            {
+              "label": "sorted",
+              "sub": "the precondition, not a detail",
+              "atWord": 7.167
+            },
+            {
+              "label": "find / search",
+              "sub": "a value, or a position",
+              "atWord": 19.167
+            },
+            {
+              "label": "first or last that...",
+              "sub": "the sneaky version",
+              "atWord": 27.917
+            },
+            {
+              "label": "kth smallest",
+              "sub": "the same shape again",
+              "atWord": 39.917
+            },
+            {
+              "label": "O(log n) required",
+              "sub": "they just told you the answer",
+              "color": "green",
+              "atWord": 45.5
+            },
+            {
+              "label": "NOT sorted",
+              "sub": "sort it, or pick another pattern",
+              "color": "red",
+              "atWord": 58.25
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/dsa03_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_COST",
+      "narration": "Scanning means checking every item until you hit the one you're after. On ten items that's up to ten checks, which is nothing at all. On a million it's up to a million, and on a billion it's a billion. Binary search does four checks on ten items, twenty on a million, and thirty on a billion. Look hard at those last two, because going from a million to a billion, a thousand times the data, costs you ten extra guesses. That's what logarithmic means in practice.",
+      "durationFrames": 772,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "dsaCost": {
+          "headline": "Why [scanning] hurts",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the same list, two costs",
+          "premise": "The same job priced two ways as the input grows: the obvious method against the pattern. Longer bar means more work.",
+          "cells": [
+            {
+              "label": "scan, n=10",
+              "sub": "up to 10 checks",
+              "value": 8,
+              "text": "dropped",
+              "atWord": 8.667
+            },
+            {
+              "label": "scan, n=1M",
+              "sub": "up to 1,000,000",
+              "value": 70,
+              "text": "dropped",
+              "atWord": 18
+            },
+            {
+              "label": "scan, n=1B",
+              "sub": "up to 1,000,000,000",
+              "value": 100,
+              "text": "dropped",
+              "atWord": 23.75
+            },
+            {
+              "label": "binary, n=10",
+              "sub": "4 checks",
+              "value": 4,
+              "atWord": 30.917
+            },
+            {
+              "label": "binary, n=1M",
+              "sub": "20 checks",
+              "value": 6,
+              "atWord": 34.5
+            },
+            {
+              "label": "binary, n=1B",
+              "sub": "30 checks",
+              "value": 8,
+              "atWord": 37.417
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/dsa03_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "DSA_TRACE_BSEARCH",
+      "narration": "You know this game already. A friend thinks of a number between one and a hundred, and every time you guess they say higher or lower. Guessing one, then two, then three could take a hundred turns. So you guess fifty. Higher. Then seventy-five. Lower. Then sixty-two. Every guess throws away half of what is left, and that's the entire pattern. Here it is on ten sorted numbers: two, sixteen, fifty-six, up to ninety-one, and we're hunting for twenty-three. Same game, same rule. Guess in the middle, and let the answer tell you which half to throw away.",
+      "durationFrames": 1044,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaBsearch": {
+          "headline": "Higher, or [lower]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "ten sorted numbers",
+          "codeTitle": "binary_search.py",
+          "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left.",
+          "lines": [
+            {
+              "text": "def binary_search(nums, target):"
+            },
+            {
+              "text": "    left = 0"
+            },
+            {
+              "text": "    right = len(nums) - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while left <= right:"
+            },
+            {
+              "text": "        mid = (left + right) // 2"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if nums[mid] == target:"
+            },
+            {
+              "text": "            return mid"
+            },
+            {
+              "text": "        elif nums[mid] < target:"
+            },
+            {
+              "text": "            left = mid + 1"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            right = mid - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return -1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 56.583
+            },
+            {
+              "label": "5",
+              "mark": false
+            },
+            {
+              "label": "8",
+              "atWord": 59.167
+            },
+            {
+              "label": "12",
+              "mark": false
+            },
+            {
+              "label": "16",
+              "atWord": 60
+            },
+            {
+              "label": "23",
+              "mark": false
+            },
+            {
+              "label": "38",
+              "mark": false
+            },
+            {
+              "label": "56",
+              "atWord": 60.917
+            },
+            {
+              "label": "72",
+              "mark": false
+            },
+            {
+              "label": "91",
+              "atWord": 63.5
+            }
+          ],
+          "vars": [
+            {
+              "label": "target=23",
+              "atWord": 67.833
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/dsa03_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "DSA_TRACE_BSEARCH",
+      "narration": "Two variables mark the edges of the range we are still willing to look in. Left equals zero puts the low edge at position zero. Right equals len of nums minus one puts the high edge at nine. Right now the answer could be anywhere in those ten positions, and that's the honest state of our knowledge. Every guess from here shrinks the range: ten possibilities become five, then two, then one. Watch the range, not the values.",
+      "durationFrames": 794,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaBsearch": {
+          "headline": "Two [boundaries]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "the range still in play",
+          "codeTitle": "binary_search.py",
+          "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left.",
+          "lines": [
+            {
+              "text": "def binary_search(nums, target):"
+            },
+            {
+              "text": "    left = 0",
+              "detail": "The lowest position we are still willing to look at.",
+              "atWord": 12.417
+            },
+            {
+              "text": "    right = len(nums) - 1",
+              "detail": "The highest position we are still willing to look at.",
+              "atWord": 20.667
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while left <= right:"
+            },
+            {
+              "text": "        mid = (left + right) // 2"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if nums[mid] == target:"
+            },
+            {
+              "text": "            return mid"
+            },
+            {
+              "text": "        elif nums[mid] < target:"
+            },
+            {
+              "text": "            left = mid + 1"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            right = mid - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return -1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2"
+            },
+            {
+              "label": "5"
+            },
+            {
+              "label": "8"
+            },
+            {
+              "label": "12"
+            },
+            {
+              "label": "16"
+            },
+            {
+              "label": "23"
+            },
+            {
+              "label": "38"
+            },
+            {
+              "label": "56"
+            },
+            {
+              "label": "72"
+            },
+            {
+              "label": "91"
+            }
+          ],
+          "pointers": [
+            {
+              "label": "LO",
+              "value": 0,
+              "atWord": 15.667
+            },
+            {
+              "label": "HI",
+              "value": 9,
+              "color": "yellow",
+              "atWord": 27.25
+            }
+          ],
+          "vars": [
+            {
+              "label": "left=0",
+              "atWord": 19.833
+            },
+            {
+              "label": "right=9",
+              "atWord": 30.583
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa03_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "DSA_TRACE_BSEARCH",
+      "narration": "While left is less than or equal to right, keep guessing. Hold that equals sign; we'll come back to it. Mid equals left plus right, integer-divided by two. Zero plus nine is nine, and nine halved rounding down is four, because those two slashes mean divide and throw away the remainder. So we look at position four, which holds sixteen. Is sixteen our target? No, twenty-three is bigger. And because the list is sorted, everything left of sixteen is smaller still, so none of it can possibly be twenty-three.",
+      "durationFrames": 944,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaBsearch": {
+          "headline": "Guess the [middle]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "position four holds sixteen",
+          "codeTitle": "binary_search.py",
+          "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left.",
+          "lines": [
+            {
+              "text": "def binary_search(nums, target):"
+            },
+            {
+              "text": "    left = 0"
+            },
+            {
+              "text": "    right = len(nums) - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while left <= right:",
+              "detail": "Keep guessing while the range still holds something.",
+              "atWord": 1
+            },
+            {
+              "text": "        mid = (left + right) // 2",
+              "detail": "The middle of what is left. // rounds down.",
+              "atWord": 17.25
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if nums[mid] == target:",
+              "detail": "Is the middle our target? Not this time.",
+              "atWord": 51.833
+            },
+            {
+              "text": "            return mid"
+            },
+            {
+              "text": "        elif nums[mid] < target:"
+            },
+            {
+              "text": "            left = mid + 1"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            right = mid - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return -1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "mark": false
+            },
+            {
+              "label": "5",
+              "mark": false
+            },
+            {
+              "label": "8",
+              "mark": false
+            },
+            {
+              "label": "12",
+              "mark": false
+            },
+            {
+              "label": "16",
+              "atWord": 51
+            },
+            {
+              "label": "23",
+              "mark": false
+            },
+            {
+              "label": "38",
+              "mark": false
+            },
+            {
+              "label": "56",
+              "mark": false
+            },
+            {
+              "label": "72",
+              "mark": false
+            },
+            {
+              "label": "91",
+              "mark": false
+            }
+          ],
+          "pointers": [
+            {
+              "label": "LO",
+              "value": 0
+            },
+            {
+              "label": "MID",
+              "value": 4,
+              "color": "purple",
+              "atWord": 44.917
+            },
+            {
+              "label": "HI",
+              "value": 9,
+              "color": "yellow"
+            }
+          ],
+          "vars": [
+            {
+              "label": "mid=4",
+              "atWord": 33.667
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa03_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "QUIZ_CARD",
+      "narration": "Straight from the Dojo. We found sixteen at the middle, and our target is twenty-three. Sixteen is smaller, so where do we look now? The left half, the smaller numbers. The right half, the bigger numbers. Or start over. Have a think, and pause the video if you'd like a moment. Ready? The right half, because the list is sorted, so everything left of sixteen is smaller than sixteen, and sixteen was already too small.",
+      "durationFrames": 765,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "quiz": {
+          "question": "nums[mid] is 16, target is 23. Where now?",
+          "options": [
+            {
+              "text": "left half (smaller numbers)",
+              "atWord": 19.833
+            },
+            {
+              "text": "right half (bigger numbers)",
+              "atWord": 24.833
+            },
+            {
+              "text": "start over",
+              "atWord": 29.75
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Sorted means everything left of 16 is smaller than 16.",
+          "atWord": 1,
+          "revealAtWord": 42.167
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/dsa03_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "DSA_TRACE_BSEARCH",
+      "narration": "So left becomes mid plus one, and that plus one is the first bug people write. Why not just mid, though? Because we've already checked position four and it wasn't our number, so including it again buys nothing, and worse, the range would stop shrinking and the loop would spin forever. Left moves to five. And look what one guess did: positions zero to four are gone, including the sixteen we tested. Half the list, and we looked at one of them.",
+      "durationFrames": 782,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaBsearch": {
+          "headline": "Why mid [plus one]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "half the list, gone",
+          "codeTitle": "binary_search.py",
+          "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left.",
+          "lines": [
+            {
+              "text": "def binary_search(nums, target):"
+            },
+            {
+              "text": "    left = 0"
+            },
+            {
+              "text": "    right = len(nums) - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while left <= right:"
+            },
+            {
+              "text": "        mid = (left + right) // 2"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if nums[mid] == target:"
+            },
+            {
+              "text": "            return mid"
+            },
+            {
+              "text": "        elif nums[mid] < target:"
+            },
+            {
+              "text": "            left = mid + 1",
+              "detail": "mid + 1, not mid — we already checked mid.",
+              "atWord": 1
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            right = mid - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return -1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "text": "dropped",
+              "atWord": 47.167
+            },
+            {
+              "label": "5",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "8",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "12",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "16",
+              "text": "dropped",
+              "atWord": 51.833
+            },
+            {
+              "label": "23",
+              "mark": false
+            },
+            {
+              "label": "38",
+              "mark": false
+            },
+            {
+              "label": "56",
+              "mark": false
+            },
+            {
+              "label": "72",
+              "mark": false
+            },
+            {
+              "label": "91",
+              "mark": false
+            }
+          ],
+          "pointers": [
+            {
+              "label": "LO",
+              "value": 5,
+              "atWord": 39.417
+            },
+            {
+              "label": "HI",
+              "value": 9,
+              "color": "yellow"
+            }
+          ],
+          "vars": [
+            {
+              "label": "left=5",
+              "atWord": 41.75
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa03_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "DSA_TRACE_BSEARCH",
+      "narration": "New middle: five plus nine is fourteen, halved and rounded down is seven. Position seven holds fifty-six, which is bigger than twenty-three. Same reasoning as before, mirrored: everything right of fifty-six is bigger than fifty-six, and fifty-six was already too big, so all of that can go too. The else branch fires, right becomes mid minus one, and the top edge drops to six. Two guesses in, and eight of the ten are already out of the running.",
+      "durationFrames": 814,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaBsearch": {
+          "headline": "Guess again, [go left]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "fifty-six is too big",
+          "codeTitle": "binary_search.py",
+          "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left.",
+          "lines": [
+            {
+              "text": "def binary_search(nums, target):"
+            },
+            {
+              "text": "    left = 0"
+            },
+            {
+              "text": "    right = len(nums) - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while left <= right:"
+            },
+            {
+              "text": "        mid = (left + right) // 2",
+              "detail": "The middle of what is left: position seven.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if nums[mid] == target:"
+            },
+            {
+              "text": "            return mid"
+            },
+            {
+              "text": "        elif nums[mid] < target:"
+            },
+            {
+              "text": "            left = mid + 1"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            right = mid - 1",
+              "detail": "Too big, so pull the top edge down to mid - 1.",
+              "atWord": 40.667
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return -1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "5",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "8",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "12",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "16",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "23",
+              "mark": false
+            },
+            {
+              "label": "38",
+              "mark": false
+            },
+            {
+              "label": "56",
+              "text": "dropped",
+              "atWord": 13.583
+            },
+            {
+              "label": "72",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "91",
+              "text": "dropped",
+              "atWord": 35.583
+            }
+          ],
+          "pointers": [
+            {
+              "label": "LO",
+              "value": 5
+            },
+            {
+              "label": "MID",
+              "value": 7,
+              "color": "purple",
+              "atWord": 11
+            },
+            {
+              "label": "HI",
+              "value": 6,
+              "color": "yellow",
+              "atWord": 49.167
+            }
+          ],
+          "vars": [
+            {
+              "label": "mid=7",
+              "atWord": 10.167
+            },
+            {
+              "label": "right=6",
+              "atWord": 53.417
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa03_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "DSA_TRACE_BSEARCH",
+      "narration": "Stop and look at the board for a second. The range is now position five and position six, and nothing else. Ten candidates down to two, in two guesses. Eight numbers were never examined, never compared, never even read. They weren't examined at all; they were eliminated by an argument, and the argument was simply that the list is sorted.",
+      "durationFrames": 624,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaBsearch": {
+          "headline": "Ten, down to [two]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "two guesses in",
+          "codeTitle": "binary_search.py",
+          "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left.",
+          "lines": [
+            {
+              "text": "def binary_search(nums, target):"
+            },
+            {
+              "text": "    left = 0"
+            },
+            {
+              "text": "    right = len(nums) - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while left <= right:"
+            },
+            {
+              "text": "        mid = (left + right) // 2"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if nums[mid] == target:"
+            },
+            {
+              "text": "            return mid"
+            },
+            {
+              "text": "        elif nums[mid] < target:"
+            },
+            {
+              "text": "            left = mid + 1"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            right = mid - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return -1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "5",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "8",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "12",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "16",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "23",
+              "atWord": 10.917
+            },
+            {
+              "label": "38",
+              "atWord": 12.583
+            },
+            {
+              "label": "56",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "72",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "91",
+              "text": "dropped",
+              "mark": false
+            }
+          ],
+          "pointers": [
+            {
+              "label": "LO",
+              "value": 5
+            },
+            {
+              "label": "HI",
+              "value": 6,
+              "color": "yellow"
+            }
+          ],
+          "vars": [
+            {
+              "label": "8 eliminated",
+              "atWord": 24.333
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/dsa03_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "DSA_TRACE_BSEARCH",
+      "narration": "Mid is five plus six halved, rounding down to five. Position five holds twenty-three. That's our number, so we return the index, and the answer's five. Three guesses for ten items. For a phone book with a million names that's about twenty, and for every page Google has indexed, somewhere around thirty-three. Doubling the data costs you one more guess. Every time, forever.",
+      "durationFrames": 674,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaBsearch": {
+          "headline": "Found, in [three guesses]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "position five",
+          "codeTitle": "binary_search.py",
+          "premise": "A sorted row of numbers, and one target to find. It is higher-or-lower: every guess throws away half of whatever is still left.",
+          "lines": [
+            {
+              "text": "def binary_search(nums, target):"
+            },
+            {
+              "text": "    left = 0"
+            },
+            {
+              "text": "    right = len(nums) - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    while left <= right:"
+            },
+            {
+              "text": "        mid = (left + right) // 2",
+              "detail": "The middle of the last two: position five.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if nums[mid] == target:"
+            },
+            {
+              "text": "            return mid",
+              "detail": "Found it. Hand back the position.",
+              "atWord": 12.083
+            },
+            {
+              "text": "        elif nums[mid] < target:"
+            },
+            {
+              "text": "            left = mid + 1"
+            },
+            {
+              "text": "        else:"
+            },
+            {
+              "text": "            right = mid - 1"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return -1"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "5",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "8",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "12",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "16",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "23",
+              "text": "done",
+              "atWord": 11.25
+            },
+            {
+              "label": "38",
+              "mark": false
+            },
+            {
+              "label": "56",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "72",
+              "text": "dropped",
+              "mark": false
+            },
+            {
+              "label": "91",
+              "text": "dropped",
+              "mark": false
+            }
+          ],
+          "pointers": [
+            {
+              "label": "MID",
+              "value": 5,
+              "color": "purple",
+              "atWord": 8.667
+            }
+          ],
+          "vars": [
+            {
+              "label": "mid=5",
+              "atWord": 7.75
+            },
+            {
+              "label": "return 5",
+              "atWord": 19.833
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa03_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "QUIZ_CARD",
+      "narration": "One more, and this line causes infinite loops in real interviews. Why the equals in while left is less than or equal to right? Because a range of one item still needs checking. Because it makes the loop faster. Or because it wouldn't compile. Have a think, and pause here if you'd like a second. Ready? A range of one still needs checking. When left and right meet there is one candidate left, and dropping the equals walks past it.",
+      "durationFrames": 781,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "quiz": {
+          "question": "while left <= right — why the equals?",
+          "options": [
+            {
+              "text": "a range of one needs checking",
+              "atWord": 19
+            },
+            {
+              "text": "it makes the loop faster",
+              "atWord": 26.083
+            },
+            {
+              "text": "it would not compile otherwise",
+              "atWord": 30.833
+            }
+          ],
+          "answerIndex": 0,
+          "why": "left == right is a range of one, and it might be the answer.",
+          "atWord": 1,
+          "revealAtWord": 43.5
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/dsa03_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "DSA_SIGNALS",
+      "narration": "Almost every binary search failure is one of these lines, so learn them together. Left equals mid plus one, never mid, because mid is already checked and leaving it in stops the range shrinking. Right equals mid minus one, for the same reason on the other side. The loop runs while left is less than or equal to right, with the equals, so a single remaining candidate still gets looked at. On very large arrays left plus right can overflow, so left plus the half-difference is safer. Four lines. Write them from memory. That's the whole surface. Get those right and binary search stops being the pattern you dread, because everything else about it is the guessing game you already knew.",
+      "durationFrames": 1174,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaSignals": {
+          "headline": "The two [off-by-one bugs]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "what actually goes wrong",
+          "premise": "Words lifted straight out of the question, and the pattern each one points at. Red means the signal rules this pattern OUT.",
+          "cells": [
+            {
+              "label": "left = mid + 1",
+              "sub": "never mid — the range must shrink",
+              "atWord": 11.083
+            },
+            {
+              "label": "right = mid - 1",
+              "sub": "the same rule, mirrored",
+              "atWord": 27
+            },
+            {
+              "label": "while left <= right",
+              "sub": "a range of one still needs checking",
+              "atWord": 37.333
+            },
+            {
+              "label": "left + (right-left)//2",
+              "sub": "overflow-safe in other languages",
+              "atWord": 56.417
+            },
+            {
+              "label": "four lines",
+              "sub": "the whole failure surface",
+              "color": "green",
+              "atWord": 69.083
+            },
+            {
+              "label": "write them from memory",
+              "sub": "until the dread goes",
+              "color": "green",
+              "atWord": 70.667
+            },
+            {
+              "label": "the rest is the game",
+              "sub": "higher, or lower",
+              "color": "green",
+              "atWord": 73.917
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/dsa03_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "LIST_BUILD",
+      "narration": "Four to go and do. Binary Search itself, to get the template into your fingers. First Bad Version, which is binary search on a yes-or-no answer rather than a value. Search in Rotated Sorted Array, which is the one interviewers actually ask. And Koko Eating Bananas, where you binary search the answer itself rather than an array.",
+      "durationFrames": 631,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "heading": "Do these four, in this order",
+        "items": [
+          {
+            "icon": "lucide:search",
+            "text": "LeetCode 704",
+            "detail": "Binary Search",
+            "atWord": 4.417
+          },
+          {
+            "icon": "lucide:git-commit",
+            "text": "LeetCode 278",
+            "detail": "First Bad Version",
+            "atWord": 13.333
+          },
+          {
+            "icon": "lucide:rotate-cw",
+            "text": "LeetCode 33",
+            "detail": "Search in Rotated Sorted Array",
+            "atWord": 26.75
+          },
+          {
+            "icon": "lucide:zap",
+            "text": "LeetCode 875",
+            "detail": "Koko Eating Bananas",
+            "atWord": 38.333
+          }
+        ]
+      },
+      "transition": "wipe",
+      "audio": "audio/dsa03_s15.mp3"
+    },
+    {
+      "id": "s16",
+      "type": "RECAP",
+      "narration": "Three things to take with you. Your signal is sorted plus find, and sorted is what makes elimination safe. The move is to guess the middle and throw away the half that cannot hold the answer. And the bugs live in two lines: mid plus one, and mid minus one.",
+      "durationFrames": 473,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "heading": "Binary Search, in three lines",
+        "points": [
+          {
+            "text": "Sorted plus find",
+            "atWord": 6.75
+          },
+          {
+            "text": "Guess the middle, halve the rest",
+            "atWord": 17.333
+          },
+          {
+            "text": "mid + 1, mid - 1",
+            "atWord": 30.917
+          }
+        ]
+      },
+      "transition": "fade",
+      "audio": "audio/dsa03_s16.mp3"
+    },
+    {
+      "id": "s17",
+      "type": "OUTRO_CTA",
+      "narration": "Next in the Dojo is the HashMap, which is what you reach for when the array isn't sorted and sorting it would cost more than the search saves. Go and do Binary Search first.",
+      "durationFrames": 297,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "All ten patterns, one per episode",
+        "sub": "next: HashMap"
+      },
+      "transition": "fade",
+      "audio": "audio/dsa03_s17.mp3"
+    }
+  ]
+}

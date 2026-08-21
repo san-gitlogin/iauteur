@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "topic": "How Claude Works",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Claude cannot reach anything on your machine. Your code can — and MCP is the agreed way to describe what your code is offering.",
+    "openLoop": "Claude will answer anything you ask, and then fail at 'check my calendar'. Why?",
+    "analogy": "THE HARD LINE - the model on one side, your machine on the other, your code the only crossing.",
+    "seo": {
+      "title": "Why Claude Can't Read Your Files (And What Does)",
+      "hook": "Claude will answer almost anything you ask it. Ask it to open one file on your laptop, and",
+      "description": "Claude cannot reach anything on your machine. Your code can — and MCP is the agreed way to describe what your code is offering.",
+      "tags": [
+        "claude",
+        "anthropic",
+        "mcp",
+        "ai tools",
+        "llm",
+        "beginner"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "IT CAN'T READ YOUR FILES",
+    "badge": "How Claude works",
+    "asset": "si:anthropic",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 206,
+      "narration": "Claude will answer almost anything you ask it. Ask it to open one file on your laptop, and it can't.",
+      "data": {
+        "headline": "IT CAN'T READ YOUR FILES",
+        "subtext": "how claude works",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 5.417
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp-00-how-claude-works-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "MCP_REACH",
+      "durationFrames": 783,
+      "narration": "Let's start with the thing nobody says out loud. Claude is not a program sitting on your computer. It runs on Anthropic's machines, and you talk to it over the internet — you send text, it sends text back, and that is the entire relationship. Which means that on its own, it cannot open your files. It cannot read your database. It cannot see your calendar or post a message in your Slack. And none of that is a permission you forgot to switch on. There is simply no way for it to reach across that line.",
+      "data": {
+        "mcpReach": {
+          "headline": "What Claude [cannot do]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "the hard line",
+          "premise": "Claude runs on Anthropic's machines. Everything on the right is on yours. The dashed line is real.",
+          "ends": [
+            {
+              "label": "CLAUDE"
+            },
+            {
+              "label": "YOUR MACHINE"
+            }
+          ],
+          "cells": [
+            {
+              "label": "your files",
+              "sub": "notes, code, that todo.md on the desktop",
+              "icon": "lucide:folder",
+              "text": "out",
+              "atWord": 33.417
+            },
+            {
+              "label": "your database",
+              "sub": "every row behind your app",
+              "icon": "lucide:database",
+              "text": "out",
+              "atWord": 36.667
+            },
+            {
+              "label": "your calendar, your Slack",
+              "sub": "everything your team actually lives in",
+              "icon": "lucide:calendar",
+              "text": "out",
+              "atWord": 39.917
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp-00-how-claude-works-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_REACH",
+      "durationFrames": 1046,
+      "narration": "So how does any AI app you have ever used actually do anything? Your code does it. Claude replies in ordinary text saying what it wants, and your code — which lives on your side of the line — goes and does the work, then hands the result back. Your files, your database, your calendar: all reachable now, but only ever through you. That is the whole trick, and every tool, every integration, every agent you have used works exactly this way. And MCP, the entire subject of this course, is nothing more than an agreed way of describing what sits on your side of that line, so that Claude can ask for it by name.",
+      "data": {
+        "mcpReach": {
+          "headline": "The one thing [that crosses]",
+          "color": "green",
+          "atWord": 1,
+          "caption": "your code, in the middle",
+          "premise": "Same line, same three things. The only difference is that your code is now standing in the gap.",
+          "ends": [
+            {
+              "label": "CLAUDE"
+            },
+            {
+              "label": "YOUR MACHINE"
+            }
+          ],
+          "cells": [
+            {
+              "label": "your code",
+              "sub": "the one thing standing on both sides",
+              "icon": "lucide:terminal",
+              "text": "bridge",
+              "atWord": 9.583
+            },
+            {
+              "label": "your files",
+              "sub": "read and written by you, on request",
+              "icon": "lucide:folder",
+              "text": "out",
+              "atWord": 36.083
+            },
+            {
+              "label": "your database",
+              "sub": "queried by you, never by Claude",
+              "icon": "lucide:database",
+              "text": "out",
+              "atWord": 37.583
+            },
+            {
+              "label": "your calendar, your Slack",
+              "sub": "and every check you decide to run first",
+              "icon": "lucide:calendar",
+              "text": "out",
+              "atWord": 39
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-00-how-claude-works-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "durationFrames": 225,
+      "narration": "Claude asks, your code does it. That line is the whole reason MCP exists. Full course on the channel.",
+      "data": {
+        "message": "What Claude actually is",
+        "sub": "chapter one of twelve"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp-00-how-claude-works-short_s04.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

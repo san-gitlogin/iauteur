@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "topic": "DFS and Backtracking",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "You can generate every combination without duplicates, using one three-line recipe.",
+    "openLoop": "Three toppings. Eight pizzas. Where does the eighth come from?",
+    "analogy": "THE PIZZA - toppings you put on, explore, and take back off again.",
+    "seo": {
+      "title": "Backtracking In Three Lines: Choose, Explore, Undo",
+      "hook": "Three toppings make eight different pizzas. Three lines of code generate every one of them",
+      "description": "You can generate every combination without duplicates, using one three-line recipe.",
+      "tags": [
+        "backtracking",
+        "dfs",
+        "recursion",
+        "subsets",
+        "dsa",
+        "leetcode",
+        "coding interview",
+        "python"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#codinginterview",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Three toppings make eight different pizzas. Three lines of code generate every one of them.",
+      "durationFrames": 185,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "CHOOSE. EXPLORE. UNDO.",
+        "subtext": "backtracking",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 6.417
+      },
+      "audio": "audio/sh07_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "DSA_TRACE_TREE",
+      "narration": "Every combination comes out of one recipe, and the recipe is three lines. Current dot append puts a topping on. Call that the choose step. Backtrack calls itself and builds every pizza that starts this way. Call that explore. And current dot pop takes the topping back off. Call that the undo. Choose, explore, undo. Say that out loud a few times, because every backtracking problem you'll ever meet is those three lines wrapped around a different rule.",
+      "durationFrames": 833,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaTree": {
+          "headline": "Choose, explore, [undo]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "the three-line recipe",
+          "codeTitle": "subsets.py",
+          "premise": "Building pizzas from three toppings. Each node is the pizza so far — going down adds a topping, coming back up takes it off again.",
+          "lines": [
+            {
+              "text": "def subsets(nums):"
+            },
+            {
+              "text": "    result = []"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    def backtrack(start, current):"
+            },
+            {
+              "text": "        result.append(current[:])"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        for i in range(start, len(nums)):"
+            },
+            {
+              "text": "            current.append(nums[i])",
+              "detail": "CHOOSE: put a topping on.",
+              "atWord": 11.25
+            },
+            {
+              "text": "            backtrack(i + 1, current)",
+              "detail": "EXPLORE: build everything that starts this way.",
+              "atWord": 21.667
+            },
+            {
+              "text": "            current.pop()",
+              "detail": "UNDO: take it back off.",
+              "atWord": 33.833
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    backtrack(0, [])"
+            },
+            {
+              "text": "    return result"
+            }
+          ],
+          "cells": [
+            {
+              "label": "choose",
+              "value": 0,
+              "atWord": 45.083
+            },
+            {
+              "label": "explore",
+              "value": 1,
+              "atWord": 46
+            },
+            {
+              "label": "undo",
+              "value": 2,
+              "text": "dropped",
+              "atWord": 46.833
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/sh07_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_TRACE_TREE",
+      "narration": "We put pepperoni on, so the pizza is one, and we photograph it. Notice the call is diving rather than spreading, because it isn't looking at the other toppings yet at all. Backtrack calls itself from the next topping along, mushroom goes on too, the pizza is one and two, and another photograph is taken. Backtrack goes as deep as the branch allows before considering anything else.",
+      "durationFrames": 652,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaTree": {
+          "headline": "Down the [first branch]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "pepperoni, then mushroom",
+          "codeTitle": "subsets.py",
+          "premise": "Building pizzas from three toppings. Each node is the pizza so far — going down adds a topping, coming back up takes it off again.",
+          "lines": [
+            {
+              "text": "def subsets(nums):"
+            },
+            {
+              "text": "    result = []"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    def backtrack(start, current):"
+            },
+            {
+              "text": "        result.append(current[:])"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        for i in range(start, len(nums)):"
+            },
+            {
+              "text": "            current.append(nums[i])",
+              "detail": "Pepperoni goes on.",
+              "atWord": 1
+            },
+            {
+              "text": "            backtrack(i + 1, current)",
+              "detail": "Dive: what else can sit on a pepperoni pizza?",
+              "atWord": 25.083
+            },
+            {
+              "text": "            current.pop()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    backtrack(0, [])"
+            },
+            {
+              "text": "    return result"
+            }
+          ],
+          "cells": [
+            {
+              "label": "[]",
+              "value": 0
+            },
+            {
+              "label": "[1]",
+              "value": 1,
+              "atWord": 6.25
+            },
+            {
+              "label": "[1,2]",
+              "value": 2,
+              "atWord": 36.833
+            }
+          ],
+          "aux": [
+            {
+              "label": "[]"
+            },
+            {
+              "label": "[1]"
+            },
+            {
+              "label": "[1,2]",
+              "atWord": 40
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/sh07_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_TRACE_TREE",
+      "narration": "Olive goes on, the pizza is one two three, the supreme, photographed. No toppings are left to try, so the loop ends and the call returns upward. Current dot pop takes olive back off, and we're at one two again. That loop has also finished, so that call returns too, and pop takes mushroom off, leaving just pepperoni. We've climbed back up two levels, and now the loop at that level can carry on to the topping it never got to.",
+      "durationFrames": 761,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaTree": {
+          "headline": "The bottom, and the [way back]",
+          "color": "purple",
+          "atWord": 1,
+          "caption": "undo, one topping at a time",
+          "codeTitle": "subsets.py",
+          "premise": "Building pizzas from three toppings. Each node is the pizza so far — going down adds a topping, coming back up takes it off again.",
+          "lines": [
+            {
+              "text": "def subsets(nums):"
+            },
+            {
+              "text": "    result = []"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    def backtrack(start, current):"
+            },
+            {
+              "text": "        result.append(current[:])"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        for i in range(start, len(nums)):"
+            },
+            {
+              "text": "            current.append(nums[i])"
+            },
+            {
+              "text": "            backtrack(i + 1, current)"
+            },
+            {
+              "text": "            current.pop()",
+              "detail": "And again. Back to [1].",
+              "atWord": 20.583
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    backtrack(0, [])"
+            },
+            {
+              "text": "    return result"
+            }
+          ],
+          "cells": [
+            {
+              "label": "[1]",
+              "value": 1,
+              "atWord": 4.583
+            },
+            {
+              "label": "[1,2]",
+              "value": 2,
+              "text": "dropped",
+              "atWord": 28.167
+            },
+            {
+              "label": "[1,2,3]",
+              "value": 3,
+              "text": "dropped",
+              "atWord": 42.667
+            }
+          ],
+          "aux": [
+            {
+              "label": "[]"
+            },
+            {
+              "label": "[1]"
+            },
+            {
+              "label": "[1,2]"
+            },
+            {
+              "label": "[1,2,3]",
+              "atWord": 8.417
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/sh07_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "Every combination, every subset, every permutation. That is your signal. The full pattern is in the Dojo.",
+      "durationFrames": 250,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "DFS and Backtracking, traced line by line",
+        "sub": "full pattern in the Dojo"
+      },
+      "transition": "fade",
+      "audio": "audio/sh07_s05.mp3"
+    }
+  ]
+}

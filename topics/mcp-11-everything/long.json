@@ -1,0 +1,366 @@
+{
+  "meta": {
+    "topic": "Everything, Together",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Eleven chapters reduce to one mental model: who is in control, and who is paying.",
+    "openLoop": "You're building a public weather server that needs an LLM. One decision decides whether it bankrupts you.",
+    "analogy": "THE ASSEMBLED MACHINE - every part you met, running at once.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "MCP, All Of It — The Final Checkpoint",
+      "altTitles": [
+        "Everything You Now Know About MCP, In One Chapter",
+        "The MCP Mental Model That Survives The Syntax"
+      ],
+      "hook": "Eleven chapters. One mental model.",
+      "breakdown": "the whole protocol reassembled, and the one question that decides how you build a public server",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "One decision left"
+        },
+        {
+          "id": "s03",
+          "title": "The whole machine"
+        },
+        {
+          "id": "s04",
+          "title": "The final question"
+        }
+      ],
+      "sources": [
+        "Course source: https://github.com/san-gitlogin/learn-mcp",
+        "Live course: https://san-gitlogin.github.io/learn-mcp/"
+      ],
+      "queries": [
+        "mcp summary",
+        "model context protocol recap",
+        "mcp cheat sheet",
+        "learn mcp course",
+        "mcp interview questions",
+        "mcp best practices"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "claude",
+        "anthropic",
+        "python",
+        "summary",
+        "recap",
+        "tutorial",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ALL OF MCP, IN ONE",
+    "badge": "Finale",
+    "asset": "si:anthropic"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 108,
+      "narration": "You've got all the pieces now.",
+      "data": {
+        "headline": "ALL OF MCP, IN ONE",
+        "subtext": "the final checkpoint",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 3.667
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp12_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "durationFrames": 391,
+      "narration": "This is where they fit together into one mental model you can carry into real code — plus an honest list of what the specification has already deprecated, so you don't build on the wrong thing. Learn MCP, on THE NBX STUDIO.",
+      "data": {
+        "title": "EVERYTHING, TOGETHER",
+        "subtitle": "chapter twelve of twelve"
+      },
+      "transition": "fade",
+      "background": "zoneB",
+      "anchors": [],
+      "audio": "audio/mcp12_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_CONTROL",
+      "durationFrames": 1199,
+      "narration": "Here's the whole thing on one screen. Tools are functions the model chooses, and Claude never runs them — your code does, in the loop. Resources are data your code fetches, and injecting one beats a tool call whenever you already know what's needed. Prompts are workflows a person triggers, which is how you ship your own expertise as a button. Sampling reverses the protocol so the client's key pays, which is what makes a public server affordable. Roots are file access control that the S D K hands you but never enforces. And notifications are how a slow tool proves it's alive. Underneath all six, one question keeps working: who is in control — and for sampling, who is paying.",
+      "data": {
+        "mcpControl": {
+          "headline": "The whole [machine]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "every part, at once",
+          "premise": "Every piece of the protocol you've met, and the one question that tells them apart.",
+          "cells": [
+            {
+              "label": "Tools",
+              "sub": "the model chooses · your code runs",
+              "owner": "ai",
+              "icon": "lucide:wrench",
+              "atWord": 5.667
+            },
+            {
+              "label": "Resources",
+              "sub": "your code fetches · inject to skip a round trip",
+              "owner": "code",
+              "icon": "lucide:folder-open",
+              "atWord": 20.25
+            },
+            {
+              "label": "Prompts",
+              "sub": "a person triggers · your expertise, as a button",
+              "owner": "user",
+              "icon": "lucide:sparkles",
+              "atWord": 35.667
+            },
+            {
+              "label": "Sampling",
+              "sub": "the server asks · the client's key pays",
+              "owner": "code",
+              "icon": "lucide:refresh-cw",
+              "atWord": 49.5
+            },
+            {
+              "label": "Roots",
+              "sub": "handed to you · enforced by you",
+              "owner": "code",
+              "icon": "lucide:folder-lock",
+              "atWord": 63.25
+            },
+            {
+              "label": "Notifications",
+              "sub": "ctx.info and report_progress",
+              "owner": "code",
+              "icon": "lucide:bell",
+              "atWord": 75.417
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp12_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03b",
+      "type": "MCP_DEPRECATED",
+      "durationFrames": 1406,
+      "narration": "Before you go and build, here's the state of play, because a lot of MCP writing online predates it. Tools, resources and prompts are current, and they're the spine of everything. Elicitation is current, and it's where the protocol is putting its weight now. Sampling is deprecated as of the twenty twenty six revision — migrate to calling a provider API directly. Roots is deprecated too — pass paths as tool parameters, resource U R Is, or server config instead. And logging is deprecated — standard error on stdio, Open Telemetry in production. None of those three vanish tomorrow. They stay in the spec for at least twelve months and the code you inherit will be full of them, which is exactly why you learnt them. Just don't start something new on a feature the specification has already told you it's retiring.",
+      "data": {
+        "mcpDeprecated": {
+          "headline": "Current, and [on a clock]",
+          "color": "red",
+          "atWord": 1,
+          "caption": "as of spec 2026-07-28",
+          "premise": "Everything here still works today. Three of them are scheduled for removal, and the spec says not to start anything new on them.",
+          "cells": [
+            {
+              "label": "Tools · Resources · Prompts",
+              "sub": "current — the spine of the protocol",
+              "color": "green",
+              "text": "CURRENT",
+              "icon": "lucide:layers",
+              "atWord": 15.417
+            },
+            {
+              "label": "Elicitation",
+              "sub": "current — form mode and URL mode",
+              "color": "green",
+              "text": "CURRENT",
+              "icon": "lucide:message-square-plus",
+              "atWord": 25.167
+            },
+            {
+              "label": "Sampling",
+              "sub": "→ call a provider API directly",
+              "color": "red",
+              "icon": "lucide:refresh-cw",
+              "atWord": 35.75
+            },
+            {
+              "label": "Roots",
+              "sub": "→ tool parameters, resource URIs, or config",
+              "color": "red",
+              "icon": "lucide:folder-lock",
+              "atWord": 50.417
+            },
+            {
+              "label": "Logging",
+              "sub": "→ stderr on stdio, OpenTelemetry in production",
+              "color": "red",
+              "icon": "lucide:scroll-text",
+              "atWord": 65
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp12_s03b.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "QUIZ_CARD",
+      "durationFrames": 1057,
+      "narration": "The final question, straight from the course. You're building a public MCP server for a weather service, users connect from their own apps, and the server needs a language model to write the forecast in plain English. What's the smartest approach? Put your Anthropic key on the server and call Claude directly. Or use sampling, so each client calls Claude with its own key. Have a think, and pause if you'd like a moment. Ready? Sampling. Option one works beautifully until the day somebody shares your server, and then every forecast in the world is billed to you — which is precisely the corner sampling was invented to avoid.",
+      "data": {
+        "quiz": {
+          "question": "Public weather server, needs an LLM. Best?",
+          "options": [
+            {
+              "text": "your key on the server",
+              "atWord": 32.5
+            },
+            {
+              "text": "sampling — the client pays",
+              "atWord": 41.167
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Otherwise every user's forecast is billed to you.",
+          "atWord": 1,
+          "revealAtWord": 58.583
+        }
+      },
+      "transition": "iris",
+      "background": "zoneC",
+      "anchors": [
+        "quiz.atWord",
+        "quiz.options.0.atWord",
+        "quiz.options.1.atWord",
+        "quiz.revealAtWord"
+      ],
+      "audio": "audio/mcp12_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "LIST_BUILD",
+      "durationFrames": 493,
+      "narration": "Four things to go and do, in this order. Build the notes server from chapter four. Add a resource and read it from a client. Add a tool that reports progress, and watch the callback fire. And make the server ask you to call Claude, which is sampling, and the moment it clicks.",
+      "data": {
+        "heading": "Do these four, in this order",
+        "items": [
+          {
+            "icon": "lucide:server",
+            "text": "The notes server",
+            "detail": "chapter four, from scratch",
+            "atWord": 6.667
+          },
+          {
+            "icon": "lucide:folder-open",
+            "text": "A resource",
+            "detail": "and read it from a client",
+            "atWord": 11.833
+          },
+          {
+            "icon": "lucide:activity",
+            "text": "report_progress",
+            "detail": "watch the callback fire",
+            "atWord": 18.5
+          },
+          {
+            "icon": "lucide:repeat",
+            "text": "Sampling",
+            "detail": "the moment it clicks",
+            "atWord": 27.417
+          }
+        ]
+      },
+      "transition": "fade",
+      "background": "zoneB",
+      "anchors": [
+        "items.0.atWord",
+        "items.1.atWord",
+        "items.2.atWord",
+        "items.3.atWord"
+      ],
+      "audio": "audio/mcp12_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "RECAP",
+      "durationFrames": 468,
+      "narration": "Three lines for the whole protocol. Ask who is in control, and the primitive names itself. Claude asks, and your code executes — always. And check the spec's status before you build, because three of the features you just learnt are already on their way out.",
+      "data": {
+        "heading": "MCP, in three lines",
+        "points": [
+          {
+            "text": "Who is in control?",
+            "atWord": 4.833
+          },
+          {
+            "text": "Claude asks — your code executes",
+            "atWord": 13
+          },
+          {
+            "text": "Check the status before you build",
+            "atWord": 19.417
+          }
+        ]
+      },
+      "transition": "dip",
+      "background": "zoneB",
+      "anchors": [
+        "points.0.atWord",
+        "points.1.atWord",
+        "points.2.atWord"
+      ],
+      "audio": "audio/mcp12_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "OUTRO_CTA",
+      "durationFrames": 335,
+      "narration": "That's the course. You've got the mental model now, and the syntax is a search away. The interactive version is linked below if you'd like to step through it yourself. Go and build something.",
+      "data": {
+        "message": "Learn MCP — the whole course",
+        "sub": "interactive version linked below"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp12_s07.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

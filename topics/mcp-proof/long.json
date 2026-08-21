@@ -1,0 +1,771 @@
+{
+ "meta": {
+  "topic": "MCP component proof",
+  "format": "long",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "proof",
+  "openLoop": "proof"
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "MCP_API_ANATOMY",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpApi": {
+     "headline": "The call, [taken apart]",
+     "caption": "one API call",
+     "premise": "Claude is an API. You send messages, you get a message back.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "model=",
+       "sub": "claude-sonnet-4-0 \u2014 fast and affordable",
+       "atWord": 2
+      },
+      {
+       "label": "max_tokens=",
+       "sub": "1024 \u2014 the ceiling on the reply",
+       "atWord": 4
+      },
+      {
+       "label": "messages=[\u2026]",
+       "sub": "the whole conversation so far, each with a role",
+       "atWord": 6
+      }
+     ],
+     "lines": [
+      {
+       "text": "from anthropic import Anthropic"
+      },
+      {
+       "text": "client = Anthropic()",
+       "detail": "Reads ANTHROPIC_API_KEY from your environment.",
+       "atWord": 2
+      },
+      {
+       "text": "message = client.messages.create(",
+       "detail": "The core call. Everything else is arguments.",
+       "atWord": 4
+      },
+      {
+       "text": "    model=\"claude-sonnet-4-0\","
+      },
+      {
+       "text": "    max_tokens=1024,"
+      },
+      {
+       "text": "    messages=[{\"role\":\"user\",\"content\":\"What is MCP?\"}],"
+      },
+      {
+       "text": ")"
+      }
+     ],
+     "codeTitle": "server.py"
+    }
+   }
+  },
+  {
+   "id": "s02",
+   "type": "MCP_CONTROL",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpControl": {
+     "headline": "Who pulls [the trigger]",
+     "caption": "the three primitives",
+     "premise": "An MCP server exposes exactly three things. The only question that separates them is who decides when it runs.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "Tools",
+       "sub": "functions the model chooses to call",
+       "owner": "ai",
+       "atWord": 2
+      },
+      {
+       "label": "Resources",
+       "sub": "data your app fetches for context",
+       "owner": "code",
+       "atWord": 5
+      },
+      {
+       "label": "Prompts",
+       "sub": "workflows the person triggers",
+       "owner": "user",
+       "atWord": 8
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "s03",
+   "type": "MCP_WIRE",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpWire": {
+     "headline": "Every arrow is [one message]",
+     "caption": "the handshake",
+     "premise": "The client is your app. The server is somebody else's code. Each arrow is one JSON-RPC message.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "tools/list",
+       "sub": "what can you do?",
+       "dir": "out",
+       "atWord": 2,
+       "out": [
+        "{\"method\":\"tools/list\",\"id\":1}"
+       ]
+      },
+      {
+       "label": "3 tools",
+       "sub": "read_note \u00b7 edit_note \u00b7 list_notes",
+       "dir": "back",
+       "atWord": 5,
+       "out": [
+        "{\"result\":{\"tools\":[",
+        "  {\"name\":\"read_note\", \u2026},",
+        "  {\"name\":\"edit_note\", \u2026}]}}"
+       ]
+      },
+      {
+       "label": "tools/call",
+       "sub": "run read_note with note_id=todo.md",
+       "dir": "out",
+       "atWord": 8,
+       "out": [
+        "{\"method\":\"tools/call\",",
+        " \"params\":{\"name\":\"read_note\",",
+        "  \"arguments\":{\"note_id\":\"todo.md\"}}}"
+       ]
+      }
+     ],
+     "lines": [
+      {
+       "text": "tools = await client.list_tools()",
+       "detail": "Ask the server what it can do.",
+       "atWord": 2
+      },
+      {
+       "text": "result = await client.call_tool(",
+       "detail": "Run one of them by name.",
+       "atWord": 8
+      },
+      {
+       "text": "    \"read_note\", {\"note_id\": \"todo.md\"})"
+      }
+     ],
+     "codeTitle": "server.py",
+     "ends": [
+      {
+       "label": "CLIENT"
+      },
+      {
+       "label": "SERVER"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "s04",
+   "type": "MCP_SCHEMA",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpSchema": {
+     "headline": "The hint Claude [actually reads]",
+     "caption": "decorator to schema",
+     "premise": "Field(description=...) is not validation. It is the sentence Claude reads to understand your parameter.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "@mcp.tool()",
+       "sub": "registers read_note on the server",
+       "text": "reg",
+       "atWord": 2
+      },
+      {
+       "label": "name",
+       "sub": "read_note",
+       "atWord": 5
+      },
+      {
+       "label": "description",
+       "sub": "Read a note by its filename",
+       "atWord": 7
+      },
+      {
+       "label": "note_id",
+       "sub": "Filename of the note",
+       "atWord": 9
+      }
+     ],
+     "lines": [
+      {
+       "text": "@mcp.tool(",
+       "detail": "Hey MCP \u2014 register this function.",
+       "atWord": 2
+      },
+      {
+       "text": "    name=\"read_note\","
+      },
+      {
+       "text": "    description=\"Read a note by its filename\",",
+       "detail": "This is what Claude reads to decide when to call it.",
+       "atWord": 7
+      },
+      {
+       "text": ")"
+      },
+      {
+       "text": "def read_note(note_id: str = Field("
+      },
+      {
+       "text": "    description=\"Filename of the note\")):",
+       "detail": "A label for the AI. Without it Claude sees a bare parameter name.",
+       "atWord": 9
+      }
+     ],
+     "codeTitle": "server.py"
+    }
+   }
+  },
+  {
+   "id": "s05",
+   "type": "MCP_LOOP",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpLoop": {
+     "headline": "Until Claude [stops asking]",
+     "caption": "the agentic loop",
+     "premise": "Your app sits between Claude and the server, relaying until Claude has no more tool calls to make.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "send tools",
+       "sub": "+ the question",
+       "atWord": 2
+      },
+      {
+       "label": "tool_use",
+       "sub": "Claude asks",
+       "atWord": 4
+      },
+      {
+       "label": "call_tool",
+       "sub": "you run it",
+       "atWord": 6
+      },
+      {
+       "label": "send result",
+       "sub": "back to Claude",
+       "atWord": 8
+      },
+      {
+       "label": "no tool_use",
+       "sub": "done",
+       "text": "exit",
+       "atWord": 10
+      }
+     ],
+     "lines": [
+      {
+       "text": "while True:",
+       "detail": "The heartbeat of every MCP app.",
+       "atWord": 2
+      },
+      {
+       "text": "    reply = claude(messages, tools)"
+      },
+      {
+       "text": "    if not reply.tool_use: break",
+       "detail": "The ONLY exit. Not a counter, not a keypress.",
+       "atWord": 10
+      },
+      {
+       "text": "    out = await client.call_tool(...)",
+       "atWord": 6
+      },
+      {
+       "text": "    messages.append(out)",
+       "atWord": 8
+      }
+     ],
+     "codeTitle": "server.py"
+    }
+   }
+  },
+  {
+   "id": "s06",
+   "type": "MCP_URI",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpUri": {
+     "headline": "A URI is [a route]",
+     "caption": "resource routing",
+     "premise": "A resource URI works like a URL. A braced segment becomes a function parameter.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "notes://all",
+       "sub": "static \u2014 always the same kind of thing",
+       "atWord": 2,
+       "out": [
+        "todo.md",
+        "ideas.md"
+       ]
+      },
+      {
+       "label": "notes://{id}",
+       "sub": "dynamic \u2014 {id} arrives as a parameter",
+       "atWord": 5,
+       "out": [
+        "Buy groceries, call mom, fix the bug"
+       ]
+      }
+     ],
+     "lines": [
+      {
+       "text": "@mcp.resource(\"notes://all\")",
+       "detail": "Static: no parameters.",
+       "atWord": 2
+      },
+      {
+       "text": "def list_all_notes():"
+      },
+      {
+       "text": "    return list(notes.keys())"
+      },
+      {
+       "text": ""
+      },
+      {
+       "text": "@mcp.resource(\"notes://{id}\")",
+       "detail": "The braced part becomes an argument.",
+       "atWord": 5
+      },
+      {
+       "text": "def get_note(id: str):"
+      },
+      {
+       "text": "    return notes[id]"
+      }
+     ],
+     "codeTitle": "server.py"
+    }
+   }
+  },
+  {
+   "id": "s07",
+   "type": "MCP_MENTION",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpMention": {
+     "headline": "Fetched [before Claude looks]",
+     "caption": "two routes, one clock",
+     "premise": "The same note reaches Claude two ways. Only one of them makes Claude wait.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "@todo.md \u2014 your code fetches it",
+       "sub": "1 hop \u00b7 content is already in the prompt",
+       "value": 34,
+       "atWord": 3,
+       "out": [
+        "read_resource"
+       ]
+      },
+      {
+       "label": "tool call \u2014 Claude fetches it",
+       "sub": "3 hops \u00b7 Claude asks, waits, then answers",
+       "value": 100,
+       "color": "red",
+       "atWord": 7,
+       "out": [
+        "Claude asks",
+        "you call",
+        "result back"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "s08",
+   "type": "MCP_SAMPLING",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpSampling": {
+     "headline": "The arrow [turns around]",
+     "caption": "server asks client",
+     "premise": "Normally the client asks the server. Sampling is the server asking the client to call the LLM \u2014 and pay for it.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "tools/call summarize",
+       "sub": "client asks the server to work",
+       "dir": "out",
+       "atWord": 2
+      },
+      {
+       "label": "sampling/createMessage",
+       "sub": "server asks the client to call Claude",
+       "dir": "back",
+       "atWord": 6,
+       "value": 50000,
+       "sub2": "",
+       "out": []
+      },
+      {
+       "label": "the generated text",
+       "sub": "client returns it to the server",
+       "dir": "out",
+       "atWord": 10
+      }
+     ],
+     "lines": [
+      {
+       "text": "@mcp.tool()"
+      },
+      {
+       "text": "async def summarize(text, ctx: Context):",
+       "detail": "ctx is the server's walkie-talkie back to the client.",
+       "atWord": 2
+      },
+      {
+       "text": "    result = await ctx.session.create_message(",
+       "detail": "Please call an LLM for me.",
+       "atWord": 6
+      },
+      {
+       "text": "        messages=[SamplingMessage(...)],"
+      },
+      {
+       "text": "        max_tokens=4000)"
+      },
+      {
+       "text": "    return result.content.text",
+       "atWord": 10
+      }
+     ],
+     "codeTitle": "server.py",
+     "ends": [
+      {
+       "label": "CLIENT"
+      },
+      {
+       "label": "SERVER"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "s09",
+   "type": "MCP_ROOTS",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpRoots": {
+     "headline": "You can look [here, not there]",
+     "caption": "the keycard check",
+     "premise": "The client hands the server a list of folders. Anything outside them has to be refused.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "/Users/me/Movies",
+       "sub": "granted by the client",
+       "atWord": 2
+      },
+      {
+       "label": "/Users/me/Desktop",
+       "sub": "granted by the client",
+       "atWord": 4
+      },
+      {
+       "label": "/Users/me/Movies/clip.mov",
+       "sub": "inside a root",
+       "text": "ask",
+       "atWord": 7
+      },
+      {
+       "label": "/etc/passwd",
+       "sub": "outside every root",
+       "text": "ask",
+       "color": "red",
+       "atWord": 10
+      }
+     ],
+     "lines": [
+      {
+       "text": "async def is_path_allowed(p, ctx):",
+       "detail": "You write this. MCP does NOT check for you.",
+       "atWord": 2
+      },
+      {
+       "text": "    roots = await ctx.session.list_roots()",
+       "detail": "This part IS from MCP.",
+       "atWord": 4
+      },
+      {
+       "text": "    for root in roots.roots:"
+      },
+      {
+       "text": "        try:"
+      },
+      {
+       "text": "            p.relative_to(to_path(root.uri))",
+       "detail": "Is it inside? relative_to raises if not.",
+       "atWord": 7
+      },
+      {
+       "text": "            return True"
+      },
+      {
+       "text": "        except ValueError: continue"
+      },
+      {
+       "text": "    return False",
+       "detail": "Everything else is refused.",
+       "atWord": 10
+      }
+     ],
+     "codeTitle": "server.py"
+    }
+   }
+  },
+  {
+   "id": "s10",
+   "type": "MCP_PROGRESS",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpProgress": {
+     "headline": "Tell them [you are alive]",
+     "caption": "server to client",
+     "premise": "A long tool call is silent by default. These two calls are how the user learns anything is happening.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "Searching Wikipedia\u2026",
+       "atWord": 3
+      },
+      {
+       "label": "30% done",
+       "value": 30,
+       "atWord": 5
+      },
+      {
+       "label": "Writing report\u2026",
+       "atWord": 8
+      },
+      {
+       "label": "80% done",
+       "value": 80,
+       "atWord": 10
+      }
+     ],
+     "lines": [
+      {
+       "text": "@mcp.tool()"
+      },
+      {
+       "text": "async def research(topic, ctx: Context):"
+      },
+      {
+       "text": "    await ctx.info(\"Searching Wikipedia...\")",
+       "detail": "A log line. Lands in the client's logging_callback.",
+       "atWord": 3
+      },
+      {
+       "text": "    await ctx.report_progress(30, 100)",
+       "detail": "A number. Lands in this call's progress_callback.",
+       "atWord": 5
+      },
+      {
+       "text": "    data = await scrape(topic)"
+      },
+      {
+       "text": "    await ctx.info(\"Writing report...\")",
+       "atWord": 8
+      },
+      {
+       "text": "    await ctx.report_progress(80, 100)",
+       "atWord": 10
+      }
+     ],
+     "codeTitle": "server.py"
+    }
+   }
+  },
+  {
+   "id": "s11",
+   "type": "MCP_TRANSPORT",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpTransport": {
+     "headline": "Same room, or [a phone call]",
+     "caption": "stdio vs http",
+     "premise": "Both move the same JSON. The difference is whether the two programs share a machine.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "stdio",
+       "sub": "development",
+       "atWord": 2,
+       "out": [
+        "full features",
+        "simple setup",
+        "same machine only"
+       ]
+      },
+      {
+       "label": "streamable-http",
+       "sub": "production",
+       "text": "remote",
+       "atWord": 6,
+       "out": [
+        "remote servers",
+        "scales",
+        "some features limited"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "s12",
+   "type": "MCP_FLAGS",
+   "durationFrames": 300,
+   "background": "zoneA",
+   "narration": "proof fixture",
+   "data": {
+    "mcpFlags": {
+     "headline": "Two flags that [turn things off]",
+     "caption": "what you lose",
+     "premise": "These two look like performance settings. They are feature switches, and nothing warns you.",
+     "color": null,
+     "atWord": 1,
+     "cells": [
+      {
+       "label": "stateless_http=True",
+       "sub": "server forgets clients between requests",
+       "text": "flag",
+       "atWord": 3,
+       "out": [
+        "sampling",
+        "progress",
+        "roots",
+        "subscriptions"
+       ]
+      },
+      {
+       "label": "json_response=True",
+       "sub": "plain JSON instead of SSE streams",
+       "text": "flag",
+       "atWord": 8,
+       "out": [
+        "progress",
+        "log messages"
+       ]
+      },
+      {
+       "label": "sampling",
+       "atWord": 1
+      },
+      {
+       "label": "progress",
+       "atWord": 1
+      },
+      {
+       "label": "roots",
+       "atWord": 1
+      },
+      {
+       "label": "subscriptions",
+       "atWord": 1
+      },
+      {
+       "label": "log messages",
+       "atWord": 1
+      },
+      {
+       "label": "tools",
+       "atWord": 1
+      }
+     ],
+     "lines": [
+      {
+       "text": "mcp = FastMCP(",
+       "detail": "Flags are set when you CREATE the server.",
+       "atWord": 1
+      },
+      {
+       "text": "    \"my-server\","
+      },
+      {
+       "text": "    stateless_http=True,",
+       "detail": "Enables scaling. Kills sampling, progress, roots.",
+       "atWord": 3
+      },
+      {
+       "text": "    json_response=True,",
+       "detail": "Simpler responses. Kills streaming progress and logs.",
+       "atWord": 8
+      },
+      {
+       "text": ")"
+      },
+      {
+       "text": "mcp.run(transport=\"streamable-http\")"
+      }
+     ],
+     "codeTitle": "server.py"
+    }
+   }
+  }
+ ]
+}

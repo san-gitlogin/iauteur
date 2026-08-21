@@ -1,0 +1,1084 @@
+{
+  "meta": {
+    "topic": "HashMap",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "You can turn a nested loop into one pass by writing down what you have already seen.",
+    "openLoop": "Everyone in the room, compared with everyone else. Or one notebook.",
+    "analogy": "THE NOTEBOOK - a dance party where you write down every shirt number as you pass it.",
+    "topicAxes": [
+      "economic-pain",
+      "entity-novelty"
+    ],
+    "seo": {
+      "title": "HashMap — The Pattern That Kills Nested Loops",
+      "altTitles": [
+        "HashMap Explained Until It Sticks (DSA Pattern 4)",
+        "Two Sum in One Pass — How a HashMap Actually Helps"
+      ],
+      "hook": "Everyone against everyone. Or one notebook.",
+      "breakdown": "the hash map pattern traced line by line, and the memory it trades for the speed",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "Everyone, or one notebook"
+        },
+        {
+          "id": "s03",
+          "title": "The words that give it away"
+        },
+        {
+          "id": "s04",
+          "title": "Why the nested loop hurts"
+        },
+        {
+          "id": "s05",
+          "title": "The dance party"
+        },
+        {
+          "id": "s06",
+          "title": "An empty notebook"
+        },
+        {
+          "id": "s07",
+          "title": "What do I need?"
+        },
+        {
+          "id": "s09",
+          "title": "Write it down"
+        },
+        {
+          "id": "s11",
+          "title": "Found, in one pass"
+        },
+        {
+          "id": "s13",
+          "title": "What it costs you"
+        },
+        {
+          "id": "s14",
+          "title": "The four problems to go and do"
+        }
+      ],
+      "queries": [
+        "hashmap pattern explained",
+        "two sum hashmap python",
+        "two sum one pass",
+        "when to use a hash map dsa",
+        "hashmap vs two pointers",
+        "complement two sum explained",
+        "frequency counter pattern",
+        "group anagrams hashmap",
+        "contains duplicate solution",
+        "time vs space tradeoff hashmap",
+        "dsa patterns for interviews",
+        "faang interview dsa patterns"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#hashmap",
+        "#codinginterview",
+        "#thenbxstudio"
+      ],
+      "tags": [
+        "dsa",
+        "data structures and algorithms",
+        "hashmap",
+        "hash table",
+        "leetcode",
+        "coding interview",
+        "faang interview",
+        "python",
+        "algorithms",
+        "two sum",
+        "dictionary",
+        "interview preparation",
+        "software engineering interview",
+        "dsa patterns",
+        "the nbx studio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ONE PASS. NOT N².",
+    "badge": "HashMap",
+    "asset": "si:python"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Everyone against everyone. Or one notebook, and a single walk. Why is one so much faster?",
+      "durationFrames": 222,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "ONE PASS. NOT N².",
+        "subtext": "same answer, one walk",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 9.417
+      },
+      "audio": "audio/dsa04_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "Pattern four of ten in the NBX Studio Dojo: HashMap. The one that buys you instant lookup, and the one people reach for without being able to say why it's fast.",
+      "durationFrames": 304,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "title": "HASHMAP",
+        "subtitle": "pattern four of ten"
+      },
+      "transition": "fade",
+      "audio": "audio/dsa04_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_SIGNALS",
+      "narration": "Here the giveaways are about memory rather than order. Frequency, or count how many times, which is a tally and a tally wants a map. Duplicate, or have I seen this before. Anagram, which is just two frequency tallies compared. And two sum on an unsorted array, because with no sorting you cannot two-pointer it. If the array is sorted and you need a pair, go back to pattern one instead. Ask yourself whether you keep needing to look something up. If you do, write it down.",
+      "durationFrames": 898,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaSignals": {
+          "headline": "The words that [give it away]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "signals in the question",
+          "premise": "Words lifted straight out of the question, and the pattern each one points at. Red means the signal rules this pattern OUT.",
+          "cells": [
+            {
+              "label": "frequency",
+              "sub": "a tally wants a map",
+              "atWord": 7.583
+            },
+            {
+              "label": "count how many",
+              "sub": "the same thing, said plainly",
+              "atWord": 9.25
+            },
+            {
+              "label": "duplicate",
+              "sub": "have I seen this before?",
+              "atWord": 21
+            },
+            {
+              "label": "anagram",
+              "sub": "two tallies, compared",
+              "atWord": 26.917
+            },
+            {
+              "label": "two sum, unsorted",
+              "sub": "no sorting means no two pointers",
+              "atWord": 33.583
+            },
+            {
+              "label": "sorted + a pair",
+              "sub": "that is episode one, not this",
+              "color": "red",
+              "atWord": 46.167
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/dsa04_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_COST",
+      "narration": "Pairing every person with every other person. With four people that's six pairs, which is fine. With a thousand it's half a million. With a million it's five hundred billion. Walking with a notebook covers the room once for four people, once for a thousand, and once for a million. One pass, whatever the size, and the cost of a lookup does not grow with the number of things you have written down. That last part is the bit worth understanding.",
+      "durationFrames": 737,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "dsaCost": {
+          "headline": "Why the [nested loop] hurts",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the same room, two costs",
+          "premise": "The same job priced two ways as the input grows: the obvious method against the pattern. Longer bar means more work.",
+          "cells": [
+            {
+              "label": "every pair, n=4",
+              "sub": "6 comparisons",
+              "value": 6,
+              "text": "dropped",
+              "atWord": 5.167
+            },
+            {
+              "label": "every pair, n=1K",
+              "sub": "500,000",
+              "value": 55,
+              "text": "dropped",
+              "atWord": 11.833
+            },
+            {
+              "label": "every pair, n=1M",
+              "sub": "500 billion",
+              "value": 100,
+              "text": "dropped",
+              "atWord": 16.917
+            },
+            {
+              "label": "notebook, n=4",
+              "sub": "4 steps",
+              "value": 4,
+              "atWord": 27.25
+            },
+            {
+              "label": "notebook, n=1K",
+              "sub": "1,000 steps",
+              "value": 7,
+              "atWord": 30.25
+            },
+            {
+              "label": "notebook, n=1M",
+              "sub": "1 million steps",
+              "value": 11,
+              "atWord": 33.167
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/dsa04_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "DSA_TRACE_HASH",
+      "narration": "You're at a party and everybody has a number printed on their shirt. You need to find two people whose numbers add up to nine. Standing in line you have two, seven, eleven and fifteen, in that order, and you can only walk the line once. You could make every person to stand next to every other person and check, which works and takes forever. Or you could carry a notebook, and write down each person as you pass them. That notebook is the whole idea, which means everything else here is bookkeeping.",
+      "durationFrames": 840,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaHash": {
+          "headline": "A room, and a [notebook]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "four people, one target",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:"
+            },
+            {
+              "text": "            return [seen[complement], i]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 22
+            },
+            {
+              "label": "7",
+              "atWord": 22.75
+            },
+            {
+              "label": "11",
+              "atWord": 23.5
+            },
+            {
+              "label": "15",
+              "atWord": 25
+            }
+          ],
+          "vars": [
+            {
+              "label": "target=9",
+              "atWord": 17.583
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/dsa04_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "DSA_TRACE_HASH",
+      "narration": "Seen equals empty braces creates the notebook. In Python those braces make a dictionary, which is a set of pairs, the way a phone book pairs a name with a number. Ours pairs a shirt number with the position we met them at, and right now it is empty, because we have not met anybody yet. This line starts the walk. Enumerate hands us two things at once: the position, i, and the number on the shirt, num. So we meet two, then seven, then eleven, then fifteen. One walk, one person at a time, and no going back, which is why the notebook has to exist at all.",
+      "durationFrames": 997,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaHash": {
+          "headline": "An [empty] notebook",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "nothing written yet",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}",
+              "detail": "An empty notebook: shirt number, and where we met them.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):",
+              "detail": "Walk the line once, tracking position and number.",
+              "atWord": 41.75
+            },
+            {
+              "text": "        complement = target - num"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:"
+            },
+            {
+              "text": "            return [seen[complement], i]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 60.417
+            },
+            {
+              "label": "7",
+              "atWord": 61.917
+            },
+            {
+              "label": "11",
+              "atWord": 63.417
+            },
+            {
+              "label": "15",
+              "atWord": 64.917
+            }
+          ],
+          "vars": [
+            {
+              "label": "seen = {}",
+              "atWord": 32.833
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa04_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "DSA_TRACE_HASH",
+      "narration": "First person: shirt number two, standing at position zero. Complement equals target minus num, so nine minus two is seven. Read that as a question, not a calculation. It's you saying: I've got a two, so to reach nine I need a seven, and I need one I've already walked past. Is there a seven in the notebook? Empty, so no. Nothing to match against. Nobody is behind us yet, which means there is nothing to match, exactly as you'd expect from the first person in the line.",
+      "durationFrames": 915,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaHash": {
+          "headline": "Ask what you [need]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the first person",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num",
+              "detail": "What number would complete this pair? Nine minus two.",
+              "atWord": 7.583
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:",
+              "detail": "Have I already met that number?",
+              "atWord": 43.167
+            },
+            {
+              "text": "            return [seen[complement], i]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 1.667
+            },
+            {
+              "label": "7"
+            },
+            {
+              "label": "11"
+            },
+            {
+              "label": "15"
+            }
+          ],
+          "vars": [
+            {
+              "label": "num=2",
+              "atWord": 16.083
+            },
+            {
+              "label": "complement=7",
+              "atWord": 49.083
+            },
+            {
+              "label": "seen = {}",
+              "atWord": 51.667
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa04_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "QUIZ_CARD",
+      "narration": "Straight from the Dojo. We just wrote down that person two is standing at position zero. Why bother? Just for fun. Because somebody later might need a two to complete their pair. Or to count how many twos there are. Have a think, and pause the video if you'd like a moment. Ready? Because somebody later might need a two. Every person we write down is a favour to somebody further along the line, and that is what saves the second loop.",
+      "durationFrames": 747,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "quiz": {
+          "question": "We wrote 2 → position 0. Why?",
+          "options": [
+            {
+              "text": "just for fun",
+              "atWord": 13.25
+            },
+            {
+              "text": "someone later may need a 2",
+              "atWord": 15.5
+            },
+            {
+              "text": "to count how many 2s",
+              "atWord": 23.583
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Every entry is a favour to somebody further down the line.",
+          "atWord": 1,
+          "revealAtWord": 38.333
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/dsa04_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "DSA_TRACE_HASH",
+      "narration": "So seen of num equals i, which reads as: I saw the number two, at position zero. Into the notebook it goes. One line, written once, and never touched again. Why bother writing it at all, when this person did not match? Because somebody further down the line might need a two, and we want the answer waiting rather than a second walk through the room.",
+      "durationFrames": 651,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaHash": {
+          "headline": "Write it [down]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the notebook gets its first line",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:"
+            },
+            {
+              "text": "            return [seen[complement], i]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i",
+              "detail": "Record this person, for whoever comes later.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 8.75
+            },
+            {
+              "label": "7"
+            },
+            {
+              "label": "11"
+            },
+            {
+              "label": "15"
+            }
+          ],
+          "aux": [
+            {
+              "label": "2",
+              "sub": "position 0",
+              "atWord": 13.5
+            }
+          ],
+          "vars": [
+            {
+              "label": "seen = {2: 0}",
+              "atWord": 11.917
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa04_s09.mp3"
+    },
+    {
+      "id": "s09b",
+      "type": "DSA_TRACE_HASH",
+      "narration": "Now look at where that line sits, because this is the one people actually ship. The check comes first, and the write comes after it. Never the other way round. If we wrote the number down before asking whether we had seen it, then a four with a target of eight would look in the notebook, find itself, and hand back the same position twice. A pair of one person. Order matters, which is why the check comes first.",
+      "durationFrames": 668,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaHash": {
+          "headline": "Check first, [then write]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "why the order matters",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:",
+              "detail": "Ask BEFORE you write, or a number matches itself.",
+              "atWord": 10.25
+            },
+            {
+              "text": "            return [seen[complement], i]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 12.917
+            },
+            {
+              "label": "7"
+            },
+            {
+              "label": "11"
+            },
+            {
+              "label": "15"
+            }
+          ],
+          "aux": [
+            {
+              "label": "2",
+              "sub": "position 0"
+            }
+          ],
+          "vars": [
+            {
+              "label": "num=4, target=8",
+              "atWord": 30.667
+            },
+            {
+              "label": "4 + 4 = itself",
+              "atWord": 38.917
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/dsa04_s09b.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "DSA_TRACE_HASH",
+      "narration": "Next person: shirt number seven, at position one. Complement is nine minus seven, which is two, so they need a two. Here is the moment the whole pattern exists for. Instead of walking back down the line looking for a two, we ask the notebook instead. There it is: a two, met at position zero. That question took the same amount of time it would have taken with a million entries in the book, and that's what a hash map buys you.",
+      "durationFrames": 755,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaHash": {
+          "headline": "The second [person]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "seven needs a two",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num",
+              "detail": "Seven needs a two to reach nine.",
+              "atWord": 6
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:",
+              "detail": "Ask the notebook, not the room.",
+              "atWord": 30.583
+            },
+            {
+              "text": "            return [seen[complement], i]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2"
+            },
+            {
+              "label": "7",
+              "atWord": 1.5
+            },
+            {
+              "label": "11"
+            },
+            {
+              "label": "15"
+            }
+          ],
+          "aux": [
+            {
+              "label": "2",
+              "sub": "position 0"
+            }
+          ],
+          "vars": [
+            {
+              "label": "num=7",
+              "atWord": 4.5
+            },
+            {
+              "label": "complement=2",
+              "atWord": 11.167
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/dsa04_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "DSA_TRACE_HASH",
+      "narration": "Return seen of complement, comma i. Seen of complement is where we met the two, position zero. And i is where we are now, position one. So the answer is zero and one. Two people out of four, found on step two, and we never looked at eleven or fifteen. We walked the line once, forwards, and the notebook did all the remembering. That's the shape of almost every hash map problem you'll meet.",
+      "durationFrames": 726,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaHash": {
+          "headline": "Found, in [one pass]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "two positions, handed back",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:"
+            },
+            {
+              "text": "            return [seen[complement], i]",
+              "detail": "Hand back where we met them, and where we are.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "text": "done",
+              "atWord": 7.917
+            },
+            {
+              "label": "7",
+              "text": "done",
+              "atWord": 15.917
+            },
+            {
+              "label": "11"
+            },
+            {
+              "label": "15"
+            }
+          ],
+          "aux": [
+            {
+              "label": "2",
+              "sub": "position 0"
+            }
+          ],
+          "vars": [
+            {
+              "label": "i=1",
+              "atWord": 19.083
+            },
+            {
+              "label": "return [0, 1]",
+              "atWord": 23.833
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/dsa04_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "QUIZ_CARD",
+      "narration": "One more, and interviewers do follow up with this. A hash map lookup is called constant time. What does that actually mean? That it takes zero time. That the time does not grow as the map gets bigger. Or that it's always faster than an array. Have a think, and pause here if you want longer. Ready? The time does not grow with size. A lookup in a map holding a million entries costs about what it costs in one holding ten.",
+      "durationFrames": 776,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "quiz": {
+          "question": "What does O(1) lookup actually mean?",
+          "options": [
+            {
+              "text": "it takes zero time",
+              "atWord": 16.917
+            },
+            {
+              "text": "time does not grow with size",
+              "atWord": 20.75
+            },
+            {
+              "text": "always faster than an array",
+              "atWord": 29.167
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Cost is independent of how many entries are stored.",
+          "atWord": 1,
+          "revealAtWord": 43
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/dsa04_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "DSA_COST",
+      "narration": "Nothing here's free, and an interviewer will ask. Time went from n squared to n, which is an enormous win. But space went from constant up to n, because in the worst case the notebook ends up holding every single person in the room. Two pointers, by comparison, uses no extra memory at all, but it demands a sorted array. So the honest answer is that you are spending memory to buy time. Say that out loud when you propose it, because naming the trade is what makes it sound deliberate rather than lucky.",
+      "durationFrames": 883,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaCost": {
+          "headline": "What it [costs you]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the trade you are making",
+          "premise": "The same job priced two ways as the input grows: the obvious method against the pattern. Longer bar means more work.",
+          "cells": [
+            {
+              "label": "time: O(n²) → O(n)",
+              "sub": "the win",
+              "value": 100,
+              "atWord": 6.083
+            },
+            {
+              "label": "space: O(1) → O(n)",
+              "sub": "the price",
+              "value": 60,
+              "text": "dropped",
+              "atWord": 15.25
+            },
+            {
+              "label": "two pointers: O(1) space",
+              "sub": "but it needs sorted input",
+              "value": 20,
+              "atWord": 33.583
+            },
+            {
+              "label": "memory bought time",
+              "sub": "say this out loud",
+              "value": 80,
+              "atWord": 45.833
+            },
+            {
+              "label": "name the trade",
+              "sub": "it sounds deliberate, not lucky",
+              "value": 40,
+              "atWord": 55.75
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/dsa04_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "LIST_BUILD",
+      "narration": "Four to go and do. Two Sum, which is the one we just wrote. Contains Duplicate, which is the simplest have-I-seen-this in existence. Valid Anagram, which is two tallies compared. And Group Anagrams, where the key you choose is the whole puzzle.",
+      "durationFrames": 467,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "heading": "Do these four, in this order",
+        "items": [
+          {
+            "icon": "lucide:plus",
+            "text": "LeetCode 1",
+            "detail": "Two Sum",
+            "atWord": 4.417
+          },
+          {
+            "icon": "lucide:copy",
+            "text": "LeetCode 217",
+            "detail": "Contains Duplicate",
+            "atWord": 12.417
+          },
+          {
+            "icon": "lucide:shuffle",
+            "text": "LeetCode 242",
+            "detail": "Valid Anagram",
+            "atWord": 20.333
+          },
+          {
+            "icon": "lucide:layers",
+            "text": "LeetCode 49",
+            "detail": "Group Anagrams",
+            "atWord": 27.417
+          }
+        ]
+      },
+      "transition": "wipe",
+      "audio": "audio/dsa04_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "RECAP",
+      "narration": "Three things to take with you. The signal is have I seen this before, in any of its disguises. The move is to write down what you pass, so the answer is a lookup instead of a search. And the trade is memory for time, which you should name before you're asked.",
+      "durationFrames": 469,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "heading": "HashMap, in three lines",
+        "points": [
+          {
+            "text": "Have I seen this before?",
+            "atWord": 6.5
+          },
+          {
+            "text": "Write down what you pass",
+            "atWord": 16.5
+          },
+          {
+            "text": "Memory bought the time",
+            "atWord": 30.167
+          }
+        ]
+      },
+      "transition": "fade",
+      "audio": "audio/dsa04_s15.mp3"
+    },
+    {
+      "id": "s16",
+      "type": "OUTRO_CTA",
+      "narration": "Next in the Dojo is the Stack, which is what you reach for when the order things were opened in is the thing that matters. Go and do Two Sum first, in one pass.",
+      "durationFrames": 290,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "All ten patterns, one per episode",
+        "sub": "next: Stack"
+      },
+      "transition": "fade",
+      "audio": "audio/dsa04_s16.mp3"
+    }
+  ]
+}

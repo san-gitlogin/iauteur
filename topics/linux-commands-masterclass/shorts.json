@@ -1,0 +1,155 @@
+{
+ "meta": {
+  "topic": "109 Linux Commands, One Video",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "dd overwrites a whole disk with no prompt and no undo \u2014 read the of= argument twice.",
+  "openLoop": "One command wipes a disk in four characters. Which one?",
+  "analogy": "THE WORKBENCH - every command is a tool in a drawer.",
+  "seo": {
+   "title": "The Linux Command That Wipes A Disk In 4 Characters",
+   "hook": "No prompt. No undo. Four characters.",
+   "description": "dd copies raw blocks and asks nothing of anybody. One wrong letter overwrites your running system.",
+   "tags": [
+    "linux",
+    "dd command",
+    "linux commands",
+    "sysadmin",
+    "devops",
+    "terminal",
+    "bash",
+    "tutorial"
+   ],
+   "hashtags": [
+    "#linux",
+    "#devops",
+    "#sysadmin",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "FOUR CHARACTERS",
+  "badge": "dd",
+  "asset": "si:linux",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "narration": "Somewhere on every beginner's Linux list is a command that wipes a whole disk in four characters. Which one?",
+   "data": {
+    "headline": "FOUR CHARACTERS",
+    "subtext": "and the disk is gone",
+    "heroAsset": "si:linux",
+    "headlineAtWord": 1,
+    "heroAtWord": 9.583
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ],
+   "durationFrames": 218,
+   "audio": "audio/shlnx_s01.mp3",
+   "timingSource": "tts"
+  },
+  {
+   "id": "s02",
+   "type": "CMD_DD",
+   "narration": "That command is D D. It copies raw blocks, and it asks nothing of anybody. Two arguments do all the work: I F equals is the input, the thing you read from, and O F equals is the output, the thing you write over. Used properly it's excellent. Read your disk, write a file, and that's a genuine full backup. Read the file back onto a spare disk and you've restored it. Now swap one letter so the output is slash dev slash S D A, and that's your running system being overwritten while you watch. No prompt, no progress bar, no undo. Four characters. Add status equals progress so it at least tells you what it's doing. Read the of= argument twice, out loud, before you press return. Every single time.",
+   "durationFrames": 1321,
+   "timingSource": "tts",
+   "background": "zoneC",
+   "data": {
+    "cmdDd": {
+     "stageTitle": "source, target, arrow",
+     "headline": "dd is the [four characters]",
+     "color": "red",
+     "promptLabel": "root@box",
+     "cwd": "~",
+     "highlight": "of=",
+     "atWord": 1,
+     "steps": [
+      {
+       "label": "dd if=/dev/sda of=backup.img",
+       "detail": "reads the whole disk into a file",
+       "atWord": 8.083,
+       "out": [
+        "1953525168+0 records out",
+        "1000204886016 bytes (1.0 TB) copied, 4127 s, 242 MB/s"
+       ]
+      },
+      {
+       "label": "dd if=backup.img of=/dev/sda",
+       "detail": "one letter wrong. that is the running system.",
+       "atWord": 62.917,
+       "out": [
+        "^C",
+        "1240576+0 records out",
+        "-bash: /usr/bin/ls: Input/output error"
+       ]
+      }
+     ],
+     "stage": [
+      {
+       "label": "if= is the input",
+       "sub": "the disk you read from",
+       "atWord": 20.167
+      },
+      {
+       "label": "of= is the output",
+       "sub": "the disk you write over",
+       "atWord": 29.833
+      },
+      {
+       "label": "read sda, write a file",
+       "sub": "a perfectly good backup",
+       "atWord": 42
+      },
+      {
+       "label": "now swap one letter",
+       "sub": "of=/dev/sda instead",
+       "atWord": 62.917
+      },
+      {
+       "label": "that is your running system",
+       "sub": "being overwritten right now",
+       "atWord": 73.417
+      }
+     ],
+     "verdict": "Four characters, and the disk is gone",
+     "verdictSub": "add status=progress so it at least tells you what it is doing",
+     "verdictAtWord": 86.333
+    }
+   },
+   "transition": "wipe",
+   "audio": "audio/shlnx_s02.mp3"
+  },
+  {
+   "id": "s03",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "narration": "Read the O F equals argument twice, out loud, before you press return. Every single time. All hundred and nine commands are in the full video.",
+   "data": {
+    "message": "109 Linux commands, one video",
+    "sub": "every one running on screen"
+   },
+   "anchors": [],
+   "durationFrames": 303,
+   "audio": "audio/shlnx_s03.mp3",
+   "timingSource": "tts"
+  }
+ ]
+}

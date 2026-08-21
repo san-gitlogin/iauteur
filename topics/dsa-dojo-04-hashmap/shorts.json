@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "topic": "HashMap",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "You can turn a nested loop into one pass by writing down what you have already seen.",
+    "openLoop": "Everyone in the room, compared with everyone else. Or one notebook.",
+    "analogy": "THE NOTEBOOK - a dance party where you write down every shirt number as you pass it.",
+    "seo": {
+      "title": "The HashMap Trick Behind Half Of LeetCode",
+      "hook": "Everyone against everyone is a million comparisons. One notebook makes it a single walk.",
+      "description": "You can turn a nested loop into one pass by writing down what you have already seen.",
+      "tags": [
+        "hashmap",
+        "hash table",
+        "dsa",
+        "leetcode",
+        "two sum",
+        "coding interview",
+        "python"
+      ],
+      "hashtags": [
+        "#dsa",
+        "#leetcode",
+        "#codinginterview",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Everyone against everyone is a million comparisons. One notebook makes it a single walk.",
+      "durationFrames": 192,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "ONE PASS, ONE NOTEBOOK",
+        "subtext": "hashmap",
+        "heroAsset": "si:python",
+        "headlineAtWord": 1,
+        "heroAtWord": 7.167
+      },
+      "audio": "audio/sh04_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "DSA_TRACE_HASH",
+      "narration": "First person: shirt number two, standing at position zero. Complement equals target minus num, so nine minus two is seven. Read that as a question, not a calculation. It's you saying: I've got a two, so to reach nine I need a seven, and I need one I've already walked past. Is there a seven in the notebook? Empty, so no. Nothing to match against. Nobody is behind us yet, which means there is nothing to match, exactly as you'd expect from the first person in the line.",
+      "durationFrames": 915,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaHash": {
+          "headline": "Ask what you [need]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the first person",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num",
+              "detail": "What number would complete this pair? Nine minus two.",
+              "atWord": 7.583
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:",
+              "detail": "Have I already met that number?",
+              "atWord": 43.167
+            },
+            {
+              "text": "            return [seen[complement], i]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 1.667
+            },
+            {
+              "label": "7"
+            },
+            {
+              "label": "11"
+            },
+            {
+              "label": "15"
+            }
+          ],
+          "vars": [
+            {
+              "label": "num=2",
+              "atWord": 16.083
+            },
+            {
+              "label": "complement=7",
+              "atWord": 49.083
+            },
+            {
+              "label": "seen = {}",
+              "atWord": 51.667
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/sh04_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "DSA_TRACE_HASH",
+      "narration": "Now look at the ORDER of these two lines, because getting it backwards is the bug people actually ship. The check comes first, and the write comes after it. Never the other way round. If we wrote the number down before asking whether we had seen it, then a four with a target of eight would look in the notebook, find itself, and hand back the same position twice. A pair of one person. Order matters, which is why the check comes first.",
+      "durationFrames": 706,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "dsaHash": {
+          "headline": "Check first, [then write]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "why the order matters",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:",
+              "detail": "Ask BEFORE you write, or a number matches itself.",
+              "atWord": 13.083
+            },
+            {
+              "text": "            return [seen[complement], i]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "atWord": 15.833
+            },
+            {
+              "label": "7"
+            },
+            {
+              "label": "11"
+            },
+            {
+              "label": "15"
+            }
+          ],
+          "aux": [
+            {
+              "label": "2",
+              "sub": "position 0"
+            }
+          ],
+          "vars": [
+            {
+              "label": "num=4, target=8",
+              "atWord": 33.667
+            },
+            {
+              "label": "4 + 4 = itself",
+              "atWord": 41.917
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/sh04_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "DSA_TRACE_HASH",
+      "narration": "Return seen of complement, comma i. Seen of complement is where we met the two, position zero. And i is where we are now, position one. So the answer is zero and one. Two people out of four, found on step two, and we never looked at eleven or fifteen. We walked the line once, forwards, and the notebook did all the remembering. That's the shape of almost every hash map problem you'll meet.",
+      "durationFrames": 726,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "dsaHash": {
+          "headline": "Found, in [one pass]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "two positions, handed back",
+          "codeTitle": "two_sum.py",
+          "premise": "A dance party. Each box is the shirt number of a guest as you walk past them, and the notebook beside it is everything you have written down so far.",
+          "lines": [
+            {
+              "text": "def two_sum(nums, target):"
+            },
+            {
+              "text": "    seen = {}"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    for i, num in enumerate(nums):"
+            },
+            {
+              "text": "        complement = target - num"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        if complement in seen:"
+            },
+            {
+              "text": "            return [seen[complement], i]",
+              "detail": "Hand back where we met them, and where we are.",
+              "atWord": 1
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "        seen[num] = i"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    return []"
+            }
+          ],
+          "cells": [
+            {
+              "label": "2",
+              "text": "done",
+              "atWord": 7.917
+            },
+            {
+              "label": "7",
+              "text": "done",
+              "atWord": 15.917
+            },
+            {
+              "label": "11"
+            },
+            {
+              "label": "15"
+            }
+          ],
+          "aux": [
+            {
+              "label": "2",
+              "sub": "position 0"
+            }
+          ],
+          "vars": [
+            {
+              "label": "i=1",
+              "atWord": 19.083
+            },
+            {
+              "label": "return [0, 1]",
+              "atWord": 23.833
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/sh04_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "Unsorted, and you need a pair or a count. That is your signal. The full pattern is in the Dojo.",
+      "durationFrames": 217,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "HashMap, traced line by line",
+        "sub": "full pattern in the Dojo"
+      },
+      "transition": "fade",
+      "audio": "audio/sh04_s05.mp3"
+    }
+  ]
+}

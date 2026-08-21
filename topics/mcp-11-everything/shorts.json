@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "topic": "Everything, Together",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Eleven chapters reduce to one mental model: who is in control, and who is paying.",
+    "openLoop": "You're building a public weather server that needs an LLM. One decision decides whether it bankrupts you.",
+    "analogy": "THE ASSEMBLED MACHINE - every part you met, running at once.",
+    "seo": {
+      "title": "Three MCP Features You Should Stop Building On",
+      "hook": "A lot of MCP writing online predates the current spec. Here's what actually changed.",
+      "description": "Eleven chapters reduce to one mental model: who is in control, and who is paying.",
+      "tags": [
+        "mcp",
+        "deprecated",
+        "model context protocol",
+        "2026",
+        "spec",
+        "claude",
+        "anthropic"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "CURRENT, OR ON A CLOCK",
+    "badge": "MCP 2026",
+    "asset": "si:anthropic",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 193,
+      "narration": "A lot of MCP writing online predates the current spec. Here's what actually changed.",
+      "data": {
+        "headline": "CURRENT, OR ON A CLOCK",
+        "subtext": "mcp 2026",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 7.167
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp-11-everything-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "MCP_CONTROL",
+      "durationFrames": 1199,
+      "narration": "Here's the whole thing on one screen. Tools are functions the model chooses, and Claude never runs them — your code does, in the loop. Resources are data your code fetches, and injecting one beats a tool call whenever you already know what's needed. Prompts are workflows a person triggers, which is how you ship your own expertise as a button. Sampling reverses the protocol so the client's key pays, which is what makes a public server affordable. Roots are file access control that the S D K hands you but never enforces. And notifications are how a slow tool proves it's alive. Underneath all six, one question keeps working: who is in control — and for sampling, who is paying.",
+      "data": {
+        "mcpControl": {
+          "headline": "The whole [machine]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "every part, at once",
+          "premise": "Every piece of the protocol you've met, and the one question that tells them apart.",
+          "cells": [
+            {
+              "label": "Tools",
+              "sub": "the model chooses · your code runs",
+              "owner": "ai",
+              "icon": "lucide:wrench",
+              "atWord": 5.667
+            },
+            {
+              "label": "Resources",
+              "sub": "your code fetches · inject to skip a round trip",
+              "owner": "code",
+              "icon": "lucide:folder-open",
+              "atWord": 20.25
+            },
+            {
+              "label": "Prompts",
+              "sub": "a person triggers · your expertise, as a button",
+              "owner": "user",
+              "icon": "lucide:sparkles",
+              "atWord": 35.667
+            },
+            {
+              "label": "Sampling",
+              "sub": "the server asks · the client's key pays",
+              "owner": "code",
+              "icon": "lucide:refresh-cw",
+              "atWord": 49.5
+            },
+            {
+              "label": "Roots",
+              "sub": "handed to you · enforced by you",
+              "owner": "code",
+              "icon": "lucide:folder-lock",
+              "atWord": 63.25
+            },
+            {
+              "label": "Notifications",
+              "sub": "ctx.info and report_progress",
+              "owner": "code",
+              "icon": "lucide:bell",
+              "atWord": 75.417
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneC",
+      "audio": "audio/mcp-11-everything-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_DEPRECATED",
+      "durationFrames": 1406,
+      "narration": "Before you go and build, here's the state of play, because a lot of MCP writing online predates it. Tools, resources and prompts are current, and they're the spine of everything. Elicitation is current, and it's where the protocol is putting its weight now. Sampling is deprecated as of the twenty twenty six revision — migrate to calling a provider API directly. Roots is deprecated too — pass paths as tool parameters, resource U R Is, or server config instead. And logging is deprecated — standard error on stdio, Open Telemetry in production. None of those three vanish tomorrow. They stay in the spec for at least twelve months and the code you inherit will be full of them, which is exactly why you learnt them. Just don't start something new on a feature the specification has already told you it's retiring.",
+      "data": {
+        "mcpDeprecated": {
+          "headline": "Current, and [on a clock]",
+          "color": "red",
+          "atWord": 1,
+          "caption": "as of spec 2026-07-28",
+          "premise": "Everything here still works today. Three of them are scheduled for removal, and the spec says not to start anything new on them.",
+          "cells": [
+            {
+              "label": "Tools · Resources · Prompts",
+              "sub": "current — the spine of the protocol",
+              "color": "green",
+              "text": "CURRENT",
+              "icon": "lucide:layers",
+              "atWord": 15.417
+            },
+            {
+              "label": "Elicitation",
+              "sub": "current — form mode and URL mode",
+              "color": "green",
+              "text": "CURRENT",
+              "icon": "lucide:message-square-plus",
+              "atWord": 25.167
+            },
+            {
+              "label": "Sampling",
+              "sub": "→ call a provider API directly",
+              "color": "red",
+              "icon": "lucide:refresh-cw",
+              "atWord": 35.75
+            },
+            {
+              "label": "Roots",
+              "sub": "→ tool parameters, resource URIs, or config",
+              "color": "red",
+              "icon": "lucide:folder-lock",
+              "atWord": 50.417
+            },
+            {
+              "label": "Logging",
+              "sub": "→ stderr on stdio, OpenTelemetry in production",
+              "color": "red",
+              "icon": "lucide:scroll-text",
+              "atWord": 65
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-11-everything-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "durationFrames": 241,
+      "narration": "Three of those are deprecated as of the 2026 spec. Don't start anything new on them. Full course on the channel.",
+      "data": {
+        "message": "All of MCP, and what changed",
+        "sub": "checked against spec 2026-07-28"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp-11-everything-short_s04.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

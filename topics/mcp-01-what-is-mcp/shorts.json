@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "topic": "What MCP Actually Is",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "MCP is a standard socket, so the integration you need has probably already been written by somebody else.",
+    "openLoop": "Four services, four integrations, and none of them are your product. What if you didn't write any of them?",
+    "analogy": "THE DELIVERY PLATFORM - you don't sign every restaurant yourself; you plug into the one that already did.",
+    "seo": {
+      "title": "What MCP Actually Is — In One Minute",
+      "hook": "You want Claude to reach your GitHub, your Slack, your database. That plumbing is weeks of",
+      "description": "MCP is a standard socket, so the integration you need has probably already been written by somebody else.",
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "claude",
+        "anthropic",
+        "ai tools",
+        "integration"
+      ],
+      "hashtags": [
+        "#mcp",
+        "#claude",
+        "#anthropic",
+        "#python",
+        "#thenbxstudio"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "STOP WRITING GLUE",
+    "badge": "What is MCP",
+    "asset": "si:anthropic",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 189,
+      "narration": "You want Claude to reach your GitHub, your Slack, your database. That plumbing is weeks of work.",
+      "data": {
+        "headline": "STOP WRITING GLUE",
+        "subtext": "what is mcp",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 1,
+        "heroAtWord": 5.75
+      },
+      "background": "zoneA",
+      "anchors": [
+        "headlineAtWord",
+        "heroAtWord"
+      ],
+      "audio": "audio/mcp-01-what-is-mcp-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "MCP_MESH",
+      "durationFrames": 1301,
+      "narration": "It's worth seeing why anyone bothered inventing a protocol, because the answer is a multiplication. Say four different apps want tool access — your editor, a chat client, an I D E, a terminal agent. And four services worth reaching — GitHub, Slack, Postgres, the filesystem. Without a standard, every app writes its own version of every connection, so watch what that actually costs. Sixteen separate integrations, and not one of them is shareable with anybody else. With a standard it's four servers and four clients — eight pieces instead of sixteen, and the gap widens fast as either side grows. That's the entire economic argument for MCP, and it's why the shape caught on as quickly as it did.",
+      "data": {
+        "mcpMesh": {
+          "headline": "Why a standard [had to exist]",
+          "color": "orange",
+          "atWord": 1,
+          "caption": "the multiplication",
+          "premise": "Four apps on the left, four services on the right. Every line is an integration somebody has to write and then maintain.",
+          "cells": [
+            {
+              "label": "editor",
+              "icon": "lucide:file-code",
+              "text": "client",
+              "atWord": 20.417
+            },
+            {
+              "label": "chat client",
+              "icon": "lucide:message-square",
+              "text": "client",
+              "atWord": 22.25
+            },
+            {
+              "label": "IDE",
+              "icon": "lucide:code-xml",
+              "text": "client",
+              "atWord": 24.917
+            },
+            {
+              "label": "agent",
+              "icon": "lucide:bot",
+              "text": "client",
+              "atWord": 28.417
+            },
+            {
+              "label": "GitHub",
+              "icon": "si:github",
+              "text": "server",
+              "atWord": 36.417
+            },
+            {
+              "label": "Slack",
+              "icon": "si:slack",
+              "text": "server",
+              "atWord": 37.333
+            },
+            {
+              "label": "Postgres",
+              "icon": "si:postgresql",
+              "text": "server",
+              "atWord": 38.25
+            },
+            {
+              "label": "files",
+              "icon": "lucide:folder",
+              "text": "server",
+              "atWord": 39.083
+            },
+            {
+              "label": "MCP",
+              "icon": "lucide:git-fork",
+              "text": "hub",
+              "atWord": 68.417
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneA",
+      "audio": "audio/mcp-01-what-is-mcp-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MCP_WIRE",
+      "durationFrames": 987,
+      "narration": "So concretely, here's the shape. Your app opens a connection to a server, and the first thing your app asks is what can you do. The server answers with a list of tools, each carrying a name and a description. Then when you want one of those tools run, your app calls it by name with arguments, and the server runs the function and hands back the result. That's the entire protocol at this level — a question, a list, a call, a result — which means everything else in this course hangs off those four messages. Everything else in this course is detail hanging off those four messages.",
+      "data": {
+        "mcpWire": {
+          "headline": "Server, client, [and a wire]",
+          "color": "blue",
+          "atWord": 1,
+          "caption": "the two words",
+          "codeTitle": "client.py",
+          "premise": "Your app is the client. Somebody else's program is the server. Every arrow is one JSON-RPC message crossing between them.",
+          "ends": [
+            {
+              "label": "YOUR APP"
+            },
+            {
+              "label": "MCP SERVER"
+            }
+          ],
+          "lines": [
+            {
+              "text": "async with stdio_client(params) as (r, w):"
+            },
+            {
+              "text": "    async with ClientSession(r, w) as client:"
+            },
+            {
+              "text": "        await client.initialize()"
+            },
+            {
+              "text": "        tools = await client.list_tools()",
+              "detail": "Ask the server what it can do.",
+              "atWord": 9.583
+            },
+            {
+              "text": "        result = await client.call_tool(",
+              "detail": "Run one, by name, with arguments.",
+              "atWord": 29.5
+            },
+            {
+              "text": "            \"read_note\", {\"note_id\": \"todo.md\"})"
+            }
+          ],
+          "cells": [
+            {
+              "label": "3 tools",
+              "sub": "read_note · edit_note · list_notes",
+              "dir": "back",
+              "out": [
+                "{\"result\":{\"tools\":[",
+                "  {\"name\":\"read_note\",",
+                "   \"description\":\"Read a note\"}]}}"
+              ],
+              "atWord": 18.417
+            },
+            {
+              "label": "the note text",
+              "sub": "whatever the function returned",
+              "dir": "back",
+              "out": [
+                "{\"result\":{\"content\":[",
+                "  {\"type\":\"text\",",
+                "   \"text\":\"Buy groceries...\"}]}}"
+              ],
+              "atWord": 42.083
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "background": "zoneA",
+      "audio": "audio/mcp-01-what-is-mcp-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "durationFrames": 227,
+      "narration": "A server is somebody else's integration, packaged. That's MCP. Full course on the channel.",
+      "data": {
+        "message": "What MCP actually is",
+        "sub": "and the problem it removes"
+      },
+      "transition": "fade",
+      "background": "zoneA",
+      "anchors": [],
+      "audio": "audio/mcp-01-what-is-mcp-short_s04.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
