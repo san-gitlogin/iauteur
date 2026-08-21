@@ -474,6 +474,7 @@ webui/                  Optional Flask console (brief builder + pipeline runner)
 audit/                  census.json · matrix.md · register.md — the library's audit state.
 docs/                   ARCHITECTURE.html.  PROGRAM_3_FINAL.md — component-library build report.
 CLAUDE.md · PROJECT_RULES.md   Repo laws and the topic lifecycle (read before large changes).
+docs/CONTINUE_HERE.md   Paste-ready prompt for starting a new topic in a fresh session/machine.
 ```
 
 ## The component library

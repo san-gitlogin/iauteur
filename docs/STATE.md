@@ -9,6 +9,12 @@ the same commit — that is what makes the next session on a different machine c
 
 ---
 
+## Starting fresh on another machine?
+
+`docs/CONTINUE_HERE.md` holds a paste-ready prompt for a new Claude Code session —
+what to read first, the pipeline in order, the standing quality bar, the landmines,
+and what already exists so it does not get rebuilt.
+
 ## Prove it's healthy before changing anything
 
 ```bash
