@@ -1,0 +1,239 @@
+{
+ "meta": {
+  "topic": "Transport and the Two Flags",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "stdio for development, HTTP for production \u2014 and two flags that trade features for scale without warning you.",
+  "openLoop": "Two settings that look like performance tuning. One of them silently kills sampling.",
+  "analogy": "THE SAME ROOM - passing notes across a desk, versus a phone call across the world.",
+  "seo": {
+   "title": "Why print() Breaks Your MCP Server",
+   "hook": "On stdio, a stray print statement will break your MCP server. Here's why.",
+   "description": "stdio for development, HTTP for production \u2014 and two flags that trade features for scale without warning you.",
+   "tags": [
+    "mcp",
+    "stdio",
+    "transport",
+    "streamable http",
+    "debugging",
+    "python",
+    "stderr"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "STDOUT IS THE WIRE",
+  "badge": "Transport",
+  "asset": "si:anthropic",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "On stdio, a stray print statement will break your MCP server. Here's why.",
+   "data": {
+    "headline": "STDOUT IS THE WIRE",
+    "subtext": "transport",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "MCP_TERMINAL",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "mcpTerm",
+   "headline": "On stdio, stdout [is the wire]",
+   "color": "green",
+   "stageTitle": "what a stray print does",
+   "promptLabel": "santhu@box",
+   "cwd": "~/mcp/notes",
+   "durationFrames": 920,
+   "narration": "Stdio deserves a closer look, because how it works explains a bug almost everyone hits once. +The client doesn't connect to a running server. The client LAUNCHES the server as a child process, and then talks to it down that process's own standard input and standard output. So standard out isn't where your program prints \u2014 it is the wire. +Which means a stray print, left in from debugging, writes a line of plain text into the middle of a JSON-RPC stream, and the client fails to parse it. ^The error you get points at JSON, ^not at the print statement that caused it, ^which is why this one costs people an afternoon. +Print to standard error instead \u2014 the client leaves that alone, and you'll see it in your terminal. And now the logging deprecation from the last chapter makes sense: standard error is exactly where the spec is telling you to send logs.",
+   "steps": [
+    {
+     "label": "# the client runs this for you",
+     "out": [
+      "python server.py   \u2190 spawned as a child process",
+      "stdin  \u25b8 requests in",
+      "stdout \u25c2 responses out"
+     ],
+     "detail": "stdout is the protocol channel, not your console.",
+     "mark": true
+    },
+    {
+     "label": "print(\"debugging note\")",
+     "out": [
+      "Unexpected token 'd', \"debugging \"... is not valid JSON",
+      "MCP error -32700: Parse error"
+     ],
+     "detail": "One plain line, and the stream is corrupt.",
+     "mark": true
+    },
+    {
+     "label": "print(\"debugging note\", file=sys.stderr)",
+     "out": [
+      "debugging note   \u2190 visible to you, invisible to the protocol"
+     ],
+     "detail": "Where logs belong on stdio.",
+     "mark": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "the error names JSON",
+     "sub": "a parse failure, mid-stream",
+     "mark": true,
+     "icon": "lucide:file-warning"
+    },
+    {
+     "label": "not the print",
+     "sub": "nothing points at the real cause",
+     "mark": true,
+     "icon": "lucide:eye-off"
+    },
+    {
+     "label": "stderr is safe",
+     "sub": "and is where the spec sends logs now",
+     "mark": true,
+     "icon": "lucide:shield-check"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "MCP_FLAGS",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpFlags",
+   "headline": "What the flags [turn off]",
+   "color": "red",
+   "caption": "read this twice",
+   "codeTitle": "server.py",
+   "premise": "Both flags are passed to run(), not to the constructor. Both trade features for scale, and nothing warns you.",
+   "durationFrames": 1020,
+   "narration": "Now the trap, and it's worth reading twice. |First, where these flags actually live, because this catches anyone who learnt MCP a year ago: they are not constructor arguments. |You pass them to run, alongside the transport, and the server object itself knows nothing about them. |Stateless h t t p true means the server forgets each client between requests, ^which is exactly what you want behind a load balancer, because any instance can then answer any request. The cost is severe, though: sampling stops working, elicitation stops working, roots stop working, and subscriptions stop working \u2014 every one of those needs the server to remember who you are between calls. |Json response true means replies come back as plain JSON instead of a stream, ^which kills live progress and log messages, since streaming is the mechanism those travel on. ^Notice what survives both: ordinary tool calls. So start with both false, which is the default, and only reach for either when you genuinely need horizontal scaling and can say out loud what you're giving up.",
+   "lines": [
+    {
+     "text": "from mcp.server.mcpserver import MCPServer"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "mcp = MCPServer(\"my-server\")",
+     "detail": "The constructor takes no transport flags.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "mcp.run(",
+     "detail": "They belong to run(), with the transport.",
+     "teach": true
+    },
+    {
+     "text": "    transport=\"streamable-http\","
+    },
+    {
+     "text": "    stateless_http=True,",
+     "detail": "Scales. Kills sampling, elicitation, roots, subscriptions.",
+     "teach": true
+    },
+    {
+     "text": "    json_response=True,",
+     "detail": "Simpler. Kills streaming progress and log messages.",
+     "teach": true
+    },
+    {
+     "text": ")"
+    }
+   ],
+   "cells": [
+    {
+     "label": "stateless_http=True",
+     "sub": "forgets clients between requests",
+     "text": "flag",
+     "mark": true,
+     "out": [
+      "sampling",
+      "elicitation",
+      "roots",
+      "subscriptions"
+     ]
+    },
+    {
+     "label": "json_response=True",
+     "sub": "plain JSON instead of SSE streams",
+     "text": "flag",
+     "mark": true,
+     "out": [
+      "progress",
+      "log messages"
+     ]
+    },
+    {
+     "label": "sampling"
+    },
+    {
+     "label": "elicitation"
+    },
+    {
+     "label": "roots"
+    },
+    {
+     "label": "subscriptions"
+    },
+    {
+     "label": "progress"
+    },
+    {
+     "label": "log messages"
+    },
+    {
+     "label": "tools",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 280,
+   "narration": "stdout is the protocol. Log to stderr. And know what those two flags switch off. Full course on the channel.",
+   "data": {
+    "message": "Transport, and the two flags",
+    "sub": "what they silently disable"
+   },
+   "anchors": []
+  }
+ ]
+}

@@ -1,0 +1,222 @@
+{
+ "meta": {
+  "topic": "Elicitation",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "A tool can stop mid-run and ask the user a question \u2014 and for anything sensitive it must hand off to a browser instead.",
+  "openLoop": "Your tool needs the user's API key. Asking for it in the chat is forbidden. So how?",
+  "analogy": "THE FORM AND THE SIDE DOOR - one asks in the room, one sends you out of it.",
+  "seo": {
+   "title": "MCP Elicitation \u2014 Never Ask For A Key In Chat",
+   "hook": "Halfway through a tool, you need something only the person can give you.",
+   "description": "A tool can stop mid-run and ask the user a question \u2014 and for anything sensitive it must hand off to a browser instead.",
+   "tags": [
+    "mcp",
+    "elicitation",
+    "security",
+    "oauth",
+    "python",
+    "claude",
+    "anthropic"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "NEVER ASK IN CHAT",
+  "badge": "Elicitation",
+  "asset": "si:anthropic",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "Halfway through a tool, you need something only the person can give you.",
+   "data": {
+    "headline": "NEVER ASK IN CHAT",
+    "subtext": "elicitation",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "MCP_ELICIT",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpElicit",
+   "headline": "Form mode, [with a schema]",
+   "color": "green",
+   "caption": "asking in the room",
+   "codeTitle": "server.py",
+   "premise": "The tool is halfway through and needs something only the person can supply. Elicitation is how it asks.",
+   "durationFrames": 880,
+   "narration": "Form mode is the ordinary case. Your tool stops, describes what it needs, and hands over a schema. |C t x dot elicit takes a message the person will read, and a Pydantic model describing the shape of the answer, ^so the client can render a real form with a labelled field instead of guessing from prose. ^The schema is deliberately restricted to flat, primitive fields \u2014 strings, numbers, booleans, enums \u2014 because every client has to be able to draw that form, and nobody draws an arbitrary nested object well. ^A string field with a title and a description becomes a labelled text input. ^An enum becomes a picker, which means the person can't mistype the answer. |And what elicit returns carries an action, ^which is the field people forget to check.",
+   "lines": [
+    {
+     "text": "class RepoChoice(BaseModel):"
+    },
+    {
+     "text": "    repo: str = Field(description=\"Which repository?\")"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "@mcp.tool()"
+    },
+    {
+     "text": "async def open_pr(title: str, ctx: Context):"
+    },
+    {
+     "text": "    result = await ctx.elicit(",
+     "detail": "A message for the person, and a schema.",
+     "teach": true
+    },
+    {
+     "text": "        message=\"Which repo should this PR open against?\","
+    },
+    {
+     "text": "        schema=RepoChoice,"
+    },
+    {
+     "text": "    )"
+    },
+    {
+     "text": "    if result.action != \"accept\":",
+     "detail": "Always check the action first.",
+     "teach": true
+    },
+    {
+     "text": "        return \"Cancelled.\""
+    }
+   ],
+   "cells": [
+    {
+     "label": "a flat schema only",
+     "sub": "strings, numbers, booleans, enums \u2014 nothing nested",
+     "mark": true
+    },
+    {
+     "label": "repo",
+     "sub": "string \u00b7 Which repository?",
+     "mark": true,
+     "out": [
+      "octocat/hello"
+     ]
+    },
+    {
+     "label": "visibility",
+     "sub": "enum \u00b7 public or private",
+     "mark": true,
+     "out": [
+      "private"
+     ]
+    },
+    {
+     "label": "result.action",
+     "sub": "the field people forget to check",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "MCP_ELICIT",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpElicit",
+   "headline": "Never ask for a [secret in chat]",
+   "color": "orange",
+   "caption": "sending them out of the room",
+   "codeTitle": "server.py",
+   "premise": "Form mode data passes through the client. URL mode data never does. That difference is the whole reason URL mode exists.",
+   "durationFrames": 800,
+   "narration": "Now the important one, and it's a rule rather than a preference. ^The specification says servers must not use form mode to ask for passwords, API keys, access tokens or payment details. Must not \u2014 ^because anything typed into a form travels back through the client, and through whatever happens to be logging there. ^So for those, you use URL mode: your tool hands back a link, the person opens it in a real browser, and the secret goes straight from them to you without ever crossing the client or the model's context. |C t x dot elicit url takes the message, the U R L, ^and an id you'll use to track that particular hand-off.",
+   "lines": [
+    {
+     "text": "@mcp.tool()"
+    },
+    {
+     "text": "async def connect_stripe(ctx: Context):"
+    },
+    {
+     "text": "    result = await ctx.elicit_url(",
+     "detail": "Message, URL, and an id to track it.",
+     "teach": true
+    },
+    {
+     "text": "        message=\"Connect your Stripe account to continue.\","
+    },
+    {
+     "text": "        url=\"https://mcp.example.com/connect/stripe\","
+    },
+    {
+     "text": "        elicitation_id=\"stripe-42\","
+    },
+    {
+     "text": "    )"
+    }
+   ],
+   "cells": [
+    {
+     "label": "passwords \u00b7 API keys \u00b7 tokens \u00b7 payment",
+     "sub": "form mode is FORBIDDEN for these",
+     "mark": true
+    },
+    {
+     "label": "form data crosses the client",
+     "sub": "and whatever is logging there",
+     "mark": true
+    },
+    {
+     "label": "https://mcp.example.com/connect/stripe",
+     "text": "url",
+     "mark": true,
+     "sub": "opens in a real browser \u00b7 never touches the client or the model"
+    },
+    {
+     "label": "elicitation_id",
+     "sub": "how you track this one hand-off",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 280,
+   "narration": "Form mode for choices, URL mode for anything secret \u2014 that one's a rule. Full course on the channel.",
+   "data": {
+    "message": "Elicitation, both modes",
+    "sub": "and the security boundary"
+   },
+   "anchors": []
+  }
+ ]
+}

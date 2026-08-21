@@ -1,0 +1,223 @@
+{
+ "meta": {
+  "topic": "How Claude Works",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "Every Claude app is one API call in a loop \u2014 and MCP is what fills that call with tools.",
+  "openLoop": "Everyone says 'call the API'. Nobody shows you what's actually in the envelope.",
+  "analogy": "THE ENVELOPE - you post a conversation, you get one reply back.",
+  "seo": {
+   "title": "The Claude API In 90 Seconds (Before You Touch MCP)",
+   "hook": "If you've only used Claude through a chat box, the API underneath is simpler than you thin",
+   "description": "Every Claude app is one API call in a loop \u2014 and MCP is what fills that call with tools.",
+   "tags": [
+    "claude api",
+    "anthropic",
+    "python",
+    "mcp",
+    "llm",
+    "api tutorial"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "ONE CALL, FOUR ARGS",
+  "badge": "Claude's API",
+  "asset": "si:anthropic",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "If you've only used Claude through a chat box, the API underneath is simpler than you think.",
+   "data": {
+    "headline": "ONE CALL, FOUR ARGS",
+    "subtext": "claude's api",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "MCP_API_ANATOMY",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpApi",
+   "headline": "The call, [taken apart]",
+   "color": "purple",
+   "caption": "one API call",
+   "codeTitle": "first_call.py",
+   "premise": "Claude is an HTTP API. You send a list of messages, you get one message back. Nothing else is happening.",
+   "durationFrames": 900,
+   "narration": "Here's the whole thing. |You import the client and create it, and it quietly reads your key out of an environment variable, which is why you never see the key in the code. |Then messages dot create sends the conversation and waits. That single call is the entire API \u2014 everything else you'll ever write is arguments to it. ^Model picks which Claude answers, and Sonnet is the fast, affordable one. ^Max tokens is a ceiling on the reply, not a target, so a high ceiling costs nothing by itself. ^And messages is the conversation so far, where every entry carries a role, either user or assistant. |The reply comes back as a list of content blocks, which is why you index into it rather than printing the message directly.",
+   "lines": [
+    {
+     "text": "from anthropic import Anthropic"
+    },
+    {
+     "text": "client = Anthropic()",
+     "detail": "It reads ANTHROPIC_API_KEY from your environment.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "message = client.messages.create(",
+     "detail": "The whole API. Everything else is an argument.",
+     "teach": true
+    },
+    {
+     "text": "    model=\"claude-sonnet-5\","
+    },
+    {
+     "text": "    max_tokens=1024,"
+    },
+    {
+     "text": "    messages=[{\"role\": \"user\","
+    },
+    {
+     "text": "               \"content\": \"What is MCP?\"}],"
+    },
+    {
+     "text": ")"
+    },
+    {
+     "text": "print(message.content[0].text)",
+     "detail": "A list of blocks, so you index into it.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "model=",
+     "sub": "which Claude answers \u00b7 Sonnet is fast and cheap",
+     "mark": true,
+     "icon": "lucide:cpu"
+    },
+    {
+     "label": "max_tokens=",
+     "sub": "a ceiling on the reply, not a target",
+     "mark": true,
+     "icon": "lucide:ruler"
+    },
+    {
+     "label": "messages=[\u2026]",
+     "sub": "the conversation so far, each entry with a role",
+     "mark": true,
+     "icon": "lucide:messages-square"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "MCP_API_ANATOMY",
+   "transition": "push",
+   "background": "zoneC",
+   "key": "mcpApi",
+   "headline": "The argument [MCP fills]",
+   "color": "purple",
+   "caption": "where the course is going",
+   "codeTitle": "with_tools.py",
+   "premise": "Claude is an HTTP API. You send a list of messages, you get one message back. Nothing else is happening.",
+   "durationFrames": 780,
+   "narration": "One more argument, and it's the reason this whole course exists. |Alongside messages, the call takes tools \u2014 a list describing functions Claude is allowed to ask for. ^Each one is a name, ^a description Claude reads to decide when it's useful, ^and a schema saying what arguments it takes. Claude never runs those functions. Claude just replies saying which one it wants and with what inputs, and your code does the running. |So the question the rest of this course answers is simply: where does that list come from? Writing it by hand for GitHub, for Slack, for your database, forever, is the problem. %MCP is the answer, and now you know exactly which argument MCP is filling.",
+   "lines": [
+    {
+     "text": "client.messages.create("
+    },
+    {
+     "text": "    model=M, max_tokens=1024,"
+    },
+    {
+     "text": "    messages=messages,"
+    },
+    {
+     "text": "    tools=[{                        # <- the hole",
+     "detail": "A list of functions Claude may ask you to run.",
+     "teach": true
+    },
+    {
+     "text": "        \"name\": \"read_note\","
+    },
+    {
+     "text": "        \"description\": \"Read a note by filename\","
+    },
+    {
+     "text": "        \"input_schema\": {...},"
+    },
+    {
+     "text": "    }],"
+    },
+    {
+     "text": ")",
+     "detail": "Where does this list come from? That's MCP.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "name",
+     "sub": "what the function is called",
+     "mark": true,
+     "icon": "lucide:tag"
+    },
+    {
+     "label": "description",
+     "sub": "how Claude decides it's the right one",
+     "mark": true,
+     "icon": "lucide:text"
+    },
+    {
+     "label": "input_schema",
+     "sub": "the arguments, and their types",
+     "mark": true,
+     "icon": "lucide:braces"
+    }
+   ],
+   "vars": [
+    {
+     "label": "MCP fills tools=",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 280,
+   "narration": "One call, four arguments \u2014 and MCP is what fills the last one. The full course is on the channel.",
+   "data": {
+    "message": "How Claude actually works",
+    "sub": "chapter one of twelve"
+   },
+   "anchors": []
+  }
+ ]
+}

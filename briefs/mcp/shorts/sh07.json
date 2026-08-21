@@ -1,0 +1,191 @@
+{
+ "meta": {
+  "topic": "Roots",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "Roots tell a server which folders it may touch \u2014 but the SDK never enforces it, so you write the check.",
+  "openLoop": "You handed the server two folders. What stops it reading a third?",
+  "analogy": "THE HOTEL KEYCARD - it opens your room and the gym, and nothing else.",
+  "seo": {
+   "title": "MCP Roots Is Not Access Control (And It's Deprecated)",
+   "hook": "You're about to let a server touch your file system.",
+   "description": "Roots tell a server which folders it may touch \u2014 but the SDK never enforces it, so you write the check.",
+   "tags": [
+    "mcp",
+    "roots",
+    "security",
+    "file access",
+    "deprecated",
+    "python",
+    "claude"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "MCP WON'T STOP IT",
+  "badge": "Roots",
+  "asset": "si:anthropic",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "You're about to let a server touch your file system.",
+   "data": {
+    "headline": "MCP WON'T STOP IT",
+    "subtext": "roots",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "MCP_ROOTS",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "mcpRoots",
+   "headline": "The check [you write yourself]",
+   "color": "red",
+   "caption": "not in the SDK",
+   "codeTitle": "server.py",
+   "premise": "The client hands the server a list of allowed folders. Nothing stops the server looking elsewhere unless you write the check.",
+   "durationFrames": 980,
+   "narration": "Here's the part that surprises people, and it's the most important sentence in this chapter. Is path allowed is not part of the MCP library. You write it. |The S D K gives you c t x dot session dot list roots, which fires the client's callback and returns the allowed folders \u2014 that much is genuinely MCP's. |Comparing a requested path against that list is entirely your responsibility. |The trick is relative to, which raises a ValueError when the path isn't inside the folder, so a successful call means it's a child and an exception means it isn't. ^Movies slash clip dot m o v sits inside a granted root, so that one's allowed. |And if nothing matched by the end, you return False, ^which is how slash e t c slash passwd gets refused. Leave this function out and every tool you write can read anything the process can read.",
+   "lines": [
+    {
+     "text": "async def is_path_allowed(requested: Path, ctx: Context) -> bool:"
+    },
+    {
+     "text": "    roots = await ctx.session.list_roots()",
+     "detail": "This part IS from MCP.",
+     "teach": true
+    },
+    {
+     "text": "    if not requested.exists():",
+     "detail": "And this part is entirely yours.",
+     "teach": true
+    },
+    {
+     "text": "        return False"
+    },
+    {
+     "text": "    for root in roots.roots:"
+    },
+    {
+     "text": "        try:"
+    },
+    {
+     "text": "            requested.relative_to(file_url_to_path(root.uri))",
+     "detail": "Raises unless it's inside.",
+     "teach": true
+    },
+    {
+     "text": "            return True"
+    },
+    {
+     "text": "        except ValueError:"
+    },
+    {
+     "text": "            continue"
+    },
+    {
+     "text": "    return False",
+     "detail": "Nothing matched. Refuse.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "/Users/me/Movies/clip.mov",
+     "sub": "inside a granted root",
+     "text": "ask",
+     "mark": true
+    },
+    {
+     "label": "/etc/passwd",
+     "sub": "outside every root",
+     "text": "ask",
+     "color": "red",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "MCP_DEPRECATED",
+   "transition": "push",
+   "background": "zoneB",
+   "key": "mcpDeprecated",
+   "headline": "Two corrections, [both important]",
+   "color": "red",
+   "caption": "status, honestly",
+   "premise": "Roots is deprecated \u2014 and it was never the access control the analogy suggests.",
+   "durationFrames": 880,
+   "narration": "Two corrections before you build anything on this, and the first one matters more than the deprecation. ^Roots is not access control. The specification says so directly: roots are informational guidance, and the protocol does not enforce that servers stay within them. A keycard that the hotel never checks is not a keycard \u2014 which is exactly why you write that path check yourself, and why leaving it out isn't a missing feature, it's an open door. ^Second, roots is deprecated as of the same twenty twenty six revision, alongside sampling. ^The migration is to pass the directories you care about as ordinary tool parameters, or as resource U R Is, or in the server's own configuration \u2014 all of which are explicit, visible, and don't pretend to be a security boundary.",
+   "cells": [
+    {
+     "label": "Roots is NOT access control",
+     "sub": "\u201cinformational guidance\u201d \u2014 the protocol enforces nothing",
+     "color": "red",
+     "text": "CORRECTION",
+     "mark": true
+    },
+    {
+     "label": "Roots",
+     "sub": "deprecated in spec 2026-07-28 (SEP-2577)",
+     "color": "red",
+     "mark": true,
+     "out": [
+      "still in the spec",
+      "for 12+ months"
+     ],
+     "icon": "lucide:folder-lock"
+    },
+    {
+     "label": "Migrate to",
+     "sub": "tool parameters, resource URIs, or server config",
+     "color": "green",
+     "text": "INSTEAD",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 280,
+   "narration": "Roots is guidance, not enforcement \u2014 and it's deprecated. You write the check. Full course on the channel.",
+   "data": {
+    "message": "Roots, honestly",
+    "sub": "what MCP does not do"
+   },
+   "anchors": []
+  }
+ ]
+}

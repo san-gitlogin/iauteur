@@ -95,10 +95,15 @@ export const ControlBoard: React.FC<McpVizProps> = ({items, accent}) => {
         const icon = it.icon ?? (o ? o.glyph : 'lucide:box');
         return (
           <div key={i} style={{
-            flex: wide ? `1 1 ${100 / Math.min(n, 3) - 6}%` : '1 1 46%',
-            minWidth: 0, minHeight: cardH * v.scale, boxSizing: 'border-box',
-            display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
-            justifyContent: 'space-between', gap: 9 * v.scale,
+            flex: v.vertical ? '1 1 100%' : (wide ? `1 1 ${100 / Math.min(n, 3) - 6}%` : '1 1 46%'),
+            minWidth: 0,
+            minHeight: (v.vertical ? Math.min(cardH, 900 / n) : cardH) * v.scale,
+            boxSizing: 'border-box',
+            display: 'flex',
+            flexDirection: v.vertical ? 'row' : 'column',
+            alignItems: v.vertical ? 'center' : 'flex-start',
+            justifyContent: v.vertical ? 'flex-start' : 'space-between',
+            gap: v.vertical ? 18 * v.scale : 9 * v.scale,
             padding: `${20 * v.scale}px ${18 * v.scale}px`,
             borderRadius: v.rad(14),
             border: `${2 * v.scale}px solid ${on > 0.4 ? hexA(col, 0.9) : hexA(v.t.colors.panelBorder, 0.45)}`,
@@ -110,8 +115,9 @@ export const ControlBoard: React.FC<McpVizProps> = ({items, accent}) => {
             boxShadow: on > 0.6 && v.t.style.glow > 0
               ? `0 0 ${34 * v.scale * v.t.style.glow}px ${hexA(col, 0.22)}` : undefined,
           }}>
-            <div style={{display: 'flex', flexDirection: 'column', gap: 9 * v.scale}}>
-              <AssetIcon asset={icon} size={glyph * v.scale} bare tint={on > 0.4 ? col : v.dim} />
+            <AssetIcon asset={icon} size={glyph * v.scale} bare tint={on > 0.4 ? col : v.dim} />
+            <div style={{display: 'flex', flexDirection: 'column', gap: 6 * v.scale,
+                         minWidth: 0, flex: v.vertical ? 1 : undefined}}>
               <div style={{...v.mono(lab), fontWeight: 800, color: on > 0.4 ? v.t.colors.text : v.dim}}>
                 {it.label}
               </div>

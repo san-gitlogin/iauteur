@@ -1,0 +1,174 @@
+{
+ "meta": {
+  "topic": "Resources and Prompts",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "A resource lets your code put data in front of Claude before Claude ever asks for it.",
+  "openLoop": "Same note, same answer. One route makes Claude wait, and one doesn't.",
+  "analogy": "THE ROUTE - a URI is a road, and a braced segment is the turning that takes an argument.",
+  "seo": {
+   "title": "Why MCP Resources Beat A Tool Call",
+   "hook": "Sometimes your app already knows what Claude is about to need.",
+   "description": "A resource lets your code put data in front of Claude before Claude ever asks for it.",
+   "tags": [
+    "mcp",
+    "resources",
+    "prompts",
+    "model context protocol",
+    "claude",
+    "python"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "FETCHED BEFORE ASKED",
+  "badge": "Resources",
+  "asset": "si:anthropic",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "Sometimes your app already knows what Claude is about to need.",
+   "data": {
+    "headline": "FETCHED BEFORE ASKED",
+    "subtext": "resources",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "MCP_URI",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpUri",
+   "headline": "A URI is [a route]",
+   "color": "orange",
+   "caption": "static and dynamic",
+   "codeTitle": "server.py",
+   "premise": "A resource URI works like a URL. The scheme is yours to choose, and a braced segment becomes a function argument.",
+   "durationFrames": 920,
+   "narration": "A resource is data your own code fetches, and each one is addressed by a URI. |Notes colon slash slash all is a static resource, ^which always returns the same kind of thing \u2014 here, the list of every filename. The scheme at the front is yours to invent; MCP doesn't care whether you call it notes or files or anything else. |Notes colon slash slash, open brace, i d, close brace is the interesting one. ^That braced segment is a wildcard, and whatever the caller puts there arrives as the i d parameter of your function, which is why the signature underneath takes i d as a string. So one decorator gives you an endpoint for the whole collection, and another gives you an endpoint for any single item, without you writing a router.",
+   "lines": [
+    {
+     "text": "@mcp.resource(\"notes://all\")",
+     "detail": "Static: no wildcards, no parameters.",
+     "teach": true
+    },
+    {
+     "text": "def list_all_notes():"
+    },
+    {
+     "text": "    return list(notes.keys())"
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "@mcp.resource(\"notes://{id}\")",
+     "detail": "The braced part becomes an argument.",
+     "teach": true
+    },
+    {
+     "text": "def get_note(id: str):"
+    },
+    {
+     "text": "    return notes[id]"
+    }
+   ],
+   "cells": [
+    {
+     "label": "notes://all",
+     "sub": "static \u2014 the whole collection",
+     "mark": true,
+     "out": [
+      "todo.md",
+      "ideas.md"
+     ]
+    },
+    {
+     "label": "notes://{id}",
+     "sub": "dynamic \u2014 {id} arrives as a parameter",
+     "mark": true,
+     "out": [
+      "Buy groceries, call mom, fix the bug"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "MCP_MENTION",
+   "transition": "push",
+   "background": "zoneC",
+   "key": "mcpMention",
+   "headline": "Fetched [before Claude looks]",
+   "color": "green",
+   "caption": "two routes, one clock",
+   "premise": "The user types @todo.md and asks a question. The note can reach Claude two ways \u2014 and only one of them makes Claude wait.",
+   "durationFrames": 940,
+   "narration": "Here's the trick the course calls at mentions, and it's the clearest example of why resources exist. The user types at todo dot m d, then asks what's on my list. ^Route one: your app spots the at mention, calls read resource itself, and pastes the note's contents straight into the prompt before sending it. Claude opens the message and the note is already there, so Claude answers immediately \u2014 one hop. ^Route two is the tool version. Claude reads the question, realises it needs the note, asks your code for it, waits while you fetch it, and only then answers. Three hops, and two of them are round trips through the model. Same note, same answer, and the difference is that in route one your code already knew what was needed, because the user told it by typing that at sign.",
+   "cells": [
+    {
+     "label": "@todo.md \u2014 your code fetches",
+     "sub": "1 hop \u00b7 content is in the prompt already",
+     "value": 34,
+     "mark": true,
+     "out": [
+      "read_resource"
+     ]
+    },
+    {
+     "label": "tool call \u2014 Claude fetches",
+     "sub": "3 hops \u00b7 ask, wait, then answer",
+     "value": 100,
+     "color": "red",
+     "mark": true,
+     "out": [
+      "Claude asks",
+      "you call",
+      "result back"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 280,
+   "narration": "Inject when your code already knows. It's one hop instead of three. Full course on the channel.",
+   "data": {
+    "message": "Resources and prompts",
+    "sub": "and the @ mention trick"
+   },
+   "anchors": []
+  }
+ ]
+}

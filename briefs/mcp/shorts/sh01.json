@@ -1,0 +1,187 @@
+{
+ "meta": {
+  "topic": "What MCP Actually Is",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "MCP is a standard socket, so the integration you need has probably already been written by somebody else.",
+  "openLoop": "Four services, four integrations, and none of them are your product. What if you didn't write any of them?",
+  "analogy": "THE DELIVERY PLATFORM - you don't sign every restaurant yourself; you plug into the one that already did.",
+  "seo": {
+   "title": "What MCP Actually Is \u2014 In One Minute",
+   "hook": "You want Claude to reach your GitHub, your Slack, your database. That plumbing is weeks of",
+   "description": "MCP is a standard socket, so the integration you need has probably already been written by somebody else.",
+   "tags": [
+    "mcp",
+    "model context protocol",
+    "claude",
+    "anthropic",
+    "ai tools",
+    "integration"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "STOP WRITING GLUE",
+  "badge": "What is MCP",
+  "asset": "si:anthropic",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "You want Claude to reach your GitHub, your Slack, your database. That plumbing is weeks of work.",
+   "data": {
+    "headline": "STOP WRITING GLUE",
+    "subtext": "what is mcp",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "MCP_CONTROL",
+   "transition": "wipe",
+   "background": "zoneA",
+   "key": "mcpControl",
+   "headline": "Why a standard [had to exist]",
+   "color": "orange",
+   "caption": "the multiplication",
+   "premise": "Every app that wants a tool, times every tool that exists. Without a standard, somebody writes each square.",
+   "durationFrames": 820,
+   "narration": "It's worth seeing why anyone bothered inventing a protocol, because the answer is a multiplication. ^Say there are four apps that want tool access \u2014 your editor, a chat client, an I D E, a terminal agent. ^And four services worth reaching: GitHub, Slack, Postgres, the filesystem. ^Without a standard, that's sixteen separate integrations, because every app writes its own version of every connection, and none of that work is shareable. ^With a standard, it's four servers and four clients \u2014 eight pieces instead of sixteen, and the numbers diverge fast as either side grows. That's the entire economic argument for MCP, and it's why the shape caught on so quickly.",
+   "cells": [
+    {
+     "label": "4 apps",
+     "sub": "editor \u00b7 chat \u00b7 IDE \u00b7 agent",
+     "owner": "code",
+     "mark": true,
+     "icon": "lucide:layout-grid"
+    },
+    {
+     "label": "4 services",
+     "sub": "GitHub \u00b7 Slack \u00b7 Postgres \u00b7 files",
+     "owner": "code",
+     "mark": true,
+     "icon": "lucide:cloud"
+    },
+    {
+     "label": "without a standard",
+     "sub": "4 \u00d7 4 = 16 integrations, none shared",
+     "owner": "code",
+     "mark": true,
+     "icon": "lucide:git-fork"
+    },
+    {
+     "label": "with MCP",
+     "sub": "4 servers + 4 clients = 8 pieces",
+     "owner": "ai",
+     "mark": true,
+     "icon": "lucide:network"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "MCP_WIRE",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpWire",
+   "headline": "Server, client, [and a wire]",
+   "color": "blue",
+   "caption": "the two words",
+   "codeTitle": "client.py",
+   "premise": "Your app is the client. Somebody else's program is the server. Every arrow is one JSON-RPC message crossing between them.",
+   "ends": [
+    "YOUR APP",
+    "MCP SERVER"
+   ],
+   "durationFrames": 820,
+   "narration": "So concretely, here's the shape. Your app opens a connection to a server, |and the first thing your app asks is what can you do. ^The server answers with a list of tools, each carrying a name and a description. |Then when you want one of those tools run, your app calls it by name with arguments, ^and the server runs the function and hands back the result. That's the entire protocol at this level \u2014 a question, a list, a call, a result \u2014 which means everything else in this course hangs off those four messages. Everything else in this course is detail hanging off those four messages.",
+   "lines": [
+    {
+     "text": "async with stdio_client(params) as (r, w):"
+    },
+    {
+     "text": "    async with ClientSession(r, w) as client:"
+    },
+    {
+     "text": "        await client.initialize()"
+    },
+    {
+     "text": "        tools = await client.list_tools()",
+     "detail": "Ask the server what it can do.",
+     "teach": true
+    },
+    {
+     "text": "        result = await client.call_tool(",
+     "detail": "Run one, by name, with arguments.",
+     "teach": true
+    },
+    {
+     "text": "            \"read_note\", {\"note_id\": \"todo.md\"})"
+    }
+   ],
+   "cells": [
+    {
+     "label": "3 tools",
+     "sub": "read_note \u00b7 edit_note \u00b7 list_notes",
+     "dir": "back",
+     "mark": true,
+     "out": [
+      "{\"result\":{\"tools\":[",
+      "  {\"name\":\"read_note\",",
+      "   \"description\":\"Read a note\"}]}}"
+     ]
+    },
+    {
+     "label": "the note text",
+     "sub": "whatever the function returned",
+     "dir": "back",
+     "mark": true,
+     "out": [
+      "{\"result\":{\"content\":[",
+      "  {\"type\":\"text\",",
+      "   \"text\":\"Buy groceries...\"}]}}"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 280,
+   "narration": "A server is somebody else's integration, packaged. That's MCP. Full course on the channel.",
+   "data": {
+    "message": "What MCP actually is",
+    "sub": "and the problem it removes"
+   },
+   "anchors": []
+  }
+ ]
+}

@@ -1,0 +1,216 @@
+{
+ "meta": {
+  "topic": "Notifications",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "Two server calls and two client callbacks turn a frozen-looking tool into one that reports itself.",
+  "openLoop": "Thirty seconds of nothing. Is it working, or has it died?",
+  "analogy": "THE KITCHEN CALL-BACK - the chef shouting 'two minutes' so you know the order isn't lost.",
+  "seo": {
+   "title": "Stop Your MCP Tool Looking Frozen",
+   "hook": "A tool that runs for thirty seconds and says nothing looks broken.",
+   "description": "Two server calls and two client callbacks turn a frozen-looking tool into one that reports itself.",
+   "tags": [
+    "mcp",
+    "progress",
+    "notifications",
+    "cancellation",
+    "python",
+    "claude",
+    "anthropic"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "WORKING, OR DEAD?",
+  "badge": "Progress",
+  "asset": "si:anthropic",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "A tool that runs for thirty seconds and says nothing looks broken.",
+   "data": {
+    "headline": "WORKING, OR DEAD?",
+    "subtext": "progress",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "MCP_PROGRESS",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpProgress",
+   "headline": "The server [speaks up]",
+   "color": "blue",
+   "caption": "two calls",
+   "codeTitle": "server.py",
+   "premise": "A tool that takes thirty seconds is silent by default. These two calls are the only way the user learns anything is happening.",
+   "durationFrames": 920,
+   "narration": "On the server side there're exactly two calls worth knowing, and they do different jobs. |C t x dot info sends a log line \u2014 a human sentence about what's happening right now. ^Searching Wikipedia, for instance. |C t x dot report progress sends a number instead: how far through, out of how much. ^Thirty out of a hundred. |As the work moves on you send more of both, ^writing report, ^and eighty percent. Neither call changes what the tool returns, because they're side channels that travel while the tool is still running \u2014 which is exactly why they're useful.",
+   "lines": [
+    {
+     "text": "@mcp.tool()"
+    },
+    {
+     "text": "async def research(topic: str, ctx: Context):"
+    },
+    {
+     "text": "    await ctx.info(\"Searching Wikipedia...\")",
+     "detail": "A human sentence about right now.",
+     "teach": true
+    },
+    {
+     "text": "    await ctx.report_progress(30, 100)",
+     "detail": "A number: how far, out of how much.",
+     "teach": true
+    },
+    {
+     "text": "    data = await scrape(topic)"
+    },
+    {
+     "text": "    await ctx.info(\"Writing report...\")",
+     "detail": "More of both, as the work moves.",
+     "teach": true
+    },
+    {
+     "text": "    await ctx.report_progress(80, 100)"
+    },
+    {
+     "text": "    return summarize(data)"
+    }
+   ],
+   "cells": [
+    {
+     "label": "Searching Wikipedia\u2026",
+     "mark": true
+    },
+    {
+     "label": "30% done",
+     "value": 30,
+     "mark": true
+    },
+    {
+     "label": "Writing report\u2026",
+     "mark": true
+    },
+    {
+     "label": "80% done",
+     "value": 80,
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "MCP_PROGRESS",
+   "transition": "push",
+   "background": "zoneA",
+   "key": "mcpProgress",
+   "headline": "And letting them [stop it]",
+   "color": "blue",
+   "caption": "the other half",
+   "codeTitle": "server.py",
+   "premise": "Progress tells the user the work is alive. Cancellation lets them end it. A long tool needs both.",
+   "durationFrames": 900,
+   "narration": "Progress solves half the problem. Here's the other half, and the spec lists it as a core utility alongside progress: cancellation. |If a request can run for thirty seconds, the person watching needs a way to stop it \u2014 otherwise your only honest option is making them wait for something they no longer want. ^When the client cancels, your tool's async task is cancelled underneath you, |so the shape that saves you is an ordinary try and finally: ^clean up whatever you opened, then let the cancellation propagate. |Swallowing it is the mistake \u2014 ^catch and ignore, and you've built a tool nobody can stop. ^And if the work is genuinely long, minutes rather than seconds, that's what the Tasks extension is for: it hands back a durable handle you poll, instead of holding a request open and hoping.",
+   "lines": [
+    {
+     "text": "@mcp.tool()"
+    },
+    {
+     "text": "async def research(topic: str, ctx: Context):"
+    },
+    {
+     "text": "    try:",
+     "detail": "A long request must be stoppable.",
+     "teach": true
+    },
+    {
+     "text": "        await ctx.report_progress(30, 100)"
+    },
+    {
+     "text": "        return await scrape(topic)"
+    },
+    {
+     "text": "    finally:"
+    },
+    {
+     "text": "        await session.aclose()   # always runs",
+     "detail": "Clean up, then let the cancel propagate.",
+     "teach": true
+    },
+    {
+     "text": ""
+    },
+    {
+     "text": "    # never: except asyncio.CancelledError: pass",
+     "detail": "That builds a tool nobody can stop.",
+     "teach": true
+    }
+   ],
+   "cells": [
+    {
+     "label": "client cancels",
+     "sub": "your async task is cancelled underneath you",
+     "mark": true
+    },
+    {
+     "label": "try / finally",
+     "sub": "clean up, then let it propagate",
+     "mark": true
+    },
+    {
+     "label": "never swallow it",
+     "sub": "catch-and-ignore = unstoppable tool",
+     "mark": true
+    },
+    {
+     "label": "minutes, not seconds?",
+     "sub": "that is what the Tasks extension is for",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 280,
+   "narration": "Report progress, and let them cancel. Full course on the channel.",
+   "data": {
+    "message": "Notifications and cancellation",
+    "sub": "proving a tool is alive"
+   },
+   "anchors": []
+  }
+ ]
+}

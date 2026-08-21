@@ -1,0 +1,157 @@
+{
+ "meta": {
+  "topic": "The Three Primitives",
+  "format": "short",
+  "fps": 30,
+  "screenplay": "explainer",
+  "onePayoff": "Tools, resources and prompts differ by one thing only \u2014 who pulls the trigger.",
+  "openLoop": "Three words that look interchangeable. Pick the wrong one and your feature fights you forever.",
+  "analogy": "THE RESTAURANT - the kitchen, the menu board, and the chef's special button.",
+  "seo": {
+   "title": "Tools vs Resources vs Prompts \u2014 The Only Question That Matters",
+   "hook": "Tools, resources, prompts. People mix them up constantly, and one question tells them apar",
+   "description": "Tools, resources and prompts differ by one thing only \u2014 who pulls the trigger.",
+   "tags": [
+    "mcp",
+    "tools",
+    "resources",
+    "prompts",
+    "model context protocol",
+    "claude"
+   ],
+   "hashtags": [
+    "#mcp",
+    "#claude",
+    "#anthropic",
+    "#python",
+    "#thenbxstudio"
+   ]
+  }
+ },
+ "brand": {
+  "theme": "moderndark",
+  "design": "moderndark",
+  "themeLight": "daylight",
+  "background": "grid",
+  "channel": "THE NBX STUDIO",
+  "logo": "img:channel_logo.png"
+ },
+ "cover": {
+  "title": "WHO PULLS THE TRIGGER",
+  "badge": "3 Primitives",
+  "asset": "si:anthropic",
+  "frames": 2
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "type": "HOOK",
+   "background": "zoneA",
+   "durationFrames": 230,
+   "narration": "Tools, resources, prompts. People mix them up constantly, and one question tells them apart.",
+   "data": {
+    "headline": "WHO PULLS THE TRIGGER",
+    "subtext": "3 primitives",
+    "heroAsset": "si:anthropic",
+    "headlineAtWord": 1,
+    "heroAtWord": 8
+   },
+   "anchors": [
+    "headlineAtWord",
+    "heroAtWord"
+   ]
+  },
+  {
+   "id": "s02",
+   "type": "MCP_CONTROL",
+   "transition": "wipe",
+   "background": "zoneC",
+   "key": "mcpControl",
+   "headline": "Who pulls [the trigger]",
+   "color": "blue",
+   "caption": "the three primitives",
+   "premise": "One server, three kinds of thing it can expose. The only question that separates them is who decides when it runs.",
+   "durationFrames": 880,
+   "narration": "Every MCP server can expose exactly three kinds of thing, and they're told apart by who decides when each one runs. ^A tool is a function Claude chooses to call. Claude reads the description, decides the tool is relevant, and asks for it. The model is in charge. ^A resource is data your own code fetches, because your app decided it needed context \u2014 a dropdown that needs filling, a file the user just opened. Your code is in charge. ^And a prompt is a workflow the person triggers, typically by typing a slash command. The user is in charge. Same server, same decorator style \u2014 but three different owners, which is why picking the wrong one makes a feature fight you.",
+   "cells": [
+    {
+     "label": "Tools",
+     "sub": "functions the model chooses to call",
+     "owner": "ai",
+     "mark": true,
+     "icon": "lucide:wrench"
+    },
+    {
+     "label": "Resources",
+     "sub": "data your code fetches for context",
+     "owner": "code",
+     "mark": true,
+     "icon": "lucide:folder-open"
+    },
+    {
+     "label": "Prompts",
+     "sub": "workflows the person triggers",
+     "owner": "user",
+     "mark": true,
+     "icon": "lucide:sparkles"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "type": "MCP_CONTROL",
+   "transition": "push",
+   "background": "zoneC",
+   "key": "mcpControl",
+   "headline": "The same job, [three ways]",
+   "color": "orange",
+   "caption": "when the answer flips",
+   "premise": "One job \u2014 'show me the release notes' \u2014 built three different ways. The code is nearly identical; the control is not.",
+   "durationFrames": 900,
+   "narration": "Here's the test that makes the rule stick. Take one job \u2014 show me the release notes \u2014 and notice that all three primitives can do it. The code is nearly identical. What changes is who starts it. ^As a tool, Claude decides. You ask a question, Claude reasons that release notes would help, and calls it unprompted. Good when the model should judge relevance. ^As a resource, your app decides. The user opens the releases screen, so your code fetches the notes and puts them in context before anyone asks. Good when you already know they're needed. ^As a prompt, the user decides. They type slash release notes, and your pre-written instruction runs. Good when you want the same careful workflow every time. ^Same data, same server, three different owners \u2014 and picking the wrong one shows up as a feature that fires when nobody wanted it, or never fires when everybody did.",
+   "cells": [
+    {
+     "label": "as a Tool",
+     "sub": "Claude calls it unprompted, when it judges it relevant",
+     "owner": "ai",
+     "mark": true,
+     "icon": "lucide:wrench"
+    },
+    {
+     "label": "as a Resource",
+     "sub": "your screen opened, so your code fetched it first",
+     "owner": "code",
+     "mark": true,
+     "icon": "lucide:folder-open"
+    },
+    {
+     "label": "as a Prompt",
+     "sub": "they typed /release-notes and got the same careful workflow",
+     "owner": "user",
+     "mark": true,
+     "icon": "lucide:sparkles"
+    },
+    {
+     "label": "pick wrong",
+     "sub": "it fires unasked, or never fires at all",
+     "owner": "ai",
+     "mark": true,
+     "icon": "lucide:triangle-alert"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "type": "OUTRO_CTA",
+   "transition": "fade",
+   "background": "zoneA",
+   "durationFrames": 280,
+   "narration": "Ask who is in control, and the primitive names itself. Full course on the channel.",
+   "data": {
+    "message": "Tools vs Resources vs Prompts",
+    "sub": "one question settles it"
+   },
+   "anchors": []
+  }
+ ]
+}
