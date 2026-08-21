@@ -32,6 +32,54 @@ that keeps the picture and the proof attached to each other.
 running uv 0.12.5. Where a transcript is still missing it is listed at the end of
 `03-real-transcripts.md` and must be captured before that chapter is written.
 
+## The trap this course will fall into if nobody stops it
+
+**I watched the shipped Linux masterclass** (87 min, off the owner's SSD — the renders are
+gitignored, so this was the first time the cut itself could be inspected rather than its
+spec). Four frames sampled at arbitrary points, 240s / 900s / 2400s / 4000s. **All four
+were the same picture:**
+
+> a **terminal pane on the left**, and on the right a bordered box titled in caps
+> containing **seven or eight rows of text that light up in sequence**.
+
+That is verbatim LAW 0n — *"a bordered box containing rows of text that light up.
+Different data, identical picture."* LAW 0n was written on 2026-08-21 about the MCP cut;
+the Linux cut has the same disease, and it is the course the owner held up as the example
+of how many rounds it took to get right. Two further faults visible in the same frames:
+
+1. **The left pane was completely empty in two of the four** — no prompt, no command, a
+   blank 40% of the screen. Whatever second you land on, one pane is often doing nothing.
+   That is LAW 0i's defect restated: one pane idle while the other steps.
+2. **Both panes underfill.** Content sits in the top half; the bottom third is black.
+   LAW 0o fixed panes overflowing — this is the same measurement failure inverted, and a
+   dark panel on a dark ground reads as "unfinished slide", not as breathing room.
+3. In the `awk` frame, the title promised *"awk splits a line into fields"* and labelled
+   `$1 $2 $3` — **with no line on screen to split.** LAW 0k's corollary exactly: a card
+   that quotes a source must show the source.
+
+Sampling caveat, stated honestly: **four frames of an 87-minute video is indicative, not a
+census.** The programmatic contact-sheet sweep is what would prove the rate. But four for
+four is more than enough to set the rule, because uv is at *maximum* risk here — a CLI
+tool, taught on the `terminalcli` pack, is precisely the setup that drifts into
+terminal-left / list-right and never leaves.
+
+### The rule
+
+**THE RIGHT PANE IS NOT A LIST. If a beat's second pane is rows of text, the beat is not
+designed yet.**
+
+- The terminal pane earns its place only when a **real command with real output** is in it,
+  and it must be doing something for most of the scene — not empty at the top and frozen
+  after 11%.
+- The other pane holds **the object**: a parcel, a shelf, a rack, a bracket on a number
+  line, a folder opening. If the honest answer to "what object is it" is "rows saying what
+  is happening", cut the beat and design it again.
+- **Two panes is not the only layout.** The strongest beats in this course — the lone
+  script that runs itself, the resolver refusing — want ONE full-bleed picture, not a
+  split. Do not inherit the split as a default just because the previous course used it.
+- Explanatory text belongs in the **narration**, which is where it costs nothing. Putting
+  it on screen as a lit row is how a beat looks busy while teaching nothing.
+
 ## The spine analogy — established in 00, carried to 13
 
 Physical, culturally neutral, every element an object that can move (LAW 0d, LAW 0j):
@@ -73,15 +121,35 @@ That is transitive dependency, shown before it is defined.
 **Builds:** `PARCEL_LABEL`, `DEPENDENCY_UNFOLD`, `SHELF_CLASH`.
 **Closes the loop with:** "one command, and you never think about this again."
 
-### 01 — Install uv in one line
-**Promise:** installed and working, on your OS.
-**Teaches:** the standalone installer vs pip/brew/winget/scoop · why the standalone one
-needs no Python at all · verifying · what landed where (`uv cache dir`, `uv tool dir`,
-`uv python dir` — Windows AND Unix paths) · `uv self update` and when it does not work.
-**Real artefact:** the three `dir` outputs, both platforms.
-**Builds:** `INSTALL_ROUTES` (one destination, several roads — the roads are the argument).
-**Note:** this is a short chapter, ~4-5 min. Do not pad it; the floor is a floor for
-teaching, not for filler (LAW 0e r.6a).
+### 01 — Installing uv, and the chicken-and-egg problem it solves
+**Promise:** installed and working — and you will understand what you just ran.
+**Owner ruling (2026-08-21): installation IS a lesson.** My first draft treated it as
+four minutes of housekeeping and proposed folding it into 00. That was wrong, and the
+reason it was wrong is the actual spine of the chapter:
+
+> **A tool that installs Python cannot itself require Python.**
+
+That is a real idea, a beginner can hold it, and everything else in the chapter hangs
+off it. `pip` lives *inside* a Python installation — so pip can never fix a broken or
+missing Python, because it needs one to run. uv is a **Rust binary that sits beside
+Python**, which is why one line of curl works on a machine with no Python at all.
+Chapter 04 later downloads a whole CPython on demand; that is only possible because of
+what this chapter explains.
+
+**Teaches:** what the standalone installer actually is (a binary, not a package) ·
+**why `pip install uv` is the worst of the routes** — it puts uv inside the very thing
+uv exists to manage, and it is the one route where `uv self update` then fails ·
+what `curl … | sh` really does and why a beginner should be able to read it before
+running it · **PATH** — what it is, why the installer edits a shell profile, and why the
+terminal must be restarted (every beginner hits this) · verifying with `uv --version` and
+reading the build hash and date · where things land (`uv cache dir` / `tool dir` /
+`python dir`, Windows AND Unix) · that uninstalling is three commands, not a control panel.
+**Real artefact:** the three `dir` outputs on both platforms, and a real `uv --version`
+line including the commit hash and build date.
+**Builds:** `BOOTSTRAP_PARADOX` (pip drawn *inside* the Python it depends on, and dying
+with it; uv drawn *beside* it, still standing) and `INSTALL_ROUTES` (several roads, one
+destination, the viewer's OS road lighting — and the pip road marked as the trap).
+**Runtime:** comfortably ≥5:00 once the paradox is taught properly. It is not filler.
 
 ### 02 — Run any Python tool without installing it
 **Promise:** use a tool you have not installed.
@@ -244,7 +312,8 @@ LAW 0n's test applied to every row: *name the OBJECT the viewer sees.* If the an
 | 1 | `PARCEL_LABEL` | A sealed parcel with a printed label. The label's **version field** is the moving part — it changes and the parcel is a different thing. |
 | 2 | `DEPENDENCY_UNFOLD` | The parcel opens; a folded note extends listing three more; three more parcels arrive and stack. Real data: rich → markdown-it-py → mdurl, + pygments. |
 | 3 | `SHELF_CLASH` | One shelf, two projects reaching in. Both target one slot. The version tag flips; the first project's run turns red. **The failure is the animation**, not a caption about failure. |
-| 4 | `INSTALL_ROUTES` | One destination, several roads, the viewer's OS road lighting. The roads converge — that convergence is the point. |
+| 4 | `INSTALL_ROUTES` | One destination, several roads, the viewer's OS road lighting. One road (`pip install uv`) is marked as the trap and leads back into the thing being escaped. |
+| 4b | `BOOTSTRAP_PARADOX` | pip drawn **inside** a Python installation, tethered to it — the Python is removed and pip goes with it. uv drawn **beside** it, unaffected, still able to put a new Python back. The chapter-01 idea, and nothing on screen is a text row. |
 | 5 | `EPHEMERAL_BAY` | *Two modes.* **dissolve**: a machine wheels into a bay, runs, and the bay empties. **dock**: it bolts down and a shim arm extends out to PATH. The modes are the uvx-vs-install argument (the `CHANGE_RIPPLE` pattern). |
 | 6 | `SCRIPT_SELFCONTAINED` | A real `.py` file. Its `# /// script` header **lifts off the page**, becomes a small environment beside it, and the file runs inside it. |
 | 7 | `INTERPRETER_RACK` | A rack of engine blocks labelled 3.10 … 3.15, pypy, graalpy. Some solid (installed, real path), some ghosted (`<download available>`). One is pulled and a `.python-version` tag clips onto the project. |
@@ -336,9 +405,31 @@ On top of LAW 0f (name the subject, contractions, burstiness, teach don't narrat
 `casting.md` with a written reason per beat → build the components that survive that →
 spec → voiceover → sync → lint → stills → render.
 
-**Open decisions for the owner:**
-- Is `uv-course` (a single stitched full cut, as `mcp-course` and `dsa-dojo-course` exist)
-  wanted at the end? It costs one extra render pass, no extra authoring.
-- Chapter 01 is genuinely a ~4-minute chapter. The LAW 0e r.6a floor is 5:00 for a long
-  cut. Options: fold 01 into 00, or accept a short 01. I would fold it — installation is
-  not a lesson, and 00 needs the payoff.
+**Decided by the owner, 2026-08-21:**
+- **Chapter 01 stays, and installation IS a lesson.** I was wrong to propose folding it.
+  Rewritten around the chicken-and-egg problem — a tool that installs Python cannot itself
+  require Python — which is a real idea, carries a real component (`BOOTSTRAP_PARADOX`),
+  explains why `pip install uv` is the trap route, and sets up chapter 04's on-demand
+  CPython download. Comfortably ≥5:00 once taught properly.
+- **`uv-course` full cut is wanted.** A single stitched cut via
+  `scripts/build-course-cut.mjs`, as `mcp-course` and `dsa-dojo-course` already do. One
+  extra render pass, no extra authoring. Build it last, after all 14 chapters are final —
+  a course cut assembled from chapters that later change is wasted hours.
+
+## Calibration note — expect to BUILD far fewer than 16
+
+`topics/linux-commands-masterclass/component-register.md` opens with its own correction:
+
+> *"This register specified 98 new components. The shipped video does NOT follow it: it
+> was built from the 195 components already in the library plus **6** new ones … and
+> reaches 62 distinct components across 129 scenes."*
+
+98 planned, 6 built. That is the honest prior for this plan's 16. The 16 descriptions are
+the **acceptance test**, not a build list — `cast.mjs` runs first, an existing type is cast
+where it matches ~90%, and only the genuine gaps get built. Expect single digits.
+
+But note *which* correction the Linux course did **not** make: it reused the library
+heavily and still shipped the lit-rows template in four of four sampled frames. **Reusing
+more is not the same as depicting better.** The number to optimise is not "how few new
+components" — it is "how many beats show an object". Both failures are on the record now:
+over-building a register nobody follows, and under-designing the beats that get reused.

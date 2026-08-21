@@ -51,7 +51,17 @@ Three rules ship with the corollary:
 3. **Never run the publishing or destructive command to get a transcript.** A dry run or a test
    registry — and no token-shaped string on screen, ever (LAW 11).
 
-#### Added — two operational gotchas in `docs/STATE.md`
+#### Added — three operational gotchas in `docs/STATE.md`
+
+- **The renders are gitignored, so a fresh machine cannot review shipped work.** `topics/*/out/`
+  is the only copy of what shipped and it is untracked, so on a clone you have every spec and no
+  way to see a frame — and review silently degrades into reading JSON. That is how a visual defect
+  survives. Proven: four frames pulled from a backup of the 87-minute Linux masterclass showed the
+  same picture four times out of four — terminal pane left, a box of seven-or-eight lit text rows
+  right, both panes underfilled, the left one **empty** in two of the four. That is LAW 0n's exact
+  defect, in the cut that was held up as the good example. Get the mp4 and pull frames before
+  critiquing or extending any shipped course; if `out/` is absent, say so rather than reviewing the
+  spec and calling it a review.
 
 - **A checkout that is behind looks exactly like a repo that never had the work.** A session 21
   commits behind was asked about files and laws it could not see, and nearly reported them as
