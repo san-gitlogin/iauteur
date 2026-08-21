@@ -60,7 +60,7 @@
     "test-ui-walkthrough": "node scripts/test-ui-walkthrough.mjs",
     "test-asset-protocol": "node scripts/test-asset-protocol.mjs",
     "test-si-resolver": "node scripts/test-si-resolver.mjs",
-    "gate": "node scripts/check-manifest.mjs && node scripts/drift-check.mjs && node scripts/gen-schema.mjs --check && node scripts/gen-types.mjs --check && node scripts/test-normalize-fleet.mjs && node scripts/test-fix-prompt.mjs && node scripts/test-assemble.mjs && node scripts/test-ui-walkthrough.mjs && node scripts/test-asset-protocol.mjs && node scripts/test-si-resolver.mjs",
+    "gate": "node scripts/check-manifest.mjs && node scripts/drift-check.mjs && node scripts/gen-schema.mjs --check && node scripts/gen-types.mjs --check && node scripts/test-normalize-fleet.mjs && node scripts/test-fix-prompt.mjs && node scripts/test-assemble.mjs && node scripts/test-ui-walkthrough.mjs && node scripts/test-asset-protocol.mjs && node scripts/test-si-resolver.mjs && node scripts/check-viz-kinds.mjs",
     "cast": "node scripts/cast.mjs",
     "snap": "node scripts/snap.mjs",
     "publish-safety": "node scripts/check-publish-safety.mjs",

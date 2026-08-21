@@ -366,9 +366,38 @@ export const CommandStage: React.FC<{
   color?: SemColor;
   highlight?: string;
   stageTitle?: string;
-  children: React.ReactNode;
-}> = ({steps, state, promptLabel, cwd, color, highlight, stageTitle, children}) => {
+  /**
+   * 'split'    — terminal + effect pane (the default; every existing CMD_* scene).
+   * 'terminal' — terminal ONLY, full bleed, no effect pane.
+   *
+   * WHY 'terminal' EXISTS (2026-08-21). The stage used to render BOTH panes
+   * unconditionally. Four frames sampled at arbitrary points from the shipped
+   * 87-minute Linux cut showed the same picture every time — terminal left, a box of
+   * lit text rows right — and in TWO of the four the left pane was completely empty,
+   * a blank 40% of the screen, because that beat's terminal had nothing to say yet.
+   *
+   * A beat whose whole content is one screen failing, or a 2-3s silent hold on real
+   * output, has no second pane to draw. Forcing one produces either dead space or a
+   * list invented to fill it — which is LAW 0n's defect arriving through the layout
+   * rather than through the author. Passing 'terminal' is the honest answer, and it
+   * also means the split stops being the automatic shape of every beat.
+   */
+  layout?: 'split' | 'terminal';
+  /** Optional in 'terminal' layout, which has no effect pane to fill. */
+  children?: React.ReactNode;
+}> = ({steps, state, promptLabel, cwd, color, highlight, stageTitle, layout = 'split', children}) => {
   const {scale, vertical} = useScale();
+
+  // Terminal-only: the pane takes the whole stage rather than 46% of it, so a real
+  // transcript can breathe instead of wrapping inside half a frame.
+  if (layout === 'terminal') {
+    return (
+      <div style={{display: 'flex', width: '100%', height: '100%', alignItems: 'stretch'}}>
+        <TerminalPane steps={steps} state={state} promptLabel={promptLabel} cwd={cwd} color={color} highlight={highlight} />
+      </div>
+    );
+  }
+
   // WIDE: terminal left, effect right — the causal reading order, left to right.
   // VERTICAL: a RE-ARRANGEMENT, not a resize (component_authoring §5a-2). The
   // terminal takes the top third (it is short, monospaced, and reads fine narrow)

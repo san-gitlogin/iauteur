@@ -1,4 +1,5 @@
 import React from 'react';
+import {UnknownKind} from './unknownKind';
 import {interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import {useTheme, wordToFrame} from './themes';
 import {SemColor} from './types';
@@ -2336,7 +2337,11 @@ const REGISTRY: Record<string, React.FC<VizProps>> = {
 };
 
 export const Depiction: React.FC<VizProps & {kind: string}> = ({kind, ...props}) => {
-  const R = REGISTRY[kind] ?? FileContent;
+  // An unknown kind used to fall back to FileContent — a real picture, confidently drawn,
+  // for a beat that asked for something else. See src/unknownKind.tsx for why that is now
+  // a visible failure instead of a silent substitution.
+  const R = REGISTRY[kind];
+  if (!R) return <UnknownKind kind={kind} registry="linuxViz REGISTRY" />;
   return <R {...props} />;
 };
 

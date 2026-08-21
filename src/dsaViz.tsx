@@ -1,4 +1,5 @@
 import React from 'react';
+import {UnknownKind} from './unknownKind';
 import {interpolate, useCurrentFrame} from 'remotion';
 import {useTheme, wordToFrame} from './themes';
 import {SemColor} from './types';
@@ -1325,6 +1326,8 @@ const VIZ: Record<string, React.FC<DsaVizProps>> = {
   'signal-match': SignalMatch, 'brute-vs-opt': BruteVsOpt, 'framework': FrameworkLadder,
 };
 export const AlgoViz: React.FC<DsaVizProps & {kind: string}> = ({kind, ...p}) => {
-  const R = VIZ[kind] ?? SignalMatch;
+  // Was `?? SignalMatch` — a typo drew a real, wrong picture. See src/unknownKind.tsx.
+  const R = VIZ[kind];
+  if (!R) return <UnknownKind kind={kind} registry="dsaViz VIZ" />;
   return <R {...p} />;
 };

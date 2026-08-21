@@ -1,4 +1,5 @@
 import React from 'react';
+import {UnknownKind} from './unknownKind';
 import {useCurrentFrame} from 'remotion';
 import {SemColor} from './types';
 import {hexA} from './ui';
@@ -1477,6 +1478,8 @@ const MCP_VIZ: Record<string, React.FC<McpVizProps>> = {
   'deprecation': DeprecationCard,
 };
 export const McpViz: React.FC<McpVizProps & {kind: string}> = ({kind, ...p}) => {
-  const R = MCP_VIZ[kind] ?? ControlBoard;
+  // Was `?? ControlBoard` — a typo drew a real, wrong picture. See src/unknownKind.tsx.
+  const R = MCP_VIZ[kind];
+  if (!R) return <UnknownKind kind={kind} registry="mcpViz MCP_VIZ" />;
   return <R {...p} />;
 };
