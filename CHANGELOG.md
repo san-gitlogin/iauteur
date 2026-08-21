@@ -6,14 +6,94 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 > **Scope note.** iAuteur is a video *factory*: the repo ships the engine (components, linter,
-> pipeline scripts, design packs) — the videos themselves live in `topics/`, which is local
-> content and deliberately untracked. Entries below describe engine changes. Where a rule was
-> learned by shipping a real series, the measurement that produced it is recorded, because the
-> measurement is the part that generalises.
+> pipeline scripts, design packs). The videos live in `topics/`. As of 2026-08-21 their **specs**
+> (`long.json`, `shorts.json`) are tracked — they are the authored work product and 1.3 MB for the
+> whole channel — while `topics/*/out/` renders and `public/audio/` stay untracked, being large and
+> regenerable. Entries below describe engine changes. Where a rule was learned by shipping a real
+> series, the measurement that produced it is recorded, because the measurement is the part that
+> generalises.
 
 ---
 
 ## [Unreleased]
+
+### 2026-08-21 — the MCP course, and the layout bug wearing four faces
+
+#### Fixed — one cause behind four separate owner complaints
+
+`stackBudget()` returned the constant `vertical ? 960 : 430`: a guess at a pane's inner height that
+ignored everything already in the pane. A three-line premise ate 120px and every depiction still
+sized itself to the full 960, so the surplus left through the bottom border.
+
+| Symptom reported | Was actually |
+|---|---|
+| a premise sitting on top of the machines in a short | pane overflowing upward — `justify-content: center` overflows **both** ways |
+| a JSON payload overrunning the vars strip | same surplus, leaving through the floor |
+| three cards ballooning until the last was cut off by the frame | row caps of 156px against a budget that was never measured |
+| "the graph is kinda like a patty inside a burger" | a fixed 168px plot floating in a 700px card |
+
+Panes now measure — stage height, less the caption bar, less the *wrapped* premise, less the vars
+strip, less padding — and publish the remainder through `BudgetCtx`. `StatePane` and the Linux
+effect pane both provide it. Recorded as **LAW 0o**, with the rules that fell out of it:
+
+- Fit **both** axes. `CodePane` sized its font by height alone, so a 52-character line needed 1060px
+  of a 976px pane and was sliced mid-token.
+- Travel by your own width, never half of it. A pill at `left: pct%` with `translateX(-50%)` has
+  half of itself outside the track at both ends of its run — which is why a message envelope
+  "just gets hidden behind the container" the moment it moved.
+- A squashed viewBox squashes **type**. `preserveAspectRatio="none"` distorted every chart axis
+  label; they are HTML over the plot now, strokes are `non-scaling-stroke`, and the trace head is a
+  div rather than an ellipse.
+- Breathing room is not smaller type. Space comes from carrying less on the beat.
+
+#### Fixed — icon weight
+
+Lucide's 2px stroke is drawn for a 24px glyph; at the 50-100px sizes a diagram node uses it renders
+as a 6-8px marker line. Stroke now thins as the glyph grows, holding optical weight constant.
+
+#### Added — 2 scene types (library **339 → 341**), and 3 depictions rebuilt
+
+Written against **LAW 0n**: name the object the viewer should see; if the answer is "a row that
+says X", that is a caption, not a depiction.
+
+| Type | What it draws |
+|---|---|
+| `MCP_MESH` | the M×N integration explosion — four apps wired to four services one wire at a time until sixteen cross the frame, then a hub lands and eight re-route through it. The tally reads the wires actually on screen, so the arithmetic cannot drift from the drawing. |
+| `MCP_REACH` | the hard line: the model on one side, your files/database/calendar on the other, each locked or reachable, your code the only crossing. |
+
+Rebuilt: `MCP_WIRE` is now a running sequence diagram (lifelines, the crossed half of the wire drawn
+behind the envelope, the addressed machine lighting on arrival, payload docked to the side that
+*received* it). `MCP_CONTROL` became a switchboard — deciders in their own column, a curve from each
+primitive back to whoever fires it, a charge travelling down it on the beat; two primitives owned by
+the same actor visibly share a wire, which no arrangement of cards can show.
+
+#### Fixed — chapter one answered the wrong question (**LAW 0p**)
+
+It opened on `client.messages.create()` and its arguments: every sentence true, all of it answering
+a question a first-time viewer has not asked. A title is a promise. It now opens on what Claude *is*
+and what it cannot touch, then on your code as the only thing on both sides of that line; the API
+anatomy arrives as the answer to a question the viewer is by then holding.
+
+Also: the series shipped 00-09, 11, 12 — twelve chapters and no chapter ten, because two slugs were
+typed from the brief index rather than the chapter index. Numbering with a hole is a defect nobody
+reviewing content will catch and every viewer scanning a playlist will.
+
+#### Added — brief builders can no longer destroy the corrections
+
+The `.py` builders and the `.json` briefs beside them had diverged; the JSON was the correct copy.
+Re-running them proved it: nine dropped scenes outright, and the rest reverted *content* while
+keeping the scene list identical — chapter four's builder still wrote `FastMCP`, the class name
+corrected to `MCPServer` weeks earlier. Nothing downstream would complain.
+
+All builders now write through `briefs/_guard.write()`, which compares the whole document against
+the JSON on disk, refuses on any difference, and dumps what it wanted to `<name>.candidate.json` for
+diffing. 19 refuse; the ones that still write are the short generators. They also no longer contain
+hardcoded `/Users/...` paths, so they run on any machine.
+
+`briefs/linux/rewrite/regen.py` regenerates all 109 `src/scenes/Cmd*.tsx` from a table; running it
+during this audit reverted the multi-line command-output fix and the 9:16 stage change across every
+one of them. `git diff` caught it. It is now named as do-not-run in `briefs/README.md`.
+
 
 Everything below was learned producing a 19-episode tutorial course end to end. The recurring
 theme: **the linter is where a lesson becomes permanent.** A rule written only in prose gets

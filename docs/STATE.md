@@ -24,8 +24,10 @@ On Windows, prefix Python with `PYTHONIOENCODING=utf-8` or the seals crash on `�
 
 | Path | What |
 |---|---|
-| `topics/<slug>/long.json` + `shorts.json` | one folder per video. **Gitignored** — local content, not repo code |
-| `src/scenes/` | the 195 scene components |
+| `topics/<slug>/long.json` + `shorts.json` | one folder per video. **Tracked** since 2026-08-21 — the authored work, 1.3 MB for the channel |
+| `topics/<slug>/out/` | renders, thumbnails, upload kits. **Gitignored** — 3.9 GB and regenerable |
+| `briefs/` | the source each spec was authored from. **The JSON is the truth, not the `.py`** — read `briefs/README.md` before running any builder |
+| `src/scenes/` | the 339 scene components (341 registered types) |
 | `src/designs/<pack>/` | 30 design packs (layout/motion overrides) |
 | `src/themes.ts` | 42 themes (38 dark + 4 light) |
 | `scripts/lib/manifest.mjs` | **the single source of truth** for every component's data contract + a valid `example` |
@@ -43,6 +45,39 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 ```
 
 ## Recent work
+
+### 2026-08-21 — MCP course: the pane that never measured itself, and a chapter that answered the wrong question
+
+**Four owner complaints, one cause.** `stackBudget()` was the constant `vertical ? 960 : 430` — a
+guess at a pane's inner height that ignored what was already in the pane. A three-line premise took
+120px and every depiction still sized to the full 960, so the surplus left through the bottom
+border: a premise sitting on a short's machines, a payload overrunning the vars strip, three cards
+ballooning until the frame cut the last one off. The Linux chart failed inverted — a fixed 168px
+plot floating in a 700px card ("a patty inside a burger"). Panes measure now and publish through
+`BudgetCtx`; see **LAW 0o** for the full rule set, including that `justify-content: center`
+overflows *both* ways and that a pill at `left: pct%` + `translateX(-50%)` is always half outside
+its track.
+
+**New depictions.** `MCP_MESH` (the M×N explosion, one wire at a time, collapsing through a hub —
+tally reads the wires actually drawn) and `MCP_REACH` (the hard line, with your code as the only
+crossing). `MCP_WIRE` rebuilt as a running sequence diagram; `MCP_CONTROL` rebuilt as a switchboard
+that wires each primitive to whoever fires it. Library **339 → 341** types.
+
+**Chapter one rewritten (LAW 0p).** It opened on `client.messages.create()` — true, and answering a
+question a beginner has not asked. It now establishes what Claude is and what it cannot reach before
+any argument of any call. The series also shipped 00-09, 11, 12: twelve chapters, no chapter ten.
+Renumbered.
+
+**Brief builders are now guarded.** The `.py` files had drifted from the `.json` beside them and the
+JSON was correct. Re-running them dropped scenes (nine builders) or reverted content while keeping
+the scene list identical — chapter four still wrote `FastMCP` for the class corrected to
+`MCPServer`. All builders write through `briefs/_guard.write()`, which refuses on any difference and
+dumps a `.candidate.json` to diff. Hardcoded `/Users/...` paths are gone, so they run anywhere.
+
+⚠️ **`briefs/linux/rewrite/regen.py` regenerates all 109 `src/scenes/Cmd*.tsx` from a table.**
+Running it during this audit reverted the multi-line command-output fix and the 9:16 stage change
+across every one of them. `git diff` caught it; nothing else would have. Do not run it.
+
 
 ### 2026-08-18 — `linux-commands-masterclass` shipped (87 min), and the rebuild that got it there
 The first cut (38 min) was rejected on three counts; all three turned out to be measurable defects
