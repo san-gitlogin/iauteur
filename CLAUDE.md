@@ -240,6 +240,29 @@ Seventeen lines in a Shorts pane forces ~12px, which is unreadable on a phone. C
 output until the type can stay large. Owner: *"viewability is professional and feasible (not too
 short for users to stare) ... dont care if length shoots up, the content must be right."*
 
+Corollary — **CAPTURE THE ARTEFACT BY RUNNING THE TOOL. Documentation is a SECONDARY source**
+(2026-08-21, authoring the uv course). LAW 0m says show the real artefact; this says where to get
+one. A docs page is prose *about* the tool, and it drifts. Measured in a single afternoon's
+research: the docs render a build constraint as `<0.13` where the tool writes `<0.13.0`; the
+projects guide shows a `.git/` directory that `init` did not create; and the page titled
+*Benchmarks* contains **no benchmark numbers at all**, only a pointer elsewhere — so a speed claim
+copied from it would have been invented. Install the tool, run every command the course will show,
+and paste the transcript. A plausible-looking terminal transcript is the exact failure LAW 0m
+exists for, and writing one from a docs page feels like sourcing while producing fiction.
+Three rules fall out of it:
+1. **Pin the version you teach.** The machine had uv 0.10.9; current was 0.12.5, and v0.12 changed
+   what `uv init` writes. Capturing on the stale binary would have taught a file tree that no
+   longer exists. Install the exact current release **isolated** (`UV_INSTALL_DIR` into the
+   scratchpad) — never upgrade the owner's machine as a side effect of research.
+2. **A capture from a real machine carries the operator's identity.** `uv init` stamped the
+   owner's GitHub name and noreply email into `pyproject.toml` from the local git config, and the
+   interpreter list printed real install paths off a second drive. `briefs/` is TRACKED and the
+   repo is PUBLIC. Grep every capture for names, emails and local paths before it is committed or
+   drawn (LAW 11, and the brand-identity note under STANDING DEFAULTS).
+3. **Never run the destructive or publishing command for a transcript.** `uv publish` against real
+   PyPI, with a real token, to get a pretty screenshot, is not a capture — it is a release. Dry-run
+   or a test registry, and no token-shaped string on screen ever.
+
 ## LAW 0n — A REGISTERED TYPE IS NOT A PICTURE (owner verdict, 2026-08-21)
 Owner, on the MCP cut: *"ALL FUCKN VIDEOS have the same container, text, highlight, some arrows,
 highlights speak ... thats boring af. And its the same thing that I repeatedly asked not to do in

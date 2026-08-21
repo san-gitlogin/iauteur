@@ -17,6 +17,50 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### 2026-08-21 — research is done by running the tool, not by reading about it
+
+#### Added — LAW 0m corollary: capture the artefact, documentation is a secondary source
+
+LAW 0m already required real artefacts with real data on screen. It did not say where to get one,
+and the assumed answer — the project's own documentation — turns out to be unsafe. Measured while
+researching a new course, in a single pass:
+
+| The docs said | The tool actually did |
+|---|---|
+| build constraint `uv_build>=0.12.5,<0.13` | writes `<0.13.0` |
+| `uv init` creates a `.git/` directory | it did not |
+| a page titled **Benchmarks** | contains **no benchmark numbers at all**, only a pointer elsewhere |
+
+The third is the dangerous one: a "10× faster" figure lifted from a page called Benchmarks would
+have been an invention wearing a citation, which is LAW 3's worst failure mode.
+
+Running the tool also produced **better teaching material than the documentation contains** — a
+real dependency tree in which one package appears under two parents (the shared-dependency idea,
+drawn for free on real data), and a forced resolver conflict in which the tool narrates its own
+reasoning in plain English. Neither exists in the docs.
+
+Three rules ship with the corollary:
+
+1. **Pin the version you teach**, and install it **isolated** (a scratchpad install dir) — never
+   upgrade the owner's tooling as a side effect of research. The machine here had a version two
+   minors behind, across a release that changed the very command the course opens on.
+2. **A capture from a real machine carries the operator's identity.** `init` stamped a GitHub name
+   and email into the generated file from local git config; a version listing printed real install
+   paths off a second drive. `briefs/` is tracked and this repo is public, so every capture is now
+   grepped for names, emails and local paths before commit.
+3. **Never run the publishing or destructive command to get a transcript.** A dry run or a test
+   registry — and no token-shaped string on screen, ever (LAW 11).
+
+#### Added — two operational gotchas in `docs/STATE.md`
+
+- **A checkout that is behind looks exactly like a repo that never had the work.** A session 21
+  commits behind was asked about files and laws it could not see, and nearly reported them as
+  nonexistent. `git fetch` before concluding anything named in a handover prompt is missing;
+  a manifest or topic count disagreeing with STATE.md is the tell.
+- **The `skip-worktree` channel logo aborts `git pull`**, and the wrong fixes are committing it or
+  discarding it blind. The back-up → unflag → checkout → pull → restore → re-flag procedure is now
+  written down with the verification steps.
+
 ### 2026-08-21 — the MCP course, and the layout bug wearing four faces
 
 #### Fixed — one cause behind four separate owner complaints
