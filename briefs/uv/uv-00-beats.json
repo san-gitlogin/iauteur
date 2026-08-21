@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "topic": "Why your Python projects keep breaking - packages, dependencies, and the one folder nobody makes",
+    "chapter": "00",
+    "audience": "absolute beginner to Python",
+    "onePayoff": "You will know exactly what breaks a working Python project, why nothing crashes when it happens, and the shape of the fix.",
+    "openLoop": "Two projects on one laptop. You install something for the first, and the second one breaks - without you touching a single character of it.",
+    "analogy": "THE SHELF - packages are labelled parcels, your machine has one shelf, and every project reaches into the same shelf. Drawn as objects, established out loud before it is used (LAW 0l).",
+    "screenplay": "explainer",
+    "topicAxes": ["economic-pain", "sovereignty"],
+    "source": "https://docs.astral.sh/uv/",
+    "artefacts": "briefs/uv/research/04-pip-transcripts.md - every terminal frame in this chapter is a real capture",
+    "designNote": "terminalcli pack, STILL background (LAW 0h). PLAN.md rule: the second pane is NEVER a list of lit text rows. Several of these beats want ONE full-bleed picture, not a split."
+  },
+  "beats": [
+    {"id": "s01", "act": 0, "intent": "COLD OPEN, no branding. A program that worked yesterday, run again today, and Python says it cannot find a module the viewer knows they installed. Show the real traceback as a real terminal, and the confusion on the word 'installed'.", "artefact": "ModuleNotFoundError: No module named 'requests'", "ideal": "A terminal that runs, fails, and leaves the error sitting there. Not a card about errors."},
+
+    {"id": "s02", "act": 0, "intent": "Name the promise the title made: by the end you will know what actually broke, and why nobody warned you. This is where the greeting is woven in as an aside, never announced.", "ideal": "Title card - the OUTCOME, not the subject."},
+
+    {"id": "s03", "act": 0, "intent": "OPEN THE LOOP and refuse to close it: two projects on one laptop, you install something for the first, and the second breaks although you never opened it. Pose it as a question and move on.", "ideal": "Two project folders side by side, a hand touching only one, and the other going dark. No text explaining it."},
+
+    {"id": "s04", "act": 1, "intent": "ESTABLISH THE PICTURE OUT LOUD before using it: 'Picture a shelf.' What a package actually is - code somebody else already wrote, that you download and use. Draw the parcel with a printed label: a name and a version number.", "ideal": "PARCEL_LABEL - a sealed parcel, the label readable, the VERSION being the part that changes."},
+
+    {"id": "s05", "act": 1, "intent": "Where the parcels come from: one enormous public warehouse that anybody can publish to. Name PyPI once, plainly, and show its scale rather than stating it.", "ideal": "The index as a physical warehouse the parcel is pulled from - a real place, not a cloud icon."},
+
+    {"id": "s06", "act": 1, "intent": "Install one package for real. Type the command, watch it land on the shelf. Everything is fine and the viewer should feel that it is fine.", "artefact": "pip install rich - first two lines", "ideal": "The parcel travelling warehouse to shelf, and the shelf now holding one thing."},
+
+    {"id": "s07", "act": 1, "intent": "THE FIRST SURPRISE: you asked for one parcel and four arrived. Read the real output line by line - each extra package, and the CONSTRAINT printed beside it that dragged it in. Define the word dependency here, in its own sentence, with the picture already on screen.", "artefact": "the full pip install rich transcript, including 'Collecting pygments<3.0.0,>=2.13.0'", "ideal": "DEPENDENCY_UNFOLD - the parcel opens, a note inside lists more parcels, and those arrive too. One of them was requested by another parcel, not by rich - show that second level."},
+
+    {"id": "s08", "act": 1, "intent": "SILENT BEAT, no narration. The four packages sitting on the shelf, and the order pip installed them in - the deepest one first, the one you asked for last. Let the viewer read it.", "ideal": "Hold on the real 'Installing collected packages' line. 2-3s. Nothing moves."},
+
+    {"id": "s09", "act": 2, "intent": "Now the part nobody mentions: there is only ONE shelf. Every project on this machine reaches into the same one. Show two different projects, two different jobs, one shared shelf between them.", "ideal": "SHELF_CLASH, phase one - two projects, one shelf, both reaching. The reaching is the animation."},
+
+    {"id": "s10", "act": 2, "intent": "Each project wants a different version of the SAME parcel. Not different parcels - the same one, at two numbers. Put both demands on screen at once so the impossibility is visible before it is explained.", "ideal": "One slot on the shelf, two labels competing for it. The slot can hold one."},
+
+    {"id": "s11", "act": 2, "intent": "THE COLLISION, in the tool's own words. Run the install and read pip narrating the overwrite: attempting uninstall, found existing, uninstalling, successfully uninstalled. The incumbent is evicted and nobody asked the project that depended on it.", "artefact": "the pygments==2.0.0 transcript, the uninstall block", "ideal": "SHELF_CLASH, phase two - the old label physically lifted out and the new one dropped in. This ANSWERS the loop opened in s03."},
+
+    {"id": "s12", "act": 2, "intent": "THE TWO LINES. pip says ERROR and names the incompatibility - and then, two lines later, says Successfully installed. Put both on screen together and stop talking.", "artefact": "the ERROR line and the 'Successfully installed pygments-2.0' line, adjacent", "ideal": "Full-bleed, no split. Two real lines of terminal output, the contradiction between them being the entire beat."},
+
+    {"id": "s13", "act": 2, "intent": "And then - nothing happens. Run the broken thing. It works. Explain honestly that there is no crash, no red text, no moment of discovery: the environment is simply wrong now, and will stay wrong until some other day trips over it. This is why it costs an afternoon.", "artefact": "rich still printing 'hello' after the break", "ideal": "The shelf visibly wrong while the program visibly runs. Both true at once - that contradiction is the picture."},
+
+    {"id": "s14", "act": 2, "intent": "The readout that would have told you, and that nobody runs. One command, one plain sentence naming the conflict.", "artefact": "pip check output", "ideal": "A health readout on the shelf itself, one row failing."},
+
+    {"id": "s15", "act": 2, "intent": "Name the second failure mode too, the loud one from the cold open: the package is real, it just lives on a different shelf than the one now running. Connect it back to s01 so the viewer knows both errors have the same root.", "ideal": "Two shelves, the program pointed at the wrong one, the parcel sitting on the other."},
+
+    {"id": "s16", "act": 3, "intent": "QUIZ, with a real thinking gap (LAW 0e-q). You install one package and four arrive - what do we call the three you did not ask for? Ask, invite them to pause, then Ready, then the answer with the why.", "ideal": "QUIZ_CARD. Question, pause invitation of about four seconds that gives nothing away, then the reveal anchored on 'Ready'."},
+
+    {"id": "s17", "act": 3, "intent": "THE SHAPE OF THE FIX, arrived at as a question the viewer is now holding: what if each project had its own shelf? Show the walls going up between them and both projects working at once with different versions.", "ideal": "The single shelf splitting into two walled shelves, the same two versions now coexisting. The wall going up IS the idea."},
+
+    {"id": "s18", "act": 3, "intent": "Name it plainly and without ceremony - a folder of packages that belongs to one project. Say the words virtual environment once, then immediately go back to plain language.", "ideal": "The wall labelled, the folder shown as a folder."},
+
+    {"id": "s19", "act": 3, "intent": "So why does almost nobody do it? The ritual: make it, turn it on, remember which one you are in, turn it off, forget, and be back where you started. Show the ceremony as the obstacle it is - this is the honest reason, not laziness.", "ideal": "The steps as a physical sequence you must perform every single time, with the forgetting drawn."},
+
+    {"id": "s20", "act": 3, "intent": "CLOSE THE LOOP and name uv for the first time in the whole chapter. One command, and the folder is created, used and forgotten on your behalf - you never think about any of this again. Do not demo it yet; that is the next chapter.", "ideal": "The whole ceremony from s19 collapsing into a single line. The collapse is the animation."},
+
+    {"id": "s21", "act": 3, "intent": "RECAP that pays off what was promised: the two ways a project breaks, why neither announces itself, and the one idea that removes both.", "ideal": "RECAP furniture, tied to the objects already established - not new pictures."},
+
+    {"id": "s22", "act": 3, "intent": "Outro: what the next chapter answers - installing uv, and why a tool that installs Python cannot itself be written in Python.", "ideal": "OUTRO_CTA, centred, end-screen safe."}
+  ]
+}
