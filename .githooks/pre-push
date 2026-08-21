@@ -1,0 +1,16 @@
+#!/bin/sh
+# PUBLISH SAFETY — this repo is PUBLIC. Blocks a push that would publish a secret,
+# an identity string, or a machine-specific path.
+# Enabled with:  git config core.hooksPath .githooks
+#
+# Checks the commits actually being pushed, falling back to a full tracked audit when
+# the remote ref is new. To bypass in a genuine emergency you must pass --no-verify AND
+# be able to say why in the commit message.
+remote_sha=""
+while read -r _local_ref _local_sha _remote_ref remote_sha_in; do remote_sha="$remote_sha_in"; done
+if [ -n "$remote_sha" ] && [ "$remote_sha" != "0000000000000000000000000000000000000000" ]; then
+  node scripts/check-publish-safety.mjs --range "$remote_sha..HEAD" || exit 1
+else
+  node scripts/check-publish-safety.mjs --range "origin/main..HEAD" 2>/dev/null || \
+  node scripts/check-publish-safety.mjs --tracked || exit 1
+fi

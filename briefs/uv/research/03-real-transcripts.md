@@ -317,7 +317,7 @@ cpython-3.11.16-windows-x86_64-none                   <download available>
 cpython-3.10.21-windows-x86_64-none                   <download available>
 cpython-3.10.4-windows-x86_64-none                    C:\…\Python310\python.exe
 cpython-3.9.9-windows-x86_64-none                     C:\…\Python39\python.exe
-cpython-3.9.7-windows-x86_64-none                     D:\OtherPython\python.exe
+cpython-3.9.7-windows-x86_64-none                     D:\<another-python>\python.exe
 cpython-3.8.20-windows-x86_64-none                    <download available>
 pypy-3.11.15-windows-x86_64-none                      <download available>
 graalpy-3.12.0-windows-x86_64-none                    <download available>

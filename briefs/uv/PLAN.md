@@ -34,7 +34,7 @@ running uv 0.12.5. Where a transcript is still missing it is listed at the end o
 
 ## The trap this course will fall into if nobody stops it
 
-**I watched the shipped Linux masterclass** (87 min, off the owner's SSD — the renders are
+**I watched the shipped Linux masterclass** (87 min, from a backup holding the renders — they are
 gitignored, so this was the first time the cut itself could be inspected rather than its
 spec). Four frames sampled at arbitrary points, 240s / 900s / 2400s / 4000s. **All four
 were the same picture:**

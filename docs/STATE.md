@@ -88,8 +88,8 @@ rebuilt around the chicken-and-egg problem (a tool that installs Python cannot i
 Python), which is why `pip install uv` is the trap route and why chapter 04 can download a CPython
 on demand. A stitched **`uv-course`** full cut is wanted, built last via `build-course-cut.mjs`.
 
-**The finding that most changes the plan.** The owner's SSD backup (`F:\iauteur`) carries the
-gitignored renders, so the Linux masterclass could finally be *watched* rather than read. Four
+**The finding that most changes the plan.** A separate backup of this repo carried the gitignored
+`topics/*/out/` renders, so the Linux masterclass could finally be *watched* rather than read. Four
 frames, four identical pictures — terminal left, lit text rows right (see the gotcha above). The
 uv course is the highest-risk possible repeat of this: a CLI tool on the `terminalcli` pack. So
 `PLAN.md` now carries a hard rule — **the right pane is not a list; if a beat's second pane is rows
@@ -102,7 +102,7 @@ component descriptions are an acceptance test for `cast.mjs`, not a build list; 
 digits. But note the Linux cut reused heavily *and still* shipped the lit-rows template — reusing
 more is not the same as depicting better.
 
-**SSD cross-check, done:** `F:\iauteur` is at the identical commit (`3526374`) with a clean tree,
+**Backup cross-check, done:** that backup is at the identical commit (`3526374`) with a clean tree,
 and every topic on it also exists locally. **No code or spec was missing.** What it uniquely held:
 80 rendered mp4s, 635 audio files, and three gitignored planning artefacts for the Linux course
 (`beats.json`, `casting.md`, `component-register.md`) — those three are now copied into the local
@@ -302,7 +302,7 @@ can be regenerated instead of rotting.
   `topics/*/out/` holds the only copy of what actually shipped, and it is untracked (3.9 GB).
   Clone the repo on a new machine and you have every spec and **no way to see a single frame** —
   so review defaults to reading JSON, which is exactly how a visual defect survives. It did:
-  four frames pulled off the owner's SSD backup of the 87-minute Linux masterclass showed the
+  four frames pulled from a render backup of the 87-minute Linux masterclass showed the
   same picture four times out of four — terminal pane left, a bordered box of seven-or-eight
   lit text rows right, both panes underfilled, and in two of the four the left pane was
   **completely empty**. That is LAW 0n's exact defect, in the cut held up as the good example.
