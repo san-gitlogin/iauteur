@@ -6283,7 +6283,7 @@
                         },
                         "kind": {
                           "type": "string",
-                          "description": "Depiction kind from uvViz UV_VIZ: pkg-parcel | pkg-index | dep-unfold | shelf-share | shelf-evict | shelf-split | two-projects | env-ceremony. Ignored when layout is 'terminal'."
+                          "description": "Depiction kind from uvViz UV_VIZ. The shelf set: pkg-parcel | pkg-index | dep-unfold | shelf-share | shelf-evict | shelf-split | two-projects | env-ceremony. The rest of the course: bootstrap-paradox (a tool INSIDE the Python it needs vs one BESIDE it) | install-routes (roads to one destination, one marked as the trap) | ephemeral-bay (a tool wheeled in and out; token 'dock' bolts it down) | interpreter-rack (a rack of Pythons, one tagged) | project-tree (the files a command wrote, appearing as named) | constraint-line (bracketed ranges on one version line that must overlap) | packing-list (exact ids and seals; token 'two-machines') | depot-cache (the long journey, then the short one) | script-header (the header lifting off the file to become the environment) | strict-gate (one parcel, two gates) | dist-output (the wheel built FROM the sdist). Ignored when layout is 'terminal'."
                         },
                         "layout": {
                           "type": "string",

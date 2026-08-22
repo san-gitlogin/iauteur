@@ -1743,7 +1743,10 @@ for (const s of spec.scenes ?? []) {
   }
   if (d.uvStage) {
     const u = d.uvStage;
-    const KINDS = ['pkg-parcel','pkg-index','dep-unfold','shelf-share','shelf-evict','shelf-split','two-projects','env-ceremony'];
+    const KINDS = ['pkg-parcel','pkg-index','dep-unfold','shelf-share','shelf-evict','shelf-split',
+                   'two-projects','env-ceremony','bootstrap-paradox','install-routes','ephemeral-bay',
+                   'interpreter-rack','project-tree','constraint-line','packing-list','depot-cache',
+                   'script-header','strict-gate','dist-output'];
     const term = u.layout === 'terminal';
     // The kind is only read in split layout; a terminal-only beat draws no depiction.
     if (!term && !u.kind) E(`${id}: UV_STAGE needs a kind (or layout:"terminal")`);
@@ -1784,14 +1787,25 @@ for (const s of spec.scenes ?? []) {
     // clipping the pane, and let `env-ceremony` seat more stations than a ring can hold.
     // Each picture has a real capacity; the cap is that capacity, not a round number.
     const MAXI = {'pkg-parcel': 4, 'pkg-index': 6, 'dep-unfold': 6, 'shelf-share': 3,
-                  'shelf-evict': 3, 'shelf-split': 3, 'two-projects': 2, 'env-ceremony': 7};
+                  'shelf-evict': 3, 'shelf-split': 3, 'two-projects': 2, 'env-ceremony': 7,
+                  'bootstrap-paradox': 3, 'install-routes': 6, 'ephemeral-bay': 4,
+                  'interpreter-rack': 8, 'project-tree': 8, 'constraint-line': 5,
+                  'packing-list': 7, 'depot-cache': 3, 'script-header': 6,
+                  'strict-gate': 3, 'dist-output': 3};
     const cap = (!term && u.kind && MAXI[u.kind]) || 10;
     if (sg.length > cap)
       E(`${id}: UV_STAGE kind "${u.kind ?? '?'}" draws at most ${cap} stage item(s), got ${sg.length} — beyond that the picture stops being readable`);
     // `env-ceremony` draws COMMANDS, not package names, and a command is longer than a
     // name: `source .venv/bin/activate` is 25. Every other kind labels a parcel or a
     // folder, where 22 is already generous and a longer label means the wrong noun.
-    const labelCap = u.kind === 'env-ceremony' ? 40 : 22;
+    // Kinds whose labels are COMMANDS or PATHS rather than package names: a command is
+    // longer than a name, and trimming a real one to fit a cap somebody guessed is LAW 0m.
+    // `dist-output` labels are real distribution FILENAMES (hello_world-0.1.0.tar.gz is
+    // 24 chars) and `depot-cache`'s last label is a caption sentence, not a package name.
+    // LAW 0m forbids trimming a real artefact to fit a cap somebody guessed.
+    const WIDE_LABEL = new Set(['env-ceremony', 'project-tree', 'install-routes',
+                                'script-header', 'dist-output', 'depot-cache']);
+    const labelCap = WIDE_LABEL.has(u.kind) ? 40 : 22;
     for (const x of sg) {
       if (len(x.label) > labelCap) E(`${id}: UV_STAGE stage label "${x.label}" > ${labelCap} chars`);
       if (len(x.text) > 14) E(`${id}: UV_STAGE stage text "${x.text}" > 14 chars`);
@@ -1801,7 +1815,11 @@ for (const s of spec.scenes ?? []) {
     }
     // Minimum items each depiction needs to say anything at all. Below these it renders
     // a half-picture that still looks deliberate, which is the worst failure mode.
-    const NEED = {'pkg-parcel':1,'pkg-index':1,'dep-unfold':2,'shelf-share':3,'shelf-evict':2,'shelf-split':2,'two-projects':2,'env-ceremony':2};
+    const NEED = {'pkg-parcel':1,'pkg-index':1,'dep-unfold':2,'shelf-share':3,'shelf-evict':2,
+                  'shelf-split':2,'two-projects':2,'env-ceremony':2,'bootstrap-paradox':2,
+                  'install-routes':2,'ephemeral-bay':1,'interpreter-rack':2,'project-tree':2,
+                  'constraint-line':2,'packing-list':2,'depot-cache':2,'script-header':2,
+                  'strict-gate':3,'dist-output':3};
     if (!term && u.kind && NEED[u.kind] && sg.length < NEED[u.kind])
       E(`${id}: UV_STAGE kind "${u.kind}" needs >= ${NEED[u.kind]} stage item(s), got ${sg.length}`);
     // THE TERMINAL PANE DOES NOT SCROLL. Five steps at nine output lines each is 45
