@@ -1,0 +1,994 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #6 — Your first real project",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "Every file uv init writes, what each one is for, and why the environment and lockfile appear on their own.",
+    "openLoop": "One word made six files. What is each of them actually for?",
+    "analogy": "The project tree, drawn with real guide rails so nesting is visible.",
+    "topicAxes": [
+      "skill-acquisition",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #6 — uv init and Every File It Writes (2026)",
+      "altTitles": [
+        "pyproject.toml explained line by line, with uv"
+      ],
+      "description": "Chapter six of the uv course. uv init, pyproject.toml read line by line, requires-python as a promise, --app vs --lib vs --package vs --bare, what changed in uv 0.12, and why .venv and uv.lock appear without being asked for.",
+      "tags": [
+        "uv",
+        "python",
+        "uv init",
+        "pyproject.toml",
+        "astral uv",
+        "python project",
+        "python packaging",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "READ EVERY FILE",
+    "badge": "uv · 06",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One word makes a project. But what did those six files actually do?",
+      "data": {
+        "headline": "SIX FILES, ONE WORD",
+        "subtext": "and every one has a job",
+        "heroAsset": "lucide:folder-tree",
+        "headlineAtWord": 1.667,
+        "heroAtWord": 6
+      },
+      "durationFrames": 154,
+      "audio": "audio/uv-06-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "One command — uv init, and a project name — and a project exists. Six things appeared, none of which you typed. Most tutorials skip straight past this and start installing packages. We're going to read every single file instead, because a project you can't read is a project you can't fix.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "green",
+          "headline": "Six things, from [one] word",
+          "premise": "One command wrote all of these. Nothing here is decoration.",
+          "stageTitle": "what uv init wrote",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv init hello-world && ls -a hello-world",
+              "out": [
+                ".gitignore  .python-version  README.md",
+                "main.py  pyproject.toml  .git/"
+              ],
+              "detail": "six things, and you typed none of them",
+              "atWord": 7.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "hello-world/",
+              "value": 0,
+              "sub": "the project folder",
+              "atWord": 9.833
+            },
+            {
+              "label": "pyproject.toml",
+              "value": 1,
+              "detail": "the one",
+              "sub": "what your project is, and needs",
+              "atWord": 16.417
+            },
+            {
+              "label": ".python-version",
+              "value": 1,
+              "sub": "which Python this project uses",
+              "atWord": 20.5
+            },
+            {
+              "label": "main.py",
+              "value": 1,
+              "sub": "somewhere to start typing",
+              "atWord": 23.75
+            },
+            {
+              "label": ".gitignore",
+              "value": 1,
+              "sub": "written for you, and it excludes .venv",
+              "atWord": 27
+            }
+          ]
+        }
+      },
+      "durationFrames": 532,
+      "audio": "audio/uv-06-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter builds a real project and reads every line of it, so nothing in your own folder is ever a mystery again.",
+      "data": {
+        "title": "Your first real project",
+        "subtitle": "uv, chapter six · every file, line by line"
+      },
+      "durationFrames": 274,
+      "audio": "audio/uv-06-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start with the file everything else hangs off.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "pyproject.toml",
+          "subtitle": "the one file that matters"
+        }
+      },
+      "durationFrames": 101,
+      "audio": "audio/uv-06-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "pyproject dot toml is the standard way a Python project describes itself, which is why every modern tool reads it and none of them need convincing. Not a uv invention, in other words — a Python standard that uv happens to follow properly. Four sections, and we'll take them one at a time.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "The file everything [reads]",
+          "premise": "A Python standard, not a uv invention. Every modern tool understands it.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "highlight": "pyproject.toml",
+          "steps": [
+            {
+              "label": "cat pyproject.toml",
+              "out": [
+                "[project]",
+                "name = \"hello-world\"",
+                "version = \"0.1.0\"",
+                "requires-python = \">=3.10\"",
+                "dependencies = []",
+                "",
+                "[build-system]",
+                "requires = [\"uv_build>=0.12.5,<0.13.0\"]"
+              ],
+              "detail": "four sections, and nothing else",
+              "atWord": 9.25
+            },
+            {
+              "label": "grep -c . pyproject.toml",
+              "out": [
+                "18"
+              ],
+              "detail": "eighteen lines is the whole description",
+              "atWord": 20
+            },
+            {
+              "label": "uv run python -c \"import tomllib; print(1)\"",
+              "out": [
+                "1"
+              ],
+              "detail": "and Python itself can read this format",
+              "atWord": 26.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 511,
+      "audio": "audio/uv-06-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Name and version identify the project. Description and readme are for humans. Authors is written from your local git configuration, so check what landed there before you publish anything — that line goes out into the world with your package.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "orange",
+          "headline": "Check the [authors] line",
+          "premise": "uv reads your local git config to fill this in. Read it before publishing.",
+          "stageTitle": "the project block",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "steps": [
+            {
+              "label": "grep -A2 authors pyproject.toml",
+              "out": [
+                "authors = [",
+                "    { name = \"Ada Lovelace\",",
+                "      email = \"ada@example.com\" }"
+              ],
+              "detail": "yours came from git config, not from uv",
+              "atWord": 16.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "name",
+              "value": 1,
+              "detail": "hello-world",
+              "sub": "what the package will be called",
+              "atWord": 6.083
+            },
+            {
+              "label": "version",
+              "value": 1,
+              "detail": "0.1.0",
+              "sub": "and it starts here, always",
+              "atWord": 9.583
+            },
+            {
+              "label": "authors",
+              "value": 1,
+              "detail": "from git config",
+              "sub": "read this one before you publish",
+              "atWord": 16.5
+            },
+            {
+              "label": "readme",
+              "value": 1,
+              "detail": "README.md",
+              "sub": "shown on the package page",
+              "atWord": 20.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 439,
+      "audio": "audio/uv-06-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Requires-python is a promise, not a preference. It says which interpreters your code claims to work on, and uv refuses to add any package that can't satisfy it. So this one line quietly shapes every dependency decision that follows.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "purple",
+          "headline": "requires-python is a [promise]",
+          "premise": "A claim about what your code supports. uv enforces it on every package you add.",
+          "stageTitle": "the promise you made",
+          "token": "it constrains what follows",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "steps": [
+            {
+              "label": "uv add \"some-3-13-only-package\"",
+              "out": [
+                "x No solution found when resolving dependencies:",
+                "  Because your project requires-python is >=3.10 and"
+              ],
+              "detail": "the promise refused the package",
+              "atWord": 18
+            }
+          ],
+          "stage": [
+            {
+              "label": "python",
+              "sub": "3.9, 3.10, 3.11, 3.12, 3.13",
+              "atWord": 6.333
+            },
+            {
+              "label": "you promise",
+              "text": "0.25..1.00",
+              "detail": ">=3.10",
+              "atWord": 13.5
+            },
+            {
+              "label": "the package needs",
+              "text": "0.85..1.00",
+              "detail": ">=3.13",
+              "value": 0,
+              "atWord": 20.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 442,
+      "audio": "audio/uv-06-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Dependencies starts as an empty list, and next chapter fills it. Then build-system, which tells anyone packaging your code which machinery to use. Notice the constraint written there is less than nought point thirteen point zero, even though the documentation page shows it without the trailing zero. Trust the file.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Trust the [file], not the page",
+          "premise": "The docs render the constraint one way. The file on disk writes it another.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "highlight": "<0.13.0",
+          "steps": [
+            {
+              "label": "grep -A2 build-system pyproject.toml",
+              "out": [
+                "[build-system]",
+                "requires = [\"uv_build>=0.12.5,<0.13.0\"]",
+                "build-backend = \"uv_build\""
+              ],
+              "detail": "the docs show <0.13. the file writes <0.13.0.",
+              "atWord": 20.917
+            },
+            {
+              "label": "grep dependencies pyproject.toml",
+              "out": [
+                "dependencies = []"
+              ],
+              "detail": "empty, for exactly one more chapter",
+              "atWord": 24.417
+            },
+            {
+              "label": "uv build 2>&1 | head -2",
+              "out": [
+                "Building source distribution...",
+                "Building wheel from source distribution..."
+              ],
+              "detail": "and that build-system is what makes this work",
+              "atWord": 28.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 544,
+      "audio": "audio/uv-06-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Now, a warning about every older tutorial you're going to find.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Four kinds of project",
+          "subtitle": "and what changed in 0.12"
+        }
+      },
+      "durationFrames": 141,
+      "audio": "audio/uv-06-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "The documentation says it plainly: prior to version nought point twelve, uv did not define a build system for applications by default. Which means a tutorial recorded last year shows a different set of files from the ones you just got. Nothing is broken — the tool moved.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "orange",
+          "headline": "Older tutorials look [different]",
+          "premise": "uv 0.12 changed what init writes. A mismatch means the video is old, not you.",
+          "stageTitle": "before, and after 0.12",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv --version",
+              "out": [
+                "uv 0.12.5 (210d1f678 2026-08-14)"
+              ],
+              "detail": "check this before trusting any tutorial",
+              "atWord": 22.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "before 0.12",
+              "value": 0,
+              "sub": "no build-system for applications",
+              "atWord": 10.083
+            },
+            {
+              "label": "pyproject.toml",
+              "value": 1,
+              "detail": "shorter",
+              "sub": "three sections, not four",
+              "atWord": 13.917
+            },
+            {
+              "label": "from 0.12",
+              "value": 0,
+              "sub": "a build system, by default",
+              "atWord": 19.417
+            },
+            {
+              "label": "pyproject.toml",
+              "value": 1,
+              "detail": "what you got",
+              "sub": "and this is why your file differs",
+              "atWord": 24
+            }
+          ]
+        }
+      },
+      "durationFrames": 467,
+      "audio": "audio/uv-06-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "There are four shapes uv can make, and the flag you pass decides which. App is the default, meaning something you run. Lib is something other people import, so uv puts your code under a src folder to keep the import path honest. Packaged gives you a command name. And bare writes almost nothing, because sometimes you'd rather decide everything yourself.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "blue",
+          "headline": "Four shapes, [one] command",
+          "premise": "The flag decides the tree. Pick by what the thing is, not by what looks tidy.",
+          "stageTitle": "pick your shape",
+          "token": "uv init --lib, --app, --bare",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv init --lib mylib && ls mylib/src/mylib",
+              "out": [
+                "__init__.py  py.typed"
+              ],
+              "detail": "a library puts your code under src",
+              "atWord": 25.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "--app",
+              "text": "the default",
+              "sub": "something you run",
+              "atWord": 12
+            },
+            {
+              "label": "--lib",
+              "text": "importable",
+              "sub": "something other people import",
+              "atWord": 19.667
+            },
+            {
+              "label": "--package",
+              "text": "a command",
+              "sub": "installs a name you can type",
+              "atWord": 28.167
+            },
+            {
+              "label": "--bare",
+              "text": "almost nothing",
+              "sub": "when you want to decide yourself",
+              "value": 0,
+              "atWord": 33.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 647,
+      "audio": "audio/uv-06-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "And the rest of the files, quickly, because none of them hide anything.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The other files",
+          "subtitle": "and the ones that appear later"
+        }
+      },
+      "durationFrames": 128,
+      "audio": "audio/uv-06-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Dot python dash version is the pin from last chapter, written from whatever interpreter uv chose. Main dot py is a one-line starter file, so the project runs the moment it exists. README is empty and yours to fill in. And dot gitignore already excludes dot venv, which means you cannot accidentally commit an entire environment to your repository.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "green",
+          "headline": "Nothing here is [hidden]",
+          "premise": "Four small files, each doing one obvious job, all of them readable.",
+          "stageTitle": "the supporting cast",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "steps": [
+            {
+              "label": "cat .python-version .gitignore",
+              "out": [
+                "3.10",
+                "# Python-generated files",
+                "__pycache__/",
+                "*.py[oc]",
+                "# Virtual environments",
+                ".venv"
+              ],
+              "detail": "uv excluded .venv without being asked",
+              "atWord": 29.917
+            }
+          ],
+          "stage": [
+            {
+              "label": ".python-version",
+              "value": 1,
+              "detail": "3.10",
+              "sub": "the pin from last chapter",
+              "atWord": 9.667
+            },
+            {
+              "label": "main.py",
+              "value": 1,
+              "sub": "a hello world, so it runs immediately",
+              "atWord": 20.25
+            },
+            {
+              "label": "README.md",
+              "value": 1,
+              "sub": "empty, and yours to fill in",
+              "atWord": 25.5
+            },
+            {
+              "label": ".gitignore",
+              "value": 1,
+              "detail": "excludes .venv",
+              "sub": "so you cannot commit an environment",
+              "atWord": 31.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 645,
+      "audio": "audio/uv-06-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Two more files turn up later without being asked for. Dot venv is the project's own shelf, and uv lock is the exact list of what's on it. Neither is something you create; both appear the first time you add a dependency or run anything.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "blue",
+          "headline": "Two more [arrive] later",
+          "premise": "Nobody creates these. They appear the first time uv has to build anything.",
+          "stageTitle": "not yours to make",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "steps": [
+            {
+              "label": "uv run main.py",
+              "out": [
+                "Using CPython 3.10.4",
+                "Creating virtual environment at: .venv",
+                "Hello from hello-world!"
+              ],
+              "detail": "the shelf was built on the way past",
+              "atWord": 17.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "hello-world/",
+              "value": 0,
+              "atWord": 5.833
+            },
+            {
+              "label": ".venv/",
+              "value": 1,
+              "detail": "the shelf",
+              "sub": "this project’s own packages",
+              "atWord": 12.5
+            },
+            {
+              "label": "uv.lock",
+              "value": 1,
+              "detail": "the list",
+              "sub": "exactly what is on that shelf",
+              "atWord": 17.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 417,
+      "audio": "audio/uv-06-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "One command deserves special attention, and you'll type it constantly. uv run does the whole ritual from chapter zero on your behalf: check the environment exists, make it if not, make sure the packages match, then run your code inside it. Four steps, invisible, every time.",
+      "data": {
+        "uvStage": {
+          "kind": "env-ceremony",
+          "color": "green",
+          "headline": "uv run does [all four]",
+          "premise": "The ritual from chapter zero, performed for you, before every single command.",
+          "stageTitle": "the ritual, collapsed",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "steps": [
+            {
+              "label": "uv run main.py",
+              "out": [
+                "Creating virtual environment at: .venv",
+                "Installed 1 package in 8ms",
+                "Hello from hello-world!"
+              ],
+              "detail": "made, checked, used — in one line",
+              "atWord": 18.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "make it",
+              "icon": "lucide:package-plus",
+              "atWord": 1
+            },
+            {
+              "label": "switch it on",
+              "icon": "lucide:toggle-right",
+              "atWord": 1
+            },
+            {
+              "label": "sync the packages",
+              "icon": "lucide:brain",
+              "atWord": 1
+            },
+            {
+              "label": "switch it off",
+              "icon": "lucide:toggle-left",
+              "atWord": 1
+            },
+            {
+              "label": "uv run main.py",
+              "sub": "and you never think about any of it",
+              "atWord": 23.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 493,
+      "audio": "audio/uv-06-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "If you asked for a packaged project, one more section appears. Project scripts maps a command name to a function in your code, and after that uv run followed by that name runs your function directly. Which is how a Python project turns into something with an actual command.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "purple",
+          "headline": "Give it a [command] name",
+          "premise": "[project.scripts] maps a name you can type to a function in your code.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "highlight": "hello-world",
+          "steps": [
+            {
+              "label": "grep -A2 \"project.scripts\" pyproject.toml",
+              "out": [
+                "[project.scripts]",
+                "hello-world = \"hello_world:main\""
+              ],
+              "detail": "a name, and the function behind it",
+              "atWord": 11.917
+            },
+            {
+              "label": "uv run hello-world",
+              "out": [
+                "Hello from hello-world!"
+              ],
+              "detail": "and now the name itself is runnable",
+              "atWord": 17.917
+            },
+            {
+              "label": "uv run python -c \"import hello_world\"",
+              "out": [],
+              "detail": "importable too, because it is packaged",
+              "atWord": 23.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 459,
+      "audio": "audio/uv-06-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "It's worth knowing that uv init will happily take over a folder you already have. Point it at a directory with code in it and uv writes only what's missing, which means adopting an existing project is one command rather than an afternoon of copying files around.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "green",
+          "headline": "It [adopts] existing folders",
+          "premise": "uv init in a folder that already has code writes only the pieces missing.",
+          "stageTitle": "adopting what is already there",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/old-scripts",
+          "steps": [
+            {
+              "label": "ls",
+              "out": [
+                "analysis.py  helpers.py  notes.txt"
+              ],
+              "detail": "three years of files, and no project",
+              "atWord": 5.75
+            },
+            {
+              "label": "uv init --bare --name old-scripts .",
+              "out": [
+                "Initialized project `old-scripts`"
+              ],
+              "detail": "and nothing of yours was overwritten",
+              "atWord": 18.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "analysis.py",
+              "value": 1,
+              "sub": "untouched",
+              "atWord": 7.917
+            },
+            {
+              "label": "helpers.py",
+              "value": 1,
+              "sub": "untouched",
+              "atWord": 10.083
+            },
+            {
+              "label": "pyproject.toml",
+              "value": 1,
+              "detail": "new",
+              "sub": "the only thing uv added",
+              "atWord": 19.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 429,
+      "audio": "audio/uv-06-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One more thing worth doing on day one. uv init made a git repository for you, and now is the moment to decide what belongs in it. The project file, the pin and the lockfile all go in. The environment folder does not, because uv already excluded it on your behalf.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "blue",
+          "headline": "What goes in [git]",
+          "premise": "Everything that describes the project is committed. The built shelf never is.",
+          "stageTitle": "commit these, not that",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "steps": [
+            {
+              "label": "git status --short",
+              "out": [
+                "?? .gitignore",
+                "?? .python-version",
+                "?? README.md",
+                "?? main.py",
+                "?? pyproject.toml"
+              ],
+              "detail": "notice .venv is not even offered",
+              "atWord": 20.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "pyproject.toml",
+              "value": 1,
+              "detail": "commit",
+              "sub": "what the project is",
+              "atWord": 10.667
+            },
+            {
+              "label": ".python-version",
+              "value": 1,
+              "detail": "commit",
+              "sub": "so colleagues get your interpreter",
+              "atWord": 14.5
+            },
+            {
+              "label": "uv.lock",
+              "value": 1,
+              "detail": "commit",
+              "sub": "so colleagues get your exact packages",
+              "atWord": 19.083
+            },
+            {
+              "label": ".venv/",
+              "value": 1,
+              "detail": "never",
+              "sub": "rebuildable, large, and machine-specific",
+              "atWord": 24.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 489,
+      "audio": "audio/uv-06-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And if you'd rather not have a git repository at all, dash dash no dash vcs skips it. Small thing, but worth knowing before uv creates a repository inside a repository and your version control starts behaving strangely.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "Skip the repo with [--no-vcs]",
+          "premise": "uv init makes a git repo by default. Inside another repo, that is rarely wanted.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/monorepo",
+          "highlight": "--no-vcs",
+          "steps": [
+            {
+              "label": "uv init packages/parser",
+              "out": [
+                "Initialized project `parser`"
+              ],
+              "detail": "a git repo, inside your git repo",
+              "atWord": 10.75
+            },
+            {
+              "label": "uv init --no-vcs packages/parser",
+              "out": [
+                "Initialized project `parser`"
+              ],
+              "detail": "better, inside a repository you already have",
+              "atWord": 21.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 429,
+      "audio": "audio/uv-06-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. You just ran uv init and there's no dot venv folder anywhere. Did something go wrong? Pause the video here and decide for yourself before I answer. Ready? No — the environment appears the first time uv actually needs one.",
+      "data": {
+        "quiz": {
+          "question": "uv init finished and there is no .venv. Is that a problem?",
+          "options": [
+            {
+              "text": "Yes, init failed"
+            },
+            {
+              "text": "No — it appears when needed"
+            },
+            {
+              "text": "Only on Windows"
+            },
+            {
+              "text": "You must run uv venv"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "uv builds it the first time it has something to put in it.",
+          "atWord": 1.667,
+          "revealAtWord": 23.333
+        }
+      },
+      "durationFrames": 441,
+      "audio": "audio/uv-06-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. pyproject dot toml describes your project and every modern tool reads it. Requires-python is a promise that constrains every package you'll ever add. And the environment and the lockfile arrive by themselves, the first time uv needs them.",
+      "data": {
+        "heading": "Chapter six, in three lines",
+        "points": [
+          {
+            "text": "pyproject.toml is a standard, not a uv file",
+            "atWord": 6.667
+          },
+          {
+            "text": "requires-python constrains everything after",
+            "atWord": 16.167
+          },
+          {
+            "text": ".venv and uv.lock arrive on their own",
+            "atWord": 25.667
+          }
+        ]
+      },
+      "durationFrames": 489,
+      "audio": "audio/uv-06-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter we finally add a dependency, and I show you why uv add does not do the thing almost everybody assumes it does.",
+      "data": {
+        "message": "Next: adding dependencies",
+        "sub": "and what uv add really writes"
+      },
+      "durationFrames": 240,
+      "audio": "audio/uv-06-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

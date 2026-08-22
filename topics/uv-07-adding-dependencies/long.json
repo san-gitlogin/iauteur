@@ -1,0 +1,1006 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #7 — Adding dependencies",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "uv add writes a lower bound rather than a pin, the +/~/- markers are a report, and uv tree shows a shared dependency needed by two packages at once.",
+    "openLoop": "Everyone thinks uv add pins the version. What does it really write?",
+    "analogy": "The shelf again: one copy of pygments, two packages reaching for it, both satisfied.",
+    "topicAxes": [
+      "skill-acquisition",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #7 — uv add Does Not Pin (and What It Really Writes) (2026)",
+      "altTitles": [
+        "uv add, uv remove, uv tree and dependency groups explained"
+      ],
+      "description": "Chapter seven of the uv course. Why uv add writes rich>=15.0.0 rather than a pin, reading the +/~/- markers, uv remove taking seven packages away, uv tree showing pygments needed by both rich and pytest, and dev groups versus extras.",
+      "tags": [
+        "uv",
+        "python",
+        "uv add",
+        "uv tree",
+        "dependencies",
+        "astral uv",
+        "dependency groups",
+        "python packaging",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT DOES NOT PIN",
+    "badge": "uv · 07",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Everyone thinks uv add pins the version. It does not. Here's what really happens.",
+      "data": {
+        "headline": "IT DOES NOT PIN",
+        "subtext": "and almost nobody notices",
+        "heroAsset": "lucide:pin-off",
+        "headlineAtWord": 1.917,
+        "heroAtWord": 7.667
+      },
+      "durationFrames": 182,
+      "audio": "audio/uv-07-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "I asked for rich, and uv wrote rich greater-than-or-equal-to fifteen point zero point zero. Read the operator carefully. Not equals — greater than or equal to. So that line is a floor rather than a pin. Which raises an obvious question: if pyproject doesn't pin the version, what does?",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "Read the [operator]",
+          "premise": "uv wrote a lower bound derived from what it installed, not an exact version.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": ">=",
+          "steps": [
+            {
+              "label": "uv add rich",
+              "out": [
+                "Resolved 5 packages in 377ms",
+                "Installed 5 packages in 980ms",
+                " + rich==15.0.0"
+              ],
+              "detail": "installed exactly 15.0.0",
+              "atWord": 5.5
+            },
+            {
+              "label": "grep -A2 dependencies pyproject.toml",
+              "out": [
+                "dependencies = [",
+                "    \"rich>=15.0.0\",",
+                "]"
+              ],
+              "detail": "but wrote a floor, not that exact number",
+              "atWord": 18.333
+            },
+            {
+              "label": "grep -m1 -A1 rich uv.lock",
+              "out": [
+                "name = \"rich\"",
+                "version = \"15.0.0\""
+              ],
+              "detail": "and the exact number went in here instead",
+              "atWord": 29.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 559,
+      "audio": "audio/uv-07-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter adds packages properly, reads every symbol uv prints while doing it, and shows you the graph uv draws of your own project.",
+      "data": {
+        "title": "Adding dependencies",
+        "subtitle": "uv, chapter seven · and what uv add really writes"
+      },
+      "durationFrames": 279,
+      "audio": "audio/uv-07-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start with the command, then the thing it wrote.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "uv add",
+          "subtitle": "a floor, not a pin"
+        }
+      },
+      "durationFrames": 105,
+      "audio": "audio/uv-07-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "uv add does four jobs at once. uv resolves what your request implies, writes the requirement into pyproject dot toml, updates the lockfile, and installs into your environment. One command where the old world needed three separate ones, and no environment to activate beforehand.",
+      "data": {
+        "uvStage": {
+          "kind": "env-ceremony",
+          "color": "green",
+          "headline": "One command, [four] jobs",
+          "premise": "Resolve, write, lock, install. All four, from one word, with nothing activated.",
+          "stageTitle": "what uv add does",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add rich",
+              "out": [
+                "Resolved 5 packages in 377ms",
+                "Prepared 5 packages in 1.43s",
+                "Installed 5 packages in 980ms"
+              ],
+              "detail": "four jobs, one line, no activation",
+              "atWord": 11.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "resolve",
+              "icon": "lucide:git-branch",
+              "atWord": 9.5
+            },
+            {
+              "label": "write pyproject",
+              "icon": "lucide:file-pen",
+              "atWord": 13.25
+            },
+            {
+              "label": "update the lock",
+              "icon": "lucide:lock",
+              "atWord": 18
+            },
+            {
+              "label": "install",
+              "icon": "lucide:package-plus",
+              "atWord": 21.75
+            },
+            {
+              "label": "uv add rich",
+              "sub": "and you typed one of those four words",
+              "atWord": 26.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 521,
+      "audio": "audio/uv-07-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So why a floor rather than a pin? Because pyproject dot toml describes what your project can live with, and pinning there would stop anyone depending on your package from ever upgrading rich. The exact version gets recorded somewhere else entirely — the lockfile, which is the next chapter.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "blue",
+          "headline": "A floor is a [wider] promise",
+          "premise": "pyproject says what you can live with. The exact version is recorded elsewhere.",
+          "stageTitle": "why not pin here",
+          "token": "the lockfile pins it",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "grep rich pyproject.toml uv.lock",
+              "out": [
+                "pyproject.toml:    \"rich>=15.0.0\",",
+                "uv.lock:version = \"15.0.0\""
+              ],
+              "detail": "the range here, the exact one there",
+              "atWord": 23.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "sub": "14.0, 15.0, 15.1, 16.0, 17.0",
+              "atWord": 7.5
+            },
+            {
+              "label": "a pin would say",
+              "text": "0.28..0.34",
+              "detail": "==15.0.0",
+              "value": 0,
+              "atWord": 15.833
+            },
+            {
+              "label": "uv wrote",
+              "text": "0.28..1.00",
+              "detail": ">=15.0.0",
+              "atWord": 23.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 510,
+      "audio": "audio/uv-07-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "You can of course write the range yourself, and uv'll respect whatever you ask for. Quote it, though, because those symbols mean something to your shell too. Pin exactly with double equals, cap an upper bound with less-than, or allow only patch releases with the squiggle-equals form.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Write the [range] yourself",
+          "premise": "uv respects whatever specifier you hand it. Quote it — the shell reads symbols.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "\"",
+          "steps": [
+            {
+              "label": "uv add \"rich==15.0.0\"",
+              "out": [
+                " + rich==15.0.0"
+              ],
+              "detail": "exactly this version, and no other",
+              "atWord": 11.917
+            },
+            {
+              "label": "uv add \"rich>=15,<16\"",
+              "out": [
+                " + rich==15.0.0"
+              ],
+              "detail": "anything in the fifteen series",
+              "atWord": 19.833
+            },
+            {
+              "label": "uv add \"rich~=15.0\"",
+              "out": [
+                " + rich==15.0.0"
+              ],
+              "detail": "patch releases only, so 15.0.x",
+              "atWord": 24.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 468,
+      "audio": "audio/uv-07-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Now the symbols uv prints while it works, because they carry real information.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Reading the output",
+          "subtitle": "plus, tilde, minus"
+        }
+      },
+      "durationFrames": 170,
+      "audio": "audio/uv-07-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Three markers, and each one means something different. A plus sign marks a package that arrived. A squiggle marks one that changed or got rebuilt. A minus marks one that left. Once you can read all three, uv's output stops being noise and starts being a report you can act on.",
+      "data": {
+        "uvStage": {
+          "kind": "dep-unfold",
+          "color": "green",
+          "headline": "Plus, squiggle, [minus]",
+          "premise": "Three markers in uv output: added, changed or rebuilt, and removed.",
+          "stageTitle": "the marker vocabulary",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add --dev pytest",
+              "out": [
+                "Resolved 13 packages in 450ms",
+                " + pluggy==1.6.0",
+                " + pytest==9.1.1",
+                " ~ invoice-app==0.1.0",
+                " + tomli==2.4.1"
+              ],
+              "detail": "four lines, three different meanings",
+              "atWord": 7.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "pytest",
+              "text": "9.1.1",
+              "detail": "+  added",
+              "atWord": 11.5
+            },
+            {
+              "label": "pluggy",
+              "text": "1.6.0",
+              "detail": "+  added",
+              "atWord": 15.583
+            },
+            {
+              "label": "invoice-app",
+              "text": "0.1.0",
+              "detail": "~  rebuilt",
+              "atWord": 21.333
+            },
+            {
+              "label": "httpx",
+              "text": "0.28.1",
+              "detail": "-  removed",
+              "value": 0,
+              "atWord": 25.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 524,
+      "audio": "audio/uv-07-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Watch what happens when a package leaves. I added httpx earlier, and httpx brought six friends along. Removing httpx takes all seven away, because uv knows nothing else in the project was asking for those six. Chapter zero's install, run backwards.",
+      "data": {
+        "uvStage": {
+          "kind": "dep-unfold",
+          "color": "orange",
+          "headline": "Seven in, [seven] out",
+          "premise": "uv removes what nothing else needs. The install from chapter zero, reversed.",
+          "stageTitle": "uv remove httpx",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "remove",
+          "steps": [
+            {
+              "label": "uv remove httpx",
+              "out": [
+                "Resolved 13 packages in 29ms",
+                "Uninstalled 7 packages in 124ms",
+                " - anyio==4.14.2",
+                " - certifi==2026.7.22",
+                " - h11==0.16.0",
+                " - httpcore==1.0.9",
+                " - httpx==0.28.1",
+                " - idna==3.19"
+              ],
+              "detail": "one asked for, six that came with it",
+              "atWord": 10.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "httpx",
+              "text": "0.28.1",
+              "detail": "the one you removed",
+              "atWord": 12.5
+            },
+            {
+              "label": "httpcore",
+              "text": "1.0.9",
+              "value": 0,
+              "detail": "nothing else needs it",
+              "atWord": 19.25
+            },
+            {
+              "label": "anyio",
+              "text": "4.14.2",
+              "value": 0,
+              "detail": "nothing else needs it",
+              "atWord": 22.167
+            },
+            {
+              "label": "certifi",
+              "text": "2026.7.22",
+              "value": 0,
+              "detail": "nothing else needs it",
+              "atWord": 25
+            }
+          ]
+        }
+      },
+      "durationFrames": 495,
+      "audio": "audio/uv-07-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "And now the command that draws your project for you.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "uv tree",
+          "subtitle": "the picture the tool draws"
+        }
+      },
+      "durationFrames": 102,
+      "audio": "audio/uv-07-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "uv tree prints the whole dependency graph. Your project at the top, everything it asked for underneath, and everything those things asked for underneath that. But look carefully at this particular tree, because there's something in it worth stopping on.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "uv draws the [graph] for you",
+          "premise": "Your project, what it asked for, and what those things asked for in turn.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "pygments",
+          "steps": [
+            {
+              "label": "uv tree",
+              "out": [
+                "invoice-app v0.1.0",
+                "├── rich v15.0.0",
+                "│   ├── markdown-it-py v4.2.0",
+                "│   │   └── mdurl v0.1.2",
+                "│   └── pygments v2.21.0",
+                "└── pytest v9.1.1 (group: dev)",
+                "    ├── pluggy v1.6.0",
+                "    └── pygments v2.21.0"
+              ],
+              "detail": "read the last line, then the fifth",
+              "atWord": 10.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 397,
+      "audio": "audio/uv-07-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Pygments appears twice. Once because rich needs pygments, and once because pytest needs pygments too. Two packages asking independently, neither knowing about the other. And yet your environment holds exactly one copy, at one version, shared happily between both.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-share",
+          "color": "purple",
+          "headline": "pygments appears [twice]",
+          "premise": "Two packages ask for pygments independently. The shelf holds exactly one copy.",
+          "stageTitle": "one copy, two askers",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv pip list | grep -i pygments",
+              "out": [
+                "pygments  2.21.0"
+              ],
+              "detail": "one copy, not two",
+              "atWord": 22.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "2.21.0",
+              "atWord": 9.417
+            },
+            {
+              "label": "pytest",
+              "text": "2.21.0",
+              "atWord": 15.583
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "sub": "one copy, and both are satisfied",
+              "atWord": 23.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 508,
+      "audio": "audio/uv-07-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Which is exactly the collision from chapter zero, except this time the collision worked out. Both packages happened to accept the same version, so a single copy satisfied both askers. When two packages don't agree, uv refuses rather than overwriting — and that refusal deserves a chapter of its own, coming shortly.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-evict",
+          "color": "green",
+          "headline": "The same shelf, [no] collision",
+          "premise": "Both askers accept the same version, so nothing has to be evicted at all.",
+          "stageTitle": "agreement, this time",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv pip show pygments | head -4",
+              "out": [
+                "Name: pygments",
+                "Version: 2.21.0",
+                "Required-by: rich, pytest"
+              ],
+              "detail": "both names, on one required-by line",
+              "atWord": 22.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "sub": "nothing was carried away",
+              "atWord": 13.417
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "sub": "because both askers agreed",
+              "atWord": 22.417
+            },
+            {
+              "label": "rich + pytest",
+              "detail": "both satisfied at once",
+              "atWord": 29.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 580,
+      "audio": "audio/uv-07-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CHAPTER",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Last piece: not every dependency is the same kind of dependency.",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "Groups",
+          "subtitle": "dev, optional, and why"
+        }
+      },
+      "durationFrames": 149,
+      "audio": "audio/uv-07-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Pytest is a test runner. Your code doesn't need pytest in order to run — you're the one who needs pytest, in order to develop. So it goes in a development group instead, and anyone installing your package as a library never receives it.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "blue",
+          "headline": "Development is a [group]",
+          "premise": "Tools you need to build the thing are separated from what the thing needs to run.",
+          "stageTitle": "dev, kept apart",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--dev",
+          "steps": [
+            {
+              "label": "uv add --dev pytest",
+              "out": [
+                " + pytest==9.1.1"
+              ],
+              "detail": "into a group, not into dependencies",
+              "atWord": 10.417
+            },
+            {
+              "label": "grep -A3 dependency-groups pyproject.toml",
+              "out": [
+                "[dependency-groups]",
+                "dev = [",
+                "    \"pytest>=9.1.1\",",
+                "]"
+              ],
+              "detail": "a separate block, deliberately",
+              "atWord": 19.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "dependencies",
+              "text": "rich",
+              "detail": "to run",
+              "atWord": 8.917
+            },
+            {
+              "label": "dev group",
+              "text": "pytest",
+              "detail": "to develop",
+              "atWord": 15.583
+            },
+            {
+              "label": "wall",
+              "sub": "installing your library never brings pytest",
+              "atWord": 20.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 413,
+      "audio": "audio/uv-07-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "There're two more shapes worth knowing. Named groups let you separate docs tooling from lint tooling from test tooling. And optional dependencies become extras — things a user of your package opts into by name, rather than receiving whether they want them or not.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "purple",
+          "headline": "Groups, and [extras]",
+          "premise": "Groups are for you. Extras are for whoever installs your package later.",
+          "stageTitle": "four places a package can go",
+          "token": "who is it for?",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add --group docs mkdocs",
+              "out": [
+                " + mkdocs==1.6.1"
+              ],
+              "detail": "a named group, just for you",
+              "atWord": 11.167
+            },
+            {
+              "label": "uv add --optional pdf reportlab",
+              "out": [
+                " + reportlab==4.2.5"
+              ],
+              "detail": "an extra, for whoever installs you",
+              "atWord": 19.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "dependencies",
+              "text": "always",
+              "sub": "everybody gets these",
+              "atWord": 6.417
+            },
+            {
+              "label": "--dev",
+              "text": "you only",
+              "sub": "never shipped to a user",
+              "atWord": 10.333
+            },
+            {
+              "label": "--group docs",
+              "text": "you only",
+              "sub": "and only when you ask for it",
+              "atWord": 15.167
+            },
+            {
+              "label": "--optional pdf",
+              "text": "opt-in",
+              "sub": "a user asks for it by name",
+              "atWord": 19.917
+            },
+            {
+              "label": "pip install you[pdf]",
+              "sub": "which is how an extra gets requested",
+              "atWord": 23.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 442,
+      "audio": "audio/uv-07-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "Three more sources are worth knowing about, because not everything you'll depend on lives on PyPI. uv will take a package from a git repository, from a folder on your own disk, or from a plain URL — and each one is written into pyproject so your colleague gets the same source you did.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "purple",
+          "headline": "Not everything comes from [PyPI]",
+          "premise": "Git, a local folder, or a URL. Each is recorded, so the source travels too.",
+          "stageTitle": "four places a package lives",
+          "token": "the source is recorded",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add \"httpx @ git+https://github.com/encode/httpx\"",
+              "out": [
+                "Updating https://github.com/encode/httpx (HEAD)",
+                " + httpx==0.29.0.dev0"
+              ],
+              "detail": "an unreleased branch, recorded properly",
+              "atWord": 17.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "PyPI",
+              "text": "the default",
+              "sub": "the public warehouse",
+              "atWord": 6.667
+            },
+            {
+              "label": "git+https://...",
+              "text": "a repo",
+              "sub": "a branch, a tag, or one commit",
+              "atWord": 12.083
+            },
+            {
+              "label": "--editable ../lib",
+              "text": "local",
+              "sub": "a folder on your own disk",
+              "atWord": 16.75
+            },
+            {
+              "label": "https://.../x.whl",
+              "text": "a URL",
+              "sub": "a file somewhere on the internet",
+              "atWord": 20.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 455,
+      "audio": "audio/uv-07-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One flag deserves a mention on its own, because it's about how you work rather than what you install. Editable means uv points at a folder instead of copying it, so a change you make in that folder is live immediately, with nothing to reinstall.",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "green",
+          "headline": "Editable points, it does not [copy]",
+          "premise": "The project links to your folder, so an edit there is live without reinstalling.",
+          "stageTitle": "working on two things at once",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--editable",
+          "steps": [
+            {
+              "label": "uv add --editable ../shared-utils",
+              "out": [
+                " + shared-utils==0.1.0 (from file:///.../shared-utils)"
+              ],
+              "detail": "a link, not a copy",
+              "atWord": 11.083
+            },
+            {
+              "label": "echo \"def hi(): return 1\" >> ../shared-utils/src/u.py",
+              "out": [],
+              "detail": "edit the other project...",
+              "atWord": 17.667
+            },
+            {
+              "label": "uv run python -c \"import u; print(u.hi())\"",
+              "out": [
+                "1"
+              ],
+              "detail": "...and no reinstall was needed",
+              "atWord": 22.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "sub": "the project you are working in",
+              "atWord": 9.583
+            },
+            {
+              "label": "shared-utils",
+              "sub": "linked, so edits land instantly",
+              "atWord": 17.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 419,
+      "audio": "audio/uv-07-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And when you want a newer version of something, uv's upgrade-package flag moves exactly one thing forward and leaves the rest of the lockfile untouched. Which matters, because upgrading everything at once is how a working project becomes a debugging session.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "color": "blue",
+          "headline": "Move [one] thing forward",
+          "premise": "Upgrading one package rewrites one line of the lockfile, and nothing else.",
+          "stageTitle": "a surgical upgrade",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--upgrade-package",
+          "steps": [
+            {
+              "label": "uv lock --upgrade-package rich",
+              "out": [
+                "Resolved 13 packages in 152ms",
+                "Updated rich v15.0.0 -> v15.1.0"
+              ],
+              "detail": "one line changed, twelve untouched",
+              "atWord": 14.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.1.0",
+              "detail": "sha256:c7d0aa...",
+              "atWord": 17.25
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "sha256:8b4e10...",
+              "atWord": 20.75
+            },
+            {
+              "label": "pytest",
+              "text": "9.1.1",
+              "detail": "sha256:41ee9b...",
+              "sub": "and everything else stayed exactly put",
+              "atWord": 23.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 446,
+      "audio": "audio/uv-07-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. uv add rich wrote rich greater-than-or-equal-to fifteen. Your colleague clones the repo next month, when sixteen is out. Which version do they get? Pause the video here and think it through before I answer. Ready? Fifteen — because the lockfile decides, not that range.",
+      "data": {
+        "quiz": {
+          "question": "Range says >=15, and 16 is out. What do they get?",
+          "options": [
+            {
+              "text": "16, the newest allowed"
+            },
+            {
+              "text": "15 — the lockfile decides"
+            },
+            {
+              "text": "Whatever pip has cached"
+            },
+            {
+              "text": "uv asks them to choose"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "The range says what is allowed. The lock says what you get.",
+          "atWord": 2.833,
+          "revealAtWord": 33.083
+        }
+      },
+      "durationFrames": 542,
+      "audio": "audio/uv-07-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. uv add writes a floor rather than a pin, because pyproject describes what your project can live with. Plus, squiggle and minus tell you what was added, changed and removed. And uv tree shows you where a shared package is needed twice.",
+      "data": {
+        "heading": "Chapter seven, in three lines",
+        "points": [
+          {
+            "text": "uv add writes a floor, never a pin",
+            "atWord": 7.75
+          },
+          {
+            "text": "+ added · ~ changed · - removed",
+            "atWord": 16.333
+          },
+          {
+            "text": "uv tree shows who asked for what",
+            "atWord": 25.75
+          }
+        ]
+      },
+      "durationFrames": 485,
+      "audio": "audio/uv-07-long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter, the thing everyone told you to make and nobody ever explained: what a virtual environment actually is, in six lines of a text file.",
+      "data": {
+        "message": "Next: what a venv really is",
+        "sub": "six lines, and one of them is the answer"
+      },
+      "durationFrames": 276,
+      "audio": "audio/uv-07-long_s23.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

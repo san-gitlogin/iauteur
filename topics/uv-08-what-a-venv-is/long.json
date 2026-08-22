@@ -1,0 +1,966 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #8 — What a virtual environment actually is",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "A virtual environment is a folder with a six-line config file, and one line of that file is the entire isolation.",
+    "openLoop": "Everyone told you to make one. What is actually inside it?",
+    "analogy": "The walled shelf from chapter zero, opened up and read line by line.",
+    "topicAxes": [
+      "skill-acquisition",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #8 — What a Virtual Environment Actually Is (2026)",
+      "altTitles": [
+        "venv explained properly: pyvenv.cfg, site-packages and activation"
+      ],
+      "description": "Chapter eight of the uv course. A venv is a folder. pyvenv.cfg read line by line, why include-system-site-packages = false is the whole isolation, bin versus Scripts, site-packages, what activation really does to your PATH, and why uv run replaces it.",
+      "tags": [
+        "uv",
+        "python",
+        "virtualenv",
+        "venv",
+        "virtual environment",
+        "pyvenv.cfg",
+        "site-packages",
+        "astral uv",
+        "python tutorial",
+        "python for beginners"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT IS JUST A FOLDER",
+    "badge": "uv · 08",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Everyone told you to make a virtual environment. Did anyone say what one is?",
+      "data": {
+        "headline": "NOBODY EXPLAINED IT",
+        "subtext": "so here is the whole thing",
+        "heroAsset": "lucide:folder-open",
+        "headlineAtWord": 1.75,
+        "heroAtWord": 7
+      },
+      "durationFrames": 167,
+      "audio": "audio/uv-08-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "It's a folder. That's the entire answer, and I want to say so before anything else, because the words virtual environment sound like something clever is going on. Nothing clever is going on. Here's one, opened up, with not a single mystery inside.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "green",
+          "headline": "It is a [folder]",
+          "premise": "No magic, no daemon, no registry. A folder with an interpreter and some code.",
+          "stageTitle": "the whole thing, opened",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "ls -a .venv",
+              "out": [
+                ".gitignore  .lock  CACHEDIR.TAG",
+                "bin/  lib/  pyvenv.cfg"
+              ],
+              "detail": "six entries, and nothing hidden",
+              "atWord": 12.167
+            }
+          ],
+          "stage": [
+            {
+              "label": ".venv/",
+              "value": 0,
+              "sub": "this project’s own shelf",
+              "atWord": 6.917
+            },
+            {
+              "label": "pyvenv.cfg",
+              "value": 1,
+              "detail": "the answer",
+              "sub": "six lines of plain text",
+              "atWord": 12.167
+            },
+            {
+              "label": "bin/",
+              "value": 1,
+              "sub": "the python to run, and any commands",
+              "atWord": 18.25
+            },
+            {
+              "label": "lib/",
+              "value": 1,
+              "sub": "where the packages actually live",
+              "atWord": 22.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 469,
+      "audio": "audio/uv-08-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. You've been using one of these for four chapters without being told what it is. Let's fix that properly, because this is the idea everything else in Python packaging rests on.",
+      "data": {
+        "title": "What a venv really is",
+        "subtitle": "uv, chapter eight · six lines of plain text"
+      },
+      "durationFrames": 326,
+      "audio": "audio/uv-08-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Open the one file that decides everything.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "pyvenv.cfg",
+          "subtitle": "and the line that is the answer"
+        }
+      },
+      "durationFrames": 101,
+      "audio": "audio/uv-08-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Here is the entire configuration of a virtual environment. Six lines. Home says which real Python this folder borrows from. Implementation and version info record which one. uv notes the version that made the folder. Prompt is the name your shell shows. And then the last line.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Six lines, [that is all]",
+          "premise": "The complete configuration of a virtual environment, in plain text.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "include-system",
+          "steps": [
+            {
+              "label": "cat .venv/pyvenv.cfg",
+              "out": [
+                "home = /usr/local/bin",
+                "implementation = CPython",
+                "uv = 0.12.5",
+                "version_info = 3.12.14",
+                "include-system-site-packages = false",
+                "prompt = invoice-app"
+              ],
+              "detail": "read the fifth line twice",
+              "atWord": 10.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 552,
+      "audio": "audio/uv-08-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Include system site packages, set to false. That single line is the isolation. The line tells Python that while this environment is active, don't go looking at packages installed on the machine — look only inside this folder. One word, and two projects can never see each other's shelves again.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "green",
+          "headline": "One line is the [isolation]",
+          "premise": "false means: look in this folder only, and never at the machine-wide shelf.",
+          "stageTitle": "the wall, in text",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "false",
+          "steps": [
+            {
+              "label": "grep include .venv/pyvenv.cfg",
+              "out": [
+                "include-system-site-packages = false"
+              ],
+              "detail": "the wall from chapter zero, as one word",
+              "atWord": 14.417
+            },
+            {
+              "label": "uv run python -c \"import sys; print(len(sys.path))\"",
+              "out": [
+                "5"
+              ],
+              "detail": "five places to look, none of them shared",
+              "atWord": 27.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "2.21.0",
+              "detail": ".venv",
+              "atWord": 11.917
+            },
+            {
+              "label": "report-tool",
+              "text": "2.0",
+              "detail": ".venv",
+              "atWord": 18.667
+            },
+            {
+              "label": "wall",
+              "sub": "and the wall is one line in a text file",
+              "atWord": 24.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 531,
+      "audio": "audio/uv-08-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Home is worth a moment too, because home explains why these folders stay small. The environment contains no copy of Python at all. Home points at a real interpreter elsewhere, and the folder simply borrows the one it points at. Which is why a fresh venv weighs a few megabytes rather than a few hundred.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "blue",
+          "headline": "It [borrows] the interpreter",
+          "premise": "home points at a real Python somewhere else. The folder does not contain one.",
+          "stageTitle": "why a venv is tiny",
+          "token": "home = ...",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "du -sh .venv && du -sh \"$(uv python dir)\"",
+              "out": [
+                "4.0M    .venv",
+                "312M    /home/you/.local/share/uv/python"
+              ],
+              "detail": "four megabytes, against three hundred",
+              "atWord": 24.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "the real one",
+              "sub": "lives in uv python dir",
+              "detail": "borrowed",
+              "atWord": 15.833
+            },
+            {
+              "label": ".venv",
+              "text": "points at it",
+              "sub": "and holds only your packages",
+              "atWord": 24.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 518,
+      "audio": "audio/uv-08-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Now the two folders inside, which are where things actually are.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "bin and lib",
+          "subtitle": "and site-packages"
+        }
+      },
+      "durationFrames": 130,
+      "audio": "audio/uv-08-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Bin holds executables — the python for this environment, plus any commands your packages installed. On Windows the very same folder is called Scripts, which is the single most common reason a copied-and-pasted command fails to work. Same contents, different name.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "orange",
+          "headline": "bin, or [Scripts]",
+          "premise": "Same folder, two names. Unix calls it bin; Windows calls it Scripts.",
+          "stageTitle": "the executables",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "ls .venv/bin",
+              "out": [
+                "activate  pip  python  python3  pytest"
+              ],
+              "detail": "macOS and Linux: bin",
+              "atWord": 10.5
+            },
+            {
+              "label": "dir .venv\\Scripts",
+              "out": [
+                "activate.bat  pip.exe  python.exe  pytest.exe"
+              ],
+              "detail": "Windows: Scripts. same job, other name.",
+              "atWord": 21
+            }
+          ],
+          "stage": [
+            {
+              "label": ".venv/",
+              "value": 0,
+              "atWord": 6.667
+            },
+            {
+              "label": "bin/",
+              "value": 1,
+              "detail": "unix",
+              "sub": "python, and the commands you installed",
+              "atWord": 10.5
+            },
+            {
+              "label": "Scripts/",
+              "value": 1,
+              "detail": "windows",
+              "sub": "exactly the same contents",
+              "atWord": 21
+            }
+          ]
+        }
+      },
+      "durationFrames": 491,
+      "audio": "audio/uv-08-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And lib leads down to a folder called site-packages, which is where every package you install ends up. Open site-packages and you find more folders. Rich is a folder. Pygments is a folder. There's no database, no index, no registry — only directories with Python files inside them.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "blue",
+          "headline": "site-packages is just [folders]",
+          "premise": "Every installed package is a directory of Python files. Nothing else.",
+          "stageTitle": "where packages live",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "ls .venv/lib/python3.12/site-packages | head -6",
+              "out": [
+                "markdown_it/",
+                "mdurl/",
+                "pygments/",
+                "rich/",
+                "rich-15.0.0.dist-info/",
+                "_virtualenv.py"
+              ],
+              "detail": "folders. that is genuinely the mechanism.",
+              "atWord": 20.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "site-packages/",
+              "value": 0,
+              "sub": "the shelf itself",
+              "atWord": 10
+            },
+            {
+              "label": "rich/",
+              "value": 1,
+              "sub": "the package you asked for",
+              "atWord": 16.333
+            },
+            {
+              "label": "pygments/",
+              "value": 1,
+              "sub": "one it needed",
+              "atWord": 20.833
+            },
+            {
+              "label": "rich-15.0.0.dist-info/",
+              "value": 1,
+              "detail": "metadata",
+              "sub": "what version, and what it needs",
+              "atWord": 26.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 544,
+      "audio": "audio/uv-08-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "Which brings us to activation — and to why you have not typed it once in this whole course.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Activation",
+          "subtitle": "and why uv run replaces it"
+        }
+      },
+      "durationFrames": 164,
+      "audio": "audio/uv-08-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Activating an environment does one small thing: activation puts that bin folder at the front of your PATH, so typing python finds the venv copy first. That's the whole trick. No process starts and nothing is registered — your shell's search list simply gains one entry at the front.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "blue",
+          "headline": "Activation edits your [PATH]",
+          "premise": "One entry, added at the front of the list. That is the entire mechanism.",
+          "stageTitle": "what activate does",
+          "token": "source .venv/bin/activate",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "source .venv/bin/activate && which python",
+              "out": [
+                "/home/you/work/invoice-app/.venv/bin/python"
+              ],
+              "detail": "found in the venv, before anything else",
+              "atWord": 23.75
+            }
+          ],
+          "stage": [
+            {
+              "label": ".venv/bin",
+              "sub": "inserted at the front",
+              "detail": "new",
+              "atWord": 16.083
+            },
+            {
+              "label": "/usr/local/bin",
+              "sub": "checked second now",
+              "atWord": 22
+            },
+            {
+              "label": "/usr/bin",
+              "sub": "and third",
+              "atWord": 26.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 519,
+      "audio": "audio/uv-08-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Which also explains why forgetting to activate is so easy, and so quiet. Nothing tells you off. Your shell simply finds the machine-wide python instead, installs land on the shared shelf, and you find out weeks later — which is precisely the chapter-zero problem, arriving by a different road.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-share",
+          "token": "wrong-shelf",
+          "color": "red",
+          "headline": "Forget once, [silently] wrong",
+          "premise": "Nothing warns you. The shared shelf is simply the next one on the list.",
+          "stageTitle": "the quiet failure again",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "pip install httpx",
+              "out": [
+                "Successfully installed httpx-0.28.1"
+              ],
+              "detail": "succeeded — on the wrong shelf",
+              "atWord": 16.5
+            },
+            {
+              "label": "uv run python -c \"import httpx\"",
+              "out": [
+                "ModuleNotFoundError: No module named 'httpx'"
+              ],
+              "detail": "and your project still cannot see it",
+              "atWord": 27.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "your project",
+              "text": "here",
+              "atWord": 12.167
+            },
+            {
+              "label": "the machine shelf",
+              "text": "there",
+              "color": "orange",
+              "atWord": 18.167
+            },
+            {
+              "label": "httpx",
+              "text": "0.28.1",
+              "sub": "installed, and out of reach",
+              "atWord": 25.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 531,
+      "audio": "audio/uv-08-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "So uv run replaces activation entirely, which is why you've never typed activate once in this course. uv run finds the environment, makes sure the packages match the lockfile, then runs your command inside. Correct every time, with nothing to remember and therefore nothing to forget.",
+      "data": {
+        "uvStage": {
+          "kind": "env-ceremony",
+          "color": "green",
+          "headline": "uv run [replaces] activation",
+          "premise": "Find, check, run. Every time, whether or not you remembered anything.",
+          "stageTitle": "nothing left to forget",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add httpx && uv run python -c \"import httpx\"",
+              "out": [
+                " + httpx==0.28.1",
+                ""
+              ],
+              "detail": "right shelf, first time, no activation",
+              "atWord": 22.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "find the .venv",
+              "icon": "lucide:search",
+              "atWord": 1
+            },
+            {
+              "label": "check the packages",
+              "icon": "lucide:list-checks",
+              "atWord": 1
+            },
+            {
+              "label": "run your command",
+              "icon": "lucide:play",
+              "atWord": 1
+            },
+            {
+              "label": "uv run",
+              "sub": "and none of it is yours to remember",
+              "atWord": 26.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 546,
+      "audio": "audio/uv-08-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "How does uv find the environment? A fixed order, and it's worth knowing. An explicitly activated environment wins. Then a conda prefix. Then a dot venv folder here, or in any parent directory above you. First match wins, which is why uv run works from a subfolder.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "purple",
+          "headline": "How uv [finds] the venv",
+          "premise": "A fixed order: an active env, then conda, then .venv here or in any parent.",
+          "stageTitle": "the search order",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app/src",
+          "steps": [
+            {
+              "label": "cd src && uv run python -c \"import rich\"",
+              "out": [],
+              "detail": "worked, from a subfolder, unactivated",
+              "atWord": 28.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "VIRTUAL_ENV",
+              "value": 0,
+              "detail": "first",
+              "sub": "an environment you activated yourself",
+              "atWord": 12.25
+            },
+            {
+              "label": "CONDA_PREFIX",
+              "value": 0,
+              "detail": "second",
+              "sub": "if you live in conda",
+              "atWord": 17.917
+            },
+            {
+              "label": ".venv here",
+              "value": 0,
+              "detail": "third",
+              "sub": "in the folder you are standing in",
+              "atWord": 21.75
+            },
+            {
+              "label": ".venv above",
+              "value": 1,
+              "detail": "then upward",
+              "sub": "every parent, until one is found",
+              "atWord": 26.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 554,
+      "audio": "audio/uv-08-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "There's a command for making one directly, when you want an environment without a project around it. uv venv builds the folder, tells you which interpreter it borrowed, and prints the activation line for your shell. Same folder, same six-line file, just made on purpose rather than on the way past.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "blue",
+          "headline": "Make one [directly]",
+          "premise": "uv venv builds the folder on its own, with no project needed around it.",
+          "stageTitle": "a venv with no project",
+          "promptLabel": "you@laptop",
+          "cwd": "~/scratch",
+          "steps": [
+            {
+              "label": "uv venv",
+              "out": [
+                "Using CPython 3.10.4 interpreter at: /usr/bin/python3",
+                "Creating virtual environment at: .venv",
+                "Activate with: source .venv/bin/activate"
+              ],
+              "detail": "and it names the interpreter it borrowed",
+              "atWord": 14.667
+            }
+          ],
+          "stage": [
+            {
+              "label": ".venv/",
+              "value": 0,
+              "sub": "made deliberately this time",
+              "atWord": 10.75
+            },
+            {
+              "label": "pyvenv.cfg",
+              "value": 1,
+              "detail": "identical",
+              "sub": "the same six lines as before",
+              "atWord": 20.833
+            },
+            {
+              "label": ".gitignore",
+              "value": 1,
+              "sub": "uv excludes it here too, unasked",
+              "atWord": 25.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 493,
+      "audio": "audio/uv-08-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "You can also choose which Python the folder borrows, and give the folder a different name. Both are useful when you're testing whether a bug is version-specific, because two environments side by side beat one environment you keep rebuilding.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "purple",
+          "headline": "Choose the [Python], and the name",
+          "premise": "Two environments side by side beats one you rebuild every time you switch.",
+          "stageTitle": "two, at once",
+          "token": "uv venv --python 3.9 .venv39",
+          "promptLabel": "you@laptop",
+          "cwd": "~/scratch",
+          "steps": [
+            {
+              "label": "uv venv --python 3.12 .venv312",
+              "out": [
+                "Creating virtual environment at: .venv312"
+              ],
+              "detail": "one folder per interpreter",
+              "atWord": 11.5
+            },
+            {
+              "label": "uv venv --python 3.9 .venv39",
+              "out": [
+                "Creating virtual environment at: .venv39"
+              ],
+              "detail": "and both can sit there at the same time",
+              "atWord": 16.833
+            }
+          ],
+          "stage": [
+            {
+              "label": ".venv312",
+              "text": "3.12.14",
+              "sub": "where the code works",
+              "detail": "passes",
+              "atWord": 13
+            },
+            {
+              "label": ".venv39",
+              "text": "3.9.9",
+              "sub": "where the code does not",
+              "atWord": 19.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 380,
+      "audio": "audio/uv-08-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "One more file in there is worth naming. Dist-info sits beside every installed package and records what version arrived and what that package needs. Which is where uv pip show gets its answers from — nothing is being looked up remotely, it's reading a text file six folders down.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "green",
+          "headline": "Where the [metadata] lives",
+          "premise": "Every package ships a dist-info folder recording its version and its needs.",
+          "stageTitle": "dist-info",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "cd .venv/lib/*/site-packages/rich-15.0.0.dist-info",
+              "out": [],
+              "detail": "six folders down, and still plain text",
+              "atWord": 16.25
+            },
+            {
+              "label": "head -4 METADATA",
+              "out": [
+                "Metadata-Version: 2.4",
+                "Name: rich",
+                "Version: 15.0.0",
+                "Requires-Dist: pygments<3.0.0,>=2.13.0"
+              ],
+              "detail": "the constraint from chapter zero, on disk",
+              "atWord": 23.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich/",
+              "value": 1,
+              "sub": "the code itself",
+              "atWord": 12
+            },
+            {
+              "label": "rich-15.0.0.dist-info/",
+              "value": 1,
+              "sub": "what came with it",
+              "atWord": 17.917
+            },
+            {
+              "label": "METADATA",
+              "value": 2,
+              "detail": "plain text",
+              "sub": "version, and everything it requires",
+              "atWord": 24.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 524,
+      "audio": "audio/uv-08-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. Which single line in pyvenv dot cfg is the thing that keeps two projects apart? Pause the video here and picture the file before I answer. Ready? Include system site packages, set to false. One line, and that is the isolation.",
+      "data": {
+        "quiz": {
+          "question": "Which line in pyvenv.cfg is the isolation?",
+          "options": [
+            {
+              "text": "home = ..."
+            },
+            {
+              "text": "include-system-site-packages"
+            },
+            {
+              "text": "version_info = 3.12.14"
+            },
+            {
+              "text": "prompt = invoice-app"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "false means: look only in this folder, never at the shared shelf.",
+          "atWord": 1.917,
+          "revealAtWord": 25.333
+        }
+      },
+      "durationFrames": 506,
+      "audio": "audio/uv-08-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "One last practical note. Never commit a venv. The folder is large, the folder is specific to your machine, and the folder rebuilds from the lockfile in seconds. uv already wrote a gitignore excluding it, so committing one takes deliberate effort.",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "orange",
+          "headline": "Never [commit] a venv",
+          "premise": "Large, machine-specific, and rebuildable in seconds from a file you do commit.",
+          "stageTitle": "delete it, rebuild it",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "rm -rf .venv && uv sync",
+              "out": [
+                "Creating virtual environment at: .venv",
+                "Installed 13 packages in 47ms"
+              ],
+              "detail": "gone, and back, in forty-seven milliseconds",
+              "atWord": 21.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "uv.lock",
+              "sub": "commit this — it rebuilds the folder",
+              "atWord": 11.75
+            },
+            {
+              "label": ".venv/",
+              "sub": "never this — uv already ignores it",
+              "atWord": 19.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 465,
+      "audio": "audio/uv-08-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. A virtual environment is a folder with a six-line text file in it. One of those lines, set to false, is the whole isolation. And uv run finds and checks that folder for you, so activating one is a habit you can simply stop having.",
+      "data": {
+        "heading": "Chapter eight, in three lines",
+        "points": [
+          {
+            "text": "A venv is a folder. Nothing more.",
+            "atWord": 7.5
+          },
+          {
+            "text": "include-system-site-packages = false",
+            "atWord": 17.5
+          },
+          {
+            "text": "uv run means never activating again",
+            "atWord": 26.667
+          }
+        ]
+      },
+      "durationFrames": 501,
+      "audio": "audio/uv-08-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter, the file that makes your colleague's machine match yours exactly, down to the individual bytes.",
+      "data": {
+        "message": "Next: the lockfile",
+        "sub": "and why a hash beats a version number"
+      },
+      "durationFrames": 195,
+      "audio": "audio/uv-08-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
