@@ -27,7 +27,8 @@
         "pubgrub",
         "python packaging",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "how resolution works as overlapping ranges on a version line, and what uv says when no overlap exists."
     }
   },
   "brand": {

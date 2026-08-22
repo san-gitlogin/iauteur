@@ -27,7 +27,8 @@
         "ruff",
         "python tools",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "when to install a tool instead of borrowing one, how the PATH shim works, and why a tool is never an importable dependency."
     }
   },
   "brand": {

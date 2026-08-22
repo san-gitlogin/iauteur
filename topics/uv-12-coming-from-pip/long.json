@@ -28,7 +28,8 @@
         "astral uv",
         "python packaging",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "every pip command translated, pip-tools replaced by compile and sync, and the handful of places uv is deliberately stricter."
     }
   },
   "brand": {

@@ -27,7 +27,8 @@
         "dependency groups",
         "python packaging",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "why uv add writes a lower bound rather than a pin, what the +/~/- markers mean, and how uv tree exposes a shared dependency."
     }
   },
   "brand": {

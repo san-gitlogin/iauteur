@@ -29,7 +29,8 @@
         "dependencies",
         "python for beginners",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "what actually breaks a working Python project, why nothing crashes when it happens, and the shape of the fix."
     }
   },
   "brand": {

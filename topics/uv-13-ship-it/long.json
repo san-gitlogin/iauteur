@@ -29,7 +29,8 @@
         "astral uv",
         "python packaging",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "how uv build writes an sdist and builds the wheel from it, and how to publish without a credential ever reaching the screen."
     }
   },
   "brand": {

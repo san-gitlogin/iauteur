@@ -29,7 +29,8 @@
         "python for beginners",
         "curl",
         "powershell"
-      ]
+      ],
+      "breakdown": "how to get uv onto your machine, and why a tool that installs Python cannot itself require Python."
     }
   },
   "brand": {

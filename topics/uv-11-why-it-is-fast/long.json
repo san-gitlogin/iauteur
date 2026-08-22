@@ -27,7 +27,8 @@
         "pip vs uv",
         "python packaging",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "what the cache actually keeps and how it is keyed, plus the honest account of where the speed numbers come from."
     }
   },
   "brand": {

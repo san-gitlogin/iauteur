@@ -28,7 +28,8 @@
         "python tools",
         "python tutorial",
         "pipx"
-      ]
+      ],
+      "breakdown": "how uvx runs any Python tool in a throwaway environment, and why the second run is nearly free."
     }
   },
   "brand": {

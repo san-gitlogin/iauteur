@@ -27,7 +27,8 @@
         "reproducible builds",
         "python packaging",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "why the lockfile records exact bytes rather than version numbers, and why uv sync removes anything it did not record."
     }
   },
   "brand": {

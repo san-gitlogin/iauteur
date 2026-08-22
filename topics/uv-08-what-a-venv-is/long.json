@@ -28,7 +28,8 @@
         "astral uv",
         "python tutorial",
         "python for beginners"
-      ]
+      ],
+      "breakdown": "what a virtual environment actually is — a folder with a six-line config file, one line of which is the entire isolation."
     }
   },
   "brand": {

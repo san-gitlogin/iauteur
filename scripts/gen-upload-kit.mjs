@@ -93,6 +93,12 @@ const sources = sceneSources.length
 const title = seo.title ?? spec.meta?.topic ?? slug;
 const altTitles = Array.isArray(seo.altTitles) ? seo.altTitles : [];
 const hook = seo.hook ?? spec.meta?.openLoop ?? '';
+// `onePayoff` is authored as a standalone sentence and starts with a capital, but here it
+// is spliced into the middle of one — "breaks down What actually breaks a project" reads as
+// a typo. The fix is NOT to lowercase it automatically: no rule can tell "What" from
+// "Playwright" without a dictionary, and a heuristic that tests for a second capital turns
+// PyPI into pyPI and Playwright into playwright. Author `meta.seo.breakdown` instead —
+// already the documented override — phrased to sit mid-sentence.
 const breakdown = seo.breakdown ?? spec.meta?.onePayoff ?? '';
 const queries = Array.isArray(seo.queries) ? seo.queries : [];
 const hashtags = Array.isArray(seo.hashtags) ? seo.hashtags : [];

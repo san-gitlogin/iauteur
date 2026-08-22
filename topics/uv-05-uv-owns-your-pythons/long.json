@@ -26,7 +26,8 @@
         "astral uv",
         "python-build-standalone",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "how uv downloads and manages Python versions for you, pins one per project, and never touches the interpreters it merely found."
     }
   },
   "brand": {

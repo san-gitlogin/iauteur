@@ -26,7 +26,8 @@
         "python project",
         "python packaging",
         "python tutorial"
-      ]
+      ],
+      "breakdown": "every file uv init writes, what each one is for, and why the environment and lockfile appear on their own."
     }
   },
   "brand": {
