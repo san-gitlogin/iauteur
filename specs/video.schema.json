@@ -6309,7 +6309,7 @@
                         },
                         "token": {
                           "type": "string",
-                          "description": "Mode switch or label for the depiction, <=28 chars. shelf-share reads 'wrong-shelf'; pkg-index uses it as the warehouse label."
+                          "description": "Mode switch or label for the depiction, <=28 chars. shelf-share reads 'wrong-shelf'; env-ceremony reads 'no-collapse' (the ring, with its payoff withheld for a later beat); pkg-index uses it as the warehouse label."
                         },
                         "stageTitle": {
                           "type": "string",

@@ -1,0 +1,1074 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #0 — Why your Python projects keep breaking",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "What actually breaks a working Python project, why nothing crashes when it happens, and the shape of the fix.",
+    "openLoop": "You install a package for one project and a different project breaks, without you touching it.",
+    "analogy": "The shelf: packages are labelled parcels, your machine has one shelf, and every project reaches into it.",
+    "topicAxes": [
+      "economic-pain",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #0 — Why Your Python Projects Keep Breaking (2026)",
+      "altTitles": [
+        "Python packages, dependencies and virtual environments explained for total beginners"
+      ],
+      "description": "Chapter zero of the uv course. What a package really is, what a dependency really is, why two projects on one laptop fight over the same shelf, and why nothing crashes when they do.",
+      "tags": [
+        "uv",
+        "python",
+        "uv python",
+        "astral uv",
+        "pip",
+        "virtualenv",
+        "venv",
+        "python packaging",
+        "dependencies",
+        "python for beginners",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT BROKE ITSELF",
+    "badge": "uv · 00",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your program ran fine yesterday. Today Python can't find the package you know you installed.",
+      "data": {
+        "headline": "YOU CHANGED NOTHING",
+        "subtext": "and it broke anyway",
+        "heroAsset": "lucide:circle-alert",
+        "headlineAtWord": 1,
+        "heroAtWord": 7.25
+      },
+      "durationFrames": 184,
+      "audio": "audio/uv-00-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Here's the real thing. One line of Python, one import, and a wall of red text. No module named requests. But you remember installing requests, so what happened? You're not imagining anything, and none of this is your fault.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "red",
+          "headline": "The error [everybody] gets",
+          "premise": "A real terminal. One import, and the message every beginner has stared at.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "requests",
+          "steps": [
+            {
+              "label": "python -c \"import requests\"",
+              "out": [
+                "Traceback (most recent call last):",
+                "  File \"<string>\", line 1, in <module>",
+                "ModuleNotFoundError: No module named 'requests'"
+              ],
+              "detail": "installed. and Python cannot find it.",
+              "atWord": 5.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 458,
+      "audio": "audio/uv-00-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome along. By the end of this chapter you'll know exactly what breaks a working Python project, why nothing crashes when the breakage happens, and the shape of the thing that fixes all of it for good.",
+      "data": {
+        "title": "Why Python projects break",
+        "subtitle": "uv, chapter zero · packages, versions, and one shelf"
+      },
+      "durationFrames": 342,
+      "audio": "audio/uv-00-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And here's the one that really stings. Two projects on the same laptop. You install a package for the first project, you never once open the second, and the second project stops working. How? Hold that question, because the whole chapter is the answer.",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "orange",
+          "headline": "You never [opened] the other one",
+          "premise": "Two folders on one laptop. Each is a project you wrote on a different week.",
+          "stageTitle": "the blast radius",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "cd report-tool && pip install \"pygments==2.0.0\"",
+              "out": [
+                "Successfully installed pygments-2.0"
+              ],
+              "detail": "you only touched this project",
+              "atWord": 8.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "report-tool",
+              "sub": "you installed something here",
+              "atWord": 10.333
+            },
+            {
+              "label": "invoice-app",
+              "sub": "and this one stopped working",
+              "atWord": 19.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 474,
+      "audio": "audio/uv-00-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "To see why one project can break another, we need to look at what's actually sitting on your machine.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "What is on your machine",
+          "subtitle": "packages, and where they live"
+        }
+      },
+      "durationFrames": 176,
+      "audio": "audio/uv-00-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Picture a shelf. Every piece of code you install arrives as a sealed parcel, and the label on the parcel says two things: a name, and a version number. The name almost never changes, whereas the number changes constantly, and that number is where all the trouble starts.",
+      "data": {
+        "uvStage": {
+          "kind": "pkg-parcel",
+          "color": "blue",
+          "headline": "A package is a [name and a number]",
+          "premise": "Picture a shelf. Each parcel is a package; the label says its name and version.",
+          "stageTitle": "the label",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pip download rich",
+              "out": [
+                "Saved ./rich-15.0.0-py3-none-any.whl"
+              ],
+              "detail": "one file. one name. one number.",
+              "atWord": 7
+            },
+            {
+              "label": "pip download rich==14.1.0",
+              "out": [
+                "Saved ./rich-14.1.0-py3-none-any.whl"
+              ],
+              "detail": "same name, different number, different file",
+              "atWord": 19.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "sub": "the number is the part that moves",
+              "atWord": 14
+            },
+            {
+              "label": "rich",
+              "text": "14.1.0",
+              "sub": "and the same shelf slot holds one of them",
+              "atWord": 24.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 470,
+      "audio": "audio/uv-00-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Every parcel comes from the same place: one enormous public warehouse called PyPI, where anybody can put a parcel on the shelf and anybody can take one down. So when you type pip install, PyPI is where your machine goes looking.",
+      "data": {
+        "uvStage": {
+          "kind": "pkg-index",
+          "color": "blue",
+          "headline": "They come from [one place]",
+          "premise": "One public warehouse. Anyone may add a parcel; your machine fetches one down.",
+          "stageTitle": "where parcels come from",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pip install rich",
+              "out": [
+                "Collecting rich",
+                "  Downloading rich-15.0.0-py3-none-any.whl (310 kB)"
+              ],
+              "detail": "three hundred and ten kilobytes, off the stack",
+              "atWord": 16.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "color": "blue",
+              "sub": "pulled down off the stack",
+              "atWord": 21.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 422,
+      "audio": "audio/uv-00-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Now watch what pip actually does. I asked for one parcel. Four arrived. Read the lines pip is printing out: markdown-it-py, pygments, mdurl. Nobody asked for those three. And look at the strange little bits of text beside each name, because those are the reasons. Rich can't run without pygments, so pip fetched pygments too.",
+      "data": {
+        "uvStage": {
+          "kind": "dep-unfold",
+          "color": "blue",
+          "headline": "One parcel, [four arrived]",
+          "premise": "Open a parcel and a note inside names the others the code cannot run without.",
+          "stageTitle": "what came with rich",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pip install rich",
+              "out": [
+                "Collecting rich",
+                "Collecting markdown-it-py>=2.2.0",
+                "Collecting pygments<3.0.0,>=2.13.0",
+                "Collecting mdurl~=0.1"
+              ],
+              "detail": "the constraint beside each name is the reason",
+              "atWord": 7.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "sub": "the one you actually asked for",
+              "atWord": 9.083
+            },
+            {
+              "label": "markdown-it-py",
+              "text": "4.2.0",
+              "detail": "markdown-it-py>=2.2.0",
+              "atWord": 15.5
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "pygments<3.0.0,>=2.13.0",
+              "atWord": 19.167
+            },
+            {
+              "label": "mdurl",
+              "text": "0.1.2",
+              "detail": "mdurl~=0.1",
+              "atWord": 22.833
+            }
+          ],
+          "verdict": "Three nobody asked for",
+          "verdictSub": "and mdurl was asked for by markdown-it-py",
+          "verdictAtWord": 31.917
+        }
+      },
+      "durationFrames": 623,
+      "audio": "audio/uv-00-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Code that other code needs in order to run at all is called a dependency, and dependency is the single most important word in this whole course. Rich depends on pygments, which means pip must fetch pygments too. Markdown-it-py depends on mdurl, so mdurl arrives as well. That's two levels deep from one install, and nobody told you.",
+      "data": {
+        "uvStage": {
+          "kind": "dep-unfold",
+          "color": "purple",
+          "headline": "The word is [dependency]",
+          "premise": "Rich needs pygments. markdown-it-py needs mdurl. Two levels, from one command.",
+          "stageTitle": "two levels deep",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pip show rich",
+              "out": [
+                "Name: rich",
+                "Version: 15.0.0",
+                "Requires: markdown-it-py, pygments"
+              ],
+              "detail": "rich says so itself",
+              "atWord": 20.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "sub": "what you typed",
+              "atWord": 8.833
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "rich needs this",
+              "atWord": 14.5
+            },
+            {
+              "label": "markdown-it-py",
+              "text": "4.2.0",
+              "detail": "rich needs this too",
+              "atWord": 18.5
+            },
+            {
+              "label": "mdurl",
+              "text": "0.1.2",
+              "detail": "markdown-it-py needs this",
+              "atWord": 27.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 582,
+      "audio": "audio/uv-00-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Look at the order pip chose.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Read the [order]",
+          "premise": "Deepest first, and the parcel you actually asked for last of all.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "rich",
+          "steps": [
+            {
+              "label": "pip install rich",
+              "out": [
+                "Installing collected packages:",
+                "  pygments, mdurl, markdown-it-py, rich",
+                "Successfully installed rich-15.0.0"
+              ],
+              "detail": "the floor first, then the thing standing on it",
+              "atWord": 2.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 90,
+      "audio": "audio/uv-00-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "So far everything works, which is exactly why the next part catches people out. Here's the bit nobody mentions.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "One shelf, two projects",
+          "subtitle": "and one slot per parcel"
+        }
+      },
+      "durationFrames": 223,
+      "audio": "audio/uv-00-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "There's only one shelf. Not one shelf per project — one shelf, for the entire machine. Your invoice app and your report tool are completely separate pieces of work, written months apart, and both of them reach into that same shelf for the same parcels.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-share",
+          "color": "blue",
+          "headline": "Two projects, [one shelf]",
+          "premise": "One shelf for the whole machine. Every project on it reaches into the same one.",
+          "stageTitle": "one shelf, two hands",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pip list",
+              "out": [
+                "Package        Version",
+                "-------------- -------",
+                "markdown-it-py 4.2.0",
+                "pygments       2.21.0",
+                "rich           15.0.0"
+              ],
+              "detail": "one list, for everything you own",
+              "atWord": 6.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "2.21.0",
+              "atWord": 12.417
+            },
+            {
+              "label": "report-tool",
+              "text": "2.21.0",
+              "atWord": 15.75
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "sub": "the slot holds exactly one parcel",
+              "atWord": 22.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 468,
+      "audio": "audio/uv-00-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And now the two projects want different things. Your invoice app was built against pygments two point twenty-one. Your report tool needs the old two point zero, because the report tool was written back when two point zero was current. Same parcel, two numbers, one slot, which means one of those projects is about to lose.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-share",
+          "color": "orange",
+          "headline": "Same parcel, [two numbers]",
+          "premise": "The slot holds one parcel. Both projects need pygments, at versions that differ.",
+          "stageTitle": "the impossible request",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pip install \"pygments==2.0.0\"",
+              "out": [
+                "Collecting pygments==2.0.0",
+                "  Downloading Pygments-2.0-py3-none-any.whl (672 kB)"
+              ],
+              "detail": "the report tool asks for the old parcel",
+              "atWord": 12.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "2.21.0",
+              "sub": "needs the new pygments",
+              "atWord": 8
+            },
+            {
+              "label": "report-tool",
+              "text": "2.0",
+              "sub": "needs the old pygments",
+              "color": "orange",
+              "atWord": 16.833
+            },
+            {
+              "label": "pygments",
+              "text": "?",
+              "sub": "one slot, and one parcel fits in it",
+              "color": "red",
+              "atWord": 27.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 560,
+      "audio": "audio/uv-00-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "So pip does the only thing pip can do, and narrates the whole business itself. Attempting uninstall. Found existing installation. Uninstalling. Successfully uninstalled. Pip lifted the parcel your invoice app depends on straight off the shelf, and pip never asked the invoice app what it thought.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-evict",
+          "color": "red",
+          "headline": "The last install [wins]",
+          "premise": "The newcomer takes the slot. Whatever sat in the slot is carried away.",
+          "stageTitle": "the overwrite, in pip’s words",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pip install \"pygments==2.0.0\"",
+              "out": [
+                "Installing collected packages: pygments",
+                "  Attempting uninstall: pygments",
+                "    Found existing installation: Pygments 2.21.0",
+                "    Uninstalling Pygments-2.21.0:",
+                "      Successfully uninstalled Pygments-2.21.0"
+              ],
+              "detail": "nobody asked the project that needed it",
+              "atWord": 10.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "value": 0,
+              "sub": "carried off the shelf",
+              "atWord": 16
+            },
+            {
+              "label": "pygments",
+              "text": "2.0",
+              "sub": "and the newcomer takes the slot",
+              "atWord": 22.583
+            },
+            {
+              "label": "rich 15.0.0",
+              "detail": "requires pygments>=2.13.0",
+              "atWord": 28.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 540,
+      "audio": "audio/uv-00-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Then pip prints these two lines, one after the other. Pip says ERROR, and names the exact incompatibility pip has just created. And four lines later, in the same breath, pip says Successfully installed.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "red",
+          "headline": "Pip said both of [these]",
+          "premise": "Two real lines, four lines apart, from one command. Read them together.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "Successfully",
+          "steps": [
+            {
+              "label": "pip install \"pygments==2.0.0\"",
+              "out": [
+                "ERROR: pip’s dependency resolver does not currently take",
+                "into account all the packages that are installed.",
+                "rich 15.0.0 requires pygments<3.0.0,>=2.13.0, but you",
+                "have pygments 2.0 which is incompatible.",
+                "Successfully installed pygments-2.0"
+              ],
+              "detail": "broke rich, and reported success",
+              "atWord": 7.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 413,
+      "audio": "audio/uv-00-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And then nothing happens. That's the part I want you to sit with. Run the code that's now broken and rich prints its text perfectly happily, because rich only reaches for the missing piece on certain code paths.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Nothing [crashes]",
+          "premise": "The environment is wrong. The program still runs. Both of those are true.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "python -c \"from rich import print; print('hi')\"",
+              "out": [
+                "hi"
+              ],
+              "detail": "no crash. no warning. nothing at all.",
+              "atWord": 9.417
+            },
+            {
+              "label": "python -c \"import rich; print(rich.__version__)\"",
+              "out": [
+                "15.0.0"
+              ],
+              "detail": "still here, still broken underneath",
+              "atWord": 18
+            }
+          ]
+        }
+      },
+      "durationFrames": 377,
+      "audio": "audio/uv-00-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "There's no red text, no traceback, no moment of discovery, which is exactly why the damage goes unnoticed. The shelf is simply wrong now, and the shelf stays wrong until some other line of code, on some other day, finally trips over the missing piece. That's why this costs people an entire afternoon: by the time the pain arrives, the command that caused the pain is long forgotten, and that command told you it succeeded.",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "red",
+          "headline": "Wrong now. Painful [later].",
+          "premise": "The break and the symptom are days apart, which is what makes it so expensive.",
+          "stageTitle": "why it costs an afternoon",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "git log --oneline -1",
+              "out": [
+                "a1b3f90 tidy up the invoice totals"
+              ],
+              "detail": "the real cause was three days earlier",
+              "atWord": 35.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "Tuesday",
+              "sub": "you installed something, and it said success",
+              "atWord": 14.5
+            },
+            {
+              "label": "Friday",
+              "sub": "a different project fails, for no visible reason",
+              "atWord": 34.583
+            }
+          ],
+          "verdict": "Three days of distance",
+          "verdictSub": "which is why nobody connects the two",
+          "verdictAtWord": 40.25
+        }
+      },
+      "durationFrames": 745,
+      "audio": "audio/uv-00-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "One command would've told you, and almost nobody runs it. Pip check reads the shelf and says, in one plain sentence, which parcel is now wrong for which project.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "The check [nobody] runs",
+          "premise": "One command reads the shelf and names the conflict in a plain sentence.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "pip check",
+          "steps": [
+            {
+              "label": "pip check",
+              "out": [
+                "rich 15.0.0 has requirement pygments<3.0.0,>=2.13.0,",
+                "but you have pygments 2.0."
+              ],
+              "detail": "pip knew. you just had to ask pip.",
+              "atWord": 9.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 309,
+      "audio": "audio/uv-00-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "And the loud error from the very beginning? Same shelf, different symptom. The requests parcel is real, requests exists, and you genuinely did install requests. Requests is just sitting on a different shelf from the one your program is standing at. So the loud error and the quiet one share a single cause: the shelf.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-share",
+          "token": "wrong-shelf",
+          "color": "red",
+          "headline": "Real parcel, [wrong shelf]",
+          "premise": "The parcel exists and you installed it. Your program is standing somewhere else.",
+          "stageTitle": "the loud one, explained",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "python -c \"import requests\"",
+              "out": [
+                "ModuleNotFoundError: No module named 'requests'"
+              ],
+              "detail": "installed. just not on this shelf.",
+              "atWord": 13.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "your program",
+              "text": "here",
+              "atWord": 10.667
+            },
+            {
+              "label": "the other shelf",
+              "text": "there",
+              "color": "orange",
+              "atWord": 19.75
+            },
+            {
+              "label": "requests",
+              "text": "2.32.3",
+              "sub": "installed, and out of reach",
+              "atWord": 26.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 563,
+      "audio": "audio/uv-00-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "So what would actually fix all of this? Before I answer, one quick check that the important word landed.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The shape of the fix",
+          "subtitle": "and why nobody does it"
+        }
+      },
+      "durationFrames": 210,
+      "audio": "audio/uv-00-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "You asked for one package and four turned up. What do we call the three nobody asked for? Have a think, and pause the video here if you'd like a moment. Ready? They're dependencies — code your code needs in order to run.",
+      "data": {
+        "quiz": {
+          "question": "You asked for one. Four arrived. The other three are called?",
+          "options": [
+            {
+              "text": "Extensions"
+            },
+            {
+              "text": "Dependencies"
+            },
+            {
+              "text": "Modules"
+            },
+            {
+              "text": "Duplicates"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Code your code needs to run — fetched for you, noticed or not.",
+          "atWord": 2.083,
+          "revealAtWord": 19
+        }
+      },
+      "durationFrames": 385,
+      "audio": "audio/uv-00-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "Here's the answer, and honestly it's almost embarrassingly simple. Give every project a shelf of its own, and put a wall between the shelves so that nothing crosses over. Your invoice app keeps the new pygments, your report tool keeps the old pygments, and neither project can reach across and touch the other one's shelf.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "green",
+          "headline": "A shelf [each]",
+          "premise": "One shelf per project, walled. Both versions exist, and neither reaches the other.",
+          "stageTitle": "the wall goes up",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "ls invoice-app/.venv/lib/python3.12/site-packages",
+              "out": [
+                "markdown_it/  mdurl/  pygments/  rich/"
+              ],
+              "detail": "a folder. genuinely, that is all a shelf is.",
+              "atWord": 25.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "2.21.0",
+              "detail": "pygments",
+              "atWord": 12.833
+            },
+            {
+              "label": "report-tool",
+              "text": "2.0",
+              "detail": "pygments",
+              "atWord": 17.667
+            },
+            {
+              "label": "wall",
+              "sub": "neither project can reach the other shelf",
+              "atWord": 23.333
+            }
+          ],
+          "verdict": "A virtual environment",
+          "verdictSub": "a folder of parcels owned by one project",
+          "verdictAtWord": 28.917
+        }
+      },
+      "durationFrames": 552,
+      "audio": "audio/uv-00-long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "That folder of parcels, belonging to exactly one project, has a name: a virtual environment. So why does almost nobody keep one? Because of the ritual. You make the folder. You switch the folder on. You carry around in your head which folder you're currently in, because the terminal barely tells you. You switch the folder off when you leave. And the first time you forget any single one of those steps, you're straight back on the shared shelf without knowing.",
+      "data": {
+        "uvStage": {
+          "kind": "env-ceremony",
+          "token": "no-collapse",
+          "color": "orange",
+          "headline": "The ritual nobody [keeps up]",
+          "premise": "Four steps, every project, every session. Miss one and you are back on the shared shelf.",
+          "stageTitle": "round and round",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "python -m venv .venv",
+              "out": [],
+              "detail": "step one, every single time",
+              "atWord": 17.5
+            },
+            {
+              "label": "source .venv/bin/activate",
+              "out": [
+                "(.venv) $"
+              ],
+              "detail": "and now you must remember you are in it",
+              "atWord": 24.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "make it",
+              "icon": "lucide:package-plus",
+              "atWord": 15.917
+            },
+            {
+              "label": "switch it on",
+              "icon": "lucide:toggle-right",
+              "atWord": 22.25
+            },
+            {
+              "label": "remember",
+              "icon": "lucide:brain",
+              "atWord": 30.167
+            },
+            {
+              "label": "switch it off",
+              "icon": "lucide:toggle-left",
+              "atWord": 36.5
+            },
+            {
+              "label": "forget once",
+              "icon": "lucide:rotate-ccw",
+              "atWord": 42.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 793,
+      "audio": "audio/uv-00-long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Unless something performs the ritual for you. There's a tool called uv, and removing that ritual is the entire reason uv exists. The folder gets made, used and forgotten on your behalf, every single time, and you never think about any of it. One command instead of four steps. We install uv in the next chapter.",
+      "data": {
+        "uvStage": {
+          "kind": "env-ceremony",
+          "color": "green",
+          "headline": "One command, [instead]",
+          "premise": "The same four steps, performed for you, every time, without being asked.",
+          "stageTitle": "the ritual, collapsed",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv run main.py",
+              "out": [
+                "Creating virtual environment at: .venv",
+                "Installed 4 packages in 11ms",
+                "hi"
+              ],
+              "detail": "made, used and forgotten, in one line",
+              "atWord": 23
+            }
+          ],
+          "stage": [
+            {
+              "label": "make it",
+              "icon": "lucide:package-plus",
+              "atWord": 1
+            },
+            {
+              "label": "switch it on",
+              "icon": "lucide:toggle-right",
+              "atWord": 1
+            },
+            {
+              "label": "remember",
+              "icon": "lucide:brain",
+              "atWord": 1
+            },
+            {
+              "label": "switch it off",
+              "icon": "lucide:toggle-left",
+              "atWord": 1
+            },
+            {
+              "label": "uv run main.py",
+              "sub": "created, used and forgotten for you",
+              "atWord": 25.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 593,
+      "audio": "audio/uv-00-long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. A package is a parcel with a name and a number, and asking for one parcel quietly brings others along. Your machine has one shelf, every project reaches into that shelf, and one slot holds exactly one version. And when two projects disagree, the last install wins, nothing crashes, and you find out weeks later.",
+      "data": {
+        "heading": "Chapter zero, in three lines",
+        "points": [
+          {
+            "text": "A package is a name and a number",
+            "atWord": 7.083
+          },
+          {
+            "text": "One shelf, and one slot per parcel",
+            "atWord": 22.083
+          },
+          {
+            "text": "The last install wins, and says nothing",
+            "atWord": 33.5
+          }
+        ]
+      },
+      "durationFrames": 635,
+      "audio": "audio/uv-00-long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter we install uv, and I'll show you why a tool whose job is installing Python can't itself be written in Python.",
+      "data": {
+        "message": "Next: installing uv",
+        "sub": "and the chicken-and-egg problem it solves"
+      },
+      "durationFrames": 221,
+      "audio": "audio/uv-00-long_s26.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

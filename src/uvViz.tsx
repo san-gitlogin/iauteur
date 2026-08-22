@@ -526,13 +526,18 @@ const TwoProjects: React.FC<UvVizProps> = ({items, accent}) => {
 //
 // items[0..n-2] = the stations (label = the short name, icon = the object).
 // items[n-1]    = the collapse (label = the single command that replaces the ring).
-const EnvCeremony: React.FC<UvVizProps> = ({items, accent}) => {
+const EnvCeremony: React.FC<UvVizProps> = ({items, accent, token}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const stations = items.slice(0, -1).slice(0, 6);   // six is all a ring can seat legibly
-  const collapse = items[items.length - 1];
-  const cOn = items.length > 1 ? liveAt(frame, collapse?.atWord, 20) : 0;
+  // `token: "no-collapse"` — the ring WITHOUT its payoff. The chapter that teaches the
+  // ritual has to show the ring turning and stop there, because naming the thing that
+  // removes it is the next beat's job. Without this mode the last station was silently
+  // eaten as a collapse that never fired, so the ring drew one station short.
+  const noCollapse = token === 'no-collapse';
+  const stations = (noCollapse ? items : items.slice(0, -1)).slice(0, 6);
+  const collapse = noCollapse ? undefined : items[items.length - 1];
+  const cOn = !noCollapse && items.length > 1 ? liveAt(frame, collapse?.atWord, 20) : 0;
 
   // The ring is sized from the MEASURED pane, never a constant (LAW 0o rule 1).
   // Sized from the MEASURED pane. The first pass capped the ring at 340 design px and it

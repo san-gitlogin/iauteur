@@ -81,6 +81,12 @@ const familyOf = (s) => {
   return FAMILY[s.type] || s.type;
 };
 const subTypeOf = (s) => {
+  // UV_STAGE dispatches a DIFFERENT picture per `kind` — a parcel, a ring, a wall going
+  // up — so counting the type alone would read eight distinct depictions as one component
+  // used eight times, which is the opposite of what the over-reliance cap is for (a
+  // generic card standing in for several ideas). `layout:"terminal"` beats all look the
+  // same, a full-width terminal, so they correctly count together under one key.
+  if (s.type === 'UV_STAGE') return `UV_STAGE:${s.data?.uvStage?.layout === 'terminal' ? 'terminal' : (s.data?.uvStage?.kind ?? '?')}`;
   if (s.type === 'PIPELINE' && s.data?.pipeline?.variant) return `PIPELINE:${s.data.pipeline.variant}`;
   if (s.type === 'CODE_EDITOR' && s.data?.editor?.variant) return `CODE_EDITOR:${s.data.editor.variant}`;
   if (s.type === 'WINDOW_FRAME' && s.data?.window?.variant) return `WINDOW_FRAME:${s.data.window.variant}`;
