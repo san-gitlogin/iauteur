@@ -765,6 +765,37 @@ anchors past the scene's own length, panes with nothing to draw, missing premise
 now **three frames per scene** — 25/55/88% — because one still cannot reveal a motion glitch; 594
 frames across 12 episodes, montaged into per-episode contact sheets.
 
+### terminalcli chrome: three corrections, all from watching real frames (2026-08-22)
+
+Every one of these was invisible in code review and obvious on screen. They are recorded
+together because they share a cause: a value chosen once, in isolation, that then had to
+survive contact with type, with a corner, and with a second aspect ratio.
+
+**1 · `panelProps.title` was `~/data.chart`** — stamped on every window the pack draws, so
+a CHAPTER card read "CHAPTERS" inside a window titled data.chart. Now `~/studio`. The
+general trap: `panelProps` applies to everything a kit builds, so anything specific in it
+will eventually caption something it does not describe.
+
+**2 · The `[ REC ]` badge sat bottom-RIGHT**, which is exactly where the channel watermark
+is stamped on every frame — the two overlapped in all 33 packs' worth of terminalcli
+output. Now bottom-left, opposite the prompt line in the top-left corner.
+
+**3 · `TermCursor` did not follow its type.** The prop was a raw `size` that the component
+multiplied by `scale` a second time, while every caller had already scaled it; and
+`verticalAlign: 'text-bottom'` aligns to the bottom of the LINE BOX, below the descender,
+so beside capitals the block hung under the baseline. It now takes the rendered `fontSize`
+of its neighbour and derives width, height, gap and glow from that — one monospace cell,
+cap height, on the baseline. Holds at 28px and at 240px with no second number.
+
+⚠ **Checking a blinking element needs a blink-ON frame.** The first verification still
+caught the cursor mid-blink and showed nothing at all, which looks identical to "fixed".
+`_proof.mjs` shoots at 55% of a scene, so choose a `durationFrames` whose 55% mark lands
+inside the on-window (`frame % 30 < 16`) before believing the still.
+
+The fourteen long chapters were rendered BEFORE these three landed and are being left as
+they are (owner's call, twice). The corrections apply from the next render onward — the
+shorts carry all three.
+
 ### terminalcli: the panel title was `~/data.chart` (fixed 2026-08-22)
 
 The pack's `ChartKit.panelProps` set one title for EVERY window it draws — chapter cards,
