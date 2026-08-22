@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "topic": "uv shorts — a virtual environment is a folder, and one line is the isolation",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "A venv is a folder with a six-line config file, and include-system-site-packages = false is the whole isolation.",
+    "openLoop": "Everyone told you to make one. What is actually inside it?",
+    "analogy": "The walled shelf, opened up and read line by line.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "A virtual environment is just a folder #python #venv",
+      "description": "Six lines of plain text, and one of them is the entire isolation. That is all a venv is.",
+      "tags": [
+        "python",
+        "venv",
+        "virtualenv",
+        "uv",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "JUST A FOLDER",
+    "badge": "uv · 08",
+    "asset": "si:python",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Everyone told you to make a virtual environment. Did anyone say what one is?",
+      "data": {
+        "headline": "NOBODY EXPLAINED IT",
+        "subtext": "so here is the whole thing",
+        "heroAsset": "lucide:folder-open",
+        "headlineAtWord": 1.75,
+        "heroAtWord": 7
+      },
+      "durationFrames": 167,
+      "audio": "audio/uv-08-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "It is a folder. That is the whole answer. The words virtual environment sound like something clever is going on, and nothing clever is going on.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "green",
+          "headline": "It is a [folder]",
+          "premise": "No magic, no daemon, no registry. A folder with an interpreter and some code.",
+          "stageTitle": "the whole thing, opened",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "ls -a .venv",
+              "out": [
+                ".gitignore  CACHEDIR.TAG",
+                "bin/  lib/  pyvenv.cfg"
+              ],
+              "detail": "six entries, and nothing hidden",
+              "atWord": 6
+            }
+          ],
+          "stage": [
+            {
+              "label": ".venv/",
+              "value": 0,
+              "sub": "this project's own shelf",
+              "atWord": 4.5
+            },
+            {
+              "label": "pyvenv.cfg",
+              "value": 1,
+              "detail": "the answer",
+              "sub": "six lines of plain text",
+              "atWord": 8.333
+            },
+            {
+              "label": "lib/",
+              "value": 1,
+              "sub": "where the packages actually live",
+              "atWord": 11.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 256,
+      "audio": "audio/uv-08-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Open the config and there are six lines. Six. And one of them, set to false, is the entire isolation — it tells Python to look only in this folder and never at the machine.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Six lines, [that is all]",
+          "premise": "The complete configuration of a virtual environment, in plain text.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "include-system",
+          "steps": [
+            {
+              "label": "cat .venv/pyvenv.cfg",
+              "out": [
+                "home = /usr/local/bin",
+                "implementation = CPython",
+                "uv = 0.12.5",
+                "version_info = 3.12.14",
+                "include-system-site-packages = false",
+                "prompt = invoice-app"
+              ],
+              "detail": "read the fifth line twice",
+              "atWord": 8
+            }
+          ]
+        }
+      },
+      "durationFrames": 357,
+      "audio": "audio/uv-08-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "That one line is the wall from chapter zero. Set it false and two projects can never see each other’s packages again. One word, in a text file.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "green",
+          "headline": "One line is the [isolation]",
+          "premise": "false means: look in this folder only, and never at the machine-wide shelf.",
+          "stageTitle": "the wall, in text",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "false",
+          "steps": [
+            {
+              "label": "grep include .venv/pyvenv.cfg",
+              "out": [
+                "include-system-site-packages = false"
+              ],
+              "detail": "the wall, as one word",
+              "atWord": 7.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "2.21.0",
+              "detail": ".venv",
+              "atWord": 9.583
+            },
+            {
+              "label": "report-tool",
+              "text": "2.0",
+              "detail": ".venv",
+              "atWord": 11.25
+            },
+            {
+              "label": "wall",
+              "sub": "and the wall is one line in a text file",
+              "atWord": 13.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 290,
+      "audio": "audio/uv-08-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And uv run means you never activate one again. Full course on the channel.",
+      "data": {
+        "message": "It is just a folder",
+        "sub": "the complete uv course — chapter 08"
+      },
+      "durationFrames": 171,
+      "audio": "audio/uv-08-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

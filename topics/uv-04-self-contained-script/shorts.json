@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "topic": "uv shorts — a Python file that installs its own dependencies",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Four comment lines let one file carry its own environment and run anywhere.",
+    "openLoop": "How does one file go from nothing to output in under two seconds?",
+    "analogy": "The header lifts off the file and becomes the shelf the file runs on.",
+    "topicAxes": [
+      "entity-novelty"
+    ],
+    "seo": {
+      "title": "A Python file that installs its own dependencies #python #uv",
+      "description": "PEP 723 inline metadata: four comment lines Python ignores and uv reads. One file, no project, 1.824 seconds from nothing to output.",
+      "tags": [
+        "python",
+        "uv",
+        "pep 723",
+        "script",
+        "packaging",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "ONE FILE. NO SETUP.",
+    "badge": "uv · 04",
+    "asset": "si:python",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One Python file. No project, no setup. It installs its own dependencies.",
+      "data": {
+        "headline": "ONE FILE. NO SETUP.",
+        "subtext": "it brings its own everything",
+        "heroAsset": "lucide:file-code",
+        "headlineAtWord": 1.167,
+        "heroAtWord": 7.083
+      },
+      "durationFrames": 192,
+      "audio": "audio/uv-04-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Watch the clock. One file sits here, and rich is installed absolutely nowhere on this machine. One point eight seconds later, output.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Nothing to [output], in 1.8s",
+          "premise": "One file. rich installed in no environment anywhere on this machine.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "uv run",
+          "steps": [
+            {
+              "label": "time uv run demo.py",
+              "out": [
+                "Reading inline script metadata from: demo.py",
+                "Installed 4 packages in 798ms",
+                "hello from a lone script",
+                "real    0m1.824s"
+              ],
+              "detail": "no project. no venv. no install step.",
+              "atWord": 5.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 283,
+      "audio": "audio/uv-04-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "The trick is four lines of comments at the top of the file. Python skips them, because comments are comments. uv reads them and builds an environment out of them.",
+      "data": {
+        "uvStage": {
+          "kind": "script-header",
+          "color": "green",
+          "headline": "A comment Python [ignores]",
+          "premise": "Comments to Python. Instructions to uv. The same four lines do both jobs.",
+          "stageTitle": "PEP 723, line by line",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "head -4 demo.py",
+              "out": [
+                "# /// script",
+                "# requires-python = \">=3.12\"",
+                "# dependencies = [\"rich\"]",
+                "# ///"
+              ],
+              "detail": "four comment lines, and a whole environment",
+              "atWord": 7.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "demo.py",
+              "sub": "one file, nothing beside it",
+              "detail": "and uv built its shelf",
+              "atWord": 3.833
+            },
+            {
+              "label": "# /// script",
+              "sub": "the block opens here",
+              "atWord": 8.5
+            },
+            {
+              "label": "# dependencies = [\"rich\"]",
+              "sub": "and what goes on its shelf",
+              "atWord": 12.333
+            },
+            {
+              "label": "# ///",
+              "sub": "the block closes",
+              "atWord": 14.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 298,
+      "audio": "audio/uv-04-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And uv writes that block for you. Ask for a Python you do not have, and it simply downloads one — twenty-one megabytes, without stopping to ask.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "purple",
+          "headline": "It fetched a whole [Python]",
+          "premise": "3.12 was not on this machine, so uv fetched one rather than refusing.",
+          "stageTitle": "asked for, not installed",
+          "token": "uv init --script",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv init --script demo.py --python 3.12",
+              "out": [
+                "Downloading cpython-3.12.14 (21.0MiB)",
+                "Initialized script at `demo.py`"
+              ],
+              "detail": "twenty-one megabytes, unasked",
+              "atWord": 7.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "fetched",
+              "sub": "it was not here a second ago",
+              "detail": "now here",
+              "atWord": 10
+            },
+            {
+              "label": "your python3",
+              "text": "3.10.4",
+              "sub": "untouched, as always",
+              "atWord": 13.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 271,
+      "audio": "audio/uv-04-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Email that file to anyone and it just runs. Full course on the channel.",
+      "data": {
+        "message": "One file, no setup",
+        "sub": "the complete uv course — chapter 04"
+      },
+      "durationFrames": 149,
+      "audio": "audio/uv-04-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

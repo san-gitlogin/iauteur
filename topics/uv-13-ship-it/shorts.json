@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "topic": "uv shorts — the wheel is built from the sdist",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "uv build writes an sdist then builds the wheel from it, and --no-sources keeps local paths out of what you publish.",
+    "openLoop": "uv build makes two files. Which is made out of the other?",
+    "analogy": "One crate producing another: the wheel comes out of the sdist.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "The wheel is built FROM the sdist #python #packaging",
+      "description": "uv build says so in its own second line, and almost everybody reads it as two files made side by side.",
+      "tags": [
+        "python",
+        "uv",
+        "packaging",
+        "wheel",
+        "pypi",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "READ LINE TWO",
+    "badge": "uv · 13",
+    "asset": "si:pypi",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "uv build makes two files. Which one is made out of the other?",
+      "data": {
+        "headline": "READ THE SECOND LINE",
+        "subtext": "it says what everyone misses",
+        "heroAsset": "lucide:package-check",
+        "headlineAtWord": 1.583,
+        "heroAtWord": 5.5
+      },
+      "durationFrames": 143,
+      "audio": "audio/uv-13-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Two files land in a folder called dist. And the second line of that output says something people get wrong constantly.",
+      "data": {
+        "uvStage": {
+          "kind": "dist-output",
+          "color": "green",
+          "headline": "The wheel is built [from] the sdist",
+          "premise": "Two files in dist/, and the second is made out of the first. uv build says so.",
+          "stageTitle": "what uv build writes",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "from source",
+          "steps": [
+            {
+              "label": "uv build",
+              "out": [
+                "Building source distribution...",
+                "Building wheel from source distribution...",
+                "Successfully built dist/invoice_app-0.1.0.tar.gz",
+                "Successfully built dist/invoice_app-0.1.0-py3-none-any.whl"
+              ],
+              "detail": "read the second line again",
+              "atWord": 4.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "your project",
+              "text": "src/",
+              "sub": "the code as you wrote it",
+              "detail": "packed up",
+              "atWord": 5.333
+            },
+            {
+              "label": "invoice_app-0.1.0.tar.gz",
+              "text": "760 bytes",
+              "sub": "the source, packaged",
+              "atWord": 9.833
+            },
+            {
+              "label": "invoice_app-...any.whl",
+              "text": "1631 bytes",
+              "sub": "the installable one",
+              "detail": "built from the sdist",
+              "atWord": 11.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 246,
+      "audio": "audio/uv-13-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "One flag before you publish, and it is easy to forget. Build with no-sources and uv resolves exactly as a stranger would — so a local path cannot escape into your package.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "orange",
+          "headline": "Build as a [stranger] would",
+          "premise": "A local path or a git branch works on your machine and nowhere else.",
+          "stageTitle": "--no-sources",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--no-sources",
+          "steps": [
+            {
+              "label": "uv build --no-sources",
+              "out": [
+                "x Failed to resolve: shared-utils",
+                "  Caused by: not found in the package registry"
+              ],
+              "detail": "caught here, instead of by a stranger",
+              "atWord": 13.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "shared-utils",
+              "text": "local",
+              "atWord": 7.25
+            },
+            {
+              "label": "on your machine",
+              "sub": "resolved from ../shared-utils",
+              "detail": "works",
+              "atWord": 10.5
+            },
+            {
+              "label": "for anyone else",
+              "sub": "no such folder exists",
+              "detail": "fails",
+              "atWord": 15.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 332,
+      "audio": "audio/uv-13-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "Then check the version, publish, and verify from a completely clean environment. If the import works there, a stranger can install what you shipped.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Prove it from [nothing]",
+          "premise": "A clean environment, no project, straight from the index. The real test.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "--no-project",
+          "steps": [
+            {
+              "label": "uv version --bump minor --dry-run",
+              "out": [
+                "invoice-app 0.1.0 => 0.2.0"
+              ],
+              "detail": "the arrow, and nothing written yet",
+              "atWord": 4.667
+            },
+            {
+              "label": "uv run --with invoice-app --no-project -- python -V",
+              "out": [
+                "Installed 5 packages in 41ms",
+                "Python 3.12.14"
+              ],
+              "detail": "a clean env, straight from the index",
+              "atWord": 13.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 290,
+      "audio": "audio/uv-13-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That is the whole course, thirteen chapters, on the channel.",
+      "data": {
+        "message": "Ship the thing",
+        "sub": "the complete uv course — chapter 13"
+      },
+      "durationFrames": 120,
+      "audio": "audio/uv-13-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

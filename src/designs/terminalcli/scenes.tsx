@@ -42,7 +42,7 @@ export const TermHook: React.FC<{scene: Scene}> = ({scene}) => {
         }}
       >
         {d.headline}
-        <TermCursor size={(vertical ? 62 : 76) * scale} />
+        <TermCursor fontSize={(vertical ? 74 : 92) * scale} />
       </div>
       {d.subtext ? (
         <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps), fontFamily: t.fonts.mono, fontSize: 28 * scale, color: t.colors.muted}}>
@@ -194,11 +194,11 @@ export const TermStatCallout: React.FC<{scene: Scene}> = ({scene}) => {
       <div style={{fontFamily: t.fonts.mono, fontSize: 28 * scale, color: t.colors.muted, ...fadeUp(frame, start - 4, fps)}}>
         <span style={{color: t.colors.accent2}}>$ </span>echo $RESULT
       </div>
-      <div style={{...springPop(frame, start, fps), fontFamily: t.fonts.mono, fontWeight: 700, fontSize: (vertical ? 200 : 240) * scale, color: t.colors.accent, fontVariantNumeric: 'tabular-nums', lineHeight: 0.95, ...glow(scale, '#33ff00'), display: 'flex', alignItems: 'center'}}>
+      <div style={{...springPop(frame, start, fps), fontFamily: t.fonts.mono, fontWeight: 700, fontSize: (vertical ? 200 : 240) * scale, color: t.colors.accent, fontVariantNumeric: 'tabular-nums', lineHeight: 0.95, ...glow(scale, '#33ff00')}}>
         {d.prefix ?? ''}
         {value}
         {d.suffix ?? ''}
-        <TermCursor size={(vertical ? 130 : 150) * scale} />
+        <TermCursor fontSize={(vertical ? 200 : 240) * scale} />
       </div>
       <div style={{...fadeUp(frame, start + 14, fps), fontFamily: t.fonts.mono, fontSize: 38 * scale, color: t.colors.muted, textAlign: 'center', maxWidth: '80%'}}>
         {'# ' + d.label}
@@ -263,7 +263,7 @@ export const TermCodeWindow: React.FC<{scene: Scene}> = ({scene}) => {
             <div key={i} style={{display: 'flex', gap: 14 * scale, height: lh, alignItems: 'center', fontFamily: t.fonts.mono, fontSize: fsz}}>
               <span style={{color: hexA(t.colors.accent, 0.45), width: 22 * scale}}>{i + 1}</span>
               <span style={{color: col, whiteSpace: 'pre', ...glow(scale, col)}}>{text}</span>
-              {isCurrent ? <TermCursor size={fsz} /> : null}
+              {isCurrent ? <TermCursor fontSize={fsz} /> : null}
             </div>
           );
         })}

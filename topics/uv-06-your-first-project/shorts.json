@@ -1,0 +1,219 @@
+{
+  "meta": {
+    "topic": "uv shorts — every file uv init writes, and the two that arrive later",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "uv init writes six files with a job each, and .venv and uv.lock appear on their own.",
+    "openLoop": "One word made six files. What is each of them for?",
+    "analogy": "The project tree, drawn with real guide rails so nesting is visible.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "What uv init actually writes #python #uv",
+      "description": "Six files from one command, each with a job — and the two that appear on their own the first time uv needs them.",
+      "tags": [
+        "python",
+        "uv",
+        "pyproject.toml",
+        "uv init",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "SIX FILES, ONE WORD",
+    "badge": "uv · 06",
+    "asset": "si:uv",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One word makes a project. But what did those six files actually do?",
+      "data": {
+        "headline": "SIX FILES, ONE WORD",
+        "subtext": "and every one has a job",
+        "heroAsset": "lucide:folder-tree",
+        "headlineAtWord": 1.667,
+        "heroAtWord": 6
+      },
+      "durationFrames": 154,
+      "audio": "audio/uv-06-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "uv init, and a project exists. Six things appeared and you typed none of them. Most tutorials skip straight past this and start installing packages.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "green",
+          "headline": "Six things, from [one] word",
+          "premise": "One command wrote all of these. Nothing here is decoration.",
+          "stageTitle": "what uv init wrote",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv init hello-world && ls -a hello-world",
+              "out": [
+                ".gitignore  .python-version  README.md",
+                "main.py  pyproject.toml  .git/"
+              ],
+              "detail": "six things, and you typed none of them",
+              "atWord": 4.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "hello-world/",
+              "value": 0,
+              "sub": "the project folder",
+              "atWord": 6.583
+            },
+            {
+              "label": "pyproject.toml",
+              "value": 1,
+              "detail": "the one",
+              "sub": "what your project is, and needs",
+              "atWord": 9.417
+            },
+            {
+              "label": ".python-version",
+              "value": 1,
+              "sub": "which Python this project uses",
+              "atWord": 12.167
+            },
+            {
+              "label": ".gitignore",
+              "value": 1,
+              "sub": "and it already excludes .venv",
+              "atWord": 15
+            }
+          ]
+        }
+      },
+      "durationFrames": 303,
+      "audio": "audio/uv-06-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "pyproject dot toml is the one that matters. Not a uv invention — a Python standard every modern tool reads. Name, version, which Pythons you support, and what you depend on.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "The file everything [reads]",
+          "premise": "A Python standard, not a uv invention. Every modern tool understands it.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "highlight": "pyproject.toml",
+          "steps": [
+            {
+              "label": "cat pyproject.toml",
+              "out": [
+                "[project]",
+                "name = \"hello-world\"",
+                "version = \"0.1.0\"",
+                "requires-python = \">=3.10\"",
+                "dependencies = []"
+              ],
+              "detail": "four sections, and nothing else",
+              "atWord": 9.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 379,
+      "audio": "audio/uv-06-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Notice what is missing. No dot venv folder, and no lockfile. Neither is yours to create — both simply appear the first time uv actually needs them.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "purple",
+          "headline": "Two more [arrive] later",
+          "premise": "Nobody creates these. They appear the first time uv has to build anything.",
+          "stageTitle": "not yours to make",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/hello-world",
+          "steps": [
+            {
+              "label": "uv run main.py",
+              "out": [
+                "Creating virtual environment at: .venv",
+                "Hello from hello-world!"
+              ],
+              "detail": "the shelf was built on the way past",
+              "atWord": 11.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "hello-world/",
+              "value": 0,
+              "atWord": 5.25
+            },
+            {
+              "label": ".venv/",
+              "value": 1,
+              "detail": "the shelf",
+              "sub": "this project's own packages",
+              "atWord": 9.583
+            },
+            {
+              "label": "uv.lock",
+              "value": 1,
+              "detail": "the list",
+              "sub": "exactly what is on that shelf",
+              "atWord": 14
+            }
+          ]
+        }
+      },
+      "durationFrames": 304,
+      "audio": "audio/uv-06-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Every file read line by line in the full course.",
+      "data": {
+        "message": "Read every file",
+        "sub": "the complete uv course — chapter 06"
+      },
+      "durationFrames": 115,
+      "audio": "audio/uv-06-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

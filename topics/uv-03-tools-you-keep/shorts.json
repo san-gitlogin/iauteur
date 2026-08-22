@@ -1,0 +1,201 @@
+{
+  "meta": {
+    "topic": "uv shorts — installing a tool does not let your project import it",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "A tool gets its own environment and one shim on PATH; your project cannot import it.",
+    "openLoop": "How can a tool be installed and still be command-not-found?",
+    "analogy": "Two walled shelves: the tool on one, your project at the other.",
+    "topicAxes": [
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "Installed the tool, still cannot import it #python #uv",
+      "description": "uv tool install gives a tool its own environment and one shim on your PATH. Your project is a different environment entirely.",
+      "tags": [
+        "python",
+        "uv",
+        "ruff",
+        "pipx",
+        "PATH",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "INSTALLED, NOT FOUND",
+    "badge": "uv · 03",
+    "asset": "si:uv",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You installed the tool. Your terminal says command not found. Both true.",
+      "data": {
+        "headline": "INSTALLED. NOT FOUND.",
+        "subtext": "both, at the same time",
+        "heroAsset": "lucide:search-x",
+        "headlineAtWord": 1.083,
+        "heroAtWord": 6.333
+      },
+      "durationFrames": 173,
+      "audio": "audio/uv-03-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Watch uv install ruff and warn you in the very same breath. The folder it just put ruff into is not on your PATH, so the command will not work yet.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "It warns you [immediately]",
+          "premise": "The install succeeded. The warning underneath is the part that matters.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "not on your PATH",
+          "steps": [
+            {
+              "label": "uv tool install ruff",
+              "out": [
+                " + ruff==0.16.4",
+                "Installed 1 executable: ruff",
+                "warning: `~/.local/bin` is not on your PATH."
+              ],
+              "detail": "succeeded, and told you what is missing",
+              "atWord": 5.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 270,
+      "audio": "audio/uv-03-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "One command fixes that permanently, and then a fresh terminal picks it up. But there is a second surprise waiting.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "green",
+          "headline": "One command, [then] restart",
+          "premise": "uv edits your shell profile — but only when you ask it to.",
+          "stageTitle": "making the shim reachable",
+          "token": "uv tool update-shell",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv tool update-shell && exec $SHELL",
+              "out": [
+                "Updated PATH in `/home/you/.bashrc`"
+              ],
+              "detail": "it names the file it edited",
+              "atWord": 4.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "/usr/bin",
+              "sub": "checked first",
+              "atWord": 4.083
+            },
+            {
+              "label": "~/.local/bin",
+              "sub": "and now this is on the list too",
+              "detail": "added",
+              "atWord": 8.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 216,
+      "audio": "audio/uv-03-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Try to import ruff in your project code and Python says no such module. Nothing is broken. The tool lives in its own environment, and your project is a different one.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "red",
+          "headline": "A tool is not a [dependency]",
+          "premise": "Two separate shelves. The tool sits on one, your project stands at the other.",
+          "stageTitle": "two shelves, no bridge",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv pip show ruff",
+              "out": [
+                "warning: Package(s) not found for: ruff"
+              ],
+              "detail": "not in your project. never was.",
+              "atWord": 10.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "the tool env",
+              "text": "ruff",
+              "detail": "runs",
+              "atWord": 12.25
+            },
+            {
+              "label": "your project",
+              "text": "rich",
+              "detail": "imports",
+              "atWord": 14.667
+            },
+            {
+              "label": "wall",
+              "sub": "a tool you run is not a package you import",
+              "atWord": 16.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 324,
+      "audio": "audio/uv-03-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Tools are for running. Dependencies are for importing. Full course on the channel.",
+      "data": {
+        "message": "Run it, or import it",
+        "sub": "the complete uv course — chapter 03"
+      },
+      "durationFrames": 174,
+      "audio": "audio/uv-03-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

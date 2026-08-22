@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "topic": "uv shorts — uv picks the first compatible Python, not the newest",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "uv manages Python versions for you, and picks the first compatible one rather than the newest.",
+    "openLoop": "How many Pythons are already on your laptop, and who put them there?",
+    "analogy": "A rack of engines on rails, with one tagged for this project.",
+    "topicAxes": [
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "uv picks the OLDEST Python that works, not the newest #python #uv",
+      "description": "uv downloads and pins Python versions for you — and takes the first compatible one, not the newest. Pin it if you want a specific one.",
+      "tags": [
+        "python",
+        "uv",
+        "pyenv",
+        "python version",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "NOT THE NEWEST",
+    "badge": "uv · 05",
+    "asset": "si:python",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "How many Pythons are on your laptop right now? Most people guess wrong.",
+      "data": {
+        "headline": "HOW MANY PYTHONS?",
+        "subtext": "the answer is rarely one",
+        "heroAsset": "lucide:layers",
+        "headlineAtWord": 1.583,
+        "heroAtWord": 5.583
+      },
+      "durationFrames": 146,
+      "audio": "audio/uv-05-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "I asked this machine and the answer was three. One from an installer years ago, one bundled inside something else, one from the operating system. None of them knew about the others.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "orange",
+          "headline": "Three, on a [normal] laptop",
+          "premise": "Three interpreters from three sources, none of which knows about the others.",
+          "stageTitle": "what was already here",
+          "token": "uv python list",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv python list --only-installed",
+              "out": [
+                "cpython-3.10.4  ~/.../Python310/python.exe",
+                "cpython-3.9.9   ~/.../Python39/python.exe",
+                "cpython-3.9.7   <a science distribution>"
+              ],
+              "detail": "and nobody planned any of them",
+              "atWord": 7.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.10.4",
+              "text": "installer",
+              "sub": "from python.org, years ago",
+              "atWord": 8.25
+            },
+            {
+              "label": "cpython-3.9.9",
+              "text": "installer",
+              "sub": "also python.org, also years ago",
+              "atWord": 12.333
+            },
+            {
+              "label": "cpython-3.9.7",
+              "text": "bundled",
+              "sub": "arrived inside something else",
+              "atWord": 15.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 337,
+      "audio": "audio/uv-05-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Hand that mess to uv and it sorts itself out. One command installs a version. Another pins your project to it, in a one-line file you commit.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "green",
+          "headline": "One tiny file [decides] it",
+          "premise": ".python-version names the interpreter, and every uv command in the folder obeys.",
+          "stageTitle": "pinned to the project",
+          "token": "uv python pin 3.12",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv python install 3.12 && uv python pin 3.12",
+              "out": [
+                "Installed Python 3.12.14 in 4.21s",
+                "Pinned `.python-version` to `3.12`"
+              ],
+              "detail": "one line of text, in one small file",
+              "atWord": 8.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "pinned",
+              "sub": "what this project uses",
+              "detail": "pinned",
+              "atWord": 10.583
+            },
+            {
+              "label": "cpython-3.10.4",
+              "text": "ignored",
+              "sub": "still your machine default elsewhere",
+              "atWord": 13.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 285,
+      "audio": "audio/uv-05-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "But here is the bit that surprises everyone. uv takes the first compatible version, not the newest. Say you need three point ten or better, and three point ten is sitting there? That is what you get.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "orange",
+          "headline": "First compatible, not [newest]",
+          "premise": "uv takes the earliest version that satisfies you, not the highest available.",
+          "stageTitle": "the surprising default",
+          "token": "requires-python = \">=3.10\"",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv run python -V",
+              "out": [
+                "Python 3.10.4"
+              ],
+              "detail": "not 3.13, even though 3.13 is right there",
+              "atWord": 15.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "python",
+              "sub": "3.9, 3.10, 3.11, 3.12, 3.13",
+              "atWord": 6.333
+            },
+            {
+              "label": "you allow",
+              "text": "0.25..1.00",
+              "detail": ">=3.10",
+              "atWord": 12.75
+            },
+            {
+              "label": "uv picks",
+              "text": "0.25..0.35",
+              "detail": "3.10.4",
+              "atWord": 17.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 374,
+      "audio": "audio/uv-05-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Want a specific one? Pin it. Full uv course on the channel.",
+      "data": {
+        "message": "Pin it, and stop guessing",
+        "sub": "the complete uv course — chapter 05"
+      },
+      "durationFrames": 150,
+      "audio": "audio/uv-05-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

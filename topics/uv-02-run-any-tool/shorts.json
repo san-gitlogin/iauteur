@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "topic": "uv shorts — run any Python tool without installing it",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "uvx runs any tool in a throwaway environment, and the cache makes the second run nearly free.",
+    "openLoop": "How does a ten-megabyte tool run in a third of a second?",
+    "analogy": "A machine wheeled into a bay, used, and wheeled straight back out.",
+    "topicAxes": [
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "Run any Python tool without installing it #python #uv",
+      "description": "uvx builds a throwaway environment, runs your tool and forgets it. 5.792s cold, 0.294s warm — measured.",
+      "tags": [
+        "python",
+        "uv",
+        "uvx",
+        "ruff",
+        "pipx",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "5.7s THEN 0.29s",
+    "badge": "uv · 02",
+    "asset": "si:uv",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Five point seven seconds. Then nought point two nine. Same command.",
+      "data": {
+        "headline": "RUN IT WITHOUT INSTALLING",
+        "subtext": "and the second run is free",
+        "heroAsset": "lucide:wrench",
+        "headlineAtWord": 1.083,
+        "heroAtWord": 6.667
+      },
+      "durationFrames": 168,
+      "audio": "audio/uv-02-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Ruff is a Python linter, and it is not on this machine anywhere. One command runs it, checks the folder, and then it is gone again. Nothing added to any project.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "A tool you never [installed]",
+          "premise": "ruff is on no shelf on this machine. Watch it run anyway.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "uvx",
+          "steps": [
+            {
+              "label": "uvx ruff check .",
+              "out": [
+                "Downloading ruff (10.1MiB)",
+                "Installed 1 package in 637ms",
+                "All checks passed!"
+              ],
+              "detail": "and nothing was added to your project",
+              "atWord": 6.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 325,
+      "audio": "audio/uv-02-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "uv builds a throwaway environment off in its cache, drops the tool in, runs it, then stops caring. Your project is never touched.",
+      "data": {
+        "uvStage": {
+          "kind": "ephemeral-bay",
+          "color": "blue",
+          "headline": "Built, used, [let go]",
+          "premise": "A throwaway environment in the cache. The bay is empty before and after.",
+          "stageTitle": "wheeled in, wheeled out",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "0.16.4",
+              "icon": "lucide:wrench",
+              "atWord": 5.417
+            },
+            {
+              "label": "nothing on PATH",
+              "sub": "and nothing in your project either",
+              "atWord": 11.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 271,
+      "audio": "audio/uv-02-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Now run it again. Five point seven nine two seconds the first time, ten megabytes fetched and unpacked. Nought point two nine four the second. Same command, same machine, seconds apart.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "green",
+          "headline": "Five seconds, then [a third of one]",
+          "premise": "The same command run twice. The only difference is where the parcel came from.",
+          "stageTitle": "measured on this machine",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "time uvx ruff --version",
+              "out": [
+                "Downloading ruff (10.1MiB)",
+                "real    0m5.792s"
+              ],
+              "detail": "cold: nothing cached at all",
+              "atWord": 4.833
+            },
+            {
+              "label": "time uvx ruff --version",
+              "out": [
+                "ruff 0.16.4",
+                "real    0m0.294s"
+              ],
+              "detail": "warm: seconds later, same command",
+              "atWord": 14.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "cold",
+              "text": "5.792s",
+              "sub": "all the way from the warehouse",
+              "atWord": 7.75
+            },
+            {
+              "label": "warm",
+              "text": "0.294s",
+              "sub": "from the depot down the road",
+              "atWord": 16.583
+            },
+            {
+              "label": "nineteen times, measured here",
+              "atWord": 19.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 383,
+      "audio": "audio/uv-02-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That is uvx. Complete uv course on the channel.",
+      "data": {
+        "message": "uvx: borrow, do not install",
+        "sub": "the complete uv course — chapter 02"
+      },
+      "durationFrames": 128,
+      "audio": "audio/uv-02-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

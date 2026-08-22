@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "topic": "uv shorts — uv explains its own refusal in plain English",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Resolution is overlapping ranges on a version line, and uv narrates its reasoning when none exists.",
+    "openLoop": "Two packages want different versions of the same thing. Who wins?",
+    "analogy": "Bracketed ranges laid across one number line, and the overlap is the answer.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "uv tells you exactly why it refused #python #uv",
+      "description": "Because A depends on B, and because your project depends on C, we can conclude... uv narrates its own reasoning.",
+      "tags": [
+        "python",
+        "uv",
+        "resolver",
+        "dependencies",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "NO SOLUTION FOUND",
+    "badge": "uv · 10",
+    "asset": "si:uv",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Two packages want different versions of the same thing. Now what?",
+      "data": {
+        "headline": "THEY CANNOT BOTH WIN",
+        "subtext": "so which one does?",
+        "heroAsset": "lucide:git-merge",
+        "headlineAtWord": 1,
+        "heroAtWord": 5.167
+      },
+      "durationFrames": 135,
+      "audio": "audio/uv-10-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Chapter zero ended with pip overwriting one package and reporting success. Hand uv the same impossible request and it refuses — then explains itself in ordinary English.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "red",
+          "headline": "It refuses, and [explains]",
+          "premise": "The same impossible request pip accepted. uv stops, and says why in English.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "we can conclude",
+          "steps": [
+            {
+              "label": "uv add \"pytest==9.1.1\" \"pluggy<1.0\"",
+              "out": [
+                "x No solution found when resolving dependencies:",
+                "  Because pytest>=9.1.1 depends on pluggy>=1.5,<2 and your",
+                "  project depends on pluggy<1.0, we can conclude that your",
+                "  project and pytest>=9.1.1 are incompatible."
+              ],
+              "detail": "no overwrite. no success message. a refusal.",
+              "atWord": 8.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 358,
+      "audio": "audio/uv-10-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Picture one line with every version of a package on it. Each package lays a bracketed range across it. Where the brackets overlap, there is an answer.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "green",
+          "headline": "Where the brackets [overlap]",
+          "premise": "One line of versions. Each asker lays a bracketed range across it.",
+          "stageTitle": "the easy case",
+          "token": "the overlap is the answer",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "stage": [
+            {
+              "label": "lib",
+              "sub": "1.0, 1.5, 2.0, 2.5, 3.0",
+              "atWord": 3.25
+            },
+            {
+              "label": "foo wants",
+              "text": "0.15..1.00",
+              "detail": ">=1.0.0",
+              "atWord": 8.833
+            },
+            {
+              "label": "bar wants",
+              "text": "0.45..1.00",
+              "detail": ">=2.0.0",
+              "atWord": 12.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 281,
+      "audio": "audio/uv-10-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "And when they never touch, no answer exists. pytest needs pluggy above one point five. I asked for below one point zero. Opposite ends of the line.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "red",
+          "headline": "Brackets that never [touch]",
+          "premise": "pytest needs pluggy 1.5 or above. You asked for below 1.0. Nothing is in both.",
+          "stageTitle": "no overlap at all",
+          "token": "no version satisfies both",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "stage": [
+            {
+              "label": "pluggy",
+              "sub": "0.9, 1.0, 1.2, 1.5, 2.0",
+              "atWord": 3.75
+            },
+            {
+              "label": "pytest wants",
+              "text": "0.60..0.95",
+              "detail": ">=1.5,<2",
+              "atWord": 10.333
+            },
+            {
+              "label": "you want",
+              "text": "0.02..0.28",
+              "detail": "<1.0",
+              "value": 0,
+              "atWord": 15
+            }
+          ]
+        }
+      },
+      "durationFrames": 325,
+      "audio": "audio/uv-10-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Loosen one of the two it named. Full course on the channel.",
+      "data": {
+        "message": "Move one bracket",
+        "sub": "the complete uv course — chapter 10"
+      },
+      "durationFrames": 130,
+      "audio": "audio/uv-10-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "topic": "uv shorts — uv sync deletes packages it did not record",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "uv sync is exact by default: the folder must match the lockfile, and the lockfile records exact bytes.",
+    "openLoop": "Why would a sync command delete something you installed?",
+    "analogy": "A packing list with an exact identity and a wax seal against every line.",
+    "topicAxes": [
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "uv sync deleted my package (and it was right) #python #uv",
+      "description": "uv sync is --exact by default. Not in the lockfile means not in the folder — which is what stops an environment drifting.",
+      "tags": [
+        "python",
+        "uv",
+        "lockfile",
+        "uv sync",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "IT DELETED IT",
+    "badge": "uv · 09",
+    "asset": "si:uv",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "I ran uv sync and it deleted three packages. That is not a bug.",
+      "data": {
+        "headline": "IT DELETED MY PACKAGE",
+        "subtext": "and it was right to",
+        "heroAsset": "lucide:trash-2",
+        "headlineAtWord": 1.75,
+        "heroAtWord": 7.167
+      },
+      "durationFrames": 171,
+      "audio": "audio/uv-09-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "I installed typer behind uv’s back, using the pip interface. Then I ran a plain uv sync. Watch what happened.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-evict",
+          "color": "red",
+          "headline": "uv sync [removes] extras",
+          "premise": "Exact means the folder matches the lockfile. Anything else is an extra, and goes.",
+          "stageTitle": "the surprising default",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "Uninstalled",
+          "steps": [
+            {
+              "label": "uv pip install typer",
+              "out": [
+                " + typer==0.27.1"
+              ],
+              "detail": "installed behind uv's back, on purpose",
+              "atWord": 4
+            },
+            {
+              "label": "uv sync",
+              "out": [
+                "Uninstalled 3 packages in 47ms",
+                " - annotated-doc==0.0.5",
+                " - shellingham==1.5.4",
+                " - typer==0.27.1"
+              ],
+              "detail": "three gone, and nobody asked for that",
+              "atWord": 10
+            }
+          ],
+          "stage": [
+            {
+              "label": "typer",
+              "text": "0.27.1",
+              "value": 0,
+              "sub": "not in the lockfile",
+              "atWord": 11
+            },
+            {
+              "label": "the lockfile",
+              "text": "13 pkgs",
+              "sub": "and the folder now matches it exactly",
+              "atWord": 13
+            }
+          ]
+        }
+      },
+      "durationFrames": 261,
+      "audio": "audio/uv-09-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "uv sync is exact by default. The folder is made to match the lockfile, and anything not recorded there is an extra. Sounds alarming. It is the point.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "green",
+          "headline": "Alarming, and [correct]",
+          "premise": "An environment that keeps extras drifts. An exact one always matches the file.",
+          "stageTitle": "why exact is the default",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv sync --inexact",
+              "out": [
+                "Resolved 13 packages in 1ms"
+              ],
+              "detail": "if you really want extras left alone",
+              "atWord": 13.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "the lockfile",
+              "text": "13 pkgs",
+              "detail": "recorded",
+              "atWord": 7.833
+            },
+            {
+              "label": "your .venv",
+              "text": "13 pkgs",
+              "detail": "installed",
+              "atWord": 11.25
+            },
+            {
+              "label": "wall",
+              "sub": "and nothing can drift in between",
+              "atWord": 14.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 312,
+      "audio": "audio/uv-09-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Because the lockfile does not record a version. It records a hash — which exact bytes. That is what makes your machine and your colleague’s identical.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "token": "two-machines",
+          "color": "purple",
+          "headline": "Which exact [bytes]",
+          "premise": "A version names a release. A hash names the exact file, byte for byte.",
+          "stageTitle": "both machines, identical",
+          "promptLabel": "them@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "git clone ... && uv sync",
+              "out": [
+                "Installed 13 packages in 62ms"
+              ],
+              "detail": "sixty-two milliseconds to identical",
+              "atWord": 10.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "sha256:1f2a9c...",
+              "atWord": 5.417
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "sha256:8b4e10...",
+              "atWord": 8.5
+            },
+            {
+              "label": "pytest",
+              "text": "9.1.1",
+              "detail": "sha256:41ee9b...",
+              "sub": "the same bytes, on both machines",
+              "atWord": 11.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 263,
+      "audio": "audio/uv-09-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Commit the lockfile. Full uv course on the channel.",
+      "data": {
+        "message": "Commit the lockfile",
+        "sub": "the complete uv course — chapter 09"
+      },
+      "durationFrames": 129,
+      "audio": "audio/uv-09-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

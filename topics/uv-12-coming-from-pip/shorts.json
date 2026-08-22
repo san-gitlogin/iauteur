@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "topic": "uv shorts — uv pip compile prints and writes nothing without -o",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Every pip command works with uv in front, compile prints unless you pass -o, and uv is deliberately stricter.",
+    "openLoop": "If the commands are the same, what actually changes?",
+    "analogy": "One parcel, two gates: pip waves it through, uv stamps it with the reason.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "The uv command that prints instead of writing #python #pip",
+      "description": "uv pip compile prints to your screen and creates no file unless you pass -o. Catches almost everybody once.",
+      "tags": [
+        "python",
+        "uv",
+        "pip",
+        "pip-tools",
+        "requirements",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "IT DID NOT WRITE",
+    "badge": "uv · 12",
+    "asset": "si:python",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You already know pip. Put uv in front and every command still works.",
+      "data": {
+        "headline": "YOU ALREADY KNOW THIS",
+        "subtext": "just faster, and stricter",
+        "heroAsset": "lucide:arrow-left-right",
+        "headlineAtWord": 1.75,
+        "heroAtWord": 6.167
+      },
+      "durationFrames": 159,
+      "audio": "audio/uv-12-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Same flags, same arguments, same shape of output. The install that took pip eleven seconds takes under a second and a half here.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Put [uv] in front of it",
+          "premise": "The pip interface is deliberately familiar. Same flags, same shapes, faster.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "uv pip",
+          "steps": [
+            {
+              "label": "pip install rich",
+              "out": [
+                "Successfully installed rich-15.0.0",
+                "real    0m11.4s"
+              ],
+              "detail": "the command you already know",
+              "atWord": 4.333
+            },
+            {
+              "label": "uv pip install rich",
+              "out": [
+                "Installed 4 packages in 918ms",
+                "real    0m1.42s"
+              ],
+              "detail": "same command, one word in front",
+              "atWord": 10.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 259,
+      "audio": "audio/uv-12-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "But here is a trap that catches almost everybody. uv pip compile prints its output. It writes no file at all unless you pass dash o.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "red",
+          "headline": "It [prints]. It does not write.",
+          "premise": "Without -o the compiled output goes to your screen, and no file is created.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "-o",
+          "steps": [
+            {
+              "label": "uv pip compile requirements.in",
+              "out": [
+                "Resolved 4 packages in 64ms",
+                "rich==15.0.0",
+                "    # via -r requirements.in"
+              ],
+              "detail": "printed. nothing was saved.",
+              "atWord": 6.5
+            },
+            {
+              "label": "ls requirements.txt",
+              "out": [
+                "ls: cannot access requirements.txt: No such file"
+              ],
+              "detail": "exactly as promised, and as surprising",
+              "atWord": 12.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 273,
+      "audio": "audio/uv-12-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "And uv is deliberately stricter. Broken metadata that pip waves straight through, uv refuses — and tells you exactly why, now rather than in three weeks.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "orange",
+          "headline": "uv stops what [pip waves] through",
+          "premise": "The same package, offered to both. Only one of them reads the small print.",
+          "stageTitle": "two gates, one parcel",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "stage": [
+            {
+              "label": "broken-metadata",
+              "text": "1.0.0",
+              "atWord": 6.167
+            },
+            {
+              "label": "pip",
+              "sub": "installed",
+              "detail": "you find out later",
+              "atWord": 10.667
+            },
+            {
+              "label": "uv",
+              "sub": "rejected",
+              "detail": "stricter, and it tells you now",
+              "atWord": 14.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 297,
+      "audio": "audio/uv-12-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Every pip command translated in the full course.",
+      "data": {
+        "message": "Just add uv",
+        "sub": "the complete uv course — chapter 12"
+      },
+      "durationFrames": 114,
+      "audio": "audio/uv-12-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "topic": "uv shorts — a tool that installs Python cannot require Python",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "pip lives inside the interpreter and dies with it; uv is a binary beside it, which is why it can fetch a Python.",
+    "openLoop": "How can a tool install Python if it needs Python to run?",
+    "analogy": "Inside versus beside: pip lives in the interpreter, uv stands on the floor next to it.",
+    "topicAxes": [
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "Why pip can never fix a broken Python #python #uv",
+      "description": "pip is a Python package living inside the interpreter. uv is a Rust binary beside it. That one difference is the whole install story.",
+      "tags": [
+        "python",
+        "pip",
+        "uv",
+        "rust",
+        "packaging",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "INSIDE vs BESIDE",
+    "badge": "uv · 01",
+    "asset": "si:python",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A tool whose job is installing Python. Written in Python. See the problem?",
+      "data": {
+        "headline": "THE CHICKEN AND THE EGG",
+        "subtext": "installing the installer",
+        "heroAsset": "lucide:egg",
+        "headlineAtWord": 1.917,
+        "heroAtWord": 6.75
+      },
+      "durationFrames": 172,
+      "audio": "audio/uv-01-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Here is something about pip nobody says out loud. pip is a Python package. It lives inside a Python installation, in site-packages, beside everything else you ever installed.",
+      "data": {
+        "uvStage": {
+          "kind": "bootstrap-paradox",
+          "color": "blue",
+          "headline": "pip lives [inside] Python",
+          "premise": "pip is a Python package, so pip needs a working Python before pip can run.",
+          "stageTitle": "where pip actually is",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "python -m pip --version",
+              "out": [
+                "pip 25.2 from /usr/lib/python3.12/site-packages/pip"
+              ],
+              "detail": "read the path — pip is in there",
+              "atWord": 12.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "CPython 3.12",
+              "sub": "the interpreter",
+              "atWord": 5.917
+            },
+            {
+              "label": "pip",
+              "sub": "a package, in site-packages",
+              "atWord": 12.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 353,
+      "audio": "audio/uv-01-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Which means pip can never fix a broken Python. Break the interpreter and pip goes down with it. Not a bug — just where pip lives.",
+      "data": {
+        "uvStage": {
+          "kind": "bootstrap-paradox",
+          "color": "red",
+          "headline": "Break Python, [lose pip]",
+          "premise": "Whatever lives inside the interpreter cannot outlive the interpreter.",
+          "stageTitle": "down together",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "python -m pip install anything",
+              "out": [
+                "/usr/bin/python: No module named pip"
+              ],
+              "detail": "the package-fixer is itself a package",
+              "atWord": 6.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "CPython 3.12",
+              "sub": "broken, missing, or wrong version",
+              "value": 0,
+              "atWord": 5.083
+            },
+            {
+              "label": "pip",
+              "sub": "goes down with it",
+              "atWord": 9.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 247,
+      "audio": "audio/uv-01-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "uv is built the other way round. One compiled binary, in Rust, sitting beside Python rather than inside it. No interpreter needed to start.",
+      "data": {
+        "uvStage": {
+          "kind": "bootstrap-paradox",
+          "color": "green",
+          "headline": "uv sits [beside] Python",
+          "premise": "One compiled binary on the floor. Nothing underneath it to break.",
+          "stageTitle": "beside, not inside",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "curl -LsSf https://astral.sh/uv/install.sh | sh",
+              "out": [
+                "downloading uv 0.12.5",
+                "everything's installed!"
+              ],
+              "detail": "on a machine with no Python at all",
+              "atWord": 9.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "CPython 3.12",
+              "sub": "optional. genuinely optional.",
+              "atWord": 4.667
+            },
+            {
+              "label": "pip",
+              "sub": "still inside, still dependent",
+              "atWord": 8.5
+            },
+            {
+              "label": "uv",
+              "sub": "a Rust binary, on the floor",
+              "detail": "nothing to break under it",
+              "atWord": 12.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 292,
+      "audio": "audio/uv-01-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "Which is why uv can go and fetch a Python for you. A tool written in Python never could.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "purple",
+          "headline": "Which is why it can [fetch] one",
+          "premise": "A binary that needs no interpreter can go and download one.",
+          "stageTitle": "the payoff",
+          "token": "uv python install 3.12",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv python install 3.12",
+              "out": [
+                "Installed Python 3.12.14 in 4.21s"
+              ],
+              "detail": "a Rust binary fetching an interpreter",
+              "atWord": 5.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "fetched",
+              "sub": "four seconds, no browser",
+              "detail": "new",
+              "atWord": 6.5
+            },
+            {
+              "label": "your python3",
+              "text": "untouched",
+              "sub": "still exactly what it was",
+              "atWord": 8.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 185,
+      "audio": "audio/uv-01-short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Full uv course on the channel. Chapter one covers the install properly.",
+      "data": {
+        "message": "Install it properly",
+        "sub": "the complete uv course — chapter 01"
+      },
+      "durationFrames": 166,
+      "audio": "audio/uv-01-short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

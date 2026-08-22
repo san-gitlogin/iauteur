@@ -1,0 +1,219 @@
+{
+  "meta": {
+    "topic": "uv shorts — uv add writes a floor, not a pin",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "uv add writes a lower bound; the lockfile holds the exact version, and uv tree shows shared dependencies.",
+    "openLoop": "If pyproject does not pin the version, what does?",
+    "analogy": "One shelf, one copy of pygments, two packages both satisfied.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "uv add does NOT pin your version #python #uv",
+      "description": "uv add rich writes rich>=15.0.0 — a floor, not a pin. The exact version lives in the lockfile.",
+      "tags": [
+        "python",
+        "uv",
+        "dependencies",
+        "uv add",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "IT DOES NOT PIN",
+    "badge": "uv · 07",
+    "asset": "si:uv",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Everyone thinks uv add pins the version. It does not.",
+      "data": {
+        "headline": "IT DOES NOT PIN",
+        "subtext": "and almost nobody notices",
+        "heroAsset": "lucide:pin-off",
+        "headlineAtWord": 1,
+        "heroAtWord": 4.417
+      },
+      "durationFrames": 126,
+      "audio": "audio/uv-07-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "I asked for rich and uv installed fifteen point zero. But read what it wrote to the file. Not equals. Greater than or equal to. That is a floor, not a pin.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "Read the [operator]",
+          "premise": "uv wrote a lower bound derived from what it installed, not an exact version.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": ">=",
+          "steps": [
+            {
+              "label": "uv add rich",
+              "out": [
+                "Installed 5 packages in 980ms",
+                " + rich==15.0.0"
+              ],
+              "detail": "installed exactly 15.0.0",
+              "atWord": 4.083
+            },
+            {
+              "label": "grep -A2 dependencies pyproject.toml",
+              "out": [
+                "dependencies = [",
+                "    \"rich>=15.0.0\",",
+                "]"
+              ],
+              "detail": "but wrote a floor, not that number",
+              "atWord": 12.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 333,
+      "audio": "audio/uv-07-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "That is deliberate. pyproject says what your project can live with. The exact version goes in the lockfile instead, which is what your colleague actually gets.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "blue",
+          "headline": "A floor is a [wider] promise",
+          "premise": "pyproject says what you can live with. The exact version is recorded elsewhere.",
+          "stageTitle": "why not pin here",
+          "token": "the lockfile pins it",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "grep rich pyproject.toml uv.lock",
+              "out": [
+                "pyproject.toml:    \"rich>=15.0.0\",",
+                "uv.lock:version = \"15.0.0\""
+              ],
+              "detail": "the range here, the exact one there",
+              "atWord": 10.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "sub": "14.0, 15.0, 15.1, 16.0, 17.0",
+              "atWord": 3.25
+            },
+            {
+              "label": "a pin would say",
+              "text": "0.28..0.34",
+              "detail": "==15.0.0",
+              "value": 0,
+              "atWord": 7.417
+            },
+            {
+              "label": "uv wrote",
+              "text": "0.28..1.00",
+              "detail": ">=15.0.0",
+              "atWord": 12.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 277,
+      "audio": "audio/uv-07-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "And run uv tree on a real project. Look at pygments — it appears twice. Once because rich needs it, once because pytest does. Two packages asking, one copy installed.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-share",
+          "color": "purple",
+          "headline": "pygments appears [twice]",
+          "premise": "Two packages ask for pygments independently. The shelf holds exactly one copy.",
+          "stageTitle": "one copy, two askers",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv tree",
+              "out": [
+                "├── rich v15.0.0",
+                "│   └── pygments v2.21.0",
+                "└── pytest v9.1.1 (group: dev)",
+                "    └── pygments v2.21.0"
+              ],
+              "detail": "read the second line, then the last",
+              "atWord": 7.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "2.21.0",
+              "atWord": 10.833
+            },
+            {
+              "label": "pytest",
+              "text": "2.21.0",
+              "atWord": 15.75
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "sub": "one copy, and both are satisfied",
+              "atWord": 18.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 375,
+      "audio": "audio/uv-07-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Floors, groups and extras, all in the full course.",
+      "data": {
+        "message": "A floor, not a pin",
+        "sub": "the complete uv course — chapter 07"
+      },
+      "durationFrames": 122,
+      "audio": "audio/uv-07-short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
