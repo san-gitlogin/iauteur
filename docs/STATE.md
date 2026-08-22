@@ -109,6 +109,18 @@ Captured with uv 0.12.5 installed isolated into a scratchpad via `UV_INSTALL_DIR
 machine's own 0.10.9 was left alone. Scrubbed: `uv init` writes an `authors` line from the
 local git config, and `briefs/` is tracked in a public repo.
 
+**Shipped.** All fourteen rendered at 16:9 dark, thumbnails rendered, upload kits written,
+and the stitched cut built: `topics/uv-course/out/wide-dark.mp4`, **01:12:45**, 352 MB,
+frame count verified against the sum of the episode specs. Register a course in
+`scripts/build-course-cut.mjs` and run `node scripts/build-course-cut.mjs uv` to rebuild.
+
+Two small things fixed along the way, both of which affect every future course:
+`meta.seo.breakdown` is now authored per chapter rather than letting the upload kit splice
+a capitalised `onePayoff` into the middle of a sentence — and the automatic fix for that
+was rejected on purpose, because no rule distinguishes "What" from "Playwright" and testing
+for a second capital turns PyPI into pyPI. The course-cut chapter labels also strip the
+episode's own "Tutorial #N —" prefix, which was otherwise said twice in one line.
+
 ⚠ **The chapter `build.mjs` files are gitignored** (`topics/*/*` keeps only `long.json` and
 `shorts.json`). Every word of narration and every data field lives in the tracked spec, so
 nothing is lost — but the builders themselves exist only on the machine that made them.
