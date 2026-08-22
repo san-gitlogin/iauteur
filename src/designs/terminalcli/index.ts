@@ -3,7 +3,16 @@ import {TermChrome, TermWindow} from './primitives';
 import {Headline} from '../../ui';
 import {makeLineChart, makeDonut, makeProgress, makeTimeline, makeTitleCard, makeChapter, makeRecap, ChartKit} from '../chartKit';
 
-const termKit: ChartKit = {Headline, Panel: TermWindow, panelProps: {title: '~/data.chart'}, legendGlow: true, progressVariant: 'bar'};
+// The panel title is stamped on EVERY window this pack draws — the chapter card, the
+// title card, the recap rows, and every chart. `~/data.chart` was a chart-shaped name
+// borrowed for all of them, so a CHAPTER card read "CHAPTERS" inside a window titled
+// data.chart, which describes nothing on screen (owner, 2026-08-22).
+//
+// `~/studio` instead: a plain working directory, which claims nothing about the contents
+// and matches the prompt this pack's own chrome already draws (`you@studio:~$`). The
+// channel name deliberately does NOT go here — brand identity is local-only in a public
+// repo, and a literal would put the owner's channel into every fork.
+const termKit: ChartKit = {Headline, Panel: TermWindow, panelProps: {title: '~/studio'}, legendGlow: true, progressVariant: 'bar'};
 const TermLineChart = makeLineChart(termKit);
 const TermDonut = makeDonut(termKit);
 const TermProgress = makeProgress(termKit);

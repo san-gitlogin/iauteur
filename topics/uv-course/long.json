@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "topic": "The Complete uv Course",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "Python packaging from the thing that actually goes wrong to publishing a package anybody can install.",
+    "openLoop": "Almost every tutorial tells you to make a virtual environment. Almost none say what one is.",
+    "analogy": "The shelf: packages are labelled parcels, and every project reaches into the same one.",
+    "topicAxes": [
+      "economic-pain",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "Learn uv Properly — The Complete Python Packaging Course for Absolute Beginners (2026)",
+      "breakdown": "Python packaging from the thing that actually goes wrong to publishing a package anybody can install."
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "STOP USING PIP",
+    "badge": "Complete uv course",
+    "asset": "si:uv",
+    "note": "14 chapters · 1h 12m",
+    "replaces": {
+      "from": "pip",
+      "to": "uv",
+      "toAsset": "si:uv"
+    },
+    "logos": [
+      "si:python"
+    ]
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "placeholder",
+      "durationFrames": 60,
+      "background": "zoneA",
+      "data": {
+        "headline": "STOP USING PIP",
+        "subtext": "the complete uv course",
+        "heroAsset": "si:uv"
+      }
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "placeholder",
+      "durationFrames": 60,
+      "background": "zoneB",
+      "data": {
+        "title": "The Complete uv Course",
+        "subtitle": "fourteen chapters, in one sitting"
+      }
+    }
+  ]
+}

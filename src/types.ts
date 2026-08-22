@@ -11197,6 +11197,11 @@ export interface VideoSpec {
      *  title rather than orphaned between it and the logo wall. Keep it short —
      *  it is set on one line and does not wrap. */
     note?: string;
+    /** THE SWAP: the old thing struck through, the new thing lit under it. Use when the
+     *  video ARGUES a replacement rather than merely mentioning brands — a logo wall
+     *  shows what a video is about, this shows what it claims. `fromAsset`/`toAsset` are
+     *  optional because not every tool has a brand mark (pip has none). */
+    replaces?: {from: string; to: string; fromAsset?: string; toAsset?: string};
   };
   scenes: Scene[];
 }

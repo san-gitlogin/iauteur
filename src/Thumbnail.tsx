@@ -6,10 +6,65 @@ import {AssetIcon} from './AssetIcon';
 
 // Long-form thumbnail (1280x720). Rule: ≤4 words, one focal icon, readable at 120px.
 // `logo` (brand.logo) stamps the channel mark bottom-right — every thumbnail carries it.
+type Replaces = {from: string; to: string; fromAsset?: string; toAsset?: string};
+
+/**
+ * THE SWAP. The old thing struck through, the new thing lit underneath it.
+ *
+ * Built for the uv course cut, where the promise is "stop using pip" and a row of tidy
+ * brand marks would say nothing at all — a logo wall shows what a video mentions, and
+ * this shows what it ARGUES. The strike is drawn as a bar across the word rather than a
+ * CSS line-through, because at thumbnail scale a text decoration is a hairline nobody
+ * sees on a phone.
+ *
+ * `from` and `to` are words. `fromAsset` / `toAsset` are optional marks beside them —
+ * optional because not everything has an icon: pip has no simple-icons glyph, and
+ * setting one it does not own would be an invention (LAW 3).
+ */
+const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
+  const t = useTheme();
+  const red = '#ff4d4d';
+  const word = (text: string, size: number, color: string) => (
+    <div style={{fontFamily: t.fonts.mono, fontWeight: 800, fontSize: size,
+                 letterSpacing: '-0.02em', color, lineHeight: 1, whiteSpace: 'nowrap'}}>{text}</div>
+  );
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
+                 gap: 22, flex: '0 0 auto'}}>
+      {/* the old way, crossed out */}
+      {/* Legible, not faint. The rejected thing has to be READ for the strike to mean
+          anything — muted at 0.6 disappeared at phone size, which is where the decision
+          to click is made. Subordinate to the lit half by size and opacity, not by fading
+          it out of the picture. */}
+      <div style={{position: 'relative', display: 'flex', alignItems: 'center', gap: 14,
+                   opacity: 0.78, padding: '2px 6px'}}>
+        {r.fromAsset ? <AssetIcon asset={r.fromAsset} size={64} bare tint={t.colors.text} /> : null}
+        {word(r.from, 96, t.colors.text)}
+        {/* a BAR, not a text decoration: at thumbnail scale a line-through is a hairline
+            nobody sees on a phone. Centred on the glyph box rather than the padded box. */}
+        <div style={{position: 'absolute', left: -14, right: -14, top: '50%',
+                     height: 10, borderRadius: 5, background: red,
+                     transform: 'translateY(-50%)',
+                     boxShadow: `0 0 24px ${red}`}} />
+      </div>
+      {/* the new way, lit */}
+      <div style={{display: 'flex', alignItems: 'center', gap: 16,
+                   padding: '12px 22px', borderRadius: 16 * t.style.cornerRadius,
+                   background: `${t.colors.accent}22`,
+                   border: `3px solid ${t.colors.accent}`,
+                   boxShadow: t.style.glow > 0 ? `0 0 46px ${t.colors.glowSoft}` : 'none'}}>
+        {r.toAsset ? <AssetIcon asset={r.toAsset} size={84} bare tint={t.colors.text} /> : null}
+        {word(r.to, 108, t.colors.text)}
+      </div>
+    </div>
+  );
+};
+
+
 const ThumbInner: React.FC<{
   title: string; badge: string; asset: string; logo?: string;
-  logos?: string[]; logoTint?: string; note?: string;
-}> = ({title, badge, asset, logo, logos, logoTint, note}) => {
+  logos?: string[]; logoTint?: string; note?: string; replaces?: Replaces;
+}> = ({title, badge, asset, logo, logos, logoTint, note, replaces}) => {
   const t = useTheme();
 
   // FIT THE TITLE. The size used to be a constant, so a longer title simply wrapped
@@ -29,9 +84,14 @@ const ThumbInner: React.FC<{
   // room above the logo wall, less the badge, the note, and the gaps between them
   const budget = (logos?.length ? 530 : 660) - 54 - 28 - (note ? 56 : 0);
   const base = logos?.length ? 132 : 108;
+  // 1584 is calibrated against the 88%-wide column a logo-wall thumbnail gets. A swap
+  // block is a second COLUMN and takes real width away, so the same constant let the
+  // title wrap to a line more than the fitter predicted and pushed the badge off the top
+  // edge — LAW 0o's "never size to a constant", one layer further in. Scale, do not guess.
+  const fitWidth = replaces ? 1584 * (0.56 / 0.88) : 1584;
   const titleSize =
     [base, base - 10, base - 20, base - 28, base - 36, base - 44].find(
-      (size) => wrapAt(Math.max(6, Math.floor(1584 / size))) * size * 1.02 <= budget,
+      (size) => wrapAt(Math.max(6, Math.floor(fitWidth / size))) * size * 1.02 <= budget,
     ) ?? base - 44;
   return (
     <AbsoluteFill>
@@ -44,7 +104,11 @@ const ThumbInner: React.FC<{
           padding: logos?.length ? '0 90px 190px' : '0 90px',
         }}
       >
-        <div style={{display: 'flex', flexDirection: 'column', gap: 28, maxWidth: logos?.length ? '88%' : '62%'}}>
+        {/* The swap block is a second column, not an icon, so the text column has to
+            yield real width to it. Without this the left column kept the 88% it takes
+            when a logo wall is present and the swap ran straight off the right edge. */}
+        <div style={{display: 'flex', flexDirection: 'column', gap: 28,
+                     maxWidth: replaces ? '56%' : logos?.length ? '88%' : '62%'}}>
           <div
             style={{
               alignSelf: 'flex-start',
@@ -104,7 +168,7 @@ const ThumbInner: React.FC<{
             ) : null}
           </div>
         </div>
-        {logos?.length ? null : <AssetIcon asset={asset} size={300} />}
+        {replaces ? <ReplacesBlock r={replaces} /> : logos?.length ? null : <AssetIcon asset={asset} size={300} />}
       </AbsoluteFill>
       {/* THE LOGO WALL. Bare glyphs on the background itself — no chip, no card, no
           tinted container. Tinted uniformly: Anthropic (#191919), SpaceX (#000000)
@@ -150,6 +214,7 @@ export const Thumbnail: React.FC<{
   logos?: string[];
   logoTint?: string;
   note?: string;
+  replaces?: Replaces;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>
     <ThumbInner {...props} />
