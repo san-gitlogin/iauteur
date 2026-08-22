@@ -1441,6 +1441,42 @@ export const MANIFEST = {  MCP_MESH: {
     },
     example: {cmdTraceroute: {"stageTitle":"hop by hop","headline":"traceroute makes each hop [answer]","color":"blue","promptLabel":"santhu@box","cwd":"~","atWord":1,"steps":[{"label":"traceroute 1.1.1.1","text":"7  * * *","detail":"the stars are the problem"}],"stage":[{"label":"send a packet","sub":"allowed one hop only"},{"label":"it expires","sub":"and that router reports back"},{"label":"hop 1","sub":"your own router"},{"label":"allow two hops","sub":"and repeat"},{"label":"hop 4","sub":"your internet provider"},{"label":"hop 7","sub":"replies with nothing at all"},{"label":"hop 9","sub":"the destination, finally"}],"verdict":"Stars are not automatically a fault","verdictSub":"plenty of routers are configured never to reply, and traffic passes anyway","verdictAtWord":1}},
   },
+  UV_STAGE: {
+    category: "diagram", family: "diagram", data_key: "uvStage",
+    purpose: "Every beat of the uv course on one scene type. A live terminal types each real command on the word it is spoken, and the stage beside it draws the OBJECT the beat is about — a parcel, a shelf, a wall going up — chosen by `kind` from the uvViz registry. Set layout:'terminal' to drop the stage entirely when the beat is one screen and nothing else. One type, many pictures: registering a scene type is plumbing, the depiction is the picture (LAW 0n).",
+    use_when: "Any uv / Python-packaging beat. Pick `kind` for the object: pkg-parcel (what a package is), pkg-index (where they come from), dep-unfold (one install brings four), shelf-share (two projects, one shelf), shelf-evict (the overwrite), shelf-split (a shelf each), two-projects (blast radius), env-ceremony (the ritual, and its collapse). Use layout:'terminal' for a cold-open failure or a silent hold on real output — never draw an empty second pane.",
+    fields: {
+      headline: {t: "string", note: "Scene headline, <=48 chars, one [accent] phrase."},
+      kind: {t: "string", req: true, note: "Depiction kind from uvViz UV_VIZ: pkg-parcel | pkg-index | dep-unfold | shelf-share | shelf-evict | shelf-split | two-projects | env-ceremony. Ignored when layout is 'terminal'."},
+      layout: {t: "string", note: "'split' (default: terminal + stage) or 'terminal' (terminal only, full bleed)."},
+      premise: {t: "string", note: "LAW 0l. One plain sentence naming what the viewer is looking at and what stands for what, <=120 chars. Unanchored and constant for the whole scene."},
+      steps: {t: "items", preserveWs: true, note: "0-5 terminal steps. label = the command typed (<=44). out = REAL output lines, verbatim, one string per line (<=62 each). detail = plain-English note under it (<=48). atWord REQUIRED — the word its typing starts on."},
+      stage: {t: "items", note: "0-10 elements of the depiction. label (<=22), text = version or value (<=14), sub = caption (<=54), detail = the real constraint or a second label (<=34), value = 0 to dim an item, color, atWord = the word it lands on."},
+      token: {t: "string", note: "Mode switch or label for the depiction, <=28 chars. shelf-share reads 'wrong-shelf'; pkg-index uses it as the warehouse label."},
+      stageTitle: {t: "string", note: "Caption above the stage, <=30 chars. Authored PER BEAT from that beat's subject — one generic title repeated across a course is LAW 0j's defect in miniature."},
+      verdict: {t: "string", note: "The one-line conclusion chip, <=40 chars."},
+      verdictSub: {t: "string", note: "Supporting line under the verdict, <=48 chars."},
+      verdictAtWord: {t: "number", note: "Word the verdict lands on (retargeted by sync like any atWord)."},
+      promptLabel: {t: "string", note: "Shell prompt label, <=26 chars. Never a real machine or user name."},
+      cwd: {t: "string", note: "Working directory shown in the prompt, <=26 chars."},
+      highlight: {t: "string", note: "Substring of the command to highlight once typed, <=24 chars."},
+      color: {t: "string", note: "Semantic accent: blue|green|red|orange|purple|yellow."}
+    },
+    example: {
+      headline: "One package, [four arrived]",
+      kind: "dep-unfold",
+      premise: "Picture a shelf. Each parcel is a package, and the label says its name and version.",
+      stageTitle: "what came with it",
+      steps: [{label: "pip install rich", out: ["Collecting rich", "Collecting pygments<3.0.0,>=2.13.0"], detail: "you asked for one", atWord: 3}],
+      stage: [
+        {label: "rich", text: "15.0.0", atWord: 4},
+        {label: "pygments", text: "2.21.0", detail: "pygments<3.0.0,>=2.13.0", atWord: 9}
+      ],
+      verdict: "Three you never asked for",
+      verdictAtWord: 14,
+      color: "blue"
+    }
+  },
   CMD_PING: {
     category: "diagram", family: "diagram", data_key: "cmdPing",
     purpose: "The `ping` command on the two-up command stage: a live terminal on the left types each step as it is spoken and highlights the flag being taught, while the right stage draws an echo request leaving, arriving, and returning with the time it took. Every element is timed from its own atWord so the picture lands on the spoken word.",

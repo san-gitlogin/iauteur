@@ -17,6 +17,42 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### 2026-08-22 — one scene type, eight pictures: the uv course stage
+
+#### Added — `UV_STAGE`, and a viz registry that cannot fail quietly
+
+The uv course adds exactly **one** scene type. `src/uvViz.tsx` holds the pictures: `pkg-parcel`,
+`pkg-index`, `dep-unfold`, `shelf-share`, `shelf-evict`, `shelf-split`, `two-projects`,
+`env-ceremony` — each built from parcel/plank/folder atoms, each reading `stackBudget()` (LAW 0o)
+and resolving every element from its own `atWord` (LAW 0i).
+
+The shape was chosen by measuring the Linux course rather than copying it: 116 registered `CMD_*`
+types, **one** shared two-up shell, **56** depiction kinds — and a component register that opens by
+admitting *98 specified, 6 built*. A plan counted in scene types over-promises by an order of
+magnitude, so the plan is now counted in pictures. Recorded as a LAW 0n corollary.
+
+#### Added — `layout: "terminal"` on `CommandStage`
+
+`CommandStage` was hard-locked to two-up. Four frames sampled from the shipped Linux cut were the
+same split, and in two of them the left pane was empty — a beat whose whole content is one screen
+has no second pane to draw, and forcing one yields dead space or a list invented to fill it.
+Purely additive: `'split'` stays the default, and all 111 existing callers are untouched.
+
+#### Fixed — three silent viz fallbacks, and a seal that was blind
+
+`linuxViz`/`dsaViz`/`mcpViz` each substituted a real picture for an unknown kind (`?? FileContent`,
+`?? SignalMatch`, `?? ControlBoard`). A one-character typo therefore drew a confident WRONG picture
+that passed tsc (it is a string), passed the linter (the kind is chosen inside the component, never
+in the spec), rendered fine, and showed up on a contact sheet as *a* picture. Now:
+`src/unknownKind.tsx` renders the failure loudly in semantic red — loud, not fatal, because throwing
+would abort a 90-minute render at minute 80 over a typo — and `scripts/check-viz-kinds.mjs` (gate
+seal #11, `npm run gate` is now 11 seals) catches it in milliseconds before any render.
+
+The seal's first version reported a green tick **while blind**: it matched `kind="x"` but not
+`kind={"x"}`, which is 110 of the 140 call sites. It was caught only by deliberately breaking a real
+file and watching the script pass. It now carries a self-test that fails if its own extractor goes
+blind — the general lesson being that a guard is unverified until a fault has been injected into it.
+
 ### 2026-08-21 — research is done by running the tool, not by reading about it
 
 #### Added — LAW 0m corollary: capture the artefact, documentation is a secondary source

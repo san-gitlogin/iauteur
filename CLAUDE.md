@@ -294,6 +294,22 @@ explicitly, and each new field must be added to every mapping or it silently nev
 `parent`/`links` on the DSA cut, `out`/`series` on the Linux cut, `icon` here. When you add a field
 to an item type, grep every `\.map((c) =>` in `src/scenes/` before you render anything.
 
+Corollary — **count SCENE TYPES against PICTURES, and plan the smaller number.** The Linux
+course registered 116 `CMD_*` scene types; all of them are thin wrappers that pick a string from one
+shared registry of 56 depiction kinds, drawn by one shared two-up shell. Its own component register
+opens by admitting the gap: *98 new components specified, 6 actually built.* A plan expressed in
+scene types is therefore a plan of plumbing, and it will over-promise by an order of magnitude.
+The uv course adds **ONE** scene type (`UV_STAGE`) and grows `src/uvViz.tsx` instead — the budget
+you commit to is the number of distinct PICTURES, and it is the only number worth planning.
+
+Corollary — **an unregistered kind must be loud.** All three viz dispatchers used to substitute a
+real picture for a kind they did not know (`?? FileContent`, `?? SignalMatch`, `?? ControlBoard`),
+so a one-character typo produced a confidently-drawn WRONG picture that passed tsc, passed the
+linter (the kind is chosen inside the component, never in the spec) and rendered fine.
+`src/unknownKind.tsx` now renders the failure in semantic red; `scripts/check-viz-kinds.mjs` catches
+it before any render. A seal like that must be tested by BREAKING a real file on purpose — the first
+version of that script reported a green tick while blind to 110 of 140 call sites.
+
 ## LAW 0o — THE PANE MEASURES ITSELF, AND NOTHING LEAVES IT (owner verdict, 2026-08-21)
 Owner, on the reworked MCP shorts: *"I see the top and bottom are getting overlapped with the
 content inside, there is no room to breathe."* And separately, on a Linux chart: *"the graph is

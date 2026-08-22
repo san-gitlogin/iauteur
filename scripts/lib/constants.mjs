@@ -165,6 +165,7 @@ export const TYPES = [
   'CMD_UMOUNT',
   'CMD_DD',
   'CMD_IP',
+  'UV_STAGE',
   'CMD_PING',
   'CMD_TRACEROUTE',
   'CMD_MTR',

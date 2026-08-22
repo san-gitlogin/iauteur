@@ -18,7 +18,7 @@ and what already exists so it does not get rebuilt.
 ## Prove it's healthy before changing anything
 
 ```bash
-npm run gate                      # 10 seals; must exit 0
+npm run gate                      # 11 seals; must exit 0
 npm run typecheck                 # tsc --noEmit
 npm run publish-safety            # staged changes: secrets / identity / machine paths
 npm run publish-safety:all        # same, over every tracked file
@@ -57,6 +57,31 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 ```
 
 ## Recent work
+
+### 2026-08-22 — uv course: the stage is built and sealed
+
+`UV_STAGE` is wired and green — **one** scene type for the whole 14-chapter course, plus
+`src/uvViz.tsx` holding the pictures (`pkg-parcel`, `pkg-index`, `dep-unfold`, `shelf-share`,
+`shelf-evict`, `shelf-split`, `two-projects`, `env-ceremony`). All eight wiring touchpoints are
+done — manifest, `types.ts`, the scene, `MainComposition`, `constants.mjs` TYPES, the linter's
+DYNAMIC list **and** a `UV_STAGE` validation block, `showcaseSpec.ts`, and the `scene_library.md`
+USE-WHEN row. `audit-census` reads 342 / 342 / 342 with **0 defects**.
+
+Proofs run before committing, because a green tick is worth nothing untested:
+
+- the lint block was fed a deliberately bad fixture — **7 errors**, then **0** on the fixed one;
+- `check-viz-kinds.mjs` was verified by breaking a real file on purpose (its first version passed
+  while blind to 110 of 140 call sites); it now self-tests its own extractor;
+- `npm run gate` is **11 seals**; `tsc --noEmit` exits 0; publish-safety clean on the staged set.
+
+`CommandStage` gained `layout: "terminal"` (additive; `'split'` default, 111 callers untouched) so
+a beat whose whole content is one screen is not forced into a second pane it has nothing to fill.
+
+**Next, in order:** proof the 8 depictions as stills (MIN/MAX/MIX × both aspects × two packs,
+scanned programmatically — two seconds a still against hours a render) → write the EP00 spec against
+`briefs/uv/uv-00-beats.json` + `uv-00-casting.md` → `voiceover.py` → `sync.mjs` → `lint-spec.mjs`
+(must PASS) → `render-topic.mjs`. Flashcard TSV decks live in `briefs/uv/flashcards/<slug>.tsv`.
+The stitched `uv-course` full cut is built **last**.
 
 ### 2026-08-21 — uv course: research done by running the tool, not reading about it
 

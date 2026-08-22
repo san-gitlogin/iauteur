@@ -6381,6 +6381,43 @@ export interface CmdIpData {
   atWord?: number;
   color?: SemColor;
 }
+export interface UvStageItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  /** Real terminal output, one string per line. Verbatim, never invented (LAW 0m). */
+  out?: string[];
+}
+
+export interface UvStageData {
+  headline?: string;
+  /** Which uv depiction to draw. Must exist in uvViz UV_VIZ — the seal checks it. */
+  kind?: string;
+  /** 'terminal' drops the effect pane entirely. See CommandStage's layout prop. */
+  layout?: 'split' | 'terminal';
+  /** LAW 0l: what the viewer is looking at and what stands for what. Unanchored,
+   *  constant for the whole scene, re-readable by someone who looked away. */
+  premise?: string;
+  steps?: UvStageItem[];
+  stage?: UvStageItem[];
+  token?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  stageTitle?: string;
+  promptLabel?: string;
+  cwd?: string;
+  highlight?: string;
+  atWord?: number;
+  color?: SemColor;
+}
+
 export interface CmdPingItem {
   label?: string;
   text?: string;
@@ -9856,6 +9893,7 @@ export interface SceneData {
   cmdMtr?: CmdMtrData;
   cmdTraceroute?: CmdTracerouteData;
   cmdPing?: CmdPingData;
+  uvStage?: UvStageData;
   cmdIp?: CmdIpData;
   cmdDd?: CmdDdData;
   cmdUmount?: CmdUmountData;

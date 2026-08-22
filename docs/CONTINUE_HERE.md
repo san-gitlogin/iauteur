@@ -22,7 +22,7 @@ BEFORE YOU WRITE ANYTHING, READ THESE, IN THIS ORDER:
 
 PROVE THE REPO IS HEALTHY BEFORE CHANGING ANYTHING:
   npm install
-  npm run gate            # 10 seals, must exit 0
+  npm run gate            # 11 seals, must exit 0
   npm run typecheck
   node scripts/gen-index.mjs
 

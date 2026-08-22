@@ -73,6 +73,7 @@ export type SceneTypeName =
   | 'CMD_NETSTAT'
   | 'CMD_MTR'
   | 'CMD_TRACEROUTE'
+  | 'UV_STAGE'
   | 'CMD_PING'
   | 'CMD_IP'
   | 'CMD_DD'
@@ -1574,6 +1575,26 @@ export type CmdTracerouteScene = SceneCommon<'CMD_TRACEROUTE'> & { data: {
       cwd?: string;
       highlight?: string;
       atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type UvStageScene = SceneCommon<'UV_STAGE'> & { data: {
+    uvStage: {
+      headline?: string;
+      kind: string;
+      layout?: string;
+      premise?: string;
+      steps?: Array<Record<string, unknown>>;
+      stage?: Array<Record<string, unknown>>;
+      token?: string;
+      stageTitle?: string;
+      verdict?: string;
+      verdictSub?: string;
+      verdictAtWord?: number;
+      promptLabel?: string;
+      cwd?: string;
+      highlight?: string;
       color?: string;
     };
   } };
@@ -5220,6 +5241,7 @@ export interface SceneByType {
   CMD_NETSTAT: CmdNetstatScene;
   CMD_MTR: CmdMtrScene;
   CMD_TRACEROUTE: CmdTracerouteScene;
+  UV_STAGE: UvStageScene;
   CMD_PING: CmdPingScene;
   CMD_IP: CmdIpScene;
   CMD_DD: CmdDdScene;
@@ -5568,6 +5590,7 @@ export type TypedScene =
   | CmdNetstatScene
   | CmdMtrScene
   | CmdTracerouteScene
+  | UvStageScene
   | CmdPingScene
   | CmdIpScene
   | CmdDdScene

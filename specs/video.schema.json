@@ -457,6 +457,7 @@
               "CMD_UMOUNT",
               "CMD_DD",
               "CMD_IP",
+              "UV_STAGE",
               "CMD_PING",
               "CMD_TRACEROUTE",
               "CMD_MTR",
@@ -6252,6 +6253,95 @@
                         "color": {
                           "type": "string",
                           "description": "Semantic colour: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "UV_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "uvStage": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "description": "Scene headline, <=48 chars, one [accent] phrase."
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "Depiction kind from uvViz UV_VIZ: pkg-parcel | pkg-index | dep-unfold | shelf-share | shelf-evict | shelf-split | two-projects | env-ceremony. Ignored when layout is 'terminal'."
+                        },
+                        "layout": {
+                          "type": "string",
+                          "description": "'split' (default: terminal + stage) or 'terminal' (terminal only, full bleed)."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "LAW 0l. One plain sentence naming what the viewer is looking at and what stands for what, <=120 chars. Unanchored and constant for the whole scene."
+                        },
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-5 terminal steps. label = the command typed (<=44). out = REAL output lines, verbatim, one string per line (<=62 each). detail = plain-English note under it (<=48). atWord REQUIRED — the word its typing starts on."
+                        },
+                        "stage": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-10 elements of the depiction. label (<=22), text = version or value (<=14), sub = caption (<=54), detail = the real constraint or a second label (<=34), value = 0 to dim an item, color, atWord = the word it lands on."
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "Mode switch or label for the depiction, <=28 chars. shelf-share reads 'wrong-shelf'; pkg-index uses it as the warehouse label."
+                        },
+                        "stageTitle": {
+                          "type": "string",
+                          "description": "Caption above the stage, <=30 chars. Authored PER BEAT from that beat's subject — one generic title repeated across a course is LAW 0j's defect in miniature."
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "description": "The one-line conclusion chip, <=40 chars."
+                        },
+                        "verdictSub": {
+                          "type": "string",
+                          "description": "Supporting line under the verdict, <=48 chars."
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "Word the verdict lands on (retargeted by sync like any atWord)."
+                        },
+                        "promptLabel": {
+                          "type": "string",
+                          "description": "Shell prompt label, <=26 chars. Never a real machine or user name."
+                        },
+                        "cwd": {
+                          "type": "string",
+                          "description": "Working directory shown in the prompt, <=26 chars."
+                        },
+                        "highlight": {
+                          "type": "string",
+                          "description": "Substring of the command to highlight once typed, <=24 chars."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic accent: blue|green|red|orange|purple|yellow."
                         }
                       }
                     }
