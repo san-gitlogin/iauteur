@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "topic": "uv shorts — pip said ERROR and Successfully in the same breath",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "pip overwrites a package another project needs, reports success, and nothing crashes until much later.",
+    "openLoop": "How does one command say ERROR and Successfully installed?",
+    "analogy": "One shelf, one slot, and the last install wins.",
+    "topicAxes": [
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "pip said ERROR and Successfully in the same breath #python #pip",
+      "description": "One slot on the shelf, two projects that disagree, and pip narrating the overwrite itself. Complete uv course on the channel.",
+      "tags": [
+        "python",
+        "pip",
+        "uv",
+        "venv",
+        "packaging",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "ERROR + SUCCESS",
+    "badge": "uv · 00",
+    "asset": "si:python",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "It said ERROR. Then it said Successfully installed. Same command.",
+      "data": {
+        "headline": "ERROR. THEN SUCCESS.",
+        "subtext": "the same command said both",
+        "heroAsset": "lucide:circle-alert",
+        "headlineAtWord": 1.167,
+        "heroAtWord": 6
+      },
+      "durationFrames": 164,
+      "audio": "audio/uv-00-short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Your machine has one shelf. Every project you own reaches into it, and one slot holds exactly one version of a package. So when a second project needs a different version, something has to give.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-share",
+          "color": "blue",
+          "headline": "One shelf, [every] project",
+          "premise": "One shelf for the whole machine, and one slot holds exactly one parcel.",
+          "stageTitle": "one slot, two demands",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "2.21.0",
+              "sub": "needs the new one",
+              "atWord": 6.333
+            },
+            {
+              "label": "report-tool",
+              "text": "2.0",
+              "sub": "needs the old one",
+              "color": "orange",
+              "atWord": 11.917
+            },
+            {
+              "label": "pygments",
+              "text": "?",
+              "sub": "and the slot holds one",
+              "color": "red",
+              "atWord": 16.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 355,
+      "audio": "audio/uv-00-short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Watch pip narrate it. Attempting uninstall. Found existing installation. Uninstalling. Pip just lifted out a package another project depends on, and never asked that project a thing.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-evict",
+          "color": "red",
+          "headline": "The last install [wins]",
+          "premise": "The newcomer takes the slot. Whatever sat in it is carried away.",
+          "stageTitle": "in pip’s own words",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pip install \"pygments==2.0.0\"",
+              "out": [
+                "  Attempting uninstall: pygments",
+                "    Found existing installation: Pygments 2.21.0",
+                "    Uninstalling Pygments-2.21.0:"
+              ],
+              "detail": "nobody asked the project that needed it",
+              "atWord": 6.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "value": 0,
+              "sub": "carried off the shelf",
+              "atWord": 10.75
+            },
+            {
+              "label": "pygments",
+              "text": "2.0",
+              "sub": "and this takes the slot",
+              "atWord": 16.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 368,
+      "audio": "audio/uv-00-short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Then these two lines, four apart. ERROR, naming the exact thing it just broke. And then, calmly, Successfully installed.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "red",
+          "headline": "It said [both] of these",
+          "premise": "Two real lines, four lines apart, from one command.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "Successfully",
+          "steps": [
+            {
+              "label": "pip install \"pygments==2.0.0\"",
+              "out": [
+                "ERROR: rich 15.0.0 requires pygments<3.0.0,>=2.13.0,",
+                "but you have pygments 2.0 which is incompatible.",
+                "Successfully installed pygments-2.0"
+              ],
+              "detail": "broke rich, and reported success",
+              "atWord": 4.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 236,
+      "audio": "audio/uv-00-short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "And nothing crashes. Your code runs perfectly happily, which is the cruel part — the shelf is wrong now, and stays wrong until some other day trips over it.",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "orange",
+          "headline": "Wrong now. Painful [later].",
+          "premise": "The break and the symptom are days apart, which is what makes it expensive.",
+          "stageTitle": "why it costs an afternoon",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "stage": [
+            {
+              "label": "Tuesday",
+              "sub": "you installed something. it said success.",
+              "atWord": 6.25
+            },
+            {
+              "label": "Friday",
+              "sub": "a different project fails, for no reason",
+              "atWord": 12.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 294,
+      "audio": "audio/uv-00-short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The fix is a shelf per project. uv builds it for you.",
+      "data": {
+        "message": "A shelf per project",
+        "sub": "the complete uv course — chapter 00"
+      },
+      "durationFrames": 126,
+      "audio": "audio/uv-00-short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

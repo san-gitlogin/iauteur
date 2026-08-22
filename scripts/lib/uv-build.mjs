@@ -123,7 +123,7 @@ export function chapter({fps = 30} = {}) {
     channel: channelName(), logo: channelLogo(),
   });
 
-  const emit = (url, spec) => {
+  const emit = (url, spec, {isShort = false} = {}) => {
     fs.writeFileSync(url, JSON.stringify(spec, null, 2));
     const total = S.reduce((a, s) => a + s.durationFrames, 0);
     const mins = total / fps / 60;
@@ -131,9 +131,41 @@ export function chapter({fps = 30} = {}) {
     console.log(`transitions: ${new Set(S.map((s) => s.transition)).size} distinct · longest scene ${(Math.max(...S.map((s) => s.durationFrames)) / fps).toFixed(1)}s`);
     // LAW 0e r.6a — the runtime FLOOR is 5:00. Printed rather than thrown, because the
     // fix is more teaching, and that is a decision for the author not the build script.
-    if (mins < 5) console.log(`  ⚠ under the 5:00 floor by ${((5 - mins) * 60).toFixed(0)}s — teach more, do not pad`);
+    // LAW 0e r.6a's 5:00 floor is a LONG-FORM law. A short that cleared it would be a
+    // short in name only, so the check does not run on one.
+    if (!isShort && mins < 5) console.log(`  ⚠ under the 5:00 floor by ${((5 - mins) * 60).toFixed(0)}s — teach more, do not pad`);
     return spec;
   };
 
   return {S, add, uv, brand, emit};
+}
+
+/**
+ * A SHORT for one chapter — the single sharpest moment in it, vertical, under a minute.
+ *
+ * Not a trailer and not a summary. A short that says "this chapter covers X, Y and Z" is
+ * an advert; one that shows the actual surprise and stops is a lesson somebody can use
+ * without ever opening the long cut. Every uv depiction was proofed at 9:16 alongside
+ * 16:9, so the pictures already work here — what changes is the pace and the count.
+ *
+ * The linter's palette, over-reliance and specialist rules only fire at 8+ scenes, so a
+ * six-beat short may lean on UV_STAGE throughout without tripping them. That is a
+ * permission, not an instruction: the picture still has to be the right one.
+ */
+export function short({fps = 30} = {}) {
+  const c = chapter({fps});
+  const emitShort = (url, spec) => {
+    const total = c.S.reduce((a, x) => a + x.durationFrames, 0);
+    const secs = total / fps;
+    // 58s is YouTube's Shorts ceiling with no margin at all, and sync ADDS frames from
+    // the real audio. Flag anything over 50 pre-sync, because discovering it afterwards
+    // costs another TTS pass.
+    // Measured on chapter 00's short: 47.9s of estimate became 51.4s of real audio, so
+    // sync adds roughly 7% plus a breath per scene. 48 pre-sync leaves genuine headroom
+    // under the 58s ceiling; 50 did not leave much.
+    if (secs > 48) console.error(`✗ short is ${secs.toFixed(1)}s pre-sync — sync adds ~7%, and 58s is the hard ceiling. Cut a beat.`);
+    if (c.S.length > 7) console.error(`✗ ${c.S.length} scenes — a short holds 5 to 7. More is a summary, not a short.`);
+    return c.emit(url, spec, {isShort: true});
+  };
+  return {...c, emitShort};
 }

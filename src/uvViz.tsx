@@ -28,6 +28,16 @@ import {AssetIcon} from './AssetIcon';
  * runs on a fixed frame interval (LAW 0i defect 1).
  *
  * Sizing: every depiction reads `stackBudget()` and divides the REAL measured pane height.
+ * UNITS, and the bug they hid: `stackBudget()` returns DESIGN px, so a ceiling compared
+ * against it must ALSO be design px, and the whole result is multiplied by `v.scale` once
+ * at the end. Writing the ceiling as `N * v.scale` and the budget unscaled is a mismatch
+ * that is completely invisible at 16:9, where scale is 1 — and at 9:16 scale is 0.5625, so
+ * every ceiling shrank by 44% while the budget did not, and every picture in this file
+ * rendered far smaller than the pane holding it. Found by looking at a vertical short.
+ *
+ * The vertical ceilings are also LARGER, not merely rescaled: a 9:16 effect pane is about
+ * twice as tall as a 16:9 one, and a picture sized for the short pane floats in the tall one.
+ *
  * Nothing is sized to a constant (LAW 0o rule 1). The `Math.min(budget * f, CONST)` in
  * each one is a CEILING for the crowded case and must never be the binding term in the
  * ordinary one — the first pass got that wrong in five of eight kinds, drawing the
@@ -184,7 +194,7 @@ const PkgParcel: React.FC<UvVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const h = Math.min(budget * 0.42, 150 * v.scale);
+  const h = Math.min(budget * 0.42, 150) * v.scale;
   const w = h * 1.5;
   const [first, ...rest] = items;
   if (!first) return null;
@@ -210,7 +220,7 @@ const PkgIndex: React.FC<UvVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const cols = v.vertical ? 4 : 6;
   const rows = 3;
-  const cellH = Math.min((budget * 0.66) / rows, 150 * v.scale);
+  const cellH = Math.min((budget * 0.66) / rows, v.vertical ? 190 : 150) * v.scale;
   const cellW = cellH * 1.35;
   const chosen = items.find((i) => i.color) ?? items[0];
   const chosenOn = liveAt(frame, chosen?.atWord);
@@ -254,15 +264,14 @@ const DepUnfold: React.FC<UvVizProps> = ({items, accent}) => {
   const [root, ...deps] = items;
   if (!root) return null;
   const rootOn = liveAt(frame, root.atWord);
-  const rootH = Math.min(budget * 0.26, 96 * v.scale);
+  const rootH = Math.min(budget * 0.26, v.vertical ? 130 : 96) * v.scale;
   // The note has a SPINE: one vertical line out of the parcel with a stub to each
   // dependency, so the deps visibly hang off the thing that named them. The first
   // version centred the root and left-aligned the deps with a stub pointing at
   // nothing, which read as two unrelated pictures stacked.
   const gap = 6 * v.scale;
   const rows = Math.max(deps.length, 1);
-  const depH = Math.max(26 * v.scale,
-    Math.min((budget * 0.52 - gap * (rows - 1)) / rows, 74 * v.scale));
+  const depH = Math.max(26, Math.min((budget * 0.52) / rows - 6, v.vertical ? 104 : 74)) * v.scale;
   const depW = depH * 2.4;
   const rootW = rootH * 2.2;
   const spineX = rootW * 0.16;     // under the root's left third, so it reads as hanging
@@ -324,9 +333,9 @@ const ShelfShare: React.FC<UvVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const wrongShelf = token === 'wrong-shelf';
   const [a, b, slot] = items;
-  const fH = Math.min(budget * 0.24, 124 * v.scale);
+  const fH = Math.min(budget * 0.24, v.vertical ? 172 : 124) * v.scale;
   const fW = fH * 1.5;
-  const pH = Math.min(budget * 0.2, 98 * v.scale);
+  const pH = Math.min(budget * 0.2, v.vertical ? 136 : 98) * v.scale;
   const aOn = liveAt(frame, a?.atWord);
   const bOn = liveAt(frame, b?.atWord);
   const sOn = liveAt(frame, slot?.atWord);
@@ -381,7 +390,7 @@ const ShelfEvict: React.FC<UvVizProps> = ({items, accent}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const [old, next, broken] = items;
-  const pH = Math.min(budget * 0.22, 116 * v.scale);
+  const pH = Math.min(budget * 0.22, v.vertical ? 162 : 116) * v.scale;
   const pW = pH * 2.3;
   const oldOn = liveAt(frame, old?.atWord);
   const evict = liveAt(frame, next?.atWord, 16);   // the newcomer's arrival IS the eviction
@@ -442,7 +451,7 @@ const ShelfSplit: React.FC<UvVizProps> = ({items, accent}) => {
   const budget = stackBudget(v);
   const [a, b, wall] = items;
   const wallOn = liveAt(frame, wall?.atWord ?? b?.atWord, 18);
-  const fH = Math.min(budget * 0.2, 112 * v.scale);
+  const fH = Math.min(budget * 0.2, v.vertical ? 156 : 112) * v.scale;
   const fW = fH * 1.6;
   const pH = fH * 0.85;
   const gap = 18 * v.scale + wallOn * 34 * v.scale; // the shelves physically separate
@@ -486,7 +495,7 @@ const TwoProjects: React.FC<UvVizProps> = ({items, accent}) => {
   const [touched, victim] = items;
   const tOn = liveAt(frame, touched?.atWord);
   const dark = liveAt(frame, victim?.atWord, 20);
-  const fH = Math.min(budget * 0.34, 200 * v.scale);
+  const fH = Math.min(budget * 0.34, v.vertical ? 280 : 200) * v.scale;
   const fW = fH * 1.45;
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -544,7 +553,7 @@ const EnvCeremony: React.FC<UvVizProps> = ({items, accent, token}) => {
   // floated in the middle of a pane twice its height — the "patty inside a burger" LAW 0o
   // was written about. The label sits OUTSIDE its circle, so the ring must leave a node's
   // width of margin all round rather than filling the budget outright.
-  const ring = Math.min(budget * 0.80, (v.vertical ? 470 : 400) * v.scale);
+  const ring = Math.min(budget * 0.80, v.vertical ? 620 : 400) * v.scale;
   const R = ring / 2;
   const node = Math.min(ring * 0.24, 92 * v.scale);
   // The marker's position IS the last station that has fired — the loop advances on the
@@ -660,7 +669,7 @@ const BootstrapParadox: React.FC<UvVizProps> = ({items, accent}) => {
   const outOn = liveAt(frame, beside?.atWord);
   // the break: the interpreter's own second anchor, if the author gave it one
   const broke = liveAt(frame, py?.value === 0 ? py?.atWord : undefined, 18) * (py?.value === 0 ? 1 : 0);
-  const boxH = Math.min(budget * 0.52, 210 * v.scale);
+  const boxH = Math.min(budget * 0.52, v.vertical ? 290 : 210) * v.scale;
   const boxW = boxH * 1.15;
   const red = v.sem('red');
   return (
@@ -736,8 +745,8 @@ const InstallRoutes: React.FC<UvVizProps> = ({items, accent, token}) => {
   const routes = items.slice(0, -1).slice(0, 5);
   const dest = items[items.length - 1];
   const destOn = liveAt(frame, dest?.atWord);
-  const laneH = Math.max(24 * v.scale,
-    Math.min((budget * 0.62) / Math.max(routes.length, 1) - 8 * v.scale, 62 * v.scale));
+  const laneH = Math.max(24,
+    Math.min((budget * 0.62) / Math.max(routes.length, 1) - 8, v.vertical ? 92 : 62)) * v.scale;
   const red = v.sem('red');
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch',
@@ -807,7 +816,7 @@ const EphemeralBay: React.FC<UvVizProps> = ({items, accent, token}) => {
   const toolOn = liveAt(frame, tool?.atWord);
   // in bay mode the LAST item's anchor is the moment it dissolves
   const gone = docked ? 0 : liveAt(frame, rest[rest.length - 1]?.atWord, 22);
-  const bayH = Math.min(budget * 0.5, 190 * v.scale);
+  const bayH = Math.min(budget * 0.5, v.vertical ? 265 : 190) * v.scale;
   const bayW = bayH * 1.5;
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -882,8 +891,8 @@ const InterpreterRack: React.FC<UvVizProps> = ({items, accent, token}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const rows = items.slice(0, 8);
-  const rowH = Math.max(20 * v.scale,
-    Math.min((budget * 0.72) / Math.max(rows.length, 1) - 5 * v.scale, 52 * v.scale));
+  const rowH = Math.max(20,
+    Math.min((budget * 0.72) / Math.max(rows.length, 1) - 5, v.vertical ? 76 : 52)) * v.scale;
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch',
                  justifyContent: 'center', gap: 5 * v.scale, width: '100%', height: '100%',
@@ -943,8 +952,8 @@ const ProjectTree: React.FC<UvVizProps> = ({items, accent}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const rows = items.slice(0, 8);
-  const rowH = Math.max(20 * v.scale,
-    Math.min((budget * 0.78) / Math.max(rows.length, 1) - 4 * v.scale, 50 * v.scale));
+  const rowH = Math.max(20,
+    Math.min((budget * 0.78) / Math.max(rows.length, 1) - 4, v.vertical ? 74 : 50)) * v.scale;
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch',
                  justifyContent: 'center', gap: 4 * v.scale, width: '100%', height: '100%',
@@ -1007,8 +1016,8 @@ const ConstraintLine: React.FC<UvVizProps> = ({items, accent, token}) => {
   const [axis, ...ranges] = items;
   const axisOn = liveAt(frame, axis?.atWord);
   const ticks = (axis?.sub ?? '').split(',').map((x) => x.trim()).filter(Boolean);
-  const barH = Math.max(18 * v.scale,
-    Math.min((budget * 0.5) / Math.max(ranges.length, 1) - 8 * v.scale, 44 * v.scale));
+  const barH = Math.max(18,
+    Math.min((budget * 0.5) / Math.max(ranges.length, 1) - 8, v.vertical ? 66 : 44)) * v.scale;
   const red = v.sem('red');
   const parse = (t?: string) => {
     const m = /^([0-9.]+)\.\.([0-9.]+)$/.exec(t ?? '');
@@ -1078,8 +1087,8 @@ const PackingList: React.FC<UvVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const two = token === 'two-machines';
   const rows = items.slice(0, two ? 4 : 6);
-  const rowH = Math.max(18 * v.scale,
-    Math.min((budget * (two ? 0.42 : 0.72)) / Math.max(rows.length, 1) - 4 * v.scale, 44 * v.scale));
+  const rowH = Math.max(18,
+    Math.min((budget * (two ? 0.42 : 0.72)) / Math.max(rows.length, 1) - 4, v.vertical ? 66 : 44)) * v.scale;
   const green = v.sem('green');
   const sheet = (side: number) => (
     <div style={{
@@ -1148,7 +1157,7 @@ const DepotCache: React.FC<UvVizProps> = ({items, accent, token}) => {
   const coldOn = liveAt(frame, cold?.atWord);
   const warmOn = liveAt(frame, warm?.atWord);
   const noteOn = liveAt(frame, note?.atWord);
-  const h = Math.min(budget * 0.2, 74 * v.scale);
+  const h = Math.min(budget * 0.2, v.vertical ? 104 : 74) * v.scale;
   const green = v.sem('green');
   const stop = (label: string, on: number, col: string, wide = false) => (
     <div style={{
@@ -1212,7 +1221,7 @@ const ScriptHeader: React.FC<UvVizProps> = ({items, accent}) => {
   const [file, ...lines] = items;
   const fileOn = liveAt(frame, file?.atWord);
   const lift = liveAt(frame, lines[lines.length - 1]?.atWord, 24);
-  const lineH = Math.max(16 * v.scale, Math.min(budget * 0.09, 30 * v.scale));
+  const lineH = Math.max(16, Math.min(budget * 0.09, v.vertical ? 44 : 30)) * v.scale;
   const green = v.sem('green');
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -1271,7 +1280,7 @@ const StrictGate: React.FC<UvVizProps> = ({items, accent}) => {
   const pOn = liveAt(frame, pkg?.atWord);
   const lOn = liveAt(frame, lenient?.atWord);
   const sOn = liveAt(frame, strict?.atWord);
-  const h = Math.min(budget * 0.3, 130 * v.scale);
+  const h = Math.min(budget * 0.3, v.vertical ? 182 : 130) * v.scale;
   const green = v.sem('green');
   const red = v.sem('red');
   const gate = (item: UvVizItem | undefined, on: number, pass: boolean) => (
@@ -1330,7 +1339,7 @@ const DistOutput: React.FC<UvVizProps> = ({items, accent}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const [src, sdist, wheel] = items;
-  const h = Math.min(budget * 0.26, 104 * v.scale);
+  const h = Math.min(budget * 0.26, v.vertical ? 146 : 104) * v.scale;
   const green = v.sem('green');
   const crate = (item: UvVizItem | undefined, on: number, col: string) => (
     <div style={{
