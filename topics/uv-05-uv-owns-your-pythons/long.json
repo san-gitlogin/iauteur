@@ -1,0 +1,957 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #5 — Let uv own your Pythons",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "uv downloads and manages Python versions for you, pins one per project in a one-line file, and never touches the interpreters it merely found.",
+    "openLoop": "How many Pythons are already on your laptop, and who put them there?",
+    "analogy": "A rack of engines on rails, with one tagged for this project.",
+    "topicAxes": [
+      "sovereignty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #5 — Never Install Python By Hand Again (2026)",
+      "altTitles": [
+        "uv python install, pin and list explained"
+      ],
+      "description": "Chapter five of the uv course. Managed versus system interpreters, uv python install and list, python-build-standalone, .python-version and how it is searched upwards, and why uv picks the first compatible version rather than the newest.",
+      "tags": [
+        "uv",
+        "python",
+        "uv python install",
+        "python version",
+        "pyenv",
+        "astral uv",
+        "python-build-standalone",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "STOP INSTALLING PYTHON",
+    "badge": "uv · 05",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "How many Pythons are on your laptop right now? Most people guess wrong.",
+      "data": {
+        "headline": "HOW MANY PYTHONS?",
+        "subtext": "the answer is rarely one",
+        "heroAsset": "lucide:layers",
+        "headlineAtWord": 1.583,
+        "heroAtWord": 5.583
+      },
+      "durationFrames": 146,
+      "audio": "audio/uv-05-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "I asked this machine, and the answer was three. One from an installer years ago, one from a science distribution, and one that came with the operating system. None of them knew about the others. That's a completely normal laptop, by the way.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "orange",
+          "headline": "Three, on a [normal] laptop",
+          "premise": "Three interpreters from three sources, none of which knows about the others.",
+          "stageTitle": "what was already here",
+          "token": "uv python list",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv python list --only-installed",
+              "out": [
+                "cpython-3.10.4  ~/.../Python310/python.exe",
+                "cpython-3.9.9   ~/.../Python39/python.exe",
+                "cpython-3.9.7   <a science distribution>"
+              ],
+              "detail": "three, and nobody planned any of them",
+              "atWord": 7.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.10.4",
+              "text": "installer",
+              "sub": "from python.org, years ago",
+              "atWord": 10.667
+            },
+            {
+              "label": "cpython-3.9.9",
+              "text": "installer",
+              "sub": "also from python.org, also years ago",
+              "atWord": 16.083
+            },
+            {
+              "label": "cpython-3.9.7",
+              "text": "bundled",
+              "sub": "arrived inside something else",
+              "atWord": 19.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 416,
+      "audio": "audio/uv-05-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter hands the whole problem of installing Python over to uv, so you never download an installer from a website again.",
+      "data": {
+        "title": "Let uv own your Pythons",
+        "subtitle": "uv, chapter five · the rack, and the pin"
+      },
+      "durationFrames": 254,
+      "audio": "audio/uv-05-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "First, the distinction that makes everything else make sense.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Managed and system",
+          "subtitle": "two kinds of interpreter"
+        }
+      },
+      "durationFrames": 130,
+      "audio": "audio/uv-05-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Interpreters get sorted into two piles, and the split matters because it decides what uv is allowed to change. A system Python was already on the machine when uv arrived, so uv will happily use one but will never modify it. A managed Python is one uv downloaded itself, into uv's own folder, which means uv can add and remove those freely.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "blue",
+          "headline": "Two piles: [managed] and system",
+          "premise": "uv uses what it finds and owns only what it fetched. The line never moves.",
+          "stageTitle": "who owns which",
+          "token": "uv python list",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv python dir",
+              "out": [
+                "~/.local/share/uv/python"
+              ],
+              "detail": "everything uv owns lives in here",
+              "atWord": 30.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.10.4",
+              "text": "system",
+              "sub": "found, used, never modified",
+              "atWord": 14.833
+            },
+            {
+              "label": "cpython-3.13.1",
+              "text": "managed",
+              "sub": "downloaded by uv, into uv folder",
+              "detail": "uv owns",
+              "atWord": 27.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 634,
+      "audio": "audio/uv-05-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And the headline behaviour, straight from the documentation: uv will automatically download Python versions when they are required. You've already watched that happen in chapter four. No installer, no website, no wizard — the version you asked for simply turns up.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "green",
+          "headline": "It fetches them [automatically]",
+          "premise": "Ask for a version. If uv does not have it, uv gets it and carries on.",
+          "stageTitle": "no installer, no website",
+          "token": "uv python install 3.12",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv python install 3.12",
+              "out": [
+                "Installed Python 3.12.14 in 4.21s",
+                " + cpython-3.12.14"
+              ],
+              "detail": "four seconds, and no browser involved",
+              "atWord": 15.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "fetched",
+              "sub": "four seconds ago it was not here",
+              "detail": "new",
+              "atWord": 18.083
+            },
+            {
+              "label": "cpython-3.10.4",
+              "text": "system",
+              "sub": "still exactly where it was",
+              "atWord": 23.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 466,
+      "audio": "audio/uv-05-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "You can name several versions at once, and you can name implementations other than the usual one. PyPy and GraalPy are alternative Pythons with different performance characteristics, which means the same code can behave quite differently on each — and uv fetches either with exactly the same command.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "purple",
+          "headline": "Several, and [other] Pythons",
+          "premise": "One command, many versions — and CPython is not the only implementation.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "pypy",
+          "steps": [
+            {
+              "label": "uv python install 3.11 3.12 3.13",
+              "out": [
+                "Installed 3 versions in 9.84s"
+              ],
+              "detail": "three interpreters, one command",
+              "atWord": 10.583
+            },
+            {
+              "label": "uv python install pypy@3.11",
+              "out": [
+                "Installed pypy-3.11.15 in 7.02s"
+              ],
+              "detail": "a different implementation entirely",
+              "atWord": 18.75
+            },
+            {
+              "label": "uv python list --only-installed | wc -l",
+              "out": [
+                "6"
+              ],
+              "detail": "six interpreters, none of them by hand",
+              "atWord": 26
+            }
+          ]
+        }
+      },
+      "durationFrames": 490,
+      "audio": "audio/uv-05-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Now the command you'll actually type most often.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Reading the rack",
+          "subtitle": "uv python list"
+        }
+      },
+      "durationFrames": 99,
+      "audio": "audio/uv-05-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Running uv python list prints the whole rack. Every line is a version, and the right-hand column is the interesting bit: either a real path, meaning that interpreter is already here, or the words download available, meaning uv can have it in a few seconds if you ask.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "blue",
+          "headline": "Read the [right-hand] column",
+          "premise": "A path means it is here. \"download available\" means uv can fetch it.",
+          "stageTitle": "the whole rack",
+          "token": "uv python list",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv python list",
+              "out": [
+                "cpython-3.15.0rc1  <download available>",
+                "cpython-3.14.7     <download available>",
+                "cpython-3.12.14    <download available>",
+                "cpython-3.10.4     ~/.../Python310/python.exe",
+                "pypy-3.11.15       <download available>"
+              ],
+              "detail": "a path, or an offer",
+              "atWord": 9.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.15.0rc1",
+              "text": "offered",
+              "sub": "not out yet, and already reachable",
+              "value": 0,
+              "atWord": 13.583
+            },
+            {
+              "label": "cpython-3.12.14",
+              "text": "offered",
+              "sub": "one command away",
+              "value": 0,
+              "atWord": 17.333
+            },
+            {
+              "label": "cpython-3.10.4",
+              "text": "here",
+              "sub": "a real path, already on the machine",
+              "atWord": 21.833
+            },
+            {
+              "label": "pypy-3.11.15",
+              "text": "offered",
+              "sub": "a different implementation",
+              "value": 0,
+              "atWord": 24.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 455,
+      "audio": "audio/uv-05-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "One detail is worth knowing before you rely on any of this. The interpreters don't come from python dot org. Instead, uv uses a project called python-build-standalone, which produces portable builds designed to run from any folder at all. That portability is exactly why uv can drop an interpreter into its own directory and have it work immediately.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "blue",
+          "headline": "Not from [python.org]",
+          "premise": "Portable builds, designed to run from any folder rather than one fixed place.",
+          "stageTitle": "where they come from",
+          "token": "python-build-standalone",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "ls \"$(uv python dir)\"",
+              "out": [
+                "cpython-3.12.14-linux-x86_64-gnu/",
+                "cpython-3.13.1-linux-x86_64-gnu/"
+              ],
+              "detail": "one folder per interpreter, movable",
+              "atWord": 31.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "python.org",
+              "text": "installer",
+              "sub": "installs to one fixed location",
+              "value": 0,
+              "atWord": 14.583
+            },
+            {
+              "label": "your package manager",
+              "text": "system",
+              "sub": "ties the version to your OS release",
+              "value": 0,
+              "atWord": 20.917
+            },
+            {
+              "label": "python-build-standalone",
+              "text": "portable",
+              "sub": "runs from wherever you put it",
+              "atWord": 30.083
+            },
+            {
+              "label": "uv python dir",
+              "sub": "which is why uv can just drop one in",
+              "atWord": 34.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 655,
+      "audio": "audio/uv-05-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "And here is the part that makes a project reproducible rather than merely lucky.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Pinning a version",
+          "subtitle": "and the file it writes"
+        }
+      },
+      "durationFrames": 162,
+      "audio": "audio/uv-05-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Running uv python pin writes a tiny file called dot python dash version into the folder you're standing in. From then on, every uv command run in that project uses the version named in that file. Commit the file, and your colleague gets the same interpreter without being told.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "green",
+          "headline": "One tiny file [decides] it",
+          "premise": ".python-version names the interpreter, and every uv command in the folder obeys.",
+          "stageTitle": "pinned to the project",
+          "token": "uv python pin 3.12",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv python pin 3.12",
+              "out": [
+                "Pinned `.python-version` to `3.12`"
+              ],
+              "detail": "one line of text, in one small file",
+              "atWord": 11.333
+            },
+            {
+              "label": "cat .python-version && uv run python -V",
+              "out": [
+                "3.12",
+                "Python 3.12.14"
+              ],
+              "detail": "and every command here now obeys it",
+              "atWord": 23.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "pinned",
+              "sub": "what this project uses",
+              "detail": "pinned",
+              "atWord": 15.417
+            },
+            {
+              "label": "cpython-3.10.4",
+              "text": "ignored",
+              "sub": "still your machine default elsewhere",
+              "atWord": 25.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 497,
+      "audio": "audio/uv-05-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "That file gets searched for in the folder you're standing in and in every parent above it. Which means a pin at the top of a repository covers every project inside, and a pin inside one project overrides the one above. Nearest wins, which is the rule you'd expect anyway.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "blue",
+          "headline": "Nearest [pin] wins",
+          "premise": "uv looks in this folder, then every parent. The closest file is the one obeyed.",
+          "stageTitle": "searched upwards",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "cd invoice-app && uv run python -V",
+              "out": [
+                "Python 3.12.14"
+              ],
+              "detail": "the nearer pin won",
+              "atWord": 22.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "work/",
+              "value": 0,
+              "sub": "the repository root",
+              "atWord": 9.167
+            },
+            {
+              "label": ".python-version",
+              "value": 1,
+              "detail": "3.10",
+              "sub": "covers everything below, by default",
+              "atWord": 13
+            },
+            {
+              "label": "invoice-app/",
+              "value": 1,
+              "sub": "one project inside it",
+              "atWord": 17.583
+            },
+            {
+              "label": ".python-version",
+              "value": 2,
+              "detail": "3.12",
+              "sub": "and this one overrides the parent",
+              "atWord": 21.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 479,
+      "audio": "audio/uv-05-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Two behaviours here surprise people, so let's say both plainly. First: uv uses the first compatible version, not the newest one. If your project needs three point ten or better, and three point ten is sitting there, uv takes three point ten and does not go looking for anything shinier.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "orange",
+          "headline": "First compatible, not [newest]",
+          "premise": "uv takes the earliest version that satisfies you, not the highest one available.",
+          "stageTitle": "the surprising default",
+          "token": "requires-python = \">=3.10\"",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv run python -V",
+              "out": [
+                "Python 3.10.4"
+              ],
+              "detail": "not 3.13, even though 3.13 is right there",
+              "atWord": 24.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "python",
+              "sub": "3.9, 3.10, 3.11, 3.12, 3.13",
+              "atWord": 10.083
+            },
+            {
+              "label": "you allow",
+              "text": "0.25..1.00",
+              "detail": ">=3.10",
+              "atWord": 18.5
+            },
+            {
+              "label": "uv picks",
+              "text": "0.25..0.35",
+              "detail": "3.10.4",
+              "atWord": 25.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 525,
+      "audio": "audio/uv-05-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Second: installing a Python with uv doesn't put a bare python command on your PATH. That's deliberate, because silently replacing the python command on somebody's machine is exactly the kind of surprise uv refuses to spring. If you genuinely want that, dash dash default asks for it explicitly.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "orange",
+          "headline": "No bare [python] on your PATH",
+          "premise": "uv will not shadow a command you already depend on unless you ask it to.",
+          "stageTitle": "deliberately not automatic",
+          "token": "uv python install --default",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv python install 3.13 && which python3",
+              "out": [
+                "/usr/bin/python3"
+              ],
+              "detail": "still your original python3",
+              "atWord": 11.667
+            },
+            {
+              "label": "uv python install 3.13 --default --preview",
+              "out": [
+                "Installed Python 3.13.1 in 3.90s",
+                "Installed 2 executables: python, python3"
+              ],
+              "detail": "now, and only now, uv adds them",
+              "atWord": 27.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "python3",
+              "text": "yours",
+              "sub": "untouched by default",
+              "atWord": 14.417
+            },
+            {
+              "label": "uv run python",
+              "text": "always works",
+              "sub": "the safe way to reach uv Python",
+              "atWord": 20.667
+            },
+            {
+              "label": "--default",
+              "text": "opt in",
+              "sub": "only when you say so, out loud",
+              "atWord": 27.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 539,
+      "audio": "audio/uv-05-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "There's a related file worth not confusing with the pin. The pin says which Python to use. Requires-python, over in pyproject dot toml, says which Pythons your code is allowed to run on at all — a promise to everybody else, rather than a choice for you.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "purple",
+          "headline": "The pin, and the [promise]",
+          "premise": "One file chooses for you. The other declares what your code supports for everyone.",
+          "stageTitle": "two different jobs",
+          "token": "they are not the same field",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "grep requires-python pyproject.toml",
+              "out": [
+                "requires-python = \">=3.10\""
+              ],
+              "detail": "a promise about what your code supports",
+              "atWord": 18.417
+            },
+            {
+              "label": "cat .python-version",
+              "out": [
+                "3.12"
+              ],
+              "detail": "and a choice about what you develop on",
+              "atWord": 24
+            }
+          ],
+          "stage": [
+            {
+              "label": "python",
+              "sub": "3.9, 3.10, 3.11, 3.12, 3.13",
+              "atWord": 8.75
+            },
+            {
+              "label": "you support",
+              "text": "0.25..1.00",
+              "detail": ">=3.10",
+              "atWord": 18.417
+            },
+            {
+              "label": "you develop on",
+              "text": "0.60..0.75",
+              "detail": "3.12, pinned",
+              "atWord": 24
+            }
+          ]
+        }
+      },
+      "durationFrames": 472,
+      "audio": "audio/uv-05-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Every command that runs Python takes the same flag, which is genuinely useful when you're checking whether a bug is version-specific. Add dash dash python and a number to uv run, and the whole thing runs on that interpreter instead — without changing anything you've pinned.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "blue",
+          "headline": "Try it on [another] version",
+          "premise": "One flag reruns the same code on a different interpreter, changing nothing.",
+          "stageTitle": "is it version-specific?",
+          "token": "uv run --python 3.9",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv run main.py",
+              "out": [
+                "ok"
+              ],
+              "detail": "on the pinned 3.12, as usual",
+              "atWord": 10.417
+            },
+            {
+              "label": "uv run --python 3.9 main.py",
+              "out": [
+                "SyntaxError: invalid syntax"
+              ],
+              "detail": "and now you know it is version-specific",
+              "atWord": 21.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "works",
+              "sub": "the version you pinned",
+              "detail": "pinned",
+              "atWord": 12.083
+            },
+            {
+              "label": "cpython-3.9.9",
+              "text": "fails",
+              "sub": "which is the answer you wanted",
+              "value": 0,
+              "atWord": 22.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 465,
+      "audio": "audio/uv-05-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And once uv owns your interpreters, that chapter-zero mess starts to clear on its own. Every project names the version it wants, uv fetches whatever is missing, and nobody ever downloads an installer from a website and forgets which folder it went into.",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "green",
+          "headline": "The mess, [cleared] up",
+          "premise": "Each project names its version. uv fetches what is missing. Nothing is guessed.",
+          "stageTitle": "why this fixes chapter zero",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "cat */.python-version",
+              "out": [
+                "3.12",
+                "3.10"
+              ],
+              "detail": "each project states its own answer",
+              "atWord": 17.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "sub": "says 3.12, and gets 3.12",
+              "atWord": 11.5
+            },
+            {
+              "label": "report-tool",
+              "sub": "says 3.10, and gets 3.10",
+              "atWord": 21.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 446,
+      "audio": "audio/uv-05-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. Your project needs three point ten or newer, and both three point ten and three point thirteen are installed. Which does uv pick? Pause the video here and commit to an answer before I say it. Ready? Three point ten — first compatible, never newest.",
+      "data": {
+        "quiz": {
+          "question": "requires-python >=3.10, and 3.10 and 3.13 installed. Which runs?",
+          "options": [
+            {
+              "text": "3.13, the newest"
+            },
+            {
+              "text": "3.10, the first compatible"
+            },
+            {
+              "text": "Whichever is on PATH"
+            },
+            {
+              "text": "uv asks you"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "The first compatible one. Pin a version if you want a specific one.",
+          "atWord": 2.667,
+          "revealAtWord": 32.833
+        }
+      },
+      "durationFrames": 521,
+      "audio": "audio/uv-05-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "Managed Pythons come and go like anything else uv owns. Uninstall removes one, list shows what's left, and none of it ever reaches the interpreters your operating system depends on. Which means you can try a release candidate on a Tuesday and be rid of it by Wednesday.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Fetched, used, [removed]",
+          "premise": "uv only ever removes what uv fetched. Your system interpreters are off limits.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "uninstall",
+          "steps": [
+            {
+              "label": "uv python install 3.15.0rc1",
+              "out": [
+                "Installed Python 3.15.0rc1 in 5.02s"
+              ],
+              "detail": "a release candidate, on a Tuesday",
+              "atWord": 10.417
+            },
+            {
+              "label": "uv python uninstall 3.15.0rc1",
+              "out": [
+                "Uninstalled Python 3.15.0rc1 in 210ms"
+              ],
+              "detail": "and gone again, by Wednesday",
+              "atWord": 20
+            },
+            {
+              "label": "which python3",
+              "out": [
+                "/usr/bin/python3"
+              ],
+              "detail": "your system Python never noticed",
+              "atWord": 25.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 483,
+      "audio": "audio/uv-05-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. uv separates interpreters it merely found from interpreters it downloaded, and only ever changes the second kind. A one-line file pins a project to a version and travels with the repository. And uv takes the first compatible version, not the newest one.",
+      "data": {
+        "heading": "Chapter five, in three lines",
+        "points": [
+          {
+            "text": "Found ones are used. Fetched ones are owned.",
+            "atWord": 8.5
+          },
+          {
+            "text": ".python-version pins it, and travels",
+            "atWord": 17.833
+          },
+          {
+            "text": "First compatible version, never the newest",
+            "atWord": 28.167
+          }
+        ]
+      },
+      "durationFrames": 529,
+      "audio": "audio/uv-05-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter we finally make a real project, and read every single file uv writes, line by line.",
+      "data": {
+        "message": "Next: your first real project",
+        "sub": "uv init, and every file it writes"
+      },
+      "durationFrames": 198,
+      "audio": "audio/uv-05-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
