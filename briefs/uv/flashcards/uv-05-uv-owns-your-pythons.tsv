@@ -1,0 +1,16 @@
+What is a system Python, in uv's terms?	An interpreter already on the machine when uv arrived. uv will use it but never modify it.
+What is a managed Python?	One uv downloaded itself into uv's own directory, where uv is free to add and remove.
+Does uv download Python versions automatically?	Yes. uv downloads Python versions when they are required.
+Which command installs a specific Python?	uv python install 3.12
+Which command lists every interpreter uv can see or fetch?	uv python list
+What do the two right-hand column values in uv python list mean?	A real path means the interpreter is already installed; <download available> means uv can fetch it.
+Where do uv's Python builds come from?	python-build-standalone — portable builds designed to run from any folder, not python.org.
+Why does portability matter for uv's interpreters?	uv can drop the interpreter into its own directory and have it work, without a fixed install location.
+Which command pins a project to a Python version?	uv python pin 3.12
+Which file records the pin?	.python-version, one line of text, meant to be committed.
+How is .python-version searched for?	In the current folder and then every parent folder above it. The nearest one wins.
+Your project says requires-python >=3.10 and you have 3.10 and 3.13. Which does uv use?	3.10 — uv takes the first compatible version, not the newest.
+Does uv python install put a bare python command on your PATH?	No, deliberately. Pass --default if you explicitly want that.
+Compare .python-version and requires-python.	.python-version chooses the interpreter you develop on. requires-python is a public promise about what your code supports.
+How do you run one command on a different interpreter?	uv run --python 3.9 <command>, which changes nothing you have pinned.
+Which command removes a managed Python?	uv python uninstall <version>. System interpreters are never touched.

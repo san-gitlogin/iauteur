@@ -1,0 +1,24 @@
+What is a package, in one sentence?	Code somebody else wrote, downloaded as a file whose label carries a name and a version number.
+Which part of a package label changes constantly?	The version number. The name almost never changes.
+Where do Python packages come from by default?	PyPI, one enormous public index that anybody can publish to.
+What is a dependency?	Code that other code needs in order to run at all.
+You run pip install rich and four packages arrive. What are the other three called?	Dependencies — packages rich cannot run without, fetched automatically.
+In pip's output, what does the text beside a Collecting line mean?	The constraint that dragged that package in, for example pygments<3.0.0,>=2.13.0.
+In pip install rich, which package asked for mdurl?	markdown-it-py, not rich. That is a dependency two levels deep.
+Why does pip install packages in the order pygments, mdurl, markdown-it-py, rich?	Dependency order — the deepest first, and the thing you asked for last.
+How many shelves does a machine have, without virtual environments?	One, shared by every project on the machine.
+How many versions of a package can occupy one slot on that shared shelf?	Exactly one.
+What happens when a second project needs a different version of a package already installed?	The new install evicts the old one. The last install wins.
+Which pip lines show the eviction happening?	Attempting uninstall, Found existing installation, Uninstalling, Successfully uninstalled.
+pip printed ERROR and then Successfully installed in the same run. What does that mean?	pip broke a dependency of another package and completed the install anyway.
+After pip breaks a dependency, what happens when you run the affected code?	Usually nothing. It keeps working until some other code path finally trips over the missing piece.
+Why does a broken environment cost so much time to diagnose?	The break and the symptom are days apart, and the command that caused it reported success.
+Which command reports an inconsistent environment?	pip check.
+What does ModuleNotFoundError usually mean, if you know you installed the package?	The package is installed on a different environment from the one currently running.
+What are the two ways a Python project breaks?	Loudly, with ModuleNotFoundError from the wrong environment; and silently, when one install overwrites a version another project needed.
+Which of those two failures is more expensive, and why?	The silent one, because nothing announces it and there is no error to trace back.
+What is a virtual environment, in plain terms?	A folder of packages that belongs to exactly one project.
+How does a virtual environment fix the version collision?	Each project gets its own shelf, so two versions of the same package can exist at once.
+Why do so few beginners actually use virtual environments?	The ritual — make it, activate it, remember which one you are in, deactivate it — and forgetting any step puts you back on the shared shelf.
+What does uv change about that ritual?	uv creates, uses and forgets the environment for you, so there is nothing to remember.
+Compare a package and a dependency.	A package is any installable unit. A dependency is a package required by another package rather than requested by you.

@@ -1,0 +1,19 @@
+Where does uv keep what it downloads?	In the cache directory, reported by uv cache dir.
+Which buckets does the cache contain?	Downloaded archives, built wheels, source distributions, and the throwaway environments uvx builds.
+Why do the bucket names carry version numbers?	So several uv releases can share one cache without confusing each other's formats.
+Why does caching built wheels matter?	Packages with C code can take minutes to compile. uv keeps the compiled result and never repeats the work.
+How is a registry download keyed in the cache?	On the URL and the HTTP caching headers the server returned.
+How is a git dependency keyed?	On the commit hash — a branch moves, a commit never does.
+How is a local folder dependency keyed?	On the modification time of its files.
+What is cache-keys for?	Telling uv what a rebuild actually depends on, when the default key is not the right one.
+Besides the cache, what makes uv fast?	It is compiled so nothing has to start an interpreter, it works in parallel, and it hard-links files rather than copying them.
+What is a hard link?	A second name for bytes already on disk, so installing a cached package writes almost nothing.
+Why must the cache and your projects share a filesystem?	Hard links cannot cross filesystems. Across two disks, uv falls back to copying.
+Cold and warm timings measured for this course	5.792 seconds cold, 0.294 seconds warm, for uvx ruff --version.
+What speed claim does Astral make?	10 to 100 times faster than pip, on their homepage. Their benchmarks page carries no figures.
+State the honest performance summary.	Cold, uv is about as fast as your connection allows. Warm, about as fast as your disk allows.
+Which command empties the whole cache?	uv cache clean
+Which command removes only what nothing needs any more?	uv cache prune
+What does uv cache prune --ci do?	Keeps downloads and discards built wheels, making a saved CI cache much smaller.
+Is the cache a mirror of the index?	No. uv still asks whether anything has changed, using ordinary HTTP caching headers.
+A cached copy seems stale. What is the narrow fix?	uv sync --refresh-package <name>, or uv cache clean <name>, rather than emptying the whole cache.

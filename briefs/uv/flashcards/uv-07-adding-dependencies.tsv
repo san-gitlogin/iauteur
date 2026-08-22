@@ -1,0 +1,18 @@
+Which command adds a dependency?	uv add <package>
+uv add rich installed 15.0.0. What did it write to pyproject.toml?	rich>=15.0.0 — a lower bound derived from what was installed, not a pin.
+Why does uv add write a floor rather than a pin?	pyproject describes what your project can live with. Pinning there would stop anyone depending on you from upgrading.
+Where is the exact version recorded, if not in pyproject.toml?	In uv.lock.
+Which four jobs does uv add do?	Resolves, writes the requirement into pyproject.toml, updates the lockfile, and installs into the environment.
+What does a + mean in uv output?	A package was added.
+What does a ~ mean in uv output?	A package changed or was rebuilt.
+What does a - mean in uv output?	A package was removed.
+You remove httpx and seven packages disappear. Why?	httpx brought six dependencies with it, and nothing else in the project needs them.
+Which command draws your dependency graph?	uv tree
+In the real uv tree for this course, which package appears twice?	pygments — once under rich and once under pytest.
+Two packages need pygments. How many copies are installed?	One, at one version, shared by both.
+How do you pin a version exactly with uv add?	Quote the specifier, for example uv add "rich==15.0.0".
+What does uv add --dev pytest do?	Adds pytest to the dev dependency group, which nobody installing your library receives.
+Compare a dependency group and an optional dependency.	A group is for you while developing. An optional dependency becomes an extra that a user opts into by name.
+How do you add a package from a git repository?	uv add "httpx @ git+<repository url>"
+What does --editable do?	Links to a folder on disk instead of copying it, so edits there are live without reinstalling.
+How do you move one package forward without touching the rest?	uv lock --upgrade-package <name>

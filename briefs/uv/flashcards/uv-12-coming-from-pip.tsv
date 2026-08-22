@@ -1,0 +1,18 @@
+How do you use a pip command with uv?	Put uv in front of it: uv pip install, uv pip list, uv pip freeze, uv pip show, uv pip uninstall.
+Which uv pip command has no pip equivalent?	uv pip tree, which draws the dependency graph.
+What replaces python -m venv?	uv venv, which also names the interpreter it borrowed and prints the activation line for your shell.
+What does uv pip compile do?	Turns a loose requirements file into an exact pinned one, replacing pip-tools.
+What is the trap with uv pip compile?	Without -o it prints to your screen and writes no file at all.
+What do the "# via" comments in a compiled file mean?	Who asked for that pin. "via rich" means rich needed it; "via -r requirements.in" means you did.
+What is the difference between uv pip install and uv pip sync?	install is additive and leaves what it finds. sync is exact and removes anything not in the file.
+How do you migrate an existing project to uv?	uv init on the folder, then uv add -r requirements.in, adding -c requirements.txt to keep your pins.
+Where does requirements.in end up after migration?	In [project.dependencies] in pyproject.toml.
+Where does requirements.txt end up?	In uv.lock.
+Where does requirements-dev.txt end up?	In a dependency group, added with uv add -r requirements-dev.txt --dev.
+Why does uv reject packages pip would install?	uv is deliberately stricter about metadata, so a problem surfaces now instead of weeks later.
+Does uv support --user installs?	No. Use a virtual environment, or uv tool install for a command.
+Does uv read pip.conf or PIP_INDEX_URL?	No. uv has its own configuration and its own UV_INDEX_URL.
+How does uv treat requires-python upper bounds?	It ignores them entirely, because such upper bounds are almost always wrong and age badly.
+When should you use the pip interface rather than the project commands?	For an existing project, a quick experiment, or somebody else's script. Anything you maintain wants uv add and a lockfile.
+Does the pip interface write a lockfile?	No. Only the project commands do.
+Do you still need to activate an environment with uv pip?	No. uv finds the environment the same way uv run does.

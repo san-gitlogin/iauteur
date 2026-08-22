@@ -1,0 +1,17 @@
+What is the difference between locking and syncing?	Locking decides one exact set of versions and writes it down. Syncing makes your folder match that decision.
+Which file records the decision?	uv.lock
+Do you normally run uv lock yourself?	Rarely. uv add, uv run and uv sync all lock first, so the file stays current on its own.
+What does the hash field in uv.lock record?	Which exact bytes, using sha256 — not merely which release.
+Why does a hash matter more than a version number?	A version can in principle be re-uploaded, and downloads can be corrupted. A mismatch makes uv refuse to install.
+What does universal resolution mean?	One lockfile covers every platform and several Python versions, so a colleague on another operating system uses the same file.
+What is the default behaviour of uv sync?	Exact. The environment is made to match the lockfile, and anything not recorded is removed.
+You pip-installed a package and then ran uv sync. What happens?	uv uninstalls it, because it is not in the lockfile.
+How do you keep extra packages during a sync?	uv sync --inexact
+What does --locked do?	Fails if the lockfile is out of date, which is what you want on a build machine.
+What does --frozen do?	Uses the lockfile exactly as it stands and never re-resolves.
+Does uv upgrade packages when a new release appears?	No. New releases are ignored until you explicitly ask.
+When does a lockfile actually go stale?	When a requirement changes so the locked version no longer qualifies. Loosening a constraint that still allows it does not.
+Which command checks whether the lockfile is current?	uv lock --check
+Should uv.lock be committed?	Yes. It is what makes two machines identical, and it is plain text a review can read.
+Should uv.lock ever be edited by hand?	No. It is generated output, and the next command will overwrite your edit.
+Compare pyproject.toml and uv.lock.	pyproject says what your project can live with. uv.lock says what it actually got, down to the bytes.

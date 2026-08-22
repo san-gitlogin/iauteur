@@ -1,0 +1,17 @@
+What is a virtual environment?	A folder. It holds a small config file, a bin or Scripts directory, and a lib directory of packages.
+Which file configures a virtual environment?	pyvenv.cfg, which is six lines of plain text.
+Which line in pyvenv.cfg provides the isolation?	include-system-site-packages = false
+What does that line actually do?	Tells Python to look only inside this environment and never at the machine-wide packages.
+What does the home line in pyvenv.cfg point at?	A real Python interpreter elsewhere on disk. The environment borrows it rather than containing a copy.
+Why is a fresh virtual environment small?	It contains no interpreter of its own — only your packages and a pointer to a real Python.
+What is bin called on Windows?	Scripts. Same contents, different name, and the most common reason a copied command fails.
+What is in site-packages?	One ordinary folder per installed package, plus a dist-info folder recording each package's version and requirements.
+What does activating an environment actually do?	Puts that environment's bin folder at the front of your PATH, so its python is found first.
+Why is forgetting to activate so quiet a failure?	Nothing warns you. Your shell simply finds the machine-wide python and the install lands on the shared shelf.
+What replaces activation when using uv?	uv run, which finds the environment, checks the packages, and runs your command inside it.
+In what order does uv look for an environment?	An activated VIRTUAL_ENV, then CONDA_PREFIX, then a .venv in this folder or any parent.
+Which command creates an environment without a project?	uv venv
+How do you create an environment on a specific Python?	uv venv --python 3.12
+Should .venv be committed?	Never. It is large, machine-specific, and rebuildable from the lockfile in seconds.
+How do you rebuild a deleted environment?	uv sync, which recreates it from the lockfile.
+Where does uv pip show get its answers?	From the dist-info folder beside each installed package. Nothing is looked up remotely.

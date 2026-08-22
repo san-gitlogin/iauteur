@@ -1,0 +1,16 @@
+Which command creates a new project?	uv init <name>
+Which six things does uv init write?	pyproject.toml, .python-version, main.py, README.md, .gitignore, and a git repository.
+What is pyproject.toml?	The standard file in which a Python project describes itself. Every modern tool reads it, and it is not a uv invention.
+Which four sections does uv init write into pyproject.toml?	[project], [project.scripts], [build-system], and later [dependency-groups].
+Where does the authors line come from?	Your local git configuration. Check it before publishing, because it travels with your package.
+What does requires-python declare?	Which interpreters your code claims to support. uv refuses to add any package that cannot satisfy it.
+What does uv init --lib do differently?	Creates an importable library and puts your code under a src folder.
+What does uv init --bare do?	Writes almost nothing, for when you want to decide the structure yourself.
+What changed about uv init in version 0.12?	Prior to v0.12, uv did not define a build system for applications by default — so older tutorials show a different tree.
+When does .venv appear?	The first time uv actually needs an environment, such as the first uv run or uv add.
+When does uv.lock appear?	The same moment, without being asked for.
+What does uv run do before running your command?	Finds or creates the environment, makes sure the packages match the lockfile, then runs your command inside it.
+What does [project.scripts] do?	Maps a command name to a function in your code, so uv run <name> calls that function.
+Which files should be committed?	pyproject.toml, .python-version, uv.lock, and your source. Never .venv.
+Can uv init adopt a folder that already has code?	Yes. It writes only what is missing and overwrites nothing of yours.
+How do you avoid creating a git repository inside an existing one?	uv init --no-vcs

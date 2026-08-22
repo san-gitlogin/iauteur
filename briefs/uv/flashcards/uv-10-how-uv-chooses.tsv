@@ -1,0 +1,17 @@
+What is dependency resolution?	Finding one version of each package that satisfies every constraint asked of it at once.
+Picture resolution geometrically.	Every version of a package laid along a line, with each asker placing a bracketed range on it. The answer lives where the brackets overlap.
+foo needs lib>=1.0.0 and bar needs lib>=2.0.0. What gets installed?	lib 2.0.0 — the version satisfying both.
+What does uv do when no version satisfies every constraint?	Refuses to install, and explains the reasoning step by step in plain English.
+How does a uv conflict message read?	Because A depends on B, and because your project depends on C, we can conclude that your requirements are unsatisfiable.
+How should you read a long resolution error?	From the bottom. The last line is the conclusion; everything above it is the working.
+uv says pytest needs pluggy>=1.5 and you asked for pluggy<1.0. What do you do?	Loosen one of the two named constraints — whichever you actually control.
+What does the --frozen hint in an error message do?	Skips locking and writes the requirement anyway. It postpones the conflict rather than solving it.
+What is uv's default resolution strategy?	Highest — the newest version each constraint allows.
+What does --resolution lowest do?	Picks the earliest version every constraint allows, for every package.
+What does --resolution lowest-direct do?	Earliest for the packages you named yourself, highest for everything they dragged in.
+Why would you ever resolve at the lowest versions?	To test whether the floors you published are honest, by running your tests against the oldest versions you claim to support.
+What is the difference between universal and platform resolution?	A project resolves for every platform at once. The pip interface resolves only for the machine you are on.
+What is an environment marker?	A condition attached to a dependency, such as sys_platform == 'win32', deciding who the package applies to.
+Give an example of a marker in practice.	colorama is recorded for Windows only; tomli is recorded only for Python below 3.11.
+Sometimes a conflict mentions no package version at all. Why?	The conflict is with requires-python — no version of the package supports the interpreters you promised to support.
+What does --exclude-newer do?	Resolves as though nothing had been published after a given date, which reproduces an older set of packages exactly.

@@ -1,0 +1,16 @@
+What is uvx short for?	uv tool run. The two spellings are exactly equivalent.
+What does uvx do when you run a tool?	Builds a throwaway environment in the cache, installs the tool into it, runs the tool, and forgets the environment.
+Does uvx add anything to your project?	No. Nothing is written to pyproject.toml and nothing lands on your PATH.
+How do you run a specific release of a tool with uvx?	Append @ and the version, for example uvx ruff@0.3.0.
+How do you always run the newest release with uvx?	uvx ruff@latest
+When do you need --from with uvx?	When the command name differs from the package name, for example uvx --from httpie http.
+What does --with do on a uvx command?	Adds extra packages to the throwaway environment for that one run, such as a plugin the tool does not ship with.
+How do you run a tool straight from a git repository?	uvx --from git+<repository url> <command>
+Cold and warm timings for uvx ruff --version, measured for this course	5.792 seconds cold, 0.294 seconds warm.
+Why is the second uvx run so much faster?	The cache already holds the downloaded and built package, so nothing has to be fetched or built again.
+Where does uv keep the throwaway environments it builds?	In the environments bucket of the cache directory, one folder per thing you have borrowed.
+What does --refresh do?	Ignores the cached copy for that one command and fetches from the index again.
+When should you use uvx rather than installing a tool?	When you reach for the tool occasionally, and paying a fraction of a second now and then costs nothing.
+What is the drawback of borrowing every tool?	The command never lands on your PATH, so you must type uvx every single time.
+How does uvx compare with pipx?	Same idea and same job. uv already owns the cache, resolver and interpreters, so arranging the environment costs it very little.
+Can uvx run a tool on a Python version you do not have?	Yes. uvx --python 3.12 fetches that interpreter, builds the environment on it, and leaves your own Python alone.

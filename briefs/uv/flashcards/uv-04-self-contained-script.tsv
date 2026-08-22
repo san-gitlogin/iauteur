@@ -1,0 +1,16 @@
+Which command runs a single Python file with uv?	uv run <file.py>
+How do you lend a script one package for a single run?	uv run --with rich script.py
+Why is --with fragile for sharing a script?	The knowledge of what the script needs lives in your shell history, so the file cannot travel alone.
+What is PEP 723?	The Python standard for inline script metadata — a comment block at the top of a file declaring what it needs.
+What opens and closes a PEP 723 block?	# /// script opens it and # /// closes it.
+Why does Python ignore the metadata block?	Every line is a comment, and the interpreter does not care what is inside a comment.
+Which two fields normally appear in a script header?	requires-python, naming the interpreter, and dependencies, listing the packages.
+Which command writes a script header for you?	uv init --script <file.py>
+Which command adds a dependency to an existing script header?	uv add --script <file.py> <package>
+What happens if you ask for a Python version that is not installed?	uv downloads it. Capturing this course, uv fetched a 21 MiB CPython 3.12 on the spot.
+Measured time from nothing to output for a self-contained script	1.824 seconds, including installing four packages.
+What shebang makes a PEP 723 script directly executable?	#!/usr/bin/env -S uv run --script
+Which command freezes a script's dependencies?	uv lock --script <file.py>, which writes a lockfile beside the script.
+A script with an inline header sits inside a project. Can it use the project's packages?	No. When inline metadata is present the project's dependencies are ignored entirely.
+Why is the second run of a self-contained script so fast?	uv keys the environment on the header, so an unchanged header means the shelf is already standing.
+Name three real uses for a self-contained script.	A one-file utility you can send to somebody, a repository build step that needs libraries the main project should not carry, and a runnable snippet in a bug report.

@@ -1,0 +1,20 @@
+Why can pip never repair a broken Python installation?	pip is a Python package living inside that installation, so pip needs the very interpreter it would have to fix.
+Where does pip actually live on disk?	Inside a Python installation, in site-packages, alongside every other installed package.
+What language is uv written in, and why does that matter?	Rust. uv is a compiled binary that needs no interpreter to start, so it can install Python itself.
+State the chicken-and-egg idea in one line.	A tool that installs Python cannot itself require Python.
+What installs uv on macOS or Linux?	curl -LsSf https://astral.sh/uv/install.sh | sh
+What installs uv on Windows?	powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+What do the flags in curl -LsSf mean?	-L follow redirects, -s stay quiet, -S still show real errors, -f fail properly on a bad response.
+Why is pip install uv the route to avoid?	It puts uv inside a Python environment, which is the thing uv exists to manage from outside — and uv self update then fails.
+Which install routes support uv self update?	Only the standalone installer routes. A pip-installed uv cannot replace its own file.
+You installed uv and the terminal says command not found. What happened?	Your open shell read its PATH before uv existed. Open a new terminal.
+What is PATH?	The short, ordered list of folders your shell searches for a command, using the first match it finds.
+Where does the standalone installer put the uv binary?	~/.local/bin on Unix, and the equivalent local bin folder on Windows.
+What three facts are in the uv --version output?	The version number, the exact commit the binary was built from, and the build date.
+Which command shows where uv keeps its downloads?	uv cache dir
+Which command shows where uv keeps installed tools?	uv tool dir
+Which command shows where uv keeps downloaded interpreters?	uv python dir
+How do you uninstall uv completely?	uv cache clean, then delete the tool and python directories, then delete the uv and uvx binaries.
+Does installing uv change your existing Python?	No. uv does not modify your system Python, your existing environments, or add a bare python to PATH.
+Compare pip and uv by where each one lives.	pip lives inside a Python installation and depends on it. uv sits beside Python as an independent binary.
+Why can uv download a whole CPython on demand while pip cannot?	uv starts without an interpreter, so fetching one is an ordinary download rather than a bootstrap problem.

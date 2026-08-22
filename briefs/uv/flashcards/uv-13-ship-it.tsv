@@ -1,0 +1,21 @@
+Which command builds your package?	uv build
+What two files does uv build produce?	A source distribution (.tar.gz) and a wheel (.whl), both in dist/.
+Which is built from which?	The wheel is built from the source distribution. uv build's own output says so.
+What is a source distribution?	Your code, packed up. Whoever installs it has to build the package on their own machine.
+What is a wheel?	The built result, ready to unpack straight into site-packages, which is why installing from one is nearly instant.
+Read the filename invoice_app-0.1.0-py3-none-any.whl	Package invoice_app, version 0.1.0, any Python 3, no C extensions, any platform.
+What is a wheel file, structurally?	A zip archive containing the package folder and a dist-info folder of metadata.
+What does uv build --no-sources do?	Resolves as a stranger would, so a local path or git branch cannot escape into the published package.
+Why does --no-sources matter?	Nobody else has your folder. A pointer that works only on your machine must not travel.
+Which command shows the current version?	uv version
+How do you increase the version?	uv version --bump major, minor, or patch.
+What does --dry-run add?	Prints the change as an arrow and writes nothing, so you can check before committing to it.
+What does a patch bump promise?	A fix that breaks nothing.
+What does a minor bump promise?	Something new, with everything that already worked still working.
+What does a major bump promise?	Something was deliberately broken, and everyone depending on you must read the notes.
+Which command uploads your package?	uv publish
+Where should a publish token live?	In an environment variable such as UV_PUBLISH_TOKEN — never in a command, a file, or on screen.
+What is TestPyPI for?	Rehearsing a publish on a separate index where a mistake costs nothing.
+What is trusted publishing?	Your CI provider proves its identity directly to the index, so no token is created, stored or rotated.
+Can you re-upload a published version with different contents?	No. A published version is permanent. The only fix is to publish a new version.
+How do you verify a published package?	uv run --with <package> --no-project -- python -c "import <package>", which proves it works from nothing.

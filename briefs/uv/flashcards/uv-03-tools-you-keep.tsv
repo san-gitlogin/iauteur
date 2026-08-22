@@ -1,0 +1,16 @@
+Which command installs a tool permanently?	uv tool install <name>
+What two things does uv tool install create?	A private environment for the tool, and one shim file on your PATH pointing at it.
+Why does uv print a PATH warning after the first tool install?	The shim folder is not yet in your shell's list, and uv will not edit a shell profile without being asked.
+Which command adds the shim folder to your shell profile?	uv tool update-shell
+After uv tool update-shell, why is the command still not found?	The current shell read its profile at startup. Open a new terminal.
+What is a shim?	One small file on your PATH that points at the tool's own environment — a symlink on Unix, a launcher executable on Windows.
+You installed ruff as a tool. Can your project import ruff?	No. The tool lives in its own environment; your project is a different environment entirely.
+What does uv pip show ruff report after uv tool install ruff?	warning: Package(s) not found for: ruff — because ruff is not in your project environment.
+When do you install a tool instead of borrowing it?	When you type the command many times a day and want the bare name rather than a uvx prefix.
+Which commands manage installed tools?	uv tool list, uv tool upgrade, uv tool uninstall, and uv tool dir.
+How do you pin a version with uv tool install?	Ordinary specifier syntax, for example uv tool install "ruff==0.16.4". The @ form is uvx only.
+How do you give an installed tool a plugin?	Reinstall with --with, so uv records the extra in the tool's receipt and keeps it through upgrades.
+Why should tool environments not be edited by hand?	They are not intended to be mutated directly; an upgrade rebuilds them from the recorded requirements.
+Which tools are worth pinning?	The ones that decide whether your code passes — linters and formatters — because a silent upgrade can fail a build nobody touched.
+Does an installed tool use your project's Python?	No. Each tool environment has its own interpreter, chosen when the tool was installed.
+Compare a tool and a dependency.	A tool is something you run and it gets its own environment. A dependency is something your code imports and it belongs in your project.
