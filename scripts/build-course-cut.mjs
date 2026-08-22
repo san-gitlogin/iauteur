@@ -56,7 +56,11 @@ const COURSES = {
     // Chapter 00 is chapter zero on purpose — it is the "before uv" chapter — so the
     // label is the index itself rather than the index plus one.
     numbered: () => true,
-    label: (i, name) => `Chapter ${String(i).padStart(2, '0')} — ${name}`,
+    // The episode titles carry their own "uv Python Tutorial #N — " prefix, for search.
+    // Inside a chapter list that prefix is said twice in the same line, so strip it and
+    // keep only the part that names the chapter.
+    label: (i, name) => `Chapter ${String(i).padStart(2, '0')} — `
+      + String(name).replace(/^uv Python Tutorial #\d+\s*[—-]\s*/, ''),
     title: 'Learn uv Properly — The Complete Python Packaging Course for Absolute Beginners (2026)',
     alts: [
       'uv From Scratch: Packages, Environments and Lockfiles Explained Properly',
