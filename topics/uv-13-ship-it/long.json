@@ -1,0 +1,928 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #13 — Ship it",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "uv build writes an sdist and builds the wheel from it; --no-sources keeps local paths out of what you publish; and credentials never appear on screen.",
+    "openLoop": "Your code works. How does anybody else get to run it?",
+    "analogy": "One crate producing another: the wheel is built out of the sdist, not beside it.",
+    "topicAxes": [
+      "skill-acquisition",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #13 — Build and Publish Your Package (2026)",
+      "altTitles": [
+        "uv build, uv version and uv publish explained safely"
+      ],
+      "description": "The final chapter of the uv course. uv build and why the wheel is built from the sdist, reading a wheel filename, --no-sources before publishing, uv version --bump with --dry-run, publishing to TestPyPI, trusted publishing, and verifying from a clean environment.",
+      "tags": [
+        "uv",
+        "python",
+        "uv build",
+        "uv publish",
+        "pypi",
+        "wheel",
+        "sdist",
+        "trusted publishing",
+        "astral uv",
+        "python packaging",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "SHIP THE THING",
+    "badge": "uv · 13",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your code works. Now let anyone in the world install it with one command.",
+      "data": {
+        "headline": "SHIP THE THING",
+        "subtext": "two files, one command",
+        "heroAsset": "lucide:package-check",
+        "headlineAtWord": 1.667,
+        "heroAtWord": 6.833
+      },
+      "durationFrames": 164,
+      "audio": "audio/uv-13-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "uv build, and two files appear in a folder called dist. Read the second line of that output carefully, because uv is saying something people get wrong constantly. Which of those two files does the other one come from? The wheel is built FROM the source distribution — not alongside it.",
+      "data": {
+        "uvStage": {
+          "kind": "dist-output",
+          "color": "green",
+          "headline": "The wheel is built [from] the sdist",
+          "premise": "Two files in dist/, and the second is made out of the first. uv build says so.",
+          "stageTitle": "what uv build writes",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "from source",
+          "steps": [
+            {
+              "label": "uv build",
+              "out": [
+                "Building source distribution...",
+                "Building wheel from source distribution...",
+                "Successfully built dist/invoice_app-0.1.0.tar.gz",
+                "Successfully built dist/invoice_app-0.1.0-py3-none-any.whl"
+              ],
+              "detail": "read the second line again",
+              "atWord": 5.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "your project",
+              "text": "src/",
+              "sub": "the code as you wrote it",
+              "detail": "packed up",
+              "atWord": 9.083
+            },
+            {
+              "label": "invoice_app-0.1.0.tar.gz",
+              "text": "760 bytes",
+              "sub": "the source, packaged",
+              "atWord": 16.583
+            },
+            {
+              "label": "invoice_app-...any.whl",
+              "text": "1631 bytes",
+              "sub": "the installable one",
+              "detail": "built from the sdist",
+              "atWord": 24.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 483,
+      "audio": "audio/uv-13-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back, and welcome to the last chapter. This one turns the project you've built into something anybody can install, and it does that without ever putting a secret on screen.",
+      "data": {
+        "title": "Ship it",
+        "subtitle": "uv, chapter thirteen · build, version, publish"
+      },
+      "durationFrames": 309,
+      "audio": "audio/uv-13-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start with what those two files actually are, because they do different jobs.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "sdist and wheel",
+          "subtitle": "two files, two jobs"
+        }
+      },
+      "durationFrames": 138,
+      "audio": "audio/uv-13-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "A source distribution is your code, packed up. Anyone installing from an sdist has to build the package on their own machine first, which takes time and sometimes needs a compiler they haven't got. A wheel is the built result, ready to unpack straight into a folder — which is exactly why installing from a wheel is nearly instant.",
+      "data": {
+        "uvStage": {
+          "kind": "dist-output",
+          "color": "blue",
+          "headline": "One is [source]. One is built.",
+          "premise": "An sdist must be built on arrival. A wheel unpacks straight into place.",
+          "stageTitle": "why both exist",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "tar tzf dist/invoice_app-0.1.0.tar.gz | head -3",
+              "out": [
+                "invoice_app-0.1.0/pyproject.toml",
+                "invoice_app-0.1.0/README.md",
+                "invoice_app-0.1.0/src/invoice_app/__init__.py"
+              ],
+              "detail": "the sdist is your project, as-is",
+              "atWord": 16.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "your project",
+              "text": "src/",
+              "sub": "what you wrote",
+              "detail": "packed",
+              "atWord": 8.833
+            },
+            {
+              "label": "the sdist",
+              "text": "source",
+              "sub": "must be built on arrival",
+              "atWord": 16.083
+            },
+            {
+              "label": "the wheel",
+              "text": "built",
+              "sub": "unpacks straight into site-packages",
+              "detail": "instant to install",
+              "atWord": 27.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 591,
+      "audio": "audio/uv-13-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Reading the filename tells you a lot. Invoice underscore app is the package. Nought point one point zero is the version. Py three means any Python three. None means no C extensions. And any means any platform — which together say this wheel will install absolutely anywhere.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "The filename is a [description]",
+          "premise": "Name, version, Python tag, ABI tag, platform tag. Five facts, in one filename.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "py3-none-any",
+          "steps": [
+            {
+              "label": "ls -l dist/",
+              "out": [
+                "invoice_app-0.1.0-py3-none-any.whl   1631 bytes",
+                "invoice_app-0.1.0.tar.gz              760 bytes"
+              ],
+              "detail": "real files, real sizes",
+              "atWord": 10.25
+            },
+            {
+              "label": "unzip -l dist/*.whl | head -3",
+              "out": [
+                "invoice_app/__init__.py",
+                "invoice_app-0.1.0.dist-info/METADATA"
+              ],
+              "detail": "and a wheel is only a zip file, inside",
+              "atWord": 26.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 546,
+      "audio": "audio/uv-13-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Before publishing anything, two things need checking.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Before you publish",
+          "subtitle": "sources, and the version"
+        }
+      },
+      "durationFrames": 117,
+      "audio": "audio/uv-13-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "The first is easy to forget and embarrassing to get wrong. If your project points at a local folder or a git branch while you're developing, that pointer must not travel into the published package, because nobody else has your folder. Building with no-sources makes uv resolve exactly as a stranger would.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "orange",
+          "headline": "Build as a [stranger] would",
+          "premise": "A local path or a git branch works on your machine and nowhere else.",
+          "stageTitle": "--no-sources",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--no-sources",
+          "steps": [
+            {
+              "label": "uv build --no-sources",
+              "out": [
+                "x Failed to resolve: shared-utils",
+                "  Caused by: not found in the package registry"
+              ],
+              "detail": "caught here, instead of by a stranger",
+              "atWord": 25.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "shared-utils",
+              "text": "local",
+              "atWord": 12.417
+            },
+            {
+              "label": "on your machine",
+              "sub": "resolved from ../shared-utils",
+              "detail": "works",
+              "atWord": 18.167
+            },
+            {
+              "label": "for anyone else",
+              "sub": "no such folder exists",
+              "detail": "fails",
+              "atWord": 25.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 536,
+      "audio": "audio/uv-13-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "The second is the version number, and uv manages that for you. uv version prints the current one. Bump takes it forward by major, minor or patch. Dry-run shows you the arrow without changing a single file, which is the safest way to check the bump does what you meant.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Bump it, but [look] first",
+          "premise": "--dry-run prints the change as an arrow and writes nothing at all.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--dry-run",
+          "steps": [
+            {
+              "label": "uv version",
+              "out": [
+                "invoice-app 0.1.0"
+              ],
+              "detail": "where you are now",
+              "atWord": 8.833
+            },
+            {
+              "label": "uv version --bump minor --dry-run",
+              "out": [
+                "invoice-app 0.1.0 => 0.2.0"
+              ],
+              "detail": "the arrow, and nothing written",
+              "atWord": 19.917
+            },
+            {
+              "label": "uv version --bump minor",
+              "out": [
+                "invoice-app 0.1.0 => 0.2.0"
+              ],
+              "detail": "and now pyproject actually changed",
+              "atWord": 24.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 464,
+      "audio": "audio/uv-13-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "A quick word on what those three words mean, because choosing wrongly annoys everybody downstream. Patch is a fix that breaks nothing. Minor adds something new while keeping everything that already worked working. Major means you broke something deliberately, and every person depending on your package now has to read the release notes.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "purple",
+          "headline": "Major, minor, [patch]",
+          "premise": "The number is a promise to everyone who depends on you. Choose it honestly.",
+          "stageTitle": "what each one promises",
+          "token": "a promise, not a preference",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv version --bump patch --dry-run",
+              "out": [
+                "invoice-app 0.2.0 => 0.2.1"
+              ],
+              "detail": "a fix, and nothing else changed",
+              "atWord": 21.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "sub": "0.2.0, 0.2.1, 0.3.0, 1.0.0",
+              "atWord": 8.167
+            },
+            {
+              "label": "patch fixes",
+              "text": "0.10..0.30",
+              "detail": "0.2.1",
+              "atWord": 16.25
+            },
+            {
+              "label": "minor adds",
+              "text": "0.30..0.62",
+              "detail": "0.3.0",
+              "atWord": 22.75
+            },
+            {
+              "label": "major breaks",
+              "text": "0.62..1.00",
+              "detail": "1.0.0",
+              "value": 0,
+              "atWord": 27.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 538,
+      "audio": "audio/uv-13-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "And now publishing — carefully, because this is the step involving credentials.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Publishing",
+          "subtitle": "and never showing a token"
+        }
+      },
+      "durationFrames": 158,
+      "audio": "audio/uv-13-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "uv publish uploads what's in dist. Authentication comes from an environment variable, and I want to be explicit here: you set that variable in your own shell, and it never appears in a command, in a file, or on anybody's screen. What you see here is the variable's name, never its contents.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "red",
+          "headline": "The token is a [variable name]",
+          "premise": "Set it in your own shell. It belongs in no command, no file, and no recording.",
+          "stageTitle": "never on screen",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "UV_PUBLISH_TOKEN",
+          "steps": [
+            {
+              "label": "echo \"${UV_PUBLISH_TOKEN:+set}\"",
+              "out": [
+                "set"
+              ],
+              "detail": "confirms it exists without printing it",
+              "atWord": 23.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "your credential",
+              "text": "needed",
+              "atWord": 11.583
+            },
+            {
+              "label": "the variable name",
+              "sub": "UV_PUBLISH_TOKEN, shown freely",
+              "detail": "safe to say",
+              "atWord": 18.25
+            },
+            {
+              "label": "the value",
+              "sub": "not in a command, a file, or a video",
+              "detail": "never once",
+              "atWord": 26.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 539,
+      "audio": "audio/uv-13-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Practise on TestPyPI first. It's a completely separate copy of the index, built for exactly this, and a mistake there costs nothing at all. Point publish at it with the index flag, and you get the whole experience without touching the real thing.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "blue",
+          "headline": "Practise on [TestPyPI] first",
+          "premise": "A separate index, built for rehearsal. A mistake there costs you nothing.",
+          "stageTitle": "rehearse, then perform",
+          "token": "a mistake here is free",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "testpypi",
+          "steps": [
+            {
+              "label": "uv publish --index testpypi",
+              "out": [
+                "Publishing 2 files to https://test.pypi.org/legacy/",
+                "Uploading invoice_app-0.2.0-py3-none-any.whl",
+                "Uploading invoice_app-0.2.0.tar.gz"
+              ],
+              "detail": "the real experience, on a practice index",
+              "atWord": 16.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "TestPyPI",
+              "text": "rehearsal",
+              "sub": "wipe it, redo it, nobody minds",
+              "atWord": 9.5
+            },
+            {
+              "label": "PyPI",
+              "text": "permanent",
+              "sub": "a published version cannot be replaced",
+              "atWord": 16.583
+            },
+            {
+              "label": "uv publish",
+              "sub": "and the same command does both",
+              "atWord": 21.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 428,
+      "audio": "audio/uv-13-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "There's a better option than a token, if you publish from a repository. Trusted publishing lets your CI provider prove who it is directly to the index, which means no token is created, stored or rotated — and a secret that doesn't exist cannot leak.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "green",
+          "headline": "Better: [no] credential at all",
+          "premise": "Trusted publishing proves identity directly. There is no secret to store or leak.",
+          "stageTitle": "the safest option",
+          "promptLabel": "ci@runner",
+          "cwd": "/build/invoice-app",
+          "steps": [
+            {
+              "label": "uv publish",
+              "out": [
+                "Publishing 2 files to https://upload.pypi.org/legacy/",
+                "note: using trusted publishing"
+              ],
+              "detail": "no token was set, or needed",
+              "atWord": 19.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice_app-0.2.0",
+              "text": "ready",
+              "atWord": 10.417
+            },
+            {
+              "label": "with a token",
+              "sub": "created, stored, rotated, and leakable",
+              "detail": "a secret",
+              "atWord": 15.167
+            },
+            {
+              "label": "trusted publishing",
+              "sub": "nothing to store, so nothing to leak",
+              "detail": "no secret",
+              "atWord": 21.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 453,
+      "audio": "audio/uv-13-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "Then verify, because publishing is not the same as working. Run your package from a completely clean environment, with no project around it at all. If the import succeeds under those conditions, a stranger with nothing on their machine can install what you published.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Prove it from [nothing]",
+          "premise": "A clean environment, no project, straight from the index. That is the real test.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "--no-project",
+          "steps": [
+            {
+              "label": "uv run --with invoice-app --no-project -- \\",
+              "out": [],
+              "detail": "a fresh environment, no project at all",
+              "atWord": 9.583
+            },
+            {
+              "label": "  python -c \"import invoice_app; print('ok')\"",
+              "out": [
+                "Installed 5 packages in 41ms",
+                "ok"
+              ],
+              "detail": "and a stranger would get exactly this",
+              "atWord": 20.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 443,
+      "audio": "audio/uv-13-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "Two build flags are worth knowing before you need them. You can build only the wheel, or only the sdist, which matters in a build pipeline where the two are produced by different jobs. You can also build a package that lives in a subfolder of a larger repository.",
+      "data": {
+        "uvStage": {
+          "kind": "dist-output",
+          "color": "blue",
+          "headline": "Build [one], or the other",
+          "premise": "Separate flags for each artefact, and a path for a package inside a bigger repo.",
+          "stageTitle": "two useful flags",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/monorepo",
+          "highlight": "--wheel",
+          "steps": [
+            {
+              "label": "uv build --wheel packages/parser",
+              "out": [
+                "Building wheel...",
+                "Successfully built dist/parser-0.1.0-py3-none-any.whl"
+              ],
+              "detail": "one artefact, from one subfolder",
+              "atWord": 19.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "packages/parser",
+              "text": "src/",
+              "sub": "one package inside a larger repo",
+              "detail": "built",
+              "atWord": 9.75
+            },
+            {
+              "label": "--sdist only",
+              "text": "source",
+              "sub": "when a later job builds the wheel",
+              "atWord": 14.667
+            },
+            {
+              "label": "--wheel only",
+              "text": "built",
+              "sub": "when the sdist already exists",
+              "detail": "and both are optional",
+              "atWord": 20.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 432,
+      "audio": "audio/uv-13-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One rule about published versions catches people badly, so let me say it plainly. A version, once published, is permanent. You cannot re-upload nought point two point zero with different contents, ever. If you got it wrong, the fix is always to publish a new version — never to try to replace an old one.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-evict",
+          "color": "red",
+          "headline": "A published version is [permanent]",
+          "premise": "You cannot re-upload a version with different contents. The fix is a new number.",
+          "stageTitle": "no take-backs",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv publish",
+              "out": [
+                "x Failed to publish: invoice_app-0.2.0.tar.gz",
+                "  Caused by: File already exists (400)"
+              ],
+              "detail": "refused, and rightly so",
+              "atWord": 23.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "0.2.0",
+              "value": 0,
+              "sub": "published, and now permanent",
+              "atWord": 12.917
+            },
+            {
+              "label": "invoice-app",
+              "text": "0.2.1",
+              "sub": "the only real fix there is",
+              "atWord": 26.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 552,
+      "audio": "audio/uv-13-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "One last thought, for whoever installs what you publish. Everything from chapter nine applies to your users as well: their lockfile records the exact bytes of your wheel. So the more carefully you version, the less painful your package becomes to depend on.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "token": "two-machines",
+          "color": "green",
+          "headline": "They lock [you], too",
+          "premise": "Whoever installs your package records its exact bytes, just as you record theirs.",
+          "stageTitle": "the other side of chapter nine",
+          "promptLabel": "them@laptop",
+          "cwd": "~/work/their-app",
+          "steps": [
+            {
+              "label": "uv add invoice-app && grep -A2 invoice uv.lock",
+              "out": [
+                "name = \"invoice-app\"",
+                "version = \"0.2.0\"",
+                "wheels = [{ hash = \"sha256:a41f0c...\" }]"
+              ],
+              "detail": "your package, sealed into their lockfile",
+              "atWord": 19.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "0.2.0",
+              "detail": "sha256:a41f0c...",
+              "atWord": 11.75
+            },
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "sha256:1f2a9c...",
+              "atWord": 17.583
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "sha256:8b4e10...",
+              "sub": "and yours sits in the list like any other",
+              "atWord": 22.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 453,
+      "audio": "audio/uv-13-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Last quiz of the course. What does uv build with no-sources actually protect you from? Pause the video here and think it through before I answer. Ready? From publishing something that only resolves on your own machine, because of a local path.",
+      "data": {
+        "quiz": {
+          "question": "What does uv build --no-sources protect you from?",
+          "options": [
+            {
+              "text": "Publishing a broken wheel"
+            },
+            {
+              "text": "Shipping a local-only path"
+            },
+            {
+              "text": "Leaking your token"
+            },
+            {
+              "text": "Building twice"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "A local path resolves on your machine and nowhere else at all.",
+          "atWord": 1.667,
+          "revealAtWord": 20.583
+        }
+      },
+      "durationFrames": 436,
+      "audio": "audio/uv-13-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "So that's the whole course. You started with a shelf that everything fought over. You now have a project with its own shelf, an exact list of what's on it, a Python version pinned to it, and a package anybody in the world can install. Thirteen chapters, and no ritual to remember.",
+      "data": {
+        "uvStage": {
+          "kind": "env-ceremony",
+          "color": "green",
+          "headline": "From one shelf, to [shipped]",
+          "premise": "Everything the course built, in the order it was built, and none of it manual.",
+          "stageTitle": "the whole thing",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv init && uv add rich && uv build && uv publish",
+              "out": [
+                "Initialized project",
+                " + rich==15.0.0",
+                "Successfully built dist/invoice_app-0.2.0.tar.gz",
+                "Publishing 2 files"
+              ],
+              "detail": "four commands, start to finish",
+              "atWord": 18.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "a shelf per project",
+              "icon": "lucide:package-plus",
+              "atWord": 9
+            },
+            {
+              "label": "an exact list",
+              "icon": "lucide:list-checks",
+              "atWord": 12.75
+            },
+            {
+              "label": "a pinned Python",
+              "icon": "lucide:layers",
+              "atWord": 16.5
+            },
+            {
+              "label": "shipped",
+              "icon": "lucide:send",
+              "atWord": 21
+            },
+            {
+              "label": "uv",
+              "sub": "and none of it was yours to remember",
+              "atWord": 24.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 489,
+      "audio": "audio/uv-13-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. uv build writes a source distribution and then builds the wheel out of it. Build with no-sources before publishing, so a local path can't escape into the world. And keep every credential in an environment variable, where nobody can read it over your shoulder.",
+      "data": {
+        "heading": "Chapter thirteen, in three lines",
+        "points": [
+          {
+            "text": "The wheel is built FROM the sdist",
+            "atWord": 7.75
+          },
+          {
+            "text": "--no-sources before you publish",
+            "atWord": 17.25
+          },
+          {
+            "text": "Tokens live in the environment, not on screen",
+            "atWord": 26.833
+          }
+        ]
+      },
+      "durationFrames": 508,
+      "audio": "audio/uv-13-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That's the course. Go and make something, and if it helped, the whole series is right here waiting for the next person who needs it.",
+      "data": {
+        "message": "That is the whole course",
+        "sub": "now go and build something"
+      },
+      "durationFrames": 243,
+      "audio": "audio/uv-13-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,962 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #11 — Why it is this fast",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "The cache keeps downloads and built wheels keyed on what identifies them; being compiled, parallel and hard-linked explains the rest.",
+    "openLoop": "Where did five and a half seconds go between two identical commands?",
+    "analogy": "A local depot between the warehouse and your shelf: the second delivery never leaves town.",
+    "topicAxes": [
+      "economic-pain",
+      "entity-novelty"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #11 — Why uv Is Actually This Fast (2026)",
+      "altTitles": [
+        "The uv cache explained: buckets, keys, hard links and prune"
+      ],
+      "description": "Chapter eleven of the uv course. What the uv cache keeps and how each bucket is keyed, why built wheels matter, hard linking, cache-keys, uv cache prune and prune --ci, and an honest look at where the speed numbers actually come from.",
+      "tags": [
+        "uv",
+        "python",
+        "uv cache",
+        "performance",
+        "astral uv",
+        "hard links",
+        "pip vs uv",
+        "python packaging",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "5.7s THEN 0.29s",
+    "badge": "uv · 11",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Five point seven seconds. Then nought point two nine. Same command, same machine.",
+      "data": {
+        "headline": "THE SECOND RUN IS FREE",
+        "subtext": "and here is the honest reason",
+        "heroAsset": "lucide:gauge",
+        "headlineAtWord": 2.25,
+        "heroAtWord": 7.917
+      },
+      "durationFrames": 197,
+      "audio": "audio/uv-11-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "I promised in chapter two that I'd explain this properly, so here we are. Nine chapters ago you watched the same command take five point seven nine two seconds, then nought point two nine four. Nothing was optimised in between. So where did five and a half seconds go?",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "green",
+          "headline": "The loop from [chapter two]",
+          "premise": "The same command, twice, with nothing changed in between. Measured here.",
+          "stageTitle": "measured on this machine",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "real",
+          "steps": [
+            {
+              "label": "time uvx ruff --version",
+              "out": [
+                "Downloading ruff (10.1MiB)",
+                "ruff 0.16.4",
+                "real    0m5.792s"
+              ],
+              "detail": "cold: an empty cache",
+              "atWord": 11
+            },
+            {
+              "label": "time uvx ruff --version",
+              "out": [
+                "ruff 0.16.4",
+                "real    0m0.294s"
+              ],
+              "detail": "warm: seconds later, same command",
+              "atWord": 20.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "cold",
+              "text": "5.792s",
+              "sub": "all the way from the warehouse",
+              "atWord": 12.5
+            },
+            {
+              "label": "warm",
+              "text": "0.294s",
+              "sub": "from the depot down the road",
+              "atWord": 21.917
+            },
+            {
+              "label": "nineteen times, measured here",
+              "atWord": 25.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 482,
+      "audio": "audio/uv-11-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter is the honest answer to why uv feels the way it does — not a benchmark graphic, but the actual mechanism, and what it costs you in disk space.",
+      "data": {
+        "title": "Why it is this fast",
+        "subtitle": "uv, chapter eleven · the depot, and the honest numbers"
+      },
+      "durationFrames": 315,
+      "audio": "audio/uv-11-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start with what actually gets kept, because the answer is more than you'd guess.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "What is in the cache",
+          "subtitle": "and how it is keyed"
+        }
+      },
+      "durationFrames": 147,
+      "audio": "audio/uv-11-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "The cache is a folder of buckets, and each bucket holds a different kind of thing. Downloaded archives. Built wheels. Source distributions. Whole environments, from chapter two. And every bucket carries a version number in its name, which means several uv releases can share one cache without ever confusing each other.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "blue",
+          "headline": "Buckets, and [version] numbers",
+          "premise": "One folder per kind of thing, each versioned so several uv releases can share.",
+          "stageTitle": "inside the cache",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "ls \"$(uv cache dir)\"",
+              "out": [
+                "archive-v0  builds-v0  environments-v2",
+                "sdists-v9  wheels-v6"
+              ],
+              "detail": "the trailing number is the format version",
+              "atWord": 25
+            }
+          ],
+          "stage": [
+            {
+              "label": "archive-v0/",
+              "value": 1,
+              "sub": "what was downloaded",
+              "atWord": 11.083
+            },
+            {
+              "label": "wheels-v6/",
+              "value": 1,
+              "sub": "and what was built from it",
+              "atWord": 16.667
+            },
+            {
+              "label": "sdists-v9/",
+              "value": 1,
+              "sub": "source distributions, unpacked",
+              "atWord": 21.25
+            },
+            {
+              "label": "environments-v2/",
+              "value": 1,
+              "sub": "the throwaway envs from chapter two",
+              "atWord": 26.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 587,
+      "audio": "audio/uv-11-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "The built wheels bucket is the one that matters most. Some packages contain C code that has to be compiled, and compiling can take minutes. uv keeps the compiled result, so the second time you need that package on this machine, there is nothing to compile at all.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "purple",
+          "headline": "It keeps what it [built], too",
+          "premise": "Compiling C extensions takes minutes. uv keeps the result and never repeats it.",
+          "stageTitle": "built once, kept",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "time uv add some-c-extension",
+              "out": [
+                "Building some-c-extension...",
+                "real    1m14.2s"
+              ],
+              "detail": "a minute and a quarter of compiling",
+              "atWord": 9.917
+            },
+            {
+              "label": "time uv add some-c-extension",
+              "out": [
+                "Installed 1 package in 31ms",
+                "real    0m0.402s"
+              ],
+              "detail": "and nothing at all to compile this time",
+              "atWord": 21.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "first build",
+              "text": "74.2s",
+              "sub": "the compiler actually ran",
+              "atWord": 12.167
+            },
+            {
+              "label": "second time",
+              "text": "0.402s",
+              "sub": "the built wheel was already there",
+              "atWord": 22.083
+            },
+            {
+              "label": "and every project after it, too",
+              "atWord": 24.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 460,
+      "audio": "audio/uv-11-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Each kind of thing is keyed on whatever identifies it. A registry download is keyed on the URL and the response headers. A git dependency is keyed on the commit hash, which is exactly right — a branch moves, a commit never does. And a local folder is keyed on the modification time of its files.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "blue",
+          "headline": "Keyed on what [identifies] it",
+          "premise": "Each source has a natural identity, and uv keys the cache entry on that.",
+          "stageTitle": "four keys",
+          "token": "a commit never moves",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "ls \"$(uv cache dir)/environments-v2\" | head -2",
+              "out": [
+                "ruff-c2a1f0e9",
+                "httpie-7b41dd02"
+              ],
+              "detail": "the suffix is the key, hashed",
+              "atWord": 27.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "from the registry",
+              "text": "the URL",
+              "sub": "plus the caching headers it sent",
+              "atWord": 10.583
+            },
+            {
+              "label": "from git",
+              "text": "the commit",
+              "sub": "a branch moves; a commit cannot",
+              "atWord": 18.667
+            },
+            {
+              "label": "from a folder",
+              "text": "mtime",
+              "sub": "when the files last changed",
+              "atWord": 24.333
+            },
+            {
+              "label": "an immutable file",
+              "text": "the name",
+              "sub": "a versioned filename never changes",
+              "atWord": 29.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 567,
+      "audio": "audio/uv-11-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And when the default key isn't right, you can say so. Cache-keys in pyproject lets you tell uv what a rebuild actually depends on — a particular file, a git commit, an environment variable — so your builds neither rebuild pointlessly nor skip a rebuild they needed.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "Tell it what a rebuild [depends on]",
+          "premise": "cache-keys names what should invalidate a build, when the default guess is wrong.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "cache-keys",
+          "steps": [
+            {
+              "label": "grep -A4 cache-keys pyproject.toml",
+              "out": [
+                "cache-keys = [",
+                "  { file = \"pyproject.toml\" },",
+                "  { file = \"src/**/*.rs\" },",
+                "  { git = { commit = true } },",
+                "]"
+              ],
+              "detail": "rebuild when these change, and only then",
+              "atWord": 18
+            }
+          ]
+        }
+      },
+      "durationFrames": 462,
+      "audio": "audio/uv-11-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "So the cache explains the second run. But the first run was fast too. Why?",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The rest of it",
+          "subtitle": "and the honest numbers"
+        }
+      },
+      "durationFrames": 177,
+      "audio": "audio/uv-11-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Three other things are doing work here. uv is compiled, which means no interpreter has to start up before anything can happen. uv downloads and installs in parallel rather than one package after another, so a slow package never blocks a fast one. And where the operating system allows it, uv hard-links files into place instead of copying them.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "green",
+          "headline": "Compiled, parallel, [linked]",
+          "premise": "Three things beyond the cache: no interpreter start, parallel work, hard links.",
+          "stageTitle": "the rest of the answer",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "time uv sync",
+              "out": [
+                "Installed 13 packages in 47ms",
+                "real    0m0.121s"
+              ],
+              "detail": "thirteen packages, forty-seven milliseconds",
+              "atWord": 23.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "compiled",
+              "text": "no startup",
+              "sub": "nothing to interpret before starting",
+              "atWord": 13.583
+            },
+            {
+              "label": "parallel",
+              "text": "all at once",
+              "sub": "not one package after another",
+              "atWord": 23.25
+            },
+            {
+              "label": "hard-linked, not copied",
+              "atWord": 30.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 588,
+      "audio": "audio/uv-11-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Hard linking deserves a sentence, because it sounds like cheating and isn't. A hard link is a second name for a file that already exists on disk. So installing a cached package into a new environment writes almost no bytes — the file is already there, and the environment just points at it.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-share",
+          "color": "purple",
+          "headline": "A second [name], not a copy",
+          "premise": "A hard link is another name for bytes already on disk. Nothing is written twice.",
+          "stageTitle": "why installs are nearly free",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "du -sh invoice-app/.venv report-tool/.venv",
+              "out": [
+                "4.0M    invoice-app/.venv",
+                "4.1M    report-tool/.venv"
+              ],
+              "detail": "and the disk did not lose eight megabytes",
+              "atWord": 23.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "invoice-app",
+              "text": "2.21.0",
+              "atWord": 11.417
+            },
+            {
+              "label": "report-tool",
+              "text": "2.21.0",
+              "atWord": 15.917
+            },
+            {
+              "label": "pygments",
+              "text": "one copy",
+              "sub": "on disk once, named from both places",
+              "atWord": 24.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 504,
+      "audio": "audio/uv-11-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Now let's be careful about numbers, because this is where tutorials get sloppy. Astral's homepage says ten to a hundred times faster than pip. That's their claim, and I'm attributing it rather than repeating it as fact. Their own benchmarks page, at the time of recording, carries no figures at all.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "orange",
+          "headline": "Where the [numbers] come from",
+          "premise": "One claim from a homepage, one pair measured here. They are not the same thing.",
+          "stageTitle": "attributing honestly",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "time uvx ruff --version",
+              "out": [
+                "ruff 0.16.4",
+                "real    0m0.294s"
+              ],
+              "detail": "this one I measured, on this machine",
+              "atWord": 27.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "\"10-100x faster\"",
+              "text": "a claim",
+              "atWord": 12.333
+            },
+            {
+              "label": "Astral's homepage",
+              "sub": "their claim, not my measurement",
+              "detail": "attributed",
+              "atWord": 20.25
+            },
+            {
+              "label": "this machine",
+              "sub": "5.792s to 0.294s, measured here",
+              "detail": "measured",
+              "atWord": 29
+            }
+          ]
+        }
+      },
+      "durationFrames": 559,
+      "audio": "audio/uv-11-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "The honest version is simpler, and more useful anyway. On a cold cache uv is roughly as fast as your internet connection allows, because there's genuinely nothing else to wait for. On a warm cache uv is roughly as fast as your disk allows. Which is why the first install of the day feels ordinary and everything afterwards feels instant.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "blue",
+          "headline": "Network-bound, then [disk-bound]",
+          "premise": "Cold, you wait for the network. Warm, you wait for the disk. Nothing else.",
+          "stageTitle": "the honest summary",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "time uv sync --refresh",
+              "out": [
+                "Installed 13 packages in 4.02s",
+                "real    0m4.331s"
+              ],
+              "detail": "cold: waiting for the network",
+              "atWord": 16.167
+            },
+            {
+              "label": "time uv sync",
+              "out": [
+                "Audited 13 packages in 0.2ms",
+                "real    0m0.089s"
+              ],
+              "detail": "warm: waiting for almost nothing",
+              "atWord": 28.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "cold",
+              "text": "4.331s",
+              "sub": "as fast as your connection allows",
+              "atWord": 18.583
+            },
+            {
+              "label": "warm",
+              "text": "0.089s",
+              "sub": "as fast as your disk allows",
+              "atWord": 29.083
+            },
+            {
+              "label": "and that is the whole trick",
+              "atWord": 32.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 603,
+      "audio": "audio/uv-11-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "All of which costs disk space, so let's look at managing it.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Managing the cache",
+          "subtitle": "four commands"
+        }
+      },
+      "durationFrames": 141,
+      "audio": "audio/uv-11-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Four commands, and each does something different. Dir tells you where the cache is. Clean empties the whole thing, or one named package. Prune removes only what nothing needs any more. And prune with the CI flag is tuned for build machines, where keeping built wheels is wasteful.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Four commands, [four] jobs",
+          "premise": "Empty it, empty part of it, tidy it, or tidy it the way a build machine wants.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "prune",
+          "steps": [
+            {
+              "label": "uv cache dir && du -sh \"$(uv cache dir)\"",
+              "out": [
+                "/home/you/.cache/uv",
+                "412M    /home/you/.cache/uv"
+              ],
+              "detail": "four hundred megabytes, well spent",
+              "atWord": 9.5
+            },
+            {
+              "label": "uv cache clean ruff",
+              "out": [
+                "Removed 24 files for ruff (10.1MiB)"
+              ],
+              "detail": "one package, when you suspect a stale copy",
+              "atWord": 18.167
+            },
+            {
+              "label": "uv cache prune",
+              "out": [
+                "Pruning cache at: /home/you/.cache/uv",
+                "Removed 1,204 unused entries (61.2MiB)"
+              ],
+              "detail": "only what nothing needs any more",
+              "atWord": 25.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 520,
+      "audio": "audio/uv-11-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "The CI variant is worth knowing if you run builds. On a build machine the cache usually lives in a saved archive, and built wheels are expensive to store but cheap to rebuild — so keeping them is the wrong trade. Prune with the CI flag keeps the downloads and discards the wheels, which means the saved archive gets dramatically smaller.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "purple",
+          "headline": "A [smaller] cache, for CI",
+          "premise": "On a build machine, storing built wheels costs more than rebuilding them.",
+          "stageTitle": "prune --ci",
+          "token": "PyPI",
+          "promptLabel": "ci@runner",
+          "cwd": "/build",
+          "highlight": "--ci",
+          "steps": [
+            {
+              "label": "du -sh \"$(uv cache dir)\" && uv cache prune --ci",
+              "out": [
+                "412M    /root/.cache/uv",
+                "Removed 2,910 entries (287MiB)"
+              ],
+              "detail": "the wheels go; the downloads stay",
+              "atWord": 25.25
+            },
+            {
+              "label": "du -sh \"$(uv cache dir)\"",
+              "out": [
+                "125M    /root/.cache/uv"
+              ],
+              "detail": "a much cheaper thing to save and restore",
+              "atWord": 30.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "before",
+              "text": "412M",
+              "sub": "downloads plus everything built",
+              "atWord": 15.25
+            },
+            {
+              "label": "after --ci",
+              "text": "125M",
+              "sub": "downloads only, wheels discarded",
+              "atWord": 27.5
+            },
+            {
+              "label": "cheaper to store, and quick to rebuild",
+              "atWord": 30.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 580,
+      "audio": "audio/uv-11-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "One thing the cache is not is a mirror. uv still asks the index whether anything has changed, using the ordinary caching headers every web server understands. So a cached copy is used because the server said the copy is still current, not because uv decided to stop checking.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "blue",
+          "headline": "It still [asks] the index",
+          "premise": "A cached copy is used because the server said so, not because uv stopped asking.",
+          "stageTitle": "not a mirror",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv sync -v 2>&1 | grep -i \"cached\\|304\" | head -2",
+              "out": [
+                "Found fresh response for: https://pypi.org/simple/rich/",
+                "Cached request to https://files.pythonhosted.org/..."
+              ],
+              "detail": "fresh means the server confirmed it",
+              "atWord": 20.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "a question",
+              "text": "sent",
+              "sub": "has anything changed since last time?",
+              "atWord": 12.75
+            },
+            {
+              "label": "the answer",
+              "text": "no",
+              "sub": "so the depot copy is used",
+              "atWord": 22.333
+            },
+            {
+              "label": "checked, then trusted",
+              "atWord": 25.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 490,
+      "audio": "audio/uv-11-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "That also explains a failure mode worth recognising. If a cached copy ever seems stale or wrong, you don't need to delete the whole cache and start again. Refresh forces one command past the depot, and cache clean with a package name removes exactly that package's entries.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "orange",
+          "headline": "Suspect it? Do the [small] thing",
+          "premise": "Two narrow tools before the blunt one. Emptying the whole cache is rarely needed.",
+          "stageTitle": "narrow, then blunt",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--refresh",
+          "steps": [
+            {
+              "label": "uv sync --refresh-package rich",
+              "out": [
+                "Downloading rich (310KiB)",
+                "Installed 1 package in 22ms"
+              ],
+              "detail": "one package, past the depot, once",
+              "atWord": 19.583
+            },
+            {
+              "label": "uv cache clean rich",
+              "out": [
+                "Removed 8 files for rich (310KiB)"
+              ],
+              "detail": "or evict just that package permanently",
+              "atWord": 26.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "suspect",
+              "atWord": 11.083
+            },
+            {
+              "label": "--refresh-package",
+              "sub": "one command, one package",
+              "detail": "narrow",
+              "atWord": 17.083
+            },
+            {
+              "label": "uv cache clean",
+              "sub": "four hundred megabytes, gone",
+              "detail": "blunt",
+              "atWord": 23.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 502,
+      "audio": "audio/uv-11-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And a practical note if your machine is short of space. The cache and your project folders should live on the same filesystem, because hard linking only works within one filesystem. Put them on different disks and uv falls back to copying, which costs both time and space.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "purple",
+          "headline": "Keep them on [one] disk",
+          "premise": "Hard links only work within a filesystem. Across two, uv has to copy instead.",
+          "stageTitle": "why the disk matters",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "UV_CACHE_DIR",
+          "steps": [
+            {
+              "label": "df --output=source \"$(uv cache dir)\" ~/work | tail -2",
+              "out": [
+                "/dev/nvme0n1p2",
+                "/dev/nvme0n1p2"
+              ],
+              "detail": "same filesystem, so links are possible",
+              "atWord": 22.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "same disk",
+              "text": "linked",
+              "detail": "fast",
+              "atWord": 10.417
+            },
+            {
+              "label": "different disks",
+              "text": "copied",
+              "detail": "slower",
+              "atWord": 18.417
+            },
+            {
+              "label": "wall",
+              "sub": "a link cannot cross a filesystem boundary",
+              "atWord": 24.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 483,
+      "audio": "audio/uv-11-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. What makes the second uvx run so much faster than the first? Pause the video here and answer it for yourself before I do. Ready? The cache. The parcel was already in the local depot, so nothing had to be fetched or built again.",
+      "data": {
+        "quiz": {
+          "question": "Why is the second uvx run so much faster?",
+          "options": [
+            {
+              "text": "uv warms up as it runs"
+            },
+            {
+              "text": "The cache already had it"
+            },
+            {
+              "text": "PyPI remembers you"
+            },
+            {
+              "text": "The venv stays open"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Nothing was fetched and nothing was built. The depot already had it.",
+          "atWord": 2.417,
+          "revealAtWord": 20.083
+        }
+      },
+      "durationFrames": 465,
+      "audio": "audio/uv-11-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. uv keeps what it downloaded and what it built, keyed on whatever identifies each thing. Being compiled, working in parallel and hard-linking explain the rest. And the only figures worth quoting are the ones you measured yourself.",
+      "data": {
+        "heading": "Chapter eleven, in three lines",
+        "points": [
+          {
+            "text": "It keeps downloads AND built wheels",
+            "atWord": 7.417
+          },
+          {
+            "text": "Compiled, parallel, and hard-linked",
+            "atWord": 15.75
+          },
+          {
+            "text": "Quote numbers you measured yourself",
+            "atWord": 24.083
+          }
+        ]
+      },
+      "durationFrames": 466,
+      "audio": "audio/uv-11-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter is for everybody arriving from pip: every command you already know, translated, plus the places where uv is deliberately stricter.",
+      "data": {
+        "message": "Next: coming from pip",
+        "sub": "the translation, and the sharp edges"
+      },
+      "durationFrames": 287,
+      "audio": "audio/uv-11-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

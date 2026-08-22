@@ -1,0 +1,1021 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #12 — Coming from pip",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "Every pip command translated, pip-tools replaced by compile and sync, and the handful of places uv is deliberately stricter.",
+    "openLoop": "If the commands are the same, what actually changes?",
+    "analogy": "One parcel, two gates: pip waves it through, uv stamps it with the reason.",
+    "topicAxes": [
+      "skill-acquisition",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #12 — Every pip Command, Translated (2026)",
+      "altTitles": [
+        "Migrating from pip and pip-tools to uv"
+      ],
+      "description": "Chapter twelve of the uv course. The uv pip interface, uv venv, compile and sync replacing pip-tools, the -o trap that catches everyone, migrating requirements.txt into pyproject.toml, and where uv is deliberately stricter than pip.",
+      "tags": [
+        "uv",
+        "python",
+        "pip",
+        "pip-tools",
+        "uv pip",
+        "migrate from pip",
+        "requirements.txt",
+        "astral uv",
+        "python packaging",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "JUST ADD uv",
+    "badge": "uv · 12",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You already know pip. Nearly every command you know still works.",
+      "data": {
+        "headline": "YOU ALREADY KNOW THIS",
+        "subtext": "just faster, and stricter",
+        "heroAsset": "lucide:arrow-left-right",
+        "headlineAtWord": 1,
+        "heroAtWord": 5.667
+      },
+      "durationFrames": 146,
+      "audio": "audio/uv-12-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Put the word uv in front of any pip command you've ever typed, and the command works. Same flags, same arguments, same shape of output. So why bother at all? Because the install that took pip eleven seconds takes under a second and a half here — and because uv catches things pip waves straight through.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Put [uv] in front of it",
+          "premise": "The pip interface is deliberately familiar. Same flags, same shapes, faster.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "uv pip",
+          "steps": [
+            {
+              "label": "pip install rich",
+              "out": [
+                "Successfully installed rich-15.0.0",
+                "real    0m11.4s"
+              ],
+              "detail": "the command you already know",
+              "atWord": 8.083
+            },
+            {
+              "label": "uv pip install rich",
+              "out": [
+                "Resolved 4 packages in 368ms",
+                "Installed 4 packages in 918ms",
+                "real    0m1.42s"
+              ],
+              "detail": "same command, one word in front",
+              "atWord": 18.583
+            },
+            {
+              "label": "uv pip list | wc -l",
+              "out": [
+                "6"
+              ],
+              "detail": "and the same four packages, either way",
+              "atWord": 29.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 565,
+      "audio": "audio/uv-12-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter is a translation guide for everything you already know, plus the handful of places where uv is deliberately stricter than pip and will tell you so.",
+      "data": {
+        "title": "Coming from pip",
+        "subtitle": "uv, chapter twelve · the translation, and the sharp edges"
+      },
+      "durationFrames": 313,
+      "audio": "audio/uv-12-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start with the door that looks exactly like the one you came through.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The pip interface",
+          "subtitle": "the same commands, faster"
+        }
+      },
+      "durationFrames": 128,
+      "audio": "audio/uv-12-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Install, list, freeze, show, uninstall — every one of them exists, and every one behaves the way you'd expect. There's a tree command too, which pip has no equivalent for and which you'll reach for far more often than you'd guess.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "The commands you [already] type",
+          "premise": "Five familiar commands, plus one pip never had.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "uv pip",
+          "steps": [
+            {
+              "label": "uv pip list",
+              "out": [
+                "Package        Version",
+                "-------------- -------",
+                "markdown-it-py 4.2.0",
+                "pygments       2.21.0",
+                "rich           15.0.0"
+              ],
+              "detail": "exactly the shape pip prints",
+              "atWord": 7.417
+            },
+            {
+              "label": "uv pip tree",
+              "out": [
+                "rich v15.0.0",
+                "├── markdown-it-py v4.2.0",
+                "│   └── mdurl v0.1.2",
+                "└── pygments v2.21.0"
+              ],
+              "detail": "and this one pip simply does not have",
+              "atWord": 19.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 425,
+      "audio": "audio/uv-12-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Then there's uv venv, which replaces python dash m venv and does two things that command never did. First it names the interpreter it borrowed, so you know what you got. Second it prints the activation line for the shell you're actually in, which saves a search every single time you forget the Windows spelling.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "blue",
+          "headline": "uv venv, [and] the extras",
+          "premise": "The same folder as python -m venv, plus two things that command never says.",
+          "stageTitle": "a small kindness",
+          "promptLabel": "you@laptop",
+          "cwd": "~/scratch",
+          "steps": [
+            {
+              "label": "uv venv",
+              "out": [
+                "Using CPython 3.10.4 interpreter at: /usr/bin/python3",
+                "Creating virtual environment at: .venv",
+                "Activate with: source .venv/bin/activate"
+              ],
+              "detail": "it names the interpreter, and the command",
+              "atWord": 12
+            },
+            {
+              "label": "python -m venv .venv2",
+              "out": [],
+              "detail": "the old way. silent, and no gitignore.",
+              "atWord": 26.167
+            }
+          ],
+          "stage": [
+            {
+              "label": ".venv/",
+              "value": 0,
+              "sub": "the same folder either way",
+              "atWord": 9.75
+            },
+            {
+              "label": "pyvenv.cfg",
+              "value": 1,
+              "detail": "identical",
+              "sub": "the six lines from chapter eight",
+              "atWord": 20.167
+            },
+            {
+              "label": ".gitignore",
+              "value": 1,
+              "detail": "extra",
+              "sub": "and uv excluded it, unasked",
+              "atWord": 26.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 515,
+      "audio": "audio/uv-12-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Now the pair that replaces a whole separate tool.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "compile and sync",
+          "subtitle": "pip-tools, built in"
+        }
+      },
+      "durationFrames": 110,
+      "audio": "audio/uv-12-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "If you've used pip-tools, this pair will look immediately familiar. Compile turns a loose list of requirements into an exact pinned one. Sync then makes your environment match that pinned list precisely. Both live inside uv already, which means there's nothing extra to install and nothing else to keep updated.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "color": "blue",
+          "headline": "pip-tools, [built in]",
+          "premise": "compile turns a loose list into a pinned one. sync makes the folder match it.",
+          "stageTitle": "loose in, exact out",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "compile",
+          "steps": [
+            {
+              "label": "cat requirements.in",
+              "out": [
+                "rich"
+              ],
+              "detail": "one loose line, no version at all",
+              "atWord": 12.25
+            },
+            {
+              "label": "uv pip compile requirements.in -o requirements.txt",
+              "out": [
+                "Resolved 4 packages in 64ms"
+              ],
+              "detail": "and four exact ones come out",
+              "atWord": 25.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "via -r requirements.in",
+              "atWord": 16.583
+            },
+            {
+              "label": "markdown-it-py",
+              "text": "4.2.0",
+              "detail": "via rich",
+              "atWord": 23.583
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "via rich",
+              "sub": "and every line records who asked",
+              "atWord": 28
+            }
+          ]
+        }
+      },
+      "durationFrames": 546,
+      "audio": "audio/uv-12-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "And here's a trap that catches almost everybody the first time. Compile prints its output. Compile does not write a file unless you pass dash o. So a beginner runs the documented command, sees the result scroll past, goes looking for requirements dot txt, and finds nothing there.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "red",
+          "headline": "It [prints]. It does not write.",
+          "premise": "Without -o the compiled output goes to your screen, and no file is created.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "-o",
+          "steps": [
+            {
+              "label": "uv pip compile requirements.in",
+              "out": [
+                "Resolved 4 packages in 64ms",
+                "# This file was autogenerated by uv via the following command:",
+                "#    uv pip compile requirements.in",
+                "markdown-it-py==4.2.0",
+                "    # via rich"
+              ],
+              "detail": "printed. nothing was saved.",
+              "atWord": 11.833
+            },
+            {
+              "label": "ls requirements.txt",
+              "out": [
+                "ls: cannot access requirements.txt: No such file"
+              ],
+              "detail": "exactly as promised, and as surprising",
+              "atWord": 26.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 547,
+      "audio": "audio/uv-12-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Those little via comments are worth reading, by the way. Every pinned line records who asked for it. Via rich means rich needed it. Via dash r requirements dot in means you did. Which turns a wall of pins into something you can actually audit.",
+      "data": {
+        "uvStage": {
+          "kind": "dep-unfold",
+          "color": "green",
+          "headline": "Each line records [who asked]",
+          "premise": "via rich means rich needed it. via -r means you did. That distinction is auditable.",
+          "stageTitle": "reading a compiled file",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "cat requirements.txt",
+              "out": [
+                "markdown-it-py==4.2.0",
+                "    # via rich",
+                "mdurl==0.1.2",
+                "    # via markdown-it-py",
+                "rich==15.0.0",
+                "    # via -r requirements.in"
+              ],
+              "detail": "three pins, three different reasons",
+              "atWord": 9.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "via -r  (you)",
+              "atWord": 13
+            },
+            {
+              "label": "markdown-it-py",
+              "text": "4.2.0",
+              "detail": "via rich",
+              "atWord": 16.833
+            },
+            {
+              "label": "mdurl",
+              "text": "0.1.2",
+              "detail": "via markdown-it-py",
+              "atWord": 20.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 434,
+      "audio": "audio/uv-12-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "One more distinction, and it mirrors chapter nine. uv pip install adds to whatever is already there. uv pip sync makes the environment match the file exactly, which means anything not in that file gets removed. Install is additive. Sync is exact. Reach for the right one.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-evict",
+          "color": "orange",
+          "headline": "Install adds. Sync is [exact].",
+          "premise": "One leaves what it finds. The other makes the folder match the file, and only it.",
+          "stageTitle": "additive, or exact",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "sync",
+          "steps": [
+            {
+              "label": "uv pip install typer && uv pip sync requirements.txt",
+              "out": [
+                " + typer==0.27.1",
+                "Resolved 4 packages in 4ms",
+                "Uninstalled 3 packages in 12ms"
+              ],
+              "detail": "added, then removed by the very next command",
+              "atWord": 21.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "typer",
+              "text": "0.27.1",
+              "value": 0,
+              "sub": "not in requirements.txt",
+              "atWord": 23
+            },
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "sub": "and the folder now matches exactly",
+              "atWord": 27.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 539,
+      "audio": "audio/uv-12-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "Now the migration itself, which is genuinely two commands.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Migrating a project",
+          "subtitle": "requirements to pyproject"
+        }
+      },
+      "durationFrames": 123,
+      "audio": "audio/uv-12-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Run uv init on the folder you already have, then uv add dash r pointing at your requirements file. uv reads every line and writes each one into pyproject properly. Point dash c at your pinned file as well, and uv keeps the exact versions you were already running — because a migration that changes your versions isn't a migration, it's an upgrade in disguise.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "green",
+          "headline": "Two commands, [one] migration",
+          "premise": "Adopt the folder, then read your requirements into pyproject with the pins kept.",
+          "stageTitle": "requirements to pyproject",
+          "token": "and -c keeps your pins",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/old-project",
+          "steps": [
+            {
+              "label": "uv init --bare",
+              "out": [
+                "Initialized project `old-project`"
+              ],
+              "detail": "adopt the folder you already have",
+              "atWord": 14.333
+            },
+            {
+              "label": "uv add -r requirements.in -c requirements.txt",
+              "out": [
+                "Resolved 4 packages in 88ms",
+                " + rich==15.0.0"
+              ],
+              "detail": "and the pins you had are the pins you keep",
+              "atWord": 28.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "requirements.in",
+              "text": "loose",
+              "sub": "becomes [project.dependencies]",
+              "atWord": 12.833
+            },
+            {
+              "label": "requirements.txt",
+              "text": "pinned",
+              "sub": "becomes uv.lock",
+              "atWord": 19.667
+            },
+            {
+              "label": "requirements-dev.txt",
+              "text": "dev",
+              "sub": "becomes a dependency group",
+              "atWord": 26.5
+            },
+            {
+              "label": "uv.lock",
+              "sub": "and the whole thing is one file now",
+              "atWord": 31.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 611,
+      "audio": "audio/uv-12-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "The mapping is easy to hold. Your loose requirements file becomes project dependencies. Your pinned file becomes the lockfile. And any dev requirements file becomes a dependency group, which is what chapter seven called the development group.",
+      "data": {
+        "uvStage": {
+          "kind": "project-tree",
+          "color": "blue",
+          "headline": "What becomes [what]",
+          "premise": "Three familiar files, three new homes, and nothing lost in the move.",
+          "stageTitle": "the mapping",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/old-project",
+          "steps": [
+            {
+              "label": "uv add -r requirements-dev.txt --dev",
+              "out": [
+                "Resolved 13 packages in 92ms",
+                " + pytest==9.1.1"
+              ],
+              "detail": "straight into the dev group",
+              "atWord": 16.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "pyproject.toml",
+              "value": 1,
+              "detail": "from .in",
+              "sub": "what your project can live with",
+              "atWord": 8.667
+            },
+            {
+              "label": "uv.lock",
+              "value": 1,
+              "detail": "from .txt",
+              "sub": "what it actually gets",
+              "atWord": 13.917
+            },
+            {
+              "label": "[dependency-groups]",
+              "value": 1,
+              "detail": "from -dev",
+              "sub": "the tools you develop with",
+              "atWord": 19.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 408,
+      "audio": "audio/uv-12-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CHAPTER",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "And finally, the places where uv will not do what pip did.",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "The sharp edges",
+          "subtitle": "where uv is stricter"
+        }
+      },
+      "durationFrames": 125,
+      "audio": "audio/uv-12-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "The documentation puts it plainly: uv is stricter than pip, and will often reject packages that pip would happily install. None of that is uv being difficult. Broken metadata pip waved through becomes a problem you find weeks later, and later is always more expensive than now.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "red",
+          "headline": "uv stops what [pip waves] through",
+          "premise": "The same package, offered to both. Only one of them reads the small print.",
+          "stageTitle": "two gates, one parcel",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv pip install broken-metadata",
+              "out": [
+                "x Failed to parse metadata for broken-metadata==1.0.0",
+                "  Caused by: expected a version specifier"
+              ],
+              "detail": "refused, and it says exactly why",
+              "atWord": 19.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "broken-metadata",
+              "text": "1.0.0",
+              "atWord": 11
+            },
+            {
+              "label": "pip",
+              "sub": "installed",
+              "detail": "you find out later",
+              "atWord": 18.583
+            },
+            {
+              "label": "uv",
+              "sub": "rejected",
+              "detail": "stricter, and it tells you now",
+              "atWord": 24.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 497,
+      "audio": "audio/uv-12-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Three differences will actually bite you. uv has no dash dash user install. uv ignores pip dot conf and the pip index environment variable, using its own settings instead. And uv wants a virtual environment rather than installing into the system Python.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "orange",
+          "headline": "Three that will [bite]",
+          "premise": "Not a list of all eighteen. These three are the ones a beginner actually hits.",
+          "stageTitle": "the ones that matter",
+          "token": "uv has its own settings",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv pip install --user rich",
+              "out": [
+                "error: unexpected argument '--user' found"
+              ],
+              "detail": "no --user. use a venv, or a tool.",
+              "atWord": 15.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "--user",
+              "text": "gone",
+              "sub": "a venv or uv tool install instead",
+              "value": 0,
+              "atWord": 13.333
+            },
+            {
+              "label": "pip.conf",
+              "text": "ignored",
+              "sub": "uv reads its own config files",
+              "value": 0,
+              "atWord": 19
+            },
+            {
+              "label": "PIP_INDEX_URL",
+              "text": "ignored",
+              "sub": "set UV_INDEX_URL instead",
+              "value": 0,
+              "atWord": 21.833
+            },
+            {
+              "label": "a venv",
+              "text": "required",
+              "sub": "and uv will make one for you",
+              "atWord": 25.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 500,
+      "audio": "audio/uv-12-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "And here's one that surprises even experienced people. Upper bounds on requires-python are ignored entirely. If a package claims to need Python below three point twelve, uv treats the claim as advice rather than law — because such upper bounds are almost always wrong, and they age very badly indeed.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "purple",
+          "headline": "Upper bounds are [ignored]",
+          "premise": "requires-python upper bounds age badly, so uv treats them as advice.",
+          "stageTitle": "the surprising one",
+          "token": "lower bounds still apply",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv pip install \"old-package\"",
+              "out": [
+                "Installed 1 package in 12ms",
+                " + old-package==1.0.0"
+              ],
+              "detail": "installed, despite claiming <3.12",
+              "atWord": 25.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "python",
+              "sub": "3.9, 3.10, 3.11, 3.12, 3.13",
+              "atWord": 8
+            },
+            {
+              "label": "the package says",
+              "text": "0.10..0.62",
+              "detail": ">=3.9,<3.12",
+              "atWord": 17.75
+            },
+            {
+              "label": "uv reads",
+              "text": "0.10..1.00",
+              "detail": ">=3.9",
+              "atWord": 26.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 553,
+      "audio": "audio/uv-12-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "One habit worth changing while you're here. In the pip world you'd activate an environment and then type pip install. With uv you can skip the activation entirely, because uv finds the environment for you — which is chapter eight's lesson arriving in a place you didn't expect it.",
+      "data": {
+        "uvStage": {
+          "kind": "env-ceremony",
+          "color": "green",
+          "headline": "Stop [activating] first",
+          "premise": "The pip interface finds your environment the same way uv run does.",
+          "stageTitle": "the old habit, dropped",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv pip install rich",
+              "out": [
+                "Using CPython 3.12.14 environment at: .venv",
+                "Installed 4 packages in 918ms"
+              ],
+              "detail": "it found the .venv without being told",
+              "atWord": 19
+            }
+          ],
+          "stage": [
+            {
+              "label": "make it",
+              "icon": "lucide:package-plus",
+              "atWord": 1
+            },
+            {
+              "label": "switch it on",
+              "icon": "lucide:toggle-right",
+              "atWord": 1
+            },
+            {
+              "label": "remember",
+              "icon": "lucide:brain",
+              "atWord": 1
+            },
+            {
+              "label": "switch it off",
+              "icon": "lucide:toggle-left",
+              "atWord": 1
+            },
+            {
+              "label": "uv pip install rich",
+              "sub": "no activation, and the right shelf",
+              "atWord": 21.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 452,
+      "audio": "audio/uv-12-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "A word on when to use which interface, because having both can be confusing. The pip commands are a bridge: perfect for an existing project, a quick experiment, or a script somebody else wrote. For anything you'll maintain, use the project commands instead, because those give you the lockfile.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "blue",
+          "headline": "A bridge, not a [destination]",
+          "premise": "The pip interface is for what already exists. The project commands are for what you keep.",
+          "stageTitle": "which one, when",
+          "token": "only one writes a lock",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv pip install rich && ls uv.lock",
+              "out": [
+                "ls: cannot access uv.lock: No such file"
+              ],
+              "detail": "the pip interface writes no lockfile",
+              "atWord": 24.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "uv pip install",
+              "text": "a bridge",
+              "sub": "an existing project, or an experiment",
+              "atWord": 11.667
+            },
+            {
+              "label": "uv add",
+              "text": "a project",
+              "sub": "anything you intend to maintain",
+              "atWord": 17.583
+            },
+            {
+              "label": "uv.lock",
+              "text": "only one",
+              "sub": "and only the project commands write it",
+              "atWord": 23.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 513,
+      "audio": "audio/uv-12-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Finally, two things you'll want on day one of any migration. uv pip check reports anything inconsistent, exactly like the pip command from chapter zero. And uv pip freeze still prints what's installed, so you can compare against the file you started with.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Check, then [compare]",
+          "premise": "Two familiar commands, useful for proving a migration changed nothing.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/old-project",
+          "highlight": "check",
+          "steps": [
+            {
+              "label": "uv pip check",
+              "out": [
+                "All installed packages are compatible"
+              ],
+              "detail": "the readout nobody ran, in chapter zero",
+              "atWord": 11.583
+            },
+            {
+              "label": "uv pip freeze | diff requirements.txt -",
+              "out": [],
+              "detail": "no output means nothing changed at all",
+              "atWord": 22.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 447,
+      "audio": "audio/uv-12-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. You run uv pip compile on a requirements file and then look for the output file. Is it there? Pause the video here and answer for yourself before I say it. Ready? No — compile prints to your screen unless you pass dash o.",
+      "data": {
+        "quiz": {
+          "question": "uv pip compile ran. Is requirements.txt on disk?",
+          "options": [
+            {
+              "text": "Yes, always"
+            },
+            {
+              "text": "No — it printed instead"
+            },
+            {
+              "text": "Only with --lock"
+            },
+            {
+              "text": "Only inside a venv"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Without -o the compiled output goes to stdout and no file is written.",
+          "atWord": 2.333,
+          "revealAtWord": 24.75
+        }
+      },
+      "durationFrames": 448,
+      "audio": "audio/uv-12-long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. Every pip command you know works with uv in front of it. Compile and sync replace pip-tools outright, and compile prints unless you ask it to write. And uv is deliberately stricter, which costs you a refusal now instead of a mystery later.",
+      "data": {
+        "heading": "Chapter twelve, in three lines",
+        "points": [
+          {
+            "text": "Put uv in front. Everything still works.",
+            "atWord": 7.083
+          },
+          {
+            "text": "compile prints — pass -o to write a file",
+            "atWord": 17.75
+          },
+          {
+            "text": "Stricter now beats a mystery later",
+            "atWord": 26.583
+          }
+        ]
+      },
+      "durationFrames": 510,
+      "audio": "audio/uv-12-long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Last chapter next: turning what you've built into something anybody in the world can install with one command.",
+      "data": {
+        "message": "Next: ship it",
+        "sub": "build, version, and publish safely"
+      },
+      "durationFrames": 204,
+      "audio": "audio/uv-12-long_s24.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
