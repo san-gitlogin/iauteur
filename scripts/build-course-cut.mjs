@@ -35,7 +35,50 @@ const TAGS_MCP = [
   'mcp deprecated', 'mcp 2026', 'ai engineering', 'the nbx studio',
 ];
 
+const TAGS_UV = [
+  'uv', 'uv python', 'astral uv', 'python', 'pip', 'pip alternative', 'python packaging',
+  'virtualenv', 'venv', 'virtual environment', 'pyproject.toml', 'uv.lock', 'lockfile',
+  'pyenv', 'pipx', 'pip-tools', 'poetry', 'dependency management', 'python dependencies',
+  'python for beginners', 'python tutorial', 'pep 723', 'uvx', 'uv run', 'uv add',
+  'uv sync', 'python environment', 'python project setup', 'the nbx studio',
+];
+
 const COURSES = {
+  uv: {
+    out: 'topics/uv-course',
+    order: [
+      'uv-00-why-python-breaks', 'uv-01-installing-uv', 'uv-02-run-any-tool',
+      'uv-03-tools-you-keep', 'uv-04-self-contained-script', 'uv-05-uv-owns-your-pythons',
+      'uv-06-your-first-project', 'uv-07-adding-dependencies', 'uv-08-what-a-venv-is',
+      'uv-09-the-lockfile', 'uv-10-how-uv-chooses', 'uv-11-why-it-is-fast',
+      'uv-12-coming-from-pip', 'uv-13-ship-it',
+    ],
+    // Chapter 00 is chapter zero on purpose — it is the "before uv" chapter — so the
+    // label is the index itself rather than the index plus one.
+    numbered: () => true,
+    label: (i, name) => `Chapter ${String(i).padStart(2, '0')} — ${name}`,
+    title: 'Learn uv Properly — The Complete Python Packaging Course for Absolute Beginners (2026)',
+    alts: [
+      'uv From Scratch: Packages, Environments and Lockfiles Explained Properly',
+      'I Used pip For Five Years And Never Understood Virtual Environments. Here Is The Whole Thing.',
+      'The Complete uv Course — From Why Python Breaks To Publishing Your First Package',
+    ],
+    lede: 'Almost every Python tutorial tells you to make a virtual environment. Almost none of them tell you what one is.',
+    sub: 'Every command captured by running uv 0.12.5, not copied from documentation.',
+    body: (ch) => `In this course, ${ch} builds up Python packaging from the thing that actually goes wrong — one shelf, shared by every project on your machine — all the way to publishing a package anybody can install. What a package really is, what a dependency really is, why a virtual environment is only a folder, what the lockfile records that a version number cannot, and how uv removes the ritual nobody keeps up. Written for somebody who has never made a venv on purpose.`,
+    sources: [
+      'uv documentation: https://docs.astral.sh/uv/',
+      'PEP 723, inline script metadata: https://peps.python.org/pep-0723/',
+      'python-build-standalone: https://github.com/astral-sh/python-build-standalone',
+    ],
+    next: (ch) => `Every chapter is also a standalone video on ${ch} — start at zero if Python has ever broken on you for no reason.`,
+    pinned: 'One honest note on the numbers. The 5.792s to 0.294s pair you see in chapters 2 and 11 was measured on the machine this course was made on, and it is stated as such. The "10-100x faster" figure is a claim from the Astral homepage, attributed on screen — their benchmarks page carries no figures at all. Measure your own; the shape will hold.',
+    queries: ['what is uv python', 'uv tutorial', 'uv vs pip', 'python virtual environment explained',
+      'pyproject.toml explained', 'uv lock file', 'how to use uv python', 'replace pip with uv',
+      'python packaging for beginners', 'uv run uvx explained'],
+    hashtags: '#uv #python #packaging #venv #pip #astral #pythontutorial #thenbxstudio',
+    tags: TAGS_UV,
+  },
   dsa: {
     out: 'topics/dsa-dojo-course',
     order: [
