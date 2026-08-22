@@ -1,0 +1,888 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #1 — Installing uv, and the chicken-and-egg problem",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "uv installed and working, and the reason a tool that installs Python cannot itself require Python.",
+    "openLoop": "How can one line install a Python tool on a machine with no Python on it?",
+    "analogy": "Inside versus beside: pip lives in the interpreter, uv stands on the floor next to it.",
+    "topicAxes": [
+      "sovereignty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #1 — Install uv the Right Way (and why NOT pip) (2026)",
+      "altTitles": [
+        "How to install uv — and why pip install uv is the wrong route"
+      ],
+      "description": "Chapter one of the uv course. The one line that installs uv on a machine with no Python, what curl pipe sh actually does, why PATH means you must restart your terminal, and why pip install uv is the route to avoid.",
+      "tags": [
+        "uv",
+        "python",
+        "install uv",
+        "uv install",
+        "astral uv",
+        "pip",
+        "PATH",
+        "python tutorial",
+        "python for beginners",
+        "curl",
+        "powershell"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "NO PYTHON NEEDED",
+    "badge": "uv · 01",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A tool whose job is installing Python. Written in Python. Do you see the problem?",
+      "data": {
+        "headline": "THE CHICKEN AND THE EGG",
+        "subtext": "installing the installer",
+        "heroAsset": "lucide:egg",
+        "headlineAtWord": 1,
+        "heroAtWord": 6.75
+      },
+      "durationFrames": 172,
+      "audio": "audio/uv-01-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "This is the whole installation. One line, pasted into a terminal, on a machine that has no Python on it whatsoever. Fifteen seconds later uv is there and working. By the end of this chapter you'll understand every part of what that line just did.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "The whole [install]",
+          "premise": "A machine with no Python at all. One line, and uv is on it.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "astral.sh",
+          "steps": [
+            {
+              "label": "curl -LsSf https://astral.sh/uv/install.sh | sh",
+              "out": [
+                "downloading uv 0.12.5 x86_64-unknown-linux-gnu",
+                "installing to /home/you/.local/bin",
+                "  uv",
+                "  uvx",
+                "everything's installed!"
+              ],
+              "detail": "no Python involved at any point",
+              "atWord": 6.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 489,
+      "audio": "audio/uv-01-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter gets uv onto your machine, and more importantly it explains why installing uv works so differently from installing anything else in the Python world.",
+      "data": {
+        "title": "Installing uv",
+        "subtitle": "uv, chapter one · and the chicken-and-egg problem"
+      },
+      "durationFrames": 327,
+      "audio": "audio/uv-01-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start with the problem, because the problem is what makes the solution make sense.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The chicken and the egg",
+          "subtitle": "why pip cannot save you"
+        }
+      },
+      "durationFrames": 151,
+      "audio": "audio/uv-01-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Here's something about pip almost nobody says out loud. Pip is a Python package. Pip lives inside a Python installation, in a folder called site-packages, right alongside every other package you've ever installed. Ask pip where pip is, and pip will tell you.",
+      "data": {
+        "uvStage": {
+          "kind": "bootstrap-paradox",
+          "color": "blue",
+          "headline": "pip lives [inside] Python",
+          "premise": "pip is a Python package, so pip needs a working Python before pip can run.",
+          "stageTitle": "where pip actually is",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "python -m pip --version",
+              "out": [
+                "pip 25.2 from /usr/lib/python3.12/site-packages/pip"
+              ],
+              "detail": "read the path — pip is in there",
+              "atWord": 20.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "CPython 3.12",
+              "sub": "the interpreter",
+              "atWord": 7.25
+            },
+            {
+              "label": "pip",
+              "sub": "a package, in site-packages",
+              "atWord": 14.583
+            },
+            {
+              "label": "uv",
+              "sub": "nowhere near this picture yet",
+              "atWord": 24.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 491,
+      "audio": "audio/uv-01-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Which means pip can never fix a broken Python, because pip needs that Python in order to start. Break the interpreter and pip goes down with the interpreter. Now, none of that is a bug, and none of it is pip's fault. Living inside Python is simply what pip is.",
+      "data": {
+        "uvStage": {
+          "kind": "bootstrap-paradox",
+          "color": "red",
+          "headline": "Break Python, [lose pip]",
+          "premise": "Whatever lives inside the interpreter cannot outlive the interpreter.",
+          "stageTitle": "down together",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "python -m pip install anything",
+              "out": [
+                "/usr/bin/python: No module named pip"
+              ],
+              "detail": "the package-fixer is itself a package",
+              "atWord": 12.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "CPython 3.12",
+              "sub": "broken, missing, or the wrong version",
+              "value": 0,
+              "atWord": 9.25
+            },
+            {
+              "label": "pip",
+              "sub": "goes down with it",
+              "atWord": 13.583
+            },
+            {
+              "label": "uv",
+              "sub": "one binary, standing on the floor",
+              "detail": "nothing to break underneath it",
+              "atWord": 21.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 449,
+      "audio": "audio/uv-01-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "So uv is built the other way round. uv is one compiled program, written in Rust, sitting beside Python rather than inside Python. uv needs no interpreter to start, which is exactly why a single line of curl works on a bare machine, and why in a few chapters uv can download an entire Python for you on demand.",
+      "data": {
+        "uvStage": {
+          "kind": "bootstrap-paradox",
+          "color": "green",
+          "headline": "uv sits [beside] Python",
+          "premise": "One compiled binary on the floor. Nothing underneath it to break.",
+          "stageTitle": "beside, not inside",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "file $(which uv)",
+              "out": [
+                "/home/you/.local/bin/uv: ELF 64-bit LSB executable,",
+                "  statically linked, stripped"
+              ],
+              "detail": "statically linked: it carries its own world",
+              "atWord": 18.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "CPython 3.12",
+              "sub": "optional. genuinely optional.",
+              "atWord": 8.75
+            },
+            {
+              "label": "pip",
+              "sub": "still inside, still dependent",
+              "atWord": 13.5
+            },
+            {
+              "label": "uv",
+              "sub": "a Rust binary, on the floor",
+              "detail": "which is why curl alone is enough",
+              "atWord": 23.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 584,
+      "audio": "audio/uv-01-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "There are several roads onto your machine and they all end at the same binary. Mac and Linux use curl. Windows uses PowerShell. Homebrew works, and so does winget. And then there's the fourth road, which is the one to avoid.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "blue",
+          "headline": "Four roads, [one] binary",
+          "premise": "Every route below installs the identical program. Only the delivery differs.",
+          "stageTitle": "pick your road",
+          "token": "one binary, four roads",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv --version",
+              "out": [
+                "uv 0.12.5 (210d1f678 2026-08-14)"
+              ],
+              "detail": "the same answer from every road",
+              "atWord": 20.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "curl | sh",
+              "text": "macOS/Linux",
+              "sub": "the standalone binary",
+              "atWord": 7.75
+            },
+            {
+              "label": "irm | iex",
+              "text": "Windows",
+              "sub": "PowerShell, same binary",
+              "atWord": 11.167
+            },
+            {
+              "label": "brew install uv",
+              "text": "macOS",
+              "sub": "homebrew keeps it current",
+              "atWord": 14.583
+            },
+            {
+              "label": "pip install uv",
+              "text": "the trap",
+              "sub": "the road to avoid",
+              "value": 0,
+              "atWord": 20.583
+            },
+            {
+              "label": "uv 0.12.5",
+              "sub": "whichever road you took",
+              "atWord": 23.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 443,
+      "audio": "audio/uv-01-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Why is that fourth road a trap? Because pip puts uv inside a Python environment, and managing Python environments from the outside is uv's whole job. Delete the environment and uv disappears along with the environment. Worse, uv can no longer update itself, because a package cannot overwrite its own file while Python is holding that file open.",
+      "data": {
+        "uvStage": {
+          "kind": "bootstrap-paradox",
+          "color": "red",
+          "headline": "Why pip install uv is a [trap]",
+          "premise": "Installing the manager inside the thing it manages puts it back in the trap.",
+          "stageTitle": "the trap, drawn",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "uv self update",
+              "out": [
+                "error: Self-update is only available for uv",
+                "binaries installed via the standalone installer"
+              ],
+              "detail": "the one route where updating breaks",
+              "atWord": 30
+            }
+          ],
+          "stage": [
+            {
+              "label": "CPython 3.12",
+              "sub": "delete this and both go",
+              "value": 0,
+              "atWord": 13.75
+            },
+            {
+              "label": "uv (via pip)",
+              "sub": "now inside what it manages",
+              "atWord": 19.75
+            },
+            {
+              "label": "uv (standalone)",
+              "sub": "updates itself, forever",
+              "detail": "the route the docs recommend",
+              "atWord": 31.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 618,
+      "audio": "audio/uv-01-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Now let's read that install line properly, because you should never paste something into a terminal you cannot read.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Read it before you run it",
+          "subtitle": "what curl pipe sh does"
+        }
+      },
+      "durationFrames": 185,
+      "audio": "audio/uv-01-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Curl fetches a file over the internet. Dash L follows redirects. Dash s stays quiet. Dash S still shows real errors. Dash f fails properly on a bad response instead of saving the error page. Then the pipe hands that file to sh, which runs it. That's it — download a script, run the script.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "What [curl pipe sh] means",
+          "premise": "Four flags and a pipe. Nothing hidden, nothing clever.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "-LsSf",
+          "steps": [
+            {
+              "label": "curl -LsSf https://astral.sh/uv/install.sh -o install.sh",
+              "out": [],
+              "detail": "-o writes a file instead of piping",
+              "atWord": 19.5
+            },
+            {
+              "label": "head -3 install.sh",
+              "out": [
+                "#!/bin/sh",
+                "# shellcheck shell=dash",
+                "set -u"
+              ],
+              "detail": "an ordinary shell script. read it.",
+              "atWord": 26.583
+            },
+            {
+              "label": "sh install.sh",
+              "out": [
+                "downloading uv 0.12.5",
+                "everything's installed!"
+              ],
+              "detail": "read first, then run. always allowed.",
+              "atWord": 31.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 606,
+      "audio": "audio/uv-01-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "On Windows the shape is identical. PowerShell fetches the script with irm, and iex runs it. Same binary, same destination, different shell.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "The same thing, on [Windows]",
+          "premise": "irm fetches, iex runs. The shell differs; the binary does not.",
+          "promptLabel": "PS you@laptop",
+          "cwd": "~",
+          "highlight": "iex",
+          "steps": [
+            {
+              "label": "powershell -c \"irm https://astral.sh/uv/install.ps1 | iex\"",
+              "out": [
+                "downloading uv 0.12.5 x86_64-pc-windows-msvc",
+                "installing to C:\\Users\\you\\.local\\bin",
+                "  uv.exe",
+                "  uvx.exe"
+              ],
+              "detail": "irm fetches. iex runs. same two jobs.",
+              "atWord": 6.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 310,
+      "audio": "audio/uv-01-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "And now the step that trips up literally everybody, the first time.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "PATH, and the restart",
+          "subtitle": "the step everybody misses"
+        }
+      },
+      "durationFrames": 138,
+      "audio": "audio/uv-01-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "When you type a command, your shell doesn't search your whole computer. Your shell walks a short list of folders, in order, and runs the first match found. The list is called PATH. The installer put uv in a folder near the end of the list, then added that folder to your shell profile.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "blue",
+          "headline": "PATH is a [short list]",
+          "premise": "Your shell checks these folders in order and runs the first match it finds.",
+          "stageTitle": "where the shell looks",
+          "token": "echo $PATH",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "which uv",
+              "out": [
+                "/home/you/.local/bin/uv"
+              ],
+              "detail": "found, on the fourth folder checked",
+              "atWord": 23.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "/usr/local/bin",
+              "sub": "checked first",
+              "atWord": 10.167
+            },
+            {
+              "label": "/usr/bin",
+              "sub": "then here",
+              "atWord": 14.5
+            },
+            {
+              "label": "/bin",
+              "sub": "then here",
+              "atWord": 17.417
+            },
+            {
+              "label": "~/.local/bin",
+              "sub": "and uv is in this one",
+              "detail": "match",
+              "atWord": 22.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 491,
+      "audio": "audio/uv-01-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "But your open terminal read the profile once, back when the terminal started, and no shell re-reads a profile on its own. So the first thing almost everybody sees after installing uv is command not found, and almost everybody assumes the install failed. The install did not fail. Close the terminal, open a fresh one, and uv is right there.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "Close it. [Open] a new one.",
+          "premise": "A shell reads its profile once, at startup. Yours started before uv existed.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "uv",
+          "steps": [
+            {
+              "label": "uv --version",
+              "out": [
+                "bash: uv: command not found"
+              ],
+              "detail": "installed fine. this shell has an old list.",
+              "atWord": 13.583
+            },
+            {
+              "label": "exec $SHELL   # or just open a new terminal",
+              "out": [],
+              "detail": "now the profile is read again",
+              "atWord": 28.667
+            },
+            {
+              "label": "uv --version",
+              "out": [
+                "uv 0.12.5 (210d1f678 2026-08-14)"
+              ],
+              "detail": "there it is",
+              "atWord": 31.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 595,
+      "audio": "audio/uv-01-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "The version line is worth reading properly, because three separate facts live in it. First the version number. Then the exact commit the binary was built from. Then the build date. When you report a bug or follow along with a tutorial, the commit hash is what tells another person precisely which uv you are running, down to the day.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Read the [version] line",
+          "premise": "Three facts in one line: the version, the exact commit, and the build date.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "210d1f678",
+          "steps": [
+            {
+              "label": "uv --version",
+              "out": [
+                "uv 0.12.5 (210d1f678 2026-08-14 x86_64-pc-windows-msvc)"
+              ],
+              "detail": "version, commit, date, platform",
+              "atWord": 8.25
+            },
+            {
+              "label": "uv self update",
+              "out": [
+                "Checking for updates...",
+                "You are on the latest version of uv (0.12.5)"
+              ],
+              "detail": "and this only works off the standalone route",
+              "atWord": 24.083
+            },
+            {
+              "label": "uv --help | head -3",
+              "out": [
+                "An extremely fast Python package manager.",
+                "",
+                "Usage: uv [OPTIONS] <COMMAND>"
+              ],
+              "detail": "and that one line is the whole pitch",
+              "atWord": 30.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 562,
+      "audio": "audio/uv-01-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "uv keeps its own things in three folders, and it will tell you where all three are. The cache is where downloads are kept so the second install is instant. The tool folder holds programs you install. The python folder holds interpreters uv downloaded for you. These live in different places on Windows and on Unix, and uv knows which.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Three folders uv [owns]",
+          "premise": "Ask uv where its own things live. It answers, correctly, on either platform.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "dir",
+          "steps": [
+            {
+              "label": "uv cache dir",
+              "out": [
+                "~/.cache/uv"
+              ],
+              "detail": "Windows: AppData\\Local\\uv\\cache",
+              "atWord": 15.667
+            },
+            {
+              "label": "uv tool dir",
+              "out": [
+                "~/.local/share/uv/tools"
+              ],
+              "detail": "Windows: AppData\\Roaming\\uv\\tools",
+              "atWord": 22.75
+            },
+            {
+              "label": "uv python dir",
+              "out": [
+                "~/.local/share/uv/python"
+              ],
+              "detail": "Windows: AppData\\Roaming\\uv\\python",
+              "atWord": 28.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 585,
+      "audio": "audio/uv-01-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. Of those four roads, why is pip install uv the one to avoid? Pause here and have a proper think about it. Ready? Because pip puts uv inside a Python environment, and managing those from outside is uv's whole job.",
+      "data": {
+        "quiz": {
+          "question": "Why avoid installing uv with pip?",
+          "options": [
+            {
+              "text": "It downloads a slower build"
+            },
+            {
+              "text": "It puts uv inside what uv manages"
+            },
+            {
+              "text": "It skips the PATH setup"
+            },
+            {
+              "text": "It only works on Linux"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Delete that environment and uv goes too — and it cannot self-update.",
+          "atWord": 1.667,
+          "revealAtWord": 19.083
+        }
+      },
+      "durationFrames": 440,
+      "audio": "audio/uv-01-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "And because uv is only ever files in folders, removing uv takes three commands and no control panel at all. Clear the cache, delete the tool and python folders, delete the binary. Nothing else on your machine ever knew uv was there.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "Uninstalling is [three] commands",
+          "premise": "No installer, no registry, no uninstall wizard. Three folders, gone.",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "highlight": "rm -r",
+          "steps": [
+            {
+              "label": "uv cache clean",
+              "out": [
+                "Clearing cache at: ~/.cache/uv",
+                "Removed 1,204 files"
+              ],
+              "detail": "take the downloads with it",
+              "atWord": 13.333
+            },
+            {
+              "label": "rm -r \"$(uv tool dir)\" \"$(uv python dir)\"",
+              "out": [],
+              "detail": "the tools and the interpreters",
+              "atWord": 18.333
+            },
+            {
+              "label": "rm ~/.local/bin/uv ~/.local/bin/uvx",
+              "out": [],
+              "detail": "and the binary itself. done.",
+              "atWord": 22.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 441,
+      "audio": "audio/uv-01-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "One last thing the installer deliberately does not do. uv does not touch your system Python, does not modify any environment you already have, and does not put a bare python command on your PATH. Everything uv installs lives in uv's own folders, which is why removing uv leaves absolutely nothing behind.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "green",
+          "headline": "What the installer [never] touches",
+          "premise": "Two folders written, and nothing at all changed in any Python you already had.",
+          "stageTitle": "left alone on purpose",
+          "token": "nothing else was touched",
+          "promptLabel": "you@laptop",
+          "cwd": "~",
+          "steps": [
+            {
+              "label": "which python python3 uv uvx",
+              "out": [
+                "/usr/bin/python3",
+                "/home/you/.local/bin/uv",
+                "/home/you/.local/bin/uvx"
+              ],
+              "detail": "your python3 is exactly where it was",
+              "atWord": 23.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "your system Python",
+              "text": "untouched",
+              "sub": "not upgraded, not moved",
+              "atWord": 10.083
+            },
+            {
+              "label": "your existing venvs",
+              "text": "untouched",
+              "sub": "uv has not looked at them yet",
+              "atWord": 16
+            },
+            {
+              "label": "bare `python`",
+              "text": "not added",
+              "sub": "uv will not shadow a command you rely on",
+              "value": 0,
+              "atWord": 21.083
+            },
+            {
+              "label": "~/.local/bin",
+              "text": "two files",
+              "sub": "uv and uvx. that is the whole footprint.",
+              "atWord": 26.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 547,
+      "audio": "audio/uv-01-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. pip lives inside Python, so pip can never rescue a Python that's broken. uv is one compiled binary that sits beside Python, which is why a single line installs it on a bare machine. And when the terminal says command not found, open a new terminal.",
+      "data": {
+        "heading": "Chapter one, in three lines",
+        "points": [
+          {
+            "text": "pip lives inside Python. uv sits beside it.",
+            "atWord": 7.833
+          },
+          {
+            "text": "One binary, four roads, and pip is the trap",
+            "atWord": 18.333
+          },
+          {
+            "text": "Command not found? Open a new terminal.",
+            "atWord": 27.917
+          }
+        ]
+      },
+      "durationFrames": 534,
+      "audio": "audio/uv-01-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter, you run a tool you have not installed, and I show you the stopwatch that explains why uv feels the way it does.",
+      "data": {
+        "message": "Next: run a tool you never installed",
+        "sub": "uvx, and the cache behind it"
+      },
+      "durationFrames": 220,
+      "audio": "audio/uv-01-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

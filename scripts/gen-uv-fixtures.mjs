@@ -24,7 +24,7 @@ const at = (n, seed) => {
 };
 
 const CAP = {headline: 38, premise: 120, stageTitle: 30, verdict: 40, verdictSub: 48,
-             token: 28, promptLabel: 26, cwd: 26, stepLabel: 52, stepDetail: 48,
+             token: 28, promptLabel: 26, cwd: 26, stepLabel: 60, stepDetail: 48,
              outLine: 62, stageLabel: 22, stageLabelCmd: 40, stageText: 14, stageSub: 54, stageDetail: 34};
 
 // A headline must carry exactly one [accent phrase] (grammar rule), and the linter's

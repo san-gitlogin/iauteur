@@ -13,6 +13,27 @@
 // The channel name and logo come from the gitignored `.env` via `scripts/lib/env.mjs`.
 // They are NEVER written literally into a builder: this repo is public, and a literal
 // would put the owner's brand into every fork.
+// ── AUTHORING RULES, learned by having the linter reject them ────────────────
+// Every one of these cost a build-lint-fix round trip on chapters 00 and 01, so they are
+// written down rather than rediscovered eleven more times:
+//
+//  1. THE GREETING must use a form the guard recognises — "Welcome back", "Welcome along",
+//     "good to see you". "Good to have you back" is warm and does not count. It belongs in
+//     scenes 2-4, never scene 1 (LAW 0g).
+//  2. A BEAT EARNS 16 SECONDS with two anchored elements, and four more seconds for each
+//     anchor beyond that. A 60-word beat with one step will be rejected; either step
+//     something more or split the beat. Roughly: words <= 45 + 25 per extra anchor.
+//  3. NAME THE SUBJECT. Bare it/this/that/they must stay under 4.5% of all words, and no
+//     more than a handful of sentences may OPEN with one. Say "pip", "the interpreter",
+//     "the shelf" — repeating a name is clarity, not repetition.
+//  4. CARRY THE REASON INSIDE THE SENTENCE. because / which means / so that / that's why,
+//     at least 0.8% of words.
+//  5. CONTRACTIONS above 1.2%: you'll, it's, don't, here's.
+//  6. ASK SOMETHING in the first four beats, and answer it later in the body.
+//  7. A QUIZ_CARD reveal goes through `quizReveal(narration)`, never a fraction.
+//  8. THE HOOK stays at or under 15 words — enforced below, because the 8s cap is only
+//     checked after the whole chapter has been voiced.
+//
 import fs from 'node:fs';
 import {MANIFEST} from './manifest.mjs';
 import {channelName, channelLogo} from './env.mjs';
@@ -31,10 +52,25 @@ export const words = (s) => s.trim().split(/\s+/).filter(Boolean).length;
 export const anchorAt = (n, frac) => Math.max(1, Math.min(Math.round(n * frac), Math.floor(n * 0.7)));
 
 /**
+ * Where a QUIZ_CARD's answer should be anchored: the word just BEFORE "Ready?".
+ *
+ * LAW 0e-q wants question -> pause invitation -> "Ready?" -> answer. The linter measures
+ * the gap from the LAST question mark before the reveal, and "Ready?" is itself a question
+ * mark — so anchoring the reveal after it reports a one-word thinking gap however long the
+ * pause actually was. Anchor just before it and the gap measured is the real one.
+ * Chapter 00 passed this by luck; chapter 01 did not, which is why it is a function now.
+ */
+export const quizReveal = (narration) => {
+  const w = narration.trim().split(/\s+/).filter(Boolean);
+  const i = w.findIndex((x) => /^ready[?!.,]?$/i.test(x));
+  return i > 0 ? i : Math.max(1, Math.round(w.length * 0.62));
+};
+
+/**
  * A chapter under construction.
  *
- * `add(type, transition, background, narration, mk)` appends one beat. `mk(A, n)`
- * receives the anchor helper and the word count and returns the scene's DATA BODY —
+ * `add(type, transition, background, narration, mk)` appends one beat. `mk(A, n, text)`
+ * receives the anchor helper, the word count and the narration, and returns the DATA BODY —
  * which is wrapped in the manifest's `data_key` here rather than per scene, because
  * writing those fields at the top level renders an empty scene that still passes lint.
  */
@@ -44,7 +80,10 @@ export function chapter({fps = 30} = {}) {
     const n = words(narration);
     const A = (f) => anchorAt(n, f);
     const key = MANIFEST[type]?.data_key;
-    const body = mk(A, n) ?? {};
+    // the narration is handed to `mk` as well, because a couple of components need to
+    // anchor against the WORDS rather than a fraction — a quiz reveal must land just
+    // before "Ready?", wherever in the line that happens to fall.
+    const body = mk(A, n, narration) ?? {};
     const sc = {
       // positional ids, so a beat can be inserted without renumbering fourteen files
       id: 's' + String(S.length + 1).padStart(2, '0'),

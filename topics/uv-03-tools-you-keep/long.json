@@ -1,0 +1,988 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #3 — Tools you actually keep",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "When to install a tool instead of borrowing it, how the PATH shim works, and why a tool is never an importable dependency.",
+    "openLoop": "How can a tool be installed and still be command-not-found?",
+    "analogy": "The same bay: wheeled in and out for uvx, bolted to the floor for uv tool install.",
+    "topicAxes": [
+      "economic-pain",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #3 — uv tool install, PATH, and the Trap Everyone Hits (2026)",
+      "altTitles": [
+        "uv tool install explained: shims, PATH and tool environments"
+      ],
+      "description": "Chapter three of the uv course. When to keep a tool instead of borrowing it, what uv tool update-shell actually edits, where the shim lives, and why installing a tool does not let your project import it.",
+      "tags": [
+        "uv",
+        "uv tool install",
+        "python",
+        "astral uv",
+        "pipx",
+        "PATH",
+        "ruff",
+        "python tools",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "INSTALLED, NOT FOUND",
+    "badge": "uv · 03",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You installed the tool. Your terminal says command not found. Both are true.",
+      "data": {
+        "headline": "INSTALLED. NOT FOUND.",
+        "subtext": "both, at the same time",
+        "heroAsset": "lucide:search-x",
+        "headlineAtWord": 2,
+        "heroAtWord": 6.917
+      },
+      "durationFrames": 174,
+      "audio": "audio/uv-03-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Here's the whole thing happening. uv installs ruff, uv reports installed one executable, and then uv warns you in the very next breath that the folder holding ruff isn't on your PATH. Most package managers leave a beginner to work that out alone.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "It warns you [immediately]",
+          "premise": "The install succeeded. The warning underneath is the part that matters.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "not on your PATH",
+          "steps": [
+            {
+              "label": "uv tool install ruff",
+              "out": [
+                "Resolved 1 package in 456ms",
+                "Installed 1 package in 623ms",
+                " + ruff==0.16.4",
+                "Installed 1 executable: ruff",
+                "warning: `~/.local/bin` is not on your PATH."
+              ],
+              "detail": "succeeded, and told you what is missing",
+              "atWord": 8.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 439,
+      "audio": "audio/uv-03-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. Last chapter you borrowed tools. This one is about the handful you use every day, and why keeping those is a different decision entirely.",
+      "data": {
+        "title": "Tools you actually keep",
+        "subtitle": "uv, chapter three · install, PATH, and the trap"
+      },
+      "durationFrames": 269,
+      "audio": "audio/uv-03-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "So when should you borrow, and when should you keep? There's a simple test.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Borrow, or bolt it down",
+          "subtitle": "the same bay, two modes"
+        }
+      },
+      "durationFrames": 151,
+      "audio": "audio/uv-03-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Borrowing is right when you reach for a tool now and then, because paying half a second occasionally costs nothing. Keeping is right when you type the name twenty times a day, because then you want the command itself, not a prefix in front of it.",
+      "data": {
+        "uvStage": {
+          "kind": "ephemeral-bay",
+          "color": "blue",
+          "headline": "Borrowed, and [gone] again",
+          "premise": "uvx wheels the tool in, runs it, wheels it out. Nothing stays behind.",
+          "stageTitle": "mode one: borrowed",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uvx ruff check .",
+              "out": [
+                "All checks passed!"
+              ],
+              "detail": "perfect for the occasional tool",
+              "atWord": 8.667
+            },
+            {
+              "label": "ruff check .",
+              "out": [
+                "bash: ruff: command not found"
+              ],
+              "detail": "and useless for the daily one",
+              "atWord": 18
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "borrowed",
+              "icon": "lucide:wrench",
+              "atWord": 10
+            },
+            {
+              "label": "nothing kept",
+              "sub": "you type uvx every single time",
+              "atWord": 18.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 390,
+      "audio": "audio/uv-03-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "uv tool install is the other mode. Same bay, but now the tool is bolted to the floor: uv builds it a permanent environment of its own, then puts one small file on your PATH that points at it. That one file is what makes the bare command work.",
+      "data": {
+        "uvStage": {
+          "kind": "ephemeral-bay",
+          "token": "dock",
+          "color": "green",
+          "headline": "Bolted [down] instead",
+          "premise": "A permanent environment of its own, plus one small file on your PATH.",
+          "stageTitle": "mode two: kept",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "ruff",
+          "steps": [
+            {
+              "label": "uv tool install ruff",
+              "out": [
+                "Installed 1 executable: ruff"
+              ],
+              "detail": "one environment, one shim",
+              "atWord": 10.25
+            },
+            {
+              "label": "ruff check .",
+              "out": [
+                "All checks passed!"
+              ],
+              "detail": "no prefix. just the command.",
+              "atWord": 21.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "0.16.4",
+              "icon": "lucide:wrench",
+              "atWord": 11.667
+            },
+            {
+              "label": "ruff on your PATH",
+              "sub": "one shim file, pointing at that environment",
+              "atWord": 20.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 450,
+      "audio": "audio/uv-03-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "You can see both halves. uv tool dir holds a whole environment per tool, complete with its own Python. The bin folder beside it holds nothing but the shims — one tiny file per command, and that's the only thing your shell ever sees.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Two folders, [two] jobs",
+          "premise": "One folder holds the environments. The other holds the shims on your PATH.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "bin",
+          "steps": [
+            {
+              "label": "ls \"$(uv tool dir)\"",
+              "out": [
+                "ruff/"
+              ],
+              "detail": "a full environment, per tool",
+              "atWord": 8.5
+            },
+            {
+              "label": "ls \"$(uv tool dir)/ruff\"",
+              "out": [
+                "bin/  lib/  pyvenv.cfg  uv-receipt.toml"
+              ],
+              "detail": "its own Python, its own site-packages",
+              "atWord": 15.5
+            },
+            {
+              "label": "ls ~/.local/bin",
+              "out": [
+                "ruff  uv  uvx"
+              ],
+              "detail": "and only the shim reaches your PATH",
+              "atWord": 21.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 429,
+      "audio": "audio/uv-03-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Which brings us straight to the thing that trips everybody up on day one.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The PATH warning",
+          "subtitle": "and how to make it stop"
+        }
+      },
+      "durationFrames": 133,
+      "audio": "audio/uv-03-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "The warning fires because the shim folder isn't in your shell's list yet. uv won't silently edit a shell profile behind your back, so the first install says so and waits for permission. One command fixes the list permanently, and a fresh terminal picks the change up.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "orange",
+          "headline": "One command, [then] restart",
+          "premise": "uv will edit your shell profile — but only when you ask it to.",
+          "stageTitle": "making the shim reachable",
+          "token": "uv tool update-shell",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "update-shell",
+          "steps": [
+            {
+              "label": "uv tool update-shell",
+              "out": [
+                "Updated PATH in `/home/you/.bashrc`"
+              ],
+              "detail": "it names the file it edited",
+              "atWord": 18.333
+            },
+            {
+              "label": "exec $SHELL && ruff --version",
+              "out": [
+                "ruff 0.16.4"
+              ],
+              "detail": "a fresh shell, and there it is",
+              "atWord": 23.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "/usr/local/bin",
+              "sub": "checked first",
+              "atWord": 8.75
+            },
+            {
+              "label": "/usr/bin",
+              "sub": "then here",
+              "atWord": 11.167
+            },
+            {
+              "label": "~/.local/bin",
+              "sub": "and now this one is on the list too",
+              "detail": "added",
+              "atWord": 21.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 471,
+      "audio": "audio/uv-03-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "On Windows a shim is a real executable file rather than a symbolic link, which is a Windows detail rather than a uv one. On macOS and Linux you get a link instead. Either way, one file per command, and removing that file is how a tool goes away.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "A link, or a [small file]",
+          "premise": "Unix links to the environment; Windows copies a launcher. Same job either way.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "ls -l ~/.local/bin/ruff",
+              "out": [
+                "lrwxrwxrwx  ruff -> ../share/uv/tools/ruff/bin/ruff"
+              ],
+              "detail": "macOS and Linux: a symbolic link",
+              "atWord": 9.667
+            },
+            {
+              "label": "dir %LOCALAPPDATA%\\uv\\bin",
+              "out": [
+                "ruff.exe"
+              ],
+              "detail": "Windows: a real launcher executable",
+              "atWord": 17.083
+            },
+            {
+              "label": "rm ~/.local/bin/ruff && ruff --version",
+              "out": [
+                "bash: ruff: command not found"
+              ],
+              "detail": "delete that one file and the tool is gone",
+              "atWord": 23
+            }
+          ]
+        }
+      },
+      "durationFrames": 457,
+      "audio": "audio/uv-03-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "Now the misunderstanding. This one is worth stopping on, because almost everybody hits it.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The one big trap",
+          "subtitle": "a tool is not a dependency"
+        }
+      },
+      "durationFrames": 174,
+      "audio": "audio/uv-03-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "You install ruff as a tool. Then you open a Python file in your project, type import ruff, and Python says no such module exists. Nothing is broken and nothing went wrong. Ruff lives in ruff's own environment, and your project is a completely different environment.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "red",
+          "headline": "A tool is not a [dependency]",
+          "premise": "Two separate shelves. The tool sits on one, your project stands at the other.",
+          "stageTitle": "two shelves, no bridge",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv pip show ruff",
+              "out": [
+                "warning: Package(s) not found for: ruff"
+              ],
+              "detail": "not in your project. never was.",
+              "atWord": 19.167
+            },
+            {
+              "label": "uv run python -c \"import ruff\"",
+              "out": [
+                "ModuleNotFoundError: No module named 'ruff'"
+              ],
+              "detail": "the command works. the import does not.",
+              "atWord": 25.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "the tool env",
+              "text": "ruff",
+              "detail": "runs",
+              "atWord": 11.333
+            },
+            {
+              "label": "your project",
+              "text": "rich",
+              "detail": "imports",
+              "atWord": 15.667
+            },
+            {
+              "label": "wall",
+              "sub": "a tool you can run is not a package you can import",
+              "atWord": 22.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 502,
+      "audio": "audio/uv-03-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So if your code needs to import a package, that package belongs in your project, and we'll do exactly that in a couple of chapters. Tools are for things you run. Dependencies are for things you import. Keeping those two ideas apart will save you an enormous amount of confusion.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "blue",
+          "headline": "Run it, or [import] it",
+          "premise": "The question is never which command. It is what you want to do with the thing.",
+          "stageTitle": "the only question that matters",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv tool install ruff",
+              "out": [
+                "Installed 1 executable: ruff"
+              ],
+              "detail": "because you want to RUN ruff",
+              "atWord": 14.667
+            },
+            {
+              "label": "uv add rich",
+              "out": [
+                " + rich==15.0.0"
+              ],
+              "detail": "because your code will IMPORT rich",
+              "atWord": 23.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "a tool",
+              "atWord": 10.833
+            },
+            {
+              "label": "you run it",
+              "sub": "uv tool install",
+              "detail": "own environment",
+              "atWord": 17
+            },
+            {
+              "label": "you import it",
+              "sub": "uv add",
+              "detail": "your project environment",
+              "atWord": 23.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 485,
+      "audio": "audio/uv-03-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "CHAPTER",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Finally, living with the tools you've kept.",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "Living with them",
+          "subtitle": "list, upgrade, uninstall"
+        }
+      },
+      "durationFrames": 97,
+      "audio": "audio/uv-03-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Four commands cover everything. List shows what you've kept and what each one gave you. Upgrade takes one tool forward, or all of them at once. Uninstall removes a tool and its shim together. And uv tells you plainly when there's nothing to do.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Four commands, [that is all]",
+          "premise": "Everything you will ever do with an installed tool is one of these four.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv tool list",
+              "out": [
+                "ruff v0.16.4",
+                "- ruff"
+              ],
+              "detail": "the tool, then the commands it gave you",
+              "atWord": 8.833
+            },
+            {
+              "label": "uv tool upgrade --all",
+              "out": [
+                "Nothing to upgrade"
+              ],
+              "detail": "plain english when there is nothing to do",
+              "atWord": 18.583
+            },
+            {
+              "label": "uv tool uninstall ruff",
+              "out": [
+                "Uninstalled 1 executable: ruff"
+              ],
+              "detail": "the environment and the shim, together",
+              "atWord": 25.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 488,
+      "audio": "audio/uv-03-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "One difference is worth watching for. When borrowing a tool, you pin the version with an at sign. When keeping one, you use the ordinary equals syntax instead. The mismatch catches people constantly, because the two commands otherwise look so alike.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "The syntax [changes]",
+          "premise": "uvx pins with @. uv tool install pins the way pip always has.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "==",
+          "steps": [
+            {
+              "label": "uvx ruff@0.3.0 --version",
+              "out": [
+                "ruff 0.3.0"
+              ],
+              "detail": "borrowing: the at sign",
+              "atWord": 7.833
+            },
+            {
+              "label": "uv tool install \"ruff@0.3.0\"",
+              "out": [
+                "error: Failed to parse: `ruff@0.3.0`"
+              ],
+              "detail": "the at sign is not accepted here",
+              "atWord": 14.833
+            },
+            {
+              "label": "uv tool install \"ruff==0.3.0\"",
+              "out": [
+                " + ruff==0.3.0"
+              ],
+              "detail": "keeping: the ordinary specifier",
+              "atWord": 22.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 451,
+      "audio": "audio/uv-03-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "And one rule straight from the documentation, worth repeating exactly: tool environments are not meant to be edited by hand. If a tool needs a plugin, reinstall the tool and name the plugin with dash dash with, so uv writes the plugin into a receipt file and remembers the pairing next time.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Do not [hand-edit] a tool env",
+          "premise": "Reinstall with --with instead, so uv records the extra and keeps it.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "--with",
+          "steps": [
+            {
+              "label": "uv tool install mkdocs --with mkdocs-material",
+              "out": [
+                "Installed 1 executable: mkdocs"
+              ],
+              "detail": "the theme goes in the tool environment",
+              "atWord": 17.417
+            },
+            {
+              "label": "cat \"$(uv tool dir)/mkdocs/uv-receipt.toml\"",
+              "out": [
+                "requirements = [",
+                "  { name = \"mkdocs\" },",
+                "  { name = \"mkdocs-material\" },",
+                "]"
+              ],
+              "detail": "uv wrote it down, so upgrades keep it",
+              "atWord": 22.167
+            },
+            {
+              "label": "uv tool upgrade mkdocs",
+              "out": [
+                "Updated mkdocs v1.6.1 -> v1.6.2",
+                "Installed 1 executable: mkdocs"
+              ],
+              "detail": "and the theme comes along automatically",
+              "atWord": 26.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 514,
+      "audio": "audio/uv-03-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "Here's a habit worth forming early. Pin the tools that decide whether your code is acceptable, because a linter that quietly upgrades overnight can fail a build nobody touched. Pin ruff, pin the formatter, and leave the harmless conveniences floating on latest.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "orange",
+          "headline": "Pin the ones that [judge] you",
+          "premise": "A linter that upgrades itself can fail a build where nothing actually changed.",
+          "stageTitle": "what to pin, and what not to",
+          "token": "pin the judges",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv tool install \"ruff==0.16.4\"",
+              "out": [
+                " + ruff==0.16.4"
+              ],
+              "detail": "pinned, because ruff decides pass or fail",
+              "atWord": 15.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "pin it",
+              "sub": "decides whether your code passes",
+              "atWord": 8.833
+            },
+            {
+              "label": "a formatter",
+              "text": "pin it",
+              "sub": "rewrites files, so surprises are costly",
+              "atWord": 14.167
+            },
+            {
+              "label": "httpie",
+              "text": "leave it",
+              "sub": "a convenience, and nothing depends on it",
+              "value": 0,
+              "atWord": 20.333
+            },
+            {
+              "label": "uv tool upgrade ruff",
+              "sub": "and upgrade deliberately, when you choose",
+              "atWord": 24.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 467,
+      "audio": "audio/uv-03-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "A kept tool also gets its own Python, which matters more than it sounds. Upgrade the Python you use for your own work and ruff carries on running against the interpreter ruff was installed with, because nothing in ruff's environment depends on yours.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "green",
+          "headline": "Each tool gets [its own] Python",
+          "premise": "The interpreter inside a tool environment is not the one you work with.",
+          "stageTitle": "why upgrades stay quiet",
+          "token": "uv tool dir",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "cat \"$(uv tool dir)/ruff/pyvenv.cfg\" | head -2",
+              "out": [
+                "home = /home/you/.local/share/uv/python/cpython-3.13.1",
+                "uv = 0.12.5"
+              ],
+              "detail": "ruff runs on 3.13, whatever you use",
+              "atWord": 13.333
+            },
+            {
+              "label": "uv run python -V",
+              "out": [
+                "Python 3.10.4"
+              ],
+              "detail": "and your own project is still on 3.10",
+              "atWord": 20.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff env",
+              "text": "3.13.1",
+              "sub": "picked when ruff was installed",
+              "detail": "fixed",
+              "atWord": 8.917
+            },
+            {
+              "label": "your project",
+              "text": "3.10.4",
+              "sub": "and upgrading yours changes nothing",
+              "atWord": 19.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 404,
+      "audio": "audio/uv-03-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And because every tool has a private environment, two tools that need incompatible versions of the same library simply never meet. That's the chapter-zero problem solved once more, quietly, in a place you weren't thinking about.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "green",
+          "headline": "Tools never [collide] either",
+          "premise": "One environment per tool, so two tools needing different libraries never meet.",
+          "stageTitle": "the same fix, again",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv tool list",
+              "out": [
+                "mkdocs v1.6.1",
+                "- mkdocs",
+                "ruff v0.16.4",
+                "- ruff"
+              ],
+              "detail": "two tools, two private shelves",
+              "atWord": 16.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "mkdocs",
+              "text": "2.21.0",
+              "detail": "pygments",
+              "atWord": 9.75
+            },
+            {
+              "label": "ruff",
+              "text": "none",
+              "detail": "no pygments at all",
+              "atWord": 14.667
+            },
+            {
+              "label": "wall",
+              "sub": "neither tool can reach the other shelf",
+              "atWord": 20.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 442,
+      "audio": "audio/uv-03-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "One more flag earns its keep. Adding dash dash isolated alongside dash dash refresh builds the environment from scratch and ignores everything cached, which is how you prove a failure is really the tool's fault rather than a stale copy sitting in your depot.",
+      "data": {
+        "uvStage": {
+          "kind": "ephemeral-bay",
+          "color": "purple",
+          "headline": "Prove it is not [stale]",
+          "premise": "A build from scratch, ignoring the depot, when the cached copy is the suspect.",
+          "stageTitle": "ruling out the cache",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "--isolated",
+          "steps": [
+            {
+              "label": "uvx --isolated --refresh ruff check .",
+              "out": [
+                "Downloading ruff (10.1MiB)",
+                "All checks passed!"
+              ],
+              "detail": "a clean build, straight from the warehouse",
+              "atWord": 17.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "fresh",
+              "icon": "lucide:wrench",
+              "atWord": 11.667
+            },
+            {
+              "label": "cache ignored",
+              "sub": "so a stale copy cannot be the explanation",
+              "atWord": 21.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 461,
+      "audio": "audio/uv-03-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. You install ruff as a tool, then try to import ruff in your project code. What happens? Pause the video here and think it through properly first. Ready? It fails, because the tool lives in its own environment and your project is a different one.",
+      "data": {
+        "quiz": {
+          "question": "Tool installed. Can your project import it?",
+          "options": [
+            {
+              "text": "Yes, tools are global"
+            },
+            {
+              "text": "No — separate environments"
+            },
+            {
+              "text": "Only inside uv run"
+            },
+            {
+              "text": "Only after uv sync"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Tools are for running. Dependencies are for importing.",
+          "atWord": 2.417,
+          "revealAtWord": 22.833
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/uv-03-long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. Borrow a tool you reach for occasionally, and keep the one you type all day. Installing a tool gives it a private environment and puts one shim on your PATH. And a tool you can run is never a package your code can import.",
+      "data": {
+        "heading": "Chapter three, in three lines",
+        "points": [
+          {
+            "text": "Borrow occasionally, keep the daily ones",
+            "atWord": 6.167
+          },
+          {
+            "text": "Own environment, plus one shim on PATH",
+            "atWord": 15.333
+          },
+          {
+            "text": "Run it with a tool. Import it with uv add.",
+            "atWord": 23.75
+          }
+        ]
+      },
+      "durationFrames": 453,
+      "audio": "audio/uv-03-long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter, something genuinely surprising: a single Python file that installs its own dependencies and runs from nothing in under two seconds.",
+      "data": {
+        "message": "Next: a script that fixes itself",
+        "sub": "one file, no setup, PEP 723"
+      },
+      "durationFrames": 259,
+      "audio": "audio/uv-03-long_s24.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

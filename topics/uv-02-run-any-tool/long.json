@@ -1,0 +1,892 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #2 — Run any Python tool without installing it",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "uvx runs any Python tool in a throwaway environment, and the cache makes the second run nearly free.",
+    "openLoop": "How can a ten-megabyte tool run in under a third of a second?",
+    "analogy": "A machine wheeled into a bay, used, and wheeled straight back out.",
+    "topicAxes": [
+      "economic-pain",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #2 — uvx: Run Any Python Tool Without Installing It (2026)",
+      "altTitles": [
+        "uvx explained: run Python tools with zero install"
+      ],
+      "description": "Chapter two of the uv course. uvx and uv tool run, --from when the command name differs from the package, --with for one-off plugins, running straight from git, and the measured 5.792s to 0.294s the cache buys you.",
+      "tags": [
+        "uv",
+        "uvx",
+        "python",
+        "uv tool run",
+        "astral uv",
+        "ruff",
+        "httpie",
+        "python tools",
+        "python tutorial",
+        "pipx"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "NEVER INSTALL IT",
+    "badge": "uv · 02",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "What if you could use a program without installing the program?",
+      "data": {
+        "headline": "BORROW IT. DO NOT KEEP IT.",
+        "subtext": "tools you never install",
+        "heroAsset": "lucide:wrench",
+        "headlineAtWord": 1,
+        "heroAtWord": 3.917
+      },
+      "durationFrames": 111,
+      "audio": "audio/uv-02-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Watch this. Ruff is a Python linter, and ruff isn't on this machine anywhere. I type one command, ruff runs, ruff checks the folder, and then ruff's gone again. Nothing was added to any project, and nothing at all was left behind.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "A tool you never [installed]",
+          "premise": "ruff is on no shelf on this machine. Watch it run anyway.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "uvx",
+          "steps": [
+            {
+              "label": "uvx ruff check .",
+              "out": [
+                "Downloading ruff (10.1MiB)",
+                " Downloaded ruff",
+                "Installed 1 package in 637ms",
+                "All checks passed!"
+              ],
+              "detail": "and nothing was added to your project",
+              "atWord": 8.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 449,
+      "audio": "audio/uv-02-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter is about borrowing tools instead of owning them, and about the small warehouse on your own machine that makes borrowing feel instant.",
+      "data": {
+        "title": "Run any tool, instantly",
+        "subtitle": "uv, chapter two · uvx and the cache"
+      },
+      "durationFrames": 278,
+      "audio": "audio/uv-02-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start with the command itself, because two spellings of it exist and knowing that saves confusion later.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "uvx, and its longer name",
+          "subtitle": "the same command twice"
+        }
+      },
+      "durationFrames": 189,
+      "audio": "audio/uv-02-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "First, a small thing that saves confusion later. uvx is not a separate program at all — typing uvx ruff is exactly the same as typing uv tool run ruff. Not similar, identical, and the documentation says so plainly. Both spellings are worth knowing, because older tutorials tend to use the long one.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "uvx is [uv tool run]",
+          "premise": "Two spellings, one program. Older tutorials use the long one.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "uvx",
+          "steps": [
+            {
+              "label": "uvx ruff --version",
+              "out": [
+                "ruff 0.16.4"
+              ],
+              "detail": "the short spelling",
+              "atWord": 8.583
+            },
+            {
+              "label": "uv tool run ruff --version",
+              "out": [
+                "ruff 0.16.4"
+              ],
+              "detail": "the long spelling. same program.",
+              "atWord": 19.75
+            },
+            {
+              "label": "type -a uvx",
+              "out": [
+                "uvx is /home/you/.local/bin/uvx"
+              ],
+              "detail": "and uvx is its own tiny binary beside uv",
+              "atWord": 29.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 567,
+      "audio": "audio/uv-02-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So what actually happens when you run one? uv builds a tiny throwaway environment off in the cache, drops the tool into it, runs the tool, and then simply stops caring about that environment. Your project isn't touched, which means nothing lands on your PATH either — you won't find a new command sitting there afterwards.",
+      "data": {
+        "uvStage": {
+          "kind": "ephemeral-bay",
+          "color": "blue",
+          "headline": "Built, used, [let go]",
+          "premise": "A throwaway environment in the cache. The bay is empty before and after.",
+          "stageTitle": "wheeled in, wheeled out",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uvx ruff check .",
+              "out": [
+                "Installed 1 package in 8ms",
+                "All checks passed!"
+              ],
+              "detail": "built in the cache, not in your project",
+              "atWord": 12.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "0.16.4",
+              "icon": "lucide:wrench",
+              "atWord": 14.833
+            },
+            {
+              "label": "nothing on PATH",
+              "sub": "and nothing in your project either",
+              "atWord": 26.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 547,
+      "audio": "audio/uv-02-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Because nothing is being installed, you can pin a version without committing to anything at all. Adding at zero point three point zero runs that exact release. Adding at latest always fetches the newest one. Neither choice changes a single file in the project you happen to be standing in.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Pin it with an [at sign]",
+          "premise": "The @ suffix picks a release for this one run, and only this one run.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "@",
+          "steps": [
+            {
+              "label": "uvx ruff@0.3.0 --version",
+              "out": [
+                "ruff 0.3.0"
+              ],
+              "detail": "that exact release, just this once",
+              "atWord": 10.833
+            },
+            {
+              "label": "uvx ruff@latest --version",
+              "out": [
+                "ruff 0.16.4"
+              ],
+              "detail": "always the newest, just this once",
+              "atWord": 18.583
+            },
+            {
+              "label": "git status --short",
+              "out": [],
+              "detail": "and your project is untouched by both",
+              "atWord": 24.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 486,
+      "audio": "audio/uv-02-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Two flags turn uvx from a nice trick into something you'll use constantly.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "from and with",
+          "subtitle": "when the name does not match"
+        }
+      },
+      "durationFrames": 151,
+      "audio": "audio/uv-02-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Sometimes the package and the command have different names. The package httpie installs a command called http, so uvx httpie would look for a command called httpie and fail. Dash dash from tells uv which package to fetch, and the word after it is the command to run.",
+      "data": {
+        "uvStage": {
+          "kind": "ephemeral-bay",
+          "color": "orange",
+          "headline": "When the names [disagree]",
+          "premise": "The package is httpie. The command it provides is http. --from bridges the two.",
+          "stageTitle": "package, then command",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "--from",
+          "steps": [
+            {
+              "label": "uvx httpie",
+              "out": [
+                "error: Failed to spawn: `httpie`",
+                "  Caused by: program not found"
+              ],
+              "detail": "the package exists. the command does not.",
+              "atWord": 11.167
+            },
+            {
+              "label": "uvx --from httpie http --version",
+              "out": [
+                "3.2.4"
+              ],
+              "detail": "fetch httpie, run http",
+              "atWord": 24.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "httpie",
+              "text": "the package",
+              "icon": "lucide:package",
+              "atWord": 13.75
+            },
+            {
+              "label": "http",
+              "text": "the command",
+              "sub": "what actually ends up runnable",
+              "atWord": 21.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 516,
+      "audio": "audio/uv-02-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And dash dash with adds extra packages into that throwaway environment for the one run. So you can hand a tool a plugin it doesn't ship with, use the pair together once, and leave no trace of either afterwards.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Add a plugin, [just once]",
+          "premise": "--with puts extra packages in the throwaway environment for this run only.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "--with",
+          "steps": [
+            {
+              "label": "uvx --with mkdocs-material mkdocs build",
+              "out": [
+                "INFO - Building documentation...",
+                "INFO - Documentation built in 1.42s"
+              ],
+              "detail": "mkdocs plus a theme it does not ship with",
+              "atWord": 8.167
+            },
+            {
+              "label": "uv pip show mkdocs-material",
+              "out": [
+                "warning: Package(s) not found"
+              ],
+              "detail": "gone. it never entered your project.",
+              "atWord": 17
+            }
+          ]
+        }
+      },
+      "durationFrames": 367,
+      "audio": "audio/uv-02-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Better still, a tool can come straight out of a git repository, which is how you try somebody's unreleased branch without adopting it. Same shape as before — fetch, run, forget — except the parcel came from a repository rather than the warehouse.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "purple",
+          "headline": "Straight from a [repository]",
+          "premise": "A tool that was never published to PyPI, run once, from source.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "git+",
+          "steps": [
+            {
+              "label": "uvx --from git+https://github.com/astral-sh/ruff ruff -V",
+              "out": [
+                "Updating https://github.com/astral-sh/ruff (HEAD)",
+                "ruff 0.17.0"
+              ],
+              "detail": "an unreleased branch, borrowed for one run",
+              "atWord": 11.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 450,
+      "audio": "audio/uv-02-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "So why does any of this feel instant, when the first run clearly had to download ten megabytes?",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The stopwatch",
+          "subtitle": "why the second run is free"
+        }
+      },
+      "durationFrames": 207,
+      "audio": "audio/uv-02-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "I timed it. The first uvx ruff, on a completely empty cache, took five point seven nine two seconds — that's ten megabytes fetched, unpacked and run. The second, seconds later, took nought point two nine four. Same command. Same machine. The only difference is that the parcel never had to leave town twice.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "green",
+          "headline": "Five seconds, then [a third of one]",
+          "premise": "The same command run twice. The only difference is where the parcel came from.",
+          "stageTitle": "measured on this machine",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "time uvx ruff --version",
+              "out": [
+                "Downloading ruff (10.1MiB)",
+                "ruff 0.16.4",
+                "real    0m5.792s"
+              ],
+              "detail": "cold: nothing cached at all",
+              "atWord": 9.333
+            },
+            {
+              "label": "time uvx ruff --version",
+              "out": [
+                "ruff 0.16.4",
+                "real    0m0.294s"
+              ],
+              "detail": "warm: seconds later, same command",
+              "atWord": 24.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "cold",
+              "text": "5.792s",
+              "sub": "all the way from the warehouse",
+              "atWord": 14.083
+            },
+            {
+              "label": "warm",
+              "text": "0.294s",
+              "sub": "from the depot down the road",
+              "atWord": 27.167
+            },
+            {
+              "label": "nineteen times, measured here",
+              "atWord": 33.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 628,
+      "audio": "audio/uv-02-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "That local store is called the cache, and the cache is the real answer to why uv feels the way it does. I'll open it up properly in a later chapter, because it deserves one. For now, just hold on to the shape: the first run pays, and every run afterwards doesn't.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "The store has a [name]",
+          "premise": "Everything uv downloads lands here, and stays here for the next command.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "cache",
+          "steps": [
+            {
+              "label": "uv cache dir",
+              "out": [
+                "/home/you/.cache/uv"
+              ],
+              "detail": "a folder. as always, just a folder.",
+              "atWord": 11
+            },
+            {
+              "label": "du -sh \"$(uv cache dir)\"",
+              "out": [
+                "412M    /home/you/.cache/uv"
+              ],
+              "detail": "and it pays for itself the second time",
+              "atWord": 18.417
+            },
+            {
+              "label": "uv cache prune",
+              "out": [
+                "Pruning cache at: /home/you/.cache/uv",
+                "Removed 412 unused entries"
+              ],
+              "detail": "and you can trim it whenever you like",
+              "atWord": 25
+            }
+          ]
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/uv-02-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "A tool can also be run under a Python you do not have. Passing dash dash python three point twelve makes uv fetch that interpreter, build the throwaway environment on top of it, and run your tool there — while the Python you normally use sits completely untouched.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "purple",
+          "headline": "Run it on a [different] Python",
+          "premise": "uv fetches the interpreter the tool needs and leaves yours entirely alone.",
+          "stageTitle": "borrowed Python, borrowed tool",
+          "token": "uvx --python 3.12",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "python3 --version",
+              "out": [
+                "Python 3.10.4"
+              ],
+              "detail": "what your machine normally uses",
+              "atWord": 6.75
+            },
+            {
+              "label": "uvx --python 3.12 ruff --version",
+              "out": [
+                "Downloading cpython-3.12.14 (21.0MiB)",
+                "ruff 0.16.4"
+              ],
+              "detail": "uv fetched a whole Python to do it",
+              "atWord": 15.833
+            },
+            {
+              "label": "python3 --version",
+              "out": [
+                "Python 3.10.4"
+              ],
+              "detail": "and yours is still exactly what it was",
+              "atWord": 23.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "fetched",
+              "sub": "for this run",
+              "detail": "used",
+              "atWord": 12
+            },
+            {
+              "label": "your python3",
+              "text": "untouched",
+              "sub": "still whatever it always was",
+              "atWord": 21.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 454,
+      "audio": "audio/uv-02-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And if you want to see where all of that actually happens, look inside the cache. Every throwaway environment uvx has ever built is sitting in one folder, keyed by exactly what was asked for, which is why asking for the same thing twice costs nothing the second time.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Where the [bay] really is",
+          "premise": "Not magic, not hidden. One folder of environments, keyed by what was asked for.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "environments",
+          "steps": [
+            {
+              "label": "ls \"$(uv cache dir)\"",
+              "out": [
+                "archive-v0  builds-v0  environments-v2  sdists-v9  wheels-v6"
+              ],
+              "detail": "every bucket uv keeps, versioned",
+              "atWord": 11.583
+            },
+            {
+              "label": "ls \"$(uv cache dir)/environments-v2\" | head -3",
+              "out": [
+                "ruff-c2a1f0e9",
+                "httpie-7b41dd02",
+                "mkdocs-19ca03f5"
+              ],
+              "detail": "one folder per thing you have borrowed",
+              "atWord": 17.417
+            },
+            {
+              "label": "ls \"$(uv cache dir)/environments-v2/ruff-c2a1f0e9\"",
+              "out": [
+                "bin/  lib/  pyvenv.cfg"
+              ],
+              "detail": "and inside, an ordinary environment",
+              "atWord": 23.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 447,
+      "audio": "audio/uv-02-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Occasionally you'll want to force a fresh copy, because a tool has published a fix and the cached parcel is still the old one. Dash dash refresh throws that cached copy away for a single command, and only for that command, so everything else you've built up stays exactly where it is.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "orange",
+          "headline": "Force the [long] way round",
+          "premise": "--refresh ignores the depot for one command and goes back to the warehouse.",
+          "stageTitle": "when you want it stale-free",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "--refresh",
+          "steps": [
+            {
+              "label": "uvx ruff --version",
+              "out": [
+                "ruff 0.16.4",
+                "real    0m0.294s"
+              ],
+              "detail": "the depot answers, as usual",
+              "atWord": 8.667
+            },
+            {
+              "label": "uvx --refresh ruff --version",
+              "out": [
+                "Downloading ruff (10.1MiB)",
+                "ruff 0.16.4",
+                "real    0m5.802s"
+              ],
+              "detail": "straight past the depot, on purpose",
+              "atWord": 18
+            },
+            {
+              "label": "uvx ruff --version",
+              "out": [
+                "ruff 0.16.4",
+                "real    0m0.291s"
+              ],
+              "detail": "and the depot is warm again immediately",
+              "atWord": 24.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "normal",
+              "text": "0.294s",
+              "sub": "the depot answers",
+              "atWord": 10.833
+            },
+            {
+              "label": "refreshed",
+              "text": "5.8s",
+              "sub": "the warehouse answers instead",
+              "atWord": 20.167
+            },
+            {
+              "label": "use it when a fix has just landed",
+              "atWord": 23.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 471,
+      "audio": "audio/uv-02-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "If you've used pipx, all of this will feel familiar, because pipx does the very same job and has done for years. What's different is that uv already owns the cache, already owns the resolver, and already owns the interpreters, so borrowing one more tool costs uv almost nothing to arrange.",
+      "data": {
+        "uvStage": {
+          "kind": "ephemeral-bay",
+          "color": "green",
+          "headline": "If you know [pipx], you know this",
+          "premise": "Same idea as pipx. The parts uv already owns are what make it quick.",
+          "stageTitle": "same job, fewer parts",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "pipx run ruff --version",
+              "out": [
+                "ruff 0.16.4"
+              ],
+              "detail": "pipx does this too, and has for years",
+              "atWord": 6.75
+            },
+            {
+              "label": "uvx ruff --version",
+              "out": [
+                "ruff 0.16.4"
+              ],
+              "detail": "same result, off parts uv already had",
+              "atWord": 18.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "0.16.4",
+              "icon": "lucide:wrench",
+              "atWord": 12.75
+            },
+            {
+              "label": "nothing kept",
+              "sub": "true of both tools, by design",
+              "atWord": 23.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/uv-02-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick one. You run uvx ruff inside a project folder. Afterwards, is ruff a dependency of that project? Pause here and decide for yourself before I say a word. Ready? No — the environment lives in the cache, and your project never heard about it.",
+      "data": {
+        "quiz": {
+          "question": "After uvx ruff, is ruff a dependency of your project?",
+          "options": [
+            {
+              "text": "Yes, uvx adds it"
+            },
+            {
+              "text": "No, it lived in the cache"
+            },
+            {
+              "text": "Only if you pass --save"
+            },
+            {
+              "text": "Yes, but only for dev"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "The throwaway environment lives in the cache, not your project.",
+          "atWord": 2.667,
+          "revealAtWord": 24.667
+        }
+      },
+      "durationFrames": 496,
+      "audio": "audio/uv-02-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "One honest limitation before we finish. Because every uvx run builds its own little environment, a tool you reach for twenty times a day pays a small startup cost every single time, and none of those tools end up on your PATH. When that starts to annoy you, the answer is the next chapter.",
+      "data": {
+        "uvStage": {
+          "kind": "ephemeral-bay",
+          "color": "orange",
+          "headline": "Where borrowing [stops paying]",
+          "premise": "Borrowing is perfect for the occasional tool and wrong for the daily one.",
+          "stageTitle": "the cost of borrowing",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "ruff --version",
+              "out": [
+                "bash: ruff: command not found"
+              ],
+              "detail": "borrowed tools never land on your PATH",
+              "atWord": 16.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "ruff",
+              "text": "borrowed",
+              "icon": "lucide:wrench",
+              "atWord": 10
+            },
+            {
+              "label": "nothing on PATH",
+              "sub": "you must type uvx every single time",
+              "atWord": 22.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 521,
+      "audio": "audio/uv-02-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. uvx and uv tool run are the same command. uvx builds a throwaway environment, runs your tool in it, and forgets the environment. And the second run of anything is nearly free, because the cache already has the parts.",
+      "data": {
+        "heading": "Chapter two, in three lines",
+        "points": [
+          {
+            "text": "uvx is exactly uv tool run",
+            "atWord": 6.25
+          },
+          {
+            "text": "Built in the cache, then forgotten",
+            "atWord": 16.167
+          },
+          {
+            "text": "5.792s cold, 0.294s warm — measured",
+            "atWord": 25.083
+          }
+        ]
+      },
+      "durationFrames": 473,
+      "audio": "audio/uv-02-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter, the tools you actually want to keep, and the one misunderstanding that catches everybody who installs one.",
+      "data": {
+        "message": "Next: tools you keep",
+        "sub": "uv tool install, and the PATH warning"
+      },
+      "durationFrames": 215,
+      "audio": "audio/uv-02-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

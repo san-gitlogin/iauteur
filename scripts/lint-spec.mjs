@@ -1771,11 +1771,12 @@ for (const s of spec.scenes ?? []) {
     if (st.length > 5) E(`${id}: UV_STAGE max 5 steps (got ${st.length})`);
     if (term && !st.length) E(`${id}: UV_STAGE layout:"terminal" with no steps draws an empty screen`);
     for (const x of st) {
-      // 52, not 44: the real install one-liner is
-      // `curl -LsSf <the astral.sh install url> | sh` at 46 visible chars, and LAW 0m
-      // forbids trimming a real artefact to fit a cap somebody guessed. Proved against
-      // the MAX fixture at both aspects before the number was raised.
-      if (len(x.label) > 52) E(`${id}: UV_STAGE step "${x.label}" > 52 chars`);
+      // 60, not 44 and not 52. The real commands this course must show are longer than
+      // anybody's guess: the Unix installer one-liner is 46, and the Windows equivalent
+      // `powershell -c "irm <the install url> | iex"` is 58. LAW 0m forbids trimming a
+      // real artefact to fit a cap, so the cap moved — and was proved against a MAX
+      // fixture at both aspects before it did.
+      if (len(x.label) > 60) E(`${id}: UV_STAGE step "${x.label}" > 60 chars — beyond this the terminal wraps mid-command`);
       if (len(x.detail) > 48) E(`${id}: UV_STAGE step detail > 48 chars`);
       for (const o of x.out ?? []) if (len(o) > 62) E(`${id}: UV_STAGE output line > 62 chars — trim the real output, never shrink the type (LAW 0m)`);
       if ((x.out ?? []).length > 9) E(`${id}: UV_STAGE step has ${x.out.length} output lines (max 9)`);

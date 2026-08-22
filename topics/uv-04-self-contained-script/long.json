@@ -1,0 +1,890 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #4 — A script that installs its own dependencies",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "PEP 723 inline metadata: four comment lines that let one Python file carry its own environment and run anywhere.",
+    "openLoop": "How does a single file go from nothing to output in under two seconds?",
+    "analogy": "The header lifts off the file and becomes the shelf the file runs on.",
+    "topicAxes": [
+      "economic-pain",
+      "entity-novelty"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #4 — One File, No Setup: PEP 723 Scripts (2026)",
+      "altTitles": [
+        "Self-contained Python scripts with uv and inline metadata"
+      ],
+      "description": "Chapter four of the uv course. uv run --with, PEP 723 inline metadata, uv init --script and uv add --script, the uv run shebang, locking a script, and why the surrounding project is ignored.",
+      "tags": [
+        "uv",
+        "python",
+        "pep 723",
+        "inline metadata",
+        "uv run",
+        "astral uv",
+        "python script",
+        "python tutorial",
+        "shebang"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ONE FILE. NO SETUP.",
+    "badge": "uv · 04",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One Python file. No project, no setup, no install step. It just runs.",
+      "data": {
+        "headline": "ONE FILE. NO SETUP.",
+        "subtext": "it brings its own everything",
+        "heroAsset": "lucide:file-code",
+        "headlineAtWord": 2.417,
+        "heroAtWord": 8.417
+      },
+      "durationFrames": 208,
+      "audio": "audio/uv-04-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Watch the clock on this one. A single file sits on this machine, and rich is installed absolutely nowhere. I run the file, uv reads the file, uv builds whatever the file asks for, and the output appears on screen. One point eight seconds, from nothing at all. So where did rich come from?",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "green",
+          "headline": "Nothing to [output], in 1.8s",
+          "premise": "One file. rich installed in no environment anywhere on this machine.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "uv run",
+          "steps": [
+            {
+              "label": "ls",
+              "out": [
+                "demo.py"
+              ],
+              "detail": "one file. nothing else in the folder.",
+              "atWord": 5.75
+            },
+            {
+              "label": "time uv run demo.py",
+              "out": [
+                "Reading inline script metadata from: demo.py",
+                "Installed 4 packages in 798ms",
+                "hello from a lone script",
+                "real    0m1.824s"
+              ],
+              "detail": "no project. no venv. no install step.",
+              "atWord": 18.167
+            },
+            {
+              "label": "uv pip list",
+              "out": [
+                "warning: no virtual environment found"
+              ],
+              "detail": "and rich is still installed nowhere",
+              "atWord": 28.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 557,
+      "audio": "audio/uv-04-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter is about the smallest useful thing in the whole of uv: a single file that carries its own dependencies and needs nothing else on the machine to work.",
+      "data": {
+        "title": "A script that fixes itself",
+        "subtitle": "uv, chapter four · one file, no setup"
+      },
+      "durationFrames": 306,
+      "audio": "audio/uv-04-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start at the simplest possible version, then work up to that demo.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Running a plain script",
+          "subtitle": "and borrowing a package"
+        }
+      },
+      "durationFrames": 140,
+      "audio": "audio/uv-04-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Typing uv run and a filename runs that file. Where a project already has an environment, uv'll reach for that one. Where a package is missing, you can lend the script one for a single run with dash dash with — exactly the way you lent a tool a plugin two chapters back.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Lend it a package, [once]",
+          "premise": "--with adds a package for this one run and changes nothing on disk.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "--with",
+          "steps": [
+            {
+              "label": "uv run demo.py",
+              "out": [
+                "ModuleNotFoundError: No module named 'rich'"
+              ],
+              "detail": "rich is not on any shelf here",
+              "atWord": 8.667
+            },
+            {
+              "label": "uv run --with rich demo.py",
+              "out": [
+                "Installed 4 packages in 12ms",
+                "hello"
+              ],
+              "detail": "borrowed for exactly one run",
+              "atWord": 18.75
+            },
+            {
+              "label": "uv pip show rich",
+              "out": [
+                "warning: Package(s) not found for: rich"
+              ],
+              "detail": "and gone again immediately afterwards",
+              "atWord": 25.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/uv-04-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Lending works, but lending is fragile, because the knowledge of what the script needs lives in your head and in your shell history. Send the file to a colleague and your colleague gets the same module error you got. The fix, then, has to put that knowledge inside the file itself.",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "orange",
+          "headline": "The knowledge is in [your head]",
+          "premise": "The file says nothing about what it needs, so the file cannot travel alone.",
+          "stageTitle": "why --with does not travel",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "scp demo.py them@laptop:~/",
+              "out": [
+                "demo.py    100%   412"
+              ],
+              "detail": "the file goes. the flag does not.",
+              "atWord": 18.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "you",
+              "sub": "you remember the --with rich",
+              "atWord": 10.5
+            },
+            {
+              "label": "them",
+              "sub": "they get the module error you got",
+              "atWord": 23.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 482,
+      "audio": "audio/uv-04-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "So: how do you write requirements inside a Python file that Python itself will ignore?",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The header",
+          "subtitle": "PEP 723 inline metadata"
+        }
+      },
+      "durationFrames": 179,
+      "audio": "audio/uv-04-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "There's a real Python standard for exactly this, and it's beautifully simple. Put a block of comments at the very top of the file, opened by slash slash slash script and closed by slash slash slash. Python skips the entire block, because comments are comments and the interpreter doesn't care what's inside them. uv reads the very same block and builds an environment out of the contents.",
+      "data": {
+        "uvStage": {
+          "kind": "script-header",
+          "color": "green",
+          "headline": "A comment Python [ignores]",
+          "premise": "Comments to Python. Instructions to uv. The same four lines do both jobs.",
+          "stageTitle": "PEP 723, line by line",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "head -5 demo.py",
+              "out": [
+                "# /// script",
+                "# requires-python = \">=3.12\"",
+                "# dependencies = [\"rich\"]",
+                "# ///"
+              ],
+              "detail": "four comment lines, and a whole environment",
+              "atWord": 19
+            }
+          ],
+          "stage": [
+            {
+              "label": "demo.py",
+              "sub": "one file, nothing beside it",
+              "detail": "and uv built its shelf",
+              "atWord": 10.333
+            },
+            {
+              "label": "# /// script",
+              "sub": "the block opens here",
+              "atWord": 19
+            },
+            {
+              "label": "# requires-python = \">=3.12\"",
+              "sub": "which Python the script needs",
+              "atWord": 28.5
+            },
+            {
+              "label": "# dependencies = [\"rich\"]",
+              "sub": "and what goes on its shelf",
+              "atWord": 33.667
+            },
+            {
+              "label": "# ///",
+              "sub": "the block closes",
+              "atWord": 38.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 715,
+      "audio": "audio/uv-04-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "You never have to type that block by hand. Running uv init dash dash script writes the block for you, and uv add dash dash script edits the block in place afterwards. Which means adding a dependency to a lone file is the same gesture as adding one to a whole project.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "uv writes the [header] for you",
+          "premise": "Two commands create and edit the block, so nobody hand-edits comments.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "--script",
+          "steps": [
+            {
+              "label": "uv init --script demo.py --python 3.12",
+              "out": [
+                "Initialized script at `demo.py`"
+              ],
+              "detail": "the block is written, dependencies empty",
+              "atWord": 12.167
+            },
+            {
+              "label": "uv add --script demo.py rich",
+              "out": [
+                "Resolved 4 packages in 9ms",
+                "Updated `demo.py`"
+              ],
+              "detail": "and now the block names rich",
+              "atWord": 17.917
+            },
+            {
+              "label": "head -4 demo.py",
+              "out": [
+                "# /// script",
+                "# requires-python = \">=3.12\"",
+                "# dependencies = [",
+                "#     \"rich>=15.0.0\","
+              ],
+              "detail": "uv edited the comments, in place",
+              "atWord": 24.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 469,
+      "audio": "audio/uv-04-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Now here's the part that makes people sit up. My init command asked for Python three point twelve, and three point twelve was not on this machine anywhere. uv simply downloaded an entire Python — twenty-one megabytes of interpreter — and carried on without stopping to ask.",
+      "data": {
+        "uvStage": {
+          "kind": "interpreter-rack",
+          "color": "purple",
+          "headline": "It fetched a whole [Python]",
+          "premise": "3.12 was not on this machine, so uv fetched one rather than refusing.",
+          "stageTitle": "asked for, not installed",
+          "token": "uv init --script",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv init --script demo.py --python 3.12",
+              "out": [
+                "Downloading cpython-3.12.14-windows-x86_64 (21.0MiB)",
+                " Downloaded cpython-3.12.14-windows-x86_64",
+                "Initialized script at `demo.py`"
+              ],
+              "detail": "this is chapter one paying off",
+              "atWord": 10.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "cpython-3.12.14",
+              "text": "fetched",
+              "sub": "twenty-one megabytes, unasked",
+              "detail": "now here",
+              "atWord": 16.833
+            },
+            {
+              "label": "your python3",
+              "text": "3.10.4",
+              "sub": "untouched, as always",
+              "atWord": 25.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 495,
+      "audio": "audio/uv-04-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "And none of that would be possible without what chapter one explained. uv is a binary standing beside Python, which means uv can go and fetch a Python. A tool written in Python couldn't manage the same trick, because it'd need an interpreter before it could start looking for one.",
+      "data": {
+        "uvStage": {
+          "kind": "bootstrap-paradox",
+          "color": "green",
+          "headline": "This is [chapter one] paying off",
+          "premise": "A tool inside Python cannot fetch a Python. A binary beside it can.",
+          "stageTitle": "why uv can do this at all",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv python install 3.12",
+              "out": [
+                "Installed Python 3.12.14 in 4.21s"
+              ],
+              "detail": "a Rust binary fetching an interpreter",
+              "atWord": 18.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "CPython 3.12",
+              "sub": "the thing being fetched",
+              "atWord": 13.083
+            },
+            {
+              "label": "pip",
+              "sub": "would need this first, to fetch this",
+              "atWord": 16.917
+            },
+            {
+              "label": "uv",
+              "sub": "needs nothing first",
+              "detail": "which is the whole trick",
+              "atWord": 23
+            }
+          ]
+        }
+      },
+      "durationFrames": 482,
+      "audio": "audio/uv-04-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "Two more things, and then the file becomes genuinely portable.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Making it portable",
+          "subtitle": "the shebang, and locking"
+        }
+      },
+      "durationFrames": 135,
+      "audio": "audio/uv-04-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Put a shebang line at the very top and the file becomes runnable on its own. Mark the file executable, type dot slash demo dot py, and your operating system hands it straight to uv, which reads the header and does everything else. No python command typed anywhere.",
+      "data": {
+        "uvStage": {
+          "kind": "script-header",
+          "color": "blue",
+          "headline": "Run it like [any] program",
+          "premise": "A shebang hands the file to uv, and uv reads the header before running it.",
+          "stageTitle": "the shebang line",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "./demo.py",
+          "steps": [
+            {
+              "label": "chmod +x demo.py && ./demo.py",
+              "out": [
+                "Installed 4 packages in 11ms",
+                "hello from a lone script"
+              ],
+              "detail": "no python, no uv typed at all",
+              "atWord": 23.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "demo.py",
+              "sub": "now executable",
+              "detail": "and it runs itself",
+              "atWord": 9.25
+            },
+            {
+              "label": "#!/usr/bin/env -S uv run --script",
+              "sub": "the shebang, exactly",
+              "atWord": 15.167
+            },
+            {
+              "label": "# /// script",
+              "sub": "and the header underneath it",
+              "atWord": 21
+            }
+          ]
+        }
+      },
+      "durationFrames": 506,
+      "audio": "audio/uv-04-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Now, the header names what the script needs, but not the exact versions, which means two people can still end up with slightly different parcels. Running uv lock dash dash script freezes those versions into a companion file beside the script, and from then on everybody who runs the file gets an identical set — the same guarantee a project lockfile gives you.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "color": "green",
+          "headline": "Freeze it with a [lockfile]",
+          "premise": "A companion file beside the script, holding the exact versions and hashes.",
+          "stageTitle": "demo.py.lock",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "highlight": "--script",
+          "steps": [
+            {
+              "label": "uv lock --script demo.py",
+              "out": [
+                "Resolved 4 packages in 12ms"
+              ],
+              "detail": "and a demo.py.lock appears beside it",
+              "atWord": 19.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "sha256:1f2a9c...",
+              "atWord": 22.667
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "sha256:8b4e10...",
+              "atWord": 26.333
+            },
+            {
+              "label": "mdurl",
+              "text": "0.1.2",
+              "detail": "sha256:aa30de...",
+              "sub": "and everyone gets these exact files",
+              "atWord": 30.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 575,
+      "audio": "audio/uv-04-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "One rule does catch people out, so it's worth saying plainly. When a file carries an inline header, the project around the file is ignored completely — the documentation says the project's dependencies will not be used. Which means a script sitting inside a project still gets a private shelf, built only from that script's own header.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "orange",
+          "headline": "The project is [ignored]",
+          "premise": "A header wins. The surrounding project contributes nothing to the script.",
+          "stageTitle": "header beats project",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv add httpx",
+              "out": [
+                " + httpx==0.28.1"
+              ],
+              "detail": "httpx is now a project dependency",
+              "atWord": 13.083
+            },
+            {
+              "label": "uv run demo.py",
+              "out": [
+                "ModuleNotFoundError: No module named 'httpx'"
+              ],
+              "detail": "and the script still cannot see it",
+              "atWord": 27.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "the project",
+              "text": "httpx",
+              "detail": "ignored",
+              "atWord": 15.583
+            },
+            {
+              "label": "demo.py",
+              "text": "rich",
+              "detail": "its header",
+              "atWord": 23
+            },
+            {
+              "label": "wall",
+              "sub": "a header makes the script its own little world",
+              "atWord": 30.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 582,
+      "audio": "audio/uv-04-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "There's more that fits in the header than a package list. Requires-python sets the interpreter, exclude-newer freezes the whole resolution to a date, and a tool table can carry per-tool configuration. All of it still comments, and Python still ignores every line.",
+      "data": {
+        "uvStage": {
+          "kind": "script-header",
+          "color": "purple",
+          "headline": "What else fits in the [block]",
+          "premise": "Still comments. Still ignored by Python. Considerably more useful than a list.",
+          "stageTitle": "the rest of the header",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv run --exclude-newer 2026-01-01 demo.py",
+              "out": [
+                "Installed 4 packages in 14ms",
+                "hello from a lone script"
+              ],
+              "detail": "resolved as if today were January",
+              "atWord": 23.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "# requires-python",
+              "sub": "which interpreter the script needs",
+              "atWord": 9.25
+            },
+            {
+              "label": "# dependencies",
+              "sub": "what goes on the shelf",
+              "atWord": 12.917
+            },
+            {
+              "label": "# [tool.uv]",
+              "sub": "per-tool settings, still in comments",
+              "atWord": 17.5
+            },
+            {
+              "label": "# exclude-newer",
+              "sub": "pretend nothing was published after a date",
+              "atWord": 22.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 486,
+      "audio": "audio/uv-04-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And because everything lives inside the file, the second run's nearly free. uv keys that little environment on exactly what the header asked for, so as long as the header stays the same, the depot answers and nothing is fetched again.",
+      "data": {
+        "uvStage": {
+          "kind": "depot-cache",
+          "color": "green",
+          "headline": "The second run is [free] too",
+          "premise": "The environment is keyed on the header, so an unchanged header means no fetch.",
+          "stageTitle": "same header, same shelf",
+          "token": "PyPI",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "time uv run demo.py",
+              "out": [
+                "Installed 4 packages in 798ms",
+                "real 0m1.824s"
+              ],
+              "detail": "first run: built from scratch",
+              "atWord": 6.917
+            },
+            {
+              "label": "time uv run demo.py",
+              "out": [
+                "hello from a lone script",
+                "real 0m0.121s"
+              ],
+              "detail": "second run: the header had not changed",
+              "atWord": 17
+            }
+          ],
+          "stage": [
+            {
+              "label": "first run",
+              "text": "1.824s",
+              "sub": "resolved, fetched, built, run",
+              "atWord": 8.5
+            },
+            {
+              "label": "second run",
+              "text": "0.121s",
+              "sub": "the same shelf was already standing",
+              "atWord": 18.5
+            },
+            {
+              "label": "change one line and it rebuilds",
+              "atWord": 20.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 400,
+      "audio": "audio/uv-04-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. A script has an inline header naming rich, and it sits inside a project that depends on httpx. Can the script import httpx? Pause here and think it through before I answer. Ready? No — the header wins, and the project is ignored entirely.",
+      "data": {
+        "quiz": {
+          "question": "Script has a header. Can it import the project’s packages?",
+          "options": [
+            {
+              "text": "Yes, projects win"
+            },
+            {
+              "text": "No — the header wins"
+            },
+            {
+              "text": "Only with uv sync"
+            },
+            {
+              "text": "Only outside .venv"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Inline metadata makes the script its own world, project or no project.",
+          "atWord": 2.75,
+          "revealAtWord": 30.417
+        }
+      },
+      "durationFrames": 529,
+      "audio": "audio/uv-04-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "This is genuinely useful in real life. A one-file utility you can email to somebody. A build step in a repository that needs two libraries nobody wants in the main project. A snippet in a bug report that actually runs on the reader's machine. All of it from four comment lines.",
+      "data": {
+        "uvStage": {
+          "kind": "install-routes",
+          "color": "green",
+          "headline": "Where this actually [pays off]",
+          "premise": "Three ordinary situations where a self-contained file beats a whole project.",
+          "stageTitle": "real uses",
+          "token": "four comment lines",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work",
+          "steps": [
+            {
+              "label": "uv run https://example.com/tidy.py",
+              "out": [
+                "Installed 4 packages in 21ms",
+                "tidied 118 rows"
+              ],
+              "detail": "uv will even run one straight off a URL",
+              "atWord": 26.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "email a utility",
+              "text": "one file",
+              "sub": "and it runs on their machine",
+              "atWord": 9.75
+            },
+            {
+              "label": "a repo build step",
+              "text": "no bloat",
+              "sub": "without adding to the main project",
+              "atWord": 15.417
+            },
+            {
+              "label": "a bug report",
+              "text": "runnable",
+              "sub": "the reader can actually run your snippet",
+              "atWord": 21.917
+            },
+            {
+              "label": "four comment lines",
+              "sub": "is the entire mechanism",
+              "atWord": 27.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 518,
+      "audio": "audio/uv-04-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. To recap, then: a block of comments at the top of a file tells uv what the file needs, and Python ignores those comments completely. uv writes and edits that block for you. And if the Python you asked for is missing, uv fetches it rather than refusing.",
+      "data": {
+        "heading": "Chapter four, in three lines",
+        "points": [
+          {
+            "text": "Four comment lines carry the whole environment",
+            "atWord": 8
+          },
+          {
+            "text": "uv writes and edits that block for you",
+            "atWord": 17.667
+          },
+          {
+            "text": "Missing Python? uv fetches one and carries on.",
+            "atWord": 27.333
+          }
+        ]
+      },
+      "durationFrames": 513,
+      "audio": "audio/uv-04-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter we stop letting Python be something you install by hand, and let uv own every version on your machine instead.",
+      "data": {
+        "message": "Next: let uv own your Pythons",
+        "sub": "the rack, and the pinned one"
+      },
+      "durationFrames": 230,
+      "audio": "audio/uv-04-long_s21.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
