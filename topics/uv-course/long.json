@@ -32,8 +32,7 @@
     "note": "for Python beginners",
     "replaces": {
       "to": "uv",
-      "toAsset": "si:uv",
-      "contextAsset": "si:python"
+      "toAsset": "si:uv"
     }
   },
   "scenes": [

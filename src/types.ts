@@ -11201,7 +11201,7 @@ export interface VideoSpec {
      *  video ARGUES a replacement rather than merely mentioning brands — a logo wall
      *  shows what a video is about, this shows what it claims. `fromAsset`/`toAsset` are
      *  optional because not every tool has a brand mark (pip has none). */
-    replaces?: {from?: string; to: string; fromAsset?: string; toAsset?: string; contextAsset?: string};
+    replaces?: {from?: string; to: string; fromAsset?: string; toAsset?: string};
     /** The rejected word, set large under the title and crossed out with a red bar.
      *  Use INSTEAD of `replaces.from` when the thing being rejected is the headline of
      *  the video rather than a footnote beside it — the title then reads as a lead-in to

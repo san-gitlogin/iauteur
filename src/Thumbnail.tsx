@@ -6,7 +6,7 @@ import {AssetIcon} from './AssetIcon';
 
 // Long-form thumbnail (1280x720). Rule: ≤4 words, one focal icon, readable at 120px.
 // `logo` (brand.logo) stamps the channel mark bottom-right — every thumbnail carries it.
-type Replaces = {from?: string; to: string; fromAsset?: string; toAsset?: string; contextAsset?: string};
+type Replaces = {from?: string; to: string; fromAsset?: string; toAsset?: string};
 
 const STRIKE = '#ff4d4d';
 
@@ -39,7 +39,10 @@ const Struck: React.FC<{text: string; size: number; color: string; font: string}
  *
  * `fromAsset` / `toAsset` are optional because not everything has a brand mark — pip has
  * no simple-icons glyph, and giving it one it does not own would be an invention (LAW 3).
- * `contextAsset` is the ecosystem the argument sits in (Python), set small and dim above.
+ *
+ * Deliberately NO third "context" mark above the block. It was tried — a dim Python glyph
+ * over the uv panel — and it read as an orphan floating off the block's axis rather than
+ * as context (owner, 2026-08-22). The ecosystem belongs in the words, not in a spare logo.
  */
 const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
   const t = useTheme();
@@ -53,9 +56,6 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
                  gap: 20, flex: '0 0 auto'}}>
-      {r.contextAsset ? (
-        <AssetIcon asset={r.contextAsset} size={76} bare tint={t.colors.muted} />
-      ) : null}
       {/* the rejected thing, when it is not already in the title */}
       {r.from ? (
         <div style={{display: 'flex', alignItems: 'center', gap: 14, opacity: 0.78}}>
