@@ -3,9 +3,10 @@ import {useCurrentFrame} from 'remotion';
 import {useTheme} from './themes';
 import {SemColor} from './types';
 import {useScale, useSem, hexA} from './ui';
-import {stackBudget} from './dsaViz';
+import {stackBudget, pulseAt} from './dsaViz';
 import {liveAt, usePulse} from './linuxViz';
 import {UnknownKind} from './unknownKind';
+import {AssetIcon} from './AssetIcon';
 
 /**
  * uv depictions — the pictures for the uv course.
@@ -27,7 +28,13 @@ import {UnknownKind} from './unknownKind';
  * runs on a fixed frame interval (LAW 0i defect 1).
  *
  * Sizing: every depiction reads `stackBudget()` and divides the REAL measured pane height.
- * Nothing is sized to a constant (LAW 0o rule 1).
+ * Nothing is sized to a constant (LAW 0o rule 1). The `Math.min(budget * f, CONST)` in
+ * each one is a CEILING for the crowded case and must never be the binding term in the
+ * ordinary one — the first pass got that wrong in five of eight kinds, drawing the
+ * warehouse wall at 17% of the pane's height and floating it in the middle, which is
+ * LAW 0o's "patty inside a burger" exactly. `scripts/pane-fill.mjs` measures the ink box
+ * against the pane and reports the fraction; run it before accepting a new kind, because
+ * a contact sheet makes an undersized picture look composed.
  */
 
 /**
@@ -47,6 +54,10 @@ export interface UvVizItem {
   color?: SemColor;
   atWord?: number;
   out?: string[];
+  /** `lucide:<name>` / `si:<brand>` — the station glyph in `env-ceremony`. LAW 0n:
+   *  four things on screen must be four RECOGNISABLE objects, never four copies of
+   *  one generic box with different words in it. */
+  icon?: string;
 }
 
 export interface UvVizProps {
@@ -199,7 +210,7 @@ const PkgIndex: React.FC<UvVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const cols = v.vertical ? 4 : 6;
   const rows = 3;
-  const cellH = Math.min((budget * 0.62) / rows, 54 * v.scale);
+  const cellH = Math.min((budget * 0.66) / rows, 150 * v.scale);
   const cellW = cellH * 1.35;
   const chosen = items.find((i) => i.color) ?? items[0];
   const chosenOn = liveAt(frame, chosen?.atWord);
@@ -244,26 +255,51 @@ const DepUnfold: React.FC<UvVizProps> = ({items, accent}) => {
   if (!root) return null;
   const rootOn = liveAt(frame, root.atWord);
   const rootH = Math.min(budget * 0.26, 96 * v.scale);
-  const depH = Math.min((budget * 0.5) / Math.max(deps.length, 1) - 8 * v.scale, 74 * v.scale);
+  // The note has a SPINE: one vertical line out of the parcel with a stub to each
+  // dependency, so the deps visibly hang off the thing that named them. The first
+  // version centred the root and left-aligned the deps with a stub pointing at
+  // nothing, which read as two unrelated pictures stacked.
+  const gap = 6 * v.scale;
+  const rows = Math.max(deps.length, 1);
+  const depH = Math.max(26 * v.scale,
+    Math.min((budget * 0.52 - gap * (rows - 1)) / rows, 74 * v.scale));
+  const depW = depH * 2.4;
+  const rootW = rootH * 2.2;
+  const spineX = rootW * 0.16;     // under the root's left third, so it reads as hanging
+  const stub = 22 * v.scale;
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
-                 justifyContent: 'center', gap: 8 * v.scale, width: '100%', height: '100%'}}>
-      <Parcel name={root.label ?? ''} version={root.text} on={rootOn} v={v}
-              w={rootH * 2.2} h={rootH} pulse={usePulse(root.atWord)} />
-      {/* the note that unfolds out of it — the reason the others are here */}
-      <div style={{width: 2 * v.scale, height: 14 * v.scale * rootOn, background: hexA(v.a, 0.5)}} />
-      <div style={{display: 'flex', flexDirection: 'column', gap: 6 * v.scale, width: '100%',
-                   alignItems: 'stretch', minWidth: 0}}>
+                 justifyContent: 'center', width: '100%', height: '100%', minHeight: 0}}>
+      {/* ONE relative group: the root, the spine that leaves its underside, and the
+          dependencies hanging off it. Rendered as three separate centred blocks it read
+          as two unrelated pictures with a stub pointing at nothing. */}
+      <div style={{position: 'relative', display: 'flex', flexDirection: 'column',
+                   alignItems: 'flex-start', minWidth: 0}}>
+        <Parcel name={root.label ?? ''} version={root.text} on={rootOn} v={v}
+                w={rootW} h={rootH} pulse={usePulse(root.atWord)} />
+        <div style={{position: 'relative', display: 'flex', flexDirection: 'column', gap,
+                     alignItems: 'flex-start', minWidth: 0,
+                     paddingLeft: spineX + stub, paddingTop: 10 * v.scale}}>
+          {/* the spine — it grows out of the parcel as the root lands */}
+          <div style={{position: 'absolute', left: spineX, top: 0,
+                       width: 2 * v.scale,
+                       height: (10 * v.scale + (depH + gap) * (rows - 1) + depH / 2) * rootOn,
+                       background: hexA(v.a, 0.5)}} />
         {deps.map((d, i) => {
           const on = liveAt(frame, d.atWord);
           return (
             <div key={i} style={{display: 'flex', alignItems: 'center', gap: 9 * v.scale,
-                                 opacity: 0.2 + on * 0.8,
-                                 transform: `translateX(${(1 - on) * 16 * v.scale}px)`, minWidth: 0}}>
+                                 height: depH, opacity: 0.2 + on * 0.8,
+                                 transform: `translateX(${(1 - on) * 16 * v.scale}px)`,
+                                 minWidth: 0}}>
+              {/* the stub from the spine to this parcel */}
+              <div style={{position: 'absolute', left: spineX, width: stub * on,
+                           height: 2 * v.scale, background: hexA(v.a, 0.4),
+                           top: 10 * v.scale + (depH + gap) * i + depH / 2}} />
               <Parcel name={d.label ?? ''} version={d.text} on={on} v={v}
-                      w={depH * 2.4} h={depH} tone={d.value === 0 ? 'muted' : 'accent'} />
+                      w={depW} h={depH} tone={d.value === 0 ? 'muted' : 'accent'} />
               {d.detail ? (
-                <div style={{...v.mono(Math.max(10, depH * 0.22)), color: v.dim, minWidth: 0,
+                <div style={{...v.mono(Math.max(9, depH * 0.22)), color: v.dim, minWidth: 0,
                              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
                   {d.detail}
                 </div>
@@ -271,6 +307,7 @@ const DepUnfold: React.FC<UvVizProps> = ({items, accent}) => {
             </div>
           );
         })}
+        </div>
       </div>
     </div>
   );
@@ -287,9 +324,9 @@ const ShelfShare: React.FC<UvVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const wrongShelf = token === 'wrong-shelf';
   const [a, b, slot] = items;
-  const fH = Math.min(budget * 0.24, 96 * v.scale);
+  const fH = Math.min(budget * 0.24, 124 * v.scale);
   const fW = fH * 1.5;
-  const pH = Math.min(budget * 0.2, 74 * v.scale);
+  const pH = Math.min(budget * 0.2, 98 * v.scale);
   const aOn = liveAt(frame, a?.atWord);
   const bOn = liveAt(frame, b?.atWord);
   const sOn = liveAt(frame, slot?.atWord);
@@ -344,7 +381,7 @@ const ShelfEvict: React.FC<UvVizProps> = ({items, accent}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const [old, next, broken] = items;
-  const pH = Math.min(budget * 0.22, 86 * v.scale);
+  const pH = Math.min(budget * 0.22, 116 * v.scale);
   const pW = pH * 2.3;
   const oldOn = liveAt(frame, old?.atWord);
   const evict = liveAt(frame, next?.atWord, 16);   // the newcomer's arrival IS the eviction
@@ -405,7 +442,7 @@ const ShelfSplit: React.FC<UvVizProps> = ({items, accent}) => {
   const budget = stackBudget(v);
   const [a, b, wall] = items;
   const wallOn = liveAt(frame, wall?.atWord ?? b?.atWord, 18);
-  const fH = Math.min(budget * 0.2, 78 * v.scale);
+  const fH = Math.min(budget * 0.2, 112 * v.scale);
   const fW = fH * 1.6;
   const pH = fH * 0.85;
   const gap = 18 * v.scale + wallOn * 34 * v.scale; // the shelves physically separate
@@ -449,7 +486,7 @@ const TwoProjects: React.FC<UvVizProps> = ({items, accent}) => {
   const [touched, victim] = items;
   const tOn = liveAt(frame, touched?.atWord);
   const dark = liveAt(frame, victim?.atWord, 20);
-  const fH = Math.min(budget * 0.34, 150 * v.scale);
+  const fH = Math.min(budget * 0.34, 200 * v.scale);
   const fW = fH * 1.45;
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -472,59 +509,122 @@ const TwoProjects: React.FC<UvVizProps> = ({items, accent}) => {
 };
 
 // ── 8 · env-ceremony ─────────────────────────────────────────────────────────
-// The ritual you must perform every time — and, on the last anchor, the whole column
-// collapsing into one line. items[0..n-1] = the steps. The LAST item is the collapse
-// (label = the single command that replaces all of it).
+// A RING, not a list.
+//
+// The first version of this drew the steps as numbered rows that lit up in order, and
+// the MAX fixture rendered nine identical text rows in the right-hand pane — which is
+// precisely the defect this whole course was designed around ("the right pane is not a
+// list"; four sampled frames of the shipped Linux cut were the same lit-rows template).
+// Found by proofing a still, not by reading the code.
+//
+// The idea being taught is that this is a LOOP: you make the environment, switch it on,
+// carry the memory of which one you are in, switch it off — and then you are back at the
+// start, every single time, for every project, forever. A loop is a shape. So the
+// stations sit around a ring with a marker travelling it, each station a recognisable
+// object rather than a sentence. On the final anchor the ring contracts and one command
+// takes its place, which is the payoff drawn rather than captioned.
+//
+// items[0..n-2] = the stations (label = the short name, icon = the object).
+// items[n-1]    = the collapse (label = the single command that replaces the ring).
 const EnvCeremony: React.FC<UvVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const steps = items.slice(0, -1);
+  const stations = items.slice(0, -1).slice(0, 6);   // six is all a ring can seat legibly
   const collapse = items[items.length - 1];
   const cOn = items.length > 1 ? liveAt(frame, collapse?.atWord, 20) : 0;
-  const stepH = Math.min((budget * 0.62) / Math.max(steps.length, 1) - 6 * v.scale, 56 * v.scale);
+
+  // The ring is sized from the MEASURED pane, never a constant (LAW 0o rule 1).
+  // Sized from the MEASURED pane. The first pass capped the ring at 340 design px and it
+  // floated in the middle of a pane twice its height — the "patty inside a burger" LAW 0o
+  // was written about. The label sits OUTSIDE its circle, so the ring must leave a node's
+  // width of margin all round rather than filling the budget outright.
+  const ring = Math.min(budget * 0.80, (v.vertical ? 470 : 400) * v.scale);
+  const R = ring / 2;
+  const node = Math.min(ring * 0.24, 92 * v.scale);
+  // The marker's position IS the last station that has fired — the loop advances on the
+  // voice, not on a timer (LAW 0i).
+  const lastLive = stations.reduce((acc, st, i) => (liveAt(frame, st.atWord) > 0.5 ? i : acc), -1);
+  const markerAngle = ((lastLive < 0 ? 0 : lastLive + 1) / stations.length) * Math.PI * 2 - Math.PI / 2;
+
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
-                 justifyContent: 'center', gap: 10 * v.scale, width: '100%', height: '100%'}}>
-      <div style={{display: 'flex', flexDirection: 'column', gap: 6 * v.scale,
-                   width: '100%', alignItems: 'stretch',
-                   // the collapse: the whole stack squeezes to nothing
-                   maxHeight: (1 - cOn) * budget * 0.66, opacity: 1 - cOn,
-                   transform: `scaleY(${1 - cOn * 0.6})`, transformOrigin: 'top center',
-                   overflow: 'hidden'}}>
-        {steps.map((s, i) => {
-          const on = liveAt(frame, s.atWord);
+                 justifyContent: 'center', gap: 10 * v.scale, width: '100%', height: '100%',
+                 minHeight: 0}}>
+      <div style={{
+        position: 'relative', width: ring, height: ring,
+        // the collapse: the ring shrinks out of existence rather than fading, because
+        // the point is that the work GOES AWAY, not that it becomes faint
+        transform: `scale(${1 - cOn * 0.82})`, opacity: 1 - cOn,
+        flex: '0 0 auto',
+      }}>
+        {/* THE LOOP ITSELF — one drawn circle, so "again" is visible without a caption */}
+        <svg width={ring} height={ring} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
+          <circle cx={R} cy={R} r={R - node * 0.55} fill="none"
+                  stroke={hexA(v.a, 0.32)} strokeWidth={2 * v.scale}
+                  strokeDasharray={`${7 * v.scale} ${7 * v.scale}`} />
+        </svg>
+        {stations.map((st, i) => {
+          const a = (i / stations.length) * Math.PI * 2 - Math.PI / 2;
+          const on = liveAt(frame, st.atWord);
+          // pulseAt, not usePulse: a hook inside a .map() is a hook in a loop. Every
+          // other depiction in this file resolves through the pure `liveAt` for exactly
+          // this reason, and the ring is the first one with a real list to walk.
+          const pulse = pulseAt(frame, st.atWord);
+          const cx = R + Math.cos(a) * (R - node * 0.55) - node / 2;
+          const cy = R + Math.sin(a) * (R - node * 0.55) - node / 2;
           return (
             <div key={i} style={{
-              display: 'flex', alignItems: 'center', gap: 9 * v.scale,
-              height: stepH, boxSizing: 'border-box',
-              padding: `0 ${11 * v.scale}px`,
-              border: `${1.5 * v.scale}px solid ${hexA(v.t.colors.panelBorder, 0.5 + on * 0.4)}`,
-              background: hexA(v.t.colors.panel, 0.25 + on * 0.2),
-              borderRadius: v.rad(6),
-              opacity: 0.2 + on * 0.8,
-              transform: `translateX(${(1 - on) * 14 * v.scale}px)`, minWidth: 0,
+              position: 'absolute', left: cx, top: cy, width: node, height: node,
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              justifyContent: 'center', gap: 3 * v.scale,
+              border: `${1.8 * v.scale}px solid ${hexA(v.a, 0.25 + on * 0.6)}`,
+              background: hexA(v.t.colors.panel, 0.5 + on * 0.25),
+              borderRadius: '50%',
+              opacity: 0.3 + on * 0.7,
+              transform: `scale(${(0.9 + on * 0.1) * (1 + pulse * 0.08)})`,
+              boxSizing: 'border-box', padding: 4 * v.scale,
             }}>
-              <div style={{...v.mono(Math.max(10, stepH * 0.3)), color: hexA(v.a, 0.9),
-                           fontWeight: 800, flex: '0 0 auto'}}>{i + 1}</div>
-              <div style={{...v.mono(Math.max(11, stepH * 0.3)), color: v.t.colors.text, minWidth: 0,
-                           whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
-                {s.label}
+              {st.icon ? (
+                <AssetIcon asset={st.icon} size={node * 0.5} bare
+                           tint={hexA(v.a, 0.5 + on * 0.5)} on={v.t.colors.panel} />
+              ) : (
+                <div style={{...v.mono(node * 0.34), color: hexA(v.a, 0.9), fontWeight: 800}}>{i + 1}</div>
+              )}
+              {/* the name sits OUTSIDE the circle. Inside, "switch it on" wrapped and
+                  spilled over its own border and over the ring behind it. */}
+              <div style={{
+                position: 'absolute', top: '100%', left: '50%',
+                transform: `translate(-50%, ${3 * v.scale}px)`,
+                width: node * 2.05, textAlign: 'center',
+                ...v.mono(Math.max(10, node * 0.19)), color: v.t.colors.text,
+                lineHeight: 1.15, whiteSpace: 'nowrap', overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}>
+                {st.label}
               </div>
             </div>
           );
         })}
+        {/* the marker going round — the thing that makes it read as "again, and again" */}
+        <div style={{
+          position: 'absolute',
+          left: R + Math.cos(markerAngle) * (R - node * 0.55) - 5 * v.scale,
+          top: R + Math.sin(markerAngle) * (R - node * 0.55) - 5 * v.scale,
+          width: 10 * v.scale, height: 10 * v.scale, borderRadius: '50%',
+          background: v.a, opacity: lastLive < 0 ? 0 : 1,
+        }} />
       </div>
       {collapse && cOn > 0.02 ? (
         <div style={{
           opacity: cOn, transform: `scale(${0.94 + cOn * 0.06})`,
           border: `${2 * v.scale}px solid ${hexA(v.a, 0.8)}`,
           background: hexA(v.a, 0.14), borderRadius: v.rad(8),
-          padding: `${10 * v.scale}px ${18 * v.scale}px`, maxWidth: '100%',
+          padding: `${10 * v.scale}px ${18 * v.scale}px`, maxWidth: '100%', flex: '0 0 auto',
         }}>
-          <div style={{...v.mono(Math.max(13, 22 * v.scale / Math.max(v.scale, 0.0001) * v.scale * 0.9)),
-                       color: v.t.colors.text, fontWeight: 800, whiteSpace: 'nowrap',
-                       overflow: 'hidden', textOverflow: 'ellipsis'}}>
+          <div style={{...v.mono(Math.max(14, 22 * v.scale)), color: v.t.colors.text,
+                       fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden',
+                       textOverflow: 'ellipsis'}}>
             {collapse.label}
           </div>
           {collapse.sub ? (

@@ -6393,6 +6393,9 @@ export interface UvStageItem {
   atWord?: number;
   /** Real terminal output, one string per line. Verbatim, never invented (LAW 0m). */
   out?: string[];
+  /** `lucide:<name>` / `si:<brand>` — the station glyph on the env-ceremony ring. Four
+   *  things on screen must be four recognisable OBJECTS, not four boxes (LAW 0n). */
+  icon?: string;
 }
 
 export interface UvStageData {

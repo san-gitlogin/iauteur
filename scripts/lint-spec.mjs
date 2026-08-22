@@ -1745,7 +1745,11 @@ for (const s of spec.scenes ?? []) {
       E(`${id}: UV_STAGE unknown kind "${u.kind}" — must be one of ${KINDS.join(', ')}. It would render as UNKNOWN DEPICTION KIND.`);
     if (u.layout && !['split','terminal'].includes(u.layout))
       E(`${id}: UV_STAGE layout must be "split" or "terminal"`);
-    if (len(u.headline) > 48) E(`${id}: UV_STAGE headline > 48 chars`);
+    // 38, not 48. Measured off the MAX fixture: at 1920 wide the headline band is one
+    // line tall (top 110, stage top 212, line-height ~78), and 48 chars wraps in every
+    // pack — the second line landed ON the premise and ON the stage border. 38 fits one
+    // line in the widest-glyph pack at 16:9 and two comfortable lines at 9:16.
+    if (len(u.headline) > 38) E(`${id}: UV_STAGE headline > 38 chars — it wraps onto the stage at 16:9`);
     if (len(u.premise) > 120) E(`${id}: UV_STAGE premise > 120 chars — it must stay readable at a glance (LAW 0l)`);
     if (len(u.stageTitle) > 30) E(`${id}: UV_STAGE stageTitle > 30 chars`);
     if (len(u.verdict) > 40) E(`${id}: UV_STAGE verdict > 40 chars`);
@@ -1758,16 +1762,32 @@ for (const s of spec.scenes ?? []) {
     if (st.length > 5) E(`${id}: UV_STAGE max 5 steps (got ${st.length})`);
     if (term && !st.length) E(`${id}: UV_STAGE layout:"terminal" with no steps draws an empty screen`);
     for (const x of st) {
-      if (len(x.label) > 44) E(`${id}: UV_STAGE step "${x.label}" > 44 chars`);
+      // 52, not 44: the real install one-liner is
+      // `curl -LsSf <the astral.sh install url> | sh` at 46 visible chars, and LAW 0m
+      // forbids trimming a real artefact to fit a cap somebody guessed. Proved against
+      // the MAX fixture at both aspects before the number was raised.
+      if (len(x.label) > 52) E(`${id}: UV_STAGE step "${x.label}" > 52 chars`);
       if (len(x.detail) > 48) E(`${id}: UV_STAGE step detail > 48 chars`);
       for (const o of x.out ?? []) if (len(o) > 62) E(`${id}: UV_STAGE output line > 62 chars — trim the real output, never shrink the type (LAW 0m)`);
       if ((x.out ?? []).length > 9) E(`${id}: UV_STAGE step has ${x.out.length} output lines (max 9)`);
       if (x.atWord == null) W(`${id}: UV_STAGE step "${x.label}" has no atWord — it will type immediately instead of on its word (LAW 0i)`);
     }
     const sg = u.stage ?? [];
-    if (sg.length > 10) E(`${id}: UV_STAGE max 10 stage items (got ${sg.length})`);
+    // Per-kind CEILINGS, measured from stills rather than assumed. A blanket "max 10"
+    // let `dep-unfold` render ten parcels squeezed to unreadable slivers with the tenth
+    // clipping the pane, and let `env-ceremony` seat more stations than a ring can hold.
+    // Each picture has a real capacity; the cap is that capacity, not a round number.
+    const MAXI = {'pkg-parcel': 4, 'pkg-index': 6, 'dep-unfold': 6, 'shelf-share': 3,
+                  'shelf-evict': 3, 'shelf-split': 3, 'two-projects': 2, 'env-ceremony': 7};
+    const cap = (!term && u.kind && MAXI[u.kind]) || 10;
+    if (sg.length > cap)
+      E(`${id}: UV_STAGE kind "${u.kind ?? '?'}" draws at most ${cap} stage item(s), got ${sg.length} — beyond that the picture stops being readable`);
+    // `env-ceremony` draws COMMANDS, not package names, and a command is longer than a
+    // name: `source .venv/bin/activate` is 25. Every other kind labels a parcel or a
+    // folder, where 22 is already generous and a longer label means the wrong noun.
+    const labelCap = u.kind === 'env-ceremony' ? 40 : 22;
     for (const x of sg) {
-      if (len(x.label) > 22) E(`${id}: UV_STAGE stage label "${x.label}" > 22 chars`);
+      if (len(x.label) > labelCap) E(`${id}: UV_STAGE stage label "${x.label}" > ${labelCap} chars`);
       if (len(x.text) > 14) E(`${id}: UV_STAGE stage text "${x.text}" > 14 chars`);
       if (len(x.sub) > 54) E(`${id}: UV_STAGE stage sub > 54 chars`);
       if (len(x.detail) > 34) E(`${id}: UV_STAGE stage detail > 34 chars`);
@@ -1778,6 +1798,16 @@ for (const s of spec.scenes ?? []) {
     const NEED = {'pkg-parcel':1,'pkg-index':1,'dep-unfold':2,'shelf-share':3,'shelf-evict':2,'shelf-split':2,'two-projects':2,'env-ceremony':2};
     if (!term && u.kind && NEED[u.kind] && sg.length < NEED[u.kind])
       E(`${id}: UV_STAGE kind "${u.kind}" needs >= ${NEED[u.kind]} stage item(s), got ${sg.length}`);
+    // THE TERMINAL PANE DOES NOT SCROLL. Five steps at nine output lines each is 45
+    // lines plus prompts and notes; the MAX fixture rendered two and a half commands and
+    // cut the third mid-line at the pane border, with no affordance saying more exists.
+    // Counted the way the pane stacks it: one line per command, one per output line, one
+    // per detail note. The split layout gives the terminal ~46% of the stage; a
+    // terminal-only beat gets the lot.
+    const lines = st.reduce((n, x) => n + 1 + (x.out?.length ?? 0) + (x.detail ? 1 : 0), 0);
+    const lineCap = term ? 26 : 17;
+    if (lines > lineCap)
+      E(`${id}: UV_STAGE terminal holds ${lineCap} lines, this beat asks for ${lines} (commands + output + notes). The pane does not scroll — cut the transcript to the lines that carry the point.`);
   }
   if (d.setLogic) {
     const sl = d.setLogic;

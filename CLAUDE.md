@@ -310,6 +310,50 @@ linter (the kind is chosen inside the component, never in the spec) and rendered
 it before any render. A seal like that must be tested by BREAKING a real file on purpose — the first
 version of that script reported a green tick while blind to 110 of 140 call sites.
 
+Corollary — **`Math.min(budget * f, CONST)` — the CONST must never be the binding term.**
+Every depiction caps its size against a constant so it stays sane when crowded. That
+constant is a CEILING for the crowded case; the moment it binds in the ordinary case the
+picture floats in a pane two to five times its height, which is the "patty inside a
+burger" complaint. Five of eight uv depictions shipped that way on the first pass —
+`pkg-index` drew its warehouse wall at 24% of the pane's height. **`scripts/pane-fill.mjs`
+measures the ink box against the pane and prints the fraction**; run it on every new kind,
+at both aspects, because a contact sheet makes an undersized picture look composed. Two
+caveats it states about itself: a terminal-layout beat has no right pane and reads ~0%,
+and deliberately DIM content needs the low ink threshold or a full pane reads as a third
+of one.
+
+Corollary — **proof at the CAPS, not at the content you happen to have written.** A MIX
+fixture (the realistic content) showed none of the four layout defects a MAX fixture
+(every field at the linter's cap, every collection at its ceiling) showed immediately: a
+2-line headline landing on the premise and on the stage border, a terminal pane cut
+mid-line with no affordance, ten dependency parcels squeezed to unreadable slivers, and a
+verdict rendered on every beat and visible on none of them. Whatever the linter permits,
+somebody will eventually author. `scripts/gen-uv-fixtures.mjs` is the pattern: generate
+MIN (sparsest legal) / MAX (at every cap) / MIX (what ships) from the linter's own bound
+tables, so the fixture cannot drift from the contract it is testing.
+
+Corollary — **a cap is a measurement, not a taste.** Three UV_STAGE caps were wrong on the
+first pass and all three were found by rendering: the headline cap of 48 wrapped in every
+pack at 16:9 (now 38); the step-label cap of 44 was shorter than the real install
+one-liner at 46, which LAW 0m forbids trimming (now 52); and a blanket "max 10 stage
+items" ignored that each picture has its own capacity (now per-kind, 2 to 7). When you
+write a number into the linter, say in the comment what you measured to get it.
+
+Corollary — **a component with a payoff STATE needs a fixture per state.** `env-ceremony`
+holds a ring that turns and then collapses into one command. One still at the 55% mark
+caught the collapse and never showed the ring — half the component shipped unlooked-at
+until a second fixture held the collapse anchor back.
+
+Corollary — **a list-shaped data model becomes a list on screen.** `env-ceremony` took
+`items[]` of steps and rendered them as numbered rows that lit up in order; at its cap
+that is nine identical text rows in the right-hand pane — the exact lit-rows template
+four sampled frames of the shipped Linux cut all shared, reproduced in a course written
+to avoid it. The idea was a LOOP, and a loop is a shape: it is now a ring of six
+recognisable objects with a marker travelling it and a collapse at the end. **Before you
+write the component, say the SHAPE out loud** — a ring, a spine, a shelf, a wall going
+up. If the answer is "the items, in order", you have a caption list, whatever the field
+names say.
+
 ## LAW 0o — THE PANE MEASURES ITSELF, AND NOTHING LEAVES IT (owner verdict, 2026-08-21)
 Owner, on the reworked MCP shorts: *"I see the top and bottom are getting overlapped with the
 content inside, there is no room to breathe."* And separately, on a Linux chart: *"the graph is

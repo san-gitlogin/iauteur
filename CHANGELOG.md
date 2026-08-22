@@ -17,6 +17,68 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### 2026-08-22 — proofing the eight uv depictions found six defects and three wrong caps
+
+162 stills — 8 kinds x MIN/MAX/MIX + 2 terminal-layout + a ring-state fixture, at both
+aspects, on `terminalcli`, `neobrutalism` and `material`. Every one scanned rather than
+eyeballed. Final state: `edge-scan` 0 flags across all 162; `pane-fill` clean except two
+deliberately compact two-object pictures (~32-41%) and the terminal-layout rows, which
+have no right pane to fill.
+
+#### Fixed — `env-ceremony` was a list, which is the one thing this course cannot ship
+
+It took `items[]` and drew numbered rows lighting up in order. At its cap that is nine
+identical text rows in the right-hand pane: the lit-rows template four sampled frames of
+the shipped Linux cut all shared, reproduced inside the course written to avoid it. The
+idea is a LOOP, and a loop is a shape — it is now a ring of six recognisable objects
+(`lucide:package-plus`, `toggle-right`, `brain`, `toggle-left`, `rotate-ccw`,
+`alarm-clock`) with a marker travelling it, contracting into one command on the payoff.
+Recorded as a LAW 0n corollary: say the SHAPE out loud before writing the component; if
+the answer is "the items, in order", it is a caption list whatever the field names say.
+
+#### Fixed — the verdict rendered on every beat and was visible on none
+
+Every uv depiction sets `height:100%` on its own root. Inside the effect pane's flex
+column that claimed the whole pane and pushed `VizVerdict` out under `overflow:hidden`.
+The pane's budget already reserved the strip, so the arithmetic looked right in review and
+was wrong on screen. Found by proofing a still.
+
+#### Fixed — three more layout defects, all of them MAX-only
+
+A 48-char headline wraps in every pack at 16:9 and the second line landed on the premise
+and on the stage border. The terminal pane, which does not scroll, was cut mid-line with
+no affordance at 45 output lines. `dep-unfold` squeezed ten parcels to unreadable slivers
+with the tenth clipping the pane, and hung its spine in space instead of off the parcel
+that named the dependencies. **The MIX fixture showed none of these** — which is the
+lesson: proof at the caps, because whatever the linter permits somebody will author.
+
+#### Changed — three UV_STAGE caps, each replaced by a measurement
+
+| Cap | Was | Now | Why |
+|---|---|---|---|
+| `headline` | 48 | 38 | 48 wraps onto the stage at 16:9; 38 is one line in the widest-glyph pack |
+| `steps[].label` | 44 | 52 | the real install one-liner is 46 visible chars, and LAW 0m forbids trimming a real artefact to fit a guess |
+| `stage[]` count | 10, flat | 2-7, per kind | each picture has its own capacity; a blanket ceiling let two of them burst |
+
+Plus two new rules: a total terminal-line budget (17 split / 26 terminal, counting
+commands + output lines + notes, because the pane does not scroll), and a wider stage
+label cap for `env-ceremony`, whose labels are commands rather than package names. All
+five were proved by injecting the violation and watching each one fire.
+
+#### Added — `scripts/pane-fill.mjs` and `scripts/gen-uv-fixtures.mjs`
+
+`pane-fill` measures the depiction's ink box against the pane and prints the fraction —
+the counterpart to `edge-scan`, which catches content spilling OUT while this catches
+content that never grew IN. It found that five of eight uv depictions had a size ceiling
+binding before the measured budget did, floating the picture in a pane up to five times
+its height. It also documents two things about itself, because both cost a wrong
+conclusion first: a terminal-layout beat has no right pane and reads ~0%, and the ink
+threshold has to be low enough to see deliberately DIM content or a full pane reads as a
+third of one.
+
+`gen-uv-fixtures` generates MIN / MAX / MIX from the linter's own bound tables, so the
+fixture cannot drift from the contract it is testing.
+
 ### 2026-08-22 — one scene type, eight pictures: the uv course stage
 
 #### Added — `UV_STAGE`, and a viz registry that cannot fail quietly

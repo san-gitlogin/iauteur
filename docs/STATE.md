@@ -58,6 +58,32 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-08-22 — uv course: the eight depictions are proofed
+
+162 stills — 8 kinds x MIN/MAX/MIX + 2 terminal-layout + a ring-state fixture, both
+aspects, three packs (`terminalcli`, `neobrutalism`, `material`). Regenerate with
+`node scripts/gen-uv-fixtures.mjs <out.json>` then `node scripts/_proof.mjs <out.json>
+<pack> <tag>`; scan with `scripts/edge-scan.mjs` (content spilling OUT) and the new
+`scripts/pane-fill.mjs` (content that never grew IN).
+
+**Six defects found, all by rendering, none by review.** `env-ceremony` was a numbered
+list — the lit-rows template this course exists to avoid — and is now a ring of six
+recognisable objects; the verdict rendered on every beat and was visible on none (a
+`height:100%` root claiming the whole flex column); a 48-char headline wrapped onto the
+premise and the stage border; the terminal pane was cut mid-line at 45 output lines; and
+`dep-unfold` both burst at ten items and hung its spine in space. Four of the six were
+invisible in the MIX (realistic) fixture and obvious in the MAX (at-the-caps) one.
+
+**Three caps were wrong and are now measurements** — headline 48→38, step label 44→52
+(the real install one-liner is 46 chars and LAW 0m forbids trimming it), stage items
+10-flat→2-7 per kind. Two new rules: a total terminal-line budget (17 split / 26
+terminal — the pane does not scroll) and a wider label cap for `env-ceremony`, whose
+labels are commands. Each of the five was proved by injecting the violation.
+
+Final state: `edge-scan` 0 flags on all 162; `pane-fill` clean except two deliberately
+compact two-object pictures (32-41%) and the terminal-layout rows, which have no right
+pane. `npm run gate` 11 seals, `tsc` 0, census 342/342/342 with 0 defects.
+
 ### 2026-08-22 — uv course: the stage is built and sealed
 
 `UV_STAGE` is wired and green — **one** scene type for the whole 14-chapter course, plus

@@ -51,7 +51,11 @@ export const UvStage: React.FC<{scene: Scene}> = ({scene}) => {
           top: (d.headline ? (vertical ? 322 : 212) : 90) * scale,
           left: (vertical ? 52 : 72) * scale,
           right: (vertical ? 52 : 72) * scale,
-          height: (vertical ? 1364 : 620) * scale,
+          // The house floor: 212 + 620 = 832 wide, 322 + 1364 = 1686 vertical. 141
+          // scenes hard-code the height and duplicate the arithmetic; stating the
+          // FLOOR instead means a headline that pushes `top` down cannot push the
+          // stage through the bottom of the frame.
+          height: ((vertical ? 1686 : 832) - (d.headline ? (vertical ? 322 : 212) : 90)) * scale,
           display: 'flex',
           flexDirection: 'column',
           gap: d.premise ? (vertical ? 14 : 12) * scale : 0,
@@ -91,13 +95,23 @@ export const UvStage: React.FC<{scene: Scene}> = ({scene}) => {
           >
             {terminalOnly ? null : (
               <>
-                <UvViz
-                  kind={d.kind ?? ''}
-                  items={(d.stage ?? []).slice(0, 10)}
-                  accent={accent}
-                  token={d.token}
-                />
-                <VizVerdict text={d.verdict} sub={d.verdictSub} color={accent} atWord={d.verdictAtWord} />
+                {/* The depiction is a FLEX CHILD, not a 100%-height block. Every uv
+                    depiction sets height:100% on its own root, and inside the effect
+                    pane's flex column that made it claim the whole pane and push the
+                    verdict out under `overflow:hidden` — the verdict rendered on every
+                    beat and was visible on none of them. Caught by proofing stills, not
+                    by reading the code. The pane's budget already reserves the strip. */}
+                <div style={{flex: '1 1 auto', minHeight: 0, display: 'flex', minWidth: 0}}>
+                  <UvViz
+                    kind={d.kind ?? ''}
+                    items={(d.stage ?? []).slice(0, 10)}
+                    accent={accent}
+                    token={d.token}
+                  />
+                </div>
+                <div style={{flex: '0 0 auto'}}>
+                  <VizVerdict text={d.verdict} sub={d.verdictSub} color={accent} atWord={d.verdictAtWord} />
+                </div>
               </>
             )}
           </CommandStage>
