@@ -1,0 +1,959 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #9 — The lockfile, and why your teammate gets the same thing",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "The lockfile records exact bytes rather than version numbers, and uv sync makes your folder match it exactly — removing anything that is not recorded.",
+    "openLoop": "It works on your machine and fails on theirs. What actually stops that?",
+    "analogy": "A packing list with an exact identity and a wax seal against every line.",
+    "topicAxes": [
+      "economic-pain",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #9 — uv.lock Explained (and Why uv sync Deletes Things) (2026)",
+      "altTitles": [
+        "The uv lockfile: hashes, universal resolution and --exact"
+      ],
+      "description": "Chapter nine of the uv course. Locking versus syncing, what is really inside uv.lock, why a sha256 beats a version number, universal cross-platform resolution, --locked and --frozen for CI, and why uv sync removes packages you installed behind its back.",
+      "tags": [
+        "uv",
+        "python",
+        "uv.lock",
+        "lockfile",
+        "uv sync",
+        "astral uv",
+        "reproducible builds",
+        "python packaging",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT DELETED MY PACKAGE",
+    "badge": "uv · 09",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "It works on your machine. It fails on theirs. Same code, same command.",
+      "data": {
+        "headline": "WORKS ON MY MACHINE",
+        "subtext": "the oldest excuse there is",
+        "heroAsset": "lucide:laptop",
+        "headlineAtWord": 2,
+        "heroAtWord": 7
+      },
+      "durationFrames": 177,
+      "audio": "audio/uv-09-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Your pyproject says rich greater-than-or-equal-to fifteen. You installed it in March, and got fifteen point zero. Your colleague clones the repo in June, when sixteen is out, and gets sixteen. Same file, two different sets of packages. So what stops the drift?",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "orange",
+          "headline": "Same file, [different] packages",
+          "premise": "A range is a permission, not an instruction. Two people can both obey it differently.",
+          "stageTitle": "the drift",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "grep rich pyproject.toml",
+              "out": [
+                "    \"rich>=15.0.0\","
+              ],
+              "detail": "a floor. anything above it is allowed.",
+              "atWord": 4.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "you, in March",
+              "sub": "installed rich 15.0.0",
+              "atWord": 11.5
+            },
+            {
+              "label": "them, in June",
+              "sub": "installed rich 16.0.0",
+              "atWord": 21.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 506,
+      "audio": "audio/uv-09-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter is about the file that makes two machines identical, and about the one uv behaviour that genuinely startles people coming from pip.",
+      "data": {
+        "title": "The lockfile",
+        "subtitle": "uv, chapter nine · exact bytes, not version numbers"
+      },
+      "durationFrames": 285,
+      "audio": "audio/uv-09-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start by separating two words that get used interchangeably and mean different things.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Locking and syncing",
+          "subtitle": "two jobs, two commands"
+        }
+      },
+      "durationFrames": 168,
+      "audio": "audio/uv-09-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Locking is deciding. Given your requirements, uv works out one exact set of versions that satisfies all of them, then writes the decision down. Syncing is doing: uv reads that decision and makes your folder match it. Two separate jobs, and keeping the two apart is what makes the whole arrangement reliable.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "color": "blue",
+          "headline": "Deciding, then [doing]",
+          "premise": "Lock writes down one exact answer. Sync makes your folder match that answer.",
+          "stageTitle": "lock, then sync",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv lock",
+              "out": [
+                "Resolved 13 packages in 152ms"
+              ],
+              "detail": "decided, and written down",
+              "atWord": 12.833
+            },
+            {
+              "label": "uv sync",
+              "out": [
+                "Resolved 13 packages in 1ms",
+                "Checked 13 packages in 3ms"
+              ],
+              "detail": "done — and Checked means already correct",
+              "atWord": 25.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "sha256:1f2a9c...",
+              "atWord": 14.5
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "sha256:8b4e10...",
+              "atWord": 21.417
+            },
+            {
+              "label": "pytest",
+              "text": "9.1.1",
+              "detail": "sha256:41ee9b...",
+              "sub": "one exact answer, written down",
+              "atWord": 28.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 555,
+      "audio": "audio/uv-09-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "You'll almost never type uv lock yourself, though, because every command that touches your environment locks first. Adding a package locks. Running your code locks. Syncing locks. So the file stays correct without anybody maintaining anything, which is rather the point of the design.",
+      "data": {
+        "uvStage": {
+          "kind": "env-ceremony",
+          "color": "green",
+          "headline": "You rarely [type] it yourself",
+          "premise": "Every command that touches the environment locks first, so the file stays current.",
+          "stageTitle": "locking, invisibly",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv run main.py",
+              "out": [
+                "Resolved 13 packages in 2ms",
+                "Audited 13 packages in 0.1ms",
+                "ok"
+              ],
+              "detail": "it locked, checked and ran, in one line",
+              "atWord": 20.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "uv add",
+              "icon": "lucide:package-plus",
+              "atWord": 9.833
+            },
+            {
+              "label": "uv run",
+              "icon": "lucide:play",
+              "atWord": 13.417
+            },
+            {
+              "label": "uv sync",
+              "icon": "lucide:refresh-cw",
+              "atWord": 16.083
+            },
+            {
+              "label": "uv lock",
+              "sub": "and all three do this one first",
+              "atWord": 22.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 492,
+      "audio": "audio/uv-09-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Open the file, because there's a field in it doing more work than you'd expect.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Inside uv.lock",
+          "subtitle": "and the hash"
+        }
+      },
+      "durationFrames": 145,
+      "audio": "audio/uv-09-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Here's a real entry. A name, a version, where the package came from, and then a hash — sha256, followed by sixty-four characters. The hash isn't decoration. A version number tells you which release arrived; a hash tells you which exact bytes arrived. Those are genuinely different promises.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "color": "purple",
+          "headline": "A version, and a [seal]",
+          "premise": "A version names a release. A hash names the exact file, byte for byte.",
+          "stageTitle": "a real lockfile entry",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "sha256",
+          "steps": [
+            {
+              "label": "head -12 uv.lock",
+              "out": [
+                "[[package]]",
+                "name = \"colorama\"",
+                "version = \"0.4.6\"",
+                "source = { registry = \"https://pypi.org/simple\" }",
+                "wheels = [{ url = \"...\", hash = \"sha256:4f1d99...\" }]"
+              ],
+              "detail": "the hash is the interesting field",
+              "atWord": 10.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "colorama",
+              "text": "0.4.6",
+              "detail": "sha256:4f1d99...",
+              "atWord": 17.333
+            },
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "sha256:1f2a9c...",
+              "atWord": 22.167
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "sha256:8b4e10...",
+              "sub": "the same bytes on every machine, or none",
+              "atWord": 29.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 577,
+      "audio": "audio/uv-09-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Why does the difference matter? Because a version number can in principle be re-uploaded, and because any download can be corrupted or intercepted on the way. A hash catches both problems. If the bytes arriving don't match the recorded hash, uv refuses to install rather than hoping for the best.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "red",
+          "headline": "The hash is a [check], not a label",
+          "premise": "If the bytes arriving do not match the recorded hash, uv stops rather than hoping.",
+          "stageTitle": "what the seal is for",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv sync",
+              "out": [
+                "x Failed to install: rich-15.0.0-py3-none-any.whl",
+                "  Caused by: Hash mismatch for rich==15.0.0"
+              ],
+              "detail": "refused. not installed-and-hoped-for.",
+              "atWord": 23.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich-15.0.0.whl",
+              "text": "15.0.0",
+              "atWord": 11.417
+            },
+            {
+              "label": "a version check",
+              "sub": "passed",
+              "detail": "the number is right",
+              "atWord": 18
+            },
+            {
+              "label": "the hash check",
+              "sub": "failed",
+              "detail": "the bytes are not",
+              "atWord": 24.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 511,
+      "audio": "audio/uv-09-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "The lockfile is also universal, which is a genuinely unusual property. One file covers every platform — Windows, macOS, Linux, several Python versions — so a colleague on a different operating system resolves from your file rather than needing one of their own.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "token": "two-machines",
+          "color": "green",
+          "headline": "One file, [every] platform",
+          "premise": "The same lockfile answers for Windows, macOS and Linux, and several Pythons.",
+          "stageTitle": "the same list, both machines",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "grep -c \"resolution-markers\" uv.lock",
+              "out": [
+                "4"
+              ],
+              "detail": "four platform answers, in one file",
+              "atWord": 19.833
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "sha256:1f2a9c...",
+              "atWord": 10.333
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "sha256:8b4e10...",
+              "atWord": 14.667
+            },
+            {
+              "label": "colorama",
+              "text": "0.4.6",
+              "detail": "windows only",
+              "sub": "and the markers say who gets it",
+              "atWord": 22.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 466,
+      "audio": "audio/uv-09-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "And now the behaviour that surprises everybody who arrives from pip.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "sync is exact",
+          "subtitle": "and it will delete things"
+        }
+      },
+      "durationFrames": 137,
+      "audio": "audio/uv-09-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "I installed typer behind uv's back, using the pip interface. Then I ran a plain uv sync. Watch what happened: uv uninstalled three packages nobody asked it to touch. Not a bug — sync is exact by default, and exact means the folder must match the lockfile, with nothing extra sitting alongside.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-evict",
+          "color": "red",
+          "headline": "uv sync [removes] extras",
+          "premise": "Exact means the folder matches the lockfile. Anything else is an extra, and goes.",
+          "stageTitle": "the surprising default",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "Uninstalled",
+          "steps": [
+            {
+              "label": "uv pip install typer",
+              "out": [
+                " + typer==0.27.1"
+              ],
+              "detail": "installed behind uv’s back, on purpose",
+              "atWord": 8.417
+            },
+            {
+              "label": "uv sync",
+              "out": [
+                "Resolved 13 packages in 1ms",
+                "Uninstalled 3 packages in 47ms",
+                " - annotated-doc==0.0.5",
+                " - shellingham==1.5.4",
+                " - typer==0.27.1"
+              ],
+              "detail": "three gone, and nobody asked for that",
+              "atWord": 20.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "typer",
+              "text": "0.27.1",
+              "value": 0,
+              "sub": "not in the lockfile",
+              "atWord": 23.417
+            },
+            {
+              "label": "the lockfile",
+              "text": "13 pkgs",
+              "sub": "and the folder now matches exactly",
+              "atWord": 30.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 606,
+      "audio": "audio/uv-09-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Which sounds alarming, and is precisely the point. If uv left extras alone, your environment would slowly fill with packages nobody ever recorded, and sooner or later one such package would be the reason something broke. Exact means the folder always tells the truth about the file.",
+      "data": {
+        "uvStage": {
+          "kind": "shelf-split",
+          "color": "green",
+          "headline": "Alarming, and [correct]",
+          "premise": "An environment that keeps extras drifts. An exact one always matches the file.",
+          "stageTitle": "why exact is the default",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--inexact",
+          "steps": [
+            {
+              "label": "uv sync --inexact",
+              "out": [
+                "Resolved 13 packages in 1ms"
+              ],
+              "detail": "if you really want extras left alone",
+              "atWord": 24.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "the lockfile",
+              "text": "13 pkgs",
+              "detail": "recorded",
+              "atWord": 11.25
+            },
+            {
+              "label": "your .venv",
+              "text": "13 pkgs",
+              "detail": "installed",
+              "atWord": 17.333
+            },
+            {
+              "label": "wall",
+              "sub": "and nothing can drift in between them",
+              "atWord": 23.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 511,
+      "audio": "audio/uv-09-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three flags matter on a build machine. Locked fails if the lockfile is out of date, which is exactly what you want in continuous integration — a refusal beats a helpful silent update. Frozen uses the file as it stands and never re-resolves. And no-sync locks without touching your environment at all.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "blue",
+          "headline": "Three flags for [CI]",
+          "premise": "On a build machine you want a refusal, not a helpful silent update.",
+          "promptLabel": "ci@runner",
+          "cwd": "/build/invoice-app",
+          "highlight": "--locked",
+          "steps": [
+            {
+              "label": "uv sync --locked",
+              "out": [
+                "error: The lockfile at `uv.lock` needs to be updated,",
+                "but `--locked` was provided."
+              ],
+              "detail": "the build fails, which is correct here",
+              "atWord": 12.583
+            },
+            {
+              "label": "uv run --frozen main.py",
+              "out": [
+                "ok"
+              ],
+              "detail": "use the file as-is, never re-resolve",
+              "atWord": 23.5
+            },
+            {
+              "label": "uv lock --no-sync",
+              "out": [
+                "Resolved 13 packages in 140ms"
+              ],
+              "detail": "decide, without touching the folder",
+              "atWord": 28.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 544,
+      "audio": "audio/uv-09-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "One more thing's worth knowing, because it surprises people in the opposite direction. New releases are ignored until you explicitly ask for them. A newer rich comes out, and nothing happens — no automatic upgrade, no quiet drift. You ask, or the version stays exactly where it is.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "blue",
+          "headline": "New releases are [ignored]",
+          "premise": "A newer version existing is not a reason to change anything. You have to ask.",
+          "stageTitle": "nothing moves on its own",
+          "token": "until you ask for it",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv sync",
+              "out": [
+                "Resolved 13 packages in 1ms",
+                "Audited 13 packages in 0.1ms"
+              ],
+              "detail": "rich 16 is out. nothing happened.",
+              "atWord": 18.25
+            },
+            {
+              "label": "uv lock --upgrade-package rich",
+              "out": [
+                "Updated rich v15.0.0 -> v16.0.0"
+              ],
+              "detail": "and now, because you asked",
+              "atWord": 27.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "sub": "15.0, 15.1, 16.0",
+              "atWord": 7.833
+            },
+            {
+              "label": "allowed",
+              "text": "0.20..1.00",
+              "detail": ">=15.0.0",
+              "atWord": 15.583
+            },
+            {
+              "label": "locked at",
+              "text": "0.20..0.32",
+              "detail": "15.0.0",
+              "atWord": 24.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 521,
+      "audio": "audio/uv-09-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "A fair question at this point: when does the lockfile actually go stale? The answer's narrower than most people expect. Changing a requirement so the locked version no longer qualifies makes it stale. Loosening a constraint that still allows the locked version does not, because the recorded answer is still a valid one.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "purple",
+          "headline": "When it goes [stale]",
+          "premise": "Stale means the recorded answer is no longer allowed — not merely no longer newest.",
+          "stageTitle": "still valid, or not",
+          "token": "loosening is still valid",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add \"rich>=14\" && uv lock --check",
+              "out": [
+                "Resolved 13 packages in 1ms"
+              ],
+              "detail": "looser, and 15.0.0 still qualifies",
+              "atWord": 22
+            },
+            {
+              "label": "uv add \"rich>=16\" && uv lock --check",
+              "out": [
+                "error: The lockfile needs to be updated"
+              ],
+              "detail": "now the locked answer is not allowed",
+              "atWord": 29.583
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "sub": "14.0, 15.0, 16.0, 17.0",
+              "atWord": 8.417
+            },
+            {
+              "label": "locked at",
+              "text": "0.30..0.40",
+              "detail": "15.0.0",
+              "atWord": 16.917
+            },
+            {
+              "label": ">=16 wants",
+              "text": "0.60..1.00",
+              "detail": "stale now",
+              "value": 0,
+              "atWord": 28.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 559,
+      "audio": "audio/uv-09-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "It's also worth saying plainly what the lockfile is not. Nobody edits the file by hand. uv.lock is generated, regenerated constantly, and any hand edit gets overwritten by the next command you run. Treat the file as output — read it, review it in a pull request, and never type into it.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "orange",
+          "headline": "Read it. Never [edit] it.",
+          "premise": "Generated output, regenerated constantly. A hand edit lasts until the next command.",
+          "stageTitle": "output, not input",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "sed -i \"s/15.0.0/99.0.0/\" uv.lock && uv sync",
+              "out": [
+                "Resolved 13 packages in 148ms",
+                "Audited 13 packages in 0.1ms"
+              ],
+              "detail": "your edit lasted exactly one command",
+              "atWord": 25.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "uv.lock",
+              "text": "generated",
+              "atWord": 12.417
+            },
+            {
+              "label": "reviewing it",
+              "sub": "yes — a diff shows every version change",
+              "detail": "do this",
+              "atWord": 18.25
+            },
+            {
+              "label": "editing it",
+              "sub": "no — the next command overwrites you",
+              "detail": "not this",
+              "atWord": 25.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 539,
+      "audio": "audio/uv-09-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And the diff is genuinely useful in review. Because uv.lock is text, and every entry carries a version and a hash, a pull request bumping one dependency shows exactly which packages moved and which stayed put — considerably better than trusting a summary line in a commit message.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "color": "green",
+          "headline": "The diff is the [review]",
+          "premise": "Plain text, one entry per package, so a version bump is visible line by line.",
+          "stageTitle": "what a bump looks like",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "git diff --stat uv.lock",
+              "out": [
+                " uv.lock | 6 +++---"
+              ],
+              "detail": "six lines changed, out of four hundred",
+              "atWord": 19.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "16.0.0",
+              "detail": "changed",
+              "atWord": 11.167
+            },
+            {
+              "label": "markdown-it-py",
+              "text": "4.2.0",
+              "detail": "unchanged",
+              "atWord": 18
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "unchanged",
+              "sub": "one package moved, twelve did not",
+              "atWord": 24.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 514,
+      "audio": "audio/uv-09-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. You pip-install something into a uv project, then run uv sync. What happens to that package? Pause the video here and decide before I say anything. Ready? uv removes it, because sync is exact and the package is not in the lockfile.",
+      "data": {
+        "quiz": {
+          "question": "pip-installed a package, then ran uv sync. What happens?",
+          "options": [
+            {
+              "text": "It stays, uv ignores it"
+            },
+            {
+              "text": "uv removes it — sync is exact"
+            },
+            {
+              "text": "uv adds it to the lockfile"
+            },
+            {
+              "text": "uv warns and stops"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Not in the lockfile means not in the folder. --inexact opts out.",
+          "atWord": 2.583,
+          "revealAtWord": 23.417
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/uv-09-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "So commit the lockfile. That one file turns works-on-my-machine into works-everywhere, it's plain text so a code review can actually read it, and it costs you nothing at all, because uv keeps the file correct on your behalf.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "token": "two-machines",
+          "color": "green",
+          "headline": "Commit it, and [stop] worrying",
+          "premise": "The same thirteen packages, the same thirteen hashes, on both machines.",
+          "stageTitle": "both machines, identical",
+          "promptLabel": "them@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "git clone ... && uv sync",
+              "out": [
+                "Creating virtual environment at: .venv",
+                "Installed 13 packages in 62ms"
+              ],
+              "detail": "sixty-two milliseconds to identical",
+              "atWord": 13.917
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "sha256:1f2a9c...",
+              "atWord": 7.75
+            },
+            {
+              "label": "pygments",
+              "text": "2.21.0",
+              "detail": "sha256:8b4e10...",
+              "atWord": 12.417
+            },
+            {
+              "label": "pytest",
+              "text": "9.1.1",
+              "detail": "sha256:41ee9b...",
+              "sub": "the same exact bytes, on both machines",
+              "atWord": 17.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 375,
+      "audio": "audio/uv-09-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. Locking decides one exact set of versions and writes them down with their hashes. Syncing makes your folder match, exactly, removing anything that isn't recorded. And nothing upgrades until you explicitly ask for it.",
+      "data": {
+        "heading": "Chapter nine, in three lines",
+        "points": [
+          {
+            "text": "Lock decides. Sync does. Different jobs.",
+            "atWord": 6.75
+          },
+          {
+            "text": "A hash says which bytes, not which release",
+            "atWord": 15.333
+          },
+          {
+            "text": "sync is exact — extras are removed",
+            "atWord": 23
+          }
+        ]
+      },
+      "durationFrames": 447,
+      "audio": "audio/uv-09-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter, what happens when two packages want versions that cannot both be true, and how uv explains its own refusal in plain English.",
+      "data": {
+        "message": "Next: how uv chooses versions",
+        "sub": "and what it says when it cannot"
+      },
+      "durationFrames": 269,
+      "audio": "audio/uv-09-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

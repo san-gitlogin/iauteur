@@ -1,0 +1,928 @@
+{
+  "meta": {
+    "topic": "uv Python Tutorial #10 — How uv chooses versions",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "dojo",
+    "onePayoff": "Resolution is overlapping ranges on a version line, and when no overlap exists uv refuses and explains its reasoning in plain English.",
+    "openLoop": "Two packages want different versions of the same thing. Who wins?",
+    "analogy": "Bracketed ranges laid across one number line, and the overlap is the answer.",
+    "topicAxes": [
+      "skill-acquisition",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "uv Python Tutorial #10 — How uv Resolves Versions (and Reads You Its Reasoning) (2026)",
+      "altTitles": [
+        "Understanding uv dependency resolution and conflict messages"
+      ],
+      "description": "Chapter ten of the uv course. Resolution as overlapping ranges, reading a real \"No solution found\" message step by step, --resolution lowest-direct for testing the floors you published, universal versus platform resolution, and environment markers.",
+      "tags": [
+        "uv",
+        "python",
+        "dependency resolution",
+        "resolver",
+        "astral uv",
+        "version conflict",
+        "pubgrub",
+        "python packaging",
+        "python tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "paper",
+    "design": "terminalcli",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "NO SOLUTION FOUND",
+    "badge": "uv · 10",
+    "asset": "si:uv"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Two packages want different versions of the same thing. Now what?",
+      "data": {
+        "headline": "THEY CANNOT BOTH WIN",
+        "subtext": "so which one does?",
+        "heroAsset": "lucide:git-merge",
+        "headlineAtWord": 1,
+        "heroAtWord": 5.167
+      },
+      "durationFrames": 135,
+      "audio": "audio/uv-10-long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "UV_STAGE",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Chapter zero ended with pip overwriting one package with another and reporting success. Here's uv, handed the same impossible request. uv refuses — and then uv explains, in ordinary English, exactly why. Read it, because that paragraph is the whole chapter.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "red",
+          "headline": "It refuses, and [explains]",
+          "premise": "The same impossible request pip accepted. uv stops, and says why in English.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "we can conclude",
+          "steps": [
+            {
+              "label": "uv add \"pytest==9.1.1\" \"pluggy<1.0\"",
+              "out": [
+                "x No solution found when resolving dependencies:",
+                "  Because pytest>=9.1.1 depends on pluggy>=1.5,<2 and your",
+                "  project depends on pluggy<1.0, we can conclude that your",
+                "  project and pytest>=9.1.1 are incompatible.",
+                "  And because your project depends on pytest==9.1.1, we can",
+                "  conclude that your requirements are unsatisfiable."
+              ],
+              "detail": "no overwrite. no success message. a refusal.",
+              "atWord": 11.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 518,
+      "audio": "audio/uv-10-long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Welcome back. This chapter is about how a package manager decides, what it does when no decision exists, and how to read the paragraph it hands you when that happens.",
+      "data": {
+        "title": "How uv chooses versions",
+        "subtitle": "uv, chapter ten · and what it says when it cannot"
+      },
+      "durationFrames": 290,
+      "audio": "audio/uv-10-long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Start with the easy case, so the hard one has something to be compared against.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "When it works",
+          "subtitle": "brackets that overlap"
+        }
+      },
+      "durationFrames": 157,
+      "audio": "audio/uv-10-long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Picture one line, with every released version of a package laid along it. Each package wanting that thing lays a bracketed range across the line. Wherever all the brackets overlap, any version inside the overlap will do — and uv picks one. That's resolution, and honestly there's nothing more to it.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "green",
+          "headline": "Where the brackets [overlap]",
+          "premise": "One line of versions. Each asker lays a bracketed range across it.",
+          "stageTitle": "the easy case",
+          "token": "the overlap is the answer",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add foo bar",
+              "out": [
+                "Resolved 3 packages in 88ms",
+                " + lib==2.0.0"
+              ],
+              "detail": "both asks satisfied by one version",
+              "atWord": 27.167
+            }
+          ],
+          "stage": [
+            {
+              "label": "lib",
+              "sub": "1.0, 1.5, 2.0, 2.5, 3.0",
+              "atWord": 7.917
+            },
+            {
+              "label": "foo wants",
+              "text": "0.15..1.00",
+              "detail": ">=1.0.0",
+              "atWord": 16.667
+            },
+            {
+              "label": "bar wants",
+              "text": "0.45..1.00",
+              "detail": ">=2.0.0",
+              "atWord": 23.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 557,
+      "audio": "audio/uv-10-long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "In that example foo will take anything from one upwards, and bar needs two or better. Both are satisfied from two onwards, so uv takes two point zero — the lowest version inside the overlap that also happens to be the highest available answer that both accept.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "blue",
+          "headline": "One answer, [both] satisfied",
+          "premise": "The overlap is where both brackets agree. uv picks a version from inside it.",
+          "stageTitle": "the overlap",
+          "token": "lib 2.0.0",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv tree | head -4",
+              "out": [
+                "invoice-app v0.1.0",
+                "├── bar v1.0.0",
+                "│   └── lib v2.0.0",
+                "└── foo v1.0.0"
+              ],
+              "detail": "one copy of lib, and both are happy",
+              "atWord": 20.75
+            }
+          ],
+          "stage": [
+            {
+              "label": "lib",
+              "sub": "1.0, 1.5, 2.0, 2.5, 3.0",
+              "atWord": 6.167
+            },
+            {
+              "label": "foo wants",
+              "text": "0.15..1.00",
+              "detail": ">=1.0.0",
+              "atWord": 11.583
+            },
+            {
+              "label": "bar wants",
+              "text": "0.45..1.00",
+              "detail": ">=2.0.0",
+              "atWord": 17.667
+            },
+            {
+              "label": "uv picks",
+              "text": "0.45..0.55",
+              "detail": "lib 2.0.0",
+              "atWord": 23.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 455,
+      "audio": "audio/uv-10-long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "transition": "blinds",
+      "background": "zoneB",
+      "narration": "Now the case that actually teaches you something.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "When it cannot",
+          "subtitle": "reading a real refusal"
+        }
+      },
+      "durationFrames": 102,
+      "audio": "audio/uv-10-long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "UV_STAGE",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "I asked for pytest nine point one point one, and at the same time for pluggy below one point zero. Pytest needs pluggy at one point five or above. Those two brackets sit on opposite ends of the line and never touch. No version of pluggy can satisfy both, so no answer exists.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "red",
+          "headline": "Brackets that never [touch]",
+          "premise": "pytest needs pluggy 1.5 or above. You asked for below 1.0. Nothing is in both.",
+          "stageTitle": "no overlap at all",
+          "token": "no version satisfies both",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv pip index versions pluggy | head -2",
+              "out": [
+                "pluggy",
+                "Available versions: 1.6.0, 1.5.0, 1.2.0, 1.0.0, 0.13.1"
+              ],
+              "detail": "every version there has ever been",
+              "atWord": 12.333
+            },
+            {
+              "label": "uv add \"pytest==9.1.1\" \"pluggy<1.0\"",
+              "out": [
+                "x No solution found when resolving dependencies:"
+              ],
+              "detail": "and not one of them satisfies both",
+              "atWord": 26.333
+            }
+          ],
+          "stage": [
+            {
+              "label": "pluggy",
+              "sub": "0.9, 1.0, 1.2, 1.5, 2.0",
+              "atWord": 8.25
+            },
+            {
+              "label": "pytest wants",
+              "text": "0.60..0.95",
+              "detail": ">=1.5,<2",
+              "atWord": 16.417
+            },
+            {
+              "label": "you want",
+              "text": "0.02..0.28",
+              "detail": "<1.0",
+              "value": 0,
+              "atWord": 26.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 544,
+      "audio": "audio/uv-10-long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "UV_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "And here's the part worth slowing down for. uv doesn't merely announce a failure. uv walks you through the reasoning one step at a time: because pytest depends on pluggy above one point five, and because your project depends on pluggy below one point zero, we can conclude the two are incompatible. A proof, written in English.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "orange",
+          "headline": "A proof, in [plain English]",
+          "premise": "Because … and because … we can conclude. Read it as the argument it is.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "Because",
+          "steps": [
+            {
+              "label": "uv add \"pytest==9.1.1\" \"pluggy<1.0\"",
+              "out": [
+                "  Because pytest>=9.1.1 depends on pluggy>=1.5,<2 and your",
+                "  project depends on pluggy<1.0, we can conclude that your",
+                "  project and pytest>=9.1.1 are incompatible.",
+                "  And because your project depends on pytest==9.1.1, we can",
+                "  conclude that your requirements are unsatisfiable."
+              ],
+              "detail": "two steps, and the conclusion follows",
+              "atWord": 12.5
+            },
+            {
+              "label": "echo $?",
+              "out": [
+                "1"
+              ],
+              "detail": "and it exits non-zero, so CI stops too",
+              "atWord": 31.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 593,
+      "audio": "audio/uv-10-long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Which tells you where to look. Either loosen your own pin on pluggy, because you may not really need one below one point zero, or loosen the pin on pytest, because an older pytest might accept an older pluggy. Two ends of one line, and you get to choose which one moves.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "green",
+          "headline": "Move [one] of the brackets",
+          "premise": "A refusal names both constraints. Loosen either, and the overlap can appear.",
+          "stageTitle": "two ways out",
+          "token": "move either end",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add \"pytest==9.1.1\" \"pluggy>=1.5\"",
+              "out": [
+                "Resolved 13 packages in 210ms",
+                " + pluggy==1.6.0"
+              ],
+              "detail": "moved your bracket, and it resolved",
+              "atWord": 21.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "pluggy",
+              "sub": "0.9, 1.0, 1.2, 1.5, 2.0",
+              "atWord": 6.25
+            },
+            {
+              "label": "pytest wants",
+              "text": "0.60..0.95",
+              "detail": ">=1.5,<2",
+              "atWord": 13.833
+            },
+            {
+              "label": "you now want",
+              "text": "0.60..1.00",
+              "detail": ">=1.5",
+              "atWord": 21.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 454,
+      "audio": "audio/uv-10-long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "There's a hint at the bottom of that error too, and the hint deserves a warning. uv offers dash dash frozen, which skips locking entirely and writes the requirement down anyway. Occasionally that's the right move, but frozen stores the problem rather than solving it — read the hint as an escape hatch, never as advice.",
+      "data": {
+        "uvStage": {
+          "kind": "strict-gate",
+          "color": "orange",
+          "headline": "The hint is an [escape hatch]",
+          "premise": "--frozen skips locking and adds it anyway. The conflict does not go away.",
+          "stageTitle": "not advice",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--frozen",
+          "steps": [
+            {
+              "label": "uv add --frozen \"pluggy<1.0\"",
+              "out": [
+                "warning: Skipping lock and sync",
+                "Updated pyproject.toml"
+              ],
+              "detail": "written down, and still unsatisfiable",
+              "atWord": 29.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "pluggy<1.0",
+              "text": "requested",
+              "atWord": 13.75
+            },
+            {
+              "label": "without --frozen",
+              "sub": "refused, with a reason",
+              "detail": "solved",
+              "atWord": 20.667
+            },
+            {
+              "label": "with --frozen",
+              "sub": "recorded, and still impossible",
+              "detail": "postponed",
+              "atWord": 29.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 599,
+      "audio": "audio/uv-10-long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "Three settings change how uv chooses, and each exists for a real reason.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Choosing differently",
+          "subtitle": "highest, lowest, and why"
+        }
+      },
+      "durationFrames": 161,
+      "audio": "audio/uv-10-long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "UV_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "By default uv picks the highest version each constraint allows, which is what you almost always want. Lowest picks the earliest instead. And lowest-direct takes the earliest for the packages you named yourself, while still taking the highest for everything they dragged in.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "blue",
+          "headline": "Highest, lowest, [lowest-direct]",
+          "premise": "Three strategies. Default is highest; the others exist for testing your floors.",
+          "stageTitle": "three strategies",
+          "token": "--resolution",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv lock --resolution lowest-direct",
+              "out": [
+                "Resolved 13 packages in 190ms",
+                "Updated rich v15.0.0 -> v15.0.0"
+              ],
+              "detail": "your floors, tested honestly",
+              "atWord": 23.25
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "sub": "14.0, 15.0, 15.1, 16.0, 17.0",
+              "atWord": 6.917
+            },
+            {
+              "label": "you allow",
+              "text": "0.25..1.00",
+              "detail": ">=15.0.0",
+              "atWord": 12.083
+            },
+            {
+              "label": "highest picks",
+              "text": "0.86..1.00",
+              "detail": "17.0",
+              "atWord": 18.083
+            },
+            {
+              "label": "lowest picks",
+              "text": "0.25..0.38",
+              "detail": "15.0.0",
+              "atWord": 22.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 465,
+      "audio": "audio/uv-10-long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Why would anyone want the lowest? Because your pyproject claims your code works with rich fifteen or newer, and nobody has ever checked that claim. Running your tests on the lowest allowed versions is the only way to find out whether the promise you published is actually true.",
+      "data": {
+        "uvStage": {
+          "kind": "two-projects",
+          "color": "purple",
+          "headline": "It tests the [promise] you made",
+          "premise": "Your floors are a public claim. Resolving lowest is how you check the claim.",
+          "stageTitle": "is your floor honest?",
+          "promptLabel": "ci@runner",
+          "cwd": "/build/invoice-app",
+          "steps": [
+            {
+              "label": "uv run --resolution lowest-direct pytest",
+              "out": [
+                "E   AttributeError: module rich has no attribute Group",
+                "1 failed in 0.42s"
+              ],
+              "detail": "the floor you published was a fiction",
+              "atWord": 21.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "the default run",
+              "sub": "newest versions, and everything passes",
+              "atWord": 9.75
+            },
+            {
+              "label": "the lowest run",
+              "sub": "oldest allowed, and your tests fail",
+              "atWord": 20.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 452,
+      "audio": "audio/uv-10-long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "One more distinction is worth knowing. Resolving a project produces a universal answer, valid on every platform at once. The pip interface resolves for the machine you happen to be standing on instead. Same resolver, two different questions — which is why one produces a portable lockfile and the other cannot.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "token": "two-machines",
+          "color": "green",
+          "headline": "Universal, or [this machine]",
+          "premise": "A project resolves for every platform at once. The pip interface resolves for one.",
+          "stageTitle": "two different questions",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "grep -c \"sys_platform\" uv.lock",
+              "out": [
+                "9"
+              ],
+              "detail": "nine platform conditions, in one file",
+              "atWord": 22.333
+            },
+            {
+              "label": "uv pip compile pyproject.toml | head -2",
+              "out": [
+                "# via -r pyproject.toml",
+                "rich==15.0.0"
+              ],
+              "detail": "and the pip interface answers for here only",
+              "atWord": 30.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "colorama",
+              "text": "0.4.6",
+              "detail": "windows only",
+              "atWord": 12.5
+            },
+            {
+              "label": "tomli",
+              "text": "2.4.1",
+              "detail": "python < 3.11 only",
+              "atWord": 19.667
+            },
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "everywhere",
+              "sub": "and each line records who gets it",
+              "atWord": 27.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 568,
+      "audio": "audio/uv-10-long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "UV_STAGE",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "narration": "Those little conditions are called markers, and markers are how one file stays correct everywhere. Colorama is only needed on Windows. Tomli is only needed before Python three point eleven. So a single lockfile records which packages apply to whom, and every machine reads its own answer straight out of it.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "blue",
+          "headline": "Markers say [who] gets what",
+          "premise": "A condition attached to a dependency: this one only applies under these terms.",
+          "stageTitle": "conditions, not exceptions",
+          "token": "one file, many answers",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "grep -B1 sys_platform uv.lock | head -4",
+              "out": [
+                "name = \"colorama\"",
+                "marker = \"sys_platform == 'win32'\""
+              ],
+              "detail": "a plain condition, in the file",
+              "atWord": 27.083
+            }
+          ],
+          "stage": [
+            {
+              "label": "python",
+              "sub": "3.9, 3.10, 3.11, 3.12, 3.13",
+              "atWord": 10.833
+            },
+            {
+              "label": "tomli applies",
+              "text": "0.02..0.48",
+              "detail": "< 3.11",
+              "atWord": 22.583
+            },
+            {
+              "label": "not needed after",
+              "text": "0.52..1.00",
+              "detail": ">= 3.11",
+              "value": 0,
+              "atWord": 29.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 574,
+      "audio": "audio/uv-10-long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "A practical note on reading these messages, because they can get long. Start at the bottom. The last line is always the conclusion — your requirements are unsatisfiable — and every line above it is the working. Read upward until you hit a package name you recognise, and that's usually where you can act.",
+      "data": {
+        "uvStage": {
+          "layout": "terminal",
+          "color": "purple",
+          "headline": "Read it from the [bottom]",
+          "premise": "The last line is the conclusion. Everything above it is the working, in order.",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "unsatisfiable",
+          "steps": [
+            {
+              "label": "uv add \"pytest==9.1.1\" \"pluggy<1.0\" 2>&1 | tail -3",
+              "out": [
+                "  And because your project depends on pytest==9.1.1, we can",
+                "  conclude that your requirements are unsatisfiable.",
+                "hint: provide `--frozen` to skip locking and syncing"
+              ],
+              "detail": "the conclusion, then the escape hatch",
+              "atWord": 14
+            },
+            {
+              "label": "uv add \"pytest==9.1.1\" \"pluggy<1.0\" 2>&1 | head -3",
+              "out": [
+                "x No solution found when resolving dependencies:",
+                "  Because pytest>=9.1.1 depends on pluggy>=1.5,<2 and your",
+                "  project depends on pluggy<1.0, we can conclude that your"
+              ],
+              "detail": "and the working, above it",
+              "atWord": 27.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 524,
+      "audio": "audio/uv-10-long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "There's a third kind of conflict that catches people out, and Python itself causes it. Sometimes no version of a package supports the Python you promised to support, so the refusal mentions requires-python rather than any package version. The fix is usually to raise your floor.",
+      "data": {
+        "uvStage": {
+          "kind": "constraint-line",
+          "color": "orange",
+          "headline": "Sometimes [Python] is the conflict",
+          "premise": "The package supports 3.12 and up. Your project promised 3.10 and up.",
+          "stageTitle": "a requires-python conflict",
+          "token": "raise your own floor",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "steps": [
+            {
+              "label": "uv add modern-only",
+              "out": [
+                "x No solution found when resolving dependencies:",
+                "  Because your project supports Python >=3.10 and",
+                "  modern-only requires Python >=3.12, we can conclude..."
+              ],
+              "detail": "no package version is mentioned at all",
+              "atWord": 16.667
+            }
+          ],
+          "stage": [
+            {
+              "label": "python",
+              "sub": "3.9, 3.10, 3.11, 3.12, 3.13",
+              "atWord": 6.667
+            },
+            {
+              "label": "you promised",
+              "text": "0.25..1.00",
+              "detail": ">=3.10",
+              "atWord": 15
+            },
+            {
+              "label": "the package needs",
+              "text": "0.68..1.00",
+              "detail": ">=3.12",
+              "value": 0,
+              "atWord": 23.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/uv-10-long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "UV_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And there's a deliberate way to freeze time, which is genuinely useful when you're bisecting a problem. Exclude-newer tells uv to resolve as though nothing had been published after a given date, so you can reproduce exactly the set of packages a colleague had last March.",
+      "data": {
+        "uvStage": {
+          "kind": "packing-list",
+          "color": "green",
+          "headline": "Resolve as if it were [March]",
+          "premise": "--exclude-newer resolves as though nothing was published after a chosen date.",
+          "stageTitle": "reproducing the past",
+          "promptLabel": "you@laptop",
+          "cwd": "~/work/invoice-app",
+          "highlight": "--exclude-newer",
+          "steps": [
+            {
+              "label": "uv lock --exclude-newer 2026-03-01",
+              "out": [
+                "Resolved 13 packages in 320ms",
+                "Updated rich v16.0.0 -> v15.0.0"
+              ],
+              "detail": "the versions that existed that day",
+              "atWord": 18.5
+            }
+          ],
+          "stage": [
+            {
+              "label": "rich",
+              "text": "15.0.0",
+              "detail": "as of 2026-03-01",
+              "atWord": 13.167
+            },
+            {
+              "label": "pygments",
+              "text": "2.20.0",
+              "detail": "as of 2026-03-01",
+              "atWord": 18.5
+            },
+            {
+              "label": "pytest",
+              "text": "9.0.2",
+              "detail": "as of 2026-03-01",
+              "sub": "exactly what your colleague had",
+              "atWord": 22.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 447,
+      "audio": "audio/uv-10-long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. uv says no solution found and names two constraints. What's the fastest way forward? Pause the video here and think it through before I answer. Ready? Loosen one of the two brackets it named, because the message tells you exactly which two are fighting.",
+      "data": {
+        "quiz": {
+          "question": "uv says no solution found. What do you do first?",
+          "options": [
+            {
+              "text": "Add --frozen and move on"
+            },
+            {
+              "text": "Loosen one named constraint"
+            },
+            {
+              "text": "Delete the lockfile"
+            },
+            {
+              "text": "Downgrade Python"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "The message names both sides. Move whichever one you control.",
+          "atWord": 2.583,
+          "revealAtWord": 22.417
+        }
+      },
+      "durationFrames": 497,
+      "audio": "audio/uv-10-long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. Resolution is brackets on a version line, and an answer exists wherever they overlap. When no overlap exists uv refuses and explains the reasoning step by step. And resolving at the lowest allowed versions is how you check whether your published floors are honest.",
+      "data": {
+        "heading": "Chapter ten, in three lines",
+        "points": [
+          {
+            "text": "An answer lives where the brackets overlap",
+            "atWord": 8.167
+          },
+          {
+            "text": "No overlap? uv refuses, and explains why",
+            "atWord": 18.083
+          },
+          {
+            "text": "Resolve lowest to test your published floors",
+            "atWord": 28.083
+          }
+        ]
+      },
+      "durationFrames": 531,
+      "audio": "audio/uv-10-long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next chapter, the honest answer to why uv is this fast — and I close the stopwatch loop I opened back in chapter two.",
+      "data": {
+        "message": "Next: why it is this fast",
+        "sub": "the cache, and the honest numbers"
+      },
+      "durationFrames": 218,
+      "audio": "audio/uv-10-long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
