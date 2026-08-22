@@ -121,6 +121,13 @@ was rejected on purpose, because no rule distinguishes "What" from "Playwright" 
 for a second capital turns PyPI into pyPI. The course-cut chapter labels also strip the
 episode's own "Tutorial #N —" prefix, which was otherwise said twice in one line.
 
+**The course-cut thumbnail** lives at `topics/uv-course/out/thumb.png`, rendered from
+`topics/uv-course/long.json` — the same trick `dsa-dojo-course` and `mcp-course` use: a
+two-scene placeholder spec whose only real job is to carry a `thumbnail` block so the slug
+gets a `-thumb` composition. It uses the new `thumbnail.replaces` field (pip struck
+through, uv lit beneath), which is the right reach whenever a video ARGUES a replacement
+rather than merely mentioning brands.
+
 ⚠ **The chapter `build.mjs` files are gitignored** (`topics/*/*` keeps only `long.json` and
 `shorts.json`). Every word of narration and every data field lives in the tracked spec, so
 nothing is lost — but the builders themselves exist only on the machine that made them.
@@ -757,6 +764,20 @@ stale spec. Suppressing a builder's output defeats the fatal guard added the day
 anchors past the scene's own length, panes with nothing to draw, missing premises). Visual gate is
 now **three frames per scene** — 25/55/88% — because one still cannot reveal a motion glitch; 594
 frames across 12 episodes, montaged into per-episode contact sheets.
+
+### terminalcli: the panel title was `~/data.chart` (fixed 2026-08-22)
+
+The pack's `ChartKit.panelProps` set one title for EVERY window it draws — chapter cards,
+title cards, recap rows and charts alike — and that title was a chart-shaped name. So a
+CHAPTER card rendered "CHAPTERS" inside a window labelled `data.chart`. Now `~/studio`.
+
+The general lesson, which applies to all 33 packs: `panelProps` is stamped on every
+component the kit builds, so anything specific in it will eventually appear over something
+it does not describe. Keep it generic, and keep the channel name out of it — brand
+identity is local-only because this repo is public.
+
+Videos rendered before the fix are left as they are (owner's call); the change applies from
+the next render onward.
 
 ## Open threads
 
