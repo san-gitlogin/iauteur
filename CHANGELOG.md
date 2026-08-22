@@ -17,6 +17,58 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### 2026-08-22 — the uv course: fourteen chapters, one scene type, nineteen pictures
+
+#### Added — `scripts/lib/uv-build.mjs`, one harness for a whole course
+
+Every chapter's `build.mjs` is a list of beats and nothing else; duration and every anchor
+are computed from the narration. The Playwright series carries the same twenty-line
+preamble in every topic builder, and when the frames-per-word estimate was re-measured only
+the episode being worked on got the new number. A course is not a concatenation of videos,
+and its build rig should not be one either.
+
+The harness header records the eight authoring rules, each of which cost a build-lint-fix
+round trip before it was written down — a beat earns 16 seconds with two anchored elements
+and four more per anchor beyond, the greeting guard recognises only specific forms, bare
+pronouns must stay under 4.5%, and so on. It also refuses a HOOK over 15 words at build
+time, because the 8-second cap is only checked AFTER sync and a two-word overrun otherwise
+costs a whole second TTS pass. Measured: 21 words of Ava audio is 8.2 seconds.
+
+#### Added — `quizReveal(narration)`
+
+LAW 0e-q wants question → pause invitation → "Ready?" → answer, and the linter measures the
+gap from the last question mark before the reveal. But "Ready?" is itself a question mark,
+so anchoring the reveal after it reports a one-word thinking gap however long the pause
+actually was. Chapter 00 passed that by luck; chapter 01 did not, which is why the anchor
+is now computed from the words rather than from a fraction.
+
+#### Added — eleven more depictions, and 251 flashcards
+
+`bootstrap-paradox`, `install-routes`, `ephemeral-bay`, `interpreter-rack`, `project-tree`,
+`constraint-line`, `packing-list`, `depot-cache`, `script-header`, `strict-gate` and
+`dist-output`, taking `src/uvViz.tsx` to nineteen kinds behind one scene type. Plus
+`briefs/uv/flashcards/*.tsv` — fourteen decks, one card per line as `Question<TAB>Answer`,
+validated so every line has exactly two fields.
+
+#### Changed — three more caps, each replaced by a measurement
+
+The step-label cap went 44 → 52 → 60, because the real Windows installer one-liner is 58
+visible characters and LAW 0m forbids trimming a real artefact to fit somebody's guess.
+`dist-output` labels are real distribution filenames and `depot-cache`'s last label is a
+caption sentence, so both joined the wide-label set. And the over-reliance cap now keys
+`UV_STAGE` by `kind`: eight distinct depictions were being counted as one component used
+eight times, which is the opposite of what that cap exists to catch.
+
+#### Added — `briefs/uv/research/05-uv-transcripts-2.md`
+
+The gaps the first research pass listed as still-to-capture, captured by running uv 0.12.5
+installed isolated into a scratchpad via `UV_INSTALL_DIR`. Three of them changed what the
+course teaches: `uv pip compile` PRINTS and writes nothing without `-o`; `uv sync` removed
+three packages nobody asked it to touch; and the obvious verification command does NOT work
+(`rich` exposes no `__version__`), which is recorded precisely so it never goes on screen as
+if it did. Scrubbed before commit — `uv init` writes an `authors` line from the local git
+config, and `briefs/` is tracked in a public repository.
+
 ### 2026-08-22 — proofing the eight uv depictions found six defects and three wrong caps
 
 162 stills — 8 kinds x MIN/MAX/MIX + 2 terminal-layout + a ring-state fixture, at both

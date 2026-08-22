@@ -58,6 +58,62 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-08-22 — uv course: all fourteen chapters authored, voiced, synced and rendering
+
+The whole course exists. Fourteen chapters, ~5:00-6:20 each, every one passing
+`lint-spec.mjs` **after** sync against real Ava audio, and every terminal frame a real
+capture rather than an invention.
+
+| Ch | Slug | The thing it teaches |
+|---|---|---|
+| 00 | `uv-00-why-python-breaks` | one shelf, and why the last install wins silently |
+| 01 | `uv-01-installing-uv` | a tool that installs Python cannot itself require Python |
+| 02 | `uv-02-run-any-tool` | uvx, and the 5.792s → 0.294s stopwatch |
+| 03 | `uv-03-tools-you-keep` | the shim, and why a tool is not an importable package |
+| 04 | `uv-04-self-contained-script` | PEP 723 — four comment lines carry an environment |
+| 05 | `uv-05-uv-owns-your-pythons` | managed vs system, and first-compatible-not-newest |
+| 06 | `uv-06-your-first-project` | every file `uv init` writes, line by line |
+| 07 | `uv-07-adding-dependencies` | `uv add` writes a FLOOR, and `uv tree` proves sharing |
+| 08 | `uv-08-what-a-venv-is` | it is a folder, and one line of it is the isolation |
+| 09 | `uv-09-the-lockfile` | exact bytes, and `uv sync` deleting what it did not record |
+| 10 | `uv-10-how-uv-chooses` | brackets on a version line, and uv's own refusal verbatim |
+| 11 | `uv-11-why-it-is-fast` | the cache, honestly, with the numbers attributed |
+| 12 | `uv-12-coming-from-pip` | the translation, and `compile` printing without `-o` |
+| 13 | `uv-13-ship-it` | the wheel built FROM the sdist, and no token on screen |
+
+**The rig.** `scripts/lib/uv-build.mjs` is one shared harness for all fourteen — duration
+and every anchor computed from the narration, so the pacing model is one edit rather than
+fourteen. Its header carries the eight authoring rules, each of which cost a build-lint-fix
+round trip before it was written down. Two of them are worth repeating here: a beat earns
+16 seconds with two anchored elements and four more per anchor beyond that, and the
+greeting guard only recognises specific forms ("Welcome back" counts, "good to have you
+back" does not). `quizReveal(narration)` anchors a quiz answer just before "Ready?",
+because the linter measures the thinking gap from the last question mark and "Ready?" is
+one — chapter 00 passed that by luck and chapter 01 did not.
+
+**Depictions: 19 kinds, one scene type.** The eight from the shelf set plus eleven more
+(`bootstrap-paradox`, `install-routes`, `ephemeral-bay`, `interpreter-rack`,
+`project-tree`, `constraint-line`, `packing-list`, `depot-cache`, `script-header`,
+`strict-gate`, `dist-output`). All proofed as 120 stills before a single chapter was
+written: edge-scan 0 flags, pane-fill clean.
+
+**Flashcards.** `briefs/uv/flashcards/*.tsv`, 251 cards across fourteen decks, one card per
+line as `Question<TAB>Answer`, validated so every line has exactly two fields.
+
+**More real captures.** `briefs/uv/research/05-uv-transcripts-2.md` closes the gaps the
+first research pass listed as missing — `uv venv`, the whole pip interface, `uv tool
+install` with its PATH warning, `uv pip compile` PRINTING unless you pass `-o`, `uv sync`
+removing three packages nobody asked it to touch, and a verification command that does NOT
+work (`rich` exposes no `__version__`), recorded so it never goes on screen as if it did.
+Captured with uv 0.12.5 installed isolated into a scratchpad via `UV_INSTALL_DIR`; the
+machine's own 0.10.9 was left alone. Scrubbed: `uv init` writes an `authors` line from the
+local git config, and `briefs/` is tracked in a public repo.
+
+⚠ **The chapter `build.mjs` files are gitignored** (`topics/*/*` keeps only `long.json` and
+`shorts.json`). Every word of narration and every data field lives in the tracked spec, so
+nothing is lost — but the builders themselves exist only on the machine that made them.
+That is the "scripts in git" question the owner deferred, still open.
+
 ### 2026-08-22 — uv course: the eight depictions are proofed
 
 162 stills — 8 kinds x MIN/MAX/MIX + 2 terminal-layout + a ring-state fixture, both
