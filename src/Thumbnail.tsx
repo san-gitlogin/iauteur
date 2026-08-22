@@ -6,65 +6,81 @@ import {AssetIcon} from './AssetIcon';
 
 // Long-form thumbnail (1280x720). Rule: ≤4 words, one focal icon, readable at 120px.
 // `logo` (brand.logo) stamps the channel mark bottom-right — every thumbnail carries it.
-type Replaces = {from: string; to: string; fromAsset?: string; toAsset?: string};
+type Replaces = {from?: string; to: string; fromAsset?: string; toAsset?: string; contextAsset?: string};
+
+const STRIKE = '#ff4d4d';
+
+/** A word with a red bar drawn across it. A BAR, not a CSS line-through: at thumbnail
+ *  scale a text decoration is a hairline nobody sees on a phone. The bar's weight and
+ *  overhang scale with the type, so it reads the same struck at 96px and at 200px. */
+const Struck: React.FC<{text: string; size: number; color: string; font: string}> =
+  ({text, size, color, font}) => (
+    <div style={{position: 'relative', display: 'inline-flex', alignItems: 'center',
+                 alignSelf: 'flex-start', padding: `0 ${size * 0.06}px`}}>
+      <div style={{fontFamily: font, fontWeight: 800, fontSize: size, letterSpacing: '-0.03em',
+                   color, lineHeight: 1, whiteSpace: 'nowrap', textTransform: 'none'}}>{text}</div>
+      {/* 54%, not 50%: the box is the em box and capital letters sit BELOW its centre, so
+          a bar at 50% crosses the upper third and reads as underlining the wrong thing. */}
+      <div style={{position: 'absolute', left: -size * 0.05, right: -size * 0.05, top: '54%',
+                   height: Math.max(9, size * 0.085), borderRadius: 999, background: STRIKE,
+                   transform: 'translateY(-50%)', boxShadow: `0 0 ${size * 0.16}px ${STRIKE}`}} />
+    </div>
+  );
 
 /**
- * THE SWAP. The old thing struck through, the new thing lit underneath it.
+ * THE SWAP — what the video argues, not what it mentions.
  *
- * Built for the uv course cut, where the promise is "stop using pip" and a row of tidy
- * brand marks would say nothing at all — a logo wall shows what a video mentions, and
- * this shows what it ARGUES. The strike is drawn as a bar across the word rather than a
- * CSS line-through, because at thumbnail scale a text decoration is a hairline nobody
- * sees on a phone.
+ * Two shapes, and the second is the one the owner asked for after seeing the first:
  *
- * `from` and `to` are words. `fromAsset` / `toAsset` are optional marks beside them —
- * optional because not everything has an icon: pip has no simple-icons glyph, and
- * setting one it does not own would be an invention (LAW 3).
+ *  · `from` set    → the rejected thing is struck in THIS block, above the lit one.
+ *  · `from` absent → the rejected word lives in the TITLE instead (`titleStruck`), set
+ *    large, and this block carries only the destination. That reads better, because the
+ *    thing being rejected is the headline of the video, not a footnote beside it.
+ *
+ * `fromAsset` / `toAsset` are optional because not everything has a brand mark — pip has
+ * no simple-icons glyph, and giving it one it does not own would be an invention (LAW 3).
+ * `contextAsset` is the ecosystem the argument sits in (Python), set small and dim above.
  */
 const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
   const t = useTheme();
-  const red = '#ff4d4d';
   const word = (text: string, size: number, color: string) => (
     <div style={{fontFamily: t.fonts.mono, fontWeight: 800, fontSize: size,
-                 letterSpacing: '-0.02em', color, lineHeight: 1, whiteSpace: 'nowrap'}}>{text}</div>
+                 letterSpacing: '-0.02em', color, lineHeight: 1, whiteSpace: 'nowrap',
+                 // A wordmark keeps whatever casing it was given — `uv` is lowercase, and
+                 // several packs uppercase text by default, which would quietly rebrand it.
+                 textTransform: 'none'}}>{text}</div>
   );
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
-                 gap: 22, flex: '0 0 auto'}}>
-      {/* the old way, crossed out */}
-      {/* Legible, not faint. The rejected thing has to be READ for the strike to mean
-          anything — muted at 0.6 disappeared at phone size, which is where the decision
-          to click is made. Subordinate to the lit half by size and opacity, not by fading
-          it out of the picture. */}
-      <div style={{position: 'relative', display: 'flex', alignItems: 'center', gap: 14,
-                   opacity: 0.78, padding: '2px 6px'}}>
-        {r.fromAsset ? <AssetIcon asset={r.fromAsset} size={64} bare tint={t.colors.text} /> : null}
-        {word(r.from, 96, t.colors.text)}
-        {/* a BAR, not a text decoration: at thumbnail scale a line-through is a hairline
-            nobody sees on a phone. Centred on the glyph box rather than the padded box. */}
-        <div style={{position: 'absolute', left: -14, right: -14, top: '50%',
-                     height: 10, borderRadius: 5, background: red,
-                     transform: 'translateY(-50%)',
-                     boxShadow: `0 0 24px ${red}`}} />
-      </div>
-      {/* the new way, lit */}
+                 gap: 20, flex: '0 0 auto'}}>
+      {r.contextAsset ? (
+        <AssetIcon asset={r.contextAsset} size={76} bare tint={t.colors.muted} />
+      ) : null}
+      {/* the rejected thing, when it is not already in the title */}
+      {r.from ? (
+        <div style={{display: 'flex', alignItems: 'center', gap: 14, opacity: 0.78}}>
+          {r.fromAsset ? <AssetIcon asset={r.fromAsset} size={64} bare tint={t.colors.text} /> : null}
+          <Struck text={r.from} size={96} color={t.colors.text} font={t.fonts.mono} />
+        </div>
+      ) : null}
+      {/* the destination, lit */}
       <div style={{display: 'flex', alignItems: 'center', gap: 16,
-                   padding: '12px 22px', borderRadius: 16 * t.style.cornerRadius,
+                   padding: '14px 26px', borderRadius: 16 * t.style.cornerRadius,
                    background: `${t.colors.accent}22`,
                    border: `3px solid ${t.colors.accent}`,
                    boxShadow: t.style.glow > 0 ? `0 0 46px ${t.colors.glowSoft}` : 'none'}}>
-        {r.toAsset ? <AssetIcon asset={r.toAsset} size={84} bare tint={t.colors.text} /> : null}
-        {word(r.to, 108, t.colors.text)}
+        {r.toAsset ? <AssetIcon asset={r.toAsset} size={92} bare tint={t.colors.text} /> : null}
+        {word(r.to, 118, t.colors.text)}
       </div>
     </div>
   );
 };
 
-
 const ThumbInner: React.FC<{
   title: string; badge: string; asset: string; logo?: string;
   logos?: string[]; logoTint?: string; note?: string; replaces?: Replaces;
-}> = ({title, badge, asset, logo, logos, logoTint, note, replaces}) => {
+  titleStruck?: string;
+}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck}) => {
   const t = useTheme();
 
   // FIT THE TITLE. The size used to be a constant, so a longer title simply wrapped
@@ -81,9 +97,10 @@ const ThumbInner: React.FC<{
     }
     return lines;
   };
-  // room above the logo wall, less the badge, the note, and the gaps between them
-  const budget = (logos?.length ? 530 : 660) - 54 - 28 - (note ? 56 : 0);
-  const base = logos?.length ? 132 : 108;
+  // room above the logo wall, less the badge, the note, and the gaps between them.
+  // A struck word takes its own big line, so the title above it has to give that room up.
+  const budget = (logos?.length ? 530 : 660) - 54 - 28 - (note ? 56 : 0) - (titleStruck ? 210 : 0);
+  const base = titleStruck ? 92 : logos?.length ? 132 : 108;
   // 1584 is calibrated against the 88%-wide column a logo-wall thumbnail gets. A swap
   // block is a second COLUMN and takes real width away, so the same constant let the
   // title wrap to a line more than the fitter predicted and pushed the badge off the top
@@ -93,6 +110,9 @@ const ThumbInner: React.FC<{
     [base, base - 10, base - 20, base - 28, base - 36, base - 44].find(
       (size) => wrapAt(Math.max(6, Math.floor(fitWidth / size))) * size * 1.02 <= budget,
     ) ?? base - 44;
+  // THE STRUCK WORD IS THE HEADLINE. It is set roughly twice the lead-in above it, so
+  // "STOP USING" reads as the setup and the crossed-out word reads as the subject.
+  const struckSize = Math.min(210, Math.round(titleSize * 2.15));
   return (
     <AbsoluteFill>
       <Background zone="zoneA" />
@@ -101,6 +121,10 @@ const ThumbInner: React.FC<{
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          // A logo wall reserves the bottom band, so the row is lifted to clear it.
+          // With no wall the row centres on the frame itself, which is what a short
+          // stack wants (owner, 2026-08-22: *"vertically align to the center of the
+          // thumb overall"*) — the lifted version left the badge against the top edge.
           padding: logos?.length ? '0 90px 190px' : '0 90px',
         }}
       >
@@ -146,6 +170,12 @@ const ThumbInner: React.FC<{
             >
               {title}
             </div>
+            {/* The rejected word, set large and crossed out. It sits INSIDE the title
+                group rather than beside it, because it is the subject of the sentence
+                the title starts — "STOP USING" is only a lead-in to it. */}
+            {titleStruck ? (
+              <Struck text={titleStruck} size={struckSize} color={t.colors.text} font={t.fonts.display} />
+            ) : null}
             {/* the sub-line: small, tracked, flush to the title's left edge, led by a
                 short rule so it reads as attached rather than orphaned */}
             {note ? (
@@ -215,6 +245,7 @@ export const Thumbnail: React.FC<{
   logoTint?: string;
   note?: string;
   replaces?: Replaces;
+  titleStruck?: string;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>
     <ThumbInner {...props} />
