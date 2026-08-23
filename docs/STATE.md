@@ -58,6 +58,50 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-08-23 — the shorts inventory: what exists, what never got covers, what is not in git
+
+Collecting every rendered short for upload turned up three gaps that nothing in the
+pipeline was watching for.
+
+**1. Nineteen shorts had no cover still.** The whole Playwright Dojo series. Each
+`shorts.json` carried an authored `cover` block; nobody had ever rendered it, because
+`render-topic.mjs <slug> cover` re-bundles the project per call and no one was going to
+pay that nineteen times. `scripts/render-covers.mjs` bundles once and renders every
+missing cover, finding them itself. All 39 rendered shorts now have one. The general
+lesson: **a per-item script with a fixed setup cost per invocation will not be run in
+bulk, and the work simply does not happen.** Nothing warned; the gap was invisible until
+the artefacts were gathered in one place.
+
+**2. Fifty topics have an authored `shorts.json` and no rendered short.** Six of them
+have a rendered long cut, so the short is the only missing piece
+(`apple-overtakes-nvidia`, `coinbase-for-agents…`, `gpt-live-full-duplex-voice`,
+`kimi-k3`, `kimi-k3-deep-dive`, `the-rise-of-agentic-micro-saas-in-2026`). The other
+forty-four have **no `out/` directory at all** — including every MCP chapter, every DSA
+Dojo episode and the Linux masterclass, whose renders are nowhere on the authoring
+machine: not in `topics/*/out/`, and not in the `iauteur-render-tmp` scratch directory on
+the second drive, which holds only logs and stale puppeteer profiles. Those cuts were
+published and their renders reclaimed, or they live on the other laptop. Their specs are
+tracked, so they are all re-renderable.
+
+**3. Forty-six topics' specs are on disk but were never `git add`ed.** `.gitignore`
+permits them (`!topics/*/long.json`, `!topics/*/shorts.json`); the 2026-08-21 tracking
+pass simply did not stage them. Tracked: 45 of 91 `long.json`, 44 of 89 `shorts.json`.
+Missing: **the entire Playwright Dojo series (20 topics)**, the six iAuteur promos, and
+twenty one-off news/explainer videos. Read-only scan of all 91 untracked spec files
+before recommending anything: **zero** channel-name occurrences (they read
+`brand.channel` from the gitignored `.env`, as designed), zero personal handles, zero
+Windows paths, zero token-shaped strings; the six email hits are fictional login fixtures
+(`@matrix.io`, `@example.com`) in the Playwright specs. So committing them is clean on
+every count the publish gate checks — but it is a content decision on a public repo and
+belongs to the owner, which is why it is an open thread below rather than a commit.
+
+**Shorts have never been uploaded.** The owner uploads wide cuts from the desktop and
+believed Shorts required a phone. They do not: YouTube Studio classifies a vertical video
+under three minutes as a Short. All 39 were packed into a `shorts-for-phone` folder on
+the owner's Desktop, grouped by series, each group with `videos/`, `covers/` and one
+`UPLOAD-ALL.txt` carrying every title, description and tag in upload order.
+
+
 ### 2026-08-22 — uv course: all fourteen chapters authored, voiced, synced and rendering
 
 The whole course exists. Fourteen chapters, ~5:00-6:20 each, every one passing
@@ -811,6 +855,17 @@ Videos rendered before the fix are left as they are (owner's call); the change a
 the next render onward.
 
 ## Open threads
+
+- **Forty-six topics' specs are not in git** (found 2026-08-23; see the dated entry above).
+  The whole Playwright Dojo series, the six iAuteur promos, and twenty one-off videos. They
+  are not ignored — they were never staged. A read-only scan found nothing the publish gate
+  would object to: no channel name, no handle, no local paths, no token-shaped strings, and
+  the only email-shaped strings are `@matrix.io` / `@example.com` login fixtures. **The
+  recommendation is to commit them** — a spec is what a second machine needs to re-render a
+  cut whose mp4 has been reclaimed, and forty-four topics currently have neither. It is left
+  for the owner because it publishes nineteen episodes of course script to a public repo, and
+  that is the same question already flagged at the end of the accepted-risk note below.
+
 
 - **ACCEPTED RISK, decided 2026-08-21 — do not "fix" this.** The channel name appears in
   **182 lines across 136 tracked files** (the briefs, every `topics/*/long.json`,
