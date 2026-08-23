@@ -17,6 +17,23 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### 2026-08-23 — `scripts/render-covers.mjs`: the covers nobody could afford to render
+
+#### Added
+
+`render-topic.mjs <slug> cover` shells out to `npx remotion still`, which re-bundles the
+whole project on every call. That is fine for one cover and absurd for twenty — which is
+why the entire Playwright Dojo series shipped nineteen shorts with **no cover still at
+all**, and nobody noticed until the shorts were collected for upload. `render-covers.mjs`
+bundles ONCE and renders every missing cover against that bundle; it defaults to "every
+topic that has a rendered short, an authored `cover` block, and no `out/cover.png`", so
+the gap cannot silently reopen.
+
+The general shape of the defect is worth keeping: **a per-item script that pays a fixed
+setup cost per invocation will not be run in bulk, and the work it does simply will not
+happen.** The cost was not the render (a still is ~2s); it was the bundle in front of it.
+
+
 ### 2026-08-22 — the uv course: fourteen chapters, one scene type, nineteen pictures
 
 #### Added — `scripts/lib/uv-build.mjs`, one harness for a whole course
