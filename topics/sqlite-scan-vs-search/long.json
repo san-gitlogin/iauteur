@@ -53,11 +53,12 @@
         "headline": "SCAN OR SEARCH",
         "subtext": "one word tells you everything",
         "heroAsset": "lucide:search",
-        "headlineAtWord": 2,
-        "heroAtWord": 11
+        "headlineAtWord": 1,
+        "heroAtWord": 8.583
       },
-      "durationFrames": 225,
-      "timingSource": "estimate"
+      "durationFrames": 175,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_scan_long_s01.mp3"
     },
     {
       "id": "s02",
@@ -98,13 +99,14 @@
               "sub": "product 3"
             }
           ],
-          "scanAtWord": 14,
-          "seekAtWord": 38,
-          "atWord": 3
+          "scanAtWord": 11.167,
+          "seekAtWord": 31.833,
+          "atWord": 1.75
         }
       },
-      "durationFrames": 657,
-      "timingSource": "estimate"
+      "durationFrames": 548,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_scan_long_s02.mp3"
     },
     {
       "id": "s03",
@@ -124,7 +126,7 @@
               "zooms": [
                 {
                   "mark": "scan",
-                  "atWord": 29
+                  "atWord": 24.167
                 }
               ],
               "callouts": [
@@ -132,7 +134,7 @@
                   "text": "reads every row",
                   "mark": "scan",
                   "color": "orange",
-                  "atWord": 35
+                  "atWord": 29.333
                 }
               ],
               "id": "plan-before",
@@ -152,7 +154,7 @@
                   "h": 19
                 }
               },
-              "atWord": 4
+              "atWord": 2.583
             },
             {
               "ref": "rec:sqlite-act2#index",
@@ -167,7 +169,7 @@
                 "w": 1252,
                 "h": 300
               },
-              "atWord": 42
+              "atWord": 35.333
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -176,11 +178,11 @@
               "zooms": [
                 {
                   "mark": "search",
-                  "atWord": 95
+                  "atWord": 81
                 },
                 {
                   "at": "full",
-                  "atWord": 97
+                  "atWord": 82.75
                 }
               ],
               "callouts": [
@@ -188,7 +190,7 @@
                   "text": "straight to the rows",
                   "mark": "search",
                   "color": "green",
-                  "atWord": 96
+                  "atWord": 81.833
                 }
               ],
               "id": "plan-after",
@@ -208,18 +210,19 @@
                   "h": 19
                 }
               },
-              "atWord": 76
+              "atWord": 64.667
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1497,
-      "timingSource": "estimate"
+      "durationFrames": 1272,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_scan_long_s03.mp3"
     },
     {
       "id": "s04",
@@ -231,8 +234,9 @@
         "message": "Ask for the plan before you optimise",
         "sub": "the plan is a fact, a guess is not"
       },
-      "durationFrames": 213,
-      "timingSource": "estimate"
+      "durationFrames": 181,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_scan_long_s04.mp3"
     }
   ]
 }

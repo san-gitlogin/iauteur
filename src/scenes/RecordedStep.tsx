@@ -139,7 +139,10 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // The floor stops the opposite failure: a one-line target blowing up into mush
   // (LAW 0o rule 6 — space comes from carrying less, never from unreadable scale), and it
   // is tighter in 9:16/split because those hold LESS CONTENT, not smaller type.
-  const windowFor = (r?: {x: number; y: number; w: number; h: number}) => {
+  const windowFor = (
+    r?: {x: number; y: number; w: number; h: number},
+    keepLeft?: {x: number; w: number},
+  ) => {
     if (!r) return wide;
     const bw = Math.max(1, Number(r.w));
     const bh = Math.max(1, Number(r.h));
@@ -158,6 +161,18 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
       ? Number(r.x) + winW / 2
       : Number(r.x) - winW * LEAD_MARGIN + winW / 2;
     let cy = bh > winH ? Number(r.y) + winH / 2 : Number(r.y) + bh / 2;
+    // NEVER CUT THE START OF A LINE. Zooming to a mark in the MIDDLE of a terminal frames
+    // that mark, and the window's left edge then lands inside the text — measured on the
+    // first 9:16 still of the SQLite short, where "unsafe ->" rendered as "nsafe ->" and the
+    // prompt "PS shop3>" as "S shop3>". A character sliced off the left of every line reads
+    // as a broken capture, not as a punch-in. So when the whole target still fits, the
+    // window is pulled back to the clip's own left edge, which is where prompts and line
+    // starts live.
+    if (keepLeft) {
+      const left = Number(keepLeft.x);
+      const fitsFromLeft = Number(r.x) + bw - left <= winW;
+      if (fitsFromLeft) cx = Math.min(cx, left + winW / 2);
+    }
     cx = Math.min(Math.max(cx, winW / 2), capW - winW / 2);
     cy = Math.min(Math.max(cy, winH / 2), capH - winH / 2);
     return {x: cx - winW / 2, y: cy - winH / 2, w: winW, h: winH};
@@ -178,7 +193,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   for (const z of cur.zooms ?? []) {
     const at = wordToFrame(z.atWord ?? cur.atWord ?? 1);
     const r = z.at === 'full' ? undefined : (z.mark ? cur.marks?.[z.mark] : bb);
-    targets.push({at, win: z.at === 'full' ? wide : windowFor(r)});
+    targets.push({at, win: z.at === 'full' ? wide : windowFor(r, bb as any)});
   }
   targets.sort((a, b) => a.at - b.at);
 
@@ -306,11 +321,25 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             // (measured: "this line is new" covered "Hello, iAuteur!"). There is almost
             // always empty space to the right of a line of text; use it. Fall back to
             // above/below only when the target really is near the right edge.
+            // CHOOSE THE SIDE AGAINST WHAT IS ON SCREEN, NOT AGAINST THE WHOLE CAPTURE.
+            // The viewer sees the punched-in VIEW; measuring "is there room to the right?"
+            // against the full 1600px capture said yes while the visible window ended a few
+            // pixels past the target, and the label ran off the edge of the video. Measured
+            // on the 9:16 short the moment the window was pulled back to keep line starts
+            // visible — the two are the same rectangle, so they have to agree.
+            const vx = view.x;
+            const vw = view.w;
+            const vy = view.y;
+            const vh = view.h;
             const rightEdge = Number(target.x) + Number(target.w);
+            // A label needs roughly a third of the visible width to sit beside the target.
+            const roomRight = vx + vw - rightEdge;
+            const roomLeft = Number(target.x) - vx;
+            const need = vw * 0.34;
             const side = co.side ?? (
-              rightEdge < capW * 0.62 ? 'right'
-                : Number(target.x) > capW * 0.38 ? 'left'
-                  : ty > capH * 0.55 ? 'top' : 'bottom');
+              roomRight >= need ? 'right'
+                : roomLeft >= need ? 'left'
+                  : ty > vy + vh * 0.55 ? 'top' : 'bottom');
             const gap = 34 / k * (stageW / 1000); // keep the leader a constant on-screen length
             const lx = side === 'left' ? Number(target.x) - gap : side === 'right' ? Number(target.x) + Number(target.w) + gap : tx;
             const ly = side === 'top' ? Number(target.y) - gap : side === 'bottom' ? Number(target.y) + Number(target.h) + gap : ty;
