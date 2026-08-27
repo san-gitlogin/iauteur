@@ -92,6 +92,24 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // WIDE: in 9:16 there is no width to give away, and the legibility fight is already
   // the hard one there.
   const split = d.layout === 'split' && !vertical;
+  // FULL-BLEED — the recording IS the frame, and everything else floats on top of it.
+  //
+  // Owner: *"I am also wondering on how you will be displaying an entire screen recording
+  // which most of the coding tutorial videos have and expect, where you would not need a
+  // component to hold the video, but have the video as base and include components that
+  // float over the video that does not hide the content."*
+  //
+  // The card layout puts the capture inside a bordered panel with the premise above and the
+  // caption below, which costs roughly a third of the frame in chrome and forces a harder
+  // punch-in to keep the text readable — which is what was cutting commands off at the right.
+  // In full-bleed the capture fills the frame edge to edge and the premise, rail, keycaps and
+  // caption sit ON it, over gradient scrims so they stay legible whatever is underneath.
+  // WIDE ONLY. A 16:9 capture filling a 9:16 frame has to crop to about a third of its
+  // width, which is the opposite of showing the whole screen — so vertical keeps the card
+  // layout and its punch-in, where cropping is a deliberate choice rather than a side effect.
+  const fullBleed = d.layout === 'full' && !vertical;
+  const frameW = (vertical ? 1080 : 1920) * scale;
+  const frameH = (vertical ? 1920 : 1080) * scale;
   const sideW = split ? 430 * scale : 0;
   // When the rail moves into the side panel it stops costing vertical space, so the
   // footage gets that height back.
@@ -101,14 +119,14 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
 
   // The stage fills the space it is given, capped by the capture's own aspect in wide
   // (never upscale a 16:9 capture past its width) and free to go portrait in vertical.
-  const stageW = Math.min(availW, vertical ? availW : (availH * capW) / capH);
+  const stageW = fullBleed ? frameW : Math.min(availW, vertical ? availW : (availH * capW) / capH);
   // In 9:16, do NOT let the stage take the whole column. A 16:9 capture has no portrait
   // region that holds a terminal at readable size AND fills a 0.65 aspect, so the surplus
   // comes back as a dead band of empty editor above the content. Capping the stage at a
   // squarish 0.8 gives the window a shape the capture can actually satisfy, and hands the
   // reclaimed height to the rail and caption.
   const MIN_ASPECT = 0.8;
-  const stageH = Math.min(availH, vertical ? Math.min(availH, stageW / MIN_ASPECT) : (stageW * capH) / capW);
+  const stageH = fullBleed ? frameH : Math.min(availH, vertical ? Math.min(availH, stageW / MIN_ASPECT) : (stageW * capH) / capW);
   const stageAspect = stageW / stageH;
 
   const bb = cur.bbox;
@@ -121,7 +139,14 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   //    width the panel takes.
   // A clip with a bbox therefore focuses by default in both; `focus: false` opts out.
   const autoFocus = vertical || split;
-  const wantFocus = Boolean(bb) && (cur.focus === true || (autoFocus && cur.focus !== false));
+  // IN FULL-BLEED THE WHOLE SCREEN IS THE POINT, so the default is no punch-in at all —
+  // the capture already fills the frame at close to 1:1 (a 1600x900 capture in a 1920x1080
+  // video is a 1.2x upscale) and the callout box is what draws the eye. Punching in on top
+  // of that is what was cutting commands off at the right edge. A clip can still ask for
+  // focus explicitly, and authored `zooms` still move the camera for a real emphasis beat.
+  const wantFocus = fullBleed
+    ? Boolean(bb) && cur.focus === true && (cur.zooms ?? []).length > 0
+    : Boolean(bb) && (cur.focus === true || (autoFocus && cur.focus !== false));
 
   // The window we would show with no focus at all: the whole capture, cropped to the
   // stage's aspect so nothing is letterboxed.
@@ -203,11 +228,20 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   //
   // Entry 0 is always the clip's own default, so a clip with no `zooms` behaves exactly as
   // before. `mark` points at a rectangle the RUNNER measured; `at: "full"` pulls back out.
-  const targets = [{at: curStart, win: wantFocus ? windowFor(bb) : wide}];
-  for (const z of cur.zooms ?? []) {
-    const at = wordToFrame(z.atWord ?? cur.atWord ?? 1);
-    const r = z.at === 'full' ? undefined : (z.mark ? cur.marks?.[z.mark] : bb);
-    targets.push({at, win: z.at === 'full' ? wide : windowFor(r, bb as any)});
+  // IN FULL-BLEED THE CAMERA DOES NOT MOVE. The whole recording stays on screen for the
+  // whole beat and the neon box does the pointing — which is what "the video as base, with
+  // components floating over it" means, and the only way a long command is never cut. A mark
+  // zoom would crop it again: the SEARCH mark is 220px wide, so its window is ~500 of 1600,
+  // and everything past it leaves the frame. Emphasis moved from the lens to the overlay.
+  const targets = fullBleed
+    ? [{at: curStart, win: wide}]
+    : [{at: curStart, win: wantFocus ? windowFor(bb) : wide}];
+  if (!fullBleed) {
+    for (const z of cur.zooms ?? []) {
+      const at = wordToFrame(z.atWord ?? cur.atWord ?? 1);
+      const r = z.at === 'full' ? undefined : (z.mark ? cur.marks?.[z.mark] : bb);
+      targets.push({at, win: z.at === 'full' ? wide : windowFor(r, bb as any)});
+    }
   }
   targets.sort((a, b) => a.at - b.at);
 
@@ -240,7 +274,53 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   const innerX = -view.x * k;
   const innerY = -view.y * k;
 
+  // WHERE DOES THE FURNITURE GO? WHERE THE WORK ISN'T.
+  //
+  // Owner: *"components that float over the video that does not hide the content"*. In
+  // full-bleed the rail and the caption were pinned to the floor, and the floor is exactly
+  // where a terminal lives — so the overlays covered the SEARCH line the beat was about.
+  //
+  // The runner already measured the region of interest for this step (the clip bbox), so the
+  // answer is not a guess: put the cluster on whichever side of that region has room for it.
+  // A terminal at the bottom pushes the furniture to the top; an editor beat at the top
+  // pushes it to the floor.
+  const clusterH = ((d.caption ? 46 : 0) + (split ? 0 : 44) + (anyKeys ? 48 : 0) + 34) * scale;
+  const bbTopPx = bb ? (Number(bb.y) - view.y) * k : frameH;
+  const bbBotPx = bb ? (Number(bb.y) + Number(bb.h) - view.y) * k : 0;
+  const roomBelow = frameH - bbBotPx;
+  const roomAbove = bbTopPx;
+  // Below is the habit a viewer already has, so it wins whenever it genuinely fits.
+  const clusterAtTop = fullBleed && roomBelow < clusterH && roomAbove >= clusterH;
+  // CENTRE IT IN THE FREE BAND, DO NOT PIN IT TO THE EDGE. Pinned to the top of the frame the
+  // cluster sat on the editor's first three lines while a large empty band waited 250px
+  // below it. The band between the frame edge and the region of interest is the space the
+  // step is not using, so the furniture goes in the middle of THAT.
+  const band = clusterAtTop ? roomAbove : roomBelow;
+  const clusterInset = Math.max(20 * scale, (band - clusterH) / 2);
+
   const mono = t.fonts.mono;
+
+  // THE STANDING SETUP (LAW 0l) — what the viewer is looking at, on screen for the whole
+  // beat, unanchored. In full-bleed it JOINS THE CLUSTER rather than taking the opposite
+  // edge: parking it on the far side just moved the problem, because when the work is at the
+  // bottom the "free" edge is the top and the premise was landing on the terminal instead.
+  // One group, one free side, nothing on the work.
+  const premiseNode = d.premise ? (
+    <div
+      style={{
+        position: 'relative', zIndex: 2,
+        maxWidth: fullBleed ? frameW * 0.9 : stageW,
+        padding: fullBleed ? `0 ${40 * scale}px` : 0,
+        fontFamily: t.fonts.body,
+        fontSize: 21 * scale,
+        lineHeight: 1.42,
+        color: fullBleed ? hexA(t.colors.text, 0.95) : hexA(t.colors.text, 0.82),
+        textAlign: 'center',
+      }}
+    >
+      {d.premise}
+    </div>
+  ) : null;
 
   return (
     <AbsoluteFill style={{background: t.colors.bg}}>
@@ -249,42 +329,50 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
       <AbsoluteFill
         style={{
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: fullBleed ? 'flex-start' : 'center',
           flexDirection: 'column',
-          gap: 16 * scale,
-          paddingTop: headH,
-          paddingBottom: 40 * scale,
+          gap: fullBleed ? 0 : 16 * scale,
+          paddingTop: fullBleed ? 28 * scale : headH,
+          paddingBottom: fullBleed ? 26 * scale : 40 * scale,
           opacity: appear,
         }}
       >
-        {/* THE STANDING SETUP (LAW 0l) — what the viewer is looking at, on screen
-            for the whole beat, unanchored. */}
-        {d.premise ? (
-          <div
-            style={{
-              maxWidth: stageW,
-              fontFamily: t.fonts.body,
-              fontSize: 21 * scale,
-              lineHeight: 1.42,
-              color: hexA(t.colors.text, 0.82),
-              textAlign: 'center',
-            }}
-          >
-            {d.premise}
-          </div>
+        {/* SCRIMS. An overlay on top of a recording has to stay legible whatever happens to
+            be under it — a white terminal, a bright IDE theme, a diff. Two gradients, from
+            the frame's own background colour at the edge to fully transparent, give the
+            premise and the caption a reliable ground without hiding any of the footage they
+            sit over. They are painted between the video and the text, never over the middle
+            of the frame where the work is. */}
+        {fullBleed ? (
+          <>
+            {/* ONE SCRIM, ON THE EDGE THE CLUSTER CHOSE. Everything that floats lives in
+                that one group now, so a second gradient on the opposite edge would only be
+                dimming footage nothing is written over. */}
+            <div style={{
+              position: 'absolute', left: 0, right: 0,
+              ...(clusterAtTop ? {top: 0} : {bottom: 0}),
+              height: (vertical ? 320 : 250) * scale, zIndex: 1, pointerEvents: 'none',
+              background: `linear-gradient(to ${clusterAtTop ? 'bottom' : 'top'}, ${hexA(t.colors.bg, 0.93)}, ${hexA(t.colors.bg, 0)})`,
+            }} />
+          </>
         ) : null}
+        {fullBleed ? null : premiseNode}
 
         {/* footage, and — when split — the demo's own steps beside it */}
-        <div style={{display: 'flex', gap: split ? 22 * scale : 0, alignItems: 'stretch'}}>
+        <div style={fullBleed
+          ? {position: 'absolute', inset: 0, zIndex: 0}
+          : {display: 'flex', gap: split ? 22 * scale : 0, alignItems: 'stretch'}}>
         <div
           style={{
-            width: stageW,
-            height: stageH,
-            borderRadius: rad,
+            width: fullBleed ? '100%' : stageW,
+            height: fullBleed ? '100%' : stageH,
+            borderRadius: fullBleed ? 0 : rad,
             overflow: 'hidden',
             position: 'relative',
-            border: `${2 * scale}px solid ${hexA(accent, held ? 0.5 : 0.8)}`,
-            boxShadow: `0 ${18 * scale}px ${46 * scale}px ${hexA('#000000', 0.45)}`,
+            // No card, no border, no drop shadow: in full-bleed the recording is the
+            // background of the whole video, not an object sitting on one.
+            border: fullBleed ? 'none' : `${2 * scale}px solid ${hexA(accent, held ? 0.5 : 0.8)}`,
+            boxShadow: fullBleed ? 'none' : `0 ${18 * scale}px ${46 * scale}px ${hexA('#000000', 0.45)}`,
             background: t.colors.panel,
           }}
         >
@@ -622,13 +710,22 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             cannot drift from the take: if the demo stops pressing Ctrl+S, the keycaps stop
             saying Ctrl+S. This is the one overlay that answers "what did you just DO",
             which a screen recording otherwise leaves invisible. */}
+        {/* THE BOTTOM CLUSTER — keycaps, step rail and caption travel together, and in
+            full-bleed they are pinned to whichever edge the WORK is not on. `display:
+            contents` keeps the card layout byte-identical: the wrapper vanishes and the three
+            blocks stay direct children of the column exactly as before. */}
+        <div style={fullBleed
+          ? {position: 'absolute', left: 0, right: 0, [clusterAtTop ? 'top' : 'bottom']: clusterInset,
+             zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 * scale}
+          : {display: 'contents'}}>
+          {fullBleed ? premiseNode : null}
         {anyKeys ? (() => {
           if (!(cur.keys ?? []).length) return <div style={{height: 44 * scale}} />;
           const kStart = wordToFrame(cur.keysAtWord ?? cur.atWord ?? 1);
           if (frame < kStart) return null;
           const kp = interpolate(frame, [kStart, kStart + 10], [0, 1], clamp);
           return (
-            <div style={{display: 'flex', gap: 8 * scale, alignItems: 'center', opacity: kp}}>
+            <div style={{position: 'relative', zIndex: 2, display: 'flex', gap: 8 * scale, alignItems: 'center', opacity: kp}}>
               {(cur.keys ?? []).map((key, i) => (
                 <React.Fragment key={i}>
                   {i > 0 ? (
@@ -660,7 +757,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
 
         {/* step rail — which step of the demo this is, and its plain-English note.
             Hidden when split, because the side panel already carries the steps. */}
-        {split ? null : <div style={{display: 'flex', gap: 8 * scale, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: stageW}}>
+        {split ? null : <div style={{position: 'relative', zIndex: 2, display: 'flex', gap: 8 * scale, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: fullBleed ? frameW * 0.92 : stageW, marginBottom: fullBleed ? 10 * scale : 0}}>
           {clips.map((c, i) => {
             const on = i === active;
             const done = frame >= starts[i];
@@ -686,16 +783,19 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
         {d.caption ? (
           <div
             style={{
+              position: 'relative', zIndex: 2,
               fontFamily: t.fonts.body,
-              fontSize: 22 * scale,
-              color: hexA(t.colors.text, 0.9),
+              fontSize: (fullBleed ? 26 : 22) * scale,
+              fontWeight: fullBleed ? 600 : 400,
+              color: hexA(t.colors.text, fullBleed ? 0.97 : 0.9),
               textAlign: 'center',
-              maxWidth: stageW,
+              maxWidth: fullBleed ? frameW * 0.9 : stageW,
             }}
           >
             {d.caption}
           </div>
         ) : null}
+        </div>
       </AbsoluteFill>
 
       {scene.data.source ? <SourceFooter text={String(scene.data.source)} /> : null}
