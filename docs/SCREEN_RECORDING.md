@@ -685,16 +685,23 @@ is more teaching, never padding). Reaching 20 minutes needs roughly 15–20 more
 and the captures to back them — the SQL surface has them (LEFT JOIN, UNIQUE, DEFAULT, CHECK,
 dates, LIKE/IN, subqueries, VACUUM, WAL, ATTACH), so this is more work, not a dead end.
 
-**NEXT, and the only thing left:** render the three cuts. Nothing is blocked.
-```
-npm run render -- sqlite-the-database-that-is-just-a-file short-dark
-npm run render -- sqlite-scan-vs-search wide-dark
-npm run render -- sqlite-the-database-that-is-just-a-file wide-dark   # 14 min: SEGMENT IT (LAW 12)
-```
-The bundle at `build/` is current. `scripts/render-topic.mjs` now calls the Remotion CLI
-directly instead of through `npx`, which died on this machine with
-`ERR_INVALID_PACKAGE_CONFIG` minutes after `npx remotion bundle` had worked.
+**ALL THREE CUTS ARE RENDERED AND VERIFIED (2026-08-28).**
 
+| Cut | File | Frames | Audio drift |
+|---|---|---|---|
+| Long 16:9, 13:58 | `topics/sqlite-the-database-that-is-just-a-file/out/wide-dark.mp4` | 25135 **exact** | −9 ms |
+| Short 9:16, 0:39 | same topic, `out/short-dark.mp4` | 1172 **exact** | 59 ms |
+| Short 16:9, 1:13 | `topics/sqlite-scan-vs-search/out/wide-dark.mp4` | 2176 **exact** | 43 ms |
+
+Each ships with its `upload.md` (YouTube title, description, chapters). The long cut was
+rendered `--muted` and stream-copied against a separately built audio track (LAW 12).
+
+**KNOWN LIMIT, and where the fix belongs.** In 9:16 the tail of a long source line is still
+cut: a 0.8-aspect stage over a 16:9 capture tops out near 720 capture-px of width, and
+`params.py` has lines around 900px. That is not a framing bug to chase in the component — it
+is LAW 0m's vertical corollary, *less content per beat, never smaller type*. The fix is a
+capture-side one: wrap the Python in `demos/sqlite-act3.json` so no line exceeds ~700px, then
+re-record, re-bake, re-anchor, re-sync. Everything else in the frame is now complete.
 ### P6 — Proof episode
 
 - [ ] Re-cut one Playwright Dojo episode with real footage; judge as school owner AND as beginner
