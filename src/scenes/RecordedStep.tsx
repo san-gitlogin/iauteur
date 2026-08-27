@@ -107,7 +107,11 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // WIDE ONLY. A 16:9 capture filling a 9:16 frame has to crop to about a third of its
   // width, which is the opposite of showing the whole screen — so vertical keeps the card
   // layout and its punch-in, where cropping is a deliberate choice rather than a side effect.
-  const fullBleed = d.layout === 'full' && !vertical;
+  // FULL IS THE DEFAULT, which is what the manifest has always said this field means:
+  // "full (default) = the footage IS the frame, overlays on top". The code had never
+  // implemented it, so every recorded beat silently got the card. `layout: "card"` asks for
+  // the old bordered panel back.
+  const fullBleed = (d.layout ?? 'full') === 'full' && !vertical;
   const frameW = (vertical ? 1080 : 1920) * scale;
   const frameH = (vertical ? 1920 : 1080) * scale;
   const sideW = split ? 430 * scale : 0;

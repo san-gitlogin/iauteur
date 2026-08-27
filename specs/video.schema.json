@@ -15727,7 +15727,7 @@
                         },
                         "layout": {
                           "type": "string",
-                          "description": "full (default) = the footage IS the frame, overlays on top. split = footage one side, the demo's own steps read down the other. Use split ONLY for a wide capture with a small region of interest and a lot to say - halving the footage width halves the legibility. Ignored in 9:16, where there is no width to give away."
+                          "description": "full (default) = the footage IS the frame, overlays float on top and are placed in the band the region of interest leaves free. card = the older bordered panel with the premise above and the caption below. split = footage one side, the demo's own steps read down the other. Use split ONLY for a wide capture with a small region of interest and a lot to say - halving the footage width halves the legibility. Ignored in 9:16, where there is no width to give away."
                         },
                         "caption": {
                           "type": "string",

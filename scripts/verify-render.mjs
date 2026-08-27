@@ -136,6 +136,30 @@ for (const [i, sh] of shots.entries()) {
       detail: `only ${inked}/12 horizontal bands carry contrast — the picture is floating in mostly empty frame`});
   }
 
+  // 6. EDGE BLEED — TRIED, MEASURED, AND REJECTED. Kept as a note so nobody rebuilds it.
+  //
+  // Owner reported content sliced by the frame edge on two cuts. The obvious detector is
+  // "a narrow column at the frame edge with a lot of luma variation means glyphs are being
+  // cut mid-stem". It was calibrated against four real stills before being trusted, and the
+  // numbers say the opposite of the hypothesis:
+  //
+  //   BAD  9:16, text sliced        left  12   right  11
+  //   GOOD 9:16, fixed              left   9   right   9
+  //   BAD  wide, command cut        left   9   right   9
+  //   GOOD wide, full-bleed         left  23   right  25   <- the HIGHEST
+  //
+  // The good frame scores highest because a full-bleed IDE legitimately reaches the edge
+  // with a sidebar, a scrollbar and a status bar. Edge variance measures "is there content
+  // at the edge", not "is that content cut" — and a check that fires on correct output is
+  // worse than no check, because it teaches everyone to ignore the report.
+  //
+  // The sound version of this is GEOMETRIC, not photometric: the window formula and the
+  // measured mark rectangles are both known, so "is every callout target fully inside the
+  // view" can be answered exactly. That needs `windowFor` lifted out of RecordedStep.tsx
+  // into a shared module so the checker cannot drift from the renderer — worth doing, and
+  // deliberately not faked in the meantime. In full-bleed (now the default) the camera does
+  // not move at all, which designs the defect out rather than detecting it.
+
   // 4. CONTRAST — a callout must be legible against what is actually beneath it.
   if (sh.callout) {
     const mid = stats(file, `${Math.floor(W * 0.5)}:${Math.floor(H * 0.12)}:${Math.floor(W * 0.25)}:${Math.floor(H * 0.44)}`);
