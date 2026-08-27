@@ -99,7 +99,21 @@ for (const sp of specs) {
   try { spec = JSON.parse(fs.readFileSync(sp, 'utf8')); } catch { continue; }
   for (const scene of spec.scenes ?? []) {
     for (const clip of scene?.data?.recordedStep?.clips ?? []) {
-      if (!clip.src || clip.frames == null) continue;
+      // A CLIP WITH A ref BUT NO BAKED src IS THE WORST CASE, NOT ONE TO SKIP.
+      //
+      // PAID FOR: rebuilding shorts.json from its builder wipes the bake (the builder writes
+      // `ref` only), and the next render drew the "NOT BAKED" placeholder for the whole beat
+      // — a 47-second short shipped as an empty box with a play icon in it. This seal ran and
+      // reported PASSED, because the freshness loop skipped any clip without a `src`: the
+      // one state that is always broken was the one state it ignored.
+      if (!clip.src || clip.frames == null) {
+        problems.push(
+          `${sp}: clip "${clip.id ?? clip.ref ?? '?'}" has a ref but is NOT BAKED ` +
+          `(no ${!clip.src ? 'src' : 'frames'}) — it will render as a placeholder.
+` +
+          `      fix: node scripts/bake-rec.mjs ${sp}   then re-anchor and re-sync`);
+        continue;
+      }
       const abs = path.resolve('public', clip.src);
       if (!fs.existsSync(abs)) continue; // already reported above
       const real = probeFrames(abs);
