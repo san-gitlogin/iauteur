@@ -14,7 +14,10 @@
       "seed.sql": "CREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  price REAL NOT NULL\n);\nINSERT INTO products (name, price) VALUES\n  ('Mechanical keyboard', 89.00),\n  ('27-inch monitor', 240.00),\n  ('Desk lamp', 35.50),\n  ('USB-C hub', 45.00);\n",
       "read_it.py": "import sqlite3\n\ncon = sqlite3.connect(\"shop.db\")\ncur = con.cursor()\n\nfor name, price in cur.execute(\"SELECT name, price FROM products ORDER BY price DESC\"):\n    print(f\"{name:<22}{price:>8.2f}\")\n\ncon.close()\n",
       "params.py": "import sqlite3\n\ncon = sqlite3.connect(\"shop.db\")\ncur = con.cursor()\n\nwanted = \"USB-C hub\"\ncur.execute(\"SELECT name, price FROM products WHERE name = ?\", (wanted,))\nprint(\"safe   ->\", cur.fetchone())\n\nevil = \"' OR 1=1 --\"\ncur.execute(f\"SELECT name, price FROM products WHERE name = '{evil}'\")\nrows = cur.fetchall()\nprint(\"unsafe ->\", len(rows), \"rows came back:\")\nfor r in rows:\n    print(\"          \", r)\n\ncon.close()\n",
-      "write_it.py": "import sqlite3\n\ncon = sqlite3.connect(\"shop.db\")\ncur = con.cursor()\n\ncur.execute(\"INSERT INTO products (name, price) VALUES (?, ?)\", (\"Webcam\", 59.0))\nprint(\"new row id:\", cur.lastrowid)\n\ncon.commit()\nprint(\"rows now:\", cur.execute(\"SELECT COUNT(*) FROM products\").fetchone()[0])\n\ncon.close()\n"
+      "write_it.py": "import sqlite3\n\ncon = sqlite3.connect(\"shop.db\")\ncur = con.cursor()\n\ncur.execute(\"INSERT INTO products (name, price) VALUES (?, ?)\", (\"Webcam\", 59.0))\nprint(\"new row id:\", cur.lastrowid)\n\ncon.commit()\nprint(\"rows now:\", cur.execute(\"SELECT COUNT(*) FROM products\").fetchone()[0])\n\ncon.close()\n",
+      "row_factory.py": "import sqlite3\n\ncon = sqlite3.connect(\"shop.db\")\ncon.row_factory = sqlite3.Row          # rows you can read by NAME\ncur = con.cursor()\n\nrow = cur.execute(\"SELECT id, name, price FROM products WHERE id = 2\").fetchone()\nprint(\"by index:\", row[1])\nprint(\"by name :\", row[\"name\"], \"costs\", row[\"price\"])\nprint(\"columns :\", row.keys())\n\ncon.close()\n",
+      "many.py": "import sqlite3\n\ncon = sqlite3.connect(\"shop.db\")\ncur = con.cursor()\n\nnew = [(\"Cable tidy\", 9.0), (\"Laptop stand\", 42.0), (\"Mouse mat\", 12.5)]\ncur.executemany(\"INSERT INTO products (name, price) VALUES (?, ?)\", new)\nprint(\"inserted:\", cur.rowcount, \"rows in one call\")\n\ncon.commit()\nprint(\"total now:\", cur.execute(\"SELECT COUNT(*) FROM products\").fetchone()[0])\ncon.close()\n",
+      "rollback.py": "import sqlite3\n\ncon = sqlite3.connect(\"shop.db\")\ncur = con.cursor()\n\nbefore = cur.execute(\"SELECT COUNT(*) FROM products\").fetchone()[0]\ncur.execute(\"DELETE FROM products\")\nprint(\"after delete, this connection sees:\", cur.execute(\"SELECT COUNT(*) FROM products\").fetchone()[0])\n\ncon.rollback()\nprint(\"after rollback:\", cur.execute(\"SELECT COUNT(*) FROM products\").fetchone()[0], \"(was\", before, \"before)\")\ncon.close()\n"
     },
     "commands": [
       "Set-Alias sq '{{TOOLS}}/sqlite/sqlite3.exe'",
@@ -64,6 +67,41 @@
       "holdMs": 1300
     },
     {
+      "id": "open-rowfac",
+      "action": "openFile",
+      "path": "row_factory.py",
+      "label": "columns by name, not by number",
+      "focus": "editor",
+      "holdMs": 1500,
+      "marks": [
+        {
+          "id": "rf",
+          "text": "con.row_factory = sqlite3.Row"
+        }
+      ]
+    },
+    {
+      "id": "run-rowfac",
+      "action": "run",
+      "cmd": "python row_factory.py",
+      "label": "row[1] versus row[\"name\"]",
+      "focus": "terminal",
+      "holdMs": 1900,
+      "expect": {
+        "contains": "by name"
+      },
+      "marks": [
+        {
+          "id": "byidx",
+          "text": "by index: 27-inch monitor"
+        },
+        {
+          "id": "byname",
+          "text": "by name : 27-inch monitor costs 240.0"
+        }
+      ]
+    },
+    {
       "id": "open-params",
       "action": "openFile",
       "path": "params.py",
@@ -103,21 +141,73 @@
       "holdMs": 1800
     },
     {
+      "id": "run-many",
+      "action": "run",
+      "cmd": "python many.py",
+      "label": "three rows, one call",
+      "focus": "terminal",
+      "holdMs": 1600,
+      "expect": {
+        "contains": "in one call"
+      },
+      "marks": [
+        {
+          "id": "many",
+          "text": "inserted: 3 rows in one call"
+        }
+      ]
+    },
+    {
       "id": "run-write",
       "action": "run",
       "cmd": "python write_it.py",
       "label": "and the commit that makes it real",
       "focus": "terminal",
       "expect": {
-        "contains": "rows now: 5"
+        "contains": "rows now: 8"
       },
       "marks": [
         {
           "id": "count",
-          "text": "rows now: 5"
+          "text": "rows now: 8"
         }
       ],
       "holdMs": 1400
+    },
+    {
+      "id": "open-rollback",
+      "action": "openFile",
+      "path": "rollback.py",
+      "label": "the undo you did not know you had",
+      "focus": "editor",
+      "holdMs": 1500,
+      "marks": [
+        {
+          "id": "rb",
+          "text": "con.rollback()"
+        }
+      ]
+    },
+    {
+      "id": "run-rollback",
+      "action": "run",
+      "cmd": "python rollback.py",
+      "label": "deleted everything, then took it back",
+      "focus": "terminal",
+      "holdMs": 2100,
+      "expect": {
+        "contains": "after rollback"
+      },
+      "marks": [
+        {
+          "id": "gone",
+          "text": "after delete, this connection sees: 0"
+        },
+        {
+          "id": "back",
+          "text": "after rollback: 8"
+        }
+      ]
     }
   ]
 }

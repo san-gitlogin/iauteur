@@ -11,7 +11,8 @@
   "maxHoldMs": 700,
   "prep": {
     "files": {
-      "schema.sql": "CREATE TABLE products (\n  id    INTEGER PRIMARY KEY,\n  name  TEXT    NOT NULL,\n  price REAL    NOT NULL\n);\n\nINSERT INTO products (name, price) VALUES\n  ('Mechanical keyboard', 89.00),\n  ('27-inch monitor',    240.00),\n  ('Desk lamp',           35.50),\n  ('USB-C hub',           45.00);\n"
+      "schema.sql": "CREATE TABLE products (\n  id    INTEGER PRIMARY KEY,\n  name  TEXT    NOT NULL,\n  price REAL    NOT NULL\n) STRICT;\n",
+      "seed.sql": "INSERT INTO products (name, price) VALUES\n  ('Mechanical keyboard',  89.00),\n  ('27-inch monitor',     240.00),\n  ('Desk lamp',            35.50),\n  ('USB-C hub',            45.00);\n"
     },
     "commands": [
       "Set-Alias sq '{{TOOLS}}/sqlite/sqlite3.exe'",
@@ -34,6 +35,7 @@
       "cmd": "sq -version",
       "label": "the version we teach",
       "focus": "terminal",
+      "holdMs": 900,
       "expect": {
         "contains": "3.53.4"
       },
@@ -42,14 +44,57 @@
           "id": "ver",
           "text": "3.53.4"
         }
-      ],
-      "holdMs": 900
+      ]
+    },
+    {
+      "id": "open-schema",
+      "action": "openFile",
+      "path": "schema.sql",
+      "label": "four lines of table",
+      "focus": "editor",
+      "holdMs": 1400,
+      "marks": [
+        {
+          "id": "strict",
+          "text": ") STRICT;"
+        },
+        {
+          "id": "notnull",
+          "text": "name  TEXT    NOT NULL,"
+        }
+      ]
     },
     {
       "id": "create",
       "action": "run",
       "cmd": "sq shop.db \".read schema.sql\"",
-      "label": "create the table",
+      "label": "make the table",
+      "focus": "terminal",
+      "holdMs": 700
+    },
+    {
+      "id": "strict-error",
+      "action": "run",
+      "cmd": "sq shop.db \"INSERT INTO products (name, price) VALUES ('Broken', 'not-a-number');\"",
+      "label": "what STRICT actually buys you",
+      "focus": "terminal",
+      "holdMs": 1800,
+      "expect": {
+        "contains": "cannot store TEXT value",
+        "exitCode": 1
+      },
+      "marks": [
+        {
+          "id": "err",
+          "text": "cannot store TEXT value in REAL column products.price"
+        }
+      ]
+    },
+    {
+      "id": "insert",
+      "action": "run",
+      "cmd": "sq shop.db \".read seed.sql\"",
+      "label": "put four rows in",
       "focus": "terminal",
       "holdMs": 700
     },
@@ -57,8 +102,9 @@
       "id": "select",
       "action": "run",
       "cmd": "sq shop.db -box -header \"SELECT * FROM products;\"",
-      "label": "read it back",
+      "label": "read them back",
       "focus": "terminal",
+      "holdMs": 1300,
       "expect": {
         "contains": "Mechanical keyboard"
       },
@@ -71,8 +117,92 @@
           "id": "mon",
           "text": "27-inch monitor"
         }
-      ],
-      "holdMs": 1100
+      ]
+    },
+    {
+      "id": "where",
+      "action": "run",
+      "cmd": "sq shop.db -box -header \"SELECT name, price FROM products WHERE price < 60;\"",
+      "label": "only some of them",
+      "focus": "terminal",
+      "holdMs": 1400,
+      "expect": {
+        "contains": "Desk lamp"
+      },
+      "marks": [
+        {
+          "id": "cheap",
+          "text": "Desk lamp"
+        }
+      ]
+    },
+    {
+      "id": "order",
+      "action": "run",
+      "cmd": "sq shop.db -box -header \"SELECT name, price FROM products ORDER BY price DESC LIMIT 3;\"",
+      "label": "and in an order you choose",
+      "focus": "terminal",
+      "holdMs": 1400,
+      "expect": {
+        "contains": "27-inch monitor"
+      },
+      "marks": [
+        {
+          "id": "top",
+          "text": "27-inch monitor"
+        }
+      ]
+    },
+    {
+      "id": "update",
+      "action": "run",
+      "cmd": "sq shop.db -box -header \"UPDATE products SET price = 79.00 WHERE name = 'Mechanical keyboard' RETURNING name, price;\"",
+      "label": "change one, and see what changed",
+      "focus": "terminal",
+      "holdMs": 1600,
+      "expect": {
+        "contains": "79.0"
+      },
+      "marks": [
+        {
+          "id": "newprice",
+          "text": "79.0"
+        }
+      ]
+    },
+    {
+      "id": "delete",
+      "action": "run",
+      "cmd": "sq shop.db -box -header \"DELETE FROM products WHERE name = 'Desk lamp'; SELECT changes() AS rows_deleted;\"",
+      "label": "and take one away",
+      "focus": "terminal",
+      "holdMs": 1500,
+      "expect": {
+        "contains": "rows_deleted"
+      },
+      "marks": [
+        {
+          "id": "n",
+          "text": "rows_deleted"
+        }
+      ]
+    },
+    {
+      "id": "schema",
+      "action": "run",
+      "cmd": "sq shop.db \".schema products\"",
+      "label": "the database describing itself",
+      "focus": "terminal",
+      "holdMs": 1600,
+      "expect": {
+        "contains": "CREATE TABLE products"
+      },
+      "marks": [
+        {
+          "id": "sch",
+          "text": "CREATE TABLE products ("
+        }
+      ]
     },
     {
       "id": "just-a-file",
@@ -80,6 +210,7 @@
       "cmd": "Get-Item shop.db | Select-Object Name, Length",
       "label": "it is only a file",
       "focus": "terminal",
+      "holdMs": 1600,
       "expect": {
         "contains": "shop.db"
       },
@@ -88,8 +219,7 @@
           "id": "file",
           "text": "shop.db"
         }
-      ],
-      "holdMs": 1200
+      ]
     }
   ]
 }

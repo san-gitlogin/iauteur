@@ -573,7 +573,13 @@ The first real course built on this subsystem, and the thing that exercised it e
 - [x] `demos/sqlite-act1.json` — 4 steps · version · create · select · **the file is 8192 bytes**
 - [x] `demos/sqlite-act2.json` — 6 steps · second table · the JOIN · revenue · **SCAN → SEARCH**
 - [x] `demos/sqlite-act3.json` — 5 steps · connect · read · **safe vs. injected** · commit
-- [x] **15/15 steps verified by read-back**, marks measured in both editor and terminal.
+- [x] **31/31 steps verified by read-back** (12 + 9 + 10), marks measured in both editor and
+      terminal, including one step asserted to FAIL (exit 1) because STRICT is only teachable
+      by watching it refuse something.
+- [x] `briefs/sqlite/TRANSCRIPTS.md` is GENERATED from the manifests
+      (`npm run captures`, `npm run captures-check`). The hand-written transcripts had already
+      drifted: adding `executemany` moved a running row count 5 -> 8, the recording refused to
+      film the stale number, and nothing would have caught the DOC.
 - [x] All three demos carry `{{TOOLS}}` rather than a machine path (gotcha 47), re-recorded
       from the detoxed scripts to prove the token resolves to the pinned 3.53.4.
 

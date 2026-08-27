@@ -18,7 +18,8 @@
     "commands": [
       "Set-Alias sq '{{TOOLS}}/sqlite/sqlite3.exe'",
       "Remove-Item shop.db -ErrorAction SilentlyContinue",
-      "sq shop.db \".read seed.sql\""
+      "sq shop.db \".read seed.sql\"",
+      "sq shop.db \"ALTER TABLE products ADD COLUMN note TEXT;\""
     ],
     "openFile": "orders.sql",
     "requires": [
@@ -73,6 +74,65 @@
         }
       ],
       "holdMs": 1300
+    },
+    {
+      "id": "aggregate",
+      "action": "run",
+      "cmd": "sq shop.db -box -header \"SELECT COUNT(*) AS orders, SUM(qty) AS units, ROUND(AVG(qty),2) AS avg_qty FROM orders;\"",
+      "label": "the whole table, as three numbers",
+      "focus": "terminal",
+      "holdMs": 1600,
+      "expect": {
+        "contains": "avg_qty"
+      },
+      "marks": [
+        {
+          "id": "units",
+          "text": "units"
+        },
+        {
+          "id": "avg",
+          "text": "2.17"
+        }
+      ]
+    },
+    {
+      "id": "having",
+      "action": "run",
+      "cmd": "sq shop.db -box -header \"SELECT product_id, SUM(qty) AS units FROM orders GROUP BY product_id HAVING SUM(qty) > 2;\"",
+      "label": "filtering the GROUPS, not the rows",
+      "focus": "terminal",
+      "holdMs": 1700,
+      "expect": {
+        "contains": "product_id"
+      },
+      "marks": [
+        {
+          "id": "kept",
+          "text": "product_id"
+        }
+      ]
+    },
+    {
+      "id": "null",
+      "action": "run",
+      "cmd": "sq shop.db -box -header \"SELECT name, note, note = '' AS is_empty, note IS NULL AS is_null FROM products LIMIT 2;\"",
+      "label": "NULL is not empty, and not zero",
+      "focus": "terminal",
+      "holdMs": 2000,
+      "expect": {
+        "contains": "is_null"
+      },
+      "marks": [
+        {
+          "id": "blank",
+          "text": "is_empty"
+        },
+        {
+          "id": "isnull",
+          "text": "is_null"
+        }
+      ]
     },
     {
       "id": "plan-before",

@@ -77,7 +77,9 @@
     "test-rec-determinism": "node scripts/test-rec-determinism.mjs",
     "test-rec-sync": "node scripts/test-rec-sync.mjs",
     "anchor-spec": "node scripts/anchor-spec.mjs",
-    "test-rec-anchors": "node scripts/test-rec-anchors.mjs"
+    "test-rec-anchors": "node scripts/test-rec-anchors.mjs",
+    "captures": "node scripts/gen-captures.mjs sqlite sqlite-act1 sqlite-act2 sqlite-act3",
+    "captures-check": "node scripts/gen-captures.mjs sqlite sqlite-act1 sqlite-act2 sqlite-act3 --check"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
