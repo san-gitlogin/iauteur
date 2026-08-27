@@ -237,6 +237,7 @@ export const TYPES = [
   'MCP_DEPRECATED',
   'MCP_REACH',
   'MCP_MESH',
+  'SCAN_VS_SEEK',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

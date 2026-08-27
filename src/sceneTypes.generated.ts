@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'SCAN_VS_SEEK'
   | 'MCP_MESH'
   | 'MCP_REACH'
   | 'MCP_DEPRECATED'
@@ -361,6 +362,20 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type ScanVsSeekScene = SceneCommon<'SCAN_VS_SEEK'> & { data: {
+    scanVsSeek: {
+      premise?: string;
+      caption?: string;
+      scanLabel?: string;
+      seekLabel?: string;
+      rows?: Array<Record<string, unknown>>;
+      targetIndex?: number;
+      scanAtWord?: number;
+      seekAtWord?: number;
+      atWord?: number;
+    };
+  } };
 
 export type McpMeshScene = SceneCommon<'MCP_MESH'> & { data: {
     mcpMesh: {
@@ -5185,6 +5200,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  SCAN_VS_SEEK: ScanVsSeekScene;
   MCP_MESH: McpMeshScene;
   MCP_REACH: McpReachScene;
   MCP_DEPRECATED: McpDeprecatedScene;
@@ -5535,6 +5551,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | ScanVsSeekScene
   | McpMeshScene
   | McpReachScene
   | McpDeprecatedScene

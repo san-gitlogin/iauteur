@@ -351,10 +351,12 @@ import {McpElicit} from './scenes/McpElicit';
 import {McpDeprecated} from './scenes/McpDeprecated';
 import {McpReach} from './scenes/McpReach';
 import {McpMesh} from './scenes/McpMesh';
+import {ScanVsSeek} from './scenes/ScanVsSeek';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {
+const registry: Record<string, React.FC<{scene: Scene}>> = {  SCAN_VS_SEEK: ScanVsSeek,
+
   MCP_MESH: McpMesh,
   MCP_REACH: McpReach,
   MCP_DEPRECATED: McpDeprecated,

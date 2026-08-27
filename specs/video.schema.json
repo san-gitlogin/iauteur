@@ -528,7 +528,8 @@
               "MCP_ELICIT",
               "MCP_DEPRECATED",
               "MCP_REACH",
-              "MCP_MESH"
+              "MCP_MESH",
+              "SCAN_VS_SEEK"
             ]
           },
           "narration": {
@@ -598,6 +599,59 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SCAN_VS_SEEK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "scanVsSeek": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "scanLabel": {
+                          "type": "string"
+                        },
+                        "seekLabel": {
+                          "type": "string"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "targetIndex": {
+                          "type": "number"
+                        },
+                        "scanAtWord": {
+                          "type": "number"
+                        },
+                        "seekAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

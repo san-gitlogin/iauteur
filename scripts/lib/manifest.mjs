@@ -16,7 +16,24 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  MCP_MESH: {
+export const MANIFEST = {  SCAN_VS_SEEK: {
+    category: "diagram", family: "diagram", data_key: "scanVsSeek",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      scanLabel: {t: 'string'},
+      seekLabel: {t: 'string'},
+      rows: {t: 'items'},
+      targetIndex: {t: 'number'},
+      scanAtWord: {t: 'number'},
+      seekAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {scanVsSeek: {"premise":"Six orders on disk. You want the ones for product 1.","caption":"the same question, asked two ways","scanLabel":"SCAN orders","seekLabel":"SEARCH orders USING INDEX","targetIndex":4,"rows":[{"label":"order 1","sub":"product 2"},{"label":"order 2","sub":"product 3"},{"label":"order 3","sub":"product 4"},{"label":"order 4","sub":"product 2"},{"label":"order 5","sub":"product 1"},{"label":"order 6","sub":"product 3"}],"scanAtWord":8,"seekAtWord":26,"atWord":2}},
+  },
+  MCP_MESH: {
     category: "diagram", family: "diagram", data_key: "mcpMesh",
     purpose: "One beat of an MCP lesson drawn as an M-by-N MESH: every client wired to every service, one wire at a time, until the count on screen is the argument; then a hub lands and the same job re-routes through M+N connections. The tally reads the wires actually drawn, so it can never disagree with the picture. Every element is timed from its own atWord so the picture lands on the spoken word.",
     use_when: "a beat turns on how many integrations something costs, or on a hub replacing point-to-point wiring",
