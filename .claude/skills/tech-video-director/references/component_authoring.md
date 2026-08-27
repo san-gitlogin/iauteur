@@ -123,6 +123,14 @@ but it only strips the type from `DYNAMIC`, so **delete your hand-written valida
   cannot drift. For labels pinned to a shape, render them INSIDE the same SVG as `<text>` (or
   anchored to the same element) — never as an absolutely-positioned div whose coordinates
   re-derive the layout (that drifts the moment the layout changes).
+- **`component-flow proof` renders ONE frame (120) of a spec built from the CONFIG's `example`,
+  not from the showcase.** Two consequences, both paid for on PLACEHOLDER_SEAL:
+  (a) if the example's anchors resolve past frame ~110, the proof shows only the PRE-payoff
+  state and the component looks broken or half-drawn. `wordToFrame(w) = (w-1)*12`, so keep a
+  proof example's anchors under word 9. (b) editing the example in `manifest.mjs` /
+  `showcaseSpec.ts` does NOT change what `proof` renders — edit the config file. A component
+  with a payoff STATE still needs a look at BOTH states (LAW 0n corollary); the cheap way is
+  two proof runs with the example's anchor moved, not a guess.
 - **Icons**: `AssetIcon asset="lucide:x"` (UI glyph) or `si:brand` (brand mark), always with
   `bare` inside cards, plus `tint` and `on={bgItSitsOn}` so the contrast guard keeps it visible.
 

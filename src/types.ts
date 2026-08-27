@@ -9960,7 +9960,24 @@ export interface ScanVsSeekData {
   seekAtWord?: number;
   atWord?: number;
 }
+export interface PlaceholderSealData {
+  premise?: string;
+  caption?: string;
+  queryHead?: string;
+  queryTail?: string;
+  value?: string;
+  evil?: string;
+  evilHighlight?: string;
+  safeLabel?: string;
+  evilLabel?: string;
+  safeResult?: string;
+  evilResult?: string;
+  safeAtWord?: number;
+  evilAtWord?: number;
+  atWord?: number;
+}
 export interface SceneData {
+  placeholderSeal?: PlaceholderSealData;
   scanVsSeek?: ScanVsSeekData;
   mcpMesh?: McpMeshData;
   mcpReach?: McpReachData;

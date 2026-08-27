@@ -352,10 +352,12 @@ import {McpDeprecated} from './scenes/McpDeprecated';
 import {McpReach} from './scenes/McpReach';
 import {McpMesh} from './scenes/McpMesh';
 import {ScanVsSeek} from './scenes/ScanVsSeek';
+import {PlaceholderSeal} from './scenes/PlaceholderSeal';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  SCAN_VS_SEEK: ScanVsSeek,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  PLACEHOLDER_SEAL: PlaceholderSeal,
+  SCAN_VS_SEEK: ScanVsSeek,
 
   MCP_MESH: McpMesh,
   MCP_REACH: McpReach,

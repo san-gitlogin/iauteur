@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'PLACEHOLDER_SEAL'
   | 'SCAN_VS_SEEK'
   | 'MCP_MESH'
   | 'MCP_REACH'
@@ -362,6 +363,25 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type PlaceholderSealScene = SceneCommon<'PLACEHOLDER_SEAL'> & { data: {
+    placeholderSeal: {
+      premise?: string;
+      caption?: string;
+      queryHead?: string;
+      queryTail?: string;
+      value?: string;
+      evil?: string;
+      evilHighlight?: string;
+      safeLabel?: string;
+      evilLabel?: string;
+      safeResult?: string;
+      evilResult?: string;
+      safeAtWord?: number;
+      evilAtWord?: number;
+      atWord?: number;
+    };
+  } };
 
 export type ScanVsSeekScene = SceneCommon<'SCAN_VS_SEEK'> & { data: {
     scanVsSeek: {
@@ -5200,6 +5220,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  PLACEHOLDER_SEAL: PlaceholderSealScene;
   SCAN_VS_SEEK: ScanVsSeekScene;
   MCP_MESH: McpMeshScene;
   MCP_REACH: McpReachScene;
@@ -5551,6 +5572,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | PlaceholderSealScene
   | ScanVsSeekScene
   | McpMeshScene
   | McpReachScene

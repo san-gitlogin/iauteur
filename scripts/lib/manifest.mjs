@@ -16,7 +16,29 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  SCAN_VS_SEEK: {
+export const MANIFEST = {  PLACEHOLDER_SEAL: {
+    category: "diagram", family: "diagram", data_key: "placeholderSeal",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      queryHead: {t: 'string'},
+      queryTail: {t: 'string'},
+      value: {t: 'string'},
+      evil: {t: 'string'},
+      evilHighlight: {t: 'string'},
+      safeLabel: {t: 'string'},
+      evilLabel: {t: 'string'},
+      safeResult: {t: 'string'},
+      evilResult: {t: 'string'},
+      safeAtWord: {t: 'number'},
+      evilAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {placeholderSeal: {"premise":"The same question, asked twice. Only one of them stays a question.","caption":"a value, or a piece of the sentence","queryHead":"SELECT name, price FROM products WHERE name = ","queryTail":"'","value":"USB-C hub","evil":"' OR 1=1 --","evilHighlight":"OR 1=1","safeLabel":"parameterised","evilLabel":"built by hand","safeResult":"1 row","evilResult":"all 4 rows","safeAtWord":2,"evilAtWord":4,"atWord":2}},
+  },
+  SCAN_VS_SEEK: {
     category: "diagram", family: "diagram", data_key: "scanVsSeek",
     purpose: "",
     use_when: "",

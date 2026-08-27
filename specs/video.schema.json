@@ -529,7 +529,8 @@
               "MCP_DEPRECATED",
               "MCP_REACH",
               "MCP_MESH",
-              "SCAN_VS_SEEK"
+              "SCAN_VS_SEEK",
+              "PLACEHOLDER_SEAL"
             ]
           },
           "narration": {
@@ -599,6 +600,71 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PLACEHOLDER_SEAL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "placeholderSeal": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "queryHead": {
+                          "type": "string"
+                        },
+                        "queryTail": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        },
+                        "evil": {
+                          "type": "string"
+                        },
+                        "evilHighlight": {
+                          "type": "string"
+                        },
+                        "safeLabel": {
+                          "type": "string"
+                        },
+                        "evilLabel": {
+                          "type": "string"
+                        },
+                        "safeResult": {
+                          "type": "string"
+                        },
+                        "evilResult": {
+                          "type": "string"
+                        },
+                        "safeAtWord": {
+                          "type": "number"
+                        },
+                        "evilAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

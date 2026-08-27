@@ -238,6 +238,7 @@ export const TYPES = [
   'MCP_REACH',
   'MCP_MESH',
   'SCAN_VS_SEEK',
+  'PLACEHOLDER_SEAL',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];
