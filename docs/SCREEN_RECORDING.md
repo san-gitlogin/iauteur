@@ -282,6 +282,25 @@ Machine: Windows 11, node v24.13.1, npm 11.8.0.
 22. **"Fit the whole region on screen" gives a zoom BELOW 1** for a wide, short bbox — measured
     k = 0.92 for a 1252×300 terminal in a 1600×900 capture, i.e. no punch-in at all. Use the
     LARGER ratio (cover, with cropping), capped, floored at 1.
+51. **A PULL-BACK IS A RELEASE, NOT A TEACHING BEAT — and one the viewer cannot register is
+    worse than none.** Found by pulling a frame out of the FINISHED 16:9 mp4: the SCAN ->
+    SEARCH payoff, the beat that cut exists for, rendered at full zoom with the one-word
+    difference about eleven pixels tall. `zooms: [{mark}, {at:'full'}]` plus a callout gave
+    zoom / callout / pull-back at words 81.0 / 81.8 / 82.75, because pass 2 spread in-clip
+    events EVENLY across the room after the footage — so the release shared airtime with the
+    beat it was meant to follow. Against the 18-frame ease the label was legible punched-in
+    for under half a second, in **four scenes of the long cut**, including the 8192-byte
+    reveal. Two changes, both in the solver so no spec has to remember: a trailing
+    `{at:'full'}` is pinned to the END of the clip window with the teaching beats spread
+    before it; and when it still cannot earn **36 frames (1.2s)** it is DROPPED and the beat
+    re-solved without it — the punch-in simply holds to the end, which is what the payoff
+    wanted. All five premature pull-backs across the three cuts disappeared.
+52. **`npx` IS NOT A DEPENDENCY WORTH HAVING.** `npx remotion render` died with
+    `ERR_INVALID_PACKAGE_CONFIG` pointing at npm's own `libnpmexec/package.json`, minutes
+    after `npx remotion bundle` had worked in the same shell — and then did it again on a
+    later bundle. The CLI is a dependency and its path is known, so `render-topic.mjs` calls
+    `node node_modules/@remotion/cli/remotion-cli.js` directly. One less moving part between
+    a finished spec and a file.
 49. **LAW 8 BOUNDS THE LAST ANCHOR, NOT THE LAST CLIP — and a callout is an anchor.** The
     solver placed each final clip correctly at ~72% of the read and then, in pass 2, put that
     clip's callouts *after* its footage, which landed them past the last spoken word: 13
