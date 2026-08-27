@@ -45,6 +45,27 @@ const id = `${slug}-${variant}`;
 const out = variant === 'thumb' || variant === 'cover'
   ? `topics/${slug}/out/${variant}.png`
   : `topics/${slug}/out/${variant}.mp4`;
+// A SPEC WITH AN UNBAKED CLIP MUST NOT RENDER AT ALL.
+//
+// PAID FOR: a 47-second short rendered end to end as an empty box with the words NOT BAKED
+// in the middle of it, because rebuilding the spec from its builder had wiped the bake. The
+// render was perfectly happy — RecordedStep draws a placeholder rather than crashing, which
+// is right for Studio and wrong for a deliverable. Four minutes of CPU produced a file that
+// could never have been used.
+//
+// check-recordings already knows how to spot it, so the render asks it first. Skipped for
+// thumb/cover, which draw no footage.
+if (variant !== 'thumb' && variant !== 'cover') {
+  try {
+    execSync('node scripts/check-recordings.mjs --quiet', {stdio: 'inherit'});
+  } catch {
+    console.error('');
+    console.error('REFUSING TO RENDER: the spec references footage it has not baked.');
+    console.error('Rendering it would produce a placeholder, not a video. Fix the above first.');
+    process.exit(1);
+  }
+}
+
 // CALL THE CLI DIRECTLY, NOT THROUGH npx.
 //
 // PAID FOR: `npx remotion render` died on this machine with
