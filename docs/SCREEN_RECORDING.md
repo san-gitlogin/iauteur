@@ -282,6 +282,15 @@ Machine: Windows 11, node v24.13.1, npm 11.8.0.
 22. **"Fit the whole region on screen" gives a zoom BELOW 1** for a wide, short bbox — measured
     k = 0.92 for a 1252×300 terminal in a 1600×900 capture, i.e. no punch-in at all. Use the
     LARGER ratio (cover, with cropping), capped, floored at 1.
+56. **A SEAL THAT SKIPS THE BROKEN STATE IS NOT A SEAL.** Rebuilding a spec from its builder
+    wipes the bake — a builder writes `ref` only — and the next render drew the "NOT BAKED"
+    placeholder for a whole 47-second short. `check-recordings` ran and reported **PASSED**:
+    its freshness loop opened with `if (!clip.src || clip.frames == null) continue;`, so the
+    one state that is always wrong was the one state it ignored. It was checking that baked
+    numbers were FRESH while saying nothing about a clip never baked at all. It now fails,
+    names the clip and prints the three commands that fix it — and `render-topic.mjs` runs it
+    BEFORE rendering, so a placeholder can never reach an mp4 again. Both break-tested.
+    **After re-running any spec builder: bake -> anchor -> sync -> lint. Every time.**
 53. **`layout: "full"` IS THE DEFAULT, AND THE MANIFEST SAID SO ALL ALONG.** Owner: *"have
     the video as base and include components that float over the video that does not hide the
     content."* The manifest field note has always read *"full (default) = the footage IS the
