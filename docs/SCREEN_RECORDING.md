@@ -282,6 +282,32 @@ Machine: Windows 11, node v24.13.1, npm 11.8.0.
 22. **"Fit the whole region on screen" gives a zoom BELOW 1** for a wide, short bbox — measured
     k = 0.92 for a 1252×300 terminal in a 1600×900 capture, i.e. no punch-in at all. Use the
     LARGER ratio (cover, with cropping), capped, floored at 1.
+53. **`layout: "full"` IS THE DEFAULT, AND THE MANIFEST SAID SO ALL ALONG.** Owner: *"have
+    the video as base and include components that float over the video that does not hide the
+    content."* The manifest field note has always read *"full (default) = the footage IS the
+    frame, overlays on top"* — the component never implemented it, so every recorded beat got
+    the bordered card. The card costs about a third of the frame in chrome, which forces a
+    harder punch-in to keep text readable, which is what cut commands off at the right. In
+    full-bleed the capture fills the frame, **the camera does not move at all**, and emphasis
+    moves from the lens to the neon box. `layout: "card"` asks for the old panel back. Wide
+    only — a 16:9 capture in a 9:16 frame has to crop to a third of its width.
+54. **"OUTSIDE THE BBOX" IS NOT "EMPTY" — USE THE MARKS.** Placing the floating overlays took
+    five renders. Pinned to the floor they covered the terminal; flipped by `column-reverse`
+    every child reversed and the lot piled at the bottom; pinned to the free EDGE the premise
+    and the cluster took opposite edges and the premise landed on the terminal; joined into
+    one group they still sat on the editor's first lines. The bbox is a PANE, not the writing
+    in it. **Every mark the runner measured is a rectangle around real text**, so the union of
+    all marks in the scene, projected to screen space, gives the tallest genuinely ink-free
+    band — and the group goes in the middle of that. On the schema beat that is between the
+    last line of code and the top of the terminal, with both fully readable.
+55. **THE WINDOW MUST CONTAIN ITS TARGET'S WIDTH, and the box must be clamped to the view.**
+    Owner: *"mostly the highlights that is done gets hidden to the right"*. `Math.min(width-
+    driven, height-driven)` — COVER, gotcha 33 — was written for a wide, short TERMINAL bbox.
+    Applied to a MARK, whose height is one text line, the height candidate is always tiny, so
+    a 723px-wide line got a 381px window and the highlight box left the screen with its label
+    attached. Width leads, height follows. Where a line still cannot fit (9:16 over a 16:9
+    capture tops out near 720 capture-px) the box is CLAMPED to the visible region so it
+    frames the visible part rather than leaving the video.
 51. **A PULL-BACK IS A RELEASE, NOT A TEACHING BEAT — and one the viewer cannot register is
     worse than none.** Found by pulling a frame out of the FINISHED 16:9 mp4: the SCAN ->
     SEARCH payoff, the beat that cut exists for, rendered at full zoom with the one-word
