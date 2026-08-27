@@ -45,9 +45,18 @@ const id = `${slug}-${variant}`;
 const out = variant === 'thumb' || variant === 'cover'
   ? `topics/${slug}/out/${variant}.png`
   : `topics/${slug}/out/${variant}.mp4`;
+// CALL THE CLI DIRECTLY, NOT THROUGH npx.
+//
+// PAID FOR: `npx remotion render` died on this machine with
+//   npm error ERR_INVALID_PACKAGE_CONFIG
+//   Invalid package config <UNC-prefixed path to npm's own libnpmexec/package.json>
+// after `npx remotion bundle` had worked minutes earlier in the same shell. npx is a
+// resolver we do not need: the CLI is a dependency, its path is known, and `node <path>`
+// has no npm layer to be broken by. One less moving part between a finished spec and a file.
+const REMOTION_CLI = 'node_modules/@remotion/cli/remotion-cli.js';
 const cmd = variant === 'thumb' || variant === 'cover'
-  ? `npx remotion still ${id} ${out}`
-  : `npx remotion render ${id} ${out}`;
+  ? `node ${REMOTION_CLI} still ${id} ${out}`
+  : `node ${REMOTION_CLI} render ${id} ${out}`;
 console.log('→ ' + cmd);
 execSync(cmd, {stdio: 'inherit'});
 

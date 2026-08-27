@@ -613,9 +613,33 @@ Built and render-verified at both aspects: **DB_TWO_WAYS · TYPE_GATE · JOIN_ME
 SCAN_VS_SEEK · PLACEHOLDER_SEAL · TRANSACTION_DOOR**. Every one of them had at least one
 defect that was invisible in the code and obvious in a still.
 
-**Pending for this course:** five more components (`GROUP_BUCKETS`, `TABLE_SPLIT`,
-`INDEX_LEDGER`, `WHERE_IT_RUNS`, `WHEN_NOT_SQLITE`), then the three specs (long 20–30min,
-shorts, short-wide), then anchor → lint → voiceover → sync → verify-render → render.
+### P4d — SQLite course SPECS  **BUILT, VOICED, SYNCED, LINT-CLEAN (2026-08-27)**
+
+| Cut | Slug | Scenes | Runtime | State |
+|---|---|---|---|---|
+| Long 16:9 | `sqlite-the-database-that-is-just-a-file` `long.json` | 37 | **14:00** | synced, lint-clean |
+| Short 9:16 | same topic, `shorts.json` | 3 | ~0:50 | synced, lint-clean, verify-render PASSED |
+| Short 16:9 | `sqlite-scan-vs-search` `long.json` | 4 | ~1:25 | synced, lint-clean |
+
+All 11 components built and render-verified. All 31 clips used. Voiced with
+`en-US-AvaMultilingualNeural`, re-timed by `sync.mjs` from the real audio.
+
+**RUNTIME IS BELOW THE 20–30 MIN ASK — 14:00, and this is reported rather than padded.**
+The scene ceiling (`180 * anchors + 120`, hard cap 70s) bounds how long any one beat may run,
+so more minutes means more BEATS, not longer ones (LAW 0e rule 6a says exactly this: the fix
+is more teaching, never padding). Reaching 20 minutes needs roughly 15–20 more taught beats
+and the captures to back them — the SQL surface has them (LEFT JOIN, UNIQUE, DEFAULT, CHECK,
+dates, LIKE/IN, subqueries, VACUUM, WAL, ATTACH), so this is more work, not a dead end.
+
+**NEXT, and the only thing left:** render the three cuts. Nothing is blocked.
+```
+npm run render -- sqlite-the-database-that-is-just-a-file short-dark
+npm run render -- sqlite-scan-vs-search wide-dark
+npm run render -- sqlite-the-database-that-is-just-a-file wide-dark   # 14 min: SEGMENT IT (LAW 12)
+```
+The bundle at `build/` is current. `scripts/render-topic.mjs` now calls the Remotion CLI
+directly instead of through `npx`, which died on this machine with
+`ERR_INVALID_PACKAGE_CONFIG` minutes after `npx remotion bundle` had worked.
 
 ### P6 — Proof episode
 
