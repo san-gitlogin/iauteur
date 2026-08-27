@@ -533,7 +533,8 @@
               "PLACEHOLDER_SEAL",
               "JOIN_MERGE",
               "DB_TWO_WAYS",
-              "TYPE_GATE"
+              "TYPE_GATE",
+              "TRANSACTION_DOOR"
             ]
           },
           "narration": {
@@ -603,6 +604,65 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TRANSACTION_DOOR"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "transactionDoor": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "pendingLabel": {
+                          "type": "string"
+                        },
+                        "diskLabel": {
+                          "type": "string"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "diskBefore": {
+                          "type": "string"
+                        },
+                        "diskAfter": {
+                          "type": "string"
+                        },
+                        "outcome": {
+                          "type": "string"
+                        },
+                        "stageAtWord": {
+                          "type": "number"
+                        },
+                        "actAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

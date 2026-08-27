@@ -16,7 +16,26 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  TYPE_GATE: {
+export const MANIFEST = {  TRANSACTION_DOOR: {
+    category: "diagram", family: "diagram", data_key: "transactionDoor",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      pendingLabel: {t: 'string'},
+      diskLabel: {t: 'string'},
+      rows: {t: 'items'},
+      diskBefore: {t: 'string'},
+      diskAfter: {t: 'string'},
+      outcome: {t: 'string'},
+      stageAtWord: {t: 'number'},
+      actAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {transactionDoor: {"premise":"The DELETE ran. Whether it HAPPENED is a different question.","caption":"nothing is real until you commit","pendingLabel":"in this connection","diskLabel":"shop.db","outcome":"rollback","diskBefore":"8 rows","diskAfter":"8 rows","rows":[{"label":"DELETE FROM products"},{"label":"7 rows removed"},{"label":"COUNT(*) now 0"}],"stageAtWord":3,"actAtWord":6,"atWord":2}},
+  },
+  TYPE_GATE: {
     category: "diagram", family: "diagram", data_key: "typeGate",
     purpose: "",
     use_when: "",

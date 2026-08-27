@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'TRANSACTION_DOOR'
   | 'TYPE_GATE'
   | 'DB_TWO_WAYS'
   | 'JOIN_MERGE'
@@ -366,6 +367,22 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type TransactionDoorScene = SceneCommon<'TRANSACTION_DOOR'> & { data: {
+    transactionDoor: {
+      premise?: string;
+      caption?: string;
+      pendingLabel?: string;
+      diskLabel?: string;
+      rows?: Array<Record<string, unknown>>;
+      diskBefore?: string;
+      diskAfter?: string;
+      outcome?: string;
+      stageAtWord?: number;
+      actAtWord?: number;
+      atWord?: number;
+    };
+  } };
 
 export type TypeGateScene = SceneCommon<'TYPE_GATE'> & { data: {
     typeGate: {
@@ -5269,6 +5286,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  TRANSACTION_DOOR: TransactionDoorScene;
   TYPE_GATE: TypeGateScene;
   DB_TWO_WAYS: DbTwoWaysScene;
   JOIN_MERGE: JoinMergeScene;
@@ -5624,6 +5642,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | TransactionDoorScene
   | TypeGateScene
   | DbTwoWaysScene
   | JoinMergeScene

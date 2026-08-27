@@ -680,3 +680,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | JOIN_MERGE |  | premise, caption, leftTable, rightTable, leftRow, rightRow, keyLeft, keyRight, resultLabel, keyAtWord, mergeAtWord, atWord |
 | DB_TWO_WAYS |  | premise, caption, serverLabel, fileLabel, serverParts, fileName, fileSize, fileNote, atWord |
 | TYPE_GATE |  | premise, caption, columnName, columnType, goodValue, badValue, errorText, passAtWord, rejectAtWord, atWord |
+| TRANSACTION_DOOR |  | premise, caption, pendingLabel, diskLabel, rows, diskBefore, diskAfter, outcome, stageAtWord, actAtWord, atWord |

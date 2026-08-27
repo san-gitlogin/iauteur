@@ -242,6 +242,7 @@ export const TYPES = [
   'JOIN_MERGE',
   'DB_TWO_WAYS',
   'TYPE_GATE',
+  'TRANSACTION_DOOR',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];
