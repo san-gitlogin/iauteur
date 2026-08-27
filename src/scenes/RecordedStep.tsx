@@ -146,7 +146,21 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     if (!r) return wide;
     const bw = Math.max(1, Number(r.w));
     const bh = Math.max(1, Number(r.h));
-    let winW = Math.max(Math.min(bw * 1.18, bh * stageAspect * 1.18), capW / (vertical || split ? 4.2 : 3.2));
+    // THE WINDOW MUST CONTAIN THE TARGET'S WIDTH. Text is read across, so a window
+    // narrower than the thing it frames does not "punch in" — it cuts the sentence, and
+    // draws a highlight box that leaves the screen with its label attached.
+    //
+    // PAID FOR, owner on the shipped shorts: *"Shorts still has part of the required video
+    // hidden due to width, and mostly the highlights that is done gets hidden to the right"*
+    // and on the wide cut *"the command you are executing gets hidden to the right"*.
+    // Measured: the mark on `cur.execute("SELECT ... ?", (wanted,))` is 723px wide, and this
+    // line produced a 381px window — the box was nearly twice the frame it was drawn in.
+    //
+    // The old form took `Math.min(width-driven, height-driven)` — COVER, from gotcha 33,
+    // which was written for the CLIP BBOX (a wide, short terminal that should be punched
+    // into). Applied to a MARK, whose height is one text line, the height-driven candidate is
+    // always tiny, so the minimum could never contain the words. Width leads; height follows.
+    let winW = Math.max(bw * 1.08, capW / (vertical || split ? 4.2 : 3.2));
     let winH = winW / stageAspect;
     if (winH > capH) { winH = capH; winW = winH * stageAspect; }
     if (winW > capW) { winW = capW; winH = winW / stageAspect; }
@@ -307,47 +321,140 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
               it. Drawn in capture space and scaled with the stage, so the arrow still
               lands if the capture size or the stage size changes.
               They ride INSIDE the zoom container so a punch-in carries them along. */}
-          {(cur.callouts ?? []).slice(0, 4).map((co, i) => {
-            const start = wordToFrame(co.atWord ?? cur.atWord ?? 1);
-            if (frame < start) return null;
+          {(() => {
+            // ── PLACE EVERY VISIBLE CALLOUT TOGETHER, NOT ONE AT A TIME ────────────
+            //
+            // Owner, on the shipped cuts: *"the point for the highlights are coming from the
+            // center of the highlight box, sometimes its fine, sometimes, it hides the text,
+            // which can be adjusted by making the lines and dot responsive to the UI, so that
+            // it can be displayed at any place on the screen like top right, top left, which
+            // doesnt overlap with another highlight."*
+            //
+            // Three defects in one sentence, and all three came from deciding each callout in
+            // isolation, in its own `.map()` iteration:
+            //   1. the leader started at the box CENTRE, so it crossed the very words the box
+            //      was drawn around;
+            //   2. a label could land on another callout's box, because nothing knew the
+            //      others existed;
+            //   3. "right" was preferred unconditionally, which on a terminal line is exactly
+            //      where the rest of the command is.
+            //
+            // So placement is solved for the whole set first: the leader leaves from the box
+            // EDGE facing the label, and each label takes the best free position out of ten,
+            // scored against the other boxes and the labels already placed.
+            const vx = view.x, vy = view.y, vw = view.w, vh = view.h;
+            // capture units per rendered pixel — labels are HTML sized in screen px, the
+            // geometry is in capture space, and collisions have to be judged in one of them.
+            const u = vw / Math.max(1, stageW);
+            const visible = (cur.callouts ?? []).slice(0, 4)
+              .map((co, i) => ({co, i, start: wordToFrame(co.atWord ?? cur.atWord ?? 1)}))
+              .filter((e) => frame >= e.start)
+              .map((e) => ({...e, target: ((e.co.mark && cur.marks?.[e.co.mark]) || bb) as {x: number; y: number; w: number; h: number}}))
+              .filter((e) => !!e.target);
+
+            const pad = 8 * u;
+            const gap = 20 * u;
+            // THE BOX IS CLAMPED TO WHAT IS ON SCREEN. When a marked line is wider than the
+            // window can hold — which 9:16 cannot always avoid, since a 0.8-aspect stage over
+            // a 16:9 capture tops out around 720 capture-px of width — an unclamped rect
+            // leaves the frame and drags its label with it. Clamping draws the box around the
+            // VISIBLE part of the line instead, which still reads as "this line" and stays
+            // inside the video.
+            const clampBox = (r: {x: number; y: number; w: number; h: number}) => {
+              const x0 = Math.max(Number(r.x) - 4, vx + 3);
+              const y0 = Math.max(Number(r.y) - 4, vy + 3);
+              const x1 = Math.min(Number(r.x) + Number(r.w) + 4, vx + vw - 3);
+              const y1 = Math.min(Number(r.y) + Number(r.h) + 4, vy + vh - 3);
+              return {x: x0, y: y0, w: Math.max(8, x1 - x0), h: Math.max(8, y1 - y0)};
+            };
+            const boxes = visible.map((e) => clampBox(e.target));
+            type Rect = {x: number; y: number; w: number; h: number};
+            const hits = (a: Rect, b: Rect) =>
+              a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+            const inside = (r: Rect) =>
+              r.x >= vx + pad && r.y >= vy + pad &&
+              r.x + r.w <= vx + vw - pad && r.y + r.h <= vy + vh - pad;
+
+            const placed: {x: number; y: number; w: number; h: number}[] = [];
+            const placements = visible.map((e, n) => {
+              const t = boxes[n];                    // the CLAMPED box, so the label and the
+              const tx0 = Number(t.x), ty0 = Number(t.y);   // leader agree with what is drawn
+              const tw = Number(t.w), th = Number(t.h);
+              const cx = tx0 + tw / 2, cy = ty0 + th / 2;
+              const txt = String(e.co.text ?? '');
+              // Estimated on the same numbers the label is styled with, below.
+              const lw = (txt.length * 17 * 0.62 + 26) * scale * u;
+              const lh = (17 * 1.55 + 12) * scale * u;
+
+              // A TERMINAL FILLS FROM THE TOP AND THE LAST LINE HAS EMPTY SPACE UNDER IT, so
+              // "below" is the safest place for a label on the lower half of a pane, and
+              // "above" for the upper half. The previous rule was the other way round.
+              const lower = cy > vy + vh * 0.5;
+              const order = lower
+                ? ['below', 'below-right', 'below-left', 'above', 'right', 'left', 'above-right', 'above-left']
+                : ['above', 'above-right', 'above-left', 'below', 'right', 'left', 'below-right', 'below-left'];
+              const at = (side: string) => {
+                switch (side) {
+                  case 'right': return {x: tx0 + tw + gap, y: cy - lh / 2, side};
+                  case 'left': return {x: tx0 - gap - lw, y: cy - lh / 2, side};
+                  case 'above': return {x: cx - lw / 2, y: ty0 - gap - lh, side};
+                  case 'below': return {x: cx - lw / 2, y: ty0 + th + gap, side};
+                  case 'above-right': return {x: tx0 + tw * 0.5, y: ty0 - gap - lh, side};
+                  case 'above-left': return {x: tx0 + tw * 0.5 - lw, y: ty0 - gap - lh, side};
+                  case 'below-right': return {x: tx0 + tw * 0.5, y: ty0 + th + gap, side};
+                  default: return {x: tx0 + tw * 0.5 - lw, y: ty0 + th + gap, side};
+                }
+              };
+              const obstacles = boxes.filter((_, k) => k !== n).concat(placed);
+              let pick = null;
+              for (const side of (e.co.side ? [e.co.side, ...order] : order)) {
+                const p = at(side);
+                const r = {x: p.x, y: p.y, w: lw, h: lh};
+                if (!inside(r)) continue;
+                if (obstacles.some((o) => hits(r, o))) continue;
+                pick = {...p, w: lw, h: lh};
+                break;
+              }
+              if (!pick) {
+                // Nothing clean: sit it in the emptiest corner of the view rather than on
+                // top of something. A label the viewer can read beside the wrong thing beats
+                // a label they cannot read at all.
+                const corners = [
+                  {x: vx + vw - pad - lw, y: vy + pad, side: 'corner'},
+                  {x: vx + pad, y: vy + pad, side: 'corner'},
+                  {x: vx + vw - pad - lw, y: vy + vh - pad - lh, side: 'corner'},
+                  {x: vx + pad, y: vy + vh - pad - lh, side: 'corner'},
+                ];
+                pick = corners
+                  .map((p) => ({p, bad: obstacles.filter((o) => hits({...p, w: lw, h: lh}, o)).length}))
+                  .sort((a, b) => a.bad - b.bad)[0].p;
+                pick = {...pick, w: lw, h: lh};
+              }
+              placed.push({x: pick.x, y: pick.y, w: lw, h: lh});
+
+              // THE LEADER LEAVES FROM THE EDGE OF THE BOX, not its middle, so it never
+              // crosses the words the box is drawn around. The end it leaves from is the one
+              // facing the label.
+              const lcx = pick.x + lw / 2, lcy = pick.y + lh / 2;
+              const ax = lcx < tx0 ? tx0 : lcx > tx0 + tw ? tx0 + tw : cx;
+              const ay = lcy < ty0 ? ty0 : lcy > ty0 + th ? ty0 + th : cy;
+              // ...and lands on the label's nearest edge, not its centre.
+              const bx = lcx < ax ? pick.x + lw : lcx > ax ? pick.x : lcx;
+              const by = lcy < ay ? pick.y + lh : lcy > ay ? pick.y : lcy;
+              return {...e, ax, ay, bx, by, label: pick, box: t};
+            });
+
+            return placements.map(({co, i, start, target, ax, ay, bx, by, label, box}) => {
             const t0 = interpolate(frame, [start, start + 12], [0, 1], clamp);
-            const target = (co.mark && cur.marks?.[co.mark]) || bb;
-            if (!target) return null;
-            const tx = Number(target.x) + Number(target.w) / 2;
-            const ty = Number(target.y) + Number(target.h) / 2;
-            // Default side: prefer the SIDE, not above/below. The things worth pointing
-            // at are lines of text in a stacked pane — terminal rows, editor lines — so a
-            // label placed above lands squarely on the previous line and hides it
-            // (measured: "this line is new" covered "Hello, iAuteur!"). There is almost
-            // always empty space to the right of a line of text; use it. Fall back to
-            // above/below only when the target really is near the right edge.
-            // CHOOSE THE SIDE AGAINST WHAT IS ON SCREEN, NOT AGAINST THE WHOLE CAPTURE.
-            // The viewer sees the punched-in VIEW; measuring "is there room to the right?"
-            // against the full 1600px capture said yes while the visible window ended a few
-            // pixels past the target, and the label ran off the edge of the video. Measured
-            // on the 9:16 short the moment the window was pulled back to keep line starts
-            // visible — the two are the same rectangle, so they have to agree.
-            const vx = view.x;
-            const vw = view.w;
-            const vy = view.y;
-            const vh = view.h;
-            const rightEdge = Number(target.x) + Number(target.w);
-            // A label needs roughly a third of the visible width to sit beside the target.
-            const roomRight = vx + vw - rightEdge;
-            const roomLeft = Number(target.x) - vx;
-            const need = vw * 0.34;
-            const side = co.side ?? (
-              roomRight >= need ? 'right'
-                : roomLeft >= need ? 'left'
-                  : ty > vy + vh * 0.55 ? 'top' : 'bottom');
-            const gap = 34 / k * (stageW / 1000); // keep the leader a constant on-screen length
-            const lx = side === 'left' ? Number(target.x) - gap : side === 'right' ? Number(target.x) + Number(target.w) + gap : tx;
-            const ly = side === 'top' ? Number(target.y) - gap : side === 'bottom' ? Number(target.y) + Number(target.h) + gap : ty;
+            const tx = ax;
+            const ty = ay;
+            const lx = bx;
+            const ly = by;
             const c = sem(co.color ?? d.color ?? 'blue');
             const glow = t.style.glow;
             // Stroke the outline on over ~14 frames from this callout's OWN anchor.
             const draw = easeInOutCubic(interpolate(frame, [start, start + 14], [0, 1], clamp));
-            const perim = 2 * (Number(target.w) + Number(target.h)) + 40;
+            const perim = 2 * (box.w + box.h) + 40;
             return (
               <AbsoluteFill key={`co-${active}-${i}`} style={{pointerEvents: 'none', opacity: t0}}>
                 <svg width="100%" height="100%" viewBox={`0 0 ${capW} ${capH}`} preserveAspectRatio="none">
@@ -359,10 +466,10 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                       moving after the point is made (LAW 0h is about exactly that kind of
                       standing distraction); a draw-on lands once and then holds. */}
                   <rect
-                    x={Number(target.x) - 4}
-                    y={Number(target.y) - 4}
-                    width={Number(target.w) + 8}
-                    height={Number(target.h) + 8}
+                    x={box.x}
+                    y={box.y}
+                    width={box.w}
+                    height={box.h}
                     rx={6}
                     fill={glow > 0 ? hexA(c, 0.1 * t0) : 'none'}
                     stroke={c}
@@ -385,25 +492,16 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                   <div
                     style={{
                       position: 'absolute',
-                      left: `${(lx / capW) * 100}%`,
-                      top: `${(ly / capH) * 100}%`,
-                      // Anchor the label by the edge that faces the target, so it never
-                      // sits on top of what it is pointing at.
+                      // The solver already chose a free RECTANGLE in capture space, so the
+                      // label is positioned by its own top-left and needs no side-based
+                      // transform. The old translate()/transformOrigin pair re-derived a
+                      // position the solver had already decided, which is how a label ended
+                      // up half a box away from where collision was checked.
+                      left: `${(label.x / capW) * 100}%`,
+                      top: `${(label.y / capH) * 100}%`,
                       // NO scale compensation. The label is HTML inside the scaled BOX,
                       // not inside the SVG's user-unit space, so its font-size is already
-                      // in real pixels. The old `1/zoom` factor was correct when the
-                      // container was transform-scaled; carried over to the view-window
-                      // model it shrank the label to unreadable at high punch-in.
-                      // (SVG strokes DO still divide by k — those are in user units.)
-                      transform:
-                        side === 'right' ? 'translate(0, -50%)'
-                          : side === 'left' ? 'translate(-100%, -50%)'
-                            : side === 'top' ? 'translate(-50%, -100%)'
-                              : 'translate(-50%, 0)',
-                      transformOrigin:
-                        side === 'right' ? 'left center'
-                          : side === 'left' ? 'right center'
-                            : side === 'top' ? 'bottom center' : 'top center',
+                      // in real pixels. (SVG strokes DO still divide by k.)
                       background: c,
                       color: t.colors.bg,
                       fontFamily: t.fonts.mono,
@@ -420,7 +518,8 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                 ) : null}
               </AbsoluteFill>
             );
-          })}
+            });
+          })()}
 
           </div>
 
