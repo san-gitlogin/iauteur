@@ -352,6 +352,7 @@
               "QUIZ_CARD",
               "CODE_RUN",
               "BROWSER_STEP",
+              "RECORDED_STEP",
               "OVERLAY_BLOCK",
               "FIXTURE_CREW",
               "CHANGE_RIPPLE",
@@ -15056,6 +15057,61 @@
                         "atWord": {
                           "type": "number",
                           "description": "BASE only - the page, the button and the overlay are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RECORDED_STEP"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "recordedStep": {
+                      "type": "object",
+                      "properties": {
+                        "clips": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-8 x {ref = 'rec:<slug>#<step>' (bake-rec.mjs resolves it to src/frames/bbox/marks), label = plain-English note for this step (<=26), focus = punch in on the step's bbox, spotlight = dim everything but the bbox, callouts = 0-4 x {text (<=64), mark = which named rectangle the RUNNER measured to point at, side = top|bottom|left|right (default auto), color?, atWord}, keys = the chord the runner PRESSED (baked, e.g. [\"Ctrl\",\"S\"]) with optional keysAtWord, zooms = 0-6 CAMERA MOVES inside this one clip, each {mark = a rectangle the runner measured | at:'full' to pull back out, atWord} - zoom to the code, PAN to the output, then pull back, all while the footage holds, atWord}. EVERY clip AND every callout needs atWord - a segment starting on its own spoken word IS the whole mechanism. A callout never carries a hand-typed pixel position: it points at a MARK the capture measured, so it still lands after a re-record or a viewport change. The gap to the next anchor must be >= the segment's own length or the footage gets cut off mid-action; the linter enforces it."
+                        },
+                        "capture": {
+                          "type": "object",
+                          "description": "baked from the manifest: {width,height} of the capture viewport, used to map bboxes into stage space"
+                        },
+                        "layout": {
+                          "type": "string",
+                          "description": "full (default) = the footage IS the frame, overlays on top. split = footage one side, the demo's own steps read down the other. Use split ONLY for a wide capture with a small region of interest and a lot to say - halving the footage width halves the legibility. Ignored in 9:16, where there is no width to give away."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "one plain-words takeaway under the footage"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 150,
+                          "description": "THE STANDING SETUP, <=150 chars (LAW 0l): one plain sentence naming what the viewer is looking at. Carries NO marker."
+                        },
+                        "color": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the frame, premise and rail are on screen by frame 38 regardless of where this lands"
                         }
                       }
                     }

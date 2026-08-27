@@ -2074,6 +2074,80 @@ export interface BrowserStepData {
   color?: SemColor;
   atWord?: number;
 }
+// ── RECORDED_STEP — real captured footage, replayed on the narrator's clock ──
+// A bbox is the element rectangle the RUNNER measured, in CAPTURE space (the
+// viewport the recording was made at). Overlays map it through `capture`, so a
+// callout lands on the right pixels without anyone placing it by hand.
+export interface RecordedBBox {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+/** A label with a leader line, pointing at a rectangle the RUNNER measured. */
+export interface RecordedCallout {
+  /** The plain-English point being made, <=64 chars. */
+  text?: string;
+  /** Which named mark to point at (from the capture manifest). Falls back to the step bbox. */
+  mark?: string;
+  /** Which side of the target the label sits on. Default: auto from the target's position. */
+  side?: 'top' | 'bottom' | 'left' | 'right';
+  color?: SemColor;
+  /** THE anchor: the word at which this callout appears. */
+  atWord?: number;
+}
+export interface RecordedClip {
+  /** Baked: named rectangles measured by the runner, for callouts to point at. */
+  marks?: Record<string, RecordedBBox>;
+  /** Baked: the key chord the runner actually pressed for this step, e.g. ["Ctrl","S"]. */
+  keys?: string[];
+  /** The word at which the keycaps appear. Defaults to the clip's own anchor. */
+  keysAtWord?: number;
+  /** 0-4 callouts, each anchored to its own spoken word. */
+  callouts?: RecordedCallout[];
+  /** Authored as `rec:<slug>#<step>`; bake-rec.mjs resolves it into `src`. */
+  ref?: string;
+  /** Baked: public-relative path to the segment, e.g. `rec/<slug>/seg-03.mp4`. */
+  src?: string;
+  /** Baked: the segment's REAL length in frames, measured by ffprobe at capture. */
+  frames?: number;
+  /** The runner's step id, carried through for traceability. */
+  id?: string;
+  /** Plain-English note for this step, shown in the rail. */
+  label?: string;
+  /** Baked: where to look, from the runner. */
+  bbox?: RecordedBBox;
+  /** Punch in on the bbox for this step. */
+  focus?: boolean;
+  /**
+   * A SEQUENCE of camera moves within this one clip, each on its own spoken word — so a
+   * step with two things worth seeing (the line you typed, then the output it produced)
+   * can visit both while the footage under it holds. `mark` names a rectangle the RUNNER
+   * measured; `at: "full"` pulls back out to the whole capture.
+   */
+  zooms?: Array<{mark?: string; at?: 'full'; atWord?: number}>;
+  /** Dim everything but the bbox for this step. */
+  spotlight?: boolean;
+  /** THE anchor: the word at which this segment starts playing. */
+  atWord?: number;
+}
+export interface RecordedStepData {
+  clips?: RecordedClip[];
+  /**
+   * How the footage sits in the frame.
+   *  full  (default) — the footage IS the frame; overlays ride on top of it.
+   *  split — footage on one side, the demo's own steps read as a list on the other.
+   * Use `split` only when the capture has a SMALL region of interest and a lot to say
+   * about it: halving the footage width halves the legibility you just paid for.
+   */
+  layout?: 'full' | 'split';
+  /** The capture viewport, so bboxes can be mapped into stage space. */
+  capture?: {width?: number; height?: number};
+  caption?: string;
+  premise?: string;
+  color?: SemColor;
+  atWord?: number;
+}
 export interface OverlayBlockData {
   button?: string;
   overlayLabel?: string;
@@ -10003,6 +10077,7 @@ export interface SceneData {
   fixtureCrew?: FixtureCrewData;
   overlayBlock?: OverlayBlockData;
   browserStep?: BrowserStepData;
+  recordedStep?: RecordedStepData;
   codeRun?: CodeRunData;
   quiz?: QuizCardData;
   stage?: TheaterStageData;

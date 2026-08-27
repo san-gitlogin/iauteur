@@ -3729,6 +3729,21 @@ export const MANIFEST = {  MCP_MESH: {
     },
     example: {overlayBlock: {"screenTitle":"Your basket","button":"Checkout","overlayLabel":"We use cookies","overlayButton":"Accept","blockedNote":"the click hits the banner","clearedNote":"banner gone, click lands","waitLabel":"waiting...","caption":"Playwright waits, then clicks","color":"blue","atWord":2,"blockedAtWord":8,"clearedAtWord":20}},
   },
+  RECORDED_STEP: {
+    category: "code", family: "recording", data_key: "recordedStep",
+    purpose: "REAL captured footage of real software really running, replayed on the NARRATOR'S clock. A demo is captured once as one segment per authored step; this plays segment k from its own narration word and then FREEZES on its last frame until the voice reaches the next word. Rewrite the narration and the demo re-paces itself with no re-capture. Every frame of terminal output shown was read back from the real terminal — nothing here is reconstructed.",
+    use_when: "A beat where seeing the thing ACTUALLY WORK beats any drawing of it: a command run and its real output, a real IDE, a real browser, a real failure. Prefer a drawn component when the point is a MECHANISM or an analogy (LAW 0j) — footage shows what happened, not why.",
+    fields: {
+      clips: {t: 'items', req: true, note: "1-8 x {ref = 'rec:<slug>#<step>' (bake-rec.mjs resolves it to src/frames/bbox/marks), label = plain-English note for this step (<=26), focus = punch in on the step's bbox, spotlight = dim everything but the bbox, callouts = 0-4 x {text (<=64), mark = which named rectangle the RUNNER measured to point at, side = top|bottom|left|right (default auto), color?, atWord}, keys = the chord the runner PRESSED (baked, e.g. [\"Ctrl\",\"S\"]) with optional keysAtWord, zooms = 0-6 CAMERA MOVES inside this one clip, each {mark = a rectangle the runner measured | at:'full' to pull back out, atWord} - zoom to the code, PAN to the output, then pull back, all while the footage holds, atWord}. EVERY clip AND every callout needs atWord - a segment starting on its own spoken word IS the whole mechanism. A callout never carries a hand-typed pixel position: it points at a MARK the capture measured, so it still lands after a re-record or a viewport change. The gap to the next anchor must be >= the segment's own length or the footage gets cut off mid-action; the linter enforces it."},
+      capture: {t: 'object', note: "baked from the manifest: {width,height} of the capture viewport, used to map bboxes into stage space"},
+      layout: {t: 'string', note: "full (default) = the footage IS the frame, overlays on top. split = footage one side, the demo's own steps read down the other. Use split ONLY for a wide capture with a small region of interest and a lot to say - halving the footage width halves the legibility. Ignored in 9:16, where there is no width to give away."},
+      caption: {t: 'string', max: 40, note: "one plain-words takeaway under the footage"},
+      premise: {t: 'string', max: 150, note: "THE STANDING SETUP, <=150 chars (LAW 0l): one plain sentence naming what the viewer is looking at. Carries NO marker."},
+      color: {t: 'string'},
+      atWord: {t: 'anchor', note: "BASE only - the frame, premise and rail are on screen by frame 38 regardless of where this lands"},
+    },
+    example: {recordedStep: {"caption":"the real terminal, on the real machine","premise":"This is VS Code running on a normal laptop. Everything in the black pane below is real output, not a mock-up.","color":"blue","atWord":2,"capture":{"width":960,"height":540},"clips":[{"ref":"rec:demo#open-file","label":"open the file","atWord":4},{"ref":"rec:demo#type-code","label":"write the function","atWord":14},{"ref":"rec:demo#run-tests","label":"run the tests","focus":true,"atWord":26}]}},
+  },
   BROWSER_STEP: {
     category: "code", family: "browser", data_key: "browserStep",
     purpose: "Pair each line of code with the page change it causes. A real browser window is built FROM the steps (a fill step makes an input, a click step makes a button, an assert step makes a banner); as each step fires at its own narration word, the code line shows and the matching element on the page visibly does the thing.",

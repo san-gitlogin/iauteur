@@ -1,0 +1,52 @@
+{
+  "slug": "vscode-frontend",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "demo-frontend",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "maxHoldMs": 600,
+  "prep": {
+    "files": {
+      "index.html": "<!doctype html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <title>Tiny Shop</title>\n  <style>\n    body { font-family: system-ui, sans-serif; background:#0f1117; color:#e8e8ef; margin:0; padding:48px; }\n    h1 { font-size:40px; margin:0 0 8px; }\n    p.lead { color:#8b90a0; margin:0 0 32px; }\n    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }\n    .card { background:#171a23; border:1px solid #262a36; border-radius:14px; padding:22px; }\n    .card h2 { margin:0 0 6px; font-size:20px; }\n    .price { color:#4ade80; font-weight:700; font-size:22px; }\n  </style>\n</head>\n<body>\n  <h1>Tiny Shop</h1>\n  <p class=\"lead\">Three things, served by Python.</p>\n  <div class=\"grid\">\n    <div class=\"card\"><h2>Keyboard</h2><div class=\"price\">$89</div></div>\n    <div class=\"card\"><h2>Monitor</h2><div class=\"price\">$240</div></div>\n    <div class=\"card\"><h2>Desk lamp</h2><div class=\"price\">$35</div></div>\n  </div>\n</body>\n</html>\n"
+    },
+    "openFile": "index.html"
+  },
+  "steps": [
+    {
+      "id": "start-server",
+      "action": "run",
+      "cmd": "python -m http.server 8899",
+      "background": true,
+      "waitFor": "Serving HTTP",
+      "label": "start the server",
+      "focus": "terminal",
+      "marks": [
+        {
+          "id": "serving",
+          "text": "Serving HTTP"
+        }
+      ],
+      "holdMs": 900
+    },
+    {
+      "id": "show-site",
+      "action": "preview",
+      "url": "http://localhost:8899/index.html",
+      "label": "open the live page",
+      "focus": "editor",
+      "settleMs": 3500,
+      "holdMs": 1200
+    },
+    {
+      "id": "stop-server",
+      "action": "interrupt",
+      "label": "stop the server",
+      "focus": "terminal",
+      "holdMs": 700
+    }
+  ]
+}

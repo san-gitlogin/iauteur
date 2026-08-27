@@ -1,0 +1,147 @@
+#!/usr/bin/env node
+// CHECK-RECORDINGS — the seal that makes "recordings stay local" safe.
+//
+// Decision D4: captures are gitignored and never pushed. That is right for a public repo,
+// but it means a fresh clone has SPECS THAT REFERENCE FOOTAGE THAT IS NOT THERE. Without
+// a check, the failure mode is silent and late: the bake fails, or worse, a stale capture
+// renders the wrong frames.
+//
+// So this is the lockfile, in the only form that is honest here: the demo scripts ARE the
+// recordings' source, so instead of shipping bytes we verify that every reference resolves
+// and tell you the exact command to regenerate what is missing.
+//
+// It checks three things per referenced step:
+//   1. the capture manifest exists
+//   2. the step id is in it
+//   3. the segment file on disk still has the frame count the SPEC was baked against
+//      (a stale spec renders the wrong length and silently breaks the freeze boundary)
+//
+// Usage: node scripts/check-recordings.mjs [--quiet]
+import {execFileSync} from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const quiet = process.argv.includes('--quiet');
+const REF = /rec:([A-Za-z0-9._-]+)#([A-Za-z0-9._-]+)/g;
+
+// slug -> the demo file that produces it, so the fix is a command, not a puzzle.
+const demoBySlug = new Map();
+if (fs.existsSync('demos')) {
+  for (const f of fs.readdirSync('demos').filter((x) => x.endsWith('.json'))) {
+    try {
+      const d = JSON.parse(fs.readFileSync(path.join('demos', f), 'utf8'));
+      if (d.slug) demoBySlug.set(d.slug, path.join('demos', f));
+    } catch { /* a malformed demo is not this seal's problem */ }
+  }
+}
+
+const specs = [];
+if (fs.existsSync('topics')) {
+  for (const t of fs.readdirSync('topics')) {
+    for (const f of ['long.json', 'shorts.json']) {
+      const p = path.join('topics', t, f);
+      if (fs.existsSync(p)) specs.push(p);
+    }
+  }
+}
+
+const probeFrames = (file) => {
+  try {
+    const out = execFileSync('ffprobe',
+      ['-v', 'error', '-select_streams', 'v:0', '-count_frames',
+       '-show_entries', 'stream=nb_read_frames', '-of', 'csv=p=0', file]).toString().trim();
+    return Number(out.split(/\r?\n/)[0]);
+  } catch { return null; }
+};
+
+const problems = [];
+const used = new Map(); // slug -> Set(stepId)
+let refCount = 0;
+
+for (const sp of specs) {
+  const text = fs.readFileSync(sp, 'utf8');
+  let m;
+  REF.lastIndex = 0;
+  while ((m = REF.exec(text))) {
+    const [, slug, stepId] = m;
+    refCount++;
+    if (!used.has(slug)) used.set(slug, new Set());
+    used.get(slug).add(stepId);
+
+    const manPath = path.resolve('public/rec', slug, 'manifest.json');
+    const fix = demoBySlug.has(slug)
+      ? `npm run record -- ${demoBySlug.get(slug)}`
+      : `(no demo in demos/ produces slug "${slug}" — write one, or fix the reference)`;
+
+    if (!fs.existsSync(manPath)) {
+      problems.push(`${sp}: recording "${slug}" is MISSING (public/rec/${slug}/)\n      fix: ${fix}`);
+      continue;
+    }
+    const man = JSON.parse(fs.readFileSync(manPath, 'utf8'));
+    const step = (man.steps || []).find((s) => s.id === stepId);
+    if (!step) {
+      problems.push(`${sp}: "${slug}" has no step "${stepId}" (has: ${(man.steps || []).map((s) => s.id).join(', ')})\n      fix: ${fix}`);
+      continue;
+    }
+    const seg = path.resolve('public/rec', slug, step.segment);
+    if (!fs.existsSync(seg)) {
+      problems.push(`${sp}: segment missing on disk for ${slug}#${stepId}\n      fix: ${fix}`);
+      continue;
+    }
+  }
+}
+
+// Freshness: the SPEC's baked frame count must still match the file. This is the stale
+// trap that already bit once — bake used to be one-way, so a re-record left specs
+// pointing at the previous take's numbers.
+for (const sp of specs) {
+  let spec;
+  try { spec = JSON.parse(fs.readFileSync(sp, 'utf8')); } catch { continue; }
+  for (const scene of spec.scenes ?? []) {
+    for (const clip of scene?.data?.recordedStep?.clips ?? []) {
+      if (!clip.src || clip.frames == null) continue;
+      const abs = path.resolve('public', clip.src);
+      if (!fs.existsSync(abs)) continue; // already reported above
+      const real = probeFrames(abs);
+      if (real != null && real !== Number(clip.frames)) {
+        const slug = String(clip.src).split('/')[1];
+        problems.push(
+          `${sp}: STALE — clip "${clip.id ?? clip.src}" was baked at ${clip.frames} frames, the file has ${real}\n` +
+          `      fix: node scripts/bake-rec.mjs ${sp}` +
+          (demoBySlug.has(slug) ? `   (or re-record: npm run record -- ${demoBySlug.get(slug)})` : ''));
+      }
+    }
+  }
+}
+
+// PREP MUST LEAVE NO TRACE. The exit-code prompt hook is typed into the terminal before
+// capture starts; it must never reach a manifest (and therefore never a spec, a caption or
+// a callout). Cheap to check, and the kind of leak that would otherwise ship quietly.
+const HOOK = /function prompt|LASTEXITCODE|iauteur-rec-exit|__iauteur_hook|PROMPT_COMMAND/;
+for (const slug of used.keys()) {
+  const p = path.resolve('public/rec', slug, 'manifest.json');
+  if (!fs.existsSync(p)) continue;
+  const raw = fs.readFileSync(p, 'utf8');
+  if (HOOK.test(raw)) {
+    problems.push(`public/rec/${slug}/manifest.json: PREP-phase prompt-hook text leaked into the ` +
+      `capture manifest. It should be cleared before the take — re-record.`);
+  }
+}
+
+if (!quiet) {
+  console.log(`RECORDING CHECK: ${refCount} reference(s) across ${specs.length} spec(s), ` +
+    `${used.size} recording(s) used, ${demoBySlug.size} demo script(s) available.`);
+  for (const [slug, steps] of used) {
+    const ok = fs.existsSync(path.resolve('public/rec', slug, 'manifest.json'));
+    console.log(`  ${ok ? 'ok  ' : 'MISS'} ${slug}  (${[...steps].join(', ')})`);
+  }
+}
+
+if (problems.length) {
+  console.error('\n✗ RECORDING CHECK FAILED:');
+  for (const p of problems) console.error(`  • ${p}`);
+  console.error('\nRecordings are gitignored on purpose (they stay local). The demo scripts in');
+  console.error('demos/ are what regenerates them, so nothing is lost — it just has to be run.');
+  process.exit(1);
+}
+if (!quiet) console.log('✓ RECORDING CHECK PASSED (every rec: reference resolves and is fresh)');

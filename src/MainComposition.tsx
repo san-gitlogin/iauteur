@@ -174,6 +174,7 @@ import {TheaterStage} from './scenes/TheaterStage';
 import {QuizCard} from './scenes/QuizCard';
 import {CodeRun} from './scenes/CodeRun';
 import {BrowserStep} from './scenes/BrowserStep';
+import {RecordedStep} from './scenes/RecordedStep';
 import {OverlayBlock} from './scenes/OverlayBlock';
 import {FixtureCrew} from './scenes/FixtureCrew';
 import {ChangeRipple} from './scenes/ChangeRipple';
@@ -531,6 +532,7 @@ const registry: Record<string, React.FC<{scene: Scene}>> = {
   FIXTURE_CREW: FixtureCrew,
   OVERLAY_BLOCK: OverlayBlock,
   BROWSER_STEP: BrowserStep,
+  RECORDED_STEP: RecordedStep,
   CODE_RUN: CodeRun,
   QUIZ_CARD: QuizCard,
   THEATER_STAGE: TheaterStage,

@@ -60,11 +60,24 @@
     "test-ui-walkthrough": "node scripts/test-ui-walkthrough.mjs",
     "test-asset-protocol": "node scripts/test-asset-protocol.mjs",
     "test-si-resolver": "node scripts/test-si-resolver.mjs",
-    "gate": "node scripts/check-manifest.mjs && node scripts/drift-check.mjs && node scripts/gen-schema.mjs --check && node scripts/gen-types.mjs --check && node scripts/test-normalize-fleet.mjs && node scripts/test-fix-prompt.mjs && node scripts/test-assemble.mjs && node scripts/test-ui-walkthrough.mjs && node scripts/test-asset-protocol.mjs && node scripts/test-si-resolver.mjs && node scripts/check-viz-kinds.mjs",
+    "gate": "node scripts/check-manifest.mjs && node scripts/drift-check.mjs && node scripts/gen-schema.mjs --check && node scripts/gen-types.mjs --check && node scripts/test-normalize-fleet.mjs && node scripts/test-fix-prompt.mjs && node scripts/test-assemble.mjs && node scripts/test-ui-walkthrough.mjs && node scripts/test-asset-protocol.mjs && node scripts/test-si-resolver.mjs && node scripts/check-viz-kinds.mjs && node scripts/check-recordings.mjs --quiet",
     "cast": "node scripts/cast.mjs",
     "snap": "node scripts/snap.mjs",
     "publish-safety": "node scripts/check-publish-safety.mjs",
-    "publish-safety:all": "node scripts/check-publish-safety.mjs --tracked"
+    "publish-safety:all": "node scripts/check-publish-safety.mjs --tracked",
+    "rec-fixture": "node scripts/gen-rec-fixture.mjs",
+    "bake-rec": "node scripts/bake-rec.mjs",
+    "test-rec": "node scripts/test-rec-lint.mjs && node scripts/test-rec-anchors.mjs && node scripts/test-rec-capture.mjs && node scripts/test-rec-contract.mjs && node scripts/test-rec-sync.mjs",
+    "test-rec-lint": "node scripts/test-rec-lint.mjs",
+    "test-rec-contract": "node scripts/test-rec-contract.mjs",
+    "test-rec-surface": "node scripts/test-rec-surface.mjs",
+    "record": "node scripts/record.mjs",
+    "test-rec-capture": "node scripts/test-rec-capture.mjs",
+    "check-recordings": "node scripts/check-recordings.mjs",
+    "test-rec-determinism": "node scripts/test-rec-determinism.mjs",
+    "test-rec-sync": "node scripts/test-rec-sync.mjs",
+    "anchor-spec": "node scripts/anchor-spec.mjs",
+    "test-rec-anchors": "node scripts/test-rec-anchors.mjs"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
@@ -78,6 +91,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.12",
+    "playwright": "^1.62.1",
     "typescript": "^5.6.3"
   }
 }

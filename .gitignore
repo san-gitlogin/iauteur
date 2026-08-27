@@ -68,3 +68,11 @@ Thumbs.db
 *.swp
 .vscode/
 *.candidate.json
+
+# Screen recordings — local only, never published (docs/SCREEN_RECORDING.md D4)
+public/rec/
+
+# Pinned third-party binaries a course records against (LAW 0m: teach the version you ran).
+# They are large, platform-specific and not ours to redistribute — demos reference them via
+# the {{TOOLS}} token and `prep.requires` tells a fresh clone what to download.
+tools/

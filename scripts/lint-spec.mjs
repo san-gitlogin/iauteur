@@ -140,7 +140,7 @@ if (n >= 8) {
     if (traceExempt && /^DSA_(TRACE_|FRAMEWORK|SIGNALS)/.test(st)) continue;
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
   }
-  const DYNAMIC = ['UV_STAGE', 'MCP_MESH', 'MCP_REACH', 'MCP_DEPRECATED', 'MCP_ELICIT', 'MCP_TERMINAL', 'MCP_FLAGS', 'MCP_TRANSPORT', 'MCP_PROGRESS', 'MCP_ROOTS', 'MCP_SAMPLING', 'MCP_MENTION', 'MCP_URI', 'MCP_LOOP', 'MCP_SCHEMA', 'MCP_WIRE', 'MCP_CONTROL', 'MCP_API_ANATOMY', 'DSA_FRAMEWORK', 'DSA_COST', 'DSA_SIGNALS', 'DSA_TRACE_LIST', 'DSA_TRACE_INTERVALS', 'DSA_TRACE_DP', 'DSA_TRACE_TREE', 'DSA_TRACE_GRID', 'DSA_TRACE_STACK', 'DSA_TRACE_HASH', 'DSA_TRACE_BSEARCH', 'DSA_TRACE_WINDOW', 'DSA_TRACE_PTRS', 'CMD_LSUSB', 'CMD_LSPCI', 'CMD_CHEAT', 'CMD_TLDR', 'CMD_APROPOS', 'CMD_MAN', 'CMD_DMESG', 'CMD_JOURNALCTL', 'CMD_SYSTEMCTL', 'CMD_TMUX', 'CMD_SCREEN', 'CMD_HISTORY', 'CMD_ENV', 'CMD_ALIAS', 'CMD_BASHSCRIPT', 'CMD_CRONTAB', 'CMD_CRON', 'CMD_ZIP', 'CMD_BZIP2', 'CMD_GZIP', 'CMD_TAR', 'CMD_CURL', 'CMD_WGET', 'CMD_NC', 'CMD_RSYNC', 'CMD_SCP', 'CMD_SSH', 'CMD_WHOIS', 'CMD_NSLOOKUP', 'CMD_HOST', 'CMD_DIG', 'CMD_NLOAD', 'CMD_NETHOGS', 'CMD_IFTOP', 'CMD_NMCLI', 'CMD_SS', 'CMD_NETSTAT', 'CMD_MTR', 'CMD_TRACEROUTE', 'CMD_PING', 'CMD_IP', 'CMD_DD', 'CMD_UMOUNT', 'CMD_MOUNT', 'CMD_FSCK', 'CMD_MKFS', 'CMD_BLKID', 'CMD_PARTED', 'CMD_FDISK', 'CMD_NCDU', 'CMD_DU', 'CMD_DF', 'CMD_WATCH', 'CMD_SAR', 'CMD_DSTAT', 'CMD_IOTOP', 'CMD_IOSTAT', 'CMD_VMSTAT', 'CMD_FREE', 'CMD_UPTIME', 'CMD_STRACE', 'CMD_LSOF', 'CMD_WAIT', 'CMD_SLEEP', 'CMD_NOHUP', 'CMD_KILLALL', 'CMD_KILL', 'CMD_NMON', 'CMD_GLANCES', 'CMD_ATOP', 'CMD_BTOP', 'CMD_HTOP', 'CMD_TOP', 'CMD_PSTREE', 'CMD_PS', 'CMD_CHROOT', 'CMD_LAST', 'CMD_W', 'CMD_CHPASSWD', 'CMD_PASSWD', 'CMD_USERDEL', 'CMD_USERMOD', 'CMD_USERADD', 'CMD_SUDO', 'CMD_UMASK', 'CMD_CHOWN', 'CMD_CHMOD', 'CMD_XARGS', 'CMD_SED', 'CMD_AWK', 'CMD_GREP', 'CMD_LOCATE', 'CMD_FIND', 'CMD_DIFF', 'CMD_VI', 'CMD_TAIL', 'CMD_LESS', 'CMD_MORE', 'CMD_TAC', 'CMD_CAT', 'CMD_TOUCH', 'CMD_CLEAR', 'CMD_LN', 'CMD_RM', 'CMD_MV', 'CMD_CP', 'CMD_MKDIR', 'CMD_PWD', 'CMD_CD', 'CMD_LS', 'COPY_FORK', 'TOOL_BENCH', 'DELETION_GUARD', 'LINK_PAIR', 'LISTING_ROW', 'PATH_WALK', 'RECORD_DRAFT', 'FROZEN_FRAME', 'ORDER_ROULETTE', 'WORKER_SPREAD', 'SEALED_BOX', 'SET_LOGIC', 'SEARCH_NARROW', 'STAGE_HANDOFF', 'BACKSTAGE_PHONE', 'SCOPE_LADDER', 'HAND_STAMP', 'SAD_PATHS', 'MAIL_ROOM', 'TRACE_SCRUB', 'FLAG_HARVEST', 'SHOT_SCOPE', 'PICKER_BYPASS', 'DIALOG_GATE', 'FRAME_BOUNDARY', 'TRAP_TRIGGER', 'INDEX_DRIFT', 'ROW_FILTER', 'CROWD_MATCH', 'RESPONSIBILITY_SPLIT', 'SAVED_SEARCH', 'RULE_TEST', 'CHANGE_RIPPLE', 'FIXTURE_CREW', 'OVERLAY_BLOCK', 'BROWSER_STEP', 'CODE_RUN', 'QUIZ_CARD', 'THEATER_STAGE', 'INTRO_CARD', 'REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['RECORDED_STEP', 'UV_STAGE', 'MCP_MESH', 'MCP_REACH', 'MCP_DEPRECATED', 'MCP_ELICIT', 'MCP_TERMINAL', 'MCP_FLAGS', 'MCP_TRANSPORT', 'MCP_PROGRESS', 'MCP_ROOTS', 'MCP_SAMPLING', 'MCP_MENTION', 'MCP_URI', 'MCP_LOOP', 'MCP_SCHEMA', 'MCP_WIRE', 'MCP_CONTROL', 'MCP_API_ANATOMY', 'DSA_FRAMEWORK', 'DSA_COST', 'DSA_SIGNALS', 'DSA_TRACE_LIST', 'DSA_TRACE_INTERVALS', 'DSA_TRACE_DP', 'DSA_TRACE_TREE', 'DSA_TRACE_GRID', 'DSA_TRACE_STACK', 'DSA_TRACE_HASH', 'DSA_TRACE_BSEARCH', 'DSA_TRACE_WINDOW', 'DSA_TRACE_PTRS', 'CMD_LSUSB', 'CMD_LSPCI', 'CMD_CHEAT', 'CMD_TLDR', 'CMD_APROPOS', 'CMD_MAN', 'CMD_DMESG', 'CMD_JOURNALCTL', 'CMD_SYSTEMCTL', 'CMD_TMUX', 'CMD_SCREEN', 'CMD_HISTORY', 'CMD_ENV', 'CMD_ALIAS', 'CMD_BASHSCRIPT', 'CMD_CRONTAB', 'CMD_CRON', 'CMD_ZIP', 'CMD_BZIP2', 'CMD_GZIP', 'CMD_TAR', 'CMD_CURL', 'CMD_WGET', 'CMD_NC', 'CMD_RSYNC', 'CMD_SCP', 'CMD_SSH', 'CMD_WHOIS', 'CMD_NSLOOKUP', 'CMD_HOST', 'CMD_DIG', 'CMD_NLOAD', 'CMD_NETHOGS', 'CMD_IFTOP', 'CMD_NMCLI', 'CMD_SS', 'CMD_NETSTAT', 'CMD_MTR', 'CMD_TRACEROUTE', 'CMD_PING', 'CMD_IP', 'CMD_DD', 'CMD_UMOUNT', 'CMD_MOUNT', 'CMD_FSCK', 'CMD_MKFS', 'CMD_BLKID', 'CMD_PARTED', 'CMD_FDISK', 'CMD_NCDU', 'CMD_DU', 'CMD_DF', 'CMD_WATCH', 'CMD_SAR', 'CMD_DSTAT', 'CMD_IOTOP', 'CMD_IOSTAT', 'CMD_VMSTAT', 'CMD_FREE', 'CMD_UPTIME', 'CMD_STRACE', 'CMD_LSOF', 'CMD_WAIT', 'CMD_SLEEP', 'CMD_NOHUP', 'CMD_KILLALL', 'CMD_KILL', 'CMD_NMON', 'CMD_GLANCES', 'CMD_ATOP', 'CMD_BTOP', 'CMD_HTOP', 'CMD_TOP', 'CMD_PSTREE', 'CMD_PS', 'CMD_CHROOT', 'CMD_LAST', 'CMD_W', 'CMD_CHPASSWD', 'CMD_PASSWD', 'CMD_USERDEL', 'CMD_USERMOD', 'CMD_USERADD', 'CMD_SUDO', 'CMD_UMASK', 'CMD_CHOWN', 'CMD_CHMOD', 'CMD_XARGS', 'CMD_SED', 'CMD_AWK', 'CMD_GREP', 'CMD_LOCATE', 'CMD_FIND', 'CMD_DIFF', 'CMD_VI', 'CMD_TAIL', 'CMD_LESS', 'CMD_MORE', 'CMD_TAC', 'CMD_CAT', 'CMD_TOUCH', 'CMD_CLEAR', 'CMD_LN', 'CMD_RM', 'CMD_MV', 'CMD_CP', 'CMD_MKDIR', 'CMD_PWD', 'CMD_CD', 'CMD_LS', 'COPY_FORK', 'TOOL_BENCH', 'DELETION_GUARD', 'LINK_PAIR', 'LISTING_ROW', 'PATH_WALK', 'RECORD_DRAFT', 'FROZEN_FRAME', 'ORDER_ROULETTE', 'WORKER_SPREAD', 'SEALED_BOX', 'SET_LOGIC', 'SEARCH_NARROW', 'STAGE_HANDOFF', 'BACKSTAGE_PHONE', 'SCOPE_LADDER', 'HAND_STAMP', 'SAD_PATHS', 'MAIL_ROOM', 'TRACE_SCRUB', 'FLAG_HARVEST', 'SHOT_SCOPE', 'PICKER_BYPASS', 'DIALOG_GATE', 'FRAME_BOUNDARY', 'TRAP_TRIGGER', 'INDEX_DRIFT', 'ROW_FILTER', 'CROWD_MATCH', 'RESPONSIBILITY_SPLIT', 'SAVED_SEARCH', 'RULE_TEST', 'CHANGE_RIPPLE', 'FIXTURE_CREW', 'OVERLAY_BLOCK', 'BROWSER_STEP', 'CODE_RUN', 'QUIZ_CARD', 'THEATER_STAGE', 'INTRO_CARD', 'REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -1508,6 +1508,74 @@ for (const s of spec.scenes ?? []) {
     }
     if (len(d.code.filename) > 28) E(`${id}: code filename > 28 chars`);
     if (len(d.code.runLabel) > 36) E(`${id}: code runLabel > 36 chars`);
+  }
+  // ── RECORDED_STEP — footage must obey the voice (docs/SCREEN_RECORDING.md) ──
+  // Three failure modes, all of which produce a video that looks fine in the spec and
+  // wrong on screen, so all three are checked here rather than trusted to the author.
+  if (d.recordedStep) {
+    const rs = d.recordedStep;
+    const cl = rs.clips ?? [];
+    if (!cl.length) E(`${id}: RECORDED_STEP needs >=1 clip`);
+    if (cl.length > 8) E(`${id}: RECORDED_STEP max 8 clips (got ${cl.length}) — split the beat`);
+    if (len(rs.caption) > 40) E(`${id}: RECORDED_STEP caption > 40 chars`);
+    if (len(rs.premise) > 150) E(`${id}: RECORDED_STEP premise > 150 chars`);
+    checkColor(id, 'recordedStep.color', rs.color);
+
+    // 1. An UNBAKED reference would render a placeholder instead of the footage.
+    //    Fatal: this is the one that silently ships a "NOT BAKED" card to YouTube.
+    for (const c of cl) {
+      // `ref` is the authored intent and legitimately stays in the spec (bake is
+      // idempotent). What must never reach the renderer is a clip with no resolved src.
+      if (!c.src) E(`${id}: RECORDED_STEP clip ${c.ref ? `"${c.ref}" is UNBAKED` : 'has neither ref nor src'} — run: node scripts/bake-rec.mjs <spec>`);
+      if (len(c.label) > 26) E(`${id}: RECORDED_STEP label "${String(c.label).slice(0, 20)}…" > 26 chars`);
+    }
+
+    // 2. EVERY clip needs its own anchor. A segment starting on its own spoken word
+    //    IS the mechanism (LAW 0i); an unanchored clip silently inherits the base and
+    //    the whole beat collapses to "everything at once".
+    const unanchored = cl.filter((c) => c.atWord == null).length;
+    if (unanchored) E(`${id}: RECORDED_STEP has ${unanchored} clip(s) with no atWord — every segment needs its own word`);
+
+    // 2b. CALLOUTS. Each needs its own word (LAW 0i) and must fit on screen.
+    for (const c of cl) {
+      const cos = c.callouts ?? [];
+      if (cos.length > 4) E(`${id}: RECORDED_STEP clip "${c.label ?? c.id}" has ${cos.length} callouts (max 4) — the frame becomes a noticeboard`);
+      for (const co of cos) {
+        if (co.atWord == null) E(`${id}: RECORDED_STEP callout ${JSON.stringify(String(co.text ?? '').slice(0, 20))} has no atWord — it must land on a spoken word`);
+        if (len(co.text) > 64) E(`${id}: RECORDED_STEP callout text > 64 chars — say less, or split it into two callouts`);
+        if (co.mark == null && !c.bbox) E(`${id}: RECORDED_STEP callout has no mark and its clip has no bbox — nothing to point at`);
+        checkColor(id, 'recordedStep.callout.color', co.color);
+      }
+    }
+
+    // 3. THE GAP RULE. A segment plays from its anchor and freezes when it runs out.
+    //    If the NEXT anchor arrives before this segment has finished playing, the
+    //    footage is cut off mid-action — the viewer never sees the thing complete.
+    //    Freezing is fine (the picture waits for the voice); truncation is not.
+    //    Pre-sync `atWord` is a word index, post-sync it encodes a frame; wordToFrame
+    //    handles both, so this check is valid at either stage.
+    const w2f = (w) => Math.max(0, ((w ?? 1) - 1) * 12);
+    for (let i = 0; i < cl.length - 1; i++) {
+      const a = cl[i];
+      const gap = w2f(cl[i + 1].atWord) - w2f(a.atWord);
+      const need = Number(a.frames ?? 0);
+      if (gap <= 0) {
+        E(`${id}: RECORDED_STEP clip ${i + 1} ("${a.label ?? a.id}") is anchored at or after clip ${i + 2} — anchors must ascend`);
+      } else if (need && gap < need) {
+        E(
+          `${id}: RECORDED_STEP clip ${i + 1} ("${a.label ?? a.id}") is ${need}f of footage but only ${gap}f of narration ` +
+          `before the next step — it would be CUT OFF mid-action. Give the step more words, or shorten the capture.`,
+        );
+      }
+    }
+    // The last clip must fit in what remains of the scene, same reasoning.
+    const last = cl[cl.length - 1];
+    if (last && last.frames && s.durationFrames) {
+      const tail = s.durationFrames - w2f(last.atWord);
+      if (tail < Number(last.frames)) {
+        E(`${id}: RECORDED_STEP last clip needs ${last.frames}f but only ${tail}f remain in the scene — it would be cut off`);
+      }
+    }
   }
   if (d.codeRun) {
     const cr = d.codeRun;

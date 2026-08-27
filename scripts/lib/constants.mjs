@@ -60,6 +60,7 @@ export const TYPES = [
   'QUIZ_CARD',
   'CODE_RUN',
   'BROWSER_STEP',
+  'RECORDED_STEP',
   'OVERLAY_BLOCK',
   'FIXTURE_CREW',
   'CHANGE_RIPPLE',

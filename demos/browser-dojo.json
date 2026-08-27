@@ -1,0 +1,25 @@
+{
+  "slug": "browser-dojo",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "prep": {"url": "https://san-gitlogin.github.io/playwright-dojo/"},
+  "steps": [
+    {
+      "id": "landing",
+      "action": "expect",
+      "target": "h1",
+      "label": "the Dojo, live",
+      "marks": [{"id": "heading", "selector": "h1"}],
+      "holdMs": 1200
+    },
+    {
+      "id": "scroll-down",
+      "action": "scroll",
+      "by": 700,
+      "label": "look at the lessons",
+      "holdMs": 900
+    }
+  ]
+}

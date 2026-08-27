@@ -180,6 +180,7 @@ export type SceneTypeName =
   | 'CHANGE_RIPPLE'
   | 'FIXTURE_CREW'
   | 'OVERLAY_BLOCK'
+  | 'RECORDED_STEP'
   | 'BROWSER_STEP'
   | 'CODE_RUN'
   | 'QUIZ_CARD'
@@ -3530,6 +3531,18 @@ export type OverlayBlockScene = SceneCommon<'OVERLAY_BLOCK'> & { data: {
     };
   } };
 
+export type RecordedStepScene = SceneCommon<'RECORDED_STEP'> & { data: {
+    recordedStep: {
+      clips: Array<Record<string, unknown>>;
+      capture?: Record<string, unknown>;
+      layout?: string;
+      caption?: string;
+      premise?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
 export type BrowserStepScene = SceneCommon<'BROWSER_STEP'> & { data: {
     browserStep: {
       steps: Array<Record<string, unknown>>;
@@ -5348,6 +5361,7 @@ export interface SceneByType {
   CHANGE_RIPPLE: ChangeRippleScene;
   FIXTURE_CREW: FixtureCrewScene;
   OVERLAY_BLOCK: OverlayBlockScene;
+  RECORDED_STEP: RecordedStepScene;
   BROWSER_STEP: BrowserStepScene;
   CODE_RUN: CodeRunScene;
   QUIZ_CARD: QuizCardScene;
@@ -5697,6 +5711,7 @@ export type TypedScene =
   | ChangeRippleScene
   | FixtureCrewScene
   | OverlayBlockScene
+  | RecordedStepScene
   | BrowserStepScene
   | CodeRunScene
   | QuizCardScene

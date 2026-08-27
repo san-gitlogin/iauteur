@@ -1,0 +1,85 @@
+{
+  "slug": "vscode-hello",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "demo-hello",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "prep": {
+    "files": {
+      "hello.py": "def greet(name):\n    return f\"Hello, {name}!\"\n\n\nprint(greet(\"iAuteur\"))\n"
+    },
+    "openFile": "hello.py"
+  },
+  "steps": [
+    {
+      "id": "show-file",
+      "action": "pause",
+      "ms": 1600,
+      "label": "look at the file",
+      "focus": "editor"
+    },
+    {
+      "id": "run-it",
+      "action": "run",
+      "cmd": "python hello.py",
+      "label": "run the script",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Hello, iAuteur!",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "greeting",
+          "text": "Hello, iAuteur!"
+        }
+      ]
+    },
+    {
+      "id": "add-line",
+      "action": "type",
+      "at": "end",
+      "text": "print(greet(\"world\"))",
+      "label": "add a second call",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "newline",
+          "text": "print(greet(\"world\"))"
+        }
+      ]
+    },
+    {
+      "id": "save-it",
+      "action": "save",
+      "label": "save the file",
+      "focus": "editor"
+    },
+    {
+      "id": "run-again",
+      "action": "run",
+      "cmd": "python hello.py",
+      "label": "run it again",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Hello, world!",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "second",
+          "text": "Hello, world!"
+        },
+        {
+          "id": "first",
+          "text": "Hello, iAuteur!"
+        }
+      ]
+    }
+  ],
+  "maxHoldMs": 600
+}

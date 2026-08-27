@@ -1,0 +1,95 @@
+{
+  "slug": "sqlite-act1",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "shop",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "maxHoldMs": 700,
+  "prep": {
+    "files": {
+      "schema.sql": "CREATE TABLE products (\n  id    INTEGER PRIMARY KEY,\n  name  TEXT    NOT NULL,\n  price REAL    NOT NULL\n);\n\nINSERT INTO products (name, price) VALUES\n  ('Mechanical keyboard', 89.00),\n  ('27-inch monitor',    240.00),\n  ('Desk lamp',           35.50),\n  ('USB-C hub',           45.00);\n"
+    },
+    "commands": [
+      "Set-Alias sq '{{TOOLS}}/sqlite/sqlite3.exe'",
+      "Remove-Item shop.db -ErrorAction SilentlyContinue"
+    ],
+    "openFile": "schema.sql",
+    "requires": [
+      {
+        "tool": "sqlite3 3.53.4",
+        "put": "tools/sqlite/sqlite3.exe",
+        "why": "The course teaches 3.53.4. The machine SQLite here was 3.36.0, which has no STRICT tables — a lesson written from memory would have failed on camera (LAW 0m).",
+        "from": "https://sqlite.org/download.html (precompiled binaries for your platform)"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "version",
+      "action": "run",
+      "cmd": "sq -version",
+      "label": "the version we teach",
+      "focus": "terminal",
+      "expect": {
+        "contains": "3.53.4"
+      },
+      "marks": [
+        {
+          "id": "ver",
+          "text": "3.53.4"
+        }
+      ],
+      "holdMs": 900
+    },
+    {
+      "id": "create",
+      "action": "run",
+      "cmd": "sq shop.db \".read schema.sql\"",
+      "label": "create the table",
+      "focus": "terminal",
+      "holdMs": 700
+    },
+    {
+      "id": "select",
+      "action": "run",
+      "cmd": "sq shop.db -box -header \"SELECT * FROM products;\"",
+      "label": "read it back",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Mechanical keyboard"
+      },
+      "marks": [
+        {
+          "id": "kb",
+          "text": "Mechanical keyboard"
+        },
+        {
+          "id": "mon",
+          "text": "27-inch monitor"
+        }
+      ],
+      "holdMs": 1100
+    },
+    {
+      "id": "just-a-file",
+      "action": "run",
+      "cmd": "Get-Item shop.db | Select-Object Name, Length",
+      "label": "it is only a file",
+      "focus": "terminal",
+      "expect": {
+        "contains": "shop.db"
+      },
+      "marks": [
+        {
+          "id": "file",
+          "text": "shop.db"
+        }
+      ],
+      "holdMs": 1200
+    }
+  ]
+}
