@@ -288,19 +288,50 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // answer is not a guess: put the cluster on whichever side of that region has room for it.
   // A terminal at the bottom pushes the furniture to the top; an editor beat at the top
   // pushes it to the floor.
-  const clusterH = ((d.caption ? 46 : 0) + (split ? 0 : 44) + (anyKeys ? 48 : 0) + 34) * scale;
+  const clusterH = ((d.premise ? 60 : 0) + (d.caption ? 46 : 0) + (split ? 0 : 44) +
+    (anyKeys ? 48 : 0) + 34) * scale;
+
+  // THE MARKS KNOW WHERE THE INK IS. A bbox is a PANE, not the writing in it, so "outside
+  // the bbox" is not the same as "empty" — measured on an editor beat, the cluster went
+  // below the editor pane and landed squarely on the terminal, which is content too.
+  //
+  // Every mark the runner measured is a rectangle around real text this beat points at. Take
+  // all of them across every clip in the scene, project them into screen space, and find the
+  // tallest horizontal band with none of them in it. That is where the furniture goes.
+  const inkBands = clips
+    .flatMap((c) => Object.values((c.marks ?? {}) as Record<string, {y: number; h: number}>))
+    .map((m) => ({
+      top: (Number(m.y) - view.y) * k - 10 * scale,
+      bot: (Number(m.y) + Number(m.h) - view.y) * k + 10 * scale,
+    }))
+    .filter((b) => b.bot > 0 && b.top < frameH)
+    .sort((a, b) => a.top - b.top);
+
+  let gapTop = 0;
+  let gapBot = frameH;
+  if (inkBands.length) {
+    const edges = [{top: -1e6, bot: 0}, ...inkBands, {top: frameH, bot: 1e6}];
+    let best = -1;
+    for (let i = 0; i < edges.length - 1; i++) {
+      // bands can overlap, so carry the furthest bottom seen so far
+      const from = Math.max(...edges.slice(0, i + 1).map((e) => e.bot));
+      const to = edges[i + 1].top;
+      if (to - from > best) { best = to - from; gapTop = from; gapBot = to; }
+    }
+  }
+  const gapH = gapBot - gapTop;
+  const hasGap = fullBleed && gapH >= clusterH + 24 * scale;
+
+  // Fall back to the bbox rule when the beat marked nothing.
   const bbTopPx = bb ? (Number(bb.y) - view.y) * k : frameH;
   const bbBotPx = bb ? (Number(bb.y) + Number(bb.h) - view.y) * k : 0;
   const roomBelow = frameH - bbBotPx;
   const roomAbove = bbTopPx;
-  // Below is the habit a viewer already has, so it wins whenever it genuinely fits.
-  const clusterAtTop = fullBleed && roomBelow < clusterH && roomAbove >= clusterH;
-  // CENTRE IT IN THE FREE BAND, DO NOT PIN IT TO THE EDGE. Pinned to the top of the frame the
-  // cluster sat on the editor's first three lines while a large empty band waited 250px
-  // below it. The band between the frame edge and the region of interest is the space the
-  // step is not using, so the furniture goes in the middle of THAT.
+  const clusterAtTop = fullBleed && !hasGap && roomBelow < clusterH && roomAbove >= clusterH;
   const band = clusterAtTop ? roomAbove : roomBelow;
-  const clusterInset = Math.max(20 * scale, (band - clusterH) / 2);
+  const clusterInset = hasGap
+    ? gapTop + (gapH - clusterH) / 2
+    : Math.max(20 * scale, (band - clusterH) / 2);
 
   const mono = t.fonts.mono;
 
@@ -347,7 +378,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             premise and the caption a reliable ground without hiding any of the footage they
             sit over. They are painted between the video and the text, never over the middle
             of the frame where the work is. */}
-        {fullBleed ? (
+        {fullBleed && !hasGap ? (
           <>
             {/* ONE SCRIM, ON THE EDGE THE CLUSTER CHOSE. Everything that floats lives in
                 that one group now, so a second gradient on the opposite edge would only be
@@ -719,7 +750,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             contents` keeps the card layout byte-identical: the wrapper vanishes and the three
             blocks stay direct children of the column exactly as before. */}
         <div style={fullBleed
-          ? {position: 'absolute', left: 0, right: 0, [clusterAtTop ? 'top' : 'bottom']: clusterInset,
+          ? {position: 'absolute', left: 0, right: 0, [hasGap || clusterAtTop ? 'top' : 'bottom']: clusterInset,
              zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 * scale}
           : {display: 'contents'}}>
           {fullBleed ? premiseNode : null}
