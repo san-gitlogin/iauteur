@@ -588,8 +588,16 @@ decision, not a style one: the single-line form wraps across two xterm rows at 1
 callout rectangle is measured from ONE row element, so the injection payoff could not have been
 highlighted. It is also the better picture — one safe row above four stolen ones.
 
-**Pending for this course:** the three specs (long 20–30min, shorts, short-wide), then
-anchor → lint → voiceover → sync → verify-render → render.
+### P4c — SQLite course COMPONENTS  **6 of 11 built, 2026-08-27**
+
+`briefs/sqlite/COURSE.md` is the course plan and the live status board for this part.
+Built and render-verified at both aspects: **DB_TWO_WAYS · TYPE_GATE · JOIN_MERGE ·
+SCAN_VS_SEEK · PLACEHOLDER_SEAL · TRANSACTION_DOOR**. Every one of them had at least one
+defect that was invisible in the code and obvious in a still.
+
+**Pending for this course:** five more components (`GROUP_BUCKETS`, `TABLE_SPLIT`,
+`INDEX_LEDGER`, `WHERE_IT_RUNS`, `WHEN_NOT_SQLITE`), then the three specs (long 20–30min,
+shorts, short-wide), then anchor → lint → voiceover → sync → verify-render → render.
 
 ### P6 — Proof episode
 
