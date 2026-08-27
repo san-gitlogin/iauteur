@@ -61,8 +61,8 @@ export const PlaceholderSeal: React.FC<{scene: Scene}> = ({scene}) => {
   const evilMid = hiAt >= 0 ? hi : '';
   const evilPost = hiAt >= 0 ? evilText.slice(hiAt + hi.length) : '';
 
-  const Lane: React.FC<{kind: 'safe' | 'evil'}> = ({kind}) => {
-    const isSafe = kind === 'safe';
+  const Lane: React.FC<{lane: 'safe' | 'evil'}> = ({lane}) => {
+    const isSafe = lane === 'safe';
     const accent = isSafe ? sem('green') : sem('red');
     const on = isSafe ? safe : evil;
     const label = (isSafe ? d.safeLabel : d.evilLabel) ?? (isSafe ? 'parameterised' : 'built by hand');
@@ -245,8 +245,8 @@ export const PlaceholderSeal: React.FC<{scene: Scene}> = ({scene}) => {
           flex: 1, display: 'flex', flexDirection: 'column',
           gap: laneGap, justifyContent: 'safe center', minHeight: 0,
         }}>
-          <Lane kind="safe" />
-          <Lane kind="evil" />
+          <Lane lane="safe" />
+          <Lane lane="evil" />
         </div>
       </div>
     </AbsoluteFill>

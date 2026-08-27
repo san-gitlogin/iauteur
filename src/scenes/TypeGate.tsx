@@ -74,8 +74,8 @@ export const TypeGate: React.FC<{scene: Scene}> = ({scene}) => {
   const badShift = -(1 - rejRun) * (vertical ? 420 : 820) * scale + recoil * -10 * scale;
 
   const Lane: React.FC<{
-    kind: 'good' | 'bad'; value: string; shift: number; on: number; accent: string;
-  }> = ({kind, value, shift, on, accent}) => (
+    lane: 'good' | 'bad'; value: string; shift: number; on: number; accent: string;
+  }> = ({lane, value, shift, on, accent}) => (
     <div style={{
       position: 'relative', height: laneH, minWidth: 0,
       borderRadius: radius,
@@ -88,7 +88,7 @@ export const TypeGate: React.FC<{scene: Scene}> = ({scene}) => {
       <div style={{
         position: 'absolute', left: `${SLOT}%`, top: 0, bottom: 0, right: 0,
         borderLeft: `1px dashed ${hexA(t.colors.muted, 0.4)}`,
-        background: hexA(kind === 'good' && pass > 0.9 ? green : t.colors.bg, 0.28),
+        background: hexA(lane === 'good' && pass > 0.9 ? green : t.colors.bg, 0.28),
         // The label sits in the TOP-RIGHT corner, out of the value's path. Centred, it was
         // written straight through by the chip that lands there — "89.00" printed on top of
         // "products.price" in the first proof. A slot has to leave room for what lands in it.
@@ -102,15 +102,15 @@ export const TypeGate: React.FC<{scene: Scene}> = ({scene}) => {
       <div style={{
         position: 'absolute', left: `${GATE}%`, top: 0, bottom: 0,
         width: 4 * scale,
-        background: kind === 'bad' && rejected ? red : accent,
+        background: lane === 'bad' && rejected ? red : accent,
         boxShadow: t.style.glow > 0
-          ? `0 0 ${14 * scale * t.style.glow}px ${hexA(kind === 'bad' && rejected ? red : accent, 0.55)}` : 'none',
+          ? `0 0 ${14 * scale * t.style.glow}px ${hexA(lane === 'bad' && rejected ? red : accent, 0.55)}` : 'none',
       }} />
       <div style={{
         position: 'absolute', left: `${GATE}%`, top: 4 * scale,
         transform: 'translateX(-50%)',
         fontFamily: t.fonts.mono, fontSize: chipFont * 0.58,
-        color: kind === 'bad' && rejected ? red : accent,
+        color: lane === 'bad' && rejected ? red : accent,
         padding: `${1 * scale}px ${8 * scale}px`,
         borderRadius: radius,
         background: hexA(t.colors.bg, 0.8),
@@ -122,16 +122,16 @@ export const TypeGate: React.FC<{scene: Scene}> = ({scene}) => {
         position: 'absolute',
         // pinned by the edge that matters: the good value rests inside the slot, the bad one
         // rests against the gate.
-        right: kind === 'good' ? '2%' : `${100 - GATE}%`,
-        marginRight: kind === 'bad' ? 10 * scale : 0,
+        right: lane === 'good' ? '2%' : `${100 - GATE}%`,
+        marginRight: lane === 'bad' ? 10 * scale : 0,
         top: '50%',
-        transform: `translate(${shift}px, -50%) rotate(${kind === 'bad' ? recoil * -8 : 0}deg)`,
+        transform: `translate(${shift}px, -50%) rotate(${lane === 'bad' ? recoil * -8 : 0}deg)`,
         fontFamily: t.fonts.mono, fontSize: chipFont,
-        color: kind === 'bad' && rejected ? red : t.colors.text,
+        color: lane === 'bad' && rejected ? red : t.colors.text,
         padding: `${5 * scale}px ${12 * scale}px`,
         borderRadius: radius,
-        border: `2px solid ${hexA(kind === 'bad' && rejected ? red : accent, 0.75)}`,
-        background: hexA(kind === 'bad' && rejected ? red : accent, 0.14),
+        border: `2px solid ${hexA(lane === 'bad' && rejected ? red : accent, 0.75)}`,
+        background: hexA(lane === 'bad' && rejected ? red : accent, 0.14),
         opacity: on > 0 ? 1 : 0.25,
         whiteSpace: 'nowrap',
       }}>{value}</div>
@@ -161,8 +161,8 @@ export const TypeGate: React.FC<{scene: Scene}> = ({scene}) => {
           flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column',
           justifyContent: 'safe center', gap: (vertical ? 24 : 30) * scale,
         }}>
-          <Lane kind="good" value={d.goodValue ?? ''} shift={goodShift} on={pass} accent={green} />
-          <Lane kind="bad" value={d.badValue ?? ''} shift={badShift} on={rejRun} accent={green} />
+          <Lane lane="good" value={d.goodValue ?? ''} shift={goodShift} on={pass} accent={green} />
+          <Lane lane="bad" value={d.badValue ?? ''} shift={badShift} on={rejRun} accent={green} />
 
           {/* THE REAL ERROR, verbatim (LAW 0m). It appears only once the value has actually
               been turned away — a message on screen before the refusal would be a caption. */}
