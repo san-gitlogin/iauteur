@@ -357,10 +357,12 @@ import {JoinMerge} from './scenes/JoinMerge';
 import {DbTwoWays} from './scenes/DbTwoWays';
 import {TypeGate} from './scenes/TypeGate';
 import {TransactionDoor} from './scenes/TransactionDoor';
+import {GroupBuckets} from './scenes/GroupBuckets';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  TRANSACTION_DOOR: TransactionDoor,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  GROUP_BUCKETS: GroupBuckets,
+  TRANSACTION_DOOR: TransactionDoor,
   TYPE_GATE: TypeGate,
   DB_TWO_WAYS: DbTwoWays,
   JOIN_MERGE: JoinMerge,

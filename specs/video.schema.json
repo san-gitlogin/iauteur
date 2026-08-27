@@ -534,7 +534,8 @@
               "JOIN_MERGE",
               "DB_TWO_WAYS",
               "TYPE_GATE",
-              "TRANSACTION_DOOR"
+              "TRANSACTION_DOOR",
+              "GROUP_BUCKETS"
             ]
           },
           "narration": {
@@ -604,6 +605,62 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "GROUP_BUCKETS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "groupBuckets": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "sourceLabel": {
+                          "type": "string"
+                        },
+                        "groupBy": {
+                          "type": "string"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "buckets": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "fallAtWord": {
+                          "type": "number"
+                        },
+                        "collapseAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

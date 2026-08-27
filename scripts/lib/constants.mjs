@@ -243,6 +243,7 @@ export const TYPES = [
   'DB_TWO_WAYS',
   'TYPE_GATE',
   'TRANSACTION_DOOR',
+  'GROUP_BUCKETS',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

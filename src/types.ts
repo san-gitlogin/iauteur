@@ -10176,7 +10176,69 @@ export interface TransactionDoorData {
   actAtWord?: number;
   atWord?: number;
 }
+export interface GroupBucketsItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  // The one NUMERIC slot every item gets: bar lengths, counts, scores, hours.
+  // Added 2026-07-26 — the template was all-strings, so a component whose items
+  // carry a magnitude could not be assembled at all (PRODUCTION_GRIND failed the
+  // tsc gate on exactly this).
+  value?: number;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+  // TOPOLOGY. A tree/graph edge is DECLARED, never inferred from array position —
+  // inferring it produced a complete bipartite graph in the BFS episode, and a
+  // linked-list cycle that was described in the narration but never drawn.
+  // Added 2026-08-20, see LAW 0k.
+  parent?: string;
+  links?: string[];
+  // Short role label printed under the cell: LEFT, RIGHT, MID, +IN, -OUT, slow, fast.
+  tag?: string;
+  // REAL terminal output: one string per line, exactly as the command prints it,
+  // columns and header row included. text/sub gave at most two lines, so a
+  // narration saying "look at the third column" had no third column to look at
+  // (owner, 2026-08-20). Authors supply the real shape; the pane reveals it line
+  // by line across the step's window.
+  out?: string[];
+  // A real measured SERIES for chart components: one number per sample, in order.
+  // Without it a "chart" has nothing to plot and can only fake a shape — which is
+  // what shipped: a synthetic sine wave with no axes, no ticks and no numbers
+  // (owner, 2026-08-20: *"that doesn't even look like a chart"*).
+  series?: number[];
+  // Axis/unit metadata for the chart card.
+  unit?: string;
+  // A horizontal reference line: capacity, a limit, a threshold worth naming.
+  threshold?: number;
+  // Who holds the trigger for this row: 'ai' | 'code' | 'user'. Control is the whole
+  // lesson in MCP's three primitives, so it is a first-class field.
+  owner?: string;
+  // Direction of a protocol message: 'out' = client to server, 'back' = server to
+  // client. Sampling is a REVERSAL, and a reversal needs a direction to reverse.
+  dir?: string;
+  // Axis labels for a chart: first, middle, last sample.
+  xLabels?: string[];
+  // A GLYPH for this item: "lucide:folder-lock", "si:python". A depiction made of
+  // labelled boxes is a list; a depiction made of recognisable objects is a picture
+  // (LAW 0j). Every item that stands for a THING should name one.
+  icon?: string;
+}
+export interface GroupBucketsData {
+  premise?: string;
+  caption?: string;
+  sourceLabel?: string;
+  groupBy?: string;
+  rows?: GroupBucketsItem[];
+  buckets?: GroupBucketsItem[];
+  fallAtWord?: number;
+  collapseAtWord?: number;
+  atWord?: number;
+}
 export interface SceneData {
+  groupBuckets?: GroupBucketsData;
   transactionDoor?: TransactionDoorData;
   typeGate?: TypeGateData;
   dbTwoWays?: DbTwoWaysData;

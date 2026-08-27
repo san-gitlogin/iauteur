@@ -16,7 +16,24 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  TRANSACTION_DOOR: {
+export const MANIFEST = {  GROUP_BUCKETS: {
+    category: "diagram", family: "diagram", data_key: "groupBuckets",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      sourceLabel: {t: 'string'},
+      groupBy: {t: 'string'},
+      rows: {t: 'items'},
+      buckets: {t: 'items'},
+      fallAtWord: {t: 'number'},
+      collapseAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {groupBuckets: {"premise":"Six order rows. Three different products.","caption":"many rows in, one row out","sourceLabel":"orders","groupBy":"GROUP BY product_id","rows":[{"label":"qty 2","sub":"1"},{"label":"qty 1","sub":"2"},{"label":"qty 1","sub":"1"},{"label":"qty 4","sub":"3"},{"label":"qty 2","sub":"4"},{"label":"qty 3","sub":"1"}],"buckets":[{"label":"product 1","sub":"6 units","text":"1"},{"label":"product 2","sub":"1 unit","text":"2"},{"label":"product 3","sub":"4 units","text":"3"},{"label":"product 4","sub":"2 units","text":"4"}],"fallAtWord":3,"collapseAtWord":6,"atWord":2}},
+  },
+  TRANSACTION_DOOR: {
     category: "diagram", family: "diagram", data_key: "transactionDoor",
     purpose: "",
     use_when: "",
