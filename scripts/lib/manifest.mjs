@@ -16,7 +16,27 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  PLACEHOLDER_SEAL: {
+export const MANIFEST = {  JOIN_MERGE: {
+    category: "diagram", family: "diagram", data_key: "joinMerge",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      leftTable: {t: 'string'},
+      rightTable: {t: 'string'},
+      leftRow: {t: 'items'},
+      rightRow: {t: 'items'},
+      keyLeft: {t: 'string'},
+      keyRight: {t: 'string'},
+      resultLabel: {t: 'string'},
+      keyAtWord: {t: 'number'},
+      mergeAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {joinMerge: {"premise":"One row from each table. They have exactly one thing in common.","caption":"two rows, one answer","leftTable":"products","rightTable":"orders","keyLeft":"id","keyRight":"product_id","resultLabel":"one joined row","leftRow":[{"label":"id","sub":"1"},{"label":"name","sub":"Mechanical keyboard"},{"label":"price","sub":"89.00"}],"rightRow":[{"label":"id","sub":"3"},{"label":"product_id","sub":"1"},{"label":"qty","sub":"2"}],"keyAtWord":3,"mergeAtWord":6,"atWord":2}},
+  },
+  PLACEHOLDER_SEAL: {
     category: "diagram", family: "diagram", data_key: "placeholderSeal",
     purpose: "",
     use_when: "",

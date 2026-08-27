@@ -530,7 +530,8 @@
               "MCP_REACH",
               "MCP_MESH",
               "SCAN_VS_SEEK",
-              "PLACEHOLDER_SEAL"
+              "PLACEHOLDER_SEAL",
+              "JOIN_MERGE"
             ]
           },
           "narration": {
@@ -600,6 +601,71 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "JOIN_MERGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "joinMerge": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "leftTable": {
+                          "type": "string"
+                        },
+                        "rightTable": {
+                          "type": "string"
+                        },
+                        "leftRow": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "rightRow": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "keyLeft": {
+                          "type": "string"
+                        },
+                        "keyRight": {
+                          "type": "string"
+                        },
+                        "resultLabel": {
+                          "type": "string"
+                        },
+                        "keyAtWord": {
+                          "type": "number"
+                        },
+                        "mergeAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

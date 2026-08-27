@@ -239,6 +239,7 @@ export const TYPES = [
   'MCP_MESH',
   'SCAN_VS_SEEK',
   'PLACEHOLDER_SEAL',
+  'JOIN_MERGE',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

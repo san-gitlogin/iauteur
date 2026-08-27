@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'JOIN_MERGE'
   | 'PLACEHOLDER_SEAL'
   | 'SCAN_VS_SEEK'
   | 'MCP_MESH'
@@ -363,6 +364,23 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type JoinMergeScene = SceneCommon<'JOIN_MERGE'> & { data: {
+    joinMerge: {
+      premise?: string;
+      caption?: string;
+      leftTable?: string;
+      rightTable?: string;
+      leftRow?: Array<Record<string, unknown>>;
+      rightRow?: Array<Record<string, unknown>>;
+      keyLeft?: string;
+      keyRight?: string;
+      resultLabel?: string;
+      keyAtWord?: number;
+      mergeAtWord?: number;
+      atWord?: number;
+    };
+  } };
 
 export type PlaceholderSealScene = SceneCommon<'PLACEHOLDER_SEAL'> & { data: {
     placeholderSeal: {
@@ -5220,6 +5238,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  JOIN_MERGE: JoinMergeScene;
   PLACEHOLDER_SEAL: PlaceholderSealScene;
   SCAN_VS_SEEK: ScanVsSeekScene;
   MCP_MESH: McpMeshScene;
@@ -5572,6 +5591,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | JoinMergeScene
   | PlaceholderSealScene
   | ScanVsSeekScene
   | McpMeshScene
