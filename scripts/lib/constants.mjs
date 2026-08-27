@@ -247,6 +247,7 @@ export const TYPES = [
   'TABLE_SPLIT',
   'WHERE_IT_RUNS',
   'INDEX_LEDGER',
+  'WHEN_NOT_SQLITE',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

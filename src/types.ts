@@ -10371,7 +10371,21 @@ export interface IndexLedgerData {
   costAtWord?: number;
   atWord?: number;
 }
+export interface WhenNotSqliteData {
+  premise?: string;
+  caption?: string;
+  fileLabel?: string;
+  readerLabel?: string;
+  writerLabel?: string;
+  readers?: number;
+  writers?: number;
+  verdict?: string;
+  readAtWord?: number;
+  writeAtWord?: number;
+  atWord?: number;
+}
 export interface SceneData {
+  whenNotSqlite?: WhenNotSqliteData;
   indexLedger?: IndexLedgerData;
   whereItRuns?: WhereItRunsData;
   tableSplit?: TableSplitData;

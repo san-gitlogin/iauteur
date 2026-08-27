@@ -51,26 +51,26 @@ because the gap is filled by teaching more SQL and never by padding narration.
 | 12 | Removing one — `DELETE` | `rec#delete` | **captured** |
 | 13 | `.schema` — the database describing itself | `rec#schema` | **captured** |
 | 14 | **PAYOFF: it is 8192 bytes** | `rec#just-a-file` | **captured** |
-| 15 | Where this is already running near you | **new component** `WHERE_IT_RUNS` — phone, browser, aircraft, all revealing the same file | to build |
+| 15 | Where this is already running near you | **new component** `WHERE_IT_RUNS` — phone, browser, aircraft, all revealing the same file | **BUILT** |
 
 ## ACT II — Real querying
 
 | # | Beat | Surface | Status |
 |---|---|---|---|
-| 16 | One table is never enough | **new component** `TABLE_SPLIT` — a fat table with a repeated column, splitting in two | pending |
+| 16 | One table is never enough | **new component** `TABLE_SPLIT` — a fat table with a repeated column, splitting in two | **BUILT** |
 | 17 | The second table | `rec#add-orders` | **captured** |
 | 18 | What a JOIN actually does | **new component** `JOIN_MERGE` — two rows physically sliding together on the matching id | **BUILT** |
 | 19 | The join, in the editor | `rec#open-revenue` | **captured** |
 | 20 | The answer | `rec#revenue` | **captured** |
 | 21 | Counting things — `COUNT`, `AVG` | `rec#aggregate` | **captured** |
-| 22 | `GROUP BY` — one row per bucket | **new component** `GROUP_BUCKETS` — rows falling into labelled buckets, each collapsing to one | to build |
+| 22 | `GROUP BY` — one row per bucket | **new component** `GROUP_BUCKETS` — rows falling into labelled buckets, each collapsing to one | **BUILT** |
 | 23 | `HAVING` vs `WHERE` | `rec#having` | **captured** |
 | 24 | NULL is not zero, and not empty | `rec#null` | **captured** |
 | 25 | How does it FIND a row? | **new component** `SCAN_VS_SEEK` — a finger down every row, versus a jump straight to one | **BUILT** |
 | 26 | `EXPLAIN QUERY PLAN` — SCAN | `rec#plan-before` | **captured** |
 | 27 | Adding the index | `rec#index` | **captured** |
 | 28 | **PAYOFF: SEARCH USING INDEX** | `rec#plan-after` | **captured** |
-| 29 | What an index costs | **new component** `INDEX_LEDGER` — the write side of the bargain | to build |
+| 29 | What an index costs | **new component** `INDEX_LEDGER` — the write side of the bargain | **BUILT** |
 | 30 | Quiz (LAW 0e-q: gap + pause cue + `Ready?`) | concept | to author |
 
 ## ACT III — From real code
@@ -87,7 +87,7 @@ because the gap is filled by teaching more SQL and never by padding narration.
 | 38 | Writing, and the commit | `rec#run-write` | **captured** |
 | 39 | What `rollback` is for | `rec#rollback` | **captured** |
 | 40 | A transaction, depicted | **new component** `TRANSACTION_DOOR` — work staged behind a door that either opens or is swept away | **BUILT** |
-| 41 | When SQLite is the wrong answer | **new component** `WHEN_NOT_SQLITE` — the writer queue backing up | to build |
+| 41 | When SQLite is the wrong answer | **new component** `WHEN_NOT_SQLITE` — the writer queue backing up | **BUILT** |
 | 42 | Recap — the three facts, each as it appeared | concept | to author |
 | 43 | Outro / CTA | structural | to author |
 
@@ -106,16 +106,17 @@ OBJECT the viewer should see, per LAW 0n's test:
 | `SCAN_VS_SEEK` | a finger down every row, versus one jump | **BUILT** |
 | `PLACEHOLDER_SEAL` | the sentence, and what a value does to it | **BUILT** |
 | `TRANSACTION_DOOR` | the delete that ran without happening | **BUILT** |
-| `GROUP_BUCKETS` | rows falling into buckets, each collapsing to one | pending |
-| `TABLE_SPLIT` | a fat table with a repeated column, splitting in two | pending |
-| `INDEX_LEDGER` | the write side of the index bargain | pending |
-| `WHERE_IT_RUNS` | phone, browser, aircraft, all revealing the same file | pending |
-| `WHEN_NOT_SQLITE` | the writer queue backing up | pending |
+| `GROUP_BUCKETS` | rows falling into buckets, each collapsing to one | **BUILT** |
+| `TABLE_SPLIT` | a fat table with a repeated column, splitting in two | **BUILT** |
+| `INDEX_LEDGER` | one write, two destinations, and the bill | **BUILT** |
+| `WHERE_IT_RUNS` | four objects, one identical file inside each | **BUILT** |
+| `WHEN_NOT_SQLITE` | readers stream through, writers queue at one door | **BUILT** |
 
-Six built, every one verified by rendering at both aspects, and every one of them
-found at least one defect that was invisible in the code. `FOREIGN_KEY_LINK` was
-dropped and replaced by `TABLE_SPLIT`: as specified it was a second JOIN picture, and
-two components drawing the same relationship is the reuse LAW 0e rule 8 rejects.
+**All eleven built**, every one verified by rendering at both aspects — and every one
+of them had at least one defect that was invisible in the code and obvious in a still.
+`FOREIGN_KEY_LINK` was dropped and replaced by `TABLE_SPLIT`: as specified it was a
+second JOIN picture, and two components drawing the same relationship is exactly the
+reuse LAW 0e rule 8 rejects.
 
 None of them may be satisfied by `STICKY_NOTE`, `REVEAL`, `SPLIT_PATHS` or `ICON_GRID`
 (LAW 0e rule 8 names those as the offenders).

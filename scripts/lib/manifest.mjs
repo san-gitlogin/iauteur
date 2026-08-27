@@ -16,7 +16,26 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  INDEX_LEDGER: {
+export const MANIFEST = {  WHEN_NOT_SQLITE: {
+    category: "diagram", family: "diagram", data_key: "whenNotSqlite",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      fileLabel: {t: 'string'},
+      readerLabel: {t: 'string'},
+      writerLabel: {t: 'string'},
+      readers: {t: 'number'},
+      writers: {t: 'number'},
+      verdict: {t: 'string'},
+      readAtWord: {t: 'number'},
+      writeAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {whenNotSqlite: {"premise":"Many readers at once is fine. Many writers at once is the limit.","caption":"one door for the writers","fileLabel":"shop.db","readerLabel":"readers","writerLabel":"writers","readers":5,"writers":5,"verdict":"a busy write workload wants a server","readAtWord":3,"writeAtWord":6,"atWord":2}},
+  },
+  INDEX_LEDGER: {
     category: "diagram", family: "diagram", data_key: "indexLedger",
     purpose: "",
     use_when: "",

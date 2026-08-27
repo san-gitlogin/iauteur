@@ -538,7 +538,8 @@
               "GROUP_BUCKETS",
               "TABLE_SPLIT",
               "WHERE_IT_RUNS",
-              "INDEX_LEDGER"
+              "INDEX_LEDGER",
+              "WHEN_NOT_SQLITE"
             ]
           },
           "narration": {
@@ -608,6 +609,62 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "WHEN_NOT_SQLITE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "whenNotSqlite": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "fileLabel": {
+                          "type": "string"
+                        },
+                        "readerLabel": {
+                          "type": "string"
+                        },
+                        "writerLabel": {
+                          "type": "string"
+                        },
+                        "readers": {
+                          "type": "number"
+                        },
+                        "writers": {
+                          "type": "number"
+                        },
+                        "verdict": {
+                          "type": "string"
+                        },
+                        "readAtWord": {
+                          "type": "number"
+                        },
+                        "writeAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {
