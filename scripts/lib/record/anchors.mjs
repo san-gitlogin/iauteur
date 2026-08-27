@@ -38,7 +38,7 @@ const frameOf = (word) => Math.max(0, Math.round((word - 1) * FPW));
  * @param {number}   [o.settle]   frames of tail after the last clip finishes
  * @returns {{ok:boolean, reason?:string, durationFrames:number, clips:{atWord:number, callouts:number[]}[]}}
  */
-export const solveAnchors = ({words, clipFrames, callouts = [], settle = 45}) => {
+export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], settle = 45}) => {
   const n = clipFrames.length;
   if (!n) return {ok: false, reason: 'no clips', durationFrames: 0, clips: []};
 
@@ -153,9 +153,22 @@ export const solveAnchors = ({words, clipFrames, callouts = [], settle = 45}) =>
         `Give the beat ~${needWords} words, or move a callout to an earlier clip.`;
       continue;
     }
-    for (let j = 0; j < cn; j++) {
-      clips[i].callouts.push(wordOf(afterFootage + Math.round((room * (j + 1)) / (cn + 1))));
+    // A PULL-BACK IS A RELEASE, NOT A TEACHING BEAT, so it does not share the even spread.
+    //
+    // PAID FOR on the SQLite cuts: `zooms: [{mark}, {at:'full'}]` with one callout produced
+    // zoom / callout / pull-back at words 81.0 / 81.8 / 82.75 — the camera started leaving
+    // 0.8 words after the label appeared, and the 18-frame ease meant the payoff was legible
+    // punched-in for under half a second. Four scenes of the long cut did this, including the
+    // 8192-byte reveal and SCAN -> SEARCH, which are the two beats the whole course is for.
+    //
+    // So a trailing release is pinned to the END of the clip's window and the teaching beats
+    // spread across the room BEFORE it — which is the most dwell the script can afford.
+    const rel = releases[i] ? 1 : 0;
+    const teach = cn - rel;
+    for (let j = 0; j < teach; j++) {
+      clips[i].callouts.push(wordOf(afterFootage + Math.round((room * (j + 1)) / (teach + 1))));
     }
+    if (rel) clips[i].callouts.push(wordOf(afterFootage + room));
   }
   if (overflow) {
     return {ok: false, reason: overflow, durationFrames, clips};
@@ -202,17 +215,54 @@ export const anchorScene = (scene, {settle = 45} = {}) => {
     return seq;
   });
 
-  const res = solveAnchors({
+  // A trailing pull-back is the camera letting go, not another thing to read.
+  const isRelease = (seq) => {
+    const last = seq[seq.length - 1];
+    return !!(last && last.kind === 'zoom' && last.obj?.at === 'full');
+  };
+  const solve = (plan) => solveAnchors({
     words,
     clipFrames: d.clips.map((c) => Number(c.frames)),
-    callouts: eventPlan.map((seq) => seq.length),
+    callouts: plan.map((seq) => seq.length),
+    releases: plan.map(isRelease),
     settle,
   });
+
+  let plan = eventPlan;
+  let res = solve(plan);
   if (!res.ok) return res;
+
+  // A CAMERA MOVE THE VIEWER CANNOT REGISTER IS WORSE THAN NO MOVE. Pinning the pull-back to
+  // the end of the window bought the payoff more dwell, but on a clip with long footage and a
+  // short script there is simply no room left: measured 9 frames — three tenths of a second —
+  // between the callout on the 8192-byte reveal and the camera starting to leave, against an
+  // 18-frame ease. The label would be legible punched-in for almost no time at all.
+  //
+  // So when a release cannot earn at least MIN_DWELL, it is DROPPED and the beat re-solved
+  // without it. The punch-in simply holds to the end of the clip, which is what the payoff
+  // wanted anyway. Garnish loses to legibility.
+  const MIN_DWELL = 36; // 1.2s — long enough to read a short label before the camera moves
+  const drop = [];
+  plan.forEach((seq, i) => {
+    if (!isRelease(seq) || seq.length < 2) return;
+    const at = res.clips[i].callouts;
+    const dwell = (at[at.length - 1] - at[at.length - 2]) * FPW;
+    if (dwell < MIN_DWELL) drop.push(i);
+  });
+  if (drop.length) {
+    for (const i of drop) {
+      const seq = plan[i];
+      const rel = seq.pop();                                  // the trailing {at:'full'}
+      d.clips[i].zooms = (d.clips[i].zooms ?? []).filter((z) => z !== rel.obj);
+    }
+    plan = plan.map((seq) => seq.filter(Boolean));
+    const re = solve(plan);
+    if (re.ok) res = re;
+  }
 
   d.clips.forEach((c, i) => {
     c.atWord = res.clips[i].atWord;
-    eventPlan[i].forEach((e, j) => { e.obj.atWord = res.clips[i].callouts[j]; });
+    plan[i].forEach((e, j) => { e.obj.atWord = res.clips[i].callouts[j]; });
   });
   if (d.atWord == null) d.atWord = 2;
   scene.durationFrames = res.durationFrames;

@@ -389,15 +389,11 @@
               "zooms": [
                 {
                   "mark": "kb",
-                  "atWord": 57.583
+                  "atWord": 58.333
                 },
                 {
                   "mark": "mon",
-                  "atWord": 59.083
-                },
-                {
-                  "at": "full",
-                  "atWord": 60.5
+                  "atWord": 59.75
                 }
               ],
               "callouts": [
@@ -405,13 +401,13 @@
                   "text": "the row we keep returning to",
                   "mark": "kb",
                   "color": "green",
-                  "atWord": 58.333
+                  "atWord": 59.083
                 },
                 {
                   "text": "and the one WHERE is about to drop",
                   "mark": "mon",
                   "color": "blue",
-                  "atWord": 59.75
+                  "atWord": 60.5
                 }
               ],
               "id": "select",
@@ -437,7 +433,7 @@
                   "h": 19
                 }
               },
-              "atWord": 47.417
+              "atWord": 48.083
             }
           ],
           "capture": {
@@ -700,11 +696,7 @@
               "zooms": [
                 {
                   "mark": "file",
-                  "atWord": 67.833
-                },
-                {
-                  "at": "full",
-                  "atWord": 69.333
+                  "atWord": 68.583
                 }
               ],
               "callouts": [
@@ -712,7 +704,7 @@
                   "text": "the entire database",
                   "mark": "file",
                   "color": "green",
-                  "atWord": 68.583
+                  "atWord": 69.333
                 }
               ],
               "id": "just-a-file",
@@ -732,7 +724,7 @@
                   "h": 19
                 }
               },
-              "atWord": 57
+              "atWord": 57.75
             }
           ],
           "capture": {
@@ -1010,7 +1002,7 @@
                   "text": "matched on the id",
                   "mark": "joinline",
                   "color": "blue",
-                  "atWord": 55.25
+                  "atWord": 56.083
                 }
               ],
               "id": "open-revenue",
@@ -1043,11 +1035,7 @@
               "zooms": [
                 {
                   "mark": "top",
-                  "atWord": 76.333
-                },
-                {
-                  "at": "full",
-                  "atWord": 78
+                  "atWord": 77.167
                 }
               ],
               "callouts": [
@@ -1055,7 +1043,7 @@
                   "text": "six units, eighty nine each",
                   "mark": "rev",
                   "color": "green",
-                  "atWord": 77.167
+                  "atWord": 78
                 }
               ],
               "id": "revenue",
@@ -1081,7 +1069,7 @@
                   "h": 19
                 }
               },
-              "atWord": 65
+              "atWord": 65.75
             }
           ],
           "capture": {
@@ -1429,7 +1417,7 @@
                 "w": 1252,
                 "h": 300
               },
-              "atWord": 31.25
+              "atWord": 32.083
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -1438,11 +1426,7 @@
               "zooms": [
                 {
                   "mark": "search",
-                  "atWord": 72.083
-                },
-                {
-                  "at": "full",
-                  "atWord": 73.75
+                  "atWord": 72.917
                 }
               ],
               "callouts": [
@@ -1450,7 +1434,7 @@
                   "text": "straight to the rows",
                   "mark": "search",
                   "color": "green",
-                  "atWord": 72.917
+                  "atWord": 73.75
                 }
               ],
               "id": "plan-after",
@@ -1470,7 +1454,7 @@
                   "h": 19
                 }
               },
-              "atWord": 56.917
+              "atWord": 57.667
             }
           ],
           "capture": {

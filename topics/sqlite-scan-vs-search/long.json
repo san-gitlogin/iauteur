@@ -134,7 +134,7 @@
                   "text": "reads every row",
                   "mark": "scan",
                   "color": "orange",
-                  "atWord": 29.333
+                  "atWord": 30.167
                 }
               ],
               "id": "plan-before",
@@ -169,7 +169,7 @@
                 "w": 1252,
                 "h": 300
               },
-              "atWord": 35.333
+              "atWord": 36.167
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -178,11 +178,7 @@
               "zooms": [
                 {
                   "mark": "search",
-                  "atWord": 81
-                },
-                {
-                  "at": "full",
-                  "atWord": 82.75
+                  "atWord": 81.833
                 }
               ],
               "callouts": [
@@ -190,7 +186,7 @@
                   "text": "straight to the rows",
                   "mark": "search",
                   "color": "green",
-                  "atWord": 81.833
+                  "atWord": 82.75
                 }
               ],
               "id": "plan-after",
@@ -210,7 +206,7 @@
                   "h": 19
                 }
               },
-              "atWord": 64.667
+              "atWord": 65.5
             }
           ],
           "capture": {
