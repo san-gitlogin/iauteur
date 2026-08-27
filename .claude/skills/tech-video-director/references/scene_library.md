@@ -683,3 +683,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | TRANSACTION_DOOR |  | premise, caption, pendingLabel, diskLabel, rows, diskBefore, diskAfter, outcome, stageAtWord, actAtWord, atWord |
 | GROUP_BUCKETS |  | premise, caption, sourceLabel, groupBy, rows, buckets, fallAtWord, collapseAtWord, atWord |
 | TABLE_SPLIT |  | premise, caption, tableLabel, splitLeftLabel, splitRightLabel, headers, rows, note, splitAtWord, atWord |
+| WHERE_IT_RUNS |  | premise, caption, fileName, places, note, atWord |

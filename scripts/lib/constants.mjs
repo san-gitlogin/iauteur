@@ -245,6 +245,7 @@ export const TYPES = [
   'TRANSACTION_DOOR',
   'GROUP_BUCKETS',
   'TABLE_SPLIT',
+  'WHERE_IT_RUNS',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

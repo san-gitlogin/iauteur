@@ -359,10 +359,12 @@ import {TypeGate} from './scenes/TypeGate';
 import {TransactionDoor} from './scenes/TransactionDoor';
 import {GroupBuckets} from './scenes/GroupBuckets';
 import {TableSplit} from './scenes/TableSplit';
+import {WhereItRuns} from './scenes/WhereItRuns';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  TABLE_SPLIT: TableSplit,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  WHERE_IT_RUNS: WhereItRuns,
+  TABLE_SPLIT: TableSplit,
   GROUP_BUCKETS: GroupBuckets,
   TRANSACTION_DOOR: TransactionDoor,
   TYPE_GATE: TypeGate,

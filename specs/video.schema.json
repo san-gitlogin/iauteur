@@ -536,7 +536,8 @@
               "TYPE_GATE",
               "TRANSACTION_DOOR",
               "GROUP_BUCKETS",
-              "TABLE_SPLIT"
+              "TABLE_SPLIT",
+              "WHERE_IT_RUNS"
             ]
           },
           "narration": {
@@ -606,6 +607,50 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "WHERE_IT_RUNS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "whereItRuns": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "places": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "note": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

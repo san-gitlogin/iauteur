@@ -16,7 +16,21 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  TABLE_SPLIT: {
+export const MANIFEST = {  WHERE_IT_RUNS: {
+    category: "diagram", family: "diagram", data_key: "whereItRuns",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      fileName: {t: 'string'},
+      places: {t: 'items'},
+      note: {t: 'string'},
+      atWord: {t: 'anchor'},
+    },
+    example: {whereItRuns: {"premise":"You are almost certainly carrying several copies of it right now.","caption":"already in your pocket","fileName":"*.db","note":"one engine, one file format, everywhere it runs","places":[{"label":"every phone","sub":"contacts, messages","asset":"lucide:smartphone","atWord":2},{"label":"every browser","sub":"history, settings","asset":"lucide:globe","atWord":4},{"label":"aircraft","sub":"flight software","asset":"lucide:plane","atWord":6},{"label":"cars","sub":"infotainment","asset":"lucide:car","atWord":8}],"atWord":2}},
+  },
+  TABLE_SPLIT: {
     category: "diagram", family: "diagram", data_key: "tableSplit",
     purpose: "",
     use_when: "",
