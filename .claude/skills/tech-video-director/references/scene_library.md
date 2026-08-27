@@ -682,3 +682,4 @@ QUOTE_SPOTLIGHT extra: `points:[{text,atWord}]` renders a person-profile bullet 
 | TYPE_GATE |  | premise, caption, columnName, columnType, goodValue, badValue, errorText, passAtWord, rejectAtWord, atWord |
 | TRANSACTION_DOOR |  | premise, caption, pendingLabel, diskLabel, rows, diskBefore, diskAfter, outcome, stageAtWord, actAtWord, atWord |
 | GROUP_BUCKETS |  | premise, caption, sourceLabel, groupBy, rows, buckets, fallAtWord, collapseAtWord, atWord |
+| TABLE_SPLIT |  | premise, caption, tableLabel, splitLeftLabel, splitRightLabel, headers, rows, note, splitAtWord, atWord |

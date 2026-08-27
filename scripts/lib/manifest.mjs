@@ -16,7 +16,25 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  GROUP_BUCKETS: {
+export const MANIFEST = {  TABLE_SPLIT: {
+    category: "diagram", family: "diagram", data_key: "tableSplit",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      tableLabel: {t: 'string'},
+      splitLeftLabel: {t: 'string'},
+      splitRightLabel: {t: 'string'},
+      headers: {t: 'string[]'},
+      rows: {t: 'items'},
+      note: {t: 'string'},
+      splitAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {tableSplit: {"premise":"Four orders. The same product name typed out three times.","caption":"the same words, over and over","tableLabel":"one big table","splitLeftLabel":"orders","splitRightLabel":"products","note":"stored once, referenced anywhere","headers":["id","product","qty"],"rows":[{"label":"1","sub":"Mechanical keyboard","text":"2"},{"label":"2","sub":"Mechanical keyboard","text":"1"},{"label":"3","sub":"Desk lamp","text":"4"},{"label":"4","sub":"Mechanical keyboard","text":"3"}],"splitAtWord":4,"atWord":2}},
+  },
+  GROUP_BUCKETS: {
     category: "diagram", family: "diagram", data_key: "groupBuckets",
     purpose: "",
     use_when: "",

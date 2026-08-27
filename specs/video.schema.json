@@ -535,7 +535,8 @@
               "DB_TWO_WAYS",
               "TYPE_GATE",
               "TRANSACTION_DOOR",
-              "GROUP_BUCKETS"
+              "GROUP_BUCKETS",
+              "TABLE_SPLIT"
             ]
           },
           "narration": {
@@ -605,6 +606,65 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TABLE_SPLIT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "tableSplit": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "tableLabel": {
+                          "type": "string"
+                        },
+                        "splitLeftLabel": {
+                          "type": "string"
+                        },
+                        "splitRightLabel": {
+                          "type": "string"
+                        },
+                        "headers": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "note": {
+                          "type": "string"
+                        },
+                        "splitAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {
