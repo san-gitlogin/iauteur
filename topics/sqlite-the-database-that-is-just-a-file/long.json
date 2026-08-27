@@ -1,0 +1,2281 @@
+{
+  "meta": {
+    "topic": "SQLite: the database that is just a file",
+    "format": "long",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "fps": 30,
+    "onePayoff": "The entire database is one 8 KB file you can email.",
+    "openLoop": "You did not install anything — so where does the data actually live?",
+    "analogy": "A gate that checks a value, a queue at one door, a sentence that grows a clause.",
+    "seo": {
+      "title": "SQLite Tutorial: The Database That Is Just A File",
+      "description": "SQLite from nothing — the shell first, then Python. Real commands, real output, nothing faked.",
+      "queries": [
+        "what is sqlite",
+        "sqlite tutorial for beginners",
+        "sqlite vs mysql",
+        "sqlite python tutorial",
+        "sql injection python sqlite",
+        "explain query plan sqlite"
+      ],
+      "tags": [
+        "sqlite",
+        "sqlite tutorial",
+        "sql",
+        "sql tutorial",
+        "database",
+        "python sqlite",
+        "sqlite3",
+        "sql for beginners",
+        "explain query plan",
+        "sql injection",
+        "parameterised queries",
+        "database tutorial",
+        "learn sql",
+        "sqlite python"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png",
+    "background": "grid"
+  },
+  "thumbnail": {
+    "title": "JUST A FILE",
+    "badge": "8 KB",
+    "asset": "lucide:file"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "filmburn",
+      "background": "zoneA",
+      "narration": "You didn't install a database to watch this. So where is the data going to live?",
+      "data": {
+        "headline": "NO SERVER",
+        "subtext": "a database that is one file",
+        "heroAsset": "lucide:file",
+        "headlineAtWord": 2,
+        "heroAtWord": 13
+      },
+      "durationFrames": 237,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s02",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Welcome in. Today is SQLite, from absolutely nothing to querying two tables and calling SQLite from Python. Everything you see me run is running live, so when something fails, you'll see the error.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "It is a file",
+          "subtitle": "no server, no port, no password"
+        }
+      },
+      "durationFrames": 441,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s03",
+      "type": "DB_TWO_WAYS",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Here's what trips people up, because every database tutorial you have opened starts the same way. First a machine for the server to run on. Then a service that has to stay running, or nothing works. Then a port to listen on. Then a user and a password, and the twenty minutes you'll spend getting those wrong. SQLite skips the whole list. On the right is the whole thing — one file, eight kilobytes, already finished before we start.",
+      "data": {
+        "dbTwoWays": {
+          "caption": "what you have to run first",
+          "premise": "Both of these store the same four rows.",
+          "serverLabel": "a database server",
+          "fileLabel": "SQLite",
+          "fileName": "shop.db",
+          "fileSize": "8192 bytes",
+          "fileNote": "no port, no daemon, no password",
+          "serverParts": [
+            {
+              "label": "a machine to run on",
+              "asset": "lucide:server",
+              "atWord": 19
+            },
+            {
+              "label": "a service, kept running",
+              "asset": "lucide:activity",
+              "atWord": 25
+            },
+            {
+              "label": "a port to listen on",
+              "asset": "lucide:plug",
+              "atWord": 35
+            },
+            {
+              "label": "a user and a password",
+              "asset": "lucide:key-round",
+              "atWord": 41
+            }
+          ],
+          "atWord": 3
+        }
+      },
+      "durationFrames": 993,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s04",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "We're going to build this twice. First in the shell, where every single thing is visible. Then from Python, reading the very same file. Nothing gets exported in between.",
+      "data": {
+        "title": "SQLite, from nothing",
+        "subtitle": "the shell first, then Python"
+      },
+      "durationFrames": 393,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s05",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Let's prove the thing exists. That's the version I am teaching and I want to be specific, because SQLite has been quietly gaining features for twenty five years. Now, before I run anything, look at the schema file itself. Four lines, and every one is a promise. The id is the row's own number. The name is text, and NOT NULL means the database will refuse a row that leaves the name blank. Price is a real number. And that last word, STRICT, is the one people skip past — hold on to STRICT, because in about a minute it's going to bite something on purpose.",
+      "data": {
+        "recordedStep": {
+          "caption": "four lines, four promises",
+          "premise": "The version being taught, and the shape of the table before a single row exists.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act1#version",
+              "label": "check the version",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "strict tables need 3.37+",
+                  "mark": "ver",
+                  "color": "blue",
+                  "atWord": 37
+                }
+              ],
+              "id": "version",
+              "src": "rec/sqlite-act1/seg-01.mp4",
+              "frames": 56,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "ver": {
+                  "x": 368,
+                  "y": 688,
+                  "w": 53,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act1#open-schema",
+              "label": "read the schema",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "notnull",
+                  "atWord": 82
+                },
+                {
+                  "mark": "strict",
+                  "atWord": 84
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "refuses a blank name",
+                  "mark": "notnull",
+                  "color": "blue",
+                  "atWord": 83
+                },
+                {
+                  "text": "and this one checks types",
+                  "mark": "strict",
+                  "color": "orange",
+                  "atWord": 85
+                }
+              ],
+              "id": "open-schema",
+              "src": "rec/sqlite-act1/seg-02.mp4",
+              "frames": 188,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "strict": {
+                  "x": 428,
+                  "y": 162,
+                  "w": 89,
+                  "h": 22
+                },
+                "notnull": {
+                  "x": 448,
+                  "y": 114,
+                  "w": 228,
+                  "h": 22
+                }
+              },
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 65
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1317,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s06",
+      "type": "TYPE_GATE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Without STRICT, SQLite is famously relaxed about types. Declare a column as a number and SQLite will happily accept the word banana and hand the value back months later. STRICT turns that off. The column becomes a gate — a number goes through, text stops dead, and you get told why.",
+      "data": {
+        "typeGate": {
+          "caption": "a promise the table keeps",
+          "premise": "The column was declared REAL. STRICT is what makes that a rule rather than a hint.",
+          "columnName": "products.price",
+          "columnType": "REAL",
+          "goodValue": "89.00",
+          "badValue": "'not-a-number'",
+          "errorText": "cannot store TEXT value in REAL column products.price",
+          "passAtWord": 30,
+          "rejectAtWord": 38,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 657,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s07",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So let's make the table, and then break the table deliberately. The first command reads that file and creates the table. Silence means the command worked, because SQLite only speaks when something is wrong. The second one tries to put the string not-a-number into the price column. Watch. SQLite refuses, and names the column and the type, and nothing was stored. STRICT just earned its place.",
+      "data": {
+        "recordedStep": {
+          "caption": "the error is the lesson",
+          "premise": "The second command FAILS on purpose. Exit code 1, and the message names the column.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act1#create",
+              "label": "create the table",
+              "focus": true,
+              "id": "create",
+              "src": "rec/sqlite-act1/seg-03.mp4",
+              "frames": 114,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act1#strict-error",
+              "label": "break it on purpose",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "err",
+                  "atWord": 52
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "refused, and it says why",
+                  "mark": "err",
+                  "color": "red",
+                  "atWord": 53
+                }
+              ],
+              "id": "strict-error",
+              "src": "rec/sqlite-act1/seg-04.mp4",
+              "frames": 194,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "err": {
+                  "x": 685,
+                  "y": 745,
+                  "w": 466,
+                  "h": 19
+                }
+              },
+              "atWord": 35
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 837,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s08",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Right, four real rows. The insert is silent again, so the next command asks for the whole table back. And there's your table — headers, a box drawn round the rows, four products with prices. That box isn't me formatting anything, by the way. That's dot mode box, a display setting in the shell, and it's the fastest way to make SQLite readable while you're learning. Keep an eye on the keyboard row, because we come back to the keyboard several times. And keep half an eye on the monitor at two hundred and forty, because the next command is about to drop the monitor.",
+      "data": {
+        "recordedStep": {
+          "caption": "four rows, and a readable box",
+          "premise": "shop.db now holds four products. `.mode box` is what draws the borders.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act1#insert",
+              "label": "put four rows in",
+              "focus": true,
+              "id": "insert",
+              "src": "rec/sqlite-act1/seg-05.mp4",
+              "frames": 85,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act1#select",
+              "label": "read them back",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "kb",
+                  "atWord": 80
+                },
+                {
+                  "mark": "mon",
+                  "atWord": 82
+                },
+                {
+                  "at": "full",
+                  "atWord": 84
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the row we keep returning to",
+                  "mark": "kb",
+                  "color": "green",
+                  "atWord": 81
+                },
+                {
+                  "text": "and the one WHERE is about to drop",
+                  "mark": "mon",
+                  "color": "blue",
+                  "atWord": 83
+                }
+              ],
+              "id": "select",
+              "src": "rec/sqlite-act1/seg-06.mp4",
+              "frames": 157,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "kb": {
+                  "x": 430,
+                  "y": 764,
+                  "w": 167,
+                  "h": 19
+                },
+                "mon": {
+                  "x": 430,
+                  "y": 783,
+                  "w": 132,
+                  "h": 19
+                }
+              },
+              "atWord": 66
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1305,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s09",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "You'll almost never want the whole table. WHERE is how you ask for some of the table. Price under sixty, and three rows come back instead of four. The monitor is gone, because two hundred and forty isn't under sixty. It's that literal. ORDER BY decides what comes out first. Descending by price, limit three, and the monitor is back on top. Here's the part worth keeping: without ORDER BY, a database may hand rows back in any order the engine likes. The output usually looks sorted. It's never promised to be. So ask.",
+      "data": {
+        "recordedStep": {
+          "caption": "some of them, in an order",
+          "premise": "WHERE picks the rows. ORDER BY is the only thing that promises their order.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act1#where",
+              "label": "filter the rows",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "cheap",
+                  "atWord": 32
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "under sixty, so it stays",
+                  "mark": "cheap",
+                  "color": "green",
+                  "atWord": 42
+                }
+              ],
+              "id": "where",
+              "src": "rec/sqlite-act1/seg-07.mp4",
+              "frames": 216,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "cheap": {
+                  "x": 386,
+                  "y": 802,
+                  "w": 79,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act1#order",
+              "label": "sort and limit",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "top",
+                  "atWord": 74
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "most expensive, first",
+                  "mark": "top",
+                  "color": "blue",
+                  "atWord": 75
+                }
+              ],
+              "id": "order",
+              "src": "rec/sqlite-act1/seg-08.mp4",
+              "frames": 248,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "top": {
+                  "x": 386,
+                  "y": 783,
+                  "w": 132,
+                  "h": 19
+                }
+              },
+              "atWord": 53
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1173,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s10",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Changing a row is UPDATE, and watch the end of that command, because RETURNING is the bit I wish somebody had shown me years earlier. Normally you run an update, get silence, then run a SELECT to check. RETURNING hands the changed rows straight back, confirmed by the database rather than assumed by you. DELETE takes rows away, and it's worth being nervous about, because there's no undo. So I asked for changes as well. One row. If that had said three, I would want to know right now, rather than tomorrow morning.",
+      "data": {
+        "recordedStep": {
+          "caption": "change one, take one away",
+          "premise": "RETURNING shows what changed. changes() reports how many rows were really touched.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act1#update",
+              "label": "update, and see it",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "newprice",
+                  "atWord": 35
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the database confirming, not me",
+                  "mark": "newprice",
+                  "color": "green",
+                  "atWord": 43
+                }
+              ],
+              "id": "update",
+              "src": "rec/sqlite-act1/seg-09.mp4",
+              "frames": 286,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "newprice": {
+                  "x": 588,
+                  "y": 821,
+                  "w": 35,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act1#delete",
+              "label": "delete, and count it",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "n",
+                  "atWord": 73
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "one row, as expected",
+                  "mark": "n",
+                  "color": "orange",
+                  "atWord": 74
+                }
+              ],
+              "id": "delete",
+              "src": "rec/sqlite-act1/seg-10.mp4",
+              "frames": 269,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "n": {
+                  "x": 386,
+                  "y": 783,
+                  "w": 106,
+                  "h": 19
+                }
+              },
+              "atWord": 50
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1171,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s11",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Two more. Dot schema asks the file to describe itself, and hands back the exact statement that created the table, the same words I typed, kept inside the file. You never have to guess the shape of a SQLite database. You can ask the file. And then the thing I promised at the very start. Where does all of this actually live? One file. Eight thousand one hundred and ninety two bytes. That's eight kilobytes, smaller than most photos on your phone, and holds the schema, the rows, and every change I made. You can email the file. You can copy the file to a stick. You can put the file in version control.",
+      "data": {
+        "recordedStep": {
+          "caption": "eight kilobytes, and that is all",
+          "premise": "The schema, the rows and every edit — all inside one ordinary file.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act1#schema",
+              "label": "ask it to describe itself",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "sch",
+                  "atWord": 35
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the words I typed, stored",
+                  "mark": "sch",
+                  "color": "purple",
+                  "atWord": 55
+                }
+              ],
+              "id": "schema",
+              "src": "rec/sqlite-act1/seg-11.mp4",
+              "frames": 123,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "sch": {
+                  "x": 368,
+                  "y": 764,
+                  "w": 202,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act1#just-a-file",
+              "label": "look at the file",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "file",
+                  "atWord": 89
+                },
+                {
+                  "at": "full",
+                  "atWord": 91
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the entire database",
+                  "mark": "file",
+                  "color": "green",
+                  "atWord": 90
+                }
+              ],
+              "id": "just-a-file",
+              "src": "rec/sqlite-act1/seg-12.mp4",
+              "frames": 161,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "file": {
+                  "x": 368,
+                  "y": 802,
+                  "w": 62,
+                  "h": 19
+                }
+              },
+              "atWord": 75
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1413,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s12",
+      "type": "WHERE_IT_RUNS",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That one property is why you're carrying several copies right now, whether you knew or not. Your phone keeps contacts and messages in SQLite. Your browser keeps history and settings in SQLite. The same engine flies in aircraft, and sits in the dashboard of a lot of cars. Same engine, same file format, four machines that share nothing else — because a thing with no server to run has almost nowhere SQLite can't go.",
+      "data": {
+        "whereItRuns": {
+          "caption": "already in your pocket",
+          "premise": "One engine, one file format, in four places that share nothing else.",
+          "fileName": "*.db",
+          "note": "one engine, one file format, everywhere it runs",
+          "places": [
+            {
+              "label": "every phone",
+              "sub": "contacts, messages",
+              "asset": "lucide:smartphone",
+              "atWord": 11
+            },
+            {
+              "label": "every browser",
+              "sub": "history, settings",
+              "asset": "lucide:globe",
+              "atWord": 18
+            },
+            {
+              "label": "aircraft",
+              "sub": "flight software",
+              "asset": "lucide:plane",
+              "atWord": 24
+            },
+            {
+              "label": "cars",
+              "sub": "infotainment",
+              "asset": "lucide:car",
+              "atWord": 30
+            }
+          ],
+          "atWord": 3
+        }
+      },
+      "durationFrames": 933,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s13",
+      "type": "QUIZ_CARD",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "Quick check. Which of these does SQLite genuinely not need? Have a think, and pause if you want longer. Ready. It is B. There's no port, because there's nothing to connect to.",
+      "data": {
+        "quiz": {
+          "question": "Which does SQLite genuinely not need?",
+          "options": [
+            {
+              "text": "A table"
+            },
+            {
+              "text": "A port"
+            },
+            {
+              "text": "A file"
+            },
+            {
+              "text": "A query"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "There is no server, so there is nothing to connect to.",
+          "revealAtWord": 22,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 429,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s14",
+      "type": "RECAP",
+      "transition": "blinds",
+      "background": "zoneA",
+      "narration": "So that's the first third of this. A table with constraints that are actually enforced. Rows going in, coming back out, changing, and being deleted with a count to prove the change. And the whole database sitting in one small file you could attach to an email without thinking twice.",
+      "data": {
+        "heading": "Act one, in three facts",
+        "points": [
+          {
+            "text": "STRICT refused a bad type",
+            "atWord": 8
+          },
+          {
+            "text": "RETURNING showed what changed",
+            "atWord": 17
+          },
+          {
+            "text": "The database is one 8 KB file",
+            "atWord": 24
+          }
+        ]
+      },
+      "durationFrames": 645,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s15",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "One table is fine while you're learning. One table stops being fine the moment two things in your data relate to each other, which in practice is almost immediately.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Asking real questions",
+          "subtitle": "joins, groups, and how it finds a row"
+        }
+      },
+      "durationFrames": 393,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s16",
+      "type": "TABLE_SPLIT",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Say every order also recorded the product name. Mechanical keyboard, typed three separate times. That's fragile, because the day somebody fixes a typo in one of them you have two products that are secretly one.",
+      "data": {
+        "tableSplit": {
+          "caption": "the same words, over and over",
+          "premise": "Four orders. The same product name typed out three times.",
+          "tableLabel": "one big table",
+          "splitLeftLabel": "orders",
+          "splitRightLabel": "products",
+          "note": "stored once, referenced anywhere",
+          "headers": [
+            "id",
+            "product",
+            "qty"
+          ],
+          "rows": [
+            {
+              "label": "1",
+              "sub": "Mechanical keyboard",
+              "text": "2"
+            },
+            {
+              "label": "2",
+              "sub": "Mechanical keyboard",
+              "text": "1"
+            },
+            {
+              "label": "3",
+              "sub": "Desk lamp",
+              "text": "4"
+            },
+            {
+              "label": "4",
+              "sub": "Mechanical keyboard",
+              "text": "3"
+            }
+          ],
+          "splitAtWord": 24,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 465,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s17",
+      "type": "JOIN_MERGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "If the price lives in one table and the quantity lives in another, how do you multiply them? That's what a JOIN is for. Take a row from here, take a row from there. They share one value. Line them up on it, and they become a single wider row.",
+      "data": {
+        "joinMerge": {
+          "caption": "two rows, one answer",
+          "premise": "One row from each table. They have exactly one thing in common.",
+          "leftTable": "products",
+          "rightTable": "orders",
+          "keyLeft": "id",
+          "keyRight": "product_id",
+          "resultLabel": "one joined row",
+          "leftRow": [
+            {
+              "label": "id",
+              "sub": "1"
+            },
+            {
+              "label": "name",
+              "sub": "Mechanical keyboard"
+            },
+            {
+              "label": "price",
+              "sub": "89.00"
+            }
+          ],
+          "rightRow": [
+            {
+              "label": "id",
+              "sub": "3"
+            },
+            {
+              "label": "product_id",
+              "sub": "1"
+            },
+            {
+              "label": "qty",
+              "sub": "2"
+            }
+          ],
+          "keyAtWord": 32,
+          "mergeAtWord": 40,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 645,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s18",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here's that second table. Orders, with an id of its own, a product id pointing across, and a quantity. Six rows go in, and notice what isn't in there — not one product name. Now the query. Read the FROM and JOIN lines together, because that's the whole idea in a sentence: take orders, and join products where the product's id matches the order's product id. Run it, and two tables become one answer. Six order rows went in. Four lines came out, one per product, sorted by revenue, and the keyboard is on top at five hundred and thirty four — six units at eighty nine each. Nothing in orders knew the word keyboard. Nothing in products knew about quantities.",
+      "data": {
+        "recordedStep": {
+          "caption": "six rows in, four lines out",
+          "premise": "Revenue per product — arithmetic across two tables that share only an id.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act2#add-orders",
+              "label": "add a second table",
+              "focus": true,
+              "id": "add-orders",
+              "src": "rec/sqlite-act2/seg-01.mp4",
+              "frames": 86,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act2#open-revenue",
+              "label": "read the join",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "joinline",
+                  "atWord": 57
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "matched on the id",
+                  "mark": "joinline",
+                  "color": "blue",
+                  "atWord": 69
+                }
+              ],
+              "id": "open-revenue",
+              "src": "rec/sqlite-act2/seg-02.mp4",
+              "frames": 214,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "joinline": {
+                  "x": 428,
+                  "y": 162,
+                  "w": 376,
+                  "h": 22
+                }
+              },
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 27
+            },
+            {
+              "ref": "rec:sqlite-act2#revenue",
+              "label": "run it",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "top",
+                  "atWord": 95
+                },
+                {
+                  "at": "full",
+                  "atWord": 97
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "six units, eighty nine each",
+                  "mark": "rev",
+                  "color": "green",
+                  "atWord": 96
+                }
+              ],
+              "id": "revenue",
+              "src": "rec/sqlite-act2/seg-03.mp4",
+              "frames": 155,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "top": {
+                  "x": 386,
+                  "y": 764,
+                  "w": 167,
+                  "h": 19
+                },
+                "rev": {
+                  "x": 667,
+                  "y": 764,
+                  "w": 44,
+                  "h": 19
+                }
+              },
+              "atWord": 81
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1497,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s19",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Sometimes you don't want rows at all, you want a number. COUNT, SUM and AVG collapse the whole table into one line — six orders, thirteen units, an average of two point one seven per order. One row of output from six rows of input. Then HAVING, which confuses almost everybody the first time they meet HAVING. WHERE filters rows before they're grouped. HAVING filters the groups afterwards. This asks for products with more than two units in total, and two of the four survive. You couldn't have written that with WHERE, because the total doesn't exist yet when WHERE runs. And this last one is worth thirty seconds of your life, because the NULL rule catches everyone eventually. I have added an empty column. Is the note equal to an empty string? Blank. Not true, not false — blank. Is it NULL? One, meaning yes. NULL means unknown, and comparing anything to unknown gives you unknown, which is why IS NULL is the only test that works.",
+      "data": {
+        "recordedStep": {
+          "caption": "numbers, groups, and the NULL trap",
+          "premise": "Aggregates collapse rows. HAVING filters groups. NULL answers neither yes nor no.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act2#aggregate",
+              "label": "count the whole table",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "avg",
+                  "atWord": 37
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "thirteen units across six orders",
+                  "mark": "units",
+                  "color": "blue",
+                  "atWord": 46
+                }
+              ],
+              "id": "aggregate",
+              "src": "rec/sqlite-act2/seg-04.mp4",
+              "frames": 287,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "units": {
+                  "x": 465,
+                  "y": 783,
+                  "w": 44,
+                  "h": 19
+                },
+                "avg": {
+                  "x": 562,
+                  "y": 821,
+                  "w": 35,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act2#having",
+              "label": "filter the groups",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "kept",
+                  "atWord": 88
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "two of four survived",
+                  "mark": "kept",
+                  "color": "orange",
+                  "atWord": 97
+                }
+              ],
+              "id": "having",
+              "src": "rec/sqlite-act2/seg-05.mp4",
+              "frames": 289,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "kept": {
+                  "x": 386,
+                  "y": 764,
+                  "w": 88,
+                  "h": 19
+                }
+              },
+              "atWord": 55
+            },
+            {
+              "ref": "rec:sqlite-act2#null",
+              "label": "the NULL trap",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "blank",
+                  "atWord": 131
+                },
+                {
+                  "mark": "isnull",
+                  "atWord": 133
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the comparison is unknown",
+                  "mark": "blank",
+                  "color": "orange",
+                  "atWord": 132
+                },
+                {
+                  "text": "and this one answers it",
+                  "mark": "isnull",
+                  "color": "green",
+                  "atWord": 134
+                }
+              ],
+              "id": "null",
+              "src": "rec/sqlite-act2/seg-06.mp4",
+              "frames": 292,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "blank": {
+                  "x": 641,
+                  "y": 764,
+                  "w": 70,
+                  "h": 19
+                },
+                "isnull": {
+                  "x": 737,
+                  "y": 764,
+                  "w": 62,
+                  "h": 19
+                }
+              },
+              "atWord": 106
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 2061,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s20",
+      "type": "GROUP_BUCKETS",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Usually you want that number per something. Per product, per customer, per day. GROUP BY sorts your rows into buckets by whatever you grouped on. Then every bucket collapses into exactly one line, with the aggregate worked out inside the bucket rather than across the whole table.",
+      "data": {
+        "groupBuckets": {
+          "caption": "many rows in, one row out",
+          "premise": "Six order rows. Four different products.",
+          "sourceLabel": "orders",
+          "groupBy": "GROUP BY product_id",
+          "rows": [
+            {
+              "label": "qty 2",
+              "sub": "1"
+            },
+            {
+              "label": "qty 1",
+              "sub": "2"
+            },
+            {
+              "label": "qty 1",
+              "sub": "1"
+            },
+            {
+              "label": "qty 4",
+              "sub": "3"
+            },
+            {
+              "label": "qty 2",
+              "sub": "4"
+            },
+            {
+              "label": "qty 3",
+              "sub": "1"
+            }
+          ],
+          "buckets": [
+            {
+              "label": "product 1",
+              "sub": "6 units",
+              "text": "1"
+            },
+            {
+              "label": "product 2",
+              "sub": "1 unit",
+              "text": "2"
+            },
+            {
+              "label": "product 3",
+              "sub": "4 units",
+              "text": "3"
+            },
+            {
+              "label": "product 4",
+              "sub": "2 units",
+              "text": "4"
+            }
+          ],
+          "fallAtWord": 19,
+          "collapseAtWord": 33,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 609,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s21",
+      "type": "SCAN_VS_SEEK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Now the thing you can't see. When you ask for orders where product id is one, SQLite reads every row and checks each one, because that's the only option SQLite has. Six rows here, so who cares. Six million and you would care enormously.",
+      "data": {
+        "scanVsSeek": {
+          "caption": "the same question, asked two ways",
+          "premise": "Six orders on disk. You want the ones for product 1.",
+          "scanLabel": "SCAN orders",
+          "seekLabel": "SEARCH orders USING INDEX",
+          "targetIndex": 4,
+          "rows": [
+            {
+              "label": "order 1",
+              "sub": "product 2"
+            },
+            {
+              "label": "order 2",
+              "sub": "product 3"
+            },
+            {
+              "label": "order 3",
+              "sub": "product 4"
+            },
+            {
+              "label": "order 4",
+              "sub": "product 2"
+            },
+            {
+              "label": "order 5",
+              "sub": "product 1"
+            },
+            {
+              "label": "order 6",
+              "sub": "product 3"
+            }
+          ],
+          "scanAtWord": 21,
+          "seekAtWord": 36,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 573,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s22",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And you don't have to take my word here, because SQLite will tell you. EXPLAIN QUERY PLAN asks the engine what it intends to do before running the query, and the answer comes back as one word: SCAN. It's going to read the whole orders table to answer this. So, one command. Create an index on the product id column. No arguments to think about, and no output at all. Now the identical query. Same words, same table, same everything. And SCAN has become SEARCH, searching orders using the index we just made. One word changed, and that word is the difference between reading six million rows and jumping straight to the ones you asked for.",
+      "data": {
+        "recordedStep": {
+          "caption": "SCAN became SEARCH",
+          "premise": "The identical query, before and after one CREATE INDEX. One word of the plan moved.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act2#plan-before",
+              "label": "the plan, before",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "scan",
+                  "atWord": 28
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "reads every row",
+                  "mark": "scan",
+                  "color": "orange",
+                  "atWord": 34
+                }
+              ],
+              "id": "plan-before",
+              "src": "rec/sqlite-act2/seg-07.mp4",
+              "frames": 214,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "scan": {
+                  "x": 394,
+                  "y": 840,
+                  "w": 97,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act2#index",
+              "label": "add the index",
+              "focus": true,
+              "id": "index",
+              "src": "rec/sqlite-act2/seg-08.mp4",
+              "frames": 191,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "atWord": 40
+            },
+            {
+              "ref": "rec:sqlite-act2#plan-after",
+              "label": "the plan, after",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "search",
+                  "atWord": 91
+                },
+                {
+                  "at": "full",
+                  "atWord": 93
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "straight to the rows",
+                  "mark": "search",
+                  "color": "green",
+                  "atWord": 92
+                }
+              ],
+              "id": "plan-after",
+              "src": "rec/sqlite-act2/seg-09.mp4",
+              "frames": 214,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "search": {
+                  "x": 394,
+                  "y": 840,
+                  "w": 220,
+                  "h": 19
+                }
+              },
+              "atWord": 72
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1437,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s23",
+      "type": "INDEX_LEDGER",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Before you index everything, the other half of the trade. An index is a second copy of that column, kept sorted, and the index has to stay correct. So every insert now writes twice, once into the table and once into the index. Reads got faster; writes and disk paid.",
+      "data": {
+        "indexLedger": {
+          "caption": "every write now pays twice",
+          "premise": "The index made the read fast. It did not make it free.",
+          "writeLabel": "INSERT",
+          "tableLabel": "the table",
+          "indexLabel": "the index",
+          "sizeBefore": "8 KB",
+          "sizeAfter": "12 KB",
+          "sizeGrow": 0.5,
+          "bought": "SCAN became SEARCH",
+          "forkAtWord": 21,
+          "costAtWord": 37,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 645,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s24",
+      "type": "QUIZ_CARD",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "Another one. Your query got slow. What do you do first? Have a think, and pause if you want longer. Ready. It is C, because a guess about slowness is usually wrong.",
+      "data": {
+        "quiz": {
+          "question": "A query got slow. What do you do first?",
+          "options": [
+            {
+              "text": "Index every column"
+            },
+            {
+              "text": "Rewrite it with fewer joins"
+            },
+            {
+              "text": "Run EXPLAIN QUERY PLAN"
+            },
+            {
+              "text": "Move to a bigger database"
+            }
+          ],
+          "answerIndex": 2,
+          "why": "A guess about slowness is usually wrong. The plan is a fact.",
+          "revealAtWord": 21,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 429,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s25",
+      "type": "RECAP",
+      "transition": "blinds",
+      "background": "zoneA",
+      "narration": "Second third done. Two tables joined on a value they share. Rows collapsed into buckets by GROUP BY, one line out per bucket. And a query plan that changed a single word the moment we gave the query an index to work with.",
+      "data": {
+        "heading": "Act two, in three facts",
+        "points": [
+          {
+            "text": "A join lines rows up on one value",
+            "atWord": 5
+          },
+          {
+            "text": "GROUP BY makes one row per bucket",
+            "atWord": 14
+          },
+          {
+            "text": "SCAN became SEARCH",
+            "atWord": 22
+          }
+        ]
+      },
+      "durationFrames": 561,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s26",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Everything so far has been the shell, which is wonderful for learning and not how you'll actually use this. So let's open the same file from Python, without installing anything.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The same file, from code",
+          "subtitle": "Python, parameters, and commit"
+        }
+      },
+      "durationFrames": 405,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s27",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Six lines. Connect to shop dot db, the same file the shell has been writing this whole time. Get a cursor, which is the thing you run queries through. Loop the results, and each row arrives as a plain Python tuple you can unpack. Then close the connection. There's no server to reach, no credentials, no connection string. It's a filename. Run the script, and there are the products the shell inserted, sorted by price. Nothing was exported and nothing was migrated. Python opened the same eight kilobytes and handed them straight back.",
+      "data": {
+        "recordedStep": {
+          "caption": "a filename, not a connection string",
+          "premise": "The same shop.db the shell created, opened by Python on a different engine build.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act3#open-read",
+              "label": "read the file",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "connect",
+                  "atWord": 35
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the whole connection",
+                  "mark": "connect",
+                  "color": "blue",
+                  "atWord": 51
+                }
+              ],
+              "id": "open-read",
+              "src": "rec/sqlite-act3/seg-01.mp4",
+              "frames": 187,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "connect": {
+                  "x": 428,
+                  "y": 114,
+                  "w": 317,
+                  "h": 22
+                }
+              },
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act3#run-read",
+              "label": "run it",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "firstrow",
+                  "atWord": 73
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "written by the shell, read by Python",
+                  "mark": "firstrow",
+                  "color": "green",
+                  "atWord": 74
+                }
+              ],
+              "id": "run-read",
+              "src": "rec/sqlite-act3/seg-02.mp4",
+              "frames": 68,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "firstrow": {
+                  "x": 368,
+                  "y": 707,
+                  "w": 132,
+                  "h": 19
+                }
+              },
+              "atWord": 67
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1161,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s28",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One small thing that will save you real pain. By default a row comes back as a tuple, so you write row square bracket one — and then somebody adds a column to the SELECT and every number you wrote is quietly pointing at the wrong thing. Setting row factory to sqlite3 dot Row gives you rows you can index by name instead. Same data, two ways of reaching the value. Row one, and row name. The second still works after somebody reorders the columns. The first silently returns the wrong value, and nothing will raise an error to tell you, which is exactly why the bug survives code review and then bites you in production.",
+      "data": {
+        "recordedStep": {
+          "caption": "index by name, not by number",
+          "premise": "Both print the same value today. Only one keeps working after a schema change.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act3#open-rowfac",
+              "label": "name your columns",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "rf",
+                  "atWord": 42
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "one line, and rows get names",
+                  "mark": "rf",
+                  "color": "purple",
+                  "atWord": 63
+                }
+              ],
+              "id": "open-rowfac",
+              "src": "rec/sqlite-act3/seg-03.mp4",
+              "frames": 217,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "rf": {
+                  "x": 428,
+                  "y": 138,
+                  "w": 287,
+                  "h": 22
+                }
+              },
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act3#run-rowfac",
+              "label": "by index, by name",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "byidx",
+                  "atWord": 90
+                },
+                {
+                  "mark": "byname",
+                  "atWord": 92
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "breaks when columns move",
+                  "mark": "byidx",
+                  "color": "orange",
+                  "atWord": 91
+                },
+                {
+                  "text": "this one does not",
+                  "mark": "byname",
+                  "color": "green",
+                  "atWord": 93
+                }
+              ],
+              "id": "run-rowfac",
+              "src": "rec/sqlite-act3/seg-04.mp4",
+              "frames": 74,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "byidx": {
+                  "x": 368,
+                  "y": 802,
+                  "w": 220,
+                  "h": 19
+                },
+                "byname": {
+                  "x": 368,
+                  "y": 821,
+                  "w": 326,
+                  "h": 19
+                }
+              },
+              "atWord": 83
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1437,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s29",
+      "type": "PLACEHOLDER_SEAL",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Now the most important thirty seconds in this video. You have a value to put inside a query. There are two ways, and only one is safe. With a placeholder the value never becomes part of the sentence. Glue the query together as text, and the value becomes code.",
+      "data": {
+        "placeholderSeal": {
+          "caption": "a value, or a piece of the sentence",
+          "premise": "The same question, asked twice. Only one of them stays a question.",
+          "queryHead": "SELECT name, price FROM products WHERE name = ",
+          "queryTail": "'",
+          "value": "USB-C hub",
+          "evil": "' OR 1=1 --",
+          "evilHighlight": "OR 1=1",
+          "safeLabel": "parameterised",
+          "evilLabel": "built by hand",
+          "safeResult": "1 row",
+          "evilResult": "all 4 rows",
+          "safeAtWord": 28,
+          "evilAtWord": 39,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 633,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s30",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here are both, in one file. The first passes the value as a parameter — that's the question mark, and the tuple after the question mark. The second builds the same string with an f-string. Four characters of difference. Now watch what that costs. The safe one asked for the USB-C hub and got the USB-C hub. One row. The unsafe one was handed a value containing OR one equals one, which is true for every row, followed by a comment marker that kills the rest of the query. Four rows came back. The whole table. Nobody had to be clever; they typed a quote into a search box. And placeholders scale as well — execute many takes a list and inserts the whole list in a single call, preparing the statement once instead of three separate times. That matters more than you would think: preparing a statement is most of the cost of running a small one, so a loop of inserts repeats that work every time.",
+      "data": {
+        "recordedStep": {
+          "caption": "one row, or all of them",
+          "premise": "The same table, the same code path. The difference is where the value went.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act3#open-params",
+              "label": "two ways to ask",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "safe",
+                  "atWord": 34
+                },
+                {
+                  "mark": "unsafe",
+                  "atWord": 59
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the value stays a value",
+                  "mark": "safe",
+                  "color": "green",
+                  "atWord": 46
+                },
+                {
+                  "text": "the value becomes code",
+                  "mark": "unsafe",
+                  "color": "red",
+                  "atWord": 71
+                }
+              ],
+              "id": "open-params",
+              "src": "rec/sqlite-act3/seg-05.mp4",
+              "frames": 208,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "safe": {
+                  "x": 428,
+                  "y": 210,
+                  "w": 723,
+                  "h": 22
+                },
+                "unsafe": {
+                  "x": 428,
+                  "y": 306,
+                  "w": 693,
+                  "h": 22
+                }
+              },
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act3#run-params",
+              "label": "safe, then not",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "one",
+                  "atWord": 99
+                },
+                {
+                  "mark": "all",
+                  "atWord": 111
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "exactly what was asked for",
+                  "mark": "one",
+                  "color": "green",
+                  "atWord": 105
+                },
+                {
+                  "text": "the whole table",
+                  "mark": "all",
+                  "color": "red",
+                  "atWord": 118
+                }
+              ],
+              "id": "run-params",
+              "src": "rec/sqlite-act3/seg-06.mp4",
+              "frames": 101,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "one": {
+                  "x": 368,
+                  "y": 745,
+                  "w": 255,
+                  "h": 19
+                },
+                "all": {
+                  "x": 456,
+                  "y": 764,
+                  "w": 150,
+                  "h": 19
+                }
+              },
+              "atWord": 84
+            },
+            {
+              "ref": "rec:sqlite-act3#run-many",
+              "label": "insert three at once",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "many",
+                  "atWord": 133
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "prepared once, run three times",
+                  "mark": "many",
+                  "color": "blue",
+                  "atWord": 134
+                }
+              ],
+              "id": "run-many",
+              "src": "rec/sqlite-act3/seg-07.mp4",
+              "frames": 98,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "many": {
+                  "x": 368,
+                  "y": 821,
+                  "w": 246,
+                  "h": 19
+                }
+              },
+              "atWord": 124
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 2061,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s31",
+      "type": "TRANSACTION_DOOR",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Something I have deliberately not mentioned yet. In Python your changes are not real until you commit them. They pile up inside your connection, invisible to everybody else, and commit is what lands the whole lot in the file at once.",
+      "data": {
+        "transactionDoor": {
+          "caption": "nothing is real until you commit",
+          "premise": "The statement ran. Whether it HAPPENED is a different question.",
+          "pendingLabel": "in this connection",
+          "diskLabel": "shop.db",
+          "outcome": "commit",
+          "diskBefore": "7 rows",
+          "diskAfter": "8 rows",
+          "rows": [
+            {
+              "label": "INSERT Webcam"
+            },
+            {
+              "label": "new row id: 8"
+            }
+          ],
+          "stageAtWord": 14,
+          "actAtWord": 27,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 537,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s32",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So here's commit doing its job. Insert a webcam, print the new row id, commit, then count. Eight rows on disk. If I had forgotten that commit line, the insert would have printed a perfectly convincing row id and then vanished the moment the script ended, and that's the number one confusion for people new to this driver. Now the other side of the coin, which is much more fun. This script deletes everything and then rolls back. Watch what happens. After the delete, this connection genuinely sees zero rows. As far as it's concerned the table is empty and the data is gone. Then roll back, and all eight are back, because they never actually left in the first place. If you have ever wondered what a transaction actually means, that's it, in two lines of output — work that was real to one connection and invisible to the file underneath.",
+      "data": {
+        "recordedStep": {
+          "caption": "zero rows, then eight again",
+          "premise": "The connection saw an empty table. The file on disk never did.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act3#run-write",
+              "label": "insert, then commit",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "count",
+                  "atWord": 22
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "on disk, for good",
+                  "mark": "count",
+                  "color": "green",
+                  "atWord": 31
+                }
+              ],
+              "id": "run-write",
+              "src": "rec/sqlite-act3/seg-08.mp4",
+              "frames": 105,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "count": {
+                  "x": 368,
+                  "y": 840,
+                  "w": 97,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act3#open-rollback",
+              "label": "delete it all",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "the undo",
+                  "mark": "rb",
+                  "color": "purple",
+                  "atWord": 83
+                }
+              ],
+              "id": "open-rollback",
+              "src": "rec/sqlite-act3/seg-09.mp4",
+              "frames": 210,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "rb": {
+                  "x": 428,
+                  "y": 282,
+                  "w": 139,
+                  "h": 22
+                }
+              },
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 40
+            },
+            {
+              "ref": "rec:sqlite-act3#run-rollback",
+              "label": "and take it back",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "gone",
+                  "atWord": 119
+                },
+                {
+                  "mark": "back",
+                  "atWord": 121
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "this connection sees nothing",
+                  "mark": "gone",
+                  "color": "red",
+                  "atWord": 120
+                },
+                {
+                  "text": "and nothing was lost",
+                  "mark": "back",
+                  "color": "green",
+                  "atWord": 122
+                }
+              ],
+              "id": "run-rollback",
+              "src": "rec/sqlite-act3/seg-10.mp4",
+              "frames": 111,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "gone": {
+                  "x": 368,
+                  "y": 821,
+                  "w": 326,
+                  "h": 19
+                },
+                "back": {
+                  "x": 368,
+                  "y": 840,
+                  "w": 150,
+                  "h": 19
+                }
+              },
+              "atWord": 108
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1869,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s33",
+      "type": "TRANSACTION_DOOR",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That's what a transaction actually means, and it's worth saying plainly. The delete was completely real inside the transaction, and the delete never happened outside the transaction. Roll back, and the file on disk learns nothing at all about the work you just did.",
+      "data": {
+        "transactionDoor": {
+          "caption": "a rollback leaves no trace",
+          "premise": "The DELETE ran. Whether it HAPPENED is a different question.",
+          "pendingLabel": "in this connection",
+          "diskLabel": "shop.db",
+          "outcome": "rollback",
+          "diskBefore": "8 rows",
+          "diskAfter": "8 rows",
+          "rows": [
+            {
+              "label": "DELETE FROM products"
+            },
+            {
+              "label": "COUNT(*) now 0"
+            }
+          ],
+          "stageAtWord": 12,
+          "actAtWord": 24,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 573,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s34",
+      "type": "WHEN_NOT_SQLITE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One honest limit, because a course that only sells you its subject teaches you nothing. Readers are cheap, as many as you like, all at once. Writers are not. SQLite lets one writer in at a time, so many processes writing constantly will queue behind that door.",
+      "data": {
+        "whenNotSqlite": {
+          "caption": "one door for the writers",
+          "premise": "Many readers at once is fine. Many writers at once is the limit.",
+          "fileLabel": "shop.db",
+          "readerLabel": "readers",
+          "writerLabel": "writers",
+          "readers": 5,
+          "writers": 5,
+          "verdict": "a busy write workload wants a server",
+          "readAtWord": 16,
+          "writeAtWord": 30,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 609,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s35",
+      "type": "QUIZ_CARD",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "Your script inserts a row, prints the id, and the row is gone. Why? Have a think, and pause if you want longer. Ready. It is D, and nothing was committed.",
+      "data": {
+        "quiz": {
+          "question": "The row vanished after the script exited. Why?",
+          "options": [
+            {
+              "text": "The file was read-only"
+            },
+            {
+              "text": "The table had no primary key"
+            },
+            {
+              "text": "The cursor was not closed"
+            },
+            {
+              "text": "It never called commit()"
+            }
+          ],
+          "answerIndex": 3,
+          "why": "Changes live in the connection until commit() lands them in the file.",
+          "revealAtWord": 24,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 417,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s36",
+      "type": "RECAP",
+      "transition": "blinds",
+      "background": "zoneA",
+      "narration": "Three things, and you watched every one of them happen. The whole database was one file of eight kilobytes. One word of a query plan changed from SCAN to SEARCH. And a value passed as a parameter returned one row, while the same value glued into a string returned everything.",
+      "data": {
+        "heading": "What you actually saw",
+        "points": [
+          {
+            "text": "The database was one 8 KB file",
+            "atWord": 12
+          },
+          {
+            "text": "SCAN became SEARCH",
+            "atWord": 24
+          },
+          {
+            "text": "One row, or the whole table",
+            "atWord": 38
+          }
+        ]
+      },
+      "durationFrames": 645,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s37",
+      "type": "OUTRO_CTA",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Everything here runs on a plain install with nothing added, so go and open a shell and break something. Genuinely — that's how this sticks.",
+      "data": {
+        "message": "Open a shell and break something",
+        "sub": "that is genuinely how it sticks"
+      },
+      "durationFrames": 345,
+      "timingSource": "estimate"
+    }
+  ]
+}

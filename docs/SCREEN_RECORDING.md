@@ -282,6 +282,24 @@ Machine: Windows 11, node v24.13.1, npm 11.8.0.
 22. **"Fit the whole region on screen" gives a zoom BELOW 1** for a wide, short bbox — measured
     k = 0.92 for a 1252×300 terminal in a 1600×900 capture, i.e. no punch-in at all. Use the
     LARGER ratio (cover, with cropping), capped, floored at 1.
+49. **LAW 8 BOUNDS THE LAST ANCHOR, NOT THE LAST CLIP — and a callout is an anchor.** The
+    solver placed each final clip correctly at ~72% of the read and then, in pass 2, put that
+    clip's callouts *after* its footage, which landed them past the last spoken word: 13
+    scenes of the SQLite course were rejected with *"atWord 105 exceeds narration word count
+    (96)"*. Clamping the callouts to the last word only moved the defect — every one of those
+    beats then reported *"payoff lands in the last 15%"*. The real fix is in PASS 1: reserve
+    `clipFrames[last] + FPW * (callouts[last] + 1)` before distributing any slack, and close
+    the final event window at **80% of the read** rather than at the last word. Fixing it
+    took 14 warnings and 6 errors off the spec at once, and it is fixed for every future
+    recording spec rather than worked around in this one.
+50. **A DEMO SPEC IS SHAPED BY TWO LINTER NUMBERS, so plan against them from the first
+    draft.** `OVER-RELIANCE` caps any sub-type at `ceil(scenes * 0.35)` — a first pass put
+    every recorded step in its own scene (29 RECORDED_STEPs of 47) and was rejected outright.
+    And the scene ceiling is `180 * distinct_anchors + 120` frames, capped at 70s, so a beat
+    earns runtime by depicting more. Together they say: **fewer, richer recorded scenes** —
+    31 clips across 13 scenes, two or three to a beat, which is also how a person narrates
+    them. `briefs/sqlite/build_long.mjs` checks itself against both before it writes, which
+    turned a slow lint-and-guess loop into a fast one.
 45. **MONACO RENDERS EVERY SPACE AS U+00A0.** Measured with a probe that dumped the char codes
     of each `.view-line`: `includes(" ")` was **false on all seven lines** of a SQL file, and
     the normalised comparison was true. Consequence: `marksFor` matched on raw `innerText`, so

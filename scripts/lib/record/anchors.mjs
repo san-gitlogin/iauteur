@@ -69,13 +69,24 @@ export const solveAnchors = ({words, clipFrames, callouts = [], settle = 45}) =>
   // inside the first LAW8_LIMIT of the scene, and only the LEADING clips share the slack.
   // The final clip's own length is the tail, which is what the settle is for.
   const LAW8_LIMIT = 0.72;
+  // LAW 8 bounds the LAST ANCHOR, and a callout is an anchor. Everything — the final clip's
+  // footage and every event inside it — has to be done by this line.
+  const LAW8_TAIL = 0.80;
   const lead = n - 1;                                   // clips before the last
   const leadFootage = clipFrames.slice(0, lead).reduce((a, b) => a + b, 0);
-  // Room the leading clips may occupy without pushing the last anchor past the limit.
-  const leadRoom = Math.max(leadFootage, Math.min(usable - clipFrames[n - 1], total * LAW8_LIMIT - start));
+  // THE LAST CLIP'S OWN CALLOUTS ARE PART OF THE TAIL, and reserving only its footage was
+  // not enough. PAID FOR twice on the SQLite course: pass 1 placed the final clip correctly
+  // at ~72%, pass 2 then had to put that clip's callouts after its footage, and they landed
+  // past the last spoken word. Clamping them merely moved the defect into LAW 8's final 15%.
+  // A callout IS an anchor, so the room it needs is reserved here, before anything is placed.
+  const tailCallouts = callouts[n - 1] ?? 0;
+  const tailNeed = clipFrames[n - 1] + FPW * (tailCallouts + 1);
+  // Room the leading clips may occupy without pushing the last ANCHOR past the limit.
+  const leadRoom = Math.max(leadFootage,
+    Math.min(usable - clipFrames[n - 1], total * LAW8_TAIL - start - tailNeed));
 
   if (lead > 0 && leadRoom < leadFootage) {
-    const needWords = Math.ceil((leadFootage + clipFrames[n - 1] + start + settle) / (FPW * LAW8_LIMIT));
+    const needWords = Math.ceil((leadFootage + tailNeed + start + settle) / (FPW * LAW8_LIMIT));
     return {
       ok: false,
       reason: `too many steps for this narration: the leading clips need ${leadFootage}f but only ` +
@@ -114,15 +125,40 @@ export const solveAnchors = ({words, clipFrames, callouts = [], settle = 45}) =>
   // every event collapsed onto the same word while 944 frames of hold sat unused. The hold
   // is exactly where events belong: the footage has played, the picture is frozen, and the
   // voice is still talking about it.
+  // AN ANCHOR PAST THE LAST SPOKEN WORD IS NEVER VALID. `durationFrames` can exceed the
+  // narration (it stretches to fit footage that outruns the read), so using it as the final
+  // window's end placed callouts on words nobody ever says — the linter rejected them with
+  // "atWord N exceeds narration word count". The window has to close at the LAST WORD.
+  //
+  // PAID FOR on the SQLite course: three beats had their second clip placed correctly at ~72%
+  // and then its callouts pushed to word 105 of a 96-word script. LAW 8 bounds the last
+  // ANCHOR, not the last clip, and this is where that distinction was being lost.
+  // ...and LAW 8 wants the last anchor out of the final 15% entirely, so the window closes
+  // at 80% of the read rather than on the last word. Clamping to the last word merely moved
+  // the defect: every one of those beats then reported "payoff lands in the last 15%".
+  // The rule bounds the LAST ANCHOR, so that is what this has to bound.
+  const lastWordFrame = Math.max(FPW, Math.floor(total * LAW8_TAIL));
+  let overflow = null;
   for (let i = 0; i < n; i++) {
     const cn = callouts[i] ?? 0;
     if (!cn) continue;
-    const winEnd = i + 1 < n ? starts[i + 1] : durationFrames - settle;
+    const winEnd = i + 1 < n ? starts[i + 1] : Math.min(durationFrames - settle, lastWordFrame);
     const afterFootage = starts[i] + clipFrames[i];
-    const room = Math.max(FPW * cn, winEnd - afterFootage);
+    const room = winEnd - afterFootage;
+    if (room < FPW * cn) {
+      // Not enough spoken words left after this clip's footage to hold its callouts.
+      const needWords = Math.ceil((afterFootage + FPW * (cn + 1) + settle) / FPW);
+      overflow = `clip ${i + 1} has ${cn} callout(s) but only ` +
+        `${Math.max(0, Math.round(room / FPW))} word(s) of script after its footage ends. ` +
+        `Give the beat ~${needWords} words, or move a callout to an earlier clip.`;
+      continue;
+    }
     for (let j = 0; j < cn; j++) {
       clips[i].callouts.push(wordOf(afterFootage + Math.round((room * (j + 1)) / (cn + 1))));
     }
+  }
+  if (overflow) {
+    return {ok: false, reason: overflow, durationFrames, clips};
   }
   if (lastFrame > durationFrames * 0.85) {
     return {
