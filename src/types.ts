@@ -10101,7 +10101,20 @@ export interface DbTwoWaysData {
   fileNote?: string;
   atWord?: number;
 }
+export interface TypeGateData {
+  premise?: string;
+  caption?: string;
+  columnName?: string;
+  columnType?: string;
+  goodValue?: string;
+  badValue?: string;
+  errorText?: string;
+  passAtWord?: number;
+  rejectAtWord?: number;
+  atWord?: number;
+}
 export interface SceneData {
+  typeGate?: TypeGateData;
   dbTwoWays?: DbTwoWaysData;
   joinMerge?: JoinMergeData;
   placeholderSeal?: PlaceholderSealData;

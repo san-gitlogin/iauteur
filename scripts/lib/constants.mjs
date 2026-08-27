@@ -241,6 +241,7 @@ export const TYPES = [
   'PLACEHOLDER_SEAL',
   'JOIN_MERGE',
   'DB_TWO_WAYS',
+  'TYPE_GATE',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

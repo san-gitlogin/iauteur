@@ -16,7 +16,25 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  DB_TWO_WAYS: {
+export const MANIFEST = {  TYPE_GATE: {
+    category: "diagram", family: "diagram", data_key: "typeGate",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      columnName: {t: 'string'},
+      columnType: {t: 'string'},
+      goodValue: {t: 'string'},
+      badValue: {t: 'string'},
+      errorText: {t: 'string'},
+      passAtWord: {t: 'number'},
+      rejectAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {typeGate: {"premise":"The column was declared REAL. STRICT means it is checked, not merely suggested.","caption":"a promise the table keeps","columnName":"products.price","columnType":"REAL","goodValue":"89.00","badValue":"'not-a-number'","errorText":"cannot store TEXT value in REAL column products.price","passAtWord":3,"rejectAtWord":6,"atWord":2}},
+  },
+  DB_TWO_WAYS: {
     category: "diagram", family: "diagram", data_key: "dbTwoWays",
     purpose: "",
     use_when: "",

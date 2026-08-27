@@ -355,10 +355,12 @@ import {ScanVsSeek} from './scenes/ScanVsSeek';
 import {PlaceholderSeal} from './scenes/PlaceholderSeal';
 import {JoinMerge} from './scenes/JoinMerge';
 import {DbTwoWays} from './scenes/DbTwoWays';
+import {TypeGate} from './scenes/TypeGate';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  DB_TWO_WAYS: DbTwoWays,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  TYPE_GATE: TypeGate,
+  DB_TWO_WAYS: DbTwoWays,
   JOIN_MERGE: JoinMerge,
   PLACEHOLDER_SEAL: PlaceholderSeal,
   SCAN_VS_SEEK: ScanVsSeek,
