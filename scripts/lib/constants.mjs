@@ -240,6 +240,7 @@ export const TYPES = [
   'SCAN_VS_SEEK',
   'PLACEHOLDER_SEAL',
   'JOIN_MERGE',
+  'DB_TWO_WAYS',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

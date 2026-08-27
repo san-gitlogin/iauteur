@@ -531,7 +531,8 @@
               "MCP_MESH",
               "SCAN_VS_SEEK",
               "PLACEHOLDER_SEAL",
-              "JOIN_MERGE"
+              "JOIN_MERGE",
+              "DB_TWO_WAYS"
             ]
           },
           "narration": {
@@ -601,6 +602,59 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DB_TWO_WAYS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "dbTwoWays": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "serverLabel": {
+                          "type": "string"
+                        },
+                        "fileLabel": {
+                          "type": "string"
+                        },
+                        "serverParts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "string"
+                        },
+                        "fileNote": {
+                          "type": "string"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

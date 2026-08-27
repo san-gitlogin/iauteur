@@ -16,7 +16,24 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  JOIN_MERGE: {
+export const MANIFEST = {  DB_TWO_WAYS: {
+    category: "diagram", family: "diagram", data_key: "dbTwoWays",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      serverLabel: {t: 'string'},
+      fileLabel: {t: 'string'},
+      serverParts: {t: 'items'},
+      fileName: {t: 'string'},
+      fileSize: {t: 'string'},
+      fileNote: {t: 'string'},
+      atWord: {t: 'anchor'},
+    },
+    example: {dbTwoWays: {"premise":"Both of these store the same four rows.","caption":"what you have to run first","serverLabel":"a database server","fileLabel":"SQLite","fileName":"shop.db","fileSize":"8192 bytes","fileNote":"no port, no daemon, no password","serverParts":[{"label":"a machine to run on","asset":"lucide:server","atWord":3},{"label":"a service, kept running","asset":"lucide:activity","atWord":5},{"label":"a port to listen on","asset":"lucide:plug","atWord":7},{"label":"a user and a password","asset":"lucide:key-round","atWord":9}],"atWord":2}},
+  },
+  JOIN_MERGE: {
     category: "diagram", family: "diagram", data_key: "joinMerge",
     purpose: "",
     use_when: "",
