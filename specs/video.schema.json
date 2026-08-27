@@ -537,7 +537,8 @@
               "TRANSACTION_DOOR",
               "GROUP_BUCKETS",
               "TABLE_SPLIT",
-              "WHERE_IT_RUNS"
+              "WHERE_IT_RUNS",
+              "INDEX_LEDGER"
             ]
           },
           "narration": {
@@ -607,6 +608,65 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "INDEX_LEDGER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "indexLedger": {
+                      "type": "object",
+                      "properties": {
+                        "premise": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "writeLabel": {
+                          "type": "string"
+                        },
+                        "tableLabel": {
+                          "type": "string"
+                        },
+                        "indexLabel": {
+                          "type": "string"
+                        },
+                        "sizeBefore": {
+                          "type": "string"
+                        },
+                        "sizeAfter": {
+                          "type": "string"
+                        },
+                        "sizeGrow": {
+                          "type": "number"
+                        },
+                        "bought": {
+                          "type": "string"
+                        },
+                        "forkAtWord": {
+                          "type": "number"
+                        },
+                        "costAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

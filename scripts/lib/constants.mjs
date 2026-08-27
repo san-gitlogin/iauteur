@@ -246,6 +246,7 @@ export const TYPES = [
   'GROUP_BUCKETS',
   'TABLE_SPLIT',
   'WHERE_IT_RUNS',
+  'INDEX_LEDGER',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

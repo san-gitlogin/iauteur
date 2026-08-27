@@ -123,6 +123,14 @@ but it only strips the type from `DYNAMIC`, so **delete your hand-written valida
   cannot drift. For labels pinned to a shape, render them INSIDE the same SVG as `<text>` (or
   anchored to the same element) — never as an absolutely-positioned div whose coordinates
   re-derive the layout (that drifts the moment the layout changes).
+- **`vectorEffect="non-scaling-stroke"` makes `strokeDasharray` a SCREEN-PIXEL length.** Paid
+  for on INDEX_LEDGER's fork: a draw-on stroke with `strokeDasharray={40}` in a `viewBox="0 0
+  100 10"` rendered as a dashed line, and raising it to 200 rendered a solid line with a hole
+  punched through the middle — because the path's RENDERED length was ~500px while its
+  coordinate length was ~35 units. Size a draw-on dash against the path's rendered length (or
+  drop `vectorEffect` and divide `strokeWidth` by the scale instead, which is what
+  RecordedStep's callout does — it derives its dasharray from the rect's own perimeter in the
+  same units and is correct by construction).
 - **`component-flow proof` renders ONE frame (120) of a spec built from the CONFIG's `example`,
   not from the showcase.** Two consequences, both paid for on PLACEHOLDER_SEAL:
   (a) if the example's anchors resolve past frame ~110, the proof shows only the PRE-payoff

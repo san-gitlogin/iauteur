@@ -16,7 +16,27 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  WHERE_IT_RUNS: {
+export const MANIFEST = {  INDEX_LEDGER: {
+    category: "diagram", family: "diagram", data_key: "indexLedger",
+    purpose: "",
+    use_when: "",
+    fields: {
+      premise: {t: 'string'},
+      caption: {t: 'string'},
+      writeLabel: {t: 'string'},
+      tableLabel: {t: 'string'},
+      indexLabel: {t: 'string'},
+      sizeBefore: {t: 'string'},
+      sizeAfter: {t: 'string'},
+      sizeGrow: {t: 'number'},
+      bought: {t: 'string'},
+      forkAtWord: {t: 'number'},
+      costAtWord: {t: 'number'},
+      atWord: {t: 'anchor'},
+    },
+    example: {indexLedger: {"premise":"The index made the read fast. It did not make it free.","caption":"every write now pays twice","writeLabel":"INSERT","tableLabel":"the table","indexLabel":"the index","sizeBefore":"8 KB","sizeAfter":"12 KB","sizeGrow":0.5,"bought":"SCAN became SEARCH","forkAtWord":3,"costAtWord":6,"atWord":2}},
+  },
+  WHERE_IT_RUNS: {
     category: "diagram", family: "diagram", data_key: "whereItRuns",
     purpose: "",
     use_when: "",

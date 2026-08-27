@@ -10357,7 +10357,22 @@ export interface WhereItRunsData {
   note?: string;
   atWord?: number;
 }
+export interface IndexLedgerData {
+  premise?: string;
+  caption?: string;
+  writeLabel?: string;
+  tableLabel?: string;
+  indexLabel?: string;
+  sizeBefore?: string;
+  sizeAfter?: string;
+  sizeGrow?: number;
+  bought?: string;
+  forkAtWord?: number;
+  costAtWord?: number;
+  atWord?: number;
+}
 export interface SceneData {
+  indexLedger?: IndexLedgerData;
   whereItRuns?: WhereItRunsData;
   tableSplit?: TableSplitData;
   groupBuckets?: GroupBucketsData;

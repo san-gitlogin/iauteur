@@ -360,10 +360,12 @@ import {TransactionDoor} from './scenes/TransactionDoor';
 import {GroupBuckets} from './scenes/GroupBuckets';
 import {TableSplit} from './scenes/TableSplit';
 import {WhereItRuns} from './scenes/WhereItRuns';
+import {IndexLedger} from './scenes/IndexLedger';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  WHERE_IT_RUNS: WhereItRuns,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  INDEX_LEDGER: IndexLedger,
+  WHERE_IT_RUNS: WhereItRuns,
   TABLE_SPLIT: TableSplit,
   GROUP_BUCKETS: GroupBuckets,
   TRANSACTION_DOOR: TransactionDoor,

@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'INDEX_LEDGER'
   | 'WHERE_IT_RUNS'
   | 'TABLE_SPLIT'
   | 'GROUP_BUCKETS'
@@ -370,6 +371,23 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type IndexLedgerScene = SceneCommon<'INDEX_LEDGER'> & { data: {
+    indexLedger: {
+      premise?: string;
+      caption?: string;
+      writeLabel?: string;
+      tableLabel?: string;
+      indexLabel?: string;
+      sizeBefore?: string;
+      sizeAfter?: string;
+      sizeGrow?: number;
+      bought?: string;
+      forkAtWord?: number;
+      costAtWord?: number;
+      atWord?: number;
+    };
+  } };
 
 export type WhereItRunsScene = SceneCommon<'WHERE_IT_RUNS'> & { data: {
     whereItRuns: {
@@ -5329,6 +5347,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  INDEX_LEDGER: IndexLedgerScene;
   WHERE_IT_RUNS: WhereItRunsScene;
   TABLE_SPLIT: TableSplitScene;
   GROUP_BUCKETS: GroupBucketsScene;
@@ -5688,6 +5707,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | IndexLedgerScene
   | WhereItRunsScene
   | TableSplitScene
   | GroupBucketsScene
