@@ -1,22 +1,206 @@
 {
   "meta": {
-    "topic": "SQLite: the database that is just a file",
-    "format": "short",
+    "topic": "SQL injection, in two lines of Python",
+    "format": "shorts",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "screenplay": "documentary",
+    "onePayoff": "One row from a parameter, four rows from a glued string.",
+    "openLoop": "Which of these two nearly identical queries returns the whole table?",
+    "analogy": "A value handed over sealed, versus glued into the sentence.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "One quote and the whole table walks out #python #sql",
+      "description": "The same query, two ways. Real output, nothing faked.",
+      "tags": [
+        "sql injection",
+        "python",
+        "sqlite",
+        "parameterised queries",
+        "security"
+      ],
+      "queries": [
+        "sql injection python example",
+        "why use parameterised queries"
+      ]
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
     "channel": "THE NBX STUDIO",
-    "logo": "img:channel_logo.png"
+    "logo": "img:channel_logo.png",
+    "background": "grid"
   },
-  "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
-    "frames": 2
+  "thumbnail": {
+    "title": "ONE QUOTE",
+    "badge": "4 ROWS",
+    "asset": "lucide:database"
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "filmburn",
+      "background": "zoneA",
+      "narration": "Same table. Same Python. One of these queries hands back four rows it should never see.",
+      "data": {
+        "headline": "ONE QUOTE",
+        "subtext": "and the whole table walks out",
+        "heroAsset": "lucide:database",
+        "headlineAtWord": 2,
+        "heroAtWord": 11
+      },
+      "durationFrames": 237,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Look at the two lines. The first passes the name as a parameter — that's the question mark. The second glues the same name into the string. Four characters apart. Now run both. The safe one asked for a USB-C hub and got a USB-C hub. One row. The second was handed a quote, OR one equals one, and a comment marker, so every row matches and the rest of the query is dead. Four rows. The entire table.",
+      "data": {
+        "recordedStep": {
+          "caption": "one row, or all of them",
+          "premise": "The same table and the same code path. Only the placeholder is different.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act3#open-params",
+              "label": "two ways to ask",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "safe",
+                  "atWord": 27
+                },
+                {
+                  "mark": "unsafe",
+                  "atWord": 39
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the value stays a value",
+                  "mark": "safe",
+                  "color": "green",
+                  "atWord": 33
+                },
+                {
+                  "text": "the value becomes code",
+                  "mark": "unsafe",
+                  "color": "red",
+                  "atWord": 45
+                }
+              ],
+              "id": "open-params",
+              "src": "rec/sqlite-act3/seg-05.mp4",
+              "frames": 208,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "safe": {
+                  "x": 428,
+                  "y": 210,
+                  "w": 723,
+                  "h": 22
+                },
+                "unsafe": {
+                  "x": 428,
+                  "y": 306,
+                  "w": 693,
+                  "h": 22
+                }
+              },
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act3#run-params",
+              "label": "safe, then not",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "one",
+                  "atWord": 60
+                },
+                {
+                  "mark": "all",
+                  "atWord": 62
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "exactly what was asked for",
+                  "mark": "one",
+                  "color": "green",
+                  "atWord": 61
+                },
+                {
+                  "text": "the whole table",
+                  "mark": "all",
+                  "color": "red",
+                  "atWord": 63
+                }
+              ],
+              "id": "run-params",
+              "src": "rec/sqlite-act3/seg-06.mp4",
+              "frames": 101,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "one": {
+                  "x": 368,
+                  "y": 745,
+                  "w": 255,
+                  "h": 19
+                },
+                "all": {
+                  "x": 456,
+                  "y": 764,
+                  "w": 150,
+                  "h": 19
+                }
+              },
+              "atWord": 51
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 993,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s03",
+      "type": "OUTRO_CTA",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Use the question mark. Every time, in every language, forever.",
+      "data": {
+        "message": "Always pass the value as a parameter",
+        "sub": "every language, every time"
+      },
+      "durationFrames": 165,
+      "timingSource": "estimate"
+    }
+  ]
 }

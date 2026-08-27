@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "topic": "SCAN or SEARCH: reading a SQLite query plan",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "One CREATE INDEX turns SCAN into SEARCH, and the plan says so.",
+    "openLoop": "What is the database actually doing when your query is slow?",
+    "analogy": "A finger down every row, versus one jump straight to the answer.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "SCAN or SEARCH: Read a SQLite Query Plan in 90 Seconds",
+      "description": "EXPLAIN QUERY PLAN, one index, and the one word that changes. Real output.",
+      "tags": [
+        "sqlite",
+        "explain query plan",
+        "database index",
+        "sql performance",
+        "query optimisation",
+        "sql tutorial"
+      ],
+      "queries": [
+        "explain query plan sqlite",
+        "sqlite index slow query",
+        "sql scan vs search"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png",
+    "background": "grid"
+  },
+  "thumbnail": {
+    "title": "SCAN OR SEARCH",
+    "badge": "1 WORD",
+    "asset": "lucide:search"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "filmburn",
+      "background": "zoneA",
+      "narration": "Your query got slow. Before you rewrite anything, ask the database what it is planning.",
+      "data": {
+        "headline": "SCAN OR SEARCH",
+        "subtext": "one word tells you everything",
+        "heroAsset": "lucide:search",
+        "headlineAtWord": 2,
+        "heroAtWord": 11
+      },
+      "durationFrames": 225,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s02",
+      "type": "SCAN_VS_SEEK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Ask for the orders belonging to one product, and SQLite reads every row and checks each one, because reading everything is the only option available. Six rows here, so nobody cares. Six million and you would care enormously. An index gives the engine a second option: go straight to the answer.",
+      "data": {
+        "scanVsSeek": {
+          "caption": "the same question, asked two ways",
+          "premise": "Six orders on disk. You want the ones for product 1.",
+          "scanLabel": "SCAN orders",
+          "seekLabel": "SEARCH orders USING INDEX",
+          "targetIndex": 4,
+          "rows": [
+            {
+              "label": "order 1",
+              "sub": "product 2"
+            },
+            {
+              "label": "order 2",
+              "sub": "product 3"
+            },
+            {
+              "label": "order 3",
+              "sub": "product 4"
+            },
+            {
+              "label": "order 4",
+              "sub": "product 2"
+            },
+            {
+              "label": "order 5",
+              "sub": "product 1"
+            },
+            {
+              "label": "order 6",
+              "sub": "product 3"
+            }
+          ],
+          "scanAtWord": 14,
+          "seekAtWord": 38,
+          "atWord": 3
+        }
+      },
+      "durationFrames": 657,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "You don't have to guess about any of this, because SQLite will tell you outright. EXPLAIN QUERY PLAN asks what the engine intends to do before running anything at all, and the answer comes back as a single word: SCAN. The whole orders table, every row, to answer one small question. So — one command. Create an index on that column. It takes no arguments worth thinking about and prints no output whatsoever. Now run the identical query again. Same words, same table, same everything. And SCAN has become SEARCH, searching orders using the index we just built. One word changed, and that word is the difference between reading six million rows and jumping straight to the handful you asked for.",
+      "data": {
+        "recordedStep": {
+          "caption": "SCAN became SEARCH",
+          "premise": "The identical query, before and after one CREATE INDEX.",
+          "clips": [
+            {
+              "ref": "rec:sqlite-act2#plan-before",
+              "label": "the plan, before",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "scan",
+                  "atWord": 29
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "reads every row",
+                  "mark": "scan",
+                  "color": "orange",
+                  "atWord": 35
+                }
+              ],
+              "id": "plan-before",
+              "src": "rec/sqlite-act2/seg-07.mp4",
+              "frames": 214,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "scan": {
+                  "x": 394,
+                  "y": 840,
+                  "w": 97,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            },
+            {
+              "ref": "rec:sqlite-act2#index",
+              "label": "add the index",
+              "focus": true,
+              "id": "index",
+              "src": "rec/sqlite-act2/seg-08.mp4",
+              "frames": 191,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "atWord": 42
+            },
+            {
+              "ref": "rec:sqlite-act2#plan-after",
+              "label": "the plan, after",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "search",
+                  "atWord": 95
+                },
+                {
+                  "at": "full",
+                  "atWord": 97
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "straight to the rows",
+                  "mark": "search",
+                  "color": "green",
+                  "atWord": 96
+                }
+              ],
+              "id": "plan-after",
+              "src": "rec/sqlite-act2/seg-09.mp4",
+              "frames": 214,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "search": {
+                  "x": 394,
+                  "y": 840,
+                  "w": 220,
+                  "h": 19
+                }
+              },
+              "atWord": 76
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1497,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "When something is slow, ask for the plan first. Guessing is how afternoons disappear.",
+      "data": {
+        "message": "Ask for the plan before you optimise",
+        "sub": "the plan is a fact, a guess is not"
+      },
+      "durationFrames": 213,
+      "timingSource": "estimate"
+    }
+  ]
+}
