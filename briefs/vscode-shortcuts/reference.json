@@ -1,0 +1,186 @@
+{
+  "source": {
+    "card": "https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf",
+    "docs": "https://code.visualstudio.com/docs/configure/keybindings",
+    "fetched": "2026-08-28",
+    "note": "Transcribed verbatim from the Windows keyboard shortcut card. This file is the DOCUMENTED claim only. What the running build actually does is out/probe/keys/default-keybindings.jsonc (dumped from VS Code 1.134.0 itself) and out/probe/keys/verified.json (pressed for real in the browser). Where they disagree, the card is wrong for our surface - LAW 0m."
+  },
+  "categories": [
+    {
+      "name": "General",
+      "items": [
+        {"keys": ["ctrl+shift+p", "f1"], "label": "Show Command Palette"},
+        {"keys": ["ctrl+p"], "label": "Quick Open, Go to File"},
+        {"keys": ["ctrl+shift+n"], "label": "New window/instance"},
+        {"keys": ["ctrl+shift+w"], "label": "Close window/instance"},
+        {"keys": ["ctrl+,"], "label": "User Settings"},
+        {"keys": ["ctrl+k ctrl+s"], "label": "Keyboard Shortcuts"}
+      ]
+    },
+    {
+      "name": "Basic editing",
+      "items": [
+        {"keys": ["ctrl+x"], "label": "Cut line (empty selection)"},
+        {"keys": ["ctrl+c"], "label": "Copy line (empty selection)"},
+        {"keys": ["alt+up", "alt+down"], "label": "Move line up/down"},
+        {"keys": ["shift+alt+down", "shift+alt+up"], "label": "Copy line up/down"},
+        {"keys": ["ctrl+shift+k"], "label": "Delete line"},
+        {"keys": ["ctrl+enter"], "label": "Insert line below"},
+        {"keys": ["ctrl+shift+enter"], "label": "Insert line above"},
+        {"keys": ["ctrl+shift+\\"], "label": "Jump to matching bracket"},
+        {"keys": ["ctrl+]", "ctrl+["], "label": "Indent/outdent line"},
+        {"keys": ["home", "end"], "label": "Go to beginning/end of line"},
+        {"keys": ["ctrl+home"], "label": "Go to beginning of file"},
+        {"keys": ["ctrl+end"], "label": "Go to end of file"},
+        {"keys": ["ctrl+up", "ctrl+down"], "label": "Scroll line up/down"},
+        {"keys": ["alt+pageup", "alt+pagedown"], "label": "Scroll page up/down"},
+        {"keys": ["ctrl+shift+["], "label": "Fold (collapse) region"},
+        {"keys": ["ctrl+shift+]"], "label": "Unfold (uncollapse) region"},
+        {"keys": ["ctrl+k ctrl+["], "label": "Fold all subregions"},
+        {"keys": ["ctrl+k ctrl+]"], "label": "Unfold all subregions"},
+        {"keys": ["ctrl+k ctrl+0"], "label": "Fold all regions"},
+        {"keys": ["ctrl+k ctrl+j"], "label": "Unfold all regions"},
+        {"keys": ["ctrl+k ctrl+c"], "label": "Add line comment"},
+        {"keys": ["ctrl+k ctrl+u"], "label": "Remove line comment"},
+        {"keys": ["ctrl+/"], "label": "Toggle line comment"},
+        {"keys": ["shift+alt+a"], "label": "Toggle block comment"},
+        {"keys": ["alt+z"], "label": "Toggle word wrap"}
+      ]
+    },
+    {
+      "name": "Navigation",
+      "items": [
+        {"keys": ["ctrl+t"], "label": "Show all Symbols"},
+        {"keys": ["ctrl+g"], "label": "Go to Line"},
+        {"keys": ["ctrl+p"], "label": "Go to File"},
+        {"keys": ["ctrl+shift+o"], "label": "Go to Symbol"},
+        {"keys": ["ctrl+shift+m"], "label": "Show Problems panel"},
+        {"keys": ["f8"], "label": "Go to next error or warning"},
+        {"keys": ["shift+f8"], "label": "Go to previous error or warning"},
+        {"keys": ["ctrl+shift+tab"], "label": "Navigate editor group history"},
+        {"keys": ["alt+left", "alt+right"], "label": "Go back / forward"},
+        {"keys": ["ctrl+m"], "label": "Toggle Tab moves focus"}
+      ]
+    },
+    {
+      "name": "Search and replace",
+      "items": [
+        {"keys": ["ctrl+f"], "label": "Find"},
+        {"keys": ["ctrl+h"], "label": "Replace"},
+        {"keys": ["f3", "shift+f3"], "label": "Find next/previous"},
+        {"keys": ["alt+enter"], "label": "Select all occurrences of Find match"},
+        {"keys": ["ctrl+d"], "label": "Add selection to next Find match"},
+        {"keys": ["ctrl+k ctrl+d"], "label": "Move last selection to next Find match"},
+        {"keys": ["alt+c", "alt+r", "alt+w"], "label": "Toggle case-sensitive / regex / whole word"}
+      ]
+    },
+    {
+      "name": "Multi-cursor and selection",
+      "items": [
+        {"keys": ["alt+click"], "label": "Insert cursor", "mouse": true},
+        {"keys": ["ctrl+alt+up", "ctrl+alt+down"], "label": "Insert cursor above / below"},
+        {"keys": ["ctrl+u"], "label": "Undo last cursor operation"},
+        {"keys": ["shift+alt+i"], "label": "Insert cursor at end of each line selected"},
+        {"keys": ["ctrl+l"], "label": "Select current line"},
+        {"keys": ["ctrl+shift+l"], "label": "Select all occurrences of current selection"},
+        {"keys": ["ctrl+f2"], "label": "Select all occurrences of current word"},
+        {"keys": ["shift+alt+right"], "label": "Expand selection"},
+        {"keys": ["shift+alt+left"], "label": "Shrink selection"},
+        {"keys": ["shift+alt+drag"], "label": "Column (box) selection", "mouse": true},
+        {"keys": ["ctrl+shift+alt+up", "ctrl+shift+alt+down", "ctrl+shift+alt+left", "ctrl+shift+alt+right"], "label": "Column (box) selection"},
+        {"keys": ["ctrl+shift+alt+pageup", "ctrl+shift+alt+pagedown"], "label": "Column (box) selection page up/down"}
+      ]
+    },
+    {
+      "name": "Rich languages editing",
+      "items": [
+        {"keys": ["ctrl+space", "ctrl+i"], "label": "Trigger suggestion"},
+        {"keys": ["ctrl+shift+space"], "label": "Trigger parameter hints"},
+        {"keys": ["shift+alt+f"], "label": "Format document"},
+        {"keys": ["ctrl+k ctrl+f"], "label": "Format selection"},
+        {"keys": ["f12"], "label": "Go to Definition"},
+        {"keys": ["alt+f12"], "label": "Peek Definition"},
+        {"keys": ["ctrl+k f12"], "label": "Open Definition to the side"},
+        {"keys": ["ctrl+."], "label": "Quick Fix"},
+        {"keys": ["shift+f12"], "label": "Show References"},
+        {"keys": ["f2"], "label": "Rename Symbol"},
+        {"keys": ["ctrl+k ctrl+x"], "label": "Trim trailing whitespace"},
+        {"keys": ["ctrl+k m"], "label": "Change file language"}
+      ]
+    },
+    {
+      "name": "Editor management",
+      "items": [
+        {"keys": ["ctrl+f4", "ctrl+w"], "label": "Close editor"},
+        {"keys": ["ctrl+k f"], "label": "Close folder"},
+        {"keys": ["ctrl+\\"], "label": "Split editor"},
+        {"keys": ["ctrl+1", "ctrl+2", "ctrl+3"], "label": "Focus into 1st, 2nd or 3rd editor group"},
+        {"keys": ["ctrl+k ctrl+left", "ctrl+k ctrl+right"], "label": "Focus into previous/next editor group"},
+        {"keys": ["ctrl+shift+pageup", "ctrl+shift+pagedown"], "label": "Move editor left/right"},
+        {"keys": ["ctrl+k left", "ctrl+k right"], "label": "Move active editor group"}
+      ]
+    },
+    {
+      "name": "File management",
+      "items": [
+        {"keys": ["ctrl+n"], "label": "New File"},
+        {"keys": ["ctrl+o"], "label": "Open File"},
+        {"keys": ["ctrl+s"], "label": "Save"},
+        {"keys": ["ctrl+shift+s"], "label": "Save As"},
+        {"keys": ["ctrl+k s"], "label": "Save All"},
+        {"keys": ["ctrl+f4"], "label": "Close"},
+        {"keys": ["ctrl+k ctrl+w"], "label": "Close All"},
+        {"keys": ["ctrl+shift+t"], "label": "Reopen closed editor"},
+        {"keys": ["ctrl+k enter"], "label": "Keep preview mode editor open"},
+        {"keys": ["ctrl+tab"], "label": "Open next"},
+        {"keys": ["ctrl+shift+tab"], "label": "Open previous"},
+        {"keys": ["ctrl+k p"], "label": "Copy path of active file"},
+        {"keys": ["ctrl+k r"], "label": "Reveal active file in Explorer"},
+        {"keys": ["ctrl+k o"], "label": "Show active file in new window/instance"}
+      ]
+    },
+    {
+      "name": "Display",
+      "items": [
+        {"keys": ["f11"], "label": "Toggle full screen"},
+        {"keys": ["shift+alt+0"], "label": "Toggle editor layout (horizontal/vertical)"},
+        {"keys": ["ctrl+=", "ctrl+-"], "label": "Zoom in/out"},
+        {"keys": ["ctrl+b"], "label": "Toggle Sidebar visibility"},
+        {"keys": ["ctrl+shift+e"], "label": "Show Explorer / Toggle focus"},
+        {"keys": ["ctrl+shift+f"], "label": "Show Search"},
+        {"keys": ["ctrl+shift+g"], "label": "Show Source Control"},
+        {"keys": ["ctrl+shift+d"], "label": "Show Debug"},
+        {"keys": ["ctrl+shift+x"], "label": "Show Extensions"},
+        {"keys": ["ctrl+shift+h"], "label": "Replace in files"},
+        {"keys": ["ctrl+shift+j"], "label": "Toggle Search details"},
+        {"keys": ["ctrl+shift+u"], "label": "Show Output panel"},
+        {"keys": ["ctrl+shift+v"], "label": "Open Markdown preview"},
+        {"keys": ["ctrl+k v"], "label": "Open Markdown preview to the side"},
+        {"keys": ["ctrl+k z"], "label": "Zen Mode (Esc Esc to exit)"}
+      ]
+    },
+    {
+      "name": "Debug",
+      "items": [
+        {"keys": ["f9"], "label": "Toggle breakpoint"},
+        {"keys": ["f5"], "label": "Start/Continue"},
+        {"keys": ["shift+f5"], "label": "Stop"},
+        {"keys": ["f11", "shift+f11"], "label": "Step into/out"},
+        {"keys": ["f10"], "label": "Step over"},
+        {"keys": ["ctrl+k ctrl+i"], "label": "Show hover"}
+      ]
+    },
+    {
+      "name": "Integrated terminal",
+      "items": [
+        {"keys": ["ctrl+`"], "label": "Show integrated terminal"},
+        {"keys": ["ctrl+shift+`"], "label": "Create new terminal"},
+        {"keys": ["ctrl+c"], "label": "Copy selection"},
+        {"keys": ["ctrl+v"], "label": "Paste into active terminal"},
+        {"keys": ["ctrl+up", "ctrl+down"], "label": "Scroll up/down"},
+        {"keys": ["shift+pageup", "shift+pagedown"], "label": "Scroll page up/down"},
+        {"keys": ["ctrl+home", "ctrl+end"], "label": "Scroll to top/bottom"}
+      ]
+    }
+  ]
+}

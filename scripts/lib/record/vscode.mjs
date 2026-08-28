@@ -67,6 +67,12 @@ export const recordingSettings = ({theme = 'dark', fontSize = 18, terminalFontSi
   'editor.inlineSuggest.enabled': false,
   'breadcrumbs.enabled': false,
   'workbench.colorTheme': THEME_IDS[theme] ?? THEME_IDS.dark,
+  // AUTO-SAVE OFF. VS Code for the Web enables it, and the runner's `save` action proves a save
+  // happened by asserting the tab is no longer dirty - which is vacuously true when the file was
+  // never dirty in the first place. Found while probing shortcuts: a diagnostic printed the tab's
+  // class list before typing, after typing and after Ctrl+S and it never once carried `dirty`.
+  // A demo that shows Ctrl+S should also be the thing that actually writes the file.
+  'files.autoSave': 'off',
   'workbench.startupEditor': 'none',
   'workbench.tips.enabled': false,
   'workbench.editor.showTabs': 'multiple',

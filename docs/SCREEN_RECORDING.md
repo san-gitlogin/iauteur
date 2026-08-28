@@ -706,6 +706,60 @@ re-record, re-bake, re-anchor, re-sync. Everything else in the frame is now comp
 
 - [ ] Re-cut one Playwright Dojo episode with real footage; judge as school owner AND as beginner
 
+### P8 — KEYBOARD SHORTCUTS (owner, 2026-08-28)
+
+Owner: *"check out the keybindings docs and the Windows shortcuts PDF thoroughly and in depth,
+have every shortcut verified using VS Code web which you use. You don't wanna always use the search
+thing you do and execute, some places shortcuts might help you work even faster ... we should also
+test and review and do a feedback loop testing of the same not settling on any assumptions while
+actual things must work with different types of projects containing different files, executing
+different coding languages, viewing images / viewing different types of text files."*
+
+Two motives, and they are separate. **Speed:** the runner drives almost everything through the
+command palette (open a file, focus the terminal, split an editor), which is three interactions and
+about two seconds where a chord is one and about two hundred milliseconds. **Truth on camera:** a
+tutorial that shows the palette every time is teaching the palette; a real developer's hands use
+keys, and the keycap overlay already exists to show them.
+
+**Sources.** `briefs/vscode-shortcuts/reference.json` is the Windows shortcut card, transcribed —
+149 pressable chords in 11 categories. That is the CLAIM. LAW 0m governs what happens next: the
+card is a printed document for the DESKTOP app and we drive VS Code for the Web, so nothing on it
+is trusted until this machine says so.
+
+- [x] a. **Dump the build's own keybinding table.** `node scripts/probe-keys.mjs --dump` drives
+      `Preferences: Open Default Keybindings (JSON)` and reads the buffer back through the
+      clipboard (NOT by scraping Monaco — it virtualises its lines and a DOM scrape would silently
+      truncate a 4000-line document to the viewport). Result: **1144 bindings, VS Code 1.134.0**,
+      in `out/probe/keys/default-keybindings.jsonc`.
+- [x] b. **Cross-check card against build.** `node scripts/keys-crosscheck.mjs` →
+      **143 of 149 card chords are bound here.** The four that are not are all desktop-only, and
+      the reason is the browser: `ctrl+shift+w` (closes the browser window), `ctrl+=` / `ctrl+-`
+      (browser zoom), `ctrl+k r` (reveal in OS file manager). Two more are mouse gestures.
+- [x] c. **Press every one of them for real.** `node scripts/probe-keys.mjs --probe`. A chord counts
+      as verified only when a snapshot of the workbench MOVED in the specific way that command
+      would move it. "The key dispatched without throwing" is not evidence — almost every chord
+      carries a `when` clause (`ctrl+c` alone has ten bindings), so *bound* and *works here, now,
+      with this focus* are different claims.
+- [ ] d. Teach the runner a general `keys` action (any chord, incl. two-key chords) with read-back.
+- [ ] e. Replace palette-driven steps with verified chords where a chord is faster and safe.
+- [ ] f. Feedback-loop the whole thing across project types, languages and file kinds.
+- [ ] g. The VS Code shortcuts course itself.
+
+**Paid for already:**
+
+- The probe's first Display run reported four failures and **all four were the probe's fault, not
+  VS Code's** — Zen Mode had visibly hidden the sidebar, panel and activity bar while the check
+  looked for a `.zen-mode` class this build does not set. Fixed by measuring zen mode *by its
+  effect*. Same for the markdown preview (its iframe mounts outside `.part.editor`) and the editor
+  layout toggle (changes group ORIENTATION, not group count). A shortcut probe is mostly a test of
+  your own observables; write the failure reason to say **what did move**, or every failure looks
+  identical.
+- **Never pin the serve-web port.** A fixed port turned the recorded shim-leak into a hard stop:
+  the listener outlives the run by several seconds after the process is gone, so the next
+  invocation waited the full 180s timeout and failed. `startServer` picks a free one.
+- **A setup must not depend on the thing under test.** The probe opens files through the palette
+  rather than Ctrl+P, because Ctrl+P is one of the chords being measured.
+
 ### P7 — Polish
 
 - [ ] Dead-air compressor with an honest speed chip
