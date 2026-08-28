@@ -14,7 +14,7 @@ import path from 'node:path';
 import {chromium} from 'playwright';
 import {
   startServer, openWorkbench, applySettings, verifySurface, prep,
-  recordingSettings, vscodeVersion, palette,
+  recordingSettings, vscodeVersion, palette, reapStaleServers,
 } from './vscode.mjs';
 import {openTerminal, primeTerminal, runCommand, readBuffer, readScrollback} from './terminal.mjs';
 import {startCapture} from './capture.mjs';
@@ -603,6 +603,11 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
   fs.mkdirSync(rec, {recursive: true});
   const framesDir = path.join(rec, '.frames');
 
+  // Clear orphaned servers from earlier runs BEFORE starting one. They accumulate silently and
+  // starve the machine; ten probe runs left 87 of them and the next render could not allocate
+  // five megabytes for ffmpeg. See reapStaleServers.
+  const reaped = reapStaleServers();
+  if (reaped) console.log(`  reaped ${reaped} stale serve-web process(es) from earlier runs`);
   console.log(`  starting serve-web for ${ws} ...`);
   const server = await startServer({workspace: ws});
   console.log(`  server ready at ${server.url}`);

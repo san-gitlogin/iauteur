@@ -51,8 +51,8 @@
       "action": "keys",
       "chord": "ctrl+`",
       "verify": "panelChanged",
-      "focus": "editor",
-      "label": "show the terminal"
+      "focus": "terminal",
+      "label": "hide the terminal"
     },
     {
       "id": "run",

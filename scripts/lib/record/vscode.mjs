@@ -207,6 +207,42 @@ export const startServer = async ({workspace, port, dataDir, timeoutMs = 180000}
 
 /** Kill whatever still holds `port`, on either platform. Best effort by design: this is
  *  teardown, and a stubborn orphan must never fail an otherwise-good recording. */
+/**
+ * START FROM A CLEAN MACHINE.
+ *
+ * `stop()` reaps the LISTENER, but `code serve-web` spawns a whole tree of server processes under
+ * `~/.vscode/cli/serve-web/` and those are orphaned rather than killed — the shim exits first, so
+ * there is no parent left to recurse from. They accumulate silently.
+ *
+ * Measured on 2026-08-28 after ten shortcut-probe runs: **87 stray node processes**, and the next
+ * recording died with `x264 [error]: malloc of size 5074176 failed` — ffmpeg could not get five
+ * megabytes. Killing them returned 12.8 GB. The existing note in `startServer` says 26 of these
+ * once left the machine unable to start a terminal at all; this is the same failure, three times
+ * bigger, and it had been quietly getting worse every run.
+ *
+ * Reaping at STARTUP rather than at teardown is deliberate: teardown cannot tell an orphan from a
+ * concurrently running server, and startup does not need to — nothing else is meant to be running.
+ */
+export const reapStaleServers = () => {
+  if (os.platform() !== 'win32') {
+    try {
+      execFileSync('sh', ['-c', 'pkill -f "\\.vscode/cli/serve-web/" 2>/dev/null || true'], {stdio: 'ignore'});
+    } catch { /* best effort */ }
+    return 0;
+  }
+  try {
+    const out = execFileSync('powershell', ['-NoProfile', '-Command',
+      `$p = Get-CimInstance Win32_Process -Filter "Name='node.exe'" | ` +
+      `Where-Object { $_.CommandLine -match '\\\\.vscode\\\\cli\\\\serve-web\\\\' -and $_.CommandLine -notmatch 'claude' }; ` +
+      `$p | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }; ` +
+      `($p | Measure-Object).Count`],
+      {encoding: 'utf8', windowsHide: true});
+    return Number(String(out).trim()) || 0;
+  } catch {
+    return 0; // never let housekeeping fail a run
+  }
+};
+
 export const reapPort = (port) => {
   if (os.platform() === 'win32') {
     execFileSync('powershell', ['-NoProfile', '-Command',

@@ -30,6 +30,7 @@ import path from 'node:path';
 import {chromium} from 'playwright';
 import {
   startServer, openWorkbench, applySettings, palette, recordingSettings, vscodeVersion,
+  reapStaleServers,
 } from './lib/record/vscode.mjs';
 import {snapshot, pressChord} from './lib/record/keyprobe.mjs';
 import {PROBES} from './lib/record/keyprobe-table.mjs';
@@ -72,6 +73,10 @@ console.log(`workspace: ${workspace}`);
 // NO FIXED PORT. A pinned port turns the recorded serve-web leak into a hard stop: the
 // listener outlives the run by a few seconds even after the process is gone, so the next
 // invocation waited the full three minutes and failed. startServer picks a free one.
+// Ten runs of this script left 87 orphaned serve-web processes and starved the machine; clear
+// them before adding another. See reapStaleServers.
+const reaped = reapStaleServers();
+if (reaped) console.log(`reaped ${reaped} stale serve-web process(es) from earlier runs`);
 const server = await startServer({workspace});
 console.log(`serve-web ready on ${server.url}`);
 
