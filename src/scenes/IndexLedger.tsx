@@ -3,6 +3,10 @@ import {AbsoluteFill, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {Headline, useScale, useSem, hexA} from '../ui';
 import {useTheme, wordToFrame} from '../themes';
+// MOTION SYSTEM (src/motion/system.ts): nothing on screen moves linearly. An arrival
+// eases OUT so it settles; a move or a state change uses the S-curve so it accelerates
+// away and decelerates in. Measured before this pass: 33 interpolates, zero easing.
+import {easeInOutCubic, easeOutCubic} from '../motion/util';
 
 // INDEX_LEDGER — what an index costs.
 //
@@ -28,12 +32,12 @@ export const IndexLedger: React.FC<{scene: Scene}> = ({scene}) => {
   const forkAt = wordToFrame(d.forkAtWord ?? d.atWord ?? 1);
   const costAt = wordToFrame(d.costAtWord ?? d.forkAtWord ?? d.atWord ?? 1);
 
-  const appear = interpolate(frame, [base, base + 14], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const fork = interpolate(frame, [forkAt, forkAt + 22], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const cost = interpolate(frame, [costAt, costAt + 20], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const appear = easeOutCubic(interpolate(frame, [base, base + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const fork = easeInOutCubic(interpolate(frame, [forkAt, forkAt + 22], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const cost = easeInOutCubic(interpolate(frame, [costAt, costAt + 20], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
 
   const amber = sem('orange');
   const blue = sem('blue');
@@ -52,8 +56,8 @@ export const IndexLedger: React.FC<{scene: Scene}> = ({scene}) => {
   const grow = Math.min(Math.max(d.sizeGrow ?? 0.5, 0), 1);
 
   const Dest: React.FC<{label: string; accent: string; delay: number}> = ({label, accent, delay}) => {
-    const on = interpolate(frame, [forkAt + delay, forkAt + delay + 18], [0, 1],
-      {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+    const on = easeOutCubic(interpolate(frame, [forkAt + delay, forkAt + delay + 18], [0, 1],
+      {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
     return (
       <div style={{
         flex: 1, minWidth: 0, height: boxH,

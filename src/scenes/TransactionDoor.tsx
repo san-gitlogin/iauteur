@@ -4,6 +4,10 @@ import {Scene} from '../types';
 import {Headline, useScale, useSem, hexA} from '../ui';
 import {AssetIcon} from '../AssetIcon';
 import {useTheme, wordToFrame} from '../themes';
+// MOTION SYSTEM (src/motion/system.ts): nothing on screen moves linearly. An arrival
+// eases OUT so it settles; a move or a state change uses the S-curve so it accelerates
+// away and decelerates in. Measured before this pass: 33 interpolates, zero easing.
+import {easeInOutCubic, easeOutCubic} from '../motion/util';
 
 // TRANSACTION_DOOR — what a transaction actually is.
 //
@@ -33,12 +37,12 @@ export const TransactionDoor: React.FC<{scene: Scene}> = ({scene}) => {
   const stageAt = wordToFrame(d.stageAtWord ?? d.atWord ?? 1);
   const actAt = wordToFrame(d.actAtWord ?? d.stageAtWord ?? d.atWord ?? 1);
 
-  const appear = interpolate(frame, [base, base + 14], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const staged = interpolate(frame, [stageAt, stageAt + 16], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const acted = interpolate(frame, [actAt, actAt + 22], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const appear = easeOutCubic(interpolate(frame, [base, base + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const staged = easeInOutCubic(interpolate(frame, [stageAt, stageAt + 16], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const acted = easeInOutCubic(interpolate(frame, [actAt, actAt + 22], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
 
   const green = sem('green');
   const amber = sem('orange');

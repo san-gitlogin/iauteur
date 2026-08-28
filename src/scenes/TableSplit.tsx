@@ -3,6 +3,10 @@ import {AbsoluteFill, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {Headline, useScale, useSem, hexA} from '../ui';
 import {useTheme, wordToFrame} from '../themes';
+// MOTION SYSTEM (src/motion/system.ts): nothing on screen moves linearly. An arrival
+// eases OUT so it settles; a move or a state change uses the S-curve so it accelerates
+// away and decelerates in. Measured before this pass: 33 interpolates, zero easing.
+import {easeInOutCubic, easeOutCubic} from '../motion/util';
 
 // TABLE_SPLIT — why a second table exists at all.
 //
@@ -32,10 +36,10 @@ export const TableSplit: React.FC<{scene: Scene}> = ({scene}) => {
 
   const base = Math.min(wordToFrame(d.atWord ?? 1), 38);
   const splitAt = wordToFrame(d.splitAtWord ?? d.atWord ?? 1);
-  const appear = interpolate(frame, [base, base + 14], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const split = interpolate(frame, [splitAt, splitAt + 24], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const appear = easeOutCubic(interpolate(frame, [base, base + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const split = easeInOutCubic(interpolate(frame, [splitAt, splitAt + 24], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
   const done = split > 0.55;
 
   // WHICH ROWS ARE DUPLICATES? Computed from the values themselves, so the picture cannot
@@ -181,8 +185,8 @@ export const TableSplit: React.FC<{scene: Scene}> = ({scene}) => {
             const isDupe = homeOf[i] !== i;
             // staggered, so the column leaves rather than teleports
             const f0 = splitAt + i * 3;
-            const go = interpolate(frame, [f0, f0 + 22], [0, 1],
-              {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+            const go = easeInOutCubic(interpolate(frame, [f0, f0 + 22], [0, 1],
+              {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
 
             const srcX = (leftW / 100) * colFrac[1] * 100;
             const dstX = rightX + 40 * 0.5;

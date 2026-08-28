@@ -3,6 +3,10 @@ import {AbsoluteFill, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {Headline, useScale, useSem, hexA} from '../ui';
 import {useTheme, wordToFrame} from '../themes';
+// MOTION SYSTEM (src/motion/system.ts): nothing on screen moves linearly. An arrival
+// eases OUT so it settles; a move or a state change uses the S-curve so it accelerates
+// away and decelerates in. Measured before this pass: 33 interpolates, zero easing.
+import {easeInOutCubic, easeOutCubic} from '../motion/util';
 
 // JOIN_MERGE — what a JOIN physically does.
 //
@@ -34,12 +38,12 @@ export const JoinMerge: React.FC<{scene: Scene}> = ({scene}) => {
   const keyAt = wordToFrame(d.keyAtWord ?? d.atWord ?? 1);
   const mergeAt = wordToFrame(d.mergeAtWord ?? d.keyAtWord ?? d.atWord ?? 1);
 
-  const appear = interpolate(frame, [base, base + 14], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const lit = interpolate(frame, [keyAt, keyAt + 12], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const merged = interpolate(frame, [mergeAt, mergeAt + 20], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const appear = easeOutCubic(interpolate(frame, [base, base + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const lit = easeOutCubic(interpolate(frame, [keyAt, keyAt + 12], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const merged = easeInOutCubic(interpolate(frame, [mergeAt, mergeAt + 20], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
 
   const stageTop = (d.caption ? (vertical ? 322 : 212) : 90) * scale;
   const stageH = ((vertical ? 1686 : 832) - (d.caption ? (vertical ? 322 : 212) : 90)) * scale;

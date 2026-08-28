@@ -3,6 +3,10 @@ import {AbsoluteFill, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {Headline, useScale, useSem, hexA} from '../ui';
 import {useTheme, wordToFrame} from '../themes';
+// MOTION SYSTEM (src/motion/system.ts): nothing on screen moves linearly. An arrival
+// eases OUT so it settles; a move or a state change uses the S-curve so it accelerates
+// away and decelerates in. Measured before this pass: 33 interpolates, zero easing.
+import {easeInOutCubic, easeOutCubic} from '../motion/util';
 
 // PLACEHOLDER_SEAL — why `?` is not "quoting for you".
 //
@@ -31,12 +35,12 @@ export const PlaceholderSeal: React.FC<{scene: Scene}> = ({scene}) => {
   const safeAt = wordToFrame(d.safeAtWord ?? d.atWord ?? 1);
   const evilAt = wordToFrame(d.evilAtWord ?? d.safeAtWord ?? d.atWord ?? 1);
 
-  const appear = interpolate(frame, [base, base + 14], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const safe = interpolate(frame, [safeAt, safeAt + 16], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const evil = interpolate(frame, [evilAt, evilAt + 16], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const appear = easeOutCubic(interpolate(frame, [base, base + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const safe = easeInOutCubic(interpolate(frame, [safeAt, safeAt + 16], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const evil = easeInOutCubic(interpolate(frame, [evilAt, evilAt + 16], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
 
   const head = d.queryHead ?? '';
   const tail = d.queryTail ?? '';

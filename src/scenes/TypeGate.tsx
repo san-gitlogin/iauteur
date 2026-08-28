@@ -3,6 +3,10 @@ import {AbsoluteFill, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {Headline, useScale, useSem, hexA} from '../ui';
 import {useTheme, wordToFrame} from '../themes';
+// MOTION SYSTEM (src/motion/system.ts): nothing on screen moves linearly. An arrival
+// eases OUT so it settles; a move or a state change uses the S-curve so it accelerates
+// away and decelerates in. Measured before this pass: 33 interpolates, zero easing.
+import {easeInOutCubic, easeOutCubic} from '../motion/util';
 
 // TYPE_GATE — what a column type actually promises.
 //
@@ -31,16 +35,16 @@ export const TypeGate: React.FC<{scene: Scene}> = ({scene}) => {
   const passAt = wordToFrame(d.passAtWord ?? d.atWord ?? 1);
   const rejAt = wordToFrame(d.rejectAtWord ?? d.passAtWord ?? d.atWord ?? 1);
 
-  const appear = interpolate(frame, [base, base + 14], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const appear = easeOutCubic(interpolate(frame, [base, base + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
   // The good value runs the WHOLE lane: 0 -> past the gate -> into the column.
-  const pass = interpolate(frame, [passAt, passAt + 26], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const pass = easeInOutCubic(interpolate(frame, [passAt, passAt + 26], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
   // The bad value only ever reaches the gate, then recoils and stays there.
-  const rejRun = interpolate(frame, [rejAt, rejAt + 16], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const recoil = interpolate(frame, [rejAt + 16, rejAt + 24], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const rejRun = easeInOutCubic(interpolate(frame, [rejAt, rejAt + 16], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const recoil = easeInOutCubic(interpolate(frame, [rejAt + 16, rejAt + 24], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
   const rejected = rejRun > 0.98;
 
   const green = sem('green');

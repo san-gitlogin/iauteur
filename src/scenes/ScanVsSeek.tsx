@@ -3,6 +3,10 @@ import {AbsoluteFill, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {Headline, useScale, useSem, hexA} from '../ui';
 import {useTheme, wordToFrame} from '../themes';
+// MOTION SYSTEM (src/motion/system.ts): nothing on screen moves linearly. An arrival
+// eases OUT so it settles; a move or a state change uses the S-curve so it accelerates
+// away and decelerates in. Measured before this pass: 33 interpolates, zero easing.
+import {easeInOutCubic, easeOutCubic} from '../motion/util';
 
 // SCAN_VS_SEEK — why an index changes one word of the query plan.
 //
@@ -34,17 +38,28 @@ export const ScanVsSeek: React.FC<{scene: Scene}> = ({scene}) => {
   const seekAt = wordToFrame(d.seekAtWord ?? d.scanAtWord ?? d.atWord ?? 1);
   const target = Math.min(Math.max(d.targetIndex ?? n - 1, 0), n - 1);
 
-  const appear = interpolate(frame, [base, base + 14], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const appear = easeOutCubic(interpolate(frame, [base, base + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  // OVERLAP (motion guide, 7): objects rarely start and stop at the same moment. Three frames
+  // between rows reads as life; ten would read as a queue. The stacks fill top to bottom, so
+  // the eye is already travelling the way the finger is about to.
+  const rowIn = (i: number) => easeOutCubic(interpolate(
+    frame, [base + i * 3, base + i * 3 + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
 
   // THE WALK: one row per 10 frames, so the cost is felt rather than asserted.
+  //
+  // THE ONE DELIBERATELY LINEAR MOVE IN THE SET. Everything else eases, because eased motion
+  // reads as alive — but a full-table scan is not alive, it is a machine touching every row
+  // at exactly the same rate. The constant tick IS the argument: uniform cost, no shortcuts.
+  // Easing it would make six rows look like a considered search rather than a grind.
   const PER = 10;
   const walked = Math.floor(interpolate(frame, [scanAt, scanAt + PER * n], [0, n],
     {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
   const scanCount = Math.min(walked, n);
   // THE JUMP: one move, and it only fires at its own word.
-  const jump = interpolate(frame, [seekAt, seekAt + 12], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const jump = easeInOutCubic(interpolate(frame, [seekAt, seekAt + 12], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
 
   // Geometry from the item count, never a fixed cell height (LAW 0k rule 4).
   const stageTop = (d.caption ? (vertical ? 322 : 212) : 90) * scale;
@@ -121,7 +136,7 @@ export const ScanVsSeek: React.FC<{scene: Scene}> = ({scene}) => {
                 background: hit ? hexA(accent, 0.16) : touched ? hexA(accent, 0.05) : t.colors.panel,
                 boxShadow: hit && t.style.glow > 0
                   ? `0 0 ${16 * scale * t.style.glow}px ${hexA(accent, 0.45)}` : 'none',
-                opacity: appear,
+                opacity: rowIn(i),
                 minWidth: 0,
               }}>
                 <span style={{

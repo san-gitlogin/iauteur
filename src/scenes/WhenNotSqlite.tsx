@@ -4,6 +4,10 @@ import {Scene} from '../types';
 import {Headline, useScale, useSem, hexA} from '../ui';
 import {AssetIcon} from '../AssetIcon';
 import {useTheme, wordToFrame} from '../themes';
+// MOTION SYSTEM (src/motion/system.ts): nothing on screen moves linearly. An arrival
+// eases OUT so it settles; a move or a state change uses the S-curve so it accelerates
+// away and decelerates in. Measured before this pass: 33 interpolates, zero easing.
+import {easeInOutCubic, easeOutCubic} from '../motion/util';
 
 // WHEN_NOT_SQLITE — the honest limit, drawn rather than conceded.
 //
@@ -32,12 +36,12 @@ export const WhenNotSqlite: React.FC<{scene: Scene}> = ({scene}) => {
   const readAt = wordToFrame(d.readAtWord ?? d.atWord ?? 1);
   const writeAt = wordToFrame(d.writeAtWord ?? d.readAtWord ?? d.atWord ?? 1);
 
-  const appear = interpolate(frame, [base, base + 14], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const read = interpolate(frame, [readAt, readAt + 20], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const write = interpolate(frame, [writeAt, writeAt + 20], [0, 1],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const appear = easeOutCubic(interpolate(frame, [base, base + 14], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const read = easeInOutCubic(interpolate(frame, [readAt, readAt + 20], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
+  const write = easeInOutCubic(interpolate(frame, [writeAt, writeAt + 20], [0, 1],
+    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
 
   const green = sem('green');
   const red = sem('red');
