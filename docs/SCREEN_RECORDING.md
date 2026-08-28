@@ -786,6 +786,31 @@ is trusted until this machine says so.
 - **Keybindings resolve BOTTOM to TOP.** Reporting the first-listed binding for a chord had the
   table teaching `ctrl+x` as `notebook.cell.cut`. True that it is bound; false that it is what runs.
 
+### P9 — LONG-FORM RENDER, made a command (2026-08-28)
+
+LAW 12 records the recipe that survived the 87-minute Linux cut — segment the video, render
+`--muted`, delete the scratch between passes, build the audio track separately, stream-copy the two
+together. It was a recipe, not a script, so it had to be retyped by hand every time and the
+temptation on a "only fifteen minutes" cut is to skip it.
+
+`scripts/render-long.mjs <slug> <composition> [segments]` is that law as a command, and it VERIFIES
+rather than assumes: frame count must equal the spec's total and audio drift must be ~0, both
+printed, both having been wrong once before.
+
+**Paid for on this very render.** Free disk was **5.8 GB** and 27,382 frames want roughly 4 GB of
+scratch in one pass — LAW 12's exact death, at a quarter of the size that first caused it. Clearing
+stills, bundles and probe workspaces took it to 7.7 GB, and with four segments the free space then
+stayed FLAT at 7.7 GB for the whole run. That flatness is the proof the segmenting works.
+
+**And the reaper committed an hour earlier had never worked.** `reapStaleServers` matched on
+`'\.vscode\cli\serve-web\'`, which reaches PowerShell as a regex ending in a lone
+backslash: *"Illegal \ at end of pattern"*. The command threw, the `catch` returned 0, and it
+reported success while killing nothing. Found by running the same command by hand and reading the
+error rather than the exit code. Fixed to `'cli.serve-web'` and proven — it reaped 5.
+
+The lesson generalises past this one bug: **a housekeeping helper that swallows its own errors will
+lie to you**, and the leak it was written to stop is precisely the thing that then goes unnoticed.
+
 ### P7 — Polish
 
 - [ ] Dead-air compressor with an honest speed chip

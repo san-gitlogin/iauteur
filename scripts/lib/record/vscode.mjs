@@ -233,7 +233,11 @@ export const reapStaleServers = () => {
   try {
     const out = execFileSync('powershell', ['-NoProfile', '-Command',
       `$p = Get-CimInstance Win32_Process -Filter "Name='node.exe'" | ` +
-      `Where-Object { $_.CommandLine -match '\\\\.vscode\\\\cli\\\\serve-web\\\\' -and $_.CommandLine -notmatch 'claude' }; ` +
+      // NO TRAILING BACKSLASH. PowerShell's -match takes a REGEX, and a pattern ending in a lone
+      // backslash is "Illegal \\ at end of pattern" — the whole call throws and the reaper silently
+      // kills nothing, which is exactly the leak it exists to stop. Caught by running the same
+      // command by hand and reading the error.
+      `Where-Object { $_.CommandLine -match 'cli.serve-web' -and $_.CommandLine -notmatch 'claude' }; ` +
       `$p | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }; ` +
       `($p | Measure-Object).Count`],
       {encoding: 'utf8', windowsHide: true});
