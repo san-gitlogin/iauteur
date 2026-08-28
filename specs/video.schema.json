@@ -535,6 +535,8 @@
               "DB_TWO_WAYS",
               "TYPE_GATE",
               "CURSOR_WALK",
+              "KEY_CHORD",
+              "BROWSER_STEALS",
               "TRANSACTION_DOOR",
               "GROUP_BUCKETS",
               "TABLE_SPLIT",
@@ -936,6 +938,124 @@
                         "atWord": {
                           "type": "number"
                         }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "KEY_CHORD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "keyChord": {
+                      "type": "object",
+                      "properties": {
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "per-beat, from THIS beat subject (LAW 0j)"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 120,
+                          "description": "what the viewer is looking at; unanchored, stays up (LAW 0l)"
+                        },
+                        "groups": {
+                          "description": "one entry per SIMULTANEOUS press, in order. Two groups is what makes a two-part chord legible; the gap between them is the lesson."
+                        },
+                        "command": {
+                          "type": "string",
+                          "maxLength": 46,
+                          "description": "the command that fired, e.g. \"Preferences: Open Keyboard Shortcuts\""
+                        },
+                        "result": {
+                          "type": "string",
+                          "maxLength": 62,
+                          "description": "what you SEE happen, in plain words"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        },
+                        "commandAtWord": {
+                          "type": "number",
+                          "description": "when the command fires - AFTER the last group"
+                        },
+                        "color": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "BROWSER_STEALS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "browserSteals": {
+                      "type": "object",
+                      "properties": {
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 120
+                        },
+                        "keys": {
+                          "description": "the chord, as separate caps"
+                        },
+                        "browserLabel": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "editorLabel": {
+                          "type": "string",
+                          "maxLength": 28
+                        },
+                        "browserDoes": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "what the browser does with it instead"
+                        },
+                        "editorWanted": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "what the editor would have done, and never gets to"
+                        },
+                        "atWord": {
+                          "type": "number"
+                        },
+                        "pressAtWord": {
+                          "type": "number",
+                          "description": "when the key is pressed and starts falling"
+                        },
+                        "stealAtWord": {
+                          "type": "number",
+                          "description": "when the browser catches it"
+                        },
+                        "color": {}
                       }
                     }
                   }

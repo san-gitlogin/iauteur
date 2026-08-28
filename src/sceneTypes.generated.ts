@@ -10,6 +10,8 @@ export type SceneTypeName =
   | 'TABLE_SPLIT'
   | 'GROUP_BUCKETS'
   | 'TRANSACTION_DOOR'
+  | 'KEY_CHORD'
+  | 'BROWSER_STEALS'
   | 'CURSOR_WALK'
   | 'TYPE_GATE'
   | 'DB_TWO_WAYS'
@@ -460,6 +462,35 @@ export type TransactionDoorScene = SceneCommon<'TRANSACTION_DOOR'> & { data: {
       stageAtWord?: number;
       actAtWord?: number;
       atWord?: number;
+    };
+  } };
+
+export type KeyChordScene = SceneCommon<'KEY_CHORD'> & { data: {
+    keyChord: {
+      caption?: string;
+      premise?: string;
+      groups?: unknown;
+      command?: string;
+      result?: string;
+      atWord?: number;
+      commandAtWord?: number;
+      color?: unknown;
+    };
+  } };
+
+export type BrowserStealsScene = SceneCommon<'BROWSER_STEALS'> & { data: {
+    browserSteals: {
+      caption?: string;
+      premise?: string;
+      keys?: unknown;
+      browserLabel?: string;
+      editorLabel?: string;
+      browserDoes?: string;
+      editorWanted?: string;
+      atWord?: number;
+      pressAtWord?: number;
+      stealAtWord?: number;
+      color?: unknown;
     };
   } };
 
@@ -5389,6 +5420,8 @@ export interface SceneByType {
   TABLE_SPLIT: TableSplitScene;
   GROUP_BUCKETS: GroupBucketsScene;
   TRANSACTION_DOOR: TransactionDoorScene;
+  KEY_CHORD: KeyChordScene;
+  BROWSER_STEALS: BrowserStealsScene;
   CURSOR_WALK: CursorWalkScene;
   TYPE_GATE: TypeGateScene;
   DB_TWO_WAYS: DbTwoWaysScene;
@@ -5751,6 +5784,8 @@ export type TypedScene =
   | TableSplitScene
   | GroupBucketsScene
   | TransactionDoorScene
+  | KeyChordScene
+  | BrowserStealsScene
   | CursorWalkScene
   | TypeGateScene
   | DbTwoWaysScene

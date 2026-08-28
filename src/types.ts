@@ -10130,6 +10130,51 @@ export interface DbTwoWaysData {
  * returns — one row handed to the loop per step. Each row carries its own `atWord` so the head
  * walks to the voice (LAW 0i: no explanatory component may contain a fixed frame interval).
  */
+/**
+ * KEY_CHORD — a shortcut as a sequence of simultaneous presses, not a spelling.
+ *
+ * Each group is one set of keys held together; the gap BETWEEN groups is what makes
+ * `ctrl+k ctrl+s` a two-part chord rather than four keys at once, and it is the whole
+ * misunderstanding this exists to fix. Groups carry their own anchors (LAW 0i).
+ */
+export interface KeyChordData {
+  caption?: string;
+  premise?: string;
+  /** one entry per simultaneous press, in order */
+  groups?: {keys?: string[]; atWord?: number}[];
+  /** the command that fired once the last key went down */
+  command?: string;
+  /** what you SEE happen, in plain words */
+  result?: string;
+  atWord?: number;
+  commandAtWord?: number;
+  color?: SemColor;
+}
+
+/**
+ * BROWSER_STEALS — a keypress the browser takes before the editor can see it.
+ *
+ * Not a comparison of two things: an INTERCEPTION. The key falls toward the editor and
+ * stops at the browser, which is why four chords on the Windows card have no binding in
+ * VS Code for the Web.
+ */
+export interface BrowserStealsData {
+  caption?: string;
+  premise?: string;
+  /** the chord, as separate caps */
+  keys?: string[];
+  browserLabel?: string;
+  editorLabel?: string;
+  /** what the browser does with it instead */
+  browserDoes?: string;
+  /** what the editor would have done, and never gets to */
+  editorWanted?: string;
+  atWord?: number;
+  pressAtWord?: number;
+  stealAtWord?: number;
+  color?: SemColor;
+}
+
 export interface CursorWalkData {
   caption?: string;
   premise?: string;
@@ -10445,6 +10490,8 @@ export interface SceneData {
   transactionDoor?: TransactionDoorData;
   typeGate?: TypeGateData;
   cursorWalk?: CursorWalkData;
+  keyChord?: KeyChordData;
+  browserSteals?: BrowserStealsData;
   dbTwoWays?: DbTwoWaysData;
   joinMerge?: JoinMergeData;
   placeholderSeal?: PlaceholderSealData;
