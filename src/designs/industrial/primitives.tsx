@@ -80,6 +80,9 @@ export const IndHeadline: React.FC<{text: string; color?: SemColor; startFrame?:
 // Chrome: hazard stripes top/bottom + a REC LED + faint plastic noise.
 export const IndChrome: React.FC = () => {
   const {scale, vertical} = useScale();
+  // The REC readout is a MONO label like any other; a literal 'monospace' is the one thing a
+  // theme cannot reskin, so all 30 packs would render this in the browser default.
+  const t = useTheme();
   const frame = useCurrentFrame();
   const on = frame % 40 < 24;
   const m = (vertical ? 40 : 52) * scale;
@@ -88,7 +91,7 @@ export const IndChrome: React.FC = () => {
       <div style={{position: 'absolute', inset: 0, backgroundImage: `radial-gradient(rgba(255,255,255,0.5) ${1 * scale}px, transparent ${1 * scale}px)`, backgroundSize: `${4 * scale}px ${4 * scale}px`, mixBlendMode: 'overlay', opacity: 0.04}} />
       <div style={{position: 'absolute', top: 0, left: 0, right: 0, height: 10 * scale, backgroundImage: `repeating-linear-gradient(45deg, #FF6A00 0 ${12 * scale}px, #1B1D20 ${12 * scale}px ${24 * scale}px)`, opacity: 0.85}} />
       <div style={{position: 'absolute', bottom: 0, left: 0, right: 0, height: 10 * scale, backgroundImage: `repeating-linear-gradient(45deg, #FF6A00 0 ${12 * scale}px, #1B1D20 ${12 * scale}px ${24 * scale}px)`, opacity: 0.85}} />
-      <div style={{position: 'absolute', top: m, right: m, display: 'flex', alignItems: 'center', gap: 8 * scale, fontFamily: 'monospace', fontSize: 16 * scale, letterSpacing: '0.16em', color: '#8A9099'}}>
+      <div style={{position: 'absolute', top: m, right: m, display: 'flex', alignItems: 'center', gap: 8 * scale, fontFamily: t.fonts.mono, fontSize: 16 * scale, letterSpacing: '0.16em', color: '#8A9099'}}>
         <div style={{width: 12 * scale, height: 12 * scale, borderRadius: '50%', background: on ? '#FF4A3D' : '#4A2420', boxShadow: on ? `0 0 ${8 * scale}px #FF4A3D` : undefined}} />
         REC
       </div>

@@ -465,7 +465,20 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             // So placement is solved for the whole set first: the leader leaves from the box
             // EDGE facing the label, and each label takes the best free position out of ten,
             // scored against the other boxes and the labels already placed.
-            const vx = view.x, vy = view.y, vw = view.w, vh = view.h;
+            // DECIDE AGAINST WHERE THE CAMERA IS GOING, NOT WHERE IT IS THIS FRAME.
+            //
+            // Owner, on the 9:16 cut: *"when you moved the camera to right when already a
+            // part of the code is highlighted, it moved, but the anchor dot ... stayed in the
+            // old place, and the line was cross then it moved to the new place"*. The
+            // placement was solved against the ANIMATING window, so as the view slid a
+            // candidate that had been rejected became valid and the label teleported
+            // mid-move, dragging its leader across the frame.
+            //
+            // `to` is the window this move is heading for and is constant for its whole
+            // duration, so the choice is made once. The box and the label both live in
+            // capture space inside the scaled container, so they travel WITH the camera —
+            // the geometry animates, the decision does not.
+            const vx = to.x, vy = to.y, vw = to.w, vh = to.h;
             // capture units per rendered pixel — labels are HTML sized in screen px, the
             // geometry is in capture space, and collisions have to be judged in one of them.
             const u = vw / Math.max(1, stageW);
@@ -758,7 +771,17 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           if (!(cur.keys ?? []).length) return <div style={{height: 44 * scale}} />;
           const kStart = wordToFrame(cur.keysAtWord ?? cur.atWord ?? 1);
           if (frame < kStart) return null;
-          const kp = interpolate(frame, [kStart, kStart + 10], [0, 1], clamp);
+          // A KEYPRESS IS AN EVENT, NOT A STATE. This only faded IN, so "Ctrl + P" sat on
+          // screen until the next scene cut — owner: *"it gets displayed but didnt disappear
+          // until the next video cutscene started"*. A chord happens once: it presses in over
+          // 8 frames, holds long enough to read (36f ~ 1.2s), and releases over 12.
+          const K_IN = 8, K_HOLD = 36, K_OUT = 12;
+          const kp = interpolate(
+            frame,
+            [kStart, kStart + K_IN, kStart + K_IN + K_HOLD, kStart + K_IN + K_HOLD + K_OUT],
+            [0, 1, 1, 0],
+            clamp,
+          );
           return (
             <div style={{position: 'relative', zIndex: 2, display: 'flex', gap: 8 * scale, alignItems: 'center', opacity: kp}}>
               {(cur.keys ?? []).map((key, i) => (
@@ -819,9 +842,15 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           <div
             style={{
               position: 'relative', zIndex: 2,
-              fontFamily: t.fonts.body,
-              fontSize: (fullBleed ? 26 : 22) * scale,
-              fontWeight: fullBleed ? 600 : 400,
+              // TYPOGRAPHY ROLES, as themes.ts defines them: display carries headlines and
+              // big statements, body is the deliberately invisible face for longer text. The
+              // caption is the beat's one-line takeaway — a statement — so it belongs in the
+              // theme's display face. In body it rendered as neutral Inter next to
+              // components using Space Grotesk, which is what "normal fonts" looks like.
+              fontFamily: t.fonts.display,
+              fontSize: (fullBleed ? 27 : 23) * scale,
+              fontWeight: t.style.displayWeight,
+              letterSpacing: t.style.displayTracking,
               color: hexA(t.colors.text, fullBleed ? 0.97 : 0.9),
               textAlign: 'center',
               maxWidth: fullBleed ? frameW * 0.9 : stageW,
