@@ -1,0 +1,121 @@
+{
+  "slug": "vscode-keys-act1",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "demo-keys-act1",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "prep": {
+    "files": {
+      "app.js": "const PRICE = 89.0;\n\nconst add = (a, b) => a + b;\nconst total = (n) => add(PRICE, n);\n\nconsole.log(total(11));\n",
+      "notes.md": "# Shortcuts\n\nThe ones you reach for every hour.\n\n- the palette\n- quick open\n- the terminal\n",
+      "config.json": "{\n  \"name\": \"shortcuts\",\n  \"verified\": 103\n}\n"
+    },
+    "openFile": "app.js"
+  },
+  "steps": [
+    {
+      "id": "palette",
+      "action": "keys",
+      "chord": "ctrl+shift+p",
+      "verify": "quick",
+      "focus": "editor",
+      "label": "the command palette",
+      "settleMs": 1100
+    },
+    {
+      "id": "escape-1",
+      "action": "keys",
+      "chord": "escape",
+      "verify": "anything",
+      "label": "close it again",
+      "settleMs": 600
+    },
+    {
+      "id": "quickopen",
+      "action": "keys",
+      "chord": "ctrl+p",
+      "verify": "quick",
+      "focus": "editor",
+      "label": "quick open",
+      "settleMs": 1100
+    },
+    {
+      "id": "escape-2",
+      "action": "keys",
+      "chord": "escape",
+      "verify": "anything",
+      "label": "and out",
+      "settleMs": 600
+    },
+    {
+      "id": "sidebar",
+      "action": "keys",
+      "chord": "ctrl+b",
+      "verify": "sidebarToggled",
+      "focus": "editor",
+      "label": "hide the sidebar"
+    },
+    {
+      "id": "sidebar-back",
+      "action": "keys",
+      "chord": "ctrl+b",
+      "verify": "sidebarToggled",
+      "focus": "editor",
+      "label": "and bring it back"
+    },
+    {
+      "id": "find",
+      "action": "keys",
+      "chord": "ctrl+f",
+      "verify": "find",
+      "focus": "editor",
+      "label": "find in this file",
+      "settleMs": 1100
+    },
+    {
+      "id": "escape-3",
+      "action": "keys",
+      "chord": "escape",
+      "verify": "anything",
+      "label": "close find",
+      "settleMs": 600
+    },
+    {
+      "id": "search",
+      "action": "keys",
+      "chord": "ctrl+shift+f",
+      "verify": "sidebarBodyChanged",
+      "focus": "editor",
+      "label": "search every file",
+      "settleMs": 1400
+    },
+    {
+      "id": "explorer",
+      "action": "keys",
+      "chord": "ctrl+shift+e",
+      "verify": "sidebarBodyChanged",
+      "focus": "editor",
+      "label": "back to the files",
+      "settleMs": 1200
+    },
+    {
+      "id": "terminal",
+      "action": "keys",
+      "chord": "ctrl+`",
+      "verify": "panelChanged",
+      "focus": "terminal",
+      "label": "toggle the terminal"
+    },
+    {
+      "id": "run",
+      "action": "run",
+      "cmd": "node app.js",
+      "label": "run the file",
+      "focus": "terminal",
+      "expect": {"contains": "100", "exitCode": 0},
+      "marks": [{"id": "out", "text": "100"}]
+    }
+  ],
+  "maxHoldMs": 600
+}

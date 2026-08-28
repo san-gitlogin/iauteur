@@ -289,8 +289,22 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // answer is not a guess: put the cluster on whichever side of that region has room for it.
   // A terminal at the bottom pushes the furniture to the top; an editor beat at the top
   // pushes it to the floor.
-  const clusterH = ((d.premise ? 60 : 0) + (d.caption ? 46 : 0) + (split ? 0 : 44) +
-    (anyKeys ? 48 : 0) + 34) * scale;
+  // COUNT EVERY ROW, AND THE GAPS BETWEEN THEM.
+  //
+  // This estimate was short by about ninety pixels: it forgot the 10px flex gap between each
+  // child, and it predated the animated overlay that now rides in the same column. Because the
+  // cluster is CENTRED in the gap, half of any underestimate spills upward — and upward is the
+  // code. Pulled from the finished render: the premise line sat squarely on top of `con.close()`
+  // while the rail and caption below it were correctly inside the band.
+  const hasOverlay = clips.some((c) => c.overlay);
+  const measure = (compact: boolean) => {
+    const rows = (d.premise ? 1 : 0) + (d.caption ? 1 : 0) + (split ? 0 : 1) +
+      (anyKeys && !compact ? 1 : 0) + (hasOverlay ? 1 : 0);
+    return ((d.premise ? (compact ? 30 : 60) : 0) + (d.caption ? 46 : 0) + (split ? 0 : 44) +
+      (anyKeys && !compact ? 48 : 0) + (hasOverlay ? 56 : 0) +
+      Math.max(0, rows - 1) * 10 + (compact ? 12 : 34)) * scale;
+  };
+  const clusterHFull = measure(false);
 
   // THE MARKS KNOW WHERE THE INK IS. A bbox is a PANE, not the writing in it, so "outside
   // the bbox" is not the same as "empty" — measured on an editor beat, the cluster went
@@ -321,17 +335,38 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     }
   }
   const gapH = gapBot - gapTop;
-  const hasGap = fullBleed && gapH >= clusterH + 24 * scale;
 
   // Fall back to the bbox rule when the beat marked nothing.
   const bbTopPx = bb ? (Number(bb.y) - view.y) * k : frameH;
   const bbBotPx = bb ? (Number(bb.y) + Number(bb.h) - view.y) * k : 0;
   const roomBelow = frameH - bbBotPx;
   const roomAbove = bbTopPx;
+  // WHEN NOTHING FITS, SHRINK — do not just move.
+  //
+  // Pulled from the finished render: on the parameters beat the free band between the last line
+  // of code and the terminal is about 117px, and the full cluster wants 180. Centring it, or
+  // clamping it, only chooses WHICH content it covers. The honest answer is that the furniture
+  // has to get smaller: the empty keycap row this clip never uses goes first, then the standing
+  // premise drops to a single small line. Both are furniture; the code underneath is the lesson.
+  // WHEN THERE ARE MARKS, THE INK GAP WINS — the bbox is blind to the terminal.
+  //
+  // The first attempt at this asked "does the full cluster fit ANYWHERE", and the bbox answered
+  // yes: 480px of room below the editor pane. But that room IS the terminal, which is content the
+  // bbox knows nothing about, so compact mode never fired and the premise stayed on the code. The
+  // marks are the only thing that knows where real ink is, so once a beat has any, the gap between
+  // them is the only band considered — and the cluster shrinks to fit it rather than spilling out.
+  const haveMarks = inkBands.length > 0;
+  const compact = fullBleed && haveMarks && gapH < clusterHFull + 24 * scale;
+  const clusterH = compact ? measure(true) : clusterHFull;
+  const hasGap = fullBleed && haveMarks && gapH >= clusterH + 10 * scale;
+
   const clusterAtTop = fullBleed && !hasGap && roomBelow < clusterH && roomAbove >= clusterH;
   const band = clusterAtTop ? roomAbove : roomBelow;
+  // NEVER START ABOVE THE GAP. Centring is right when the cluster fits; when it does not, the
+  // overflow must go DOWN into whatever slack is left, never up onto the work. An estimate can
+  // still be wrong — this makes being wrong harmless in the direction that matters.
   const clusterInset = hasGap
-    ? gapTop + (gapH - clusterH) / 2
+    ? Math.max(gapTop + 6 * scale, gapTop + (gapH - clusterH) / 2)
     : Math.max(20 * scale, (band - clusterH) / 2);
 
   const mono = t.fonts.mono;
@@ -348,8 +383,11 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
         maxWidth: fullBleed ? frameW * 0.9 : stageW,
         padding: fullBleed ? `0 ${40 * scale}px` : 0,
         fontFamily: t.fonts.body,
-        fontSize: 21 * scale,
-        lineHeight: 1.42,
+        fontSize: (compact ? 17 : 21) * scale,
+        lineHeight: compact ? 1.25 : 1.42,
+        // one line only when the band is tight — a wrapped premise is what lands on the code
+        ...(compact ? {whiteSpace: 'nowrap' as const, overflow: 'hidden' as const,
+                       textOverflow: 'ellipsis' as const} : {}),
         color: fullBleed ? hexA(t.colors.text, 0.95) : hexA(t.colors.text, 0.82),
         textAlign: 'center',
       }}
@@ -765,7 +803,21 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             blocks stay direct children of the column exactly as before. */}
         <div style={fullBleed
           ? {position: 'absolute', left: 0, right: 0, [hasGap || clusterAtTop ? 'top' : 'bottom']: clusterInset,
-             zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 * scale}
+             zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 * scale,
+             // A SCRIM UNDER THE CLUSTER ITSELF, not along the frame edge.
+             //
+             // The marks are a SPARSE sample of the ink — they are the lines this beat points at,
+             // not every line on screen. So the "tallest band with no marks in it" can still be
+             // full of unmarked code, and on a full IDE screen it always is: there is no empty
+             // space to find. Pulled from the finished render, the premise sat on an unmarked
+             // `print(...)` with nothing behind it, reading as two texts colliding.
+             //
+             // Covering something is unavoidable when the screen is full; being ILLEGIBLE is not.
+             // The edge gradient only helped when the cluster was against an edge, so the group
+             // now carries its own ground wherever it lands.
+             paddingTop: 14 * scale, paddingBottom: 14 * scale,
+             background: `linear-gradient(to bottom, ${hexA(t.colors.bg, 0)}, ${hexA(t.colors.bg, 0.9)} 14%, ${hexA(t.colors.bg, 0.9)} 86%, ${hexA(t.colors.bg, 0)})`,
+             backdropFilter: 'blur(3px)'}
           : {display: 'contents'}}>
           {fullBleed ? premiseNode : null}
           {/* THE EXPLAINING LAYER. Until now this group could only carry furniture — a rail, a
@@ -779,7 +831,10 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             />
           ) : null}
         {anyKeys ? (() => {
-          if (!(cur.keys ?? []).length) return <div style={{height: 44 * scale}} />;
+          // The reservation keeps the cluster from jumping between clips when one has a chord
+          // and the next does not — but 44px of nothing is not worth covering a line of code
+          // for, so it is the first thing dropped when the band is tight.
+          if (!(cur.keys ?? []).length) return compact ? null : <div style={{height: 44 * scale}} />;
           const kStart = wordToFrame(cur.keysAtWord ?? cur.atWord ?? 1);
           if (frame < kStart) return null;
           // A KEYPRESS IS AN EVENT, NOT A STATE. This only faded IN, so "Ctrl + P" sat on

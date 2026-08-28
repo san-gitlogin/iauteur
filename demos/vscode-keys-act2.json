@@ -1,0 +1,101 @@
+{
+  "slug": "vscode-keys-act2",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "demo-keys-act2",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "prep": {
+    "files": {
+      "cart.js": "const rate = 0.2;\nconst net = 100;\nconst vat = net * rate;\nconst gross = net + vat;\n\nconsole.log(rate, vat, gross);\n"
+    },
+    "openFile": "cart.js"
+  },
+  "steps": [
+    {
+      "id": "comment",
+      "action": "keys",
+      "chord": "ctrl+/",
+      "verify": "textChanged",
+      "focus": "editor",
+      "label": "comment this line out",
+      "marks": [{"id": "commented", "text": "// const rate = 0.2;"}]
+    },
+    {
+      "id": "uncomment",
+      "action": "keys",
+      "chord": "ctrl+/",
+      "verify": "textChanged",
+      "focus": "editor",
+      "label": "and back again",
+      "marks": [{"id": "plain", "text": "const rate = 0.2;"}]
+    },
+    {
+      "id": "copyline",
+      "action": "keys",
+      "chord": "shift+alt+down",
+      "verify": "textChanged",
+      "focus": "editor",
+      "label": "copy the line down"
+    },
+    {
+      "id": "deleteline",
+      "action": "keys",
+      "chord": "ctrl+shift+k",
+      "verify": "textChanged",
+      "focus": "editor",
+      "label": "delete a whole line"
+    },
+    {
+      "id": "moveline",
+      "action": "keys",
+      "chord": "alt+down",
+      "verify": "textChanged",
+      "focus": "editor",
+      "label": "move a line down"
+    },
+    {
+      "id": "multicursor",
+      "action": "keys",
+      "chord": "ctrl+alt+down",
+      "verify": "cursorsGrew",
+      "focus": "editor",
+      "label": "a second cursor"
+    },
+    {
+      "id": "undocursor",
+      "action": "keys",
+      "chord": "ctrl+u",
+      "verify": "anything",
+      "focus": "editor",
+      "label": "take it back"
+    },
+    {
+      "id": "selectline",
+      "action": "keys",
+      "chord": "ctrl+l",
+      "verify": "selectionsGrew",
+      "focus": "editor",
+      "label": "select the line"
+    },
+    {
+      "id": "fold",
+      "action": "keys",
+      "chord": "ctrl+k ctrl+0",
+      "verify": "anything",
+      "focus": "editor",
+      "label": "fold everything",
+      "settleMs": 1200
+    },
+    {
+      "id": "unfold",
+      "action": "keys",
+      "chord": "ctrl+k ctrl+j",
+      "verify": "anything",
+      "focus": "editor",
+      "label": "and unfold it",
+      "settleMs": 1200
+    }
+  ],
+  "maxHoldMs": 600
+}

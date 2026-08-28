@@ -1,0 +1,115 @@
+{
+  "slug": "vscode-keys-act3",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "demo-keys-act3",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "prep": {
+    "files": {
+      "money.ts": "export const rate = 0.2;\n\nexport const vat = (net: number): number => net * rate;\n\nexport const gross = (net: number): number => net + vat(net);\n\nconsole.log(gross(100));\n",
+      "README.md": "# Money\n\nA tiny module, so the navigation shortcuts have somewhere to go.\n\n- rate\n- vat\n- gross\n",
+      "notes.txt": "one\ntwo\nthree\nfour\nfive\nsix\nseven\neight\nnine\nten\n"
+    },
+    "openFile": "money.ts"
+  },
+  "steps": [
+    {
+      "id": "gotosymbol",
+      "action": "keys",
+      "chord": "ctrl+shift+o",
+      "verify": "quick",
+      "focus": "editor",
+      "label": "jump to a symbol",
+      "settleMs": 1400
+    },
+    {
+      "id": "escape-1",
+      "action": "keys",
+      "chord": "escape",
+      "verify": "anything",
+      "label": "out again",
+      "settleMs": 600
+    },
+    {
+      "id": "gotoline",
+      "action": "keys",
+      "chord": "ctrl+g",
+      "verify": "quick",
+      "focus": "editor",
+      "label": "jump to a line",
+      "settleMs": 1200
+    },
+    {
+      "id": "escape-2",
+      "action": "keys",
+      "chord": "escape",
+      "verify": "anything",
+      "label": "out",
+      "settleMs": 600
+    },
+    {
+      "id": "split",
+      "action": "keys",
+      "chord": "ctrl+\\",
+      "verify": "groupsGrew",
+      "focus": "editor",
+      "label": "split the editor",
+      "settleMs": 1400
+    },
+    {
+      "id": "group1",
+      "action": "keys",
+      "chord": "ctrl+1",
+      "verify": "anything",
+      "focus": "editor",
+      "label": "back to the first pane",
+      "settleMs": 1000
+    },
+    {
+      "id": "closeone",
+      "action": "keys",
+      "chord": "ctrl+w",
+      "verify": "anything",
+      "focus": "editor",
+      "label": "close an editor",
+      "settleMs": 1200
+    },
+    {
+      "id": "reopen",
+      "action": "keys",
+      "chord": "ctrl+shift+t",
+      "verify": "anything",
+      "focus": "editor",
+      "label": "and undo that close",
+      "settleMs": 1400
+    },
+    {
+      "id": "zen",
+      "action": "keys",
+      "chord": "ctrl+k z",
+      "verify": "zen",
+      "focus": "editor",
+      "label": "everything else, gone",
+      "settleMs": 1800
+    },
+    {
+      "id": "unzen",
+      "action": "keys",
+      "chord": "escape escape",
+      "verify": "anything",
+      "label": "and back",
+      "settleMs": 1600
+    },
+    {
+      "id": "keyboard",
+      "action": "keys",
+      "chord": "ctrl+k ctrl+s",
+      "verify": "anything",
+      "focus": "editor",
+      "label": "the shortcut list itself",
+      "settleMs": 2000
+    }
+  ],
+  "maxHoldMs": 600
+}

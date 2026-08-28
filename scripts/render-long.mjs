@@ -95,17 +95,24 @@ execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', mute, '-i', track,
 
 // VERIFY, do not assume. Frame count must equal the spec's, and drift must be ~0 — both were
 // wrong once and both were only caught because they were measured.
-const probe = (args) => String(execFileSync('ffprobe', args, {encoding: 'utf8'})).trim();
+// ffprobe's `csv=p=0` emits a TRAILING COMMA and a CR, so `27382,\r` came back — and
+// `Number('27382,')` is NaN, which made a perfect render report MISMATCH and a drift of NaN ms.
+// A verifier that cries wolf is worse than none: strip to the number and mean it.
+const probe = (args) => {
+  const raw = String(execFileSync('ffprobe', args, {encoding: 'utf8'}));
+  const m = /-?\d+(?:\.\d+)?/.exec(raw);
+  return m ? Number(m[0]) : NaN;
+};
 const vFrames = probe(['-v', 'error', '-select_streams', 'v:0', '-count_frames',
   '-show_entries', 'stream=nb_read_frames', '-of', 'csv=p=0', final]);
-const vDur = Number(probe(['-v', 'error', '-select_streams', 'v:0',
-  '-show_entries', 'stream=duration', '-of', 'csv=p=0', final]));
-const aDur = Number(probe(['-v', 'error', '-select_streams', 'a:0',
-  '-show_entries', 'stream=duration', '-of', 'csv=p=0', final]));
+// the VIDEO stream's own duration is absent in some muxes; the container's is always there
+const vDur = probe(['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', final]);
+const aDur = probe(['-v', 'error', '-select_streams', 'a:0',
+  '-show_entries', 'stream=duration', '-of', 'csv=p=0', final]);
 
 console.log(`\n${final}`);
-console.log(`  frames: ${vFrames} (spec says ${total})  ${Number(vFrames) === total ? 'EXACT' : 'MISMATCH'}`);
+console.log(`  frames: ${vFrames} (spec says ${total})  ${vFrames === total ? 'EXACT' : 'MISMATCH'}`);
 console.log(`  drift : ${Math.round((vDur - aDur) * 1000)} ms`);
 console.log(`  free  : ${free()} GB`);
 fs.rmSync(work, {recursive: true, force: true});
-if (Number(vFrames) !== total) process.exitCode = 1;
+if (vFrames !== total) process.exitCode = 1;
