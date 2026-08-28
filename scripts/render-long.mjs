@@ -30,7 +30,11 @@ const total = spec.scenes.reduce((a, s) => a + s.durationFrames, 0);
 const outDir = path.resolve(`topics/${slug}/out`);
 const work = path.resolve(`out/render-${slug}`);
 fs.mkdirSync(outDir, {recursive: true});
-fs.rmSync(work, {recursive: true, force: true});
+// RESUMABLE. A long render is the one job most likely to be interrupted — the machine is wanted
+// for something else, or it is simply late. Wiping the work directory on start threw away two
+// finished segments and an hour of rendering the first time this was paused. Finished segments are
+// kept and skipped; `--fresh` is there for when the spec has actually changed.
+if (process.argv.includes('--fresh')) fs.rmSync(work, {recursive: true, force: true});
 fs.mkdirSync(work, {recursive: true});
 
 const REMOTION = path.resolve('node_modules/@remotion/cli/remotion-cli.js');
@@ -51,6 +55,13 @@ for (let i = 0; i < segments; i++) {
   const end = Math.min(total - 1, start + per - 1);
   if (start > end) break;
   const part = path.join(work, `seg-${String(i).padStart(2, '0')}.mp4`);
+  // Already done on an earlier run? Keep it. A segment is only written once ffmpeg has finished
+  // it, so a file being present means it is complete rather than half-written.
+  if (fs.existsSync(part) && fs.statSync(part).size > 0) {
+    console.log(`[${i + 1}/${segments}] frames ${start}-${end}  — already rendered, skipping`);
+    parts.push(part);
+    continue;
+  }
   console.log(`\n[${i + 1}/${segments}] frames ${start}-${end}  (free ${free()} GB)`);
   execFileSync('node', [REMOTION, 'render', comp, part,
     `--frames=${start}-${end}`, '--muted', '--concurrency=2',
