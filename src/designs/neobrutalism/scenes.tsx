@@ -6,50 +6,30 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {NeoBox, NeoHeadline, NeoTag, CREAM, INK} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const TILTS = [-2, 1.5, -1.5, 2, -1];
 
 // HOOK — big tilted headline, hero sticker, pop subtext tag.
 export const NeoHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
-  const sem = useSem();
   const {scale, vertical} = useScale();
-  const d = scene.data;
+  const sem = useSem();
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 44 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <NeoBox fill={CREAM} shadow={sem('purple')} rotate={-3} style={{padding: `${26 * scale}px`}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 150 : 140) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: sem('purple'),
+        headlineStyle: {fontWeight: 900, letterSpacing: '-0.04em', textTransform: 'uppercase', lineHeight: 0.98},
+        mark: (size) => (
+          <NeoBox fill={CREAM} shadow={sem('purple')} rotate={-3} style={{padding: size * 0.18}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </NeoBox>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 900,
-          fontSize: (vertical ? 92 : 108) * scale,
-          letterSpacing: '-0.04em',
-          textTransform: 'uppercase',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '90%',
-          lineHeight: 0.98,
-          transform: 'rotate(-1deg)',
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
-          <NeoTag text={d.subtext} color="yellow" rotate={2} />
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+        sub: (text) => <NeoTag text={text} color="yellow" rotate={2} />,
+      }}
+    />
   );
 };
 

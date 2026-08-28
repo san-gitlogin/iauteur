@@ -6,51 +6,34 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {VaporPanel, VaporHeadline, VaporPrompt} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const SUNSET = 'linear-gradient(180deg, #FFE95C 0%, #FF9900 38%, #FF00FF 78%, #B85CFF 100%)';
 
 // HOOK — gradient headline, glowing hero, terminal subtext.
 export const VaporHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 44 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), filter: `drop-shadow(0 0 ${20 * scale}px ${hexA('#FF00FF', 0.7)})`}}>
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 180 : 165) * scale} />
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 800,
-          fontSize: (vertical ? 88 : 104) * scale,
-          letterSpacing: '0.02em',
-          textTransform: 'uppercase',
-          textAlign: 'center',
-          maxWidth: '90%',
-          lineHeight: 1.0,
-          backgroundImage: SUNSET,
-          WebkitBackgroundClip: 'text',
-          backgroundClip: 'text',
-          color: 'transparent',
-          WebkitTextFillColor: 'transparent',
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: '#FF00FF',
+        headlineStyle: {
+          fontWeight: 800, letterSpacing: '0.02em', textTransform: 'uppercase', lineHeight: 1.0,
+          backgroundImage: SUNSET, WebkitBackgroundClip: 'text', backgroundClip: 'text',
+          color: 'transparent', WebkitTextFillColor: 'transparent',
           filter: `drop-shadow(0 0 ${18 * scale}px ${hexA('#FF00FF', 0.55)})`,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
-          <VaporPrompt text={d.subtext} color="blue" />
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        },
+        mark: (size) => (
+          <div style={{filter: `drop-shadow(0 0 ${20 * scale}px ${hexA('#FF00FF', 0.7)})`}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+          </div>
+        ),
+        sub: (text) => <VaporPrompt text={text} color="blue" />,
+      }}
+    />
   );
 };
 

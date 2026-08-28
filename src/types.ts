@@ -2126,6 +2126,28 @@ export interface RecordedClip {
    * measured; `at: "full"` pulls back out to the whole capture.
    */
   zooms?: Array<{mark?: string; at?: 'full'; atWord?: number}>;
+  /**
+   * An ANIMATED explainer that floats over this clip's footage, in the same measured
+   * ink-free band as the caption — so it annotates the recording instead of hiding it.
+   *   swap   one word becomes another   {from, to}
+   *   chain  a token travels a pipeline {steps[]}
+   *   split  one input, two fates       {left, right, leftNote, rightNote}
+   *   tally  a number counts up         {value, label}
+   */
+  overlay?: {
+    kind?: 'swap' | 'chain' | 'split' | 'tally';
+    atWord?: number;
+    from?: string;
+    to?: string;
+    steps?: string[];
+    left?: string;
+    right?: string;
+    leftNote?: string;
+    rightNote?: string;
+    value?: string;
+    label?: string;
+    color?: SemColor;
+  };
   /** Dim everything but the bbox for this step. */
   spotlight?: boolean;
   /** THE anchor: the word at which this segment starts playing. */
@@ -10607,6 +10629,14 @@ export interface SceneData {
   heroAsset?: string | null;
   headlineAtWord?: number;
   heroAtWord?: number;
+  /**
+   * WHICH OPENING SILHOUETTE this video uses. Omit and one is chosen from the headline itself,
+   * so two videos do not open with the same shape and a re-render never changes its own opening.
+   *   stack | statement | ask | figure | reveal | lowerthird | plaque
+   * `ask` needs a question in the headline, `figure` a real number in the copy, `reveal` a
+   * heroAsset; authoring one without its ingredient falls through to the framed default.
+   */
+  hookVariant?: 'stack' | 'statement' | 'ask' | 'figure' | 'reveal' | 'lowerthird' | 'plaque';
   // TITLE_CARD
   title?: string;
   subtitle?: string;

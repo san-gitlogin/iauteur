@@ -6,51 +6,36 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Panel, Screen, LED, Hazard, IndHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const LEDS: Array<'orange' | 'green' | 'yellow' | 'blue'> = ['orange', 'green', 'yellow', 'blue'];
 
 // HOOK — hero mounted in a steel panel, mono status row, grotesk headline.
 export const IndHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 46 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 800, textTransform: 'uppercase', letterSpacing: '-0.01em', lineHeight: 1.02},
+        mark: (size) => (
           <Panel style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <Screen color="orange" style={{width: (vertical ? 220 : 208) * scale, height: (vertical ? 220 : 208) * scale, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0}}>
-              <AssetIcon asset={d.heroAsset} size={(vertical ? 112 : 104) * scale} />
+            <Screen color="orange" style={{width: size * 2, height: size * 2, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0}}>
+              <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
             </Screen>
           </Panel>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 800,
-          fontSize: (vertical ? 76 : 90) * scale,
-          textTransform: 'uppercase',
-          letterSpacing: '-0.01em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '90%',
-          lineHeight: 1.02,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps), display: 'flex', alignItems: 'center', gap: 14 * scale, fontFamily: t.fonts.mono, fontSize: 26 * scale, letterSpacing: '0.1em', textTransform: 'uppercase', color: t.colors.muted}}>
-          <LED color="orange" size={16} />
-          {d.subtext}
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+        sub: (text) => (
+          <span style={{display: 'inline-flex', alignItems: 'center', gap: 14 * scale, fontFamily: t.fonts.mono, fontSize: 26 * scale, letterSpacing: '0.1em', textTransform: 'uppercase', color: t.colors.muted}}>
+            <LED color="orange" size={16} />
+            {text}
+          </span>
+        ),
+      }}
+    />
   );
 };
 

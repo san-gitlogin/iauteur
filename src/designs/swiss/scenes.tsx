@@ -6,63 +6,28 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {SwissHeadline, SwissRule, SwissIndex, useSwissMargins} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — giant flush-left statement, red bar, hero glyph top-right.
 export const SwissHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
-  const sem = useSem();
-  const {left, right, scale, vertical} = useSwissMargins();
-  const d = scene.data;
+  const {scale, vertical} = useScale();
   return (
-    <AbsoluteFill>
-      <div style={{position: 'absolute', left, right, top: (vertical ? 300 : 300) * scale}}>
-        <div style={{marginBottom: 20 * scale}}>
-          <SwissIndex n={1} color="red" />
-        </div>
-        <div
-          style={{
-            ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-            fontFamily: t.fonts.display,
-            fontWeight: 900,
-            fontSize: (vertical ? 92 : 118) * scale,
-            letterSpacing: '-0.04em',
-            textTransform: 'uppercase',
-            lineHeight: 0.94,
-            color: t.colors.text,
-          }}
-        >
-          {d.headline}
-        </div>
-        <div style={{marginTop: 28 * scale, maxWidth: '70%'}}>
-          <SwissRule color="red" weight={3} delay={wordToFrame(d.headlineAtWord) + 8} />
-        </div>
-        {d.subtext ? (
-          <div
-            style={{
-              ...fadeUp(frame, wordToFrame(d.headlineAtWord) + 12, fps),
-              marginTop: 22 * scale,
-              fontFamily: t.fonts.mono,
-              fontWeight: 500,
-              fontSize: 30 * scale,
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: t.colors.muted,
-            }}
-          >
-            {d.subtext}
-          </div>
-        ) : null}
-      </div>
-      {d.heroAsset ? (
-        <div style={{position: 'absolute', top: (vertical ? 150 : 110) * scale, right: left, ...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 120 : 130) * scale} />
-        </div>
-      ) : null}
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 900, letterSpacing: '-0.04em', textTransform: 'uppercase', lineHeight: 0.94},
+        mark: (size) => <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />,
+        kicker: () => <SwissIndex n={1} color="red" />,
+        divider: () => <div style={{width: (vertical ? 420 : 520) * scale}}><SwissRule color="red" weight={3} delay={0} /></div>,
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.mono, fontWeight: 500, fontSize: 30 * scale, letterSpacing: '0.14em', textTransform: 'uppercase', color: t.colors.muted}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

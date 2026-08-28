@@ -6,6 +6,7 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Sticker, Shape, PgHeadline, dotPattern} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const CYC: Array<'purple' | 'red' | 'yellow' | 'green'> = ['purple', 'red', 'yellow', 'green'];
@@ -13,44 +14,26 @@ const TILT = [-3, 2.5, -2, 3, -1.5];
 
 // HOOK — hero in a leaf sticker, highlighter headline, pill subtext.
 export const PgHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
-  const sem = useSem();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 46 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Sticker color="purple" index={0} rotate={-3} style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: (vertical ? 240 : 224) * scale, height: (vertical ? 240 : 224) * scale}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 116 : 108) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 800, letterSpacing: '-0.01em', lineHeight: 1.04},
+        mark: (size) => (
+          <Sticker color="purple" index={0} rotate={-3} style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: size * 2.07, height: size * 2.07}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </Sticker>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 800,
-          fontSize: (vertical ? 82 : 96) * scale,
-          letterSpacing: '-0.01em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '88%',
-          lineHeight: 1.04,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
+        ),
+        sub: (text) => (
           <Sticker color="yellow" index={2} rotate={2} style={{padding: `${12 * scale}px ${30 * scale}px`}}>
-            <span style={{fontFamily: t.fonts.body, fontWeight: 700, fontSize: 28 * scale, color: t.colors.text}}>{d.subtext}</span>
+            <span style={{fontFamily: t.fonts.body, fontWeight: 700, fontSize: 28 * scale, color: t.colors.text}}>{text}</span>
           </Sticker>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+      }}
+    />
   );
 };
 

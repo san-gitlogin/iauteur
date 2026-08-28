@@ -6,47 +6,33 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Card, Glow, Hairline, Kicker, SdHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — hero in a calm card over an ambient amber glow, clean headline.
 export const SdHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 52 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <Glow size={420} style={{left: '50%', top: '50%', transform: 'translate(-50%,-50%)'}} />
-          <Card style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: (vertical ? 236 : 220) * scale, height: (vertical ? 236 : 220) * scale}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 112 : 104) * scale} />
-          </Card>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 600,
-          fontSize: (vertical ? 76 : 88) * scale,
-          letterSpacing: '-0.02em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '84%',
-          lineHeight: 1.08,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps), fontFamily: t.fonts.body, fontWeight: 400, fontSize: 30 * scale, color: t.colors.muted, textAlign: 'center', maxWidth: '66%', lineHeight: 1.5}}>
-          {d.subtext}
-        </div>
-      ) : null}
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.08},
+        mark: (size) => (
+          <div style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <Glow size={size * 4 / scale} style={{left: '50%', top: '50%', transform: 'translate(-50%,-50%)'}} />
+            <Card style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: size * 2.1, height: size * 2.1}}>
+              <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+            </Card>
+          </div>
+        ),
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.body, fontWeight: 400, fontSize: 30 * scale, color: t.colors.muted, lineHeight: 1.5}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

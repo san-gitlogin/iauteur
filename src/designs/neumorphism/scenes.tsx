@@ -6,49 +6,35 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {NeuRaised, NeuInset, NeuHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — hero in a raised disc, embossed headline, inset pill subtext.
 export const NeuHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 46 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <NeuRaised circle style={{width: (vertical ? 220 : 210) * scale, height: (vertical ? 220 : 210) * scale, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 110 : 104) * scale} />
-          </NeuRaised>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 800,
-          fontSize: (vertical ? 84 : 100) * scale,
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '88%',
-          lineHeight: 1.02,
-          letterSpacing: '-0.02em',
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {
+          fontWeight: 800, lineHeight: 1.02, letterSpacing: '-0.02em',
           textShadow: `-${1.5 * scale}px -${1.5 * scale}px ${3 * scale}px rgba(255,255,255,0.06), ${1.5 * scale}px ${1.5 * scale}px ${3 * scale}px rgba(0,0,0,0.55)`,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
+        },
+        mark: (size) => (
+          <NeuRaised circle style={{width: size * 2, height: size * 2, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+          </NeuRaised>
+        ),
+        sub: (text) => (
           <NeuInset style={{padding: `${12 * scale}px ${28 * scale}px`}}>
-            <span style={{fontFamily: t.fonts.body, fontWeight: 600, fontSize: 28 * scale, color: t.colors.muted}}>{d.subtext}</span>
+            <span style={{fontFamily: t.fonts.body, fontWeight: 600, fontSize: 28 * scale, color: t.colors.muted}}>{text}</span>
           </NeuInset>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+      }}
+    />
   );
 };
 

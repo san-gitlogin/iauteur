@@ -6,6 +6,7 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Loud, Star, Burst, MaxHeadline, ACC, clash} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const TILT = [-3, 2.5, -2, 3, -1.5];
@@ -13,48 +14,31 @@ const GRAD = 'linear-gradient(90deg, #FF3AF2, #FFE600, #00F5D4)';
 
 // HOOK — hero in a loud card, gradient headline, sticker subtext, sparkles.
 export const MaxHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 46 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Loud index={0} rotate={-3} style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: (vertical ? 240 : 224) * scale, height: (vertical ? 240 : 224) * scale}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 116 : 108) * scale} />
-          </Loud>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 900,
-          fontSize: (vertical ? 80 : 94) * scale,
-          textTransform: 'uppercase',
-          letterSpacing: '-0.01em',
-          textAlign: 'center',
-          maxWidth: '90%',
-          lineHeight: 1.02,
-          backgroundImage: GRAD,
-          WebkitBackgroundClip: 'text',
-          backgroundClip: 'text',
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {
+          fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.01em', lineHeight: 1.02,
+          backgroundImage: GRAD, WebkitBackgroundClip: 'text', backgroundClip: 'text',
           color: 'transparent',
           filter: `drop-shadow(0 0 ${14 * scale}px rgba(255,58,242,0.45))`,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
-          <Loud index={2} rotate={2} badge={false} style={{padding: `${12 * scale}px ${30 * scale}px`}}>
-            <span style={{fontFamily: t.fonts.body, fontWeight: 800, fontSize: 28 * scale, color: t.colors.text}}>{d.subtext}</span>
+        },
+        mark: (size) => (
+          <Loud index={0} rotate={-3} style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: size * 2.07, height: size * 2.07}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </Loud>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+        sub: (text) => (
+          <Loud index={2} rotate={2} badge={false} style={{padding: `${12 * scale}px ${30 * scale}px`}}>
+            <span style={{fontFamily: t.fonts.body, fontWeight: 800, fontSize: 28 * scale, color: t.colors.text}}>{text}</span>
+          </Loud>
+        ),
+      }}
+    />
   );
 };
 

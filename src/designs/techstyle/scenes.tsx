@@ -6,50 +6,33 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Card, GradTile, LiveBadge, Ring, TsHeadline, gradText} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — hero in a floating elevated card (gradient tile + ring), serif headline.
 export const TsHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
-  const bob = Math.sin(frame / 26) * 8 * scale;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 48 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), position: 'relative', transform: `translateY(${bob}px)`}}>
-          <Ring size={vertical ? 300 : 280} style={{left: '50%', top: '50%', transform: 'translate(-50%,-50%)'}} />
-          <Card style={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 30 * scale}}>
-            <GradTile size={vertical ? 176 : 164} radius={32}>
-              <AssetIcon asset={d.heroAsset} size={(vertical ? 100 : 92) * scale} />
-            </GradTile>
-          </Card>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 600,
-          fontSize: (vertical ? 80 : 94) * scale,
-          letterSpacing: '-0.01em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '86%',
-          lineHeight: 1.04,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
-          <LiveBadge label={d.subtext} />
-        </div>
-      ) : null}
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.04},
+        mark: (size) => (
+          <div style={{position: 'relative'}}>
+            <Ring size={size * 3 / scale} style={{left: '50%', top: '50%', transform: 'translate(-50%,-50%)'}} />
+            <Card style={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: size * 0.3}}>
+              <GradTile size={size * 1.78 / scale} radius={32}>
+                <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+              </GradTile>
+            </Card>
+          </div>
+        ),
+        sub: (text) => <LiveBadge label={text} />,
+      }}
+    />
   );
 };
 

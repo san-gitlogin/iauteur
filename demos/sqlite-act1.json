@@ -43,6 +43,10 @@
         {
           "id": "ver",
           "text": "3.53.4"
+        },
+        {
+          "id": "cmd",
+          "text": "sq -version"
         }
       ]
     },
@@ -61,6 +65,14 @@
         {
           "id": "notnull",
           "text": "name  TEXT    NOT NULL,"
+        },
+        {
+          "id": "pk",
+          "text": "id    INTEGER PRIMARY KEY,"
+        },
+        {
+          "id": "real",
+          "text": "price REAL    NOT NULL"
         }
       ]
     },
@@ -70,7 +82,13 @@
       "cmd": "sq shop.db \".read schema.sql\"",
       "label": "make the table",
       "focus": "terminal",
-      "holdMs": 700
+      "holdMs": 700,
+      "marks": [
+        {
+          "id": "cmd",
+          "text": ".read schema.sql"
+        }
+      ]
     },
     {
       "id": "strict-error",
@@ -87,6 +105,10 @@
         {
           "id": "err",
           "text": "cannot store TEXT value in REAL column products.price"
+        },
+        {
+          "id": "bad",
+          "text": "'not-a-number'"
         }
       ]
     },
@@ -96,7 +118,13 @@
       "cmd": "sq shop.db \".read seed.sql\"",
       "label": "put four rows in",
       "focus": "terminal",
-      "holdMs": 700
+      "holdMs": 700,
+      "marks": [
+        {
+          "id": "cmd",
+          "text": ".read seed.sql"
+        }
+      ]
     },
     {
       "id": "select",
@@ -116,6 +144,10 @@
         {
           "id": "mon",
           "text": "27-inch monitor"
+        },
+        {
+          "id": "hdr",
+          "text": "price"
         }
       ]
     },
@@ -133,6 +165,10 @@
         {
           "id": "cheap",
           "text": "Desk lamp"
+        },
+        {
+          "id": "cmd",
+          "text": "WHERE price < 60"
         }
       ]
     },
@@ -150,6 +186,10 @@
         {
           "id": "top",
           "text": "27-inch monitor"
+        },
+        {
+          "id": "cmd",
+          "text": "ORDER BY price DESC LIMIT 3"
         }
       ]
     },
@@ -167,6 +207,10 @@
         {
           "id": "newprice",
           "text": "79.0"
+        },
+        {
+          "id": "cmd",
+          "text": "RETURNING name, price"
         }
       ]
     },
@@ -184,6 +228,10 @@
         {
           "id": "n",
           "text": "rows_deleted"
+        },
+        {
+          "id": "cmd",
+          "text": "SELECT changes() AS rows_deleted"
         }
       ]
     },
@@ -201,6 +249,10 @@
         {
           "id": "sch",
           "text": "CREATE TABLE products ("
+        },
+        {
+          "id": "strict",
+          "text": ") STRICT;"
         }
       ]
     },
@@ -218,6 +270,10 @@
         {
           "id": "file",
           "text": "shop.db"
+        },
+        {
+          "id": "size",
+          "text": "8192"
         }
       ]
     }

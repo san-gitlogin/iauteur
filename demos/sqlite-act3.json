@@ -45,6 +45,14 @@
         {
           "id": "connect",
           "text": "con = sqlite3.connect(\"shop.db\")"
+        },
+        {
+          "id": "cursor",
+          "text": "cur = con.cursor()"
+        },
+        {
+          "id": "loop",
+          "text": "for name, price in cur.execute("
         }
       ],
       "holdMs": 1400
@@ -62,6 +70,10 @@
         {
           "id": "firstrow",
           "text": "27-inch monitor"
+        },
+        {
+          "id": "top",
+          "text": "240.00"
         }
       ],
       "holdMs": 1300
@@ -77,6 +89,10 @@
         {
           "id": "rf",
           "text": "con.row_factory = sqlite3.Row"
+        },
+        {
+          "id": "byname",
+          "text": "row[\"name\"]"
         }
       ]
     },
@@ -115,6 +131,14 @@
         {
           "id": "unsafe",
           "text": "cur.execute(f\"SELECT name, price FROM products WHERE name = '{evil}'\")"
+        },
+        {
+          "id": "wanted",
+          "text": "wanted = \"USB-C hub\""
+        },
+        {
+          "id": "evil",
+          "text": "evil = \"' OR 1=1 --\""
         }
       ],
       "holdMs": 1800
@@ -154,6 +178,10 @@
         {
           "id": "many",
           "text": "inserted: 3 rows in one call"
+        },
+        {
+          "id": "total",
+          "text": "total now:"
         }
       ]
     },
@@ -170,6 +198,10 @@
         {
           "id": "count",
           "text": "rows now: 8"
+        },
+        {
+          "id": "newid",
+          "text": "new row id: 8"
         }
       ],
       "holdMs": 1400
@@ -185,6 +217,10 @@
         {
           "id": "rb",
           "text": "con.rollback()"
+        },
+        {
+          "id": "del",
+          "text": "cur.execute(\"DELETE FROM products\")"
         }
       ]
     },

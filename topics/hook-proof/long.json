@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "topic": "Hook Variants",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "proof",
+    "openLoop": "proof",
+    "analogy": "proof"
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "background": "plain",
+    "logo": "img:channel_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "v1",
+      "type": "HOOK",
+      "narration": "The framed opening, where the box draws itself around the words.",
+      "data": {
+        "hookVariant": "plaque",
+        "headline": "NO SERVER",
+        "subtext": "a database that is one file",
+        "heroAsset": "lucide:file",
+        "headlineAtWord": 1,
+        "heroAtWord": 6
+      },
+      "durationFrames": 96,
+      "background": "zoneA"
+    },
+    {
+      "id": "v2",
+      "type": "HOOK",
+      "narration": "The bold claim, set flush left, one word landing at a time.",
+      "data": {
+        "hookVariant": "statement",
+        "headline": "IT IS JUST A FILE",
+        "subtext": "no daemon, no port, no password",
+        "headlineAtWord": 1
+      },
+      "durationFrames": 96,
+      "background": "zoneB"
+    },
+    {
+      "id": "v3",
+      "type": "HOOK",
+      "narration": "The curiosity gap, with the mark itself as the whole set.",
+      "data": {
+        "hookVariant": "ask",
+        "headline": "WHERE DOES IT LIVE?",
+        "subtext": "you never installed a server",
+        "headlineAtWord": 1,
+        "heroAtWord": 2
+      },
+      "durationFrames": 96,
+      "background": "zoneC"
+    },
+    {
+      "id": "v4",
+      "type": "HOOK",
+      "narration": "The data hook, where the number counts up to its answer.",
+      "data": {
+        "hookVariant": "figure",
+        "headline": "8192 BYTES ON DISK",
+        "subtext": "the whole database, weighed",
+        "headlineAtWord": 4,
+        "heroAtWord": 1
+      },
+      "durationFrames": 96,
+      "background": "zoneA"
+    },
+    {
+      "id": "v5",
+      "type": "HOOK",
+      "narration": "The result hook, showing the thing before anybody names it.",
+      "data": {
+        "hookVariant": "reveal",
+        "headline": "ONE QUOTE",
+        "subtext": "and the whole table walks out",
+        "heroAsset": "lucide:database",
+        "headlineAtWord": 5,
+        "heroAtWord": 1
+      },
+      "durationFrames": 96,
+      "background": "zoneB"
+    },
+    {
+      "id": "v6",
+      "type": "HOOK",
+      "narration": "The cold open, sitting low and left like a caption under a running scene.",
+      "data": {
+        "hookVariant": "lowerthird",
+        "headline": "FOUR ROWS CAME BACK",
+        "subtext": "chapter one",
+        "heroAsset": "lucide:table",
+        "headlineAtWord": 1
+      },
+      "durationFrames": 96,
+      "background": "zoneC"
+    },
+    {
+      "id": "v7",
+      "type": "HOOK",
+      "narration": "The original stack, kept because a short punchy line still wants it.",
+      "data": {
+        "hookVariant": "stack",
+        "headline": "DEAD IN 3 DAYS",
+        "subtext": "a 72-hour lifespan",
+        "heroAsset": "lucide:skull",
+        "headlineAtWord": 1,
+        "heroAtWord": 5
+      },
+      "durationFrames": 96,
+      "background": "zoneA"
+    },
+    {
+      "id": "v8",
+      "type": "HOOK",
+      "narration": "No variant authored here, so the headline picks its own silhouette.",
+      "data": {
+        "headline": "WHY IS IT SO FAST?",
+        "subtext": "nobody optimised anything",
+        "heroAsset": "lucide:zap",
+        "headlineAtWord": 1,
+        "heroAtWord": 4
+      },
+      "durationFrames": 96,
+      "background": "zoneB"
+    },
+    {
+      "id": "v9",
+      "type": "HOOK",
+      "narration": "Another automatic pick, from copy that carries a real number.",
+      "data": {
+        "headline": "300 MILLISECONDS",
+        "subtext": "down from nineteen seconds",
+        "headlineAtWord": 3,
+        "heroAtWord": 1
+      },
+      "durationFrames": 96,
+      "background": "zoneC"
+    },
+    {
+      "id": "v10",
+      "type": "HOOK",
+      "narration": "A third automatic pick, on plain copy with nothing special in it.",
+      "data": {
+        "headline": "THE INDEX IS A BOOK",
+        "subtext": "and the page numbers are real",
+        "heroAsset": "lucide:book-open",
+        "headlineAtWord": 1,
+        "heroAtWord": 5
+      },
+      "durationFrames": 96,
+      "background": "zoneA"
+    }
+  ]
+}

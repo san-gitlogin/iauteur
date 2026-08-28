@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Sequence, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {useTheme, wordToFrame} from '../themes';
+import {StepOverlay} from '../recordedOverlay';
 import {Headline, SourceFooter, useScale, useSem, hexA} from '../ui';
 import {ClipVideo} from '../video';
 import {easeInOutCubic} from '../motion/util';
@@ -767,6 +768,16 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
              zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 * scale}
           : {display: 'contents'}}>
           {fullBleed ? premiseNode : null}
+          {/* THE EXPLAINING LAYER. Until now this group could only carry furniture — a rail, a
+              keycap, a caption. An overlay that ANIMATES what the command is doing rides here
+              too, in the same measured ink-free band, so it still covers nothing. */}
+          {cur.overlay ? (
+            <StepOverlay
+              data={cur.overlay as any}
+              fallbackAtWord={cur.atWord}
+              maxWidth={(fullBleed ? frameW * 0.86 : stageW)}
+            />
+          ) : null}
         {anyKeys ? (() => {
           if (!(cur.keys ?? []).length) return <div style={{height: 44 * scale}} />;
           const kStart = wordToFrame(cur.keysAtWord ?? cur.atWord ?? 1);

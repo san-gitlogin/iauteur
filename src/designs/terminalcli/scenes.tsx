@@ -6,51 +6,42 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {TermCursor, TermWindow, glow} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — shell prompt + all-caps headline with a blinking cursor.
 export const TermHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 40 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), filter: `drop-shadow(0 0 ${16 * scale}px ${hexA(t.colors.accent, 0.6)})`}}>
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 150 : 140) * scale} />
-        </div>
-      ) : null}
-      <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) - 2, fps), fontFamily: t.fonts.mono, fontSize: 30 * scale, color: t.colors.accent2, ...glow(scale, '#ffb000')}}>
-        <span style={{color: t.colors.muted}}>$ </span>
-        run --query
-      </div>
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.mono,
-          fontWeight: 700,
-          fontSize: (vertical ? 74 : 92) * scale,
-          textTransform: 'uppercase',
-          color: t.colors.accent,
-          textAlign: 'center',
-          maxWidth: '90%',
-          lineHeight: 1.05,
-          ...glow(scale, '#33ff00'),
-        }}
-      >
-        {d.headline}
-        <TermCursor fontSize={(vertical ? 74 : 92) * scale} />
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps), fontFamily: t.fonts.mono, fontSize: 28 * scale, color: t.colors.muted}}>
-          <span style={{color: t.colors.accent2}}># </span>
-          {d.subtext}
-        </div>
-      ) : null}
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {
+          fontFamily: t.fonts.mono, fontWeight: 700, textTransform: 'uppercase',
+          color: t.colors.accent, lineHeight: 1.05, ...glow(scale, '#33ff00'),
+        },
+        mark: (size) => (
+          <div style={{filter: `drop-shadow(0 0 ${16 * scale}px ${hexA(t.colors.accent, 0.6)})`}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+          </div>
+        ),
+        kicker: () => (
+          <span style={{fontFamily: t.fonts.mono, fontSize: 30 * scale, color: t.colors.accent2, ...glow(scale, '#ffb000')}}>
+            <span style={{color: t.colors.muted}}>$ </span>
+            run --query
+          </span>
+        ),
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.mono, fontSize: 28 * scale, color: t.colors.muted}}>
+            <span style={{color: t.colors.accent2}}># </span>
+            {text}
+          </span>
+        ),
+      }}
+    />
   );
 };
 

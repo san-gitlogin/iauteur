@@ -99,7 +99,7 @@
               ],
               "id": "open-params",
               "src": "rec/sqlite-act3/seg-05.mp4",
-              "frames": 208,
+              "frames": 210,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -117,6 +117,18 @@
                   "x": 428,
                   "y": 306,
                   "w": 693,
+                  "h": 22
+                },
+                "wanted": {
+                  "x": 428,
+                  "y": 186,
+                  "w": 198,
+                  "h": 22
+                },
+                "evil": {
+                  "x": 428,
+                  "y": 282,
+                  "w": 198,
                   "h": 22
                 }
               },
@@ -156,7 +168,7 @@
               ],
               "id": "run-params",
               "src": "rec/sqlite-act3/seg-06.mp4",
-              "frames": 101,
+              "frames": 109,
               "bbox": {
                 "x": 348,
                 "y": 578,

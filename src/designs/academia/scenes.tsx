@@ -6,36 +6,37 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {LibPlate, LibRule, LibHeadline, WaxSeal} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const roman = (n: number) => ['I', 'II', 'III', 'IV', 'V'][n - 1] ?? String(n);
 
 // HOOK — book-plate framed serif headline + brass rule + hero.
 export const LibHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center'}}>
-      <LibPlate style={{width: vertical ? '88%' : (1080 * scale + 'px')}}>
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 26 * scale}}>
-          {d.heroAsset ? (
-            <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), filter: `sepia(0.4) drop-shadow(0 0 ${14 * scale}px ${hexA(t.colors.accent, 0.5)})`}}>
-              <AssetIcon asset={d.heroAsset} size={(vertical ? 120 : 110) * scale} />
-            </div>
-          ) : null}
-          <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord), fps), fontFamily: t.fonts.display, fontWeight: 600, fontSize: (vertical ? 72 : 84) * scale, color: t.colors.text, textAlign: 'center', lineHeight: 1.06}}>
-            {d.headline}
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 600, lineHeight: 1.06},
+        plate: (children) => (
+          <LibPlate style={{width: vertical ? '88%' : 1080 * scale + 'px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 26 * scale}}>{children}</div>
+          </LibPlate>
+        ),
+        mark: (size) => (
+          <div style={{filter: `sepia(0.4) drop-shadow(0 0 ${14 * scale}px ${hexA(t.colors.accent, 0.5)})`}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </div>
-          <LibRule width={vertical ? 380 : 420} delay={wordToFrame(d.headlineAtWord) + 8} />
-          {d.subtext ? (
-            <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 12, fps), fontFamily: t.fonts.body, fontWeight: 500, fontSize: 30 * scale, fontStyle: 'italic', letterSpacing: '0.06em', color: t.colors.accent}}>{d.subtext}</div>
-          ) : null}
-        </div>
-      </LibPlate>
-    </AbsoluteFill>
+        ),
+        divider: () => <LibRule width={vertical ? 380 : 420} delay={0} />,
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.body, fontWeight: 500, fontSize: 30 * scale, fontStyle: 'italic', letterSpacing: '0.06em', color: t.colors.accent}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

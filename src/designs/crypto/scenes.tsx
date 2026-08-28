@@ -7,6 +7,7 @@ import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Glass, Delta, CoinRing, CrHeadline, gradText, ORANGE_GOLD} from './primitives';
 import {LineChart} from '../../charts';
+import {HookStage} from '../../hookStage';
 
 const CR_CYCLE = ['orange', 'blue', 'green', 'purple', 'yellow', 'red'] as const;
 
@@ -14,43 +15,26 @@ const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — hero in an orange coin-ring, gradient headline, mono glass subtext.
 export const CrHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 48 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <CoinRing size={vertical ? 236 : 220}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 108 : 100) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.04},
+        mark: (size) => (
+          <CoinRing size={size * 2.2 / scale}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </CoinRing>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 700,
-          fontSize: (vertical ? 78 : 92) * scale,
-          letterSpacing: '-0.01em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '88%',
-          lineHeight: 1.04,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
+        ),
+        sub: (text) => (
           <Glass style={{padding: `${12 * scale}px ${28 * scale}px`, borderRadius: 999}}>
-            <span style={{fontFamily: t.fonts.mono, fontWeight: 500, fontSize: 26 * scale, letterSpacing: '0.04em', color: t.colors.muted}}>{d.subtext}</span>
+            <span style={{fontFamily: t.fonts.mono, fontWeight: 500, fontSize: 26 * scale, letterSpacing: '0.04em', color: t.colors.muted}}>{text}</span>
           </Glass>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+      }}
+    />
   );
 };
 

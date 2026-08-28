@@ -6,6 +6,7 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Note, Doodle, SkHeadline, PENCIL} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const TILT = [-3, 2.5, -2, 3, -1.5];
@@ -13,42 +14,26 @@ const PAPER_CYC = [1, 3, 2, 4, 0];
 
 // HOOK — hero taped to a paper note, big handwritten headline, post-it subtext.
 export const SkHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 48 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Note paper={0} rotate={-3} wobble={0} tape style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: (vertical ? 244 : 228) * scale, height: (vertical ? 244 : 228) * scale}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 112 : 104) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 700, lineHeight: 1.0},
+        mark: (size) => (
+          <Note paper={0} rotate={-3} wobble={0} tape style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: size * 2.19, height: size * 2.19}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </Note>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 700,
-          fontSize: (vertical ? 92 : 108) * scale,
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '88%',
-          lineHeight: 1.0,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
+        ),
+        sub: (text) => (
           <Note paper={1} rotate={2} wobble={1} style={{padding: `${10 * scale}px ${26 * scale}px`}}>
-            <span style={{fontFamily: t.fonts.body, fontWeight: 700, fontSize: 34 * scale, color: PENCIL}}>{d.subtext}</span>
+            <span style={{fontFamily: t.fonts.body, fontWeight: 700, fontSize: 34 * scale, color: PENCIL}}>{text}</span>
           </Note>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+      }}
+    />
   );
 };
 

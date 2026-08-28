@@ -6,46 +6,27 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Rule, DoubleRule, SmallCaps, FigTag, BsHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — small-caps kicker between rules, large Playfair headline, italic subtext.
 export const BsHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 34 * scale, padding: `0 ${(vertical ? 120 : 220) * scale}px`}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 6 * scale}}>
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 116 : 108) * scale} />
-        </div>
-      ) : null}
-      <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) - 6, fps), width: (vertical ? 300 : 360) * scale, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 * scale}}>
-        <DoubleRule />
-        <SmallCaps size={20}>An AI Search Brief</SmallCaps>
-      </div>
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 700,
-          fontSize: (vertical ? 84 : 100) * scale,
-          color: t.colors.text,
-          textAlign: 'center',
-          lineHeight: 1.02,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps), fontFamily: t.fonts.body, fontStyle: 'italic', fontSize: 34 * scale, color: t.colors.muted, textAlign: 'center', maxWidth: '80%', lineHeight: 1.4}}>
-          {d.subtext}
-        </div>
-      ) : null}
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 700, lineHeight: 1.02},
+        mark: (size) => <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />,
+        divider: () => <div style={{width: (vertical ? 300 : 360) * scale}}><DoubleRule /></div>,
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.body, fontStyle: 'italic', fontSize: 34 * scale, color: t.colors.muted, lineHeight: 1.4}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

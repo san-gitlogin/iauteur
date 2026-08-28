@@ -6,39 +6,40 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Win95, Win95Button, raised, sunken, GRAY, INK, NAVY} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — WELCOME.HTM window with big heading + blinking NEW! badge.
 export const RetroHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
-  const sem = useSem();
   const {scale, vertical} = useScale();
-  const d = scene.data;
-  const blink = frame % 30 < 16;
+  const sem = useSem();
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center'}}>
-      <Win95 title="WELCOME.HTM" status="Done." style={{width: vertical ? '90%' : (1180 * scale + 'px')}}>
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 * scale, background: '#fff', padding: `${34 * scale}px ${24 * scale}px`, border: `${1 * scale}px solid ${INK}`}}>
-          {d.heroAsset ? (
-            <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-              <AssetIcon asset={d.heroAsset} size={(vertical ? 130 : 120) * scale} />
-            </div>
-          ) : null}
-          <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord), fps), fontFamily: t.fonts.display, fontSize: (vertical ? 74 : 90) * scale, color: sem('red'), textAlign: 'center', textTransform: 'uppercase', lineHeight: 1, textShadow: `${3 * scale}px ${3 * scale}px 0 ${INK}`}}>
-            {d.headline}
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: sem('red'),
+        headlineStyle: {
+          color: sem('red'), textTransform: 'uppercase', lineHeight: 1,
+          textShadow: `${3 * scale}px ${3 * scale}px 0 ${INK}`,
+        },
+        plate: (children) => (
+          <Win95 title="WELCOME.HTM" status="Done." style={{width: vertical ? '90%' : 1180 * scale + 'px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 * scale, background: '#fff', padding: `${34 * scale}px ${24 * scale}px`, border: `${1 * scale}px solid ${INK}`}}>{children}</div>
+          </Win95>
+        ),
+        // white-on-white otherwise: the Win95 page is #fff and AssetIcon paints light-on-dark
+        mark: (size) => (
+          <div style={{filter: 'brightness(0)'}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </div>
-          {d.subtext ? (
-            <div style={{display: 'flex', alignItems: 'center', gap: 14 * scale}}>
-              {blink ? <span style={{fontFamily: t.fonts.display, fontSize: 26 * scale, color: '#fff', background: sem('red'), padding: `${3 * scale}px ${10 * scale}px`}}>NEW!</span> : <span style={{width: 66 * scale}} />}
-              <span style={{fontFamily: t.fonts.body, fontWeight: 700, fontSize: 30 * scale, color: sem('blue'), textDecoration: 'underline'}}>{d.subtext}</span>
-            </div>
-          ) : null}
-        </div>
-      </Win95>
-    </AbsoluteFill>
+        ),
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.body, fontWeight: 700, fontSize: 30 * scale, color: sem('blue'), textDecoration: 'underline'}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

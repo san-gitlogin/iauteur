@@ -7,47 +7,29 @@ import {SourceFooter, useScale, useSem} from '../../ui';
 import {SemColor} from '../../types';
 import {AssetIcon} from '../../AssetIcon';
 import {Block, Tag, FdHeadline, onColor} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const CYC: SemColor[] = ['blue', 'green', 'orange', 'purple'];
 
 // HOOK — hero in a solid blue block, bold headline, tag subtext.
 export const FdHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 46 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Block color="blue" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: (vertical ? 236 : 220) * scale, height: (vertical ? 236 : 220) * scale, borderRadius: 20 * scale}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 112 : 104) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.04},
+        mark: (size) => (
+          <Block color="blue" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: size * 2.1, height: size * 2.1, borderRadius: 20 * scale}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </Block>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 800,
-          fontSize: (vertical ? 80 : 94) * scale,
-          letterSpacing: '-0.02em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '88%',
-          lineHeight: 1.04,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
-          <Tag color="green">{d.subtext}</Tag>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+        sub: (text) => <Tag color="green">{text}</Tag>,
+      }}
+    />
   );
 };
 

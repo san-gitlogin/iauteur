@@ -6,6 +6,7 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Blob, OrgHeadline, BLOB_RADII} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const ONBLOB = '#23241D';
@@ -13,42 +14,26 @@ const TILTS = [-3, 2, -2, 3, -1.5];
 
 // HOOK — hero in a moss blob, Fraunces headline, sand blob subtext.
 export const OrgHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 44 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Blob fill="green" index={0} rotate={-3} style={{width: (vertical ? 220 : 210) * scale, height: (vertical ? 220 : 210) * scale, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 112 : 104) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 600, lineHeight: 1.04},
+        mark: (size) => (
+          <Blob fill="green" index={0} rotate={-3} style={{width: size * 2, height: size * 2, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </Blob>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 600,
-          fontSize: (vertical ? 82 : 96) * scale,
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '88%',
-          lineHeight: 1.04,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
+        ),
+        sub: (text) => (
           <Blob fill="orange" index={2} rotate={2} style={{padding: `${12 * scale}px ${30 * scale}px`}}>
-            <span style={{fontFamily: t.fonts.body, fontWeight: 600, fontSize: 28 * scale, color: ONBLOB}}>{d.subtext}</span>
+            <span style={{fontFamily: t.fonts.body, fontWeight: 600, fontSize: 28 * scale, color: ONBLOB}}>{text}</span>
           </Blob>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+      }}
+    />
   );
 };
 

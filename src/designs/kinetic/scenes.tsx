@@ -6,49 +6,32 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {KBlock, Marquee, GhostNumber, KiHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — giant uppercase headline over a ghost number, sharp hero block, marquee.
 export const KiHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 44 * scale, overflow: 'hidden'}}>
-      <GhostNumber style={{top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}>0</GhostNumber>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), position: 'relative'}}>
-          <KBlock style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: (vertical ? 224 : 208) * scale, height: (vertical ? 224 : 208) * scale}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 108 : 100) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.03em', lineHeight: 0.92},
+        mark: (size) => (
+          <KBlock style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: size * 2.08, height: size * 2.08}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </KBlock>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          position: 'relative',
-          fontFamily: t.fonts.display,
-          fontWeight: 900,
-          fontSize: (vertical ? 88 : 108) * scale,
-          textTransform: 'uppercase',
-          letterSpacing: '-0.03em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '92%',
-          lineHeight: 0.92,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps), position: 'relative', width: '100%', maxWidth: (vertical ? 900 : 1100) * scale}}>
-          <Marquee text={d.subtext} filled speed={0.4} height={vertical ? 58 : 52} />
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+        sub: (text) => (
+          <div style={{width: '100%', maxWidth: (vertical ? 900 : 1100) * scale}}>
+            <Marquee text={text} filled speed={0.4} height={vertical ? 58 : 52} />
+          </div>
+        ),
+      }}
+    />
   );
 };
 

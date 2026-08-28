@@ -6,49 +6,34 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {DecoFrame, DecoDivider, DecoHeadline, Sunburst, toRoman} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — sunburst behind hero, Cinzel headline, diamond divider.
 export const DecoHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 34 * scale}}>
-      {d.heroAsset ? (
-        <div style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', ...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Sunburst size={(vertical ? 320 : 300) * scale} opacity={0.4} style={{position: 'absolute'}} />
-          <div style={{position: 'relative', filter: `drop-shadow(0 0 ${16 * scale}px ${hexA(t.colors.accent, 0.6)})`}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 120 : 112) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.1},
+        mark: (size) => (
+          <div style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <Sunburst size={size * 2.7} opacity={0.4} style={{position: 'absolute'}} />
+            <div style={{position: 'relative', filter: `drop-shadow(0 0 ${16 * scale}px ${hexA(t.colors.accent, 0.6)})`}}>
+              <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+            </div>
           </div>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 600,
-          fontSize: (vertical ? 74 : 86) * scale,
-          letterSpacing: '0.06em',
-          textTransform: 'uppercase',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '88%',
-          lineHeight: 1.1,
-        }}
-      >
-        {d.headline}
-      </div>
-      <DecoDivider width={vertical ? 420 : 460} delay={wordToFrame(d.headlineAtWord) + 8} />
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 12, fps), fontFamily: t.fonts.body, fontWeight: 500, fontSize: 28 * scale, letterSpacing: '0.24em', textTransform: 'uppercase', color: t.colors.accent}}>
-          {d.subtext}
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+        divider: () => <DecoDivider width={vertical ? 420 : 460} delay={0} />,
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.body, fontWeight: 500, fontSize: 28 * scale, letterSpacing: '0.24em', textTransform: 'uppercase', color: t.colors.accent}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

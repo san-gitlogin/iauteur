@@ -6,45 +6,26 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Label, Hairline, BtHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — wide-tracked label, a massive headline (vermillion + underline), subtext.
 export const BtHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 34 * scale, padding: `0 ${(vertical ? 90 : 170) * scale}px`}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), marginBottom: 4 * scale}}>
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 110 : 100) * scale} />
-        </div>
-      ) : null}
-      <Label style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) - 6, fps)}} color="red">An AI Search Manifesto</Label>
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 700,
-          fontSize: (vertical ? 100 : 128) * scale,
-          letterSpacing: '-0.05em',
-          textTransform: 'uppercase',
-          color: t.colors.text,
-          textAlign: 'center',
-          lineHeight: 0.9,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps), fontFamily: t.fonts.body, fontWeight: 400, fontSize: 32 * scale, color: t.colors.muted, textAlign: 'center', maxWidth: '78%', lineHeight: 1.4}}>
-          {d.subtext}
-        </div>
-      ) : null}
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 700, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: 0.9},
+        mark: (size) => <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />,
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.body, fontWeight: 400, fontSize: 32 * scale, color: t.colors.muted, lineHeight: 1.4}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

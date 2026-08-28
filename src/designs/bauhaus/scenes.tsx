@@ -7,6 +7,7 @@ import {SourceFooter, useScale} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {SemColor} from '../../types';
 import {BauBlock, BauShape, BauHeadline, RED, BLUE, YELLOW, INK, PAPER, onFill} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
@@ -21,45 +22,29 @@ const CYCLE = [RED, BLUE, YELLOW];
 
 // HOOK — geometric composition: circle behind hero, color-blocked headline.
 export const BauHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 46 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), position: 'relative'}}>
-          <BauShape kind="circle" size={(vertical ? 210 : 200) * scale} fill={BLUE} style={{position: 'absolute', top: -30 * scale, left: -30 * scale}} />
-          <BauBlock fill={PAPER} shadow={RED} style={{position: 'relative', padding: `${24 * scale}px`}}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 130 : 120) * scale} />
-          </BauBlock>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 900,
-          fontSize: (vertical ? 90 : 106) * scale,
-          letterSpacing: '-0.04em',
-          textTransform: 'uppercase',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '90%',
-          lineHeight: 0.96,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: BLUE,
+        headlineStyle: {fontWeight: 900, letterSpacing: '-0.04em', textTransform: 'uppercase', lineHeight: 0.96},
+        mark: (size) => (
+          <div style={{position: 'relative'}}>
+            <BauShape kind="circle" size={size * 1.6} fill={BLUE} style={{position: 'absolute', top: -size * 0.24, left: -size * 0.24}} />
+            <BauBlock fill={PAPER} shadow={RED} style={{position: 'relative', padding: size * 0.2}}>
+              <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+            </BauBlock>
+          </div>
+        ),
+        sub: (text) => (
           <BauBlock fill={YELLOW} shadow={BLUE} style={{padding: `${8 * scale}px ${20 * scale}px`}}>
-            <span style={{fontFamily: t.fonts.mono, fontWeight: 700, fontSize: 26 * scale, letterSpacing: '0.1em', textTransform: 'uppercase', color: INK}}>{d.subtext}</span>
+            <span style={{fontFamily: t.fonts.mono, fontWeight: 700, fontSize: 26 * scale, letterSpacing: '0.1em', textTransform: 'uppercase', color: INK}}>{text}</span>
           </BauBlock>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+      }}
+    />
   );
 };
 

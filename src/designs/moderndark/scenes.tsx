@@ -6,49 +6,55 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Glass, WindowDots, Chip, IndigoTile, MdHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
-// HOOK — hero in a glass "app window" card, grotesk headline, indigo chip subtext.
+// HOOK — moderndark's handwriting, lent to the shared stage.
+//
+// This used to draw ONE composition: a glass app-window card holding an indigo icon tile, a centred
+// grotesk headline, an indigo chip underneath. It is a good-looking opening and it was the opening
+// of every single video, because moderndark is the standing default (LAW 0) and every pack's HOOK
+// override is likewise a single fixed shape. Owner: *"it's just boring and it's what I see for
+// every single video ... they will guess and move on to the next video."*
+//
+// `HookStage` (src/hookStage.tsx) owns the SILHOUETTE and every timing; this file keeps what makes
+// the opening recognisably moderndark — the glass window, the indigo tile, the chip, the 600-weight
+// grotesk at -0.02em tracking. The parts are unchanged. Where they sit, and how they arrive, now
+// varies per video.
 export const MdHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
-  const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
+  const t = useTheme();
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 48 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Glass glow style={{display: 'flex', flexDirection: 'column', gap: 22 * scale, padding: `${22 * scale}px ${26 * scale}px`, alignItems: 'center'}}>
-            <WindowDots style={{alignSelf: 'flex-start'}} />
-            <IndigoTile size={vertical ? 158 : 148} radius={30}>
-              <AssetIcon asset={d.heroAsset} size={(vertical ? 92 : 86) * scale} />
-            </IndigoTile>
-          </Glass>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 600,
-          fontSize: (vertical ? 78 : 92) * scale,
-          letterSpacing: '-0.02em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '86%',
-          lineHeight: 1.04,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
-          <Chip>{d.subtext}</Chip>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.04},
+        // THE MARK SCALES WITH THE SILHOUETTE. `size` is the icon's, and the glass and tile are
+        // derived from it, so the same window reads correctly at reveal's 250px and at plaque's
+        // 78px corner stamp instead of being a fixed card the layout has to work around.
+        mark: (size) => {
+          const icon = size * 0.58;
+          const pad = Math.max(8 * scale, size * 0.14);
+          return (
+            <Glass
+              glow
+              style={{
+                display: 'flex', flexDirection: 'column', gap: pad * 0.9,
+                padding: `${pad}px ${pad * 1.15}px`, alignItems: 'center',
+              }}
+            >
+              {size > 110 * scale ? <WindowDots style={{alignSelf: 'flex-start'}} /> : null}
+              <IndigoTile size={size / scale} radius={Math.max(10, size / scale * 0.2)}>
+                <AssetIcon asset={scene.data.heroAsset ?? undefined} size={icon} />
+              </IndigoTile>
+            </Glass>
+          );
+        },
+        sub: (text) => <Chip>{text}</Chip>,
+      }}
+    />
   );
 };
 

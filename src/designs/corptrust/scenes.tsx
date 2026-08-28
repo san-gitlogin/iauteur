@@ -6,6 +6,7 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Card, GradTile, Pill, Check, CtHeadline, gradText} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const TINTS: Array<'indigo' | 'violet'> = ['indigo', 'violet', 'indigo', 'violet'];
@@ -28,43 +29,24 @@ export const CtTitleCard: React.FC<{scene: Scene}> = ({scene}) => {
 
 // HOOK — hero in a gradient tile inside an elevated card, gradient headline, pill.
 export const CtHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 48 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Card style={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 30 * scale}}>
-            <GradTile size={vertical ? 176 : 164} radius={32}>
-              <AssetIcon asset={d.heroAsset} size={(vertical ? 100 : 92) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.04},
+        mark: (size) => (
+          <Card style={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: size * 0.3}}>
+            <GradTile size={size * 1.78 / scale} radius={32}>
+              <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
             </GradTile>
           </Card>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 800,
-          fontSize: (vertical ? 78 : 92) * scale,
-          letterSpacing: '-0.02em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '86%',
-          lineHeight: 1.04,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
-          <Pill>{d.subtext}</Pill>
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+        sub: (text) => <Pill>{text}</Pill>,
+      }}
+    />
   );
 };
 

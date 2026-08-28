@@ -4118,6 +4118,7 @@ export type HookScene = SceneCommon<'HOOK'> & { data: {
     heroAsset?: string;
     headlineAtWord?: number;
     heroAtWord?: number;
+    hookVariant?: unknown;
   } };
 
 export type TitleCardScene = SceneCommon<'TITLE_CARD'> & { data: {

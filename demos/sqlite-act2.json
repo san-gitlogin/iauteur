@@ -38,7 +38,13 @@
       "cmd": "sq shop.db \".read orders.sql\"",
       "label": "add a second table",
       "focus": "terminal",
-      "holdMs": 700
+      "holdMs": 700,
+      "marks": [
+        {
+          "id": "cmd",
+          "text": ".read orders.sql"
+        }
+      ]
     },
     {
       "id": "open-revenue",
@@ -50,6 +56,14 @@
         {
           "id": "joinline",
           "text": "JOIN products p ON p.id = o.product_id"
+        },
+        {
+          "id": "sum",
+          "text": "SUM(o.qty)"
+        },
+        {
+          "id": "group",
+          "text": "GROUP BY p.name"
         }
       ],
       "holdMs": 1400
@@ -71,6 +85,10 @@
         {
           "id": "rev",
           "text": "534.0"
+        },
+        {
+          "id": "units",
+          "text": "units"
         }
       ],
       "holdMs": 1300
@@ -93,6 +111,10 @@
         {
           "id": "avg",
           "text": "2.17"
+        },
+        {
+          "id": "cmd",
+          "text": "COUNT(*) AS orders"
         }
       ]
     },
@@ -110,6 +132,10 @@
         {
           "id": "kept",
           "text": "product_id"
+        },
+        {
+          "id": "cmd",
+          "text": "HAVING SUM(qty) > 2"
         }
       ]
     },
@@ -147,6 +173,10 @@
         {
           "id": "scan",
           "text": "SCAN orders"
+        },
+        {
+          "id": "where",
+          "text": "WHERE product_id = 1"
         }
       ],
       "holdMs": 1400
@@ -157,7 +187,13 @@
       "cmd": "sq shop.db \"CREATE INDEX idx_orders_product ON orders(product_id);\"",
       "label": "add an index",
       "focus": "terminal",
-      "holdMs": 700
+      "holdMs": 700,
+      "marks": [
+        {
+          "id": "cmd",
+          "text": "CREATE INDEX idx_orders_product"
+        }
+      ]
     },
     {
       "id": "plan-after",
@@ -172,6 +208,10 @@
         {
           "id": "search",
           "text": "SEARCH orders USING INDEX"
+        },
+        {
+          "id": "idx",
+          "text": "idx_orders_product"
         }
       ],
       "holdMs": 1600

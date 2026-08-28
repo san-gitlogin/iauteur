@@ -139,7 +139,7 @@
               ],
               "id": "plan-before",
               "src": "rec/sqlite-act2/seg-07.mp4",
-              "frames": 214,
+              "frames": 207,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -152,6 +152,12 @@
                   "y": 840,
                   "w": 97,
                   "h": 19
+                },
+                "where": {
+                  "x": 913,
+                  "y": 802,
+                  "w": 176,
+                  "h": 19
                 }
               },
               "atWord": 2.583
@@ -162,14 +168,22 @@
               "focus": true,
               "id": "index",
               "src": "rec/sqlite-act2/seg-08.mp4",
-              "frames": 191,
+              "frames": 195,
               "bbox": {
                 "x": 348,
                 "y": 578,
                 "w": 1252,
                 "h": 300
               },
-              "atWord": 36.167
+              "atWord": 36.167,
+              "marks": {
+                "cmd": {
+                  "x": 562,
+                  "y": 840,
+                  "w": 273,
+                  "h": 19
+                }
+              }
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -191,7 +205,7 @@
               ],
               "id": "plan-after",
               "src": "rec/sqlite-act2/seg-09.mp4",
-              "frames": 214,
+              "frames": 223,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -203,6 +217,12 @@
                   "x": 394,
                   "y": 840,
                   "w": 220,
+                  "h": 19
+                },
+                "idx": {
+                  "x": 623,
+                  "y": 840,
+                  "w": 158,
                   "h": 19
                 }
               },

@@ -6,36 +6,42 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {NewsPage, NewsBadge, INK, PAPER} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — front page: BREAKING badge, huge serif banner, photo box, deck.
 export const NewsHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center'}}>
-      <NewsPage style={{width: vertical ? '90%' : (1180 * scale + 'px')}}>
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 * scale}}>
-          <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) - 2, fps)}}><NewsBadge text="Breaking" /></div>
-          <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord), fps), fontFamily: t.fonts.display, fontWeight: 700, fontSize: (vertical ? 74 : 92) * scale, color: INK, textAlign: 'center', lineHeight: 0.98, textTransform: 'uppercase'}}>
-            {d.headline}
-          </div>
-          <div style={{height: 2 * scale, width: '60%', background: INK, margin: `${6 * scale}px 0`}} />
-          {d.heroAsset ? (
-            <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), border: `${2 * scale}px solid ${INK}`, padding: 16 * scale, background: '#EBE8DF'}}>
-              <AssetIcon asset={d.heroAsset} size={(vertical ? 104 : 96) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: INK,
+        headlineStyle: {fontWeight: 700, color: INK, lineHeight: 0.98, textTransform: 'uppercase'},
+        plate: (children) => (
+          <NewsPage style={{width: vertical ? '90%' : 1180 * scale + 'px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 * scale}}>{children}</div>
+          </NewsPage>
+        ),
+        kicker: () => <NewsBadge text="Breaking" />,
+        mark: (size) => (
+          <div style={{border: `${2 * scale}px solid ${INK}`, padding: size * 0.16, background: '#EBE8DF'}}>
+            {/* AN ICON ON PAPER HAS TO BE INK. `AssetIcon` paints in the theme's light-on-dark
+                glyph colour, so the mark rendered near-white inside a newsprint box and read as
+                an empty frame. Pre-dates this rewrite; visible the moment a still was taken. */}
+            <div style={{filter: 'brightness(0)'}}>
+              <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
             </div>
-          ) : null}
-          {d.subtext ? (
-            <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 12, fps), fontFamily: t.fonts.body, fontWeight: 500, fontSize: 28 * scale, fontStyle: 'italic', color: INK}}>{d.subtext}</div>
-          ) : null}
-        </div>
-      </NewsPage>
-    </AbsoluteFill>
+          </div>
+        ),
+        divider: () => <div style={{height: 2 * scale, width: (vertical ? 380 : 460) * scale, background: INK}} />,
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.body, fontWeight: 500, fontSize: 28 * scale, fontStyle: 'italic', color: INK}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

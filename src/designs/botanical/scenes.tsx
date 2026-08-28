@@ -6,48 +6,32 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, hexA, useScale, useSem} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {Arch, Sprig, BotHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 const STAGGER = [0, 28, 0, 28, 0];
 
 // HOOK — hero in a sage arch frame, Playfair italic headline, clay pill subtext.
 export const BotHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
-  const sem = useSem();
   const {scale, vertical} = useScale();
-  const d = scene.data;
+  const sem = useSem();
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 46 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps)}}>
-          <Arch width={vertical ? 220 : 206} height={vertical ? 264 : 248} fill={hexA(sem('green'), 0.16)} border={hexA(sem('green'), 0.5)}>
-            <AssetIcon asset={d.heroAsset} size={(vertical ? 108 : 100) * scale} />
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: sem('green'),
+        headlineStyle: {fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.05},
+        mark: (size) => (
+          <Arch width={size * 1.9 / scale} height={size * 2.28 / scale} fill={hexA(sem('green'), 0.16)} border={hexA(sem('green'), 0.5)}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
           </Arch>
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 600,
-          fontSize: (vertical ? 82 : 96) * scale,
-          letterSpacing: '-0.01em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '84%',
-          lineHeight: 1.05,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps), fontFamily: t.fonts.body, fontWeight: 400, fontSize: 30 * scale, letterSpacing: '0.02em', color: t.colors.onAccent, background: sem('orange'), borderRadius: 999, padding: `${11 * scale}px ${28 * scale}px`}}>
-          {d.subtext}
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        ),
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.body, fontWeight: 400, fontSize: 30 * scale, letterSpacing: '0.02em', color: t.colors.onAccent, background: sem('orange'), borderRadius: 999, padding: `${11 * scale}px ${28 * scale}px`}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

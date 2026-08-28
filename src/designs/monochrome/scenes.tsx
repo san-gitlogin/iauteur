@@ -6,41 +6,29 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {MonoRule, MonoLabel, MonoHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — oversized serif headline with an inverted-block word.
 export const MonoHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 34 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), filter: 'grayscale(1) brightness(2)'}}>
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 120 : 112) * scale} />
-        </div>
-      ) : null}
-      <MonoLabel text={d.subtext ?? ''} size={24} />
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 500,
-          fontSize: (vertical ? 96 : 118) * scale,
-          color: '#FFFFFF',
-          textAlign: 'center',
-          maxWidth: '90%',
-          lineHeight: 0.98,
-          letterSpacing: '-0.02em',
-        }}
-      >
-        {d.headline}
-      </div>
-      <MonoRule width={vertical ? 260 : 300} weight={3} delay={wordToFrame(d.headlineAtWord) + 10} />
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: '#FFFFFF',
+        headlineStyle: {fontWeight: 500, color: '#FFFFFF', lineHeight: 0.98, letterSpacing: '-0.02em'},
+        mark: (size) => (
+          <div style={{filter: 'grayscale(1) brightness(2)'}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+          </div>
+        ),
+        divider: () => <MonoRule width={vertical ? 260 : 300} weight={3} delay={0} />,
+        sub: (text) => <MonoLabel text={text} size={24} />,
+      }}
+    />
   );
 };
 

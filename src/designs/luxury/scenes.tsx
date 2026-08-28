@@ -7,6 +7,7 @@ import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {LuxRule, LuxOverline, LuxHeadline} from './primitives';
 import {Donut} from '../../charts';
+import {HookStage} from '../../hookStage';
 
 const LUX_CYCLE = ['blue', 'purple', 'green', 'orange', 'yellow', 'red'] as const;
 
@@ -14,40 +15,23 @@ const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — hero glyph, gold overline, Playfair headline, hairline.
 export const LuxHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 40 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), filter: `drop-shadow(0 0 ${20 * scale}px ${hexA(t.colors.accent, 0.4)})`}}>
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 150 : 138) * scale} />
-        </div>
-      ) : null}
-      <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) - 2, fps)}}>
-        <LuxOverline text={d.subtext ?? ''} />
-      </div>
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 500,
-          fontSize: (vertical ? 92 : 108) * scale,
-          letterSpacing: '-0.01em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '86%',
-          lineHeight: 1.02,
-        }}
-      >
-        {d.headline}
-      </div>
-      <div style={{width: (vertical ? 200 : 240) * scale}}>
-        <LuxRule delay={wordToFrame(d.headlineAtWord) + 10} />
-      </div>
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {fontWeight: 500, letterSpacing: '-0.01em', lineHeight: 1.02},
+        mark: (size) => (
+          <div style={{filter: `drop-shadow(0 0 ${20 * scale}px ${hexA(t.colors.accent, 0.4)})`}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+          </div>
+        ),
+        divider: () => <div style={{width: (vertical ? 200 : 240) * scale}}><LuxRule delay={0} /></div>,
+        sub: (text) => <LuxOverline text={text} />,
+      }}
+    />
   );
 };
 

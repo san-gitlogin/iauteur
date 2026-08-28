@@ -7,6 +7,7 @@ import {Kicker, Pill, SourceFooter, DottedConnector, useScale, useSem, hexA} fro
 import {AssetIcon} from '../../AssetIcon';
 import {CyberPanel, GlitchHeadline} from './primitives';
 import {LineChart, Donut} from '../../charts';
+import {HookStage} from '../../hookStage';
 
 const CHART_CYCLE = ['blue', 'purple', 'green', 'orange', 'yellow', 'red'] as const;
 
@@ -32,55 +33,27 @@ export const CyberTitleCard: React.FC<{scene: Scene}> = ({scene}) => {
 
 // HOOK — glitch headline, neon hero glyph, mono subtext.
 export const CyberHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
   const {scale, vertical} = useScale();
-  const d = scene.data;
-
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 46 * scale}}>
-      {d.heroAsset ? (
-        <div
-          style={{
-            ...springPop(frame, wordToFrame(d.heroAtWord), fps),
-            filter: `drop-shadow(0 0 ${18 * scale}px ${hexA(t.colors.accent, 0.7)})`,
-          }}
-        >
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 190 : 170) * scale} />
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: t.style.displayWeight,
-          fontSize: (vertical ? 86 : 100) * scale,
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: t.colors.accent,
+        headlineStyle: {
           letterSpacing: '0.04em',
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '90%',
           textShadow: `2px 0 ${hexA('#ff0033', 0.7)}, -2px 0 ${hexA('#00d4ff', 0.7)}, 0 0 ${28 * scale}px ${hexA(t.colors.accent, 0.4)}`,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div
-          style={{
-            ...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps),
-            fontFamily: t.fonts.mono,
-            fontWeight: 600,
-            fontSize: 34 * scale,
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            color: t.colors.accent3,
-          }}
-        >
-          {d.subtext}
-        </div>
-      ) : null}
-    </AbsoluteFill>
+        },
+        mark: (size) => (
+          <div style={{filter: `drop-shadow(0 0 ${18 * scale}px ${hexA(t.colors.accent, 0.7)})`}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+          </div>
+        ),
+        sub: (text) => (
+          <span style={{fontFamily: t.fonts.mono, fontWeight: 600, fontSize: 34 * scale, letterSpacing: '0.18em', textTransform: 'uppercase', color: t.colors.accent3}}>{text}</span>
+        ),
+      }}
+    />
   );
 };
 

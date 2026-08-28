@@ -6,44 +6,29 @@ import {fadeUp, stackIn, counterValue, springPop} from '../../anim';
 import {SourceFooter, useScale, useSem, hexA} from '../../ui';
 import {AssetIcon} from '../../AssetIcon';
 import {MatCard, MatChip, MatHeadline} from './primitives';
+import {HookStage} from '../../hookStage';
 
 const formatNumber = (n: number) => n.toLocaleString('en-US');
 
 // HOOK — hero in a rounded tonal circle, rounded headline, pill subtext.
 export const MatHook: React.FC<{scene: Scene}> = ({scene}) => {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
   const t = useTheme();
-  const sem = useSem();
   const {scale, vertical} = useScale();
-  const d = scene.data;
+  const sem = useSem();
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 44 * scale}}>
-      {d.heroAsset ? (
-        <div style={{...springPop(frame, wordToFrame(d.heroAtWord), fps), width: (vertical ? 210 : 200) * scale, height: (vertical ? 210 : 200) * scale, borderRadius: '50%', background: hexA(sem('purple'), 0.18), display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <AssetIcon asset={d.heroAsset} size={(vertical ? 120 : 112) * scale} />
-        </div>
-      ) : null}
-      <div
-        style={{
-          ...fadeUp(frame, wordToFrame(d.headlineAtWord), fps),
-          fontFamily: t.fonts.display,
-          fontWeight: 500,
-          fontSize: (vertical ? 84 : 100) * scale,
-          color: t.colors.text,
-          textAlign: 'center',
-          maxWidth: '88%',
-          lineHeight: 1.04,
-        }}
-      >
-        {d.headline}
-      </div>
-      {d.subtext ? (
-        <div style={{...fadeUp(frame, wordToFrame(d.headlineAtWord) + 10, fps)}}>
-          <MatChip text={d.subtext} color="purple" />
-        </div>
-      ) : null}
-    </AbsoluteFill>
+    <HookStage
+      scene={scene}
+      kit={{
+        accent: sem('purple'),
+        headlineStyle: {fontWeight: 500, lineHeight: 1.04},
+        mark: (size) => (
+          <div style={{width: size * 1.79, height: size * 1.79, borderRadius: '50%', background: hexA(sem('purple'), 0.18), display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size} />
+          </div>
+        ),
+        sub: (text) => <MatChip text={text} color="purple" />,
+      }}
+    />
   );
 };
 
