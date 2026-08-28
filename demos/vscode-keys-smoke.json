@@ -1,0 +1,68 @@
+{
+  "slug": "vscode-keys-smoke",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "demo-keys-smoke",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "prep": {
+    "files": {
+      "app.js": "const add = (a, b) => a + b;\n\nconsole.log(add(2, 3));\n",
+      "notes.md": "# Notes\n\nOne markdown file, so the preview shortcut has something to preview.\n\n- one\n- two\n"
+    },
+    "openFile": "app.js"
+  },
+  "steps": [
+    {
+      "id": "sidebar",
+      "action": "keys",
+      "chord": "ctrl+b",
+      "verify": "sidebarToggled",
+      "focus": "editor",
+      "label": "hide the sidebar"
+    },
+    {
+      "id": "comment",
+      "action": "keys",
+      "chord": "ctrl+/",
+      "verify": "textChanged",
+      "focus": "editor",
+      "label": "comment the line out",
+      "marks": [{"id": "commented", "text": "// const add"}]
+    },
+    {
+      "id": "duplicate",
+      "action": "keys",
+      "chord": "shift+alt+down",
+      "verify": "textChanged",
+      "focus": "editor",
+      "label": "copy the line down"
+    },
+    {
+      "id": "find",
+      "action": "keys",
+      "chord": "ctrl+f",
+      "verify": "find",
+      "focus": "editor",
+      "label": "open find"
+    },
+    {
+      "id": "terminal",
+      "action": "keys",
+      "chord": "ctrl+`",
+      "verify": "panelChanged",
+      "focus": "editor",
+      "label": "show the terminal"
+    },
+    {
+      "id": "run",
+      "action": "run",
+      "cmd": "node --version",
+      "label": "check node is there",
+      "focus": "terminal",
+      "expect": {"exitCode": 0},
+      "marks": [{"id": "v", "text": "v"}]
+    }
+  ],
+  "maxHoldMs": 600
+}

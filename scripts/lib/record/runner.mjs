@@ -18,6 +18,8 @@ import {
 } from './vscode.mjs';
 import {openTerminal, primeTerminal, runCommand, readBuffer, readScrollback} from './terminal.mjs';
 import {startCapture} from './capture.mjs';
+import {snapshot, pressChord, capsFor} from './keyprobe.mjs';
+import {CHECKS} from './keyprobe-table.mjs';
 import {setupBrowser, browserActions, BROWSER_FOCUS} from './browser.mjs';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -498,6 +500,59 @@ ${content.text}`, truth: 'read-back',
   /** A deliberate look-at-it beat. Nothing happens, on purpose (LAW 0e rule 4).
    *  `no-output` is not a weaker `read-back`: the step makes NO claim about output, so
    *  there is nothing that could be fabricated. The gate distinguishes the two. */
+  /**
+   * PRESS A SHORTCUT, AND PROVE IT LANDED.
+   *
+   * Owner: *"You don't wanna always use the search thing you do and execute, some places
+   * shortcuts might help you work even faster."* Correct, and there is a second reason: a
+   * tutorial that opens the command palette for every action is teaching the palette. A real
+   * developer's hands use keys, and the keycap overlay already exists to draw them.
+   *
+   * The rule this enforces is the one the whole recorder runs on: a dispatched key is NOT a
+   * working shortcut. Almost every chord carries a `when` clause, so a press at a workbench
+   * focused somewhere else does nothing, throws nothing, and looks exactly like success. So
+   * `verify` is REQUIRED - it names the observable that has to move - and the step fails loudly
+   * when it does not. `briefs/vscode-shortcuts/verified.json` records which chords have been
+   * measured on this surface; do not press one that is not in there.
+   *
+   *   {action: 'keys', id: 'sidebar', chord: 'ctrl+b', focus: 'editor', verify: 'sidebarToggled'}
+   */
+  async keysPrepare(page, step) {
+    // Focus is housekeeping, so it runs BEFORE t0 and never lands in the captured segment.
+    if (step.focus === 'terminal') { await palette(page, 'Terminal: Focus Terminal'); await sleep(600); }
+    else if (step.focus === 'editor') { await palette(page, 'View: Focus Active Editor Group'); await sleep(400); }
+  },
+  async keys(page, step) {
+    if (!step.chord) throw new Error(`Step "${step.id}": a keys step needs a "chord", e.g. "ctrl+b".`);
+    const check = CHECKS[step.verify];
+    if (!check) {
+      throw new Error(`Step "${step.id}": a keys step needs "verify" naming an observable. ` +
+        `Known: ${Object.keys(CHECKS).join(', ')}. Pressing a chord without checking it is how a ` +
+        `shortcut silently does nothing on camera.`);
+    }
+    const before = await snapshot(page);
+    await pressChord(page, step.chord);
+    await sleep(step.settleMs ?? 900);
+    const after = await snapshot(page);
+
+    const fn = check.length === 2 ? check : check(step.arg);
+    const moved = () => Object.keys(after)
+      .filter((k) => JSON.stringify(after[k]) !== JSON.stringify(before[k]));
+    if (!fn(before, after)) {
+      const m = moved();
+      throw new Error(`Step "${step.id}": pressed ${step.chord} but "${step.verify}" did not hold. ` +
+        (m.length ? `What did move: ${m.join(', ')}.` : 'The workbench did not change at all.') +
+        ' Check the chord against its `when` clause and the focus this step set.');
+    }
+    return {
+      sent: `(${step.chord})`,
+      output: step.reads ? String(after[step.reads] ?? '') : '',
+      keys: capsFor(step.chord),
+      truth: 'read-back',
+      verified: `${step.verify} held; moved: ${moved().join(', ') || '(nothing measurable)'}`,
+    };
+  },
+
   async pause(page, step) {
     await sleep(step.ms ?? 1500);
     return {sent: `(pause ${step.ms ?? 1500}ms)`, output: '', truth: 'no-output', verified: 'nothing to verify'};

@@ -54,7 +54,14 @@ const FILES = {
   'data.json': '{\n  "name": "probe",\n  "count": 3\n}\n',
   'plain.txt': 'line one\nline two\nline three\nline four\nline five\n',
   'style.css': '.card {\n  color: #fff;\n  padding: 12px;\n}\n',
+  // long enough to scroll, and wide enough to need a horizontal scrollbar - the two fixtures the
+  // scroll and word-wrap probes were missing
+  'long.txt': Array.from({length: 200}, (_, i) => `row ${i + 1}`).join('\n') + '\n',
+  'wide.txt': 'x'.repeat(400) + '\nshort line\n',
 };
+for (const f of fs.readdirSync(workspace)) {
+  if (f.startsWith('probe_')) fs.rmSync(path.join(workspace, f), {force: true});
+}
 for (const [name, body] of Object.entries(FILES)) {
   fs.writeFileSync(path.join(workspace, name), body);
 }
@@ -68,7 +75,11 @@ console.log(`workspace: ${workspace}`);
 const server = await startServer({workspace});
 console.log(`serve-web ready on ${server.url}`);
 
-const profile = path.join(workspace, '.chrome-profile');
+// ONE PROFILE PER RUN. Chromium refuses to start on a user-data-dir another instance still holds,
+// so a focused re-probe launched while the previous run's browser was still closing died with
+// "Opening in existing browser session". Same shape as the pinned-port failure: a shared, fixed
+// resource turns an ordinary overlap into a hard stop.
+const profile = path.join(workspace, `.chrome-profile-${process.pid}`);
 const ctx = await chromium.launchPersistentContext(profile, {
   headless: false,
   viewport: {width: 1600, height: 900},
@@ -117,10 +128,20 @@ try {
       for (let i = 0; i < n; i++) { await page.keyboard.press('Escape'); await sleep(120); }
     };
 
+    // A NEUTRAL WORKBENCH, not just an empty editor.
+    //
+    // The sidebar and the panel carry state between probes, and that made results depend on the
+    // order rows happen to sit in the table: `f5` opens the Run and Debug view, and it reported
+    // "nothing changed" because `ctrl+shift+d` three rows earlier had already opened it. Resetting
+    // the viewlet and closing the panel makes every row independent of every other row.
     const closeAll = async () => {
       await esc();
       await palette(page, 'View: Close All Editors', {settle: 900});
-      await sleep(700);
+      await sleep(600);
+      await palette(page, 'View: Show Explorer', {settle: 700});
+      await sleep(400);
+      const panelUp = await page.locator('.part.panel').isVisible().catch(() => false);
+      if (panelUp) { await palette(page, 'View: Close Panel', {settle: 700}); await sleep(400); }
     };
 
     const openFile = async (name) => {
@@ -132,6 +153,22 @@ try {
       await sleep(1100);
       await page.keyboard.press('Enter');
       await sleep(1200);
+      // FOCUS THE EDITOR EXPLICITLY. `ctrl+down` has ELEVEN bindings in this build and VS Code
+      // resolves them bottom-to-top, so `list.scrollDown` (Explorer tree focused) beats
+      // `scrollLineDown` (text input focused). After the neutral reset parks focus in the
+      // Explorer, clicking the text is not reliably enough on its own.
+      await palette(page, 'View: Focus Active Editor Group', {settle: 700});
+      await sleep(400);
+      // REVERT TO WHAT IS ON DISK, EVERY TIME.
+      //
+      // The table declared `mutates: true` on the editing probes and nothing ever acted on it, so
+      // each mutation survived into the next test. The evidence, once the failure reason started
+      // printing the buffer: by the time `alt+up` ran, plain.txt read "line two / line three /
+      // line four / line five" - the very first probe, `ctrl+x`, had cut "line one" and it never
+      // came back. Five commands were reported broken across three runs for that reason alone.
+      //
+      // Undo would need a different number of presses per probe. Reverting is one command and it
+      // is exact, because with files.autoSave off the file on disk is still the fixture.
       const box = await page.locator('.part.editor .monaco-editor .view-lines').first()
         .boundingBox().catch(() => null);
       if (box) { await page.mouse.click(box.x + 40, box.y + 12); await sleep(300); }
@@ -165,8 +202,13 @@ try {
         }
         return;
       }
-      if (need === 'twofiles') {
-        await closeAll(); await openFile('plain.txt'); await openFile('app.js'); return;
+      if (need.startsWith('twofiles')) {
+        await closeAll(); await openFile('plain.txt'); await openFile('app.js');
+        // `twofiles@first` makes the LEFT tab active, so a "move editor right" has somewhere to go
+        if (need === 'twofiles@first') {
+          await palette(page, 'View: Open Previous Editor', {settle: 800}); await sleep(700);
+        }
+        return;
       }
       if (need === 'wentback') {
         await closeAll(); await openFile('plain.txt'); await openFile('app.js');
@@ -191,6 +233,9 @@ try {
       }
       if (st.includes('messy')) { await page.keyboard.press('End'); await page.keyboard.type('   '); await sleep(300); }
       if (st.includes('selectall')) { await page.keyboard.press('Control+a'); await sleep(200); }
+      if (st.includes('scrolled')) {
+        await page.keyboard.press('Control+End'); await sleep(500);
+      }
       if (st.includes('multi')) { await page.keyboard.press('Control+Alt+ArrowDown'); await sleep(250); }
       if (st.includes('folded')) {
         await page.keyboard.press('Control+K'); await sleep(220);
@@ -214,6 +259,10 @@ try {
         await page.keyboard.type(term, {delay: 40}); await sleep(500);
       }
       if (st.includes('dirty') || st.includes('trailing')) {
+        // TRAILING means at the END of the line. Typing at column 1 makes LEADING whitespace,
+        // which "Trim Trailing Whitespace" correctly ignores — so this probe was asking the
+        // command to remove something that was not there, then reporting it as broken.
+        if (st.includes('trailing')) { await page.keyboard.press('End'); await sleep(150); }
         await page.keyboard.type('   '); await sleep(300);
       }
     };
@@ -240,12 +289,50 @@ try {
         continue;
       }
       let status = 'fail'; let why = '';
+      // A PER-ROW DEADLINE. Run 8 stalled forever on `ctrl+shift+h` because the row before it had
+      // opened the Extensions view, which sits waiting on a marketplace this workspace cannot
+      // reach; the palette command never returned and the whole 112-row suite was dead. One row
+      // that cannot answer must cost one row, not the run.
+      const deadline = (promise, ms, label) => Promise.race([
+        promise,
+        new Promise((_, rej) => setTimeout(() => rej(new Error(`timed out after ${ms}ms in ${label}`)), ms)),
+      ]);
       try {
-        await setup(p.need);
-        const before = await snapshot(page);
+        // The save probes genuinely WRITE, so "revert to disk" stops meaning "revert to the
+        // fixture" the moment one of them has run. Rewriting is cheap and makes probe order
+        // irrelevant, which is the only way a 112-row table stays trustworthy.
+        for (const [name, body] of Object.entries(FILES)) {
+          fs.writeFileSync(path.join(workspace, name), body);
+        }
+        // A FRESH FILE PER PROBE, rather than a shared one that has to be cleaned up afterwards.
+        //
+        // Resetting a shared buffer was tried twice and failed twice: the first probe cut a line
+        // out of plain.txt and five later probes inherited the damage (two of them "passed" on the
+        // damage), and reverting through the palette left residue of its own. Giving each editing
+        // probe its own copy makes the order of the table irrelevant, which is the only property
+        // that makes a 112-row suite worth trusting.
+        let need = p.need;
+        const fresh = /^editor:([^@]+)(?:@(.*))?$/.exec(need ?? '');
+        if (fresh && FILES[fresh[1]]) {
+          const copy = `probe_${p.id}_${fresh[1]}`;
+          fs.writeFileSync(path.join(workspace, copy), FILES[fresh[1]]);
+          need = `editor:${copy}${fresh[2] ? '@' + fresh[2] : ''}`;
+        }
+        try {
+          await deadline(setup(need), 45000, `setup "${need}"`);
+        } catch {
+          // RECOVER, DO NOT GIVE UP. Opening the Extensions view in a workspace with no reachable
+          // marketplace leaves the renderer unable to answer, and every row after it timed out —
+          // seven in a row, all of them working shortcuts. Reloading the workbench costs a few
+          // seconds and puts the suite back on its feet; only a second failure is a real error.
+          console.log(`     (setup stalled — reloading the workbench and retrying)`);
+          await openWorkbench(page, server.url);
+          await deadline(setup(need), 45000, `setup "${need}" after reload`);
+        }
+        const before = await deadline(snapshot(page), 15000, 'snapshot');
         await pressChord(page, p.keys);
         await sleep(p.settle ?? 900);
-        const after = await snapshot(page);
+        const after = await deadline(snapshot(page), 15000, 'snapshot');
         status = p.expect(before, after) ? 'pass' : 'fail';
         if (status === 'fail') {
           // WHAT DID MOVE is the useful half. A chord that fires the WRONG command looks identical
@@ -255,6 +342,14 @@ try {
           why = moved.length
             ? `expected field unchanged; what moved: ${moved.join(', ')}`
             : 'the workbench did not change at all';
+          // WHEN THE TEXT MOVED, SHOW THE TEXT. Five line-editing chords were reported as failures
+          // across three runs purely because the assertion described the wrong resulting order,
+          // and "editorText moved" could not tell me that. A failure that does not carry the
+          // evidence costs a whole probe run to diagnose.
+          if (moved.includes('editorText')) {
+            const flat = (t) => t.replace(/\n/g, ' / ').slice(0, 110);
+            why += `\n        before: ${flat(before.editorText)}\n        after : ${flat(after.editorText)}`;
+          }
         }
         await esc(3);
       } catch (e) {
@@ -277,13 +372,21 @@ try {
     // would vanish on the next clone and the next session would re-derive it from scratch — and
     // this table is the thing the runner and the course are both built on. Same reason
     // briefs/sqlite/TRANSCRIPTS.md is tracked.
-    fs.mkdirSync('briefs/vscode-shortcuts', {recursive: true});
-    fs.writeFileSync('briefs/vscode-shortcuts/verified.json', JSON.stringify(report, null, 2));
+    // ONLY A FULL RUN MAY WRITE THE TRACKED TABLE. A `--only=Debug` pass overwrote it with three
+    // rows, which would have shipped as "the verified shortcut list" — a partial measurement
+    // presented as a complete one is worse than no measurement.
+    if (!only) {
+      fs.mkdirSync('briefs/vscode-shortcuts', {recursive: true});
+      fs.writeFileSync('briefs/vscode-shortcuts/verified.json', JSON.stringify(report, null, 2));
+    } else {
+      console.log('  (--only run: briefs/vscode-shortcuts/verified.json left alone)');
+    }
     console.log(`\n${count('pass')} pass · ${count('fail')} fail · ${count('error')} error · ${count('unverified')} unverified (of ${results.length})`);
     console.log(`written: ${OUT}/verified.json and briefs/vscode-shortcuts/verified.json`);
   }
 } finally {
   await ctx.close().catch(() => {});
   await server.stop();
+  fs.rmSync(profile, {recursive: true, force: true});
   console.log('server stopped');
 }

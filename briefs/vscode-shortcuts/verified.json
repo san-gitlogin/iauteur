@@ -1,0 +1,907 @@
+{
+  "build": "1.134.0",
+  "surface": "code serve-web + Chromium (Playwright)",
+  "measured": "2026-08-28",
+  "pass": 103,
+  "fail": 0,
+  "error": 0,
+  "unverified": 9,
+  "results": [
+    {
+      "id": "palette",
+      "cat": "General",
+      "keys": "ctrl+shift+p",
+      "label": "Show Command Palette",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "palette-f1",
+      "cat": "General",
+      "keys": "f1",
+      "label": "Show Command Palette (F1)",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "quickopen",
+      "cat": "General",
+      "keys": "ctrl+p",
+      "label": "Quick Open, Go to File",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "settings",
+      "cat": "General",
+      "keys": "ctrl+,",
+      "label": "User Settings",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "kbshortcuts",
+      "cat": "General",
+      "keys": "ctrl+k ctrl+s",
+      "label": "Keyboard Shortcuts",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "newwindow",
+      "cat": "General",
+      "keys": "ctrl+shift+n",
+      "label": "New window/instance",
+      "status": "unverified",
+      "why": "opens a second browser window; a new page, not a DOM change"
+    },
+    {
+      "id": "cutline",
+      "cat": "Basic editing",
+      "keys": "ctrl+x",
+      "label": "Cut line (empty selection)",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "moveup",
+      "cat": "Basic editing",
+      "keys": "alt+up",
+      "label": "Move line up",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "movedown",
+      "cat": "Basic editing",
+      "keys": "alt+down",
+      "label": "Move line down",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "copydown",
+      "cat": "Basic editing",
+      "keys": "shift+alt+down",
+      "label": "Copy line down",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "copyup",
+      "cat": "Basic editing",
+      "keys": "shift+alt+up",
+      "label": "Copy line up",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "deleteline",
+      "cat": "Basic editing",
+      "keys": "ctrl+shift+k",
+      "label": "Delete line",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "insertbelow",
+      "cat": "Basic editing",
+      "keys": "ctrl+enter",
+      "label": "Insert line below",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "insertabove",
+      "cat": "Basic editing",
+      "keys": "ctrl+shift+enter",
+      "label": "Insert line above",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "matchbracket",
+      "cat": "Basic editing",
+      "keys": "ctrl+shift+\\",
+      "label": "Jump to matching bracket",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "indent",
+      "cat": "Basic editing",
+      "keys": "ctrl+]",
+      "label": "Indent line",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "outdent",
+      "cat": "Basic editing",
+      "keys": "ctrl+[",
+      "label": "Outdent line",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "end",
+      "cat": "Basic editing",
+      "keys": "end",
+      "label": "Go to end of line",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "home",
+      "cat": "Basic editing",
+      "keys": "home",
+      "label": "Go to beginning of line",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "ctrlend",
+      "cat": "Basic editing",
+      "keys": "ctrl+end",
+      "label": "Go to end of file",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "ctrlhome",
+      "cat": "Basic editing",
+      "keys": "ctrl+home",
+      "label": "Go to beginning of file",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "scrollup",
+      "cat": "Basic editing",
+      "keys": "ctrl+up",
+      "label": "Scroll line up",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "scrolldown",
+      "cat": "Basic editing",
+      "keys": "ctrl+down",
+      "label": "Scroll line down",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "fold",
+      "cat": "Basic editing",
+      "keys": "ctrl+shift+[",
+      "label": "Fold region",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "unfold",
+      "cat": "Basic editing",
+      "keys": "ctrl+shift+]",
+      "label": "Unfold region",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "foldall",
+      "cat": "Basic editing",
+      "keys": "ctrl+k ctrl+0",
+      "label": "Fold all regions",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "unfoldall",
+      "cat": "Basic editing",
+      "keys": "ctrl+k ctrl+j",
+      "label": "Unfold all regions",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "foldsub",
+      "cat": "Basic editing",
+      "keys": "ctrl+k ctrl+[",
+      "label": "Fold all subregions",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "unfoldsub",
+      "cat": "Basic editing",
+      "keys": "ctrl+k ctrl+]",
+      "label": "Unfold all subregions",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "addcomment",
+      "cat": "Basic editing",
+      "keys": "ctrl+k ctrl+c",
+      "label": "Add line comment",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "removecomment",
+      "cat": "Basic editing",
+      "keys": "ctrl+k ctrl+u",
+      "label": "Remove line comment",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "togglecomment",
+      "cat": "Basic editing",
+      "keys": "ctrl+/",
+      "label": "Toggle line comment",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "blockcomment",
+      "cat": "Basic editing",
+      "keys": "shift+alt+a",
+      "label": "Toggle block comment",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "wordwrap",
+      "cat": "Basic editing",
+      "keys": "alt+z",
+      "label": "Toggle word wrap",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "allsymbols",
+      "cat": "Navigation",
+      "keys": "ctrl+t",
+      "label": "Show all Symbols",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "gotoline",
+      "cat": "Navigation",
+      "keys": "ctrl+g",
+      "label": "Go to Line",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "gotosymbol",
+      "cat": "Navigation",
+      "keys": "ctrl+shift+o",
+      "label": "Go to Symbol",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "problems",
+      "cat": "Navigation",
+      "keys": "ctrl+shift+m",
+      "label": "Show Problems panel",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "nexterror",
+      "cat": "Navigation",
+      "keys": "f8",
+      "label": "Go to next error or warning",
+      "status": "unverified",
+      "why": "needs a file with a real diagnostic; no language server in web by default"
+    },
+    {
+      "id": "preverror",
+      "cat": "Navigation",
+      "keys": "shift+f8",
+      "label": "Go to previous error or warning",
+      "status": "unverified",
+      "why": "needs a file with a real diagnostic"
+    },
+    {
+      "id": "grouphistory",
+      "cat": "Navigation",
+      "keys": "ctrl+shift+tab",
+      "label": "Navigate editor group history",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "goback",
+      "cat": "Navigation",
+      "keys": "alt+left",
+      "label": "Go back",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "goforward",
+      "cat": "Navigation",
+      "keys": "alt+right",
+      "label": "Go forward",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "tabmovesfocus",
+      "cat": "Navigation",
+      "keys": "ctrl+m",
+      "label": "Toggle Tab moves focus",
+      "status": "unverified",
+      "why": "state lives in a context key, not the DOM"
+    },
+    {
+      "id": "find",
+      "cat": "Search and replace",
+      "keys": "ctrl+f",
+      "label": "Find",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "replace",
+      "cat": "Search and replace",
+      "keys": "ctrl+h",
+      "label": "Replace",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "findnext",
+      "cat": "Search and replace",
+      "keys": "f3",
+      "label": "Find next",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "findprev",
+      "cat": "Search and replace",
+      "keys": "shift+f3",
+      "label": "Find previous",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "selectallfind",
+      "cat": "Search and replace",
+      "keys": "alt+enter",
+      "label": "Select all occurrences of Find match",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "addselection",
+      "cat": "Search and replace",
+      "keys": "ctrl+d",
+      "label": "Add selection to next Find match",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "movelastselection",
+      "cat": "Search and replace",
+      "keys": "ctrl+k ctrl+d",
+      "label": "Move last selection to next Find match",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "cursorabove",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+alt+up",
+      "label": "Insert cursor above",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "cursorbelow",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+alt+down",
+      "label": "Insert cursor below",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "undocursor",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+u",
+      "label": "Undo last cursor operation",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "cursorendofline",
+      "cat": "Multi-cursor",
+      "keys": "shift+alt+i",
+      "label": "Insert cursor at end of each line selected",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "selectline",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+l",
+      "label": "Select current line",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "selectalloccurrences",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+shift+l",
+      "label": "Select all occurrences of current selection",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "selectallword",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+f2",
+      "label": "Select all occurrences of current word",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "expandselection",
+      "cat": "Multi-cursor",
+      "keys": "shift+alt+right",
+      "label": "Expand selection",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "shrinkselection",
+      "cat": "Multi-cursor",
+      "keys": "shift+alt+left",
+      "label": "Shrink selection",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "boxdown",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+shift+alt+down",
+      "label": "Column (box) selection down",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "boxup",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+shift+alt+up",
+      "label": "Column (box) selection up",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "boxright",
+      "cat": "Multi-cursor",
+      "keys": "ctrl+shift+alt+right",
+      "label": "Column (box) selection right",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "suggest",
+      "cat": "Languages",
+      "keys": "ctrl+space",
+      "label": "Trigger suggestion",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "suggest-i",
+      "cat": "Languages",
+      "keys": "ctrl+i",
+      "label": "Trigger suggestion (Ctrl+I)",
+      "status": "unverified",
+      "why": "Ctrl+I is Copilot/chat in current builds, not suggest"
+    },
+    {
+      "id": "paramhints",
+      "cat": "Languages",
+      "keys": "ctrl+shift+space",
+      "label": "Trigger parameter hints",
+      "status": "unverified",
+      "why": "needs a signature-aware language service"
+    },
+    {
+      "id": "formatdoc",
+      "cat": "Languages",
+      "keys": "shift+alt+f",
+      "label": "Format document",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "formatselection",
+      "cat": "Languages",
+      "keys": "ctrl+k ctrl+f",
+      "label": "Format selection",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "gotodef",
+      "cat": "Languages",
+      "keys": "f12",
+      "label": "Go to Definition",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "peekdef",
+      "cat": "Languages",
+      "keys": "alt+f12",
+      "label": "Peek Definition",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "quickfix",
+      "cat": "Languages",
+      "keys": "ctrl+.",
+      "label": "Quick Fix",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "references",
+      "cat": "Languages",
+      "keys": "shift+f12",
+      "label": "Show References",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "rename",
+      "cat": "Languages",
+      "keys": "f2",
+      "label": "Rename Symbol",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "trimwhitespace",
+      "cat": "Languages",
+      "keys": "ctrl+k ctrl+x",
+      "label": "Trim trailing whitespace",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "changelang",
+      "cat": "Languages",
+      "keys": "ctrl+k m",
+      "label": "Change file language",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "splitedit",
+      "cat": "Editor management",
+      "keys": "ctrl+\\",
+      "label": "Split editor",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "focusgroup1",
+      "cat": "Editor management",
+      "keys": "ctrl+1",
+      "label": "Focus 1st editor group",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "focusgroup2",
+      "cat": "Editor management",
+      "keys": "ctrl+2",
+      "label": "Focus 2nd editor group",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "moveeditorright",
+      "cat": "Editor management",
+      "keys": "ctrl+shift+pagedown",
+      "label": "Move editor right",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "moveeditorleft",
+      "cat": "Editor management",
+      "keys": "ctrl+shift+pageup",
+      "label": "Move editor left",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "focusprevgroup",
+      "cat": "Editor management",
+      "keys": "ctrl+k ctrl+left",
+      "label": "Focus previous editor group",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "focusnextgroup",
+      "cat": "Editor management",
+      "keys": "ctrl+k ctrl+right",
+      "label": "Focus next editor group",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "newfile",
+      "cat": "File management",
+      "keys": "ctrl+n",
+      "label": "New File",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "save",
+      "cat": "File management",
+      "keys": "ctrl+s",
+      "label": "Save",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "saveas",
+      "cat": "File management",
+      "keys": "ctrl+shift+s",
+      "label": "Save As",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "saveall",
+      "cat": "File management",
+      "keys": "ctrl+k s",
+      "label": "Save All",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "closeeditor",
+      "cat": "File management",
+      "keys": "ctrl+w",
+      "label": "Close editor",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "closeeditor-f4",
+      "cat": "File management",
+      "keys": "ctrl+f4",
+      "label": "Close editor (Ctrl+F4)",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "closeall",
+      "cat": "File management",
+      "keys": "ctrl+k ctrl+w",
+      "label": "Close All",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "reopenclosed",
+      "cat": "File management",
+      "keys": "ctrl+shift+t",
+      "label": "Reopen closed editor",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "keepeditor",
+      "cat": "File management",
+      "keys": "ctrl+k enter",
+      "label": "Keep preview mode editor open",
+      "status": "unverified",
+      "why": "no preview (italic) tab is ever created here, so nothing can be promoted"
+    },
+    {
+      "id": "nexteditor",
+      "cat": "File management",
+      "keys": "ctrl+tab",
+      "label": "Open next editor",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "copypath",
+      "cat": "File management",
+      "keys": "ctrl+k p",
+      "label": "Copy path of active file",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "sidebar",
+      "cat": "Display",
+      "keys": "ctrl+b",
+      "label": "Toggle Sidebar visibility",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "explorer",
+      "cat": "Display",
+      "keys": "ctrl+shift+e",
+      "label": "Show Explorer",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "search",
+      "cat": "Display",
+      "keys": "ctrl+shift+f",
+      "label": "Show Search",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "scm",
+      "cat": "Display",
+      "keys": "ctrl+shift+g",
+      "label": "Show Source Control",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "debugview",
+      "cat": "Display",
+      "keys": "ctrl+shift+d",
+      "label": "Show Debug",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "extensions",
+      "cat": "Display",
+      "keys": "ctrl+shift+x",
+      "label": "Show Extensions",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "replaceinfiles",
+      "cat": "Display",
+      "keys": "ctrl+shift+h",
+      "label": "Replace in files",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "output",
+      "cat": "Display",
+      "keys": "ctrl+shift+u",
+      "label": "Show Output panel",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "mdpreview",
+      "cat": "Display",
+      "keys": "ctrl+shift+v",
+      "label": "Open Markdown preview",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "mdpreviewside",
+      "cat": "Display",
+      "keys": "ctrl+k v",
+      "label": "Open Markdown preview to the side",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "zen",
+      "cat": "Display",
+      "keys": "ctrl+k z",
+      "label": "Zen Mode",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "editorlayout",
+      "cat": "Display",
+      "keys": "shift+alt+0",
+      "label": "Toggle editor layout",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "fullscreen",
+      "cat": "Display",
+      "keys": "f11",
+      "label": "Toggle full screen",
+      "status": "unverified",
+      "why": "browser fullscreen needs a user gesture; a synthetic key is refused"
+    },
+    {
+      "id": "searchdetails",
+      "cat": "Display",
+      "keys": "ctrl+shift+j",
+      "label": "Toggle Search details",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "breakpoint",
+      "cat": "Debug",
+      "keys": "f9",
+      "label": "Toggle breakpoint",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "startdebug",
+      "cat": "Debug",
+      "keys": "f5",
+      "label": "Start/Continue",
+      "status": "unverified",
+      "why": "bound, but a bare serve-web workspace has no debug extension, so there is nothing to start"
+    },
+    {
+      "id": "showhover",
+      "cat": "Debug",
+      "keys": "ctrl+k ctrl+i",
+      "label": "Show hover",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "terminal",
+      "cat": "Terminal",
+      "keys": "ctrl+`",
+      "label": "Show integrated terminal",
+      "status": "pass",
+      "why": ""
+    },
+    {
+      "id": "newterminal",
+      "cat": "Terminal",
+      "keys": "ctrl+shift+`",
+      "label": "Create new terminal",
+      "status": "pass",
+      "why": ""
+    }
+  ]
+}

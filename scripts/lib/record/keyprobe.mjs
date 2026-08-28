@@ -20,8 +20,31 @@ export const snapshot = async (page) => page.evaluate(async () => {
     // the status bar carries Ln/Col, indentation, encoding, EOL and language — five observables
     // in one string, and it updates synchronously with the editor
     status: txt('.part.statusbar'),
-    editorText: Array.from(document.querySelectorAll('.part.editor .monaco-editor .view-line'))
-      .map((l) => l.innerText.replace(/ /g, ' ')).join('\n'),
+    // THE ACTIVE EDITOR PANE ONLY.
+    //
+    // Querying every `.monaco-editor` under `.part.editor` also caught the Settings editor's
+    // embedded editors and the palette's own input, so from the Ctrl+, row onwards `editorText`
+    // was the file concatenated with whatever widget happened to be up. The failure text proved
+    // it: a buffer came back reading "Show Expline two" — the palette's leftover "Show Exp" glued
+    // to the file's own line. `.editor-instance` is the pane; the rest is furniture.
+    //
+    // NBSP BY CODE POINT (gotcha 45, paid for twice now). Monaco renders every space as U+00A0.
+    // The old line carried an invisible one inside its regex literal, which made this block
+    // unmatchable by any patch that typed a normal space — two edits reported success and changed
+    // nothing at all before that was spotted.
+    editorText: (() => {
+      const NBSP = String.fromCharCode(160);
+      const group = document.querySelector('.part.editor .editor-group-container.active')
+        ?? document.querySelector('.part.editor');
+      if (!group) return '';
+      const ed = Array.from(group.querySelectorAll('.editor-instance .monaco-editor')).find((e) =>
+        !e.closest('.settings-editor') && !e.closest('.keybindings-editor') &&
+        !e.closest('.suggest-widget') && !e.closest('.find-widget') &&
+        !e.closest('.rename-box') && !e.closest('.quick-input-widget'));
+      if (!ed) return '';
+      return Array.from(ed.querySelectorAll('.view-line'))
+        .map((l) => l.innerText.split(NBSP).join(' ')).join('\n');
+    })(),
     tabs: Array.from(document.querySelectorAll('.part.editor .tab')).map((t) => t.innerText.trim()),
     activeTab: txt('.part.editor .tab.active'),
     // an editor GROUP per split; the count is how `ctrl+\` is verified
@@ -95,7 +118,34 @@ export const snapshot = async (page) => page.evaluate(async () => {
     // `ctrl+k p` copies the file path and touches nothing on screen at all. Reading the clipboard
     // is the only honest way to verify it; guarded because permission can be refused and a throw
     // here would take down every unrelated probe with it.
-    clipboard: await navigator.clipboard.readText().catch(() => ''),
+    // CLIPBOARD READS CAN HANG, NOT REJECT.
+    //
+    // `navigator.clipboard.readText()` requires the document to be focused. When focus has gone
+    // somewhere the page does not own — the Extensions view waiting on a marketplace it cannot
+    // reach — the promise simply never settles, and `catch` never runs because nothing throws.
+    // That killed a full 112-row run stone dead at row 99. Race it.
+    clipboard: await Promise.race([
+      navigator.clipboard.readText().catch(() => ''),
+      new Promise((res) => setTimeout(() => res(''), 1500)),
+    ]),
+    // The topmost line number currently rendered. `ctrl+up` / `ctrl+down` scroll WITHOUT moving
+    // the caret, so nothing else in this snapshot notices them.
+    // MONACO REUSES ITS LINE-NUMBER NODES OUT OF ORDER, so the first `.line-numbers` element in
+    // DOM order is NOT the topmost line on screen, and it can sit still while the view moves.
+    // Taking the minimum is the only reading that survives a scroll.
+    firstVisibleLine: (() => {
+      const ns = Array.from(document.querySelectorAll('.part.editor .monaco-editor .line-numbers'))
+        .map((e) => Number(e.textContent.trim())).filter((n) => Number.isFinite(n) && n > 0);
+      return ns.length ? Math.min(...ns) : 0;
+    })(),
+    // A horizontal scrollbar exists exactly when the longest line overflows the viewport, which is
+    // precisely what word wrap removes. That makes it the observable for `alt+z`.
+    hScroll: (() => {
+      const sl = document.querySelector('.part.editor .monaco-editor .scrollbar.horizontal .slider');
+      if (!sl) return 0;
+      const r = sl.getBoundingClientRect();
+      return getComputedStyle(sl).display === 'none' ? 0 : Math.round(r.width);
+    })(),
   };
 });
 
@@ -133,4 +183,32 @@ export const toPlaywright = (chord) => {
     out.push(b.length === 1 ? b.toUpperCase() : b);
   }
   return out.join('+');
+};
+
+/**
+ * The keycaps to DRAW for a chord: `ctrl+k ctrl+s` -> ['Ctrl','K','Ctrl','S'].
+ *
+ * The overlay renders one cap per element, so a two-key chord is four caps in order, not two
+ * strings with a plus in them. Names are the ones a viewer reads off a keyboard, which is why
+ * `up` becomes an arrow and `pageup` becomes `PgUp` rather than either the VS Code spelling or
+ * Playwright's.
+ */
+export const capsFor = (chord) => {
+  const NICE = {
+    ctrl: 'Ctrl', shift: 'Shift', alt: 'Alt', meta: 'Win', cmd: 'Cmd', win: 'Win',
+    up: '\u2191', down: '\u2193', left: '\u2190', right: '\u2192',
+    pageup: 'PgUp', pagedown: 'PgDn', enter: 'Enter', tab: 'Tab', esc: 'Esc', escape: 'Esc',
+    space: 'Space', home: 'Home', end: 'End', backspace: 'Backspace', delete: 'Del',
+  };
+  const caps = [];
+  for (const part of String(chord).trim().split(/\s+/)) {
+    const bits = part.split('+');
+    for (let i = 0; i < bits.length; i++) {
+      let b = bits[i];
+      if (b === '' && i > 0) b = '+';
+      const low = b.toLowerCase();
+      caps.push(NICE[low] ?? (b.length === 1 ? b.toUpperCase() : b));
+    }
+  }
+  return caps;
 };

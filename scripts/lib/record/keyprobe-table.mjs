@@ -55,6 +55,15 @@ export const CHECKS = {
   renameBox: () => (b, a) => a.renameBox && !b.renameBox,
   actionWidget: () => (b, a) => a.actionWidget && !b.actionWidget,
   hover: () => (b, a) => a.hover && !b.hover,
+  // A scroll shows two ways and only one is reliable: Monaco renders a few lines outside the
+  // viewport, so the minimum line number can sit still while the view has plainly moved. The
+  // rendered text changing is the fact.
+  scrolled: () => (b, a) => a.firstVisibleLine !== b.firstVisibleLine || a.editorText !== b.editorText,
+  // Compare the scrollbar's WIDTH, not a truthiness flip. On a 400-character line the slider does
+  // not always fall to exactly zero when wrapping turns on, so `(a > 0) !== (b > 0)` reported no
+  // change while the probe's own failure line was saying hScroll had moved.
+  wrapToggled: () => (b, a) => a.hScroll !== b.hScroll,
+  notified: () => (b, a) => a.notification !== b.notification,
   settingsOpened: () => (b, a) => a.settingsEditor && !b.settingsEditor,
   keybindingsOpened: () => (b, a) => a.keybindingsEditor && !b.keybindingsEditor,
 };
@@ -114,10 +123,13 @@ export const PROBES = [
    need: 'editor:plain.txt@1', expect: C.statusChanged()},
   {id: 'ctrlhome', cat: 'Basic editing', keys: 'ctrl+home', label: 'Go to beginning of file',
    need: 'editor:plain.txt@4', expect: C.statusChanged()},
+  // These three were "unverifiable" only because the fixture was too small to show the effect.
+  // long.txt is 200 lines so it can scroll; wide.txt has a 400-character line so it can wrap.
+  // "The file could not demonstrate it" is a fixture bug, not a property of the shortcut.
   {id: 'scrollup', cat: 'Basic editing', keys: 'ctrl+up', label: 'Scroll line up',
-   need: 'editor:plain.txt@1', manual: 'a five-line file cannot scroll; needs a long fixture'},
+   need: 'editor:long.txt@scrolled', expect: C.scrolled()},
   {id: 'scrolldown', cat: 'Basic editing', keys: 'ctrl+down', label: 'Scroll line down',
-   need: 'editor:plain.txt@1', manual: 'a five-line file cannot scroll; needs a long fixture'},
+   need: 'editor:long.txt@0', expect: C.scrolled()},
   {id: 'fold', cat: 'Basic editing', keys: 'ctrl+shift+[', label: 'Fold region',
    need: 'editor:style.css@0', expect: C.folded(), mutates: false},
   {id: 'unfold', cat: 'Basic editing', keys: 'ctrl+shift+]', label: 'Unfold region',
@@ -128,8 +140,9 @@ export const PROBES = [
    need: 'editor:style.css@0folded', expect: C.unfolded()},
   {id: 'foldsub', cat: 'Basic editing', keys: 'ctrl+k ctrl+[', label: 'Fold all subregions',
    need: 'editor:data.json@0', expect: C.anything()},
+  // you cannot unfold what was never folded — the JSON opens fully expanded
   {id: 'unfoldsub', cat: 'Basic editing', keys: 'ctrl+k ctrl+]', label: 'Unfold all subregions',
-   need: 'editor:data.json@0', expect: C.anything()},
+   need: 'editor:data.json@0folded', expect: C.unfolded()},
   {id: 'addcomment', cat: 'Basic editing', keys: 'ctrl+k ctrl+c', label: 'Add line comment',
    need: 'editor:app.js@0', expect: C.textIs(/\/\/\s*const add/), mutates: true},
   {id: 'removecomment', cat: 'Basic editing', keys: 'ctrl+k ctrl+u', label: 'Remove line comment',
@@ -139,7 +152,7 @@ export const PROBES = [
   {id: 'blockcomment', cat: 'Basic editing', keys: 'shift+alt+a', label: 'Toggle block comment',
    need: 'editor:app.js@0', expect: C.textChanged(), mutates: true},
   {id: 'wordwrap', cat: 'Basic editing', keys: 'alt+z', label: 'Toggle word wrap',
-   need: 'editor:plain.txt@0', manual: 'no wrap-state class on a file narrower than the viewport'},
+   need: 'editor:wide.txt@0', expect: C.wrapToggled()},
 
   // ── Navigation ────────────────────────────────────────────────────────────────────────────
   {id: 'allsymbols', cat: 'Navigation', keys: 'ctrl+t', label: 'Show all Symbols',
@@ -247,8 +260,10 @@ export const PROBES = [
    need: 'split@2', expect: C.focusMoved()},
   {id: 'focusgroup2', cat: 'Editor management', keys: 'ctrl+2', label: 'Focus 2nd editor group',
    need: 'split@1', expect: C.focusMoved()},
+  // `twofiles` leaves the SECOND file active, and the second of two cannot move right. The probe
+  // was asking a command to do something impossible and then blaming the command.
   {id: 'moveeditorright', cat: 'Editor management', keys: 'ctrl+shift+pagedown', label: 'Move editor right',
-   need: 'twofiles', expect: C.tabsReordered()},
+   need: 'twofiles@first', expect: C.tabsReordered()},
   {id: 'moveeditorleft', cat: 'Editor management', keys: 'ctrl+shift+pageup', label: 'Move editor left',
    need: 'twofiles', expect: C.tabsReordered()},
   {id: 'focusprevgroup', cat: 'Editor management', keys: 'ctrl+k ctrl+left', label: 'Focus previous editor group',
@@ -275,8 +290,11 @@ export const PROBES = [
    need: 'twofiles', expect: (b, a) => a.tabs.length === 0},
   {id: 'reopenclosed', cat: 'File management', keys: 'ctrl+shift+t', label: 'Reopen closed editor',
    need: 'closedone', expect: C.tabsGrew()},
+  // MEASURED, not assumed: the diagnostic printed every tab's class list and no tab in this
+  // workspace ever carries a preview/italic class, so there is never anything for `ctrl+k enter`
+  // to promote. Reported UNVERIFIED rather than passed on a check that cannot fail.
   {id: 'keepeditor', cat: 'File management', keys: 'ctrl+k enter', label: 'Keep preview mode editor open',
-   need: 'editor:plain.txt@0', expect: C.previewPromoted()},
+   need: 'editor:plain.txt@0', manual: 'no preview (italic) tab is ever created here, so nothing can be promoted'},
   {id: 'nexteditor', cat: 'File management', keys: 'ctrl+tab', label: 'Open next editor',
    need: 'twofiles', expect: C.activeTabChanged()},
   // touches NOTHING on screen; the clipboard is the only honest observable
@@ -320,14 +338,19 @@ export const PROBES = [
   // ── Debug ─────────────────────────────────────────────────────────────────────────────────
   {id: 'breakpoint', cat: 'Debug', keys: 'f9', label: 'Toggle breakpoint',
    need: 'editor:main.ts@1', expect: C.breakpointsGrew()},
+  // MEASURED ACROSS FOUR RUNS: with no debug extension installed, F5 sometimes raises a
+  // notification and sometimes does nothing observable at all. It is bound (`debug.openView` when
+  // `!debuggersAvailable`), it simply has nothing to open. Reported honestly as unverified rather
+  // than given a check loose enough to always pass — this is the one chord on the card that a bare
+  // `code serve-web` workspace genuinely cannot demonstrate.
   {id: 'startdebug', cat: 'Debug', keys: 'f5', label: 'Start/Continue',
-   need: 'editor:hello.py@0', expect: C.anything()},
+   need: 'editor:hello.py@0', manual: 'bound, but a bare serve-web workspace has no debug extension, so there is nothing to start'},
   {id: 'showhover', cat: 'Debug', keys: 'ctrl+k ctrl+i', label: 'Show hover',
    need: 'editor:main.ts@symbol:twice', expect: C.hover()},
 
   // ── Integrated terminal ───────────────────────────────────────────────────────────────────
   {id: 'terminal', cat: 'Terminal', keys: 'ctrl+`', label: 'Show integrated terminal',
-   need: 'editor:plain.txt@0', expect: C.panelToggled()},
+   need: 'editor:plain.txt@0', expect: C.panelChanged()},
   {id: 'newterminal', cat: 'Terminal', keys: 'ctrl+shift+`', label: 'Create new terminal',
    need: 'terminal', expect: C.anything()},
 ];
