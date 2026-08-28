@@ -356,6 +356,7 @@ import {PlaceholderSeal} from './scenes/PlaceholderSeal';
 import {JoinMerge} from './scenes/JoinMerge';
 import {DbTwoWays} from './scenes/DbTwoWays';
 import {TypeGate} from './scenes/TypeGate';
+import {CursorWalk} from './scenes/CursorWalk';
 import {TransactionDoor} from './scenes/TransactionDoor';
 import {GroupBuckets} from './scenes/GroupBuckets';
 import {TableSplit} from './scenes/TableSplit';
@@ -372,6 +373,7 @@ const registry: Record<string, React.FC<{scene: Scene}>> = {  WHEN_NOT_SQLITE: W
   GROUP_BUCKETS: GroupBuckets,
   TRANSACTION_DOOR: TransactionDoor,
   TYPE_GATE: TypeGate,
+  CURSOR_WALK: CursorWalk,
   DB_TWO_WAYS: DbTwoWays,
   JOIN_MERGE: JoinMerge,
   PLACEHOLDER_SEAL: PlaceholderSeal,

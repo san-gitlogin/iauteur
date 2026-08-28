@@ -10,6 +10,7 @@ export type SceneTypeName =
   | 'TABLE_SPLIT'
   | 'GROUP_BUCKETS'
   | 'TRANSACTION_DOOR'
+  | 'CURSOR_WALK'
   | 'TYPE_GATE'
   | 'DB_TWO_WAYS'
   | 'JOIN_MERGE'
@@ -459,6 +460,23 @@ export type TransactionDoorScene = SceneCommon<'TRANSACTION_DOOR'> & { data: {
       stageAtWord?: number;
       actAtWord?: number;
       atWord?: number;
+    };
+  } };
+
+export type CursorWalkScene = SceneCommon<'CURSOR_WALK'> & { data: {
+    cursorWalk: {
+      caption?: string;
+      premise?: string;
+      connectionLabel?: string;
+      cursorLabel?: string;
+      fileName?: string;
+      query?: string;
+      loopLabel?: string;
+      rows?: unknown;
+      atWord?: number;
+      queryAtWord?: number;
+      walkAtWord?: number;
+      color?: unknown;
     };
   } };
 
@@ -5371,6 +5389,7 @@ export interface SceneByType {
   TABLE_SPLIT: TableSplitScene;
   GROUP_BUCKETS: GroupBucketsScene;
   TRANSACTION_DOOR: TransactionDoorScene;
+  CURSOR_WALK: CursorWalkScene;
   TYPE_GATE: TypeGateScene;
   DB_TWO_WAYS: DbTwoWaysScene;
   JOIN_MERGE: JoinMergeScene;
@@ -5732,6 +5751,7 @@ export type TypedScene =
   | TableSplitScene
   | GroupBucketsScene
   | TransactionDoorScene
+  | CursorWalkScene
   | TypeGateScene
   | DbTwoWaysScene
   | JoinMergeScene

@@ -505,21 +505,66 @@ scene('CHAPTER',
   {chapter: {number: '03', title: 'The same file, from code',
              subtitle: 'Python, parameters, and commit'}});
 
-rec(`Six lines, one at a time. We call sqlite3 dot connect and hand it a filename. What comes
-     back is a connection — we call it con — and con is simply the open file. Then we ask con
-     for a cursor, which we call cur. The cursor is what we hand a query to, and what hands
-     the rows back. We loop, we print, we close. No server, no password, no connection string:
-     it is a filename. Run it, and down in the terminal are the products the shell inserted.`,
+// LAW 0d: the script says one is the door and the other is the desk. An analogy that is SAID and
+// not DRAWN is the weakest beat you can ship, so it gets drawn — and LAW 0l says draw it BEFORE
+// the words are leaned on, not after.
+scene('CURSOR_WALK',
+  `Two words are about to do all the work, so let's see them before we type them. The connection is
+   the open file — that is all it is. The cursor is the thing you hand a question to, and the thing
+   that hands rows back. And here is the part people get wrong: the rows do not arrive as a list you
+   already hold. The cursor walks them, and gives you one per turn of the loop.`,
+  {cursorWalk: {
+    caption: 'rows, one at a time',
+    premise: 'con is the open file. cur is the thing you hand a question to.',
+    connectionLabel: 'con - the open file',
+    cursorLabel: 'cur - the read head',
+    fileName: 'shop.db',
+    query: 'SELECT name, price FROM products',
+    loopLabel: 'for name, price in cur.execute(...)',
+    rows: [
+      {label: 'Mechanical keyboard', sub: '89.00', atWord: 47},
+      {label: '27-inch monitor', sub: '240.00', atWord: 53},
+      {label: 'Desk lamp', sub: '35.50', atWord: 58},
+    ],
+    atWord: 3, queryAtWord: 14, color: 'blue',
+  }});
+
+rec(`There it is in real code. First line: we call sqlite3 dot connect and we hand it a filename,
+     and what comes back we call con. Second line: we ask con for a cursor and we call it cur.
+     Third line: we loop over cur dot execute, which is us handing the sentence over, and the rows
+     come back one at a time. Then we close the file behind us.
+     Six lines. And notice what is missing — no host, no port, no password. If you have used
+     Postgres or MySQL, that is the line where you would be pasting credentials, and here you are
+     naming a file.`,
   {caption: 'a filename, not a connection string',
    premise: 'The same shop.db the shell created, opened by Python on a different engine build.',
    clips: [
      clip('rec:sqlite-act3#open-read', 'read the file', {
-       zooms: [{mark: 'connect'}],
-       callouts: [{text: 'the whole connection', mark: 'connect', color: 'blue'}],
+       zooms: [{mark: 'connect'}, {mark: 'cursor'}, {mark: 'loop'}],
+       callouts: [
+         {text: 'con IS the file', mark: 'connect', color: 'blue'},
+         {text: 'cur is who you talk to', mark: 'cursor', color: 'purple'},
+         {text: 'hand it the sentence', mark: 'loop', color: 'green'},
+       ],
+       // THE OVERLAY EXPLAINS THE SHAPE, not the words. Three named stops and one token
+       // travelling them is what "connect, then cursor, then rows" actually IS.
+       overlay: {kind: 'chain', steps: ['connect', 'cursor', 'rows'], color: 'blue'},
      }),
+   ]});
+
+rec(`Now we run it. And we see, down at the bottom, the four products — the ones the shell inserted,
+     in the shell, in a completely separate session. The monitor is right there at two hundred and
+     forty, the same number we typed in Act one. Nothing was exported. Nothing was converted. There
+     was no migration step and no import. It is the same file, and Python just opened it.`,
+  {caption: 'the shell wrote it, Python reads it',
+   premise: 'No export, no import, no conversion step. One file, two languages.',
+   clips: [
      clip('rec:sqlite-act3#run-read', 'run it', {
-       zooms: [{mark: 'firstrow'}],
-       callouts: [{text: 'written by the shell, read by Python', mark: 'firstrow', color: 'green'}],
+       zooms: [{mark: 'firstrow'}, {mark: 'top'}],
+       callouts: [
+         {text: 'written by the shell, read by Python', mark: 'firstrow', color: 'green'},
+         {text: 'same price, same file', mark: 'top', color: 'blue'},
+       ],
      }),
    ]});
 
@@ -534,8 +579,12 @@ rec(`One small thing that will save you real pain. By default a row comes back a
    premise: 'Both print the same value today. Only one keeps working after a schema change.',
    clips: [
      clip('rec:sqlite-act3#open-rowfac', 'name your columns', {
-       zooms: [{mark: 'rf'}],
-       callouts: [{text: 'one line, and rows get names', mark: 'rf', color: 'purple'}],
+       zooms: [{mark: 'rf'}, {mark: 'byname'}],
+       callouts: [
+         {text: 'one line, and rows get names', mark: 'rf', color: 'purple'},
+         {text: 'now you can ask for it by name', mark: 'byname', color: 'green'},
+       ],
+       overlay: {kind: 'swap', from: 'row[1]', to: 'row["name"]', color: 'green'},
      }),
      clip('rec:sqlite-act3#run-rowfac', 'by index, by name', {
        zooms: [{mark: 'byidx'}, {mark: 'byname'}],
@@ -563,25 +612,30 @@ scene('PLACEHOLDER_SEAL',
     safeAtWord: 28, evilAtWord: 39, atWord: 3,
   }});
 
-rec(`Both are in one file, and they look almost the same. cur dot execute is how we hand a query
-     to the database, and the first call hands it two separate things: the sentence, and the
-     value, kept apart. That is what the question mark is for — it means "a value goes here,
-     and I will pass it to you separately". The second one glues the value straight into the
-     sentence with an f-string. Four characters between them. Now watch the bottom of the
-     screen. The safe call asked for the USB-C hub and got the USB-C hub — one row, exactly
-     what we asked for. The second was handed a quote, then OR one equals one, which is true
-     of every row, then a comment marker that kills the rest of the sentence. Four rows come
-     back. The whole table. And placeholders scale too: execute many takes a list and sends
-     all of it in one call, preparing the sentence once instead of three times.`,
+rec(`Both of these are in one file and they look almost the same, so let's go slowly. Up top we set
+     two variables. Wanted is an ordinary product name. Evil is a string somebody could type into a
+     search box.
+     Now the two calls. cur dot execute is how we hand a query to the database. The first hands it
+     TWO separate things — the sentence, and the value, kept apart by a comma. That is what the
+     question mark is for: a value goes here, pass it to me separately, do not read it as part of
+     the sentence. The second glues the value in with an f-string. That is the whole difference.
+     Watch the bottom. The safe call asked for the hub: one row. The second was handed a quote,
+     which closes the string early, then OR one equals one, true of every row, then two dashes,
+     which comment out the rest. Four rows. The whole table. Nobody broke in — the value was
+     allowed to become code.`,
   {caption: 'one row, or all of them',
    premise: 'The same table, the same code path. The difference is where the value went.',
    clips: [
      clip('rec:sqlite-act3#open-params', 'two ways to ask', {
-       zooms: [{mark: 'safe'}, {mark: 'unsafe'}],
+       zooms: [{mark: 'wanted'}, {mark: 'evil'}, {mark: 'safe'}, {mark: 'unsafe'}],
        callouts: [
+         {text: 'an ordinary product name', mark: 'wanted', color: 'blue'},
+         {text: 'and something somebody typed', mark: 'evil', color: 'orange'},
          {text: 'the value stays a value', mark: 'safe', color: 'green'},
          {text: 'the value becomes code', mark: 'unsafe', color: 'red'},
        ],
+       overlay: {kind: 'split', left: '?', right: 'f-string',
+                 leftNote: 'stays a value', rightNote: 'becomes code'},
      }),
      clip('rec:sqlite-act3#run-params', 'safe, then not', {
        zooms: [{mark: 'one'}, {mark: 'all'}],
@@ -590,11 +644,39 @@ rec(`Both are in one file, and they look almost the same. cur dot execute is how
          {text: 'the whole table', mark: 'all', color: 'red'},
        ],
      }),
+   ]});
+
+rec(`Placeholders do not only keep you safe, they are also how you go fast. Execute many takes a
+     LIST and sends the whole lot in one call — the database prepares the sentence once and runs it
+     three times, and we see the total climb at the bottom. If you are inserting in a loop and it
+     feels slow, this is the line you want.`,
+  {caption: 'prepared once, run many times',
+   premise: 'The same placeholder that stops an injection is also what lets a batch go in one call.',
+   clips: [
      clip('rec:sqlite-act3#run-many', 'insert three at once', {
-       zooms: [{mark: 'many'}],
-       callouts: [{text: 'prepared once, run three times', mark: 'many', color: 'blue'}],
+       zooms: [{mark: 'many'}, {mark: 'total'}],
+       callouts: [
+         {text: 'prepared once, run three times', mark: 'many', color: 'blue'},
+         {text: 'and the count moves', mark: 'total', color: 'green'},
+       ],
      }),
    ]});
+
+scene('QUIZ_CARD',
+  `Putting a name a user typed into a query. Which one keeps it a value? Have a think, and pause
+   if you want longer. Ready. It is C — the value gets handed over separately.`,
+  {quiz: {
+    question: 'Which one keeps a typed-in name a VALUE?',
+    options: [
+      {text: 'An f-string'},
+      {text: 'Adding the strings together'},
+      {text: 'A question-mark placeholder'},
+      {text: 'Quoting it yourself'},
+    ],
+    answerIndex: 2,
+    why: 'The value is passed separately, so it is never part of the sentence.',
+    revealAtWord: 27, atWord: 3,
+  }});
 
 scene('TRANSACTION_DOOR',
   `Something I have deliberately not mentioned yet. In Python your changes are not real until you
@@ -623,8 +705,11 @@ rec(`So here's commit doing its job. Insert a webcam, print the new row id, comm
    premise: 'The connection saw an empty table. The file on disk never did.',
    clips: [
      clip('rec:sqlite-act3#run-write', 'insert, then commit', {
-       zooms: [{mark: 'count'}],
-       callouts: [{text: 'on disk, for good', mark: 'count', color: 'green'}],
+       zooms: [{mark: 'newid'}, {mark: 'count'}],
+       callouts: [
+         {text: 'the id SQLite just assigned', mark: 'newid', color: 'purple'},
+         {text: 'on disk, for good', mark: 'count', color: 'green'},
+       ],
      }),
      clip('rec:sqlite-act3#open-rollback', 'delete it all', {
        callouts: [{text: 'the undo', mark: 'rb', color: 'purple'}],

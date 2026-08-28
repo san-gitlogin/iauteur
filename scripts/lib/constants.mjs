@@ -242,6 +242,7 @@ export const TYPES = [
   'JOIN_MERGE',
   'DB_TWO_WAYS',
   'TYPE_GATE',
+  'CURSOR_WALK',
   'TRANSACTION_DOOR',
   'GROUP_BUCKETS',
   'TABLE_SPLIT',

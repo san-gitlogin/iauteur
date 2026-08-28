@@ -82,7 +82,7 @@
   {
     "index": 10,
     "id": "sc11",
-    "type": "PROGRESS",
+    "type": "FUNNEL",
     "durationFrames": 220,
     "startFrame": 2810,
     "midFrame": 2931
@@ -90,883 +90,3019 @@
   {
     "index": 11,
     "id": "sc12",
-    "type": "TIMELINE",
-    "durationFrames": 220,
+    "type": "WATERFALL",
+    "durationFrames": 240,
     "startFrame": 3030,
-    "midFrame": 3151
+    "midFrame": 3162
   },
   {
     "index": 12,
     "id": "sc13",
-    "type": "QUADRANT",
-    "durationFrames": 210,
-    "startFrame": 3250,
-    "midFrame": 3365
+    "type": "PICTOGRAM",
+    "durationFrames": 230,
+    "startFrame": 3270,
+    "midFrame": 3396
   },
   {
     "index": 13,
     "id": "sc14",
-    "type": "CODE_WINDOW",
-    "durationFrames": 260,
-    "startFrame": 3460,
-    "midFrame": 3603
+    "type": "RADAR",
+    "durationFrames": 240,
+    "startFrame": 3500,
+    "midFrame": 3632
   },
   {
     "index": 14,
     "id": "sc15",
-    "type": "RECAP",
-    "durationFrames": 300,
-    "startFrame": 3720,
-    "midFrame": 3885
+    "type": "CANDLESTICK",
+    "durationFrames": 240,
+    "startFrame": 3740,
+    "midFrame": 3872
   },
   {
     "index": 15,
     "id": "sc16",
-    "type": "OUTRO_CTA",
-    "durationFrames": 200,
-    "startFrame": 4020,
-    "midFrame": 4130
+    "type": "BOX_PLOT",
+    "durationFrames": 230,
+    "startFrame": 3980,
+    "midFrame": 4106
   },
   {
     "index": 16,
     "id": "sc17",
-    "type": "TITLE_CARD",
-    "durationFrames": 150,
-    "startFrame": 4220,
-    "midFrame": 4302
+    "type": "TREEMAP",
+    "durationFrames": 230,
+    "startFrame": 4210,
+    "midFrame": 4336
   },
   {
     "index": 17,
     "id": "sc18",
-    "type": "KINETIC_TEXT",
-    "durationFrames": 150,
-    "startFrame": 4370,
-    "midFrame": 4452
+    "type": "SANKEY",
+    "durationFrames": 240,
+    "startFrame": 4440,
+    "midFrame": 4572
   },
   {
     "index": 18,
     "id": "sc19",
-    "type": "KINETIC_TEXT",
-    "durationFrames": 140,
-    "startFrame": 4520,
-    "midFrame": 4597
+    "type": "ICON_GRID",
+    "durationFrames": 220,
+    "startFrame": 4680,
+    "midFrame": 4801
   },
   {
     "index": 19,
     "id": "sc20",
-    "type": "KINETIC_TEXT",
-    "durationFrames": 140,
-    "startFrame": 4660,
-    "midFrame": 4737
+    "type": "ICON_CALLOUT",
+    "durationFrames": 220,
+    "startFrame": 4900,
+    "midFrame": 5021
   },
   {
     "index": 20,
     "id": "sc21",
-    "type": "DIAGRAM",
-    "durationFrames": 220,
-    "startFrame": 4800,
-    "midFrame": 4921
+    "type": "ICON_BURST",
+    "durationFrames": 230,
+    "startFrame": 5120,
+    "midFrame": 5246
   },
   {
     "index": 21,
     "id": "sc22",
-    "type": "CONCEPT_DIAGRAM",
-    "durationFrames": 180,
-    "startFrame": 5020,
-    "midFrame": 5119
+    "type": "LOGO_WALL",
+    "durationFrames": 220,
+    "startFrame": 5350,
+    "midFrame": 5471
   },
   {
     "index": 22,
     "id": "sc23",
-    "type": "BITS",
-    "durationFrames": 200,
-    "startFrame": 5200,
-    "midFrame": 5310
+    "type": "LOGO_VERSUS",
+    "durationFrames": 220,
+    "startFrame": 5570,
+    "midFrame": 5691
   },
   {
     "index": 23,
     "id": "sc24",
-    "type": "MEMORY",
-    "durationFrames": 200,
-    "startFrame": 5400,
-    "midFrame": 5510
+    "type": "LOGO_TIMELINE",
+    "durationFrames": 240,
+    "startFrame": 5790,
+    "midFrame": 5922
   },
   {
     "index": 24,
     "id": "sc25",
-    "type": "PACKET",
-    "durationFrames": 240,
-    "startFrame": 5600,
-    "midFrame": 5732
+    "type": "FORMULA",
+    "durationFrames": 220,
+    "startFrame": 6030,
+    "midFrame": 6151
   },
   {
     "index": 25,
     "id": "sc26",
-    "type": "PIPELINE",
-    "durationFrames": 210,
-    "startFrame": 5840,
-    "midFrame": 5955
+    "type": "MOLECULE",
+    "durationFrames": 220,
+    "startFrame": 6250,
+    "midFrame": 6371
   },
   {
     "index": 26,
     "id": "sc27",
-    "type": "PIPELINE",
-    "variant": "ci",
-    "durationFrames": 200,
-    "startFrame": 6050,
-    "midFrame": 6160
+    "type": "DNA_HELIX",
+    "durationFrames": 240,
+    "startFrame": 6470,
+    "midFrame": 6602
   },
   {
     "index": 27,
     "id": "sc28",
-    "type": "PIPELINE",
-    "variant": "boot",
-    "durationFrames": 200,
-    "startFrame": 6250,
-    "midFrame": 6360
+    "type": "LABELED_FIGURE",
+    "durationFrames": 240,
+    "startFrame": 6710,
+    "midFrame": 6842
   },
   {
     "index": 28,
     "id": "sc29",
-    "type": "PIPELINE",
-    "variant": "serverless",
-    "durationFrames": 200,
-    "startFrame": 6450,
-    "midFrame": 6560
+    "type": "VECTOR_FIELD",
+    "durationFrames": 240,
+    "startFrame": 6950,
+    "midFrame": 7082
   },
   {
     "index": 29,
     "id": "sc30",
-    "type": "PIPELINE",
-    "variant": "journey",
-    "durationFrames": 200,
-    "startFrame": 6650,
-    "midFrame": 6760
+    "type": "CIRCUIT_FLOW",
+    "durationFrames": 240,
+    "startFrame": 7190,
+    "midFrame": 7322
   },
   {
     "index": 30,
     "id": "sc31",
-    "type": "LAYERED_STACK",
-    "durationFrames": 210,
-    "startFrame": 6850,
-    "midFrame": 6965
+    "type": "TICKER_TAPE",
+    "durationFrames": 240,
+    "startFrame": 7430,
+    "midFrame": 7562
   },
   {
     "index": 31,
     "id": "sc32",
-    "type": "GRID_ARRAY",
-    "durationFrames": 200,
-    "startFrame": 7060,
-    "midFrame": 7170
+    "type": "MAP_RADAR",
+    "durationFrames": 240,
+    "startFrame": 7670,
+    "midFrame": 7802
   },
   {
     "index": 32,
     "id": "sc33",
-    "type": "SPEC_COMPARE",
-    "durationFrames": 210,
-    "startFrame": 7260,
-    "midFrame": 7375
+    "type": "PROGRESS",
+    "durationFrames": 220,
+    "startFrame": 7910,
+    "midFrame": 8031
   },
   {
     "index": 33,
     "id": "sc34",
-    "type": "DIE_SHOT",
-    "durationFrames": 210,
-    "startFrame": 7470,
-    "midFrame": 7585
+    "type": "TIMELINE",
+    "durationFrames": 220,
+    "startFrame": 8130,
+    "midFrame": 8251
   },
   {
     "index": 34,
     "id": "sc35",
-    "type": "NEURAL_NET",
-    "durationFrames": 200,
-    "startFrame": 7680,
-    "midFrame": 7790
+    "type": "QUADRANT",
+    "durationFrames": 210,
+    "startFrame": 8350,
+    "midFrame": 8465
   },
   {
     "index": 35,
     "id": "sc36",
-    "type": "DATACENTER",
-    "durationFrames": 210,
-    "startFrame": 7880,
-    "midFrame": 7995
+    "type": "CODE_WINDOW",
+    "durationFrames": 260,
+    "startFrame": 8560,
+    "midFrame": 8703
   },
   {
     "index": 36,
     "id": "sc37",
-    "type": "DATACENTER",
-    "durationFrames": 210,
-    "startFrame": 8090,
-    "midFrame": 8205
+    "type": "RECAP",
+    "durationFrames": 300,
+    "startFrame": 8820,
+    "midFrame": 8985
   },
   {
     "index": 37,
     "id": "sc38",
-    "type": "TRANSFORMER_BLOCK",
-    "durationFrames": 210,
-    "startFrame": 8300,
-    "midFrame": 8415
-  },
-  {
-    "index": 38,
-    "id": "sc39",
-    "type": "CACHE_PYRAMID",
-    "durationFrames": 200,
-    "startFrame": 8510,
-    "midFrame": 8620
-  },
-  {
-    "index": 39,
-    "id": "sc40",
-    "type": "CALL_STACK",
-    "durationFrames": 200,
-    "startFrame": 8710,
-    "midFrame": 8820
-  },
-  {
-    "index": 40,
-    "id": "sc41",
-    "type": "TOKENIZER",
-    "durationFrames": 210,
-    "startFrame": 8910,
-    "midFrame": 9025
-  },
-  {
-    "index": 41,
-    "id": "sc42",
-    "type": "FILE_TREE",
+    "type": "OUTRO_CTA",
     "durationFrames": 200,
     "startFrame": 9120,
     "midFrame": 9230
   },
   {
+    "index": 38,
+    "id": "sc39",
+    "type": "WHEN_NOT_SQLITE",
+    "durationFrames": 200,
+    "startFrame": 9320,
+    "midFrame": 9430
+  },
+  {
+    "index": 39,
+    "id": "sc40",
+    "type": "INDEX_LEDGER",
+    "durationFrames": 200,
+    "startFrame": 9520,
+    "midFrame": 9630
+  },
+  {
+    "index": 40,
+    "id": "sc41",
+    "type": "WHERE_IT_RUNS",
+    "durationFrames": 200,
+    "startFrame": 9720,
+    "midFrame": 9830
+  },
+  {
+    "index": 41,
+    "id": "sc42",
+    "type": "TABLE_SPLIT",
+    "durationFrames": 200,
+    "startFrame": 9920,
+    "midFrame": 10030
+  },
+  {
     "index": 42,
     "id": "sc43",
-    "type": "DATABASE_TABLE",
-    "durationFrames": 210,
-    "startFrame": 9320,
-    "midFrame": 9435
+    "type": "GROUP_BUCKETS",
+    "durationFrames": 200,
+    "startFrame": 10120,
+    "midFrame": 10230
   },
   {
     "index": 43,
     "id": "sc44",
-    "type": "GIT_BRANCH",
-    "durationFrames": 210,
-    "startFrame": 9530,
-    "midFrame": 9645
+    "type": "TRANSACTION_DOOR",
+    "durationFrames": 200,
+    "startFrame": 10320,
+    "midFrame": 10430
   },
   {
     "index": 44,
     "id": "sc45",
-    "type": "STATE_MACHINE",
-    "durationFrames": 200,
-    "startFrame": 9740,
-    "midFrame": 9850
+    "type": "CURSOR_WALK",
+    "durationFrames": 220,
+    "startFrame": 10520,
+    "midFrame": 10641
   },
   {
     "index": 45,
     "id": "sc46",
-    "type": "EMBEDDING_SPACE",
+    "type": "TYPE_GATE",
     "durationFrames": 200,
-    "startFrame": 9940,
-    "midFrame": 10050
+    "startFrame": 10740,
+    "midFrame": 10850
   },
   {
     "index": 46,
     "id": "sc47",
-    "type": "QUEUE",
-    "durationFrames": 190,
-    "startFrame": 10140,
-    "midFrame": 10244
+    "type": "DB_TWO_WAYS",
+    "durationFrames": 200,
+    "startFrame": 10940,
+    "midFrame": 11050
   },
   {
     "index": 47,
     "id": "sc48",
-    "type": "API_REQUEST_RESPONSE",
+    "type": "JOIN_MERGE",
     "durationFrames": 200,
-    "startFrame": 10330,
-    "midFrame": 10440
+    "startFrame": 11140,
+    "midFrame": 11250
   },
   {
     "index": 48,
     "id": "sc49",
-    "type": "BOOLEAN_LOGIC_GATES",
+    "type": "PLACEHOLDER_SEAL",
     "durationFrames": 200,
-    "startFrame": 10530,
-    "midFrame": 10640
+    "startFrame": 11340,
+    "midFrame": 11450
   },
   {
     "index": 49,
     "id": "sc50",
-    "type": "HASH_FUNCTION",
+    "type": "SCAN_VS_SEEK",
     "durationFrames": 200,
-    "startFrame": 10730,
-    "midFrame": 10840
+    "startFrame": 11540,
+    "midFrame": 11650
   },
   {
     "index": 50,
     "id": "sc51",
-    "type": "SORTING_VISUAL",
-    "durationFrames": 200,
-    "startFrame": 10930,
-    "midFrame": 11040
-  },
-  {
-    "index": 51,
-    "id": "sc52",
-    "type": "CLOCK_SIGNAL",
-    "durationFrames": 200,
-    "startFrame": 11130,
-    "midFrame": 11240
-  },
-  {
-    "index": 52,
-    "id": "sc53",
-    "type": "GPU_CLUSTER",
-    "durationFrames": 200,
-    "startFrame": 11330,
-    "midFrame": 11440
-  },
-  {
-    "index": 53,
-    "id": "sc54",
-    "type": "ZOOM_SCALE",
-    "durationFrames": 210,
-    "startFrame": 11530,
-    "midFrame": 11645
-  },
-  {
-    "index": 54,
-    "id": "sc55",
-    "type": "ENCRYPTION",
-    "variant": "encrypt",
+    "type": "MCP_MESH",
     "durationFrames": 200,
     "startFrame": 11740,
     "midFrame": 11850
   },
   {
-    "index": 55,
-    "id": "sc56",
-    "type": "POINTER_DIAGRAM",
+    "index": 51,
+    "id": "sc52",
+    "type": "MCP_REACH",
     "durationFrames": 200,
     "startFrame": 11940,
     "midFrame": 12050
   },
   {
-    "index": 56,
-    "id": "sc57",
-    "type": "NUMBER_BASE",
+    "index": 52,
+    "id": "sc53",
+    "type": "MCP_DEPRECATED",
     "durationFrames": 200,
     "startFrame": 12140,
     "midFrame": 12250
   },
   {
-    "index": 57,
-    "id": "sc58",
-    "type": "CODE_EDITOR",
+    "index": 53,
+    "id": "sc54",
+    "type": "MCP_ELICIT",
     "durationFrames": 200,
     "startFrame": 12340,
     "midFrame": 12450
   },
   {
-    "index": 58,
-    "id": "sc59",
-    "type": "CODE_EDITOR",
-    "variant": "split",
+    "index": 54,
+    "id": "sc55",
+    "type": "MCP_TERMINAL",
     "durationFrames": 200,
     "startFrame": 12540,
     "midFrame": 12650
   },
   {
-    "index": 59,
-    "id": "sc60",
-    "type": "TERMINAL_SESSION",
+    "index": 55,
+    "id": "sc56",
+    "type": "MCP_FLAGS",
     "durationFrames": 200,
     "startFrame": 12740,
     "midFrame": 12850
   },
   {
-    "index": 60,
-    "id": "sc61",
-    "type": "LOG_STREAM",
+    "index": 56,
+    "id": "sc57",
+    "type": "MCP_TRANSPORT",
     "durationFrames": 200,
     "startFrame": 12940,
     "midFrame": 13050
   },
   {
-    "index": 61,
-    "id": "sc62",
-    "type": "CODE_DIFF",
+    "index": 57,
+    "id": "sc58",
+    "type": "MCP_PROGRESS",
     "durationFrames": 200,
     "startFrame": 13140,
     "midFrame": 13250
   },
   {
-    "index": 62,
-    "id": "sc63",
-    "type": "ERROR_TRACE",
+    "index": 58,
+    "id": "sc59",
+    "type": "MCP_ROOTS",
     "durationFrames": 200,
     "startFrame": 13340,
     "midFrame": 13450
   },
   {
-    "index": 63,
-    "id": "sc64",
-    "type": "WINDOW_FRAME",
-    "variant": "browser",
+    "index": 59,
+    "id": "sc60",
+    "type": "MCP_SAMPLING",
     "durationFrames": 200,
     "startFrame": 13540,
     "midFrame": 13650
   },
   {
-    "index": 64,
-    "id": "sc65",
-    "type": "WINDOW_FRAME",
-    "variant": "mac",
+    "index": 60,
+    "id": "sc61",
+    "type": "MCP_MENTION",
     "durationFrames": 200,
     "startFrame": 13740,
     "midFrame": 13850
   },
   {
+    "index": 61,
+    "id": "sc62",
+    "type": "MCP_URI",
+    "durationFrames": 200,
+    "startFrame": 13940,
+    "midFrame": 14050
+  },
+  {
+    "index": 62,
+    "id": "sc63",
+    "type": "MCP_LOOP",
+    "durationFrames": 200,
+    "startFrame": 14140,
+    "midFrame": 14250
+  },
+  {
+    "index": 63,
+    "id": "sc64",
+    "type": "MCP_SCHEMA",
+    "durationFrames": 200,
+    "startFrame": 14340,
+    "midFrame": 14450
+  },
+  {
+    "index": 64,
+    "id": "sc65",
+    "type": "MCP_WIRE",
+    "durationFrames": 200,
+    "startFrame": 14540,
+    "midFrame": 14650
+  },
+  {
     "index": 65,
     "id": "sc66",
-    "type": "AUTOMATION_RUN",
-    "durationFrames": 210,
-    "startFrame": 13940,
-    "midFrame": 14055
+    "type": "MCP_CONTROL",
+    "durationFrames": 200,
+    "startFrame": 14740,
+    "midFrame": 14850
   },
   {
     "index": 66,
     "id": "sc67",
-    "type": "DOM_INSPECT",
+    "type": "MCP_API_ANATOMY",
     "durationFrames": 200,
-    "startFrame": 14150,
-    "midFrame": 14260
+    "startFrame": 14940,
+    "midFrame": 15050
   },
   {
     "index": 67,
     "id": "sc68",
-    "type": "NETWORK_WATERFALL",
+    "type": "DSA_FRAMEWORK",
     "durationFrames": 200,
-    "startFrame": 14350,
-    "midFrame": 14460
+    "startFrame": 15140,
+    "midFrame": 15250
   },
   {
     "index": 68,
     "id": "sc69",
-    "type": "DEVICE_FRAME",
+    "type": "DSA_COST",
     "durationFrames": 200,
-    "startFrame": 14550,
-    "midFrame": 14660
+    "startFrame": 15340,
+    "midFrame": 15450
   },
   {
     "index": 69,
     "id": "sc70",
-    "type": "CLOUD_ARCH",
-    "durationFrames": 220,
-    "startFrame": 14750,
-    "midFrame": 14871
+    "type": "DSA_SIGNALS",
+    "durationFrames": 200,
+    "startFrame": 15540,
+    "midFrame": 15650
   },
   {
     "index": 70,
     "id": "sc71",
-    "type": "K8S_CLUSTER",
-    "variant": "rollout",
-    "durationFrames": 220,
-    "startFrame": 14970,
-    "midFrame": 15091
+    "type": "DSA_TRACE_LIST",
+    "durationFrames": 200,
+    "startFrame": 15740,
+    "midFrame": 15850
   },
   {
     "index": 71,
     "id": "sc72",
-    "type": "COST_METER",
-    "durationFrames": 190,
-    "startFrame": 15190,
-    "midFrame": 15294
+    "type": "DSA_TRACE_INTERVALS",
+    "durationFrames": 200,
+    "startFrame": 15940,
+    "midFrame": 16050
   },
   {
     "index": 72,
     "id": "sc73",
-    "type": "SLO_GAUGE",
+    "type": "DSA_TRACE_DP",
     "durationFrames": 200,
-    "startFrame": 15380,
-    "midFrame": 15490
+    "startFrame": 16140,
+    "midFrame": 16250
   },
   {
     "index": 73,
     "id": "sc74",
-    "type": "IAC_PLAN",
-    "durationFrames": 210,
-    "startFrame": 15580,
-    "midFrame": 15695
+    "type": "DSA_TRACE_TREE",
+    "durationFrames": 200,
+    "startFrame": 16340,
+    "midFrame": 16450
   },
   {
     "index": 74,
     "id": "sc75",
-    "type": "ERD",
-    "durationFrames": 210,
-    "startFrame": 15790,
-    "midFrame": 15905
+    "type": "DSA_TRACE_GRID",
+    "durationFrames": 200,
+    "startFrame": 16540,
+    "midFrame": 16650
   },
   {
     "index": 75,
     "id": "sc76",
-    "type": "LAYERED_STACK",
-    "variant": "imageLayers",
-    "durationFrames": 210,
-    "startFrame": 16000,
-    "midFrame": 16115
+    "type": "DSA_TRACE_STACK",
+    "durationFrames": 200,
+    "startFrame": 16740,
+    "midFrame": 16850
   },
   {
     "index": 76,
     "id": "sc77",
-    "type": "PACKET",
-    "variant": "container",
-    "durationFrames": 210,
-    "startFrame": 16210,
-    "midFrame": 16325
+    "type": "DSA_TRACE_HASH",
+    "durationFrames": 200,
+    "startFrame": 16940,
+    "midFrame": 17050
   },
   {
     "index": 77,
     "id": "sc78",
-    "type": "DIAGRAM",
-    "variant": "mesh",
-    "durationFrames": 210,
-    "startFrame": 16420,
-    "midFrame": 16535
+    "type": "DSA_TRACE_BSEARCH",
+    "durationFrames": 200,
+    "startFrame": 17140,
+    "midFrame": 17250
   },
   {
     "index": 78,
     "id": "sc79",
-    "type": "PROCESS_TABLE",
-    "durationFrames": 210,
-    "startFrame": 16630,
-    "midFrame": 16745
+    "type": "DSA_TRACE_WINDOW",
+    "durationFrames": 200,
+    "startFrame": 17340,
+    "midFrame": 17450
   },
   {
     "index": 79,
     "id": "sc80",
-    "type": "KERNEL_BOUNDARY",
-    "durationFrames": 220,
-    "startFrame": 16840,
-    "midFrame": 16961
+    "type": "DSA_TRACE_PTRS",
+    "durationFrames": 200,
+    "startFrame": 17540,
+    "midFrame": 17650
   },
   {
     "index": 80,
     "id": "sc81",
-    "type": "BITS",
-    "variant": "permissions",
-    "durationFrames": 210,
-    "startFrame": 17060,
-    "midFrame": 17175
+    "type": "CMD_LSUSB",
+    "durationFrames": 200,
+    "startFrame": 17740,
+    "midFrame": 17850
   },
   {
     "index": 81,
     "id": "sc82",
-    "type": "TEST_RUNNER",
-    "durationFrames": 220,
-    "startFrame": 17270,
-    "midFrame": 17391
+    "type": "CMD_LSPCI",
+    "durationFrames": 200,
+    "startFrame": 17940,
+    "midFrame": 18050
   },
   {
     "index": 82,
     "id": "sc83",
-    "type": "TEST_MATRIX",
-    "durationFrames": 210,
-    "startFrame": 17490,
-    "midFrame": 17605
+    "type": "CMD_CHEAT",
+    "durationFrames": 200,
+    "startFrame": 18140,
+    "midFrame": 18250
   },
   {
     "index": 83,
     "id": "sc84",
-    "type": "CACHE_PYRAMID",
-    "variant": "pyramid",
-    "durationFrames": 210,
-    "startFrame": 17700,
-    "midFrame": 17815
+    "type": "CMD_TLDR",
+    "durationFrames": 200,
+    "startFrame": 18340,
+    "midFrame": 18450
   },
   {
     "index": 84,
     "id": "sc85",
-    "type": "STATE_MACHINE",
-    "variant": "lifecycle",
-    "durationFrames": 230,
-    "startFrame": 17910,
-    "midFrame": 18036
+    "type": "CMD_APROPOS",
+    "durationFrames": 200,
+    "startFrame": 18540,
+    "midFrame": 18650
   },
   {
     "index": 85,
     "id": "sc86",
-    "type": "CONTEXT_METER",
-    "durationFrames": 210,
-    "startFrame": 18140,
-    "midFrame": 18255
+    "type": "CMD_MAN",
+    "durationFrames": 200,
+    "startFrame": 18740,
+    "midFrame": 18850
   },
   {
     "index": 86,
     "id": "sc87",
-    "type": "AGENT_HARNESS",
-    "durationFrames": 230,
-    "startFrame": 18350,
-    "midFrame": 18476
+    "type": "CMD_DMESG",
+    "durationFrames": 200,
+    "startFrame": 18940,
+    "midFrame": 19050
   },
   {
     "index": 87,
     "id": "sc88",
-    "type": "KNOWLEDGE_GRAPH",
-    "durationFrames": 220,
-    "startFrame": 18580,
-    "midFrame": 18701
+    "type": "CMD_JOURNALCTL",
+    "durationFrames": 200,
+    "startFrame": 19140,
+    "midFrame": 19250
   },
   {
     "index": 88,
     "id": "sc89",
-    "type": "RETRIEVAL_RANK",
-    "durationFrames": 230,
-    "startFrame": 18800,
-    "midFrame": 18926
+    "type": "CMD_SYSTEMCTL",
+    "durationFrames": 200,
+    "startFrame": 19340,
+    "midFrame": 19450
   },
   {
     "index": 89,
     "id": "sc90",
-    "type": "MODEL_STAGES",
-    "durationFrames": 220,
-    "startFrame": 19030,
-    "midFrame": 19151
+    "type": "CMD_TMUX",
+    "durationFrames": 200,
+    "startFrame": 19540,
+    "midFrame": 19650
   },
   {
     "index": 90,
     "id": "sc91",
-    "type": "CONFIDENCE_GATE",
-    "variant": "block",
+    "type": "CMD_SCREEN",
     "durationFrames": 200,
-    "startFrame": 19250,
-    "midFrame": 19360
+    "startFrame": 19740,
+    "midFrame": 19850
   },
   {
     "index": 91,
     "id": "sc92",
-    "type": "SANDBOX_BOX",
-    "durationFrames": 210,
-    "startFrame": 19450,
-    "midFrame": 19565
+    "type": "CMD_HISTORY",
+    "durationFrames": 200,
+    "startFrame": 19940,
+    "midFrame": 20050
   },
   {
     "index": 92,
     "id": "sc93",
-    "type": "DRILL_IN",
-    "durationFrames": 240,
-    "startFrame": 19660,
-    "midFrame": 19792
+    "type": "CMD_ENV",
+    "durationFrames": 200,
+    "startFrame": 20140,
+    "midFrame": 20250
   },
   {
     "index": 93,
     "id": "sc94",
-    "type": "EVAL_DASHBOARD",
-    "durationFrames": 210,
-    "startFrame": 19900,
-    "midFrame": 20015
+    "type": "CMD_ALIAS",
+    "durationFrames": 200,
+    "startFrame": 20340,
+    "midFrame": 20450
   },
   {
     "index": 94,
     "id": "sc95",
-    "type": "DIAGRAM",
-    "variant": "agentMesh",
-    "durationFrames": 210,
-    "startFrame": 20110,
-    "midFrame": 20225
+    "type": "CMD_BASHSCRIPT",
+    "durationFrames": 200,
+    "startFrame": 20540,
+    "midFrame": 20650
   },
   {
     "index": 95,
     "id": "sc96",
-    "type": "LINE_CHART",
-    "durationFrames": 210,
-    "startFrame": 20320,
-    "midFrame": 20435
+    "type": "CMD_CRONTAB",
+    "durationFrames": 200,
+    "startFrame": 20740,
+    "midFrame": 20850
   },
   {
     "index": 96,
     "id": "sc97",
-    "type": "DIAGRAM",
-    "variant": "auth",
-    "durationFrames": 220,
-    "startFrame": 20530,
-    "midFrame": 20651
+    "type": "CMD_CRON",
+    "durationFrames": 200,
+    "startFrame": 20940,
+    "midFrame": 21050
   },
   {
     "index": 97,
     "id": "sc98",
-    "type": "REVEAL",
+    "type": "CMD_ZIP",
     "durationFrames": 200,
-    "startFrame": 20750,
-    "midFrame": 20860
+    "startFrame": 21140,
+    "midFrame": 21250
   },
   {
     "index": 98,
     "id": "sc99",
-    "type": "LIST_BUILD",
-    "durationFrames": 220,
-    "startFrame": 20950,
-    "midFrame": 21071
+    "type": "CMD_BZIP2",
+    "durationFrames": 200,
+    "startFrame": 21340,
+    "midFrame": 21450
   },
   {
     "index": 99,
     "id": "sc100",
-    "type": "STAT_CALLOUT",
-    "durationFrames": 150,
-    "startFrame": 21170,
-    "midFrame": 21252
+    "type": "CMD_GZIP",
+    "durationFrames": 200,
+    "startFrame": 21540,
+    "midFrame": 21650
   },
   {
     "index": 100,
     "id": "sc101",
-    "type": "CAROUSEL",
+    "type": "CMD_TAR",
     "durationFrames": 200,
-    "startFrame": 21320,
-    "midFrame": 21430
+    "startFrame": 21740,
+    "midFrame": 21850
   },
   {
     "index": 101,
     "id": "sc102",
-    "type": "ACTIVITY_CARD",
-    "durationFrames": 180,
-    "startFrame": 21520,
-    "midFrame": 21619
+    "type": "CMD_CURL",
+    "durationFrames": 200,
+    "startFrame": 21940,
+    "midFrame": 22050
   },
   {
     "index": 102,
     "id": "sc103",
-    "type": "LOCATION_MAP",
-    "durationFrames": 220,
-    "startFrame": 21700,
-    "midFrame": 21821
+    "type": "CMD_WGET",
+    "durationFrames": 200,
+    "startFrame": 22140,
+    "midFrame": 22250
   },
   {
     "index": 103,
     "id": "sc104",
-    "type": "SOUND_WAVE",
-    "durationFrames": 150,
-    "startFrame": 21920,
-    "midFrame": 22002
+    "type": "CMD_NC",
+    "durationFrames": 200,
+    "startFrame": 22340,
+    "midFrame": 22450
   },
   {
     "index": 104,
     "id": "sc105",
-    "type": "LOGO_REVEAL",
-    "durationFrames": 170,
-    "startFrame": 22070,
-    "midFrame": 22163
+    "type": "CMD_RSYNC",
+    "durationFrames": 200,
+    "startFrame": 22540,
+    "midFrame": 22650
   },
   {
     "index": 105,
     "id": "sc106",
-    "type": "PHOTO",
-    "durationFrames": 180,
-    "startFrame": 22240,
-    "midFrame": 22339
+    "type": "CMD_SCP",
+    "durationFrames": 200,
+    "startFrame": 22740,
+    "midFrame": 22850
   },
   {
     "index": 106,
     "id": "sc107",
-    "type": "SUBSCRIBE_REMINDER",
-    "durationFrames": 150,
-    "startFrame": 22420,
-    "midFrame": 22502
+    "type": "CMD_SSH",
+    "durationFrames": 200,
+    "startFrame": 22940,
+    "midFrame": 23050
   },
   {
     "index": 107,
     "id": "sc108",
-    "type": "CREDITS_ROLL",
+    "type": "CMD_WHOIS",
     "durationFrames": 200,
-    "startFrame": 22570,
-    "midFrame": 22680
+    "startFrame": 23140,
+    "midFrame": 23250
   },
   {
     "index": 108,
     "id": "sc109",
-    "type": "LOWER_THIRD",
-    "durationFrames": 186,
-    "startFrame": 22770,
-    "midFrame": 22872
+    "type": "CMD_NSLOOKUP",
+    "durationFrames": 200,
+    "startFrame": 23340,
+    "midFrame": 23450
   },
   {
     "index": 109,
     "id": "sc110",
-    "type": "CHAPTER",
-    "durationFrames": 180,
-    "startFrame": 22956,
-    "midFrame": 23055
+    "type": "CMD_HOST",
+    "durationFrames": 200,
+    "startFrame": 23540,
+    "midFrame": 23650
   },
   {
     "index": 110,
     "id": "sc111",
-    "type": "NOTIFICATION",
-    "durationFrames": 190,
-    "startFrame": 23136,
-    "midFrame": 23240
+    "type": "CMD_DIG",
+    "durationFrames": 200,
+    "startFrame": 23740,
+    "midFrame": 23850
   },
   {
     "index": 111,
     "id": "sc112",
-    "type": "COUNTDOWN",
-    "durationFrames": 190,
-    "startFrame": 23326,
-    "midFrame": 23430
+    "type": "CMD_NLOAD",
+    "durationFrames": 200,
+    "startFrame": 23940,
+    "midFrame": 24050
   },
   {
     "index": 112,
     "id": "sc113",
-    "type": "FLIP_CARD",
-    "durationFrames": 210,
-    "startFrame": 23516,
-    "midFrame": 23631
+    "type": "CMD_NETHOGS",
+    "durationFrames": 200,
+    "startFrame": 24140,
+    "midFrame": 24250
   },
   {
     "index": 113,
     "id": "sc114",
-    "type": "GALLERY",
-    "durationFrames": 220,
-    "startFrame": 23726,
-    "midFrame": 23847
+    "type": "CMD_IFTOP",
+    "durationFrames": 200,
+    "startFrame": 24340,
+    "midFrame": 24450
   },
   {
     "index": 114,
     "id": "sc115",
-    "type": "COMPARISON_SLIDER",
+    "type": "CMD_NMCLI",
     "durationFrames": 200,
-    "startFrame": 23946,
-    "midFrame": 24056
+    "startFrame": 24540,
+    "midFrame": 24650
   },
   {
     "index": 115,
     "id": "sc116",
-    "type": "PHOTO_STACK",
+    "type": "CMD_SS",
     "durationFrames": 200,
-    "startFrame": 24146,
-    "midFrame": 24256
+    "startFrame": 24740,
+    "midFrame": 24850
   },
   {
     "index": 116,
     "id": "sc117",
-    "type": "IMAGE_SCENE",
-    "durationFrames": 180,
-    "startFrame": 24346,
-    "midFrame": 24445
+    "type": "CMD_NETSTAT",
+    "durationFrames": 200,
+    "startFrame": 24940,
+    "midFrame": 25050
   },
   {
     "index": 117,
     "id": "sc118",
-    "type": "IMAGE_SCENE",
-    "durationFrames": 180,
-    "startFrame": 24526,
-    "midFrame": 24625
+    "type": "UV_STAGE",
+    "durationFrames": 200,
+    "startFrame": 25140,
+    "midFrame": 25250
   },
   {
     "index": 118,
     "id": "sc119",
+    "type": "UV_STAGE",
+    "durationFrames": 200,
+    "startFrame": 25340,
+    "midFrame": 25450
+  },
+  {
+    "index": 119,
+    "id": "sc120",
+    "type": "UV_STAGE",
+    "durationFrames": 200,
+    "startFrame": 25540,
+    "midFrame": 25650
+  },
+  {
+    "index": 120,
+    "id": "sc121",
+    "type": "UV_STAGE",
+    "durationFrames": 200,
+    "startFrame": 25740,
+    "midFrame": 25850
+  },
+  {
+    "index": 121,
+    "id": "sc122",
+    "type": "UV_STAGE",
+    "durationFrames": 200,
+    "startFrame": 25940,
+    "midFrame": 26050
+  },
+  {
+    "index": 122,
+    "id": "sc123",
+    "type": "UV_STAGE",
+    "durationFrames": 200,
+    "startFrame": 26140,
+    "midFrame": 26250
+  },
+  {
+    "index": 123,
+    "id": "sc124",
+    "type": "UV_STAGE",
+    "durationFrames": 200,
+    "startFrame": 26340,
+    "midFrame": 26450
+  },
+  {
+    "index": 124,
+    "id": "sc125",
+    "type": "UV_STAGE",
+    "durationFrames": 200,
+    "startFrame": 26540,
+    "midFrame": 26650
+  },
+  {
+    "index": 125,
+    "id": "sc126",
+    "type": "CMD_MTR",
+    "durationFrames": 200,
+    "startFrame": 26740,
+    "midFrame": 26850
+  },
+  {
+    "index": 126,
+    "id": "sc127",
+    "type": "CMD_TRACEROUTE",
+    "durationFrames": 200,
+    "startFrame": 26940,
+    "midFrame": 27050
+  },
+  {
+    "index": 127,
+    "id": "sc128",
+    "type": "CMD_PING",
+    "durationFrames": 200,
+    "startFrame": 27140,
+    "midFrame": 27250
+  },
+  {
+    "index": 128,
+    "id": "sc129",
+    "type": "CMD_IP",
+    "durationFrames": 200,
+    "startFrame": 27340,
+    "midFrame": 27450
+  },
+  {
+    "index": 129,
+    "id": "sc130",
+    "type": "CMD_DD",
+    "durationFrames": 200,
+    "startFrame": 27540,
+    "midFrame": 27650
+  },
+  {
+    "index": 130,
+    "id": "sc131",
+    "type": "CMD_UMOUNT",
+    "durationFrames": 200,
+    "startFrame": 27740,
+    "midFrame": 27850
+  },
+  {
+    "index": 131,
+    "id": "sc132",
+    "type": "CMD_MOUNT",
+    "durationFrames": 200,
+    "startFrame": 27940,
+    "midFrame": 28050
+  },
+  {
+    "index": 132,
+    "id": "sc133",
+    "type": "CMD_FSCK",
+    "durationFrames": 200,
+    "startFrame": 28140,
+    "midFrame": 28250
+  },
+  {
+    "index": 133,
+    "id": "sc134",
+    "type": "CMD_MKFS",
+    "durationFrames": 200,
+    "startFrame": 28340,
+    "midFrame": 28450
+  },
+  {
+    "index": 134,
+    "id": "sc135",
+    "type": "CMD_BLKID",
+    "durationFrames": 200,
+    "startFrame": 28540,
+    "midFrame": 28650
+  },
+  {
+    "index": 135,
+    "id": "sc136",
+    "type": "CMD_PARTED",
+    "durationFrames": 200,
+    "startFrame": 28740,
+    "midFrame": 28850
+  },
+  {
+    "index": 136,
+    "id": "sc137",
+    "type": "CMD_FDISK",
+    "durationFrames": 200,
+    "startFrame": 28940,
+    "midFrame": 29050
+  },
+  {
+    "index": 137,
+    "id": "sc138",
+    "type": "CMD_NCDU",
+    "durationFrames": 200,
+    "startFrame": 29140,
+    "midFrame": 29250
+  },
+  {
+    "index": 138,
+    "id": "sc139",
+    "type": "CMD_DU",
+    "durationFrames": 200,
+    "startFrame": 29340,
+    "midFrame": 29450
+  },
+  {
+    "index": 139,
+    "id": "sc140",
+    "type": "CMD_DF",
+    "durationFrames": 200,
+    "startFrame": 29540,
+    "midFrame": 29650
+  },
+  {
+    "index": 140,
+    "id": "sc141",
+    "type": "CMD_WATCH",
+    "durationFrames": 200,
+    "startFrame": 29740,
+    "midFrame": 29850
+  },
+  {
+    "index": 141,
+    "id": "sc142",
+    "type": "CMD_SAR",
+    "durationFrames": 200,
+    "startFrame": 29940,
+    "midFrame": 30050
+  },
+  {
+    "index": 142,
+    "id": "sc143",
+    "type": "CMD_DSTAT",
+    "durationFrames": 200,
+    "startFrame": 30140,
+    "midFrame": 30250
+  },
+  {
+    "index": 143,
+    "id": "sc144",
+    "type": "CMD_IOTOP",
+    "durationFrames": 200,
+    "startFrame": 30340,
+    "midFrame": 30450
+  },
+  {
+    "index": 144,
+    "id": "sc145",
+    "type": "CMD_IOSTAT",
+    "durationFrames": 200,
+    "startFrame": 30540,
+    "midFrame": 30650
+  },
+  {
+    "index": 145,
+    "id": "sc146",
+    "type": "CMD_VMSTAT",
+    "durationFrames": 200,
+    "startFrame": 30740,
+    "midFrame": 30850
+  },
+  {
+    "index": 146,
+    "id": "sc147",
+    "type": "CMD_FREE",
+    "durationFrames": 200,
+    "startFrame": 30940,
+    "midFrame": 31050
+  },
+  {
+    "index": 147,
+    "id": "sc148",
+    "type": "CMD_UPTIME",
+    "durationFrames": 200,
+    "startFrame": 31140,
+    "midFrame": 31250
+  },
+  {
+    "index": 148,
+    "id": "sc149",
+    "type": "CMD_STRACE",
+    "durationFrames": 200,
+    "startFrame": 31340,
+    "midFrame": 31450
+  },
+  {
+    "index": 149,
+    "id": "sc150",
+    "type": "CMD_LSOF",
+    "durationFrames": 200,
+    "startFrame": 31540,
+    "midFrame": 31650
+  },
+  {
+    "index": 150,
+    "id": "sc151",
+    "type": "CMD_WAIT",
+    "durationFrames": 200,
+    "startFrame": 31740,
+    "midFrame": 31850
+  },
+  {
+    "index": 151,
+    "id": "sc152",
+    "type": "CMD_SLEEP",
+    "durationFrames": 200,
+    "startFrame": 31940,
+    "midFrame": 32050
+  },
+  {
+    "index": 152,
+    "id": "sc153",
+    "type": "CMD_NOHUP",
+    "durationFrames": 200,
+    "startFrame": 32140,
+    "midFrame": 32250
+  },
+  {
+    "index": 153,
+    "id": "sc154",
+    "type": "CMD_KILLALL",
+    "durationFrames": 200,
+    "startFrame": 32340,
+    "midFrame": 32450
+  },
+  {
+    "index": 154,
+    "id": "sc155",
+    "type": "CMD_KILL",
+    "durationFrames": 200,
+    "startFrame": 32540,
+    "midFrame": 32650
+  },
+  {
+    "index": 155,
+    "id": "sc156",
+    "type": "CMD_NMON",
+    "durationFrames": 200,
+    "startFrame": 32740,
+    "midFrame": 32850
+  },
+  {
+    "index": 156,
+    "id": "sc157",
+    "type": "CMD_GLANCES",
+    "durationFrames": 200,
+    "startFrame": 32940,
+    "midFrame": 33050
+  },
+  {
+    "index": 157,
+    "id": "sc158",
+    "type": "CMD_ATOP",
+    "durationFrames": 200,
+    "startFrame": 33140,
+    "midFrame": 33250
+  },
+  {
+    "index": 158,
+    "id": "sc159",
+    "type": "CMD_BTOP",
+    "durationFrames": 200,
+    "startFrame": 33340,
+    "midFrame": 33450
+  },
+  {
+    "index": 159,
+    "id": "sc160",
+    "type": "CMD_HTOP",
+    "durationFrames": 200,
+    "startFrame": 33540,
+    "midFrame": 33650
+  },
+  {
+    "index": 160,
+    "id": "sc161",
+    "type": "CMD_TOP",
+    "durationFrames": 200,
+    "startFrame": 33740,
+    "midFrame": 33850
+  },
+  {
+    "index": 161,
+    "id": "sc162",
+    "type": "CMD_PSTREE",
+    "durationFrames": 200,
+    "startFrame": 33940,
+    "midFrame": 34050
+  },
+  {
+    "index": 162,
+    "id": "sc163",
+    "type": "CMD_PS",
+    "durationFrames": 200,
+    "startFrame": 34140,
+    "midFrame": 34250
+  },
+  {
+    "index": 163,
+    "id": "sc164",
+    "type": "CMD_CHROOT",
+    "durationFrames": 200,
+    "startFrame": 34340,
+    "midFrame": 34450
+  },
+  {
+    "index": 164,
+    "id": "sc165",
+    "type": "CMD_LAST",
+    "durationFrames": 200,
+    "startFrame": 34540,
+    "midFrame": 34650
+  },
+  {
+    "index": 165,
+    "id": "sc166",
+    "type": "CMD_W",
+    "durationFrames": 200,
+    "startFrame": 34740,
+    "midFrame": 34850
+  },
+  {
+    "index": 166,
+    "id": "sc167",
+    "type": "CMD_CHPASSWD",
+    "durationFrames": 200,
+    "startFrame": 34940,
+    "midFrame": 35050
+  },
+  {
+    "index": 167,
+    "id": "sc168",
+    "type": "CMD_PASSWD",
+    "durationFrames": 200,
+    "startFrame": 35140,
+    "midFrame": 35250
+  },
+  {
+    "index": 168,
+    "id": "sc169",
+    "type": "CMD_USERDEL",
+    "durationFrames": 200,
+    "startFrame": 35340,
+    "midFrame": 35450
+  },
+  {
+    "index": 169,
+    "id": "sc170",
+    "type": "CMD_USERMOD",
+    "durationFrames": 200,
+    "startFrame": 35540,
+    "midFrame": 35650
+  },
+  {
+    "index": 170,
+    "id": "sc171",
+    "type": "CMD_USERADD",
+    "durationFrames": 200,
+    "startFrame": 35740,
+    "midFrame": 35850
+  },
+  {
+    "index": 171,
+    "id": "sc172",
+    "type": "CMD_SUDO",
+    "durationFrames": 200,
+    "startFrame": 35940,
+    "midFrame": 36050
+  },
+  {
+    "index": 172,
+    "id": "sc173",
+    "type": "CMD_UMASK",
+    "durationFrames": 200,
+    "startFrame": 36140,
+    "midFrame": 36250
+  },
+  {
+    "index": 173,
+    "id": "sc174",
+    "type": "CMD_CHOWN",
+    "durationFrames": 200,
+    "startFrame": 36340,
+    "midFrame": 36450
+  },
+  {
+    "index": 174,
+    "id": "sc175",
+    "type": "CMD_CHMOD",
+    "durationFrames": 200,
+    "startFrame": 36540,
+    "midFrame": 36650
+  },
+  {
+    "index": 175,
+    "id": "sc176",
+    "type": "CMD_XARGS",
+    "durationFrames": 200,
+    "startFrame": 36740,
+    "midFrame": 36850
+  },
+  {
+    "index": 176,
+    "id": "sc177",
+    "type": "CMD_SED",
+    "durationFrames": 200,
+    "startFrame": 36940,
+    "midFrame": 37050
+  },
+  {
+    "index": 177,
+    "id": "sc178",
+    "type": "CMD_AWK",
+    "durationFrames": 200,
+    "startFrame": 37140,
+    "midFrame": 37250
+  },
+  {
+    "index": 178,
+    "id": "sc179",
+    "type": "CMD_GREP",
+    "durationFrames": 200,
+    "startFrame": 37340,
+    "midFrame": 37450
+  },
+  {
+    "index": 179,
+    "id": "sc180",
+    "type": "CMD_LOCATE",
+    "durationFrames": 200,
+    "startFrame": 37540,
+    "midFrame": 37650
+  },
+  {
+    "index": 180,
+    "id": "sc181",
+    "type": "CMD_FIND",
+    "durationFrames": 200,
+    "startFrame": 37740,
+    "midFrame": 37850
+  },
+  {
+    "index": 181,
+    "id": "sc182",
+    "type": "CMD_DIFF",
+    "durationFrames": 200,
+    "startFrame": 37940,
+    "midFrame": 38050
+  },
+  {
+    "index": 182,
+    "id": "sc183",
+    "type": "CMD_VI",
+    "durationFrames": 200,
+    "startFrame": 38140,
+    "midFrame": 38250
+  },
+  {
+    "index": 183,
+    "id": "sc184",
+    "type": "CMD_TAIL",
+    "durationFrames": 200,
+    "startFrame": 38340,
+    "midFrame": 38450
+  },
+  {
+    "index": 184,
+    "id": "sc185",
+    "type": "CMD_LESS",
+    "durationFrames": 200,
+    "startFrame": 38540,
+    "midFrame": 38650
+  },
+  {
+    "index": 185,
+    "id": "sc186",
+    "type": "CMD_MORE",
+    "durationFrames": 200,
+    "startFrame": 38740,
+    "midFrame": 38850
+  },
+  {
+    "index": 186,
+    "id": "sc187",
+    "type": "CMD_TAC",
+    "durationFrames": 200,
+    "startFrame": 38940,
+    "midFrame": 39050
+  },
+  {
+    "index": 187,
+    "id": "sc188",
+    "type": "CMD_CAT",
+    "durationFrames": 200,
+    "startFrame": 39140,
+    "midFrame": 39250
+  },
+  {
+    "index": 188,
+    "id": "sc189",
+    "type": "CMD_TOUCH",
+    "durationFrames": 200,
+    "startFrame": 39340,
+    "midFrame": 39450
+  },
+  {
+    "index": 189,
+    "id": "sc190",
+    "type": "CMD_CLEAR",
+    "durationFrames": 200,
+    "startFrame": 39540,
+    "midFrame": 39650
+  },
+  {
+    "index": 190,
+    "id": "sc191",
+    "type": "CMD_LN",
+    "durationFrames": 200,
+    "startFrame": 39740,
+    "midFrame": 39850
+  },
+  {
+    "index": 191,
+    "id": "sc192",
+    "type": "CMD_RM",
+    "durationFrames": 200,
+    "startFrame": 39940,
+    "midFrame": 40050
+  },
+  {
+    "index": 192,
+    "id": "sc193",
+    "type": "CMD_MV",
+    "durationFrames": 200,
+    "startFrame": 40140,
+    "midFrame": 40250
+  },
+  {
+    "index": 193,
+    "id": "sc194",
+    "type": "CMD_CP",
+    "durationFrames": 200,
+    "startFrame": 40340,
+    "midFrame": 40450
+  },
+  {
+    "index": 194,
+    "id": "sc195",
+    "type": "CMD_MKDIR",
+    "durationFrames": 200,
+    "startFrame": 40540,
+    "midFrame": 40650
+  },
+  {
+    "index": 195,
+    "id": "sc196",
+    "type": "CMD_PWD",
+    "durationFrames": 200,
+    "startFrame": 40740,
+    "midFrame": 40850
+  },
+  {
+    "index": 196,
+    "id": "sc197",
+    "type": "CMD_CD",
+    "durationFrames": 200,
+    "startFrame": 40940,
+    "midFrame": 41050
+  },
+  {
+    "index": 197,
+    "id": "sc198",
+    "type": "CMD_LS",
+    "durationFrames": 200,
+    "startFrame": 41140,
+    "midFrame": 41250
+  },
+  {
+    "index": 198,
+    "id": "sc199",
+    "type": "COPY_FORK",
+    "durationFrames": 200,
+    "startFrame": 41340,
+    "midFrame": 41450
+  },
+  {
+    "index": 199,
+    "id": "sc200",
+    "type": "TOOL_BENCH",
+    "durationFrames": 200,
+    "startFrame": 41540,
+    "midFrame": 41650
+  },
+  {
+    "index": 200,
+    "id": "sc201",
+    "type": "DELETION_GUARD",
+    "durationFrames": 200,
+    "startFrame": 41740,
+    "midFrame": 41850
+  },
+  {
+    "index": 201,
+    "id": "sc202",
+    "type": "LINK_PAIR",
+    "durationFrames": 200,
+    "startFrame": 41940,
+    "midFrame": 42050
+  },
+  {
+    "index": 202,
+    "id": "sc203",
+    "type": "LISTING_ROW",
+    "durationFrames": 200,
+    "startFrame": 42140,
+    "midFrame": 42250
+  },
+  {
+    "index": 203,
+    "id": "sc204",
+    "type": "PATH_WALK",
+    "durationFrames": 200,
+    "startFrame": 42340,
+    "midFrame": 42450
+  },
+  {
+    "index": 204,
+    "id": "sc205",
+    "type": "RECORD_DRAFT",
+    "durationFrames": 200,
+    "startFrame": 42540,
+    "midFrame": 42650
+  },
+  {
+    "index": 205,
+    "id": "sc206",
+    "type": "FROZEN_FRAME",
+    "durationFrames": 200,
+    "startFrame": 42740,
+    "midFrame": 42850
+  },
+  {
+    "index": 206,
+    "id": "sc207",
+    "type": "ORDER_ROULETTE",
+    "durationFrames": 200,
+    "startFrame": 42940,
+    "midFrame": 43050
+  },
+  {
+    "index": 207,
+    "id": "sc208",
+    "type": "WORKER_SPREAD",
+    "durationFrames": 200,
+    "startFrame": 43140,
+    "midFrame": 43250
+  },
+  {
+    "index": 208,
+    "id": "sc209",
+    "type": "SEALED_BOX",
+    "durationFrames": 200,
+    "startFrame": 43340,
+    "midFrame": 43450
+  },
+  {
+    "index": 209,
+    "id": "sc210",
+    "type": "SET_LOGIC",
+    "durationFrames": 200,
+    "startFrame": 43540,
+    "midFrame": 43650
+  },
+  {
+    "index": 210,
+    "id": "sc211",
+    "type": "SEARCH_NARROW",
+    "durationFrames": 200,
+    "startFrame": 43740,
+    "midFrame": 43850
+  },
+  {
+    "index": 211,
+    "id": "sc212",
+    "type": "STAGE_HANDOFF",
+    "durationFrames": 200,
+    "startFrame": 43940,
+    "midFrame": 44050
+  },
+  {
+    "index": 212,
+    "id": "sc213",
+    "type": "BACKSTAGE_PHONE",
+    "durationFrames": 200,
+    "startFrame": 44140,
+    "midFrame": 44250
+  },
+  {
+    "index": 213,
+    "id": "sc214",
+    "type": "SCOPE_LADDER",
+    "durationFrames": 200,
+    "startFrame": 44340,
+    "midFrame": 44450
+  },
+  {
+    "index": 214,
+    "id": "sc215",
+    "type": "HAND_STAMP",
+    "durationFrames": 200,
+    "startFrame": 44540,
+    "midFrame": 44650
+  },
+  {
+    "index": 215,
+    "id": "sc216",
+    "type": "SAD_PATHS",
+    "durationFrames": 200,
+    "startFrame": 44740,
+    "midFrame": 44850
+  },
+  {
+    "index": 216,
+    "id": "sc217",
+    "type": "MAIL_ROOM",
+    "durationFrames": 200,
+    "startFrame": 44940,
+    "midFrame": 45050
+  },
+  {
+    "index": 217,
+    "id": "sc218",
+    "type": "TRACE_SCRUB",
+    "durationFrames": 200,
+    "startFrame": 45140,
+    "midFrame": 45250
+  },
+  {
+    "index": 218,
+    "id": "sc219",
+    "type": "FLAG_HARVEST",
+    "durationFrames": 200,
+    "startFrame": 45340,
+    "midFrame": 45450
+  },
+  {
+    "index": 219,
+    "id": "sc220",
+    "type": "SHOT_SCOPE",
+    "durationFrames": 200,
+    "startFrame": 45540,
+    "midFrame": 45650
+  },
+  {
+    "index": 220,
+    "id": "sc221",
+    "type": "PICKER_BYPASS",
+    "durationFrames": 200,
+    "startFrame": 45740,
+    "midFrame": 45850
+  },
+  {
+    "index": 221,
+    "id": "sc222",
+    "type": "DIALOG_GATE",
+    "durationFrames": 200,
+    "startFrame": 45940,
+    "midFrame": 46050
+  },
+  {
+    "index": 222,
+    "id": "sc223",
+    "type": "FRAME_BOUNDARY",
+    "durationFrames": 200,
+    "startFrame": 46140,
+    "midFrame": 46250
+  },
+  {
+    "index": 223,
+    "id": "sc224",
+    "type": "TRAP_TRIGGER",
+    "durationFrames": 200,
+    "startFrame": 46340,
+    "midFrame": 46450
+  },
+  {
+    "index": 224,
+    "id": "sc225",
+    "type": "INDEX_DRIFT",
+    "durationFrames": 200,
+    "startFrame": 46540,
+    "midFrame": 46650
+  },
+  {
+    "index": 225,
+    "id": "sc226",
+    "type": "ROW_FILTER",
+    "durationFrames": 200,
+    "startFrame": 46740,
+    "midFrame": 46850
+  },
+  {
+    "index": 226,
+    "id": "sc227",
+    "type": "CROWD_MATCH",
+    "durationFrames": 200,
+    "startFrame": 46940,
+    "midFrame": 47050
+  },
+  {
+    "index": 227,
+    "id": "sc228",
+    "type": "RESPONSIBILITY_SPLIT",
+    "durationFrames": 200,
+    "startFrame": 47140,
+    "midFrame": 47250
+  },
+  {
+    "index": 228,
+    "id": "sc229",
+    "type": "SAVED_SEARCH",
+    "durationFrames": 200,
+    "startFrame": 47340,
+    "midFrame": 47450
+  },
+  {
+    "index": 229,
+    "id": "sc230",
+    "type": "RULE_TEST",
+    "durationFrames": 200,
+    "startFrame": 47540,
+    "midFrame": 47650
+  },
+  {
+    "index": 230,
+    "id": "sc231",
+    "type": "CHANGE_RIPPLE",
+    "durationFrames": 200,
+    "startFrame": 47740,
+    "midFrame": 47850
+  },
+  {
+    "index": 231,
+    "id": "sc232",
+    "type": "FIXTURE_CREW",
+    "durationFrames": 200,
+    "startFrame": 47940,
+    "midFrame": 48050
+  },
+  {
+    "index": 232,
+    "id": "sc233",
+    "type": "OVERLAY_BLOCK",
+    "durationFrames": 200,
+    "startFrame": 48140,
+    "midFrame": 48250
+  },
+  {
+    "index": 233,
+    "id": "sc234",
+    "type": "BROWSER_STEP",
+    "durationFrames": 200,
+    "startFrame": 48340,
+    "midFrame": 48450
+  },
+  {
+    "index": 234,
+    "id": "sc235",
+    "type": "RECORDED_STEP",
+    "durationFrames": 200,
+    "startFrame": 48540,
+    "midFrame": 48650
+  },
+  {
+    "index": 235,
+    "id": "sc236",
+    "type": "CODE_RUN",
+    "durationFrames": 200,
+    "startFrame": 48740,
+    "midFrame": 48850
+  },
+  {
+    "index": 236,
+    "id": "sc237",
+    "type": "QUIZ_CARD",
+    "durationFrames": 200,
+    "startFrame": 48940,
+    "midFrame": 49050
+  },
+  {
+    "index": 237,
+    "id": "sc238",
+    "type": "THEATER_STAGE",
+    "durationFrames": 200,
+    "startFrame": 49140,
+    "midFrame": 49250
+  },
+  {
+    "index": 238,
+    "id": "sc239",
+    "type": "INTRO_CARD",
+    "durationFrames": 200,
+    "startFrame": 49340,
+    "midFrame": 49450
+  },
+  {
+    "index": 239,
+    "id": "sc240",
+    "type": "REPO_CTA",
+    "durationFrames": 200,
+    "startFrame": 49540,
+    "midFrame": 49650
+  },
+  {
+    "index": 240,
+    "id": "sc241",
+    "type": "AUTO_RUN",
+    "durationFrames": 200,
+    "startFrame": 49740,
+    "midFrame": 49850
+  },
+  {
+    "index": 241,
+    "id": "sc242",
+    "type": "COMPONENT_LAB",
+    "durationFrames": 200,
+    "startFrame": 49940,
+    "midFrame": 50050
+  },
+  {
+    "index": 242,
+    "id": "sc243",
+    "type": "BEAT_BOARD",
+    "durationFrames": 200,
+    "startFrame": 50140,
+    "midFrame": 50250
+  },
+  {
+    "index": 243,
+    "id": "sc244",
+    "type": "PRODUCTION_GRIND",
+    "durationFrames": 200,
+    "startFrame": 50340,
+    "midFrame": 50450
+  },
+  {
+    "index": 244,
+    "id": "sc245",
+    "type": "SCENE_FORGE",
+    "durationFrames": 200,
+    "startFrame": 50540,
+    "midFrame": 50650
+  },
+  {
+    "index": 245,
+    "id": "sc246",
+    "type": "VIDEO_PLAYER",
+    "durationFrames": 200,
+    "startFrame": 50740,
+    "midFrame": 50850
+  },
+  {
+    "index": 246,
+    "id": "sc247",
+    "type": "CHAT_TRIO",
+    "durationFrames": 200,
+    "startFrame": 50940,
+    "midFrame": 51050
+  },
+  {
+    "index": 247,
+    "id": "sc248",
+    "type": "PROMPT_HANDOUT",
+    "durationFrames": 200,
+    "startFrame": 51140,
+    "midFrame": 51250
+  },
+  {
+    "index": 248,
+    "id": "sc249",
+    "type": "APP_WINDOW",
+    "durationFrames": 200,
+    "startFrame": 51340,
+    "midFrame": 51450
+  },
+  {
+    "index": 249,
+    "id": "sc250",
+    "type": "CHECK_SWEEP",
+    "durationFrames": 200,
+    "startFrame": 51540,
+    "midFrame": 51650
+  },
+  {
+    "index": 250,
+    "id": "sc251",
+    "type": "PROMPT_HANDOFF",
+    "durationFrames": 200,
+    "startFrame": 51740,
+    "midFrame": 51850
+  },
+  {
+    "index": 251,
+    "id": "sc252",
+    "type": "TOPIC_INTAKE",
+    "durationFrames": 200,
+    "startFrame": 51940,
+    "midFrame": 52050
+  },
+  {
+    "index": 252,
+    "id": "sc253",
+    "type": "PIPELINE_GATE",
+    "durationFrames": 200,
+    "startFrame": 52140,
+    "midFrame": 52250
+  },
+  {
+    "index": 253,
+    "id": "sc254",
+    "type": "ASPECT_TWIN",
+    "durationFrames": 200,
+    "startFrame": 52340,
+    "midFrame": 52450
+  },
+  {
+    "index": 254,
+    "id": "sc255",
+    "type": "RESKIN_CAROUSEL",
+    "durationFrames": 200,
+    "startFrame": 52540,
+    "midFrame": 52650
+  },
+  {
+    "index": 255,
+    "id": "sc256",
+    "type": "WORD_ANCHOR_RAIL",
+    "durationFrames": 200,
+    "startFrame": 52740,
+    "midFrame": 52850
+  },
+  {
+    "index": 256,
+    "id": "sc257",
+    "type": "BUDGET_METER_ROW",
+    "durationFrames": 200,
+    "startFrame": 52940,
+    "midFrame": 53050
+  },
+  {
+    "index": 257,
+    "id": "sc258",
+    "type": "LAB_ASSEMBLY",
+    "durationFrames": 200,
+    "startFrame": 53140,
+    "midFrame": 53250
+  },
+  {
+    "index": 258,
+    "id": "sc259",
+    "type": "CAST_BOARD",
+    "durationFrames": 200,
+    "startFrame": 53340,
+    "midFrame": 53450
+  },
+  {
+    "index": 259,
+    "id": "sc260",
+    "type": "SPEC_TO_FRAME",
+    "durationFrames": 200,
+    "startFrame": 53540,
+    "midFrame": 53650
+  },
+  {
+    "index": 260,
+    "id": "sc261",
+    "type": "BATCH_SWEEP",
+    "durationFrames": 200,
+    "startFrame": 53740,
+    "midFrame": 53850
+  },
+  {
+    "index": 261,
+    "id": "sc262",
+    "type": "PIPELINE_GANTT",
+    "durationFrames": 200,
+    "startFrame": 53940,
+    "midFrame": 54050
+  },
+  {
+    "index": 262,
+    "id": "sc263",
+    "type": "STICKY_NOTE",
+    "durationFrames": 200,
+    "startFrame": 54140,
+    "midFrame": 54250
+  },
+  {
+    "index": 263,
+    "id": "sc264",
+    "type": "STICKY_NOTE",
+    "durationFrames": 220,
+    "startFrame": 54340,
+    "midFrame": 54461
+  },
+  {
+    "index": 264,
+    "id": "sc265",
+    "type": "TITLE_CARD",
+    "durationFrames": 150,
+    "startFrame": 54560,
+    "midFrame": 54642
+  },
+  {
+    "index": 265,
+    "id": "sc266",
+    "type": "TRADEOFF_SCALE",
+    "durationFrames": 200,
+    "startFrame": 54710,
+    "midFrame": 54820
+  },
+  {
+    "index": 266,
+    "id": "sc267",
+    "type": "KINETIC_TEXT",
+    "durationFrames": 150,
+    "startFrame": 54910,
+    "midFrame": 54992
+  },
+  {
+    "index": 267,
+    "id": "sc268",
+    "type": "KINETIC_TEXT",
+    "durationFrames": 140,
+    "startFrame": 55060,
+    "midFrame": 55137
+  },
+  {
+    "index": 268,
+    "id": "sc269",
+    "type": "KINETIC_TEXT",
+    "durationFrames": 140,
+    "startFrame": 55200,
+    "midFrame": 55277
+  },
+  {
+    "index": 269,
+    "id": "sc270",
+    "type": "DIAGRAM",
+    "durationFrames": 220,
+    "startFrame": 55340,
+    "midFrame": 55461
+  },
+  {
+    "index": 270,
+    "id": "sc271",
+    "type": "CONCEPT_DIAGRAM",
+    "durationFrames": 180,
+    "startFrame": 55560,
+    "midFrame": 55659
+  },
+  {
+    "index": 271,
+    "id": "sc272",
+    "type": "BITS",
+    "durationFrames": 200,
+    "startFrame": 55740,
+    "midFrame": 55850
+  },
+  {
+    "index": 272,
+    "id": "sc273",
+    "type": "MEMORY",
+    "durationFrames": 200,
+    "startFrame": 55940,
+    "midFrame": 56050
+  },
+  {
+    "index": 273,
+    "id": "sc274",
+    "type": "PACKET",
+    "durationFrames": 240,
+    "startFrame": 56140,
+    "midFrame": 56272
+  },
+  {
+    "index": 274,
+    "id": "sc275",
+    "type": "PIPELINE",
+    "durationFrames": 210,
+    "startFrame": 56380,
+    "midFrame": 56495
+  },
+  {
+    "index": 275,
+    "id": "sc276",
+    "type": "PIPELINE",
+    "variant": "ci",
+    "durationFrames": 200,
+    "startFrame": 56590,
+    "midFrame": 56700
+  },
+  {
+    "index": 276,
+    "id": "sc277",
+    "type": "PIPELINE",
+    "variant": "boot",
+    "durationFrames": 200,
+    "startFrame": 56790,
+    "midFrame": 56900
+  },
+  {
+    "index": 277,
+    "id": "sc278",
+    "type": "PIPELINE",
+    "variant": "serverless",
+    "durationFrames": 200,
+    "startFrame": 56990,
+    "midFrame": 57100
+  },
+  {
+    "index": 278,
+    "id": "sc279",
+    "type": "PIPELINE",
+    "variant": "journey",
+    "durationFrames": 200,
+    "startFrame": 57190,
+    "midFrame": 57300
+  },
+  {
+    "index": 279,
+    "id": "sc280",
+    "type": "LAYERED_STACK",
+    "durationFrames": 210,
+    "startFrame": 57390,
+    "midFrame": 57505
+  },
+  {
+    "index": 280,
+    "id": "sc281",
+    "type": "GRID_ARRAY",
+    "durationFrames": 200,
+    "startFrame": 57600,
+    "midFrame": 57710
+  },
+  {
+    "index": 281,
+    "id": "sc282",
+    "type": "SPEC_COMPARE",
+    "durationFrames": 210,
+    "startFrame": 57800,
+    "midFrame": 57915
+  },
+  {
+    "index": 282,
+    "id": "sc283",
+    "type": "DIE_SHOT",
+    "durationFrames": 210,
+    "startFrame": 58010,
+    "midFrame": 58125
+  },
+  {
+    "index": 283,
+    "id": "sc284",
+    "type": "NEURAL_NET",
+    "durationFrames": 200,
+    "startFrame": 58220,
+    "midFrame": 58330
+  },
+  {
+    "index": 284,
+    "id": "sc285",
+    "type": "DATACENTER",
+    "durationFrames": 210,
+    "startFrame": 58420,
+    "midFrame": 58535
+  },
+  {
+    "index": 285,
+    "id": "sc286",
+    "type": "DATACENTER",
+    "durationFrames": 210,
+    "startFrame": 58630,
+    "midFrame": 58745
+  },
+  {
+    "index": 286,
+    "id": "sc287",
+    "type": "TRANSFORMER_BLOCK",
+    "durationFrames": 210,
+    "startFrame": 58840,
+    "midFrame": 58955
+  },
+  {
+    "index": 287,
+    "id": "sc288",
+    "type": "CACHE_PYRAMID",
+    "durationFrames": 200,
+    "startFrame": 59050,
+    "midFrame": 59160
+  },
+  {
+    "index": 288,
+    "id": "sc289",
+    "type": "CALL_STACK",
+    "durationFrames": 200,
+    "startFrame": 59250,
+    "midFrame": 59360
+  },
+  {
+    "index": 289,
+    "id": "sc290",
+    "type": "TOKENIZER",
+    "durationFrames": 210,
+    "startFrame": 59450,
+    "midFrame": 59565
+  },
+  {
+    "index": 290,
+    "id": "sc291",
+    "type": "FILE_TREE",
+    "durationFrames": 200,
+    "startFrame": 59660,
+    "midFrame": 59770
+  },
+  {
+    "index": 291,
+    "id": "sc292",
+    "type": "DATABASE_TABLE",
+    "durationFrames": 210,
+    "startFrame": 59860,
+    "midFrame": 59975
+  },
+  {
+    "index": 292,
+    "id": "sc293",
+    "type": "GIT_BRANCH",
+    "durationFrames": 210,
+    "startFrame": 60070,
+    "midFrame": 60185
+  },
+  {
+    "index": 293,
+    "id": "sc294",
+    "type": "STATE_MACHINE",
+    "durationFrames": 200,
+    "startFrame": 60280,
+    "midFrame": 60390
+  },
+  {
+    "index": 294,
+    "id": "sc295",
+    "type": "EMBEDDING_SPACE",
+    "durationFrames": 200,
+    "startFrame": 60480,
+    "midFrame": 60590
+  },
+  {
+    "index": 295,
+    "id": "sc296",
+    "type": "QUEUE",
+    "durationFrames": 190,
+    "startFrame": 60680,
+    "midFrame": 60784
+  },
+  {
+    "index": 296,
+    "id": "sc297",
+    "type": "API_REQUEST_RESPONSE",
+    "durationFrames": 200,
+    "startFrame": 60870,
+    "midFrame": 60980
+  },
+  {
+    "index": 297,
+    "id": "sc298",
+    "type": "BOOLEAN_LOGIC_GATES",
+    "durationFrames": 200,
+    "startFrame": 61070,
+    "midFrame": 61180
+  },
+  {
+    "index": 298,
+    "id": "sc299",
+    "type": "HASH_FUNCTION",
+    "durationFrames": 200,
+    "startFrame": 61270,
+    "midFrame": 61380
+  },
+  {
+    "index": 299,
+    "id": "sc300",
+    "type": "SORTING_VISUAL",
+    "durationFrames": 200,
+    "startFrame": 61470,
+    "midFrame": 61580
+  },
+  {
+    "index": 300,
+    "id": "sc301",
+    "type": "CLOCK_SIGNAL",
+    "durationFrames": 200,
+    "startFrame": 61670,
+    "midFrame": 61780
+  },
+  {
+    "index": 301,
+    "id": "sc302",
+    "type": "GPU_CLUSTER",
+    "durationFrames": 200,
+    "startFrame": 61870,
+    "midFrame": 61980
+  },
+  {
+    "index": 302,
+    "id": "sc303",
+    "type": "ZOOM_SCALE",
+    "durationFrames": 210,
+    "startFrame": 62070,
+    "midFrame": 62185
+  },
+  {
+    "index": 303,
+    "id": "sc304",
+    "type": "ENCRYPTION",
+    "variant": "encrypt",
+    "durationFrames": 200,
+    "startFrame": 62280,
+    "midFrame": 62390
+  },
+  {
+    "index": 304,
+    "id": "sc305",
+    "type": "POINTER_DIAGRAM",
+    "durationFrames": 200,
+    "startFrame": 62480,
+    "midFrame": 62590
+  },
+  {
+    "index": 305,
+    "id": "sc306",
+    "type": "NUMBER_BASE",
+    "durationFrames": 200,
+    "startFrame": 62680,
+    "midFrame": 62790
+  },
+  {
+    "index": 306,
+    "id": "sc307",
+    "type": "CODE_EDITOR",
+    "durationFrames": 200,
+    "startFrame": 62880,
+    "midFrame": 62990
+  },
+  {
+    "index": 307,
+    "id": "sc308",
+    "type": "CODE_EDITOR",
+    "variant": "split",
+    "durationFrames": 200,
+    "startFrame": 63080,
+    "midFrame": 63190
+  },
+  {
+    "index": 308,
+    "id": "sc309",
+    "type": "TERMINAL_SESSION",
+    "durationFrames": 200,
+    "startFrame": 63280,
+    "midFrame": 63390
+  },
+  {
+    "index": 309,
+    "id": "sc310",
+    "type": "LOG_STREAM",
+    "durationFrames": 200,
+    "startFrame": 63480,
+    "midFrame": 63590
+  },
+  {
+    "index": 310,
+    "id": "sc311",
+    "type": "CODE_DIFF",
+    "durationFrames": 200,
+    "startFrame": 63680,
+    "midFrame": 63790
+  },
+  {
+    "index": 311,
+    "id": "sc312",
+    "type": "ERROR_TRACE",
+    "durationFrames": 200,
+    "startFrame": 63880,
+    "midFrame": 63990
+  },
+  {
+    "index": 312,
+    "id": "sc313",
+    "type": "WINDOW_FRAME",
+    "variant": "browser",
+    "durationFrames": 200,
+    "startFrame": 64080,
+    "midFrame": 64190
+  },
+  {
+    "index": 313,
+    "id": "sc314",
+    "type": "WINDOW_FRAME",
+    "variant": "mac",
+    "durationFrames": 200,
+    "startFrame": 64280,
+    "midFrame": 64390
+  },
+  {
+    "index": 314,
+    "id": "sc315",
+    "type": "AUTOMATION_RUN",
+    "durationFrames": 210,
+    "startFrame": 64480,
+    "midFrame": 64595
+  },
+  {
+    "index": 315,
+    "id": "sc316",
+    "type": "DOM_INSPECT",
+    "durationFrames": 200,
+    "startFrame": 64690,
+    "midFrame": 64800
+  },
+  {
+    "index": 316,
+    "id": "sc317",
+    "type": "NETWORK_WATERFALL",
+    "durationFrames": 200,
+    "startFrame": 64890,
+    "midFrame": 65000
+  },
+  {
+    "index": 317,
+    "id": "sc318",
+    "type": "DEVICE_FRAME",
+    "durationFrames": 200,
+    "startFrame": 65090,
+    "midFrame": 65200
+  },
+  {
+    "index": 318,
+    "id": "sc319",
+    "type": "CLOUD_ARCH",
+    "durationFrames": 220,
+    "startFrame": 65290,
+    "midFrame": 65411
+  },
+  {
+    "index": 319,
+    "id": "sc320",
+    "type": "K8S_CLUSTER",
+    "variant": "rollout",
+    "durationFrames": 220,
+    "startFrame": 65510,
+    "midFrame": 65631
+  },
+  {
+    "index": 320,
+    "id": "sc321",
+    "type": "COST_METER",
+    "durationFrames": 190,
+    "startFrame": 65730,
+    "midFrame": 65834
+  },
+  {
+    "index": 321,
+    "id": "sc322",
+    "type": "SLO_GAUGE",
+    "durationFrames": 200,
+    "startFrame": 65920,
+    "midFrame": 66030
+  },
+  {
+    "index": 322,
+    "id": "sc323",
+    "type": "IAC_PLAN",
+    "durationFrames": 210,
+    "startFrame": 66120,
+    "midFrame": 66235
+  },
+  {
+    "index": 323,
+    "id": "sc324",
+    "type": "ERD",
+    "durationFrames": 210,
+    "startFrame": 66330,
+    "midFrame": 66445
+  },
+  {
+    "index": 324,
+    "id": "sc325",
+    "type": "LAYERED_STACK",
+    "variant": "imageLayers",
+    "durationFrames": 210,
+    "startFrame": 66540,
+    "midFrame": 66655
+  },
+  {
+    "index": 325,
+    "id": "sc326",
+    "type": "PACKET",
+    "variant": "container",
+    "durationFrames": 210,
+    "startFrame": 66750,
+    "midFrame": 66865
+  },
+  {
+    "index": 326,
+    "id": "sc327",
+    "type": "DIAGRAM",
+    "variant": "mesh",
+    "durationFrames": 210,
+    "startFrame": 66960,
+    "midFrame": 67075
+  },
+  {
+    "index": 327,
+    "id": "sc328",
+    "type": "PROCESS_TABLE",
+    "durationFrames": 210,
+    "startFrame": 67170,
+    "midFrame": 67285
+  },
+  {
+    "index": 328,
+    "id": "sc329",
+    "type": "KERNEL_BOUNDARY",
+    "durationFrames": 220,
+    "startFrame": 67380,
+    "midFrame": 67501
+  },
+  {
+    "index": 329,
+    "id": "sc330",
+    "type": "BITS",
+    "variant": "permissions",
+    "durationFrames": 210,
+    "startFrame": 67600,
+    "midFrame": 67715
+  },
+  {
+    "index": 330,
+    "id": "sc331",
+    "type": "TEST_RUNNER",
+    "durationFrames": 220,
+    "startFrame": 67810,
+    "midFrame": 67931
+  },
+  {
+    "index": 331,
+    "id": "sc332",
+    "type": "TEST_MATRIX",
+    "durationFrames": 210,
+    "startFrame": 68030,
+    "midFrame": 68145
+  },
+  {
+    "index": 332,
+    "id": "sc333",
+    "type": "CACHE_PYRAMID",
+    "variant": "pyramid",
+    "durationFrames": 210,
+    "startFrame": 68240,
+    "midFrame": 68355
+  },
+  {
+    "index": 333,
+    "id": "sc334",
+    "type": "STATE_MACHINE",
+    "variant": "lifecycle",
+    "durationFrames": 230,
+    "startFrame": 68450,
+    "midFrame": 68576
+  },
+  {
+    "index": 334,
+    "id": "sc335",
+    "type": "CONTEXT_METER",
+    "durationFrames": 210,
+    "startFrame": 68680,
+    "midFrame": 68795
+  },
+  {
+    "index": 335,
+    "id": "sc336",
+    "type": "AGENT_HARNESS",
+    "durationFrames": 230,
+    "startFrame": 68890,
+    "midFrame": 69016
+  },
+  {
+    "index": 336,
+    "id": "sc337",
+    "type": "KNOWLEDGE_GRAPH",
+    "durationFrames": 220,
+    "startFrame": 69120,
+    "midFrame": 69241
+  },
+  {
+    "index": 337,
+    "id": "sc338",
+    "type": "RETRIEVAL_RANK",
+    "durationFrames": 230,
+    "startFrame": 69340,
+    "midFrame": 69466
+  },
+  {
+    "index": 338,
+    "id": "sc339",
+    "type": "MODEL_STAGES",
+    "durationFrames": 220,
+    "startFrame": 69570,
+    "midFrame": 69691
+  },
+  {
+    "index": 339,
+    "id": "sc340",
+    "type": "CONFIDENCE_GATE",
+    "variant": "block",
+    "durationFrames": 200,
+    "startFrame": 69790,
+    "midFrame": 69900
+  },
+  {
+    "index": 340,
+    "id": "sc341",
+    "type": "SANDBOX_BOX",
+    "durationFrames": 210,
+    "startFrame": 69990,
+    "midFrame": 70105
+  },
+  {
+    "index": 341,
+    "id": "sc342",
+    "type": "DRILL_IN",
+    "durationFrames": 240,
+    "startFrame": 70200,
+    "midFrame": 70332
+  },
+  {
+    "index": 342,
+    "id": "sc343",
+    "type": "EVAL_DASHBOARD",
+    "durationFrames": 210,
+    "startFrame": 70440,
+    "midFrame": 70555
+  },
+  {
+    "index": 343,
+    "id": "sc344",
+    "type": "VIDEO_HERO",
+    "durationFrames": 210,
+    "startFrame": 70650,
+    "midFrame": 70765
+  },
+  {
+    "index": 344,
+    "id": "sc345",
+    "type": "VIDEO_SPOTLIGHT",
+    "durationFrames": 210,
+    "startFrame": 70860,
+    "midFrame": 70975
+  },
+  {
+    "index": 345,
+    "id": "sc346",
+    "type": "MEDIA_CALLOUT",
+    "durationFrames": 210,
+    "startFrame": 71070,
+    "midFrame": 71185
+  },
+  {
+    "index": 346,
+    "id": "sc347",
+    "type": "MEDIA_COMPARE",
+    "durationFrames": 210,
+    "startFrame": 71280,
+    "midFrame": 71395
+  },
+  {
+    "index": 347,
+    "id": "sc348",
+    "type": "MEDIA_STAT_OVERLAY",
+    "durationFrames": 210,
+    "startFrame": 71490,
+    "midFrame": 71605
+  },
+  {
+    "index": 348,
+    "id": "sc349",
+    "type": "DEVICE_FRAME",
+    "durationFrames": 210,
+    "startFrame": 71700,
+    "midFrame": 71815
+  },
+  {
+    "index": 349,
+    "id": "sc350",
+    "type": "GALLERY",
+    "durationFrames": 210,
+    "startFrame": 71910,
+    "midFrame": 72025
+  },
+  {
+    "index": 350,
+    "id": "sc351",
+    "type": "SCREENSHOT_CASCADE",
+    "durationFrames": 210,
+    "startFrame": 72120,
+    "midFrame": 72235
+  },
+  {
+    "index": 351,
+    "id": "sc352",
+    "type": "FLOATING_QUOTE_PILL",
+    "durationFrames": 210,
+    "startFrame": 72330,
+    "midFrame": 72445
+  },
+  {
+    "index": 352,
+    "id": "sc353",
+    "type": "OVERLAY_SPLIT_DEFINITIONS",
+    "durationFrames": 210,
+    "startFrame": 72540,
+    "midFrame": 72655
+  },
+  {
+    "index": 353,
+    "id": "sc354",
+    "type": "CYCLE_LOOP",
+    "durationFrames": 220,
+    "startFrame": 72750,
+    "midFrame": 72871
+  },
+  {
+    "index": 354,
+    "id": "sc355",
+    "type": "STEP_STACK_OVERLAY",
+    "durationFrames": 210,
+    "startFrame": 72970,
+    "midFrame": 73085
+  },
+  {
+    "index": 355,
+    "id": "sc356",
+    "type": "TITLE_BANNER_FOCUS",
+    "durationFrames": 210,
+    "startFrame": 73180,
+    "midFrame": 73295
+  },
+  {
+    "index": 356,
+    "id": "sc357",
+    "type": "CHANNEL_CARD",
+    "durationFrames": 200,
+    "startFrame": 73390,
+    "midFrame": 73500
+  },
+  {
+    "index": 357,
+    "id": "sc358",
+    "type": "TALKING_POINTS",
+    "durationFrames": 210,
+    "startFrame": 73590,
+    "midFrame": 73705
+  },
+  {
+    "index": 358,
+    "id": "sc359",
+    "type": "SLIDE_BULLETS_PIP",
+    "durationFrames": 220,
+    "startFrame": 73800,
+    "midFrame": 73921
+  },
+  {
+    "index": 359,
+    "id": "sc360",
+    "type": "CAPTION_KINETIC_OVERLAY",
+    "durationFrames": 200,
+    "startFrame": 74020,
+    "midFrame": 74130
+  },
+  {
+    "index": 360,
+    "id": "sc361",
+    "type": "PHOTO_TIMELINE",
+    "durationFrames": 220,
+    "startFrame": 74220,
+    "midFrame": 74341
+  },
+  {
+    "index": 361,
+    "id": "sc362",
+    "type": "DIAGRAM",
+    "variant": "agentMesh",
+    "durationFrames": 210,
+    "startFrame": 74440,
+    "midFrame": 74555
+  },
+  {
+    "index": 362,
+    "id": "sc363",
+    "type": "LINE_CHART",
+    "durationFrames": 210,
+    "startFrame": 74650,
+    "midFrame": 74765
+  },
+  {
+    "index": 363,
+    "id": "sc364",
+    "type": "DIAGRAM",
+    "variant": "auth",
+    "durationFrames": 220,
+    "startFrame": 74860,
+    "midFrame": 74981
+  },
+  {
+    "index": 364,
+    "id": "sc365",
+    "type": "REVEAL",
+    "durationFrames": 200,
+    "startFrame": 75080,
+    "midFrame": 75190
+  },
+  {
+    "index": 365,
+    "id": "sc366",
+    "type": "LIST_BUILD",
+    "durationFrames": 220,
+    "startFrame": 75280,
+    "midFrame": 75401
+  },
+  {
+    "index": 366,
+    "id": "sc367",
+    "type": "STAT_CALLOUT",
+    "durationFrames": 150,
+    "startFrame": 75500,
+    "midFrame": 75582
+  },
+  {
+    "index": 367,
+    "id": "sc368",
+    "type": "CAROUSEL",
+    "durationFrames": 200,
+    "startFrame": 75650,
+    "midFrame": 75760
+  },
+  {
+    "index": 368,
+    "id": "sc369",
+    "type": "ACTIVITY_CARD",
+    "durationFrames": 180,
+    "startFrame": 75850,
+    "midFrame": 75949
+  },
+  {
+    "index": 369,
+    "id": "sc370",
+    "type": "LOCATION_MAP",
+    "durationFrames": 220,
+    "startFrame": 76030,
+    "midFrame": 76151
+  },
+  {
+    "index": 370,
+    "id": "sc371",
+    "type": "SOUND_WAVE",
+    "durationFrames": 150,
+    "startFrame": 76250,
+    "midFrame": 76332
+  },
+  {
+    "index": 371,
+    "id": "sc372",
+    "type": "LOGO_REVEAL",
+    "durationFrames": 170,
+    "startFrame": 76400,
+    "midFrame": 76493
+  },
+  {
+    "index": 372,
+    "id": "sc373",
+    "type": "PHOTO",
+    "durationFrames": 180,
+    "startFrame": 76570,
+    "midFrame": 76669
+  },
+  {
+    "index": 373,
+    "id": "sc374",
+    "type": "SUBSCRIBE_REMINDER",
+    "durationFrames": 150,
+    "startFrame": 76750,
+    "midFrame": 76832
+  },
+  {
+    "index": 374,
+    "id": "sc375",
+    "type": "CREDITS_ROLL",
+    "durationFrames": 200,
+    "startFrame": 76900,
+    "midFrame": 77010
+  },
+  {
+    "index": 375,
+    "id": "sc376",
+    "type": "LOWER_THIRD",
+    "durationFrames": 186,
+    "startFrame": 77100,
+    "midFrame": 77202
+  },
+  {
+    "index": 376,
+    "id": "sc377",
+    "type": "CHAPTER",
+    "durationFrames": 180,
+    "startFrame": 77286,
+    "midFrame": 77385
+  },
+  {
+    "index": 377,
+    "id": "sc378",
+    "type": "NOTIFICATION",
+    "durationFrames": 190,
+    "startFrame": 77466,
+    "midFrame": 77570
+  },
+  {
+    "index": 378,
+    "id": "sc379",
+    "type": "COUNTDOWN",
+    "durationFrames": 190,
+    "startFrame": 77656,
+    "midFrame": 77760
+  },
+  {
+    "index": 379,
+    "id": "sc380",
+    "type": "FLIP_CARD",
+    "durationFrames": 210,
+    "startFrame": 77846,
+    "midFrame": 77961
+  },
+  {
+    "index": 380,
+    "id": "sc381",
+    "type": "GALLERY",
+    "durationFrames": 220,
+    "startFrame": 78056,
+    "midFrame": 78177
+  },
+  {
+    "index": 381,
+    "id": "sc382",
+    "type": "COMPARISON_SLIDER",
+    "durationFrames": 200,
+    "startFrame": 78276,
+    "midFrame": 78386
+  },
+  {
+    "index": 382,
+    "id": "sc383",
+    "type": "PHOTO_STACK",
+    "durationFrames": 200,
+    "startFrame": 78476,
+    "midFrame": 78586
+  },
+  {
+    "index": 383,
+    "id": "sc384",
+    "type": "IMAGE_SCENE",
+    "durationFrames": 180,
+    "startFrame": 78676,
+    "midFrame": 78775
+  },
+  {
+    "index": 384,
+    "id": "sc385",
+    "type": "IMAGE_SCENE",
+    "durationFrames": 180,
+    "startFrame": 78856,
+    "midFrame": 78955
+  },
+  {
+    "index": 385,
+    "id": "sc386",
     "type": "OUTRO_CTA",
     "durationFrames": 200,
-    "startFrame": 24706,
-    "midFrame": 24816
+    "startFrame": 79036,
+    "midFrame": 79146
   }
 ]

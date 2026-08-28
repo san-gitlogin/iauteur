@@ -10123,6 +10123,36 @@ export interface DbTwoWaysData {
   fileNote?: string;
   atWord?: number;
 }
+/**
+ * CURSOR_WALK — what `con` and `cur` are, drawn rather than named.
+ *
+ * The file on the left, a question travelling into it, and a READ HEAD stepping down the rows it
+ * returns — one row handed to the loop per step. Each row carries its own `atWord` so the head
+ * walks to the voice (LAW 0i: no explanatory component may contain a fixed frame interval).
+ */
+export interface CursorWalkData {
+  caption?: string;
+  premise?: string;
+  /** what the connection is called in the code, e.g. "con - the open file" */
+  connectionLabel?: string;
+  /** what the cursor is called, e.g. "cur - the read head" */
+  cursorLabel?: string;
+  /** the file the connection is open on */
+  fileName?: string;
+  /** the sentence that travels into the file */
+  query?: string;
+  /** a note under the rows, e.g. the for-loop line */
+  loopLabel?: string;
+  /** the result set, in order. Each row is handed over at its OWN anchor. */
+  rows?: {label?: string; sub?: string; atWord?: number}[];
+  atWord?: number;
+  /** when the question leaves the code and lands in the file */
+  queryAtWord?: number;
+  /** fallback anchor for rows that do not carry their own */
+  walkAtWord?: number;
+  color?: SemColor;
+}
+
 export interface TypeGateData {
   premise?: string;
   caption?: string;
@@ -10414,6 +10444,7 @@ export interface SceneData {
   groupBuckets?: GroupBucketsData;
   transactionDoor?: TransactionDoorData;
   typeGate?: TypeGateData;
+  cursorWalk?: CursorWalkData;
   dbTwoWays?: DbTwoWaysData;
   joinMerge?: JoinMergeData;
   placeholderSeal?: PlaceholderSealData;

@@ -1,0 +1,119 @@
+{
+  "slug": "vscode-polyglot",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "demo-polyglot",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "prep": {
+    "files": {
+      "greet.py": "def greet(name):\n    return f\"hello, {name}\"\n\n\nprint(greet(\"python\"))\n",
+      "sum.js": "const add = (a, b) => a + b;\n\nconsole.log('node says', add(20, 22));\n",
+      "twice.ts": "export const twice = (n: number): number => n * 2;\n\nconsole.log(twice(21));\n",
+      "README.md": "# Polyglot\n\nOne workspace, several languages.\n\n- Python\n- JavaScript\n- TypeScript\n",
+      "config.json": "{\n  \"name\": \"polyglot\",\n  \"languages\": 3\n}\n",
+      "card.css": ".card {\n  color: #fff;\n  padding: 12px;\n}\n",
+      "notes.txt": "line one\nline two\nline three\n"
+    },
+    "copy": {
+      "swatch.png": "briefs/vscode-shortcuts/fixtures/swatch.png"
+    },
+    "openFile": "greet.py"
+  },
+  "steps": [
+    {
+      "id": "run-python",
+      "action": "run",
+      "cmd": "python greet.py",
+      "label": "Python runs",
+      "focus": "terminal",
+      "expect": {"contains": "hello, python", "exitCode": 0},
+      "marks": [{"id": "out", "text": "hello, python"}]
+    },
+    {
+      "id": "open-js",
+      "action": "openFile",
+      "path": "sum.js",
+      "label": "open the JavaScript file",
+      "focus": "editor"
+    },
+    {
+      "id": "run-node",
+      "action": "run",
+      "cmd": "node sum.js",
+      "label": "Node runs",
+      "focus": "terminal",
+      "expect": {"contains": "node says 42", "exitCode": 0},
+      "marks": [{"id": "out", "text": "node says 42"}]
+    },
+    {
+      "id": "open-ts",
+      "action": "openFile",
+      "path": "twice.ts",
+      "label": "open the TypeScript file",
+      "focus": "editor"
+    },
+    {
+      "id": "comment-ts",
+      "action": "keys",
+      "chord": "ctrl+/",
+      "verify": "textChanged",
+      "focus": "editor",
+      "label": "comment a TypeScript line"
+    },
+    {
+      "id": "open-json",
+      "action": "openFile",
+      "path": "config.json",
+      "label": "open the JSON file",
+      "focus": "editor"
+    },
+    {
+      "id": "fold-json",
+      "action": "keys",
+      "chord": "ctrl+k ctrl+0",
+      "verify": "folded",
+      "focus": "editor",
+      "label": "fold the JSON"
+    },
+    {
+      "id": "open-md",
+      "action": "openFile",
+      "path": "README.md",
+      "label": "open the markdown file",
+      "focus": "editor"
+    },
+    {
+      "id": "preview-md",
+      "action": "keys",
+      "chord": "ctrl+shift+v",
+      "verify": "webviewsGrew",
+      "focus": "editor",
+      "label": "preview the markdown",
+      "settleMs": 2000
+    },
+    {
+      "id": "open-png",
+      "action": "openFile",
+      "path": "swatch.png",
+      "label": "open an image",
+      "focus": "editor"
+    },
+    {
+      "id": "open-css",
+      "action": "openFile",
+      "path": "card.css",
+      "label": "open the stylesheet",
+      "focus": "editor"
+    },
+    {
+      "id": "explorer",
+      "action": "keys",
+      "chord": "ctrl+shift+e",
+      "verify": "sidebarBodyChanged",
+      "focus": "editor",
+      "label": "back to the explorer"
+    }
+  ],
+  "maxHoldMs": 600
+}

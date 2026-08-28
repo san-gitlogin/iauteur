@@ -597,6 +597,20 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
     fs.mkdirSync(path.dirname(p), {recursive: true});
     fs.writeFileSync(p, content);
   }
+  // BINARY FIXTURES. `prep.files` writes strings, which cannot express a PNG — and the owner
+  // asked for the pipeline to be proved against "viewing images / viewing different types of text
+  // files". `prep.copy` brings a REAL file in from the repo, so an image beat shows an actual
+  // image rather than something drawn to look like one (LAW 0m).
+  for (const [rel, src] of Object.entries(demo.prep?.copy ?? {})) {
+    const from = path.resolve(src);
+    if (!fs.existsSync(from)) {
+      throw new Error(`prep.copy: "${src}" does not exist. A demo may not reference a fixture ` +
+        `that is not in the repo — the recording would silently open an empty editor.`);
+    }
+    const p = path.join(ws, rel);
+    fs.mkdirSync(path.dirname(p), {recursive: true});
+    fs.copyFileSync(from, p);
+  }
 
   const rec = path.resolve(outDir || path.join('public/rec', slug));
   fs.rmSync(rec, {recursive: true, force: true, maxRetries: 20, retryDelay: 250});

@@ -534,6 +534,7 @@
               "JOIN_MERGE",
               "DB_TWO_WAYS",
               "TYPE_GATE",
+              "CURSOR_WALK",
               "TRANSACTION_DOOR",
               "GROUP_BUCKETS",
               "TABLE_SPLIT",
@@ -935,6 +936,79 @@
                         "atWord": {
                           "type": "number"
                         }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CURSOR_WALK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "cursorWalk": {
+                      "type": "object",
+                      "properties": {
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "per-beat, from THIS beat subject (LAW 0j)"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 120,
+                          "description": "one plain sentence saying what the viewer is looking at; stays on screen unanchored (LAW 0l)"
+                        },
+                        "connectionLabel": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "what the connection is called in the code, e.g. \"con - the open file\""
+                        },
+                        "cursorLabel": {
+                          "type": "string",
+                          "maxLength": 34,
+                          "description": "what the cursor is called, e.g. \"cur - the read head\""
+                        },
+                        "fileName": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "the file the connection is open on"
+                        },
+                        "query": {
+                          "type": "string",
+                          "maxLength": 46,
+                          "description": "the sentence that travels into the file"
+                        },
+                        "loopLabel": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "a note under the rows, e.g. the for-loop line"
+                        },
+                        "rows": {
+                          "description": "the result set IN ORDER. Each row carries its own atWord and is handed to the loop at it - that is the whole depiction, so two rows is the minimum that can show a walk."
+                        },
+                        "atWord": {
+                          "type": "number"
+                        },
+                        "queryAtWord": {
+                          "type": "number",
+                          "description": "when the question leaves the code and lands in the file"
+                        },
+                        "walkAtWord": {
+                          "type": "number",
+                          "description": "fallback for rows with no atWord of their own"
+                        },
+                        "color": {}
                       }
                     }
                   }
