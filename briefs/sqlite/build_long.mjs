@@ -100,7 +100,7 @@ scene('HOOK',
    heroAsset: 'lucide:file', headlineAtWord: 2, heroAtWord: 13});
 
 scene('CHAPTER',
-  `Welcome in. Today is SQLite, from absolutely nothing to querying two tables and calling SQLite
+  `Welcome in. Today is SQLite, from an empty folder to querying two tables and calling SQLite
    from Python. Everything you see me run is running live, so when something fails, you'll
    see the error.`,
   {chapter: {number: '01', title: 'It is a file', subtitle: 'no server, no port, no password'}});
@@ -108,9 +108,9 @@ scene('CHAPTER',
 scene('DB_TWO_WAYS',
   `Here's what trips people up, because every database tutorial you have opened starts the
    same way. First a machine for the server to run on. Then a service that has to stay running, or
-   nothing works. Then a port to listen on. Then a user and a password, and the twenty minutes
-   you'll spend getting those wrong. SQLite skips the whole list. On the right is the whole
-   thing — one file, eight kilobytes, already finished before we start.`,
+   the whole thing is dead. Then a port to listen on. Then a user and a password, and the twenty minutes
+   you'll spend getting those wrong. SQLite skips the list. On the right is the whole thing —
+   one file, eight kilobytes, finished before we start.`,
   {dbTwoWays: {
     caption: 'what you have to run first',
     premise: 'Both of these store the same four rows.',
@@ -128,7 +128,7 @@ scene('DB_TWO_WAYS',
 
 scene('TITLE_CARD',
   `We're going to build this twice. First in the shell, where every single thing is visible.
-   Then from Python, reading the very same file. Nothing gets exported in between.`,
+   Then from Python, reading the very same file. No export step in between — the same file, both times.`,
   {title: 'SQLite, from nothing', subtitle: 'the shell first, then Python'});
 
 rec(`Let's prove the thing exists. That's the version I am teaching and I want to be specific,
@@ -169,8 +169,7 @@ scene('TYPE_GATE',
 rec(`So let's make the table, and then break the table deliberately. The first command reads that file
      and creates the table. Silence means the command worked, because SQLite only speaks when something
      is wrong. The second one tries to put the string not-a-number into the price column. Watch.
-     SQLite refuses, and names the column and the type, and nothing was stored. STRICT just earned
-     its place.`,
+     SQLite refuses, and names the column and the type, and the row never lands. STRICT earned its place.`,
   {caption: 'the error is the lesson',
    premise: 'The second command FAILS on purpose. Exit code 1, and the message names the column.',
    clips: [
@@ -238,13 +237,13 @@ rec(`Changing a row is UPDATE, and watch the end of that command, because RETURN
      }),
    ]});
 
-rec(`Two more. Dot schema asks the file to describe itself, and hands back the exact statement
-     that created the table, the same words I typed, kept inside the file. You never have to guess
-     the shape of a SQLite database. You can ask the file. And then the thing I promised at
-     the very start. Where does all of this actually live? One file. Eight thousand one hundred
-     and ninety two bytes. That's eight kilobytes, smaller than most photos on your phone, and
-     holds the schema, the rows, and every change I made. You can email the file. You can copy the file to
-     a stick. You can put the file in version control.`,
+rec(`Two more. Dot schema asks the file to describe itself, and back comes the exact statement
+     that created the table — the same words we typed, kept inside the file. You never have to
+     guess the shape of a SQLite database. Ask it. And then the thing I promised at the very
+     start. Where does all of this actually live? One file. Eight thousand one hundred and
+     ninety two bytes, which is eight kilobytes — smaller than most photos on your phone, and
+     it holds the schema, the rows and every change we made. Email it. Copy it to a stick. Put
+     it in version control.`,
   {caption: 'eight kilobytes, and that is all',
    premise: 'The schema, the rows and every edit — all inside one ordinary file.',
    clips: [
@@ -262,7 +261,7 @@ scene('WHERE_IT_RUNS',
   `That one property is why you're carrying several copies right now, whether you knew or
    not. Your phone keeps contacts and messages in SQLite. Your browser keeps history and settings
    in SQLite. The same engine flies in aircraft, and sits in the dashboard of a lot of cars. Same engine, same file
-   format, four machines that share nothing else — because a thing with no server to run has
+   format, four machines with almost no common ground — because a thing with no server to run has
    almost nowhere SQLite can't go.`,
   {whereItRuns: {
     caption: 'already in your pocket',
@@ -280,7 +279,7 @@ scene('WHERE_IT_RUNS',
 
 scene('QUIZ_CARD',
   `Quick check. Which of these does SQLite genuinely not need? Have a think, and pause if you
-   want longer. Ready. It is B. There's no port, because there's nothing to connect to.`,
+   want longer. Ready. It is B. There's no port, because there's no service listening.`,
   {quiz: {
     question: 'Which does SQLite genuinely not need?',
     options: [{text: 'A table'}, {text: 'A port'}, {text: 'A file'}, {text: 'A query'}],
@@ -352,8 +351,8 @@ rec(`Here's that second table. Orders, with an id of its own, a product id point
      take orders, and join products where the product's id matches the order's product id. Run
      it, and two tables become one answer. Six order rows went in. Four lines came out, one per
      product, sorted by revenue, and the keyboard is on top at five hundred and thirty four —
-     six units at eighty nine each. Nothing in orders knew the word keyboard. Nothing in products
-     knew about quantities.`,
+     six units at eighty nine each. The orders table has never seen the word keyboard, and the products
+     table has never seen a quantity.`,
   {caption: 'six rows in, four lines out',
    premise: 'Revenue per product — arithmetic across two tables that share only an id.',
    clips: [
@@ -506,12 +505,11 @@ scene('CHAPTER',
   {chapter: {number: '03', title: 'The same file, from code',
              subtitle: 'Python, parameters, and commit'}});
 
-rec(`Six lines. Connect to shop dot db, the same file the shell has been writing this whole time.
-     Get a cursor, which is the thing you run queries through. Loop the results, and each row
-     arrives as a plain Python tuple you can unpack. Then close the connection. There's no server to reach,
-     no credentials, no connection string. It's a filename. Run the script, and there are the products
-     the shell inserted, sorted by price. Nothing was exported and nothing was migrated. Python
-     opened the same eight kilobytes and handed them straight back.`,
+rec(`Six lines, one at a time. We call sqlite3 dot connect and hand it a filename. What comes
+     back is a connection — we call it con — and con is simply the open file. Then we ask con
+     for a cursor, which we call cur. The cursor is what we hand a query to, and what hands
+     the rows back. We loop, we print, we close. No server, no password, no connection string:
+     it is a filename. Run it, and down in the terminal are the products the shell inserted.`,
   {caption: 'a filename, not a connection string',
    premise: 'The same shop.db the shell created, opened by Python on a different engine build.',
    clips: [
@@ -530,7 +528,7 @@ rec(`One small thing that will save you real pain. By default a row comes back a
      number you wrote is quietly pointing at the wrong thing. Setting row factory to sqlite3 dot
      Row gives you rows you can index by name instead. Same data, two ways of reaching the value. Row
      one, and row name. The second still works after somebody reorders the columns. The first
-     silently returns the wrong value, and nothing will raise an error to tell you, which is
+     silently returns the wrong value, and Python raises no error to warn you, which is
      exactly why the bug survives code review and then bites you in production.`,
   {caption: 'index by name, not by number',
    premise: 'Both print the same value today. Only one keeps working after a schema change.',
@@ -565,17 +563,16 @@ scene('PLACEHOLDER_SEAL',
     safeAtWord: 28, evilAtWord: 39, atWord: 3,
   }});
 
-rec(`Here are both, in one file. The first passes the value
-     as a parameter — that's the question mark, and the tuple after the question mark. The second builds the
-     same string with an f-string. Four characters of difference. Now watch what that costs. The
-     safe one asked for the USB-C hub and got the USB-C hub. One row. The unsafe one was handed a
-     value containing OR one equals one, which is true for every row, followed by a comment
-     marker that kills the rest of the query. Four rows came back. The whole table. Nobody had to be clever; they typed a quote
-     into a search box. And placeholders scale as well —
-     execute many takes a list and inserts the whole list in a single call, preparing the statement
-     once instead of three separate times. That matters more than you would think: preparing a
-     statement is most of the cost of running a small one, so a loop of inserts repeats that
-     work every time.`,
+rec(`Both are in one file, and they look almost the same. cur dot execute is how we hand a query
+     to the database, and the first call hands it two separate things: the sentence, and the
+     value, kept apart. That is what the question mark is for — it means "a value goes here,
+     and I will pass it to you separately". The second one glues the value straight into the
+     sentence with an f-string. Four characters between them. Now watch the bottom of the
+     screen. The safe call asked for the USB-C hub and got the USB-C hub — one row, exactly
+     what we asked for. The second was handed a quote, then OR one equals one, which is true
+     of every row, then a comment marker that kills the rest of the sentence. Four rows come
+     back. The whole table. And placeholders scale too: execute many takes a list and sends
+     all of it in one call, preparing the sentence once instead of three times.`,
   {caption: 'one row, or all of them',
    premise: 'The same table, the same code path. The difference is where the value went.',
    clips: [
@@ -644,7 +641,7 @@ rec(`So here's commit doing its job. Insert a webcam, print the new row id, comm
 scene('TRANSACTION_DOOR',
   `That's what a transaction actually means, and it's worth saying plainly. The delete was
    completely real inside the transaction, and the delete never happened outside the transaction. Roll back, and the
-   file on disk learns nothing at all about the work you just did.`,
+   file on disk never hears a word about the work you just did.`,
   {transactionDoor: {
     caption: 'a rollback leaves no trace',
     premise: 'The DELETE ran. Whether it HAPPENED is a different question.',
@@ -656,7 +653,7 @@ scene('TRANSACTION_DOOR',
   }});
 
 scene('WHEN_NOT_SQLITE',
-  `One honest limit, because a course that only sells you its subject teaches you nothing.
+  `One honest limit, because a course that only sells you its subject is advertising, not teaching.
    Readers are cheap, as many as you like, all at once. Writers are not. SQLite lets one writer
    in at a time, so many processes writing constantly will queue behind that door.`,
   {whenNotSqlite: {
@@ -670,7 +667,7 @@ scene('WHEN_NOT_SQLITE',
 
 scene('QUIZ_CARD',
   `Your script inserts a row, prints the id, and the row is gone. Why? Have a think, and pause
-   if you want longer. Ready. It is D, and nothing was committed.`,
+   if you want longer. Ready. It is D — the script never called commit.`,
   {quiz: {
     question: 'The row vanished after the script exited. Why?',
     options: [
@@ -695,7 +692,7 @@ scene('RECAP',
    ]});
 
 scene('OUTRO_CTA',
-  `Everything here runs on a plain install with nothing added, so go and open a shell and break
+  `Everything here runs on a plain install with no extra packages, so go and open a shell and break
    something. Genuinely — that's how this sticks.`,
   {message: 'Open a shell and break something',
    sub: 'that is genuinely how it sticks'});
