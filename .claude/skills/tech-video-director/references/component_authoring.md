@@ -103,6 +103,24 @@ but it only strips the type from `DYNAMIC`, so **delete your hand-written valida
 - **Three Guards on bounded text** (Budget in linter + Fit via fitText + Wrap fallback).
   `whiteSpace:'nowrap'` is banned unless paired with a maxWidth. Prefer `overflow:hidden` +
   `textOverflow:'ellipsis'` on single-line labels inside fixed-width cells.
+- **NOTHING MOVES LINEARLY. Pick a ROLE from `src/motion/system.ts`, never a raw ramp.**
+  Measured across eleven components built in one course: **33 interpolates, zero easing** —
+  every arrival, travel and collapse ran linear, and the set read as boxes appearing rather
+  than as animation. The four roles are `arriveAt` (ease out — something shows up and
+  settles), `travelAt` (the S-curve — something moves or changes state), `landAt` (overshoot,
+  for follow-through) and `leaveAt` (ease in — something drifts away), with one duration each
+  because style comes from a small set of repeated rules. `stagger(i)` exists so a list never
+  arrives as a block: 3 frames between children reads as life, 10 reads as a queue.
+  A linear move is allowed only when the MECHANISM is uniform — a full-table scan touching
+  every row at the same rate — and then it carries a comment saying so.
+- **A KEYPRESS IS AN EVENT, A HIGHLIGHT IS A STATE.** Anything that represents an ACTION needs
+  in / hold / out, not just a fade in. Keycaps faded in and then sat on screen until the next
+  scene cut, which reads as a stuck overlay.
+- **TYPOGRAPHY ROLE, NOT JUST A TOKEN.** `t.fonts.*` everywhere is necessary and not
+  sufficient. A one-line takeaway set in `body` is not hardcoded and still reads as "a normal
+  font", because body is chosen to be characterless — headlines and statements belong in
+  `display`, where the theme's personality lives. `npm run check-fonts` fails on a literal
+  family and REPORTS files that set type without ever reaching for the display face.
 - **Deterministic motion only.** Pure functions of `useCurrentFrame()`; every `interpolate`
   clamps both sides (`{extrapolateLeft:'clamp', extrapolateRight:'clamp'}`). NO `Math.random()`
   unseeded (use a `Math.sin(i*..)` hash for "random-looking" but stable values), NO CSS
