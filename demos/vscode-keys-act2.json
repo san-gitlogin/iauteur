@@ -3,11 +3,14 @@
   "surface": "vscode",
   "theme": "dark",
   "workspace": "demo-keys-act2",
-  "viewport": {"width": 1600, "height": 900},
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
   "fps": 30,
   "prep": {
     "files": {
-      "cart.js": "const rate = 0.2;\nconst net = 100;\nconst vat = net * rate;\nconst gross = net + vat;\n\nconsole.log(rate, vat, gross);\n"
+      "cart.js": "const rate = 0.2;\nconst net = 100;\n\nfunction priceOf(items) {\n  const sub = items.reduce((a, b) => a + b, 0);\n  const vat = sub * rate;\n  return sub + vat;\n}\n\nconsole.log(priceOf([net, 50]));\n"
     },
     "openFile": "cart.js"
   },
@@ -19,7 +22,12 @@
       "verify": "textChanged",
       "focus": "editor",
       "label": "comment this line out",
-      "marks": [{"id": "commented", "text": "// const rate = 0.2;"}]
+      "marks": [
+        {
+          "id": "commented",
+          "text": "// const rate = 0.2;"
+        }
+      ]
     },
     {
       "id": "uncomment",
@@ -28,7 +36,12 @@
       "verify": "textChanged",
       "focus": "editor",
       "label": "and back again",
-      "marks": [{"id": "plain", "text": "const rate = 0.2;"}]
+      "marks": [
+        {
+          "id": "plain",
+          "text": "const rate = 0.2;"
+        }
+      ]
     },
     {
       "id": "copyline",
@@ -82,7 +95,7 @@
       "id": "fold",
       "action": "keys",
       "chord": "ctrl+k ctrl+0",
-      "verify": "anything",
+      "verify": "folded",
       "focus": "editor",
       "label": "fold everything",
       "settleMs": 1200
@@ -91,7 +104,7 @@
       "id": "unfold",
       "action": "keys",
       "chord": "ctrl+k ctrl+j",
-      "verify": "anything",
+      "verify": "unfolded",
       "focus": "editor",
       "label": "and unfold it",
       "settleMs": 1200

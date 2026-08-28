@@ -3,7 +3,10 @@
   "surface": "vscode",
   "theme": "dark",
   "workspace": "demo-keys-act1",
-  "viewport": {"width": 1600, "height": 900},
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
   "fps": 30,
   "prep": {
     "files": {
@@ -24,14 +27,6 @@
       "settleMs": 1100
     },
     {
-      "id": "escape-1",
-      "action": "keys",
-      "chord": "escape",
-      "verify": "anything",
-      "label": "close it again",
-      "settleMs": 600
-    },
-    {
       "id": "quickopen",
       "action": "keys",
       "chord": "ctrl+p",
@@ -39,14 +34,6 @@
       "focus": "editor",
       "label": "quick open",
       "settleMs": 1100
-    },
-    {
-      "id": "escape-2",
-      "action": "keys",
-      "chord": "escape",
-      "verify": "anything",
-      "label": "and out",
-      "settleMs": 600
     },
     {
       "id": "sidebar",
@@ -72,14 +59,6 @@
       "focus": "editor",
       "label": "find in this file",
       "settleMs": 1100
-    },
-    {
-      "id": "escape-3",
-      "action": "keys",
-      "chord": "escape",
-      "verify": "anything",
-      "label": "close find",
-      "settleMs": 600
     },
     {
       "id": "search",
@@ -113,8 +92,16 @@
       "cmd": "node app.js",
       "label": "run the file",
       "focus": "terminal",
-      "expect": {"contains": "100", "exitCode": 0},
-      "marks": [{"id": "out", "text": "100"}]
+      "expect": {
+        "contains": "100",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "out",
+          "text": "100"
+        }
+      ]
     }
   ],
   "maxHoldMs": 600
