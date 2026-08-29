@@ -124,6 +124,58 @@ not, words often which are not humane"* — measured at 24 negations in 1039 wor
 was decorative are rewritten to positive constructions; the five where the negation IS the
 argument (six shortcuts that do nothing in a browser) keep theirs.
 
+### 2026-08-29 (later) — four defects the proof frames found, and a linter that was lying
+
+Everything below was found by pulling frames out of finished renders. None of it was visible
+in the code, and three of the four had already survived a review pass.
+
+**A mark is measured ONCE, at the end of a step — and the clip PLAYS.** The standing `__cmd`
+band was drawn from clip start, so for most of the take it sat wherever the command *would
+be* once the output had landed. Frame 1500 of scan-vs-search shows it around empty space just
+right of `QUERY PLAN`. This is exactly why callouts are anchored after their clip's footage;
+the band takes the same rule and appears when the last frame freezes. Verified at frames 1400
+and 1780 — it lands on `CREATE INDEX …` and `EXPLAIN QUERY PLAN …` to the pixel.
+
+**A full terminal has no clear spot, so pass 2 must pick the LEAST BAD one.** The callout
+label solver scored candidates against other callout boxes and nothing else. With measured ink
+available, pass 1 now clears the ink too — but on a terminal beat pass 1 finds nothing at all,
+and the old fallback took the FIRST legal candidate in preference order, which put *"straight
+to the rows"* on the `CREATE INDEX` line the viewer had just read. Pass 2 scores by how much
+ink a candidate actually covers, with preference order as the tie-break only. The same label
+now sits in the empty gutter beside the outline pane.
+
+**A centred flex column shrink-wraps to its widest child, and `maxWidth` cannot undo that.**
+Chapter four's title broke over two lines on a 1920px frame while carrying `maxWidth: '76%'`,
+because the widest child of that column is the 250px stamp box above it. A ceiling on a width
+the browser never offered is not a layout — the text block takes an explicit width now. Same
+latent bug fixed in `numeral` and `doors`.
+
+**THE PRONOUN GUARD WAS COUNTING ITS OWN REMEDY.** Measured: 47 "bare pronouns" in a
+1037-word script, 4.5% against a 4.5% threshold — a rejection. Twenty-one of the 47 were
+DETERMINERS: "that card", "this file", "that chord". The warning's own message reads *"Name
+the subject instead: … that trace file"* and its regex scored that phrase as the disease. It
+also counted the relative pronoun in "the one that confuses everybody".
+
+`it`/`its`/`they`/`them` always count. A demonstrative counts only when it stands alone as
+the SUBJECT ("That's it"), which is the vague-reference case the owner complained about. The
+THRESHOLD is untouched — LAW 5 says fix specs rather than rules, and this is not a rule being
+slackened to pass, it is a measurement that was wrong. **Across every spec in the repo the
+count falls from 40 warnings to 13**, so 27 specs were being told to fix a problem they did
+not have, and the "fix" — ducking the subject's own name — is a backfire LAW 0f already warns
+about. Worth checking the other guards for the same shape of error.
+
+**Delivered this session**, all gates green (tsc, lint, recordings, viz-kinds, publish-safety):
+
+| cut | frames | length | size |
+|---|---|---|---|
+| `sqlite-scan-vs-search` wide | 2,176 | 1m13s | 17.4 MB |
+| `sqlite-…-just-a-file` short | 1,172 | 39s | 10.3 MB |
+| `vscode-shortcuts-that-actually-work` wide | 10,183 | 5m39s | 81.1 MB |
+| `sqlite-…-just-a-file` wide | 27,382 | 15m13s | rendering (6 segments, LAW 12) |
+
+⚠ The VS Code cut was rendered BEFORE the chapter-measure fix, so its chapter four still
+carries the wrapped title. Re-render it once the long cut is out of the way.
+
 ### 2026-08-23 — the shorts inventory: what exists, what never got covers, what is not in git
 
 Collecting every rendered short for upload turned up three gaps that nothing in the
