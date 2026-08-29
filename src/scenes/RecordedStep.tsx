@@ -708,57 +708,49 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
               const inkBoxes = ((cur.ink ?? []) as {x: number; y: number; w: number; h: number}[])
                 .map((r) => ({x: Number(r.x) - 2, y: Number(r.y) - 2, w: Number(r.w) + 4, h: Number(r.h) + 4}));
               const obstacles = boxes.filter((_, k) => k !== n).concat(placed);
-              let pick = null;
-              // PASS 1 — a spot that clears the other callouts AND the ink. On an editor beat
-              // with white space this is usually available and the label covers nothing.
-              for (const side of (e.co.side ? [e.co.side, ...order] : order)) {
-                const p = at(side);
-                const r = {x: p.x, y: p.y, w: lw, h: lh};
-                if (!inside(r)) continue;
-                if (obstacles.concat(inkBoxes).some((o) => hits(r, o))) continue;
-                pick = {...p, w: lw, h: lh};
-                break;
-              }
-              // PASS 2 — A FULL TERMINAL HAS NO CLEAR SPOT, so take the LEAST BAD one rather
-              // than the first legal one.
+              // ONE SCORED PASS, NOT A LADDER OF FALLBACKS.
               //
-              // Measured on the scan-vs-search render at frame 1780: every candidate around
-              // `SEARCH orders USING INDEX` overlaps ink, so pass 1 finds nothing and the old
-              // fallback took the first entry in the preference order — which put *"straight
-              // to the rows"* squarely on the `CREATE INDEX` line the viewer had just read.
-              // Preference order is the right tie-break, never the whole answer: scoring by
-              // how much ink a candidate actually covers finds the gap to the right of a short
-              // last line, which the fixed order cannot see.
+              // The solver used to try candidates in preference order, take the first that
+              // was clean, and — if none was — dump the label in "the emptiest corner". Pulled
+              // from the long cut at frame 22900: with three callouts live on a crowded frame,
+              // nothing came back clean and *"and the count moves"* landed in the TOP-RIGHT
+              // corner with a leader running diagonally across the entire 1920px frame, over
+              // the code, over the card and down into the terminal. A label that far from its
+              // target is not pointing at anything; it is a line across the picture.
+              //
+              // So every candidate is SCORED and the cheapest wins. The weights are an
+              // ordering, and they say what matters in what order:
+              //   · landing on another callout's box or label is nearly disqualifying —
+              //     two labels on top of each other are both unreadable;
+              //   · covering measured ink costs its actual area, so a gutter beats a code
+              //     line and a short line's right-hand slack beats a long one's;
+              //   · distance from the target costs, because a near label needs no leader
+              //     to be understood and a far one does;
+              //   · preference order is the tie-break, never the whole answer.
+              const areaOver = (r: Rect, o: Rect) =>
+                Math.max(0, Math.min(r.x + r.w, o.x + o.w) - Math.max(r.x, o.x)) *
+                Math.max(0, Math.min(r.y + r.h, o.y + o.h) - Math.max(r.y, o.y));
+              const unit = Math.max(1, lw * lh);   // score in label-areas, so `u` cancels out
+              let pick: {x: number; y: number; w: number; h: number; side: string} | null = null;
+              let best = Infinity;
+              (e.co.side ? [e.co.side, ...order] : order).forEach((side, rank) => {
+                const q = at(side);
+                const r = {x: q.x, y: q.y, w: lw, h: lh};
+                if (!inside(r)) return;
+                const clash = obstacles.reduce((acc, o) => acc + areaOver(r, o), 0) / unit;
+                const ink = inkBoxes.reduce((acc, o) => acc + areaOver(r, o), 0) / unit;
+                const away = Math.hypot((r.x + lw / 2) - cx, (r.y + lh / 2) - cy) / Math.max(1, vw);
+                const cost = clash * 100 + ink * 4 + away * 6 + rank * 0.01;
+                if (cost < best) { best = cost; pick = {...q, w: lw, h: lh}; }
+              });
               if (!pick) {
-                const areaOver = (r: Rect, o: Rect) =>
-                  Math.max(0, Math.min(r.x + r.w, o.x + o.w) - Math.max(r.x, o.x)) *
-                  Math.max(0, Math.min(r.y + r.h, o.y + o.h) - Math.max(r.y, o.y));
-                let best = Infinity;
-                (e.co.side ? [e.co.side, ...order] : order).forEach((side, rank) => {
-                  const p = at(side);
-                  const r = {x: p.x, y: p.y, w: lw, h: lh};
-                  if (!inside(r)) return;
-                  // Another callout's box or label is a HARD conflict — never trade one of
-                  // those for a little less ink.
-                  if (obstacles.some((o) => hits(r, o))) return;
-                  const cost = inkBoxes.reduce((acc, o) => acc + areaOver(r, o), 0) + rank;
-                  if (cost < best) { best = cost; pick = {...p, w: lw, h: lh}; }
-                });
-              }
-              if (!pick) {
-                // Nothing clean: sit it in the emptiest corner of the view rather than on
-                // top of something. A label the viewer can read beside the wrong thing beats
-                // a label they cannot read at all.
-                const corners = [
-                  {x: vx + vw - pad - lw, y: vy + pad, side: 'corner'},
-                  {x: vx + pad, y: vy + pad, side: 'corner'},
-                  {x: vx + vw - pad - lw, y: vy + vh - pad - lh, side: 'corner'},
-                  {x: vx + pad, y: vy + vh - pad - lh, side: 'corner'},
-                ];
-                pick = corners
-                  .map((p) => ({p, bad: obstacles.filter((o) => hits({...p, w: lw, h: lh}, o)).length}))
-                  .sort((a, b) => a.bad - b.bad)[0].p;
-                pick = {...pick, w: lw, h: lh};
+                // Nothing fits inside the view at all — only possible on a tiny window. Pin it
+                // to the target's own corner so the leader stays short.
+                pick = {
+                  x: Math.min(Math.max(tx0, vx + pad), vx + vw - pad - lw),
+                  y: Math.min(Math.max(ty0 - gap - lh, vy + pad), vy + vh - pad - lh),
+                  w: lw, h: lh, side: 'pinned',
+                };
               }
               placed.push({x: pick.x, y: pick.y, w: lw, h: lh});
 

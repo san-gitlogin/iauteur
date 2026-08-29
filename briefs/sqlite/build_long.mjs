@@ -78,11 +78,137 @@ const scene = (type, narration, data = {}, extra = {}) => {
 /** A RECORDED_STEP scene. Clip anchors arrive later from anchor-spec, so they are ESTIMATED
  *  here as one per clip plus one per zoom plus one per callout — which is exactly what the
  *  solver places. */
+// ── WHAT THE CARD DRAWS, PER BEAT ────────────────────────────────────────────
+//
+// Owner: *"the text you put there is certainly very much AI-ish, I would like it to have
+// meaningful animation components and data rather than just showing texts... Maybe you can
+// display what happens in the table, maybe you can display a component graph, a sequence
+// diagram."*
+//
+// The shorts got that first. This cut still had a card holding a caption, a premise and a
+// step rule on TWELVE of its fifteen recorded beats — the same complaint at fifteen times the
+// runtime, which is worse, not better.
+//
+// Keyed by caption because that is what identifies a beat here, and applied to the LAST clip
+// of the beat: the card should draw the beat's CONCLUSION, and the last clip is the one still
+// on screen when the voice reaches it.
+//
+// EVERY FIGURE IS FROM THE CAPTURE OR THE FIXTURE IT RAN (LAW 3, LAW 0m). The four products
+// and their prices are `seed.sql` verbatim; the six orders, the aggregate line and the exit
+// code are what the terminal actually printed. Nothing here is decoration invented to fill a
+// box — that is the defect being fixed, not a new one to introduce.
+const CARD_CONTENT = {
+  // The beat IS the schema, so the card carries the schema: one row per promise, in the
+  // order the file declares them.
+  'four lines, four promises': {
+    kind: 'rows', color: 'blue', columns: ['line', 'the promise it makes'],
+    rows: [
+      {cells: ['id INTEGER', 'PRIMARY KEY'], state: 'plain'},
+      {cells: ['name TEXT', 'NOT NULL'], state: 'kept'},
+      {cells: ['price REAL', 'NOT NULL'], state: 'kept'},
+      {cells: [') STRICT', 'types get checked'], state: 'new'},
+    ],
+  },
+  // Two commands, two fates — which is what `split` is for, and the exit codes are real.
+  'the error is the lesson': {
+    kind: 'split', color: 'blue',
+    left: '.read schema.sql', leftNote: 'silence, exit 0',
+    right: "price = 'not-a-number'", rightNote: 'exit 1, names the column',
+  },
+  // The table, as it now stands on disk.
+  'four rows, and a readable box': {
+    kind: 'rows', color: 'green', columns: ['name', 'price'],
+    rows: [
+      {cells: ['Mechanical keyboard', '89.00'], state: 'new'},
+      {cells: ['27-inch monitor', '240.00'], state: 'new'},
+      {cells: ['Desk lamp', '35.50'], state: 'new'},
+      {cells: ['USB-C hub', '45.00'], state: 'new'},
+    ],
+  },
+  // WHERE price < 60 — the monitor is the row that leaves, and the card shows it leaving.
+  'some of them, in an order': {
+    kind: 'rows', color: 'orange', columns: ['name', 'price'],
+    rows: [
+      {cells: ['27-inch monitor', '240.00'], state: 'cut'},
+      {cells: ['Mechanical keyboard', '89.00'], state: 'kept'},
+      {cells: ['USB-C hub', '45.00'], state: 'kept'},
+      {cells: ['Desk lamp', '35.50'], state: 'kept'},
+    ],
+  },
+  // Two verbs, two ways of proving they happened.
+  'change one, take one away': {
+    kind: 'split', color: 'purple',
+    left: 'UPDATE … RETURNING', leftNote: 'hands the changed row back',
+    right: 'DELETE, then changes()', rightNote: 'reports how many it touched',
+  },
+  // The number the whole act has been building to.
+  'eight kilobytes, and that is all': {kind: 'tally', color: 'green', value: '8192', label: 'bytes on disk — schema, rows and all'},
+  // A JOIN is a CONVERGENCE: two tables that share only an id, meeting to make a third thing.
+  // A declared topology (LAW 0k.1) says that far better than a list of steps.
+  'six rows in, four lines out': {
+    kind: 'graph', color: 'blue',
+    nodes: [
+      {id: 'o', label: 'orders · 6 rows'},
+      {id: 'p', label: 'products · 4 rows'},
+      {id: 'j', label: 'JOIN ON p.id = o.product_id'},
+      {id: 'r', label: 'revenue · 4 lines', tone: 'green'},
+    ],
+    edges: [{from: 'o', to: 'j'}, {from: 'p', to: 'j'}, {from: 'j', to: 'r'}],
+  },
+  // Six rows of input collapsing into one line of output, with the real numbers on it.
+  'numbers, groups, and the NULL trap': {
+    kind: 'rows', color: 'purple', columns: ['aggregate', 'over six orders'],
+    rows: [
+      {cells: ['COUNT(*)', '6'], state: 'plain'},
+      {cells: ['SUM(qty)', '13'], state: 'plain'},
+      {cells: ['AVG(qty)', '2.17'], state: 'kept'},
+      {cells: ['COUNT(note)', 'skips the NULLs'], state: 'cut'},
+    ],
+  },
+  // One word of the plan moved, and the whole act is about that word.
+  'SCAN became SEARCH': {kind: 'swap', from: 'SCAN', to: 'SEARCH', color: 'green'},
+  // Two languages, one file, in two different sessions — an EXCHANGE, so a sequence diagram.
+  'the shell wrote it, Python reads it': {
+    kind: 'seq', color: 'blue',
+    actors: ['sqlite3 shell', 'shop.db', 'Python'],
+    messages: [
+      // Anchored on the words that name each hop: "the shell inserted" (w19), "Python just
+      // opened it" (w67), and the four products themselves (w13), which is the return.
+      {from: 0, to: 1, text: 'INSERT · four products', atWord: 19},
+      {from: 2, to: 1, text: 'connect + SELECT', atWord: 67},
+      {from: 1, to: 2, text: 'the same four rows', ret: true, atWord: 13},
+    ],
+  },
+  // Prepared once, run three times — the whole point of executemany, as a sequence.
+  'prepared once, run many times': {
+    kind: 'seq', color: 'purple',
+    actors: ['your code', 'sqlite3', 'shop.db'],
+    messages: [
+      // "Execute many takes a LIST" (w15), "prepares the sentence once" (w31), and the
+      // total we watch climb at the bottom (w44).
+      {from: 0, to: 1, text: 'executemany(sql, 3 rows)', atWord: 15},
+      {from: 1, to: 2, text: 'prepare once, run x3', atWord: 31},
+      {from: 2, to: 0, text: 'rowcount: 3', ret: true, atWord: 44},
+    ],
+  },
+  // The whole of transactions in one contrast.
+  'zero rows, then eight again': {
+    kind: 'split', color: 'orange',
+    left: 'commit()', leftNote: 'the file keeps it',
+    right: 'rollback()', rightNote: 'the file never saw it',
+  },
+};
+
 const rec = (narration, {caption, premise, clips, layout}) => {
   const est = clips.reduce((a, c) =>
     a + 1 + (c.zooms?.length ?? 0) + (c.callouts?.length ?? 0), 0);
+  // The card's depiction rides on the LAST clip, unless the beat already authored one there.
+  const card = CARD_CONTENT[caption];
+  const withCard = card
+    ? clips.map((c, i) => (i === clips.length - 1 && !c.overlay ? {...c, overlay: card} : c))
+    : clips;
   scene('RECORDED_STEP', narration, {
-    recordedStep: {caption, premise, ...(layout ? {layout} : {}), clips},
+    recordedStep: {caption, premise, ...(layout ? {layout} : {}), clips: withCard},
   }, {plusAnchors: est});
 };
 

@@ -166,7 +166,7 @@
                   "text": "strict tables need 3.37+",
                   "mark": "ver",
                   "color": "blue",
-                  "atWord": 27.833
+                  "atWord": 28.583
                 }
               ],
               "id": "version",
@@ -198,7 +198,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.333,
               "ink": [
                 {
                   "x": 428,
@@ -212,7 +211,8 @@
                   "w": 880,
                   "h": 57
                 }
-              ]
+              ],
+              "atWord": 2.333
             },
             {
               "ref": "rec:sqlite-act1#open-schema",
@@ -242,6 +242,44 @@
                   "atWord": 64.917
                 }
               ],
+              "overlay": {
+                "kind": "rows",
+                "color": "blue",
+                "columns": [
+                  "line",
+                  "the promise it makes"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "id INTEGER",
+                      "PRIMARY KEY"
+                    ],
+                    "state": "plain"
+                  },
+                  {
+                    "cells": [
+                      "name TEXT",
+                      "NOT NULL"
+                    ],
+                    "state": "kept"
+                  },
+                  {
+                    "cells": [
+                      "price REAL",
+                      "NOT NULL"
+                    ],
+                    "state": "kept"
+                  },
+                  {
+                    "cells": [
+                      ") STRICT",
+                      "types get checked"
+                    ],
+                    "state": "new"
+                  }
+                ]
+              },
               "id": "open-schema",
               "src": "rec/sqlite-act1/seg-02.mp4",
               "frames": 187,
@@ -277,11 +315,6 @@
                   "h": 22
                 }
               },
-              "keys": [
-                "Ctrl",
-                "P"
-              ],
-              "atWord": 49.417,
               "ink": [
                 {
                   "x": 428,
@@ -295,7 +328,12 @@
                   "w": 880,
                   "h": 57
                 }
-              ]
+              ],
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 49.417
             }
           ],
           "capture": {
@@ -371,7 +409,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.667,
               "ink": [
                 {
                   "x": 428,
@@ -385,7 +422,8 @@
                   "w": 880,
                   "h": 76
                 }
-              ]
+              ],
+              "atWord": 2.667
             },
             {
               "ref": "rec:sqlite-act1#strict-error",
@@ -405,6 +443,14 @@
                   "atWord": 46.5
                 }
               ],
+              "overlay": {
+                "kind": "split",
+                "color": "blue",
+                "left": ".read schema.sql",
+                "leftNote": "silence, exit 0",
+                "right": "price = 'not-a-number'",
+                "rightNote": "exit 1, names the column"
+              },
               "id": "strict-error",
               "src": "rec/sqlite-act1/seg-04.mp4",
               "frames": 202,
@@ -434,7 +480,6 @@
                   "h": 19
                 }
               },
-              "atWord": 30.417,
               "ink": [
                 {
                   "x": 428,
@@ -448,7 +493,8 @@
                   "w": 880,
                   "h": 114
                 }
-              ]
+              ],
+              "atWord": 29.5
             }
           ],
           "capture": {
@@ -500,7 +546,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.167,
               "ink": [
                 {
                   "x": 428,
@@ -514,7 +559,8 @@
                   "w": 880,
                   "h": 133
                 }
-              ]
+              ],
+              "atWord": 2.167
             },
             {
               "ref": "rec:sqlite-act1#select",
@@ -544,6 +590,44 @@
                   "atWord": 60.5
                 }
               ],
+              "overlay": {
+                "kind": "rows",
+                "color": "green",
+                "columns": [
+                  "name",
+                  "price"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "Mechanical keyboard",
+                      "89.00"
+                    ],
+                    "state": "new"
+                  },
+                  {
+                    "cells": [
+                      "27-inch monitor",
+                      "240.00"
+                    ],
+                    "state": "new"
+                  },
+                  {
+                    "cells": [
+                      "Desk lamp",
+                      "35.50"
+                    ],
+                    "state": "new"
+                  },
+                  {
+                    "cells": [
+                      "USB-C hub",
+                      "45.00"
+                    ],
+                    "state": "new"
+                  }
+                ]
+              },
               "id": "select",
               "src": "rec/sqlite-act1/seg-06.mp4",
               "frames": 166,
@@ -579,7 +663,6 @@
                   "h": 19
                 }
               },
-              "atWord": 47.417,
               "ink": [
                 {
                   "x": 428,
@@ -593,7 +676,8 @@
                   "w": 801,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 47.417
             }
           ],
           "capture": {
@@ -665,7 +749,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.5,
               "ink": [
                 {
                   "x": 428,
@@ -679,7 +762,8 @@
                   "w": 748,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 2.5
             },
             {
               "ref": "rec:sqlite-act1#order",
@@ -699,6 +783,44 @@
                   "atWord": 61.667
                 }
               ],
+              "overlay": {
+                "kind": "rows",
+                "color": "orange",
+                "columns": [
+                  "name",
+                  "price"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "27-inch monitor",
+                      "240.00"
+                    ],
+                    "state": "cut"
+                  },
+                  {
+                    "cells": [
+                      "Mechanical keyboard",
+                      "89.00"
+                    ],
+                    "state": "kept"
+                  },
+                  {
+                    "cells": [
+                      "USB-C hub",
+                      "45.00"
+                    ],
+                    "state": "kept"
+                  },
+                  {
+                    "cells": [
+                      "Desk lamp",
+                      "35.50"
+                    ],
+                    "state": "kept"
+                  }
+                ]
+              },
               "id": "order",
               "src": "rec/sqlite-act1/seg-08.mp4",
               "frames": 237,
@@ -728,7 +850,6 @@
                   "h": 19
                 }
               },
-              "atWord": 44.167,
               "ink": [
                 {
                   "x": 428,
@@ -742,7 +863,8 @@
                   "w": 845,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 43.333
             }
           ],
           "capture": {
@@ -774,7 +896,7 @@
               "zooms": [
                 {
                   "mark": "newprice",
-                  "atWord": 27.417
+                  "atWord": 28.167
                 }
               ],
               "callouts": [
@@ -814,7 +936,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.417,
               "ink": [
                 {
                   "x": 428,
@@ -828,7 +949,8 @@
                   "w": 1109,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 2.417
             },
             {
               "ref": "rec:sqlite-act1#delete",
@@ -848,6 +970,14 @@
                   "atWord": 58.75
                 }
               ],
+              "overlay": {
+                "kind": "split",
+                "color": "purple",
+                "left": "UPDATE … RETURNING",
+                "leftNote": "hands the changed row back",
+                "right": "DELETE, then changes()",
+                "rightNote": "reports how many it touched"
+              },
               "id": "delete",
               "src": "rec/sqlite-act1/seg-10.mp4",
               "frames": 268,
@@ -877,7 +1007,6 @@
                   "h": 19
                 }
               },
-              "atWord": 39.417,
               "ink": [
                 {
                   "x": 428,
@@ -891,7 +1020,8 @@
                   "w": 1109,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 39.417
             }
           ],
           "capture": {
@@ -931,7 +1061,7 @@
                   "text": "the words I typed, stored",
                   "mark": "sch",
                   "color": "purple",
-                  "atWord": 38
+                  "atWord": 37.25
                 }
               ],
               "id": "schema",
@@ -963,7 +1093,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.25,
               "ink": [
                 {
                   "x": 428,
@@ -977,7 +1106,8 @@
                   "w": 1012,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 2.25
             },
             {
               "ref": "rec:sqlite-act1#just-a-file",
@@ -997,6 +1127,12 @@
                   "atWord": 62.583
                 }
               ],
+              "overlay": {
+                "kind": "tally",
+                "color": "green",
+                "value": "8192",
+                "label": "bytes on disk — schema, rows and all"
+              },
               "id": "just-a-file",
               "src": "rec/sqlite-act1/seg-12.mp4",
               "frames": 158,
@@ -1026,7 +1162,6 @@
                   "h": 19
                 }
               },
-              "atWord": 51.417,
               "ink": [
                 {
                   "x": 428,
@@ -1040,7 +1175,8 @@
                   "w": 475,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 51.417
             }
           ],
           "capture": {
@@ -1315,7 +1451,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.333,
               "ink": [
                 {
                   "x": 428,
@@ -1329,7 +1464,8 @@
                   "w": 343,
                   "h": 38
                 }
-              ]
+              ],
+              "atWord": 2.333
             },
             {
               "ref": "rec:sqlite-act2#open-revenue",
@@ -1338,7 +1474,7 @@
               "zooms": [
                 {
                   "mark": "joinline",
-                  "atWord": 46.667
+                  "atWord": 49
                 }
               ],
               "callouts": [
@@ -1346,7 +1482,7 @@
                   "text": "matched on the id",
                   "mark": "joinline",
                   "color": "blue",
-                  "atWord": 56.917
+                  "atWord": 59.25
                 }
               ],
               "id": "open-revenue",
@@ -1378,11 +1514,6 @@
                   "h": 22
                 }
               },
-              "keys": [
-                "Ctrl",
-                "P"
-              ],
-              "atWord": 22.167,
               "ink": [
                 {
                   "x": 428,
@@ -1396,7 +1527,12 @@
                   "w": 343,
                   "h": 38
                 }
-              ]
+              ],
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 24.5
             },
             {
               "ref": "rec:sqlite-act2#revenue",
@@ -1416,6 +1552,43 @@
                   "atWord": 79.083
                 }
               ],
+              "overlay": {
+                "kind": "graph",
+                "color": "blue",
+                "nodes": [
+                  {
+                    "id": "o",
+                    "label": "orders · 6 rows"
+                  },
+                  {
+                    "id": "p",
+                    "label": "products · 4 rows"
+                  },
+                  {
+                    "id": "j",
+                    "label": "JOIN ON p.id = o.product_id"
+                  },
+                  {
+                    "id": "r",
+                    "label": "revenue · 4 lines",
+                    "tone": "green"
+                  }
+                ],
+                "edges": [
+                  {
+                    "from": "o",
+                    "to": "j"
+                  },
+                  {
+                    "from": "p",
+                    "to": "j"
+                  },
+                  {
+                    "from": "j",
+                    "to": "r"
+                  }
+                ]
+              },
               "id": "revenue",
               "src": "rec/sqlite-act2/seg-03.mp4",
               "frames": 125,
@@ -1451,7 +1624,6 @@
                   "h": 19
                 }
               },
-              "atWord": 67.167,
               "ink": [
                 {
                   "x": 428,
@@ -1465,7 +1637,8 @@
                   "w": 466,
                   "h": 209
                 }
-              ]
+              ],
+              "atWord": 68.75
             }
           ],
           "capture": {
@@ -1543,7 +1716,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.5,
               "ink": [
                 {
                   "x": 428,
@@ -1557,7 +1729,8 @@
                   "w": 1082,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 2.5
             },
             {
               "ref": "rec:sqlite-act2#having",
@@ -1566,7 +1739,7 @@
               "zooms": [
                 {
                   "mark": "kept",
-                  "atWord": 73.167
+                  "atWord": 74.083
                 }
               ],
               "callouts": [
@@ -1574,7 +1747,7 @@
                   "text": "two of four survived",
                   "mark": "kept",
                   "color": "orange",
-                  "atWord": 80.75
+                  "atWord": 81.583
                 }
               ],
               "id": "having",
@@ -1606,7 +1779,6 @@
                   "h": 19
                 }
               },
-              "atWord": 46.25,
               "ink": [
                 {
                   "x": 428,
@@ -1620,7 +1792,8 @@
                   "w": 1100,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 45.417
             },
             {
               "ref": "rec:sqlite-act2#null",
@@ -1650,6 +1823,44 @@
                   "atWord": 111.917
                 }
               ],
+              "overlay": {
+                "kind": "rows",
+                "color": "purple",
+                "columns": [
+                  "aggregate",
+                  "over six orders"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "COUNT(*)",
+                      "6"
+                    ],
+                    "state": "plain"
+                  },
+                  {
+                    "cells": [
+                      "SUM(qty)",
+                      "13"
+                    ],
+                    "state": "plain"
+                  },
+                  {
+                    "cells": [
+                      "AVG(qty)",
+                      "2.17"
+                    ],
+                    "state": "kept"
+                  },
+                  {
+                    "cells": [
+                      "COUNT(note)",
+                      "skips the NULLs"
+                    ],
+                    "state": "cut"
+                  }
+                ]
+              },
               "id": "null",
               "src": "rec/sqlite-act2/seg-06.mp4",
               "frames": 286,
@@ -1679,7 +1890,6 @@
                   "h": 19
                 }
               },
-              "atWord": 88.333,
               "ink": [
                 {
                   "x": 428,
@@ -1693,7 +1903,8 @@
                   "w": 1091,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 89.167
             }
           ],
           "capture": {
@@ -1882,7 +2093,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.417,
               "ink": [
                 {
                   "x": 428,
@@ -1896,7 +2106,8 @@
                   "w": 1091,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 2.417
             },
             {
               "ref": "rec:sqlite-act2#index",
@@ -1925,7 +2136,6 @@
                   "h": 19
                 }
               },
-              "atWord": 30.417,
               "ink": [
                 {
                   "x": 428,
@@ -1939,7 +2149,8 @@
                   "w": 1091,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 30.417
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -1959,6 +2170,12 @@
                   "atWord": 73.75
                 }
               ],
+              "overlay": {
+                "kind": "swap",
+                "from": "SCAN",
+                "to": "SEARCH",
+                "color": "green"
+              },
               "id": "plan-after",
               "src": "rec/sqlite-act2/seg-09.mp4",
               "frames": 219,
@@ -1988,7 +2205,6 @@
                   "h": 19
                 }
               },
-              "atWord": 56.917,
               "ink": [
                 {
                   "x": 428,
@@ -2002,7 +2218,8 @@
                   "w": 739,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 57.667
             }
           ],
           "capture": {
@@ -2178,7 +2395,7 @@
               "zooms": [
                 {
                   "mark": "connect",
-                  "atWord": 21.583
+                  "atWord": 22.417
                 },
                 {
                   "mark": "cursor",
@@ -2247,11 +2464,6 @@
                   "h": 22
                 }
               },
-              "keys": [
-                "Ctrl",
-                "P"
-              ],
-              "atWord": 2.333,
               "ink": [
                 {
                   "x": 428,
@@ -2271,7 +2483,12 @@
                   "w": 79,
                   "h": 19
                 }
-              ]
+              ],
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 2.333
             }
           ],
           "capture": {
@@ -2307,7 +2524,7 @@
                 },
                 {
                   "mark": "top",
-                  "atWord": 28.333
+                  "atWord": 29.083
                 }
               ],
               "callouts": [
@@ -2324,6 +2541,36 @@
                   "atWord": 36
                 }
               ],
+              "overlay": {
+                "kind": "seq",
+                "color": "blue",
+                "actors": [
+                  "sqlite3 shell",
+                  "shop.db",
+                  "Python"
+                ],
+                "messages": [
+                  {
+                    "from": 0,
+                    "to": 1,
+                    "text": "INSERT · four products",
+                    "atWord": 13.833
+                  },
+                  {
+                    "from": 2,
+                    "to": 1,
+                    "text": "connect + SELECT",
+                    "atWord": 50.583
+                  },
+                  {
+                    "from": 1,
+                    "to": 2,
+                    "text": "the same four rows",
+                    "ret": true,
+                    "atWord": 9.167
+                  }
+                ]
+              },
               "id": "run-read",
               "src": "rec/sqlite-act3/seg-02.mp4",
               "frames": 81,
@@ -2353,7 +2600,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.333,
               "ink": [
                 {
                   "x": 428,
@@ -2373,7 +2619,8 @@
                   "w": 264,
                   "h": 114
                 }
-              ]
+              ],
+              "atWord": 2.333
             }
           ],
           "capture": {
@@ -2383,7 +2630,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 665,
+      "durationFrames": 670,
       "timingSource": "tts",
       "audio": "audio/sqlite_long_s29.mp3"
     },
@@ -2409,7 +2656,7 @@
                 },
                 {
                   "mark": "byname",
-                  "atWord": 43.167
+                  "atWord": 42.417
                 }
               ],
               "callouts": [
@@ -2423,7 +2670,7 @@
                   "text": "now you can ask for it by name",
                   "mark": "byname",
                   "color": "green",
-                  "atWord": 52.25
+                  "atWord": 51.5
                 }
               ],
               "overlay": {
@@ -2455,11 +2702,6 @@
                   "h": 22
                 }
               },
-              "keys": [
-                "Ctrl",
-                "P"
-              ],
-              "atWord": 2.25,
               "ink": [
                 {
                   "x": 428,
@@ -2479,7 +2721,12 @@
                   "w": 264,
                   "h": 114
                 }
-              ]
+              ],
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 2.25
             },
             {
               "ref": "rec:sqlite-act3#run-rowfac",
@@ -2538,7 +2785,6 @@
                   "h": 19
                 }
               },
-              "atWord": 61.333,
               "ink": [
                 {
                   "x": 428,
@@ -2558,7 +2804,8 @@
                   "w": 326,
                   "h": 190
                 }
-              ]
+              ],
+              "atWord": 60.583
             }
           ],
           "capture": {
@@ -2622,7 +2869,7 @@
                 },
                 {
                   "mark": "evil",
-                  "atWord": 42.083
+                  "atWord": 42.833
                 },
                 {
                   "mark": "safe",
@@ -2630,7 +2877,7 @@
                 },
                 {
                   "mark": "unsafe",
-                  "atWord": 77.083
+                  "atWord": 77.917
                 }
               ],
               "callouts": [
@@ -2650,7 +2897,7 @@
                   "text": "the value stays a value",
                   "mark": "safe",
                   "color": "green",
-                  "atWord": 68.583
+                  "atWord": 69.333
                 },
                 {
                   "text": "the value becomes code",
@@ -2701,11 +2948,6 @@
                   "h": 22
                 }
               },
-              "keys": [
-                "Ctrl",
-                "P"
-              ],
-              "atWord": 2.333,
               "ink": [
                 {
                   "x": 428,
@@ -2719,7 +2961,12 @@
                   "w": 783,
                   "h": 707
                 }
-              ]
+              ],
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 2.333
             },
             {
               "ref": "rec:sqlite-act3#run-params",
@@ -2778,7 +3025,6 @@
                   "h": 19
                 }
               },
-              "atWord": 95,
               "ink": [
                 {
                   "x": 428,
@@ -2792,7 +3038,8 @@
                   "w": 783,
                   "h": 764
                 }
-              ]
+              ],
+              "atWord": 95.833
             }
           ],
           "capture": {
@@ -2824,7 +3071,7 @@
               "zooms": [
                 {
                   "mark": "many",
-                  "atWord": 13.333
+                  "atWord": 12.667
                 },
                 {
                   "mark": "total",
@@ -2836,7 +3083,7 @@
                   "text": "prepared once, run three times",
                   "mark": "many",
                   "color": "blue",
-                  "atWord": 18.667
+                  "atWord": 18
                 },
                 {
                   "text": "and the count moves",
@@ -2845,6 +3092,36 @@
                   "atWord": 29.333
                 }
               ],
+              "overlay": {
+                "kind": "seq",
+                "color": "purple",
+                "actors": [
+                  "your code",
+                  "sqlite3",
+                  "shop.db"
+                ],
+                "messages": [
+                  {
+                    "from": 0,
+                    "to": 1,
+                    "text": "executemany(sql, 3 rows)",
+                    "atWord": 9.333
+                  },
+                  {
+                    "from": 1,
+                    "to": 2,
+                    "text": "prepare once, run x3",
+                    "atWord": 20
+                  },
+                  {
+                    "from": 2,
+                    "to": 0,
+                    "text": "rowcount: 3",
+                    "ret": true,
+                    "atWord": 28.667
+                  }
+                ]
+              },
               "id": "run-many",
               "src": "rec/sqlite-act3/seg-07.mp4",
               "frames": 95,
@@ -2874,7 +3151,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2,
               "ink": [
                 {
                   "x": 428,
@@ -2888,7 +3164,8 @@
                   "w": 783,
                   "h": 764
                 }
-              ]
+              ],
+              "atWord": 2
             }
           ],
           "capture": {
@@ -2989,7 +3266,7 @@
                 },
                 {
                   "mark": "count",
-                  "atWord": 22.833
+                  "atWord": 22
                 }
               ],
               "callouts": [
@@ -3035,7 +3312,6 @@
                   "h": 19
                 }
               },
-              "atWord": 2.333,
               "ink": [
                 {
                   "x": 428,
@@ -3049,7 +3325,8 @@
                   "w": 783,
                   "h": 764
                 }
-              ]
+              ],
+              "atWord": 2.333
             },
             {
               "ref": "rec:sqlite-act3#open-rollback",
@@ -3060,7 +3337,7 @@
                   "text": "the undo",
                   "mark": "rb",
                   "color": "purple",
-                  "atWord": 65.25
+                  "atWord": 64.5
                 }
               ],
               "id": "open-rollback",
@@ -3086,11 +3363,6 @@
                   "h": 22
                 }
               },
-              "keys": [
-                "Ctrl",
-                "P"
-              ],
-              "atWord": 31.417,
               "ink": [
                 {
                   "x": 428,
@@ -3110,7 +3382,12 @@
                   "w": 352,
                   "h": 247
                 }
-              ]
+              ],
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 30.667
             },
             {
               "ref": "rec:sqlite-act3#run-rollback",
@@ -3140,6 +3417,14 @@
                   "atWord": 95.167
                 }
               ],
+              "overlay": {
+                "kind": "split",
+                "color": "orange",
+                "left": "commit()",
+                "leftNote": "the file keeps it",
+                "right": "rollback()",
+                "rightNote": "the file never saw it"
+              },
               "id": "run-rollback",
               "src": "rec/sqlite-act3/seg-10.mp4",
               "frames": 111,
@@ -3169,7 +3454,6 @@
                   "h": 19
                 }
               },
-              "atWord": 84.917,
               "ink": [
                 {
                   "x": 428,
@@ -3189,7 +3473,8 @@
                   "w": 326,
                   "h": 247
                 }
-              ]
+              ],
+              "atWord": 84.167
             }
           ],
           "capture": {
