@@ -361,7 +361,20 @@ const extra = [  {id: 'x-whennotsqlite', type: 'WHEN_NOT_SQLITE', narration: "A 
 
 const BG = ['zoneA', 'zoneB', 'zoneC'] as const;
 // gallery (opens with HOOK) + the extra dynamic types + widgets (drop its HOOK).
-const raw = [...gallery.scenes, ...extra, ...widgets.scenes.slice(1)];
+// THE SIX CHAPTER SILHOUETTES. LAW 9 wants every component reviewable in every pack, and
+// CHAPTER had no showcase entry at all — which is how ONE composition survived across sixty
+// design packs without anyone looking at it twice. Each entry pins its variant by name so a
+// design sweep shows all six rather than whichever the rotation happens to land on.
+const chapterSilhouettes = [
+  {id: 'x-chapter-numeral', type: 'CHAPTER' as const, narration: 'The numeral chapter silhouette, in this design.', durationFrames: 150, timingSource: 'estimated' as const, background: 'zoneB' as const, data: {chapterVariant: 'numeral', chapter: {number: '01', title: 'The one that shipped', subtitle: 'kicker, giant number, ruled diamond', color: 'orange' as const}}},
+  {id: 'x-chapter-slab', type: 'CHAPTER' as const, narration: 'The slab chapter silhouette, in this design.', durationFrames: 150, timingSource: 'estimated' as const, background: 'zoneB' as const, data: {chapterVariant: 'slab', chapter: {number: '02', title: 'A slab off the edge', subtitle: 'the bar bleeds; the type keeps its gutter', color: 'orange' as const}}},
+  {id: 'x-chapter-stub', type: 'CHAPTER' as const, narration: 'The stub chapter silhouette, in this design.', durationFrames: 150, timingSource: 'estimated' as const, background: 'zoneB' as const, data: {chapterVariant: 'stub', chapter: {number: '03', title: 'A ticket to the next part', subtitle: 'punched stub, perforation, counterfoil', color: 'orange' as const}}},
+  {id: 'x-chapter-doors', type: 'CHAPTER' as const, narration: 'The doors chapter silhouette, in this design.', durationFrames: 150, timingSource: 'estimated' as const, background: 'zoneB' as const, data: {chapterVariant: 'doors', chapter: {number: '04', title: 'Two panels part', subtitle: 'the one silhouette that is literally an opening', color: 'orange' as const}}},
+  {id: 'x-chapter-spine', type: 'CHAPTER' as const, narration: 'The spine chapter silhouette, in this design.', durationFrames: 150, timingSource: 'estimated' as const, background: 'zoneB' as const, data: {chapterVariant: 'spine', chapter: {number: '05', title: 'A book spine', subtitle: 'vertical rule, number at its head', color: 'orange' as const}}},
+  {id: 'x-chapter-stamp', type: 'CHAPTER' as const, narration: 'The stamp chapter silhouette, in this design.', durationFrames: 150, timingSource: 'estimated' as const, background: 'zoneB' as const, data: {chapterVariant: 'stamp', chapter: {number: '06', title: 'It lands like a stamp', subtitle: 'over-rotated, overshooting, then square', color: 'orange' as const}}},
+];
+
+const raw = [...gallery.scenes, ...extra, ...chapterSilhouettes, ...widgets.scenes.slice(1)];
 const scenes: Scene[] = raw.map((s, i) => ({
   ...s,
   id: `sc${String(i + 1).padStart(2, '0')}`,

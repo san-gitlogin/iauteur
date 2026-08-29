@@ -58,7 +58,7 @@
       },
       "durationFrames": 175,
       "timingSource": "tts",
-      "audio": "audio/svs_long_s01.mp3"
+      "audio": "audio/sqlite-scan-vs-search_long_s01.mp3"
     },
     {
       "id": "s02",
@@ -106,7 +106,7 @@
       },
       "durationFrames": 548,
       "timingSource": "tts",
-      "audio": "audio/svs_long_s02.mp3"
+      "audio": "audio/sqlite-scan-vs-search_long_s02.mp3"
     },
     {
       "id": "s03",
@@ -129,7 +129,7 @@
               "zooms": [
                 {
                   "mark": "scan",
-                  "atWord": 23.25
+                  "atWord": 24.167
                 }
               ],
               "callouts": [
@@ -187,7 +187,7 @@
               },
               "id": "plan-before",
               "src": "rec/sqlite-act2/seg-07.mp4",
-              "frames": 207,
+              "frames": 206,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -206,8 +206,28 @@
                   "y": 802,
                   "w": 176,
                   "h": 19
+                },
+                "__cmd": {
+                  "x": 456,
+                  "y": 802,
+                  "w": 651,
+                  "h": 19
                 }
               },
+              "ink": [
+                {
+                  "x": 428,
+                  "y": 66,
+                  "w": 505,
+                  "h": 166
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 1091,
+                  "h": 247
+                }
+              ],
               "atWord": 2.583
             },
             {
@@ -222,7 +242,7 @@
               },
               "id": "index",
               "src": "rec/sqlite-act2/seg-08.mp4",
-              "frames": 195,
+              "frames": 194,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -235,9 +255,29 @@
                   "y": 840,
                   "w": 273,
                   "h": 19
+                },
+                "__cmd": {
+                  "x": 456,
+                  "y": 840,
+                  "w": 589,
+                  "h": 19
                 }
               },
-              "atWord": 34.5
+              "ink": [
+                {
+                  "x": 428,
+                  "y": 66,
+                  "w": 505,
+                  "h": 166
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 1091,
+                  "h": 247
+                }
+              ],
+              "atWord": 35.333
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -276,7 +316,7 @@
               },
               "id": "plan-after",
               "src": "rec/sqlite-act2/seg-09.mp4",
-              "frames": 223,
+              "frames": 219,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -295,9 +335,29 @@
                   "y": 840,
                   "w": 158,
                   "h": 19
+                },
+                "__cmd": {
+                  "x": 456,
+                  "y": 802,
+                  "w": 651,
+                  "h": 19
                 }
               },
-              "atWord": 64.667
+              "ink": [
+                {
+                  "x": 428,
+                  "y": 66,
+                  "w": 505,
+                  "h": 166
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 739,
+                  "h": 247
+                }
+              ],
+              "atWord": 65.5
             }
           ],
           "capture": {
@@ -309,7 +369,7 @@
       },
       "durationFrames": 1272,
       "timingSource": "tts",
-      "audio": "audio/svs_long_s03.mp3"
+      "audio": "audio/sqlite-scan-vs-search_long_s03.mp3"
     },
     {
       "id": "s04",
@@ -323,7 +383,7 @@
       },
       "durationFrames": 181,
       "timingSource": "tts",
-      "audio": "audio/svs_long_s04.mp3"
+      "audio": "audio/sqlite-scan-vs-search_long_s04.mp3"
     }
   ]
 }

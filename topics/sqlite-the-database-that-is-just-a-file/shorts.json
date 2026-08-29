@@ -56,7 +56,7 @@
       },
       "durationFrames": 198,
       "timingSource": "tts",
-      "audio": "audio/sqlite_shorts_s01.mp3"
+      "audio": "audio/sqlite-the-database-that-is-just-a-file_shorts_s01.mp3"
     },
     {
       "id": "s02",
@@ -76,7 +76,7 @@
               "zooms": [
                 {
                   "mark": "safe",
-                  "atWord": 21.75
+                  "atWord": 22.583
                 },
                 {
                   "mark": "unsafe",
@@ -94,12 +94,77 @@
                   "text": "the value becomes code",
                   "mark": "unsafe",
                   "color": "red",
-                  "atWord": 36
+                  "atWord": 36.833
                 }
               ],
+              "overlay": {
+                "kind": "graph",
+                "atWord": 2.5,
+                "nodes": [
+                  {
+                    "id": "q",
+                    "label": "your query text",
+                    "atWord": 2.5
+                  },
+                  {
+                    "id": "v",
+                    "label": "\"USB-C hub\"",
+                    "atWord": 7.5
+                  },
+                  {
+                    "id": "ph",
+                    "label": "?  placeholder",
+                    "atWord": 10.083
+                  },
+                  {
+                    "id": "glue",
+                    "label": "glued into the string",
+                    "atWord": 16.75
+                  },
+                  {
+                    "id": "data",
+                    "label": "stays DATA",
+                    "tone": "green",
+                    "atWord": 13.417
+                  },
+                  {
+                    "id": "code",
+                    "label": "becomes CODE",
+                    "tone": "red",
+                    "atWord": 21.75
+                  }
+                ],
+                "edges": [
+                  {
+                    "from": "q",
+                    "to": "ph",
+                    "atWord": 10.083
+                  },
+                  {
+                    "from": "v",
+                    "to": "ph",
+                    "atWord": 10.083
+                  },
+                  {
+                    "from": "ph",
+                    "to": "data",
+                    "atWord": 13.417
+                  },
+                  {
+                    "from": "q",
+                    "to": "glue",
+                    "atWord": 16.75
+                  },
+                  {
+                    "from": "glue",
+                    "to": "code",
+                    "atWord": 21.75
+                  }
+                ]
+              },
               "id": "open-params",
               "src": "rec/sqlite-act3/seg-05.mp4",
-              "frames": 210,
+              "frames": 211,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -132,6 +197,20 @@
                   "h": 22
                 }
               },
+              "ink": [
+                {
+                  "x": 428,
+                  "y": 66,
+                  "w": 139,
+                  "h": 22
+                },
+                {
+                  "x": 368,
+                  "y": 114,
+                  "w": 783,
+                  "h": 707
+                }
+              ],
               "keys": [
                 "Ctrl",
                 "P"
@@ -166,9 +245,51 @@
                   "atWord": 51.917
                 }
               ],
+              "overlay": {
+                "kind": "rows",
+                "atWord": 38.5,
+                "columns": [
+                  "name",
+                  "price"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "USB-C hub",
+                      "45.00"
+                    ],
+                    "state": "kept",
+                    "atWord": 38.5
+                  },
+                  {
+                    "cells": [
+                      "Mechanical keyboard",
+                      "89.00"
+                    ],
+                    "state": "new",
+                    "atWord": 52.75
+                  },
+                  {
+                    "cells": [
+                      "27-inch monitor",
+                      "240.00"
+                    ],
+                    "state": "new",
+                    "atWord": 53.583
+                  },
+                  {
+                    "cells": [
+                      "Desk lamp",
+                      "35.50"
+                    ],
+                    "state": "new",
+                    "atWord": 54.417
+                  }
+                ]
+              },
               "id": "run-params",
               "src": "rec/sqlite-act3/seg-06.mp4",
-              "frames": 109,
+              "frames": 101,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -187,8 +308,28 @@
                   "y": 764,
                   "w": 150,
                   "h": 19
+                },
+                "__cmd": {
+                  "x": 456,
+                  "y": 726,
+                  "w": 141,
+                  "h": 19
                 }
               },
+              "ink": [
+                {
+                  "x": 428,
+                  "y": 66,
+                  "w": 139,
+                  "h": 22
+                },
+                {
+                  "x": 368,
+                  "y": 114,
+                  "w": 783,
+                  "h": 764
+                }
+              ],
               "atWord": 41.083
             }
           ],
@@ -201,7 +342,7 @@
       },
       "durationFrames": 815,
       "timingSource": "tts",
-      "audio": "audio/sqlite_shorts_s02.mp3"
+      "audio": "audio/sqlite-the-database-that-is-just-a-file_shorts_s02.mp3"
     },
     {
       "id": "s03",
@@ -215,7 +356,7 @@
       },
       "durationFrames": 159,
       "timingSource": "tts",
-      "audio": "audio/sqlite_shorts_s03.mp3"
+      "audio": "audio/sqlite-the-database-that-is-just-a-file_shorts_s03.mp3"
     }
   ]
 }
