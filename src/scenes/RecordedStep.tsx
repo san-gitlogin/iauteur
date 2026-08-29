@@ -556,7 +556,23 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
               return !!m && hits(m as {x: number; y: number; w: number; h: number}, r);
             });
             if (covered) return null;
-            const on = interpolate(frame, [curStart, curStart + 10], [0, 1], clamp);
+            // WAIT FOR THE FRAME TO FREEZE BEFORE DRAWING ON IT.
+            //
+            // A mark is measured ONCE, at the end of the step — that is the only moment the
+            // runner can measure anything, because it is the only moment the step is done.
+            // The clip, meanwhile, PLAYS: the terminal scrolls, output arrives, and the line
+            // the rectangle describes is somewhere else for most of the take. Pulled from the
+            // scan-vs-search render at frame 1500: the band was drawn around empty space just
+            // right of `QUERY PLAN`, because that is where the command WOULD be once the
+            // output had landed, and the footage had not got there yet.
+            //
+            // This is precisely why callouts are anchored after their clip's footage (see the
+            // anchor solver). The standing band takes the same rule: it appears when the
+            // segment runs out and the last frame freezes, which is when the geometry it was
+            // measured against is what is actually on screen — and it then holds for the whole
+            // rest of the step, which is the part the owner asked for.
+            const settleAt = curStart + Math.max(0, Number(cur.frames ?? 0) - 2);
+            const on = interpolate(frame, [settleAt, settleAt + 10], [0, 1], clamp);
             if (on <= 0.001) return null;
             const c = sem(d.color ?? 'blue');
             const x = Number(r.x) - 5, y = Number(r.y) - 3;
@@ -677,15 +693,57 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                   default: return {x: tx0 + tw * 0.5 - lw, y: ty0 + th + gap, side};
                 }
               };
+              // A LABEL AVOIDS THE INK, NOT JUST THE OTHER LABELS.
+              //
+              // The solver used to score a candidate against the other callout boxes and the
+              // labels already placed — and nothing else, because nothing else was known.
+              // Pulled from the scan-vs-search render at frame 1780: *"straight to the rows"*
+              // landed squarely on the `CREATE INDEX` line above its target, which is a line
+              // the viewer had just been asked to read. The measured ink makes that avoidable,
+              // and it is the same list the card's placement uses, so the two agree.
+              //
+              // The ink is a DEMOTED obstacle: a label that cannot find a clear spot at all
+              // still has to go somewhere, and beside the right thing beats nowhere. So it is
+              // tried against ink first, and the pass is repeated without it if nothing fits.
+              const inkBoxes = ((cur.ink ?? []) as {x: number; y: number; w: number; h: number}[])
+                .map((r) => ({x: Number(r.x) - 2, y: Number(r.y) - 2, w: Number(r.w) + 4, h: Number(r.h) + 4}));
               const obstacles = boxes.filter((_, k) => k !== n).concat(placed);
               let pick = null;
+              // PASS 1 — a spot that clears the other callouts AND the ink. On an editor beat
+              // with white space this is usually available and the label covers nothing.
               for (const side of (e.co.side ? [e.co.side, ...order] : order)) {
                 const p = at(side);
                 const r = {x: p.x, y: p.y, w: lw, h: lh};
                 if (!inside(r)) continue;
-                if (obstacles.some((o) => hits(r, o))) continue;
+                if (obstacles.concat(inkBoxes).some((o) => hits(r, o))) continue;
                 pick = {...p, w: lw, h: lh};
                 break;
+              }
+              // PASS 2 — A FULL TERMINAL HAS NO CLEAR SPOT, so take the LEAST BAD one rather
+              // than the first legal one.
+              //
+              // Measured on the scan-vs-search render at frame 1780: every candidate around
+              // `SEARCH orders USING INDEX` overlaps ink, so pass 1 finds nothing and the old
+              // fallback took the first entry in the preference order — which put *"straight
+              // to the rows"* squarely on the `CREATE INDEX` line the viewer had just read.
+              // Preference order is the right tie-break, never the whole answer: scoring by
+              // how much ink a candidate actually covers finds the gap to the right of a short
+              // last line, which the fixed order cannot see.
+              if (!pick) {
+                const areaOver = (r: Rect, o: Rect) =>
+                  Math.max(0, Math.min(r.x + r.w, o.x + o.w) - Math.max(r.x, o.x)) *
+                  Math.max(0, Math.min(r.y + r.h, o.y + o.h) - Math.max(r.y, o.y));
+                let best = Infinity;
+                (e.co.side ? [e.co.side, ...order] : order).forEach((side, rank) => {
+                  const p = at(side);
+                  const r = {x: p.x, y: p.y, w: lw, h: lh};
+                  if (!inside(r)) return;
+                  // Another callout's box or label is a HARD conflict — never trade one of
+                  // those for a little less ink.
+                  if (obstacles.some((o) => hits(r, o))) return;
+                  const cost = inkBoxes.reduce((acc, o) => acc + areaOver(r, o), 0) + rank;
+                  if (cost < best) { best = cost; pick = {...p, w: lw, h: lh}; }
+                });
               }
               if (!pick) {
                 // Nothing clean: sit it in the emptiest corner of the view rather than on

@@ -281,10 +281,10 @@ scene('KEY_CHORD',
     atWord: 3, commandAtWord: 24, color: 'green',
   }});
 
-rec(`Two to finish. K then Z is zen mode, where everything but the code goes away because none of it
-     was helping. Escape twice brings the furniture back. K then S opens the shortcut list itself,
-     which is the honest answer to anything I haven't shown you.`,
-  {caption: 'nothing but the code',
+rec(`Two to finish. K then Z is zen mode, where everything but the code goes away and the code gets
+     the whole screen. Escape twice brings the furniture back. K then S opens the shortcut list
+     itself, which is the honest answer to whatever I skipped.`,
+  {caption: 'the code, and only the code',
    premise: 'The last shortcut is the one that shows you all the others.',
    clips: [
      clip('rec:vscode-keys-act3#zen', 'everything else, gone', {}),
