@@ -257,14 +257,14 @@ rec(`Two ways to jump. Shift with O lists this file's symbols, so you land on a 
    ]});
 
 rec(`Now panes. Backslash splits the editor, so you can read one file while writing another. The
-     number one returns you to the first pane. W closes an editor — and here's the one nobody
+     number two jumps you to the second pane. W closes an editor — and here's the one nobody
      knows: shift with T reopens whatever you just closed. Closing stops being destructive once you
      can undo it, which changes how freely you do it.`,
   {caption: 'split, close, and undo the close',
    premise: 'Ctrl+Shift+T is the safety net that makes Ctrl+W worth using.',
    clips: [
      clip('rec:vscode-keys-act3#split', 'split the editor', {}),
-     clip('rec:vscode-keys-act3#group1', 'back to the first', {}),
+     clip('rec:vscode-keys-act3#group2', 'jump to the second', {}),
      clip('rec:vscode-keys-act3#closeone', 'close it', {}),
      clip('rec:vscode-keys-act3#reopen', 'and undo that', {}),
    ]});

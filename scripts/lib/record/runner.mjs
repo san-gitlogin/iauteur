@@ -520,7 +520,25 @@ ${content.text}`, truth: 'read-back',
   async keysPrepare(page, step) {
     // Focus is housekeeping, so it runs BEFORE t0 and never lands in the captured segment.
     if (step.focus === 'terminal') { await palette(page, 'Terminal: Focus Terminal'); await sleep(600); }
-    else if (step.focus === 'editor') { await palette(page, 'View: Focus Active Editor Group'); await sleep(400); }
+    else if (step.focus === 'editor') {
+      // CLICK THE EDITOR. DO NOT ASK THE PALETTE FOR IT.
+      //
+      // Driving `View: Focus Active Editor Group` through the palette types a sentence and presses
+      // Enter, and both of those need the palette to have actually opened. When it had not — focus
+      // sitting in a search box, a widget still closing — the sentence went into the FILE instead,
+      // and the palette's Enter picked whatever was highlighted. Pulled from the finished render:
+      // a settings.json open, dirty, with "View: Focus Active Editor Group" typed as line one, on
+      // screen for a whole beat. The recording verified every step and still showed a mangled
+      // artefact, because each step checked its own chord and nothing checked the workspace.
+      //
+      // A click cannot be swallowed and cannot type anything.
+      await page.keyboard.press('Escape');
+      await sleep(150);
+      const box = await page.locator('.part.editor .monaco-editor .view-lines').first()
+        .boundingBox().catch(() => null);
+      if (box) { await page.mouse.click(box.x + 40, box.y + 10); }
+      await sleep(400);
+    }
   },
   async keys(page, step) {
     if (!step.chord) throw new Error(`Step "${step.id}": a keys step needs a "chord", e.g. "ctrl+b".`);

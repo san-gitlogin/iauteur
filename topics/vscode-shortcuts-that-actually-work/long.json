@@ -150,7 +150,7 @@
               "focus": true,
               "id": "quickopen",
               "src": "rec/vscode-keys-act1/seg-02.mp4",
-              "frames": 56,
+              "frames": 55,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -192,7 +192,7 @@
               "focus": true,
               "id": "sidebar",
               "src": "rec/vscode-keys-act1/seg-03.mp4",
-              "frames": 50,
+              "frames": 37,
               "bbox": {
                 "x": 48,
                 "y": 65,
@@ -211,7 +211,7 @@
               "focus": true,
               "id": "sidebar-back",
               "src": "rec/vscode-keys-act1/seg-04.mp4",
-              "frames": 50,
+              "frames": 44,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -230,7 +230,7 @@
               "focus": true,
               "id": "find",
               "src": "rec/vscode-keys-act1/seg-05.mp4",
-              "frames": 56,
+              "frames": 26,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -241,7 +241,7 @@
                 "Ctrl",
                 "F"
               ],
-              "atWord": 24.5
+              "atWord": 26
             }
           ],
           "capture": {
@@ -272,7 +272,7 @@
               "focus": true,
               "id": "search",
               "src": "rec/vscode-keys-act1/seg-06.mp4",
-              "frames": 66,
+              "frames": 65,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -292,7 +292,7 @@
               "focus": true,
               "id": "explorer",
               "src": "rec/vscode-keys-act1/seg-07.mp4",
-              "frames": 22,
+              "frames": 21,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -304,7 +304,7 @@
                 "Shift",
                 "E"
               ],
-              "atWord": 16.083
+              "atWord": 19.417
             },
             {
               "ref": "rec:vscode-keys-act1#terminal",
@@ -312,12 +312,12 @@
               "focus": true,
               "id": "terminal",
               "src": "rec/vscode-keys-act1/seg-08.mp4",
-              "frames": 50,
+              "frames": 21,
               "keys": [
                 "Ctrl",
                 "`"
               ],
-              "atWord": 22.083
+              "atWord": 26.167
             },
             {
               "ref": "rec:vscode-keys-act1#run",
@@ -470,7 +470,7 @@
               ],
               "id": "comment",
               "src": "rec/vscode-keys-act2/seg-01.mp4",
-              "frames": 44,
+              "frames": 36,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -547,7 +547,7 @@
               "focus": true,
               "id": "copyline",
               "src": "rec/vscode-keys-act2/seg-03.mp4",
-              "frames": 49,
+              "frames": 40,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -567,7 +567,7 @@
               "focus": true,
               "id": "deleteline",
               "src": "rec/vscode-keys-act2/seg-04.mp4",
-              "frames": 49,
+              "frames": 40,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -587,7 +587,7 @@
               "focus": true,
               "id": "moveline",
               "src": "rec/vscode-keys-act2/seg-05.mp4",
-              "frames": 21,
+              "frames": 39,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -598,7 +598,7 @@
                 "Alt",
                 "↓"
               ],
-              "atWord": 29.667
+              "atWord": 28
             }
           ],
           "capture": {
@@ -747,7 +747,7 @@
               "focus": true,
               "id": "fold",
               "src": "rec/vscode-keys-act2/seg-09.mp4",
-              "frames": 66,
+              "frames": 28,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -768,7 +768,7 @@
               "focus": true,
               "id": "unfold",
               "src": "rec/vscode-keys-act2/seg-10.mp4",
-              "frames": 67,
+              "frames": 28,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -781,7 +781,7 @@
                 "Ctrl",
                 "J"
               ],
-              "atWord": 11.667
+              "atWord": 14
             }
           ],
           "capture": {
@@ -862,7 +862,7 @@
               "focus": true,
               "id": "gotosymbol",
               "src": "rec/vscode-keys-act3/seg-01.mp4",
-              "frames": 65,
+              "frames": 66,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -882,7 +882,7 @@
               "focus": true,
               "id": "gotoline",
               "src": "rec/vscode-keys-act3/seg-03.mp4",
-              "frames": 58,
+              "frames": 59,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -912,7 +912,7 @@
       "type": "RECORDED_STEP",
       "transition": "push",
       "background": "zoneB",
-      "narration": "Now panes. Backslash splits the editor, so you can read one file while writing another. The number one returns you to the first pane. W closes an editor — and here's the one nobody knows: shift with T reopens whatever you just closed. Closing stops being destructive once you can undo it, which changes how freely you do it.",
+      "narration": "Now panes. Backslash splits the editor, so you can read one file while writing another. The number two jumps you to the second pane. W closes an editor — and here's the one nobody knows: shift with T reopens whatever you just closed. Closing stops being destructive once you can undo it, which changes how freely you do it.",
       "data": {
         "recordedStep": {
           "caption": "split, close, and undo the close",
@@ -924,7 +924,7 @@
               "focus": true,
               "id": "split",
               "src": "rec/vscode-keys-act3/seg-05.mp4",
-              "frames": 60,
+              "frames": 61,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -935,13 +935,13 @@
                 "Ctrl",
                 "\\"
               ],
-              "atWord": 2.417
+              "atWord": 2.5
             },
             {
-              "ref": "rec:vscode-keys-act3#group1",
-              "label": "back to the first",
+              "ref": "rec:vscode-keys-act3#group2",
+              "label": "jump to the second",
               "focus": true,
-              "id": "group1",
+              "id": "group2",
               "src": "rec/vscode-keys-act3/seg-06.mp4",
               "frames": 45,
               "bbox": {
@@ -952,9 +952,9 @@
               },
               "keys": [
                 "Ctrl",
-                "1"
+                "2"
               ],
-              "atWord": 14.667
+              "atWord": 18.167
             },
             {
               "ref": "rec:vscode-keys-act3#closeone",
@@ -962,7 +962,7 @@
               "focus": true,
               "id": "closeone",
               "src": "rec/vscode-keys-act3/seg-07.mp4",
-              "frames": 59,
+              "frames": 24,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -973,7 +973,7 @@
                 "Ctrl",
                 "W"
               ],
-              "atWord": 24.5
+              "atWord": 29.667
             },
             {
               "ref": "rec:vscode-keys-act3#reopen",
@@ -993,7 +993,7 @@
                 "Shift",
                 "T"
               ],
-              "atWord": 35.917
+              "atWord": 36.25
             }
           ],
           "capture": {
@@ -1003,7 +1003,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 598,
+      "durationFrames": 605,
       "timingSource": "tts",
       "audio": "audio/vscode_long_s19.mp3"
     },
@@ -1055,7 +1055,7 @@
               "focus": true,
               "id": "zen",
               "src": "rec/vscode-keys-act3/seg-09.mp4",
-              "frames": 30,
+              "frames": 29,
               "bbox": {
                 "x": 305,
                 "y": 65,
@@ -1075,18 +1075,18 @@
               "focus": true,
               "id": "unzen",
               "src": "rec/vscode-keys-act3/seg-10.mp4",
-              "frames": 58,
+              "frames": 46,
               "bbox": {
-                "x": 305,
+                "x": 348,
                 "y": 65,
-                "w": 990,
-                "h": 835
+                "w": 1252,
+                "h": 513
               },
               "keys": [
                 "Esc",
                 "Esc"
               ],
-              "atWord": 10.167
+              "atWord": 11
             },
             {
               "ref": "rec:vscode-keys-act3#keyboard",
@@ -1094,12 +1094,12 @@
               "focus": true,
               "id": "keyboard",
               "src": "rec/vscode-keys-act3/seg-11.mp4",
-              "frames": 94,
+              "frames": 93,
               "bbox": {
-                "x": 305,
+                "x": 348,
                 "y": 65,
-                "w": 990,
-                "h": 835
+                "w": 1252,
+                "h": 513
               },
               "keys": [
                 "Ctrl",
