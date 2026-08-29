@@ -171,10 +171,13 @@ about. Worth checking the other guards for the same shape of error.
 | `sqlite-scan-vs-search` wide | 2,176 | 1m13s | 17.4 MB |
 | `sqlite-…-just-a-file` short | 1,172 | 39s | 10.3 MB |
 | `vscode-shortcuts-that-actually-work` wide | 10,183 | 5m39s | 81.1 MB |
-| `sqlite-…-just-a-file` wide | 27,382 | 15m13s | rendering (6 segments, LAW 12) |
+| `sqlite-…-just-a-file` wide | 27,387 | 15m13s | 190.3 MB (6 segments, LAW 12; frames EXACT, 4 ms drift) |
 
-⚠ The VS Code cut was rendered BEFORE the chapter-measure fix, so its chapter four still
-carries the wrapped title. Re-render it once the long cut is out of the way.
+Both wide cuts were rendered TWICE: the first pass finished, and pulling frames out of it
+found two more defects (the chapter title wrapping at the stamp's width, and a callout label
+dumped in the top-right corner with a leader across the whole frame). The renders that ship
+are the second pass. That is the loop working — a defect found in a finished render costs one
+re-render; the same defect found by a viewer costs the video.
 
 ### 2026-08-23 — the shorts inventory: what exists, what never got covers, what is not in git
 
