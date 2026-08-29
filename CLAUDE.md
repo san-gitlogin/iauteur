@@ -524,51 +524,72 @@ requires both a real gap (≥9 words) and an actual pause cue. It runs PRE-SYNC,
 `revealAtWord` holds a frame rather than a word index — and pre-sync is when the narration can
 still be rewritten without paying for a re-voice.
 
-## LAW 0g — THE FIRST THIRTY SECONDS ARE A CONTRACT (owner, 2026-08-16)
-Owner, twice: *"In all videos, greeting is missing… saying welcome to <channel>, then asking some
-questions and answering them with what we're gonna see today."* Then, sharpening it: *"you must
-look at how latest videos start, how they introduce suspense, how they increase curiosity, how they
-make sure the watcher relates to what they knew, or what they anticipated by clicking the video by
-looking at the title or thumbnail. Introducing doesn't always mean 'Hi welcome to channel name' —
-it must be absolutely different when and wherever possible."*
+## LAW 0g — SAY WHAT THIS IS, TO WHOM, BEFORE ANYTHING ELSE (owner, 2026-08-16 → **amended 2026-08-30**)
 
-Both are right, and the second is the important one. **A greeting is not an intro. The intro is a
-contract with a person who clicked something.** They arrived carrying an expectation set by your
-title and thumbnail, and the opening either confirms that expectation or loses them. Nineteen
-shipped episodes opened cold with no welcome AND no acknowledgement of why the viewer clicked.
+⚠ **THIS LAW WAS REWRITTEN BY THE OWNER ON 2026-08-30, AND THE AMENDMENT REVERSES PART OF
+WHAT IT USED TO SAY.** The earlier version banned a greeting and the channel name from scene
+1 on retention grounds, and it produced exactly the failure he then reported:
 
-### The three phases (this is the shape, every episode)
+> *"we need to improve our scripting, every video just starts like user already know what we
+> are talking about! NO!. You need to say like we are gonna see on sqlite, or vscode or
+> whatever, the title that you show initially should not be some random one liner sentence
+> that doesnt even match with what the user clicked on and wanted to hear. The welcome to my
+> channel and today we are gonna learn about or talk about or see about or whatever about
+> something, then proceed with things. This is something that we have to improve universally
+> in iauteur and not just for specific cases."*
 
-| Phase | Runs | Job |
+**He is right, and the measurement backs him.** Four shipped openings, four failures — not one
+of them names its own subject in the first sentence:
+
+| cut | scene 1 opened | names the subject? |
 |---|---|---|
-| **1 · Confirm the click** | 0–5s | Continue the *exact* promise of the title and thumbnail, in the viewer's own words. They must know within a breath that they are in the right place. No welcome, no channel name, no logo — leading with branding is the single most-documented way to lose this window. |
-| **2 · Promise the payoff** | 5–15s | The one concrete thing they get for staying. This is where the greeting lives, woven in — an aside, not an announcement. |
-| **3 · Open the loop** | 15–30s | An information gap that only closes by watching: a question posed and deliberately not yet answered, a result shown before its method, a claim that sounds wrong. |
+| SQLite query plans | *"Your query got slow…"* | no — never says SQLite |
+| SQLite course | *"You didn't install a database…"* | no |
+| SQL injection short | *"Same table. Same Python."* | no |
+| VS Code shortcuts | *"…shortcuts on that card"* | no — and **which card?** |
 
-### The rules
+The old law's cold-open rule, applied literally, produces a riddle. *"Six of the hundred and
+forty nine shortcuts on that card do nothing"* is a fine second sentence and a terrible first
+one, because the viewer has not been told there is a card, or that this is VS Code. A cold
+open only works when the audience already shares the context; a tutorial viewer does not.
 
-1. **Echo the click promise in scene 1.** If the thumbnail says `NO BROWSER` and the title says
-   *API testing with no browser*, the first sentence is about a test running with no browser. A
-   viewer who cannot tell in five seconds that this is the video they clicked, leaves.
-2. **Create curiosity, then SATISFY it.** That is the whole difference between a click promise and
-   clickbait — both open a gap, only one closes it. Every loop opened in the first 30s must be
-   paid off in the body, and the RECAP is where you prove you did.
-3. **Relate to what they already know.** "You already know this one, actually" · "Remember the
-   fresh context from episode eight?" · "You've hit this and you know you have." Anchoring the new
-   thing to something they own is what makes a beginner feel capable instead of lost.
-4. **The greeting is never a formula.** "Hi, welcome to <channel>" 22 times is a jingle, and a
-   playlist binge makes it unbearable. Rotate the *form*, not just the words: a welcome; a
-   mid-thought aside that happens to name the channel; a question thrown at the viewer; a
-   confession; picking up a thread from last episode. **Some episodes should not greet at all** —
-   if the cold open is strong and the loop is tight, forcing a welcome in damages it.
-5. **Name the channel from `brand.channel`**, never a hardcoded string in shared code. The channel
-   name is local content (see the brand-identity note under STANDING DEFAULTS).
-6. **Never force enthusiasm.** "Let's gooo" reads worse than plain warmth. LAW 0f's test still
-   governs: would you say this sentence out loud, to a colleague?
+### The shape, every video
 
-**Enforced.** `scripts/lint-spec.mjs` runs a GREETING GUARD on long specs: it REJECTS a welcome or
-channel name in scene 1, warns when the opening never echoes the title/thumbnail promise, warns
-when no question is posed in the opening beats (no loop opened), and warns on a second greeting.
+1. **NAME THE SUBJECT IN THE FIRST SENTENCE.** *SQLite.* *VS Code.* *uv.* Not "the database",
+   not "that card", not "it". The viewer must be able to tell in one breath that this is the
+   thing they clicked. **This is an ERROR, not a warning.**
+2. **GREET, AND SAY WHAT WE ARE GOING TO DO.** *"Welcome to <channel> — today we're going to
+   take SQLite from an empty folder to querying two tables."* The greeting is welcome in scene
+   1 now; it is no longer a rejection. Vary the FORM between episodes (a welcome, an aside, a
+   question, picking up a thread) — vary the wording, never vary away from naming the thing.
+3. **THE ON-SCREEN TITLE MUST MATCH THE CLICK.** The HOOK's headline is not a mood-setting
+   one-liner; it is the promise the thumbnail and title made, in the viewer's own words.
+   `NO SERVER` for a video titled *The Database That Is Just A File* is a different claim, and
+   the viewer notices. Headline and `seo.title` share their distinctive words or the headline
+   is wrong.
+4. **THEN open the loop.** A question the body answers, a result shown before its method, a
+   claim that sounds wrong. Curiosity still matters — it just comes AFTER the viewer knows
+   what they are watching, not instead of it.
+5. **Create curiosity, then SATISFY it.** Every loop opened in the opening is paid off in the
+   body, and the RECAP is where you prove it.
+6. **Name the channel from `brand.channel`**, never a hardcoded string in shared code.
+7. **Never force enthusiasm.** "Let's gooo" reads worse than plain warmth. LAW 0f's test
+   still governs: would you say this sentence out loud, to a colleague?
+
+### What is enforced
+
+`scripts/lint-spec.mjs` runs a GREETING GUARD, on **long cuts AND shorts**:
+- **ERROR** — scene 1 does not name `meta.subject` (a new REQUIRED field: the thing being
+  taught, spelled as a person would say it: `SQLite`, `VS Code`, `uv`).
+- **ERROR** — the HOOK headline shares no distinctive word with `meta.seo.title`.
+- **WARNING** — no greeting anywhere in the opening beats (long cuts; a short has no room).
+- **WARNING** — no intent line ("today we're going to…", "we'll look at…") in the opening.
+- **WARNING** — greeted more than once; a second reads as a jingle.
+- **WARNING** — no question in the opening beats, so no loop is open.
+
+The old rule REJECTED a welcome in scene 1. That rejection is gone. If a future session finds
+this law and the retention argument for a cold open persuasive: the owner has heard it, and
+overruled it, twice. Name the subject.
 
 ## LAW 0h — THE BACKGROUND MUST NOT MOVE (owner, 2026-08-16)
 Owner, on a pulsing ring shipped behind four episodes: *"I don't like the circular animation going

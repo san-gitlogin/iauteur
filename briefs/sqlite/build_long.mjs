@@ -174,9 +174,9 @@ const CARD_CONTENT = {
     messages: [
       // Anchored on the words that name each hop: "the shell inserted" (w19), "Python just
       // opened it" (w67), and the four products themselves (w13), which is the return.
-      {from: 0, to: 1, text: 'INSERT · four products', atWord: 19},
-      {from: 2, to: 1, text: 'connect + SELECT', atWord: 67},
+      {from: 2, to: 1, text: 'connect + SELECT', atWord: 3},
       {from: 1, to: 2, text: 'the same four rows', ret: true, atWord: 13},
+      {from: 0, to: 1, text: 'INSERT, in another session', atWord: 19},
     ],
   },
   // Prepared once, run three times — the whole point of executemany, as a sequence.
@@ -221,14 +221,13 @@ const clip = (ref, label, opts = {}) => ({ref, label, focus: true, ...opts});
 // LAW 0g phase 1: continue the title's promise in the viewer's own words, inside 8 seconds.
 // No welcome, no channel name — that arrives later, woven in.
 scene('HOOK',
-  `You didn't install a database to watch this. So where is the data going to live?`,
-  {headline: 'NO SERVER', subtext: 'a database that is one file',
+  `Today it's SQLite — a database that's just one file. So where does the data live?`,
+  {headline: 'JUST A FILE', subtext: 'no server, no install, no password',
    heroAsset: 'lucide:file', headlineAtWord: 2, heroAtWord: 13});
 
 scene('CHAPTER',
-  `Welcome in. Today is SQLite, from an empty folder to querying two tables and calling SQLite
-   from Python. Everything you see me run is running live, so when something fails, you'll
-   see the error.`,
+  `Welcome in. Empty folder to two tables to Python, and everything you see me run is running
+   live — so when something fails, you'll see the error.`,
   {chapter: {number: '01', title: 'It is a file', subtitle: 'no server, no port, no password'}});
 
 scene('DB_TWO_WAYS',
@@ -944,6 +943,9 @@ for (const s of scenes) delete s._anchors, delete s._hookCap;
 const spec = {
   meta: {
     topic: 'SQLite: the database that is just a file',
+    // How the thing is SAID out loud. Scene 1 has to contain it — the viewer clicked a
+    // title with this word in it (LAW 0g.1).
+    subject: 'SQLite',
     format: 'long',
     // 37 scenes is deliberate for a course of this length; the linter asks long-form to say so.
     screenplay: 'documentary',

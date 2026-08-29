@@ -1,6 +1,7 @@
 {
   "meta": {
     "topic": "SCAN or SEARCH: reading a SQLite query plan",
+    "subject": "SQLite",
     "format": "long",
     "fps": 30,
     "screenplay": "documentary",
@@ -48,17 +49,16 @@
       "type": "HOOK",
       "transition": "filmburn",
       "background": "zoneA",
-      "narration": "Your query got slow. Before you rewrite anything, ask the database what it is planning.",
+      "narration": "SQLite gone slow on you? Before you rewrite a line, ask SQLite what it's planning.",
       "data": {
         "headline": "SCAN OR SEARCH",
         "subtext": "one word tells you everything",
         "heroAsset": "lucide:search",
-        "headlineAtWord": 1,
-        "heroAtWord": 8.583
+        "headlineAtWord": 2,
+        "heroAtWord": 11
       },
-      "durationFrames": 175,
-      "timingSource": "tts",
-      "audio": "audio/sqlite-scan-vs-search_long_s01.mp3"
+      "durationFrames": 225,
+      "timingSource": "estimate"
     },
     {
       "id": "s02",
@@ -99,14 +99,13 @@
               "sub": "product 3"
             }
           ],
-          "scanAtWord": 11.167,
-          "seekAtWord": 31.833,
-          "atWord": 1.75
+          "scanAtWord": 14,
+          "seekAtWord": 38,
+          "atWord": 3
         }
       },
-      "durationFrames": 548,
-      "timingSource": "tts",
-      "audio": "audio/sqlite-scan-vs-search_long_s02.mp3"
+      "durationFrames": 657,
+      "timingSource": "estimate"
     },
     {
       "id": "s03",
@@ -129,7 +128,7 @@
               "zooms": [
                 {
                   "mark": "scan",
-                  "atWord": 24.167
+                  "atWord": 28
                 }
               ],
               "callouts": [
@@ -137,7 +136,7 @@
                   "text": "reads every row",
                   "mark": "scan",
                   "color": "orange",
-                  "atWord": 29.333
+                  "atWord": 35
                 }
               ],
               "overlay": {
@@ -228,7 +227,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 2.583
+              "atWord": 4
             },
             {
               "ref": "rec:sqlite-act2#index",
@@ -277,7 +276,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 35.333
+              "atWord": 41
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -286,7 +285,7 @@
               "zooms": [
                 {
                   "mark": "search",
-                  "atWord": 81.833
+                  "atWord": 96
                 }
               ],
               "callouts": [
@@ -294,7 +293,7 @@
                   "text": "straight to the rows",
                   "mark": "search",
                   "color": "green",
-                  "atWord": 82.75
+                  "atWord": 97
                 }
               ],
               "overlay": {
@@ -357,19 +356,18 @@
                   "h": 247
                 }
               ],
-              "atWord": 65.5
+              "atWord": 77
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 1272,
-      "timingSource": "tts",
-      "audio": "audio/sqlite-scan-vs-search_long_s03.mp3"
+      "durationFrames": 1497,
+      "timingSource": "estimate"
     },
     {
       "id": "s04",
@@ -381,9 +379,8 @@
         "message": "Ask for the plan before you optimise",
         "sub": "the plan is a fact, a guess is not"
       },
-      "durationFrames": 181,
-      "timingSource": "tts",
-      "audio": "audio/sqlite-scan-vs-search_long_s04.mp3"
+      "durationFrames": 213,
+      "timingSource": "estimate"
     }
   ]
 }

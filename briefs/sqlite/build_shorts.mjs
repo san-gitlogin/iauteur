@@ -58,7 +58,7 @@ const brand = {
   const {scenes, push} = mk();
 
   push('HOOK',
-    `Same table. Same Python. One of these queries hands back four rows it should never see.`,
+    `Two SQLite queries, four characters apart. One returns one row — the other returns everything.`,
     {headline: 'ONE QUOTE', subtext: 'and the whole table walks out',
      heroAsset: 'lucide:database', headlineAtWord: 2, heroAtWord: 11}, 2);
 
@@ -146,6 +146,7 @@ const brand = {
   const spec = {
     meta: {
       topic: 'SQL injection, in two lines of Python',
+      subject: 'SQLite',
       format: 'shorts', fps: 30, screenplay: 'documentary',
       onePayoff: 'One row from a parameter, four rows from a glued string.',
       openLoop: 'Which of these two nearly identical queries returns the whole table?',
@@ -172,7 +173,7 @@ const brand = {
   const {scenes, push} = mk();
 
   push('HOOK',
-    `Your query got slow. Before you rewrite anything, ask the database what it is planning.`,
+    `SQLite gone slow on you? Before you rewrite a line, ask SQLite what it's planning.`,
     {headline: 'SCAN OR SEARCH', subtext: 'one word tells you everything',
      heroAsset: 'lucide:search', headlineAtWord: 2, heroAtWord: 11}, 2);
 
@@ -245,6 +246,7 @@ const brand = {
   const spec = {
     meta: {
       topic: 'SCAN or SEARCH: reading a SQLite query plan',
+      subject: 'SQLite',
       format: 'long', fps: 30, screenplay: 'documentary',
       onePayoff: 'One CREATE INDEX turns SCAN into SEARCH, and the plan says so.',
       openLoop: 'What is the database actually doing when your query is slow?',

@@ -405,6 +405,72 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     ? Math.max(gapTop + 6 * scale, gapTop + (gapH - clusterH) / 2)
     : Math.max(20 * scale, (band - clusterH) / 2);
 
+  // ── WHEN IS THE CARD THE SUBJECT, AND HOW MUCH? ─────────────────────────────
+  //
+  // Owner: *"the overlay over the recording must be visible upto some extent and not for
+  // entire cutscene... If something shown in the overlay needs to be focused and is talked
+  // about, the background shall be blurred. If background needs to be focused, the overlay
+  // shall not exist."*
+  //
+  // So a step now has two phases, and only ONE thing is the subject in each:
+  //
+  //   PHASE 1 — the recording is working. Something is being typed, a command is running,
+  //             output is arriving. The footage is the subject; there is no card at all.
+  //   PHASE 2 — the footage has run out and the last frame is frozen. Nothing on screen is
+  //             moving any more, so the card comes up, the footage steps back behind a small
+  //             blur, and the card is the subject while the voice explains what just happened.
+  //
+  // The handover point is the same instant the standing command highlight uses, and for the
+  // same reason: it is when the geometry on screen stops changing. The card then LEAVES before
+  // the next step starts, so every step opens on a clean frame instead of a card crossfading
+  // into another card.
+  //
+  // An overlay that carries its OWN anchors overrides all of this — an author who has said
+  // when each row lands has said when the card matters, and that is better information than
+  // any default.
+  const cardWindow = (() => {
+    const c0 = clips[active];
+    if (!c0) return null;
+    const nx = active + 1 < starts.length ? starts[active + 1] : (scene.durationFrames ?? 1e6);
+    const st = starts[active] ?? 0;
+    const ov = c0.overlay as {atWord?: number; rows?: {atWord?: number}[];
+      messages?: {atWord?: number}[]; nodes?: {atWord?: number}[]; edges?: {atWord?: number}[]} | undefined;
+
+    const at: number[] = [];
+    const push = (w?: number) => { if (w != null) at.push(wordToFrame(w)); };
+    if (ov) {
+      push(ov.atWord);
+      for (const g of [ov.rows, ov.messages, ov.nodes, ov.edges]) for (const e of g ?? []) push(e?.atWord);
+    }
+    // An authored anchor equal to the clip's own is the FALLBACK the components use, not a
+    // real decision, so it does not count as one.
+    const authored = at.filter((f) => Math.abs(f - st) > 2);
+
+    if (authored.length) {
+      const on = Math.max(st, Math.min(...authored) - 10);
+      const off = Math.min(nx, Math.max(...authored) + 40);
+      return {on, off: Math.max(on + 60, off), owns: !!ov};
+    }
+    // THE DEFAULT: appear when the footage freezes, leave before the next step.
+    const settle = st + Math.max(0, Number(c0.frames ?? 0) - 2);
+    const TAIL = 20;              // ~0.7s of clean frame before the next step takes over
+    const MAX = 260;              // and never more than ~8.5s of card in one go
+    const on = Math.min(settle, Math.max(st, nx - 90));   // a very short gap still gets a card
+    const off = Math.min(nx - TAIL, on + MAX);
+    if (off - on < 45) return null;   // no room to show and read one — leave the frame alone
+    return {on, off, owns: !!ov};
+  })();
+
+  // The dial between the two subjects. Only a card with a DEPICTION dims the work: a caption
+  // is furniture, and furniture never earns a blur.
+  const cardFocus = (!fullBleed || !cardWindow || !cardWindow.owns) ? 0 : interpolate(
+    frame,
+    [cardWindow.on, cardWindow.on + 14,
+     Math.max(cardWindow.on + 20, cardWindow.off - 12), cardWindow.off],
+    [0, 1, 1, 0],
+    clamp,
+  );
+
   const mono = t.fonts.mono;
 
   // THE STANDING SETUP (LAW 0l) — what the viewer is looking at, on screen for the whole
@@ -475,9 +541,22 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
         ) : null}
         {fullBleed ? null : premiseNode}
 
-        {/* footage, and — when split — the demo's own steps beside it */}
+        {/* footage, and — when split — the demo's own steps beside it.
+            THE WORK RECEDES WHILE THE CARD IS SPEAKING. Owner: *"If something shown in the
+            overlay needs to be focused and is talked about, the background shall be blurred."*
+            A small blur and a slight desaturation is enough — the footage stays legible as
+            CONTEXT, it just stops competing for the eye. It ramps on the same curve the card
+            fades in on, so the handover is one movement rather than two. */}
         <div style={fullBleed
-          ? {position: 'absolute', inset: 0, zIndex: 0}
+          ? {
+              position: 'absolute', inset: 0, zIndex: 0,
+              filter: cardFocus > 0.01
+                ? `blur(${(4.5 * cardFocus).toFixed(2)}px) saturate(${(1 - 0.35 * cardFocus).toFixed(3)})`
+                : undefined,
+              // A blur samples outside the element's box and would show the frame's ground at
+              // the edges; scaling up by the blur radius keeps the footage edge-to-edge.
+              transform: cardFocus > 0.01 ? `scale(${(1 + 0.012 * cardFocus).toFixed(4)})` : undefined,
+            }
           : {display: 'flex', gap: split ? 22 * scale : 0, alignItems: 'stretch'}}>
         <div
           style={{
@@ -962,28 +1041,68 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
               `card.aspect` and `card.width` do that, so a beat that explains code can park a narrow
               portrait card beside it instead of a strip across it. */}
         {(() => {
-          const nextStart = active + 1 < starts.length ? starts[active + 1] : (scene.durationFrames ?? 1e6);
-          const IN = 12, OUT = 10;
-          // HOLD until the next step actually takes over — the fade is a crossover, not an exit.
+          // The window is computed once, above, so the card and the blur behind it cannot
+          // disagree about when the handover happens.
+          if (!cardWindow) return null;
+          const IN = 14, OUT = 12;
           const life = interpolate(
             frame,
-            [curStart, curStart + IN, Math.max(curStart + IN + 6, nextStart - OUT), nextStart],
-            [0, 1, 1, active + 1 < starts.length ? 0 : 1],
+            [cardWindow.on, cardWindow.on + IN,
+             Math.max(cardWindow.on + IN + 6, cardWindow.off - OUT), cardWindow.off],
+            [0, 1, 1, 0],
             clamp,
           );
           if (life <= 0.001) return null;
 
           const cardCfg = d.card ?? {};
+          const pad = 42 * scale;
+
+          // ── WHERE THE CARD GOES WHEN NOBODY SAID ──────────────────────────────
+          //
+          // Owner: *"the overlay need not always sit in the center... the component overlay
+          // can be placed at the right or left, where you can see when we are in VS Code the
+          // screen recordings, the right side has some gaps where the overlays can fit in,
+          // where the overlay need not be a horizontal rectangle, it can be a vertical rounded
+          // rectangle, like how in Android Studio or Xcode we see the mobile on the right side
+          // of the editor, something like that of that size."*
+          //
+          // He is describing a DOCK, and the measured ink can find one. Editor text is
+          // left-aligned and ragged-right, so on a real IDE capture there is almost always a
+          // tall empty column down the right-hand side — exactly the strip a device preview
+          // occupies in Android Studio. When that column is wide enough to hold a readable
+          // card, the card goes there as a vertical panel and the eye stops being thrown from
+          // centre to top to bottom and back.
+          //
+          // The centre band is the FALLBACK now, not the default: it is where the card goes
+          // when the footage genuinely has no free column, which is what a full-width terminal
+          // dump looks like.
+          const sideDock = (() => {
+            if (!fullBleed || !cur.ink?.length) return null;
+            const ink = cur.ink as {x: number; y: number; w: number; h: number}[];
+            const toPx = (x: number) => (x - view.x) * k;
+            // The rightmost ink on screen — everything past it is free.
+            const rightEdge = Math.max(...ink.map((r) => toPx(Number(r.x) + Number(r.w))));
+            const freeW = frameW - rightEdge;
+            const MIN = 330 * scale;   // below this a table or a graph is unreadable, so refuse
+            if (freeW < MIN + 2 * pad) return null;
+            const w = Math.min(freeW - 2 * pad, 460 * scale);
+            return {left: Math.max(rightEdge + pad, frameW - pad - w), width: w};
+          })();
+
+          const place = cardCfg.place ?? (sideDock ? 'right' : 'auto');
+
+          // An authored width always wins; otherwise the dock decides, and only when there is
+          // no dock does the old full-width strip apply.
           const wFrac = Math.min(0.92, Math.max(0.2, Number(cardCfg.width ?? (vertical ? 0.9 : 0.62))));
-          const cardW = frameW * wFrac;
+          const cardW = cardCfg.width != null
+            ? frameW * wFrac
+            : (sideDock ? sideDock.width : frameW * wFrac);
           const ASPECT = {wide: 16 / 6, square: 1, portrait: 3 / 4, '4:3': 4 / 3, '3:4': 3 / 4};
           const ratio = ASPECT[cardCfg.aspect as keyof typeof ASPECT];
           // `auto` lets the content decide the height, which is right for a line of text; a named
           // aspect pins it, which is what a diagram or a table needs.
           const cardH = ratio ? cardW / ratio : undefined;
 
-          const place = cardCfg.place ?? 'auto';
-          const pad = 42 * scale;
 
           // IN THE STACKED LAYOUT THE CARD IS A SIBLING OF THE VIDEO, NOT A LAYER OVER IT.
           //
@@ -998,7 +1117,12 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           const inFlow = !fullBleed && place === 'auto';
 
           const pos: React.CSSProperties = {};
-          if (place === 'auto') {
+          if (sideDock && place === 'right' && cardCfg.place == null) {
+            // Vertically centred IN THE DOCK, which reads as a panel beside the editor rather
+            // than a banner over it.
+            pos.left = sideDock.left;
+            pos.top = 0; pos.bottom = 0;
+          } else if (place === 'auto') {
             if (fullBleed) {
               pos.left = 0; pos.right = 0;
               pos[hasGap || clusterAtTop ? 'top' : 'bottom'] = clusterInset;
@@ -1025,7 +1149,11 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                 : {position: 'absolute', ...pos}),
               zIndex: 3,
               display: 'flex', justifyContent: justify,
-              alignItems: place === 'center' ? 'center' : undefined,
+              // `undefined` means STRETCH, and the docked wrapper spans top-to-bottom — so the
+              // card grew to the full height of the frame and read as a sidebar rather than a
+              // panel. Anything given a top AND a bottom is centred inside that span.
+              alignItems: (place === 'center' || (pos.top != null && pos.bottom != null))
+                ? 'center' : undefined,
               pointerEvents: 'none', opacity: life,
               transform: `translateY(${(1 - life) * 10 * scale}px)`,
             }}>

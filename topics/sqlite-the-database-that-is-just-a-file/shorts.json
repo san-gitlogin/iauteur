@@ -1,6 +1,7 @@
 {
   "meta": {
     "topic": "SQL injection, in two lines of Python",
+    "subject": "SQLite",
     "format": "shorts",
     "fps": 30,
     "screenplay": "documentary",
@@ -46,17 +47,16 @@
       "type": "HOOK",
       "transition": "filmburn",
       "background": "zoneA",
-      "narration": "Same table. Same Python. One of these queries hands back four rows it should never see.",
+      "narration": "Two SQLite queries, four characters apart. One returns one row — the other returns everything.",
       "data": {
         "headline": "ONE QUOTE",
         "subtext": "and the whole table walks out",
         "heroAsset": "lucide:database",
-        "headlineAtWord": 1,
-        "heroAtWord": 9.25
+        "headlineAtWord": 2,
+        "heroAtWord": 11
       },
-      "durationFrames": 198,
-      "timingSource": "tts",
-      "audio": "audio/sqlite-the-database-that-is-just-a-file_shorts_s01.mp3"
+      "durationFrames": 225,
+      "timingSource": "estimate"
     },
     {
       "id": "s02",
@@ -76,11 +76,11 @@
               "zooms": [
                 {
                   "mark": "safe",
-                  "atWord": 22.583
+                  "atWord": 28
                 },
                 {
                   "mark": "unsafe",
-                  "atWord": 31.833
+                  "atWord": 39
                 }
               ],
               "callouts": [
@@ -88,77 +88,77 @@
                   "text": "the value stays a value",
                   "mark": "safe",
                   "color": "green",
-                  "atWord": 26.833
+                  "atWord": 33
                 },
                 {
                   "text": "the value becomes code",
                   "mark": "unsafe",
                   "color": "red",
-                  "atWord": 36.833
+                  "atWord": 45
                 }
               ],
               "overlay": {
                 "kind": "graph",
-                "atWord": 2.5,
+                "atWord": 4,
                 "nodes": [
                   {
                     "id": "q",
                     "label": "your query text",
-                    "atWord": 2.5
+                    "atWord": 4
                   },
                   {
                     "id": "v",
                     "label": "\"USB-C hub\"",
-                    "atWord": 7.5
+                    "atWord": 10
                   },
                   {
                     "id": "ph",
                     "label": "?  placeholder",
-                    "atWord": 10.083
+                    "atWord": 13
                   },
                   {
                     "id": "glue",
                     "label": "glued into the string",
-                    "atWord": 16.75
+                    "atWord": 21
                   },
                   {
                     "id": "data",
                     "label": "stays DATA",
                     "tone": "green",
-                    "atWord": 13.417
+                    "atWord": 17
                   },
                   {
                     "id": "code",
                     "label": "becomes CODE",
                     "tone": "red",
-                    "atWord": 21.75
+                    "atWord": 27
                   }
                 ],
                 "edges": [
                   {
                     "from": "q",
                     "to": "ph",
-                    "atWord": 10.083
+                    "atWord": 13
                   },
                   {
                     "from": "v",
                     "to": "ph",
-                    "atWord": 10.083
+                    "atWord": 13
                   },
                   {
                     "from": "ph",
                     "to": "data",
-                    "atWord": 13.417
+                    "atWord": 17
                   },
                   {
                     "from": "q",
                     "to": "glue",
-                    "atWord": 16.75
+                    "atWord": 21
                   },
                   {
                     "from": "glue",
                     "to": "code",
-                    "atWord": 21.75
+                    "atWord": 27
                   }
                 ]
               },
@@ -215,7 +215,7 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 2.5
+              "atWord": 4
             },
             {
               "ref": "rec:sqlite-act3#run-params",
@@ -224,11 +224,11 @@
               "zooms": [
                 {
                   "mark": "one",
-                  "atWord": 49.417
+                  "atWord": 60
                 },
                 {
                   "mark": "all",
-                  "atWord": 51.083
+                  "atWord": 62
                 }
               ],
               "callouts": [
@@ -236,18 +236,18 @@
                   "text": "exactly what was asked for",
                   "mark": "one",
                   "color": "green",
-                  "atWord": 50.25
+                  "atWord": 61
                 },
                 {
                   "text": "the whole table",
                   "mark": "all",
                   "color": "red",
-                  "atWord": 51.917
+                  "atWord": 63
                 }
               ],
               "overlay": {
                 "kind": "rows",
-                "atWord": 38.5,
+                "atWord": 47,
                 "columns": [
                   "name",
                   "price"
@@ -259,7 +259,7 @@
                       "45.00"
                     ],
                     "state": "kept",
-                    "atWord": 38.5
+                    "atWord": 47
                   },
                   {
                     "cells": [
@@ -267,7 +267,7 @@
                       "89.00"
                     ],
                     "state": "new",
-                    "atWord": 52.75
+                    "atWord": 64
                   },
                   {
                     "cells": [
@@ -275,7 +275,7 @@
                       "240.00"
                     ],
                     "state": "new",
-                    "atWord": 53.583
+                    "atWord": 65
                   },
                   {
                     "cells": [
@@ -283,7 +283,7 @@
                       "35.50"
                     ],
                     "state": "new",
-                    "atWord": 54.417
+                    "atWord": 66
                   }
                 ]
               },
@@ -330,19 +330,18 @@
                   "h": 764
                 }
               ],
-              "atWord": 41.083
+              "atWord": 51
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 815,
-      "timingSource": "tts",
-      "audio": "audio/sqlite-the-database-that-is-just-a-file_shorts_s02.mp3"
+      "durationFrames": 993,
+      "timingSource": "estimate"
     },
     {
       "id": "s03",
@@ -354,9 +353,8 @@
         "message": "Always pass the value as a parameter",
         "sub": "every language, every time"
       },
-      "durationFrames": 159,
-      "timingSource": "tts",
-      "audio": "audio/sqlite-the-database-that-is-just-a-file_shorts_s03.mp3"
+      "durationFrames": 165,
+      "timingSource": "estimate"
     }
   ]
 }

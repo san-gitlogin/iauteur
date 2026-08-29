@@ -193,56 +193,94 @@ const sceneAnchorRoot = (s) => ({data: s.data, stepRail: s.stepRail, pip: s.pip}
 // rejections) and they are measured over the WHOLE spec, never per scene — a chapter
 // card is meant to be four words long.
 // ─────────────────────────────────────────────────────────────────────────────
-// GREETING GUARD (LAW 0g, owner 2026-08-16: *"in all videos, greeting is missing"*).
+// GREETING GUARD (LAW 0g — REWRITTEN 2026-08-30 on the owner's override).
 //
-// The fix is a greeting, but the ORDER is the whole rule. Retention research is blunt:
-// creators lose viewers in the first 30s precisely by opening with greeting + channel
-// branding, and tutorials retain best when the payoff comes first and the welcome
-// second. So scene 1 stays a cold open, and the greeting lands in the beats just after
-// it — usually folded into TITLE_CARD, costing no extra scene.
-const GREET = /\b(welcome (?:back )?(?:to|along)?|hello|hey there|good to see you|glad you(?:'re| are) here)\b/i;
+// Owner: *"every video just starts like user already know what we are talking about! NO!.
+// You need to say like we are gonna see on sqlite, or vscode or whatever, the title that you
+// show initially should not be some random one liner sentence that doesnt even match with
+// what the user clicked on... This is something that we have to improve universally."*
+//
+// THIS GUARD USED TO ENFORCE THE OPPOSITE. It made a welcome or a channel name in scene 1 an
+// ERROR, on the retention argument that leading with branding loses the first thirty seconds.
+// Applied literally, that rule produces a riddle: measured across four shipped openings, not
+// one named its own subject in the first sentence — *"Your query got slow"*, *"You didn't
+// install a database"*, *"Same table. Same Python."*, *"...shortcuts on that card"*. A cold
+// open works when the audience already shares the context. A tutorial viewer does not: they
+// clicked a title, and the first sentence has to be that title's subject.
+//
+// So the rejection is gone and the requirement is inverted. Name the thing.
+const GREET = /\b(welcome (?:back )?(?:to|along|in)?|hello|hey there|good to see you|glad you(?:'re| are) here)\b/i;
+// "today we're going to…", "we'll look at…", "here's what we're doing" — the intent line.
+const INTENT = /\b(today|in this (?:video|one|episode)|we(?:'re| are) going to|we(?:'ll| will) (?:look|see|build|take|cover|walk|go)|by the end)\b/i;
 const longFmt = (spec.meta?.format ?? 'long') === 'long';
 const chan = String(spec.brand?.channel ?? '').trim();
-if (longFmt && (spec.scenes ?? []).length >= 6) {
-  const nar = (i) => String(spec.scenes[i]?.narration ?? '');
+const nar = (i) => String(spec.scenes?.[i]?.narration ?? '');
+
+// ── 1. THE SUBJECT, IN THE FIRST SENTENCE. Errors, on EVERY format. ──────────
+//
+// `meta.subject` is how the thing is SAID out loud — "SQLite", "VS Code", "uv". It is
+// deliberately a separate field from `topic` (a sentence) and `seo.title` (marketing), so the
+// check cannot be satisfied by a coincidental keyword.
+const subject = String(spec.meta?.subject ?? '').trim();
+if (!subject) {
+  E(`meta.subject is missing — name the thing being taught, spelled as you would SAY it ` +
+    `("SQLite", "VS Code", "uv"). Scene 1 has to contain it (LAW 0g).`);
+} else if ((spec.scenes ?? []).length) {
   const s1 = nar(0);
-  // Leading with branding is the documented retention killer, so it is an ERROR.
-  if (GREET.test(s1))
-    E(`s01: the HOOK greets the viewer — a cold open must name the PAIN first. Move the welcome to scene 2-3 (LAW 0g).`);
-  if (chan && s1.toLowerCase().includes(chan.toLowerCase()))
-    E(`s01: the HOOK says the channel name — leading with branding is the single most-documented way to lose the first 30 seconds. Move it to scene 2-3 (LAW 0g).`);
-  // ...but having NO greeting anywhere is the thing the owner actually complained about.
-  const opening = [1, 2, 3].map(nar).join(' ');
+  // First SENTENCE, not first scene: "the viewer must be able to tell in one breath".
+  const firstSentence = (s1.split(/(?<=[.!?])\s/)[0] ?? s1);
+  const has = (hay) => hay.toLowerCase().includes(subject.toLowerCase());
+  if (!has(s1)) {
+    E(`s01: the opening never says "${subject}". The viewer clicked a title with that word in ` +
+      `it and the first thing they hear is a riddle. Name the subject (LAW 0g.1).`);
+  } else if (!has(firstSentence)) {
+    W(`s01: "${subject}" appears in the opening but not in its FIRST sentence — ` +
+      `${JSON.stringify(firstSentence.slice(0, 70))}. One breath is the budget (LAW 0g.1).`);
+  }
+}
+
+// ── 2. THE ON-SCREEN TITLE IS THE CLICK PROMISE, not a mood one-liner. ───────
+const STOP = new Set(['playwright', 'python', 'tutorial', 'the', 'and', 'for', 'with', 'your',
+                      'what', 'why', 'how', 'that', 'this', 'from', 'into', 'when', 'once',
+                      'every', 'you', 'not', 'but', 'all', 'its', 'a', 'an', 'of', 'in', 'on',
+                      'actually', 'work', 'works', 'just', 'about', 'they', 'them', 'have']);
+const keyWords = (str) => String(str ?? '')
+  .toLowerCase().split(/[^a-z0-9_]+/).filter((w) => w.length > 3 && !STOP.has(w));
+{
+  const head = String(spec.scenes?.[0]?.data?.headline ?? '');
+  const titleWords = keyWords(spec.meta?.seo?.title);
+  const headWords = keyWords(head);
+  const subjWords = keyWords(subject);
+  if (head && titleWords.length) {
+    const shared = headWords.filter((w) => titleWords.includes(w) || subjWords.includes(w));
+    if (!shared.length)
+      E(`s01 HOOK headline ${JSON.stringify(head)} shares no word with the title ` +
+        `${JSON.stringify(String(spec.meta?.seo?.title ?? ''))}. The headline is the promise the ` +
+        `viewer clicked, not a separate one-liner — they arrive on a different claim and ` +
+        `bounce (LAW 0g.3).`);
+  }
+}
+
+// ── 3. THE GREETING AND THE INTENT LINE. Long cuts have room; a short does not. ──
+if (longFmt && (spec.scenes ?? []).length >= 6) {
+  const opening = [0, 1, 2, 3].map(nar).join(' ');
   const greeted = GREET.test(opening) || (chan && opening.toLowerCase().includes(chan.toLowerCase()));
   if (!greeted)
-    W(`NO GREETING: scenes 2-4 never welcome the viewer or name the channel. After the cold open, weave one in as an aside — and vary the form between episodes (LAW 0g).`);
-  // A jingle repeated every episode reads as one on a binge; twice in ONE spec is worse.
+    W(`NO GREETING: the opening beats never welcome the viewer or name the channel. ` +
+      `Weave one in — and vary the FORM between episodes so a binge does not hear a jingle (LAW 0g.2).`);
+  if (!INTENT.test(opening))
+    W(`NO INTENT LINE: the opening never says what this video is going to DO ` +
+      `("today we're going to…", "by the end you'll…"). The viewer is being asked to trust a ` +
+      `riddle (LAW 0g.2).`);
   const welcomes = (spec.scenes ?? []).filter((s) => GREET.test(String(s.narration ?? ''))).length;
   if (welcomes > 1)
     W(`GREETED ${welcomes} TIMES: one welcome per episode. A second reads as a jingle.`);
 
-  // CLICK-PROMISE CONGRUENCE. The viewer arrived carrying an expectation set by the
-  // title and the thumbnail. If the opening does not obviously continue it, they cannot
-  // tell this is the video they clicked, and they leave. Checked by looking for the
-  // distinctive words of the title/thumbnail in the first three narrations.
-  const STOP = new Set(['playwright', 'python', 'tutorial', 'the', 'and', 'for', 'with', 'your',
-                        'what', 'why', 'how', 'that', 'this', 'from', 'into', 'when', 'once',
-                        'every', 'you', 'not', 'but', 'all', 'its', 'a', 'an', 'of', 'in', 'on']);
-  const keyWords = (str) => String(str ?? '')
-    .toLowerCase().split(/[^a-z0-9_]+/).filter((w) => w.length > 3 && !STOP.has(w));
-  const promise = [...new Set([...keyWords(spec.meta?.seo?.title), ...keyWords(spec.thumbnail?.title)])];
-  if (promise.length) {
-    const openLower = (s1 + ' ' + opening).toLowerCase();
-    const hit = promise.filter((w) => openLower.includes(w));
-    if (!hit.length)
-      W(`CLICK PROMISE UNMET: the opening beats never mention ${promise.slice(0, 4).map((w) => `"${w}"`).join(', ')} — the words the viewer clicked. Echo the title/thumbnail promise in the first breath, or they cannot tell this is the video they picked (LAW 0g).`);
-  }
-
-  // AN OPEN LOOP IS A QUESTION. Phase 3 of the opening is an information gap the body
-  // closes. A spec that opens with only statements has nothing pulling the viewer through.
-  const openingAll = [0, 1, 2, 3].map(nar).join(' ');
-  if (!/\?/.test(openingAll))
-    W(`NO OPEN LOOP: the first four beats never ask anything. Pose a question the body answers — curiosity you then SATISFY is what separates a click promise from clickbait (LAW 0g).`);
+  // ── 4. AN OPEN LOOP IS A QUESTION — but now it comes AFTER the viewer knows
+  //      what they are watching, rather than instead of it.
+  if (!/\?/.test(opening))
+    W(`NO OPEN LOOP: the first four beats never ask anything. Pose a question the body answers — ` +
+      `curiosity you then SATISFY is what separates a click promise from clickbait (LAW 0g.4).`);
 }
 
 // MOVING-BACKGROUND GUARD (LAW 0h, owner 2026-08-16 on a pulsing ring shipped behind

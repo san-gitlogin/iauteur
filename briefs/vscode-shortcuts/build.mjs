@@ -61,9 +61,92 @@ const scene = (type, narration, data = {}, extra = {}) => {
 };
 
 /** A RECORDED_STEP. Anchors arrive later from anchor-spec; estimated here the way it solves them. */
+// ── WHAT THE DOCKED CARD DRAWS, PER BEAT ─────────────────────────────────────
+//
+// All ten cards in this cut were empty — caption, premise, step rule, nothing else. That was
+// already the owner's *"just showing texts"* complaint, and it matters more here than
+// anywhere: VS Code footage is left-aligned and ragged-right, so a tall free column exists on
+// 26 of this cut's 28 clips, and the card now DOCKS into it as a vertical panel — the shape
+// he described as *"like how in Android Studio or Xcode we see the mobile on the right side
+// of the editor"*. A panel that size with only a caption in it wastes the column.
+//
+// Every chord below is one the probe suite pressed against VS Code Web and recorded in
+// briefs/vscode-shortcuts/verified.json. Nothing here claims a shortcut that was not tested.
+//
+// `rows` is the right shape for most of these: a shortcut lesson IS a small table — the chord
+// on the left, what it does on the right — and the docked column is exactly a table's shape.
+const CARD_CONTENT = {
+  'two doors, one box': {
+    kind: 'split', color: 'blue',
+    left: 'Ctrl+Shift+P', leftNote: 'wants a COMMAND name',
+    right: 'Ctrl+P', rightNote: 'wants a FILE name',
+  },
+  'width back, and find': {
+    kind: 'rows', color: 'blue', columns: ['chord', 'what it does'],
+    rows: [
+      {cells: ['Ctrl+B', 'hides the sidebar'], state: 'kept'},
+      {cells: ['Ctrl+B', 'and brings it back'], state: 'plain'},
+      {cells: ['Ctrl+F', 'find, in this file'], state: 'new'},
+    ],
+  },
+  'across the project, and the terminal': {
+    kind: 'rows', color: 'purple', columns: ['chord', 'where it looks'],
+    rows: [
+      {cells: ['Ctrl+Shift+F', 'every file in the project'], state: 'new'},
+      {cells: ['Ctrl+Shift+E', 'back to the file tree'], state: 'plain'},
+      {cells: ['Ctrl+`', 'the terminal, one key down'], state: 'kept'},
+    ],
+  },
+  'no selection needed': {
+    kind: 'chain', color: 'green',
+    steps: ['caret on the line', 'Ctrl+/', 'commented', 'Ctrl+/ again'],
+  },
+  'copy, delete, move': {
+    kind: 'rows', color: 'orange', columns: ['chord', 'what happens to the line'],
+    rows: [
+      {cells: ['Shift+Alt+Down', 'copied below itself'], state: 'new'},
+      {cells: ['Ctrl+Shift+K', 'deleted outright'], state: 'cut'},
+      {cells: ['Alt+Up / Down', 'moved past its neighbours'], state: 'kept'},
+    ],
+  },
+  'two cursors, one keystroke': {
+    kind: 'split', color: 'purple',
+    left: 'Ctrl+Alt+Down', leftNote: 'a second caret below',
+    right: 'Ctrl+U', rightNote: 'takes the last one back',
+  },
+  'the shape, without the detail': {
+    kind: 'swap', from: 'every block open', to: 'Ctrl+K Ctrl+0', color: 'blue',
+  },
+  'to a symbol, or to a line': {
+    kind: 'split', color: 'blue',
+    left: 'Ctrl+Shift+O', leftNote: "this file's symbols",
+    right: 'Ctrl+G', rightNote: 'a line number, from a stack trace',
+  },
+  'split, close, and undo the close': {
+    kind: 'rows', color: 'green', columns: ['chord', 'what it does to the editor'],
+    rows: [
+      {cells: ['Ctrl+\\', 'splits it in two'], state: 'new'},
+      {cells: ['Ctrl+2', 'jumps to the second pane'], state: 'plain'},
+      {cells: ['Ctrl+W', 'closes an editor'], state: 'cut'},
+      {cells: ['Ctrl+Shift+T', 'reopens what you just closed'], state: 'kept'},
+    ],
+  },
+  'the code, and only the code': {
+    kind: 'split', color: 'orange',
+    left: 'Ctrl+K Z', leftNote: 'zen mode — the code gets the screen',
+    right: 'Ctrl+K Ctrl+S', rightNote: 'the shortcut list itself',
+  },
+};
+
 const rec = (narration, {caption, premise, clips}) => {
   const est = clips.reduce((a, c) => a + 1 + (c.zooms?.length ?? 0) + (c.callouts?.length ?? 0), 0);
-  scene('RECORDED_STEP', narration, {recordedStep: {caption, premise, clips}}, {plusAnchors: est});
+  // The depiction rides on the LAST clip — the card should draw the beat's conclusion, and the
+  // last clip is the one frozen on screen when the voice reaches it.
+  const card = CARD_CONTENT[caption];
+  const withCard = card
+    ? clips.map((c, i) => (i === clips.length - 1 && !c.overlay ? {...c, overlay: card} : c))
+    : clips;
+  scene('RECORDED_STEP', narration, {recordedStep: {caption, premise, clips: withCard}}, {plusAnchors: est});
 };
 const clip = (ref, label, opts = {}) => ({ref, label, focus: true, ...opts});
 
@@ -74,13 +157,13 @@ const clip = (ref, label, opts = {}) => ({ref, label, focus: true, ...opts});
 // LAW 0g phase 1: continue the title's promise in the viewer's own words, inside 8 seconds.
 // The title says shortcuts that actually work, so the first sentence is about one that does not.
 scene('HOOK',
-  `Six of the hundred and forty nine shortcuts on that card do nothing. Which six?`,
-  {headline: '6 OF THEM LIE', subtext: 'and the card will not tell you which',
+  `Today it's VS Code shortcuts. I pressed all hundred and forty nine. Six do nothing.`,
+  {headline: '6 SHORTCUTS LIE', subtext: 'and the card will not tell you which',
    heroAsset: 'lucide:keyboard', headlineAtWord: 1, heroAtWord: 6});
 
 scene('TITLE_CARD',
-  `So I pressed all of them — welcome back, by the way — every chord on that card, one at a time,
-   against a real editor. A hundred and three work. What about the rest?`,
+  `The card is Microsoft's own shortcut PDF — welcome back, by the way — and every chord on it
+   went into a real editor. A hundred and three work. What about the rest?`,
   {title: 'Shortcuts that actually work', subtitle: '103 pressed, one at a time'});
 
 scene('CHAPTER',
@@ -392,6 +475,7 @@ for (const s of scenes) { delete s._anchors; delete s._words; }
 const spec = {
   meta: {
     topic: 'VS Code Shortcuts That Actually Work',
+    subject: 'VS Code',
     format: 'long', fps: 30, screenplay: 'masterclass',
     onePayoff: 'the six shortcuts that do nothing in a browser, and why',
     openLoop: 'six of the card’s shortcuts do nothing — which six?',
@@ -408,7 +492,7 @@ const spec = {
     background: 'grid', logo: 'img:channel_logo.png',
   },
   // Derived from the topic, never generic: the number is the one this course measured.
-  thumbnail: {title: '6 OF THEM LIE', badge: '103 VERIFIED', asset: 'lucide:keyboard'},
+  thumbnail: {title: '6 SHORTCUTS LIE', badge: '103 VERIFIED', asset: 'lucide:keyboard'},
   scenes,
 };
 

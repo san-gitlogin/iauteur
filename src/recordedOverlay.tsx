@@ -201,11 +201,19 @@ export const StepOverlay: React.FC<{
   if (data.kind === 'rows') {
     const cols = (data.columns ?? []).slice(0, 3);
     const rows = (data.rows ?? []).slice(0, 5);
+    // A DOCKED CARD IS NARROW, AND AN ELLIPSED CELL IS A CELL THAT WAS NOT SHOWN.
+    //
+    // Measured on the VS Code dock at 460px: `copied below itself` rendered as `copied b…`,
+    // which teaches nothing and looks broken. Side-by-side columns need width the dock does
+    // not have, so below the threshold each row becomes TWO LINES — the chord, then what it
+    // does — which is the shape a narrow column actually wants (LAW 0k.4: components size to
+    // the space they are given rather than clipping).
+    const narrow = maxWidth < 520 * scale;
     const cut = sem('red'), kept = sem('green'), fresh = sem('purple');
     const toneOf = (st?: string) => st === 'cut' ? cut : st === 'new' ? fresh : st === 'kept' ? kept : accent;
     return (
       <div style={{...wrap, flexDirection: 'column', gap: 5 * scale, width: '100%'}}>
-        {cols.length ? (
+        {cols.length && !narrow ? (
           <div style={{display: 'flex', width: '100%', gap: 10 * scale, padding: `0 ${11 * scale}px`}}>
             {cols.map((c, i) => (
               <span key={i} style={{
@@ -225,8 +233,11 @@ export const StepOverlay: React.FC<{
           const gone = r.state === 'cut' ? travelAt(frame, at + 8, 16) : 0;
           return (
             <div key={i} style={{
-              display: 'flex', width: '100%', alignItems: 'center', gap: 10 * scale,
-              padding: `${6 * scale}px ${11 * scale}px`,
+              display: 'flex', width: '100%',
+              ...(narrow
+                ? {flexDirection: 'column' as const, alignItems: 'flex-start' as const, gap: 2 * scale}
+                : {alignItems: 'center' as const, gap: 10 * scale}),
+              padding: `${(narrow ? 8 : 6) * scale}px ${11 * scale}px`,
               borderRadius: radius,
               border: `${1.2 * scale}px solid ${hexA(tone, 0.15 + 0.45 * on)}`,
               background: hexA(tone, 0.06 + 0.07 * on),
@@ -236,10 +247,13 @@ export const StepOverlay: React.FC<{
             }}>
               {(r.cells ?? []).slice(0, 3).map((cell, j) => (
                 <span key={j} style={{
-                  flex: j === 0 ? 2 : 1, minWidth: 0,
-                  fontFamily: t.fonts.mono, fontSize: mono * 0.86,
+                  ...(narrow
+                    ? {width: '100%', fontSize: mono * (j === 0 ? 0.8 : 0.68)}
+                    : {flex: j === 0 ? 2 : 1, fontSize: mono * 0.86}),
+                  minWidth: 0,
+                  fontFamily: t.fonts.mono,
                   color: j === 0 ? t.colors.text : tone,
-                  textAlign: j === 0 ? 'left' : 'right',
+                  textAlign: narrow ? 'left' : (j === 0 ? 'left' : 'right'),
                   textDecoration: r.state === 'cut' && gone > 0.4 ? 'line-through' : 'none',
                   overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                 }}>{cell}</span>

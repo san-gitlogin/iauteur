@@ -1,6 +1,7 @@
 {
   "meta": {
     "topic": "VS Code Shortcuts That Actually Work",
+    "subject": "VS Code",
     "format": "long",
     "fps": 30,
     "screenplay": "masterclass",
@@ -29,7 +30,7 @@
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "6 OF THEM LIE",
+    "title": "6 SHORTCUTS LIE",
     "badge": "103 VERIFIED",
     "asset": "lucide:keyboard"
   },
@@ -39,31 +40,29 @@
       "type": "HOOK",
       "transition": "filmburn",
       "background": "zoneB",
-      "narration": "Six of the hundred and forty nine shortcuts on that card do nothing. Which six?",
+      "narration": "Today it's VS Code shortcuts. I pressed all hundred and forty nine. Six do nothing.",
       "data": {
-        "headline": "6 OF THEM LIE",
+        "headline": "6 SHORTCUTS LIE",
         "subtext": "and the card will not tell you which",
         "heroAsset": "lucide:keyboard",
         "headlineAtWord": 1,
-        "heroAtWord": 4.167
+        "heroAtWord": 6
       },
-      "durationFrames": 170,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s01.mp3"
+      "durationFrames": 220,
+      "timingSource": "estimated"
     },
     {
       "id": "s02",
       "type": "TITLE_CARD",
       "transition": "dip",
       "background": "zoneC",
-      "narration": "So I pressed all of them — welcome back, by the way — every chord on that card, one at a time, against a real editor. A hundred and three work. What about the rest?",
+      "narration": "The card is Microsoft's own shortcut PDF — welcome back, by the way — and every chord on it went into a real editor. A hundred and three work. What about the rest?",
       "data": {
         "title": "Shortcuts that actually work",
         "subtitle": "103 pressed, one at a time"
       },
-      "durationFrames": 344,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s02.mp3"
+      "durationFrames": 436,
+      "timingSource": "estimated"
     },
     {
       "id": "s03",
@@ -78,9 +77,8 @@
           "subtitle": "the five that replace the mouse"
         }
       },
-      "durationFrames": 283,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s03.mp3"
+      "durationFrames": 472,
+      "timingSource": "estimated"
     },
     {
       "id": "s04",
@@ -99,19 +97,18 @@
                 "Shift",
                 "P"
               ],
-              "atWord": 4.833
+              "atWord": 7
             }
           ],
           "command": "Show All Commands",
           "result": "anything the editor can do",
-          "atWord": 1,
-          "commandAtWord": 12.167,
+          "atWord": 2,
+          "commandAtWord": 16,
           "color": "blue"
         }
       },
-      "durationFrames": 419,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s04.mp3"
+      "durationFrames": 532,
+      "timingSource": "estimated"
     },
     {
       "id": "s05",
@@ -162,12 +159,20 @@
                 "Shift",
                 "P"
               ],
-              "atWord": 2.5
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act1#quickopen",
               "label": "quick open",
               "focus": true,
+              "overlay": {
+                "kind": "split",
+                "color": "blue",
+                "left": "Ctrl+Shift+P",
+                "leftNote": "wants a COMMAND name",
+                "right": "Ctrl+P",
+                "rightNote": "wants a FILE name"
+              },
               "id": "quickopen",
               "src": "rec/vscode-keys-act1/seg-02.mp4",
               "frames": 56,
@@ -201,19 +206,18 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 15
+              "atWord": 19
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 321,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s05.mp3"
+      "durationFrames": 405,
+      "timingSource": "estimated"
     },
     {
       "id": "s06",
@@ -263,7 +267,7 @@
                 "Ctrl",
                 "B"
               ],
-              "atWord": 2.25
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act1#sidebar-back",
@@ -302,12 +306,43 @@
                 "Ctrl",
                 "B"
               ],
-              "atWord": 12.667
+              "atWord": 18
             },
             {
               "ref": "rec:vscode-keys-act1#find",
               "label": "find in this file",
               "focus": true,
+              "overlay": {
+                "kind": "rows",
+                "color": "blue",
+                "columns": [
+                  "chord",
+                  "what it does"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "Ctrl+B",
+                      "hides the sidebar"
+                    ],
+                    "state": "kept"
+                  },
+                  {
+                    "cells": [
+                      "Ctrl+B",
+                      "and brings it back"
+                    ],
+                    "state": "plain"
+                  },
+                  {
+                    "cells": [
+                      "Ctrl+F",
+                      "find, in this file"
+                    ],
+                    "state": "new"
+                  }
+                ]
+              },
               "id": "find",
               "src": "rec/vscode-keys-act1/seg-05.mp4",
               "frames": 57,
@@ -341,19 +376,18 @@
                 "Ctrl",
                 "F"
               ],
-              "atWord": 23.167
+              "atWord": 32
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 433,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s06.mp3"
+      "durationFrames": 597,
+      "timingSource": "estimated"
     },
     {
       "id": "s07",
@@ -404,7 +438,7 @@
                 "Shift",
                 "F"
               ],
-              "atWord": 2
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act1#explorer",
@@ -444,7 +478,7 @@
                 "Shift",
                 "E"
               ],
-              "atWord": 13.417
+              "atWord": 21
             },
             {
               "ref": "rec:vscode-keys-act1#terminal",
@@ -471,7 +505,7 @@
                 "Ctrl",
                 "`"
               ],
-              "atWord": 24.167
+              "atWord": 37
             },
             {
               "ref": "rec:vscode-keys-act1#run",
@@ -482,9 +516,40 @@
                   "text": "no mouse touched",
                   "mark": "out",
                   "color": "green",
-                  "atWord": 37.5
+                  "atWord": 57
                 }
               ],
+              "overlay": {
+                "kind": "rows",
+                "color": "purple",
+                "columns": [
+                  "chord",
+                  "where it looks"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "Ctrl+Shift+F",
+                      "every file in the project"
+                    ],
+                    "state": "new"
+                  },
+                  {
+                    "cells": [
+                      "Ctrl+Shift+E",
+                      "back to the file tree"
+                    ],
+                    "state": "plain"
+                  },
+                  {
+                    "cells": [
+                      "Ctrl+`",
+                      "the terminal, one key down"
+                    ],
+                    "state": "kept"
+                  }
+                ]
+              },
               "id": "run",
               "src": "rec/vscode-keys-act1/seg-09.mp4",
               "frames": 66,
@@ -528,19 +593,18 @@
                   "h": 57
                 }
               ],
-              "atWord": 32.833
+              "atWord": 50
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 592,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s07.mp3"
+      "durationFrames": 897,
+      "timingSource": "estimated"
     },
     {
       "id": "s08",
@@ -567,13 +631,12 @@
           ],
           "answerIndex": 1,
           "why": "Quick Open takes a filename directly.",
-          "revealAtWord": 19,
-          "atWord": 1.75
+          "revealAtWord": 23,
+          "atWord": 3
         }
       },
-      "durationFrames": 384,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s08.mp3"
+      "durationFrames": 460,
+      "timingSource": "estimated"
     },
     {
       "id": "s09",
@@ -601,12 +664,11 @@
               "text": "Ctrl+` — the terminal"
             }
           ],
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 298,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s09.mp3"
+      "durationFrames": 436,
+      "timingSource": "estimated"
     },
     {
       "id": "s10",
@@ -621,9 +683,8 @@
           "subtitle": "four that pay for themselves"
         }
       },
-      "durationFrames": 235,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s10.mp3"
+      "durationFrames": 352,
+      "timingSource": "estimated"
     },
     {
       "id": "s11",
@@ -645,7 +706,7 @@
                   "text": "it picked the right marker",
                   "mark": "commented",
                   "color": "blue",
-                  "atWord": 16.583
+                  "atWord": 23
                 }
               ],
               "id": "comment",
@@ -683,12 +744,22 @@
                 "Ctrl",
                 "/"
               ],
-              "atWord": 2.25
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act2#uncomment",
               "label": "and back again",
               "focus": true,
+              "overlay": {
+                "kind": "chain",
+                "color": "green",
+                "steps": [
+                  "caret on the line",
+                  "Ctrl+/",
+                  "commented",
+                  "Ctrl+/ again"
+                ]
+              },
               "id": "uncomment",
               "src": "rec/vscode-keys-act2/seg-02.mp4",
               "frames": 35,
@@ -724,19 +795,18 @@
                 "Ctrl",
                 "/"
               ],
-              "atWord": 27.833
+              "atWord": 38
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 482,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s11.mp3"
+      "durationFrames": 657,
+      "timingSource": "estimated"
     },
     {
       "id": "s12",
@@ -781,7 +851,7 @@
                 "Alt",
                 "↓"
               ],
-              "atWord": 2.5
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act2#deleteline",
@@ -815,12 +885,43 @@
                 "Shift",
                 "K"
               ],
-              "atWord": 16
+              "atWord": 20
             },
             {
               "ref": "rec:vscode-keys-act2#moveline",
               "label": "move it",
               "focus": true,
+              "overlay": {
+                "kind": "rows",
+                "color": "orange",
+                "columns": [
+                  "chord",
+                  "what happens to the line"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "Shift+Alt+Down",
+                      "copied below itself"
+                    ],
+                    "state": "new"
+                  },
+                  {
+                    "cells": [
+                      "Ctrl+Shift+K",
+                      "deleted outright"
+                    ],
+                    "state": "cut"
+                  },
+                  {
+                    "cells": [
+                      "Alt+Up / Down",
+                      "moved past its neighbours"
+                    ],
+                    "state": "kept"
+                  }
+                ]
+              },
               "id": "moveline",
               "src": "rec/vscode-keys-act2/seg-05.mp4",
               "frames": 39,
@@ -848,19 +949,18 @@
                 "Alt",
                 "↓"
               ],
-              "atWord": 28.583
+              "atWord": 35
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 505,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s12.mp3"
+      "durationFrames": 621,
+      "timingSource": "estimated"
     },
     {
       "id": "s13",
@@ -905,7 +1005,7 @@
                 "Alt",
                 "↓"
               ],
-              "atWord": 2.083
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act2#undocursor",
@@ -938,12 +1038,20 @@
                 "Ctrl",
                 "U"
               ],
-              "atWord": 13.75
+              "atWord": 21
             },
             {
               "ref": "rec:vscode-keys-act2#selectline",
               "label": "select the line",
               "focus": true,
+              "overlay": {
+                "kind": "split",
+                "color": "purple",
+                "left": "Ctrl+Alt+Down",
+                "leftNote": "a second caret below",
+                "right": "Ctrl+U",
+                "rightNote": "takes the last one back"
+              },
               "id": "selectline",
               "src": "rec/vscode-keys-act2/seg-08.mp4",
               "frames": 23,
@@ -971,19 +1079,18 @@
                 "Ctrl",
                 "L"
               ],
-              "atWord": 24.75
+              "atWord": 37
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 426,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s13.mp3"
+      "durationFrames": 633,
+      "timingSource": "estimated"
     },
     {
       "id": "s14",
@@ -1001,26 +1108,25 @@
                 "Ctrl",
                 "K"
               ],
-              "atWord": 12.583
+              "atWord": 16
             },
             {
               "keys": [
                 "Ctrl",
                 "0"
               ],
-              "atWord": 20.167
+              "atWord": 25
             }
           ],
           "command": "Fold All",
           "result": "every block collapses",
-          "atWord": 1.667,
-          "commandAtWord": 26.083,
+          "atWord": 3,
+          "commandAtWord": 32,
           "color": "purple"
         }
       },
-      "durationFrames": 475,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s14.mp3"
+      "durationFrames": 580,
+      "timingSource": "estimated"
     },
     {
       "id": "s15",
@@ -1066,12 +1172,18 @@
                 "Ctrl",
                 "0"
               ],
-              "atWord": 2.333
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act2#unfold",
               "label": "and open it up",
               "focus": true,
+              "overlay": {
+                "kind": "swap",
+                "from": "every block open",
+                "to": "Ctrl+K Ctrl+0",
+                "color": "blue"
+              },
               "id": "unfold",
               "src": "rec/vscode-keys-act2/seg-10.mp4",
               "frames": 28,
@@ -1101,19 +1213,18 @@
                 "Ctrl",
                 "J"
               ],
-              "atWord": 14
+              "atWord": 19
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 272,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s15.mp3"
+      "durationFrames": 369,
+      "timingSource": "estimated"
     },
     {
       "id": "s16",
@@ -1140,13 +1251,12 @@
           ],
           "answerIndex": 1,
           "why": "A chord is a sequence of simultaneous presses, not one big one.",
-          "revealAtWord": 15.083,
-          "atWord": 1.583
+          "revealAtWord": 20,
+          "atWord": 3
         }
       },
-      "durationFrames": 326,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s16.mp3"
+      "durationFrames": 424,
+      "timingSource": "estimated"
     },
     {
       "id": "s17",
@@ -1161,9 +1271,8 @@
           "subtitle": "someone else’s project"
         }
       },
-      "durationFrames": 269,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s17.mp3"
+      "durationFrames": 400,
+      "timingSource": "estimated"
     },
     {
       "id": "s18",
@@ -1226,12 +1335,20 @@
                 "Shift",
                 "O"
               ],
-              "atWord": 2.167
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act3#gotoline",
               "label": "jump to a line",
               "focus": true,
+              "overlay": {
+                "kind": "split",
+                "color": "blue",
+                "left": "Ctrl+Shift+O",
+                "leftNote": "this file's symbols",
+                "right": "Ctrl+G",
+                "rightNote": "a line number, from a stack trace"
+              },
               "id": "gotoline",
               "src": "rec/vscode-keys-act3/seg-03.mp4",
               "frames": 59,
@@ -1277,19 +1394,18 @@
                 "Ctrl",
                 "G"
               ],
-              "atWord": 15.333
+              "atWord": 22
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 310,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s18.mp3"
+      "durationFrames": 441,
+      "timingSource": "estimated"
     },
     {
       "id": "s19",
@@ -1369,7 +1485,7 @@
                 "Ctrl",
                 "\\"
               ],
-              "atWord": 2.5
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act3#group2",
@@ -1438,7 +1554,7 @@
                 "Ctrl",
                 "2"
               ],
-              "atWord": 15.667
+              "atWord": 20
             },
             {
               "ref": "rec:vscode-keys-act3#closeone",
@@ -1489,12 +1605,50 @@
                 "Ctrl",
                 "W"
               ],
-              "atWord": 25.583
+              "atWord": 32
             },
             {
               "ref": "rec:vscode-keys-act3#reopen",
               "label": "and undo that",
               "focus": true,
+              "overlay": {
+                "kind": "rows",
+                "color": "green",
+                "columns": [
+                  "chord",
+                  "what it does to the editor"
+                ],
+                "rows": [
+                  {
+                    "cells": [
+                      "Ctrl+\\",
+                      "splits it in two"
+                    ],
+                    "state": "new"
+                  },
+                  {
+                    "cells": [
+                      "Ctrl+2",
+                      "jumps to the second pane"
+                    ],
+                    "state": "plain"
+                  },
+                  {
+                    "cells": [
+                      "Ctrl+W",
+                      "closes an editor"
+                    ],
+                    "state": "cut"
+                  },
+                  {
+                    "cells": [
+                      "Ctrl+Shift+T",
+                      "reopens what you just closed"
+                    ],
+                    "state": "kept"
+                  }
+                ]
+              },
               "id": "reopen",
               "src": "rec/vscode-keys-act3/seg-08.mp4",
               "frames": 22,
@@ -1517,19 +1671,18 @@
                 "Shift",
                 "T"
               ],
-              "atWord": 36.25
+              "atWord": 45
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 605,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s19.mp3"
+      "durationFrames": 753,
+      "timingSource": "estimated"
     },
     {
       "id": "s20",
@@ -1548,19 +1701,18 @@
                 "Shift",
                 "T"
               ],
-              "atWord": 13.667
+              "atWord": 18
             }
           ],
           "command": "Reopen Closed Editor",
           "result": "it comes straight back",
-          "atWord": 1.583,
-          "commandAtWord": 18.5,
+          "atWord": 3,
+          "commandAtWord": 24,
           "color": "green"
         }
       },
-      "durationFrames": 330,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s20.mp3"
+      "durationFrames": 424,
+      "timingSource": "estimated"
     },
     {
       "id": "s21",
@@ -1617,7 +1769,7 @@
                 "K",
                 "Z"
               ],
-              "atWord": 2.5
+              "atWord": 4
             },
             {
               "ref": "rec:vscode-keys-act3#unzen",
@@ -1668,12 +1820,20 @@
                 "Esc",
                 "Esc"
               ],
-              "atWord": 11
+              "atWord": 14
             },
             {
               "ref": "rec:vscode-keys-act3#keyboard",
               "label": "the list itself",
               "focus": true,
+              "overlay": {
+                "kind": "split",
+                "color": "orange",
+                "left": "Ctrl+K Z",
+                "leftNote": "zen mode — the code gets the screen",
+                "right": "Ctrl+K Ctrl+S",
+                "rightNote": "the shortcut list itself"
+              },
               "id": "keyboard",
               "src": "rec/vscode-keys-act3/seg-11.mp4",
               "frames": 93,
@@ -1697,19 +1857,18 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 23.667
+              "atWord": 29
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 488,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s21.mp3"
+      "durationFrames": 597,
+      "timingSource": "estimated"
     },
     {
       "id": "s22",
@@ -1724,9 +1883,8 @@
           "subtitle": "what the browser takes"
         }
       },
-      "durationFrames": 294,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s22.mp3"
+      "durationFrames": 424,
+      "timingSource": "estimated"
     },
     {
       "id": "s23",
@@ -1747,15 +1905,14 @@
           "editorLabel": "VS Code",
           "browserDoes": "closes the whole tab",
           "editorWanted": "never sees the key",
-          "atWord": 1,
-          "pressAtWord": 6.917,
-          "stealAtWord": 14.667,
+          "atWord": 2,
+          "pressAtWord": 9,
+          "stealAtWord": 18,
           "color": "red"
         }
       },
-      "durationFrames": 455,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s23.mp3"
+      "durationFrames": 544,
+      "timingSource": "estimated"
     },
     {
       "id": "s24",
@@ -1775,15 +1932,14 @@
           "editorLabel": "VS Code",
           "browserDoes": "zooms the page",
           "editorWanted": "wanted to resize the font",
-          "atWord": 1,
-          "pressAtWord": 5.583,
-          "stealAtWord": 11.917,
+          "atWord": 2,
+          "pressAtWord": 8,
+          "stealAtWord": 16,
           "color": "orange"
         }
       },
-      "durationFrames": 461,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s24.mp3"
+      "durationFrames": 592,
+      "timingSource": "estimated"
     },
     {
       "id": "s25",
@@ -1810,13 +1966,12 @@
           ],
           "answerIndex": 2,
           "why": "Both are in the same path, and only the first gets a turn.",
-          "revealAtWord": 15.333,
-          "atWord": 1.583
+          "revealAtWord": 20,
+          "atWord": 3
         }
       },
-      "durationFrames": 350,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s25.mp3"
+      "durationFrames": 448,
+      "timingSource": "estimated"
     },
     {
       "id": "s26",
@@ -1844,12 +1999,11 @@
               "text": "Nothing happened? Something took the key"
             }
           ],
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 377,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s26.mp3"
+      "durationFrames": 436,
+      "timingSource": "estimated"
     },
     {
       "id": "s27",
@@ -1861,12 +2015,11 @@
         "outro": {
           "headline": "Pressed, not copied",
           "sub": "all 103 of them",
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 279,
-      "timingSource": "tts",
-      "audio": "audio/vscode-shortcuts_long_s27.mp3"
+      "durationFrames": 448,
+      "timingSource": "estimated"
     }
   ]
 }
