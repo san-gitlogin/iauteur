@@ -27,14 +27,50 @@
 // a real staleness. For a gate whose failure mode is "you shipped a bug you had already
 // fixed", erring toward re-rendering is the correct bias.
 //
+// SCOPE IS THE WHOLE DIFFICULTY, and the first version got it wrong.
+//
+// Run across every topic, this seal reported 87 of 91 renders stale — because ~90 archived
+// videos are all older than the current `src/`, which is true, unactionable, and precisely the
+// "gate you learn to ignore" failure this file's own commit message warns about. A video that
+// shipped six weeks ago is not stale; it is FINISHED. `src/` has moved on and nobody intends
+// to re-render it.
+//
+// So the default scope is WHAT YOU ARE WORKING ON, taken from git: any topic with uncommitted
+// changes, or touched by the last few commits. That is exactly the set where "did I remember to
+// re-render?" is a live question — and it is the set the original mistake lived in.
+//
 // Usage:
-//   node scripts/check-fresh.mjs                 every topic that has rendered output
+//   node scripts/check-fresh.mjs                 topics in flight (uncommitted or recent)
 //   node scripts/check-fresh.mjs <slug> [...]    just these
+//   node scripts/check-fresh.mjs --all           every topic — expect archive noise
 import fs from 'node:fs';
 import path from 'node:path';
+import {execSync} from 'node:child_process';
 
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 const quiet = process.argv.includes('--quiet');
+const all = process.argv.includes('--all');
+
+/** Topic slugs git says are in flight: uncommitted, or touched in the last N commits. */
+const inFlight = (commits = 8) => {
+  const slugs = new Set();
+  const collect = (out) => {
+    for (const line of String(out).split(/\r?\n/)) {
+      const m = /(?:^|\s)topics[\/\\]([^\/\\]+)[\/\\]/.exec(line);
+      if (m) slugs.add(m[1]);
+    }
+  };
+  try {
+    // SKIP UNTRACKED. `git status --porcelain` marks a never-committed directory `??`, and this
+    // repo has ~90 of them — old topic folders that were never added. They are not "in flight",
+    // they have simply never been committed, and counting them put the whole archive back in
+    // scope (62 topics, 58 "stale"), which is the noise this scoping exists to remove.
+    const st = execSync('git status --porcelain -- topics', {encoding: 'utf8'});
+    collect(String(st).split(/\r?\n/).filter((l) => !l.startsWith('??')).join('\n'));
+  } catch { /* not a repo */ }
+  try { collect(execSync(`git log --name-only --pretty=format: -${commits} -- topics`, {encoding: 'utf8'})); } catch { /* shallow or empty */ }
+  return [...slugs];
+};
 
 /** Newest mtime under a directory tree, in ms. Skips nothing — a stylesheet counts. */
 const newestUnder = (dir) => {
@@ -66,9 +102,16 @@ const ago = (ms) => {
 // The renderer. Every video is a function of this, so a change here dates every output.
 const SRC = newestUnder('src');
 
-const slugs = args.length
-  ? args
-  : fs.readdirSync('topics', {withFileTypes: true}).filter((e) => e.isDirectory()).map((e) => e.name);
+const everySlug = () => fs.readdirSync('topics', {withFileTypes: true})
+  .filter((e) => e.isDirectory()).map((e) => e.name);
+
+const slugs = args.length ? args : all ? everySlug() : inFlight();
+const scope = args.length ? 'named' : all ? 'all' : 'in flight (git)';
+
+if (!slugs.length) {
+  console.log('✓ FRESHNESS SEAL — no topic is in flight, so nothing can be stale');
+  process.exit(0);
+}
 
 const stale = [];
 const fresh = [];
@@ -114,7 +157,7 @@ for (const slug of slugs) {
 }
 
 if (!checked) {
-  console.log('no rendered output found — nothing to check');
+  console.log(`no rendered output among ${slugs.length} ${scope} topic(s) — nothing to check`);
   process.exit(0);
 }
 
@@ -130,4 +173,7 @@ if (stale.length) {
   process.exit(1);
 }
 
-if (!quiet) console.log(`✓ FRESHNESS SEAL — all ${checked} rendered file(s) are newer than their spec, their audio and src/`);
+if (!quiet) {
+  console.log(`✓ FRESHNESS SEAL — all ${checked} rendered file(s) across ${slugs.length} ${scope} ` +
+    `topic(s) are newer than their spec, their audio and src/`);
+}
