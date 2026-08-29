@@ -301,7 +301,14 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     const rows = (d.premise ? 1 : 0) + (d.caption ? 1 : 0) + (split ? 0 : 1) +
       (anyKeys && !compact ? 1 : 0) + (hasOverlay ? 1 : 0);
     return ((d.premise ? (compact ? 30 : 60) : 0) + (d.caption ? 46 : 0) + (split ? 0 : 44) +
-      (anyKeys && !compact ? 48 : 0) + (hasOverlay ? 56 : 0) +
+      (anyKeys && !compact ? 48 : 0) +
+      // A `rows` overlay is a TABLE, not a chip — reserving one line for it put a five-row card
+      // half on top of the terminal. Reserve what it will actually occupy.
+      (hasOverlay ? (() => {
+        const o = clips.find((c) => c.overlay)?.overlay as {kind?: string; rows?: unknown[]} | undefined;
+        if (o?.kind === 'rows') return 34 + (o.rows?.length ?? 0) * 34;
+        return 56;
+      })() : 0) +
       Math.max(0, rows - 1) * 10 + (compact ? 12 : 34)) * scale;
   };
   const clusterHFull = measure(false);
@@ -801,115 +808,124 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             cannot drift from the take: if the demo stops pressing Ctrl+S, the keycaps stop
             saying Ctrl+S. This is the one overlay that answers "what did you just DO",
             which a screen recording otherwise leaves invisible. */}
-        {/* THE OVERLAY CARD.
-            Owner: *"Use cards for overlay, not some line that blurs the entire wide screen like a
-            ribbon and shitty default font on the top, with non-responsive animations stuffed
-            within the ribbon's width, along with shitty step boxes highlighting as you speak."*
+        {/* THE OVERLAY CARD — in BOTH aspects, positionable, and it STAYS while a step is
+            being explained.
 
-            He is right, and what he is describing is exactly what the previous version was: a
-            full-width scrim band with a body-font line, a row of pills and a caption stacked
-            inside it. A band spanning 1920px is not a component, it is a letterbox — and it dimmed
-            a third of the footage to carry text that occupies a quarter of the width.
-
-            THIS IS A CARD. Rounded, glass, its own depth shadow, sized to its contents and never
-            wider than about two thirds of the frame. Type follows the theme's roles: the takeaway
-            in the DISPLAY face because it is a statement, the standing setup in MONO, small and
-            letterspaced, the way a subtitle sits under a title on a real slide.
-
-            AND IT COMES AND GOES. Owner: *"that overlay is being shown constantly until your
-            explanation completes of the steps. Dude I dont like that."* Each clip's card fades in
-            when its step starts and fades out before the next one, so the footage breathes between
-            beats instead of being permanently letterboxed. */}
+            Three owner notes, all acted on here:
+            · *"in shorts i dont see anything changed"* — the card was gated on `fullBleed`, so 9:16
+              still got the old stack of pills and a caption jammed under the video. It renders in
+              both now, and in 9:16 it sits BELOW the footage with a real gap, because
+              *"there must be gap in between the container box which holds the video, and the one
+              row all of them text."*
+            · *"I would like to see it stay, whenever something is being explained"* — the earlier
+              version faded out early. It now holds for the whole step and only crosses over at the
+              boundary into the next one, so it is present whenever there is something to read and
+              still re-animates per beat rather than being one permanent block.
+            · *"The position of the glassmorphic card, and its width and length must be
+              adjustable... it can be a square, a vertical rectangle, a 4:3 or 3:4"* — `card.place`,
+              `card.aspect` and `card.width` do that, so a beat that explains code can park a narrow
+              portrait card beside it instead of a strip across it. */}
         {(() => {
-          if (!fullBleed) return null;
-          // The card's own life: in at this step, out before the next one takes over.
           const nextStart = active + 1 < starts.length ? starts[active + 1] : (scene.durationFrames ?? 1e6);
-          const IN = 12, OUT = 16, TAIL = 20;
-          const outAt = Math.max(curStart + IN + 24, nextStart - TAIL - OUT);
+          const IN = 12, OUT = 10;
+          // HOLD until the next step actually takes over — the fade is a crossover, not an exit.
           const life = interpolate(
             frame,
-            [curStart, curStart + IN, outAt, outAt + OUT],
-            [0, 1, 1, 0],
+            [curStart, curStart + IN, Math.max(curStart + IN + 6, nextStart - OUT), nextStart],
+            [0, 1, 1, active + 1 < starts.length ? 0 : 1],
             clamp,
           );
           if (life <= 0.001) return null;
+
+          const cardCfg = d.card ?? {};
+          const wFrac = Math.min(0.92, Math.max(0.2, Number(cardCfg.width ?? (vertical ? 0.9 : 0.62))));
+          const cardW = frameW * wFrac;
+          const ASPECT = {wide: 16 / 6, square: 1, portrait: 3 / 4, '4:3': 4 / 3, '3:4': 3 / 4};
+          const ratio = ASPECT[cardCfg.aspect as keyof typeof ASPECT];
+          // `auto` lets the content decide the height, which is right for a line of text; a named
+          // aspect pins it, which is what a diagram or a table needs.
+          const cardH = ratio ? cardW / ratio : undefined;
+
+          const place = cardCfg.place ?? 'auto';
+          const pad = 42 * scale;
+          const pos: React.CSSProperties = {};
+          if (place === 'auto') {
+            if (fullBleed) {
+              pos.left = 0; pos.right = 0;
+              pos[hasGap || clusterAtTop ? 'top' : 'bottom'] = clusterInset;
+            } else {
+              pos.left = 0; pos.right = 0; pos.bottom = pad;
+            }
+          } else {
+            if (place.includes('left')) pos.left = pad;
+            else if (place.includes('right')) pos.right = pad;
+            else { pos.left = 0; pos.right = 0; }
+            if (place.includes('top')) pos.top = pad;
+            else if (place.includes('bottom')) pos.bottom = pad;
+            else if (place === 'center') { pos.top = 0; pos.bottom = 0; }
+            else { pos.bottom = pad; }
+          }
+          const justify = place.includes('left') ? 'flex-start'
+            : place.includes('right') ? 'flex-end' : 'center';
 
           const glass = hexA(t.colors.panel, 0.66);
           const edge = hexA(t.colors.text, 0.13);
 
           return (
             <div style={{
-              position: 'absolute', left: 0, right: 0,
-              [hasGap || clusterAtTop ? 'top' : 'bottom']: clusterInset,
-              zIndex: 3, display: 'flex', justifyContent: 'center',
-              opacity: life,
-              // rises a touch as it arrives, settles as it goes — a card, not a light switch
+              position: 'absolute', ...pos, zIndex: 3,
+              display: 'flex', justifyContent: justify,
+              alignItems: place === 'center' ? 'center' : undefined,
+              pointerEvents: 'none', opacity: life,
               transform: `translateY(${(1 - life) * 10 * scale}px)`,
             }}>
               <div style={{
-                maxWidth: frameW * 0.66, minWidth: frameW * 0.3,
-                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                width: cardW, ...(cardH ? {height: cardH} : {}),
+                display: 'flex', flexDirection: 'column',
+                alignItems: 'center', justifyContent: 'center',
                 gap: 10 * scale,
-                padding: `${(compact ? 14 : 20) * scale}px ${(compact ? 22 : 30) * scale}px`,
+                padding: `${(compact ? 14 : 20) * scale}px ${(compact ? 20 : 28) * scale}px`,
                 borderRadius: 20 * scale * t.style.cornerRadius,
                 background: glass,
                 backdropFilter: 'blur(20px) saturate(1.25)',
                 border: `${1 * scale}px solid ${edge}`,
-                // depth: a real shadow below, and a hairline of light along the top edge, which is
-                // what makes glass read as glass rather than as a grey box
                 boxShadow: `0 ${22 * scale}px ${54 * scale}px ${hexA('#000000', 0.5)},`
                   + ` inset 0 ${1 * scale}px 0 ${hexA(t.colors.text, 0.14)}`,
+                overflow: 'hidden',
               }}>
-                {/* THE TAKEAWAY — a statement, so the display face (LAW: typography roles) */}
                 {d.caption ? (
                   <div style={{
                     fontFamily: t.fonts.display,
                     fontWeight: t.style.displayWeight,
                     letterSpacing: t.style.displayTracking,
-                    fontSize: (compact ? 26 : 31) * scale,
-                    lineHeight: 1.12,
-                    color: t.colors.text,
-                    textAlign: 'center',
+                    fontSize: (compact ? 25 : 30) * scale,
+                    lineHeight: 1.12, color: t.colors.text, textAlign: 'center',
                   }}>{d.caption}</div>
                 ) : null}
 
-                {/* THE STANDING SETUP — small, letterspaced mono, the way a subtitle sits under a
-                    title. In body it rendered as neutral Inter, which is what "default fonts"
-                    looks like next to Space Grotesk. */}
                 {d.premise ? (
                   <div style={{
                     fontFamily: mono,
                     fontSize: (compact ? 14 : 15.5) * scale,
-                    letterSpacing: 1.1,
-                    lineHeight: 1.4,
-                    color: hexA(t.colors.text, 0.62),
-                    textAlign: 'center',
+                    letterSpacing: 1.1, lineHeight: 1.4,
+                    color: hexA(t.colors.text, 0.62), textAlign: 'center',
                   }}>{d.premise}</div>
                 ) : null}
 
-                {/* THE ANIMATED EXPLAINER, inside the card and sized to it */}
                 {cur.overlay ? (
                   <StepOverlay
                     data={cur.overlay as any}
                     fallbackAtWord={cur.atWord}
-                    maxWidth={frameW * 0.58}
+                    maxWidth={cardW * 0.9}
                   />
                 ) : null}
 
-                {/* PROGRESS, not a row of buttons.
-                    A pill per step, all lit at once, was four labels competing with the caption —
-                    and only one of them was ever true. This is a rule of segments with the current
-                    one filled, plus that step's name. One fact, one line. */}
                 {!split && clips.length > 1 ? (
-                  <div style={{
-                    display: 'flex', alignItems: 'center', gap: 9 * scale,
-                    marginTop: 2 * scale,
-                  }}>
+                  <div style={{display: 'flex', alignItems: 'center', gap: 9 * scale, marginTop: 2 * scale}}>
                     <div style={{display: 'flex', gap: 4 * scale}}>
                       {clips.map((_, i) => (
                         <div key={i} style={{
-                          width: (i === active ? 20 : 9) * scale, height: 3 * scale,
-                          borderRadius: 999,
+                          width: (i === active ? 20 : 9) * scale, height: 3 * scale, borderRadius: 999,
                           background: i === active ? accent
                             : hexA(t.colors.text, frame >= starts[i] ? 0.32 : 0.14),
                         }} />
@@ -926,11 +942,9 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           );
         })()}
 
-        {/* THE KEYCAPS — mid-bottom, on their own, nowhere near the card.
-            Owner: *"Displaying the shortcut keys pressed, you can display at the mid bottom, like
-            how you have corrected that it shows up and disappears as expected."* A chord is an
-            EVENT: it presses in, holds long enough to read, and releases. */}
-        {fullBleed && (cur.keys ?? []).length ? (() => {
+        {/* THE KEYCAPS — mid-bottom, on their own, nowhere near the card. A chord is an EVENT:
+            it presses in, holds long enough to read, and releases. */}
+        {(cur.keys ?? []).length ? (() => {
           const kStart = wordToFrame(cur.keysAtWord ?? cur.atWord ?? 1);
           if (frame < kStart) return null;
           const K_IN = 8, K_HOLD = 40, K_OUT = 14;
@@ -943,7 +957,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           if (kp <= 0.001) return null;
           return (
             <div style={{
-              position: 'absolute', left: 0, right: 0, bottom: frameH * 0.08,
+              position: 'absolute', left: 0, right: 0, bottom: frameH * (vertical ? 0.05 : 0.08),
               zIndex: 4, display: 'flex', gap: 9 * scale,
               alignItems: 'center', justifyContent: 'center', opacity: kp,
             }}>
@@ -969,36 +983,6 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             </div>
           );
         })() : null}
-
-        {/* CARD LAYOUT (not full-bleed) keeps the old stacked furniture. */}
-        {!fullBleed ? (
-          <>
-            {split ? null : (
-              <div style={{display: 'flex', gap: 8 * scale, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: stageW}}>
-                {clips.map((c, i) => {
-                  const on = i === active;
-                  const done = frame >= starts[i];
-                  return (
-                    <div key={i} style={{
-                      fontFamily: mono, fontSize: 15 * scale,
-                      padding: `${5 * scale}px ${11 * scale}px`, borderRadius: 999,
-                      color: on ? t.colors.bg : hexA(t.colors.text, done ? 0.75 : 0.34),
-                      background: on ? accent : hexA(t.colors.text, done ? 0.1 : 0.04),
-                      border: `${1 * scale}px solid ${on ? accent : hexA(t.colors.text, 0.12)}`,
-                    }}>{i + 1}. {String(c.label ?? c.id ?? 'step')}</div>
-                  );
-                })}
-              </div>
-            )}
-            {d.caption ? (
-              <div style={{
-                fontFamily: t.fonts.display, fontSize: 23 * scale,
-                fontWeight: t.style.displayWeight, letterSpacing: t.style.displayTracking,
-                color: hexA(t.colors.text, 0.9), textAlign: 'center', maxWidth: stageW,
-              }}>{d.caption}</div>
-            ) : null}
-          </>
-        ) : null}
       </AbsoluteFill>
 
       {scene.data.source ? <SourceFooter text={String(scene.data.source)} /> : null}

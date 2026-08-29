@@ -156,15 +156,34 @@ const brand = {
     {recordedStep: {
       caption: 'SCAN became SEARCH',
       premise: 'The identical query, before and after one CREATE INDEX.',
+      // LET THE SOLVER PLACE IT. `place:'right'` was tried first and dropped the card straight onto
+      // the terminal — the one region this beat is about. The ink-band measurement already knows
+      // where the marks are; the card just needs to be narrow enough to sit in the space it finds.
+      card: {width: 0.46},
       clips: [
+        // THE CARD SHOWS THE TABLE, not a caption about the table. Six orders go in; five are cut
+        // and one is kept, which is the whole difference between a scan and a seek — and it reads
+        // with the sound off (LAW 0d).
         clip('rec:sqlite-act2#plan-before', 'the plan, before', {
           zooms: [{mark: 'scan'}],
           callouts: [{text: 'reads every row', mark: 'scan', color: 'orange'}],
+          overlay: {kind: 'rows', columns: ['order', 'product'], color: 'orange', rows: [
+            {cells: ['order 1', 'product 2'], state: 'cut'},
+            {cells: ['order 2', 'product 3'], state: 'cut'},
+            {cells: ['order 3', 'product 4'], state: 'cut'},
+            {cells: ['order 4', 'product 2'], state: 'cut'},
+            {cells: ['order 5', 'product 1'], state: 'kept'},
+          ]},
         }),
-        clip('rec:sqlite-act2#index', 'add the index'),
+        clip('rec:sqlite-act2#index', 'add the index', {
+          overlay: {kind: 'swap', from: 'SCAN', to: 'SEARCH', color: 'green'},
+        }),
         clip('rec:sqlite-act2#plan-after', 'the plan, after', {
           zooms: [{mark: 'search'}, {at: 'full'}],
           callouts: [{text: 'straight to the rows', mark: 'search', color: 'green'}],
+          overlay: {kind: 'rows', columns: ['order', 'product'], color: 'green', rows: [
+            {cells: ['order 5', 'product 1'], state: 'kept'},
+          ]},
         }),
       ],
     }}, 8);

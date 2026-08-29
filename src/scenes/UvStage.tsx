@@ -68,7 +68,7 @@ export const UvStage: React.FC<{scene: Scene}> = ({scene}) => {
           <div
             style={{
               flex: '0 0 auto',
-              fontFamily: t.fonts.body,
+              fontFamily: t.fonts.mono, letterSpacing: 0.9,
               fontSize: (vertical ? 21 : 17) * scale,
               lineHeight: 1.4,
               color: hexA(t.colors.muted, 0.95),

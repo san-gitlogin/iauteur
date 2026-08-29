@@ -58,7 +58,7 @@
       },
       "durationFrames": 175,
       "timingSource": "tts",
-      "audio": "audio/sqlite_scan_long_s01.mp3"
+      "audio": "audio/svs_long_s01.mp3"
     },
     {
       "id": "s02",
@@ -106,7 +106,7 @@
       },
       "durationFrames": 548,
       "timingSource": "tts",
-      "audio": "audio/sqlite_scan_long_s02.mp3"
+      "audio": "audio/svs_long_s02.mp3"
     },
     {
       "id": "s03",
@@ -118,6 +118,9 @@
         "recordedStep": {
           "caption": "SCAN became SEARCH",
           "premise": "The identical query, before and after one CREATE INDEX.",
+          "card": {
+            "width": 0.46
+          },
           "clips": [
             {
               "ref": "rec:sqlite-act2#plan-before",
@@ -126,7 +129,7 @@
               "zooms": [
                 {
                   "mark": "scan",
-                  "atWord": 24.167
+                  "atWord": 23.25
                 }
               ],
               "callouts": [
@@ -134,9 +137,54 @@
                   "text": "reads every row",
                   "mark": "scan",
                   "color": "orange",
-                  "atWord": 30.167
+                  "atWord": 29.333
                 }
               ],
+              "overlay": {
+                "kind": "rows",
+                "columns": [
+                  "order",
+                  "product"
+                ],
+                "color": "orange",
+                "rows": [
+                  {
+                    "cells": [
+                      "order 1",
+                      "product 2"
+                    ],
+                    "state": "cut"
+                  },
+                  {
+                    "cells": [
+                      "order 2",
+                      "product 3"
+                    ],
+                    "state": "cut"
+                  },
+                  {
+                    "cells": [
+                      "order 3",
+                      "product 4"
+                    ],
+                    "state": "cut"
+                  },
+                  {
+                    "cells": [
+                      "order 4",
+                      "product 2"
+                    ],
+                    "state": "cut"
+                  },
+                  {
+                    "cells": [
+                      "order 5",
+                      "product 1"
+                    ],
+                    "state": "kept"
+                  }
+                ]
+              },
               "id": "plan-before",
               "src": "rec/sqlite-act2/seg-07.mp4",
               "frames": 207,
@@ -166,6 +214,12 @@
               "ref": "rec:sqlite-act2#index",
               "label": "add the index",
               "focus": true,
+              "overlay": {
+                "kind": "swap",
+                "from": "SCAN",
+                "to": "SEARCH",
+                "color": "green"
+              },
               "id": "index",
               "src": "rec/sqlite-act2/seg-08.mp4",
               "frames": 195,
@@ -175,7 +229,6 @@
                 "w": 1252,
                 "h": 300
               },
-              "atWord": 36.167,
               "marks": {
                 "cmd": {
                   "x": 562,
@@ -183,7 +236,8 @@
                   "w": 273,
                   "h": 19
                 }
-              }
+              },
+              "atWord": 34.5
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -203,6 +257,23 @@
                   "atWord": 82.75
                 }
               ],
+              "overlay": {
+                "kind": "rows",
+                "columns": [
+                  "order",
+                  "product"
+                ],
+                "color": "green",
+                "rows": [
+                  {
+                    "cells": [
+                      "order 5",
+                      "product 1"
+                    ],
+                    "state": "kept"
+                  }
+                ]
+              },
               "id": "plan-after",
               "src": "rec/sqlite-act2/seg-09.mp4",
               "frames": 223,
@@ -226,7 +297,7 @@
                   "h": 19
                 }
               },
-              "atWord": 65.5
+              "atWord": 64.667
             }
           ],
           "capture": {
@@ -238,7 +309,7 @@
       },
       "durationFrames": 1272,
       "timingSource": "tts",
-      "audio": "audio/sqlite_scan_long_s03.mp3"
+      "audio": "audio/svs_long_s03.mp3"
     },
     {
       "id": "s04",
@@ -252,7 +323,7 @@
       },
       "durationFrames": 181,
       "timingSource": "tts",
-      "audio": "audio/sqlite_scan_long_s04.mp3"
+      "audio": "audio/svs_long_s04.mp3"
     }
   ]
 }

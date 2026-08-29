@@ -127,8 +127,22 @@ export const HookStage: React.FC<{scene: Scene; kit?: HookKit}> = ({scene, kit =
 
   const headline = String(d.headline ?? '');
   const sub = d.subtext ? String(d.subtext) : '';
-  const hAt = wordToFrame(d.headlineAtWord ?? 1);
-  const mAt = wordToFrame(d.heroAtWord ?? 3);
+  // THE WHOLE OPENING LANDS INSIDE THREE SECONDS, AND THE MARK NEVER TRAILS THE WORDS.
+  //
+  // Owner: *"there is a persisting issue that I see with the title hook, where the text appears
+  // first, you are saying something and then the icon animation comes in. It feels odd. The
+  // animations all must complete within 3 seconds, while the logo alone comes in after sometime
+  // which needs a fix on all the hooks different varieties that you created."*
+  //
+  // The cause was that `heroAtWord` is authored per spec — 6, 8, sometimes 13 — and it was taken
+  // literally, so the mark arrived seconds after the headline it belongs to. An opening is
+  // FURNITURE, not a stepped explanation: LAW 8 already caps a component's base at 38 frames for
+  // exactly this reason. So both anchors are clamped into the first three seconds, and the mark is
+  // never allowed to land more than a beat after the headline. `reveal` is the one silhouette that
+  // wants the mark FIRST, and clamping preserves that because its mark anchor is already earlier.
+  const HOOK_CEIL = 90;           // 3s at 30fps — nothing in an opening starts after this
+  const hAt = Math.min(wordToFrame(d.headlineAtWord ?? 1), 30);
+  const mAt = Math.min(wordToFrame(d.heroAtWord ?? 3), HOOK_CEIL - 30, hAt + 10);
 
   const fig = figureIn(headline, sub);
   const pool: string[] = [...NEUTRAL];

@@ -82,7 +82,7 @@ export const TransactionDoor: React.FC<{scene: Scene}> = ({scene}) => {
         {d.premise ? (
           <div style={{
             height: premiseH, display: 'flex', alignItems: 'center',
-            fontFamily: t.fonts.body, fontSize: (vertical ? 28 : 24) * scale,
+            fontFamily: t.fonts.mono, letterSpacing: 0.9, fontSize: (vertical ? 28 : 24) * scale,
             color: t.colors.muted, lineHeight: 1.35,
           }}>{d.premise}</div>
         ) : null}

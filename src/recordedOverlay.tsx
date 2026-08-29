@@ -42,6 +42,9 @@ export type StepOverlayData = {
   rightNote?: string;
   value?: string;
   label?: string;
+  /** `rows` — the table itself, and what this step does to it */
+  columns?: string[];
+  rows?: {cells?: string[]; state?: 'kept' | 'cut' | 'new' | 'plain'; atWord?: number}[];
   color?: SemColor;
 };
 
@@ -171,6 +174,69 @@ export const StepOverlay: React.FC<{
             </span>
           ) : null}
         </span>
+      </div>
+    );
+  }
+
+  // ── ROWS — THE TABLE, AND WHAT THIS STEP DID TO IT.
+  //
+  //    Owner: *"the text you put there is certainly very much AI-ish, I would like it to have
+  //    meaningful animation components and data rather than just showing texts and moving the
+  //    animation within them. Maybe you can display what happens in the table."*
+  //
+  //    He is right that a caption plus a moving chip is still a caption. This is the actual data:
+  //    the rows the query touched, arriving one at a time at their own anchors, each one KEPT,
+  //    CUT or NEW. A viewer can read the result of a WHERE off this without hearing a word, which
+  //    is the test LAW 0d sets — would it still teach with the sound off?
+  if (data.kind === 'rows') {
+    const cols = (data.columns ?? []).slice(0, 3);
+    const rows = (data.rows ?? []).slice(0, 5);
+    const cut = sem('red'), kept = sem('green'), fresh = sem('purple');
+    const toneOf = (st?: string) => st === 'cut' ? cut : st === 'new' ? fresh : st === 'kept' ? kept : accent;
+    return (
+      <div style={{...wrap, flexDirection: 'column', gap: 5 * scale, width: '100%'}}>
+        {cols.length ? (
+          <div style={{display: 'flex', width: '100%', gap: 10 * scale, padding: `0 ${11 * scale}px`}}>
+            {cols.map((c, i) => (
+              <span key={i} style={{
+                flex: i === 0 ? 2 : 1, minWidth: 0,
+                fontFamily: t.fonts.mono, fontSize: mono * 0.62,
+                letterSpacing: 1.2, textTransform: 'uppercase',
+                color: hexA(t.colors.muted, 0.9),
+                textAlign: i === 0 ? 'left' : 'right',
+              }}>{c}</span>
+            ))}
+          </div>
+        ) : null}
+        {rows.map((r, i) => {
+          const at = wordToFrame(r.atWord ?? data.atWord ?? 1);
+          const on = arriveAt(frame, at, 14);
+          const tone = toneOf(r.state);
+          const gone = r.state === 'cut' ? travelAt(frame, at + 8, 16) : 0;
+          return (
+            <div key={i} style={{
+              display: 'flex', width: '100%', alignItems: 'center', gap: 10 * scale,
+              padding: `${6 * scale}px ${11 * scale}px`,
+              borderRadius: radius,
+              border: `${1.2 * scale}px solid ${hexA(tone, 0.15 + 0.45 * on)}`,
+              background: hexA(tone, 0.06 + 0.07 * on),
+              opacity: (0.25 + 0.75 * on) * (1 - 0.55 * gone),
+              // a row that is CUT slides out of the result rather than merely dimming
+              transform: `translateX(${gone * 14 * scale}px)`,
+            }}>
+              {(r.cells ?? []).slice(0, 3).map((cell, j) => (
+                <span key={j} style={{
+                  flex: j === 0 ? 2 : 1, minWidth: 0,
+                  fontFamily: t.fonts.mono, fontSize: mono * 0.86,
+                  color: j === 0 ? t.colors.text : tone,
+                  textAlign: j === 0 ? 'left' : 'right',
+                  textDecoration: r.state === 'cut' && gone > 0.4 ? 'line-through' : 'none',
+                  overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                }}>{cell}</span>
+              ))}
+            </div>
+          );
+        })}
       </div>
     );
   }

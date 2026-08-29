@@ -2146,6 +2146,9 @@ export interface RecordedClip {
     rightNote?: string;
     value?: string;
     label?: string;
+    /** `rows` — the table this step touched, and what happened to each row */
+    columns?: string[];
+    rows?: {cells?: string[]; state?: 'kept' | 'cut' | 'new' | 'plain'; atWord?: number}[];
     color?: SemColor;
   };
   /** Dim everything but the bbox for this step. */
@@ -2155,6 +2158,24 @@ export interface RecordedClip {
 }
 export interface RecordedStepData {
   clips?: RecordedClip[];
+  /**
+   * THE OVERLAY CARD's geometry. It is not always a wide strip.
+   *
+   * Owner: *"The position of the glassmorphic card, and its width and length must be adjustable.
+   * Its not always a rectangular shape, it can be a square, a vertical rectangle, a 4:3 or 3:4
+   * etc., it can be placed at place where it doesnt disturb the main content."*
+   *
+   * `place` picks a corner or edge; `auto` keeps the measured ink-free band. `aspect` shapes the
+   * card so a sequence diagram can be tall and a table can be square. `width` is a fraction of the
+   * frame, so the card can be small enough to sit beside code rather than across it.
+   */
+  card?: {
+    place?: 'auto' | 'center' | 'top' | 'bottom' | 'left' | 'right'
+      | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+    aspect?: 'auto' | 'wide' | 'square' | 'portrait' | '4:3' | '3:4';
+    /** fraction of the frame width, 0.2–0.9 */
+    width?: number;
+  };
   /**
    * How the footage sits in the frame.
    *  full  (default) — the footage IS the frame; overlays ride on top of it.
