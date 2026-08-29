@@ -321,7 +321,24 @@ if (narrations.length >= 6) {
   //    and so missed almost all of them: measured ~54 bare pronouns per episode while
   //    the actual subject was named 1-5 times in 880 words. Owner: *"when you say IT,
   //    what is IT?"* Naming the subject repeatedly is clarity, not repetition.
-  const bare = (allText.match(/\b(it|its|it's|this|that|they|them|those|these)\b/gi) ?? []).length;
+  //    ⚠ THE GUARD WAS COUNTING ITS OWN REMEDY (measured 2026-08-29, on the VS Code cut).
+  //    The old pattern matched every `this|that|those|these`, which sweeps up the DETERMINER
+  //    use — "that card", "this file", "that chord" — and the RELATIVE use — "the one that
+  //    confuses everybody". Neither is a vague reference; the first is naming the subject,
+  //    which is precisely what this warning's own message tells you to do ("that trace file"
+  //    appears in the remedy text and was scored as the disease). Measured on one 1037-word
+  //    script: 47 raw matches, of which 21 were determiners — the guard was inflating every
+  //    spec it has ever judged by roughly 45%, and the honest number was 2.5% against a 4.5%
+  //    threshold. Chasing that phantom degrades narration, which is the opposite of the point.
+  //
+  //    So: `it`/`its`/`they`/`them` always count — they are always pronouns. A demonstrative
+  //    counts only when it stands alone as the SUBJECT ("That's it", "this is why"), which is
+  //    the vague-reference case the owner actually complained about. The THRESHOLD is
+  //    untouched; only the thing being counted is corrected.
+  const ALWAYS = /\b(it|its|it's|they|them)\b/gi;
+  const DEMONSTRATIVE_SUBJECT = /\b(this|that|those|these)\s*(?:'s|\b(?:is|are|was|were|will|would|can|could|should|means|meant|makes|made|does|did|has|have|had|leaves|changes|matters|works|happens|stops|takes)\b|[,.;:!?—-]|$)/gi;
+  const bare = (allText.match(ALWAYS) ?? []).length +
+    (allText.match(DEMONSTRATIVE_SUBJECT) ?? []).length;
   if (wordTotal >= 250 && bare / wordTotal > 0.045)
     W(`PRONOUN DENSITY ${(bare / wordTotal * 100).toFixed(1)}%: ${bare} bare it/this/that/they in ${wordTotal} words — roughly one every ${Math.round(wordTotal / bare)}. Name the subject instead: Playwright, the locator, your test, that trace file. Repeating a NAME is clarity.`);
 
