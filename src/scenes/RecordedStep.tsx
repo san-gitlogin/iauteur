@@ -118,7 +118,24 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   const sideW = split ? 430 * scale : 0;
   // When the rail moves into the side panel it stops costing vertical space, so the
   // footage gets that height back.
-  const chromeH = (d.premise ? 96 : 0) + (d.caption ? 52 : 0) + (anyKeys ? 62 : 0) + (split ? 0 : 66) + 80;
+  // THE CARD IS NOW A SIBLING OF THE VIDEO, SO THE VIDEO HAS TO BUDGET FOR IT (LAW 0o.1 —
+  // measure, never assume). The old figure reserved 66px for the pill row the card replaced;
+  // a card carrying a five-row table is four times that, and the surplus came out of the
+  // bottom of the frame. Reserved from the card's own contents, the same way the full-bleed
+  // cluster measures itself.
+  const cardChrome = (() => {
+    const o = clips.find((c) => c.overlay)?.overlay as
+      {kind?: string; rows?: unknown[]; nodes?: unknown[]; messages?: unknown[]} | undefined;
+    let body = 0;
+    if (o?.kind === 'rows') body = 30 + (o.rows?.length ?? 0) * 40;
+    else if (o?.kind === 'graph') body = 40 + Math.min(3, o.nodes?.length ?? 0) * 62;
+    else if (o?.kind === 'seq') body = 54 + (o.messages?.length ?? 0) * 34;
+    else if (o) body = 56;
+    // caption + premise (full-bleed only) + the step rule + the card's own padding and the
+    // gap between it and the video.
+    return (d.caption ? 46 : 0) + body + (clips.length > 1 ? 30 : 0) + 58 + 18;
+  })();
+  const chromeH = (d.premise ? 96 : 0) + (anyKeys ? 62 : 0) + (split ? 0 : cardChrome) + 80;
   const availW = ((vertical ? 1010 : 1220) * scale) - sideW;
   const availH = ((vertical ? 1920 : 1080) * scale) - headH - chromeH * scale;
 
@@ -426,7 +443,10 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
       <AbsoluteFill
         style={{
           alignItems: 'center',
-          justifyContent: fullBleed ? 'flex-start' : 'center',
+          // LAW 0o.4 — centred flex content that outgrows its box pushes out of the TOP as
+          // well as the bottom. `safe center` degrades to flex-start exactly when it would
+          // otherwise overflow, which is what the card being in flow makes possible.
+          justifyContent: fullBleed ? 'flex-start' : 'safe center',
           flexDirection: 'column',
           gap: fullBleed ? 0 : 16 * scale,
           paddingTop: fullBleed ? 28 * scale : headH,
@@ -914,13 +934,24 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
 
           const place = cardCfg.place ?? 'auto';
           const pad = 42 * scale;
+
+          // IN THE STACKED LAYOUT THE CARD IS A SIBLING OF THE VIDEO, NOT A LAYER OVER IT.
+          //
+          // Owner: *"there must be gap in between the container box which holds the video, and
+          // the one row all of them text."* The card was absolutely positioned at
+          // `bottom: pad` in both aspects, so in 9:16 it sat ON the container's lower edge and
+          // over the last lines of the terminal — visible in the shorts proof, the card's top
+          // border crossing the video's bottom border. There is nothing to overlay in the
+          // stacked layout: the video already occupies a box of its own, and the card belongs
+          // UNDER it, in flow, separated by the column's own gap. Full-bleed is the case where
+          // the card genuinely floats, and there the ink solver places it.
+          const inFlow = !fullBleed && place === 'auto';
+
           const pos: React.CSSProperties = {};
           if (place === 'auto') {
             if (fullBleed) {
               pos.left = 0; pos.right = 0;
               pos[hasGap || clusterAtTop ? 'top' : 'bottom'] = clusterInset;
-            } else {
-              pos.left = 0; pos.right = 0; pos.bottom = pad;
             }
           } else {
             if (place.includes('left')) pos.left = pad;
@@ -939,7 +970,10 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
 
           return (
             <div style={{
-              position: 'absolute', ...pos, zIndex: 3,
+              ...(inFlow
+                ? {position: 'relative', width: '100%', marginTop: 18 * scale}
+                : {position: 'absolute', ...pos}),
+              zIndex: 3,
               display: 'flex', justifyContent: justify,
               alignItems: place === 'center' ? 'center' : undefined,
               pointerEvents: 'none', opacity: life,
