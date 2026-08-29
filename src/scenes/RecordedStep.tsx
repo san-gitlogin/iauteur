@@ -382,9 +382,13 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
         position: 'relative', zIndex: 2,
         maxWidth: fullBleed ? frameW * 0.9 : stageW,
         padding: fullBleed ? `0 ${40 * scale}px` : 0,
-        fontFamily: t.fonts.body,
-        fontSize: (compact ? 17 : 21) * scale,
-        lineHeight: compact ? 1.25 : 1.42,
+        // MONO, letterspaced — the same subtitle voice the wide card uses, so 9:16 and 16:9 read
+        // as one design. Owner on the shorts: *"needs to be better viewable, with the font that
+        // follows moderndark."* Inter next to Space Grotesk is what "default font" looks like.
+        fontFamily: t.fonts.mono,
+        fontSize: (compact ? 16 : 19) * scale,
+        letterSpacing: 0.9,
+        lineHeight: compact ? 1.3 : 1.45,
         // one line only when the band is tight — a wrapped premise is what lands on the code
         ...(compact ? {whiteSpace: 'nowrap' as const, overflow: 'hidden' as const,
                        textOverflow: 'ellipsis' as const} : {}),
@@ -797,135 +801,204 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             cannot drift from the take: if the demo stops pressing Ctrl+S, the keycaps stop
             saying Ctrl+S. This is the one overlay that answers "what did you just DO",
             which a screen recording otherwise leaves invisible. */}
-        {/* THE BOTTOM CLUSTER — keycaps, step rail and caption travel together, and in
-            full-bleed they are pinned to whichever edge the WORK is not on. `display:
-            contents` keeps the card layout byte-identical: the wrapper vanishes and the three
-            blocks stay direct children of the column exactly as before. */}
-        <div style={fullBleed
-          ? {position: 'absolute', left: 0, right: 0, [hasGap || clusterAtTop ? 'top' : 'bottom']: clusterInset,
-             zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 * scale,
-             // A SCRIM UNDER THE CLUSTER ITSELF, not along the frame edge.
-             //
-             // The marks are a SPARSE sample of the ink — they are the lines this beat points at,
-             // not every line on screen. So the "tallest band with no marks in it" can still be
-             // full of unmarked code, and on a full IDE screen it always is: there is no empty
-             // space to find. Pulled from the finished render, the premise sat on an unmarked
-             // `print(...)` with nothing behind it, reading as two texts colliding.
-             //
-             // Covering something is unavoidable when the screen is full; being ILLEGIBLE is not.
-             // The edge gradient only helped when the cluster was against an edge, so the group
-             // now carries its own ground wherever it lands.
-             paddingTop: 14 * scale, paddingBottom: 14 * scale,
-             background: `linear-gradient(to bottom, ${hexA(t.colors.bg, 0)}, ${hexA(t.colors.bg, 0.9)} 14%, ${hexA(t.colors.bg, 0.9)} 86%, ${hexA(t.colors.bg, 0)})`,
-             backdropFilter: 'blur(3px)'}
-          : {display: 'contents'}}>
-          {fullBleed ? premiseNode : null}
-          {/* THE EXPLAINING LAYER. Until now this group could only carry furniture — a rail, a
-              keycap, a caption. An overlay that ANIMATES what the command is doing rides here
-              too, in the same measured ink-free band, so it still covers nothing. */}
-          {cur.overlay ? (
-            <StepOverlay
-              data={cur.overlay as any}
-              fallbackAtWord={cur.atWord}
-              maxWidth={(fullBleed ? frameW * 0.86 : stageW)}
-            />
-          ) : null}
-        {anyKeys ? (() => {
-          // The reservation keeps the cluster from jumping between clips when one has a chord
-          // and the next does not — but 44px of nothing is not worth covering a line of code
-          // for, so it is the first thing dropped when the band is tight.
-          if (!(cur.keys ?? []).length) return compact ? null : <div style={{height: 44 * scale}} />;
+        {/* THE OVERLAY CARD.
+            Owner: *"Use cards for overlay, not some line that blurs the entire wide screen like a
+            ribbon and shitty default font on the top, with non-responsive animations stuffed
+            within the ribbon's width, along with shitty step boxes highlighting as you speak."*
+
+            He is right, and what he is describing is exactly what the previous version was: a
+            full-width scrim band with a body-font line, a row of pills and a caption stacked
+            inside it. A band spanning 1920px is not a component, it is a letterbox — and it dimmed
+            a third of the footage to carry text that occupies a quarter of the width.
+
+            THIS IS A CARD. Rounded, glass, its own depth shadow, sized to its contents and never
+            wider than about two thirds of the frame. Type follows the theme's roles: the takeaway
+            in the DISPLAY face because it is a statement, the standing setup in MONO, small and
+            letterspaced, the way a subtitle sits under a title on a real slide.
+
+            AND IT COMES AND GOES. Owner: *"that overlay is being shown constantly until your
+            explanation completes of the steps. Dude I dont like that."* Each clip's card fades in
+            when its step starts and fades out before the next one, so the footage breathes between
+            beats instead of being permanently letterboxed. */}
+        {(() => {
+          if (!fullBleed) return null;
+          // The card's own life: in at this step, out before the next one takes over.
+          const nextStart = active + 1 < starts.length ? starts[active + 1] : (scene.durationFrames ?? 1e6);
+          const IN = 12, OUT = 16, TAIL = 20;
+          const outAt = Math.max(curStart + IN + 24, nextStart - TAIL - OUT);
+          const life = interpolate(
+            frame,
+            [curStart, curStart + IN, outAt, outAt + OUT],
+            [0, 1, 1, 0],
+            clamp,
+          );
+          if (life <= 0.001) return null;
+
+          const glass = hexA(t.colors.panel, 0.66);
+          const edge = hexA(t.colors.text, 0.13);
+
+          return (
+            <div style={{
+              position: 'absolute', left: 0, right: 0,
+              [hasGap || clusterAtTop ? 'top' : 'bottom']: clusterInset,
+              zIndex: 3, display: 'flex', justifyContent: 'center',
+              opacity: life,
+              // rises a touch as it arrives, settles as it goes — a card, not a light switch
+              transform: `translateY(${(1 - life) * 10 * scale}px)`,
+            }}>
+              <div style={{
+                maxWidth: frameW * 0.66, minWidth: frameW * 0.3,
+                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                gap: 10 * scale,
+                padding: `${(compact ? 14 : 20) * scale}px ${(compact ? 22 : 30) * scale}px`,
+                borderRadius: 20 * scale * t.style.cornerRadius,
+                background: glass,
+                backdropFilter: 'blur(20px) saturate(1.25)',
+                border: `${1 * scale}px solid ${edge}`,
+                // depth: a real shadow below, and a hairline of light along the top edge, which is
+                // what makes glass read as glass rather than as a grey box
+                boxShadow: `0 ${22 * scale}px ${54 * scale}px ${hexA('#000000', 0.5)},`
+                  + ` inset 0 ${1 * scale}px 0 ${hexA(t.colors.text, 0.14)}`,
+              }}>
+                {/* THE TAKEAWAY — a statement, so the display face (LAW: typography roles) */}
+                {d.caption ? (
+                  <div style={{
+                    fontFamily: t.fonts.display,
+                    fontWeight: t.style.displayWeight,
+                    letterSpacing: t.style.displayTracking,
+                    fontSize: (compact ? 26 : 31) * scale,
+                    lineHeight: 1.12,
+                    color: t.colors.text,
+                    textAlign: 'center',
+                  }}>{d.caption}</div>
+                ) : null}
+
+                {/* THE STANDING SETUP — small, letterspaced mono, the way a subtitle sits under a
+                    title. In body it rendered as neutral Inter, which is what "default fonts"
+                    looks like next to Space Grotesk. */}
+                {d.premise ? (
+                  <div style={{
+                    fontFamily: mono,
+                    fontSize: (compact ? 14 : 15.5) * scale,
+                    letterSpacing: 1.1,
+                    lineHeight: 1.4,
+                    color: hexA(t.colors.text, 0.62),
+                    textAlign: 'center',
+                  }}>{d.premise}</div>
+                ) : null}
+
+                {/* THE ANIMATED EXPLAINER, inside the card and sized to it */}
+                {cur.overlay ? (
+                  <StepOverlay
+                    data={cur.overlay as any}
+                    fallbackAtWord={cur.atWord}
+                    maxWidth={frameW * 0.58}
+                  />
+                ) : null}
+
+                {/* PROGRESS, not a row of buttons.
+                    A pill per step, all lit at once, was four labels competing with the caption —
+                    and only one of them was ever true. This is a rule of segments with the current
+                    one filled, plus that step's name. One fact, one line. */}
+                {!split && clips.length > 1 ? (
+                  <div style={{
+                    display: 'flex', alignItems: 'center', gap: 9 * scale,
+                    marginTop: 2 * scale,
+                  }}>
+                    <div style={{display: 'flex', gap: 4 * scale}}>
+                      {clips.map((_, i) => (
+                        <div key={i} style={{
+                          width: (i === active ? 20 : 9) * scale, height: 3 * scale,
+                          borderRadius: 999,
+                          background: i === active ? accent
+                            : hexA(t.colors.text, frame >= starts[i] ? 0.32 : 0.14),
+                        }} />
+                      ))}
+                    </div>
+                    <span style={{
+                      fontFamily: mono, fontSize: 13.5 * scale, letterSpacing: 0.8,
+                      color: hexA(t.colors.text, 0.55), whiteSpace: 'nowrap',
+                    }}>{String(cur.label ?? cur.id ?? '')}</span>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* THE KEYCAPS — mid-bottom, on their own, nowhere near the card.
+            Owner: *"Displaying the shortcut keys pressed, you can display at the mid bottom, like
+            how you have corrected that it shows up and disappears as expected."* A chord is an
+            EVENT: it presses in, holds long enough to read, and releases. */}
+        {fullBleed && (cur.keys ?? []).length ? (() => {
           const kStart = wordToFrame(cur.keysAtWord ?? cur.atWord ?? 1);
           if (frame < kStart) return null;
-          // A KEYPRESS IS AN EVENT, NOT A STATE. This only faded IN, so "Ctrl + P" sat on
-          // screen until the next scene cut — owner: *"it gets displayed but didnt disappear
-          // until the next video cutscene started"*. A chord happens once: it presses in over
-          // 8 frames, holds long enough to read (36f ~ 1.2s), and releases over 12.
-          const K_IN = 8, K_HOLD = 36, K_OUT = 12;
+          const K_IN = 8, K_HOLD = 40, K_OUT = 14;
           const kp = interpolate(
             frame,
             [kStart, kStart + K_IN, kStart + K_IN + K_HOLD, kStart + K_IN + K_HOLD + K_OUT],
             [0, 1, 1, 0],
             clamp,
           );
+          if (kp <= 0.001) return null;
           return (
-            <div style={{position: 'relative', zIndex: 2, display: 'flex', gap: 8 * scale, alignItems: 'center', opacity: kp}}>
+            <div style={{
+              position: 'absolute', left: 0, right: 0, bottom: frameH * 0.08,
+              zIndex: 4, display: 'flex', gap: 9 * scale,
+              alignItems: 'center', justifyContent: 'center', opacity: kp,
+            }}>
               {(cur.keys ?? []).map((key, i) => (
                 <React.Fragment key={i}>
                   {i > 0 ? (
-                    <span style={{fontFamily: mono, fontSize: 20 * scale, color: hexA(t.colors.text, 0.5)}}>+</span>
+                    <span style={{fontFamily: mono, fontSize: 22 * scale, color: hexA(t.colors.text, 0.45)}}>+</span>
                   ) : null}
-                  <span
-                    style={{
-                      fontFamily: mono,
-                      fontSize: 20 * scale,
-                      fontWeight: 700,
-                      color: t.colors.text,
-                      background: hexA(t.colors.text, 0.09),
-                      border: `${1.5 * scale}px solid ${hexA(t.colors.text, 0.28)}`,
-                      // a key has a bottom edge — that is what makes it read as a KEY
-                      borderBottomWidth: `${4 * scale}px`,
-                      borderRadius: 7 * scale,
-                      padding: `${5 * scale}px ${13 * scale}px`,
-                      // spring in: the cap "presses" as it appears
-                      transform: `translateY(${(1 - kp) * -6 * scale}px)`,
-                    }}
-                  >
-                    {String(key)}
-                  </span>
+                  <span style={{
+                    fontFamily: mono, fontSize: 23 * scale, fontWeight: 700,
+                    color: t.colors.text,
+                    background: hexA(t.colors.panel, 0.9),
+                    backdropFilter: 'blur(10px)',
+                    border: `${1.5 * scale}px solid ${hexA(t.colors.text, 0.26)}`,
+                    borderBottomWidth: `${4.5 * scale}px`,
+                    borderRadius: 9 * scale,
+                    padding: `${7 * scale}px ${15 * scale}px`,
+                    boxShadow: `0 ${8 * scale}px ${20 * scale}px ${hexA('#000000', 0.45)}`,
+                    transform: `translateY(${(1 - kp) * -7 * scale}px)`,
+                  }}>{String(key)}</span>
                 </React.Fragment>
               ))}
             </div>
           );
         })() : null}
 
-        {/* step rail — which step of the demo this is, and its plain-English note.
-            Hidden when split, because the side panel already carries the steps. */}
-        {split ? null : <div style={{position: 'relative', zIndex: 2, display: 'flex', gap: 8 * scale, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: fullBleed ? frameW * 0.92 : stageW, marginBottom: fullBleed ? 10 * scale : 0}}>
-          {clips.map((c, i) => {
-            const on = i === active;
-            const done = frame >= starts[i];
-            return (
-              <div
-                key={i}
-                style={{
-                  fontFamily: mono,
-                  fontSize: 15 * scale,
-                  padding: `${5 * scale}px ${11 * scale}px`,
-                  borderRadius: 999,
-                  color: on ? t.colors.bg : hexA(t.colors.text, done ? 0.75 : 0.34),
-                  background: on ? accent : hexA(t.colors.text, done ? 0.1 : 0.04),
-                  border: `${1 * scale}px solid ${on ? accent : hexA(t.colors.text, 0.12)}`,
-                }}
-              >
-                {i + 1}. {String(c.label ?? c.id ?? 'step')}
+        {/* CARD LAYOUT (not full-bleed) keeps the old stacked furniture. */}
+        {!fullBleed ? (
+          <>
+            {split ? null : (
+              <div style={{display: 'flex', gap: 8 * scale, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: stageW}}>
+                {clips.map((c, i) => {
+                  const on = i === active;
+                  const done = frame >= starts[i];
+                  return (
+                    <div key={i} style={{
+                      fontFamily: mono, fontSize: 15 * scale,
+                      padding: `${5 * scale}px ${11 * scale}px`, borderRadius: 999,
+                      color: on ? t.colors.bg : hexA(t.colors.text, done ? 0.75 : 0.34),
+                      background: on ? accent : hexA(t.colors.text, done ? 0.1 : 0.04),
+                      border: `${1 * scale}px solid ${on ? accent : hexA(t.colors.text, 0.12)}`,
+                    }}>{i + 1}. {String(c.label ?? c.id ?? 'step')}</div>
+                  );
+                })}
               </div>
-            );
-          })}
-        </div>}
-
-        {d.caption ? (
-          <div
-            style={{
-              position: 'relative', zIndex: 2,
-              // TYPOGRAPHY ROLES, as themes.ts defines them: display carries headlines and
-              // big statements, body is the deliberately invisible face for longer text. The
-              // caption is the beat's one-line takeaway — a statement — so it belongs in the
-              // theme's display face. In body it rendered as neutral Inter next to
-              // components using Space Grotesk, which is what "normal fonts" looks like.
-              fontFamily: t.fonts.display,
-              fontSize: (fullBleed ? 27 : 23) * scale,
-              fontWeight: t.style.displayWeight,
-              letterSpacing: t.style.displayTracking,
-              color: hexA(t.colors.text, fullBleed ? 0.97 : 0.9),
-              textAlign: 'center',
-              maxWidth: fullBleed ? frameW * 0.9 : stageW,
-            }}
-          >
-            {d.caption}
-          </div>
+            )}
+            {d.caption ? (
+              <div style={{
+                fontFamily: t.fonts.display, fontSize: 23 * scale,
+                fontWeight: t.style.displayWeight, letterSpacing: t.style.displayTracking,
+                color: hexA(t.colors.text, 0.9), textAlign: 'center', maxWidth: stageW,
+              }}>{d.caption}</div>
+            ) : null}
+          </>
         ) : null}
-        </div>
       </AbsoluteFill>
 
       {scene.data.source ? <SourceFooter text={String(scene.data.source)} /> : null}

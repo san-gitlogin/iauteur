@@ -76,7 +76,15 @@ export type HookKit = {
   plate?: (children: React.ReactNode) => React.ReactNode;
 };
 
-const NEUTRAL = ['stack', 'statement', 'lowerthird', 'plaque'] as const;
+// `stack` IS THE OLD SHAPE, so it is not in the automatic pool.
+//
+// Owner, on a freshly rendered cut: *"the intro animation component still fucking same!!!!"* — and
+// he was right. The hash picked `stack` for that headline, and `stack` is precisely the glass-card
+// composition every previous video opened with. Leaving the thing being replaced inside the pool
+// of replacements means one video in five still looks unchanged, which reads as nothing having
+// happened at all. It stays available to `hookVariant` for a beat that genuinely wants it; it is
+// never chosen for you.
+const NEUTRAL = ['statement', 'lowerthird', 'plaque'] as const;
 
 /** FNV-1a. Stable across machines and runs — one headline always picks the same silhouette. */
 const hashOf = (s: string): number => {
@@ -418,42 +426,56 @@ export const HookStage: React.FC<{scene: Scene; kit?: HookKit}> = ({scene, kit =
     );
   }
 
-  // ── PLAQUE — the headline inside a frame that DRAWS itself: top and bottom sweep out from the
-  //    centre, the sides grow down after them, so the box is built AROUND the words instead of
-  //    blinking on behind them. The mark is demoted to a corner, which is where a mark belongs
-  //    when the words are the subject.
-  const top = travelAt(frame, hAt, 18);
-  const sides = travelAt(frame, hAt + 8, 22);
-  const inner = arriveAt(frame, hAt + 14, 16);
-  const thick = 4 * scale;
+  // ── PLAQUE — a GLASS CARD that lights along its top edge and settles.
+  //
+  //    Owner: *"the component became a box. Dude is that it?? Is that your animation, design
+  //    knowledge?? ... whatever you did just do not even blend well with moderndark."*
+  //
+  //    He was right. The first version drew four hard accent rules around the words — a box, and a
+  //    box belongs to no design language in particular. moderndark is glass, depth and indigo: a
+  //    translucent panel, a blurred ground, a hairline of light on the top edge and a real shadow
+  //    underneath. So the card is now built from those, and the only thing that "draws" is that
+  //    light running along its top, which is a highlight catching rather than a border being
+  //    constructed.
+  const sweep = travelAt(frame, hAt, 22);
+  const inner = arriveAt(frame, hAt + 10, 16);
+  const settle = landAt(frame, hAt + 4, 20);
   return (
     <AbsoluteFill style={{
       alignItems: 'center', justifyContent: 'safe center', flexDirection: 'column',
       padding: (vertical ? 62 : 140) * scale, gap: 30 * scale, overflow: 'hidden',
     }}>
       <div style={{
-        position: 'relative', maxWidth: '100%',
-        padding: `${(vertical ? 62 : 62) * scale}px ${(vertical ? 54 : 78) * scale}px`,
-        background: hexA(t.colors.panel, 0.5), borderRadius: radius,
+        position: 'relative', maxWidth: '100%', overflow: 'hidden',
+        padding: `${(vertical ? 64 : 66) * scale}px ${(vertical ? 56 : 84) * scale}px`,
+        borderRadius: 26 * scale * t.style.cornerRadius,
+        // GLASS, not a rectangle: translucent panel, blurred ground, hairline of light along the
+        // top, and a shadow deep enough to lift the card off the wallpaper.
+        background: hexA(t.colors.panel, 0.62),
+        backdropFilter: 'blur(22px) saturate(1.25)',
+        border: `${1 * scale}px solid ${hexA(t.colors.text, 0.12)}`,
+        boxShadow: `0 ${26 * scale}px ${64 * scale}px ${hexA('#000000', 0.55)},`
+          + ` inset 0 ${1 * scale}px 0 ${hexA(t.colors.text, 0.16)}`,
+        opacity: settle,
+        transform: `translateY(${(1 - settle) * 16 * scale}px) scale(${0.97 + 0.03 * settle})`,
       }}>
-        {(['top', 'bottom'] as const).map((edge) => (
-          <div key={edge} style={{
-            position: 'absolute', left: 0, right: 0, [edge]: 0, height: thick,
-            background: hexA(accent, 0.75),
-            transform: `scaleX(${top})`, transformOrigin: 'center',
-            boxShadow: glow(20, hexA(accent, 0.4)),
-          }} />
-        ))}
-        {(['left', 'right'] as const).map((edge) => (
-          <div key={edge} style={{
-            position: 'absolute', top: 0, bottom: 0, [edge]: 0, width: thick,
-            background: hexA(accent, 0.75),
-            transform: `scaleY(${sides})`, transformOrigin: 'top center',
-          }} />
-        ))}
+        {/* the light catching along the top edge — one moving thing, and it is a highlight
+            rather than a border being assembled */}
+        <div style={{
+          position: 'absolute', top: 0, left: '8%', right: '8%', height: 2 * scale,
+          background: `linear-gradient(to right, ${hexA(accent, 0)}, ${accent}, ${hexA(accent, 0)})`,
+          transform: `scaleX(${sweep})`, transformOrigin: 'center',
+          boxShadow: glow(26, hexA(accent, 0.55)),
+        }} />
+        {/* an indigo bloom behind the words, the way moderndark lights its own panels */}
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.55 * settle,
+          background: `radial-gradient(120% 90% at 50% 0%, ${hexA(accent, 0.20)} 0%, ${hexA(accent, 0)} 62%)`,
+        }} />
         <div style={{
           ...display(displayBase * 0.92 * fitMul(headline, 26, 0.5)),
-          opacity: inner, transform: `scale(${0.965 + 0.035 * inner})`,
+          position: 'relative', zIndex: 1,
+          opacity: inner, transform: `translateY(${(1 - inner) * 8 * scale}px)`,
           textShadow: glow(38, t.colors.glowSoft),
         }}>{headline}</div>
         {d.heroAsset && kit.mark ? (
