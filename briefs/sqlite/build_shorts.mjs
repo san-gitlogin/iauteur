@@ -125,9 +125,14 @@ const brand = {
             kind: 'rows', atWord: 47, columns: ['name', 'price'],
             rows: [
               {cells: ['USB-C hub', '45.00'], state: 'kept', atWord: 47},
-              {cells: ['Mechanical keyboard', '89.00'], state: 'new', atWord: 75},
-              {cells: ['27-inch monitor', '240.00'], state: 'new', atWord: 76},
-              {cells: ['Desk lamp', '35.50'], state: 'new', atWord: 77},
+              // LAW 8 — these landed on words 75-77 of 79 and the linter called it: the payoff
+              // was arriving in the last four percent of the read. They belong on *"so every
+              // row matches"*, which is where the viewer actually learns the rest are coming,
+              // and it teaches better too — the rows are already on screen when the voice
+              // counts them.
+              {cells: ['Mechanical keyboard', '89.00'], state: 'new', atWord: 64},
+              {cells: ['27-inch monitor', '240.00'], state: 'new', atWord: 65},
+              {cells: ['Desk lamp', '35.50'], state: 'new', atWord: 66},
             ],
           },
         }),

@@ -873,11 +873,14 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
       //
       // It is added LAST so an author's own mark of the same text still wins the id it asked for,
       // and it is skipped when the author already marked the command themselves.
+      // ALWAYS measure the command's own rectangle. The first version skipped it when an
+      // authored mark already sat inside the command — but an authored mark is only DRAWN
+      // when a callout points at it, and a callout lands on its own spoken word. Measured on
+      // the finished cut: the `where` mark suppressed `__cmd`, and its callout arrives eleven
+      // seconds later, so the running command carried no highlight for eleven seconds. The
+      // runner never sees the spec and cannot know that; RecordedStep does, and decides there.
       const implicit = [...(step.marks ?? [])];
-      if (step.action === 'run' && step.cmd &&
-          !implicit.some((m) => m?.text && String(step.cmd).includes(String(m.text)) && String(m.text).length > 8)) {
-        implicit.push({id: '__cmd', text: String(step.cmd)});
-      }
+      if (step.action === 'run' && step.cmd) implicit.push({id: '__cmd', text: String(step.cmd)});
       // Marks are measured AFTER the step settles, so they point at the finished state.
       await assertNoIdentity(page, step.id ?? `step-${i + 1}`);
       const marks = await marksFor(page, implicit);

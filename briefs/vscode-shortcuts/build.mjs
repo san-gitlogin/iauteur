@@ -84,7 +84,7 @@ scene('TITLE_CARD',
   {title: 'Shortcuts that actually work', subtitle: '103 pressed, one at a time'});
 
 scene('CHAPTER',
-  `We'll start with five you'll reach for every hour. Not the clever ones — the ones that stop your
+  `We'll start with five you'll reach for every hour. These are the plain ones — the ones that stop your
    hand going to the mouse in the first place, which is where the time actually goes.`,
   {chapter: {number: '01', title: 'Every hour', subtitle: 'the five that replace the mouse'}});
 
@@ -110,7 +110,7 @@ rec(`Watch both. Shift makes the palette want a COMMAND name. Drop the shift and
      clip('rec:vscode-keys-act1#quickopen', 'quick open', {}),
    ]});
 
-rec(`Three that cost nothing to learn. B hides the sidebar and hands that width back to the thing
+rec(`Three you'll have by tomorrow. B hides the sidebar and hands that width back to the thing
      you're actually reading, because the file tree isn't what you're looking at. Press it again and
      the sidebar returns. Then F is find, right where your eyes already are.`,
   {caption: 'width back, and find',
@@ -152,7 +152,7 @@ scene('QUIZ_CARD',
 // ─────────────────────────────────────────────────────────────────────────────
 
 scene('RECAP',
-  `Five keys, none of them clever. The palette for what you can't name, quick open for what you can,
+  `Five plain keys. The palette for the command you can only describe, quick open for the file you can name,
    and the terminal one key down, so you never go looking for it.`,
   {recap: {
     title: 'Act one, in five keys',
@@ -171,7 +171,7 @@ scene('CHAPTER',
    drag and a click with a single chord.`,
   {chapter: {number: '02', title: 'Editing', subtitle: 'four that pay for themselves'}});
 
-rec(`Slash comments a line out. Your caret's on the line and you select nothing first, which is the
+rec(`Slash comments a line out. Your caret sits on the line and you leave the selection alone, which is the
      part people miss. Press slash again and the line comes back. Notice your editor picked the
      right comment marker on its own, because it already knows what language this file is.`,
   {caption: 'no selection needed',
@@ -183,7 +183,7 @@ rec(`Slash comments a line out. Your caret's on the line and you select nothing 
      clip('rec:vscode-keys-act2#uncomment', 'and back again', {}),
    ]});
 
-rec(`Three more that move whole lines, and none of them wants a selection either. Shift with alt and
+rec(`Three more that move whole lines, and each one works off the caret alone. Shift with alt and
      down copies the line below itself. Shift with K deletes that line outright — no select to end,
      no backspace. Alt and an arrow MOVES a line past its neighbours.`,
   {caption: 'copy, delete, move',
@@ -362,7 +362,7 @@ scene('RECAP',
 
 scene('OUTRO_CTA',
   `Every shortcut here got pressed against a real editor before it went in, because a list you
-   haven't tested is just a list. If that's your sort of thing, you know what to do.`,
+   only read is just a list. If that's your sort of thing, you know what to do.`,
   {outro: {headline: 'Pressed, not copied', sub: 'all 103 of them', atWord: 2}});
 
 // ── self-check against the two numbers the linter actually enforces ───────────

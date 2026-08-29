@@ -58,6 +58,72 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-08-29 — the recorded-step card: six owner complaints, all fixed at the cause
+
+The owner reviewed the SQLite and VS Code cuts and named six defects in one message. Every one
+of them turned out to be structural, and the same class of structural: a decision that had been
+made ONCE, in shared code, and was therefore being made identically in every video.
+
+**1. Every chapter card was the same slide.** *"we need to change the chapter animation too."*
+Sixty design packs register `CHAPTER` and all sixty call `makeChapter`, which drew one
+composition — mono kicker, 290px numeral, ruled diamond, title. `src/chapterStage.tsx` now owns
+six silhouettes (`numeral` · `slab` · `stub` · `doors` · `spine` · `stamp`) and every timing;
+packs lend handwriting only. Identical split to `hookStage.tsx`, deliberately, so there is one
+idea to learn.
+
+⚠ **The pick ROTATES by chapter number; it does not hash.** The first cut hashed
+`number|title` and chapters 01 and 02 of the SQLite course both landed on `slab` — two
+consecutive chapter cards, identical shape, which is the defect itself. A hash is uniform in
+the limit and promises nothing about any particular pair, and a course has three chapters, not
+three hundred. Cost, stated plainly: two courses step the shapes in the same ORDER, because
+nothing course-wide is reachable from a chapter's own data. `chapterVariant` overrides it.
+
+**2. The card had nothing in it.** *"the text you put there is certainly very much AI-ish...
+maybe you can display a component graph, a sequence diagram."* Two new `StepOverlay` kinds:
+`seq` (named parties, lifelines, messages that CROSS at their own spoken word) and `graph` (a
+DECLARED topology per LAW 0k.1 — ranks derived from the edges, never inferred from position).
+The 9:16 short carries a graph on its code beat and the real four rows on its result beat.
+
+**3. THE MARKS ARE A SPARSE SAMPLE OF THE INK.** *"I dont know how it will hold when you are
+explaining the code base, it will definitely overlap right."* He was right and the proof frame
+showed it: the card's top edge cutting `ORDER BY revenue DESC;`, because that line carried no
+callout and so did not exist as far as the placement solver was concerned. Two marked
+rectangles on a screen holding forty lines of text is not a map. `inkFor()` in the runner now
+measures every rendered text row, tightens it onto its glyphs (a row's rect is the width of its
+PANE in both Monaco and xterm, which would make an empty screen read as full) and merges
+neighbours. The SQLite acts measure **2–3 blocks**: editor ink `y 66–232`, terminal ink
+`y 631–840`, and the free band between them is now a fact. This is the FOURTH attempt at this
+problem — a height estimate, a compact mode and a scrim all failed because each was a guess
+standing in for a measurement.
+
+**4. Highlight the query every time.** *"you just highlight once and leave!"* Every `run` step
+implicitly marks its own command as `__cmd` (suppressed when the author already marked it), and
+`RecordedStep` keeps that rectangle lit — a filled band and a left bar, no leader, no label —
+for the whole step, so ten seconds later the viewer can still see which line produced the
+output being talked about. Deliberately quieter than a callout, because a beat carries both.
+
+**5. The premise printed twice in 9:16** — once above the video container and again inside the
+card. The card owns it in full-bleed only.
+
+**6. A MACHINE PATH REACHED A FINISHED CUT.** The demos write `{{TOOLS}}`, which is why the
+tracked JSON is clean — but `expandTokens` resolves it at run time and prep TYPES the result,
+so `Set-Alias sq 'C:/Users/<name>/projects/iauteur/tools/...'` sat in the terminal for a whole
+beat of footage headed for YouTube. Grepping `demos/` would never have caught it: the JSON was
+clean and the SCREEN was not. Prep scrollback is cleared before the camera rolls, and
+`assertNoIdentity()` reads what is actually rendered, per step, and throws.
+
+**Sealed.** The linter now rejects an unknown overlay kind and any collection past what the
+picture can hold — the components `.slice()` their input, so a sixth `rows` entry was being
+dropped in silence, and a cap that truncates without saying so is worse than no cap.
+`StepOverlay` renders `UnknownKind` rather than returning `null`. Both proved by mutating a
+real spec: the bad kind and the 15-row overflow were each reported.
+
+**Also this session.** The VS Code narration's negation tic — owner: *"has the same nothing,
+not, words often which are not humane"* — measured at 24 negations in 1039 words across 15 of
+27 scenes, with `nothing`/`none` as the payoff word nine times. Six sites where the negation
+was decorative are rewritten to positive constructions; the five where the negation IS the
+argument (six shortcuts that do nothing in a browser) keep theirs.
+
 ### 2026-08-23 — the shorts inventory: what exists, what never got covers, what is not in git
 
 Collecting every rendered short for upload turned up three gaps that nothing in the

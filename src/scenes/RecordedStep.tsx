@@ -519,10 +519,23 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           {(() => {
             const r = cur.marks?.__cmd as {x: number; y: number; w: number; h: number} | undefined;
             if (!r || cur.cmdHighlight === false) return null;
-            // Skip it when an authored callout already boxes the same rectangle — two
-            // outlines on one line is noise, and the callout wins.
-            const dup = (cur.callouts ?? []).some((co) => co.mark === '__cmd');
-            if (dup) return null;
+            // STAND DOWN ONLY WHILE A CALLOUT IS ACTUALLY ON THE COMMAND.
+            //
+            // Two outlines on one line is noise and the callout wins — but only once the
+            // callout is VISIBLE. The runner used to make this call, and it got it wrong,
+            // because it cannot see the spec: a mark inside the command suppressed the band
+            // for the whole step even though its callout arrived eleven seconds later. Here
+            // the test is per-frame and geometric, so the band holds the line until the
+            // callout takes over, and steps back in if the callout is one of several.
+            const hits = (a: {x: number; y: number; w: number; h: number},
+                          b: {x: number; y: number; w: number; h: number}) =>
+              a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+            const covered = (cur.callouts ?? []).some((co) => {
+              if (frame < wordToFrame(co.atWord ?? cur.atWord ?? 1)) return false;
+              const m = co.mark ? cur.marks?.[co.mark] : null;
+              return !!m && hits(m as {x: number; y: number; w: number; h: number}, r);
+            });
+            if (covered) return null;
             const on = interpolate(frame, [curStart, curStart + 10], [0, 1], clamp);
             if (on <= 0.001) return null;
             const c = sem(d.color ?? 'blue');

@@ -383,12 +383,57 @@ export const StepOverlay: React.FC<{
       const r = rank[String(n.id)];
       (layers[r] ??= []).push(String(n.id));
     }
-    const rows = layers.filter(Boolean);
+    const rows: string[][] = layers.filter(Boolean);   // reordered in place by the sweep below
+
+    // ORDER EACH LAYER SO THE EDGES DO NOT CROSS.
+    //
+    // Measured in the shorts proof: `your query text` and `"USB-C hub"` sat in row 0 in the
+    // order they were authored, so the edge from the hub down to `? placeholder` crossed the
+    // edge from the query text down to `glued into the string` — a clean X in the middle of
+    // the card. Two paths that cross read as one confusion.
+    //
+    // A barycentre sweep fixes it: a node moves next to the average position of the nodes it
+    // connects to, downward then upward, twice. It is the standard layered-graph pass and
+    // three passes is more than enough for six nodes.
+    const order = (ids: string[], key: (id: string) => number) =>
+      ids.map((id, i) => ({id, k: key(id), i}))
+        .sort((x, y) => (Number.isFinite(x.k) ? x.k : x.i) - (Number.isFinite(y.k) ? y.k : y.i))
+        .map((e) => e.id);
+    const indexIn = (layer: string[], id: string) => layer.indexOf(id);
+    const mean = (xs: number[]) => xs.length ? xs.reduce((a2, b2) => a2 + b2, 0) / xs.length : NaN;
+    for (let pass = 0; pass < 3; pass++) {
+      // DOWN — a child sits under the mean of its parents.
+      for (let r = 1; r < rows.length; r++) {
+        rows[r] = order(rows[r], (id) =>
+          mean(edges.filter((e) => e.to === id)
+            .map((e) => indexIn(rows[r - 1], String(e.from)))
+            .filter((i) => i >= 0)));
+      }
+      // UP — a parent sits over the mean of its children.
+      for (let r = rows.length - 2; r >= 0; r--) {
+        rows[r] = order(rows[r], (id) =>
+          mean(edges.filter((e) => e.from === id)
+            .map((e) => indexIn(rows[r + 1], String(e.to)))
+            .filter((i) => i >= 0)));
+      }
+    }
 
     const W = maxWidth;
     const nodeH = 32 * scale;
     const rowGap = 30 * scale;
     const H = rows.length * nodeH + (rows.length - 1) * rowGap;
+    // A LABEL THAT IS ELLIPSED IS A LABEL THAT WAS NOT SHOWN. The proof frame rendered
+    // `glued into the string` as `ued into the strir`, which is worse than not drawing it —
+    // LAW 0k.4: a component sizes to the space it is given rather than clipping. The type
+    // steps down until the WIDEST label in the graph fits the NARROWEST node, so the whole
+    // graph stays one size and nothing is cut.
+    const widest = Math.max(1, ...nodes.map((n) => String(n.label ?? n.id ?? '').length));
+    const narrowest = Math.min(...rows.map((ids) => Math.min(W / ids.length - 12 * scale, 190 * scale)));
+    // 0.58em per character is the measured advance width of the mono faces this repo ships.
+    const nodeFont = Math.max(
+      mono * 0.42,
+      Math.min(mono * 0.7, (narrowest - 18 * scale) / (widest * 0.58)),
+    );
     const pos: Record<string, {x: number; y: number; w: number}> = {};
     rows.forEach((ids, r) => {
       const w = Math.min(W / ids.length - 12 * scale, 190 * scale);
@@ -434,7 +479,7 @@ export const StepOverlay: React.FC<{
                 left: pt.x, top: pt.y, width: pt.w, height: nodeH,
                 transform: `translateX(-50%) translateY(${(1 - on) * 7 * scale}px)`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: t.fonts.mono, fontSize: mono * 0.7,
+                fontFamily: t.fonts.mono, fontSize: nodeFont,
                 color: t.colors.text,
                 background: hexA(t.colors.panel, 0.92),
                 border: `${1.6 * scale}px solid ${hexA(tone, 0.2 + 0.55 * on)}`,
