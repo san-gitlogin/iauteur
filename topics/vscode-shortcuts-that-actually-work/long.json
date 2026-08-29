@@ -46,10 +46,11 @@
         "subtext": "and the card will not tell you which",
         "heroAsset": "lucide:keyboard",
         "headlineAtWord": 1,
-        "heroAtWord": 6
+        "heroAtWord": 4.917
       },
-      "durationFrames": 220,
-      "timingSource": "estimated"
+      "durationFrames": 197,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s01.mp3"
     },
     {
       "id": "s02",
@@ -61,8 +62,9 @@
         "title": "Shortcuts that actually work",
         "subtitle": "103 pressed, one at a time"
       },
-      "durationFrames": 436,
-      "timingSource": "estimated"
+      "durationFrames": 332,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s02.mp3"
     },
     {
       "id": "s03",
@@ -77,8 +79,9 @@
           "subtitle": "the five that replace the mouse"
         }
       },
-      "durationFrames": 472,
-      "timingSource": "estimated"
+      "durationFrames": 283,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s03.mp3"
     },
     {
       "id": "s04",
@@ -97,18 +100,19 @@
                 "Shift",
                 "P"
               ],
-              "atWord": 7
+              "atWord": 4.833
             }
           ],
           "command": "Show All Commands",
           "result": "anything the editor can do",
-          "atWord": 2,
-          "commandAtWord": 16,
+          "atWord": 1,
+          "commandAtWord": 12.167,
           "color": "blue"
         }
       },
-      "durationFrames": 532,
-      "timingSource": "estimated"
+      "durationFrames": 419,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s04.mp3"
     },
     {
       "id": "s05",
@@ -159,7 +163,7 @@
                 "Shift",
                 "P"
               ],
-              "atWord": 4
+              "atWord": 2.5
             },
             {
               "ref": "rec:vscode-keys-act1#quickopen",
@@ -206,18 +210,19 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 19
+              "atWord": 15
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 405,
-      "timingSource": "estimated"
+      "durationFrames": 321,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s05.mp3"
     },
     {
       "id": "s06",
@@ -267,7 +272,7 @@
                 "Ctrl",
                 "B"
               ],
-              "atWord": 4
+              "atWord": 2.25
             },
             {
               "ref": "rec:vscode-keys-act1#sidebar-back",
@@ -306,7 +311,7 @@
                 "Ctrl",
                 "B"
               ],
-              "atWord": 18
+              "atWord": 12.667
             },
             {
               "ref": "rec:vscode-keys-act1#find",
@@ -376,18 +381,19 @@
                 "Ctrl",
                 "F"
               ],
-              "atWord": 32
+              "atWord": 23.167
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 597,
-      "timingSource": "estimated"
+      "durationFrames": 433,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s06.mp3"
     },
     {
       "id": "s07",
@@ -438,7 +444,7 @@
                 "Shift",
                 "F"
               ],
-              "atWord": 4
+              "atWord": 2
             },
             {
               "ref": "rec:vscode-keys-act1#explorer",
@@ -478,7 +484,7 @@
                 "Shift",
                 "E"
               ],
-              "atWord": 21
+              "atWord": 13.417
             },
             {
               "ref": "rec:vscode-keys-act1#terminal",
@@ -505,7 +511,7 @@
                 "Ctrl",
                 "`"
               ],
-              "atWord": 37
+              "atWord": 24.167
             },
             {
               "ref": "rec:vscode-keys-act1#run",
@@ -516,7 +522,7 @@
                   "text": "no mouse touched",
                   "mark": "out",
                   "color": "green",
-                  "atWord": 57
+                  "atWord": 37.5
                 }
               ],
               "overlay": {
@@ -593,18 +599,19 @@
                   "h": 57
                 }
               ],
-              "atWord": 50
+              "atWord": 32.833
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 897,
-      "timingSource": "estimated"
+      "durationFrames": 592,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s07.mp3"
     },
     {
       "id": "s08",
@@ -631,12 +638,13 @@
           ],
           "answerIndex": 1,
           "why": "Quick Open takes a filename directly.",
-          "revealAtWord": 23,
-          "atWord": 3
+          "revealAtWord": 19,
+          "atWord": 1.75
         }
       },
-      "durationFrames": 460,
-      "timingSource": "estimated"
+      "durationFrames": 384,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s08.mp3"
     },
     {
       "id": "s09",
@@ -664,11 +672,12 @@
               "text": "Ctrl+` — the terminal"
             }
           ],
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 436,
-      "timingSource": "estimated"
+      "durationFrames": 298,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s09.mp3"
     },
     {
       "id": "s10",
@@ -683,8 +692,9 @@
           "subtitle": "four that pay for themselves"
         }
       },
-      "durationFrames": 352,
-      "timingSource": "estimated"
+      "durationFrames": 235,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s10.mp3"
     },
     {
       "id": "s11",
@@ -706,7 +716,7 @@
                   "text": "it picked the right marker",
                   "mark": "commented",
                   "color": "blue",
-                  "atWord": 23
+                  "atWord": 16.583
                 }
               ],
               "id": "comment",
@@ -744,7 +754,7 @@
                 "Ctrl",
                 "/"
               ],
-              "atWord": 4
+              "atWord": 2.25
             },
             {
               "ref": "rec:vscode-keys-act2#uncomment",
@@ -795,18 +805,19 @@
                 "Ctrl",
                 "/"
               ],
-              "atWord": 38
+              "atWord": 27.833
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 657,
-      "timingSource": "estimated"
+      "durationFrames": 482,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s11.mp3"
     },
     {
       "id": "s12",
@@ -851,7 +862,7 @@
                 "Alt",
                 "↓"
               ],
-              "atWord": 4
+              "atWord": 2.5
             },
             {
               "ref": "rec:vscode-keys-act2#deleteline",
@@ -885,7 +896,7 @@
                 "Shift",
                 "K"
               ],
-              "atWord": 20
+              "atWord": 16
             },
             {
               "ref": "rec:vscode-keys-act2#moveline",
@@ -949,18 +960,19 @@
                 "Alt",
                 "↓"
               ],
-              "atWord": 35
+              "atWord": 28.583
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 621,
-      "timingSource": "estimated"
+      "durationFrames": 505,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s12.mp3"
     },
     {
       "id": "s13",
@@ -1005,7 +1017,7 @@
                 "Alt",
                 "↓"
               ],
-              "atWord": 4
+              "atWord": 2.083
             },
             {
               "ref": "rec:vscode-keys-act2#undocursor",
@@ -1038,7 +1050,7 @@
                 "Ctrl",
                 "U"
               ],
-              "atWord": 21
+              "atWord": 13.75
             },
             {
               "ref": "rec:vscode-keys-act2#selectline",
@@ -1079,18 +1091,19 @@
                 "Ctrl",
                 "L"
               ],
-              "atWord": 37
+              "atWord": 24.75
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 633,
-      "timingSource": "estimated"
+      "durationFrames": 426,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s13.mp3"
     },
     {
       "id": "s14",
@@ -1108,25 +1121,26 @@
                 "Ctrl",
                 "K"
               ],
-              "atWord": 16
+              "atWord": 12.583
             },
             {
               "keys": [
                 "Ctrl",
                 "0"
               ],
-              "atWord": 25
+              "atWord": 20.167
             }
           ],
           "command": "Fold All",
           "result": "every block collapses",
-          "atWord": 3,
-          "commandAtWord": 32,
+          "atWord": 1.667,
+          "commandAtWord": 26.083,
           "color": "purple"
         }
       },
-      "durationFrames": 580,
-      "timingSource": "estimated"
+      "durationFrames": 475,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s14.mp3"
     },
     {
       "id": "s15",
@@ -1172,7 +1186,7 @@
                 "Ctrl",
                 "0"
               ],
-              "atWord": 4
+              "atWord": 2.333
             },
             {
               "ref": "rec:vscode-keys-act2#unfold",
@@ -1213,18 +1227,19 @@
                 "Ctrl",
                 "J"
               ],
-              "atWord": 19
+              "atWord": 14
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 369,
-      "timingSource": "estimated"
+      "durationFrames": 272,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s15.mp3"
     },
     {
       "id": "s16",
@@ -1251,12 +1266,13 @@
           ],
           "answerIndex": 1,
           "why": "A chord is a sequence of simultaneous presses, not one big one.",
-          "revealAtWord": 20,
-          "atWord": 3
+          "revealAtWord": 15.083,
+          "atWord": 1.583
         }
       },
-      "durationFrames": 424,
-      "timingSource": "estimated"
+      "durationFrames": 326,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s16.mp3"
     },
     {
       "id": "s17",
@@ -1271,8 +1287,9 @@
           "subtitle": "someone else’s project"
         }
       },
-      "durationFrames": 400,
-      "timingSource": "estimated"
+      "durationFrames": 269,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s17.mp3"
     },
     {
       "id": "s18",
@@ -1335,7 +1352,7 @@
                 "Shift",
                 "O"
               ],
-              "atWord": 4
+              "atWord": 2.167
             },
             {
               "ref": "rec:vscode-keys-act3#gotoline",
@@ -1394,18 +1411,19 @@
                 "Ctrl",
                 "G"
               ],
-              "atWord": 22
+              "atWord": 15.333
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 441,
-      "timingSource": "estimated"
+      "durationFrames": 310,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s18.mp3"
     },
     {
       "id": "s19",
@@ -1485,7 +1503,7 @@
                 "Ctrl",
                 "\\"
               ],
-              "atWord": 4
+              "atWord": 2.5
             },
             {
               "ref": "rec:vscode-keys-act3#group2",
@@ -1554,7 +1572,7 @@
                 "Ctrl",
                 "2"
               ],
-              "atWord": 20
+              "atWord": 15.667
             },
             {
               "ref": "rec:vscode-keys-act3#closeone",
@@ -1605,7 +1623,7 @@
                 "Ctrl",
                 "W"
               ],
-              "atWord": 32
+              "atWord": 25.583
             },
             {
               "ref": "rec:vscode-keys-act3#reopen",
@@ -1671,18 +1689,19 @@
                 "Shift",
                 "T"
               ],
-              "atWord": 45
+              "atWord": 36.25
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 753,
-      "timingSource": "estimated"
+      "durationFrames": 605,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s19.mp3"
     },
     {
       "id": "s20",
@@ -1701,18 +1720,19 @@
                 "Shift",
                 "T"
               ],
-              "atWord": 18
+              "atWord": 13.667
             }
           ],
           "command": "Reopen Closed Editor",
           "result": "it comes straight back",
-          "atWord": 3,
-          "commandAtWord": 24,
+          "atWord": 1.583,
+          "commandAtWord": 18.5,
           "color": "green"
         }
       },
-      "durationFrames": 424,
-      "timingSource": "estimated"
+      "durationFrames": 330,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s20.mp3"
     },
     {
       "id": "s21",
@@ -1769,7 +1789,7 @@
                 "K",
                 "Z"
               ],
-              "atWord": 4
+              "atWord": 2.5
             },
             {
               "ref": "rec:vscode-keys-act3#unzen",
@@ -1820,7 +1840,7 @@
                 "Esc",
                 "Esc"
               ],
-              "atWord": 14
+              "atWord": 11
             },
             {
               "ref": "rec:vscode-keys-act3#keyboard",
@@ -1857,18 +1877,19 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 29
+              "atWord": 23.667
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 597,
-      "timingSource": "estimated"
+      "durationFrames": 488,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s21.mp3"
     },
     {
       "id": "s22",
@@ -1883,8 +1904,9 @@
           "subtitle": "what the browser takes"
         }
       },
-      "durationFrames": 424,
-      "timingSource": "estimated"
+      "durationFrames": 294,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s22.mp3"
     },
     {
       "id": "s23",
@@ -1905,14 +1927,15 @@
           "editorLabel": "VS Code",
           "browserDoes": "closes the whole tab",
           "editorWanted": "never sees the key",
-          "atWord": 2,
-          "pressAtWord": 9,
-          "stealAtWord": 18,
+          "atWord": 1,
+          "pressAtWord": 6.917,
+          "stealAtWord": 14.667,
           "color": "red"
         }
       },
-      "durationFrames": 544,
-      "timingSource": "estimated"
+      "durationFrames": 455,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s23.mp3"
     },
     {
       "id": "s24",
@@ -1932,14 +1955,15 @@
           "editorLabel": "VS Code",
           "browserDoes": "zooms the page",
           "editorWanted": "wanted to resize the font",
-          "atWord": 2,
-          "pressAtWord": 8,
-          "stealAtWord": 16,
+          "atWord": 1,
+          "pressAtWord": 5.583,
+          "stealAtWord": 11.917,
           "color": "orange"
         }
       },
-      "durationFrames": 592,
-      "timingSource": "estimated"
+      "durationFrames": 461,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s24.mp3"
     },
     {
       "id": "s25",
@@ -1966,12 +1990,13 @@
           ],
           "answerIndex": 2,
           "why": "Both are in the same path, and only the first gets a turn.",
-          "revealAtWord": 20,
-          "atWord": 3
+          "revealAtWord": 15.167,
+          "atWord": 1.583
         }
       },
-      "durationFrames": 448,
-      "timingSource": "estimated"
+      "durationFrames": 346,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s25.mp3"
     },
     {
       "id": "s26",
@@ -1999,11 +2024,12 @@
               "text": "Nothing happened? Something took the key"
             }
           ],
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 436,
-      "timingSource": "estimated"
+      "durationFrames": 377,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s26.mp3"
     },
     {
       "id": "s27",
@@ -2015,11 +2041,12 @@
         "outro": {
           "headline": "Pressed, not copied",
           "sub": "all 103 of them",
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 448,
-      "timingSource": "estimated"
+      "durationFrames": 279,
+      "timingSource": "tts",
+      "audio": "audio/vscode-shortcuts_long_s27.mp3"
     }
   ]
 }

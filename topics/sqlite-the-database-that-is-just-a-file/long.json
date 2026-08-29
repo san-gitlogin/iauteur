@@ -65,11 +65,12 @@
         "headline": "JUST A FILE",
         "subtext": "no server, no install, no password",
         "heroAsset": "lucide:file",
-        "headlineAtWord": 2,
-        "heroAtWord": 13
+        "headlineAtWord": 1,
+        "heroAtWord": 11.5
       },
-      "durationFrames": 237,
-      "timingSource": "estimate"
+      "durationFrames": 205,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s01.mp3"
     },
     {
       "id": "s02",
@@ -84,8 +85,9 @@
           "subtitle": "no server, no port, no password"
         }
       },
-      "durationFrames": 369,
-      "timingSource": "estimate"
+      "durationFrames": 264,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s02.mp3"
     },
     {
       "id": "s03",
@@ -106,29 +108,30 @@
             {
               "label": "a machine to run on",
               "asset": "lucide:server",
-              "atWord": 19
+              "atWord": 13.083
             },
             {
               "label": "a service, kept running",
               "asset": "lucide:activity",
-              "atWord": 25
+              "atWord": 17.417
             },
             {
               "label": "a port to listen on",
               "asset": "lucide:plug",
-              "atWord": 35
+              "atWord": 24.667
             },
             {
               "label": "a user and a password",
               "asset": "lucide:key-round",
-              "atWord": 41
+              "atWord": 29
             }
           ],
-          "atWord": 3
+          "atWord": 1.417
         }
       },
-      "durationFrames": 1005,
-      "timingSource": "estimate"
+      "durationFrames": 717,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s03.mp3"
     },
     {
       "id": "s04",
@@ -140,8 +143,9 @@
         "title": "SQLite, from nothing",
         "subtitle": "the shell first, then Python"
       },
-      "durationFrames": 465,
-      "timingSource": "estimate"
+      "durationFrames": 370,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s04.mp3"
     },
     {
       "id": "s05",
@@ -163,7 +167,7 @@
                   "text": "strict tables need 3.37+",
                   "mark": "ver",
                   "color": "blue",
-                  "atWord": 38
+                  "atWord": 28.583
                 }
               ],
               "id": "version",
@@ -209,7 +213,7 @@
                   "h": 57
                 }
               ],
-              "atWord": 4
+              "atWord": 2.333
             },
             {
               "ref": "rec:sqlite-act1#open-schema",
@@ -218,11 +222,11 @@
               "zooms": [
                 {
                   "mark": "notnull",
-                  "atWord": 82
+                  "atWord": 62.583
                 },
                 {
                   "mark": "strict",
-                  "atWord": 84
+                  "atWord": 64.167
                 }
               ],
               "callouts": [
@@ -230,13 +234,13 @@
                   "text": "refuses a blank name",
                   "mark": "notnull",
                   "color": "blue",
-                  "atWord": 83
+                  "atWord": 63.333
                 },
                 {
                   "text": "and this one checks types",
                   "mark": "strict",
                   "color": "orange",
-                  "atWord": 85
+                  "atWord": 64.917
                 }
               ],
               "overlay": {
@@ -330,18 +334,19 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 65
+              "atWord": 49.417
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1317,
-      "timingSource": "estimate"
+      "durationFrames": 1004,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s05.mp3"
     },
     {
       "id": "s06",
@@ -358,13 +363,14 @@
           "goodValue": "89.00",
           "badValue": "'not-a-number'",
           "errorText": "cannot store TEXT value in REAL column products.price",
-          "passAtWord": 30,
-          "rejectAtWord": 38,
-          "atWord": 3
+          "passAtWord": 24.333,
+          "rejectAtWord": 31,
+          "atWord": 1.667
         }
       },
-      "durationFrames": 657,
-      "timingSource": "estimate"
+      "durationFrames": 534,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s06.mp3"
     },
     {
       "id": "s07",
@@ -418,7 +424,7 @@
                   "h": 76
                 }
               ],
-              "atWord": 4
+              "atWord": 2.667
             },
             {
               "ref": "rec:sqlite-act1#strict-error",
@@ -427,7 +433,7 @@
               "zooms": [
                 {
                   "mark": "err",
-                  "atWord": 52
+                  "atWord": 45.583
                 }
               ],
               "callouts": [
@@ -435,7 +441,7 @@
                   "text": "refused, and it says why",
                   "mark": "err",
                   "color": "red",
-                  "atWord": 53
+                  "atWord": 46.5
                 }
               ],
               "overlay": {
@@ -489,18 +495,19 @@
                   "h": 114
                 }
               ],
-              "atWord": 34
+              "atWord": 29.5
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 845,
-      "timingSource": "estimate"
+      "durationFrames": 729,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s07.mp3"
     },
     {
       "id": "s08",
@@ -554,7 +561,7 @@
                   "h": 133
                 }
               ],
-              "atWord": 4
+              "atWord": 2.167
             },
             {
               "ref": "rec:sqlite-act1#select",
@@ -563,11 +570,11 @@
               "zooms": [
                 {
                   "mark": "kb",
-                  "atWord": 81
+                  "atWord": 58.333
                 },
                 {
                   "mark": "mon",
-                  "atWord": 83
+                  "atWord": 59.75
                 }
               ],
               "callouts": [
@@ -575,13 +582,13 @@
                   "text": "the row we keep returning to",
                   "mark": "kb",
                   "color": "green",
-                  "atWord": 82
+                  "atWord": 59.083
                 },
                 {
                   "text": "and the one WHERE is about to drop",
                   "mark": "mon",
                   "color": "blue",
-                  "atWord": 84
+                  "atWord": 60.5
                 }
               ],
               "overlay": {
@@ -671,18 +678,19 @@
                   "h": 247
                 }
               ],
-              "atWord": 66
+              "atWord": 47.417
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1305,
-      "timingSource": "estimate"
+      "durationFrames": 940,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s08.mp3"
     },
     {
       "id": "s09",
@@ -702,7 +710,7 @@
               "zooms": [
                 {
                   "mark": "cheap",
-                  "atWord": 33
+                  "atWord": 26.667
                 }
               ],
               "callouts": [
@@ -710,7 +718,7 @@
                   "text": "under sixty, so it stays",
                   "mark": "cheap",
                   "color": "green",
-                  "atWord": 43
+                  "atWord": 35
                 }
               ],
               "id": "where",
@@ -756,7 +764,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 4
+              "atWord": 2.5
             },
             {
               "ref": "rec:sqlite-act1#order",
@@ -765,7 +773,7 @@
               "zooms": [
                 {
                   "mark": "top",
-                  "atWord": 74
+                  "atWord": 60.833
                 }
               ],
               "callouts": [
@@ -773,7 +781,7 @@
                   "text": "most expensive, first",
                   "mark": "top",
                   "color": "blue",
-                  "atWord": 75
+                  "atWord": 61.667
                 }
               ],
               "overlay": {
@@ -857,18 +865,19 @@
                   "h": 247
                 }
               ],
-              "atWord": 53
+              "atWord": 43.333
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1173,
-      "timingSource": "estimate"
+      "durationFrames": 961,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s09.mp3"
     },
     {
       "id": "s10",
@@ -888,7 +897,7 @@
               "zooms": [
                 {
                   "mark": "newprice",
-                  "atWord": 36
+                  "atWord": 28.167
                 }
               ],
               "callouts": [
@@ -896,7 +905,7 @@
                   "text": "the database confirming, not me",
                   "mark": "newprice",
                   "color": "green",
-                  "atWord": 43
+                  "atWord": 33.833
                 }
               ],
               "id": "update",
@@ -942,7 +951,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 4
+              "atWord": 2.417
             },
             {
               "ref": "rec:sqlite-act1#delete",
@@ -951,7 +960,7 @@
               "zooms": [
                 {
                   "mark": "n",
-                  "atWord": 73
+                  "atWord": 58
                 }
               ],
               "callouts": [
@@ -959,7 +968,7 @@
                   "text": "one row, as expected",
                   "mark": "n",
                   "color": "orange",
-                  "atWord": 74
+                  "atWord": 58.75
                 }
               ],
               "overlay": {
@@ -1013,18 +1022,19 @@
                   "h": 247
                 }
               ],
-              "atWord": 50
+              "atWord": 39.417
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1170,
-      "timingSource": "estimate"
+      "durationFrames": 920,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s10.mp3"
     },
     {
       "id": "s11",
@@ -1044,7 +1054,7 @@
               "zooms": [
                 {
                   "mark": "sch",
-                  "atWord": 33
+                  "atWord": 23.833
                 }
               ],
               "callouts": [
@@ -1052,7 +1062,7 @@
                   "text": "the words I typed, stored",
                   "mark": "sch",
                   "color": "purple",
-                  "atWord": 51
+                  "atWord": 37.25
                 }
               ],
               "id": "schema",
@@ -1098,7 +1108,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 4
+              "atWord": 2.25
             },
             {
               "ref": "rec:sqlite-act1#just-a-file",
@@ -1107,7 +1117,7 @@
               "zooms": [
                 {
                   "mark": "file",
-                  "atWord": 84
+                  "atWord": 61.833
                 }
               ],
               "callouts": [
@@ -1115,7 +1125,7 @@
                   "text": "the entire database",
                   "mark": "file",
                   "color": "green",
-                  "atWord": 85
+                  "atWord": 62.583
                 }
               ],
               "overlay": {
@@ -1167,18 +1177,19 @@
                   "h": 247
                 }
               ],
-              "atWord": 70
+              "atWord": 51.417
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1317,
-      "timingSource": "estimate"
+      "durationFrames": 969,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s11.mp3"
     },
     {
       "id": "s12",
@@ -1197,32 +1208,33 @@
               "label": "every phone",
               "sub": "contacts, messages",
               "asset": "lucide:smartphone",
-              "atWord": 11
+              "atWord": 8.333
             },
             {
               "label": "every browser",
               "sub": "history, settings",
               "asset": "lucide:globe",
-              "atWord": 18
+              "atWord": 14.083
             },
             {
               "label": "aircraft",
               "sub": "flight software",
               "asset": "lucide:plane",
-              "atWord": 24
+              "atWord": 19.083
             },
             {
               "label": "cars",
               "sub": "infotainment",
               "asset": "lucide:car",
-              "atWord": 30
+              "atWord": 24.083
             }
           ],
-          "atWord": 3
+          "atWord": 1.667
         }
       },
-      "durationFrames": 945,
-      "timingSource": "estimate"
+      "durationFrames": 768,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s12.mp3"
     },
     {
       "id": "s13",
@@ -1249,12 +1261,13 @@
           ],
           "answerIndex": 1,
           "why": "There is no server, so there is nothing to connect to.",
-          "revealAtWord": 22,
-          "atWord": 3
+          "revealAtWord": 19.417,
+          "atWord": 1.833
         }
       },
-      "durationFrames": 417,
-      "timingSource": "estimate"
+      "durationFrames": 364,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s13.mp3"
     },
     {
       "id": "s14",
@@ -1267,20 +1280,21 @@
         "points": [
           {
             "text": "STRICT refused a bad type",
-            "atWord": 8
+            "atWord": 5.417
           },
           {
             "text": "RETURNING showed what changed",
-            "atWord": 17
+            "atWord": 12.333
           },
           {
             "text": "The database is one 8 KB file",
-            "atWord": 24
+            "atWord": 17.75
           }
         ]
       },
-      "durationFrames": 645,
-      "timingSource": "estimate"
+      "durationFrames": 483,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s14.mp3"
     },
     {
       "id": "s15",
@@ -1295,8 +1309,9 @@
           "subtitle": "joins, groups, and how it finds a row"
         }
       },
-      "durationFrames": 393,
-      "timingSource": "estimate"
+      "durationFrames": 285,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s15.mp3"
     },
     {
       "id": "s16",
@@ -1339,12 +1354,13 @@
               "text": "3"
             }
           ],
-          "splitAtWord": 24,
-          "atWord": 3
+          "splitAtWord": 19.333,
+          "atWord": 1.667
         }
       },
-      "durationFrames": 465,
-      "timingSource": "estimate"
+      "durationFrames": 375,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s16.mp3"
     },
     {
       "id": "s17",
@@ -1389,13 +1405,14 @@
               "sub": "2"
             }
           ],
-          "keyAtWord": 32,
-          "mergeAtWord": 40,
-          "atWord": 3
+          "keyAtWord": 21.667,
+          "mergeAtWord": 27.25,
+          "atWord": 1.417
         }
       },
-      "durationFrames": 645,
-      "timingSource": "estimate"
+      "durationFrames": 440,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s17.mp3"
     },
     {
       "id": "s18",
@@ -1449,7 +1466,7 @@
                   "h": 38
                 }
               ],
-              "atWord": 4
+              "atWord": 2.333
             },
             {
               "ref": "rec:sqlite-act2#open-revenue",
@@ -1458,7 +1475,7 @@
               "zooms": [
                 {
                   "mark": "joinline",
-                  "atWord": 63
+                  "atWord": 49
                 }
               ],
               "callouts": [
@@ -1466,7 +1483,7 @@
                   "text": "matched on the id",
                   "mark": "joinline",
                   "color": "blue",
-                  "atWord": 76
+                  "atWord": 59.25
                 }
               ],
               "id": "open-revenue",
@@ -1516,7 +1533,7 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 32
+              "atWord": 24.5
             },
             {
               "ref": "rec:sqlite-act2#revenue",
@@ -1525,7 +1542,7 @@
               "zooms": [
                 {
                   "mark": "top",
-                  "atWord": 100
+                  "atWord": 78.25
                 }
               ],
               "callouts": [
@@ -1533,7 +1550,7 @@
                   "text": "six units, eighty nine each",
                   "mark": "rev",
                   "color": "green",
-                  "atWord": 101
+                  "atWord": 79.083
                 }
               ],
               "overlay": {
@@ -1622,18 +1639,19 @@
                   "h": 209
                 }
               ],
-              "atWord": 88
+              "atWord": 68.75
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1557,
-      "timingSource": "estimate"
+      "durationFrames": 1216,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s18.mp3"
     },
     {
       "id": "s19",
@@ -1653,7 +1671,7 @@
               "zooms": [
                 {
                   "mark": "avg",
-                  "atWord": 37
+                  "atWord": 30.333
                 }
               ],
               "callouts": [
@@ -1661,7 +1679,7 @@
                   "text": "thirteen units across six orders",
                   "mark": "units",
                   "color": "blue",
-                  "atWord": 46
+                  "atWord": 37.833
                 }
               ],
               "id": "aggregate",
@@ -1713,7 +1731,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 4
+              "atWord": 2.5
             },
             {
               "ref": "rec:sqlite-act2#having",
@@ -1722,7 +1740,7 @@
               "zooms": [
                 {
                   "mark": "kept",
-                  "atWord": 89
+                  "atWord": 74.083
                 }
               ],
               "callouts": [
@@ -1730,7 +1748,7 @@
                   "text": "two of four survived",
                   "mark": "kept",
                   "color": "orange",
-                  "atWord": 98
+                  "atWord": 81.583
                 }
               ],
               "id": "having",
@@ -1776,7 +1794,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 55
+              "atWord": 45.417
             },
             {
               "ref": "rec:sqlite-act2#null",
@@ -1785,11 +1803,11 @@
               "zooms": [
                 {
                   "mark": "blank",
-                  "atWord": 131
+                  "atWord": 109.417
                 },
                 {
                   "mark": "isnull",
-                  "atWord": 133
+                  "atWord": 111.083
                 }
               ],
               "callouts": [
@@ -1797,13 +1815,13 @@
                   "text": "the comparison is unknown",
                   "mark": "blank",
                   "color": "orange",
-                  "atWord": 132
+                  "atWord": 110.25
                 },
                 {
                   "text": "and this one answers it",
                   "mark": "isnull",
                   "color": "green",
-                  "atWord": 134
+                  "atWord": 111.917
                 }
               ],
               "overlay": {
@@ -1887,18 +1905,19 @@
                   "h": 247
                 }
               ],
-              "atWord": 107
+              "atWord": 89.167
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 2061,
-      "timingSource": "estimate"
+      "durationFrames": 1717,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s19.mp3"
     },
     {
       "id": "s20",
@@ -1960,13 +1979,14 @@
               "text": "4"
             }
           ],
-          "fallAtWord": 19,
-          "collapseAtWord": 33,
-          "atWord": 3
+          "fallAtWord": 14.75,
+          "collapseAtWord": 26.25,
+          "atWord": 1.667
         }
       },
-      "durationFrames": 609,
-      "timingSource": "estimate"
+      "durationFrames": 483,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s20.mp3"
     },
     {
       "id": "s21",
@@ -2007,13 +2027,14 @@
               "sub": "product 3"
             }
           ],
-          "scanAtWord": 21,
-          "seekAtWord": 36,
-          "atWord": 3
+          "scanAtWord": 17.167,
+          "seekAtWord": 30,
+          "atWord": 1.75
         }
       },
-      "durationFrames": 573,
-      "timingSource": "estimate"
+      "durationFrames": 473,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s21.mp3"
     },
     {
       "id": "s22",
@@ -2033,7 +2054,7 @@
               "zooms": [
                 {
                   "mark": "scan",
-                  "atWord": 27
+                  "atWord": 20.833
                 }
               ],
               "callouts": [
@@ -2041,7 +2062,7 @@
                   "text": "reads every row",
                   "mark": "scan",
                   "color": "orange",
-                  "atWord": 33
+                  "atWord": 25.667
                 }
               ],
               "id": "plan-before",
@@ -2087,7 +2108,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 4
+              "atWord": 2.417
             },
             {
               "ref": "rec:sqlite-act2#index",
@@ -2130,7 +2151,7 @@
                   "h": 247
                 }
               ],
-              "atWord": 39
+              "atWord": 30.417
             },
             {
               "ref": "rec:sqlite-act2#plan-after",
@@ -2139,7 +2160,7 @@
               "zooms": [
                 {
                   "mark": "search",
-                  "atWord": 92
+                  "atWord": 72.917
                 }
               ],
               "callouts": [
@@ -2147,7 +2168,7 @@
                   "text": "straight to the rows",
                   "mark": "search",
                   "color": "green",
-                  "atWord": 93
+                  "atWord": 73.75
                 }
               ],
               "overlay": {
@@ -2199,18 +2220,19 @@
                   "h": 247
                 }
               ],
-              "atWord": 73
+              "atWord": 57.667
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1437,
-      "timingSource": "estimate"
+      "durationFrames": 1136,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s22.mp3"
     },
     {
       "id": "s23",
@@ -2229,13 +2251,14 @@
           "sizeAfter": "12 KB",
           "sizeGrow": 0.5,
           "bought": "SCAN became SEARCH",
-          "forkAtWord": 21,
-          "costAtWord": 37,
-          "atWord": 3
+          "forkAtWord": 17.083,
+          "costAtWord": 30.75,
+          "atWord": 1.667
         }
       },
-      "durationFrames": 645,
-      "timingSource": "estimate"
+      "durationFrames": 533,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s23.mp3"
     },
     {
       "id": "s24",
@@ -2262,12 +2285,13 @@
           ],
           "answerIndex": 2,
           "why": "A guess about slowness is usually wrong. The plan is a fact.",
-          "revealAtWord": 21,
-          "atWord": 3
+          "revealAtWord": 16.75,
+          "atWord": 1.667
         }
       },
-      "durationFrames": 429,
-      "timingSource": "estimate"
+      "durationFrames": 342,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s24.mp3"
     },
     {
       "id": "s25",
@@ -2280,20 +2304,21 @@
         "points": [
           {
             "text": "A join lines rows up on one value",
-            "atWord": 5
+            "atWord": 3.25
           },
           {
             "text": "GROUP BY makes one row per bucket",
-            "atWord": 14
+            "atWord": 10.5
           },
           {
             "text": "SCAN became SEARCH",
-            "atWord": 22
+            "atWord": 17
           }
         ]
       },
-      "durationFrames": 561,
-      "timingSource": "estimate"
+      "durationFrames": 439,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s25.mp3"
     },
     {
       "id": "s26",
@@ -2308,8 +2333,9 @@
           "subtitle": "Python, parameters, and commit"
         }
       },
-      "durationFrames": 405,
-      "timingSource": "estimate"
+      "durationFrames": 333,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s26.mp3"
     },
     {
       "id": "s27",
@@ -2330,26 +2356,27 @@
             {
               "label": "Mechanical keyboard",
               "sub": "89.00",
-              "atWord": 47
+              "atWord": 29.417
             },
             {
               "label": "27-inch monitor",
               "sub": "240.00",
-              "atWord": 53
+              "atWord": 33.25
             },
             {
               "label": "Desk lamp",
               "sub": "35.50",
-              "atWord": 58
+              "atWord": 36.5
             }
           ],
-          "atWord": 3,
-          "queryAtWord": 14,
+          "atWord": 1.25,
+          "queryAtWord": 8.333,
           "color": "blue"
         }
       },
-      "durationFrames": 981,
-      "timingSource": "estimate"
+      "durationFrames": 620,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s27.mp3"
     },
     {
       "id": "s28",
@@ -2369,15 +2396,15 @@
               "zooms": [
                 {
                   "mark": "connect",
-                  "atWord": 30
+                  "atWord": 22.417
                 },
                 {
                   "mark": "cursor",
-                  "atWord": 49
+                  "atWord": 37
                 },
                 {
                   "mark": "loop",
-                  "atWord": 68
+                  "atWord": 51.667
                 }
               ],
               "callouts": [
@@ -2385,19 +2412,19 @@
                   "text": "con IS the file",
                   "mark": "connect",
                   "color": "blue",
-                  "atWord": 39
+                  "atWord": 29.333
                 },
                 {
                   "text": "cur is who you talk to",
                   "mark": "cursor",
                   "color": "purple",
-                  "atWord": 58
+                  "atWord": 44
                 },
                 {
                   "text": "hand it the sentence",
                   "mark": "loop",
                   "color": "green",
-                  "atWord": 78
+                  "atWord": 59.417
                 }
               ],
               "overlay": {
@@ -2462,18 +2489,19 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 4
+              "atWord": 2.333
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1341,
-      "timingSource": "estimate"
+      "durationFrames": 1021,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s28.mp3"
     },
     {
       "id": "s29",
@@ -2493,11 +2521,11 @@
               "zooms": [
                 {
                   "mark": "firstrow",
-                  "atWord": 20
+                  "atWord": 14.583
                 },
                 {
                   "mark": "top",
-                  "atWord": 39
+                  "atWord": 29.083
                 }
               ],
               "callouts": [
@@ -2505,13 +2533,13 @@
                   "text": "written by the shell, read by Python",
                   "mark": "firstrow",
                   "color": "green",
-                  "atWord": 29
+                  "atWord": 21.417
                 },
                 {
                   "text": "same price, same file",
                   "mark": "top",
                   "color": "blue",
-                  "atWord": 48
+                  "atWord": 36
                 }
               ],
               "overlay": {
@@ -2527,20 +2555,20 @@
                     "from": 2,
                     "to": 1,
                     "text": "connect + SELECT",
-                    "atWord": 3
+                    "atWord": 1.5
                   },
                   {
                     "from": 1,
                     "to": 2,
                     "text": "the same four rows",
                     "ret": true,
-                    "atWord": 13
+                    "atWord": 9.167
                   },
                   {
                     "from": 0,
                     "to": 1,
                     "text": "INSERT, in another session",
-                    "atWord": 19
+                    "atWord": 13.833
                   }
                 ]
               },
@@ -2593,18 +2621,19 @@
                   "h": 114
                 }
               ],
-              "atWord": 4
+              "atWord": 2.333
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 885,
-      "timingSource": "estimate"
+      "durationFrames": 665,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s29.mp3"
     },
     {
       "id": "s30",
@@ -2624,11 +2653,11 @@
               "zooms": [
                 {
                   "mark": "rf",
-                  "atWord": 34
+                  "atWord": 25
                 },
                 {
                   "mark": "byname",
-                  "atWord": 57
+                  "atWord": 42.417
                 }
               ],
               "callouts": [
@@ -2636,13 +2665,13 @@
                   "text": "one line, and rows get names",
                   "mark": "rf",
                   "color": "purple",
-                  "atWord": 46
+                  "atWord": 34.083
                 },
                 {
                   "text": "now you can ask for it by name",
                   "mark": "byname",
                   "color": "green",
-                  "atWord": 69
+                  "atWord": 51.5
                 }
               ],
               "overlay": {
@@ -2698,7 +2727,7 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 4
+              "atWord": 2.25
             },
             {
               "ref": "rec:sqlite-act3#run-rowfac",
@@ -2707,11 +2736,11 @@
               "zooms": [
                 {
                   "mark": "byidx",
-                  "atWord": 89
+                  "atWord": 66.667
                 },
                 {
                   "mark": "byname",
-                  "atWord": 91
+                  "atWord": 68.167
                 }
               ],
               "callouts": [
@@ -2719,13 +2748,13 @@
                   "text": "breaks when columns move",
                   "mark": "byidx",
                   "color": "orange",
-                  "atWord": 90
+                  "atWord": 67.417
                 },
                 {
                   "text": "this one does not",
                   "mark": "byname",
                   "color": "green",
-                  "atWord": 92
+                  "atWord": 68.917
                 }
               ],
               "id": "run-rowfac",
@@ -2777,18 +2806,19 @@
                   "h": 190
                 }
               ],
-              "atWord": 81
+              "atWord": 60.583
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1425,
-      "timingSource": "estimate"
+      "durationFrames": 1066,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s30.mp3"
     },
     {
       "id": "s31",
@@ -2809,13 +2839,14 @@
           "evilLabel": "built by hand",
           "safeResult": "1 row",
           "evilResult": "all 4 rows",
-          "safeAtWord": 28,
-          "evilAtWord": 39,
-          "atWord": 3
+          "safeAtWord": 21.25,
+          "evilAtWord": 29.833,
+          "atWord": 1.583
         }
       },
-      "durationFrames": 633,
-      "timingSource": "estimate"
+      "durationFrames": 483,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s31.mp3"
     },
     {
       "id": "s32",
@@ -2835,19 +2866,19 @@
               "zooms": [
                 {
                   "mark": "wanted",
-                  "atWord": 33
+                  "atWord": 24.917
                 },
                 {
                   "mark": "evil",
-                  "atWord": 56
+                  "atWord": 42.833
                 },
                 {
                   "mark": "safe",
-                  "atWord": 78
+                  "atWord": 60
                 },
                 {
                   "mark": "unsafe",
-                  "atWord": 101
+                  "atWord": 77.917
                 }
               ],
               "callouts": [
@@ -2855,25 +2886,25 @@
                   "text": "an ordinary product name",
                   "mark": "wanted",
                   "color": "blue",
-                  "atWord": 44
+                  "atWord": 33.5
                 },
                 {
                   "text": "and something somebody typed",
                   "mark": "evil",
                   "color": "orange",
-                  "atWord": 67
+                  "atWord": 51.417
                 },
                 {
                   "text": "the value stays a value",
                   "mark": "safe",
                   "color": "green",
-                  "atWord": 90
+                  "atWord": 69.333
                 },
                 {
                   "text": "the value becomes code",
                   "mark": "unsafe",
                   "color": "red",
-                  "atWord": 112
+                  "atWord": 86.5
                 }
               ],
               "overlay": {
@@ -2936,7 +2967,7 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 4
+              "atWord": 2.333
             },
             {
               "ref": "rec:sqlite-act3#run-params",
@@ -2945,11 +2976,11 @@
               "zooms": [
                 {
                   "mark": "one",
-                  "atWord": 133
+                  "atWord": 102.833
                 },
                 {
                   "mark": "all",
-                  "atWord": 135
+                  "atWord": 104.417
                 }
               ],
               "callouts": [
@@ -2957,13 +2988,13 @@
                   "text": "exactly what was asked for",
                   "mark": "one",
                   "color": "green",
-                  "atWord": 134
+                  "atWord": 103.583
                 },
                 {
                   "text": "the whole table",
                   "mark": "all",
                   "color": "red",
-                  "atWord": 136
+                  "atWord": 105.167
                 }
               ],
               "id": "run-params",
@@ -3009,18 +3040,19 @@
                   "h": 764
                 }
               ],
-              "atWord": 124
+              "atWord": 95.833
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 2085,
-      "timingSource": "estimate"
+      "durationFrames": 1610,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s32.mp3"
     },
     {
       "id": "s33",
@@ -3040,11 +3072,11 @@
               "zooms": [
                 {
                   "mark": "many",
-                  "atWord": 20
+                  "atWord": 12.667
                 },
                 {
                   "mark": "total",
-                  "atWord": 37
+                  "atWord": 24
                 }
               ],
               "callouts": [
@@ -3052,13 +3084,13 @@
                   "text": "prepared once, run three times",
                   "mark": "many",
                   "color": "blue",
-                  "atWord": 28
+                  "atWord": 18
                 },
                 {
                   "text": "and the count moves",
                   "mark": "total",
                   "color": "green",
-                  "atWord": 45
+                  "atWord": 29.333
                 }
               ],
               "overlay": {
@@ -3074,20 +3106,20 @@
                     "from": 0,
                     "to": 1,
                     "text": "executemany(sql, 3 rows)",
-                    "atWord": 15
+                    "atWord": 9.333
                   },
                   {
                     "from": 1,
                     "to": 2,
                     "text": "prepare once, run x3",
-                    "atWord": 31
+                    "atWord": 20
                   },
                   {
                     "from": 2,
                     "to": 0,
                     "text": "rowcount: 3",
                     "ret": true,
-                    "atWord": 44
+                    "atWord": 28.667
                   }
                 ]
               },
@@ -3134,18 +3166,19 @@
                   "h": 764
                 }
               ],
-              "atWord": 4
+              "atWord": 2
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 825,
-      "timingSource": "estimate"
+      "durationFrames": 542,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s33.mp3"
     },
     {
       "id": "s34",
@@ -3172,12 +3205,13 @@
           ],
           "answerIndex": 2,
           "why": "The value is passed separately, so it is never part of the sentence.",
-          "revealAtWord": 27,
-          "atWord": 3
+          "revealAtWord": 20.667,
+          "atWord": 1.583
         }
       },
-      "durationFrames": 465,
-      "timingSource": "estimate"
+      "durationFrames": 355,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s34.mp3"
     },
     {
       "id": "s35",
@@ -3202,13 +3236,14 @@
               "label": "new row id: 8"
             }
           ],
-          "stageAtWord": 14,
-          "actAtWord": 27,
-          "atWord": 3
+          "stageAtWord": 9.917,
+          "actAtWord": 19.917,
+          "atWord": 1.5
         }
       },
-      "durationFrames": 537,
-      "timingSource": "estimate"
+      "durationFrames": 398,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s35.mp3"
     },
     {
       "id": "s36",
@@ -3228,11 +3263,11 @@
               "zooms": [
                 {
                   "mark": "newid",
-                  "atWord": 19
+                  "atWord": 14.167
                 },
                 {
                   "mark": "count",
-                  "atWord": 29
+                  "atWord": 22
                 }
               ],
               "callouts": [
@@ -3240,13 +3275,13 @@
                   "text": "the id SQLite just assigned",
                   "mark": "newid",
                   "color": "purple",
-                  "atWord": 24
+                  "atWord": 18.083
                 },
                 {
                   "text": "on disk, for good",
                   "mark": "count",
                   "color": "green",
-                  "atWord": 35
+                  "atWord": 26.75
                 }
               ],
               "id": "run-write",
@@ -3292,7 +3327,7 @@
                   "h": 764
                 }
               ],
-              "atWord": 4
+              "atWord": 2.333
             },
             {
               "ref": "rec:sqlite-act3#open-rollback",
@@ -3303,7 +3338,7 @@
                   "text": "the undo",
                   "mark": "rb",
                   "color": "purple",
-                  "atWord": 83
+                  "atWord": 64.5
                 }
               ],
               "id": "open-rollback",
@@ -3353,7 +3388,7 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 40
+              "atWord": 30.667
             },
             {
               "ref": "rec:sqlite-act3#run-rollback",
@@ -3362,11 +3397,11 @@
               "zooms": [
                 {
                   "mark": "gone",
-                  "atWord": 119
+                  "atWord": 92.75
                 },
                 {
                   "mark": "back",
-                  "atWord": 121
+                  "atWord": 94.333
                 }
               ],
               "callouts": [
@@ -3374,13 +3409,13 @@
                   "text": "this connection sees nothing",
                   "mark": "gone",
                   "color": "red",
-                  "atWord": 120
+                  "atWord": 93.583
                 },
                 {
                   "text": "and nothing was lost",
                   "mark": "back",
                   "color": "green",
-                  "atWord": 122
+                  "atWord": 95.167
                 }
               ],
               "overlay": {
@@ -3440,18 +3475,19 @@
                   "h": 247
                 }
               ],
-              "atWord": 108
+              "atWord": 84.167
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1869,
-      "timingSource": "estimate"
+      "durationFrames": 1455,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s36.mp3"
     },
     {
       "id": "s37",
@@ -3476,13 +3512,14 @@
               "label": "COUNT(*) now 0"
             }
           ],
-          "stageAtWord": 12,
-          "actAtWord": 24,
-          "atWord": 3
+          "stageAtWord": 9.083,
+          "actAtWord": 19,
+          "atWord": 1.667
         }
       },
-      "durationFrames": 573,
-      "timingSource": "estimate"
+      "durationFrames": 458,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s37.mp3"
     },
     {
       "id": "s38",
@@ -3500,13 +3537,14 @@
           "readers": 5,
           "writers": 5,
           "verdict": "a busy write workload wants a server",
-          "readAtWord": 16,
-          "writeAtWord": 30,
-          "atWord": 3
+          "readAtWord": 12.5,
+          "writeAtWord": 24.167,
+          "atWord": 1.667
         }
       },
-      "durationFrames": 621,
-      "timingSource": "estimate"
+      "durationFrames": 501,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s38.mp3"
     },
     {
       "id": "s39",
@@ -3533,12 +3571,13 @@
           ],
           "answerIndex": 3,
           "why": "Changes live in the connection until commit() lands them in the file.",
-          "revealAtWord": 24,
-          "atWord": 3
+          "revealAtWord": 19.083,
+          "atWord": 1.667
         }
       },
-      "durationFrames": 441,
-      "timingSource": "estimate"
+      "durationFrames": 349,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s39.mp3"
     },
     {
       "id": "s40",
@@ -3551,20 +3590,21 @@
         "points": [
           {
             "text": "The database was one 8 KB file",
-            "atWord": 12
+            "atWord": 9
           },
           {
             "text": "SCAN became SEARCH",
-            "atWord": 24
+            "atWord": 18.75
           },
           {
             "text": "One row, or the whole table",
-            "atWord": 38
+            "atWord": 30.167
           }
         ]
       },
-      "durationFrames": 645,
-      "timingSource": "estimate"
+      "durationFrames": 511,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s40.mp3"
     },
     {
       "id": "s41",
@@ -3576,8 +3616,9 @@
         "message": "Open a shell and break something",
         "sub": "that is genuinely how it sticks"
       },
-      "durationFrames": 357,
-      "timingSource": "estimate"
+      "durationFrames": 281,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_long_s41.mp3"
     }
   ]
 }
