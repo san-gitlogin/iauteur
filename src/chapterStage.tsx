@@ -73,6 +73,7 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
   const d = scene.data.chapter;
   if (!d) return <AbsoluteFill />;
 
+  const frameWidth = (vertical ? 1080 : 1920) * scale;
   const num = String(d.number ?? '');
   const title = String(d.title ?? '');
   const subtitle = d.subtitle ? String(d.subtitle) : '';
@@ -134,7 +135,7 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
       fontFamily: t.fonts.body,
       fontSize: (vertical ? 28 : 31) * scale,
       color: t.colors.muted,
-      maxWidth: vertical ? '86%' : '68%',
+      maxWidth: '100%',   // the parent block now carries the real measure (see `stamp`)
       lineHeight: 1.35,
       opacity: arriveAt(frame, A_SUB, 14),
       transform: `translateY(${(1 - arriveAt(frame, A_SUB, 14)) * 8 * scale}px)`,
@@ -267,7 +268,10 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
             letterSpacing: t.style.displayTracking,
             textShadow: t.style.glow > 0 ? `0 0 ${34 * t.style.glow}px ${hexA(c, 0.6)}` : undefined,
           }}>{num}</div>
-          <div style={{...displayOf((vertical ? 54 : 66) * scale * fitMul(title, 28)), maxWidth: '88%'}}>{title}</div>
+          <div style={{
+            ...displayOf((vertical ? 54 : 66) * scale * fitMul(title, 28)),
+            width: vertical ? frameWidth * 0.88 : frameWidth * 0.72,
+          }}>{title}</div>
           {subNode}
         </AbsoluteFill>
         {/* The doors themselves — the frame's own ground, so they read as the card opening
@@ -346,7 +350,8 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
         </div>
         <div style={{
           ...displayOf((vertical ? 56 : 64) * scale * fitMul(title, 30)),
-          maxWidth: '84%', opacity: show,
+          width: vertical ? frameWidth * 0.88 : frameWidth * 0.7,
+          opacity: show,
           transform: `translateY(${(1 - show) * 10 * scale}px)`,
         }}>{title}</div>
         {subNode}
@@ -380,10 +385,13 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
       </div>
       <div style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 * scale,
+        // EXPLICIT, not maxWidth: this column's parent centres its children, so without a real
+        // width the block shrink-wraps to the stamp above it and the title breaks at 250px.
+        width: vertical ? frameWidth * 0.9 : frameWidth * 0.72,
         opacity: show, transform: `translateY(${(1 - show) * 12 * scale}px)`,
       }}>
         {kicker()}
-        <div style={{...displayOf((vertical ? 56 : 68) * scale * fitMul(title, 28)), maxWidth: vertical ? '92%' : '76%'}}>{title}</div>
+        <div style={displayOf((vertical ? 56 : 68) * scale * fitMul(title, 28))}>{title}</div>
         {subNode}
       </div>
     </div>,
