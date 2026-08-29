@@ -26,6 +26,24 @@ python scripts/test-webui-http.py # 12 Flask endpoint checks
 python scripts/docs_shots.py      # regenerates docs/img/*.png from the live console
 ```
 
+### …and before you say any of it SHIPPED
+
+```bash
+npm run check-fresh               # is the mp4 on disk newer than the fix?
+```
+
+Deliberately NOT part of `npm run gate`. Any edit under `src/` instantly dates every rendered
+file, which is normal and correct mid-session — folding that into the pre-change gate would
+make it cry wolf on every commit, and a gate you learn to ignore is worse than no gate. This
+one answers a different question, asked at a different moment: *the work is done — does the
+artifact actually contain it?*
+
+It exists because that question went unasked once. A highlight bug was found, fixed, verified
+with stills, committed — and then two of four cuts were re-rendered and two were not. The
+owner watched a forgotten one and reported the bug back, seven minutes after its fix was
+committed. Every other seal was green, because every other seal checks the pipeline and none
+of them checks the OUTPUT.
+
 **This repo is PUBLIC and pushing is the line.** `scripts/check-publish-safety.mjs` runs
 automatically on push via `.githooks/pre-push` — enable it once per clone with
 `git config core.hooksPath .githooks`. Working locally is free; a push is publication.

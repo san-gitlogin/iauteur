@@ -74,6 +74,7 @@
     "record": "node scripts/record.mjs",
     "test-rec-capture": "node scripts/test-rec-capture.mjs",
     "check-recordings": "node scripts/check-recordings.mjs",
+    "check-fresh": "node scripts/check-fresh.mjs",
     "test-rec-determinism": "node scripts/test-rec-determinism.mjs",
     "test-rec-sync": "node scripts/test-rec-sync.mjs",
     "anchor-spec": "node scripts/anchor-spec.mjs",
