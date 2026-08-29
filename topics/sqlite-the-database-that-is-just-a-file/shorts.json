@@ -51,11 +51,12 @@
         "headline": "ONE QUOTE",
         "subtext": "and the whole table walks out",
         "heroAsset": "lucide:database",
-        "headlineAtWord": 2,
-        "heroAtWord": 11
+        "headlineAtWord": 1,
+        "heroAtWord": 9.25
       },
-      "durationFrames": 237,
-      "timingSource": "estimate"
+      "durationFrames": 198,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_shorts_s01.mp3"
     },
     {
       "id": "s02",
@@ -74,24 +75,68 @@
               "focus": true,
               "zooms": [
                 {
-                  "mark": "safe"
+                  "mark": "safe",
+                  "atWord": 21.75
                 },
                 {
-                  "mark": "unsafe"
+                  "mark": "unsafe",
+                  "atWord": 31.833
                 }
               ],
               "callouts": [
                 {
                   "text": "the value stays a value",
                   "mark": "safe",
-                  "color": "green"
+                  "color": "green",
+                  "atWord": 26.833
                 },
                 {
                   "text": "the value becomes code",
                   "mark": "unsafe",
-                  "color": "red"
+                  "color": "red",
+                  "atWord": 36
                 }
-              ]
+              ],
+              "id": "open-params",
+              "src": "rec/sqlite-act3/seg-05.mp4",
+              "frames": 210,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "safe": {
+                  "x": 428,
+                  "y": 210,
+                  "w": 723,
+                  "h": 22
+                },
+                "unsafe": {
+                  "x": 428,
+                  "y": 306,
+                  "w": 693,
+                  "h": 22
+                },
+                "wanted": {
+                  "x": 428,
+                  "y": 186,
+                  "w": 198,
+                  "h": 22
+                },
+                "evil": {
+                  "x": 428,
+                  "y": 282,
+                  "w": 198,
+                  "h": 22
+                }
+              },
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 2.5
             },
             {
               "ref": "rec:sqlite-act3#run-params",
@@ -99,30 +144,64 @@
               "focus": true,
               "zooms": [
                 {
-                  "mark": "one"
+                  "mark": "one",
+                  "atWord": 49.417
                 },
                 {
-                  "mark": "all"
+                  "mark": "all",
+                  "atWord": 51.083
                 }
               ],
               "callouts": [
                 {
                   "text": "exactly what was asked for",
                   "mark": "one",
-                  "color": "green"
+                  "color": "green",
+                  "atWord": 50.25
                 },
                 {
                   "text": "the whole table",
                   "mark": "all",
-                  "color": "red"
+                  "color": "red",
+                  "atWord": 51.917
                 }
-              ]
+              ],
+              "id": "run-params",
+              "src": "rec/sqlite-act3/seg-06.mp4",
+              "frames": 109,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "one": {
+                  "x": 368,
+                  "y": 745,
+                  "w": 255,
+                  "h": 19
+                },
+                "all": {
+                  "x": 456,
+                  "y": 764,
+                  "w": 150,
+                  "h": 19
+                }
+              },
+              "atWord": 41.083
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 993,
-      "timingSource": "estimate"
+      "durationFrames": 815,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_shorts_s02.mp3"
     },
     {
       "id": "s03",
@@ -134,8 +213,9 @@
         "message": "Always pass the value as a parameter",
         "sub": "every language, every time"
       },
-      "durationFrames": 165,
-      "timingSource": "estimate"
+      "durationFrames": 159,
+      "timingSource": "tts",
+      "audio": "audio/sqlite_shorts_s03.mp3"
     }
   ]
 }
