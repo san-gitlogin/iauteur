@@ -117,6 +117,10 @@ for (const [si, scene] of scenes.entries()) {
     clip.frames = real;
     if (step.bbox) clip.bbox = step.bbox;
     if (step.marks) clip.marks = step.marks;
+    // WHERE THE INK IS on this frame — every block of real text the capture measured, so
+    // the overlay card can be placed where it covers nothing. Derived, like marks: it is
+    // refreshed on every bake and must never be hand-authored.
+    if (step.ink) clip.ink = step.ink;
     // The KEYS the runner actually pressed. Carried through so a KEYCAP overlay is a
     // record of what happened, never a hand-typed guess that can drift from the take.
     if (step.keys) clip.keys = step.keys;

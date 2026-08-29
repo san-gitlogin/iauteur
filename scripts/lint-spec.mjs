@@ -1548,6 +1548,85 @@ for (const s of spec.scenes ?? []) {
       }
     }
 
+    // 2c. THE OVERLAY CARD's CONTENT.
+    //
+    //     Owner: *"the text you put there is certainly very much AI-ish, I would like it to
+    //     have meaningful animation components and data rather than just showing texts...
+    //     Maybe you can display what happens in the table, maybe you can display a component
+    //     graph, a sequence diagram."*
+    //
+    //     So the card carries a DEPICTION, and a depiction has a contract. Two things are
+    //     checked here and neither is cosmetic:
+    //
+    //     · An UNKNOWN kind. `StepOverlay` used to `return null` on one, which is the silent
+    //       failure LAW 0n's corollary was written about — the card renders with its caption
+    //       and simply has nothing in it, and nobody notices until the finished cut. It is
+    //       loud at render time now (UnknownKind), and rejected here, which is cheaper.
+    //     · Content past what the picture can hold. The component `.slice()`s its input, so
+    //       authoring a sixth row silently DROPS it. A cap that truncates in silence is worse
+    //       than no cap; these numbers are the component's own slices, restated as rejections.
+    const OVERLAY_KINDS = {
+      swap:  {need: ['from', 'to']},
+      chain: {need: ['steps'], caps: {steps: 4}},
+      split: {need: ['left', 'right']},
+      tally: {need: ['value']},
+      rows:  {need: ['rows'], caps: {rows: 5, columns: 3}},
+      seq:   {need: ['actors', 'messages'], caps: {actors: 4, messages: 5}},
+      graph: {need: ['nodes'], caps: {nodes: 6, edges: 8}},
+    };
+    for (const c of cl) {
+      const o = c.overlay;
+      if (!o) continue;
+      const spec = OVERLAY_KINDS[o.kind];
+      if (!spec) {
+        E(`${id}: RECORDED_STEP clip "${c.label ?? c.id}" overlay kind "${o.kind}" is not a picture — ` +
+          `one of: ${Object.keys(OVERLAY_KINDS).join(', ')}`);
+        continue;
+      }
+      for (const f of spec.need) {
+        const v = o[f];
+        if (v == null || (Array.isArray(v) && !v.length) || v === '') {
+          E(`${id}: RECORDED_STEP overlay "${o.kind}" needs "${f}" — without it the card draws nothing`);
+        }
+      }
+      for (const [f, cap] of Object.entries(spec.caps ?? {})) {
+        const n = Array.isArray(o[f]) ? o[f].length : 0;
+        if (n > cap) E(`${id}: RECORDED_STEP overlay "${o.kind}" has ${n} ${f} (max ${cap}) — ` +
+          `the extras would be silently dropped; split the beat`);
+      }
+      // seq: a message that points at an actor who is not on stage draws off the card.
+      for (const m of o.messages ?? []) {
+        const n = (o.actors ?? []).length;
+        for (const end of ['from', 'to']) {
+          const v = m[end];
+          if (v != null && (!Number.isInteger(v) || v < 0 || v >= n)) {
+            E(`${id}: RECORDED_STEP seq message "${String(m.text ?? '').slice(0, 20)}" has ${end}=${v}, ` +
+              `but there are ${n} actors`);
+          }
+        }
+        if (m.from != null && m.from === m.to) {
+          E(`${id}: RECORDED_STEP seq message "${String(m.text ?? '').slice(0, 20)}" goes from an actor to itself`);
+        }
+        if (m.atWord == null) E(`${id}: RECORDED_STEP seq message "${String(m.text ?? '').slice(0, 20)}" has no atWord (LAW 0i)`);
+      }
+      // graph: LAW 0k.1 — the topology is DECLARED, so an edge naming a node that does not
+      // exist is a typo that would otherwise just draw one fewer line than intended.
+      if (o.kind === 'graph') {
+        const ids = new Set((o.nodes ?? []).map((n) => n.id).filter(Boolean));
+        if (ids.size !== (o.nodes ?? []).length) E(`${id}: RECORDED_STEP graph has nodes with missing or duplicate ids`);
+        for (const e of o.edges ?? []) {
+          for (const end of ['from', 'to']) {
+            if (!ids.has(e[end])) E(`${id}: RECORDED_STEP graph edge ${end}="${e[end]}" names no node`);
+          }
+        }
+      }
+      // Every kind lands on a spoken word, like everything else in this repo.
+      if (o.atWord == null && c.atWord == null) {
+        E(`${id}: RECORDED_STEP overlay "${o.kind}" has no atWord and its clip has none either (LAW 0i)`);
+      }
+      checkColor(id, 'recordedStep.overlay.color', o.color);
+    }
+
     // 3. THE GAP RULE. A segment plays from its anchor and freezes when it runs out.
     //    If the NEXT anchor arrives before this segment has finished playing, the
     //    footage is cut off mid-action — the viewer never sees the thing complete.

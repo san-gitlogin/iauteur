@@ -2149,10 +2149,30 @@ export interface RecordedClip {
     /** `rows` — the table this step touched, and what happened to each row */
     columns?: string[];
     rows?: {cells?: string[]; state?: 'kept' | 'cut' | 'new' | 'plain'; atWord?: number}[];
+    /** `seq` — the exchange: named parties, and the messages between them in order. */
+    actors?: string[];
+    messages?: {from?: number; to?: number; text?: string; atWord?: number; ret?: boolean}[];
+    /** `graph` — a DECLARED topology (LAW 0k.1). Ranks are derived from these edges. */
+    nodes?: {id?: string; label?: string; atWord?: number; tone?: SemColor}[];
+    edges?: {from?: string; to?: string; atWord?: number}[];
     color?: SemColor;
   };
+  /**
+   * WHERE THE INK IS on this step's frame — every block of real text the capture measured,
+   * merged, in capture pixels. DERIVED by `inkFor` in the runner and refreshed on every
+   * bake; never hand-authored. It is what lets the overlay card be placed where it covers
+   * nothing, instead of guessing from the two or three rectangles a callout happened to mark.
+   */
+  ink?: {x: number; y: number; w: number; h: number}[];
   /** Dim everything but the bbox for this step. */
   spotlight?: boolean;
+  /**
+   * The runner marks every `run` step's own command as `__cmd`, and RecordedStep keeps that
+   * rectangle lit for the whole step so the viewer can always find the line that produced
+   * what is being talked about. Set false on the rare step where the command is not the
+   * thing to look at (a scroll, a hover, a pure "look at this" beat).
+   */
+  cmdHighlight?: boolean;
   /** THE anchor: the word at which this segment starts playing. */
   atWord?: number;
 }
@@ -10736,6 +10756,12 @@ export interface SceneData {
    * heroAsset; authoring one without its ingredient falls through to the framed default.
    */
   hookVariant?: 'stack' | 'statement' | 'ask' | 'figure' | 'reveal' | 'lowerthird' | 'plaque';
+  /**
+   * Ask for one CHAPTER silhouette by name: numeral | slab | stub | doors | spine | stamp.
+   * Omit it and the stage picks stably from a hash of the number and title, so consecutive
+   * chapters differ without an author having to track what the last one used.
+   */
+  chapterVariant?: string;
   // TITLE_CARD
   title?: string;
   subtitle?: string;

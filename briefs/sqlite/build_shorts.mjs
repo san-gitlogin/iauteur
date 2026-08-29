@@ -72,19 +72,64 @@ const brand = {
       caption: 'one row, or all of them',
       premise: 'The same table and the same code path. Only the placeholder is different.',
       clips: [
+        // THE CARD CARRIES THE MECHANISM, NOT A CAPTION.
+        //
+        // Owner, on this very cut: *"in shorts i dont see anything changed"*, and then
+        // *"it would be great if we have this card in the shorts too because just
+        // displaying text below the container doesnt help much again."* The card renders
+        // in 9:16 now — but a card holding only a title and a sentence is the same
+        // nothing, moved four hundred pixels down. So each clip gives it something to
+        // draw, and both are the real thing rather than a chip with a word in it.
+        //
+        // Clip 1: a DECLARED graph (LAW 0k.1). The whole lesson is that one route keeps
+        // the name as data and the other turns it into code, and a graph is the shape of
+        // exactly that — two paths out of the same query text, converging on two
+        // different fates. Every node lands on the word that names it.
         clip('rec:sqlite-act3#open-params', 'two ways to ask', {
           zooms: [{mark: 'safe'}, {mark: 'unsafe'}],
           callouts: [
             {text: 'the value stays a value', mark: 'safe', color: 'green'},
             {text: 'the value becomes code', mark: 'unsafe', color: 'red'},
           ],
+          overlay: {
+            kind: 'graph', atWord: 4,
+            nodes: [
+              {id: 'q', label: 'your query text', atWord: 4},
+              {id: 'v', label: '"USB-C hub"', atWord: 10},
+              {id: 'ph', label: '?  placeholder', atWord: 13},
+              {id: 'glue', label: 'glued into the string', atWord: 21},
+              {id: 'data', label: 'stays DATA', tone: 'green', atWord: 17},
+              {id: 'code', label: 'becomes CODE', tone: 'red', atWord: 27},
+            ],
+            edges: [
+              {from: 'q', to: 'ph', atWord: 13},
+              {from: 'v', to: 'ph', atWord: 13},
+              {from: 'ph', to: 'data', atWord: 17},
+              {from: 'q', to: 'glue', atWord: 21},
+              {from: 'glue', to: 'code', atWord: 27},
+            ],
+          },
         }),
+        // Clip 2: the ROWS themselves. The argument of this short is a count — one row
+        // against four — so the card shows the four products, with the one the safe query
+        // legitimately returned landing on "One row" and the three it should never have
+        // seen landing on "Four rows". A viewer with the sound off can still count them,
+        // which is the test LAW 0d sets.
         clip('rec:sqlite-act3#run-params', 'safe, then not', {
           zooms: [{mark: 'one'}, {mark: 'all'}],
           callouts: [
             {text: 'exactly what was asked for', mark: 'one', color: 'green'},
             {text: 'the whole table', mark: 'all', color: 'red'},
           ],
+          overlay: {
+            kind: 'rows', atWord: 47, columns: ['name', 'price'],
+            rows: [
+              {cells: ['USB-C hub', '45.00'], state: 'kept', atWord: 47},
+              {cells: ['Mechanical keyboard', '89.00'], state: 'new', atWord: 75},
+              {cells: ['27-inch monitor', '240.00'], state: 'new', atWord: 76},
+              {cells: ['Desk lamp', '35.50'], state: 'new', atWord: 77},
+            ],
+          },
         }),
       ],
     }}, 10);

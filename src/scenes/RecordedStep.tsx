@@ -320,8 +320,20 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // Every mark the runner measured is a rectangle around real text this beat points at. Take
   // all of them across every clip in the scene, project them into screen space, and find the
   // tallest horizontal band with none of them in it. That is where the furniture goes.
+  //
+  // AMENDED — THE MARKS ARE A SPARSE SAMPLE OF THE INK, NOT THE INK.
+  // Owner, on the glassmorphic card: *"I dont know how it will hold when you are explaining
+  // the code base, it will definitely overlap right."* He was right, and the proof frame
+  // shows it: the card's top edge cutting `ORDER BY revenue DESC;`, because that line
+  // carried no callout and therefore did not exist as far as this solver was concerned. Two
+  // or three marked rectangles on a screen holding forty lines of text is not a map of the
+  // ink. The runner now MEASURES every rendered text row (`inkFor`) and bakes the merged
+  // blocks onto the clip, so `ink` is the real answer and the marks only supplement it.
   const inkBands = clips
-    .flatMap((c) => Object.values((c.marks ?? {}) as Record<string, {y: number; h: number}>))
+    .flatMap((c) => [
+      ...((c.ink ?? []) as {y: number; h: number}[]),
+      ...Object.values((c.marks ?? {}) as Record<string, {y: number; h: number}>),
+    ])
     .map((m) => ({
       top: (Number(m.y) - view.y) * k - 10 * scale,
       bot: (Number(m.y) + Number(m.h) - view.y) * k + 10 * scale,
@@ -362,7 +374,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // bbox knows nothing about, so compact mode never fired and the premise stayed on the code. The
   // marks are the only thing that knows where real ink is, so once a beat has any, the gap between
   // them is the only band considered — and the cluster shrinks to fit it rather than spilling out.
-  const haveMarks = inkBands.length > 0;
+  const haveMarks = inkBands.length > 0;   // measured ink OR marks — either is real geometry
   const compact = fullBleed && haveMarks && gapH < clusterHFull + 24 * scale;
   const clusterH = compact ? measure(true) : clusterHFull;
   const hasGap = fullBleed && haveMarks && gapH >= clusterH + 10 * scale;
@@ -488,6 +500,47 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                 style={{background: t.colors.panel}}
               />
             </Sequence>
+          {/* THE RUNNING COMMAND STAYS LIT FOR THE WHOLE STEP.
+
+              Owner: *"I would like you to highlight the queries each and every time you are
+              executing, just helps users to focus on where. you just highlight once and leave!"*
+
+              He is describing two separate holes. The first: only the steps where I had
+              hand-authored a callout on the command ever got a box, so most executions were
+              never pointed at. The runner now measures every `run` step's own command as a
+              `__cmd` mark, so the rectangle always exists. The second: a callout DRAWS ON and
+              then the eye moves elsewhere — nothing tells you, ten seconds later, which line
+              produced the output being talked about. This is a STANDING highlight: it lands
+              once with the clip and then holds, unanimated, for the whole step.
+
+              It is deliberately quieter than a callout — a filled band and a left-edge accent
+              bar, no leader, no label — because a beat can carry both, and the callout is the
+              one making a point. LAW 0h: it holds, it never pulses. */}
+          {(() => {
+            const r = cur.marks?.__cmd as {x: number; y: number; w: number; h: number} | undefined;
+            if (!r || cur.cmdHighlight === false) return null;
+            // Skip it when an authored callout already boxes the same rectangle — two
+            // outlines on one line is noise, and the callout wins.
+            const dup = (cur.callouts ?? []).some((co) => co.mark === '__cmd');
+            if (dup) return null;
+            const on = interpolate(frame, [curStart, curStart + 10], [0, 1], clamp);
+            if (on <= 0.001) return null;
+            const c = sem(d.color ?? 'blue');
+            const x = Number(r.x) - 5, y = Number(r.y) - 3;
+            const w = Number(r.w) + 10, h = Number(r.h) + 6;
+            return (
+              <AbsoluteFill style={{pointerEvents: 'none', opacity: on}}>
+                <svg width="100%" height="100%" viewBox={`0 0 ${capW} ${capH}`} preserveAspectRatio="none">
+                  <rect x={x} y={y} width={w} height={h} rx={5}
+                    fill={hexA(c, 0.14)} stroke={hexA(c, 0.55)} strokeWidth={1.6 / k} />
+                  {/* The bar is the "you are here" — it reads at a glance even when the
+                      band itself is washed out by bright syntax colouring underneath. */}
+                  <rect x={x} y={y} width={3.5 / k} height={h} rx={2 / k} fill={c} />
+                </svg>
+              </AbsoluteFill>
+            );
+          })()}
+
           {/* CALLOUTS — a label and a leader line pointing at a rectangle the RUNNER
               MEASURED, never a hand-placed pixel. Each appears at its OWN spoken word, so
               a single held frame can be annotated three times as the voice works through
@@ -903,7 +956,13 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                   }}>{d.caption}</div>
                 ) : null}
 
-                {d.premise ? (
+                {/* THE PREMISE BELONGS TO EXACTLY ONE OF THEM.
+                    In 9:16 the standing setup already sits above the video container, where it
+                    is unanchored and readable for the whole beat (LAW 0l). Rendering it in the
+                    card as well printed the same sentence twice on one frame — visible in the
+                    shorts proof, and the kind of defect that reads as carelessness. Full-bleed
+                    has no stacked layout, so there the card is the only place it can live. */}
+                {d.premise && fullBleed ? (
                   <div style={{
                     fontFamily: mono,
                     fontSize: (compact ? 14 : 15.5) * scale,

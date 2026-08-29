@@ -68,6 +68,133 @@ export const expandTokens = (s) => String(s ?? '')
   .split('{{TOOLS}}').join(path.resolve('tools').split(path.sep).join('/'))
   .split('{{REPO}}').join(path.resolve('.').split(path.sep).join('/'));
 
+// ── WHERE THE INK ACTUALLY IS ────────────────────────────────────────────────────────
+//
+// Owner, on the glassmorphic card: *"I dont know how it will hold when you are explaining
+// the code base, it will definitely overlap right."*
+//
+// He is describing a defect that had already shipped twice. The card's placement solver
+// only knew about MARKS — the two or three rectangles a step happened to author a callout
+// on — and treated everything else as empty. On a full IDE screen that is a fiction: the
+// proof frame shows the card's top edge cutting through `ORDER BY revenue DESC;`, because
+// nothing had told the solver line 7 was there. The three earlier attempts at this (a
+// height estimate, then a "compact mode", then a scrim) all failed for the same reason —
+// each was a guess standing in for a measurement.
+//
+// So MEASURE it. Every rendered text row in the editor and the terminal, read off the DOM
+// at the moment the frame is captured, tightened onto its glyphs (a row's own rect is the
+// width of its PANE in both renderers, which would make an empty screen look full), then
+// merged with its neighbours so a 20-line listing costs one rectangle instead of twenty.
+//
+// Returned in the same capture-pixel space as marks, so RecordedStep can score a candidate
+// card position against it without converting anything.
+export const inkFor = async (page) => {
+  const rows = await page.evaluate(() => {
+    const NBSP = String.fromCharCode(160);
+    const flat = (v) => String(v || '').split(NBSP).join(' ');
+    // The glyph extent of a row: from its first non-space character to its last.
+    const glyphBox = (el) => {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      let first = null, last = null, firstOff = -1, lastOff = -1;
+      while (walker.nextNode()) {
+        const v = flat(walker.currentNode.nodeValue);
+        for (let i = 0; i < v.length; i++) {
+          if (v[i] === ' ') continue;
+          if (!first) { first = walker.currentNode; firstOff = i; }
+          last = walker.currentNode; lastOff = i + 1;
+        }
+      }
+      if (!first) return null;
+      try {
+        const range = document.createRange();
+        range.setStart(first, firstOff);
+        range.setEnd(last, lastOff);
+        const r = range.getBoundingClientRect();
+        if (r.width > 2 && r.height > 2) return {x: r.x, y: r.y, w: r.width, h: r.height};
+      } catch { /* fall through to the row rect */ }
+      const r = el.getBoundingClientRect();
+      return {x: r.x, y: r.y, w: r.width, h: r.height};
+    };
+    const out = [];
+    const rows = [
+      ...document.querySelectorAll('.view-lines .view-line'),
+      ...document.querySelectorAll('.xterm-rows > div'),
+    ];
+    for (const el of rows) {
+      if (!flat(el.innerText).trim()) continue;   // an empty line is genuinely free space
+      const b = glyphBox(el);
+      if (b && b.w >= 6 && b.h >= 3) out.push(b);
+    }
+    return out;
+  }).catch(() => []);
+
+  const sorted = rows
+    .map((r) => ({x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.w), h: Math.round(r.h)}))
+    .sort((a, b) => a.y - b.y || a.x - b.x);
+
+  // MERGE VERTICALLY. Two rows that are adjacent and horizontally overlapping are one block
+  // of text as far as "is there room here" is concerned.
+  const blocks = [];
+  for (const r of sorted) {
+    const prev = blocks[blocks.length - 1];
+    const touches = prev &&
+      r.y <= prev.y + prev.h + Math.max(6, prev.h * 0.6) &&
+      r.x < prev.x + prev.w + 24 && r.x + r.w > prev.x - 24;
+    if (touches) {
+      const x1 = Math.max(prev.x + prev.w, r.x + r.w);
+      const y1 = Math.max(prev.y + prev.h, r.y + r.h);
+      prev.x = Math.min(prev.x, r.x);
+      prev.y = Math.min(prev.y, r.y);
+      prev.w = x1 - prev.x;
+      prev.h = y1 - prev.y;
+    } else {
+      blocks.push({...r});
+    }
+  }
+  // A cap, because this rides in the spec JSON. The SQLite acts measure 4-9 blocks after the
+  // merge, so 24 is slack; the biggest are the ones that matter, so drop the smallest rather
+  // than whatever happens to be last.
+  return blocks.length
+    ? blocks.sort((a, b) => b.w * b.h - a.w * a.h).slice(0, 24).sort((a, b) => a.y - b.y)
+    : null;
+};
+
+// ── THE FRAME MAY NOT CARRY THE OPERATOR'S IDENTITY ─────────────────────────────────
+//
+// The `clear` after prep fixes the leak that shipped; this makes a new one impossible to
+// ship quietly. `demos/` writes {{TOOLS}} and {{REPO}}, but expandTokens resolves those to
+// real machine paths at run time, and anything TYPED with one in it lands in the footage —
+// which then goes to YouTube. Grepping the demo JSON would not have caught it: the JSON was
+// clean and the SCREEN was not.
+//
+// Reads what is actually rendered, per step, and throws rather than letting a take finish
+// and be discovered later at render time (LAW 0m corollary 2, LAW 11).
+export const assertNoIdentity = async (page, stepId) => {
+  const home = (process.env.USERPROFILE || process.env.HOME || '').split(path.sep).join('/');
+  const repo = path.resolve('.').split(path.sep).join('/');
+  const needles = [home, repo].filter((n) => n && n.length > 8);
+  if (!needles.length) return;
+  const text = await page.evaluate(() => {
+    const rows = [
+      ...document.querySelectorAll('.view-lines .view-line'),
+      ...document.querySelectorAll('.xterm-rows > div'),
+    ];
+    // Joined with a newline so a path that wraps across two rows is still one string here.
+    return rows.map((r) => String(r.innerText || '')).join('\n');
+  }).catch(() => '');
+  // Windows prints backslashes; the needles are built with forward ones.
+  const flat = String(text).split('\\').join('/');
+  for (const n of needles) {
+    // Case-insensitive: Windows prints the same path with either casing.
+    if (flat.toLowerCase().includes(n.toLowerCase())) {
+      throw new Error(
+        `Step "${stepId}": a MACHINE PATH is visible on screen (matched ${JSON.stringify(n)}). ` +
+        `The footage is published; the operator's identity may not be in it. Clear the terminal ` +
+        `before the take, or run the command from a directory that keeps the path short.`);
+    }
+  }
+};
+
 export const marksFor = async (page, marks = []) => {
   const out = {};
   for (const m of marks) {
@@ -682,6 +809,21 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
     for (const cmd of demo.prep?.commands ?? []) {
       await runCommand(page, expandTokens(cmd), {typeDelay: 6, jitter: 0, timeout: 300000});
     }
+    // WIPE THE PREP SCROLLBACK BEFORE THE CAMERA ROLLS.
+    //
+    // PAID FOR, and it reached a finished cut: the shorts proof frame shows
+    // `Set-Alias sq 'C:/Users/<name>/projects/iauteur/tools/sqlite/sqlite3.exe'` sitting in
+    // the terminal for the whole beat. The DEMO is clean — it writes {{TOOLS}} — but
+    // expandTokens resolves that to a real machine path at run time and prep TYPES it, so
+    // the operator's username was on screen in footage headed for YouTube (LAW 0m
+    // corollary 2 / LAW 11). primeTerminal already clears after installing its hook; prep
+    // then wrote three more lines and nothing cleared them.
+    //
+    // It is also just better production. Prep is setup, not performance: the take should
+    // open on a clean prompt, not on somebody's rummaging.
+    if ((demo.prep?.commands ?? []).length) {
+      await runCommand(page, 'clear', {typeDelay: 4, jitter: 0});
+    }
     await painted(page);
     await sleep(600);
 
@@ -718,10 +860,32 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
       if (finFn) Object.assign(res, (await finFn(page, step, res)) || {});
 
       const bbox = await bboxFor(page, step.focus ?? (step.action === 'run' ? 'terminal' : 'editor'));
+      // EVERY COMMAND MARKS ITSELF.
+      //
+      // Owner: *"I would like you to highlight the queries each and every time you are executing,
+      // just helps users to focus on where. you just highlight once and leave!"*
+      //
+      // He is right that a one-off callout is not the same as knowing, at every moment, which line
+      // is the one that ran. The runner already TYPED the command, and the shell echoes it at the
+      // prompt, so it is on screen and measurable — there is no reason to make an author remember
+      // to mark it. `__cmd` is added implicitly to every run step, and RecordedStep draws a
+      // standing highlight on it for the whole clip.
+      //
+      // It is added LAST so an author's own mark of the same text still wins the id it asked for,
+      // and it is skipped when the author already marked the command themselves.
+      const implicit = [...(step.marks ?? [])];
+      if (step.action === 'run' && step.cmd &&
+          !implicit.some((m) => m?.text && String(step.cmd).includes(String(m.text)) && String(m.text).length > 8)) {
+        implicit.push({id: '__cmd', text: String(step.cmd)});
+      }
       // Marks are measured AFTER the step settles, so they point at the finished state.
-      const marks = await marksFor(page, step.marks);
+      await assertNoIdentity(page, step.id ?? `step-${i + 1}`);
+      const marks = await marksFor(page, implicit);
+      // Measured at the same instant as the marks, so the card knows what the frame holds.
+      const ink = await inkFor(page);
       steps.push({
         marks,
+        ink,
         id: step.id ?? `step-${i + 1}`,
         index: i,
         action: step.action,
@@ -822,9 +986,11 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
       const t1 = Date.now();
 
       const bbox = await bboxFor(page, step.focus ?? 'page', BROWSER_FOCUS);
+      await assertNoIdentity(page, step.id ?? `step-${i + 1}`);
       const marks = await marksFor(page, step.marks);
+      const ink = await inkFor(page);
       steps.push({id: step.id ?? `step-${i + 1}`, index: i, action: step.action,
-                  label: step.label ?? null, tStart: t0, tEnd: t1, bbox, marks, ...res});
+                  label: step.label ?? null, tStart: t0, tEnd: t1, bbox, marks, ink, ...res});
       console.log(`  [${i + 1}/${demo.steps.length}] ${step.id}  ${((t1 - t0) / 1000).toFixed(2)}s`);
     }
 
