@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Sequence, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {useTheme, wordToFrame} from '../themes';
-import {StepOverlay} from '../recordedOverlay';
+import {StepOverlay, minCardWidth} from '../recordedOverlay';
 import {Headline, SourceFooter, useScale, useSem, hexA} from '../ui';
 import {ClipVideo} from '../video';
 import {easeInOutCubic} from '../motion/util';
@@ -1083,7 +1083,11 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             // The rightmost ink on screen — everything past it is free.
             const rightEdge = Math.max(...ink.map((r) => toPx(Number(r.x) + Number(r.w))));
             const freeW = frameW - rightEdge;
-            const MIN = 330 * scale;   // below this a table or a graph is unreadable, so refuse
+            // A floor for any card, plus whatever THIS depiction says it needs. `seq` refuses
+            // anything under ~560px because its labels collide, `graph` scales with its widest
+            // layer; the stacking kinds are happy at the floor. Measured by rendering all seven
+            // into a 460px dock and looking at every one (LAW 0o.6).
+            const MIN = Math.max(330, minCardWidth(cur.overlay as Parameters<typeof minCardWidth>[0])) * scale;
             if (freeW < MIN + 2 * pad) return null;
             const w = Math.min(freeW - 2 * pad, 460 * scale);
             return {left: Math.max(rightEdge + pad, frameW - pad - w), width: w};

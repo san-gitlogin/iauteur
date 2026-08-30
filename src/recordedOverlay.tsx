@@ -58,6 +58,44 @@ export type StepOverlayData = {
   color?: SemColor;
 };
 
+/**
+ * The narrowest card this depiction will accept, in unscaled px.
+ *
+ * Measured by rendering every kind into the 460px VS Code dock and looking at all seven, after
+ * shipping a `split` that was chopped off at both edges because only `rows` had been checked.
+ * A kind that would have to shrink its type below readability to fit says so here, and
+ * RecordedStep places it in the centre band instead (LAW 0o.6 — breathing room is not smaller
+ * type).
+ */
+export const minCardWidth = (o?: {kind?: string; actors?: unknown[]; nodes?: {id?: string}[];
+  edges?: {from?: string; to?: string}[]}): number => {
+  if (!o?.kind) return 0;
+  switch (o.kind) {
+    // Three lifelines plus labels spanning between them collided at 460px, and the labels are
+    // the whole content — there is nothing to trim.
+    case 'seq': return Math.max(560, 210 * Math.max(2, (o.actors ?? []).length));
+    // Ranks are derived from the edges, so the widest layer is what actually needs the room.
+    case 'graph': {
+      const nodes = o.nodes ?? [];
+      const edges = o.edges ?? [];
+      const rank: Record<string, number> = {};
+      for (const n of nodes) rank[String(n.id)] = 0;
+      for (let i = 0; i < nodes.length; i++) {
+        for (const e of edges) {
+          const r = (rank[String(e.from)] ?? 0) + 1;
+          if (r > (rank[String(e.to)] ?? 0)) rank[String(e.to)] = r;
+        }
+      }
+      const per: Record<number, number> = {};
+      for (const n of nodes) { const r = rank[String(n.id)] ?? 0; per[r] = (per[r] ?? 0) + 1; }
+      const widest = Math.max(1, ...Object.values(per));
+      return 260 * widest;
+    }
+    // The rest stack happily into a column once `narrow` kicks in.
+    default: return 0;
+  }
+};
+
 export const StepOverlay: React.FC<{
   data: StepOverlayData;
   /** the clip's own anchor, so an overlay with no atWord still lands with its step */
@@ -78,26 +116,57 @@ export const StepOverlay: React.FC<{
   const mono = 25 * scale;
 
   // One shared chip so every kind looks like the same family (motion guide, 9: consistency).
+  //
+  // AND IT SIZES ITSELF TO THE ROOM IT HAS. `whiteSpace: nowrap` at a fixed 25px mono means a
+  // long label is simply wider than a docked card, and the card clips it — which is exactly
+  // what the owner photographed: `Ctrl+Shift+P` cut to `rl+Shift+P` on one edge and the note
+  // cut to `wa a FI na` on the other. A chip is the smallest primitive here and it was the one
+  // ignoring LAW 0k.4. `share` is how much of the card's width this chip may claim, so a kind
+  // placing two chips side by side says 0.5 and each shrinks honestly instead of overflowing.
+  const chipFont = (text: string, share = 1) => {
+    const room = maxWidth * share - 34 * scale;         // less the chip's own padding + border
+    const advance = 0.6;                                 // measured em-width of the mono faces
+    return Math.max(mono * 0.5, Math.min(mono, room / Math.max(1, text.length * advance)));
+  };
   const Chip: React.FC<{
-    text: string; on?: number; tone?: string; dim?: boolean; big?: boolean;
-  }> = ({text, on = 1, tone = accent, dim = false, big = false}) => (
+    text: string; on?: number; tone?: string; dim?: boolean; big?: boolean; share?: number;
+  }> = ({text, on = 1, tone = accent, dim = false, big = false, share = 1}) => (
     <span style={{
       fontFamily: t.fonts.mono,
-      fontSize: (big ? mono * 1.15 : mono) * 1,
+      fontSize: chipFont(text, share) * (big ? 1.15 : 1),
       color: dim ? t.colors.muted : tone,
       background: hexA(tone, dim ? 0.05 : 0.14 * on),
       border: `${1.5 * scale}px solid ${hexA(dim ? t.colors.panelBorder : tone, dim ? 0.3 : 0.55 * on)}`,
       borderRadius: radius,
       padding: `${5 * scale}px ${13 * scale}px`,
       whiteSpace: 'nowrap',
+      maxWidth: '100%',
       opacity: on,
     }}>{text}</span>
   );
 
+  // NARROW IS THE COMMON CASE NOW, NOT THE EXCEPTION.
+  //
+  // The card docks into the free right-hand column on most VS Code footage, which is ~460px —
+  // and every kind below was written for a full-width strip. `rows` was fixed for it and the
+  // other six were shipped unlooked-at: the owner's frame shows `split` with "Ctrl+Shift+P"
+  // chopped off on the left and "wants a FILE name" chopped off on the right, because the card
+  // clips what overflows. One kind measured, six assumed, is not a fix.
+  //
+  // Every kind consults this. Below the threshold the layout goes VERTICAL — which is what a
+  // tall narrow column wants anyway — and nothing is allowed to exceed the width it was given.
+  const narrow = maxWidth < 520 * scale;
+
   const wrap: React.CSSProperties = {
     position: 'relative', zIndex: 2,
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    gap: 12 * scale,
+    display: 'flex',
+    // `minWidth: 0` is what actually stops a flex child pushing past its parent: without it a
+    // flex item's automatic minimum size is its CONTENT, so `maxWidth` on the parent is advice
+    // rather than a constraint, and the overflow is simply clipped by the card.
+    minWidth: 0,
+    alignItems: 'center', justifyContent: 'center',
+    ...(narrow ? {flexDirection: 'column' as const, gap: 8 * scale} : {gap: 12 * scale}),
+    width: '100%',
     maxWidth,
     opacity: inMs,
   };
@@ -135,6 +204,9 @@ export const StepOverlay: React.FC<{
   if (data.kind === 'chain') {
     const steps = (data.steps ?? []).slice(0, 4);
     const per = 14;
+    // Four stops side by side need width a dock does not have, so the pipeline stands up: the
+    // same journey, read top to bottom, with the connectors becoming rungs. The MOTION is
+    // unchanged — each stop still lights from its own moment, travelling the same direction.
     return (
       <div style={wrap}>
         {steps.map((s, i) => {
@@ -143,14 +215,21 @@ export const StepOverlay: React.FC<{
             <React.Fragment key={i}>
               {i > 0 ? (
                 <span style={{
-                  width: 26 * scale, height: 2 * scale,
+                  ...(narrow
+                    ? {height: 14 * scale, width: 2 * scale}
+                    : {width: 26 * scale, height: 2 * scale}),
                   background: hexA(accent, 0.25 + 0.6 * lit),
                   // the connector draws toward the next stop rather than blinking on
-                  transform: `scaleX(${0.2 + 0.8 * lit})`, transformOrigin: 'left center',
+                  transform: narrow ? `scaleY(${0.2 + 0.8 * lit})` : `scaleX(${0.2 + 0.8 * lit})`,
+                  transformOrigin: narrow ? 'top center' : 'left center',
                 }} />
               ) : null}
-              <span style={{transform: `translateY(${(1 - lit) * 6 * scale}px)`, display: 'inline-block'}}>
-                <Chip text={s} on={0.35 + 0.65 * lit} dim={lit < 0.15} />
+              <span style={{
+                transform: `translateY(${(1 - lit) * 6 * scale}px)`,
+                display: 'inline-block', maxWidth: '100%',
+              }}>
+                <Chip text={s} on={0.35 + 0.65 * lit} dim={lit < 0.15}
+                      share={narrow ? 0.9 : 1 / Math.max(1, steps.length)} />
               </span>
             </React.Fragment>
           );
@@ -165,25 +244,37 @@ export const StepOverlay: React.FC<{
   if (data.kind === 'split') {
     const a = arriveAt(frame, start + stagger(0, 8), 12);
     const b = arriveAt(frame, start + stagger(2, 8), 12);
+    // In a dock, each fate becomes its own stacked block — chip over note — and the divider
+    // turns from a vertical rule into a horizontal one, because that is the axis the two
+    // things are now separated along.
+    const side = (label: string, note: string | undefined, on: number, tone: string) => (
+      <span style={{
+        display: 'flex', minWidth: 0, maxWidth: '100%',
+        ...(narrow
+          ? {flexDirection: 'column' as const, alignItems: 'center' as const, gap: 4 * scale}
+          : {alignItems: 'center' as const, gap: 8 * scale}),
+        transform: `translateY(${(1 - on) * 8 * scale}px)`,
+      }}>
+        <Chip text={label} on={on} tone={tone} share={narrow ? 0.9 : 0.4} />
+        {note ? (
+          <span style={{
+            fontFamily: t.fonts.body, fontSize: mono * (narrow ? 0.72 : 0.8),
+            color: t.colors.muted, opacity: on,
+            textAlign: narrow ? 'center' : 'left', maxWidth: '100%',
+          }}>{note}</span>
+        ) : null}
+      </span>
+    );
     return (
       <div style={wrap}>
-        <span style={{transform: `translateY(${(1 - a) * 8 * scale}px)`, display: 'inline-flex', alignItems: 'center', gap: 8 * scale}}>
-          <Chip text={String(data.left ?? '')} on={a} tone={sem('green')} />
-          {data.leftNote ? (
-            <span style={{fontFamily: t.fonts.body, fontSize: mono * 0.8, color: t.colors.muted, opacity: a}}>
-              {data.leftNote}
-            </span>
-          ) : null}
-        </span>
-        <span style={{width: 1.5 * scale, height: 30 * scale, background: hexA(t.colors.muted, 0.3)}} />
-        <span style={{transform: `translateY(${(1 - b) * 8 * scale}px)`, display: 'inline-flex', alignItems: 'center', gap: 8 * scale}}>
-          <Chip text={String(data.right ?? '')} on={b} tone={sem('red')} />
-          {data.rightNote ? (
-            <span style={{fontFamily: t.fonts.body, fontSize: mono * 0.8, color: t.colors.muted, opacity: b}}>
-              {data.rightNote}
-            </span>
-          ) : null}
-        </span>
+        {side(String(data.left ?? ''), data.leftNote, a, sem('green'))}
+        <span style={{
+          background: hexA(t.colors.muted, 0.3),
+          ...(narrow
+            ? {height: 1.5 * scale, width: '55%'}
+            : {width: 1.5 * scale, height: 30 * scale}),
+        }} />
+        {side(String(data.right ?? ''), data.rightNote, b, sem('red'))}
       </div>
     );
   }
@@ -201,14 +292,10 @@ export const StepOverlay: React.FC<{
   if (data.kind === 'rows') {
     const cols = (data.columns ?? []).slice(0, 3);
     const rows = (data.rows ?? []).slice(0, 5);
-    // A DOCKED CARD IS NARROW, AND AN ELLIPSED CELL IS A CELL THAT WAS NOT SHOWN.
-    //
     // Measured on the VS Code dock at 460px: `copied below itself` rendered as `copied b…`,
     // which teaches nothing and looks broken. Side-by-side columns need width the dock does
     // not have, so below the threshold each row becomes TWO LINES — the chord, then what it
-    // does — which is the shape a narrow column actually wants (LAW 0k.4: components size to
-    // the space they are given rather than clipping).
-    const narrow = maxWidth < 520 * scale;
+    // does — which is the shape a narrow column actually wants (LAW 0k.4).
     const cut = sem('red'), kept = sem('green'), fresh = sem('purple');
     const toneOf = (st?: string) => st === 'cut' ? cut : st === 'new' ? fresh : st === 'kept' ? kept : accent;
     return (
@@ -299,7 +386,12 @@ export const StepOverlay: React.FC<{
               <div style={{
                 position: 'absolute', left: colX(i), top: 0,
                 transform: 'translateX(-50%)',
-                fontFamily: t.fonts.mono, fontSize: mono * 0.72,
+                fontFamily: t.fonts.mono,
+                // Three actor labels across a 460px dock is ~150px each; at a fixed 18px mono
+                // "sqlite3 shell" is 130px of glyphs plus padding and it runs into its
+                // neighbour. The label sizes to its own column, exactly as the chip does.
+                fontSize: Math.max(mono * 0.42, Math.min(mono * 0.72,
+                  (W / actors.length - 16 * scale) / Math.max(1, name.length * 0.62))),
                 color: t.colors.text, whiteSpace: 'nowrap',
                 background: hexA(t.colors.panel, 0.85),
                 border: `${1.2 * scale}px solid ${hexA(t.colors.text, 0.2)}`,
@@ -355,7 +447,11 @@ export const StepOverlay: React.FC<{
                     position: 'absolute',
                     left: (x0 + x1) / 2, top: y - 17 * scale,
                     transform: 'translateX(-50%)',
-                    fontFamily: t.fonts.mono, fontSize: mono * 0.62,
+                    fontFamily: t.fonts.mono,
+                    // A message label may not be wider than the hop it describes, or it runs
+                    // off the card at either end.
+                    fontSize: Math.max(mono * 0.4, Math.min(mono * 0.62,
+                      Math.max(span, W * 0.5) / Math.max(1, String(m.text).length * 0.62))),
                     color: tone, whiteSpace: 'nowrap', opacity: go,
                   }}>{m.text}</div>
                 ) : null}
@@ -442,7 +538,10 @@ export const StepOverlay: React.FC<{
     // steps down until the WIDEST label in the graph fits the NARROWEST node, so the whole
     // graph stays one size and nothing is cut.
     const widest = Math.max(1, ...nodes.map((n) => String(n.label ?? n.id ?? '').length));
-    const narrowest = Math.min(...rows.map((ids) => Math.min(W / ids.length - 12 * scale, 190 * scale)));
+    // `Math.min(..., 190)` was a CEILING for a wide card and became the binding term in a dock,
+    // where W / ids.length is already smaller than 190 — the LAW 0n corollary about a constant
+    // binding in the ordinary case, one layer down. Take the real share of the real width.
+    const narrowest = Math.min(...rows.map((ids) => W / ids.length - 12 * scale));
     // 0.58em per character is the measured advance width of the mono faces this repo ships.
     const nodeFont = Math.max(
       mono * 0.42,
