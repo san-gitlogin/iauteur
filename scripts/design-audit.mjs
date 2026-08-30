@@ -25,6 +25,9 @@
 //   node scripts/design-audit.mjs render <design> [wide|vert]   render the stills
 //   node scripts/design-audit.mjs scan <dir>                    measure them
 //   node scripts/design-audit.mjs scan <dir> --worst 25         just the worst offenders
+//
+// Set AUDIT_COMP=<composition-id> when scanning so a flagged frame can be re-rendered a beat
+// later and confirmed; without it every hit is reported, transitions included.
 import fs from 'node:fs';
 import path from 'node:path';
 import {execSync} from 'node:child_process';
@@ -114,25 +117,47 @@ if (cmd === 'render') {
   const outDir = path.join('out', 'audit', `${design}-${aspect}`);
   fs.mkdirSync(outDir, {recursive: true});
 
-  // Scene boundaries come from the showcase itself, so a still lands mid-scene rather than
-  // during a transition — a transition frame is half of two components and measures as
-  // neither.
-  const src = fs.readFileSync('src/showcaseSpec.ts', 'utf8');
-  void src;
-  const meta = JSON.parse(execSync(
-    `node -e "import('./src/showcaseSpec.ts').then(m=>{let a=0;const o=[];for(const s of m.showcaseSpec.scenes){o.push({id:s.id,type:s.type,mid:a+Math.round((s.durationFrames||150)*0.55)});a+=s.durationFrames||150;}console.log(JSON.stringify(o));})" --experimental-strip-types`,
-    {encoding: 'utf8', maxBuffer: 64 * 1024 * 1024},
-  ).trim().split('\n').pop());
+  // SAMPLE UNIFORMLY RATHER THAN PER SCENE.
+  //
+  // Reading the showcase's scene list would need `src/showcaseSpec.ts` at run time, and node's
+  // TypeScript stripping cannot resolve its extensionless imports. Walking the composition at a
+  // fixed stride needs nothing but the bundle, and it is a SUPERSET of the scene midpoints —
+  // some stills land on a transition, which the scan skips anyway (a transition frame is half
+  // of two components and measures as neither).
+  const STRIDE = Number(process.env.AUDIT_STRIDE ?? 90);
+  const TOTAL = Number(process.env.AUDIT_TOTAL ?? 70000);
+  const meta = [];
+  for (let f = Math.round(STRIDE / 2); f < TOTAL; f += STRIDE) {
+    meta.push({id: `f${f}`, type: 'frame', mid: f});
+  }
 
-  console.log(`${meta.length} scenes -> ${outDir}`);
+  console.log(`sampling every ${STRIDE}f -> ${outDir}`);
+  // RENDER FROM A PREBUILT BUNDLE. `remotion still` re-bundles on every invocation, which at
+  // 350 scenes is ~90 minutes of webpack and about two minutes of actual rendering. `npx
+  // remotion bundle` once, then pass the directory as the serve-url, and the same sweep is a
+  // few minutes. Built here if it is missing so the command stays one step.
   const R = 'node_modules/@remotion/cli/remotion-cli.js';
+  if (!fs.existsSync('build/index.html')) {
+    console.log('bundling once...');
+    execSync(`node ${R} bundle`, {stdio: 'inherit'});
+  }
   for (const [i, s] of meta.entries()) {
     const out = path.join(outDir, `${String(i).padStart(3, '0')}_${s.type}_${s.id}.png`);
     if (fs.existsSync(out)) continue;
     try {
-      execSync(`node ${R} still ${comp} "${out}" --frame=${s.mid} --log=error`, {stdio: 'ignore'});
-    } catch { console.error(`  ! ${s.id} (${s.type}) failed to render`); }
-    if ((i + 1) % 25 === 0) console.log(`  ${i + 1}/${meta.length}`);
+      // HALF RESOLUTION. Every measure here is a RATIO — gutter as a fraction of the frame,
+      // ink box against frame area — so pixel count is irrelevant to the verdict and halving
+      // it roughly quarters the work. The one thing that cares is the full-frame test, which
+      // now checks the ASPECT rather than an exact size.
+      execSync(`node ${R} still build ${comp} "${out}" --frame=${s.mid} --scale=0.5 --log=error`,
+        {stdio: 'ignore'});
+    } catch {
+      // Past the end of the composition — every later frame fails too, so stop rather than
+      // spending a process per remaining sample proving it.
+      console.log(`  reached the end of ${comp} at frame ${s.mid}`);
+      break;
+    }
+    if ((i + 1) % 25 === 0) console.log(`  ${i + 1} stills`);
   }
   console.log('done');
   process.exit(0);
@@ -156,7 +181,7 @@ if (cmd === 'scan') {
   if (!files.length) { console.error(`no PNGs under ${dir}`); process.exit(1); }
 
   const rows = [];
-  let skippedCrop = 0, skippedBleed = 0;
+  let skippedCrop = 0, skippedBleed = 0, transient = 0;
   for (const f of files) {
     let m;
     try { m = measure(f); } catch (e) { console.error(`  ! ${f}: ${e.message}`); continue; }
@@ -176,7 +201,8 @@ if (cmd === 'scan') {
     //   · ink at ALL FOUR edges is full-bleed BY DESIGN. The composition error this is hunting
     //     is ASYMMETRIC — healthy gutters on some sides and none on another, which is what a
     //     label running off the frame looks like and what a background never looks like.
-    const isFullFrame = (m.W === 1920 && m.H === 1080) || (m.W === 1080 && m.H === 1920);
+    const ar = m.W / m.H;
+    const isFullFrame = Math.abs(ar - 16 / 9) < 0.02 || Math.abs(ar - 9 / 16) < 0.02;
     if (!isFullFrame) { skippedCrop++; continue; }
 
     const sides = ['left', 'right', 'top', 'bottom'];
@@ -210,9 +236,52 @@ if (cmd === 'scan') {
     }
   }
 
+  // ── CONFIRM BEFORE REPORTING ────────────────────────────────────────────────
+  //
+  // The first real hit was a headline reading "The fix everyone reached fo" — cut mid-word at
+  // the right edge, and entirely innocent: it was a slide-in caught mid-flight, and thirty
+  // frames later the same headline sits perfectly centred. A sampling sweep WILL land on
+  // transitions, and a tool that makes a human check each one by hand is a tool that gets
+  // ignored (the failure mode this file has already been rewritten once to avoid).
+  //
+  // So a flagged frame is re-rendered a beat later and re-measured. A composition fault is a
+  // property of the layout and survives; a transition is gone. Only survivors are reported.
+  if (rows.length && !process.argv.includes('--no-confirm')) {
+    const comp = process.env.AUDIT_COMP;
+    if (comp) {
+      const R = 'node_modules/@remotion/cli/remotion-cli.js';
+      const tmp = path.join('out', 'audit', '_confirm');
+      fs.mkdirSync(tmp, {recursive: true});
+      const kept = [];
+      for (const r of rows) {
+        const m = /f(\d+)\.png$/.exec(path.basename(r.f));
+        if (!m) { kept.push(r); continue; }        // cannot locate it — report rather than drop
+        const later = Number(m[1]) + 40;
+        const probe = path.join(tmp, `c${later}.png`);
+        try {
+          execSync(`node ${R} still build ${comp} "${probe}" --frame=${later} --scale=0.5 --log=error`,
+            {stdio: 'ignore'});
+        } catch { kept.push(r); continue; }
+        let m2;
+        try { m2 = measure(probe); } catch { kept.push(r); continue; }
+        if (m2.empty) { kept.push(r); continue; }
+        const sides2 = ['left', 'right', 'top', 'bottom'];
+        const tight2 = sides2.filter((k) => m2.margin[k] < 0.015);
+        const healthy2 = sides2.filter((k) => m2.margin[k] > 0.03);
+        const stillBad = (tight2.length > 0 && tight2.length < 4 && healthy2.length >= 2)
+          || (m2.fill < 0.12 && m2.density > 0.004);
+        if (stillBad) kept.push({...r, why: r.why + ' [persists 40f later]'});
+        else transient++;
+      }
+      rows.length = 0;
+      rows.push(...kept);
+    }
+  }
+
   rows.sort((a, b) => b.score - a.score);
-  console.log(`\nscanned ${files.length} still(s): ${skippedCrop} crop(s) and ${skippedBleed} ` +
-    `full-bleed frame(s) skipped, ${rows.length} carry a layout fault\n`);
+  console.log(`\nscanned ${files.length} still(s): ${skippedCrop} crop(s), ${skippedBleed} ` +
+    `full-bleed frame(s) and ${transient} transition(s) skipped — ${rows.length} carry a ` +
+    `layout fault\n`);
   for (const r of rows.slice(0, worst)) {
     console.log(`  ${String(Math.round(r.score)).padStart(4)}  ${path.basename(r.f)}`);
     console.log(`        ${r.why}`);
