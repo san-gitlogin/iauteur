@@ -76,6 +76,66 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-08-30 — the design audit, and the identity leak it found by accident
+
+Owner, heading out: *"look at all possible places and correct everything w.r.t design
+principles and alignment, scaffolding, padding, giving enough room for items to breathe."*
+
+"All possible places" is ~350 registered components across 30 packs. That is far past eye
+review, and eye review is how every defect he reported this session got shipped. So
+`scripts/design-audit.mjs` renders the component showcase from a PREBUILT BUNDLE (`remotion
+still` re-bundles per invocation — 90 minutes of webpack for 350 stills; passing `build` as the
+serve-url makes the same sweep minutes) at half resolution, and measures five things per frame:
+bleed per edge, gutter, fill, balance, and — the only one that looks INSIDE the composition —
+the tightest gap between two content bands against the smaller band's own height.
+
+⚠ **THE FIRST TWO VERSIONS WERE NOISE, AND THAT IS THE LESSON.** v1 flagged 83 of 124 stills:
+my own debugging crops (a crop has no gutter by definition) and every full-bleed recording
+(footage filling the frame is the design). v2 still reported transition frames — a headline
+reading *"The fix everyone reached fo"*, perfectly centred forty frames later. A sweep that
+reports two-thirds of its input has said nothing. Three structural fixes, none of them a tuned
+threshold: judge only full frames; ink at ALL FOUR edges is full-bleed by design; and a fault
+must PERSIST 40 frames to be reported. Final signal on 450 frames: **10 hits, of which 3 are
+TICKER_TAPE doing what a ticker does.** That is a number a human reads.
+
+**What it actually found — the type floor.** The single most common font size in
+`src/linuxViz.tsx` is `body(12.5)`, 35 call sites, with a `mono(10.5)` at the bottom. LAW 0m's
+own corollary already says ~12px is unreadable on a phone. CMD_SYSTEMCTL's state rows and
+CMD_DD's legend render as a grey blur — *in panes that measure 40% EMPTY*. Two defects that
+cancel out to look deliberate. One floor in the shared `mono`/`body` helpers (15px wide, 16px
+vertical) lifts ~150 call sites, reaching 56 depictions and 116 scene types. Safe precisely
+BECAUSE the panes were under-filled: it spends room already going to waste rather than
+squeezing (LAW 0o.6). Re-swept afterwards to prove no overflow was introduced.
+
+**And the thing nobody was looking for.** A `ps` still from that sweep showed a terminal prompt
+carrying the operator's own handle. Grep: **594 occurrences across 33 TRACKED files of this
+PUBLIC repo** — promptLabel, a /home path, a sudo prompt — pushed weeks ago.
+
+Every seal missed it, and the reasons matter more than the fix:
+- `assertNoIdentity` only reads what a CAPTURE renders. This was hand-authored fixture data and
+  was never captured.
+- check-publish-safety's HOME_PATH rule only recognises a username when a path prefix precedes
+  it. `<handle>@box` is not a path.
+
+The gate was looking for the container rather than the contents. Registered as
+`OPERATOR_HANDLE` in the gitignored `.env`, which check-publish-safety already matches BY VALUE
+for identity-shaped keys — the mechanism the repo already trusts for the channel name, so the
+needle never enters the repository. Proved to fail on a planted fixture.
+
+⚠ **I nearly shipped a guard that would not have worked.** My first attempt derived the needle
+from the machine (USERNAME / homedir leaf). Checked against the actual leak: the machine's user
+and the handle in the fixtures are DIFFERENT STRINGS, so it would have caught nothing. Reverted
+rather than ship protection-shaped code. **Check a new guard against the specific incident that
+motivated it, not against the class you imagine it covers.**
+
+⚠ **The videos are not fixed.** The Linux masterclass and the MCP episodes were rendered and
+published with that prompt on screen. The specs are clean; the published files are not.
+Re-rendering them is the owner's call.
+
+Housekeeping: the type-floor change was swept into the de-identification commit by a broad
+`git add -A src/`, so that commit's message does not mention it. Recorded here rather than
+rewriting pushed history.
+
 ### 2026-08-29 — the recorded-step card: six owner complaints, all fixed at the cause
 
 The owner reviewed the SQLite and VS Code cuts and named six defects in one message. Every one
