@@ -27,6 +27,8 @@
 //   node scripts/design-audit.mjs render <design> [wide|vert]   render the stills
 //   node scripts/design-audit.mjs scan <dir>                    measure them
 //   node scripts/design-audit.mjs scan <dir> --worst 25         just the worst offenders
+//   node scripts/design-audit.mjs scan <dir> --crowding          + internal spacing (COMPOSED
+//                                                                 frames only — see below)
 //
 // Set AUDIT_COMP=<composition-id> when scanning so a flagged frame can be re-rendered a beat
 // later and confirmed; without it every hit is reported, transitions included.
@@ -284,7 +286,20 @@ if (cmd === 'scan') {
     // So a tight gap under a SHORT band is annotated as probably a caption and scored low,
     // rather than the threshold being tuned until the tool agrees with my opinion. Tuning a
     // measure to match a verdict is how you get a number that only confirms what you thought.
-    const g = m.tightestGap;
+    // ⚠ AND WHAT IT CANNOT SEE AT ALL: a frame that is mostly SCREEN RECORDING. An editor's
+    // lines, a file tree, a quick-open dropdown — dozens of text bands a pixel apart, every one
+    // reading as a collision. Checked: the worst hit across 455 frames of the SQLite cut was VS
+    // Code's own quick-open panel over the editor — real UI, none of this repo's business.
+    //
+    // I tried to separate footage from composition by band count, then by ink density. Band
+    // count fails because the card's blur merges rows; density gave 15.5% for a composed frame
+    // against 21.8% and 35.3% for two footage frames — separable, on THREE samples, which is
+    // not evidence, it is a threshold fitted to the answer I wanted.
+    //
+    // So it is OPT-IN and the caller declares it, because the caller knows what they pointed
+    // this at. `--crowding` when scanning the component showcase; omit it for finished video.
+    // An honest limitation beats an inferred one.
+    const g = process.argv.includes('--crowding') ? m.tightestGap : null;
     if (g && g.ratio < 0.28 && m.bands >= 2) {
       const caption = g.ref <= 12;   // ~24 real px — a sublabel, not a block of content
       faults.push(`CROWDED at y=${g.at}: ${g.gap}px between blocks ${g.ref}px tall ` +

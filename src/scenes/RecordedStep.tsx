@@ -1089,6 +1089,23 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             // into a 460px dock and looking at every one (LAW 0o.6).
             const MIN = Math.max(330, minCardWidth(cur.overlay as Parameters<typeof minCardWidth>[0])) * scale;
             if (freeW < MIN + 2 * pad) return null;
+            // AN AUTHORED WIDTH IS AN INSTRUCTION, AND IT DECIDES WHETHER THE DOCK APPLIES.
+            //
+            // PAID FOR, and the owner photographed it. `sqlite-scan-vs-search` authors
+            // `card: {width: 0.46}` = 883px. On its third clip the free column is 592px, so the
+            // dock fired and positioned the card from the DOCK's width (460px) at left = 1418 —
+            // while the card rendered at the AUTHORED 883px. Right edge 2301 against a 1920
+            // frame: 381px of the card, including the end of its title and every row, hanging
+            // off the screen.
+            //
+            // Two numbers that must agree and did not. An authored width wins (the author said
+            // it), so when it cannot fit the column the DOCK is what gives way — the card takes
+            // the centre band, where the width it asked for is honoured. Same shape of decision
+            // as `seq` refusing a narrow dock: placement yields to legibility.
+            if (cardCfg.width != null &&
+                frameW * Math.min(0.92, Math.max(0.2, Number(cardCfg.width))) > freeW - 2 * pad) {
+              return null;
+            }
             const w = Math.min(freeW - 2 * pad, 460 * scale);
             return {left: Math.max(rightEdge + pad, frameW - pad - w), width: w};
           })();
@@ -1124,7 +1141,14 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           if (sideDock && place === 'right' && cardCfg.place == null) {
             // Vertically centred IN THE DOCK, which reads as a panel beside the editor rather
             // than a banner over it.
-            pos.left = sideDock.left;
+            //
+            // CLAMPED AS A BELT FOR THE BRACES. The check above should mean this never binds,
+            // but the defect it fixes was precisely two numbers disagreeing about the card's
+            // width — so the position is derived from the width that will ACTUALLY render, and
+            // a card can never start at an x it cannot finish inside. If a future path
+            // reintroduces the disagreement, the card is mispositioned rather than half off
+            // the screen, which is a bug you can see in a still instead of one you cannot.
+            pos.left = Math.max(pad, Math.min(sideDock.left, frameW - pad - cardW));
             pos.top = 0; pos.bottom = 0;
           } else if (place === 'auto') {
             if (fullBleed) {
