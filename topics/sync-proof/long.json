@@ -49,7 +49,7 @@
           "headline": "ls shows names. [ls -l] shows the truth",
           "color": "green",
           "atWord": 1,
-          "promptLabel": "santhu@box",
+          "promptLabel": "dev@box",
           "cwd": "~/projects",
           "highlight": "-l",
           "steps": [
@@ -61,14 +61,14 @@
             },
             {
               "label": "ls -l",
-              "text": "-rw-r--r-- 1 santhu 4096 Aug 17 api.log",
-              "sub": "-rwxr-xr-x 1 santhu 812 Aug 17 deploy.sh",
+              "text": "-rw-r--r-- 1 dev 4096 Aug 17 api.log",
+              "sub": "-rwxr-xr-x 1 dev 812 Aug 17 deploy.sh",
               "detail": "one row per file",
               "atWord": 7.833
             },
             {
               "label": "ls -lh",
-              "text": "-rw-r--r-- 1 santhu 4.0K Aug 17 api.log",
+              "text": "-rw-r--r-- 1 dev 4.0K Aug 17 api.log",
               "detail": "sizes a human can read",
               "atWord": 24.333
             }

@@ -13,11 +13,11 @@ B3 = {
 "s37": dict(cmd="chown", exp="change owner", viz="perm-switches",
  vizNote="The same nine switches, but frozen and greyed to show they never move. What changes is the identity card attached to the owner and group banks — the name on it swaps, and the first bank re-points at the new person.",
  steps=["chown deploy app.py","chown deploy:www app.py"],
- stage=[("the owner","was santhu"),("now it is deploy","the same file, a new owner"),("add a colon","and you set the group too"),
+ stage=[("the owner","was dev"),("now it is deploy","the same file, a new owner"),("add a colon","and you set the group too"),
         ("the group","now www"),("the nine switches","did not move at all"),("read, write, execute","set exactly as before"),
         ("the first bank","now applies to deploy"),("chmod and chown","are two separate jobs")],
  verdict="The permissions never changed", vsub="only the people they point at did", n=
- "|Change own, spelled C H O W N, is short for change owner, and it hands a file to somebody else. ^This file belonged to santhu, and after running that one short command ^it belongs to the deploy account instead. Files carry a group as well as an owner, and very often you want to set the two of them together in one go. So |add a colon and a second name, and ^you set both at once, making ^the group W W W. Now look carefully at what did not happen. ^The nine permission switches have not moved a millimetre. ^Read, write and execute are set exactly as they were before. What changed is that ^the first bank now describes a different person. ~Permissions describe a role rather than a person, which is precisely why ^these are two separate commands."),
+ "|Change own, spelled C H O W N, is short for change owner, and it hands a file to somebody else. ^This file belonged to dev, and after running that one short command ^it belongs to the deploy account instead. Files carry a group as well as an owner, and very often you want to set the two of them together in one go. So |add a colon and a second name, and ^you set both at once, making ^the group W W W. Now look carefully at what did not happen. ^The nine permission switches have not moved a millimetre. ^Read, write and execute are set exactly as they were before. What changed is that ^the first bank now describes a different person. ~Permissions describe a role rather than a person, which is precisely why ^these are two separate commands."),
 
 "s38": dict(cmd="umask", exp="user file creation mask", viz="perm-switches",
  vizNote="A subtraction drawn on the switch banks: the default 666 lights up, the mask's bits are then physically switched OFF one by one, and the remaining lit switches read out as 644. The arithmetic happens on the switches, not as text.",
@@ -31,8 +31,8 @@ B3 = {
 "s39": dict(cmd="sudo", exp="superuser do", viz="auth-gate",
  vizNote="A gate between the shell and the kernel. Without sudo the command hits the gate and bounces back with a denial. With sudo the rule file is visibly consulted, the gate opens, the command runs wearing a root badge, and a log line is written — then the badge is visibly removed.",
  steps=["systemctl restart nginx","sudo systemctl restart nginx"],
- stage=[("permission denied","you are not allowed"),("the sudoers file","is checked first"),("is santhu allowed?","yes, for this command"),
-        ("it runs as root","with full privilege"),("the audit log","records that santhu did it"),
+ stage=[("permission denied","you are not allowed"),("the sudoers file","is checked first"),("is dev allowed?","yes, for this command"),
+        ("it runs as root","with full privilege"),("the audit log","records that dev did it"),
         ("the badge is handed back","the moment it finishes"),("the next command","runs as you again")],
  verdict="You are not root afterwards", vsub="the privilege lasts exactly one command", n=
  "|Restarting a service is something only an administrator may do, so run it as yourself and you get ^permission denied, which is the system working as intended. The obvious fix is to log in as root, and it is the wrong one, because then every command carries full power and nothing records who you were. What you want is to borrow that power once. So |put sudo in front, short for superuser do. First ^a rule file called sudoers is consulted to answer ^one question: is this user allowed to run this particular command? If the answer is yes, ^the command runs with full root privilege, and ^a line goes into the audit log naming you. And then ^the privilege is handed straight back, so ^the next thing you type runs as you again. ~It lasted exactly one command, and that is the entire point."),
@@ -83,16 +83,16 @@ B3 = {
 "s45": dict(cmd="w", exp="who (and what they are doing)", viz="session-list",
  vizNote="Each login is drawn as its own terminal card with a TTY label and the command currently running inside it. One person opening a second connection visibly spawns a second card, which is what makes sessions-not-people concrete.",
  steps=["w"],
- stage=[("santhu","on pts/0, in an editor"),("deploy","on pts/1, running a sync"),("santhu again","on pts/2, a second connection"),
+ stage=[("dev","on pts/0, in an editor"),("deploy","on pts/1, running a sync"),("dev again","on pts/2, a second connection"),
         ("two cards, one person","because these are sessions"),("the header line","carries the load average"),
         ("what they are running","not just who they are"),("who tells you names","and stops there"),("w tells you more","which is usually what you wanted"),("idle time too","how long since they typed")],
  verdict="Sessions, not accounts", vsub="one person logged in twice is two rows, every time", n=
- "Somebody else is on this server, and you would like to know who they are and what they are up to, before you restart anything. The command that answers is |W, which is the shortest on this whole list and covers both at once. ^Santhu is on P T S zero, in an editor. ^Deploy is on P T S one, running a sync. And here is ^santhu again on P T S two, because they opened a second connection. That is ^two rows for one person, which trips people up constantly. These are sessions, not accounts. ^The header line across the top carries the load average, so you get a sense of the machine at the same time. It shows ^what each session is running and ^how long it has been idle. ^Who gives names and stops; ^W goes further. ~These are sessions, not accounts."),
+ "Somebody else is on this server, and you would like to know who they are and what they are up to, before you restart anything. The command that answers is |W, which is the shortest on this whole list and covers both at once. ^Santhu is on P T S zero, in an editor. ^Deploy is on P T S one, running a sync. And here is ^dev again on P T S two, because they opened a second connection. That is ^two rows for one person, which trips people up constantly. These are sessions, not accounts. ^The header line across the top carries the load average, so you get a sense of the machine at the same time. It shows ^what each session is running and ^how long it has been idle. ^Who gives names and stops; ^W goes further. ~These are sessions, not accounts."),
 
 "s46": dict(cmd="last", exp="(last logins)", viz="session-list",
  vizNote="A time-ordered ledger scrolling back through days, each row a login with its timestamp. The 03:12 root login is drawn at genuinely odd hours against a day/night band so the anomaly is visual, not annotated.",
  steps=["last -n 5"],
- stage=[("root","logged in at 03:12"),("at three in the morning","which deserves a second look"),("santhu","Monday at 09:01, normal"),
+ stage=[("root","logged in at 03:12"),("at three in the morning","which deserves a second look"),("dev","Monday at 09:01, normal"),
         ("reboot","Sunday at 22:40"),("it reads a log file","wtmp, going back weeks"),
         ("which means it can be edited","by anyone who gets root"),("so it is evidence","but not proof"),("check it early","before anything else is touched")],
  verdict="First place to look after a breach", vsub="and the first thing a competent attacker clears", n=

@@ -71,7 +71,7 @@
    "headline": "On stdio, stdout [is the wire]",
    "color": "green",
    "stageTitle": "what a stray print does",
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/mcp/notes",
    "durationFrames": 920,
    "narration": "Stdio deserves a closer look, because how it works explains a bug almost everyone hits once. +The client doesn't connect to a running server. The client LAUNCHES the server as a child process, and then talks to it down that process's own standard input and standard output. So standard out isn't where your program prints \u2014 it is the wire. +Which means a stray print, left in from debugging, writes a line of plain text into the middle of a JSON-RPC stream, and the client fails to parse it. ^The error you get points at JSON, ^not at the print statement that caused it, ^which is why this one costs people an afternoon. +Print to standard error instead \u2014 the client leaves that alone, and you'll see it in your terminal. And now the logging deprecation from the last chapter makes sense: standard error is exactly where the spec is telling you to send logs.",

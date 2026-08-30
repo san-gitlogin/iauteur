@@ -12,12 +12,12 @@
    "headline": "cd moves [you], not the files",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "..",
    "steps": [
     {
-     "label": "cd /home/santhu/api",
+     "label": "cd /home/dev/api",
      "text": "",
      "detail": "absolute: starts at /",
      "atWord": 3
@@ -39,7 +39,7 @@
      "value": 1
     },
     {
-     "label": "santhu",
+     "label": "dev",
      "value": 2
     },
     {
@@ -73,12 +73,12 @@
    "headline": "pwd prints [where you stand]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/api",
    "steps": [
     {
      "label": "pwd",
-     "text": "/home/santhu/api",
+     "text": "/home/dev/api",
      "detail": "always absolute",
      "atWord": 2
     }
@@ -95,7 +95,7 @@
      "atWord": 6
     },
     {
-     "label": "santhu",
+     "label": "dev",
      "sub": "your account",
      "atWord": 8
     },
@@ -124,7 +124,7 @@
    "headline": "mkdir -p builds the [whole chain]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/projects",
    "highlight": "-p",
    "steps": [
@@ -183,7 +183,7 @@
    "headline": "touch sets [timestamps], not content",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/api",
    "steps": [
     {
@@ -238,7 +238,7 @@
    "headline": "cp makes a [second file]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/api",
    "highlight": "-r",
    "steps": [
@@ -289,7 +289,7 @@
    "headline": "mv renames and moves \u2014 [same command]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/api",
    "steps": [
     {
@@ -345,7 +345,7 @@
    "headline": "Every guard on [rm] is opt-in",
    "color": "red",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-rf",
    "steps": [
@@ -409,7 +409,7 @@
    "headline": "A hard link is a [second name]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/api",
    "highlight": "-s",
    "steps": [
@@ -472,7 +472,7 @@
    "headline": "clear hides. [reset] forgets",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {

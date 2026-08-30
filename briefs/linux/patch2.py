@@ -35,7 +35,7 @@ R['s02']['narration']=("That's the gap this video closes. Every command a Linux 
 R['s03']['narration']=("Here's how we'll keep a hundred and nine of anything straight. Your terminal is a |workbench, "
  "every command is a tool, and the tools live in ten drawers.")
 R['s07']['narration']=("Every shell session stands in one directory, and |C D is how you move. An |absolute path starts "
- "at the root slash. A |relative one starts where you're standing. Watch |root, then |home, then |santhu, then "
+ "at the root slash. A |relative one starts where you're standing. Watch |root, then |home, then |dev, then "
  "|api light up. |The tree never moves. |Only your position does, which is the whole idea behind paths.")
 R['s17']['narration']=("Quick check. You delete the original file. |Which link still works? Have a think, and pause here "
  "if you want longer. |Ready? The hard link, because it points at the data.")

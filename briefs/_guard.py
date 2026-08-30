@@ -15,7 +15,7 @@ a second machine.
    made deliberately instead of discovered three renders later. See LAW 0p.
 
 2. THE HARDCODED PATH.
-   Every builder wrote to an absolute '/Users/santhu/iauteur/...' path, so none of
+   Every builder wrote to an absolute '/Users/dev/iauteur/...' path, so none of
    them ran anywhere except the machine they were written on. Paths now resolve from
    this file's own location.
 

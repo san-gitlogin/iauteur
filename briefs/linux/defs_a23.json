@@ -12,7 +12,7 @@
    "headline": "cat prints [everything], instantly",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/etc",
    "steps": [
     {
@@ -62,7 +62,7 @@
    "headline": "tac is cat, [backwards]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "steps": [
     {
@@ -116,7 +116,7 @@
    "headline": "more only goes [forward]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "steps": [
     {
@@ -165,7 +165,7 @@
    "headline": "less goes [both ways]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "highlight": "/",
    "steps": [
@@ -222,7 +222,7 @@
    "headline": "tail -f watches it [happen]",
    "color": "orange",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "highlight": "-f",
    "steps": [
@@ -273,7 +273,7 @@
    "headline": "vi has [two modes]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "i",
    "steps": [
@@ -340,7 +340,7 @@
    "headline": "diff shows [only the change]",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/etc/nginx",
    "steps": [
     {
@@ -390,7 +390,7 @@
    "headline": "find [tests] every single file",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "highlight": "-mtime",
    "steps": [
@@ -453,13 +453,13 @@
    "headline": "locate is fast, and can be [wrong]",
    "color": "orange",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
      "label": "locate notes.md",
      "atWord": 2,
-     "text": "/home/santhu/notes.md",
+     "text": "/home/dev/notes.md",
      "detail": "instant"
     },
     {
@@ -509,7 +509,7 @@
    "headline": "grep finds the [matching lines]",
    "color": "orange",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "highlight": "-v",
    "steps": [
@@ -577,7 +577,7 @@
    "headline": "awk splits a line into [fields]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -629,7 +629,7 @@
    "headline": "sed edits the [stream]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "g",
    "steps": [
@@ -686,7 +686,7 @@
    "headline": "xargs turns input into [arguments]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "steps": [
     {
@@ -746,7 +746,7 @@
    "headline": "chmod flips [nine switches]",
    "color": "orange",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/bin",
    "perms": "rwxr-xr-x",
    "permsAtWord": 6,
@@ -799,7 +799,7 @@
     {
      "label": "owner",
      "atWord": 4,
-     "sub": "was santhu",
+     "sub": "was dev",
      "text": "now deploy",
      "color": "green"
     },
@@ -835,7 +835,7 @@
    "headline": "umask decides what [new files] get",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -890,7 +890,7 @@
    "headline": "sudo lends power for [one command]",
    "color": "red",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -902,7 +902,7 @@
     {
      "label": "sudo systemctl restart nginx",
      "atWord": 8,
-     "text": "[sudo] password for santhu:",
+     "text": "[sudo] password for dev:",
      "detail": "checked against sudoers"
     }
    ],
@@ -910,7 +910,7 @@
     {
      "label": "the sudoers rule",
      "atWord": 5,
-     "sub": "is santhu allowed?",
+     "sub": "is dev allowed?",
      "text": "yes",
      "color": "green"
     },
@@ -923,7 +923,7 @@
     {
      "label": "the audit log",
      "atWord": 13,
-     "sub": "santhu ran this",
+     "sub": "dev ran this",
      "text": "recorded",
      "color": "orange"
     }
@@ -1120,7 +1120,7 @@
    "headline": "passwd stores a [hash], never the word",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -1218,19 +1218,19 @@
    "headline": "w shows who is on [right now]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
      "label": "w",
      "atWord": 2,
-     "text": "santhu  pts/0  vim",
+     "text": "dev  pts/0  vim",
      "detail": "one row per live session"
     }
    ],
    "stage": [
     {
-     "label": "santhu",
+     "label": "dev",
      "atWord": 4,
      "sub": "pts/0",
      "text": "vim",
@@ -1268,7 +1268,7 @@
    "headline": "last reads the [login history]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -1287,7 +1287,7 @@
      "color": "red"
     },
     {
-     "label": "santhu",
+     "label": "dev",
      "atWord": 6,
      "sub": "Mon 09:01",
      "text": "normal"

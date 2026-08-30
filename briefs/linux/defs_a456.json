@@ -12,19 +12,19 @@
    "headline": "ps is a [snapshot], not a feed",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
      "label": "ps aux",
      "atWord": 2,
-     "text": "santhu 4821 63.2 node",
+     "text": "dev 4821 63.2 node",
      "detail": "BSD style"
     },
     {
      "label": "ps -ef",
      "atWord": 9,
-     "text": "santhu 4821 1 node",
+     "text": "dev 4821 1 node",
      "detail": "UNIX style, same data"
     }
    ],
@@ -67,7 +67,7 @@
    "headline": "pstree shows [who started whom]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -123,7 +123,7 @@
    "headline": "top re-sorts [as you watch]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -171,7 +171,7 @@
    "headline": "htop is top with [colour and a mouse]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -221,7 +221,7 @@
    "headline": "btop draws it [over time]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -270,7 +270,7 @@
    "headline": "atop already [recorded it]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-r",
    "steps": [
@@ -321,7 +321,7 @@
    "headline": "glances shows [everything] at once",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -378,7 +378,7 @@
    "headline": "nmon builds the view [you want]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -435,7 +435,7 @@
    "headline": "kill sends a [signal], not a bullet",
    "color": "red",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "token": "SIGTERM (15)",
    "steps": [
@@ -494,7 +494,7 @@
    "headline": "killall hits [all of them]",
    "color": "red",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -544,7 +544,7 @@
    "headline": "nohup ignores the [hangup]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -599,7 +599,7 @@
    "headline": "sleep pauses [the script]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -651,7 +651,7 @@
    "headline": "wait holds until [they finish]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -775,7 +775,7 @@
    "headline": "strace shows what it [really tried]",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-e",
    "steps": [
@@ -830,7 +830,7 @@
    "headline": "Load is [three numbers], not one",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -884,7 +884,7 @@
    "headline": "Low free memory is [normal]",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-h",
    "steps": [
@@ -943,7 +943,7 @@
    "headline": "vmstat's first row is [since boot]",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -993,7 +993,7 @@
    "headline": "await is the number [that matters]",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-x",
    "steps": [
@@ -1094,7 +1094,7 @@
    "headline": "dstat puts it [on one line]",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -1142,7 +1142,7 @@
    "headline": "sar already [wrote it down]",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-f",
    "steps": [
@@ -1194,7 +1194,7 @@
    "headline": "watch turns anything [into a dashboard]",
    "color": "yellow",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-d",
    "steps": [
@@ -1251,7 +1251,7 @@
    "headline": "df -i is the [trap] nobody checks",
    "color": "red",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-i",
    "steps": [

@@ -75,7 +75,7 @@
           "stageTitle": "swap out, per second",
           "headline": "vmstat's first row is [since boot]",
           "color": "yellow",
-          "promptLabel": "santhu@box",
+          "promptLabel": "dev@box",
           "cwd": "~",
           "atWord": 1,
           "steps": [

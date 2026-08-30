@@ -6,22 +6,22 @@
 # Markers: | step   ^ stage beat   @ perms   ~ verdict
 B1 = {
 "s07": dict(cmd="cd", exp="change directory", viz="fs-tree",
- vizNote="A real directory tree. A YOU ARE HERE puck walks root->home->santhu->api, then climbs one level and drops into logs. The folders are pinned in place so it is visibly the puck that moves, never the tree.",
- steps=["cd /home/santhu/api","cd ../logs"],
+ vizNote="A real directory tree. A YOU ARE HERE puck walks root->home->dev->api, then climbs one level and drops into logs. The folders are pinned in place so it is visibly the puck that moves, never the tree.",
+ steps=["cd /home/dev/api","cd ../logs"],
  stage=[("absolute path","begins at the root slash"),("/","the root of the disk"),("home","every user's folder"),
-        ("santhu","your own account"),("api","you are here now"),
+        ("dev","your own account"),("api","you are here now"),
         ("relative path","begins where you stand"),("..","up one level"),("logs","you are here now")],
  verdict="None of the folders moved", vsub="only your position in the tree did", n=
- "Your project lives a few folders deep and you want to work inside it. The command is |C D, short for change directory. One way in is an ^absolute path, which begins at the root slash, and the shell walks down it a level at a time: the ^root of the disk, into ^home, where every user's folder lives, into ^santhu, your own account, and finally into ^api. The other way is a ^relative path, which begins wherever you are standing. To reach the logs folder beside you, type |C D dot dot slash logs, where two dots mean ^up one level, and you drop into ^logs. ~None of those folders moved. Only where you are standing changed."),
+ "Your project lives a few folders deep and you want to work inside it. The command is |C D, short for change directory. One way in is an ^absolute path, which begins at the root slash, and the shell walks down it a level at a time: the ^root of the disk, into ^home, where every user's folder lives, into ^dev, your own account, and finally into ^api. The other way is a ^relative path, which begins wherever you are standing. To reach the logs folder beside you, type |C D dot dot slash logs, where two dots mean ^up one level, and you drop into ^logs. ~None of those folders moved. Only where you are standing changed."),
 
 "s08": dict(cmd="pwd", exp="print working directory", viz="fs-tree",
  vizNote="The same tree, but the branch from root down to the current folder lights as one connected trail, and the trail assembles itself into the absolute path string underneath, segment by segment.",
  steps=["pwd"],
- stage=[("/","the root of the disk"),("home","every user's folder"),("santhu","your own account"),
-        ("api","the folder you are in"),("/home/santhu/api","the whole trail, joined up"),
+ stage=[("/","the root of the disk"),("home","every user's folder"),("dev","your own account"),
+        ("api","the folder you are in"),("/home/dev/api","the whole trail, joined up"),
         ("the same answer","wherever you started from"),("a relative path","never returned"),("a shortcut","never returned either")],
  verdict="It answers from the root, every time", vsub="which is exactly why scripts can trust it", n=
- "Here is something that happens more often than people admit. You have been jumping between folders and you genuinely cannot remember which one you are sitting in. The command that answers is |P W D, which stands for print working directory. It replies with the whole path, read top down: the ^root of the disk, then ^home, which holds every user's folder, then ^santhu, your own account, and finally ^api, where you are standing. Joined up, that is ^the full path. And it is ^the same answer no matter where you started from, because P W D will never hand you ^a relative path, and never ^a shortcut either. ~It answers from the root every single time."),
+ "Here is something that happens more often than people admit. You have been jumping between folders and you genuinely cannot remember which one you are sitting in. The command that answers is |P W D, which stands for print working directory. It replies with the whole path, read top down: the ^root of the disk, then ^home, which holds every user's folder, then ^dev, your own account, and finally ^api, where you are standing. Joined up, that is ^the full path. And it is ^the same answer no matter where you started from, because P W D will never hand you ^a relative path, and never ^a shortcut either. ~It answers from the root every single time."),
 
 "s09": dict(cmd="ls", exp="list", viz="fs-listing",
  vizNote="A real directory drawn as file rows with type-coloured names. Bare names first; then each metadata column slides in from the left as a labelled column with its meaning written under it; then the raw byte figures visibly count down into 4.0K form.",

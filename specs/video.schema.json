@@ -1727,7 +1727,7 @@
                         },
                         "promptLabel": {
                           "type": "string",
-                          "description": "Shell prompt owner, e.g. santhu@box."
+                          "description": "Shell prompt owner, e.g. dev@box."
                         },
                         "cwd": {
                           "type": "string",

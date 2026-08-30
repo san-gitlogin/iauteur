@@ -57,7 +57,7 @@ const fields = (d) => [
   {name:'headline', t:'string', note:'Scene headline, <=48 chars, one [accent] phrase.'},
   ...(d.term ? [
     {name:'steps', t:'items', req:true, note:'Shell steps. label = the command exactly as typed. out = the REAL output, one string per line, header rows included. detail = the plain-English note under it. atWord = the word it is typed on.'},
-    {name:'promptLabel', t:'string', note:'Shell prompt owner, e.g. santhu@box.'},
+    {name:'promptLabel', t:'string', note:'Shell prompt owner, e.g. dev@box.'},
     {name:'cwd', t:'string', note:'Working directory shown in the chrome.'},
     {name:'stageTitle', t:'string', note:'Caption over the right pane, <=30 chars.'},
   ] : []),

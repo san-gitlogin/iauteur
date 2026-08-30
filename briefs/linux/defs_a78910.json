@@ -12,7 +12,7 @@
    "headline": "ip replaced [ifconfig]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -68,7 +68,7 @@
    "headline": "ping answers [two questions]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "token": "ICMP echo request",
    "steps": [
@@ -123,7 +123,7 @@
    "headline": "traceroute makes each hop [answer]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "token": "TTL 1, then 2, then 3",
    "steps": [
@@ -182,7 +182,7 @@
    "headline": "mtr keeps [probing]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -233,7 +233,7 @@
    "headline": "netstat still works, [ss is faster]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -283,7 +283,7 @@
    "headline": "ss shows [what is listening]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-l",
    "steps": [
@@ -340,7 +340,7 @@
    "headline": "A profile is not the [device]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -494,7 +494,7 @@
    "headline": "nload is [two numbers]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -538,7 +538,7 @@
    "headline": "dig gives you the [whole answer]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "token": "example.com  A?",
    "steps": [
@@ -594,7 +594,7 @@
    "headline": "host is the [one-line] answer",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -644,7 +644,7 @@
    "headline": "nslookup can [mislead] you",
    "color": "orange",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -694,7 +694,7 @@
    "headline": "whois tells you when it [expires]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -743,7 +743,7 @@
    "headline": "The [public] half goes on the server",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "token": "ed25519 key pair",
    "steps": [
@@ -805,7 +805,7 @@
    "headline": "scp rides the [ssh channel]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": ":",
    "steps": [
@@ -855,7 +855,7 @@
    "headline": "rsync sends only the [difference]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "--dry-run",
    "steps": [
@@ -919,7 +919,7 @@
    "headline": "nc asks one [blunt question]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-zv",
    "steps": [
@@ -977,7 +977,7 @@
    "headline": "wget is built to [finish]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-c",
    "steps": [
@@ -1033,7 +1033,7 @@
    "headline": "curl is for [talking], not downloading",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-X",
    "steps": [
@@ -1097,7 +1097,7 @@
    "headline": "czvf is [four instructions]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-czvf",
    "steps": [
@@ -1154,7 +1154,7 @@
    "headline": "gzip [replaces] the original",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "highlight": "-k",
    "steps": [
@@ -1204,7 +1204,7 @@
    "headline": "bzip2 trades [time] for size",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "/var/log",
    "steps": [
     {
@@ -1249,7 +1249,7 @@
    "headline": "zip is the [portable] one",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-r",
    "steps": [
@@ -1301,7 +1301,7 @@
    "headline": "cron is [five fields]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -1363,7 +1363,7 @@
    "headline": "crontab -e, never [edit the file]",
    "color": "purple",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-e",
    "steps": [
@@ -1420,7 +1420,7 @@
    "headline": "Three lines and a [permission bit]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "+x",
    "steps": [
@@ -1483,7 +1483,7 @@
    "headline": "An alias dies unless you [save it]",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -1531,13 +1531,13 @@
    "headline": "env changes it for [one command]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
      "label": "env",
      "atWord": 2,
-     "text": "PATH=/usr/bin  HOME=/home/santhu",
+     "text": "PATH=/usr/bin  HOME=/home/dev",
      "detail": "everything inherited"
     },
     {
@@ -1585,7 +1585,7 @@
    "headline": "history plus [Ctrl-R]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -1646,7 +1646,7 @@
    "headline": "screen survives your [dropped wifi]",
    "color": "orange",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-r",
    "steps": [
@@ -1702,7 +1702,7 @@
    "headline": "tmux adds [panes] to the same idea",
    "color": "orange",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "attach",
    "steps": [
@@ -1947,7 +1947,7 @@
    "headline": "man passwd and man [5] passwd differ",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "5",
    "steps": [
@@ -2004,7 +2004,7 @@
    "headline": "apropos searches [descriptions]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -2054,7 +2054,7 @@
    "headline": "tldr gives you the [normal] usage",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -2105,7 +2105,7 @@
    "headline": "cheat stores [your own] notes",
    "color": "green",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "steps": [
     {
@@ -2160,7 +2160,7 @@
    "headline": "lspci shows the [driver] too",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-k",
    "steps": [
@@ -2212,7 +2212,7 @@
    "headline": "lsusb shows the [tree]",
    "color": "blue",
    "atWord": 1,
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~",
    "highlight": "-t",
    "steps": [

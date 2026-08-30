@@ -382,7 +382,7 @@
    "headline": "Run it, and [look inside]",
    "color": "green",
    "stageTitle": "what the server exposes",
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/mcp/notes",
    "durationFrames": 860,
    "narration": "Let's actually run the server, because a server that only exists in a file isn't a server yet. +The MCP command line tools ship with an inspector, and pointing it at your file starts the server and opens a panel where you can poke at it by hand. +Ask it to list the tools and you get back exactly what Claude would get: one tool, its description, and the schema for its argument. +And calling the tool by hand returns the note text, which is the same value Claude would receive. ^One tool registered, ^one parameter described, ^and a real result coming back. That's a working MCP server, and nothing has touched Claude yet.",

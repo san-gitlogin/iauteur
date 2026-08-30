@@ -444,7 +444,7 @@
    "headline": "Four things, [then you're set]",
    "color": "green",
    "stageTitle": "what you end up with",
-   "promptLabel": "santhu@box",
+   "promptLabel": "dev@box",
    "cwd": "~/mcp",
    "durationFrames": 880,
    "narration": "Four things to install, and then we'll never do setup again. +First, Python three point ten or newer, because the MCP SDK needs the newer typing features. +Second, u v, which is a Python package manager that's dramatically faster than pip and is what the MCP docs assume you're using. +Third, the SDK itself. Note the square brackets around c l i \u2014 that pulls in the command line tools as well as the library, and you'll want them. +And fourth, your key, exported in the shell so the client can find it. ^Python, ^u v, ^the SDK, ^and a key. That's the whole list.",

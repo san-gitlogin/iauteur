@@ -493,7 +493,7 @@
           "headline": "Four things, [then you're set]",
           "color": "green",
           "atWord": 1,
-          "promptLabel": "santhu@box",
+          "promptLabel": "dev@box",
           "cwd": "~/mcp",
           "stageTitle": "what you end up with",
           "cells": [

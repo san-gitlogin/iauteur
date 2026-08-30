@@ -49,7 +49,7 @@ dict(id="s06", type="CHAPTER", transition="push", background="zoneA",
 dict(id="s07", type="CMD_CD", transition="fade", background="zoneB",
  narration=("Every shell session stands in exactly one directory, and |C D is how you move. An |absolute path "
             "starts at the root slash, so it works from anywhere. A |relative path starts from wherever you are "
-            "standing right now. Watch the |root, then |home, then |santhu, then |api light up as we go, because "
+            "standing right now. Watch the |root, then |home, then |dev, then |api light up as we go, because "
             "the tree never moves. |Only you do."),
  headline="cd moves [you], not the files"),
 dict(id="s08", type="CMD_PWD", transition="dip", background="zoneC",

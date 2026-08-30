@@ -133,7 +133,7 @@ T = {
 
   dict(id="s06", type="MCP_TERMINAL", transition="dip", background="zoneA", key="mcpTerm",
    headline="Run it, and [look inside]", color="green", stageTitle="what the server exposes",
-   promptLabel="santhu@box", cwd="~/mcp/notes", durationFrames=860,
+   promptLabel="dev@box", cwd="~/mcp/notes", durationFrames=860,
    narration=
    "Let's actually run the thing, because a server that only exists in a file isn't a server yet. "
    "+The MCP command line tools ship with an inspector, and pointing it at your file starts the server "

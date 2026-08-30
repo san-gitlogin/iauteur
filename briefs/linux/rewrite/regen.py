@@ -37,7 +37,7 @@ OUT = {
  "sed -i 's/8080/443/g' app.conf": {"text":"listen 443;","detail":"-i: the file itself is changed"},
  "ip link": {"text":"1: lo  2: eth0 <UP>","detail":"the interfaces themselves"},
  "curl -X POST -d '{}' api.ex.com/jobs": {"text":"HTTP/1.1 201 Created","detail":"method, headers and body"},
- "sudo !!": {"text":"[sudo] password for santhu:","detail":"reruns the last command, elevated"},
+ "sudo !!": {"text":"[sudo] password for dev:","detail":"reruns the last command, elevated"},
 }
 
 def steps_for(sid, r, ov):
@@ -78,7 +78,7 @@ for sid, r in NEW.items():
     if r.get('verdict'): ex['verdictAtWord'] = 1
     examples[key] = (ty, ex, r)
 json.dump({k: [v[0], v[1], v[2]['viz']] for k, v in examples.items()},
-          open('/private/tmp/claude-501/-Users-santhu/385c0a2e-17f5-419c-a84b-e5aaee440ea3/scratchpad/examples.json','w'), indent=1)
+          open('/private/tmp/claude-501/-Users-dev/385c0a2e-17f5-419c-a84b-e5aaee440ea3/scratchpad/examples.json','w'), indent=1)
 print(f"built {len(examples)} examples")
 
 # ── write the manifest examples ──────────────────────────────────────────────

@@ -169,7 +169,7 @@
           "headline": "On stdio, stdout [is the wire]",
           "color": "green",
           "atWord": 1,
-          "promptLabel": "santhu@box",
+          "promptLabel": "dev@box",
           "cwd": "~/mcp/notes",
           "stageTitle": "what a stray print does",
           "cells": [

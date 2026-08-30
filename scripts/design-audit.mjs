@@ -13,6 +13,8 @@
 //   MARGIN   the smallest gutter between the ink box and the frame, as a % of the frame
 //   FILL     ink box area against frame area — the "patty inside a burger" measure (LAW 0n)
 //   BALANCE  how far the ink box's centre sits from the frame's centre
+//   CROWDING the tightest gap between two blocks, against the smaller block's own height —
+//            the one measure that looks INSIDE the composition rather than at its outline
 //
 // None of these is a defect on its own. A deliberately edge-anchored lower-third SHOULD have a
 // small margin on one side; a title card SHOULD have low fill. What the sweep is for is the
@@ -100,13 +102,54 @@ const measure = (file) => {
     left: x0 / W, right: (W - 1 - x1) / W,
     top: y0 / H, bottom: (H - 1 - y1) / H,
   };
+  // ── ROOM TO BREATHE, *INSIDE* THE COMPOSITION ──────────────────────────────
+  //
+  // Everything above measures the ink BOX against the FRAME, which says nothing about two
+  // elements crammed together in the middle of an otherwise well-margined layout — and
+  // "giving enough room for items to breathe" is exactly that. So project the ink onto the
+  // vertical axis to get a row profile, split it into BANDS (runs of rows carrying ink) and
+  // GAPS, and judge each gap against the bands it separates.
+  //
+  // The rule is proportional, not absolute: a 12px gap between two 14px captions is fine, and
+  // the same 12px between two 90px headlines is a collision. Typographic leading conventions
+  // put the floor around a third of the type size, so a gap below 0.28x the smaller adjacent
+  // band is the signal. Bands are the eye's units here, not elements — two lines of one
+  // paragraph merge into a single band, which is correct: nobody wants leading flagged.
+  const rowHasInk = [];
+  for (let y = 0; y < H; y += step) {
+    let n = 0;
+    for (let x = 0; x < W; x += step) if (isInk(x, y)) { n++; if (n >= 2) break; }
+    rowHasInk.push(n >= 2);   // two samples, so a single stray pixel is not a band
+  }
+  const bands = [];
+  for (let i = 0; i < rowHasInk.length; i++) {
+    if (!rowHasInk[i]) continue;
+    const from = i;
+    while (i + 1 < rowHasInk.length && rowHasInk[i + 1]) i++;
+    bands.push({from: from * step, to: i * step + step});
+  }
+  let tightestGap = null;
+  for (let i = 1; i < bands.length; i++) {
+    const gap = bands[i].from - bands[i - 1].to;
+    if (gap <= 0) continue;
+    const hA = bands[i - 1].to - bands[i - 1].from;
+    const hB = bands[i].to - bands[i].from;
+    const ref = Math.min(hA, hB);
+    if (ref < 8) continue;                 // a hairline rule is not a block that needs leading
+    const ratio = gap / ref;
+    if (tightestGap === null || ratio < tightestGap.ratio) {
+      tightestGap = {ratio, gap, ref, at: bands[i].from};
+    }
+  }
+
   const fill = ((x1 - x0) * (y1 - y0)) / (W * H);
   const density = (count * step * step) / (W * H);
   const balance = {
     x: ((x0 + x1) / 2 - W / 2) / W,
     y: ((y0 + y1) / 2 - H / 2) / H,
   };
-  return {W, H, margin, fill, density, balance, bleed: bleedPct, empty: false};
+  return {W, H, margin, fill, density, balance, bleed: bleedPct, bands: bands.length,
+          tightestGap, empty: false};
 };
 
 // ── RENDER ───────────────────────────────────────────────────────────────────
@@ -221,17 +264,31 @@ if (cmd === 'scan') {
       faults.push(`CLIPPED on ${tight.join('/')} (${Math.round(maxBleed * 100)}% of an edge, ` +
         `${(minMargin * 100).toFixed(1)}% gutter, but ${healthy.length} other sides compose)`);
     } else if (asym) {
-      faults.push(`NO BREATHING ROOM on ${tight.join('/')} (${(minMargin * 100).toFixed(1)}% gutter)`);
+      // Bleeding on BOTH ends of one axis is the signature of a marquee or a deliberately
+      // full-width band — TICKER_TAPE scrolls its pills off left and right, which is what a
+      // ticker IS. Reported rather than suppressed (the tool should not decide intent for
+      // you), but labelled, so a reader is not sent hunting for a defect that is a design.
+      const pair = tight.slice().sort().join('/');
+      const marquee = pair === 'left/right' || pair === 'bottom/top';
+      faults.push(`NO BREATHING ROOM on ${tight.join('/')} (${(minMargin * 100).toFixed(1)}% gutter)` +
+        (marquee ? ' — both ends of one axis, so likely a marquee/full-width band by design' : ''));
     }
     // FLOATING — real content that never grew into its frame (LAW 0n's "patty in a burger").
     if (m.fill < 0.12 && m.density > 0.004) faults.push(`FLOATING (fills ${Math.round(m.fill * 100)}%)`);
     if (off > 0.18 && !asym) faults.push(`OFF-CENTRE by ${Math.round(off * 100)}%`);
+    // CROWDED — two blocks closer than a third of the smaller one's own height.
+    const g = m.tightestGap;
+    if (g && g.ratio < 0.28 && m.bands >= 2) {
+      faults.push(`CROWDED at y=${g.at}: ${g.gap}px between blocks ${g.ref}px tall ` +
+        `(${g.ratio.toFixed(2)}x — under 0.28x reads as collision)`);
+    }
 
     if (faults.length) {
       const score = (asym && maxBleed > 0.45 ? 100 : 0)
         + (asym ? Math.max(0, (0.015 - minMargin) * 2000) : 0)
         + (m.fill < 0.12 && m.density > 0.004 ? 20 : 0)
-        + Math.max(0, (off - 0.18) * 60);
+        + Math.max(0, (off - 0.18) * 60)
+        + (g && g.ratio < 0.28 && m.bands >= 2 ? (0.28 - g.ratio) * 150 : 0);
       rows.push({f, score, why: faults.join(' · ')});
     }
   }
@@ -268,8 +325,10 @@ if (cmd === 'scan') {
         const sides2 = ['left', 'right', 'top', 'bottom'];
         const tight2 = sides2.filter((k) => m2.margin[k] < 0.015);
         const healthy2 = sides2.filter((k) => m2.margin[k] > 0.03);
+        const g2 = m2.tightestGap;
         const stillBad = (tight2.length > 0 && tight2.length < 4 && healthy2.length >= 2)
-          || (m2.fill < 0.12 && m2.density > 0.004);
+          || (m2.fill < 0.12 && m2.density > 0.004)
+          || (g2 && g2.ratio < 0.28 && m2.bands >= 2);
         if (stillBad) kept.push({...r, why: r.why + ' [persists 40f later]'});
         else transient++;
       }

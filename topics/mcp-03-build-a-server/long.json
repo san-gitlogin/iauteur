@@ -405,7 +405,7 @@
           "headline": "Run it, and [look inside]",
           "color": "green",
           "atWord": 1,
-          "promptLabel": "santhu@box",
+          "promptLabel": "dev@box",
           "cwd": "~/mcp/notes",
           "stageTitle": "what the server exposes",
           "cells": [

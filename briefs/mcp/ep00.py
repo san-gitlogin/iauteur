@@ -192,7 +192,7 @@ T = {
 
  dict(id="s05", type="MCP_TERMINAL", transition="push", background="zoneA", key="mcpTerm",
   headline="Four things, [then you're set]", color="green", stageTitle="what you end up with",
-  promptLabel="santhu@box", cwd="~/mcp", durationFrames=880,
+  promptLabel="dev@box", cwd="~/mcp", durationFrames=880,
   narration=
   "Four things to install, and then we'll never do setup again. "
   "+First, Python three point ten or newer, because the MCP SDK needs the newer typing features. "

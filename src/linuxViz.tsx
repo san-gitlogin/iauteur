@@ -82,8 +82,27 @@ const useViz = (accent: SemColor) => {
     t, sem, scale, vertical,
     a: sem(accent),
     rad: (n = 8) => n * scale * t.style.cornerRadius,
-    mono: (n = 18) => ({fontFamily: t.fonts.mono, fontSize: n * scale}),
-    body: (n = 17) => ({fontFamily: t.fonts.body, fontSize: n * scale}),
+    // ── A TYPOGRAPHIC FLOOR, ENFORCED IN ONE PLACE ────────────────────────────
+    //
+    // Measured across this file (2026-08-30 design audit): the single most common size in the
+    // whole depiction library is `body(12.5)` — 35 call sites — with a `mono(10.5)` at the
+    // bottom. At 1920x1080 that is 12.5 real pixels, and LAW 0m's own corollary already says
+    // ~12px "is unreadable on a phone". The audit's stills show it plainly: CMD_SYSTEMCTL's
+    // state rows and CMD_DD's legend are a grey blur, sitting in panes that measure 40% EMPTY.
+    // Two defects that cancel to look deliberate — tiny type AND unused space.
+    //
+    // The floor lifts every one of ~150 call sites at once, which is the only honest way to
+    // fix 56 depictions feeding 116 scene types. It is safe here precisely BECAUSE the panes
+    // were under-filled: this is spending room that was already going to waste, not squeezing
+    // (LAW 0o.6 — breathing room is never bought by shrinking what is there).
+    //
+    // Vertical gets a higher floor: a 9:16 frame is viewed on a phone, and the same pixel is
+    // a smaller share of a smaller screen held further from the eye than a laptop.
+    //
+    // A depiction that genuinely cannot fit its content at the floor is carrying too much for
+    // its pane, and the answer there is fewer items — not smaller type.
+    mono: (n = 18) => ({fontFamily: t.fonts.mono, fontSize: Math.max(vertical ? 16 : 15, n) * scale}),
+    body: (n = 17) => ({fontFamily: t.fonts.body, fontSize: Math.max(vertical ? 16 : 15, n) * scale}),
     line: hexA(t.colors.panelBorder, 0.9),
     dim: hexA(t.colors.muted, 0.9),
   };

@@ -361,7 +361,7 @@
   {
    "id": "s07",
    "type": "CMD_CD",
-   "narration": "Your project lives a few folders deep and you want to work inside it. The command is C D, short for change directory. One way in is an absolute path, which begins at the root slash, and the shell walks down it a level at a time: the root of the disk, into home, where every user's folder lives, into santhu, your own account, and finally into api. The other way is a relative path, which begins wherever you're standing. To reach the logs folder beside you, type C D dot dot slash logs, where two dots mean up one level, and you drop into logs. None of those folders moved. Only where you're standing changed. So a path is just directions to a place which was already there, and cd walks them for you.",
+   "narration": "Your project lives a few folders deep and you want to work inside it. The command is C D, short for change directory. One way in is an absolute path, which begins at the root slash, and the shell walks down it a level at a time: the root of the disk, into home, where every user's folder lives, into dev, your own account, and finally into api. The other way is a relative path, which begins wherever you're standing. To reach the logs folder beside you, type C D dot dot slash logs, where two dots mean up one level, and you drop into logs. None of those folders moved. Only where you're standing changed. So a path is just directions to a place which was already there, and cd walks them for you.",
    "durationFrames": 1223,
    "timingSource": "tts",
    "background": "zoneB",
@@ -370,13 +370,13 @@
      "stageTitle": "where you are standing",
      "headline": "cd moves [you], not the files",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "..",
      "atWord": 1,
      "steps": [
       {
-       "label": "cd /home/santhu/api",
+       "label": "cd /home/dev/api",
        "detail": "absolute: starts at /",
        "atWord": 12.583
       },
@@ -405,7 +405,7 @@
        "atWord": 39.333
       },
       {
-       "label": "santhu",
+       "label": "dev",
        "sub": "your own account",
        "value": 2,
        "atWord": 44.5
@@ -444,7 +444,7 @@
   {
    "id": "s08",
    "type": "CMD_PWD",
-   "narration": "Here's something which happens more often than people admit. You've been jumping between folders and you genuinely can't remember which one you're sitting in. The command which answers is P W D, which stands for print working directory. P W D replies with the whole path, read top down: the root of the disk, then home, which holds every user's folder, then santhu, your own account, and finally api, where you're standing. Joined up, that's the full path. And it's the same answer no matter where you started from, because P W D will never hand you a relative path, and never a shortcut either. P W D answers from the root every single time. When a script needs to know where it is, pwd is the answer it can rely on.",
+   "narration": "Here's something which happens more often than people admit. You've been jumping between folders and you genuinely can't remember which one you're sitting in. The command which answers is P W D, which stands for print working directory. P W D replies with the whole path, read top down: the root of the disk, then home, which holds every user's folder, then dev, your own account, and finally api, where you're standing. Joined up, that's the full path. And it's the same answer no matter where you started from, because P W D will never hand you a relative path, and never a shortcut either. P W D answers from the root every single time. When a script needs to know where it is, pwd is the answer it can rely on.",
    "durationFrames": 1245,
    "timingSource": "tts",
    "background": "zoneC",
@@ -453,13 +453,13 @@
      "stageTitle": "the trail from the root",
      "headline": "pwd prints [where you stand]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~/api",
      "atWord": 1,
      "steps": [
       {
        "label": "pwd",
-       "text": "/home/santhu/api",
+       "text": "/home/dev/api",
        "detail": "always absolute",
        "atWord": 22.417
       }
@@ -478,7 +478,7 @@
        "atWord": 42.5
       },
       {
-       "label": "santhu",
+       "label": "dev",
        "sub": "your own account",
        "value": 2,
        "atWord": 47.917
@@ -490,7 +490,7 @@
        "atWord": 52.583
       },
       {
-       "label": "/home/santhu/api",
+       "label": "/home/dev/api",
        "sub": "the whole trail, joined up",
        "atWord": 57.917
       },
@@ -530,7 +530,7 @@
      "stageTitle": "what the listing becomes",
      "headline": "ls shows names. [ls -l] shows the truth",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~/projects",
      "highlight": "-l",
      "atWord": 1,
@@ -543,14 +543,14 @@
       },
       {
        "label": "ls -l",
-       "text": "-rw-r--r-- 1 santhu 4096 Aug 17 api.log",
-       "sub": "-rwxr-xr-x 1 santhu 812 Aug 17 deploy.sh",
+       "text": "-rw-r--r-- 1 dev 4096 Aug 17 api.log",
+       "sub": "-rwxr-xr-x 1 dev 812 Aug 17 deploy.sh",
        "detail": "one row per file, seven columns",
        "atWord": 27.167
       },
       {
        "label": "ls -lh",
-       "text": "-rw-r--r-- 1 santhu 4.0K Aug 17 api.log",
+       "text": "-rw-r--r-- 1 dev 4.0K Aug 17 api.log",
        "detail": "sizes a human can read",
        "atWord": 69.833
       }
@@ -612,7 +612,7 @@
      "stageTitle": "the tree growing",
      "headline": "mkdir -p builds the [whole chain]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~/projects",
      "highlight": "-p",
      "atWord": 1,
@@ -689,7 +689,7 @@
      "stageTitle": "the file's two clocks",
      "headline": "touch sets [timestamps], not content",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~/api",
      "atWord": 1,
      "steps": [
@@ -761,7 +761,7 @@
      "stageTitle": "two sets of bytes",
      "headline": "cp makes a [second file]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~/api",
      "highlight": "-r",
      "atWord": 1,
@@ -834,7 +834,7 @@
      "stageTitle": "one inode, a new name",
      "headline": "mv renames and moves \u2014 [same command]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~/api",
      "atWord": 1,
      "steps": [
@@ -911,7 +911,7 @@
      "stageTitle": "the delete gate",
      "headline": "Every guard on [rm] is opt-in",
      "color": "red",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-rf",
      "atWord": 1,
@@ -991,7 +991,7 @@
      "stageTitle": "names pointing at data",
      "headline": "A hard link is a [second name]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~/api",
      "highlight": "-s",
      "atWord": 1,
@@ -1069,7 +1069,7 @@
      "stageTitle": "screen, and scrollback",
      "headline": "clear hides. [reset] forgets",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -1218,7 +1218,7 @@
      "stageTitle": "the whole file, at once",
      "headline": "cat prints [everything], instantly",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/etc",
      "atWord": 1,
      "steps": [
@@ -1292,7 +1292,7 @@
      "stageTitle": "the order reversed",
      "headline": "tac is cat, [backwards]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "atWord": 1,
      "steps": [
@@ -1366,7 +1366,7 @@
      "stageTitle": "one screen, forwards only",
      "headline": "more only goes [forward]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "atWord": 1,
      "steps": [
@@ -1439,7 +1439,7 @@
      "stageTitle": "the viewport, both ways",
      "headline": "less goes [both ways]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "highlight": "/",
      "atWord": 1,
@@ -1508,7 +1508,7 @@
      "stageTitle": "new lines arriving",
      "headline": "tail -f watches it [happen]",
      "color": "orange",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "highlight": "-f",
      "atWord": 1,
@@ -1581,7 +1581,7 @@
      "stageTitle": "the two modes",
      "headline": "vi has [two modes]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "i",
      "atWord": 1,
@@ -1660,7 +1660,7 @@
      "stageTitle": "only what changed",
      "headline": "diff shows [only the change]",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/etc/nginx",
      "atWord": 1,
      "steps": [
@@ -1733,7 +1733,7 @@
      "stageTitle": "every file, tested",
      "headline": "find [tests] every single file",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "highlight": "-mtime",
      "atWord": 1,
@@ -1806,13 +1806,13 @@
      "stageTitle": "index versus disk",
      "headline": "locate is fast, and can be [wrong]",
      "color": "orange",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
       {
        "label": "locate notes.md",
-       "text": "/home/santhu/notes.md",
+       "text": "/home/dev/notes.md",
        "detail": "instant",
        "atWord": 1
       },
@@ -1880,7 +1880,7 @@
      "stageTitle": "the lines that match",
      "headline": "grep finds the [matching lines]",
      "color": "orange",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "highlight": "-v",
      "atWord": 1,
@@ -1955,7 +1955,7 @@
      "stageTitle": "the line, split into fields",
      "headline": "awk splits a line into [fields]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -2029,7 +2029,7 @@
      "stageTitle": "lines through the transform",
      "headline": "sed edits the [stream]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "g",
      "atWord": 1,
@@ -2103,7 +2103,7 @@
      "stageTitle": "the pipe, adapted",
      "headline": "xargs turns input into [arguments]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "atWord": 1,
      "steps": [
@@ -2253,7 +2253,7 @@
      "stageTitle": "nine switches",
      "headline": "chmod flips [nine switches]",
      "color": "orange",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~/bin",
      "atWord": 1,
      "steps": [
@@ -2318,7 +2318,7 @@
   {
    "id": "s37",
    "type": "CMD_CHOWN",
-   "narration": "Change own, spelled C H O W N, is short for change owner, and change own hands a file to somebody else. This file belonged to santhu, and after running that one short command it belongs to the deploy account instead. Files carry a group as well as an owner, and very often you want to set the two of them together in one go. So add a colon and a second name, and you set both at once, making the group W W W. Now look carefully at what didn't happen. The nine permission switches haven't moved a millimetre. Read, write and execute are set exactly as they were before. What changed is that the first bank now describes a different person. Permissions describe a role rather than a person, which is precisely why these are two separate commands. So when a service can't read its own config, check the owner before you change the mode. Change the mode when the rules are wrong; change the owner when the person is.",
+   "narration": "Change own, spelled C H O W N, is short for change owner, and change own hands a file to somebody else. This file belonged to dev, and after running that one short command it belongs to the deploy account instead. Files carry a group as well as an owner, and very often you want to set the two of them together in one go. So add a colon and a second name, and you set both at once, making the group W W W. Now look carefully at what didn't happen. The nine permission switches haven't moved a millimetre. Read, write and execute are set exactly as they were before. What changed is that the first bank now describes a different person. Permissions describe a role rather than a person, which is precisely why these are two separate commands. So when a service can't read its own config, check the owner before you change the mode. Change the mode when the rules are wrong; change the owner when the person is.",
    "durationFrames": 1601,
    "timingSource": "tts",
    "background": "zoneB",
@@ -2345,7 +2345,7 @@
      "stage": [
       {
        "label": "the owner",
-       "sub": "was santhu",
+       "sub": "was dev",
        "atWord": 16.833
       },
       {
@@ -2404,7 +2404,7 @@
      "stageTitle": "666 minus your mask",
      "headline": "umask decides what [new files] get",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -2483,7 +2483,7 @@
      "stageTitle": "the gate, and the badge",
      "headline": "sudo lends power for [one command]",
      "color": "red",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -2495,7 +2495,7 @@
       },
       {
        "label": "sudo systemctl restart nginx",
-       "text": "[sudo] password for santhu:",
+       "text": "[sudo] password for dev:",
        "detail": "checked against sudoers",
        "atWord": 49.167
       }
@@ -2512,7 +2512,7 @@
        "atWord": 56.083
       },
       {
-       "label": "is santhu allowed?",
+       "label": "is dev allowed?",
        "sub": "yes, for this command",
        "atWord": 63
       },
@@ -2523,7 +2523,7 @@
       },
       {
        "label": "the audit log",
-       "sub": "records that santhu did it",
+       "sub": "records that dev did it",
        "atWord": 81.5
       },
       {
@@ -2776,7 +2776,7 @@
      "stageTitle": "the one-way hash",
      "headline": "passwd stores a [hash], never the word",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -2917,7 +2917,7 @@
   {
    "id": "s45",
    "type": "CMD_W",
-   "narration": "Somebody else is on this server, and you'd like to know who they're and what they're up to, before you restart anything. The command which answers is W, which is the shortest on this whole list and covers both at once. Santhu is on P T S zero, in an editor. Deploy is on P T S one, running a sync. And here's santhu again on P T S two, because they opened a second connection. That's two rows for one person, which trips people up constantly. These are sessions, not accounts. The header line across the top carries the load average, so you get a sense of the machine at the same time. W shows what each session is running and how long it has been idle. Who gives names and stops; W goes further. These are sessions, not accounts. Run w before you reboot anything, because somebody else may be halfway through something. Two rows for one person is normal, so read the TTY column before you assume anything.",
+   "narration": "Somebody else is on this server, and you'd like to know who they're and what they're up to, before you restart anything. The command which answers is W, which is the shortest on this whole list and covers both at once. Santhu is on P T S zero, in an editor. Deploy is on P T S one, running a sync. And here's dev again on P T S two, because they opened a second connection. That's two rows for one person, which trips people up constantly. These are sessions, not accounts. The header line across the top carries the load average, so you get a sense of the machine at the same time. W shows what each session is running and how long it has been idle. Who gives names and stops; W goes further. These are sessions, not accounts. Run w before you reboot anything, because somebody else may be halfway through something. Two rows for one person is normal, so read the TTY column before you assume anything.",
    "durationFrames": 1661,
    "timingSource": "tts",
    "background": "zoneA",
@@ -2926,20 +2926,20 @@
      "stageTitle": "one card per session",
      "headline": "w shows who is on [right now]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
       {
        "label": "w",
-       "text": "santhu  pts/0  vim",
+       "text": "dev  pts/0  vim",
        "detail": "one row per live session",
        "atWord": 21.583
       }
      ],
      "stage": [
       {
-       "label": "santhu",
+       "label": "dev",
        "sub": "on pts/0, in an editor",
        "atWord": 32.75
       },
@@ -2949,7 +2949,7 @@
        "atWord": 40.75
       },
       {
-       "label": "santhu again",
+       "label": "dev again",
        "sub": "on pts/2, a second connection",
        "atWord": 50.333
       },
@@ -3004,7 +3004,7 @@
      "stageTitle": "the login ledger",
      "headline": "last reads the [login history]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3027,7 +3027,7 @@
        "atWord": 29.083
       },
       {
-       "label": "santhu",
+       "label": "dev",
        "sub": "Monday at 09:01, normal",
        "atWord": 44.833
       },
@@ -3231,19 +3231,19 @@
      "stageTitle": "the snapshot, and the PID",
      "headline": "ps is a [snapshot], not a feed",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
       {
        "label": "ps aux",
-       "text": "santhu 4821 63.2 node",
+       "text": "dev 4821 63.2 node",
        "detail": "BSD style",
        "atWord": 1
       },
       {
        "label": "ps -ef",
-       "text": "santhu 4821 1 node",
+       "text": "dev 4821 1 node",
        "detail": "UNIX style, same data",
        "atWord": 69.25
       }
@@ -3305,7 +3305,7 @@
      "stageTitle": "who started whom",
      "headline": "pstree shows [who started whom]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3376,7 +3376,7 @@
      "stageTitle": "the rows re-sorting",
      "headline": "top re-sorts [as you watch]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3443,7 +3443,7 @@
      "stageTitle": "one bar per core",
      "headline": "htop is top with [colour and a mouse]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3510,7 +3510,7 @@
      "stageTitle": "the last sixty seconds",
      "headline": "btop draws it [over time]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3577,7 +3577,7 @@
      "stageTitle": "rewinding to the spike",
      "headline": "atop already [recorded it]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-r",
      "atWord": 1,
@@ -3640,7 +3640,7 @@
      "stageTitle": "the one that turns red",
      "headline": "glances shows [everything] at once",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3702,7 +3702,7 @@
      "stageTitle": "the panels you choose",
      "headline": "nmon builds the view [you want]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3774,7 +3774,7 @@
      "stageTitle": "the signal's path",
      "headline": "kill sends a [signal], not a bullet",
      "color": "red",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3846,7 +3846,7 @@
      "stageTitle": "everything that matches",
      "headline": "killall hits [all of them]",
      "color": "red",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3913,7 +3913,7 @@
      "stageTitle": "the hangup signal",
      "headline": "nohup ignores the [hangup]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -3981,7 +3981,7 @@
      "stageTitle": "the script, paused",
      "headline": "sleep pauses [the script]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -4048,7 +4048,7 @@
      "stageTitle": "three timelines",
      "headline": "wait holds until [they finish]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -4201,7 +4201,7 @@
      "stageTitle": "across the kernel line",
      "headline": "strace shows what it [really tried]",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-e",
      "atWord": 1,
@@ -4357,7 +4357,7 @@
      "stageTitle": "load against cores",
      "headline": "Load is [three numbers], not one",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -4430,7 +4430,7 @@
      "stageTitle": "one bar, four segments",
      "headline": "Low free memory is [normal]",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-h",
      "atWord": 1,
@@ -4499,7 +4499,7 @@
      "stageTitle": "the rows, and the swap",
      "headline": "vmstat's first row is [since boot]",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -4566,7 +4566,7 @@
      "stageTitle": "the queue in front",
      "headline": "await is the number [that matters]",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-x",
      "atWord": 1,
@@ -4697,7 +4697,7 @@
      "stageTitle": "one time axis",
      "headline": "dstat puts it [on one line]",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -4764,7 +4764,7 @@
      "stageTitle": "yesterday, replayed",
      "headline": "sar already [wrote it down]",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-f",
      "atWord": 1,
@@ -4833,7 +4833,7 @@
      "stageTitle": "the loop",
      "headline": "watch turns anything [into a dashboard]",
      "color": "yellow",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-d",
      "atWord": 1,
@@ -4988,7 +4988,7 @@
      "stageTitle": "space, and inodes",
      "headline": "df -i is the [trap] nobody checks",
      "color": "red",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-i",
      "atWord": 1,
@@ -5879,7 +5879,7 @@
      "stageTitle": "three layers",
      "headline": "ip replaced [ifconfig]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -5959,7 +5959,7 @@
      "stageTitle": "there, and back",
      "headline": "ping answers [two questions]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6027,7 +6027,7 @@
      "stageTitle": "hop by hop",
      "headline": "traceroute makes each hop [answer]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6095,7 +6095,7 @@
      "stageTitle": "loss per hop",
      "headline": "mtr keeps [probing]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6163,7 +6163,7 @@
      "stageTitle": "two routes, same answer",
      "headline": "netstat still works, [ss is faster]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6231,7 +6231,7 @@
      "stageTitle": "doors, and live pipes",
      "headline": "ss shows [what is listening]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-l",
      "atWord": 1,
@@ -6305,7 +6305,7 @@
      "stageTitle": "one device, many profiles",
      "headline": "A profile is not the [device]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6515,7 +6515,7 @@
      "stageTitle": "in, and out",
      "headline": "nload is [two numbers]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6660,7 +6660,7 @@
      "stageTitle": "the answer, and its TTL",
      "headline": "dig gives you the [whole answer]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6734,7 +6734,7 @@
      "stageTitle": "three depths",
      "headline": "host is the [one-line] answer",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6797,7 +6797,7 @@
      "stageTitle": "the cache in between",
      "headline": "nslookup can [mislead] you",
      "color": "orange",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6865,7 +6865,7 @@
      "stageTitle": "the registry record",
      "headline": "whois tells you when it [expires]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -6938,7 +6938,7 @@
      "stageTitle": "which half travels",
      "headline": "The [public] half goes on the server",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -7016,7 +7016,7 @@
      "stageTitle": "the colon does the work",
      "headline": "scp rides the [ssh channel]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": ":",
      "atWord": 1,
@@ -7085,7 +7085,7 @@
      "stageTitle": "compared, then sent",
      "headline": "rsync sends only the [difference]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "--dry-run",
      "atWord": 1,
@@ -7159,7 +7159,7 @@
      "stageTitle": "three different answers",
      "headline": "nc asks one [blunt question]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-zv",
      "atWord": 1,
@@ -7229,7 +7229,7 @@
      "stageTitle": "resuming at 61%",
      "headline": "wget is built to [finish]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-c",
      "atWord": 1,
@@ -7302,7 +7302,7 @@
      "stageTitle": "the request, assembled",
      "headline": "curl is for [talking], not downloading",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-X",
      "atWord": 1,
@@ -7464,7 +7464,7 @@
      "stageTitle": "four letters, four actions",
      "headline": "czvf is [four instructions]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-czvf",
      "atWord": 1,
@@ -7532,7 +7532,7 @@
      "stageTitle": "the original, consumed",
      "headline": "gzip [replaces] the original",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "highlight": "-k",
      "atWord": 1,
@@ -7600,7 +7600,7 @@
      "stageTitle": "the trade, timed",
      "headline": "bzip2 trades [time] for size",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "/var/log",
      "atWord": 1,
      "steps": [
@@ -7677,7 +7677,7 @@
      "stageTitle": "stream versus index",
      "headline": "zip is the [portable] one",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-r",
      "atWord": 1,
@@ -7741,7 +7741,7 @@
      "stageTitle": "five fields, one clock",
      "headline": "cron is [five fields]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -7808,7 +7808,7 @@
      "stageTitle": "validated, or not",
      "headline": "crontab -e, never [edit the file]",
      "color": "purple",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-e",
      "atWord": 1,
@@ -7882,7 +7882,7 @@
      "stageTitle": "the execute bit",
      "headline": "Three lines and a [permission bit]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "+x",
      "atWord": 1,
@@ -7962,7 +7962,7 @@
      "stageTitle": "which shell sees it",
      "headline": "An alias dies unless you [save it]",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -8034,13 +8034,13 @@
      "stageTitle": "the scope of a variable",
      "headline": "env changes it for [one command]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
       {
        "label": "env",
-       "text": "PATH=/usr/bin  HOME=/home/santhu",
+       "text": "PATH=/usr/bin  HOME=/home/dev",
        "detail": "everything inherited",
        "atWord": 1
       },
@@ -8107,7 +8107,7 @@
      "stageTitle": "reaching back",
      "headline": "history plus [Ctrl-R]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -8124,7 +8124,7 @@
       },
       {
        "label": "sudo !!",
-       "text": "[sudo] password for santhu:",
+       "text": "[sudo] password for dev:",
        "detail": "reruns the last command, elevated",
        "atWord": 44.917
       }
@@ -8186,7 +8186,7 @@
      "stageTitle": "the session survives",
      "headline": "screen survives your [dropped wifi]",
      "color": "orange",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-r",
      "atWord": 1,
@@ -8259,7 +8259,7 @@
      "stageTitle": "panes in one session",
      "headline": "tmux adds [panes] to the same idea",
      "color": "orange",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "attach",
      "atWord": 1,
@@ -8439,7 +8439,7 @@
        "out": [
         "Aug 20 09:14:02 box systemd[1]: Started nginx.service.",
         "Aug 20 09:14:02 box nginx[812]: start worker process 813",
-        "Aug 20 09:41:55 box sshd[2210]: Accepted publickey for santhu",
+        "Aug 20 09:41:55 box sshd[2210]: Accepted publickey for dev",
         "Aug 20 10:02:11 box nginx[813]: 502 upstream timed out",
         "Aug 20 10:02:11 box nginx[813]: [error] connect() failed",
         "Aug 20 10:07:43 box CRON[3004]: pam_unix(cron:session): opened"
@@ -8655,7 +8655,7 @@
      "stageTitle": "numbered shelves",
      "headline": "man passwd and man [5] passwd differ",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "5",
      "atWord": 1,
@@ -8730,7 +8730,7 @@
      "stageTitle": "searched by description",
      "headline": "apropos searches [descriptions]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -8798,7 +8798,7 @@
      "stageTitle": "1,241 lines versus 8",
      "headline": "tldr gives you the [normal] usage",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -8866,7 +8866,7 @@
      "stageTitle": "your own shelf",
      "headline": "cheat stores [your own] notes",
      "color": "green",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "atWord": 1,
      "steps": [
@@ -8939,7 +8939,7 @@
      "stageTitle": "present, and bound",
      "headline": "lspci shows the [driver] too",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-k",
      "atWord": 1,
@@ -9008,7 +9008,7 @@
      "stageTitle": "the USB tree",
      "headline": "lsusb shows the [tree]",
      "color": "blue",
-     "promptLabel": "santhu@box",
+     "promptLabel": "dev@box",
      "cwd": "~",
      "highlight": "-t",
      "atWord": 1,
