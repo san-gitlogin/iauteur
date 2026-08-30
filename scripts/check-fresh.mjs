@@ -72,9 +72,9 @@ const inFlight = (commits = 8) => {
   return [...slugs];
 };
 
-/** Newest mtime under a directory tree, in ms. Skips nothing — a stylesheet counts. */
+/** Newest mtime under a directory tree, and WHICH file it was. Skips nothing. */
 const newestUnder = (dir) => {
-  let newest = 0;
+  let newest = 0, which = dir;
   const walk = (d) => {
     let entries;
     try { entries = fs.readdirSync(d, {withFileTypes: true}); } catch { return; }
@@ -83,12 +83,12 @@ const newestUnder = (dir) => {
       if (e.isDirectory()) walk(full);
       else {
         const m = fs.statSync(full).mtimeMs;
-        if (m > newest) newest = m;
+        if (m > newest) { newest = m; which = full; }
       }
     }
   };
   walk(dir);
-  return newest;
+  return {mtime: newest, file: which};
 };
 
 const mtime = (f) => { try { return fs.statSync(f).mtimeMs; } catch { return 0; } };
@@ -100,7 +100,19 @@ const ago = (ms) => {
 };
 
 // The renderer. Every video is a function of this, so a change here dates every output.
-const SRC = newestUnder('src');
+//
+// NAMING THE FILE IS THE POINT. This gate is deliberately conservative — mtime against the
+// whole of src/, so it can never miss a real staleness — and the cost is that an edit to one
+// component dates every video, including the ones that never render that component. Measured
+// straight after it was built: a typography change in `linuxViz.tsx` marked four cuts stale,
+// none of which uses a single CMD_* scene. Re-rendering those would have been two hours spent
+// proving nothing.
+//
+// Reporting WHICH file is newest turns that from a two-hour re-render into a five-second
+// judgement: read the filename, ask whether the spec in question uses it. The conservative
+// bias stays — the gate still reports — but it now hands over what a person needs to act.
+const SRC_INFO = newestUnder('src');
+const SRC = SRC_INFO.mtime;
 
 const everySlug = () => fs.readdirSync('topics', {withFileTypes: true})
   .filter((e) => e.isDirectory()).map((e) => e.name);
@@ -146,7 +158,8 @@ for (const slug of slugs) {
 
     const newestInput = Math.max(specM, SRC, audioM);
     const why = newestInput === specM ? specName
-      : newestInput === audioM ? 'its audio' : 'src/';
+      : newestInput === audioM ? 'its audio'
+      : SRC_INFO.file.split(/[\\/]/).slice(-2).join('/');
 
     if (rendered < newestInput) {
       stale.push({render, behind: newestInput - rendered, why});
