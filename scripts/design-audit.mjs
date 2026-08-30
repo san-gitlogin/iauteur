@@ -277,10 +277,20 @@ if (cmd === 'scan') {
     if (m.fill < 0.12 && m.density > 0.004) faults.push(`FLOATING (fills ${Math.round(m.fill * 100)}%)`);
     if (off > 0.18 && !asym) faults.push(`OFF-CENTRE by ${Math.round(off * 100)}%`);
     // CROWDED — two blocks closer than a third of the smaller one's own height.
+    // ⚠ WHAT THIS MEASURE CANNOT SEE. A caption sitting directly under the thing it names is
+    // SUPPOSED to be tight — that closeness is what binds them. Two independent blocks at the
+    // same distance is a collision. From a row profile alone those are the same picture, and
+    // checked by hand: CMD_SYSTEMCTL's "running now" under its track reads perfectly at 8x.
+    // So a tight gap under a SHORT band is annotated as probably a caption and scored low,
+    // rather than the threshold being tuned until the tool agrees with my opinion. Tuning a
+    // measure to match a verdict is how you get a number that only confirms what you thought.
     const g = m.tightestGap;
     if (g && g.ratio < 0.28 && m.bands >= 2) {
+      const caption = g.ref <= 12;   // ~24 real px — a sublabel, not a block of content
       faults.push(`CROWDED at y=${g.at}: ${g.gap}px between blocks ${g.ref}px tall ` +
-        `(${g.ratio.toFixed(2)}x — under 0.28x reads as collision)`);
+        `(${g.ratio.toFixed(2)}x)` +
+        (caption ? ' — short band, so probably a caption bound to the element above it'
+                 : ' — under 0.28x reads as a collision'));
     }
 
     if (faults.length) {
@@ -288,7 +298,7 @@ if (cmd === 'scan') {
         + (asym ? Math.max(0, (0.015 - minMargin) * 2000) : 0)
         + (m.fill < 0.12 && m.density > 0.004 ? 20 : 0)
         + Math.max(0, (off - 0.18) * 60)
-        + (g && g.ratio < 0.28 && m.bands >= 2 ? (0.28 - g.ratio) * 150 : 0);
+        + (g && g.ratio < 0.28 && m.bands >= 2 ? (0.28 - g.ratio) * (g.ref <= 12 ? 20 : 150) : 0);
       rows.push({f, score, why: faults.join(' · ')});
     }
   }
