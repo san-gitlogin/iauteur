@@ -1,0 +1,70 @@
+{
+  "slug": "fable-page",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "prep": {
+    "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+    "dismiss": [
+      "Reject all cookies",
+      "Accept all cookies"
+    ]
+  },
+  "steps": [
+    {
+      "id": "open",
+      "action": "expect",
+      "text": "Claude Mythos 5.1",
+      "label": "the announcement itself",
+      "holdMs": 1500
+    },
+    {
+      "id": "cache",
+      "action": "scroll",
+      "by": 1200,
+      "label": "what changed on price",
+      "marks": [
+        {
+          "id": "cache",
+          "text": "cache reads"
+        }
+      ],
+      "holdMs": 1400
+    },
+    {
+      "id": "bench",
+      "action": "scroll",
+      "by": 900,
+      "label": "the benchmark they lead with",
+      "marks": [
+        {
+          "id": "bench",
+          "text": "Terminal-Bench-Science 0.1"
+        }
+      ],
+      "holdMs": 1400
+    },
+    {
+      "id": "scores",
+      "action": "scroll",
+      "by": 1000,
+      "label": "the two numbers that matter",
+      "marks": [
+        {
+          "id": "science",
+          "text": "52.6%"
+        },
+        {
+          "id": "terminal",
+          "text": "55.8%"
+        }
+      ],
+      "holdMs": 1600
+    }
+  ],
+  "maxHoldMs": 1600
+}

@@ -395,7 +395,7 @@ Machine: Windows 11, node v24.13.1, npm 11.8.0.
     source, write it by code point (`String.fromCharCode(160)`) — an invisible NBSP sitting
     inside a regex literal is a landmine for the next reader.
 
-### GOTCHAS 57-73 — THE MACOS PORT AND THE FIRST RECORDED CUT (2026-09-02)
+### GOTCHAS 57-76 — THE MACOS PORT, THE FIRST RECORDED CUT, AND THE FIRST BROWSER CUT (2026-09-02)
 
 Everything above was measured on Windows. Bringing the runner up on macOS found **twelve**
 defects, and the shape of them is the lesson: only two were "macOS is different". The rest
@@ -579,6 +579,37 @@ silently corrupting what a recording claimed to be true.
     luma against its immediate surround, not the variance of the whole region.
     **Left as a known false positive rather than silenced.** If the check is tightened
     later, re-run it against this cut: 8 findings, all of which must disappear.
+
+74. **`verify-render`'s FRAMING HEURISTICS ASSUME A DARK CAPTURE.** Gotcha 73 recorded the
+    low-contrast check misreading an empty background; the first BROWSER cut showed the same
+    blind spot has a second face. Recording anthropic.com — a cream page with dark serif
+    text — produced `letterbox: only 3/12 horizontal bands carry contrast, the picture is
+    floating in mostly empty frame` on a frame where the benchmark table fills the screen
+    edge to edge, plus three low-contrast flags on callout pills that are plainly readable.
+    Both checks were tuned on VS Code and terminal footage, where ink is BRIGHT on near-black
+    and a band either has glowing text in it or is empty. Invert that — dark text on a light
+    ground, most of the page legitimately whitespace — and "band carries contrast" stops
+    measuring what it was built to measure.
+    **Known false positives; deliberately not silenced.** If these checks are ever made
+    polarity-aware, `claude-fable-5-1` is the fixture: 4 findings on the wide cut, all of
+    which must disappear, and `uv-getting-started`'s 8 with them.
+
+75. **A THIRD-PARTY PAGE HAS ITS OWN FURNITURE, AND A COOKIE BANNER LANDS EXACTLY WHERE THE
+    DATA IS.** The first capture of the announcement came back with a consent dialog sitting
+    over the last column of the benchmark table — the competitor scores, in the one shot the
+    whole beat exists for. The VS Code surface has had a prep phase since day one; the
+    browser surface had none. `prep.dismiss: ["Reject all cookies", …]` clicks a list of
+    button labels before the camera rolls, each optional (a banner that did not appear is
+    not an error) and each logged when it does fire.
+
+76. **TEXT MARKS ONLY WORKED INSIDE VS CODE.** `marksFor` searched
+    `.xterm-rows > div, .view-lines .view-line` and nothing else, so on the browser surface a
+    `{text: …}` mark could never resolve and `marks` was effectively selector-only there.
+    That is the wrong half to lose: highlighting a phrase you did NOT write — a number in
+    someone else's table — is the entire point of recording a page, and a CSS selector for it
+    is brittle where the words are not. The VS Code rows still match first and keep
+    "last match wins"; only when there are none does it fall back to the document, taking the
+    SMALLEST element whose own text carries the needle so the range stays tight to the phrase.
 
 ### THE SETTINGS RECIPE (solved 2026-08-26 — this is the load-bearing trick)
 

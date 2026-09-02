@@ -86,9 +86,17 @@ if (Array.isArray(seo.chapters) && seo.chapters.length) {
 // would mean re-rendering it. Authored, spec-level, render-invisible.
 const sceneSources = [...new Set(spec.scenes.map((s) => s.data?.source).filter(Boolean))]
   .filter((s) => !/^\s*illustrative\s*$/i.test(s));
-const sources = sceneSources.length
-  ? sceneSources
-  : Array.isArray(seo.sources) ? seo.sources : [];
+// BOTH, NOT EITHER. This used to fall back to `seo.sources` only when no scene carried an
+// on-screen `data.source` — so the moment a video had a single chart, its authored citations
+// were dropped from the description entirely.
+//
+// The two are not alternatives. An on-screen source is a LABEL, capped at 64 characters and
+// written to fit under a chart ("Anthropic, 2026-09"); `meta.seo.sources` is the citation a
+// reader can actually follow, and the CHANGELOG introduced it precisely for what the screen
+// cannot hold. A video built on someone else's published numbers has to be able to link the
+// page it read them from. Authored citations lead, because they are the fuller reference.
+const authored = Array.isArray(seo.sources) ? seo.sources : [];
+const sources = [...new Set([...authored, ...sceneSources])];
 
 const title = seo.title ?? spec.meta?.topic ?? slug;
 const altTitles = Array.isArray(seo.altTitles) ? seo.altTitles : [];

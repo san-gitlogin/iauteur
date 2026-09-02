@@ -1,0 +1,727 @@
+{
+  "meta": {
+    "topic": "What Claude Fable 5.1 and Mythos 5.1 actually change",
+    "subject": "Claude Fable 5.1",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "a science benchmark that roughly doubled, and a price that did not move",
+    "openLoop": "Is the jump as big as the headline number suggests?",
+    "analogy": "Two doors into the same building — one open, one with a guest list.",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "Claude Fable 5.1: A Benchmark Doubled — And The Price Did Not Move",
+      "description": "Anthropic shipped Claude Fable 5.1 and Mythos 5.1. One benchmark roughly doubled, coding moved past Opus 5, and the sticker price stayed exactly where it was. Every number here is from the announcement, with the page on screen — plus the protein-design and Venus results, what Mythos actually is, and why a lot of developers say their usage limits still vanish just as fast.",
+      "queries": [
+        "claude fable 5.1 benchmarks",
+        "fable 5.1 vs opus 5",
+        "claude mythos 5.1 what is it",
+        "claude fable 5.1 pricing cache",
+        "terminal bench science 52.6",
+        "is claude fable 5.1 worth it"
+      ],
+      "tags": [
+        "claude",
+        "anthropic",
+        "claude fable 5.1",
+        "mythos 5.1",
+        "fable 5.1",
+        "ai news",
+        "llm benchmarks",
+        "terminal bench",
+        "opus 5",
+        "gpt 5.6",
+        "ai models 2026",
+        "claude code",
+        "ai coding",
+        "agentic ai",
+        "protein design"
+      ],
+      "sources": [
+        "https://www.anthropic.com/claude-fable-and-mythos-5-1 — all benchmark, pricing, science and safeguard figures",
+        "Launch coverage and community reaction, September 2026 — the usage-limit and pricing responses"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT DOUBLED",
+    "badge": "Claude Fable 5.1",
+    "asset": "si:anthropic",
+    "note": "24.7% → 52.6%",
+    "logos": [
+      "si:anthropic",
+      "si:claude"
+    ]
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Claude Fable 5.1 doubled a science benchmark. Twenty-four point seven, to fifty-two point six.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "IT DOUBLED",
+        "subtext": "Terminal-Bench-Science",
+        "heroAsset": "si:anthropic",
+        "hookVariant": "figure"
+      },
+      "durationFrames": 202,
+      "audio": "audio/claude-fable-5-1_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "Welcome back to THE NBX STUDIO — follow along if you like your AI news with the numbers attached. Anthropic shipped two models at once, and here's what we're testing today: is that doubled number as big as it looks, or is one benchmark carrying the announcement?",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "title": "Claude Fable 5.1",
+        "subtitle": "and Mythos 5.1 · what the numbers say"
+      },
+      "durationFrames": 450,
+      "audio": "audio/claude-fable-5-1_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "SPEC_COMPARE",
+      "narration": "Fable 5.1 is the one you can use today. Mythos 5.1 is the same weights with lighter safeguards, because vetted teams doing cyber and life-sciences work kept hitting refusals on legitimate jobs. Same brain, different seatbelts.",
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "compare": {
+          "headline": "One model, two doors",
+          "a": {
+            "name": "Fable 5.1",
+            "color": "blue"
+          },
+          "b": {
+            "name": "Mythos 5.1",
+            "color": "purple"
+          },
+          "rows": [
+            {
+              "label": "Underlying model",
+              "a": "Same",
+              "b": "Same"
+            },
+            {
+              "label": "Safeguards",
+              "a": "Standard",
+              "b": "Reduced",
+              "winner": "a"
+            },
+            {
+              "label": "Who can use it",
+              "a": "Everyone",
+              "b": "Vetted orgs",
+              "winner": "a"
+            },
+            {
+              "label": "Terminal-Bench 4.0",
+              "a": "55.8%",
+              "b": "60.9%",
+              "winner": "b"
+            }
+          ],
+          "atWord": 8.583
+        }
+      },
+      "durationFrames": 434,
+      "audio": "audio/claude-fable-5-1_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "narration": "Start where they started: the benchmark table.",
+      "transition": "zoom",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The numbers"
+        }
+      },
+      "durationFrames": 112,
+      "audio": "audio/claude-fable-5-1_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "RECORDED_STEP",
+      "narration": "Here's the announcement, and here's the table everyone screenshotted. Top row, agentic scientific research. Fifty-two point six for Fable 5.1, against twenty-four point seven for the model it replaces. Second row is coding — fifty-five point eight, where Opus 5 sat at fifty-two point three. Those two rows are the whole announcement in miniature.",
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "the table everyone screenshotted",
+          "premise": "Anthropic’s announcement page.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:fable-page#open",
+              "label": "the announcement",
+              "focus": true,
+              "id": "open",
+              "src": "rec/fable-page/seg-01.mp4",
+              "frames": 64,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "atWord": 3.083
+            },
+            {
+              "ref": "rec:fable-page#scores",
+              "label": "the two rows that matter",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "more than double",
+                  "mark": "science",
+                  "side": "right",
+                  "color": "green",
+                  "atWord": 42.417
+                },
+                {
+                  "text": "past Opus 5",
+                  "mark": "terminal",
+                  "side": "right",
+                  "color": "blue",
+                  "atWord": 43.5
+                }
+              ],
+              "id": "scores",
+              "src": "rec/fable-page/seg-04.mp4",
+              "frames": 49,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "science": {
+                  "x": 613,
+                  "y": 290,
+                  "w": 41,
+                  "h": 18
+                },
+                "terminal": {
+                  "x": 613,
+                  "y": 362,
+                  "w": 41,
+                  "h": 18
+                }
+              },
+              "atWord": 37.25
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 692,
+      "audio": "audio/claude-fable-5-1_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "BAR_COMPARE",
+      "narration": "Put that first row on a chart and it stops being a percentage, because now you can see the gap. Fable 5 managed twenty-four point seven. Opus 5, twenty-nine. GPT-5.6 Sol, twenty-two point four. Fable 5.1 comes in at fifty-two point six — roughly double the field. Anthropic footnote it with a standard error of around four points, so read it as a wide lead rather than an exact one.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
+        "bars": [
+          {
+            "label": "GPT-5.6 Sol",
+            "value": 22.4,
+            "display": "22.4%",
+            "atWord": 26.333
+          },
+          {
+            "label": "Fable 5",
+            "value": 24.7,
+            "display": "24.7%",
+            "atWord": 18.167
+          },
+          {
+            "label": "Opus 5",
+            "value": 29,
+            "display": "29.0%",
+            "atWord": 23.583
+          },
+          {
+            "label": "Fable 5.1",
+            "value": 52.6,
+            "display": "52.6%",
+            "color": "green",
+            "atWord": 32.667
+          }
+        ],
+        "source": "Terminal-Bench-Science 0.1 · Anthropic, 2026-09"
+      },
+      "durationFrames": 783,
+      "audio": "audio/claude-fable-5-1_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "BAR_COMPARE",
+      "narration": "Coding's the closer race, and that's the honest read. On Terminal-Bench 4.0, Fable 5.1 takes fifty-five point eight. Opus 5 was already at fifty-two point three, which means this is a step, not a leap. Mythos 5.1, with the lighter safeguards, goes to sixty point nine — which quietly tells you how much the guardrails cost on agentic work.",
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "bars": [
+          {
+            "label": "GPT-5.6 Sol",
+            "value": 37.3,
+            "display": "37.3%",
+            "atWord": 1.917
+          },
+          {
+            "label": "Opus 5",
+            "value": 52.3,
+            "display": "52.3%",
+            "atWord": 17.083
+          },
+          {
+            "label": "Fable 5.1",
+            "value": 55.8,
+            "display": "55.8%",
+            "color": "blue",
+            "atWord": 13.25
+          },
+          {
+            "label": "Mythos 5.1",
+            "value": 60.9,
+            "display": "60.9%",
+            "color": "purple",
+            "atWord": 33.167
+          }
+        ],
+        "source": "Terminal-Bench 4.0 · Anthropic, 2026-09"
+      },
+      "durationFrames": 693,
+      "audio": "audio/claude-fable-5-1_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RADAR",
+      "narration": "Plot the four benchmarks all three models ran, and the shape shows up. GPT-5.6 Sol sits inside. Opus 5, a ring out. Fable 5.1 tracks just outside Opus on coding, business and Cursor — then blows out on science. One spike, modest lifts elsewhere: more useful than any single row.",
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "radar": {
+          "axes": [
+            "Science",
+            "Terminal",
+            "Business",
+            "Cursor"
+          ],
+          "series": [
+            {
+              "name": "GPT-5.6 Sol",
+              "values": [
+                22.4,
+                37.3,
+                19.6,
+                67.2
+              ],
+              "color": "red",
+              "atWord": 13.417
+            },
+            {
+              "name": "Opus 5",
+              "values": [
+                29,
+                52.3,
+                26.9,
+                70
+              ],
+              "color": "orange",
+              "atWord": 17.5
+            },
+            {
+              "name": "Fable 5.1",
+              "values": [
+                52.6,
+                55.8,
+                31.4,
+                73.4
+              ],
+              "color": "green",
+              "atWord": 24.75
+            }
+          ],
+          "max": 100
+        }
+      },
+      "durationFrames": 639,
+      "audio": "audio/claude-fable-5-1_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "STAT_PANELS",
+      "narration": "Here's the thing the people using it keep pointing at, and it isn't on the chart. It's how long it'll run without you. Ramp left it on a machine-learning problem for thirty-eight hours unattended, and it came back having diagnosed an earlier result. Block ran it through a thirty-day simulated business. And at Millennium it found the cause of a crash that showed up about once in a million runs, which their engineers hadn't cracked in years.",
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "stats": [
+          {
+            "kicker": "Ramp",
+            "value": "38 hours",
+            "note": "unattended ML run",
+            "color": "blue",
+            "atWord": 17.417
+          },
+          {
+            "kicker": "Block",
+            "value": "30 days",
+            "note": "simulated run-a-business eval",
+            "atWord": 32.5
+          },
+          {
+            "kicker": "Millennium",
+            "value": "1 in 1M",
+            "note": "crash unexplained for years",
+            "color": "green",
+            "atWord": 40.083
+          }
+        ],
+        "verdict": {
+          "text": "It keeps going when you stop",
+          "color": "green",
+          "atWord": 56
+        },
+        "source": "customer reports · Anthropic, 2026-09"
+      },
+      "durationFrames": 720,
+      "audio": "audio/claude-fable-5-1_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "narration": "The part that got scientists talking had nothing to do with code.",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "What it did in a lab"
+        }
+      },
+      "durationFrames": 119,
+      "audio": "audio/claude-fable-5-1_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "PICTOGRAM",
+      "narration": "Anthropic had it design protein binders. Ten to fifteen percent of candidates binding is normal, because most simply don't. Across twelve targets, this one hit close to fifty — and on three of them the binding was ten times stronger than anything submitted before.",
+      "transition": "slide",
+      "background": "zoneB",
+      "data": {
+        "pictogram": {
+          "rows": [
+            {
+              "label": "Typical design",
+              "value": 12,
+              "color": "red",
+              "atWord": 11.833
+            },
+            {
+              "label": "Fable 5.1",
+              "value": 50,
+              "color": "green",
+              "atWord": 22.833
+            }
+          ],
+          "icon": "lucide:atom",
+          "unit": "%"
+        }
+      },
+      "durationFrames": 467,
+      "audio": "audio/claude-fable-5-1_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "STAT_PANELS",
+      "narration": "Two more, quickly, because they're the same story in different clothes. It re-mapped Venus from Magellan radar data, resolving detail down to two or three kilometres instead of ten to twenty. And it rewrote seven biology models to run faster, cutting the GPU bill on one of them from eighteen thousand dollars to eight.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "stats": [
+          {
+            "kicker": "Venus radar map",
+            "value": "20→3 km",
+            "note": "detail resolved, from Magellan data",
+            "atWord": 11
+          },
+          {
+            "kicker": "Evo 2 40B run",
+            "value": "$18k→$8k",
+            "note": "GPU cost after rewrite",
+            "color": "green",
+            "atWord": 35.583
+          }
+        ],
+        "verdict": {
+          "text": "Cheaper science, not code",
+          "color": "green",
+          "atWord": 33.083
+        },
+        "source": "Anthropic, 2026-09"
+      },
+      "durationFrames": 570,
+      "audio": "audio/claude-fable-5-1_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "narration": "Now the part the announcement is quieter about.",
+      "transition": "wipe",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Price, access, reception"
+        }
+      },
+      "durationFrames": 107,
+      "audio": "audio/claude-fable-5-1_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "RECORDED_STEP",
+      "narration": "Scroll up on the same page and you'll find the pricing note. Headline rates didn't move — ten dollars a million in, fifty out. What changed is the cache: a read used to cost a dollar, now it's twenty-five cents. So the saving lives wherever your work re-reads the same context.",
+      "transition": "dip",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "the line about cache reads",
+          "premise": "The same page, further up: what actually changed on price.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:fable-page#cache",
+              "label": "the pricing note",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "this is the change",
+                  "mark": "cache",
+                  "color": "green",
+                  "atWord": 20
+                }
+              ],
+              "id": "cache",
+              "src": "rec/fable-page/seg-02.mp4",
+              "frames": 59,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "cache": {
+                  "x": 480,
+                  "y": 363,
+                  "w": 93,
+                  "h": 21
+                }
+              },
+              "atWord": 2.5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 531,
+      "audio": "audio/claude-fable-5-1_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "STAT_PANELS",
+      "narration": "So the sticker price is identical to Fable 5, and it's still above Opus 5 and GPT-5.6. Anthropic's own estimate is about twenty-five percent cheaper for typical work, and up to forty-five on heavily agentic runs. Both of those depend entirely on how much of your context repeats, which means your mileage genuinely will vary.",
+      "transition": "morph",
+      "background": "zoneC",
+      "data": {
+        "stats": [
+          {
+            "kicker": "Input / output",
+            "value": "$10 / $50",
+            "note": "per million — unchanged",
+            "atWord": 1.917
+          },
+          {
+            "kicker": "Cache read",
+            "value": "$1→$0.25",
+            "note": "down 75%",
+            "color": "green",
+            "atWord": 16
+          }
+        ],
+        "verdict": {
+          "text": "The discount is conditional",
+          "color": "orange",
+          "atWord": 36.75
+        },
+        "source": "per million tokens · Anthropic, 2026-09"
+      },
+      "durationFrames": 643,
+      "audio": "audio/claude-fable-5-1_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "STAT_PANELS",
+      "narration": "Safeguards moved too, in the direction developers had been asking for. The biology classifiers fire eighty-five percent less often on ordinary questions. Cyber interventions are down about sixty percent per session, and finding vulnerabilities for defensive work is now allowed outright.",
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "stats": [
+          {
+            "kicker": "Biology refusals",
+            "value": "−85%",
+            "note": "on benign questions",
+            "color": "green",
+            "atWord": 12.083
+          },
+          {
+            "kicker": "Cyber blocks",
+            "value": "−60%",
+            "note": "per Claude Code session",
+            "color": "green",
+            "atWord": 22.083
+          }
+        ],
+        "verdict": {
+          "text": "Fewer refusals on benign work",
+          "color": "green",
+          "atWord": 33.167
+        },
+        "source": "Anthropic, 2026-09"
+      },
+      "durationFrames": 516,
+      "audio": "audio/claude-fable-5-1_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "STAT_PANELS",
+      "narration": "And the reception, which is not all applause. The cache cut landed well. Usage limits didn't — plenty of people report burning through an agentic session as fast as before, because the discount only covers cached reads. Worth holding both: the jump is genuine, and your bill might not feel lighter.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "stats": [
+          {
+            "kicker": "Landed well",
+            "value": "−75%",
+            "note": "on cache reads",
+            "color": "green",
+            "atWord": 7.917
+          },
+          {
+            "kicker": "Still sore",
+            "value": "limits",
+            "note": "agentic sessions burn as fast",
+            "color": "red",
+            "atWord": 12.333
+          }
+        ],
+        "verdict": {
+          "text": "Both things are true",
+          "color": "orange",
+          "atWord": 33.417
+        },
+        "source": "launch coverage, 2026-09"
+      },
+      "durationFrames": 559,
+      "audio": "audio/claude-fable-5-1_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "RECAP",
+      "narration": "So, quickly. Fable 5.1 roughly doubles a science benchmark and edges ahead on coding. The lab results are the genuinely new part. Pricing is unchanged unless you lean on the cache. Mythos is the same model with lighter guardrails, for vetted organisations only. And it is on Bedrock, Vertex and Foundry from today.",
+      "transition": "push",
+      "background": "zoneC",
+      "data": {
+        "heading": "Fable 5.1, in five lines",
+        "points": [
+          {
+            "text": "Terminal-Bench-Science 24.7% → 52.6%",
+            "atWord": 4.833
+          },
+          {
+            "text": "Coding 55.8%, past Opus 5",
+            "atWord": 12.583
+          },
+          {
+            "text": "Protein binders near 50% hit rate",
+            "atWord": 14.583
+          },
+          {
+            "text": "$10/$50 unchanged · cache −75%",
+            "atWord": 21.333
+          },
+          {
+            "text": "Mythos = same model, vetted access",
+            "atWord": 30.083
+          }
+        ]
+      },
+      "durationFrames": 638,
+      "audio": "audio/claude-fable-5-1_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "OUTRO_CTA",
+      "narration": "If this was a useful five minutes, hit like — it genuinely helps this channel. Subscribe for more of these, we break down every model that matters. And tell me in the comments whether that science number holds up in your own work.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "message": "Subscribe for more",
+        "sub": "we read the whole announcement so you do not have to"
+      },
+      "durationFrames": 395,
+      "audio": "audio/claude-fable-5-1_long_s19.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

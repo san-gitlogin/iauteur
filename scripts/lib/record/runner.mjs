@@ -236,9 +236,37 @@ export const marksFor = async (page, marks = []) => {
         const NBSP = String.fromCharCode(160); // written by code point: an invisible NBSP in a regex literal is a landmine
         const flat = (s) => String(s || '').split(NBSP).join(' ');
         const needle = flat(rawNeedle);
+        // WHICH ELEMENTS CAN HOLD A MARK depends on the SURFACE.
+        //
+        // This used to look only at `.xterm-rows > div` and `.view-lines .view-line` — the
+        // two containers VS Code renders text into. On the BROWSER surface an ordinary web
+        // page has neither, so a text mark could never resolve and `marks` was effectively
+        // selector-only there. That is the wrong half to lose: highlighting a phrase you
+        // did not write (a number in someone else's benchmark table) is the whole point of
+        // recording a page, and a CSS selector for it is brittle where the words are not.
+        //
+        // VS Code rows stay FIRST and keep "last match wins" — in a terminal the most
+        // recent occurrence is the one meant. Only when there are no such rows does this
+        // fall back to the document, where the FIRST match is the right one because a page
+        // is read top to bottom. Smallest matching element, so the range is tight to the
+        // phrase rather than to a section wrapper that happens to contain it.
         const rows = Array.from(document.querySelectorAll('.xterm-rows > div, .view-lines .view-line'));
-        // last match wins: in a terminal the most recent occurrence is the one meant
-        const hit = rows.filter((r) => flat(r.innerText).includes(needle)).pop();
+        let hit = rows.filter((r) => flat(r.innerText).includes(needle)).pop();
+        if (!hit && !rows.length) {
+          const cands = Array.from(document.querySelectorAll('body *')).filter((el) => {
+            if (!el.childNodes.length) return false;
+            // only elements whose OWN text carries the needle, not every ancestor of one
+            const own = Array.from(el.childNodes)
+              .filter((n) => n.nodeType === 3).map((n) => n.nodeValue).join('');
+            if (!flat(own).includes(needle)) return false;
+            const r = el.getBoundingClientRect();
+            return r.width > 2 && r.height > 2 && r.bottom > 0 && r.top < window.innerHeight;
+          });
+          hit = cands.sort((a, b) => {
+            const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+            return (ra.width * ra.height) - (rb.width * rb.height);
+          })[0] ?? null;
+        }
         if (!hit) return null;
         // TIGHT to the TEXT, not to the row. An xterm row is a full-width div, so using
         // its rect drew a highlight stretching the whole terminal instead of around the
@@ -1063,6 +1091,29 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
   const steps = [];
   let capture = null;
   try {
+    // DISMISS THE PAGE'S OWN FURNITURE BEFORE THE CAMERA ROLLS.
+    //
+    // The VS Code surface has had a prep phase since day one — toasts, the welcome tab, the
+    // chat panel (gotcha 3). The browser surface had none, and a real third-party page is
+    // worse: the first capture of the Anthropic announcement came back with a COOKIE BANNER
+    // sitting over the last column of the benchmark table, hiding the competitor scores in
+    // the one shot the whole beat exists for.
+    //
+    // `prep.dismiss` is a list of button labels to click if present. Each is optional by
+    // design — a consent banner that did not appear is not an error — but anything that DID
+    // match is logged, so a run says what it cleared rather than clearing silently.
+    const dismissed = [];
+    for (const label of demo.prep?.dismiss ?? []) {
+      const btn = page.getByRole('button', {name: label, exact: false}).first();
+      const n = await btn.count().catch(() => 0);
+      if (!n) continue;
+      await btn.click({timeout: 5000}).catch(() => {});
+      dismissed.push(label);
+      await sleep(600);
+    }
+    if (dismissed.length) console.log(`  prep: dismissed ${dismissed.map((d) => JSON.stringify(d)).join(', ')}`);
+    await sleep(400);
+
     console.log('  TAKE: capture started');
     capture = await startCapture(page, {dir: framesDir, quality: demo.quality ?? 92});
     await sleep(400);

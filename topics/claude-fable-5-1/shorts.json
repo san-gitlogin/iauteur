@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "topic": "Claude Fable 5.1 doubled a science benchmark",
+    "subject": "Claude Fable 5.1",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "one benchmark roughly doubled while the sticker price stayed put",
+    "openLoop": "Is one spike enough to justify the same price?",
+    "analogy": "A spike on a chart that is flat everywhere else.",
+    "screenplay": "explainer",
+    "topicAxes": [
+      "entity-novelty"
+    ],
+    "seo": {
+      "title": "Claude Fable 5.1 doubled this benchmark #claude #ai",
+      "description": "Terminal-Bench-Science went from 24.7% to 52.6%. Coding moved past Opus 5. The sticker price did not move — only cache reads got cheaper.",
+      "queries": [
+        "claude fable 5.1 benchmark",
+        "fable 5.1 vs opus 5",
+        "claude fable 5.1 price"
+      ],
+      "tags": [
+        "claude",
+        "anthropic",
+        "fable 5.1",
+        "ai news",
+        "llm benchmarks",
+        "shorts",
+        "opus 5",
+        "ai models"
+      ],
+      "sources": [
+        "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "IT DOUBLED",
+    "badge": "Claude Fable 5.1",
+    "asset": "si:anthropic",
+    "frames": 1
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Claude Fable 5.1 doubled a science benchmark. Twenty-four point seven, to fifty-two point six.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "IT DOUBLED",
+        "subtext": "Terminal-Bench-Science",
+        "heroAsset": "si:anthropic",
+        "hookVariant": "stack"
+      },
+      "durationFrames": 202,
+      "audio": "audio/claude-fable-5-1_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "narration": "Here's the table. Top row is agentic scientific research — fifty-two point six, against twenty-four point seven for the model it replaces. Second row is coding, fifty-five point eight, just past Opus 5. One spike, and a normal step everywhere else.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "the two rows that matter",
+          "premise": "Anthropic’s announcement page.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:fable-page#scores",
+              "label": "the benchmark table",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "more than double",
+                  "mark": "science",
+                  "side": "right",
+                  "color": "green",
+                  "atWord": 15.917
+                },
+                {
+                  "text": "past Opus 5",
+                  "mark": "terminal",
+                  "side": "right",
+                  "color": "blue",
+                  "atWord": 23.917
+                }
+              ],
+              "id": "scores",
+              "src": "rec/fable-page/seg-04.mp4",
+              "frames": 49,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "science": {
+                  "x": 613,
+                  "y": 290,
+                  "w": 41,
+                  "h": 18
+                },
+                "terminal": {
+                  "x": 613,
+                  "y": 362,
+                  "w": 41,
+                  "h": 18
+                }
+              },
+              "atWord": 3
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 511,
+      "audio": "audio/claude-fable-5-1_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "STAT_PANELS",
+      "narration": "The catch: the sticker price didn't move. Ten dollars a million in, fifty out. Only cache reads got cheaper.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "stats": [
+          {
+            "kicker": "Input / output",
+            "value": "$10 / $50",
+            "note": "unchanged",
+            "atWord": 2.833
+          },
+          {
+            "kicker": "Cache read",
+            "value": "$1→$0.25",
+            "note": "down 75%",
+            "color": "green",
+            "atWord": 14.333
+          }
+        ],
+        "source": "Anthropic, 2026-09"
+      },
+      "durationFrames": 239,
+      "audio": "audio/claude-fable-5-1_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "narration": "Full breakdown is on the channel. Subscribe if you want the numbers, not the hype.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "message": "Full breakdown on the channel",
+        "sub": "numbers, not hype"
+      },
+      "durationFrames": 160,
+      "audio": "audio/claude-fable-5-1_shorts_s04.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
