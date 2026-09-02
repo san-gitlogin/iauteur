@@ -2,32 +2,69 @@
   "onePayoff": "A password manager turns one memorized key into unbreakable, unique passwords everywhere.",
   "openLoop": "Why is reusing one password the single most dangerous habit online?",
   "analogy": "A master key that opens a vault, not every door in the city.",
-  "topicAxes": ["economic-pain", "sovereignty"],
-  "thumbnail": { "title": "ONE KEY", "badge": "SECURITY", "asset": "lucide:lock" },
+  "topicAxes": [
+    "economic-pain",
+    "sovereignty"
+  ],
+  "thumbnail": {
+    "title": "ONE KEY",
+    "badge": "SECURITY",
+    "asset": "lucide:lock"
+  },
   "scenes": [
     {
       "type": "HOOK",
-      "narration": "Every password you reuse is one breach away from exposing your whole digital life.",
-      "data": { "headline": "ONE LEAK, EVERYWHERE", "subtext": "reuse is the real risk", "heroAsset": "lucide:lock" }
+      "narration": "A password manager holds every secret you own. One breach away from all of it.",
+      "data": {
+        "headline": "ONE LEAK, EVERYWHERE",
+        "subtext": "reuse is the real risk",
+        "heroAsset": "lucide:lock"
+      }
     },
     {
       "type": "CONCEPT_DIAGRAM",
-      "narration": "One master password unlocks an encrypted vault that holds every other secret you own.",
+      "narration": "Welcome in. Today we're going to see how a password manager actually keeps those secrets safe. One master password unlocks an encrypted vault.",
       "transition": "fade",
       "data": {
         "nodes": [
-          { "id": "n1", "label": "Master key", "asset": "lucide:key" },
-          { "id": "n2", "label": "Vault", "asset": "lucide:vault" },
-          { "id": "n3", "label": "Secrets", "asset": "lucide:file-lock" }
+          {
+            "id": "n1",
+            "label": "Master key",
+            "asset": "lucide:key"
+          },
+          {
+            "id": "n2",
+            "label": "Vault",
+            "asset": "lucide:vault"
+          },
+          {
+            "id": "n3",
+            "label": "Secrets",
+            "asset": "lucide:file-lock"
+          }
         ],
-        "edges": [ { "from": "n1", "to": "n2" }, { "from": "n2", "to": "n3" } ]
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "from": "n2",
+            "to": "n3"
+          }
+        ]
       }
     },
     {
       "type": "STAT_CALLOUT",
-      "narration": "Inside, your data is wrapped in 256-bit encryption that no one can brute force.",
+      "narration": "So what stops a thief who steals the whole vault file? Your data is wrapped in 256-bit encryption.",
       "transition": "slide",
-      "data": { "value": 256, "suffix": "-bit", "label": "AES vault encryption", "source": "illustrative" }
+      "data": {
+        "value": 256,
+        "suffix": "-bit",
+        "label": "AES vault encryption",
+        "source": "illustrative"
+      }
     },
     {
       "type": "STEP_FLOW",
@@ -35,9 +72,18 @@
       "transition": "fade",
       "data": {
         "steps": [
-          { "title": "Generate", "sub": "random strings" },
-          { "title": "Encrypt", "sub": "with your key" },
-          { "title": "Sync", "sub": "across devices" }
+          {
+            "title": "Generate",
+            "sub": "random strings"
+          },
+          {
+            "title": "Encrypt",
+            "sub": "with your key"
+          },
+          {
+            "title": "Sync",
+            "sub": "across devices"
+          }
         ],
         "source": "illustrative"
       }
@@ -49,9 +95,21 @@
       "data": {
         "heading": "Why it matters",
         "items": [
-          { "icon": "lucide:shield", "text": "No reuse", "detail": "unique per site" },
-          { "icon": "lucide:eye-off", "text": "Phishing resistant", "detail": "matches real domains" },
-          { "icon": "lucide:zap", "text": "Instant autofill", "detail": "fast and safe" }
+          {
+            "icon": "lucide:shield",
+            "text": "No reuse",
+            "detail": "unique per site"
+          },
+          {
+            "icon": "lucide:eye-off",
+            "text": "Phishing resistant",
+            "detail": "matches real domains"
+          },
+          {
+            "icon": "lucide:zap",
+            "text": "Instant autofill",
+            "detail": "fast and safe"
+          }
         ]
       }
     },
@@ -59,7 +117,10 @@
       "type": "OUTRO_CTA",
       "narration": "Set one up tonight and lock down your entire digital life for good.",
       "transition": "fade",
-      "data": { "message": "Start using a password manager today", "sub": "your future self will thank you" }
+      "data": {
+        "message": "Start using a password manager today",
+        "sub": "your future self will thank you"
+      }
     }
   ]
 }

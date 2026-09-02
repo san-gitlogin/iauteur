@@ -6,7 +6,7 @@
 //
 // Pure: normalizeSpec(spec) -> {spec, changes[]}. Safe to run repeatedly.
 import {MANIFEST} from './manifest.mjs';
-import {TRANSITIONS, ANIMS, DARK_THEMES, LIGHT_THEMES, BACKGROUNDS, SEM, FPS, FPW, HOOK_MAX_FRAMES} from './constants.mjs';
+import {TRANSITIONS, ANIMS, DARK_THEMES, LIGHT_THEMES, BACKGROUNDS, SEM, FPS, FPW, HOOK_MAX_FRAMES, META_KEYS, THUMB_KEYS} from './constants.mjs';
 
 // animation value mistakenly used as a scene transition -> nearest real cut
 const ANIM_TO_TRANSITION = {
@@ -200,7 +200,7 @@ export function normalizeSpec(spec) {
   if (b.background && !BACKGROUNDS.includes(b.background)) { const s = snap(b.background, BACKGROUNDS); if (s) { log(`brand.background "${b.background}"→"${s}"`); b.background = s; } else { delete b.background; } }
 
   // ENVELOPE absorptions — the console owns the envelope; models drift on it.
-  const META_KEEP = ['topic', 'format', 'fps', 'onePayoff', 'openLoop', 'analogy', 'screenplay', 'topicAxes', 'seo'];
+  const META_KEEP = META_KEYS;
   if (spec.meta && typeof spec.meta === 'object') {
     if (spec.meta.title && !spec.meta.topic) { spec.meta.topic = spec.meta.title; log('meta.title→meta.topic'); }
     if (spec.meta.channel && !b.channel) { b.channel = spec.meta.channel; log('meta.channel→brand.channel'); }
@@ -213,7 +213,7 @@ export function normalizeSpec(spec) {
     if (th.subtitle && !th.badge) { th.badge = th.subtitle; delete th.subtitle; log(`${key}.subtitle→badge`); }
     if (th.subtext && !th.badge) { th.badge = th.subtext; delete th.subtext; log(`${key}.subtext→badge`); }
     if (th.heroAsset && !th.asset) { th.asset = th.heroAsset; delete th.heroAsset; log(`${key}.heroAsset→asset`); }
-    for (const k of Object.keys(th)) if (!['title', 'badge', 'asset', 'frames'].includes(k)) { delete th[k]; log(`dropped unknown ${key}.${k}`); }
+    for (const k of Object.keys(th)) if (!THUMB_KEYS.includes(k)) { delete th[k]; log(`dropped unknown ${key}.${k}`); }
   }
 
   const zones = ['zoneA', 'zoneB', 'zoneC'];

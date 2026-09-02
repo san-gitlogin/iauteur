@@ -21,6 +21,11 @@ export function assembleSpec(model, cfg, beats) {
   const spec = {};
   spec.meta = {
     topic: cfg.topic || m.topic || m.title || '',
+    // LAW 0g.1 made meta.subject a REQUIRED field on 2026-08-30, and the console had no
+    // way to supply it — so every console-authored spec failed lint on a field the model
+    // is not allowed to own. Same shape as the brand.logo drop pinned below: a required
+    // envelope field the assembler never carried, with no gate watching.
+    subject: cfg.subject || m.subject || undefined,
     format, fps: FPS,
     onePayoff: story('onePayoff'),
     openLoop: story('openLoop'),

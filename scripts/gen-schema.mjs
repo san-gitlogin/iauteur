@@ -108,6 +108,9 @@ const buildSchema = () => {
         required: ['topic'],
         properties: {
           topic: {type: 'string'},
+          // REQUIRED by LAW 0g since 2026-08-30: the thing being taught, spelled as a
+          // person would SAY it ("SQLite", "VS Code", "uv"). Scene 1 has to contain it.
+          subject: {type: 'string', description: 'the subject, spelled as spoken (LAW 0g.1)'},
           format: {enum: ['long', 'short']},
           fps: {type: 'number'},
           screenplay: {type: 'string'},
@@ -115,6 +118,7 @@ const buildSchema = () => {
           openLoop: {type: 'string'},
           analogy: {type: 'string'},
           topicAxes: {type: 'array', items: {type: 'string'}},
+          seo: {type: 'object'},
         },
       },
       brand: {

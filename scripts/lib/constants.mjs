@@ -328,3 +328,24 @@ export const FAMILY = {
   DATABASE_TABLE: 'row-list', PROCESS_TABLE: 'row-list', IAC_PLAN: 'row-list', TEST_RUNNER: 'row-list',
 };
 export const CONSOLIDATED = new Set(['PIPELINE', 'gauge-surface', 'code-surface', 'stream-surface', 'framed-surface', 'node-graph', 'zone-surface', 'row-list']);
+
+// ---- SPEC ENVELOPE ----
+// The keys the envelope may carry. These are a SINGLE SOURCE for three consumers that used
+// to each keep their own copy: gen-schema.mjs (the JSON Schema editors validate against),
+// normalize-spec.mjs (which DELETES anything not listed) and lint-spec.mjs.
+//
+// They drifted, and the drift was destructive rather than cosmetic. LAW 0g's 2026-08-30
+// amendment made `meta.subject` a REQUIRED field; normalize's copy of this list was last
+// touched long before that, so it deleted `subject` as "unknown" and the very next lint
+// rejected the spec it had just cleaned. Four shipped specs (both SQLite cuts, the VS Code
+// cut) went pass -> fail through a normalize, and `thumbnail.logos` / `note` / `titleStruck`
+// / `replaces` — four shipped thumbnail features — were being silently stripped the same way.
+//
+// Anything added to the envelope goes HERE, or normalize will quietly eat it.
+export const META_KEYS = [
+  'topic', 'subject', 'format', 'fps', 'onePayoff', 'openLoop', 'analogy',
+  'screenplay', 'topicAxes', 'seo',
+];
+export const THUMB_KEYS = [
+  'title', 'badge', 'asset', 'frames', 'note', 'logos', 'titleStruck', 'replaces',
+];
