@@ -44,6 +44,22 @@ export interface DesignKit {
 export const DesignKitContext = React.createContext<DesignKit | null>(null);
 export const useDesignKit = (): DesignKit | null => React.useContext(DesignKitContext);
 
+/**
+ * A STABLE PER-VIDEO SEED.
+ *
+ * Some silhouettes must be constant WITHIN a video and different ACROSS videos — a chapter
+ * card being the clear case. Owner: *"The chapter title, if chosen, must be the same
+ * throughout. Within a video the chapter title design must not change. But across videos it
+ * must change."*
+ *
+ * Nothing reachable from a single scene can do that: a chapter's own number varies inside the
+ * video (which is what made the first version rotate the design chapter by chapter) and its
+ * title varies too. The seed is therefore published once, at the composition, from something
+ * that identifies the VIDEO.
+ */
+export const VideoSeedContext = React.createContext<string>('');
+export const useVideoSeed = (): string => React.useContext(VideoSeedContext);
+
 // Letterspaced uppercase mono label: "STEP 1", "AI AGENT", "NEVER OPENED"
 export const Kicker: React.FC<{text: string; color?: SemColor | null; size?: number}> = ({
   text,

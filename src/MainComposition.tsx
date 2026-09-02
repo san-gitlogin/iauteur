@@ -3,7 +3,7 @@ import {AbsoluteFill, Sequence, Audio, staticFile} from 'remotion';
 import {Scene, VideoSpec} from './types';
 import {ThemeProvider, useTheme} from './themes';
 import {AssetIcon} from './AssetIcon';
-import {useScale, DesignKitContext} from './ui';
+import {useScale, DesignKitContext, VideoSeedContext} from './ui';
 import {Background} from './Background';
 import {CoverCard} from './CoverCard';
 import {SceneTransition} from './SceneTransition';
@@ -841,9 +841,13 @@ export const MainComposition: React.FC<{spec: VideoSpec; themeOverride?: string;
       themeName={themeOverride ?? effective.brand?.theme}
       backgroundOverride={effective.brand?.background}
     >
+      <VideoSeedContext.Provider
+        value={String(effective.meta?.topic ?? effective.scenes?.[0]?.narration ?? '')}
+      >
       <DesignKitContext.Provider value={resolveKit(effective.brand?.design) ?? null}>
         <Inner spec={effective} />
       </DesignKitContext.Provider>
+      </VideoSeedContext.Provider>
     </ThemeProvider>
   );
 };

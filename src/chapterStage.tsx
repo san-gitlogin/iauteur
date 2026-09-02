@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {Scene} from './types';
 import {useTheme} from './themes';
-import {useScale, useSem, hexA} from './ui';
+import {useScale, useSem, hexA, useVideoSeed} from './ui';
 import {arriveAt, travelAt, landAt} from './motion/system';
 
 // CHAPTER STAGE — the SILHOUETTE of a chapter opening, separated from the pack's handwriting.
@@ -81,19 +81,24 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
   const ink = kit.ink ?? t.colors.text;
   const radius = 14 * scale * t.style.cornerRadius;
 
-  // ROTATE BY CHAPTER NUMBER — do NOT hash the title.
+  // ONE SILHOUETTE PER VIDEO — constant WITHIN, different ACROSS.
   //
-  // The first cut hashed `number|title` and chapters 01 and 02 of the SQLite course both
-  // landed on `slab`: two consecutive chapter cards, identical shape, which is the exact
-  // defect this file exists to remove. A hash is uniform in the limit and says nothing about
-  // any particular pair, and a course has three or four chapters, not three hundred.
+  // Owner, 2026-09-02: *"The chapter title, if chosen, must be the same throughout. Within a
+  // video the chapter title design must not change. But across videos it must change."*
   //
-  // Stepping the pool by the chapter number makes a repeat impossible until chapter six, and
-  // it is still perfectly stable per chapter. The cost, stated plainly: two different courses
-  // step through the shapes in the SAME order, because nothing course-wide is reachable from
-  // a chapter's own data. `chapterVariant` overrides it wherever that matters.
-  const n = parseInt(num.replace(/\D/g, ''), 10);
-  const idx = Number.isFinite(n) ? n : hashOf(title || scene.id || 'chapter');
+  // This file previously stepped the pool BY CHAPTER NUMBER, so a three-act video opened its
+  // acts with three different shapes — variety in the one place it reads as inconsistency,
+  // because a chapter card is furniture and furniture does not change between rooms. That was
+  // an over-correction: the defect it was written against (an earlier hash of `number|title`
+  // putting two CONSECUTIVE chapters on the same shape) is solved for free here, since every
+  // chapter in a video now shares one shape deliberately.
+  //
+  // The seed is the VIDEO's, published by MainComposition — a chapter's own data cannot
+  // identify the video it belongs to, which is exactly why the first version reached for the
+  // chapter number. `chapterVariant` still overrides, and a spec that sets it on one chapter
+  // should set it on all of them.
+  const seed = useVideoSeed();
+  const idx = hashOf(seed || title || scene.id || 'chapter');
   const variant = String(
     (scene.data as {chapterVariant?: string}).chapterVariant ?? POOL[idx % POOL.length],
   );
@@ -164,11 +169,17 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
     const gutter = (vertical ? 56 : 88) * scale;
     return (
       <AbsoluteFill style={{justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'column', gap: 30 * scale}}>
+        {/* THE NUMBER SITS ON THE SAME LEFT AXIS AS THE TITLE.
+            It used to be right-aligned at the far end of an 86%-wide bar, so the eye read
+            the number on the right and then travelled all the way back to a title on the
+            left — two objects, no shared edge, which is what "badly aligned" meant. The bar
+            still bleeds off the frame; the number now starts at the same gutter the type
+            uses, so the card has one left edge from top to bottom. */}
         <div style={{
           height: barH, width: `${grow * 86}%`,
           background: c, borderRadius: `0 ${radius}px ${radius}px 0`,
-          display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
-          paddingRight: 34 * scale, overflow: 'hidden',
+          display: 'flex', alignItems: 'center', justifyContent: 'flex-start',
+          paddingLeft: gutter, overflow: 'hidden',
         }}>
           <span style={{
             fontFamily: t.fonts.display, fontWeight: 900,
@@ -189,19 +200,26 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
     );
   }
 
-  // ── STUB — a ticket. The number lives in a punched stub on the left, a perforated line
-  //    separates it, and the title sits on the counterfoil. A chapter IS an admission to the
-  //    next part, and this is the object that says so.
+  // ── STUB — a two-part plate: the number in a solid block, the title beside it.
+  //
+  //    IT USED TO BE A TICKET, with punched holes and a dashed perforation, and the owner
+  //    named it: *"I think the first chapter title design is meant to be like kinda a ticket
+  //    where I see the cutout design between CHAPTER 1 and the title. I kinda find it odd."*
+  //    He is right — a dashed line with circles reads as a form field or a coupon, not as a
+  //    chapter opening, and the metaphor was doing no work the number and title were not
+  //    already doing. The structure survives (a number block and a title block, one object);
+  //    the costume goes. The divider is now a solid accent rule that draws down as the card
+  //    lands, and the card sizes to its content instead of always spanning 78% with a dead
+  //    right-hand third.
   if (variant === 'stub') {
     const tear = travelAt(frame, A_NUM, 18);
     const show = arriveAt(frame, A_TITLE, 16);
     const stubW = (vertical ? 190 : 230) * scale;
     const cardH = (vertical ? 260 : 230) * scale;
-    const holes = 9;
     return wrap(
       <div style={{
-        display: 'flex', alignItems: 'stretch',
-        height: cardH, width: vertical ? '96%' : '78%',
+        display: 'inline-flex', alignItems: 'stretch',
+        height: cardH, maxWidth: vertical ? '96%' : '84%',
         borderRadius: radius,
         border: `${2 * scale}px solid ${hexA(c, 0.55)}`,
         background: hexA(t.colors.panel, 0.72),
@@ -210,9 +228,9 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
         transform: `translateY(${(1 - arriveAt(frame, A_NUM, 12)) * 14 * scale}px)`,
       }}>
         <div style={{
-          width: stubW, background: hexA(c, 0.16),
+          flex: '0 0 auto', width: stubW, background: hexA(c, 0.18),
           display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center', gap: 6 * scale,
+          alignItems: 'center', justifyContent: 'center', gap: 8 * scale,
         }}>
           {kicker()}
           <span style={{
@@ -222,24 +240,15 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
             transform: `scale(${0.85 + 0.15 * landAt(frame, A_NUM + 6, 16)})`,
           }}>{num}</span>
         </div>
-        {/* the perforation, torn open left to right as the card lands */}
+        {/* One solid rule, drawn top-to-bottom as the card lands. */}
         <div style={{
-          width: 0, borderLeft: `${2 * scale}px dashed ${hexA(c, 0.5)}`,
-          position: 'relative',
-        }}>
-          {Array.from({length: holes}).map((_, i) => (
-            <div key={i} style={{
-              position: 'absolute', left: -5 * scale,
-              top: `${((i + 0.5) / holes) * 100}%`,
-              width: 8 * scale, height: 8 * scale, borderRadius: '50%',
-              background: t.colors.bg,
-              opacity: tear > (i + 1) / holes ? 1 : 0,
-            }} />
-          ))}
-        </div>
+          flex: '0 0 auto', width: 2 * scale,
+          background: `linear-gradient(to bottom, ${hexA(c, 0.65)} ${(tear * 100).toFixed(1)}%, ${hexA(c, 0)} ${(tear * 100).toFixed(1)}%)`,
+        }} />
         <div style={{
-          flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          gap: 12 * scale, padding: `0 ${34 * scale}px`,
+          flex: '0 1 auto', minWidth: 0,
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          gap: 12 * scale, padding: `0 ${38 * scale}px`,
           opacity: show, transform: `translateX(${(1 - show) * 18 * scale}px)`,
         }}>
           <div style={displayOf((vertical ? 48 : 58) * scale * fitMul(title, 26), 'left')}>{title}</div>
@@ -296,29 +305,38 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
   if (variant === 'spine') {
     const draw = travelAt(frame, A_NUM, 20);
     const show = arriveAt(frame, A_TITLE, 16);
-    const railH = (vertical ? 420 : 320) * scale;
+    // THE RULE MEASURES THE TEXT, AND EVERYTHING SHARES ONE LEFT AXIS.
+    //
+    // The first cut gave the rule a FIXED height (320px) and centred the numeral ABOVE it in
+    // its own column. Three things went wrong at once and the owner called all three: the
+    // rule ran a long way past the last line with nothing beside it, the numeral floated
+    // above-and-left of everything instead of aligning to anything, and the two columns had
+    // no shared edge. Now the rule is a stretched sibling — it is exactly as tall as the
+    // content — and the numeral is the first line of the SAME column as the kicker, title and
+    // subtitle, so there is a single left axis down the whole card.
     return wrap(
-      <div style={{display: 'flex', gap: 34 * scale, alignItems: 'stretch', maxWidth: vertical ? '94%' : '78%'}}>
+      <div style={{
+        display: 'flex', gap: 30 * scale, alignItems: 'stretch',
+        width: vertical ? '90%' : '74%',
+      }}>
         <div style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 * scale,
+          flex: '0 0 auto', width: 7 * scale, borderRadius: 999,
+          background: `linear-gradient(to bottom, ${c} ${(draw * 100).toFixed(1)}%, ${hexA(c, 0)} ${(draw * 100).toFixed(1)}%)`,
+          boxShadow: t.style.glow > 0 ? `0 0 ${20 * t.style.glow}px ${hexA(c, 0.6)}` : undefined,
+        }} />
+        <div style={{
+          flex: '1 1 auto', minWidth: 0,
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          gap: 10 * scale, opacity: show,
+          transform: `translateX(${(1 - show) * 20 * scale}px)`,
         }}>
           <span style={{
             fontFamily: t.fonts.display, fontWeight: 900,
-            fontSize: (vertical ? 96 : 116) * scale, lineHeight: 1, color: c,
+            fontSize: (vertical ? 84 : 104) * scale, lineHeight: 1.02, color: c,
             letterSpacing: t.style.displayTracking,
             opacity: arriveAt(frame, A_NUM, 12),
             transform: `translateY(${(1 - arriveAt(frame, A_NUM, 12)) * -12 * scale}px)`,
           }}>{num}</span>
-          <div style={{
-            width: 7 * scale, height: railH * draw, background: c, borderRadius: 999,
-            boxShadow: t.style.glow > 0 ? `0 0 ${20 * t.style.glow}px ${hexA(c, 0.6)}` : undefined,
-          }} />
-        </div>
-        <div style={{
-          display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          gap: 16 * scale, opacity: show,
-          transform: `translateX(${(1 - show) * 20 * scale}px)`,
-        }}>
           {kicker('left')}
           <div style={displayOf((vertical ? 56 : 70) * scale * fitMul(title, 28), 'left')}>{title}</div>
           {subNode}
@@ -366,7 +384,7 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
   const show = arriveAt(frame, A_TITLE, 16);
   const box = (vertical ? 230 : 250) * scale;
   return wrap(
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 26 * scale}}>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 40 * scale}}>
       <div style={{
         width: box, height: box,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -384,7 +402,7 @@ export const ChapterStage: React.FC<{scene: Scene; kit?: ChapterKit}> = ({scene,
         }}>{num}</span>
       </div>
       <div style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 * scale,
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 * scale,
         // EXPLICIT, not maxWidth: this column's parent centres its children, so without a real
         // width the block shrink-wraps to the stamp above it and the title breaks at 250px.
         width: vertical ? frameWidth * 0.9 : frameWidth * 0.72,

@@ -6,6 +6,7 @@ import {fadeUp, springPop} from '../anim';
 import {entranceStyle} from '../motion';
 import {AssetIcon} from '../AssetIcon';
 import {Bell} from 'lucide-react';
+import {ActionRow} from './ActionRow';
 
 // Long-form: keep key content CENTERED — YouTube end screens own the corners.
 // When brand.logo is set, the subscribe circle shows the CHANNEL LOGO (Bell is the fallback).
@@ -65,6 +66,9 @@ export const OutroCta: React.FC<{scene: Scene; brand?: VideoSpec['brand']}> = ({
       >
         {d.message}
       </div>
+      {/* LIKE · SUBSCRIBE · SHARE. The owner asked for these under the channel logo, and they
+          arrive AFTER the message has been read rather than competing with it. */}
+      <ActionRow start={30} />
       {d.sub ? (
         <div
           style={{
