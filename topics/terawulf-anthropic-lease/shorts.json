@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "topic": "TeraWulf's $19B Anthropic lease - Shorts cut (TeraWulf press release, Jul 6 2026)",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "TeraWulf locked ~$19B of Anthropic lease revenue and recycled $450M out of Texas.",
+    "topicAxes": [
+      "capital-scale",
+      "ownership-control"
+    ]
+  },
+  "brand": {
+    "theme": "corptrust",
+    "design": "corptrust",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO"
+  },
+  "cover": {
+    "title": "$19B AI LEASE",
+    "badge": "WULF",
+    "asset": "lucide:server",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "TeraWulf just signed a nineteen billion dollar lease with Anthropic.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "$19B WITH ANTHROPIC",
+        "subtext": "a 20-year AI lease",
+        "heroAsset": "lucide:server",
+        "headlineAtWord": 1,
+        "heroAtWord": 9,
+        "anim": "scale"
+      }
+    },
+    {
+      "id": "s02",
+      "type": "STAT_CALLOUT",
+      "narration": "Nineteen billion dollars over its twenty-year term.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "value": 19,
+        "prefix": "$",
+        "suffix": "B",
+        "label": "contracted over the 20-year term",
+        "atWord": 1
+      }
+    },
+    {
+      "id": "s03",
+      "type": "STAT_PANELS",
+      "narration": "Four hundred one megawatts for Anthropic, and four hundred fifty million recycled from Texas.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "push",
+      "data": {
+        "headline": "The [two numbers.]",
+        "headlineColor": "blue",
+        "stats": [
+          {
+            "kicker": "FOR ANTHROPIC",
+            "value": "401 MW",
+            "color": "blue",
+            "atWord": 4
+          },
+          {
+            "kicker": "RECYCLED FROM TX",
+            "value": "$450M",
+            "color": "green",
+            "atWord": 11
+          }
+        ],
+        "source": "TERAWULF PRESS RELEASE, JUL 6 2026"
+      }
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "narration": "Follow THE NBX STUDIO for more.",
+      "durationFrames": 120,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "Own the core, lease the rest",
+        "sub": "follow THE NBX STUDIO"
+      }
+    }
+  ]
+}

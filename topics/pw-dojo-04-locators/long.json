@@ -1,0 +1,1023 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP04: Locators",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "what a Playwright locator really is, the ladder you pick one from, and how to survive strict mode",
+    "openLoop": "Why can Playwright not find a button you are looking straight at?",
+    "analogy": "A locator is the spotlight that finds one actor on the stage.",
+    "topicAxes": [
+      "skill-acquisition",
+      "tooling-shift"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #4 — Locators (get_by_role and the locator ladder)",
+      "altTitles": [
+        "Playwright locators explained: get_by_role, get_by_label and strict mode"
+      ],
+      "description": "A locator is a saved search, not the element. The ladder, the mnemonic, and the strict mode error everyone meets.",
+      "tags": [
+        "playwright",
+        "python",
+        "locators",
+        "get_by_role",
+        "get_by_label",
+        "strict mode",
+        "playwright python",
+        "playwright tutorial",
+        "selectors"
+      ],
+      "sources": [
+        "san-gitlogin.github.io/playwright-dojo"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "LOCATORS",
+    "badge": "Dojo · EP 4",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your script says it cannot find the Sign in button. You are looking straight at that button on your screen.",
+      "data": {
+        "headline": "CANNOT FIND IT?",
+        "subtext": "the button is right there",
+        "heroAsset": "lucide:search-x",
+        "headlineAtWord": 3.583,
+        "heroAtWord": 8
+      },
+      "durationFrames": 174,
+      "audio": "audio/pw-dojo-04-locators_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "AUTOMATION_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here is what that looks like. The run opens the page. It types the email in. Then it reaches for the Sign in button and stops dead. Nine times out of ten nothing is wrong with the page. Something is wrong with how you described the button.",
+      "data": {
+        "auto": {
+          "url": "shop.example.com/login",
+          "runner": "playwright",
+          "content": {
+            "kind": "form",
+            "title": "Sign in",
+            "fields": [
+              {
+                "label": "Email",
+                "value": "neo@matrix.io"
+              },
+              {
+                "label": "Password",
+                "value": "••••••••"
+              }
+            ],
+            "submit": "Sign in"
+          },
+          "steps": [
+            {
+              "action": "goto",
+              "target": "shop.example.com",
+              "status": "pass"
+            },
+            {
+              "action": "type",
+              "target": "Email",
+              "value": "neo@matrix.io",
+              "status": "pass"
+            },
+            {
+              "action": "click",
+              "target": "Sign in",
+              "status": "fail",
+              "reason": "no element matched that description"
+            }
+          ],
+          "atWord": 11.75
+        }
+      },
+      "durationFrames": 425,
+      "audio": "audio/pw-dojo-04-locators_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Describing things is what this whole episode is about, and it is honestly the most important skill in Playwright. Get this one right and half of your future problems simply never happen.",
+      "data": {
+        "title": "LOCATORS",
+        "subtitle": "The Playwright Dojo · Episode 4"
+      },
+      "durationFrames": 324,
+      "audio": "audio/pw-dojo-04-locators_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "You already know the map. The browser is your theatre. The page is the stage, and every element on it is an actor standing on the boards. A locator is the spotlight. You describe one actor, and the spotlight swings across and lands on them.",
+      "data": {
+        "stage": {
+          "marquee": "shop.example.com",
+          "curtain": "raising",
+          "actors": [
+            {
+              "label": "Sign in",
+              "kind": "button",
+              "atWord": 15.583
+            },
+            {
+              "label": "Email",
+              "kind": "field",
+              "atWord": 17.917
+            },
+            {
+              "label": "Password",
+              "kind": "field",
+              "atWord": 19.5
+            },
+            {
+              "label": "Pricing",
+              "kind": "link",
+              "atWord": 21
+            }
+          ],
+          "spotlightIndex": 0,
+          "caption": "the spotlight finds one actor",
+          "atWord": 8.667
+        }
+      },
+      "durationFrames": 436,
+      "audio": "audio/pw-dojo-04-locators_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things to carry out of here. What a locator really is underneath, the ladder you climb when you pick one, and the error every single person meets in their first week.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:sticky-note",
+              "label": "A saved search",
+              "atWord": 7.5
+            },
+            {
+              "icon": "lucide:list-ordered",
+              "label": "The ladder",
+              "atWord": 11.083
+            },
+            {
+              "icon": "lucide:alert-triangle",
+              "label": "Strict mode",
+              "atWord": 14.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 298,
+      "audio": "audio/pw-dojo-04-locators_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Start with the idea that changes how you read every line of Playwright code.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "A locator is a saved search",
+          "subtitle": "Not the element itself"
+        }
+      },
+      "durationFrames": 150,
+      "audio": "audio/pw-dojo-04-locators_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Two lines. The first one names the button, and it searches nothing at all. Nothing happens on that page. All you have done is write a description down: the button that says Sign in. The search only runs on the second line, at the moment you click.",
+      "data": {
+        "code": {
+          "filename": "locator.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "# A locator is a SAVED SEARCH, not the element",
+              "color": "green"
+            },
+            {
+              "text": "sign_in = page.get_by_role(\"button\", name=\"Sign in\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# Nothing searched yet. It runs when you ACT:",
+              "color": "green"
+            },
+            {
+              "text": "sign_in.click()",
+              "color": "purple"
+            }
+          ],
+          "atWord": 10.583
+        }
+      },
+      "durationFrames": 436,
+      "audio": "audio/pw-dojo-04-locators_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneB",
+      "narration": "So a locator is not the element. It is a saved search for the element, and Playwright holds that search back until the very last moment, then goes and looks fresh.",
+      "data": {
+        "kinetic": {
+          "text": "Nothing has searched yet.",
+          "fx": "typewriter",
+          "sub": "the search runs when you act",
+          "atWord": 9.083
+        }
+      },
+      "durationFrames": 321,
+      "audio": "audio/pw-dojo-04-locators_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "SPLIT_PATHS",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Which matters more than it sounds. Say the button turns up two seconds late, because part of the page is still loading. The old style grabs the element the second you ask, so it grabs nothing and falls over. A locator looks again when you click.",
+      "data": {
+        "center": {
+          "kicker": "the button arrives 2s late",
+          "title": "Same page, two ways",
+          "atWord": 7.25
+        },
+        "left": {
+          "title": "Grab it now",
+          "badge": {
+            "text": "old way",
+            "color": "red"
+          },
+          "color": "red",
+          "atWord": 14.25,
+          "lines": [
+            {
+              "text": "saved at line one"
+            },
+            {
+              "text": "button not there yet"
+            },
+            {
+              "text": "crash",
+              "color": "red"
+            }
+          ]
+        },
+        "right": {
+          "title": "Save the search",
+          "badge": {
+            "text": "locator",
+            "color": "green"
+          },
+          "color": "green",
+          "atWord": 22.833,
+          "lines": [
+            {
+              "text": "nothing saved yet"
+            },
+            {
+              "text": "searches at click"
+            },
+            {
+              "text": "found",
+              "color": "green"
+            }
+          ]
+        },
+        "source": "illustrative"
+      },
+      "durationFrames": 452,
+      "audio": "audio/pw-dojo-04-locators_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Keep this one somewhere. A locator is a sticky note with a description of your actor written on it, and the spotlight only switches on when you act.",
+      "data": {
+        "stickyNote": {
+          "headline": "What a locator [is]",
+          "color": "yellow",
+          "notes": [
+            {
+              "title": "LOCATOR = STICKY NOTE",
+              "tag": "memory hook",
+              "body": "A description of your actor, written down. The spotlight only switches on when you act.",
+              "highlight": "only switches on when you act",
+              "asset": "lucide:sticky-note",
+              "atWord": 9.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 258,
+      "audio": "audio/pw-dojo-04-locators_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "First check. When does that first line actually go and search the page? Read the four options and answer in your head. Pause the video here if you want longer to think about it. Ready? It is B. The search runs only when you act on it.",
+      "data": {
+        "quiz": {
+          "question": "When does the locator search the page?",
+          "options": [
+            {
+              "text": "The moment the line runs"
+            },
+            {
+              "text": "When you act on it — .click()"
+            },
+            {
+              "text": "When the page finishes loading"
+            },
+            {
+              "text": "Never, it is decoration"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Locators are lazy on purpose — a late button is still found.",
+          "revealAtWord": 27.917,
+          "atWord": 5
+        }
+      },
+      "durationFrames": 468,
+      "audio": "audio/pw-dojo-04-locators_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Now the way you should be describing things almost all of the time.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "get_by_role, the king",
+          "subtitle": "Describe it like a human"
+        }
+      },
+      "durationFrames": 122,
+      "audio": "audio/pw-dojo-04-locators_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CODE_DIFF",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Here is a thing developers do every other Tuesday. They restyle a page, and the class names all change. Nothing a user can see is any different. But if your script was pointing at that old class name, every test you wrote just went red.",
+      "data": {
+        "diff": {
+          "fileName": "login.html",
+          "stat": {
+            "plus": 1,
+            "minus": 1
+          },
+          "atWord": 12.917,
+          "rows": [
+            {
+              "kind": "ctx",
+              "text": "<form class=\"login\">"
+            },
+            {
+              "kind": "del",
+              "text": "  <button class=\"btn-primary-2xl\">Sign in</button>"
+            },
+            {
+              "kind": "add",
+              "text": "  <button class=\"ui-btn-v3\">Sign in</button>"
+            },
+            {
+              "kind": "ctx",
+              "text": "</form>"
+            }
+          ]
+        }
+      },
+      "durationFrames": 450,
+      "audio": "audio/pw-dojo-04-locators_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "DOM_INSPECT",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "That is because a class name describes how the page was built. The nesting, the position, the styling. All of that belongs to the developers and they change it whenever they like. It says nothing about what the button means.",
+      "data": {
+        "dom": {
+          "selector": "form > div > .btn-primary-2xl",
+          "nodes": [
+            {
+              "tag": "form",
+              "attr": "class=\"login\"",
+              "depth": 0
+            },
+            {
+              "tag": "div",
+              "attr": "class=\"row\"",
+              "depth": 1
+            },
+            {
+              "tag": "button",
+              "attr": ".btn-primary-2xl",
+              "depth": 2
+            },
+            {
+              "tag": "span",
+              "attr": "Sign in",
+              "depth": 3
+            }
+          ],
+          "highlight": 2,
+          "atWord": 9.333
+        }
+      },
+      "durationFrames": 384,
+      "audio": "audio/pw-dojo-04-locators_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So describe it the way a person would. Nobody says click the div with class b t n dash primary. They say click the Sign in button. That is all get by role does. A role, and the name the user can actually read.",
+      "data": {
+        "code": {
+          "filename": "roles.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "page.get_by_role(\"button\", name=\"Sign in\").click()",
+              "color": "green"
+            },
+            {
+              "text": "page.get_by_role(\"link\", name=\"Pricing\").click()"
+            },
+            {
+              "text": "page.get_by_role(\"heading\", name=\"Welcome back\")"
+            },
+            {
+              "text": "page.get_by_role(\"checkbox\","
+            },
+            {
+              "text": "                 name=\"Remember me\").check()"
+            },
+            {
+              "text": "email = page.get_by_role(\"textbox\", name=\"Email\")"
+            },
+            {
+              "text": "email.fill(\"neo@matrix.io\")"
+            }
+          ],
+          "atWord": 14.25
+        }
+      },
+      "durationFrames": 432,
+      "audio": "audio/pw-dojo-04-locators_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Roles cover most of a page. Forms need a couple of extra friends.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The rest of the family",
+          "subtitle": "Label, placeholder, text, test id"
+        }
+      },
+      "durationFrames": 153,
+      "audio": "audio/pw-dojo-04-locators_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "WINDOW_FRAME",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Look at a real form. Every box has a label sitting beside it, and that label is how your eyes know which box is which. Get by label uses the very same thing, and it is the way you fill in forms.",
+      "data": {
+        "window": {
+          "variant": "browser",
+          "url": "shop.example.com/login",
+          "title": "Sign in",
+          "content": {
+            "kind": "form",
+            "title": "Sign in",
+            "fields": [
+              {
+                "label": "Email",
+                "value": "neo@matrix.io"
+              },
+              {
+                "label": "Password",
+                "value": "",
+                "focus": true
+              }
+            ],
+            "submit": "Sign in"
+          },
+          "atWord": 10.417
+        }
+      },
+      "durationFrames": 359,
+      "audio": "audio/pw-dojo-04-locators_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "And the rest, one line each. Placeholder, for grey hint text in an empty box. Text, for a message on the page. Test id, for an attribute added only for tests, the sturdiest of the lot. And alt text, for images.",
+      "data": {
+        "code": {
+          "filename": "family.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "page.get_by_label(\"Email\").fill(\"neo@matrix.io\")"
+            },
+            {
+              "text": "box = page.get_by_placeholder(\"Search docs...\")"
+            },
+            {
+              "text": "box.fill(\"locators\")"
+            },
+            {
+              "text": "page.get_by_text(\"Thanks for signing up!\")"
+            },
+            {
+              "text": "page.get_by_test_id(\"checkout-btn\").click()",
+              "color": "green"
+            },
+            {
+              "text": "page.get_by_alt_text(\"Company logo\")"
+            }
+          ],
+          "atWord": 11
+        }
+      },
+      "durationFrames": 470,
+      "audio": "audio/pw-dojo-04-locators_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "QUIZ_CARD",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "Second check. You need to fill the box underneath the label Password. Which of these four do you reach for? Have a think, and pause the video if you want longer. Ready? B again. Get by label joins a label to its box.",
+      "data": {
+        "quiz": {
+          "question": "Fill the input under the label \"Password\"",
+          "options": [
+            {
+              "text": "page.locator(\"#pwd-input-3\")"
+            },
+            {
+              "text": "page.get_by_label(\"Password\")"
+            },
+            {
+              "text": "page.get_by_text(\"Password\")"
+            },
+            {
+              "text": "page.locator(\"input\")"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "get_by_text finds the label itself, not the box beside it.",
+          "revealAtWord": 24.333,
+          "atWord": 4
+        }
+      },
+      "durationFrames": 409,
+      "audio": "audio/pw-dojo-04-locators_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "There is an order to all of these, and it comes with a sentence you will not forget.",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "The ladder",
+          "subtitle": "Start at the top, climb down when forced"
+        }
+      },
+      "durationFrames": 161,
+      "audio": "audio/pw-dojo-04-locators_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "DOM_INSPECT",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Which brings us to the bottom of the pile. Raw CSS and XPath do work. But look at what this one is really saying: the third div, then the form, then the second button. Those are directions through the furniture, not a description of the thing.",
+      "data": {
+        "dom": {
+          "selector": "//div[3]/form/button[2]",
+          "nodes": [
+            {
+              "tag": "div",
+              "attr": "3rd of 5",
+              "depth": 0
+            },
+            {
+              "tag": "form",
+              "attr": "class=\"checkout\"",
+              "depth": 1
+            },
+            {
+              "tag": "button",
+              "attr": "1st — Cancel",
+              "depth": 2
+            },
+            {
+              "tag": "button",
+              "attr": "2nd — Pay",
+              "depth": 2
+            }
+          ],
+          "highlight": 3,
+          "atWord": 13.583
+        }
+      },
+      "durationFrames": 429,
+      "audio": "audio/pw-dojo-04-locators_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "CACHE_PYRAMID",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "So here is the ladder, top to bottom, with the daft sentence that makes it stick. Robots Love Pizza, Tacos, Two Cokes. Start at the top every time, and climb down a rung only when you must.",
+      "data": {
+        "pyramid": {
+          "variant": "pyramid",
+          "headline": "Robots Love Pizza, Tacos, Two Cokes",
+          "tiers": [
+            {
+              "label": "Role",
+              "speed": "Robots",
+              "size": "meaning",
+              "color": "green"
+            },
+            {
+              "label": "Label",
+              "speed": "Love",
+              "size": "meaning"
+            },
+            {
+              "label": "Placeholder",
+              "speed": "Pizza",
+              "size": "hint text"
+            },
+            {
+              "label": "Text",
+              "speed": "Tacos",
+              "size": "what is seen"
+            },
+            {
+              "label": "Test id",
+              "speed": "Two",
+              "size": "for tests"
+            },
+            {
+              "label": "CSS / XPath",
+              "speed": "Cokes",
+              "size": "structure",
+              "color": "red"
+            }
+          ],
+          "axisTop": "start here",
+          "axisBottom": "last resort",
+          "atWord": 7.667
+        }
+      },
+      "durationFrames": 390,
+      "audio": "audio/pw-dojo-04-locators_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Role, Label, Placeholder, Text, Test id, and CSS at the bottom. And if you ever catch yourself writing an XPath with numbers in it, that is your signal to go and ask for a test id instead.",
+      "data": {
+        "stickyNote": {
+          "headline": "The ladder [mnemonic]",
+          "color": "orange",
+          "notes": [
+            {
+              "title": "ROBOTS LOVE PIZZA",
+              "tag": "memory hook",
+              "body": "Robots Love Pizza, Tacos, Two Cokes. Role, Label, Placeholder, Text, Test id, CSS. Climb down only when forced.",
+              "highlight": "Climb down only when forced",
+              "asset": "lucide:list-ordered",
+              "atWord": 12.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 394,
+      "audio": "audio/pw-dojo-04-locators_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Last check, and this one turns up in interviews. Which of these four breaks the next time somebody restyles the site? Have a think, and pause the video if you want a bit longer. Ready? It is C. Class names and nesting are what a restyle changes.",
+      "data": {
+        "quiz": {
+          "question": "Which breaks when the site is restyled?",
+          "options": [
+            {
+              "text": "get_by_role(\"button\", name=\"Pay\")"
+            },
+            {
+              "text": "get_by_label(\"Card number\")"
+            },
+            {
+              "text": "page.locator(\".css-1x2y3z > div\")"
+            },
+            {
+              "text": "get_by_test_id(\"pay-button\")"
+            }
+          ],
+          "answerIndex": 2,
+          "why": "Roles, labels and test ids describe meaning — and meaning survives.",
+          "revealAtWord": 26.5,
+          "atWord": 4.75
+        }
+      },
+      "durationFrames": 444,
+      "audio": "audio/pw-dojo-04-locators_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "One last thing, and it is the error you are most likely to meet this week.",
+      "data": {
+        "chapter": {
+          "number": "05",
+          "title": "Strict mode",
+          "subtitle": "One spotlight, one actor"
+        }
+      },
+      "durationFrames": 146,
+      "audio": "audio/pw-dojo-04-locators_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Picture two actors on the stage, and both of them answer to the name Edit. You call for Edit. Which one should the spotlight light? Playwright will not guess, because guessing means maybe clicking the wrong one and never telling you.",
+      "data": {
+        "stage": {
+          "marquee": "two actors, one name",
+          "curtain": "up",
+          "actors": [
+            {
+              "label": "Edit",
+              "kind": "button",
+              "atWord": 6.417
+            },
+            {
+              "label": "Edit",
+              "kind": "button",
+              "atWord": 8.75
+            },
+            {
+              "label": "Delete",
+              "kind": "button",
+              "atWord": 11.833
+            }
+          ],
+          "spotlightIndex": 0,
+          "caption": "which Edit did you mean?",
+          "atWord": 14.167
+        }
+      },
+      "durationFrames": 402,
+      "audio": "audio/pw-dojo-04-locators_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So instead it stops, loudly, and shows you exactly what it found. Strict mode violation. Resolved to two elements, and here they both are. Annoying for about five minutes. Then it saves your career.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@dojo",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "python test_edit.py",
+              "exitCode": 1,
+              "atWord": 9.333,
+              "output": [
+                "Error: strict mode violation: get_by_role(\"button\",",
+                "name=\"Edit\") resolved to 2 elements:",
+                "  1) <button>Edit profile</button>",
+                "  2) <button>Edit settings</button>"
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 400,
+      "audio": "audio/pw-dojo-04-locators_long_s27.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s28",
+      "type": "REVEAL",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Because think about the alternative for a second. A test that quietly clicked the wrong Delete button, went green, and told absolutely nobody.",
+      "data": {
+        "reveal": {
+          "kicker": "strict mode",
+          "statement": "A loud error beats a silent wrong click.",
+          "sub": "ambiguity is made loud, not dangerous",
+          "atWord": 8
+        }
+      },
+      "durationFrames": 263,
+      "audio": "audio/pw-dojo-04-locators_long_s28.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s29",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And the fix is small. Do not try to describe the button harder. Narrow the room down first. Find the one card you mean, then look for the Edit button inside it. That is called chaining, and it is the right answer nearly every time.",
+      "data": {
+        "diff": {
+          "fileName": "the fix: chain it",
+          "stat": {
+            "plus": 2,
+            "minus": 1
+          },
+          "atWord": 13.417,
+          "rows": [
+            {
+              "kind": "del",
+              "text": "page.get_by_role(\"button\", name=\"Edit\").click()"
+            },
+            {
+              "kind": "add",
+              "text": "card = page.get_by_test_id(\"profile-card\")"
+            },
+            {
+              "kind": "add",
+              "text": "card.get_by_role(\"button\", name=\"Edit\").click()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 415,
+      "audio": "audio/pw-dojo-04-locators_long_s29.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s30",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Pro corner. You can also pick by position, with first, or last, or nth. But that is admitting the order on the page matters, and orders move. Chaining from a unique parent does not.",
+      "data": {
+        "stickyNote": {
+          "headline": "Strict mode, in an [interview]",
+          "color": "green",
+          "notes": [
+            {
+              "title": "ONE SPOTLIGHT, ONE ACTOR",
+              "tag": "pro corner",
+              "body": "Two matches is a loud error, never a silent wrong click. Best fix: chain from a unique parent, not .first.",
+              "highlight": "chain from a unique parent",
+              "asset": "lucide:crosshair",
+              "atWord": 14.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 367,
+      "audio": "audio/pw-dojo-04-locators_long_s30.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s31",
+      "type": "RECAP",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "So, episode four in three lines. A locator is a saved search, not the element itself. Climb the ladder from the top down. And one spotlight may only ever light one actor.",
+      "data": {
+        "heading": "Episode four, in three lines",
+        "points": [
+          {
+            "text": "A saved search, not the element",
+            "atWord": 9.667
+          },
+          {
+            "text": "Robots Love Pizza, Tacos, Two Cokes",
+            "atWord": 15.417
+          },
+          {
+            "text": "One spotlight, one actor",
+            "atWord": 20.25
+          }
+        ]
+      },
+      "durationFrames": 391,
+      "audio": "audio/pw-dojo-04-locators_long_s31.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s32",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Next time we start directing the show: clicking, filling, checking and selecting. Every lesson is free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Actions",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 260,
+      "audio": "audio/pw-dojo-04-locators_long_s32.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

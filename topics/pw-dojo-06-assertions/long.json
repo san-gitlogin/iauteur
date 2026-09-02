@@ -1,0 +1,924 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP06: Assertions",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "why expect() beats a plain assert, and the checklist the critic works from",
+    "openLoop": "How can every test be green while the feature is broken?",
+    "analogy": "An assertion is the critic who decides whether the show actually went right.",
+    "topicAxes": [
+      "skill-acquisition",
+      "tooling-shift"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #6 — Assertions & expect()",
+      "altTitles": [
+        "assert vs expect() in Playwright — the interview answer"
+      ],
+      "description": "Why a green suite can hide a broken feature, why expect() retries for 5 seconds where a plain assert checks once, and how to read a Playwright failure.",
+      "tags": [
+        "playwright",
+        "python",
+        "assertions",
+        "expect",
+        "assert",
+        "to_be_visible",
+        "playwright python",
+        "playwright tutorial",
+        "automation testing"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ASSERTIONS",
+    "badge": "Dojo · EP 6",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Every test in your suite is green. And the feature has been broken in production since Tuesday.",
+      "data": {
+        "headline": "ALL GREEN. STILL BROKEN.",
+        "subtext": "the tests never checked anything",
+        "heroAsset": "lucide:check-check",
+        "headlineAtWord": 3.167,
+        "heroAtWord": 7.583
+      },
+      "durationFrames": 170,
+      "audio": "audio/pw-dojo-06-assertions_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "AUTOMATION_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here is the guilty test. It goes to the login page, types a username, types a password, clicks the Login button. Four steps, every one of them green. Now look at the page underneath: that login did not work at all.",
+      "data": {
+        "auto": {
+          "content": {
+            "kind": "text",
+            "title": "Login",
+            "body": "Still on the login page. The login silently failed."
+          },
+          "steps": [
+            {
+              "action": "goto",
+              "target": "/login",
+              "status": "pass"
+            },
+            {
+              "action": "type",
+              "target": "Username",
+              "value": "tomsmith",
+              "status": "pass"
+            },
+            {
+              "action": "type",
+              "target": "Password",
+              "value": "wrong-password",
+              "status": "pass"
+            },
+            {
+              "action": "click",
+              "target": "Login",
+              "status": "pass"
+            }
+          ],
+          "url": "the-internet.herokuapp.com/login",
+          "runner": "playwright",
+          "atWord": 9.583
+        }
+      },
+      "durationFrames": 404,
+      "audio": "audio/pw-dojo-06-assertions_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "That test cannot fail. Not because your code is good, but because nothing in it ever asks a question. The missing half has a name, a personality, and one feature that beats Python's own assert keyword.",
+      "data": {
+        "title": "ASSERTIONS",
+        "subtitle": "The Playwright Dojo · Episode 6"
+      },
+      "durationFrames": 382,
+      "audio": "audio/pw-dojo-06-assertions_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Two episodes ago the spotlight found your actor. Last episode you directed them. Now the curtain comes down, the show is over, and nobody has said whether it was any good. That is the job you have not hired for.",
+      "data": {
+        "stage": {
+          "marquee": "the-internet.herokuapp.com",
+          "curtain": "up",
+          "actors": [
+            {
+              "label": "Username",
+              "kind": "field",
+              "atWord": 9.083
+            },
+            {
+              "label": "Password",
+              "kind": "field",
+              "atWord": 10.5
+            },
+            {
+              "label": "Login",
+              "kind": "button",
+              "atWord": 12.75
+            }
+          ],
+          "caption": "the show is over. Was it any good?",
+          "atWord": 4.667
+        }
+      },
+      "durationFrames": 373,
+      "audio": "audio/pw-dojo-06-assertions_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three parts. The half of a test that beginners leave out, the one feature that makes Playwright's expect beat a plain assert, and the checklist the critic actually works from every day.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:split",
+              "label": "The missing half",
+              "atWord": 6.667
+            },
+            {
+              "icon": "lucide:repeat",
+              "label": "The patient critic",
+              "atWord": 11.583
+            },
+            {
+              "icon": "lucide:list-checks",
+              "label": "Daily checklist",
+              "atWord": 16.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 333,
+      "audio": "audio/pw-dojo-06-assertions_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Start with the half that most beginners leave out entirely, usually without noticing.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The missing half",
+          "subtitle": "Automation is not testing"
+        }
+      },
+      "durationFrames": 153,
+      "audio": "audio/pw-dojo-06-assertions_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "AUTOMATION_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Automation is making the browser do things. Testing is doing things and then checking the result. Add one line — a check that the welcome banner turned up — and the very same run finally goes red.",
+      "data": {
+        "auto": {
+          "content": {
+            "kind": "text",
+            "title": "Login",
+            "body": "Still on the login page. The login silently failed."
+          },
+          "steps": [
+            {
+              "action": "goto",
+              "target": "/login",
+              "status": "pass"
+            },
+            {
+              "action": "type",
+              "target": "Username",
+              "value": "tomsmith",
+              "status": "pass"
+            },
+            {
+              "action": "type",
+              "target": "Password",
+              "value": "wrong-password",
+              "status": "pass"
+            },
+            {
+              "action": "click",
+              "target": "Login",
+              "status": "pass"
+            },
+            {
+              "action": "assert",
+              "target": "welcome banner",
+              "status": "fail",
+              "reason": "not found after 5 seconds",
+              "atWord": 16.333
+            }
+          ],
+          "url": "the-internet.herokuapp.com/login",
+          "runner": "playwright",
+          "atWord": 5.833
+        }
+      },
+      "durationFrames": 380,
+      "audio": "audio/pw-dojo-06-assertions_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "The shape never changes. Expect, the thing you are checking, then to something. Wrap the locator, then say the expectation out loud. Here the critic checks two things: the banner is on screen, and the browser really moved to the secure page.",
+      "data": {
+        "code": {
+          "filename": "login_test.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "from playwright.sync_api import expect"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "page.get_by_role(\"button\", name=\"Login\").click()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# The critic checks the result:",
+              "color": "green"
+            },
+            {
+              "text": "expect(page.get_by_text("
+            },
+            {
+              "text": "    \"You logged into a secure area!\""
+            },
+            {
+              "text": ")).to_be_visible()"
+            },
+            {
+              "text": "expect(page).to_have_url("
+            },
+            {
+              "text": "    \"https://the-internet.herokuapp.com/secure\")"
+            }
+          ],
+          "atWord": 11.25
+        }
+      },
+      "durationFrames": 451,
+      "audio": "audio/pw-dojo-06-assertions_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Worth writing down. An action without an assertion is a play with no critic. Things happened on the stage, and nobody in the building can tell you whether any of it was right.",
+      "data": {
+        "stickyNote": {
+          "headline": "Action without [assertion]",
+          "color": "blue",
+          "notes": [
+            {
+              "title": "NO CRITIC, NO VERDICT",
+              "tag": "memory hook",
+              "body": "An action without an assertion is a play with no critic. Nobody knows if it was any good.",
+              "highlight": "a play with no critic",
+              "asset": "lucide:theater",
+              "atWord": 10.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 299,
+      "audio": "audio/pw-dojo-06-assertions_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Python already ships an assert keyword. So why does Playwright bring its own? This is the interview question.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The patient critic",
+          "subtitle": "expect versus plain assert"
+        }
+      },
+      "durationFrames": 228,
+      "audio": "audio/pw-dojo-06-assertions_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "TIMELINE",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Because a plain assert checks once, instantly. You click Save. Assert looks for the toast at zero milliseconds, and the toast does not arrive until eight hundred. The check and the event sit at different places on the clock. Wrong verdict, flaky test.",
+      "data": {
+        "timeline": {
+          "milestones": [
+            {
+              "date": "0 ms",
+              "title": "you click Save",
+              "color": "blue",
+              "atWord": 6.25
+            },
+            {
+              "date": "still 0 ms",
+              "title": "assert: FAIL",
+              "color": "red",
+              "atWord": 8.917
+            },
+            {
+              "date": "800 ms",
+              "title": "toast arrives",
+              "color": "orange",
+              "atWord": 17.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 476,
+      "audio": "audio/pw-dojo-06-assertions_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CYCLE_LOOP",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Expect is a patient critic. It checks, and if the answer is not true yet, it waits a moment and checks again, round and round, for up to five seconds. The instant that toast appears, it passes.",
+      "data": {
+        "cycleLoop": {
+          "headline": "expect() re-checks, for up to 5s",
+          "nodes": [
+            {
+              "label": "check the page",
+              "sub": "is it true yet?",
+              "color": "blue",
+              "atWord": 1.833
+            },
+            {
+              "label": "not true yet",
+              "sub": "no verdict written",
+              "color": "orange",
+              "atWord": 3.417
+            },
+            {
+              "label": "wait a moment",
+              "sub": "then check again",
+              "color": "purple",
+              "atWord": 5.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 385,
+      "audio": "audio/pw-dojo-06-assertions_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So in your tests, one line goes out and one line comes in. And when something is genuinely slow, like a report that takes ten seconds to build, you hand the critic more patience instead of reaching for sleep.",
+      "data": {
+        "diff": {
+          "fileName": "test_save.py",
+          "stat": {
+            "plus": 4,
+            "minus": 1
+          },
+          "atWord": 9.5,
+          "rows": [
+            {
+              "kind": "ctx",
+              "text": "# BAD — checks once, at the worst possible moment:"
+            },
+            {
+              "kind": "del",
+              "text": "assert page.get_by_text(\"Success\").is_visible()"
+            },
+            {
+              "kind": "ctx",
+              "text": ""
+            },
+            {
+              "kind": "ctx",
+              "text": "# GOOD — retries for up to 5s until true:"
+            },
+            {
+              "kind": "add",
+              "text": "expect(page.get_by_text(\"Success\")).to_be_visible()"
+            },
+            {
+              "kind": "ctx",
+              "text": ""
+            },
+            {
+              "kind": "ctx",
+              "text": "# custom patience for slow things:"
+            },
+            {
+              "kind": "add",
+              "text": "expect("
+            },
+            {
+              "kind": "add",
+              "text": "    page.get_by_text(\"Report ready\")"
+            },
+            {
+              "kind": "add",
+              "text": ").to_be_visible(timeout=15000)"
+            }
+          ]
+        }
+      },
+      "durationFrames": 383,
+      "audio": "audio/pw-dojo-06-assertions_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "REVEAL",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Is a plain assert ever right? Yes. For a value you have already pulled out of the page and hold in a variable, there is nothing left to wait for. A number you computed will not change while you look at it.",
+      "data": {
+        "reveal": {
+          "kicker": "the exception",
+          "statement": "assert is fine for values, not for the page",
+          "sub": "nothing on a live page is ever settled",
+          "atWord": 2.5
+        }
+      },
+      "durationFrames": 351,
+      "audio": "audio/pw-dojo-06-assertions_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "First check. A success toast appears about one second after you click Save. Which check is reliable? Have a think, and pause the video if you want longer. Ready? It is C. Expect keeps re-checking until that toast turns up.",
+      "data": {
+        "quiz": {
+          "question": "A toast appears 1s after Save. Which check is reliable?",
+          "options": [
+            {
+              "text": "assert loc.is_visible()"
+            },
+            {
+              "text": "time.sleep(3), then assert"
+            },
+            {
+              "text": "expect(loc).to_be_visible()"
+            },
+            {
+              "text": "No check needed"
+            }
+          ],
+          "answerIndex": 2,
+          "why": "expect() re-checks until the toast appears. sleep wastes 3s every run.",
+          "revealAtWord": 25.417,
+          "atWord": 4.5
+        }
+      },
+      "durationFrames": 440,
+      "audio": "audio/pw-dojo-06-assertions_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "The second card for your wall. Assert checks once. Expect re-checks for five seconds. The critic checks twice, and fifty more times, before ever writing a bad review.",
+      "data": {
+        "stickyNote": {
+          "headline": "assert once · [expect retries]",
+          "color": "purple",
+          "notes": [
+            {
+              "title": "ONCE vs FIFTY TIMES",
+              "tag": "memory hook",
+              "body": "assert checks ONCE, instantly. expect() re-checks for up to 5 seconds, and passes the moment it becomes true.",
+              "highlight": "re-checks for up to 5 seconds",
+              "asset": "lucide:repeat",
+              "atWord": 11.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 327,
+      "audio": "audio/pw-dojo-06-assertions_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Now the checklist the critic actually works from, and how to read the review when it goes badly.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The critic's checklist",
+          "subtitle": "And how to read a bad review"
+        }
+      },
+      "durationFrames": 174,
+      "audio": "audio/pw-dojo-06-assertions_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "CHECK_SWEEP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Here is the critic going down a page after a login, one check at a time. Is the banner on screen. Does the heading say the right name. Is the Pay button clickable. Every one has to pass before your test does.",
+      "data": {
+        "checkSweep": {
+          "headline": "The critic sweeps [the whole page]",
+          "subjectLabel": "the page after login",
+          "checks": [
+            {
+              "label": "banner is visible",
+              "atWord": 9.5
+            },
+            {
+              "label": "heading says Welcome, Neo",
+              "atWord": 13
+            },
+            {
+              "label": "Pay button is enabled",
+              "atWord": 15.833
+            }
+          ],
+          "verdict": "all clear — test passes",
+          "color": "green",
+          "atWord": 4.5
+        }
+      },
+      "durationFrames": 377,
+      "audio": "audio/pw-dojo-06-assertions_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Those checks, as the real calls you type. Visible. Has this exact text. Holds this value. Has this many matches. And the last two wrap the page itself, because a URL and a title belong to the whole page.",
+      "data": {
+        "code": {
+          "filename": "checklist.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "expect(page.get_by_role(\"alert\")).to_be_visible()",
+              "color": "green"
+            },
+            {
+              "text": "expect(page.get_by_role(\"heading\")).to_have_text("
+            },
+            {
+              "text": "    \"Welcome, Neo\")"
+            },
+            {
+              "text": "expect(page.get_by_label(\"Email\")).to_have_value("
+            },
+            {
+              "text": "    \"neo@matrix.io\")"
+            },
+            {
+              "text": "expect("
+            },
+            {
+              "text": "    page.get_by_role(\"listitem\")"
+            },
+            {
+              "text": ").to_have_count(3)"
+            },
+            {
+              "text": "expect(page).to_have_url(\"https://app.example.com\""
+            },
+            {
+              "text": "                         \"/dashboard\")",
+              "color": "purple"
+            },
+            {
+              "text": "expect(page).to_have_title(\"Dashboard\")",
+              "color": "purple"
+            }
+          ],
+          "atWord": 10.917
+        }
+      },
+      "durationFrames": 443,
+      "audio": "audio/pw-dojo-06-assertions_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "COMPARISON_SLIDER",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "And the one that makes tests elegant. Put not in front of any of them, and the critic confirms your actor has left the stage. The loading spinner should disappear — not to be visible is how you say that.",
+      "data": {
+        "comparison": {
+          "before": {
+            "label": "still loading",
+            "caption": "the spinner is on screen",
+            "asset": "lucide:loader-circle",
+            "color": "orange"
+          },
+          "after": {
+            "label": "a second later",
+            "caption": "not_to_be_visible() passes",
+            "asset": "lucide:check",
+            "color": "green"
+          },
+          "atWord": 12
+        }
+      },
+      "durationFrames": 332,
+      "audio": "audio/pw-dojo-06-assertions_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "SPEC_COMPARE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Two of those look almost identical and are not. To have text checks the element's full text, and is forgiving about spacing. To contain text only needs your words somewhere inside it. Reach for the strict one when the exact wording matters.",
+      "data": {
+        "compare": {
+          "headline": "to_have_text vs [to_contain_text]",
+          "a": {
+            "name": "to_have_text",
+            "color": "blue"
+          },
+          "b": {
+            "name": "to_contain_text",
+            "color": "purple"
+          },
+          "rows": [
+            {
+              "label": "what it matches",
+              "a": "the FULL text",
+              "b": "a substring"
+            },
+            {
+              "label": "extra words allowed",
+              "a": "no",
+              "b": "yes"
+            },
+            {
+              "label": "about whitespace",
+              "a": "forgiving",
+              "b": "forgiving"
+            },
+            {
+              "label": "reach for it when",
+              "a": "exact wording",
+              "b": "part matters"
+            }
+          ],
+          "atWord": 10.667
+        }
+      },
+      "durationFrames": 428,
+      "audio": "audio/pw-dojo-06-assertions_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "CODE_WINDOW",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "And when the critic does fail, read the review. Playwright does not just say failed. It tells you exactly what it expected, exactly what it found instead, and a diary of every retry it made along the way.",
+      "data": {
+        "code": {
+          "filename": "test_welcome.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "expect(page.get_by_role(\"heading\")).to_have_text("
+            },
+            {
+              "text": "    \"Welcome, Neo\")"
+            }
+          ],
+          "output": [
+            {
+              "text": "AssertionError: Locator expected to have text",
+              "color": "red"
+            },
+            {
+              "text": "'Welcome, Neo'",
+              "color": "red"
+            },
+            {
+              "text": "Actual value: Welcome, Trinity",
+              "color": "orange"
+            },
+            {
+              "text": "Call log:"
+            },
+            {
+              "text": "  - expect.to_have_text with timeout 5000ms"
+            },
+            {
+              "text": "  -   ... (retried 9 times) ..."
+            }
+          ],
+          "atWord": 8.833
+        }
+      },
+      "durationFrames": 377,
+      "audio": "audio/pw-dojo-06-assertions_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "LIST_BUILD",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Train yourself to read every failure the same way, calmly, top to bottom. What did the critic expect. What did it actually find. What does the call log say it tried. The bug is almost always sitting right there.",
+      "data": {
+        "heading": "Reading any failure, top to bottom",
+        "items": [
+          {
+            "icon": "lucide:target",
+            "text": "1 · Expected what?",
+            "detail": "the line you wrote",
+            "atWord": 9.667
+          },
+          {
+            "icon": "lucide:eye",
+            "text": "2 · Actually found what?",
+            "detail": "what the page really said",
+            "atWord": 12.833
+          },
+          {
+            "icon": "lucide:scroll-text",
+            "text": "3 · The call log",
+            "detail": "the critic's diary of every retry",
+            "atWord": 16.75
+          }
+        ]
+      },
+      "durationFrames": 390,
+      "audio": "audio/pw-dojo-06-assertions_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Last check. The error says: expected Total fifty dollars, actual value Total forty five. What happened here? Have a think, and pause the video if you want longer. Ready? It is C. The element was found fine — the price is wrong.",
+      "data": {
+        "quiz": {
+          "question": "Expected 'Total: $50', actual 'Total: $45'. What happened?",
+          "options": [
+            {
+              "text": "The locator is broken"
+            },
+            {
+              "text": "Playwright timed out"
+            },
+            {
+              "text": "Element found — its TEXT is wrong"
+            },
+            {
+              "text": "Needs a bigger timeout"
+            }
+          ],
+          "answerIndex": 2,
+          "why": "The call log shows it WAS found. You may have caught a real bug.",
+          "revealAtWord": 26,
+          "atWord": 4.583
+        }
+      },
+      "durationFrames": 471,
+      "audio": "audio/pw-dojo-06-assertions_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Pro corner, and a bridge to next time. Expect to be visible is not only a check, it is a wait. While the critic keeps re-checking, your test is standing there waiting for that element to appear. Assertions double as waits.",
+      "data": {
+        "stickyNote": {
+          "headline": "Every check is [also a wait]",
+          "color": "green",
+          "source": "san-gitlogin.github.io/playwright-dojo",
+          "notes": [
+            {
+              "title": "ASSERTIONS ARE WAITS",
+              "tag": "pro corner",
+              "body": "expect(...).to_be_visible() re-checks until it is true — so the assertion IS the wait. You almost never need sleep().",
+              "highlight": "the assertion IS the wait",
+              "asset": "lucide:hourglass",
+              "atWord": 16.667
+            }
+          ]
+        },
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 405,
+      "audio": "audio/pw-dojo-06-assertions_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "RECAP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Episode six in three lines. A test that never checks anything is not a test. Expect re-checks for five seconds where a plain assert checks once. And a failure hands you expected, actual, and every retry in between.",
+      "data": {
+        "heading": "Episode six, in three lines",
+        "points": [
+          {
+            "text": "No assertion, no test",
+            "atWord": 10.417
+          },
+          {
+            "text": "expect retries · assert checks once",
+            "atWord": 17.917
+          },
+          {
+            "text": "Read it: expected, actual, call log",
+            "atWord": 24.5
+          }
+        ]
+      },
+      "durationFrames": 449,
+      "audio": "audio/pw-dojo-06-assertions_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next time, the superpower this whole episode has been hinting at: auto-waiting, and why you will almost never write time dot sleep again. Every lesson is free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Auto-Waiting",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 339,
+      "audio": "audio/pw-dojo-06-assertions_long_s27.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

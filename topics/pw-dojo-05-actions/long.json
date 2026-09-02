@@ -1,0 +1,914 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP05: Actions",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "the five Playwright actions you use every day, and why fill() and press_sequentially() are not the same thing",
+    "openLoop": "Why does a filled search box never show its suggestions?",
+    "analogy": "An action is a stage direction given to the actor the spotlight found.",
+    "topicAxes": [
+      "skill-acquisition",
+      "tooling-shift"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #5 — Actions (click, fill, check, hover)",
+      "altTitles": [
+        "Playwright fill vs press_sequentially — the interview question explained"
+      ],
+      "description": "The five actions that cover 90% of the work, the fill-versus-typing trap, and one complete login script from the first line to the last.",
+      "tags": [
+        "playwright",
+        "python",
+        "actions",
+        "fill",
+        "press_sequentially",
+        "click",
+        "playwright python",
+        "playwright tutorial",
+        "automation"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ACTIONS",
+    "badge": "Dojo · EP 5",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You filled a search box in your test, and the suggestions never came. By hand, that same box works fine.",
+      "data": {
+        "headline": "NO SUGGESTIONS?",
+        "subtext": "the box has the right text in it",
+        "heroAsset": "lucide:text-cursor-input",
+        "headlineAtWord": 4.333,
+        "heroAtWord": 10.167
+      },
+      "durationFrames": 220,
+      "audio": "audio/pw-dojo-05-actions_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TEST_RUNNER",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Your test does exactly what you told it. It fills the box with the word Chen, then looks underneath for the list of city suggestions. Expected three. Got none at all.",
+      "data": {
+        "testRunner": {
+          "headline": "The suggestions never arrive",
+          "nodes": [
+            {
+              "name": "search box",
+              "depth": 0,
+              "kind": "describe"
+            },
+            {
+              "name": "fills the box",
+              "depth": 1,
+              "kind": "it",
+              "status": "pass",
+              "ms": "0.4s"
+            },
+            {
+              "name": "shows city suggestions",
+              "depth": 1,
+              "kind": "it",
+              "status": "fail",
+              "ms": "5.0s"
+            }
+          ],
+          "passed": 1,
+          "failed": 1,
+          "failIndex": 2,
+          "expected": "3 suggestions",
+          "actual": "0 suggestions",
+          "atWord": 9.167
+        }
+      },
+      "durationFrames": 323,
+      "audio": "audio/pw-dojo-05-actions_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "The fix is one word, and the reason behind it is one of the most asked interview questions in this whole subject. Welcome to actions: how you tell an element on the page what to do.",
+      "data": {
+        "title": "ACTIONS",
+        "subtitle": "The Playwright Dojo · Episode 5"
+      },
+      "durationFrames": 315,
+      "audio": "audio/pw-dojo-05-actions_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Last episode, the spotlight found your actor. That is all a locator does. This episode you open your mouth and direct them. Click that. Fill this in. Tick that box. Those are your stage directions.",
+      "data": {
+        "stage": {
+          "marquee": "the-internet.herokuapp.com",
+          "curtain": "raising",
+          "actors": [
+            {
+              "label": "Username",
+              "kind": "field",
+              "atWord": 14.917
+            },
+            {
+              "label": "Password",
+              "kind": "field",
+              "atWord": 16.75
+            },
+            {
+              "label": "Login",
+              "kind": "button",
+              "atWord": 19.583
+            }
+          ],
+          "spotlightIndex": 2,
+          "caption": "found them — now direct them",
+          "atWord": 6.583
+        }
+      },
+      "durationFrames": 411,
+      "audio": "audio/pw-dojo-05-actions_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three parts. The five actions you will use every single day, the fill versus typing trap that catches everybody, and one complete scene from the first line to the last.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:mouse-pointer-click",
+              "label": "The daily five",
+              "atWord": 6.5
+            },
+            {
+              "icon": "lucide:keyboard",
+              "label": "fill vs typing",
+              "atWord": 11.167
+            },
+            {
+              "icon": "lucide:clapperboard",
+              "label": "A full scene",
+              "atWord": 15.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 303,
+      "audio": "audio/pw-dojo-05-actions_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Start with the five you will reach for again and again.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The daily five",
+          "subtitle": "Ninety percent of the work"
+        }
+      },
+      "durationFrames": 122,
+      "audio": "audio/pw-dojo-05-actions_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "LIST_BUILD",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Five actions cover about ninety percent of the work you will ever do. Click, for buttons and links. Fill, for text boxes. Check, for tick boxes. Select option, for dropdowns. And hover, to open a hidden menu.",
+      "data": {
+        "heading": "The five you will use every day",
+        "items": [
+          {
+            "icon": "lucide:mouse-pointer-click",
+            "text": "click()",
+            "detail": "and dblclick() beside it",
+            "atWord": 8.75
+          },
+          {
+            "icon": "lucide:pencil",
+            "text": "fill(\"text\")",
+            "detail": "clears, then sets",
+            "atWord": 12.667
+          },
+          {
+            "icon": "lucide:check-square",
+            "text": "check() / uncheck()",
+            "detail": "tick boxes and radios",
+            "atWord": 16.5
+          },
+          {
+            "icon": "lucide:chevron-down",
+            "text": "select_option(\"India\")",
+            "detail": "a dropdown",
+            "atWord": 19.417
+          },
+          {
+            "icon": "lucide:hand",
+            "text": "hover()",
+            "detail": "opens hidden menus",
+            "atWord": 23.333
+          }
+        ]
+      },
+      "durationFrames": 452,
+      "audio": "audio/pw-dojo-05-actions_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "And here they are on real elements. Read any line left to right: find the actor, then direct the actor. Every line of Playwright you ever write has that same two part shape.",
+      "data": {
+        "code": {
+          "filename": "actions.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "page.get_by_role(\"button\", name=\"Sign in\").click()",
+              "color": "green"
+            },
+            {
+              "text": "page.get_by_label(\"Email\").fill(\"neo@matrix.io\")"
+            },
+            {
+              "text": "page.get_by_label(\"I agree to the terms\").check()"
+            },
+            {
+              "text": "page.get_by_label(\"Country\").select_option(\"India\")"
+            },
+            {
+              "text": "page.get_by_role(\"link\", name=\"Products\").hover()"
+            }
+          ],
+          "atWord": 9.583
+        }
+      },
+      "durationFrames": 331,
+      "audio": "audio/pw-dojo-05-actions_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "FLIP_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "One of those five is quietly smarter than it looks. Click a tick box that is already ticked, and you have just unticked it. Check never does that. Check on a ticked box does nothing at all.",
+      "data": {
+        "flip": {
+          "front": {
+            "label": "click() a ticked box",
+            "text": "unticks it, silently",
+            "color": "red"
+          },
+          "back": {
+            "label": "check() a ticked box",
+            "text": "does nothing. Already true.",
+            "color": "green"
+          },
+          "atWord": 14.917
+        }
+      },
+      "durationFrames": 346,
+      "audio": "audio/pw-dojo-05-actions_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneB",
+      "narration": "That is how a test stops turning off the consent box it was meant to turn on. And every one of these actions waits for the element to be ready first. No sleeping, no retry loops. That gets its own episode, number seven.",
+      "data": {
+        "kinetic": {
+          "text": "Every action waits first.",
+          "fx": "highlight",
+          "sub": "no sleep, no retry loops",
+          "atWord": 11.25
+        }
+      },
+      "durationFrames": 399,
+      "audio": "audio/pw-dojo-05-actions_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So that is your daily five. Click, fill, check, select option, hover. And every one of them waits for the page before it acts.",
+      "data": {
+        "stickyNote": {
+          "headline": "The [daily five]",
+          "color": "blue",
+          "notes": [
+            {
+              "title": "THE DAILY FIVE",
+              "tag": "memory hook",
+              "body": "click · fill · check · select_option · hover. All five wait for the element before they act.",
+              "highlight": "All five wait for the element",
+              "asset": "lucide:mouse-pointer-click",
+              "atWord": 10.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 277,
+      "audio": "audio/pw-dojo-05-actions_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Now the one that gets asked in interviews, and the one that broke your search box.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "fill vs typing",
+          "subtitle": "The classic interview trap"
+        }
+      },
+      "durationFrames": 151,
+      "audio": "audio/pw-dojo-05-actions_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "APP_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "This is what fill actually does. It clears whatever was in the box, then drops the whole value in, in one single shot. Exactly like pasting. Fast, reliable, and what you want almost every time.",
+      "data": {
+        "appWindow": {
+          "windowTitle": "City finder",
+          "screenTitle": "Find a city",
+          "steps": [
+            "fill",
+            "suggest"
+          ],
+          "activeStep": 1,
+          "fields": [
+            {
+              "label": "Search city",
+              "text": "Chennai",
+              "mode": "paste",
+              "atWord": 11.833
+            }
+          ],
+          "button": "Search",
+          "caption": "fill() = paste: one shot, no keystrokes",
+          "color": "blue",
+          "atWord": 11.833
+        }
+      },
+      "durationFrames": 371,
+      "audio": "audio/pw-dojo-05-actions_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "LOG_STREAM",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "But look at what a suggestion box is really listening for. Every key you press fires an event, and the box answers each one. Paste the whole word and those key events never happen, so the box has nothing to answer.",
+      "data": {
+        "logs": {
+          "rate": "per key",
+          "highlight": 4,
+          "atWord": 9.25,
+          "lines": [
+            {
+              "level": "info",
+              "tag": "keydown",
+              "text": "C    → fetching cities for \"C\""
+            },
+            {
+              "level": "info",
+              "tag": "keydown",
+              "text": "h    → fetching cities for \"Ch\""
+            },
+            {
+              "level": "info",
+              "tag": "keydown",
+              "text": "e    → fetching cities for \"Che\""
+            },
+            {
+              "level": "info",
+              "tag": "keydown",
+              "text": "n    → fetching cities for \"Chen\""
+            },
+            {
+              "level": "warn",
+              "tag": "fill()",
+              "text": "value set — no key events fired"
+            }
+          ]
+        }
+      },
+      "durationFrames": 389,
+      "audio": "audio/pw-dojo-05-actions_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "APP_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Press sequentially does it the other way round. It presses the keys one after another, exactly like a person typing, so every one of those events fires and the suggestions finally turn up.",
+      "data": {
+        "appWindow": {
+          "windowTitle": "City finder",
+          "screenTitle": "Find a city",
+          "steps": [
+            "type",
+            "suggest"
+          ],
+          "activeStep": 2,
+          "fields": [
+            {
+              "label": "Search city",
+              "text": "Chen",
+              "mode": "type",
+              "atWord": 9.667
+            }
+          ],
+          "typeIndex": 0,
+          "button": "Search",
+          "caption": "press_sequentially() = key by key",
+          "color": "green",
+          "atWord": 13.667
+        }
+      },
+      "durationFrames": 334,
+      "audio": "audio/pw-dojo-05-actions_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CODE_WINDOW",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Three lines, three jobs. Fill, for the everyday case. Press sequentially, when the box is listening for keys. And press, for one single key like Enter, or a shortcut like control A.",
+      "data": {
+        "code": {
+          "filename": "typing.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "# 95% case — instant, like pasting:",
+              "color": "green"
+            },
+            {
+              "text": "page.get_by_label(\"Email\").fill(\"neo@matrix.io\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# Autocomplete needs real keystrokes:",
+              "color": "green"
+            },
+            {
+              "text": "box = page.get_by_placeholder(\"Search city\")"
+            },
+            {
+              "text": "box.press_sequentially(\"Chen\")",
+              "color": "purple"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# Single keys and shortcuts:",
+              "color": "green"
+            },
+            {
+              "text": "box.press(\"Enter\")"
+            },
+            {
+              "text": "page.get_by_role(\"textbox\").press(\"Control+A\")"
+            }
+          ],
+          "atWord": 9.667
+        }
+      },
+      "durationFrames": 390,
+      "audio": "audio/pw-dojo-05-actions_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "REVEAL",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "One warning for when you go reading older tutorials. You will see dot type on inputs. That is the old name for press sequentially. Recognise it. Do not write it.",
+      "data": {
+        "reveal": {
+          "kicker": "deprecated",
+          "statement": ".type() is the old name for press_sequentially()",
+          "sub": "recognise it, do not write it",
+          "atWord": 11.833
+        }
+      },
+      "durationFrames": 322,
+      "audio": "audio/pw-dojo-05-actions_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "First check. This is the interview question. Your fill test gets no suggestions from a live search box. Why? Have a think, and pause if you want longer. Ready? It is B. The box listens for key events; a paste fires none.",
+      "data": {
+        "quiz": {
+          "question": "fill() gives no live suggestions. Why?",
+          "options": [
+            {
+              "text": "The site is broken"
+            },
+            {
+              "text": "fill() pastes, so no key events"
+            },
+            {
+              "text": "You must sleep(2) first"
+            },
+            {
+              "text": "Search boxes cannot be automated"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Suggestion boxes listen for key events. Use press_sequentially().",
+          "revealAtWord": 25.75,
+          "atWord": 4.5
+        }
+      },
+      "durationFrames": 467,
+      "audio": "audio/pw-dojo-05-actions_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Worth writing down, because you will hit this one for real. Fill is a paste. Press sequentially is a human typing. And press is one single key going down and up.",
+      "data": {
+        "stickyNote": {
+          "headline": "fill vs [typing]",
+          "color": "purple",
+          "notes": [
+            {
+              "title": "FILL vs TYPING",
+              "tag": "memory hook",
+              "body": "fill() = paste, instant. press_sequentially() = a human typing, key by key. press() = one key.",
+              "highlight": "press_sequentially() = a human typing",
+              "asset": "lucide:keyboard",
+              "atWord": 11.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 331,
+      "audio": "audio/pw-dojo-05-actions_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Now let us direct one complete scene, from the first line to the last.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "A real scene",
+          "subtitle": "Logging in, start to finish"
+        }
+      },
+      "durationFrames": 157,
+      "audio": "audio/pw-dojo-05-actions_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "MEDIA_CALLOUT",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "This is the practice site the Dojo uses. It is free, it was built for exactly this, and the page itself tells you the username and the password. A username box, a password box, and a Login button. Three actors.",
+      "data": {
+        "mediaCallout": {
+          "src": "assets/the_internet_login_crop.png",
+          "kind": "image",
+          "treatment": "scrim",
+          "callouts": [
+            {
+              "x": 0.269,
+              "y": 0.44,
+              "label": "Username → get_by_label",
+              "side": "right",
+              "color": "blue",
+              "atWord": 16.75
+            },
+            {
+              "x": 0.269,
+              "y": 0.56,
+              "label": "Password → get_by_label",
+              "side": "right",
+              "color": "blue",
+              "atWord": 19.25
+            },
+            {
+              "x": 0.19,
+              "y": 0.675,
+              "label": "Login → get_by_role",
+              "side": "right",
+              "color": "green",
+              "atWord": 21.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 418,
+      "audio": "audio/pw-dojo-05-actions_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "And here is the whole thing. Twelve lines. Open a browser, go to the login page, fill the username, fill the password, click Login, print whatever the banner says, and close up.",
+      "data": {
+        "code": {
+          "filename": "login.py",
+          "language": "py",
+          "runLabel": "python login.py",
+          "lines": [
+            {
+              "text": "from playwright.sync_api import sync_playwright"
+            },
+            {
+              "text": "with sync_playwright() as p:"
+            },
+            {
+              "text": "    browser = p.chromium.launch(headless=False)"
+            },
+            {
+              "text": "    page = browser.new_page()"
+            },
+            {
+              "text": "    page.goto(\"https://the-internet.herokuapp.com\""
+            },
+            {
+              "text": "              \"/login\")"
+            },
+            {
+              "text": "    page.get_by_label(\"Username\").fill(\"tomsmith\")",
+              "color": "green"
+            },
+            {
+              "text": "    page.get_by_label(\"Password\").fill("
+            },
+            {
+              "text": "        \"SuperSecretPassword!\")",
+              "color": "green"
+            },
+            {
+              "text": "    page.get_by_role(\"button\", name=\"Login\").click()",
+              "color": "green"
+            },
+            {
+              "text": "    print(page.locator(\"#flash\").inner_text())"
+            },
+            {
+              "text": "    browser.close()"
+            }
+          ],
+          "atWord": 8.75
+        }
+      },
+      "durationFrames": 350,
+      "audio": "audio/pw-dojo-05-actions_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "Now read those middle lines out loud. Fill username. Fill password. Click Login. That is not really code any more. That is a set of stage directions a ten year old could follow.",
+      "data": {
+        "stage": {
+          "marquee": "login.py",
+          "curtain": "up",
+          "actors": [
+            {
+              "label": "Username",
+              "kind": "field",
+              "atWord": 7.167
+            },
+            {
+              "label": "Password",
+              "kind": "field",
+              "atWord": 9.833
+            },
+            {
+              "label": "Login",
+              "kind": "button",
+              "atWord": 12.5
+            }
+          ],
+          "spotlightIndex": 2,
+          "caption": "stage directions, in order",
+          "atWord": 16
+        }
+      },
+      "durationFrames": 371,
+      "audio": "audio/pw-dojo-05-actions_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Run it, and a real browser opens in front of you, does all four things in order, prints back the banner it found on the other side, and closes itself again. That is a complete scene.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@dojo",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "python login.py",
+              "exitCode": 0,
+              "atWord": 8,
+              "output": [
+                "You logged into a secure area!"
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 323,
+      "audio": "audio/pw-dojo-05-actions_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "That last line, inner text, asks the element one simple question. What do you actually say on screen? That is how you read a page back.",
+      "data": {
+        "kinetic": {
+          "text": "What does this element SAY?",
+          "fx": "typewriter",
+          "sub": "that is inner_text()",
+          "atWord": 8.333
+        }
+      },
+      "durationFrames": 274,
+      "audio": "audio/pw-dojo-05-actions_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Last check. What does fill do to a box that already has something sitting in it? Have a think, and pause the video if you need longer. Ready? B again. Fill always clears the box first, then sets your value.",
+      "data": {
+        "quiz": {
+          "question": "fill() on a box that already has text?",
+          "options": [
+            {
+              "text": "Adds it after the old text"
+            },
+            {
+              "text": "Clears first, then sets it"
+            },
+            {
+              "text": "Crashes"
+            },
+            {
+              "text": "Only works on empty boxes"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "The end state is exactly what you asked for — no leftovers.",
+          "revealAtWord": 22.167,
+          "atWord": 4.167
+        }
+      },
+      "durationFrames": 397,
+      "audio": "audio/pw-dojo-05-actions_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Pro corner, and it is a callback. That script reads like English because every line of it stays high on the locator ladder from last episode. Roles and labels read like a person. CSS never does.",
+      "data": {
+        "stickyNote": {
+          "headline": "Why it [reads so well]",
+          "color": "green",
+          "source": "san-gitlogin.github.io/playwright-dojo",
+          "notes": [
+            {
+              "title": "READS LIKE DIRECTIONS",
+              "tag": "pro corner",
+              "body": "Good Playwright reads like stage directions. That is what staying high on the locator ladder buys you.",
+              "highlight": "staying high on the locator ladder",
+              "asset": "lucide:book-open",
+              "atWord": 16.167
+            }
+          ]
+        },
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 405,
+      "audio": "audio/pw-dojo-05-actions_long_s27.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s28",
+      "type": "RECAP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Episode five in three lines. Five actions cover almost everything you do. Fill is a paste, press sequentially is a human. And good Playwright code reads like stage directions.",
+      "data": {
+        "heading": "Episode five, in three lines",
+        "points": [
+          {
+            "text": "click · fill · check · select · hover",
+            "atWord": 8
+          },
+          {
+            "text": "fill pastes, press_sequentially types",
+            "atWord": 14.917
+          },
+          {
+            "text": "It should read like directions",
+            "atWord": 18.917
+          }
+        ]
+      },
+      "durationFrames": 367,
+      "audio": "audio/pw-dojo-05-actions_long_s28.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s29",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next time the critic arrives: assertions, and how you check the show actually went the way it should. Every lesson is free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Assertions",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 269,
+      "audio": "audio/pw-dojo-05-actions_long_s29.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,769 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP14: Network, Intercept & Mock",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how page.route lets you answer, block or forward any request your app makes",
+    "openLoop": "How do you test the error screen when you cannot ask the server to break?",
+    "analogy": "route() puts you in the mail room — every letter passes your desk first.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #14 — network interception and mocking",
+      "description": "page.route() puts you in the mail room: fulfill a request yourself, abort it, or let it through. Then mock a 500 and finally test the sad paths.",
+      "tags": [
+        "playwright",
+        "python",
+        "network",
+        "route",
+        "mock",
+        "intercept",
+        "expect_response",
+        "api"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Network — Intercept & Mock",
+    "badge": "Dojo · EP 14",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "FAKE THE SERVER",
+    "badge": "EP 14 · MOCKING",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "When your server falls over, your app shows a friendly error. Probably. Nobody's ever actually seen it happen.",
+      "data": {
+        "headline": "NOBODY TESTS THE 500.",
+        "subtext": "because you can't ask for one",
+        "heroAsset": "lucide:network",
+        "headlineAtWord": 4.833,
+        "heroAtWord": 11.583
+      },
+      "durationFrames": 229,
+      "audio": "audio/pw-dojo-14-network_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Act Three starts here, and this one hands you the keys to the whole building.",
+      "data": {
+        "title": "Network — Intercept & Mock",
+        "subtitle": "The Playwright Dojo · Episode 14"
+      },
+      "durationFrames": 145,
+      "audio": "audio/pw-dojo-14-network_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things today. Waiting on one specific letter to come back from the server. Then running the whole mail room yourself, deciding what gets through. And then the genuinely good part, where you stop waiting for the server entirely and just make up whatever answer you fancy.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:mail-search",
+              "label": "wait for a reply",
+              "color": "blue",
+              "atWord": 10.833
+            },
+            {
+              "icon": "lucide:mail-check",
+              "label": "run the mail room",
+              "color": "green",
+              "atWord": 18.417
+            },
+            {
+              "icon": "lucide:server-crash",
+              "label": "break it yourself",
+              "color": "red",
+              "atWord": 24.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 448,
+      "audio": "audio/pw-dojo-14-network_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "First, the gentle one. You're only watching the post go by here. Not touching any of it yet, and not changing anything.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Watching the mail",
+          "subtitle": "expect_response"
+        }
+      },
+      "durationFrames": 227,
+      "audio": "audio/pw-dojo-14-network_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "TRAP_TRIGGER",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Look familiar? You've met this shape twice already. Popups in episode eleven, downloads in twelve. Same deal here. Start listening for a particular reply, do the click inside that block, and afterwards the response is yours to poke at.",
+      "data": {
+        "trapTrigger": {
+          "listener": "with page.expect_response(url)",
+          "trigger": "get_by_role(\"button\", \"Save\")",
+          "catcher": "response = resp_info.value",
+          "caught": "the reply",
+          "caughtItems": [
+            "status 200",
+            "the payload"
+          ],
+          "originLabel": "the same page",
+          "mode": "trap",
+          "caption": "trap-then-trigger, third time round",
+          "color": "blue",
+          "atWord": 1.917,
+          "armAtWord": 12.75,
+          "fireAtWord": 20.917
+        }
+      },
+      "durationFrames": 444,
+      "audio": "audio/pw-dojo-14-network_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here it is for real. That pattern up top uses two stars, which just means anything can sit there. Any host, any prefix, as long as the path ends in slash api slash todos. Then the click goes inside the block. Afterwards you've got the status and the payload right there in your hands. And response dot ok is True for anything in the two hundreds.",
+      "data": {
+        "codeRun": {
+          "filename": "wait.py",
+          "language": "py",
+          "resultLabel": "what comes back",
+          "color": "blue",
+          "atWord": 2.583,
+          "caption": "wait for the letter, not for a guess",
+          "lines": [
+            {
+              "text": "with page.expect_response(",
+              "detail": "two stars mean \"anything here\"",
+              "sub": "matches any host",
+              "label": "armed",
+              "atWord": 6.583
+            },
+            {
+              "text": "        \"**/api/todos\") as resp_info:"
+            },
+            {
+              "text": "    page.get_by_role(\"button\",",
+              "detail": "the click that causes the request",
+              "sub": "the letter goes out",
+              "label": "fired",
+              "atWord": 24.167
+            },
+            {
+              "text": "        name=\"Save\").click()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "response = resp_info.value",
+              "detail": "and here is the reply itself",
+              "sub": "status, headers, body",
+              "label": "caught",
+              "atWord": 35.417
+            },
+            {
+              "text": "assert response.ok",
+              "detail": "and you can assert on it too",
+              "sub": "True for any 2xx",
+              "label": "assert",
+              "atWord": 44.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 655,
+      "audio": "audio/pw-dojo-14-network_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Print the status and the body, and there's your data. Two hundred, and the exact todo the server saved, id and all. No guessing about whether the save actually worked, and no arbitrary wait either — the reply itself told you.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "python wait.py",
+              "exitCode": 0,
+              "atWord": 9.583,
+              "output": [
+                "200",
+                "{'id': 42, 'title': 'Learn Playwright',",
+                " 'done': False}"
+              ]
+            }
+          ],
+          "atWord": 9.583
+        }
+      },
+      "durationFrames": 405,
+      "audio": "audio/pw-dojo-14-network_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Now this fixes something you've almost certainly hit. Your assertion fires before the data's landed, the test goes red, you rerun it, and it passes. Classic flake. Waiting on the real network event beats guessing at a sleep number — that number is always wrong on somebody's machine.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the flake killer",
+          "rule": "wait for the event, never for a number",
+          "okLabel": "deterministic",
+          "noLabel": "a coin flip",
+          "caption": "the data decides, not the clock",
+          "color": "blue",
+          "atWord": 1.833,
+          "cases": [
+            {
+              "text": "expect_response(\"**/api/todos\")",
+              "title": "ok",
+              "sub": "waits for the actual reply",
+              "atWord": 19.167
+            },
+            {
+              "text": "time.sleep(2) and hope",
+              "title": "no",
+              "sub": "too slow, or too fast",
+              "atWord": 25.167
+            },
+            {
+              "text": "expect(row).to_be_visible()",
+              "title": "ok",
+              "sub": "auto-waits, from episode 7",
+              "atWord": 28.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 519,
+      "audio": "audio/pw-dojo-14-network_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Watching the post is fine, and useful. Controlling it, though — that's where this whole thing gets fun.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Running the mail room",
+          "subtitle": "route(), and three fates"
+        }
+      },
+      "durationFrames": 201,
+      "audio": "audio/pw-dojo-14-network_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "MAIL_ROOM",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "So picture a mail room. Every request your page sends stops at your desk before it goes anywhere at all, and you get to decide what happens to it. Answer it yourself, and nothing reaches the real server. Tear it up, and that request dies on your desk. Or wave it through untouched, and off it goes. Anything that doesn't match your pattern? Sails straight past, like you were never sitting there.",
+      "data": {
+        "mailRoom": {
+          "pattern": "**/api/todos",
+          "deskLabel": "page.route",
+          "serverLabel": "the real server",
+          "browserLabel": "your page",
+          "caption": "every letter stops at your desk first",
+          "color": "green",
+          "atWord": 3.25,
+          "requests": [
+            {
+              "label": "GET /api/todos",
+              "title": "fulfill",
+              "sub": "your fake list",
+              "atWord": 15.25
+            },
+            {
+              "label": "GET /logo.png",
+              "title": "abort",
+              "sub": "never sent",
+              "atWord": 24.25
+            },
+            {
+              "label": "POST /api/todos",
+              "title": "continue",
+              "sub": "on to the server",
+              "atWord": 30.25
+            },
+            {
+              "label": "GET /api/user",
+              "title": "pass",
+              "sub": "no match",
+              "atWord": 37
+            }
+          ]
+        }
+      },
+      "durationFrames": 670,
+      "audio": "audio/pw-dojo-14-network_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here's the mock itself. You hand route a pattern and a handler, and that handler decides. Fulfill writes the answer for you, right there, and the request never leaves the browser at all. The page gets a todo list that no server ever sent.",
+      "data": {
+        "codeRun": {
+          "filename": "mock.py",
+          "language": "py",
+          "resultLabel": "what the page gets",
+          "color": "green",
+          "atWord": 2.583,
+          "caption": "fulfill answers it yourself",
+          "lines": [
+            {
+              "text": "page.route(\"**/api/todos\",",
+              "detail": "catch every matching request",
+              "sub": "the desk is staffed",
+              "label": "route",
+              "atWord": 7.333
+            },
+            {
+              "text": "    lambda route: route.fulfill(",
+              "detail": "you write the answer yourself",
+              "sub": "nothing leaves the browser",
+              "label": "mock",
+              "atWord": 20.917
+            },
+            {
+              "text": "        json=[{\"id\": 1,"
+            },
+            {
+              "text": "               \"title\": \"Fake todo\"}]))"
+            }
+          ]
+        }
+      },
+      "durationFrames": 441,
+      "audio": "audio/pw-dojo-14-network_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Abort's the other one worth knowing about. Shred every image request and your suite gets noticeably quicker, simply because nothing's downloading pictures that no test ever looks at. And that underscore on continue? Plain continue is a reserved Python keyword, so they had to bolt one on the end.",
+      "data": {
+        "codeRun": {
+          "filename": "mock.py",
+          "language": "py",
+          "resultLabel": "what happens",
+          "color": "green",
+          "atWord": 2.75,
+          "caption": "abort shreds it. continue_ waves it on.",
+          "lines": [
+            {
+              "text": "page.route(\"**/*.{png,jpg,jpeg}\",",
+              "detail": "catch every image request",
+              "sub": "matches three extensions",
+              "label": "route",
+              "atWord": 7.167
+            },
+            {
+              "text": "    lambda route: route.abort())",
+              "detail": "and tear each one up",
+              "sub": "no images ever load",
+              "label": "abort",
+              "atWord": 16
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# route.continue_() passes it on",
+              "detail": "the underscore is not a typo",
+              "sub": "continue is a keyword",
+              "label": "note",
+              "atWord": 30.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 539,
+      "audio": "audio/pw-dojo-14-network_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "BROWSER_STEP",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "And here's the genuinely strange part. Your app has absolutely no idea. The page asked for todos, something came back that looked exactly right, so the page renders it. That fake todo is sitting on screen now. The real server never heard a word about any of this.",
+      "data": {
+        "browserStep": {
+          "url": "app.example.com/todos",
+          "screenTitle": "Your todos",
+          "caption": "the app cannot tell the difference",
+          "color": "green",
+          "atWord": 4.25,
+          "steps": [
+            {
+              "text": "page.goto(\"/todos\")",
+              "title": "goto",
+              "label": "the page loads",
+              "detail": "the browser",
+              "atWord": 11.5
+            },
+            {
+              "text": "route.fulfill(json=[...])",
+              "title": "check",
+              "label": "your mock answers",
+              "detail": "todo list",
+              "sub": "Fake todo",
+              "color": "green",
+              "atWord": 19.583
+            },
+            {
+              "text": "expect(item).to_be_visible()",
+              "title": "assert",
+              "label": "and it renders",
+              "detail": "list",
+              "sub": "Fake todo shown",
+              "color": "green",
+              "atWord": 26.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 486,
+      "audio": "audio/pw-dojo-14-network_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "One catch, and it's the very same one dialogs had back in episode twelve. Set your route up before the request flies. Register it afterwards and that letter has already gone — nobody was sitting at the desk when it went past. Same rule, different feature. Brief the mail room first.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the same old catch",
+          "rule": "register the route BEFORE the request fires",
+          "okLabel": "intercepted",
+          "noLabel": "already gone",
+          "caption": "brief the mail room before the post",
+          "color": "green",
+          "atWord": 2.667,
+          "cases": [
+            {
+              "text": "route(...) then goto(...)",
+              "title": "ok",
+              "sub": "the desk was staffed",
+              "atWord": 19
+            },
+            {
+              "text": "goto(...) then route(...)",
+              "title": "no",
+              "sub": "the letter already left",
+              "atWord": 25.583
+            },
+            {
+              "text": "page.once(\"dialog\", ...) first",
+              "title": "ok",
+              "sub": "episode twelve, same rule",
+              "atWord": 28.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 523,
+      "audio": "audio/pw-dojo-14-network_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Quick one. Why mock the products API instead of hitting the real thing? Pause here if you want longer. Ready? The answer's B. Control and stability — same data every run, works offline, plus edge cases the real backend won't give you.",
+      "data": {
+        "quiz": {
+          "question": "Why mock /api/products in a UI test?",
+          "options": [
+            {
+              "text": "Mocking is faster to write"
+            },
+            {
+              "text": "Control and stability, every run"
+            },
+            {
+              "text": "Real APIs are illegal in tests"
+            },
+            {
+              "text": "To make tests slower"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 17.5,
+          "why": "Same data every run, works offline, and edge cases on demand.",
+          "atWord": 1.833
+        }
+      },
+      "durationFrames": 458,
+      "audio": "audio/pw-dojo-14-network_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Right. This next bit is the one that genuinely separates people in interviews, so stay with me.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Testing the sad paths",
+          "subtitle": "the senior move"
+        }
+      },
+      "durationFrames": 179,
+      "audio": "audio/pw-dojo-14-network_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "SAD_PATHS",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Same app, three times over. Nothing changed except what the server said back. First, the happy path. Everybody tests that one. Second, an empty list. Does the copy read properly with nothing to show? Third, a five hundred. Friendly error, or white screen? One line each.",
+      "data": {
+        "sadPaths": {
+          "screenTitle": "Your products",
+          "rows": [
+            "Blue mug",
+            "Red mug",
+            "Green mug"
+          ],
+          "emptyText": "No products yet",
+          "errorText": "Something went wrong",
+          "caption": "one line each. every single run.",
+          "color": "green",
+          "atWord": 2,
+          "states": [
+            {
+              "label": "the happy path",
+              "title": "ok",
+              "text": "json=[...three products...]",
+              "sub": "everyone tests this",
+              "atWord": 10.167
+            },
+            {
+              "label": "an empty list",
+              "title": "empty",
+              "text": "route.fulfill(json=[])",
+              "sub": "does the copy read ok?",
+              "atWord": 19.25
+            },
+            {
+              "label": "a 500 error",
+              "title": "error",
+              "text": "route.fulfill(status=500)",
+              "sub": "or a white screen?",
+              "atWord": 29.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 582,
+      "audio": "audio/pw-dojo-14-network_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Simulating a server on fire takes one argument. Status five hundred, a bit of error json, and you're done. Then you load the page and check the thing you actually care about. Did anybody build a decent error screen? Is there a retry button, or does the user just sit there staring at nothing?",
+      "data": {
+        "codeRun": {
+          "filename": "sad.py",
+          "language": "py",
+          "resultLabel": "what the app does",
+          "color": "red",
+          "atWord": 2.583,
+          "caption": "the server is on fire, on demand",
+          "lines": [
+            {
+              "text": "page.route(\"**/api/products\",",
+              "detail": "catch the products call",
+              "sub": "the desk is staffed",
+              "label": "route",
+              "atWord": 8.167
+            },
+            {
+              "text": "    lambda route: route.fulfill(",
+              "detail": "and answer with a 500",
+              "sub": "the server \"died\"",
+              "label": "boom",
+              "atWord": 16.083
+            },
+            {
+              "text": "        status=500,"
+            },
+            {
+              "text": "        json={\"error\": \"Server Error\"}))"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "expect(page.get_by_text(",
+              "detail": "now check the error screen",
+              "sub": "friendly, or a blank page?",
+              "label": "check",
+              "atWord": 28.75
+            },
+            {
+              "text": "    \"Something went wrong\"))"
+            },
+            {
+              "text": "    .to_be_visible()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 535,
+      "audio": "audio/pw-dojo-14-network_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "And that, more or less, is the interview answer. Everyone tests the happy path. Mocking is what makes the sad ones cheap — errors, empty states, slow replies — all reliable, all on demand, whenever you want them. Whole classes of scenario that used to be filed under untestable turn into one-liners.",
+      "data": {
+        "ruleTest": {
+          "kicker": "say this out loud",
+          "rule": "everyone tests the happy path. mock the sad ones.",
+          "okLabel": "one line",
+          "noLabel": "impossible",
+          "caption": "whole classes of untestable, solved",
+          "color": "red",
+          "atWord": 2.833,
+          "cases": [
+            {
+              "text": "mock a 500 and check the copy",
+              "title": "ok",
+              "sub": "any time you like",
+              "atWord": 20.917
+            },
+            {
+              "text": "ask production to fail on cue",
+              "title": "no",
+              "sub": "good luck with that",
+              "atWord": 28.167
+            },
+            {
+              "text": "mock an empty list",
+              "title": "ok",
+              "sub": "the state nobody designs",
+              "atWord": 32.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 586,
+      "audio": "audio/pw-dojo-14-network_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Three lines to take away. Expect response waits for a real letter, instead of guessing. Route puts you behind the desk, where every request has to pass. And fulfill lets you write whatever reply you fancy — including the ones nobody can ask a real server for.",
+      "data": {
+        "heading": "The mail room, in three lines",
+        "points": [
+          {
+            "text": "expect_response waits for real data",
+            "atWord": 11.5
+          },
+          {
+            "text": "route() intercepts before it leaves",
+            "atWord": 19.583
+          },
+          {
+            "text": "fulfill() writes the reply yourself",
+            "atWord": 26.083
+          }
+        ]
+      },
+      "durationFrames": 477,
+      "audio": "audio/pw-dojo-14-network_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Next time, logging in once and then never again for the rest of your suite. The hand stamp trick. Whole course is free, over at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Auth — Login Once, Reuse Forever",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 289,
+      "audio": "audio/pw-dojo-14-network_long_s21.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "meta": {
+    "topic": "Instagram's newest AI tool didn't survive the week",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "Tech giants cannot push opt-out AI training without facing massive creator backlash.",
+    "openLoop": "Why did Meta kill its brand new AI image tool after just three days?",
+    "analogy": "A product launch that turned into a digital fire drill.",
+    "screenplay": "explainer"
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "channel": "THE NBX STUDIO"
+  },
+  "thumbnail": {
+    "title": "DEAD IN 3 DAYS",
+    "badge": "Meta AI Backlash",
+    "asset": "lucide:alert-triangle"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Meta launched a brand new AI tool on Tuesday. By Friday, it was completely dead. Here is what happened.",
+      "durationFrames": 258,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "Dead in 3 Days",
+        "kicker": "META AI",
+        "heroAsset": "lucide:skull",
+        "atWord": 9
+      }
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "slide",
+      "narration": "The tool was called Muse Image, built by Meta Superintelligence Labs.",
+      "durationFrames": 162,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "title": "MUSE IMAGE",
+        "subtitle": "The 72-Hour Lifespan",
+        "atWord": 4
+      }
+    },
+    {
+      "id": "s03",
+      "type": "CONCEPT_DIAGRAM",
+      "transition": "morph",
+      "narration": "It allowed users to generate AI images directly from other people's public Instagram posts.",
+      "durationFrames": 204,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "title": "How It Worked",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Public Posts",
+            "asset": "lucide:image"
+          },
+          {
+            "id": "n2",
+            "label": "Muse Image",
+            "asset": "lucide:cpu"
+          },
+          {
+            "id": "n3",
+            "label": "AI Gen",
+            "asset": "lucide:wand-2"
+          }
+        ],
+        "edges": [
+          {
+            "from": "n1",
+            "to": "n2"
+          },
+          {
+            "from": "n2",
+            "to": "n3"
+          }
+        ],
+        "atWord": 4
+      }
+    },
+    {
+      "id": "s04",
+      "type": "NOTIFICATION",
+      "transition": "pop",
+      "narration": "But immediately, users panicked. They flooded X and Reddit, warning that this created a massive space for deepfakes.",
+      "durationFrames": 246,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "title": "The Backlash",
+        "notifications": [
+          {
+            "title": "Reddit User",
+            "message": "How do I opt out of this?!",
+            "icon": "si:reddit"
+          },
+          {
+            "title": "X User",
+            "message": "Huge privacy concerns here.",
+            "icon": "si:x"
+          },
+          {
+            "title": "Creator",
+            "message": "Perfect tool for deepfakes...",
+            "icon": "lucide:alert-circle"
+          }
+        ],
+        "atWord": 6
+      }
+    },
+    {
+      "id": "s05",
+      "type": "QUOTE_SPOTLIGHT",
+      "transition": "fade",
+      "narration": "Privacy advocates like Apar Gupta accused Meta of taking an excuse to violate our consent and privacy again and again.",
+      "durationFrames": 270,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "quote": "An excuse to violate our consent and privacy again and again.",
+        "author": "Apar Gupta",
+        "role": "Internet Freedom Foundation",
+        "person": {
+          "asset": "lucide:user"
+        },
+        "atWord": 9
+      }
+    },
+    {
+      "id": "s06",
+      "type": "STAT_CALLOUT",
+      "transition": "slideUp",
+      "narration": "The pressure mounted when SAG-AFTRA, representing a hundred and sixty thousand professionals, urged members to opt out.",
+      "durationFrames": 246,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "statValue": "160K",
+        "statLabel": "Entertainment Professionals",
+        "kicker": "SAG-AFTRA Warning",
+        "atWord": 10
+      }
+    },
+    {
+      "id": "s07",
+      "type": "FLIP_CARD",
+      "transition": "whippan",
+      "narration": "They called the lack of an opt-in an utter miscalculation of public sentiment regarding obvious digital dangers.",
+      "durationFrames": 234,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "frontTitle": "Meta's Approach",
+        "frontSubtitle": "Opt-Out Only",
+        "backTitle": "Union Demand",
+        "backSubtitle": "Clear OPT-IN Required",
+        "atWord": 7
+      }
+    },
+    {
+      "id": "s08",
+      "type": "TIMELINE",
+      "transition": "slide",
+      "narration": "By Friday, Meta surrendered. They released a blog post admitting the feature missed the mark and shut it down.",
+      "durationFrames": 258,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "title": "The Rollback",
+        "events": [
+          {
+            "date": "Tuesday",
+            "label": "Launched via PR"
+          },
+          {
+            "date": "Mid-Week",
+            "label": "SAG-AFTRA & CAA Revolt"
+          },
+          {
+            "date": "Friday",
+            "label": "Feature Killed"
+          }
+        ],
+        "atWord": 4
+      }
+    },
+    {
+      "id": "s09",
+      "type": "LIST_BUILD",
+      "transition": "wipe",
+      "narration": "We saw this happen in twenty twenty five when OpenAI's Sora 2 faced similar backlash and eventually shut down in March.",
+      "durationFrames": 282,
+      "timingSource": "estimated",
+      "background": "zoneC",
+      "data": {
+        "title": "A Familiar Pattern",
+        "items": [
+          {
+            "title": "OpenAI Sora 2",
+            "subtitle": "Shut down March 2025",
+            "icon": "lucide:video"
+          },
+          {
+            "title": "Trademark Issues",
+            "subtitle": "Studio Ghibli angered",
+            "icon": "lucide:copyright"
+          },
+          {
+            "title": "Celeb Protection",
+            "subtitle": "Registering likeness marks",
+            "icon": "lucide:shield-check"
+          }
+        ],
+        "atWord": 11
+      }
+    },
+    {
+      "id": "s10",
+      "type": "RECAP",
+      "transition": "push",
+      "narration": "To recap: Muse Image launched Tuesday, sparked instant privacy backlash, and was entirely pulled by Friday.",
+      "durationFrames": 222,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "title": "The Short Life of Muse Image",
+        "points": [
+          "Launched Tuesday",
+          "Deepfake & Privacy Panic",
+          "Killed on Friday"
+        ],
+        "atWord": 4
+      }
+    },
+    {
+      "id": "s11",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "narration": "For more breaking news on AI and creator rights, hit subscribe to THE NBX STUDIO.",
+      "durationFrames": 198,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "data": {
+        "headline": "Stay Informed",
+        "subhead": "Subscribe for more updates",
+        "buttonText": "Subscribe",
+        "atWord": 9
+      }
+    }
+  ]
+}

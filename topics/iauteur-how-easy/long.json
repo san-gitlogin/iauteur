@@ -1,0 +1,436 @@
+{
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "design": "moderndark",
+    "logo": "img:iauteur_logo.png",
+    "theme": "moderndark",
+    "themeLight": "daylight"
+  },
+  "meta": {
+    "analogy": "Ordering a meal instead of learning to cook it.",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "You describe the video you want in one line, and a finished video comes back.",
+    "openLoop": "If nobody filmed it and nobody edited it, where did this video come from?",
+    "screenplay": "deep-dive",
+    "topic": "iAuteur — how easy this is",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ]
+  },
+  "scenes": [
+    {
+      "background": "zoneA",
+      "data": {
+        "headline": "NOT A WHOLE WEEK",
+        "headlineAtWord": 6.667,
+        "heroAsset": "lucide:clapperboard",
+        "heroAtWord": 1.75,
+        "subtext": "you have something worth explaining"
+      },
+      "durationFrames": 166,
+      "id": "s01",
+      "narration": "You know something worth explaining. But making a video about it shouldn't cost you a whole week.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "HOOK",
+      "audio": "audio/he_long_s01.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "appWindow": {
+          "activeStep": 1,
+          "atWord": 28,
+          "button": "Continue",
+          "buttonDone": "Saved",
+          "caption": "that's step one, and that's all of it",
+          "color": "blue",
+          "fields": [
+            {
+              "atWord": 10.667,
+              "label": "Title",
+              "text": "How your money actually moves"
+            },
+            {
+              "atWord": 3.083,
+              "label": "Who it's for",
+              "text": "Anyone who never studied it"
+            },
+            {
+              "atWord": 29.417,
+              "label": "Look",
+              "text": "Modern dark"
+            }
+          ],
+          "headline": "Step one: [say what it's about]",
+          "screenTitle": "What's it about?",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "typeIndex": 0,
+          "windowTitle": "iAuteur"
+        }
+      },
+      "durationFrames": 453,
+      "id": "s02",
+      "narration": "So here's the whole thing, start to finish. You open it up, and you type what your video is about. One line — the way you'd say it to a friend. Then a sentence on who it's for, and pick the look you want. That's step one. That's genuinely all of it.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "APP_WINDOW",
+      "audio": "audio/he_long_s02.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "promptHandout": {
+          "atWord": 24.833,
+          "color": "blue",
+          "copiedLabel": "Copied!",
+          "copyLabel": "Copy",
+          "headline": "It writes [the question] for you",
+          "hint": "you didn't write any of that",
+          "lines": [
+            "Make a video about how money moves.",
+            "About three minutes. Twelve scenes.",
+            "Plain English. No jargon anywhere.",
+            "Say who it's for right at the start.",
+            "Send it back as one single answer."
+          ],
+          "panelTitle": "Your question"
+        }
+      },
+      "durationFrames": 380,
+      "id": "s03",
+      "narration": "Now it writes the question for you. The whole brief: what to make, how long it runs, what goes in which order, what to leave out. You don't write a single word of it. You press copy, and that's you done with this screen.",
+      "timingSource": "tts",
+      "transition": "morph",
+      "type": "PROMPT_HANDOUT",
+      "audio": "audio/he_long_s03.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "chatTrio": {
+          "answerLabel": "your video, written",
+          "answerLines": 4,
+          "assistants": [
+            {
+              "atWord": 6.583,
+              "label": "ChatGPT"
+            },
+            {
+              "atWord": 7.417,
+              "label": "Claude"
+            },
+            {
+              "atWord": 8.25,
+              "label": "Gemini"
+            }
+          ],
+          "atWord": 29.083,
+          "color": "green",
+          "footNote": "no new key, nothing new to subscribe to",
+          "headline": "Paste it into [whichever you use]",
+          "pasted": "Make a video about how money…"
+        }
+      },
+      "durationFrames": 454,
+      "id": "s04",
+      "narration": "Then you paste it wherever you like. ChatGPT, Claude, Gemini — whichever one you're already paying for. There's no key to set up and nothing new to subscribe to. Each of them reads it, and hands your whole video back, written out, in one answer.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "CHAT_TRIO",
+      "audio": "audio/he_long_s04.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "appWindow": {
+          "activeStep": 3,
+          "atWord": 24.667,
+          "button": "Load it in",
+          "buttonDone": "12 scenes in",
+          "caption": "no editor, no timeline, nothing dragged",
+          "color": "blue",
+          "fields": [
+            {
+              "atWord": 6.25,
+              "label": "Paste the answer",
+              "text": "Twelve scenes, all written"
+            },
+            {
+              "atWord": 13.25,
+              "label": "What you got",
+              "text": "Ready to preview"
+            }
+          ],
+          "headline": "Paste it back, and [there it is]",
+          "screenTitle": "Your scenes",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "typeIndex": 0,
+          "windowTitle": "iAuteur"
+        }
+      },
+      "durationFrames": 442,
+      "id": "s05",
+      "narration": "Copy that answer, come back, and paste it in. And there it is. Your video, laid out scene by scene, with every line of narration already in place. You still haven't opened an editor, or dragged anything onto a timeline.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "APP_WINDOW",
+      "audio": "audio/he_long_s05.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "checkSweep": {
+          "atWord": 20.75,
+          "caughtIndex": 2,
+          "caughtNote": "too many words",
+          "checks": [
+            {
+              "atWord": 6.5,
+              "label": "Is anything missing?"
+            },
+            {
+              "atWord": 8.083,
+              "label": "Will it fit the screen?"
+            },
+            {
+              "atWord": 12.833,
+              "label": "Is it too crowded?"
+            },
+            {
+              "atWord": 14.417,
+              "label": "Can you read it in time?"
+            }
+          ],
+          "color": "green",
+          "fixNote": "rewritten, then passed",
+          "headline": "It reads it back, [line by line]",
+          "subjectLabel": "the answer",
+          "verdict": "ready for you"
+        }
+      },
+      "durationFrames": 448,
+      "id": "s06",
+      "narration": "Before you see any of it, it reads that answer back, line by line. Too crowded, too long, a picture that won't fit — it rewrites the line and checks again. Sometimes it asks you to paste once more. That's it being fussy for you.",
+      "timingSource": "tts",
+      "transition": "wipe",
+      "type": "CHECK_SWEEP",
+      "audio": "audio/he_long_s06.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "videoPlayer": {
+          "atWord": 13.333,
+          "badge": "PREVIEW",
+          "clips": [
+            {
+              "asset": "assets/video/sample_market.mp4",
+              "atWord": 9,
+              "label": "Scene 4 — where money goes"
+            }
+          ],
+          "color": "blue",
+          "footNote": "one scene, a few seconds, nothing wasted",
+          "headline": "See one before you [build anything]",
+          "runtime": "0:08",
+          "startAt": 0.05
+        }
+      },
+      "durationFrames": 387,
+      "id": "s07",
+      "narration": "Want to see one before committing to the whole thing? Press preview on any scene and it plays, right there, in a few seconds. Change a word and watch it again. Nothing else has to be built yet, and nothing is wasted.",
+      "timingSource": "tts",
+      "transition": "zoomthrough",
+      "type": "VIDEO_PLAYER",
+      "audio": "audio/he_long_s07.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "sceneForge": {
+          "askLabel": "a dial that fills as it counts up",
+          "atWord": 23.75,
+          "color": "green",
+          "doneLabel": "ready in scene 5",
+          "footNote": "every scene can have its own",
+          "headline": "Made for [this one scene]",
+          "rows": [
+            {
+              "atWord": 3.167,
+              "label": "Scene 3",
+              "text": "the opening question"
+            },
+            {
+              "atWord": 3.917,
+              "label": "Scene 4",
+              "text": "where the money goes"
+            },
+            {
+              "atWord": 7.583,
+              "label": "Scene 5",
+              "text": "nothing fits this one"
+            },
+            {
+              "atWord": 9.833,
+              "label": "Scene 6",
+              "text": "the closing line"
+            }
+          ],
+          "stages": [
+            "designed",
+            "built",
+            "checked"
+          ],
+          "targetIndex": 2
+        }
+      },
+      "durationFrames": 435,
+      "id": "s08",
+      "narration": "And when a scene needs something that just doesn't exist yet, you say what you want to see. In your own words. It gets designed for that scene, built, checked, and dropped straight back into it. Every scene can have its own. Nothing here is a template.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "SCENE_FORGE",
+      "audio": "audio/he_long_s08.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "appWindow": {
+          "activeStep": 4,
+          "atWord": 12.167,
+          "button": "Listen",
+          "buttonDone": "Playing…",
+          "caption": "timed to your words, not a stopwatch",
+          "color": "blue",
+          "fields": [
+            {
+              "atWord": 4,
+              "label": "Voice",
+              "text": "Ava — natural, multilingual"
+            },
+            {
+              "atWord": 9.167,
+              "label": "Language",
+              "text": "English (US)"
+            }
+          ],
+          "headline": "Then you [pick a voice]",
+          "screenTitle": "Pick a voice",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "typeIndex": 0,
+          "windowTitle": "iAuteur"
+        }
+      },
+      "durationFrames": 395,
+      "id": "s09",
+      "narration": "Then you pick a voice. There are hundreds, in almost any language you'd want. Press listen, and your whole script is read out loud. And it's timed to the words — so every picture lands on exactly the word it belongs to.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "APP_WINDOW",
+      "audio": "audio/he_long_s09.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "aspectTwin": {
+          "atWord": 14.083,
+          "color": "blue",
+          "countLabel": "four finished videos",
+          "headline": "One description, [four videos]",
+          "sourceLabel": "one description",
+          "tallLabel": "shorts & reels",
+          "variantLabels": [
+            "dark",
+            "light"
+          ],
+          "wideLabel": "widescreen"
+        }
+      },
+      "durationFrames": 413,
+      "id": "s10",
+      "narration": "One press, and you get the widescreen cut for YouTube. And a tall one, ready for shorts and reels. Each of them in dark and in light. That's four finished videos, from one description, with no extra work at all.",
+      "timingSource": "tts",
+      "transition": "zoom",
+      "type": "ASPECT_TWIN",
+      "audio": "audio/he_long_s10.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "videoPlayer": {
+          "atWord": 14.417,
+          "badge": "FINISHED",
+          "clips": [
+            {
+              "asset": "assets/video/sample_market.mp4",
+              "atWord": 5.75,
+              "label": "A market story"
+            },
+            {
+              "asset": "assets/video/sample_product.mp4",
+              "atWord": 8.667,
+              "label": "A product launch"
+            },
+            {
+              "asset": "assets/video/sample_tech.mp4",
+              "atWord": 12.5,
+              "label": "Something deeply technical"
+            }
+          ],
+          "color": "green",
+          "footNote": "nobody filmed a second of any of them",
+          "headline": "These are [real ones]",
+          "runtime": "3:20",
+          "startAt": 0.12
+        }
+      },
+      "durationFrames": 389,
+      "id": "s11",
+      "narration": "These are real ones. A market story, a product launch, something deeply technical. Nobody filmed a second of them. No camera, no editor, no timeline. Someone described them, and out they came.",
+      "timingSource": "tts",
+      "transition": "zoomthrough",
+      "type": "VIDEO_PLAYER",
+      "audio": "audio/he_long_s11.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "message": "Describe yours. Watch it happen.",
+        "sub": "iAuteur — including this video"
+      },
+      "durationFrames": 370,
+      "id": "s12",
+      "narration": "Everything you've just watched was made in exactly that way. Including this video — the one you're watching right now. Every scene, every picture, every word of it. So describe yours, and watch it happen.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "OUTRO_CTA",
+      "audio": "audio/he_long_s12.mp3"
+    }
+  ],
+  "thumbnail": {
+    "asset": "img:iauteur_logo.png",
+    "badge": "made by iAuteur",
+    "title": "NOBODY FILMED THIS"
+  }
+}

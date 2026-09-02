@@ -1,0 +1,629 @@
+{
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:iauteur_logo.png"
+  },
+  "meta": {
+    "topic": "iAuteur — introducing",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "Describe the video you want; iAuteur hands back a finished one — and all of it is on GitHub.",
+    "openLoop": "If nobody filmed it, where did this come from?",
+    "analogy": "Ordering a meal instead of learning to cook.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ]
+  },
+  "cover": {
+    "title": "NOBODY FILMED THIS",
+    "badge": "made by iAuteur",
+    "asset": "img:iauteur_logo.png",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A whole week, for one short video. There's a better way.",
+      "data": {
+        "headline": "A WHOLE WEEK",
+        "subtext": "for one short video",
+        "heroAsset": "lucide:clapperboard",
+        "headlineAtWord": 2.583,
+        "heroAtWord": 5.667
+      },
+      "timingSource": "tts",
+      "durationFrames": 132,
+      "audio": "audio/iauteur-introducing_short_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "PRODUCTION_GRIND",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Write the script, record the voice, cut the clips, animate each scene. Then rebuild the whole video, vertical. Twenty-one hours, for one video.",
+      "data": {
+        "productionGrind": {
+          "headline": "The old way took [a whole evening]",
+          "windowTitle": "one 3-minute explainer",
+          "takeLabel": "take 14",
+          "chores": [
+            {
+              "label": "Write the script",
+              "detail": "twelve scenes, by hand",
+              "value": 3,
+              "atWord": 2
+            },
+            {
+              "label": "Record the voice",
+              "detail": "again, and then again",
+              "value": 2.5,
+              "atWord": 4.917
+            },
+            {
+              "label": "Cut the clips",
+              "detail": "clip by clip by clip",
+              "value": 4,
+              "atWord": 7.917
+            },
+            {
+              "label": "Animate each scene",
+              "detail": "keyframe by keyframe",
+              "value": 6,
+              "atWord": 9.917
+            },
+            {
+              "label": "Rebuild it vertical",
+              "detail": "the whole video, twice",
+              "value": 5.5,
+              "atWord": 15.833
+            }
+          ],
+          "tracks": [
+            "voice",
+            "b-roll",
+            "titles",
+            "music"
+          ],
+          "totalLabel": "hours, for one video",
+          "color": "orange",
+          "atWord": 17.833
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 294,
+      "audio": "audio/iauteur-introducing_short_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "INTRO_CARD",
+      "transition": "zoom",
+      "background": "zoneC",
+      "narration": "Introducing iAuteur — the one place a whole video gets made.",
+      "data": {
+        "introCard": {
+          "kicker": "introducing",
+          "name": "iAuteur",
+          "color": "blue",
+          "atWord": 1.833
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 129,
+      "audio": "audio/iauteur-introducing_short_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "APP_WINDOW",
+      "transition": "morph",
+      "background": "zoneA",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 1,
+        "app": "iAuteur",
+        "note": "saying what it's about",
+        "color": "blue",
+        "atWord": 1.667
+      },
+      "narration": "You open iAuteur, type what your video is about, and pick the look. That is step one, and step one is all you do.",
+      "data": {
+        "appWindow": {
+          "headline": "Step one: [say what it's about]",
+          "windowTitle": "iAuteur",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "activeStep": 1,
+          "screenTitle": "What's it about?",
+          "fields": [
+            {
+              "label": "Title",
+              "text": "How your money actually moves",
+              "atWord": 3
+            },
+            {
+              "label": "Look",
+              "text": "Modern dark",
+              "atWord": 8.833
+            }
+          ],
+          "typeIndex": 0,
+          "button": "Continue",
+          "buttonDone": "Saved",
+          "caption": "that's all of step one",
+          "color": "blue",
+          "atWord": 10.833
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 210,
+      "audio": "audio/iauteur-introducing_short_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "CHAT_TRIO",
+      "transition": "slide",
+      "background": "zoneB",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "the brief goes to an assistant",
+        "color": "green",
+        "atWord": 1.833
+      },
+      "narration": "iAuteur writes the brief. You paste that brief into any assistant you already use, and the assistant hands back one file — your whole video, written.",
+      "data": {
+        "chatTrio": {
+          "headline": "Paste the brief into [any assistant]",
+          "assistants": [
+            {
+              "label": "ChatGPT",
+              "atWord": 7.583
+            },
+            {
+              "label": "Claude",
+              "atWord": 8.417
+            },
+            {
+              "label": "Gemini",
+              "atWord": 9.25
+            }
+          ],
+          "pasted": "Make a video about how money…",
+          "answerLabel": "your video, written",
+          "answerFile": "your-video.json",
+          "answerJson": [
+            "{",
+            "  \"scenes\": [",
+            "    { \"id\": \"s01\", \"say\": \"A week…\" },",
+            "    { \"id\": \"s02\", \"say\": \"The fix\" }",
+            "  ]",
+            "}"
+          ],
+          "footNote": "no new key, nothing to subscribe to",
+          "color": "green",
+          "atWord": 14.167
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 278,
+      "audio": "audio/iauteur-introducing_short_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "APP_WINDOW",
+      "transition": "wipe",
+      "background": "zoneA",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "the file goes back to iAuteur",
+        "color": "blue",
+        "atWord": 1.75
+      },
+      "narration": "Paste that file back into iAuteur, and there is your video — every scene, every line already in place.",
+      "data": {
+        "appWindow": {
+          "headline": "Paste the file back, and [there it is]",
+          "windowTitle": "iAuteur",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "activeStep": 3,
+          "screenTitle": "Your scenes",
+          "fields": [
+            {
+              "label": "Paste the file",
+              "mode": "paste",
+              "lines": [
+                "{",
+                "  \"scenes\": [ 12 ],",
+                "  \"voice\": \"Ava\",",
+                "  \"look\": \"modern dark\"",
+                "}"
+              ],
+              "atWord": 1
+            },
+            {
+              "label": "What you got",
+              "text": "Twelve scenes, ready to play",
+              "atWord": 10.333
+            }
+          ],
+          "button": "Load it in",
+          "buttonDone": "12 scenes in",
+          "caption": "no editor, nothing dragged",
+          "color": "blue",
+          "atWord": 6.5
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 199,
+      "audio": "audio/iauteur-introducing_short_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "BEAT_BOARD",
+      "transition": "push",
+      "background": "zoneC",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "one button per scene",
+        "color": "green",
+        "atWord": 1.667
+      },
+      "narration": "Every scene is a row, and every row has its own button. Press the button on the one scene that needs a picture nobody built yet.",
+      "data": {
+        "beatBoard": {
+          "headline": "Every scene has [its own button]",
+          "panelTitle": "your scenes",
+          "rows": [
+            {
+              "label": "s03 · HOOK",
+              "text": "Where does the money actually go?",
+              "value": 12,
+              "atWord": 1.667
+            },
+            {
+              "label": "s04 · DONUT",
+              "text": "Half of it never leaves the bank.",
+              "value": 15,
+              "atWord": 2.417
+            },
+            {
+              "label": "s05 · ???",
+              "text": "The part nobody ever shows you.",
+              "value": 17,
+              "atWord": 3.75
+            },
+            {
+              "label": "s06 · RECAP",
+              "text": "So that is where it all went.",
+              "value": 11,
+              "atWord": 5.167
+            }
+          ],
+          "targetIndex": 2,
+          "newLabel": "＋ component",
+          "previewLabel": "▶ preview",
+          "customLabel": "SPEND_DIAL",
+          "doneLabel": "↺ recreate",
+          "footNote": "one button, on the scene that needs it",
+          "color": "green",
+          "atWord": 9.25
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 236,
+      "audio": "audio/iauteur-introducing_short_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "COMPONENT_LAB",
+      "transition": "morph",
+      "background": "zoneB",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "iAuteur builds the component",
+        "color": "purple",
+        "atWord": 1.667
+      },
+      "narration": "You describe the picture you want. iAuteur writes that component, fits it to your design, checks it, and drops it into that one scene.",
+      "data": {
+        "componentLab": {
+          "headline": "You say it. [iAuteur builds it.]",
+          "drawerTitle": "component creator",
+          "forScene": "for s05 — the spend split",
+          "askLabel": "Describe what you want to see",
+          "ask": "a dial that fills as it counts up",
+          "askAtWord": 1.667,
+          "stages": [
+            {
+              "label": "Work out what it holds",
+              "detail": "a number, a label, a dial",
+              "atWord": 5.833
+            },
+            {
+              "label": "Write the component",
+              "detail": "drawn from your own words",
+              "atWord": 7.25
+            },
+            {
+              "label": "Fit it to your design",
+              "detail": "every theme, both shapes",
+              "atWord": 10
+            }
+          ],
+          "gates": [
+            "checked",
+            "wired in",
+            "type-checked"
+          ],
+          "doneLabel": "ready in scene 5",
+          "color": "purple",
+          "atWord": 12.75
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 220,
+      "audio": "audio/iauteur-introducing_short_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "APP_WINDOW",
+      "transition": "slide",
+      "background": "zoneA",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 4,
+        "app": "iAuteur",
+        "note": "picking a voice",
+        "color": "blue",
+        "atWord": 1.75
+      },
+      "narration": "Then you pick a voice, and iAuteur times that voice to every word on screen.",
+      "data": {
+        "appWindow": {
+          "headline": "Then you [pick a voice]",
+          "windowTitle": "iAuteur",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "activeStep": 4,
+          "screenTitle": "Pick a voice",
+          "fields": [
+            {
+              "label": "Voice",
+              "text": "Ava — natural, multilingual",
+              "atWord": 3.917
+            },
+            {
+              "label": "Language",
+              "text": "English (US)",
+              "atWord": 6.167
+            }
+          ],
+          "typeIndex": 0,
+          "button": "Listen",
+          "buttonDone": "Playing…",
+          "caption": "timed to your words",
+          "color": "blue",
+          "atWord": 7.667
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 156,
+      "audio": "audio/iauteur-introducing_short_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "AUTO_RUN",
+      "transition": "push",
+      "background": "zoneC",
+      "narration": "Or paste in your own AI key and press one button. iAuteur writes the script, checks the script, records the voice, and renders all four videos. You did none of it.",
+      "data": {
+        "autoRun": {
+          "headline": "Or hand iAuteur [your own AI key]",
+          "keyLabel": "your AI key",
+          "keyMask": "sk-••••••••••••••••",
+          "modelLabel": "the model you chose",
+          "toggles": [
+            "save it when it passes",
+            "build what is missing"
+          ],
+          "runLabel": "Run it all →",
+          "runningLabel": "Running…",
+          "runAtWord": 7.667,
+          "steps": [
+            {
+              "label": "Wrote every scene and every line",
+              "detail": "12 scenes",
+              "atWord": 11
+            },
+            {
+              "label": "Checked the script, fixed two lines",
+              "detail": "2 fixed",
+              "atWord": 13.417
+            },
+            {
+              "label": "Built the one missing component",
+              "detail": "1 new",
+              "atWord": 15.083
+            },
+            {
+              "label": "Recorded the voice, timed the scenes",
+              "detail": "3m 04s",
+              "atWord": 15.917
+            },
+            {
+              "label": "Rendered all four videos",
+              "detail": "4 files",
+              "atWord": 19.25
+            }
+          ],
+          "doneLabel": "your video, and you did nothing",
+          "footNote": "one key, one button, no pasting",
+          "color": "purple",
+          "atWord": 21.75
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 330,
+      "audio": "audio/iauteur-introducing_short_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "VIDEO_PLAYER",
+      "transition": "zoomthrough",
+      "background": "zoneB",
+      "narration": "These three videos are real. Nobody filmed a second of them. Someone described each video, and out it came.",
+      "data": {
+        "videoPlayer": {
+          "headline": "These three are [real videos]",
+          "clips": [
+            {
+              "label": "A market story",
+              "asset": "assets/video/sample_market.mp4",
+              "seconds": 14,
+              "atWord": 2.833
+            },
+            {
+              "label": "A product launch",
+              "asset": "assets/video/sample_product.mp4",
+              "seconds": 12,
+              "atWord": 3.75
+            },
+            {
+              "label": "Something technical",
+              "asset": "assets/video/sample_tech.mp4",
+              "seconds": 10,
+              "atWord": 4.667
+            }
+          ],
+          "runtime": "3:20",
+          "startAt": 0.12,
+          "badge": "FINISHED",
+          "footNote": "nobody filmed a second of them",
+          "color": "green",
+          "atWord": 8.417
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 232,
+      "audio": "audio/iauteur-introducing_short_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "REPO_CTA",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "And iAuteur is on GitHub. Every component, every look, the whole console. Go and take a look.",
+      "data": {
+        "repoCta": {
+          "headline": "iAuteur is [on GitHub]",
+          "mark": "si:github",
+          "owner": "san-gitlogin",
+          "repo": "iauteur",
+          "description": "Describe a video. Get a finished one back — widescreen and vertical, dark and light.",
+          "facts": [
+            {
+              "label": "161 components",
+              "atWord": 7.667
+            },
+            {
+              "label": "30 design packs",
+              "atWord": 9.583
+            },
+            {
+              "label": "built on Remotion",
+              "atWord": 11.5
+            }
+          ],
+          "url": "github.com/san-gitlogin/iauteur",
+          "footNote": "everything you just watched is in there",
+          "color": "blue",
+          "atWord": 4.833
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 216,
+      "audio": "audio/iauteur-introducing_short_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneC",
+      "narration": "Including this one. So describe your video, and watch iAuteur make it.",
+      "data": {
+        "message": "Describe yours. Watch it happen.",
+        "sub": "github.com/san-gitlogin/iauteur"
+      },
+      "timingSource": "tts",
+      "durationFrames": 162,
+      "audio": "audio/iauteur-introducing_short_s13.mp3"
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "design": "moderndark",
+    "logo": "img:iauteur_logo.png",
+    "theme": "moderndark",
+    "themeLight": "daylight"
+  },
+  "meta": {
+    "analogy": "A screenplay a projector can read — the document is the film, not a timeline.",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "You describe the video in words, and deterministic code renders the film.",
+    "openLoop": "If a model writes the video, what stops it from shipping a broken one?",
+    "screenplay": "explainer",
+    "topic": "iAuteur — explaining itself",
+    "topicAxes": [
+      "entity-novelty",
+      "sovereignty"
+    ]
+  },
+  "scenes": [
+    {
+      "background": "zoneA",
+      "data": {
+        "headline": "WORDS IN, FILM OUT",
+        "headlineAtWord": 7,
+        "heroAsset": "lucide:clapperboard",
+        "heroAtWord": 2.167,
+        "subtext": "you describe it, code renders it"
+      },
+      "durationFrames": 164,
+      "id": "s01",
+      "narration": "You describe the video in words. Code renders the film.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "HOOK",
+      "audio": "audio/iauteur_long_s01.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "specToFrame": {
+          "atWord": 5.667,
+          "color": "blue",
+          "frameBars": [
+            64,
+            38,
+            22
+          ],
+          "frameCaption": "1920 x 1080",
+          "frameLabel": "Words per scene",
+          "headline": "The [JSON] is the movie",
+          "source": "illustrative",
+          "specCaption": "long.json",
+          "specLines": [
+            "{",
+            "  \"type\": \"BAR_COMPARE\",",
+            "  \"narration\": \"...\",",
+            "  \"data\": { \"bars\": [...] }",
+            "}"
+          ]
+        }
+      },
+      "durationFrames": 222,
+      "id": "s02",
+      "narration": "Every video here is a JSON file. Each scene names a component and the content it should show.",
+      "timingSource": "tts",
+      "transition": "morph",
+      "type": "SPEC_TO_FRAME",
+      "audio": "audio/iauteur_long_s02.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "castBoard": {
+          "atWord": 5.833,
+          "beatLabel": "s07 · the re-skin",
+          "candidates": [
+            {
+              "atWord": 4.25,
+              "detail": "generic slides, one look",
+              "label": "CAROUSEL"
+            },
+            {
+              "atWord": 6.583,
+              "detail": "brands, not design languages",
+              "label": "LOGO_WALL"
+            },
+            {
+              "atWord": 8.25,
+              "detail": "one scene, every pack at once",
+              "label": "RESKIN_CAROUSEL"
+            }
+          ],
+          "chosenIndex": 2,
+          "color": "green",
+          "headline": "Cast [per beat], never in bulk",
+          "verdict": "chosen, not defaulted"
+        }
+      },
+      "durationFrames": 195,
+      "id": "s03",
+      "narration": "For each beat, a component gets cast from a library of over a hundred, with a stated reason.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "CAST_BOARD",
+      "audio": "audio/iauteur_long_s03.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "labAssembly": {
+          "atWord": 4.667,
+          "color": "green",
+          "headline": "Describe it, and it gets [built]",
+          "rollbackNote": "won't compile? rolled back",
+          "stages": [
+            {
+              "atWord": 1.917,
+              "detail": "fields + budgets",
+              "label": "contract"
+            },
+            {
+              "atWord": 4.667,
+              "detail": "one .tsx file",
+              "label": "code"
+            },
+            {
+              "atWord": 6.583,
+              "detail": "six files updated",
+              "label": "wired"
+            },
+            {
+              "atWord": 8.417,
+              "detail": "type-checked",
+              "label": "gate"
+            }
+          ],
+          "verdict": "tsc clean"
+        }
+      },
+      "durationFrames": 199,
+      "id": "s04",
+      "narration": "When nothing fits, you describe the component you want and it gets written, wired and type-checked.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "LAB_ASSEMBLY",
+      "audio": "audio/iauteur_long_s04.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "budgetMeter": {
+          "atWord": 2.833,
+          "cap": 20,
+          "capLabel": "words per scene",
+          "color": "green",
+          "headline": "Counted, not [estimated]",
+          "rejectNote": "over budget? it won't render",
+          "rows": [
+            {
+              "atWord": 2.833,
+              "label": "s02",
+              "text": "the spec is the movie"
+            },
+            {
+              "atWord": 4.583,
+              "label": "s05",
+              "text": "the linter counts the words"
+            },
+            {
+              "atWord": 8.167,
+              "label": "draft",
+              "text": "an earlier draft of this line"
+            }
+          ],
+          "source": "illustrative",
+          "used": [
+            18,
+            17,
+            24
+          ]
+        }
+      },
+      "durationFrames": 205,
+      "id": "s05",
+      "narration": "A linter counts every word against that component's budget, and refuses to render a scene that overflows.",
+      "timingSource": "tts",
+      "transition": "wipe",
+      "type": "BUDGET_METER_ROW",
+      "audio": "audio/iauteur_long_s05.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "anchorRail": {
+          "atWord": 2.917,
+          "color": "orange",
+          "footNote": "anchored to words, not a stopwatch",
+          "headline": "The payoff lands on the [word]",
+          "marks": [
+            {
+              "atWord": 1,
+              "label": "base draws"
+            },
+            {
+              "atWord": 2.917,
+              "label": "mark fires"
+            },
+            {
+              "atWord": 5.833,
+              "label": "payoff lands"
+            }
+          ],
+          "playhead": 6,
+          "words": [
+            "Animations",
+            "are",
+            "anchored",
+            "to",
+            "individual",
+            "words,",
+            "so",
+            "each"
+          ]
+        }
+      },
+      "durationFrames": 194,
+      "id": "s06",
+      "narration": "Animations are anchored to individual words, so each payoff lands exactly when it is spoken.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "WORD_ANCHOR_RAIL",
+      "audio": "audio/iauteur_long_s06.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "reskin": {
+          "atWord": 4.167,
+          "footNote": "nothing reads a hardcoded colour",
+          "headline": "One scene, [thirty] design languages",
+          "packs": [
+            {
+              "atWord": 3.167,
+              "color": "blue",
+              "label": "moderndark"
+            },
+            {
+              "atWord": 6.333,
+              "color": "yellow",
+              "label": "neobrutalism"
+            },
+            {
+              "atWord": 7.417,
+              "color": "green",
+              "label": "terminalcli"
+            },
+            {
+              "atWord": 8.417,
+              "color": "purple",
+              "label": "vaporwave"
+            }
+          ],
+          "sourceLabel": "one scene",
+          "tileTitle": "The same scene"
+        }
+      },
+      "durationFrames": 213,
+      "id": "s07",
+      "narration": "The same scene re-skins itself across thirty design packs, because nothing reads a hardcoded colour.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "RESKIN_CAROUSEL",
+      "audio": "audio/iauteur_long_s07.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "aspectTwin": {
+          "atWord": 5.25,
+          "color": "blue",
+          "countLabel": "four files, one spec",
+          "headline": "One spec, [four] deliverables",
+          "sourceLabel": "long.json",
+          "tallLabel": "9:16 vertical",
+          "variantLabels": [
+            "dark",
+            "light"
+          ],
+          "wideLabel": "16:9 widescreen"
+        }
+      },
+      "durationFrames": 238,
+      "id": "s08",
+      "narration": "One spec gives you widescreen and vertical, each in dark and light. Four files, no extra work.",
+      "timingSource": "tts",
+      "transition": "zoom",
+      "type": "ASPECT_TWIN",
+      "audio": "audio/iauteur_long_s08.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "pipelineGate": {
+          "atWord": 5.583,
+          "checks": [
+            "budgets",
+            "structure",
+            "word anchors"
+          ],
+          "color": "green",
+          "footNote": "bad output fails loudly",
+          "gateLabel": "the linter",
+          "headline": "The model proposes, code [judges]",
+          "outputLabel": "rendered video",
+          "passLabel": "passes",
+          "proposerLabel": "any model",
+          "rejectLabel": "rejected, sent back"
+        }
+      },
+      "durationFrames": 254,
+      "id": "s09",
+      "narration": "Your model only ever proposes the JSON. Deterministic code is the judge, so bad output fails loudly.",
+      "timingSource": "tts",
+      "transition": "dip",
+      "type": "PIPELINE_GATE",
+      "audio": "audio/iauteur_long_s09.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "message": "Describe it. Let the renderer do the rest.",
+        "sub": "iAuteur — spec in, film out"
+      },
+      "durationFrames": 140,
+      "id": "s10",
+      "narration": "Describe the video you want, and let the renderer do the rest.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "OUTRO_CTA",
+      "audio": "audio/iauteur_long_s10.mp3"
+    }
+  ],
+  "thumbnail": {
+    "asset": "img:iauteur_logo.png",
+    "badge": "made by iAuteur",
+    "title": "WORDS IN, FILM OUT"
+  }
+}

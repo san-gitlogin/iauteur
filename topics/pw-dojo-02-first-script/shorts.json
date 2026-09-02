@@ -1,0 +1,217 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP02 shorts: the five moves",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "the five moves every Playwright script makes, in order",
+    "openLoop": "What is line one of a Playwright script?",
+    "analogy": "Open the theater, raise the curtain, take a bow.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Every Playwright script is the same 5 moves #playwright #python",
+      "description": "Open up, a theater, a stage, perform, close. Full free course in the Playwright Dojo.",
+      "tags": [
+        "playwright",
+        "python",
+        "automation",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "THE 5 MOVES",
+    "badge": "Dojo · EP 2",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Every Playwright script ever written is the same five moves. Learn the shape once.",
+      "data": {
+        "headline": "THE SAME 5 MOVES",
+        "subtext": "every script, every time",
+        "heroAsset": "lucide:shapes",
+        "headlineAtWord": 3,
+        "heroAtWord": 7.917
+      },
+      "durationFrames": 187,
+      "audio": "audio/pw-dojo-02-first-script_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "The browser is a theater. A page is a stage inside it. A real stage, with actors on it.",
+      "data": {
+        "stage": {
+          "marquee": "the browser",
+          "curtain": "raising",
+          "actors": [
+            {
+              "label": "a button",
+              "kind": "button",
+              "atWord": 8.75
+            },
+            {
+              "label": "a text box",
+              "kind": "field",
+              "atWord": 9.667
+            },
+            {
+              "label": "a link",
+              "kind": "link",
+              "atWord": 11.417
+            }
+          ],
+          "caption": "browser = theater, page = stage",
+          "atWord": 3.583
+        }
+      },
+      "durationFrames": 218,
+      "audio": "audio/pw-dojo-02-first-script_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "STEP_FLOW",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Open the company. Open a theater. Get a stage. Perform. Then close it all down.",
+      "data": {
+        "source": "The Playwright Dojo",
+        "steps": [
+          {
+            "kicker": "1",
+            "title": "Open up",
+            "sub": "sync_playwright()",
+            "atWord": 3
+          },
+          {
+            "kicker": "2",
+            "title": "A theater",
+            "sub": "launch()",
+            "atWord": 5.083
+          },
+          {
+            "kicker": "3",
+            "title": "A stage",
+            "sub": "new_page()",
+            "atWord": 8.083
+          },
+          {
+            "kicker": "4",
+            "title": "Perform",
+            "sub": "goto, click, read",
+            "atWord": 9.167
+          },
+          {
+            "kicker": "5",
+            "title": "Close up",
+            "sub": "close()",
+            "atWord": 10.167
+          }
+        ]
+      },
+      "durationFrames": 204,
+      "audio": "audio/pw-dojo-02-first-script_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Nine lines. It opens a browser, visits a page, reads the title, saves a photo and closes.",
+      "data": {
+        "code": {
+          "filename": "first.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "with sync_playwright() as p:"
+            },
+            {
+              "text": "    browser = p.chromium.launch()"
+            },
+            {
+              "text": "    page = browser.new_page()"
+            },
+            {
+              "text": "    page.goto(\"https://playwright.dev\")"
+            },
+            {
+              "text": "    print(page.title())"
+            },
+            {
+              "text": "    browser.close()"
+            }
+          ],
+          "atWord": 4
+        }
+      },
+      "durationFrames": 227,
+      "audio": "audio/pw-dojo-02-first-script_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "THEATER_STAGE",
+      "transition": "clock",
+      "background": "zoneA",
+      "narration": "And close is the curtain coming down. Lights off, keys handed back.",
+      "data": {
+        "stage": {
+          "marquee": "browser.close()",
+          "curtain": "falling",
+          "actors": [
+            {
+              "label": "a button",
+              "kind": "button"
+            },
+            {
+              "label": "a link",
+              "kind": "link"
+            }
+          ],
+          "caption": "curtain down, lights off",
+          "atWord": 3.833
+        }
+      },
+      "durationFrames": 158,
+      "audio": "audio/pw-dojo-02-first-script_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Every line explained, free, at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 125,
+      "audio": "audio/pw-dojo-02-first-script_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

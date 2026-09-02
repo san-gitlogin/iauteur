@@ -1,0 +1,830 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP13: Screenshots, Video & Trace",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how a Playwright trace lets you rewind a CI failure instead of guessing at logs",
+    "openLoop": "It failed in CI at 3am and passes on your machine — how do you even start?",
+    "analogy": "A trace is the black box flight recorder of your test suite.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #13 — screenshots, video and the trace viewer",
+      "description": "Screenshots, video and tracing — and why --tracing retain-on-failure turns any red CI test into a time-travel debugger you can scrub through.",
+      "tags": [
+        "playwright",
+        "python",
+        "trace viewer",
+        "screenshot",
+        "video",
+        "debugging",
+        "CI"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Screenshots, Video & Trace",
+    "badge": "Dojo · EP 13",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "REWIND THE FAILURE",
+    "badge": "EP 13 · TRACE",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Three in the morning. Your build has gone red, and the test that broke? Passes on your laptop. Every single time.",
+      "data": {
+        "headline": "RED IN CI. GREEN AT HOME.",
+        "subtext": "and all you have is a log",
+        "heroAsset": "lucide:camera",
+        "headlineAtWord": 5.167,
+        "heroAtWord": 11.833
+      },
+      "durationFrames": 231,
+      "audio": "audio/pw-dojo-13-evidence_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Today you stop guessing, because a test run can leave real evidence behind. If you ask for it.",
+      "data": {
+        "title": "Screenshots, Video & Trace",
+        "subtitle": "The Playwright Dojo · Episode 13"
+      },
+      "durationFrames": 192,
+      "audio": "audio/pw-dojo-13-evidence_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three kinds of evidence today, and honestly, they keep getting better as we go. One photo, one moment. Then a recording of the whole run, start to finish. And then the good one, a flight recorder you can rewind and poke around inside.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:image",
+              "label": "a photo",
+              "color": "blue",
+              "atWord": 12.167
+            },
+            {
+              "icon": "lucide:video",
+              "label": "a recording",
+              "color": "purple",
+              "atWord": 19.333
+            },
+            {
+              "icon": "lucide:history",
+              "label": "a time machine",
+              "color": "green",
+              "atWord": 24.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 433,
+      "audio": "audio/pw-dojo-13-evidence_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "We will start easy. Although even the easy one hides a catch.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Photos of the stage",
+          "subtitle": "three different crops"
+        }
+      },
+      "durationFrames": 135,
+      "audio": "audio/pw-dojo-13-evidence_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "SHOT_SCOPE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Three ways to take a photo, and here is the thing. They don't hand you the same picture at all. The first grabs whatever fits on screen right now. That's it. The second scrolls your entire page, top to bottom, and stitches the whole lot into one tall image. And the third? One element. Nothing around it.",
+      "data": {
+        "shotScope": {
+          "pageTitle": "your dashboard",
+          "foldLabel": "the fold",
+          "blocks": [
+            "Top bar",
+            "Summary cards",
+            "The chart",
+            "Recent orders",
+            "Footer"
+          ],
+          "foldAfter": 2,
+          "elementIndex": 2,
+          "caption": "same page. three very different files.",
+          "color": "blue",
+          "atWord": 2.667,
+          "shots": [
+            {
+              "label": "page.screenshot()",
+              "title": "viewport",
+              "sub": "now.png",
+              "detail": "just what fits on screen",
+              "atWord": 13.25
+            },
+            {
+              "label": "full_page=True",
+              "title": "full",
+              "sub": "whole.png",
+              "detail": "scrolled, then stitched",
+              "atWord": 22.333
+            },
+            {
+              "label": "chart.screenshot()",
+              "title": "element",
+              "sub": "chart.png",
+              "detail": "one element, nothing else",
+              "atWord": 32.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 581,
+      "audio": "audio/pw-dojo-13-evidence_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Now, the real lines. The first one's the plain call. Hand Playwright a path, you get a png back. The second adds full page equals true, and that one little argument changes the file completely. The third hangs the very same call off a locator, instead of off the page. Small difference. Huge result.",
+      "data": {
+        "codeRun": {
+          "filename": "shots.py",
+          "language": "py",
+          "resultLabel": "what lands on disk",
+          "color": "blue",
+          "atWord": 2.75,
+          "caption": "the same verb, three different subjects",
+          "lines": [
+            {
+              "text": "page.screenshot(path=\"now.png\")",
+              "detail": "what is on screen right now",
+              "sub": "now.png, one screenful",
+              "label": "file",
+              "atWord": 9.583
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "page.screenshot(path=\"whole.png\",",
+              "detail": "the whole scrolled page",
+              "sub": "whole.png, top to bottom",
+              "label": "file",
+              "atWord": 21.583
+            },
+            {
+              "text": "                full_page=True)"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "page.get_by_test_id(\"chart\")",
+              "detail": "off a locator, not the page",
+              "sub": "chart.png, one element",
+              "label": "file",
+              "atWord": 34.5
+            },
+            {
+              "text": "    .screenshot(path=\"chart.png\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 578,
+      "audio": "audio/pw-dojo-13-evidence_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "FLAG_HARVEST",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "But here's the move nobody tells beginners about, and you don't call screenshot for any of it. You add one flag to the command you're already running. That's the whole change. Now every test that fails drops a photo on its own, and the ones that pass leave you absolutely nothing. Look at the gap between those rows. Not one line of code went into your test file.",
+      "data": {
+        "flagHarvest": {
+          "flag": "--screenshot only-on-failure",
+          "command": "pytest",
+          "folder": "test-results/",
+          "quietNote": "nothing kept",
+          "artifacts": [
+            "test-failed-1.png"
+          ],
+          "caption": "zero code. evidence only where it failed.",
+          "color": "orange",
+          "atWord": 2.5,
+          "harvestAtWord": 35.417,
+          "tests": [
+            {
+              "label": "test_login",
+              "title": "pass",
+              "atWord": 15.167
+            },
+            {
+              "label": "test_checkout",
+              "title": "fail",
+              "atWord": 21.917
+            },
+            {
+              "label": "test_search",
+              "title": "pass",
+              "atWord": 27.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 631,
+      "audio": "audio/pw-dojo-13-evidence_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Run that, and a folder just appears, right next to your tests. One failing test. One crime scene photo, sitting there waiting for somebody to open it.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pytest --screenshot only-on-failure",
+              "exitCode": 1,
+              "atWord": 5.833,
+              "output": [
+                "test_checkout.py F                    [100%]",
+                "",
+                "test-results/test-checkout-chromium/",
+                "    test-failed-1.png"
+              ]
+            }
+          ],
+          "atWord": 5.833
+        }
+      },
+      "durationFrames": 284,
+      "audio": "audio/pw-dojo-13-evidence_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Keep these two apart in your head. Screenshots you write yourself are for people. Bug reports, docs, something a human being actually reads. The flag is for machines. And the flag is what saves you at three in the morning, when nobody's awake to press a button.",
+      "data": {
+        "ruleTest": {
+          "kicker": "two different jobs",
+          "rule": "write screenshots for humans, flag them for CI",
+          "okLabel": "automatic",
+          "noLabel": "by hand",
+          "caption": "one you choose. one just happens.",
+          "color": "orange",
+          "atWord": 1.75,
+          "cases": [
+            {
+              "text": "--screenshot only-on-failure",
+              "title": "ok",
+              "sub": "every failure, no code",
+              "atWord": 16.667
+            },
+            {
+              "text": "page.screenshot() in a test",
+              "title": "no",
+              "sub": "only where you remembered",
+              "atWord": 24.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 463,
+      "audio": "audio/pw-dojo-13-evidence_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Photos show you the ending. Sometimes, though, you need to watch the whole thing unfold.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Record the play",
+          "subtitle": "video is a context setting"
+        }
+      },
+      "durationFrames": 158,
+      "audio": "audio/pw-dojo-13-evidence_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "FIXTURE_CREW",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Remember the dressing room, back in episode eight? Video's a setting on that. Not on the page, not on the browser. The recording kicks off the instant your context gets created, and the file only lands on disk when that same context closes again. So the dressing room is the thing wearing the camera. Everything happening on the stage inside ends up on the tape.",
+      "data": {
+        "fixtureCrew": {
+          "testName": "test_checkout",
+          "askFor": "page",
+          "crewLabel": "recording context",
+          "bodyLabel": "the camera is rolling",
+          "teardownLabel": "closed, video written",
+          "caption": "the dressing room wears the camera",
+          "color": "purple",
+          "atWord": 2.583,
+          "handoffAtWord": 20.5,
+          "teardownAtWord": 34.5,
+          "stages": [
+            {
+              "label": "browser",
+              "sub": "the building",
+              "atWord": 10.333
+            },
+            {
+              "label": "context",
+              "sub": "camera lives here",
+              "color": "purple",
+              "atWord": 14.25
+            },
+            {
+              "label": "page",
+              "sub": "the stage",
+              "atWord": 17.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 629,
+      "audio": "audio/pw-dojo-13-evidence_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "In a plain script, here's how that looks. Pass a folder in when you build the context. That single argument is what switches recording on. Then your test does whatever your test does. And the file? Only turns up when you close that context. Forget the close, and you get nothing at all.",
+      "data": {
+        "codeRun": {
+          "filename": "video.py",
+          "language": "py",
+          "resultLabel": "what happens",
+          "color": "purple",
+          "atWord": 2.583,
+          "caption": "starts on create. saves on close.",
+          "lines": [
+            {
+              "text": "context = browser.new_context(",
+              "detail": "recording starts right here",
+              "sub": "the camera is rolling",
+              "label": "start",
+              "atWord": 8.833
+            },
+            {
+              "text": "    record_video_dir=\"videos/\")"
+            },
+            {
+              "text": "page = context.new_page()"
+            },
+            {
+              "text": "# ... your test runs ...",
+              "detail": "everything gets recorded",
+              "sub": "still rolling",
+              "label": "live",
+              "atWord": 21.417
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "context.close()",
+              "detail": "and only NOW is the file written",
+              "sub": "videos/xyz.webm",
+              "label": "saved",
+              "atWord": 30.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 521,
+      "audio": "audio/pw-dojo-13-evidence_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "With pytest, it's a flag again, so you're never managing contexts by hand. Retain on failure records every single test, then throws the boring ones straight in the bin and keeps the failures for you.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pytest --video retain-on-failure",
+              "exitCode": 1,
+              "atWord": 8.583,
+              "output": [
+                "test_checkout.py F                    [100%]",
+                "",
+                "test-results/test-checkout-chromium/",
+                "    video.webm"
+              ]
+            }
+          ],
+          "atWord": 8.583
+        }
+      },
+      "durationFrames": 341,
+      "audio": "audio/pw-dojo-13-evidence_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Notice the wording on that flag, because the wording really matters. Retain on failure records everything, then quietly deletes whatever passed. Ninety videos of green tests? That's just disk space you pay for and never open. Be honest. Have you ever watched one?",
+      "data": {
+        "ruleTest": {
+          "kicker": "why not keep it all",
+          "rule": "record everything, keep only the failures",
+          "okLabel": "worth the disk",
+          "noLabel": "just clutter",
+          "caption": "nobody has ever watched a passing test",
+          "color": "purple",
+          "atWord": 1.917,
+          "cases": [
+            {
+              "text": "video of the run that broke",
+              "title": "ok",
+              "sub": "you will watch this one",
+              "atWord": 17.667
+            },
+            {
+              "text": "video of ninety green tests",
+              "title": "no",
+              "sub": "gigabytes, never opened",
+              "atWord": 24.167
+            },
+            {
+              "text": "a trace of every green run",
+              "title": "no",
+              "sub": "same problem, bigger files",
+              "atWord": 27.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 500,
+      "audio": "audio/pw-dojo-13-evidence_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "And now the one that genuinely changes how you debug. Forever.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The black box",
+          "subtitle": "the crown jewel"
+        }
+      },
+      "durationFrames": 145,
+      "audio": "audio/pw-dojo-13-evidence_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "A trace is the flight recorder. For every single step, Playwright keeps a picture of the page before and after, the action itself, the console, the network calls. All of that, zipped into one file. Two lines switch the recorder on and off.",
+      "data": {
+        "codeRun": {
+          "filename": "trace.py",
+          "language": "py",
+          "resultLabel": "what is being kept",
+          "color": "green",
+          "atWord": 2.75,
+          "caption": "every step, with everything around it",
+          "lines": [
+            {
+              "text": "context.tracing.start(",
+              "detail": "start recording everything",
+              "sub": "pictures, actions, logs",
+              "label": "on",
+              "atWord": 11.333
+            },
+            {
+              "text": "    screenshots=True, snapshots=True,"
+            },
+            {
+              "text": "    sources=True)"
+            },
+            {
+              "text": "# ... your test runs ..."
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "context.tracing.stop(",
+              "detail": "and zip the whole recording",
+              "sub": "trace.zip, one file",
+              "label": "saved",
+              "atWord": 28.583
+            },
+            {
+              "text": "    path=\"trace.zip\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 466,
+      "audio": "audio/pw-dojo-13-evidence_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "TRACE_SCRUB",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Now open that zip, and here's where a trace stops being a log and starts being a recording. Every action you performed, laid out along a timeline. Click any one of them, any one at all, and you're looking at the page exactly as it stood at that instant, with the console line and the network call from that step sitting right beside it. And you can go backwards. Straight back to the step that broke, and wander around inside it.",
+      "data": {
+        "traceScrub": {
+          "traceFile": "trace.zip",
+          "openWith": "playwright show-trace trace.zip",
+          "snapshot": [
+            "Your basket",
+            "Card number",
+            "Pay now",
+            "Receipt"
+          ],
+          "caption": "the page, exactly as it was back then",
+          "color": "green",
+          "atWord": 3.083,
+          "rewindAtWord": 38.75,
+          "steps": [
+            {
+              "label": "goto /checkout",
+              "sub": "navigated to /checkout",
+              "detail": "GET /checkout 200",
+              "atWord": 13.333
+            },
+            {
+              "label": "fill card number",
+              "sub": "typed 16 digits",
+              "detail": "no request",
+              "atWord": 19.5
+            },
+            {
+              "label": "click Pay now",
+              "sub": "clicked Pay now",
+              "detail": "POST /pay 500",
+              "atWord": 25
+            },
+            {
+              "label": "expect receipt",
+              "title": "fail",
+              "sub": "TimeoutError: not found",
+              "detail": "no response",
+              "atWord": 30.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 688,
+      "audio": "audio/pw-dojo-13-evidence_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "FLAG_HARVEST",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "In CI, though, you're never calling any of that by hand. Same flag shape you saw back in chapter one. Every red test leaves a zip behind, every green one leaves nothing, and your build quietly uploads that whole folder for you to grab later.",
+      "data": {
+        "flagHarvest": {
+          "flag": "--tracing retain-on-failure",
+          "command": "pytest",
+          "folder": "test-results/",
+          "quietNote": "nothing kept",
+          "artifacts": [
+            "trace.zip"
+          ],
+          "caption": "red tests hand you a recording",
+          "color": "green",
+          "atWord": 1.75,
+          "harvestAtWord": 24,
+          "tests": [
+            {
+              "label": "test_login",
+              "title": "pass",
+              "atWord": 11
+            },
+            {
+              "label": "test_checkout",
+              "title": "fail",
+              "atWord": 14.833
+            },
+            {
+              "label": "test_search",
+              "title": "pass",
+              "atWord": 18.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 435,
+      "audio": "audio/pw-dojo-13-evidence_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So here's the whole thing on one screen. Retain on failure in CI. Every red test hands you a zip. Download that, run show trace, and suddenly you're standing inside the failure itself.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pytest --tracing retain-on-failure",
+              "exitCode": 1,
+              "atWord": 8.75,
+              "output": [
+                "test-results/test-checkout-chromium/",
+                "    trace.zip",
+                "",
+                "$ playwright show-trace trace.zip"
+              ]
+            }
+          ],
+          "atWord": 8.75
+        }
+      },
+      "durationFrames": 364,
+      "audio": "audio/pw-dojo-13-evidence_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check, and this one turns up in interviews constantly. A test fails only in CI, never on your laptop. What's the modern move? Pause here if you want longer. Ready? The answer is C. Trace the run, then open the zip.",
+      "data": {
+        "quiz": {
+          "question": "It fails only in CI, never locally. The modern move?",
+          "options": [
+            {
+              "text": "Add time.sleep(10) everywhere"
+            },
+            {
+              "text": "Delete the test"
+            },
+            {
+              "text": "Trace it, then open the zip"
+            },
+            {
+              "text": "SSH in and squint at the logs"
+            }
+          ],
+          "answerIndex": 2,
+          "revealAtWord": 25.917,
+          "why": "The trace replays the real CI run, step by step, with the DOM.",
+          "atWord": 1.833
+        }
+      },
+      "durationFrames": 440,
+      "audio": "audio/pw-dojo-13-evidence_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "And here's the sentence to actually say out loud in an interview. We run tracing retain on failure in CI, so any red test hands us a time travel debugger. That's it. That's the whole answer.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the interview answer",
+          "rule": "any red test hands you a time-travel debugger",
+          "okLabel": "you replay it",
+          "noLabel": "you guess",
+          "caption": "the best debugging tool in the industry",
+          "color": "green",
+          "atWord": 1.833,
+          "cases": [
+            {
+              "text": "a trace.zip from the CI run",
+              "title": "ok",
+              "sub": "DOM, console and network",
+              "atWord": 13.667
+            },
+            {
+              "text": "a wall of CI log output",
+              "title": "no",
+              "sub": "no page, no snapshots",
+              "atWord": 19.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 385,
+      "audio": "audio/pw-dojo-13-evidence_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Three lines to close Act Two with. Screenshots catch one moment. Video gives you the whole play, start to finish. And a trace? That lets you rewind the flight, then wander around inside it.",
+      "data": {
+        "heading": "Evidence, in three lines",
+        "points": [
+          {
+            "text": "screenshots for a moment",
+            "atWord": 8.667
+          },
+          {
+            "text": "video for the whole run",
+            "atWord": 14.667
+          },
+          {
+            "text": "a trace to rewind and inspect",
+            "atWord": 19.833
+          }
+        ]
+      },
+      "durationFrames": 370,
+      "audio": "audio/pw-dojo-13-evidence_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "That's Act Two done. Next time we crack open Act Three with network interception, where you take over the mail room entirely. The whole course is free, over at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Network — Intercept & Mock",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 328,
+      "audio": "audio/pw-dojo-13-evidence_long_s23.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,779 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP16: API Testing, Skip the Stage",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how playwright.request runs HTTP tests with no browser, and why setup belongs there",
+    "openLoop": "Playwright will run a whole test without ever opening a browser.",
+    "analogy": "the API is the backstage phone — you call the director instead of watching the play.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #16 — API testing with no browser",
+      "description": "playwright.request.new_context() speaks HTTP with no browser at all — about 50x faster. Use the API for setup and the UI for what users actually do.",
+      "tags": [
+        "playwright",
+        "python",
+        "api testing",
+        "APIRequestContext",
+        "pytest",
+        "request fixture"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "API — Skip the Stage",
+    "badge": "Dojo · EP 16",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "NO BROWSER",
+    "badge": "EP 16 · API",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Here's a thing nobody tells you on day one. Playwright will happily run a test without opening a browser at all.",
+      "data": {
+        "headline": "NO BROWSER. NO PROBLEM.",
+        "subtext": "the test still passes",
+        "heroAsset": "lucide:phone-call",
+        "headlineAtWord": 5.5,
+        "heroAtWord": 9.917
+      },
+      "durationFrames": 209,
+      "audio": "audio/pw-dojo-16-api-testing_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Sounds like cheating. It sort of is, and it's completely legitimate.",
+      "data": {
+        "title": "API Testing — Skip the Stage",
+        "subtitle": "The Playwright Dojo · Episode 16"
+      },
+      "durationFrames": 152,
+      "audio": "audio/pw-dojo-16-api-testing_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things today. Why a test with no browser finishes in half a second. What that unlocks for the boring setup nobody enjoys writing. And the one moment you should absolutely still open the browser, because skipping it there would be a mistake.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:phone-call",
+              "label": "no browser",
+              "atWord": 4.917
+            },
+            {
+              "icon": "lucide:package-plus",
+              "label": "setup by API",
+              "color": "green",
+              "atWord": 13.583
+            },
+            {
+              "icon": "lucide:eye",
+              "label": "when not to",
+              "color": "orange",
+              "atWord": 21.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 426,
+      "audio": "audio/pw-dojo-16-api-testing_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "So. Playwright, with the stage lights off entirely.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The backstage phone",
+          "subtitle": "HTTP without a browser"
+        }
+      },
+      "durationFrames": 141,
+      "audio": "audio/pw-dojo-16-api-testing_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "BACKSTAGE_PHONE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Say you want to know what language some repository is written in. Down the browser route, that's honest work. Boot a browser. Load the page. Wait for the whole DOM to settle. Meanwhile — over here — one call, straight to the server, and it's already back. Six hundred milliseconds. The browser hasn't even finished reading the text off the page it just spent five seconds loading. Same answer, either way. About fifty times faster one way than the other.",
+      "data": {
+        "backstagePhone": {
+          "question": "what language is this repo in?",
+          "stageLabel": "the whole play",
+          "hopLabel": "the backstage phone",
+          "hop": "api.get(\"/repos/microsoft/pw\")",
+          "hopTime": "0.61s",
+          "stageTime": "6.8s",
+          "verdict": "~50x faster",
+          "caption": "same answer. no stage at all.",
+          "color": "green",
+          "atWord": 3.667,
+          "steps": [
+            {
+              "label": "launch a browser",
+              "detail": "1.9s",
+              "atWord": 11.5
+            },
+            {
+              "label": "load the page",
+              "detail": "3.4s",
+              "atWord": 14.167
+            },
+            {
+              "label": "wait for the DOM",
+              "detail": "5.1s",
+              "atWord": 17.667
+            },
+            {
+              "label": "read the text",
+              "detail": "6.8s",
+              "atWord": 43.917
+            }
+          ],
+          "hopAtWord": 28.167,
+          "verdictAtWord": 49.167
+        }
+      },
+      "durationFrames": 862,
+      "audio": "audio/pw-dojo-16-api-testing_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here's what that looks like as actual code. You ask Playwright for a request context instead of a browser — that's the object that speaks HTTP and nothing else. Give it a base URL so you're not retyping the host in every test. Then get, post, put, delete, whatever you need. And notice the assertion at the bottom is a plain Python assert. No expect, no waiting. There's no DOM to wait for.",
+      "data": {
+        "codeRun": {
+          "filename": "test_api.py",
+          "language": "py",
+          "resultLabel": "what comes back",
+          "color": "blue",
+          "atWord": 2.667,
+          "caption": "no browser opens for any of this",
+          "lines": [
+            {
+              "text": "@pytest.fixture(scope=\"session\")",
+              "detail": "one request context, reused",
+              "sub": "session scope, like ep 15",
+              "label": "once",
+              "atWord": 12
+            },
+            {
+              "text": "def api(playwright: Playwright):"
+            },
+            {
+              "text": "    ctx = playwright.request.new_context(",
+              "detail": "this speaks HTTP, not clicks",
+              "sub": "no browser is launched at all",
+              "label": "http",
+              "atWord": 18.75
+            },
+            {
+              "text": "        base_url=\"https://api.github.com\")",
+              "detail": "set the host once",
+              "sub": "every call is a short path now",
+              "label": "base",
+              "atWord": 28.833
+            },
+            {
+              "text": "    yield ctx"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "def test_get_repo(api):"
+            },
+            {
+              "text": "    resp = api.get(\"/repos/pw\")",
+              "detail": "the actual call",
+              "sub": "status, ok, json() come back",
+              "label": "get",
+              "atWord": 37.333
+            },
+            {
+              "text": "    assert resp.ok"
+            },
+            {
+              "text": "    assert resp.json()[\"lang\"] == \"TS\"",
+              "detail": "a plain assert is fine here",
+              "sub": "nothing to wait for",
+              "label": "assert",
+              "atWord": 49.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 760,
+      "audio": "audio/pw-dojo-16-api-testing_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "API_REQUEST_RESPONSE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "And what comes back isn't a page. It's a response object — a status code, an ok flag that's true for anything in the two hundreds, and a json method that hands you a Python dictionary. That's the whole surface. Three things.",
+      "data": {
+        "api": {
+          "method": "GET",
+          "path": "/repos/microsoft/pw",
+          "requestLines": [
+            "Accept: application/json"
+          ],
+          "status": "200",
+          "statusText": "OK",
+          "clientLabel": "your test",
+          "serverLabel": "the API",
+          "responseLines": [
+            "{",
+            "  \"language\": \"TS\",",
+            "  \"stars\": 68412 }"
+          ],
+          "atWord": 12.333
+        }
+      },
+      "durationFrames": 429,
+      "audio": "audio/pw-dojo-16-api-testing_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Run it, and honestly the first time you see this you double-take. Point six one seconds. A browser test doing the same job would still be booting.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "atWord": 1,
+          "commands": [
+            {
+              "cmd": "pytest test_api.py -v",
+              "output": [
+                "test_api.py::test_get_repo PASSED          [100%]",
+                "",
+                "============ 1 passed in 0.61s ============",
+                "# no browser = lightning fast"
+              ],
+              "exitCode": 0,
+              "atWord": 6.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 274,
+      "audio": "audio/pw-dojo-16-api-testing_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "ERROR_TRACE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Course, sooner or later one of these goes red. And an API failure reads nothing like a browser one — no screenshot, no video, no trace. Just the assert that blew up, and whatever the server sent back. Four oh four? Check your path.",
+      "data": {
+        "callStack": {
+          "mode": "trace",
+          "exception": "AssertionError: assert resp.ok",
+          "culprit": 1,
+          "atWord": 1.833,
+          "frames": [
+            {
+              "fn": "test_get_repo",
+              "file": "test_api.py",
+              "line": 14,
+              "sub": "your test, the assert line"
+            },
+            {
+              "fn": "assert resp.ok",
+              "file": "test_api.py",
+              "line": 15,
+              "sub": "resp.status was 404",
+              "color": "red"
+            },
+            {
+              "fn": "GET /repos/microsft/pw",
+              "file": "api.github.com",
+              "sub": "typo in the path, look",
+              "color": "orange"
+            }
+          ]
+        }
+      },
+      "durationFrames": 462,
+      "audio": "audio/pw-dojo-16-api-testing_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Right, that's the party trick out of the way. Here's the part you'll genuinely reach for every week.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Setup by phone",
+          "subtitle": "the pattern that pays"
+        }
+      },
+      "durationFrames": 176,
+      "audio": "audio/pw-dojo-16-api-testing_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "STAGE_HANDOFF",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Picture a test for deleting a todo. Before you can delete one, a todo has to exist — so most people click through the whole create flow first, in the browser, every single run. But wait. Nobody's testing the create form today. That's scenery. So make the todo over the phone instead, in forty milliseconds, and only then open the page. Everything lit up here is the actual thing under test. Everything above it was just getting the stage ready.",
+      "data": {
+        "stageHandoff": {
+          "testName": "test_delete_todo",
+          "railLabel": "setup · by API",
+          "stageLabel": "the test · by UI",
+          "handoffLabel": "hang up. open the page.",
+          "verdict": "when it fails, you know why",
+          "caption": "scenery by phone. the scene on stage.",
+          "color": "blue",
+          "atWord": 3.417,
+          "steps": [
+            {
+              "label": "api.post(\"/api/todos\")",
+              "sub": "40ms",
+              "title": "api",
+              "atWord": 23.5
+            },
+            {
+              "label": "read the new id back",
+              "sub": "still no browser",
+              "title": "api",
+              "atWord": 27.583
+            },
+            {
+              "label": "page.goto(\"/todos\")",
+              "sub": "now we look",
+              "title": "ui",
+              "atWord": 37.25
+            },
+            {
+              "label": "click Delete on the row",
+              "sub": "the behaviour",
+              "title": "ui",
+              "atWord": 40.417
+            },
+            {
+              "label": "expect(row).not_to_be_visible()",
+              "sub": "the question",
+              "title": "ui",
+              "atWord": 42.833
+            }
+          ],
+          "handoffAtWord": 33.167,
+          "verdictAtWord": 45.25
+        }
+      },
+      "durationFrames": 794,
+      "audio": "audio/pw-dojo-16-api-testing_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "In code the split is obvious once you've seen it. Top half, the phone call — post a todo, grab the id it hands back. That's your setup, and it never flakes, because there's no form and no clicking. Bottom half, the browser opens and does exactly one job: find that row, delete it, check it's gone.",
+      "data": {
+        "codeRun": {
+          "filename": "test_delete.py",
+          "language": "py",
+          "resultLabel": "two transports",
+          "color": "green",
+          "atWord": 2.583,
+          "caption": "setup by API. behaviour by UI.",
+          "lines": [
+            {
+              "text": "def test_delete_todo(page, api):"
+            },
+            {
+              "text": "    # SETUP by API — never flakes",
+              "detail": "the phone call",
+              "sub": "no form, no clicking",
+              "label": "setup",
+              "atWord": 8.25
+            },
+            {
+              "text": "    resp = api.post(\"/api/todos\","
+            },
+            {
+              "text": "        data={\"title\": \"Doomed todo\"})",
+              "detail": "a todo now exists",
+              "sub": "40ms, no browser yet",
+              "label": "made",
+              "atWord": 14.75
+            },
+            {
+              "text": "    todo_id = resp.json()[\"id\"]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    # TEST by UI — the real question",
+              "detail": "now the browser opens",
+              "sub": "this part is the actual test",
+              "label": "test",
+              "atWord": 27.667
+            },
+            {
+              "text": "    page.goto(\"/todos\")"
+            },
+            {
+              "text": "    row = page.get_by_role(\"listitem\")"
+            },
+            {
+              "text": "        has_text=\"Doomed todo\")",
+              "detail": "find it, delete it, check it went",
+              "sub": "one job, nothing else",
+              "label": "done",
+              "atWord": 39
+            }
+          ]
+        }
+      },
+      "durationFrames": 574,
+      "audio": "audio/pw-dojo-16-api-testing_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "BROWSER_STEP",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "And here's the bit I find genuinely satisfying. Watch the page. That todo was never typed into anything — it arrived over the phone, forty milliseconds before the browser even opened. But there it is on the list, exactly as if somebody had sat there and created it. The app can't tell the difference. Why would it? A row is a row.",
+      "data": {
+        "browserStep": {
+          "url": "app.example.com/todos",
+          "screenTitle": "Your todos",
+          "caption": "seeded by phone. deleted by hand.",
+          "color": "green",
+          "atWord": 2.667,
+          "steps": [
+            {
+              "text": "page.goto(\"/todos\")",
+              "title": "goto",
+              "label": "open the list",
+              "detail": "the todos page",
+              "atWord": 8.5
+            },
+            {
+              "text": "row = get_by_role(\"listitem\")",
+              "title": "check",
+              "label": "there it is already",
+              "detail": "Doomed todo",
+              "sub": "Doomed todo",
+              "atWord": 21.833
+            },
+            {
+              "text": "row.get_by_role(\"button\").click()",
+              "title": "click",
+              "label": "now delete it",
+              "detail": "Delete",
+              "atWord": 31
+            },
+            {
+              "text": "expect(row).not_to_be_visible()",
+              "title": "assert",
+              "label": "and it is gone",
+              "detail": "the row",
+              "sub": "gone",
+              "atWord": 35.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 640,
+      "audio": "audio/pw-dojo-16-api-testing_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Quick one. You're testing that an admin can ban a user, and the test needs five users to already exist. What's the best setup? Have a think. Ready? It's B. The signup form isn't what you're testing today — it's scenery.",
+      "data": {
+        "quiz": {
+          "question": "A ban test needs 5 users to exist. Best setup?",
+          "options": [
+            {
+              "text": "Sign all 5 up through the UI"
+            },
+            {
+              "text": "Create 5 by API, ban in the UI"
+            },
+            {
+              "text": "Test it with zero users"
+            },
+            {
+              "text": "Ask a coworker to make them"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 23.667,
+          "why": "Make them in a second by API. Spend UI time on the ban only.",
+          "atWord": 1.833
+        }
+      },
+      "durationFrames": 434,
+      "audio": "audio/pw-dojo-16-api-testing_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One question comes up every single time, so let's get ahead of it. What if the API needs you logged in? Almost all of them do. Well — remember that auth dot json file from last episode? The request context takes it too. Same file, same trick.",
+      "data": {
+        "codeRun": {
+          "filename": "conftest.py",
+          "language": "py",
+          "resultLabel": "an authed line",
+          "color": "purple",
+          "atWord": 2.667,
+          "caption": "the stamp works on the phone too",
+          "lines": [
+            {
+              "text": "ctx = playwright.request.new_context(",
+              "detail": "the same request context",
+              "sub": "still no browser anywhere",
+              "label": "ctx",
+              "atWord": 11.75
+            },
+            {
+              "text": "    base_url=\"https://api.example.com\",",
+              "detail": "the host, set once",
+              "sub": "every call is a short path",
+              "label": "base",
+              "atWord": 21.75
+            },
+            {
+              "text": "    storage_state=\"auth.json\")",
+              "detail": "hand it the stamp from ep 15",
+              "sub": "the API sees you logged in",
+              "label": "stamp",
+              "atWord": 31.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 488,
+      "audio": "audio/pw-dojo-16-api-testing_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Or maybe your API wants a bearer token in a header instead. There's a keyword for exactly that — extra HTTP headers. Set it once, when you build the context, and it rides along on every single call after. Then, when the run's finished, dispose of the context. That's mostly politeness, but it does close the connection properly.",
+      "data": {
+        "codeRun": {
+          "filename": "conftest.py",
+          "language": "py",
+          "resultLabel": "headers + cleanup",
+          "color": "purple",
+          "atWord": 2.667,
+          "caption": "set once. sent on every call.",
+          "lines": [
+            {
+              "text": "ctx = playwright.request.new_context(",
+              "detail": "same context, built again",
+              "sub": "this is still conftest.py",
+              "label": "ctx",
+              "atWord": 6.917
+            },
+            {
+              "text": "    extra_http_headers={",
+              "detail": "a header on every request",
+              "sub": "set it exactly once",
+              "label": "headers",
+              "atWord": 15.333
+            },
+            {
+              "text": "        \"Authorization\": \"Bearer ...\"})",
+              "detail": "whatever your API wants",
+              "sub": "a token, a key, an api-key",
+              "label": "token",
+              "atWord": 25.5
+            },
+            {
+              "text": "yield ctx"
+            },
+            {
+              "text": "ctx.dispose()",
+              "detail": "and hang up when you are done",
+              "sub": "closes the connection",
+              "label": "hang up",
+              "atWord": 39
+            }
+          ]
+        }
+      },
+      "durationFrames": 609,
+      "audio": "audio/pw-dojo-16-api-testing_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "One caution, though, before you go off and rewrite your entire suite over the weekend.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "When not to",
+          "subtitle": "the stage still matters"
+        }
+      },
+      "durationFrames": 169,
+      "audio": "audio/pw-dojo-16-api-testing_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "There's a line here, and it's worth knowing where it sits. Setting things up? Phone, every time. Checking a JSON field came back right? Phone again. But whether the delete button is actually clickable on a narrow screen — no phone call on earth answers that. Your users don't send HTTP requests. They click things.",
+      "data": {
+        "ruleTest": {
+          "kicker": "know the line",
+          "rule": "the API is for setup and data. the UI is for what users do.",
+          "okLabel": "phone it",
+          "noLabel": "open the page",
+          "caption": "users click. they do not send requests.",
+          "color": "orange",
+          "atWord": 2.833,
+          "cases": [
+            {
+              "text": "seed five users before the test",
+              "title": "ok",
+              "sub": "scenery, not the subject",
+              "atWord": 13.667
+            },
+            {
+              "text": "assert the JSON field came back",
+              "title": "ok",
+              "sub": "no DOM involved at all",
+              "atWord": 20.917
+            },
+            {
+              "text": "clean the seeded rows up after",
+              "title": "ok",
+              "sub": "teardown is scenery too",
+              "atWord": 26.417
+            },
+            {
+              "text": "is the Delete button clickable?",
+              "title": "no",
+              "sub": "only a real browser knows",
+              "atWord": 32.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 619,
+      "audio": "audio/pw-dojo-16-api-testing_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Three lines to walk away with. Playwright speaks HTTP with no browser at all, and that route runs about fifty times faster than the one you're used to. Set your world up over the phone, every time, because the setup was never the thing you were testing. Then open the browser for the one bit that actually is.",
+      "data": {
+        "heading": "Skip the stage, in four lines",
+        "points": [
+          {
+            "text": "request.new_context() — HTTP, no browser",
+            "atWord": 8.833
+          },
+          {
+            "text": "about fifty times faster than the UI",
+            "atWord": 16
+          },
+          {
+            "text": "setup by API, because setup is scenery",
+            "atWord": 23.167
+          },
+          {
+            "text": "the UI is for what users actually do",
+            "atWord": 28.167
+          }
+        ]
+      },
+      "durationFrames": 519,
+      "audio": "audio/pw-dojo-16-api-testing_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Next time, the trickiest stages there are — shadow DOM, and the locator tricks that get you inside it. Whole course is free, by the way, over at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Advanced Locators & Shadow DOM",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 286,
+      "audio": "audio/pw-dojo-16-api-testing_long_s20.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

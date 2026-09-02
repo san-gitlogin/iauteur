@@ -1,0 +1,995 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP01: Meet Playwright + Setup",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how Playwright drives real browsers from Python, why it waits for the page by default, and the two commands that install it",
+    "openLoop": "Why did everyone stop writing sleep(5) in their tests?",
+    "analogy": "A playwright writes plays: browser = theater, page = stage, locator = spotlight.",
+    "topicAxes": [
+      "skill-acquisition",
+      "tooling-shift"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #1 — Setup & Your First Look (2026)",
+      "altTitles": [
+        "Learn Playwright with Python — Episode 1: Meet Playwright"
+      ],
+      "description": "Start the Playwright Dojo: what Playwright is, why it beat the older tools, and the two commands that install it.",
+      "tags": [
+        "playwright",
+        "python",
+        "playwright python",
+        "browser automation",
+        "pytest",
+        "automation testing",
+        "playwright tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "MEET PLAYWRIGHT",
+    "badge": "Dojo · EP 1",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You click the same buttons, type the same login, check the same result. Then again tomorrow.",
+      "data": {
+        "headline": "AGAIN. AND AGAIN.",
+        "subtext": "the same clicks, every single day",
+        "heroAsset": "lucide:mouse-pointer-click",
+        "headlineAtWord": 1.917,
+        "heroAtWord": 7.25
+      },
+      "durationFrames": 192,
+      "audio": "audio/pw-dojo-01-setup_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "There is a tool that does every one of those clicks for you, and this is episode one of the Playwright Dojo.",
+      "data": {
+        "title": "MEET PLAYWRIGHT",
+        "subtitle": "The Playwright Dojo · Episode 1"
+      },
+      "durationFrames": 183,
+      "audio": "audio/pw-dojo-01-setup_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things to cover today. What Playwright actually is, why so many teams moved to it from the older tool, and the two commands that put it on your machine.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:drama",
+              "label": "What it is",
+              "atWord": 5.667
+            },
+            {
+              "icon": "lucide:rabbit",
+              "label": "Why this one",
+              "atWord": 9.75
+            },
+            {
+              "icon": "lucide:terminal",
+              "label": "Install it",
+              "atWord": 13.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 262,
+      "audio": "audio/pw-dojo-01-setup_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "STAT_CALLOUT",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "And this is episode one of nineteen. The whole Dojo runs from your very first click all the way to interview ready, and every lesson is free.",
+      "data": {
+        "value": 19,
+        "label": "lessons in the Dojo",
+        "suffix": "",
+        "atWord": 5.5,
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 265,
+      "audio": "audio/pw-dojo-01-setup_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "STEP_FLOW",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "It runs in three acts. The basics first, then the everyday working tools, then the advanced things teams actually pay for.",
+      "data": {
+        "source": "The Playwright Dojo",
+        "steps": [
+          {
+            "kicker": "ACT I",
+            "title": "The Basics",
+            "sub": "7 lessons · start here",
+            "atWord": 5.417
+          },
+          {
+            "kicker": "ACT II",
+            "title": "Everyday",
+            "sub": "6 lessons · real projects",
+            "atWord": 8.917
+          },
+          {
+            "kicker": "ACT III",
+            "title": "Advanced",
+            "sub": "6 lessons · interview ready",
+            "atWord": 12.5
+          }
+        ]
+      },
+      "durationFrames": 243,
+      "audio": "audio/pw-dojo-01-setup_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "PHOTO",
+      "transition": "zoomthrough",
+      "background": "zoneB",
+      "narration": "Everything you see me type lives on this page, free, with the code ready to copy. Keep it open beside the video and follow along.",
+      "data": {
+        "photo": {
+          "asset": "img:playwright_dojo_site.png",
+          "kicker": "Follow along, free",
+          "caption": "san-gitlogin.github.io/playwright-dojo",
+          "pan": "in",
+          "atWord": 6.583
+        }
+      },
+      "durationFrames": 261,
+      "audio": "audio/pw-dojo-01-setup_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "So let us start with the obvious question, the one nobody really wants to admit they still have.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "What even is Playwright?",
+          "subtitle": "Start here"
+        }
+      },
+      "durationFrames": 184,
+      "audio": "audio/pw-dojo-01-setup_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "AUTOMATION_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Imagine a robot friend who can open a browser, fill in the form, and click the button for you. It works a million times faster than you do, it never once gets bored, and it checks every single field the same way every time.",
+      "data": {
+        "auto": {
+          "url": "shop.example.com/login",
+          "runner": "playwright",
+          "content": {
+            "kind": "form",
+            "title": "Sign in",
+            "fields": [
+              {
+                "label": "Email",
+                "value": "you@example.com",
+                "focus": true
+              },
+              {
+                "label": "Password",
+                "value": "••••••••"
+              }
+            ],
+            "submit": "Sign in"
+          },
+          "steps": [
+            {
+              "action": "type",
+              "target": "Email",
+              "atWord": 8.917
+            },
+            {
+              "action": "type",
+              "target": "Password",
+              "atWord": 12.5
+            },
+            {
+              "action": "click",
+              "target": "Sign in",
+              "atWord": 16.083
+            }
+          ],
+          "atWord": 6.75
+        }
+      },
+      "durationFrames": 401,
+      "audio": "audio/pw-dojo-01-setup_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "LOGO_WALL",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "That robot friend is Playwright, built by Microsoft. From ordinary Python code, Playwright drives three real browser engines: Chromium, Firefox, and WebKit, the engine behind Safari.",
+      "data": {
+        "logoWall": {
+          "cols": 4,
+          "logos": [
+            {
+              "icon": "si:python",
+              "label": "Python",
+              "atWord": 9.333
+            },
+            {
+              "icon": "si:googlechrome",
+              "label": "Chromium",
+              "atWord": 16.5
+            },
+            {
+              "icon": "si:firefox",
+              "label": "Firefox",
+              "atWord": 18.833
+            },
+            {
+              "icon": "si:safari",
+              "label": "WebKit",
+              "atWord": 21.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 393,
+      "audio": "audio/pw-dojo-01-setup_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "REVEAL",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "Now here is the memory trick that makes this entire course stick, and it is hiding in the name itself. A playwright is a person who writes plays.",
+      "data": {
+        "reveal": {
+          "statement": "A playwright writes plays.",
+          "kicker": "REMEMBER THIS",
+          "sub": "So think theater.",
+          "atWord": 11.5
+        }
+      },
+      "durationFrames": 274,
+      "audio": "audio/pw-dojo-01-setup_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "LIST_BUILD",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Picture a theater. The browser is the building. A page is the stage. A locator is your spotlight. An action is a stage direction. An assertion is the critic.",
+      "data": {
+        "heading": "The whole course, in five rows",
+        "items": [
+          {
+            "icon": "lucide:building-2",
+            "text": "Browser = the theater",
+            "detail": "the building itself",
+            "atWord": 2.833
+          },
+          {
+            "icon": "lucide:layout-panel-top",
+            "text": "Page = the stage",
+            "detail": "one tab, one stage",
+            "atWord": 7.417
+          },
+          {
+            "icon": "lucide:flashlight",
+            "text": "Locator = the spotlight",
+            "detail": "finds the actor",
+            "atWord": 11.167
+          },
+          {
+            "icon": "lucide:hand",
+            "text": "Action = a stage direction",
+            "detail": "click, type, check",
+            "atWord": 14.833
+          },
+          {
+            "icon": "lucide:glasses",
+            "text": "Assertion = the critic",
+            "detail": "checks it went right",
+            "atWord": 18.5
+          }
+        ]
+      },
+      "durationFrames": 341,
+      "audio": "audio/pw-dojo-01-setup_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Notice that you never walk onto the stage yourself. You write the script, and Playwright performs it for you, exactly as written, every single time.",
+      "data": {
+        "kinetic": {
+          "text": "You write it. Playwright performs it.",
+          "fx": "typewriter",
+          "sub": "You direct — you do not click",
+          "atWord": 7.833
+        }
+      },
+      "durationFrames": 277,
+      "audio": "audio/pw-dojo-01-setup_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Keep this note somewhere. Theater, stage, spotlight, direction, critic. Every single thing in this course maps back to those five words, so learning them now saves you a lot later.",
+      "data": {
+        "stickyNote": {
+          "headline": "The big analogy",
+          "color": "yellow",
+          "notes": [
+            {
+              "title": "THE BIG ANALOGY",
+              "tag": "memory hook",
+              "body": "Browser = theater. Page = stage. Locator = spotlight. Action = stage direction. Assertion = the critic.",
+              "highlight": "Locator = spotlight",
+              "asset": "lucide:drama",
+              "atWord": 11.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 357,
+      "audio": "audio/pw-dojo-01-setup_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "SLIDE_BULLETS_PIP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Quick check before we move on. In the theater analogy, what does a locator actually do? Have a think, and pause the video here if you want a bit longer.",
+      "data": {
+        "slideBullets": {
+          "heading": "What does a LOCATOR do?",
+          "bullets": [
+            {
+              "text": "A · Builds the theater",
+              "atWord": 6.667
+            },
+            {
+              "text": "B · Finds the actor on the stage",
+              "atWord": 8.75
+            },
+            {
+              "text": "C · Writes the review",
+              "atWord": 10.917
+            },
+            {
+              "text": "D · Sells the tickets",
+              "atWord": 13
+            }
+          ]
+        }
+      },
+      "durationFrames": 275,
+      "audio": "audio/pw-dojo-01-setup_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "REVEAL",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "It is B. A locator is your spotlight. Before you can tell an actor to do anything at all, the spotlight has to find them on the stage first.",
+      "data": {
+        "reveal": {
+          "statement": "B — it finds the actor.",
+          "kicker": "ANSWER",
+          "sub": "The spotlight comes before the direction.",
+          "atWord": 4.583
+        }
+      },
+      "durationFrames": 272,
+      "audio": "audio/pw-dojo-01-setup_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Which brings us to the thing people actually argue about online, and it has a surprisingly boring answer.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Why not the older tool?",
+          "subtitle": "One word: waiting"
+        }
+      },
+      "durationFrames": 199,
+      "audio": "audio/pw-dojo-01-setup_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "TEST_RUNNER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "The older tool behaved like an impatient director. Click the button, it shouts. But the button has not appeared on the page yet, so the whole run falls over, and you get a red failure that has nothing to do with a real bug.",
+      "data": {
+        "testRunner": {
+          "headline": "The impatient director",
+          "passed": 1,
+          "failed": 1,
+          "nodes": [
+            {
+              "name": "checkout flow",
+              "depth": 0,
+              "kind": "describe",
+              "atWord": 4.833
+            },
+            {
+              "name": "opens the cart",
+              "depth": 1,
+              "kind": "it",
+              "status": "pass",
+              "ms": 412,
+              "atWord": 8.667
+            },
+            {
+              "name": "clicks Pay now",
+              "depth": 1,
+              "kind": "it",
+              "status": "fail",
+              "ms": 38,
+              "atWord": 14.333
+            }
+          ],
+          "failIndex": 2,
+          "expected": "the Pay now button",
+          "actual": "no such element",
+          "atWord": 7.333
+        }
+      },
+      "durationFrames": 357,
+      "audio": "audio/pw-dojo-01-setup_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "CODE_WINDOW",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "So people sprinkled sleep five all the way through their code, just hoping five seconds would be long enough. That made every test slower, and they were still unreliable.",
+      "data": {
+        "code": {
+          "filename": "old_way.py",
+          "language": "py",
+          "runLabel": "sleeping...",
+          "lines": [
+            {
+              "text": "driver.get(\"https://shop.example.com\")"
+            },
+            {
+              "text": "time.sleep(5)          # hope it loaded"
+            },
+            {
+              "text": "driver.find_element(By.ID, \"cart\").click()"
+            },
+            {
+              "text": "time.sleep(5)          # hope again"
+            },
+            {
+              "text": "driver.find_element(By.ID, \"pay\").click()"
+            }
+          ],
+          "output": [
+            {
+              "text": "ElementNotInteractableException",
+              "color": "red"
+            }
+          ],
+          "atWord": 5.833
+        }
+      },
+      "durationFrames": 299,
+      "audio": "audio/pw-dojo-01-setup_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "CHECK_SWEEP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Playwright is the patient director instead. When you say click, Playwright first checks the button is on the page, that you can see it, that it has stopped moving, and that it is enabled. Then it clicks.",
+      "data": {
+        "checkSweep": {
+          "headline": "The [pre-flight checklist]",
+          "subjectLabel": "the button you want",
+          "checks": [
+            {
+              "label": "is it on the page",
+              "atWord": 10.667
+            },
+            {
+              "label": "can you see it",
+              "atWord": 13.417
+            },
+            {
+              "label": "has it stopped moving",
+              "atWord": 14.75
+            },
+            {
+              "label": "is it enabled",
+              "atWord": 16.833
+            }
+          ],
+          "atWord": 7.917
+        }
+      },
+      "durationFrames": 326,
+      "audio": "audio/pw-dojo-01-setup_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Which gives you the second memory hook of the episode. Playwright waits like a good waiter, and because of that you will almost never write a sleep line again.",
+      "data": {
+        "stickyNote": {
+          "headline": "Memory hook",
+          "color": "green",
+          "notes": [
+            {
+              "title": "PATIENT BY DEFAULT",
+              "tag": "memory hook",
+              "body": "Playwright waits like a good waiter. You will almost never write time.sleep() again.",
+              "highlight": "waits like a good waiter",
+              "asset": "lucide:hand-platter",
+              "atWord": 9.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 265,
+      "audio": "audio/pw-dojo-01-setup_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "ICON_GRID",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "That one install also hands you video recording of the run, a full trace you can rewind, screenshots, a fake location, and fake network replies. We meet every one of those later.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:monitor-play",
+              "label": "3 engines",
+              "atWord": 5.167
+            },
+            {
+              "icon": "lucide:video",
+              "label": "Video",
+              "atWord": 8.5
+            },
+            {
+              "icon": "lucide:film",
+              "label": "Trace",
+              "atWord": 11
+            },
+            {
+              "icon": "lucide:map-pin",
+              "label": "Fake location",
+              "atWord": 15.25
+            },
+            {
+              "icon": "lucide:network",
+              "label": "Fake network",
+              "atWord": 17.75
+            },
+            {
+              "icon": "lucide:camera",
+              "label": "Screenshots",
+              "atWord": 18.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 342,
+      "audio": "audio/pw-dojo-01-setup_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "All of which is completely useless until Playwright is actually on your machine, so let us fix that right now.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Install it",
+          "subtitle": "Two commands, that is all"
+        }
+      },
+      "durationFrames": 200,
+      "audio": "audio/pw-dojo-01-setup_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "CODE_EDITOR",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Two commands, and that is genuinely the whole setup. The first one installs the Python package, which brings Playwright plus the test tools we lean on later in this course.",
+      "data": {
+        "editor": {
+          "lang": "bash",
+          "tabs": [
+            {
+              "name": "setup.sh",
+              "active": true
+            }
+          ],
+          "lines": [
+            "pip install pytest-playwright",
+            "playwright install"
+          ],
+          "highlight": {
+            "from": 1,
+            "to": 1,
+            "color": "green"
+          },
+          "atWord": 7.167
+        }
+      },
+      "durationFrames": 300,
+      "audio": "audio/pw-dojo-01-setup_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "TERMINAL_SESSION",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Run them both. The second command downloads the actual browsers onto your machine: Chromium, Firefox and WebKit, each one reporting done as it lands.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pip install pytest-playwright",
+              "output": [
+                "Successfully installed playwright pytest"
+              ],
+              "exitCode": 0,
+              "atWord": 4
+            },
+            {
+              "cmd": "playwright install",
+              "output": [
+                "Downloading Chromium ... done",
+                "Downloading Firefox ... done",
+                "Downloading Webkit ... done"
+              ],
+              "exitCode": 0,
+              "atWord": 7.917
+            }
+          ],
+          "atWord": 4
+        }
+      },
+      "durationFrames": 306,
+      "audio": "audio/pw-dojo-01-setup_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "SPEC_COMPARE",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Now notice what that second command just did. Playwright brought its own copies of the browsers, rather than borrowing the Chrome already sitting on your laptop. Your Chrome updates itself whenever it likes, and that quietly changes what your tests are running against.",
+      "data": {
+        "compare": {
+          "headline": "Your Chrome, or its own?",
+          "a": {
+            "name": "Your Chrome",
+            "asset": "si:googlechrome"
+          },
+          "b": {
+            "name": "Playwright",
+            "asset": "lucide:drama"
+          },
+          "rows": [
+            {
+              "label": "Version",
+              "a": "whatever",
+              "b": "pinned",
+              "winner": "b"
+            },
+            {
+              "label": "Updates on you",
+              "a": "yes",
+              "b": "no",
+              "winner": "b"
+            },
+            {
+              "label": "Same in CI",
+              "a": "no",
+              "b": "yes",
+              "winner": "b"
+            }
+          ],
+          "atWord": 12.083
+        }
+      },
+      "durationFrames": 431,
+      "audio": "audio/pw-dojo-01-setup_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "TEST_MATRIX",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "That means your laptop, a teammate's laptop, and the build server that runs at three in the morning all perform the play in exactly the same theater.",
+      "data": {
+        "testMatrix": {
+          "headline": "Same browsers, everywhere",
+          "rows": [
+            "Your laptop",
+            "Teammate",
+            "CI server"
+          ],
+          "cols": [
+            "Chromium",
+            "Firefox",
+            "WebKit"
+          ],
+          "cells": [
+            {
+              "r": 0,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 2,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 2,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 2,
+              "status": "pass"
+            }
+          ],
+          "emphasize": {
+            "r": 2,
+            "c": 0
+          },
+          "atWord": 5.833
+        }
+      },
+      "durationFrames": 246,
+      "audio": "audio/pw-dojo-01-setup_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneB",
+      "narration": "And that quietly kills the oldest excuse in all of software development. The one that goes: well, it works on my machine. If the browser is identical everywhere, that sentence simply stops being available to anybody.",
+      "data": {
+        "kinetic": {
+          "text": "\"Works on my machine\" — gone.",
+          "fx": "highlight",
+          "sub": "same version for everyone",
+          "atWord": 12.833
+        }
+      },
+      "durationFrames": 416,
+      "audio": "audio/pw-dojo-01-setup_long_s27.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s28",
+      "type": "SLIDE_BULLETS_PIP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Second check, same rules as before. Why does Playwright bother downloading its own browsers, instead of just using the Chrome you already have installed?",
+      "data": {
+        "slideBullets": {
+          "heading": "Why its own browsers?",
+          "bullets": [
+            {
+              "text": "A · To use more disk space",
+              "atWord": 6.083
+            },
+            {
+              "text": "B · Every machine runs identical versions",
+              "atWord": 8.667
+            },
+            {
+              "text": "C · Because your Chrome is locked",
+              "atWord": 11.25
+            },
+            {
+              "text": "D · It does use your Chrome",
+              "atWord": 13.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 267,
+      "audio": "audio/pw-dojo-01-setup_long_s28.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s29",
+      "type": "REVEAL",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "B again. Bundled browsers mean your laptop, your teammate, and the server all agree on the version. That consistency is exactly what kills flaky, unrepeatable bugs.",
+      "data": {
+        "reveal": {
+          "statement": "B — identical everywhere.",
+          "kicker": "ANSWER",
+          "sub": "Consistency kills flaky bugs.",
+          "atWord": 4.917
+        }
+      },
+      "durationFrames": 328,
+      "audio": "audio/pw-dojo-01-setup_long_s29.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s30",
+      "type": "TRADEOFF_SCALE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "One more for your next interview. Playwright versus Selenium is the classic opening question, and the answer they are listening for is one word: waiting. Say that Playwright waits for the element to be ready before it acts, and you have answered it properly.",
+      "data": {
+        "tradeoff": {
+          "headline": "The [interview] opener",
+          "left": {
+            "label": "Selenium",
+            "sub": "you handle the waiting",
+            "asset": "lucide:hourglass"
+          },
+          "right": {
+            "label": "Playwright",
+            "sub": "it waits for you",
+            "asset": "lucide:drama"
+          },
+          "lean": 0.7,
+          "caption": "One word: auto-waiting.",
+          "atWord": 17.917
+        }
+      },
+      "durationFrames": 447,
+      "audio": "audio/pw-dojo-01-setup_long_s30.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s31",
+      "type": "RECAP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So, to recap. Playwright drives real browsers from Python code. Playwright waits for the page by default, so you stop writing sleep and your tests stop being flaky. And two commands set the whole thing up on any machine.",
+      "data": {
+        "heading": "Episode one, in three lines",
+        "points": [
+          {
+            "text": "Real browsers, driven from Python",
+            "atWord": 6.75
+          },
+          {
+            "text": "It waits — so no more sleep()",
+            "atWord": 15.083
+          },
+          {
+            "text": "pip install, then playwright install",
+            "atWord": 20.833
+          }
+        ]
+      },
+      "durationFrames": 408,
+      "audio": "audio/pw-dojo-01-setup_long_s31.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s32",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next episode, you write your first script and watch a browser obey it. Follow along free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Your First Script",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 213,
+      "audio": "audio/pw-dojo-01-setup_long_s32.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

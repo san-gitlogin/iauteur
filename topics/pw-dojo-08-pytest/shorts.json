@@ -1,0 +1,228 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP08 shorts: pytest fixtures",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "how a pytest fixture deletes the six lines of setup at the top of every test",
+    "openLoop": "Where do the six setup lines at the top of every test file go?",
+    "analogy": "A fixture is the backstage crew who set the stage before you walk on.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "pytest fixtures in Playwright #playwright #python",
+      "description": "Ask for \"page\" in your test arguments and a fixture builds the browser, the context and the page for you.",
+      "tags": [
+        "playwright",
+        "python",
+        "pytest",
+        "fixtures",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "pytest FIXTURES",
+    "badge": "Dojo · EP 8",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You type the same six lines at the top of every test file. There is a way to stop.",
+      "data": {
+        "headline": "THE SAME SIX LINES.",
+        "subtext": "you do not have to write them",
+        "heroAsset": "lucide:flask-conical",
+        "headlineAtWord": 3.667,
+        "heroAtWord": 7.667
+      },
+      "durationFrames": 173,
+      "audio": "audio/pw-dojo-08-pytest_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Watch them go. Five lines of setup leave. One line arrives instead, and it asks for one thing: a page.",
+      "data": {
+        "diff": {
+          "fileName": "test_login.py",
+          "stat": {
+            "plus": 1,
+            "minus": 4
+          },
+          "atWord": 5.917,
+          "rows": [
+            {
+              "kind": "del",
+              "text": "with sync_playwright() as p:"
+            },
+            {
+              "kind": "del",
+              "text": "    browser = p.chromium.launch()"
+            },
+            {
+              "kind": "del",
+              "text": "    page = browser.new_page()"
+            },
+            {
+              "kind": "del",
+              "text": "    browser.close()"
+            },
+            {
+              "kind": "ctx",
+              "text": ""
+            },
+            {
+              "kind": "add",
+              "text": "def test_successful_login(page: Page):"
+            }
+          ]
+        }
+      },
+      "durationFrames": 256,
+      "audio": "audio/pw-dojo-08-pytest_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "FIXTURE_CREW",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "A fixture makes it for you. It builds a browser, then a context, then a page. It hands the page over. Then it takes it all apart again. You wrote none of that yourself.",
+      "data": {
+        "fixtureCrew": {
+          "testName": "test_successful_login",
+          "askFor": "page",
+          "crewLabel": "pytest-playwright",
+          "bodyLabel": "your test runs",
+          "teardownLabel": "taken apart, backwards",
+          "caption": "you asked for one word",
+          "color": "green",
+          "atWord": 2.5,
+          "handoffAtWord": 12.417,
+          "teardownAtWord": 20.833,
+          "stages": [
+            {
+              "label": "browser",
+              "sub": "the building",
+              "atWord": 7.833
+            },
+            {
+              "label": "context",
+              "sub": "a dressing room",
+              "atWord": 10.167
+            },
+            {
+              "label": "page",
+              "sub": "the stage",
+              "atWord": 11.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 332,
+      "audio": "audio/pw-dojo-08-pytest_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Two rules and you are done. Name the file and the function with test underscore. Then just ask for page in the brackets.",
+      "data": {
+        "codeRun": {
+          "filename": "test_login.py",
+          "language": "py",
+          "resultLabel": "what pytest sees",
+          "caption": "name it right, then ask",
+          "color": "green",
+          "atWord": 2.667,
+          "lines": [
+            {
+              "text": "# test_login.py",
+              "detail": "name both with test_",
+              "sub": "pytest finds it",
+              "label": "found",
+              "atWord": 5.917
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "def test_successful_login("
+            },
+            {
+              "text": "        page: Page):",
+              "detail": "then ask for page",
+              "sub": "the fixture hands it over",
+              "label": "page",
+              "atWord": 13.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 246,
+      "audio": "audio/pw-dojo-08-pytest_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "A fixture is the backstage crew. Ask for page, and a ready stage appears. The clean up is free.",
+      "data": {
+        "stickyNote": {
+          "headline": "A fixture is the [crew]",
+          "color": "green",
+          "notes": [
+            {
+              "title": "FIXTURE = THE CREW",
+              "tag": "memory hook",
+              "body": "Ask for \"page\" in your arguments and a fresh, ready stage appears. Cleanup happens for you.",
+              "highlight": "a fresh, ready stage appears",
+              "asset": "lucide:users",
+              "atWord": 7.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 228,
+      "audio": "audio/pw-dojo-08-pytest_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "The whole lesson, free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-08-pytest_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

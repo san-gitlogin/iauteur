@@ -1,0 +1,909 @@
+{
+  "meta": {
+    "topic": "Apple Overtakes Nvidia: The $5 Trillion Crown Flip",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "The most valuable company on Earth changed hands on Friday — and a Chinese AI model is the reason.",
+    "openLoop": "Why did traders yank the crown off Nvidia and hand it to Apple in a single trading day?",
+    "analogy": "The gold rush repriced: shovels out, storefronts in.",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "market-shock",
+      "versus"
+    ],
+    "seo": {
+      "title": "Apple Just Took Nvidia's Crown: Inside the $5 Trillion Flip Nobody Saw Coming",
+      "altTitles": [
+        "Apple vs Nvidia: How One Chinese AI Model Flipped the World's Most Valuable Company",
+        "Why Traders Fled Nvidia for Apple (The AI Trade Just Cracked)"
+      ],
+      "hook": "The most valuable company on Earth changed hands on Friday — and the trigger wasn't an iPhone or a chip. It was a 2.8-trillion-parameter AI model from Beijing.",
+      "breakdown": "the Apple–Nvidia crown flip of July 17, 2026: the Kimi K3 selloff that cracked the AI-capex thesis, Apple's $600B refuge rally, the $111B quarter and 2.5-billion-device moat, the foldable-iPhone fall catalyst, the Sacks and Ackman alarm, and the race to the first $5 trillion market cap.",
+      "queries": [
+        "apple overtakes nvidia",
+        "apple most valuable company 2026",
+        "apple vs nvidia market cap",
+        "why did nvidia stock drop",
+        "kimi k3 stock market selloff",
+        "apple 5 trillion market cap",
+        "ai bubble bursting 2026",
+        "apple intelligence monetization",
+        "foldable iphone 2026",
+        "nvidia vs apple who wins"
+      ],
+      "hashtags": [
+        "#Apple",
+        "#Nvidia",
+        "#StockMarket",
+        "#AI",
+        "#MarketCap"
+      ],
+      "tags": [
+        "apple",
+        "nvidia",
+        "apple overtakes nvidia",
+        "most valuable company",
+        "apple vs nvidia",
+        "market cap",
+        "apple stock",
+        "nvidia stock",
+        "AAPL",
+        "NVDA",
+        "kimi k3",
+        "moonshot ai",
+        "ai selloff",
+        "ai bubble",
+        "5 trillion market cap",
+        "apple intelligence",
+        "foldable iphone",
+        "apple services revenue",
+        "magnificent seven",
+        "tech stocks 2026",
+        "stock market news",
+        "ai stocks",
+        "semiconductor selloff",
+        "david sacks ai",
+        "bill ackman",
+        "apple rally",
+        "nvidia selloff",
+        "deepseek moment",
+        "open source ai",
+        "tech news"
+      ],
+      "pinned": "Apple or Nvidia to $5T first? And does the AI-capex trade recover from the Kimi shock — or was Friday the top? 👇"
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png",
+    "background": "grid"
+  },
+  "thumbnail": {
+    "title": "THE CROWN FLIPPED",
+    "badge": "Apple vs Nvidia",
+    "asset": "si:apple"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "The most valuable company on Earth just changed hands — first time in over a year.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "headline": "THE CROWN FLIPPED",
+        "subtext": "Apple vs Nvidia",
+        "heroAsset": "lucide:crown",
+        "headlineAtWord": 2,
+        "heroAtWord": 7.75
+      },
+      "timingSource": "tts",
+      "durationFrames": 206,
+      "audio": "audio/apple-overtakes-nvidia_long_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "STAT_CALLOUT",
+      "narration": "Four-point-eight-eight trillion dollars — Apple's value at the moment it slid past Nvidia's four-point-eight-six. A photo finish at the very top of capitalism.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "value": 4.88,
+        "suffix": "T",
+        "label": "Apple at the flip — past Nvidia's $4.86T",
+        "source": "Yahoo Finance · CNBC, Jul 17 2026",
+        "atWord": 1
+      },
+      "timingSource": "tts",
+      "durationFrames": 359,
+      "audio": "audio/apple-overtakes-nvidia_long_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "narration": "This is the story of the flip: what triggered it, why money is pouring into Cupertino, and whether the AI trade just cracked.",
+      "transition": "letterbox",
+      "background": "zoneC",
+      "data": {
+        "title": "Apple vs Nvidia",
+        "subtitle": "the race to the $5T crown"
+      },
+      "timingSource": "tts",
+      "durationFrames": 279,
+      "audio": "audio/apple-overtakes-nvidia_long_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "narration": "Start with the flip itself — because the crown did not fall on its own. It was knocked loose, from Beijing.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The Flip",
+          "subtitle": "what happened on Friday"
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 266,
+      "audio": "audio/apple-overtakes-nvidia_long_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "PHOTO_STACK",
+      "narration": "Friday morning, China's Moonshot AI shipped Kimi K3 — the model from our last video: two-point-eight trillion parameters, open weights, frontier scores. Real receipts, captured by us.",
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "headline": "The [trigger]",
+        "headlineColor": "red",
+        "photoStack": {
+          "cards": [
+            {
+              "asset": "img:kimi-home.png",
+              "label": "kimi.com — K3 live",
+              "color": "blue",
+              "atWord": 9.083
+            },
+            {
+              "asset": "img:kimi-k3-docs.png",
+              "label": "platform.kimi.ai — docs",
+              "color": "purple",
+              "atWord": 25.25
+            },
+            {
+              "asset": "img:aa-models.png",
+              "label": "AA leaderboard, Jul 17",
+              "color": "green",
+              "atWord": 27.917
+            }
+          ]
+        },
+        "source": "Own captures · SOURCES.json provenance"
+      },
+      "timingSource": "tts",
+      "durationFrames": 457,
+      "audio": "audio/apple-overtakes-nvidia_long_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "TICKER_TAPE",
+      "narration": "Markets called it another DeepSeek moment. Nvidia sank three and a half percent intraday — a hundred seventy-three billion gone — AMD dropped five, Intel four, the Nasdaq one.",
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "ticker": {
+          "entries": [
+            {
+              "symbol": "NVDA",
+              "price": "chips",
+              "change": -3.5
+            },
+            {
+              "symbol": "AMD",
+              "price": "chips",
+              "change": -5
+            },
+            {
+              "symbol": "INTC",
+              "price": "chips",
+              "change": -4
+            },
+            {
+              "symbol": "NASDAQ",
+              "price": "index",
+              "change": -1
+            }
+          ],
+          "featured": "NVDA",
+          "rows": 1,
+          "atWord": 9.167
+        },
+        "source": "CNN · 24/7 Wall St · Investing.com, Jul 17"
+      },
+      "timingSource": "tts",
+      "durationFrames": 429,
+      "audio": "audio/apple-overtakes-nvidia_long_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "LOGO_TIMELINE",
+      "narration": "Rewind the crown: Apple wore it for years, Nvidia seized it in the AI boom — and Friday, Apple snatched it back, before the closing bell even rang.",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "headline": "A [crown] with history",
+        "headlineColor": "blue",
+        "logoTimeline": {
+          "color": "blue",
+          "entries": [
+            {
+              "icon": "si:apple",
+              "label": "Apple's reign",
+              "date": "2011–24",
+              "color": "green",
+              "atWord": 3.833
+            },
+            {
+              "icon": "si:nvidia",
+              "label": "Nvidia's AI era",
+              "date": "2025–26",
+              "color": "orange",
+              "atWord": 8.667
+            },
+            {
+              "icon": "si:apple",
+              "label": "The flip",
+              "date": "Jul 2026",
+              "color": "green",
+              "atWord": 18.167
+            }
+          ]
+        },
+        "source": "Yahoo Finance · 9to5Mac, Jul 17 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 342,
+      "audio": "audio/apple-overtakes-nvidia_long_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "IMAGE_SCENE",
+      "narration": "And this is the scoreboard as we record — a real screenshot, Saturday morning: Nvidia four-point-nine-one-two trillion, Apple four-point-nine-zero-one. Eleven billion dollars apart.",
+      "transition": "clock",
+      "background": "zoneB",
+      "data": {
+        "image": {
+          "variant": "polaroid",
+          "asset": "img:market-cap-top.png",
+          "caption": "companiesmarketcap.com — Jul 18, 2026",
+          "atWord": 9.5
+        },
+        "source": "companiesmarketcap.com snap, Jul 18 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 411,
+      "audio": "audio/apple-overtakes-nvidia_long_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "narration": "So why did the money move? This was not charity for Cupertino — Wall Street rotated for reasons.",
+      "transition": "letterbox",
+      "background": "zoneC",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The Case for Apple",
+          "subtitle": "why the money moved"
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 249,
+      "audio": "audio/apple-overtakes-nvidia_long_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "LINE_CHART",
+      "narration": "The twenty-twenty-six split tells it: Apple up twenty percent, the best of the Magnificent Seven — Nvidia up just seven. Same year, same market, opposite stories.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "lineChart": {
+          "series": [
+            {
+              "label": "AAPL",
+              "values": [
+                0,
+                20
+              ],
+              "color": "green"
+            },
+            {
+              "label": "NVDA",
+              "values": [
+                0,
+                7
+              ],
+              "color": "orange"
+            }
+          ],
+          "xAxis": [
+            "Jan",
+            "Jul"
+          ],
+          "yUnit": "%",
+          "area": false,
+          "atWord": 3.417
+        },
+        "source": "Yahoo Finance · 24/7 Wall St, Jul 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 397,
+      "audio": "audio/apple-overtakes-nvidia_long_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "STAT_PANELS",
+      "narration": "The machine still prints: one hundred eleven billion booked last quarter, up seventeen percent, earnings per share up twenty-two — fundamentals, not hype, doing the lifting.",
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "headline": "Receipts, not [vibes]",
+        "stats": [
+          {
+            "kicker": "Q2 FY26 REVENUE",
+            "value": "$111.2B",
+            "color": "blue",
+            "atWord": 8
+          },
+          {
+            "kicker": "GROWTH YoY",
+            "value": "+17%",
+            "color": "green",
+            "atWord": 17.333
+          },
+          {
+            "kicker": "EPS",
+            "value": "+22%",
+            "color": "purple",
+            "atWord": 25.5
+          }
+        ],
+        "verdict": {
+          "text": "The machine still prints",
+          "color": "green",
+          "atWord": 2.167
+        },
+        "source": "Apple Q2 FY2026 via Motley Fool"
+      },
+      "timingSource": "tts",
+      "durationFrames": 385,
+      "audio": "audio/apple-overtakes-nvidia_long_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "DONUT",
+      "narration": "Slice that quarter open: fifty-seven billion of it is iPhone, thirty-one an all-time services record — subscriptions, the sticky stuff — and the rest, the halo of devices around them.",
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "headline": "One [quarter], sliced",
+        "headlineColor": "purple",
+        "donut": {
+          "segments": [
+            {
+              "label": "iPhone $57B",
+              "value": 51,
+              "color": "blue",
+              "atWord": 11.917
+            },
+            {
+              "label": "Services $31B",
+              "value": 28,
+              "color": "purple",
+              "atWord": 16.25
+            },
+            {
+              "label": "Everything else",
+              "value": 21,
+              "color": "green",
+              "atWord": 27.083
+            }
+          ],
+          "centerValue": "$111B",
+          "centerLabel": "Q2 FY26"
+        },
+        "source": "Apple Q2 FY2026 via Motley Fool"
+      },
+      "timingSource": "tts",
+      "durationFrames": 413,
+      "audio": "audio/apple-overtakes-nvidia_long_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "GRID_ARRAY",
+      "narration": "Now the moat: Apple Intelligence doesn't need to win benchmarks — it ships to two-point-five billion active devices. Distribution at a scale no lab, no chipmaker, can match.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "grid": {
+          "headline": "[2.5 billion] screens",
+          "rows": 8,
+          "cols": 14,
+          "mode": "heatmap",
+          "label": "active Apple devices",
+          "legendA": "AI-capable devices",
+          "legendB": "install base",
+          "color": "green",
+          "atWord": 19.75
+        },
+        "source": "Install base per Motley Fool, Jul 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 414,
+      "audio": "audio/apple-overtakes-nvidia_long_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "WATERFALL",
+      "narration": "Watch the bridge: Apple stood near four-point-three trillion before the run — then six hundred billion of refuge money poured in — four-point-nine now, and climbing toward a number no one's ever printed.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "headline": "The [$600B] refuge rally",
+        "headlineColor": "green",
+        "waterfallChart": {
+          "color": "green",
+          "unit": "T",
+          "bars": [
+            {
+              "label": "Before the run",
+              "value": 4.3,
+              "isTotal": true,
+              "atWord": 6.833
+            },
+            {
+              "label": "AI-selloff refuge",
+              "value": 0.6,
+              "color": "green",
+              "atWord": 13.667
+            },
+            {
+              "label": "Apple today",
+              "value": 0,
+              "isTotal": true,
+              "atWord": 21.5
+            }
+          ]
+        },
+        "source": "Bloomberg via Yahoo Finance, Jul 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 407,
+      "audio": "audio/apple-overtakes-nvidia_long_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "GALLERY",
+      "narration": "And the fall catalyst is loaded: over fifteen new devices are coming — headlined by the first foldable iPhone, a redesigned MacBook Pro, and refreshes across the whole shelf.",
+      "transition": "wipe",
+      "background": "zoneC",
+      "data": {
+        "headline": "The fall [wave]",
+        "headlineColor": "orange",
+        "gallery": {
+          "columns": 3,
+          "tiles": [
+            {
+              "asset": "lucide:smartphone",
+              "label": "Foldable iPhone",
+              "color": "orange",
+              "atWord": 18.417
+            },
+            {
+              "asset": "lucide:laptop",
+              "label": "MacBook Pro",
+              "color": "blue",
+              "atWord": 23.5
+            },
+            {
+              "asset": "lucide:watch",
+              "label": "Watch",
+              "color": "green"
+            },
+            {
+              "asset": "lucide:headphones",
+              "label": "AirPods",
+              "color": "purple"
+            },
+            {
+              "asset": "lucide:tv",
+              "label": "TV & home",
+              "color": "blue"
+            },
+            {
+              "asset": "lucide:glasses",
+              "label": "Vision",
+              "color": "orange"
+            }
+          ]
+        },
+        "source": "15+ devices per BigGo Finance, Jul 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 377,
+      "audio": "audio/apple-overtakes-nvidia_long_s15.mp3"
+    },
+    {
+      "id": "s16",
+      "type": "CHAPTER",
+      "narration": "But Apple rising is only half this story. The other half is a belief breaking.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The Case Against AI Capex",
+          "subtitle": "a belief breaks"
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 210,
+      "audio": "audio/apple-overtakes-nvidia_long_s16.mp3"
+    },
+    {
+      "id": "s17",
+      "type": "FLIP_CARD",
+      "narration": "One assumption priced this whole market: whoever spends most on chips wins AI. Friday broke that in public — and repriced everything downstream of it.",
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "anim": "blur",
+        "flip": {
+          "front": {
+            "label": "The belief",
+            "text": "Biggest capex wins AI",
+            "color": "orange"
+          },
+          "back": {
+            "label": "Friday's math",
+            "text": "Frontier scores, fraction of the spend",
+            "color": "red"
+          },
+          "atWord": 17.583
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 352,
+      "audio": "audio/apple-overtakes-nvidia_long_s17.mp3"
+    },
+    {
+      "id": "s18",
+      "type": "EVAL_DASHBOARD",
+      "narration": "The breaker: Kimi K3 posts an Artificial Analysis score of fifty-seven — third overall, first among open models — at two-point-eight trillion parameters, weights dropping July twenty-seventh.",
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "evalDash": {
+          "headline": "The [receipts] that broke it",
+          "metrics": [
+            {
+              "label": "AA Index",
+              "value": 57,
+              "color": "purple"
+            },
+            {
+              "label": "Open rank",
+              "value": 1,
+              "color": "green"
+            },
+            {
+              "label": "Params",
+              "value": 2.8,
+              "unit": "T",
+              "color": "blue"
+            }
+          ],
+          "atWord": 17.417
+        },
+        "source": "Artificial Analysis snap · Latent Space, Jul 17"
+      },
+      "timingSource": "tts",
+      "durationFrames": 429,
+      "audio": "audio/apple-overtakes-nvidia_long_s18.mp3"
+    },
+    {
+      "id": "s19",
+      "type": "SPLIT_PATHS",
+      "narration": "So capital rotated between two bets — shovels: chips, clusters, power. Storefronts: subscriptions, lock-in, upgrades. And Friday, the storefronts won.",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "headline": "One market, [two bets]",
+        "headlineColor": "purple",
+        "left": {
+          "title": "Shovels",
+          "badge": {
+            "text": "capex",
+            "color": "orange"
+          },
+          "lines": [
+            {
+              "text": "chips · clusters · power",
+              "color": "orange"
+            }
+          ],
+          "color": "orange",
+          "atWord": 13.333
+        },
+        "center": {
+          "kicker": "THE ROTATION",
+          "title": "one repricing",
+          "color": "purple",
+          "atWord": 4.5
+        },
+        "right": {
+          "title": "Storefronts",
+          "badge": {
+            "text": "monetization",
+            "color": "green"
+          },
+          "lines": [
+            {
+              "text": "subscriptions · lock-in · upgrades",
+              "color": "green"
+            }
+          ],
+          "color": "green",
+          "atWord": 20.333
+        },
+        "source": "Rotation framing per Yahoo Finance, Jul 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 443,
+      "audio": "audio/apple-overtakes-nvidia_long_s19.mp3"
+    },
+    {
+      "id": "s20",
+      "type": "QUOTE_SPOTLIGHT",
+      "narration": "Washington noticed. White House AI adviser David Sacks warned, quote, this is how you lose the AI race — and Bill Ackman answered with a single word: agreed.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "headline": "Even the bulls [blinked]",
+        "headlineColor": "red",
+        "person": {
+          "name": "David Sacks",
+          "role": "WHITE HOUSE AI ADVISER",
+          "asset": null
+        },
+        "quote": "This is how you [lose the AI race].",
+        "source": "The Hill · Benzinga, Jul 17 2026",
+        "atWord": 17.333
+      },
+      "timingSource": "tts",
+      "durationFrames": 386,
+      "audio": "audio/apple-overtakes-nvidia_long_s20.mp3"
+    },
+    {
+      "id": "s21",
+      "type": "BAR_COMPARE",
+      "narration": "And yet — don't bury Nvidia. By Friday's close it clawed back to four-point-nine-two trillion against Apple's four-point-eight-nine, still number one — by a fraction of one percent.",
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "headline": "Still [Nvidia's] crown — barely",
+        "headlineColor": "orange",
+        "bars": [
+          {
+            "label": "NVDA",
+            "sub": "Friday close",
+            "value": 4.92,
+            "display": "$4.92T",
+            "color": "orange",
+            "atWord": 18
+          },
+          {
+            "label": "AAPL",
+            "sub": "Friday close",
+            "value": 4.89,
+            "display": "$4.89T",
+            "color": "green",
+            "atWord": 22.5
+          }
+        ],
+        "maxValue": 5,
+        "source": "Fox Business · AOL, Jul 17 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 401,
+      "audio": "audio/apple-overtakes-nvidia_long_s21.mp3"
+    },
+    {
+      "id": "s22",
+      "type": "CHAPTER",
+      "narration": "One question left: the finish line — because whoever wears the crown next wears it at a number history has never seen.",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "The Race to $5 Trillion",
+          "subtitle": "what happens next"
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 268,
+      "audio": "audio/apple-overtakes-nvidia_long_s22.mp3"
+    },
+    {
+      "id": "s23",
+      "type": "PROGRESS",
+      "narration": "Run the math: five trillion is the line. Nvidia sits ninety-eight percent of the way there; Apple, a whisker behind — about three hundred forty dollars a share prints it.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "headline": "The [$5T] finish line",
+        "headlineColor": "blue",
+        "progress": {
+          "variant": "ring",
+          "items": [
+            {
+              "label": "Nvidia",
+              "value": 98,
+              "display": "98%",
+              "color": "orange",
+              "atWord": 11
+            },
+            {
+              "label": "Apple",
+              "value": 98,
+              "display": "98%",
+              "color": "green",
+              "atWord": 17
+            }
+          ]
+        },
+        "source": "$340/share math per Motley Fool, Jul 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 381,
+      "audio": "audio/apple-overtakes-nvidia_long_s23.mp3"
+    },
+    {
+      "id": "s24",
+      "type": "TRADEOFF_SCALE",
+      "narration": "What decides it? On one pan: a foldable supercycle with services compounding behind it. On the other: AI capex proving durable after the scare. The scale is genuinely level.",
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "tradeoff": {
+          "headline": "The [decider]",
+          "left": {
+            "label": "Foldable supercycle",
+            "sub": "devices + services compounding",
+            "asset": "lucide:smartphone",
+            "color": "green"
+          },
+          "right": {
+            "label": "Durable AI capex",
+            "sub": "if the buildout holds",
+            "asset": "lucide:server",
+            "color": "orange"
+          },
+          "lean": 0,
+          "caption": "The $5T decider — genuinely level",
+          "source": "Both cases as reported, Jul 2026",
+          "atWord": 2.25
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 455,
+      "audio": "audio/apple-overtakes-nvidia_long_s24.mp3"
+    },
+    {
+      "id": "s25",
+      "type": "REVEAL",
+      "narration": "So hear the verdict precisely: nobody won artificial intelligence on Friday. The market simply repriced who gets paid for it — and for one day, the storefront beat the shovel.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "reveal": {
+          "statement": "The market repriced [who gets paid] for AI.",
+          "kicker": "THE VERDICT",
+          "sub": "monetization beat infrastructure — for one day",
+          "color": "purple",
+          "atWord": 16.833
+        }
+      },
+      "timingSource": "tts",
+      "durationFrames": 402,
+      "audio": "audio/apple-overtakes-nvidia_long_s25.mp3"
+    },
+    {
+      "id": "s26",
+      "type": "LOGO_VERSUS",
+      "narration": "Which leaves the crown a coin flip: two logos, eleven billion dollars apart, head to head — point two percent. It could flip again Monday morning.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "headline": "[0.2%] apart",
+        "headlineColor": "orange",
+        "logoVersus": {
+          "color": "orange",
+          "left": {
+            "icon": "si:apple",
+            "name": "Apple",
+            "tagline": "$4.90T",
+            "color": "green"
+          },
+          "right": {
+            "icon": "si:nvidia",
+            "name": "Nvidia",
+            "tagline": "$4.91T",
+            "color": "orange"
+          },
+          "atWord": 8.417
+        },
+        "source": "companiesmarketcap.com snap, Jul 18 2026"
+      },
+      "timingSource": "tts",
+      "durationFrames": 350,
+      "audio": "audio/apple-overtakes-nvidia_long_s26.mp3"
+    },
+    {
+      "id": "s27",
+      "type": "RECAP",
+      "narration": "So: the crown flipped, first in a year. Kimi cracked the capex story. Apple brought receipts. Nvidia held the close — five trillion next, whichever logo prints it.",
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "heading": "The flip, in four beats",
+        "points": [
+          {
+            "text": "Crown flipped — first time in a year",
+            "atWord": 4.833
+          },
+          {
+            "text": "Kimi K3 cracked the capex thesis",
+            "atWord": 11.167
+          },
+          {
+            "text": "Apple: +20% YTD, $111B quarter",
+            "atWord": 20
+          },
+          {
+            "text": "Nvidia held the close — barely",
+            "atWord": 22.583
+          },
+          {
+            "text": "Next stop: the first $5T company",
+            "atWord": 27.667
+          }
+        ]
+      },
+      "timingSource": "tts",
+      "durationFrames": 447,
+      "audio": "audio/apple-overtakes-nvidia_long_s27.mp3"
+    },
+    {
+      "id": "s28",
+      "type": "OUTRO_CTA",
+      "narration": "The crown is one trading day from flipping again. The model that knocked it loose has its own deep dive on this channel — watch that next, and subscribe.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "message": "One trading day from flipping again.",
+        "sub": "Watch the Kimi K3 deep dive next — THE NBX STUDIO"
+      },
+      "timingSource": "tts",
+      "durationFrames": 338,
+      "audio": "audio/apple-overtakes-nvidia_long_s28.mp3"
+    }
+  ]
+}

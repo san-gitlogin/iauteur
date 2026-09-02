@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP11 shorts: iframes",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "why a visible element times out, and how frame_locator reaches inside an iframe",
+    "openLoop": "You can see the field on screen — so why does Playwright say it does not exist?",
+    "analogy": "An iframe is a puppet theatre standing on your stage.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Why Playwright cannot see your field #playwright #python",
+      "description": "It is an iframe. frame_locator() steps inside first, then your normal locator works.",
+      "tags": [
+        "playwright",
+        "python",
+        "iframe",
+        "frame_locator",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "IT IS AN IFRAME",
+    "badge": "Dojo · EP 11",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You can see the field on your screen. Playwright says it does not exist.",
+      "data": {
+        "headline": "YOU SEE IT. IT DOES NOT.",
+        "subtext": "here is why",
+        "heroAsset": "lucide:app-window",
+        "headlineAtWord": 3.167,
+        "heroAtWord": 6.833
+      },
+      "durationFrames": 145,
+      "audio": "audio/pw-dojo-11-frames-tabs_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "FRAME_BOUNDARY",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Your locator searches your page and stops at the edge of a second page inside it. That is an iframe. Step across the border first, and the same locator finds it.",
+      "data": {
+        "frameBoundary": {
+          "outerTitle": "checkout.shop.com",
+          "innerTitle": "Secure payment",
+          "outerItems": [
+            "Your basket",
+            "Pay now"
+          ],
+          "attempt": "page.get_by_label(\"Card number\")",
+          "crossing": "page.frame_locator(\"iframe\")",
+          "failNote": "TimeoutError",
+          "okNote": "found it, inside",
+          "caption": "same locator. different room.",
+          "color": "purple",
+          "atWord": 1.75,
+          "crossAtWord": 14.917,
+          "innerItems": [
+            {
+              "label": "Card number",
+              "title": "target"
+            },
+            {
+              "label": "Expiry"
+            }
+          ]
+        }
+      },
+      "durationFrames": 308,
+      "audio": "audio/pw-dojo-11-frames-tabs_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One extra step is all it takes. Step inside the frame first, and then chain your normal locator onto it, exactly as you always would.",
+      "data": {
+        "codeRun": {
+          "filename": "pay.py",
+          "language": "py",
+          "resultLabel": "what happens",
+          "color": "purple",
+          "atWord": 2.583,
+          "caption": "step inside first, then look",
+          "lines": [
+            {
+              "text": "stripe = page.frame_locator(",
+              "detail": "step inside the frame",
+              "sub": "now you are in there",
+              "label": "inside",
+              "atWord": 5
+            },
+            {
+              "text": "    \"iframe[title='Secure payment']\")"
+            },
+            {
+              "text": "stripe.get_by_label(\"Card number\")",
+              "detail": "then your normal locator",
+              "sub": "found, and filled",
+              "label": "ok",
+              "atWord": 11.417
+            },
+            {
+              "text": "    .fill(\"4242 4242 4242 4242\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 261,
+      "audio": "audio/pw-dojo-11-frames-tabs_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So keep this one in your pocket. Visible on screen, but the locator times out? Suspect an iframe first.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the symptom",
+          "rule": "visible on screen, but the locator times out",
+          "okLabel": "iframe",
+          "noLabel": "not an iframe",
+          "caption": "chat widgets are nearly always iframes",
+          "color": "purple",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "a chat box you can type in",
+              "title": "ok",
+              "sub": "almost always an iframe",
+              "atWord": 7.917
+            },
+            {
+              "text": "a button hidden by a banner",
+              "title": "no",
+              "sub": "that one is episode seven",
+              "atWord": 10.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 218,
+      "audio": "audio/pw-dojo-11-frames-tabs_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Popups and new tabs are in the full lesson, free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 156,
+      "audio": "audio/pw-dojo-11-frames-tabs_short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

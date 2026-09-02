@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "topic": "uv builds your virtual environment for you",
+    "subject": "uv",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "Running your code is what creates the environment — you never activate anything.",
+    "openLoop": "What are the two files that appeared without being asked for?",
+    "analogy": "A workshop that sets itself up the moment you start work.",
+    "screenplay": "explainer",
+    "topicAxes": [
+      "entity-novelty"
+    ],
+    "seo": {
+      "title": "uv run builds your venv for you #python #uv",
+      "description": "No python -m venv. No source .venv/bin/activate. uv run creates the environment and the lockfile while it runs your code.",
+      "queries": [
+        "uv run venv",
+        "do i need to activate venv with uv",
+        "uv lock file"
+      ],
+      "tags": [
+        "uv",
+        "python",
+        "uv python",
+        "venv",
+        "virtualenv",
+        "python packaging",
+        "pip alternative",
+        "shorts",
+        "python tips"
+      ],
+      "sources": [
+        "uv 0.12.9 run locally on macOS, 2026-09-02"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "NO VENV, NO ACTIVATE",
+    "badge": "uv run",
+    "asset": "si:uv",
+    "frames": 1
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "uv builds your Python environment for you. You never type venv, and you never activate it.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "NO VENV, NO ACTIVATE",
+        "subtext": "uv run",
+        "heroAsset": "si:uv",
+        "hookVariant": "stack"
+      },
+      "durationFrames": 178,
+      "audio": "audio/uv-getting-started_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "narration": "Watch. One command — uv run — and look at the first two lines. An interpreter got picked, then a virtual environment was created without being asked. Your code ran straight after. List the folder and two new things are there: a dot venv, and a lockfile. Running your code is what built the environment.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "uv run, start to finish",
+          "premise": "One command, and the environment appears with it.",
+          "layout": "full",
+          "color": "green",
+          "clips": [
+            {
+              "ref": "rec:uv-tour#run",
+              "label": "uv run",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "it made the venv",
+                  "mark": "venv",
+                  "color": "green",
+                  "atWord": 19.25
+                }
+              ],
+              "id": "run",
+              "src": "rec/uv-tour/seg-04.mp4",
+              "frames": 98,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "venv": {
+                  "x": 368,
+                  "y": 118,
+                  "w": 262,
+                  "h": 19
+                },
+                "hello": {
+                  "x": 368,
+                  "y": 175,
+                  "w": 159,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 80,
+                  "w": 112,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 956,
+                  "h": 133
+                }
+              ],
+              "atWord": 2.417
+            },
+            {
+              "ref": "rec:uv-tour#after",
+              "label": "two new things",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "you never asked",
+                  "mark": "lock",
+                  "color": "purple",
+                  "atWord": 34.5
+                }
+              ],
+              "id": "after",
+              "src": "rec/uv-tour/seg-05.mp4",
+              "frames": 60,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "lock": {
+                  "x": 968,
+                  "y": 232,
+                  "w": 66,
+                  "h": 19
+                },
+                "dotvenv": {
+                  "x": 668,
+                  "y": 232,
+                  "w": 47,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 194,
+                  "w": 47,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 956,
+                  "h": 190
+                }
+              ],
+              "atWord": 29.667
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 550,
+      "audio": "audio/uv-getting-started_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "OUTRO_CTA",
+      "narration": "The full walkthrough covers uv add, the lockfile, and shipping a package. Link above.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "headline": "Full uv walkthrough",
+        "sub": "on the channel",
+        "channel": "THE NBX STUDIO"
+      },
+      "durationFrames": 198,
+      "audio": "audio/uv-getting-started_shorts_s03.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

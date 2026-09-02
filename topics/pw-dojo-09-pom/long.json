@@ -1,0 +1,852 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP09: Page Object Model",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how the Page Object Model turns a fifty-file rename into a one-line fix",
+    "openLoop": "A developer renames one button — why do fifty of your tests break?",
+    "analogy": "One drawer for every sock, instead of one sock in every room.",
+    "topicAxes": [
+      "skill-acquisition",
+      "maintainability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #9 — Page Object Model (one file, not fifty)",
+      "description": "Locators live in a page class; tests only tell the story. Rename a button and you fix one line instead of fifty files.",
+      "tags": [
+        "playwright",
+        "python",
+        "page object model",
+        "pom",
+        "test automation",
+        "pytest",
+        "maintainable tests"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Page Object Model",
+    "badge": "Dojo · EP 9",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "ONE FILE, NOT FIFTY",
+    "badge": "EP 09 · POM",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A developer renames one button. And fifty of your tests break overnight.",
+      "data": {
+        "headline": "ONE BUTTON. FIFTY BREAKS.",
+        "subtext": "and nobody told you",
+        "heroAsset": "lucide:layers",
+        "headlineAtWord": 3.833,
+        "heroAtWord": 7.583
+      },
+      "durationFrames": 157,
+      "audio": "audio/pw-dojo-09-pom_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here are three lines you have written before. They log a user in. And they sit at the top of every login test you own. Fifty tests, fifty copies of the same three lines.",
+      "data": {
+        "code": {
+          "filename": "test_1.py … test_50.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "# the same 3 lines, in all 50 files:"
+            },
+            {
+              "text": "page.get_by_label(\"Username\").fill(\"tomsmith\")",
+              "color": "red"
+            },
+            {
+              "text": "page.get_by_label(\"Password\").fill(",
+              "color": "red"
+            },
+            {
+              "text": "    \"SuperSecretPassword!\")",
+              "color": "red"
+            },
+            {
+              "text": "page.get_by_role(\"button\",",
+              "color": "red"
+            },
+            {
+              "text": "    name=\"Login\").click()",
+              "color": "red"
+            }
+          ],
+          "atWord": 8
+        }
+      },
+      "durationFrames": 340,
+      "audio": "audio/pw-dojo-09-pom_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Today we put them all in one place. Once.",
+      "data": {
+        "title": "Page Object Model",
+        "subtitle": "The Playwright Dojo · Episode 9"
+      },
+      "durationFrames": 114,
+      "audio": "audio/pw-dojo-09-pom_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things today. Why copying hurts later. How one class fixes it. And what your tests look like after.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:copy",
+              "label": "the copy problem",
+              "color": "red",
+              "atWord": 3.75
+            },
+            {
+              "icon": "lucide:box",
+              "label": "one class per page",
+              "color": "purple",
+              "atWord": 9.25
+            },
+            {
+              "icon": "lucide:book-open",
+              "label": "tests as stories",
+              "color": "green",
+              "atWord": 12
+            }
+          ]
+        }
+      },
+      "durationFrames": 231,
+      "audio": "audio/pw-dojo-09-pom_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "First, let us look at what copying really costs you.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Copy-paste hell",
+          "subtitle": "why fifty copies hurt"
+        }
+      },
+      "durationFrames": 112,
+      "audio": "audio/pw-dojo-09-pom_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CHANGE_RIPPLE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Now watch what one rename costs you. The button text changes. Every copy is now wrong. So you open each file and fix it, by hand, one after another. And you miss one.",
+      "data": {
+        "changeRipple": {
+          "mode": "scattered",
+          "line": "name=\"Login\"",
+          "newLine": "name=\"Sign in\"",
+          "cards": 12,
+          "countLabel": "50 test files",
+          "fixLabel": "50 files, by hand",
+          "doneLabel": "49 fixed. one missed.",
+          "missIndex": 11,
+          "caption": "the same locator, copied fifty times",
+          "color": "red",
+          "atWord": 8.167
+        }
+      },
+      "durationFrames": 377,
+      "audio": "audio/pw-dojo-09-pom_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "RULE_TEST",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So here is the rule that fixes it, and it is short. Every locator lives in exactly one place. Watch it judge two things you have already seen today. One of them passes. One of them does not.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the rule",
+          "rule": "every locator lives in exactly one place",
+          "okLabel": "follows it",
+          "noLabel": "breaks it",
+          "caption": "copy-paste is a bill you pay later",
+          "color": "green",
+          "atWord": 1.75,
+          "cases": [
+            {
+              "text": "the same line in fifty tests",
+              "title": "no",
+              "sub": "fifty owners, fifty edits",
+              "atWord": 13.667
+            },
+            {
+              "text": "one line in pages/login_page.py",
+              "title": "ok",
+              "sub": "one owner, one edit",
+              "atWord": 20.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 381,
+      "audio": "audio/pw-dojo-09-pom_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Now for the fix. It is one ordinary Python class.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "One class per page",
+          "subtitle": "the page object"
+        }
+      },
+      "durationFrames": 135,
+      "audio": "audio/pw-dojo-09-pom_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "FILE_TREE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "First, where does this go? You make a new folder called pages. Inside it, one file for each page of your app. Your login page gets login page dot py.",
+      "data": {
+        "fileTree": {
+          "headline": "A new folder called [pages]",
+          "nodes": [
+            {
+              "name": "test_login.py",
+              "depth": 0,
+              "kind": "file"
+            },
+            {
+              "name": "pages",
+              "depth": 0,
+              "kind": "folder",
+              "color": "green"
+            },
+            {
+              "name": "login_page.py",
+              "depth": 1,
+              "kind": "file",
+              "color": "green"
+            }
+          ],
+          "highlight": 2,
+          "atWord": 12.167
+        }
+      },
+      "durationFrames": 331,
+      "audio": "audio/pw-dojo-09-pom_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Now the class itself. We will take three lines, one at a time. The first line gives it a name. The second one runs the moment you make one. And the third keeps hold of the page you handed over.",
+      "data": {
+        "codeRun": {
+          "filename": "pages/login_page.py",
+          "language": "py",
+          "resultLabel": "what it means",
+          "caption": "a class that stands for one page",
+          "color": "purple",
+          "atWord": 2.5,
+          "lines": [
+            {
+              "text": "# pages/login_page.py"
+            },
+            {
+              "text": "from playwright.sync_api import Page"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "class LoginPage:",
+              "detail": "one class for one page",
+              "sub": "the login page, in code",
+              "label": "class",
+              "atWord": 7.917
+            },
+            {
+              "text": "    def __init__(self, page: Page):",
+              "detail": "this runs when you make one",
+              "sub": "it is handed a page",
+              "label": "page",
+              "atWord": 14.833
+            },
+            {
+              "text": "        self.page = page",
+              "detail": "and it keeps that page",
+              "sub": "kept, for every method",
+              "label": "kept",
+              "atWord": 20.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 389,
+      "audio": "audio/pw-dojo-09-pom_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Now the locators, and there are four of them. The two boxes each get a line of their own. Then comes the login button, the one that keeps getting renamed. And last, the little strip where the message appears. Each of them is written once, right here.",
+      "data": {
+        "codeRun": {
+          "filename": "pages/login_page.py",
+          "language": "py",
+          "resultLabel": "what it means",
+          "caption": "every locator, written exactly once",
+          "color": "purple",
+          "atWord": 2.5,
+          "lines": [
+            {
+              "text": "    def __init__(self, page: Page):"
+            },
+            {
+              "text": "        self.page = page"
+            },
+            {
+              "text": "        self.username = page.get_by_label(",
+              "detail": "the two boxes, once each",
+              "sub": "the two boxes, saved",
+              "label": "saved",
+              "atWord": 7
+            },
+            {
+              "text": "            \"Username\")"
+            },
+            {
+              "text": "        self.password = page.get_by_label("
+            },
+            {
+              "text": "            \"Password\")"
+            },
+            {
+              "text": "        self.login_btn = page.get_by_role(",
+              "detail": "the button everyone renames",
+              "sub": "the button, saved",
+              "label": "saved",
+              "atWord": 14.583
+            },
+            {
+              "text": "            \"button\", name=\"Login\")"
+            },
+            {
+              "text": "        self.flash = page.locator(",
+              "detail": "and the message strip",
+              "sub": "the message strip, saved",
+              "label": "saved",
+              "atWord": 19.083
+            },
+            {
+              "text": "            \"#flash\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 446,
+      "audio": "audio/pw-dojo-09-pom_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "SAVED_SEARCH",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "You might worry that we just searched the page four times. We did not. Remember episode four. A locator is a saved search. Look at the page. Nothing on it has been touched. It only goes looking when you act on it.",
+      "data": {
+        "savedSearch": {
+          "query": "page.get_by_label(\"Username\")",
+          "pageTitle": "Login Page",
+          "savedLabel": "saved, not run",
+          "ranLabel": "run · 1 found",
+          "trigger": ".fill(\"tomsmith\")",
+          "matchIndex": 1,
+          "caption": "four locators, and nothing was searched",
+          "color": "blue",
+          "atWord": 1.75,
+          "runAtWord": 22,
+          "elements": [
+            {
+              "label": "Login Page",
+              "title": "text"
+            },
+            {
+              "label": "Username",
+              "title": "field"
+            },
+            {
+              "label": "Password",
+              "title": "field"
+            },
+            {
+              "label": "Login",
+              "title": "button"
+            }
+          ]
+        }
+      },
+      "durationFrames": 399,
+      "audio": "audio/pw-dojo-09-pom_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Next come the actions. These are just methods, and they are named the way you would say them out loud. The first one opens the page. The second one logs a person in. Now look carefully at what moved inside that second one.",
+      "data": {
+        "codeRun": {
+          "filename": "pages/login_page.py",
+          "language": "py",
+          "resultLabel": "what you can call",
+          "caption": "the three lines now live in one place",
+          "color": "green",
+          "atWord": 2.417,
+          "lines": [
+            {
+              "text": "    def goto(self):",
+              "detail": "an action, named plainly",
+              "sub": "login.goto()",
+              "label": "call it",
+              "atWord": 6
+            },
+            {
+              "text": "        self.page.goto("
+            },
+            {
+              "text": "            \"https://the-internet\""
+            },
+            {
+              "text": "            \".herokuapp.com/login\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    def login(self, user, pwd):",
+              "detail": "the whole login, in one name",
+              "sub": "login.login(user, pwd)",
+              "label": "call it",
+              "atWord": 13.25
+            },
+            {
+              "text": "        self.username.fill(user)",
+              "detail": "the three lines moved in here",
+              "sub": "they live here now, once",
+              "label": "moved",
+              "atWord": 18.25
+            },
+            {
+              "text": "        self.password.fill(pwd)"
+            },
+            {
+              "text": "        self.login_btn.click()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 392,
+      "audio": "audio/pw-dojo-09-pom_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "BROWSER_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "So what does one single call to login actually do? Watch the page now, not the code. The username gets typed in first. Then the password goes in below it. Then the button is pressed. That was all three lines.",
+      "data": {
+        "browserStep": {
+          "url": "the-internet.herokuapp.com/login",
+          "screenTitle": "Login Page",
+          "caption": "one call, three things on the page",
+          "color": "blue",
+          "atWord": 3.5,
+          "steps": [
+            {
+              "text": "self.username.fill(user)",
+              "title": "fill",
+              "label": "type the username",
+              "detail": "Username",
+              "sub": "tomsmith",
+              "atWord": 13.333
+            },
+            {
+              "text": "self.password.fill(pwd)",
+              "title": "fill",
+              "label": "type the password",
+              "detail": "Password",
+              "sub": "SuperSecret!",
+              "atWord": 18.25
+            },
+            {
+              "text": "self.login_btn.click()",
+              "title": "click",
+              "label": "press the button",
+              "detail": "Login",
+              "color": "green",
+              "atWord": 23.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 416,
+      "audio": "audio/pw-dojo-09-pom_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "And here is the part that makes it all worth it.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Tests become stories",
+          "subtitle": "the good part"
+        }
+      },
+      "durationFrames": 108,
+      "audio": "audio/pw-dojo-09-pom_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here is the test now. First you bring the class in at the top. Then you make one, and hand it your page. Then you simply say what the person did. And last, you say what you expect to see.",
+      "data": {
+        "codeRun": {
+          "filename": "test_login.py",
+          "language": "py",
+          "resultLabel": "what the line says",
+          "caption": "no locators. only the story.",
+          "color": "green",
+          "atWord": 2.417,
+          "lines": [
+            {
+              "text": "# test_login.py"
+            },
+            {
+              "text": "from pages.login_page import LoginPage"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "def test_successful_login(page: Page):"
+            },
+            {
+              "text": "    login = LoginPage(page)",
+              "detail": "make one, hand it the page",
+              "sub": "your page object is ready",
+              "label": "ready",
+              "atWord": 6.083
+            },
+            {
+              "text": "    login.goto()"
+            },
+            {
+              "text": "    login.login(\"tomsmith\",",
+              "detail": "this is the whole login",
+              "sub": "reads like a sentence",
+              "label": "story",
+              "atWord": 13.333
+            },
+            {
+              "text": "        \"SuperSecretPassword!\")"
+            },
+            {
+              "text": "    expect(login.flash).to_contain_text(",
+              "detail": "and this is what you expect",
+              "sub": "the green banner is checked",
+              "label": "check",
+              "atWord": 18.5
+            },
+            {
+              "text": "        \"You logged into a secure area!\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 370,
+      "audio": "audio/pw-dojo-09-pom_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Run it, and nothing about running changed. Two tests collected. Two tests passed. Four seconds.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pytest -v",
+              "exitCode": 0,
+              "atWord": 3.083,
+              "output": [
+                "test_login.py::test_successful_login PASSED  [ 50%]",
+                "test_login.py::test_wrong_password PASSED   [100%]",
+                "======== 2 passed in 4.10s ========"
+              ]
+            }
+          ],
+          "atWord": 3.083
+        }
+      },
+      "durationFrames": 209,
+      "audio": "audio/pw-dojo-09-pom_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "CODE_WINDOW",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "And here is a second test, for a wrong password. Same class. Same three lines. Only the data changed, and the message you expect.",
+      "data": {
+        "code": {
+          "filename": "test_login.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "def test_wrong_password(page: Page):"
+            },
+            {
+              "text": "    login = LoginPage(page)"
+            },
+            {
+              "text": "    login.goto()"
+            },
+            {
+              "text": "    login.login(\"tomsmith\","
+            },
+            {
+              "text": "        \"wrong-password\")",
+              "color": "orange"
+            },
+            {
+              "text": "    expect(login.flash).to_contain_text("
+            },
+            {
+              "text": "        \"Your password is invalid!\")",
+              "color": "orange"
+            }
+          ],
+          "atWord": 7.333
+        }
+      },
+      "durationFrames": 283,
+      "audio": "audio/pw-dojo-09-pom_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "CHANGE_RIPPLE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Now rename that button again. This time the words live in one file. You change one line there. And every single test heals, without being opened.",
+      "data": {
+        "changeRipple": {
+          "mode": "central",
+          "line": "name=\"Login\"",
+          "newLine": "name=\"Sign in\"",
+          "cards": 12,
+          "countLabel": "50 test files",
+          "holder": "pages/login_page.py",
+          "fixLabel": "one line, one file",
+          "doneLabel": "all 50 fixed",
+          "caption": "not one test file had to be opened",
+          "color": "green",
+          "atWord": 8.583
+        }
+      },
+      "durationFrames": 316,
+      "audio": "audio/pw-dojo-09-pom_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "RESPONSIBILITY_SPLIT",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "That is the whole idea, and it has a name. The golden separation. Take the four lines you just wrote and put each one where it belongs. Finding things, and doing things, go left. What the person did, and what you expect, go right.",
+      "data": {
+        "respSplit": {
+          "leftLabel": "Page object",
+          "leftSub": "HOW",
+          "rightLabel": "Your test",
+          "rightSub": "WHAT",
+          "pileLabel": "everything you wrote",
+          "caption": "one boundary, every line knows its side",
+          "color": "purple",
+          "atWord": 1.833,
+          "lines": [
+            {
+              "text": "get_by_label(\"Username\")",
+              "title": "left",
+              "sub": "where it is",
+              "atWord": 14.917
+            },
+            {
+              "text": "self.login_btn.click()",
+              "title": "left",
+              "sub": "how to press it",
+              "atWord": 19
+            },
+            {
+              "text": "login.login(user, pwd)",
+              "title": "right",
+              "sub": "what they did",
+              "atWord": 22.333
+            },
+            {
+              "text": "expect(login.flash)",
+              "title": "right",
+              "sub": "what you expect",
+              "atWord": 24.75
+            }
+          ],
+          "source": "san-gitlogin.github.io/playwright-dojo"
+        }
+      },
+      "durationFrames": 454,
+      "audio": "audio/pw-dojo-09-pom_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. The Login button becomes Sign in. With a page object in place, what do you change? Read all four before you decide. Pause here if you want a longer look. Ready? The answer is B. One locator line, inside LoginPage.",
+      "data": {
+        "quiz": {
+          "question": "The Login button becomes \"Sign in\". What changes?",
+          "options": [
+            {
+              "text": "Every test that logs in"
+            },
+            {
+              "text": "One locator line in LoginPage"
+            },
+            {
+              "text": "Nothing, tests adapt on their own"
+            },
+            {
+              "text": "The pytest config file"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 29.5,
+          "why": "The locator exists in one place. One line, fifty tests fixed.",
+          "atWord": 1.917
+        }
+      },
+      "durationFrames": 470,
+      "audio": "audio/pw-dojo-09-pom_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So here is the interview answer, in three lines. Locators live in page classes. Tests only tell the story. So a change to the app is a one-file fix.",
+      "data": {
+        "heading": "Say exactly this in an interview",
+        "points": [
+          {
+            "text": "locators live in page classes",
+            "atWord": 8.167
+          },
+          {
+            "text": "tests only tell the story",
+            "atWord": 13.5
+          },
+          {
+            "text": "a UI change is a one-file fix",
+            "atWord": 17.917
+          }
+        ]
+      },
+      "durationFrames": 331,
+      "audio": "audio/pw-dojo-09-pom_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Next time, many elements at once. Crowd control. The whole course is free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Many Elements — Crowd Control",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 210,
+      "audio": "audio/pw-dojo-09-pom_long_s23.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

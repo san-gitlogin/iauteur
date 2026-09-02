@@ -1,0 +1,675 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP10: Many Elements, Crowd Control",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how to pick the one element you mean out of a page full of identical ones",
+    "openLoop": "Twenty rows, twenty Edit buttons — how do you click the right one?",
+    "analogy": "The spotlight has found a whole chorus line, not one actor.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #10 — filter(), count() and nth()",
+      "description": "One locator can match a whole group. Count it, loop it, and use filter(has_text=) to find the row you mean instead of a brittle nth().",
+      "tags": [
+        "playwright",
+        "python",
+        "filter",
+        "nth",
+        "locators",
+        "test automation",
+        "table rows"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Many Elements",
+    "badge": "Dojo · EP 10",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "FIND THE RIGHT ROW",
+    "badge": "EP 10 · CROWD",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Twenty rows on screen. Every one has an Edit button. You need exactly one of them.",
+      "data": {
+        "headline": "TWENTY EDIT BUTTONS.",
+        "subtext": "you need one of them",
+        "heroAsset": "lucide:list",
+        "headlineAtWord": 4.25,
+        "heroAtWord": 8.417
+      },
+      "durationFrames": 179,
+      "audio": "audio/pw-dojo-10-many-elements_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Today you learn how to pick the right one, every single time.",
+      "data": {
+        "title": "Many Elements",
+        "subtitle": "The Playwright Dojo · Episode 10"
+      },
+      "durationFrames": 120,
+      "audio": "audio/pw-dojo-10-many-elements_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things today. Counting a whole group. Narrowing it down to one row. And picking by position, carefully.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:hash",
+              "label": "count the group",
+              "color": "orange",
+              "atWord": 5
+            },
+            {
+              "icon": "lucide:filter",
+              "label": "narrow to one row",
+              "color": "green",
+              "atWord": 9
+            },
+            {
+              "icon": "lucide:move-vertical",
+              "label": "pick by position",
+              "color": "blue",
+              "atWord": 12
+            }
+          ]
+        }
+      },
+      "durationFrames": 237,
+      "audio": "audio/pw-dojo-10-many-elements_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Let us start with what happens when one locator matches more than one thing.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "One locator, many",
+          "subtitle": "the whole group at once"
+        }
+      },
+      "durationFrames": 143,
+      "audio": "audio/pw-dojo-10-many-elements_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "CROWD_MATCH",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Here is a todo list with five items. One locator matches all five at once. Back in episode four, that was an error. But look closely. It is only an error when you try to ACT on them. Asking about them is fine.",
+      "data": {
+        "crowdMatch": {
+          "query": "page.get_by_role(\"listitem\")",
+          "pageTitle": "My todo list",
+          "countLabel": "matches",
+          "strict": true,
+          "strictNote": "you cannot click five things",
+          "caption": "a match is fine. an action is not.",
+          "color": "orange",
+          "atWord": 1.75,
+          "members": [
+            {
+              "label": "Buy milk"
+            },
+            {
+              "label": "Walk dog"
+            },
+            {
+              "label": "Learn Playwright"
+            },
+            {
+              "label": "Ship it"
+            },
+            {
+              "label": "Sleep"
+            }
+          ]
+        }
+      },
+      "durationFrames": 429,
+      "audio": "audio/pw-dojo-10-many-elements_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So what can you do with a group? Three things, and we will take them one at a time. The first tells you how many there are. The second grabs every label in one go. And the third hands you a list you can loop over.",
+      "data": {
+        "codeRun": {
+          "filename": "crowd.py",
+          "language": "py",
+          "resultLabel": "what it prints",
+          "caption": "three tools, one group",
+          "color": "orange",
+          "atWord": 2.25,
+          "lines": [
+            {
+              "text": "items = page.get_by_role(\"listitem\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "print(items.count())",
+              "detail": "how many are there right now",
+              "sub": "5",
+              "label": "stdout",
+              "atWord": 9.417
+            },
+            {
+              "text": "print(items.all_inner_texts())",
+              "detail": "every label, in one go",
+              "sub": "['Buy milk', 'Walk dog', ...]",
+              "label": "stdout",
+              "atWord": 15.833
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "for item in items.all():",
+              "detail": "a list you can loop over",
+              "sub": "5 single locators",
+              "label": "loop",
+              "atWord": 22.25
+            },
+            {
+              "text": "    print(item.inner_text())"
+            }
+          ]
+        }
+      },
+      "durationFrames": 377,
+      "audio": "audio/pw-dojo-10-many-elements_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Run it, and here is exactly what comes back. The number five. Then the five labels together. Then the loop, printing them one per line.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "python crowd.py",
+              "exitCode": 0,
+              "atWord": 4.417,
+              "output": [
+                "5",
+                "['Buy milk', 'Walk dog', 'Learn Playwright', ...]",
+                "Buy milk",
+                "Walk dog"
+              ]
+            }
+          ],
+          "atWord": 4.417
+        }
+      },
+      "durationFrames": 278,
+      "audio": "audio/pw-dojo-10-many-elements_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "One warning before we move on. If you want to check how many there are, do not use count yourself. Use expect. One of these asks once and gives up. The other keeps checking for five seconds.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the safe way",
+          "rule": "check a size with expect, never with count()",
+          "okLabel": "retries",
+          "noLabel": "asks once",
+          "caption": "one waits for the page. one does not.",
+          "color": "green",
+          "atWord": 1.833,
+          "cases": [
+            {
+              "text": "assert items.count() == 5",
+              "title": "no",
+              "sub": "asks once, then gives up",
+              "atWord": 15.667
+            },
+            {
+              "text": "expect(items).to_have_count(5)",
+              "title": "ok",
+              "sub": "keeps checking for 5s",
+              "atWord": 20.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 382,
+      "audio": "audio/pw-dojo-10-many-elements_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Now the part that solves the problem we opened with.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "filter()",
+          "subtitle": "narrowing the crowd"
+        }
+      },
+      "durationFrames": 104,
+      "audio": "audio/pw-dojo-10-many-elements_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "ROW_FILTER",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Watch this. Every row has its own Delete button, and they all look the same. Now the filter arrives. It keeps only the row that mentions the dog. The others drop away. And here is the important part. The Delete pressed belongs to that row.",
+      "data": {
+        "rowFilter": {
+          "baseLabel": "get_by_role(\"listitem\")",
+          "condition": ".filter(has_text=\"Walk dog\")",
+          "control": "Delete",
+          "actLabel": ".click()",
+          "pageTitle": "My todo list",
+          "caption": "find the row, then act inside it",
+          "color": "orange",
+          "atWord": 1.833,
+          "filterAtWord": 15.417,
+          "actAtWord": 25,
+          "rows": [
+            {
+              "label": "Buy milk"
+            },
+            {
+              "label": "Walk dog",
+              "title": "keep"
+            },
+            {
+              "label": "Learn Playwright"
+            },
+            {
+              "label": "Ship it"
+            },
+            {
+              "label": "Sleep"
+            }
+          ]
+        }
+      },
+      "durationFrames": 454,
+      "audio": "audio/pw-dojo-10-many-elements_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here it is in code. Read the middle part out loud, like a sentence. Among all the list items, keep the one containing the words walk dog. Then click the Delete button inside that one. There is also a second kind of filter, and it keeps rows by what they hold inside them, like a ticked checkbox.",
+      "data": {
+        "codeRun": {
+          "filename": "filter.py",
+          "language": "py",
+          "resultLabel": "what is left",
+          "caption": "find the row, then act within it",
+          "color": "orange",
+          "atWord": 2.333,
+          "lines": [
+            {
+              "text": "rows = page.get_by_role(\"listitem\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "dog_row = rows.filter(",
+              "detail": "keep only rows with that text",
+              "sub": "1 row left, out of 5",
+              "label": "rows",
+              "atWord": 8.5
+            },
+            {
+              "text": "    has_text=\"Walk dog\")"
+            },
+            {
+              "text": "dog_row.get_by_role(\"button\",",
+              "detail": "then act INSIDE that row",
+              "sub": "one Delete, the right one",
+              "label": "click",
+              "atWord": 19.5
+            },
+            {
+              "text": "    name=\"Delete\").click()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "done = rows.filter(",
+              "detail": "or keep rows by what they hold",
+              "sub": "every row with a tick",
+              "label": "rows",
+              "atWord": 28.417
+            },
+            {
+              "text": "    has=page.get_by_role("
+            },
+            {
+              "text": "        \"checkbox\", checked=True))"
+            }
+          ]
+        }
+      },
+      "durationFrames": 490,
+      "audio": "audio/pw-dojo-10-many-elements_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Quick check. This gets asked in interviews. Twenty rows, each with an Edit button. You want the one on Trinity's row. Pause here if you want a longer look. Ready? The answer is C. Filter finds the row by what it says.",
+      "data": {
+        "quiz": {
+          "question": "Twenty rows, each with Edit. Click Edit for \"Trinity\".",
+          "options": [
+            {
+              "text": "get_by_role(\"button\").nth(7)"
+            },
+            {
+              "text": "Loop the rows with an if"
+            },
+            {
+              "text": "filter(has_text=\"Trinity\") first"
+            },
+            {
+              "text": "Click every Edit button"
+            }
+          ],
+          "answerIndex": 2,
+          "revealAtWord": 25.083,
+          "why": "filter finds the row by meaning. nth(7) breaks when it re-sorts.",
+          "atWord": 1.833
+        }
+      },
+      "durationFrames": 439,
+      "audio": "audio/pw-dojo-10-many-elements_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "There is one more way to pick, and it comes with a warning attached.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "first, last, nth",
+          "subtitle": "picking by position"
+        }
+      },
+      "durationFrames": 135,
+      "audio": "audio/pw-dojo-10-many-elements_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "CROWD_MATCH",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Sometimes position really is what you mean. The top search result. The newest message at the bottom. For those there is first, last, and nth. But nth counts from zero, so nth of two is the third one, not the second.",
+      "data": {
+        "crowdMatch": {
+          "query": "get_by_test_id(\"search-result\")",
+          "pageTitle": "Search results",
+          "countLabel": "results",
+          "pickIndex": 2,
+          "pickLabel": ".nth(2) = third",
+          "caption": "nth counts from zero. always.",
+          "color": "blue",
+          "atWord": 1.833,
+          "pickAtWord": 21.417,
+          "members": [
+            {
+              "label": "Playwright docs"
+            },
+            {
+              "label": "Playwright GitHub"
+            },
+            {
+              "label": "Playwright tutorial"
+            },
+            {
+              "label": "Playwright vs Cy"
+            }
+          ]
+        }
+      },
+      "durationFrames": 440,
+      "audio": "audio/pw-dojo-10-many-elements_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here they are in code. First clicks the top one, which is a real idea a person would say. Last scrolls to the one at the bottom. And nth of two clicks the third, because the counting starts at zero.",
+      "data": {
+        "codeRun": {
+          "filename": "position.py",
+          "language": "py",
+          "resultLabel": "what it picks",
+          "caption": "first, last, and one by number",
+          "color": "blue",
+          "atWord": 2.417,
+          "lines": [
+            {
+              "text": "results = page.get_by_test_id("
+            },
+            {
+              "text": "    \"search-result\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "results.first.click()",
+              "detail": "the top one, a real idea",
+              "sub": "clicks result number 1",
+              "label": "first",
+              "atWord": 7.5
+            },
+            {
+              "text": "results.last.scroll_into_view_if_needed()",
+              "detail": "the one at the bottom",
+              "sub": "scrolls to the last one",
+              "label": "last",
+              "atWord": 16.083
+            },
+            {
+              "text": "results.nth(2).click()",
+              "detail": "and this one is the THIRD",
+              "sub": "because counting starts at 0",
+              "label": "nth",
+              "atWord": 21.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 366,
+      "audio": "audio/pw-dojo-10-many-elements_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "INDEX_DRIFT",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "But here is the trap. You write nth of two because Trinity happens to sit third today. Then somebody adds one user. The list re-sorts. Your number has not moved, so it is now pointing at a complete stranger. The filter simply followed her.",
+      "data": {
+        "indexDrift": {
+          "target": "Trinity",
+          "indexLabel": ".nth(2)",
+          "meaningLabel": "filter(has_text=)",
+          "causeLabel": "someone adds a user",
+          "brokenNote": "now points at Neo",
+          "heldNote": "still finds Trinity",
+          "caption": "position is a guess. meaning is not.",
+          "color": "orange",
+          "atWord": 1.833,
+          "shuffleAtWord": 19.667,
+          "before": [
+            {
+              "label": "Morpheus"
+            },
+            {
+              "label": "Neo"
+            },
+            {
+              "label": "Trinity"
+            },
+            {
+              "label": "Switch"
+            }
+          ],
+          "after": [
+            "Apoc",
+            "Morpheus",
+            "Neo",
+            "Trinity",
+            "Switch"
+          ]
+        }
+      },
+      "durationFrames": 469,
+      "audio": "audio/pw-dojo-10-many-elements_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So here is the gut check to carry with you. Would a human ever describe it that way out loud? One of these is something people really say. The other one, nobody has ever said.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the gut check",
+          "rule": "if no human would say it, do not write it",
+          "okLabel": "people say it",
+          "noLabel": "nobody says it",
+          "caption": "position, only when position is the point",
+          "color": "blue",
+          "atWord": 1.75,
+          "cases": [
+            {
+              "text": "\"the first search result\"",
+              "title": "ok",
+              "sub": "a normal thing to say",
+              "atWord": 13.25
+            },
+            {
+              "text": "\"the seventh edit button\"",
+              "title": "no",
+              "sub": "use filter instead",
+              "atWord": 17.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 324,
+      "audio": "audio/pw-dojo-10-many-elements_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So, three lines to remember. Count and loop a group with count and all. Find the right row with filter. And only use a number when the number is the point.",
+      "data": {
+        "heading": "Crowd control, in three lines",
+        "points": [
+          {
+            "text": "count() and all() work on the group",
+            "atWord": 7.583
+          },
+          {
+            "text": "filter() finds the row by meaning",
+            "atWord": 13.25
+          },
+          {
+            "text": "nth() only when position is the point",
+            "atWord": 17.417
+          }
+        ]
+      },
+      "durationFrames": 326,
+      "audio": "audio/pw-dojo-10-many-elements_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Next time, frames, tabs and popups. The whole course is free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Frames, Tabs & Popups",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 205,
+      "audio": "audio/pw-dojo-10-many-elements_long_s19.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

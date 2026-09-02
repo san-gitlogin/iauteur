@@ -1,0 +1,967 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP08: pytest",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how a pytest fixture builds your page for you, and the free flags that come with it",
+    "openLoop": "Where do the six setup lines at the top of every test file go?",
+    "analogy": "A fixture is the backstage crew who set the stage before you walk on.",
+    "topicAxes": [
+      "skill-acquisition",
+      "tooling-shift"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #8 — pytest fixtures explained",
+      "altTitles": [
+        "Stop writing browser setup — pytest fixtures in Playwright"
+      ],
+      "description": "Where the six lines of setup go, what a fixture actually does, the free command-line flags, and why one test is never still logged in from the last one.",
+      "tags": [
+        "playwright",
+        "python",
+        "pytest",
+        "fixtures",
+        "pytest-playwright",
+        "conftest",
+        "playwright python",
+        "playwright tutorial",
+        "test automation"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "pytest",
+    "badge": "Dojo · EP 8",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You open a new test file. And you type the same six lines you typed last time.",
+      "data": {
+        "headline": "THE SAME SIX LINES.",
+        "subtext": "every new test file starts this way",
+        "heroAsset": "lucide:flask-conical",
+        "headlineAtWord": 3.083,
+        "heroAtWord": 7.333
+      },
+      "durationFrames": 165,
+      "audio": "audio/pw-dojo-08-pytest_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here is a test from Act One. Count the lines. Nine of them. But only four are your actual test. The other five just open a browser and close it. You type those five in every file you ever write.",
+      "data": {
+        "code": {
+          "filename": "act_one_way.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "from playwright.sync_api import sync_playwright",
+              "color": "red"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "with sync_playwright() as p:",
+              "color": "red"
+            },
+            {
+              "text": "    browser = p.chromium.launch()",
+              "color": "red"
+            },
+            {
+              "text": "    page = browser.new_page()",
+              "color": "red"
+            },
+            {
+              "text": "    page.goto(\"https://the-internet.herokuapp\""
+            },
+            {
+              "text": "              \".com/login\")"
+            },
+            {
+              "text": "    page.get_by_label(\"Username\").fill(\"tomsmith\")"
+            },
+            {
+              "text": "    page.get_by_role(\"button\").click()"
+            },
+            {
+              "text": "    browser.close()",
+              "color": "red"
+            }
+          ],
+          "atWord": 8.167
+        }
+      },
+      "durationFrames": 405,
+      "audio": "audio/pw-dojo-08-pytest_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "There is a way to delete all five. You do not replace them. You just stop writing them.",
+      "data": {
+        "title": "pytest",
+        "subtitle": "The Playwright Dojo · Episode 8"
+      },
+      "durationFrames": 166,
+      "audio": "audio/pw-dojo-08-pytest_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Think about a real theatre. Before the actors walk on, someone set the stage. Someone put the props out. You never see that person. They are the crew. They work before the show, and after it.",
+      "data": {
+        "stage": {
+          "marquee": "the-internet.herokuapp.com",
+          "curtain": "raising",
+          "actors": [
+            {
+              "label": "Username",
+              "kind": "field",
+              "atWord": 8.833
+            },
+            {
+              "label": "Password",
+              "kind": "field",
+              "atWord": 10.417
+            },
+            {
+              "label": "Login",
+              "kind": "button",
+              "atWord": 12
+            }
+          ],
+          "caption": "ready. And nobody is here.",
+          "atWord": 3.333
+        }
+      },
+      "durationFrames": 361,
+      "audio": "audio/pw-dojo-08-pytest_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three parts today. How the setup disappears. The free flags you get with it. And a room between the browser and the page.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:eraser",
+              "label": "The setup goes",
+              "atWord": 5.167
+            },
+            {
+              "icon": "lucide:flag",
+              "label": "Free flags",
+              "atWord": 8.5
+            },
+            {
+              "icon": "lucide:door-open",
+              "label": "A hidden room",
+              "atWord": 12.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 251,
+      "audio": "audio/pw-dojo-08-pytest_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Start with the setup, and where all of it went.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "From script to test",
+          "subtitle": "Where the setup went"
+        }
+      },
+      "durationFrames": 94,
+      "audio": "audio/pw-dojo-08-pytest_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Watch the five setup lines leave. One line arrives instead. It is a function. And it asks for one thing, by name: a page.",
+      "data": {
+        "diff": {
+          "fileName": "test_login.py",
+          "stat": {
+            "plus": 1,
+            "minus": 4
+          },
+          "atWord": 6.5,
+          "rows": [
+            {
+              "kind": "ctx",
+              "text": "# the Act I ceremony:"
+            },
+            {
+              "kind": "del",
+              "text": "with sync_playwright() as p:"
+            },
+            {
+              "kind": "del",
+              "text": "    browser = p.chromium.launch()"
+            },
+            {
+              "kind": "del",
+              "text": "    page = browser.new_page()"
+            },
+            {
+              "kind": "del",
+              "text": "    browser.close()"
+            },
+            {
+              "kind": "ctx",
+              "text": ""
+            },
+            {
+              "kind": "ctx",
+              "text": "# all of it, replaced by this:"
+            },
+            {
+              "kind": "add",
+              "text": "def test_successful_login(page: Page):"
+            }
+          ]
+        }
+      },
+      "durationFrames": 284,
+      "audio": "audio/pw-dojo-08-pytest_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "FIXTURE_CREW",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Who makes the page now? A fixture does. It builds a browser, then a context, then a page. Then it hands that page to you. Your test runs. Then it takes it all apart, backwards. You never wrote a line of that.",
+      "data": {
+        "fixtureCrew": {
+          "testName": "test_successful_login",
+          "askFor": "page",
+          "crewLabel": "pytest-playwright",
+          "bodyLabel": "your test runs",
+          "teardownLabel": "taken apart, backwards",
+          "caption": "you asked for one word",
+          "color": "green",
+          "atWord": 4.25,
+          "handoffAtWord": 17.167,
+          "teardownAtWord": 25.333,
+          "stages": [
+            {
+              "label": "browser",
+              "sub": "the building",
+              "atWord": 9.917
+            },
+            {
+              "label": "context",
+              "sub": "a dressing room",
+              "atWord": 12.333
+            },
+            {
+              "label": "page",
+              "sub": "the stage",
+              "atWord": 14.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 429,
+      "audio": "audio/pw-dojo-08-pytest_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Now the rules, and there are only three. The file name must start with test underscore. The function name must start with test underscore too. And you ask for page in the brackets. That is all pytest needs.",
+      "data": {
+        "codeRun": {
+          "filename": "test_login.py",
+          "language": "py",
+          "resultLabel": "what pytest sees",
+          "caption": "three rules, and pytest does the rest",
+          "color": "green",
+          "atWord": 2.583,
+          "lines": [
+            {
+              "text": "# test_login.py",
+              "detail": "the file name starts with test_",
+              "sub": "pytest finds this file",
+              "label": "found",
+              "atWord": 8.083
+            },
+            {
+              "text": "from playwright.sync_api import ("
+            },
+            {
+              "text": "    Page, expect)"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "def test_successful_login(",
+              "detail": "the function starts with test_ too",
+              "sub": "pytest will run this one",
+              "label": "run",
+              "atWord": 14.333
+            },
+            {
+              "text": "        page: Page):",
+              "detail": "and here you ask for page",
+              "sub": "the fixture hands it over",
+              "label": "page",
+              "atWord": 22.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 378,
+      "audio": "audio/pw-dojo-08-pytest_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "BROWSER_STEP",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Now the test itself, and it is only three lines. The first one types your username into the box. The second one types the password. The third one presses the Login button. Watch the page do it.",
+      "data": {
+        "browserStep": {
+          "url": "the-internet.herokuapp.com/login",
+          "screenTitle": "Login Page",
+          "caption": "three lines, three things happen",
+          "color": "blue",
+          "atWord": 3.5,
+          "steps": [
+            {
+              "text": "page.get_by_label(\"Username\")",
+              "title": "fill",
+              "label": "type your username",
+              "detail": "Username",
+              "sub": "tomsmith",
+              "atWord": 11.833
+            },
+            {
+              "text": "page.get_by_label(\"Password\")",
+              "title": "fill",
+              "label": "type the password",
+              "detail": "Password",
+              "sub": "SuperSecret!",
+              "atWord": 19.25
+            },
+            {
+              "text": "page.get_by_role(\"button\").click()",
+              "title": "click",
+              "label": "press the Login button",
+              "detail": "Login",
+              "atWord": 24.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 390,
+      "audio": "audio/pw-dojo-08-pytest_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One more line finishes the test. It checks that the welcome message appeared. If it is there, the test passes quietly. If it is not, pytest tells you exactly what it wanted.",
+      "data": {
+        "codeRun": {
+          "filename": "test_login.py",
+          "language": "py",
+          "resultLabel": "the verdict",
+          "caption": "a test that never checks is not a test",
+          "color": "green",
+          "atWord": 2.583,
+          "lines": [
+            {
+              "text": "expect(page.get_by_text(",
+              "detail": "find the welcome message",
+              "sub": "looks for the banner",
+              "label": "check",
+              "atWord": 5.75
+            },
+            {
+              "text": "    \"You logged into a secure area!\")"
+            },
+            {
+              "text": ").to_be_visible()",
+              "detail": "and check you can see it",
+              "sub": "green: the test passes",
+              "label": "pass",
+              "atWord": 14.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 327,
+      "audio": "audio/pw-dojo-08-pytest_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Then you run it with one word. Pytest. It finds your file. It runs your test. One passed, in three and a half seconds.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@dojo",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pytest",
+              "exitCode": 0,
+              "atWord": 6.167,
+              "output": [
+                "======= test session starts =======",
+                "collected 1 item",
+                "test_login.py .                [100%]",
+                "======== 1 passed in 3.42s ========"
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 267,
+      "audio": "audio/pw-dojo-08-pytest_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Worth writing down. A fixture is the backstage crew. Ask for page, and a ready stage appears. The clean up is automatic.",
+      "data": {
+        "stickyNote": {
+          "headline": "A fixture is the [crew]",
+          "color": "green",
+          "notes": [
+            {
+              "title": "FIXTURE = THE CREW",
+              "tag": "memory hook",
+              "body": "Ask for \"page\" in your arguments and a fresh, ready stage appears. Cleanup happens for you.",
+              "highlight": "a fresh, ready stage appears",
+              "asset": "lucide:users",
+              "atWord": 10.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 282,
+      "audio": "audio/pw-dojo-08-pytest_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "First check. Your test asks for page in the brackets. Where does that page come from? Have a think, and pause if you want longer. Ready? It is B. A fixture builds it and hands it in.",
+      "data": {
+        "quiz": {
+          "question": "Where does the page argument come from?",
+          "options": [
+            {
+              "text": "You create it above the function"
+            },
+            {
+              "text": "A fixture makes it and passes it"
+            },
+            {
+              "text": "It is a global variable"
+            },
+            {
+              "text": "Nobody really knows"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "pytest sees the name, finds the fixture, and passes you the result.",
+          "revealAtWord": 20.5,
+          "atWord": 3.333
+        }
+      },
+      "durationFrames": 367,
+      "audio": "audio/pw-dojo-08-pytest_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Now the flags. You get these free, and they change nothing in your code.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The free flags",
+          "subtitle": "One suite, many modes"
+        }
+      },
+      "durationFrames": 153,
+      "audio": "audio/pw-dojo-08-pytest_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Same tests, new powers, and you change nothing. Add dash dash headed and a real browser opens so you can watch. Add dash dash browser firefox and the same test runs in Firefox. Add slow mo and it slows right down so you can see it.",
+      "data": {
+        "codeRun": {
+          "filename": "your terminal",
+          "language": "bash",
+          "resultLabel": "what changes",
+          "caption": "no code changes. None at all.",
+          "color": "purple",
+          "atWord": 2.583,
+          "lines": [
+            {
+              "text": "pytest --headed",
+              "detail": "a real browser opens",
+              "sub": "you watch it happen",
+              "label": "watch",
+              "atWord": 7.417
+            },
+            {
+              "text": "pytest --browser firefox",
+              "detail": "same test, different browser",
+              "sub": "runs in Firefox",
+              "label": "browser",
+              "atWord": 17.833
+            },
+            {
+              "text": "pytest --headed --slowmo 500",
+              "detail": "half a second between actions",
+              "sub": "human speed replay",
+              "label": "slow",
+              "atWord": 27.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 464,
+      "audio": "audio/pw-dojo-08-pytest_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Write these down. One suite, many modes. Headed to watch. Browser to switch. Slow mo to slow down. Dash k to pick one test. And screenshot to keep the evidence.",
+      "data": {
+        "stickyNote": {
+          "headline": "One suite, [many modes]",
+          "color": "purple",
+          "notes": [
+            {
+              "title": "THE FLAGS",
+              "tag": "memory hook",
+              "body": "--headed watch · --browser switch · --slowmo slow · -k pick one · --screenshot evidence",
+              "highlight": "--browser switch",
+              "asset": "lucide:flag",
+              "atWord": 13.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 377,
+      "audio": "audio/pw-dojo-08-pytest_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "TERMINAL_SESSION",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Here is the best one. Name two browsers on one line. The same test now runs twice, once in each. That is cross browser testing, and you wrote no new code.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@dojo",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pytest --browser chromium --browser firefox",
+              "exitCode": 0,
+              "atWord": 7.833,
+              "output": [
+                "collected 2 items",
+                "test_successful_login[chromium] .    [ 50%]",
+                "test_successful_login[firefox] .     [100%]",
+                "======== 2 passed in 6.87s ========"
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 340,
+      "audio": "audio/pw-dojo-08-pytest_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Two more worth knowing. Dash k login runs only the tests with login in the name. And screenshot only on failure leaves a photo behind when something breaks.",
+      "data": {
+        "codeRun": {
+          "filename": "your terminal",
+          "language": "bash",
+          "resultLabel": "what you get",
+          "caption": "you never write code for any of this",
+          "color": "orange",
+          "atWord": 2.75,
+          "lines": [
+            {
+              "text": "pytest -k login",
+              "detail": "only tests with login in the name",
+              "sub": "3 selected, 9 skipped",
+              "label": "filter",
+              "atWord": 4.583
+            },
+            {
+              "text": "pytest --screenshot only-on-failure",
+              "detail": "a photo of every failure",
+              "sub": "saved to test-results/",
+              "label": "photo",
+              "atWord": 15.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 320,
+      "audio": "audio/pw-dojo-08-pytest_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "And now the room nobody told you about, sitting between the browser and the page.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The dressing room",
+          "subtitle": "Why tests never leak"
+        }
+      },
+      "durationFrames": 162,
+      "audio": "audio/pw-dojo-08-pytest_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "FIXTURE_CREW",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Look at those three again. The browser is the whole building. In between sits a dressing room, called a context. And the page is the stage. Your cookies live in that middle room, and that is the whole point.",
+      "data": {
+        "fixtureCrew": {
+          "testName": "test_anything",
+          "askFor": "page",
+          "crewLabel": "one test",
+          "caption": "building, dressing room, stage",
+          "color": "blue",
+          "atWord": 3.167,
+          "stages": [
+            {
+              "label": "browser",
+              "sub": "the whole building",
+              "atWord": 5.333
+            },
+            {
+              "label": "context",
+              "sub": "cookies live here",
+              "color": "orange",
+              "atWord": 14.667
+            },
+            {
+              "label": "page",
+              "sub": "the stage",
+              "atWord": 16.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 358,
+      "audio": "audio/pw-dojo-08-pytest_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "SPLIT_PATHS",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here is why that matters. Test A logs in. Its cookie sits in its own dressing room. Test B starts in a brand new room. So test B is not logged in. Ever.",
+      "data": {
+        "center": {
+          "title": "one browser",
+          "color": "purple",
+          "atWord": 4.417
+        },
+        "left": {
+          "title": "Test A",
+          "badge": {
+            "text": "logged in",
+            "color": "green"
+          },
+          "color": "green",
+          "atWord": 9.417,
+          "lines": [
+            {
+              "text": "its own dressing room"
+            },
+            {
+              "text": "cookie saved here",
+              "color": "green"
+            }
+          ]
+        },
+        "right": {
+          "title": "Test B",
+          "badge": {
+            "text": "brand new",
+            "color": "blue"
+          },
+          "color": "blue",
+          "atWord": 15.333,
+          "lines": [
+            {
+              "text": "a fresh dressing room"
+            },
+            {
+              "text": "no cookie at all",
+              "color": "red"
+            }
+          ]
+        },
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 355,
+      "audio": "audio/pw-dojo-08-pytest_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "You can use that on purpose. Ask for browser instead of page. Make one context for Alice. Make another for Bob. Now you have two people in one browser, and they cannot see each other at all.",
+      "data": {
+        "codeRun": {
+          "filename": "test_chat.py",
+          "language": "py",
+          "resultLabel": "two people at once",
+          "caption": "two dressing rooms, one building",
+          "color": "purple",
+          "atWord": 2.583,
+          "lines": [
+            {
+              "text": "def test_two_users_chat(browser):",
+              "detail": "ask for browser, not page",
+              "sub": "you build the rooms",
+              "label": "you",
+              "atWord": 5.667
+            },
+            {
+              "text": "    alice_ctx = browser.new_context()",
+              "detail": "one dressing room for Alice",
+              "sub": "her own cookies",
+              "label": "alice",
+              "atWord": 10.333
+            },
+            {
+              "text": "    bob_ctx = browser.new_context()",
+              "detail": "a separate one for Bob",
+              "sub": "totally separate cookies",
+              "label": "bob",
+              "atWord": 14.167
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    alice = alice_ctx.new_page()"
+            },
+            {
+              "text": "    bob = bob_ctx.new_page()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 366,
+      "audio": "audio/pw-dojo-08-pytest_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Last check. Test A logs in. Test B runs next, and it is not logged in. Why? Have a think, and pause if you need longer. Ready? It is B. Every test gets a fresh room.",
+      "data": {
+        "quiz": {
+          "question": "Test A logs in. Test B is not. Why?",
+          "options": [
+            {
+              "text": "A bug in Playwright"
+            },
+            {
+              "text": "Each test gets a fresh context"
+            },
+            {
+              "text": "The site logged you out"
+            },
+            {
+              "text": "Tests run in random order"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Cookies live in the context, and every test gets a new one.",
+          "revealAtWord": 23.25,
+          "atWord": 3.583
+        }
+      },
+      "durationFrames": 390,
+      "audio": "audio/pw-dojo-08-pytest_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "The last card. Browser is the building. Context is the dressing room, and your cookies live there. Page is the stage. Every test gets a fresh room.",
+      "data": {
+        "stickyNote": {
+          "headline": "building · [dressing room] · stage",
+          "color": "blue",
+          "source": "san-gitlogin.github.io/playwright-dojo",
+          "notes": [
+            {
+              "title": "THE THREE LEVELS",
+              "tag": "memory hook",
+              "body": "Browser = the building. Context = the dressing room, where cookies live. Page = the stage. Every test gets a fresh room.",
+              "highlight": "where cookies live",
+              "asset": "lucide:door-open",
+              "atWord": 12.833
+            }
+          ]
+        },
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 315,
+      "audio": "audio/pw-dojo-08-pytest_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "REVEAL",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "One last thing, and it has a name. You asked for page. Something else worked out what that meant, and gave it to you. That is called dependency injection. Interviewers love that phrase.",
+      "data": {
+        "reveal": {
+          "kicker": "pro corner",
+          "statement": "You asked. Something else provided.",
+          "sub": "that is dependency injection",
+          "atWord": 1.833
+        }
+      },
+      "durationFrames": 344,
+      "audio": "audio/pw-dojo-08-pytest_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "RECAP",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Episode eight, in three lines. A fixture builds your page and cleans it up. The flags give you new powers for free. And every test gets its own dressing room.",
+      "data": {
+        "heading": "Episode eight, in three lines",
+        "points": [
+          {
+            "text": "A fixture builds your page",
+            "atWord": 8
+          },
+          {
+            "text": "Flags give you free powers",
+            "atWord": 13.333
+          },
+          {
+            "text": "Every test gets a fresh room",
+            "atWord": 17.75
+          }
+        ]
+      },
+      "durationFrames": 338,
+      "audio": "audio/pw-dojo-08-pytest_long_s27.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s28",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Next time, the page object model. It is how you stop your tests turning into a mess. Every lesson is free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Page Object Model",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 261,
+      "audio": "audio/pw-dojo-08-pytest_long_s28.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

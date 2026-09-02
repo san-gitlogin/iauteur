@@ -1,0 +1,910 @@
+{
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:iauteur_logo.png"
+  },
+  "meta": {
+    "topic": "iAuteur — try it yourself",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "deep-dive",
+    "onePayoff": "You describe the video you want, and a finished video comes back — every step of it on screen, and it's all on GitHub.",
+    "openLoop": "If nobody filmed it and nobody edited it, where did this video come from?",
+    "analogy": "Ordering a meal instead of learning to cook it.",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "Nobody filmed this video. Here's how it was made.",
+      "altTitles": [
+        "21 hours of editing, or one description",
+        "I described a video. This came back."
+      ],
+      "hook": "Twenty-one hours of editing for one three-minute video — or one description, and a finished film.",
+      "breakdown": "the whole workflow, screen by screen: one line in, a brief you didn't write, any assistant you already pay for, the answer pasted back, a scene previewed, a piece built for the one scene that needed it, a voice picked — and four finished videos out. Then the same thing again with one button and no pasting at all.",
+      "chapters": [
+        {
+          "id": "s01",
+          "title": "A whole week for one video"
+        },
+        {
+          "id": "s02",
+          "title": "What that week actually costs"
+        },
+        {
+          "id": "s03",
+          "title": "Step one: say what it's about"
+        },
+        {
+          "id": "s04",
+          "title": "It writes the brief for you"
+        },
+        {
+          "id": "s05",
+          "title": "Paste it into whichever you use"
+        },
+        {
+          "id": "s06",
+          "title": "Paste the answer back"
+        },
+        {
+          "id": "s07",
+          "title": "It reads it back, line by line"
+        },
+        {
+          "id": "s08",
+          "title": "Preview one scene"
+        },
+        {
+          "id": "s09",
+          "title": "Every scene has its own button"
+        },
+        {
+          "id": "s10",
+          "title": "A piece built for one scene"
+        },
+        {
+          "id": "s11",
+          "title": "Pick a voice"
+        },
+        {
+          "id": "s12",
+          "title": "One description, four videos"
+        },
+        {
+          "id": "s13",
+          "title": "Or let it do all of it"
+        },
+        {
+          "id": "s14",
+          "title": "Three real ones"
+        },
+        {
+          "id": "s15",
+          "title": "It's all on GitHub"
+        },
+        {
+          "id": "s16",
+          "title": "Including this video"
+        }
+      ],
+      "queries": [
+        "how to make explainer videos without editing",
+        "AI video generator that isn't a slideshow",
+        "make YouTube shorts and reels from one script",
+        "Remotion video automation",
+        "open source AI video tool"
+      ],
+      "hashtags": [
+        "#iAuteur",
+        "#Remotion",
+        "#VideoAutomation",
+        "#OpenSource",
+        "#Shorts"
+      ],
+      "tags": [
+        "iauteur",
+        "remotion",
+        "video automation",
+        "explainer video",
+        "ai video",
+        "shorts",
+        "reels",
+        "content creation",
+        "no editing",
+        "react video",
+        "open source"
+      ],
+      "pinned": "Every frame of this was made by the thing it's describing. It's all at github.com/san-gitlogin/iauteur."
+    }
+  },
+  "thumbnail": {
+    "title": "NOBODY FILMED THIS",
+    "badge": "made by iAuteur",
+    "asset": "img:iauteur_logo.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "durationFrames": 162,
+      "timingSource": "tts",
+      "narration": "A whole week of your life, for one three-minute video. There's a better way.",
+      "data": {
+        "headline": "A WHOLE WEEK",
+        "subtext": "for one three-minute video",
+        "heroAsset": "lucide:clapperboard",
+        "headlineAtWord": 2.583,
+        "heroAtWord": 8.167
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "PRODUCTION_GRIND",
+      "transition": "push",
+      "background": "zoneB",
+      "durationFrames": 520,
+      "timingSource": "tts",
+      "narration": "Here's what that week looks like. Write it, storyboard it, record the voice — twice. Cut it together. Animate every scene, keyframe by keyframe. Then build the whole thing again, vertical. That's twenty-one hours, for one video, and that's if nothing goes wrong.",
+      "data": {
+        "productionGrind": {
+          "headline": "The old way took [a whole evening]",
+          "windowTitle": "one 3-minute explainer",
+          "takeLabel": "take 14",
+          "chores": [
+            {
+              "label": "Write and storyboard",
+              "detail": "twelve scenes, by hand",
+              "value": 3,
+              "atWord": 6.833
+            },
+            {
+              "label": "Record the voice",
+              "detail": "again, and then again",
+              "value": 2.5,
+              "atWord": 10.667
+            },
+            {
+              "label": "Cut it together",
+              "detail": "clip by clip by clip",
+              "value": 4,
+              "atWord": 14.5
+            },
+            {
+              "label": "Animate every scene",
+              "detail": "keyframe by keyframe",
+              "value": 6,
+              "atWord": 17.417
+            },
+            {
+              "label": "Build it again, tall",
+              "detail": "the whole thing, twice",
+              "value": 5.5,
+              "atWord": 28.083
+            }
+          ],
+          "tracks": [
+            "voice",
+            "b-roll",
+            "titles",
+            "music"
+          ],
+          "totalLabel": "hours, for one video",
+          "footNote": "and that is only if nothing goes wrong",
+          "color": "orange",
+          "atWord": 31
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "APP_WINDOW",
+      "transition": "morph",
+      "background": "zoneA",
+      "durationFrames": 372,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 1,
+        "app": "iAuteur",
+        "note": "saying what it's about",
+        "color": "blue",
+        "atWord": 1.583
+      },
+      "narration": "So here's the whole thing instead. You open it up and you type what your video is about — one line, the way you'd say it to a friend. Then who it's for, and the look you want. That's step one, and that's genuinely all of it.",
+      "data": {
+        "appWindow": {
+          "headline": "Step one: [say what it's about]",
+          "windowTitle": "iAuteur",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "activeStep": 1,
+          "screenTitle": "What's it about?",
+          "fields": [
+            {
+              "label": "Title",
+              "text": "How your money actually moves",
+              "atWord": 8.5
+            },
+            {
+              "label": "Who it's for",
+              "text": "Anyone who never studied it",
+              "atWord": 19
+            },
+            {
+              "label": "Look",
+              "text": "Modern dark",
+              "atWord": 22.167
+            }
+          ],
+          "typeIndex": 0,
+          "button": "Continue",
+          "buttonDone": "Saved",
+          "caption": "that's step one, and that's all of it",
+          "color": "blue",
+          "atWord": 24
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "PROMPT_HANDOUT",
+      "transition": "slide",
+      "background": "zoneC",
+      "durationFrames": 372,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "it writes the brief for you",
+        "color": "blue",
+        "atWord": 1.75
+      },
+      "narration": "Now it writes the question for you — the whole brief. What to make, how long it runs, what goes where, what to leave out. You don't write a word of it. You press copy, and you're done with this screen.",
+      "data": {
+        "promptHandout": {
+          "headline": "It writes [the question] for you",
+          "panelTitle": "Your question",
+          "lines": [
+            "Make a video about how money moves.",
+            "About three minutes. Twelve scenes.",
+            "Plain English. No jargon anywhere.",
+            "Say who it's for right at the start.",
+            "Send it back as one single answer."
+          ],
+          "copyLabel": "Copy",
+          "copiedLabel": "Copied!",
+          "hint": "you didn't write any of that",
+          "color": "blue",
+          "atWord": 23.833
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "CHAT_TRIO",
+      "transition": "push",
+      "background": "zoneB",
+      "durationFrames": 472,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "pasted into your assistant",
+        "color": "green",
+        "atWord": 1.917
+      },
+      "narration": "Paste it into whichever assistant you already use. ChatGPT, Claude, Gemini — the one you're already paying for. No new key, nothing new to subscribe to. And each of them hands back a file: your whole video, written out, scene by scene.",
+      "data": {
+        "chatTrio": {
+          "headline": "Paste it into [whichever you use]",
+          "assistants": [
+            {
+              "label": "ChatGPT",
+              "atWord": 8.167
+            },
+            {
+              "label": "Claude",
+              "atWord": 9.083
+            },
+            {
+              "label": "Gemini",
+              "atWord": 9.917
+            }
+          ],
+          "pasted": "Make a video about how money…",
+          "answerLabel": "your video, written",
+          "answerFile": "your-video.json",
+          "answerJson": [
+            "{",
+            "  \"scenes\": [",
+            "    { \"id\": \"s01\", \"say\": \"A week…\" },",
+            "    { \"id\": \"s02\", \"say\": \"The fix\" }",
+            "  ]",
+            "}"
+          ],
+          "footNote": "no new key, nothing to subscribe to",
+          "color": "green",
+          "atWord": 26.917
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "APP_WINDOW",
+      "transition": "wipe",
+      "background": "zoneA",
+      "durationFrames": 382,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "pasting the answer back in",
+        "color": "blue",
+        "atWord": 1.75
+      },
+      "narration": "Copy that answer, come back, and paste it straight in. And there it is — your video, laid out scene by scene, every line already in place. You still haven't opened an editor or dragged anything onto a timeline.",
+      "data": {
+        "appWindow": {
+          "headline": "Paste it back, and [there it is]",
+          "windowTitle": "iAuteur",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "activeStep": 3,
+          "screenTitle": "Your scenes",
+          "fields": [
+            {
+              "label": "Paste the answer",
+              "mode": "paste",
+              "lines": [
+                "{",
+                "  \"scenes\": [ 12 ],",
+                "  \"voice\": \"Ava\",",
+                "  \"look\": \"modern dark\"",
+                "}"
+              ],
+              "atWord": 5.667
+            },
+            {
+              "label": "What you got",
+              "text": "Twelve scenes, ready to play",
+              "atWord": 12.583
+            }
+          ],
+          "button": "Load it in",
+          "buttonDone": "12 scenes in",
+          "caption": "no editor, nothing dragged at all",
+          "color": "blue",
+          "atWord": 9.5
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "CHECK_SWEEP",
+      "transition": "zoom",
+      "background": "zoneC",
+      "durationFrames": 400,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "reading it back for you",
+        "color": "green",
+        "atWord": 1.75
+      },
+      "narration": "Before you see any of it, it reads that answer back, line by line. Too crowded, too long, a picture that won't fit — it rewrites the line and checks again. That's it being fussy, so you don't have to be.",
+      "data": {
+        "checkSweep": {
+          "headline": "It reads it back, [line by line]",
+          "subjectLabel": "the answer",
+          "checks": [
+            {
+              "label": "Is anything missing?",
+              "atWord": 6.417
+            },
+            {
+              "label": "Is it too crowded?",
+              "atWord": 12.583
+            },
+            {
+              "label": "Can you read it in time?",
+              "atWord": 14.083
+            },
+            {
+              "label": "Will it fit the screen?",
+              "atWord": 18
+            }
+          ],
+          "caughtIndex": 1,
+          "caughtNote": "too many words",
+          "fixNote": "rewritten, then passed",
+          "verdict": "ready for you",
+          "color": "green",
+          "atWord": 19.5
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "VIDEO_PLAYER",
+      "transition": "zoomthrough",
+      "background": "zoneB",
+      "durationFrames": 346,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "previewing one scene",
+        "color": "blue",
+        "atWord": 1.75
+      },
+      "narration": "Want to see one before you commit to the whole thing? Press preview on any scene and it plays, right there, in a few seconds. Change a word, watch it again. Nothing else has to be built yet.",
+      "data": {
+        "videoPlayer": {
+          "headline": "See one before you [build anything]",
+          "clips": [
+            {
+              "label": "Scene 4 — where money goes",
+              "asset": "assets/video/sample_market.mp4",
+              "seconds": 14,
+              "atWord": 9.583
+            }
+          ],
+          "runtime": "0:09",
+          "startAt": 0.05,
+          "badge": "PREVIEW",
+          "footNote": "one scene, a few seconds, nothing wasted",
+          "color": "blue",
+          "atWord": 13.833
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "BEAT_BOARD",
+      "transition": "slide",
+      "background": "zoneA",
+      "durationFrames": 312,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "one button per scene",
+        "color": "green",
+        "atWord": 1.667
+      },
+      "narration": "Now look at your scenes. Every one is a row, and every row has its own button. Press the button on the one row that needs something new — not the whole video, just that scene.",
+      "data": {
+        "beatBoard": {
+          "headline": "Every scene has [its own button]",
+          "panelTitle": "your scenes",
+          "rows": [
+            {
+              "label": "s03 · HOOK",
+              "text": "Where does the money actually go?",
+              "value": 12,
+              "atWord": 2.333
+            },
+            {
+              "label": "s04 · DONUT",
+              "text": "Half of it never leaves the bank.",
+              "value": 15,
+              "atWord": 3
+            },
+            {
+              "label": "s05 · ???",
+              "text": "And this is the part nobody shows you.",
+              "value": 17,
+              "atWord": 3.667
+            },
+            {
+              "label": "s06 · BAR_COMPARE",
+              "text": "Two accounts, two different years.",
+              "value": 14,
+              "atWord": 4.333
+            },
+            {
+              "label": "s07 · RECAP",
+              "text": "So that is where it all went.",
+              "value": 11,
+              "atWord": 5
+            }
+          ],
+          "targetIndex": 2,
+          "newLabel": "＋ component",
+          "previewLabel": "▶ preview",
+          "customLabel": "SPEND_DIAL",
+          "doneLabel": "↺ recreate",
+          "footNote": "one button, on the one scene that needs it",
+          "color": "green",
+          "atWord": 12.417
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "COMPONENT_LAB",
+      "transition": "morph",
+      "background": "zoneC",
+      "durationFrames": 398,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 3,
+        "app": "iAuteur",
+        "note": "building the piece it needs",
+        "color": "purple",
+        "atWord": 1.667
+      },
+      "narration": "And here's what happens. You describe what you want to see, in your own words. It works out what it needs to hold, writes the piece, and fits it to the look you already picked. Then it's checked, wired in, and dropped into that scene.",
+      "data": {
+        "componentLab": {
+          "headline": "You say it. [It gets built.]",
+          "drawerTitle": "component creator",
+          "forScene": "for s05 — the spend split",
+          "askLabel": "Describe what you want to see",
+          "ask": "a dial that fills as it counts up",
+          "askAtWord": 4.5,
+          "stages": [
+            {
+              "label": "Work out what it holds",
+              "detail": "a number, a label, a dial",
+              "atWord": 12.167
+            },
+            {
+              "label": "Write the piece itself",
+              "detail": "drawn from your own words",
+              "atWord": 17
+            },
+            {
+              "label": "Fit it to the look you chose",
+              "detail": "every theme, both shapes",
+              "atWord": 19.833
+            }
+          ],
+          "gates": [
+            "checked",
+            "wired in",
+            "type-checked",
+            "undone if wrong"
+          ],
+          "doneLabel": "ready in scene 5",
+          "footNote": "and it belongs to that one scene alone",
+          "color": "purple",
+          "atWord": 25.417
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "APP_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "durationFrames": 412,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 4,
+        "app": "iAuteur",
+        "note": "picking a voice",
+        "color": "blue",
+        "atWord": 1.833
+      },
+      "narration": "Then you pick a voice. There are hundreds, in almost any language you'd want. Press listen and your whole script is read out loud. And it's timed to the words, so every picture lands on exactly the word it belongs to.",
+      "data": {
+        "appWindow": {
+          "headline": "Then you [pick a voice]",
+          "windowTitle": "iAuteur",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "activeStep": 4,
+          "screenTitle": "Pick a voice",
+          "fields": [
+            {
+              "label": "Voice",
+              "text": "Ava — natural, multilingual",
+              "atWord": 4.167
+            },
+            {
+              "label": "Language",
+              "text": "English (US)",
+              "atWord": 9.75
+            }
+          ],
+          "typeIndex": 0,
+          "button": "Listen",
+          "buttonDone": "Playing…",
+          "caption": "timed to your words, not a stopwatch",
+          "color": "blue",
+          "atWord": 12.917
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "ASPECT_TWIN",
+      "transition": "zoom",
+      "background": "zoneB",
+      "durationFrames": 429,
+      "timingSource": "tts",
+      "stepRail": {
+        "steps": [
+          "Topic",
+          "Design",
+          "Script",
+          "Voice",
+          "Render"
+        ],
+        "active": 5,
+        "app": "iAuteur",
+        "note": "rendered with Remotion",
+        "color": "blue",
+        "atWord": 1.833
+      },
+      "narration": "Then one press, and it renders. Widescreen for YouTube, and a tall cut for shorts and reels — each in dark and in light. Four finished videos from one description. It's built on Remotion, so every frame is real.",
+      "data": {
+        "aspectTwin": {
+          "headline": "One description, [four videos]",
+          "sourceLabel": "one description",
+          "wideLabel": "widescreen",
+          "tallLabel": "shorts & reels",
+          "variantLabels": [
+            "dark",
+            "light"
+          ],
+          "countLabel": "four finished videos",
+          "color": "blue",
+          "atWord": 13.167
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "AUTO_RUN",
+      "transition": "slide",
+      "background": "zoneC",
+      "durationFrames": 467,
+      "timingSource": "tts",
+      "narration": "And if you'd rather not do any of that yourself, put in a key and press one button. It writes the brief, writes every scene, reads it back, builds whatever's missing, records the voice, and renders the lot. A finished video, and you did none of it.",
+      "data": {
+        "autoRun": {
+          "headline": "Or let it [do all of it]",
+          "keyLabel": "your key",
+          "keyMask": "sk-••••••••••••••••",
+          "modelLabel": "the model you chose",
+          "toggles": [
+            "save it when it passes",
+            "build what is missing"
+          ],
+          "runLabel": "Run it all →",
+          "runningLabel": "Running…",
+          "runAtWord": 12.833,
+          "steps": [
+            {
+              "label": "Wrote the brief for the whole video",
+              "detail": "12 scenes",
+              "atWord": 16
+            },
+            {
+              "label": "Wrote every scene and every line",
+              "detail": "done",
+              "atWord": 18.417
+            },
+            {
+              "label": "Read it back and rewrote two lines",
+              "detail": "2 fixed",
+              "atWord": 20.75
+            },
+            {
+              "label": "Built a piece that did not exist",
+              "detail": "1 new",
+              "atWord": 23.167
+            },
+            {
+              "label": "Read it out and timed every picture",
+              "detail": "3m 04s",
+              "atWord": 25.5
+            },
+            {
+              "label": "Rendered it, widescreen and tall",
+              "detail": "4 files",
+              "atWord": 28.667
+            }
+          ],
+          "doneLabel": "your video, and you did nothing",
+          "footNote": "one key, one button, no pasting at all",
+          "color": "purple",
+          "atWord": 31.833
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "VIDEO_PLAYER",
+      "transition": "zoomthrough",
+      "background": "zoneA",
+      "durationFrames": 389,
+      "timingSource": "tts",
+      "narration": "These are real ones. A market story, a product launch, something deeply technical. Nobody filmed a second of them. No camera, no editor, no timeline. Someone described them, and out they came.",
+      "data": {
+        "videoPlayer": {
+          "headline": "These are [real ones]",
+          "clips": [
+            {
+              "label": "A market story",
+              "asset": "assets/video/sample_market.mp4",
+              "seconds": 14,
+              "atWord": 5.75
+            },
+            {
+              "label": "A product launch",
+              "asset": "assets/video/sample_product.mp4",
+              "seconds": 12,
+              "atWord": 8.667
+            },
+            {
+              "label": "Something deeply technical",
+              "asset": "assets/video/sample_tech.mp4",
+              "seconds": 10,
+              "atWord": 11.5
+            }
+          ],
+          "runtime": "3:20",
+          "startAt": 0.12,
+          "badge": "FINISHED",
+          "footNote": "nobody filmed a second of any of them",
+          "color": "green",
+          "atWord": 14.417
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "REPO_CTA",
+      "transition": "push",
+      "background": "zoneB",
+      "durationFrames": 366,
+      "timingSource": "tts",
+      "narration": "And all of it is on GitHub. A hundred and sixty-one pieces to build scenes from, thirty different looks, the voices, the console you just watched — the whole thing is there. Go and have a look for yourself.",
+      "data": {
+        "repoCta": {
+          "headline": "It's all [on GitHub]",
+          "mark": "si:github",
+          "owner": "san-gitlogin",
+          "repo": "iauteur",
+          "description": "Describe a video. Get a finished one back — widescreen and vertical, dark and light, voice already timed.",
+          "facts": [
+            {
+              "label": "161 components",
+              "atWord": 8.333
+            },
+            {
+              "label": "30 design packs",
+              "atWord": 12.75
+            },
+            {
+              "label": "built on Remotion",
+              "atWord": 17.25
+            }
+          ],
+          "url": "github.com/san-gitlogin/iauteur",
+          "footNote": "everything you just watched is in there",
+          "color": "blue",
+          "atWord": 5.417
+        }
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s15.mp3"
+    },
+    {
+      "id": "s16",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneC",
+      "durationFrames": 336,
+      "timingSource": "tts",
+      "narration": "Everything you just watched was made in exactly that way. Including this video — every scene, every picture, every word of it. So describe yours, and watch it happen.",
+      "data": {
+        "message": "Describe yours. Watch it happen.",
+        "sub": "github.com/san-gitlogin/iauteur"
+      },
+      "audio": "audio/iauteur-try-it-yourself_long_s16.mp3"
+    }
+  ]
+}

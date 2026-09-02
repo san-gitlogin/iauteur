@@ -1,0 +1,310 @@
+{
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "design": "moderndark",
+    "theme": "moderndark",
+    "themeLight": "daylight"
+  },
+  "meta": {
+    "format": "both",
+    "fps": 30,
+    "screenplay": "explainer",
+    "topic": "Coinbase for Agents: Automating portfolio trading with AI"
+  },
+  "scenes": [
+    {
+      "background": "zoneA",
+      "data": {
+        "headline": "CAN'T TOUCH YOUR MONEY",
+        "headlineAtWord": 11.333,
+        "heroAsset": "lucide:wallet",
+        "heroAtWord": 13,
+        "subtext": "brilliant reasoning, zero execution"
+      },
+      "durationFrames": 219,
+      "id": "s01",
+      "narration": "Your AI can already out-think Wall Street analysts, yet it still can't touch your money.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "HOOK",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s01.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "subtitle": "automating portfolio trading",
+        "title": "Coinbase for Agents"
+      },
+      "durationFrames": 75,
+      "id": "s02",
+      "narration": "Coinbase for Agents.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "TITLE_CARD",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s02.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "edges": [
+          {
+            "atWord": 11.25,
+            "from": "n1",
+            "to": "n2"
+          }
+        ],
+        "nodes": [
+          {
+            "asset": "lucide:brain",
+            "atWord": 9.5,
+            "id": "n1",
+            "label": "Reads markets"
+          },
+          {
+            "asset": "lucide:x-circle",
+            "atWord": 14.667,
+            "id": "n2",
+            "label": "Places trade"
+          }
+        ]
+      },
+      "durationFrames": 240,
+      "id": "s03",
+      "narration": "Here's the honest problem — these models can read markets brilliantly, they just can't place the trade.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "CONCEPT_DIAGRAM",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s03.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "donut": {
+          "atWord": 4.167,
+          "centerLabel": "Bitcoin",
+          "centerValue": "60%",
+          "segments": [
+            {
+              "atWord": 6.25,
+              "label": "Bitcoin",
+              "value": 60
+            },
+            {
+              "atWord": 8.417,
+              "label": "Ethereum",
+              "value": 20
+            },
+            {
+              "atWord": 10.5,
+              "label": "Solana",
+              "value": 20
+            }
+          ],
+          "source": "illustrative",
+          "variant": "donut"
+        }
+      },
+      "durationFrames": 287,
+      "id": "s04",
+      "narration": "Picture this — sixty percent Bitcoin, twenty Ethereum, twenty Solana; the agent holds that ratio for months, buying every real dip.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "DONUT",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s04.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "center": {
+          "atWord": 3.583,
+          "kicker": "Two ways in",
+          "title": "Connect"
+        },
+        "left": {
+          "atWord": 7.083,
+          "badge": "API keys",
+          "color": "blue",
+          "lines": [
+            "Claude Code",
+            "Codex"
+          ],
+          "title": "Terminal"
+        },
+        "right": {
+          "atWord": 20.167,
+          "badge": "Single login",
+          "color": "purple",
+          "lines": [
+            "ChatGPT",
+            "Claude Web"
+          ],
+          "title": "MCP"
+        },
+        "source": "Coinbase for Agents product overview"
+      },
+      "durationFrames": 346,
+      "id": "s05",
+      "narration": "There are two ways in — a terminal route through Claude Code or Codex with real API keys, or one login via MCP for ChatGPT and Claude Web, no keys needed.",
+      "timingSource": "tts",
+      "transition": "wipe",
+      "type": "SPLIT_PATHS",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s05.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "source": "Coinbase for Agents product overview",
+        "stats": [
+          {
+            "atWord": 14,
+            "kicker": "Lookback",
+            "value": "30 days"
+          },
+          {
+            "atWord": 20,
+            "color": "yellow",
+            "kicker": "Buy size",
+            "value": "$20/day"
+          },
+          {
+            "atWord": 29.5,
+            "kicker": "Duration",
+            "value": "14 days"
+          }
+        ],
+        "verdict": {
+          "atWord": 24.333,
+          "color": "blue",
+          "text": "Timed to the cheapest hour"
+        }
+      },
+      "durationFrames": 417,
+      "id": "s06",
+      "narration": "Here's the fun part — tell it once to dollar-cost into Ethereum, and it scans thirty days of hourly prices to time twenty-dollar buys to the exact cheapest hour, every day, for two weeks.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "STAT_PANELS",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s06.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "harness": {
+          "agent": "Agent",
+          "atWord": 12.75,
+          "guardrail": {
+            "label": "view full balances",
+            "reason": "walled off by design",
+            "ring": 1
+          },
+          "rings": [
+            {
+              "chips": [
+                "view",
+                "trade"
+              ],
+              "label": "Isolated slice"
+            },
+            {
+              "chips": [
+                "locked"
+              ],
+              "label": "Full balances"
+            }
+          ]
+        }
+      },
+      "durationFrames": 456,
+      "id": "s07",
+      "narration": "Now, some fairness to the skeptics — the agent only ever sees an isolated slice of your portfolio, never your full balances. But fine-grained rules — hard spending caps, locked asset lists — those are still coming, not live yet.",
+      "timingSource": "tts",
+      "transition": "zoom",
+      "type": "AGENT_HARNESS",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s07.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "timeline": {
+          "milestones": [
+            {
+              "atWord": 11.583,
+              "date": "2024",
+              "sub": "wallets for agents",
+              "title": "AgentKit"
+            },
+            {
+              "atWord": 16.833,
+              "date": "Last year",
+              "sub": "agents can pay",
+              "title": "x402 protocol"
+            },
+            {
+              "atWord": 24.75,
+              "date": "Now",
+              "sub": "agents can trade",
+              "title": "Trade trigger"
+            }
+          ]
+        }
+      },
+      "durationFrames": 380,
+      "id": "s08",
+      "narration": "Remember that gap I mentioned? Coinbase closed it in stages — 2024's AgentKit gave agents wallets, last year's x402 gave them a way to pay, and this finally gives them the trigger to act.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "TIMELINE",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s08.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "heading": "Coinbase for Agents, recapped",
+        "points": [
+          {
+            "atWord": 12.417,
+            "text": "Rebalances your portfolio"
+          },
+          {
+            "atWord": 13.333,
+            "text": "Dollar-cost-averages in"
+          },
+          {
+            "atWord": 15.25,
+            "text": "Pays for its own data"
+          },
+          {
+            "atWord": 22.917,
+            "text": "Stays in a walled-off slice"
+          }
+        ]
+      },
+      "durationFrames": 341,
+      "id": "s09",
+      "narration": "So — reasoning was never the problem, execution was. Now it can rebalance, dollar-cost-average, and pay for its own data, all inside a walled-off slice of your money.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "RECAP",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s09.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "message": "Know the boundary before you hand over control",
+        "sub": "Coinbase for Agents"
+      },
+      "durationFrames": 194,
+      "id": "s10",
+      "narration": "Before you hand an agent your portfolio — go read exactly what boundary it's operating inside.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "OUTRO_CTA",
+      "audio": "audio/coinbase-for-agents-automating-portfolio-trading-with-ai_long_s10.mp3"
+    }
+  ],
+  "thumbnail": {
+    "asset": "lucide:bot",
+    "badge": "Coinbase for Agents",
+    "title": "AI Trades For You"
+  }
+}

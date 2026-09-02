@@ -1,0 +1,863 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP02: Your First Script",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how every Playwright script opens a theater, gets a stage, performs and closes — and what each of the nine lines does",
+    "openLoop": "What does the very first line of a Playwright script actually say?",
+    "analogy": "Open the theater, raise the curtain, take a bow.",
+    "topicAxes": [
+      "skill-acquisition",
+      "tooling-shift"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #2 — Your First Script, Line by Line",
+      "altTitles": [
+        "Write your first Playwright script in Python (every line explained)"
+      ],
+      "description": "Nine lines that drive a real browser — the skeleton every Playwright script shares, explained one line at a time.",
+      "tags": [
+        "playwright",
+        "python",
+        "playwright python",
+        "browser automation",
+        "sync_playwright",
+        "playwright tutorial",
+        "automation testing"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "YOUR FIRST SCRIPT",
+    "badge": "Dojo · EP 2",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Playwright is installed. You open a new file, the cursor blinks, and line one is a mystery.",
+      "data": {
+        "headline": "AN EMPTY FILE",
+        "subtext": "so what is line one?",
+        "heroAsset": "lucide:file-code",
+        "headlineAtWord": 2.667,
+        "heroAtWord": 7.75
+      },
+      "durationFrames": 193,
+      "audio": "audio/pw-dojo-02-first-script_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "By the end of this episode you will have written a script that drives a real browser on your own machine, and you will understand every single line of it, not just copy it.",
+      "data": {
+        "title": "YOUR FIRST SCRIPT",
+        "subtitle": "The Playwright Dojo · Episode 2"
+      },
+      "durationFrames": 276,
+      "audio": "audio/pw-dojo-02-first-script_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three parts. The shape that every Playwright script shares, then the nine lines one at a time, then we run it and watch a browser obey.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:shapes",
+              "label": "The shape",
+              "atWord": 5.583
+            },
+            {
+              "icon": "lucide:list-ordered",
+              "label": "Line by line",
+              "atWord": 9.333
+            },
+            {
+              "icon": "lucide:play",
+              "label": "Run it",
+              "atWord": 13.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 258,
+      "audio": "audio/pw-dojo-02-first-script_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Before any of the words, look at the shape.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The shape of every script",
+          "subtitle": "Notice it, do not read it"
+        }
+      },
+      "durationFrames": 102,
+      "audio": "audio/pw-dojo-02-first-script_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "This is a complete, working script. Nine lines. It opens a browser, visits a page, prints the title of that page, saves a photo of it, and closes everything down. Save it as first dot py and run it with python first dot py.",
+      "data": {
+        "code": {
+          "filename": "first.py",
+          "language": "py",
+          "runLabel": "python first.py",
+          "lines": [
+            {
+              "text": "from playwright.sync_api import sync_playwright"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "with sync_playwright() as p:"
+            },
+            {
+              "text": "    browser = p.chromium.launch(headless=False)"
+            },
+            {
+              "text": "    page = browser.new_page()"
+            },
+            {
+              "text": "    page.goto(\"https://playwright.dev\")"
+            },
+            {
+              "text": "    print(page.title())"
+            },
+            {
+              "text": "    page.screenshot(path=\"stage.png\")"
+            },
+            {
+              "text": "    browser.close()"
+            }
+          ],
+          "atWord": 11.167
+        }
+      },
+      "durationFrames": 467,
+      "audio": "audio/pw-dojo-02-first-script_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "STEP_FLOW",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Do not read the letters yet. Just notice the shape. Every Playwright script you ever write follows these same five moves, in this same order, without exception. Once you can see the shape, the letters stop being frightening.",
+      "data": {
+        "source": "The Playwright Dojo",
+        "steps": [
+          {
+            "kicker": "1",
+            "title": "Open up",
+            "sub": "sync_playwright()",
+            "atWord": 9.5
+          },
+          {
+            "kicker": "2",
+            "title": "A theater",
+            "sub": "launch()",
+            "atWord": 13.75
+          },
+          {
+            "kicker": "3",
+            "title": "A stage",
+            "sub": "new_page()",
+            "atWord": 17.167
+          },
+          {
+            "kicker": "4",
+            "title": "Perform",
+            "sub": "goto, click, read",
+            "atWord": 20.583
+          },
+          {
+            "kicker": "5",
+            "title": "Close up",
+            "sub": "close()",
+            "atWord": 22.25
+          }
+        ]
+      },
+      "durationFrames": 409,
+      "audio": "audio/pw-dojo-02-first-script_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "And here is what those words actually mean. Picture a real stage, the kind with a live audience sitting out front and actors waiting in the wings for their cue. Not a cinema screen. A stage, with people on it.",
+      "data": {
+        "stage": {
+          "marquee": "the browser",
+          "curtain": "raising",
+          "actors": [
+            {
+              "label": "a button",
+              "kind": "button",
+              "atWord": 17.083
+            },
+            {
+              "label": "a text box",
+              "kind": "field",
+              "atWord": 19.417
+            },
+            {
+              "label": "a link",
+              "kind": "link",
+              "atWord": 20.917
+            }
+          ],
+          "caption": "browser = theater, page = stage",
+          "atWord": 7.917
+        }
+      },
+      "durationFrames": 389,
+      "audio": "audio/pw-dojo-02-first-script_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So memorise the shape, never the letters. Open up, a theater, a stage, perform, then close. That order never changes, no matter how big the script gets or what you are testing.",
+      "data": {
+        "stickyNote": {
+          "headline": "The skeleton",
+          "color": "yellow",
+          "notes": [
+            {
+              "title": "THE SKELETON",
+              "tag": "memory hook",
+              "body": "Open up. A theater. A stage. Perform. Close. Memorise the shape, not the letters.",
+              "highlight": "Memorise the shape, not the letters",
+              "asset": "lucide:shapes",
+              "atWord": 12.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 363,
+      "audio": "audio/pw-dojo-02-first-script_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Now the words, three lines at a time.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Opening the theater",
+          "subtitle": "Lines one to three"
+        }
+      },
+      "durationFrames": 101,
+      "audio": "audio/pw-dojo-02-first-script_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Line one imports the sync version of Playwright. Sync just means one line at a time, top to bottom, exactly how you already think about Python. There is an async version too, and that is the whole of next episode.",
+      "data": {
+        "code": {
+          "filename": "first.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "from playwright.sync_api import sync_playwright",
+              "color": "green"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "with sync_playwright() as p:"
+            },
+            {
+              "text": "    browser = p.chromium.launch(headless=False)"
+            }
+          ],
+          "atWord": 7.75
+        }
+      },
+      "durationFrames": 379,
+      "audio": "audio/pw-dojo-02-first-script_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "REVEAL",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "Line three is a with block. That is Python saying: set this up, and clean up after me automatically, even if something crashes.",
+      "data": {
+        "reveal": {
+          "statement": "Set it up. Clean it up.",
+          "kicker": "WHAT `with` MEANS",
+          "sub": "even when your code crashes",
+          "atWord": 9
+        }
+      },
+      "durationFrames": 265,
+      "audio": "audio/pw-dojo-02-first-script_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CODE_EDITOR",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Think of p as the theater company manager. When that block ends, the manager turns off the lights and locks the doors behind you. Guaranteed, every time, whether your script finished properly or fell over.",
+      "data": {
+        "editor": {
+          "lang": "py",
+          "tabs": [
+            {
+              "name": "first.py",
+              "active": true
+            }
+          ],
+          "lines": [
+            "with sync_playwright() as p:",
+            "    browser = p.chromium.launch(",
+            "        headless=False)",
+            "    page = browser.new_page()"
+          ],
+          "highlight": {
+            "from": 1,
+            "to": 1,
+            "color": "green"
+          },
+          "atWord": 9.917
+        }
+      },
+      "durationFrames": 395,
+      "audio": "audio/pw-dojo-02-first-script_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "THEATER_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Launching chromium opens the theater itself. Headless False means the doors are open and the lights are on, so you can sit and watch the whole play happen. And swapping chromium for firefox or webkit needs no other change.",
+      "data": {
+        "stage": {
+          "marquee": "headless=False",
+          "curtain": "up",
+          "actors": [
+            {
+              "label": "a button",
+              "kind": "button",
+              "atWord": 16.25
+            },
+            {
+              "label": "a text box",
+              "kind": "field",
+              "atWord": 18.667
+            },
+            {
+              "label": "a link",
+              "kind": "link",
+              "atWord": 20.333
+            }
+          ],
+          "caption": "you can watch the play",
+          "atWord": 6.667
+        }
+      },
+      "durationFrames": 398,
+      "audio": "audio/pw-dojo-02-first-script_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "SPEC_COMPARE",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Headless True is the opposite. No window at all, an invisible ghost performing the very same play, and considerably faster for it. It is also the default, and it is what servers and build machines always use.",
+      "data": {
+        "compare": {
+          "headline": "Watch it, or run it fast?",
+          "a": {
+            "name": "headless=False",
+            "asset": "lucide:eye"
+          },
+          "b": {
+            "name": "headless=True",
+            "asset": "lucide:eye-off"
+          },
+          "rows": [
+            {
+              "label": "Window",
+              "a": "visible",
+              "b": "none",
+              "winner": "tie"
+            },
+            {
+              "label": "Speed",
+              "a": "slower",
+              "b": "faster",
+              "winner": "b"
+            },
+            {
+              "label": "On a server",
+              "a": "no",
+              "b": "yes",
+              "winner": "b"
+            }
+          ],
+          "atWord": 10
+        }
+      },
+      "durationFrames": 419,
+      "audio": "audio/pw-dojo-02-first-script_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So here is your first check. Your test runs on a server with no screen at all. Which mode do you want? Have a think, and pause here if you need longer.",
+      "data": {
+        "quiz": {
+          "question": "Server with no screen — which mode?",
+          "options": [
+            {
+              "text": "headless=False"
+            },
+            {
+              "text": "headless=True"
+            },
+            {
+              "text": "screenless=True"
+            },
+            {
+              "text": "Servers cannot run browsers"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "No window, faster, and it works anywhere — including build servers.",
+          "revealAtWord": 14.5,
+          "atWord": 3.167
+        }
+      },
+      "durationFrames": 294,
+      "audio": "audio/pw-dojo-02-first-script_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Which brings us to the object you will use more than any other.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The stage",
+          "subtitle": "Lines four and five"
+        }
+      },
+      "durationFrames": 131,
+      "audio": "audio/pw-dojo-02-first-script_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "New page hands you one fresh, empty stage, which is really just a browser tab. A single theater can hold many stages at once, and this one is yours, with nobody standing on it yet.",
+      "data": {
+        "stage": {
+          "marquee": "a new page",
+          "curtain": "up",
+          "actors": [
+            {
+              "label": "empty",
+              "kind": "text",
+              "atWord": 14.5
+            },
+            {
+              "label": "empty",
+              "kind": "text",
+              "atWord": 16.833
+            }
+          ],
+          "caption": "one fresh, empty stage",
+          "atWord": 5.75
+        }
+      },
+      "durationFrames": 354,
+      "audio": "audio/pw-dojo-02-first-script_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneB",
+      "narration": "That page object is your main character for the entire rest of this course. Almost everything you will ever do, clicking, typing, reading, checking, happens through the page.",
+      "data": {
+        "kinetic": {
+          "text": "page = your stage",
+          "fx": "typewriter",
+          "sub": "almost everything goes through it",
+          "atWord": 8.833
+        }
+      },
+      "durationFrames": 313,
+      "audio": "audio/pw-dojo-02-first-script_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "THEATER_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "And goto is your very first stage direction. Raise the curtain on this address. The curtain goes up, the actors are standing there, and the page is genuinely loaded in a real browser.",
+      "data": {
+        "stage": {
+          "marquee": "playwright.dev",
+          "curtain": "raising",
+          "actors": [
+            {
+              "label": "Get started",
+              "kind": "button",
+              "atWord": 13.75
+            },
+            {
+              "label": "Docs",
+              "kind": "link",
+              "atWord": 15.333
+            },
+            {
+              "label": "Search",
+              "kind": "field",
+              "atWord": 17
+            }
+          ],
+          "caption": "goto — raise the curtain",
+          "atWord": 5.75
+        }
+      },
+      "durationFrames": 337,
+      "audio": "audio/pw-dojo-02-first-script_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "CHECK_SWEEP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "And here is the quiet magic. Goto does not just fire and walk away. It waits until the page has genuinely finished loading before your next line is allowed to run at all. The patient director, remember.",
+      "data": {
+        "checkSweep": {
+          "headline": "goto [waits for you]",
+          "subjectLabel": "the page you asked for",
+          "checks": [
+            {
+              "label": "request sent",
+              "atWord": 12.417
+            },
+            {
+              "label": "page responded",
+              "atWord": 15.667
+            },
+            {
+              "label": "content loaded",
+              "atWord": 18.083
+            },
+            {
+              "label": "now your next line runs",
+              "atWord": 20.5
+            }
+          ],
+          "atWord": 7.5
+        }
+      },
+      "durationFrames": 382,
+      "audio": "audio/pw-dojo-02-first-script_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Three lines left, and each one does something you will use forever.",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "Read, photograph, close",
+          "subtitle": "Lines six to eight"
+        }
+      },
+      "durationFrames": 145,
+      "audio": "audio/pw-dojo-02-first-script_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "THEATER_STAGE",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Page title asks the stage a simple question. What is written on your marquee? Then it prints the answer straight to your terminal. That is the first time you read real data out of a live browser using code.",
+      "data": {
+        "stage": {
+          "marquee": "Fast and reliable…",
+          "curtain": "up",
+          "actors": [
+            {
+              "label": "Get started",
+              "kind": "button",
+              "atWord": 15.417
+            },
+            {
+              "label": "Docs",
+              "kind": "link",
+              "atWord": 17.583
+            }
+          ],
+          "caption": "page.title() — what is on your marquee?",
+          "atWord": 6.083
+        }
+      },
+      "durationFrames": 359,
+      "audio": "audio/pw-dojo-02-first-script_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Page screenshot photographs the stage exactly as it stands and saves it to a file. When a test fails at three in the morning and you were asleep, that photo answers the only question that matters: what did the page actually look like.",
+      "data": {
+        "code": {
+          "filename": "first.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "    print(page.title())"
+            },
+            {
+              "text": "    page.screenshot(path=\"stage.png\")",
+              "color": "green"
+            },
+            {
+              "text": "    browser.close()"
+            }
+          ],
+          "output": [
+            {
+              "text": "saved stage.png"
+            }
+          ],
+          "atWord": 8.417
+        }
+      },
+      "durationFrames": 403,
+      "audio": "audio/pw-dojo-02-first-script_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "And browser close is curtain down, lights off. The with block would technically clean up anyway, but closing on purpose is a good habit, like handing the theater keys back instead of leaving the manager to hunt for them.",
+      "data": {
+        "stage": {
+          "marquee": "browser.close()",
+          "curtain": "falling",
+          "actors": [
+            {
+              "label": "a button",
+              "kind": "button"
+            },
+            {
+              "label": "a link",
+              "kind": "link"
+            }
+          ],
+          "caption": "curtain down, lights off",
+          "atWord": 7.583
+        }
+      },
+      "durationFrames": 365,
+      "audio": "audio/pw-dojo-02-first-script_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Run it, and there it is. A real browser window opened on your screen, visited the site, printed the title into your terminal, saved the photo beside your script, and then closed itself. You just automated a browser.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "python first.py",
+              "output": [
+                "Fast and reliable end-to-end testing",
+                "for modern web apps | Playwright"
+              ],
+              "exitCode": 0,
+              "atWord": 8.25
+            }
+          ],
+          "atWord": 6.667
+        }
+      },
+      "durationFrames": 390,
+      "audio": "audio/pw-dojo-02-first-script_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "QUIZ_CARD",
+      "transition": "clock",
+      "background": "zoneB",
+      "narration": "Second check. Of everything you have just met, which object will you use most in every single script from now on? Take a moment.",
+      "data": {
+        "quiz": {
+          "question": "Which object will you use most?",
+          "options": [
+            {
+              "text": "sync_playwright"
+            },
+            {
+              "text": "browser"
+            },
+            {
+              "text": "page"
+            },
+            {
+              "text": "screenshot"
+            }
+          ],
+          "answerIndex": 2,
+          "why": "goto, click, fill and read all happen through the page.",
+          "revealAtWord": 12,
+          "atWord": 2.583
+        }
+      },
+      "durationFrames": 248,
+      "audio": "audio/pw-dojo-02-first-script_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "One for your next interview. That with block is exactly why you rarely see a browser process still running after a crash, and being able to say why out loud sounds a lot better than saying it just works.",
+      "data": {
+        "stickyNote": {
+          "headline": "Pro corner",
+          "color": "purple",
+          "notes": [
+            {
+              "title": "WHY `with` MATTERS",
+              "tag": "interview",
+              "body": "The with block closes the browser even when your test crashes. No leaked processes, no zombie Chromium eating memory.",
+              "highlight": "even when your test crashes",
+              "asset": "lucide:shield-check",
+              "atWord": 12.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 336,
+      "audio": "audio/pw-dojo-02-first-script_long_s27.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s28",
+      "type": "RECAP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "So, to recap the episode. Every script you write opens a theater, gets itself a stage, performs, and then closes. The page object is your lead actor. And goto waits for the page so that you never have to.",
+      "data": {
+        "heading": "Episode two, in three lines",
+        "points": [
+          {
+            "text": "Open, stage, perform, close",
+            "atWord": 8.333
+          },
+          {
+            "text": "page = your stage, used everywhere",
+            "atWord": 16.5
+          },
+          {
+            "text": "goto waits — no sleep needed",
+            "atWord": 20.583
+          }
+        ]
+      },
+      "durationFrames": 403,
+      "audio": "audio/pw-dojo-02-first-script_long_s28.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s29",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next episode: sync versus async, and why you can safely ignore one of them for now. Follow along free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Sync vs Async",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 259,
+      "audio": "audio/pw-dojo-02-first-script_long_s29.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

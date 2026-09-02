@@ -1,0 +1,223 @@
+{
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "design": "moderndark",
+    "logo": "img:iauteur_logo.png",
+    "theme": "moderndark",
+    "themeLight": "daylight"
+  },
+  "cover": {
+    "asset": "img:iauteur_logo.png",
+    "badge": "made by iAuteur",
+    "title": "WORDS IN, FILM OUT"
+  },
+  "meta": {
+    "analogy": "A screenplay a projector can read — the document is the film, not a timeline.",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "You describe the video in words, and deterministic code renders the film.",
+    "openLoop": "If a model writes the video, what stops it from shipping a broken one?",
+    "screenplay": "explainer",
+    "topic": "iAuteur — explaining itself",
+    "topicAxes": [
+      "entity-novelty",
+      "sovereignty"
+    ]
+  },
+  "scenes": [
+    {
+      "background": "zoneA",
+      "data": {
+        "headline": "WORDS IN, FILM OUT",
+        "headlineAtWord": 7,
+        "heroAsset": "lucide:clapperboard",
+        "heroAtWord": 2.167,
+        "subtext": "you describe it, code renders it"
+      },
+      "durationFrames": 164,
+      "id": "s01",
+      "narration": "You describe the video in words. Code renders the film.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "HOOK",
+      "audio": "audio/iauteur_short_s01.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "specToFrame": {
+          "atWord": 5.083,
+          "color": "blue",
+          "frameBars": [
+            64,
+            38,
+            22
+          ],
+          "frameCaption": "1080 x 1920",
+          "frameLabel": "Words per scene",
+          "headline": "The [JSON] is the movie",
+          "source": "illustrative",
+          "specCaption": "shorts.json",
+          "specLines": [
+            "{",
+            "  \"type\": \"BAR_COMPARE\",",
+            "  \"narration\": \"...\",",
+            "  \"data\": { \"bars\": [...] }",
+            "}"
+          ]
+        }
+      },
+      "durationFrames": 203,
+      "id": "s02",
+      "narration": "Every video is a JSON file. Each scene names a component and what it shows.",
+      "timingSource": "tts",
+      "transition": "morph",
+      "type": "SPEC_TO_FRAME",
+      "audio": "audio/iauteur_short_s02.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "labAssembly": {
+          "atWord": 5.167,
+          "color": "green",
+          "headline": "Describe it, and it gets [built]",
+          "rollbackNote": "won't compile? rolled back",
+          "stages": [
+            {
+              "atWord": 1.833,
+              "detail": "fields + budgets",
+              "label": "contract"
+            },
+            {
+              "atWord": 3.5,
+              "detail": "one .tsx file",
+              "label": "code"
+            },
+            {
+              "atWord": 5.167,
+              "detail": "six files updated",
+              "label": "wired"
+            },
+            {
+              "atWord": 6.917,
+              "detail": "type-checked",
+              "label": "gate"
+            }
+          ],
+          "verdict": "tsc clean"
+        }
+      },
+      "durationFrames": 172,
+      "id": "s03",
+      "narration": "When no component fits, you describe a new one and it gets built and type-checked.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "LAB_ASSEMBLY",
+      "audio": "audio/iauteur_short_s03.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "reskin": {
+          "atWord": 4.25,
+          "footNote": "nothing reads a hardcoded colour",
+          "headline": "One scene, [thirty] design languages",
+          "packs": [
+            {
+              "atWord": 3.167,
+              "color": "blue",
+              "label": "moderndark"
+            },
+            {
+              "atWord": 5.333,
+              "color": "yellow",
+              "label": "neobrutalism"
+            },
+            {
+              "atWord": 6.5,
+              "color": "green",
+              "label": "terminalcli"
+            }
+          ],
+          "sourceLabel": "one scene",
+          "tileTitle": "The same scene"
+        }
+      },
+      "durationFrames": 205,
+      "id": "s04",
+      "narration": "That same scene re-skins across thirty design packs, because nothing reads a hardcoded colour.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "RESKIN_CAROUSEL",
+      "audio": "audio/iauteur_short_s04.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "aspectTwin": {
+          "atWord": 4.75,
+          "color": "blue",
+          "countLabel": "four files, one spec",
+          "headline": "One spec, [four] deliverables",
+          "sourceLabel": "one spec",
+          "tallLabel": "9:16 vertical",
+          "variantLabels": [
+            "dark",
+            "light"
+          ],
+          "wideLabel": "16:9 widescreen"
+        }
+      },
+      "durationFrames": 156,
+      "id": "s05",
+      "narration": "One spec gives you widescreen and vertical, each in dark and light.",
+      "timingSource": "tts",
+      "transition": "zoom",
+      "type": "ASPECT_TWIN",
+      "audio": "audio/iauteur_short_s05.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "pipelineGate": {
+          "atWord": 4.75,
+          "checks": [
+            "budgets",
+            "structure",
+            "word anchors"
+          ],
+          "color": "green",
+          "footNote": "bad output fails loudly",
+          "gateLabel": "the linter",
+          "headline": "The model proposes, code [judges]",
+          "outputLabel": "rendered video",
+          "passLabel": "passes",
+          "proposerLabel": "any model",
+          "rejectLabel": "rejected, sent back"
+        }
+      },
+      "durationFrames": 231,
+      "id": "s06",
+      "narration": "Your model only proposes. Deterministic code is the judge, so bad output fails loudly.",
+      "timingSource": "tts",
+      "transition": "dip",
+      "type": "PIPELINE_GATE",
+      "audio": "audio/iauteur_short_s06.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "message": "Describe it. Let the renderer do the rest.",
+        "sub": "iAuteur — spec in, film out"
+      },
+      "durationFrames": 140,
+      "id": "s07",
+      "narration": "Describe the video you want, and let the renderer do the rest.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "OUTRO_CTA",
+      "audio": "audio/iauteur_short_s07.mp3"
+    }
+  ]
+}

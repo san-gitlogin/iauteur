@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "topic": "Inside Kimi K3: China's 2.8T Open Frontier",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "TODO",
+    "openLoop": "TODO",
+    "analogy": "TODO"
+  },
+  "brand": {
+    "theme": "CHOOSE_DARK_THEME",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "TODO",
+    "badge": "TODO",
+    "asset": "lucide:sparkles",
+    "frames": 2
+  },
+  "scenes": []
+}

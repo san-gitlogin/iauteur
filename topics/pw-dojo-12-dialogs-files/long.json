@@ -1,0 +1,846 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP12: Dialogs, Uploads & Downloads",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how to handle the three things that are not part of your page: dialogs, file pickers and downloads",
+    "openLoop": "You click Delete, a confirm box appears — and nothing gets deleted. No error either.",
+    "analogy": "Brief the doorman before the knock, not during.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #12 — dialogs, uploads and downloads",
+      "description": "Register a dialog handler BEFORE the click, hand files straight to the input with set_input_files, and catch downloads with expect_download.",
+      "tags": [
+        "playwright",
+        "python",
+        "dialog",
+        "alert",
+        "confirm",
+        "set_input_files",
+        "expect_download",
+        "upload"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Dialogs & Files",
+    "badge": "Dojo · EP 12",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "NOTHING GOT DELETED",
+    "badge": "EP 12 · DIALOGS",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You click Delete. A box asks if you are sure. And then nothing happens at all.",
+      "data": {
+        "headline": "NOTHING GOT DELETED.",
+        "subtext": "and nothing failed either",
+        "heroAsset": "lucide:folder",
+        "headlineAtWord": 4.083,
+        "heroAtWord": 7.917
+      },
+      "durationFrames": 169,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Today, three things that are not part of your page at all.",
+      "data": {
+        "title": "Dialogs, Uploads & Downloads",
+        "subtitle": "The Playwright Dojo · Episode 12"
+      },
+      "durationFrames": 116,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "A box the browser puts up. A window your operating system owns. And a file arriving from nowhere.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:message-square-warning",
+              "label": "browser dialogs",
+              "color": "red",
+              "atWord": 4.417
+            },
+            {
+              "icon": "lucide:upload",
+              "label": "uploading files",
+              "color": "green",
+              "atWord": 7.917
+            },
+            {
+              "icon": "lucide:download",
+              "label": "catching downloads",
+              "color": "blue",
+              "atWord": 10.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 207,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Let us start with the one that fails without telling you.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Answering the door",
+          "subtitle": "alert, confirm, prompt"
+        }
+      },
+      "durationFrames": 103,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "There are three of these boxes, and it is worth knowing them apart. An alert just tells you something, and it only has one button. A confirm asks a yes or no question, so it has two buttons and gives back true or false. And a prompt asks you to type something in, and hands that text back.",
+      "data": {
+        "codeRun": {
+          "filename": "the three kinds",
+          "language": "js",
+          "resultLabel": "what you get back",
+          "color": "red",
+          "atWord": 2.417,
+          "caption": "one button, two buttons, or a field",
+          "lines": [
+            {
+              "text": "alert(\"Saved!\")",
+              "detail": "it only tells you something",
+              "sub": "one button. nothing back.",
+              "label": "alert",
+              "atWord": 9
+            },
+            {
+              "text": "confirm(\"Delete this?\")",
+              "detail": "a yes or no question",
+              "sub": "True if OK, False if Cancel",
+              "label": "confirm",
+              "atWord": 19.167
+            },
+            {
+              "text": "prompt(\"Your name?\")",
+              "detail": "it asks you to type",
+              "sub": "the text, or None",
+              "label": "prompt",
+              "atWord": 29.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 526,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "DIALOG_GATE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Here is what really happened. That box came from the browser, not your page. It freezes everything underneath, and no locator can touch it. So Playwright answers it for you, to stop your test hanging. It picks Cancel. So your delete never happened.",
+      "data": {
+        "dialogGate": {
+          "message": "Are you sure you want to delete?",
+          "kind": "confirm",
+          "handler": "none",
+          "trigger": "Delete account",
+          "pageTitle": "Your account",
+          "outcome": "nothing was deleted",
+          "caption": "no error. no hang. a silent Cancel.",
+          "color": "red",
+          "atWord": 1.833,
+          "knockAtWord": 8,
+          "answerAtWord": 23.667,
+          "rows": [
+            {
+              "label": "Profile settings"
+            },
+            {
+              "label": "Your account",
+              "title": "target"
+            },
+            {
+              "label": "Billing history"
+            }
+          ]
+        }
+      },
+      "durationFrames": 470,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So you tell it what to answer, before the knock. Line one registers a handler for the next dialog that appears. Line two does the click that actually makes the box show up. And notice the order those two are in. The handler has to be registered first, or the box has come and gone before your line ever runs.",
+      "data": {
+        "codeRun": {
+          "filename": "dialogs.py",
+          "language": "py",
+          "resultLabel": "what happens",
+          "color": "green",
+          "atWord": 2.417,
+          "caption": "brief the doorman before the knock",
+          "lines": [
+            {
+              "text": "# brief the doorman BEFORE the knock",
+              "detail": "the order is the whole trick",
+              "sub": "nothing has knocked yet",
+              "label": "ready",
+              "atWord": 6.583
+            },
+            {
+              "text": "page.once(\"dialog\",",
+              "detail": "answer the NEXT dialog with OK",
+              "sub": "once = just the next one",
+              "label": "armed",
+              "atWord": 14.333
+            },
+            {
+              "text": "    lambda dialog: dialog.accept())"
+            },
+            {
+              "text": "page.get_by_role(\"button\",",
+              "detail": "now the click that makes it knock",
+              "sub": "the box appears, accepted",
+              "label": "clicked",
+              "atWord": 22.75
+            },
+            {
+              "text": "    name=\"Delete account\").click()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 526,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "DIALOG_GATE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Now run it again with the handler in place. Same page, same box, same click. Nothing about the site changed. The only difference is that this time somebody was already waiting to answer, so it says OK instead of Cancel. And the account is actually gone.",
+      "data": {
+        "dialogGate": {
+          "message": "Are you sure you want to delete?",
+          "kind": "confirm",
+          "handler": "accept",
+          "handlerLine": "page.once(\"dialog\", accept)",
+          "trigger": "Delete account",
+          "pageTitle": "Your account",
+          "outcome": "the account is gone",
+          "caption": "briefed before the knock",
+          "color": "green",
+          "atWord": 1.833,
+          "knockAtWord": 9.833,
+          "answerAtWord": 23.583,
+          "rows": [
+            {
+              "label": "Profile settings"
+            },
+            {
+              "label": "Your account",
+              "title": "target"
+            },
+            {
+              "label": "Billing history"
+            }
+          ]
+        }
+      },
+      "durationFrames": 466,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "A lambda is fine for a one liner. But if you want to read the message first, give it a real function instead. It receives the dialog, so you can print what it said and then answer it. And notice the word once. Use on instead, and it answers every dialog for the rest of the test.",
+      "data": {
+        "codeRun": {
+          "filename": "dialogs.py",
+          "language": "py",
+          "resultLabel": "what it does",
+          "color": "green",
+          "atWord": 2.417,
+          "caption": "once is the next one. on is all of them.",
+          "lines": [
+            {
+              "text": "def handle(dialog):",
+              "detail": "a real function, not a lambda",
+              "sub": "it is handed the dialog",
+              "label": "handler",
+              "atWord": 10
+            },
+            {
+              "text": "    print(\"Dialog says:\", dialog.message)",
+              "detail": "read what it actually said",
+              "sub": "the text of the box",
+              "label": "message",
+              "atWord": 18.333
+            },
+            {
+              "text": "    dialog.accept()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "page.once(\"dialog\", handle)",
+              "detail": "once = only the next one",
+              "sub": "use on for every dialog",
+              "label": "once",
+              "atWord": 29.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 495,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And because the handler is a real function now, you can read the message on the way past. That is genuinely useful when a test surprises you and you have no idea which box appeared, or what it was even asking you about.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pytest -s test_delete.py",
+              "exitCode": 0,
+              "atWord": 7.833,
+              "output": [
+                "Dialog says: Are you sure you want to",
+                "delete your account?",
+                "1 passed in 2.30s"
+              ]
+            }
+          ],
+          "atWord": 7.833
+        }
+      },
+      "durationFrames": 375,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So the rule here is about order, not about syntax. Register the handler first, then do the click. The other way round is already too late, because the box has been answered and closed before your line ever runs. It is the same race you saw with popups last episode.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the rule",
+          "rule": "register the handler BEFORE the click",
+          "okLabel": "answered",
+          "noLabel": "auto-dismissed",
+          "caption": "no handler means Cancel, every time",
+          "color": "green",
+          "atWord": 2.583,
+          "cases": [
+            {
+              "text": "page.once(...) then click",
+              "title": "ok",
+              "sub": "somebody was ready",
+              "atWord": 19.667
+            },
+            {
+              "text": "click, then page.once(...)",
+              "title": "no",
+              "sub": "the box is already gone",
+              "atWord": 23.583
+            },
+            {
+              "text": "page.on(...) then click",
+              "title": "ok",
+              "sub": "and it answers every one",
+              "atWord": 27.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 488,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. You click Delete, a confirm box appears, and nothing gets deleted. No handler was registered. Why? Pause here if you want longer. Ready? The answer is B. It was dismissed for you, and dismiss means Cancel.",
+      "data": {
+        "quiz": {
+          "question": "No handler. You click Delete. Nothing is deleted. Why?",
+          "options": [
+            {
+              "text": "The site is broken"
+            },
+            {
+              "text": "Auto-dismissed. dismiss = Cancel"
+            },
+            {
+              "text": "Dialogs need a sleep()"
+            },
+            {
+              "text": "confirm() cannot be automated"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 24.833,
+          "why": "Playwright dismisses dialogs so tests never freeze. Dismiss = Cancel.",
+          "atWord": 2
+        }
+      },
+      "durationFrames": 473,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Now something that is not even part of the browser.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Uploading a file",
+          "subtitle": "skip the picker"
+        }
+      },
+      "durationFrames": 106,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "PICKER_BYPASS",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Clicking Choose file opens a window that your operating system owns. It is not a web page at all. Nothing in Playwright can click inside it, and waiting will not help. So the answer is simple. Do not open it. Hand the file straight to the input.",
+      "data": {
+        "pickerBypass": {
+          "inputLabel": "Upload resume",
+          "pickerTitle": "Open File",
+          "pickerItems": [
+            "Documents",
+            "resume.pdf",
+            "photo.png"
+          ],
+          "files": [
+            "resume.pdf"
+          ],
+          "call": ".set_input_files(\"resume.pdf\")",
+          "blockedNote": "not a web page",
+          "landedNote": "1 file attached",
+          "pageTitle": "Apply for a job",
+          "caption": "do not open what you cannot automate",
+          "color": "green",
+          "atWord": 1.75,
+          "handAtWord": 21.167
+        }
+      },
+      "durationFrames": 428,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One line does it, and it has two more shapes worth knowing. Give it a single filename for a single file input. Give it a list, for an input that accepts several files at once. And give it an empty list, which clears the whole selection again.",
+      "data": {
+        "codeRun": {
+          "filename": "upload.py",
+          "language": "py",
+          "resultLabel": "the input now",
+          "color": "green",
+          "atWord": 2.5,
+          "caption": "one file, many files, or none",
+          "lines": [
+            {
+              "text": "page.get_by_label(\"Upload resume\")",
+              "detail": "hand it straight to the input",
+              "sub": "resume.pdf attached",
+              "label": "one",
+              "atWord": 6.333
+            },
+            {
+              "text": "    .set_input_files(\"resume.pdf\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "page.get_by_label(\"Photos\")",
+              "detail": "a list, for several files",
+              "sub": "a.png and b.png attached",
+              "label": "many",
+              "atWord": 17
+            },
+            {
+              "text": "    .set_input_files([\"a.png\", \"b.png\"])"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": ".set_input_files([])",
+              "detail": "and an empty list clears it",
+              "sub": "nothing attached now",
+              "label": "none",
+              "atWord": 24.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 452,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "BROWSER_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "And here is the part that matters. The page cannot tell the difference. As far as it is concerned, a person opened the picker and chose that file by hand. So you submit the form like normal, and the site confirms the upload, exactly as it would for anybody else.",
+      "data": {
+        "browserStep": {
+          "url": "careers.example.com/apply",
+          "screenTitle": "Apply for a job",
+          "caption": "the page cannot tell the difference",
+          "color": "green",
+          "atWord": 4,
+          "steps": [
+            {
+              "text": ".set_input_files(\"resume.pdf\")",
+              "title": "fill",
+              "label": "the file is attached",
+              "detail": "Upload resume",
+              "sub": "resume.pdf",
+              "atWord": 11.5
+            },
+            {
+              "text": "get_by_role(\"button\", \"Submit\")",
+              "title": "click",
+              "label": "send the form",
+              "detail": "Submit",
+              "atWord": 19
+            },
+            {
+              "text": "expect(msg).to_be_visible()",
+              "title": "assert",
+              "label": "the site confirms it",
+              "detail": "flash",
+              "sub": "resume.pdf saved",
+              "color": "green",
+              "atWord": 25.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 471,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "PICKER_BYPASS",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "And if the input accepts several files, you pass a list instead of one name. All of them arrive together, from a single line, and that picker window still never opens once. Pass an empty list, and it clears the whole selection again.",
+      "data": {
+        "pickerBypass": {
+          "inputLabel": "Photos",
+          "pickerTitle": "Open File",
+          "pickerItems": [
+            "a.png",
+            "b.png",
+            "c.png"
+          ],
+          "files": [
+            "a.png",
+            "b.png",
+            "c.png"
+          ],
+          "call": ".set_input_files([\"a\", \"b\", \"c\"])",
+          "blockedNote": "still never opens",
+          "landedNote": "3 files attached",
+          "pageTitle": "Your gallery",
+          "caption": "a list for many. an empty list to clear.",
+          "color": "green",
+          "atWord": 1.833,
+          "handAtWord": 19.833
+        }
+      },
+      "durationFrames": 443,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "And the last one you already know how to do.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Catching a download",
+          "subtitle": "you have seen this shape"
+        }
+      },
+      "durationFrames": 91,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "TRAP_TRIGGER",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Look at this shape for a second, because you have seen it before. You met it last episode, for popups. Start listening first. Then, inside that block, click the button that starts the download. And afterwards, the thing you caught is waiting for you in the value.",
+      "data": {
+        "trapTrigger": {
+          "listener": "with page.expect_download():",
+          "trigger": "get_by_role(\"button\", \"Export\")",
+          "catcher": "download = d.value",
+          "caught": "a download",
+          "caughtItems": [
+            "report-2026-07.csv"
+          ],
+          "originLabel": "the same page",
+          "mode": "trap",
+          "caption": "set the trap, then trigger it",
+          "color": "blue",
+          "atWord": 1.75,
+          "armAtWord": 10.917,
+          "fireAtWord": 21.667
+        }
+      },
+      "durationFrames": 452,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here it is in full, and there is one line that people always forget about. The download arrives, and you can read its name. But without save as, that file only lives in a temporary folder somewhere, and it disappears the very moment your test finishes running.",
+      "data": {
+        "codeRun": {
+          "filename": "download.py",
+          "language": "py",
+          "resultLabel": "what you get",
+          "color": "blue",
+          "atWord": 2.583,
+          "caption": "save it, or it disappears",
+          "lines": [
+            {
+              "text": "with page.expect_download() as dl_info:",
+              "detail": "set the trap first",
+              "sub": "now listening",
+              "label": "armed",
+              "atWord": 5
+            },
+            {
+              "text": "    page.get_by_role(\"button\","
+            },
+            {
+              "text": "        name=\"Export CSV\").click()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "download = dl_info.value",
+              "detail": "and here is the download",
+              "sub": "report-2026-07.csv",
+              "label": "caught",
+              "atWord": 11.333
+            },
+            {
+              "text": "download.save_as(\"reports/\" +",
+              "detail": "save it, or it vanishes",
+              "sub": "kept, where you chose",
+              "label": "saved",
+              "atWord": 17.667
+            },
+            {
+              "text": "    download.suggested_filename)"
+            }
+          ]
+        }
+      },
+      "durationFrames": 468,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And the download already knows what it was called. That suggested filename is the name the server offered you, which is almost always the one you actually want to keep it under. So you can just hand it straight to save as.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "python export.py",
+              "exitCode": 0,
+              "atWord": 7.667,
+              "output": [
+                "report-2026-07.csv",
+                "saved to reports/report-2026-07.csv"
+              ]
+            }
+          ],
+          "atWord": 7.667
+        }
+      },
+      "durationFrames": 355,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "And that is a whole family, not a one off. Popups, downloads and network replies all use the very same shape. Trap first, trigger inside the block, then read the value after it. Notice that a dialog is the odd one out, because that one is a handler.",
+      "data": {
+        "ruleTest": {
+          "kicker": "one shape, three uses",
+          "rule": "trap first, trigger inside, value after",
+          "okLabel": "same family",
+          "noLabel": "not this one",
+          "caption": "you will meet it again in episode fourteen",
+          "color": "blue",
+          "atWord": 1.75,
+          "cases": [
+            {
+              "text": "expect_popup, expect_download",
+              "title": "ok",
+              "sub": "both wait for an event",
+              "atWord": 19
+            },
+            {
+              "text": "expect_response",
+              "title": "ok",
+              "sub": "episode fourteen uses it",
+              "atWord": 22.917
+            },
+            {
+              "text": "page.once(\"dialog\", ...)",
+              "title": "no",
+              "sub": "a handler, not a trap",
+              "atWord": 26.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 472,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "So, three lines to take away with you. Answer a dialog before you ever cause it, because afterwards is far too late. Never open the file picker at all, just hand the file straight over to the input. And trap a download before you click the button.",
+      "data": {
+        "heading": "Three things off your page",
+        "points": [
+          {
+            "text": "register the handler before the click",
+            "atWord": 10.333
+          },
+          {
+            "text": "hand files straight to the input",
+            "atWord": 17.5
+          },
+          {
+            "text": "trap the download, then trigger it",
+            "atWord": 23.167
+          }
+        ]
+      },
+      "durationFrames": 425,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next time, screenshots, video and the trace viewer. The whole course is free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Screenshots, Video & Trace",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 220,
+      "audio": "audio/pw-dojo-12-dialogs-files_long_s24.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP17 shorts: chaining and shadow DOM",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "chaining narrows the search region, and every locator but XPath pierces shadow DOM",
+    "openLoop": "Why did a forty-character selector break when a designer moved a div?",
+    "analogy": "a chain is directions — in the sidebar, in Notifications, the Email toggle.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Playwright chaining + shadow DOM #playwright #python",
+      "description": "Locator chaining reads like directions, and_ keeps only what matches both, and every Playwright locator pierces an open shadow root — except XPath.",
+      "tags": [
+        "playwright",
+        "python",
+        "locators",
+        "shadow-dom",
+        "chaining",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "PIERCE THE BOX",
+    "badge": "Dojo · EP 17",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A forty-character selector broke because a designer moved a div. Stop writing addresses.",
+      "data": {
+        "headline": "GIVE DIRECTIONS.",
+        "subtext": "not an address",
+        "heroAsset": "lucide:crosshair",
+        "headlineAtWord": 4,
+        "heroAtWord": 8
+      },
+      "durationFrames": 177,
+      "audio": "audio/pw-dojo-17-advanced-locators_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "SEARCH_NARROW",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Chaining is just directions. In the sidebar. Inside that, Notifications. Inside that, the Email switch. Each link doesn't lengthen a selector — it shrinks the room, until there's only one thing that could possibly match.",
+      "data": {
+        "searchNarrow": {
+          "rootLabel": "the whole settings page",
+          "target": "Email alerts",
+          "targetAction": "click",
+          "caption": "the room shrank. the selector did not.",
+          "color": "purple",
+          "atWord": 2,
+          "links": [
+            {
+              "label": "page.get_by_role(\"complementary\")",
+              "text": "the sidebar",
+              "sub": "the main article",
+              "detail": "start in the sidebar",
+              "atWord": 5.917
+            },
+            {
+              "label": ".get_by_role(\"region\")",
+              "text": "Notifications",
+              "sub": "Billing",
+              "detail": "then that block inside",
+              "atWord": 8.833
+            },
+            {
+              "label": ".get_by_role(\"switch\")",
+              "text": "Email alerts",
+              "sub": "Push alerts",
+              "detail": "then the switch inside that",
+              "atWord": 12.75
+            }
+          ],
+          "targetAtWord": 22.583
+        }
+      },
+      "durationFrames": 434,
+      "audio": "audio/pw-dojo-17-advanced-locators_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "SET_LOGIC",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Need two descriptions at once? And underscore keeps only what satisfies both. Button, and titled Save. The link goes. The untitled one goes. Cancel says Close, so that goes too.",
+      "data": {
+        "setLogic": {
+          "op": "and_",
+          "opNote": "both must be true",
+          "criteria": [
+            "is a button",
+            "titled Save"
+          ],
+          "countLabel": "matched",
+          "verdict": "exactly one survives",
+          "caption": "and_ narrows. or_ widens.",
+          "color": "blue",
+          "atWord": 2,
+          "candidates": [
+            {
+              "label": "Save",
+              "sub": "button · title=Save",
+              "title": "keep",
+              "atWord": 10.167
+            },
+            {
+              "label": "Save draft",
+              "sub": "link · title=Save",
+              "title": "drop",
+              "atWord": 14.25
+            },
+            {
+              "label": "Submit",
+              "sub": "button · no title",
+              "title": "drop",
+              "atWord": 16.333
+            },
+            {
+              "label": "Cancel",
+              "sub": "button · title=Close",
+              "title": "drop",
+              "atWord": 19.417
+            }
+          ],
+          "verdictAtWord": 21.417
+        }
+      },
+      "durationFrames": 389,
+      "audio": "audio/pw-dojo-17-advanced-locators_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "SEALED_BOX",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "And the one everybody's scared of. Web components seal their HTML inside a shadow root, and in Selenium that meant JavaScript incantations. In Playwright, get by label just walks in. So does get by role. So does CSS. One exception though — XPath genuinely cannot see inside.",
+      "data": {
+        "sealedBox": {
+          "boxLabel": "<fancy-datepicker>",
+          "wallLabel": "#shadow-root (open)",
+          "contents": "Departure date",
+          "blockedNote": "XPath cannot see inside",
+          "verdict": "no special call needed",
+          "caption": "everything pierces it. except XPath.",
+          "color": "green",
+          "atWord": 2,
+          "probes": [
+            {
+              "label": "get_by_label(\"Departure\")",
+              "title": "through",
+              "sub": "straight in",
+              "atWord": 18.333
+            },
+            {
+              "label": "get_by_role(\"textbox\")",
+              "title": "through",
+              "sub": "also fine",
+              "atWord": 22.417
+            },
+            {
+              "label": "locator(\"input.date\")",
+              "title": "through",
+              "sub": "CSS pierces too",
+              "atWord": 25.417
+            },
+            {
+              "label": "locator(\"//input[@id]\")",
+              "title": "blocked",
+              "sub": "the one exception",
+              "atWord": 31.583
+            }
+          ],
+          "verdictAtWord": 32.583
+        }
+      },
+      "durationFrames": 596,
+      "audio": "audio/pw-dojo-17-advanced-locators_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Whole lesson's free, over at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-17-advanced-locators_shorts_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

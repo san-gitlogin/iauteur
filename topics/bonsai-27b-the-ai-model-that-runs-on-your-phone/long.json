@@ -1,0 +1,239 @@
+{
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "design": "moderndark",
+    "theme": "moderndark",
+    "themeLight": "daylight"
+  },
+  "meta": {
+    "analogy": "Running Bonsai on your phone is like fitting an entire datacenter's library of intelligence into your pocket.",
+    "format": "both",
+    "fps": 30,
+    "onePayoff": "Bonsai 27B runs a 27-billion parameter AI model completely locally on your smartphone with extreme compression and energy efficiency.",
+    "openLoop": "How can you compress a massive 27B-class model from fifty-four gigabytes down to just three-point-nine gigabytes to run locally on an iPhone?",
+    "screenplay": "explainer",
+    "topic": "Bonsai 27B: the AI model that runs on your phone",
+    "topicAxes": [
+      "entity-novelty",
+      "sovereignty"
+    ]
+  },
+  "scenes": [
+    {
+      "background": "zoneA",
+      "data": {
+        "headline": "AI ON YOUR PHONE",
+        "headlineAtWord": 1,
+        "heroAsset": "lucide:cpu",
+        "heroAtWord": 2,
+        "subtext": "Complete offline twenty-seven-B model"
+      },
+      "durationFrames": 192,
+      "id": "s01",
+      "narration": "Can a massive AI model run completely on your phone, without any cell service?",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "HOOK",
+      "audio": "audio/bonsai-27b-the-ai-model-that-runs-on-your-phone_long_s01.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "subtitle": "The offline 27B-class model",
+        "title": "Bonsai 27B"
+      },
+      "durationFrames": 223,
+      "id": "s02",
+      "narration": "Meet Bonsai 27B, the first large model designed to run inside your smartphone.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "TITLE_CARD",
+      "audio": "audio/bonsai-27b-the-ai-model-that-runs-on-your-phone_long_s02.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "compare": {
+          "a": {
+            "color": "orange",
+            "name": "Standard 27B"
+          },
+          "atWord": 2.333,
+          "b": {
+            "color": "green",
+            "name": "Bonsai 1-bit"
+          },
+          "headline": "Deployment Size",
+          "rows": [
+            {
+              "a": "54 GB",
+              "b": "3.9 GB",
+              "label": "Required Memory",
+              "winner": "b"
+            },
+            {
+              "a": "No",
+              "b": "Yes",
+              "label": "On iOS / Android",
+              "winner": "b"
+            }
+          ]
+        }
+      },
+      "durationFrames": 322,
+      "id": "s03",
+      "narration": "Normally, a massive model demands fifty-four gigabytes of memory. But Bonsai shrinks that weight down to just three-point-nine gigabytes.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "SPEC_COMPARE",
+      "audio": "audio/bonsai-27b-the-ai-model-that-runs-on-your-phone_long_s03.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "kinetic": {
+          "atWord": 1,
+          "color": "purple",
+          "fx": "highlight",
+          "sub": "Extreme parameter compression",
+          "text": "Intelligence Density"
+        }
+      },
+      "durationFrames": 333,
+      "id": "s04",
+      "narration": "This breakthrough is based on Caltech's research into intelligence density. It prioritizes real intelligence per bit rather than raw parameter count.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "KINETIC_TEXT",
+      "audio": "audio/bonsai-27b-the-ai-model-that-runs-on-your-phone_long_s04.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "source": "PrismML, 2026",
+        "steps": [
+          {
+            "atWord": 12.167,
+            "color": "purple",
+            "sub": "Multi-step logic offline",
+            "title": "Reasoning"
+          },
+          {
+            "atWord": 19.083,
+            "color": "blue",
+            "sub": "Local function executing",
+            "title": "Tools"
+          },
+          {
+            "atWord": 24.667,
+            "color": "green",
+            "sub": "Complete smart automation",
+            "title": "Workflows"
+          }
+        ]
+      },
+      "durationFrames": 389,
+      "id": "s05",
+      "narration": "By packing intelligence tightly, Bonsai executes complex multi-step reasoning offline. It seamlessly orchestrates tool calling and agentic workflows right in your hand.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "STEP_FLOW",
+      "audio": "audio/bonsai-27b-the-ai-model-that-runs-on-your-phone_long_s05.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "device": {
+          "atWord": 3.25,
+          "content": {
+            "cards": [
+              {
+                "asset": "lucide:eye",
+                "color": "purple",
+                "sub": "Voice and sight",
+                "title": "Multimodal"
+              },
+              {
+                "asset": "lucide:brain",
+                "color": "blue",
+                "sub": "Offline reasoning",
+                "title": "Local Agent"
+              }
+            ],
+            "kind": "cardGrid",
+            "title": "Bonsai Studio"
+          },
+          "notification": {
+            "app": "Bonsai App",
+            "text": "Task completed offline!"
+          },
+          "os": "ios"
+        }
+      },
+      "durationFrames": 346,
+      "id": "s06",
+      "narration": "You can try it out today via the Bonsai Studio iOS app. It also brings full on-device multimodal understanding into a native mobile workspace.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "DEVICE_FRAME",
+      "audio": "audio/bonsai-27b-the-ai-model-that-runs-on-your-phone_long_s06.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "source": "PrismML, 2026",
+        "stats": [
+          {
+            "atWord": 21.917,
+            "color": "green",
+            "kicker": "Memory Weight",
+            "value": "14x less"
+          },
+          {
+            "atWord": 28.833,
+            "color": "green",
+            "kicker": "Processing Speed",
+            "value": "8x faster"
+          },
+          {
+            "atWord": 37.167,
+            "color": "green",
+            "kicker": "Power Consumption",
+            "value": "5x less"
+          }
+        ],
+        "verdict": {
+          "atWord": 5.167,
+          "color": "green",
+          "text": "Ultra-efficient offline execution"
+        }
+      },
+      "durationFrames": 522,
+      "id": "s07",
+      "narration": "Even better, local execution means massive savings on your mobile hardware. PrismML reports fourteen-times less memory usage and an eight-fold speedup. It even consumes five-times less energy than full-precision alternatives.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "STAT_PANELS",
+      "audio": "audio/bonsai-27b-the-ai-model-that-runs-on-your-phone_long_s07.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "message": "Get Bonsai on Hugging Face",
+        "sub": "Download the Bonsai iOS app"
+      },
+      "durationFrames": 214,
+      "id": "s08",
+      "narration": "Download Bonsai on Hugging Face today, or try the iOS app to run models locally.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "OUTRO_CTA",
+      "audio": "audio/bonsai-27b-the-ai-model-that-runs-on-your-phone_long_s08.mp3"
+    }
+  ],
+  "thumbnail": {
+    "asset": "lucide:smartphone",
+    "badge": "Offline AI",
+    "title": "Bonsai 27B"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "topic": "RECORDED_STEP — a real VS Code session on the narrator's clock",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "a real recorded VS Code session, re-timed to the narration",
+    "openLoop": "Is that a real editor or a drawing of one?",
+    "analogy": "A film reel that waits for the narrator.",
+    "topicAxes": [
+      "entity-novelty",
+      "tribal-conflict"
+    ],
+    "seo": {
+      "title": "RECORDED_STEP — real capture demo",
+      "altTitles": [
+        "recording pipeline demo"
+      ],
+      "description": "Internal demo. Real VS Code footage captured by scripts/record.mjs, replayed on the narration clock.",
+      "tags": [
+        "internal",
+        "demo",
+        "recording"
+      ],
+      "queries": [
+        "how does iauteur record real screen demos"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "studio",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "REAL FOOTAGE",
+    "badge": "internal",
+    "asset": "lucide:clapperboard"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Every tutorial shows you a picture of an editor. This one shows you the editor.",
+      "data": {
+        "headline": "NOT A DRAWING.",
+        "subtext": "a real session, really recorded",
+        "heroAsset": "lucide:clapperboard",
+        "headlineAtWord": 1,
+        "heroAtWord": 6.167
+      },
+      "durationFrames": 160,
+      "timingSource": "tts",
+      "audio": "audio/rec-vscode-demo_long_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "background": "zoneA",
+      "narration": "Look at this. That is not an animation. That is my real editor on my real machine, and the code you can see is really about to run. I press run, and Python prints the greeting that line five asks for. Now I add a second call underneath it, and I save the file. Watch the terminal one more time. Two lines come back, and the second one is the line I typed a moment ago. Nothing here was drawn or faked for you.",
+      "data": {
+        "headline": "A real session, [on the voice]",
+        "recordedStep": {
+          "caption": "captured once, re-timed every render",
+          "premise": "This is VS Code running on a normal laptop. Every character in the black pane below was read back off that screen.",
+          "color": "blue",
+          "atWord": 1,
+          "clips": [
+            {
+              "ref": "rec:vscode-hello#run-it",
+              "label": "run the script",
+              "atWord": 2.167,
+              "callouts": [
+                {
+                  "text": "real output, read back off this screen",
+                  "mark": "greeting",
+                  "atWord": 9.5
+                }
+              ],
+              "id": "run-it",
+              "src": "rec/vscode-hello/seg-02.mp4",
+              "frames": 59,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "greeting": {
+                  "x": 368,
+                  "y": 650,
+                  "w": 132,
+                  "h": 19
+                }
+              }
+            },
+            {
+              "ref": "rec:vscode-hello#add-line",
+              "label": "add a second call",
+              "atWord": 19.833,
+              "callouts": [
+                {
+                  "text": "the line being typed",
+                  "mark": "newline",
+                  "atWord": 25.667
+                }
+              ],
+              "id": "add-line",
+              "src": "rec/vscode-hello/seg-03.mp4",
+              "frames": 76,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "newline": {
+                  "x": 428,
+                  "y": 186,
+                  "w": 208,
+                  "h": 22
+                }
+              }
+            },
+            {
+              "ref": "rec:vscode-hello#save-it",
+              "label": "save it",
+              "atWord": 34.5,
+              "id": "save-it",
+              "src": "rec/vscode-hello/seg-04.mp4",
+              "frames": 18,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "keys": [
+                "Ctrl",
+                "S"
+              ]
+            },
+            {
+              "ref": "rec:vscode-hello#run-again",
+              "label": "run it again",
+              "atWord": 43.25,
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "this line is new",
+                  "mark": "second",
+                  "color": "green",
+                  "atWord": 50.583
+                }
+              ],
+              "id": "run-again",
+              "src": "rec/vscode-hello/seg-05.mp4",
+              "frames": 61,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "second": {
+                  "x": 368,
+                  "y": 707,
+                  "w": 114,
+                  "h": 19
+                },
+                "first": {
+                  "x": 368,
+                  "y": 688,
+                  "w": 132,
+                  "h": 19
+                }
+              }
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 760,
+      "timingSource": "tts",
+      "audio": "audio/rec-vscode-demo_long_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The footage waited for the voice at every step. That is the whole contract.",
+      "data": {
+        "message": "Captured, then re-timed",
+        "sub": "docs/SCREEN_RECORDING.md"
+      },
+      "durationFrames": 159,
+      "timingSource": "tts",
+      "audio": "audio/rec-vscode-demo_long_s03.mp3"
+    }
+  ]
+}

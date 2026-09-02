@@ -1,0 +1,237 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP10 shorts: filter() vs nth()",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "how to pick the one element you mean out of a page full of identical ones",
+    "openLoop": "Twenty rows, twenty Edit buttons — how do you click the right one?",
+    "analogy": "The spotlight has found a whole chorus line, not one actor.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Stop using nth() in Playwright #playwright #python",
+      "description": "filter(has_text=) finds the row by meaning. nth() breaks the moment the list re-sorts.",
+      "tags": [
+        "playwright",
+        "python",
+        "filter",
+        "nth",
+        "locators",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "FILTER, NOT nth()",
+    "badge": "Dojo · EP 10",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Twenty rows. Every one has an Edit button. You need exactly one of them.",
+      "data": {
+        "headline": "TWENTY EDIT BUTTONS.",
+        "subtext": "you need one of them",
+        "heroAsset": "lucide:list",
+        "headlineAtWord": 3.5,
+        "heroAtWord": 7.583
+      },
+      "durationFrames": 159,
+      "audio": "audio/pw-dojo-10-many-elements_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "ROW_FILTER",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Do not count them. Filter them. Keep only the row that mentions the dog, and watch the others drop away. Now click the Delete button that belongs to that one row.",
+      "data": {
+        "rowFilter": {
+          "baseLabel": "get_by_role(\"listitem\")",
+          "condition": ".filter(has_text=\"Walk dog\")",
+          "control": "Delete",
+          "actLabel": ".click()",
+          "pageTitle": "My todo list",
+          "caption": "find the row, then act inside it",
+          "color": "orange",
+          "atWord": 1.75,
+          "filterAtWord": 6.833,
+          "actAtWord": 15.667,
+          "rows": [
+            {
+              "label": "Buy milk"
+            },
+            {
+              "label": "Walk dog",
+              "title": "keep"
+            },
+            {
+              "label": "Learn Playwright"
+            },
+            {
+              "label": "Ship it"
+            }
+          ]
+        }
+      },
+      "durationFrames": 294,
+      "audio": "audio/pw-dojo-10-many-elements_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "One line does it. Among all the rows, keep the one containing that text. Then act inside the match, on the button that belongs to it.",
+      "data": {
+        "codeRun": {
+          "filename": "filter.py",
+          "language": "py",
+          "resultLabel": "what is left",
+          "caption": "find the row, then act within it",
+          "color": "orange",
+          "atWord": 2.5,
+          "lines": [
+            {
+              "text": "rows = page.get_by_role(\"listitem\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "rows.filter(has_text=\"Walk dog\")",
+              "detail": "keep the row with that text",
+              "sub": "1 row left, out of 5",
+              "label": "rows",
+              "atWord": 4.833
+            },
+            {
+              "text": "    .get_by_role(\"button\",",
+              "detail": "then act INSIDE the match",
+              "sub": "the right Delete",
+              "label": "click",
+              "atWord": 11.75
+            },
+            {
+              "text": "        name=\"Delete\").click()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 261,
+      "audio": "audio/pw-dojo-10-many-elements_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "INDEX_DRIFT",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "So why not just use a number instead? Look at the order here, and remember it. Because somebody adds one user, the list re-sorts, and your number now points at a stranger.",
+      "data": {
+        "indexDrift": {
+          "target": "Trinity",
+          "indexLabel": ".nth(2)",
+          "meaningLabel": "filter(has_text=)",
+          "causeLabel": "someone adds a user",
+          "brokenNote": "now points at Neo",
+          "heldNote": "still finds Trinity",
+          "caption": "position is a guess. meaning is not.",
+          "color": "orange",
+          "atWord": 1.75,
+          "shuffleAtWord": 14.167,
+          "before": [
+            {
+              "label": "Morpheus"
+            },
+            {
+              "label": "Neo"
+            },
+            {
+              "label": "Trinity"
+            },
+            {
+              "label": "Switch"
+            }
+          ],
+          "after": [
+            "Apoc",
+            "Morpheus",
+            "Neo",
+            "Trinity",
+            "Switch"
+          ]
+        }
+      },
+      "durationFrames": 318,
+      "audio": "audio/pw-dojo-10-many-elements_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So here is the gut check. Would a human ever say it that way? The first result, yes. The seventh edit button, never.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the gut check",
+          "rule": "if no human would say it, do not write it",
+          "okLabel": "people say it",
+          "noLabel": "nobody says it",
+          "caption": "position, only when position is the point",
+          "color": "blue",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "\"the first search result\"",
+              "title": "ok",
+              "sub": "a normal thing to say",
+              "atWord": 9
+            },
+            {
+              "text": "\"the seventh edit button\"",
+              "title": "no",
+              "sub": "use filter instead",
+              "atWord": 13.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 265,
+      "audio": "audio/pw-dojo-10-many-elements_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "The whole lesson, free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-10-many-elements_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

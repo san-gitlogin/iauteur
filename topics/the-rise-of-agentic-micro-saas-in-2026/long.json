@@ -1,0 +1,270 @@
+{
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "design": "moderndark",
+    "theme": "moderndark",
+    "themeLight": "daylight"
+  },
+  "meta": {
+    "format": "both",
+    "fps": 30,
+    "screenplay": "explainer",
+    "topic": "The Rise of \"Agentic Micro-SaaS\" in 2026"
+  },
+  "scenes": [
+    {
+      "background": "zoneA",
+      "data": {
+        "headline": "END OF TYPING CODE",
+        "headlineAtWord": 4,
+        "heroAsset": "lucide:terminal-square",
+        "heroAtWord": 16,
+        "subtext": "AI Agents take over the stack"
+      },
+      "durationFrames": 238,
+      "id": "s01",
+      "narration": "The era of typing every single line of code is officially dying. Here is what replaces it.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "HOOK",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s01.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "center": {
+          "atWord": 6.167,
+          "title": "Tech Trend 2026"
+        },
+        "left": {
+          "atWord": 19.167,
+          "badge": "Old",
+          "color": "red",
+          "title": "Syntax"
+        },
+        "right": {
+          "atWord": 21.75,
+          "badge": "New",
+          "color": "green",
+          "title": "Agentic AI"
+        },
+        "source": "illustrative"
+      },
+      "durationFrames": 426,
+      "id": "s02",
+      "narration": "In 2026, the biggest trend taking over the tech world isn't a new programming language—it is Agentic AI. Suddenly, one-person startups are crushing traditional tech teams.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "SPLIT_PATHS",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s02.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "kinetic": {
+          "atWord": 16.417,
+          "color": "purple",
+          "fx": "typewriter",
+          "sub": "managing the AI workforce",
+          "text": "Programmer to Orchestrator."
+        }
+      },
+      "durationFrames": 225,
+      "id": "s03",
+      "narration": "Indie developers are no longer just programmers. Today, they are orchestrators.",
+      "timingSource": "tts",
+      "transition": "glitch",
+      "type": "KINETIC_TEXT",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s03.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "harness": {
+          "agent": "Autonomous AI",
+          "atWord": 12.583,
+          "guardrail": {
+            "label": "manual coding",
+            "reason": "bypassed",
+            "ring": 1
+          },
+          "rings": [
+            {
+              "chips": [
+                "goals",
+                "rules"
+              ],
+              "label": "Intent"
+            },
+            {
+              "chips": [
+                "build",
+                "deploy"
+              ],
+              "label": "Action"
+            }
+          ]
+        }
+      },
+      "durationFrames": 413,
+      "id": "s04",
+      "narration": "Instead of using AI just to answer questions, developers are deploying autonomous agents to do the heavy lifting. You simply give the agent an intent, and it builds the entire architecture.",
+      "timingSource": "tts",
+      "transition": "zoom",
+      "type": "AGENT_HARNESS",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s04.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "source": "illustrative",
+        "steps": [
+          {
+            "atWord": 16.417,
+            "sub": "Frontend design",
+            "title": "UI Agent"
+          },
+          {
+            "atWord": 23,
+            "sub": "Cloud database",
+            "title": "DB Agent"
+          },
+          {
+            "atWord": 28.5,
+            "sub": "Testing bugs",
+            "title": "QA Agent"
+          }
+        ]
+      },
+      "durationFrames": 417,
+      "id": "s05",
+      "narration": "Here is exactly how a Micro-SaaS is built right now. One agent designs the frontend UI, another structures the cloud database, and a third continuously tests the code for bugs.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "STEP_FLOW",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s05.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "lineChart": {
+          "area": true,
+          "atWord": 28.083,
+          "series": [
+            {
+              "color": "purple",
+              "label": "Solo Output",
+              "values": [
+                10,
+                25,
+                55,
+                95
+              ]
+            },
+            {
+              "color": "orange",
+              "label": "Tech Teams",
+              "values": [
+                15,
+                30,
+                40,
+                45
+              ]
+            }
+          ],
+          "xAxis": [
+            "Wk 1",
+            "Wk 2",
+            "Wk 3",
+            "Wk 4"
+          ]
+        }
+      },
+      "durationFrames": 411,
+      "id": "s06",
+      "narration": "Because these agents work simultaneously, a single person can act as the CEO and launch a full-scale app in days rather than months—pushing solo developer output way past traditional startups.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "LINE_CHART",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s06.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "source": "illustrative",
+        "stats": [
+          {
+            "atWord": 7.75,
+            "color": "green",
+            "kicker": "Cloud 3.0 Cost",
+            "value": "Dropping"
+          },
+          {
+            "atWord": 16.75,
+            "color": "blue",
+            "kicker": "Entry Barrier",
+            "value": "Lower"
+          }
+        ],
+        "verdict": {
+          "atWord": 35.833,
+          "color": "purple",
+          "text": "Solve Problems"
+        }
+      },
+      "durationFrames": 480,
+      "id": "s07",
+      "narration": "Add in the fact that server costs are dropping under Cloud 3.0, and the barrier to entry is lower than ever. The focus has entirely shifted from memorizing syntax, to actually solving real-world problems.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "STAT_PANELS",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s07.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "heading": "The Agentic Shift",
+        "points": [
+          {
+            "atWord": 8.417,
+            "text": "Engineering evolves"
+          },
+          {
+            "atWord": 15.917,
+            "text": "Orchestrate AI"
+          },
+          {
+            "atWord": 29.75,
+            "text": "Build tech giants"
+          }
+        ]
+      },
+      "durationFrames": 404,
+      "id": "s08",
+      "narration": "Software engineering isn't going away; it is evolving. The indie hackers who adapt to orchestrating AI agents today, are the ones who will build the billion-dollar tech giants of tomorrow.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "RECAP",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s08.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "message": "Subscribe to The NBX Studio",
+        "sub": "Build your agentic workflow"
+      },
+      "durationFrames": 223,
+      "id": "s09",
+      "narration": "Ready to build your own agentic workflow? Subscribe to The NBX Studio for more.",
+      "timingSource": "tts",
+      "transition": "zoomthrough",
+      "type": "OUTRO_CTA",
+      "audio": "audio/the-rise-of-agentic-micro-saas-in-2026_long_s09.mp3"
+    }
+  ],
+  "thumbnail": {
+    "asset": "lucide:bot",
+    "badge": "2026 Trend",
+    "title": "AGENTIC MICRO-SAAS"
+  }
+}

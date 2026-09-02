@@ -1,0 +1,748 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP18: Parallel Runs & CI",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "pytest -n spreads the suite across workers, and CI runs the lot on every push",
+    "openLoop": "A hundred tests at six seconds each is ten minutes, every single push.",
+    "analogy": "pytest -n 4 is four theatres performing different plays at the same time.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #18 — parallel runs and CI",
+      "description": "pytest-xdist turns a 10-minute suite into under 3 by spreading it across workers — but only because tests are isolated. Plus the GitHub Actions workflow that runs it on every push.",
+      "tags": [
+        "playwright",
+        "python",
+        "pytest-xdist",
+        "parallel",
+        "github actions",
+        "ci"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Four Theatres At Once",
+    "badge": "Dojo · EP 18",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "10 MIN → 3 MIN",
+    "badge": "EP 18 · PARALLEL",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A hundred tests. Six seconds each. That's ten minutes of watching a progress bar, every single time you push.",
+      "data": {
+        "headline": "TEN MINUTES. EVERY PUSH.",
+        "subtext": "or two and a half",
+        "heroAsset": "lucide:rocket",
+        "headlineAtWord": 5.75,
+        "heroAtWord": 11.417
+      },
+      "durationFrames": 238,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "One flag fixes most of that. And then a robot takes the job off you entirely.",
+      "data": {
+        "title": "Parallel Runs & CI",
+        "subtitle": "The Playwright Dojo · Episode 18"
+      },
+      "durationFrames": 162,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things. One flag that turns ten minutes into under three. Then the catch, because there's always a catch, and this one bites people hard. And finally the robot — how you get your whole suite running on every push without anybody remembering to do it.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:rocket",
+              "label": "-n 4",
+              "atWord": 4.917
+            },
+            {
+              "icon": "lucide:dices",
+              "label": "the catch",
+              "color": "red",
+              "atWord": 13.5
+            },
+            {
+              "icon": "lucide:bot",
+              "label": "CI",
+              "color": "green",
+              "atWord": 22.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 452,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Start with the flag, because it's the easiest win in this entire course.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Four theatres at once",
+          "subtitle": "pytest-xdist"
+        }
+      },
+      "durationFrames": 139,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "WORKER_SPREAD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Sequentially, your hundred tests queue up and go one at a time. Ten minutes twelve. But hand them to four workers and they get dealt out — a quarter each, roughly, running at the same moment in four separate browsers. Two minutes forty-one. Now, nothing got faster here. Not one test. The work just stopped queuing. And the only reason that's allowed is the thing from episode eight — every test gets its own fresh context, so there's nothing to fight over.",
+      "data": {
+        "workerSpread": {
+          "queueLabel": "100 tests · 6s each",
+          "items": [
+            "test_login",
+            "test_checkout",
+            "test_search",
+            "test_profile"
+          ],
+          "beforeLabel": "10m12s, one file",
+          "afterLabel": "2m41s, four workers",
+          "note": "only because tests are isolated",
+          "caption": "the work did not get faster. it got spread.",
+          "color": "green",
+          "atWord": 3.417,
+          "lanes": [
+            {
+              "label": "gw0",
+              "sub": "25 tests",
+              "detail": "2m38s",
+              "atWord": 16.083
+            },
+            {
+              "label": "gw1",
+              "sub": "25 tests",
+              "detail": "2m41s",
+              "atWord": 18.5
+            },
+            {
+              "label": "gw2",
+              "sub": "24 tests",
+              "detail": "2m29s",
+              "atWord": 20.917
+            },
+            {
+              "label": "gw3",
+              "sub": "26 tests",
+              "detail": "2m40s",
+              "atWord": 24.083
+            }
+          ],
+          "afterAtWord": 28.833
+        }
+      },
+      "durationFrames": 804,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Getting it is one line. Install pytest-xdist, and you've got a new flag. Dash n four gives you four worker processes. Dash n auto gives you one per CPU core, which is the one I'd reach for on a machine you don't control — your laptop and the build server won't have the same number of cores.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "atWord": 2.5,
+          "commands": [
+            {
+              "cmd": "pip install pytest-xdist",
+              "output": [
+                "Successfully installed pytest-xdist-3.5.0"
+              ],
+              "exitCode": 0,
+              "atWord": 6.083
+            },
+            {
+              "cmd": "pytest -n 4",
+              "output": [
+                "# four worker processes"
+              ],
+              "exitCode": 0,
+              "atWord": 13.417
+            },
+            {
+              "cmd": "pytest -n auto",
+              "output": [
+                "# one worker per CPU core"
+              ],
+              "exitCode": 0,
+              "atWord": 19.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 521,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Which one, though? Honestly, on your own machine pick a number, because you know what the thing's got and you probably want a core left over to work on. On a build server, auto every time. You've no idea what hardware it hands you this week.",
+      "data": {
+        "ruleTest": {
+          "kicker": "pick your flag",
+          "rule": "a number when you know the machine. auto when you do not.",
+          "okLabel": "good fit",
+          "noLabel": "guessing",
+          "caption": "the build server changes under you",
+          "color": "blue",
+          "atWord": 1.667,
+          "cases": [
+            {
+              "text": "-n 4 on your own laptop",
+              "title": "ok",
+              "sub": "leaves you a core to work",
+              "atWord": 10.083
+            },
+            {
+              "text": "-n auto in CI",
+              "title": "ok",
+              "sub": "whatever it gives you",
+              "atWord": 17.167
+            },
+            {
+              "text": "-n 16 on a two-core runner",
+              "title": "no",
+              "sub": "sixteen workers, two cores",
+              "atWord": 21.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 408,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "And here's the real thing running. Four workers, a hundred items, every dot a passing test. Two minutes forty-one, where it used to be ten twelve. Same tests, same machine, same code. Just not standing in a queue any more.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "atWord": 1.833,
+          "commands": [
+            {
+              "cmd": "pytest -n 4",
+              "output": [
+                "4 workers [100 items]",
+                ".................................  [100%]",
+                "========= 100 passed in 2m41s =========",
+                "# was 10m12s single-file. same tests."
+              ],
+              "exitCode": 0,
+              "atWord": 7
+            }
+          ]
+        }
+      },
+      "durationFrames": 435,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Right. Now the catch, and it's a proper one, so stay with me here.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The catch",
+          "subtitle": "parallel roulette"
+        }
+      },
+      "durationFrames": 158,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "ORDER_ROULETTE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Suppose test_edit_profile quietly assumes test_create_profile already ran. Sequentially that's fine. Nobody notices. Under four workers? Workers grab tests independently, so there's no order at all. Run one passes. Run two fails, because edit went first and there was nothing to edit. Run three fails differently. Run four passes again. This isn't broken. It's a coin flip.",
+      "data": {
+        "orderRoulette": {
+          "dependency": "test_edit assumes test_create ran",
+          "producer": "test_create_profile",
+          "consumer": "test_edit_profile",
+          "verdict": "not broken. a coin flip.",
+          "fix": "each test builds its own world",
+          "caption": "workers grab tests. there is no order.",
+          "color": "red",
+          "atWord": 3.333,
+          "runs": [
+            {
+              "label": "run 1",
+              "text": "gw0: create → gw1: edit",
+              "title": "pass",
+              "sub": "lucky ordering",
+              "atWord": 23.25
+            },
+            {
+              "label": "run 2",
+              "text": "gw2: edit → gw0: create",
+              "title": "fail",
+              "sub": "nothing to edit yet",
+              "atWord": 29.083
+            },
+            {
+              "label": "run 3",
+              "text": "gw1: edit · gw3: create",
+              "title": "fail",
+              "sub": "same instant, no row",
+              "atWord": 33.75
+            },
+            {
+              "label": "run 4",
+              "text": "gw3: create → gw2: edit",
+              "title": "pass",
+              "sub": "lucky again, somehow",
+              "atWord": 37.25
+            }
+          ],
+          "verdictAtWord": 44.25
+        }
+      },
+      "durationFrames": 807,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick one. test_edit_profile assumes test_create_profile ran first. You add dash n four. What happens? Ready? It's C. Random failures — those two land on any worker, in any order.",
+      "data": {
+        "quiz": {
+          "question": "A chained test, run with -n 4. What happens?",
+          "options": [
+            {
+              "text": "pytest works out the order"
+            },
+            {
+              "text": "Works fine, same as before"
+            },
+            {
+              "text": "Random failures, any order"
+            },
+            {
+              "text": "The suite just runs slower"
+            }
+          ],
+          "answerIndex": 2,
+          "revealAtWord": 19.417,
+          "why": "Workers grab tests independently. Nothing guarantees an order.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "And the fix is something you already know how to do. Remember episode sixteen, setting your world up over the API? That's this. Each test creates the profile it needs, in forty milliseconds, and then edits that one. No shared state, no assumed order, and it doesn't matter which worker picks it up or when.",
+      "data": {
+        "codeRun": {
+          "filename": "test_profile.py",
+          "language": "py",
+          "resultLabel": "safe in parallel",
+          "color": "green",
+          "atWord": 2.667,
+          "caption": "each test builds its own world",
+          "lines": [
+            {
+              "text": "def test_edit_profile(page, api):"
+            },
+            {
+              "text": "    # build MY OWN profile first",
+              "detail": "no waiting on another test",
+              "sub": "this is the whole fix",
+              "label": "own",
+              "atWord": 11.75
+            },
+            {
+              "text": "    resp = api.post(\"/api/profiles\","
+            },
+            {
+              "text": "        data={\"name\": \"Ada\"})",
+              "detail": "forty milliseconds, by API",
+              "sub": "episode sixteen, remember",
+              "label": "seed",
+              "atWord": 21.583
+            },
+            {
+              "text": "    pid = resp.json()[\"id\"]"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    page.goto(f\"/profiles/{pid}/edit\")",
+              "detail": "and edit the one I made",
+              "sub": "any worker, any order",
+              "label": "edit",
+              "atWord": 36.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 565,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Last bit. Let's hand the whole job over to a robot, so nobody has to remember to run anything.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The robot",
+          "subtitle": "CI on every push"
+        }
+      },
+      "durationFrames": 195,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here's nearly all of it — one more line to come. Save this as dot github, workflows, tests dot yml. Most of it is boilerplate you'll copy from job to job forever, and I'd not pretend otherwise. Check out the code, install things.",
+      "data": {
+        "code": {
+          "filename": ".github/workflows/tests.yml",
+          "language": "bash",
+          "runLabel": "commit this once",
+          "atWord": 1.833,
+          "lines": [
+            {
+              "text": "name: Playwright Tests"
+            },
+            {
+              "text": "on: [push, pull_request]"
+            },
+            {
+              "text": "jobs:"
+            },
+            {
+              "text": "  test:"
+            },
+            {
+              "text": "    runs-on: ubuntu-latest"
+            },
+            {
+              "text": "    steps:"
+            },
+            {
+              "text": "      - uses: actions/checkout@v4"
+            },
+            {
+              "text": "      - uses: actions/setup-python@v5"
+            },
+            {
+              "text": "      - run: pip install pytest-xdist"
+            },
+            {
+              "text": "      - run: playwright install --with-deps"
+            },
+            {
+              "text": "      - run: pytest -n auto \\"
+            },
+            {
+              "text": "          --tracing retain-on-failure"
+            }
+          ]
+        }
+      },
+      "durationFrames": 455,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Push that, and from now on every single push gets checked. Green tick, three minutes, nobody had to remember anything. Somebody opens a pull request at eleven at night and the suite runs anyway.",
+      "data": {
+        "terminal": {
+          "promptLabel": "github",
+          "cwd": "actions",
+          "atWord": 1.833,
+          "commands": [
+            {
+              "cmd": "git push",
+              "output": [
+                "✓ Playwright Tests — 100 passed in 3m02s",
+                "# ran on every push. and every PR."
+              ],
+              "exitCode": 0,
+              "atWord": 6.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 349,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Now, four lines do the actual work here. With-deps installs the Linux libraries the browser needs, which everybody forgets and then loses an hour to. Dash n auto runs it in parallel, on however many cores the runner gave you. Retain-on-failure keeps a trace, but only for tests that broke. And upload-artifact takes that trace home with you. Which sounds like housekeeping, and absolutely is not, for a reason I'll show you in about ten seconds.",
+      "data": {
+        "codeRun": {
+          "filename": "the three that matter",
+          "language": "bash",
+          "resultLabel": "what each does",
+          "color": "green",
+          "atWord": 2.667,
+          "caption": "the rest is boilerplate. these are not.",
+          "lines": [
+            {
+              "text": "# the four that actually matter",
+              "detail": "the rest you will copy forever",
+              "sub": "these four you should know",
+              "label": "four",
+              "atWord": 5.083
+            },
+            {
+              "text": "playwright install --with-deps chromium",
+              "detail": "browsers AND the Linux libs",
+              "sub": "the bit everyone forgets",
+              "label": "deps",
+              "atWord": 13.333
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "pytest -n auto \\",
+              "detail": "one worker per core it gives you",
+              "sub": "you never know the hardware",
+              "label": "auto",
+              "atWord": 33.167
+            },
+            {
+              "text": "    --tracing retain-on-failure",
+              "detail": "record, keep only the failures",
+              "sub": "green runs cost you nothing",
+              "label": "trace",
+              "atWord": 44.667
+            },
+            {
+              "text": "  - uses: actions/upload-artifact@v4",
+              "detail": "and take the trace home with you",
+              "sub": "or it dies with the runner",
+              "label": "keep",
+              "atWord": 51.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 773,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "TRACE_SCRUB",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Which is the bit I genuinely love. A build goes red at three in the morning on a machine you've never seen. Normally you'd get a stack trace and a shrug. Instead, you download trace dot zip from the run, open it with show-trace, and you're standing inside that failure — every step, the page exactly as it looked, the console, the network. On a machine that no longer exists.",
+      "data": {
+        "traceScrub": {
+          "traceFile": "trace.zip",
+          "openWith": "playwright show-trace trace.zip",
+          "snapshot": [
+            "Your cart",
+            "Blue mug · £14",
+            "Checkout"
+          ],
+          "caption": "a time machine for a machine that is gone",
+          "color": "purple",
+          "atWord": 3.25,
+          "steps": [
+            {
+              "label": "goto /cart",
+              "sub": "GET /cart 200",
+              "atWord": 18.25
+            },
+            {
+              "label": "click Checkout",
+              "title": "fail",
+              "sub": "element not visible",
+              "detail": "POST /checkout 500",
+              "atWord": 24.25
+            },
+            {
+              "label": "expect(total)",
+              "sub": "never reached",
+              "atWord": 28.75
+            }
+          ],
+          "rewindAtWord": 34.75
+        }
+      },
+      "durationFrames": 652,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So that's your CI recipe, and it's four things. Install with-deps. Run with auto. Keep traces on failure only. Upload them as an artifact. Miss the last one and the trace gets thrown away with the runner, which is a genuinely miserable thing to discover on a Friday.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the four-line recipe",
+          "rule": "with-deps · -n auto · retain-on-failure · upload it",
+          "okLabel": "kept",
+          "noLabel": "gone",
+          "caption": "the runner is deleted the moment it finishes",
+          "color": "orange",
+          "atWord": 1.917,
+          "cases": [
+            {
+              "text": "upload-artifact on failure",
+              "title": "ok",
+              "sub": "you can download it later",
+              "atWord": 16.833
+            },
+            {
+              "text": "install --with-deps in CI",
+              "title": "ok",
+              "sub": "the Linux libs as well",
+              "atWord": 22.167
+            },
+            {
+              "text": "write the trace and stop there",
+              "title": "no",
+              "sub": "deleted with the runner",
+              "atWord": 28.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 529,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Four lines to take away. Dash n spreads the work across workers, and nothing actually got faster. That only works because your tests are isolated. A test that depends on another test is a coin flip, not a bug. And CI runs the lot on every push, keeping a trace of anything that broke.",
+      "data": {
+        "heading": "Parallel and CI, in four lines",
+        "points": [
+          {
+            "text": "-n spreads the work. nothing got faster.",
+            "atWord": 9.167
+          },
+          {
+            "text": "it is only legal because tests are isolated",
+            "atWord": 17.333
+          },
+          {
+            "text": "a chained test is a coin flip, not a bug",
+            "atWord": 24.667
+          },
+          {
+            "text": "CI: --with-deps, -n auto, keep the trace",
+            "atWord": 30.417
+          }
+        ]
+      },
+      "durationFrames": 550,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Next time, the last lesson — debugging like somebody who's done this before. Pausing the play, poking at the stage, and cheating with codegen. Whole course is free, over at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Debugging Like a Pro",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 350,
+      "audio": "audio/pw-dojo-18-parallel-ci_long_s20.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

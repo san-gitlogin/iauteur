@@ -1,0 +1,206 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP09 shorts: Page Object Model",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "how the Page Object Model turns a fifty-file rename into a one-line fix",
+    "openLoop": "A developer renames one button — why do fifty of your tests break?",
+    "analogy": "One drawer for every sock, instead of one sock in every room.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Page Object Model in 45 seconds #playwright #python",
+      "description": "Locators live in a page class; tests only tell the story. One rename, one line changed.",
+      "tags": [
+        "playwright",
+        "python",
+        "page object model",
+        "pom",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "PAGE OBJECT MODEL",
+    "badge": "Dojo · EP 9",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A developer renames one button. And fifty of your tests break overnight.",
+      "data": {
+        "headline": "ONE BUTTON. FIFTY BREAKS.",
+        "subtext": "there is a one line fix",
+        "heroAsset": "lucide:layers",
+        "headlineAtWord": 3.833,
+        "heroAtWord": 7.583
+      },
+      "durationFrames": 157,
+      "audio": "audio/pw-dojo-09-pom_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CHANGE_RIPPLE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "The words that find that button are copied into every test you own. So you open every file and fix it by hand. And you miss one.",
+      "data": {
+        "changeRipple": {
+          "mode": "scattered",
+          "line": "name=\"Login\"",
+          "newLine": "name=\"Sign in\"",
+          "cards": 6,
+          "countLabel": "50 test files",
+          "fixLabel": "50 files, by hand",
+          "doneLabel": "49 fixed. one missed.",
+          "missIndex": 5,
+          "caption": "the same locator, copied fifty times",
+          "color": "red",
+          "atWord": 5.833
+        }
+      },
+      "durationFrames": 280,
+      "audio": "audio/pw-dojo-09-pom_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "The fix is one class per page. Every locator is written inside it, exactly once. And the actions get names a person would say.",
+      "data": {
+        "codeRun": {
+          "filename": "pages/login_page.py",
+          "language": "py",
+          "resultLabel": "what it means",
+          "caption": "written once, in one file",
+          "color": "purple",
+          "atWord": 2.75,
+          "lines": [
+            {
+              "text": "class LoginPage:"
+            },
+            {
+              "text": "    def __init__(self, page: Page):"
+            },
+            {
+              "text": "        self.login_btn = page.get_by_role(",
+              "detail": "the locator, written once",
+              "sub": "lives in one file",
+              "label": "once",
+              "atWord": 7.167
+            },
+            {
+              "text": "            \"button\", name=\"Login\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "    def login(self, user, pwd):",
+              "detail": "an action, named plainly",
+              "sub": "login.login(user, pwd)",
+              "label": "call it",
+              "atWord": 15
+            }
+          ]
+        }
+      },
+      "durationFrames": 274,
+      "audio": "audio/pw-dojo-09-pom_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHANGE_RIPPLE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Now rename it again. You change one line, in one file. And all fifty tests heal without being opened.",
+      "data": {
+        "changeRipple": {
+          "mode": "central",
+          "line": "name=\"Login\"",
+          "newLine": "name=\"Sign in\"",
+          "cards": 6,
+          "countLabel": "50 test files",
+          "holder": "pages/login_page.py",
+          "fixLabel": "one line, one file",
+          "doneLabel": "all 50 fixed",
+          "caption": "not one test file had to be opened",
+          "color": "green",
+          "atWord": 5.667
+        }
+      },
+      "durationFrames": 232,
+      "audio": "audio/pw-dojo-09-pom_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "RULE_TEST",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "That is the page object model. Every locator lives in exactly one place. Fifty copies breaks it. One page class follows it.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the rule",
+          "rule": "every locator lives in exactly one place",
+          "okLabel": "follows it",
+          "noLabel": "breaks it",
+          "caption": "one owner, or fifty. pick one.",
+          "color": "green",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "the same line in fifty tests",
+              "title": "no",
+              "sub": "fifty owners, fifty edits",
+              "atWord": 10.75
+            },
+            {
+              "text": "one line in login_page.py",
+              "title": "ok",
+              "sub": "one owner, one edit",
+              "atWord": 14.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 279,
+      "audio": "audio/pw-dojo-09-pom_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "The whole lesson, free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-09-pom_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

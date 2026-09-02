@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP06 shorts: assert vs expect",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "why expect() retries for five seconds where a plain assert checks once",
+    "openLoop": "Why does a check that works by hand fail in your test?",
+    "analogy": "expect() is a patient critic who checks again and again before writing a review.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "assert vs expect() in Playwright #playwright #python",
+      "description": "A plain assert checks once, at the worst possible instant. expect() re-checks for up to 5 seconds.",
+      "tags": [
+        "playwright",
+        "python",
+        "assertions",
+        "expect",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "assert vs EXPECT",
+    "badge": "Dojo · EP 6",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your test clicks Save, checks for the success message, and fails. Then you try it by hand and it works perfectly.",
+      "data": {
+        "headline": "WORKS BY HAND. FAILS.",
+        "subtext": "your check ran too early",
+        "heroAsset": "lucide:check-check",
+        "headlineAtWord": 4.333,
+        "heroAtWord": 11
+      },
+      "durationFrames": 231,
+      "audio": "audio/pw-dojo-06-assertions_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TIMELINE",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Because a plain assert checks once, instantly. You click Save, assert looks at zero milliseconds, and the message does not arrive until eight hundred.",
+      "data": {
+        "timeline": {
+          "milestones": [
+            {
+              "date": "0 ms",
+              "title": "you click Save",
+              "color": "blue",
+              "atWord": 4.833
+            },
+            {
+              "date": "still 0 ms",
+              "title": "assert: FAIL",
+              "color": "red",
+              "atWord": 6.667
+            },
+            {
+              "date": "800 ms",
+              "title": "message lands",
+              "color": "orange",
+              "atWord": 12.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 295,
+      "audio": "audio/pw-dojo-06-assertions_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "CYCLE_LOOP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Playwright ships its own expect, and expect is a patient critic. It checks, and if the answer is not true yet, it waits and checks again, for up to five seconds. The instant it becomes true, it passes.",
+      "data": {
+        "cycleLoop": {
+          "headline": "expect() re-checks, for up to 5s",
+          "nodes": [
+            {
+              "label": "check the page",
+              "sub": "is it true yet?",
+              "color": "blue",
+              "atWord": 1.833
+            },
+            {
+              "label": "not true yet",
+              "sub": "no verdict written",
+              "color": "orange",
+              "atWord": 4.333
+            },
+            {
+              "label": "wait a moment",
+              "sub": "then check again",
+              "color": "purple",
+              "atWord": 6.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 404,
+      "audio": "audio/pw-dojo-06-assertions_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So one line goes out and one line comes in, and the flaky test stops being flaky.",
+      "data": {
+        "diff": {
+          "fileName": "test_save.py",
+          "stat": {
+            "plus": 1,
+            "minus": 1
+          },
+          "atWord": 3.167,
+          "rows": [
+            {
+              "kind": "ctx",
+              "text": "# checks once — flaky:"
+            },
+            {
+              "kind": "del",
+              "text": "assert page.get_by_text(\"Saved\").is_visible()"
+            },
+            {
+              "kind": "ctx",
+              "text": ""
+            },
+            {
+              "kind": "ctx",
+              "text": "# retries for up to 5s:"
+            },
+            {
+              "kind": "add",
+              "text": "expect("
+            },
+            {
+              "kind": "add",
+              "text": "    page.get_by_text(\"Saved\")"
+            },
+            {
+              "kind": "add",
+              "text": ").to_be_visible()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 169,
+      "audio": "audio/pw-dojo-06-assertions_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Assert checks once. Expect re-checks for five seconds before it ever writes a bad review. That is the whole interview answer.",
+      "data": {
+        "stickyNote": {
+          "headline": "assert once · [expect retries]",
+          "color": "purple",
+          "notes": [
+            {
+              "title": "ONCE vs FIFTY TIMES",
+              "tag": "memory hook",
+              "body": "assert checks ONCE, instantly. expect() re-checks for up to 5 seconds, and passes the moment it becomes true.",
+              "highlight": "re-checks for up to 5 seconds",
+              "asset": "lucide:repeat",
+              "atWord": 7.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 256,
+      "audio": "audio/pw-dojo-06-assertions_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Every Playwright lesson, in full, free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 146,
+      "audio": "audio/pw-dojo-06-assertions_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

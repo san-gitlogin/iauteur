@@ -1,0 +1,807 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP03: Sync vs Async",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "why Playwright has two flavors, the four things that change between them, and why you should write sync",
+    "openLoop": "Why does half the Playwright code online use await, and half of it not?",
+    "analogy": "Sync is a walkie-talkie. Async is a group chat.",
+    "topicAxes": [
+      "skill-acquisition",
+      "tooling-shift"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #3 — Sync vs Async (which should you use?)",
+      "altTitles": [
+        "Playwright sync_api vs async_api explained in 5 minutes"
+      ],
+      "description": "Two flavors, the same power. The four things that change, and why sync is the one you write for tests.",
+      "tags": [
+        "playwright",
+        "python",
+        "sync vs async",
+        "asyncio",
+        "playwright python",
+        "await",
+        "playwright tutorial"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "SYNC vs ASYNC",
+    "badge": "Dojo · EP 3",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You search for Playwright code. Half the examples say await everywhere. Half of them do not.",
+      "data": {
+        "headline": "await, OR NOT?",
+        "subtext": "both look right online",
+        "heroAsset": "lucide:split",
+        "headlineAtWord": 3.667,
+        "heroAtWord": 8.083
+      },
+      "durationFrames": 191,
+      "audio": "audio/pw-dojo-03-sync-async_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Nobody tells you which one is correct, because both of them are. By the end of this episode you will know which flavor you should be writing, and you will recognise the other one on sight.",
+      "data": {
+        "title": "SYNC vs ASYNC",
+        "subtitle": "The Playwright Dojo · Episode 3"
+      },
+      "durationFrames": 300,
+      "audio": "audio/pw-dojo-03-sync-async_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three parts. What these two flavors actually are, the four things that change when you switch between them, and a clear answer on which one you should be learning first.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:split",
+              "label": "Two flavors",
+              "atWord": 6.417
+            },
+            {
+              "icon": "lucide:diff",
+              "label": "What changes",
+              "atWord": 11.083
+            },
+            {
+              "icon": "lucide:check",
+              "label": "Which one",
+              "atWord": 15.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 300,
+      "audio": "audio/pw-dojo-03-sync-async_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "So start with what these two words actually mean, because the names are not helping anybody.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Two flavors, same power",
+          "subtitle": "Different ceremony"
+        }
+      },
+      "durationFrames": 157,
+      "audio": "audio/pw-dojo-03-sync-async_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "SPEC_COMPARE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Playwright for Python comes in two flavors, and this trips up almost everybody at the start. Both can do exactly the same things. What differs is purely how much ceremony you have to type around them.",
+      "data": {
+        "compare": {
+          "headline": "Same abilities, different ceremony",
+          "a": {
+            "name": "sync_api",
+            "asset": "lucide:arrow-down"
+          },
+          "b": {
+            "name": "async_api",
+            "asset": "lucide:shuffle"
+          },
+          "rows": [
+            {
+              "label": "Can do",
+              "a": "everything",
+              "b": "everything",
+              "winner": "tie"
+            },
+            {
+              "label": "Ceremony",
+              "a": "none",
+              "b": "await",
+              "winner": "a"
+            },
+            {
+              "label": "Used for tests",
+              "a": "yes",
+              "b": "rarely",
+              "winner": "a"
+            }
+          ],
+          "atWord": 10.25
+        }
+      },
+      "durationFrames": 355,
+      "audio": "audio/pw-dojo-03-sync-async_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CHAT_MOCKUP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Sync is a walkie-talkie conversation. You say one thing. You wait for the reply to come back. Only then do you say the next thing. Nothing else happens while you are waiting, and that simplicity is the entire appeal.",
+      "data": {
+        "panelLabel": "sync — one at a time",
+        "source": "walkie-talkie",
+        "messages": [
+          {
+            "from": "user",
+            "text": "open the browser",
+            "atWord": 6.417
+          },
+          {
+            "from": "agent",
+            "text": "done — waiting on you",
+            "atWord": 11
+          },
+          {
+            "from": "user",
+            "text": "now go to the page",
+            "atWord": 15.667
+          },
+          {
+            "from": "agent",
+            "text": "done — waiting on you",
+            "atWord": 18.75
+          }
+        ]
+      },
+      "durationFrames": 382,
+      "audio": "audio/pw-dojo-03-sync-async_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "BATCH_SWEEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Async is a group chat. You fire off several messages at once and handle the replies as they arrive, in whatever order they turn up. Far more powerful when you are driving many pages, and far more wiring to write.",
+      "data": {
+        "batchSweep": {
+          "rows": 6,
+          "atWord": 9.833,
+          "slow": {
+            "label": "One at a time",
+            "stat": "sync",
+            "color": "blue"
+          },
+          "fast": {
+            "label": "All at once",
+            "stat": "async",
+            "color": "purple"
+          },
+          "source": "illustrative"
+        }
+      },
+      "durationFrames": 406,
+      "audio": "audio/pw-dojo-03-sync-async_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "And notice what does not change between the two. Same play, same stage, the same actors standing on the same boards. The only thing that differs is how you choose to direct them from the wings.",
+      "data": {
+        "stage": {
+          "marquee": "the same play",
+          "curtain": "up",
+          "actors": [
+            {
+              "label": "a button",
+              "kind": "button",
+              "atWord": 10.75
+            },
+            {
+              "label": "a text box",
+              "kind": "field",
+              "atWord": 13.75
+            },
+            {
+              "label": "a link",
+              "kind": "link",
+              "atWord": 16.75
+            }
+          ],
+          "caption": "only the directing changes",
+          "atWord": 5.5
+        }
+      },
+      "durationFrames": 345,
+      "audio": "audio/pw-dojo-03-sync-async_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So keep this one somewhere. Sync is a walkie-talkie, async is a group chat, and both of them can put on exactly the same show with exactly the same actors.",
+      "data": {
+        "stickyNote": {
+          "headline": "The two flavors",
+          "color": "purple",
+          "notes": [
+            {
+              "title": "SYNC vs ASYNC",
+              "tag": "memory hook",
+              "body": "Sync = walkie-talkie: one at a time, wait for each reply. Async = group chat: many at once, replies as they arrive.",
+              "highlight": "Sync = walkie-talkie",
+              "asset": "lucide:radio",
+              "atWord": 10.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 295,
+      "audio": "audio/pw-dojo-03-sync-async_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Now let us look properly at the one you will actually be writing every day.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The sync flavor",
+          "subtitle": "The one you will write"
+        }
+      },
+      "durationFrames": 143,
+      "audio": "audio/pw-dojo-03-sync-async_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here is the sync script from last episode. Look at it closely for a second. There is no await anywhere to be seen, and the whole thing reads straight down the page exactly like ordinary Python does.",
+      "data": {
+        "code": {
+          "filename": "sync_version.py",
+          "language": "py",
+          "runLabel": "python sync_version.py",
+          "lines": [
+            {
+              "text": "# SYNC — what we use in this course",
+              "color": "green"
+            },
+            {
+              "text": "from playwright.sync_api import sync_playwright"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "with sync_playwright() as p:"
+            },
+            {
+              "text": "    browser = p.chromium.launch()"
+            },
+            {
+              "text": "    page = browser.new_page()"
+            },
+            {
+              "text": "    page.goto(\"https://playwright.dev\")"
+            },
+            {
+              "text": "    print(page.title())"
+            }
+          ],
+          "atWord": 8.167
+        }
+      },
+      "durationFrames": 340,
+      "audio": "audio/pw-dojo-03-sync-async_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneB",
+      "narration": "Every line finishes completely before the next one is allowed to begin. Which is exactly how Python already feels to you, so there is genuinely nothing new to learn here. That is the whole reason this course uses it.",
+      "data": {
+        "kinetic": {
+          "text": "One line. Then the next.",
+          "fx": "typewriter",
+          "sub": "no waiting to manage yourself",
+          "atWord": 10.583
+        }
+      },
+      "durationFrames": 367,
+      "audio": "audio/pw-dojo-03-sync-async_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And then the one you only ever need to be able to recognise when you meet it.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The async flavor",
+          "subtitle": "Recognise it, do not fear it"
+        }
+      },
+      "durationFrames": 133,
+      "audio": "audio/pw-dojo-03-sync-async_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here is that very same script in the async flavor, shown as a before and after, so you can see precisely what had to change and, just as importantly, what did not have to change at all.",
+      "data": {
+        "diff": {
+          "fileName": "sync → async",
+          "stat": {
+            "plus": 4,
+            "minus": 2
+          },
+          "atWord": 7.5,
+          "rows": [
+            {
+              "kind": "del",
+              "text": "from playwright.sync_api import sync_playwright"
+            },
+            {
+              "kind": "add",
+              "text": "from playwright.async_api import async_playwright"
+            },
+            {
+              "kind": "add",
+              "text": "async def main():"
+            },
+            {
+              "kind": "del",
+              "text": "    browser = p.chromium.launch()"
+            },
+            {
+              "kind": "add",
+              "text": "        browser = await p.chromium.launch()"
+            },
+            {
+              "kind": "add",
+              "text": "asyncio.run(main())"
+            }
+          ]
+        }
+      },
+      "durationFrames": 310,
+      "audio": "audio/pw-dojo-03-sync-async_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "LIST_BUILD",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Four changes, and that is the entire difference between the two files. A different import, an async function for it all to live inside, await in front of every single call, and one line at the bottom to start it running.",
+      "data": {
+        "heading": "Four changes, that is all",
+        "items": [
+          {
+            "icon": "lucide:package",
+            "text": "async_api, not sync_api",
+            "detail": "the import changes",
+            "atWord": 8.583
+          },
+          {
+            "icon": "lucide:box",
+            "text": "everything inside async def",
+            "detail": "no more top level",
+            "atWord": 13.083
+          },
+          {
+            "icon": "lucide:clock",
+            "text": "await in front of every call",
+            "detail": "every single one",
+            "atWord": 17.667
+          },
+          {
+            "icon": "lucide:play",
+            "text": "asyncio.run() at the bottom",
+            "detail": "starts it off",
+            "atWord": 20.667
+          }
+        ]
+      },
+      "durationFrames": 393,
+      "audio": "audio/pw-dojo-03-sync-async_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CODE_WINDOW",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "That await keyword is the one that matters. It means: send this request off, and let other work carry on in the meantime while we wait for the answer to come back. That is where the overlapping comes from.",
+      "data": {
+        "code": {
+          "filename": "async_version.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "async def main():"
+            },
+            {
+              "text": "  async with async_playwright() as p:"
+            },
+            {
+              "text": "    browser = await p.chromium.launch()",
+              "color": "purple"
+            },
+            {
+              "text": "    page = await browser.new_page()",
+              "color": "purple"
+            },
+            {
+              "text": "    await page.goto(\"https://playwright.dev\")",
+              "color": "purple"
+            }
+          ],
+          "atWord": 11.583
+        }
+      },
+      "durationFrames": 352,
+      "audio": "audio/pw-dojo-03-sync-async_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "CHECK_SWEEP",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Which conveniently gives you a checklist. An async api import, an async def wrapper, await scattered everywhere, and asyncio run down at the bottom. Spot those four tells and you know for certain you are reading async code.",
+      "data": {
+        "checkSweep": {
+          "headline": "The [spot-the-async] checklist",
+          "subjectLabel": "the code on screen",
+          "checks": [
+            {
+              "label": "async_api import",
+              "atWord": 9.75
+            },
+            {
+              "label": "async def",
+              "atWord": 14.167
+            },
+            {
+              "label": "await everywhere",
+              "atWord": 17.667
+            },
+            {
+              "label": "asyncio.run()",
+              "atWord": 20.25
+            }
+          ],
+          "atWord": 7.167
+        }
+      },
+      "durationFrames": 421,
+      "audio": "audio/pw-dojo-03-sync-async_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Worth keeping beside you the first few times you read somebody else's Playwright code online, because you will meet both flavors within about ten minutes of searching, and mixing them up produces errors that make very little sense.",
+      "data": {
+        "stickyNote": {
+          "headline": "Four tells",
+          "color": "blue",
+          "notes": [
+            {
+              "title": "SPOT THE ASYNC",
+              "tag": "memory hook",
+              "body": "async_api import. async def. await everywhere. asyncio.run(). See those four? You are reading async code.",
+              "highlight": "await everywhere",
+              "asset": "lucide:search",
+              "atWord": 11.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 353,
+      "audio": "audio/pw-dojo-03-sync-async_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Which leaves the only question that really matters to you right now.",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "Which one do you write?",
+          "subtitle": "Almost always the same answer"
+        }
+      },
+      "durationFrames": 120,
+      "audio": "audio/pw-dojo-03-sync-async_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "BATCH_SWEEP",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Async genuinely wins in one particular situation. Say you need fifty pages scraped at the same time. One at a time, that is a very long wait indeed. Overlapping, the whole thing collapses into a short one.",
+      "data": {
+        "batchSweep": {
+          "rows": 7,
+          "atWord": 8.917,
+          "slow": {
+            "label": "One at a time",
+            "stat": "50 waits",
+            "color": "red"
+          },
+          "fast": {
+            "label": "Overlapping",
+            "stat": "1 wait",
+            "color": "green"
+          },
+          "source": "illustrative"
+        }
+      },
+      "durationFrames": 411,
+      "audio": "audio/pw-dojo-03-sync-async_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "Because the thing that overlaps is the waiting, not the work. While one page is still loading, the other forty nine are already loading right alongside it.",
+      "data": {
+        "kinetic": {
+          "text": "The waiting is what overlaps.",
+          "fx": "highlight",
+          "sub": "not the work — the waiting",
+          "atWord": 8.75
+        }
+      },
+      "durationFrames": 272,
+      "audio": "audio/pw-dojo-03-sync-async_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "PIPELINE_GANTT",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Drawn out across time it looks like this. Each page starts before the one in front of it has finished, so instead of adding up one after another, all of that waiting stacks on top of itself, and the total run time collapses right down.",
+      "data": {
+        "pipelineGantt": {
+          "headline": "Four pages, [overlapped]",
+          "stages": [
+            "open",
+            "load",
+            "read",
+            "close"
+          ],
+          "count": 4,
+          "color": "purple",
+          "caption": "each one starts before the last finishes",
+          "source": "illustrative",
+          "atWord": 10.083
+        }
+      },
+      "durationFrames": 398,
+      "audio": "audio/pw-dojo-03-sync-async_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "STAT_CALLOUT",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "The other place async makes sense is when Playwright goes inside an app that is already async, like a web server or a chat bot. But here is the number that decides it for almost everybody watching. Around ninety nine percent of testing work is plain sync.",
+      "data": {
+        "value": 99,
+        "suffix": "%",
+        "label": "of testing work is sync",
+        "atWord": 17.417,
+        "source": "The Playwright Dojo"
+      },
+      "durationFrames": 423,
+      "audio": "audio/pw-dojo-03-sync-async_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "TRADEOFF_SCALE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "And the reason for that is simple enough. Tests are sequential stories. Go here, click on this, expect to see that, then move on. Sync matches that shape exactly, and the pytest plugin we meet in Act two is built directly on top of it.",
+      "data": {
+        "tradeoff": {
+          "headline": "For tests, the beam [barely moves]",
+          "left": {
+            "label": "async",
+            "sub": "many pages at once",
+            "asset": "lucide:shuffle"
+          },
+          "right": {
+            "label": "sync",
+            "sub": "sequential stories",
+            "asset": "lucide:arrow-down"
+          },
+          "lean": 0.72,
+          "caption": "pytest-playwright is built on sync.",
+          "atWord": 14.583
+        }
+      },
+      "durationFrames": 452,
+      "audio": "audio/pw-dojo-03-sync-async_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So here is your check. You are writing pytest tests for your company's login page. Which flavor do you reach for? Have a think, and pause here if you want longer.",
+      "data": {
+        "quiz": {
+          "question": "pytest tests for a login page — which?",
+          "options": [
+            {
+              "text": "Async — it is newer"
+            },
+            {
+              "text": "Sync — tests read top to bottom"
+            },
+            {
+              "text": "Both mixed in one file"
+            },
+            {
+              "text": "Neither, use time.sleep"
+            }
+          ],
+          "answerIndex": 1,
+          "why": "Sync matches a sequential story, and pytest-playwright is built on it.",
+          "revealAtWord": 15,
+          "atWord": 3.333
+        }
+      },
+      "durationFrames": 310,
+      "audio": "audio/pw-dojo-03-sync-async_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "One rule of thumb to carry out of here, and it will serve you for years. Learn sync properly. Recognise async when you see it in the wild. And reach for async only when you genuinely need many things happening at once.",
+      "data": {
+        "stickyNote": {
+          "headline": "The rule of thumb",
+          "color": "green",
+          "notes": [
+            {
+              "title": "THE RULE OF THUMB",
+              "tag": "pro corner",
+              "body": "Learn sync. Recognise async. Reach for async only when you genuinely need many pages at once.",
+              "highlight": "Learn sync. Recognise async.",
+              "asset": "lucide:compass",
+              "atWord": 15.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 418,
+      "audio": "audio/pw-dojo-03-sync-async_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "RECAP",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "So, to recap the episode. Two flavors with identical abilities. Four small changes between them. And sync is the one you will write, because tests are sequential stories from beginning to end.",
+      "data": {
+        "heading": "Episode three, in three lines",
+        "points": [
+          {
+            "text": "Same power, different ceremony",
+            "atWord": 7.417
+          },
+          {
+            "text": "Four tells give async away",
+            "atWord": 12.917
+          },
+          {
+            "text": "Write sync — tests are sequential",
+            "atWord": 19.417
+          }
+        ]
+      },
+      "durationFrames": 374,
+      "audio": "audio/pw-dojo-03-sync-async_long_s27.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s28",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Next episode is the big one, and it is the most important skill in all of Playwright: locators, and how the spotlight finds your actor. Follow along free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Locators",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 339,
+      "audio": "audio/pw-dojo-03-sync-async_long_s28.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

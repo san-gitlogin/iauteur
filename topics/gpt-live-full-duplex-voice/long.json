@@ -1,0 +1,685 @@
+{
+  "meta": {
+    "topic": "GPT-Live: The AI That Talks While You Talk",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "OpenAI shipped GPT-Live — full-duplex voice that listens while it speaks, backed by GPT-5.5, live for 150M weekly users.",
+    "openLoop": "What happens when your AI stops waiting for you to finish?",
+    "analogy": "A phone call, not a walkie-talkie.",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ]
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png",
+    "background": "ripple"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Your AI just learned to talk while you're still talking. That changes everything about voice.",
+      "durationFrames": 207,
+      "transition": "zoom",
+      "background": "zoneA",
+      "data": {
+        "headline": "IT TALKS WHILE YOU TALK",
+        "subtext": "the walkie-talkie era ends",
+        "heroAsset": "lucide:audio-waveform",
+        "headlineAtWord": 6.167,
+        "heroAtWord": 2
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "ACTIVITY_CARD",
+      "narration": "On July eighth, OpenAI flipped the switch for a hundred and fifty million weekly voice users — every tier, every continent, in a single day. Not a beta, not a waitlist — the default voice mode.",
+      "durationFrames": 406,
+      "transition": "pixel",
+      "background": "zoneB",
+      "data": {
+        "anim": "pop",
+        "activity": {
+          "title": "ChatGPT Voice",
+          "value": "150M",
+          "trend": "weekly voice users",
+          "range": "Weekly",
+          "color": "green",
+          "data": [
+            {
+              "day": "Mon",
+              "value": 148
+            },
+            {
+              "day": "Tue",
+              "value": 150
+            },
+            {
+              "day": "Wed",
+              "value": 149
+            },
+            {
+              "day": "Thu",
+              "value": 151
+            },
+            {
+              "day": "Fri",
+              "value": 150
+            }
+          ],
+          "atWord": 9
+        },
+        "source": "MarkTechPost · OpenAI, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "narration": "This is GPT-Live — OpenAI's new voice engine, and the first full-duplex assistant most people on Earth will ever meet. It rolled out to phones and the web on day one.",
+      "durationFrames": 339,
+      "transition": "blinds",
+      "background": "zoneC",
+      "data": {
+        "title": "GPT-Live",
+        "subtitle": "Full-duplex voice, at scale"
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "SOUND_WAVE",
+      "narration": "Until now, voice AI worked like a walkie-talkie. It recorded you, waited for silence, decided you were done, then finally answered — one direction at a time.",
+      "durationFrames": 343,
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "anim": "rise",
+        "wave": {
+          "label": "One-way audio",
+          "bars": 44,
+          "atWord": 7.917
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "API_REQUEST_RESPONSE",
+      "narration": "Full-duplex flips that pattern: audio flows in both directions at once, so it hears you even while it's speaking — a phone call, not a radio check-in.",
+      "durationFrames": 292,
+      "transition": "whippan",
+      "background": "zoneB",
+      "data": {
+        "anim": "slideLeft",
+        "api": {
+          "headline": "Two streams, [zero waiting]",
+          "method": "STREAM",
+          "path": "/voice/live",
+          "requestLines": [
+            "you: …still talking…"
+          ],
+          "status": "200",
+          "statusText": "LIVE",
+          "responseLines": [
+            "ai: mhmm — go on"
+          ],
+          "clientLabel": "You",
+          "serverLabel": "GPT-Live",
+          "atWord": 6.833
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "CHAT_MOCKUP",
+      "narration": "Listen to what that unlocks: it murmurs mhmm while you're mid-thought, waits quietly when you pause to think, and takes an interruption without losing the thread.",
+      "durationFrames": 279,
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "panelLabel": "Live voice",
+        "messages": [
+          {
+            "from": "user",
+            "text": "Book me a flight for, um—",
+            "atWord": 5.833
+          },
+          {
+            "from": "agent",
+            "text": "mhmm.",
+            "color": "purple",
+            "atWord": 6.667
+          },
+          {
+            "from": "user",
+            "text": "—Friday. Actually, Saturday.",
+            "atWord": 17.917
+          },
+          {
+            "from": "agent",
+            "text": "Saturday it is. Searching now.",
+            "color": "green",
+            "atWord": 16.333
+          }
+        ],
+        "source": "Behaviors per OpenAI launch, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "CONFIDENCE_GATE",
+      "narration": "Underneath sits a decision engine: multi-signal turn detection scoring the conversation many times per second, deciding in real time whether to speak, hold, or hand over.",
+      "durationFrames": 320,
+      "transition": "glitch",
+      "background": "zoneA",
+      "data": {
+        "anim": "pop",
+        "confidence": {
+          "value": 92,
+          "threshold": 80,
+          "mode": "pass",
+          "style": "gauge",
+          "atWord": 8.667
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "LAYERED_STACK",
+      "narration": "The architecture is two layers working one job. An interaction layer owns the flow of conversation, while a delegation layer quietly ships the heavy questions elsewhere.",
+      "durationFrames": 335,
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "stack": {
+          "headline": "Two layers, [one voice]",
+          "layers": [
+            {
+              "label": "Interaction layer",
+              "sub": "talks, listens, reacts",
+              "color": "blue"
+            },
+            {
+              "label": "Delegation layer",
+              "sub": "routes the hard work",
+              "color": "purple"
+            }
+          ],
+          "signal": "down",
+          "atWord": 5
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "SANKEY",
+      "narration": "Where do your words go? Simple chat stays with the fast voice model; anything needing search or deep reasoning flows silently to GPT-5.5 in the background.",
+      "durationFrames": 339,
+      "transition": "push",
+      "background": "zoneC",
+      "data": {
+        "sankey": {
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Your words",
+              "col": 0
+            },
+            {
+              "id": "b",
+              "label": "Voice model",
+              "col": 1,
+              "color": "blue"
+            },
+            {
+              "id": "c",
+              "label": "GPT-5.5",
+              "col": 1,
+              "color": "purple"
+            },
+            {
+              "id": "d",
+              "label": "Spoken reply",
+              "col": 2,
+              "color": "green"
+            }
+          ],
+          "links": [
+            {
+              "source": "a",
+              "target": "b",
+              "value": 70
+            },
+            {
+              "source": "a",
+              "target": "c",
+              "value": 30
+            },
+            {
+              "source": "b",
+              "target": "d",
+              "value": 70
+            },
+            {
+              "source": "c",
+              "target": "d",
+              "value": 30
+            }
+          ],
+          "unit": "%"
+        },
+        "source": "Flow illustrative · OpenAI, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "TRADEOFF_SCALE",
+      "narration": "Choosing a tier is really choosing a tradeoff. Instant variants answer with pure speed; Medium and High run GPT-5.5 Thinking, trading a beat of pace for deeper reasoning.",
+      "durationFrames": 374,
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "tradeoff": {
+          "headline": "Speed vs [depth]",
+          "left": {
+            "label": "Instant",
+            "sub": "replies at pace",
+            "asset": "lucide:zap",
+            "color": "blue"
+          },
+          "right": {
+            "label": "Thinking",
+            "sub": "medium / high effort",
+            "asset": "lucide:brain",
+            "color": "purple"
+          },
+          "lean": 0,
+          "caption": "Live-1 on paid tiers · mini free",
+          "source": "Tiers per OpenAI · MarkTechPost, Jul 2026",
+          "atWord": 8.333
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "STAT_CALLOUT",
+      "narration": "Speed is the headline act: replies land in under two hundred milliseconds, which is close enough to human tempo that the gap stops registering. Blink and you'd miss the handoff.",
+      "durationFrames": 341,
+      "transition": "zoomthrough",
+      "background": "zoneB",
+      "data": {
+        "value": 200,
+        "prefix": "<",
+        "suffix": "ms",
+        "label": "Reply latency, near-human tempo",
+        "source": "MindStudio · AI Chronicle, Jul 2026",
+        "logos": [
+          "si:openai"
+        ],
+        "atWord": 8.083
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "BAR_COMPARE",
+      "narration": "Now the shocker: GPT-Live scores seventy-five percent on BrowseComp voice web-search, a test where the old Advanced Voice Mode managed zero-point-seven. Same task, same voice interface — a different century of capability.",
+      "durationFrames": 451,
+      "transition": "wipe",
+      "background": "zoneC",
+      "data": {
+        "headline": "One benchmark, [two eras]",
+        "bars": [
+          {
+            "label": "GPT-Live-1",
+            "value": 75.2,
+            "display": "75.2%",
+            "color": "green",
+            "atWord": 6.583
+          },
+          {
+            "label": "Adv. Voice Mode",
+            "value": 0.7,
+            "display": "0.7%",
+            "color": "orange",
+            "atWord": 17.75
+          }
+        ],
+        "maxValue": 100,
+        "source": "BrowseComp via byteiota, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "QUOTE_SPOTLIGHT",
+      "narration": "And in OpenAI's own testing, humans strongly preferred it over Advanced Voice Mode — with substantially better results on expert science questions too.",
+      "durationFrames": 288,
+      "transition": "letterbox",
+      "background": "zoneA",
+      "data": {
+        "quote": "Strongly preferred over Advanced Voice Mode",
+        "person": {
+          "name": "OpenAI",
+          "role": "Launch evals",
+          "asset": "si:openai"
+        },
+        "source": "OpenAI via MarkTechPost, Jul 2026",
+        "atWord": 7.75
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "ICON_CALLOUT",
+      "narration": "The first place this lands hard is support calls. On multi-turn telecom tasks, the benchmark crown already moved — real conversations, not demo scripts.",
+      "durationFrames": 346,
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "iconCallout": {
+          "icon": "lucide:headset",
+          "heading": "Support desks first",
+          "sub": "Tau-3 Voice telecom win",
+          "points": [
+            "Multi-turn calls",
+            "Beats old voice mode"
+          ],
+          "color": "green",
+          "atWord": 8.917
+        },
+        "source": "Tau-3 Voice via MarkTechPost, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "ICON_GRID",
+      "narration": "It ships surprisingly complete for day one: nine remastered voices, visual cards for weather and stocks, live web search, memory, and image and file uploads.",
+      "durationFrames": 339,
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "iconGrid": {
+          "items": [
+            {
+              "icon": "lucide:mic",
+              "label": "9 new voices",
+              "color": "purple",
+              "atWord": 8.333
+            },
+            {
+              "icon": "lucide:layout-grid",
+              "label": "Visual cards",
+              "color": "blue",
+              "atWord": 12.5
+            },
+            {
+              "icon": "lucide:search",
+              "label": "Web search",
+              "atWord": 19.833
+            },
+            {
+              "icon": "lucide:bookmark",
+              "label": "Memory",
+              "atWord": 20.833
+            },
+            {
+              "icon": "lucide:file-up",
+              "label": "File uploads",
+              "atWord": 22.917
+            }
+          ],
+          "cols": 5
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s15.mp3"
+    },
+    {
+      "id": "s16",
+      "type": "NOTIFICATION",
+      "narration": "Now the cold shower: developers got nothing on launch day. There's no API — just a sign-up form with no timeline attached to it. The form is real; the date is anyone's guess.",
+      "durationFrames": 395,
+      "transition": "zoom",
+      "background": "zoneA",
+      "data": {
+        "notifications": [
+          {
+            "app": "OpenAI Devs",
+            "icon": "si:openai",
+            "title": "API access",
+            "body": "Waitlist opened — no date",
+            "color": "orange",
+            "atWord": 4.75
+          },
+          {
+            "app": "Inbox",
+            "title": "Status update",
+            "body": "Still waiting…",
+            "color": "red",
+            "atWord": 16.083
+          }
+        ]
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s16.mp3"
+    },
+    {
+      "id": "s17",
+      "type": "STAT_PANELS",
+      "narration": "Builders do get one consolation prize: the realtime API's newest model, which cut worst-case latency by a quarter and keeps text input at sixty cents per million.",
+      "durationFrames": 323,
+      "transition": "clock",
+      "background": "zoneB",
+      "data": {
+        "headline": "[Realtime 2.1] for devs",
+        "stats": [
+          {
+            "kicker": "p95 latency vs 2.0",
+            "value": "-25%",
+            "color": "green",
+            "atWord": 16.833
+          },
+          {
+            "kicker": "Text input / 1M",
+            "value": "$0.60",
+            "color": "blue",
+            "atWord": 19.583
+          }
+        ],
+        "verdict": {
+          "text": "Voice API: still waitlist",
+          "color": "orange",
+          "atWord": 4.75
+        },
+        "source": "OpenAI GPT-Realtime-2.1, Jul 6 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s17.mp3"
+    },
+    {
+      "id": "s18",
+      "type": "COST_METER",
+      "narration": "But listen to the audio prices: sixty-four dollars per million tokens of speech out, double the thirty-two it costs to listen. Voice compute is a premium product.",
+      "durationFrames": 336,
+      "transition": "filmburn",
+      "background": "zoneC",
+      "data": {
+        "cost": {
+          "value": 64,
+          "budget": 32,
+          "unit": "$",
+          "period": "per 1M, audio",
+          "atWord": 6.833
+        },
+        "source": "GPT-Realtime-2.1 pricing, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s18.mp3"
+    },
+    {
+      "id": "s19",
+      "type": "LIST_BUILD",
+      "narration": "The box isn't full yet, either. Video input didn't ship, screen sharing didn't ship, and language support beyond English is still short of parity.",
+      "durationFrames": 304,
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "heading": "Not in the box yet",
+        "items": [
+          {
+            "icon": "lucide:video",
+            "text": "Video input",
+            "detail": "not at launch",
+            "atWord": 6.917
+          },
+          {
+            "icon": "lucide:monitor-up",
+            "text": "Screen sharing",
+            "detail": "coming later",
+            "atWord": 10.833
+          },
+          {
+            "icon": "lucide:languages",
+            "text": "Full multilingual",
+            "detail": "parity incomplete",
+            "atWord": 15.75
+          }
+        ]
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s19.mp3"
+    },
+    {
+      "id": "s20",
+      "type": "ZOOM_SCALE",
+      "narration": "One piece of honesty: full-duplex demos existed two years ago in research labs. What never existed was this — a frontier brain behind the voice, at consumer scale.",
+      "durationFrames": 368,
+      "transition": "blinds",
+      "background": "zoneB",
+      "data": {
+        "zoomScale": {
+          "headline": "Demos existed. [Scale] didn't.",
+          "levels": [
+            {
+              "label": "Research demo",
+              "sub": "2024",
+              "color": "blue"
+            },
+            {
+              "label": "Dev previews",
+              "sub": "2025"
+            },
+            {
+              "label": "GPT-Live",
+              "sub": "Jul 2026",
+              "scale": "150M wkly",
+              "color": "green"
+            }
+          ],
+          "atWord": 6.167
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s20.mp3"
+    },
+    {
+      "id": "s21",
+      "type": "KINETIC_TEXT",
+      "narration": "Because when talking becomes faster than typing, voice stops being a party trick and starts being an interface. That's the actual launch story hiding under the demo videos.",
+      "durationFrames": 326,
+      "transition": "glitch",
+      "background": "zoneC",
+      "data": {
+        "kinetic": {
+          "text": "VOICE BECOMES THE INTERFACE",
+          "fx": "highlight",
+          "sub": "faster than typing",
+          "color": "purple",
+          "atWord": 7.333
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s21.mp3"
+    },
+    {
+      "id": "s22",
+      "type": "RECAP",
+      "narration": "So here's where we landed: your assistant now talks while you talk, ships the hard thinking to GPT-5.5, answers at human tempo — and still owes developers an API.",
+      "durationFrames": 348,
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "heading": "The walkie-talkie era is over",
+        "points": [
+          {
+            "text": "Talks while you talk",
+            "atWord": 8.5
+          },
+          {
+            "text": "GPT-5.5 does the heavy lifting",
+            "atWord": 15.083
+          },
+          {
+            "text": "Under 200ms replies",
+            "atWord": 20.75
+          },
+          {
+            "text": "Still no API",
+            "atWord": 23.583
+          }
+        ]
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s22.mp3"
+    },
+    {
+      "id": "s23",
+      "type": "OUTRO_CTA",
+      "narration": "GPT-Live just made every other assistant sound like a walkie-talkie. Follow THE NBX STUDIO to hear what happens next.",
+      "durationFrames": 269,
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "message": "Every other assistant sounds old now.",
+        "sub": "Follow THE NBX STUDIO for what's next."
+      },
+      "timingSource": "tts",
+      "audio": "audio/gpt-live-full-duplex-voice_long_s23.mp3"
+    }
+  ],
+  "thumbnail": {
+    "title": "IT TALKS WHILE YOU TALK",
+    "badge": "GPT-Live is here",
+    "asset": "si:openai"
+  }
+}

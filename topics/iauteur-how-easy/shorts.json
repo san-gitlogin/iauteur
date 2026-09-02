@@ -1,0 +1,330 @@
+{
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "design": "moderndark",
+    "logo": "img:iauteur_logo.png",
+    "theme": "moderndark",
+    "themeLight": "daylight"
+  },
+  "cover": {
+    "asset": "img:iauteur_logo.png",
+    "badge": "made by iAuteur",
+    "title": "NOBODY FILMED THIS"
+  },
+  "meta": {
+    "analogy": "Ordering a meal instead of learning to cook.",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "Describe the video you want; a finished one comes back.",
+    "openLoop": "If nobody filmed it, where did this come from?",
+    "screenplay": "explainer",
+    "topic": "iAuteur — how easy this is",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ]
+  },
+  "scenes": [
+    {
+      "background": "zoneA",
+      "data": {
+        "headline": "NOT A WHOLE WEEK",
+        "headlineAtWord": 6.167,
+        "heroAsset": "lucide:clapperboard",
+        "heroAtWord": 1.75,
+        "subtext": "you have something worth explaining"
+      },
+      "durationFrames": 144,
+      "id": "s01",
+      "narration": "You know something worth explaining. Making a video about it shouldn't take a week.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "HOOK",
+      "audio": "audio/he_short_s01.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "appWindow": {
+          "activeStep": 1,
+          "atWord": 6.417,
+          "button": "Continue",
+          "buttonDone": "Saved",
+          "caption": "that's step one, and that's all of it",
+          "color": "blue",
+          "fields": [
+            {
+              "atWord": 1.583,
+              "label": "Title",
+              "text": "How your money actually moves"
+            },
+            {
+              "atWord": 8.167,
+              "label": "Who it's for",
+              "text": "Anyone who never studied it"
+            }
+          ],
+          "headline": "Step one: [say what it's about]",
+          "screenTitle": "What's it about?",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "typeIndex": 0,
+          "windowTitle": "iAuteur"
+        }
+      },
+      "durationFrames": 172,
+      "id": "s02",
+      "narration": "You type what your video is about — one line — and who it's for. That's the whole of step one.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "APP_WINDOW",
+      "audio": "audio/he_short_s02.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "promptHandout": {
+          "atWord": 7.417,
+          "color": "blue",
+          "copiedLabel": "Copied!",
+          "copyLabel": "Copy",
+          "headline": "It writes [the question] for you",
+          "hint": "you didn't write any of that",
+          "lines": [
+            "Make a video about how money moves.",
+            "About three minutes. Twelve scenes.",
+            "Plain English. No jargon anywhere.",
+            "Say who it's for right at the start.",
+            "Send it back as one single answer."
+          ],
+          "panelTitle": "Your question"
+        }
+      },
+      "durationFrames": 174,
+      "id": "s03",
+      "narration": "It writes the whole question for you — you just press copy. You don't write a single word of it.",
+      "timingSource": "tts",
+      "transition": "morph",
+      "type": "PROMPT_HANDOUT",
+      "audio": "audio/he_short_s03.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "chatTrio": {
+          "answerLabel": "your video, written",
+          "answerLines": 4,
+          "assistants": [
+            {
+              "atWord": 3.667,
+              "label": "ChatGPT"
+            },
+            {
+              "atWord": 4.583,
+              "label": "Claude"
+            },
+            {
+              "atWord": 6.333,
+              "label": "Gemini"
+            }
+          ],
+          "atWord": 13.417,
+          "color": "green",
+          "footNote": "no new key, nothing new to subscribe to",
+          "headline": "Paste it into [whichever you use]",
+          "pasted": "Make a video about how money…"
+        }
+      },
+      "durationFrames": 225,
+      "id": "s04",
+      "narration": "Paste it into ChatGPT, Claude or Gemini — whichever you already pay for. Each hands your video back, written.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "CHAT_TRIO",
+      "audio": "audio/he_short_s04.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "appWindow": {
+          "activeStep": 3,
+          "atWord": 12.917,
+          "button": "Load it in",
+          "buttonDone": "12 scenes in",
+          "caption": "no editor, no timeline, nothing dragged",
+          "color": "blue",
+          "fields": [
+            {
+              "atWord": 5.25,
+              "label": "Paste the answer",
+              "text": "Twelve scenes, all written"
+            },
+            {
+              "atWord": 10.333,
+              "label": "What you got",
+              "text": "Ready to preview"
+            }
+          ],
+          "headline": "Paste it back, and [there it is]",
+          "screenTitle": "Your scenes",
+          "steps": [
+            "Topic",
+            "Design",
+            "Script",
+            "Voice",
+            "Render"
+          ],
+          "typeIndex": 0,
+          "windowTitle": "iAuteur"
+        }
+      },
+      "durationFrames": 219,
+      "id": "s05",
+      "narration": "Copy that answer, come back, paste it in. And there's your video, laid out scene by scene.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "APP_WINDOW",
+      "audio": "audio/he_short_s05.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "checkSweep": {
+          "atWord": 8.333,
+          "caughtIndex": 2,
+          "caughtNote": "too many words",
+          "checks": [
+            {
+              "atWord": 1.833,
+              "label": "Is anything missing?"
+            },
+            {
+              "atWord": 3.417,
+              "label": "Will it fit the screen?"
+            },
+            {
+              "atWord": 10.75,
+              "label": "Is it too crowded?"
+            },
+            {
+              "atWord": 5.083,
+              "label": "Can you read it in time?"
+            }
+          ],
+          "color": "green",
+          "fixNote": "rewritten, then passed",
+          "headline": "It reads it back, [line by line]",
+          "subjectLabel": "the answer",
+          "verdict": "ready for you"
+        }
+      },
+      "durationFrames": 197,
+      "id": "s06",
+      "narration": "It reads that answer back, line by line, and rewrites anything too crowded before you ever see it.",
+      "timingSource": "tts",
+      "transition": "wipe",
+      "type": "CHECK_SWEEP",
+      "audio": "audio/he_short_s06.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "videoPlayer": {
+          "atWord": 6.583,
+          "badge": "PREVIEW",
+          "clips": [
+            {
+              "asset": "assets/video/sample_market.mp4",
+              "atWord": 1.833,
+              "label": "Scene 4 — where money goes"
+            }
+          ],
+          "color": "blue",
+          "footNote": "one scene, a few seconds, nothing wasted",
+          "headline": "See one before you [build anything]",
+          "runtime": "0:08",
+          "startAt": 0.05
+        }
+      },
+      "durationFrames": 202,
+      "id": "s07",
+      "narration": "Press preview on any scene and it plays right there, in seconds. Nothing else has to be built yet.",
+      "timingSource": "tts",
+      "transition": "zoomthrough",
+      "type": "VIDEO_PLAYER",
+      "audio": "audio/he_short_s07.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "aspectTwin": {
+          "atWord": 8.417,
+          "color": "blue",
+          "countLabel": "four finished videos",
+          "headline": "One description, [four videos]",
+          "sourceLabel": "one description",
+          "tallLabel": "shorts & reels",
+          "variantLabels": [
+            "dark",
+            "light"
+          ],
+          "wideLabel": "widescreen"
+        }
+      },
+      "durationFrames": 243,
+      "id": "s08",
+      "narration": "Widescreen for YouTube, and a tall one for shorts and reels. Each in dark and light. Four videos, one description.",
+      "timingSource": "tts",
+      "transition": "zoom",
+      "type": "ASPECT_TWIN",
+      "audio": "audio/he_short_s08.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "videoPlayer": {
+          "atWord": 5.417,
+          "badge": "FINISHED",
+          "clips": [
+            {
+              "asset": "assets/video/sample_market.mp4",
+              "atWord": 2.75,
+              "label": "A real one, start to finish"
+            }
+          ],
+          "color": "green",
+          "footNote": "nobody filmed a second of any of them",
+          "headline": "These are [real ones]",
+          "runtime": "3:20",
+          "startAt": 0.12
+        }
+      },
+      "durationFrames": 200,
+      "id": "s09",
+      "narration": "These are real ones. Nobody filmed a second of them. Someone described them, and out they came.",
+      "timingSource": "tts",
+      "transition": "zoomthrough",
+      "type": "VIDEO_PLAYER",
+      "audio": "audio/he_short_s09.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "message": "Describe yours. Watch it happen.",
+        "sub": "iAuteur — including this video"
+      },
+      "durationFrames": 201,
+      "id": "s10",
+      "narration": "Everything you've just watched was made that way. This video too. Describe yours, and watch it happen.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "OUTRO_CTA",
+      "audio": "audio/he_short_s10.mp3"
+    }
+  ]
+}

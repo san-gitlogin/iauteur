@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP14 shorts: mocking the network",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "how page.route lets you answer, block or forward any request your app makes",
+    "openLoop": "How do you test the error screen when you cannot ask the server to break?",
+    "analogy": "route() puts you in the mail room — every letter passes your desk first.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Fake a 500 in Playwright #playwright #python",
+      "description": "page.route() plus fulfill() lets you serve any response you like — including the ones production will never give you.",
+      "tags": [
+        "playwright",
+        "python",
+        "mock",
+        "route",
+        "network",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "FAKE THE SERVER",
+    "badge": "Dojo · EP 14",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your app shows a friendly error when the server dies. Probably. Nobody's seen it.",
+      "data": {
+        "headline": "NOBODY TESTS THE 500.",
+        "subtext": "you can't ask for one",
+        "heroAsset": "lucide:network",
+        "headlineAtWord": 3.833,
+        "heroAtWord": 8.583
+      },
+      "durationFrames": 179,
+      "audio": "audio/pw-dojo-14-network_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "MAIL_ROOM",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Route puts you in the mail room. Every request stops at your desk, and you pick what happens. Answer it yourself, tear it up, or wave it through.",
+      "data": {
+        "mailRoom": {
+          "pattern": "**/api/todos",
+          "deskLabel": "page.route",
+          "serverLabel": "the real server",
+          "browserLabel": "your page",
+          "caption": "every letter stops at your desk first",
+          "color": "green",
+          "atWord": 1,
+          "requests": [
+            {
+              "label": "GET /api/todos",
+              "title": "fulfill",
+              "sub": "your fake list",
+              "atWord": 6.083
+            },
+            {
+              "label": "GET /logo.png",
+              "title": "abort",
+              "sub": "never sent",
+              "atWord": 9.75
+            },
+            {
+              "label": "POST /api/todos",
+              "title": "continue",
+              "sub": "on to the server",
+              "atWord": 12.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 266,
+      "audio": "audio/pw-dojo-14-network_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "SAD_PATHS",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Which means the sad paths suddenly get cheap. An empty list? That is one line. Server on fire, returning a five hundred? Also one line. Now try asking production to break on cue for you instead.",
+      "data": {
+        "sadPaths": {
+          "screenTitle": "Your products",
+          "rows": [
+            "Blue mug",
+            "Red mug"
+          ],
+          "emptyText": "No products yet",
+          "errorText": "Something went wrong",
+          "caption": "one line each. every single run.",
+          "color": "green",
+          "atWord": 1.917,
+          "states": [
+            {
+              "label": "the happy path",
+              "title": "ok",
+              "text": "json=[two products]",
+              "sub": "everyone tests this",
+              "atWord": 8.417
+            },
+            {
+              "label": "an empty list",
+              "title": "empty",
+              "text": "route.fulfill(json=[])",
+              "sub": "does the copy read ok?",
+              "atWord": 15
+            },
+            {
+              "label": "a 500 error",
+              "title": "error",
+              "text": "route.fulfill(status=500)",
+              "sub": "or a white screen?",
+              "atWord": 20.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 423,
+      "audio": "audio/pw-dojo-14-network_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "That's the interview answer, really. Everyone tests the happy path. Mocking makes the sad ones a one-liner.",
+      "data": {
+        "ruleTest": {
+          "kicker": "say this out loud",
+          "rule": "everyone tests the happy path. mock the sad ones.",
+          "okLabel": "one line",
+          "noLabel": "impossible",
+          "caption": "whole classes of untestable, solved",
+          "color": "red",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "mock a 500 and check the copy",
+              "title": "ok",
+              "sub": "any time you like",
+              "atWord": 7.833
+            },
+            {
+              "text": "ask production to fail on cue",
+              "title": "no",
+              "sub": "good luck with that",
+              "atWord": 10.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 221,
+      "audio": "audio/pw-dojo-14-network_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Whole lesson's free, over at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-14-network_short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

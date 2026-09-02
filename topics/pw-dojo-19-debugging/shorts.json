@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP19 shorts: debugging",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "page.pause() freezes a live run, codegen gives locators, and the error message comes first",
+    "openLoop": "A test fails and you re-run it. What should you actually do?",
+    "analogy": "pause() freezes the play mid-scene with the stage lights still on.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Stop re-running failing Playwright tests #playwright #python",
+      "description": "page.pause() freezes a live run with the browser still open and the Inspector beside it. codegen hands you locators, not tests. And most bugs die on the error message.",
+      "tags": [
+        "playwright",
+        "python",
+        "debugging",
+        "page.pause",
+        "codegen",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "FREEZE THE PLAY",
+    "badge": "Dojo · EP 19",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A test fails. You re-run it. It fails again. There's a better move than praying.",
+      "data": {
+        "headline": "FREEZE THE PLAY.",
+        "subtext": "stop re-running it",
+        "heroAsset": "lucide:pause",
+        "headlineAtWord": 3.75,
+        "heroAtWord": 8.417
+      },
+      "durationFrames": 189,
+      "audio": "audio/pw-dojo-19-debugging_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "FROZEN_FRAME",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Drop page dot pause in your script, run it headed, and watch. The page loads. The card fills. Then it just stops — right there, on that line. Browser still open, form still half-filled, Inspector open beside it. Nothing torn down. Step forward one action whenever you're ready.",
+      "data": {
+        "frozenFrame": {
+          "filename": "test_checkout.py",
+          "screenTitle": "Checkout",
+          "pageItems": [
+            "Card number",
+            "4242 4242 4242 4242",
+            "Pay now"
+          ],
+          "inspectorLabel": "Playwright Inspector",
+          "stepLabel": "step over one action",
+          "note": "the browser is still open",
+          "caption": "frozen, and the stage is still lit",
+          "color": "orange",
+          "atWord": 1,
+          "lines": [
+            {
+              "text": "page.goto(\"/checkout\")",
+              "sub": "the page loads",
+              "atWord": 6.667
+            },
+            {
+              "text": "page.get_by_label(\"Card number\")",
+              "sub": "the field fills",
+              "atWord": 9.583
+            },
+            {
+              "text": "page.pause()",
+              "title": "freeze",
+              "sub": "everything stops here",
+              "atWord": 12.417
+            },
+            {
+              "text": "page.get_by_role(\"button\").click()",
+              "sub": "waiting on you",
+              "atWord": 20.083
+            }
+          ],
+          "stepAtWord": 29.583
+        }
+      },
+      "durationFrames": 571,
+      "audio": "audio/pw-dojo-19-debugging_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "RECORD_DRAFT",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "And codegen? It records you and writes the code as you click. Lovely, first time. But look at what you got — the locators are real and good, and everything else is a transcript of you clicking. No assertions. It checks nothing, because it never watched you check anything.",
+      "data": {
+        "recordDraft": {
+          "sourceLabel": "the real login page",
+          "outputLabel": "generated, live",
+          "missing": [
+            "no assertions",
+            "no test names"
+          ],
+          "verdict": "a source of locators, not tests",
+          "caption": "keep the locators. rewrite the rest.",
+          "color": "purple",
+          "atWord": 1,
+          "actions": [
+            {
+              "label": "click the username box",
+              "text": "page.get_by_label(\"Username\").click()",
+              "title": "keep",
+              "sub": "a real locator",
+              "atWord": 6
+            },
+            {
+              "label": "type tomsmith",
+              "text": "    .fill(\"tomsmith\")",
+              "title": "drop",
+              "sub": "your data, not a test",
+              "atWord": 9.417
+            },
+            {
+              "label": "press Login",
+              "text": "page.get_by_role(\"button\").click()",
+              "title": "keep",
+              "sub": "the one you came for",
+              "atWord": 12.833
+            },
+            {
+              "label": "read the green banner",
+              "text": "# nothing generated",
+              "title": "drop",
+              "sub": "records acts, not checks",
+              "atWord": 23.917
+            }
+          ],
+          "verdictAtWord": 28.167
+        }
+      },
+      "durationFrames": 524,
+      "audio": "audio/pw-dojo-19-debugging_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "And before any of that — read the error. Playwright tells you the locator, what it waited for, and how long. Most bugs die right there. Seniors read errors. Juniors re-run and pray.",
+      "data": {
+        "ruleTest": {
+          "kicker": "rung one, always",
+          "rule": "seniors read the error. juniors re-run and pray.",
+          "okLabel": "free",
+          "noLabel": "wasted",
+          "caption": "most bugs never need a tool",
+          "color": "green",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "read all of the timeout message",
+              "title": "ok",
+              "sub": "it names the locator",
+              "atWord": 10.833
+            },
+            {
+              "text": "re-run it and hope",
+              "title": "no",
+              "sub": "same answer, more time",
+              "atWord": 18.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 380,
+      "audio": "audio/pw-dojo-19-debugging_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Whole course is free, over at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 111,
+      "audio": "audio/pw-dojo-19-debugging_shorts_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

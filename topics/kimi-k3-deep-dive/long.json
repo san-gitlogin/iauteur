@@ -1,0 +1,1192 @@
+{
+  "meta": {
+    "topic": "Inside Kimi K3: China's 2.8T Open Frontier",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "A three-year-old Chinese lab built the largest open-weight model ever — and its weights go public July 27.",
+    "openLoop": "How does a startup born in 2023 end up shaking the US frontier and the chip market in one week?",
+    "analogy": "A giant staff where only a tiny task force clocks in for each job.",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "entity-novelty",
+      "sovereignty"
+    ],
+    "seo": {
+      "title": "Inside Kimi K3: How a 3-Year-Old Lab Built China's 2.8T Open Frontier Model",
+      "altTitles": [
+        "Kimi K3 Deep Dive: The 2.8 Trillion Parameter Model That Shook the Chip Market",
+        "Why Kimi K3 Is the Most Important AI Release of 2026 (Full Breakdown)"
+      ],
+      "hook": "How does a startup born in 2023 build the largest open-weight AI model ever — rattle Washington, dent the chip market, and promise to give the whole thing away by July 27?",
+      "breakdown": "the full Kimi K3 story: the Pink Floyd-inspired lab behind it, the 896-expert sparse architecture with Kimi Delta Attention, the real leaderboard receipts (and the hallucination wrinkle), the $3/$15 Sonnet-tier pricing, the TSMC selloff, and the July 27 weights drop.",
+      "queries": [
+        "kimi k3 explained",
+        "moonshot ai kimi k3",
+        "largest open source ai model",
+        "kimi k3 vs claude fable 5",
+        "mixture of experts 896 experts",
+        "kimi delta attention explained",
+        "kimi k3 weights july 27",
+        "china open source ai models 2026",
+        "why did tsmc stock drop kimi",
+        "kimi k3 benchmarks artificial analysis"
+      ],
+      "hashtags": [
+        "#KimiK3",
+        "#MoonshotAI",
+        "#OpenSourceAI",
+        "#AI",
+        "#MixtureOfExperts"
+      ],
+      "pinned": "The weights drop July 27. Would you run a 2.8T open model if you had the hardware — or is open-but-unrunnable still closed? 👇"
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "design": "moderndark",
+    "themeLight": "daylight",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png",
+    "background": "geo"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "In nine days, the most powerful open AI model ever built becomes a free download.",
+      "durationFrames": 240,
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "headline": "2.8 TRILLION, FREE",
+        "subtext": "the Kimi K3 deep dive",
+        "heroAsset": "lucide:download",
+        "headlineAtWord": 2.083,
+        "heroAtWord": 15.917
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "STAT_CALLOUT",
+      "narration": "The number to hold onto is two-point-eight trillion parameters — the largest open-weight model any lab, anywhere, has ever released. And it came from a startup barely three years old.",
+      "durationFrames": 403,
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "value": 2.8,
+        "suffix": "T",
+        "label": "Parameters — largest open model ever",
+        "source": "Moonshot AI · Bloomberg, Jul 2026",
+        "atWord": 7.333
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "narration": "This is the deep dive on Kimi K3: the lab behind it, the machine inside it, the scores it just posted, and the shockwave it sent through the markets.",
+      "durationFrames": 337,
+      "transition": "letterbox",
+      "background": "zoneC",
+      "data": {
+        "title": "Inside Kimi K3",
+        "subtitle": "the lab · the machine · the fallout"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "narration": "Start with the lab itself — because you can't make sense of this model without the very unusual company behind it.",
+      "durationFrames": 249,
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The Lab",
+          "subtitle": "who is Moonshot AI"
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "FLIP_CARD",
+      "narration": "Moonshot AI was founded in March twenty twenty-three by three Tsinghua schoolmates — and the name is a record collector's joke: it launched on the fiftieth anniversary of Pink Floyd's Dark Side of the Moon.",
+      "durationFrames": 406,
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "anim": "blur",
+        "flip": {
+          "front": {
+            "label": "The name",
+            "text": "Why 'Moonshot'?",
+            "color": "purple"
+          },
+          "back": {
+            "label": "The answer",
+            "text": "Dark Side of the Moon at 50",
+            "color": "blue"
+          },
+          "atWord": 12
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "TRANSFORMER_BLOCK",
+      "narration": "Founder Yang Zhilin isn't a newcomer, either. Before Moonshot he worked at Google Brain and Meta, and co-authored Transformer-XL and XLNet — architectures this whole generation of models is built on.",
+      "durationFrames": 480,
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "transformer": {
+          "headline": "The founder wrote the [playbook]",
+          "blocks": [
+            {
+              "label": "Input",
+              "kind": "io"
+            },
+            {
+              "label": "Self-attention",
+              "sub": "Transformer-XL",
+              "kind": "attn",
+              "color": "purple"
+            },
+            {
+              "label": "Feed-forward",
+              "kind": "ffn"
+            },
+            {
+              "label": "Output",
+              "kind": "io"
+            }
+          ],
+          "repeatFrom": 2,
+          "repeatTo": 3,
+          "repeatLabel": "× N",
+          "atWord": 34.917
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "LINE_CHART",
+      "narration": "Investors noticed. Moonshot's valuation went three hundred million, to two-point-five billion after Alibaba led a round, to over four billion — and then, this May, it hit twenty billion.",
+      "durationFrames": 442,
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "lineChart": {
+          "series": [
+            {
+              "label": "Valuation",
+              "values": [
+                0.3,
+                2.5,
+                4.3,
+                20
+              ],
+              "color": "green"
+            }
+          ],
+          "xAxis": [
+            "2023",
+            "2024",
+            "2025",
+            "2026"
+          ],
+          "yUnit": "$B",
+          "area": true,
+          "atWord": 8.25
+        },
+        "source": "Forbes · TechCrunch, May 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "LOGO_WALL",
+      "narration": "And the money is strategic: Alibaba took a major stake early, Xiaohongshu joined the billion-dollar round, and the latest twenty-billion valuation was led by Meituan's venture arm — China's giants are bankrolling open AI.",
+      "durationFrames": 480,
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "logoWall": {
+          "logos": [
+            {
+              "icon": "si:alibabadotcom",
+              "label": "Alibaba",
+              "atWord": 9.75
+            },
+            {
+              "icon": "si:xiaohongshu",
+              "label": "Xiaohongshu",
+              "atWord": 16.333
+            },
+            {
+              "icon": "si:meituan",
+              "label": "Meituan",
+              "atWord": 36.167
+            }
+          ],
+          "cols": 3,
+          "color": "blue"
+        },
+        "source": "Alibaba · Xiaohongshu (EqualOcean) · Meituan $2B, TechCrunch"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "narration": "So how did a chatbot company end up here? The road to K3 runs through three earlier models, and the pace of it tells you everything.",
+      "durationFrames": 308,
+      "transition": "letterbox",
+      "background": "zoneC",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The Lineage",
+          "subtitle": "Kimi to K3 in three years"
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "TIMELINE",
+      "narration": "K3 landed this month — but the road matters: the Kimi chatbot in late twenty twenty-three, K2 last July, K2.5 in January — three frontier releases inside a single year.",
+      "durationFrames": 431,
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "timeline": {
+          "milestones": [
+            {
+              "date": "Oct 2023",
+              "title": "Kimi chatbot",
+              "sub": "the start",
+              "color": "blue",
+              "atWord": 15.833
+            },
+            {
+              "date": "Jul 2025",
+              "title": "K2",
+              "sub": "1T, open",
+              "color": "purple",
+              "atWord": 21.5
+            },
+            {
+              "date": "Jan 2026",
+              "title": "K2.5",
+              "sub": "vision",
+              "atWord": 26.083
+            },
+            {
+              "date": "Jul 2026",
+              "title": "K3 lands",
+              "sub": "2.8T",
+              "color": "green",
+              "atWord": 1
+            }
+          ]
+        },
+        "source": "Moonshot release history · Wikipedia"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "GPU_CLUSTER",
+      "narration": "K2 set the baseline: one trillion parameters, thirty-two billion active, trained on fifteen-and-a-half trillion tokens, and released under a modified MIT license — the open playbook was already working.",
+      "durationFrames": 451,
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "gpuCluster": {
+          "headline": "K2: the [baseline]",
+          "nodes": 4,
+          "gpusPerNode": 6,
+          "interconnect": "15.5T training tokens",
+          "totalLabel": "1T params · 32B active",
+          "atWord": 8.417
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "ICON_CALLOUT",
+      "narration": "K2.5 gave the family eyes: a four-hundred-million-parameter vision encoder called MoonViT, letting Kimi read images and video natively — a piece K3 inherits whole.",
+      "durationFrames": 398,
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "iconCallout": {
+          "icon": "lucide:eye",
+          "heading": "MoonViT",
+          "sub": "a 400M-parameter vision encoder",
+          "points": [
+            "Reads images natively",
+            "Understands video",
+            "Carried into K3"
+          ],
+          "color": "purple",
+          "atWord": 12.75
+        },
+        "source": "Moonshot K2.5, Jan 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "ZOOM_SCALE",
+      "narration": "Put the lineage on one ladder and K3 isn't just bigger — Moonshot says it converts compute into capability with two-and-a-half times the efficiency of K2. The curve is compounding.",
+      "durationFrames": 411,
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "zoomScale": {
+          "headline": "Bigger and [more efficient]",
+          "levels": [
+            {
+              "label": "K2",
+              "sub": "1T",
+              "color": "blue"
+            },
+            {
+              "label": "K2.5 / K2.6",
+              "sub": "vision, code"
+            },
+            {
+              "label": "K3",
+              "sub": "2.8T · 2.5x eff",
+              "color": "green"
+            }
+          ],
+          "atWord": 6.417
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "CHAPTER",
+      "narration": "Now open the machine itself, because the architecture is where this release gets genuinely clever — and where the efficiency comes from.",
+      "durationFrames": 279,
+      "transition": "dip",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The Machine",
+          "subtitle": "inside the architecture"
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "GRID_ARRAY",
+      "narration": "Inside sit eight hundred ninety-six experts, and for any single token only sixteen of them light up — under two percent of the network doing each moment's work.",
+      "durationFrames": 341,
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "grid": {
+          "headline": "[16 of 896] fire",
+          "rows": 8,
+          "cols": 14,
+          "mode": "heatmap",
+          "label": "sparse expert activation",
+          "legendA": "Active (16)",
+          "legendB": "Idle (880)",
+          "color": "purple",
+          "atWord": 5.75
+        },
+        "source": "Stable LatentMoE · Moonshot, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s15.mp3"
+    },
+    {
+      "id": "s16",
+      "type": "WATERFALL",
+      "narration": "Here's what sparsity buys: start at two-point-eight trillion total, park the inactive experts, and each token effectively runs through roughly fifty billion parameters — frontier scale at a fraction of the compute.",
+      "durationFrames": 441,
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "waterfallChart": {
+          "bars": [
+            {
+              "label": "Total",
+              "value": 2800,
+              "isTotal": true,
+              "atWord": 10.833
+            },
+            {
+              "label": "Idle experts",
+              "value": -2750,
+              "color": "blue",
+              "atWord": 14.167
+            },
+            {
+              "label": "Active/token",
+              "value": 50,
+              "isTotal": true,
+              "color": "green",
+              "atWord": 29.5
+            }
+          ],
+          "unit": "B"
+        },
+        "source": "~50B active per Latent Space, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s16.mp3"
+    },
+    {
+      "id": "s17",
+      "type": "PIPELINE",
+      "narration": "The routing is one clean pass: a token arrives, a router scores every expert, the top sixteen fire, and their outputs blend into a single answer — thousands of times per sentence.",
+      "durationFrames": 408,
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "pipeline": {
+          "headline": "One token, one pass",
+          "stages": [
+            {
+              "label": "Token in",
+              "sub": "your words"
+            },
+            {
+              "label": "Router",
+              "sub": "scores 896 experts",
+              "color": "purple"
+            },
+            {
+              "label": "16 experts",
+              "sub": "fire together",
+              "color": "blue"
+            },
+            {
+              "label": "Blend",
+              "sub": "one answer",
+              "color": "green"
+            }
+          ],
+          "tokenLabel": "one token",
+          "atWord": 2
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s17.mp3"
+    },
+    {
+      "id": "s18",
+      "type": "BAR_COMPARE",
+      "narration": "Then there's Kimi Delta Attention, their in-house hybrid design. At million-token context lengths, Moonshot claims decoding up to six-point-three times faster than standard attention.",
+      "durationFrames": 451,
+      "transition": "wipe",
+      "background": "zoneC",
+      "data": {
+        "headline": "Decoding at [1M context]",
+        "bars": [
+          {
+            "label": "Standard attn",
+            "value": 1,
+            "display": "1x",
+            "color": "blue",
+            "atWord": 14.667
+          },
+          {
+            "label": "KDA",
+            "value": 6.3,
+            "display": "6.3x",
+            "color": "green",
+            "atWord": 32.333
+          }
+        ],
+        "maxValue": 6.3,
+        "source": "Moonshot via MarkTechPost, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s18.mp3"
+    },
+    {
+      "id": "s19",
+      "type": "CONTEXT_METER",
+      "narration": "All of that serves a one-million-token context window — enough to hold an entire codebase, or a shelf of novels, in a single conversation without forgetting the start.",
+      "durationFrames": 360,
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "context": {
+          "headline": "One million tokens of memory",
+          "segments": [
+            {
+              "label": "Codebase",
+              "tokens": 600000,
+              "kind": "history"
+            },
+            {
+              "label": "Docs + chat",
+              "tokens": 250000,
+              "kind": "tools"
+            },
+            {
+              "label": "Free",
+              "tokens": 150000,
+              "kind": "free"
+            }
+          ],
+          "windowTokens": 1000000,
+          "verdict": "fill illustrative · window is real",
+          "atWord": 6.083
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s19.mp3"
+    },
+    {
+      "id": "s20",
+      "type": "PROGRESS",
+      "narration": "Two quieter inventions carry the training: Attention Residuals, which Moonshot credits with roughly twenty-five percent better training efficiency, for under two percent extra cost.",
+      "durationFrames": 417,
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "progress": {
+          "items": [
+            {
+              "label": "Efficiency gain",
+              "value": 25,
+              "display": "+25%",
+              "color": "green",
+              "atWord": 29.417
+            },
+            {
+              "label": "Extra cost",
+              "value": 2,
+              "display": "<2%",
+              "color": "blue",
+              "atWord": 1
+            }
+          ],
+          "variant": "bar"
+        },
+        "source": "AttnRes per Moonshot, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s20.mp3"
+    },
+    {
+      "id": "s21",
+      "type": "ICON_GRID",
+      "narration": "The rest of the training stack is a parade of house specials: a per-head Muon optimizer, a new activation function they call SiTU, and quantile-based load balancing across those experts.",
+      "durationFrames": 409,
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "iconGrid": {
+          "items": [
+            {
+              "icon": "lucide:settings-2",
+              "label": "Muon optimizer",
+              "color": "blue",
+              "atWord": 15.417
+            },
+            {
+              "icon": "lucide:activity",
+              "label": "SiTU activation",
+              "color": "purple",
+              "atWord": 26.833
+            },
+            {
+              "icon": "lucide:scale",
+              "label": "Load balancing",
+              "atWord": 28.833
+            }
+          ],
+          "cols": 3
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s21.mp3"
+    },
+    {
+      "id": "s22",
+      "type": "BITS",
+      "narration": "And it was trained quantization-aware from the fine-tuning stage on: weights in four-bit MXFP4, activations in eight-bit — so the giant deploys on far humbler hardware without a painful conversion.",
+      "durationFrames": 421,
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "bits": {
+          "value": 11,
+          "bits": 4,
+          "label": "MXFP4: weights in 4 bits",
+          "showPlaceValues": true,
+          "atWord": 18.75
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s22.mp3"
+    },
+    {
+      "id": "s23",
+      "type": "CHAPTER",
+      "narration": "Specs are promises, though. So let's check the receipts — the leaderboards, the blind tests, and one wrinkle Moonshot would rather you skipped.",
+      "durationFrames": 340,
+      "transition": "letterbox",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "The Scorecard",
+          "subtitle": "benchmarks and receipts"
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s23.mp3"
+    },
+    {
+      "id": "s24",
+      "type": "SCREENSHOT_CASCADE",
+      "narration": "None of this is hidden, by the way — this is Kimi's actual site, days after launch: the model card, the docs, and the product, already public.",
+      "durationFrames": 341,
+      "transition": "clock",
+      "background": "zoneC",
+      "data": {
+        "screenshotCascade": {
+          "headline": "Public, in [plain sight]",
+          "shots": [
+            {
+              "src": "assets/kimi-home.png",
+              "kind": "image",
+              "label": "kimi.com — K3 Max live",
+              "color": "green",
+              "highlight": {
+                "x": 0.36,
+                "y": 0.4,
+                "w": 0.28,
+                "h": 0.16
+              },
+              "atWord": 12.833
+            },
+            {
+              "src": "assets/kimi-k3-docs.png",
+              "kind": "image",
+              "label": "platform.kimi.ai — K3 docs",
+              "color": "blue",
+              "atWord": 20.75
+            }
+          ]
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s24.mp3"
+    },
+    {
+      "id": "s25",
+      "type": "IMAGE_SCENE",
+      "narration": "And independent scorekeepers moved fast. This is Artificial Analysis, the live leaderboard: K3 debuts at fifty-seven — third place overall, first among open models.",
+      "durationFrames": 462,
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "image": {
+          "variant": "polaroid",
+          "asset": "img:aa-models.png",
+          "caption": "AA Intelligence Index — Jul 17",
+          "atWord": 33.167
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s25.mp3"
+    },
+    {
+      "id": "s26",
+      "type": "BAR_COMPARE",
+      "narration": "The podium reads: Claude Fable 5 at sixty, GPT-5.6 Sol at fifty-nine, Kimi K3 at fifty-seven — an open-weight model breathing on the closed frontier's neck.",
+      "durationFrames": 463,
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "headline": "The [podium]",
+        "bars": [
+          {
+            "label": "Fable 5",
+            "value": 60,
+            "display": "60",
+            "color": "blue",
+            "atWord": 21.667
+          },
+          {
+            "label": "GPT-5.6 Sol",
+            "value": 59,
+            "display": "59",
+            "color": "blue",
+            "atWord": 30.75
+          },
+          {
+            "label": "Kimi K3",
+            "value": 57,
+            "display": "57",
+            "color": "purple",
+            "atWord": 33.333
+          }
+        ],
+        "maxValue": 60,
+        "source": "Artificial Analysis, Jul 17 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s26.mp3"
+    },
+    {
+      "id": "s27",
+      "type": "EVAL_DASHBOARD",
+      "narration": "And there's one upset: in blind front-end code testing, developers preferred K3 over every US model — sixteen seventy-nine points, a seventy-six percent pairwise win rate, rank one.",
+      "durationFrames": 434,
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "evalDash": {
+          "headline": "Frontend Code Arena: [rank 1]",
+          "metrics": [
+            {
+              "label": "Arena points",
+              "value": 1679,
+              "color": "purple"
+            },
+            {
+              "label": "Pairwise wins",
+              "value": 76,
+              "unit": "%",
+              "color": "green"
+            },
+            {
+              "label": "Rank",
+              "value": 1,
+              "color": "green"
+            }
+          ],
+          "atWord": 8.417
+        },
+        "source": "Frontend Code Arena via Latent Space"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s27.mp3"
+    },
+    {
+      "id": "s28",
+      "type": "PICTOGRAM",
+      "narration": "It also tops AutomationBench, completing fifty-three percent of real automation tasks — the best score recorded, on work that looks like actual jobs.",
+      "durationFrames": 352,
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "pictogram": {
+          "rows": [
+            {
+              "label": "Completed",
+              "value": 53,
+              "color": "green",
+              "atWord": 10.25
+            },
+            {
+              "label": "Missed",
+              "value": 47,
+              "color": "blue",
+              "atWord": 24.083
+            }
+          ],
+          "icon": "lucide:bot",
+          "unit": "%"
+        },
+        "source": "AutomationBench-AA, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s28.mp3"
+    },
+    {
+      "id": "s29",
+      "type": "REVEAL",
+      "narration": "Now the honest wrinkle, because there is one: K3 answers more questions correctly than K2.6 — but when it's wrong, it's confidently wrong more often. Hallucination went up, not down.",
+      "durationFrames": 456,
+      "transition": "letterbox",
+      "background": "zoneB",
+      "data": {
+        "reveal": {
+          "statement": "Smarter — and more confidently wrong",
+          "kicker": "The wrinkle",
+          "sub": "hallucination rose 39% to 51%",
+          "atWord": 8.25
+        },
+        "source": "AA-Omniscience via Latent Space, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s29.mp3"
+    },
+    {
+      "id": "s30",
+      "type": "TRADEOFF_SCALE",
+      "narration": "There's also a speed tax: through the API, K3 streams at under thirty tokens per second. You're trading responsiveness for frontier reasoning — and the beam leans hard toward depth.",
+      "durationFrames": 416,
+      "transition": "morph",
+      "background": "zoneC",
+      "data": {
+        "tradeoff": {
+          "headline": "Depth over [speed]",
+          "left": {
+            "label": "Speed",
+            "sub": "~27 tok/s via API",
+            "asset": "lucide:gauge",
+            "color": "orange"
+          },
+          "right": {
+            "label": "Depth",
+            "sub": "frontier reasoning",
+            "asset": "lucide:brain",
+            "color": "purple"
+          },
+          "lean": 0.6,
+          "caption": "The K3 tradeoff, today",
+          "source": "26-28 tok/s per Latent Space, Jul 2026",
+          "atWord": 5.417
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s30.mp3"
+    },
+    {
+      "id": "s31",
+      "type": "CHAPTER",
+      "narration": "Which brings us to the fallout — the pricing, the hardware bill, the markets, and a date circled in red on two continents.",
+      "durationFrames": 288,
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "05",
+          "title": "The Stakes",
+          "subtitle": "money, markets, July 27"
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s31.mp3"
+    },
+    {
+      "id": "s32",
+      "type": "STAT_PANELS",
+      "narration": "Access is not cheap, and that is deliberate. Thirty cents per million cached, three dollars fresh input, fifteen for output — the most expensive Chinese release yet: Sonnet-tier pricing, on purpose.",
+      "durationFrames": 469,
+      "transition": "slide",
+      "background": "zoneB",
+      "data": {
+        "headline": "Priced like the [frontier]",
+        "stats": [
+          {
+            "kicker": "Cached / 1M",
+            "value": "$0.30",
+            "color": "green",
+            "atWord": 10.667
+          },
+          {
+            "kicker": "Input / 1M",
+            "value": "$3",
+            "color": "blue",
+            "atWord": 16.667
+          },
+          {
+            "kicker": "Output / 1M",
+            "value": "$15",
+            "color": "orange",
+            "atWord": 21.5
+          }
+        ],
+        "verdict": {
+          "text": "Most expensive Chinese model",
+          "color": "orange",
+          "atWord": 28.667
+        },
+        "source": "VentureBeat · TechCrunch, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s32.mp3"
+    },
+    {
+      "id": "s33",
+      "type": "DATACENTER",
+      "narration": "Running it yourself is its own project: recommended serving means supernode configurations, sixty-four accelerators or more in one coherent block. Open weights, yes — living-room hardware, no.",
+      "durationFrames": 480,
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "datacenter": {
+          "headline": "What [open] costs to run",
+          "variant": "rack",
+          "units": [
+            {
+              "label": "Accelerators ×64",
+              "sub": "one supernode",
+              "color": "purple"
+            },
+            {
+              "label": "Interconnect",
+              "sub": "coherent fabric"
+            },
+            {
+              "label": "Cooling + power",
+              "sub": "not optional"
+            }
+          ],
+          "rackLabel": "Supernode",
+          "atWord": 36.167
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s33.mp3"
+    },
+    {
+      "id": "s34",
+      "type": "TREEMAP",
+      "narration": "Against the domestic rival, sheer size is the flex: K3's two-point-eight trillion parameters sit about seventy-five percent above DeepSeek V4 Pro's estimated one-point-six trillion.",
+      "durationFrames": 441,
+      "transition": "wipe",
+      "background": "zoneA",
+      "data": {
+        "treemap": {
+          "items": [
+            {
+              "label": "Kimi K3",
+              "value": 2.8,
+              "color": "purple",
+              "atWord": 31.417
+            },
+            {
+              "label": "DeepSeek V4",
+              "value": 1.6,
+              "color": "blue",
+              "atWord": 31.417
+            }
+          ],
+          "unit": "T"
+        },
+        "source": "V4 Pro ~1.6T per Axios chart, Jul 2026"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s34.mp3"
+    },
+    {
+      "id": "s35",
+      "type": "DIE_SHOT",
+      "narration": "Zoom out and the geopolitics write themselves: this model exists despite years of US chip export controls — the exact outcome those restrictions were designed to prevent.",
+      "durationFrames": 368,
+      "transition": "filmburn",
+      "background": "zoneB",
+      "data": {
+        "die": {
+          "headline": "Built around the [blockade]",
+          "chipLabel": "Restricted silicon",
+          "cols": 4,
+          "rows": 3,
+          "blocks": [
+            {
+              "label": "Compute",
+              "sub": "capped",
+              "x": 1,
+              "y": 1,
+              "w": 2,
+              "h": 2,
+              "color": "orange"
+            },
+            {
+              "label": "Memory",
+              "x": 3,
+              "y": 1,
+              "w": 2,
+              "h": 1,
+              "color": "blue"
+            },
+            {
+              "label": "Interconnect",
+              "sub": "limited",
+              "x": 3,
+              "y": 2,
+              "w": 2,
+              "h": 1
+            },
+            {
+              "label": "Workarounds",
+              "sub": "efficiency",
+              "x": 1,
+              "y": 3,
+              "w": 4,
+              "h": 1,
+              "color": "green"
+            }
+          ],
+          "atWord": 19.25
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s35.mp3"
+    },
+    {
+      "id": "s36",
+      "type": "TICKER_TAPE",
+      "narration": "The markets noticed immediately. TSMC dropped seven percent Friday — despite a seventy-seven percent jump in quarterly profit. Traders are calling it another DeepSeek moment.",
+      "durationFrames": 427,
+      "transition": "whippan",
+      "background": "zoneC",
+      "data": {
+        "ticker": {
+          "entries": [
+            {
+              "symbol": "TSM",
+              "price": "foundry",
+              "change": -7
+            },
+            {
+              "symbol": "CHIPS",
+              "price": "sector",
+              "change": -2
+            },
+            {
+              "symbol": "AI",
+              "price": "sentiment",
+              "change": -1.5
+            }
+          ],
+          "featured": "TSM",
+          "rows": 1,
+          "atWord": 10.5
+        },
+        "source": "TSM -7% per Fortune · other rows illustrative"
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s36.mp3"
+    },
+    {
+      "id": "s37",
+      "type": "COUNTDOWN",
+      "narration": "And the calendar is the final move: full weights promised by July twenty-seventh, timed to land right before the World AI Conference in Shanghai. Nine days, as of this video.",
+      "durationFrames": 398,
+      "transition": "clock",
+      "background": "zoneA",
+      "data": {
+        "countdown": {
+          "from": 9,
+          "label": "Days until the weights drop",
+          "color": "purple",
+          "atWord": 3.083
+        }
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s37.mp3"
+    },
+    {
+      "id": "s38",
+      "type": "NOTIFICATION",
+      "narration": "In Washington and Silicon Valley, the reaction reads as alarm: US labs are described as clearly worried, lobbying against exactly this kind of open-weight release. The lead is thinner than advertised.",
+      "durationFrames": 444,
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "notifications": [
+          {
+            "app": "Axios",
+            "icon": "lucide:newspaper",
+            "title": "Labs 'clearly worried'",
+            "body": "Open weights, led by China",
+            "color": "orange",
+            "atWord": 15.75
+          },
+          {
+            "app": "DC",
+            "icon": "lucide:landmark",
+            "title": "Lobbying heats up",
+            "body": "Against open-weight rivals",
+            "color": "red",
+            "atWord": 29.417
+          }
+        ]
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s38.mp3"
+    },
+    {
+      "id": "s39",
+      "type": "RECAP",
+      "narration": "So the loop closes where we started: a three-year-old lab, a two-point-eight trillion parameter machine, scores beside the American frontier, and weights that go public in days.",
+      "durationFrames": 411,
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "heading": "The K3 story so far",
+        "points": [
+          {
+            "text": "A 3-year-old lab at $20B",
+            "atWord": 13.917
+          },
+          {
+            "text": "2.8T sparse machine",
+            "atWord": 19.333
+          },
+          {
+            "text": "Third on the leaderboard",
+            "atWord": 20.417
+          },
+          {
+            "text": "Weights drop July 27",
+            "atWord": 29
+          }
+        ]
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s39.mp3"
+    },
+    {
+      "id": "s40",
+      "type": "OUTRO_CTA",
+      "narration": "If the frontier is about to be a free download, you'll want to see what happens next. Follow THE NBX STUDIO — we'll be watching July twenty-seventh together.",
+      "durationFrames": 351,
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "message": "The frontier becomes a download in days.",
+        "sub": "Follow THE NBX STUDIO for July 27."
+      },
+      "timingSource": "tts",
+      "audio": "audio/kimi-k3-deep-dive_long_s40.mp3"
+    }
+  ],
+  "thumbnail": {
+    "title": "2.8 TRILLION, FOR FREE",
+    "badge": "Kimi K3 deep dive",
+    "asset": "img:kimi-home.png"
+  }
+}

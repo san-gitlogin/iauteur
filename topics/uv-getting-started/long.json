@@ -1,0 +1,1285 @@
+{
+  "meta": {
+    "topic": "Getting started with uv, the fast Python package manager",
+    "subject": "uv",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "how one binary replaces pip, virtualenv, pyenv, pipx and poetry, from an empty folder to a published package",
+    "openLoop": "What does collapsing five tools into one binary actually change about your day?",
+    "analogy": "A toolbox in which five separate tools collapse into one.",
+    "screenplay": "masterclass",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "Getting Started with uv — One Tool Instead of Five (Python)",
+      "description": "uv replaces pip, virtualenv, pyenv, pipx and poetry with a single Rust binary. The whole Python workflow, start to finish: uv init, uv run, uv add, the lockfile, uvx, uv tool install, uv python and uv build — plus three commands people write down that uv rejects, and what to type instead.",
+      "queries": [
+        "what is uv python",
+        "uv vs pip speed",
+        "uv init project structure",
+        "uv lock file explained",
+        "uvx vs uv tool install",
+        "how to publish a package with uv"
+      ],
+      "tags": [
+        "uv",
+        "python",
+        "uv python",
+        "python packaging",
+        "pip alternative",
+        "astral uv",
+        "python tutorial",
+        "uv tutorial",
+        "virtualenv",
+        "pyenv",
+        "pipx",
+        "python venv",
+        "uv lock",
+        "uvx",
+        "python for beginners"
+      ],
+      "sources": [
+        "uv 0.12.9 run locally on macOS, 2026-09-02 — every command and transcript shown",
+        "https://medium.com/@ammar_naich/getting-started-with-uv-a-fast-modern-python-package-manager-69714fa50065"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ONE TOOL, NOT FIVE",
+    "badge": "uv, start to finish",
+    "asset": "si:uv",
+    "note": "pip · virtualenv · pyenv · pipx · poetry",
+    "logos": [
+      "si:uv",
+      "si:python",
+      "si:rust"
+    ]
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "uv replaces five separate Python tools with one binary. So what does that change?",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "ONE TOOL, NOT FIVE",
+        "subtext": "Python packaging",
+        "heroAsset": "si:uv",
+        "hookVariant": "stack"
+      },
+      "durationFrames": 183,
+      "audio": "audio/uv-getting-started_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "Empty folder to a published package, and every command starts with the same two letters.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "title": "Getting Started with uv",
+        "subtitle": "pip · virtualenv · pyenv · pipx · poetry"
+      },
+      "durationFrames": 177,
+      "audio": "audio/uv-getting-started_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "UV_STAGE",
+      "narration": "Welcome back to THE NBX STUDIO, where we take one tool and actually use it — follow along if that is your kind of thing. If you write Python, you already know the drill. pip installs your packages. virtualenv keeps them apart. pyenv juggles interpreters. pipx handles command-line tools, and poetry tries to hold the whole thing together. Five tools, five ways to get it wrong. uv is a single binary that covers all five, and today we're taking it from an empty folder to a package you could publish. So where does that actually save you time?",
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "uvStage": {
+          "promptLabel": "uv",
+          "cwd": "myapp",
+          "headline": "Five tools, [one binary]",
+          "kind": "install-routes",
+          "premise": "Each row is a job Python developers reach for a different tool to do.",
+          "stageTitle": "what you juggle today",
+          "steps": [
+            {
+              "label": "pip install rich",
+              "out": [
+                "installs into whichever python is first on PATH"
+              ],
+              "detail": "packages",
+              "atWord": 27.75
+            },
+            {
+              "label": "python -m venv .venv",
+              "out": [
+                "and you must remember to activate it"
+              ],
+              "detail": "environments",
+              "atWord": 31
+            }
+          ],
+          "stage": [
+            {
+              "label": "pip",
+              "text": "packages",
+              "atWord": 27.75
+            },
+            {
+              "label": "virtualenv",
+              "text": "environments",
+              "atWord": 31
+            },
+            {
+              "label": "pyenv",
+              "text": "interpreters",
+              "atWord": 34.25
+            },
+            {
+              "label": "pipx",
+              "text": "CLI tools",
+              "atWord": 36.75
+            },
+            {
+              "label": "poetry",
+              "text": "projects",
+              "atWord": 40.833
+            },
+            {
+              "label": "uv",
+              "text": "all five",
+              "atWord": 53.833
+            }
+          ],
+          "verdict": "uv does all five",
+          "verdictAtWord": 57.167,
+          "color": "purple"
+        }
+      },
+      "durationFrames": 981,
+      "audio": "audio/uv-getting-started_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "narration": "First, the project itself, because everything else builds on what uv writes to disk.",
+      "transition": "zoom",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Your first project"
+        }
+      },
+      "durationFrames": 169,
+      "audio": "audio/uv-getting-started_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "RECORDED_STEP",
+      "narration": "Open a terminal in an empty folder, and type uv init, dash dash app. The project is initialised, uv says, and look what appeared alongside it. There's a dot python dash version file, a pyproject dot toml, a README, and a src folder. Now read the config uv wrote. Name, version, description, all filled in for you. Then requires dash python, which means this project needs Python three point twelve or newer. And dependencies sits empty, because we haven't asked for anything yet. One file holds the whole configuration.",
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "uv init, and every file it wrote",
+          "premise": "An empty folder, and the one command that fills it.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:uv-tour#init",
+              "label": "one command",
+              "focus": true,
+              "id": "init",
+              "src": "rec/uv-tour/seg-01.mp4",
+              "frames": 83,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "made": {
+                  "x": 368,
+                  "y": 99,
+                  "w": 178,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 80,
+                  "w": 122,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 253,
+                  "h": 57
+                }
+              ],
+              "atWord": 2.917
+            },
+            {
+              "ref": "rec:uv-tour#tree",
+              "label": "what appeared",
+              "focus": true,
+              "id": "tree",
+              "src": "rec/uv-tour/seg-02.mp4",
+              "frames": 59,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "pyver": {
+                  "x": 968,
+                  "y": 137,
+                  "w": 141,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 118,
+                  "w": 47,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 1078,
+                  "h": 95
+                }
+              ],
+              "atWord": 35.833
+            },
+            {
+              "ref": "rec:uv-tour#pyproject",
+              "label": "the one config file",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "the Python floor",
+                  "mark": "reqpy",
+                  "color": "blue",
+                  "atWord": 66.833
+                },
+                {
+                  "text": "nothing added yet",
+                  "mark": "deps",
+                  "color": "orange",
+                  "atWord": 67.75
+                }
+              ],
+              "id": "pyproject",
+              "src": "rec/uv-tour/seg-03.mp4",
+              "frames": 85,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "deps": {
+                  "x": 368,
+                  "y": 346,
+                  "w": 159,
+                  "h": 19
+                },
+                "reqpy": {
+                  "x": 368,
+                  "y": 327,
+                  "w": 141,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 156,
+                  "w": 169,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 1078,
+                  "h": 437
+                }
+              ],
+              "atWord": 59.083
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1055,
+      "audio": "audio/uv-getting-started_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "RECORDED_STEP",
+      "narration": "Now let us run it. Back in the terminal — uv run, then the project name. Watch the first two lines closely, because that's the part people miss. An interpreter got picked, and then a virtual environment was built without being asked. You never typed python dash m venv, and you never activated anything. The program just ran. List the folder again and two new items are sitting there — a dot venv directory, and a uv dot lock file. Running your code is what created your environment.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "the environment builds itself",
+          "premise": "The same folder, one command later.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:uv-tour#run",
+              "label": "uv run",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "it made the venv for you",
+                  "mark": "venv",
+                  "color": "green",
+                  "atWord": 23.25
+                },
+                {
+                  "text": "and your code ran",
+                  "mark": "hello",
+                  "color": "blue",
+                  "atWord": 36.917
+                }
+              ],
+              "id": "run",
+              "src": "rec/uv-tour/seg-04.mp4",
+              "frames": 98,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "venv": {
+                  "x": 368,
+                  "y": 118,
+                  "w": 262,
+                  "h": 19
+                },
+                "hello": {
+                  "x": 368,
+                  "y": 175,
+                  "w": 159,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 80,
+                  "w": 112,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 956,
+                  "h": 133
+                }
+              ],
+              "atWord": 2.417
+            },
+            {
+              "ref": "rec:uv-tour#after",
+              "label": "two new things",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "you never asked for this",
+                  "mark": "lock",
+                  "color": "purple",
+                  "atWord": 55.333
+                }
+              ],
+              "id": "after",
+              "src": "rec/uv-tour/seg-05.mp4",
+              "frames": 60,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "lock": {
+                  "x": 968,
+                  "y": 232,
+                  "w": 66,
+                  "h": 19
+                },
+                "dotvenv": {
+                  "x": 668,
+                  "y": 232,
+                  "w": 47,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 194,
+                  "w": 47,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 956,
+                  "h": 190
+                }
+              ],
+              "atWord": 50.583
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 868,
+      "audio": "audio/uv-getting-started_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "UV_STAGE",
+      "narration": "So what is a virtual environment, really? Honestly, it's a folder. Inside sits a Python interpreter, plus the packages this one project asked for. Nothing lands system-wide, which means two projects can want two different versions of the same library and neither one breaks the other.",
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "uvStage": {
+          "promptLabel": "uv",
+          "cwd": "myapp",
+          "headline": "A venv is [a folder]",
+          "kind": "two-projects",
+          "premise": "Two projects on one laptop. Each carries its own .venv, so neither can disturb the other.",
+          "stageTitle": "one laptop, two projects",
+          "stage": [
+            {
+              "label": "myapp/.venv",
+              "text": "rich 15.0.0",
+              "atWord": 8.833
+            },
+            {
+              "label": "other/.venv",
+              "text": "rich 13.7.1",
+              "atWord": 30.833
+            }
+          ],
+          "verdict": "Same library, two versions",
+          "verdictAtWord": 22.917,
+          "color": "green"
+        }
+      },
+      "durationFrames": 507,
+      "audio": "audio/uv-getting-started_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "narration": "Next: dependencies. Adding them, seeing what they drag along, and pinning the result.",
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Dependencies"
+        }
+      },
+      "durationFrames": 182,
+      "audio": "audio/uv-getting-started_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "RECORDED_STEP",
+      "narration": "Say we need a library. Type uv add rich, and watch what comes back. Now read the list it installed. There's rich, the one you named — and three more you have never heard of. So ask uv to draw the tree. rich sits at the top, where you put it. Underneath sit markdown dash it dash py, mdurl, and pygments. Those three came along because rich needs them to work. That's how a small project gets large.",
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "One name, four installs",
+          "premise": "Adding one dependency, then asking what came in with it.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:uv-tour#add",
+              "label": "uv add rich",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "the one you asked for",
+                  "mark": "richv",
+                  "color": "blue",
+                  "atWord": 26.083
+                }
+              ],
+              "id": "add",
+              "src": "rec/uv-tour/seg-06.mp4",
+              "frames": 79,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "richv": {
+                  "x": 377,
+                  "y": 270,
+                  "w": 75,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 80,
+                  "w": 103,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 562,
+                  "h": 228
+                }
+              ],
+              "atWord": 2.417
+            },
+            {
+              "ref": "rec:uv-tour#deptree",
+              "label": "uv tree",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "these came along",
+                  "mark": "kids",
+                  "color": "orange",
+                  "atWord": 49.75
+                }
+              ],
+              "id": "deptree",
+              "src": "rec/uv-tour/seg-07.mp4",
+              "frames": 67,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "kids": {
+                  "x": 443,
+                  "y": 365,
+                  "w": 131,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 289,
+                  "w": 66,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 562,
+                  "h": 361
+                }
+              ],
+              "atWord": 44.917
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 785,
+      "audio": "audio/uv-getting-started_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "UV_STAGE",
+      "narration": "Your pyproject records a floor, not a version. Written out, it says rich, at least fifteen point zero. That's a rule, and a rule can resolve differently tomorrow. The lockfile is the other half, because it records the exact versions actually chosen. One file carries your intent; the other carries the answer.",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "uvStage": {
+          "promptLabel": "uv",
+          "cwd": "myapp",
+          "headline": "A floor, and [an exact answer]",
+          "kind": "constraint-line",
+          "premise": "pyproject.toml states a rule. uv.lock states the one answer that rule produced today.",
+          "stageTitle": "two different jobs",
+          "stage": [
+            {
+              "label": "pyproject.toml",
+              "text": "rich>=15.0.0",
+              "detail": "the rule you wrote",
+              "atWord": 3.5
+            },
+            {
+              "label": "uv.lock",
+              "text": "rich 15.0.0",
+              "detail": "the answer uv chose",
+              "atWord": 25.5
+            },
+            {
+              "label": "next month",
+              "text": "rich 15.4.0",
+              "detail": "same rule, new answer",
+              "atWord": 23.75
+            }
+          ],
+          "verdict": "Intent, and the record",
+          "verdictAtWord": 25.5,
+          "color": "blue"
+        }
+      },
+      "durationFrames": 570,
+      "audio": "audio/uv-getting-started_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "RECORDED_STEP",
+      "narration": "Let us open the lockfile and read it. head, dash eleven, uv dot lock. Version, revision, and the Python it was solved for. Then a package block — markdown dash it dash py, pinned at four point two point zero. Notice that's a package you never typed, and uv pinned it exactly anyway, so your laptop and your CI install identical bytes. Removing one is a single command. uv remove rich, and all four go together, because nothing else needed them.",
+      "transition": "slide",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "the lockfile, and removing it",
+          "premise": "uv.lock is generated. You read it; uv writes it.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:uv-tour#lockfile",
+              "label": "exact versions",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "pinned, not a range",
+                  "mark": "exact",
+                  "color": "purple",
+                  "atWord": 28.833
+                }
+              ],
+              "id": "lockfile",
+              "src": "rec/uv-tour/seg-08.mp4",
+              "frames": 85,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "exact": {
+                  "x": 368,
+                  "y": 213,
+                  "w": 159,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 80,
+                  "w": 150,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 459,
+                  "h": 247
+                }
+              ],
+              "atWord": 2.667
+            },
+            {
+              "ref": "rec:uv-tour#remove",
+              "label": "uv remove rich",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "and its three friends",
+                  "mark": "gone",
+                  "color": "red",
+                  "atWord": 56
+                }
+              ],
+              "id": "remove",
+              "src": "rec/uv-tour/seg-09.mp4",
+              "frames": 80,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "gone": {
+                  "x": 377,
+                  "y": 498,
+                  "w": 75,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 308,
+                  "w": 131,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 562,
+                  "h": 456
+                }
+              ],
+              "atWord": 49
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 871,
+      "audio": "audio/uv-getting-started_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "UV_STAGE",
+      "narration": "One more thing before we leave dependencies. If you keep several projects in one repository, uv calls that a workspace. Members each keep their own pyproject, so every one of them declares what it needs. But the whole workspace shares a single lockfile and a single environment, which means two services in one repo can never drift onto different versions.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "uvStage": {
+          "promptLabel": "uv",
+          "cwd": "myapp",
+          "headline": "Many projects, [one lock]",
+          "kind": "shelf-share",
+          "premise": "One repository, several services. The shelf they share is the workspace root.",
+          "stageTitle": "a workspace root",
+          "stage": [
+            {
+              "label": "api/",
+              "text": "own pyproject",
+              "atWord": 16.333
+            },
+            {
+              "label": "worker/",
+              "text": "own pyproject",
+              "atWord": 17.167
+            },
+            {
+              "label": "root uv.lock",
+              "text": "one, shared",
+              "atWord": 36
+            }
+          ],
+          "verdict": "They cannot drift apart",
+          "verdictAtWord": 33.5,
+          "color": "purple"
+        }
+      },
+      "durationFrames": 639,
+      "audio": "audio/uv-getting-started_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "narration": "Last act: running tools, managing Python itself, and shipping what you've built.",
+      "transition": "wipe",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Tools and publishing"
+        }
+      },
+      "durationFrames": 182,
+      "audio": "audio/uv-getting-started_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "RECORDED_STEP",
+      "narration": "Sometimes you want to run a tool, not depend on it. Try this one with me — uvx, then any tool name. Name something you've never installed, and uv fetches it, runs it in a throwaway environment, and leaves your project completely untouched. Nothing got added to your dependencies. For the ones you use daily, install them properly. Running uv tool install ruff puts the executable straight on your PATH, managed for you, and still isolated from every project you own.",
+      "transition": "dip",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "uvx, then uv tool install",
+          "premise": "A tool you need once, and a tool you need every day.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:uv-tour#uvx",
+              "label": "uvx — no install",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "never installed it",
+                  "mark": "cow",
+                  "color": "green",
+                  "atWord": 27.667
+                }
+              ],
+              "id": "uvx",
+              "src": "rec/uv-tour/seg-10.mp4",
+              "frames": 122,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "cow": {
+                  "x": 387,
+                  "y": 118,
+                  "w": 159,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 80,
+                  "w": 309,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 403,
+                  "h": 228
+                }
+              ],
+              "atWord": 2.417
+            },
+            {
+              "ref": "rec:uv-tour#toolinstall",
+              "label": "uv tool install",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "on your PATH now",
+                  "mark": "exe",
+                  "color": "blue",
+                  "atWord": 52
+                }
+              ],
+              "id": "toolinstall",
+              "src": "rec/uv-tour/seg-11.mp4",
+              "frames": 96,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "exe": {
+                  "x": 368,
+                  "y": 365,
+                  "w": 206,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 289,
+                  "w": 187,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 403,
+                  "h": 323
+                }
+              ],
+              "atWord": 44.667
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 811,
+      "audio": "audio/uv-getting-started_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "UV_STAGE",
+      "narration": "The difference is worth holding onto. uvx builds an environment, runs your tool, and then throws the environment away. Its sibling, uv tool install, keeps that environment and drops a shim on your PATH. Isolation is identical either way, so the only real question is whether you'll want the same tool again tomorrow.",
+      "transition": "morph",
+      "background": "zoneC",
+      "data": {
+        "uvStage": {
+          "promptLabel": "uv",
+          "cwd": "myapp",
+          "headline": "Borrow it, or [keep it]",
+          "kind": "ephemeral-bay",
+          "premise": "Each bay is one isolated environment. uvx returns the bay; uv tool install keeps it.",
+          "stageTitle": "two ways to run a tool",
+          "stage": [
+            {
+              "label": "uvx ruff",
+              "text": "discarded",
+              "atWord": 5.333
+            },
+            {
+              "label": "uv tool install",
+              "text": "kept on PATH",
+              "atWord": 21.25
+            },
+            {
+              "label": "your project",
+              "text": "untouched",
+              "atWord": 30.083
+            }
+          ],
+          "verdict": "Neither touches your project",
+          "verdictAtWord": 21.25,
+          "color": "orange"
+        }
+      },
+      "durationFrames": 583,
+      "audio": "audio/uv-getting-started_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "RECORDED_STEP",
+      "narration": "Interpreters are uv's business too. Ask it what it can see — uv python list. Some of these are already installed. The ones marked download available get fetched on demand, with no system package manager anywhere in the picture. And when you're ready to ship, run uv build. Two files came out — a source distribution, and a wheel. Those are exactly what PyPI wants. Empty folder to publishable package, on one binary.",
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "the interpreter, and the wheel",
+          "premise": "The interpreter itself, and the two files PyPI wants.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:uv-tour#pythons",
+              "label": "uv python list",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "uv will fetch these",
+                  "mark": "dl",
+                  "color": "purple",
+                  "atWord": 28.167
+                }
+              ],
+              "id": "pythons",
+              "src": "rec/uv-tour/seg-12.mp4",
+              "frames": 115,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "dl": {
+                  "x": 865,
+                  "y": 156,
+                  "w": 187,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 80,
+                  "w": 225,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 1209,
+                  "h": 171
+                }
+              ],
+              "atWord": 2.667
+            },
+            {
+              "ref": "rec:uv-tour#build",
+              "label": "uv build",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "this is what PyPI wants",
+                  "mark": "wheel",
+                  "color": "green",
+                  "atWord": 50.167
+                }
+              ],
+              "id": "build",
+              "src": "rec/uv-tour/seg-13.mp4",
+              "frames": 67,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "wheel": {
+                  "x": 593,
+                  "y": 308,
+                  "w": 262,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 462,
+                  "y": 232,
+                  "w": 75,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 1209,
+                  "h": 266
+                }
+              ],
+              "atWord": 44.917
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 792,
+      "audio": "audio/uv-getting-started_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "UV_STAGE",
+      "narration": "Now, the speed. Same package, same laptop, into a fresh environment. First with nothing cached: pip took one point six nine seconds, and uv took zero point four four. Run it again with the cache warm, which is what happens all day in practice. pip needs one point three three seconds. Meanwhile uv finishes in three hundredths of a second. That gap isn't a faster download, because uv is hard-linking files it already holds.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "uvStage": {
+          "promptLabel": "uv",
+          "cwd": "myapp",
+          "headline": "Warm cache: [1.33s vs 0.03s]",
+          "kind": "depot-cache",
+          "premise": "The same install, twice. Only the tool doing it changed.",
+          "stageTitle": "install rich into a fresh venv",
+          "steps": [
+            {
+              "label": "pip install rich",
+              "out": [
+                "cold  1.69s",
+                "warm  1.33s"
+              ],
+              "detail": "downloads and unpacks every time",
+              "atWord": 13.417
+            },
+            {
+              "label": "uv pip install rich",
+              "out": [
+                "cold  0.44s",
+                "warm  0.03s"
+              ],
+              "detail": "hard-links out of its cache",
+              "atWord": 46.417
+            }
+          ],
+          "stage": [
+            {
+              "label": "cold cache",
+              "text": "1.69 → 0.44s",
+              "atWord": 12.5
+            },
+            {
+              "label": "warm cache",
+              "text": "1.33 → 0.03s",
+              "atWord": 31.25
+            }
+          ],
+          "verdict": "Hard links beat downloads",
+          "verdictSub": "uv 0.12.9",
+          "verdictAtWord": 47.25,
+          "color": "green"
+        }
+      },
+      "durationFrames": 813,
+      "audio": "audio/uv-getting-started_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "UV_STAGE",
+      "narration": "One caution before you go. Some command names you'll read online simply don't exist. Shell completions don't come from uv completion. Upgrading one package isn't uv lock upgrade. And fixing your PATH isn't uv tool update shell. Each one is rejected outright, so check uv dash dash help before you search.",
+      "transition": "push",
+      "background": "zoneC",
+      "data": {
+        "uvStage": {
+          "promptLabel": "uv",
+          "cwd": "myapp",
+          "headline": "Names people [get wrong]",
+          "kind": "strict-gate",
+          "layout": "terminal",
+          "premise": "Three commands you will find written down. This is what uv answers.",
+          "steps": [
+            {
+              "label": "uv completion zsh",
+              "out": [
+                "error: unrecognized subcommand 'completion'",
+                "Usage: uv [OPTIONS] <COMMAND>"
+              ],
+              "detail": "use: uv generate-shell-completion zsh",
+              "atWord": 13.667
+            },
+            {
+              "label": "uv lock upgrade rich",
+              "out": [
+                "error: unexpected argument 'upgrade' found",
+                "Usage: uv lock [OPTIONS]"
+              ],
+              "detail": "use: uv lock --upgrade-package rich",
+              "atWord": 19.167
+            },
+            {
+              "label": "uv tool update shell",
+              "out": [
+                "error: Failed to upgrade shell",
+                "  Caused by: `shell` is not installed"
+              ],
+              "detail": "use: uv tool update-shell",
+              "atWord": 28.333
+            }
+          ],
+          "verdict": "Type it and see",
+          "verdictAtWord": 36.5,
+          "color": "red"
+        }
+      },
+      "durationFrames": 580,
+      "audio": "audio/uv-getting-started_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "RECAP",
+      "narration": "So that's uv, end to end. uv init lays down the project. Then uv run builds the environment while it runs your code. Dependencies go in and out with uv add and uv remove, and the lockfile records what you got. uvx borrows a tool for one run, while uv tool install keeps one around. Interpreters come from uv python, and uv build makes the files PyPI wants. One binary, and it replaced every tool we opened with.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "heading": "uv, end to end",
+        "points": [
+          {
+            "text": "uv init — the project on disk",
+            "atWord": 6.083
+          },
+          {
+            "text": "uv run — builds .venv as it runs",
+            "atWord": 12.083
+          },
+          {
+            "text": "uv add / remove — dependencies",
+            "atWord": 25.917
+          },
+          {
+            "text": "uvx / uv tool install — tools",
+            "atWord": 35.417
+          },
+          {
+            "text": "uv build — sdist and wheel",
+            "atWord": 53.583
+          }
+        ]
+      },
+      "durationFrames": 830,
+      "audio": "audio/uv-getting-started_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "OUTRO_CTA",
+      "narration": "If this saved you an afternoon, hit like — it genuinely helps. Subscribe for more of these, because there's a full fourteen-chapter uv course on the channel that goes deeper on every one of them. And send it to whoever is still fighting with virtualenv. See you next time.",
+      "transition": "zoom",
+      "background": "zoneB",
+      "data": {
+        "message": "Subscribe for more",
+        "sub": "the full uv course is on the channel"
+      },
+      "durationFrames": 454,
+      "audio": "audio/uv-getting-started_long_s20.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

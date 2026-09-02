@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP01 shorts: the theater analogy",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "One analogy makes every Playwright word stick: theater, stage, spotlight, direction, critic.",
+    "openLoop": "Why do people keep forgetting what a locator is?",
+    "analogy": "A playwright writes plays: browser = theater, page = stage, locator = spotlight.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "The Playwright analogy that makes it all stick #playwright #python",
+      "description": "Browser = theater. Page = stage. Locator = spotlight. Full free course in the Playwright Dojo.",
+      "tags": [
+        "playwright",
+        "python",
+        "automation",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "THE TRICK",
+    "badge": "Dojo · EP 1",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Everyone learning Playwright forgets the words. Here is the trick that fixes it.",
+      "data": {
+        "headline": "STOP FORGETTING IT",
+        "subtext": "one analogy, whole course",
+        "heroAsset": "lucide:drama",
+        "headlineAtWord": 2.917,
+        "heroAtWord": 6.583
+      },
+      "durationFrames": 167,
+      "audio": "audio/pw-dojo-01-setup_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "REVEAL",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "A playwright is a person who writes plays. So picture a theater.",
+      "data": {
+        "reveal": {
+          "statement": "A playwright writes plays.",
+          "kicker": "THE TRICK",
+          "sub": "So think theater.",
+          "atWord": 5.083
+        }
+      },
+      "durationFrames": 139,
+      "audio": "audio/pw-dojo-01-setup_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "LIST_BUILD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "The browser is the theater. A page is the stage. A locator is your spotlight.",
+      "data": {
+        "heading": "Playwright, in five words",
+        "items": [
+          {
+            "icon": "lucide:building-2",
+            "text": "Browser = the theater",
+            "detail": "the building",
+            "atWord": 2.833
+          },
+          {
+            "icon": "lucide:layout-panel-top",
+            "text": "Page = the stage",
+            "detail": "one tab",
+            "atWord": 5.583
+          },
+          {
+            "icon": "lucide:flashlight",
+            "text": "Locator = the spotlight",
+            "detail": "finds the actor",
+            "atWord": 8.417
+          }
+        ]
+      },
+      "durationFrames": 187,
+      "audio": "audio/pw-dojo-01-setup_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "An action is a stage direction. And an assertion is the critic checking it went right.",
+      "data": {
+        "stickyNote": {
+          "headline": "The other two",
+          "color": "yellow",
+          "notes": [
+            {
+              "title": "THE LAST TWO",
+              "tag": "memory hook",
+              "body": "Action = a stage direction. Assertion = the critic who checks the show went right.",
+              "highlight": "Assertion = the critic",
+              "asset": "lucide:glasses",
+              "atWord": 5.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 184,
+      "audio": "audio/pw-dojo-01-setup_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneA",
+      "narration": "You never touch the stage. You write the script, Playwright performs it.",
+      "data": {
+        "kinetic": {
+          "text": "You write it. Playwright performs it.",
+          "fx": "typewriter",
+          "sub": "you direct, you do not click",
+          "atWord": 4.5
+        }
+      },
+      "durationFrames": 146,
+      "audio": "audio/pw-dojo-01-setup_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "And getting started is two commands. That is genuinely the whole setup.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pip install pytest-playwright",
+              "output": [
+                "Successfully installed playwright"
+              ],
+              "exitCode": 0,
+              "atWord": 3.917
+            },
+            {
+              "cmd": "playwright install",
+              "output": [
+                "Downloading Chromium ... done"
+              ],
+              "exitCode": 0,
+              "atWord": 6.75
+            }
+          ],
+          "atWord": 3.917
+        }
+      },
+      "durationFrames": 159,
+      "audio": "audio/pw-dojo-01-setup_short_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Full free course at the Playwright Dojo. Episode one is live now.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 164,
+      "audio": "audio/pw-dojo-01-setup_short_s07.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

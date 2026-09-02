@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP03 shorts: sync vs async",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "why you should write sync, and how to recognise async on sight",
+    "openLoop": "Why does half the Playwright code online use await?",
+    "analogy": "Sync is a walkie-talkie. Async is a group chat.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Playwright: sync or async? #playwright #python",
+      "description": "Walkie-talkie vs group chat. Four changes between them, and why tests use sync.",
+      "tags": [
+        "playwright",
+        "python",
+        "async",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "SYNC OR ASYNC?",
+    "badge": "Dojo · EP 3",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Half the Playwright code online uses await. Half does not. Only one is right for you.",
+      "data": {
+        "headline": "await, OR NOT?",
+        "subtext": "both look correct online",
+        "heroAsset": "lucide:split",
+        "headlineAtWord": 3.583,
+        "heroAtWord": 8.833
+      },
+      "durationFrames": 187,
+      "audio": "audio/pw-dojo-03-sync-async_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CHAT_MOCKUP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Sync is a walkie-talkie. Say one thing, wait for the reply, then say the next thing.",
+      "data": {
+        "panelLabel": "sync — one at a time",
+        "source": "walkie-talkie",
+        "messages": [
+          {
+            "from": "user",
+            "text": "open the browser",
+            "atWord": 3.75
+          },
+          {
+            "from": "agent",
+            "text": "done — waiting on you",
+            "atWord": 6.5
+          },
+          {
+            "from": "user",
+            "text": "now go to the page",
+            "atWord": 9.25
+          }
+        ]
+      },
+      "durationFrames": 197,
+      "audio": "audio/pw-dojo-03-sync-async_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "BATCH_SWEEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Async is a group chat. Fire off many at once, take the replies as they arrive.",
+      "data": {
+        "batchSweep": {
+          "rows": 6,
+          "atWord": 4.333,
+          "slow": {
+            "label": "One at a time",
+            "stat": "sync",
+            "color": "blue"
+          },
+          "fast": {
+            "label": "All at once",
+            "stat": "async",
+            "color": "purple"
+          },
+          "source": "illustrative"
+        }
+      },
+      "durationFrames": 182,
+      "audio": "audio/pw-dojo-03-sync-async_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Switching between them is four changes. A different import, an async function, await everywhere, and one line to start it.",
+      "data": {
+        "diff": {
+          "fileName": "sync → async",
+          "stat": {
+            "plus": 4,
+            "minus": 2
+          },
+          "atWord": 4.667,
+          "rows": [
+            {
+              "kind": "del",
+              "text": "from playwright.sync_api import sync_playwright"
+            },
+            {
+              "kind": "add",
+              "text": "from playwright.async_api import async_playwright"
+            },
+            {
+              "kind": "add",
+              "text": "async def main():"
+            },
+            {
+              "kind": "add",
+              "text": "  browser = await p.chromium.launch()"
+            },
+            {
+              "kind": "add",
+              "text": "asyncio.run(main())"
+            }
+          ]
+        }
+      },
+      "durationFrames": 243,
+      "audio": "audio/pw-dojo-03-sync-async_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "TRADEOFF_SCALE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "But tests are sequential stories. So write sync. Around ninety nine percent of testing work is sync.",
+      "data": {
+        "tradeoff": {
+          "headline": "For tests, write [sync]",
+          "left": {
+            "label": "async",
+            "sub": "many pages at once",
+            "asset": "lucide:shuffle"
+          },
+          "right": {
+            "label": "sync",
+            "sub": "sequential stories",
+            "asset": "lucide:arrow-down"
+          },
+          "lean": 0.72,
+          "caption": "pytest-playwright is built on sync.",
+          "atWord": 7.25
+        }
+      },
+      "durationFrames": 234,
+      "audio": "audio/pw-dojo-03-sync-async_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Both flavors explained in full, free, at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 148,
+      "audio": "audio/pw-dojo-03-sync-async_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

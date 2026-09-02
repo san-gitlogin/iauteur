@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "topic": "Camera moves over real footage",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "zoom, pan and neon highlighting over a real recorded session",
+    "openLoop": "Can the camera move inside a still frame?",
+    "analogy": "A camera operator on a locked-off shot.",
+    "topicAxes": [
+      "entity-novelty",
+      "tribal-conflict"
+    ],
+    "seo": {
+      "title": "Camera moves over real footage",
+      "altTitles": [
+        "zoom pan neon demo"
+      ],
+      "description": "Internal proof: zoom, pan, pull-back and neon highlighting over real captured footage, all anchored to the voice.",
+      "tags": [
+        "internal",
+        "demo"
+      ],
+      "queries": [
+        "how to zoom into a screen recording"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "studio",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "CAMERA MOVES",
+    "badge": "internal",
+    "asset": "lucide:clapperboard"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The footage is frozen. The camera is not.",
+      "data": {
+        "headline": "THE CAMERA MOVES.",
+        "subtext": "zoom, pan, highlight",
+        "heroAsset": "lucide:clapperboard",
+        "headlineAtWord": 2,
+        "heroAtWord": 6
+      },
+      "durationFrames": 120,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "background": "zoneA",
+      "narration": "Watch what happens when I run this a second time. The script prints both greetings now, one after the other. Look closely at the first line, because that one was already there before I touched anything. Now follow me down to the second line. That one is brand new, and it only exists because of the call I added a moment ago. Pull back out and you can see the whole editor again, with the file saved and the terminal holding both results.",
+      "data": {
+        "headline": "Zoom, [pan], highlight",
+        "recordedStep": {
+          "caption": "one frozen frame, three camera moves",
+          "premise": "The terminal below is a single held frame. Everything that moves is the camera and the overlay.",
+          "color": "blue",
+          "atWord": 2,
+          "clips": [
+            {
+              "ref": "rec:vscode-hello#run-again",
+              "label": "run it again",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "first",
+                  "atWord": 22
+                },
+                {
+                  "mark": "second",
+                  "atWord": 47
+                },
+                {
+                  "at": "full",
+                  "atWord": 72
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "already there",
+                  "mark": "first",
+                  "color": "orange",
+                  "atWord": 34
+                },
+                {
+                  "text": "this line is new",
+                  "mark": "second",
+                  "color": "green",
+                  "atWord": 59
+                }
+              ],
+              "id": "run-again",
+              "src": "rec/vscode-hello/seg-05.mp4",
+              "frames": 61,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "second": {
+                  "x": 368,
+                  "y": 707,
+                  "w": 114,
+                  "h": 19
+                },
+                "first": {
+                  "x": 368,
+                  "y": 688,
+                  "w": 132,
+                  "h": 19
+                }
+              },
+              "atWord": 4
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 1041,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s03",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Zoom, pan, and a neon highlight, all timed to the voice.",
+      "data": {
+        "message": "The camera moves",
+        "sub": "docs/SCREEN_RECORDING.md"
+      },
+      "durationFrames": 150,
+      "timingSource": "estimate"
+    }
+  ]
+}

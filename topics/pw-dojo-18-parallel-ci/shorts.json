@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP18 shorts: parallel runs",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "pytest -n spreads the suite across workers, and chained tests turn that into a coin flip",
+    "openLoop": "How does a ten-minute suite become under three?",
+    "analogy": "pytest -n 4 is four theatres performing different plays at the same time.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Make Playwright tests 4x faster #playwright #python",
+      "description": "pytest-xdist spreads your suite across workers — 10m12s down to 2m41s. It only works because every test gets a fresh context.",
+      "tags": [
+        "playwright",
+        "python",
+        "pytest-xdist",
+        "parallel",
+        "ci",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "10 MIN → 3 MIN",
+    "badge": "Dojo · EP 18",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A hundred tests at six seconds each is ten minutes. Every single push. One flag fixes it.",
+      "data": {
+        "headline": "TEN MINUTES → THREE.",
+        "subtext": "one flag",
+        "heroAsset": "lucide:rocket",
+        "headlineAtWord": 5.917,
+        "heroAtWord": 10.833
+      },
+      "durationFrames": 221,
+      "audio": "audio/pw-dojo-18-parallel-ci_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "WORKER_SPREAD",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Sequentially they queue up, one at a time. Ten twelve. Hand them to four workers and they get dealt out, running at the same moment. Two forty-one. Nothing got faster, mind — the work just stopped queuing. And that's only legal because every test gets a fresh context.",
+      "data": {
+        "workerSpread": {
+          "queueLabel": "100 tests · 6s each",
+          "items": [
+            "test_login",
+            "test_checkout",
+            "test_search",
+            "test_profile"
+          ],
+          "beforeLabel": "10m12s, one file",
+          "afterLabel": "2m41s, four workers",
+          "note": "only because tests are isolated",
+          "caption": "the work did not get faster. it got spread.",
+          "color": "green",
+          "atWord": 1.833,
+          "lanes": [
+            {
+              "label": "gw0",
+              "sub": "25 tests",
+              "detail": "2m38s",
+              "atWord": 10.583
+            },
+            {
+              "label": "gw1",
+              "sub": "25 tests",
+              "detail": "2m41s",
+              "atWord": 12.333
+            },
+            {
+              "label": "gw2",
+              "sub": "24 tests",
+              "detail": "2m29s",
+              "atWord": 15
+            },
+            {
+              "label": "gw3",
+              "sub": "26 tests",
+              "detail": "2m40s",
+              "atWord": 17.583
+            }
+          ],
+          "afterAtWord": 21.917
+        }
+      },
+      "durationFrames": 524,
+      "audio": "audio/pw-dojo-18-parallel-ci_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ORDER_ROULETTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Here's the catch though. If one test assumes another ran first, workers grab them in any order at all. So it passes. Then fails. Then fails differently. Then passes again. That's not a broken test, that's a coin flip — and a broken test at least stays broken while you fix it.",
+      "data": {
+        "orderRoulette": {
+          "dependency": "test_edit assumes test_create ran",
+          "producer": "test_create_profile",
+          "consumer": "test_edit_profile",
+          "verdict": "not broken. a coin flip.",
+          "fix": "each test builds its own world",
+          "caption": "workers grab tests. there is no order.",
+          "color": "red",
+          "atWord": 2.667,
+          "runs": [
+            {
+              "label": "run 1",
+              "text": "gw0: create → gw1: edit",
+              "title": "pass",
+              "sub": "lucky ordering",
+              "atWord": 16.083
+            },
+            {
+              "label": "run 2",
+              "text": "gw2: edit → gw0: create",
+              "title": "fail",
+              "sub": "nothing to edit yet",
+              "atWord": 19.417
+            },
+            {
+              "label": "run 3",
+              "text": "gw1: edit · gw3: create",
+              "title": "fail",
+              "sub": "same instant, no row",
+              "atWord": 22
+            },
+            {
+              "label": "run 4",
+              "text": "gw3: create → gw2: edit",
+              "title": "pass",
+              "sub": "lucky again, somehow",
+              "atWord": 24.5
+            }
+          ],
+          "verdictAtWord": 28.667
+        }
+      },
+      "durationFrames": 544,
+      "audio": "audio/pw-dojo-18-parallel-ci_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Fix that, and it's two words. Install pytest-xdist, then dash n auto — one worker per core, whatever machine you happen to be on.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "atWord": 1,
+          "commands": [
+            {
+              "cmd": "pip install pytest-xdist",
+              "output": [
+                "Successfully installed pytest-xdist-3.5.0"
+              ],
+              "exitCode": 0,
+              "atWord": 5.833
+            },
+            {
+              "cmd": "pytest -n auto",
+              "output": [
+                "4 workers [100 items]",
+                "========= 100 passed in 2m41s ========="
+              ],
+              "exitCode": 0,
+              "atWord": 9.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 253,
+      "audio": "audio/pw-dojo-18-parallel-ci_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Whole lesson's free, over at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-18-parallel-ci_shorts_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

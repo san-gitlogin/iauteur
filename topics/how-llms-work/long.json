@@ -1,0 +1,723 @@
+{
+  "meta": {
+    "topic": "How Large Language Models Work: from a wall of text to a machine that writes back - tokens, embeddings, attention, training and generation (evergreen explainer)",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "An LLM is a next-token predictor: it splits text into tokens, weighs them with attention, and repeatedly guesses the most likely next piece.",
+    "openLoop": "How can a pile of math finish your sentence better than you can?",
+    "analogy": "An LLM is autocomplete raised to planetary scale: predict the next token, again and again.",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "mechanism-depth",
+      "everyday-magic"
+    ]
+  },
+  "brand": {
+    "theme": "neobrutalism",
+    "design": "neobrutalism",
+    "themeLight": "brutalist",
+    "background": "plain",
+    "channel": "THE NBX STUDIO"
+  },
+  "thumbnail": {
+    "title": "How LLMs Work",
+    "badge": "EXPLAINER",
+    "asset": "lucide:brain-circuit"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "You type half a thought, and the machine finishes it - fluently, instantly. How does that even work?",
+      "durationFrames": 216,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "HOW LLMs WORK",
+        "subtext": "from tokens to text",
+        "heroAsset": "lucide:brain-circuit",
+        "headlineAtWord": 1,
+        "heroAtWord": 7,
+        "anim": "scale"
+      }
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "Large language models feel like magic. They're not. They're one simple idea, repeated at enormous scale.",
+      "durationFrames": 246,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "wipe",
+      "data": {
+        "title": "How Large Language Models Work",
+        "subtitle": "one idea, enormous scale"
+      }
+    },
+    {
+      "id": "s03",
+      "type": "KINETIC_TEXT",
+      "narration": "At its core, a language model does exactly one thing: it predicts the next piece of text.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "fade",
+      "data": {
+        "kinetic": {"fx": "typewriter", "text": "Predict the next token.", "sub": "that's the whole trick", "color": "blue", "atWord": 9}
+      }
+    },
+    {
+      "id": "s04",
+      "type": "DIAGRAM",
+      "narration": "Here's the whole pipeline. Your text is split into tokens, the model processes them, and it outputs the most likely next token - which becomes part of the input again.",
+      "durationFrames": 366,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "The [big picture.]",
+        "headlineColor": "blue",
+        "anim": "rise",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "text", "label": "Your text", "asset": "lucide:type", "color": "blue", "atWord": 5},
+            {"id": "tok", "label": "Tokens", "asset": "lucide:scissors", "color": "purple", "atWord": 8},
+            {"id": "model", "label": "The model", "asset": "lucide:brain-circuit", "color": "orange", "atWord": 11},
+            {"id": "next", "label": "Next token", "asset": "lucide:sparkles", "color": "green", "atWord": 18}
+          ],
+          "edges": [
+            {"from": "text", "to": "tok", "atWord": 7},
+            {"from": "tok", "to": "model", "atWord": 10},
+            {"from": "model", "to": "next", "atWord": 16}
+          ]
+        },
+        "source": "THE INFERENCE PIPELINE"
+      }
+    },
+    {
+      "id": "s04b",
+      "type": "LIST_BUILD",
+      "narration": "We'll build it up in five moves: tokens, embeddings, attention, training, and finally generation - the model writing back.",
+      "durationFrames": 342,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "heading": "What we'll cover",
+        "anim": "slideLeft",
+        "items": [
+          {"icon": "lucide:scissors", "text": "Tokens", "detail": "splitting the text", "atWord": 6},
+          {"icon": "lucide:locate", "text": "Embeddings", "detail": "meaning as numbers", "atWord": 7},
+          {"icon": "lucide:eye", "text": "Attention", "detail": "what matters, when", "atWord": 8},
+          {"icon": "lucide:dumbbell", "text": "Training", "detail": "learning from text", "atWord": 9},
+          {"icon": "lucide:sparkles", "text": "Generation", "detail": "writing back", "atWord": 12}
+        ]
+      }
+    },
+    {
+      "id": "s05",
+      "type": "CHAPTER",
+      "narration": "Chapter one. Before a model sees a single word, it sees tokens.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "01", "title": "Tokens", "subtitle": "splitting the text", "color": "blue"}
+      }
+    },
+    {
+      "id": "s06",
+      "type": "DIAGRAM",
+      "narration": "A tokenizer chops text into common chunks - whole words, word-pieces, sometimes single characters. Then each chunk is mapped to a number, an id the model can work with.",
+      "durationFrames": 360,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "headline": "Text into [tokens.]",
+        "headlineColor": "purple",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "raw", "label": "Raw text", "asset": "lucide:type", "color": "blue", "atWord": 1},
+            {"id": "tk", "label": "Tokenizer", "asset": "lucide:scissors", "color": "purple", "atWord": 3},
+            {"id": "pieces", "label": "Token pieces", "asset": "lucide:puzzle", "color": "orange", "atWord": 8},
+            {"id": "ids", "label": "Token IDs", "asset": "lucide:hash", "color": "green", "atWord": 20}
+          ],
+          "edges": [
+            {"from": "raw", "to": "tk", "atWord": 3},
+            {"from": "tk", "to": "pieces", "atWord": 8},
+            {"from": "pieces", "to": "ids", "atWord": 20}
+          ]
+        },
+        "source": "TOKENIZATION: TEXT TO TOKEN IDS"
+      }
+    },
+    {
+      "id": "s07",
+      "type": "STAT_CALLOUT",
+      "narration": "Every token maps to a slot in a fixed vocabulary. A typical model knows on the order of one hundred thousand distinct tokens.",
+      "durationFrames": 276,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "value": 100000,
+        "label": "tokens in a typical vocabulary",
+        "atWord": 15,
+        "source": "ILLUSTRATIVE VOCABULARY SIZE"
+      }
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "narration": "Chapter two. Numbers alone mean nothing. So each token becomes a vector - a list of numbers that captures meaning.",
+      "durationFrames": 168,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "02", "title": "Embeddings", "subtitle": "meaning as numbers", "color": "purple"}
+      }
+    },
+    {
+      "id": "s09",
+      "type": "DIAGRAM",
+      "narration": "This is embedding. The token id is looked up in a giant learned table, returning hundreds of numbers that place the word in a space of meaning.",
+      "durationFrames": 330,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "headline": "Meaning as [vectors.]",
+        "headlineColor": "green",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "id", "label": "Token ID", "asset": "lucide:hash", "color": "blue", "atWord": 4},
+            {"id": "table", "label": "Lookup table", "asset": "lucide:table", "color": "purple", "atWord": 8},
+            {"id": "vec", "label": "A vector", "asset": "lucide:locate", "color": "green", "atWord": 12},
+            {"id": "space", "label": "Meaning-space", "asset": "lucide:box", "color": "orange", "atWord": 18}
+          ],
+          "edges": [
+            {"from": "id", "to": "table", "atWord": 8},
+            {"from": "table", "to": "vec", "atWord": 12},
+            {"from": "vec", "to": "space", "atWord": 18}
+          ]
+        },
+        "source": "EMBEDDING: TOKENS TO VECTORS"
+      }
+    },
+    {
+      "id": "s10",
+      "type": "KINETIC_TEXT",
+      "narration": "In that space, similar words sit close together. Words become directions you can actually do math with.",
+      "durationFrames": 246,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "kinetic": {"fx": "highlight", "text": "Words become [directions].", "sub": "similar meanings sit close", "color": "green", "atWord": 9}
+      }
+    },
+    {
+      "id": "s11",
+      "type": "CONCEPT_DIAGRAM",
+      "narration": "The classic example: take the vector for king, subtract man, add woman, and you land right next to queen. The geometry encodes relationships.",
+      "durationFrames": 312,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "slide",
+      "data": {
+        "headline": "King minus [man.]",
+        "headlineColor": "purple",
+        "anim": "rise",
+        "nodes": [
+          {"id": "king", "label": "king", "asset": "lucide:crown", "atWord": 6},
+          {"id": "woman", "label": "woman", "asset": "lucide:user", "atWord": 11},
+          {"id": "queen", "label": "queen", "asset": "lucide:gem", "atWord": 15}
+        ],
+        "edges": [
+          {"from": "king", "to": "queen", "atWord": 15},
+          {"from": "woman", "to": "queen", "atWord": 15}
+        ]
+      }
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "narration": "Chapter three. Now the key insight that made modern models possible: attention.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "03", "title": "Attention", "subtitle": "what matters, when", "color": "orange"}
+      }
+    },
+    {
+      "id": "s13",
+      "type": "DIAGRAM",
+      "narration": "For each word, the model asks every other word how relevant it is. It sends a query, compares it against keys, and blends the values from the words that matter most.",
+      "durationFrames": 366,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "headline": "Query, key, [value.]",
+        "headlineColor": "blue",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "q", "label": "Query", "asset": "lucide:help-circle", "color": "blue", "atWord": 10},
+            {"id": "k", "label": "Compare keys", "asset": "lucide:key", "color": "purple", "atWord": 14},
+            {"id": "w", "label": "Weights", "asset": "lucide:sliders", "color": "orange", "atWord": 18},
+            {"id": "v", "label": "Blend values", "asset": "lucide:layers", "color": "green", "atWord": 22}
+          ],
+          "edges": [
+            {"from": "q", "to": "k", "label": "match", "atWord": 14, "color": "blue"},
+            {"from": "k", "to": "w", "label": "score", "atWord": 18, "color": "purple"},
+            {"from": "w", "to": "v", "label": "weighted", "atWord": 22, "color": "orange"}
+          ]
+        },
+        "source": "SELF-ATTENTION: QUERY, KEY, VALUE"
+      }
+    },
+    {
+      "id": "s14",
+      "type": "DIAGRAM",
+      "narration": "Do that for every word at once, and each token gathers context from the entire sentence - not just its immediate neighbors.",
+      "durationFrames": 300,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "headline": "Attend to [all.]",
+        "headlineColor": "orange",
+        "diagram": {
+          "layout": "hub",
+          "nodes": [
+            {"id": "cur", "label": "This token", "asset": "lucide:crosshair", "color": "orange", "atWord": 8},
+            {"id": "w1", "label": "The", "asset": "lucide:type", "color": "blue", "atWord": 12},
+            {"id": "w2", "label": "cat", "asset": "lucide:type", "color": "purple", "atWord": 12},
+            {"id": "w3", "label": "sat", "asset": "lucide:type", "color": "green", "atWord": 13},
+            {"id": "w4", "label": "quietly", "asset": "lucide:type", "color": "yellow", "atWord": 13}
+          ]
+        },
+        "source": "EACH TOKEN ATTENDS TO ALL OTHERS"
+      }
+    },
+    {
+      "id": "s15",
+      "type": "QUOTE_SPOTLIGHT",
+      "narration": "The 2017 paper that introduced this architecture said it best, right in its title.",
+      "durationFrames": 258,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "dip",
+      "fx": "vignette",
+      "data": {
+        "person": {"name": "Vaswani et al., 2017", "role": "The Transformer paper"},
+        "quote": "Attention is all you need.",
+        "source": "THE PAPER THAT INTRODUCED THE TRANSFORMER"
+      }
+    },
+    {
+      "id": "s16",
+      "type": "CHAPTER",
+      "narration": "Chapter four. Attention is the engine. The transformer is the machine built around it.",
+      "durationFrames": 156,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "04", "title": "The Transformer", "subtitle": "the stack", "color": "blue"}
+      }
+    },
+    {
+      "id": "s17",
+      "type": "DIAGRAM",
+      "narration": "One block does two things in turn: an attention layer to mix information across words, then a feed-forward layer to think about each word on its own. Stack dozens of these, and you get a deep model.",
+      "durationFrames": 372,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "headline": "One block, [stacked.]",
+        "headlineColor": "purple",
+        "diagram": {
+          "layout": "block",
+          "nodes": [
+            {"id": "att", "label": "Attention", "asset": "lucide:eye", "color": "blue", "atWord": 10, "col": 0, "row": 0},
+            {"id": "n1", "label": "Add + norm", "asset": "lucide:plus", "color": "green", "atWord": 12, "col": 0, "row": 1},
+            {"id": "ff", "label": "Feed-forward", "asset": "lucide:cpu", "color": "orange", "atWord": 16, "col": 0, "row": 2},
+            {"id": "n2", "label": "Add + norm", "asset": "lucide:plus", "color": "green", "atWord": 20, "col": 0, "row": 3}
+          ],
+          "edges": [
+            {"from": "att", "to": "n1", "atWord": 12},
+            {"from": "n1", "to": "ff", "atWord": 16},
+            {"from": "ff", "to": "n2", "atWord": 20}
+          ]
+        },
+        "source": "A TRANSFORMER BLOCK, STACKED N TIMES"
+      }
+    },
+    {
+      "id": "s18",
+      "type": "STAT_PANELS",
+      "narration": "Scale is the other half of the story. Modern models stack many layers and carry billions of parameters - the adjustable weights that store everything they've learned.",
+      "durationFrames": 336,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "headline": "Built at [scale.]",
+        "headlineColor": "orange",
+        "stats": [
+          {"kicker": "DEPTH", "value": "dozens", "color": "blue", "atWord": 9},
+          {"kicker": "PARAMETERS", "value": "billions", "color": "purple", "atWord": 13}
+        ],
+        "verdict": {"text": "weights are the memory", "color": "orange", "atWord": 18},
+        "source": "ILLUSTRATIVE MODEL SCALE"
+      }
+    },
+    {
+      "id": "s19",
+      "type": "PHOTO",
+      "narration": "And none of this is abstract. It all runs on real hardware - warehouses of GPUs, humming day and night to train and serve these models.",
+      "durationFrames": 288,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "fx": "letterbox",
+      "data": {
+        "photo": {"asset": "img:server-racks.jpg", "kicker": "THE COMPUTE", "caption": "Warehouses of GPUs, running nonstop", "color": "blue", "pan": "in", "atWord": 1},
+        "source": "PHOTO: WIKIMEDIA / VIRTUO DOC - CC BY-SA 4.0"
+      }
+    },
+    {
+      "id": "s20",
+      "type": "CHAPTER",
+      "narration": "Chapter five. A fresh model knows nothing at all. Training is how it learns - by reading.",
+      "durationFrames": 156,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "05", "title": "Training", "subtitle": "learning from text", "color": "green"}
+      }
+    },
+    {
+      "id": "s21",
+      "type": "DIAGRAM",
+      "narration": "Training is a loop. Show the model text with the next word hidden, let it guess, measure how wrong it was, and nudge every weight to be a little less wrong. Then repeat.",
+      "durationFrames": 384,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "headline": "Guess, check, [adjust.]",
+        "headlineColor": "green",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "hide", "label": "Hide next word", "asset": "lucide:eye-off", "color": "blue", "atWord": 6},
+            {"id": "guess", "label": "Model guesses", "asset": "lucide:brain-circuit", "color": "purple", "atWord": 12},
+            {"id": "err", "label": "Measure error", "asset": "lucide:ruler", "color": "orange", "atWord": 16},
+            {"id": "adj", "label": "Adjust weights", "asset": "lucide:sliders", "color": "green", "atWord": 22}
+          ],
+          "edges": [
+            {"from": "hide", "to": "guess", "atWord": 12},
+            {"from": "guess", "to": "err", "atWord": 16},
+            {"from": "err", "to": "adj", "atWord": 22}
+          ]
+        },
+        "source": "GRADIENT DESCENT: THE TRAINING LOOP"
+      }
+    },
+    {
+      "id": "s22",
+      "type": "KINETIC_TEXT",
+      "narration": "Wrong. Adjust. Wrong again. Adjust again. Across trillions of words, the errors shrink and fluent language emerges.",
+      "durationFrames": 252,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "kinetic": {"fx": "glitch", "text": "Wrong. Adjust. Repeat.", "sub": "a trillion times over", "color": "red", "atWord": 1}
+      }
+    },
+    {
+      "id": "s23",
+      "type": "BAR_COMPARE",
+      "narration": "There are two phases. Pretraining reads a vast slice of the internet to learn language itself. Fine-tuning then shapes behavior with a much smaller, carefully curated set.",
+      "durationFrames": 354,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "iris",
+      "data": {
+        "headline": "Two [phases.]",
+        "headlineColor": "blue",
+        "bars": [
+          {"label": "Pretraining", "value": 100, "display": "massive", "color": "blue", "atWord": 6},
+          {"label": "Fine-tuning", "value": 12, "display": "curated", "color": "green", "atWord": 16}
+        ],
+        "maxValue": 100,
+        "source": "ILLUSTRATIVE RELATIVE DATA SCALE"
+      }
+    },
+    {
+      "id": "s24",
+      "type": "CHAT_MOCKUP",
+      "narration": "One fine-tuning step uses people directly. Humans compare answers and rank them, teaching the model which kinds of responses we actually prefer.",
+      "durationFrames": 324,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "messages": [
+          {"from": "agent", "text": "Here are two answers. Which is better?", "atWord": 1},
+          {"from": "user", "text": "The second one - it's clearer.", "color": "green", "atWord": 9},
+          {"from": "agent", "text": "Understood. I'll favor that style.", "color": "blue", "atWord": 14}
+        ],
+        "source": "RLHF: LEARNING FROM HUMAN PREFERENCES"
+      }
+    },
+    {
+      "id": "s24b",
+      "type": "SUBSCRIBE_REMINDER",
+      "narration": "If the pieces are clicking into place, subscribe - we go this deep every single week.",
+      "durationFrames": 210,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "wipe",
+      "fx": "burst",
+      "data": {
+        "subscribe": {"text": "Making sense so far?", "sub": "we go this deep every week", "handle": "@thenbxstudio", "color": "orange", "atWord": 1}
+      }
+    },
+    {
+      "id": "s25",
+      "type": "CHAPTER",
+      "narration": "Chapter six. Now the payoff: how a trained model actually writes.",
+      "durationFrames": 150,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "06", "title": "Generation", "subtitle": "writing back", "color": "orange"}
+      }
+    },
+    {
+      "id": "s26",
+      "type": "DIAGRAM",
+      "narration": "Generation happens one token at a time. The model reads everything so far, predicts the next token, appends it, and feeds the whole thing back in to predict the one after that.",
+      "durationFrames": 372,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "push",
+      "data": {
+        "headline": "One token at a [time.]",
+        "headlineColor": "blue",
+        "diagram": {
+          "layout": "flow",
+          "nodes": [
+            {"id": "prompt", "label": "Prompt so far", "asset": "lucide:message-square", "color": "blue", "atWord": 6},
+            {"id": "pred", "label": "Predict token", "asset": "lucide:brain-circuit", "color": "orange", "atWord": 12},
+            {"id": "app", "label": "Append it", "asset": "lucide:plus", "color": "green", "atWord": 16},
+            {"id": "loop", "label": "Feed back", "asset": "lucide:repeat", "color": "purple", "atWord": 22}
+          ],
+          "edges": [
+            {"from": "prompt", "to": "pred", "atWord": 12},
+            {"from": "pred", "to": "app", "atWord": 16},
+            {"from": "app", "to": "loop", "atWord": 22}
+          ]
+        },
+        "source": "AUTOREGRESSIVE GENERATION"
+      }
+    },
+    {
+      "id": "s27",
+      "type": "SOUND_WAVE",
+      "narration": "That's why answers stream in, word by word. Each pulse you see appear is one more token, chosen and printed.",
+      "durationFrames": 288,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "headline": "Word by [word.]",
+        "headlineColor": "blue",
+        "wave": {"label": "streaming tokens", "color": "blue", "atWord": 1},
+        "source": "TOKENS ARE STREAMED AS THEY ARE PICKED"
+      }
+    },
+    {
+      "id": "s28",
+      "type": "SPLIT_PATHS",
+      "narration": "But which token? Always taking the single most likely gives safe, repetitive text. Sampling with a little randomness - tuned by a dial called temperature - gives creativity and surprise.",
+      "durationFrames": 366,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "slide",
+      "data": {
+        "headline": "Safe vs [creative.]",
+        "headlineColor": "purple",
+        "center": {"kicker": "NEXT TOKEN", "title": "many options", "color": "blue", "atWord": 4},
+        "left": {
+          "title": "Greedy",
+          "badge": {"text": "TEMP 0", "color": "blue"},
+          "lines": [{"text": "always the top pick", "color": "blue"}, {"text": "safe, repetitive", "color": "green"}],
+          "color": "blue",
+          "atWord": 1
+        },
+        "right": {
+          "title": "Sampling",
+          "badge": {"text": "TEMP > 0", "color": "orange"},
+          "lines": [{"text": "weighted random pick", "color": "orange"}, {"text": "creative, varied", "color": "green"}],
+          "color": "orange",
+          "atWord": 12
+        },
+        "source": "DECODING: GREEDY VS TEMPERATURE SAMPLING"
+      }
+    },
+    {
+      "id": "s29",
+      "type": "STAT_CALLOUT",
+      "narration": "And the model can only weigh so much at once - its context window. Anything beyond that window simply falls out of view.",
+      "durationFrames": 282,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "value": 128000,
+        "label": "tokens the model can hold at once",
+        "atWord": 11,
+        "source": "ILLUSTRATIVE CONTEXT WINDOW SIZE"
+      }
+    },
+    {
+      "id": "s30",
+      "type": "CAROUSEL",
+      "narration": "Zoom out, and every answer runs the same stack: tokenize, embed, attend, transform, and sample the next token.",
+      "durationFrames": 324,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "zoom",
+      "data": {
+        "headline": "The full [stack.]",
+        "headlineColor": "blue",
+        "carousel": {
+          "atWord": 1,
+          "speed": 0.018,
+          "items": [
+            {"label": "Tokenize", "sub": "text to tokens", "color": "blue", "asset": "lucide:scissors"},
+            {"label": "Embed", "sub": "tokens to vectors", "color": "green", "asset": "lucide:locate"},
+            {"label": "Attention", "sub": "what matters", "color": "orange", "asset": "lucide:eye"},
+            {"label": "Transform", "sub": "deep layers", "color": "purple", "asset": "lucide:layers"},
+            {"label": "Sample", "sub": "pick next token", "color": "yellow", "asset": "lucide:sparkles"}
+          ]
+        },
+        "source": "THE INFERENCE STACK"
+      }
+    },
+    {
+      "id": "s31",
+      "type": "CHAPTER",
+      "narration": "Chapter seven. For all that power, there's a catch you must never forget.",
+      "durationFrames": 156,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "dip",
+      "data": {
+        "chapter": {"number": "07", "title": "The Catch", "subtitle": "what it can't do", "color": "red"}
+      }
+    },
+    {
+      "id": "s32",
+      "type": "LIST_BUILD",
+      "narration": "A model predicts plausible text, not verified truth. So it can hallucinate confident nonsense, it has no memory between separate chats, and its knowledge stops at its training cutoff.",
+      "durationFrames": 384,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "heading": "Three hard limits",
+        "anim": "slideLeft",
+        "items": [
+          {"icon": "lucide:ghost", "text": "Hallucination", "detail": "confident but wrong", "atWord": 9},
+          {"icon": "lucide:eraser", "text": "No memory", "detail": "each chat starts fresh", "atWord": 16},
+          {"icon": "lucide:calendar-off", "text": "Training cutoff", "detail": "blind to recent events", "atWord": 22}
+        ]
+      }
+    },
+    {
+      "id": "s33",
+      "type": "REVEAL",
+      "narration": "So here's the truth to hold onto. A language model doesn't know things. It predicts what words most plausibly come next.",
+      "durationFrames": 300,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "zoom",
+      "fx": "burst",
+      "data": {
+        "headline": "It doesn't [know.]",
+        "reveal": {"kicker": "THE REAL TAKEAWAY", "sub": "it predicts what comes next, nothing more", "color": "green", "atWord": 8},
+        "source": "PREDICTION, NOT KNOWLEDGE"
+      }
+    },
+    {
+      "id": "s34",
+      "type": "RECAP",
+      "narration": "So that's the whole machine. Text becomes tokens. Tokens become vectors. Attention weighs their meaning. Training tunes the weights. And generation predicts the next token, over and over.",
+      "durationFrames": 402,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "iris",
+      "data": {
+        "heading": "The machine, recapped",
+        "points": [
+          {"text": "Text becomes tokens", "atWord": 5},
+          {"text": "Tokens become vectors", "atWord": 8},
+          {"text": "Attention weighs meaning", "atWord": 11},
+          {"text": "Generation predicts the next token", "atWord": 18}
+        ]
+      }
+    },
+    {
+      "id": "s35",
+      "type": "CREDITS_ROLL",
+      "narration": "Five ideas, one elegant loop, quietly turning math into language.",
+      "durationFrames": 246,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "fade",
+      "data": {
+        "credits": {
+          "title": "How LLMs Work",
+          "color": "blue",
+          "rows": [
+            {"role": "THE INPUT", "name": "Tokens & Embeddings"},
+            {"role": "THE ENGINE", "name": "Attention"},
+            {"role": "THE MACHINE", "name": "The Transformer"},
+            {"role": "THE LEARNING", "name": "Training"},
+            {"role": "THE OUTPUT", "name": "Generation"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s36",
+      "type": "OUTRO_CTA",
+      "narration": "Now you know what's really happening when you hit send. If this made it click, subscribe to THE NBX STUDIO.",
+      "durationFrames": 288,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "It's prediction, all the way down",
+        "sub": "subscribe to THE NBX STUDIO"
+      }
+    }
+  ]
+}

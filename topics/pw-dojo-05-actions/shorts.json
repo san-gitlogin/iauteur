@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP05 shorts: fill vs typing",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "why fill() breaks autocomplete, and the one line that fixes it",
+    "openLoop": "Why does a filled search box never show its suggestions?",
+    "analogy": "fill() pastes. press_sequentially() types like a person.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Playwright fill() vs press_sequentially() #playwright #python",
+      "description": "fill() pastes, so per-key events never fire. That is why your autocomplete test finds nothing.",
+      "tags": [
+        "playwright",
+        "python",
+        "fill",
+        "press_sequentially",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "fill vs TYPING",
+    "badge": "Dojo · EP 5",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your test fills the search box, and the suggestions never appear. By hand, the same box works fine.",
+      "data": {
+        "headline": "NO SUGGESTIONS?",
+        "subtext": "the text is in the box",
+        "heroAsset": "lucide:text-cursor-input",
+        "headlineAtWord": 4.583,
+        "heroAtWord": 10
+      },
+      "durationFrames": 215,
+      "audio": "audio/pw-dojo-05-actions_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "APP_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Because fill does not type. It clears the box and drops the whole value in at once, exactly like pasting.",
+      "data": {
+        "appWindow": {
+          "windowTitle": "City finder",
+          "screenTitle": "Find a city",
+          "fields": [
+            {
+              "label": "Search city",
+              "text": "Chennai",
+              "mode": "paste",
+              "atWord": 7
+            }
+          ],
+          "button": "Search",
+          "caption": "fill() = paste: no keystrokes",
+          "color": "blue",
+          "atWord": 7.917
+        }
+      },
+      "durationFrames": 228,
+      "audio": "audio/pw-dojo-05-actions_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "LOG_STREAM",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "And a suggestion box is listening for keys. Every key you press fires an event. A paste fires none of them, so the box has nothing to answer.",
+      "data": {
+        "logs": {
+          "rate": "per key",
+          "highlight": 4,
+          "atWord": 6.417,
+          "lines": [
+            {
+              "level": "info",
+              "tag": "keydown",
+              "text": "C    → fetching cities for \"C\""
+            },
+            {
+              "level": "info",
+              "tag": "keydown",
+              "text": "h    → fetching cities for \"Ch\""
+            },
+            {
+              "level": "info",
+              "tag": "keydown",
+              "text": "e    → fetching cities for \"Che\""
+            },
+            {
+              "level": "info",
+              "tag": "keydown",
+              "text": "n    → fetching cities for \"Chen\""
+            },
+            {
+              "level": "warn",
+              "tag": "fill()",
+              "text": "value set — no key events fired"
+            }
+          ]
+        }
+      },
+      "durationFrames": 280,
+      "audio": "audio/pw-dojo-05-actions_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So use press sequentially instead. It presses the keys one by one, like a person, and the suggestions turn up.",
+      "data": {
+        "code": {
+          "filename": "typing.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "box = page.get_by_placeholder(\"Search city\")"
+            },
+            {
+              "text": "box.press_sequentially(\"Chen\")",
+              "color": "green"
+            },
+            {
+              "text": "box.press(\"Enter\")"
+            }
+          ],
+          "atWord": 6.333
+        }
+      },
+      "durationFrames": 233,
+      "audio": "audio/pw-dojo-05-actions_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Fill is a paste. Press sequentially is a human typing. Press is one single key. That is the whole interview answer.",
+      "data": {
+        "stickyNote": {
+          "headline": "fill vs [typing]",
+          "color": "purple",
+          "notes": [
+            {
+              "title": "FILL vs TYPING",
+              "tag": "memory hook",
+              "body": "fill() = paste, instant. press_sequentially() = a human typing, key by key. press() = one key.",
+              "highlight": "press_sequentially() = a human typing",
+              "asset": "lucide:keyboard",
+              "atWord": 8
+            }
+          ]
+        }
+      },
+      "durationFrames": 274,
+      "audio": "audio/pw-dojo-05-actions_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "All five everyday actions, in full, free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 169,
+      "audio": "audio/pw-dojo-05-actions_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

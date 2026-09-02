@@ -1,0 +1,217 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP15 shorts: log in once",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "storage_state saves your session to a file so every later context starts logged in",
+    "openLoop": "Why does every single test have to log in again?",
+    "analogy": "the club hand stamp — one person pays at the door, everybody after just shows the mark.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Log in once in Playwright #playwright #python",
+      "description": "storage_state() saves your cookies to a file — every context built with it starts already logged in. 25 minutes down to 8.",
+      "tags": [
+        "playwright",
+        "python",
+        "auth",
+        "storage-state",
+        "pytest",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "LOG IN ONCE",
+    "badge": "Dojo · EP 15",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Two hundred tests. Two hundred logins. That's seventeen minutes of somebody typing the same password.",
+      "data": {
+        "headline": "STOP LOGGING IN.",
+        "subtext": "once is enough",
+        "heroAsset": "lucide:key-round",
+        "headlineAtWord": 5.417,
+        "heroAtWord": 10.917
+      },
+      "durationFrames": 220,
+      "audio": "audio/pw-dojo-15-auth_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "HAND_STAMP",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Every test wakes up with a fresh context, so every test wakes up logged out. Which means it queues at the login page like everybody else. Five seconds, each and every time.",
+      "data": {
+        "handStamp": {
+          "toll": "log in (5s)",
+          "mode": "everyone-pays",
+          "doorLabel": "the login page",
+          "totalLabel": "17 minutes of typing",
+          "flakyNote": "and sometimes it wobbles",
+          "color": "red",
+          "atWord": 1.917,
+          "settleAtWord": 19.667,
+          "tests": [
+            {
+              "label": "test_checkout",
+              "atWord": 8.167
+            },
+            {
+              "label": "test_profile",
+              "title": "flaky",
+              "atWord": 12.583
+            },
+            {
+              "label": "test_search",
+              "atWord": 17
+            }
+          ]
+        }
+      },
+      "durationFrames": 363,
+      "audio": "audio/pw-dojo-15-auth_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "HAND_STAMP",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Clubs worked this out decades ago. One person pays, gets stamped — everybody after that just shows the mark. Storage state is that stamp. Log in for real once, save the cookies to a JSON file, and hand it to every context you build after.",
+      "data": {
+        "handStamp": {
+          "toll": "log in (5s)",
+          "mode": "stamped",
+          "doorLabel": "the login page",
+          "stampLabel": "auth.json",
+          "totalLabel": "5 seconds, total",
+          "color": "green",
+          "atWord": 1.833,
+          "settleAtWord": 25.083,
+          "tests": [
+            {
+              "label": "test_checkout",
+              "atWord": 14.667
+            },
+            {
+              "label": "test_profile",
+              "atWord": 18.667
+            },
+            {
+              "label": "test_search",
+              "atWord": 22.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 455,
+      "audio": "audio/pw-dojo-15-auth_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CODE_RUN",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "It's two lines, honestly. Storage state writes your session out to a file. Then any context you build with that file is born already logged in.",
+      "data": {
+        "codeRun": {
+          "file": "conftest.py",
+          "runLabel": "once, ever",
+          "color": "blue",
+          "atWord": 1,
+          "lines": [
+            {
+              "text": "ctx.storage_state(path=\"auth.json\")",
+              "detail": "save the stamp",
+              "sub": "→ cookies written to disk",
+              "atWord": 6.917
+            },
+            {
+              "text": "",
+              "atWord": 6.917
+            },
+            {
+              "text": "new_context(storage_state=\"auth.json\")",
+              "detail": "wear the stamp",
+              "sub": "→ already on the dashboard",
+              "atWord": 13.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 284,
+      "audio": "audio/pw-dojo-15-auth_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "One warning though — that file is you until the session dies. Gitignore it. Never commit the thing.",
+      "data": {
+        "ruleTest": {
+          "kicker": "before you push",
+          "rule": "auth.json holds no password. it still holds you.",
+          "okLabel": "gitignore",
+          "noLabel": "commit",
+          "caption": "a stolen stamp still opens the door",
+          "color": "orange",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "add auth.json to .gitignore",
+              "title": "ok",
+              "sub": "regenerate it per run",
+              "atWord": 7.167
+            },
+            {
+              "text": "commit it \"just this once\"",
+              "title": "no",
+              "sub": "anyone with the repo is you",
+              "atWord": 10.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 213,
+      "audio": "audio/pw-dojo-15-auth_shorts_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Whole lesson's free, over at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-15-auth_shorts_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

@@ -1,0 +1,842 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP15: Auth, Login Once, Reuse Forever",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how storage_state turns two hundred logins into one, and a 25-minute suite into eight",
+    "openLoop": "Two hundred tests, two hundred logins — seventeen minutes of typing one password.",
+    "analogy": "storage_state is the club hand-stamp: show ID once, then walk straight back in.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #15 — storage_state, log in once",
+      "description": "Every test starts logged out because every test gets a fresh context. storage_state saves the session to a file so the whole suite starts already inside.",
+      "tags": [
+        "playwright",
+        "python",
+        "storage_state",
+        "auth",
+        "login",
+        "conftest",
+        "pytest fixtures"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Auth — Login Once",
+    "badge": "Dojo · EP 15",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "LOG IN ONCE",
+    "badge": "EP 15 · AUTH",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Two hundred tests. Two hundred logins. Seventeen minutes of typing the exact same password.",
+      "data": {
+        "headline": "SEVENTEEN MINUTES.",
+        "subtext": "just typing one password",
+        "heroAsset": "lucide:key",
+        "headlineAtWord": 4.417,
+        "heroAtWord": 10.083
+      },
+      "durationFrames": 213,
+      "audio": "audio/pw-dojo-15-auth_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "There's a trick for this one, and honestly, nightclubs worked it out decades ago.",
+      "data": {
+        "title": "Auth — Login Once, Reuse Forever",
+        "subtitle": "The Playwright Dojo · Episode 15"
+      },
+      "durationFrames": 135,
+      "audio": "audio/pw-dojo-15-auth_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things today. Why every test starts logged out in the first place, which surprises people. Then where your login actually lives — and it's not where you'd guess. And finally the hand stamp trick that fixes the whole lot.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:timer",
+              "label": "the same toll",
+              "color": "red",
+              "atWord": 9.833
+            },
+            {
+              "icon": "lucide:cookie",
+              "label": "where login lives",
+              "color": "blue",
+              "atWord": 16.25
+            },
+            {
+              "icon": "lucide:stamp",
+              "label": "the hand stamp",
+              "color": "green",
+              "atWord": 22.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 405,
+      "audio": "audio/pw-dojo-15-auth_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "So why is every test logged out to begin with? You already know the answer to this one, actually.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Two hundred logins",
+          "subtitle": "the same toll, every time"
+        }
+      },
+      "durationFrames": 192,
+      "audio": "audio/pw-dojo-15-auth_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "HAND_STAMP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Every test gets a fresh context, remember, back from episode eight. Fresh context means fresh cookies. Which means every single test wakes up logged out, and has to queue at the login page like everybody else. Five seconds each, every time. And look at that middle one — the login page hiccuped, so a test about editing your profile just died for a reason that had nothing to do with profiles.",
+      "data": {
+        "handStamp": {
+          "toll": "log in (5s)",
+          "mode": "everyone-pays",
+          "doorLabel": "the login page",
+          "totalLabel": "17 minutes of typing",
+          "flakyNote": "the login hiccuped",
+          "caption": "every test pays the same toll",
+          "color": "red",
+          "atWord": 3.333,
+          "settleAtWord": 38.417,
+          "tests": [
+            {
+              "label": "test_checkout",
+              "atWord": 16.583
+            },
+            {
+              "label": "test_profile",
+              "title": "flaky",
+              "atWord": 25.167
+            },
+            {
+              "label": "test_search",
+              "atWord": 32.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 686,
+      "audio": "audio/pw-dojo-15-auth_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "In code it looks harmless enough. One tidy helper call at the top of each test. But that same line is sitting in two hundred files, and every one of them costs you five seconds before anything useful even starts happening.",
+      "data": {
+        "codeRun": {
+          "filename": "the old way.py",
+          "language": "py",
+          "resultLabel": "what it costs",
+          "color": "red",
+          "atWord": 2.5,
+          "caption": "harmless once. brutal two hundred times.",
+          "lines": [
+            {
+              "text": "def test_checkout(page):"
+            },
+            {
+              "text": "    login(page)          # 5s",
+              "detail": "five seconds before anything",
+              "sub": "and the test has not started",
+              "label": "5s",
+              "atWord": 7.833
+            },
+            {
+              "text": "    ..."
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "def test_profile(page):"
+            },
+            {
+              "text": "    login(page)          # 5s",
+              "detail": "and again, in the next file",
+              "sub": "x200 tests = ~17 minutes",
+              "label": "+5s",
+              "atWord": 19.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 393,
+      "audio": "audio/pw-dojo-15-auth_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Logging in inside every test is bad in three separate ways. Slow, obviously — that part's easy to see. Fragile, because you've just handed the login page two hundred separate chances to wobble on you. And dull, honestly, because your tests end up spending most of their lives repeating the same six lines.",
+      "data": {
+        "ruleTest": {
+          "kicker": "three problems",
+          "rule": "logging in per test is slow, fragile and dull",
+          "okLabel": "once per run",
+          "noLabel": "once per test",
+          "caption": "the login page should get one chance",
+          "color": "red",
+          "atWord": 2.667,
+          "cases": [
+            {
+              "text": "one real login per suite",
+              "title": "ok",
+              "sub": "one chance to wobble",
+              "atWord": 18.917
+            },
+            {
+              "text": "a login inside all 200 tests",
+              "title": "no",
+              "sub": "200 chances to wobble",
+              "atWord": 26.583
+            },
+            {
+              "text": "a shared helper called login()",
+              "title": "no",
+              "sub": "tidier, but still 200 logins",
+              "atWord": 31.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 563,
+      "audio": "audio/pw-dojo-15-auth_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Right. So think about how a nightclub handles this exact problem, because they solved it years ago.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The hand stamp",
+          "subtitle": "storage_state"
+        }
+      },
+      "durationFrames": 192,
+      "audio": "audio/pw-dojo-15-auth_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "FIXTURE_CREW",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "First though — where does being logged in actually live? Not in the page. It's cookies and local storage, and both of those sit in the context. The dressing room, from episode eight. Which turns out to be very handy indeed, because a context is one single thing. And one single thing can be picked up, saved, and carried somewhere else entirely.",
+      "data": {
+        "fixtureCrew": {
+          "testName": "test_checkout",
+          "askFor": "page",
+          "crewLabel": "the context",
+          "bodyLabel": "cookies live here",
+          "teardownLabel": "and die here, normally",
+          "caption": "your session lives in the dressing room",
+          "color": "blue",
+          "atWord": 2.583,
+          "handoffAtWord": 21,
+          "teardownAtWord": 33.75,
+          "stages": [
+            {
+              "label": "browser",
+              "sub": "the building",
+              "atWord": 9.75
+            },
+            {
+              "label": "context",
+              "sub": "cookies + storage",
+              "color": "blue",
+              "atWord": 13.75
+            },
+            {
+              "label": "page",
+              "sub": "the stage",
+              "atWord": 17
+            }
+          ]
+        }
+      },
+      "durationFrames": 615,
+      "audio": "audio/pw-dojo-15-auth_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So here's step one, and you run this exactly once, ever. Log in for real, like a person would — email, password, click the button. Nothing clever so far. Then that last line is the entire trick. Storage state writes those cookies and that local storage into a plain JSON file. That file? That's your hand stamp.",
+      "data": {
+        "codeRun": {
+          "filename": "save_stamp.py",
+          "language": "py",
+          "resultLabel": "what you get",
+          "color": "green",
+          "atWord": 2.75,
+          "caption": "log in for real. once.",
+          "lines": [
+            {
+              "text": "# save_stamp.py — run this ONCE"
+            },
+            {
+              "text": "page.get_by_label(\"Email\").fill(",
+              "detail": "a real login, like a person",
+              "sub": "typed into the real form",
+              "label": "login",
+              "atWord": 12.583
+            },
+            {
+              "text": "    \"neo@matrix.io\")"
+            },
+            {
+              "text": "page.get_by_label(\"Password\").fill(",
+              "detail": "then the password, same as always",
+              "sub": "nothing clever happening here",
+              "label": "creds",
+              "atWord": 18
+            },
+            {
+              "text": "    \"redpill\")"
+            },
+            {
+              "text": "page.get_by_role(\"button\",",
+              "detail": "and press the button",
+              "sub": "you are properly in now",
+              "label": "in",
+              "atWord": 25.167
+            },
+            {
+              "text": "    name=\"Sign in\").click()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "context.storage_state(",
+              "detail": "now save the stamp to a file",
+              "sub": "auth.json, on disk",
+              "label": "saved",
+              "atWord": 34.083
+            },
+            {
+              "text": "    path=\"auth.json\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 632,
+      "audio": "audio/pw-dojo-15-auth_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Step two is where the whole thing pays off. Any test that wants in just builds its context with that file attached. Born already stamped. So it goes straight to the dashboard — no login page, no five second toll, nothing at all in between.",
+      "data": {
+        "codeRun": {
+          "filename": "any_test.py",
+          "language": "py",
+          "resultLabel": "where you land",
+          "color": "green",
+          "atWord": 2.583,
+          "caption": "born stamped, straight to the dashboard",
+          "lines": [
+            {
+              "text": "# every other test"
+            },
+            {
+              "text": "context = browser.new_context(",
+              "detail": "hand the stamp to the context",
+              "sub": "born already logged in",
+              "label": "stamped",
+              "atWord": 9.75
+            },
+            {
+              "text": "    storage_state=\"auth.json\")"
+            },
+            {
+              "text": "page = context.new_page()"
+            },
+            {
+              "text": "page.goto(",
+              "detail": "and go straight where you wanted",
+              "sub": "no login page at all",
+              "label": "in",
+              "atWord": 20.833
+            },
+            {
+              "text": "    \"https://app.example.com/dashboard\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 450,
+      "audio": "audio/pw-dojo-15-auth_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "HAND_STAMP",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Same door. Same tests. One rule changed, and look what happens. The first one still does the real login, because somebody has to actually get the stamp in the first place. Everybody after that just flashes it and walks straight through. No queue, no wobble, no five seconds.",
+      "data": {
+        "handStamp": {
+          "toll": "log in (5s)",
+          "mode": "stamped",
+          "stampLabel": "auth.json",
+          "doorLabel": "the login page",
+          "totalLabel": "one login, whole suite",
+          "caption": "one pays. everybody else walks in.",
+          "color": "green",
+          "atWord": 1.833,
+          "settleAtWord": 28.167,
+          "tests": [
+            {
+              "label": "test_checkout",
+              "atWord": 12
+            },
+            {
+              "label": "test_profile",
+              "atWord": 18.833
+            },
+            {
+              "label": "test_search",
+              "atWord": 23.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 510,
+      "audio": "audio/pw-dojo-15-auth_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick one, and people get this wrong. What's actually inside auth dot json? Pause here if you want longer. Ready? The answer's B. Cookies and local storage — the session itself, not your password.",
+      "data": {
+        "quiz": {
+          "question": "What is actually inside auth.json?",
+          "options": [
+            {
+              "text": "Your password, in plain text"
+            },
+            {
+              "text": "Cookies and localStorage"
+            },
+            {
+              "text": "A screenshot of the dashboard"
+            },
+            {
+              "text": "The browser binary"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 18,
+          "why": "It is the session state, not your credentials.",
+          "atWord": 1.917
+        }
+      },
+      "durationFrames": 386,
+      "audio": "audio/pw-dojo-15-auth_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "That said, don't get too relaxed about it. There's no password in there, true. But anybody holding that file effectively is you, until the session expires. So treat it like a secret. Gitignore it. Never commit the thing.",
+      "data": {
+        "ruleTest": {
+          "kicker": "still a secret",
+          "rule": "no password inside — but holding it IS being you",
+          "okLabel": "safe",
+          "noLabel": "a leak",
+          "caption": "gitignore auth.json. always.",
+          "color": "orange",
+          "atWord": 1.917,
+          "cases": [
+            {
+              "text": "auth.json in .gitignore",
+              "title": "ok",
+              "sub": "stays on your machine",
+              "atWord": 15.333
+            },
+            {
+              "text": "auth.json committed to git",
+              "title": "no",
+              "sub": "anyone cloning is now you",
+              "atWord": 22.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 429,
+      "audio": "audio/pw-dojo-15-auth_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Now let's wire all of that into pytest properly, so nobody writing a test has to remember any of it.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Wiring it up",
+          "subtitle": "two fixtures in conftest"
+        }
+      },
+      "durationFrames": 197,
+      "audio": "audio/pw-dojo-15-auth_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "SCOPE_LADDER",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Two fixtures do it, and the only difference is how often each runs. Session scope means once. One login, at the top, for the whole suite. Function scope means again, for every single test. Same file. Totally different rhythm.",
+      "data": {
+        "scopeLadder": {
+          "fileLabel": "conftest.py",
+          "runLabel": "one pytest run",
+          "tests": [
+            "test_add_to_cart",
+            "test_pay",
+            "test_edit_name",
+            "test_search"
+          ],
+          "caption": "session runs once. function runs per test.",
+          "color": "orange",
+          "atWord": 2,
+          "fixtures": [
+            {
+              "label": "auth_state",
+              "title": "session",
+              "sub": "the one real login",
+              "detail": "ran 1 time",
+              "atWord": 13.583
+            },
+            {
+              "label": "browser_context_args",
+              "title": "function",
+              "sub": "hands over the stamp",
+              "detail": "ran 4 times",
+              "atWord": 23.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 473,
+      "audio": "audio/pw-dojo-15-auth_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here it is, both pieces. Scope equals session on the first one, so pytest runs that login exactly once and hangs onto whatever came back. Then the second fixture overrides the context arguments for every test, quietly slipping the stamp in on the way past. Somebody writing a test never has to know any of this exists.",
+      "data": {
+        "codeRun": {
+          "filename": "conftest.py",
+          "language": "py",
+          "resultLabel": "how often it runs",
+          "color": "orange",
+          "atWord": 2.75,
+          "caption": "once at the top, then every test",
+          "lines": [
+            {
+              "text": "@pytest.fixture(scope=\"session\")",
+              "detail": "session means once per run",
+              "sub": "one login, whole suite",
+              "label": "once",
+              "atWord": 7.083
+            },
+            {
+              "text": "def auth_state(browser):"
+            },
+            {
+              "text": "    context.storage_state(",
+              "detail": "save the stamp, hand back the path",
+              "sub": "auth.json written",
+              "label": "saved",
+              "atWord": 19.167
+            },
+            {
+              "text": "        path=\"auth.json\")"
+            },
+            {
+              "text": "    return \"auth.json\"",
+              "detail": "hand the path back to pytest",
+              "sub": "cached for the whole session",
+              "label": "kept",
+              "atWord": 24.417
+            },
+            {
+              "text": "@pytest.fixture"
+            },
+            {
+              "text": "def browser_context_args(",
+              "detail": "and slip it into every context",
+              "sub": "every test, born stamped",
+              "label": "each",
+              "atWord": 33.083
+            },
+            {
+              "text": "        browser_context_args, auth_state):"
+            },
+            {
+              "text": "    return {**browser_context_args,"
+            },
+            {
+              "text": "            \"storage_state\": auth_state}"
+            }
+          ]
+        }
+      },
+      "durationFrames": 614,
+      "audio": "audio/pw-dojo-15-auth_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "One more thing, because you'll hit it in about a week. Most apps have more than one kind of person in them. An admin sees buttons a normal user never will. So make more than one stamp — log in as each, save each to its own file, and pick the file you want per test. Same trick, just twice.",
+      "data": {
+        "codeRun": {
+          "filename": "roles.py",
+          "language": "py",
+          "resultLabel": "who you are",
+          "color": "purple",
+          "atWord": 2.417,
+          "caption": "one file per role. pick per test.",
+          "lines": [
+            {
+              "text": "# save one stamp per person",
+              "detail": "run the login twice, once each",
+              "sub": "admin.json and user.json",
+              "label": "two",
+              "atWord": 17.25
+            },
+            {
+              "text": "ctx.storage_state(path=\"admin.json\")"
+            },
+            {
+              "text": "ctx.storage_state(path=\"user.json\")"
+            },
+            {
+              "text": "def test_admin_sees_delete(browser):",
+              "detail": "this test wants the admin",
+              "sub": "sees the danger buttons",
+              "label": "admin",
+              "atWord": 28.5
+            },
+            {
+              "text": "    ctx = browser.new_context("
+            },
+            {
+              "text": "        storage_state=\"admin.json\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "def test_user_cannot(browser):",
+              "detail": "and this one wants a plain user",
+              "sub": "no delete button anywhere",
+              "label": "user",
+              "atWord": 34.167
+            },
+            {
+              "text": "    ctx = browser.new_context("
+            },
+            {
+              "text": "        storage_state=\"user.json\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 529,
+      "audio": "audio/pw-dojo-15-auth_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "The result is genuinely dramatic. One real login at the very start, then two hundred tests that all begin life sitting on the dashboard. That suite used to take twenty five minutes. Eight now.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "pytest -v",
+              "exitCode": 0,
+              "atWord": 8.417,
+              "output": [
+                "# one real login, then:",
+                "test_checkout.py::test_add_to_cart PASSED",
+                "test_profile.py::test_edit_name PASSED",
+                "=========== 200 passed in 8m04s ==========="
+              ]
+            }
+          ],
+          "atWord": 8.417
+        }
+      },
+      "durationFrames": 358,
+      "audio": "audio/pw-dojo-15-auth_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "This one's interview gold, honestly. Somebody asks how you'd speed up a slow test suite, and there are really only three good answers. You've picked up two of them already, between this episode and the last one.",
+      "data": {
+        "ruleTest": {
+          "kicker": "interview gold",
+          "rule": "storage_state, parallel workers, mock the heavy calls",
+          "okLabel": "covered",
+          "noLabel": "episode 18",
+          "caption": "two down. one waiting in episode eighteen.",
+          "color": "green",
+          "atWord": 1.75,
+          "cases": [
+            {
+              "text": "storage_state for the login",
+              "title": "ok",
+              "sub": "this episode, right here",
+              "atWord": 12.167
+            },
+            {
+              "text": "mock the heavy API calls",
+              "title": "ok",
+              "sub": "last episode, fourteen",
+              "atWord": 15.833
+            },
+            {
+              "text": "run it on parallel workers",
+              "title": "no",
+              "sub": "still to come, episode 18",
+              "atWord": 18.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 351,
+      "audio": "audio/pw-dojo-15-auth_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Three lines to take away. Every test starts logged out, because every test gets a fresh context. Your session lives in cookies, and storage state saves those to a file. So log in once, and the whole suite walks in behind you.",
+      "data": {
+        "heading": "The hand stamp, in three lines",
+        "points": [
+          {
+            "text": "fresh context means logged out",
+            "atWord": 10.917
+          },
+          {
+            "text": "storage_state saves the session",
+            "atWord": 17.583
+          },
+          {
+            "text": "one login, then everybody walks in",
+            "atWord": 24.167
+          }
+        ]
+      },
+      "durationFrames": 439,
+      "audio": "audio/pw-dojo-15-auth_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next time, testing an API with no browser open at all. Which sounds like cheating, and sort of is. Whole course is free, over at the Playwright Dojo.",
+      "data": {
+        "message": "Next: API Testing — Skip the Stage",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 291,
+      "audio": "audio/pw-dojo-15-auth_long_s22.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

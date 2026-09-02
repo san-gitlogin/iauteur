@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "topic": "RECORDED_STEP contract test — footage on the narrator's clock",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "proves a captured segment starts on its own spoken word and freezes until the next one",
+    "openLoop": "Does the footage really wait for the voice?",
+    "analogy": "A film reel that pauses itself until the narrator catches up.",
+    "topicAxes": [
+      "entity-novelty",
+      "tribal-conflict"
+    ],
+    "seo": {
+      "title": "RECORDED_STEP contract test",
+      "altTitles": [
+        "recording contract fixture"
+      ],
+      "description": "Internal fixture. Renders the frame-numbered recording fixture so the anchor and freeze behaviour can be measured from stills. Not for publication.",
+      "tags": [
+        "internal",
+        "fixture",
+        "test"
+      ],
+      "queries": [
+        "how does iauteur time screen recordings"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "studio",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "CONTRACT TEST",
+    "badge": "internal",
+    "asset": "lucide:clapperboard"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A recording has its own clock. The voice has another. Watch which one wins.",
+      "data": {
+        "headline": "TWO CLOCKS.",
+        "subtext": "the footage and the voice",
+        "heroAsset": "lucide:clapperboard",
+        "headlineAtWord": 2,
+        "heroAtWord": 8
+      },
+      "durationFrames": 180,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "background": "zoneA",
+      "narration": "Watch the reel. One two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twenty-one twenty-two twenty-three twenty-four twenty-five twenty-six twenty-seven twenty-eight twenty-nine thirty thirty-one thirty-two thirty-three thirty-four thirty-five.",
+      "data": {
+        "headline": "Footage on the [narrator's clock]",
+        "recordedStep": {
+          "caption": "each segment waits for its word",
+          "premise": "Three recorded segments. The big yellow number is the frame INSIDE that segment, and the white box slides while it plays.",
+          "color": "blue",
+          "atWord": 2,
+          "clips": [
+            {
+              "label": "open the file",
+              "atWord": 4,
+              "id": "open-file",
+              "src": "rec/_fixture/seg-01.mp4",
+              "frames": 60,
+              "bbox": {
+                "x": 40,
+                "y": 40,
+                "w": 300,
+                "h": 120
+              }
+            },
+            {
+              "label": "write the function",
+              "atWord": 12,
+              "id": "type-code",
+              "src": "rec/_fixture/seg-02.mp4",
+              "frames": 90,
+              "bbox": {
+                "x": 480,
+                "y": 120,
+                "w": 420,
+                "h": 260
+              }
+            },
+            {
+              "label": "run the tests",
+              "atWord": 25,
+              "id": "run-tests",
+              "src": "rec/_fixture/seg-03.mp4",
+              "frames": 45,
+              "bbox": {
+                "x": 60,
+                "y": 300,
+                "w": 840,
+                "h": 200
+              }
+            }
+          ],
+          "capture": {
+            "width": 960,
+            "height": 540
+          }
+        }
+      },
+      "durationFrames": 420,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "s03",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The footage started on its word, and then it waited. That is the whole contract.",
+      "data": {
+        "message": "Contract held",
+        "sub": "docs/SCREEN_RECORDING.md"
+      },
+      "durationFrames": 180,
+      "timingSource": "estimate"
+    }
+  ]
+}

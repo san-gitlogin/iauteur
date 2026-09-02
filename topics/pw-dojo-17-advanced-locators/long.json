@@ -1,0 +1,821 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP17: Advanced Locators & Shadow DOM",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "chaining, and_/or_/filter, and why shadow DOM needs no special call at all",
+    "openLoop": "A forty-character selector broke because a designer moved a div.",
+    "analogy": "a chain is directions — in the sidebar, in Notifications, the Email toggle.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #17 — chaining, and_, shadow DOM",
+      "description": "Locator chaining reads like directions, and_/or_/filter combine descriptions, and every Playwright locator pierces an open shadow root for free — except XPath.",
+      "tags": [
+        "playwright",
+        "python",
+        "locators",
+        "shadow dom",
+        "chaining",
+        "web components"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Directions, Not Addresses",
+    "badge": "Dojo · EP 17",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "PIERCE THE BOX",
+    "badge": "EP 17 · LOCATORS",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Somebody hands you a selector full of nth-child and asks why the test broke. A designer moved a div.",
+      "data": {
+        "headline": "STOP WRITING ADDRESSES.",
+        "subtext": "give directions instead",
+        "heroAsset": "lucide:crosshair",
+        "headlineAtWord": 5.417,
+        "heroAtWord": 10.667
+      },
+      "durationFrames": 222,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "There's a better way to point at things, and it reads like English.",
+      "data": {
+        "title": "Advanced Locators & Shadow DOM",
+        "subtitle": "The Playwright Dojo · Episode 17"
+      },
+      "durationFrames": 119,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three tricks today. Chaining, which is how you give directions instead of an address. Then combining descriptions, so you can say both of these, or either of these. And last, the sealed box that everybody warns you about — which turns out to be almost no trouble at all.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:corner-down-right",
+              "label": "chaining",
+              "atWord": 4
+            },
+            {
+              "icon": "lucide:combine",
+              "label": "combining",
+              "color": "blue",
+              "atWord": 12.917
+            },
+            {
+              "icon": "lucide:filter",
+              "label": "has / has_not",
+              "color": "blue",
+              "atWord": 18.083
+            },
+            {
+              "icon": "lucide:box",
+              "label": "shadow DOM",
+              "color": "green",
+              "atWord": 22.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 459,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Start with chaining, because honestly it changes how you think about the whole page, not just how you write one line.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Directions, not addresses",
+          "subtitle": "each link searches inside the last"
+        }
+      },
+      "durationFrames": 199,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "SEARCH_NARROW",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Here's how I'd tell a colleague to find it. In the sidebar. Inside that, the Notifications block. Inside that, the Email alerts switch. Notice what happened — each step didn't add to a selector, it shrank the room. By the time we get to that switch there's exactly one place it could be, and nothing else on the page can be confused for it.",
+      "data": {
+        "searchNarrow": {
+          "rootLabel": "the whole settings page",
+          "target": "Email alerts",
+          "targetAction": "click",
+          "caption": "the room shrank. the selector did not.",
+          "color": "purple",
+          "atWord": 2.5,
+          "links": [
+            {
+              "label": "page.get_by_role(\"complementary\")",
+              "text": "the sidebar",
+              "sub": "the main article",
+              "detail": "start in the sidebar",
+              "atWord": 7.083
+            },
+            {
+              "label": ".get_by_role(\"region\")",
+              "text": "Notifications",
+              "sub": "Billing",
+              "detail": "then that block inside it",
+              "atWord": 11.667
+            },
+            {
+              "label": ".get_by_role(\"switch\")",
+              "text": "Email alerts",
+              "sub": "Push alerts",
+              "detail": "then the switch inside that",
+              "atWord": 17.083
+            }
+          ],
+          "targetAtWord": 30.833
+        }
+      },
+      "durationFrames": 608,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Two ways to write it, and they do exactly the same thing. Store each step in a variable if you want the reading order to be obvious — sidebar, then the region, then the switch. Or run the whole thing together as one chain. I use the variables when I'm debugging, honestly, because I can print each one and see what it found.",
+      "data": {
+        "codeRun": {
+          "filename": "test_settings.py",
+          "language": "py",
+          "resultLabel": "what it searches",
+          "color": "purple",
+          "atWord": 2.333,
+          "caption": "same locator, two spellings",
+          "lines": [
+            {
+              "text": "sidebar = page.get_by_role(\"complem…\")",
+              "detail": "search the whole page for this",
+              "sub": "one sidebar found",
+              "label": "step 1",
+              "atWord": 9.917
+            },
+            {
+              "text": "notif = sidebar.get_by_role(\"region\","
+            },
+            {
+              "text": "    name=\"Notifications\")",
+              "detail": "now search only INSIDE it",
+              "sub": "the rest of the page is gone",
+              "label": "step 2",
+              "atWord": 16.75
+            },
+            {
+              "text": "notif.get_by_role(\"switch\","
+            },
+            {
+              "text": "    name=\"Email alerts\").click()",
+              "detail": "and only inside that",
+              "sub": "one switch, no ambiguity",
+              "label": "step 3",
+              "atWord": 23.667
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# or all in one go:"
+            },
+            {
+              "text": "page.get_by_role(\"complementary\") \\",
+              "detail": "the same thing, chained",
+              "sub": "pick whichever reads better",
+              "label": "chained",
+              "atWord": 34.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 539,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "BROWSER_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And on the page? It's this ordinary. Into the sidebar. Then the Notifications block inside it. Then the toggle, and it flips. Nothing clever happening anywhere, no explicit waiting, and not one nth-child in sight. So if a designer reorders those blocks tomorrow morning, this test doesn't care even slightly — the directions still hold, because the sidebar is still the sidebar.",
+      "data": {
+        "browserStep": {
+          "url": "app.example.com/settings",
+          "screenTitle": "Settings",
+          "caption": "reorder the page. directions still hold.",
+          "color": "purple",
+          "atWord": 2.833,
+          "steps": [
+            {
+              "text": "page.get_by_role(\"complementary\")",
+              "title": "goto",
+              "label": "into the sidebar",
+              "detail": "the sidebar",
+              "atWord": 5.667
+            },
+            {
+              "text": ".get_by_role(\"region\", name=\"N\")",
+              "title": "check",
+              "label": "then Notifications",
+              "detail": "Notifications",
+              "sub": "found",
+              "atWord": 11.25
+            },
+            {
+              "text": ".get_by_role(\"switch\").click()",
+              "title": "click",
+              "label": "and flip it",
+              "detail": "Email alerts",
+              "atWord": 17.75
+            },
+            {
+              "text": "expect(sw).to_be_checked()",
+              "title": "assert",
+              "label": "it is on",
+              "detail": "the switch",
+              "sub": "on",
+              "atWord": 24.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 714,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Right. Sometimes one description isn't quite enough on its own, and you need to say two things at once.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Both, either, or neither",
+          "subtitle": "and_, or_, has, has_not"
+        }
+      },
+      "durationFrames": 199,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "SET_LOGIC",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Say four things on the page could plausibly be what you want. Buttons, links, all sorts. And underscore takes two descriptions and keeps only what satisfies both — so it has to be a button, and it has to be titled Save. Save draft is a link, so it goes. Submit has no title. Cancel's title says Close. One survivor.",
+      "data": {
+        "setLogic": {
+          "op": "and_",
+          "opNote": "both must be true",
+          "criteria": [
+            "is a button",
+            "titled Save"
+          ],
+          "countLabel": "matched",
+          "verdict": "exactly one survives",
+          "caption": "and_ narrows. it never widens.",
+          "color": "blue",
+          "atWord": 2.667,
+          "candidates": [
+            {
+              "label": "Save",
+              "sub": "button · title=Save",
+              "title": "keep",
+              "atWord": 15.5
+            },
+            {
+              "label": "Save draft",
+              "sub": "link · title=Save",
+              "title": "drop",
+              "atWord": 22.333
+            },
+            {
+              "label": "Submit",
+              "sub": "button · no title",
+              "title": "drop",
+              "atWord": 26.583
+            },
+            {
+              "label": "Cancel",
+              "sub": "button · title=Close",
+              "title": "drop",
+              "atWord": 30.833
+            }
+          ],
+          "verdictAtWord": 35.083
+        }
+      },
+      "durationFrames": 635,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "In code that's and underscore, with the trailing underscore. Which looks odd, I know. But and and or are reserved words in Python, so Playwright had no choice. Or underscore is the mirror image — whichever one turns up, take it. That's the pattern for when a submit either opens a dialog or throws an error and you genuinely don't know which.",
+      "data": {
+        "codeRun": {
+          "filename": "test_combine.py",
+          "language": "py",
+          "resultLabel": "what matches",
+          "color": "blue",
+          "atWord": 2.667,
+          "caption": "the underscore is Python, not Playwright",
+          "lines": [
+            {
+              "text": "page.get_by_role(\"button\").and_(",
+              "detail": "both descriptions at once",
+              "sub": "button AND titled Save",
+              "label": "and_",
+              "atWord": 10.083
+            },
+            {
+              "text": "    page.get_by_title(\"Save\")).click()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "dialog = page.get_by_role(\"dialog\")"
+            },
+            {
+              "text": "error = page.get_by_role(\"alert\")",
+              "detail": "two things it could turn into",
+              "sub": "a dialog, or an error",
+              "label": "either",
+              "atWord": 24.917
+            },
+            {
+              "text": "expect(dialog.or_(error))",
+              "detail": "whichever one shows up first",
+              "sub": "you do not have to guess",
+              "label": "or_",
+              "atWord": 36.417
+            },
+            {
+              "text": "    .to_be_visible()",
+              "detail": "and assert on whichever landed",
+              "sub": "no guessing required",
+              "label": "assert",
+              "atWord": 43
+            }
+          ]
+        }
+      },
+      "durationFrames": 634,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "SET_LOGIC",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Now a different shape of question. Not what is this thing, but what does it contain. Filter with has-not keeps the containers that are missing something — so, every product card that hasn't got a Sold out badge on it. Three of these six survive. Try writing that as a CSS selector sometime. Go on.",
+      "data": {
+        "setLogic": {
+          "op": "filter(has_not=…)",
+          "opNote": "keeps what lacks a child",
+          "criteria": [
+            "is a product card",
+            "no Sold out badge"
+          ],
+          "countLabel": "still buyable",
+          "verdict": "three of six survive",
+          "caption": "a check about children, not attributes",
+          "color": "green",
+          "atWord": 2.5,
+          "candidates": [
+            {
+              "label": "Blue mug",
+              "sub": "card · in stock",
+              "title": "keep",
+              "atWord": 15.25
+            },
+            {
+              "label": "Red mug",
+              "sub": "card · Sold out",
+              "title": "drop",
+              "atWord": 17.5
+            },
+            {
+              "label": "Coaster set",
+              "sub": "card · in stock",
+              "title": "keep",
+              "atWord": 19.75
+            },
+            {
+              "label": "Tea towel",
+              "sub": "card · Sold out",
+              "title": "drop",
+              "atWord": 22.833
+            },
+            {
+              "label": "Chopboard",
+              "sub": "card · in stock",
+              "title": "keep",
+              "atWord": 25.083
+            }
+          ],
+          "verdictAtWord": 28.083
+        }
+      },
+      "durationFrames": 517,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Here it is. Grab every product card, then filter out any that contain the words Sold out, and click the first one left. Notice the argument is a locator, not a string — you're handing filter a whole description to look for inside each card. And has equals does the opposite, keeping only the ones that do contain it.",
+      "data": {
+        "codeRun": {
+          "filename": "test_shop.py",
+          "language": "py",
+          "resultLabel": "what survives",
+          "color": "green",
+          "atWord": 2.583,
+          "caption": "the filter argument is a locator",
+          "lines": [
+            {
+              "text": "in_stock = page.get_by_test_id(",
+              "detail": "start with every card",
+              "sub": "six of them on the page",
+              "label": "all",
+              "atWord": 8
+            },
+            {
+              "text": "    \"product-card\") \\"
+            },
+            {
+              "text": "    .filter(has_not=page.get_by_text(",
+              "detail": "drop any containing this",
+              "sub": "a locator, not a string",
+              "label": "has_not",
+              "atWord": 20.333
+            },
+            {
+              "text": "        \"Sold out\"))"
+            },
+            {
+              "text": "in_stock.first.click()",
+              "detail": "and take the first one left",
+              "sub": "three were still buyable",
+              "label": "click",
+              "atWord": 32.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 570,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Last one. And it's the one people turn up absolutely terrified of, which I've never really understood.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The sealed puppet box",
+          "subtitle": "shadow DOM, and the one exception"
+        }
+      },
+      "durationFrames": 202,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "DOM_INSPECT",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Open the inspector on one of these fancy date pickers and you hit this. A node called shadow-root, and everything you wanted is behind it. Which is why people turn up to this topic braced for a fight. In Selenium, fair enough. JavaScript incantations.",
+      "data": {
+        "dom": {
+          "selector": "<fancy-datepicker> · shadow root",
+          "highlight": 2,
+          "atWord": 6.167,
+          "nodes": [
+            {
+              "tag": "body",
+              "depth": 0
+            },
+            {
+              "tag": "datepicker",
+              "attr": "<fancy-datepicker>",
+              "depth": 1
+            },
+            {
+              "tag": "#shadow-root",
+              "attr": "(open)",
+              "depth": 2
+            },
+            {
+              "tag": "div",
+              "attr": "class=\"dp-wrap\"",
+              "depth": 3
+            },
+            {
+              "tag": "input",
+              "attr": "aria-label=\"Depa…\"",
+              "depth": 4
+            }
+          ]
+        }
+      },
+      "durationFrames": 474,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "SEALED_BOX",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "In Playwright, though? Get by label just walks in. So does get by role. Plain CSS, same story. Every locator you already know pierces an open shadow root, for free, without anybody asking it to. One exception, mind. XPath genuinely cannot see inside — it's the only tool in the box that can't.",
+      "data": {
+        "sealedBox": {
+          "boxLabel": "<fancy-datepicker>",
+          "wallLabel": "#shadow-root (open)",
+          "contents": "Departure date",
+          "blockedNote": "XPath cannot see inside",
+          "verdict": "no special call needed",
+          "caption": "everything pierces it. except XPath.",
+          "color": "green",
+          "atWord": 2.833,
+          "probes": [
+            {
+              "label": "get_by_label(\"Departure\")",
+              "title": "through",
+              "sub": "straight in",
+              "atWord": 5.667
+            },
+            {
+              "label": "get_by_role(\"textbox\")",
+              "title": "through",
+              "sub": "also fine",
+              "atWord": 10.333
+            },
+            {
+              "label": "locator(\"input.date\")",
+              "title": "through",
+              "sub": "CSS pierces too",
+              "atWord": 14.083
+            },
+            {
+              "label": "get_by_placeholder(\"YYYY\")",
+              "title": "through",
+              "sub": "that one too",
+              "atWord": 20.667
+            },
+            {
+              "label": "locator(\"//input[@id]\")",
+              "title": "blocked",
+              "sub": "the one exception",
+              "atWord": 32.833
+            }
+          ],
+          "verdictAtWord": 34.667
+        }
+      },
+      "durationFrames": 616,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And this is the punchline. The code for reaching inside a shadow root is just… the code. There's no shadow locator function, no piercing flag, no special anything. You write the line you'd have written if the shadow DOM had never existed, and it works. Which is the whole point — the complexity is somebody else's problem now.",
+      "data": {
+        "codeRun": {
+          "filename": "test_shadow.py",
+          "language": "py",
+          "resultLabel": "the result",
+          "color": "green",
+          "atWord": 2.667,
+          "caption": "the boring code IS the feature",
+          "lines": [
+            {
+              "text": "# <fancy-datepicker> hides its input"
+            },
+            {
+              "text": "# inside a shadow root."
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# Selenium: execute_script, tears, etc."
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# Playwright: just locate it, as normal:",
+              "detail": "no piercing flag exists",
+              "sub": "because none is needed",
+              "label": "nothing",
+              "atWord": 11.667
+            },
+            {
+              "text": "page.get_by_label(\"Departure date\") \\",
+              "detail": "what you would write anyway",
+              "sub": "no special call at all",
+              "label": "normal",
+              "atWord": 18.25
+            },
+            {
+              "text": "    .fill(\"2026-08-01\")",
+              "detail": "and it fills the sealed input",
+              "sub": "the date lands",
+              "label": "filled",
+              "atWord": 33.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 593,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Test yourself, because this is the bit people forget. A date input sits inside a shadow DOM. Which one fails to reach it? Pause if you like. Ready? It's C. Every get by and every CSS locator sees inside.",
+      "data": {
+        "quiz": {
+          "question": "A date input is in shadow DOM. Which one fails?",
+          "options": [
+            {
+              "text": "get_by_label(\"Date\")"
+            },
+            {
+              "text": "get_by_role(\"textbox\")"
+            },
+            {
+              "text": "locator(\"//input[@id='date']\")"
+            },
+            {
+              "text": "get_by_placeholder(\"YYYY-MM-DD\")"
+            }
+          ],
+          "answerIndex": 2,
+          "revealAtWord": 26.417,
+          "why": "XPath is the one locator type that cannot pierce shadow roots.",
+          "atWord": 1.917
+        }
+      },
+      "durationFrames": 461,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "One caution, and it catches people. Shadow DOM and iframes look similar from outside — both are a document tucked inside a document. They're not the same thing at all. Your locators pierce a shadow root without being asked. An iframe still needs frame locator, every single time, exactly like episode eleven.",
+      "data": {
+        "ruleTest": {
+          "kicker": "do not mix these up",
+          "rule": "shadow root pierces free. an iframe never does.",
+          "okLabel": "just works",
+          "noLabel": "needs a call",
+          "caption": "they look alike. they behave nothing alike.",
+          "color": "orange",
+          "atWord": 2.833,
+          "cases": [
+            {
+              "text": "get_by_label inside a shadow root",
+              "title": "ok",
+              "sub": "no extra call needed",
+              "atWord": 19.083
+            },
+            {
+              "text": "CSS selectors inside a shadow root",
+              "title": "ok",
+              "sub": "those pierce it as well",
+              "atWord": 24.5
+            },
+            {
+              "text": "the same call inside an iframe",
+              "title": "no",
+              "sub": "frame_locator first — ep 11",
+              "atWord": 30.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 585,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Four lines to take with you. Chaining gives directions, and each link searches inside the last. And underscore narrows to both, or underscore takes either. Filter with has or has-not asks about children. And your locators walk into a shadow root unasked — all except XPath.",
+      "data": {
+        "heading": "Spotlight tricks, in four lines",
+        "points": [
+          {
+            "text": "chain = directions, each inside the last",
+            "atWord": 8.667
+          },
+          {
+            "text": "and_ both · or_ either",
+            "atWord": 16.333
+          },
+          {
+            "text": "filter(has=/has_not=) asks about children",
+            "atWord": 24
+          },
+          {
+            "text": "shadow DOM: free. except XPath.",
+            "atWord": 29.75
+          }
+        ]
+      },
+      "durationFrames": 550,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next time, running the whole suite in parallel, and handing the whole thing over to a robot on a schedule. Whole course is free, by the way, over at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Parallel Runs & CI",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 300,
+      "audio": "audio/pw-dojo-17-advanced-locators_long_s20.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

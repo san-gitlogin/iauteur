@@ -1,0 +1,1109 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP20: The Drill Room",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "twelve real scenarios, and whether you can reach for the right answer under pressure",
+    "openLoop": "Nineteen lessons in — but could you call the right move on the spot?",
+    "analogy": "a drill room: the moves you already know, practised until they are reflexes.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #20 — 12 real scenarios (drill room)",
+      "description": "Twelve situations you will actually meet: the moving table row, the invisible iframe field, the runaway tab, the 25-minute suite, the 3am CI failure. Scenario, four options, then the answer.",
+      "tags": [
+        "playwright",
+        "python",
+        "interview questions",
+        "practice",
+        "scenarios",
+        "testing"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "The Drill Room",
+    "badge": "Dojo · EP 20",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "CALL THE MOVE",
+    "badge": "EP 20 · 12 DRILLS",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Nineteen lessons behind you. So: twelve real situations, and one question — what would you actually do?",
+      "data": {
+        "headline": "TWELVE SCENARIOS.",
+        "subtext": "call the move",
+        "heroAsset": "lucide:swords",
+        "headlineAtWord": 4.167,
+        "heroAtWord": 10.5
+      },
+      "durationFrames": 235,
+      "audio": "audio/pw-dojo-20-drill-room_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Welcome back to THE NBX STUDIO, and welcome to the Drill Room. Nothing new gets taught in this one. Everything here you have already been shown, which is exactly why it is worth finding out whether you can reach for it under pressure.",
+      "data": {
+        "title": "The Drill Room",
+        "subtitle": "The Playwright Dojo · 12 scenarios"
+      },
+      "durationFrames": 377,
+      "audio": "audio/pw-dojo-20-drill-room_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Here's how each one runs. You get the situation, four options, then a few seconds of quiet to commit before I say anything. Say it out loud if you can, because a guess you've said out loud is one you'll remember getting right.",
+      "data": {
+        "ruleTest": {
+          "kicker": "how this works",
+          "rule": "situation · four options · commit · then the answer",
+          "okLabel": "commit",
+          "noLabel": "coast",
+          "caption": "pause any time you want longer",
+          "color": "purple",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "say your answer out loud",
+              "title": "ok",
+              "sub": "you will remember it",
+              "atWord": 11.833
+            },
+            {
+              "text": "wait to be told",
+              "title": "no",
+              "sub": "you will forget by lunch",
+              "atWord": 18.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 380,
+      "audio": "audio/pw-dojo-20-drill-room_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Level one first, and these three are the ones that separate somebody who has read the docs from somebody who has actually written a test.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Level one",
+          "subtitle": "the fundamentals, under pressure"
+        }
+      },
+      "durationFrames": 220,
+      "audio": "audio/pw-dojo-20-drill-room_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "First one. A signup form's Work email field, and the input's got an auto-generated id, a class, and a placeholder. Which locator first? Ready? Option B — get by label, because that id changes the moment anyone edits the form.",
+      "data": {
+        "quiz": {
+          "question": "Which locator do you reach for first?",
+          "options": [
+            {
+              "text": "page.locator(\"#fld_8231\")"
+            },
+            {
+              "text": "page.get_by_label(\"Work email\")"
+            },
+            {
+              "text": "page.locator(\".inp--lg\")"
+            },
+            {
+              "text": "get_by_placeholder(\"you@...\")"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 21.917,
+          "why": "That id is auto-generated. It will change and your test will not.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 478,
+      "audio": "audio/pw-dojo-20-drill-room_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CACHE_PYRAMID",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "That's the ladder from episode four, ordered by how likely a locator is to survive somebody else's redesign. A label is what a human reads, so a label is what you reach for. An auto-generated id is a number a framework invented this morning.",
+      "data": {
+        "pyramid": {
+          "headline": "Robots Love Pizza, Tacos, Two Cokes",
+          "axisTop": "survives a redesign",
+          "axisBottom": "breaks on a restyle",
+          "tiers": [
+            {
+              "label": "get_by_role",
+              "speed": "best",
+              "color": "green"
+            },
+            {
+              "label": "get_by_label",
+              "speed": "forms",
+              "color": "green"
+            },
+            {
+              "label": "get_by_placeholder",
+              "speed": "ok"
+            },
+            {
+              "label": "get_by_text",
+              "speed": "ok"
+            },
+            {
+              "label": "CSS / #id",
+              "speed": "brittle",
+              "color": "orange"
+            }
+          ],
+          "atWord": 1
+        }
+      },
+      "durationFrames": 459,
+      "audio": "audio/pw-dojo-20-drill-room_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Number two. Your test clicks Save, then asserts the Saved toast is visible. Passes locally, fails in CI weekly. The professional fix? Ready? Go with B. expect retries, so the toast gets five seconds to turn up.",
+      "data": {
+        "quiz": {
+          "question": "Passes locally, fails in CI weekly. Fix?",
+          "options": [
+            {
+              "text": "Add time.sleep(3) before it"
+            },
+            {
+              "text": "Use expect(...).to_be_visible()"
+            },
+            {
+              "text": "Re-run CI until it goes green"
+            },
+            {
+              "text": "Pay for a bigger CI machine"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 21.5,
+          "why": "expect() retries for five seconds, and passes the instant it appears.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 455,
+      "audio": "audio/pw-dojo-20-drill-room_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "And notice that expect is not just more reliable than a sleep, expect is usually faster. A sleep of three seconds costs you three seconds even on a good day. expect passes the moment that toast lands, which is often under a hundred milliseconds.",
+      "data": {
+        "ruleTest": {
+          "kicker": "people get this wrong",
+          "rule": "expect() is more reliable AND usually faster than sleep",
+          "okLabel": "retries",
+          "noLabel": "always waits",
+          "caption": "a sleep costs you the full three seconds",
+          "color": "green",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "expect(toast).to_be_visible()",
+              "title": "ok",
+              "sub": "passes the instant it lands",
+              "atWord": 14.333
+            },
+            {
+              "text": "time.sleep(3)",
+              "title": "no",
+              "sub": "three seconds, every run",
+              "atWord": 22.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 467,
+      "audio": "audio/pw-dojo-20-drill-room_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Here's a nasty one. A city box shows suggestions as you type. You call fill with Chennai, the value lands, and the dropdown never opens. Why? Ready? The answer's B — press sequentially, because fill never fires a single keystroke.",
+      "data": {
+        "quiz": {
+          "question": "fill() sets the value but no dropdown. Why?",
+          "options": [
+            {
+              "text": "The site has a bug to report"
+            },
+            {
+              "text": "Use press_sequentially instead"
+            },
+            {
+              "text": "Add sleep(2) after the fill"
+            },
+            {
+              "text": "Click the box twice first"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 23.917,
+          "why": "fill() sets the value in one shot, so no key events ever fire.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 463,
+      "audio": "audio/pw-dojo-20-drill-room_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "This one catches everybody once. fill sets the value in a single shot, so the page never sees a keystroke, and an autocomplete listening for keystrokes has nothing to hear. press sequentially types like a person, so the dropdown wakes up.",
+      "data": {
+        "codeRun": {
+          "filename": "test_search.py",
+          "language": "py",
+          "resultLabel": "what the page sees",
+          "color": "orange",
+          "atWord": 1.75,
+          "caption": "one sets a value. one types.",
+          "lines": [
+            {
+              "text": "box.fill(\"Chennai\")",
+              "detail": "the value lands in one shot",
+              "sub": "zero key events fire",
+              "label": "silent",
+              "atWord": 13.083
+            },
+            {
+              "text": "# dropdown never opens"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "box.press_sequentially(\"Chennai\")",
+              "detail": "typed key by key, like a person",
+              "sub": "the autocomplete wakes up",
+              "label": "typed",
+              "atWord": 25.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 450,
+      "audio": "audio/pw-dojo-20-drill-room_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Level two now. These four are the ones that get asked in interviews, and the ones that cost people an afternoon when they meet them for the first time.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Level two",
+          "subtitle": "the ones that cost an afternoon"
+        }
+      },
+      "durationFrames": 249,
+      "audio": "audio/pw-dojo-20-drill-room_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Level two, and this one's an interview favourite. Thirty users in a table, and you must deactivate only Morpheus, whose row keeps moving. What's robust? Ready? C is the one. Filter the rows by text, then act inside the match.",
+      "data": {
+        "quiz": {
+          "question": "Deactivate one user whose row keeps moving?",
+          "options": [
+            {
+              "text": "Deactivate button .nth(12)"
+            },
+            {
+              "text": "Loop rows with an if inside"
+            },
+            {
+              "text": "row.filter(has_text=...) then act"
+            },
+            {
+              "text": "Ask devs to keep him 13th"
+            }
+          ],
+          "answerIndex": 2,
+          "revealAtWord": 23.917,
+          "why": "Locate all rows, filter by content, then act INSIDE the match.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/pw-dojo-20-drill-room_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "ROW_FILTER",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "That's the filter recipe from episode ten, and the important half is the last step. Locate every row, narrow to the one containing Morpheus, then press the button inside that row — not the twelfth button on the page, which belongs to whoever's sitting there today.",
+      "data": {
+        "rowFilter": {
+          "condition": ".filter(has_text=\"Morpheus\")",
+          "control": "Deactivate",
+          "baseLabel": "get_by_role(\"row\")",
+          "actLabel": ".click()",
+          "pageTitle": "Admin · users",
+          "caption": "narrow to the row. act inside it.",
+          "color": "green",
+          "atWord": 1,
+          "rows": [
+            {
+              "label": "Trinity",
+              "sub": "Deactivate"
+            },
+            {
+              "label": "Morpheus",
+              "title": "keep",
+              "sub": "Deactivate"
+            },
+            {
+              "label": "Cypher",
+              "sub": "Deactivate"
+            },
+            {
+              "label": "Switch",
+              "sub": "Deactivate"
+            }
+          ],
+          "filterAtWord": 14.417,
+          "actAtWord": 23.25
+        }
+      },
+      "durationFrames": 464,
+      "audio": "audio/pw-dojo-20-drill-room_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Now this one wastes afternoons. The card number field in a Stripe widget is right there on screen, you can see it, and fill times out anyway. What's happening? Ready? C. That field is sitting inside an iframe.",
+      "data": {
+        "quiz": {
+          "question": "You can SEE the field. fill() times out. Why?",
+          "options": [
+            {
+              "text": "The field is disabled"
+            },
+            {
+              "text": "Stripe is blocking robots"
+            },
+            {
+              "text": "It is in an iframe"
+            },
+            {
+              "text": "Use press_sequentially"
+            }
+          ],
+          "answerIndex": 2,
+          "revealAtWord": 23.583,
+          "why": "\"I can see it but Playwright cannot find it\" is the iframe symptom.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 392,
+      "audio": "audio/pw-dojo-20-drill-room_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "FRAME_BOUNDARY",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Learn that symptom by heart, because it saves an hour every time. I can see it and Playwright can't find it means a document inside a document, and payment widgets are always iframes. Frame locator steps inside, and the same locator works fine.",
+      "data": {
+        "frameBoundary": {
+          "outerTitle": "checkout.shop.com",
+          "innerTitle": "Secure payment",
+          "outerItems": [
+            "Your basket",
+            "Pay now"
+          ],
+          "innerItems": [
+            {
+              "label": "Card number",
+              "title": "target"
+            },
+            {
+              "label": "Expiry"
+            }
+          ],
+          "attempt": "page.get_by_label(\"Card number\")",
+          "crossing": "page.frame_locator(\"iframe\")",
+          "failNote": "TimeoutError",
+          "okNote": "found, inside",
+          "caption": "you can see it. the page cannot reach it.",
+          "color": "orange",
+          "atWord": 1,
+          "crossAtWord": 21.25
+        }
+      },
+      "durationFrames": 443,
+      "audio": "audio/pw-dojo-20-drill-room_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Next. Clicking View invoice opens a new tab, and your title assertion fails, because page still points at the tab you started on. The fix? Ready? B — expect popup, armed before the click, because a listener can't catch what already happened.",
+      "data": {
+        "quiz": {
+          "question": "A click opens a new tab. Assertion fails. Fix?",
+          "options": [
+            {
+              "text": "Sleep, then check the title again"
+            },
+            {
+              "text": "expect_popup() around the click"
+            },
+            {
+              "text": "Check the title twice"
+            },
+            {
+              "text": "Ask the devs to stop using tabs"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 22.333,
+          "why": "Arm the listener BEFORE the click, then read info.value.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 471,
+      "audio": "audio/pw-dojo-20-drill-room_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "TRAP_TRIGGER",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Trap, then trigger. The order is the entire answer here, because a listener armed after the event has already happened catches precisely nothing. So you arm expect popup first, you do the click inside that block, and afterwards info dot value is the new page.",
+      "data": {
+        "trapTrigger": {
+          "listener": "with page.expect_popup() as p:",
+          "trigger": "get_by_role(\"link\").click()",
+          "catcher": "p.value",
+          "caught": "the invoice tab",
+          "caughtItems": [
+            "Invoice #42",
+            "Download PDF"
+          ],
+          "originLabel": "the original tab",
+          "mode": "trap",
+          "caption": "arm it first. then cause the event.",
+          "color": "green",
+          "atWord": 1,
+          "armAtWord": 12.083,
+          "fireAtWord": 22.667
+        }
+      },
+      "durationFrames": 457,
+      "audio": "audio/pw-dojo-20-drill-room_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Try this one. Upload avatar opens an operating system file picker, and your locators can't touch an OS window. So what's the Playwright way? Ready? You want B. Hand the file straight to the input and skip the dialog entirely.",
+      "data": {
+        "quiz": {
+          "question": "An OS file picker opens. Locators cannot reach it.",
+          "options": [
+            {
+              "text": "Drive the mouse with PyAutoGUI"
+            },
+            {
+              "text": "set_input_files() on the input"
+            },
+            {
+              "text": "Uploads cannot be automated"
+            },
+            {
+              "text": "Drag and drop with mouse events"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 21.25,
+          "why": "Hand the file straight to the <input type=\"file\"> and skip the dialog.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 446,
+      "audio": "audio/pw-dojo-20-drill-room_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "PICKER_BYPASS",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "You never open that picker at all, which is the bit that feels like cheating. Set input files hands the file directly to the file input underneath, exactly as if a person had chosen it, and the operating system window never gets involved.",
+      "data": {
+        "pickerBypass": {
+          "inputLabel": "Upload avatar",
+          "pickerTitle": "Open File",
+          "pickerItems": [
+            "avatar.png",
+            "holiday.jpg"
+          ],
+          "files": [
+            "avatar.png"
+          ],
+          "call": ".set_input_files(\"avatar.png\")",
+          "blockedNote": "not a web page",
+          "landedNote": "1 file attached",
+          "pageTitle": "Your profile",
+          "caption": "skip the dialog. hand it the file.",
+          "color": "green",
+          "atWord": 1,
+          "handAtWord": 16
+        }
+      },
+      "durationFrames": 413,
+      "audio": "audio/pw-dojo-20-drill-room_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "And level three. These five are the senior calls — the ones where the right answer is not a different line of code, but a different idea about where the test should even happen.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Level three",
+          "subtitle": "the senior calls"
+        }
+      },
+      "durationFrames": 285,
+      "audio": "audio/pw-dojo-20-drill-room_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Level three now. Your product manager wants the orders page for a user with zero orders, and staging hasn't got one. How do you test that today? Ready? B again — mock the response, because impossible data is one line.",
+      "data": {
+        "quiz": {
+          "question": "You need a user with ZERO orders. None exists.",
+          "options": [
+            {
+              "text": "Wait for another team's ticket"
+            },
+            {
+              "text": "route() and fulfill an empty list"
+            },
+            {
+              "text": "Delete every order in staging"
+            },
+            {
+              "text": "Screenshot production instead"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 23.75,
+          "why": "route + fulfill makes impossible data one line of code.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 443,
+      "audio": "audio/pw-dojo-20-drill-room_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "SAD_PATHS",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "The empty state is the one everybody ships without ever looking at, because producing it for real is somebody else's ticket. Mock the response and the impossible state becomes one line, available on every single run, for ever.",
+      "data": {
+        "sadPaths": {
+          "screenTitle": "Your orders",
+          "rows": [
+            "Order #1201",
+            "Order #1202"
+          ],
+          "emptyText": "No orders yet",
+          "errorText": "Something went wrong",
+          "caption": "one line each. every run.",
+          "color": "green",
+          "atWord": 1,
+          "states": [
+            {
+              "label": "the happy path",
+              "title": "ok",
+              "text": "json=[two orders]",
+              "sub": "everyone tests this",
+              "atWord": 7
+            },
+            {
+              "label": "zero orders",
+              "title": "empty",
+              "text": "route.fulfill(json=[])",
+              "sub": "does the copy read ok?",
+              "atWord": 13.917
+            },
+            {
+              "label": "the API is down",
+              "title": "error",
+              "text": "route.fulfill(status=500)",
+              "sub": "or a white screen?",
+              "atWord": 20.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 418,
+      "audio": "audio/pw-dojo-20-drill-room_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "A hundred and eighty tests, twenty five minutes, and every one logs in through the interface at six seconds a go. Get it under ten. Which combination? Ready? C. Storage state, then dash n auto, because those two stack.",
+      "data": {
+        "quiz": {
+          "question": "180 tests, 25 minutes. Get under 10.",
+          "options": [
+            {
+              "text": "A bigger CI machine, that is all"
+            },
+            {
+              "text": "Tune the time.sleep calls down"
+            },
+            {
+              "text": "storage_state, plus -n auto"
+            },
+            {
+              "text": "Convert every test to an API test"
+            }
+          ],
+          "answerIndex": 2,
+          "revealAtWord": 25,
+          "why": "One real login instead of 180, then split what is left across workers.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 454,
+      "audio": "audio/pw-dojo-20-drill-room_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "WORKER_SPREAD",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Two ideas stacked, and the order matters. Storage state removes a hundred and seventy nine logins, which is roughly eighteen minutes gone on its own. Then dash n auto takes whatever is left and spreads it across workers, because the work never got faster — the work just stopped queuing.",
+      "data": {
+        "workerSpread": {
+          "queueLabel": "180 tests · one login",
+          "items": [
+            "test_checkout",
+            "test_profile",
+            "test_search",
+            "test_refund"
+          ],
+          "beforeLabel": "25m, one worker",
+          "afterLabel": "under 10m",
+          "note": "only because tests are isolated",
+          "caption": "log in once. then spread the rest.",
+          "color": "green",
+          "atWord": 1.667,
+          "lanes": [
+            {
+              "label": "gw0",
+              "sub": "45 tests",
+              "detail": "2m20s",
+              "atWord": 13.833
+            },
+            {
+              "label": "gw1",
+              "sub": "45 tests",
+              "detail": "2m24s",
+              "atWord": 16.333
+            },
+            {
+              "label": "gw2",
+              "sub": "45 tests",
+              "detail": "2m19s",
+              "atWord": 18.75
+            },
+            {
+              "label": "gw3",
+              "sub": "45 tests",
+              "detail": "2m22s",
+              "atWord": 21.167
+            }
+          ],
+          "afterAtWord": 26.083
+        }
+      },
+      "durationFrames": 510,
+      "audio": "audio/pw-dojo-20-drill-room_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Here's one you'll actually hit. The app should show a Retry button when the products API returns a five hundred, and the real API won't fail on demand. Test it permanently? Ready? B — route the call and fulfil a five hundred yourself.",
+      "data": {
+        "quiz": {
+          "question": "Test the 500 screen. The API never fails.",
+          "options": [
+            {
+              "text": "Unplug the server mid-test"
+            },
+            {
+              "text": "route() and fulfill status=500"
+            },
+            {
+              "text": "This one cannot be automated"
+            },
+            {
+              "text": "Test during the next outage"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 25.75,
+          "why": "fulfill(status=500) fakes the disaster reliably, in milliseconds.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 450,
+      "audio": "audio/pw-dojo-20-drill-room_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "MAIL_ROOM",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Route puts you in the mail room, and once you are standing in the mail room every request stops at your desk on the way past. You decide what happens to each one. Answer it yourself with a five hundred, and the disaster you could never schedule happens on cue, every run.",
+      "data": {
+        "mailRoom": {
+          "pattern": "**/api/products",
+          "deskLabel": "page.route",
+          "serverLabel": "the real server",
+          "browserLabel": "your page",
+          "caption": "every letter stops at your desk",
+          "color": "green",
+          "atWord": 1.333,
+          "requests": [
+            {
+              "label": "GET /api/products",
+              "title": "fulfill",
+              "sub": "status=500",
+              "atWord": 11.417
+            },
+            {
+              "label": "GET /logo.png",
+              "title": "continue",
+              "sub": "on to the server",
+              "atWord": 16.833
+            },
+            {
+              "label": "POST /api/cart",
+              "title": "continue",
+              "sub": "untouched",
+              "atWord": 20.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 441,
+      "audio": "audio/pw-dojo-20-drill-room_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "The three a.m. mystery. test checkout fails in CI weekly, always passes on your machine, and the log just says TimeoutError. How do you see what happened? Ready? B. Keep a trace, because a log can't show you the page.",
+      "data": {
+        "quiz": {
+          "question": "Fails weekly in CI. Never locally. Log says timeout.",
+          "options": [
+            {
+              "text": "Add print statements everywhere"
+            },
+            {
+              "text": "Keep a trace, then show-trace it"
+            },
+            {
+              "text": "Mark the test as skipped"
+            },
+            {
+              "text": "Blame the network and move on"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 23.667,
+          "why": "The trace is a flight recorder from the actual failing run.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 442,
+      "audio": "audio/pw-dojo-20-drill-room_long_s27.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s28",
+      "type": "TRACE_SCRUB",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "A trace is a flight recorder, and that is not a metaphor I am stretching. You get a DOM snapshot before and after every action, the console, and the network — recorded on the machine where the failure actually happened, which is a machine that no longer exists.",
+      "data": {
+        "traceScrub": {
+          "traceFile": "trace.zip",
+          "openWith": "playwright show-trace trace.zip",
+          "snapshot": [
+            "Your basket",
+            "Blue mug · £14",
+            "Checkout"
+          ],
+          "caption": "the failing run, kept in a file",
+          "color": "purple",
+          "atWord": 1,
+          "steps": [
+            {
+              "label": "goto /checkout",
+              "sub": "GET /checkout 200",
+              "atWord": 9.5
+            },
+            {
+              "label": "click Pay now",
+              "title": "fail",
+              "sub": "element not visible",
+              "detail": "a banner was on top",
+              "atWord": 14.667
+            },
+            {
+              "label": "expect(receipt)",
+              "sub": "never reached",
+              "atWord": 18.25
+            }
+          ],
+          "rewindAtWord": 22.667
+        }
+      },
+      "durationFrames": 442,
+      "audio": "audio/pw-dojo-20-drill-room_long_s28.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s29",
+      "type": "QUIZ_CARD",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Last one, and it separates levels. Archiving a project needs a project, and building one through the interface is twelve clicks. How does a senior structure that? Ready? B — create it by API, because the create form isn't what you're testing.",
+      "data": {
+        "quiz": {
+          "question": "The setup is 12 clicks. The test is one click.",
+          "options": [
+            {
+              "text": "Do the twelve clicks each run"
+            },
+            {
+              "text": "Create by API, archive in the UI"
+            },
+            {
+              "text": "Reuse yesterday's project"
+            },
+            {
+              "text": "Hardcode a staging project id"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 22.083,
+          "why": "UI for the behaviour under test, API for the scenery.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 433,
+      "audio": "audio/pw-dojo-20-drill-room_long_s29.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s30",
+      "type": "STAGE_HANDOFF",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Nobody is testing the create form today, so the create form is scenery. One post request builds the project in about a tenth of a second, and then the browser opens for the one thing you actually came to check. When that test goes red, you know why, because the only interface in it is the archive flow.",
+      "data": {
+        "stageHandoff": {
+          "testName": "test_archive_project",
+          "railLabel": "setup · by API",
+          "stageLabel": "the test · by UI",
+          "handoffLabel": "hang up. open the page.",
+          "verdict": "when it fails, you know why",
+          "caption": "scenery by phone. the scene on stage.",
+          "color": "blue",
+          "atWord": 1.333,
+          "steps": [
+            {
+              "label": "api.post(\"/api/projects\")",
+              "sub": "0.1s",
+              "title": "api",
+              "atWord": 8.75
+            },
+            {
+              "label": "read the new id back",
+              "sub": "no browser yet",
+              "title": "api",
+              "atWord": 12.167
+            },
+            {
+              "label": "page.goto(\"/projects\")",
+              "sub": "now we look",
+              "title": "ui",
+              "atWord": 18.917
+            },
+            {
+              "label": "click Archive",
+              "sub": "the behaviour",
+              "title": "ui",
+              "atWord": 22.333
+            },
+            {
+              "label": "expect(row).to_have_text(\"Arch…\")",
+              "sub": "the question",
+              "title": "ui",
+              "atWord": 24.333
+            }
+          ],
+          "handoffAtWord": 16.917,
+          "verdictAtWord": 26.333
+        }
+      },
+      "durationFrames": 491,
+      "audio": "audio/pw-dojo-20-drill-room_long_s30.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s31",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "If you got most of those, you are genuinely ready for an interview, and more importantly you are ready for a Tuesday. Notice how few of the answers were a clever line of code. Nearly all of them were a decision about where the test should happen at all.",
+      "data": {
+        "heading": "What twelve drills actually taught",
+        "points": [
+          {
+            "text": "the ladder decides your locator",
+            "atWord": 7.083
+          },
+          {
+            "text": "expect() over sleep, always",
+            "atWord": 12.25
+          },
+          {
+            "text": "mock what you cannot cause",
+            "atWord": 16.083
+          },
+          {
+            "text": "API for scenery, UI for behaviour",
+            "atWord": 20.583
+          }
+        ]
+      },
+      "durationFrames": 399,
+      "audio": "audio/pw-dojo-20-drill-room_long_s31.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s32",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "One episode left, and it is the cheat sheet — every command, on one screen, for the night before an interview. The whole course is free, over at the Playwright Dojo.",
+      "data": {
+        "message": "Next: the Cheat Sheet",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 308,
+      "audio": "audio/pw-dojo-20-drill-room_long_s32.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

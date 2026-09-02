@@ -1,0 +1,660 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP11: Frames, Tabs & Popups",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "how to reach inside an iframe and how to catch a new tab before it gets away",
+    "openLoop": "You can see the field on screen — so why does Playwright say it does not exist?",
+    "analogy": "An iframe is a puppet theatre standing on your stage; a popup is a whole new stage.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #11 — iframes, tabs and popups",
+      "description": "Your locator cannot see inside an iframe. frame_locator() steps in first. And expect_popup() catches a new tab — but only if you listen before you click.",
+      "tags": [
+        "playwright",
+        "python",
+        "iframe",
+        "frame_locator",
+        "expect_popup",
+        "new tab",
+        "test automation"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Frames & Popups",
+    "badge": "Dojo · EP 11",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "YOU SEE IT. IT CANNOT.",
+    "badge": "EP 11 · IFRAMES",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You can see the field on your screen. Playwright says it does not exist.",
+      "data": {
+        "headline": "YOU SEE IT. IT DOES NOT.",
+        "subtext": "and the test times out",
+        "heroAsset": "lucide:app-window",
+        "headlineAtWord": 3.167,
+        "heroAtWord": 6.833
+      },
+      "durationFrames": 145,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "There are two reasons for that, and today you learn both.",
+      "data": {
+        "title": "Frames, Tabs & Popups",
+        "subtitle": "The Playwright Dojo · Episode 11"
+      },
+      "durationFrames": 115,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three things today. A page hidden inside another page. A brand new tab that opens on you. And one pattern you will keep meeting.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:square-stack",
+              "label": "a page in a page",
+              "color": "purple",
+              "atWord": 5.417
+            },
+            {
+              "icon": "lucide:external-link",
+              "label": "a whole new tab",
+              "color": "blue",
+              "atWord": 10.667
+            },
+            {
+              "icon": "lucide:crosshair",
+              "label": "trap, then trigger",
+              "color": "green",
+              "atWord": 14.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 273,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Let us start with the one that catches almost everybody out.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Inside an iframe",
+          "subtitle": "a page within a page"
+        }
+      },
+      "durationFrames": 120,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "An iframe is a whole web page living inside another web page. Look at the shape. There is your page. And then, right in the middle of it, a second page starts. Payment forms, embedded videos and chat widgets are almost always built this way.",
+      "data": {
+        "code": {
+          "filename": "what the browser sees",
+          "language": "html",
+          "lines": [
+            {
+              "text": "<html>            <!-- your page -->"
+            },
+            {
+              "text": "  <h1>Checkout</h1>"
+            },
+            {
+              "text": "  <iframe>",
+              "color": "purple"
+            },
+            {
+              "text": "     <html>      <!-- a SECOND page -->",
+              "color": "purple"
+            },
+            {
+              "text": "       <input label=\"Card number\">",
+              "color": "purple"
+            },
+            {
+              "text": "     </html>",
+              "color": "purple"
+            },
+            {
+              "text": "  </iframe>",
+              "color": "purple"
+            },
+            {
+              "text": "</html>"
+            }
+          ],
+          "atWord": 11.417
+        }
+      },
+      "durationFrames": 455,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "FRAME_BOUNDARY",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Watch what your locator does. It searches your page, top to bottom, and stops at the edge of that second page. You can see the card field. It just lives somewhere the search cannot reach. Now step across the border, and the same locator finds it.",
+      "data": {
+        "frameBoundary": {
+          "outerTitle": "checkout.shop.com",
+          "innerTitle": "Secure payment",
+          "outerItems": [
+            "Your basket",
+            "Delivery address",
+            "Pay now"
+          ],
+          "attempt": "page.get_by_label(\"Card number\")",
+          "crossing": "page.frame_locator(\"iframe\")",
+          "failNote": "TimeoutError",
+          "okNote": "found it, inside",
+          "caption": "same locator. different room.",
+          "color": "purple",
+          "atWord": 1.75,
+          "crossAtWord": 23.667,
+          "innerItems": [
+            {
+              "label": "Card number",
+              "title": "target"
+            },
+            {
+              "label": "Expiry"
+            },
+            {
+              "label": "CVC"
+            }
+          ]
+        }
+      },
+      "durationFrames": 452,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So here is the fix, and it is one extra step. The first line is the one that fails. The second line steps inside the frame first. And then the third line is your normal locator again, chained onto it. Same spotlight, just pointed into the right room.",
+      "data": {
+        "codeRun": {
+          "filename": "pay.py",
+          "language": "py",
+          "resultLabel": "what happens",
+          "color": "purple",
+          "atWord": 2.583,
+          "caption": "step inside first, then look",
+          "lines": [
+            {
+              "text": "# fails - looks at your page only",
+              "detail": "this one never finds it",
+              "sub": "TimeoutError, 30s",
+              "label": "error",
+              "atWord": 9.75
+            },
+            {
+              "text": "page.get_by_label(\"Card number\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "stripe = page.frame_locator(",
+              "detail": "step inside the frame first",
+              "sub": "now you are in there",
+              "label": "inside",
+              "atWord": 19.333
+            },
+            {
+              "text": "    \"iframe[title='Secure payment']\")"
+            },
+            {
+              "text": "stripe.get_by_label(\"Card number\")",
+              "detail": "then your normal locator",
+              "sub": "found, and filled",
+              "label": "ok",
+              "atWord": 28.917
+            },
+            {
+              "text": "    .fill(\"4242 4242 4242 4242\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 481,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Keep this one in your pocket. If you can see it but the test cannot, suspect an iframe first. Here are two real symptoms. Only one of them is an iframe.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the symptom",
+          "rule": "visible on screen, but the locator times out",
+          "okLabel": "iframe",
+          "noLabel": "not an iframe",
+          "caption": "chat widgets are nearly always iframes",
+          "color": "purple",
+          "atWord": 1.75,
+          "cases": [
+            {
+              "text": "a chat box you can type in",
+              "title": "ok",
+              "sub": "almost always an iframe",
+              "atWord": 11.917
+            },
+            {
+              "text": "a button hidden by a banner",
+              "title": "no",
+              "sub": "that one is episode seven",
+              "atWord": 15.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 292,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Quick check. You can see the chat box, but get by placeholder times out on it. Most likely cause? Pause here if you want a longer look. Ready? The answer is B. It is sitting inside an iframe.",
+      "data": {
+        "quiz": {
+          "question": "You SEE the chat box. The locator times out. Why?",
+          "options": [
+            {
+              "text": "Playwright is broken"
+            },
+            {
+              "text": "It is inside an iframe"
+            },
+            {
+              "text": "You need time.sleep(5)"
+            },
+            {
+              "text": "The placeholder is invisible"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 22.75,
+          "why": "\"I can see it but Playwright cannot\" is THE iframe symptom.",
+          "atWord": 1.833
+        }
+      },
+      "durationFrames": 389,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Now the second one, which is about timing rather than place.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "A new tab opens",
+          "subtitle": "catching it in time"
+        }
+      },
+      "durationFrames": 120,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "BROWSER_STEP",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Some links open a new tab instead of moving you. You click Docs, and a second tab appears. But your page object is still pointing at the old one. So how do you get hold of the new one?",
+      "data": {
+        "browserStep": {
+          "url": "playwright.dev",
+          "screenTitle": "Playwright",
+          "caption": "the click opens a second tab",
+          "color": "blue",
+          "atWord": 3,
+          "steps": [
+            {
+              "text": "page.goto(\"https://playwright.dev\")",
+              "title": "goto",
+              "label": "open the site",
+              "detail": "the browser",
+              "atWord": 8.5
+            },
+            {
+              "text": "page.get_by_role(\"link\",",
+              "title": "click",
+              "label": "click the Docs link",
+              "detail": "Docs",
+              "color": "blue",
+              "atWord": 14.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 339,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "TRAP_TRIGGER",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here is the obvious way to write it, and it does not work. You click first. The tab opens straight away. And only then do you start listening for it. By that point the popup has already come and gone.",
+      "data": {
+        "trapTrigger": {
+          "listener": "with page.expect_popup() as p:",
+          "trigger": "page.get_by_role(\"link\").click()",
+          "caught": "the popup",
+          "mode": "missed",
+          "missNote": "nobody was listening yet",
+          "caption": "the popup came and went, unseen",
+          "color": "red",
+          "atWord": 1.75,
+          "armAtWord": 9.333,
+          "fireAtWord": 19.25
+        }
+      },
+      "durationFrames": 385,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "TRAP_TRIGGER",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Now swap the two lines around. Start listening first. Then, inside that block, do the click. The tab opens into something that is already waiting for it, and you get back a whole new page object.",
+      "data": {
+        "trapTrigger": {
+          "listener": "with page.expect_popup() as p:",
+          "trigger": "page.get_by_role(\"link\").click()",
+          "catcher": "docs_page = p.value",
+          "caught": "a new page",
+          "caughtItems": [
+            "Documentation",
+            "Search docs"
+          ],
+          "originLabel": "the original tab",
+          "mode": "trap",
+          "caption": "set the trap, then trigger it",
+          "color": "green",
+          "atWord": 1.833,
+          "armAtWord": 9,
+          "fireAtWord": 17.75
+        }
+      },
+      "durationFrames": 366,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Here it is for real. Line one sets the trap and starts listening. Line two does the click, and notice it is indented, so it happens inside the block. Then you read the new page out of it. And your original page still works exactly as before.",
+      "data": {
+        "codeRun": {
+          "filename": "tabs.py",
+          "language": "py",
+          "resultLabel": "what you get",
+          "color": "green",
+          "atWord": 2.5,
+          "caption": "listen first, then click",
+          "lines": [
+            {
+              "text": "with page.expect_popup() as popup_info:",
+              "detail": "set the trap first",
+              "sub": "now listening",
+              "label": "armed",
+              "atWord": 6.167
+            },
+            {
+              "text": "    page.get_by_role(\"link\",",
+              "detail": "the click, inside the block",
+              "sub": "a new tab opens",
+              "label": "fired",
+              "atWord": 16.583
+            },
+            {
+              "text": "        name=\"Docs\").click()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "docs_page = popup_info.value",
+              "detail": "and here is the new page",
+              "sub": "a full Page object",
+              "label": "caught",
+              "atWord": 27
+            },
+            {
+              "text": "page.get_by_role(\"button\").click()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 439,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "And that new page is a real page, not some special popup thing. You can check its title. You can type into it. Everything you already know still works, on the tab you just caught.",
+      "data": {
+        "codeRun": {
+          "filename": "tabs.py",
+          "language": "py",
+          "resultLabel": "what it does",
+          "color": "green",
+          "atWord": 2.5,
+          "caption": "a caught tab is just a page",
+          "lines": [
+            {
+              "text": "docs_page = popup_info.value"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "expect(docs_page).to_have_title(",
+              "detail": "check it, like any page",
+              "sub": "title matches, retried",
+              "label": "expect",
+              "atWord": 7.75
+            },
+            {
+              "text": "    \"Documentation\")"
+            },
+            {
+              "text": "docs_page.get_by_placeholder(",
+              "detail": "and type into it, like any page",
+              "sub": "search box filled",
+              "label": "fill",
+              "atWord": 18.25
+            },
+            {
+              "text": "    \"Search\").fill(\"locators\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 336,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "And remember the shape, because you will meet it again. Set the trap, then trigger it. Downloads and file pickers use the very same pattern.",
+      "data": {
+        "ruleTest": {
+          "kicker": "trap, then trigger",
+          "rule": "start listening BEFORE you cause the event",
+          "okLabel": "catches it",
+          "noLabel": "misses it",
+          "caption": "downloads and uploads work the same way",
+          "color": "green",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "listen, then click",
+              "title": "ok",
+              "sub": "the trap was ready",
+              "atWord": 11.25
+            },
+            {
+              "text": "click, then listen",
+              "title": "no",
+              "sub": "a race you will lose",
+              "atWord": 14.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 278,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Last check. Why must the click go inside the with block? Pause here if you want a longer look. Ready? The answer is B. Playwright has to be listening before the popup happens.",
+      "data": {
+        "quiz": {
+          "question": "Why must the click go INSIDE the with block?",
+          "options": [
+            {
+              "text": "Python syntax demands it"
+            },
+            {
+              "text": "It must listen before it happens"
+            },
+            {
+              "text": "It is only a style choice"
+            },
+            {
+              "text": "The click is faster inside"
+            }
+          ],
+          "answerIndex": 1,
+          "revealAtWord": 16.167,
+          "why": "Set the trap, then trigger it. Otherwise it is a race you lose.",
+          "atWord": 1.833
+        }
+      },
+      "durationFrames": 337,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "So, three lines to remember. A frame is a page inside a page, so step inside it first. A new tab is a whole new page. And always start listening before you click.",
+      "data": {
+        "heading": "Frames and tabs, in three lines",
+        "points": [
+          {
+            "text": "step inside a frame before you look",
+            "atWord": 8.583
+          },
+          {
+            "text": "a new tab is a whole new page",
+            "atWord": 14.417
+          },
+          {
+            "text": "listen first, then click",
+            "atWord": 18.583
+          }
+        ]
+      },
+      "durationFrames": 353,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Next time, dialogs, uploads and downloads. The whole course is free at the Playwright Dojo.",
+      "data": {
+        "message": "Next: Dialogs, Uploads & Downloads",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 208,
+      "audio": "audio/pw-dojo-11-frames-tabs_long_s19.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

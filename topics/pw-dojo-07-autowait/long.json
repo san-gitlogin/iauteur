@@ -1,0 +1,903 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP07: Auto-Waiting",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "why time.sleep() causes flaky tests, and the five-point checklist Playwright runs before every action",
+    "openLoop": "Why does the same suite pass on your laptop and fail on the build server?",
+    "analogy": "Playwright runs a pilot’s pre-flight checklist before it touches an element.",
+    "topicAxes": [
+      "skill-acquisition",
+      "tooling-shift"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #7 — Auto-Waiting (stop using sleep)",
+      "altTitles": [
+        "Why your Playwright tests are flaky — and the fix is deleting code"
+      ],
+      "description": "Why time.sleep() is guessing, the five actionability checks Playwright runs before every click, and how to wait for a condition instead of a number.",
+      "tags": [
+        "playwright",
+        "python",
+        "auto-waiting",
+        "flaky tests",
+        "time.sleep",
+        "actionability",
+        "playwright python",
+        "playwright tutorial",
+        "test automation"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "AUTO-WAITING",
+    "badge": "Dojo · EP 7",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The same test suite passes on your laptop and fails on the build server. Nobody touched the code.",
+      "data": {
+        "headline": "PASSES HERE. FAILS THERE.",
+        "subtext": "and nobody changed a line of code",
+        "heroAsset": "lucide:hourglass",
+        "headlineAtWord": 4,
+        "heroAtWord": 8.583
+      },
+      "durationFrames": 185,
+      "audio": "audio/pw-dojo-07-autowait_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TEST_MATRIX",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Same four tests, three different machines. Green on your laptop. Green on a colleague's. And on the build server, checkout goes red — not every time, which is the worst part, just often enough that nobody trusts the suite any more.",
+      "data": {
+        "testMatrix": {
+          "headline": "Same code, different machine, different answer",
+          "rows": [
+            "login",
+            "search",
+            "checkout",
+            "profile"
+          ],
+          "cols": [
+            "laptop",
+            "colleague",
+            "CI"
+          ],
+          "cells": [
+            {
+              "r": 0,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 2,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 2,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 2,
+              "c": 2,
+              "status": "flaky"
+            },
+            {
+              "r": 3,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 3,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 3,
+              "c": 2,
+              "status": "pass"
+            }
+          ],
+          "emphasize": {
+            "r": 2,
+            "c": 2
+          },
+          "atWord": 14.083
+        }
+      },
+      "durationFrames": 400,
+      "audio": "audio/pw-dojo-07-autowait_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "That word, flaky, is the most expensive word in test automation. It costs trust, and once a team stops trusting a red build, the suite may as well not exist.",
+      "data": {
+        "title": "AUTO-WAITING",
+        "subtitle": "The Playwright Dojo · Episode 7"
+      },
+      "durationFrames": 333,
+      "audio": "audio/pw-dojo-07-autowait_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "You have met the spotlight that finds your actor, the directions you give them, and the critic who says whether it went right. Here is what nobody mentioned: all three have been waiting for the stage to be ready this entire time.",
+      "data": {
+        "stage": {
+          "marquee": "the-internet.herokuapp.com",
+          "curtain": "raising",
+          "actors": [
+            {
+              "label": "Username",
+              "kind": "field",
+              "atWord": 6
+            },
+            {
+              "label": "Password",
+              "kind": "field",
+              "atWord": 8.167
+            },
+            {
+              "label": "Login",
+              "kind": "button",
+              "atWord": 9.667
+            }
+          ],
+          "spotlightIndex": 2,
+          "caption": "none of them ever rushed",
+          "atWord": 3.917
+        }
+      },
+      "durationFrames": 384,
+      "audio": "audio/pw-dojo-07-autowait_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Three parts. Why sleeping is a disease and not a fix, the pre-flight checklist Playwright runs before it touches anything at all, and how to wait properly on the rare day you genuinely have to.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:bed-double",
+              "label": "The sleep disease",
+              "atWord": 5.583
+            },
+            {
+              "icon": "lucide:clipboard-check",
+              "label": "Pre-flight checks",
+              "atWord": 11.667
+            },
+            {
+              "icon": "lucide:target",
+              "label": "Waiting properly",
+              "atWord": 17
+            }
+          ]
+        }
+      },
+      "durationFrames": 341,
+      "audio": "audio/pw-dojo-07-autowait_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Almost every flaky test in the world traces back to one habit. This is the episode that kills it.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "The sleep disease",
+          "subtitle": "Guessing, dressed as engineering"
+        }
+      },
+      "durationFrames": 206,
+      "audio": "audio/pw-dojo-07-autowait_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Every beginner writes this, and plenty of people keep writing it for years. Go to the page. Sleep five seconds, because the page probably needs a moment. Click the menu. Sleep two more, just to be safe. Every one of those numbers is a guess.",
+      "data": {
+        "code": {
+          "filename": "old_way.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "import time"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "page.goto(\"https://app.example.com\")"
+            },
+            {
+              "text": "time.sleep(5)          # guessing",
+              "color": "red"
+            },
+            {
+              "text": "page.click(\"#menu\")  # old-style, and still guessing"
+            },
+            {
+              "text": "time.sleep(2)          # more guessing",
+              "color": "red"
+            }
+          ],
+          "atWord": 10.75
+        }
+      },
+      "durationFrames": 427,
+      "audio": "audio/pw-dojo-07-autowait_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "NETWORK_WATERFALL",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Here is why the guess breaks. That button does not exist until the request that draws it comes back. On a fast connection that lands inside a second. On a slow one the cart call alone takes five.",
+      "data": {
+        "waterfall": {
+          "totalMs": 6200,
+          "atWord": 10.167,
+          "requests": [
+            {
+              "name": "GET /app",
+              "phases": [
+                {
+                  "phase": "dns",
+                  "ms": 40
+                },
+                {
+                  "phase": "connect",
+                  "ms": 60
+                },
+                {
+                  "phase": "ttfb",
+                  "ms": 180
+                },
+                {
+                  "phase": "download",
+                  "ms": 120
+                }
+              ]
+            },
+            {
+              "name": "GET /bundle.js",
+              "phases": [
+                {
+                  "phase": "blocked",
+                  "ms": 100
+                },
+                {
+                  "phase": "ttfb",
+                  "ms": 220
+                },
+                {
+                  "phase": "download",
+                  "ms": 640
+                }
+              ]
+            },
+            {
+              "name": "GET /api/cart",
+              "phases": [
+                {
+                  "phase": "queue",
+                  "ms": 300
+                },
+                {
+                  "phase": "ttfb",
+                  "ms": 4200
+                },
+                {
+                  "phase": "download",
+                  "ms": 900
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 368,
+      "audio": "audio/pw-dojo-07-autowait_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "BOX_PLOT",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Measured across a few hundred real runs it looks like this. On your laptop the button turns up well under a second. On the build server the middle is slower and the tail is very long. No number is right on both.",
+      "data": {
+        "boxPlot": {
+          "unit": "s",
+          "boxes": [
+            {
+              "label": "your laptop",
+              "min": 0.3,
+              "q1": 0.5,
+              "median": 0.7,
+              "q3": 1,
+              "max": 1.6,
+              "color": "green",
+              "atWord": 10.333
+            },
+            {
+              "label": "colleague's",
+              "min": 0.4,
+              "q1": 0.7,
+              "median": 1.1,
+              "q3": 1.7,
+              "max": 2.9,
+              "color": "blue",
+              "atWord": 14.25
+            },
+            {
+              "label": "build server",
+              "min": 0.8,
+              "q1": 1.9,
+              "median": 3.1,
+              "q3": 5.4,
+              "max": 9.2,
+              "outliers": [
+                12.4
+              ],
+              "color": "red",
+              "atWord": 18.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 413,
+      "audio": "audio/pw-dojo-07-autowait_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Write this on the wall. Time dot sleep is code smell number one. Too short and the test is flaky. Too long and the suite is slow — two hundred tests wasting four seconds each adds twenty minutes to every run.",
+      "data": {
+        "stickyNote": {
+          "headline": "sleep() is [always wrong]",
+          "color": "red",
+          "notes": [
+            {
+              "title": "CODE SMELL #1",
+              "tag": "memory hook",
+              "body": "time.sleep() in a Playwright test: too short is flaky, too long is slow. Always wrong.",
+              "highlight": "too short is flaky, too long is slow",
+              "asset": "lucide:bed-double",
+              "atWord": 17.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 421,
+      "audio": "audio/pw-dojo-07-autowait_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Now what Playwright is quietly doing instead, every single time you act.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The pre-flight checklist",
+          "subtitle": "What click() really does"
+        }
+      },
+      "durationFrames": 160,
+      "audio": "audio/pw-dojo-07-autowait_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHECK_SWEEP",
+      "transition": "morph",
+      "background": "zoneB",
+      "narration": "Before Playwright touches that button it runs a checklist, like a pilot before takeoff. Is it attached. Can a human see it. Has it stopped moving. Is it enabled. Is nothing covering it. And that last one is where the cookie banner gets caught.",
+      "data": {
+        "checkSweep": {
+          "headline": "Before every click: [five checks]",
+          "subjectLabel": "the Checkout button",
+          "checks": [
+            {
+              "label": "attached to the page",
+              "atWord": 13.833
+            },
+            {
+              "label": "visible to a human",
+              "atWord": 17.083
+            },
+            {
+              "label": "stable, done animating",
+              "atWord": 20.25
+            },
+            {
+              "label": "enabled, not greyed out",
+              "atWord": 22.667
+            },
+            {
+              "label": "nothing covering it",
+              "atWord": 24.333
+            }
+          ],
+          "caughtIndex": 4,
+          "caughtNote": "a cookie banner on top",
+          "fixNote": "waited — the banner closed",
+          "verdict": "then it clicks, safely",
+          "color": "green",
+          "atWord": 4.25
+        }
+      },
+      "durationFrames": 445,
+      "audio": "audio/pw-dojo-07-autowait_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And that was one completely ordinary line of code. You wrote find the Checkout button and click it. Playwright turned that into five checks and up to thirty seconds of patience, and then clicked at the earliest moment it was actually safe to.",
+      "data": {
+        "code": {
+          "filename": "checkout.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "# This one line secretly does ALL of this:",
+              "color": "green"
+            },
+            {
+              "text": "page.get_by_role(\"button\", name=\"Checkout\").click()"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "# 1. wait until the button exists   (attached)"
+            },
+            {
+              "text": "# 2. wait until it's visible        (visible)"
+            },
+            {
+              "text": "# 3. wait until it stops animating  (stable)"
+            },
+            {
+              "text": "# 4. wait until it's not disabled   (enabled)"
+            },
+            {
+              "text": "# 5. wait until nothing covers it  (receives events)"
+            },
+            {
+              "text": "# ... THEN click. Up to 30s of patience.",
+              "color": "green"
+            }
+          ],
+          "atWord": 10.083
+        }
+      },
+      "durationFrames": 411,
+      "audio": "audio/pw-dojo-07-autowait_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "First check. A button exists on the page, but a cookie banner is sitting over it. What does click do? Have a think, and pause the video if you want longer. Ready? It is C. Playwright waits for the banner to go.",
+      "data": {
+        "quiz": {
+          "question": "A cookie banner covers the button. What does click() do?",
+          "options": [
+            {
+              "text": "Clicks the banner instead"
+            },
+            {
+              "text": "Crashes immediately"
+            },
+            {
+              "text": "Waits for the banner to go"
+            },
+            {
+              "text": "Scrolls the banner away"
+            }
+          ],
+          "answerIndex": 2,
+          "why": "Receives-events check: the click would hit the banner, so it waits.",
+          "revealAtWord": 24.75,
+          "atWord": 4.083
+        }
+      },
+      "durationFrames": 407,
+      "audio": "audio/pw-dojo-07-autowait_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "The card for your wall, and it is five words. Attached, visible, stable, enabled, uncovered. Five checks, every single action, whether you asked for them or not.",
+      "data": {
+        "stickyNote": {
+          "headline": "The [pre-flight] checklist",
+          "color": "blue",
+          "notes": [
+            {
+              "title": "PRE-FLIGHT CHECKLIST",
+              "tag": "memory hook",
+              "body": "Attached · Visible · Stable · Enabled · Uncovered. A pilot never takes off mid-checklist.",
+              "highlight": "A pilot never takes off mid-checklist",
+              "asset": "lucide:plane",
+              "atWord": 12.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 362,
+      "audio": "audio/pw-dojo-07-autowait_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "LAYERED_STACK",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "This is why the last three episodes kept telling you it waits for you. There are three layers of patience stacked on top of each other. Locators find the element fresh every time. Actions wait until it is ready. And expect keeps re-checking.",
+      "data": {
+        "stack": {
+          "headline": "Three layers of [patience]",
+          "signal": "down",
+          "atWord": 11.833,
+          "layers": [
+            {
+              "label": "Locators",
+              "sub": "find the element fresh",
+              "color": "blue"
+            },
+            {
+              "label": "Actions",
+              "sub": "wait until it is ready",
+              "color": "green"
+            },
+            {
+              "label": "expect()",
+              "sub": "re-checks until true",
+              "color": "purple"
+            }
+          ]
+        }
+      },
+      "durationFrames": 421,
+      "audio": "audio/pw-dojo-07-autowait_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "BAR_COMPARE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And here is the part nobody expects. Deleting all those sleeps does not make your suite slower and safer — it makes it faster. Every action now takes exactly as long as the app takes, and not one second more.",
+      "data": {
+        "maxValue": 24,
+        "bars": [
+          {
+            "label": "With sleep()",
+            "sub": "200 guesses",
+            "value": 24,
+            "display": "24 min",
+            "color": "red",
+            "atWord": 11.167
+          },
+          {
+            "label": "Auto-waiting",
+            "sub": "no guessing",
+            "value": 6,
+            "display": "6 min",
+            "color": "green",
+            "atWord": 17.417
+          }
+        ]
+      },
+      "durationFrames": 395,
+      "audio": "audio/pw-dojo-07-autowait_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And finally, the rare day when you do have to wait for something yourself.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Waiting properly",
+          "subtitle": "When nothing else covers it"
+        }
+      },
+      "durationFrames": 148,
+      "audio": "audio/pw-dojo-07-autowait_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "KINETIC_TEXT",
+      "transition": "glitch",
+      "background": "zoneB",
+      "narration": "Sometimes no action and no assertion naturally covers the thing you are waiting for. Even then the answer is never sleep. Ask yourself one question instead, and answer it out loud.",
+      "data": {
+        "kinetic": {
+          "text": "What EXACTLY am I waiting for?",
+          "fx": "typewriter",
+          "sub": "name the condition, wait for that",
+          "atWord": 14.583
+        }
+      },
+      "durationFrames": 358,
+      "audio": "audio/pw-dojo-07-autowait_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Wait for the dashboard to load. What does that actually mean? Name it. It means the address in the bar changed. It means the spinner left the stage. And it means the data table finally showed up. Three conditions, and three real waits.",
+      "data": {
+        "code": {
+          "filename": "dashboard.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "# \"Wait for the dashboard\" — name what it MEANS:",
+              "color": "green"
+            },
+            {
+              "text": "expect(page).to_have_url("
+            },
+            {
+              "text": "    \"https://app.example.com/dashboard\")"
+            },
+            {
+              "text": "expect("
+            },
+            {
+              "text": "    page.get_by_test_id(\"spinner\")"
+            },
+            {
+              "text": ").not_to_be_visible()"
+            },
+            {
+              "text": "expect(page.get_by_role(\"table\")).to_be_visible()"
+            }
+          ],
+          "atWord": 12.833
+        }
+      },
+      "durationFrames": 457,
+      "audio": "audio/pw-dojo-07-autowait_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "REVEAL",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "One more kind of wait, and then Act Two. If what you are waiting for is a network call coming back, Playwright has expect response for exactly that. It gets a whole lesson to itself in Act Three.",
+      "data": {
+        "reveal": {
+          "kicker": "one more",
+          "statement": "page.expect_response() waits for the network",
+          "sub": "a whole lesson of its own in Act III",
+          "atWord": 1.667
+        }
+      },
+      "durationFrames": 340,
+      "audio": "audio/pw-dojo-07-autowait_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "QUIZ_CARD",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Last check. Click Generate report, a spinner shows, then a table appears three to ten seconds later. What is the professional wait? Have a think, and pause if you need longer. Ready? It is C. Name the condition and give it room.",
+      "data": {
+        "quiz": {
+          "question": "A table appears 3-10s after Generate. The pro wait is:",
+          "options": [
+            {
+              "text": "time.sleep(10)"
+            },
+            {
+              "text": "time.sleep(3)"
+            },
+            {
+              "text": "expect(...).to_be_visible(15000)"
+            },
+            {
+              "text": "Click and hope"
+            }
+          ],
+          "answerIndex": 2,
+          "why": "It waits 3s on fast days, 10s on slow ones, and fails clearly at 15s.",
+          "revealAtWord": 27.667,
+          "atWord": 4.417
+        }
+      },
+      "durationFrames": 454,
+      "audio": "audio/pw-dojo-07-autowait_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And when a wait genuinely cannot succeed, the timeout hands you gold instead of a shrug. It found the button. It tells you the button is disabled. And it says, in plain words, that it is still waiting for that to change.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@dojo",
+          "cwd": "~/dojo",
+          "commands": [
+            {
+              "cmd": "python checkout_test.py",
+              "exitCode": 1,
+              "atWord": 10,
+              "output": [
+                "TimeoutError: Locator.click:",
+                "    Timeout 30000ms exceeded.",
+                "  -   locator resolved to <button disabled>",
+                "  -   element is not enabled - waiting..."
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 400,
+      "audio": "audio/pw-dojo-07-autowait_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Pro corner, and it is the sentence that ends the argument. Sleep is what you write when you have not answered the question. Name the condition and wait for that condition, and the number stops mattering entirely.",
+      "data": {
+        "stickyNote": {
+          "headline": "Name the [condition]",
+          "color": "green",
+          "source": "san-gitlogin.github.io/playwright-dojo",
+          "notes": [
+            {
+              "title": "NAME THE CONDITION",
+              "tag": "pro corner",
+              "body": "sleep() is what you write when you have not answered \"what exactly am I waiting for?\"",
+              "highlight": "what exactly am I waiting for?",
+              "asset": "lucide:target",
+              "atWord": 13.833
+            }
+          ]
+        },
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 377,
+      "audio": "audio/pw-dojo-07-autowait_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "RECAP",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Episode seven in three lines. Sleep is guessing, and guessing is why suites flake. Every action already runs five checks and waits up to thirty seconds for you. And on the rare day you must wait yourself, name the condition.",
+      "data": {
+        "heading": "Episode seven, in three lines",
+        "points": [
+          {
+            "text": "sleep() is guessing",
+            "atWord": 10.583
+          },
+          {
+            "text": "Every action runs 5 checks first",
+            "atWord": 17.583
+          },
+          {
+            "text": "Name the condition, not a number",
+            "atWord": 23.75
+          }
+        ]
+      },
+      "durationFrames": 441,
+      "audio": "audio/pw-dojo-07-autowait_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "And that closes Act One. You can open a browser, find anything on a page, drive it, check it, and never write a sleep again. Act Two turns those scripts into a real test suite. Every lesson is free at the Playwright Dojo.",
+      "data": {
+        "message": "Act I complete. Next: pytest",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 431,
+      "audio": "audio/pw-dojo-07-autowait_long_s26.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

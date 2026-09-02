@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "topic": "React Basics",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "React builds UIs from components that hold state; change the state and it re-renders only what changed.",
+    "openLoop": "What actually is React?",
+    "analogy": "A React app is LEGO: small reusable pieces snapped together."
+  },
+  "brand": {
+    "theme": "material",
+    "design": "material",
+    "themeLight": "daylight",
+    "background": "grid",
+    "channel": "THE NBX STUDIO"
+  },
+  "cover": {
+    "title": "React in 60s",
+    "badge": "BASICS",
+    "asset": "lucide:atom",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "What is React, actually? Here's the whole idea in under a minute.",
+      "durationFrames": 168,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "headline": "REACT IN 60s",
+        "subtext": "the core idea",
+        "heroAsset": "lucide:atom",
+        "headlineAtWord": 1,
+        "heroAtWord": 5,
+        "anim": "scale"
+      }
+    },
+    {
+      "id": "s02",
+      "type": "KINETIC_TEXT",
+      "narration": "You build your interface out of small reusable components.",
+      "durationFrames": 168,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "fade",
+      "data": {
+        "kinetic": {"fx": "typewriter", "text": "Build UIs from components.", "sub": "small, reusable pieces", "color": "blue", "atWord": 6}
+      }
+    },
+    {
+      "id": "s03",
+      "type": "CODE_WINDOW",
+      "narration": "Each component is a function that returns JSX, and it can hold state with a hook.",
+      "durationFrames": 288,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "transition": "push",
+      "data": {
+        "code": {
+          "filename": "Counter.jsx",
+          "language": "jsx",
+          "atWord": 1,
+          "lines": [
+            {"text": "function Counter() {"},
+            {"text": "  const [n, setN] = useState(0);"},
+            {"text": "  return <button onClick={() => setN(n+1)}>"},
+            {"text": "    {n}"},
+            {"text": "  </button>;"},
+            {"text": "}"}
+          ],
+          "output": [
+            {"text": "a component with state", "color": "green"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "s04",
+      "type": "REVEAL",
+      "narration": "Change the state, and React re-renders only what changed. That's the whole trick.",
+      "durationFrames": 216,
+      "timingSource": "estimated",
+      "background": "zoneB",
+      "transition": "zoom",
+      "fx": "burst",
+      "data": {
+        "headline": "Only what [changed.]",
+        "reveal": {"kicker": "THAT'S REACT", "sub": "state changes, React updates just the difference", "color": "blue", "atWord": 6},
+        "source": "COMPONENTS + STATE"
+      }
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "Follow THE NBX STUDIO for more dev basics.",
+      "durationFrames": 156,
+      "timingSource": "estimated",
+      "background": "zoneA",
+      "data": {
+        "message": "That's React",
+        "sub": "follow THE NBX STUDIO"
+      }
+    }
+  ]
+}

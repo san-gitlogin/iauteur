@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP04 shorts: the locator ladder",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "why your locator broke, and the ladder that stops it happening again",
+    "openLoop": "Why can your test not find a button you are looking straight at?",
+    "analogy": "A locator is the spotlight that finds one actor on the stage.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Stop using CSS selectors in Playwright #playwright #python",
+      "description": "Robots Love Pizza, Tacos, Two Cokes — the locator ladder, and why a restyle kills CSS selectors.",
+      "tags": [
+        "playwright",
+        "python",
+        "locators",
+        "get_by_role",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "FIND YOUR ACTOR",
+    "badge": "Dojo · EP 4",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your test cannot find a button that you can see. Nine times out of ten, this is why.",
+      "data": {
+        "headline": "CANNOT FIND IT?",
+        "subtext": "the button is right there",
+        "heroAsset": "lucide:search-x",
+        "headlineAtWord": 4,
+        "heroAtWord": 8.417
+      },
+      "durationFrames": 181,
+      "audio": "audio/pw-dojo-04-locators_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "The developers restyled the page. The class name changed. Nothing a user can see is different, and every test pointing at that class just died.",
+      "data": {
+        "diff": {
+          "fileName": "login.html",
+          "stat": {
+            "plus": 1,
+            "minus": 1
+          },
+          "atWord": 7,
+          "rows": [
+            {
+              "kind": "ctx",
+              "text": "<form class=\"login\">"
+            },
+            {
+              "kind": "del",
+              "text": "  <button class=\"btn-primary-2xl\">Sign in</button>"
+            },
+            {
+              "kind": "add",
+              "text": "  <button class=\"ui-btn-v3\">Sign in</button>"
+            },
+            {
+              "kind": "ctx",
+              "text": "</form>"
+            }
+          ]
+        }
+      },
+      "durationFrames": 277,
+      "audio": "audio/pw-dojo-04-locators_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "THEATER_STAGE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "So describe the actor, not the furniture around them. A locator is a spotlight, and you point it with the words a person would use.",
+      "data": {
+        "stage": {
+          "marquee": "shop.example.com",
+          "curtain": "up",
+          "actors": [
+            {
+              "label": "Sign in",
+              "kind": "button",
+              "atWord": 7.083
+            },
+            {
+              "label": "Email",
+              "kind": "field",
+              "atWord": 8.583
+            },
+            {
+              "label": "Pricing",
+              "kind": "link",
+              "atWord": 10.833
+            }
+          ],
+          "spotlightIndex": 0,
+          "caption": "the spotlight finds one actor",
+          "atWord": 4
+        }
+      },
+      "durationFrames": 249,
+      "audio": "audio/pw-dojo-04-locators_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Click the Sign in button. Fill the box labelled Email. That is exactly what these two lines say, and a restyle cannot touch either of them.",
+      "data": {
+        "code": {
+          "filename": "roles.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "page.get_by_role(\"button\", name=\"Sign in\").click()",
+              "color": "green"
+            },
+            {
+              "text": "page.get_by_label(\"Email\").fill(\"neo@matrix.io\")",
+              "color": "green"
+            }
+          ],
+          "atWord": 7.333
+        }
+      },
+      "durationFrames": 267,
+      "audio": "audio/pw-dojo-04-locators_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "CACHE_PYRAMID",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "And here is the whole ladder in one daft sentence. Robots Love Pizza, Tacos, Two Cokes. Start at the top, and climb down only when you must.",
+      "data": {
+        "pyramid": {
+          "variant": "pyramid",
+          "headline": "Robots Love Pizza, Tacos, Two Cokes",
+          "tiers": [
+            {
+              "label": "Role",
+              "speed": "Robots",
+              "size": "meaning",
+              "color": "green"
+            },
+            {
+              "label": "Label",
+              "speed": "Love",
+              "size": "meaning"
+            },
+            {
+              "label": "Placeholder",
+              "speed": "Pizza",
+              "size": "hint text"
+            },
+            {
+              "label": "Text",
+              "speed": "Tacos",
+              "size": "what is seen"
+            },
+            {
+              "label": "Test id",
+              "speed": "Two",
+              "size": "for tests"
+            },
+            {
+              "label": "CSS / XPath",
+              "speed": "Cokes",
+              "size": "structure",
+              "color": "red"
+            }
+          ],
+          "axisTop": "start here",
+          "axisBottom": "last resort",
+          "atWord": 7.083
+        }
+      },
+      "durationFrames": 304,
+      "audio": "audio/pw-dojo-04-locators_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "The full lesson, with strict mode and all the traps, is free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 182,
+      "audio": "audio/pw-dojo-04-locators_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

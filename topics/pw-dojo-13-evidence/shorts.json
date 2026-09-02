@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP13 shorts: the trace viewer",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "how a Playwright trace lets you rewind a CI failure instead of guessing at logs",
+    "openLoop": "It failed in CI at 3am and passes on your machine — how do you even start?",
+    "analogy": "A trace is the black box flight recorder of your test suite.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Stop debugging CI from logs #playwright #python",
+      "description": "--tracing retain-on-failure turns any red test into a recording you can scrub through.",
+      "tags": [
+        "playwright",
+        "python",
+        "trace viewer",
+        "debugging",
+        "CI",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "REWIND THE FAILURE",
+    "badge": "Dojo · EP 13",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Three in the morning. Your build is red, and that test? Passes fine on your laptop.",
+      "data": {
+        "headline": "RED IN CI. GREEN AT HOME.",
+        "subtext": "stop guessing at logs",
+        "heroAsset": "lucide:camera",
+        "headlineAtWord": 4.083,
+        "heroAtWord": 8
+      },
+      "durationFrames": 170,
+      "audio": "audio/pw-dojo-13-evidence_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "FLAG_HARVEST",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Add one flag to the command you're already running. That's it. Every test that fails drops a zip behind it, and the ones that pass leave you nothing at all.",
+      "data": {
+        "flagHarvest": {
+          "flag": "--tracing retain-on-failure",
+          "command": "pytest",
+          "folder": "test-results/",
+          "quietNote": "nothing kept",
+          "artifacts": [
+            "trace.zip"
+          ],
+          "caption": "zero code. evidence only where it failed.",
+          "color": "orange",
+          "atWord": 1.75,
+          "harvestAtWord": 16.333,
+          "tests": [
+            {
+              "label": "test_login",
+              "title": "pass",
+              "atWord": 7.167
+            },
+            {
+              "label": "test_checkout",
+              "title": "fail",
+              "atWord": 10.25
+            },
+            {
+              "label": "test_search",
+              "title": "pass",
+              "atWord": 12.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 297,
+      "audio": "audio/pw-dojo-13-evidence_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "TRACE_SCRUB",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Open that zip and every action you performed is sitting on a timeline. Click one, and you're looking at the page exactly as it stood back then. Then scrub straight back to the step that broke.",
+      "data": {
+        "traceScrub": {
+          "traceFile": "trace.zip",
+          "openWith": "playwright show-trace trace.zip",
+          "snapshot": [
+            "Your basket",
+            "Pay now",
+            "Receipt"
+          ],
+          "caption": "the page, exactly as it was back then",
+          "color": "green",
+          "atWord": 1.75,
+          "rewindAtWord": 18.333,
+          "steps": [
+            {
+              "label": "goto /checkout",
+              "sub": "navigated to /checkout",
+              "detail": "GET /checkout 200",
+              "atWord": 6.75
+            },
+            {
+              "label": "click Pay now",
+              "sub": "clicked Pay now",
+              "detail": "POST /pay 500",
+              "atWord": 10.417
+            },
+            {
+              "label": "expect receipt",
+              "title": "fail",
+              "sub": "TimeoutError: not found",
+              "detail": "no response",
+              "atWord": 14
+            }
+          ]
+        }
+      },
+      "durationFrames": 333,
+      "audio": "audio/pw-dojo-13-evidence_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So here's the interview answer, word for word. We run tracing retain on failure in CI, so any red test hands us a time travel debugger.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the interview answer",
+          "rule": "any red test hands you a time-travel debugger",
+          "okLabel": "you replay it",
+          "noLabel": "you guess",
+          "caption": "the best debugging tool in the industry",
+          "color": "green",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "a trace.zip from the CI run",
+              "title": "ok",
+              "sub": "DOM, console and network",
+              "atWord": 10.917
+            },
+            {
+              "text": "a wall of CI log output",
+              "title": "no",
+              "sub": "no page, no snapshots",
+              "atWord": 15.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 301,
+      "audio": "audio/pw-dojo-13-evidence_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Whole lesson's free, over at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-13-evidence_short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

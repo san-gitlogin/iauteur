@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "topic": "How GPS Knows Where You Are",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "GPS is distance from four atomic clocks in orbit; where the ranges cross is you.",
+    "openLoop": "How does your phone know exactly where you are?",
+    "analogy": "Four satellites shout how far away they are, and the overlap pins you down."
+  },
+  "brand": {
+    "theme": "swiss",
+    "design": "swiss",
+    "themeLight": "paper",
+    "background": "grid",
+    "channel": "THE NBX STUDIO"
+  },
+  "cover": {
+    "title": "How GPS Works",
+    "badge": "60s",
+    "asset": "lucide:satellite",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "background": "zoneA",
+      "narration": "Your phone finds you within metres, using clocks in space.",
+      "durationFrames": 132,
+      "data": {"headline": "FOUND FROM SPACE", "subtext": "clocks in orbit", "heroAsset": "lucide:satellite", "headlineAtWord": 1, "heroAtWord": 8}
+    },
+    {
+      "id": "s02",
+      "type": "MAP_RADAR",
+      "background": "zoneB",
+      "narration": "A fleet of satellites is always sweeping the sky above you.",
+      "durationFrames": 132,
+      "transition": "slide",
+      "data": {"mapRadar": {"blips": [{"label": "SAT 12", "angle": 40, "range": 0.6, "color": "blue"}, {"label": "SAT 24", "angle": 150, "range": 0.85}, {"label": "SAT 07", "angle": 250, "range": 0.5, "color": "green"}, {"label": "SAT 19", "angle": 320, "range": 0.95}], "rings": 4, "sweepLabel": "tracking\u2026", "atWord": 2}}
+    },
+    {
+      "id": "s03",
+      "type": "CLOCK_SIGNAL",
+      "background": "zoneC",
+      "narration": "Each carries an atomic clock, ticking billions of times a second.",
+      "durationFrames": 132,
+      "transition": "morph",
+      "data": {"clock": {"cycles": 6, "label": "atomic clock", "headline": "Timing is everything", "atWord": 4}}
+    },
+    {
+      "id": "s04",
+      "type": "STEP_FLOW",
+      "background": "zoneA",
+      "narration": "Time each signal, turn delay into distance, and where they cross is you.",
+      "durationFrames": 156,
+      "transition": "wipe",
+      "data": {"steps": [{"title": "Hear signals", "sub": "from several satellites", "color": "blue", "atWord": 3}, {"title": "Measure delay", "sub": "time = distance", "color": "orange", "atWord": 5}, {"title": "Draw ranges", "sub": "one per satellite", "color": "purple", "atWord": 7}, {"title": "Find the cross", "sub": "that is you", "color": "green", "atWord": 11}], "source": "GPS trilateration (illustrative)"}
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "background": "zoneB",
+      "narration": "Follow for more invisible tech.",
+      "durationFrames": 96,
+      "transition": "fade",
+      "data": {"message": "Follow for more hidden tech", "sub": "new explainers weekly"}
+    }
+  ]
+}

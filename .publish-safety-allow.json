@@ -14,7 +14,9 @@
   "accept": [
     {
       "rule": "ENV:IAUTEUR_CHANNEL",
-      "paths": ["**"],
+      "paths": [
+        "**"
+      ],
       "decidedOn": "2026-08-21",
       "decidedBy": "owner",
       "reason": [
@@ -49,6 +51,27 @@
         "Scoped deliberately to course content and fixtures: a real home path appearing in",
         "docs/, webui/ or anywhere else still BLOCKS, because that would be new disclosure",
         "rather than this accepted one."
+      ]
+    },
+    {
+      "rule": "EMAIL",
+      "paths": [
+        "topics/pw-dojo-*/long.json",
+        "topics/pw-dojo-*/shorts.json"
+      ],
+      "decidedOn": "2026-09-02",
+      "decidedBy": "owner",
+      "reason": [
+        "The Playwright Dojo specs demonstrate filling a login form, and the fixture address is",
+        "a Matrix joke. All ten flagged lines are the SAME invented address; every one was read",
+        "before this entry was written, and none is a real mailbox or the operator's.",
+        "",
+        "Scoped to the pw-dojo topic specs on purpose. An email anywhere else — briefs/, docs/,",
+        "scripts/, another topic — still BLOCKS, because that would be a new disclosure rather",
+        "than this reviewed one.",
+        "",
+        "These 96 specs lived only on the Windows laptop and were in no git history on any",
+        "machine; tracking them is what this entry unblocks."
       ]
     }
   ]

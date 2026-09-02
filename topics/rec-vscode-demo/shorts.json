@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "topic": "RECORDED_STEP — a real VS Code session on the narrator's clock",
+    "format": "shorts",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "a real recorded VS Code session, re-timed to the narration",
+    "openLoop": "Is that a real editor or a drawing of one?",
+    "analogy": "A film reel that waits for the narrator.",
+    "topicAxes": [
+      "entity-novelty",
+      "tribal-conflict"
+    ],
+    "seo": {
+      "title": "Real footage, on the voice #playwright #python",
+      "altTitles": [
+        "recording pipeline demo"
+      ],
+      "description": "Internal demo. Real VS Code footage captured by scripts/record.mjs, replayed on the narration clock.",
+      "tags": [
+        "internal",
+        "demo",
+        "recording"
+      ],
+      "queries": [
+        "how does iauteur record real screen demos"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "studio",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "REAL FOOTAGE",
+    "badge": "internal",
+    "asset": "lucide:clapperboard"
+  },
+  "scenes": [
+    {
+      "id": "v00",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That terminal is not a drawing. Watch it run.",
+      "data": {
+        "headline": "NOT A DRAWING.",
+        "subtext": "a real session",
+        "heroAsset": "lucide:clapperboard",
+        "headlineAtWord": 2,
+        "heroAtWord": 7
+      },
+      "durationFrames": 110,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "v01",
+      "type": "RECORDED_STEP",
+      "background": "zoneA",
+      "narration": "Watch this run for real. I add one line, save, and run it again. The second greeting is brand new.",
+      "data": {
+        "headline": "Real [footage]",
+        "recordedStep": {
+          "caption": "the second line is new",
+          "premise": "A real VS Code session. Everything in the black pane was read back off that screen.",
+          "color": "blue",
+          "atWord": 2,
+          "clips": [
+            {
+              "ref": "rec:vscode-hello#run-it",
+              "label": "run it",
+              "atWord": 3,
+              "id": "run-it",
+              "src": "rec/vscode-hello/seg-02.mp4",
+              "frames": 59,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "greeting": {
+                  "x": 368,
+                  "y": 650,
+                  "w": 132,
+                  "h": 19
+                }
+              }
+            },
+            {
+              "ref": "rec:vscode-hello#run-again",
+              "label": "run again",
+              "atWord": 12,
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "this line is new",
+                  "mark": "second",
+                  "color": "green",
+                  "atWord": 17
+                }
+              ],
+              "id": "run-again",
+              "src": "rec/vscode-hello/seg-05.mp4",
+              "frames": 61,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "second": {
+                  "x": 368,
+                  "y": 707,
+                  "w": 114,
+                  "h": 19
+                },
+                "first": {
+                  "x": 368,
+                  "y": 688,
+                  "w": 132,
+                  "h": 19
+                }
+              }
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 280,
+      "timingSource": "estimate"
+    },
+    {
+      "id": "v02",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Real footage, timed to the voice. More in the Dojo.",
+      "data": {
+        "message": "Real footage, on the voice",
+        "sub": "the Playwright Dojo"
+      },
+      "durationFrames": 120,
+      "timingSource": "estimate"
+    }
+  ]
+}

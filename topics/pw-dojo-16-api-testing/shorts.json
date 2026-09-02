@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP16 shorts: no browser needed",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "playwright.request runs HTTP tests with no browser, which is where setup belongs",
+    "openLoop": "How does a Playwright test pass without a browser ever opening?",
+    "analogy": "the API is the backstage phone — call the director instead of watching the play.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Playwright with no browser #playwright #python",
+      "description": "playwright.request.new_context() speaks HTTP with no browser — about 50x faster. Use it for setup, and save the UI for what users actually do.",
+      "tags": [
+        "playwright",
+        "python",
+        "api",
+        "testing",
+        "pytest",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "NO BROWSER",
+    "badge": "Dojo · EP 16",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Playwright will run a whole test without opening a browser. Sounds like cheating. It isn't.",
+      "data": {
+        "headline": "NO BROWSER NEEDED.",
+        "subtext": "and it still passes",
+        "heroAsset": "lucide:phone-call",
+        "headlineAtWord": 4.917,
+        "heroAtWord": 8.833
+      },
+      "durationFrames": 197,
+      "audio": "audio/pw-dojo-16-api-testing_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "BACKSTAGE_PHONE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Want to know what language a repo is in? The browser way: boot a browser, load the page, wait for the DOM. Meanwhile — one call, straight to the server, already back. Six hundred milliseconds, while the browser's still reading text off a page it only just loaded.",
+      "data": {
+        "backstagePhone": {
+          "question": "what language is this repo in?",
+          "stageLabel": "the whole play",
+          "hopLabel": "the backstage phone",
+          "hop": "api.get(\"/repos/microsoft/pw\")",
+          "hopTime": "0.61s",
+          "stageTime": "6.8s",
+          "verdict": "~50x faster",
+          "caption": "same answer. no stage at all.",
+          "color": "green",
+          "atWord": 1.833,
+          "steps": [
+            {
+              "label": "launch a browser",
+              "detail": "1.9s",
+              "atWord": 7.5
+            },
+            {
+              "label": "load the page",
+              "detail": "3.4s",
+              "atWord": 9.917
+            },
+            {
+              "label": "wait for the DOM",
+              "detail": "5.1s",
+              "atWord": 11.583
+            },
+            {
+              "label": "read the text",
+              "detail": "6.8s",
+              "atWord": 26.167
+            }
+          ],
+          "hopAtWord": 17.25,
+          "verdictAtWord": 27
+        }
+      },
+      "durationFrames": 489,
+      "audio": "audio/pw-dojo-16-api-testing_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "You ask Playwright for a request context instead of a browser. Give that a base URL, so you're not retyping the host everywhere. Then get, post, whatever you need — and a plain assert does fine here, because there's no DOM to sit around waiting on.",
+      "data": {
+        "codeRun": {
+          "filename": "test_api.py",
+          "language": "py",
+          "resultLabel": "no browser",
+          "color": "blue",
+          "atWord": 2.5,
+          "caption": "HTTP, and nothing else",
+          "lines": [
+            {
+              "text": "ctx = playwright.request.new_context(",
+              "detail": "speaks HTTP, not clicks",
+              "sub": "no browser launches",
+              "label": "http",
+              "atWord": 6.167
+            },
+            {
+              "text": "    base_url=\"https://api.github.com\")"
+            },
+            {
+              "text": ""
+            },
+            {
+              "text": "resp = ctx.get(\"/repos/microsoft/pw\")",
+              "detail": "the call itself",
+              "sub": "status, ok, json()",
+              "label": "get",
+              "atWord": 15.083
+            },
+            {
+              "text": "assert resp.ok",
+              "detail": "a plain assert is fine",
+              "sub": "nothing to wait for",
+              "label": "assert",
+              "atWord": 21
+            }
+          ]
+        }
+      },
+      "durationFrames": 430,
+      "audio": "audio/pw-dojo-16-api-testing_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "STAGE_HANDOFF",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Which unlocks the real trick, honestly. Nobody's testing the create form today, so make that todo over the phone instead, in forty milliseconds flat, and then open the browser only for the one thing you're actually asking about here.",
+      "data": {
+        "stageHandoff": {
+          "testName": "test_delete_todo",
+          "railLabel": "setup · by API",
+          "stageLabel": "the test · by UI",
+          "handoffLabel": "hang up. open the page.",
+          "verdict": "when it fails, you know why",
+          "caption": "scenery by phone. the scene on stage.",
+          "color": "blue",
+          "atWord": 1.833,
+          "steps": [
+            {
+              "label": "api.post(\"/api/todos\")",
+              "sub": "40ms",
+              "title": "api",
+              "atWord": 10.833
+            },
+            {
+              "label": "read the new id back",
+              "sub": "still no browser",
+              "title": "api",
+              "atWord": 13.333
+            },
+            {
+              "label": "page.goto(\"/todos\")",
+              "sub": "now we look",
+              "title": "ui",
+              "atWord": 18.25
+            },
+            {
+              "label": "click Delete on the row",
+              "sub": "the behaviour",
+              "title": "ui",
+              "atWord": 19.083
+            },
+            {
+              "label": "expect(row).not_to_be_visible()",
+              "sub": "the question",
+              "title": "ui",
+              "atWord": 20.75
+            }
+          ],
+          "handoffAtWord": 16.583,
+          "verdictAtWord": 22.333
+        }
+      },
+      "durationFrames": 405,
+      "audio": "audio/pw-dojo-16-api-testing_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Whole lesson's free, over at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-16-api-testing_shorts_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

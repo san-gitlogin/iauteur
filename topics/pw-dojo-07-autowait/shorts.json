@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP07 shorts: stop writing sleep()",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "why time.sleep() makes tests flaky, and the checklist Playwright runs instead",
+    "openLoop": "Why does the same test pass on your laptop and fail on CI?",
+    "analogy": "Playwright runs a pilot’s pre-flight checklist before it touches an element.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Stop writing time.sleep() in Playwright #playwright #python",
+      "description": "There is no right number for sleep(). Playwright already runs five checks before every action.",
+      "tags": [
+        "playwright",
+        "python",
+        "flaky tests",
+        "auto-waiting",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "DELETE sleep()",
+    "badge": "Dojo · EP 7",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your test passes on your laptop and fails on the build server, and the culprit is almost always one line.",
+      "data": {
+        "headline": "PASSES HERE. FAILS THERE.",
+        "subtext": "one line causes most of it",
+        "heroAsset": "lucide:hourglass",
+        "headlineAtWord": 3.917,
+        "heroAtWord": 9.083
+      },
+      "durationFrames": 198,
+      "audio": "audio/pw-dojo-07-autowait_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CODE_WINDOW",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "This one. Sleep five seconds, because the page probably needs a moment. That number is a guess, and it is the wrong guess twice over.",
+      "data": {
+        "code": {
+          "filename": "old_way.py",
+          "language": "py",
+          "lines": [
+            {
+              "text": "page.goto(\"https://app.example.com\")"
+            },
+            {
+              "text": "time.sleep(5)   # guessing",
+              "color": "red"
+            },
+            {
+              "text": "page.click(\"#menu\")"
+            }
+          ],
+          "atWord": 5.083
+        }
+      },
+      "durationFrames": 266,
+      "audio": "audio/pw-dojo-07-autowait_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "BOX_PLOT",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Too short and the element is not there yet, so the test fails at random. Too long and every test wastes seconds forever. And across real machines, there is no number that is right on both.",
+      "data": {
+        "boxPlot": {
+          "unit": "s",
+          "boxes": [
+            {
+              "label": "your laptop",
+              "min": 0.3,
+              "q1": 0.5,
+              "median": 0.7,
+              "q3": 1,
+              "max": 1.6,
+              "color": "green",
+              "atWord": 5.583
+            },
+            {
+              "label": "build server",
+              "min": 0.8,
+              "q1": 1.9,
+              "median": 3.1,
+              "q3": 5.4,
+              "max": 9.2,
+              "outliers": [
+                12.4
+              ],
+              "color": "red",
+              "atWord": 12.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 354,
+      "audio": "audio/pw-dojo-07-autowait_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHECK_SWEEP",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So stop guessing, because Playwright already checks. Before every action: is it attached, visible, stable, enabled, and is nothing covering it. If one fails it waits, then acts the moment it is safe.",
+      "data": {
+        "checkSweep": {
+          "headline": "Before every click: [five checks]",
+          "subjectLabel": "the Checkout button",
+          "checks": [
+            {
+              "label": "attached to the page",
+              "atWord": 9.917
+            },
+            {
+              "label": "visible to a human",
+              "atWord": 12.833
+            },
+            {
+              "label": "stable, done animating",
+              "atWord": 14.833
+            },
+            {
+              "label": "enabled, not greyed out",
+              "atWord": 16.833
+            },
+            {
+              "label": "nothing covering it",
+              "atWord": 19.75
+            }
+          ],
+          "caughtIndex": 4,
+          "caughtNote": "a cookie banner on top",
+          "fixNote": "waited — the banner closed",
+          "verdict": "then it clicks, safely",
+          "color": "green",
+          "atWord": 4
+        }
+      },
+      "durationFrames": 412,
+      "audio": "audio/pw-dojo-07-autowait_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "STICKY_NOTE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So delete the sleeps. And on the rare day nothing covers your wait, name the condition instead of picking a number.",
+      "data": {
+        "stickyNote": {
+          "headline": "sleep() is [always wrong]",
+          "color": "red",
+          "notes": [
+            {
+              "title": "CODE SMELL #1",
+              "tag": "memory hook",
+              "body": "time.sleep() in a Playwright test: too short is flaky, too long is slow. Always wrong.",
+              "highlight": "too short is flaky, too long is slow",
+              "asset": "lucide:bed-double",
+              "atWord": 6.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 228,
+      "audio": "audio/pw-dojo-07-autowait_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "The whole lesson, free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 109,
+      "audio": "audio/pw-dojo-07-autowait_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

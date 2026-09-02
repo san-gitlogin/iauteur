@@ -1,0 +1,258 @@
+{
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "design": "moderndark",
+    "logo": "img:iauteur_logo.png",
+    "theme": "moderndark",
+    "themeLight": "daylight"
+  },
+  "cover": {
+    "asset": "img:iauteur_logo.png",
+    "badge": "made by iAuteur",
+    "title": "NOBODY FILMED THIS"
+  },
+  "meta": {
+    "analogy": "Ordering a meal instead of learning to cook it.",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "You describe the video you want in one line, and a finished video comes back.",
+    "openLoop": "If nobody filmed it and nobody edited it, where did this video come from?",
+    "screenplay": "explainer",
+    "topic": "iAuteur — what you get",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ]
+  },
+  "scenes": [
+    {
+      "background": "zoneA",
+      "data": {
+        "headline": "IT SHOULDN'T TAKE A WEEK",
+        "headlineAtWord": 6.5,
+        "heroAsset": "lucide:clapperboard",
+        "heroAtWord": 1.75,
+        "subtext": "you have something worth explaining"
+      },
+      "durationFrames": 141,
+      "id": "s01",
+      "narration": "You know something worth explaining. Making a video shouldn't take a week.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "HOOK",
+      "audio": "audio/wyg_short_s01.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "topicIntake": {
+          "atWord": 1.667,
+          "caption": "that's the whole form",
+          "choices": [
+            {
+              "atWord": 6.833,
+              "detail": "Modern dark",
+              "label": "Look"
+            },
+            {
+              "atWord": 7.5,
+              "detail": "Two minutes",
+              "label": "Length"
+            },
+            {
+              "atWord": 8.167,
+              "detail": "Ava",
+              "label": "Voice"
+            }
+          ],
+          "color": "blue",
+          "fieldLabel": "What's it about?",
+          "headline": "You fill in [one line]",
+          "typed": "How your money actually moves"
+        }
+      },
+      "durationFrames": 162,
+      "id": "s02",
+      "narration": "You type what your video is about. Then you pick how it looks and sounds.",
+      "timingSource": "tts",
+      "transition": "push",
+      "type": "TOPIC_INTAKE",
+      "audio": "audio/wyg_short_s02.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "promptHandoff": {
+          "appLabel": "iAuteur",
+          "assistants": [
+            {
+              "atWord": 4.25,
+              "label": "ChatGPT"
+            },
+            {
+              "atWord": 5.083,
+              "label": "Claude"
+            },
+            {
+              "atWord": 5.833,
+              "label": "Gemini"
+            },
+            {
+              "atWord": 6.667,
+              "label": "or your own"
+            }
+          ],
+          "atWord": 9.083,
+          "backLabel": "the answer",
+          "color": "blue",
+          "footNote": "copy out, paste back. that's it",
+          "headline": "Use the assistant [you already have]",
+          "outLabel": "your question"
+        }
+      },
+      "durationFrames": 172,
+      "id": "s03",
+      "narration": "Hand the question to whichever assistant you already use, then paste the answer back.",
+      "timingSource": "tts",
+      "transition": "morph",
+      "type": "PROMPT_HANDOFF",
+      "audio": "audio/wyg_short_s03.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "checkSweep": {
+          "atWord": 8.417,
+          "caughtIndex": 2,
+          "caughtNote": "too many words",
+          "checks": [
+            {
+              "atWord": 2.667,
+              "label": "Is anything missing?"
+            },
+            {
+              "atWord": 4.333,
+              "label": "Will it fit the screen?"
+            },
+            {
+              "atWord": 6.75,
+              "label": "Is it too crowded?"
+            },
+            {
+              "atWord": 7.583,
+              "label": "Can you read it in time?"
+            }
+          ],
+          "color": "green",
+          "fixNote": "rewritten, then passed",
+          "headline": "It checks its own [work]",
+          "subjectLabel": "the answer",
+          "verdict": "ready for you"
+        }
+      },
+      "durationFrames": 165,
+      "id": "s04",
+      "narration": "Then it checks that answer. Anything too crowded gets rewritten before you see it.",
+      "timingSource": "tts",
+      "transition": "wipe",
+      "type": "CHECK_SWEEP",
+      "audio": "audio/wyg_short_s04.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "videoHero": {
+          "atWord": 3,
+          "color": "blue",
+          "headline": "Nobody filmed this",
+          "kicker": "MADE THIS WAY",
+          "src": "assets/video/sample_market.mp4",
+          "sub": "no camera, no editor, no timeline",
+          "treatment": "scrim",
+          "zoom": true
+        }
+      },
+      "durationFrames": 152,
+      "id": "s05",
+      "narration": "And this comes out. Nobody filmed it. Nobody opened an editor.",
+      "timingSource": "tts",
+      "transition": "zoomthrough",
+      "type": "VIDEO_HERO",
+      "audio": "audio/wyg_short_s05.mp3"
+    },
+    {
+      "background": "zoneC",
+      "data": {
+        "screenshotCascade": {
+          "headline": "Three more, same five minutes",
+          "shots": [
+            {
+              "atWord": 4.5,
+              "color": "green",
+              "label": "A market story",
+              "src": "assets/video/sample_market.mp4"
+            },
+            {
+              "atWord": 7.917,
+              "color": "blue",
+              "label": "A product launch",
+              "src": "assets/video/sample_product.mp4"
+            },
+            {
+              "atWord": 10.25,
+              "color": "purple",
+              "label": "Something deeply technical",
+              "src": "assets/video/sample_tech.mp4"
+            }
+          ]
+        }
+      },
+      "durationFrames": 202,
+      "id": "s06",
+      "narration": "Three more. A market story, a product launch, something technical. Same five minutes.",
+      "timingSource": "tts",
+      "transition": "slide",
+      "type": "SCREENSHOT_CASCADE",
+      "audio": "audio/wyg_short_s06.mp3"
+    },
+    {
+      "background": "zoneA",
+      "data": {
+        "aspectTwin": {
+          "atWord": 5.667,
+          "color": "blue",
+          "countLabel": "four videos, one line",
+          "headline": "One description, [four videos]",
+          "sourceLabel": "one description",
+          "tallLabel": "the phone",
+          "variantLabels": [
+            "dark",
+            "light"
+          ],
+          "wideLabel": "the big screen"
+        }
+      },
+      "durationFrames": 153,
+      "id": "s07",
+      "narration": "One description gives you the big screen and the phone, in dark and light.",
+      "timingSource": "tts",
+      "transition": "zoom",
+      "type": "ASPECT_TWIN",
+      "audio": "audio/wyg_short_s07.mp3"
+    },
+    {
+      "background": "zoneB",
+      "data": {
+        "message": "Describe yours. Watch it happen.",
+        "sub": "iAuteur — including this video"
+      },
+      "durationFrames": 172,
+      "id": "s08",
+      "narration": "Everything you just watched was made this way. Including this one. Describe yours.",
+      "timingSource": "tts",
+      "transition": "fade",
+      "type": "OUTRO_CTA",
+      "audio": "audio/wyg_short_s08.mp3"
+    }
+  ]
+}

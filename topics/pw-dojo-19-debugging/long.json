@@ -1,0 +1,761 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP19: Debugging Like a Pro",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "page.pause(), PWDEBUG, codegen — and the order to reach for them in",
+    "openLoop": "A test fails. You re-run it. It fails again. Now what?",
+    "analogy": "pause() freezes the play mid-scene with the stage lights still on.",
+    "topicAxes": [
+      "skill-acquisition",
+      "reliability"
+    ],
+    "seo": {
+      "title": "Playwright Python Tutorial #19 — debugging like a pro",
+      "description": "page.pause() freezes a live run with the browser still open, PWDEBUG=1 does it without editing your test, and codegen hands you locators — not tests. Plus the ladder to climb, in order.",
+      "tags": [
+        "playwright",
+        "python",
+        "debugging",
+        "page.pause",
+        "PWDEBUG",
+        "codegen",
+        "inspector"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Debugging Like a Pro",
+    "badge": "Dojo · EP 19",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "thumbnail": {
+    "title": "FREEZE THE PLAY",
+    "badge": "EP 19 · DEBUG",
+    "asset": "img:playwright_logo_sq.svg"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Your test fails, so you run it again, and it fails again. What would you actually do instead?",
+      "data": {
+        "headline": "RE-RUN AND PRAY.",
+        "subtext": "we have all done it",
+        "heroAsset": "lucide:bug",
+        "headlineAtWord": 3.583,
+        "heroAtWord": 7.917
+      },
+      "durationFrames": 177,
+      "audio": "audio/pw-dojo-19-debugging_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Welcome back to THE NBX STUDIO. I have lost an entire evening to a test I could have fixed in ninety seconds, and the only difference was knowing which tool to reach for first. Because these tools are not interchangeable.",
+      "data": {
+        "title": "Debugging Like a Pro",
+        "subtitle": "The Playwright Dojo · Episode 19"
+      },
+      "durationFrames": 397,
+      "audio": "audio/pw-dojo-19-debugging_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So there are three tools I want to show you today. The first freezes a running test mid-flight, which means you can walk over and poke at the page while the test is still standing. The second writes your code while you click, and I will be honest about what that code is worth. The third is the ladder.",
+      "data": {
+        "iconGrid": {
+          "cols": 3,
+          "items": [
+            {
+              "icon": "lucide:pause",
+              "label": "pause()",
+              "color": "orange",
+              "atWord": 3.917
+            },
+            {
+              "icon": "lucide:terminal",
+              "label": "PWDEBUG=1",
+              "color": "orange",
+              "atWord": 8.417
+            },
+            {
+              "icon": "lucide:circle-dot",
+              "label": "codegen",
+              "color": "purple",
+              "atWord": 14.917
+            },
+            {
+              "icon": "lucide:list-ordered",
+              "label": "the ladder",
+              "color": "green",
+              "atWord": 23.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/pw-dojo-19-debugging_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Start with page dot pause, because that one genuinely feels like a superpower the first time you use it. page dot pause changes what debugging means — instead of reading about a failure afterwards, you stand inside the failure while it is still happening.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Freeze the play",
+          "subtitle": "page.pause()"
+        }
+      },
+      "durationFrames": 427,
+      "audio": "audio/pw-dojo-19-debugging_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "FROZEN_FRAME",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Drop page dot pause anywhere in your script and run it headed. Watch what happens. The page loads. The card number types itself in. And then — it just stops. Right there, on that line. The browser's still open, the form's still half-filled, and the Inspector window opens beside it. Nothing has been torn down. You can hover elements, you can pick a locator, and when you're ready you step forward exactly one action at a time.",
+      "data": {
+        "frozenFrame": {
+          "filename": "test_checkout.py",
+          "screenTitle": "Checkout",
+          "pageItems": [
+            "Card number",
+            "4242 4242 4242 4242",
+            "Pay now"
+          ],
+          "inspectorLabel": "Playwright Inspector",
+          "stepLabel": "step over one action",
+          "note": "the browser is still open",
+          "caption": "frozen, and the stage is still lit",
+          "color": "orange",
+          "atWord": 2.25,
+          "lines": [
+            {
+              "text": "page.goto(\"/checkout\")",
+              "sub": "the page loads",
+              "atWord": 7.667
+            },
+            {
+              "text": "page.get_by_label(\"Card number\")",
+              "sub": "the field fills",
+              "atWord": 10.667
+            },
+            {
+              "text": "    .fill(\"4242 4242 4242 4242\")",
+              "sub": "typed in",
+              "atWord": 13
+            },
+            {
+              "text": "page.pause()",
+              "title": "freeze",
+              "sub": "everything stops here",
+              "atWord": 16.833
+            },
+            {
+              "text": "page.get_by_role(\"button\").click()",
+              "sub": "waiting on you",
+              "atWord": 23.667
+            }
+          ],
+          "stepAtWord": 38.167
+        }
+      },
+      "durationFrames": 727,
+      "audio": "audio/pw-dojo-19-debugging_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "In your test file, page dot pause is a single line, and that one line is the whole feature. Put page dot pause wherever you want the world to stop, usually just before whatever is misbehaving. And run the test headed, because a paused headless browser is one you cannot see, which helps nobody.",
+      "data": {
+        "codeRun": {
+          "filename": "test_checkout.py",
+          "language": "py",
+          "resultLabel": "what happens",
+          "color": "orange",
+          "atWord": 1.5,
+          "caption": "put it just before the trouble",
+          "lines": [
+            {
+              "text": "page.goto(\"https://app.ex/checkout\")"
+            },
+            {
+              "text": "page.get_by_label(\"Card number\").fill(",
+              "detail": "everything up here just runs",
+              "sub": "normal, no pausing",
+              "label": "runs",
+              "atWord": 8.167
+            },
+            {
+              "text": "    \"4242 4242 4242 4242\")"
+            },
+            {
+              "text": "page.pause()",
+              "detail": "and the world stops on this line",
+              "sub": "Inspector opens beside it",
+              "label": "freeze",
+              "atWord": 18.5
+            },
+            {
+              "text": "page.get_by_role(\"button\","
+            },
+            {
+              "text": "    name=\"Pay now\").click()",
+              "detail": "this waits until you say go",
+              "sub": "step it yourself",
+              "label": "waits",
+              "atWord": 30.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 500,
+      "audio": "audio/pw-dojo-19-debugging_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Under pytest there's an easier way in. Normally you get this — a timeout, headless, gone in four seconds. But set PWDEBUG to one and you get the lot: headed forced on, every timeout off, and the Inspector open from action one.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "atWord": 1,
+          "commands": [
+            {
+              "cmd": "pytest test_checkout.py",
+              "output": [
+                "E   TimeoutError: locator.click: 30000ms",
+                "# headless. gone in four seconds."
+              ],
+              "exitCode": 1,
+              "atWord": 4.167
+            },
+            {
+              "cmd": "PWDEBUG=1 pytest test_checkout.py",
+              "output": [
+                "# headed, forced",
+                "# every timeout disabled",
+                "# Inspector open from action one"
+              ],
+              "exitCode": 0,
+              "atWord": 14
+            }
+          ]
+        }
+      },
+      "durationFrames": 437,
+      "audio": "audio/pw-dojo-19-debugging_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Worth knowing which of those two you actually want, though. PWDEBUG is for when you've no idea where the problem is and you want to walk the whole test from the very top. page dot pause is for when you already know roughly where it goes wrong, and you'd rather not step through forty lines just to arrive there.",
+      "data": {
+        "ruleTest": {
+          "kicker": "pick your entry point",
+          "rule": "PWDEBUG walks the whole test. pause() jumps to the spot.",
+          "okLabel": "right tool",
+          "noLabel": "the slow way",
+          "caption": "both open the same Inspector",
+          "color": "blue",
+          "atWord": 1.25,
+          "cases": [
+            {
+              "text": "no idea where it breaks",
+              "title": "ok",
+              "sub": "PWDEBUG=1, walk it",
+              "atWord": 12.75
+            },
+            {
+              "text": "you know the line already",
+              "title": "ok",
+              "sub": "pause() right above it",
+              "atWord": 19.833
+            },
+            {
+              "text": "stepping 40 lines to reach line 41",
+              "title": "no",
+              "sub": "that is just slower",
+              "atWord": 24.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 473,
+      "audio": "audio/pw-dojo-19-debugging_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "BROWSER_STEP",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And while it's frozen there, the Inspector has a button called Pick locator. Press it, then hover anything on the page. Playwright hands back the locator it would use — the good one, the get-by-role one, not a brittle CSS path. So the most annoying part of writing a test becomes hovering the thing.",
+      "data": {
+        "browserStep": {
+          "url": "app.example.com/checkout",
+          "screenTitle": "Checkout",
+          "caption": "hover a thing. get the locator for it.",
+          "color": "orange",
+          "atWord": 1.583,
+          "steps": [
+            {
+              "text": "Inspector → Pick locator",
+              "title": "click",
+              "label": "arm the picker",
+              "detail": "Pick locator",
+              "atWord": 5.417
+            },
+            {
+              "text": "# hover the Pay now button",
+              "title": "check",
+              "label": "hover anything",
+              "detail": "Pay now",
+              "sub": "highlighted",
+              "atWord": 11.667
+            },
+            {
+              "text": "get_by_role(\"button\", name=\"Pay now\")",
+              "title": "assert",
+              "label": "and it hands this back",
+              "detail": "the locator",
+              "sub": "copied",
+              "atWord": 20.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 524,
+      "audio": "audio/pw-dojo-19-debugging_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Right. Now the famous party trick — and the caveat that nobody ever seems to mention when they're demoing this thing at you from a conference stage.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The recorder",
+          "subtitle": "codegen, and what it gives you"
+        }
+      },
+      "durationFrames": 271,
+      "audio": "audio/pw-dojo-19-debugging_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "TERMINAL_SESSION",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "One command. Playwright codegen, then a URL. A browser opens, and a little panel opens next to it — and that panel is watching you. Every click, every keystroke, turned into Python while you work.",
+      "data": {
+        "terminal": {
+          "promptLabel": "you@laptop",
+          "cwd": "~/dojo",
+          "atWord": 1,
+          "commands": [
+            {
+              "cmd": "playwright codegen the-internet.../login",
+              "output": [
+                "# a browser opens",
+                "# and it is recording everything you do"
+              ],
+              "exitCode": 0,
+              "atWord": 8.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 394,
+      "audio": "audio/pw-dojo-19-debugging_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "RECORD_DRAFT",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "So you click the username box, and a line of Python appears. Type a name — another line. Click the password box, press Login, and there's your script, written while you worked. Lovely, first time. But look at what you've got. Those locators are real and good, and they're the reason to use this at all. Everything else is a transcript of you clicking. No assertions. No test names. It checks nothing, because it never watched you check anything.",
+      "data": {
+        "recordDraft": {
+          "sourceLabel": "the real login page",
+          "outputLabel": "generated, live",
+          "missing": [
+            "no assertions",
+            "no test names",
+            "no structure"
+          ],
+          "verdict": "a source of locators, not tests",
+          "caption": "keep the locators. rewrite the rest.",
+          "color": "purple",
+          "atWord": 2.5,
+          "actions": [
+            {
+              "label": "click the username box",
+              "text": "page.get_by_label(\"Username\").click()",
+              "title": "keep",
+              "sub": "a real locator",
+              "atWord": 5.833
+            },
+            {
+              "label": "type tomsmith",
+              "text": "    .fill(\"tomsmith\")",
+              "title": "drop",
+              "sub": "your data, not a test",
+              "atWord": 10.833
+            },
+            {
+              "label": "click the password box",
+              "text": "page.get_by_label(\"Password\").click()",
+              "title": "keep",
+              "sub": "also a real locator",
+              "atWord": 15
+            },
+            {
+              "label": "press Login",
+              "text": "page.get_by_role(\"button\").click()",
+              "title": "keep",
+              "sub": "the one you came for",
+              "atWord": 19.167
+            },
+            {
+              "label": "read the green banner",
+              "text": "# nothing generated",
+              "title": "drop",
+              "sub": "records acts, not checks",
+              "atWord": 40.083
+            }
+          ],
+          "verdictAtWord": 45.083
+        }
+      },
+      "durationFrames": 812,
+      "audio": "audio/pw-dojo-19-debugging_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "CODE_DIFF",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So here is the workflow that works. Record the flow with codegen, steal the locators, rewrite the rest. Name your test for what the test proves, because test underscore login tells the next person nothing. Then add the assertion codegen was never going to write.",
+      "data": {
+        "diff": {
+          "fileName": "test_login.py",
+          "atWord": 1,
+          "stat": {
+            "plus": 4,
+            "minus": 2
+          },
+          "rows": [
+            {
+              "kind": "del",
+              "text": "page.get_by_label(\"Username\").click()"
+            },
+            {
+              "kind": "del",
+              "text": "page.get_by_label(\"Password\").click()"
+            },
+            {
+              "kind": "add",
+              "text": "def test_login_shows_banner(page):"
+            },
+            {
+              "kind": "ctx",
+              "text": "    page.get_by_label(\"Username\")"
+            },
+            {
+              "kind": "ctx",
+              "text": "        .fill(\"tomsmith\")"
+            },
+            {
+              "kind": "ctx",
+              "text": "    page.get_by_role(\"button\").click()"
+            },
+            {
+              "kind": "add",
+              "text": "    expect(page.get_by_role(\"alert\"))"
+            },
+            {
+              "kind": "add",
+              "text": "        .to_contain_text(\"You logged into\")"
+            }
+          ]
+        }
+      },
+      "durationFrames": 477,
+      "audio": "audio/pw-dojo-19-debugging_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "One last thing, and then we are done with the whole course. This ladder is the part I would tattoo on people if they let me, because the order you try things in is often the difference between an hour of your evening and ninety seconds.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The ladder",
+          "subtitle": "in this order, every time"
+        }
+      },
+      "durationFrames": 375,
+      "audio": "audio/pw-dojo-19-debugging_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "ERROR_TRACE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Rung one is simply to read the error. Properly, though — the whole message, not just the first line. Playwright's messages are unusually good: the locator Playwright used, what Playwright waited for, and what Playwright found instead. Most bugs die here.",
+      "data": {
+        "callStack": {
+          "mode": "trace",
+          "exception": "TimeoutError: locator.click: Timeout 30000ms",
+          "culprit": 1,
+          "atWord": 1,
+          "frames": [
+            {
+              "fn": "test_checkout",
+              "file": "test_pay.py",
+              "line": 22,
+              "sub": "your test, the click line"
+            },
+            {
+              "fn": "waiting for the button",
+              "sub": "name=\"Pay now\" — 30s",
+              "color": "red"
+            },
+            {
+              "fn": "found: name=\"Pay Now\"",
+              "sub": "capital N. that is the bug",
+              "color": "orange"
+            }
+          ]
+        }
+      },
+      "durationFrames": 480,
+      "audio": "audio/pw-dojo-19-debugging_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "AUTOMATION_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Rung two, if reading it didn't do it. Run headed with slow-mo five hundred and every action takes half a second. Suddenly you can watch. Nine times in ten you spot it with your eyes — the click landing on a cookie banner.",
+      "data": {
+        "auto": {
+          "url": "app.example.com/checkout",
+          "runner": "playwright",
+          "content": {
+            "kind": "form",
+            "title": "Checkout",
+            "fields": [
+              {
+                "label": "Card number",
+                "value": "4242 4242 4242"
+              },
+              {
+                "label": "Expiry",
+                "value": "12/28"
+              }
+            ],
+            "submit": "Pay now"
+          },
+          "steps": [
+            {
+              "action": "goto",
+              "target": "/checkout",
+              "status": "pass"
+            },
+            {
+              "action": "type",
+              "target": "Card number",
+              "value": "4242 4242",
+              "status": "pass"
+            },
+            {
+              "action": "click",
+              "target": "Pay now",
+              "status": "fail",
+              "reason": "a cookie banner was sitting on it"
+            }
+          ],
+          "atWord": 1
+        }
+      },
+      "durationFrames": 407,
+      "audio": "audio/pw-dojo-19-debugging_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "CACHE_PYRAMID",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Survives that? Climb down. Headed with slow-mo. Then pause, or PWDEBUG. Then the trace, for CI-only breakage. Codegen at the bottom. Each rung costs more. Seniors read the error. Juniors re-run and pray.",
+      "data": {
+        "pyramid": {
+          "headline": "Climb down only when you have to",
+          "axisTop": "cheapest · try first",
+          "axisBottom": "most effort · last",
+          "tiers": [
+            {
+              "label": "read the error",
+              "speed": "free",
+              "size": "most bugs",
+              "color": "green"
+            },
+            {
+              "label": "--headed --slowmo",
+              "speed": "30s",
+              "size": "watch it"
+            },
+            {
+              "label": "pause() / PWDEBUG",
+              "speed": "2 min",
+              "size": "poke at it"
+            },
+            {
+              "label": "trace on failure",
+              "speed": "5 min",
+              "size": "CI only"
+            },
+            {
+              "label": "codegen",
+              "speed": "last",
+              "size": "stubborn",
+              "color": "orange"
+            }
+          ],
+          "atWord": 1.167
+        }
+      },
+      "durationFrames": 475,
+      "audio": "audio/pw-dojo-19-debugging_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "QUIZ_CARD",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Last quiz of the whole course. A test fails on your machine, with a clear timeout message naming the locator. What do you do first? Ready? A. Read it. The message already told you which locator and what it waited for.",
+      "data": {
+        "quiz": {
+          "question": "A test fails with a clear timeout. First move?",
+          "options": [
+            {
+              "text": "Read the error message"
+            },
+            {
+              "text": "Run it again, headed"
+            },
+            {
+              "text": "Open a trace"
+            },
+            {
+              "text": "Fire up codegen"
+            }
+          ],
+          "answerIndex": 0,
+          "revealAtWord": 20.75,
+          "why": "The message names the locator and the wait. Start there.",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 430,
+      "audio": "audio/pw-dojo-19-debugging_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Four lines, and then we're done. page dot pause freezes a live run with the browser still open. PWDEBUG equals one does the same thing without editing your test. Codegen hands you locators, not tests. And the ladder starts with reading the error, which is where most bugs already died.",
+      "data": {
+        "heading": "Debugging, in four lines",
+        "points": [
+          {
+            "text": "pause() freezes a LIVE run",
+            "atWord": 7.5
+          },
+          {
+            "text": "PWDEBUG=1 — same, no edit",
+            "atWord": 15
+          },
+          {
+            "text": "codegen gives locators, not tests",
+            "atWord": 21.75
+          },
+          {
+            "text": "read the error first. always.",
+            "atWord": 27.583
+          }
+        ]
+      },
+      "durationFrames": 522,
+      "audio": "audio/pw-dojo-19-debugging_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "And that's all nineteen lessons. You started by opening a browser. You've ended up running a suite in parallel, on a robot's schedule. That's not nothing. Whole course is free, over at the Playwright Dojo.",
+      "data": {
+        "message": "That is all 19 lessons.",
+        "sub": "san-gitlogin.github.io/playwright-dojo",
+        "source": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 380,
+      "audio": "audio/pw-dojo-19-debugging_long_s20.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

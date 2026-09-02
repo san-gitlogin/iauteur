@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "topic": "The Playwright Dojo — EP12 shorts: dialogs",
+    "format": "short",
+    "fps": 30,
+    "screenplay": "explainer",
+    "onePayoff": "why a confirm box silently cancels your test, and the one line that fixes it",
+    "openLoop": "You click Delete, a confirm box appears — and nothing gets deleted. No error either.",
+    "analogy": "Brief the doorman before the knock, not during.",
+    "topicAxes": [
+      "skill-acquisition"
+    ],
+    "seo": {
+      "title": "Why your Playwright delete did nothing #playwright #python",
+      "description": "No handler means Playwright dismisses the confirm — and dismissing a confirm is Cancel.",
+      "tags": [
+        "playwright",
+        "python",
+        "dialog",
+        "confirm",
+        "testing",
+        "shorts"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "A SILENT CANCEL",
+    "badge": "Dojo · EP 12",
+    "asset": "img:playwright_logo_sq.svg",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "You click Delete. A box asks if you are sure. And then nothing happens at all.",
+      "data": {
+        "headline": "NOTHING GOT DELETED.",
+        "subtext": "and nothing failed either",
+        "heroAsset": "lucide:folder",
+        "headlineAtWord": 4.083,
+        "heroAtWord": 7.917
+      },
+      "durationFrames": 169,
+      "audio": "audio/pw-dojo-12-dialogs-files_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "DIALOG_GATE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "That box comes from the browser, not your page. It freezes everything and no locator can reach it. So Playwright answers it for you, and it picks Cancel.",
+      "data": {
+        "dialogGate": {
+          "message": "Are you sure you want to delete?",
+          "kind": "confirm",
+          "handler": "none",
+          "trigger": "Delete account",
+          "pageTitle": "Your account",
+          "outcome": "nothing was deleted",
+          "caption": "no error. no hang. a silent Cancel.",
+          "color": "red",
+          "atWord": 1,
+          "knockAtWord": 5.167,
+          "answerAtWord": 14.417,
+          "rows": [
+            {
+              "label": "Profile settings"
+            },
+            {
+              "label": "Your account",
+              "title": "target"
+            },
+            {
+              "label": "Billing history"
+            }
+          ]
+        }
+      },
+      "durationFrames": 303,
+      "audio": "audio/pw-dojo-12-dialogs-files_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "CODE_RUN",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "The fix is one line, and the order is everything. Register your handler first. Then do the click that makes the box appear.",
+      "data": {
+        "codeRun": {
+          "filename": "dialogs.py",
+          "language": "py",
+          "resultLabel": "what happens",
+          "color": "green",
+          "atWord": 2.667,
+          "caption": "brief the doorman before the knock",
+          "lines": [
+            {
+              "text": "page.once(\"dialog\",",
+              "detail": "answer the next dialog with OK",
+              "sub": "registered, and waiting",
+              "label": "armed",
+              "atWord": 6.833
+            },
+            {
+              "text": "    lambda dialog: dialog.accept())"
+            },
+            {
+              "text": "page.get_by_role(\"button\",",
+              "detail": "now the click that makes it knock",
+              "sub": "the box appears, accepted",
+              "label": "clicked",
+              "atWord": 14.333
+            },
+            {
+              "text": "    name=\"Delete account\").click()"
+            }
+          ]
+        }
+      },
+      "durationFrames": 251,
+      "audio": "audio/pw-dojo-12-dialogs-files_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "RULE_TEST",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So remember the order, not the syntax. Handler first, then click. The other way round is already too late.",
+      "data": {
+        "ruleTest": {
+          "kicker": "the rule",
+          "rule": "register the handler BEFORE the click",
+          "okLabel": "answered",
+          "noLabel": "auto-dismissed",
+          "caption": "no handler means Cancel, every time",
+          "color": "green",
+          "atWord": 1,
+          "cases": [
+            {
+              "text": "page.once(...) then click",
+              "title": "ok",
+              "sub": "somebody was ready",
+              "atWord": 8.25
+            },
+            {
+              "text": "click, then page.once(...)",
+              "title": "no",
+              "sub": "the box is already gone",
+              "atWord": 10.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 227,
+      "audio": "audio/pw-dojo-12-dialogs-files_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Uploads and downloads are in the full lesson, free at the Playwright Dojo.",
+      "data": {
+        "message": "The Playwright Dojo",
+        "sub": "san-gitlogin.github.io/playwright-dojo"
+      },
+      "durationFrames": 153,
+      "audio": "audio/pw-dojo-12-dialogs-files_short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

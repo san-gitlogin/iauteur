@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "topic": "Bonsai 27B: the AI model that runs on your phone",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "TODO",
+    "openLoop": "TODO",
+    "analogy": "TODO"
+  },
+  "brand": {
+    "theme": "CHOOSE_DARK_THEME",
+    "channel": "TODO"
+  },
+  "cover": {
+    "title": "TODO",
+    "badge": "TODO",
+    "asset": "lucide:sparkles",
+    "frames": 2
+  },
+  "scenes": []
+}
