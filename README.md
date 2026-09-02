@@ -25,7 +25,7 @@
   <a href="https://remotion.dev"><img alt="Built with Remotion" src="https://img.shields.io/badge/built%20with-Remotion-0B84F3"></a>
   <img alt="Node" src="https://img.shields.io/badge/Node-%E2%89%A518-339933?logo=nodedotjs&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white">
-  <img alt="341 components" src="https://img.shields.io/badge/components-341-E8A22E">
+  <img alt="357 components" src="https://img.shields.io/badge/components-357-E8A22E">
   <img alt="30 design packs" src="https://img.shields.io/badge/design%20packs-30-E8A22E">
   <img alt="42 themes" src="https://img.shields.io/badge/themes-42-E8A22E">
   <img alt="Works with any LLM" src="https://img.shields.io/badge/works%20with-any%20LLM-8957E5">
@@ -33,7 +33,7 @@
 
 Turn a **topic** into a finished tech‑explainer video. You (or any LLM) describe the video as a
 **JSON spec**; [Remotion](https://remotion.dev) renders it to MP4 — 16:9 long‑form **and** 9:16 shorts,
-each in **dark and light**. The project ships a large, audited component library (**341 scene types**)
+each in **dark and light**. The project ships a large, audited component library (**357 scene types**)
 that automatically reskins across **30 design packs** and **42 themes**.
 
 > **The JSON is the movie.** `topics/<slug>/long.json` + `shorts.json` → Remotion renders exactly what
@@ -44,6 +44,19 @@ that automatically reskins across **30 design packs** and **42 themes**.
 diagrams, device mockups, timelines — that reads theme tokens and re‑skins itself. A linter counts your
 words against per‑component budgets and refuses to render an overfull scene, and animations are anchored
 to individual **words** of the narration, so the payoff lands exactly when it's spoken.
+
+**Real software, really running.** Alongside the synthesised components there is a **screen‑recording
+layer**: a Playwright‑driven VS Code (via `code serve-web`) executes a scripted demo, and the runner emits
+video *plus* an event manifest — what ran, when, where on screen, and what it actually printed. Every
+character shown as terminal output is **read back from the real terminal**; if it cannot be read back, the
+recording fails rather than guesses. Because the manifest carries per‑step timings and measured bounding
+boxes, that footage obeys the same `atWord` clock as everything else, so the picture still moves with the
+voice. Recordings stay local and are never committed — `demos/*.json` is what regenerates them. See
+[`docs/SCREEN_RECORDING.md`](docs/SCREEN_RECORDING.md).
+
+```bash
+npm run record -- demos/uv-tour.json     # capture; auto-rebakes any spec that uses it
+```
 
 **Bring your own model.** The director that writes the JSON is *any* LLM. Point the console at your own
 API key (OpenAI, Azure, Groq, OpenRouter, Together, Hugging Face, or a **local Ollama**) and it runs the
@@ -172,7 +185,7 @@ stay in step with the UI.</sub>
 
 ## Showcase
 
-A handful of the **341 components**, rendered straight from JSON specs across different design packs
+A handful of the **357 components**, rendered straight from JSON specs across different design packs
 (finance in `corptrust`, science in `organic`) — dark themes shown:
 
 <table>

@@ -18,7 +18,7 @@ and what already exists so it does not get rebuilt.
 ## Prove it's healthy before changing anything
 
 ```bash
-npm run gate                      # 11 seals; must exit 0
+npm run gate                      # 14 seals; must exit 0
 npm run typecheck                 # tsc --noEmit
 npm run publish-safety            # staged changes: secrets / identity / machine paths
 npm run publish-safety:all        # same, over every tracked file
@@ -57,7 +57,7 @@ On Windows, prefix Python with `PYTHONIOENCODING=utf-8` or the seals crash on `�
 | `topics/<slug>/long.json` + `shorts.json` | one folder per video. **Tracked** since 2026-08-21 — the authored work, 1.3 MB for the channel |
 | `topics/<slug>/out/` | renders, thumbnails, upload kits. **Gitignored** — 3.9 GB and regenerable |
 | `briefs/` | the source each spec was authored from. **The JSON is the truth, not the `.py`** — read `briefs/README.md` before running any builder |
-| `src/scenes/` | the 339 scene components (341 registered types) |
+| `src/scenes/` | the 355 scene components (357 registered types) |
 | `src/designs/<pack>/` | 30 design packs (layout/motion overrides) |
 | `src/themes.ts` | 42 themes (38 dark + 4 light) |
 | `scripts/lib/manifest.mjs` | **the single source of truth** for every component's data contract + a valid `example` |
@@ -75,6 +75,59 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 ```
 
 ## Recent work
+
+### 2026-09-02 — the recording subsystem now runs on macOS, and the uv walkthrough it produced
+
+The screen-recording layer had only ever run on Windows. Bringing it up on the Mac to build
+a video from a Medium article on uv found **twelve defects**, of which only two were genuine
+platform differences — the rest were latent bugs Windows had been getting away with. Three of
+them made a recording *succeed while being wrong*, which is the failure mode the whole
+subsystem exists to prevent. Full detail and the measurements: `docs/SCREEN_RECORDING.md`
+gotchas **57-70**; the summary is in CHANGELOG under 2026-09-02.
+
+The three worth knowing without opening either file:
+
+- **Every exit code in every recording was 1.** The POSIX prompt hook put a LITERAL tab in a
+  string that gets *typed into a live shell*, where a tab is completion, not a character.
+  PowerShell escaped its tab and never typed one, so Windows never saw it.
+- **The next command lost its first character** after every step, because reading the
+  scrollback through the command palette costs the terminal one key event. `echo BBB` ran as
+  `cho BBB` — a real command with real output, recorded as truth.
+- **`code` on PATH was Cursor**, not VS Code. A fork answers every probe the runner makes.
+
+⚠ **THE FIRST MAC FRAME LEAKED THE OPERATOR'S HANDLE**, in the default zsh prompt
+(`<handle>@<machine>`). `assertNoIdentity` checked the home path and the repo path and
+matched neither. That is the SAME miss as the 2026-08-30 repo-wide incident, which had
+already written down *"`<handle>@box` is not a path"* — the gate was fixed there and this
+guard, the one closest to the pixels, was not. **When a guard is fixed, grep for its
+siblings.**
+
+**`npm run gate` was RED, and had been on both machines.** `normalize.mjs`'s envelope
+allowlists predated LAW 0g's amendment, so it deleted the now-REQUIRED `meta.subject` and the
+next lint rejected the spec it had just cleaned — four shipped specs went pass → fail through
+a normalize, and four thumbnail features were being silently stripped. Those lists now live
+once, in `scripts/lib/constants.mjs`. Separately, `check-recordings` could never pass on a
+fresh clone (recordings are gitignored BY DESIGN), which is exactly the gate-you-learn-to-
+ignore this file warns about under check-fresh: absent footage is now a notice repo-wide and
+fatal for a render, scoped with `--slug`.
+
+**New topic: `uv-getting-started`** — 20 scenes, 6m28s, moderndark, plus a 31s vertical.
+Built from `briefs/uv-tour/build_long.mjs` (do NOT hand-edit the JSON). Thirteen real uv
+clips from `demos/uv-tour.json`. `briefs/uv-tour/research.md` holds the capture, including
+**four commands the source article gets wrong** that the real binary rejects — three of them
+are on screen, because a rejected command is the most direct argument for LAW 0m there is.
+
+⚠ **It also corrects one of OUR notes.** The 2026-08-21 research recorded that `uv init` does
+not create `.git/`. On uv 0.12.9 it does, and so does `.gitignore` — but only when uv
+initialises the repo itself. Our own measurement had gone stale in eleven days, which is the
+point LAW 0m keeps making: a measurement is true of a version, not forever.
+
+**Capturing a scaffolding tool needs an identity plan before the first take.** `uv init`
+stamps the git identity into `pyproject.toml`, so a capture points `GIT_CONFIG_GLOBAL` at a
+scratch config — the default behaviour is still what gets taught, with nothing personal in
+it. And recording workspaces moved OUT of the repo to `/tmp/iauteur-rec`, because uv prints
+absolute paths constantly and the old location was under `$HOME`.
+
 
 ### 2026-08-30 — the design audit, and the identity leak it found by accident
 
@@ -1052,6 +1105,54 @@ identity is local-only because this repo is public.
 
 Videos rendered before the fix are left as they are (owner's call); the change applies from
 the next render onward.
+
+## Gotchas that are not about recording
+
+**AN UNSUPPORTED FIELD IS SILENT, AND SO IS AN ACCENT SYNTAX THAT DOES NOT APPLY.** Same
+family as the nested-`data_key` trap below, and it cost three more defects on one video:
+
+- `TITLE_CARD` has **no `asset` field** (only `title` + `subtitle`). Authoring `asset: si:uv`
+  dropped the logo silently — the owner reported it as *"the logo is hidden somewhere"*.
+- `HOOK`'s `headline` is **plain text**. The `[accent]` bracket syntax belongs to `UV_STAGE`
+  and friends, so HOOK printed the brackets on screen: `ONE TOOL, [NOT FIVE]`. Measured
+  across the catalogue: **96 of 97 shipped hooks carry no brackets**; the new one was the
+  only offender. A one-line census over shipped specs is the cheapest way to catch this
+  class — the convention is already in the data.
+- `install-routes` treats its **LAST stage item as the DESTINATION**, not a route
+  (`items.slice(0,-1)` / `items[items.length-1]`). Authored as five equal items, the fifth
+  detached and floated in the middle of the pane. The fix was to author the destination.
+
+The general rule: **the linter checks budgets and shapes, not whether a field EXISTS on the
+type you used.** Before authoring an unfamiliar field, print the manifest entry — and after
+rendering, look at the frame rather than at the JSON.
+
+**A NESTED `data_key` IS SILENT WHEN YOU MISS IT.** Some scene types put their fields
+directly in `data`; others nest them under a key the manifest names (`data_key`). Get it
+wrong and nothing complains — the linter passes, `tsc` passes, the scene renders — and the
+component simply reads `undefined`. Cost twice in one session on `uv-getting-started`:
+
+- `RECAP` takes `heading` + `points[{text, atWord}]`, not `title`/`items`. Wrong shape meant
+  the beat had **zero anchors**, so it earned only the static 16s ceiling and got warned for
+  running 27s — a warning whose real cause was three levels away from what it said.
+- `CHAPTER` nests under `chapter`. Unnested, the card drew with no title AND the upload kit's
+  chapter list read **"Chapter"** three times, which would have shipped in the description.
+
+One line audits a whole spec, and it belongs in any builder:
+
+```js
+import {MANIFEST} from './scripts/lib/manifest.mjs';
+for (const s of spec.scenes) {
+  const dk = MANIFEST[s.type]?.data_key;
+  if (dk && !Object.hasOwn(s.data ?? {}, dk)) console.log('WRONG', s.id, s.type, '->', dk);
+}
+```
+
+**READ THE UPLOAD KIT BEFORE CALLING A RENDER DONE.** `out/upload.md` is generated from the
+spec and is the first place a data-shape mistake becomes visible in words — it is how the
+`CHAPTER` bug above was caught, after the video had already rendered clean. Its description
+template reads *"In this video, <channel> breaks down <onePayoff>"*, so `meta.onePayoff` must
+be a **noun phrase**, not a sentence, or the description reads "breaks down One binary
+replaces pip…".
 
 ## Open threads
 

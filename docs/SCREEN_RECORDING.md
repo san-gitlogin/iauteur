@@ -395,6 +395,191 @@ Machine: Windows 11, node v24.13.1, npm 11.8.0.
     source, write it by code point (`String.fromCharCode(160)`) — an invisible NBSP sitting
     inside a regex literal is a landmine for the next reader.
 
+### GOTCHAS 57-73 — THE MACOS PORT AND THE FIRST RECORDED CUT (2026-09-02)
+
+Everything above was measured on Windows. Bringing the runner up on macOS found **twelve**
+defects, and the shape of them is the lesson: only two were "macOS is different". The rest
+were **latent bugs the Windows machine had been getting away with**, several of which were
+silently corrupting what a recording claimed to be true.
+
+57. ⚠ **`code` ON PATH IS NOT NECESSARILY VS CODE.** On this Mac it symlinks into
+    `Cursor.app`. Cursor is a VS Code FORK: it answers `--version`, it serves `serve-web`,
+    and its workbench carries `.monaco-workbench`, so **every assertion the runner makes
+    passes** and the recording is footage of a different product — in a course about VS
+    Code. Silent, plausible, wrong.
+    The discriminator is `serve-web --help`, whose first line NAMES the product
+    ("Runs a local web version of Visual Studio Code" vs "…of Cursor"). `--version` cannot
+    do it: VS Code prints `1.109.1`, Cursor prints `2.5.20`, and neither says whose.
+    `vscodeCli()` now resolves an override → PATH → the platform's real install locations,
+    and REFUSES rather than record a fork. `IAUTEUR_VSCODE_CLI` overrides.
+
+58. **`--default-folder` IS VERSION-SPECIFIC, AND SO IS GOTCHA 12.** That gotcha states
+    flatly that `?folder=` "DOES NOT WORK with `code serve-web`" and that `--default-folder`
+    is the fix. Both halves were measured on 1.134.0 and neither is universal:
+
+    | | `--default-folder` | `?folder=` |
+    |---|---|---|
+    | 1.134.0 (Windows) | supported | Explorer shows an unreadable leaf |
+    | 1.109.1 (macOS) | **rejected**, server never starts | binds correctly |
+
+    On 1.109.1 the unsupported flag makes the CLI exit with `unexpected argument`, which
+    surfaces 180 seconds later as a bare "did not become ready" with no cause in it. The
+    runner now asks the build what it supports and picks the route, and `openWorkbench`
+    ASSERTS the folder actually bound — by the FOLDER NAME IN THE WINDOW TITLE, not by the
+    Explorer's file list, because a demo whose whole point is to create the files starts
+    from an empty directory and an empty Explorer proves nothing.
+
+59. **THE PRIMARY MODIFIER IS NOT ALWAYS `Control`.** VS Code for the Web adapts to the
+    host OS, so on macOS the palette is Cmd+Shift+P. Playwright's `'Control+A'` sends a
+    real Control, which on macOS is a different, mostly unbound chord — so the settings
+    paste silently no-oped and the run died three steps later at *"Theme did not apply:
+    wanted dark, workbench isDark=false"*, which names the symptom and not one word of the
+    cause. `PRIMARY = 'ControlOrMeta'` for workbench commands. **Not** for the terminal's
+    Ctrl+C: that is SIGINT, and it is Control everywhere. Document start/end is a third
+    case — macOS binds Cmd+Up / Cmd+Down, and Ctrl+Home/End is unbound there.
+
+60. **`%` IS A PROMPT.** zsh has been the macOS default login shell since Catalina and the
+    prompt regex knew only `>` `$` `#`. The first recording attempt sat through the full
+    120s timeout with a perfectly good prompt on screen, reporting "never produced a
+    prompt".
+
+61. ⚠ **A LITERAL TAB TYPED INTO A SHELL IS COMPLETION, NOT A CHARACTER.** The POSIX
+    prompt hook built its output with `String.fromCharCode(9)` between the two fields. That
+    tab is *typed*, so the shell completed on it instead of inserting it, and the exit file
+    came back as `False1` with no separator. `readExitStatus` split on a tab it could not
+    find and fell through to its `ok !== 'True'` branch, so **every command in every
+    recording reported exit code 1** — including `echo hello`. PowerShell was unaffected
+    because its half escapes the tab as `` `t `` and never types a control character.
+    Wrong exit codes are worse than missing ones: `expect: {exitCode: 0}` then fails on
+    every command that worked, while the manifest still says `truth: 'read-back'`.
+    The format string carries `\t` as two characters now and printf expands it.
+
+62. **VS CODE'S OWN `precmd` RESETS `$?` BEFORE OURS RUNS.** Defining `precmd()` directly
+    is legacy zsh and collides with the shell integration that is already registered.
+    Whichever runs first leaves `$?` holding its own last internal command's status. The
+    hook goes at the FRONT of `precmd_functions` — zsh's supported extension point, which
+    takes an order — and `PROMPT_COMMAND` is prepended for bash for the same reason.
+
+63. ⚠ **`readBuffer` WAS READING AN ACCESSIBILITY MIRROR.** VS Code mounts a SECOND,
+    one-row xterm beside the real one holding just the current command line, and being
+    mounted later it won the old "last mounted xterm with size" heuristic. Measured:
+    `cat pyproject.toml` completed perfectly in terminal 0 — 13 rows ending
+    `build-backend = "uv_build"` and a fresh prompt — while readBuffer returned terminal
+    1's lone `PS myapp> cat pyproject.toml`. The completion check never saw a prompt and
+    the step died on its timeout, **on a command that had already succeeded**. Every
+    recording died on its third step, because the mirror only appears once there is a
+    command line to mirror. Now: ask for `.terminal-wrapper.active`, and fall back to the
+    terminal with the MOST rendered rows rather than the newest.
+
+64. ⚠ **READING THE SCROLLBACK THROUGH THE PALETTE COSTS THE NEXT COMMAND ITS FIRST
+    CHARACTER.** `Terminal: Select All` + `Copy Selection` reads the buffer correctly and
+    wrecks the following step: the terminal drops one key event after the round-trip, so
+    `echo BBB` arrived as `cho BBB` — a REAL command with REAL output, recorded as truth.
+    Two attempted repairs made it worse: `End` as a sacrificial keystroke stopped a 118-char
+    prep command returning a prompt at all, and Ctrl+U/Ctrl+K came back **echoed into the
+    line as a literal `^K`** with the previous command still on it (`u^Kls -av run myapp`).
+    The fix is to stop using the palette. `readScrollback` runs in `runFinalize`, AFTER the
+    step's t1 mark and after the command has completed, so **nothing is writing to the
+    buffer** — the viewport can simply be walked top to bottom with 40% overlap and the
+    windows stitched. That is what makes scrolling deterministic here where gotcha 41 showed
+    polling DURING a fast write is not: there is no race left to lose.
+    `Terminal: Select All` also scrolls to the TOP and leaves it there, which is a second
+    bug the same change removes.
+
+65. **A COMMAND LINE MUST BE READ BACK BEFORE ENTER — AND COMPARED EXACTLY.** A dropped or
+    stray character produces a different real command, so the runner cannot tell intent from
+    accident afterwards. Two traps in writing that check: `includes()` accepts `uls -a` as
+    containing `ls -a`, so it must be an EXACT comparison of the text after the prompt; and
+    finding the prompt with `lastIndexOf('> ')` finds a **redirect** instead, so
+    `printf '…' > /tmp/x` was read as the command `/tmp/x` and rejected three times on a
+    line that was typed perfectly. Anchor on the known prompt shape. Long commands are
+    exempt: xterm wraps them across rows, right-trims each row and can split inside a word,
+    so the ~300-char prompt hook came back with a space wedged into `precmd_functions`.
+
+66. ⚠ **A PATH IS NOT THE ONLY SHAPE IDENTITY TAKES.** `assertNoIdentity` checked the home
+    path and the repo path, and the very first frame of the first Mac recording carried
+    `<handle>@<machine>` — the default zsh prompt — which contains neither. This
+    is the SAME miss as the 2026-08-30 repo-wide incident, whose write-up says it exactly:
+    *"`<handle>@box` is not a path."* The gate was fixed there and this guard was not, so
+    the identical hole stayed open one layer down. It now also matches `user@` and the
+    hostname. A bare short username is deliberately NOT a needle — it false-positives on
+    ordinary words, and an aborted take is expensive.
+
+67. **A RECORDING WORKSPACE MAY NOT LIVE UNDER `$HOME`.** It was `out/rec-ws/`, i.e. inside
+    the repo, i.e. under the operator's home directory. Fine for a tool that says nothing
+    about where it is, and fatal for one that does: `uv add` prints
+    `Building myapp @ file:///Users/<operator>/iauteur/out/rec-ws/uv-tour` on every
+    dependency change. `assertNoIdentity` catches it and aborts the take — the guard doing
+    its job, and making the take IMPOSSIBLE rather than safe. Workspaces now live at
+    `/tmp/iauteur-rec` (`recWsRoot()`, `IAUTEUR_REC_WS` overrides). On Windows
+    `os.tmpdir()` is NOT a candidate: it resolves under `C:\Users\<name>`.
+
+68. **`drawtext` NEEDS AN ffmpeg BUILT `--enable-libfreetype`.** The Homebrew build here is
+    not, so `npm run rec-fixture` died at `No such filter: 'drawtext'` and took the whole
+    seven-script `test-rec-*` suite with it — on a machine where the product itself worked.
+    The fixture paints its own frames now (`scripts/lib/record/framepaint.mjs`, a
+    dependency-free PNG writer with a 5x7 bitmap font) and hands ffmpeg a PNG sequence,
+    which is the same encode path the real capture already uses. One less ffmpeg feature
+    the rig depends on and the product does not.
+
+69. **THE DEFAULT TERMINAL PANEL IS ~13 ROWS, AND THAT IS TOO SHORT TO MEASURE IN.**
+    `cat pyproject.toml` prints 18 lines, so a third scrolled away before a mark could be
+    taken and the take died on "Mark could not be measured" — the runner correctly refusing
+    to invent a rectangle for text genuinely not on screen. It is also the wrong picture: on
+    a terminal-driven demo the editor half holds nothing but the VS Code watermark, so more
+    than half the captured frame carries no information while the half that does is squeezed
+    into 13 rows. `"maximizePanel": true` on the demo runs *View: Toggle Maximized Panel*
+    AFTER `openTerminal` (prep kills every terminal, so at prep time there is nothing to
+    measure) and asserts the row count moved — **42 rows** here.
+
+70. **A HEADED BROWSER WINDOW IS CLAMPED BY THE SCREEN; THE CAPTURE IS NOT.** Owner, on the
+    first Mac footage: *"the window is not full it gets cut at the right and bottom."*
+    Measured: `window.innerWidth/Height` is the requested **1600x900** and
+    `outerWidth/Height` is **1492x870**, because the screen is 1600x900 and the OS will not
+    grant a larger window. Chrome still renders and screencasts the full viewport — the
+    captured segments are 1600x900 with the complete status bar and right-edge icons in
+    them, verified by cropping the outer strips of a real frame. So the LIVE window looks
+    cut and the RECORDING is whole. Worth knowing before "fixing" a bug that is not in the
+    output.
+
+71. ⚠ **A TERMINAL ACCUMULATES, AND A MAXIMISED ONE THEN FILLS THE FRAME.** Gotcha 69
+    maximised the panel to get readable rows, and that created a worse problem three beats
+    later: output from every earlier step was still on screen, so the beat's own lines sat
+    in the middle of a wall of text AND the ink reached the bottom edge. With no ink-free
+    band left, the overlay solver put the caption card ON the live output and the bottom
+    scrim dimmed the very lines being explained. Owner: *"the vignette kinda blurs what's
+    happening… component overlay overlapping exactly at the time where something is
+    highlighted and is being explained."*
+    Measured on the shipped cut: terminal ink to **y=846** with the card starting at
+    **y=800**. After clearing per beat, the deepest ink across all 13 steps is **y=536 of
+    900** — the bottom 40% is free and the card has somewhere to go.
+    **`"clearFirst": true` on the first step of each SCENE.** It runs BEFORE t0, so the
+    clear is outside the segment and never appears in the footage, and it is what a person
+    demonstrating something actually does. Steps that must show accumulation (`ls -a` right
+    after `uv run`, to show the two new files) deliberately do NOT clear.
+    Guard it: `runCommand` completes on "the buffer CHANGED and now ends at a prompt", so
+    clearing an ALREADY-empty screen changes nothing and hangs for the full timeout — the
+    first beat follows prep's own clear and hit exactly that. Skip the clear when the
+    buffer holds one line.
+
+72. **THE `[accent]` SYNTAX IS PER-TYPE, AND PLAIN-TEXT FIELDS PRINT THE BRACKETS.**
+    `UV_STAGE.headline` parses it; `HOOK.headline` and `RECORDED_STEP.caption` do not, and
+    render `One name, [four installs]` literally. Census over the shipped catalogue settles
+    it in one command — 96 of 97 hooks and 34 of 35 captions carry no brackets. When unsure
+    whether a field supports a syntax, count how the existing corpus uses it.
+
+73. **`verify-render`'s low-contrast check MISREADS AN EMPTY BACKGROUND.** After gotcha 71
+    cleared the terminal per beat, the verifier began reporting 8 `low-contrast` callout
+    findings on a cut that had reported none. Inspected at full resolution, every one is a
+    bright opaque pill — filled background, white text — sitting on empty dark terminal and
+    perfectly legible. The check measures the **luma SPREAD of the callout region**, which
+    is a good proxy while the background is busy and a bad one once it is uniform: a clean
+    dark background has almost no spread, and the metric reads that as "the label may not
+    separate". It is measuring the wrong two things — it should compare the LABEL's own
+    luma against its immediate surround, not the variance of the whole region.
+    **Left as a known false positive rather than silenced.** If the check is tightened
+    later, re-run it against this cut: 8 findings, all of which must disappear.
+
 ### THE SETTINGS RECIPE (solved 2026-08-26 — this is the load-bearing trick)
 
 Web user settings cannot be seeded from disk. They must be written **through the real settings
@@ -1066,6 +1251,7 @@ Longer gaps are fine and are the point — the segment FREEZES on its last frame
 | `theme` | demo | `dark` (default) / `light` (owner decision D7) |
 | `surface` | demo | `vscode` (default) / `browser` |
 | `maxHoldMs` | demo or step | dead-air cap; a frame may hold this long before the wait is cut. Default 1200ms |
+| `maximizePanel` | demo | `true` runs *View: Toggle Maximized Panel* after the terminal opens — 13 rows becomes ~42. Use it on any terminal-driven demo: the default panel is too short to measure a mark in, and the editor half is empty anyway (gotcha 69) |
 | `marks` | step | `[{id, selector}]` or `[{id, text}]` — rectangles the runner MEASURES for callouts |
 | `expect` | step | `{contains, exitCode}` — the step FAILS the recording if reality disagrees |
 | `focus` | clip (spec) | punch in on the step's bbox. Automatic in 9:16 and in `split` |

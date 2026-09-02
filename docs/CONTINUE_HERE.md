@@ -13,16 +13,22 @@ matching 9:16 shorts, thumbnails and upload kits.
 
 BEFORE YOU WRITE ANYTHING, READ THESE, IN THIS ORDER:
   1. CLAUDE.md              — 17 repo LAWS. Non-negotiable. 0i/0j/0k/0l/0m/0n/0o/0p
-                              are the ones that were paid for in re-renders.
+                              are the ones that were paid for in re-renders. LAW 0g was
+                              AMENDED on 2026-08-30 and now REQUIRES meta.subject, named
+                              in scene 1's first sentence. Most of the back catalogue
+                              predates it and fails lint for that reason alone.
   2. docs/STATE.md          — current state, gotchas, and how to prove the repo healthy.
   3. briefs/README.md       — how a brief becomes a video, and which scripts will
                               destroy your work if you run them.
   4. .claude/skills/tech-video-director/SKILL.md and its references/ — the creative
      contract: scene_library.md, component_authoring.md, content_rules.md, longform.md.
+  5. docs/SCREEN_RECORDING.md — ONLY if the topic wants real captured footage of real
+     software (RECORDED_STEP). It is the authority for that subsystem and carries 70
+     numbered gotchas that were each paid for once.
 
 PROVE THE REPO IS HEALTHY BEFORE CHANGING ANYTHING:
   npm install
-  npm run gate            # 11 seals, must exit 0
+  npm run gate            # 14 seals, must exit 0
   npm run typecheck
   node scripts/gen-index.mjs
 

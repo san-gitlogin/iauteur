@@ -1,0 +1,273 @@
+{
+  "slug": "uv-tour",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "myapp",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "maximizePanel": true,
+  "prep": {
+    "requires": [
+      {
+        "tool": "uv 0.12.9",
+        "put": "tools/uv/uv  (and tools/uv/uvx)",
+        "why": "the video pins the version it teaches; installing isolated never upgrades the operator's own tooling (LAW 0m rule 1)",
+        "from": "UV_INSTALL_DIR=<repo>/tools/uv UV_NO_MODIFY_PATH=1 sh -c 'curl -LsSf https://astral.sh/uv/install.sh | sh'"
+      }
+    ],
+    "commands": [
+      "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv {{TOOLS}}/uv/uvx /tmp/iauteur-bin/",
+      "rm -rf /tmp/iauteur-uvtools && export UV_TOOL_DIR=/tmp/iauteur-uvtools UV_TOOL_BIN_DIR=/tmp/iauteur-uvtools/bin",
+      "export PATH=\"/tmp/iauteur-bin:/tmp/iauteur-uvtools/bin:$PATH\"",
+      "export UV_NO_MODIFY_PATH=1",
+      "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
+      "export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig",
+      "rm -rf .venv uv.lock dist src pyproject.toml README.md .python-version .gitignore .git"
+    ]
+  },
+  "steps": [
+    {
+      "id": "init",
+      "action": "run",
+      "cmd": "uv init --app",
+      "label": "one command makes the project",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Initialized project",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "made",
+          "text": "Initialized project"
+        }
+      ],
+      "clearFirst": true
+    },
+    {
+      "id": "tree",
+      "action": "run",
+      "cmd": "ls -a",
+      "label": "everything uv init wrote",
+      "focus": "terminal",
+      "expect": {
+        "contains": ".python-version",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "pyver",
+          "text": ".python-version"
+        }
+      ]
+    },
+    {
+      "id": "pyproject",
+      "action": "run",
+      "cmd": "cat pyproject.toml",
+      "label": "the one config file",
+      "focus": "terminal",
+      "expect": {
+        "contains": "requires-python",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "deps",
+          "text": "dependencies = []"
+        },
+        {
+          "id": "reqpy",
+          "text": "requires-python"
+        }
+      ]
+    },
+    {
+      "id": "run",
+      "action": "run",
+      "cmd": "uv run myapp",
+      "label": "run it — the environment builds itself",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Hello from myapp!",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "venv",
+          "text": "Creating virtual environment"
+        },
+        {
+          "id": "hello",
+          "text": "Hello from myapp!"
+        }
+      ],
+      "clearFirst": true
+    },
+    {
+      "id": "after",
+      "action": "run",
+      "cmd": "ls -a",
+      "label": "two new things appeared",
+      "focus": "terminal",
+      "expect": {
+        "contains": "uv.lock",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "lock",
+          "text": "uv.lock"
+        },
+        {
+          "id": "dotvenv",
+          "text": ".venv"
+        }
+      ]
+    },
+    {
+      "id": "add",
+      "action": "run",
+      "cmd": "uv add rich",
+      "label": "add a dependency",
+      "focus": "terminal",
+      "expect": {
+        "contains": "rich==",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "richv",
+          "text": "+ rich=="
+        }
+      ],
+      "clearFirst": true
+    },
+    {
+      "id": "deptree",
+      "action": "run",
+      "cmd": "uv tree",
+      "label": "what that actually pulled in",
+      "focus": "terminal",
+      "expect": {
+        "contains": "rich v",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "kids",
+          "text": "markdown-it-py"
+        }
+      ]
+    },
+    {
+      "id": "lockfile",
+      "action": "run",
+      "cmd": "head -11 uv.lock",
+      "label": "the lockfile pins exact versions",
+      "focus": "terminal",
+      "expect": {
+        "contains": "requires-python",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "exact",
+          "text": "version = \"4.2.0\""
+        }
+      ],
+      "clearFirst": true
+    },
+    {
+      "id": "remove",
+      "action": "run",
+      "cmd": "uv remove rich",
+      "label": "and taking it back out",
+      "focus": "terminal",
+      "expect": {
+        "contains": "- rich==",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "gone",
+          "text": "- rich=="
+        }
+      ]
+    },
+    {
+      "id": "uvx",
+      "action": "run",
+      "cmd": "uvx cowsay -t \"no install needed\"",
+      "label": "run a tool you never installed",
+      "focus": "terminal",
+      "expect": {
+        "contains": "no install needed",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "cow",
+          "text": "no install needed"
+        }
+      ],
+      "clearFirst": true
+    },
+    {
+      "id": "toolinstall",
+      "action": "run",
+      "cmd": "uv tool install ruff",
+      "label": "keep the ones you use daily",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Installed 1 executable",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "exe",
+          "text": "Installed 1 executable"
+        }
+      ]
+    },
+    {
+      "id": "pythons",
+      "action": "run",
+      "cmd": "uv python list | head -6",
+      "label": "uv manages Python itself",
+      "focus": "terminal",
+      "expect": {
+        "contains": "cpython",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "dl",
+          "text": "<download available>"
+        }
+      ],
+      "clearFirst": true
+    },
+    {
+      "id": "build",
+      "action": "run",
+      "cmd": "uv build",
+      "label": "build the package",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Successfully built",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "wheel",
+          "text": "myapp-0.1.0-py3-none-any.whl"
+        }
+      ]
+    }
+  ],
+  "maxHoldMs": 900
+}

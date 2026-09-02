@@ -428,6 +428,37 @@ Re-running the builder would have silently deleted them. Before you run a brief 
 scene ids against the JSON it writes.
 
 ## LAW 0f — WRITE FOR A MOUTH, NOT A PAGE (owner verdict, 2026-08-16)
+
+### Corollary — NEVER NARRATE THAT YOUR OWN WORK IS REAL (owner, 2026-09-02)
+
+Owner, on the uv cut: *"Did anyone ask that you are doing all real? You yourself are letting
+users know that you are doing real stuffs, indirectly stating you are AI. Dude, watchers are
+humans — such scriptings are not good."*
+
+**A person demonstrating their own screen never defends its authenticity.** Nobody says "this
+is a real terminal" for the same reason nobody says "I am not lying to you" — the claim only
+occurs to someone anticipating the accusation, and hearing it makes a viewer wonder why it
+needed saying. It reads as a machine reassuring you, which is the exact impression LAW 0f
+exists to prevent.
+
+Measured on one 20-scene spec: **18 such claims** — "on a real machine", "a genuinely empty
+folder", "typed live and read back", "real numbers rather than a marketing page", "measured
+here", plus a thumbnail note reading *Real terminal, real output*. Cut all of them.
+
+- BANNED on screen and in narration: real / really-as-defence / genuinely / actually-as-proof
+  when applied to the FOOTAGE, "typed live", "read back", "verbatim", "captured", "measured
+  here", "on this machine", "not a mock", "no edits". Ordinary uses stay — *"what is a venv,
+  really?"* and *"the only real question"* are how people talk.
+- The provenance still gets recorded, in `meta.seo.sources` and in `briefs/`. That is a
+  production record, and it belongs where a reader can check it, not in the presenter's mouth.
+- The footage does the arguing. If a beat only convinces because the narration insists it is
+  genuine, the beat is weak — show the thing instead.
+
+Related, same review: **say what the video is ABOUT in the first breath.** A tour of a Python
+tool that never says "Python" until scene five has failed LAW 0g.1 in spirit even when
+`meta.subject` passes the linter. And **the screen and the mouth must agree on numbers** — a
+hook card reading NOT FIVE over narration that names four tools is the mismatch a viewer
+notices first.
 Owner: *"You often use IT, and you speak about something that's on the screen, but you forget
 what the context is about, and you start speaking in a very AI manner. Humans are not adaptable
 to that."* Measured across the shipped Playwright course: **0 contractions in 900+ words, every

@@ -17,6 +17,164 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### 2026-09-02 (later still) — a maximised terminal fills the frame, and the card has nowhere to go
+
+Owner, on the recorded beats: *"the vignette kinda blurs what's happening… component overlay
+overlapping exactly at the time where something is highlighted and is being explained."*
+
+Both are one cause, and it was a fix from earlier the same day. Maximising the terminal panel
+(gotcha 69, done to make marks measurable) meant that by the sixth step the screen still held
+every command from the first five and the ink reached the bottom edge. The overlay solver
+picks the tallest ink-free band; with no free band left it put the caption card **on** the
+live output, and the 250px bottom scrim dimmed the lines being narrated.
+
+Measured on the shipped cut: terminal ink to **y=846**, card starting at **y=800**.
+
+**`clearFirst` on the first step of each scene.** The clear runs before the step's t0 mark, so
+it never appears in the footage, and it is what a person demonstrating something actually
+does. Deepest ink across all thirteen steps is now **y=536 of 900** — the bottom 40% is free,
+the card sits clear of the work, and each beat shows only its own output instead of a wall of
+accumulated text. Steps that must show accumulation (`ls -a` right after `uv run`) keep the
+screen deliberately.
+
+Two guards fell out of it: clearing an already-empty screen changes no bytes, so `runCommand`'s
+"buffer changed and ends at a prompt" completion never fires and the first beat hung for its
+full timeout — the clear is skipped when the buffer holds one line. And the `[accent]` bracket
+syntax is **per-type**: `UV_STAGE.headline` parses it, `HOOK.headline` and
+`RECORDED_STEP.caption` print the brackets. A census over the catalogue is the cheap check —
+96 of 97 hooks and 34 of 35 captions never used them.
+
+### 2026-09-02 (later) — the script was telling viewers it was made by a machine
+
+Owner, on the first cut: *"Did anyone ask that you are doing all real? You yourself are
+letting users know that you are doing real stuffs, indirectly stating you are AI. Dude,
+watchers are humans — such scriptings are not good."*
+
+He is right, and it is a writing law rather than a one-off edit. **A person demonstrating
+their own screen never defends its authenticity.** Only someone anticipating the accusation
+says "on a real machine", "typed live and read back", "real numbers rather than a marketing
+page", "measured here". Eighteen such claims were counted in one 20-scene spec — in
+narration, in premises, in a verdict, on the title card, and in the thumbnail note. Every
+one is cut. The provenance still belongs in `meta.seo.sources` and in `briefs/`, where it
+is a production record; on screen it is a tell.
+
+Four more defects from the same review, all found by looking at frames:
+
+- **The screen said FIVE and the voice said FOUR.** The hook and thumbnail promised "one
+  tool, not five" while the narration named four. Now five are named and drawn (pip,
+  virtualenv, pyenv, pipx, poetry).
+- **"Python" was never spoken in the first four scenes** of a video about a Python tool.
+  It is in the first sentence now, and on the hook card.
+- **Three silent field drops** (see `docs/STATE.md`): `TITLE_CARD` has no `asset`, so the
+  logo never rendered — the owner reported it as *"the logo is hidden somewhere"*; `HOOK`
+  does not parse the `[accent]` syntax, so it printed the brackets, and a census showed 96
+  of 97 shipped hooks never used them; `install-routes` takes its last stage item as the
+  DESTINATION, so an item authored as a fifth peer detached and floated mid-pane.
+- **Adjacent duplicate headings** — "borrow a tool, or keep it" immediately followed by
+  "Borrow it, or keep it", and an act title repeated three beats later.
+
+### 2026-09-02 — the macOS port: twelve defects, and only two of them were "macOS is different"
+
+The screen-recording subsystem was built and measured entirely on Windows. Standing it up on
+a Mac to produce the uv walkthrough found twelve faults. Two were genuine platform
+differences; the other ten were **latent bugs the Windows machine had been getting away
+with**, and several were silently corrupting what a recording claimed to be true. Full
+detail with the measurements is in `docs/SCREEN_RECORDING.md` gotchas 57-70.
+
+#### Fixed — three that made a recording LIE
+
+A recording that fails is cheap. A recording that succeeds while being wrong is the thing
+this subsystem exists to prevent, and three separate bugs did exactly that.
+
+- **Every exit code in every recording was 1**, including `echo hello`. The POSIX prompt
+  hook separated its two fields with a literal tab built by `String.fromCharCode(9)` — and
+  that string is *typed into a live shell*, where a tab is COMPLETION, not a character. The
+  exit file came back as `False1`, `readExitStatus` split on a tab it could not find, and
+  fell through to its "not True" branch. PowerShell escaped its tab as `` `t `` and never
+  typed a control character, which is why Windows never saw it. `expect: {exitCode: 0}`
+  would have failed on every command that worked, while the manifest still reported
+  `truth: 'read-back'`.
+- **The next command lost its first character** after each step. Reading the scrollback
+  through `Terminal: Select All` + `Copy Selection` costs the terminal one key event, so
+  `echo BBB` ran as `cho BBB` — a real command, with real output, recorded as truth.
+  `readScrollback` no longer touches the palette: it runs after the step's t1 mark, when
+  nothing is writing to the buffer, and simply walks the viewport with 40% overlap and
+  stitches the windows. Deterministic precisely where gotcha 41's polling was not.
+  `runCommand` also reads the command line back and compares it EXACTLY before pressing
+  Enter, because a stray character makes a different command that the runner cannot
+  distinguish from intent afterwards.
+- **`code` on PATH was Cursor.** A VS Code fork answers `--version`, serves `serve-web` and
+  mounts `.monaco-workbench`, so every assertion passed and the footage would have been a
+  different product — in a course about VS Code. The CLI is now identified by
+  `serve-web --help`, whose first line names the product, and the runner refuses a fork
+  rather than record one.
+
+#### Fixed — two that aborted every take
+
+- **`readBuffer` was reading an accessibility mirror.** VS Code mounts a second, one-row
+  xterm holding just the current command line; being mounted later it won the old "last
+  mounted xterm with size" heuristic. `cat pyproject.toml` completed perfectly in the real
+  terminal while the runner read the mirror's single line, saw no prompt, and died on its
+  timeout — on a command that had already succeeded. Every recording died on its third
+  step, because the mirror only exists once there is a command line to mirror.
+- **`--default-folder` does not exist on VS Code 1.109.1**, and gotcha 12's flat claim that
+  `?folder=` "DOES NOT WORK" is true of 1.134.0 and false here. Passing the unsupported flag
+  makes the CLI exit immediately, which surfaces 180 seconds later as "did not become ready"
+  with no cause in it. The runner asks the build which route it supports, and
+  `openWorkbench` now ASSERTS the folder bound — by the folder name in the window title, not
+  by the Explorer's contents, since a demo that creates its own files starts empty.
+
+#### Fixed — identity, again, one layer down
+
+`assertNoIdentity` checked the home path and the repo path. The first frame of the first Mac
+recording carried `<handle>@<machine>` — the default zsh prompt — which is neither. **This is
+the same miss as the 2026-08-30 repo-wide leak**, whose write-up already said it in so many
+words: *"`<handle>@box` is not a path."* That gate was fixed and this guard was not, so the
+identical hole stayed open in the layer closest to the pixels. It now matches `user@` and the
+hostname too.
+
+Related, and preventive rather than a post-hoc grep: **recording workspaces moved out of the
+repo** to `/tmp/iauteur-rec`. They were under `out/`, i.e. under the operator's home, and uv
+prints `Building myapp @ file:///Users/<operator>/…` on every dependency change — so the
+guard fired correctly and made the take *impossible* rather than safe. And a scaffolding tool
+reads the git identity: `uv init` stamps the operator's real name and email into
+`pyproject.toml`, so a capture points `GIT_CONFIG_GLOBAL` at a scratch config and the DEFAULT
+behaviour is still what gets taught.
+
+#### Added — `maximizePanel`, and a fixture that runs anywhere
+
+- The default terminal panel is ~13 rows. An 18-line `cat` scrolled a third of itself away
+  before a mark could be measured, and the take died on "Mark could not be measured" — the
+  runner correctly refusing to invent a rectangle. It is also the wrong picture: on a
+  terminal demo the editor half holds only the VS Code watermark. `"maximizePanel": true`
+  takes it to **42 rows**, after `openTerminal` and asserting the row count moved.
+- `scripts/lib/record/framepaint.mjs` — a dependency-free PNG writer with a 5x7 bitmap font.
+  `gen-rec-fixture` used ffmpeg's `drawtext`, which needs `--enable-libfreetype`; the
+  Homebrew build here does not have it, so the entire seven-script `test-rec-*` suite died
+  on a machine where the product worked fine. The fixture paints its own frames and hands
+  ffmpeg a PNG sequence — the same encode path the real capture already uses.
+
+#### Fixed — `npm run gate` was red, on both machines
+
+- **`normalize.mjs` was destroying five shipped features.** Its `META_KEEP` allowlist
+  predated LAW 0g's 2026-08-30 amendment, which made `meta.subject` REQUIRED — so normalize
+  deleted `subject` as unknown and the very next lint rejected the spec it had just cleaned.
+  Four shipped specs went pass → fail through a normalize. The thumbnail allowlist had the
+  same rot, silently stripping `logos`, `note`, `titleStruck` and `replaces`. Both lists now
+  live in `scripts/lib/constants.mjs` as `META_KEYS` / `THUMB_KEYS`, read by the normalizer
+  AND by `gen-schema.mjs`, so the three copies that drifted are one.
+- `assembleSpec` never carried `meta.subject`, so **every console-authored spec would fail
+  lint** on a field the model is not allowed to own — the same shape as the `brand.logo`
+  drop that test already pins. Fixture specs updated to the amended LAW 0g.
+- **`check-recordings` could never pass on a fresh clone.** Recordings are gitignored by
+  design, so a clone has every spec and no footage, and the seal treated that identically to
+  a spec defect — the "gate you learn to ignore" that `docs/STATE.md` warns about in its own
+  check-fresh note. Absent footage is now a NOTICE on the repo-wide sweep and FATAL for a
+  render, which is stricter where it matters: `render-topic.mjs` passes `--slug` and asks
+  only about the cut it is about to render. NOT BAKED and STALE stay fatal everywhere; all
+  four directions were break-tested by injecting the fault.
+
+
 ### 2026-08-23 — `scripts/render-covers.mjs`: the covers nobody could afford to render
 
 #### Added
