@@ -22,6 +22,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const quiet = process.argv.includes('--quiet');
+// --slug <slug> scopes the sweep to ONE topic. render-topic.mjs uses it, because the
+// question a render asks is "do I have the footage for THIS cut", not "is every recording
+// in the repo present on this machine".
+const slugArg = (() => {
+  const i = process.argv.indexOf('--slug');
+  return i >= 0 ? process.argv[i + 1] : null;
+})();
 const REF = /rec:([A-Za-z0-9._-]+)#([A-Za-z0-9._-]+)/g;
 
 // slug -> the demo file that produces it, so the fix is a command, not a puzzle.
@@ -39,6 +46,7 @@ const specs = [];
 if (fs.existsSync('topics')) {
   for (const t of fs.readdirSync('topics')) {
     for (const f of ['long.json', 'shorts.json']) {
+      if (slugArg && t !== slugArg) continue;
       const p = path.join('topics', t, f);
       if (fs.existsSync(p)) specs.push(p);
     }
@@ -55,6 +63,15 @@ const probeFrames = (file) => {
 };
 
 const problems = [];
+// A recording whose public/rec/<slug>/ is not on this machine is a DIFFERENT condition from
+// a spec defect, and conflating them made `npm run gate` permanently red on a fresh clone —
+// which is the "gate you learn to ignore" that docs/STATE.md warns about in its own
+// check-fresh note. Recordings are gitignored by design (D4), so a clone HAS every spec and
+// NONE of the footage. That is expected, it is one command from fixed, and it must not mask
+// the failures that ARE spec defects: NOT BAKED, STALE, an unknown step id, a segment
+// missing while its manifest is present, or a prep hook left in the transcript.
+// Scoped to a slug (a render), absence IS fatal — you cannot render footage you do not have.
+const absent = new Map(); // slug -> fix command
 const used = new Map(); // slug -> Set(stepId)
 let refCount = 0;
 
@@ -74,7 +91,9 @@ for (const sp of specs) {
       : `(no demo in demos/ produces slug "${slug}" — write one, or fix the reference)`;
 
     if (!fs.existsSync(manPath)) {
-      problems.push(`${sp}: recording "${slug}" is MISSING (public/rec/${slug}/)\n      fix: ${fix}`);
+      // Once per SLUG, not once per reference — 28 identical lines for one missing
+      // recording buried the one line that mattered.
+      absent.set(slug, fix);
       continue;
     }
     const man = JSON.parse(fs.readFileSync(manPath, 'utf8'));
@@ -151,11 +170,26 @@ if (!quiet) {
   }
 }
 
+// Absent footage: fatal for a render (--slug), a notice for the repo-wide sweep.
+if (absent.size) {
+  const lines = [...absent].map(([slug, fix]) => `  • ${slug}  ->  ${fix}`);
+  if (slugArg) {
+    console.error(`\n\u2717 RECORDING CHECK FAILED: footage for "${slugArg}" is not on this machine:`);
+    for (const l of lines) console.error(l);
+    process.exit(1);
+  }
+  console.error(`\nNOTE: ${absent.size} recording(s) referenced by a spec are not on this machine:`);
+  for (const l of lines) console.error(l);
+  console.error('Recordings are gitignored by design (they stay local), so a fresh clone has every');
+  console.error('spec and no footage. This does not fail the gate — but the render of those topics');
+  console.error('WILL refuse until they are re-recorded.');
+}
+
 if (problems.length) {
-  console.error('\n✗ RECORDING CHECK FAILED:');
-  for (const p of problems) console.error(`  • ${p}`);
+  console.error('\n\u2717 RECORDING CHECK FAILED:');
+  for (const p of problems) console.error(`  \u2022 ${p}`);
   console.error('\nRecordings are gitignored on purpose (they stay local). The demo scripts in');
   console.error('demos/ are what regenerates them, so nothing is lost — it just has to be run.');
   process.exit(1);
 }
-if (!quiet) console.log('✓ RECORDING CHECK PASSED (every rec: reference resolves and is fresh)');
+if (!quiet) console.log('\u2713 RECORDING CHECK PASSED (every rec: reference resolves and is fresh)');

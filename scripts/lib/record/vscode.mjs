@@ -39,6 +39,21 @@ export const recordingSettings = ({theme = 'dark', fontSize = 18, terminalFontSi
   // its own args to bootstrap shell integration, and a custom arg list displaces them,
   // which silently costs every exit code (measured: all null). The short prompt is set
   // by TYPING it during PREP instead, which is never recorded. See primeTerminal().
+  // GIT MUST NOT REACT TO THE TAKE.
+  //
+  // A demo that scaffolds a project creates a repository ON CAMERA — `uv init` writes
+  // .git/ — and VS Code's git extension then wakes up mid-take: it rescans, decorates the
+  // Explorer, and can raise the "a git repository was found" prompt that gotcha 3 already
+  // lists as prep pollution. Measured consequence: the step AFTER the one that created the
+  // repo never returned a prompt, a SECOND xterm viewport appeared, and the run burned its
+  // whole 120s timeout on a `cat` that had nothing wrong with it.
+  //
+  // Nothing in a recording needs source control, so it is switched off rather than fought.
+  'git.enabled': false,
+  'git.autoRepositoryDetection': false,
+  'git.openRepositoryInParentFolders': 'never',
+  'git.decorations.enabled': false,
+  'scm.diffDecorations': 'none',
   'terminal.integrated.shellIntegration.enabled': true,
   'terminal.integrated.shellIntegration.decorationsEnabled': 'gutter',
   'editor.fontSize': fontSize,
@@ -119,11 +134,123 @@ const httpStatus = async (url) => {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// Resolve the VS Code CLI. `code` on PATH is a shell shim on Windows, so exec it
-// through the shell rather than as a bare binary.
+/**
+ * THE PRIMARY MODIFIER IS NOT ALWAYS Control.
+ *
+ * VS Code for the Web adapts its keybindings to the HOST OS, so on macOS the palette is
+ * Cmd+Shift+P and select-all/paste/save are Cmd. Playwright's "Control+A" sends a real
+ * Control, which on macOS is a different (mostly unbound) chord — so every one of these
+ * presses did nothing, silently. Measured here: the settings paste no-oped and the run died
+ * three steps later at "Theme did not apply: wanted dark, workbench isDark=false", which
+ * names the symptom and not one word of the cause.
+ *
+ * `ControlOrMeta` is Playwright's own name for "the platform's primary modifier".
+ * Use it for EDITOR/WORKBENCH commands. Do NOT use it for the terminal's Ctrl+C: that is
+ * SIGINT, and it is Control on every platform including macOS.
+ */
+export const PRIMARY = 'ControlOrMeta';
+
+// RESOLVE THE VS CODE CLI — AND PROVE IT IS VS CODE.
+//
+// `code` on PATH is not necessarily Visual Studio Code. On the macOS machine here it is a
+// symlink into Cursor.app, and Cursor is a VS Code FORK: it answers `--version`, it answers
+// `serve-web`, and its workbench carries `.monaco-workbench`, so every assertion the runner
+// makes passes. The recording would have come out looking right and been footage of a
+// different product — in a course about VS Code. Silent, plausible, and wrong, which is the
+// exact defect class this subsystem was built to prevent.
+//
+// The discriminator is `serve-web --help`, whose first line NAMES the product it serves:
+//   VS Code -> "Runs a local web version of Visual Studio Code"
+//   Cursor  -> "Runs a local web version of Cursor"
+// `--version` cannot do it (VS Code prints 1.109.1, Cursor prints 2.5.20 — a number, with
+// nothing saying whose).
+//
+// Order: an explicit override, then PATH, then the platform's real install locations.
+const CLI_CANDIDATES = () => {
+  const home = os.homedir();
+  if (os.platform() === 'darwin') return [
+    '/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code',
+    `${home}/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code`,
+  ];
+  if (os.platform() === 'win32') return [
+    'C:/Program Files/Microsoft VS Code/bin/code',
+    `${home}/AppData/Local/Programs/Microsoft VS Code/bin/code`,
+  ];
+  return ['/usr/share/code/bin/code', '/snap/bin/code', '/usr/bin/code'];
+};
+
+/** The first line of `serve-web --help`, or null. This is the identity probe. */
+// `shell: true` is for the Windows `code.cmd` shim ONLY. Elsewhere the CLI is a real
+// executable with a shebang, and putting an absolute path through a shell re-splits it on
+// spaces: "/Applications/Visual Studio Code.app/…" ran as "/Applications/Visual".
+const viaShell = (cli) => os.platform() === 'win32' && !path.isAbsolute(cli);
+
+const serveWebBanner = (cli) => {
+  try {
+    return execFileSync(cli, ['serve-web', '--help'],
+      {encoding: 'utf8', shell: viaShell(cli), windowsHide: true, timeout: 20000})
+      .split(/\r?\n/)[0].trim();
+  } catch { return null; }
+};
+
+const isRealVsCode = (cli) => /version of Visual Studio Code/i.test(serveWebBanner(cli) ?? '');
+
+/**
+ * DOES THIS BUILD'S serve-web TAKE `--default-folder`?
+ *
+ * Gotcha 12 records that `?folder=` "DOES NOT WORK with code serve-web" and that binding the
+ * folder with `--default-folder` is the fix. Both halves were measured on VS Code 1.134.0 and
+ * neither is universal:
+ *   1.134.0 — has --default-folder;   ?folder= leaves the Explorer an unreadable leaf
+ *   1.109.1 — REJECTS --default-folder ("unexpected argument") and the server never starts,
+ *             while ?folder= binds the folder correctly (Explorer lists the files at level 1)
+ * So the runner asks the build what it supports instead of pinning one answer, and
+ * `openWorkbench` asserts the folder actually bound either way.
+ */
+const serveWebHelp = (cli) => {
+  try {
+    return execFileSync(cli, ['serve-web', '--help'],
+      {encoding: 'utf8', shell: viaShell(cli), windowsHide: true, timeout: 20000});
+  } catch (e) { return String(e.stdout || '') + String(e.stderr || ''); }
+};
+let _hasDefaultFolder = null;
+export const supportsDefaultFolder = (cli = vscodeCli()) => {
+  if (_hasDefaultFolder === null) _hasDefaultFolder = /--default-folder/.test(serveWebHelp(cli));
+  return _hasDefaultFolder;
+};
+
+let _cli = null;
+export const vscodeCli = () => {
+  if (_cli) return _cli;
+  const override = process.env.IAUTEUR_VSCODE_CLI;
+  if (override) {
+    if (!isRealVsCode(override)) {
+      throw new Error(`IAUTEUR_VSCODE_CLI="${override}" is not Visual Studio Code ` +
+        `(serve-web says: ${serveWebBanner(override) ?? 'nothing'}).`);
+    }
+    return (_cli = override);
+  }
+  const tried = [];
+  for (const c of ['code', ...CLI_CANDIDATES()]) {
+    if (c !== 'code' && !fs.existsSync(c)) continue;
+    const banner = serveWebBanner(c);
+    if (banner && /version of Visual Studio Code/i.test(banner)) return (_cli = c);
+    if (banner) tried.push(`  ${c}\n      -> ${banner}`);
+  }
+  throw new Error(
+    'No Visual Studio Code CLI found. The recorder drives `code serve-web`, and a VS Code\n' +
+    'FORK (Cursor, Windsurf, VSCodium…) answers every probe while serving a different\n' +
+    'product — so the runner refuses rather than record the wrong workbench.\n' +
+    (tried.length ? 'Rejected:\n' + tried.join('\n') + '\n' : '') +
+    'Fix: install VS Code, or set IAUTEUR_VSCODE_CLI to its `bin/code`.');
+};
+
+/** The resolved CLI's version string (first line of `--version`). */
 export const vscodeVersion = () => {
   try {
-    return execFileSync('code', ['--version'], {encoding: 'utf8', shell: true}).split(/\r?\n/)[0].trim();
+    const cli = vscodeCli();
+    return execFileSync(cli, ['--version'], {encoding: 'utf8', shell: viaShell(cli)})
+      .split(/\r?\n/)[0].trim();
   } catch {
     return null;
   }
@@ -169,14 +296,19 @@ export const startServer = async ({workspace, port, dataDir, timeoutMs = 180000}
   const data = dataDir || path.join(os.tmpdir(), 'iauteur-rec-vscode');
   fs.mkdirSync(data, {recursive: true});
   fs.mkdirSync(workspace, {recursive: true});
-  const child = execFile('code', [
+  const cliPath = vscodeCli();
+  const canBind = supportsDefaultFolder(cliPath);
+  const child = execFile(cliPath, [
     'serve-web',
     '--port', String(chosen),
     '--without-connection-token',
     '--accept-server-license-terms',
     '--server-data-dir', data,
-    '--default-folder', workspace,
-  ], {shell: true, windowsHide: true});
+    // Passing an unsupported flag is not a warning here — the CLI exits with
+    // "unexpected argument" and the server never listens, which surfaces 180s later as a
+    // bare "did not become ready" with no cause in it.
+    ...(canBind ? ['--default-folder', workspace] : []),
+  ], {shell: viaShell(cliPath), windowsHide: true});
   child.unref?.();
 
   const started = Date.now();
@@ -190,7 +322,7 @@ export const startServer = async ({workspace, port, dataDir, timeoutMs = 180000}
     await sleep(st === 202 ? 2000 : 700); // 202 = still downloading
   }
   return {
-    url, port: chosen, workspace,
+    url, port: chosen, workspace, boundByFlag: canBind,
     stop: async () => {
       // REAP THE WHOLE TREE. `code` is a shell shim, so killing the child we spawned
       // leaves the actual server process alive and still holding the port.
@@ -271,13 +403,16 @@ export const reapPort = (port) => {
 // `?folder=` instead makes the workbench resolve the path in the BROWSER, where there is
 // no file system — the Explorer then shows an unreadable leaf and Quick Open finds
 // nothing, while the server-side terminal works fine. See startServer.
-export const workbenchUrl = (serverUrl) => serverUrl;
+export const workbenchUrl = (serverUrl, {workspace = null, boundByFlag = true} = {}) =>
+  boundByFlag || !workspace
+    ? serverUrl
+    : `${serverUrl.replace(/\/$/, '')}/?folder=${encodeURIComponent(workspace)}`;
 
 /** Run a command through the palette. Web keybindings differ from desktop, so the
  *  palette is the only reliable way to invoke anything (VS Code Web shows Ctrl+Shift+C
  *  for Create New Terminal, not the desktop backtick binding). */
 export const palette = async (page, command, {settle = 1200} = {}) => {
-  await page.keyboard.press('Control+Shift+P');
+  await page.keyboard.press(`${PRIMARY}+Shift+P`);
   await page.waitForTimeout(700);
   await page.keyboard.type(command, {delay: 18});
   await page.waitForTimeout(settle);
@@ -285,12 +420,41 @@ export const palette = async (page, command, {settle = 1200} = {}) => {
   await page.waitForTimeout(500);
 };
 
-export const openWorkbench = async (page, serverUrl, {timeout = 90000} = {}) => {
-  await page.goto(workbenchUrl(serverUrl), {waitUntil: 'domcontentloaded', timeout});
+export const openWorkbench = async (page, serverUrl, {timeout = 90000, workspace = null, boundByFlag = true} = {}) => {
+  await page.goto(workbenchUrl(serverUrl, {workspace, boundByFlag}), {waitUntil: 'domcontentloaded', timeout});
   await page.waitForSelector('.monaco-workbench', {timeout});
   // The workbench mounts before the remote connection is up; the terminal will not
   // start until it is. Wait for the window to settle rather than racing it.
   await page.waitForTimeout(6000);
+
+  // ASSERT THE FOLDER ACTUALLY BOUND — do not trust either route.
+  //
+  // This is the failure that cost a full diagnostic cycle in gotcha 12, and it is
+  // deceptive in a specific way: the integrated terminal runs SERVER-side, so it sits in
+  // the folder and runs its files happily while the EDITOR cannot see them. Every
+  // terminal-driven step therefore passes and the recording looks fine until a step opens
+  // a file. Checking the Explorer costs one evaluate and names the problem at second 15
+  // instead of at minute 4.
+  if (workspace) {
+    // The signal is the FOLDER NAME IN THE WINDOW TITLE, not the file list. An empty
+    // Explorer proves nothing: a demo whose whole point is to create the files (uv init,
+    // git init, a scaffolder) starts from an empty directory, and the first version of
+    // this check called that a bind failure. VS Code titles a bound window
+    // "<file> — <folder> — Visual Studio Code" and an unbound one has no folder segment.
+    const leaf = path.basename(workspace);
+    const bound = await page.waitForFunction(
+      (name) => document.title.split('\u2014').some((p) => p.trim() === name),
+      leaf, {timeout: 30000},
+    ).then(() => true).catch(() => false);
+    if (!bound) {
+      throw new Error(
+        `The workspace ${workspace} did not bind — "${leaf}" never appeared in the window title ` +
+        `(saw ${JSON.stringify(await page.title())}).\n` +
+        `  route used: ${boundByFlag ? '--default-folder' : '?folder='}\n` +
+        `  The terminal runs SERVER-side and would still work, so terminal-only steps would ` +
+        `pass while the editor saw nothing — which is why this is checked here.`);
+    }
+  }
 };
 
 /**
@@ -298,18 +462,21 @@ export const openWorkbench = async (page, serverUrl, {timeout = 90000} = {}) => 
  * PASTE, NEVER TYPE — Monaco auto-closes brackets and quotes, so typed JSON arrives
  * mangled. Requires clipboard permissions on the context.
  */
-export const applySettings = async (page, serverUrl, settings) => {
+export const applySettings = async (page, serverUrl, settings, {workspace = null, boundByFlag = true} = {}) => {
   await palette(page, 'Preferences: Open User Settings (JSON)', {settle: 1800});
   await page.waitForTimeout(3500);
   await page.evaluate(async (t) => { await navigator.clipboard.writeText(t); }, JSON.stringify(settings, null, 2));
-  await page.keyboard.press('Control+A');
+  await page.keyboard.press(`${PRIMARY}+A`);
   await page.waitForTimeout(250);
-  await page.keyboard.press('Control+V');
+  await page.keyboard.press(`${PRIMARY}+V`);
   await page.waitForTimeout(900);
-  await page.keyboard.press('Control+S');
+  await page.keyboard.press(`${PRIMARY}+S`);
   await page.waitForTimeout(2000);
   // Reload: the theme and the terminal renderer only take effect from a clean boot.
-  await openWorkbench(page, serverUrl);
+  // The workspace has to be carried through the reload — on the ?folder= route the bare
+  // URL comes back with NO folder bound, and every later step then runs against an empty
+  // window that still looks like a working workbench.
+  await openWorkbench(page, serverUrl, {workspace, boundByFlag});
 };
 
 /** Did the settings actually land? Assert on the EFFECT, never by reading the settings
@@ -359,7 +526,39 @@ export const prep = async (page) => {
     await page.waitForTimeout(500);
   }
   if (await auxBarOpen(page)) done.push('WARNING: secondary side bar still open');
+
+  // GIVE A TERMINAL DEMO THE WHOLE FRAME.
+  //
+  // The default panel is ~13 rows. `cat pyproject.toml` prints 18 lines, so a third of the
+  // file scrolled away before anything could be measured and the take died on
+  // "Mark could not be measured" — the runner correctly refusing to invent a rectangle for
+  // text that was genuinely not on screen.
+  //
+  // It is also just the wrong picture: on a terminal-driven demo the editor half is empty
+  // (the VS Code watermark logo, and nothing else), so more than half the captured frame
+  // carries no information and the part that does is squeezed into 13 rows. Maximising the
+  // panel roughly triples the visible rows AND fills the frame with the thing being taught.
+  // Verified by effect, not by firing the command and hoping (gotcha 8).
   return done;
+};
+
+/** Row count of the active terminal — the observable the maximise step asserts on. */
+const terminalRows = (page) => page.evaluate(() =>
+  document.querySelectorAll('.terminal-wrapper.active .xterm-rows > div').length);
+
+/**
+ * Maximise the panel. MUST run AFTER openTerminal — prep kills every terminal, so at prep
+ * time there is nothing to measure and the toggle would fire blind.
+ * Returns a note for the run log.
+ */
+export const maximizeTerminalPanel = async (page, {want = 24} = {}) => {
+  for (let i = 0; i < 3; i++) {
+    if (await terminalRows(page) >= want) break;
+    await palette(page, 'View: Toggle Maximized Panel');
+    await page.waitForTimeout(800);
+  }
+  const rows = await terminalRows(page);
+  return rows >= want ? `maximized panel (${rows} rows)` : `WARNING: panel is only ${rows} rows`;
 };
 
 /** Is the secondary side bar (Chat/Copilot column) actually taking up frame? */

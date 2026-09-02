@@ -57,7 +57,7 @@ const out = variant === 'thumb' || variant === 'cover'
 // thumb/cover, which draw no footage.
 if (variant !== 'thumb' && variant !== 'cover') {
   try {
-    execSync('node scripts/check-recordings.mjs --quiet', {stdio: 'inherit'});
+    execSync(`node scripts/check-recordings.mjs --quiet --slug ${slug}`, {stdio: 'inherit'});
   } catch {
     console.error('');
     console.error('REFUSING TO RENDER: the spec references footage it has not baked.');

@@ -16,6 +16,7 @@ import {
   recordingSettings, vscodeVersion, THEME_IDS,
 } from './lib/record/vscode.mjs';
 import {openTerminal, runCommand, readBuffer, primeTerminal, readScrollback} from './lib/record/terminal.mjs';
+import {recWsRoot} from './lib/record/runner.mjs';
 import {marksFor} from './lib/record/runner.mjs';
 
 const argv = process.argv.slice(2);
@@ -23,7 +24,7 @@ const theme = argv.includes('--light') ? 'light' : 'dark';
 const headless = argv.includes('--headless');
 const keep = argv.includes('--keep');
 
-const WS = path.resolve('out/rec-ws/surface-test');
+const WS = path.join(recWsRoot(), 'surface-test');
 const PROFILE = path.resolve('out/rec-profile');
 const SHOTS = path.resolve('out/rec-proof');
 fs.mkdirSync(WS, {recursive: true});
@@ -52,11 +53,12 @@ const ctx = await chromium.launchPersistentContext(PROFILE, {
 const page = ctx.pages()[0] || (await ctx.newPage());
 
 try {
-  await openWorkbench(page, server.url);
+  await openWorkbench(page, server.url, {workspace: server.workspace, boundByFlag: server.boundByFlag});
   check('workbench loads', await page.locator('.monaco-workbench').count() > 0);
 
   // ── settings ──────────────────────────────────────────────────────────────
-  await applySettings(page, server.url, recordingSettings({theme}));
+  await applySettings(page, server.url, recordingSettings({theme}),
+    {workspace: server.workspace, boundByFlag: server.boundByFlag});
   const surf = await verifySurface(page, {theme});
   check(`theme applied (${theme} → ${THEME_IDS[theme]})`, surf.themeOk,
     `workbench isDark=${surf.isDark}, wanted ${theme}`);

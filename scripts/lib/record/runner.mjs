@@ -14,7 +14,7 @@ import path from 'node:path';
 import {chromium} from 'playwright';
 import {
   startServer, openWorkbench, applySettings, verifySurface, prep,
-  recordingSettings, vscodeVersion, palette, reapStaleServers,
+  recordingSettings, vscodeVersion, palette, reapStaleServers, PRIMARY, maximizeTerminalPanel,
 } from './vscode.mjs';
 import {openTerminal, primeTerminal, runCommand, readBuffer, readScrollback} from './terminal.mjs';
 import {startCapture} from './capture.mjs';
@@ -172,7 +172,30 @@ export const inkFor = async (page) => {
 export const assertNoIdentity = async (page, stepId) => {
   const home = (process.env.USERPROFILE || process.env.HOME || '').split(path.sep).join('/');
   const repo = path.resolve('.').split(path.sep).join('/');
-  const needles = [home, repo].filter((n) => n && n.length > 8);
+  // A PATH IS NOT THE ONLY SHAPE IDENTITY TAKES.
+  //
+  // This guard checked two paths, and the leak it exists to stop showed up in neither. The
+  // default shell prompt on macOS and Linux is `user@host dir %`, so the FIRST frame of the
+  // first recording made on a Mac carried the operator's handle and machine name — and this
+  // function passed it, because "<handle>@<machine>" contains no path.
+  //
+  // That is the same miss as the 2026-08-30 repo-wide incident, whose write-up says it
+  // exactly: check-publish-safety's HOME_PATH rule "only recognises a username when a path
+  // prefix precedes it. `<handle>@box` is not a path." The gate was fixed there and this
+  // guard was not, so the identical hole stayed open one layer down.
+  //
+  // Matched forms are the ones identity actually takes on a terminal, not a bare username:
+  // `user@` (prompt / git / ssh) and the machine hostname. A bare short username is
+  // deliberately NOT a needle — it false-positives on ordinary words and an aborted take is
+  // expensive.
+  let user = '';
+  try { user = String(os.userInfo().username || ''); } catch { /* container with no passwd entry */ }
+  const host = String(os.hostname() || '').split('.')[0];
+  const needles = [
+    ...[home, repo].filter((n) => n && n.length > 8),
+    ...(user.length >= 3 ? [`${user}@`] : []),
+    ...(host.length >= 6 ? [host] : []),
+  ];
   if (!needles.length) return;
   const text = await page.evaluate(() => {
     const rows = [
@@ -387,8 +410,13 @@ const actions = {
     // and doing it inside the segment put the palette overlay in the footage.
     await palette(page, 'View: Focus Active Editor Group');
     await sleep(500);
-    if (step.at === 'end') { await page.keyboard.press('Control+End'); await sleep(250); }
-    if (step.at === 'start') { await page.keyboard.press('Control+Home'); await sleep(250); }
+    // Document start/end is not one chord across platforms: macOS VS Code binds
+    // cursorBottom/cursorTop to Cmd+Down / Cmd+Up, and Ctrl+End is unbound there.
+    const [toEnd, toStart] = os.platform() === 'darwin'
+      ? ['Meta+ArrowDown', 'Meta+ArrowUp']
+      : ['Control+End', 'Control+Home'];
+    if (step.at === 'end') { await page.keyboard.press(toEnd); await sleep(250); }
+    if (step.at === 'start') { await page.keyboard.press(toStart); await sleep(250); }
   },
   async type(page, step) {
     const text = step.text ?? '';
@@ -711,7 +739,7 @@ ${content.text}`, truth: 'read-back',
     await sleep(400);
   },
   async save(page, step) {
-    await page.keyboard.press('Control+S');
+    await page.keyboard.press(`${PRIMARY}+S`);
     await sleep(1400);
     const dirty = await page.locator('.part.editor .tab.active.dirty').count().catch(() => 0);
     if (dirty > 0) throw new Error(`Step "${step.id}": pressed save but the editor tab is still dirty`);
@@ -723,6 +751,39 @@ ${content.text}`, truth: 'read-back',
 
 // ── the run ──────────────────────────────────────────────────────────────────
 
+/**
+ * WHERE A RECORDING WORKSPACE LIVES — and why it is not under the repo.
+ *
+ * It used to be `out/rec-ws/<name>`, i.e. under the repo, i.e. under the operator's home
+ * directory. That is fine for a tool that prints nothing about where it is, and fatal for
+ * one that does. Measured with uv 0.12.9: a plain `uv add rich` prints
+ *
+ *     Building demo @ file:///Users/<operator>/iauteur/out/rec-ws/uv-tour
+ *
+ * on every dependency change. `assertNoIdentity()` catches it and aborts the take — which
+ * is the guard doing its job, and it makes the take IMPOSSIBLE rather than safe: there is
+ * no way to run a path-printing tool from inside the repo without the home path on camera.
+ *
+ * So the workspace moves somewhere short and identity-free. Everything the recording needs
+ * is scaffolded per run, so nothing is lost by leaving the repo.
+ *
+ * `IAUTEUR_REC_WS` overrides. On Windows `os.tmpdir()` is NOT a candidate: it resolves to
+ * C:\Users\<name>\AppData\Local\Temp, which is the very thing being avoided.
+ */
+export const recWsRoot = () => {
+  const override = process.env.IAUTEUR_REC_WS;
+  if (override) return path.resolve(override);
+  if (os.platform() === 'win32') {
+    const drive = path.parse(path.resolve('.')).root; // e.g. "D:\\"
+    const candidate = path.join(drive, 'iauteur-rec');
+    try { fs.mkdirSync(candidate, {recursive: true}); return candidate; } catch { /* fall through */ }
+    // A managed machine may refuse the drive root. Keep the old location rather than fail,
+    // and let assertNoIdentity be the backstop it already is.
+    return path.resolve('out/rec-ws');
+  }
+  return path.join('/tmp', 'iauteur-rec');
+};
+
 export const recordDemo = async (demo, {outDir, keepFrames = false, headless = false} = {}) => {
   const fps = demo.fps ?? 30;
   const theme = demo.theme ?? 'dark'; // owner D7: dark unless asked otherwise
@@ -733,7 +794,7 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
   const surface = demo.surface ?? 'vscode';
   if (surface === 'browser') return recordBrowserDemo(demo, {outDir, keepFrames, headless});
 
-  const ws = path.resolve('out/rec-ws', demo.workspace || slug);
+  const ws = path.join(recWsRoot(), demo.workspace || slug);
   fs.mkdirSync(ws, {recursive: true});
   // PREP: scaffold files. Written directly to disk — the workspace is real, and this is
   // setup, not performance. Nothing here is recorded.
@@ -785,9 +846,10 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
   try {
     // ── PREP (never recorded) ────────────────────────────────────────────────
     console.log('  opening workbench...');
-    await openWorkbench(page, server.url);
+    await openWorkbench(page, server.url, {workspace: ws, boundByFlag: server.boundByFlag});
     console.log('  applying settings...');
-    await applySettings(page, server.url, recordingSettings({theme, ...(demo.settings ?? {})}));
+    await applySettings(page, server.url, recordingSettings({theme, ...(demo.settings ?? {})}),
+      {workspace: ws, boundByFlag: server.boundByFlag});
     const surf = await verifySurface(page, {theme});
     if (!surf.themeOk) throw new Error(`Theme did not apply: wanted ${theme}, workbench isDark=${surf.isDark}`);
     const prepDid = await prep(page);
@@ -805,6 +867,9 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
     if (demo.prep?.openFile) await actions.openFile(page, {id: 'prep', path: demo.prep.openFile});
     console.log('  opening terminal...');
     await openTerminal(page);
+    if (demo.maximizePanel === true) {
+      console.log('  ' + await maximizeTerminalPanel(page));
+    }
     await primeTerminal(page);
     for (const cmd of demo.prep?.commands ?? []) {
       await runCommand(page, expandTokens(cmd), {typeDelay: 6, jitter: 0, timeout: 300000});
@@ -841,6 +906,33 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
       // performance. Runs BEFORE t0, so none of it lands in the segment.
       const prepFn = actions[`${step.action}Prepare`];
       if (prepFn) await prepFn(page, step);
+
+      // START THIS BEAT ON A CLEAN SCREEN.
+      //
+      // A terminal ACCUMULATES. By the sixth step the frame held every command from the
+      // first five, the beat's own output was somewhere in the middle of a wall of text,
+      // and — because the panel is maximised — the ink reached the bottom edge. That left
+      // the overlay solver no ink-free band, so the caption card was placed ON the live
+      // output and the bottom scrim dimmed the lines being explained. Measured on the
+      // shipped cut: terminal ink to y=846 with the card starting at y=800.
+      //
+      // Clearing before the mark fixes all three at once and is what a person
+      // demonstrating something actually does. It runs BEFORE t0, so the clear itself is
+      // outside the segment and never appears in the footage.
+      if (step.clearFirst) {
+        // Only clear when there is something to clear. `runCommand` completes on "the
+        // buffer CHANGED and now ends at a prompt", and clearing an already-empty screen
+        // changes nothing — so the very first beat, which follows prep's own clear, sat
+        // through the full 120s timeout on a command that had worked. Gotcha 9 records the
+        // same shape for the "must have GROWN" version of this check.
+        const rows = String(await readBuffer(page) ?? '').split('\n').filter((l) => l.trim());
+        if (rows.length > 1) {
+          await runCommand(page, 'clear', {typeDelay: 4, jitter: 0});
+          await painted(page);
+          await sleep(200);
+        }
+      }
+
       await painted(page);
       await sleep(250);
       const t0 = Date.now();

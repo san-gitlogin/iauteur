@@ -42,9 +42,10 @@ const openFile = async (name) => {
 };
 
 try {
-  await openWorkbench(page, server.url);
-  await applySettings(page, server.url, recordingSettings({theme: 'dark'}));
-  await openWorkbench(page, server.url);
+  await openWorkbench(page, server.url, {workspace: server.workspace, boundByFlag: server.boundByFlag});
+  await applySettings(page, server.url, recordingSettings({theme: 'dark'}),
+    {workspace: server.workspace, boundByFlag: server.boundByFlag});
+  await openWorkbench(page, server.url, {workspace: server.workspace, boundByFlag: server.boundByFlag});
 
   // ── 1. Does Ctrl+H reach the page? ──────────────────────────────────────────────────────────
   await openFile('plain.txt');

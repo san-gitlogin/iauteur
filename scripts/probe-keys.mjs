@@ -94,13 +94,14 @@ ctx.grantPermissions(['clipboard-read', 'clipboard-write'], {origin: server.url}
 const page = ctx.pages()[0] || (await ctx.newPage());
 
 try {
-  await openWorkbench(page, server.url);
+  await openWorkbench(page, server.url, {workspace: server.workspace, boundByFlag: server.boundByFlag});
   // AUTO-SAVE OFF, EXPLICITLY. The diagnostic printed the tab's class list before typing, after
   // typing and after Ctrl+S: identical all three times, never once `dirty`. VS Code for the Web
   // turns auto-save on, so the buffer saved itself before anything could observe it and Ctrl+S had
   // nothing left to do. Without this the save probe passes or fails for the wrong reason.
-  await applySettings(page, server.url, {...recordingSettings({theme: 'dark'}), 'files.autoSave': 'off'});
-  await openWorkbench(page, server.url);
+  await applySettings(page, server.url, {...recordingSettings({theme: 'dark'}), 'files.autoSave': 'off'},
+    {workspace: server.workspace, boundByFlag: server.boundByFlag});
+  await openWorkbench(page, server.url, {workspace: server.workspace, boundByFlag: server.boundByFlag});
   console.log('workbench up');
 
   if (mode === 'dump') {
@@ -331,7 +332,7 @@ try {
           // seven in a row, all of them working shortcuts. Reloading the workbench costs a few
           // seconds and puts the suite back on its feet; only a second failure is a real error.
           console.log(`     (setup stalled — reloading the workbench and retrying)`);
-          await openWorkbench(page, server.url);
+          await openWorkbench(page, server.url, {workspace: server.workspace, boundByFlag: server.boundByFlag});
           await deadline(setup(need), 45000, `setup "${need}" after reload`);
         }
         const before = await deadline(snapshot(page), 15000, 'snapshot');

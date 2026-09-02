@@ -8,11 +8,18 @@
 // Output mirrors exactly what the real runner will emit (docs/SCREEN_RECORDING.md §4):
 //   public/rec/<slug>/manifest.json + seg-NN.mp4
 //
+// The frames are PAINTED HERE and handed to ffmpeg as a PNG sequence, rather than drawn by
+// ffmpeg's `drawtext` filter. `drawtext` needs an ffmpeg built --enable-libfreetype; the
+// Homebrew build on macOS is not, so the whole test-rec suite died at
+// `No such filter: 'drawtext'` on a machine where the PRODUCT itself worked fine. The real
+// capture path already encodes a PNG sequence (capture.mjs), so this is the same road.
+//
 // Usage: node scripts/gen-rec-fixture.mjs [slug]
 import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import {Frame, hex} from './lib/record/framepaint.mjs';
 
 const slug = process.argv[2] || '_fixture';
 const OUT = path.resolve('public/rec', slug);
@@ -28,44 +35,46 @@ const SEGS = [
 fs.rmSync(OUT, {recursive: true, force: true});
 fs.mkdirSync(OUT, {recursive: true});
 
-// Copy a font next to the output so the ffmpeg filter never needs a Windows drive-letter
-// path — ':' is the filter option separator and escaping it portably is a trap.
-const FONT_CANDIDATES = [
-  'C:/Windows/Fonts/consola.ttf',
-  'C:/Windows/Fonts/arial.ttf',
-  '/System/Library/Fonts/Menlo.ttc',
-  '/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf',
-];
-const font = FONT_CANDIDATES.find((f) => fs.existsSync(f));
-if (!font) {
-  console.error('No usable font found; tried:\n  ' + FONT_CANDIDATES.join('\n  '));
-  process.exit(1);
-}
-fs.copyFileSync(font, path.join(OUT, 'font.ttf'));
+const W = 960, H = 540;
+const WHITE = [255, 255, 255];
+const YELLOW = [255, 214, 0];
+
+/** One fixture frame: the segment label, the frame number, and a bar that MOVES.
+ *  The moving bar is what makes "this clip is advancing" measurable; the numerals are
+ *  what makes a still readable by a human debugging an anchor. */
+const paint = (seg, n, i) => {
+  const f = new Frame(W, H, hex(seg.color));
+  f.text(40, 40, `SEG ${n} ${seg.id}`, 6, WHITE);
+  f.text(40, 140, `F${i}`, 20, YELLOW);
+  // mod(t*300, 900) at 30fps, in whole pixels so the sequence is reproducible.
+  f.fill(Math.round((i * 300 / FPS) % 900), 440, 60, 60, WHITE);
+  return f.png();
+};
 
 const steps = [];
 let t = 0;
 SEGS.forEach((s, i) => {
   const n = String(i + 1).padStart(2, '0');
   const file = `seg-${n}.mp4`;
-  const secs = (s.frames / FPS + 2).toFixed(3); // generate long, trim with -frames:v
-  const vf = [
-    `drawtext=fontfile=font.ttf:text='SEG ${n} ${s.id}':fontcolor=white:fontsize=44:x=40:y=40`,
-    `drawtext=fontfile=font.ttf:text='F%{frame_num}':fontcolor=yellow:fontsize=140:x=40:y=140:start_number=0`,
-    // a moving bar: proves the clip is ADVANCING, not just showing a static frame
-    `drawbox=x='mod(t*300\\,900)':y=440:w=60:h=60:color=white@0.9:t=fill`,
-  ].join(',');
+  // Paint every frame, then encode the sequence. Exactly `s.frames` files exist, so the
+  // count cannot drift the way the concat demuxer's repeated-last-image trick does
+  // (gotcha 20) — there is nothing to trim.
+  const fdir = path.join(OUT, `frames-${n}`);
+  fs.mkdirSync(fdir, {recursive: true});
+  for (let i = 0; i < s.frames; i++) {
+    fs.writeFileSync(path.join(fdir, `f${String(i).padStart(5, '0')}.png`), paint(s, n, i));
+  }
 
   execFileSync(
     'ffmpeg',
     ['-y', '-v', 'error',
-     '-f', 'lavfi', '-i', `color=c=${s.color}:s=960x540:r=${FPS}:d=${secs}`,
-     '-vf', vf,
+     '-framerate', String(FPS), '-i', path.join(`frames-${n}`, 'f%05d.png'),
      '-frames:v', String(s.frames),
      '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-r', String(FPS),
      file],
     {cwd: OUT, stdio: ['ignore', 'inherit', 'inherit']},
   );
+  fs.rmSync(fdir, {recursive: true, force: true});
 
   // verify what we actually produced — never trust the request, measure the artefact
   const probed = execFileSync('ffprobe',
@@ -96,7 +105,6 @@ SEGS.forEach((s, i) => {
   t += s.frames;
 });
 
-fs.rmSync(path.join(OUT, 'font.ttf'));
 
 const manifest = {
   slug,

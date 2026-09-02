@@ -21,14 +21,35 @@ import {palette} from './vscode.mjs';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** The literal text currently displayed by the focused terminal. */
+/**
+ * The literal text currently displayed by the ACTIVE terminal.
+ *
+ * "The last mounted xterm that has size" is not the active terminal. VS Code mounts a
+ * SECOND, one-row xterm alongside the real one — an accessibility mirror that holds only
+ * the current command line — and being mounted later, it won the old heuristic.
+ *
+ * Measured: `cat pyproject.toml` completed perfectly in terminal 0 (13 rows, ending
+ * `build-backend = "uv_build"` and a fresh prompt) while readBuffer returned terminal 1's
+ * lone `PS probe-term> cat pyproject.toml`. The completion check therefore never saw a
+ * prompt and the step died on its 120s timeout — a command that had already succeeded.
+ * Every recording died on its third step, because the mirror only appears once there is a
+ * command line to mirror.
+ *
+ * So: ask VS Code which terminal is active, and only fall back to a guess if it will not
+ * say. The fallback prefers the WIDEST-content terminal rather than the newest, because
+ * the mirror is always the degenerate one.
+ */
 export const readBuffer = async (page) =>
   page.evaluate(() => {
-    const rows = document.querySelectorAll('.xterm-rows');
-    if (!rows.length) return null;
-    // The visible (focused) terminal is the last mounted one that has size.
-    const el = Array.from(rows).reverse().find((r) => r.getBoundingClientRect().height > 0) || rows[0];
-    return el.innerText;
+    const visible = (el) => el.getBoundingClientRect().height > 0;
+    const active = document.querySelector('.terminal-wrapper.active .xterm-rows');
+    if (active && visible(active)) return active.innerText;
+    const rows = [...document.querySelectorAll('.terminal-wrapper .xterm-rows')].filter(visible);
+    const any = rows.length ? rows : [...document.querySelectorAll('.xterm-rows')].filter(visible);
+    if (!any.length) return null;
+    // Most RENDERED rows wins: the real terminal draws its whole viewport, the mirror one line.
+    return any.reduce((a, b) =>
+      (b.children.length > a.children.length ? b : a)).innerText;
   });
 
 const lines = (buf) => (buf || '').split('\n').map((l) => l.replace(/\s+$/, ''));
@@ -40,7 +61,10 @@ const nonEmpty = (buf) => lines(buf).filter((l) => l.trim());
 // absolute path, and a long path WRAPS across xterm rows — the continuation row then has
 // no `PS ` prefix, so a prefix-anchored test misses it and the terminal looks like it
 // never started. `>` PowerShell, `$` bash/zsh, `#` root.
-const isPromptLine = (l) => /[>$#]\s*$/.test(String(l).trimEnd());
+// `%` is ZSH, the default login shell on macOS since Catalina. It was missing, so the
+// first recording attempt on a Mac sat through the whole 120s timeout with a perfectly
+// good prompt on screen and reported "never produced a prompt".
+const isPromptLine = (l) => /[>$#%]\s*$/.test(String(l).trimEnd());
 
 export const openTerminal = async (page, {timeout = 120000} = {}) => {
   await palette(page, 'Terminal: Create New Terminal');
@@ -95,7 +119,8 @@ export const primeTerminal = async (page, {exitFile = exitFilePath()} = {}) => {
  * numeric exit code — so `readExitStatus` parses one format on every platform.
  */
 export const promptHook = (exitFile, platform = os.platform()) => {
-  const TAB = String.fromCharCode(9);
+  // NOTE: neither branch may contain a LITERAL tab. This string is typed into a live
+  // shell and a tab keystroke is completion, not a character — see the POSIX branch.
   if (platform === 'win32') {
     // A PowerShell single-quoted string is literal, so a Windows path needs no escaping.
     // `$ok = $?` MUST be the first statement — almost anything else resets `$?`.
@@ -103,14 +128,37 @@ export const promptHook = (exitFile, platform = os.platform()) => {
       `"$ok\`t$code" | Out-File -Encoding ascii -NoNewline '${exitFile}'; ` +
       `'PS ' + (Split-Path -Leaf (Get-Location)) + '> ' }`;
   }
-  // POSIX: bash runs PROMPT_COMMAND before each prompt, zsh runs precmd. Defining BOTH is
-  // harmless in either shell, so one line covers bash and zsh without having to sniff
+  // POSIX: bash runs PROMPT_COMMAND before each prompt, zsh runs precmd_functions.
+  // Setting both is harmless in either shell, so one line covers bash and zsh without sniffing
   // which is running. `local c=$?` as the first statement captures the previous command's
   // status, exactly as `$ok = $?` does in PowerShell.
   const f = exitFile.split('\\').join('/');
+  // THE HOOK MUST RUN *FIRST*, BEFORE VS CODE'S OWN.
+  //
+  // The first version defined `precmd() { __iauteur_hook; }`. In zsh — the default macOS
+  // login shell — VS Code's shell integration has ALREADY registered its own precmd, and
+  // whichever of the two runs first leaves `$?` holding ITS last internal command's status
+  // rather than the user's. Measured: `echo hello`, `uv --version` and `false` all reported
+  // exit code 1, with the output read back correctly. Wrong exit codes are worse than
+  // missing ones, because `expect: {exitCode: 0}` then fails on every command that worked
+  // and the manifest still claims truth: 'read-back'.
+  //
+  // `precmd_functions` is zsh's supported extension point and takes an ORDER, so the hook
+  // goes at the FRONT and sees the real status. bash has no such array and does not need
+  // one — PROMPT_COMMAND is prepended there for the same reason. Defining `precmd`
+  // directly is deliberately NOT done any more: it would override VS Code's rather than
+  // sit beside it.
   return `__iauteur_hook() { local c=$?; if [ $c -eq 0 ]; then o=True; else o=False; fi; ` +
-    `printf '%s${TAB}%s' "$o" "$c" > '${f}'; }; ` +
-    `PROMPT_COMMAND=__iauteur_hook; precmd() { __iauteur_hook; }; ` +
+    // \t AS TWO CHARACTERS, NOT A TAB. This line is TYPED into a live shell, and a real
+    // tab keystroke is COMPLETION, not a character — so the separator never arrived,
+    // `readExitStatus` split "False1" on a tab it could not find, and every command in
+    // every recording reported exit code 1 (the ok !== 'True' fallback). PowerShell was
+    // unaffected because its half escapes the tab as `t and never types a control
+    // character. printf expands the escape itself, which is the whole point of using it.
+    `printf '%s\\t%s' "$o" "$c" > '${f}'; return $c; }; ` +
+    `PROMPT_COMMAND="__iauteur_hook\${PROMPT_COMMAND:+;$PROMPT_COMMAND}"; ` +
+    `typeset -ga precmd_functions 2>/dev/null; ` +
+    `precmd_functions=(__iauteur_hook \${precmd_functions[@]}); ` +
     `PS1='PS \\W> '; PROMPT='PS %1~> '`;
 };
 
@@ -150,19 +198,52 @@ export const readExitStatus = ({exitFile = exitFilePath()} = {}) => {
  * closed (see `runFinalize` in the runner) — never inside the take.
  */
 export const readScrollback = async (page) => {
-  await palette(page, 'Terminal: Select All');
-  await sleep(700);
-  await palette(page, 'Terminal: Copy Selection');
-  await sleep(700);
-  const text = await page.evaluate(async () => {
-    try { return await navigator.clipboard.readText(); } catch { return null; }
+  // SCROLL AND READ. Do NOT go through the palette.
+  //
+  // The first version drove `Terminal: Select All` + `Terminal: Copy Selection` and read
+  // the clipboard. It reads the buffer correctly and wrecks the NEXT command: each palette
+  // round-trip costs the terminal one key event, so the following command lost its first
+  // character (`echo BBB` -> `cho BBB`), and the attempts to repair that made it worse —
+  // Ctrl+U/Ctrl+K came back echoed as a literal `^K` with the previous command still on the
+  // line (`u^Kls -av run myapp`). Every one of those is a REAL command with REAL output, so
+  // it would have been recorded as truth.
+  //
+  // This runs in runFinalize, AFTER the step's t1 mark and after the command has completed,
+  // so nothing is writing to the buffer any more. That is what makes scrolling
+  // deterministic here where gotcha 41 showed polling DURING a fast write is not: there is
+  // no race left to lose. The viewport is walked top to bottom, each window read from the
+  // DOM, and the windows stitched on their overlap — no palette, no clipboard, no focus
+  // change, and therefore nothing for the next command to trip over.
+  const geo = await page.evaluate(() => {
+    const w = document.querySelector('.terminal-wrapper.active .xterm-viewport')
+           || document.querySelector('.terminal-wrapper .xterm-viewport');
+    return w ? {h: w.clientHeight, total: w.scrollHeight} : null;
   });
-  await page.keyboard.press('Escape'); // drop the selection highlight
-  await sleep(250);
-  if (!text) return null;
-  const rows = String(text).split(String.fromCharCode(10)).map((l) => l.replace(/\s+$/, ''));
+  if (!geo || !geo.h) return null;
+
+  const step = Math.max(1, Math.floor(geo.h * 0.6)); // 40% overlap gives the stitcher a join
+  const snaps = [];
+  for (let top = 0; ; top += step) {
+    const at = Math.min(top, Math.max(0, geo.total - geo.h));
+    await page.evaluate((y) => {
+      const w = document.querySelector('.terminal-wrapper.active .xterm-viewport')
+             || document.querySelector('.terminal-wrapper .xterm-viewport');
+      if (w) w.scrollTop = y;
+    }, at);
+    await sleep(90); // xterm re-renders rows on scroll
+    snaps.push(await readBuffer(page));
+    if (at >= geo.total - geo.h) break;
+  }
+
+  // Leave the viewport where the user would: at the bottom, on the live prompt.
+  await page.evaluate(() => {
+    for (const w of document.querySelectorAll('.xterm-viewport')) w.scrollTop = w.scrollHeight;
+  });
+  await sleep(80);
+
+  const {lines: rows} = stitchSnapshots(snaps);
   while (rows.length && !rows[rows.length - 1].trim()) rows.pop();
-  return rows;
+  return rows.length ? rows : null;
 };
 
 /** Dump whatever shell-integration decorations exist, so exit-code reading is based on
@@ -250,6 +331,12 @@ export const runCommand = async (page, cmd, {
   const beforeBuf = before;
 
   const tStart = Date.now();
+  // NOTE: an earlier fix pressed `End` here to absorb the key event the terminal drops
+  // after readScrollback's palette round-trip. It cost more than it bought — the very next
+  // prep command (a 118-char mkdir && cp) stopped returning a prompt at all and burned the
+  // full 300s timeout. The verify-and-retype below covers the same fault without sending
+  // anything extra: the swallow only happens on the step AFTER a scrollback read, and
+  // every authored step command is short enough to be verified.
   // Human-ish typing: per-character delay with bounded jitter. Deterministic enough to
   // re-record, irregular enough not to read as a robot.
   for (const ch of cmd) {
@@ -257,6 +344,74 @@ export const runCommand = async (page, cmd, {
     await sleep(Math.max(12, typeDelay + (Math.random() * 2 - 1) * jitter));
   }
   await sleep(280);
+
+  // READ THE COMMAND LINE BACK BEFORE COMMITTING IT.
+  //
+  // Measured: the FIRST keystroke after `readScrollback` is swallowed — not a focus
+  // problem (document.activeElement is already the xterm helper textarea, and a bare "X"
+  // sent by hand vanished too), but the terminal dropping one event after the palette
+  // round-trip that Select All / Copy Selection needs.
+  //
+  // The failure mode is the dangerous one. `echo BBB` arrives as `cho BBB`, which is still
+  // a REAL command with REAL output, so the step completes, `truth: 'read-back'` is
+  // honestly recorded, and the footage shows a typo that no gate can see — the runner
+  // cannot know what the author MEANT. So the command line is verified against the intent
+  // before Enter, exactly as every other claim in this module is verified against reality.
+  // Compare with whitespace COLLAPSED on both sides. A long command wraps across xterm
+  // rows and each row is right-trimmed, so a wrap that lands on a space loses it and an
+  // exact match fails on a line that is perfectly correct (the prompt hook is ~300 chars
+  // and wrapped four ways). Collapsing still catches the case this exists for: a dropped
+  // leading character makes "echo BBB" into "cho BBB", which no amount of whitespace
+  // normalisation can turn back into a match.
+  //
+  // Only SHORT commands are verified. xterm wraps a long line across rows and the wrap is
+  // not reconstructable — it right-trims each row and can split inside a word, so the
+  // prompt hook (~300 chars) came back with a space wedged into `precmd_functions` and no
+  // amount of normalising made it match a line that was in fact typed perfectly. Every
+  // AUTHORED step command is far under the wrap width; the long ones are prep, which is
+  // typed before the camera rolls and whose effect is asserted separately.
+  // Compare the command line EXACTLY, not with `includes`. A stray character that lands
+  // BEFORE the command still contains it: `ls -a` typed after a leaked `u` reads `uls -a`,
+  // which `includes("ls -a")` happily accepts — and zsh then answered
+  // "command not found: uls" four steps into an otherwise good take. The text after the
+  // last prompt marker is the whole command and must equal what was asked for.
+  const norm = (t) => String(t).replace(/\s+/g, ' ').trim();
+  const wantNorm = norm(cmd);
+  const WRAP_SAFE = 100;
+  // Strip the PROMPT specifically, anchored at the start of the line. Searching for the
+  // last "> " finds a REDIRECT instead: `printf '…' > /tmp/iauteur-gitconfig` was read as
+  // the command `/tmp/iauteur-gitconfig` and rejected three times in a row, on a line that
+  // had been typed perfectly. primeTerminal sets the prompt to `PS <dir]> `, so it is a
+  // known shape rather than something to guess at.
+  const PROMPT = /^PS [^>]*>\s?/;
+  const typedLine = async () => {
+    const rows = nonEmpty(await readBuffer(page));
+    const last = rows[rows.length - 1] ?? '';
+    return norm(last.replace(PROMPT, ''));
+  };
+  for (let attempt = 0; cmd.length <= WRAP_SAFE; attempt++) {
+    const shown = await typedLine();
+    if (shown === wantNorm) break;
+    if (attempt >= 2) {
+      throw new Error(
+        `Could not type "${cmd}" into the terminal — after ${attempt + 1} attempts the ` +
+        `command line reads ${JSON.stringify(shown.slice(-160))}. Refusing to press Enter: ` +
+        `a mistyped command runs and produces real output, which would be recorded as truth.`);
+    }
+    // Clear with BACKSPACE, not Ctrl+U/Ctrl+K. The control keys were not always
+    // interpreted — one came back echoed into the line as a literal `^K`, which turned a
+    // repair attempt into more corruption. Backspace is unambiguous, and the line is
+    // short by construction (only commands under WRAP_SAFE reach here).
+    await page.keyboard.press('End');
+    for (let i = 0; i < shown.length + 8; i++) await page.keyboard.press('Backspace');
+    await sleep(200);
+    for (const ch of cmd) {
+      await page.keyboard.type(ch);
+      await sleep(Math.max(12, typeDelay + (Math.random() * 2 - 1) * jitter));
+    }
+    await sleep(280);
+  }
+
   await page.keyboard.press('Enter');
 
   // Wait for a NEW prompt after the command, and for the buffer to stop changing.
