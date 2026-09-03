@@ -1,0 +1,457 @@
+{
+  "slug": "live-analyst",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "analyst-live",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "prep": {
+    "files": {
+      ".env": "",
+      "ask.py": "",
+      "describe.py": "",
+      "analyse.py": ""
+    },
+    "copy": {
+      "orders.csv": "ai-analyst-tutorial/samples/orders.csv"
+    },
+    "commands": [
+      "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/",
+      "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
+      "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
+      "export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig",
+      "rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git"
+    ]
+  },
+  "steps": [
+    {
+      "id": "look",
+      "action": "run",
+      "cmd": "ls",
+      "label": "what is in the folder",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "orders.csv",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "csv",
+          "text": "orders.csv"
+        }
+      ]
+    },
+    {
+      "id": "peek",
+      "action": "run",
+      "cmd": "head -3 orders.csv",
+      "label": "the data, first rows",
+      "focus": "terminal",
+      "expect": {
+        "contains": "SO-1001",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "header",
+          "text": "order_id,date,region"
+        }
+      ]
+    },
+    {
+      "id": "init",
+      "action": "run",
+      "cmd": "uv init --app",
+      "label": "one command starts the project",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Initialized project",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "made",
+          "text": "Initialized project"
+        }
+      ]
+    },
+    {
+      "id": "add",
+      "action": "run",
+      "cmd": "uv add openai python-dotenv",
+      "label": "the one library every provider speaks",
+      "focus": "terminal",
+      "expect": {
+        "contains": "openai",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "lib",
+          "text": "+ openai"
+        }
+      ]
+    },
+    {
+      "id": "openenv",
+      "action": "openFile",
+      "path": ".env",
+      "label": "the file settings live in",
+      "focus": "editor"
+    },
+    {
+      "id": "typeenv",
+      "action": "type",
+      "at": "start",
+      "focus": "editor",
+      "typeDelay": 34,
+      "label": "three lines choose your provider",
+      "text": "AI_BASE_URL=http://localhost:11434/v1\nAI_API_KEY=ollama\nAI_MODEL=qwen3:4b\n\n# a cloud provider instead — same three lines, different values:\n# AI_BASE_URL=https://api.groq.com/openai/v1\n# AI_API_KEY=gsk_****************************\n# AI_MODEL=llama-3.3-70b-versatile",
+      "marks": [
+        {
+          "id": "base",
+          "text": "AI_BASE_URL=http://localhost"
+        },
+        {
+          "id": "masked",
+          "text": "AI_API_KEY=gsk_"
+        }
+      ]
+    },
+    {
+      "id": "saveenv",
+      "action": "save",
+      "label": "save it"
+    },
+    {
+      "id": "openignore",
+      "action": "openFile",
+      "path": ".gitignore",
+      "label": "the list of things git must never take",
+      "focus": "editor"
+    },
+    {
+      "id": "typeignore",
+      "action": "type",
+      "at": "end",
+      "focus": "editor",
+      "typeDelay": 42,
+      "label": "one line keeps your key out of git",
+      "text": "\n# never commit your key\n.env",
+      "marks": [
+        {
+          "id": "ignored",
+          "text": ".env"
+        }
+      ]
+    },
+    {
+      "id": "saveignore",
+      "action": "save",
+      "label": "save"
+    },
+    {
+      "id": "openask",
+      "action": "openFile",
+      "path": "ask.py",
+      "label": "an empty file",
+      "focus": "editor"
+    },
+    {
+      "id": "typeclient",
+      "action": "type",
+      "at": "start",
+      "focus": "editor",
+      "typeDelay": 32,
+      "label": "read the settings, build the client",
+      "text": "import os\nfrom dotenv import load_dotenv\nfrom openai import OpenAI\n\nload_dotenv()\n\nclient = OpenAI(\n    base_url=os.getenv(\"AI_BASE_URL\"),\n    api_key=os.getenv(\"AI_API_KEY\"),\n)",
+      "marks": [
+        {
+          "id": "import",
+          "text": "from openai import OpenAI"
+        },
+        {
+          "id": "baseurl",
+          "text": "base_url=os.getenv"
+        }
+      ]
+    },
+    {
+      "id": "typecall",
+      "action": "type",
+      "at": "end",
+      "focus": "editor",
+      "typeDelay": 30,
+      "label": "the one call that does every job here",
+      "text": "\nanswer = client.chat.completions.create(\n    model=os.getenv(\"AI_MODEL\"),\n    messages=[\n        {\"role\": \"user\", \"content\": \"Reply with exactly the word: ready\"},\n    ],\n)\n\nprint(answer.choices[0].message.content)\nprint(answer.usage)",
+      "marks": [
+        {
+          "id": "create",
+          "text": "client.chat.completions.create"
+        },
+        {
+          "id": "messages",
+          "text": "messages=["
+        },
+        {
+          "id": "role",
+          "text": "\"role\": \"user\""
+        },
+        {
+          "id": "content",
+          "text": "answer.choices[0].message.content"
+        }
+      ]
+    },
+    {
+      "id": "saveask",
+      "action": "save",
+      "label": "save"
+    },
+    {
+      "id": "runask",
+      "action": "run",
+      "cmd": "uv run python ask.py",
+      "label": "run it",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 180000,
+      "expect": {
+        "contains": "ready",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "answer",
+          "text": "ready"
+        },
+        {
+          "id": "tokens",
+          "text": "CompletionUsage"
+        }
+      ]
+    },
+    {
+      "id": "opendesc",
+      "action": "openFile",
+      "path": "describe.py",
+      "label": "a second empty file",
+      "focus": "editor"
+    },
+    {
+      "id": "d1",
+      "action": "type",
+      "at": "start",
+      "focus": "editor",
+      "typeDelay": 32,
+      "label": "read the file and count the rows",
+      "text": "import csv\nimport statistics\n\nrows = list(csv.DictReader(open(\"orders.csv\")))\nprint(\"rows:\", len(rows))\nprint()",
+      "marks": [
+        {
+          "id": "reader",
+          "text": "csv.DictReader"
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "action": "type",
+      "at": "end",
+      "focus": "editor",
+      "typeDelay": 32,
+      "label": "walk the columns, one at a time",
+      "text": "\nfor name in rows[0]:\n    values = [r[name] for r in rows if r[name]]",
+      "marks": [
+        {
+          "id": "loop",
+          "text": "for name in rows[0]:"
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "action": "type",
+      "at": "end",
+      "focus": "editor",
+      "typeDelay": 30,
+      "label": "try turning each value into a number",
+      "text": "    numbers = []\n    for v in values:\n        try:\n            numbers.append(float(v))\n        except ValueError:\n            pass\n",
+      "marks": [
+        {
+          "id": "try",
+          "text": "numbers.append(float(v))"
+        }
+      ]
+    },
+    {
+      "id": "d4",
+      "action": "type",
+      "at": "end",
+      "focus": "editor",
+      "typeDelay": 30,
+      "label": "a number column gets min, max and mean",
+      "text": "    if len(numbers) == len(values):\n        print(f\"{name:<16} min {min(numbers):<7} max {max(numbers):<7}\"\n              f\" mean {round(statistics.fmean(numbers), 2)}\")\n        continue\n",
+      "marks": [
+        {
+          "id": "mean",
+          "text": "statistics.fmean"
+        }
+      ]
+    },
+    {
+      "id": "d5",
+      "action": "type",
+      "at": "end",
+      "focus": "editor",
+      "typeDelay": 30,
+      "label": "everything else gets counted instead",
+      "text": "    counts = {}\n    for v in values:\n        counts[v] = counts.get(v, 0) + 1\n    top = sorted(counts.items(), key=lambda kv: -kv[1])[:3]\n    print(f\"{name:<16} \" + \", \".join(f\"{k} {n}\" for k, n in top))",
+      "marks": [
+        {
+          "id": "counts",
+          "text": "counts[v] = counts.get(v, 0) + 1"
+        }
+      ]
+    },
+    {
+      "id": "savedesc",
+      "action": "save",
+      "label": "save"
+    },
+    {
+      "id": "rundesc",
+      "action": "run",
+      "cmd": "uv run python describe.py",
+      "label": "run it — and read what comes out",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "delivery_days",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "noise",
+          "text": "order_id"
+        },
+        {
+          "id": "days",
+          "text": "delivery_days"
+        }
+      ]
+    },
+    {
+      "id": "gotofix",
+      "action": "reveal",
+      "target": "editor",
+      "line": 25,
+      "text": "top = sorted",
+      "label": "back to the line that ranks them",
+      "focus": "editor"
+    },
+    {
+      "id": "typefix",
+      "action": "type",
+      "focus": "editor",
+      "typeDelay": 40,
+      "label": "skip a column where every value is different",
+      "text": "    if len(counts) == len(values):\n        continue\n",
+      "marks": [
+        {
+          "id": "guard",
+          "text": "if len(counts) == len(values):"
+        }
+      ]
+    },
+    {
+      "id": "savefix",
+      "action": "save",
+      "label": "save"
+    },
+    {
+      "id": "rerun",
+      "action": "run",
+      "cmd": "uv run python describe.py",
+      "label": "run it again",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "delivery_days",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "clean",
+          "text": "delivery_days"
+        },
+        {
+          "id": "courier",
+          "text": "courier"
+        }
+      ]
+    },
+    {
+      "id": "openan",
+      "action": "openFile",
+      "path": "analyse.py",
+      "label": "the last file",
+      "focus": "editor"
+    },
+    {
+      "id": "a1",
+      "action": "type",
+      "at": "start",
+      "focus": "editor",
+      "typeDelay": 32,
+      "label": "run the describer and keep what it printed",
+      "text": "import os\nimport subprocess\nfrom dotenv import load_dotenv\nfrom openai import OpenAI\n\nload_dotenv()\nfacts = subprocess.run(\n    [\"python\", \"describe.py\"], capture_output=True, text=True\n).stdout",
+      "marks": [
+        {
+          "id": "capture",
+          "text": "capture_output=True"
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "action": "type",
+      "at": "end",
+      "focus": "editor",
+      "typeDelay": 30,
+      "label": "send the facts, not the rows",
+      "text": "\nclient = OpenAI(\n    base_url=os.getenv(\"AI_BASE_URL\"),\n    api_key=os.getenv(\"AI_API_KEY\"),\n)\n\nanswer = client.chat.completions.create(\n    model=os.getenv(\"AI_MODEL\"),\n    messages=[\n        {\"role\": \"system\", \"content\": \"You are a data analyst. Use only these facts.\"},\n        {\"role\": \"user\", \"content\": facts + \"\\n\\nWhat stands out?\"},\n    ],\n)\n\nprint(answer.choices[0].message.content)",
+      "marks": [
+        {
+          "id": "system",
+          "text": "\"role\": \"system\""
+        },
+        {
+          "id": "facts",
+          "text": "facts + "
+        }
+      ]
+    },
+    {
+      "id": "savean",
+      "action": "save",
+      "label": "save"
+    },
+    {
+      "id": "runan",
+      "action": "run",
+      "cmd": "uv run python analyse.py",
+      "label": "the model reads the description",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {
+        "exitCode": 0
+      }
+    }
+  ]
+}
