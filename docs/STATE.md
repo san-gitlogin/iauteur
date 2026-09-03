@@ -1489,6 +1489,42 @@ replaces pip…".
 
 ## Open threads
 
+- **FIVE SHARED COMPONENTS DEAD-SCREEN FOR 3–6 SECONDS, AND IT IS A LAW 8 VIOLATION**
+  (found 2026-09-03, by rendering every scene of the episode-3 cut at start+60 — one frame
+  past the deadline LAW 8 sets — and reading the sheet).
+
+  `BarCompare` was the egregious case and is FIXED: it faded the whole row in at the bar's
+  own `atWord`, so two beats in one cut opened on a black frame for **7.9s and 10.4s** out
+  of scenes 21s and 19s long. The row skeleton is the base now; only the fill and the
+  read-out keep the anchor.
+
+  **`STAT_PANELS`, `LIST_BUILD`, `CHAT_MOCKUP`, `CYCLE_LOOP` and `RECAP` have the same
+  shape at 3–6 seconds** and cannot be fixed from a spec: none of them declares a
+  scene-level anchor, so their base timing is derived entirely from their items' anchors,
+  and moving an item's anchor earlier just puts a value on screen before the narration
+  names it — trading LAW 0i.1 to satisfy LAW 8, which is the wrong trade.
+
+  The fix each one needs is the split LAW 8 prescribes: the CONTAINER (panel outlines,
+  row skeletons, an empty ring, the heading rule) at `Math.min(firstAnchor, 38)`, and only
+  the VALUES on their own anchors. It is a defined component job under LAW 9 — five
+  components, MIN/MAX/MIX fixtures, both aspects, material + neobrutalism + a light twin —
+  and it touches every spec in the catalogue, which is why it is written here rather than
+  done quietly during video production. **Ask before starting it.**
+
+  Reproduce in three minutes: render each scene at `sceneStart + 60` and montage the
+  result. An empty tile is a component whose base is its content.
+
+- **Two beats in the "Point AI At It" brief have no capture behind them.** Recorded in
+  `briefs/pointai/build_ep03.mjs` and worth settling before the other five episodes:
+  (a) the curriculum's episode-1/chapter-1 claim that a pasted-rows answer gets *"the
+  arithmetic wrong"* — no capture of that exists in any of the four documents, so chapter
+  one argues the measured facts instead and the wrongness is paid off where it really was
+  recorded; (b) `docs/04-TEST-EVIDENCE.md` §4.3's *"There is no row anywhere in it"* —
+  `_render()` does send five sample rows, and the argument was rewritten to the true and
+  sharper version (all five arrived safely, so the only rows the model could see were the
+  ones where nothing went wrong).
+
+
 - **Forty-six topics' specs are not in git** (found 2026-08-23; see the dated entry above).
   The whole Playwright Dojo series, the six iAuteur promos, and twenty one-off videos. They
   are not ignored — they were never staged. A read-only scan found nothing the publish gate
