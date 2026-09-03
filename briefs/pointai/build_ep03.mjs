@@ -66,8 +66,7 @@ const scenes = [];
 {
   const n =
     "A spreadsheet, and a model that's just read it. " +
-    "Every line of the answer sounds equally sure of itself. " +
-    "One line is flatly wrong, and the tone will not tell you which.";
+    "Every line sounds equally sure. One of them is flatly wrong.";
   scenes.push(scene('HOOK', n, {
     headline: "DON'T PASTE THE SPREADSHEET",
     subtext: 'it counts badly, and confidently',
@@ -80,9 +79,7 @@ const scenes = [];
   const n =
     `Welcome back to ${CH}. This is part three of Point AI At It, and today we're pointing ` +
     "a model at a spreadsheet — fifty orders from a made-up online shop called Bramble and Co. " +
-    "So when can a model be trusted with a number, and when can it absolutely not? " +
-    "That's the rule I want you to leave with, because it decides everything else. " +
-    "And somewhere in the middle, you'll watch the model blame a courier that lost nothing at all.";
+    "So when can a model be trusted with a number, and when can it absolutely not?";
   scenes.push(scene('TITLE_CARD', n, {
     title: 'Data: the mistake everyone makes',
     subtitle: 'Point AI At It · part three',
@@ -91,10 +88,27 @@ const scenes = [];
 
 {
   const n =
+    "Three things go wrong in the next fifteen minutes. " +
+    "A model reads a number and doesn't think it's odd. " +
+    "A check I wrote catches a bug I'd shipped. " +
+    "And the model blames a courier that lost nothing at all, in exactly the tone it uses " +
+    "for the things it gets right.";
+  scenes.push(scene('LIST_BUILD', n, {
+    heading: 'Three failures, one spreadsheet',
+    items: [
+      {text: 'It saw nineteen days and shrugged', atWord: at(n, 'odd')},
+      {text: 'My own check caught my own bug', atWord: at(n, 'bug')},
+      {text: 'It blamed a courier that lost nothing', atWord: at(n, 'blames')},
+    ],
+  }));
+}
+
+{
+  const n =
     "So, the file. Fifty orders, eight columns — who carried the parcel, how many days it " +
     "took, what it was worth, and whether it turned up. " +
     "Two of those fifty never turned up, and their delivery time is blank. " +
-    "Hold on to those two, because that pair comes back three times before the end.";
+    "Hold on to those two, because the pair comes back three times.";
   scenes.push(scene('DATABASE_TABLE', n, {database: {
     headline: 'Fifty orders, eight columns',
     tableName: 'orders.csv',
@@ -107,6 +121,7 @@ const scenes = [];
       ['SO-1047', 'RapidPost', '--', 'lost_in_transit'],
     ],
     highlight: [2, 4],
+    highlightAtWords: [at(n, 'never'), at(n, 'blank')],
     query: 'the two that never arrived',
     atWord: at(n, 'file'),
     source: FILE,
@@ -137,6 +152,23 @@ scenes.push(chapter(
 
 {
   const n =
+    "And think about what that question needs. " +
+    "Count fifty rows without losing your place. " +
+    "Average a column of decimals, in your head, exactly. " +
+    "Then cross-reference two other columns to see who was carrying the slow ones. " +
+    "That's three separate jobs, and only the last one is reading.";
+  scenes.push(scene('LIST_BUILD', n, {
+    heading: 'What you just asked it to do',
+    items: [
+      {text: 'Count fifty rows without losing count', atWord: at(n, 'Count')},
+      {text: 'Average a column of decimals, exactly', atWord: at(n, 'Average')},
+      {text: 'Cross-reference two more columns', atWord: at(n, 'cross-reference')},
+    ],
+  }));
+}
+
+{
+  const n =
     "Those fifty rows cost about two thousand four hundred tokens going in. " +
     "A token is roughly three quarters of a word, and a token is the unit you're billed in. " +
     "Fifty rows is nothing, so nobody notices. The trouble is what happens next.";
@@ -150,15 +182,18 @@ scenes.push(chapter(
 {
   const n =
     "That's about forty-eight tokens a row, so the bill grows in a straight line with the file. " +
-    "Fifty rows is two thousand four hundred. " +
-    "A thousand rows is nearly fifty thousand. " +
-    "Forty thousand rows — an ordinary export, the kind that lands in your inbox on a Monday — " +
-    "is close to two million tokens, and no model on earth will read that in one go, " +
-    "because every one of those rows has to sit in the window at the same moment. " +
+    "Forty thousand rows — an ordinary Monday-morning export — " +
+    "is close to two million tokens, and no model on earth reads that in one go. " +
+    "The summary barely moves: about six hundred tokens whatever the file does. " +
     "Pasting doesn't get expensive. Pasting stops working.";
   scenes.push(scene('LINE_CHART', n, {lineChart: {
     headline: 'The bill grows with the file',
     series: [{
+      label: 'the summary',
+      values: [600, 600, 600, 600, 600, 600],
+      color: 'green',
+      atWord: at(n, 'summary'),
+    }, {
       label: 'pasted rows',
       // DERIVED, AND DECLARED. 2,400 tokens for 50 rows is the measured figure; ~48 a row is
       // that number divided by that number of rows, and the sentence says so out loud. The
@@ -171,7 +206,7 @@ scenes.push(chapter(
     yUnit: 'tok',
     area: true,
     atWord: at(n, 'row'),
-    source: '~48 tokens per row · measured 2026-09-03',
+    source: '~48 tokens/row vs a flat ~600 · measured 2026-09-03',
   }}));
 }
 
@@ -264,10 +299,8 @@ scenes.push(chapter(
   const n =
     "Two of those eight columns aren't numbers at all. " +
     "Courier is a name, so there's no average to take — names get counted instead. " +
-    "RapidPost carried twenty of the fifty. CityLink carried twenty. " +
-    "FarReach carried the other ten, which makes FarReach the small one — and that matters later. " +
-    "Status works the same way: forty-eight delivered, two lost. " +
-    "Counting is all you can do with a word, and counting is enough, " +
+    "RapidPost carried twenty of the fifty, CityLink twenty, and FarReach the other ten. " +
+    "Which makes FarReach the small one, and that matters later, " +
     "because a count is what tells you FarReach is a tenth of the file rather than a third.";
   scenes.push(scene('BAR_COMPARE', n, {
     bars: [
@@ -281,6 +314,43 @@ scenes.push(chapter(
   }));
 }
 
+{
+  const n =
+    "Status works the same way, and status only has two values in it. " +
+    "Forty-eight orders delivered. Two lost in transit. " +
+    "Four per cent of the file, sitting in a corner of a pie chart — " +
+    "and those two are about to cause an enormous amount of trouble.";
+  scenes.push(scene('DONUT', n, {donut: {
+    segments: [
+      {label: 'delivered', value: 48, color: 'green', atWord: at(n, 'delivered')},
+      {label: 'lost_in_transit', value: 2, color: 'red', atWord: at(n, 'lost')},
+    ],
+    variant: 'donut',
+    centerValue: '2',
+    centerLabel: 'never arrived',
+    atWord: at(n, 'Status'),
+    source: FILE,
+  }}));
+}
+
+{
+  const n =
+    "And the same twenty lines describe money just as happily. " +
+    "Order value: the smallest order in the file is eighteen pounds, " +
+    "the largest is ninety-six, and the average sits at forty-six twenty. " +
+    "Nothing about that code knows what a courier is, or what a pound is. " +
+    "It knows how to count, how to sort, and how to spot a blank — " +
+    "which turns out to be most of what a spreadsheet needs.";
+  scenes.push(scene('STAT_PANELS', n, {
+    stats: [
+      {kicker: 'smallest', value: '£18', note: 'order_value', atWord: at(n, 'smallest')},
+      {kicker: 'largest', value: '£96', note: 'order_value', color: 'blue', atWord: at(n, 'largest')},
+      {kicker: 'average', value: '£46.20', note: 'order_value', atWord: at(n, 'average')},
+    ],
+    source: FILE,
+  }));
+}
+
 // ── CHAPTER 3 ────────────────────────────────────────────────────────────────
 scenes.push(chapter(
   "Now send that instead of the rows, and watch the bill.",
@@ -288,7 +358,7 @@ scenes.push(chapter(
 
 {
   const n =
-    "Here's the same question, priced both ways. " +
+    "You saw that flat line. Here's the same question, priced both ways. " +
     "Pasting the rows costs two thousand four hundred tokens going in. " +
     "Sending the profile costs about six hundred — a quarter of that. " +
     "What comes back is the same length either way, so the output line doesn't move. " +
@@ -376,12 +446,11 @@ scenes.push(chapter(
 
 {
   const n =
-    "And those parcels are in the file, in black and white. " +
-    "Order SO-1040 took eighteen point nine days. SO-1045 took nineteen point four. " +
-    "SO-1050 took nineteen point one. " +
-    "Same courier, same region, three of them in a row. " +
-    "That is not noise, because noise doesn't arrive three times in a row. " +
-    "That is somebody's fortnight.";
+    "Those parcels are in the file. " +
+    "SO-1040, eighteen point nine days. SO-1045, nineteen point four. " +
+    "SO-1050, nineteen point one. " +
+    "Same courier, same region, three in a row. " +
+    "Not noise — somebody's fortnight.";
   scenes.push(scene('DATABASE_TABLE', n, {database: {
     headline: 'The three that took a fortnight',
     tableName: 'orders.csv',
@@ -392,6 +461,7 @@ scenes.push(chapter(
       ['SO-1050', 'Remote', 'FarReach', '19.10'],
     ],
     highlight: [0, 1, 2],
+    highlightAtWords: [at(n, 'SO-1040'), at(n, 'SO-1045'), at(n, 'SO-1050')],
     query: 'delivery_days > 18',
     atWord: at(n, 'file'),
     source: FILE,
@@ -478,17 +548,27 @@ scenes.push(chapter(
 {
   const n =
     "Re-run the analysis, and the answer changes shape. " +
-    "The same model, the same question, the same price — " +
+    "Same model, same question, same price — " +
     "and now the unusual list opens with the three numbers that matter. " +
-    "The follow-up changed too — the model now wants to know whether those delays " +
-    "line up with a region or a courier. " +
-    "That's a useful question, and the model only asked because somebody handed over the values.";
+    "And the follow-up changed too: it asks whether those delays track a region or a courier.";
   scenes.push(scene('QUOTE_SPOTLIGHT', n, {
     quote: "The 'delivery_days' column has some unusually high values: 19.4, 19.1, and 18.9",
-    person: {name: 'the same model', role: 'same prompt, same price, twelve more lines'},
-    source: RUN,
+    source: 'The model’s own answer · same prompt, twelve more lines',
     atWord: at(n, 'opens'),
   }));
+}
+
+{
+  const n =
+    "Put the two answers side by side, because the difference is the chapter. " +
+    "Before: two missing values, two lost parcels. " +
+    "After: nineteen point four, nineteen point one, eighteen point nine. " +
+    "Same model. Different input.";
+  scenes.push(scene('FLIP_CARD', n, {flip: {
+    front: {label: 'before', text: '2 missing values, 2 lost parcels', color: 'orange'},
+    back: {label: 'after', text: '19.4, 19.1 and 18.9', color: 'green'},
+    atWord: at(n, 'Before'),
+  }}));
 }
 
 // ── CHAPTER 6 ────────────────────────────────────────────────────────────────
@@ -500,7 +580,7 @@ scenes.push(chapter(
   const n =
     "The check that goes with those twelve lines asks something specific: " +
     "does the tool name the worst delay, nineteen point four days? " +
-    "The check went red. " +
+    "Red. " +
     "Look at what it was handed instead — five point four eight, five point five, " +
     "five point five two, five point five four, five point five five. " +
     "Those are outliers. They're just the wrong ones — the five mildest of the ten. " +
@@ -518,9 +598,9 @@ scenes.push(chapter(
          {at: 'full', atWord: at(n, 'mildest')},
        ],
        callouts: [
-         {text: 'a specific claim, and it failed', mark: 'fail', side: 'bottom', color: 'red',
-          atWord: at(n, 'red')},
-         {text: 'the five mildest of ten', mark: 'mild', side: 'bottom', color: 'orange',
+         {text: 'a specific claim, and it failed', mark: 'fail', color: 'red',
+          atWord: at(n, 'Red')},
+         {text: 'the five mildest of ten', mark: 'mild', color: 'orange',
           atWord: at(n, 'outliers')},
        ]},
       {ref: 'rec:analyst-code#line', label: 'the line that sorted them', focus: true,
@@ -552,7 +632,7 @@ scenes.push(chapter(
   const n =
     "Run the check again. Green — and the list now opens on nineteen point four, " +
     "nineteen point one, eighteen point nine. " +
-    "The three that mattered, at the front — which matters, because only the first five " +
+    "Three that mattered, at the front — which matters, because only the first five " +
     "are ever sent. " +
     "I didn't spot that by reading the code. A question I'd written down spotted it for me.";
   scenes.push(rec(n,
@@ -566,7 +646,7 @@ scenes.push(chapter(
          {at: 'full', atWord: at(n, 'code')},
        ],
        callouts: [
-         {text: 'the three that mattered, first', mark: 'worst', side: 'bottom', color: 'green',
+         {text: 'the three that mattered, first', mark: 'worst', color: 'green',
           atWord: at(n, 'front')},
        ]},
     ]));
@@ -574,15 +654,32 @@ scenes.push(chapter(
 
 {
   const n =
+    "And that whole chapter was one turn of a loop worth keeping. " +
+    "Write the smallest thing that could possibly work. " +
+    "Then assert something specific about what it produces — not that it returned a dictionary, " +
+    "but that it named nineteen point four. " +
+    "Run it. " +
+    "Red means one of two things is wrong and you go and find out which. " +
+    "Green means change something and go round again. " +
+    "A vague assertion would have passed happily while the tool fed the model " +
+    "the five least interesting numbers in the file.";
+  scenes.push(scene('CYCLE_LOOP', n, {cycleLoop: {
+    headline: 'The loop this runs on',
+    nodes: [
+      {label: 'Write the smallest', sub: 'thing that works', atWord: at(n, 'Write')},
+      {label: 'Assert something', sub: 'not vague', color: 'blue', atWord: at(n, 'assert')},
+      {label: 'Run it', sub: 'for real', color: 'purple', atWord: at(n, 'Run')},
+      {label: 'Red or green', sub: 'go round again', color: 'green', atWord: at(n, 'Red')},
+    ],
+  }}));
+}
+
+{
+  const n =
     "One more thing about a red line, because this is the part people get wrong. " +
-    "A failing check asks you two questions, not one. " +
-    "Is the code wrong? Sometimes — that's what happened here, and one line fixed it. " +
-    "Or is the check wrong? " +
-    "Earlier in this same project I'd written one asserting that delivery days would come " +
-    "out as text, on the grounds that two cells were empty. " +
-    "Delivery days comes out as a number, correctly, because a column counts as numeric when " +
-    "every filled value converts. " +
-    "The code was right. My assumption wasn't. Red means look at both.";
+    "A failing check asks two questions, not one. " +
+    "Is the code wrong? Sometimes — one line fixed it here. " +
+    "Or is the check itself wrong? That happens too, and it happened to me.";
   scenes.push(scene('FLIP_CARD', n, {flip: {
     front: {label: 'red', text: 'Is the code wrong?', color: 'red'},
     back: {label: 'or', text: 'Is the check wrong?', color: 'blue'},
@@ -592,11 +689,30 @@ scenes.push(chapter(
 
 {
   const n =
+    "Earlier in this project I'd written a check asserting delivery days " +
+    "would come out as text, because two of the cells were empty. " +
+    "Delivery days comes out as a number — a column counts as numeric " +
+    "when every filled value converts. " +
+    "The code was right. My assumption wasn't.";
+  scenes.push(scene('SPEC_COMPARE', n, {compare: {
+    headline: 'The code was right. I wasn’t.',
+    a: {name: 'my assumption', color: 'red'},
+    b: {name: 'the file', color: 'green'},
+    rows: [
+      {label: 'delivery_days kind', a: 'text', b: 'number', winner: 'b'},
+      {label: 'two empty cells', a: 'makes it text', b: 'still numeric', winner: 'b'},
+      {label: 'so who was wrong', a: 'the check', b: 'not the code', winner: 'b'},
+    ],
+    atWord: at(n, 'text'),
+  }}));
+}
+
+{
+  const n =
     "Which is the second line worth writing down, and this one has nothing to do with models.";
   scenes.push(scene('QUOTE_SPOTLIGHT', n, {
     quote: 'A test is a question you only have to ask once.',
-    person: {name: 'the rule', role: 'ask something specific, or it catches nothing'},
-    source: 'tests/test_analyst.py · 37 checks',
+    source: 'Ask something specific, or a check catches nothing',
     atWord: at(n, 'down'),
   }));
 }
@@ -609,7 +725,7 @@ scenes.push(chapter(
 {
   const n =
     "I asked one question about one courier: is anything wrong with FarReach? " +
-    "The model came back with two findings, in the same even tone. " +
+    "Back came two findings, in the same even tone. " +
     "First: FarReach is responsible for two out of two lost-in-transit orders. " +
     "That's a specific, checkable claim, so let's check it. " +
     "Every order in the file, one square each, and the lost ones lit. " +
@@ -673,17 +789,20 @@ scenes.push(chapter(
 
 {
   const n =
-    "And the FarReach answer wasn't a one-off. Ask the same tool about regions instead of couriers " +
-    "and it says two orders were lost in transit, which is twenty per cent of the orders " +
-    "from the Remote region. " +
+    "And the FarReach answer wasn't a one-off. Ask about regions instead of couriers, " +
+    "and it says two orders were lost — twenty per cent of the Remote region. " +
     "Count the file again. Remote lost none. Central lost none. " +
-    "Both lost orders are in North — a region the model never mentioned. " +
-    "Same shape of mistake, different column, and just as calmly delivered.";
+    "Both are in North, a region the model never mentioned. " +
+    "Same mistake, different column.";
   scenes.push(scene('BAR_COMPARE', n, {
+    // ORDERED AS SPOKEN. The sentence walks Remote, then Central, then North — and the
+    // first draft listed them North-first, so two of the three bars stood empty for most of
+    // the beat while the voice talked about the third. The payoff (North, two, red) now
+    // lands last, which is also where it belongs.
     bars: [
-      {label: 'North', sub: 'lost in transit', value: 2, color: 'red', atWord: at(n, 'North')},
-      {label: 'Central', sub: 'lost in transit', value: 0, atWord: at(n, 'Central')},
       {label: 'Remote', sub: 'lost in transit', value: 0, color: 'orange', atWord: at(n, 'Remote', 2)},
+      {label: 'Central', sub: 'lost in transit', value: 0, atWord: at(n, 'Central')},
+      {label: 'North', sub: 'lost in transit', value: 2, color: 'red', atWord: at(n, 'North')},
     ],
     maxValue: 2,
     source: 'It said 20% of Remote · the file says none',
@@ -730,26 +849,52 @@ scenes.push(chapter(
     tableName: 'orders.csv',
     columns: [{label: 'courier'}, {label: 'status'}],
     rows: [
-      {label: 'RapidPost', text: 'lost_in_transit'},
-      {label: 'CityLink', text: 'delivered'},
-      {label: 'FarReach', text: 'delivered'},
-      {label: 'RapidPost', text: 'lost_in_transit'},
+      {label: 'RapidPost', text: 'lost_in_transit', atWord: at(n, 'rows')},
+      {label: 'CityLink', text: 'delivered', atWord: at(n, 'row', 2)},
+      {label: 'FarReach', text: 'delivered', atWord: at(n, 'ties')},
+      {label: 'RapidPost', text: 'lost_in_transit', atWord: at(n, 'outcome')},
     ],
     splitAtWord: at(n, 'profile'),
     left: [
-      {label: 'RapidPost', value: 20},
-      {label: 'CityLink', value: 20},
-      {label: 'FarReach', value: 10},
+      {label: 'RapidPost', value: 20, atWord: at(n, 'Courier')},
+      {label: 'CityLink', value: 20, atWord: at(n, 'names')},
+      {label: 'FarReach', value: 10, atWord: at(n, 'counts')},
     ],
     right: [
-      {label: 'delivered', value: 48},
-      {label: 'lost_in_transit', value: 2},
+      {label: 'delivered', value: 48, atWord: at(n, 'Status')},
+      {label: 'lost_in_transit', value: 2, atWord: at(n, 'words')},
     ],
     question: 'is anything wrong with FarReach?',
     askAtWord: at(n, 'asked'),
     gapNote: 'counts, not rows',
     source: FILE,
     atWord: at(n, 'rows'),
+  }}));
+}
+
+{
+  const n =
+    "Here's what the first fix looks like. " +
+    "Group the profile by courier before you send it, and every courier gets its own row " +
+    "with its own counts. " +
+    "RapidPost: eighteen delivered, two lost. " +
+    "CityLink: twenty delivered, none lost. " +
+    "FarReach: ten delivered, none lost. " +
+    "The answer to the question I asked is sitting right there, and nobody has to guess it.";
+  scenes.push(scene('DATABASE_TABLE', n, {database: {
+    headline: 'The profile, grouped',
+    tableName: 'courier × status',
+    columns: ['courier', 'delivered', 'lost'],
+    rows: [
+      ['RapidPost', '18', '2'],
+      ['CityLink', '20', '0'],
+      ['FarReach', '10', '0'],
+    ],
+    highlight: [0, 1, 2],
+    highlightAtWords: [at(n, 'RapidPost'), at(n, 'CityLink'), at(n, 'FarReach')],
+    query: 'GROUP BY courier, status',
+    atWord: at(n, 'fix'),
+    source: FILE,
   }}));
 }
 
@@ -772,12 +917,29 @@ scenes.push(chapter(
        atWord: at(n, 'group')},
       {id: 't', label: 'Give it a tool', sub: 'a function it can call', color: 'green',
        atWord: at(n, 'tool')},
+      {id: 'c', label: 'Compute, then send', sub: 'the same move, twice', color: 'purple',
+       atWord: at(n, 'Both')},
     ],
     edges: [
-      {from: 'q', to: 'g', label: 'before you ask', atWord: at(n, 'group')},
-      {from: 'q', to: 't', label: 'while it asks', atWord: at(n, 'tool')},
+      {from: 'q', to: 'g', label: 'before you ask', atWord: at(n, 'sent')},
+      {from: 'q', to: 't', label: 'while it asks', atWord: at(n, 'demand')},
+      {from: 'g', to: 'c', atWord: at(n, 'move')},
+      {from: 't', to: 'c', atWord: at(n, 'move')},
     ],
   }}));
+}
+
+{
+  const n =
+    "And that's why this one is worth more than it looks. " +
+    "A wrong answer you can spot costs you a minute. " +
+    "A wrong answer that arrives in the same calm sentence as three correct ones " +
+    "costs you whatever you go on to decide with it.";
+  scenes.push(scene('QUOTE_SPOTLIGHT', n, {
+    quote: 'A guess that sounds like a fact is the most expensive kind.',
+    source: 'Point AI At It · part three',
+    atWord: at(n, 'wrong'),
+  }));
 }
 
 {
@@ -807,9 +969,9 @@ scenes.push(chapter(
 // ── CLOSE ────────────────────────────────────────────────────────────────────
 {
   const n =
-    "So: three failures, and not one of them was the model being dim. " +
+    "So: three failures, and not one was the model being dim. " +
     "The model shrugged at nineteen days because nobody sent the odd values. " +
-    "The tool handed my check five useless numbers because I sorted a list the wrong way round. " +
+    "My own tool handed the check five useless numbers, because I sorted a list backwards. " +
     "And the model blamed the wrong courier because the summary I sent had no lost parcel on any row. " +
     "Every one of those is an input problem, which means every one of them is yours to fix — " +
     "and that is genuinely good news, because inputs are the part you control.";
@@ -826,11 +988,10 @@ scenes.push(chapter(
 
 {
   const n =
-    "Point the same tool at your own export next — a test run, a sprint, a stock report, whatever " +
-    "lands on your desk. Profile it first, then ask. " +
-    "Part four is pictures: we hand a model a screenshot, and it reads the error code straight off " +
-    "the pixels. " +
-    "If this saved you an afternoon, subscribe, and I'll see you there.";
+    "Point the profiler at your own export — a test run, a sprint, whatever lands on your desk. " +
+    "Profile it first, then ask. " +
+    "Part four is pictures: a screenshot goes in, and the error code comes back out. " +
+    "Subscribe if this saved you an afternoon.";
   scenes.push(scene('OUTRO_CTA', n, {
     message: 'Profile it first, then ask',
     sub: 'Part four — Images: it can see your screen',
@@ -903,5 +1064,12 @@ const spec = {
 
 fs.writeFileSync('topics/point-ai-03-data/long.json', JSON.stringify(spec, null, 2) + '\n');
 const words = scenes.reduce((a, s) => a + s.narration.split(/\s+/).length, 0);
+// MEASURED, NOT ASSUMED. The first estimate used 150 words a minute — the figure the
+// production bible gives for a human read — and en-US-AvaMultilingualNeural delivers this
+// script at 183 (22,051 frames for 2,242 words, measured after the first sync). Estimating
+// low is the dangerous direction: it says 15m20s, sync says 12m15s, and the shortfall only
+// appears after a voice-and-sync round trip. Re-measure when the voice changes.
+const WPS = 3.05;
+const secs = Math.round(words / WPS);
 console.log(`wrote topics/point-ai-03-data/long.json — ${scenes.length} scenes, ${words} words ` +
-  `(~${Math.round(words / 2.5)}s ≈ ${Math.floor(words / 150)}m${String(Math.round((words / 2.5) % 60)).padStart(2, '0')}s)`);
+  `(~${Math.floor(secs / 60)}m${String(secs % 60).padStart(2, '0')}s at ${WPS} words/s)`);

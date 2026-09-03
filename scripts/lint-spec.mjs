@@ -213,7 +213,13 @@ const collectAnchors = (obj, out = []) => {
   if (obj && typeof obj === 'object') {
     for (const [k, v] of Object.entries(obj)) {
       // anchors are `atWord` plus the suffixed variants (heroAtWord, headlineAtWord…)
-      if (/atword$/i.test(k) && typeof v === 'number') out.push(v);
+      // …and the LIST form (`highlightAtWords`), which is one anchor per lit row. Without
+      // this branch the recursion walks into the array, finds keys "0"/"1", matches none of
+      // them, and the anchors are invisible to the range check AND to the scene ceiling —
+      // so a beat that steps three rows was still being told it had earned sixteen seconds.
+      if (/atwords$/i.test(k) && Array.isArray(v)) {
+        for (const n of v) if (typeof n === 'number') out.push(n);
+      } else if (/atword$/i.test(k) && typeof v === 'number') out.push(v);
       else collectAnchors(v, out);
     }
   }
@@ -382,6 +388,15 @@ if (spec.thumbnail && subject) {
     /\bon (?:this|my|a real) machine\b/i, /\bmeasured here\b/i,
     /\breally (?:is|was|did|does) (?:real|running)\b/i,
     /\bnothing (?:is )?(?:staged|faked|mocked)\b/i,
+    // ADDED 2026-09-03, and I wrote the line it caught. An opening beat read *"Three things
+    // go wrong in the next fifteen minutes, and every one of them really happened."* That
+    // is the law's exact shape — vouching for your own footage — in a form none of the
+    // patterns above matched, because the adverb attaches to a VERB rather than to one of
+    // the authenticity adjectives. Nobody demonstrating their own work says "this really
+    // happened", for the same reason nobody says "I am not lying to you".
+    /\b(?:really|actually|genuinely|honestly)\s+(?:happened|occurred|ran|works|worked)\b/i,
+    /\b(?:all|every one of (?:them|these))\s+(?:really|actually)\s+\w+ed\b/i,
+    /\bi did not (?:fake|stage|edit)\b/i, /\bi didn't (?:fake|stage|edit)\b/i,
   ];
   const surfaces = [];
   for (const sc of spec.scenes ?? []) {
@@ -1405,6 +1420,18 @@ for (const s of spec.scenes ?? []) {
   // LISTED. A needle that appears in both is not a shrug, it is a duplicate — and the
   // component would happily draw the second ledger crossing off an entry that names the
   // very value the stamp then claims was never there.
+  if (d.database) {
+    const db = d.database;
+    const hl = db.highlight ?? [];
+    const hw = db.highlightAtWords ?? [];
+    if (hw.length && hw.length !== hl.length)
+      E(`${id}: database.highlightAtWords has ${hw.length} entries for ${hl.length} highlighted row(s) — the two arrays are parallel, so a mismatch silently lights the wrong row`);
+    for (const k of hl) {
+      if (typeof k !== 'number' || k < 0 || k >= (db.rows ?? []).length)
+        E(`${id}: database.highlight index ${k} is outside rows[] (0-${(db.rows ?? []).length - 1})`);
+    }
+  }
+
   if (d.modelShrug) {
     const ms = d.modelShrug;
     const said = ms.said ?? [];

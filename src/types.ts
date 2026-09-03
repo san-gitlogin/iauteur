@@ -1041,7 +1041,9 @@ export interface DatabaseData {
   query?: string;          // e.g. "WHERE active = true"
   columns: string[];       // 2–4 columns
   rows: string[][];        // 2–6 rows
-  highlight?: number[];    // indices of matched rows
+  highlight?: number[];
+  /** Parallel to `highlight`: the word each highlighted row lights on. */
+  highlightAtWords?: number[];    // indices of matched rows
   color?: SemColor;
   atWord?: number;
 }

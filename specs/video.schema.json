@@ -659,7 +659,7 @@
                           "items": {
                             "type": "object"
                           },
-                          "description": "3-5 x {label<=14 = the left cell, text<=16 = the right cell}. Real rows from the real file - this is the state that HAS the answer in it."
+                          "description": "3-5 x {label<=14 = the left cell, text<=16 = the right cell, atWord?}. Real rows from the real file - this is the state that HAS the answer in it. Give each row an atWord when the narration walks them; without one they arrive together in a stagger."
                         },
                         "splitAtWord": {
                           "type": "number",
@@ -670,14 +670,14 @@
                           "items": {
                             "type": "object"
                           },
-                          "description": "2-4 x {label<=14, value = the count} - what the left column becomes once it is only a column"
+                          "description": "2-4 x {label<=14, value = the count, atWord?} - what the left column becomes once it is only a column. An atWord lands that line on the word that names it."
                         },
                         "right": {
                           "type": "array",
                           "items": {
                             "type": "object"
                           },
-                          "description": "2-3 x {label<=16, value = the count} - the same for the right column"
+                          "description": "2-3 x {label<=16, value = the count, atWord?} - the same for the right column"
                         },
                         "question": {
                           "type": "string",
@@ -22190,6 +22190,13 @@
                             "type": "number"
                           },
                           "description": "indices of matched rows"
+                        },
+                        "highlightAtWords": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "PARALLEL TO `highlight`: the word each highlighted row lights on, so a beat that reads its rows aloud lights them one at a time rather than all at once — and earns the runtime for it. Omit and every row lights together, exactly as before. Each entry is retargeted by sync like any atWord."
                         },
                         "headline": {
                           "type": "string",

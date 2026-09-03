@@ -71,8 +71,8 @@ export const ColumnSplit: React.FC<{scene: Scene}> = ({scene}) => {
   /** One half of the sheet: the column's cells, crossfading into the column's tally. */
   const Half: React.FC<{
     title: string;
-    cells: string[];
-    tallyItems: {label?: string; value?: number}[];
+    cells: {text: string; atWord?: number}[];
+    tallyItems: {label?: string; value?: number; atWord?: number}[];
     align: 'left' | 'right';
   }> = ({title, cells, tallyItems, align}) => (
     <div
@@ -104,13 +104,22 @@ export const ColumnSplit: React.FC<{scene: Scene}> = ({scene}) => {
                 fontFamily: t.fonts.mono,
                 fontSize: cellSize,
                 color: t.colors.text,
-                opacity: arriveAt(frame, base + stagger(i, 4), 14),
+                // A ROW ARRIVES ON ITS OWN WORD WHEN THE AUTHOR NAMES ONE. Without a
+                // per-item anchor the whole table lands in one stagger off the base, which
+                // is fine for a four-row beat and starves a beat that talks its way through
+                // the rows — the scene ceiling is EARNED BY MOTION (LAW 0e.6), and a
+                // component that cannot be stepped cannot earn it.
+                opacity: arriveAt(
+                  frame,
+                  c.atWord != null ? wordToFrame(c.atWord) : base + stagger(i, 4),
+                  14,
+                ),
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
               }}
             >
-              {c}
+              {c.text}
             </div>
           ))}
         </div>
@@ -126,6 +135,9 @@ export const ColumnSplit: React.FC<{scene: Scene}> = ({scene}) => {
                 justifyContent: 'space-between',
                 gap: 12 * scale,
                 borderBottom: `${1 * scale}px solid ${hexA(t.colors.text, 0.1)}`,
+                // Same rule on the way out: a tally line can land on the word that names it,
+                // so "courier becomes three names with counts" can BE three arrivals.
+                opacity: r.atWord != null ? arriveAt(frame, wordToFrame(r.atWord), 14) : 1,
               }}
             >
               <div
@@ -159,8 +171,8 @@ export const ColumnSplit: React.FC<{scene: Scene}> = ({scene}) => {
     </div>
   );
 
-  const leftCells = rows.map((r) => r.label ?? '');
-  const rightCells = rows.map((r) => r.text ?? '');
+  const leftCells = rows.map((r) => ({text: r.label ?? '', atWord: r.atWord}));
+  const rightCells = rows.map((r) => ({text: r.text ?? '', atWord: r.atWord}));
 
   return (
     <AbsoluteFill>

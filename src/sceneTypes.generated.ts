@@ -5102,6 +5102,7 @@ export type DatabaseTableScene = SceneCommon<'DATABASE_TABLE'> & { data: {
       tableName?: string;
       query?: string;
       highlight?: number[];
+      highlightAtWords?: number[];
       headline?: string;
       atWord?: number;
     };

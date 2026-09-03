@@ -33,6 +33,25 @@ export const DatabaseTable: React.FC<{scene: Scene}> = ({scene}) => {
   const revealed = interpolate(frame, [start, start + per * nr], [0, nr], clamp);
   const queryIn = interpolate(frame, [start + per * nr + 4, start + per * nr + 18], [0, 1], clamp);
   const matchOn = interpolate(frame, [start + per * nr + 20, start + per * nr + 34], [0, 1], clamp);
+  // A ROW CAN LIGHT ON THE WORD THAT NAMES IT.
+  //
+  // `highlight` is a set of indices and `matchOn` a single ramp, so every matched row lit at
+  // the same moment however long the narration spent walking them — and because the scene
+  // then carried ONE anchor, the ceiling capped it at 16s (`180*steps + 120`, floor 480).
+  // A beat that reads three order numbers aloud needs more than that, and LAW 0f.4 names
+  // the two remedies in order: more anchored elements, then a split. This is the first.
+  //
+  // `highlightAtWords` is parallel to `highlight`: highlightAtWords[k] times highlight[k].
+  // Omit it and nothing changes — every existing spec renders exactly as before.
+  const hlList = d.highlight ?? [];
+  const hlWords = d.highlightAtWords ?? [];
+  const matchAt = (rowIndex: number) => {
+    const k = hlList.indexOf(rowIndex);
+    const w = k >= 0 ? hlWords[k] : undefined;
+    if (w == null) return matchOn;
+    const f = wordToFrame(w);
+    return interpolate(frame, [f, f + 14], [0, 1], clamp);
+  };
 
   const Cell = ({text, header, matched}: {text: string; header?: boolean; matched?: boolean}) => (
     <div
@@ -107,7 +126,7 @@ export const DatabaseTable: React.FC<{scene: Scene}> = ({scene}) => {
             const shown = i < revealed;
             const rowE = interpolate(revealed, [i, i + 1], [0, 1], clamp);
             const matched = highlight.has(i);
-            const mo = matched ? matchOn : 0;
+            const mo = matched ? matchAt(i) : 0;
             return (
               <div
                 key={i}

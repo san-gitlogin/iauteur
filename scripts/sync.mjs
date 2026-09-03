@@ -24,7 +24,19 @@ const retarget = (obj, words) => {
   for (const [k, v] of Object.entries(obj)) {
     // `atWord` plus suffixed variants (heroAtWord, headlineAtWord…) — all are
     // word anchors read via wordToFrame, so all must be retargeted to real audio.
-    if (/atword$/i.test(k) && typeof v === 'number') {
+    // AN ANCHOR CAN BE A LIST. `highlightAtWords` on DATABASE_TABLE is parallel to
+    // `highlight`, one word per lit row — and the scalar test below skips arrays, so the
+    // list would have survived sync as raw WORD indices while every other anchor in the
+    // scene became a frame. The component calls wordToFrame() on whatever it finds, so the
+    // rows would have lit at arbitrary moments with nothing failing anywhere. Handled
+    // here, once, for any `…AtWords` key rather than for this one field.
+    if (/atwords$/i.test(k) && Array.isArray(v) && v.every((x) => typeof x === 'number')) {
+      obj[k] = v.map((n) => {
+        const idx = Math.min(Math.max(1, Math.round(n)), words.length) - 1;
+        const frame = Math.max(0, Math.round(words[idx] * FPS) - LEAD);
+        return +(frame / FPW + 1).toFixed(3);
+      });
+    } else if (/atword$/i.test(k) && typeof v === 'number') {
       const idx = Math.min(Math.max(1, Math.round(v)), words.length) - 1;
       // LEAD (owner, 2026-08-16): *"the moment something changes on screen you start
       // to speak… the voice just starts to speak as quickly as possible just after the
