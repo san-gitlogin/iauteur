@@ -116,7 +116,7 @@ const scenes = [];
       {id: 'f', label: 'Your file', sub: 'csv, log, export', color: 'blue', atWord: at(n, 'file')},
       {id: 'p', label: 'Python', sub: 'counts and measures', color: 'green', atWord: at(n, 'Python')},
       {id: 'd', label: 'A description', sub: 'a few hundred words', color: 'purple',
-       atWord: at(n, 'describes')},
+       atWord: at(n, 'description')},
       {id: 'm', label: 'The model', sub: 'reads, then answers', color: 'orange', atWord: at(n, 'model')},
     ],
     edges: [
@@ -149,8 +149,8 @@ scenes.push(chapter(
     "And before you write a local model off as a hobby thing — " +
     "these are the logos Ollama puts on its own front page. " +
     "Apple. NVIDIA. Netflix. NASA. Intel. " +
-    "Running a model on hardware you control is not the amateur option; " +
-    "running a model you control is what you do when the data cannot leave the building.";
+    "Running a model on hardware you control is not the amateur option — " +
+    "it's the only option when the data cannot leave the building.";
   scenes.push(scene('LOGO_WALL', n, {
     logoWall: {
       logos: [
@@ -199,7 +199,7 @@ scenes.push(chapter(
         {label: 'On your own laptop', a: 'Ollama', b: '—', winner: 'a', atWord: at(n, 'laptop')},
         {label: 'Data leaves your PC', a: 'no (Ollama)', b: 'yes', atWord: at(n, 'leaves')},
         {label: 'Cloud, no card', a: 'Groq · Google', b: '—', winner: 'a', atWord: at(n, 'cloud')},
-        {label: 'A few hundred files', a: '£0', b: '~£1', atWord: at(n, 'pound')},
+        {label: 'A few hundred files', a: '£0', b: '~£1', atWord: at(n, 'hundred')},
         {label: 'Switching later', a: '3 lines', b: '3 lines', atWord: at(n, 'swapping')},
       ],
       atWord: at(n, 'doors'),
@@ -375,7 +375,7 @@ scenes.push(chapter(
     'The ignore list, and the one name on it.',
     [A('openignore', 'the gitignore'),
      A('typeignore', 'one line, typed', {wantAtWord: at(n, 'add'),
-       callouts: [{text: 'now git cannot take it', mark: 'ignored', side: 'right', color: 'green',
+       callouts: [{text: 'thirty seconds, once', mark: 'ignored', side: 'right', color: 'green',
                    atWord: at(n, 'seconds')}]}),
      A('saveignore', 'saved', {wantAtWord: at(n, 'internet')})]));
 }
@@ -397,7 +397,7 @@ scenes.push(chapter(
   scenes.push(rec(n, 'imports, then the client',
     'Writing the client, one line at a time.',
     [A('openask', 'an empty file'),
-     A('client', 'typing the client', {wantAtWord: at(n, 'Import'),
+     A('client', 'imports, then the client', {wantAtWord: at(n, 'Import'),
        callouts: [{text: 'the library, not the company', mark: 'import', side: 'right',
                    color: 'blue', atWord: at(n, 'company')},
                   {text: 'from the file, not from here', mark: 'apikey', side: 'right',
@@ -446,13 +446,13 @@ scenes.push(chapter(
                   {text: 'who is speaking', mark: 'role', side: 'right', color: 'purple',
                    atWord: at(n, 'Role')},
                   {text: 'what you are billed on', mark: 'usage', side: 'right', color: 'yellow',
-                   atWord: at(n, 'usage')}]}),
+                   atWord: at(n, 'billed')}]}),
      A('saveask', 'saved', {wantAtWord: at(n, 'Save')}),
      A('runask', 'running it', {wantAtWord: at(n, 'run'),
        zooms: [{mark: 'answer', atWord: at(n, 'word')},
                {mark: 'tokens', atWord: at(n, 'Fourteen')},
                {at: 'full', atWord: at(n, 'token')}],
-       callouts: [{text: 'the model answered', mark: 'answer', side: 'right', color: 'green',
+       callouts: [{text: 'the word came back', mark: 'answer', side: 'right', color: 'green',
                    atWord: at(n, 'back')}]})]));
 }
 
@@ -533,22 +533,26 @@ scenes.push(chapter(
     "because a word isn't a number and that's fine. " +
     "Then, if the count of numbers matches the count of values, every one converted — " +
     "so print the smallest, the largest and the average, all on one line. " +
+    "That's the whole numeric branch, and it's only three lines long. " +
     "Otherwise the column is text, so count how often each value shows up, " +
     "take the top three, and print those instead. " +
     "Twenty lines, no model, and every figure exact, because Python counted rather than guessing. " +
-    "The AI hasn't been involved yet, and it doesn't need to be.";
+    "The AI hasn't been involved yet, and it doesn't need to be. " +
+    "Every one of those numbers comes out of the file, not out of a model.";
   scenes.push(rec(n, 'numbers get measured, words get counted',
     'The rest of the describer, typed line by line.',
     [A('d3', 'try each value as a number', {
+       zooms: [{mark: 'try', atWord: at(n, 'try')}],
        callouts: [{text: 'not a number — that is fine', mark: 'except', side: 'right',
-                   color: 'orange', atWord: at(n, 'pass')}]}),
+                   color: 'orange', atWord: at(n, 'fine')}]}),
      A('d4', 'a number column measured', {wantAtWord: at(n, 'matches'),
-       callouts: [{text: 'smallest, largest, average', mark: 'mean', side: 'right',
+       callouts: [{text: 'the smallest and the largest', mark: 'minmax', side: 'right',
+                   color: 'blue', atWord: at(n, 'smallest')},
+                  {text: 'and the average of them', mark: 'mean', side: 'right',
                    color: 'green', atWord: at(n, 'average')}]}),
-     A('d5', 'the rest gets counted', {wantAtWord: at(n, 'Otherwise'),
+     A('d5', 'the text branch', {wantAtWord: at(n, 'Otherwise'),
        callouts: [{text: 'the three most common', mark: 'top', side: 'right', color: 'blue',
-                   atWord: at(n, 'three')}]}),
-     A('savedesc', 'saved', {wantAtWord: at(n, 'Twenty')})]));
+                   atWord: at(n, 'three')}]})]));
 }
 
 // ═══ CHAPTER 6 — run it, then fix it ═════════════════════════════════════════
@@ -558,6 +562,7 @@ scenes.push(chapter(
 
 {
   const n =
+    "Save it, and run it. " +
     "Fifty rows, and then a line for each column. " +
     "The dates, the regions, the couriers, the products. " +
     "Delivery days runs from three point eight seven up to nineteen point four. " +
@@ -566,12 +571,13 @@ scenes.push(chapter(
     "Eight columns described in a few hundred words, and every figure measured rather than guessed.";
   scenes.push(rec(n, 'fifty rows, described',
     'The describer running on the order file.',
-    [A('rundesc', 'describe.py, running', {
+    [A('savedesc', 'saved'),
+     A('rundesc', 'describe.py, running', {wantAtWord: at(n, 'run'),
        zooms: [{mark: 'days', atWord: at(n, 'Delivery')},
                {mark: 'courier', atWord: at(n, 'statuses')},
                {at: 'full', atWord: at(n, 'described')}],
-       callouts: [{text: 'measured, not guessed', mark: 'days', side: 'right', color: 'green',
-                   atWord: at(n, 'nineteen')}]})]));
+       callouts: [{text: 'three point eight seven to nineteen point four', mark: 'days',
+                   side: 'right', color: 'green', atWord: at(n, 'nineteen')}]})]));
 }
 
 {
@@ -594,7 +600,7 @@ scenes.push(chapter(
     "So we fix it, right here, before the line that ranks anything. " +
     "If the number of distinct counts equals the number of values, " +
     "then every single one is unique, so we skip that column entirely. " +
-    "Two lines, and that is the whole correction. " +
+    "Two lines, and that's the whole correction. " +
     "Save, and run it again. " +
     "There — order id is gone, and what is left is seven rows that actually tell you something. " +
     "That's the loop, by the way: write it, run it, look at what came out, and correct it.";
@@ -626,14 +632,14 @@ scenes.push(chapter(
   scenes.push(rec(n, 'run the describer, keep the output',
     'The last file, typed from empty.',
     [A('openan', 'the last empty file'),
-     A('a1', 'running our own describer', {wantAtWord: at(n, 'Import'),
+     A('a1', 'the shortest of the three', {wantAtWord: at(n, 'Import'),
        callouts: [{text: 'hands us the text', mark: 'capture', side: 'right', color: 'blue',
                    atWord: at(n, 'flag')}]})]));
 }
 
 {
   const n =
-    "One new thing goes into this call, and it is worth a moment. " +
+    "One new thing goes into this call, and it's worth a moment. " +
     "A system message. " +
     "Role user is the question you are asking right now; " +
     "role system is the standing instruction — who the model is being, for the whole call. " +
@@ -676,7 +682,7 @@ scenes.push(chapter(
                   {text: 'description, then question', mark: 'facts', side: 'right', color: 'blue',
                    atWord: at(n, 'description', 2)}]}),
      A('savean', 'saved', {wantAtWord: at(n, 'Save')}),
-     A('runan', 'running it', {wantAtWord: at(n, 'run'),
+     A('runan', 'save, then run', {wantAtWord: at(n, 'run'),
        zooms: [{at: 'full', atWord: at(n, 'telling')}]})]));
 }
 
