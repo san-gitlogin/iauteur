@@ -4865,7 +4865,7 @@ export const MANIFEST = {  WHEN_NOT_SQLITE: {
   RATE_SHEET: {
     category: 'data', family: 'data', data_key: 'rateSheet',
     purpose: "A PRICE LIST WITH ONE LINE MARKED DOWN. A rate sheet where each row is a real price: the rows that did not move sit with a HELD stamp, and the one that did gets its old price struck through in front of you and the new price dropped in beside it with a discount chip. The picture is the sticker, not a chart.",
-    use_when: "A before/after price where MOST of the sheet stayed the same and one line changed — the argument is 'only this moved', which a chart flattens into two similar bars. Also right for tiers, plan changes and rate tables. NOT for a trend over time (LINE_CHART variant 'savings' draws that).",
+    use_when: "ANY before/after ledger of figures — a price list, a plan change, or two measurements that both dropped (20 km -> 3 km, $18k -> $8k). Strongest where MOST of the sheet stayed the same and one line changed — the argument is 'only this moved', which a chart flattens into two similar bars. Also right for tiers, plan changes and rate tables. NOT for a trend over time (LINE_CHART variant 'savings' draws that).",
     fields: {
       headline: {t: 'string', max: 48},
       unit: {t: 'string', max: 24, note: "what every price on the sheet is per — e.g. 'per million tokens'. Sits under the headline so no row has to repeat it."},

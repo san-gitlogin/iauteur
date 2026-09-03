@@ -112,6 +112,7 @@
             "name": "Mythos 5.1",
             "color": "purple"
           },
+          "source": "Anthropic, 2026-09",
           "rows": [
             {
               "label": "Underlying model",
@@ -266,8 +267,8 @@
                   "h": 16
                 }
               ],
-              "atWord": 1.417,
-              "shows": ":Claude: Fable 5.1 and Mythos 5.1"
+              "shows": ":Claude: Fable 5.1 and Mythos 5.1",
+              "atWord": 1.417
             },
             {
               "ref": "rec:fable-page#scores",
@@ -599,8 +600,8 @@
                   "h": 18
                 }
               ],
-              "atWord": 10.833,
-              "shows": "Fable 5.1 avoids shortcuts that result in poorer-quality work, and it’s smart en"
+              "shows": "Fable 5.1 avoids shortcuts that result in poorer-quality work, and it’s smart en",
+              "atWord": 10.833
             }
           ],
           "card": {
@@ -1001,8 +1002,8 @@
                   "h": 18
                 }
               ],
-              "atWord": 1.583,
-              "shows": "Fable 5.1 avoids shortcuts that result in poorer-quality work, and it’s smart en"
+              "shows": "Fable 5.1 avoids shortcuts that result in poorer-quality work, and it’s smart en",
+              "atWord": 1.583
             }
           ],
           "card": {
@@ -1151,7 +1152,8 @@
               "atWord": 32.583
             }
           ],
-          "max": 100
+          "max": 100,
+          "source": "published benchmark scores · Anthropic, 2026-09"
         }
       },
       "durationFrames": 614,
@@ -1237,7 +1239,8 @@
             }
           ],
           "icon": "lucide:atom",
-          "unit": "%"
+          "unit": "%",
+          "source": "protein-binder design results · Anthropic, 2026-09"
         }
       },
       "durationFrames": 610,
@@ -1246,34 +1249,36 @@
     },
     {
       "id": "s13",
-      "type": "STAT_PANELS",
+      "type": "RATE_SHEET",
       "narration": "Two more, quickly, because they're the same story in different clothes. The model re-mapped Venus from old Magellan radar data, resolving detail down to two or three kilometres instead of ten to twenty. And it rewrote seven biology models to run faster, cutting the GPU bill on one of them from eighteen thousand dollars to eight.",
       "transition": "wipe",
       "background": "zoneA",
       "data": {
-        "stats": [
-          {
-            "kicker": "Venus radar map",
-            "value": "20→3 km",
-            "note": "detail resolved, from Magellan data",
-            "atWord": 12.25
-          },
-          {
-            "kicker": "Evo 2 40B run",
-            "value": "$18k→$8k",
-            "note": "GPU cost after rewrite",
-            "color": "green",
-            "atWord": 38.167
-          }
-        ],
-        "verdict": {
-          "text": "Cheaper science, not code",
-          "color": "green",
-          "atWord": 35.167
+        "rateSheet": {
+          "headline": "Two more, same shape",
+          "rows": [
+            {
+              "label": "Venus surface detail",
+              "value": "3 km",
+              "was": "20 km",
+              "note": "re-mapped from old Magellan radar",
+              "atWord": 12.25
+            },
+            {
+              "label": "GPU bill, one biology model",
+              "value": "$8k",
+              "was": "$18k",
+              "note": "after the model rewrote it to run faster",
+              "atWord": 38.167
+            }
+          ],
+          "foot": "Cheaper science — not cheaper code.",
+          "footAtWord": 45.667,
+          "atWord": 5.333
         },
         "source": "Anthropic, 2026-09"
       },
-      "durationFrames": 588,
+      "durationFrames": 600,
       "audio": "audio/fable_long_s13.mp3",
       "timingSource": "tts"
     },
@@ -1414,8 +1419,8 @@
                   "h": 22
                 }
               ],
-              "atWord": 2.833,
-              "shows": "We’re introducing Claude Fable 5.1 and Claude Mythos 5.1. They’re the world’s mo"
+              "shows": "We’re introducing Claude Fable 5.1 and Claude Mythos 5.1. They’re the world’s mo",
+              "atWord": 2.833
             }
           ],
           "card": {

@@ -15,6 +15,41 @@ the same commit — that is what makes the next session on a different machine c
 what to read first, the pipeline in order, the standing quality bar, the landmines,
 and what already exists so it does not get rebuilt.
 
+## The owner's corrections are a test suite — `npm run gate` proves they are still there
+
+Owner, 2026-09-03: *"Whatever corrections we did so far must be a permanent memory so that we
+don't end up correcting the same mistake again and again leading to lots of time waste."*
+
+`scripts/check-corrections.mjs` (gate seal 17) holds **24 defects the owner found in shipped
+cuts**, each paired with the mechanism that now catches it and the quote that paid for it.
+Delete a guard during a refactor and the gate goes red with his own words printed beside it.
+Two kinds of entry:
+
+- **SEAL** — a script FAILS when the defect recurs (13 of them: a linter rule or a gate check).
+- **STRUCT** — the wrong behaviour is no longer reachable in code (11 of them); the marker is
+  the comment recording WHY, so deleting the reasoning is what trips the check.
+
+Every one was separately break-tested, on the day it was written, by injecting the exact
+fault it exists for. `check-corrections.mjs` verifies the mechanism is PRESENT; it does not
+re-run those break-tests, so if you move a guard, point this file at its new home rather
+than deleting the row.
+
+**Three gaps were found and closed by the audit that produced it**, all of them laws that had
+been written down and never enforced:
+1. *"never narrate that your own work is real"* — a LAW 0f corollary written 2026-09-02 with
+   no guard for a full day. Now a phrase check over narration, captions, premises and the
+   thumbnail. Tightened after a first draft flagged *"the genuinely new part"*, which is a
+   claim about the SUBJECT and exactly the ordinary usage the law protects.
+2. **figures on screen with no declared `source`.** A linter cannot tell whether a number is
+   true; it can insist the beat says where it came from. Found three unsourced beats in the
+   Fable cut immediately, including the PICTOGRAM whose value 12 had been invented.
+3. **one generic card carrying every explanatory beat.** The existing over-reliance cap could
+   not see this: its denominator is ALL scenes, and a third of a long cut is structural
+   furniture, so 5 of 21 read as 24% against a 35% cap. Counting only beats that EXPLAIN,
+   and only the generic containers LAW 0e.8 names (footage and code are exempt — those are
+   REQUIRED to recur), 5 of 14 is 36%. Measured across the catalogue: exactly two specs trip
+   it, so it is signal rather than noise.
+
 ## Prove it's healthy before changing anything
 
 ```bash

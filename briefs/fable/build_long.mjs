@@ -79,6 +79,7 @@ scenes.push(scene('TITLE_CARD',
     headline: 'One model, two doors',
     a: {name: 'Fable 5.1', color: 'blue'},
     b: {name: 'Mythos 5.1', color: 'purple'},
+    source: SRC,
     rows: [
       {label: 'Underlying model', a: 'Same', b: 'Same'},
       {label: 'Safeguards', a: 'Standard', b: 'Reduced', winner: 'a'},
@@ -219,6 +220,7 @@ scenes.push(rec(
        atWord: at(n, 'outer')},
     ],
     max: 100,
+    source: `published benchmark scores · ${SRC}`,
   }}));
 }
 
@@ -275,6 +277,7 @@ scenes.push(chapter(
     ],
     icon: 'lucide:atom',
     unit: '%',
+    source: `protein-binder design results · ${SRC}`,
   }}));
 }
 
@@ -285,12 +288,25 @@ scenes.push(chapter(
     "kilometres instead of ten to twenty. " +
     "And it rewrote seven biology models to run faster, cutting the GPU bill on one of them " +
     "from eighteen thousand dollars to eight.";
-  scenes.push(scene('STAT_PANELS', n, {
-    stats: [
-      {kicker: 'Venus radar map', value: '20→3 km', note: 'detail resolved, from Magellan data', atWord: at(n, 'Venus')},
-      {kicker: 'Evo 2 40B run', value: '$18k→$8k', note: 'GPU cost after rewrite', color: 'green', atWord: at(n, 'GPU')},
-    ],
-    verdict: {text: 'Cheaper science, not code', color: 'green', atWord: at(n, 'faster')},
+  // A BEFORE/AFTER LEDGER, NOT TWO MORE STAT CARDS. Both facts here are the same shape —
+  // a number that got much smaller — and `20→3 km` printed inside a card makes the reader
+  // do the arithmetic. RATE_SHEET strikes the old figure through in front of them and lands
+  // the new one with the drop computed, which is the beat's own sentence ("the same story
+  // in different clothes") as a picture. It also takes STAT_PANELS down to three of the
+  // fourteen explanatory beats, under the generic-card cap.
+  scenes.push(scene('RATE_SHEET', n, {
+    rateSheet: {
+      headline: 'Two more, same shape',
+      rows: [
+        {label: 'Venus surface detail', value: '3 km', was: '20 km',
+         note: 're-mapped from old Magellan radar', atWord: at(n, 'Venus')},
+        {label: 'GPU bill, one biology model', value: '$8k', was: '$18k',
+         note: 'after the model rewrote it to run faster', atWord: at(n, 'GPU')},
+      ],
+      foot: 'Cheaper science — not cheaper code.',
+      footAtWord: at(n, 'eight'),
+      atWord: at(n, 'story'),
+    },
     source: SRC,
   }));
 }

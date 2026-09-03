@@ -184,7 +184,11 @@ export const RateSheet: React.FC<{scene: Scene}> = ({scene}) => {
                       fontWeight: 800,
                       fontSize: priceSize,
                       color: markdown ? cut : t.colors.text,
-                      fontVariantNumeric: 'tabular-nums',
+                      // TABULAR FIGURES PAD THE SPACE TOO. `$8k` sets tight and `3 km`
+                      // rendered as `3  km`, because tabular-nums widens every character
+                      // to a digit's advance — including the space. Values that are pure
+                      // figures still want the alignment; a value with words in it does not.
+                      fontVariantNumeric: /\s/.test(String(r.value)) ? 'normal' : 'tabular-nums',
                       letterSpacing: '-0.02em',
                       // a held price is simply there; a cut price ARRIVES
                       opacity: markdown ? land : 1,

@@ -114,6 +114,47 @@ for (let i = 1; i < (spec.scenes?.length ?? 0); i++) {
     E(`PIPELINE-FAMILY OVER-USE: ${pipeFam} staged-flow scenes (>~${pipeCap} for ${nn}) — reach for DIAGRAM/DRILL_IN/sequence to vary the skeleton, not just the chips.`);
 }
 
+// ── A GENERIC CARD MAY CARRY ONLY SO MANY IDEAS (owner, 2026-09-03) ─────────
+//
+// Owner, on the pricing beat: *"this one too. Not a graph but something different. I need
+// variations."* Five of twenty-one beats were STAT_PANELS — and the over-reliance cap below
+// could not see it, for two structural reasons:
+//   1. its denominator is ALL scenes, and a long cut is ~a third structural furniture
+//      (hook, title card, three chapters, recap, outro). Five of twenty-one reads as 24%
+//      against a 35% cap; five of the FOURTEEN beats that actually explain something is 36%.
+//   2. its floor is `max(4, …)`, so on any video under ~12 scenes four of anything passes.
+//
+// This counts only the beats that EXPLAIN, and only the generic containers LAW 0e.8 names —
+// the cards that can hold any idea because they hold none in particular. Footage
+// (RECORDED_STEP) and code (CODE_RUN/CODE_WINDOW) are exempt: LAW 0e rules 2 and 3 REQUIRE
+// them to recur, and a course that shows its terminal fifteen times is doing its job.
+//
+// Measured across the catalogue before this was added: exactly two specs trip it, so it is
+// a real signal rather than a new source of noise.
+{
+  const FURNITURE = new Set(['HOOK', 'TITLE_CARD', 'CHAPTER', 'RECAP', 'OUTRO_CTA',
+                             'QUIZ_CARD', 'SECTION_BREAK', 'END_CARD', 'LOGO_REVEAL']);
+  // "A card that only PRINTS the idea is not a visual" (LAW 0e.8) — its named offenders,
+  // plus the stat cards that quietly became the default for every arithmetic beat.
+  const GENERIC_CARDS = new Set(['STICKY_NOTE', 'REVEAL', 'SPLIT_PATHS', 'ICON_GRID',
+                                 'STAT_PANELS', 'STAT_CALLOUT', 'LIST_BUILD', 'STEP_FLOW',
+                                 'QUOTE_SPOTLIGHT', 'BULLETS', 'TAKEAWAYS']);
+  const explain = (spec.scenes ?? []).filter((sc) => !FURNITURE.has(sc.type));
+  if (explain.length >= 6) {
+    const counts = {};
+    for (const sc of explain) if (GENERIC_CARDS.has(sc.type)) counts[sc.type] = (counts[sc.type] || 0) + 1;
+    for (const [type, c] of Object.entries(counts)) {
+      if (c < 4) continue;
+      const msg = `${type} carries ${c} of the ${explain.length} beats that explain something. ` +
+        `A generic card can hold any idea because it holds none in particular — LAW 0e.8: ` +
+        `"expect 2-4 NEW components per episode, not zero". Say the OBJECT out loud for the ` +
+        `weakest of them (a price sticker, a ring, a shelf, a wall going up) and build THAT.`;
+      if (c >= 5) E(msg);
+      else W(msg);
+    }
+  }
+}
+
 // PALETTE DIVERSITY (hard gate) — stops the director taking the easy path of
 // reusing the same handful of components. The library has ~40 scene types; a
 // real video must draw broadly from them. Applies to non-trivial videos.
@@ -261,6 +302,112 @@ if (spec.thumbnail && subject) {
     E(`the thumbnail never says "${subject}". A thumbnail is read with no sentence before it, ` +
       `so a claim without its subject ("IT DOUBLED") asks a stranger to guess what "it" is. ` +
       `Put the name on the card — title, badge or note (LAW 0g.6).`);
+  }
+}
+
+// ── 1z. A BEAT FULL OF FIGURES DECLARES WHERE THEY CAME FROM (2026-09-03) ───
+//
+// LAW 3 says facts come only from the user's source or a live search, and LAW 0m.2 says a
+// chart needs DECLARED data. Two invented figures still shipped into a lint-clean spec on
+// the same day, because both LOOKED like research:
+//   · a PICTOGRAM row at 12 — a value in no source, averaged into existence out of "ten or
+//     fifteen" for tidiness;
+//   · a LINE_CHART plotting [10,26,42,58,74,90] against [10,18,26,33,40,47] — a plausible
+//     widening gap drawn with gridlines, units and a legend, and entirely fabricated.
+//
+// A linter cannot check whether a number is TRUE. It can insist that the beat carrying it
+// says where it came from, which is the question that would have stopped both: writing
+// `source:` forces you to name one, and "I averaged it" is not a source you will type.
+// Cheap, and it makes the invented case feel as awkward as it is.
+{
+  const NUMERIC = new Set(['BAR_COMPARE', 'LINE_CHART', 'PICTOGRAM', 'RADAR', 'DONUT',
+                           'STAT_PANELS', 'STAT_CALLOUT', 'PROGRESS', 'SPEC_COMPARE',
+                           'RATE_SHEET', 'SCATTER', 'HISTOGRAM']);
+  for (const sc of spec.scenes ?? []) {
+    if (!NUMERIC.has(sc.type)) continue;
+    const d = sc.data ?? {};
+    // Does this beat actually PUT numbers on screen? A comparison of words does not need a
+    // figures citation, and asking for one would be noise.
+    let digits = 0;
+    const walk = (v) => {
+      if (v == null) return;
+      if (typeof v === 'number') { digits++; return; }
+      if (typeof v === 'string') { if (/\d/.test(v)) digits++; return; }
+      if (Array.isArray(v)) { v.forEach(walk); return; }
+      for (const [k, q] of Object.entries(v)) {
+        if (/^(atWord|.*AtWord|durationFrames|frames|width|height|yMax|x|y|w|h)$/.test(k)) continue;
+        walk(q);
+      }
+    };
+    walk(d);
+    if (digits < 2) continue;
+    const src = String(d.source ?? d.sourceNote ?? d[Object.keys(d)[0]]?.source ?? '').trim();
+    if (!src) {
+      E(`${sc.id}: ${sc.type} puts ${digits} figures on screen and declares no \`source\`. ` +
+        `A linter cannot tell whether a number is true — it can insist the beat says where ` +
+        `the number came from (LAW 3, LAW 0m.2). Add \`source\` naming the page, paper or ` +
+        `command it was read from. If you cannot name one, the figure is not sourced yet.`);
+    }
+  }
+}
+
+// ── 1a. NEVER NARRATE THAT YOUR OWN WORK IS REAL (owner, 2026-09-02) ────────
+//
+// Owner, on the uv cut: *"Did anyone ask that you are doing all real? You yourself are
+// letting users know that you are doing real stuffs, indirectly stating you are AI. Dude,
+// watchers are humans — such scriptings are not good."*
+//
+// A person demonstrating their own screen never defends its authenticity, for the same
+// reason nobody says "I am not lying to you": the claim only occurs to someone anticipating
+// the accusation. Measured on ONE 20-scene spec: **18 such claims** — "on a real machine",
+// "a genuinely empty folder", "typed live and read back", "real numbers rather than a
+// marketing page", plus a thumbnail note reading *Real terminal, real output*.
+//
+// This law was written on 2026-09-02 and had NO guard for a full day of work, which is the
+// exact shape of failure the owner keeps paying for. It is a phrase list, so it is cheap.
+// Ordinary uses survive: the ban is on `real`/`actually`/`genuinely` applied to the FOOTAGE
+// or the CAPTURE, never on "what is a venv, really?" or "the only real question".
+{
+  const CLAIMS = [
+    /\breal(?:\s+|-)(?:machine|terminal|browser|screen|output|numbers|data|file|folder|project|run|session)\b/i,
+    // TIGHT ON PURPOSE. An earlier draft flagged any "the genuinely <word>" and fired on
+    // *"the lab results are the genuinely new part"* — which is a claim about the SUBJECT,
+    // not a defence of the footage, and is exactly the ordinary usage the law protects.
+    // The ban is the adverb applied to AUTHENTICITY or CAPTURE, so it names those words.
+    /\b(?:genuinely|actually|truly)\s+(?:real|empty|live|running|working|captured|recorded|happening|unedited)\b/i,
+    /\bthis is (?:a )?real\b/i,
+    /\bnot (?:a |an )?(?:mock|mockup|fake|simulation|simulated|staged)\b/i,
+    /\bno (?:edits|editing|cuts|tricks|magic)\b/i,
+    /\btyped live\b/i, /\bread back\b/i, /\bverbatim\b/i,
+    /\bon (?:this|my|a real) machine\b/i, /\bmeasured here\b/i,
+    /\breally (?:is|was|did|does) (?:real|running)\b/i,
+    /\bnothing (?:is )?(?:staged|faked|mocked)\b/i,
+  ];
+  const surfaces = [];
+  for (const sc of spec.scenes ?? []) {
+    surfaces.push([sc.id, String(sc.narration ?? '')]);
+    const rs = sc.data?.recordedStep;
+    if (rs) {
+      if (rs.caption) surfaces.push([`${sc.id} caption`, String(rs.caption)]);
+      if (rs.premise) surfaces.push([`${sc.id} premise`, String(rs.premise)]);
+    }
+  }
+  if (spec.thumbnail) {
+    for (const k of ['title', 'badge', 'note']) {
+      if (spec.thumbnail[k]) surfaces.push([`thumbnail.${k}`, String(spec.thumbnail[k])]);
+    }
+  }
+  for (const [where, text] of surfaces) {
+    for (const re of CLAIMS) {
+      const m = re.exec(text);
+      if (!m) continue;
+      E(`${where}: "${m[0].trim()}" — never narrate that your own work is REAL (LAW 0f). ` +
+        `Nobody demonstrating their own screen defends its authenticity; the claim only ` +
+        `occurs to someone anticipating the accusation, and hearing it makes a viewer ` +
+        `wonder why it needed saying. The footage does the arguing — cut the sentence. ` +
+        `Provenance belongs in meta.seo.sources and briefs/, not in the presenter's mouth.`);
+      break;   // one report per surface is enough to send the author back to it
+    }
   }
 }
 
