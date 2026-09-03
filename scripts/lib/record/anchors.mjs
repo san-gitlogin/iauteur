@@ -39,7 +39,7 @@ const frameOf = (word) => Math.max(0, Math.round((word - 1) * FPW));
  * @returns {{ok:boolean, reason?:string, durationFrames:number, clips:{atWord:number, callouts:number[]}[]}}
  */
 export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], settle = 45,
-                             want = []}) => {
+                             want = [], eventWant = []}) => {
   const n = clipFrames.length;
   if (!n) return {ok: false, reason: 'no clips', durationFrames: 0, clips: []};
 
@@ -200,10 +200,36 @@ export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], s
     // spread across the room BEFORE it — which is the most dwell the script can afford.
     const rel = releases[i] ? 1 : 0;
     const teach = cn - rel;
+    // ── AN AUTHORED EVENT WORD IS AN INSTRUCTION TOO ────────────────────────────────
+    // PAID FOR by `audit-sync`, which read the finished timings back against the real
+    // word timings and found FOURTEEN beats showing one thing while the voice said
+    // another — "measured, not guessed" appearing four words after the sentence that
+    // says "measured rather than guessed". Cause: clips honoured `wantAtWord` (see
+    // pass 1) and their EVENTS did not, so every callout and zoom landed on an even
+    // spread through the hold, no matter which word named it. The author's intent had
+    // no channel at all — the manifest's own note says "EVERY clip AND every callout
+    // needs atWord", and for callouts that was a field nothing read.
+    //
+    // The spread stays as the DEFAULT, because most events are not worth naming a word
+    // for. An authored `wantAtWord` wins whenever it still fits the window: after the
+    // footage has played (you see the thing before it is labelled), a word clear of the
+    // previous event, and a word clear of the window's end.
+    const wants = eventWant[i] ?? [];
+    const spread = [];
     for (let j = 0; j < teach; j++) {
-      clips[i].callouts.push(wordOf(afterFootage + Math.round((room * (j + 1)) / (teach + 1))));
+      spread.push(afterFootage + Math.round((room * (j + 1)) / (teach + 1)));
     }
-    if (rel) clips[i].callouts.push(wordOf(afterFootage + room));
+    if (rel) spread.push(afterFootage + room);
+    let floor = afterFootage;
+    for (let j = 0; j < spread.length; j++) {
+      const isRel = rel && j === spread.length - 1;
+      const asked = wants[j] == null ? null : frameOf(wants[j]);
+      // A release is the camera letting go; it stays pinned to the end of the window.
+      const ceil = winEnd - FPW * (spread.length - 1 - j);
+      const at = (!isRel && asked != null && asked >= floor && asked <= ceil) ? asked : spread[j];
+      clips[i].callouts.push(wordOf(at));
+      floor = at + FPW;
+    }
   }
   if (overflow) {
     return {ok: false, reason: overflow, durationFrames, clips};
@@ -266,6 +292,12 @@ export const anchorScene = (scene, {settle = 45} = {}) => {
     // second run would treat its own first answer as an instruction. `wantAtWord` is
     // written by the spec author and never touched here.
     want: d.clips.map((c) => (c.wantAtWord == null ? null : Number(c.wantAtWord))),
+    // Same separation as `want` above: `atWord` on a callout or a zoom is this pass's
+    // OUTPUT, so the author's intent is a different field and is never read back.
+    eventWant: plan.map((seq) => seq.map((e) => {
+      const w = e.obj?.wantAtWord;
+      return w == null ? null : Number(w);
+    })),
   });
 
   let plan = eventPlan;

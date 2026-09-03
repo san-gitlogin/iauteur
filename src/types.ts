@@ -2115,8 +2115,15 @@ export interface RecordedCallout {
   /** Which side of the target the label sits on. Default: auto from the target's position. */
   side?: 'top' | 'bottom' | 'left' | 'right';
   color?: SemColor;
-  /** THE anchor: the word at which this callout appears. */
+  /** THE anchor: the word at which this callout appears. SOLVED by anchor-spec.mjs. */
   atWord?: number;
+  /**
+   * The word the AUTHOR wants this callout on — the word the narration actually says.
+   * A separate field from `atWord`, which is the solver's OUTPUT: reading intent back out
+   * of an output makes the pass non-idempotent. Honoured whenever it still fits the clip's
+   * window (after the footage has played, clear of the previous event and of the end).
+   */
+  wantAtWord?: number;
 }
 export interface RecordedClip {
   /** Baked: named rectangles measured by the runner, for callouts to point at. */
@@ -2164,7 +2171,8 @@ export interface RecordedClip {
    * cast from its name rather than its content is visible in the spec and in review.
    */
   shows?: string;
-  zooms?: Array<{mark?: string; marks?: string[]; at?: 'full'; atWord?: number}>;
+  /** `atWord` is SOLVED; `wantAtWord` is the author's word, honoured when it fits. */
+  zooms?: Array<{mark?: string; marks?: string[]; at?: 'full'; atWord?: number; wantAtWord?: number}>;
   /**
    * An ANIMATED explainer that floats over this clip's footage, in the same measured
    * ink-free band as the caption — so it annotates the recording instead of hiding it.
