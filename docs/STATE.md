@@ -76,6 +76,43 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-09-03 (later still) — the footage was cast by its name, and the scroll was a teleport
+
+Owner, on the finished cut: *"you speak about comparison table, but you are showing this
+first, later you show the table — why so?"* and *"the scroll you are doing is not smooth, why?
+And why aren't you using the browser on full screen or whatever, why do I see the browser
+window cut?"*
+
+**The beat was cast from a label.** `s05` says *"scroll down and their comparison table
+appears… first column is the new model"* and played the `bench` step — which lands on a
+**scatter chart** headed *"A new performance frontier"*. The demo called that step "the
+benchmark they lead with" and marked `Terminal-Bench-Science 0.1`, so I labelled the clip
+"scrolling to the table" and never opened the footage. `scores` is the step with the table;
+`s05` uses it now. Every signal I had used was a word ABOUT the step.
+
+The fix is that the spec now says what the footage shows:
+- `headingFor()` (runner.mjs) reads each step's own heading, or the largest type on screen
+  when a page has none. Verified immediately: `bench` → *"A new performance frontier"*.
+- `bake-rec` bakes it as `clip.shows`, so the spec reads
+  `{label: 'scrolling to the table', shows: 'A new performance frontier'}`.
+- `check-recordings --slug` prints `your label -> the screen's own words` for every cast
+  clip in the render preflight, so the pairs are in front of you before any frame renders.
+
+**The scroll was never smooth because it was never a scroll.** `page.mouse.wheel(0, 1200)`
+delivers the whole distance in one event — top of page on one captured frame, 1200px down on
+the next, then a 900ms hold. `smoothWheel()` now steps it in ~16ms increments on an
+ease-in-out curve, duration scaled to distance (~1.1s per 1000px, clamped 420–1600ms), and
+`scrollIntoViewIfNeeded` computes its delta and travels it rather than teleporting. Measured
+on the same four steps: **119 captured frames → 339**.
+
+**And the capture was being upscaled.** 1600×900 into a 1920×1080 frame resamples every
+glyph. Widening the CSS viewport to 1920 is worse for the viewer — a max-width site just
+gains margin and the words shrink. So `deviceScaleFactor` splits the two: lay out at 1600
+(the width the site expects, nothing reflows or clips), render at higher DPI. Chrome rounds
+the factor up (1.2 → 2, giving 3200×1800), so `capture.mjs` downscales to 1920 with lanczos
+— a supersample, sharper than either alternative. Captures at or below 1920 pass through
+untouched, so terminal and editor takes are unaffected.
+
 ### 2026-09-03 (later) — the hook card, and two components built to replace a default
 
 Owner, on the finished cut: *"this issue of this title card is persisting please correct"*,

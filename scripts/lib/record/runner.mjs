@@ -249,6 +249,56 @@ export const inkFor = async (page) => {
     : null;
 };
 
+// ── WHAT DOES THIS STEP ACTUALLY SHOW? ───────────────────────────────────────────────
+//
+// Owner, on a finished cut: *"you speak about comparison table, but you are showing this
+// first, later you show the table — why so?"*
+//
+// The cause was not a timing bug. The beat was cast with the `bench` step because the demo
+// labelled it "the benchmark they lead with" and its mark read "Terminal-Bench-Science 0.1",
+// so I wrote `label: 'scrolling to the table'` and never opened the footage. `bench` lands on
+// a SCATTER CHART headed "A new performance frontier". The narration described a table over a
+// picture of something else, for nine seconds, and nothing in the spec could have told me:
+// the clip carried an id, a frame count, a bbox and marks — nothing that says what is ON IT.
+//
+// So the capture now records the step's own heading, `bake-rec` bakes it into the clip as
+// `shows`, and the spec reads:
+//     {label: 'scrolling to the table', shows: 'A new performance frontier'}
+// which is a contradiction you cannot skim past. LAW 0k's remedy is "audit by still, not by
+// render"; this is the same argument made cheap enough to be automatic.
+export const headingFor = async (page) => {
+  const h = await page.evaluate(() => {
+    const vis = (el) => {
+      const cs = getComputedStyle(el);
+      if (cs.visibility === 'hidden' || cs.display === 'none' || Number(cs.opacity) < 0.05) return false;
+      const r = el.getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0 && r.width > 40 && r.height > 8;
+    };
+    const clean = (s) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+    // A real heading first — that is what a page uses to say what you are looking at.
+    for (const sel of ['h1', 'h2', 'h3']) {
+      const hits = [...document.querySelectorAll(sel)].filter(vis);
+      if (hits.length) {
+        hits.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+        const txt = clean(hits[0].innerText);
+        if (txt) return txt;
+      }
+    }
+    // No heading in view (a terminal, an editor, a table mid-scroll): fall back to the
+    // largest type on screen, which is what a reader's eye lands on anyway.
+    let best = null, bestSize = 0;
+    for (const el of document.querySelectorAll('body *')) {
+      if (el.children.length || !vis(el)) continue;
+      const txt = clean(el.textContent);
+      if (txt.length < 3) continue;
+      const size = parseFloat(getComputedStyle(el).fontSize) || 0;
+      if (size > bestSize) { bestSize = size; best = txt; }
+    }
+    return best;
+  }).catch(() => null);
+  return h || null;
+};
+
 // ── THE FRAME MAY NOT CARRY THE OPERATOR'S IDENTITY ─────────────────────────────────
 //
 // The `clear` after prep fixes the leak that shipped; this makes a new one impossible to
@@ -1096,9 +1146,11 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
       const marks = await marksFor(page, implicit);
       // Measured at the same instant as the marks, so the card knows what the frame holds.
       const ink = await inkFor(page);
+      const heading = await headingFor(page);
       steps.push({
         marks,
         ink,
+        heading,
         id: step.id ?? `step-${i + 1}`,
         index: i,
         action: step.action,
@@ -1225,8 +1277,9 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
       await assertNoIdentity(page, step.id ?? `step-${i + 1}`);
       const marks = await marksFor(page, step.marks);
       const ink = await inkFor(page);
+      const heading = await headingFor(page);
       steps.push({id: step.id ?? `step-${i + 1}`, index: i, action: step.action,
-                  label: step.label ?? null, tStart: t0, tEnd: t1, bbox, marks, ink, ...res});
+                  label: step.label ?? null, tStart: t0, tEnd: t1, bbox, marks, ink, heading, ...res});
       console.log(`  [${i + 1}/${demo.steps.length}] ${step.id}  ${((t1 - t0) / 1000).toFixed(2)}s`);
     }
 

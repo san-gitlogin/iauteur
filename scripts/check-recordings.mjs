@@ -219,6 +219,34 @@ if (preInk.length && !quiet) {
   console.error('the gate — those cuts shipped — but re-record before re-rendering any of them.');
 }
 
+// WHAT EACH CAST CLIP ACTUALLY SHOWS, printed next to the label the author gave it.
+//
+// Owner: *"you speak about comparison table, but you are showing this first, later you show
+// the table — why so?"* A clip labelled "scrolling to the table" was playing footage headed
+// "A new performance frontier". The label was authored from the demo's step name; the
+// footage was never opened. `bake-rec` now bakes `shows` for exactly this, and the render
+// preflight prints the pairs, so casting a clip from its name instead of its content is in
+// front of you before the render starts rather than in the finished cut.
+if (slugArg && !quiet) {
+  const pairs = [];
+  for (const file of specs) {
+    let spec; try { spec = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { continue; }
+    for (const sc of spec.scenes ?? []) {
+      for (const c of sc.data?.recordedStep?.clips ?? []) {
+        if (c.shows) pairs.push({id: `${sc.id}/${c.id ?? c.ref}`, label: c.label ?? '—', shows: c.shows});
+      }
+    }
+  }
+  if (pairs.length) {
+    console.log('\n  WHAT EACH CLIP SHOWS  (your label -> the screen\'s own words)');
+    const w = Math.max(...pairs.map((p) => p.id.length));
+    for (const p of pairs) {
+      console.log(`    ${p.id.padEnd(w)}  ${String(p.label).padEnd(26)}  ->  ${p.shows.slice(0, 58)}`);
+    }
+    console.log('  If a label and the screen disagree, the clip was cast from its name, not its content.');
+  }
+}
+
 if (!quiet) {
   console.log(`RECORDING CHECK: ${refCount} reference(s) across ${specs.length} spec(s), ` +
     `${used.size} recording(s) used, ${demoBySlug.size} demo script(s) available.`);

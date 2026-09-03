@@ -165,7 +165,16 @@ export const writeSegment = ({frames, dir, t0, t1, out, fps = 30, minFrames = 2,
     '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20',
     '-pix_fmt', 'yuv420p',
     // even dimensions are required by yuv420p; screen captures are often odd-sized
-    '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2',
+    // DOWNSCALE TO THE DELIVERY SIZE, ONCE, HERE.
+    //
+    // Browser captures render at deviceScaleFactor for sharpness, and Chrome rounds that
+    // factor up — asking for 1.2 on a 1600x900 viewport produced 3200x1800 frames. Left
+    // alone, every render then decodes 3200x1800 and Remotion resamples it per frame.
+    // Scaling once at capture time gives a predictable 1:1 asset and keeps the supersample:
+    // 3200 -> 1920 is a DOWNscale, which is sharper than the 1600 -> 1920 upscale this
+    // replaced. Anything already at or below 1920 wide is left exactly as it is, so terminal
+    // and editor captures are untouched.
+    '-vf', "scale='if(gt(iw,1920),1920,trunc(iw/2)*2)':'if(gt(iw,1920),-2,trunc(ih/2)*2)':flags=lanczos",
     outAbs,
   ], {cwd: dir, stdio: ['ignore', 'ignore', 'inherit']});
 

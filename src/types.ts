@@ -2154,6 +2154,12 @@ export interface RecordedClip {
    * this is the intent, and the solver keeps it whenever the footage still fits.
    */
   wantAtWord?: number;
+  /**
+   * DERIVED by bake-rec: what this step's footage actually shows, in the page's own words.
+   * Never hand-authored. It exists to sit beside the `label` the author wrote, so a clip
+   * cast from its name rather than its content is visible in the spec and in review.
+   */
+  shows?: string;
   zooms?: Array<{mark?: string; marks?: string[]; at?: 'full'; atWord?: number}>;
   /**
    * An ANIMATED explainer that floats over this clip's footage, in the same measured

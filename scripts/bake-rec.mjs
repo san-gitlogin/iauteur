@@ -121,6 +121,15 @@ for (const [si, scene] of scenes.entries()) {
     // the overlay card can be placed where it covers nothing. Derived, like marks: it is
     // refreshed on every bake and must never be hand-authored.
     if (step.ink) clip.ink = step.ink;
+    // WHAT THIS STEP ACTUALLY SHOWS, in the page's own words — its heading, or the largest
+    // type on screen when there is none. Derived, never hand-authored, and its whole job is
+    // to sit next to the label the AUTHOR wrote so a contradiction is unmissable:
+    //     {label: 'scrolling to the table', shows: 'A new performance frontier'}
+    // That exact pair shipped. The beat's narration described a comparison table for nine
+    // seconds over a picture of a scatter chart, because the clip was cast from its label
+    // and nobody opened the footage. Nothing in the spec could have said otherwise — a clip
+    // carried an id, a frame count, a bbox and marks, and not one word about its content.
+    if (step.heading) clip.shows = step.heading;
     // The KEYS the runner actually pressed. Carried through so a KEYCAP overlay is a
     // record of what happened, never a hand-typed guess that can drift from the take.
     if (step.keys) clip.keys = step.keys;

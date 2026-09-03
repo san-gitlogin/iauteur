@@ -577,6 +577,62 @@ Two more of the same shape, found in the same frame:
   element is positioned to hang outside its parent, the parent cannot clip: make them
   siblings in an unclipped wrapper.
 
+### Corollary — CAST THE FOOTAGE BY WATCHING IT, NEVER BY ITS LABEL (owner, 2026-09-03)
+
+Owner: *"you speak about comparison table, but you are showing this first, later you show
+the table — why so?"*
+
+He was watching a beat whose narration says *"scroll down and their comparison table
+appears… first column is the new model"* over nine seconds of a **scatter chart** headed
+*"A new performance frontier"*. The comparison table did not arrive until the next beat.
+
+**Cause: I cast a clip from its NAME.** The demo step was called `bench` and labelled *"the
+benchmark they lead with"*, its mark read `Terminal-Bench-Science 0.1`, so I wrote
+`label: 'scrolling to the table'` and never opened the footage. Every signal I used was a
+word about the step; none was the step. LAW 0k already says *audit by still, not by render* —
+this is that failure moved one stage earlier, into casting.
+
+**Nothing in the spec could have told me, and that was the real defect.** A baked clip
+carried an id, a frame count, a bbox and marks — not one word about what is ON it. So:
+
+1. **The capture records what the step SHOWS.** `headingFor()` reads the step's own heading
+   (or the largest type on screen when there is none) and `bake-rec` bakes it as `shows`.
+   The spec then reads `{label: 'scrolling to the table', shows: 'A new performance
+   frontier'}` — a contradiction you cannot skim past.
+2. **The render preflight prints every pair.** `check-recordings --slug` lists
+   `your label -> the screen's own words` for every cast clip before a frame is rendered,
+   so this is in front of you whether you thought to look or not.
+3. **A label is a claim about content, so it is evidence of nothing.** When casting a
+   recorded step, the question is never "what is this step called" — it is "what is on the
+   last frame". `ffmpeg -sseof -0.2 -i seg-NN.mp4 -frames:v 1 out.png` costs a second.
+
+### Corollary — A SCROLL IS A TRAVEL, AND A CAPTURE IS NOT A SCREENSHOT (owner, 2026-09-03)
+
+Owner: *"the scroll you are doing is not smooth, why? And why aren't you using the browser
+on full screen or whatever, why do I see the browser window cut?"*
+
+Two separate causes, both in the recorder, both invisible in code review:
+
+1. **`page.mouse.wheel(0, 1200)` is a teleport.** It delivers the entire distance in ONE
+   event: the page is at the top on one captured frame and 1200px down on the next, then
+   holds still for 900ms. There was nothing to smooth — there were no intermediate frames.
+   A scroll is now delivered in ~16ms increments along an ease-in-out curve, with duration
+   scaled to distance the way a real trackpad flick is (~1.1s per 1000px, clamped
+   420–1600ms). Measured: the same four steps went from 119 captured frames to 339.
+   `scrollIntoViewIfNeeded` teleports for the same reason — compute the delta and travel it.
+2. **A 1600×900 capture in a 1920×1080 frame is a 1.2× UPSCALE**, and every glyph is
+   resampled — which is the softness that reads as a cheap window. Simply widening the CSS
+   viewport to 1920 makes it *worse for the viewer*: a site with a max-width column just
+   gains empty margin, so the words shrink relative to the frame. `deviceScaleFactor`
+   separates the two: **lay out at the width the site expects, render at the delivery
+   resolution.** Chrome rounds the factor up (1.2 → 2, i.e. 3200×1800), so the segment
+   encoder downscales to 1920 with lanczos — which is a supersample, sharper than either.
+   Captures already at or below 1920 are passed through untouched.
+
+**The general rule: a recording is FOOTAGE, and footage has motion and resolution.** Both
+defects came from treating a capture as a sequence of screenshots that happen to be stored
+in an mp4. Ask of every recorder action: *what does this look like at 30 frames a second?*
+
 ### Corollary — FIVE OF THE SAME CARD IS NOT A DESIGN (owner, 2026-09-03)
 
 Owner, on the pricing beat: *"this one too. Not a graph but something different. I need

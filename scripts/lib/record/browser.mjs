@@ -14,6 +14,41 @@ import {chromium} from 'playwright';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// ── A SCROLL IS A TRAVEL, NOT A TELEPORT ─────────────────────────────────────────────
+//
+// Owner: *"the scroll you are doing is not smooth, why?"*
+//
+// Because it was not a scroll. `page.mouse.wheel(0, 1200)` delivers the whole distance in
+// ONE event: the page is at the top on one captured frame and 1200px down on the next, then
+// sits still for 900ms. On a 30fps screencast that is a hard cut with a pause after it —
+// which is exactly what it looked like. Nothing was dropping frames; there were no
+// intermediate frames to drop.
+//
+// A person flicks a trackpad and the page eases to a stop, so the wheel is delivered in
+// ~16ms increments along an ease-in-out curve and the screencast picks up every step of it.
+// Duration scales with distance the way a real flick does — a short nudge is quick, a long
+// haul takes longer — and is clamped so neither extreme becomes a stunt.
+const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+export const smoothWheel = async (page, total, ms) => {
+  const dist = Math.abs(total);
+  if (dist < 2) return;
+  // ~1.1s per 1000px, floored at 420ms so a small nudge still reads, capped at 1600ms so a
+  // long page does not spend the beat travelling.
+  const dur = ms ?? Math.max(420, Math.min(1600, Math.round(dist * 1.1)));
+  const steps = Math.max(14, Math.round(dur / 16));
+  let done = 0;
+  for (let i = 1; i <= steps; i++) {
+    const target = Math.round(total * easeInOutCubic(i / steps));
+    const d = target - done;
+    if (d !== 0) {
+      await page.mouse.wheel(0, d);
+      done = target;
+    }
+    await sleep(dur / steps);
+  }
+};
+
 /** Where to look, for a browser demo. Any raw CSS selector also works. */
 export const BROWSER_FOCUS = {
   page: 'body',
@@ -21,14 +56,28 @@ export const BROWSER_FOCUS = {
 };
 
 export const setupBrowser = async (demo) => {
+  // LAY OUT AT 1600, RENDER AT 1920. Owner: *"why aren't you using the browser on full
+  // screen or whatever, why do I see the browser window cut?"*
+  //
+  // Two knobs, and they pull in opposite directions. A 1600x900 capture dropped into a
+  // 1920x1080 frame is a 1.2x UPSCALE — every glyph resampled, which is the softness that
+  // reads as a low-quality window. But simply widening the CSS viewport to 1920 makes it
+  // WORSE for the viewer: a site with a max-width content column just gains empty margin,
+  // so the words get smaller relative to the frame.
+  //
+  // `deviceScaleFactor` separates them. The page lays out at 1600 CSS px — the width the
+  // site was designed around, so nothing reflows or clips — and renders at 1.2x device
+  // pixels, so the screencast comes out at a native 1920x1080 with no resampling at all.
+  // Sharp AND full-frame, instead of choosing.
   const viewport = demo.viewport ?? {width: 1600, height: 900};
+  const dsf = demo.deviceScaleFactor ?? 1.2;
   const browser = await chromium.launch({
     headless: demo.headless ?? true,
-    args: ['--force-device-scale-factor=1', '--hide-scrollbars'],
+    args: ['--hide-scrollbars'],
   });
   const ctx = await browser.newContext({
     viewport,
-    deviceScaleFactor: 1,
+    deviceScaleFactor: dsf,
     // A recording is a performance, not a research session: block the noise that would
     // otherwise land in the frame or make two takes differ.
     reducedMotion: demo.reducedMotion === false ? 'no-preference' : 'reduce',
@@ -133,9 +182,19 @@ export const browserActions = {
   /** Scroll a real element into view — the honest way to move down a page. */
   async scroll(page, step) {
     if (step.target) {
-      await page.locator(step.target).first().scrollIntoViewIfNeeded({timeout: step.timeout ?? 15000});
+      // Where is it now, and how far do we have to travel? `scrollIntoViewIfNeeded` would
+      // TELEPORT there; we want the same destination, arrived at.
+      const dy = await page.locator(step.target).first().evaluate((el) => {
+        const r = el.getBoundingClientRect();
+        return Math.round(r.top - window.innerHeight * 0.28);
+      }).catch(() => null);
+      if (dy == null) {
+        await page.locator(step.target).first().scrollIntoViewIfNeeded({timeout: step.timeout ?? 15000});
+      } else {
+        await smoothWheel(page, dy, step.scrollMs);
+      }
     } else {
-      await page.mouse.wheel(0, step.by ?? 600);
+      await smoothWheel(page, step.by ?? 600, step.scrollMs);
     }
     await page.waitForTimeout(step.settleMs ?? 900);
     return {sent: step.target ?? `wheel ${step.by ?? 600}`, output: '', truth: 'no-output', verified: 'nothing to verify'};

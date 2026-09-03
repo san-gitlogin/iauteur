@@ -106,16 +106,23 @@ scenes.push(rec(
   n,
   'reading the column headings',
   'The comparison table on Anthropic’s announcement page.',
-  // THE FOOTAGE HAS TO DO WHAT THE NARRATION SAYS IT DOES. The line is *"scroll down and
-  // their comparison table appears"* — with only the hero clip on screen, nothing scrolls
-  // and nothing appears, and the viewer is told about a movement they never see. The demo
-  // already captured the scroll (`bench`); it was simply never cast. Owner: *"you must
-  // script often like how humans would visit a webpage, scroll through and get to know."*
+  // THE FOOTAGE HAS TO SHOW THE THING THE SENTENCE NAMES.
+  //
+  // PAID FOR, owner: *"you speak about comparison table, but you are showing this first,
+  // later you show the table — why so?"* This beat was cast with `bench`, whose demo label
+  // reads "the benchmark they lead with" and whose mark is "Terminal-Bench-Science 0.1" —
+  // so I labelled it "scrolling to the table" and moved on. `bench` actually lands on a
+  // SCATTER CHART headed "A new performance frontier". The viewer heard "their comparison
+  // table appears… first column is the new model" over a picture of a completely different
+  // graphic, and the table itself only arrived in the next beat.
+  //
+  // I cast a clip from its LABEL without once looking at its FOOTAGE. `scores` is the step
+  // that carries the table, so `scores` is the step this sentence gets.
   [
     clip('open', 'the announcement page'),
     // ON the word "Scroll", not a beat later: the movement and the sentence describing it
     // are the same event (LAW 0i). `wantAtWord`, not `atWord` — anchor-spec owns `atWord`.
-    clip('bench', 'scrolling to the table', {wantAtWord: at(n, 'Scroll')}),
+    clip('scores', 'the comparison table', {wantAtWord: at(n, 'Scroll')}),
   ],
   {place: 'right', width: 0.26},
   'Source: anthropic.com — Claude Fable 5.1 and Mythos 5.1 announcement'));
