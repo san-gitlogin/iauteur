@@ -796,7 +796,7 @@ const spec = {
       title: 'Make AI Read Your Own Files — A Complete Python Project (Beginner)',
       altTitles: [
         'Use AI On Your Own Files — Python, From An Empty Folder',
-        'Your First AI Tool In Python — Every Line Typed',
+        'Your First AI Tool In Python — Start To Finish',
       ],
       hook: 'What does it actually take to get an AI reading your own files?',
       breakdown:
@@ -838,7 +838,7 @@ const spec = {
     // the bare-subject failure the owner rejected on the FABLE thumbnail, on the one
     // surface that has no sentence in front of it.
     title: 'AI READS YOUR FILES',
-    badge: 'Python · from an empty folder',
+    badge: 'Python · from scratch',
     note: 'no credit card needed',
     asset: 'si:python',
   },

@@ -1489,6 +1489,47 @@ replaces pip…".
 
 ## Open threads
 
+- **FOUR MORE COMPONENTS DRAW NOTHING AT ALL UNTIL THEIR FIRST ANCHOR** (found 2026-09-04,
+  on the `ai-on-your-own-files` cut, by rendering a still 1.5s into every drawn scene and
+  counting lit pixels). Same family as the five below, but worse: those five show a
+  *container* and fill it late. These four show an EMPTY FRAME.
+
+  Measured at frame 45, peak luminance 103 means the watermark and nothing else:
+
+  | component | measured | worst case in that cut |
+  |---|---|---|
+  | `STAT_CALLOUT` | peak 103 | **9.2s** black — one anchor, at 60% of the read |
+  | `DIAGRAM`      | peak 103 | 6.3s, and 3.6s in a second beat |
+  | `LOGO_WALL`    | peak 103 | 6.1s |
+  | `ICON_GRID`    | peak 103 | 5.9s |
+
+  Measured NOT at fault, at the same frame, with late anchors: `PIPELINE_GATE`, `RECAP`,
+  `FLIP_CARD`, `LIST_BUILD`, `KINETIC_TEXT`, `SPEC_COMPARE`, `CODE_DIFF`, `RULE_TEST`.
+
+  Worked around in that spec by naming the first element in the beat's first breath, which
+  is better writing anyway — but the class is open, and `STAT_CALLOUT` is a trap: it has
+  exactly ONE anchor, so an author who anchors it on the word that says the number (which
+  is what LAW 0i.1 asks for) gets a black scene up to that word and no warning from
+  anything. Same fix as below: container at `Math.min(firstAnchor, 38)`, values on anchors.
+
+  **The threshold matters.** A first pass used "first anchor past 18% of the scene" and
+  missed two 3.5-second blanks in long scenes. LAW 8's number is 38 FRAMES, not a fraction.
+
+- **TWO BLANK SCENES IN A PUBLISHED TOPIC.** `lint-spec`'s new data-shape gate (a scene's
+  payload must sit under the key its component reads) found, besides the bug it was written
+  for, `instagram-s-newest-ai-tool-didn-t-survive-the-week` s07 `FLIP_CARD` (has
+  `{frontTitle, frontSubtitle, backTitle, backSubtitle}`, needs `data.flip`) and s08
+  `TIMELINE` (has `{title, events}`, needs `data.timeline`). That cut shipped with both
+  scenes empty. Re-rendering someone else's finished topic is the owner's call.
+
+- **A ~1s DARK BRIDGE AT SCENE TRANSITIONS IS HOUSE BEHAVIOUR, NOT A BUG TO CHASE.**
+  Measured on the assembled mp4, several scenes read peak 103–108 for the first 20–45
+  frames. Before treating that as a regression: the shipped `uv-getting-started` cut
+  measures the same (s05 105, s06 103, s07 107, s08 104 at frame 20). A `remotion still`
+  of a scene renders it WITHOUT its transition, so the two measurements answer different
+  questions — use stills to find a component that draws nothing, and the assembled file to
+  judge the bridge.
+
 - **FIVE SHARED COMPONENTS DEAD-SCREEN FOR 3–6 SECONDS, AND IT IS A LAW 8 VIOLATION**
   (found 2026-09-03, by rendering every scene of the episode-3 cut at start+60 — one frame
   past the deadline LAW 8 sets — and reading the sheet).
