@@ -181,7 +181,7 @@ if (n >= 8) {
     if (traceExempt && /^DSA_(TRACE_|FRAMEWORK|SIGNALS)/.test(st)) continue;
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
   }
-  const DYNAMIC = ['WHEN_NOT_SQLITE', 'INDEX_LEDGER', 'WHERE_IT_RUNS', 'TABLE_SPLIT', 'GROUP_BUCKETS', 'TRANSACTION_DOOR', 'TYPE_GATE', 'CURSOR_WALK', 'KEY_CHORD', 'BROWSER_STEALS', 'DB_TWO_WAYS', 'JOIN_MERGE', 'PLACEHOLDER_SEAL', 'SCAN_VS_SEEK', 'RECORDED_STEP', 'UV_STAGE', 'MCP_MESH', 'MCP_REACH', 'MCP_DEPRECATED', 'MCP_ELICIT', 'MCP_TERMINAL', 'MCP_FLAGS', 'MCP_TRANSPORT', 'MCP_PROGRESS', 'MCP_ROOTS', 'MCP_SAMPLING', 'MCP_MENTION', 'MCP_URI', 'MCP_LOOP', 'MCP_SCHEMA', 'MCP_WIRE', 'MCP_CONTROL', 'MCP_API_ANATOMY', 'DSA_FRAMEWORK', 'DSA_COST', 'DSA_SIGNALS', 'DSA_TRACE_LIST', 'DSA_TRACE_INTERVALS', 'DSA_TRACE_DP', 'DSA_TRACE_TREE', 'DSA_TRACE_GRID', 'DSA_TRACE_STACK', 'DSA_TRACE_HASH', 'DSA_TRACE_BSEARCH', 'DSA_TRACE_WINDOW', 'DSA_TRACE_PTRS', 'CMD_LSUSB', 'CMD_LSPCI', 'CMD_CHEAT', 'CMD_TLDR', 'CMD_APROPOS', 'CMD_MAN', 'CMD_DMESG', 'CMD_JOURNALCTL', 'CMD_SYSTEMCTL', 'CMD_TMUX', 'CMD_SCREEN', 'CMD_HISTORY', 'CMD_ENV', 'CMD_ALIAS', 'CMD_BASHSCRIPT', 'CMD_CRONTAB', 'CMD_CRON', 'CMD_ZIP', 'CMD_BZIP2', 'CMD_GZIP', 'CMD_TAR', 'CMD_CURL', 'CMD_WGET', 'CMD_NC', 'CMD_RSYNC', 'CMD_SCP', 'CMD_SSH', 'CMD_WHOIS', 'CMD_NSLOOKUP', 'CMD_HOST', 'CMD_DIG', 'CMD_NLOAD', 'CMD_NETHOGS', 'CMD_IFTOP', 'CMD_NMCLI', 'CMD_SS', 'CMD_NETSTAT', 'CMD_MTR', 'CMD_TRACEROUTE', 'CMD_PING', 'CMD_IP', 'CMD_DD', 'CMD_UMOUNT', 'CMD_MOUNT', 'CMD_FSCK', 'CMD_MKFS', 'CMD_BLKID', 'CMD_PARTED', 'CMD_FDISK', 'CMD_NCDU', 'CMD_DU', 'CMD_DF', 'CMD_WATCH', 'CMD_SAR', 'CMD_DSTAT', 'CMD_IOTOP', 'CMD_IOSTAT', 'CMD_VMSTAT', 'CMD_FREE', 'CMD_UPTIME', 'CMD_STRACE', 'CMD_LSOF', 'CMD_WAIT', 'CMD_SLEEP', 'CMD_NOHUP', 'CMD_KILLALL', 'CMD_KILL', 'CMD_NMON', 'CMD_GLANCES', 'CMD_ATOP', 'CMD_BTOP', 'CMD_HTOP', 'CMD_TOP', 'CMD_PSTREE', 'CMD_PS', 'CMD_CHROOT', 'CMD_LAST', 'CMD_W', 'CMD_CHPASSWD', 'CMD_PASSWD', 'CMD_USERDEL', 'CMD_USERMOD', 'CMD_USERADD', 'CMD_SUDO', 'CMD_UMASK', 'CMD_CHOWN', 'CMD_CHMOD', 'CMD_XARGS', 'CMD_SED', 'CMD_AWK', 'CMD_GREP', 'CMD_LOCATE', 'CMD_FIND', 'CMD_DIFF', 'CMD_VI', 'CMD_TAIL', 'CMD_LESS', 'CMD_MORE', 'CMD_TAC', 'CMD_CAT', 'CMD_TOUCH', 'CMD_CLEAR', 'CMD_LN', 'CMD_RM', 'CMD_MV', 'CMD_CP', 'CMD_MKDIR', 'CMD_PWD', 'CMD_CD', 'CMD_LS', 'COPY_FORK', 'TOOL_BENCH', 'DELETION_GUARD', 'LINK_PAIR', 'LISTING_ROW', 'PATH_WALK', 'RECORD_DRAFT', 'FROZEN_FRAME', 'ORDER_ROULETTE', 'WORKER_SPREAD', 'SEALED_BOX', 'SET_LOGIC', 'SEARCH_NARROW', 'STAGE_HANDOFF', 'BACKSTAGE_PHONE', 'SCOPE_LADDER', 'HAND_STAMP', 'SAD_PATHS', 'MAIL_ROOM', 'TRACE_SCRUB', 'FLAG_HARVEST', 'SHOT_SCOPE', 'PICKER_BYPASS', 'DIALOG_GATE', 'FRAME_BOUNDARY', 'TRAP_TRIGGER', 'INDEX_DRIFT', 'ROW_FILTER', 'CROWD_MATCH', 'RESPONSIBILITY_SPLIT', 'SAVED_SEARCH', 'RULE_TEST', 'CHANGE_RIPPLE', 'FIXTURE_CREW', 'OVERLAY_BLOCK', 'BROWSER_STEP', 'CODE_RUN', 'QUIZ_CARD', 'THEATER_STAGE', 'INTRO_CARD', 'REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['COLUMN_SPLIT', 'CLAIM_CHECK', 'MODEL_SHRUG', 'WHEN_NOT_SQLITE', 'INDEX_LEDGER', 'WHERE_IT_RUNS', 'TABLE_SPLIT', 'GROUP_BUCKETS', 'TRANSACTION_DOOR', 'TYPE_GATE', 'CURSOR_WALK', 'KEY_CHORD', 'BROWSER_STEALS', 'DB_TWO_WAYS', 'JOIN_MERGE', 'PLACEHOLDER_SEAL', 'SCAN_VS_SEEK', 'RECORDED_STEP', 'UV_STAGE', 'MCP_MESH', 'MCP_REACH', 'MCP_DEPRECATED', 'MCP_ELICIT', 'MCP_TERMINAL', 'MCP_FLAGS', 'MCP_TRANSPORT', 'MCP_PROGRESS', 'MCP_ROOTS', 'MCP_SAMPLING', 'MCP_MENTION', 'MCP_URI', 'MCP_LOOP', 'MCP_SCHEMA', 'MCP_WIRE', 'MCP_CONTROL', 'MCP_API_ANATOMY', 'DSA_FRAMEWORK', 'DSA_COST', 'DSA_SIGNALS', 'DSA_TRACE_LIST', 'DSA_TRACE_INTERVALS', 'DSA_TRACE_DP', 'DSA_TRACE_TREE', 'DSA_TRACE_GRID', 'DSA_TRACE_STACK', 'DSA_TRACE_HASH', 'DSA_TRACE_BSEARCH', 'DSA_TRACE_WINDOW', 'DSA_TRACE_PTRS', 'CMD_LSUSB', 'CMD_LSPCI', 'CMD_CHEAT', 'CMD_TLDR', 'CMD_APROPOS', 'CMD_MAN', 'CMD_DMESG', 'CMD_JOURNALCTL', 'CMD_SYSTEMCTL', 'CMD_TMUX', 'CMD_SCREEN', 'CMD_HISTORY', 'CMD_ENV', 'CMD_ALIAS', 'CMD_BASHSCRIPT', 'CMD_CRONTAB', 'CMD_CRON', 'CMD_ZIP', 'CMD_BZIP2', 'CMD_GZIP', 'CMD_TAR', 'CMD_CURL', 'CMD_WGET', 'CMD_NC', 'CMD_RSYNC', 'CMD_SCP', 'CMD_SSH', 'CMD_WHOIS', 'CMD_NSLOOKUP', 'CMD_HOST', 'CMD_DIG', 'CMD_NLOAD', 'CMD_NETHOGS', 'CMD_IFTOP', 'CMD_NMCLI', 'CMD_SS', 'CMD_NETSTAT', 'CMD_MTR', 'CMD_TRACEROUTE', 'CMD_PING', 'CMD_IP', 'CMD_DD', 'CMD_UMOUNT', 'CMD_MOUNT', 'CMD_FSCK', 'CMD_MKFS', 'CMD_BLKID', 'CMD_PARTED', 'CMD_FDISK', 'CMD_NCDU', 'CMD_DU', 'CMD_DF', 'CMD_WATCH', 'CMD_SAR', 'CMD_DSTAT', 'CMD_IOTOP', 'CMD_IOSTAT', 'CMD_VMSTAT', 'CMD_FREE', 'CMD_UPTIME', 'CMD_STRACE', 'CMD_LSOF', 'CMD_WAIT', 'CMD_SLEEP', 'CMD_NOHUP', 'CMD_KILLALL', 'CMD_KILL', 'CMD_NMON', 'CMD_GLANCES', 'CMD_ATOP', 'CMD_BTOP', 'CMD_HTOP', 'CMD_TOP', 'CMD_PSTREE', 'CMD_PS', 'CMD_CHROOT', 'CMD_LAST', 'CMD_W', 'CMD_CHPASSWD', 'CMD_PASSWD', 'CMD_USERDEL', 'CMD_USERMOD', 'CMD_USERADD', 'CMD_SUDO', 'CMD_UMASK', 'CMD_CHOWN', 'CMD_CHMOD', 'CMD_XARGS', 'CMD_SED', 'CMD_AWK', 'CMD_GREP', 'CMD_LOCATE', 'CMD_FIND', 'CMD_DIFF', 'CMD_VI', 'CMD_TAIL', 'CMD_LESS', 'CMD_MORE', 'CMD_TAC', 'CMD_CAT', 'CMD_TOUCH', 'CMD_CLEAR', 'CMD_LN', 'CMD_RM', 'CMD_MV', 'CMD_CP', 'CMD_MKDIR', 'CMD_PWD', 'CMD_CD', 'CMD_LS', 'COPY_FORK', 'TOOL_BENCH', 'DELETION_GUARD', 'LINK_PAIR', 'LISTING_ROW', 'PATH_WALK', 'RECORD_DRAFT', 'FROZEN_FRAME', 'ORDER_ROULETTE', 'WORKER_SPREAD', 'SEALED_BOX', 'SET_LOGIC', 'SEARCH_NARROW', 'STAGE_HANDOFF', 'BACKSTAGE_PHONE', 'SCOPE_LADDER', 'HAND_STAMP', 'SAD_PATHS', 'MAIL_ROOM', 'TRACE_SCRUB', 'FLAG_HARVEST', 'SHOT_SCOPE', 'PICKER_BYPASS', 'DIALOG_GATE', 'FRAME_BOUNDARY', 'TRAP_TRIGGER', 'INDEX_DRIFT', 'ROW_FILTER', 'CROWD_MATCH', 'RESPONSIBILITY_SPLIT', 'SAVED_SEARCH', 'RULE_TEST', 'CHANGE_RIPPLE', 'FIXTURE_CREW', 'OVERLAY_BLOCK', 'BROWSER_STEP', 'CODE_RUN', 'QUIZ_CARD', 'THEATER_STAGE', 'INTRO_CARD', 'REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -1395,6 +1395,116 @@ for (const s of spec.scenes ?? []) {
       checkColor(id, 'labAssembly.stage.color', s.color);
     }
     checkColor(id, 'labAssembly.color', la.color);
+  }
+
+  // ── MODEL_SHRUG — budgets sized to the NARROW (vertical) ledger, ~34 chars a line at
+  // 30px mono in a 960px card, so a 124-char entry is four lines and still legible.
+  //
+  // The EDITORIAL rule is the one that matters, and it is the component's whole reason to
+  // exist: the `needle` has to be present in what the source SAID and absent from what it
+  // LISTED. A needle that appears in both is not a shrug, it is a duplicate — and the
+  // component would happily draw the second ledger crossing off an entry that names the
+  // very value the stamp then claims was never there.
+  if (d.modelShrug) {
+    const ms = d.modelShrug;
+    const said = ms.said ?? [];
+    const missed = ms.missed ?? [];
+    if (!ms.needle) E(`${id}: MODEL_SHRUG needs a needle — the value that is stated and then not listed`);
+    if (len(ms.needle) > 22) E(`${id}: modelShrug needle "${ms.needle}" > 22 chars`);
+    if (said.length < 1) E(`${id}: MODEL_SHRUG needs ≥1 said line`);
+    if (said.length > 3) E(`${id}: MODEL_SHRUG max 3 said lines (got ${said.length}) — split the beat`);
+    if (missed.length < 2) E(`${id}: MODEL_SHRUG needs ≥2 missed entries — one entry reads as an oversight, not as a list`);
+    if (missed.length > 4) E(`${id}: MODEL_SHRUG max 4 missed entries (got ${missed.length})`);
+    if (len(ms.headline) > 48) E(`${id}: modelShrug headline > 48 chars`);
+    if (len(ms.saidLabel) > 22) E(`${id}: modelShrug saidLabel > 22 chars`);
+    if (len(ms.missedLabel) > 22) E(`${id}: modelShrug missedLabel > 22 chars`);
+    if (len(ms.verdict) > 40) E(`${id}: modelShrug verdict > 40 chars`);
+    if (len(ms.source) > 64) E(`${id}: modelShrug source > 64 chars`);
+    for (const l of said) if (len(l.text) > 100) E(`${id}: modelShrug said line > 100 chars — break the quotation at a comma, never trim it`);
+    for (const l of missed) if (len(l.text) > 124) E(`${id}: modelShrug missed entry > 124 chars`);
+    if (ms.needle) {
+      if (!said.some((l) => (l.text ?? '').includes(ms.needle)))
+        E(`${id}: modelShrug needle "${ms.needle}" appears in no said line — the beat is that the source WROTE it`);
+      const echoed = missed.find((l) => (l.text ?? '').includes(ms.needle));
+      if (echoed)
+        E(`${id}: modelShrug needle "${ms.needle}" also appears in a missed entry — then it was NOT missed, and the stamp would be false`);
+    }
+    checkColor(id, 'modelShrug.color', ms.color);
+  }
+
+  // ── CLAIM_CHECK — budgets sized to the vertical board (960px, 30px body).
+  //
+  // EDITORIAL rules: the `subject` must name a row, or the outline that tells the eye where
+  // the argument is settled lands on nothing; and no row may claim more matches than it has
+  // items, which would draw more lit squares than squares.
+  if (d.claimCheck) {
+    const cc = d.claimCheck;
+    const claims = cc.claims ?? [];
+    const tally = cc.tally ?? [];
+    if (claims.length < 1) E(`${id}: CLAIM_CHECK needs ≥1 claim`);
+    if (claims.length > 2) E(`${id}: CLAIM_CHECK max 2 claims (got ${claims.length})`);
+    if (tally.length < 2) E(`${id}: CLAIM_CHECK needs ≥2 tally rows — one row has nothing to compare against`);
+    if (tally.length > 4) E(`${id}: CLAIM_CHECK max 4 tally rows (got ${tally.length})`);
+    if (len(cc.headline) > 48) E(`${id}: claimCheck headline > 48 chars`);
+    if (len(cc.subject) > 14) E(`${id}: claimCheck subject > 14 chars`);
+    if (len(cc.tallyLabel) > 28) E(`${id}: claimCheck tallyLabel > 28 chars`);
+    if (len(cc.hitLabel) > 8) E(`${id}: claimCheck hitLabel > 8 chars — it shares one line with the count`);
+    if (len(cc.verdict) > 44) E(`${id}: claimCheck verdict > 44 chars`);
+    if (len(cc.source) > 64) E(`${id}: claimCheck source > 64 chars`);
+    for (const c of claims) {
+      if (len(c.text) > 124) E(`${id}: claimCheck claim > 124 chars`);
+      if (len(c.tag) > 14) E(`${id}: claimCheck claim tag > 14 chars`);
+      checkColor(id, 'claimCheck.claim.color', c.color);
+    }
+    for (const r of tally) {
+      if (len(r.label) > 14) E(`${id}: claimCheck tally label "${r.label}" > 14 chars`);
+      if (typeof r.threshold !== 'number' || r.threshold < 1)
+        E(`${id}: claimCheck tally row "${r.label}" needs threshold ≥1 — it is how many squares get drawn`);
+      // MEASURED, not chosen: at 40 the squares wrap to three lines in the vertical board
+      // and stay countable; the first cap of 60 rendered as a dotted rule in the MAX proof.
+      else if (r.threshold > 40)
+        E(`${id}: claimCheck tally row "${r.label}" threshold ${r.threshold} > 40 — past that the squares stop being countable`);
+      if (typeof r.value === 'number' && typeof r.threshold === 'number' && r.value > r.threshold)
+        E(`${id}: claimCheck tally row "${r.label}" matches ${r.value} of ${r.threshold} — more lit squares than squares`);
+      checkColor(id, 'claimCheck.tally.color', r.color);
+    }
+    if (cc.subject && !tally.some((r) => r.label === cc.subject))
+      E(`${id}: claimCheck subject "${cc.subject}" names no tally row — the outline would land on nothing`);
+  }
+
+  // ── COLUMN_SPLIT — budgets sized to the vertical half (980px, 30px mono).
+  //
+  // EDITORIAL rules, and both are about the ORDER of the argument: the tear cannot precede
+  // the table it tears, and the question cannot be asked before the join it needs is gone —
+  // asked earlier, the answer is still on screen and the beat teaches the opposite lesson.
+  if (d.columnSplit) {
+    const cs = d.columnSplit;
+    const cols = cs.columns ?? [];
+    const rows = cs.rows ?? [];
+    if (cols.length !== 2) E(`${id}: COLUMN_SPLIT needs exactly 2 columns (got ${cols.length}) — a join has two sides`);
+    if (rows.length < 3) E(`${id}: COLUMN_SPLIT needs ≥3 rows — fewer reads as a fragment, not a table`);
+    if (rows.length > 5) E(`${id}: COLUMN_SPLIT max 5 rows (got ${rows.length})`);
+    if ((cs.left ?? []).length > 4) E(`${id}: columnSplit max 4 left tally rows`);
+    if ((cs.right ?? []).length > 3) E(`${id}: columnSplit max 3 right tally rows`);
+    if (len(cs.headline) > 48) E(`${id}: columnSplit headline > 48 chars`);
+    if (len(cs.tableName) > 20) E(`${id}: columnSplit tableName > 20 chars`);
+    if (len(cs.question) > 46) E(`${id}: columnSplit question > 46 chars`);
+    if (len(cs.gapNote) > 26) E(`${id}: columnSplit gapNote > 26 chars`);
+    if (len(cs.source) > 64) E(`${id}: columnSplit source > 64 chars`);
+    for (const c of cols) if (len(c.label) > 14) E(`${id}: columnSplit column "${c.label}" > 14 chars`);
+    for (const r of rows) {
+      if (len(r.label) > 14) E(`${id}: columnSplit row left cell "${r.label}" > 14 chars`);
+      if (len(r.text) > 16) E(`${id}: columnSplit row right cell "${r.text}" > 16 chars`);
+    }
+    for (const r of [...(cs.left ?? []), ...(cs.right ?? [])]) {
+      if (len(r.label) > 16) E(`${id}: columnSplit tally label "${r.label}" > 16 chars`);
+      if (typeof r.value !== 'number') E(`${id}: columnSplit tally row "${r.label}" needs a numeric value`);
+    }
+    const b = cs.atWord ?? 1;
+    if (typeof cs.splitAtWord === 'number' && cs.splitAtWord < b)
+      E(`${id}: columnSplit splitAtWord (${cs.splitAtWord}) precedes atWord (${b}) — the tear cannot come before the table`);
+    if (typeof cs.askAtWord === 'number' && typeof cs.splitAtWord === 'number' && cs.askAtWord < cs.splitAtWord)
+      E(`${id}: columnSplit askAtWord (${cs.askAtWord}) precedes splitAtWord (${cs.splitAtWord}) — asked while the rows are still joined, the answer is on screen and the beat teaches the opposite`);
   }
 
   if (d.castBoard) {

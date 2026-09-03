@@ -76,3 +76,9 @@ public/rec/
 # They are large, platform-specific and not ours to redistribute — demos reference them via
 # the {{TOOLS}} token and `prep.requires` tells a fresh clone what to download.
 tools/
+
+# The AI-analyst tutorial project: the SOURCE for the "Point AI At It" series.
+# Untracked deliberately — it carries a live .env, a Windows .venv, and local probe
+# output. Publishing any of it to a public repo is the owner's decision, not a
+# side effect of authoring a video. briefs/pointai/ carries what the specs need.
+ai-analyst-tutorial/

@@ -640,8 +640,16 @@ const actions = {
       await page.locator(step.selector).first().scrollIntoViewIfNeeded({timeout: 8000});
     } else if (step.text) {
       const ok = await page.evaluate((needle) => {
+        // MONACO WRITES NON-BREAKING SPACES. A `.view-line` renders both its indentation
+        // AND its interior spaces as U+00A0, so `"return sorted(odd)"` is on screen, is in
+        // the DOM, and does not `.includes()` the string a human typed into the demo. The
+        // first take of the episode-3 editor beat failed on exactly that, twice, with the
+        // line plainly visible in a screenshot — so normalise before comparing, on BOTH
+        // sides, for every surface. xterm's rows are unaffected; this costs them nothing.
+        const flat = (s) => String(s || '').replace(/\u00a0/g, ' ');
+        const want = flat(needle);
         const rows = Array.from(document.querySelectorAll('.xterm-rows > div, .view-lines .view-line'));
-        const hit = rows.filter((r) => (r.innerText || '').includes(needle)).pop();
+        const hit = rows.filter((r) => flat(r.innerText).includes(want)).pop();
         if (!hit) return false;
         hit.scrollIntoView({block: 'center'});
         return true;
@@ -658,11 +666,13 @@ const actions = {
     let seen = null;
     if (step.text) {
       seen = await page.evaluate((needle) => {
+        const flat = (s) => String(s || '').replace(/\u00a0/g, ' ');   // see the note above
+        const want = flat(needle);
         const rows = Array.from(document.querySelectorAll('.xterm-rows > div, .view-lines .view-line'));
-        const hit = rows.filter((r) => (r.innerText || '').includes(needle)).pop();
+        const hit = rows.filter((r) => flat(r.innerText).includes(want)).pop();
         if (!hit) return null;
         const r = hit.getBoundingClientRect();
-        return r.top >= 0 && r.bottom <= window.innerHeight ? (hit.innerText || '').trim() : null;
+        return r.top >= 0 && r.bottom <= window.innerHeight ? flat(hit.innerText).trim() : null;
       }, step.text);
       if (!seen) throw new Error(`Step "${step.id}": scrolled, but ${JSON.stringify(step.text)} is still not in view`);
     }

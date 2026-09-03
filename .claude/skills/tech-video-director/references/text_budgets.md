@@ -61,6 +61,13 @@
 | SANDBOX_BOX label / chip | 20 / 18 |
 | EVAL_DASHBOARD metric label | 18 |
 | AUTH_FLOW authToken | 10 |
+| MODEL_SHRUG needle / said line / missed entry | 22 / 100 / 124 |
+| MODEL_SHRUG saidLabel / missedLabel / verdict | 22 / 22 / 40 |
+| CLAIM_CHECK claim text / claim tag / subject | 124 / 14 / 14 |
+| CLAIM_CHECK tallyLabel / hitLabel / tally label / verdict | 28 / 8 / 14 / 44 |
+| CLAIM_CHECK tally threshold (squares per row, measured) | 40 |
+| COLUMN_SPLIT tableName / column label / row cells | 20 / 14 / 14 + 16 |
+| COLUMN_SPLIT tally label / question / gapNote | 16 / 46 / 26 |
 Also: ≤5 steps, ≤4 chat messages, ≤4 recap points, ≤3 stats per scene.
 When an idea exceeds a budget: SHORTEN THE IDEA, never squeeze the text.
 Budgets are CONTEXT-AWARE: the same component in a narrower container gets a

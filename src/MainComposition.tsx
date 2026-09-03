@@ -366,10 +366,16 @@ import {TableSplit} from './scenes/TableSplit';
 import {WhereItRuns} from './scenes/WhereItRuns';
 import {IndexLedger} from './scenes/IndexLedger';
 import {WhenNotSqlite} from './scenes/WhenNotSqlite';
+import {ModelShrug} from './scenes/ModelShrug';
+import {ClaimCheck} from './scenes/ClaimCheck';
+import {ColumnSplit} from './scenes/ColumnSplit';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  WHEN_NOT_SQLITE: WhenNotSqlite,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  COLUMN_SPLIT: ColumnSplit,
+  CLAIM_CHECK: ClaimCheck,
+  MODEL_SHRUG: ModelShrug,
+  WHEN_NOT_SQLITE: WhenNotSqlite,
   INDEX_LEDGER: IndexLedger,
   WHERE_IT_RUNS: WhereItRuns,
   TABLE_SPLIT: TableSplit,

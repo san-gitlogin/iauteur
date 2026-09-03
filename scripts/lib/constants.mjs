@@ -251,6 +251,9 @@ export const TYPES = [
   'WHERE_IT_RUNS',
   'INDEX_LEDGER',
   'WHEN_NOT_SQLITE',
+  'MODEL_SHRUG',
+  'CLAIM_CHECK',
+  'COLUMN_SPLIT',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

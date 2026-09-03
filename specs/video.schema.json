@@ -550,7 +550,10 @@
               "TABLE_SPLIT",
               "WHERE_IT_RUNS",
               "INDEX_LEDGER",
-              "WHEN_NOT_SQLITE"
+              "WHEN_NOT_SQLITE",
+              "MODEL_SHRUG",
+              "CLAIM_CHECK",
+              "COLUMN_SPLIT"
             ]
           },
           "narration": {
@@ -620,6 +623,237 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "COLUMN_SPLIT"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "columnSplit": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "tableName": {
+                          "type": "string",
+                          "maxLength": 20
+                        },
+                        "columns": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "exactly 2 x {label<=14} - the two column names. Two is the point: a join needs exactly two sides."
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "3-5 x {label<=14 = the left cell, text<=16 = the right cell}. Real rows from the real file - this is the state that HAS the answer in it."
+                        },
+                        "splitAtWord": {
+                          "type": "number",
+                          "description": "Word the tear lands on — the columns come apart and the row bands break (retargeted by sync like any atWord)."
+                        },
+                        "left": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label<=14, value = the count} - what the left column becomes once it is only a column"
+                        },
+                        "right": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-3 x {label<=16, value = the count} - the same for the right column"
+                        },
+                        "question": {
+                          "type": "string",
+                          "maxLength": 46,
+                          "description": "the thing being asked that needs both sides, verbatim if it was really asked"
+                        },
+                        "askAtWord": {
+                          "type": "number",
+                          "description": "Word the question lands on, in the gap the tear opened (retargeted by sync like any atWord)."
+                        },
+                        "gapNote": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what is written across the broken connector, e.g. 'no row here'"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the table is on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "CLAIM_CHECK"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "claimCheck": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "claims": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-2 x {text<=124 = the assertion, verbatim and in quotation marks; tag<=14 = who said it, e.g. 'it said'; color = 'red' when the check fails, 'green' when it holds; atWord}. Two claims from ONE answer is the strongest use: one right and one wrong, in the same voice."
+                        },
+                        "subject": {
+                          "type": "string",
+                          "maxLength": 14,
+                          "description": "the name the claim is about - its tally row is outlined so the eye goes straight to the row that settles it"
+                        },
+                        "tallyLabel": {
+                          "type": "string",
+                          "maxLength": 28,
+                          "description": "kicker over the count, e.g. 'every order, counted'"
+                        },
+                        "tally": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {label<=14 = the group; value = how many MATCH the claim; threshold = how many there are in total; color; atWord}. Each row draws `threshold` squares and lights `value` of them - so a zero row is visibly a row of nothing lit."
+                        },
+                        "hitLabel": {
+                          "type": "string",
+                          "maxLength": 8,
+                          "description": "the word for a matching item in the read-out, e.g. 'lost' -> '0 lost of 10' (default 'flagged')"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "the closing line under the board"
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "Word the verdict lands on (retargeted by sync like any atWord)."
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the claim and the empty board are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MODEL_SHRUG"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "modelShrug": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "needle": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "the value that is stated above and missing below - highlighted inside `said`, hunted through `missed`, and named on the stamp"
+                        },
+                        "saidLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "kicker over the first ledger (default 'what it found')"
+                        },
+                        "missedLabel": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "kicker over the second ledger (default 'what it called unusual')"
+                        },
+                        "said": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-3 x {text<=100 = one line of what the model wrote, verbatim; atWord}. Split a long quotation across items at a natural comma rather than trimming it."
+                        },
+                        "missed": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 x {text<=124 = one entry of the list the value is NOT on, verbatim; atWord}. Each entry is crossed off on its own anchor - that sweep IS the search."
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "the stamp that lands when the search ends, e.g. 'never on the list'"
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "Word the stamp lands on (retargeted by sync like any atWord)."
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - both ledgers are on screen by frame 38"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

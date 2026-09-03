@@ -4,6 +4,9 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'COLUMN_SPLIT'
+  | 'CLAIM_CHECK'
+  | 'MODEL_SHRUG'
   | 'WHEN_NOT_SQLITE'
   | 'INDEX_LEDGER'
   | 'WHERE_IT_RUNS'
@@ -376,6 +379,53 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type ColumnSplitScene = SceneCommon<'COLUMN_SPLIT'> & { data: {
+    columnSplit: {
+      headline?: string;
+      tableName?: string;
+      columns: Array<Record<string, unknown>>;
+      rows: Array<Record<string, unknown>>;
+      splitAtWord?: number;
+      left?: Array<Record<string, unknown>>;
+      right?: Array<Record<string, unknown>>;
+      question?: string;
+      askAtWord?: number;
+      gapNote?: string;
+      source?: string;
+      atWord?: number;
+    };
+  } };
+
+export type ClaimCheckScene = SceneCommon<'CLAIM_CHECK'> & { data: {
+    claimCheck: {
+      headline?: string;
+      claims: Array<Record<string, unknown>>;
+      subject?: string;
+      tallyLabel?: string;
+      tally: Array<Record<string, unknown>>;
+      hitLabel?: string;
+      verdict?: string;
+      verdictAtWord?: number;
+      source?: string;
+      atWord?: number;
+    };
+  } };
+
+export type ModelShrugScene = SceneCommon<'MODEL_SHRUG'> & { data: {
+    modelShrug: {
+      headline?: string;
+      needle: string;
+      saidLabel?: string;
+      missedLabel?: string;
+      said: Array<Record<string, unknown>>;
+      missed: Array<Record<string, unknown>>;
+      verdict?: string;
+      verdictAtWord?: number;
+      source?: string;
+      atWord?: number;
+    };
+  } };
 
 export type WhenNotSqliteScene = SceneCommon<'WHEN_NOT_SQLITE'> & { data: {
     whenNotSqlite: {
@@ -5429,6 +5479,9 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  COLUMN_SPLIT: ColumnSplitScene;
+  CLAIM_CHECK: ClaimCheckScene;
+  MODEL_SHRUG: ModelShrugScene;
   WHEN_NOT_SQLITE: WhenNotSqliteScene;
   INDEX_LEDGER: IndexLedgerScene;
   WHERE_IT_RUNS: WhereItRunsScene;
@@ -5794,6 +5847,9 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | ColumnSplitScene
+  | ClaimCheckScene
+  | ModelShrugScene
   | WhenNotSqliteScene
   | IndexLedgerScene
   | WhereItRunsScene

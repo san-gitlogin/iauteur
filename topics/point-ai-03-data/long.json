@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "topic": "Data: the mistake everyone makes",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "TODO",
+    "openLoop": "TODO",
+    "analogy": "TODO"
+  },
+  "brand": {
+    "theme": "CHOOSE_DARK_THEME",
+    "channel": "YOUR CHANNEL",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "TODO",
+    "badge": "TODO",
+    "asset": "lucide:sparkles"
+  },
+  "scenes": []
+}

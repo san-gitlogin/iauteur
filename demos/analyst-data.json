@@ -1,0 +1,108 @@
+{
+  "slug": "analyst-data",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "analyst",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "maximizePanel": true,
+  "prep": {
+    "files": {
+      "src/analyst/__init__.py": "\"\"\"Ask an AI about your text, your data, and your screenshots.\"\"\"\n\n__version__ = \"0.1.0\"\n",
+      "src/analyst/config.py": "\"\"\"One place that knows how to reach an AI provider.\n\nEvery provider in this tutorial speaks the same dialect, so the only thing that\nchanges between OpenAI, Azure, Groq, OpenRouter and a model running on your own\nlaptop is three lines in a `.env` file.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport os\nfrom dataclasses import dataclass\n\nfrom dotenv import load_dotenv\nfrom openai import OpenAI\n\nload_dotenv()\n\n\nclass ConfigError(RuntimeError):\n    \"\"\"Raised with an instruction, not a stack trace.\"\"\"\n\n\n@dataclass(frozen=True)\nclass Settings:\n    base_url: str\n    api_key: str\n    model: str\n    vision_model: str\n\n    @property\n    def provider(self) -> str:\n        host = self.base_url.split(\"//\")[-1].split(\"/\")[0].lower()\n        for needle, label in (\n            (\"localhost\", \"Ollama (local)\"),\n            (\"127.0.0.1\", \"Ollama (local)\"),\n            (\"groq\", \"Groq\"),\n            (\"openrouter\", \"OpenRouter\"),\n            (\"azure\", \"Azure OpenAI\"),\n            (\"api.openai.com\", \"OpenAI\"),\n            (\"together\", \"Together\"),\n        ):\n            if needle in host:\n                return label\n        return host\n\n\ndef load_settings() -> Settings:\n    base_url = os.getenv(\"AI_BASE_URL\", \"\").strip()\n    api_key = os.getenv(\"AI_API_KEY\", \"\").strip()\n    model = os.getenv(\"AI_MODEL\", \"\").strip()\n\n    missing = [\n        name\n        for name, value in (\n            (\"AI_BASE_URL\", base_url),\n            (\"AI_API_KEY\", api_key),\n            (\"AI_MODEL\", model),\n        )\n        if not value\n    ]\n    if missing:\n        raise ConfigError(\n            f\"{', '.join(missing)} not set.\\n\"\n            \"Copy .env.example to .env and fill in one provider block.\"\n        )\n\n    return Settings(\n        base_url=base_url,\n        api_key=api_key,\n        model=model,\n        # Some providers use a separate model for pictures. Default to the\n        # same one so the simple case needs no extra setting.\n        vision_model=os.getenv(\"AI_VISION_MODEL\", \"\").strip() or model,\n    )\n\n\ndef get_client(settings: Settings | None = None) -> OpenAI:\n    \"\"\"The one object the rest of the program talks to.\"\"\"\n    settings = settings or load_settings()\n    return OpenAI(\n        base_url=settings.base_url,\n        api_key=settings.api_key,\n        timeout=120.0,\n        max_retries=2,\n    )\n",
+      "src/analyst/core.py": "\"\"\"The single function every other module in this project calls.\n\nThis is deliberately the smallest useful wrapper around the API. If you delete\neverything else in this project, keep this file - it is the whole idea.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport base64\nimport json\nimport mimetypes\nfrom pathlib import Path\nfrom typing import Any, Iterable\n\nfrom .config import Settings, get_client, load_settings\n\n\ndef ask(\n    instruction: str,\n    content: str,\n    *,\n    schema: dict[str, Any] | None = None,\n    images: Iterable[Path] | None = None,\n    settings: Settings | None = None,\n    temperature: float = 0.2,\n) -> str | dict[str, Any]:\n    \"\"\"Send one question and get one answer.\n\n    instruction  what the AI should do        (\"summarise complaints\")\n    content      what it should do it to      (the actual text / rows)\n    schema       optional JSON shape you want back instead of prose\n    images       optional pictures to look at\n    \"\"\"\n    settings = settings or load_settings()\n    client = get_client(settings)\n\n    user_parts: list[dict[str, Any]] = [{\"type\": \"text\", \"text\": content}]\n    for path in images or []:\n        user_parts.append(\n            {\"type\": \"image_url\", \"image_url\": {\"url\": _as_data_url(path)}}\n        )\n\n    kwargs: dict[str, Any] = {\n        \"model\": settings.vision_model if images else settings.model,\n        \"messages\": [\n            {\"role\": \"system\", \"content\": instruction},\n            {\"role\": \"user\", \"content\": user_parts},\n        ],\n        \"temperature\": temperature,\n    }\n\n    if schema is not None:\n        kwargs[\"response_format\"] = {\n            \"type\": \"json_schema\",\n            \"json_schema\": {\"name\": \"answer\", \"strict\": True, \"schema\": schema},\n        }\n\n    try:\n        response = client.chat.completions.create(**kwargs)\n    except Exception:\n        if schema is None:\n            raise\n        # Not every provider supports a full JSON schema. The ones that don't\n        # still support \"just give me JSON\", so describe the shape in words\n        # and try once more instead of failing the whole run.\n        kwargs[\"response_format\"] = {\"type\": \"json_object\"}\n        kwargs[\"messages\"][0][\"content\"] = (\n            f\"{instruction}\\n\\nReply with JSON matching this schema exactly:\\n\"\n            f\"{json.dumps(schema)}\"\n        )\n        response = client.chat.completions.create(**kwargs)\n\n    text = response.choices[0].message.content or \"\"\n    return json.loads(text) if schema is not None else text\n\n\ndef _as_data_url(path: Path) -> str:\n    \"\"\"Turn a file on disk into the string the API expects for a picture.\"\"\"\n    path = Path(path)\n    if not path.is_file():\n        raise FileNotFoundError(f\"No image at {path}\")\n    mime = mimetypes.guess_type(path.name)[0] or \"image/png\"\n    payload = base64.b64encode(path.read_bytes()).decode()\n    return f\"data:{mime};base64,{payload}\"\n",
+      "src/analyst/data.py": "\"\"\"Analyse a CSV file.\n\nThe lesson here: do the arithmetic in Python, and let the AI do the reading.\nSending 40,000 rows and asking \"what is the total\" is slow, expensive and wrong.\nComputing the total yourself and asking \"what does this pattern mean\" is fast,\ncheap and right.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport csv\nimport statistics\nfrom pathlib import Path\nfrom typing import Any\n\nfrom .core import ask\n\nINSIGHT_SCHEMA = {\n    \"type\": \"object\",\n    \"properties\": {\n        \"headline\": {\"type\": \"string\"},\n        \"findings\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n        \"anomalies\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n        \"next_checks\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n    },\n    \"required\": [\"headline\", \"findings\", \"anomalies\", \"next_checks\"],\n    \"additionalProperties\": False,\n}\n\n\ndef profile(path: Path) -> dict[str, Any]:\n    \"\"\"Describe a CSV without an AI: shape, types, ranges, gaps.\"\"\"\n    rows = list(csv.DictReader(Path(path).open(encoding=\"utf-8-sig\", newline=\"\")))\n    if not rows:\n        return {\"row_count\": 0, \"columns\": {}}\n\n    columns: dict[str, Any] = {}\n    for name in rows[0]:\n        values = [r.get(name, \"\") for r in rows]\n        filled = [v for v in values if v not in (\"\", None)]\n        numbers: list[float] = []\n        for v in filled:\n            try:\n                numbers.append(float(v))\n            except (TypeError, ValueError):\n                pass\n\n        info: dict[str, Any] = {\n            \"missing\": len(values) - len(filled),\n            \"distinct\": len(set(filled)),\n        }\n        if numbers and len(numbers) == len(filled):\n            info[\"kind\"] = \"number\"\n            info[\"min\"] = min(numbers)\n            info[\"max\"] = max(numbers)\n            info[\"mean\"] = round(statistics.fmean(numbers), 4)\n            if len(numbers) > 1:\n                info[\"stdev\"] = round(statistics.stdev(numbers), 4)\n                odd = _outliers(numbers)\n                info[\"outliers\"] = len(odd)\n                info[\"outlier_values\"] = odd[:5]\n        else:\n            info[\"kind\"] = \"text\"\n            counts: dict[str, int] = {}\n            for v in filled:\n                counts[v] = counts.get(v, 0) + 1\n            info[\"top\"] = sorted(counts.items(), key=lambda kv: -kv[1])[:5]\n        columns[name] = info\n\n    return {\"row_count\": len(rows), \"columns\": columns, \"sample\": rows[:5]}\n\n\ndef _outliers(numbers: list[float]) -> list[float]:\n    \"\"\"Values far outside the middle half of the data (the 1.5 x IQR rule).\n\n    Worth doing in Python: a language model shown only a min, a max and a mean\n    will call a spike 'variability' and move on. Handing it the actual odd\n    values is the difference between a vague answer and a useful one.\n    \"\"\"\n    if len(numbers) < 4:\n        return []\n    ordered = sorted(numbers)\n    q1 = statistics.median(ordered[: len(ordered) // 2])\n    q3 = statistics.median(ordered[(len(ordered) + 1) // 2 :])\n    gap = q3 - q1\n    if gap == 0:\n        return []\n    low, high = q1 - 1.5 * gap, q3 + 1.5 * gap\n    odd = {n for n in numbers if n < low or n > high}\n    return sorted(odd)\n\n\ndef analyse_data(path: Path, question: str | None = None) -> dict:\n    facts = profile(path)\n    instruction = question or (\n        \"You are a data analyst. You are given a computed profile of a dataset, \"\n        \"not the raw rows. Explain what it shows. State a number only if it \"\n        \"appears in the profile. If something cannot be concluded, say so.\"\n    )\n    result = ask(instruction, _render(facts), schema=INSIGHT_SCHEMA)\n    assert isinstance(result, dict)\n    result[\"_profile\"] = facts\n    return result\n\n\ndef _render(facts: dict[str, Any]) -> str:\n    lines = [f\"Rows: {facts['row_count']}\", \"\", \"Columns:\"]\n    for name, info in facts[\"columns\"].items():\n        bits = [f\"kind={info['kind']}\", f\"missing={info['missing']}\", f\"distinct={info['distinct']}\"]\n        for key in (\"min\", \"max\", \"mean\", \"stdev\"):\n            if key in info:\n                bits.append(f\"{key}={info[key]}\")\n        if info.get(\"outlier_values\"):\n            bits.append(\"unusual_values=\" + \", \".join(str(v) for v in info[\"outlier_values\"]))\n        if \"top\" in info:\n            bits.append(\"top=\" + \", \".join(f\"{v}({c})\" for v, c in info[\"top\"]))\n        lines.append(f\"  {name}: \" + \"  \".join(bits))\n    lines += [\"\", \"First rows:\"]\n    for row in facts.get(\"sample\", []):\n        lines.append(\"  \" + \" | \".join(f\"{k}={v}\" for k, v in row.items()))\n    return \"\\n\".join(lines)\n",
+      "profile_show.py": "\"\"\"Print the profile the way a person reads it.\"\"\"\n\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, \"src\")\nfrom analyst.data import profile\n\np = profile(Path(\"samples/orders.csv\"))\ncols = p[\"columns\"]\nprint(f'orders.csv  ->  {p[\"row_count\"]} rows, {len(cols)} columns')\n\nfor name in (\"delivery_days\", \"courier\", \"status\"):\n    info = cols[name]\n    print()\n    print(f'{name:<16}{info[\"kind\"]}')\n    if info[\"kind\"] == \"number\":\n        for key in (\"missing\", \"distinct\", \"min\", \"max\", \"mean\", \"stdev\"):\n            print(f'  {key:<10} {info[key]}')\n    else:\n        for value, count in info[\"top\"]:\n            print(f'  {value:<18} {count}')\n",
+      "check.py": "\"\"\"The one check that caught the bug: does the tool name the worst delay?\"\"\"\n\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, \"src\")\nfrom analyst.data import profile\n\nresults = []\n\n\ndef check(name, ok, detail=\"\"):\n    results.append(ok)\n    print(f'    [{\"PASS\" if ok else \"FAIL\"}] {name}' + (f\" - {detail}\" if detail else \"\"))\n\n\nprint(\"4. DATA: profile is computed in Python, not guessed\")\np = profile(Path(\"samples/orders.csv\"))\ndays = p[\"columns\"][\"delivery_days\"]\n\ncheck(\"row count is exact\", p[\"row_count\"] == 50, str(p[\"row_count\"]))\ncheck(\"delivery_days is numeric despite the blanks\", days[\"kind\"] == \"number\")\ncheck(\"found the 2 undelivered orders\", days[\"missing\"] == 2, str(days[\"missing\"]))\ncheck(\"flagged the slow deliveries as outliers\",\n      days.get(\"outliers\", 0) > 0, f'outliers={days.get(\"outliers\")}')\ncheck(\"named the worst delay, 19.4 days\",\n      19.4 in days.get(\"outlier_values\", []), str(days.get(\"outlier_values\")))\n\npassed = sum(results)\nprint(f\"  {passed} passed, {len(results) - passed} failed\")\nsys.exit(0 if passed == len(results) else 1)\n",
+      "ground_truth.py": "\"\"\"Ground-truth check for the episode 3 hallucination claim.\"\"\"\n\nimport csv\nfrom pathlib import Path\n\nROOT = Path(__file__).resolve().parents[0]\nrows = list(csv.DictReader((ROOT / \"samples\" / \"orders.csv\").open(encoding=\"utf-8-sig\", newline=\"\")))\n\nlost = [r for r in rows if r[\"status\"] == \"lost_in_transit\"]\nprint(\"lost_in_transit orders:\")\nfor r in lost:\n    print(f\"  {r['order_id']}  region={r['region']}  courier={r['courier']}\")\n\nprint(\"\\nlost orders per courier:\")\nfor c in sorted({r[\"courier\"] for r in rows}):\n    n = sum(1 for r in lost if r[\"courier\"] == c)\n    total = sum(1 for r in rows if r[\"courier\"] == c)\n    print(f\"  {c:<10} {n} lost of {total} orders\")\n\nprint(\"\\nlost orders per region:\")\nfor g in sorted({r[\"region\"] for r in rows}):\n    n = sum(1 for r in lost if r[\"region\"] == g)\n    print(f\"  {g:<8} {n}\")\n\nprint(\"\\ndelivery_days by courier:\")\nfor c in sorted({r[\"courier\"] for r in rows}):\n    v = [float(r[\"delivery_days\"]) for r in rows\n         if r[\"courier\"] == c and r[\"delivery_days\"]]\n    print(f\"  {c:<10} min {min(v):<6} max {max(v):<6} mean {sum(v) / len(v):.2f}  n={len(v)}\")\n\nprint(\"\\nVERDICT\")\nprint(\"  model said : 'FarReach is responsible for 2 out of 2 lost_in_transit orders'\")\nprint(\"  truth      : FarReach lost 0. Both lost orders are RapidPost, North region.\")\nprint(\"  model said : 'two lost orders ... 20% of the orders from the Remote region'\")\nprint(\"  truth      : 0 lost orders in Remote. Both are in North.\")\n"
+    },
+    "copy": {
+      "samples/orders.csv": "ai-analyst-tutorial/samples/orders.csv"
+    },
+    "commands": [
+      "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/",
+      "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
+      "test -d .venv || uv venv --python 3.13 >/dev/null 2>&1",
+      "uv pip install --quiet openai python-dotenv >/dev/null 2>&1",
+      "export PATH=\"$PWD/.venv/bin:$PATH\""
+    ]
+  },
+  "steps": [
+    {
+      "id": "rows",
+      "action": "run",
+      "cmd": "head -4 samples/orders.csv",
+      "label": "the first rows of the order file",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "SO-1001",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "header",
+          "text": "order_id,date,region"
+        },
+        {
+          "id": "first",
+          "text": "SO-1001"
+        }
+      ]
+    },
+    {
+      "id": "profile",
+      "action": "run",
+      "cmd": "python profile_show.py",
+      "label": "fifty rows described without a model",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "19.4",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "max",
+          "text": "19.4"
+        },
+        {
+          "id": "mean",
+          "text": "5.2592"
+        },
+        {
+          "id": "courier",
+          "text": "FarReach"
+        },
+        {
+          "id": "status",
+          "text": "lost_in_transit"
+        }
+      ]
+    },
+    {
+      "id": "redtest",
+      "action": "run",
+      "cmd": "python check.py",
+      "label": "the check that went red",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "[FAIL] named the worst delay"
+      },
+      "marks": [
+        {
+          "id": "fail",
+          "text": "[FAIL] named the worst delay, 19.4 days"
+        },
+        {
+          "id": "mild",
+          "text": "[5.48, 5.5, 5.52, 5.54, 5.55]"
+        }
+      ]
+    }
+  ]
+}
