@@ -1043,11 +1043,29 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
   const server = await startServer({workspace: ws});
   console.log(`  server ready at ${server.url}`);
   const profile = path.resolve('out/rec-profile');
+  // LAY OUT AT THE WIDTH VS CODE SHOULD HAVE, RENDER AT THE DELIVERY RESOLUTION.
+  //
+  // Owner, on the finished cuts: *"what I see in past videos is that it's blurry a bit,
+  // and does not look like full HD."* He is right and the cause is arithmetic. This surface
+  // was pinned at `deviceScaleFactor: 1` with a 1600x900 viewport, so every frame was
+  // captured at 1600x900 and then UPSCALED 1.2x into a 1920x1080 delivery frame — every
+  // glyph resampled, which is exactly the softness that reads as a cheap window.
+  //
+  // The browser surface was fixed for this months ago and the editor surface was not, which
+  // is the same one-call-site habit that left `reveal` unable to see a Monaco line.
+  // `deviceScaleFactor` separates the two numbers: the workbench still LAYS OUT at 1600 CSS
+  // px, so the editor font stays the right size relative to the frame, and Chrome RENDERS
+  // it at 3200x1800. capture.mjs then downscales to 1920 with lanczos, which is a
+  // supersample and is sharper than capturing at 1920 natively would have been.
+  //
+  // Marks, bboxes and ink are all measured in CSS pixels and the video is a UNIFORM scale
+  // of the same frame, so every normalised coordinate survives untouched.
+  const dsf = demo.deviceScaleFactor ?? 2;
   const ctx = await chromium.launchPersistentContext(profile, {
     headless,
     viewport,
-    deviceScaleFactor: 1,
-    args: ['--force-device-scale-factor=1'],
+    deviceScaleFactor: dsf,
+    args: [`--force-device-scale-factor=${dsf}`, '--high-dpi-support=1'],
     permissions: ['clipboard-read', 'clipboard-write'],
   });
   const page = ctx.pages()[0] || (await ctx.newPage());

@@ -1,0 +1,47 @@
+{
+  "slug": "where-keys-come-from",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 2,
+  "fps": 30,
+  "prep": {
+    "url": "https://ollama.com",
+    "dismiss": ["Reject all cookies", "Accept all cookies", "Accept", "Got it"]
+  },
+  "steps": [
+    {
+      "id": "ollama",
+      "action": "expect",
+      "text": "Ollama",
+      "label": "the free one that runs on your own machine",
+      "holdMs": 2200
+    },
+    {
+      "id": "gemini",
+      "action": "goto",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "label": "Google's own pricing page",
+      "settleMs": 2500,
+      "holdMs": 1500,
+      "marks": [{"id": "free", "text": "Free"}]
+    },
+    {
+      "id": "freetier",
+      "action": "scroll",
+      "by": 700,
+      "label": "the free tier, in their words",
+      "holdMs": 2000,
+      "marks": [{"id": "tier", "text": "Free"}]
+    },
+    {
+      "id": "groq",
+      "action": "goto",
+      "url": "https://console.groq.com/docs/rate-limits",
+      "label": "Groq: limits instead of a bill",
+      "settleMs": 2500,
+      "holdMs": 2000,
+      "marks": [{"id": "limits", "text": "Rate Limits"}]
+    }
+  ]
+}

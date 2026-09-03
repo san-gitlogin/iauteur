@@ -23,7 +23,7 @@
       "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
       "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
       "export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig",
-      "rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git"
+      "rm -rf .venv src uv.lock pyproject.toml README.md .python-version main.py .git .gitignore"
     ]
   },
   "steps": [

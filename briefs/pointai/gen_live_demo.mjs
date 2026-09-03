@@ -141,7 +141,12 @@ const demo = {
       'export PATH="/tmp/iauteur-bin:$PATH" UV_NO_MODIFY_PATH=1',
       "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
       'export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig',
-      'rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git',
+      // .gitignore IS IN THIS LIST FOR A REASON. The take types `.env` into it, so a
+      // second run starts with a .gitignore that already excludes `.env` — and VS Code's
+      // Quick Open honours .gitignore, so `openFile .env` finds nothing and the recording
+      // dies four steps in. A demo that only works the first time is a demo that cannot be
+      // re-recorded, which is the whole point of keeping them in the repo.
+      'rm -rf .venv src uv.lock pyproject.toml README.md .python-version main.py .git .gitignore',
     ],
   },
   steps: [
