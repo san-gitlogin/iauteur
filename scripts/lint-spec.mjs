@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import {SCREENPLAY_NAMES, SCREENPLAYS} from './screenplays.mjs';
 import {resolveSi} from './lib/si-resolve.mjs';
+import {MANIFEST} from './lib/manifest.mjs';
 
 import {DARK_THEMES, LIGHT_THEMES, THEMES, TYPES, SEM, ZONES, TRANSITIONS, ANIMS, BUDGET, BACKGROUNDS, HOOK_MAX_FRAMES, FAMILY, CONSOLIDATED} from './lib/constants.mjs';
 
@@ -323,6 +324,33 @@ if (spec.thumbnail && subject) {
 //
 // A linter cannot check whether a number is TRUE. It can insist that the beat carrying it
 // says where it came from, which is the question that would have stopped both: writing
+// ── A SCENE WHOSE DATA IS THE WRONG SHAPE RENDERS A BLACK FRAME, SILENTLY ───────────
+//
+// PAID FOR, 2026-09-04: an ICON_GRID beat was authored as `data: {heading, items}`
+// because the LIST_BUILD beat three scenes later is flat and looks identical in the
+// builder. ICON_GRID reads `data.iconGrid`, so the component got `undefined`, drew
+// nothing, and the cut carried NINETEEN SECONDS OF BLACK in the middle of a chapter.
+// Everything upstream agreed it was fine: `tsc` passes (`data` is a union), the
+// linter had no opinion (it never consults the manifest), anchor-spec and sync walked
+// the anchors happily, and the render succeeded. It was found by pulling a still.
+//
+// The manifest already knows every type's `data_key`. This asks the one question that
+// closes the class: is the payload where the component will look for it?
+{
+  const missing = [];
+  for (const sc of spec.scenes ?? []) {
+    const key = MANIFEST[sc.type]?.data_key;
+    if (!key) continue;                       // HOOK, TITLE_CARD, RECAP … read data flat
+    const v = sc.data?.[key];
+    if (v == null || typeof v !== 'object') {
+      missing.push(`${sc.id}: ${sc.type} reads data.${key}, which is ` +
+        `${v == null ? 'absent' : typeof v} — the scene would render EMPTY. ` +
+        `Present: {${Object.keys(sc.data ?? {}).join(', ') || 'nothing'}}`);
+    }
+  }
+  for (const m of missing) E(m);
+}
+
 // `source:` forces you to name one, and "I averaged it" is not a source you will type.
 // Cheap, and it makes the invented case feel as awkward as it is.
 {

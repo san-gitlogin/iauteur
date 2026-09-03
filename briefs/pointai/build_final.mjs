@@ -197,7 +197,8 @@ scenes.push(chapter(
       b: {name: 'paid', color: 'blue'},
       rows: [
         {label: 'On your own laptop', a: 'Ollama', b: '—', winner: 'a', atWord: at(n, 'laptop')},
-        {label: 'Data leaves your PC', a: 'no (Ollama)', b: 'yes', atWord: at(n, 'leaves')},
+        {label: 'Nothing leaves the PC', a: 'Ollama', b: 'no', winner: 'a',
+         atWord: at(n, 'leaves')},
         {label: 'Cloud, no card', a: 'Groq · Google', b: '—', winner: 'a', atWord: at(n, 'cloud')},
         {label: 'A few hundred files', a: '£0', b: '~£1', atWord: at(n, 'hundred')},
         {label: 'Switching later', a: '3 lines', b: '3 lines', atWord: at(n, 'swapping')},
@@ -253,15 +254,17 @@ scenes.push(chapter(
     "Normally you install Python, then make a virtual environment, then use pip to fetch libraries, " +
     "and then keep a requirements file so somebody else can rebuild it. " +
     "uv replaces all four, and you never have to learn what any of them were.";
-  scenes.push(scene('ICON_GRID', n, {
-    heading: 'uv replaces all four',
+  // ICON_GRID reads `data.iconGrid`. This was authored flat — the shape LIST_BUILD
+  // uses three scenes later — and rendered nineteen seconds of black.
+  scenes.push(scene('ICON_GRID', n, {iconGrid: {
+    cols: 4,
     items: [
       {icon: 'si:python', label: 'Python install', atWord: at(n, 'install')},
       {icon: 'lucide:box', label: 'virtual env', atWord: at(n, 'virtual')},
       {icon: 'lucide:package', label: 'pip', atWord: at(n, 'pip')},
       {icon: 'lucide:file-text', label: 'requirements', atWord: at(n, 'requirements')},
     ],
-  }));
+  }}));
 }
 
 {

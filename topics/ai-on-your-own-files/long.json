@@ -1136,9 +1136,10 @@
               "atWord": 5.417
             },
             {
-              "label": "Data leaves your PC",
-              "a": "no (Ollama)",
-              "b": "yes",
+              "label": "Nothing leaves the PC",
+              "a": "Ollama",
+              "b": "no",
+              "winner": "a",
               "atWord": 12
             },
             {
@@ -1683,29 +1684,31 @@
       "transition": "zoom",
       "background": "zoneC",
       "data": {
-        "heading": "uv replaces all four",
-        "items": [
-          {
-            "icon": "si:python",
-            "label": "Python install",
-            "atWord": 15.75
-          },
-          {
-            "icon": "lucide:box",
-            "label": "virtual env",
-            "atWord": 19.833
-          },
-          {
-            "icon": "lucide:package",
-            "label": "pip",
-            "atWord": 24
-          },
-          {
-            "icon": "lucide:file-text",
-            "label": "requirements",
-            "atWord": 29
-          }
-        ]
+        "iconGrid": {
+          "cols": 4,
+          "items": [
+            {
+              "icon": "si:python",
+              "label": "Python install",
+              "atWord": 15.75
+            },
+            {
+              "icon": "lucide:box",
+              "label": "virtual env",
+              "atWord": 19.833
+            },
+            {
+              "icon": "lucide:package",
+              "label": "pip",
+              "atWord": 24
+            },
+            {
+              "icon": "lucide:file-text",
+              "label": "requirements",
+              "atWord": 29
+            }
+          ]
+        }
       },
       "durationFrames": 567,
       "audio": "audio/ai-on-your-own-files_s12.mp3",
