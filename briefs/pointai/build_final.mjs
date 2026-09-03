@@ -101,14 +101,14 @@ const scenes = [];
 
 {
   const n =
-    "Here's the whole shape of the project, and it's smaller than you'd think. " +
     "Your file goes into Python. " +
     "Python describes the file — counts the rows, works out the ranges, spots the gaps — " +
-    "and the description is a few hundred words instead of forty thousand rows. " +
-    "The description goes to the model, " +
+    "so the description that comes out is a few hundred words " +
+    "instead of forty thousand rows. " +
+    "That description is what goes to the model, " +
     "and what comes back is a sentence you can act on. " +
-    "Four boxes. That's the entire project, and everything after this is typing, " +
-    "because the shape never changes.";
+    "Four boxes, and that's the whole shape of the project. " +
+    "Everything after this is typing, because the shape never changes.";
   scenes.push(scene('DIAGRAM', n, {diagram: {
     layout: 'flow',
     direction: 'horizontal',
@@ -120,7 +120,7 @@ const scenes = [];
       {id: 'm', label: 'The model', sub: 'reads, then answers', color: 'orange', atWord: at(n, 'model')},
     ],
     edges: [
-      {from: 'f', to: 'p', label: 'you point it', atWord: at(n, 'goes')},
+      {from: 'f', to: 'p', label: 'you point it', atWord: at(n, 'into')},
       {from: 'p', to: 'd', label: 'no AI yet', atWord: at(n, 'ranges')},
       {from: 'd', to: 'm', label: 'facts, not rows', atWord: at(n, 'goes', 2)},
     ],
@@ -470,10 +470,10 @@ scenes.push(chapter(
 {
   const n =
     "Forty thousand rows. " +
-    "That is an ordinary export off an ordinary system, " +
-    "and it is the thing everybody tries to paste into a chat window first. " +
+    "An ordinary export, and the thing everybody tries " +
+    "to paste into a chat window first. " +
     "On fifty rows, pasting works fine. " +
-    "At forty thousand it stops working, " +
+    "At forty thousand it stops, " +
     "because every row has to fit in the model's window at once.";
   scenes.push(scene('STAT_CALLOUT', n, {
     value: 40000,
@@ -646,8 +646,7 @@ scenes.push(chapter(
 
 {
   const n =
-    "One new thing goes into this call, and it's worth a moment. " +
-    "A system message. " +
+    "A system message — that's the one new thing in this call, and it's worth a moment. " +
     "Role user is the question you are asking right now; " +
     "role system is the standing instruction — who the model is being, for the whole call. " +
     "Here it says: you are a data analyst, use only these facts. " +
