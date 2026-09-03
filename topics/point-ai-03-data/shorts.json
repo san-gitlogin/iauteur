@@ -1,22 +1,266 @@
 {
   "meta": {
-    "topic": "Data: the mistake everyone makes",
+    "topic": "An AI blamed a courier that lost nothing",
+    "subject": "spreadsheet",
     "format": "short",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "onePayoff": "a confident, specific claim that the rows disprove in one count",
+    "openLoop": "which courier actually lost the parcels?",
+    "analogy": "a tally where the accused row stays empty",
+    "screenplay": "explainer",
+    "topicAxes": [
+      "skill-build",
+      "economic-pain"
+    ],
+    "seo": {
+      "title": "It blamed the wrong courier. Confidently. #python #ai",
+      "description": "Asked about one courier, the model answered \"responsible for 2 out of 2 lost orders\". That courier lost none. Both lost parcels belong to a different one — and the profile it was given had no row joining a courier to an outcome.",
+      "queries": [
+        "ai hallucination example",
+        "why does ai make up statistics",
+        "ai data analysis wrong",
+        "llm confidently wrong"
+      ],
+      "tags": [
+        "ai",
+        "python",
+        "data analysis",
+        "hallucination",
+        "shorts",
+        "llm",
+        "csv",
+        "spreadsheet",
+        "point ai at it"
+      ],
+      "sources": [
+        "https://github.com/san-gitlogin/iauteur"
+      ]
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
-    "channel": "YOUR CHANNEL",
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
     "logo": "img:channel_logo.png"
   },
   "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
+    "title": "SPREADSHEET, WRONG ANSWER",
+    "badge": "it blamed the wrong courier",
+    "asset": "si:python",
     "frames": 2
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "I asked an AI one question about a spreadsheet. It answered with a name, a number, and total confidence.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "IT BLAMED THE WRONG ONE",
+        "subtext": "one spreadsheet question, answered wrong",
+        "hookVariant": "statement",
+        "headlineAtWord": 9.083
+      },
+      "durationFrames": 239,
+      "audio": "audio/point-ai-03-data-shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "CLAIM_CHECK",
+      "narration": "Fifty orders, three couriers, two parcels lost. I asked whether anything was wrong with FarReach, and back came this: FarReach is responsible for two out of two lost-in-transit orders. That's checkable, so check it. One square per order, and the lost ones lit. CityLink lost none of twenty. FarReach lost none of ten. RapidPost lost two of twenty — and both of them are RapidPost's. Same even tone for the true half and the false one.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "claimCheck": {
+          "headline": "Every order, counted",
+          "claims": [
+            {
+              "text": "FarReach is responsible for 2 out of 2 'lost_in_transit' orders.",
+              "tag": "it said",
+              "color": "red",
+              "atWord": 18.917
+            }
+          ],
+          "subject": "FarReach",
+          "tallyLabel": "one square per order",
+          "hitLabel": "lost",
+          "tally": [
+            {
+              "label": "CityLink",
+              "value": 0,
+              "threshold": 20,
+              "atWord": 42.833
+            },
+            {
+              "label": "FarReach",
+              "value": 0,
+              "threshold": 10,
+              "color": "red",
+              "atWord": 48.5
+            },
+            {
+              "label": "RapidPost",
+              "value": 2,
+              "threshold": 20,
+              "color": "green",
+              "atWord": 53.833
+            }
+          ],
+          "verdict": "FarReach lost nothing",
+          "verdictAtWord": 58.083,
+          "source": "samples/orders.csv",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 872,
+      "audio": "audio/point-ai-03-data-shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "narration": "Twenty lines of Python say the same thing. Two orders lost, both in North, both carried by RapidPost. It guessed because it was handed a summary counted per column — so nothing it had ever joined a courier to an outcome.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "the same question, counted",
+          "premise": "The order file, counted per courier and per region.",
+          "layout": "full",
+          "color": "green",
+          "clips": [
+            {
+              "ref": "rec:analyst-fixed#truth",
+              "label": "the count, per courier",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "north",
+                  "atWord": 14.167
+                },
+                {
+                  "marks": [
+                    "farreach",
+                    "rapidpost"
+                  ],
+                  "atWord": 20.25
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "both are RapidPost",
+                  "mark": "north",
+                  "side": "right",
+                  "color": "blue",
+                  "atWord": 18.417
+                },
+                {
+                  "text": "not one parcel",
+                  "mark": "farreach",
+                  "side": "right",
+                  "color": "red",
+                  "atWord": 24.75
+                }
+              ],
+              "id": "truth",
+              "src": "rec/analyst-fixed/seg-02.mp4",
+              "frames": 98,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "farreach": {
+                  "x": 387,
+                  "y": 213,
+                  "w": 216,
+                  "h": 19
+                },
+                "rapidpost": {
+                  "x": 387,
+                  "y": 232,
+                  "w": 216,
+                  "h": 19
+                },
+                "north": {
+                  "x": 387,
+                  "y": 118,
+                  "w": 66,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 480,
+                  "y": 80,
+                  "w": 206,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 80,
+                  "w": 394,
+                  "h": 76
+                },
+                {
+                  "x": 368,
+                  "y": 175,
+                  "w": 300,
+                  "h": 76
+                },
+                {
+                  "x": 368,
+                  "y": 270,
+                  "w": 216,
+                  "h": 76
+                },
+                {
+                  "x": 368,
+                  "y": 365,
+                  "w": 469,
+                  "h": 76
+                },
+                {
+                  "x": 368,
+                  "y": 460,
+                  "w": 731,
+                  "h": 114
+                }
+              ],
+              "shows": "$ python ground_truth.py",
+              "atWord": 2.167
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 408,
+      "audio": "audio/point-ai-03-data-shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "narration": "If a number matters, compute it. The full breakdown is on the channel.",
+      "transition": "wipe",
+      "background": "zoneA",
+      "data": {
+        "message": "If a number matters, compute it",
+        "sub": "Point AI At It · part three"
+      },
+      "durationFrames": 140,
+      "audio": "audio/point-ai-03-data-shorts_s04.mp3",
+      "timingSource": "tts"
+    }
+  ]
 }

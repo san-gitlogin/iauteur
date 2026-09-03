@@ -111,6 +111,99 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-09-03 (evening) — "Point AI At It" begins, and four measurements that failed soft
+
+A six-part tutorial series is in flight: **Point AI At It**, teaching someone in IT to point
+a model at their text, their spreadsheets and their screenshots. The owner's brief, the
+curriculum, the production bible, the provider prices and the test evidence all live in
+`ai-analyst-tutorial/` — **untracked on purpose**: it carries a live `.env` and a Windows
+`.venv`, and publishing it to a public repo is a decision, not a side effect of authoring a
+video. `briefs/pointai/` carries everything the specs need.
+
+**Episode 3 is done** — `topics/point-ai-03-data/long.json`, 48 scenes, 14m12s, lint and
+critique clean. Order: author → bake-rec → anchor-spec → voice → sync → lint → still sweep →
+render. The remaining five episodes reuse the same builder shape (`briefs/pointai/build_ep03.mjs`).
+
+**Three components were built** (LAW 0e.8), each because the beat asked for a picture none of
+the 358 types could draw. The test is never what a beat LOOKS like, it is what the picture
+ASSERTS:
+
+| type | the object, said out loud before it was built |
+|---|---|
+| `MODEL_SHRUG` | two ledgers, and a number that only appears in one. The beat is an ABSENCE — the one thing a card, a chart and a list all fail at, because each can only draw what IS there |
+| `CLAIM_CHECK` | a quoted claim, and the things it is about, counted. Fifty orders become fifty squares; two light red, and neither is in the row the claim blames |
+| `COLUMN_SPLIT` | a table taken apart column by column. Two lists with an arrow between them is a diagram OF the idea; the idea is a LOSS, so the join is destroyed on camera |
+
+Each enforces its own EDITORIAL contract, which is where the value was: `MODEL_SHRUG` rejects
+a needle that also appears in the "missed" list (then it was not missed and the stamp is a
+lie); `COLUMN_SPLIT` rejects a question anchored before the tear (asked while the rows are
+still joined, the answer is on screen and the beat teaches the opposite).
+
+#### Four measurements that ran and threw their answer away
+
+All four were silent — valid spec, green linter, clean `tsc`, successful render — and three
+of the four are the SAME defect wearing different clothes.
+
+1. **`inkFor()` returned the wrong SHAPE on the VS Code path.** The browser branch (added the
+   day before, in this repo, by me) returns `{rects, vp}`; the VS Code early-return still
+   handed back a bare array, and the caller reads `got.rects`. So every VS Code recording
+   since measured its ink correctly and discarded it, and `ink: null` reads to the overlay
+   solver as *"the screen is empty"* — which is precisely the blindness the browser branch
+   was written to cure, reintroduced at the other end of the same function.
+   **`check-recordings` failed the render.** That is the seal doing its whole job.
+2. **`reveal` could never find a line in the editor.** Monaco renders every space as U+00A0,
+   so `"return sorted(odd)"` was on screen, in the DOM, and did not `.includes()` the string
+   a human typed into the demo. `marksFor` already normalises this and carries a comment
+   saying it was paid for on the SQLite cut — **the fix went into one call site and not the
+   class**, so the next surface to need it re-learned it from scratch.
+3. **`headingFor()` reported `EXPLORER` for all six clips.** The workbench's real headings
+   name its panels, not its content, so the *"your label → the screen's own words"* preflight
+   agreed with everything and could catch nothing. On the VS Code surface it now reads the
+   last command in the terminal or the open file, and reads back
+   `the profile it prints -> $ 50 rows, 8 columns`.
+4. **A LIST of anchors is invisible to the anchor plumbing.** `DATABASE_TABLE` gained
+   `highlightAtWords` (parallel to `highlight`), and both `sync.mjs` and the linter's
+   collector test `typeof v === 'number'` — so the array would have survived sync as raw WORD
+   indices while every other anchor in the scene became a frame, and the rows would have lit
+   at arbitrary moments with nothing failing anywhere. Both now handle any `…AtWords` key.
+
+#### A transform reserves no layout space, and a travel has TWO ends
+
+`COLUMN_SPLIT`'s halves move apart in vertical. The lower one landed on the question card; I
+reserved room at that end, re-rendered, and the file-name kicker was *still* missing — because
+the UPPER half was riding over it. Fixing the end you happened to look at is how a field ends
+up declared, drawn, and invisible. Same beat, same travel, two edges, two reservations.
+
+#### Estimate the read at a MEASURED rate — estimating LOW hides the shortfall until after the voice
+
+The first sync landed **12m15s against a 15:00 brief**. The builder estimated at 150 words a
+minute (the production bible's figure for a *human* read); `en-US-AvaMultilingualNeural`
+delivers this script at **183**. Estimating low is the dangerous direction, because the miss
+only appears after a full voice-and-sync round trip. `briefs/pointai/build_ep03.mjs` now
+prints its rate and its measured basis. The fix was six more BEATS, every one sourced — never
+padding an existing beat, which only breaks its ceiling.
+
+#### Two places the source had to be overruled, both recorded in the builder
+
+- The curriculum's chapter 1 says the pasted-rows answer gets *"the arithmetic wrong"*, and no
+  capture of that exists in any of the four documents. Chapter one argues what IS measured —
+  four times the input, a worse answer — and the wrongness is promised and paid off twice
+  where it really was recorded. **Flagged rather than staged.**
+- `docs/04-TEST-EVIDENCE.md` §4.3 explains the wrong-courier answer with *"There is no row
+  anywhere in it"*. `_render()` in `analyst/data.py` **does** append five sample rows. The
+  explanation survives for a sharper reason — those five are the FIRST five and all five
+  arrived safely — so the only rows the model could see were the ones where nothing went
+  wrong. Repeating the document's sentence would have put a false statement on screen, and
+  LAW 3 outranks a source's phrasing.
+
+#### And a guard that caught a sentence I had just written
+
+The opening beat read *"Three things go wrong in the next fifteen minutes, and every one of
+them really happened."* That is LAW 0f's banned move exactly, and none of the guard's twelve
+patterns matched it, because the adverb attaches to a VERB rather than to one of the
+authenticity adjectives it knew. The guard covers the *really/actually happened* family now,
+and was break-tested on the sentence that provoked it.
+
 ### 2026-09-03 (later still) — the footage was cast by its name, and the scroll was a teleport
 
 Owner, on the finished cut: *"you speak about comparison table, but you are showing this

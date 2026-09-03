@@ -547,6 +547,50 @@ different clothes, and every one of them was silent — valid spec, green linter
    `.map((c) =>` before you render"*, and the bug then happened three more times. The
    corollary count went 3 → 8 under a rule made of good intentions.
 
+### Corollary — A TRANSFORM RESERVES NO LAYOUT SPACE, AND A TRAVEL HAS TWO ENDS (2026-09-03)
+
+`COLUMN_SPLIT` tears a table in half: in 9:16 the upper column travels UP and the lower one
+travels DOWN, both on `transform: translateY`. A transform paints outside the flow and takes
+no room in it, so the lower half landed on top of the question card beneath it. I reserved
+clearance at that end, re-rendered — and the file-name kicker above the board was *still*
+missing, because the UPPER half was riding over it.
+
+**One travel has two edges, and fixing the one you happened to look at is how a field ends up
+declared, drawn, and invisible.** Whenever something moves by transform, ask what is on the
+other side of it too. The same sweep applies to `translateX` on a wide cut, to a pill that
+overshoots its track, and to any `landAt` overshoot near a container edge.
+
+### Corollary — ESTIMATE THE READ AT A MEASURED RATE (2026-09-03)
+
+A builder's pre-sync estimate is the ONLY chance to catch a short cut before paying for a
+voice-and-sync round trip, and LAW 0e.6a already says to check it. It is worth nothing if the
+rate is wrong. The episode-3 builder estimated at **150 words a minute** — the figure
+`docs/02-PRODUCTION-BIBLE.md` gives for a *human* read — and `en-US-AvaMultilingualNeural`
+delivered the same script at **183**. So the builder printed 15m20s, sync produced **12m15s**
+against a 15:00 brief, and the 18% shortfall only existed after the audio did.
+
+- **Estimating LOW is the dangerous direction.** A high estimate shows up as a ceiling warning
+  you fix in the builder; a low one shows up as a finished, too-short cut.
+- **Print the rate and what measured it** (`~3.05 words/s`), so the next author can see the
+  assumption instead of inheriting it. Re-measure when the voice changes.
+- **The remedy for a short cut is more BEATS, never more words in the beats you have** — every
+  beat is already at the ceiling its anchors earned, so padding one just trips the guard.
+
+### Corollary — AN ANCHOR CAN BE A LIST, AND THE PLUMBING HAS TO KNOW (2026-09-03)
+
+`DATABASE_TABLE` lit every matched row on one ramp, so a beat that reads three order numbers
+aloud lit all three at once — and, carrying a single anchor, could never earn more than the
+16s static ceiling however much it had to say. The fix is per-row anchors, and the field is a
+LIST: `highlightAtWords`, parallel to `highlight`.
+
+Both `sync.mjs` and `lint-spec.mjs`'s `collectAnchors` test `/atword$/i && typeof v ===
+'number'`, so an array matched neither — the recursion walked into it, found keys `"0"`/`"1"`,
+and moved on. The list would have **survived sync as raw word indices** while every other
+anchor in the scene became a frame, and the rows would have lit at arbitrary moments with
+nothing failing anywhere. Both now handle any `…AtWords` key. **When you add an anchor in a
+new SHAPE, grep for every place that recognises anchors by name** — the retargeter, the range
+check, and the scene-ceiling counter are three separate readers of the same convention.
+
 ### Corollary — FIX THE CLASS, NOT THE INSTANCE (owner, 2026-09-03)
 
 Owner, on a finished cut: *"this issue of this title card is persisting please correct"* —
