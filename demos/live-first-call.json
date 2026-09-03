@@ -1,0 +1,111 @@
+{
+  "slug": "live-first-call",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "firstcall",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "prep": {
+    "files": {
+      ".env": "",
+      "ask.py": ""
+    },
+    "commands": [
+      "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/",
+      "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
+      "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
+      "export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig",
+      "rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git"
+    ]
+  },
+  "steps": [
+    {
+      "id": "init",
+      "action": "run",
+      "cmd": "uv init --app",
+      "label": "start the project",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {"contains": "Initialized project", "exitCode": 0},
+      "marks": [{"id": "made", "text": "Initialized project"}]
+    },
+    {
+      "id": "add",
+      "action": "run",
+      "cmd": "uv add openai python-dotenv",
+      "label": "install the one library every provider speaks",
+      "focus": "terminal",
+      "expect": {"contains": "openai", "exitCode": 0},
+      "marks": [{"id": "lib", "text": "+ openai"}]
+    },
+    {
+      "id": "openenv",
+      "action": "openFile",
+      "path": ".env",
+      "label": "the file the key lives in",
+      "focus": "editor"
+    },
+    {
+      "id": "typeenv",
+      "action": "type",
+      "at": "start",
+      "focus": "editor",
+      "label": "three lines that choose your provider",
+      "text": "AI_BASE_URL=http://localhost:11434/v1\nAI_API_KEY=ollama\nAI_MODEL=qwen3:4b",
+      "typeDelay": 38
+    },
+    {"id": "saveenv", "action": "save", "label": "save it"},
+    {
+      "id": "openask",
+      "action": "openFile",
+      "path": "ask.py",
+      "label": "an empty file",
+      "focus": "editor"
+    },
+    {
+      "id": "typeclient",
+      "action": "type",
+      "at": "start",
+      "focus": "editor",
+      "label": "import the library and build the client",
+      "text": "import os\nfrom dotenv import load_dotenv\nfrom openai import OpenAI\n\nload_dotenv()\n\nclient = OpenAI(\n    base_url=os.getenv(\"AI_BASE_URL\"),\n    api_key=os.getenv(\"AI_API_KEY\"),\n)",
+      "typeDelay": 34,
+      "marks": [
+        {"id": "import", "text": "from openai import OpenAI"},
+        {"id": "baseurl", "text": "base_url=os.getenv"}
+      ]
+    },
+    {"id": "saveclient", "action": "save", "label": "save"},
+    {
+      "id": "typecall",
+      "action": "type",
+      "at": "end",
+      "focus": "editor",
+      "label": "the one call that does every job in this video",
+      "text": "\nr = client.chat.completions.create(\n    model=os.getenv(\"AI_MODEL\"),\n    messages=[\n        {\"role\": \"user\", \"content\": \"Reply with exactly the word: ready\"},\n    ],\n)\n\nprint(r.choices[0].message.content)\nprint(r.usage)",
+      "typeDelay": 30,
+      "marks": [
+        {"id": "create", "text": "client.chat.completions.create"},
+        {"id": "messages", "text": "messages=["},
+        {"id": "role", "text": "\"role\": \"user\""},
+        {"id": "content", "text": "r.choices[0].message.content"},
+        {"id": "usage", "text": "print(r.usage)"}
+      ]
+    },
+    {"id": "savecall", "action": "save", "label": "save"},
+    {
+      "id": "runit",
+      "action": "run",
+      "cmd": "uv run python ask.py",
+      "label": "run it",
+      "focus": "terminal",
+      "timeout": 180000,
+      "clearFirst": true,
+      "expect": {"contains": "ready", "exitCode": 0},
+      "marks": [
+        {"id": "answer", "text": "ready"},
+        {"id": "tokens", "text": "CompletionUsage"}
+      ]
+    }
+  ]
+}
