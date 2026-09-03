@@ -93,10 +93,7 @@
         "subtext": "from an empty folder, in one sitting",
         "hookVariant": "statement",
         "headlineAtWord": 1
-      },
-      "durationFrames": 234,
-      "audio": "audio/ai-on-your-own-files_s01.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s02",
@@ -107,10 +104,7 @@
       "data": {
         "title": "Make an AI read your own files",
         "subtitle": "a complete Python project, from an empty folder"
-      },
-      "durationFrames": 467,
-      "audio": "audio/ai-on-your-own-files_s02.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s03",
@@ -128,28 +122,28 @@
               "label": "Your file",
               "sub": "csv, log, export",
               "color": "blue",
-              "atWord": 10
+              "atWord": 15
             },
             {
               "id": "p",
               "label": "Python",
               "sub": "counts and measures",
               "color": "green",
-              "atWord": 12.083
+              "atWord": 18
             },
             {
               "id": "d",
               "label": "A description",
               "sub": "a few hundred words",
               "color": "purple",
-              "atWord": 29.25
+              "atWord": 37
             },
             {
               "id": "m",
               "label": "The model",
               "sub": "reads, then answers",
               "color": "orange",
-              "atWord": 41.917
+              "atWord": 53
             }
           ],
           "edges": [
@@ -157,26 +151,23 @@
               "from": "f",
               "to": "p",
               "label": "you point it",
-              "atWord": 10.917
+              "atWord": 16
             },
             {
               "from": "p",
               "to": "d",
               "label": "no AI yet",
-              "atWord": 24.333
+              "atWord": 30
             },
             {
               "from": "d",
               "to": "m",
               "label": "facts, not rows",
-              "atWord": 39.5
+              "atWord": 50
             }
           ]
         }
-      },
-      "durationFrames": 775,
-      "audio": "audio/ai-on-your-own-files_s03.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s04",
@@ -190,10 +181,7 @@
           "title": "Where the AI comes from",
           "subtitle": "three doors, and two of them are free"
         }
-      },
-      "durationFrames": 161,
-      "audio": "audio/ai-on-your-own-files_s04.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s05",
@@ -215,8 +203,8 @@
               "zooms": [
                 {
                   "at": "full",
-                  "wantAtWord": 15.167,
-                  "atWord": 29.167
+                  "wantAtWord": 24,
+                  "atWord": 42
                 }
               ],
               "id": "ollama",
@@ -387,7 +375,7 @@
                 }
               ],
               "shows": "Run open models. Get more usage.",
-              "atWord": 2.417
+              "atWord": 4
             }
           ],
           "sourceNote": "Source: ollama.com — read 2026-09-04",
@@ -395,17 +383,15 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 454,
-      "audio": "audio/ai-on-your-own-files_s05.mp3",
-      "timingSource": "tts"
+      "durationFrames": 657
     },
     {
       "id": "s06",
       "type": "LOGO_WALL",
-      "narration": "And before you write a local model off as a hobby thing — these are the logos Ollama puts on its own front page. Apple. NVIDIA. Netflix. NASA. Intel. Running a model on hardware you control is not the amateur option — it's the only option when the data cannot leave the building.",
+      "narration": "Apple. NVIDIA. Netflix. NASA. Intel. Those are the logos Ollama puts on its own front page, which is worth knowing before you write a local model off as a hobby thing. Running a model on hardware you control is not the amateur option — it's the only option when the data cannot leave the building.",
       "transition": "dip",
       "background": "zoneC",
       "data": {
@@ -414,36 +400,33 @@
             {
               "icon": "si:apple",
               "label": "Apple",
-              "atWord": 16.25
+              "atWord": 1
             },
             {
               "icon": "si:nvidia",
               "label": "NVIDIA",
-              "atWord": 18.5
+              "atWord": 2
             },
             {
               "icon": "si:netflix",
               "label": "Netflix",
-              "atWord": 21.083
+              "atWord": 3
             },
             {
               "icon": "si:nasa",
               "label": "NASA",
-              "atWord": 23.333
+              "atWord": 4
             },
             {
               "icon": "si:intel",
               "label": "Intel",
-              "atWord": 25.5
+              "atWord": 5
             }
           ],
           "cols": 5
         },
         "source": "Logos shown on ollama.com, read 2026-09-04"
-      },
-      "durationFrames": 521,
-      "audio": "audio/ai-on-your-own-files_s06.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s07",
@@ -468,8 +451,8 @@
                   "mark": "free",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 13.25,
-                  "atWord": 13.25
+                  "wantAtWord": 18,
+                  "atWord": 18
                 }
               ],
               "id": "gemini",
@@ -780,13 +763,13 @@
                 }
               ],
               "shows": "Gemini Developer API pricing",
-              "atWord": 2.167
+              "atWord": 4
             },
             {
               "ref": "rec:where-keys-come-from#freetier",
               "label": "the line that decides it",
               "focus": true,
-              "wantAtWord": 29.083,
+              "wantAtWord": 39,
               "id": "freetier",
               "src": "rec/where-keys-come-from/seg-03.mp4",
               "frames": 69,
@@ -1095,7 +1078,7 @@
                 }
               ],
               "shows": "Enterprise",
-              "atWord": 29.083
+              "atWord": 39
             }
           ],
           "sourceNote": "Source: ai.google.dev/gemini-api/docs/pricing — read 2026-09-04",
@@ -1103,12 +1086,10 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 637,
-      "audio": "audio/ai-on-your-own-files_s07.mp3",
-      "timingSource": "tts"
+      "durationFrames": 825
     },
     {
       "id": "s08",
@@ -1133,42 +1114,39 @@
               "a": "Ollama",
               "b": "—",
               "winner": "a",
-              "atWord": 5.417
+              "atWord": 7
             },
             {
               "label": "Nothing leaves the PC",
               "a": "Ollama",
               "b": "no",
               "winner": "a",
-              "atWord": 12
+              "atWord": 13
             },
             {
               "label": "Cloud, no card",
               "a": "Groq · Google",
               "b": "—",
               "winner": "a",
-              "atWord": 15.667
+              "atWord": 18
             },
             {
               "label": "A few hundred files",
               "a": "£0",
               "b": "~£1",
-              "atWord": 26.417
+              "atWord": 34
             },
             {
               "label": "Switching later",
               "a": "3 lines",
               "b": "3 lines",
-              "atWord": 40.333
+              "atWord": 55
             }
           ],
-          "atWord": 2.167
+          "atWord": 3
         },
         "source": "Read from the providers’ own pages, 2026-09-04"
-      },
-      "durationFrames": 585,
-      "audio": "audio/ai-on-your-own-files_s08.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s09",
@@ -1190,13 +1168,13 @@
               "zooms": [
                 {
                   "mark": "limits",
-                  "wantAtWord": 16,
-                  "atWord": 16
+                  "wantAtWord": 21,
+                  "atWord": 21
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 32.917,
-                  "atWord": 41.583
+                  "wantAtWord": 48,
+                  "atWord": 59
                 }
               ],
               "callouts": [
@@ -1205,8 +1183,8 @@
                   "mark": "limits",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 22.167,
-                  "atWord": 22.167
+                  "wantAtWord": 31,
+                  "atWord": 31
                 }
               ],
               "id": "groq",
@@ -1517,7 +1495,7 @@
                 }
               ],
               "shows": "Rate Limits",
-              "atWord": 1.75
+              "atWord": 4
             }
           ],
           "sourceNote": "Source: console.groq.com/docs/rate-limits — read 2026-09-04",
@@ -1525,12 +1503,10 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 691,
-      "audio": "audio/ai-on-your-own-files_s09.mp3",
-      "timingSource": "tts"
+      "durationFrames": 909
     },
     {
       "id": "s10",
@@ -1544,10 +1520,7 @@
           "title": "From an empty folder",
           "subtitle": "one command, and Python comes with it"
         }
-      },
-      "durationFrames": 173,
-      "audio": "audio/ai-on-your-own-files_s10.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s11",
@@ -1572,8 +1545,8 @@
                   "mark": "csv",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 8.083,
-                  "atWord": 8.083
+                  "wantAtWord": 13,
+                  "atWord": 13
                 }
               ],
               "id": "look",
@@ -1608,21 +1581,21 @@
                 }
               ],
               "shows": "$ ls",
-              "atWord": 1.417
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#peek",
               "label": "the first rows",
               "focus": true,
-              "wantAtWord": 29.25,
+              "wantAtWord": 41,
               "callouts": [
                 {
                   "text": "a header, then data",
                   "mark": "header",
                   "side": "bottom",
                   "color": "green",
-                  "wantAtWord": 30.333,
-                  "atWord": 40.25
+                  "wantAtWord": 43,
+                  "atWord": 52
                 }
               ],
               "id": "peek",
@@ -1663,24 +1636,22 @@
                 }
               ],
               "shows": "$ head -3 orders.csv",
-              "atWord": 29.25
+              "atWord": 41
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 611,
-      "audio": "audio/ai-on-your-own-files_s11.mp3",
-      "timingSource": "tts"
+      "durationFrames": 849
     },
     {
       "id": "s12",
       "type": "ICON_GRID",
-      "narration": "Before the commands, one sentence about uv, because uv is the thing that saves you an evening. Normally you install Python, then make a virtual environment, then use pip to fetch libraries, and then keep a requirements file so somebody else can rebuild it. uv replaces all four, and you never have to learn what any of them were.",
+      "narration": "A Python install. A virtual environment. Pip, to fetch the libraries. And a requirements file, so somebody else can rebuild what you built. That is four things you would normally have to learn before writing a line, and uv replaces all four of them. One sentence about uv, then, because uv is the thing that saves you an evening: you never have to learn what any of those four were.",
       "transition": "zoom",
       "background": "zoneC",
       "data": {
@@ -1690,29 +1661,26 @@
             {
               "icon": "si:python",
               "label": "Python install",
-              "atWord": 15.75
+              "atWord": 2
             },
             {
               "icon": "lucide:box",
               "label": "virtual env",
-              "atWord": 19.833
+              "atWord": 5
             },
             {
               "icon": "lucide:package",
               "label": "pip",
-              "atWord": 24
+              "atWord": 7
             },
             {
               "icon": "lucide:file-text",
               "label": "requirements",
-              "atWord": 29
+              "atWord": 14
             }
           ]
         }
-      },
-      "durationFrames": 567,
-      "audio": "audio/ai-on-your-own-files_s12.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s13",
@@ -1737,8 +1705,8 @@
                   "mark": "made",
                   "side": "bottom",
                   "color": "green",
-                  "wantAtWord": 10.167,
-                  "atWord": 13.583
+                  "wantAtWord": 10,
+                  "atWord": 14
                 }
               ],
               "id": "init",
@@ -1773,29 +1741,29 @@
                 }
               ],
               "shows": "$ uv init --app",
-              "atWord": 5.583
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#tree",
               "label": "what it wrote",
               "focus": true,
-              "wantAtWord": 14.333,
+              "wantAtWord": 15,
               "callouts": [
                 {
                   "text": "what this project needs",
                   "mark": "proj",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 16.833,
-                  "atWord": 25.75
+                  "wantAtWord": 19,
+                  "atWord": 30
                 },
                 {
                   "text": "which Python to use",
                   "mark": "pyver",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 30.75,
-                  "atWord": 30.75
+                  "wantAtWord": 35,
+                  "atWord": 35
                 }
               ],
               "id": "tree",
@@ -1836,21 +1804,21 @@
                 }
               ],
               "shows": "$ ls -a",
-              "atWord": 14.333
+              "atWord": 15
             },
             {
               "ref": "rec:azure-full#add",
               "label": "installing the library",
               "focus": true,
-              "wantAtWord": 40,
+              "wantAtWord": 49,
               "callouts": [
                 {
                   "text": "this one talks to all of them",
                   "mark": "lib",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 58.25,
-                  "atWord": 58.25
+                  "wantAtWord": 67,
+                  "atWord": 67
                 }
               ],
               "id": "add",
@@ -1885,19 +1853,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 40
+              "atWord": 49
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2.75
+          "atWord": 2
         }
       },
-      "durationFrames": 966,
-      "audio": "audio/ai-on-your-own-files_s13.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1137
     },
     {
       "id": "s14",
@@ -1911,10 +1877,7 @@
           "title": "Where the key lives",
           "subtitle": "never in your code — not once"
         }
-      },
-      "durationFrames": 137,
-      "audio": "audio/ai-on-your-own-files_s14.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s15",
@@ -1947,12 +1910,9 @@
             "plus": 1,
             "minus": 1
           },
-          "atWord": 1.167
+          "atWord": 4
         }
-      },
-      "durationFrames": 398,
-      "audio": "audio/ai-on-your-own-files_s15.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s16",
@@ -1993,37 +1953,37 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 1.75
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#typeenv",
               "label": "three lines, typed",
               "focus": true,
-              "wantAtWord": 28.167,
+              "wantAtWord": 37,
               "callouts": [
                 {
                   "text": "the address you talk to",
                   "mark": "url",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 30.583,
-                  "atWord": 43.667
+                  "wantAtWord": 41,
+                  "atWord": 59
                 },
                 {
                   "text": "masked — yours goes here",
                   "mark": "masked",
                   "side": "right",
                   "color": "red",
-                  "wantAtWord": 50.167,
-                  "atWord": 50.167
+                  "wantAtWord": 68,
+                  "atWord": 68
                 },
                 {
                   "text": "which brain",
                   "mark": "model",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 66.25,
-                  "atWord": 53.333
+                  "wantAtWord": 91,
+                  "atWord": 73
                 }
               ],
               "id": "typeenv",
@@ -2070,13 +2030,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 28.167
+              "atWord": 37
             },
             {
               "ref": "rec:azure-full#saveenv",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 73.75,
+              "wantAtWord": 96,
               "id": "saveenv",
               "src": "rec/azure-full/seg-08.mp4",
               "frames": 38,
@@ -2105,19 +2065,17 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 58
+              "atWord": 80
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 1164,
-      "audio": "audio/ai-on-your-own-files_s16.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1521
     },
     {
       "id": "s17",
@@ -2138,12 +2096,9 @@
           ],
           "footNote": "one line, written once, on day one",
           "color": "green",
-          "atWord": 18.333
+          "atWord": 25
         }
-      },
-      "durationFrames": 403,
-      "audio": "audio/ai-on-your-own-files_s17.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s18",
@@ -2184,21 +2139,21 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 1.75
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#typeignore",
               "label": "one line, typed",
               "focus": true,
-              "wantAtWord": 11.333,
+              "wantAtWord": 18,
               "callouts": [
                 {
                   "text": "thirty seconds, once",
                   "mark": "ignored",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 15.417,
-                  "atWord": 34.833
+                  "wantAtWord": 24,
+                  "atWord": 57
                 }
               ],
               "id": "typeignore",
@@ -2233,13 +2188,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 28.167
+              "atWord": 44
             },
             {
               "ref": "rec:azure-full#saveignore",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 26.083,
+              "wantAtWord": 43,
               "id": "saveignore",
               "src": "rec/azure-full/seg-11.mp4",
               "frames": 38,
@@ -2268,19 +2223,17 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 39.333
+              "atWord": 62
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 662,
-      "audio": "audio/ai-on-your-own-files_s18.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1017
     },
     {
       "id": "s19",
@@ -2294,10 +2247,7 @@
           "title": "Your first call",
           "subtitle": "nine lines, and what each one does"
         }
-      },
-      "durationFrames": 170,
-      "audio": "audio/ai-on-your-own-files_s19.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s20",
@@ -2338,29 +2288,29 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 2.667
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#client",
               "label": "imports, then the client",
               "focus": true,
-              "wantAtWord": 10,
+              "wantAtWord": 14,
               "callouts": [
                 {
                   "text": "the library, not the company",
                   "mark": "import",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 36.167,
-                  "atWord": 56.083
+                  "wantAtWord": 43,
+                  "atWord": 67
                 },
                 {
                   "text": "from the file, not from here",
                   "mark": "apikey",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 53.75,
-                  "atWord": 56.667
+                  "wantAtWord": 62,
+                  "atWord": 68
                 }
               ],
               "id": "client",
@@ -2419,24 +2369,22 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 39.5
+              "atWord": 46
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 854,
-      "audio": "audio/ai-on-your-own-files_s20.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1066
     },
     {
       "id": "s21",
       "type": "DIAGRAM",
-      "narration": "Before we type the call, here is what a call actually is, because once you have this, everything else in the video is a variation on it. You send a list of messages. Each message has a role — who is speaking — and content, which is what they said. The model reads the list and adds one message of its own. You read that reply out of choices, index zero, message, content. That's the whole interface, and the interface doesn't get bigger than this.",
+      "narration": "Your program on one side, the model on the other — that is what a call actually is, and once you have this, everything else in the video is a variation on it. You send a list of messages. Each message has a role — who is speaking — and content, which is what they said. The model reads the list and adds one message of its own. You read that reply out of choices, index zero, message, content. That's the whole interface, and the interface doesn't get bigger than this.",
       "transition": "wipe",
       "background": "zoneC",
       "data": {
@@ -2448,35 +2396,32 @@
               "label": "Your program",
               "sub": "builds the list",
               "color": "blue",
-              "atWord": 16.833
+              "atWord": 2
             },
             {
               "id": "mdl",
               "label": "The model",
               "sub": "reads, then replies",
               "color": "purple",
-              "atWord": 33.167
+              "atWord": 7
             }
           ],
           "edges": [
             {
               "from": "you",
               "to": "mdl",
-              "label": "role + content",
-              "atWord": 23.25
+              "label": "role and content",
+              "atWord": 44
             },
             {
               "from": "mdl",
               "to": "you",
               "label": "choices[0]",
-              "atWord": 45.667
+              "atWord": 75
             }
           ]
         }
-      },
-      "durationFrames": 742,
-      "audio": "audio/ai-on-your-own-files_s21.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s22",
@@ -2501,24 +2446,24 @@
                   "mark": "messages",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 15.083,
-                  "atWord": 30.167
+                  "wantAtWord": 14,
+                  "atWord": 33
                 },
                 {
                   "text": "who is speaking",
                   "mark": "role",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 16.917,
-                  "atWord": 32.583
+                  "wantAtWord": 15,
+                  "atWord": 36
                 },
                 {
                   "text": "what you are billed on",
                   "mark": "usage",
                   "side": "right",
                   "color": "yellow",
-                  "wantAtWord": 35.5,
-                  "atWord": 35.5
+                  "wantAtWord": 42,
+                  "atWord": 42
                 }
               ],
               "id": "thecall",
@@ -2595,13 +2540,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 4.833
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#saveask",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 37.667,
+              "wantAtWord": 44,
               "id": "saveask",
               "src": "rec/azure-full/seg-15.mp4",
               "frames": 38,
@@ -2648,23 +2593,23 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 37.667
+              "atWord": 44
             },
             {
               "ref": "rec:azure-full#runask",
               "label": "running it",
               "focus": true,
-              "wantAtWord": 40.083,
+              "wantAtWord": 46,
               "zooms": [
                 {
                   "mark": "answer",
-                  "wantAtWord": 44,
-                  "atWord": 55.167
+                  "wantAtWord": 53,
+                  "atWord": 64
                 },
                 {
                   "mark": "tokens",
-                  "wantAtWord": 51.333,
-                  "atWord": 57.75
+                  "wantAtWord": 59,
+                  "atWord": 67
                 }
               ],
               "callouts": [
@@ -2673,8 +2618,8 @@
                   "mark": "answer",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 44.917,
-                  "atWord": 57.583
+                  "wantAtWord": 54,
+                  "atWord": 66
                 }
               ],
               "id": "runask",
@@ -2739,19 +2684,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 43.083
+              "atWord": 50
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2.75
+          "atWord": 2
         }
       },
-      "durationFrames": 871,
-      "audio": "audio/ai-on-your-own-files_s22.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1053
     },
     {
       "id": "s23",
@@ -2765,26 +2708,20 @@
           "title": "Describing your file",
           "subtitle": "Python counts so the model needn’t"
         }
-      },
-      "durationFrames": 129,
-      "audio": "audio/ai-on-your-own-files_s23.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s24",
       "type": "STAT_CALLOUT",
-      "narration": "And go round the thing everybody tries first. The instinct is to paste the whole file into a chat window and ask your question. On fifty rows that works fine. On forty thousand rows it stops working, because every row has to fit in the model's window at once.",
+      "narration": "Forty thousand rows. That is an ordinary export off an ordinary system, and it is the thing everybody tries to paste into a chat window first. On fifty rows, pasting works fine. At forty thousand it stops working, because every row has to fit in the model's window at once.",
       "transition": "iris",
       "background": "zoneC",
       "data": {
         "value": 40000,
         "label": "rows a paste cannot carry",
-        "atWord": 23.917,
-        "source": "An ordinary Monday-morning export"
-      },
-      "durationFrames": 459,
-      "audio": "audio/ai-on-your-own-files_s24.mp3",
-      "timingSource": "tts"
+        "atWord": 1,
+        "source": "An ordinary export off an ordinary system"
+      }
     },
     {
       "id": "s25",
@@ -2798,12 +2735,9 @@
           "fx": "highlight",
           "sub": "the whole idea, in six words",
           "color": "green",
-          "atWord": 2.333
+          "atWord": 5
         }
-      },
-      "durationFrames": 324,
-      "audio": "audio/ai-on-your-own-files_s25.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s26",
@@ -2844,7 +2778,7 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 3.25
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#d1",
@@ -2857,8 +2791,8 @@
                   "mark": "reader",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 29.75,
-                  "atWord": 47.083
+                  "wantAtWord": 30,
+                  "atWord": 58
                 }
               ],
               "id": "d1",
@@ -2905,21 +2839,21 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 37
+              "atWord": 39
             },
             {
               "ref": "rec:azure-full#d2",
               "label": "walking the columns",
               "focus": true,
-              "wantAtWord": 51.917,
+              "wantAtWord": 63,
               "callouts": [
                 {
                   "text": "its values, blanks skipped",
                   "mark": "vals",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 65.333,
-                  "atWord": 60.25
+                  "wantAtWord": 80,
+                  "atWord": 75
                 }
               ],
               "id": "d2",
@@ -2972,19 +2906,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 51.917
+              "atWord": 63
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 948,
-      "audio": "audio/ai-on-your-own-files_s26.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1197
     },
     {
       "id": "s27",
@@ -3004,12 +2936,9 @@
             "text": "Measure it — or count it",
             "color": "green"
           },
-          "atWord": 16.583
+          "atWord": 27
         }
-      },
-      "durationFrames": 453,
-      "audio": "audio/ai-on-your-own-files_s27.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s28",
@@ -3031,8 +2960,8 @@
               "zooms": [
                 {
                   "mark": "try",
-                  "wantAtWord": 10.833,
-                  "atWord": 21.667
+                  "wantAtWord": 13,
+                  "atWord": 31
                 }
               ],
               "callouts": [
@@ -3041,8 +2970,8 @@
                   "mark": "except",
                   "side": "right",
                   "color": "orange",
-                  "wantAtWord": 30.417,
-                  "atWord": 30.417
+                  "wantAtWord": 46,
+                  "atWord": 46
                 }
               ],
               "id": "d3",
@@ -3095,29 +3024,29 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 3.667
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#d4",
               "label": "a number column measured",
               "focus": true,
-              "wantAtWord": 35.75,
+              "wantAtWord": 53,
               "callouts": [
                 {
                   "text": "the smallest and the largest",
                   "mark": "minmax",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 45.75,
-                  "atWord": 55.583
+                  "wantAtWord": 65,
+                  "atWord": 78
                 },
                 {
                   "text": "and the average of them",
                   "mark": "mean",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 49.833,
-                  "atWord": 59.167
+                  "wantAtWord": 70,
+                  "atWord": 82
                 }
               ],
               "id": "d4",
@@ -3170,21 +3099,21 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 35.75
+              "atWord": 53
             },
             {
               "ref": "rec:azure-full#d5",
               "label": "the text branch",
               "focus": true,
-              "wantAtWord": 63.917,
+              "wantAtWord": 86,
               "callouts": [
                 {
                   "text": "the three most common",
                   "mark": "top",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 60,
-                  "atWord": 87.333
+                  "wantAtWord": 83,
+                  "atWord": 114
                 }
               ],
               "id": "d5",
@@ -3243,19 +3172,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 63.917
+              "atWord": 86
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2.333
+          "atWord": 2
         }
       },
-      "durationFrames": 1351,
-      "audio": "audio/ai-on-your-own-files_s28.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1809
     },
     {
       "id": "s29",
@@ -3269,10 +3196,7 @@
           "title": "Run it, then fix it",
           "subtitle": "the part tutorials usually edit out"
         }
-      },
-      "durationFrames": 117,
-      "audio": "audio/ai-on-your-own-files_s29.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s30",
@@ -3337,23 +3261,23 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 1.75
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#rundesc",
               "label": "describe.py, running",
               "focus": true,
-              "wantAtWord": 1.75,
+              "wantAtWord": 4,
               "zooms": [
                 {
                   "mark": "days",
-                  "wantAtWord": 19.917,
-                  "atWord": 46.417
+                  "wantAtWord": 23,
+                  "atWord": 50
                 },
                 {
                   "mark": "courier",
-                  "wantAtWord": 39.167,
-                  "atWord": 49.25
+                  "wantAtWord": 44,
+                  "atWord": 52
                 }
               ],
               "callouts": [
@@ -3362,8 +3286,8 @@
                   "mark": "days",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 27.25,
-                  "atWord": 48.75
+                  "wantAtWord": 33,
+                  "atWord": 51
                 }
               ],
               "id": "rundesc",
@@ -3440,19 +3364,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 34.5
+              "atWord": 40
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 763,
-      "audio": "audio/ai-on-your-own-files_s30.mp3",
-      "timingSource": "tts"
+      "durationFrames": 825
     },
     {
       "id": "s31",
@@ -3466,12 +3388,9 @@
           "fx": "split",
           "sub": "so skip the column entirely",
           "color": "orange",
-          "atWord": 20.25
+          "atWord": 30
         }
-      },
-      "durationFrames": 385,
-      "audio": "audio/ai-on-your-own-files_s31.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s32",
@@ -3526,21 +3445,21 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 1.583
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#typefix",
               "label": "two lines, typed in",
               "focus": true,
-              "wantAtWord": 11.25,
+              "wantAtWord": 17,
               "callouts": [
                 {
                   "text": "every value is different",
                   "mark": "guard",
                   "side": "right",
                   "color": "orange",
-                  "wantAtWord": 19.917,
-                  "atWord": 30.667
+                  "wantAtWord": 29,
+                  "atWord": 41
                 }
               ],
               "id": "typefix",
@@ -3593,13 +3512,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 19.917
+              "atWord": 29
             },
             {
               "ref": "rec:azure-full#savefix",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 33.75,
+              "wantAtWord": 43,
               "id": "savefix",
               "src": "rec/azure-full/seg-27.mp4",
               "frames": 64,
@@ -3646,21 +3565,21 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 33.75
+              "atWord": 43
             },
             {
               "ref": "rec:azure-full#rerun",
               "label": "run it again",
               "focus": true,
-              "wantAtWord": 36,
+              "wantAtWord": 47,
               "callouts": [
                 {
                   "text": "order_id is gone",
                   "mark": "region",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 42.167,
-                  "atWord": 50.083
+                  "wantAtWord": 53,
+                  "atWord": 65
                 }
               ],
               "id": "rerun",
@@ -3731,19 +3650,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 42.167
+              "atWord": 53
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 754,
-      "audio": "audio/ai-on-your-own-files_s32.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1041
     },
     {
       "id": "s33",
@@ -3757,10 +3674,7 @@
           "title": "Hand it the facts",
           "subtitle": "the description goes, the rows stay home"
         }
-      },
-      "durationFrames": 120,
-      "audio": "audio/ai-on-your-own-files_s33.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s34",
@@ -3807,21 +3721,21 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 3.333
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#a1",
               "label": "the shortest of the three",
               "focus": true,
-              "wantAtWord": 11.583,
+              "wantAtWord": 16,
               "callouts": [
                 {
                   "text": "hands us the text",
                   "mark": "capture",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 30.667,
-                  "atWord": 41.75
+                  "wantAtWord": 39,
+                  "atWord": 55
                 }
               ],
               "id": "a1",
@@ -3880,19 +3794,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 25.25
+              "atWord": 32
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1.417
+          "atWord": 2
         }
       },
-      "durationFrames": 676,
-      "audio": "audio/ai-on-your-own-files_s34.mp3",
-      "timingSource": "tts"
+      "durationFrames": 950
     },
     {
       "id": "s35",
@@ -3909,21 +3821,21 @@
               "label": "system",
               "sub": "who you are being",
               "color": "purple",
-              "atWord": 9.25
+              "atWord": 14
             },
             {
               "id": "usr",
               "label": "user",
               "sub": "what you are asking",
               "color": "blue",
-              "atWord": 13.25
+              "atWord": 17
             },
             {
               "id": "out",
               "label": "the reply",
               "sub": "shaped by both",
               "color": "green",
-              "atWord": 35.833
+              "atWord": 49
             }
           ],
           "edges": [
@@ -3931,20 +3843,17 @@
               "from": "sys",
               "to": "out",
               "label": "standing rule",
-              "atWord": 21
+              "atWord": 30
             },
             {
               "from": "usr",
               "to": "out",
               "label": "this question",
-              "atWord": 14.833
+              "atWord": 20
             }
           ]
         }
-      },
-      "durationFrames": 635,
-      "audio": "audio/ai-on-your-own-files_s35.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s36",
@@ -3969,16 +3878,16 @@
                   "mark": "system",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 16.083,
-                  "atWord": 40.167
+                  "wantAtWord": 18,
+                  "atWord": 51
                 },
                 {
                   "text": "description, then question",
                   "mark": "facts",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 64.75,
-                  "atWord": 45.417
+                  "wantAtWord": 78,
+                  "atWord": 58
                 }
               ],
               "id": "a2",
@@ -4055,13 +3964,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 1.583
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#savean",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 51.167,
+              "wantAtWord": 65,
               "id": "savean",
               "src": "rec/azure-full/seg-32.mp4",
               "frames": 38,
@@ -4120,18 +4029,18 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 51.167
+              "atWord": 65
             },
             {
               "ref": "rec:azure-full#runan",
               "label": "save, then run",
               "focus": true,
-              "wantAtWord": 51.917,
+              "wantAtWord": 66,
               "zooms": [
                 {
                   "at": "full",
-                  "wantAtWord": 68.583,
-                  "atWord": 79.75
+                  "wantAtWord": 83,
+                  "atWord": 98
                 }
               ],
               "id": "runan",
@@ -4190,19 +4099,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 55.583
+              "atWord": 71
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 1195,
-      "audio": "audio/ai-on-your-own-files_s36.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1497
     },
     {
       "id": "s37",
@@ -4216,10 +4123,7 @@
           "title": "What to do with it",
           "subtitle": "same twenty lines, your file"
         }
-      },
-      "durationFrames": 110,
-      "audio": "audio/ai-on-your-own-files_s37.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s38",
@@ -4232,29 +4136,26 @@
         "items": [
           {
             "text": "Testing — durations, pass rates per suite",
-            "atWord": 24.25
+            "atWord": 32
           },
           {
             "text": "Development — build times per release",
-            "atWord": 34.583
+            "atWord": 43
           },
           {
             "text": "Analysis — any export from any system",
-            "atWord": 46.25
+            "atWord": 60
           },
           {
             "text": "Supply chain — lead times and stock",
-            "atWord": 55.083
+            "atWord": 70
           },
           {
             "text": "Support — response and resolution times",
-            "atWord": 62.5
+            "atWord": 76
           }
         ]
-      },
-      "durationFrames": 1016,
-      "audio": "audio/ai-on-your-own-files_s38.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s39",
@@ -4274,36 +4175,33 @@
               "title": "ok",
               "sub": "counting",
               "color": "green",
-              "atWord": 15
+              "atWord": 25
             },
             {
               "text": "Which courier is slowest?",
               "title": "ok",
               "sub": "counting",
               "color": "green",
-              "atWord": 26.583
+              "atWord": 37
             },
             {
               "text": "What do these complaints share?",
               "title": "no",
               "sub": "judgement",
               "color": "blue",
-              "atWord": 35.417
+              "atWord": 47
             },
             {
               "text": "Summarise the week in a sentence",
               "title": "no",
               "sub": "judgement",
               "color": "blue",
-              "atWord": 42.417
+              "atWord": 54
             }
           ],
-          "atWord": 1
+          "atWord": 3
         }
-      },
-      "durationFrames": 943,
-      "audio": "audio/ai-on-your-own-files_s39.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s40",
@@ -4316,25 +4214,22 @@
         "points": [
           {
             "text": "A provider — free, or one you already pay for",
-            "atWord": 17.5
+            "atWord": 22
           },
           {
             "text": "A key that never touches your code",
-            "atWord": 20.167
+            "atWord": 26
           },
           {
             "text": "Python describes, the model reads",
-            "atWord": 25.333
+            "atWord": 36
           },
           {
             "text": "Forty lines, any file with a header",
-            "atWord": 36.167
+            "atWord": 53
           }
         ]
-      },
-      "durationFrames": 631,
-      "audio": "audio/ai-on-your-own-files_s40.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s41",
@@ -4345,10 +4240,7 @@
       "data": {
         "message": "Change the filename. Run it.",
         "sub": "works on any file with a header row"
-      },
-      "durationFrames": 367,
-      "audio": "audio/ai-on-your-own-files_s41.mp3",
-      "timingSource": "tts"
+      }
     }
   ]
 }

@@ -146,9 +146,9 @@ scenes.push(chapter(
 
 {
   const n =
-    "And before you write a local model off as a hobby thing — " +
-    "these are the logos Ollama puts on its own front page. " +
     "Apple. NVIDIA. Netflix. NASA. Intel. " +
+    "Those are the logos Ollama puts on its own front page, " +
+    "which is worth knowing before you write a local model off as a hobby thing. " +
     "Running a model on hardware you control is not the amateur option — " +
     "it's the only option when the data cannot leave the building.";
   scenes.push(scene('LOGO_WALL', n, {
@@ -250,18 +250,20 @@ scenes.push(chapter(
 
 {
   const n =
-    "Before the commands, one sentence about uv, because uv is the thing that saves you an evening. " +
-    "Normally you install Python, then make a virtual environment, then use pip to fetch libraries, " +
-    "and then keep a requirements file so somebody else can rebuild it. " +
-    "uv replaces all four, and you never have to learn what any of them were.";
+    "A Python install. A virtual environment. Pip, to fetch the libraries. " +
+    "And a requirements file, so somebody else can rebuild what you built. " +
+    "That is four things you would normally have to learn before writing a line, " +
+    "and uv replaces all four of them. " +
+    "One sentence about uv, then, because uv is the thing that saves you an evening: " +
+    "you never have to learn what any of those four were.";
   // ICON_GRID reads `data.iconGrid`. This was authored flat — the shape LIST_BUILD
   // uses three scenes later — and rendered nineteen seconds of black.
   scenes.push(scene('ICON_GRID', n, {iconGrid: {
     cols: 4,
     items: [
-      {icon: 'si:python', label: 'Python install', atWord: at(n, 'install')},
+      {icon: 'si:python', label: 'Python install', atWord: at(n, 'Python')},
       {icon: 'lucide:box', label: 'virtual env', atWord: at(n, 'virtual')},
-      {icon: 'lucide:package', label: 'pip', atWord: at(n, 'pip')},
+      {icon: 'lucide:package', label: 'pip', atWord: at(n, 'Pip')},
       {icon: 'lucide:file-text', label: 'requirements', atWord: at(n, 'requirements')},
     ],
   }}));
@@ -409,8 +411,9 @@ scenes.push(chapter(
 
 {
   const n =
-    "Before we type the call, here is what a call actually is, " +
-    "because once you have this, everything else in the video is a variation on it. " +
+    "Your program on one side, the model on the other — " +
+    "that is what a call actually is, and once you have this, " +
+    "everything else in the video is a variation on it. " +
     "You send a list of messages. " +
     "Each message has a role — who is speaking — and content, which is what they said. " +
     "The model reads the list and adds one message of its own. " +
@@ -420,12 +423,12 @@ scenes.push(chapter(
     layout: 'sequence',
     nodes: [
       {id: 'you', label: 'Your program', sub: 'builds the list', color: 'blue',
-       atWord: at(n, 'send')},
+       atWord: at(n, 'program')},
       {id: 'mdl', label: 'The model', sub: 'reads, then replies', color: 'purple',
-       atWord: at(n, 'reads')},
+       atWord: at(n, 'model')},
     ],
     edges: [
-      {from: 'you', to: 'mdl', label: 'role + content', atWord: at(n, 'role')},
+      {from: 'you', to: 'mdl', label: 'role and content', atWord: at(n, 'role')},
       {from: 'mdl', to: 'you', label: 'choices[0]', atWord: at(n, 'choices')},
     ],
   }}));
@@ -466,16 +469,17 @@ scenes.push(chapter(
 
 {
   const n =
-    "And go round the thing everybody tries first. " +
-    "The instinct is to paste the whole file into a chat window and ask your question. " +
-    "On fifty rows that works fine. " +
-    "On forty thousand rows it stops working, " +
+    "Forty thousand rows. " +
+    "That is an ordinary export off an ordinary system, " +
+    "and it is the thing everybody tries to paste into a chat window first. " +
+    "On fifty rows, pasting works fine. " +
+    "At forty thousand it stops working, " +
     "because every row has to fit in the model's window at once.";
   scenes.push(scene('STAT_CALLOUT', n, {
     value: 40000,
     label: 'rows a paste cannot carry',
-    atWord: at(n, 'thousand'),
-    source: 'An ordinary Monday-morning export',
+    atWord: at(n, 'Forty'),
+    source: 'An ordinary export off an ordinary system',
   }));
 }
 
