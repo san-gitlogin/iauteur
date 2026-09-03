@@ -116,6 +116,14 @@ export const inkFor = async (page) => {
       return {x: r.x, y: r.y, w: r.width, h: r.height};
     };
     const out = [];
+    // THE VIEWPORT IS MEASURED FOR BOTH SURFACES, not just the browser one. It used to be
+    // declared below, after the VS Code early-return, and that early return handed back a
+    // bare ARRAY while the browser path handed back `{rects, vp}`. The caller reads
+    // `got.rects`, which is `undefined` on an array — so from the moment the browser branch
+    // landed, EVERY VS Code recording measured its ink correctly and then threw it away,
+    // and `ink: null` reads as "the screen is empty" to the overlay solver. Caught by
+    // check-recordings, which exists for exactly this: a measurement that fails soft.
+    const VP = {w: window.innerWidth, h: window.innerHeight};
     const rows = [
       ...document.querySelectorAll('.view-lines .view-line'),
       ...document.querySelectorAll('.xterm-rows > div'),
@@ -125,7 +133,7 @@ export const inkFor = async (page) => {
       const b = glyphBox(el);
       if (b && b.w >= 6 && b.h >= 3) out.push(b);
     }
-    if (out.length) return out;
+    if (out.length) return {rects: out, vp: VP};
 
     // ── A WEB PAGE HAS NO `.view-line`, AND SILENCE IS THE WRONG ANSWER ──────────────
     //
@@ -142,7 +150,6 @@ export const inkFor = async (page) => {
     // the text nodes and take Range.getClientRects(), which returns ONE RECT PER RENDERED
     // LINE — the web equivalent of `.view-line`, and the same shape the merge below wants.
     // Replaced content (images, canvases, video, svg) is ink too, and has no text node.
-    const VP = {w: window.innerWidth, h: window.innerHeight};
     const clip = (r) => {
       const x0 = Math.max(r.left, 0), y0 = Math.max(r.top, 0);
       const x1 = Math.min(r.right, VP.w), y1 = Math.min(r.bottom, VP.h);
@@ -275,7 +282,33 @@ export const headingFor = async (page) => {
       return r.top < window.innerHeight && r.bottom > 0 && r.width > 40 && r.height > 8;
     };
     const clean = (s) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, 80);
-    // A real heading first — that is what a page uses to say what you are looking at.
+    // ── VS CODE FIRST, BECAUSE ITS HEADINGS DESCRIBE THE FURNITURE ──────────────────
+    //
+    // The workbench has real <h2>-shaped headings and they all say things like EXPLORER,
+    // OUTLINE and TIMELINE — the names of panels, not of what the step is showing. Every
+    // clip in the first episode-3 preflight reported `EXPLORER`, which is worse than
+    // useless: the report exists so a label and the screen can be caught disagreeing, and
+    // a constant agrees with nothing. What a VS Code step actually shows is the last
+    // command in the terminal, or the file open in the editor.
+    const term = [...document.querySelectorAll('.xterm-rows > div')]
+      .map((r) => clean(r.innerText)).filter(Boolean);
+    if (term.length) {
+      // the last line that looks like a prompt with a command on it
+      for (let i = term.length - 1; i >= 0; i--) {
+        const m = term[i].match(/[>$#]\s+(\S.*)$/);
+        if (m && m[1].length > 1) return `$ ${m[1]}`;
+      }
+    }
+    const tab = document.querySelector('.part.editor .tab.active');
+    if (tab && vis(tab)) {
+      const name = clean(tab.innerText);
+      if (name) {
+        const line = document.querySelector('.view-lines .view-line.current-line, .view-overlays .current-line');
+        const at = line ? clean(line.innerText) : '';
+        return at ? `${name} — ${at}` : name;
+      }
+    }
+    // A real heading next — that is what a PAGE uses to say what you are looking at.
     for (const sel of ['h1', 'h2', 'h3']) {
       const hits = [...document.querySelectorAll(sel)].filter(vis);
       if (hits.length) {
