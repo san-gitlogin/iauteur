@@ -1432,9 +1432,12 @@ for (const s of spec.scenes ?? []) {
     }
   }
 
-  // ── LIVE_CODE — budgets sized to the NARROW (vertical) editor: 1000px at 38px mono is
-  // ~40 characters, so 52 is where the type has to shrink to fit and the whole argument
-  // for typing on screen (that it is READABLE) starts to go.
+  // ── LIVE_CODE — 62, and it is a measurement rather than a taste (LAW 0n corollary).
+  // The component sizes type to fit BOTH axes: at 62 characters the vertical editor solves
+  // to 1000 / (62 * 0.6 + 4.6) ≈ 24px, which clears the production bible's 20pt floor for
+  // reading on a phone; the wide editor lands near 34px, which is comfortable. Past 62 the
+  // vertical build drops under 20pt and the argument for typing code on screen — that it is
+  // legible — stops being true. Real Python wraps before then anyway.
   if (d.liveCode) {
     const lc = d.liveCode;
     const ls = lc.lines ?? [];
@@ -1448,7 +1451,7 @@ for (const s of spec.scenes ?? []) {
     if (len(lc.caption) > 40) E(`${id}: liveCode caption > 40 chars`);
     if (len(lc.source) > 64) E(`${id}: liveCode source > 64 chars`);
     for (const l of [...(lc.before ?? []), ...ls]) {
-      if (String(l.text ?? '').length > 52) E(`${id}: liveCode line "${String(l.text ?? '').slice(0, 24)}…" > 52 chars`);
+      if (String(l.text ?? '').length > 62) E(`${id}: liveCode line "${String(l.text ?? '').slice(0, 24)}…" > 62 chars`);
       if (len(l.detail) > 40) E(`${id}: liveCode line detail "${l.detail}" > 40 chars`);
     }
     for (const o of lc.output ?? []) {

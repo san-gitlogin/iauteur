@@ -1,0 +1,190 @@
+{
+  "slug": "live-setup",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "setup-live",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 1.5,
+  "fps": 30,
+  "maximizePanel": true,
+  "prep": {
+    "files": {
+      ".env": "AI_BASE_URL=http://localhost:11434/v1\nAI_API_KEY=ollama\nAI_MODEL=qwen3:4b\n",
+      "ask.py": "import os\nfrom dotenv import load_dotenv\nfrom openai import OpenAI\n\nload_dotenv()\n\nclient = OpenAI(\n    base_url=os.getenv(\"AI_BASE_URL\"),\n    api_key=os.getenv(\"AI_API_KEY\"),\n)\n\nanswer = client.chat.completions.create(\n    model=os.getenv(\"AI_MODEL\"),\n    messages=[\n        {\"role\": \"user\", \"content\": \"Reply with exactly the word: ready\"},\n    ],\n)\n\nprint(answer.choices[0].message.content)\nprint(answer.usage)\n",
+      "describe.py": "import csv\nimport statistics\n\nrows = list(csv.DictReader(open(\"orders.csv\")))\nprint(\"rows:\", len(rows))\nprint()\n\nfor name in rows[0]:\n    values = [r[name] for r in rows if r[name]]\n    numbers = []\n    for v in values:\n        try:\n            numbers.append(float(v))\n        except ValueError:\n            pass\n\n    if len(numbers) == len(values):\n        print(f\"{name:<16} min {min(numbers):<7} max {max(numbers):<7}\"\n              f\" mean {round(statistics.fmean(numbers), 2)}\")\n        continue\n\n    counts = {}\n    for v in values:\n        counts[v] = counts.get(v, 0) + 1\n    if len(counts) == len(values):\n        continue\n    top = sorted(counts.items(), key=lambda kv: -kv[1])[:3]\n    print(f\"{name:<16} \" + \", \".join(f\"{k} {n}\" for k, n in top))\n",
+      "analyse.py": "import os\nimport subprocess\nfrom dotenv import load_dotenv\nfrom openai import OpenAI\n\nload_dotenv()\nfacts = subprocess.run(\n    [\"python\", \"describe.py\"], capture_output=True, text=True\n).stdout\n\nclient = OpenAI(\n    base_url=os.getenv(\"AI_BASE_URL\"),\n    api_key=os.getenv(\"AI_API_KEY\"),\n)\n\nanswer = client.chat.completions.create(\n    model=os.getenv(\"AI_MODEL\"),\n    messages=[\n        {\"role\": \"system\", \"content\": \"You are a data analyst. Use only these facts.\"},\n        {\"role\": \"user\", \"content\": facts + \"\\n\\nWhat stands out? Two sentences.\"},\n    ],\n)\n\nprint(answer.choices[0].message.content)\n"
+    },
+    "copy": {
+      "orders.csv": "ai-analyst-tutorial/samples/orders.csv"
+    },
+    "commands": [
+      "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/",
+      "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
+      "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
+      "export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig",
+      "rm -rf .venv src uv.lock pyproject.toml README.md .python-version main.py .git .gitignore"
+    ]
+  },
+  "steps": [
+    {
+      "id": "look",
+      "action": "run",
+      "cmd": "ls",
+      "label": "the folder you start from",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "orders.csv",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "csv",
+          "text": "orders.csv"
+        }
+      ]
+    },
+    {
+      "id": "peek",
+      "action": "run",
+      "cmd": "head -3 orders.csv",
+      "label": "the data itself",
+      "focus": "terminal",
+      "expect": {
+        "contains": "SO-1001",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "header",
+          "text": "order_id,date,region"
+        },
+        {
+          "id": "row1",
+          "text": "SO-1001"
+        }
+      ]
+    },
+    {
+      "id": "init",
+      "action": "run",
+      "cmd": "uv init --app",
+      "label": "one command makes the project",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Initialized project",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "made",
+          "text": "Initialized project"
+        }
+      ]
+    },
+    {
+      "id": "tree",
+      "action": "run",
+      "cmd": "ls -a",
+      "label": "what uv wrote for you",
+      "focus": "terminal",
+      "expect": {
+        "contains": "pyproject.toml",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "proj",
+          "text": "pyproject.toml"
+        },
+        {
+          "id": "pyver",
+          "text": ".python-version"
+        }
+      ]
+    },
+    {
+      "id": "add",
+      "action": "run",
+      "cmd": "uv add openai python-dotenv",
+      "label": "the one library every provider speaks",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "openai",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "lib",
+          "text": "+ openai"
+        }
+      ]
+    },
+    {
+      "id": "runask",
+      "action": "run",
+      "cmd": "uv run python ask.py",
+      "label": "the first call, running",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "ready",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "answer",
+          "text": "ready"
+        },
+        {
+          "id": "tokens",
+          "text": "CompletionUsage"
+        }
+      ]
+    },
+    {
+      "id": "rundesc",
+      "action": "run",
+      "cmd": "uv run python describe.py",
+      "label": "fifty rows, described by Python",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "delivery_days",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "days",
+          "text": "delivery_days"
+        },
+        {
+          "id": "courier",
+          "text": "courier"
+        },
+        {
+          "id": "status",
+          "text": "status"
+        }
+      ]
+    },
+    {
+      "id": "runan",
+      "action": "run",
+      "cmd": "uv run python analyse.py",
+      "label": "the model reads the description",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {
+        "exitCode": 0
+      }
+    }
+  ]
+}

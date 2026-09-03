@@ -137,7 +137,13 @@ const elements = (scene) => {
     // be clamped there, so it has nothing to do with what is being said. Auditing it
     // reports the component's own caption as drift, which the first run did nine times.
     const isBase = anchor && anchor[0] === 'atWord' && depth <= 1;
-    if (anchor && !isBase) {
+    // THE FIRST CLIP OF A FOOTAGE BEAT STARTS WHEN THE BEAT DOES. `anchor-spec` puts it at
+    // word four so the footage begins playing immediately, which is correct and leaves its
+    // label with no chance of matching the opening words. The picture legitimately leads
+    // the sentence by a beat there. Every LATER clip, and every callout, still has to land
+    // on its own word — those are the ones a viewer notices.
+    const isFirstClip = /clips\[0\]$/.test(where);
+    if (anchor && !isBase && !isFirstClip) {
       const pick = (keys) => keys.flatMap((k) => (typeof node[k] === 'string' ? content(node[k]) : []));
       const words = pick(HUMAN).length ? pick(HUMAN) : pick(FALLBACK);
       const shown = [...HUMAN, ...FALLBACK].map((k) => node[k])
