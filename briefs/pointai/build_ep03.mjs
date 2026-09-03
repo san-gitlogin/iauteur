@@ -77,12 +77,12 @@ const scenes = [];
 
 {
   const n =
-    `Welcome back to ${CH}. This is part three of Point AI At It, and today we're pointing ` +
-    "a model at a spreadsheet — fifty orders from a made-up online shop called Bramble and Co. " +
+    `Welcome to ${CH}. Today we're pointing a model at a spreadsheet — ` +
+    "fifty orders from a made-up online shop, standing in for whatever export lands on your desk. " +
     "So when can a model be trusted with a number, and when can it absolutely not?";
   scenes.push(scene('TITLE_CARD', n, {
-    title: 'Data: the mistake everyone makes',
-    subtitle: 'Point AI At It · part three',
+    title: 'Never paste a spreadsheet into an AI',
+    subtitle: 'and what to do instead',
   }));
 }
 
@@ -126,6 +126,72 @@ const scenes = [];
     atWord: at(n, 'file'),
     source: FILE,
   }}));
+}
+
+{
+  const n =
+    "One thing before we start, in case you've never called an AI from Python. " +
+    "You need two things and neither of them is hard. " +
+    "First, uv — one command installs it, and uv brings Python with it, so there's nothing " +
+    "else to set up. " +
+    "Second, a key. Nine lines of Python, and you're talking to a model. " +
+    "That's genuinely the whole entry fee, and everything after this builds on those nine lines.";
+  scenes.push(scene('CODE_RUN', n, {codeRun: {
+    filename: 'ask.py',
+    language: 'py',
+    resultLabel: 'what happens',
+    color: 'green',
+    atWord: at(n, 'uv'),
+    lines: [
+      {text: 'from openai import OpenAI',
+       detail: 'one library, every provider', sub: 'uv add openai', label: 'install',
+       atWord: at(n, 'command')},
+      {text: 'client = OpenAI(',
+       detail: 'point it at your provider', sub: 'reads your .env', label: 'setup',
+       atWord: at(n, 'Second')},
+      {text: '  base_url=os.getenv("AI_BASE_URL"),',
+       atWord: at(n, 'Second')},
+      {text: '  api_key=os.getenv("AI_API_KEY"))',
+       detail: 'the key never goes in the code', sub: 'it lives in .env', label: 'safe',
+       atWord: at(n, 'key')},
+      {text: 'r = client.chat.completions.create(',
+       detail: 'the one call that does everything', sub: 'text, data or images', label: 'call',
+       atWord: at(n, 'Nine')},
+      {text: '  model=os.getenv("AI_MODEL"),',
+       atWord: at(n, 'Nine')},
+      {text: '  messages=[{"role": "user",',
+       detail: 'your question goes here', sub: 'ready', label: 'stdout',
+       atWord: at(n, 'talking')},
+      {text: '             "content": "…"}])',
+       atWord: at(n, 'talking')},
+    ],
+    caption: 'the whole entry fee, once',
+  }}));
+}
+
+{
+  const n =
+    "And the key: three doors, one of them free. " +
+    "Ollama runs on your own laptop — no card, and nothing you type leaves the machine. " +
+    "Groq and Google AI Studio give a cloud key with no card. " +
+    "Paid is about a pound a month, and swapping is three lines.";
+  scenes.push(scene('SPEC_COMPARE', n, {compare: {
+    headline: 'Three doors to a key',
+    a: {name: 'free', color: 'green'},
+    b: {name: 'paid', color: 'blue'},
+    rows: [
+      {label: 'On your laptop', a: 'Ollama', b: '—', winner: 'a', atWord: at(n, 'Ollama')},
+      {label: 'Data leaves your PC', a: 'no (Ollama)', b: 'yes', atWord: at(n, 'leaves')},
+      {label: 'Cloud, no card', a: 'Groq · Gemini', b: '—', winner: 'a', atWord: at(n, 'Groq')},
+      {label: 'Card required', a: 'no', b: 'yes', atWord: at(n, 'Paid')},
+      {label: 'This video, a month', a: '£0', b: '~£1', atWord: at(n, 'pound')},
+    ],
+    atWord: at(n, 'doors'),
+  },
+  // Every figure on this card is a price, so the card says where the prices came from
+  // (LAW 3 / LAW 0m.2). ~£1 a month is the measured workload in the providers doc: 3,000
+  // runs, ~2.5M input and 1M output tokens, on a small cloud model.
+  source: 'Provider pricing, checked 2026-09-03'}));
 }
 
 // ── CHAPTER 1 ────────────────────────────────────────────────────────────────
@@ -937,7 +1003,7 @@ scenes.push(chapter(
     "costs you whatever you go on to decide with it.";
   scenes.push(scene('QUOTE_SPOTLIGHT', n, {
     quote: 'A guess that sounds like a fact is the most expensive kind.',
-    source: 'Point AI At It · part three',
+    source: 'A guess that reads like a fact',
     atWord: at(n, 'wrong'),
   }));
 }
@@ -988,13 +1054,13 @@ scenes.push(chapter(
 
 {
   const n =
-    "Point the profiler at your own export — a test run, a sprint, whatever lands on your desk. " +
-    "Profile it first, then ask. " +
-    "Part four is pictures: a screenshot goes in, and the error code comes back out. " +
+    "Point the profiler at your own export — a test run, a sprint, a supplier list, " +
+    "whatever lands on your desk. Profile it first, then ask. " +
+    "The same twenty lines work on any file with a header row. " +
     "Subscribe if this saved you an afternoon.";
   scenes.push(scene('OUTRO_CTA', n, {
     message: 'Profile it first, then ask',
-    sub: 'Part four — Images: it can see your screen',
+    sub: 'works on any file with a header row',
   }));
 }
 
@@ -1012,10 +1078,10 @@ const spec = {
     screenplay: 'documentary',
     topicAxes: ['skill-build', 'economic-pain', 'sovereignty'],
     seo: {
-      title: 'Point AI At It #3 — Never Paste A Spreadsheet Into An AI',
+      title: 'Never Paste A Spreadsheet Into An AI (Do This Instead)',
       altTitles: [
-        'Point AI At It #3 — The Spreadsheet Mistake Everyone Makes',
-        'Point AI At It #3 — Why Your AI Gets Numbers Wrong',
+        'The Spreadsheet Mistake Everyone Makes With AI',
+        'Why Your AI Gets Numbers Confidently Wrong',
       ],
       hook: 'Why does an AI get a spreadsheet question confidently wrong?',
       breakdown:

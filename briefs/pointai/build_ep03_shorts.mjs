@@ -112,7 +112,7 @@ const scenes = [];
     "If a number matters, compute it. The full breakdown is on the channel.";
   scenes.push(scene('OUTRO_CTA', n, {
     message: 'If a number matters, compute it',
-    sub: 'Point AI At It · part three',
+    sub: 'one question, one wrong answer',
   }));
 }
 

@@ -19409,7 +19409,7 @@
                           "items": {
                             "type": "object"
                           },
-                          "description": "2-6 × {label≤22, a≤14, b≤14, winner?:'a'|'b'|'tie'}"
+                          "description": "2-6 × {label≤22, a≤14, b≤14, winner?:'a'|'b'|'tie', atWord?}. Give a row an atWord when the narration walks the rows one at a time — it lands on that word and earns the scene its runtime; omit it and the sheet arrives in one stagger, as before."
                         },
                         "atWord": {
                           "type": "number"

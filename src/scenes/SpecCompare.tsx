@@ -121,7 +121,17 @@ export const SpecCompare: React.FC<{scene: Scene}> = ({scene}) => {
 
         {/* rows */}
         {rows.map((r, i) => {
-          const e = interpolate(frame, [start + 8 + i * 5, start + 8 + i * 5 + 12], [0, 1], clamp);
+          // A ROW CAN LAND ON THE WORD THAT NAMES IT. Without a per-row anchor the whole
+          // sheet arrives on one 5-frame stagger off the base — fine for a card the voice
+          // summarises, starving for a beat that walks the rows one at a time, because the
+          // scene then carries ONE anchor and the ceiling caps it at the 16s static floor
+          // however much there is to say. LAW 0f.4 names more anchored elements as the
+          // first remedy and a split as the second; this is the first. Omit `atWord` and
+          // the stagger is exactly what it always was.
+          const rowAt = r.atWord != null
+            ? wordToFrame(r.atWord)
+            : start + 8 + i * 5;
+          const e = interpolate(frame, [rowAt, rowAt + 12], [0, 1], clamp);
           const y = interpolate(e, [0, 1], [18 * scale, 0]);
           return (
             <React.Fragment key={i}>

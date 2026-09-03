@@ -4940,7 +4940,7 @@ export const MANIFEST = {  COLUMN_SPLIT: {
       headline: {t: 'string', max: 48},
       a: {t: 'object', req: true, note: '{name≤16, asset?, color?}'},
       b: {t: 'object', req: true, note: '{name≤16, asset?, color?}'},
-      rows: {t: 'items', req: true, note: "2-6 × {label≤22, a≤14, b≤14, winner?:'a'|'b'|'tie'}"},
+      rows: {t: 'items', req: true, note: "2-6 × {label≤22, a≤14, b≤14, winner?:'a'|'b'|'tie', atWord?}. Give a row an atWord when the narration walks the rows one at a time — it lands on that word and earns the scene its runtime; omit it and the sheet arrives in one stagger, as before."},
       atWord: {t: 'anchor'},
     },
     example: {compare: {headline: 'Reuse vs a manager', a: {name: 'Reused password', color: 'red'}, b: {name: 'Password manager', color: 'green'}, rows: [{label: 'Unique per site', a: 'No', b: 'Yes', winner: 'b'}, {label: 'Phishing safe', a: 'No', b: 'Yes', winner: 'b'}, {label: 'Effort', a: 'High', b: 'Low', winner: 'b'}], atWord: 2}},

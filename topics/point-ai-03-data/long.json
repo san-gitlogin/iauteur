@@ -15,10 +15,10 @@
       "sovereignty"
     ],
     "seo": {
-      "title": "Point AI At It #3 — Never Paste A Spreadsheet Into An AI",
+      "title": "Never Paste A Spreadsheet Into An AI (Do This Instead)",
       "altTitles": [
-        "Point AI At It #3 — The Spreadsheet Mistake Everyone Makes",
-        "Point AI At It #3 — Why Your AI Gets Numbers Wrong"
+        "The Spreadsheet Mistake Everyone Makes With AI",
+        "Why Your AI Gets Numbers Confidently Wrong"
       ],
       "hook": "Why does an AI get a spreadsheet question confidently wrong?",
       "breakdown": "why pasting rows into a model costs four times as much and answers worse, how twenty lines of Python fix it, and the three recorded failures that show when a number can be trusted",
@@ -98,14 +98,14 @@
     {
       "id": "s02",
       "type": "TITLE_CARD",
-      "narration": "Welcome back to THE NBX STUDIO. This is part three of Point AI At It, and today we're pointing a model at a spreadsheet — fifty orders from a made-up online shop called Bramble and Co. So when can a model be trusted with a number, and when can it absolutely not?",
+      "narration": "Welcome to THE NBX STUDIO. Today we're pointing a model at a spreadsheet — fifty orders from a made-up online shop, standing in for whatever export lands on your desk. So when can a model be trusted with a number, and when can it absolutely not?",
       "transition": "push",
       "background": "zoneB",
       "data": {
-        "title": "Data: the mistake everyone makes",
-        "subtitle": "Point AI At It · part three"
+        "title": "Never paste a spreadsheet into an AI",
+        "subtitle": "and what to do instead"
       },
-      "durationFrames": 480,
+      "durationFrames": 459,
       "audio": "audio/point-ai-03-data_s02.mp3",
       "timingSource": "tts"
     },
@@ -203,10 +203,138 @@
     },
     {
       "id": "s05",
-      "type": "CHAPTER",
-      "narration": "Let's start with the thing almost everybody does first, because the trouble hides inside it.",
+      "type": "CODE_RUN",
+      "narration": "One thing before we start, in case you've never called an AI from Python. You need two things and neither of them is hard. First, uv — one command installs it, and uv brings Python with it, so there's nothing else to set up. Second, a key. Nine lines of Python, and you're talking to a model. That's genuinely the whole entry fee, and everything after this builds on those nine lines.",
       "transition": "wipe",
       "background": "zoneB",
+      "data": {
+        "codeRun": {
+          "filename": "ask.py",
+          "language": "py",
+          "resultLabel": "what happens",
+          "color": "green",
+          "atWord": 18.75,
+          "lines": [
+            {
+              "text": "from openai import OpenAI",
+              "detail": "one library, every provider",
+              "sub": "uv add openai",
+              "label": "install",
+              "atWord": 22.083
+            },
+            {
+              "text": "client = OpenAI(",
+              "detail": "point it at your provider",
+              "sub": "reads your .env",
+              "label": "setup",
+              "atWord": 34.333
+            },
+            {
+              "text": "  base_url=os.getenv(\"AI_BASE_URL\"),",
+              "atWord": 34.333
+            },
+            {
+              "text": "  api_key=os.getenv(\"AI_API_KEY\"))",
+              "detail": "the key never goes in the code",
+              "sub": "it lives in .env",
+              "label": "safe",
+              "atWord": 36.333
+            },
+            {
+              "text": "r = client.chat.completions.create(",
+              "detail": "the one call that does everything",
+              "sub": "text, data or images",
+              "label": "call",
+              "atWord": 37.25
+            },
+            {
+              "text": "  model=os.getenv(\"AI_MODEL\"),",
+              "atWord": 37.25
+            },
+            {
+              "text": "  messages=[{\"role\": \"user\",",
+              "detail": "your question goes here",
+              "sub": "ready",
+              "label": "stdout",
+              "atWord": 40.917
+            },
+            {
+              "text": "             \"content\": \"…\"}])",
+              "atWord": 40.917
+            }
+          ],
+          "caption": "the whole entry fee, once"
+        }
+      },
+      "durationFrames": 691,
+      "audio": "audio/point-ai-03-data_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "SPEC_COMPARE",
+      "narration": "And the key: three doors, one of them free. Ollama runs on your own laptop — no card, and nothing you type leaves the machine. Groq and Google AI Studio give a cloud key with no card. Paid is about a pound a month, and swapping is three lines.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
+        "compare": {
+          "headline": "Three doors to a key",
+          "a": {
+            "name": "free",
+            "color": "green"
+          },
+          "b": {
+            "name": "paid",
+            "color": "blue"
+          },
+          "rows": [
+            {
+              "label": "On your laptop",
+              "a": "Ollama",
+              "b": "—",
+              "winner": "a",
+              "atWord": 8.417
+            },
+            {
+              "label": "Data leaves your PC",
+              "a": "no (Ollama)",
+              "b": "yes",
+              "atWord": 18.25
+            },
+            {
+              "label": "Cloud, no card",
+              "a": "Groq · Gemini",
+              "b": "—",
+              "winner": "a",
+              "atWord": 21.5
+            },
+            {
+              "label": "Card required",
+              "a": "no",
+              "b": "yes",
+              "atWord": 31.417
+            },
+            {
+              "label": "This video, a month",
+              "a": "£0",
+              "b": "~£1",
+              "atWord": 33.25
+            }
+          ],
+          "atWord": 3.75
+        },
+        "source": "Provider pricing, checked 2026-09-03"
+      },
+      "durationFrames": 500,
+      "audio": "audio/point-ai-03-data_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "narration": "Let's start with the thing almost everybody does first, because the trouble hides inside it.",
+      "transition": "morph",
+      "background": "zoneA",
       "data": {
         "chapter": {
           "number": "01",
@@ -215,15 +343,15 @@
         }
       },
       "durationFrames": 160,
-      "audio": "audio/point-ai-03-data_s05.mp3",
+      "audio": "audio/point-ai-03-data_s07.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s06",
+      "id": "s08",
       "type": "CHAT_MOCKUP",
       "narration": "You open a chat, you select the whole sheet, you paste the lot in, and you ask your question. And honestly? On fifty rows, that works fine. But look at what you've actually asked for: you've handed a model a wall of text and asked it to do arithmetic inside the wall.",
-      "transition": "dip",
-      "background": "zoneC",
+      "transition": "iris",
+      "background": "zoneB",
       "data": {
         "panelLabel": "the thing almost everybody does first",
         "messages": [
@@ -246,15 +374,15 @@
         "source": "samples/orders.csv"
       },
       "durationFrames": 475,
-      "audio": "audio/point-ai-03-data_s06.mp3",
+      "audio": "audio/point-ai-03-data_s08.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s07",
+      "id": "s09",
       "type": "LIST_BUILD",
       "narration": "And think about what that question needs. Count fifty rows without losing your place. Average a column of decimals, in your head, exactly. Then cross-reference two other columns to see who was carrying the slow ones. That's three separate jobs, and only the last one is reading.",
-      "transition": "morph",
-      "background": "zoneA",
+      "transition": "fade",
+      "background": "zoneC",
       "data": {
         "heading": "What you just asked it to do",
         "items": [
@@ -273,15 +401,15 @@
         ]
       },
       "durationFrames": 520,
-      "audio": "audio/point-ai-03-data_s07.mp3",
+      "audio": "audio/point-ai-03-data_s09.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s08",
+      "id": "s10",
       "type": "STAT_CALLOUT",
       "narration": "Those fifty rows cost about two thousand four hundred tokens going in. A token is roughly three quarters of a word, and a token is the unit you're billed in. Fifty rows is nothing, so nobody notices. The trouble is what happens next.",
-      "transition": "iris",
-      "background": "zoneB",
+      "transition": "push",
+      "background": "zoneA",
       "data": {
         "value": 2400,
         "label": "input tokens for fifty pasted rows",
@@ -289,15 +417,15 @@
         "source": "Measured workload, 2026-09-03"
       },
       "durationFrames": 434,
-      "audio": "audio/point-ai-03-data_s08.mp3",
+      "audio": "audio/point-ai-03-data_s10.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s09",
+      "id": "s11",
       "type": "LINE_CHART",
       "narration": "That's about forty-eight tokens a row, so the bill grows in a straight line with the file. Forty thousand rows — an ordinary Monday-morning export — is close to two million tokens, and no model on earth reads that in one go. The summary barely moves: about six hundred tokens whatever the file does. Pasting doesn't get expensive. Pasting stops working.",
-      "transition": "fade",
-      "background": "zoneC",
+      "transition": "slide",
+      "background": "zoneB",
       "data": {
         "lineChart": {
           "headline": "The bill grows with the file",
@@ -344,15 +472,15 @@
         }
       },
       "durationFrames": 644,
-      "audio": "audio/point-ai-03-data_s09.mp3",
+      "audio": "audio/point-ai-03-data_s11.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s10",
+      "id": "s12",
       "type": "CHAPTER",
       "narration": "So don't send the rows. Send what the rows add up to.",
-      "transition": "push",
-      "background": "zoneA",
+      "transition": "zoom",
+      "background": "zoneC",
       "data": {
         "chapter": {
           "number": "02",
@@ -361,15 +489,15 @@
         }
       },
       "durationFrames": 128,
-      "audio": "audio/point-ai-03-data_s10.mp3",
+      "audio": "audio/point-ai-03-data_s12.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s11",
+      "id": "s13",
       "type": "CODE_RUN",
       "narration": "Here's the function that builds that summary, and it's worth walking a line at a time. First, read the file into a list of rows — that's Python's csv reader, and the reader is free. Then, for every column, pull out its values. Count the blanks, because a blank is information. Try turning each value into a number; if every filled value converts, the column is numeric. And a numeric column gets a smallest, a largest, and an average. No model has been involved yet, and nothing has left your machine — so far this is a program reading a file, start to finish.",
-      "transition": "slide",
-      "background": "zoneB",
+      "transition": "wipe",
+      "background": "zoneA",
       "data": {
         "codeRun": {
           "filename": "analyst/data.py",
@@ -439,15 +567,15 @@
         }
       },
       "durationFrames": 1009,
-      "audio": "audio/point-ai-03-data_s11.mp3",
+      "audio": "audio/point-ai-03-data_s13.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s12",
+      "id": "s14",
       "type": "RECORDED_STEP",
       "narration": "Run the profile, and here's what fifty rows turn into. Two missing values, forty-six distinct ones. The quickest delivery took three point eight seven days, the slowest took nineteen point four, and the average sits at five point two six days. Then the two text columns: three couriers, and two possible outcomes — forty-eight delivered, two lost in transit. Eight columns, described. The whole summary is a few hundred tokens.",
-      "transition": "zoom",
-      "background": "zoneC",
+      "transition": "dip",
+      "background": "zoneB",
       "data": {
         "recordedStep": {
           "caption": "fifty rows, described",
@@ -632,15 +760,15 @@
         }
       },
       "durationFrames": 799,
-      "audio": "audio/point-ai-03-data_s12.mp3",
+      "audio": "audio/point-ai-03-data_s14.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s13",
+      "id": "s15",
       "type": "BAR_COMPARE",
       "narration": "Two of those eight columns aren't numbers at all. Courier is a name, so there's no average to take — names get counted instead. RapidPost carried twenty of the fifty, CityLink twenty, and FarReach the other ten. Which makes FarReach the small one, and that matters later, because a count is what tells you FarReach is a tenth of the file rather than a third.",
-      "transition": "wipe",
-      "background": "zoneA",
+      "transition": "morph",
+      "background": "zoneC",
       "data": {
         "bars": [
           {
@@ -667,15 +795,15 @@
         "source": "samples/orders.csv"
       },
       "durationFrames": 634,
-      "audio": "audio/point-ai-03-data_s13.mp3",
+      "audio": "audio/point-ai-03-data_s15.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s14",
+      "id": "s16",
       "type": "DONUT",
       "narration": "Status works the same way, and status only has two values in it. Forty-eight orders delivered. Two lost in transit. Four per cent of the file, sitting in a corner of a pie chart — and those two are about to cause an enormous amount of trouble.",
-      "transition": "dip",
-      "background": "zoneB",
+      "transition": "iris",
+      "background": "zoneA",
       "data": {
         "donut": {
           "segments": [
@@ -700,15 +828,15 @@
         }
       },
       "durationFrames": 453,
-      "audio": "audio/point-ai-03-data_s14.mp3",
+      "audio": "audio/point-ai-03-data_s16.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s15",
+      "id": "s17",
       "type": "STAT_PANELS",
       "narration": "And the same twenty lines describe money just as happily. Order value: the smallest order in the file is eighteen pounds, the largest is ninety-six, and the average sits at forty-six twenty. Nothing about that code knows what a courier is, or what a pound is. It knows how to count, how to sort, and how to spot a blank — which turns out to be most of what a spreadsheet needs.",
-      "transition": "morph",
-      "background": "zoneC",
+      "transition": "fade",
+      "background": "zoneB",
       "data": {
         "stats": [
           {
@@ -734,15 +862,15 @@
         "source": "samples/orders.csv"
       },
       "durationFrames": 651,
-      "audio": "audio/point-ai-03-data_s15.mp3",
+      "audio": "audio/point-ai-03-data_s17.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s16",
+      "id": "s18",
       "type": "CHAPTER",
       "narration": "Now send that instead of the rows, and watch the bill.",
-      "transition": "iris",
-      "background": "zoneA",
+      "transition": "push",
+      "background": "zoneC",
       "data": {
         "chapter": {
           "number": "03",
@@ -751,15 +879,15 @@
         }
       },
       "durationFrames": 119,
-      "audio": "audio/point-ai-03-data_s16.mp3",
+      "audio": "audio/point-ai-03-data_s18.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s17",
+      "id": "s19",
       "type": "RATE_SHEET",
       "narration": "You saw that flat line. Here's the same question, priced both ways. Pasting the rows costs two thousand four hundred tokens going in. Sending the profile costs about six hundred — a quarter of that. What comes back is the same length either way, so the output line doesn't move. And the answer is better, which is the part that surprises people: you spent less and got more, because you stopped asking the model to do arithmetic and started handing it the arithmetic already done.",
-      "transition": "fade",
-      "background": "zoneB",
+      "transition": "slide",
+      "background": "zoneA",
       "data": {
         "rateSheet": {
           "headline": "The same question, priced both ways",
@@ -786,15 +914,15 @@
         }
       },
       "durationFrames": 792,
-      "audio": "audio/point-ai-03-data_s17.mp3",
+      "audio": "audio/point-ai-03-data_s19.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s18",
+      "id": "s20",
       "type": "CHAT_MOCKUP",
       "narration": "And here's what actually goes over the wire now. Fifty rows: gone. In their place, one line per column. Delivery days, with its range and its average and its two blanks. Courier, with its three names and their counts. Then the same question as before. Notice what the model is being asked to do here — read a summary, not run a calculator.",
-      "transition": "push",
-      "background": "zoneC",
+      "transition": "zoom",
+      "background": "zoneB",
       "data": {
         "panelLabel": "the same question, eight lines instead of fifty rows",
         "messages": [
@@ -822,15 +950,15 @@
         "source": "The profile, as the model receives it"
       },
       "durationFrames": 671,
-      "audio": "audio/point-ai-03-data_s18.mp3",
+      "audio": "audio/point-ai-03-data_s20.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s19",
+      "id": "s21",
       "type": "CHAPTER",
       "narration": "Which brings us to the first of three things that went wrong.",
-      "transition": "slide",
-      "background": "zoneA",
+      "transition": "wipe",
+      "background": "zoneC",
       "data": {
         "chapter": {
           "number": "04",
@@ -839,15 +967,15 @@
         }
       },
       "durationFrames": 110,
-      "audio": "audio/point-ai-03-data_s19.mp3",
+      "audio": "audio/point-ai-03-data_s21.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s20",
+      "id": "s22",
       "type": "MODEL_SHRUG",
       "narration": "Read what the model wrote back. The delivery_days column has two missing values and forty-six distinct ones, with a minimum of three point eight seven days, a maximum of nineteen point four days, and an average of five point two six. The model typed nineteen point four days, so the model knew. Now read the second half of the same answer — the list of what the model called unusual. Missing values. Two lost parcels. A parcel took nineteen days against a five-day average, and that never made the list. Which is a stranger failure than a wrong answer, because nothing the model said was false.",
-      "transition": "zoom",
-      "background": "zoneB",
+      "transition": "dip",
+      "background": "zoneA",
       "data": {
         "modelShrug": {
           "headline": "It wrote the number down",
@@ -881,15 +1009,15 @@
         }
       },
       "durationFrames": 1066,
-      "audio": "audio/point-ai-03-data_s20.mp3",
+      "audio": "audio/point-ai-03-data_s22.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s21",
+      "id": "s23",
       "type": "DATABASE_TABLE",
       "narration": "Those parcels are in the file. SO-1040, eighteen point nine days. SO-1045, nineteen point four. SO-1050, nineteen point one. Same courier, same region, three in a row. Not noise — somebody's fortnight.",
-      "transition": "wipe",
-      "background": "zoneC",
+      "transition": "morph",
+      "background": "zoneB",
       "data": {
         "database": {
           "headline": "The three that took a fortnight",
@@ -936,15 +1064,15 @@
         }
       },
       "durationFrames": 528,
-      "audio": "audio/point-ai-03-data_s21.mp3",
+      "audio": "audio/point-ai-03-data_s23.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s22",
+      "id": "s24",
       "type": "STAT_PANELS",
       "narration": "Here's the thing though — the model isn't being stupid. Look at everything the model was given about that column. A smallest value, a largest value, and an average. Three numbers, standing in for forty-eight. From three numbers, nothing looks wrong: a range is just a range. The spike is invisible unless somebody points at it.",
-      "transition": "dip",
-      "background": "zoneA",
+      "transition": "iris",
+      "background": "zoneC",
       "data": {
         "stats": [
           {
@@ -970,15 +1098,15 @@
         "source": "Everything the model was told about 48 values"
       },
       "durationFrames": 609,
-      "audio": "audio/point-ai-03-data_s22.mp3",
+      "audio": "audio/point-ai-03-data_s24.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s23",
+      "id": "s25",
       "type": "KINETIC_TEXT",
       "narration": "So write this line down, because these nine words are the whole episode.",
-      "transition": "morph",
-      "background": "zoneB",
+      "transition": "fade",
+      "background": "zoneA",
       "data": {
         "kinetic": {
           "text": "The model is only as good as what you hand it",
@@ -989,15 +1117,15 @@
         }
       },
       "durationFrames": 152,
-      "audio": "audio/point-ai-03-data_s23.mp3",
+      "audio": "audio/point-ai-03-data_s25.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s24",
+      "id": "s26",
       "type": "CHAPTER",
       "narration": "The fix isn't a cleverer question — the fix is twelve more lines of Python.",
-      "transition": "iris",
-      "background": "zoneC",
+      "transition": "push",
+      "background": "zoneB",
       "data": {
         "chapter": {
           "number": "05",
@@ -1006,15 +1134,15 @@
         }
       },
       "durationFrames": 159,
-      "audio": "audio/point-ai-03-data_s24.mp3",
+      "audio": "audio/point-ai-03-data_s26.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s25",
+      "id": "s27",
       "type": "CODE_RUN",
       "narration": "Here's the outlier check, and the idea behind it is far older than any of this. Sort the values. Find the point a quarter of the way in, and the point three quarters of the way in — the middle half of your data sits between those two. Measure that gap. Then draw a fence one and a half gaps out on each side. Anything outside the fence is odd enough to mention — and the fence is built from your own data, which means it moves to fit whatever you point it at. Twelve lines, no model, and now the spike has a name.",
-      "transition": "fade",
-      "background": "zoneA",
+      "transition": "slide",
+      "background": "zoneC",
       "data": {
         "codeRun": {
           "filename": "analyst/data.py",
@@ -1074,30 +1202,30 @@
         }
       },
       "durationFrames": 854,
-      "audio": "audio/point-ai-03-data_s25.mp3",
+      "audio": "audio/point-ai-03-data_s27.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s26",
+      "id": "s28",
       "type": "QUOTE_SPOTLIGHT",
       "narration": "Re-run the analysis, and the answer changes shape. Same model, same question, same price — and now the unusual list opens with the three numbers that matter. And the follow-up changed too: it asks whether those delays track a region or a courier.",
-      "transition": "push",
-      "background": "zoneB",
+      "transition": "zoom",
+      "background": "zoneA",
       "data": {
         "quote": "The 'delivery_days' column has some unusually high values: 19.4, 19.1, and 18.9",
         "source": "The model’s own answer · same prompt, twelve more lines",
         "atWord": 3.75
       },
       "durationFrames": 462,
-      "audio": "audio/point-ai-03-data_s26.mp3",
+      "audio": "audio/point-ai-03-data_s28.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s27",
+      "id": "s29",
       "type": "FLIP_CARD",
       "narration": "Put the two answers side by side, because the difference is the chapter. Before: two missing values, two lost parcels. After: nineteen point four, nineteen point one, eighteen point nine. Same model. Different input.",
-      "transition": "slide",
-      "background": "zoneC",
+      "transition": "wipe",
+      "background": "zoneB",
       "data": {
         "flip": {
           "front": {
@@ -1114,15 +1242,15 @@
         }
       },
       "durationFrames": 468,
-      "audio": "audio/point-ai-03-data_s27.mp3",
+      "audio": "audio/point-ai-03-data_s29.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s28",
+      "id": "s30",
       "type": "CHAPTER",
       "narration": "Second thing that went wrong, and this one was mine.",
-      "transition": "zoom",
-      "background": "zoneA",
+      "transition": "dip",
+      "background": "zoneC",
       "data": {
         "chapter": {
           "number": "06",
@@ -1131,15 +1259,15 @@
         }
       },
       "durationFrames": 113,
-      "audio": "audio/point-ai-03-data_s28.mp3",
+      "audio": "audio/point-ai-03-data_s30.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s29",
+      "id": "s31",
       "type": "RECORDED_STEP",
       "narration": "The check that goes with those twelve lines asks something specific: does the tool name the worst delay, nineteen point four days? Red. Look at what it was handed instead — five point four eight, five point five, five point five two, five point five four, five point five five. Those are outliers. They're just the wrong ones — the five mildest of the ten. And here's the line that chose them. Sorting them smallest-first put the three that mattered at the far end of the list, and then only the first five were ever shown.",
-      "transition": "wipe",
-      "background": "zoneB",
+      "transition": "morph",
+      "background": "zoneA",
       "data": {
         "recordedStep": {
           "caption": "the five it was handed, and why",
@@ -1271,15 +1399,15 @@
         }
       },
       "durationFrames": 911,
-      "audio": "audio/point-ai-03-data_s29.mp3",
+      "audio": "audio/point-ai-03-data_s31.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s30",
+      "id": "s32",
       "type": "CODE_DIFF",
       "narration": "One line changes. Instead of sorting by value, sort by distance from the middle — so the furthest-out value comes first and the mildest comes last. Same twelve lines otherwise, same everything else, because the only thing that was ever wrong here was the order.",
-      "transition": "dip",
-      "background": "zoneC",
+      "transition": "iris",
+      "background": "zoneB",
       "data": {
         "diff": {
           "fileName": "analyst/data.py",
@@ -1305,15 +1433,15 @@
         }
       },
       "durationFrames": 446,
-      "audio": "audio/point-ai-03-data_s30.mp3",
+      "audio": "audio/point-ai-03-data_s32.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s31",
+      "id": "s33",
       "type": "RECORDED_STEP",
       "narration": "Run the check again. Green — and the list now opens on nineteen point four, nineteen point one, eighteen point nine. Three that mattered, at the front — which matters, because only the first five are ever sent. I didn't spot that by reading the code. A question I'd written down spotted it for me.",
-      "transition": "morph",
-      "background": "zoneA",
+      "transition": "fade",
+      "background": "zoneC",
       "data": {
         "recordedStep": {
           "caption": "the same check, one line later",
@@ -1396,15 +1524,15 @@
         }
       },
       "durationFrames": 518,
-      "audio": "audio/point-ai-03-data_s31.mp3",
+      "audio": "audio/point-ai-03-data_s33.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s32",
+      "id": "s34",
       "type": "CYCLE_LOOP",
       "narration": "And that whole chapter was one turn of a loop worth keeping. Write the smallest thing that could possibly work. Then assert something specific about what it produces — not that it returned a dictionary, but that it named nineteen point four. Run it. Red means one of two things is wrong and you go and find out which. Green means change something and go round again. A vague assertion would have passed happily while the tool fed the model the five least interesting numbers in the file.",
-      "transition": "iris",
-      "background": "zoneB",
+      "transition": "push",
+      "background": "zoneA",
       "data": {
         "cycleLoop": {
           "headline": "The loop this runs on",
@@ -1436,15 +1564,15 @@
         }
       },
       "durationFrames": 807,
-      "audio": "audio/point-ai-03-data_s32.mp3",
+      "audio": "audio/point-ai-03-data_s34.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s33",
+      "id": "s35",
       "type": "FLIP_CARD",
       "narration": "One more thing about a red line, because this is the part people get wrong. A failing check asks two questions, not one. Is the code wrong? Sometimes — one line fixed it here. Or is the check itself wrong? That happens too, and it happened to me.",
-      "transition": "fade",
-      "background": "zoneC",
+      "transition": "slide",
+      "background": "zoneB",
       "data": {
         "flip": {
           "front": {
@@ -1461,15 +1589,15 @@
         }
       },
       "durationFrames": 462,
-      "audio": "audio/point-ai-03-data_s33.mp3",
+      "audio": "audio/point-ai-03-data_s35.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s34",
+      "id": "s36",
       "type": "SPEC_COMPARE",
       "narration": "Earlier in this project I'd written a check asserting delivery days would come out as text, because two of the cells were empty. Delivery days comes out as a number — a column counts as numeric when every filled value converts. The code was right. My assumption wasn't.",
-      "transition": "push",
-      "background": "zoneA",
+      "transition": "zoom",
+      "background": "zoneC",
       "data": {
         "compare": {
           "headline": "The code was right. I wasn’t.",
@@ -1505,30 +1633,30 @@
         }
       },
       "durationFrames": 477,
-      "audio": "audio/point-ai-03-data_s34.mp3",
+      "audio": "audio/point-ai-03-data_s36.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s35",
+      "id": "s37",
       "type": "QUOTE_SPOTLIGHT",
       "narration": "Which is the second line worth writing down, and this one has nothing to do with models.",
-      "transition": "slide",
-      "background": "zoneB",
+      "transition": "wipe",
+      "background": "zoneA",
       "data": {
         "quote": "A test is a question you only have to ask once.",
         "source": "Ask something specific, or a check catches nothing",
         "atWord": 4
       },
       "durationFrames": 151,
-      "audio": "audio/point-ai-03-data_s35.mp3",
+      "audio": "audio/point-ai-03-data_s37.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s36",
+      "id": "s38",
       "type": "CHAPTER",
       "narration": "Third thing, and this is the one to remember.",
-      "transition": "zoom",
-      "background": "zoneC",
+      "transition": "dip",
+      "background": "zoneB",
       "data": {
         "chapter": {
           "number": "07",
@@ -1537,15 +1665,15 @@
         }
       },
       "durationFrames": 105,
-      "audio": "audio/point-ai-03-data_s36.mp3",
+      "audio": "audio/point-ai-03-data_s38.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s37",
+      "id": "s39",
       "type": "CLAIM_CHECK",
       "narration": "I asked one question about one courier: is anything wrong with FarReach? Back came two findings, in the same even tone. First: FarReach is responsible for two out of two lost-in-transit orders. That's a specific, checkable claim, so let's check it. Every order in the file, one square each, and the lost ones lit. CityLink lost none of twenty. FarReach lost none of ten. Zero. RapidPost lost two of twenty, and both of them are RapidPost's. Now look at the second finding: FarReach really is the slow one, and that part is true. One right, one wrong, and nothing in the wording tells you which is which, because both sentences were produced exactly the same way.",
-      "transition": "wipe",
-      "background": "zoneA",
+      "transition": "morph",
+      "background": "zoneC",
       "data": {
         "claimCheck": {
           "headline": "One right, one wrong, same voice",
@@ -1595,15 +1723,15 @@
         }
       },
       "durationFrames": 1269,
-      "audio": "audio/point-ai-03-data_s37.mp3",
+      "audio": "audio/point-ai-03-data_s39.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s38",
+      "id": "s40",
       "type": "RECORDED_STEP",
       "narration": "You don't have to take my word for the count — the count is twenty lines of Python over the same file. Two orders lost, both in the North region, both carried by RapidPost. Per courier: CityLink zero, FarReach zero, RapidPost two. And the delivery times underneath say the rest: FarReach runs from five and a half days to nineteen point four, against about four for everyone else. Slow, yes. Losing parcels, no.",
-      "transition": "dip",
-      "background": "zoneB",
+      "transition": "iris",
+      "background": "zoneA",
       "data": {
         "recordedStep": {
           "caption": "the same question, counted in Python",
@@ -1734,15 +1862,15 @@
         }
       },
       "durationFrames": 822,
-      "audio": "audio/point-ai-03-data_s38.mp3",
+      "audio": "audio/point-ai-03-data_s40.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s39",
+      "id": "s41",
       "type": "BAR_COMPARE",
       "narration": "And the FarReach answer wasn't a one-off. Ask about regions instead of couriers, and it says two orders were lost — twenty per cent of the Remote region. Count the file again. Remote lost none. Central lost none. Both are in North, a region the model never mentioned. Same mistake, different column.",
-      "transition": "morph",
-      "background": "zoneC",
+      "transition": "fade",
+      "background": "zoneB",
       "data": {
         "bars": [
           {
@@ -1770,15 +1898,15 @@
         "source": "It said 20% of Remote · the file says none"
       },
       "durationFrames": 577,
-      "audio": "audio/point-ai-03-data_s39.mp3",
+      "audio": "audio/point-ai-03-data_s41.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s40",
+      "id": "s42",
       "type": "KINETIC_TEXT",
       "narration": "So here's the third line to write down, and this is the one I'd tattoo on the inside of my eyelids.",
-      "transition": "iris",
-      "background": "zoneA",
+      "transition": "push",
+      "background": "zoneC",
       "data": {
         "kinetic": {
           "text": "Right and confident are not the same thing",
@@ -1789,15 +1917,15 @@
         }
       },
       "durationFrames": 166,
-      "audio": "audio/point-ai-03-data_s40.mp3",
+      "audio": "audio/point-ai-03-data_s42.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s41",
+      "id": "s43",
       "type": "CHAPTER",
       "narration": "One question left, and it's the useful one: why did the model do that?",
-      "transition": "fade",
-      "background": "zoneB",
+      "transition": "slide",
+      "background": "zoneA",
       "data": {
         "chapter": {
           "number": "08",
@@ -1806,15 +1934,15 @@
         }
       },
       "durationFrames": 154,
-      "audio": "audio/point-ai-03-data_s41.mp3",
+      "audio": "audio/point-ai-03-data_s43.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s42",
+      "id": "s44",
       "type": "COLUMN_SPLIT",
       "narration": "Here's the file as rows. Every row ties one courier to one outcome — that's what a row is for. Now watch what the profile does to those rows. Courier becomes three names with counts. Status becomes two words with counts. Two tidy lists, and the rows are gone. Well — nearly. The profile does send five sample rows, and they're the first five in the file. All five of them arrived safely. So when I asked whether FarReach was losing parcels, the only rows the model could see were rows where nothing had gone wrong, and the two that were lost existed as the number two in a column tally and nothing else. The model couldn't look the answer up, so the model filled the gap with something that sounded right.",
-      "transition": "push",
-      "background": "zoneC",
+      "transition": "zoom",
+      "background": "zoneB",
       "data": {
         "columnSplit": {
           "headline": "The profile is per column",
@@ -1887,15 +2015,15 @@
         }
       },
       "durationFrames": 1222,
-      "audio": "audio/point-ai-03-data_s42.mp3",
+      "audio": "audio/point-ai-03-data_s44.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s43",
+      "id": "s45",
       "type": "DATABASE_TABLE",
       "narration": "Here's what the first fix looks like. Group the profile by courier before you send it, and every courier gets its own row with its own counts. RapidPost: eighteen delivered, two lost. CityLink: twenty delivered, none lost. FarReach: ten delivered, none lost. The answer to the question I asked is sitting right there, and nobody has to guess it.",
-      "transition": "slide",
-      "background": "zoneA",
+      "transition": "wipe",
+      "background": "zoneC",
       "data": {
         "database": {
           "headline": "The profile, grouped",
@@ -1938,15 +2066,15 @@
         }
       },
       "durationFrames": 665,
-      "audio": "audio/point-ai-03-data_s43.mp3",
+      "audio": "audio/point-ai-03-data_s45.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s44",
+      "id": "s46",
       "type": "DIAGRAM",
       "narration": "There are two honest fixes for that, and neither is a better question. One: group the profile by the column you're asking about, so lost parcels are counted per courier before anything is sent. Two: give the model a tool it can call — a small Python function that goes and counts the actual parcels, on demand. That's where part five goes. Both fixes are the same move: compute it, then hand it over — because a model can only join what's on the page in front of it.",
-      "transition": "zoom",
-      "background": "zoneB",
+      "transition": "dip",
+      "background": "zoneA",
       "data": {
         "diagram": {
           "layout": "flow",
@@ -2008,30 +2136,30 @@
         }
       },
       "durationFrames": 804,
-      "audio": "audio/point-ai-03-data_s44.mp3",
+      "audio": "audio/point-ai-03-data_s46.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s45",
+      "id": "s47",
       "type": "QUOTE_SPOTLIGHT",
       "narration": "And that's why this one is worth more than it looks. A wrong answer you can spot costs you a minute. A wrong answer that arrives in the same calm sentence as three correct ones costs you whatever you go on to decide with it.",
-      "transition": "wipe",
-      "background": "zoneC",
+      "transition": "morph",
+      "background": "zoneB",
       "data": {
         "quote": "A guess that sounds like a fact is the most expensive kind.",
-        "source": "Point AI At It · part three",
+        "source": "A guess that reads like a fact",
         "atWord": 7.667
       },
       "durationFrames": 379,
-      "audio": "audio/point-ai-03-data_s45.mp3",
+      "audio": "audio/point-ai-03-data_s47.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s46",
+      "id": "s48",
       "type": "RULE_TEST",
       "narration": "Which leaves one rule, and it's short. If a number matters, compute it. How many rows are in this file? Compute it — that's counting, and Python never miscounts. Which courier lost the most parcels? Compute it — that's counting too, wearing a hat. What do these six complaints have in common? Ask the model. That's reading, and reading is what a model is for.",
-      "transition": "dip",
-      "background": "zoneA",
+      "transition": "iris",
+      "background": "zoneC",
       "data": {
         "ruleTest": {
           "rule": "If a number matters, compute it",
@@ -2065,15 +2193,15 @@
         }
       },
       "durationFrames": 672,
-      "audio": "audio/point-ai-03-data_s46.mp3",
+      "audio": "audio/point-ai-03-data_s48.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s47",
+      "id": "s49",
       "type": "RECAP",
       "narration": "So: three failures, and not one was the model being dim. The model shrugged at nineteen days because nobody sent the odd values. My own tool handed the check five useless numbers, because I sorted a list backwards. And the model blamed the wrong courier because the summary I sent had no lost parcel on any row. Every one of those is an input problem, which means every one of them is yours to fix — and that is genuinely good news, because inputs are the part you control.",
-      "transition": "morph",
-      "background": "zoneB",
+      "transition": "fade",
+      "background": "zoneA",
       "data": {
         "heading": "Three failures, three inputs",
         "points": [
@@ -2096,21 +2224,21 @@
         ]
       },
       "durationFrames": 825,
-      "audio": "audio/point-ai-03-data_s47.mp3",
+      "audio": "audio/point-ai-03-data_s49.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s48",
+      "id": "s50",
       "type": "OUTRO_CTA",
-      "narration": "Point the profiler at your own export — a test run, a sprint, whatever lands on your desk. Profile it first, then ask. Part four is pictures: a screenshot goes in, and the error code comes back out. Subscribe if this saved you an afternoon.",
-      "transition": "iris",
-      "background": "zoneC",
+      "narration": "Point the profiler at your own export — a test run, a sprint, a supplier list, whatever lands on your desk. Profile it first, then ask. The same twenty lines work on any file with a header row. Subscribe if this saved you an afternoon.",
+      "transition": "push",
+      "background": "zoneB",
       "data": {
         "message": "Profile it first, then ask",
-        "sub": "Part four — Images: it can see your screen"
+        "sub": "works on any file with a header row"
       },
-      "durationFrames": 449,
-      "audio": "audio/point-ai-03-data_s48.mp3",
+      "durationFrames": 435,
+      "audio": "audio/point-ai-03-data_s50.mp3",
       "timingSource": "tts"
     }
   ]

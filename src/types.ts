@@ -581,6 +581,8 @@ export interface SpecRow {
   a: string;
   b: string;
   winner?: 'a' | 'b' | 'tie';
+  /** The word this row lands on. Omit and the sheet arrives in one stagger. */
+  atWord?: number;
 }
 export interface RateSheetRow {
   label: string;
