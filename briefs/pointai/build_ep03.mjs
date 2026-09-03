@@ -392,7 +392,7 @@ scenes.push(chapter(
   scenes.push(scene('CHAT_MOCKUP', n, {
     panelLabel: 'the same question, eight lines instead of fifty rows',
     messages: [
-      {from: 'user', text: 'Rows: 50', atWord: at(n, 'column')},
+      {from: 'user', text: 'Rows: 50', atWord: at(n, 'wire')},
       {from: 'user', text: 'delivery_days: min=3.87 max=19.4 mean=5.2592 missing=2',
        atWord: at(n, 'Delivery')},
       {from: 'user', text: 'courier: RapidPost(20), CityLink(20), FarReach(10)',
@@ -554,7 +554,7 @@ scenes.push(chapter(
   scenes.push(scene('QUOTE_SPOTLIGHT', n, {
     quote: "The 'delivery_days' column has some unusually high values: 19.4, 19.1, and 18.9",
     source: 'The model’s own answer · same prompt, twelve more lines',
-    atWord: at(n, 'opens'),
+    atWord: at(n, 'answer'),
   }));
 }
 

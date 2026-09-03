@@ -45,7 +45,7 @@ export const BarCompare: React.FC<{scene: Scene}> = ({scene}) => {
               const yTop = interpolate(reorderP, [0, 1], [i * rowPitch, rankOf[i] * rowPitch]);
               const isLeader = rankOf[i] === 0;
               return (
-                <div key={i} style={{position: 'absolute', top: yTop, left: 0, width: '100%', height: rowPitch, display: 'flex', alignItems: 'center', gap: 18 * scale, opacity: interpolate(frame - start, [0, 12], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})}}>
+                <div key={i} style={{position: 'absolute', top: yTop, left: 0, width: '100%', height: rowPitch, display: 'flex', alignItems: 'center', gap: 18 * scale, opacity: interpolate(frame - Math.min(start, 38 + i * 4), [0, 12], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})}}>
                   {/* rank chip */}
                   <div style={{width: 46 * scale, height: 46 * scale, borderRadius: 12 * scale * t.style.cornerRadius, background: isLeader ? c : t.colors.panel, border: `2px solid ${isLeader ? c : t.colors.panelBorder}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: t.fonts.display, fontWeight: 800, fontSize: 26 * scale, color: isLeader ? t.colors.onAccent : t.colors.muted, opacity: reorderP, flexShrink: 0}}>{rankOf[i] + 1}</div>
                   <div style={{width: labelW, textAlign: 'right', fontFamily: t.fonts.mono, fontWeight: 700, fontSize: 28 * scale, color: c}}>{bar.label}</div>
@@ -76,13 +76,24 @@ export const BarCompare: React.FC<{scene: Scene}> = ({scene}) => {
             extrapolateRight: 'clamp',
             easing: (x) => 1 - Math.pow(1 - x, 3),
           });
+          // BASE <=38 FRAMES (LAW 8). The whole ROW used to fade in at the bar's own
+          // anchor, so a beat that names its bars late opened on a dead frame and stayed
+          // there. Measured in the episode-3 cut before this fix: 7.9s of empty screen on
+          // one beat and 10.4s on another, out of scenes 21s and 19s long — a third to a
+          // half of each beat with nothing on it but a source footer.
+          //
+          // The row's SKELETON is the base: its label, its sub and its empty track. Only
+          // the FILL and the value are the payoff, and those keep the bar's own anchor.
+          // That is the split LAW 8 asks for, and it is what makes an anchored bar read as
+          // a bar filling rather than as a row appearing.
+          const base = Math.min(start, 38 + i * 4);
           const c = bar.color ? sem(bar.color) : t.colors.muted;
           const w = (bar.value / max) * trackW * grow;
           return (
             <div
               key={i}
               style={{
-                ...fadeUp(frame, start, fps),
+                ...fadeUp(frame, base, fps),
                 display: 'flex',
                 alignItems: 'center',
                 gap: 26 * scale,
@@ -127,6 +138,10 @@ export const BarCompare: React.FC<{scene: Scene}> = ({scene}) => {
                   color: c,
                   minWidth: 120 * scale,
                   fontVariantNumeric: 'tabular-nums',
+                  // The READ-OUT is payoff, not furniture: it arrives with the fill, so a
+                  // row standing empty at the base does not print its own answer early.
+                  opacity: interpolate(frame - start, [0, 12], [0, 1],
+                    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
                 }}
               >
                 {bar.display ?? bar.value}

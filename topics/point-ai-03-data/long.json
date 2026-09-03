@@ -801,7 +801,7 @@
           {
             "from": "user",
             "text": "Rows: 50",
-            "atWord": 15.583
+            "atWord": 5.083
           },
           {
             "from": "user",
@@ -1086,7 +1086,7 @@
       "data": {
         "quote": "The 'delivery_days' column has some unusually high values: 19.4, 19.1, and 18.9",
         "source": "The model’s own answer · same prompt, twelve more lines",
-        "atWord": 19.417
+        "atWord": 3.75
       },
       "durationFrames": 462,
       "audio": "audio/point-ai-03-data_s26.mp3",
