@@ -553,7 +553,8 @@
               "WHEN_NOT_SQLITE",
               "MODEL_SHRUG",
               "CLAIM_CHECK",
-              "COLUMN_SPLIT"
+              "COLUMN_SPLIT",
+              "LIVE_CODE"
             ]
           },
           "narration": {
@@ -623,6 +624,95 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LIVE_CODE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "liveCode": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "filename": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "the editor tab. Set `newFile` to watch the tab appear empty first."
+                        },
+                        "language": {
+                          "type": "string",
+                          "description": "py/js/ts/bash/json/ini - colouring comes from the one shared map in codeSyntax.ts"
+                        },
+                        "newFile": {
+                          "type": "boolean",
+                          "description": "true = the editor opens EMPTY and the file is created in front of the viewer; false = the file already had content and this beat appends or inserts into it"
+                        },
+                        "before": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-8 x {text<=52} - lines ALREADY in the file when the beat starts, drawn dimmed above the typing. Use when a later beat adds to a file an earlier beat wrote."
+                        },
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "1-14 x {text<=52 = the code line exactly as it is typed, indentation preserved, detail?<=40 = a plain-English aside shown beside the line while it is being typed, color?, atWord}. EVERY line needs atWord - the line types from that word to the next line's word, and that is the entire sync mechanism."
+                        },
+                        "runCmd": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "the command typed into the terminal strip once the file is written, e.g. 'uv run python ask.py'"
+                        },
+                        "runAtWord": {
+                          "type": "number",
+                          "description": "word the command types on"
+                        },
+                        "output": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-6 x {text<=64, color?} - what the command really printed, revealed line by line"
+                        },
+                        "outAtWord": {
+                          "type": "number",
+                          "description": "word the output lands on"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 40
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only - the editor chrome and the tab are on screen by frame 38"
+                        },
+                        "color": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

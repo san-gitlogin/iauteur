@@ -369,10 +369,12 @@ import {WhenNotSqlite} from './scenes/WhenNotSqlite';
 import {ModelShrug} from './scenes/ModelShrug';
 import {ClaimCheck} from './scenes/ClaimCheck';
 import {ColumnSplit} from './scenes/ColumnSplit';
+import {LiveCode} from './scenes/LiveCode';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  COLUMN_SPLIT: ColumnSplit,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  LIVE_CODE: LiveCode,
+  COLUMN_SPLIT: ColumnSplit,
   CLAIM_CHECK: ClaimCheck,
   MODEL_SHRUG: ModelShrug,
   WHEN_NOT_SQLITE: WhenNotSqlite,

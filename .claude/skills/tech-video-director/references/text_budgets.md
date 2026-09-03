@@ -68,6 +68,9 @@
 | CLAIM_CHECK tally threshold (squares per row, measured) | 40 |
 | COLUMN_SPLIT tableName / column label / row cells | 20 / 14 / 14 + 16 |
 | COLUMN_SPLIT tally label / question / gapNote | 16 / 46 / 26 |
+| LIVE_CODE line / line detail / output line | 52 / 40 / 64 |
+| LIVE_CODE filename / runCmd / caption | 26 / 44 / 40 |
+| LIVE_CODE lines (count) / before / output | 14 / 8 / 6 |
 Also: ≤5 steps, ≤4 chat messages, ≤4 recap points, ≤3 stats per scene.
 When an idea exceeds a budget: SHORTEN THE IDEA, never squeeze the text.
 Budgets are CONTEXT-AWARE: the same component in a narrower container gets a

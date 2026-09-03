@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'LIVE_CODE'
   | 'COLUMN_SPLIT'
   | 'CLAIM_CHECK'
   | 'MODEL_SHRUG'
@@ -379,6 +380,25 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type LiveCodeScene = SceneCommon<'LIVE_CODE'> & { data: {
+    liveCode: {
+      headline?: string;
+      filename?: string;
+      language?: string;
+      newFile?: boolean;
+      before?: Array<Record<string, unknown>>;
+      lines: Array<Record<string, unknown>>;
+      runCmd?: string;
+      runAtWord?: number;
+      output?: Array<Record<string, unknown>>;
+      outAtWord?: number;
+      caption?: string;
+      source?: string;
+      atWord?: number;
+      color?: string;
+    };
+  } };
 
 export type ColumnSplitScene = SceneCommon<'COLUMN_SPLIT'> & { data: {
     columnSplit: {
@@ -5480,6 +5500,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  LIVE_CODE: LiveCodeScene;
   COLUMN_SPLIT: ColumnSplitScene;
   CLAIM_CHECK: ClaimCheckScene;
   MODEL_SHRUG: ModelShrugScene;
@@ -5848,6 +5869,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | LiveCodeScene
   | ColumnSplitScene
   | ClaimCheckScene
   | ModelShrugScene

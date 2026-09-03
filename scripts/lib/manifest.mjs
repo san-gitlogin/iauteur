@@ -16,7 +16,29 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  COLUMN_SPLIT: {
+export const MANIFEST = {  LIVE_CODE: {
+    category: "code", family: "code", data_key: "liveCode",
+    purpose: "A FILE BEING WRITTEN, IN TIME WITH THE VOICE. An editor opens empty, its tab named, and the code is typed into it character by character - but each line types across the interval between ITS OWN anchor word and the next line's, so the typing speeds up and slows down with the narration instead of running at a fixed rate. The line being typed carries a highlight band and a caret; finished lines settle; lines not yet reached do not exist yet, because the file does not contain them yet. A terminal strip underneath types the command and prints the real output on their own words.",
+    use_when: "ANY beat where the viewer is meant to WRITE the code along with you - a from-scratch tutorial, a file being created, a fix being typed into an existing file. CODE_RUN reveals a block that is already on screen and CODE_WINDOW types at a fixed speed from one start; this one is the only shape where the typing itself is anchored per line, which is what makes a voiceover and a keyboard land together. Not for a finished listing nobody is asked to write (CODE_WINDOW).",
+    fields: {
+      headline: {t: 'string', max: 48},
+      filename: {t: 'string', max: 26, note: "the editor tab. Set `newFile` to watch the tab appear empty first."},
+      language: {t: 'string', note: "py/js/ts/bash/json/ini - colouring comes from the one shared map in codeSyntax.ts"},
+      newFile: {t: 'boolean', note: "true = the editor opens EMPTY and the file is created in front of the viewer; false = the file already had content and this beat appends or inserts into it"},
+      before: {t: 'items', preserveWs: true, note: "0-8 x {text<=52} - lines ALREADY in the file when the beat starts, drawn dimmed above the typing. Use when a later beat adds to a file an earlier beat wrote."},
+      lines: {t: 'items', req: true, preserveWs: true, note: "1-14 x {text<=52 = the code line exactly as it is typed, indentation preserved, detail?<=40 = a plain-English aside shown beside the line while it is being typed, color?, atWord}. EVERY line needs atWord - the line types from that word to the next line's word, and that is the entire sync mechanism."},
+      runCmd: {t: 'string', max: 44, note: "the command typed into the terminal strip once the file is written, e.g. 'uv run python ask.py'"},
+      runAtWord: {t: 'number', note: "word the command types on"},
+      output: {t: 'items', preserveWs: true, note: "0-6 x {text<=64, color?} - what the command really printed, revealed line by line"},
+      outAtWord: {t: 'number', note: "word the output lands on"},
+      caption: {t: 'string', max: 40},
+      source: {t: 'string', max: 64},
+      atWord: {t: 'anchor', note: "BASE only - the editor chrome and the tab are on screen by frame 38"},
+      color: {t: 'string'},
+    },
+    example: {liveCode: {"filename":"ask.py","language":"py","newFile":true,"lines":[{"text":"from openai import OpenAI","atWord":3,"detail":"one library, every provider"},{"text":"","atWord":5},{"text":"client = OpenAI(","atWord":5,"detail":"point it at your provider"},{"text":"    base_url=os.getenv(\"AI_BASE_URL\"),","atWord":6},{"text":"    api_key=os.getenv(\"AI_API_KEY\"),","atWord":7,"detail":"the key never goes in the code"},{"text":")","atWord":8}],"runCmd":"uv run python ask.py","runAtWord":9,"output":[{"text":"ready","color":"green"}],"outAtWord":10,"caption":"written in front of you, then run","atWord":2,"headline":"Nine lines, typed"}},
+  },
+  COLUMN_SPLIT: {
     category: "diagram", family: "structure", data_key: "columnSplit",
     purpose: "A TABLE TAKEN APART COLUMN BY COLUMN, AND THE ROW THAT STOPS EXISTING. Real rows are on screen first, each one a band joining two cells. Then the two columns slide apart, the bands break, and each column collapses into its own tally of values and counts. A question that needs BOTH columns then lands in the gap, and the connector it would need is drawn as a broken line with nothing to join.",
     use_when: "A beat about information lost by SUMMARISING per field: a column profile that cannot answer a cross-column question, an aggregate that cannot be un-aggregated, a log stripped to counts. The lesson is the missing JOIN, and this component is the only one that draws a link that is not there. Not for a hierarchy (DIAGRAM tree) and not for a query over rows (DATABASE_TABLE).",

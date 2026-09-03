@@ -254,6 +254,7 @@ export const TYPES = [
   'MODEL_SHRUG',
   'CLAIM_CHECK',
   'COLUMN_SPLIT',
+  'LIVE_CODE',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];
