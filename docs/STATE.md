@@ -76,6 +76,43 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-09-03 (later) — the hook card, and two components built to replace a default
+
+Owner, on the finished cut: *"this issue of this title card is persisting please correct"*,
+then *"i asked you to make this more modern... a line chart which shows the drastic reduction
+in cost with green lines"*, then *"this one too. Not a graph but something different. I need
+variations."*
+
+**The hook card said IT DOUBLED.** Those three words had already been rejected once, on the
+thumbnail, and I had already written a linter guard — for `spec.thumbnail`, and only that.
+The same words on the same video, on the surface a viewer sees at second zero, went straight
+through. The guard now covers the HOOK headline/subtext/kicker on the same argument (LAW 0f
+→ FIX THE CLASS, NOT THE INSTANCE). Two neighbours found with it:
+- `hookVariant: 'figure'` needs a digit in the copy for `figureIn()` to find; with none the
+  branch's `&& fig` fails and a DIFFERENT silhouette renders, silently. Rejected now, along
+  with `reveal` without a `heroAsset`.
+- the plaque hook's corner mark is translated −46% to straddle the card's corner, four lines
+  under the `overflow: hidden` that clipped it — a sliver of a tile cropped on two sides,
+  under a comment promising "three quarters of it outside the frame". Card and mark are
+  siblings in an unclipped wrapper now.
+
+**Two new depictions, because five of twenty-one beats were the same glass card.**
+`STAT_PANELS` was under the 35% over-reliance cap and still wrong: the cap measures
+repetition, the owner was describing monotony.
+- **`RATE_SHEET`** (new scene type, `src/scenes/RateSheet.tsx`) — a price list with one line
+  marked down. Rows that held take a HELD stamp; the row that moved has its old price struck
+  through (the strike DRAWS, it does not fade) and the new price drops in beside it with a
+  computed −N% chip. Registered in the manifest, `types.ts`, `MainComposition`, `constants
+  TYPES` and `showcaseSpec` so every design pack renders it for review.
+- **`LINE_CHART` variant `savings`** — the old cost as a dim dashed ceiling, the new as a lit
+  glowing floor, and the AREA BETWEEN them filling green as the new line draws. The gap is
+  the saving, so nobody measures it by eye. A read-out rides the head of the sweep; the total
+  lands on `totalAtWord` (it first landed on `newLine.atWord + 52`, a hardcoded interval
+  inside an explanatory component — exactly what LAW 0i.1 forbids).
+
+Also: `briefs/examples/lean-reply.json` had the same nameless-hook defect and was fixed —
+the assemble gate caught it, which is the example fixture doing its job.
+
 ### 2026-09-03 — five silent instructions, and the gate that was never wired
 
 Chasing one owner complaint — *"component overlay over the recording completely hides it"* —

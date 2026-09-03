@@ -3,6 +3,7 @@ import {useCurrentFrame} from 'remotion';
 import {useTheme, wordToFrame} from '../themes';
 import {useScale, useSem, hexA} from '../ui';
 import {drawProgress} from '../motion';
+import {arriveAt, landAt} from '../motion/system';
 import {LineChartData, SemColor} from '../types';
 
 const CYCLE: SemColor[] = ['blue', 'purple', 'green'];
@@ -63,6 +64,172 @@ export const LineChart: React.FC<{data: LineChartData; w: number; h: number}> = 
           <g>
             <circle cx={sx(li)} cy={sy(s0.values[li])} r={7 * scale} fill={c} stroke={t.colors.bg} strokeWidth={2 * scale} />
             <text x={sx(li) + 16 * scale} y={sy(s0.values[li]) + 8 * scale} textAnchor="start" fontFamily={t.fonts.display} fontWeight={800} fontSize={34 * scale} fill={c} style={{fontVariantNumeric: 'tabular-nums'}}>{Math.round(s0.values[li])}{data.yUnit ?? ''}</text>
+          </g>
+        ) : null}
+      </svg>
+    );
+  }
+
+  // ── VARIANT: savings — WHAT THE CUT IS WORTH, drawn as the gap it opens ───────
+  //
+  // Owner: *"I asked you to make this more modern. The component needs to be like a line
+  // chart which shows the drastic reduction in cost with green lines. You know the drill.
+  // Beautiful component with animation."*
+  //
+  // Two plain polylines are a chart you have to READ: the viewer measures the vertical
+  // distance between them by eye, at every x, and only then gets the point. The saving is
+  // not a line — it is the AREA BETWEEN the lines, so that is what is drawn: a green wedge
+  // that opens as the hours pass, with the old cost as a dim dashed ceiling above it and the
+  // new cost as a lit floor below. The wedge IS the argument, and it needs no reading.
+  //
+  // What moves, and in what order (motion guide: overlap, never queue):
+  //   1. the OLD line sweeps in dashed and dim — the ceiling, established first
+  //   2. the NEW line draws under it, lit and glowing, on its OWN word (LAW 0i.1)
+  //   3. the wedge fills BEHIND the new line as it draws, so the gap opens rather than
+  //      appearing — the growth is the animation, not a fade
+  //   4. a running read-out rides the head of the sweep with the saving SO FAR, counting
+  //      in real values rather than ticking to a final number nobody watched accumulate
+  //   5. the total lands last, once both lines are home
+  if (variant === 'savings' && data.series.length >= 2) {
+    const [was, now] = data.series;
+    const cOld = sem(was.color ?? 'orange');
+    const cNew = sem(now.color ?? 'green');
+    const pOld = was.atWord == null ? p : drawProgress(frame, wordToFrame(was.atWord), {dur: 46});
+    const pNew = now.atWord == null ? p : drawProgress(frame, wordToFrame(now.atWord), {dur: 52});
+    const m = Math.min(was.values.length, now.values.length);
+    const last = m - 1;
+    const saved = (was.values[last] ?? 0) - (now.values[last] ?? 0);
+    const pct = was.values[last] ? Math.round((saved / was.values[last]) * 100) : 0;
+    const unit = data.yUnit ?? '';
+
+    // The head of the sweep, in chart space, so the read-out rides it.
+    const headI = Math.min(last, Math.max(0, pNew * last));
+    const headX = xAt(headI);
+    const lerpAt = (vals: number[], t: number) => {
+      const i = Math.floor(t), f = t - i;
+      return (vals[i] ?? 0) + ((vals[Math.min(last, i + 1)] ?? 0) - (vals[i] ?? 0)) * f;
+    };
+    const headOld = lerpAt(was.values, headI);
+    const headNew = lerpAt(now.values, headI);
+
+    const oldPts = was.values.slice(0, m).map((v, i) => `${xAt(i)},${yAt(v)}`).join(' ');
+    const newPts = now.values.slice(0, m).map((v, i) => `${xAt(i)},${yAt(v)}`).join(' ');
+    // The wedge: along the old line out, back along the new line.
+    const wedge =
+      `M ${xAt(0)},${yAt(was.values[0])} ` +
+      was.values.slice(0, m).map((v, i) => `L ${xAt(i)},${yAt(v)}`).join(' ') + ' ' +
+      now.values.slice(0, m).map((v, i) => `L ${xAt(i)},${yAt(v)}`).reverse().join(' ') + ' Z';
+
+    // THE TOTAL LANDS ON ITS OWN WORD. The fallback keeps old specs working, but a beat
+    // that says "about thirty-seven dollars by the fifth hour" wants the number to arrive
+    // exactly there, not 52 frames after a line finished drawing.
+    const totalIn = landAt(
+      frame,
+      data.totalAtWord != null
+        ? wordToFrame(data.totalAtWord)
+        : wordToFrame(now.atWord ?? data.atWord ?? 1) + 52,
+      22,
+    );
+    const gid = `${clipId}-sv`;
+    return (
+      <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{overflow: 'visible'}}>
+        <defs>
+          <linearGradient id={`${gid}-fill`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={hexA(cNew, 0.42)} />
+            <stop offset="100%" stopColor={hexA(cNew, 0.04)} />
+          </linearGradient>
+          <clipPath id={`${gid}-old`}><rect x={0} y={0} width={pad.l + iw * pOld} height={h} /></clipPath>
+          <clipPath id={`${gid}-new`}><rect x={0} y={0} width={pad.l + iw * pNew} height={h} /></clipPath>
+        </defs>
+
+        {/* gridlines + y axis, in the chart's own quiet register */}
+        {Array.from({length: rows + 1}).map((_, r) => {
+          const y = pad.t + (ih * r) / rows;
+          return (
+            <g key={r}>
+              <line x1={pad.l} y1={y} x2={pad.l + iw} y2={y}
+                stroke={t.colors.panelBorder} strokeWidth={1} opacity={0.5} />
+              <text x={pad.l - 12 * scale} y={y + 5 * scale} textAnchor="end"
+                fontFamily={t.fonts.mono} fontSize={17 * scale} fill={t.colors.muted}>
+                {Math.round(yMax * (1 - r / rows))}{unit}
+              </text>
+            </g>
+          );
+        })}
+        {xs.map((lab, i) => (
+          <text key={i} x={xAt(i)} y={pad.t + ih + 30 * scale} textAnchor="middle"
+            fontFamily={t.fonts.mono} fontSize={17 * scale} fill={t.colors.muted}>{lab}</text>
+        ))}
+
+        {/* THE SAVING — the whole point of the beat, opening as the new line draws */}
+        <g clipPath={`url(#${gid}-new)`}>
+          <path d={wedge} fill={`url(#${gid}-fill)`} />
+        </g>
+
+        {/* the old cost: a dim dashed ceiling, deliberately recessive */}
+        <g clipPath={`url(#${gid}-old)`}>
+          <polyline points={oldPts} fill="none" stroke={hexA(cOld, 0.75)}
+            strokeWidth={3 * scale} strokeDasharray={`${9 * scale} ${7 * scale}`}
+            strokeLinejoin="round" strokeLinecap="round" />
+        </g>
+
+        {/* the new cost: lit, solid, and the only glowing thing on the card */}
+        <g clipPath={`url(#${gid}-new)`}>
+          <polyline points={newPts} fill="none" stroke={cNew} strokeWidth={5 * scale}
+            strokeLinejoin="round" strokeLinecap="round"
+            style={t.style.glow > 0 ? {filter: `drop-shadow(0 0 ${9 * t.style.glow}px ${hexA(cNew, 0.65)})`} : undefined} />
+        </g>
+
+        {/* the head of the sweep: a tick on each line and the gap between them, live */}
+        {pNew > 0.02 && pNew < 0.999 ? (
+          <g>
+            <line x1={headX} y1={yAt(headOld)} x2={headX} y2={yAt(headNew)}
+              stroke={hexA(cNew, 0.55)} strokeWidth={2 * scale}
+              strokeDasharray={`${3 * scale} ${4 * scale}`} />
+            <circle cx={headX} cy={yAt(headNew)} r={7 * scale} fill={cNew}
+              stroke={t.colors.bg} strokeWidth={2.5 * scale} />
+            <text x={headX + 14 * scale} y={(yAt(headOld) + yAt(headNew)) / 2 + 6 * scale}
+              textAnchor="start" fontFamily={t.fonts.mono} fontWeight={700}
+              fontSize={26 * scale} fill={cNew} style={{fontVariantNumeric: 'tabular-nums'}}>
+              {`\u2212${unit}${(headOld - headNew).toFixed(headOld - headNew < 10 ? 1 : 0)}`}
+            </text>
+          </g>
+        ) : null}
+
+        {/* endpoints, named — so the two ends are readable without the legend */}
+        {pOld >= 0.999 ? (
+          <text x={xAt(last) - 10 * scale} y={yAt(was.values[last]) - 16 * scale} textAnchor="end"
+            fontFamily={t.fonts.mono} fontSize={24 * scale} fill={hexA(cOld, 0.95)}
+            style={{fontVariantNumeric: 'tabular-nums'}}>
+            {`${unit}${was.values[last]}`}
+          </text>
+        ) : null}
+        {pNew >= 0.999 ? (
+          <g>
+            <circle cx={xAt(last)} cy={yAt(now.values[last])} r={7 * scale} fill={cNew}
+              stroke={t.colors.bg} strokeWidth={2.5 * scale} />
+            <text x={xAt(last) - 10 * scale} y={yAt(now.values[last]) + 34 * scale} textAnchor="end"
+              fontFamily={t.fonts.mono} fontWeight={700} fontSize={26 * scale} fill={cNew}
+              style={{fontVariantNumeric: 'tabular-nums'}}>
+              {`${unit}${now.values[last]}`}
+            </text>
+          </g>
+        ) : null}
+
+        {/* the total, landing once both lines are home — a result, not a caption */}
+        {totalIn > 0.01 ? (
+          <g transform={`translate(${pad.l + iw * 0.5}, ${pad.t + ih * 0.28})`}
+             opacity={totalIn} style={{transformOrigin: 'center'}}>
+            <text textAnchor="middle" fontFamily={t.fonts.display} fontWeight={800}
+              fontSize={(62 * scale) * (0.86 + 0.14 * totalIn)} fill={cNew}
+              style={{fontVariantNumeric: 'tabular-nums',
+                      filter: t.style.glow > 0 ? `drop-shadow(0 0 ${14 * t.style.glow}px ${hexA(cNew, 0.5)})` : undefined}}>
+              {`\u2212${pct}%`}
+            </text>
+            <text y={34 * scale} textAnchor="middle" fontFamily={t.fonts.mono}
+              fontSize={22 * scale} fill={t.colors.muted}>
+              {`${unit}${saved.toFixed(saved < 10 ? 2 : 0)} saved over ${xs[last] ?? 'the run'}`}
+            </text>
           </g>
         ) : null}
       </svg>

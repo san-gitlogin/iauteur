@@ -582,6 +582,24 @@ export interface SpecRow {
   b: string;
   winner?: 'a' | 'b' | 'tie';
 }
+export interface RateSheetRow {
+  label: string;
+  value: string;
+  /** The price BEFORE. Its presence is what makes this row a markdown rather than a held row. */
+  was?: string;
+  note?: string;
+  atWord?: number;
+}
+
+export interface RateSheetData {
+  headline?: string;
+  unit?: string;
+  rows: RateSheetRow[];
+  foot?: string;
+  footAtWord?: number;
+  atWord?: number;
+}
+
 export interface SpecCompareData {
   headline?: string;
   a: SpecSide;
@@ -10897,6 +10915,7 @@ export interface SceneData {
   pipeline?: PipelineData;       // PIPELINE
   stack?: StackData;             // LAYERED_STACK
   grid?: GridArrayData;          // GRID_ARRAY
+  rateSheet?: RateSheetData;     // RATE_SHEET
   compare?: SpecCompareData;     // SPEC_COMPARE
   die?: DieData;                 // DIE_SHOT
   net?: NeuralNetData;           // NEURAL_NET
@@ -11390,7 +11409,16 @@ export interface LineChartData {
   area?: boolean;
   // VARIANTs: sparkline (compact, no axes/labels), dualaxis (2nd y-scale on the
   // right for series[1]), compound (area-filled growth curve + ×growth badge).
-  variant?: 'sparkline' | 'dualaxis' | 'compound';
+  /**
+   * `savings` only: the word the TOTAL lands on. Without it the badge fires on a fixed
+   * offset after the second line finishes — a hardcoded frame interval inside an
+   * explanatory component, which LAW 0i.1 forbids for exactly the reason it matters here:
+   * the total is the payoff, and the payoff belongs on the word that names it.
+   */
+  totalAtWord?: number;
+  // `savings` draws the AREA BETWEEN two series — a before/after cost where the gap is the
+  // point. series[0] is the old cost (dim, dashed ceiling), series[1] the new (lit floor).
+  variant?: 'sparkline' | 'dualaxis' | 'compound' | 'savings';
   y2Unit?: string;         // dualaxis: unit for the right (series[1]) axis
   forecastFrom?: number;   // FORECAST_BAND: index where history ends → forecast (dashed + band)
   bandPct?: number;        // FORECAST_BAND: half-width of the uncertainty band as a fraction (e.g. 0.18)

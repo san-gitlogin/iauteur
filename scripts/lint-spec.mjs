@@ -264,6 +264,58 @@ if (spec.thumbnail && subject) {
   }
 }
 
+// ── 1b. AND THE HOOK CARD IS READ THE SAME WAY (owner, 2026-09-03) ──────────
+//
+// Owner, on the finished cut: *"this issue of this title card is persisting please correct"*
+// — pointing at a HOOK reading **IT DOUBLED**, the very words he had already rejected on the
+// thumbnail. The guard above was written for `spec.thumbnail` and only for `spec.thumbnail`,
+// so the same three words on the same video, on the surface a viewer actually meets FIRST,
+// sailed through. Fixing the instance and not the class is how a correction comes back.
+//
+// The argument is identical and it is stronger here: the HOOK headline is on screen at
+// second zero, before the narration has named anything. LAW 0g.1 already requires scene 1's
+// NARRATION to say the subject — this requires the CARD to, because a viewer reads the card
+// before the sentence finishes, and a muted autoplay never gets the sentence at all.
+{
+  const hook = (spec.scenes ?? []).find((sc) => sc.type === 'HOOK');
+  if (hook && subject) {
+    const face = [hook.data?.headline, hook.data?.subtext, hook.data?.kicker]
+      .filter(Boolean).join(' ').toLowerCase();
+    const bits = subject.toLowerCase().split(/[^a-z0-9.]+/).filter((w) => w.length > 2);
+    if (bits.length && !bits.some((w) => face.includes(w))) {
+      E(`${hook.id}: the HOOK card never says "${subject}" — it reads "${String(hook.data?.headline ?? '')}". ` +
+        `The headline is on screen at second zero, before the narration has named anything, ` +
+        `so a claim without its subject asks a stranger to guess. Put the name in the ` +
+        `headline, subtext or kicker (LAW 0g.6 — same rule as the thumbnail).`);
+    }
+  }
+}
+
+// ── 1c. A SILHOUETTE THE COPY CANNOT SUPPORT IS SILENTLY IGNORED ────────────
+//
+// `hookVariant: 'figure'` draws a big TICKING NUMBER pulled out of the headline or subtext.
+// With no digits in either, `figureIn()` returns null, the branch's `&& fig` fails, and the
+// hook falls through to whatever silhouette is last — a different design from the one the
+// spec asked for, with no error anywhere. Found on this video: `'figure'` authored over
+// "IT DOUBLED" / "Terminal-Bench-Science", rendering the plaque instead.
+// Same for 'reveal', which needs a mark to reveal.
+{
+  const hook = (spec.scenes ?? []).find((sc) => sc.type === 'HOOK');
+  const v = hook?.data?.hookVariant;
+  if (v === 'figure') {
+    const copy = `${hook.data?.headline ?? ''} ${hook.data?.subtext ?? ''}`;
+    if (!/\d/.test(copy)) {
+      E(`${hook.id}: hookVariant "figure" draws a number counting up, and neither the headline ` +
+        `nor the subtext contains one — the variant is silently discarded and a different ` +
+        `silhouette renders. Put the figure in the copy, or pick a variant that fits it.`);
+    }
+  }
+  if (v === 'reveal' && !hook?.data?.heroAsset) {
+    E(`${hook.id}: hookVariant "reveal" lands the MARK first and needs a \`heroAsset\` to land ` +
+      `— without one the variant is silently discarded (LAW 0b: fetch the topic's art).`);
+  }
+}
+
 // ── 2. THE ON-SCREEN TITLE IS THE CLICK PROMISE, not a mood one-liner. ───────
 const STOP = new Set(['playwright', 'python', 'tutorial', 'the', 'and', 'for', 'with', 'your',
                       'what', 'why', 'how', 'that', 'this', 'from', 'into', 'when', 'once',
@@ -744,7 +796,7 @@ for (const s of spec.scenes ?? []) {
       checkColor(id, 'series.color', s.color);
     }
     for (const x of d.lineChart.xAxis ?? []) if (len(x) > 6) E(`${id}: x-axis label "${x}" > 6 chars`);
-    if (d.lineChart.variant && !['sparkline', 'dualaxis', 'compound'].includes(d.lineChart.variant)) E(`${id}: LINE_CHART variant must be sparkline/dualaxis/compound`);
+    if (d.lineChart.variant && !['sparkline', 'dualaxis', 'compound', 'savings'].includes(d.lineChart.variant)) E(`${id}: LINE_CHART variant must be sparkline/dualaxis/compound/savings`);
     if (d.lineChart.variant === 'dualaxis' && (d.lineChart.series ?? []).length < 2) E(`${id}: LINE_CHART dualaxis needs 2 series`);
     if (len(d.lineChart.y2Unit) > 6) E(`${id}: LINE_CHART y2Unit > 6 chars`);
   }

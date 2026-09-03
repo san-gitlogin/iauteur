@@ -72,10 +72,10 @@
       "transition": "fade",
       "background": "zoneA",
       "data": {
-        "headline": "IT DOUBLED",
-        "subtext": "Terminal-Bench-Science",
+        "headline": "CLAUDE FABLE 5.1",
+        "subtext": "science score doubled",
         "heroAsset": "si:anthropic",
-        "hookVariant": "figure"
+        "hookVariant": "reveal"
       },
       "durationFrames": 213,
       "audio": "audio/fable_long_s01.mp3",
@@ -1223,7 +1223,7 @@
     {
       "id": "s16",
       "type": "LINE_CHART",
-      "narration": "Here's a worked example. Picture one long session that re-reads the same context, ten million tokens' worth an hour. Orange is what those re-reads cost at the old price, adding up hour by hour. Green is the very same session at the new price.",
+      "narration": "Here's a worked example. Picture one long session that re-reads the same context, ten million tokens' worth an hour. Orange is what those re-reads used to cost, adding up hour by hour. Green is the very same session at the new price. The gap opening between them is what the cut is actually worth — roughly thirty-eight dollars by the fifth hour.",
       "transition": "iris",
       "background": "zoneA",
       "data": {
@@ -1242,7 +1242,7 @@
                 50
               ],
               "color": "orange",
-              "atWord": 17.917
+              "atWord": 17.667
             },
             {
               "label": "New $0.25/M",
@@ -1255,7 +1255,7 @@
                 12.5
               ],
               "color": "green",
-              "atWord": 29.667
+              "atWord": 28.583
             }
           ],
           "xAxis": [
@@ -1267,51 +1267,53 @@
             "5h"
           ],
           "yUnit": "$",
-          "area": true,
-          "atWord": 17.917
+          "variant": "savings",
+          "totalAtWord": 15.167,
+          "atWord": 17.667
         }
       },
-      "durationFrames": 467,
+      "durationFrames": 633,
       "audio": "audio/fable_long_s16.mp3",
       "timingSource": "tts"
     },
     {
       "id": "s17",
-      "type": "STAT_PANELS",
-      "narration": "Those two lines separate because a cached re-read now costs twenty-five cents per million tokens instead of a dollar. So this is not a price cut — it's a discount on repetition, and the difference matters. The sticker price itself didn't move at all: ten dollars per million words in, fifty out, exactly the same as the previous model, and still dearer per word than Opus 5 or GPT-5.6.",
+      "type": "RATE_SHEET",
+      "narration": "Those two lines separate because a cached re-read now costs twenty-five cents per million tokens instead of a dollar. So this is not a price cut — it's a discount on repetition. Look at the rest of the sheet: sending the model text is still ten dollars a million, getting text back is still fifty, and neither of those moved a cent. Only the re-reading got cheaper, which is why your bill drops on long sessions and barely moves on short ones.",
       "transition": "fade",
       "background": "zoneB",
       "data": {
-        "stats": [
-          {
-            "kicker": "Input / output",
-            "value": "$10 / $50",
-            "note": "per million — unchanged",
-            "atWord": 29.167
-          },
-          {
-            "kicker": "Cache read",
-            "value": "$1→$0.25",
-            "note": "down 75%",
-            "color": "green",
-            "atWord": 22
-          },
-          {
-            "kicker": "Still dearer",
-            "value": "per word",
-            "note": "than Opus 5 · GPT-5.6",
-            "color": "orange",
-            "atWord": 47.75
-          }
-        ],
-        "verdict": {
-          "text": "A discount on repetition",
-          "color": "orange",
-          "atWord": 44
+        "rateSheet": {
+          "headline": "One line moved",
+          "unit": "per million tokens",
+          "rows": [
+            {
+              "label": "Text you send in",
+              "value": "$10",
+              "note": "same as the model it replaces",
+              "atWord": 30.083
+            },
+            {
+              "label": "Text it writes back",
+              "value": "$50",
+              "note": "same as the model it replaces",
+              "atWord": 36.417
+            },
+            {
+              "label": "Re-reading text it already saw",
+              "value": "$0.25",
+              "was": "$1",
+              "note": "the only line that changed",
+              "atWord": 45.667
+            }
+          ],
+          "foot": "Per word, Fable 5.1 is still dearer than Opus 5 or GPT-5.6.",
+          "footAtWord": 48.583,
+          "atWord": 29.25
         },
-        "source": "per million tokens · Anthropic, 2026-09"
+        "source": "Anthropic, 2026-09"
       },
-      "durationFrames": 706,
+      "durationFrames": 737,
       "audio": "audio/fable_long_s17.mp3",
       "timingSource": "tts"
     },

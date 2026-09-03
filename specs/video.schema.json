@@ -263,6 +263,7 @@
               "LAYERED_STACK",
               "GRID_ARRAY",
               "SPEC_COMPARE",
+              "RATE_SHEET",
               "DIE_SHOT",
               "NEURAL_NET",
               "DATACENTER",
@@ -18709,6 +18710,10 @@
                           "type": "boolean",
                           "description": "fill under the line"
                         },
+                        "variant": {
+                          "type": "string",
+                          "description": "savings = the BEFORE/AFTER cost picture: series[0] is the old cost (dim dashed ceiling), series[1] the new (lit, glowing floor), and the AREA BETWEEN them fills green as the new line draws - the gap IS the saving, so nobody has to measure it by eye. A read-out rides the head of the sweep and the total percentage lands once both lines are home. Needs 2 series, each with its own atWord, plus totalAtWord for the word the total percentage lands on. Others: sparkline (compact, no axes), dualaxis (2nd y-scale for series[1]), compound (growth + xN badge)."
+                        },
                         "atWord": {
                           "type": "number"
                         }
@@ -19078,6 +19083,57 @@
                         },
                         "atWord": {
                           "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "RATE_SHEET"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "rateSheet": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "unit": {
+                          "type": "string",
+                          "maxLength": 24,
+                          "description": "what every price on the sheet is per — e.g. 'per million tokens'. Sits under the headline so no row has to repeat it."
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-4 × {label≤22 = what is being charged for, value≤14 = the price NOW, was?≤14 = the price BEFORE (its presence is what makes the row a MARKDOWN: the old price is struck through on the anchor and the new one lands beside it), note?≤26 = the small print, atWord}. A row with no `was` is a HELD row and takes a stamp instead."
+                        },
+                        "foot": {
+                          "type": "string",
+                          "maxLength": 72,
+                          "description": "one closing line under the sheet — the caveat a price list cannot show, e.g. 'still dearer per word than Opus 5'"
+                        },
+                        "footAtWord": {
+                          "type": "number"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "BASE only — the sheet and its header are on screen by frame 38"
                         }
                       }
                     }

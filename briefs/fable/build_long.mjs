@@ -53,8 +53,13 @@ const scenes = [];
   const n = "Claude Fable 5.1 just doubled its score on a hard science test. " +
             "Let me show you what that means.";
   scenes.push(scene('HOOK', n, {
-    headline: 'IT DOUBLED', subtext: 'Terminal-Bench-Science', heroAsset: 'si:anthropic',
-    hookVariant: 'figure',
+    // NAME THE THING ON THE CARD, NOT JUST IN THE SENTENCE. "IT DOUBLED" is a predicate
+    // with no subject, on the one surface a viewer reads at second zero — the same words
+    // the owner rejected on the thumbnail, left standing here. And `figure` needs a number
+    // in the copy to count up; with none, it was being silently discarded and the plaque
+    // rendered instead. `reveal` lands the Anthropic mark first, then names the model.
+    headline: 'CLAUDE FABLE 5.1', subtext: 'science score doubled', heroAsset: 'si:anthropic',
+    hookVariant: 'reveal',
   }));
 }
 
@@ -325,8 +330,10 @@ scenes.push(rec(
     "Here's a worked example. " +
     "Picture one long session that re-reads the same context, " +
     "ten million tokens' worth an hour. " +
-    "Orange is what those re-reads cost at the old price, adding up hour by hour. " +
-    "Green is the very same session at the new price.";
+    "Orange is what those re-reads used to cost, adding up hour by hour. " +
+    "Green is the very same session at the new price. " +
+    "The gap opening between them is what the cut is actually worth — " +
+    "roughly thirty-eight dollars by the fifth hour.";
   // A CHART CARRIES ITS OWN FURNITURE (LAW 0m.2): what is plotted, and where the numbers
   // came from. Without a title the frame is two lines and a legend, and a viewer who joins
   // mid-beat has no way to know what is accumulating.
@@ -346,32 +353,48 @@ scenes.push(rec(
     ],
     xAxis: ['0h', '1h', '2h', '3h', '4h', '5h'],
     yUnit: '$',
-    area: true,
+    // The saving is the AREA BETWEEN the two lines, so the component draws that rather than
+    // asking the viewer to measure the vertical gap by eye at every hour.
+    variant: 'savings',
+    // the payoff lands on the word that names it, not on a fixed offset
+    totalAtWord: at(n, 'worth'),
     atWord: at(n, 'Orange'),
     },
   }));
 }
 
 {
+  // NOT ANOTHER SET OF STAT CARDS. Owner: *"this one too. Not a graph but something
+  // different. I need variations."* Five beats in this cut already use STAT_PANELS, and a
+  // chart of $10 / $50 / $1 / $0.25 would draw four similar bars and bury the only fact
+  // that matters. The argument here is "one line on the price list moved and the rest did
+  // not", and the object that says that without a word is a PRICE STICKER: the old number
+  // struck through, the new one written beside it, everything else stamped HELD.
   const n =
     "Those two lines separate because a cached re-read now costs twenty-five cents " +
     "per million tokens instead of a dollar. " +
-    "So this is not a price cut — it's a discount on repetition, and the difference matters. " +
-    "The sticker price itself didn't move at all: ten dollars per million words in, " +
-    "fifty out, exactly the same as the previous model, " +
-    "and still dearer per word than Opus 5 or GPT-5.6.";
-  scenes.push(scene('STAT_PANELS', n, {
-    stats: [
-      {kicker: 'Input / output', value: '$10 / $50', note: 'per million — unchanged', atWord: at(n, 'sticker')},
-      {kicker: 'Cache read', value: '$1→$0.25', note: 'down 75%', color: 'green', atWord: at(n, 'discount')},
-      // The narration claims Fable 5.1 is still dearer per word than its rivals and showed
-      // nothing for it — a comparison the viewer had to take on trust while looking at a
-      // panel about something else. If you make the comparison, put it on screen.
-      {kicker: 'Still dearer', value: 'per word', note: 'than Opus 5 \u00b7 GPT-5.6',
-       color: 'orange', atWord: at(n, 'dearer')},
-    ],
-    verdict: {text: 'A discount on repetition', color: 'orange', atWord: at(n, 'previous')},
-    source: `per million tokens · ${SRC}`,
+    "So this is not a price cut — it's a discount on repetition. " +
+    "Look at the rest of the sheet: sending the model text is still ten dollars a million, " +
+    "getting text back is still fifty, and neither of those moved a cent. " +
+    "Only the re-reading got cheaper, which is why your bill drops on long sessions " +
+    "and barely moves on short ones.";
+  scenes.push(scene('RATE_SHEET', n, {
+    rateSheet: {
+      headline: 'One line moved',
+      unit: 'per million tokens',
+      rows: [
+        {label: 'Text you send in', value: '$10', note: 'same as the model it replaces',
+         atWord: at(n, 'sending')},
+        {label: 'Text it writes back', value: '$50', note: 'same as the model it replaces',
+         atWord: at(n, 'getting')},
+        {label: 'Re-reading text it already saw', value: '$0.25', was: '$1',
+         note: 'the only line that changed', atWord: at(n, 'Only')},
+      ],
+      foot: 'Per word, Fable 5.1 is still dearer than Opus 5 or GPT-5.6.',
+      footAtWord: at(n, 'cheaper'),
+      atWord: at(n, 'sheet'),
+    },
+    source: `Anthropic, 2026-09`,
   }));
 }
 

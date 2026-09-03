@@ -459,6 +459,17 @@ export const HookStage: React.FC<{scene: Scene; kit?: HookKit}> = ({scene, kit =
       alignItems: 'center', justifyContent: 'safe center', flexDirection: 'column',
       padding: (vertical ? 62 : 140) * scale, gap: 30 * scale, overflow: 'hidden',
     }}>
+      {/* ⚠ THE MARK LIVES OUTSIDE THE CLIPPED CARD, OR IT IS NOT A CORNER MARK.
+          The card sets `overflow: hidden` so the top-edge light and the indigo bloom stay
+          inside its rounded corners. The mark below is deliberately translated by -46% of
+          its own size to STRADDLE the corner — and with the clip on the same element, the
+          three quarters that are supposed to hang outside were simply cut off. What shipped
+          was a sliver of a tile pinned to the card's edge, cropped on two sides. The comment
+          promising "three quarters of it outside the frame" sat four lines under the
+          `overflow: hidden` that made it impossible.
+          So the card and the mark are now SIBLINGS inside an unclipped positioning context:
+          the card keeps its clip, the mark keeps its overhang. */}
+      <div style={{position: 'relative', maxWidth: '100%', display: 'flex'}}>
       <div style={{
         position: 'relative', maxWidth: '100%', overflow: 'hidden',
         padding: `${(vertical ? 64 : 66) * scale}px ${(vertical ? 56 : 84) * scale}px`,
@@ -492,7 +503,8 @@ export const HookStage: React.FC<{scene: Scene; kit?: HookKit}> = ({scene, kit =
           opacity: inner, transform: `translateY(${(1 - inner) * 8 * scale}px)`,
           textShadow: glow(38, t.colors.glowSoft),
         }}>{headline}</div>
-        {d.heroAsset && kit.mark ? (
+      </div>
+      {d.heroAsset && kit.mark ? (
           <div style={{
             position: 'absolute', top: 0, left: 0,
             opacity: landAt(frame, mAt, 20),
@@ -502,7 +514,7 @@ export const HookStage: React.FC<{scene: Scene; kit?: HookKit}> = ({scene, kit =
             // three quarters of it outside the frame at every aspect and size.
             transform: `translate(-46%, -46%) scale(${0.7 + 0.3 * landAt(frame, mAt, 20)})`,
           }}>{mark((vertical ? 84 : 78) * scale)}</div>
-        ) : null}
+      ) : null}
       </div>
       {sub ? (
         <div style={{opacity: arriveAt(frame, hAt + 24, 16)}}>{subNode(sub)}</div>

@@ -16,8 +16,8 @@
       "type": "HOOK",
       "narration": "A password manager holds every secret you own. One breach away from all of it.",
       "data": {
-        "headline": "ONE LEAK, EVERYWHERE",
-        "subtext": "reuse is the real risk",
+        "headline": "PASSWORD MANAGERS",
+        "subtext": "one leak, everywhere",
         "heroAsset": "lucide:lock"
       }
     },

@@ -79,6 +79,7 @@ import {Pipeline} from './scenes/Pipeline';
 import {LayeredStack} from './scenes/LayeredStack';
 import {GridArray} from './scenes/GridArray';
 import {SpecCompare} from './scenes/SpecCompare';
+import {RateSheet} from './scenes/RateSheet';
 import {DieShot} from './scenes/DieShot';
 import {NeuralNet} from './scenes/NeuralNet';
 import {DataCenter} from './scenes/DataCenter';
@@ -658,6 +659,7 @@ const registry: Record<string, React.FC<{scene: Scene}>> = {  WHEN_NOT_SQLITE: W
   LAYERED_STACK: LayeredStack,
   GRID_ARRAY: GridArray,
   SPEC_COMPARE: SpecCompare,
+  RATE_SHEET: RateSheet,
   DIE_SHOT: DieShot,
   NEURAL_NET: NeuralNet,
   DATACENTER: DataCenter,

@@ -257,6 +257,7 @@ export type SceneTypeName =
   | 'PIPELINE'
   | 'LAYERED_STACK'
   | 'GRID_ARRAY'
+  | 'RATE_SHEET'
   | 'SPEC_COMPARE'
   | 'NEURAL_NET'
   | 'PICTOGRAM'
@@ -4343,6 +4344,7 @@ export type LineChartScene = SceneCommon<'LINE_CHART'> & { data: {
       yMax?: number;
       yUnit?: string;
       area?: boolean;
+      variant?: string;
       atWord?: number;
     };
   } };
@@ -4422,6 +4424,17 @@ export type GridArrayScene = SceneCommon<'GRID_ARRAY'> & { data: {
       label?: string;
       legendA?: string;
       legendB?: string;
+      atWord?: number;
+    };
+  } };
+
+export type RateSheetScene = SceneCommon<'RATE_SHEET'> & { data: {
+    rateSheet: {
+      headline?: string;
+      unit?: string;
+      rows: Array<Record<string, unknown>>;
+      foot?: string;
+      footAtWord?: number;
       atWord?: number;
     };
   } };
@@ -5669,6 +5682,7 @@ export interface SceneByType {
   PIPELINE: PipelineScene;
   LAYERED_STACK: LayeredStackScene;
   GRID_ARRAY: GridArrayScene;
+  RATE_SHEET: RateSheetScene;
   SPEC_COMPARE: SpecCompareScene;
   NEURAL_NET: NeuralNetScene;
   PICTOGRAM: PictogramScene;
@@ -6033,6 +6047,7 @@ export type TypedScene =
   | PipelineScene
   | LayeredStackScene
   | GridArrayScene
+  | RateSheetScene
   | SpecCompareScene
   | NeuralNetScene
   | PictogramScene

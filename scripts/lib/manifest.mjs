@@ -4758,6 +4758,7 @@ export const MANIFEST = {  WHEN_NOT_SQLITE: {
       series: {t: 'items', req: true, note: '1-3 × {label≤14, values:[≤8 numbers], color?, atWord = the word THIS line draws on — a two-line comparison introduces its lines one at a time, so they must not both appear at once (LAW 0i.1); omit it and the line follows the chart\u2019s own atWord}'},
       xAxis: {t: 'items', note: 'labels ≤6 chars, align to values by index'},
       yMax: {t: 'number'}, yUnit: {t: 'string', max: 6}, area: {t: 'boolean', note: 'fill under the line'},
+      variant: {t: 'string', note: 'savings = the BEFORE/AFTER cost picture: series[0] is the old cost (dim dashed ceiling), series[1] the new (lit, glowing floor), and the AREA BETWEEN them fills green as the new line draws - the gap IS the saving, so nobody has to measure it by eye. A read-out rides the head of the sweep and the total percentage lands once both lines are home. Needs 2 series, each with its own atWord, plus totalAtWord for the word the total percentage lands on. Others: sparkline (compact, no axes), dualaxis (2nd y-scale for series[1]), compound (growth + xN badge).'},
       atWord: {t: 'anchor'},
     },
     example: {lineChart: {series: [{label: 'Breaches', values: [12, 28, 45, 80], color: 'red'}], xAxis: ['Jan', 'Feb', 'Mar', 'Apr'], area: true, atWord: 3}},
@@ -4860,6 +4861,20 @@ export const MANIFEST = {  WHEN_NOT_SQLITE: {
       atWord: {t: 'anchor'},
     },
     example: {grid: {rows: 8, cols: 8, mode: 'heatmap', label: 'Every guess a cracker must try', legendA: 'tried', legendB: 'untried', atWord: 2}},
+  },
+  RATE_SHEET: {
+    category: 'data', family: 'data', data_key: 'rateSheet',
+    purpose: "A PRICE LIST WITH ONE LINE MARKED DOWN. A rate sheet where each row is a real price: the rows that did not move sit with a HELD stamp, and the one that did gets its old price struck through in front of you and the new price dropped in beside it with a discount chip. The picture is the sticker, not a chart.",
+    use_when: "A before/after price where MOST of the sheet stayed the same and one line changed — the argument is 'only this moved', which a chart flattens into two similar bars. Also right for tiers, plan changes and rate tables. NOT for a trend over time (LINE_CHART variant 'savings' draws that).",
+    fields: {
+      headline: {t: 'string', max: 48},
+      unit: {t: 'string', max: 24, note: "what every price on the sheet is per — e.g. 'per million tokens'. Sits under the headline so no row has to repeat it."},
+      rows: {t: 'items', req: true, note: "2-4 × {label≤22 = what is being charged for, value≤14 = the price NOW, was?≤14 = the price BEFORE (its presence is what makes the row a MARKDOWN: the old price is struck through on the anchor and the new one lands beside it), note?≤26 = the small print, atWord}. A row with no `was` is a HELD row and takes a stamp instead."},
+      foot: {t: 'string', max: 72, note: "one closing line under the sheet — the caveat a price list cannot show, e.g. 'still dearer per word than Opus 5'"},
+      footAtWord: {t: 'anchor'},
+      atWord: {t: 'anchor', note: 'BASE only — the sheet and its header are on screen by frame 38'},
+    },
+    example: {rateSheet: {headline: 'What actually changed', unit: 'per million tokens', rows: [{label: 'Input', value: '$10', note: 'unchanged', atWord: 6}, {label: 'Output', value: '$50', note: 'unchanged', atWord: 9}, {label: 'Cache read', value: '$0.25', was: '$1', note: 'the only line that moved', atWord: 14}], foot: 'Still dearer per word than Opus 5', footAtWord: 22, atWord: 2}},
   },
   SPEC_COMPARE: {
     category: 'data', family: 'data', data_key: 'compare',

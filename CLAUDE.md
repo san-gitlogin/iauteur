@@ -547,6 +547,66 @@ different clothes, and every one of them was silent — valid spec, green linter
    `.map((c) =>` before you render"*, and the bug then happened three more times. The
    corollary count went 3 → 8 under a rule made of good intentions.
 
+### Corollary — FIX THE CLASS, NOT THE INSTANCE (owner, 2026-09-03)
+
+Owner, on a finished cut: *"this issue of this title card is persisting please correct"* —
+pointing at a HOOK card reading **IT DOUBLED**. He had already rejected those exact three
+words, and I had already written a linter guard for them. The guard checked
+`spec.thumbnail` and only `spec.thumbnail`, so the same words on the same video, on the
+surface a viewer meets FIRST, sailed straight through.
+
+**When a correction lands, the guard goes on the ARGUMENT, not the surface.** The argument
+was "a claim with no subject asks a stranger to guess". That argument covers every surface
+read with no sentence in front of it: the thumbnail, the cover, and above all the HOOK card,
+which is on screen at second zero and is what a muted autoplay shows. Before writing a
+guard, finish this sentence: *"the same reasoning also applies to ___"* — and if the blank
+has anything in it, the guard is not done.
+
+Two more of the same shape, found in the same frame:
+
+- **A VARIANT THE COPY CANNOT SUPPORT IS SILENTLY DISCARDED.** `hookVariant: 'figure'` draws
+  a number counting up; its branch is guarded `if (variant === 'figure' && fig)`, and `fig`
+  is null when neither the headline nor the subtext contains a digit. Authored over "IT
+  DOUBLED", it fell through to a different silhouette entirely, with no error. The spec asked
+  for one design and got another. Now rejected by the linter, along with `reveal` without a
+  `heroAsset`.
+- **`overflow: hidden` ON THE ELEMENT WHOSE CHILD IS MEANT TO OVERHANG.** The plaque hook's
+  corner mark is translated by −46% of its own size to STRADDLE the card's corner, four lines
+  under the `overflow: hidden` that clipped it — so what shipped was a sliver of a tile
+  cropped on two sides. The comment promised "three quarters of it outside the frame". If an
+  element is positioned to hang outside its parent, the parent cannot clip: make them
+  siblings in an unclipped wrapper.
+
+### Corollary — FIVE OF THE SAME CARD IS NOT A DESIGN (owner, 2026-09-03)
+
+Owner, on the pricing beat: *"this one too. Not a graph but something different. I need
+variations."* — and, on the cost beat: *"the component needs to be like a line chart which
+shows the drastic reduction in cost with green lines. You know the drill. Beautiful component
+with animation."*
+
+`STAT_PANELS` was carrying five of twenty-one beats in one cut. It is under the 35%
+over-reliance cap and it was still the wrong answer, because the cap measures repetition and
+the owner was describing MONOTONY. LAW 0e.8 already says a concept beat gets a purpose-built
+component; this extends it to the arithmetic beats, which are the ones that quietly default
+to a card because a card can hold any number.
+
+**Say the OBJECT out loud before you cast.** Two beats, two objects, and neither is a card:
+
+- *"only one line on the price list moved"* → a **price sticker**. `RATE_SHEET` draws a rate
+  sheet where the rows that held take a HELD stamp and the one that moved has its old price
+  struck through in front of you — the strike DRAWS, it does not fade, because a strike is a
+  gesture — and the new price drops in beside it with a −75% chip. A bar chart of
+  $10 / $50 / $1 / $0.25 would have drawn four similar bars and buried the only fact there is.
+- *"the cut is worth this much over a long session"* → not two lines to compare by eye, but
+  the **area between them**. `LINE_CHART` variant `savings` draws the old cost as a dim dashed
+  ceiling, the new as a lit glowing floor, and fills the widening wedge between them as the
+  new line draws. The gap IS the saving, so nobody has to measure it.
+
+Corollary to the corollary: **a derived payoff still needs an anchor.** The savings total
+first landed on `newLine.atWord + 52` — a hardcoded frame interval inside an explanatory
+component, which is precisely what LAW 0i.1 forbids. It takes `totalAtWord` now, so the
+number arrives on the word that says it.
+
 ### Corollary — A CURVE YOU MADE UP IS A LIE WITH AXES ON IT (2026-09-03)
 
 LAW 0m.2 says a chart needs declared data. Two invented figures shipped into a lint-clean
