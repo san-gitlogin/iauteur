@@ -38,7 +38,8 @@ const frameOf = (word) => Math.max(0, Math.round((word - 1) * FPW));
  * @param {number}   [o.settle]   frames of tail after the last clip finishes
  * @returns {{ok:boolean, reason?:string, durationFrames:number, clips:{atWord:number, callouts:number[]}[]}}
  */
-export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], settle = 45}) => {
+export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], settle = 45,
+                             want = []}) => {
   const n = clipFrames.length;
   if (!n) return {ok: false, reason: 'no clips', durationFrames: 0, clips: []};
 
@@ -105,13 +106,47 @@ export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], s
   const wsum = weights.reduce((a, b) => a + b, 0) || 1;
 
   // PASS 1 — place the CLIP anchors.
+  //
+  // ── AN AUTHORED ANCHOR IS AN INSTRUCTION THE SOLVER SHOULD TRY TO KEEP ──────────
+  //
+  // This pass used to overwrite every clip's `atWord` unconditionally, so a spec that
+  // said "start the scroll ON the word 'Scroll'" was silently re-timed to wherever the
+  // proportional slack happened to land — three words into the NEXT sentence, describing
+  // a movement the viewer had already watched. The author knows which word names the
+  // action; the solver only knows how long the footage is.
+  //
+  // So the solver's numbers become a FLOOR rather than the answer. An authored anchor is
+  // honoured whenever it sits at or after the earliest frame this clip could legally
+  // start (previous clip's footage played, LAW 8 room still reserved for what follows);
+  // otherwise the computed position stands, because a clip cut off mid-action is a worse
+  // defect than a clip that starts a beat late. `want[i] == null` keeps the old behaviour
+  // exactly, which is what every existing spec has.
   let cursor = start;
   const clips = [];
   const starts = [];
+  const overridden = [];
   for (let i = 0; i < n; i++) {
-    starts.push(cursor);
-    clips.push({atWord: wordOf(cursor), callouts: []});
-    cursor += clipFrames[i] + (i < lead ? Math.round((slack * weights[i]) / wsum) : 0);
+    const auto = cursor;
+    let at = auto;
+    const asked = want[i] == null ? null : frameOf(want[i]);
+    if (asked != null) {
+      // THE FLOOR IS "THE PREVIOUS CLIP HAS FINISHED PLAYING", not the auto position.
+      // `cursor` has already been inflated by this clip's share of the leading slack, so
+      // testing against it would refuse every anchor EARLIER than the automatic one — and
+      // earlier is the case authors actually have: the solver spreads clips evenly across
+      // the read, while the word naming the action is usually well before that. The only
+      // real constraint is that the preceding clip is not cut off mid-action.
+      const floor = i === 0 ? start : starts[i - 1] + clipFrames[i - 1];
+      const after = clipFrames.slice(i).reduce((a, b) => a + b, 0);
+      const tailOk = asked + after <= Math.max(auto + after, total * LAW8_TAIL - FPW);
+      if (asked >= floor && tailOk) {
+        at = asked;
+        overridden.push(i);
+      }
+    }
+    starts.push(at);
+    clips.push({atWord: wordOf(at), callouts: []});
+    cursor = at + clipFrames[i] + (i < lead ? Math.round((slack * weights[i]) / wsum) : 0);
   }
 
   // LAW 8: the last anchor must not sit in the final 15% of the read.
@@ -226,6 +261,11 @@ export const anchorScene = (scene, {settle = 45} = {}) => {
     callouts: plan.map((seq) => seq.length),
     releases: plan.map(isRelease),
     settle,
+    // A SEPARATE FIELD, BECAUSE `atWord` IS THE SOLVER'S OUTPUT. Reading the authored
+    // intent back out of `atWord` would make this pass sticky and non-idempotent: the
+    // second run would treat its own first answer as an instruction. `wantAtWord` is
+    // written by the spec author and never touched here.
+    want: d.clips.map((c) => (c.wantAtWord == null ? null : Number(c.wantAtWord))),
   });
 
   let plan = eventPlan;

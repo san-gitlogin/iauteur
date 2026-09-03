@@ -161,6 +161,64 @@ for (const slug of used.keys()) {
   }
 }
 
+const preInk = [];
+// EVERY RECORDING MUST KNOW WHERE ITS OWN INK IS.
+//
+// `inkFor()` measures the text on screen so the overlay solver can place a card or a
+// callout where the work is NOT (LAW 0f corollary, AN OVERLAY GOES WHERE THE WORK IS NOT).
+// It fails SOFT: the DOM query returns [] and the take is written with `ink: null`, which
+// the solver reads as "the screen is empty" and happily lays a label over the thing the
+// voice is discussing. Nothing anywhere said so.
+//
+// It shipped exactly that way. Both row selectors were VS Code's (`.view-line`,
+// `.xterm-rows`), so BROWSER captures measured nothing at all — `public/rec/fable-page`
+// carried ink 0 on all four steps — and the Fable long cut placed *"the one it replaces"*
+// on top of the `60.9% (Mythos 5.1)` sub-label it was pointing at.
+//
+// A recorded step is footage of a screen with something on it. If NO step in a recording
+// has ink, the measurement did not run — that is the assertion.
+for (const slug of used.keys()) {
+  const p = path.resolve('public/rec', slug, 'manifest.json');
+  if (!fs.existsSync(p)) continue;
+  let man;
+  try { man = JSON.parse(fs.readFileSync(p, 'utf8')); } catch { continue; }
+  const steps = Array.isArray(man.steps) ? man.steps : [];
+  if (!steps.length) continue;
+  const fix = demoBySlug.has(slug)
+    ? `npm run record -- ${demoBySlug.get(slug)}`
+    : `demos/${slug}.json`;
+  // TWO DIFFERENT FACTS, AND CONFLATING THEM WOULD HIDE THE ONE THAT MATTERS.
+  //
+  // A manifest with NO `ink` KEY was written before inkFor() existed (2026-08-29). Nothing
+  // is wrong with the recorder; the take is simply older than the measurement. That is a
+  // notice repo-wide — those takes already shipped — and fatal only for the topic you are
+  // about to render, on the same argument check-sync makes about estimated word timings.
+  //
+  // A manifest that HAS the key and is EMPTY on every step is the live defect: inkFor()
+  // ran, looked, and found nothing. That is never true of real footage, so it never
+  // degrades to a notice.
+  const measured = steps.some((st) => Object.prototype.hasOwnProperty.call(st, 'ink'));
+  const withInk = steps.filter((st) => Array.isArray(st.ink) && st.ink.length).length;
+  if (!measured) {
+    const msg = `public/rec/${slug}/manifest.json: recorded ${String(man.recordedAt ?? '?').slice(0, 10)}, ` +
+      `before ink was measured — overlays on this footage are placed blind.\n      fix: ${fix}`;
+    if (slugArg) problems.push(msg);
+    else preInk.push(msg);
+  } else if (withInk === 0) {
+    problems.push(`public/rec/${slug}/manifest.json: NO STEP has measured ink (${steps.length} ` +
+      `step(s), surface "${man.surface ?? '?'}"). inkFor() ran and found nothing on screen, so ` +
+      `every overlay on this footage will be placed blind and can land on the content.\n` +
+      `      fix: re-record — ${fix}` +
+      `\n      If it still reports zero, inkFor() has no selector for this surface.`);
+  }
+}
+if (preInk.length && !quiet) {
+  console.error(`\nNOTE: ${preInk.length} recording(s) predate ink measurement:`);
+  for (const m of preInk) console.error(`  \u2022 ${m}`);
+  console.error('Their overlays were solved without knowing where the text was. This does NOT fail');
+  console.error('the gate — those cuts shipped — but re-record before re-rendering any of them.');
+}
+
 if (!quiet) {
   console.log(`RECORDING CHECK: ${refCount} reference(s) across ${specs.length} spec(s), ` +
     `${used.size} recording(s) used, ${demoBySlug.size} demo script(s) available.`);

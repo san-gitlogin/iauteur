@@ -15920,7 +15920,7 @@
                           "items": {
                             "type": "object"
                           },
-                          "description": "1-8 x {ref = 'rec:<slug>#<step>' (bake-rec.mjs resolves it to src/frames/bbox/marks), label = plain-English note for this step (<=26), focus = punch in on the step's bbox, spotlight = dim everything but the bbox, callouts = 0-4 x {text (<=64), mark = which named rectangle the RUNNER measured to point at, side = top|bottom|left|right (default auto), color?, atWord}, keys = the chord the runner PRESSED (baked, e.g. [\"Ctrl\",\"S\"]) with optional keysAtWord, overlay = an ANIMATED explainer floating over this clip in the ink-free band, {kind: swap|chain|split|tally, atWord, ...} - swap {from,to} turns one word into another, chain {steps[]} walks a token down a pipeline, split {left,right,leftNote,rightNote} sends one input to two fates, tally {value,label} counts a number up, rows {columns[],rows[{cells[],state,atWord}]} shows the TABLE and what the step did to each row - kept, cut or new - which is the one kind that teaches with the sound off. PREFER rows for anything a query changed; a caption plus a moving chip is still a caption. zooms = 0-6 CAMERA MOVES inside this one clip, each {mark = a rectangle the runner measured | at:'full' to pull back out, atWord} - zoom to the code, PAN to the output, then pull back, all while the footage holds, atWord}. EVERY clip AND every callout needs atWord - a segment starting on its own spoken word IS the whole mechanism. A callout never carries a hand-typed pixel position: it points at a MARK the capture measured, so it still lands after a re-record or a viewport change. The gap to the next anchor must be >= the segment's own length or the footage gets cut off mid-action; the linter enforces it."
+                          "description": "1-8 x {ref = 'rec:<slug>#<step>' (bake-rec.mjs resolves it to src/frames/bbox/marks), label = plain-English note for this step (<=26), focus = punch in on the step's bbox, spotlight = dim everything but the bbox, callouts = 0-4 x {text (<=64), mark = which named rectangle the RUNNER measured to point at, side = top|bottom|left|right (default auto), color?, atWord}, keys = the chord the runner PRESSED (baked, e.g. [\"Ctrl\",\"S\"]) with optional keysAtWord, overlay = an ANIMATED explainer floating over this clip in the ink-free band, {kind: swap|chain|split|tally, atWord, ...} - swap {from,to} turns one word into another, chain {steps[]} walks a token down a pipeline, split {left,right,leftNote,rightNote} sends one input to two fates, tally {value,label} counts a number up, rows {columns[],rows[{cells[],state,atWord}]} shows the TABLE and what the step did to each row - kept, cut or new - which is the one kind that teaches with the sound off. PREFER rows for anything a query changed; a caption plus a moving chip is still a caption. zooms = 0-6 CAMERA MOVES inside this one clip, each {mark = a rectangle the runner measured | marks = SEVERAL marks, framed as one region (a pan ACROSS a table row: ['sciencerow','rival']) | at:'full' to pull back out, atWord} - zoom to the code, PAN to the output, then pull back, all while the footage holds, atWord}. EVERY clip AND every callout needs atWord - a segment starting on its own spoken word IS the whole mechanism; anchor-spec.mjs SOLVES atWord from the measured footage, so to pin a clip to a particular word (start the scroll ON the word 'Scroll') set wantAtWord and the solver keeps it whenever the footage still fits. A callout never carries a hand-typed pixel position: it points at a MARK the capture measured, so it still lands after a re-record or a viewport change. The gap to the next anchor must be >= the segment's own length or the footage gets cut off mid-action; the linter enforces it."
                         },
                         "capture": {
                           "type": "object",
@@ -15943,6 +15943,11 @@
                           "type": "string",
                           "maxLength": 150,
                           "description": "THE STANDING SETUP, <=150 chars (LAW 0l): one plain sentence naming what the viewer is looking at. Carries NO marker."
+                        },
+                        "sourceNote": {
+                          "type": "string",
+                          "maxLength": 90,
+                          "description": "WHERE THE FOOTAGE CAME FROM - a standing credit along the bottom of the frame, on from frame 0, never anchored. REQUIRED when the capture is somebody else's screen or website: footage of a page you do not own is a quotation, and a quotation carries its attribution. Different field from `premise`, which says what the viewer is LOOKING at and rides on the card; this says where it came FROM and stays put wherever the card is parked. Name the site, e.g. 'Source: anthropic.com/claude-fable-and-mythos-5-1'."
                         },
                         "color": {
                           "type": "string"
@@ -18684,7 +18689,7 @@
                           "items": {
                             "type": "object"
                           },
-                          "description": "1-3 × {label≤14, values:[≤8 numbers], color?}"
+                          "description": "1-3 × {label≤14, values:[≤8 numbers], color?, atWord = the word THIS line draws on — a two-line comparison introduces its lines one at a time, so they must not both appear at once (LAW 0i.1); omit it and the line follows the chart’s own atWord}"
                         },
                         "xAxis": {
                           "type": "array",

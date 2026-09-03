@@ -3767,6 +3767,7 @@ export type RecordedStepScene = SceneCommon<'RECORDED_STEP'> & { data: {
       caption?: string;
       card?: Record<string, unknown>;
       premise?: string;
+      sourceNote?: string;
       color?: string;
       atWord?: number;
     };

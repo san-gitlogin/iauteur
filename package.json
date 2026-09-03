@@ -60,7 +60,7 @@
     "test-ui-walkthrough": "node scripts/test-ui-walkthrough.mjs",
     "test-asset-protocol": "node scripts/test-asset-protocol.mjs",
     "test-si-resolver": "node scripts/test-si-resolver.mjs",
-    "gate": "node scripts/check-fonts.mjs --quiet && node scripts/check-manifest.mjs && node scripts/drift-check.mjs && node scripts/gen-schema.mjs --check && node scripts/gen-types.mjs --check && node scripts/test-normalize-fleet.mjs && node scripts/test-fix-prompt.mjs && node scripts/test-assemble.mjs && node scripts/test-ui-walkthrough.mjs && node scripts/test-asset-protocol.mjs && node scripts/test-si-resolver.mjs && node scripts/check-viz-kinds.mjs && node scripts/check-hooks.mjs && node scripts/check-recordings.mjs --quiet",
+    "gate": "node scripts/check-fonts.mjs --quiet && node scripts/check-manifest.mjs && node scripts/drift-check.mjs && node scripts/gen-schema.mjs --check && node scripts/gen-types.mjs --check && node scripts/test-normalize-fleet.mjs && node scripts/test-fix-prompt.mjs && node scripts/test-assemble.mjs && node scripts/test-ui-walkthrough.mjs && node scripts/test-asset-protocol.mjs && node scripts/test-si-resolver.mjs && node scripts/check-viz-kinds.mjs && node scripts/check-hooks.mjs && node scripts/check-recordings.mjs --quiet && node scripts/check-sync.mjs --quiet && node scripts/check-field-use.mjs --quiet",
     "cast": "node scripts/cast.mjs",
     "snap": "node scripts/snap.mjs",
     "publish-safety": "node scripts/check-publish-safety.mjs",
@@ -82,7 +82,8 @@
     "captures": "node scripts/gen-captures.mjs sqlite sqlite-act1 sqlite-act2 sqlite-act3",
     "captures-check": "node scripts/gen-captures.mjs sqlite sqlite-act1 sqlite-act2 sqlite-act3 --check",
     "check-fonts": "node scripts/check-fonts.mjs",
-    "check-hooks": "node scripts/check-hooks.mjs"
+    "check-hooks": "node scripts/check-hooks.mjs",
+    "check-sync": "node scripts/check-sync.mjs"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",

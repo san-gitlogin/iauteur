@@ -55,9 +55,41 @@ const out = variant === 'thumb' || variant === 'cover'
 //
 // check-recordings already knows how to spot it, so the render asks it first. Skipped for
 // thumb/cover, which draw no footage.
+// ── AND THE LINTER IS THE JUDGE, SO THE RENDER HAS TO ASK IT ────────────────────────
+//
+// CLAUDE.md has said "NOTHING renders until it passes" since the linter existed, and
+// nothing enforced it: this script asked check-recordings and check-sync and never once
+// ran lint-spec. A spec the linter REJECTED rendered end to end, silently, and produced a
+// deliverable-looking mp4.
+//
+// Caught in the act: `topics/claude-fable-5-1/shorts.json` was rejected for a pinned card
+// aspect and `npm run render -- claude-fable-5-1 short-dark` wrote a 5.7MB file anyway. A
+// law that only exists in a document is a habit, not a gate — and habits are exactly what
+// this repo keeps paying for. Scoped to the ONE spec being rendered, so the back
+// catalogue's accumulated errors cannot block today's work.
+const specFor = variant.startsWith('short') ? 'shorts.json' : 'long.json';
+const specPath = `topics/${slug}/${specFor}`;
+if (fs.existsSync(specPath)) {
+  try {
+    execSync(`node scripts/lint-spec.mjs ${specPath}`, {stdio: 'inherit'});
+    // …and does the DESIGN PACK this spec picked actually draw the fields it sets? A pack
+    // replaces the core component, so a field it forgets is authored, voiced around, and
+    // never seen. Scoped to this spec's own pack, types and values, so it is always
+    // actionable (scripts/check-field-use.mjs).
+    execSync(`node scripts/check-field-use.mjs --quiet --spec ${specPath}`, {stdio: 'inherit'});
+  } catch {
+    console.error('');
+    console.error(`REFUSING TO RENDER: ${specPath} did not pass its pre-render checks.`);
+    console.error('The linter is the judge (CLAUDE.md, Law 5) — fix the spec, not the rule.');
+    process.exit(1);
+  }
+}
+
 if (variant !== 'thumb' && variant !== 'cover') {
   try {
     execSync(`node scripts/check-recordings.mjs --quiet --slug ${slug}`, {stdio: 'inherit'});
+    // Same question, for the voice: are this cut's anchors real word times or estimates?
+    execSync(`node scripts/check-sync.mjs --quiet --slug ${slug}`, {stdio: 'inherit'});
   } catch {
     console.error('');
     console.error('REFUSING TO RENDER: the spec references footage it has not baked.');

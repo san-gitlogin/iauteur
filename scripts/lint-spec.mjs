@@ -163,6 +163,7 @@ if (spec.meta?.format === 'long' && !spec.thumbnail)
   E('long spec missing "thumbnail": {title, badge, asset} — thumbnails must derive from the topic, never go stale');
 if (spec.thumbnail && len(spec.thumbnail.title) > BUDGET.coverTitle)
   E(`thumbnail.title "${spec.thumbnail.title}" > ${BUDGET.coverTitle} chars`);
+
 if (spec.cover && len(spec.cover.title) > BUDGET.coverTitle)
   E(`cover.title "${spec.cover.title}" > ${BUDGET.coverTitle} chars — thumbnails are fragments, not sentences`);
 
@@ -236,6 +237,30 @@ if (!subject) {
   } else if (!has(firstSentence)) {
     W(`s01: "${subject}" appears in the opening but not in its FIRST sentence — ` +
       `${JSON.stringify(firstSentence.slice(0, 70))}. One breath is the budget (LAW 0g.1).`);
+  }
+}
+
+// ── THE THUMBNAIL MUST NAME THE THING (owner, 2026-09-03) ────────────────────
+//
+// Owner: *"The thumb too is horrible, and nobody would click it. Whats that? IT DOUBLED?
+// What does that even mean for an user who sees the thumbnail? The HOT TOPIC must be the
+// bolder one, CLAUDE FABLE or MYTHOS 5.1, thats how user would click."*
+//
+// A thumbnail is read with NO sentence before it. "IT DOUBLED" is a predicate whose subject
+// is missing, so the viewer has to already know what "it" is — the same bare-pronoun failure
+// LAW 0f bans in narration, committed on the one surface that has no previous line to supply
+// the noun. `meta.subject` already exists and is already required to appear in scene 1; the
+// thumbnail is the other place a stranger meets the video, so it is required there too.
+// The badge and note count: the title carries the claim only if the NAME is somewhere on the
+// card. Matched on distinctive words so "Claude Fable 5.1" is satisfied by "CLAUDE FABLE 5.1".
+if (spec.thumbnail && subject) {
+  const face = [spec.thumbnail.title, spec.thumbnail.badge, spec.thumbnail.note]
+    .filter(Boolean).join(' ').toLowerCase();
+  const bits = subject.toLowerCase().split(/[^a-z0-9.]+/).filter((w) => w.length > 2);
+  if (bits.length && !bits.some((w) => face.includes(w))) {
+    E(`the thumbnail never says "${subject}". A thumbnail is read with no sentence before it, ` +
+      `so a claim without its subject ("IT DOUBLED") asks a stranger to guess what "it" is. ` +
+      `Put the name on the card — title, badge or note (LAW 0g.6).`);
   }
 }
 
@@ -391,6 +416,28 @@ if (narrations.length >= 6) {
   const because = (allText.match(/\b(because|which means|so that|otherwise|that's why|the reason|which is why|meaning)\b/gi) ?? []).length;
   if (wordTotal >= 400 && because / wordTotal < 0.008)
     W(`FEW REASONS: only ${because} reasoning connectives (because / which means / otherwise / that's why) in ${wordTotal} words. A list of true statements is not an explanation — carry the WHY inside the sentence (LAW 0f rule 8).`);
+}
+
+// ── A NARRATION THAT STOPS MID-SENTENCE (2026-09-03) ────────────────────────────────
+//
+// Spec builders concatenate narration across many lines with a trailing `+`. Drop one and
+// JavaScript does not complain: automatic semicolon insertion ends the statement at the
+// short fragment and evaluates the rest as a discarded expression. The scene then carries
+// HALF a sentence, gets voiced, gets synced and renders — a narrator stopping mid-clause.
+//
+// It happened while writing this very video: one `+` went missing and `n` became
+// "Coding is a much closer race, and that's the headline, because coding is what most ".
+// It was caught only because a later `at()` looked for a word that had been truncated
+// away; had the anchors all fallen inside the surviving fragment, the cut would have
+// shipped. Ending punctuation is the tell, and it costs one regex.
+for (const s of spec.scenes ?? []) {
+  const n = String(s.narration ?? '').trim();
+  if (!n) continue;
+  if (!/[.!?…"'\u2019\u201d)]$/.test(n)) {
+    E(`${s.id}: narration does not end in sentence punctuation — it ends "…${n.slice(-42)}". ` +
+      `A builder that drops a trailing \`+\` truncates the string silently (ASI), so check ` +
+      `the concatenation for this beat before voicing it.`);
+  }
 }
 
 // STATIC-SCENE GUARD (2026-07-17) — a 20-30s narration parked on ONE component is
@@ -1572,6 +1619,59 @@ for (const s of spec.scenes ?? []) {
     const cl = rs.clips ?? [];
     if (!cl.length) E(`${id}: RECORDED_STEP needs >=1 clip`);
     if (cl.length > 8) E(`${id}: RECORDED_STEP max 8 clips (got ${cl.length}) — split the beat`);
+
+    // ── FOOTAGE OF SOMEBODY ELSE'S PAGE CARRIES ITS SOURCE (owner, 2026-09-03) ──
+    //
+    // Owner: *"when you show the browser screen recording, you must always say in the
+    // official website, and at the bottom there must be a text stating the source which is
+    // very very important."*
+    //
+    // Recording our own terminal is a demonstration; recording a page we do not own is a
+    // QUOTATION, and a quotation carries its attribution on screen, for the whole beat —
+    // not only in the description, which nobody reads while watching. The distinction is
+    // machine-checkable: the runner stores `startUrl` in the manifest for a browser capture
+    // and leaves it null for a VS Code one, so this asks for a credit exactly when the
+    // footage came from the open web.
+    for (const c of cl) {
+      const ref = String(c.ref ?? c.src ?? '');
+      const m = ref.match(/rec:([A-Za-z0-9._-]+)/) ?? String(c.src ?? '').match(/rec\/([A-Za-z0-9._-]+)\//);
+      if (!m) continue;
+      let man = null;
+      try {
+        man = JSON.parse(fs.readFileSync(`public/rec/${m[1]}/manifest.json`, 'utf8'));
+      } catch { continue; }   // recording absent on this machine — check-recordings owns that
+      if (man.startUrl && !rs.sourceNote) {
+        E(`${id}: this beat plays footage of ${new URL(man.startUrl).hostname}, which is not ` +
+          `our screen — set recordedStep.sourceNote so the credit is ON SCREEN for the whole ` +
+          `beat (e.g. "Source: ${new URL(man.startUrl).hostname}"). A description credit is ` +
+          `not visible while the video plays.`);
+      }
+      break;   // one credit covers the beat
+    }
+    // ── A PINNED ASPECT NEEDS SOMETHING THAT FILLS IT (owner, 2026-09-03) ──────
+    //
+    // `card.aspect` pins the card's height to `width / ratio`. That is right for a card
+    // holding a DIAGRAM or a TABLE, which has a shape of its own and would be squashed
+    // into a strip without it. For a card holding only a caption and a premise — two
+    // lines of text — it pins a box the text cannot fill, and the card renders as a
+    // large flat slab with the words floating in the middle of it.
+    //
+    // PAID FOR on the Fable browser beats, authored `{place:'right', aspect:'portrait',
+    // width:0.26}`: a 500x660 grey panel carrying eleven words, covering the two right-
+    // hand columns of the table it was annotating. That is LAW 0n's "patty inside a
+    // burger" wearing a dock, and the owner's *"component overlay over the recording
+    // completely hides it"* is what it looks like from the outside.
+    //
+    // The component already knows the rule — *"`auto` lets the content decide the height,
+    // which is right for a line of text; a named aspect pins it, which is what a diagram
+    // or a table needs"* — so this only stops the spec from asking for the wrong one.
+    if (rs.card?.aspect && rs.card.aspect !== 'auto' && !cl.some((c) => c.overlay)) {
+      E(`${id}: recordedStep.card.aspect is "${rs.card.aspect}", but no clip on this beat ` +
+        `has an \`overlay\` — the card carries only text, and a pinned aspect gives it a ` +
+        `box the text cannot fill (a caption floating in a slab over the footage). Drop ` +
+        `\`aspect\` so the card hugs its content, or give the beat the overlay the shape ` +
+        `was reserved for. \`place\` and \`width\` still dock it to the side.`);
+    }
     if (len(rs.caption) > 40) E(`${id}: RECORDED_STEP caption > 40 chars`);
     if (len(rs.premise) > 150) E(`${id}: RECORDED_STEP premise > 150 chars`);
     checkColor(id, 'recordedStep.color', rs.color);

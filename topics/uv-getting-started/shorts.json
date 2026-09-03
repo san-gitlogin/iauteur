@@ -62,7 +62,7 @@
         "heroAsset": "si:uv",
         "hookVariant": "stack"
       },
-      "durationFrames": 178,
+      "durationFrames": 176,
       "audio": "audio/uv-getting-started_shorts_s01.mp3",
       "timingSource": "tts"
     },
@@ -189,7 +189,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 550,
+      "durationFrames": 566,
       "audio": "audio/uv-getting-started_shorts_s02.mp3",
       "timingSource": "tts"
     },
@@ -204,7 +204,7 @@
         "sub": "on the channel",
         "channel": "THE NBX STUDIO"
       },
-      "durationFrames": 198,
+      "durationFrames": 187,
       "audio": "audio/uv-getting-started_shorts_s03.mp3",
       "timingSource": "tts"
     }

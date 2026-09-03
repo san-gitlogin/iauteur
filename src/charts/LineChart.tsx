@@ -124,12 +124,32 @@ export const LineChart: React.FC<{data: LineChartData; w: number; h: number}> = 
   const g0 = data.series[0]?.values ?? [];
   const compMult = variant === 'compound' && g0.length >= 2 && g0[0] > 0 ? g0[g0.length - 1] / g0[0] : null;
 
+  // ── ONE SWEEP PER SERIES, EACH ON ITS OWN SPOKEN WORD ────────────────────────
+  //
+  // Every series used to share the chart's single `p`, so a two-line comparison drew both
+  // lines at the same instant while the narration was still introducing the first one.
+  // That is the fixed-interval failure LAW 0i.1 names: the picture has to move with the
+  // voice, and "the voice" means the word for THIS line, not for the chart.
+  //
+  // A series with no `atWord` falls back to the chart's, so every existing spec draws
+  // exactly as it did. The clip rect is per-series, so the sweeps are independent.
+  const progressFor = (si: number) => {
+    const own = data.series[si]?.atWord;
+    if (own == null) return p;
+    return drawProgress(frame, wordToFrame(own), {dur: 46});
+  };
+
   return (
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{overflow: 'visible'}}>
       <defs>
         <clipPath id={clipId}>
           <rect x={0} y={0} width={pad.l + iw * p} height={h} />
         </clipPath>
+        {data.series.map((_, si) => (
+          <clipPath key={si} id={`${clipId}-s${si}`}>
+            <rect x={0} y={0} width={pad.l + iw * progressFor(si)} height={h} />
+          </clipPath>
+        ))}
       </defs>
       {/* gridlines + y labels */}
       {Array.from({length: rows + 1}).map((_, r) => {
@@ -174,8 +194,8 @@ export const LineChart: React.FC<{data: LineChartData; w: number; h: number}> = 
           {lab}
         </text>
       ))}
-      {/* series */}
-      <g clipPath={`url(#${clipId})`}>
+      {/* series — each inside ITS OWN clip, so each draws on its own word */}
+      <g>
         {data.series.map((s, si) => {
           const c = sem(s.color ?? CYCLE[si % CYCLE.length]);
           const ff = data.forecastFrom;
@@ -194,7 +214,7 @@ export const LineChart: React.FC<{data: LineChartData; w: number; h: number}> = 
               return `${xAt(ff + i)},${yAt(Math.max(0, v - grow))}`;
             }).reverse();
             return (
-              <g key={si}>
+              <g key={si} clipPath={`url(#${clipId}-s${si})`}>
                 <polygon points={[...upper, ...lower].join(' ')} fill={hexA(c, 0.14)} />
                 <polyline points={histPts} fill="none" stroke={c} strokeWidth={3.5 * scale} strokeLinejoin="round" strokeLinecap="round" />
                 <polyline points={fcPts} fill="none" stroke={c} strokeWidth={3.5 * scale} strokeDasharray={`${8 * scale} ${7 * scale}`} strokeLinejoin="round" strokeLinecap="round" opacity={0.85} />
@@ -207,7 +227,7 @@ export const LineChart: React.FC<{data: LineChartData; w: number; h: number}> = 
             s.values.map((v, i) => `L ${xAt(i)},${yAt(v)}`).join(' ') +
             ` L ${xAt(s.values.length - 1)},${pad.t + ih} Z`;
           return (
-            <g key={si}>
+            <g key={si} clipPath={`url(#${clipId}-s${si})`}>
               {forceArea ? <path d={areaPath} fill={hexA(c, 0.16)} /> : null}
               <polyline
                 points={pts}
@@ -231,9 +251,10 @@ export const LineChart: React.FC<{data: LineChartData; w: number; h: number}> = 
       {/* points that reveal as the sweep passes their x */}
       {data.series.map((s, si) => {
         const c = sem(s.color ?? CYCLE[si % CYCLE.length]);
+        const ps = progressFor(si);
         return s.values.map((v, i) => {
           const xf = n <= 1 ? 0 : i / (n - 1);
-          const shown = p >= xf - 0.001;
+          const shown = ps >= xf - 0.001;
           return shown ? (
             <circle key={`${si}-${i}`} cx={xAt(i)} cy={yAt(v)} r={5 * scale} fill={c} stroke={t.colors.bg} strokeWidth={2 * scale} />
           ) : null;

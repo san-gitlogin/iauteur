@@ -89,7 +89,7 @@ export const expandTokens = (s) => String(s ?? '')
 // Returned in the same capture-pixel space as marks, so RecordedStep can score a candidate
 // card position against it without converting anything.
 export const inkFor = async (page) => {
-  const rows = await page.evaluate(() => {
+  const got = await page.evaluate(() => {
     const NBSP = String.fromCharCode(160);
     const flat = (v) => String(v || '').split(NBSP).join(' ');
     // The glyph extent of a row: from its first non-space character to its last.
@@ -125,37 +125,127 @@ export const inkFor = async (page) => {
       const b = glyphBox(el);
       if (b && b.w >= 6 && b.h >= 3) out.push(b);
     }
-    return out;
-  }).catch(() => []);
+    if (out.length) return out;
+
+    // ── A WEB PAGE HAS NO `.view-line`, AND SILENCE IS THE WRONG ANSWER ──────────────
+    //
+    // Both selectors above are VS Code's. On the BROWSER surface neither matches, so this
+    // returned an empty list and every browser recording ever made told the overlay solver
+    // the page was empty space. Measured on public/rec/fable-page: ink 0 on all four steps.
+    // The visible cost, pulled from the Fable long cut at frame 2101: *"the one it
+    // replaces"* placed itself directly on top of the `60.9% (Mythos 5.1)` sub-label — the
+    // solver had nothing to charge it for, so a free lunch beat the free margin beside it.
+    // Owner, twice: *"component overlay over the recording completely hides it."*
+    //
+    // A page's ink is its TEXT LINES, not its elements: a <p> rect spans the column even
+    // where the last line stops halfway, and a <section> rect is the whole band. So walk
+    // the text nodes and take Range.getClientRects(), which returns ONE RECT PER RENDERED
+    // LINE — the web equivalent of `.view-line`, and the same shape the merge below wants.
+    // Replaced content (images, canvases, video, svg) is ink too, and has no text node.
+    const VP = {w: window.innerWidth, h: window.innerHeight};
+    const clip = (r) => {
+      const x0 = Math.max(r.left, 0), y0 = Math.max(r.top, 0);
+      const x1 = Math.min(r.right, VP.w), y1 = Math.min(r.bottom, VP.h);
+      return x1 - x0 > 2 && y1 - y0 > 2 ? {x: x0, y: y0, w: x1 - x0, h: y1 - y0} : null;
+    };
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (!flat(node.nodeValue).trim()) continue;
+      const parent = node.parentElement;
+      if (!parent) continue;
+      // Text that is present in the DOM and not on the screen is not ink. `visibility`
+      // and `opacity` matter as much as `display` — an off-screen menu is typically the
+      // first, a fade-in the second.
+      const cs = getComputedStyle(parent);
+      if (cs.visibility === 'hidden' || cs.display === 'none' || Number(cs.opacity) < 0.05) continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      for (const r of range.getClientRects()) {
+        const b = clip(r);
+        if (b && b.w >= 6 && b.h >= 3) out.push(b);
+      }
+    }
+    for (const el of document.querySelectorAll('img,svg,canvas,video,picture')) {
+      const cs = getComputedStyle(el);
+      if (cs.visibility === 'hidden' || cs.display === 'none' || Number(cs.opacity) < 0.05) continue;
+      const b = clip(el.getBoundingClientRect());
+      if (!b || b.w < 12 || b.h < 12) continue;
+      // A FULL-BLEED BACKDROP IS NOT AN OBSTACLE. A hero image behind the headline covers
+      // the viewport, and a rectangle that covers everything scores every candidate the
+      // same — which is the no-ink blindness again, wearing a number. What an overlay has
+      // to stay off is the TEXT sitting on the backdrop, and that is already collected
+      // above. Measured: the Anthropic hero returned exactly one 1600x900 rect.
+      if (b.w >= 0.92 * VP.w && b.h >= 0.6 * VP.h) continue;
+      out.push(b);
+    }
+    return {rects: out, vp: VP};
+  }).catch(() => ({rects: [], vp: null}));
+
+  const rows = got.rects || [];
+  const vp = got.vp;
 
   const sorted = rows
     .map((r) => ({x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.w), h: Math.round(r.h)}))
     .sort((a, b) => a.y - b.y || a.x - b.x);
 
-  // MERGE VERTICALLY. Two rows that are adjacent and horizontally overlapping are one block
-  // of text as far as "is there room here" is concerned.
+  // MERGE VERTICALLY, WITHIN A COLUMN. Two rows that are vertically adjacent AND share most
+  // of their horizontal extent are one block of text as far as "is there room here" goes.
+  //
+  // ⚠ THE OVERLAP TEST HAS TO BE A RATIO, NOT A TOLERANCE. This used to merge whenever the
+  // next row started within 24px of the running block's right edge, against the LAST block
+  // only. In an editor pane that is correct — the lines are one narrow column and they are
+  // genuinely one blob. On a web page it chains: each row touches the block the previous row
+  // just widened, so the block grows until it spans the viewport and every later row lands
+  // inside it. Measured on the first browser capture with ink: 4 steps, **1-2 blocks each**,
+  // one of them the whole page. A single page-sized rectangle charges every candidate the
+  // same amount, which leaves the solver exactly as blind as it was with no ink at all — the
+  // failure looks fixed in the manifest and is not fixed on screen.
+  //
+  // Requiring the overlap to be most of the NARROWER row keeps table columns apart, and
+  // column gutters are precisely the free space an overlay wants on a dense page. Scanning
+  // every open block rather than only the last one matters for the same reason: rows of a
+  // table arrive interleaved by y, so the column a row belongs to is usually not the block
+  // that happens to be on the end.
+  const OVERLAP = 0.6;
   const blocks = [];
   for (const r of sorted) {
-    const prev = blocks[blocks.length - 1];
-    const touches = prev &&
-      r.y <= prev.y + prev.h + Math.max(6, prev.h * 0.6) &&
-      r.x < prev.x + prev.w + 24 && r.x + r.w > prev.x - 24;
-    if (touches) {
-      const x1 = Math.max(prev.x + prev.w, r.x + r.w);
-      const y1 = Math.max(prev.y + prev.h, r.y + r.h);
-      prev.x = Math.min(prev.x, r.x);
-      prev.y = Math.min(prev.y, r.y);
-      prev.w = x1 - prev.x;
-      prev.h = y1 - prev.y;
+    let host = null;
+    for (let i = blocks.length - 1; i >= 0 && blocks.length - i <= 300; i--) {
+      const b = blocks[i];
+      const gap = r.y - (b.y + b.h);
+      if (gap > Math.max(6, r.h * 0.6)) continue;          // too far below to be the same run
+      const ov = Math.min(b.x + b.w, r.x + r.w) - Math.max(b.x, r.x);
+      if (ov <= 0) continue;
+      if (ov < OVERLAP * Math.min(b.w, r.w)) continue;     // a neighbouring column, not this one
+      host = b;
+      break;
+    }
+    if (host) {
+      const x1 = Math.max(host.x + host.w, r.x + r.w);
+      const y1 = Math.max(host.y + host.h, r.y + r.h);
+      host.x = Math.min(host.x, r.x);
+      host.y = Math.min(host.y, r.y);
+      host.w = x1 - host.x;
+      host.h = y1 - host.y;
     } else {
       blocks.push({...r});
     }
   }
   // A cap, because this rides in the spec JSON. The SQLite acts measure 4-9 blocks after the
-  // merge, so 24 is slack; the biggest are the ones that matter, so drop the smallest rather
-  // than whatever happens to be last.
-  return blocks.length
-    ? blocks.sort((a, b) => b.w * b.h - a.w * a.h).slice(0, 24).sort((a, b) => a.y - b.y)
+  // merge, so 24 was slack for an EDITOR; a web page is denser and less regular — the
+  // Anthropic benchmark table alone merges to 20-odd blocks — so the browser branch needs
+  // more headroom. 48 rectangles is ~2KB per step, which the manifest can afford. The
+  // biggest are the ones that matter, so drop the smallest rather than whatever happens
+  // to be last.
+  // The same argument, applied after the merge: a run of text rows can legitimately merge
+  // into something viewport-sized, and it is no more useful as an obstacle than the
+  // backdrop was. Drop it rather than let it flatten the scoring.
+  const useful = vp
+    ? blocks.filter((b) => !(b.w >= 0.92 * vp.w && b.h >= 0.6 * vp.h))
+    : blocks;
+  return useful.length
+    ? useful.sort((a, b) => b.w * b.h - a.w * a.h).slice(0, 48).sort((a, b) => a.y - b.y)
     : null;
 };
 

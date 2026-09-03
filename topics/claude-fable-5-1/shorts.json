@@ -43,8 +43,8 @@
     "logo": "img:channel_logo.png"
   },
   "cover": {
-    "title": "IT DOUBLED",
-    "badge": "Claude Fable 5.1",
+    "title": "CLAUDE FABLE 5.1",
+    "badge": "science score doubled",
     "asset": "si:anthropic",
     "frames": 1
   },
@@ -52,31 +52,36 @@
     {
       "id": "s01",
       "type": "HOOK",
-      "narration": "Claude Fable 5.1 doubled a science benchmark. Twenty-four point seven, to fifty-two point six.",
+      "narration": "Claude Fable 5.1 just doubled its score on a hard science test. Here's the table.",
       "transition": "fade",
       "background": "zoneA",
       "data": {
-        "headline": "IT DOUBLED",
-        "subtext": "Terminal-Bench-Science",
+        "headline": "CLAUDE FABLE 5.1",
+        "subtext": "science score doubled",
         "heroAsset": "si:anthropic",
         "hookVariant": "stack"
       },
-      "durationFrames": 202,
-      "audio": "audio/claude-fable-5-1_shorts_s01.mp3",
+      "durationFrames": 188,
+      "audio": "audio/fable_short_s01.mp3",
       "timingSource": "tts"
     },
     {
       "id": "s02",
       "type": "RECORDED_STEP",
-      "narration": "Here's the table. Top row is agentic scientific research — fifty-two point six, against twenty-four point seven for the model it replaces. Second row is coding, fifty-five point eight, just past Opus 5. One spike, and a normal step everywhere else.",
+      "narration": "This is Anthropic's official page. Top row is agentic scientific research — fifty-two point six, against twenty-four point seven for the model it replaces. Second row is coding, fifty-five point eight, just past Opus 5. One spike, and a normal step everywhere else.",
       "transition": "push",
       "background": "zoneB",
       "data": {
         "recordedStep": {
           "caption": "the two rows that matter",
           "premise": "Anthropic’s announcement page.",
+          "sourceNote": "Source: anthropic.com — Claude Fable 5.1 announcement",
           "layout": "full",
           "color": "blue",
+          "card": {
+            "place": "top",
+            "width": 0.86
+          },
           "clips": [
             {
               "ref": "rec:fable-page#scores",
@@ -88,14 +93,14 @@
                   "mark": "science",
                   "side": "right",
                   "color": "green",
-                  "atWord": 15.917
+                  "atWord": 19.083
                 },
                 {
                   "text": "past Opus 5",
                   "mark": "terminal",
                   "side": "right",
                   "color": "blue",
-                  "atWord": 23.917
+                  "atWord": 26.25
                 }
               ],
               "id": "scores",
@@ -119,20 +124,322 @@
                   "y": 362,
                   "w": 41,
                   "h": 18
+                },
+                "sciencerow": {
+                  "x": 373,
+                  "y": 290,
+                  "w": 178,
+                  "h": 18
+                },
+                "rival": {
+                  "x": 1093,
+                  "y": 245,
+                  "w": 73,
+                  "h": 18
                 }
               },
-              "atWord": 3
+              "ink": [
+                {
+                  "x": 480,
+                  "y": 30,
+                  "w": 633,
+                  "h": 126
+                },
+                {
+                  "x": 480,
+                  "y": 177,
+                  "w": 551,
+                  "h": 21
+                },
+                {
+                  "x": 1093,
+                  "y": 245,
+                  "w": 73,
+                  "h": 18
+                },
+                {
+                  "x": 613,
+                  "y": 245,
+                  "w": 55,
+                  "h": 18
+                },
+                {
+                  "x": 772,
+                  "y": 245,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 245,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 290,
+                  "w": 194,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 290,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 290,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 1093,
+                  "y": 290,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 772,
+                  "y": 290,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 362,
+                  "w": 123,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 362,
+                  "w": 96,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 362,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 362,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 1093,
+                  "y": 362,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 434,
+                  "w": 111,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 434,
+                  "w": 29,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 434,
+                  "w": 29,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 506,
+                  "w": 101,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 506,
+                  "w": 41,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 506,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 933,
+                  "y": 506,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 1093,
+                  "y": 506,
+                  "w": 32,
+                  "h": 34
+                },
+                {
+                  "x": 373,
+                  "y": 578,
+                  "w": 94,
+                  "h": 40
+                },
+                {
+                  "x": 933,
+                  "y": 578,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 613,
+                  "y": 578,
+                  "w": 39,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 578,
+                  "w": 37,
+                  "h": 34
+                },
+                {
+                  "x": 1093,
+                  "y": 578,
+                  "w": 27,
+                  "h": 34
+                },
+                {
+                  "x": 373,
+                  "y": 650,
+                  "w": 180,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 650,
+                  "w": 42,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 650,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 933,
+                  "y": 650,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 1093,
+                  "y": 650,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 613,
+                  "y": 707,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 707,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 933,
+                  "y": 707,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 1093,
+                  "y": 707,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 373,
+                  "y": 764,
+                  "w": 132,
+                  "h": 41
+                },
+                {
+                  "x": 933,
+                  "y": 764,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 613,
+                  "y": 764,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 1093,
+                  "y": 764,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 772,
+                  "y": 764,
+                  "w": 34,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 836,
+                  "w": 118,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 836,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 836,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 772,
+                  "y": 836,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 1093,
+                  "y": 836,
+                  "w": 39,
+                  "h": 18
+                }
+              ],
+              "atWord": 4
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 1.167
         }
       },
-      "durationFrames": 511,
-      "audio": "audio/claude-fable-5-1_shorts_s02.mp3",
+      "durationFrames": 540,
+      "audio": "audio/fable_short_s02.mp3",
       "timingSource": "tts"
     },
     {
@@ -147,20 +454,20 @@
             "kicker": "Input / output",
             "value": "$10 / $50",
             "note": "unchanged",
-            "atWord": 2.833
+            "atWord": 2.583
           },
           {
             "kicker": "Cache read",
             "value": "$1→$0.25",
             "note": "down 75%",
             "color": "green",
-            "atWord": 14.333
+            "atWord": 13
           }
         ],
         "source": "Anthropic, 2026-09"
       },
-      "durationFrames": 239,
-      "audio": "audio/claude-fable-5-1_shorts_s03.mp3",
+      "durationFrames": 231,
+      "audio": "audio/fable_short_s03.mp3",
       "timingSource": "tts"
     },
     {
@@ -173,8 +480,8 @@
         "message": "Full breakdown on the channel",
         "sub": "numbers, not hype"
       },
-      "durationFrames": 160,
-      "audio": "audio/claude-fable-5-1_shorts_s04.mp3",
+      "durationFrames": 159,
+      "audio": "audio/fable_short_s04.mp3",
       "timingSource": "tts"
     }
   ]

@@ -78,7 +78,7 @@
         "heroAsset": "si:uv",
         "hookVariant": "stack"
       },
-      "durationFrames": 183,
+      "durationFrames": 181,
       "audio": "audio/uv-getting-started_long_s01.mp3",
       "timingSource": "tts"
     },
@@ -92,7 +92,7 @@
         "title": "Getting Started with uv",
         "subtitle": "pip · virtualenv · pyenv · pipx · poetry"
       },
-      "durationFrames": 177,
+      "durationFrames": 175,
       "audio": "audio/uv-getting-started_long_s02.mp3",
       "timingSource": "tts"
     },
@@ -165,7 +165,7 @@
           "color": "purple"
         }
       },
-      "durationFrames": 981,
+      "durationFrames": 982,
       "audio": "audio/uv-getting-started_long_s03.mp3",
       "timingSource": "tts"
     },
@@ -181,7 +181,7 @@
           "title": "Your first project"
         }
       },
-      "durationFrames": 169,
+      "durationFrames": 160,
       "audio": "audio/uv-getting-started_long_s04.mp3",
       "timingSource": "tts"
     },
@@ -337,7 +337,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 1055,
+      "durationFrames": 1051,
       "audio": "audio/uv-getting-started_long_s05.mp3",
       "timingSource": "tts"
     },
@@ -470,7 +470,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 868,
+      "durationFrames": 860,
       "audio": "audio/uv-getting-started_long_s06.mp3",
       "timingSource": "tts"
     },
@@ -505,7 +505,7 @@
           "color": "green"
         }
       },
-      "durationFrames": 507,
+      "durationFrames": 509,
       "audio": "audio/uv-getting-started_long_s07.mp3",
       "timingSource": "tts"
     },
@@ -521,7 +521,7 @@
           "title": "Dependencies"
         }
       },
-      "durationFrames": 182,
+      "durationFrames": 186,
       "audio": "audio/uv-getting-started_long_s08.mp3",
       "timingSource": "tts"
     },
@@ -636,7 +636,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 785,
+      "durationFrames": 775,
       "audio": "audio/uv-getting-started_long_s09.mp3",
       "timingSource": "tts"
     },
@@ -679,7 +679,7 @@
           "color": "blue"
         }
       },
-      "durationFrames": 570,
+      "durationFrames": 573,
       "audio": "audio/uv-getting-started_long_s10.mp3",
       "timingSource": "tts"
     },
@@ -794,7 +794,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 871,
+      "durationFrames": 855,
       "audio": "audio/uv-getting-started_long_s11.mp3",
       "timingSource": "tts"
     },
@@ -834,7 +834,7 @@
           "color": "purple"
         }
       },
-      "durationFrames": 639,
+      "durationFrames": 642,
       "audio": "audio/uv-getting-started_long_s12.mp3",
       "timingSource": "tts"
     },
@@ -850,7 +850,7 @@
           "title": "Tools and publishing"
         }
       },
-      "durationFrames": 182,
+      "durationFrames": 177,
       "audio": "audio/uv-getting-started_long_s13.mp3",
       "timingSource": "tts"
     },
@@ -965,7 +965,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 811,
+      "durationFrames": 801,
       "audio": "audio/uv-getting-started_long_s14.mp3",
       "timingSource": "tts"
     },
@@ -1005,7 +1005,7 @@
           "color": "orange"
         }
       },
-      "durationFrames": 583,
+      "durationFrames": 571,
       "audio": "audio/uv-getting-started_long_s15.mp3",
       "timingSource": "tts"
     },
@@ -1120,7 +1120,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 792,
+      "durationFrames": 775,
       "audio": "audio/uv-getting-started_long_s16.mp3",
       "timingSource": "tts"
     },
@@ -1176,7 +1176,7 @@
           "color": "green"
         }
       },
-      "durationFrames": 813,
+      "durationFrames": 830,
       "audio": "audio/uv-getting-started_long_s17.mp3",
       "timingSource": "tts"
     },
@@ -1228,7 +1228,7 @@
           "color": "red"
         }
       },
-      "durationFrames": 580,
+      "durationFrames": 583,
       "audio": "audio/uv-getting-started_long_s18.mp3",
       "timingSource": "tts"
     },
@@ -1263,7 +1263,7 @@
           }
         ]
       },
-      "durationFrames": 830,
+      "durationFrames": 817,
       "audio": "audio/uv-getting-started_long_s19.mp3",
       "timingSource": "tts"
     },
@@ -1277,7 +1277,7 @@
         "message": "Subscribe for more",
         "sub": "the full uv course is on the channel"
       },
-      "durationFrames": 454,
+      "durationFrames": 465,
       "audio": "audio/uv-getting-started_long_s20.mp3",
       "timingSource": "tts"
     }

@@ -429,6 +429,142 @@ scene ids against the JSON it writes.
 
 ## LAW 0f — WRITE FOR A MOUTH, NOT A PAGE (owner verdict, 2026-08-16)
 
+### Corollary — EXPLAIN IT TO SOMEONE WHO ARRIVED TODAY (owner, 2026-09-03)
+
+Owner, on an informatory cut: *"For someone who's looking at this video for the first time,
+the technical aspects you explain need more clarity and more normal English explaining what
+is what, the terms you mention and where it is useful… Rather than sounding more like human,
+you always cut short what you speak and users end up not understanding anything. Just
+mentioning IT, that, etc by just showing the video thinking user would understand would not
+help. You must always think at a human level."*
+
+Five rules, all of them about the same failure — writing for someone who already knows.
+
+1. **A JARGON TERM IS EXPLAINED THE FIRST TIME IT IS SPOKEN, IN THE SAME BREATH.** Not in a
+   later beat, not on a card, not by showing a chart with the name on it. *"agentic scientific
+   research — and agentic just means the model works on its own: it is handed a task, and it
+   has to pick the tools, write the code and reach an answer without a person steering each
+   step."* A benchmark name, a units label, a product tier and an industry noun all count.
+2. **NAME THE THING, EVERY TIME.** The PRONOUN FOG guard measures sentence OPENERS; the rule
+   is wider than the guard. "It", "that", "this one" are only allowed when the noun is in the
+   same sentence. On screen there is a picture doing the pointing and in a viewer's ears there
+   is not.
+3. **DO NOT READ OUT WHAT THE CHART ALREADY SHOWS.** Reciting four bar values duplicates the
+   picture and spends the runtime the scene ceiling grants. Say what the numbers MEAN — the
+   shape, the comparison, the caveat — and let the bars carry the digits. This is LAW 0d's
+   argument pointed at narration.
+4. **NEVER TRIM AN EXPLANATION TO FIT A CEILING.** The scene ceiling is `5s per distinct
+   anchor`, so a beat that needs more words needs more ANCHORED ELEMENTS or a SPLIT — those
+   are the two remedies the linter names, in that order. Cutting the explanation to fit is how
+   a video ends up terse and unfollowable, which is the complaint above.
+5. **A NUMBER SPOKEN WITHOUT ITS UNIT OR ITS SUBJECT IS NOISE.** *"Twenty-four point seven, to
+   fifty-two point six"* was a real HOOK, and the owner heard it as *"a rubbish voice over,
+   don't know what."* Read aloud with no picture yet, a bare pair of decimals is a string of
+   digits. Every figure gets its unit and the thing it measures.
+
+### Corollary — WHAT YOU RECORD FROM SOMEONE ELSE IS A QUOTATION (owner, 2026-09-03)
+
+Owner: *"when you show the browser screen recording, you must always say in the official
+website, and at the bottom there must be a text stating the source which is very very
+important."*
+
+Recording our own terminal is a demonstration. Recording a page we do not own is a quotation,
+and a quotation carries its attribution ON SCREEN, for the whole beat — a credit in the
+description is invisible while the video plays.
+
+- **Say it out loud** in the narration: *"this is Anthropic's official website, on the page
+  where they announced it."*
+- **Set `recordedStep.sourceNote`.** It renders as a standing strip along the bottom and is
+  never anchored. `scripts/lint-spec.mjs` REQUIRES it whenever a beat's recording carries a
+  `startUrl` — i.e. exactly when the footage came from the open web.
+- **Move the camera like a person reading.** A static screenshot held for twenty seconds is
+  not footage. `clips[].zooms` takes a list of measured marks: come in on the thing being
+  named, pan across to the number, pull back to `at:'full'`. A viewer follows a gaze.
+
+### Corollary — AN OVERLAY GOES WHERE THE WORK IS NOT (owner, twice: 2026-09-02, 2026-09-03)
+
+Owner: *"I always mentioned component overlays are not just meant to be horizontal sitting on
+the middle, it can be placed anywhere, on the sides as well… just like how we have a window in
+Android Studio to look into the device at the side, while the main content still matters and
+is highlighted."*
+
+`recordedStep.card` has taken `{place, aspect, width}` since it was built, and the manifest
+note has always said a card should be *"narrow and parked to one side so it sits BESIDE the
+listing instead of across it"*. It was still authored as a centred strip twice, over a full
+table, hiding the rows being discussed. **Default `auto` only when the footage genuinely
+leaves a free horizontal band.** Dense footage — a full-page table, a maximised terminal — has
+no free band, only free SIDE margins, so it takes `place:'right'` (or left) with a `portrait`
+aspect and a width around 0.26.
+
+### Corollary — THE THUMBNAIL NAMES THE THING (owner, 2026-09-03)
+
+Owner: *"The thumb too is horrible, and nobody would click it. Whats that? IT DOUBLED? What
+does that even mean for an user who sees the thumbnail? The HOT TOPIC must be the bolder one,
+CLAUDE FABLE or MYTHOS 5.1, thats how user would click."*
+
+A thumbnail is read with no sentence before it, so a claim whose subject is missing asks a
+stranger to guess — the bare-pronoun failure of rule 2 above, committed on the one surface
+with no previous line to supply the noun. The **name** is what someone is scrolling for; the
+claim is what earns the click once they have stopped. Name first, claim underneath. Enforced:
+the linter rejects a thumbnail whose title, badge and note never contain `meta.subject`.
+
+### Corollary — A FIELD NOTHING READS IS A LIE, AND SO IS A LAW NOTHING GATES (2026-09-03)
+
+One session, chasing one owner complaint about overlays, turned up **five** places where
+the repo was carrying an instruction nobody executed. They are the same bug wearing
+different clothes, and every one of them was silent — valid spec, green linter, clean
+`tsc`, successful render, and the thing simply not on screen.
+
+| what was declared | what read it | how it showed up |
+|---|---|---|
+| `clips[].zooms` — 32 authored camera moves, repo-wide | nothing, on any `layout:'full'` beat (the default) | *"the screen recording is just displaying the part"* — the camera had **never** moved on a wide cut, including in `topics/rec-camera-moves` |
+| `ChartSeries.atWord` | nothing — one `drawProgress` served every series | a two-line comparison drew both lines at once while the voice introduced the first |
+| `stats[].note` on `moderndark`, the standing default | nothing — `MdStatPanels` drew kicker + value | a panel reading **STILL DEARER / per word**, its note *"than Opus 5 · GPT-5.6"* — the entire comparison — never drawn |
+| a clip's authored `atWord` | `anchor-spec.mjs`, which overwrote it every run | the scroll landed three words into the next sentence |
+| `inkFor()` on the browser surface | nothing — both selectors were VS Code's | every browser recording told the overlay solver the page was empty |
+
+**The rules that fall out, and they are cheap:**
+
+1. **When you add a field, add the code that reads it in the same commit, or do not add
+   the field.** `scripts/check-field-use.mjs` now proves this for design packs: repo-wide
+   a notice (62 fields are dropped across 28 packs today), and **fatal** for the pack a
+   spec actually uses, on the types it contains, for the values it sets.
+2. **A field the spec author writes and a field the pipeline computes may not share a
+   name.** `anchor-spec` owns `atWord`; the author's intent is `wantAtWord`. Reading intent
+   back out of an output makes the pass non-idempotent — its second run obeys its own first
+   answer.
+3. **A measurement that fails soft must fail loudly instead.** `inkFor()` returned `[]` for
+   a surface it had no selector for, and `[]` reads as "the screen is empty". Anything that
+   MEASURES gets a check that at least one measurement is non-empty
+   (`check-recordings.mjs`), and that check distinguishes *not measured yet* (a notice) from
+   *measured and found nothing* (fatal).
+4. **A LAW WITH NO GATE IS A HABIT.** CLAUDE.md has said *"NOTHING renders until it
+   passes"* for as long as the linter has existed, and `render-topic.mjs` never once ran
+   the linter — a REJECTED spec rendered a 5.7MB deliverable while this was being written.
+   It runs it now. When you write a rule down, name the script that enforces it in the same
+   breath; if you cannot, you have written a wish.
+5. **Grepping is not a gate either.** LAW 0n's answer to field-dropping was *"grep every
+   `.map((c) =>` before you render"*, and the bug then happened three more times. The
+   corollary count went 3 → 8 under a rule made of good intentions.
+
+### Corollary — A CURVE YOU MADE UP IS A LIE WITH AXES ON IT (2026-09-03)
+
+LAW 0m.2 says a chart needs declared data. Two invented figures shipped into a lint-clean
+spec anyway, because both *looked* like research:
+
+- a `PICTOGRAM` row at **12**, a value in no source — I had averaged "ten or fifteen" into a
+  single number for tidiness. Drawing both ends is more honest, matches the sentence, and
+  bought the beat a third anchor.
+- a `LINE_CHART` plotting `[10,26,42,58,74,90]` against `[10,18,26,33,40,47]` — a plausible
+  widening gap, drawn with gridlines, units and a legend, and entirely fabricated.
+
+**A worked example is legitimate; an undeclared one is not.** Both series are now straight
+arithmetic on the two prices Anthropic published, the assumption that generates them is
+SPOKEN ("about ten million tokens' worth an hour"), and the legend carries the unit prices
+themselves (`Old $1/M`, `New $0.25/M`) so a viewer can check the slope instead of trusting
+it. Before any chart ships, say out loud where each number came from. "It looks right" is
+the feeling this rule exists to overrule.
+
 ### Corollary — NEVER NARRATE THAT YOUR OWN WORK IS REAL (owner, 2026-09-02)
 
 Owner, on the uv cut: *"Did anyone ask that you are doing all real? You yourself are letting

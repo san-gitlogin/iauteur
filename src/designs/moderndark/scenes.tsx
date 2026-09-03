@@ -78,6 +78,18 @@ export const MdStatPanels: React.FC<{scene: Scene}> = ({scene}) => {
               <Glass glow={i === 0} style={{minWidth: (vertical ? 560 : 360) * scale, display: 'flex', flexDirection: 'column', gap: 16 * scale, alignItems: 'flex-start'}}>
                 <div style={{fontFamily: t.fonts.mono, fontWeight: 500, fontSize: 22 * scale, letterSpacing: '0.1em', textTransform: 'uppercase', color: t.colors.muted}}>{stat.kicker}</div>
                 <div style={{fontFamily: t.fonts.display, fontWeight: 600, fontSize: (vertical ? 92 : 84) * scale, color: i === 0 ? sem(c) : t.colors.text, fontVariantNumeric: 'tabular-nums', lineHeight: 1, letterSpacing: '-0.02em'}}>{stat.value}</div>
+                {/* THE NOTE IS WHAT MAKES THE NUMBER MEAN SOMETHING, and this pack was
+                    dropping it. `note` is declared on STAT_PANELS in the manifest and drawn
+                    by src/scenes/StatPanels.tsx; MdStatPanels rendered only kicker + value,
+                    so on moderndark — the STANDING DEFAULT — every note ever authored went
+                    to the renderer and never reached the screen. Caught on a panel reading
+                    "STILL DEARER / per word", whose note said "than Opus 5 · GPT-5.6": the
+                    comparison was the whole point and the frame showed a phrase with no
+                    object. Same field-dropping failure as parent/links, out/series and icon
+                    before it (LAW 0n corollary). */}
+                {stat.note ? (
+                  <div style={{fontFamily: t.fonts.body, fontWeight: 400, fontSize: (vertical ? 30 : 26) * scale, color: t.colors.muted, lineHeight: 1.35}}>{stat.note}</div>
+                ) : null}
               </Glass>
             </div>
           );

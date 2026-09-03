@@ -46,7 +46,7 @@
           "text": "Terminal-Bench-Science 0.1"
         }
       ],
-      "holdMs": 1400
+      "holdMs": 1600
     },
     {
       "id": "scores",
@@ -61,9 +61,17 @@
         {
           "id": "terminal",
           "text": "55.8%"
+        },
+        {
+          "id": "sciencerow",
+          "text": "Agentic scientific research"
+        },
+        {
+          "id": "rival",
+          "text": "GPT-5.6 Sol"
         }
       ],
-      "holdMs": 1600
+      "holdMs": 2000
     }
   ],
   "maxHoldMs": 1600

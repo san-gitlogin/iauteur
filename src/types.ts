@@ -2125,7 +2125,18 @@ export interface RecordedClip {
    * can visit both while the footage under it holds. `mark` names a rectangle the RUNNER
    * measured; `at: "full"` pulls back out to the whole capture.
    */
-  zooms?: Array<{mark?: string; at?: 'full'; atWord?: number}>;
+  /**
+   * `marks` frames the UNION of several measured rectangles — the shape a pan across a
+   * table row needs. Framing one 178px row LABEL crops away the columns it is being
+   * compared against, which is not what a person reading that row looks at.
+   */
+  /**
+   * The word the AUTHOR wants this clip to start on. `atWord` is solved by
+   * `scripts/anchor-spec.mjs` from the measured footage and is overwritten on every run;
+   * this is the intent, and the solver keeps it whenever the footage still fits.
+   */
+  wantAtWord?: number;
+  zooms?: Array<{mark?: string; marks?: string[]; at?: 'full'; atWord?: number}>;
   /**
    * An ANIMATED explainer that floats over this clip's footage, in the same measured
    * ink-free band as the caption — so it annotates the recording instead of hiding it.
@@ -2208,6 +2219,20 @@ export interface RecordedStepData {
   capture?: {width?: number; height?: number};
   caption?: string;
   premise?: string;
+  /**
+   * WHERE THE FOOTAGE CAME FROM — a standing credit along the bottom of the frame.
+   *
+   * Owner, on the browser beats: *"when you show the browser screen recording, you must
+   * always say in the official website, and at the bottom there must be a text stating the
+   * source which is very very important."*
+   *
+   * REQUIRED when the capture is somebody else's screen or website. Footage of a page you do
+   * not own is a quotation, and a quotation carries its attribution — on screen, for the whole
+   * beat, not only in the description. It is a different field from `premise`: the premise says
+   * what the viewer is LOOKING at and rides on the card, so it moves and can be covered; this
+   * says where the footage came FROM and stays put wherever the card is parked.
+   */
+  sourceNote?: string;
   color?: SemColor;
   atWord?: number;
 }

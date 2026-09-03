@@ -76,6 +76,137 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-09-03 — five silent instructions, and the gate that was never wired
+
+Chasing one owner complaint — *"component overlay over the recording completely hides it"* —
+turned up a family of bugs where the repo carried an instruction nothing executed. Each was
+invisible: valid spec, green linter, clean `tsc`, successful render, nothing on screen. The
+law is CLAUDE.md → LAW 0f → "A FIELD NOTHING READS IS A LIE"; this is what was fixed.
+
+**1. The camera has never moved on a wide cut.** `RecordedStep` discarded `clips[].zooms`
+whenever `fullBleed` was true — and `layout` defaults to `'full'`, which IS full bleed at
+16:9. Counted across the repo: **32 clips carry authored zooms and all 32 were dropped**,
+including every move in `topics/rec-camera-moves`, a topic that exists to demo the feature.
+Three lines above the guard sat a comment promising the opposite. Authored moves are now
+honoured, at a gentler `windowFor` floor (`capW/2`, a ~2× lean-in rather than a 3.2× crop,
+which is what full bleed was protecting against). A move may also name several marks —
+`{marks: ['sciencerow','rival']}` frames their union, because a table row is read ACROSS and
+framing its 178px label alone crops off the columns it is compared against.
+
+**2. Browser recordings measured no ink.** `inkFor()`'s two row selectors are VS Code's
+(`.view-lines .view-line`, `.xterm-rows > div`), so on the browser surface it returned `[]`
+— which the overlay solver reads as "the screen is empty". `public/rec/fable-page` carried
+ink 0 on all four steps and a callout reading *"the one it replaces"* sat on the
+`60.9% (Mythos 5.1)` sub-label it was pointing at. There is now a browser branch (text-node
+`Range.getClientRects()` — one rect per rendered LINE, the web equivalent of `.view-line` —
+plus replaced content). Three things it needed that are worth knowing:
+- **the merge has to be a ratio, not a tolerance.** The original merge joined a row to the
+  last block if it started within 24px of its right edge. In an editor pane that is right; on
+  a page it CHAINS, each row widening the block the next row then lands inside, until one
+  rectangle spans the viewport. First measurement: 1–2 blocks per step, one of them the whole
+  page. Requiring the overlap to be ≥60% of the narrower row keeps table columns apart, and
+  column gutters are exactly the free space an overlay wants.
+- **a full-bleed backdrop is not an obstacle.** A hero image returned one 1600×900 rect;
+  a rectangle covering everything scores every candidate equally, which is the no-ink
+  blindness again wearing a number. Dropped, before and after the merge.
+- **`check-recordings.mjs` now asserts a recording has ink**, distinguishing *recorded before
+  ink existed* (a notice — three takes predate 2026-08-29) from *measured and found nothing*
+  (fatal). Break-tested by planting `ink: []`.
+
+**3. A graze was priced like a collision.** The callout solver scored `clash * 100` flat, so
+a 3% corner touch cost 3.0 while covering 30% of the `Fable 5.1` column header cost 1.2 — and
+a label reading *"the new model"* was placed on top of the header naming which model. Squared
+(`clash * clash * 100`) a full overlap still costs 100 and a nick costs nothing.
+
+**4. `keepLeft` was a terminal rule applied to a web page.** It pulls a punch-in back to the
+clip's left edge so a line's first character is never sliced — correct for a terminal, where
+prompts live at the left edge. A page's left edge is empty margin, so the window was dragged
+to x=0 and rendered with the left HALF of the frame blank. It now measures from the ink's own
+left edge, which is the prompt on a terminal and the content column on a page.
+
+**5. An authored clip anchor was overwritten every run.** `anchor-spec.mjs` solved every
+`atWord` from footage length and ignored what the spec asked for, so "start the scroll ON the
+word 'Scroll'" was re-timed three words into the next sentence. The solver's numbers are now
+a FLOOR: `wantAtWord` (a separate field, because `atWord` is the solver's OUTPUT and reading
+intent back out of an output makes the pass non-idempotent) is honoured whenever the previous
+clip still gets to finish playing. Break-tested with an impossible anchor — it falls back.
+
+**6. `moderndark` dropped `stats[].note`.** The standing default pack rendered kicker + value
+only, so every note ever authored went to the renderer and never reached the screen — caught
+on a panel reading **STILL DEARER / per word** whose note, *"than Opus 5 · GPT-5.6"*, was the
+whole comparison. `scripts/check-field-use.mjs` is the new seal: repo-wide a NOTICE (**62
+fields dropped across 28 packs** — `note` ×24, `kicker` ×28, `icon` ×10; fixing those is a
+design job, Law 6), and **fatal** via `--spec`, which asks only about the pack a spec
+declares, the types it contains and the values it sets. Wired into `render-topic`.
+
+**7. `render-topic.mjs` never ran the linter.** CLAUDE.md has said *"NOTHING renders until it
+passes"* for as long as the linter has existed and nothing enforced it — caught in the act
+when a REJECTED `shorts.json` rendered a 5.7MB file. It lints the one spec being rendered
+now, so the back catalogue's accumulated errors cannot block today's work.
+
+**Also:** `LINE_CHART` series each draw on their own word (`ChartSeries.atWord` was declared
+in `types.ts` and read by nothing — one `drawProgress` served every series, so a two-line
+comparison drew both lines while the voice was still introducing the first). And the linter
+rejects a narration that does not end in sentence punctuation — a spec builder that drops a
+trailing `+` truncates the string silently via ASI, which happened while writing this video
+and was caught only because a later `at()` looked for a word that had been truncated away.
+
+**Known, not fixed:** `npm run lint` is red on **193 of 195 specs**. The back catalogue
+predates laws added since (`meta.subject` from LAW 0g, 2026-08-30) and shipped specs are
+immutable, so `lint-all` is red by construction whenever a law is added. `npm run gate` is
+green and per-spec lint is green for anything in flight. Worth deciding whether `lint-all`
+should scope to in-flight topics or grandfather shipped ones.
+
+### 2026-09-03 — the sync was estimated, on every video ever made here
+
+⚠ **THE BIGGEST DEFECT THIS REPO HAS HAD, AND NOTHING REPORTED IT.** `voiceover.py` asks
+edge-tts for boundary events and falls back to spreading word starts EVENLY across a scene
+when none arrive. edge-tts's `Communicate(...)` takes a `boundary` argument that **defaults to
+`"SentenceBoundary"`** — with that default no WordBoundary event is ever sent, so the fallback
+fired on every scene of every cut this repo has produced. Every `atWord` in the back catalogue
+is an estimate, not the moment the word is spoken.
+
+It surfaced as owner feedback, not as a failure: *"your sync of voice narration with highlight
+is somewhat lacking, and I am not able to follow as a viewer."* Measured on one scene: 14 word
+starts at a uniform 0.432s apart, versus real gaps of 0.243 / 0.336 / 0.694 / 0.347 / 0.081
+once `boundary="WordBoundary"` is passed.
+
+Fixed in one argument. Guarded three ways, because a silent fallback is what let it run:
+- `voiceover.py` now PRINTS a loud warning if the fallback ever fires again.
+- `scripts/check-sync.mjs` (gate seal #15) fails on evenly-spaced timings. Scoped like
+  check-recordings: a NOTICE repo-wide, because out/tts/ holds files for cuts that already
+  shipped and a permanently-red gate is one you learn to ignore — and FATAL for the slug being
+  rendered, which `render-topic.mjs` now asks about.
+- The arithmetic is the test: real speech never spaces its words evenly.
+
+**`uv-getting-started` has been re-voiced and re-synced**, so its anchors are real now. Its
+RENDER is therefore stale — the cut that was uploaded carries the old estimated timings. Worth
+re-rendering when convenient; it is not a content change, only a sync one.
+
+### 2026-09-03 — four owner corrections, encoded rather than remembered
+
+Owner: *"we should not be correcting things again and again. As a reviewer and teacher, what I
+correct, the same mistake must not happen again with any project that gets created using
+iauteur."* So each of these is a LAW plus, where it is machine-checkable, a guard:
+
+| Correction | Where it now lives |
+|---|---|
+| Explain jargon, name the thing, don't recite the chart, never trim an explanation to fit a ceiling, no bare numbers | LAW 0f corollary "EXPLAIN IT TO SOMEONE WHO ARRIVED TODAY" |
+| Footage of someone else's page must say the site and carry an on-screen source | LAW 0f corollary + `recordedStep.sourceNote` + **linter error** when the recording has a `startUrl` |
+| Overlays dock to the SIDE on dense footage, not across the middle | LAW 0f corollary; `card {place, aspect, width}` already existed and was simply unused |
+| The thumbnail names the subject, not just a claim about it | LAW 0f corollary + **linter error** if `meta.subject` appears in no thumbnail field |
+
+Both new linter rules were break-tested by injecting the exact fault the owner reported: the
+`IT DOUBLED` thumbnail, and a browser beat with its `sourceNote` stripped.
+
+⚠ **A capability existing is not the same as it being used.** `card.place` had supported
+side-docking since it was built, and the manifest note literally said *"parked to one side so
+it sits BESIDE the listing instead of across it"* — it still shipped as a centred strip over a
+full table, twice, until the owner named it twice. When a correction has a knob already, the
+fix is a guard or a default, not a note to self.
+
+
+
 ### 2026-09-02 — the recording subsystem now runs on macOS, and the uv walkthrough it produced
 
 The screen-recording layer had only ever run on Windows. Bringing it up on the Mac to build

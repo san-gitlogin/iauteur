@@ -186,9 +186,16 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // The floor stops the opposite failure: a one-line target blowing up into mush
   // (LAW 0o rule 6 — space comes from carrying less, never from unreadable scale), and it
   // is tighter in 9:16/split because those hold LESS CONTENT, not smaller type.
+  // `gentle` raises the floor for a FULL-BLEED move. In a focus layout the capture is
+  // already a panel and a hard punch-in is the point; in full bleed the whole screen is the
+  // subject, so a 3.2x crop stops being a camera move and becomes a different shot — which
+  // is the crop that used to cut commands off the right edge. A person leaning towards a
+  // page moves maybe 2x, so that is the floor: the move reads as attention, and everything
+  // around the target stays on screen.
   const windowFor = (
     r?: {x: number; y: number; w: number; h: number},
     keepLeft?: {x: number; w: number},
+    gentle = false,
   ) => {
     if (!r) return wide;
     const bw = Math.max(1, Number(r.w));
@@ -207,7 +214,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     // which was written for the CLIP BBOX (a wide, short terminal that should be punched
     // into). Applied to a MARK, whose height is one text line, the height-driven candidate is
     // always tiny, so the minimum could never contain the words. Width leads; height follows.
-    let winW = Math.max(bw * 1.08, capW / (vertical || split ? 4.2 : 3.2));
+    let winW = Math.max(bw * 1.08, capW / (gentle ? 2 : vertical || split ? 4.2 : 3.2));
     let winH = winW / stageAspect;
     if (winH > capH) { winH = capH; winW = winH * stageAspect; }
     if (winW > capW) { winW = capW; winH = winW / stageAspect; }
@@ -255,15 +262,65 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // components floating over it" means, and the only way a long command is never cut. A mark
   // zoom would crop it again: the SEARCH mark is 220px wide, so its window is ~500 of 1600,
   // and everything past it leaves the frame. Emphasis moved from the lens to the overlay.
-  const targets = fullBleed
-    ? [{at: curStart, win: wide}]
-    : [{at: curStart, win: wantFocus ? windowFor(bb) : wide}];
-  if (!fullBleed) {
-    for (const z of cur.zooms ?? []) {
-      const at = wordToFrame(z.atWord ?? cur.atWord ?? 1);
-      const r = z.at === 'full' ? undefined : (z.mark ? cur.marks?.[z.mark] : bb);
-      targets.push({at, win: z.at === 'full' ? wide : windowFor(r, bb as any)});
-    }
+  // ⚠ AN AUTHORED MOVE IS AN INSTRUCTION, NOT A SUGGESTION — AND IT WAS BEING BINNED.
+  //
+  // This block used to be guarded by `if (!fullBleed)`, three lines under a comment
+  // promising the opposite (*"authored `zooms` still move the camera for a real emphasis
+  // beat"*). `layout` defaults to `'full'`, and `'full'` IS full bleed at 16:9 — so the
+  // guard covered the default. Counted across the repo the day it was found: **32 clips
+  // carry authored zooms and all 32 were discarded**, including every move in
+  // `topics/rec-camera-moves`, a topic that exists to demonstrate this feature. The camera
+  // has never once moved on a wide cut.
+  //
+  // Owner, on the Fable browser beats: *"the screen recording, it's just displaying the
+  // part. But you must script often like how humans would visit a webpage — scroll through
+  // and get to know, with pan, tilt, zoom in/out effects."* The spec said exactly that. The
+  // renderer threw it away, silently, which is the field-dropping failure again (LAW 0n
+  // corollary, now five-for-five): a spec field that no code path reads produces no error,
+  // no warning and no picture.
+  //
+  // What full bleed still refuses is AUTOMATIC focus — the punch-in nobody asked for, which
+  // is what cropped commands off the right edge. An authored move is honoured, at the
+  // gentler `windowFor` floor so it leans in rather than re-frames.
+  const targets = [{at: curStart, win: wantFocus ? windowFor(bb) : wide}];
+  // A move may name SEVERAL marks, and then it frames their union. A pan across a table row
+  // is one gesture, not two: zooming to the 178px row LABEL alone crops off the columns the
+  // row is being compared against, so the viewer is shown the question without the answer.
+  // WHERE A LINE STARTS IS WHERE THE INK STARTS, NOT WHERE THE CAPTURE DOES.
+  //
+  // `keepLeft` exists so a punch-in never slices the first character off a line — measured
+  // on the SQLite short, where "unsafe ->" rendered as "nsafe ->". It was handed the clip's
+  // BBOX, i.e. the capture's own left edge, which is correct for a terminal or an editor
+  // because that is exactly where prompts and line starts live.
+  //
+  // A WEB PAGE'S LEFT EDGE IS EMPTY MARGIN. Pulling the window back to it spends the shot
+  // on whitespace: measured on the Fable table beat, the window was dragged to x=0 and
+  // rendered with the left HALF of the frame blank while the table it had just zoomed to
+  // was cut off on the right. The measured ink answers this for both surfaces at once — a
+  // terminal's ink starts at the prompt, a page's at its content column.
+  const inkRects = (cur.ink ?? []) as {x: number; y: number; w: number; h: number}[];
+  const keepLeft = inkRects.length
+    ? {x: Math.min(...inkRects.map((r) => Number(r.x))), w: 0}
+    : (bb as {x: number; w: number} | undefined);
+
+  const unionOf = (names: string[]) => {
+    const rs = names.map((m) => cur.marks?.[m]).filter(Boolean) as
+      {x: number; y: number; w: number; h: number}[];
+    if (!rs.length) return undefined;
+    const x = Math.min(...rs.map((r) => Number(r.x)));
+    const y = Math.min(...rs.map((r) => Number(r.y)));
+    const x1 = Math.max(...rs.map((r) => Number(r.x) + Number(r.w)));
+    const y1 = Math.max(...rs.map((r) => Number(r.y) + Number(r.h)));
+    return {x, y, w: x1 - x, h: y1 - y};
+  };
+  for (const z of cur.zooms ?? []) {
+    const at = wordToFrame(z.atWord ?? cur.atWord ?? 1);
+    const r = z.at === 'full'
+      ? undefined
+      : z.marks?.length ? unionOf(z.marks)
+      : z.mark ? cur.marks?.[z.mark]
+      : bb;
+    targets.push({at, win: z.at === 'full' ? wide : windowFor(r, keepLeft, fullBleed)});
   }
   targets.sort((a, b) => a.at - b.at);
 
@@ -540,6 +597,40 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           </>
         ) : null}
         {fullBleed ? null : premiseNode}
+
+        {/* THE SOURCE STRIP — a standing credit along the bottom of the frame.
+            Owner, on the browser beats: *"when you show the browser screen recording, you
+            must always say in the official website, and at the bottom there must be a text
+            stating the source which is very very important."*
+            He is right, and it is not the same field as `premise`. The premise says what the
+            viewer is LOOKING at and lives on the card; this says where the footage came FROM
+            and must be readable for the whole beat regardless of where the card is parked —
+            because footage of somebody else's page is a quotation, and a quotation carries
+            its attribution. It sits under everything else in the stack but above the video,
+            is never anchored (it is on from frame 0), and is deliberately quiet: small, mono,
+            dimmed, with its own scrim so it survives a light page underneath it. */}
+        {d.sourceNote ? (
+          <div style={{
+            position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 3,
+            display: 'flex', justifyContent: 'center', alignItems: 'flex-end',
+            paddingBottom: (vertical ? 26 : 18) * scale,
+            paddingTop: 40 * scale,
+            background: `linear-gradient(to top, ${hexA(t.colors.bg, 0.82)}, ${hexA(t.colors.bg, 0)})`,
+            pointerEvents: 'none',
+          }}>
+            <div style={{
+              fontFamily: t.fonts.mono,
+              fontSize: (vertical ? 17 : 15) * scale,
+              letterSpacing: 0.7,
+              color: hexA(t.colors.text, 0.72),
+              maxWidth: '92%',
+              textAlign: 'center',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}>{String(d.sourceNote)}</div>
+          </div>
+        ) : null}
 
         {/* footage, and — when split — the demo's own steps beside it.
             THE WORK RECEDES WHILE THE CARD IS SPEAKING. Owner: *"If something shown in the
@@ -819,7 +910,17 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                 const clash = obstacles.reduce((acc, o) => acc + areaOver(r, o), 0) / unit;
                 const ink = inkBoxes.reduce((acc, o) => acc + areaOver(r, o), 0) / unit;
                 const away = Math.hypot((r.x + lw / 2) - cx, (r.y + lh / 2) - cy) / Math.max(1, vw);
-                const cost = clash * 100 + ink * 4 + away * 6 + rank * 0.01;
+                // CLASH IS SQUARED, AND THAT IS THE WHOLE POINT OF THE WEIGHT.
+                //
+                // A flat x100 prices a GRAZE like a COLLISION. Measured on the Fable table
+                // beat: the clean spot below `52.6%` overlapped the other callout's box by
+                // 3% of a label — a nicked corner — and was charged 3.0, while the spot
+                // that covered 30% of the `Fable 5.1` COLUMN HEADER was charged 1.2. So the
+                // solver put a label reading *"the new model"* on top of the header naming
+                // which model it was. Squaring keeps the intent (0.5 overlap costs 25, a
+                // full one costs 100 — still disqualifying) and stops a corner touch from
+                // outbidding real text.
+                const cost = clash * clash * 100 + ink * 4 + away * 6 + rank * 0.01;
                 if (cost < best) { best = cost; pick = {...q, w: lw, h: lh}; }
               });
               if (!pick) {
@@ -1056,6 +1157,11 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
 
           const cardCfg = d.card ?? {};
           const pad = 42 * scale;
+          // The source strip is a STANDING credit along the bottom (LAW 0f corollary, WHAT
+          // YOU RECORD FROM SOMEONE ELSE IS A QUOTATION). It is on for the whole beat, so
+          // anything the solver parks at the bottom has to clear it — an attribution the
+          // card sits on top of is not an attribution.
+          const sourceInset = d.sourceNote ? (vertical ? 52 : 44) * scale : 0;
 
           // ── WHERE THE CARD GOES WHEN NOBODY SAID ──────────────────────────────
           //
@@ -1152,17 +1258,25 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             pos.top = 0; pos.bottom = 0;
           } else if (place === 'auto') {
             if (fullBleed) {
+              const edgeKey = hasGap || clusterAtTop ? 'top' : 'bottom';
               pos.left = 0; pos.right = 0;
-              pos[hasGap || clusterAtTop ? 'top' : 'bottom'] = clusterInset;
+              pos[edgeKey] = clusterInset + (edgeKey === 'bottom' ? sourceInset : 0);
             }
           } else {
             if (place.includes('left')) pos.left = pad;
             else if (place.includes('right')) pos.right = pad;
             else { pos.left = 0; pos.right = 0; }
+            // A BARE SIDE PLACEMENT IS A DOCK, AND A DOCK IS VERTICALLY CENTRED.
+            //
+            // `place: 'right'` used to fall through to `pos.bottom = pad`, so asking for the
+            // side put the card in the bottom-right CORNER — which is not what a side dock
+            // is, and on a beat carrying a `sourceNote` it landed on the credit strip as
+            // well. `top-right` / `bottom-right` still say corner; `right` says side.
+            const bareSide = place === 'left' || place === 'right';
             if (place.includes('top')) pos.top = pad;
-            else if (place.includes('bottom')) pos.bottom = pad;
-            else if (place === 'center') { pos.top = 0; pos.bottom = 0; }
-            else { pos.bottom = pad; }
+            else if (place.includes('bottom')) pos.bottom = pad + sourceInset;
+            else if (place === 'center' || bareSide) { pos.top = 0; pos.bottom = 0; }
+            else { pos.bottom = pad + sourceInset; }
           }
           const justify = place.includes('left') ? 'flex-start'
             : place.includes('right') ? 'flex-end' : 'center';

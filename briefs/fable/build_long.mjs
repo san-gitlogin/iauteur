@@ -38,9 +38,10 @@ const scene = (type, narration, data, extra = {}) => {
 };
 const chapter = (narration, number, title) =>
   scene('CHAPTER', narration, {chapter: {number: String(number).padStart(2, '0'), title}});
-const rec = (narration, caption, premise, clips) =>
+const rec = (narration, caption, premise, clips, card = undefined, sourceNote = undefined) =>
   scene('RECORDED_STEP', narration, {
-    recordedStep: {caption, premise, layout: 'full', color: 'blue', clips},
+    recordedStep: {caption, premise, layout: 'full', color: 'blue', clips,
+                   ...(card ? {card} : {}), ...(sourceNote ? {sourceNote} : {})},
   });
 const clip = (step, label, opts = {}) =>
   ({ref: `rec:fable-page#${step}`, label, focus: true, ...opts});
@@ -49,8 +50,8 @@ const scenes = [];
 
 // ── OPENING ───────────────────────────────────────────────────────────────────
 {
-  const n = "Claude Fable 5.1 doubled a science benchmark. " +
-            "Twenty-four point seven, to fifty-two point six.";
+  const n = "Claude Fable 5.1 just doubled its score on a hard science test. " +
+            "Let me show you what that means.";
   scenes.push(scene('HOOK', n, {
     headline: 'IT DOUBLED', subtext: 'Terminal-Bench-Science', heroAsset: 'si:anthropic',
     hookVariant: 'figure',
@@ -87,42 +88,80 @@ scenes.push(scene('TITLE_CARD',
 scenes.push(chapter(
   "Start where they started: the benchmark table.", 1, 'The numbers'));
 
+// TWO BEATS, NOT ONE. Explaining the table properly took 62s, and eight anchors earn 52.
+// The split is also better teaching: one beat to say what you are looking at, one to read
+// the row. Each carries its own source credit, because either can be the frame a viewer
+// pauses on.
+{
+const n =
+  "Here we are on Anthropic's official website, on the page announcing the model. " +
+  "Scroll down and their comparison table appears. " +
+  "First column is the new model; the three beside it are what it's measured against.";
 scenes.push(rec(
-  "Here's the announcement, and here's the table everyone screenshotted. " +
-  "Top row, agentic scientific research. Fifty-two point six for Fable 5.1, " +
-  "against twenty-four point seven for the model it replaces. " +
-  "Second row is coding — fifty-five point eight, where Opus 5 sat at fifty-two point three. " +
-  "Those two rows are the whole announcement in miniature.",
-  'the table everyone screenshotted',
-  // Short premise on purpose: the page is dense edge to edge, so there is no ink-free band
-  // for the card to sit in and every extra line of it covers another row of the table.
-  'Anthropic’s announcement page.',
+  n,
+  'reading the column headings',
+  'The comparison table on Anthropic’s announcement page.',
+  // THE FOOTAGE HAS TO DO WHAT THE NARRATION SAYS IT DOES. The line is *"scroll down and
+  // their comparison table appears"* — with only the hero clip on screen, nothing scrolls
+  // and nothing appears, and the viewer is told about a movement they never see. The demo
+  // already captured the scroll (`bench`); it was simply never cast. Owner: *"you must
+  // script often like how humans would visit a webpage, scroll through and get to know."*
   [
-    clip('open', 'the announcement'),
-    clip('scores', 'the two rows that matter', {
+    clip('open', 'the announcement page'),
+    // ON the word "Scroll", not a beat later: the movement and the sentence describing it
+    // are the same event (LAW 0i). `wantAtWord`, not `atWord` — anchor-spec owns `atWord`.
+    clip('bench', 'scrolling to the table', {wantAtWord: at(n, 'Scroll')}),
+  ],
+  {place: 'right', width: 0.26},
+  'Source: anthropic.com — Claude Fable 5.1 and Mythos 5.1 announcement'));
+}
+
+scenes.push(rec(
+  "Now the top row, because that is the one being quoted everywhere. " +
+  "That top row is called agentic scientific research. " +
+  "Agentic just means the model works on its own: it is handed a scientific task, " +
+  "so it has to pick the tools, write the code and reach an answer " +
+  "without a person steering each step. " +
+  "Claude Fable 5.1 finishes fifty-two percent of those tasks. " +
+  "Fable 5, the model it replaces, finished twenty-four percent. " +
+  "So on this one test, Fable 5.1 solves roughly twice as many of those jobs as Fable 5 did.",
+  'the row everyone quotes',
+  'The same table, zoomed to the first row.',
+  [
+    // CAMERA MOVES so the shot reads like a person looking rather than a screenshot.
+    // A row is read ACROSS, so the first move frames the row label together with the
+    // furthest column it is compared against — framing the 178px label on its own crops
+    // away the very numbers the row exists to compare.
+    clip('scores', 'the top row, up close', {
+      zooms: [
+        {marks: ['sciencerow', 'rival']},   // the whole row, end to end
+        {mark: 'sciencerow'},               // in on the name, while it is being defined
+        {marks: ['science', 'terminal']},   // over to the column holding the scores
+        {at: 'full'},                       // and back out to the table
+      ],
       callouts: [
-        // side:'right' keeps the label out of the column header it was landing on.
-        {text: 'more than double', mark: 'science', side: 'right', color: 'green'},
-        {text: 'past Opus 5', mark: 'terminal', side: 'right', color: 'blue'},
+        {text: 'the new model', mark: 'science', side: 'right', color: 'green'},
+        {text: 'the one it replaces', mark: 'terminal', side: 'right', color: 'blue'},
       ],
     }),
-  ]));
+  ],
+  {place: 'right', width: 0.26},
+  'Source: anthropic.com — Claude Fable 5.1 and Mythos 5.1 announcement'));
 
 {
   const n =
-    "Put that first row on a chart and it stops being a percentage, because now you can see " +
-    "the gap. " +
-    "Fable 5 managed twenty-four point seven. Opus 5, twenty-nine. " +
-    "GPT-5.6 Sol, twenty-two point four. " +
-    "Fable 5.1 comes in at fifty-two point six — roughly double the field. " +
-    "Anthropic footnote it with a standard error of around four points, " +
-    "so read it as a wide lead rather than an exact one.";
+    "Here is that same science test as a chart, because a gap is easier to see than to hear. " +
+    "Each bar is the share of tasks a model finished correctly, which means taller is better. " +
+    "Three of these models land in the twenties. " +
+    "Claude Fable 5.1 lands at fifty-two, which is roughly double any of them. " +
+    "One caution worth saying out loud: Anthropic note a margin of error of about four " +
+    "points here, so treat this as a wide lead rather than an exact figure.";
   scenes.push(scene('BAR_COMPARE', n, {
     bars: [
-      {label: 'GPT-5.6 Sol', value: 22.4, display: '22.4%', atWord: at(n, 'GPT56')},
-      {label: 'Fable 5', value: 24.7, display: '24.7%', atWord: at(n, 'Fable')},
-      {label: 'Opus 5', value: 29.0, display: '29.0%', atWord: at(n, 'Opus')},
-      {label: 'Fable 5.1', value: 52.6, display: '52.6%', color: 'green', atWord: at(n, 'comes')},
+      {label: 'GPT-5.6 Sol', value: 22.4, display: '22.4%', atWord: at(n, 'Three')},
+      {label: 'Fable 5', value: 24.7, display: '24.7%', atWord: at(n, 'models')},
+      {label: 'Opus 5', value: 29.0, display: '29.0%', atWord: at(n, 'twenties')},
+      {label: 'Fable 5.1', value: 52.6, display: '52.6%', color: 'green', atWord: at(n, 'double')},
     ],
     source: `Terminal-Bench-Science 0.1 · ${SRC}`,
   }));
@@ -130,16 +169,17 @@ scenes.push(rec(
 
 {
   const n =
-    "Coding's the closer race, and that's the honest read. " +
-    "On Terminal-Bench 4.0, Fable 5.1 takes fifty-five point eight. " +
-    "Opus 5 was already at fifty-two point three, which means this is a step, not a leap. " +
-    "Mythos 5.1, with the lighter safeguards, goes to sixty point nine — " +
-    "which quietly tells you how much the guardrails cost on agentic work.";
+    "Coding is a much closer race, and that's the headline. " +
+    "Terminal-Bench hands it a real programming job and checks whether the job got finished. " +
+    "Claude Fable 5.1 gets more than half of them done, which is a real jump, " +
+    "but Opus 5 was already close behind, so this is a step forward rather than a leap. " +
+    "Now look at the last bar. Mythos 5.1 is the same model with lighter safety filters, " +
+    "and it scores higher, which tells you what that safety layer costs.";
   scenes.push(scene('BAR_COMPARE', n, {
     bars: [
       {label: 'GPT-5.6 Sol', value: 37.3, display: '37.3%', atWord: at(n, 'closer')},
       {label: 'Opus 5', value: 52.3, display: '52.3%', atWord: at(n, 'Opus')},
-      {label: 'Fable 5.1', value: 55.8, display: '55.8%', color: 'blue', atWord: at(n, 'takes')},
+      {label: 'Fable 5.1', value: 55.8, display: '55.8%', color: 'blue', atWord: at(n, 'half')},
       {label: 'Mythos 5.1', value: 60.9, display: '60.9%', color: 'purple', atWord: at(n, 'Mythos')},
     ],
     source: `Terminal-Bench 4.0 · ${SRC}`,
@@ -148,11 +188,11 @@ scenes.push(rec(
 
 {
   const n =
-    "Plot the four benchmarks all three models ran, and the shape shows up. " +
-    "GPT-5.6 Sol sits inside. Opus 5, a ring out. " +
-    "Fable 5.1 tracks just outside Opus on coding, business and Cursor — " +
-    "then blows out on science. " +
-    "One spike, modest lifts elsewhere: more useful than any single row.";
+    "Here is every test on one chart. Each corner is a kind of task, " +
+    "and the further a shape stretches, the better that model did. " +
+    "GPT-5.6 Sol draws the innermost shape, Opus 5 a ring outside it. " +
+    "Watch the outer shape: barely past Opus on coding, " +
+    "then stretching out towards science, because that's where the gain is.";
   // Only the four axes where ALL THREE models have a published score. OSWorld and
   // Humanity's Last Exam are dropped on purpose: GPT-5.6 Sol has no figure there, and a
   // radar that silently plots a missing value as zero would invent a result (LAW 3).
@@ -164,7 +204,7 @@ scenes.push(rec(
       {name: 'Opus 5', values: [29.0, 52.3, 26.9, 70.0], color: 'orange',
        atWord: at(n, 'Opus')},
       {name: 'Fable 5.1', values: [52.6, 55.8, 31.4, 73.4], color: 'green',
-       atWord: at(n, 'tracks')},
+       atWord: at(n, 'outer')},
     ],
     max: 100,
   }}));
@@ -176,23 +216,19 @@ scenes.push(rec(
   // you folded out rather than slower words. This was the best of them: the thing the
   // customer quotes keep circling is not on the benchmark chart at all.
   const n =
-    "Here's the thing the people using it keep pointing at, and it isn't on the chart. " +
-    "It's how long it'll run without you. " +
-    "Ramp left it on a machine-learning problem for thirty-eight hours unattended, " +
-    "and it came back having diagnosed an earlier result. " +
-    "Block ran it through a thirty-day simulated business. " +
-    "And at Millennium it found the cause of a crash that showed up about once in a million " +
-    "runs, which their engineers hadn't cracked in years.";
+    "Here's what the companies using it keep pointing at, and it isn't on any chart: " +
+    "how long it will keep working without you. " +
+    "Ramp left it running on a machine-learning problem for thirty-eight hours unattended. " +
+    "Millennium used it to find the cause of a crash that appeared roughly once in a million " +
+    "runs — one their own engineers hadn't cracked in years.";
   scenes.push(scene('STAT_PANELS', n, {
     stats: [
       {kicker: 'Ramp', value: '38 hours', note: 'unattended ML run', color: 'blue',
        atWord: at(n, 'Ramp')},
-      {kicker: 'Block', value: '30 days', note: 'simulated run-a-business eval',
-       atWord: at(n, 'Block')},
       {kicker: 'Millennium', value: '1 in 1M', note: 'crash unexplained for years', color: 'green',
        atWord: at(n, 'Millennium')},
     ],
-    verdict: {text: 'It keeps going when you stop', color: 'green', atWord: at(n, 'cracked')},
+    verdict: {text: 'It keeps going when you stop', color: 'green', atWord: at(n, 'appeared')},
     source: `customer reports · ${SRC}`,
   }));
 }
@@ -203,13 +239,26 @@ scenes.push(chapter(
 
 {
   const n =
-    "Anthropic had it design protein binders. " +
-    "Ten to fifteen percent of candidates binding is normal, because most simply don't. " +
-    "Across twelve targets, this one hit close to fifty — and on three of them the binding " +
-    "was ten times stronger than anything submitted before.";
+    "Anthropic asked the model to design protein binders — " +
+    "small proteins built to lock onto one target, which is how medicine often starts. " +
+    "Most designs simply don't stick, which is why ten or fifteen per hundred counts as normal. " +
+    "Across twelve targets, Fable 5.1 got close to fifty per hundred. " +
+    "That's three to five times the usual hit rate.";
+  // THE RANGE IS THE SOURCE'S OWN NUMBER; 12 WAS MINE.
+  // The narration says "ten or fifteen per hundred is normal" because that is what the
+  // announcement says. The first version of this beat drew a single row at 12 — a value
+  // that appears nowhere in the source and that I had averaged into existence (LAW 3).
+  // Drawing both ends is more honest AND it is what the sentence actually claims, and it
+  // gives the beat a third anchored element, so the picture starts moving on "ten" rather
+  // than standing still for the first two-thirds of the narration (LAW 0i.2).
   scenes.push(scene('PICTOGRAM', n, {pictogram: {
     rows: [
-      {label: 'Typical design', value: 12, color: 'red', atWord: at(n, 'normal')},
+      {label: 'Typical, low end', value: 10, color: 'red', atWord: at(n, 'ten')},
+      {label: 'Typical, high end', value: 15, color: 'orange', atWord: at(n, 'fifteen')},
+      // "fifty" used to be the LAST word of the beat, so the row that carries the whole
+      // point arrived as the narration stopped — the viewer heard the number and then
+      // watched the picture catch up in silence. A landing line after it (LAW 0f rule 8)
+      // gives the payoff somewhere to be looked at.
       {label: 'Fable 5.1', value: 50, color: 'green', atWord: at(n, 'fifty')},
     ],
     icon: 'lucide:atom',
@@ -220,7 +269,7 @@ scenes.push(chapter(
 {
   const n =
     "Two more, quickly, because they're the same story in different clothes. " +
-    "It re-mapped Venus from Magellan radar data, resolving detail down to two or three " +
+    "The model re-mapped Venus from old Magellan radar data, resolving detail down to two or three " +
     "kilometres instead of ten to twenty. " +
     "And it rewrote seven biology models to run faster, cutting the GPU bill on one of them " +
     "from eighteen thousand dollars to eight.";
@@ -239,31 +288,89 @@ scenes.push(chapter(
   "Now the part the announcement is quieter about.", 3, 'Price, access, reception'));
 
 scenes.push(rec(
-  "Scroll up on the same page and you'll find the pricing note. " +
-  "Headline rates didn't move — ten dollars a million in, fifty out. " +
-  "What changed is the cache: a read used to cost a dollar, now it's twenty-five cents. " +
-  "So the saving lives wherever your work re-reads the same context.",
-  'the line about cache reads',
-  'The same page, further up: what actually changed on price.',
+  "Back on Anthropic's official page there is a short note about price. " +
+  "What changed is something called a cache read. " +
+  "When you send the model the same block of text over and over — a long document, " +
+  "your codebase — it stores that block and charges far less to read it again. " +
+  "A re-read used to cost one dollar per million words, and now costs twenty-five cents. " +
+  "So is a session actually cheaper?",
+  'the note about cache reads',
+  'The pricing section of the same announcement page.',
   [
     clip('cache', 'the pricing note', {
-      callouts: [{text: 'this is the change', mark: 'cache', color: 'green'}],
+      zooms: [{mark: 'cache'}, {at: 'full'}],
+      callouts: [{text: 'this is the only change', mark: 'cache', side: 'right', color: 'green'}],
     }),
-  ]));
+  ],
+  {place: 'right', width: 0.26},
+  'Source: anthropic.com — Claude Fable 5.1 and Mythos 5.1 announcement'));
+
+{
+  // A LINE, NOT AN ARROW IN A BOX. Owner: *"I see you use just an arrow inside a container
+  // to show the cost reduction. The component is not modern. Modern component with
+  // animation would look something like a line graph plotting the cost it usually would
+  // take and compare it with what they claim."* He is right: "$1 → $0.25" is a fact stated,
+  // where two lines separating over a run is the saving HAPPENING, and the gap between them
+  // is the argument. The x-axis is a long session re-reading the same context, which is the
+  // only condition under which the discount exists at all.
+  //
+  // ⚠ AND THE LINE HAS TO BE DRAWN FROM DECLARED NUMBERS (LAW 0m.2, LAW 3). The first
+  // version of this beat plotted [10,26,42,58,74,90] against [10,18,26,33,40,47] — a
+  // plausible pair of curves I had made up to look like a widening gap, presented with the
+  // furniture of a measurement. Both series are now straight arithmetic on the two prices
+  // Anthropic published ($1.00 and $0.25 per million cached-read tokens), the assumption
+  // that generates them is SPOKEN, and the legend carries the unit prices themselves, so a
+  // viewer can check the slope rather than take it.
+  const n =
+    "Here's a worked example. " +
+    "Picture one long session that re-reads the same context, " +
+    "ten million tokens' worth an hour. " +
+    "Orange is what those re-reads cost at the old price, adding up hour by hour. " +
+    "Green is the very same session at the new price.";
+  // A CHART CARRIES ITS OWN FURNITURE (LAW 0m.2): what is plotted, and where the numbers
+  // came from. Without a title the frame is two lines and a legend, and a viewer who joins
+  // mid-beat has no way to know what is accumulating.
+  scenes.push(scene('LINE_CHART', n, {
+    headline: 'The same session, at both prices',
+    source: `cache-read price, per million tokens · ${SRC}`,
+    lineChart: {
+    series: [
+      // 10M cached-read tokens per hour, cumulative.  old $1.00/M -> $10/h
+      // Each line draws on the word that introduces it, so the viewer is never shown a
+      // comparison before it has been told what the second line is (LAW 0i.1).
+      {label: 'Old $1/M', values: [0, 10, 20, 30, 40, 50], color: 'orange',
+       atWord: at(n, 'Orange')},
+      // new $0.25/M -> $2.50/h
+      {label: 'New $0.25/M', values: [0, 2.5, 5, 7.5, 10, 12.5], color: 'green',
+       atWord: at(n, 'Green')},
+    ],
+    xAxis: ['0h', '1h', '2h', '3h', '4h', '5h'],
+    yUnit: '$',
+    area: true,
+    atWord: at(n, 'Orange'),
+    },
+  }));
+}
 
 {
   const n =
-    "So the sticker price is identical to Fable 5, and it's still above Opus 5 and GPT-5.6. " +
-    "Anthropic's own estimate is about twenty-five percent cheaper for typical work, " +
-    "and up to forty-five on heavily agentic runs. " +
-    "Both of those depend entirely on how much of your context repeats, " +
-    "which means your mileage genuinely will vary.";
+    "Those two lines separate because a cached re-read now costs twenty-five cents " +
+    "per million tokens instead of a dollar. " +
+    "So this is not a price cut — it's a discount on repetition, and the difference matters. " +
+    "The sticker price itself didn't move at all: ten dollars per million words in, " +
+    "fifty out, exactly the same as the previous model, " +
+    "and still dearer per word than Opus 5 or GPT-5.6.";
   scenes.push(scene('STAT_PANELS', n, {
     stats: [
       {kicker: 'Input / output', value: '$10 / $50', note: 'per million — unchanged', atWord: at(n, 'sticker')},
-      {kicker: 'Cache read', value: '$1→$0.25', note: 'down 75%', color: 'green', atWord: at(n, 'Anthropics')},
+      {kicker: 'Cache read', value: '$1→$0.25', note: 'down 75%', color: 'green', atWord: at(n, 'discount')},
+      // The narration claims Fable 5.1 is still dearer per word than its rivals and showed
+      // nothing for it — a comparison the viewer had to take on trust while looking at a
+      // panel about something else. If you make the comparison, put it on screen.
+      {kicker: 'Still dearer', value: 'per word', note: 'than Opus 5 \u00b7 GPT-5.6',
+       color: 'orange', atWord: at(n, 'dearer')},
     ],
-    verdict: {text: 'The discount is conditional', color: 'orange', atWord: at(n, 'depend')},
+    verdict: {text: 'A discount on repetition', color: 'orange', atWord: at(n, 'previous')},
     source: `per million tokens · ${SRC}`,
   }));
 }
@@ -273,7 +380,8 @@ scenes.push(rec(
     "Safeguards moved too, in the direction developers had been asking for. " +
     "The biology classifiers fire eighty-five percent less often on ordinary questions. " +
     "Cyber interventions are down about sixty percent per session, and finding " +
-    "vulnerabilities for defensive work is now allowed outright.";
+    "vulnerabilities for defensive work is now allowed outright, which means a security " +
+    "engineer stops having to argue with the model about their own job.";
   scenes.push(scene('STAT_PANELS', n, {
     stats: [
       {kicker: 'Biology refusals', value: '−85%', note: 'on benign questions', color: 'green', atWord: at(n, 'biology')},
@@ -370,11 +478,23 @@ const spec = {
     channel: CH,
     logo: 'img:channel_logo.png',
   },
+  // THE SUBJECT IS THE HEADLINE, NOT THE CLAIM ABOUT IT.
+  //
+  // Owner: *"The thumb too is horrible, and nobody would click it. Whats that? IT DOUBLED?
+  // What does that even mean for a user who sees the thumbnail? The HOT TOPIC must be the
+  // bolder one, CLAUDE FABLE or MYTHOS 5.1, thats how user would click."*
+  //
+  // He is right, and the reason is that a thumbnail is read with no context at all. "IT
+  // DOUBLED" is a predicate with its subject missing — the viewer has to already know what
+  // "it" is, which is the same bare-pronoun failure LAW 0f bans in narration, committed on
+  // the one surface where there is no sentence before it to supply the noun. The model name
+  // is what somebody is scrolling for; the claim is what earns the click once they have
+  // stopped. So: name first, claim underneath.
   thumbnail: {
-    title: 'IT DOUBLED',
-    badge: 'Claude Fable 5.1',
+    title: 'CLAUDE FABLE 5.1',
+    badge: 'Anthropic · new model',
     asset: 'si:anthropic',
-    note: '24.7% → 52.6%',
+    note: 'science score doubled — 24.7% to 52.6%',
     logos: ['si:anthropic', 'si:claude'],
   },
   scenes,

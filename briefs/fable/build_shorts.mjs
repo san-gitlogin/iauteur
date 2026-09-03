@@ -29,20 +29,23 @@ const scene = (type, narration, data) => {
 const scenes = [];
 
 scenes.push(scene('HOOK',
-  "Claude Fable 5.1 doubled a science benchmark. Twenty-four point seven, to fifty-two point six.",
-  {headline: 'IT DOUBLED', subtext: 'Terminal-Bench-Science', heroAsset: 'si:anthropic',
+  "Claude Fable 5.1 just doubled its score on a hard science test. Here's the table.",
+  {headline: 'CLAUDE FABLE 5.1', subtext: 'science score doubled', heroAsset: 'si:anthropic',
    hookVariant: 'stack'}));
 
 scenes.push(scene('RECORDED_STEP',
-  "Here's the table. Top row is agentic scientific research — fifty-two point six, " +
+  "This is Anthropic's official page. Top row is agentic scientific research — " +
+  "fifty-two point six, " +
   "against twenty-four point seven for the model it replaces. " +
   "Second row is coding, fifty-five point eight, just past Opus 5. " +
   "One spike, and a normal step everywhere else.",
   {recordedStep: {
     caption: 'the two rows that matter',
     premise: 'Anthropic’s announcement page.',
+    sourceNote: 'Source: anthropic.com — Claude Fable 5.1 announcement',
     layout: 'full',
     color: 'blue',
+    card: {place: 'top', width: 0.86},
     clips: [
       {ref: 'rec:fable-page#scores', label: 'the benchmark table', focus: true,
        callouts: [
@@ -98,7 +101,7 @@ const spec = {
     channel: CH,
     logo: 'img:channel_logo.png',
   },
-  cover: {title: 'IT DOUBLED', badge: 'Claude Fable 5.1', asset: 'si:anthropic', frames: 1},
+  cover: {title: 'CLAUDE FABLE 5.1', badge: 'science score doubled', asset: 'si:anthropic', frames: 1},
   scenes,
 };
 

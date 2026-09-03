@@ -55,10 +55,10 @@
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "IT DOUBLED",
-    "badge": "Claude Fable 5.1",
+    "title": "CLAUDE FABLE 5.1",
+    "badge": "Anthropic · new model",
     "asset": "si:anthropic",
-    "note": "24.7% → 52.6%",
+    "note": "science score doubled — 24.7% to 52.6%",
     "logos": [
       "si:anthropic",
       "si:claude"
@@ -68,7 +68,7 @@
     {
       "id": "s01",
       "type": "HOOK",
-      "narration": "Claude Fable 5.1 doubled a science benchmark. Twenty-four point seven, to fifty-two point six.",
+      "narration": "Claude Fable 5.1 just doubled its score on a hard science test. Let me show you what that means.",
       "transition": "fade",
       "background": "zoneA",
       "data": {
@@ -77,8 +77,8 @@
         "heroAsset": "si:anthropic",
         "hookVariant": "figure"
       },
-      "durationFrames": 202,
-      "audio": "audio/claude-fable-5-1_long_s01.mp3",
+      "durationFrames": 213,
+      "audio": "audio/fable_long_s01.mp3",
       "timingSource": "tts"
     },
     {
@@ -91,8 +91,8 @@
         "title": "Claude Fable 5.1",
         "subtitle": "and Mythos 5.1 · what the numbers say"
       },
-      "durationFrames": 450,
-      "audio": "audio/claude-fable-5-1_long_s02.mp3",
+      "durationFrames": 458,
+      "audio": "audio/fable_long_s02.mp3",
       "timingSource": "tts"
     },
     {
@@ -137,11 +137,11 @@
               "winner": "b"
             }
           ],
-          "atWord": 8.583
+          "atWord": 7.5
         }
       },
-      "durationFrames": 434,
-      "audio": "audio/claude-fable-5-1_long_s03.mp3",
+      "durationFrames": 446,
+      "audio": "audio/fable_long_s03.mp3",
       "timingSource": "tts"
     },
     {
@@ -157,25 +157,25 @@
         }
       },
       "durationFrames": 112,
-      "audio": "audio/claude-fable-5-1_long_s04.mp3",
+      "audio": "audio/fable_long_s04.mp3",
       "timingSource": "tts"
     },
     {
       "id": "s05",
       "type": "RECORDED_STEP",
-      "narration": "Here's the announcement, and here's the table everyone screenshotted. Top row, agentic scientific research. Fifty-two point six for Fable 5.1, against twenty-four point seven for the model it replaces. Second row is coding — fifty-five point eight, where Opus 5 sat at fifty-two point three. Those two rows are the whole announcement in miniature.",
+      "narration": "Here we are on Anthropic's official website, on the page announcing the model. Scroll down and their comparison table appears. First column is the new model; the three beside it are what it's measured against.",
       "transition": "wipe",
       "background": "zoneB",
       "data": {
         "recordedStep": {
-          "caption": "the table everyone screenshotted",
-          "premise": "Anthropic’s announcement page.",
+          "caption": "reading the column headings",
+          "premise": "The comparison table on Anthropic’s announcement page.",
           "layout": "full",
           "color": "blue",
           "clips": [
             {
               "ref": "rec:fable-page#open",
-              "label": "the announcement",
+              "label": "the announcement page",
               "focus": true,
               "id": "open",
               "src": "rec/fable-page/seg-01.mp4",
@@ -186,26 +186,282 @@
                 "w": 1600,
                 "h": 900
               },
-              "atWord": 3.083
+              "ink": [
+                {
+                  "x": 991,
+                  "y": 25,
+                  "w": 100,
+                  "h": 19
+                },
+                {
+                  "x": 1300,
+                  "y": 25,
+                  "w": 76,
+                  "h": 19
+                },
+                {
+                  "x": 816,
+                  "y": 25,
+                  "w": 66,
+                  "h": 19
+                },
+                {
+                  "x": 926,
+                  "y": 25,
+                  "w": 41,
+                  "h": 19
+                },
+                {
+                  "x": 1136,
+                  "y": 25,
+                  "w": 40,
+                  "h": 19
+                },
+                {
+                  "x": 1220,
+                  "y": 25,
+                  "w": 40,
+                  "h": 19
+                },
+                {
+                  "x": 164,
+                  "y": 26,
+                  "w": 143,
+                  "h": 16
+                },
+                {
+                  "x": 721,
+                  "y": 275,
+                  "w": 186,
+                  "h": 119
+                },
+                {
+                  "x": 640,
+                  "y": 310,
+                  "w": 472,
+                  "h": 159
+                },
+                {
+                  "x": 488,
+                  "y": 310,
+                  "w": 233,
+                  "h": 84
+                },
+                {
+                  "x": 620,
+                  "y": 532,
+                  "w": 724,
+                  "h": 123
+                },
+                {
+                  "x": 602,
+                  "y": 534,
+                  "w": 8,
+                  "h": 16
+                },
+                {
+                  "x": 602,
+                  "y": 560,
+                  "w": 8,
+                  "h": 16
+                },
+                {
+                  "x": 602,
+                  "y": 586,
+                  "w": 8,
+                  "h": 16
+                },
+                {
+                  "x": 602,
+                  "y": 612,
+                  "w": 8,
+                  "h": 16
+                },
+                {
+                  "x": 602,
+                  "y": 638,
+                  "w": 8,
+                  "h": 16
+                },
+                {
+                  "x": 1463,
+                  "y": 860,
+                  "w": 115,
+                  "h": 15
+                }
+              ],
+              "atWord": 1.417
             },
             {
-              "ref": "rec:fable-page#scores",
-              "label": "the two rows that matter",
+              "ref": "rec:fable-page#bench",
+              "label": "scrolling to the table",
               "focus": true,
+              "wantAtWord": 10.833,
+              "id": "bench",
+              "src": "rec/fable-page/seg-03.mp4",
+              "frames": 58,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "bench": {
+                  "x": 385,
+                  "y": 331,
+                  "w": 220,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 480,
+                  "y": 4,
+                  "w": 420,
+                  "h": 40
+                },
+                {
+                  "x": 480,
+                  "y": 77,
+                  "w": 633,
+                  "h": 153
+                },
+                {
+                  "x": 760,
+                  "y": 267,
+                  "w": 197,
+                  "h": 19
+                },
+                {
+                  "x": 360,
+                  "y": 267,
+                  "w": 196,
+                  "h": 19
+                },
+                {
+                  "x": 572,
+                  "y": 267,
+                  "w": 173,
+                  "h": 19
+                },
+                {
+                  "x": 974,
+                  "y": 267,
+                  "w": 109,
+                  "h": 19
+                },
+                {
+                  "x": 385,
+                  "y": 331,
+                  "w": 220,
+                  "h": 21
+                },
+                {
+                  "x": 1095,
+                  "y": 333,
+                  "w": 120,
+                  "h": 19
+                },
+                {
+                  "x": 1064,
+                  "y": 378,
+                  "w": 59,
+                  "h": 19
+                },
+                {
+                  "x": 1165,
+                  "y": 378,
+                  "w": 50,
+                  "h": 19
+                },
+                {
+                  "x": 385,
+                  "y": 381,
+                  "w": 830,
+                  "h": 514
+                },
+                {
+                  "x": 1042,
+                  "y": 381,
+                  "w": 14,
+                  "h": 14
+                }
+              ],
+              "atWord": 10.833
+            }
+          ],
+          "card": {
+            "place": "right",
+            "width": 0.26
+          },
+          "sourceNote": "Source: anthropic.com — Claude Fable 5.1 and Mythos 5.1 announcement",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 385,
+      "audio": "audio/fable_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "RECORDED_STEP",
+      "narration": "Now the top row, because that is the one being quoted everywhere. That top row is called agentic scientific research. Agentic just means the model works on its own: it is handed a scientific task, so it has to pick the tools, write the code and reach an answer without a person steering each step. Claude Fable 5.1 finishes fifty-two percent of those tasks. Fable 5, the model it replaces, finished twenty-four percent. So on this one test, Fable 5.1 solves roughly twice as many of those jobs as Fable 5 did.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "the row everyone quotes",
+          "premise": "The same table, zoomed to the first row.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:fable-page#scores",
+              "label": "the top row, up close",
+              "focus": true,
+              "zooms": [
+                {
+                  "marks": [
+                    "sciencerow",
+                    "rival"
+                  ],
+                  "atWord": 14.25
+                },
+                {
+                  "mark": "sciencerow",
+                  "atWord": 31.75
+                },
+                {
+                  "marks": [
+                    "science",
+                    "terminal"
+                  ],
+                  "atWord": 51.583
+                },
+                {
+                  "at": "full",
+                  "atWord": 65
+                }
+              ],
               "callouts": [
                 {
-                  "text": "more than double",
+                  "text": "the new model",
                   "mark": "science",
                   "side": "right",
                   "color": "green",
-                  "atWord": 42.417
+                  "atWord": 25.583
                 },
                 {
-                  "text": "past Opus 5",
+                  "text": "the one it replaces",
                   "mark": "terminal",
                   "side": "right",
                   "color": "blue",
-                  "atWord": 43.5
+                  "atWord": 39.75
                 }
               ],
               "id": "scores",
@@ -229,11 +485,318 @@
                   "y": 362,
                   "w": 41,
                   "h": 18
+                },
+                "sciencerow": {
+                  "x": 373,
+                  "y": 290,
+                  "w": 178,
+                  "h": 18
+                },
+                "rival": {
+                  "x": 1093,
+                  "y": 245,
+                  "w": 73,
+                  "h": 18
                 }
               },
-              "atWord": 37.25
+              "ink": [
+                {
+                  "x": 480,
+                  "y": 30,
+                  "w": 633,
+                  "h": 126
+                },
+                {
+                  "x": 480,
+                  "y": 177,
+                  "w": 551,
+                  "h": 21
+                },
+                {
+                  "x": 1093,
+                  "y": 245,
+                  "w": 73,
+                  "h": 18
+                },
+                {
+                  "x": 613,
+                  "y": 245,
+                  "w": 55,
+                  "h": 18
+                },
+                {
+                  "x": 772,
+                  "y": 245,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 245,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 290,
+                  "w": 194,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 290,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 290,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 1093,
+                  "y": 290,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 772,
+                  "y": 290,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 362,
+                  "w": 123,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 362,
+                  "w": 96,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 362,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 362,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 1093,
+                  "y": 362,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 434,
+                  "w": 111,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 434,
+                  "w": 29,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 434,
+                  "w": 29,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 506,
+                  "w": 101,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 506,
+                  "w": 41,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 506,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 933,
+                  "y": 506,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 1093,
+                  "y": 506,
+                  "w": 32,
+                  "h": 34
+                },
+                {
+                  "x": 373,
+                  "y": 578,
+                  "w": 94,
+                  "h": 40
+                },
+                {
+                  "x": 933,
+                  "y": 578,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 613,
+                  "y": 578,
+                  "w": 39,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 578,
+                  "w": 37,
+                  "h": 34
+                },
+                {
+                  "x": 1093,
+                  "y": 578,
+                  "w": 27,
+                  "h": 34
+                },
+                {
+                  "x": 373,
+                  "y": 650,
+                  "w": 180,
+                  "h": 40
+                },
+                {
+                  "x": 613,
+                  "y": 650,
+                  "w": 42,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 650,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 933,
+                  "y": 650,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 1093,
+                  "y": 650,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 613,
+                  "y": 707,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 772,
+                  "y": 707,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 933,
+                  "y": 707,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 1093,
+                  "y": 707,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 373,
+                  "y": 764,
+                  "w": 132,
+                  "h": 41
+                },
+                {
+                  "x": 933,
+                  "y": 764,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 613,
+                  "y": 764,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 1093,
+                  "y": 764,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 772,
+                  "y": 764,
+                  "w": 34,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 836,
+                  "w": 118,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 836,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 933,
+                  "y": 836,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 772,
+                  "y": 836,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 1093,
+                  "y": 836,
+                  "w": 39,
+                  "h": 18
+                }
+              ],
+              "atWord": 1.583
             }
           ],
+          "card": {
+            "place": "right",
+            "width": 0.26
+          },
+          "sourceNote": "Source: anthropic.com — Claude Fable 5.1 and Mythos 5.1 announcement",
           "capture": {
             "width": 1600,
             "height": 900
@@ -241,97 +804,97 @@
           "atWord": 1
         }
       },
-      "durationFrames": 692,
-      "audio": "audio/claude-fable-5-1_long_s05.mp3",
-      "timingSource": "tts"
-    },
-    {
-      "id": "s06",
-      "type": "BAR_COMPARE",
-      "narration": "Put that first row on a chart and it stops being a percentage, because now you can see the gap. Fable 5 managed twenty-four point seven. Opus 5, twenty-nine. GPT-5.6 Sol, twenty-two point four. Fable 5.1 comes in at fifty-two point six — roughly double the field. Anthropic footnote it with a standard error of around four points, so read it as a wide lead rather than an exact one.",
-      "transition": "dip",
-      "background": "zoneC",
-      "data": {
-        "bars": [
-          {
-            "label": "GPT-5.6 Sol",
-            "value": 22.4,
-            "display": "22.4%",
-            "atWord": 26.333
-          },
-          {
-            "label": "Fable 5",
-            "value": 24.7,
-            "display": "24.7%",
-            "atWord": 18.167
-          },
-          {
-            "label": "Opus 5",
-            "value": 29,
-            "display": "29.0%",
-            "atWord": 23.583
-          },
-          {
-            "label": "Fable 5.1",
-            "value": 52.6,
-            "display": "52.6%",
-            "color": "green",
-            "atWord": 32.667
-          }
-        ],
-        "source": "Terminal-Bench-Science 0.1 · Anthropic, 2026-09"
-      },
-      "durationFrames": 783,
-      "audio": "audio/claude-fable-5-1_long_s06.mp3",
+      "durationFrames": 983,
+      "audio": "audio/fable_long_s06.mp3",
       "timingSource": "tts"
     },
     {
       "id": "s07",
       "type": "BAR_COMPARE",
-      "narration": "Coding's the closer race, and that's the honest read. On Terminal-Bench 4.0, Fable 5.1 takes fifty-five point eight. Opus 5 was already at fifty-two point three, which means this is a step, not a leap. Mythos 5.1, with the lighter safeguards, goes to sixty point nine — which quietly tells you how much the guardrails cost on agentic work.",
+      "narration": "Here is that same science test as a chart, because a gap is easier to see than to hear. Each bar is the share of tasks a model finished correctly, which means taller is better. Three of these models land in the twenties. Claude Fable 5.1 lands at fifty-two, which is roughly double any of them. One caution worth saying out loud: Anthropic note a margin of error of about four points here, so treat this as a wide lead rather than an exact figure.",
       "transition": "morph",
       "background": "zoneA",
       "data": {
         "bars": [
           {
             "label": "GPT-5.6 Sol",
+            "value": 22.4,
+            "display": "22.4%",
+            "atWord": 25.75
+          },
+          {
+            "label": "Fable 5",
+            "value": 24.7,
+            "display": "24.7%",
+            "atWord": 27.083
+          },
+          {
+            "label": "Opus 5",
+            "value": 29,
+            "display": "29.0%",
+            "atWord": 29.583
+          },
+          {
+            "label": "Fable 5.1",
+            "value": 52.6,
+            "display": "52.6%",
+            "color": "green",
+            "atWord": 41.583
+          }
+        ],
+        "source": "Terminal-Bench-Science 0.1 · Anthropic, 2026-09"
+      },
+      "durationFrames": 821,
+      "audio": "audio/fable_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "BAR_COMPARE",
+      "narration": "Coding is a much closer race, and that's the headline. Terminal-Bench hands it a real programming job and checks whether the job got finished. Claude Fable 5.1 gets more than half of them done, which is a real jump, but Opus 5 was already close behind, so this is a step forward rather than a leap. Now look at the last bar. Mythos 5.1 is the same model with lighter safety filters, and it scores higher, which tells you what that safety layer costs.",
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "bars": [
+          {
+            "label": "GPT-5.6 Sol",
             "value": 37.3,
             "display": "37.3%",
-            "atWord": 1.917
+            "atWord": 2.667
           },
           {
             "label": "Opus 5",
             "value": 52.3,
             "display": "52.3%",
-            "atWord": 17.083
+            "atWord": 30.5
           },
           {
             "label": "Fable 5.1",
             "value": 55.8,
             "display": "55.8%",
             "color": "blue",
-            "atWord": 13.25
+            "atWord": 25.167
           },
           {
             "label": "Mythos 5.1",
             "value": 60.9,
             "display": "60.9%",
             "color": "purple",
-            "atWord": 33.167
+            "atWord": 44.667
           }
         ],
         "source": "Terminal-Bench 4.0 · Anthropic, 2026-09"
       },
-      "durationFrames": 693,
-      "audio": "audio/claude-fable-5-1_long_s07.mp3",
+      "durationFrames": 781,
+      "audio": "audio/fable_long_s08.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s08",
+      "id": "s09",
       "type": "RADAR",
-      "narration": "Plot the four benchmarks all three models ran, and the shape shows up. GPT-5.6 Sol sits inside. Opus 5, a ring out. Fable 5.1 tracks just outside Opus on coding, business and Cursor — then blows out on science. One spike, modest lifts elsewhere: more useful than any single row.",
-      "transition": "iris",
-      "background": "zoneB",
+      "narration": "Here is every test on one chart. Each corner is a kind of task, and the further a shape stretches, the better that model did. GPT-5.6 Sol draws the innermost shape, Opus 5 a ring outside it. Watch the outer shape: barely past Opus on coding, then stretching out towards science, because that's where the gain is.",
+      "transition": "fade",
+      "background": "zoneC",
       "data": {
         "radar": {
           "axes": [
@@ -350,7 +913,7 @@
                 67.2
               ],
               "color": "red",
-              "atWord": 13.417
+              "atWord": 18.417
             },
             {
               "name": "Opus 5",
@@ -361,7 +924,7 @@
                 70
               ],
               "color": "orange",
-              "atWord": 17.5
+              "atWord": 25
             },
             {
               "name": "Fable 5.1",
@@ -372,22 +935,22 @@
                 73.4
               ],
               "color": "green",
-              "atWord": 24.75
+              "atWord": 32.583
             }
           ],
           "max": 100
         }
       },
-      "durationFrames": 639,
-      "audio": "audio/claude-fable-5-1_long_s08.mp3",
+      "durationFrames": 614,
+      "audio": "audio/fable_long_s09.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s09",
+      "id": "s10",
       "type": "STAT_PANELS",
-      "narration": "Here's the thing the people using it keep pointing at, and it isn't on the chart. It's how long it'll run without you. Ramp left it on a machine-learning problem for thirty-eight hours unattended, and it came back having diagnosed an earlier result. Block ran it through a thirty-day simulated business. And at Millennium it found the cause of a crash that showed up about once in a million runs, which their engineers hadn't cracked in years.",
-      "transition": "fade",
-      "background": "zoneC",
+      "narration": "Here's what the companies using it keep pointing at, and it isn't on any chart: how long it will keep working without you. Ramp left it running on a machine-learning problem for thirty-eight hours unattended. Millennium used it to find the cause of a crash that appeared roughly once in a million runs — one their own engineers hadn't cracked in years.",
+      "transition": "push",
+      "background": "zoneA",
       "data": {
         "stats": [
           {
@@ -395,138 +958,138 @@
             "value": "38 hours",
             "note": "unattended ML run",
             "color": "blue",
-            "atWord": 17.417
-          },
-          {
-            "kicker": "Block",
-            "value": "30 days",
-            "note": "simulated run-a-business eval",
-            "atWord": 32.5
+            "atWord": 14.833
           },
           {
             "kicker": "Millennium",
             "value": "1 in 1M",
             "note": "crash unexplained for years",
             "color": "green",
-            "atWord": 40.083
+            "atWord": 26
           }
         ],
         "verdict": {
           "text": "It keeps going when you stop",
           "color": "green",
-          "atWord": 56
+          "atWord": 31.917
         },
         "source": "customer reports · Anthropic, 2026-09"
       },
-      "durationFrames": 720,
-      "audio": "audio/claude-fable-5-1_long_s09.mp3",
+      "durationFrames": 567,
+      "audio": "audio/fable_long_s10.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s10",
+      "id": "s11",
       "type": "CHAPTER",
       "narration": "The part that got scientists talking had nothing to do with code.",
-      "transition": "push",
-      "background": "zoneA",
+      "transition": "slide",
+      "background": "zoneB",
       "data": {
         "chapter": {
           "number": "02",
           "title": "What it did in a lab"
         }
       },
-      "durationFrames": 119,
-      "audio": "audio/claude-fable-5-1_long_s10.mp3",
+      "durationFrames": 122,
+      "audio": "audio/fable_long_s11.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s11",
+      "id": "s12",
       "type": "PICTOGRAM",
-      "narration": "Anthropic had it design protein binders. Ten to fifteen percent of candidates binding is normal, because most simply don't. Across twelve targets, this one hit close to fifty — and on three of them the binding was ten times stronger than anything submitted before.",
-      "transition": "slide",
-      "background": "zoneB",
+      "narration": "Anthropic asked the model to design protein binders — small proteins built to lock onto one target, which is how medicine often starts. Most designs simply don't stick, which is why ten or fifteen per hundred counts as normal. Across twelve targets, Fable 5.1 got close to fifty per hundred. That's three to five times the usual hit rate.",
+      "transition": "zoom",
+      "background": "zoneC",
       "data": {
         "pictogram": {
           "rows": [
             {
-              "label": "Typical design",
-              "value": 12,
+              "label": "Typical, low end",
+              "value": 10,
               "color": "red",
-              "atWord": 11.833
+              "atWord": 25.333
+            },
+            {
+              "label": "Typical, high end",
+              "value": 15,
+              "color": "orange",
+              "atWord": 27.167
             },
             {
               "label": "Fable 5.1",
               "value": 50,
               "color": "green",
-              "atWord": 22.833
+              "atWord": 40.25
             }
           ],
           "icon": "lucide:atom",
           "unit": "%"
         }
       },
-      "durationFrames": 467,
-      "audio": "audio/claude-fable-5-1_long_s11.mp3",
+      "durationFrames": 610,
+      "audio": "audio/fable_long_s12.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s12",
+      "id": "s13",
       "type": "STAT_PANELS",
-      "narration": "Two more, quickly, because they're the same story in different clothes. It re-mapped Venus from Magellan radar data, resolving detail down to two or three kilometres instead of ten to twenty. And it rewrote seven biology models to run faster, cutting the GPU bill on one of them from eighteen thousand dollars to eight.",
-      "transition": "zoom",
-      "background": "zoneC",
+      "narration": "Two more, quickly, because they're the same story in different clothes. The model re-mapped Venus from old Magellan radar data, resolving detail down to two or three kilometres instead of ten to twenty. And it rewrote seven biology models to run faster, cutting the GPU bill on one of them from eighteen thousand dollars to eight.",
+      "transition": "wipe",
+      "background": "zoneA",
       "data": {
         "stats": [
           {
             "kicker": "Venus radar map",
             "value": "20→3 km",
             "note": "detail resolved, from Magellan data",
-            "atWord": 11
+            "atWord": 12.25
           },
           {
             "kicker": "Evo 2 40B run",
             "value": "$18k→$8k",
             "note": "GPU cost after rewrite",
             "color": "green",
-            "atWord": 35.583
+            "atWord": 38.167
           }
         ],
         "verdict": {
           "text": "Cheaper science, not code",
           "color": "green",
-          "atWord": 33.083
+          "atWord": 35.167
         },
         "source": "Anthropic, 2026-09"
       },
-      "durationFrames": 570,
-      "audio": "audio/claude-fable-5-1_long_s12.mp3",
+      "durationFrames": 588,
+      "audio": "audio/fable_long_s13.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s13",
+      "id": "s14",
       "type": "CHAPTER",
       "narration": "Now the part the announcement is quieter about.",
-      "transition": "wipe",
-      "background": "zoneA",
+      "transition": "dip",
+      "background": "zoneB",
       "data": {
         "chapter": {
           "number": "03",
           "title": "Price, access, reception"
         }
       },
-      "durationFrames": 107,
-      "audio": "audio/claude-fable-5-1_long_s13.mp3",
+      "durationFrames": 102,
+      "audio": "audio/fable_long_s14.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s14",
+      "id": "s15",
       "type": "RECORDED_STEP",
-      "narration": "Scroll up on the same page and you'll find the pricing note. Headline rates didn't move — ten dollars a million in, fifty out. What changed is the cache: a read used to cost a dollar, now it's twenty-five cents. So the saving lives wherever your work re-reads the same context.",
-      "transition": "dip",
-      "background": "zoneB",
+      "narration": "Back on Anthropic's official page there is a short note about price. What changed is something called a cache read. When you send the model the same block of text over and over — a long document, your codebase — it stores that block and charges far less to read it again. A re-read used to cost one dollar per million words, and now costs twenty-five cents. So is a session actually cheaper?",
+      "transition": "morph",
+      "background": "zoneC",
       "data": {
         "recordedStep": {
-          "caption": "the line about cache reads",
-          "premise": "The same page, further up: what actually changed on price.",
+          "caption": "the note about cache reads",
+          "premise": "The pricing section of the same announcement page.",
           "layout": "full",
           "color": "blue",
           "clips": [
@@ -534,12 +1097,23 @@
               "ref": "rec:fable-page#cache",
               "label": "the pricing note",
               "focus": true,
+              "zooms": [
+                {
+                  "mark": "cache",
+                  "atWord": 17.667
+                },
+                {
+                  "at": "full",
+                  "atWord": 39.833
+                }
+              ],
               "callouts": [
                 {
-                  "text": "this is the change",
+                  "text": "this is the only change",
                   "mark": "cache",
+                  "side": "right",
                   "color": "green",
-                  "atWord": 20
+                  "atWord": 29.583
                 }
               ],
               "id": "cache",
@@ -559,9 +1133,82 @@
                   "h": 21
                 }
               },
-              "atWord": 2.5
+              "ink": [
+                {
+                  "x": 480,
+                  "y": 0,
+                  "w": 567,
+                  "h": 43
+                },
+                {
+                  "x": 480,
+                  "y": 94,
+                  "w": 630,
+                  "h": 100
+                },
+                {
+                  "x": 480,
+                  "y": 215,
+                  "w": 632,
+                  "h": 74
+                },
+                {
+                  "x": 480,
+                  "y": 310,
+                  "w": 639,
+                  "h": 127
+                },
+                {
+                  "x": 480,
+                  "y": 310,
+                  "w": 43,
+                  "h": 21
+                },
+                {
+                  "x": 480,
+                  "y": 458,
+                  "w": 636,
+                  "h": 179
+                },
+                {
+                  "x": 480,
+                  "y": 458,
+                  "w": 120,
+                  "h": 21
+                },
+                {
+                  "x": 600,
+                  "y": 458,
+                  "w": 7,
+                  "h": 21
+                },
+                {
+                  "x": 480,
+                  "y": 659,
+                  "w": 637,
+                  "h": 179
+                },
+                {
+                  "x": 480,
+                  "y": 659,
+                  "w": 94,
+                  "h": 21
+                },
+                {
+                  "x": 574,
+                  "y": 659,
+                  "w": 7,
+                  "h": 21
+                }
+              ],
+              "atWord": 2.833
             }
           ],
+          "card": {
+            "place": "right",
+            "width": 0.26
+          },
+          "sourceNote": "Source: anthropic.com — Claude Fable 5.1 and Mythos 5.1 announcement",
           "capture": {
             "width": 1600,
             "height": 900
@@ -569,49 +1216,111 @@
           "atWord": 1
         }
       },
-      "durationFrames": 531,
-      "audio": "audio/claude-fable-5-1_long_s14.mp3",
+      "durationFrames": 660,
+      "audio": "audio/fable_long_s15.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s15",
+      "id": "s16",
+      "type": "LINE_CHART",
+      "narration": "Here's a worked example. Picture one long session that re-reads the same context, ten million tokens' worth an hour. Orange is what those re-reads cost at the old price, adding up hour by hour. Green is the very same session at the new price.",
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "headline": "The same session, at both prices",
+        "source": "cache-read price, per million tokens · Anthropic, 2026-09",
+        "lineChart": {
+          "series": [
+            {
+              "label": "Old $1/M",
+              "values": [
+                0,
+                10,
+                20,
+                30,
+                40,
+                50
+              ],
+              "color": "orange",
+              "atWord": 17.917
+            },
+            {
+              "label": "New $0.25/M",
+              "values": [
+                0,
+                2.5,
+                5,
+                7.5,
+                10,
+                12.5
+              ],
+              "color": "green",
+              "atWord": 29.667
+            }
+          ],
+          "xAxis": [
+            "0h",
+            "1h",
+            "2h",
+            "3h",
+            "4h",
+            "5h"
+          ],
+          "yUnit": "$",
+          "area": true,
+          "atWord": 17.917
+        }
+      },
+      "durationFrames": 467,
+      "audio": "audio/fable_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
       "type": "STAT_PANELS",
-      "narration": "So the sticker price is identical to Fable 5, and it's still above Opus 5 and GPT-5.6. Anthropic's own estimate is about twenty-five percent cheaper for typical work, and up to forty-five on heavily agentic runs. Both of those depend entirely on how much of your context repeats, which means your mileage genuinely will vary.",
-      "transition": "morph",
-      "background": "zoneC",
+      "narration": "Those two lines separate because a cached re-read now costs twenty-five cents per million tokens instead of a dollar. So this is not a price cut — it's a discount on repetition, and the difference matters. The sticker price itself didn't move at all: ten dollars per million words in, fifty out, exactly the same as the previous model, and still dearer per word than Opus 5 or GPT-5.6.",
+      "transition": "fade",
+      "background": "zoneB",
       "data": {
         "stats": [
           {
             "kicker": "Input / output",
             "value": "$10 / $50",
             "note": "per million — unchanged",
-            "atWord": 1.917
+            "atWord": 29.167
           },
           {
             "kicker": "Cache read",
             "value": "$1→$0.25",
             "note": "down 75%",
             "color": "green",
-            "atWord": 16
+            "atWord": 22
+          },
+          {
+            "kicker": "Still dearer",
+            "value": "per word",
+            "note": "than Opus 5 · GPT-5.6",
+            "color": "orange",
+            "atWord": 47.75
           }
         ],
         "verdict": {
-          "text": "The discount is conditional",
+          "text": "A discount on repetition",
           "color": "orange",
-          "atWord": 36.75
+          "atWord": 44
         },
         "source": "per million tokens · Anthropic, 2026-09"
       },
-      "durationFrames": 643,
-      "audio": "audio/claude-fable-5-1_long_s15.mp3",
+      "durationFrames": 706,
+      "audio": "audio/fable_long_s17.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s16",
+      "id": "s18",
       "type": "STAT_PANELS",
-      "narration": "Safeguards moved too, in the direction developers had been asking for. The biology classifiers fire eighty-five percent less often on ordinary questions. Cyber interventions are down about sixty percent per session, and finding vulnerabilities for defensive work is now allowed outright.",
-      "transition": "iris",
-      "background": "zoneA",
+      "narration": "Safeguards moved too, in the direction developers had been asking for. The biology classifiers fire eighty-five percent less often on ordinary questions. Cyber interventions are down about sixty percent per session, and finding vulnerabilities for defensive work is now allowed outright, which means a security engineer stops having to argue with the model about their own job.",
+      "transition": "push",
+      "background": "zoneC",
       "data": {
         "stats": [
           {
@@ -619,33 +1328,33 @@
             "value": "−85%",
             "note": "on benign questions",
             "color": "green",
-            "atWord": 12.083
+            "atWord": 10.917
           },
           {
             "kicker": "Cyber blocks",
             "value": "−60%",
             "note": "per Claude Code session",
             "color": "green",
-            "atWord": 22.083
+            "atWord": 23.5
           }
         ],
         "verdict": {
           "text": "Fewer refusals on benign work",
           "color": "green",
-          "atWord": 33.167
+          "atWord": 32.667
         },
         "source": "Anthropic, 2026-09"
       },
-      "durationFrames": 516,
-      "audio": "audio/claude-fable-5-1_long_s16.mp3",
+      "durationFrames": 627,
+      "audio": "audio/fable_long_s18.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s17",
+      "id": "s19",
       "type": "STAT_PANELS",
       "narration": "And the reception, which is not all applause. The cache cut landed well. Usage limits didn't — plenty of people report burning through an agentic session as fast as before, because the discount only covers cached reads. Worth holding both: the jump is genuine, and your bill might not feel lighter.",
-      "transition": "fade",
-      "background": "zoneB",
+      "transition": "slide",
+      "background": "zoneA",
       "data": {
         "stats": [
           {
@@ -653,74 +1362,74 @@
             "value": "−75%",
             "note": "on cache reads",
             "color": "green",
-            "atWord": 7.917
+            "atWord": 7.167
           },
           {
             "kicker": "Still sore",
             "value": "limits",
             "note": "agentic sessions burn as fast",
             "color": "red",
-            "atWord": 12.333
+            "atWord": 12.5
           }
         ],
         "verdict": {
           "text": "Both things are true",
           "color": "orange",
-          "atWord": 33.417
+          "atWord": 34.083
         },
         "source": "launch coverage, 2026-09"
       },
-      "durationFrames": 559,
-      "audio": "audio/claude-fable-5-1_long_s17.mp3",
+      "durationFrames": 560,
+      "audio": "audio/fable_long_s19.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s18",
+      "id": "s20",
       "type": "RECAP",
       "narration": "So, quickly. Fable 5.1 roughly doubles a science benchmark and edges ahead on coding. The lab results are the genuinely new part. Pricing is unchanged unless you lean on the cache. Mythos is the same model with lighter guardrails, for vetted organisations only. And it is on Bedrock, Vertex and Foundry from today.",
-      "transition": "push",
-      "background": "zoneC",
+      "transition": "zoom",
+      "background": "zoneB",
       "data": {
         "heading": "Fable 5.1, in five lines",
         "points": [
           {
             "text": "Terminal-Bench-Science 24.7% → 52.6%",
-            "atWord": 4.833
+            "atWord": 7.167
           },
           {
             "text": "Coding 55.8%, past Opus 5",
-            "atWord": 12.583
+            "atWord": 13.333
           },
           {
             "text": "Protein binders near 50% hit rate",
-            "atWord": 14.583
+            "atWord": 15.583
           },
           {
             "text": "$10/$50 unchanged · cache −75%",
-            "atWord": 21.333
+            "atWord": 21.75
           },
           {
             "text": "Mythos = same model, vetted access",
-            "atWord": 30.083
+            "atWord": 29.417
           }
         ]
       },
-      "durationFrames": 638,
-      "audio": "audio/claude-fable-5-1_long_s18.mp3",
+      "durationFrames": 621,
+      "audio": "audio/fable_long_s20.mp3",
       "timingSource": "tts"
     },
     {
-      "id": "s19",
+      "id": "s21",
       "type": "OUTRO_CTA",
       "narration": "If this was a useful five minutes, hit like — it genuinely helps this channel. Subscribe for more of these, we break down every model that matters. And tell me in the comments whether that science number holds up in your own work.",
-      "transition": "slide",
-      "background": "zoneA",
+      "transition": "wipe",
+      "background": "zoneC",
       "data": {
         "message": "Subscribe for more",
         "sub": "we read the whole announcement so you do not have to"
       },
       "durationFrames": 395,
-      "audio": "audio/claude-fable-5-1_long_s19.mp3",
+      "audio": "audio/fable_long_s21.mp3",
       "timingSource": "tts"
     }
   ]
