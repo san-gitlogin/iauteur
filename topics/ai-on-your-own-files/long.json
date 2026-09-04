@@ -98,7 +98,7 @@
     {
       "id": "s02",
       "type": "TITLE_CARD",
-      "narration": "Welcome to THE NBX STUDIO. Today we build a small Python tool that takes any file — a spreadsheet, a log, an export — and hands it to an AI that reads it. No experience, no card. So what does that take?",
+      "narration": "Welcome to THE NBX STUDIO. Today we build a small Python tool that takes any file — a spreadsheet, a log, an export — and hands it to an AI. No experience, no card. So what does it take?",
       "transition": "push",
       "background": "zoneB",
       "data": {
@@ -4590,7 +4590,7 @@
     {
       "id": "s19",
       "type": "TOKENIZER",
-      "narration": "That word, tokens, matters, because every bill is counted in them. A model reads neither letters nor words. It reads tokens — chunks of text: a whole word, half of one, sometimes just a space.",
+      "narration": "That word, tokens, matters: every bill is counted in them. A model reads neither letters nor words — it reads tokens, chunks of text: a whole word, half of one, sometimes a space.",
       "transition": "slide",
       "background": "zoneA",
       "data": {
@@ -5193,7 +5193,7 @@
     {
       "id": "s26",
       "type": "STAT_CALLOUT",
-      "narration": "Forty thousand rows. An ordinary export, and the thing everybody pastes into a chat window first. On fifty rows, pasting works fine. At forty thousand it stops, because every row has to fit in the model's window at once.",
+      "narration": "Forty thousand rows. An ordinary export, and the thing everybody pastes into a chat window. On fifty rows that works fine. At forty thousand it stops, because every row must fit in the window at once.",
       "transition": "push",
       "background": "zoneB",
       "data": {
@@ -6812,7 +6812,7 @@
     {
       "id": "s41",
       "type": "RULE_TEST",
-      "narration": "And the rule that keeps it honest, worth more than the code. If a number matters, compute it. How many rows are in this file? Compute it — Python never miscounts. Which courier is slowest? Compute that. What do these complaints have in common? Ask the model. Summarise the week in a sentence? Ask the model. That's reading, and reading is what a model is for. Keep those two jobs apart, and a model can never lie about a number, because you never asked it to count one.",
+      "narration": "And the rule that keeps it honest, worth more than the code. If a number matters, compute it. How many rows are in this file? Compute it — Python never miscounts. Which courier is slowest? Compute it. What do these complaints have in common? Ask the model. Summarise the week? Ask the model. That is reading, and reading is what a model is for. Keep those two jobs apart, and a model can never lie about a number, because you never asked it to count one.",
       "transition": "fade",
       "background": "zoneB",
       "data": {

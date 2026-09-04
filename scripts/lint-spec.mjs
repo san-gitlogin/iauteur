@@ -746,16 +746,34 @@ const sceneCeiling = (s) => {
 // zero warnings and came back from sync with THIRTEEN over-ceiling drawn beats, every one
 // of which needed a narration change — i.e. another four-minute re-voice per round.
 //
-// 11.36 is measured: 3,501 words against 39,778 frames of real en-US-AvaMultilingualNeural
-// at rate -10% (2.64 words/sec, 158 wpm). Re-measure when the voice or the rate changes.
-// Only used when a real duration is absent, so it never overrides measured audio.
-const FRAMES_PER_WORD_MEASURED = 11.36;
+// 11.51 frames per word is measured: 3,369 words against 38,776 frames of real
+// en-US-AvaMultilingualNeural at rate -10% (2.61 words/sec, 156 wpm). Re-measure when the
+// voice or the rate changes — `check-holds.mjs` prints both numbers.
+//
+// NO SETTLE TERM, AND THAT IS DELIBERATE. Adding the ~45-frame tail looks right on
+// paper — sync runs a scene to `max(audio, last anchor + settle)` — but measured against
+// 44 real scenes it turned six beats that came in UNDER their ceiling into warnings,
+// because the tail is inside the audio far more often than it is on top of it. A gate
+// that cries wolf on correct beats gets ignored, which is worse than one that is coarse.
+//
+// PER-SCENE VARIANCE IS REAL AND THIS DOES NOT TRY TO ABSORB IT. 11.51 is the mean;
+// individual beats measured from 9.3 to 13.7 frames per word depending on sentence
+// length, commas and numbers read aloud. A constant safe for the slowest scene would
+// over-predict every other one and start rejecting beats that are fine — tried at a 0.92
+// margin, and it flagged ten scenes whose real durations came in UNDER the ceiling.
+//
+// So this is a coarse early warning, not a replacement for the post-sync check: it exists
+// to catch the 30-second overrun while the narration can still be rewritten for free, and
+// the exact measurement still happens after sync.
+const FRAMES_PER_WORD_MEASURED = 11.51;
+const SETTLE_TAIL = 0;
+const ESTIMATE_MARGIN = 1;
 for (const s of spec.scenes ?? []) {
   const ceil = sceneCeiling(s);
   const words = String(s.narration ?? '').trim().split(/\s+/).filter(Boolean).length;
   const estimated = s.durationFrames == null && words > 0;
-  const dur = s.durationFrames ?? Math.round(words * FRAMES_PER_WORD_MEASURED);
-  if (dur > ceil) {
+  const dur = s.durationFrames ?? Math.round(words * FRAMES_PER_WORD_MEASURED + SETTLE_TAIL);
+  if (dur > (estimated ? ceil * ESTIMATE_MARGIN : ceil)) {
     const steps = new Set(collectAnchors(sceneAnchorRoot(s))).size;
     W(`${s.id}: ${(dur / 30).toFixed(1)}s${estimated ? ' (estimated)' : ''} on a single ${s.type} with ${steps} stepped element(s) — that earns ${(ceil / 30).toFixed(0)}s. Either step something more (each anchored element buys 4s) or split the narration into two beats.`);
   }

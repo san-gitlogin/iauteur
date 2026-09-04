@@ -89,8 +89,8 @@ const scenes = [];
 {
   const n =
     `Welcome to ${CH}. Today we build a small Python tool that takes any file — ` +
-    "a spreadsheet, a log, an export — and hands it to an AI that reads it. " +
-    "No experience, no card. So what does that take?";
+    "a spreadsheet, a log, an export — and hands it to an AI. " +
+    "No experience, no card. So what does it take?";
   scenes.push(scene('TITLE_CARD', n, {
     title: 'Make an AI read your own files',
     subtitle: 'a complete Python project, from an empty folder',
@@ -481,9 +481,9 @@ scenes.push(chapter(
 
 {
   const n =
-    "That word, tokens, matters, because every bill is counted in them. " +
-    "A model reads neither letters nor words. It reads tokens — chunks of text: " +
-    "a whole word, half of one, sometimes just a space.";
+    "That word, tokens, matters: every bill is counted in them. " +
+    "A model reads neither letters nor words — it reads tokens, " +
+    "chunks of text: a whole word, half of one, sometimes a space.";
   scenes.push(scene('TOKENIZER', n, {tokenizer: {
     headline: 'What you are actually billed for',
     text: 'Reply with exactly the word: ready',
@@ -628,10 +628,9 @@ scenes.push(chapter(
 {
   const n =
     "Forty thousand rows. " +
-    "An ordinary export, and the thing everybody pastes into a chat window first. " +
-    "On fifty rows, pasting works fine. " +
-    "At forty thousand it stops, " +
-    "because every row has to fit in the model's window at once.";
+    "An ordinary export, and the thing everybody pastes into a chat window. " +
+    "On fifty rows that works fine. " +
+    "At forty thousand it stops, because every row must fit in the window at once.";
   scenes.push(scene('STAT_CALLOUT', n, {
     value: 40000,
     label: 'rows a paste cannot carry',
@@ -953,10 +952,10 @@ scenes.push(chapter(
     "And the rule that keeps it honest, worth more than the code. " +
     "If a number matters, compute it. " +
     "How many rows are in this file? Compute it — Python never miscounts. " +
-    "Which courier is slowest? Compute that. " +
+    "Which courier is slowest? Compute it. " +
     "What do these complaints have in common? Ask the model. " +
-    "Summarise the week in a sentence? Ask the model. " +
-    "That's reading, and reading is what a model is for. " +
+    "Summarise the week? Ask the model. " +
+    "That is reading, and reading is what a model is for. " +
     "Keep those two jobs apart, and a model can never lie about a number, " +
     "because you never asked it to count one.";
   scenes.push(scene('RULE_TEST', n, {ruleTest: {
