@@ -302,14 +302,12 @@ scenes.push(chapter(
     'Google’s published pricing, and Groq’s published rate limits.',
     [W('gemini', "Google's pricing page", {zooms: [{mark: 'title', atWord: at(n, 'pricing')}]}),
      W('geminidata', 'their own two columns', {wantAtWord: at(n, 'columns'),
-       zooms: [{mark: 'free', atWord: at(n, 'free', 2)},
-               {mark: 'improve', atWord: at(n, 'fourth')},
-               {mark: 'paid', atWord: at(n, 'position')},
-               {at: 'full', atWord: at(n, 'sides')}],
+       zooms: [{mark: 'improve', atWord: at(n, 'fourth')},
+               {at: 'full', atWord: at(n, 'position')}],
        callouts: [{text: 'free: your content trains them', mark: 'improve', side: 'left',
                    color: 'orange', atWord: at(n, 'Content')},
-                  {text: 'paid: it does not', mark: 'paid', side: 'left',
-                   color: 'green', atWord: at(n, 'NOT')},
+                  {text: 'paid: it does not', mark: 'paid', side: 'bottom',
+                   color: 'green', atWord: at(n, 'NOT', 2)},
                   {text: 'a work file is a different decision', mark: 'improve',
                    side: 'bottom', color: 'purple', atWord: at(n, 'decision')}]}),
      W('groq', 'Groq, the same way', {wantAtWord: at(n, 'Groq'),
@@ -843,17 +841,18 @@ scenes.push(chapter(
 
 {
   const n =
-    "A system message — that's the one new thing in this call, and it's worth a moment, " +
-    "because roles confuse almost everybody the first time. " +
-    "Every message you send carries a role, and a role is just a label " +
-    "saying who is speaking. " +
+    "A system message — the one new thing here, and it's worth a moment, " +
+    "because roles confuse everybody the first time. " +
+    "Every message carries a role, which is just a label saying who is speaking. " +
     "Role user means: this is me, the person, asking a thing right now. " +
     "That is the message you would type into a chat box. " +
     "Role system is different, because it is not a question at all. " +
     "It is a standing instruction that sits above the whole conversation " +
     "and tells the model who to be while it answers. " +
     "Think of it as the brief you give somebody on their first morning: " +
-    "you say it once, and it holds for everything after it.";
+    "you say it once, and it holds for everything after it. " +
+    "Both of them shape the reply that comes back, " +
+    "which is why the system line is worth getting right.";
   scenes.push(scene('DIAGRAM', n, {diagram: {
     layout: 'block',
     nodes: [
@@ -863,15 +862,14 @@ scenes.push(chapter(
        atWord: at(n, 'user')},
       {id: 'sys', label: 'role: system', sub: 'who to be, throughout', color: 'purple',
        atWord: at(n, 'system', 2)},
-      {id: 'out', label: 'the reply', sub: 'shaped by both', color: 'green',
+      {id: 'out', label: 'what it answers', sub: 'shaped by both roles', color: 'green',
        atWord: at(n, 'answers')},
     ],
     edges: [
       {from: 'msg', to: 'usr', label: 'a chat message', atWord: at(n, 'chat')},
       {from: 'msg', to: 'sys', label: 'not a question', atWord: at(n, 'standing')},
-      {from: 'usr', to: 'out', label: 'asked right now', atWord: at(n, 'now')},
-      {from: 'msg', to: 'out', label: 'who is speaking', atWord: at(n, 'speaking')},
-      {from: 'sys', to: 'out', label: 'a standing brief', atWord: at(n, 'brief')},
+      {from: 'usr', to: 'out', label: 'the brief', atWord: at(n, 'brief')},
+      {from: 'sys', to: 'out', label: 'held throughout', atWord: at(n, 'morning')},
     ],
   }}));
 }

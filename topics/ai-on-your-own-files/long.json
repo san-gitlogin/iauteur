@@ -1158,7 +1158,7 @@
               ],
               "id": "openaikey",
               "src": "rec/where-keys-come-from/seg-04.mp4",
-              "frames": 64,
+              "frames": 65,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -1492,7 +1492,7 @@
               ],
               "id": "claude",
               "src": "rec/where-keys-come-from/seg-05.mp4",
-              "frames": 135,
+              "frames": 139,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -1842,7 +1842,7 @@
               ],
               "id": "claudekey",
               "src": "rec/where-keys-come-from/seg-06.mp4",
-              "frames": 54,
+              "frames": 53,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -2200,12 +2200,12 @@
                 {
                   "mark": "title",
                   "wantAtWord": 7.667,
-                  "atWord": 21.5
+                  "atWord": 23.333
                 }
               ],
               "id": "azure",
               "src": "rec/where-keys-come-from/seg-07.mp4",
-              "frames": 122,
+              "frames": 138,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -2537,7 +2537,7 @@
               ],
               "id": "azurekey",
               "src": "rec/where-keys-come-from/seg-08.mp4",
-              "frames": 63,
+              "frames": 62,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -2846,7 +2846,7 @@
               ],
               "id": "gemini",
               "src": "rec/where-keys-come-from/seg-09.mp4",
-              "frames": 106,
+              "frames": 113,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -3161,24 +3161,14 @@
               "wantAtWord": 21.833,
               "zooms": [
                 {
-                  "mark": "free",
-                  "wantAtWord": 33.833,
-                  "atWord": 33.833
-                },
-                {
                   "mark": "improve",
                   "wantAtWord": 49.25,
-                  "atWord": 64.083
-                },
-                {
-                  "mark": "paid",
-                  "wantAtWord": 71.833,
-                  "atWord": 85.167
+                  "atWord": 49.25
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 89.083,
-                  "atWord": 103.333
+                  "wantAtWord": 71.833,
+                  "atWord": 71.833
                 }
               ],
               "callouts": [
@@ -3193,10 +3183,10 @@
                 {
                   "text": "paid: it does not",
                   "mark": "paid",
-                  "side": "left",
+                  "side": "bottom",
                   "color": "green",
-                  "wantAtWord": 25,
-                  "atWord": 73.75
+                  "wantAtWord": 78.417,
+                  "atWord": 78.417
                 },
                 {
                   "text": "a work file is a different decision",
@@ -3209,7 +3199,7 @@
               ],
               "id": "geminidata",
               "src": "rec/where-keys-come-from/seg-10.mp4",
-              "frames": 60,
+              "frames": 59,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -3538,7 +3528,7 @@
                 {
                   "mark": "limits",
                   "wantAtWord": 109.417,
-                  "atWord": 115
+                  "atWord": 115.5
                 },
                 {
                   "at": "full",
@@ -3558,7 +3548,7 @@
               ],
               "id": "groq",
               "src": "rec/where-keys-come-from/seg-11.mp4",
-              "frames": 98,
+              "frames": 116,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -6473,7 +6463,7 @@
     {
       "id": "s37",
       "type": "DIAGRAM",
-      "narration": "A system message — that's the one new thing in this call, and it's worth a moment, because roles confuse almost everybody the first time. Every message you send carries a role, and a role is just a label saying who is speaking. Role user means: this is me, the person, asking a thing right now. That is the message you would type into a chat box. Role system is different, because it is not a question at all. It is a standing instruction that sits above the whole conversation and tells the model who to be while it answers. Think of it as the brief you give somebody on their first morning: you say it once, and it holds for everything after it.",
+      "narration": "A system message — the one new thing here, and it's worth a moment, because roles confuse everybody the first time. Every message carries a role, which is just a label saying who is speaking. Role user means: this is me, the person, asking a thing right now. That is the message you would type into a chat box. Role system is different, because it is not a question at all. It is a standing instruction that sits above the whole conversation and tells the model who to be while it answers. Think of it as the brief you give somebody on their first morning: you say it once, and it holds for everything after it. Both of them shape the reply that comes back, which is why the system line is worth getting right.",
       "transition": "wipe",
       "background": "zoneA",
       "data": {
@@ -6485,28 +6475,28 @@
               "label": "every message",
               "sub": "carries a role",
               "color": "orange",
-              "atWord": 28.167
+              "atWord": 24.5
             },
             {
               "id": "usr",
               "label": "role: user",
               "sub": "you, asking now",
               "color": "blue",
-              "atWord": 39.083
+              "atWord": 33.417
             },
             {
               "id": "sys",
               "label": "role: system",
               "sub": "who to be, throughout",
               "color": "purple",
-              "atWord": 61.333
+              "atWord": 55.75
             },
             {
               "id": "out",
-              "label": "the reply",
-              "sub": "shaped by both",
+              "label": "what it answers",
+              "sub": "shaped by both roles",
               "color": "green",
-              "atWord": 88.083
+              "atWord": 81.5
             }
           ],
           "edges": [
@@ -6514,36 +6504,30 @@
               "from": "msg",
               "to": "usr",
               "label": "a chat message",
-              "atWord": 57.167
+              "atWord": 51.5
             },
             {
               "from": "msg",
               "to": "sys",
               "label": "not a question",
-              "atWord": 71.667
+              "atWord": 65.75
             },
             {
               "from": "usr",
               "to": "out",
-              "label": "asked right now",
-              "atWord": 51.667
-            },
-            {
-              "from": "msg",
-              "to": "out",
-              "label": "who is speaking",
-              "atWord": 37.167
+              "label": "the brief",
+              "atWord": 84.5
             },
             {
               "from": "sys",
               "to": "out",
-              "label": "a standing brief",
-              "atWord": 91.083
+              "label": "held throughout",
+              "atWord": 91
             }
           ]
         }
       },
-      "durationFrames": 1314,
+      "durationFrames": 1408,
       "audio": "audio/ai-on-your-own-files_s37.mp3",
       "timingSource": "tts"
     },
