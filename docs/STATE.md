@@ -1487,6 +1487,47 @@ template reads *"In this video, <channel> breaks down <onePayoff>"*, so `meta.on
 be a **noun phrase**, not a sentence, or the description reads "breaks down One binary
 replaces pip…".
 
+## 2026-09-04 — the pacing rebuild: speed, holds, and two gates that could not fire
+
+Owner on the first 13-minute cut: *"the voiceover is shooting very fast while the on
+screen typing and highlighting just flashes only for a few seconds which is not
+processable by a human eye."* Every gate had passed that cut, including `audit-sync`.
+
+**`scripts/check-holds.mjs` (new).** Sync proves a thing ARRIVED on the right word. It
+has never proved the thing STAYED long enough to read. Footage plays at capture speed
+whatever the voice does, so the only thing setting how long finished code sits on screen
+is how long the sentence over it lasts:
+
+    hold = (next anchor − this anchor) − footage frames
+
+Measured on the cut he was watching: a beat that types a whole block of code held for
+**0.3 seconds** after the last character. The check fails the build under 2s for any clip
+the viewer is asked to read, and prints the median so the number is visible either way.
+
+**`voiceover.py` was pinned at `rate="+8%"`** — actively sped up, and unquestioned since
+before the repo measured anything. 3.11 words/sec, 187 wpm. Now `-10%` (2.6 w/s, 156 wpm)
+and overridable as a 4th argument. Changing it moved the median hold 3.9s → 8.8s at zero
+authoring cost. **It is the single biggest lever on comprehension in the pipeline.**
+
+**The scene-ceiling guard could only ever fire after voicing.** It reads `durationFrames`;
+pre-sync only RECORDED_STEP scenes have one (anchor-spec sizes those from footage), so
+every DRAWN scene was invisible to it. This cut passed a pre-sync lint with zero warnings
+and came back from sync with thirteen over-ceiling drawn beats — each needing a narration
+change, i.e. a four-minute re-voice per round. It now estimates from `words × 11.51` when
+a real duration is absent and labels the number `(estimated)`.
+
+**That estimate was wrong twice before it was right, in opposite directions.** Plain
+`words × 11.36` under-predicted. Adding the 45-frame settle tail plus a 92% margin
+over-corrected so badly it flagged TEN beats whose real durations came in under the
+ceiling — and a gate that cries wolf on correct beats gets ignored, which is worse than a
+coarse one. What ships is plain `words × 11.51`, no settle, no margin.
+
+**Per-scene rate varies 9.3 to 13.7 frames per word, and PUNCTUATION is most of the
+spread.** A trimmed beat came back LONGER (16.6s → 17.0s) because a full stop had become
+an em-dash and the voice pauses longer on a dash. One beat measured 1.94 w/s against the
+2.6 average purely on colons. When a scene overruns and the words look already tight,
+count the breaks before cutting content.
+
 ## Open threads
 
 - **FOUR MORE COMPONENTS DRAW NOTHING AT ALL UNTIL THEIR FIRST ANCHOR** (found 2026-09-04,

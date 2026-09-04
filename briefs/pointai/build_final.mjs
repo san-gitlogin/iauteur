@@ -481,9 +481,9 @@ scenes.push(chapter(
 
 {
   const n =
-    "That word, tokens, matters: every bill is counted in them. " +
-    "A model reads neither letters nor words — it reads tokens, " +
-    "chunks of text: a whole word, half of one, sometimes a space.";
+    "Tokens are what every bill is counted in. " +
+    "A model reads neither letters nor words but chunks of text " +
+    "such as a whole word or half of one or sometimes just a space.";
   scenes.push(scene('TOKENIZER', n, {tokenizer: {
     headline: 'What you are actually billed for',
     text: 'Reply with exactly the word: ready',
