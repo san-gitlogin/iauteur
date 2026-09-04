@@ -136,11 +136,43 @@ export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], s
       // earlier is the case authors actually have: the solver spreads clips evenly across
       // the read, while the word naming the action is usually well before that. The only
       // real constraint is that the preceding clip is not cut off mid-action.
-      const floor = i === 0 ? start : starts[i - 1] + clipFrames[i - 1];
+      // THE FLOOR CARRIES A MARGIN, BECAUSE THIS SOLVE IS IN MODEL TIME AND THE VIDEO
+      // IS NOT. Everything here runs at FRAMES_PER_WORD = 12, a flat average; `sync.mjs`
+      // then re-times every anchor against REAL word boundaries, where "and we add one
+      // line to it" is far quicker than twelve frames a word and a spelled-out
+      // AZURE_OPENAI_API_KEY is far slower. A clip placed exactly `previous + footage`
+      // has zero slack for that, so a run of fast words silently closes the gap and the
+      // previous clip ships cut off mid-action.
+      //
+      // MEASURED, 2026-09-04: six clips passed this solve and failed the linter after
+      // sync, the worst by 71 frames — `openignore` needed 215f and got 144f across the
+      // words "and we add one line to it". A 25% cushion covers every case in that cut.
+      const GAP_MARGIN = 1.25;
+      const floor = i === 0 ? start : starts[i - 1] + clipFrames[i - 1] * GAP_MARGIN;
       const after = clipFrames.slice(i).reduce((a, b) => a + b, 0);
       const tailOk = asked + after <= Math.max(auto + after, total * LAW8_TAIL - FPW);
       if (asked >= floor && tailOk) {
         at = asked;
+        overridden.push(i);
+      } else if (asked < floor && floor + after <= Math.max(auto + after, total * LAW8_TAIL - FPW)) {
+        // AN ANCHOR JUST BELOW THE FLOOR MEANT "AS EARLY AS YOU CAN", NOT "NEVER MIND".
+        //
+        // PAID FOR, 2026-09-04: a four-clip beat asked for its last clip at word 91 and
+        // the floor — the previous clip finishing — was word 93.6. Two and a half words
+        // out. The old branch dropped the request entirely and fell back to the automatic
+        // cursor, which sits AFTER every leading clip has taken its share of the slack:
+        // frame 1602 instead of 1111. Sixteen seconds later than asked, which collapsed
+        // the clip's window to nothing and failed the whole scene with a message about
+        // callouts that had nothing to do with the cause.
+        //
+        // Honouring the FLOOR instead keeps the author's intent (start this as soon as it
+        // legally can) and cannot cut the previous clip off, which is the only thing the
+        // floor exists to protect.
+        // SNAP UP TO A WORD BOUNDARY. `at` is converted to a word with `wordOf`, which
+        // ROUNDS — so landing exactly on the floor round-trips to a frame up to half a
+        // word BELOW it, and the linter then reports the previous clip cut off by two or
+        // three frames. Ceil to the next whole word and the round-trip cannot go under.
+        at = Math.ceil(floor / FPW) * FPW;
         overridden.push(i);
       }
     }

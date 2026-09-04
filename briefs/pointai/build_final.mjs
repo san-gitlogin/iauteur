@@ -79,8 +79,8 @@ const scenes = [];
 {
   const n = "Python, a file on your desk, and an AI that reads it for you.";
   scenes.push(scene('HOOK', n, {
-    headline: 'PYTHON READS YOUR FILES',
-    subtext: 'from an empty folder, in one sitting',
+    headline: 'LEARN THIS IN 20 MINUTES',
+    subtext: 'AI on your own files, in Python',
     hookVariant: 'statement',
     headlineAtWord: at(n, 'Python'),
   }));
@@ -90,7 +90,7 @@ const scenes = [];
   const n =
     `Welcome to ${CH}. Today we build a small Python tool that takes any file — ` +
     "a spreadsheet, a log, an export — and hands it to an AI. " +
-    "No experience, no card. So what does it take?";
+    "No Python experience needed. So what does it actually take?";
   scenes.push(scene('TITLE_CARD', n, {
     title: 'Make an AI read your own files',
     subtitle: 'a complete Python project, from an empty folder',
@@ -178,56 +178,69 @@ scenes.push(chapter(
     "The address is your own computer, because that is where the model is running. " +
     "The model name is whatever you chose to download. " +
     "And nothing you type ever leaves the machine, " +
-    "which for a work file is often your only allowed option. " +
-    "And before you write a local model off as the hobby option, " +
-    "scroll further down that same page. " +
-    "Apple. Nike. Microsoft. NASA. Netflix. NVIDIA. IBM. Intel. " +
-    "Those are the marks Ollama puts on its own front page, " +
-    "over a line that reads: trusted by more than nine million developers. " +
-    "That's not a hobby crowd. " +
-    "Running a model on hardware you control isn't the amateur choice. " +
-    "It's what you do when the data isn't allowed to leave the building — " +
-    "a rule most of us work under whether we think about it or not.";
+    "which for a work file is often your only allowed option.";
   scenes.push(rec(n, 'the model runs on your machine',
-    'Ollama’s own home page, and the strip of logos further down it.',
+    'Ollama’s own home page.',
+    // THE CALLOUT READING "the address is your own PC" IS GONE. It pointed at the mark
+    // called `run`, which is the page's marketing headline — owner: *"What is it
+    // pointing to as address?"* There is no address on that page to point at, so the
+    // sentence carries the idea and the camera just shows the product.
     [W('ollama', 'Ollama, on its own site',
        {zooms: [{mark: 'run', atWord: at(n, 'website')},
                 {mark: 'dl', atWord: at(n, 'download')},
                 {at: 'full', atWord: at(n, 'leaves')}],
         callouts: [{text: 'no account, no card', mark: 'dl', side: 'right', color: 'green',
-                    atWord: at(n, 'card')},
-                   {text: 'the address is your own PC', mark: 'run', side: 'right',
-                    color: 'blue', atWord: at(n, 'computer')}]}),
-     W('ollamawho', 'further down the page', {wantAtWord: at(n, 'scroll'),
-       zooms: [{mark: 'trusted', atWord: at(n, 'Apple')}, {at: 'full', atWord: at(n, 'amateur')}],
-       callouts: [{text: 'nine million developers', mark: 'trusted', side: 'bottom',
-                   color: 'green', atWord: at(n, 'million')},
-                  {text: 'not the amateur choice', mark: 'trusted', side: 'top',
-                   color: 'purple', atWord: at(n, 'choice')}]})],
+                    atWord: at(n, 'card')}]})],
     {sourceNote: 'Source: ollama.com — read 2026-09-04',
      card: {place: 'right', width: 0.24}}));
+}
+
+// THE LOGO WALL IS BACK AS A COMPONENT. It was replaced with a scroll of the real strip
+// on ollama.com, and the owner called that a downgrade: *"I see you have degraded from
+// using components and animation with logo for demonstrating who all uses ollama to
+// showing it in live page."* He is right — eleven grey logos at 2% of a screenshot is
+// worse than eight marks landing one at a time on the name being said. The page stays
+// the SOURCE, credited under the wall.
+{
+  const n =
+    "And before you write a local model off as the hobby option, " +
+    "look at who is on Ollama's own front page. " +
+    "Apple. Nike. NVIDIA. NASA. Netflix. Intel. Meta. Adobe. " +
+    "Over a line that reads: trusted by more than nine million developers. " +
+    "That is not a hobby crowd. " +
+    "Running a model on hardware you control isn't the amateur choice — " +
+    "it's what you do when the data isn't allowed to leave the building, " +
+    "which is a rule most of us work under whether we think about it or not.";
+  scenes.push(scene('LOGO_WALL', n, {
+    logoWall: {
+      cols: 4,
+      logos: [
+        {icon: 'si:apple', label: 'Apple', atWord: at(n, 'Apple')},
+        {icon: 'si:nike', label: 'Nike', atWord: at(n, 'Nike')},
+        {icon: 'si:nvidia', label: 'NVIDIA', atWord: at(n, 'NVIDIA')},
+        {icon: 'si:nasa', label: 'NASA', atWord: at(n, 'NASA')},
+        {icon: 'si:netflix', label: 'Netflix', atWord: at(n, 'Netflix')},
+        {icon: 'si:intel', label: 'Intel', atWord: at(n, 'Intel')},
+        {icon: 'si:meta', label: 'Meta', atWord: at(n, 'Meta')},
+        {icon: 'si:adobe', label: 'Adobe', atWord: at(n, 'Adobe')},
+      ],
+    },
+    source: 'Logos shown on ollama.com — read 2026-09-04',
+  }));
 }
 
 {
   const n =
     "Door two is OpenAI, and this is their own developer quickstart. " +
     "Look at the heading: create and export an API key. " +
-    "That button is where the key comes from. " +
-    "You sign in, you click it once, and you get a long string " +
-    "that you copy straight away, " +
-    "because most providers show it to you exactly once and never again. " +
+    "That button is where the key comes from: you sign in, you click it once, " +
+    "and you get a long string. Copy it straight away, " +
+    "because most providers show it once and never again. " +
     "And underneath, they tell you what to do with it: " +
     "put it in an environment variable called OPENAI underscore API underscore KEY. " +
-    "Door three is Anthropic's Claude, and here is their get-started page. " +
-    "Down the left there is a link that says, simply, get your API key. " +
-    "And step one of their own quickstart is: set your API key, " +
-    "into a variable called ANTHROPIC underscore API underscore KEY. " +
-    "Different company. Different name. Exactly the same idea. " +
-    "And look at the code underneath, because messages, and role user, " +
-    "turn up in our own file shortly. " +
-    "Two companies, two pages, one shape — which is the point of showing you both.";
-  scenes.push(rec(n, 'where a key actually comes from',
-    'OpenAI’s and Anthropic’s own quickstart pages.',
+    "Hold on to that name for a second.";
+  scenes.push(rec(n, 'where an OpenAI key comes from',
+    'OpenAI’s own developer quickstart.',
     [W('openai', "OpenAI's quickstart", {zooms: [{mark: 'title', atWord: at(n, 'quickstart')}]}),
      W('openaikey', 'create and export a key', {wantAtWord: at(n, 'heading'),
        zooms: [{mark: 'heading', atWord: at(n, 'create')},
@@ -238,18 +251,56 @@ scenes.push(chapter(
                   {text: 'shown once — copy it now', mark: 'button', side: 'right',
                    color: 'red', atWord: at(n, 'again')},
                   {text: 'an environment variable', mark: 'envname', side: 'left',
-                   color: 'green', atWord: at(n, 'variable')}]}),
-     W('claude', "Anthropic's own docs", {wantAtWord: at(n, 'Anthropic'),
-       zooms: [{mark: 'title', atWord: at(n, 'Claude')}]}),
+                   color: 'green', atWord: at(n, 'variable')}]})],
+    {sourceNote: 'Source: platform.openai.com/docs/quickstart — read 2026-09-04',
+     card: {place: 'right', width: 0.24}}));
+}
+
+// A DRAWN BEAT BETWEEN THE TWO DOCS PAGES. Two footage beats cannot sit side by side,
+// and this is the thing both pages are evidence FOR: the key is the same idea every
+// time and only the label changes. It also sets up the name we choose in our own .env.
+{
+  const n =
+    "And this is the part worth holding on to. " +
+    "Every provider stores the same secret, and every one of them calls it " +
+    "something slightly different. " +
+    "OpenAI says OPENAI underscore API underscore KEY. " +
+    "Anthropic says ANTHROPIC underscore API underscore KEY. " +
+    "Microsoft says AZURE underscore OPENAI underscore API underscore KEY. " +
+    "Three companies, three labels, one secret string. " +
+    "And in a few minutes we pick our own name for it — " +
+    "AI underscore API underscore KEY — " +
+    "so our own code never has to care whose door you walked through.";
+  scenes.push(scene('LIST_BUILD', n, {
+    heading: 'One secret, four labels',
+    items: [
+      {text: 'OPENAI_API_KEY — OpenAI', atWord: at(n, 'OpenAI')},
+      {text: 'ANTHROPIC_API_KEY — Anthropic', atWord: at(n, 'Anthropic')},
+      {text: 'AZURE_OPENAI_API_KEY — Microsoft', atWord: at(n, 'Microsoft')},
+      {text: 'Three labels, one secret', atWord: at(n, 'labels')},
+      {text: 'AI_API_KEY — ours, in a minute', atWord: at(n, 'own')},
+    ],
+  }));
+}
+
+{
+  const n =
+    "Door three is Anthropic's Claude, and this is their get-started page. " +
+    "Same job, different company, and it is worth seeing precisely because " +
+    "the shape repeats. " +
+    "Down the left there is a link that says, simply, get your API key. " +
+    "And step one of their own quickstart is: set your API key. " +
+    "Different company, different name, and it's exactly the same idea. " +
+    "And look at the code underneath — messages, and role user — " +
+    "because both of those turn up in our own file shortly.";
+  scenes.push(rec(n, 'the same three things, renamed',
+    'Anthropic’s own get-started page for Claude.',
+    [W('claude', "Anthropic's own docs", {zooms: [{mark: 'title', atWord: at(n, 'Claude')}]}),
      W('claudekey', 'down the left', {wantAtWord: at(n, 'left'),
-       zooms: [{mark: 'getkey', atWord: at(n, 'link')},
-               {mark: 'envname', atWord: at(n, 'ANTHROPIC')},
-               {at: 'full', atWord: at(n, 'code')}],
+       zooms: [{mark: 'getkey', atWord: at(n, 'link')}],
        callouts: [{text: 'same idea, new name', mark: 'setkey', side: 'left',
-                   color: 'purple', atWord: at(n, 'Different')},
-                  {text: 'role user, again', mark: 'setkey', side: 'left',
-                   color: 'blue', atWord: at(n, 'messages')}]})],
-    {sourceNote: 'Sources: platform.openai.com/docs/quickstart · docs.claude.com — read 2026-09-04',
+                   color: 'purple', atWord: at(n, 'idea')}]})],
+    {sourceNote: 'Source: docs.claude.com/en/docs/get-started — read 2026-09-04',
      card: {place: 'right', width: 0.24}}));
 }
 
@@ -430,6 +481,7 @@ scenes.push(chapter(
     'The file that holds the key, so the code never has to.',
     [A('openenv', 'an empty settings file'),
      A('typeenv', 'three lines, typed', {wantAtWord: at(n, 'Base'),
+       zooms: [{mark: 'url', atWord: at(n, 'Base')}, {at: 'full', atWord: at(n, 'provider', 2)}],
        callouts: [{text: 'the address you talk to', mark: 'url', side: 'right', color: 'blue',
                    atWord: at(n, 'address')},
                   {text: 'masked — yours goes here', mark: 'masked', side: 'right', color: 'red',
@@ -461,8 +513,12 @@ scenes.push(chapter(
 
 {
   const n =
-    "So the second file. Gitignore is the list of things git must never pick up, " +
-    "and we add dot env to it. " +
+    "So the second file, and this one is called dot gitignore. " +
+    "Every project has one, and it is simply a list of names " +
+    "that git is told to walk straight past. " +
+    "We add one line to it: dot env. " +
+    "That single line is the whole protection: " +
+    "git now walks past your settings file as if the file were not there. " +
     "Thirty seconds of work, and the difference between a key that is yours " +
     "and a key that is on the internet. " +
     "Do it on the first day of a project and you'll never think about it again. " +
@@ -472,7 +528,10 @@ scenes.push(chapter(
     'The ignore list, and the one name on it.',
     [A('openignore', 'the gitignore'),
      A('typeignore', 'one line, typed', {wantAtWord: at(n, 'add'),
-       callouts: [{text: 'thirty seconds, once', mark: 'ignored', side: 'right', color: 'green',
+       zooms: [{mark: 'ignored', atWord: at(n, 'whole')}, {at: 'full', atWord: at(n, 'difference')}],
+       callouts: [{text: 'git walks past it now', mark: 'ignored', side: 'right', color: 'blue',
+                   atWord: at(n, 'walks')},
+                  {text: 'thirty seconds, once', mark: 'ignored', side: 'right', color: 'green',
                    atWord: at(n, 'seconds')}]}),
      A('saveignore', 'saved', {wantAtWord: at(n, 'internet')})]));
 }
@@ -542,17 +601,23 @@ scenes.push(chapter(
 
 {
   const n =
-    "New file, ask dot py, and we write it together, line by line. " +
+    "New file, called ask dot py, and we write this one together, " +
+    "line by line, from a completely empty page. " +
+    "Nine lines in total, and they've each earned their place. " +
     "Import os, so we can read those settings. " +
     "Import load dotenv, which is the thing that actually reads the settings file. " +
     "Import OpenAI — the library, remember, not the company. " +
     "Call load dotenv, and the settings are available. " +
     "Then build the client. Base URL and api key, both pulled from the file rather than typed here. " +
-    "That's the client finished, and it works against any of the four doors we looked at.";
+    "That's the client finished, and it works against any of the four doors " +
+    "we looked at a few minutes ago — Ollama, OpenAI, Anthropic, Azure.";
   scenes.push(rec(n, 'imports, then the client',
     'Writing the client, one line at a time.',
     [A('openask', 'an empty file'),
      A('client', 'imports, then the client', {wantAtWord: at(n, 'Import'),
+       zooms: [{mark: 'import', atWord: at(n, 'remember')},
+               {mark: 'apikey', atWord: at(n, 'client', 2)},
+               {at: 'full', atWord: at(n, 'typed')}],
        callouts: [{text: 'the library, not the company', mark: 'import', side: 'right',
                    color: 'blue', atWord: at(n, 'company')},
                   {text: 'from the file, not from here', mark: 'apikey', side: 'right',
@@ -798,7 +863,9 @@ scenes.push(chapter(
 
 {
   const n =
-    "So we fix it, right here, before the line that ranks anything. " +
+    "So we fix it, and we fix it right here, " +
+    "on the line just before anything gets ranked, " +
+    "because a guard that runs late isn't a guard at all. " +
     "If the number of distinct counts equals the number of values, " +
     "then every single one is unique, so we skip that column entirely. " +
     "Two lines, and that's the whole correction, " +
@@ -809,7 +876,7 @@ scenes.push(chapter(
   scenes.push(rec(n, 'two lines, and run it again',
     'Correcting the describer in front of you.',
     [A('gotofix', 'back to the ranking line'),
-     A('typefix', 'two lines, typed in', {wantAtWord: at(n, 'distinct'),
+     A('typefix', 'the guard, typed in', {wantAtWord: at(n, 'distinct'),
        callouts: [{text: 'every value is different', mark: 'guard', side: 'right', color: 'orange',
                    atWord: at(n, 'unique')}]}),
      A('savefix', 'saved', {wantAtWord: at(n, 'Save')}),
@@ -876,19 +943,18 @@ scenes.push(chapter(
 
 {
   const n =
-    "So we type it. The client, same as before. " +
-    "The call, same as before. " +
+    "So we type it. The client and the call, both same as before. " +
     "And here is that first-morning brief going in, as the system line: " +
     "you are a data analyst, use only these facts. " +
     "That second half is the important half, " +
-    "because it tells the model not to fill in the gaps from its own memory. " +
-    "Messages, with the system line first and then the user line, " +
-    "and notice what we are sending it: the description Python already wrote, " +
-    "and then the question. " +
-    "Not one row of the original file goes near the model, " +
+    "because it stops the model filling gaps from its own memory. " +
+    "Messages, with the system line first and then the user line. " +
+    "And notice what we send: the description Python wrote, then the question. " +
+    "Not one row of the file goes near the model, " +
     "which only ever sees the eight lines of summary. " +
-    "Save, run — and there it is. " +
-    "Azure gpt-4o, handed eight lines instead of fifty rows, " +
+    "Save the file. Then run it, from the same terminal as before — " +
+    "and there it is. " +
+    "Azure gpt-4o, handed eight lines instead of fifty rows: " +
     "telling me the Remote region and the FarReach courier have far fewer entries, " +
     "and that despite a mean order value of forty-six point two, two orders were lost in transit. " +
     "That's a tool you built, running on your own file: " +
@@ -898,7 +964,7 @@ scenes.push(chapter(
     [A('a2', 'sending the facts', {
        zooms: [{mark: 'system', atWord: at(n, 'analyst')},
                {mark: 'user', atWord: at(n, 'user')},
-               {mark: 'facts', atWord: at(n, 'sending')}],
+               {mark: 'facts', atWord: at(n, 'send')}],
        callouts: [{text: 'the standing instruction', mark: 'system', side: 'right', color: 'purple',
                    atWord: at(n, 'system')},
                   {text: 'shapes every answer', mark: 'system', side: 'right', color: 'orange',
@@ -1039,10 +1105,10 @@ const spec = {
     screenplay: 'documentary',
     topicAxes: ['skill-build', 'economic-pain', 'sovereignty'],
     seo: {
-      title: 'Make AI Read Your Own Files — A Complete Python Project (Beginner)',
+      title: 'Learn To Code AI — Python Basics, Under 20 Minutes',
       altTitles: [
-        'Use AI On Your Own Files — Python, From An Empty Folder',
-        'Your First AI Tool In Python — Start To Finish',
+        'Learn To Code AI For Your Own Work — Python, For Beginners',
+        'AI On Your Own Files — Python Basics In Under 20 Minutes',
       ],
       hook: 'What does it actually take to get an AI reading your own files?',
       breakdown:
@@ -1083,10 +1149,11 @@ const spec = {
     // NAME FIRST, CLAIM UNDERNEATH. "PYTHON READS IT" asked a scroller what IT was —
     // the bare-subject failure the owner rejected on the FABLE thumbnail, on the one
     // surface that has no sentence in front of it.
-    title: 'AI READS YOUR FILES',
-    badge: 'Python · from scratch',
-    note: 'no credit card needed',
+    title: 'Basic AI Python Coding Under 20 Mins',
+    badge: 'Beginners · AI API',
+    note: 'from an empty folder to a working tool',
     asset: 'si:python',
+    logos: ['si:python', 'si:openai', 'si:anthropic', 'si:googlegemini', 'si:ollama'],
   },
   scenes,
 };

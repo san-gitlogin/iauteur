@@ -506,6 +506,36 @@ if (spec.thumbnail && subject) {
   }
 }
 
+// ── A PINNED COMMENT IS PART OF THE DELIVERABLE, NOT AN EXTRA ────────────────
+//
+// `gen-upload-kit.mjs` emits the 📌 PINNED COMMENT block only `if (seo.pinned)`, so a
+// spec that simply forgets the field ships an upload kit with no pinned comment and says
+// nothing about it. Owner asked for it to be in the kit "going further" — the way to make
+// that true is to make the field non-optional here, rather than to remember it each time.
+//
+// It is the first comment under the video and the one that starts the thread, so it is a
+// QUESTION a viewer can answer from what they just watched — not a restatement of the
+// title and not a second call to subscribe.
+//
+// SWEEP AT THE TIME OF WRITING: 191 of 199 specs in this repo have no `pinned`, so this
+// has been shipping empty almost every time rather than occasionally. The render gate is
+// scoped to the ONE spec being rendered, so the back catalogue is not blocked — an old
+// topic only has to answer for it if somebody re-renders it, which is the right moment.
+{
+  const pinned = String(spec.meta?.seo?.pinned ?? '').trim();
+  if (!pinned) {
+    E('meta.seo.pinned is missing — every video ships a pinned comment, and the upload kit ' +
+      'silently omits the block when the field is absent. Write the question you want ' +
+      'under the video.');
+  } else if (pinned.length > 180) {
+    E(`meta.seo.pinned is ${pinned.length} chars — a pinned comment is one line people ` +
+      `read before the replies collapse it. Keep it under 180.`);
+  } else if (!/\?/.test(pinned)) {
+    W('meta.seo.pinned has no question in it. A statement does not start a thread — ask ' +
+      'something the viewer can answer from what they just watched.');
+  }
+}
+
 // ── 2. THE ON-SCREEN TITLE IS THE CLICK PROMISE, not a mood one-liner. ───────
 const STOP = new Set(['playwright', 'python', 'tutorial', 'the', 'and', 'for', 'with', 'your',
                       'what', 'why', 'how', 'that', 'this', 'from', 'into', 'when', 'once',
@@ -746,9 +776,10 @@ const sceneCeiling = (s) => {
 // zero warnings and came back from sync with THIRTEEN over-ceiling drawn beats, every one
 // of which needed a narration change — i.e. another four-minute re-voice per round.
 //
-// 11.51 frames per word is measured: 3,369 words against 38,776 frames of real
-// en-US-AvaMultilingualNeural at rate -10% (2.61 words/sec, 156 wpm). Re-measure when the
-// voice or the rate changes — `check-holds.mjs` prints both numbers.
+// 9.65 frames per word: en-US-AvaMultilingualNeural at the house rate of +8%, measured
+// at 3.11 words/sec (187 wpm). Re-measure when the voice or the rate changes —
+// `check-holds.mjs` prints both numbers. (A -10% experiment measured 11.51; it was
+// reverted because slowing the voice is the wrong fix for a short hold.)
 //
 // NO SETTLE TERM, AND THAT IS DELIBERATE. Adding the ~45-frame tail looks right on
 // paper — sync runs a scene to `max(audio, last anchor + settle)` — but measured against
@@ -765,7 +796,7 @@ const sceneCeiling = (s) => {
 // So this is a coarse early warning, not a replacement for the post-sync check: it exists
 // to catch the 30-second overrun while the narration can still be rewritten for free, and
 // the exact measurement still happens after sync.
-const FRAMES_PER_WORD_MEASURED = 11.51;
+const FRAMES_PER_WORD_MEASURED = 9.65;
 const SETTLE_TAIL = 0;
 const ESTIMATE_MARGIN = 1;
 for (const s of spec.scenes ?? []) {

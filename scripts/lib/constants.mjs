@@ -278,7 +278,11 @@ export const BUDGET = {
   recapPoint: 46,
   source: 64,
   quote: 120,
-  coverTitle: 26,
+  // 26 was "thumbnails are fragments, not sentences" — a taste call about legibility at
+  // gallery size. Owner overrode it 2026-09-04 asking for a "lengthy big title" that
+  // carries the whole promise: "Basic AI Python Coding Under 20 Mins". 40 fits that at two
+  // wrapped lines; verify a new title by RENDERING the thumb, which is a 30-second still.
+  coverTitle: 40,
   statValue: 12,
   panelTitle: 44,
   stickyTitle: 28,
