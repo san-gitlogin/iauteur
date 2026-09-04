@@ -560,6 +560,55 @@ declared, drawn, and invisible.** Whenever something moves by transform, ask wha
 other side of it too. The same sweep applies to `translateX` on a wide cut, to a pill that
 overshoots its track, and to any `landAt` overshoot near a container edge.
 
+### Corollary — A HOLD IS THE UNIT OF COMPREHENSION, AND NOTHING MEASURED IT (owner, 2026-09-04)
+
+Owner, on a 13-minute beginner tutorial: *"You are hurrying at many places where the
+voiceover is shooting very fast while the on screen typing and highlighting just flashes
+only for a few seconds which is not processable by a human eye… at one point your voiceover
+syncs with what is shown but while its syncing with whats shown, the time given for human
+to process is bare minimum."*
+
+Every gate said the cut was fine. The linter passed. `audit-sync` passed — every element
+landed on the word that named it. **Sync is not comprehension.** A thing can arrive at
+exactly the right moment and still be gone before anyone has read it.
+
+**The number nothing was computing: HOLD.** Footage plays at CAPTURE speed no matter what
+the voice does, so for a clip the only thing that decides how long the finished state stays
+on screen is how long the narration over it lasts:
+
+    hold = (next anchor − this anchor) − footage frames
+
+Measured on the shipped cut: the beat where a whole block of code is typed held for
+**0.3 SECONDS** after the last character landed. Median across twelve typing blocks: 3.9s,
+with four under 2s.
+
+Two causes, both invisible in code review:
+
+1. **`voiceover.py` was pinned at `rate="+8%"`** — actively sped up, and there since before
+   this repo measured anything. It delivered **3.11 words/sec, 187 wpm**. A presenter talks
+   at that rate; someone typing along does not. It is `-10%` now (~2.6 w/s, 155 wpm), which
+   is the production bible's own range, and it hands ~20% more dwell to every frame at zero
+   cost. **Changing the rate changes every hold in the video** — it is the biggest single
+   lever, and it was a constant nobody had questioned.
+2. **A beat's word count was written to the narration's needs, not the footage's.** If a
+   6-second typing block gets a 6-second sentence, the hold is zero by construction. The
+   sentence over a block of code has to outlast the typing, which in practice means
+   EXPLAINING what was typed rather than announcing it — LAW 0e again, arrived at from the
+   other direction.
+
+**Measure it before rendering.** Compute the hold for every clip and read the bottom of the
+list. Under ~2s on a typing block is a defect; a save or a `cd` can be short because there
+is nothing to read.
+
+Corollary to the corollary — **a beat whose visual is a sentence is the thing to cut when
+you need the time.** Owner, same review: *"you are speaking about something where something
+meaningful can be shown where you just waste the duration by just showing [a KINETIC_TEXT
+card] and animation."* The card in question read *"Every value different means nothing to
+rank"* — which is the narration, set in type, animated. The beat is about a column whose
+values never repeat, so the fix was to put THE COLUMN on screen with its counts beside it.
+If a component's whole content is a restatement of the sentence, it is spending runtime that
+the footage beside it needed.
+
 ### Corollary — ESTIMATE THE READ AT A MEASURED RATE (2026-09-03)
 
 A builder's pre-sync estimate is the ONLY chance to catch a short cut before paying for a

@@ -71,7 +71,32 @@ export const computeDiagram = (
   const msgLabels: DiagramPlan['msgLabels'] = [];
   const byId = (id: string) => placed.find((p) => p.id === id);
 
-  const NW = (layout === 'sequence' ? 210 : vertical ? 250 : 230) * scale;
+  // A NODE BOX SIZES TO ITS OWN TEXT (owner, 2026-09-04: *"there are padding and
+  // scaffolding issues with text and the box"*, over a sequence node whose sub read
+  // "builds the list" with the word `list` sitting ON the border).
+  //
+  // The height was a flat 88 for `sequence`. A label of "Your program" wraps to two
+  // lines inside a 210-wide box, the mono sub wraps to two more, and four lines of
+  // type do not fit in 88px — so the box clipped its own contents. Both numbers are
+  // now derived: the box is wide enough that ordinary labels do not wrap, and its
+  // height counts the lines that will actually be drawn.
+  const NW = (layout === 'sequence' ? 272 : vertical ? 250 : 230) * scale;
+  // Mirrors the type in Diagram.tsx: label 26/30px at line-height 1.1, mono sub 19px,
+  // role pill ~21px, plus the 14px padding top and bottom and the 2px gap between.
+  const linesFor = (text: string | undefined, px: number) => {
+    if (!text) return 0;
+    // ~0.55em per character for the body face, ~0.60em for mono.
+    const per = Math.max(1, Math.floor((NW / scale - 36) / (px * 0.56)));
+    return Math.max(1, Math.ceil(text.length / per));
+  };
+  const nodeH = (node: {label?: string; sub?: string; role?: string}) => {
+    const seq = layout === 'sequence';
+    const lab = linesFor(node.label, seq ? 26 : 30) * (seq ? 26 : 30) * 1.1;
+    const sub = linesFor(node.sub, 19) * 19 * 1.25;
+    const role = node.role ? 24 : 0;
+    const gaps = (node.sub ? 2 : 0) + (node.role ? 3 : 0);
+    return Math.max(seq ? 88 : 132, lab + sub + role + gaps + 28) * scale;
+  };
   const NH = (layout === 'sequence' ? 88 : 132) * scale;
 
   const resolveKind = (fallback: EdgeKind, e?: {kind?: EdgeKind}): EdgeKind => e?.kind ?? fallback;
@@ -80,15 +105,21 @@ export const computeDiagram = (
     // Actors across the top, lifelines down, messages at increasing y (time).
     const n = nodes.length;
     const laneGap = CW / n;
-    const headY = NH / 2 + 10 * scale;
+    const heights = nodes.map(nodeH);
+    const headH = Math.max(...heights, NH);
+    const headY = headH / 2 + 10 * scale;
     nodes.forEach((node, i) => {
       const cx = laneGap * (i + 0.5);
-      placed.push({id: node.id, cx, cy: headY, w: NW, h: NH, node});
-      lifelines.push({id: node.id, x: cx, y0: headY + NH / 2, y1: CH - 20 * scale, color: node.color});
+      placed.push({id: node.id, cx, cy: headY, w: NW, h: heights[i], node});
+      lifelines.push({id: node.id, x: cx, y0: headY + heights[i] / 2, y1: CH - 20 * scale, color: node.color});
     });
     const msgs = [...edges].sort((a, b) => (a.atWord ?? 0) - (b.atWord ?? 0));
-    const top = headY + NH / 2 + 60 * scale;
-    const step = msgs.length > 0 ? Math.min(140 * scale, (CH - top - 40 * scale) / msgs.length) : 0;
+    const top = headY + headH / 2 + 60 * scale;
+    // LAW 0n: `Math.min(budget * f, CONST)` — the CONST must never be the binding term.
+    // At 140 it bound for every diagram with three or fewer messages, so a two-message
+    // beat drew its actors at the top and left two thirds of the pane black. The cap
+    // exists for the CROWDED case only, so it sits above any ordinary spacing.
+    const step = msgs.length > 0 ? Math.min(300 * scale, (CH - top - 40 * scale) / msgs.length) : 0;
     msgs.forEach((e, k) => {
       const a = byId(e.from);
       const b = byId(e.to);

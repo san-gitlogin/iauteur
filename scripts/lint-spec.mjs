@@ -737,11 +737,27 @@ const sceneCeiling = (s) => {
   // 4s minimum stays exactly where it is.
   return Math.max(STATIC_CEIL, Math.min(HARD_CEIL, 180 * steps + 120));
 };
+// MEASURED FRAMES-PER-WORD, for scenes that do not have a duration yet.
+//
+// PAID FOR, 2026-09-04: this loop tests `durationFrames`, and before `sync.mjs` runs only
+// RECORDED_STEP scenes have one — `anchor-spec` sizes those from measured footage, and
+// every DRAWN scene has nothing. So the ceiling guard was silent on exactly the scenes it
+// was written for until AFTER the voice existed. One cut passed the pre-sync lint with
+// zero warnings and came back from sync with THIRTEEN over-ceiling drawn beats, every one
+// of which needed a narration change — i.e. another four-minute re-voice per round.
+//
+// 11.36 is measured: 3,501 words against 39,778 frames of real en-US-AvaMultilingualNeural
+// at rate -10% (2.64 words/sec, 158 wpm). Re-measure when the voice or the rate changes.
+// Only used when a real duration is absent, so it never overrides measured audio.
+const FRAMES_PER_WORD_MEASURED = 11.36;
 for (const s of spec.scenes ?? []) {
   const ceil = sceneCeiling(s);
-  if ((s.durationFrames ?? 0) > ceil) {
+  const words = String(s.narration ?? '').trim().split(/\s+/).filter(Boolean).length;
+  const estimated = s.durationFrames == null && words > 0;
+  const dur = s.durationFrames ?? Math.round(words * FRAMES_PER_WORD_MEASURED);
+  if (dur > ceil) {
     const steps = new Set(collectAnchors(sceneAnchorRoot(s))).size;
-    W(`${s.id}: ${(s.durationFrames / 30).toFixed(1)}s on a single ${s.type} with ${steps} stepped element(s) — that earns ${(ceil / 30).toFixed(0)}s. Either step something more (each anchored element buys 4s) or split the narration into two beats.`);
+    W(`${s.id}: ${(dur / 30).toFixed(1)}s${estimated ? ' (estimated)' : ''} on a single ${s.type} with ${steps} stepped element(s) — that earns ${(ceil / 30).toFixed(0)}s. Either step something more (each anchored element buys 4s) or split the narration into two beats.`);
   }
 }
 const collectImgAssets = (obj, out = []) => {

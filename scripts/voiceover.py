@@ -18,9 +18,13 @@ for _s in (sys.stdout, sys.stderr):
     except Exception:
         pass
 
+RATE = "-10%"
+
 async def main():
     spec_path, prefix = sys.argv[1], sys.argv[2]
     voice = sys.argv[3] if len(sys.argv) > 3 else "en-US-AvaMultilingualNeural"
+    global RATE
+    RATE = sys.argv[4] if len(sys.argv) > 4 else "-10%"
     spec = json.load(open(spec_path, encoding="utf-8"))
     os.makedirs("public/audio", exist_ok=True)
     os.makedirs("out/tts", exist_ok=True)
@@ -38,7 +42,23 @@ async def main():
         # the word, which is exactly the "sync is lacking, I can't follow" the owner
         # reported. Measured on one scene: 14 word starts at a uniform 0.432s apart, versus
         # real gaps of 0.243 / 0.336 / 0.694 / 0.347 / 0.081 once this is set.
-        comm = edge_tts.Communicate(text, voice, rate="+8%", boundary="WordBoundary")
+        # SPEED IS NOT ENERGY (owner, 2026-09-04, on a 13-minute beginner tutorial:
+        # *"the voiceover is shooting very fast while the on screen typing and
+        # highlighting just flashes only for a few seconds which is not processable by
+        # a human eye"*). The rate had been pinned at +8% — actively SPED UP — which
+        # measured 3.11 words/sec, i.e. 187 wpm. A presenter delivers at that rate; a
+        # tutorial someone is trying to type along with does not.
+        #
+        # It also silently starves every piece of footage. A typing block plays at
+        # CAPTURE speed no matter what the voice does, so the only thing that decides
+        # how long finished code stays on screen is how long the sentence over it
+        # lasts. At +8% one block held for 0.3 SECONDS after the last character landed.
+        #
+        # -10% measures ~2.6 words/sec (155 wpm), which is the range the production
+        # bible asks for, and it hands roughly a fifth more dwell to every frame.
+        # Override per run with a 4th argument when a cut genuinely wants a different
+        # pace; do not raise the default back without measuring a hold time.
+        comm = edge_tts.Communicate(text, voice, rate=RATE, boundary="WordBoundary")
         with open(mp3, "wb") as f:
             async for chunk in comm.stream():
                 ctype = chunk["type"]

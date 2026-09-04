@@ -107,6 +107,17 @@ export const browserActions = {
   async goto(page, step) {
     const res = await page.goto(step.url, {waitUntil: step.waitUntil ?? 'load', timeout: step.timeout ?? 60000});
     await page.waitForTimeout(step.settleMs ?? 900);
+    // A CONSENT BANNER ONLY GETS DISMISSED ONCE, AND A DEMO VISITS SEVERAL SITES.
+    // `prep.dismiss` runs before the take, so every site navigated to AFTER it kept its
+    // own cookie wall — sitting over exactly the paragraph the narration is about. Each
+    // label is optional by design: a banner that did not appear is not an error.
+    for (const label of step.dismiss ?? []) {
+      const btn = page.getByRole('button', {name: label, exact: false}).first();
+      if (!(await btn.count().catch(() => 0))) continue;
+      await btn.click({timeout: 4000}).catch(() => {});
+      await page.waitForTimeout(500);
+    }
+    if ((step.dismiss ?? []).length) await page.waitForTimeout(400);
     const landed = page.url();
     const title = await page.title().catch(() => '');
     const status = res ? res.status() : null;

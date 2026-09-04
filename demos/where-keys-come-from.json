@@ -2,46 +2,274 @@
   "slug": "where-keys-come-from",
   "surface": "browser",
   "theme": "dark",
-  "viewport": {"width": 1600, "height": 900},
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
   "deviceScaleFactor": 2,
   "fps": 30,
   "prep": {
     "url": "https://ollama.com",
-    "dismiss": ["Reject all cookies", "Accept all cookies", "Accept", "Got it"]
+    "dismiss": [
+      "Reject all",
+      "Reject all cookies",
+      "Accept all cookies",
+      "Accept all",
+      "Accept",
+      "Got it",
+      "I accept",
+      "Decline",
+      "Close"
+    ]
   },
   "steps": [
     {
       "id": "ollama",
       "action": "expect",
       "text": "Ollama",
-      "label": "the free one that runs on your own machine",
-      "holdMs": 2200
+      "label": "runs on your own machine",
+      "holdMs": 2600,
+      "marks": [
+        {
+          "id": "run",
+          "text": "Run open models"
+        },
+        {
+          "id": "dl",
+          "text": "Download"
+        }
+      ]
+    },
+    {
+      "id": "ollamawho",
+      "action": "scroll",
+      "target": "text=Trusted by",
+      "by": 620,
+      "label": "who runs models locally",
+      "holdMs": 3000,
+      "marks": [
+        {
+          "id": "trusted",
+          "text": "Trusted by"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "action": "goto",
+      "url": "https://platform.openai.com/docs/quickstart",
+      "dismiss": [
+        "Reject all",
+        "Reject all cookies",
+        "Accept all cookies",
+        "Accept all",
+        "Accept",
+        "Got it",
+        "I accept",
+        "Decline",
+        "Close"
+      ],
+      "settleMs": 3500,
+      "holdMs": 2600,
+      "label": "OpenAI's own quickstart",
+      "marks": [
+        {
+          "id": "title",
+          "text": "Developer quickstart"
+        }
+      ]
+    },
+    {
+      "id": "openaikey",
+      "action": "scroll",
+      "target": "text=OPENAI_API_KEY",
+      "by": 900,
+      "label": "the key, and the name it goes under",
+      "holdMs": 3400,
+      "settleMs": 1200,
+      "marks": [
+        {
+          "id": "envname",
+          "text": "OPENAI_API_KEY"
+        },
+        {
+          "id": "heading",
+          "text": "Create and export an API key"
+        },
+        {
+          "id": "button",
+          "text": "Create an API Key"
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "action": "goto",
+      "url": "https://docs.claude.com/en/docs/get-started",
+      "dismiss": [
+        "Reject all",
+        "Reject all cookies",
+        "Accept all cookies",
+        "Accept all",
+        "Accept",
+        "Got it",
+        "I accept",
+        "Decline",
+        "Close"
+      ],
+      "settleMs": 3500,
+      "holdMs": 2600,
+      "label": "Anthropic's own get-started",
+      "marks": [
+        {
+          "id": "title",
+          "text": "Get started with Claude"
+        }
+      ]
+    },
+    {
+      "id": "claudekey",
+      "action": "scroll",
+      "target": "text=Set your API key",
+      "by": 900,
+      "label": "same three settings, different names",
+      "holdMs": 3400,
+      "settleMs": 1200,
+      "marks": [
+        {
+          "id": "setkey",
+          "text": "Set your API key"
+        },
+        {
+          "id": "envname",
+          "text": "ANTHROPIC_API_KEY"
+        },
+        {
+          "id": "getkey",
+          "text": "Get your API key"
+        }
+      ]
+    },
+    {
+      "id": "azure",
+      "action": "goto",
+      "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart",
+      "dismiss": [
+        "Reject all",
+        "Reject all cookies",
+        "Accept all cookies",
+        "Accept all",
+        "Accept",
+        "Got it",
+        "I accept",
+        "Decline",
+        "Close"
+      ],
+      "settleMs": 3500,
+      "holdMs": 2600,
+      "label": "Microsoft's own Azure OpenAI quickstart",
+      "marks": [
+        {
+          "id": "title",
+          "text": "Azure OpenAI"
+        }
+      ]
+    },
+    {
+      "id": "azurekey",
+      "action": "scroll",
+      "target": "text=AZURE_OPENAI_API_KEY",
+      "by": 1400,
+      "label": "endpoint, key, and deployment name",
+      "holdMs": 3800,
+      "settleMs": 1200,
+      "marks": [
+        {
+          "id": "envname",
+          "text": "AZURE_OPENAI_API_KEY"
+        },
+        {
+          "id": "deployed",
+          "text": "A deployed Azure OpenAI model"
+        },
+        {
+          "id": "authmethod",
+          "text": "An authentication method"
+        }
+      ]
     },
     {
       "id": "gemini",
       "action": "goto",
       "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "dismiss": [
+        "Reject all",
+        "Reject all cookies",
+        "Accept all cookies",
+        "Accept all",
+        "Accept",
+        "Got it",
+        "I accept",
+        "Decline",
+        "Close"
+      ],
+      "settleMs": 3000,
+      "holdMs": 2600,
       "label": "Google's own pricing page",
-      "settleMs": 2500,
-      "holdMs": 1500,
-      "marks": [{"id": "free", "text": "Free"}]
+      "marks": [
+        {
+          "id": "title",
+          "text": "Gemini Developer API pricing"
+        }
+      ]
     },
     {
-      "id": "freetier",
+      "id": "geminidata",
       "action": "scroll",
-      "by": 700,
-      "label": "the free tier, in their words",
-      "holdMs": 2000,
-      "marks": [{"id": "tier", "text": "Free"}]
+      "target": "text=improve our products",
+      "by": 900,
+      "label": "what the free tier does with your content",
+      "holdMs": 3800,
+      "settleMs": 1200,
+      "marks": [
+        {
+          "id": "improve",
+          "text": "Content used to improve our products"
+        },
+        {
+          "id": "free",
+          "text": "Free"
+        },
+        {
+          "id": "paid",
+          "text": "Paid"
+        }
+      ]
     },
     {
       "id": "groq",
       "action": "goto",
       "url": "https://console.groq.com/docs/rate-limits",
-      "label": "Groq: limits instead of a bill",
-      "settleMs": 2500,
-      "holdMs": 2000,
-      "marks": [{"id": "limits", "text": "Rate Limits"}]
+      "dismiss": [
+        "Reject all",
+        "Reject all cookies",
+        "Accept all cookies",
+        "Accept all",
+        "Accept",
+        "Got it",
+        "I accept",
+        "Decline",
+        "Close"
+      ],
+      "settleMs": 3000,
+      "holdMs": 3000,
+      "label": "limits instead of a bill",
+      "marks": [
+        {
+          "id": "limits",
+          "text": "Rate Limits"
+        }
+      ]
     }
   ]
 }

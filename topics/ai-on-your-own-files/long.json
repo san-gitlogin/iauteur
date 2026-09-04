@@ -85,7 +85,7 @@
     {
       "id": "s01",
       "type": "HOOK",
-      "narration": "Python, a file on your desk, and an AI that reads it for you. Nothing installed yet. Let's fix that.",
+      "narration": "Python, a file on your desk, and an AI that reads it for you.",
       "transition": "fade",
       "background": "zoneA",
       "data": {
@@ -93,24 +93,18 @@
         "subtext": "from an empty folder, in one sitting",
         "hookVariant": "statement",
         "headlineAtWord": 1
-      },
-      "durationFrames": 234,
-      "audio": "audio/ai-on-your-own-files_s01.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s02",
       "type": "TITLE_CARD",
-      "narration": "Welcome to THE NBX STUDIO. Today we build a small Python tool that takes any file you've got — a spreadsheet, an export, a log — and hands it to an AI that tells you what is in there. No Python experience, no credit card. So what does that actually take?",
+      "narration": "Welcome to THE NBX STUDIO. Today we build a small Python tool that takes any file — a spreadsheet, a log, an export — and hands it to an AI that reads it. No experience, no card. So what does that take?",
       "transition": "push",
       "background": "zoneB",
       "data": {
         "title": "Make an AI read your own files",
         "subtitle": "a complete Python project, from an empty folder"
-      },
-      "durationFrames": 467,
-      "audio": "audio/ai-on-your-own-files_s02.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s03",
@@ -128,28 +122,28 @@
               "label": "Your file",
               "sub": "csv, log, export",
               "color": "blue",
-              "atWord": 1
+              "atWord": 2
             },
             {
               "id": "p",
               "label": "Python",
               "sub": "counts and measures",
               "color": "green",
-              "atWord": 2.333
+              "atWord": 5
             },
             {
               "id": "d",
               "label": "A description",
               "sub": "a few hundred words",
               "color": "purple",
-              "atWord": 18.583
+              "atWord": 24
             },
             {
               "id": "m",
               "label": "The model",
               "sub": "reads, then answers",
               "color": "orange",
-              "atWord": 34.083
+              "atWord": 45
             }
           ],
           "edges": [
@@ -157,54 +151,110 @@
               "from": "f",
               "to": "p",
               "label": "you point it",
-              "atWord": 1.917
+              "atWord": 4
             },
             {
               "from": "p",
               "to": "d",
               "label": "no AI yet",
-              "atWord": 14.25
+              "atWord": 17
             },
             {
               "from": "d",
               "to": "m",
               "label": "facts, not rows",
-              "atWord": 31.333
+              "atWord": 42
             }
           ]
         }
-      },
-      "durationFrames": 714,
-      "audio": "audio/ai-on-your-own-files_s03.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s04",
       "type": "CHAPTER",
-      "narration": "First question everybody asks, and it's the right one: where do you get an AI to talk to?",
+      "narration": "Before any code: the three things every provider gives you, and where to click for them.",
       "transition": "zoom",
       "background": "zoneA",
       "data": {
         "chapter": {
           "number": "01",
-          "title": "Where the AI comes from",
-          "subtitle": "three doors, and two of them are free"
+          "title": "Where settings come from",
+          "subtitle": "a key, an address, and a model name"
         }
-      },
-      "durationFrames": 161,
-      "audio": "audio/ai-on-your-own-files_s04.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s05",
-      "type": "RECORDED_STEP",
-      "narration": "Three doors, and the free ones come first because they are not a consolation prize. Door one runs the model on your own laptop — this is Ollama's own site. No account, no card, and nothing you type leaves the machine, which for work files is often the only option allowed.",
+      "type": "DIAGRAM",
+      "narration": "Whichever provider you pick, you end up with the same three things, and it is worth knowing their names before you see them in code. One: a key. That is a long secret string that says this request is yours. Two: an address — the web address your program sends the request to. Three: a model name, which is simply which brain you want to answer. A key, an address, a model name — which means once you have those three, you can talk to any of them. Every provider calls them slightly different things, and every one of them gives you all three. So let's go and get them, on four different sites.",
       "transition": "wipe",
       "background": "zoneB",
       "data": {
+        "diagram": {
+          "layout": "flow",
+          "direction": "horizontal",
+          "nodes": [
+            {
+              "id": "k",
+              "label": "A key",
+              "sub": "proves it is you",
+              "color": "red",
+              "atWord": 28
+            },
+            {
+              "id": "u",
+              "label": "An address",
+              "sub": "where to send it",
+              "color": "blue",
+              "atWord": 43
+            },
+            {
+              "id": "m",
+              "label": "A model name",
+              "sub": "which brain answers",
+              "color": "purple",
+              "atWord": 56
+            }
+          ],
+          "edges": [
+            {
+              "from": "k",
+              "to": "u",
+              "label": "secret string",
+              "atWord": 33
+            },
+            {
+              "from": "u",
+              "to": "m",
+              "label": "which brain",
+              "atWord": 62
+            },
+            {
+              "from": "k",
+              "to": "m",
+              "label": "all three",
+              "atWord": 54
+            },
+            {
+              "from": "m",
+              "to": "k",
+              "label": "every provider",
+              "atWord": 90
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s06",
+      "type": "RECORDED_STEP",
+      "narration": "Door one runs the model on your own laptop — this is Ollama's own website. No key to fetch, no card to type, because the model's a file you download, and it answers on your machine. The address is your own computer, because that is where the model is running. The model name is whatever you chose to download. And nothing you type ever leaves the machine, which for a work file is often your only allowed option. And before you write a local model off as the hobby option, scroll further down that same page. Apple. Nike. Microsoft. NASA. Netflix. NVIDIA. IBM. Intel. Those are the marks Ollama puts on its own front page, over a line that reads: trusted by more than nine million developers. That's not a hobby crowd. Running a model on hardware you control isn't the amateur choice. It's what you do when the data isn't allowed to leave the building — a rule most of us work under whether we think about it or not.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
         "recordedStep": {
-          "caption": "free, and it never leaves your laptop",
-          "premise": "Ollama’s own home page — a model that runs on your machine.",
+          "caption": "the model runs on your machine",
+          "premise": "Ollama’s own home page, and the strip of logos further down it.",
           "layout": "full",
           "color": "blue",
           "clips": [
@@ -214,9 +264,37 @@
               "focus": true,
               "zooms": [
                 {
+                  "mark": "run",
+                  "wantAtWord": 15,
+                  "atWord": 15
+                },
+                {
+                  "mark": "dl",
+                  "wantAtWord": 30,
+                  "atWord": 30
+                },
+                {
                   "at": "full",
-                  "wantAtWord": 15.167,
-                  "atWord": 29.167
+                  "wantAtWord": 65,
+                  "atWord": 91
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "no account, no card",
+                  "mark": "dl",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 21,
+                  "atWord": 21
+                },
+                {
+                  "text": "the address is your own PC",
+                  "mark": "run",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 42,
+                  "atWord": 42
                 }
               ],
               "id": "ollama",
@@ -227,6 +305,20 @@
                 "y": 0,
                 "w": 1600,
                 "h": 900
+              },
+              "marks": {
+                "run": {
+                  "x": 184,
+                  "y": 220,
+                  "w": 400,
+                  "h": 66
+                },
+                "dl": {
+                  "x": 1480,
+                  "y": 21,
+                  "w": 80,
+                  "h": 22
+                }
               },
               "ink": [
                 {
@@ -239,31 +331,31 @@
                   "x": 1480,
                   "y": 21,
                   "w": 80,
-                  "h": 21
+                  "h": 22
                 },
                 {
                   "x": 80,
                   "y": 21,
                   "w": 59,
-                  "h": 21
+                  "h": 22
                 },
                 {
                   "x": 228,
                   "y": 21,
                   "w": 55,
-                  "h": 21
+                  "h": 22
                 },
                 {
                   "x": 1386,
                   "y": 21,
                   "w": 54,
-                  "h": 21
+                  "h": 22
                 },
                 {
                   "x": 163,
                   "y": 21,
                   "w": 41,
-                  "h": 21
+                  "h": 22
                 },
                 {
                   "x": 619,
@@ -291,9 +383,9 @@
                 },
                 {
                   "x": 216,
-                  "y": 494,
+                  "y": 493,
                   "w": 72,
-                  "h": 18
+                  "h": 19
                 },
                 {
                   "x": 681,
@@ -387,94 +479,46 @@
                 }
               ],
               "shows": "Run open models. Get more usage.",
-              "atWord": 2.417
-            }
-          ],
-          "sourceNote": "Source: ollama.com — read 2026-09-04",
-          "capture": {
-            "width": 1600,
-            "height": 900
-          },
-          "atWord": 1
-        }
-      },
-      "durationFrames": 454,
-      "audio": "audio/ai-on-your-own-files_s05.mp3",
-      "timingSource": "tts"
-    },
-    {
-      "id": "s06",
-      "type": "LOGO_WALL",
-      "narration": "Apple. NVIDIA. Netflix. NASA. Intel. Those are the logos Ollama puts on its own front page, which is worth knowing before you write a local model off as a hobby thing. Running a model on hardware you control is not the amateur option — it's the only option when the data cannot leave the building.",
-      "transition": "dip",
-      "background": "zoneC",
-      "data": {
-        "logoWall": {
-          "logos": [
-            {
-              "icon": "si:apple",
-              "label": "Apple",
-              "atWord": 1
+              "atWord": 4
             },
             {
-              "icon": "si:nvidia",
-              "label": "NVIDIA",
-              "atWord": 2.25
-            },
-            {
-              "icon": "si:netflix",
-              "label": "Netflix",
-              "atWord": 4.583
-            },
-            {
-              "icon": "si:nasa",
-              "label": "NASA",
-              "atWord": 7.167
-            },
-            {
-              "icon": "si:intel",
-              "label": "Intel",
-              "atWord": 9.25
-            }
-          ],
-          "cols": 5
-        },
-        "source": "Logos shown on ollama.com, read 2026-09-04"
-      },
-      "durationFrames": 545,
-      "audio": "audio/ai-on-your-own-files_s06.mp3",
-      "timingSource": "tts"
-    },
-    {
-      "id": "s07",
-      "type": "RECORDED_STEP",
-      "narration": "Door two is a cloud key, no card. Here is Google's own pricing page, and the word free is theirs, not mine. Free input and output tokens, limits instead of a bill. But read the line at the bottom, because that line decides everything: on the free tier your content improves their products; on paid it does not. That's the real difference between the columns.",
-      "transition": "morph",
-      "background": "zoneA",
-      "data": {
-        "recordedStep": {
-          "caption": "free in their own words — and the catch",
-          "premise": "Google’s published pricing for the Gemini API.",
-          "layout": "full",
-          "color": "blue",
-          "clips": [
-            {
-              "ref": "rec:where-keys-come-from#gemini",
-              "label": "the free and paid columns",
+              "ref": "rec:where-keys-come-from#ollamawho",
+              "label": "further down the page",
               "focus": true,
-              "callouts": [
+              "wantAtWord": 91,
+              "zooms": [
                 {
-                  "text": "their word, not mine",
-                  "mark": "free",
-                  "side": "right",
-                  "color": "green",
-                  "wantAtWord": 13.25,
-                  "atWord": 13.25
+                  "mark": "trusted",
+                  "wantAtWord": 97,
+                  "atWord": 97
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 142,
+                  "atWord": 121
                 }
               ],
-              "id": "gemini",
+              "callouts": [
+                {
+                  "text": "nine million developers",
+                  "mark": "trusted",
+                  "side": "bottom",
+                  "color": "green",
+                  "wantAtWord": 126,
+                  "atWord": 126
+                },
+                {
+                  "text": "not the amateur choice",
+                  "mark": "trusted",
+                  "side": "top",
+                  "color": "purple",
+                  "wantAtWord": 143,
+                  "atWord": 129
+                }
+              ],
+              "id": "ollamawho",
               "src": "rec/where-keys-come-from/seg-02.mp4",
-              "frames": 97,
+              "frames": 58,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -482,11 +526,2318 @@
                 "h": 900
               },
               "marks": {
-                "free": {
-                  "x": 411,
-                  "y": 423,
-                  "w": 57,
-                  "h": 35
+                "trusted": {
+                  "x": 681,
+                  "y": 253,
+                  "w": 69,
+                  "h": 17
+                }
+              },
+              "ink": [
+                {
+                  "x": 694,
+                  "y": 0,
+                  "w": 722,
+                  "h": 172
+                },
+                {
+                  "x": 216,
+                  "y": 54,
+                  "w": 72,
+                  "h": 19
+                },
+                {
+                  "x": 681,
+                  "y": 253,
+                  "w": 237,
+                  "h": 17
+                },
+                {
+                  "x": 36,
+                  "y": 296,
+                  "w": 24,
+                  "h": 29
+                },
+                {
+                  "x": 664,
+                  "y": 296,
+                  "w": 17,
+                  "h": 30
+                },
+                {
+                  "x": 1142,
+                  "y": 298,
+                  "w": 26,
+                  "h": 26
+                },
+                {
+                  "x": 1240,
+                  "y": 298,
+                  "w": 26,
+                  "h": 26
+                },
+                {
+                  "x": 1454,
+                  "y": 298,
+                  "w": 26,
+                  "h": 26
+                },
+                {
+                  "x": 1552,
+                  "y": 299,
+                  "w": 34,
+                  "h": 24
+                },
+                {
+                  "x": 925,
+                  "y": 299,
+                  "w": 27,
+                  "h": 24
+                },
+                {
+                  "x": 252,
+                  "y": 300,
+                  "w": 103,
+                  "h": 22
+                },
+                {
+                  "x": 427,
+                  "y": 300,
+                  "w": 32,
+                  "h": 21
+                },
+                {
+                  "x": 752,
+                  "y": 301,
+                  "w": 101,
+                  "h": 19
+                },
+                {
+                  "x": 531,
+                  "y": 302,
+                  "w": 61,
+                  "h": 17
+                },
+                {
+                  "x": 132,
+                  "y": 302,
+                  "w": 49,
+                  "h": 17
+                },
+                {
+                  "x": 1024,
+                  "y": 302,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 1338,
+                  "y": 302,
+                  "w": 44,
+                  "h": 17
+                },
+                {
+                  "x": 584,
+                  "y": 470,
+                  "w": 151,
+                  "h": 36
+                },
+                {
+                  "x": 248,
+                  "y": 486,
+                  "w": 88,
+                  "h": 19
+                },
+                {
+                  "x": 584,
+                  "y": 525,
+                  "w": 570,
+                  "h": 45
+                },
+                {
+                  "x": 248,
+                  "y": 547,
+                  "w": 154,
+                  "h": 19
+                },
+                {
+                  "x": 1291,
+                  "y": 607,
+                  "w": 61,
+                  "h": 14
+                },
+                {
+                  "x": 248,
+                  "y": 608,
+                  "w": 118,
+                  "h": 19
+                },
+                {
+                  "x": 584,
+                  "y": 639,
+                  "w": 46,
+                  "h": 17
+                },
+                {
+                  "x": 1312,
+                  "y": 639,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 248,
+                  "y": 669,
+                  "w": 155,
+                  "h": 19
+                },
+                {
+                  "x": 584,
+                  "y": 675,
+                  "w": 67,
+                  "h": 17
+                },
+                {
+                  "x": 1322,
+                  "y": 675,
+                  "w": 30,
+                  "h": 17
+                },
+                {
+                  "x": 584,
+                  "y": 711,
+                  "w": 67,
+                  "h": 17
+                },
+                {
+                  "x": 1335,
+                  "y": 711,
+                  "w": 17,
+                  "h": 17
+                },
+                {
+                  "x": 248,
+                  "y": 730,
+                  "w": 136,
+                  "h": 19
+                },
+                {
+                  "x": 584,
+                  "y": 747,
+                  "w": 67,
+                  "h": 17
+                },
+                {
+                  "x": 1322,
+                  "y": 747,
+                  "w": 30,
+                  "h": 17
+                },
+                {
+                  "x": 584,
+                  "y": 792,
+                  "w": 531,
+                  "h": 14
+                }
+              ],
+              "shows": "Reliably fast",
+              "atWord": 91
+            }
+          ],
+          "sourceNote": "Source: ollama.com — read 2026-09-04",
+          "card": {
+            "place": "right",
+            "width": 0.24
+          },
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 2097
+    },
+    {
+      "id": "s07",
+      "type": "RECORDED_STEP",
+      "narration": "Door two is OpenAI, and this is their own developer quickstart. Look at the heading: create and export an API key. That button is where the key comes from. You sign in, you click it once, and you get a long string that you copy straight away, because most providers show it to you exactly once and never again. And underneath, they tell you what to do with it: put it in an environment variable called OPENAI underscore API underscore KEY. Door three is Anthropic's Claude, and here is their get-started page. Down the left there is a link that says, simply, get your API key. And step one of their own quickstart is: set your API key, into a variable called ANTHROPIC underscore API underscore KEY. Different company. Different name. Exactly the same idea. And look at the code underneath, because messages, and role user, turn up in our own file shortly. Two companies, two pages, one shape — which is the point of showing you both.",
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "where a key actually comes from",
+          "premise": "OpenAI’s and Anthropic’s own quickstart pages.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:where-keys-come-from#openai",
+              "label": "OpenAI's quickstart",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "title",
+                  "wantAtWord": 11,
+                  "atWord": 15
+                }
+              ],
+              "id": "openai",
+              "src": "rec/where-keys-come-from/seg-03.mp4",
+              "frames": 118,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "title": {
+                  "x": 360,
+                  "y": 147,
+                  "w": 279,
+                  "h": 36
+                }
+              },
+              "ink": [
+                {
+                  "x": 364,
+                  "y": 2,
+                  "w": 523,
+                  "h": 38
+                },
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 312,
+                  "h": 42
+                },
+                {
+                  "x": 903,
+                  "y": 2,
+                  "w": 136,
+                  "h": 38
+                },
+                {
+                  "x": 1172,
+                  "y": 23,
+                  "w": 96,
+                  "h": 17
+                },
+                {
+                  "x": 1399,
+                  "y": 23,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 795,
+                  "y": 79,
+                  "w": 87,
+                  "h": 17
+                },
+                {
+                  "x": 999,
+                  "y": 79,
+                  "w": 85,
+                  "h": 17
+                },
+                {
+                  "x": 906,
+                  "y": 79,
+                  "w": 70,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 147,
+                  "w": 331,
+                  "h": 69
+                },
+                {
+                  "x": 1300,
+                  "y": 162,
+                  "w": 157,
+                  "h": 37
+                },
+                {
+                  "x": 24,
+                  "y": 202,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 214,
+                  "w": 169,
+                  "h": 37
+                },
+                {
+                  "x": 32,
+                  "y": 236,
+                  "w": 66,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 250,
+                  "w": 861,
+                  "h": 70
+                },
+                {
+                  "x": 360,
+                  "y": 250,
+                  "w": 493,
+                  "h": 19
+                },
+                {
+                  "x": 1300,
+                  "y": 266,
+                  "w": 175,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 269,
+                  "w": 115,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 298,
+                  "w": 154,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 302,
+                  "w": 84,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 330,
+                  "w": 174,
+                  "h": 17
+                },
+                {
+                  "x": 24,
+                  "y": 352,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 362,
+                  "w": 174,
+                  "h": 37
+                },
+                {
+                  "x": 381,
+                  "y": 366,
+                  "w": 656,
+                  "h": 67
+                },
+                {
+                  "x": 32,
+                  "y": 386,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 1092,
+                  "y": 392,
+                  "w": 104,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 414,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 419,
+                  "w": 118,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 452,
+                  "w": 115,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 483,
+                  "w": 264,
+                  "h": 24
+                },
+                {
+                  "x": 32,
+                  "y": 518,
+                  "w": 111,
+                  "h": 17
+                },
+                {
+                  "x": 373,
+                  "y": 529,
+                  "w": 112,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 551,
+                  "w": 109,
+                  "h": 17
+                },
+                {
+                  "x": 512,
+                  "y": 571,
+                  "w": 695,
+                  "h": 71
+                },
+                {
+                  "x": 360,
+                  "y": 571,
+                  "w": 578,
+                  "h": 71
+                },
+                {
+                  "x": 938,
+                  "y": 571,
+                  "w": 105,
+                  "h": 19
+                },
+                {
+                  "x": 32,
+                  "y": 584,
+                  "w": 74,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 617,
+                  "w": 66,
+                  "h": 17
+                },
+                {
+                  "x": 374,
+                  "y": 677,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 683,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 716,
+                  "w": 103,
+                  "h": 17
+                },
+                {
+                  "x": 375,
+                  "y": 737,
+                  "w": 405,
+                  "h": 14
+                },
+                {
+                  "x": 24,
+                  "y": 766,
+                  "w": 87,
+                  "h": 17
+                },
+                {
+                  "x": 583,
+                  "y": 776,
+                  "w": 157,
+                  "h": 17
+                },
+                {
+                  "x": 450,
+                  "y": 776,
+                  "w": 124,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 800,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 830,
+                  "w": 583,
+                  "h": 19
+                },
+                {
+                  "x": 32,
+                  "y": 833,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 881,
+                  "w": 391,
+                  "h": 19
+                }
+              ],
+              "shows": "Developer quickstart",
+              "atWord": 4
+            },
+            {
+              "ref": "rec:where-keys-come-from#openaikey",
+              "label": "create and export a key",
+              "focus": true,
+              "wantAtWord": 15,
+              "zooms": [
+                {
+                  "mark": "heading",
+                  "wantAtWord": 16,
+                  "atWord": 23
+                },
+                {
+                  "mark": "button",
+                  "wantAtWord": 23,
+                  "atWord": 29
+                },
+                {
+                  "mark": "envname",
+                  "wantAtWord": 61,
+                  "atWord": 35
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "click it once",
+                  "mark": "button",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 42,
+                  "atWord": 26
+                },
+                {
+                  "text": "shown once — copy it now",
+                  "mark": "button",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 59,
+                  "atWord": 32
+                },
+                {
+                  "text": "an environment variable",
+                  "mark": "envname",
+                  "side": "left",
+                  "color": "green",
+                  "wantAtWord": 75,
+                  "atWord": 38
+                }
+              ],
+              "id": "openaikey",
+              "src": "rec/where-keys-come-from/seg-04.mp4",
+              "frames": 64,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "envname": {
+                  "x": 459,
+                  "y": 776,
+                  "w": 116,
+                  "h": 17
+                },
+                "heading": {
+                  "x": 360,
+                  "y": 483,
+                  "w": 264,
+                  "h": 24
+                },
+                "button": {
+                  "x": 373,
+                  "y": 529,
+                  "w": 112,
+                  "h": 17
+                }
+              },
+              "ink": [
+                {
+                  "x": 364,
+                  "y": 2,
+                  "w": 523,
+                  "h": 38
+                },
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 312,
+                  "h": 42
+                },
+                {
+                  "x": 903,
+                  "y": 2,
+                  "w": 136,
+                  "h": 38
+                },
+                {
+                  "x": 1172,
+                  "y": 23,
+                  "w": 96,
+                  "h": 17
+                },
+                {
+                  "x": 1399,
+                  "y": 23,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 795,
+                  "y": 79,
+                  "w": 87,
+                  "h": 17
+                },
+                {
+                  "x": 999,
+                  "y": 79,
+                  "w": 85,
+                  "h": 17
+                },
+                {
+                  "x": 906,
+                  "y": 79,
+                  "w": 70,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 147,
+                  "w": 331,
+                  "h": 69
+                },
+                {
+                  "x": 1300,
+                  "y": 162,
+                  "w": 157,
+                  "h": 37
+                },
+                {
+                  "x": 24,
+                  "y": 202,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 214,
+                  "w": 169,
+                  "h": 37
+                },
+                {
+                  "x": 32,
+                  "y": 236,
+                  "w": 66,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 250,
+                  "w": 861,
+                  "h": 70
+                },
+                {
+                  "x": 360,
+                  "y": 250,
+                  "w": 493,
+                  "h": 19
+                },
+                {
+                  "x": 1300,
+                  "y": 266,
+                  "w": 175,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 269,
+                  "w": 115,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 298,
+                  "w": 154,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 302,
+                  "w": 84,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 330,
+                  "w": 174,
+                  "h": 17
+                },
+                {
+                  "x": 24,
+                  "y": 352,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 362,
+                  "w": 174,
+                  "h": 37
+                },
+                {
+                  "x": 381,
+                  "y": 366,
+                  "w": 656,
+                  "h": 67
+                },
+                {
+                  "x": 32,
+                  "y": 386,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 1092,
+                  "y": 392,
+                  "w": 104,
+                  "h": 17
+                },
+                {
+                  "x": 1300,
+                  "y": 414,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 419,
+                  "w": 118,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 452,
+                  "w": 115,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 483,
+                  "w": 264,
+                  "h": 24
+                },
+                {
+                  "x": 32,
+                  "y": 518,
+                  "w": 111,
+                  "h": 17
+                },
+                {
+                  "x": 373,
+                  "y": 529,
+                  "w": 112,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 551,
+                  "w": 109,
+                  "h": 17
+                },
+                {
+                  "x": 512,
+                  "y": 571,
+                  "w": 695,
+                  "h": 71
+                },
+                {
+                  "x": 360,
+                  "y": 571,
+                  "w": 578,
+                  "h": 71
+                },
+                {
+                  "x": 938,
+                  "y": 571,
+                  "w": 105,
+                  "h": 19
+                },
+                {
+                  "x": 32,
+                  "y": 584,
+                  "w": 74,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 617,
+                  "w": 66,
+                  "h": 17
+                },
+                {
+                  "x": 374,
+                  "y": 677,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 683,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 716,
+                  "w": 103,
+                  "h": 17
+                },
+                {
+                  "x": 375,
+                  "y": 737,
+                  "w": 405,
+                  "h": 14
+                },
+                {
+                  "x": 24,
+                  "y": 766,
+                  "w": 87,
+                  "h": 17
+                },
+                {
+                  "x": 583,
+                  "y": 776,
+                  "w": 157,
+                  "h": 17
+                },
+                {
+                  "x": 450,
+                  "y": 776,
+                  "w": 124,
+                  "h": 17
+                },
+                {
+                  "x": 32,
+                  "y": 800,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 830,
+                  "w": 583,
+                  "h": 19
+                },
+                {
+                  "x": 32,
+                  "y": 833,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 360,
+                  "y": 881,
+                  "w": 391,
+                  "h": 19
+                }
+              ],
+              "shows": "Developer quickstart",
+              "atWord": 15
+            },
+            {
+              "ref": "rec:where-keys-come-from#claude",
+              "label": "Anthropic's own docs",
+              "focus": true,
+              "wantAtWord": 123,
+              "zooms": [
+                {
+                  "mark": "title",
+                  "wantAtWord": 86,
+                  "atWord": 86
+                }
+              ],
+              "id": "claude",
+              "src": "rec/where-keys-come-from/seg-05.mp4",
+              "frames": 135,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "title": {
+                  "x": 364,
+                  "y": 122,
+                  "w": 297,
+                  "h": 33
+                }
+              },
+              "ink": [
+                {
+                  "x": 40,
+                  "y": 15,
+                  "w": 208,
+                  "h": 25
+                },
+                {
+                  "x": 581,
+                  "y": 19,
+                  "w": 112,
+                  "h": 18
+                },
+                {
+                  "x": 1157,
+                  "y": 19,
+                  "w": 90,
+                  "h": 18
+                },
+                {
+                  "x": 799,
+                  "y": 19,
+                  "w": 70,
+                  "h": 18
+                },
+                {
+                  "x": 1308,
+                  "y": 93,
+                  "w": 89,
+                  "h": 18
+                },
+                {
+                  "x": 364,
+                  "y": 94,
+                  "w": 297,
+                  "h": 61
+                },
+                {
+                  "x": 1308,
+                  "y": 129,
+                  "w": 76,
+                  "h": 18
+                },
+                {
+                  "x": 1087,
+                  "y": 129,
+                  "w": 70,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 132,
+                  "w": 70,
+                  "h": 18
+                },
+                {
+                  "x": 1308,
+                  "y": 165,
+                  "w": 72,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 168,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 364,
+                  "y": 169,
+                  "w": 577,
+                  "h": 21
+                },
+                {
+                  "x": 16,
+                  "y": 204,
+                  "w": 108,
+                  "h": 18
+                },
+                {
+                  "x": 364,
+                  "y": 229,
+                  "w": 131,
+                  "h": 26
+                },
+                {
+                  "x": 16,
+                  "y": 240,
+                  "w": 70,
+                  "h": 18
+                },
+                {
+                  "x": 416,
+                  "y": 267,
+                  "w": 171,
+                  "h": 46
+                },
+                {
+                  "x": 16,
+                  "y": 276,
+                  "w": 99,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 324,
+                  "w": 136,
+                  "h": 18
+                },
+                {
+                  "x": 364,
+                  "y": 351,
+                  "w": 118,
+                  "h": 26
+                },
+                {
+                  "x": 16,
+                  "y": 360,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 396,
+                  "w": 157,
+                  "h": 18
+                },
+                {
+                  "x": 540,
+                  "y": 399,
+                  "w": 72,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 432,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 459,
+                  "w": 133,
+                  "h": 21
+                },
+                {
+                  "x": 16,
+                  "y": 468,
+                  "w": 139,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 495,
+                  "w": 438,
+                  "h": 19
+                },
+                {
+                  "x": 991,
+                  "y": 495,
+                  "w": 100,
+                  "h": 19
+                },
+                {
+                  "x": 850,
+                  "y": 497,
+                  "w": 138,
+                  "h": 17
+                },
+                {
+                  "x": 16,
+                  "y": 504,
+                  "w": 97,
+                  "h": 18
+                },
+                {
+                  "x": 620,
+                  "y": 549,
+                  "w": 148,
+                  "h": 17
+                },
+                {
+                  "x": 472,
+                  "y": 549,
+                  "w": 140,
+                  "h": 17
+                },
+                {
+                  "x": 16,
+                  "y": 552,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 609,
+                  "w": 286,
+                  "h": 21
+                },
+                {
+                  "x": 16,
+                  "y": 624,
+                  "w": 131,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 660,
+                  "w": 197,
+                  "h": 18
+                },
+                {
+                  "x": 448,
+                  "y": 662,
+                  "w": 156,
+                  "h": 55
+                },
+                {
+                  "x": 651,
+                  "y": 662,
+                  "w": 164,
+                  "h": 36
+                },
+                {
+                  "x": 425,
+                  "y": 662,
+                  "w": 55,
+                  "h": 55
+                },
+                {
+                  "x": 620,
+                  "y": 662,
+                  "w": 47,
+                  "h": 36
+                },
+                {
+                  "x": 16,
+                  "y": 696,
+                  "w": 127,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 760,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 16,
+                  "y": 768,
+                  "w": 137,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 796,
+                  "w": 133,
+                  "h": 19
+                },
+                {
+                  "x": 545,
+                  "y": 798,
+                  "w": 105,
+                  "h": 17
+                },
+                {
+                  "x": 16,
+                  "y": 804,
+                  "w": 114,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 840,
+                  "w": 94,
+                  "h": 18
+                },
+                {
+                  "x": 1473,
+                  "y": 847,
+                  "w": 67,
+                  "h": 19
+                },
+                {
+                  "x": 16,
+                  "y": 876,
+                  "w": 123,
+                  "h": 18
+                }
+              ],
+              "shows": "Get started with Claude",
+              "atWord": 41
+            },
+            {
+              "ref": "rec:where-keys-come-from#claudekey",
+              "label": "down the left",
+              "focus": true,
+              "wantAtWord": 95,
+              "zooms": [
+                {
+                  "mark": "getkey",
+                  "wantAtWord": 99,
+                  "atWord": 107
+                },
+                {
+                  "mark": "envname",
+                  "wantAtWord": 123,
+                  "atWord": 121
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 140,
+                  "atWord": 135
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "same idea, new name",
+                  "mark": "setkey",
+                  "side": "left",
+                  "color": "purple",
+                  "wantAtWord": 128,
+                  "atWord": 128
+                },
+                {
+                  "text": "role user, again",
+                  "mark": "setkey",
+                  "side": "left",
+                  "color": "blue",
+                  "wantAtWord": 143,
+                  "atWord": 128
+                }
+              ],
+              "id": "claudekey",
+              "src": "rec/where-keys-come-from/seg-06.mp4",
+              "frames": 54,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "setkey": {
+                  "x": 408,
+                  "y": 255,
+                  "w": 133,
+                  "h": 21
+                },
+                "envname": {
+                  "x": 480,
+                  "y": 345,
+                  "w": 133,
+                  "h": 17
+                },
+                "getkey": {
+                  "x": 16,
+                  "y": 204,
+                  "w": 108,
+                  "h": 18
+                }
+              },
+              "ink": [
+                {
+                  "x": 40,
+                  "y": 15,
+                  "w": 208,
+                  "h": 25
+                },
+                {
+                  "x": 581,
+                  "y": 19,
+                  "w": 112,
+                  "h": 18
+                },
+                {
+                  "x": 482,
+                  "y": 19,
+                  "w": 66,
+                  "h": 29
+                },
+                {
+                  "x": 1157,
+                  "y": 19,
+                  "w": 90,
+                  "h": 18
+                },
+                {
+                  "x": 364,
+                  "y": 25,
+                  "w": 131,
+                  "h": 26
+                },
+                {
+                  "x": 416,
+                  "y": 63,
+                  "w": 171,
+                  "h": 46
+                },
+                {
+                  "x": 1308,
+                  "y": 93,
+                  "w": 88,
+                  "h": 18
+                },
+                {
+                  "x": 1308,
+                  "y": 129,
+                  "w": 77,
+                  "h": 18
+                },
+                {
+                  "x": 364,
+                  "y": 147,
+                  "w": 118,
+                  "h": 26
+                },
+                {
+                  "x": 1308,
+                  "y": 165,
+                  "w": 72,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 168,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 204,
+                  "w": 108,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 255,
+                  "w": 133,
+                  "h": 21
+                },
+                {
+                  "x": 16,
+                  "y": 276,
+                  "w": 99,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 291,
+                  "w": 438,
+                  "h": 19
+                },
+                {
+                  "x": 991,
+                  "y": 291,
+                  "w": 100,
+                  "h": 19
+                },
+                {
+                  "x": 850,
+                  "y": 293,
+                  "w": 138,
+                  "h": 17
+                },
+                {
+                  "x": 16,
+                  "y": 324,
+                  "w": 136,
+                  "h": 18
+                },
+                {
+                  "x": 620,
+                  "y": 345,
+                  "w": 148,
+                  "h": 17
+                },
+                {
+                  "x": 472,
+                  "y": 345,
+                  "w": 140,
+                  "h": 17
+                },
+                {
+                  "x": 16,
+                  "y": 360,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 396,
+                  "w": 157,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 405,
+                  "w": 286,
+                  "h": 21
+                },
+                {
+                  "x": 16,
+                  "y": 432,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 448,
+                  "y": 458,
+                  "w": 156,
+                  "h": 55
+                },
+                {
+                  "x": 651,
+                  "y": 458,
+                  "w": 164,
+                  "h": 36
+                },
+                {
+                  "x": 425,
+                  "y": 458,
+                  "w": 55,
+                  "h": 55
+                },
+                {
+                  "x": 620,
+                  "y": 458,
+                  "w": 47,
+                  "h": 36
+                },
+                {
+                  "x": 16,
+                  "y": 468,
+                  "w": 139,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 504,
+                  "w": 97,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 552,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 408,
+                  "y": 556,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 408,
+                  "y": 592,
+                  "w": 133,
+                  "h": 19
+                },
+                {
+                  "x": 545,
+                  "y": 594,
+                  "w": 105,
+                  "h": 17
+                },
+                {
+                  "x": 16,
+                  "y": 624,
+                  "w": 131,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 660,
+                  "w": 197,
+                  "h": 18
+                },
+                {
+                  "x": 472,
+                  "y": 683,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 16,
+                  "y": 696,
+                  "w": 127,
+                  "h": 18
+                },
+                {
+                  "x": 487,
+                  "y": 721,
+                  "w": 172,
+                  "h": 17
+                },
+                {
+                  "x": 425,
+                  "y": 759,
+                  "w": 140,
+                  "h": 112
+                },
+                {
+                  "x": 495,
+                  "y": 759,
+                  "w": 187,
+                  "h": 74
+                },
+                {
+                  "x": 16,
+                  "y": 768,
+                  "w": 137,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 804,
+                  "w": 114,
+                  "h": 18
+                },
+                {
+                  "x": 16,
+                  "y": 840,
+                  "w": 94,
+                  "h": 18
+                },
+                {
+                  "x": 604,
+                  "y": 854,
+                  "w": 616,
+                  "h": 36
+                },
+                {
+                  "x": 425,
+                  "y": 854,
+                  "w": 164,
+                  "h": 46
+                },
+                {
+                  "x": 581,
+                  "y": 854,
+                  "w": 47,
+                  "h": 36
+                },
+                {
+                  "x": 16,
+                  "y": 876,
+                  "w": 123,
+                  "h": 18
+                }
+              ],
+              "shows": "Prerequisites ",
+              "atWord": 95
+            }
+          ],
+          "sourceNote": "Sources: platform.openai.com/docs/quickstart · docs.claude.com — read 2026-09-04",
+          "card": {
+            "place": "right",
+            "width": 0.24
+          },
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 2061
+    },
+    {
+      "id": "s08",
+      "type": "RECORDED_STEP",
+      "narration": "Door four is Azure OpenAI, which is Microsoft running OpenAI's models inside a company's own cloud account. This is Microsoft's own quickstart, and read the prerequisites with me. A deployed Azure OpenAI model — that phrase, deployed model, is your model name. An authentication method, and the first one listed is an API key. And the address is the endpoint of the resource somebody created for you. So it is the same three settings again, in Microsoft's own words this time, which means nothing you learn here is wasted if you switch. This is the one I am using for the rest of the video.",
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "Azure: the same three, in their words",
+          "premise": "Microsoft’s own Azure OpenAI quickstart.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:where-keys-come-from#azure",
+              "label": "Microsoft's own quickstart",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "title",
+                  "wantAtWord": 8,
+                  "atWord": 20
+                }
+              ],
+              "id": "azure",
+              "src": "rec/where-keys-come-from/seg-07.mp4",
+              "frames": 122,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "title": {
+                  "x": 156,
+                  "y": 364,
+                  "w": 89,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 56,
+                  "y": 11,
+                  "w": 215,
+                  "h": 19
+                },
+                {
+                  "x": 15,
+                  "y": 18,
+                  "w": 273,
+                  "h": 256
+                },
+                {
+                  "x": 365,
+                  "y": 63,
+                  "w": 94,
+                  "h": 22
+                },
+                {
+                  "x": 295,
+                  "y": 165,
+                  "w": 96,
+                  "h": 19
+                },
+                {
+                  "x": 1534,
+                  "y": 165,
+                  "w": 42,
+                  "h": 19
+                },
+                {
+                  "x": 503,
+                  "y": 165,
+                  "w": 38,
+                  "h": 19
+                },
+                {
+                  "x": 431,
+                  "y": 165,
+                  "w": 31,
+                  "h": 19
+                },
+                {
+                  "x": 1193,
+                  "y": 219,
+                  "w": 198,
+                  "h": 19
+                },
+                {
+                  "x": 1422,
+                  "y": 219,
+                  "w": 143,
+                  "h": 19
+                },
+                {
+                  "x": 556,
+                  "y": 219,
+                  "w": 101,
+                  "h": 19
+                },
+                {
+                  "x": 450,
+                  "y": 219,
+                  "w": 73,
+                  "h": 19
+                },
+                {
+                  "x": 673,
+                  "y": 219,
+                  "w": 62,
+                  "h": 19
+                },
+                {
+                  "x": 290,
+                  "y": 219,
+                  "w": 60,
+                  "h": 19
+                },
+                {
+                  "x": 366,
+                  "y": 219,
+                  "w": 51,
+                  "h": 19
+                },
+                {
+                  "x": 1304,
+                  "y": 286,
+                  "w": 106,
+                  "h": 24
+                },
+                {
+                  "x": 456,
+                  "y": 288,
+                  "w": 674,
+                  "h": 100
+                },
+                {
+                  "x": 578,
+                  "y": 288,
+                  "w": 113,
+                  "h": 19
+                },
+                {
+                  "x": 518,
+                  "y": 288,
+                  "w": 35,
+                  "h": 19
+                },
+                {
+                  "x": 460,
+                  "y": 288,
+                  "w": 34,
+                  "h": 19
+                },
+                {
+                  "x": 88,
+                  "y": 291,
+                  "w": 133,
+                  "h": 19
+                },
+                {
+                  "x": 23,
+                  "y": 306,
+                  "w": 47,
+                  "h": 22
+                },
+                {
+                  "x": 1314,
+                  "y": 326,
+                  "w": 177,
+                  "h": 228
+                },
+                {
+                  "x": 88,
+                  "y": 328,
+                  "w": 89,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 364,
+                  "w": 140,
+                  "h": 44
+                },
+                {
+                  "x": 104,
+                  "y": 425,
+                  "w": 188,
+                  "h": 44
+                },
+                {
+                  "x": 489,
+                  "y": 428,
+                  "w": 154,
+                  "h": 16
+                },
+                {
+                  "x": 456,
+                  "y": 469,
+                  "w": 684,
+                  "h": 134
+                },
+                {
+                  "x": 104,
+                  "y": 486,
+                  "w": 95,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 523,
+                  "w": 97,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 559,
+                  "w": 159,
+                  "h": 44
+                },
+                {
+                  "x": 1312,
+                  "y": 567,
+                  "w": 89,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 620,
+                  "w": 116,
+                  "h": 19
+                },
+                {
+                  "x": 456,
+                  "y": 625,
+                  "w": 479,
+                  "h": 115
+                },
+                {
+                  "x": 935,
+                  "y": 625,
+                  "w": 179,
+                  "h": 22
+                },
+                {
+                  "x": 1304,
+                  "y": 633,
+                  "w": 143,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 657,
+                  "w": 73,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 693,
+                  "w": 88,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 730,
+                  "w": 69,
+                  "h": 19
+                },
+                {
+                  "x": 494,
+                  "y": 762,
+                  "w": 293,
+                  "h": 134
+                },
+                {
+                  "x": 104,
+                  "y": 766,
+                  "w": 72,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 803,
+                  "w": 109,
+                  "h": 19
+                },
+                {
+                  "x": 836,
+                  "y": 818,
+                  "w": 28,
+                  "h": 22
+                },
+                {
+                  "x": 669,
+                  "y": 823,
+                  "w": 164,
+                  "h": 16
+                },
+                {
+                  "x": 104,
+                  "y": 839,
+                  "w": 58,
+                  "h": 19
+                },
+                {
+                  "x": 42,
+                  "y": 866,
+                  "w": 94,
+                  "h": 29
+                }
+              ],
+              "shows": "Use the Azure OpenAI Responses API",
+              "atWord": 4
+            },
+            {
+              "ref": "rec:where-keys-come-from#azurekey",
+              "label": "read the prerequisites",
+              "focus": true,
+              "wantAtWord": 26,
+              "zooms": [
+                {
+                  "mark": "deployed",
+                  "wantAtWord": 30,
+                  "atWord": 42
+                },
+                {
+                  "mark": "authmethod",
+                  "wantAtWord": 44,
+                  "atWord": 64
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 79,
+                  "atWord": 85
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "this is your model name",
+                  "mark": "deployed",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 36,
+                  "atWord": 53
+                },
+                {
+                  "text": "and this is your key",
+                  "mark": "envname",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 50,
+                  "atWord": 74
+                }
+              ],
+              "id": "azurekey",
+              "src": "rec/where-keys-come-from/seg-08.mp4",
+              "frames": 63,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "envname": {
+                  "x": 669,
+                  "y": 253,
+                  "w": 164,
+                  "h": 16
+                },
+                "deployed": {
+                  "x": 494,
+                  "y": 192,
+                  "w": 233,
+                  "h": 22
+                },
+                "authmethod": {
+                  "x": 494,
+                  "y": 220,
+                  "w": 185,
+                  "h": 22
+                }
+              },
+              "ink": [
+                {
+                  "x": 456,
+                  "y": 0,
+                  "w": 668,
+                  "h": 33
+                },
+                {
+                  "x": 72,
+                  "y": 0,
+                  "w": 27,
+                  "h": 17
+                },
+                {
+                  "x": 1304,
+                  "y": 14,
+                  "w": 106,
+                  "h": 24
+                },
+                {
+                  "x": 15,
+                  "y": 18,
+                  "w": 76,
+                  "h": 162
+                },
+                {
+                  "x": 88,
+                  "y": 35,
+                  "w": 133,
+                  "h": 19
+                },
+                {
+                  "x": 1314,
+                  "y": 54,
+                  "w": 177,
+                  "h": 228
+                },
+                {
+                  "x": 456,
+                  "y": 55,
+                  "w": 479,
+                  "h": 115
+                },
+                {
+                  "x": 935,
+                  "y": 55,
+                  "w": 179,
+                  "h": 22
+                },
+                {
+                  "x": 88,
+                  "y": 72,
+                  "w": 89,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 108,
+                  "w": 140,
+                  "h": 44
+                },
+                {
+                  "x": 104,
+                  "y": 169,
+                  "w": 188,
+                  "h": 44
+                },
+                {
+                  "x": 494,
+                  "y": 192,
+                  "w": 352,
+                  "h": 274
+                },
+                {
+                  "x": 104,
+                  "y": 230,
+                  "w": 95,
+                  "h": 19
+                },
+                {
+                  "x": 836,
+                  "y": 248,
+                  "w": 28,
+                  "h": 22
+                },
+                {
+                  "x": 669,
+                  "y": 253,
+                  "w": 164,
+                  "h": 16
+                },
+                {
+                  "x": 104,
+                  "y": 267,
+                  "w": 97,
+                  "h": 19
+                },
+                {
+                  "x": 1312,
+                  "y": 295,
+                  "w": 89,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 303,
+                  "w": 159,
+                  "h": 44
+                },
+                {
+                  "x": 1304,
+                  "y": 361,
+                  "w": 143,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 364,
+                  "w": 116,
+                  "h": 19
+                },
+                {
+                  "x": 803,
+                  "y": 365,
+                  "w": 270,
+                  "h": 16
+                },
+                {
+                  "x": 662,
+                  "y": 393,
+                  "w": 345,
+                  "h": 101
+                },
+                {
+                  "x": 104,
+                  "y": 401,
+                  "w": 73,
+                  "h": 19
+                },
+                {
+                  "x": 1009,
+                  "y": 416,
+                  "w": 113,
+                  "h": 22
+                },
+                {
+                  "x": 104,
+                  "y": 437,
+                  "w": 88,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 474,
+                  "w": 69,
+                  "h": 19
+                },
+                {
+                  "x": 456,
+                  "y": 477,
+                  "w": 271,
+                  "h": 83
+                },
+                {
+                  "x": 104,
+                  "y": 510,
+                  "w": 72,
+                  "h": 19
+                },
+                {
+                  "x": 104,
+                  "y": 547,
+                  "w": 109,
+                  "h": 19
+                },
+                {
+                  "x": 456,
+                  "y": 582,
+                  "w": 636,
+                  "h": 106
+                },
+                {
+                  "x": 104,
+                  "y": 583,
+                  "w": 58,
+                  "h": 19
+                },
+                {
+                  "x": 1060,
+                  "y": 610,
+                  "w": 79,
+                  "h": 50
+                },
+                {
+                  "x": 104,
+                  "y": 620,
+                  "w": 31,
+                  "h": 19
+                },
+                {
+                  "x": 88,
+                  "y": 656,
+                  "w": 110,
+                  "h": 19
+                },
+                {
+                  "x": 88,
+                  "y": 693,
+                  "w": 97,
+                  "h": 19
+                },
+                {
+                  "x": 494,
+                  "y": 710,
+                  "w": 98,
+                  "h": 190
+                },
+                {
+                  "x": 88,
+                  "y": 729,
+                  "w": 157,
+                  "h": 44
+                },
+                {
+                  "x": 88,
+                  "y": 790,
+                  "w": 172,
+                  "h": 44
+                },
+                {
+                  "x": 42,
+                  "y": 851,
+                  "w": 107,
+                  "h": 50
+                }
+              ],
+              "shows": "In this article",
+              "atWord": 26
+            }
+          ],
+          "sourceNote": "Source: learn.microsoft.com — Azure OpenAI quickstart, read 2026-09-04",
+          "card": {
+            "place": "right",
+            "width": 0.24
+          },
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1305
+    },
+    {
+      "id": "s09",
+      "type": "RECORDED_STEP",
+      "narration": "Now, cost, because that is the question everybody actually has. This is Google's own pricing page for the Gemini API, and the two columns are theirs, not mine: free left, paid right. On the free side: limited models, free tokens, and Studio access. But read the fourth line of that free column, because it matters when the file belongs to your employer. Content used to improve our products. Now read the same position in the paid column. Content NOT used to improve our products. That is the real difference between the two sides, and it is why a work file is not the same decision as a hobby one. Groq works the same way, with a different lever: a key with no card, and rate limits instead of a bill — so many requests a minute. Hit one, wait a moment, carry on. You do not get charged. Whichever door you pick, everything from here is identical, because the code only ever asks for those same three settings.",
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "what free costs, in their own words",
+          "premise": "Google’s published pricing, and Groq’s published rate limits.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:where-keys-come-from#gemini",
+              "label": "Google's pricing page",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "title",
+                  "wantAtWord": 15,
+                  "atWord": 15
+                }
+              ],
+              "id": "gemini",
+              "src": "rec/where-keys-come-from/seg-09.mp4",
+              "frames": 106,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "title": {
+                  "x": 370,
+                  "y": 249,
+                  "w": 421,
+                  "h": 40
                 }
               },
               "ink": [
@@ -504,7 +2855,7 @@
                 },
                 {
                   "x": 24,
-                  "y": 121,
+                  "y": 122,
                   "w": 80,
                   "h": 19
                 },
@@ -512,61 +2863,61 @@
                   "x": 664,
                   "y": 145,
                   "w": 213,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 151,
                   "w": 104,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 179,
                   "w": 104,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 207,
                   "w": 104,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 370,
-                  "y": 213,
+                  "y": 214,
                   "w": 421,
-                  "h": 76
+                  "h": 75
                 },
                 {
                   "x": 1322,
                   "y": 235,
                   "w": 104,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 263,
                   "w": 156,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 24,
                   "y": 277,
                   "w": 121,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 291,
                   "w": 164,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 319,
                   "w": 136,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 370,
@@ -578,25 +2929,25 @@
                   "x": 1322,
                   "y": 347,
                   "w": 131,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 375,
                   "w": 131,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 24,
-                  "y": 399,
+                  "y": 398,
                   "w": 136,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 403,
                   "w": 117,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 411,
@@ -611,52 +2962,52 @@
                   "h": 85
                 },
                 {
-                  "x": 24,
-                  "y": 427,
-                  "w": 84,
-                  "h": 16
-                },
-                {
                   "x": 1322,
                   "y": 431,
                   "w": 170,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 459,
                   "w": 144,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 24,
-                  "y": 483,
+                  "y": 482,
                   "w": 117,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 487,
                   "w": 185,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 515,
                   "w": 188,
-                  "h": 36
+                  "h": 37
                 },
                 {
                   "x": 1322,
                   "y": 563,
                   "w": 214,
-                  "h": 36
+                  "h": 37
+                },
+                {
+                  "x": 411,
+                  "y": 594,
+                  "w": 24,
+                  "h": 167
                 },
                 {
                   "x": 24,
-                  "y": 595,
+                  "y": 594,
                   "w": 92,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 447,
@@ -674,19 +3025,25 @@
                   "x": 1322,
                   "y": 611,
                   "w": 184,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
                   "y": 639,
                   "w": 145,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 447,
                   "y": 643,
                   "w": 186,
                   "h": 19
+                },
+                {
+                  "x": 858,
+                  "y": 663,
+                  "w": 24,
+                  "h": 121
                 },
                 {
                   "x": 894,
@@ -698,13 +3055,7 @@
                   "x": 1322,
                   "y": 667,
                   "w": 215,
-                  "h": 36
-                },
-                {
-                  "x": 24,
-                  "y": 679,
-                  "w": 83,
-                  "h": 16
+                  "h": 37
                 },
                 {
                   "x": 447,
@@ -722,7 +3073,7 @@
                   "x": 1322,
                   "y": 715,
                   "w": 92,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 447,
@@ -734,7 +3085,7 @@
                   "x": 1322,
                   "y": 743,
                   "w": 104,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 894,
@@ -746,7 +3097,7 @@
                   "x": 1322,
                   "y": 771,
                   "w": 131,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 24,
@@ -758,7 +3109,7 @@
                   "x": 1322,
                   "y": 799,
                   "w": 220,
-                  "h": 36
+                  "h": 37
                 },
                 {
                   "x": 978,
@@ -776,20 +3127,68 @@
                   "x": 1322,
                   "y": 847,
                   "w": 188,
-                  "h": 36
+                  "h": 37
                 }
               ],
               "shows": "Gemini Developer API pricing",
-              "atWord": 2.167
+              "atWord": 4
             },
             {
-              "ref": "rec:where-keys-come-from#freetier",
-              "label": "the line that decides it",
+              "ref": "rec:where-keys-come-from#geminidata",
+              "label": "their own two columns",
               "focus": true,
-              "wantAtWord": 29.083,
-              "id": "freetier",
-              "src": "rec/where-keys-come-from/seg-03.mp4",
-              "frames": 69,
+              "wantAtWord": 24,
+              "zooms": [
+                {
+                  "mark": "free",
+                  "wantAtWord": 35,
+                  "atWord": 35
+                },
+                {
+                  "mark": "improve",
+                  "wantAtWord": 47,
+                  "atWord": 64
+                },
+                {
+                  "mark": "paid",
+                  "wantAtWord": 73,
+                  "atWord": 87
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 93,
+                  "atWord": 110
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "free: your content trains them",
+                  "mark": "improve",
+                  "side": "left",
+                  "color": "orange",
+                  "wantAtWord": 63,
+                  "atWord": 63
+                },
+                {
+                  "text": "paid: it does not",
+                  "mark": "paid",
+                  "side": "left",
+                  "color": "green",
+                  "wantAtWord": 27,
+                  "atWord": 75
+                },
+                {
+                  "text": "a work file is a different decision",
+                  "mark": "improve",
+                  "side": "bottom",
+                  "color": "purple",
+                  "wantAtWord": 105,
+                  "atWord": 105
+                }
+              ],
+              "id": "geminidata",
+              "src": "rec/where-keys-come-from/seg-10.mp4",
+              "frames": 60,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -797,20 +3196,26 @@
                 "h": 900
               },
               "marks": {
-                "tier": {
-                  "x": 616,
-                  "y": 240,
-                  "w": 31,
+                "improve": {
+                  "x": 447,
+                  "y": 708,
+                  "w": 269,
                   "h": 19
+                },
+                "free": {
+                  "x": 411,
+                  "y": 396,
+                  "w": 57,
+                  "h": 35
+                },
+                "paid": {
+                  "x": 858,
+                  "y": 397,
+                  "w": 55,
+                  "h": 35
                 }
               },
               "ink": [
-                {
-                  "x": 447,
-                  "y": 0,
-                  "w": 173,
-                  "h": 8
-                },
                 {
                   "x": 24,
                   "y": 8,
@@ -818,22 +3223,16 @@
                   "h": 32
                 },
                 {
-                  "x": 894,
-                  "y": 12,
-                  "w": 221,
-                  "h": 19
+                  "x": 1322,
+                  "y": 10,
+                  "w": 144,
+                  "h": 23
                 },
                 {
-                  "x": 447,
-                  "y": 35,
-                  "w": 269,
-                  "h": 19
-                },
-                {
-                  "x": 894,
-                  "y": 58,
-                  "w": 249,
-                  "h": 43
+                  "x": 1322,
+                  "y": 16,
+                  "w": 185,
+                  "h": 39
                 },
                 {
                   "x": 93,
@@ -842,232 +3241,238 @@
                   "h": 18
                 },
                 {
+                  "x": 1322,
+                  "y": 66,
+                  "w": 188,
+                  "h": 37
+                },
+                {
+                  "x": 1322,
+                  "y": 114,
+                  "w": 214,
+                  "h": 37
+                },
+                {
+                  "x": 664,
+                  "y": 118,
+                  "w": 213,
+                  "h": 17
+                },
+                {
                   "x": 24,
-                  "y": 121,
+                  "y": 122,
                   "w": 80,
                   "h": 19
                 },
                 {
-                  "x": 978,
-                  "y": 126,
+                  "x": 1322,
+                  "y": 162,
+                  "w": 184,
+                  "h": 17
+                },
+                {
+                  "x": 370,
+                  "y": 187,
+                  "w": 421,
+                  "h": 75
+                },
+                {
+                  "x": 1322,
+                  "y": 190,
                   "w": 145,
-                  "h": 19
-                },
-                {
-                  "x": 894,
-                  "y": 126,
-                  "w": 63,
-                  "h": 43
+                  "h": 17
                 },
                 {
                   "x": 1322,
-                  "y": 151,
-                  "w": 104,
-                  "h": 16
+                  "y": 218,
+                  "w": 215,
+                  "h": 37
                 },
                 {
                   "x": 1322,
-                  "y": 179,
-                  "w": 104,
-                  "h": 16
-                },
-                {
-                  "x": 1322,
-                  "y": 207,
-                  "w": 104,
-                  "h": 16
-                },
-                {
-                  "x": 1322,
-                  "y": 235,
-                  "w": 104,
-                  "h": 16
-                },
-                {
-                  "x": 966,
-                  "y": 239,
-                  "w": 114,
-                  "h": 19
-                },
-                {
-                  "x": 507,
-                  "y": 240,
-                  "w": 140,
-                  "h": 19
-                },
-                {
-                  "x": 1322,
-                  "y": 263,
-                  "w": 156,
-                  "h": 16
+                  "y": 266,
+                  "w": 92,
+                  "h": 17
                 },
                 {
                   "x": 24,
                   "y": 277,
                   "w": 121,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
-                  "y": 291,
-                  "w": 164,
-                  "h": 16
+                  "y": 294,
+                  "w": 104,
+                  "h": 17
+                },
+                {
+                  "x": 370,
+                  "y": 297,
+                  "w": 788,
+                  "h": 43
                 },
                 {
                   "x": 1322,
-                  "y": 319,
-                  "w": 136,
-                  "h": 16
-                },
-                {
-                  "x": 1322,
-                  "y": 347,
+                  "y": 322,
                   "w": 131,
-                  "h": 16
+                  "h": 17
                 },
                 {
                   "x": 1322,
-                  "y": 375,
-                  "w": 131,
-                  "h": 16
+                  "y": 350,
+                  "w": 220,
+                  "h": 37
                 },
                 {
                   "x": 411,
-                  "y": 385,
-                  "w": 324,
-                  "h": 109
+                  "y": 396,
+                  "w": 293,
+                  "h": 85
                 },
                 {
-                  "x": 24,
-                  "y": 399,
-                  "w": 136,
-                  "h": 16
-                },
-                {
-                  "x": 1322,
-                  "y": 403,
-                  "w": 117,
-                  "h": 16
-                },
-                {
-                  "x": 24,
-                  "y": 427,
-                  "w": 84,
-                  "h": 16
+                  "x": 858,
+                  "y": 397,
+                  "w": 328,
+                  "h": 85
                 },
                 {
                   "x": 1322,
-                  "y": 431,
-                  "w": 170,
-                  "h": 16
-                },
-                {
-                  "x": 1322,
-                  "y": 459,
-                  "w": 144,
-                  "h": 16
-                },
-                {
-                  "x": 24,
-                  "y": 483,
-                  "w": 117,
-                  "h": 16
-                },
-                {
-                  "x": 1322,
-                  "y": 487,
-                  "w": 185,
-                  "h": 16
-                },
-                {
-                  "x": 1322,
-                  "y": 515,
+                  "y": 398,
                   "w": 188,
-                  "h": 36
-                },
-                {
-                  "x": 447,
-                  "y": 559,
-                  "w": 286,
-                  "h": 43
-                },
-                {
-                  "x": 1322,
-                  "y": 563,
-                  "w": 214,
-                  "h": 36
+                  "h": 37
                 },
                 {
                   "x": 24,
-                  "y": 595,
-                  "w": 92,
-                  "h": 16
+                  "y": 398,
+                  "w": 136,
+                  "h": 17
+                },
+                {
+                  "x": 24,
+                  "y": 426,
+                  "w": 84,
+                  "h": 17
                 },
                 {
                   "x": 1322,
-                  "y": 611,
+                  "y": 446,
                   "w": 184,
-                  "h": 16
-                },
-                {
-                  "x": 447,
-                  "y": 627,
-                  "w": 199,
-                  "h": 19
+                  "h": 17
                 },
                 {
                   "x": 1322,
-                  "y": 639,
-                  "w": 145,
-                  "h": 16
-                },
-                {
-                  "x": 1322,
-                  "y": 667,
-                  "w": 215,
-                  "h": 36
-                },
-                {
-                  "x": 447,
-                  "y": 673,
-                  "w": 231,
-                  "h": 19
+                  "y": 474,
+                  "w": 172,
+                  "h": 17
                 },
                 {
                   "x": 24,
-                  "y": 679,
-                  "w": 83,
-                  "h": 16
+                  "y": 482,
+                  "w": 117,
+                  "h": 17
                 },
                 {
-                  "x": 1322,
-                  "y": 715,
-                  "w": 92,
-                  "h": 16
+                  "x": 411,
+                  "y": 567,
+                  "w": 24,
+                  "h": 167
                 },
                 {
                   "x": 447,
-                  "y": 719,
-                  "w": 166,
+                  "y": 570,
+                  "w": 236,
                   "h": 19
                 },
                 {
-                  "x": 1322,
-                  "y": 743,
-                  "w": 104,
-                  "h": 16
-                },
-                {
-                  "x": 447,
-                  "y": 765,
-                  "w": 251,
+                  "x": 894,
+                  "y": 571,
+                  "w": 226,
                   "h": 43
                 },
                 {
                   "x": 1322,
-                  "y": 771,
-                  "w": 131,
-                  "h": 16
+                  "y": 586,
+                  "w": 129,
+                  "h": 17
+                },
+                {
+                  "x": 24,
+                  "y": 594,
+                  "w": 92,
+                  "h": 17
+                },
+                {
+                  "x": 1322,
+                  "y": 614,
+                  "w": 118,
+                  "h": 17
+                },
+                {
+                  "x": 447,
+                  "y": 616,
+                  "w": 186,
+                  "h": 19
+                },
+                {
+                  "x": 858,
+                  "y": 636,
+                  "w": 24,
+                  "h": 121
+                },
+                {
+                  "x": 894,
+                  "y": 639,
+                  "w": 190,
+                  "h": 19
+                },
+                {
+                  "x": 1322,
+                  "y": 642,
+                  "w": 186,
+                  "h": 17
+                },
+                {
+                  "x": 447,
+                  "y": 662,
+                  "w": 173,
+                  "h": 19
+                },
+                {
+                  "x": 1322,
+                  "y": 670,
+                  "w": 201,
+                  "h": 37
+                },
+                {
+                  "x": 894,
+                  "y": 685,
+                  "w": 221,
+                  "h": 19
+                },
+                {
+                  "x": 447,
+                  "y": 708,
+                  "w": 269,
+                  "h": 19
+                },
+                {
+                  "x": 1322,
+                  "y": 718,
+                  "w": 198,
+                  "h": 17
+                },
+                {
+                  "x": 894,
+                  "y": 731,
+                  "w": 249,
+                  "h": 43
+                },
+                {
+                  "x": 1322,
+                  "y": 746,
+                  "w": 211,
+                  "h": 17
                 },
                 {
                   "x": 24,
@@ -1076,127 +3481,48 @@
                   "h": 19
                 },
                 {
-                  "x": 1322,
+                  "x": 978,
                   "y": 799,
-                  "w": 220,
-                  "h": 36
-                },
-                {
-                  "x": 447,
-                  "y": 833,
-                  "w": 229,
+                  "w": 145,
                   "h": 19
                 },
                 {
+                  "x": 894,
+                  "y": 799,
+                  "w": 63,
+                  "h": 43
+                },
+                {
                   "x": 1322,
-                  "y": 847,
-                  "w": 188,
-                  "h": 36
+                  "y": 802,
+                  "w": 99,
+                  "h": 17
+                },
+                {
+                  "x": 1322,
+                  "y": 830,
+                  "w": 110,
+                  "h": 17
                 }
               ],
-              "shows": "Enterprise",
-              "atWord": 29.083
-            }
-          ],
-          "sourceNote": "Source: ai.google.dev/gemini-api/docs/pricing — read 2026-09-04",
-          "capture": {
-            "width": 1600,
-            "height": 900
-          },
-          "atWord": 1
-        }
-      },
-      "durationFrames": 637,
-      "audio": "audio/ai-on-your-own-files_s07.mp3",
-      "timingSource": "tts"
-    },
-    {
-      "id": "s08",
-      "type": "SPEC_COMPARE",
-      "narration": "So, three doors. On your own laptop, Ollama — free, and nothing leaves the machine. In the cloud with no card at all, Groq or Google. Or you pay, and for a few hundred files a month that comes to roughly a pound. Start on a free door and change your mind later, because swapping is three lines in a file and no code at all.",
-      "transition": "iris",
-      "background": "zoneB",
-      "data": {
-        "compare": {
-          "headline": "Three doors, and what each costs",
-          "a": {
-            "name": "free",
-            "color": "green"
-          },
-          "b": {
-            "name": "paid",
-            "color": "blue"
-          },
-          "rows": [
-            {
-              "label": "On your own laptop",
-              "a": "Ollama",
-              "b": "—",
-              "winner": "a",
-              "atWord": 5.417
+              "shows": "Gemini Developer API pricing",
+              "atWord": 24
             },
-            {
-              "label": "Nothing leaves the PC",
-              "a": "Ollama",
-              "b": "no",
-              "winner": "a",
-              "atWord": 12
-            },
-            {
-              "label": "Cloud, no card",
-              "a": "Groq · Google",
-              "b": "—",
-              "winner": "a",
-              "atWord": 15.667
-            },
-            {
-              "label": "A few hundred files",
-              "a": "£0",
-              "b": "~£1",
-              "atWord": 26.417
-            },
-            {
-              "label": "Switching later",
-              "a": "3 lines",
-              "b": "3 lines",
-              "atWord": 40.333
-            }
-          ],
-          "atWord": 2.167
-        },
-        "source": "Read from the providers’ own pages, 2026-09-04"
-      },
-      "durationFrames": 585,
-      "audio": "audio/ai-on-your-own-files_s08.mp3",
-      "timingSource": "tts"
-    },
-    {
-      "id": "s09",
-      "type": "RECORDED_STEP",
-      "narration": "Groq works the same way — a key with no card, and rate limits instead of a bill. Requests per minute, tokens per minute, and when you hit one you wait rather than pay. I'm going to use a fourth door for the rest of this video: Azure OpenAI, because that's what my employer already pays for, and it's the same three settings. Whichever door you pick, everything from here is identical.",
-      "transition": "fade",
-      "background": "zoneC",
-      "data": {
-        "recordedStep": {
-          "caption": "limits instead of a bill",
-          "premise": "Groq’s published rate limits.",
-          "layout": "full",
-          "color": "blue",
-          "clips": [
             {
               "ref": "rec:where-keys-come-from#groq",
-              "label": "the limits, published",
+              "label": "Groq, the same way",
               "focus": true,
+              "wantAtWord": 110,
               "zooms": [
                 {
                   "mark": "limits",
-                  "wantAtWord": 16,
-                  "atWord": 16
+                  "wantAtWord": 118,
+                  "atWord": 124
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 32.917,
-                  "atWord": 41.583
+                  "wantAtWord": 139,
+                  "atWord": 135
                 }
               ],
               "callouts": [
@@ -1205,13 +3531,13 @@
                   "mark": "limits",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 22.167,
-                  "atWord": 22.167
+                  "wantAtWord": 136,
+                  "atWord": 130
                 }
               ],
               "id": "groq",
-              "src": "rec/where-keys-come-from/seg-04.mp4",
-              "frames": 79,
+              "src": "rec/where-keys-come-from/seg-11.mp4",
+              "frames": 98,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -1259,13 +3585,13 @@
                 },
                 {
                   "x": 370,
-                  "y": 99,
+                  "y": 100,
                   "w": 128,
                   "h": 31
                 },
                 {
                   "x": 1030,
-                  "y": 106,
+                  "y": 107,
                   "w": 73,
                   "h": 17
                 },
@@ -1277,19 +3603,19 @@
                 },
                 {
                   "x": 1200,
-                  "y": 133,
+                  "y": 134,
                   "w": 167,
                   "h": 17
                 },
                 {
                   "x": 370,
-                  "y": 147,
+                  "y": 148,
                   "w": 774,
                   "h": 57
                 },
                 {
                   "x": 1200,
-                  "y": 161,
+                  "y": 162,
                   "w": 68,
                   "h": 17
                 },
@@ -1301,7 +3627,7 @@
                 },
                 {
                   "x": 1200,
-                  "y": 189,
+                  "y": 190,
                   "w": 118,
                   "h": 17
                 },
@@ -1313,7 +3639,7 @@
                 },
                 {
                   "x": 1200,
-                  "y": 217,
+                  "y": 218,
                   "w": 128,
                   "h": 17
                 },
@@ -1337,7 +3663,7 @@
                 },
                 {
                   "x": 370,
-                  "y": 295,
+                  "y": 296,
                   "w": 182,
                   "h": 17
                 },
@@ -1349,13 +3675,13 @@
                 },
                 {
                   "x": 427,
-                  "y": 327,
+                  "y": 328,
                   "w": 185,
                   "h": 199
                 },
                 {
                   "x": 394,
-                  "y": 327,
+                  "y": 328,
                   "w": 46,
                   "h": 199
                 },
@@ -1403,13 +3729,13 @@
                 },
                 {
                   "x": 502,
-                  "y": 560,
+                  "y": 561,
                   "w": 250,
                   "h": 17
                 },
                 {
                   "x": 403,
-                  "y": 560,
+                  "y": 561,
                   "w": 99,
                   "h": 17
                 },
@@ -1420,16 +3746,16 @@
                   "h": 18
                 },
                 {
-                  "x": 370,
-                  "y": 617,
-                  "w": 718,
-                  "h": 37
-                },
-                {
                   "x": 20,
                   "y": 617,
                   "w": 71,
                   "h": 18
+                },
+                {
+                  "x": 370,
+                  "y": 618,
+                  "w": 718,
+                  "h": 37
                 },
                 {
                   "x": 20,
@@ -1445,13 +3771,13 @@
                 },
                 {
                   "x": 370,
-                  "y": 693,
+                  "y": 694,
                   "w": 777,
                   "h": 37
                 },
                 {
                   "x": 370,
-                  "y": 693,
+                  "y": 694,
                   "w": 63,
                   "h": 17
                 },
@@ -1463,9 +3789,9 @@
                 },
                 {
                   "x": 370,
-                  "y": 765,
+                  "y": 766,
                   "w": 384,
-                  "h": 21
+                  "h": 20
                 },
                 {
                   "x": 20,
@@ -1481,7 +3807,7 @@
                 },
                 {
                   "x": 370,
-                  "y": 801,
+                  "y": 802,
                   "w": 742,
                   "h": 57
                 },
@@ -1499,38 +3825,40 @@
                 },
                 {
                   "x": 460,
-                  "y": 873,
+                  "y": 874,
                   "w": 688,
                   "h": 27
                 },
                 {
                   "x": 370,
-                  "y": 873,
+                  "y": 874,
                   "w": 528,
                   "h": 27
                 },
                 {
                   "x": 898,
-                  "y": 873,
+                  "y": 874,
                   "w": 76,
                   "h": 17
                 }
               ],
               "shows": "Rate Limits",
-              "atWord": 1.75
+              "atWord": 110
             }
           ],
-          "sourceNote": "Source: console.groq.com/docs/rate-limits — read 2026-09-04",
+          "sourceNote": "Sources: ai.google.dev/gemini-api/docs/pricing · console.groq.com — read 2026-09-04",
+          "card": {
+            "place": "right",
+            "width": 0.24
+          },
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 691,
-      "audio": "audio/ai-on-your-own-files_s09.mp3",
-      "timingSource": "tts"
+      "durationFrames": 2061
     },
     {
       "id": "s10",
@@ -1544,10 +3872,7 @@
           "title": "From an empty folder",
           "subtitle": "one command, and Python comes with it"
         }
-      },
-      "durationFrames": 173,
-      "audio": "audio/ai-on-your-own-files_s10.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s11",
@@ -1572,8 +3897,8 @@
                   "mark": "csv",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 8.083,
-                  "atWord": 8.083
+                  "wantAtWord": 13,
+                  "atWord": 13
                 }
               ],
               "id": "look",
@@ -1608,21 +3933,21 @@
                 }
               ],
               "shows": "$ ls",
-              "atWord": 1.417
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#peek",
               "label": "the first rows",
               "focus": true,
-              "wantAtWord": 29.25,
+              "wantAtWord": 41,
               "callouts": [
                 {
                   "text": "a header, then data",
                   "mark": "header",
                   "side": "bottom",
                   "color": "green",
-                  "wantAtWord": 30.333,
-                  "atWord": 40.25
+                  "wantAtWord": 43,
+                  "atWord": 52
                 }
               ],
               "id": "peek",
@@ -1663,19 +3988,17 @@
                 }
               ],
               "shows": "$ head -3 orders.csv",
-              "atWord": 29.25
+              "atWord": 41
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 611,
-      "audio": "audio/ai-on-your-own-files_s11.mp3",
-      "timingSource": "tts"
+      "durationFrames": 849
     },
     {
       "id": "s12",
@@ -1690,17 +4013,17 @@
             {
               "icon": "si:python",
               "label": "Python install",
-              "atWord": 1
+              "atWord": 2
             },
             {
               "icon": "lucide:box",
               "label": "virtual env",
-              "atWord": 4.5
+              "atWord": 5
             },
             {
               "icon": "lucide:package",
               "label": "pip",
-              "atWord": 8.083
+              "atWord": 7
             },
             {
               "icon": "lucide:file-text",
@@ -1709,10 +4032,7 @@
             }
           ]
         }
-      },
-      "durationFrames": 679,
-      "audio": "audio/ai-on-your-own-files_s12.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s13",
@@ -1737,8 +4057,8 @@
                   "mark": "made",
                   "side": "bottom",
                   "color": "green",
-                  "wantAtWord": 10.167,
-                  "atWord": 13.583
+                  "wantAtWord": 10,
+                  "atWord": 14
                 }
               ],
               "id": "init",
@@ -1773,29 +4093,29 @@
                 }
               ],
               "shows": "$ uv init --app",
-              "atWord": 5.583
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#tree",
               "label": "what it wrote",
               "focus": true,
-              "wantAtWord": 14.333,
+              "wantAtWord": 15,
               "callouts": [
                 {
                   "text": "what this project needs",
                   "mark": "proj",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 16.833,
-                  "atWord": 25.75
+                  "wantAtWord": 19,
+                  "atWord": 30
                 },
                 {
                   "text": "which Python to use",
                   "mark": "pyver",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 30.75,
-                  "atWord": 30.75
+                  "wantAtWord": 35,
+                  "atWord": 35
                 }
               ],
               "id": "tree",
@@ -1836,21 +4156,21 @@
                 }
               ],
               "shows": "$ ls -a",
-              "atWord": 14.333
+              "atWord": 15
             },
             {
               "ref": "rec:azure-full#add",
               "label": "installing the library",
               "focus": true,
-              "wantAtWord": 40,
+              "wantAtWord": 49,
               "callouts": [
                 {
                   "text": "this one talks to all of them",
                   "mark": "lib",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 58.25,
-                  "atWord": 58.25
+                  "wantAtWord": 67,
+                  "atWord": 67
                 }
               ],
               "id": "add",
@@ -1885,19 +4205,17 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 40
+              "atWord": 49
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2.75
+          "atWord": 2
         }
       },
-      "durationFrames": 966,
-      "audio": "audio/ai-on-your-own-files_s13.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1137
     },
     {
       "id": "s14",
@@ -1911,10 +4229,7 @@
           "title": "Where the key lives",
           "subtitle": "never in your code — not once"
         }
-      },
-      "durationFrames": 137,
-      "audio": "audio/ai-on-your-own-files_s14.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s15",
@@ -1947,12 +4262,9 @@
             "plus": 1,
             "minus": 1
           },
-          "atWord": 1.167
+          "atWord": 4
         }
-      },
-      "durationFrames": 398,
-      "audio": "audio/ai-on-your-own-files_s15.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s16",
@@ -1993,37 +4305,37 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 1.75
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#typeenv",
               "label": "three lines, typed",
               "focus": true,
-              "wantAtWord": 28.167,
+              "wantAtWord": 37,
               "callouts": [
                 {
                   "text": "the address you talk to",
                   "mark": "url",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 30.583,
-                  "atWord": 43.667
+                  "wantAtWord": 41,
+                  "atWord": 59
                 },
                 {
                   "text": "masked — yours goes here",
                   "mark": "masked",
                   "side": "right",
                   "color": "red",
-                  "wantAtWord": 50.167,
-                  "atWord": 50.167
+                  "wantAtWord": 68,
+                  "atWord": 68
                 },
                 {
                   "text": "which brain",
                   "mark": "model",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 66.25,
-                  "atWord": 53.333
+                  "wantAtWord": 91,
+                  "atWord": 73
                 }
               ],
               "id": "typeenv",
@@ -2070,13 +4382,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 28.167
+              "atWord": 37
             },
             {
               "ref": "rec:azure-full#saveenv",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 73.75,
+              "wantAtWord": 96,
               "id": "saveenv",
               "src": "rec/azure-full/seg-08.mp4",
               "frames": 38,
@@ -2105,24 +4417,22 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 58
+              "atWord": 80
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 1164,
-      "audio": "audio/ai-on-your-own-files_s16.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1521
     },
     {
       "id": "s17",
       "type": "PIPELINE_GATE",
-      "narration": "So what does gitignore actually do? Every file in that folder is queued to go wherever the code goes. Gitignore is the list that stops one. Put dot env on it, and your settings stay on your machine however many times you push.",
+      "narration": "So what does gitignore actually do? Every file in that folder is queued to go wherever the code goes. Gitignore is the list that stops one. Put dot env on it, and your settings stay put however often you push.",
       "transition": "fade",
       "background": "zoneB",
       "data": {
@@ -2138,12 +4448,9 @@
           ],
           "footNote": "one line, written once, on day one",
           "color": "green",
-          "atWord": 18.333
+          "atWord": 25
         }
-      },
-      "durationFrames": 403,
-      "audio": "audio/ai-on-your-own-files_s17.mp3",
-      "timingSource": "tts"
+      }
     },
     {
       "id": "s18",
@@ -2184,21 +4491,21 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 1.75
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#typeignore",
               "label": "one line, typed",
               "focus": true,
-              "wantAtWord": 11.333,
+              "wantAtWord": 18,
               "callouts": [
                 {
                   "text": "thirty seconds, once",
                   "mark": "ignored",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 15.417,
-                  "atWord": 34.833
+                  "wantAtWord": 24,
+                  "atWord": 57
                 }
               ],
               "id": "typeignore",
@@ -2233,13 +4540,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 28.167
+              "atWord": 44
             },
             {
               "ref": "rec:azure-full#saveignore",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 26.083,
+              "wantAtWord": 43,
               "id": "saveignore",
               "src": "rec/azure-full/seg-11.mp4",
               "frames": 38,
@@ -2268,43 +4575,155 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 39.333
+              "atWord": 62
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 662,
-      "audio": "audio/ai-on-your-own-files_s18.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1017
     },
     {
       "id": "s19",
-      "type": "CHAPTER",
-      "narration": "Now the bit you came for. Nine lines, and you are talking to a model.",
+      "type": "TOKENIZER",
+      "narration": "That word, tokens, matters, because every bill is counted in them. A model reads neither letters nor words. It reads tokens — chunks of text: a whole word, half of one, sometimes just a space.",
       "transition": "slide",
       "background": "zoneA",
+      "data": {
+        "tokenizer": {
+          "headline": "What you are actually billed for",
+          "text": "Reply with exactly the word: ready",
+          "tokens": [
+            {
+              "text": "Reply",
+              "id": 30003
+            },
+            {
+              "text": " with",
+              "id": 483,
+              "color": "blue"
+            },
+            {
+              "text": " exactly",
+              "id": 7041
+            },
+            {
+              "text": " the",
+              "id": 290,
+              "color": "blue"
+            },
+            {
+              "text": " word",
+              "id": 2195
+            },
+            {
+              "text": ":",
+              "id": 25,
+              "color": "purple"
+            },
+            {
+              "text": " ready",
+              "id": 5527,
+              "color": "green"
+            }
+          ],
+          "atWord": 3
+        }
+      }
+    },
+    {
+      "id": "s20",
+      "type": "DIAGRAM",
+      "narration": "One more idea before we write code, because this one trips up everybody. How does a Python program read a file it never opens? Your settings live in dot env, on disk. Your program never opens that file itself. Instead, one line — load dotenv — reads it once at start-up and copies each name and value into something called the environment: a little noticeboard that belongs to the running program. After that, os dot getenv, of AI underscore API underscore KEY, just reads the value off the noticeboard. And that indirection is the whole point. Your code only ever names the setting; it never contains the value. So the same file runs on your laptop and on a build server, with a different key on each, and not one line changes.",
+      "transition": "zoom",
+      "background": "zoneB",
+      "data": {
+        "diagram": {
+          "layout": "flow",
+          "direction": "horizontal",
+          "nodes": [
+            {
+              "id": "f",
+              "label": ".env",
+              "sub": "on disk, git-ignored",
+              "color": "red",
+              "atWord": 32
+            },
+            {
+              "id": "l",
+              "label": "load_dotenv()",
+              "sub": "reads it once",
+              "color": "blue",
+              "atWord": 45
+            },
+            {
+              "id": "e",
+              "label": "the environment",
+              "sub": "a noticeboard",
+              "color": "purple",
+              "atWord": 65
+            },
+            {
+              "id": "g",
+              "label": "os.getenv(...)",
+              "sub": "your code, by name",
+              "color": "green",
+              "atWord": 76
+            }
+          ],
+          "edges": [
+            {
+              "from": "f",
+              "to": "l",
+              "label": "at start-up",
+              "atWord": 49
+            },
+            {
+              "from": "l",
+              "to": "e",
+              "label": "name and value",
+              "atWord": 53
+            },
+            {
+              "from": "e",
+              "to": "g",
+              "label": "never the value",
+              "atWord": 84
+            },
+            {
+              "from": "f",
+              "to": "g",
+              "label": "same code",
+              "atWord": 92
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s21",
+      "type": "CHAPTER",
+      "narration": "Now the bit you came for. Nine lines, and you are talking to a model.",
+      "transition": "wipe",
+      "background": "zoneC",
       "data": {
         "chapter": {
           "number": "04",
           "title": "Your first call",
           "subtitle": "nine lines, and what each one does"
         }
-      },
-      "durationFrames": 170,
-      "audio": "audio/ai-on-your-own-files_s19.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s20",
+      "id": "s22",
       "type": "RECORDED_STEP",
       "narration": "New file, ask dot py, and we write it together, line by line. Import os, so we can read those settings. Import load dotenv, which is the thing that actually reads the settings file. Import OpenAI — the library, remember, not the company. Call load dotenv, and the settings are available. Then build the client. Base URL and api key, both pulled from the file rather than typed here. That's the client finished, and it works against any of the four doors we looked at.",
-      "transition": "zoom",
-      "background": "zoneB",
+      "transition": "dip",
+      "background": "zoneA",
       "data": {
         "recordedStep": {
           "caption": "imports, then the client",
@@ -2338,29 +4757,29 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 2.667
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#client",
               "label": "imports, then the client",
               "focus": true,
-              "wantAtWord": 10,
+              "wantAtWord": 14,
               "callouts": [
                 {
                   "text": "the library, not the company",
                   "mark": "import",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 36.167,
-                  "atWord": 56.083
+                  "wantAtWord": 43,
+                  "atWord": 67
                 },
                 {
                   "text": "from the file, not from here",
                   "mark": "apikey",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 53.75,
-                  "atWord": 56.667
+                  "wantAtWord": 62,
+                  "atWord": 68
                 }
               ],
               "id": "client",
@@ -2419,26 +4838,24 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 39.5
+              "atWord": 46
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 854,
-      "audio": "audio/ai-on-your-own-files_s20.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1066
     },
     {
-      "id": "s21",
+      "id": "s23",
       "type": "DIAGRAM",
-      "narration": "Your program on one side, the model on the other — that is what a call actually is, and once you have this, everything else in the video is a variation on it. You send a list of messages. Each message has a role — who is speaking — and content, which is what they said. The model reads the list and adds one message of its own. You read that reply out of choices, index zero, message, content. That's the whole interface, and the interface doesn't get bigger than this.",
-      "transition": "wipe",
-      "background": "zoneC",
+      "narration": "Your program on one side, the model on the other — that is what a call actually is, and once you have this, everything else in the video is a variation on it. You send a list of messages. Each message has a role — who is speaking — and content, which is what they said. The model reads the list and adds one message of its own. You read that reply out of choices, index zero, message, content. That's the whole interface.",
+      "transition": "morph",
+      "background": "zoneB",
       "data": {
         "diagram": {
           "layout": "sequence",
@@ -2448,14 +4865,14 @@
               "label": "Your program",
               "sub": "builds the list",
               "color": "blue",
-              "atWord": 1
+              "atWord": 2
             },
             {
               "id": "mdl",
               "label": "The model",
               "sub": "reads, then replies",
               "color": "purple",
-              "atWord": 4.083
+              "atWord": 7
             }
           ],
           "edges": [
@@ -2463,27 +4880,30 @@
               "from": "you",
               "to": "mdl",
               "label": "role and content",
-              "atWord": 28
+              "atWord": 44
+            },
+            {
+              "from": "mdl",
+              "to": "you",
+              "label": "one more message",
+              "atWord": 63
             },
             {
               "from": "mdl",
               "to": "you",
               "label": "choices[0]",
-              "atWord": 50.667
+              "atWord": 68
             }
           ]
         }
-      },
-      "durationFrames": 786,
-      "audio": "audio/ai-on-your-own-files_s21.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s22",
+      "id": "s24",
       "type": "RECORDED_STEP",
-      "narration": "So: chat completions create. Model, from the settings. Messages, and this is that list. Role user, meaning this is you talking, and content, which is the question. Then print the reply, and print usage too, because usage is what you are billed on. Save it, run it — and there is the word back, from a gpt-4o deployment. Fourteen tokens went in and two came back. A token is roughly three quarters of a word, so that request cost a fraction of a penny.",
-      "transition": "dip",
-      "background": "zoneA",
+      "narration": "So: chat completions create. Model, from the settings. Messages, and this is that list. Role user, meaning this is you talking, and content, which is the question. Then print the reply, and print usage too, because usage is what you are billed on. Save it, run it — and there is the word back, from a gpt-4o deployment. Fourteen tokens went in and two came back. The rule of thumb worth carrying is that a token is about three quarters of a word, so a thousand words is roughly thirteen hundred tokens, and that request cost a fraction of a penny. It is also why a fifty row file is nothing and a forty thousand row file is a problem, which is the reason for everything we build next.",
+      "transition": "iris",
+      "background": "zoneC",
       "data": {
         "recordedStep": {
           "caption": "the call, and what it cost",
@@ -2501,24 +4921,24 @@
                   "mark": "messages",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 15.083,
-                  "atWord": 30.167
+                  "wantAtWord": 14,
+                  "atWord": 33
                 },
                 {
                   "text": "who is speaking",
                   "mark": "role",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 16.917,
-                  "atWord": 32.583
+                  "wantAtWord": 15,
+                  "atWord": 36
                 },
                 {
                   "text": "what you are billed on",
                   "mark": "usage",
                   "side": "right",
                   "color": "yellow",
-                  "wantAtWord": 35.5,
-                  "atWord": 35.5
+                  "wantAtWord": 42,
+                  "atWord": 42
                 }
               ],
               "id": "thecall",
@@ -2595,13 +5015,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 4.833
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#saveask",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 37.667,
+              "wantAtWord": 44,
               "id": "saveask",
               "src": "rec/azure-full/seg-15.mp4",
               "frames": 38,
@@ -2648,23 +5068,28 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 37.667
+              "atWord": 44
             },
             {
               "ref": "rec:azure-full#runask",
               "label": "running it",
               "focus": true,
-              "wantAtWord": 40.083,
+              "wantAtWord": 46,
               "zooms": [
                 {
                   "mark": "answer",
-                  "wantAtWord": 44,
-                  "atWord": 55.167
+                  "wantAtWord": 53,
+                  "atWord": 77
                 },
                 {
                   "mark": "tokens",
-                  "wantAtWord": 51.333,
-                  "atWord": 57.75
+                  "wantAtWord": 59,
+                  "atWord": 95
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 76,
+                  "atWord": 104
                 }
               ],
               "callouts": [
@@ -2673,8 +5098,8 @@
                   "mark": "answer",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 44.917,
-                  "atWord": 57.583
+                  "wantAtWord": 54,
+                  "atWord": 86
                 }
               ],
               "id": "runask",
@@ -2739,78 +5164,67 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 43.083
+              "atWord": 55
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2.75
+          "atWord": 2
         }
       },
-      "durationFrames": 871,
-      "audio": "audio/ai-on-your-own-files_s22.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1593
     },
     {
-      "id": "s23",
+      "id": "s25",
       "type": "CHAPTER",
       "narration": "So the model talks. Now let's point it at your own file.",
-      "transition": "morph",
-      "background": "zoneB",
+      "transition": "fade",
+      "background": "zoneA",
       "data": {
         "chapter": {
           "number": "05",
           "title": "Describing your file",
           "subtitle": "Python counts so the model needn’t"
         }
-      },
-      "durationFrames": 129,
-      "audio": "audio/ai-on-your-own-files_s23.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s24",
+      "id": "s26",
       "type": "STAT_CALLOUT",
-      "narration": "Forty thousand rows. An ordinary export, and the thing everybody tries to paste into a chat window first. On fifty rows, pasting works fine. At forty thousand it stops, because every row has to fit in the model's window at once.",
-      "transition": "iris",
-      "background": "zoneC",
+      "narration": "Forty thousand rows. An ordinary export, and the thing everybody pastes into a chat window first. On fifty rows, pasting works fine. At forty thousand it stops, because every row has to fit in the model's window at once.",
+      "transition": "push",
+      "background": "zoneB",
       "data": {
         "value": 40000,
         "label": "rows a paste cannot carry",
         "atWord": 1,
         "source": "An ordinary export off an ordinary system"
-      },
-      "durationFrames": 465,
-      "audio": "audio/ai-on-your-own-files_s24.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s25",
+      "id": "s27",
       "type": "KINETIC_TEXT",
       "narration": "So we do something cheaper and better. Python describes the file first, and we send the description instead — because a description stays the same size however big the file gets.",
-      "transition": "fade",
-      "background": "zoneA",
+      "transition": "slide",
+      "background": "zoneC",
       "data": {
         "kinetic": {
           "text": "Describe the file. Send the description.",
           "fx": "highlight",
           "sub": "the whole idea, in six words",
           "color": "green",
-          "atWord": 2.333
+          "atWord": 5
         }
-      },
-      "durationFrames": 324,
-      "audio": "audio/ai-on-your-own-files_s25.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s26",
+      "id": "s28",
       "type": "RECORDED_STEP",
-      "narration": "New file, describe dot py. Import csv — that's Python's own reader, and it costs nothing. Import statistics for the averages. Read the file into a list of rows. Dict reader hands back each row as a small dictionary, so we can ask for a column by name. Print how many rows we got, so we know the file actually loaded. Then walk the columns, one at a time, and for each column pull out its values, skipping the blanks. No AI involved yet, and nothing has left the machine — so far this is arithmetic.",
-      "transition": "push",
-      "background": "zoneB",
+      "narration": "New file, describe dot py. And I say file, not spreadsheet, on purpose, because everything here works on a server log with a hundred thousand lines, on the JSON that came back from an API call, on a test report from last night's run, or on an export from your ticketing system. Anything you can read in Python, you can describe in Python. Import csv — that's Python's own reader, and it costs nothing. Import statistics for the averages. Read the file into a list of rows. Dict reader hands back each row as a small dictionary, so we can ask for a column by name. Print how many rows we got, so we know the file actually loaded. Then walk the columns, one at a time, and for each column pull out its values, skipping the blanks. No AI involved yet, and nothing has left the machine — so far this is arithmetic. Which is worth saying plainly: half of this project never talks to a model at all.",
+      "transition": "zoom",
+      "background": "zoneA",
       "data": {
         "recordedStep": {
           "caption": "read the file, walk the columns",
@@ -2844,21 +5258,41 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 3.25
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#d1",
-              "label": "reading the file",
+              "label": "import csv, then read",
               "focus": true,
-              "wantAtWord": 6,
+              "wantAtWord": 64,
+              "zooms": [
+                {
+                  "mark": "reader",
+                  "wantAtWord": 65,
+                  "atWord": 87
+                },
+                {
+                  "mark": "count",
+                  "wantAtWord": 107,
+                  "atWord": 107
+                }
+              ],
               "callouts": [
                 {
                   "text": "Python's own reader",
                   "mark": "reader",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 29.75,
-                  "atWord": 47.083
+                  "wantAtWord": 88,
+                  "atWord": 88
+                },
+                {
+                  "text": "so we know it loaded",
+                  "mark": "count",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 119,
+                  "atWord": 119
                 }
               ],
               "id": "d1",
@@ -2905,21 +5339,41 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 37
+              "atWord": 64
             },
             {
               "ref": "rec:azure-full#d2",
               "label": "walking the columns",
               "focus": true,
-              "wantAtWord": 51.917,
+              "wantAtWord": 121,
+              "zooms": [
+                {
+                  "mark": "loop",
+                  "wantAtWord": 121,
+                  "atWord": 132
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 142,
+                  "atWord": 135
+                }
+              ],
               "callouts": [
+                {
+                  "text": "one column at a time",
+                  "mark": "loop",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 127,
+                  "atWord": 133
+                },
                 {
                   "text": "its values, blanks skipped",
                   "mark": "vals",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 65.333,
-                  "atWord": 60.25
+                  "wantAtWord": 138,
+                  "atWord": 136
                 }
               ],
               "id": "d2",
@@ -2972,51 +5426,45 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 51.917
+              "atWord": 121
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 948,
-      "audio": "audio/ai-on-your-own-files_s26.mp3",
-      "timingSource": "tts"
+      "durationFrames": 2085
     },
     {
-      "id": "s27",
-      "type": "FLIP_CARD",
-      "narration": "Now the question each column has to answer: is this a number, or is it a word? And the honest way to find out is to try. If every value converts, the column is a number column. If any value refuses, the column is text.",
-      "transition": "slide",
-      "background": "zoneC",
+      "id": "s29",
+      "type": "TYPE_GATE",
+      "narration": "Now the question each column has to answer: is this a number, or is it a word? And the honest way to find out is to try. If every value converts, the column is a number column. If any value refuses, the column is text, and text gets counted rather than measured.",
+      "transition": "wipe",
+      "background": "zoneB",
       "data": {
-        "flip": {
-          "front": {
-            "label": "try it",
-            "text": "Does every value convert?",
-            "color": "blue"
-          },
-          "back": {
-            "label": "then",
-            "text": "Measure it — or count it",
-            "color": "green"
-          },
-          "atWord": 16.583
+        "typeGate": {
+          "caption": "try it, and see which way it falls",
+          "premise": "Python does not ask what a column is. It tries to turn each value into a number, and the ones that refuse are the answer.",
+          "columnName": "delivery_days",
+          "columnType": "float()",
+          "goodValue": "4.10",
+          "badValue": "RapidPost",
+          "errorText": "ValueError: could not convert string to float: 'RapidPost'",
+          "passAtWord": 31,
+          "rejectAtWord": 41,
+          "atWord": 27
         }
-      },
-      "durationFrames": 453,
-      "audio": "audio/ai-on-your-own-files_s27.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s28",
+      "id": "s30",
       "type": "RECORDED_STEP",
       "narration": "So: an empty list for the numbers. Loop over the values, and try turning each one into a number. If that works it goes in the list; if it raises a value error we let it pass, because a word isn't a number and that's fine. Then, if the count of numbers matches the count of values, every one converted — so print the smallest, the largest and the average, all on one line. That's the whole numeric branch, and it's only three lines long. Otherwise the column is text, so count how often each value shows up, take the top three, and print those instead. Twenty lines, no model, and every figure exact, because Python counted rather than guessing. The AI hasn't been involved yet, and it doesn't need to be. Every one of those numbers comes out of the file, not out of a model.",
-      "transition": "zoom",
-      "background": "zoneA",
+      "transition": "dip",
+      "background": "zoneC",
       "data": {
         "recordedStep": {
           "caption": "numbers get measured, words get counted",
@@ -3031,8 +5479,8 @@
               "zooms": [
                 {
                   "mark": "try",
-                  "wantAtWord": 10.833,
-                  "atWord": 21.667
+                  "wantAtWord": 13,
+                  "atWord": 31
                 }
               ],
               "callouts": [
@@ -3041,8 +5489,8 @@
                   "mark": "except",
                   "side": "right",
                   "color": "orange",
-                  "wantAtWord": 30.417,
-                  "atWord": 30.417
+                  "wantAtWord": 46,
+                  "atWord": 46
                 }
               ],
               "id": "d3",
@@ -3095,29 +5543,29 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 3.667
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#d4",
               "label": "a number column measured",
               "focus": true,
-              "wantAtWord": 35.75,
+              "wantAtWord": 53,
               "callouts": [
                 {
                   "text": "the smallest and the largest",
                   "mark": "minmax",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 45.75,
-                  "atWord": 55.583
+                  "wantAtWord": 65,
+                  "atWord": 78
                 },
                 {
                   "text": "and the average of them",
                   "mark": "mean",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 49.833,
-                  "atWord": 59.167
+                  "wantAtWord": 70,
+                  "atWord": 82
                 }
               ],
               "id": "d4",
@@ -3170,21 +5618,21 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 35.75
+              "atWord": 53
             },
             {
               "ref": "rec:azure-full#d5",
               "label": "the text branch",
               "focus": true,
-              "wantAtWord": 63.917,
+              "wantAtWord": 86,
               "callouts": [
                 {
                   "text": "the three most common",
                   "mark": "top",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 60,
-                  "atWord": 87.333
+                  "wantAtWord": 83,
+                  "atWord": 114
                 }
               ],
               "id": "d5",
@@ -3243,43 +5691,38 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 63.917
+              "atWord": 86
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2.333
+          "atWord": 2
         }
       },
-      "durationFrames": 1351,
-      "audio": "audio/ai-on-your-own-files_s28.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1809
     },
     {
-      "id": "s29",
+      "id": "s31",
       "type": "CHAPTER",
       "narration": "Run it — and then we fix the thing you will notice straight away.",
-      "transition": "wipe",
-      "background": "zoneB",
+      "transition": "morph",
+      "background": "zoneA",
       "data": {
         "chapter": {
           "number": "06",
           "title": "Run it, then fix it",
           "subtitle": "the part tutorials usually edit out"
         }
-      },
-      "durationFrames": 117,
-      "audio": "audio/ai-on-your-own-files_s29.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s30",
+      "id": "s32",
       "type": "RECORDED_STEP",
       "narration": "Save it, and run it. Fifty rows, and then a line for each column. The dates, the regions, the couriers, the products. Delivery days runs from three point eight seven up to nineteen point four. Order value from eighteen to ninety-six. And two statuses: forty-eight delivered, two lost in transit. Eight columns described in a few hundred words, and every figure measured rather than guessed.",
-      "transition": "dip",
-      "background": "zoneC",
+      "transition": "iris",
+      "background": "zoneB",
       "data": {
         "recordedStep": {
           "caption": "fifty rows, described",
@@ -3337,23 +5780,23 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 1.75
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#rundesc",
               "label": "describe.py, running",
               "focus": true,
-              "wantAtWord": 1.75,
+              "wantAtWord": 4,
               "zooms": [
                 {
                   "mark": "days",
-                  "wantAtWord": 19.917,
-                  "atWord": 46.417
+                  "wantAtWord": 23,
+                  "atWord": 50
                 },
                 {
                   "mark": "courier",
-                  "wantAtWord": 39.167,
-                  "atWord": 49.25
+                  "wantAtWord": 44,
+                  "atWord": 52
                 }
               ],
               "callouts": [
@@ -3362,8 +5805,8 @@
                   "mark": "days",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 27.25,
-                  "atWord": 48.75
+                  "wantAtWord": 33,
+                  "atWord": 51
                 }
               ],
               "id": "rundesc",
@@ -3440,45 +5883,92 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 34.5
+              "atWord": 40
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 763,
-      "audio": "audio/ai-on-your-own-files_s30.mp3",
-      "timingSource": "tts"
+      "durationFrames": 825
     },
     {
-      "id": "s31",
-      "type": "KINETIC_TEXT",
-      "narration": "But look at the first line of that output. Order id. Fifty orders, fifty different ids, and we are printing the top three of them — which tells you nothing at all, because a column where every value is different has no top three.",
-      "transition": "morph",
-      "background": "zoneA",
+      "id": "s33",
+      "type": "DATABASE_TABLE",
+      "narration": "But look at the first line of that output. Order id. Here are the first five rows of that column, straight out of the file. S O one thousand and one. One thousand and two. One thousand and three. Every single one is different, and there are fifty of them. Now, counting how often each one shows up gives you fifty counts of one, and we are printing the top three of those, which tells you absolutely nothing. Compare it with the region column beside it, where North turns up twenty times and that number means something. A column where every value is different has no top three to find.",
+      "transition": "fade",
+      "background": "zoneC",
       "data": {
-        "kinetic": {
-          "text": "Every value different means nothing to rank",
-          "fx": "split",
-          "sub": "so skip the column entirely",
-          "color": "orange",
-          "atWord": 20.25
+        "database": {
+          "headline": "Fifty rows, fifty different order ids",
+          "tableName": "orders.csv",
+          "query": "top 3 of a column that repeats nothing",
+          "columns": [
+            "order_id",
+            "region",
+            "times seen"
+          ],
+          "rows": [
+            [
+              "SO-1001",
+              "North",
+              "1"
+            ],
+            [
+              "SO-1002",
+              "North",
+              "1"
+            ],
+            [
+              "SO-1003",
+              "Central",
+              "1"
+            ],
+            [
+              "SO-1004",
+              "Central",
+              "1"
+            ],
+            [
+              "SO-1005",
+              "Remote",
+              "1"
+            ],
+            [
+              "…and 45 more",
+              "North ×20",
+              "1 each"
+            ]
+          ],
+          "highlight": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "highlightAtWords": [
+            29,
+            35,
+            39,
+            44,
+            61,
+            88
+          ],
+          "atWord": 17
         }
-      },
-      "durationFrames": 385,
-      "audio": "audio/ai-on-your-own-files_s31.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s32",
+      "id": "s34",
       "type": "RECORDED_STEP",
-      "narration": "So we fix it, right here, before the line that ranks anything. If the number of distinct counts equals the number of values, then every single one is unique, so we skip that column entirely. Two lines, and that's the whole correction. Save, and run it again. There — order id is gone, and what is left is seven rows that actually tell you something. That's the loop, by the way: write it, run it, look at what came out, and correct it.",
-      "transition": "iris",
-      "background": "zoneB",
+      "narration": "So we fix it, right here, before the line that ranks anything. If the number of distinct counts equals the number of values, then every single one is unique, so we skip that column entirely. Two lines, and that's the whole correction, because the guard runs before anything gets ranked. Save, and run it again. There — order id is gone, and what is left is seven rows that actually tell you something. That's the loop, by the way: write it, run it, look at what came out, and correct it.",
+      "transition": "push",
+      "background": "zoneA",
       "data": {
         "recordedStep": {
           "caption": "two lines, and run it again",
@@ -3526,21 +6016,21 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 1.583
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#typefix",
               "label": "two lines, typed in",
               "focus": true,
-              "wantAtWord": 11.25,
+              "wantAtWord": 17,
               "callouts": [
                 {
                   "text": "every value is different",
                   "mark": "guard",
                   "side": "right",
                   "color": "orange",
-                  "wantAtWord": 19.917,
-                  "atWord": 30.667
+                  "wantAtWord": 29,
+                  "atWord": 46
                 }
               ],
               "id": "typefix",
@@ -3593,13 +6083,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 19.917
+              "atWord": 32
             },
             {
               "ref": "rec:azure-full#savefix",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 33.75,
+              "wantAtWord": 51,
               "id": "savefix",
               "src": "rec/azure-full/seg-27.mp4",
               "frames": 64,
@@ -3646,21 +6136,21 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 33.75
+              "atWord": 51
             },
             {
               "ref": "rec:azure-full#rerun",
               "label": "run it again",
               "focus": true,
-              "wantAtWord": 36,
+              "wantAtWord": 55,
               "callouts": [
                 {
                   "text": "order_id is gone",
                   "mark": "region",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 42.167,
-                  "atWord": 50.083
+                  "wantAtWord": 61,
+                  "atWord": 72
                 }
               ],
               "id": "rerun",
@@ -3731,43 +6221,38 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 42.167
+              "atWord": 62
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 754,
-      "audio": "audio/ai-on-your-own-files_s32.mp3",
-      "timingSource": "tts"
+      "durationFrames": 1137
     },
     {
-      "id": "s33",
+      "id": "s35",
       "type": "CHAPTER",
       "narration": "Last file. This is where the two halves meet.",
-      "transition": "fade",
-      "background": "zoneC",
+      "transition": "slide",
+      "background": "zoneB",
       "data": {
         "chapter": {
           "number": "07",
           "title": "Hand it the facts",
           "subtitle": "the description goes, the rows stay home"
         }
-      },
-      "durationFrames": 120,
-      "audio": "audio/ai-on-your-own-files_s33.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s34",
+      "id": "s36",
       "type": "RECORDED_STEP",
       "narration": "Analyse dot py — the last file we write, and the shortest of the three. Import subprocess, which lets one Python program run another. Then run the describer and keep what it printed — capture output is the flag that hands us the text instead of letting it scroll past. Load the settings the same way as before. That variable, facts, now holds the whole description as a string.",
-      "transition": "push",
-      "background": "zoneA",
+      "transition": "zoom",
+      "background": "zoneC",
       "data": {
         "recordedStep": {
           "caption": "run the describer, keep the output",
@@ -3807,21 +6292,21 @@
                 "Ctrl",
                 "P"
               ],
-              "atWord": 3.333
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#a1",
               "label": "the shortest of the three",
               "focus": true,
-              "wantAtWord": 11.583,
+              "wantAtWord": 16,
               "callouts": [
                 {
                   "text": "hands us the text",
                   "mark": "capture",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 30.667,
-                  "atWord": 41.75
+                  "wantAtWord": 39,
+                  "atWord": 55
                 }
               ],
               "id": "a1",
@@ -3880,78 +6365,98 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 25.25
+              "atWord": 32
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1.417
+          "atWord": 2
         }
       },
-      "durationFrames": 676,
-      "audio": "audio/ai-on-your-own-files_s34.mp3",
-      "timingSource": "tts"
+      "durationFrames": 950
     },
     {
-      "id": "s35",
+      "id": "s37",
       "type": "DIAGRAM",
-      "narration": "A system message — that's the one new thing in this call, and it's worth a moment. Role user is the question you are asking right now; role system is the standing instruction — who the model is being, for the whole call. Here it says: you are a data analyst, use only these facts. That second half matters, because it tells the model not to fill in gaps from memory.",
-      "transition": "slide",
-      "background": "zoneB",
+      "narration": "A system message — that's the one new thing in this call, and it's worth a moment, because roles confuse almost everybody the first time. Every message you send carries a role, and a role is just a label saying who is speaking. Role user means: this is me, the person, asking a thing right now. That is the message you would type into a chat box. Role system is different, because it is not a question at all. It is a standing instruction that sits above the whole conversation and tells the model who to be while it answers. Think of it as the brief you give somebody on their first morning: you say it once, and it holds for everything after it.",
+      "transition": "wipe",
+      "background": "zoneA",
       "data": {
         "diagram": {
           "layout": "block",
           "nodes": [
             {
-              "id": "sys",
-              "label": "system",
-              "sub": "who you are being",
-              "color": "purple",
-              "atWord": 1
+              "id": "msg",
+              "label": "every message",
+              "sub": "carries a role",
+              "color": "orange",
+              "atWord": 32
             },
             {
               "id": "usr",
-              "label": "user",
-              "sub": "what you are asking",
+              "label": "role: user",
+              "sub": "you, asking now",
               "color": "blue",
-              "atWord": 14
+              "atWord": 45
+            },
+            {
+              "id": "sys",
+              "label": "role: system",
+              "sub": "who to be, throughout",
+              "color": "purple",
+              "atWord": 69
             },
             {
               "id": "out",
               "label": "the reply",
               "sub": "shaped by both",
               "color": "green",
-              "atWord": 35.333
+              "atWord": 100
             }
           ],
           "edges": [
             {
-              "from": "sys",
-              "to": "out",
-              "label": "standing rule",
-              "atWord": 21.583
+              "from": "msg",
+              "to": "usr",
+              "label": "a chat message",
+              "atWord": 66
+            },
+            {
+              "from": "msg",
+              "to": "sys",
+              "label": "not a question",
+              "atWord": 83
             },
             {
               "from": "usr",
               "to": "out",
-              "label": "this question",
-              "atWord": 15.333
+              "label": "asked right now",
+              "atWord": 56
+            },
+            {
+              "from": "msg",
+              "to": "out",
+              "label": "who is speaking",
+              "atWord": 43
+            },
+            {
+              "from": "sys",
+              "to": "out",
+              "label": "a standing brief",
+              "atWord": 106
             }
           ]
         }
-      },
-      "durationFrames": 619,
-      "audio": "audio/ai-on-your-own-files_s35.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s36",
+      "id": "s38",
       "type": "RECORDED_STEP",
-      "narration": "So we type it. The client, same as before. The call, same as before. Messages, with the system line first and then the user line, and notice what we are sending it: the description Python already wrote, and then the question. Not one row of the original file goes anywhere near the model — the model only ever sees the eight lines of summary. Save, run — and there it is. Azure gpt-4o, handed eight lines of description instead of fifty rows, telling me the Remote region and the FarReach courier have far fewer entries, and that despite a mean order value of forty-six point two, two orders were lost in transit. That's a tool you built, running on your file.",
-      "transition": "zoom",
-      "background": "zoneC",
+      "narration": "So we type it. The client, same as before. The call, same as before. And here is that first-morning brief going in, as the system line: you are a data analyst, use only these facts. That second half is the important half, because it tells the model not to fill in the gaps from its own memory. Messages, with the system line first and then the user line, and notice what we are sending it: the description Python already wrote, and then the question. Not one row of the original file goes near the model, which only ever sees the eight lines of summary. Save, run — and there it is. Azure gpt-4o, handed eight lines instead of fifty rows, telling me the Remote region and the FarReach courier have far fewer entries, and that despite a mean order value of forty-six point two, two orders were lost in transit. That's a tool you built, running on your own file: eight lines in, one sentence out, and the spreadsheet never moved.",
+      "transition": "dip",
+      "background": "zoneB",
       "data": {
         "recordedStep": {
           "caption": "the answer, from a description",
@@ -3963,22 +6468,55 @@
               "ref": "rec:azure-full#a2",
               "label": "sending the facts",
               "focus": true,
+              "zooms": [
+                {
+                  "mark": "system",
+                  "wantAtWord": 31,
+                  "atWord": 52
+                },
+                {
+                  "mark": "user",
+                  "wantAtWord": 67,
+                  "atWord": 67
+                },
+                {
+                  "mark": "facts",
+                  "wantAtWord": 74,
+                  "atWord": 82
+                }
+              ],
               "callouts": [
                 {
                   "text": "the standing instruction",
                   "mark": "system",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 16.083,
-                  "atWord": 40.167
+                  "wantAtWord": 25,
+                  "atWord": 60
+                },
+                {
+                  "text": "shapes every answer",
+                  "mark": "system",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 57,
+                  "atWord": 75
                 },
                 {
                   "text": "description, then question",
                   "mark": "facts",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 64.75,
-                  "atWord": 45.417
+                  "wantAtWord": 77,
+                  "atWord": 90
+                },
+                {
+                  "text": "eight lines of summary",
+                  "mark": "facts",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 104,
+                  "atWord": 104
                 }
               ],
               "id": "a2",
@@ -4055,13 +6593,13 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 1.583
+              "atWord": 4
             },
             {
               "ref": "rec:azure-full#savean",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 51.167,
+              "wantAtWord": 105,
               "id": "savean",
               "src": "rec/azure-full/seg-32.mp4",
               "frames": 38,
@@ -4120,18 +6658,33 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 51.167
+              "atWord": 105
             },
             {
               "ref": "rec:azure-full#runan",
               "label": "save, then run",
               "focus": true,
-              "wantAtWord": 51.917,
+              "wantAtWord": 106,
               "zooms": [
                 {
+                  "mark": "__cmd",
+                  "wantAtWord": 112,
+                  "atWord": 132
+                },
+                {
                   "at": "full",
-                  "wantAtWord": 68.583,
-                  "atWord": 79.75
+                  "wantAtWord": 121,
+                  "atWord": 138
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "far fewer entries",
+                  "mark": "__cmd",
+                  "side": "top",
+                  "color": "green",
+                  "wantAtWord": 133,
+                  "atWord": 133
                 }
               ],
               "id": "runan",
@@ -4190,78 +6743,78 @@
                 }
               ],
               "shows": "$ uv add openai python-dotenv",
-              "atWord": 55.583
+              "atWord": 115
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 1
+          "atWord": 2
         }
       },
-      "durationFrames": 1195,
-      "audio": "audio/ai-on-your-own-files_s36.mp3",
-      "timingSource": "tts"
+      "durationFrames": 2097
     },
     {
-      "id": "s37",
+      "id": "s39",
       "type": "CHAPTER",
       "narration": "So what do you actually do with this on Monday morning?",
-      "transition": "wipe",
-      "background": "zoneA",
+      "transition": "morph",
+      "background": "zoneC",
       "data": {
         "chapter": {
           "number": "08",
           "title": "What to do with it",
           "subtitle": "same twenty lines, your file"
         }
-      },
-      "durationFrames": 110,
-      "audio": "audio/ai-on-your-own-files_s37.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s38",
+      "id": "s40",
       "type": "LIST_BUILD",
-      "narration": "Nothing in that describer knows what a courier is, and that's the point. The describer counts, measures and spots blanks, so it works on any file with a header row. A tester points the describer at test durations and pass rates. A developer points it at build times per release, because a build log is a file too. An analyst points it at any export from any system. Supply chain: lead times and stock levels. Support: response and resolution times. Same twenty lines, a different file, and not one word of the code has to change.",
-      "transition": "dip",
-      "background": "zoneB",
+      "narration": "Nothing in that describer knows what a courier is, and that's the point. The describer counts, measures and spots blanks, so it works on any file with a header row. A tester points the describer at test durations and pass rates. A developer points it at build times per release. An analyst points it at any export from any system. Supply chain: lead times and stock levels. Support: response and resolution times. Finance: any invoice or ledger export. Ops: anything with a header row. Same twenty lines, a different file, and not one word of the code has to change.",
+      "transition": "iris",
+      "background": "zoneA",
       "data": {
         "heading": "Same twenty lines, your file",
         "items": [
           {
             "text": "Testing — durations, pass rates per suite",
-            "atWord": 24.25
+            "atWord": 32
           },
           {
             "text": "Development — build times per release",
-            "atWord": 34.583
+            "atWord": 43
           },
           {
             "text": "Analysis — any export from any system",
-            "atWord": 46.25
+            "atWord": 52
           },
           {
             "text": "Supply chain — lead times and stock",
-            "atWord": 55.083
+            "atWord": 62
           },
           {
             "text": "Support — response and resolution times",
-            "atWord": 62.5
+            "atWord": 68
+          },
+          {
+            "text": "Finance — any invoice or ledger export",
+            "atWord": 73
+          },
+          {
+            "text": "Ops — anything with a header row",
+            "atWord": 29
           }
         ]
-      },
-      "durationFrames": 1016,
-      "audio": "audio/ai-on-your-own-files_s38.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s39",
+      "id": "s41",
       "type": "RULE_TEST",
-      "narration": "And the rule that keeps the whole thing honest, which is worth more than the code. If a number matters, compute it. How many rows are in this file? Compute it — Python never miscounts. Which courier is slowest? Compute that too. What do these six complaints have in common? Ask the model. Summarise the week in a sentence? Ask the model. That's reading, and reading is what a model is for. Keep those two jobs apart — Python counts, the model reads — and a model will not lie to you about a number, because you never asked it to count one.",
-      "transition": "morph",
-      "background": "zoneC",
+      "narration": "And the rule that keeps it honest, worth more than the code. If a number matters, compute it. How many rows are in this file? Compute it — Python never miscounts. Which courier is slowest? Compute that. What do these complaints have in common? Ask the model. Summarise the week in a sentence? Ask the model. That's reading, and reading is what a model is for. Keep those two jobs apart, and a model can never lie about a number, because you never asked it to count one.",
+      "transition": "fade",
+      "background": "zoneB",
       "data": {
         "ruleTest": {
           "rule": "If a number matters, compute it",
@@ -4274,81 +6827,106 @@
               "title": "ok",
               "sub": "counting",
               "color": "green",
-              "atWord": 15
+              "atWord": 21
             },
             {
               "text": "Which courier is slowest?",
               "title": "ok",
               "sub": "counting",
               "color": "green",
-              "atWord": 26.583
+              "atWord": 33
             },
             {
               "text": "What do these complaints share?",
               "title": "no",
               "sub": "judgement",
               "color": "blue",
-              "atWord": 35.417
+              "atWord": 41
             },
             {
               "text": "Summarise the week in a sentence",
               "title": "no",
               "sub": "judgement",
               "color": "blue",
-              "atWord": 42.417
+              "atWord": 48
             }
           ],
-          "atWord": 1
+          "atWord": 3
         }
-      },
-      "durationFrames": 943,
-      "audio": "audio/ai-on-your-own-files_s39.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s40",
+      "id": "s42",
       "type": "RECAP",
       "narration": "So that's the whole thing. A folder, two commands, a settings file, and about forty lines of Python. You picked a provider, you kept your key out of your code, and you built something that reads a file and tells you what is in it. Everything after this is the same four boxes with a different file in the first one. The shape doesn't change, which is why it keeps working.",
-      "transition": "iris",
-      "background": "zoneA",
+      "transition": "push",
+      "background": "zoneC",
       "data": {
         "heading": "What you just built",
         "points": [
           {
             "text": "A provider — free, or one you already pay for",
-            "atWord": 17.5
+            "atWord": 22
           },
           {
             "text": "A key that never touches your code",
-            "atWord": 20.167
+            "atWord": 26
           },
           {
             "text": "Python describes, the model reads",
-            "atWord": 25.333
+            "atWord": 36
           },
           {
             "text": "Forty lines, any file with a header",
-            "atWord": 36.167
+            "atWord": 53
           }
         ]
-      },
-      "durationFrames": 631,
-      "audio": "audio/ai-on-your-own-files_s40.mp3",
-      "timingSource": "tts"
+      }
     },
     {
-      "id": "s41",
+      "id": "s43",
+      "type": "ICON_GRID",
+      "narration": "One last thing, worth asking on Monday. If your company already runs on a cloud, there is often an approved provider switched on already. So ask your platform team for four things. The endpoint, which is the address. A key, which they generate for you. The deployment name, which is their word for the model. And permission, because that route is normally approved for work data.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "iconGrid": {
+          "cols": 4,
+          "items": [
+            {
+              "icon": "lucide:link",
+              "label": "the endpoint",
+              "atWord": 34
+            },
+            {
+              "icon": "lucide:key-round",
+              "label": "a key",
+              "atWord": 40
+            },
+            {
+              "icon": "lucide:box",
+              "label": "deployment name",
+              "atWord": 47
+            },
+            {
+              "icon": "lucide:shield-check",
+              "label": "permission",
+              "atWord": 57
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s44",
       "type": "OUTRO_CTA",
       "narration": "Point it at your own export tonight — whatever is sitting in your downloads folder. Change the filename, run it, and see what the model says. If this got you started, subscribe, and tell me what you pointed it at.",
-      "transition": "fade",
+      "transition": "zoom",
       "background": "zoneB",
       "data": {
         "message": "Change the filename. Run it.",
         "sub": "works on any file with a header row"
-      },
-      "durationFrames": 367,
-      "audio": "audio/ai-on-your-own-files_s41.mp3",
-      "timingSource": "tts"
+      }
     }
   ]
 }

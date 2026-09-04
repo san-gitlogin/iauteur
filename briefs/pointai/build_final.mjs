@@ -77,8 +77,7 @@ const scenes = [];
 
 // ═══ OPENING ═════════════════════════════════════════════════════════════════
 {
-  const n = "Python, a file on your desk, and an AI that reads it for you. " +
-            "Nothing installed yet. Let's fix that.";
+  const n = "Python, a file on your desk, and an AI that reads it for you.";
   scenes.push(scene('HOOK', n, {
     headline: 'PYTHON READS YOUR FILES',
     subtext: 'from an empty folder, in one sitting',
@@ -89,10 +88,9 @@ const scenes = [];
 
 {
   const n =
-    `Welcome to ${CH}. Today we build a small Python tool that takes any file you've got — ` +
-    "a spreadsheet, an export, a log — and hands it to an AI that tells you what is in there. " +
-    "No Python experience, no credit card. " +
-    "So what does that actually take?";
+    `Welcome to ${CH}. Today we build a small Python tool that takes any file — ` +
+    "a spreadsheet, a log, an export — and hands it to an AI that reads it. " +
+    "No experience, no card. So what does that take?";
   scenes.push(scene('TITLE_CARD', n, {
     title: 'Make an AI read your own files',
     subtitle: 'a complete Python project, from an empty folder',
@@ -127,102 +125,199 @@ const scenes = [];
   }}));
 }
 
-// ═══ CHAPTER 1 — where the AI comes from ═════════════════════════════════════
+// ═══ CHAPTER 1 — where the three settings come from ══════════════════════════
+//
+// REWRITTEN AFTER THE FIRST CUT. Owner: *"I see you did not show azure openai website,
+// and you also forgot the main where you didnt show claude or openai. You were not
+// beginner friendly in showing how to get the api key and the url and the model."*
+//
+// So the chapter is no longer "three doors and what they cost". It is: EVERY provider
+// hands you the SAME THREE THINGS, here is each one's own page saying so, and here is
+// where you click to get them. The drawn LOGO_WALL is gone — the logos are on Ollama's
+// real page, and a real page beats a redrawing of it.
 scenes.push(chapter(
-  "First question everybody asks, and it's the right one: where do you get an AI to talk to?",
-  1, 'Where the AI comes from', 'three doors, and two of them are free'));
+  "Before any code: the three things every provider gives you, and where to click for them.",
+  1, 'Where settings come from', 'a key, an address, and a model name'));
 
 {
   const n =
-    "Three doors, and the free ones come first because they are not a consolation prize. " +
-    "Door one runs the model on your own laptop — this is Ollama's own site. " +
-    "No account, no card, and nothing you type leaves the machine, " +
-    "which for work files is often the only option allowed.";
-  scenes.push(rec(n, 'free, and it never leaves your laptop',
-    'Ollama’s own home page — a model that runs on your machine.',
-    [W('ollama', 'Ollama, on its own site', {zooms: [{at: 'full', atWord: at(n, 'laptop')}]})],
-    {sourceNote: 'Source: ollama.com — read 2026-09-04'}));
+    "Whichever provider you pick, you end up with the same three things, " +
+    "and it is worth knowing their names before you see them in code. " +
+    "One: a key. That is a long secret string that says this request is yours. " +
+    "Two: an address — the web address your program sends the request to. " +
+    "Three: a model name, which is simply which brain you want to answer. " +
+    "A key, an address, a model name — which means once you have those three, " +
+    "you can talk to any of them. " +
+    "Every provider calls them slightly different things, " +
+    "and every one of them gives you all three. " +
+    "So let's go and get them, on four different sites.";
+  scenes.push(scene('DIAGRAM', n, {diagram: {
+    layout: 'flow',
+    direction: 'horizontal',
+    nodes: [
+      {id: 'k', label: 'A key', sub: 'proves it is you', color: 'red', atWord: at(n, 'key')},
+      {id: 'u', label: 'An address', sub: 'where to send it', color: 'blue',
+       atWord: at(n, 'address')},
+      {id: 'm', label: 'A model name', sub: 'which brain answers', color: 'purple',
+       atWord: at(n, 'model')},
+    ],
+    edges: [
+      {from: 'k', to: 'u', label: 'secret string', atWord: at(n, 'secret')},
+      {from: 'u', to: 'm', label: 'which brain', atWord: at(n, 'brain')},
+      {from: 'k', to: 'm', label: 'all three', atWord: at(n, 'three', 2)},
+      {from: 'm', to: 'k', label: 'every provider', atWord: at(n, 'provider', 2)},
+    ],
+  }}));
 }
 
 {
   const n =
-    "Apple. NVIDIA. Netflix. NASA. Intel. " +
-    "Those are the logos Ollama puts on its own front page, " +
-    "which is worth knowing before you write a local model off as a hobby thing. " +
-    "Running a model on hardware you control is not the amateur option — " +
-    "it's the only option when the data cannot leave the building.";
-  scenes.push(scene('LOGO_WALL', n, {
-    logoWall: {
-      logos: [
-        {icon: 'si:apple', label: 'Apple', atWord: at(n, 'Apple')},
-        {icon: 'si:nvidia', label: 'NVIDIA', atWord: at(n, 'NVIDIA')},
-        {icon: 'si:netflix', label: 'Netflix', atWord: at(n, 'Netflix')},
-        {icon: 'si:nasa', label: 'NASA', atWord: at(n, 'NASA')},
-        {icon: 'si:intel', label: 'Intel', atWord: at(n, 'Intel')},
-      ],
-      cols: 5,
-    },
-    source: 'Logos shown on ollama.com, read 2026-09-04',
-  }));
+    "Door one runs the model on your own laptop — this is Ollama's own website. " +
+    "No key to fetch, no card to type, " +
+    "because the model's a file you download, and it answers on your machine. " +
+    "The address is your own computer, because that is where the model is running. " +
+    "The model name is whatever you chose to download. " +
+    "And nothing you type ever leaves the machine, " +
+    "which for a work file is often your only allowed option. " +
+    "And before you write a local model off as the hobby option, " +
+    "scroll further down that same page. " +
+    "Apple. Nike. Microsoft. NASA. Netflix. NVIDIA. IBM. Intel. " +
+    "Those are the marks Ollama puts on its own front page, " +
+    "over a line that reads: trusted by more than nine million developers. " +
+    "That's not a hobby crowd. " +
+    "Running a model on hardware you control isn't the amateur choice. " +
+    "It's what you do when the data isn't allowed to leave the building — " +
+    "a rule most of us work under whether we think about it or not.";
+  scenes.push(rec(n, 'the model runs on your machine',
+    'Ollama’s own home page, and the strip of logos further down it.',
+    [W('ollama', 'Ollama, on its own site',
+       {zooms: [{mark: 'run', atWord: at(n, 'website')},
+                {mark: 'dl', atWord: at(n, 'download')},
+                {at: 'full', atWord: at(n, 'leaves')}],
+        callouts: [{text: 'no account, no card', mark: 'dl', side: 'right', color: 'green',
+                    atWord: at(n, 'card')},
+                   {text: 'the address is your own PC', mark: 'run', side: 'right',
+                    color: 'blue', atWord: at(n, 'computer')}]}),
+     W('ollamawho', 'further down the page', {wantAtWord: at(n, 'scroll'),
+       zooms: [{mark: 'trusted', atWord: at(n, 'Apple')}, {at: 'full', atWord: at(n, 'amateur')}],
+       callouts: [{text: 'nine million developers', mark: 'trusted', side: 'bottom',
+                   color: 'green', atWord: at(n, 'million')},
+                  {text: 'not the amateur choice', mark: 'trusted', side: 'top',
+                   color: 'purple', atWord: at(n, 'choice')}]})],
+    {sourceNote: 'Source: ollama.com — read 2026-09-04',
+     card: {place: 'right', width: 0.24}}));
 }
 
 {
   const n =
-    "Door two is a cloud key, no card. " +
-    "Here is Google's own pricing page, and the word free is theirs, not mine. " +
-    "Free input and output tokens, limits instead of a bill. " +
-    "But read the line at the bottom, because that line decides everything: " +
-    "on the free tier your content improves their products; on paid it does not. " +
-    "That's the real difference between the columns.";
-  scenes.push(rec(n, 'free in their own words — and the catch',
-    'Google’s published pricing for the Gemini API.',
-    [W('gemini', 'the free and paid columns',
-       {callouts: [{text: 'their word, not mine', mark: 'free', side: 'right', color: 'green',
-                    atWord: at(n, 'free')}]}),
-     W('freetier', 'the line that decides it', {wantAtWord: at(n, 'bottom')})],
-    {sourceNote: 'Source: ai.google.dev/gemini-api/docs/pricing — read 2026-09-04'}));
+    "Door two is OpenAI, and this is their own developer quickstart. " +
+    "Look at the heading: create and export an API key. " +
+    "That button is where the key comes from. " +
+    "You sign in, you click it once, and you get a long string " +
+    "that you copy straight away, " +
+    "because most providers show it to you exactly once and never again. " +
+    "And underneath, they tell you what to do with it: " +
+    "put it in an environment variable called OPENAI underscore API underscore KEY. " +
+    "Door three is Anthropic's Claude, and here is their get-started page. " +
+    "Down the left there is a link that says, simply, get your API key. " +
+    "And step one of their own quickstart is: set your API key, " +
+    "into a variable called ANTHROPIC underscore API underscore KEY. " +
+    "Different company. Different name. Exactly the same idea. " +
+    "And look at the code underneath, because messages, and role user, " +
+    "turn up in our own file shortly. " +
+    "Two companies, two pages, one shape — which is the point of showing you both.";
+  scenes.push(rec(n, 'where a key actually comes from',
+    'OpenAI’s and Anthropic’s own quickstart pages.',
+    [W('openai', "OpenAI's quickstart", {zooms: [{mark: 'title', atWord: at(n, 'quickstart')}]}),
+     W('openaikey', 'create and export a key', {wantAtWord: at(n, 'heading'),
+       zooms: [{mark: 'heading', atWord: at(n, 'create')},
+               {mark: 'button', atWord: at(n, 'button')},
+               {mark: 'envname', atWord: at(n, 'underneath')}],
+       callouts: [{text: 'click it once', mark: 'button', side: 'right', color: 'blue',
+                   atWord: at(n, 'string')},
+                  {text: 'shown once — copy it now', mark: 'button', side: 'right',
+                   color: 'red', atWord: at(n, 'again')},
+                  {text: 'an environment variable', mark: 'envname', side: 'left',
+                   color: 'green', atWord: at(n, 'variable')}]}),
+     W('claude', "Anthropic's own docs", {wantAtWord: at(n, 'Anthropic'),
+       zooms: [{mark: 'title', atWord: at(n, 'Claude')}]}),
+     W('claudekey', 'down the left', {wantAtWord: at(n, 'left'),
+       zooms: [{mark: 'getkey', atWord: at(n, 'link')},
+               {mark: 'envname', atWord: at(n, 'ANTHROPIC')},
+               {at: 'full', atWord: at(n, 'code')}],
+       callouts: [{text: 'same idea, new name', mark: 'setkey', side: 'left',
+                   color: 'purple', atWord: at(n, 'Different')},
+                  {text: 'role user, again', mark: 'setkey', side: 'left',
+                   color: 'blue', atWord: at(n, 'messages')}]})],
+    {sourceNote: 'Sources: platform.openai.com/docs/quickstart · docs.claude.com — read 2026-09-04',
+     card: {place: 'right', width: 0.24}}));
 }
 
 {
   const n =
-    "So, three doors. On your own laptop, Ollama — free, and nothing leaves the machine. " +
-    "In the cloud with no card at all, Groq or Google. " +
-    "Or you pay, and for a few hundred files a month that comes to roughly a pound. " +
-    "Start on a free door and change your mind later, " +
-    "because swapping is three lines in a file and no code at all.";
-  scenes.push(scene('SPEC_COMPARE', n, {
-    compare: {
-      headline: 'Three doors, and what each costs',
-      a: {name: 'free', color: 'green'},
-      b: {name: 'paid', color: 'blue'},
-      rows: [
-        {label: 'On your own laptop', a: 'Ollama', b: '—', winner: 'a', atWord: at(n, 'laptop')},
-        {label: 'Nothing leaves the PC', a: 'Ollama', b: 'no', winner: 'a',
-         atWord: at(n, 'leaves')},
-        {label: 'Cloud, no card', a: 'Groq · Google', b: '—', winner: 'a', atWord: at(n, 'cloud')},
-        {label: 'A few hundred files', a: '£0', b: '~£1', atWord: at(n, 'hundred')},
-        {label: 'Switching later', a: '3 lines', b: '3 lines', atWord: at(n, 'swapping')},
-      ],
-      atWord: at(n, 'doors'),
-    },
-    source: DATED,
-  }));
+    "Door four is Azure OpenAI, which is Microsoft running OpenAI's models " +
+    "inside a company's own cloud account. " +
+    "This is Microsoft's own quickstart, and read the prerequisites with me. " +
+    "A deployed Azure OpenAI model — that phrase, deployed model, is your model name. " +
+    "An authentication method, and the first one listed is an API key. " +
+    "And the address is the endpoint of the resource somebody created for you. " +
+    "So it is the same three settings again, in Microsoft's own words this time, " +
+    "which means nothing you learn here is wasted if you switch. " +
+    "This is the one I am using for the rest of the video.";
+  scenes.push(rec(n, 'Azure: the same three, in their words',
+    'Microsoft’s own Azure OpenAI quickstart.',
+    [W('azure', "Microsoft's own quickstart", {zooms: [{mark: 'title', atWord: at(n, 'Microsoft')}]}),
+     W('azurekey', 'read the prerequisites', {wantAtWord: at(n, 'prerequisites'),
+       zooms: [{mark: 'deployed', atWord: at(n, 'deployed')},
+               {mark: 'authmethod', atWord: at(n, 'authentication')},
+               {at: 'full', atWord: at(n, 'words')}],
+       callouts: [{text: 'this is your model name', mark: 'deployed', side: 'right',
+                   color: 'purple', atWord: at(n, 'phrase')},
+                  {text: 'and this is your key', mark: 'envname', side: 'right',
+                   color: 'red', atWord: at(n, 'listed')}]})],
+    {sourceNote: 'Source: learn.microsoft.com — Azure OpenAI quickstart, read 2026-09-04',
+     card: {place: 'right', width: 0.24}}));
 }
 
 {
   const n =
-    "Groq works the same way — a key with no card, and rate limits instead of a bill. " +
-    "Requests per minute, tokens per minute, and when you hit one you wait rather than pay. " +
-    "I'm going to use a fourth door for the rest of this video: Azure OpenAI, " +
-    "because that's what my employer already pays for, and it's the same three settings. " +
-    "Whichever door you pick, everything from here is identical.";
-  scenes.push(rec(n, 'limits instead of a bill',
-    'Groq’s published rate limits.',
-    [W('groq', 'the limits, published',
-       {zooms: [{mark: 'limits', atWord: at(n, 'minute')}, {at: 'full', atWord: at(n, 'Azure')}],
-        callouts: [{text: 'you wait, you don’t pay', mark: 'limits', side: 'right', color: 'green',
-                    atWord: at(n, 'wait')}]})],
-    {sourceNote: 'Source: console.groq.com/docs/rate-limits — read 2026-09-04'}));
+    "Now, cost, because that is the question everybody actually has. " +
+    "This is Google's own pricing page for the Gemini API, " +
+    "and the two columns are theirs, not mine: free left, paid right. " +
+    "On the free side: limited models, free tokens, and Studio access. " +
+    "But read the fourth line of that free column, " +
+    "because it matters when the file belongs to your employer. " +
+    "Content used to improve our products. " +
+    "Now read the same position in the paid column. " +
+    "Content NOT used to improve our products. " +
+    "That is the real difference between the two sides, " +
+    "and it is why a work file is not the same decision as a hobby one. " +
+    "Groq works the same way, with a different lever: " +
+    "a key with no card, and rate limits instead of a bill — " +
+    "so many requests a minute. Hit one, wait a moment, carry on. " +
+    "You do not get charged. " +
+    "Whichever door you pick, everything from here is identical, " +
+    "because the code only ever asks for those same three settings.";
+  scenes.push(rec(n, 'what free costs, in their own words',
+    'Google’s published pricing, and Groq’s published rate limits.',
+    [W('gemini', "Google's pricing page", {zooms: [{mark: 'title', atWord: at(n, 'pricing')}]}),
+     W('geminidata', 'their own two columns', {wantAtWord: at(n, 'columns'),
+       zooms: [{mark: 'free', atWord: at(n, 'free', 2)},
+               {mark: 'improve', atWord: at(n, 'fourth')},
+               {mark: 'paid', atWord: at(n, 'position')},
+               {at: 'full', atWord: at(n, 'sides')}],
+       callouts: [{text: 'free: your content trains them', mark: 'improve', side: 'left',
+                   color: 'orange', atWord: at(n, 'Content')},
+                  {text: 'paid: it does not', mark: 'paid', side: 'left',
+                   color: 'green', atWord: at(n, 'NOT')},
+                  {text: 'a work file is a different decision', mark: 'improve',
+                   side: 'bottom', color: 'purple', atWord: at(n, 'decision')}]}),
+     W('groq', 'Groq, the same way', {wantAtWord: at(n, 'Groq'),
+       zooms: [{mark: 'limits', atWord: at(n, 'lever')}, {at: 'full', atWord: at(n, 'wait')}],
+       callouts: [{text: 'you wait, you don’t pay', mark: 'limits', side: 'right',
+                   color: 'green', atWord: at(n, 'minute')}]})],
+    {sourceNote: 'Sources: ai.google.dev/gemini-api/docs/pricing · console.groq.com — read 2026-09-04',
+     card: {place: 'right', width: 0.24}}));
 }
 
 // ═══ CHAPTER 2 — from an empty folder ════════════════════════════════════════
@@ -351,8 +446,7 @@ scenes.push(chapter(
     "So what does gitignore actually do? " +
     "Every file in that folder is queued to go wherever the code goes. " +
     "Gitignore is the list that stops one. " +
-    "Put dot env on it, and your settings stay on your machine " +
-    "however many times you push.";
+    "Put dot env on it, and your settings stay put however often you push.";
   scenes.push(scene('PIPELINE_GATE', n, {pipelineGate: {
     headline: 'Everything ships — [except what is listed]',
     proposerLabel: 'every file you write',
@@ -383,6 +477,64 @@ scenes.push(chapter(
        callouts: [{text: 'thirty seconds, once', mark: 'ignored', side: 'right', color: 'green',
                    atWord: at(n, 'seconds')}]}),
      A('saveignore', 'saved', {wantAtWord: at(n, 'internet')})]));
+}
+
+{
+  const n =
+    "That word, tokens, matters, because every bill is counted in them. " +
+    "A model reads neither letters nor words. It reads tokens — chunks of text: " +
+    "a whole word, half of one, sometimes just a space.";
+  scenes.push(scene('TOKENIZER', n, {tokenizer: {
+    headline: 'What you are actually billed for',
+    text: 'Reply with exactly the word: ready',
+    tokens: [
+      {text: 'Reply', id: 30003},
+      {text: ' with', id: 483, color: 'blue'},
+      {text: ' exactly', id: 7041},
+      {text: ' the', id: 290, color: 'blue'},
+      {text: ' word', id: 2195},
+      {text: ':', id: 25, color: 'purple'},
+      {text: ' ready', id: 5527, color: 'green'},
+    ],
+    atWord: at(n, 'tokens'),
+  }}));
+}
+
+{
+  const n =
+    "One more idea before we write code, because this one trips up everybody. " +
+    "How does a Python program read a file it never opens? " +
+    "Your settings live in dot env, on disk. " +
+    "Your program never opens that file itself. " +
+    "Instead, one line — load dotenv — reads it once at start-up " +
+    "and copies each name and value into something called the environment: " +
+    "a little noticeboard that belongs to the running program. " +
+    "After that, os dot getenv, of AI underscore API underscore KEY, " +
+    "just reads the value off the noticeboard. " +
+    "And that indirection is the whole point. " +
+    "Your code only ever names the setting; it never contains the value. " +
+    "So the same file runs on your laptop and on a build server, " +
+    "with a different key on each, and not one line changes.";
+  scenes.push(scene('DIAGRAM', n, {diagram: {
+    layout: 'flow',
+    direction: 'horizontal',
+    nodes: [
+      {id: 'f', label: '.env', sub: 'on disk, git-ignored', color: 'red',
+       atWord: at(n, 'disk')},
+      {id: 'l', label: 'load_dotenv()', sub: 'reads it once', color: 'blue',
+       atWord: at(n, 'dotenv')},
+      {id: 'e', label: 'the environment', sub: 'a noticeboard', color: 'purple',
+       atWord: at(n, 'noticeboard')},
+      {id: 'g', label: 'os.getenv(...)', sub: 'your code, by name', color: 'green',
+       atWord: at(n, 'getenv')},
+    ],
+    edges: [
+      {from: 'f', to: 'l', label: 'at start-up', atWord: at(n, 'once')},
+      {from: 'l', to: 'e', label: 'name and value', atWord: at(n, 'copies')},
+      {from: 'e', to: 'g', label: 'never the value', atWord: at(n, 'reads', 2)},
+      {from: 'f', to: 'g', label: 'same code', atWord: at(n, 'indirection')},
+    ],
+  }}));
 }
 
 // ═══ CHAPTER 4 — the first call ══════════════════════════════════════════════
@@ -418,7 +570,7 @@ scenes.push(chapter(
     "Each message has a role — who is speaking — and content, which is what they said. " +
     "The model reads the list and adds one message of its own. " +
     "You read that reply out of choices, index zero, message, content. " +
-    "That's the whole interface, and the interface doesn't get bigger than this.";
+    "That's the whole interface.";
   scenes.push(scene('DIAGRAM', n, {diagram: {
     layout: 'sequence',
     nodes: [
@@ -429,7 +581,8 @@ scenes.push(chapter(
     ],
     edges: [
       {from: 'you', to: 'mdl', label: 'role and content', atWord: at(n, 'role')},
-      {from: 'mdl', to: 'you', label: 'choices[0]', atWord: at(n, 'choices')},
+      {from: 'mdl', to: 'you', label: 'one more message', atWord: at(n, 'adds')},
+      {from: 'mdl', to: 'you', label: 'choices[0]', atWord: at(n, 'own')},
     ],
   }}));
 }
@@ -443,7 +596,12 @@ scenes.push(chapter(
     "Then print the reply, and print usage too, because usage is what you are billed on. " +
     "Save it, run it — and there is the word back, from a gpt-4o deployment. " +
     "Fourteen tokens went in and two came back. " +
-    "A token is roughly three quarters of a word, so that request cost a fraction of a penny.";
+    "The rule of thumb worth carrying is that a token is about three quarters of a word, " +
+    "so a thousand words is roughly thirteen hundred tokens, " +
+    "and that request cost a fraction of a penny. " +
+    "It is also why a fifty row file is nothing " +
+    "and a forty thousand row file is a problem, " +
+    "which is the reason for everything we build next.";
   scenes.push(rec(n, 'the call, and what it cost',
     'Typing the call, then running it against Azure OpenAI.',
     [A('thecall', 'typing the call', {
@@ -470,8 +628,7 @@ scenes.push(chapter(
 {
   const n =
     "Forty thousand rows. " +
-    "An ordinary export, and the thing everybody tries " +
-    "to paste into a chat window first. " +
+    "An ordinary export, and the thing everybody pastes into a chat window first. " +
     "On fifty rows, pasting works fine. " +
     "At forty thousand it stops, " +
     "because every row has to fit in the model's window at once.";
@@ -488,6 +645,7 @@ scenes.push(chapter(
     "So we do something cheaper and better. " +
     "Python describes the file first, and we send the description instead — " +
     "because a description stays the same size however big the file gets.";
+
   scenes.push(scene('KINETIC_TEXT', n, {kinetic: {
     text: 'Describe the file. Send the description.',
     fx: 'highlight',
@@ -500,6 +658,12 @@ scenes.push(chapter(
 {
   const n =
     "New file, describe dot py. " +
+    "And I say file, not spreadsheet, on purpose, " +
+    "because everything here works on a server log with a hundred thousand lines, " +
+    "on the JSON that came back from an API call, " +
+    "on a test report from last night's run, " +
+    "or on an export from your ticketing system. " +
+    "Anything you can read in Python, you can describe in Python. " +
     "Import csv — that's Python's own reader, and it costs nothing. " +
     "Import statistics for the averages. " +
     "Read the file into a list of rows. Dict reader hands back each row as a small dictionary, " +
@@ -507,15 +671,22 @@ scenes.push(chapter(
     "Print how many rows we got, so we know the file actually loaded. " +
     "Then walk the columns, one at a time, " +
     "and for each column pull out its values, skipping the blanks. " +
-    "No AI involved yet, and nothing has left the machine — so far this is arithmetic.";
+    "No AI involved yet, and nothing has left the machine — so far this is arithmetic. " +
+    "Which is worth saying plainly: half of this project never talks to a model at all.";
   scenes.push(rec(n, 'read the file, walk the columns',
     'The describer, typed from empty.',
     [A('opendesc', 'a second empty file'),
-     A('d1', 'reading the file', {wantAtWord: at(n, 'Import'),
+     A('d1', 'import csv, then read', {wantAtWord: at(n, 'Import'),
+       zooms: [{mark: 'reader', atWord: at(n, 'csv')}, {mark: 'count', atWord: at(n, 'Print')}],
        callouts: [{text: "Python's own reader", mark: 'reader', side: 'right', color: 'green',
-                   atWord: at(n, 'Dict')}]}),
+                   atWord: at(n, 'Dict')},
+                  {text: 'so we know it loaded', mark: 'count', side: 'right', color: 'blue',
+                   atWord: at(n, 'loaded')}]}),
      A('d2', 'walking the columns', {wantAtWord: at(n, 'walk'),
-       callouts: [{text: 'its values, blanks skipped', mark: 'vals', side: 'right', color: 'blue',
+       zooms: [{mark: 'loop', atWord: at(n, 'walk')}, {at: 'full', atWord: at(n, 'yet')}],
+       callouts: [{text: 'one column at a time', mark: 'loop', side: 'right', color: 'purple',
+                   atWord: at(n, 'time')},
+                  {text: 'its values, blanks skipped', mark: 'vals', side: 'right', color: 'blue',
                    atWord: at(n, 'blanks')}]})]));
 }
 
@@ -524,12 +695,21 @@ scenes.push(chapter(
     "Now the question each column has to answer: is this a number, or is it a word? " +
     "And the honest way to find out is to try. " +
     "If every value converts, the column is a number column. " +
-    "If any value refuses, the column is text.";
-  scenes.push(scene('FLIP_CARD', n, {flip: {
-    front: {label: 'try it', text: 'Does every value convert?', color: 'blue'},
-    back: {label: 'then', text: 'Measure it — or count it', color: 'green'},
+    "If any value refuses, the column is text, " +
+    "and text gets counted rather than measured.";
+  scenes.push(scene('TYPE_GATE', n, {typeGate: {
+    caption: 'try it, and see which way it falls',
+    premise: 'Python does not ask what a column is. It tries to turn each value into a ' +
+             'number, and the ones that refuse are the answer.',
+    columnName: 'delivery_days',
+    columnType: 'float()',
+    goodValue: '4.10',
+    badValue: 'RapidPost',
+    errorText: "ValueError: could not convert string to float: 'RapidPost'",
+    passAtWord: at(n, 'converts'),
+    rejectAtWord: at(n, 'refuses'),
     atWord: at(n, 'try'),
-  }}));
+  }}))
 }
 
 {
@@ -590,15 +770,32 @@ scenes.push(chapter(
 {
   const n =
     "But look at the first line of that output. Order id. " +
-    "Fifty orders, fifty different ids, and we are printing the top three of them — " +
-    "which tells you nothing at all, " +
-    "because a column where every value is different has no top three.";
-  scenes.push(scene('KINETIC_TEXT', n, {kinetic: {
-    text: 'Every value different means nothing to rank',
-    fx: 'split',
-    sub: 'so skip the column entirely',
-    color: 'orange',
-    atWord: at(n, 'nothing'),
+    "Here are the first five rows of that column, straight out of the file. " +
+    "S O one thousand and one. One thousand and two. One thousand and three. " +
+    "Every single one is different, and there are fifty of them. " +
+    "Now, counting how often each one shows up gives you fifty counts of one, " +
+    "and we are printing the top three of those, " +
+    "which tells you absolutely nothing. " +
+    "Compare it with the region column beside it, " +
+    "where North turns up twenty times and that number means something. " +
+    "A column where every value is different has no top three to find.";
+  scenes.push(scene('DATABASE_TABLE', n, {database: {
+    headline: 'Fifty rows, fifty different order ids',
+    tableName: 'orders.csv',
+    query: 'top 3 of a column that repeats nothing',
+    columns: ['order_id', 'region', 'times seen'],
+    rows: [
+      ['SO-1001', 'North', '1'],
+      ['SO-1002', 'North', '1'],
+      ['SO-1003', 'Central', '1'],
+      ['SO-1004', 'Central', '1'],
+      ['SO-1005', 'Remote', '1'],
+      ['…and 45 more', 'North ×20', '1 each'],
+    ],
+    highlight: [0, 1, 2, 3, 4, 5],
+    highlightAtWords: [at(n, 'thousand'), at(n, 'two'), at(n, 'three'),
+                       at(n, 'different'), at(n, 'fifty', 2), at(n, 'North')],
+    atWord: at(n, 'rows'),
   }}));
 }
 
@@ -607,7 +804,8 @@ scenes.push(chapter(
     "So we fix it, right here, before the line that ranks anything. " +
     "If the number of distinct counts equals the number of values, " +
     "then every single one is unique, so we skip that column entirely. " +
-    "Two lines, and that's the whole correction. " +
+    "Two lines, and that's the whole correction, " +
+    "because the guard runs before anything gets ranked. " +
     "Save, and run it again. " +
     "There — order id is gone, and what is left is seven rows that actually tell you something. " +
     "That's the loop, by the way: write it, run it, look at what came out, and correct it.";
@@ -646,22 +844,35 @@ scenes.push(chapter(
 
 {
   const n =
-    "A system message — that's the one new thing in this call, and it's worth a moment. " +
-    "Role user is the question you are asking right now; " +
-    "role system is the standing instruction — who the model is being, for the whole call. " +
-    "Here it says: you are a data analyst, use only these facts. " +
-    "That second half matters, because it tells the model not to fill in gaps from memory.";
+    "A system message — that's the one new thing in this call, and it's worth a moment, " +
+    "because roles confuse almost everybody the first time. " +
+    "Every message you send carries a role, and a role is just a label " +
+    "saying who is speaking. " +
+    "Role user means: this is me, the person, asking a thing right now. " +
+    "That is the message you would type into a chat box. " +
+    "Role system is different, because it is not a question at all. " +
+    "It is a standing instruction that sits above the whole conversation " +
+    "and tells the model who to be while it answers. " +
+    "Think of it as the brief you give somebody on their first morning: " +
+    "you say it once, and it holds for everything after it.";
   scenes.push(scene('DIAGRAM', n, {diagram: {
     layout: 'block',
     nodes: [
-      {id: 'sys', label: 'system', sub: 'who you are being', color: 'purple',
-       atWord: at(n, 'system')},
-      {id: 'usr', label: 'user', sub: 'what you are asking', color: 'blue', atWord: at(n, 'user')},
-      {id: 'out', label: 'the reply', sub: 'shaped by both', color: 'green', atWord: at(n, 'analyst')},
+      {id: 'msg', label: 'every message', sub: 'carries a role', color: 'orange',
+       atWord: at(n, 'role')},
+      {id: 'usr', label: 'role: user', sub: 'you, asking now', color: 'blue',
+       atWord: at(n, 'user')},
+      {id: 'sys', label: 'role: system', sub: 'who to be, throughout', color: 'purple',
+       atWord: at(n, 'system', 2)},
+      {id: 'out', label: 'the reply', sub: 'shaped by both', color: 'green',
+       atWord: at(n, 'answers')},
     ],
     edges: [
-      {from: 'sys', to: 'out', label: 'standing rule', atWord: at(n, 'standing')},
-      {from: 'usr', to: 'out', label: 'this question', atWord: at(n, 'question')},
+      {from: 'msg', to: 'usr', label: 'a chat message', atWord: at(n, 'chat')},
+      {from: 'msg', to: 'sys', label: 'not a question', atWord: at(n, 'standing')},
+      {from: 'usr', to: 'out', label: 'asked right now', atWord: at(n, 'now')},
+      {from: 'msg', to: 'out', label: 'who is speaking', atWord: at(n, 'speaking')},
+      {from: 'sys', to: 'out', label: 'a standing brief', atWord: at(n, 'brief')},
     ],
   }}));
 }
@@ -670,26 +881,40 @@ scenes.push(chapter(
   const n =
     "So we type it. The client, same as before. " +
     "The call, same as before. " +
+    "And here is that first-morning brief going in, as the system line: " +
+    "you are a data analyst, use only these facts. " +
+    "That second half is the important half, " +
+    "because it tells the model not to fill in the gaps from its own memory. " +
     "Messages, with the system line first and then the user line, " +
     "and notice what we are sending it: the description Python already wrote, " +
     "and then the question. " +
-    "Not one row of the original file goes anywhere near the model — " +
-    "the model only ever sees the eight lines of summary. " +
+    "Not one row of the original file goes near the model, " +
+    "which only ever sees the eight lines of summary. " +
     "Save, run — and there it is. " +
-    "Azure gpt-4o, handed eight lines of description instead of fifty rows, " +
+    "Azure gpt-4o, handed eight lines instead of fifty rows, " +
     "telling me the Remote region and the FarReach courier have far fewer entries, " +
     "and that despite a mean order value of forty-six point two, two orders were lost in transit. " +
-    "That's a tool you built, running on your file.";
+    "That's a tool you built, running on your own file: " +
+    "eight lines in, one sentence out, and the spreadsheet never moved.";
   scenes.push(rec(n, 'the answer, from a description',
     'The finished tool, reading the description and answering.',
     [A('a2', 'sending the facts', {
+       zooms: [{mark: 'system', atWord: at(n, 'analyst')},
+               {mark: 'user', atWord: at(n, 'user')},
+               {mark: 'facts', atWord: at(n, 'sending')}],
        callouts: [{text: 'the standing instruction', mark: 'system', side: 'right', color: 'purple',
                    atWord: at(n, 'system')},
+                  {text: 'shapes every answer', mark: 'system', side: 'right', color: 'orange',
+                   atWord: at(n, 'memory')},
                   {text: 'description, then question', mark: 'facts', side: 'right', color: 'blue',
-                   atWord: at(n, 'description', 2)}]}),
+                   atWord: at(n, 'description')},
+                  {text: 'eight lines of summary', mark: 'facts', side: 'right', color: 'green',
+                   atWord: at(n, 'summary')}]}),
      A('savean', 'saved', {wantAtWord: at(n, 'Save')}),
      A('runan', 'save, then run', {wantAtWord: at(n, 'run'),
-       zooms: [{at: 'full', atWord: at(n, 'telling')}]})]));
+       zooms: [{mark: '__cmd', atWord: at(n, 'Azure')}, {at: 'full', atWord: at(n, 'telling')}],
+       callouts: [{text: 'far fewer entries', mark: '__cmd', side: 'top', color: 'green',
+                   atWord: at(n, 'entries')}]})]));
 }
 
 // ═══ CHAPTER 8 — what to do with it ══════════════════════════════════════════
@@ -702,10 +927,12 @@ scenes.push(chapter(
     "Nothing in that describer knows what a courier is, and that's the point. " +
     "The describer counts, measures and spots blanks, so it works on any file with a header row. " +
     "A tester points the describer at test durations and pass rates. " +
-    "A developer points it at build times per release, because a build log is a file too. " +
+    "A developer points it at build times per release. " +
     "An analyst points it at any export from any system. " +
     "Supply chain: lead times and stock levels. " +
     "Support: response and resolution times. " +
+    "Finance: any invoice or ledger export. " +
+    "Ops: anything with a header row. " +
     "Same twenty lines, a different file, and not one word of the code has to change.";
   scenes.push(scene('LIST_BUILD', n, {
     heading: 'Same twenty lines, your file',
@@ -715,21 +942,23 @@ scenes.push(chapter(
       {text: 'Analysis — any export from any system', atWord: at(n, 'analyst')},
       {text: 'Supply chain — lead times and stock', atWord: at(n, 'chain')},
       {text: 'Support — response and resolution times', atWord: at(n, 'Support')},
+      {text: 'Finance — any invoice or ledger export', atWord: at(n, 'Finance')},
+      {text: 'Ops — anything with a header row', atWord: at(n, 'header')},
     ],
   }));
 }
 
 {
   const n =
-    "And the rule that keeps the whole thing honest, which is worth more than the code. " +
+    "And the rule that keeps it honest, worth more than the code. " +
     "If a number matters, compute it. " +
     "How many rows are in this file? Compute it — Python never miscounts. " +
-    "Which courier is slowest? Compute that too. " +
-    "What do these six complaints have in common? Ask the model. " +
+    "Which courier is slowest? Compute that. " +
+    "What do these complaints have in common? Ask the model. " +
     "Summarise the week in a sentence? Ask the model. " +
     "That's reading, and reading is what a model is for. " +
-    "Keep those two jobs apart — Python counts, the model reads — " +
-    "and a model will not lie to you about a number, because you never asked it to count one.";
+    "Keep those two jobs apart, and a model can never lie about a number, " +
+    "because you never asked it to count one.";
   scenes.push(scene('RULE_TEST', n, {ruleTest: {
     rule: 'If a number matters, compute it',
     kicker: 'the one rule',
@@ -766,6 +995,26 @@ scenes.push(chapter(
       {text: 'Forty lines, any file with a header', atWord: at(n, 'boxes')},
     ],
   }));
+}
+
+{
+  const n =
+    "One last thing, worth asking on Monday. " +
+    "If your company already runs on a cloud, there is often an approved provider " +
+    "switched on already. So ask your platform team for four things. " +
+    "The endpoint, which is the address. " +
+    "A key, which they generate for you. " +
+    "The deployment name, which is their word for the model. " +
+    "And permission, because that route is normally approved for work data.";
+  scenes.push(scene('ICON_GRID', n, {iconGrid: {
+    cols: 4,
+    items: [
+      {icon: 'lucide:link', label: 'the endpoint', atWord: at(n, 'endpoint')},
+      {icon: 'lucide:key-round', label: 'a key', atWord: at(n, 'key')},
+      {icon: 'lucide:box', label: 'deployment name', atWord: at(n, 'deployment')},
+      {icon: 'lucide:shield-check', label: 'permission', atWord: at(n, 'permission')},
+    ],
+  }}));
 }
 
 {
