@@ -7,7 +7,10 @@
     "onePayoff": "Tech giants cannot push opt-out AI training without facing massive creator backlash.",
     "openLoop": "Why did Meta kill its brand new AI image tool after just three days?",
     "analogy": "A product launch that turned into a digital fire drill.",
-    "screenplay": "explainer"
+    "screenplay": "explainer",
+    "seo": {
+      "pinned": "Which of these would you try first?"
+    }
   },
   "brand": {
     "theme": "moderndark",

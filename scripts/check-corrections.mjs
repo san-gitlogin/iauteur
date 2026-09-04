@@ -27,6 +27,18 @@ const has = (file, re) => fs.existsSync(file) && new RegExp(re).test(fs.readFile
 
 const CORRECTIONS = [
   // ── the voice ──────────────────────────────────────────────────────────────
+  ['the voice speed used as a pacing knob', 'SEAL',
+   '"why does ava sound slow!!! it was perfect before" / "never adjust the pace of the voice to match"',
+   () => has('scripts/voiceover.py', 'RATE = "\\+8%"') &&
+         has('scripts/voiceover.py', 'NOT A TUNING KNOB|wrong lever|pacing is a scripting problem') &&
+         fs.existsSync('scripts/check-holds.mjs')],
+  ['a clip gone before it can be read', 'SEAL',
+   '"the on screen typing and highlighting just flashes only for a few seconds"',
+   () => has('scripts/check-holds.mjs', 'hold = \\(next anchor') &&
+         has('scripts/check-holds.mjs', 'TOO FAST TO READ')],
+  ['a code line explained with a text label instead of a depiction', 'SEAL',
+   '"the overlay component is meant to have components animated and display what the line does graphically instead of just showing text"',
+   () => has('scripts/lint-spec.mjs', 'NO ANIMATED OVERLAYS')],
   ['every word timing was an evenly-spaced estimate', 'SEAL',
    '"your sync of voice narration with highlight is somewhat lacking"',
    () => has('scripts/voiceover.py', 'boundary="WordBoundary"') &&

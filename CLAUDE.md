@@ -560,6 +560,58 @@ declared, drawn, and invisible.** Whenever something moves by transform, ask wha
 other side of it too. The same sweep applies to `translateX` on a wide cut, to a pill that
 overshoots its track, and to any `landAt` overshoot near a container edge.
 
+### Corollary — NEVER FIX PACING WITH THE VOICE SPEED (owner, 2026-09-04)
+
+Owner, on a cut voiced at -10%: *"why does ava sound slow!!! it was perfect before… I need
+ava to sound like before."* And, ruling on it generally: *"the voice syncs purely must be
+maintained in your scripting by planning properly the beats and the cuts. You should not or
+never adjust the pace of the voice to match."*
+
+**THE HOUSE RATE IS `+8%` AND IT IS NOT A TUNING KNOB.** It had been dropped to -10% to fix
+a real complaint — typed code flashing past too fast to read — and that was the wrong lever
+in the most expensive way available: it inflates EVERY gap in the video to buy dwell on the
+few that needed it, so the listener pays everywhere for a problem in one place.
+
+The measurement, on the same cut, is the whole argument:
+
+  | | first cut | at -10% | back at +8% |
+  |---|---|---|---|
+  | rate | 187 wpm | 156 wpm | 186 wpm |
+  | median hold, clips you must read | 3.9s | 11.8s | **11.8s** |
+
+Same speed the owner likes, three times the dwell of the cut he complained about — because
+the fix was always WORDS OVER THE CLIP, never playback speed.
+
+**So when a beat is too fast, the remedies are, in order:** more explanation over that clip
+(which is LAW 0e arrived at from the other direction); move an anchor; split the beat; cut a
+step from the capture. `scripts/check-holds.mjs` measures the thing you are actually fixing.
+Sealed in `check-corrections.mjs` — the rate cannot be edited without the gate going red.
+
+### Corollary — AN OVERLAY ON A CODE LINE DEPICTS WHAT THE LINE DOES (owner, 2026-09-04)
+
+Owner: *"when you are explaining about a code line, if needed, the overlay component is meant
+to have components animated and display what the line does graphically instead of just
+showing text."*
+
+**Measured on the cut that prompted this: 45 callouts, ZERO overlays.** `RecordedStep`
+has carried an animated `overlay` on every clip since it was built, it is wired, and three
+other topics use it — and every single explanation in a 19-minute coding tutorial was a text
+label with a leader line. A caption pointing at a line is not a depiction of what the line
+does; it is LAW 0j's "lazy ass animation" defect wearing a callout's clothes.
+
+`clips[].overlay` takes `{kind, atWord, …}`:
+- **`rows`** — the TABLE and what the step did to each row (kept / cut / new). The manifest
+  already says PREFER this for anything a query or a filter changed.
+- **`chain`** — a token walking down a pipeline, one stage at a time.
+- **`split`** — one input sent to two fates (the try/except branch; number vs text).
+- **`swap`** — one word becoming another (a name resolving to a value).
+- **`tally`** — a number counting up (rows read, tokens billed).
+
+**The test, per code line: could this be drawn as something HAPPENING?** `float(v)` on a
+column is a `split`. `counts[v] = counts.get(v,0)+1` is a `tally`. `subprocess.run(...)` is a
+`chain`. Reserve `callouts` for naming a thing that is already on screen — a file, a button,
+a key — and stop using them to narrate behaviour.
+
 ### Corollary — A HOLD IS THE UNIT OF COMPREHENSION, AND NOTHING MEASURED IT (owner, 2026-09-04)
 
 Owner, on a 13-minute beginner tutorial: *"You are hurrying at many places where the

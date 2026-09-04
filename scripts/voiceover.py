@@ -42,7 +42,7 @@ async def main():
         # the word, which is exactly the "sync is lacking, I can't follow" the owner
         # reported. Measured on one scene: 14 word starts at a uniform 0.432s apart, versus
         # real gaps of 0.243 / 0.336 / 0.694 / 0.347 / 0.081 once this is set.
-        # THE RATE IS +8% AND STAYS THERE. It was dropped to -10% once, to fix a
+        # THE RATE IS +8% AND IT IS NOT A TUNING KNOB. It was dropped to -10% once, to fix a
         # complaint that typed code "flashes only for a few seconds which is not
         # processable by a human eye" — and that was the WRONG LEVER. Owner on hearing
         # the result: *"why does ava sound slow!!! it was perfect before"*.

@@ -506,6 +506,44 @@ if (spec.thumbnail && subject) {
   }
 }
 
+// ── AN OVERLAY DEPICTS; A CALLOUT ONLY NAMES ────────────────────────────────
+//
+// Owner, 2026-09-04: *"when you are explaining about a code line, if needed, the overlay
+// component is meant to have components animated and display what the line does
+// graphically instead of just showing text."*
+//
+// MEASURED on the cut that prompted it: 45 callouts, ZERO overlays, across a 19-minute
+// coding tutorial. `clips[].overlay` has existed since RecordedStep was built, is wired,
+// and three other topics use it — and every explanation in that video was a text label on
+// a leader line. That is LAW 0j's "lazy ass animation" defect wearing a callout's clothes.
+//
+// WHAT THIS DOES NOT DO. It does not demand an overlay per clip: naming a file in the
+// explorer, a button, a saved tab is exactly what a callout is FOR. It fires on the shape
+// the owner actually hit — a spec that leans on callouts throughout and never once reaches
+// for the animated explainer. One overlay anywhere clears it, because at that point the
+// author has demonstrably made the choice rather than defaulted past it.
+{
+  let callouts = 0;
+  let overlays = 0;
+  let typingClips = 0;
+  // The same "the viewer is being asked to READ this" test check-holds.mjs uses.
+  const READS = /^(type|d[0-9]|client|thecall|a[0-9]|fix)/i;
+  for (const sc of spec.scenes ?? []) {
+    for (const c of sc.data?.recordedStep?.clips ?? []) {
+      callouts += (c.callouts ?? []).length;
+      if (c.overlay) overlays++;
+      if (READS.test(String(c.id ?? ''))) typingClips++;
+    }
+  }
+  if (typingClips >= 3 && callouts >= 8 && overlays === 0) {
+    W(`NO ANIMATED OVERLAYS: ${callouts} callouts across ${typingClips} clip(s) that type code, ` +
+      `and not one \`clips[].overlay\`. A callout NAMES something already on screen; an overlay ` +
+      `DEPICTS what a line does — rows (what the step did to each row), chain (a token down a ` +
+      `pipeline), split (one input, two fates), swap (a name becoming a value), tally (a number ` +
+      `counting up). Ask of each taught line: could this be drawn as something HAPPENING?`);
+  }
+}
+
 // ── A PINNED COMMENT IS PART OF THE DELIVERABLE, NOT AN EXTRA ────────────────
 //
 // `gen-upload-kit.mjs` emits the 📌 PINNED COMMENT block only `if (seo.pinned)`, so a
@@ -521,13 +559,22 @@ if (spec.thumbnail && subject) {
 // has been shipping empty almost every time rather than occasionally. The render gate is
 // scoped to the ONE spec being rendered, so the back catalogue is not blocked — an old
 // topic only has to answer for it if somebody re-renders it, which is the right moment.
+//
+// SCOPED TO SPECS THAT HAVE AN `meta.seo` BLOCK AT ALL. The console's assemble path
+// produces a mid-pipeline spec with no seo whatsoever — it is not yet a deliverable, and
+// demanding a pinned comment there fails a test for a spec nobody is about to publish. A
+// spec that HAS seo is being prepared for upload, and that is when this has to hold.
 {
-  const pinned = String(spec.meta?.seo?.pinned ?? '').trim();
-  if (!pinned) {
+  const seo = spec.meta?.seo;
+  const pinned = String(seo?.pinned ?? '').trim();
+  if (seo && !pinned) {
     E('meta.seo.pinned is missing — every video ships a pinned comment, and the upload kit ' +
       'silently omits the block when the field is absent. Write the question you want ' +
       'under the video.');
-  } else if (pinned.length > 180) {
+  } else if (!seo && spec.meta?.format === 'long') {
+    W('no meta.seo at all — the upload kit will have no title, no description, no chapters ' +
+      'and no pinned comment. Author meta.seo before this is rendered.');
+  } else if (pinned && pinned.length > 180) {
     E(`meta.seo.pinned is ${pinned.length} chars — a pinned comment is one line people ` +
       `read before the replies collapse it. Keep it under 180.`);
   } else if (!/\?/.test(pinned)) {
