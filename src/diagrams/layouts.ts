@@ -151,7 +151,7 @@ export const computeDiagram = (
     nodes.forEach((node, i) => {
       const col = hasRC ? node.col! : i % cols;
       const row = hasRC ? node.row! : Math.floor(i / cols);
-      placed.push({id: node.id, cx: gx * (col + 0.5), cy: gy * (row + 0.5), w: Math.min(NW, gx - 30 * scale), h: NH, node});
+      placed.push({id: node.id, cx: gx * (col + 0.5), cy: gy * (row + 0.5), w: Math.min(NW, gx - 30 * scale), h: nodeH(node), node});
     });
     edges.forEach((e) => {
       const a = byId(e.from); const b = byId(e.to);
@@ -163,8 +163,17 @@ export const computeDiagram = (
   }
 
   if (layout === 'tree') {
-    // top-down hierarchy by parent (horizontal video) / same but tighter vertical
-    const roots = nodes.filter((n) => !n.parent);
+    // ── A TIDY TREE: CHILDREN SIT UNDER THEIR PARENT ─────────────────────────
+    //
+    // The manifest calls this layout "limited" and it was right. Each level used to be
+    // centred INDEPENDENTLY — `stepX = CW / lvl.length` — so a node's x had nothing to do
+    // with its parent's. A five-node architecture came out with the third level centred
+    // under nothing, its edge wandering diagonally across the frame to find it, which is
+    // unreadable as an architecture drawing and was the owner's whole ask.
+    //
+    // Standard tidy-tree instead: lay the LEAVES out evenly in tree order, then give every
+    // parent the mean x of its own children, bottom up. A parent is then always centred
+    // over its branch, and a branch never crosses another.
     const depthOf = (n: DiagramNode): number => {
       let d = 0; let cur: DiagramNode | undefined = n;
       const seen = new Set<string>();
@@ -172,21 +181,55 @@ export const computeDiagram = (
       return d;
     };
     const maxDepth = Math.max(0, ...nodes.map(depthOf));
-    const levels: DiagramNode[][] = Array.from({length: maxDepth + 1}, () => []);
-    nodes.forEach((n) => levels[depthOf(n)].push(n));
+    const kidsOf = (id: string) => nodes.filter((n) => n.parent === id);
+
+    // Leaves, in the order the tree walks them — that ordering is what stops branches
+    // crossing, and it comes from the author's node order, not from the array index.
+    const leaves: string[] = [];
+    const walk = (n: DiagramNode, seen = new Set<string>()) => {
+      if (seen.has(n.id)) return;
+      seen.add(n.id);
+      const kids = kidsOf(n.id);
+      if (!kids.length) { leaves.push(n.id); return; }
+      kids.forEach((k) => walk(k, seen));
+    };
+    nodes.filter((n) => !n.parent).forEach((r) => walk(r));
+
+    const slot = new Map<string, number>();
+    leaves.forEach((id, i) => slot.set(id, i));
+    // Bottom up, so a parent always sees its children's slots already resolved.
+    for (let d = maxDepth; d >= 0; d--) {
+      for (const n of nodes.filter((x) => depthOf(x) === d)) {
+        if (slot.has(n.id)) continue;
+        const kids = kidsOf(n.id).map((k) => slot.get(k.id)).filter((v): v is number => v != null);
+        if (kids.length) slot.set(n.id, kids.reduce((a, b) => a + b, 0) / kids.length);
+      }
+    }
+    const lanes = Math.max(1, leaves.length);
     const stepY = CH / (maxDepth + 1);
-    levels.forEach((lvl, d) => {
-      const stepX = CW / lvl.length;
-      lvl.forEach((node, i) => {
-        placed.push({id: node.id, cx: stepX * (i + 0.5), cy: stepY * (d + 0.5), w: NW, h: NH, node});
-      });
+    const stepX = CW / lanes;
+    // Never wider than the lane it sits in, or two siblings touch.
+    const treeW = Math.min(NW, stepX - 26 * scale);
+    nodes.forEach((node) => {
+      const s = slot.get(node.id) ?? 0;
+      placed.push({id: node.id, cx: stepX * (s + 0.5), cy: stepY * (depthOf(node) + 0.5),
+                   w: treeW, h: nodeH(node), node});
     });
-    // edges: explicit, else parent->child
+
     const treeEdges = edges.length ? edges : nodes.filter((n) => n.parent).map((n) => ({from: n.parent!, to: n.id, atWord: n.atWord}));
     treeEdges.forEach((e) => {
       const a = byId(e.from); const b = byId(e.to);
       if (!a || !b) return;
-      out.push({fromA: sideAnchor(a, 'bottom'), toA: sideAnchor(b, 'top'), kind: (e as {kind?: EdgeKind}).kind ?? 'curve', atWord: e.atWord ?? b.node.atWord, color: (e as {color?: SemColor}).color, dashed: (e as {dashed?: boolean}).dashed ?? true});
+      const at = e.atWord ?? b.node.atWord;
+      out.push({fromA: sideAnchor(a, 'bottom'), toA: sideAnchor(b, 'top'), kind: (e as {kind?: EdgeKind}).kind ?? 'curve', atWord: at, color: (e as {color?: SemColor}).color, dashed: (e as {dashed?: boolean}).dashed ?? true});
+      // AN EDGE LABEL ON A TREE IS THE VERB. Only `sequence` collected these, so a tree
+      // edge silently dropped its label — "which tool?", "wraps", "run it" authored and
+      // never drawn, which is the field-that-nothing-reads bug in miniature.
+      const label = (e as {label?: string}).label;
+      if (label) {
+        msgLabels.push({x: (a.cx + b.cx) / 2, y: (a.cy + a.h / 2 + b.cy - b.h / 2) / 2,
+                        text: label, atWord: at, color: (e as {color?: SemColor}).color ?? b.node.color});
+      }
     });
     return {nodes: placed, edges: out, lifelines, sequence: false, msgLabels};
   }
@@ -197,10 +240,10 @@ export const computeDiagram = (
     const sats = nodes.slice(1);
     const cx0 = CW / 2; const cy0 = CH / 2;
     const R = Math.min(CW, CH) * 0.36;
-    if (center) placed.push({id: center.id, cx: cx0, cy: cy0, w: NW, h: NH, node: center});
+    if (center) placed.push({id: center.id, cx: cx0, cy: cy0, w: NW, h: nodeH(center), node: center});
     sats.forEach((node, i) => {
       const ang = (-Math.PI / 2) + (i / sats.length) * Math.PI * 2;
-      placed.push({id: node.id, cx: cx0 + R * Math.cos(ang), cy: cy0 + R * Math.sin(ang), w: NW * 0.9, h: NH * 0.9, node});
+      placed.push({id: node.id, cx: cx0 + R * Math.cos(ang), cy: cy0 + R * Math.sin(ang), w: NW * 0.9, h: Math.max(NH * 0.9, nodeH(node)), node});
     });
     const hubEdges = edges.length ? edges : sats.map((n) => ({from: center?.id ?? '', to: n.id, atWord: n.atWord}));
     hubEdges.forEach((e) => {
@@ -224,7 +267,7 @@ export const computeDiagram = (
   } else {
     const stepX = CW / n;
     const nw = Math.min(NW, stepX - 36 * scale); // guarantee a gap for the connector
-    nodes.forEach((node, i) => placed.push({id: node.id, cx: stepX * (i + 0.5), cy: CH / 2, w: nw, h: NH, node}));
+    nodes.forEach((node, i) => placed.push({id: node.id, cx: stepX * (i + 0.5), cy: CH / 2, w: nw, h: nodeH(node), node}));
   }
   const flowEdges = edges.length ? edges : nodes.slice(1).map((n2, i) => ({from: nodes[i].id, to: n2.id, atWord: n2.atWord}));
   flowEdges.forEach((e) => {

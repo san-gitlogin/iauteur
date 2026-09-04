@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "topic": "Code an AI agent with MCP",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "TODO",
+    "openLoop": "TODO",
+    "analogy": "TODO",
+    "subject": "Python",
+    "seo": {
+      "pinned": "What would you point an agent at first?"
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "plain",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "TODO",
+    "badge": "TODO",
+    "asset": "lucide:sparkles"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "DIAGRAM",
+      "durationFrames": 700,
+      "narration": "Here is the whole thing we are about to build, and it is five files. At the top, your question, typed in plain English. That goes to agent dot py, the loop you write yourself. The loop asks Azure OpenAI which tool to use \u2014 and I am using Azure here, but any API you like will do. The tools live in server dot py, your MCP server. It wraps tools dot py, three ordinary Python functions. One of them reads service dot log, which your own app wrote. The other calls the orders API, running on port eight thousand. Five files, top to bottom, and we type every line of them.",
+      "data": {
+        "diagram": {
+          "layout": "tree",
+          "nodes": [
+            {
+              "id": "q",
+              "label": "Your question",
+              "sub": "in plain English",
+              "color": "blue",
+              "atWord": 14
+            },
+            {
+              "id": "agent",
+              "label": "agent.py",
+              "sub": "the loop you write",
+              "color": "purple",
+              "atWord": 21,
+              "parent": "q"
+            },
+            {
+              "id": "model",
+              "label": "Azure OpenAI",
+              "sub": "picks a tool",
+              "color": "orange",
+              "atWord": 31,
+              "parent": "agent"
+            },
+            {
+              "id": "server",
+              "label": "server.py",
+              "sub": "your MCP server",
+              "color": "green",
+              "atWord": 50,
+              "parent": "agent"
+            },
+            {
+              "id": "tools",
+              "label": "tools.py",
+              "sub": "three functions",
+              "color": "blue",
+              "atWord": 57,
+              "parent": "server"
+            },
+            {
+              "id": "log",
+              "label": "service.log",
+              "sub": "your app wrote it",
+              "color": "purple",
+              "atWord": 66,
+              "parent": "tools"
+            },
+            {
+              "id": "api",
+              "label": "the orders API",
+              "sub": "FastAPI on :8000",
+              "color": "orange",
+              "atWord": 74,
+              "parent": "tools"
+            }
+          ],
+          "edges": [
+            {
+              "from": "q",
+              "to": "agent",
+              "atWord": 21
+            },
+            {
+              "from": "agent",
+              "to": "model",
+              "label": "which tool?",
+              "atWord": 31
+            },
+            {
+              "from": "agent",
+              "to": "server",
+              "label": "run it",
+              "atWord": 50
+            },
+            {
+              "from": "server",
+              "to": "tools",
+              "label": "wraps",
+              "atWord": 57
+            },
+            {
+              "from": "tools",
+              "to": "log",
+              "atWord": 66
+            },
+            {
+              "from": "tools",
+              "to": "api",
+              "atWord": 74
+            }
+          ]
+        }
+      },
+      "background": "zoneA",
+      "transition": "fade"
+    }
+  ]
+}

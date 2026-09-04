@@ -1,0 +1,551 @@
+{
+  "slug": "mcp-agent",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "mcp-agent",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 1.5,
+  "fps": 30,
+  "maximizePanel": false,
+  "prep": {
+    "files": {
+      ".env": "",
+      ".gitignore": "",
+      "api.py": "",
+      "traffic.py": "",
+      "tools.py": "",
+      "server.py": "",
+      "agent.py": ""
+    },
+    "commands": [
+      "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/",
+      "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
+      "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
+      "export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig",
+      "export AI_API_KEY=\"$(cat /tmp/iauteur-secret/key)\"",
+      "export AI_BASE_URL=\"$(cat /tmp/iauteur-secret/base)\"",
+      "export AI_MODEL=gpt-4o",
+      "rm -rf .venv src uv.lock pyproject.toml README.md .python-version main.py .git service.log server.log"
+    ]
+  },
+  "steps": [
+    {
+      "id": "look",
+      "action": "run",
+      "cmd": "ls",
+      "label": "nothing but empty files",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "files",
+          "text": "api.py"
+        }
+      ]
+    },
+    {
+      "id": "init",
+      "action": "run",
+      "cmd": "uv init --app",
+      "label": "one command makes the project",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Initialized project",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "made",
+          "text": "Initialized project"
+        }
+      ]
+    },
+    {
+      "id": "add",
+      "action": "run",
+      "cmd": "uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
+      "label": "the SDK, the web framework, and the client",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "added",
+      "action": "run",
+      "cmd": "uv pip list | grep -E \"^(mcp|fastapi|openai|httpx|uvicorn|python-dotenv) \"",
+      "label": "six libraries, and their versions",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "mcp",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "mcp",
+          "text": "mcp"
+        },
+        {
+          "id": "fastapi",
+          "text": "fastapi"
+        },
+        {
+          "id": "openai",
+          "text": "openai"
+        }
+      ]
+    },
+    {
+      "id": "openapi",
+      "action": "openFile",
+      "file": "api.py",
+      "label": "an empty file"
+    },
+    {
+      "id": "api1",
+      "action": "type",
+      "text": "import random\nimport time\n\nfrom fastapi import FastAPI, HTTPException, Request\n\napp = FastAPI()\n\nORDERS = {\n    \"SO-1001\": {\"id\": \"SO-1001\", \"region\": \"North\", \"status\": \"delivered\"},\n    \"SO-1002\": {\"id\": \"SO-1002\", \"region\": \"Central\", \"status\": \"delivered\"},\n    \"SO-1003\": {\"id\": \"SO-1003\", \"region\": \"Remote\", \"status\": \"lost_in_transit\"},\n}",
+      "label": "the app, and three orders",
+      "marks": [
+        {
+          "id": "app",
+          "text": "app = FastAPI()"
+        },
+        {
+          "id": "orders",
+          "text": "\"SO-1003\""
+        }
+      ]
+    },
+    {
+      "id": "api2",
+      "action": "type",
+      "text": "\n\n@app.middleware(\"http\")\nasync def write_a_log_line(request: Request, call_next):\n    started = time.time()\n    reply = await call_next(request)\n    took = max(1, int((time.time() - started) * 1000))\n    level = \"ERROR\" if reply.status_code >= 400 else \"INFO \"\n    with open(\"service.log\", \"a\") as log:\n        log.write(f\"{time.strftime('%H:%M:%S')} {level} {request.url.path:<16} \"\n                  f\"{reply.status_code} {took}ms\\n\")\n    return reply",
+      "label": "a middleware that writes the log",
+      "marks": [
+        {
+          "id": "mw",
+          "text": "@app.middleware(\"http\")"
+        },
+        {
+          "id": "write",
+          "text": "log.write"
+        }
+      ]
+    },
+    {
+      "id": "api3",
+      "action": "type",
+      "text": "\n\n@app.get(\"/orders\")\ndef list_orders():\n    return list(ORDERS.values())\n\n\n@app.get(\"/orders/{order_id}\")\ndef get_order(order_id: str):\n    if order_id not in ORDERS:\n        raise HTTPException(status_code=404, detail=\"no such order\")\n    return ORDERS[order_id]\n\n\n@app.post(\"/checkout\")\ndef checkout():\n    time.sleep(random.uniform(0.8, 2.4))\n    if random.random() < 0.55:\n        raise HTTPException(status_code=500, detail=\"upstream timeout\")\n    return {\"ok\": True}",
+      "label": "three routes, one of them flaky",
+      "marks": [
+        {
+          "id": "checkout",
+          "text": "@app.post(\"/checkout\")"
+        },
+        {
+          "id": "flaky",
+          "text": "random.random() < 0.55"
+        }
+      ]
+    },
+    {
+      "id": "saveapi",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "serve",
+      "action": "run",
+      "cmd": "uv run uvicorn api:app --port 8000 > server.log 2>&1 &",
+      "label": "start it in the background",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "serveup",
+      "action": "run",
+      "cmd": "sleep 6 && tail -3 server.log",
+      "label": "the service is up",
+      "focus": "terminal",
+      "timeout": 60000,
+      "expect": {
+        "contains": "Application startup complete",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "up",
+          "text": "Application startup complete"
+        }
+      ]
+    },
+    {
+      "id": "opentraffic",
+      "action": "openFile",
+      "file": "traffic.py",
+      "label": "something to call it with"
+    },
+    {
+      "id": "traffic1",
+      "action": "type",
+      "text": "import random\n\nimport httpx\n\nAPI = \"http://127.0.0.1:8000\"\n\nfor _ in range(60):\n    roll = random.random()\n    if roll < 0.4:\n        httpx.get(f\"{API}/orders\")\n    elif roll < 0.7:\n        httpx.get(f\"{API}/orders/SO-1001\")\n    else:\n        httpx.post(f\"{API}/checkout\")\n\nprint(\"done - look at service.log\")",
+      "label": "sixty requests",
+      "marks": [
+        {
+          "id": "loop",
+          "text": "for _ in range(60)"
+        },
+        {
+          "id": "post",
+          "text": "/checkout"
+        }
+      ]
+    },
+    {
+      "id": "savetraffic",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "runtraffic",
+      "action": "run",
+      "cmd": "uv run python traffic.py",
+      "label": "making real traffic",
+      "focus": "terminal",
+      "timeout": 240000,
+      "expect": {
+        "contains": "done",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "done",
+          "text": "done"
+        }
+      ]
+    },
+    {
+      "id": "seelog",
+      "action": "run",
+      "cmd": "tail -6 service.log",
+      "label": "the log the app just wrote",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "ms",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "line",
+          "text": "/checkout"
+        }
+      ]
+    },
+    {
+      "id": "opentools",
+      "action": "openFile",
+      "file": "tools.py",
+      "label": "plain Python, no AI yet"
+    },
+    {
+      "id": "t1",
+      "action": "type",
+      "text": "from collections import Counter\n\nimport httpx\n\nLOG = \"service.log\"\nAPI = \"http://127.0.0.1:8000\"\n\n\ndef recent_errors() -> str:\n    \"\"\"Count the errors in the service log, grouped by route.\"\"\"\n    hits = Counter()\n    for line in open(LOG):\n        time, level, route, status, took = line.split()\n        if level == \"ERROR\":\n            hits[route] += 1\n    return \"\\n\".join(f\"{route} failed {n} times\" for route, n in hits.most_common())",
+      "label": "count the errors",
+      "marks": [
+        {
+          "id": "split5",
+          "text": "line.split()"
+        },
+        {
+          "id": "counter",
+          "text": "hits[route] += 1"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "action": "type",
+      "text": "\n\ndef slowest_routes() -> str:\n    \"\"\"Report each route's average response time, slowest first.\"\"\"\n    times = {}\n    for line in open(LOG):\n        time, level, route, status, took = line.split()\n        times.setdefault(route, []).append(int(took.removesuffix(\"ms\")))\n    rows = sorted(times.items(), key=lambda kv: -sum(kv[1]) / len(kv[1]))\n    return \"\\n\".join(f\"{r} took {sum(v) // len(v)}ms on average\" for r, v in rows)",
+      "label": "average the response times",
+      "marks": [
+        {
+          "id": "avg",
+          "text": "sum(v) // len(v)"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "action": "type",
+      "text": "\n\ndef get_order(order_id: str) -> str:\n    \"\"\"Look up one order by its id, from the orders service.\"\"\"\n    reply = httpx.get(f\"{API}/orders/{order_id}\")\n    if reply.status_code == 404:\n        return f\"there is no order called {order_id}\"\n    return str(reply.json())",
+      "label": "and one that calls the API",
+      "marks": [
+        {
+          "id": "httpx",
+          "text": "httpx.get"
+        }
+      ]
+    },
+    {
+      "id": "savetools",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "runtools",
+      "action": "run",
+      "cmd": "uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"",
+      "label": "they already work",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "checkout",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "failed",
+          "text": "failed"
+        },
+        {
+          "id": "slow",
+          "text": "on average"
+        }
+      ]
+    },
+    {
+      "id": "openserver",
+      "action": "openFile",
+      "file": "server.py",
+      "label": "the MCP server"
+    },
+    {
+      "id": "s1",
+      "action": "type",
+      "text": "from mcp.server.mcpserver import MCPServer\n\nimport tools\n\nmcp = MCPServer(\"service-tools\")\n\n\n@mcp.tool()\ndef recent_errors() -> str:\n    \"\"\"Count the errors in the service log, grouped by route.\"\"\"\n    return tools.recent_errors()",
+      "label": "one import, one decorator",
+      "marks": [
+        {
+          "id": "imp",
+          "text": "from mcp.server.mcpserver import MCPServer"
+        },
+        {
+          "id": "dec",
+          "text": "@mcp.tool()"
+        },
+        {
+          "id": "doc",
+          "text": "Count the errors in the service log"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "action": "type",
+      "text": "\n\n@mcp.tool()\ndef slowest_routes() -> str:\n    \"\"\"Report each route's average response time, slowest first.\"\"\"\n    return tools.slowest_routes()\n\n\n@mcp.tool()\ndef get_order(order_id: str) -> str:\n    \"\"\"Look up one order by its id, for example SO-1003.\"\"\"\n    return tools.get_order(order_id)",
+      "label": "the other two",
+      "marks": [
+        {
+          "id": "arg",
+          "text": "def get_order(order_id: str) -> str:"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "action": "type",
+      "text": "\n\n@mcp.resource(\"log://today\")\ndef todays_log() -> str:\n    \"\"\"The raw service log for today.\"\"\"\n    return open(\"service.log\").read()\n\n\nif __name__ == \"__main__\":\n    mcp.run()",
+      "label": "a resource, and run it",
+      "marks": [
+        {
+          "id": "res",
+          "text": "@mcp.resource(\"log://today\")"
+        },
+        {
+          "id": "run",
+          "text": "mcp.run()"
+        }
+      ]
+    },
+    {
+      "id": "saveserver",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "openenv",
+      "action": "openFile",
+      "file": ".env",
+      "label": "the three settings"
+    },
+    {
+      "id": "typeenv",
+      "action": "type",
+      "text": "AI_BASE_URL=https://YOUR-RESOURCE.openai.azure.com/openai/v1/\nAI_API_KEY=****************************\nAI_MODEL=gpt-4o",
+      "label": "masked, and never in the code",
+      "marks": [
+        {
+          "id": "url",
+          "text": "AI_BASE_URL"
+        },
+        {
+          "id": "masked",
+          "text": "AI_API_KEY"
+        },
+        {
+          "id": "model",
+          "text": "AI_MODEL"
+        }
+      ]
+    },
+    {
+      "id": "saveenv",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "openignore",
+      "action": "openFile",
+      "file": ".gitignore",
+      "label": "and git never sees it"
+    },
+    {
+      "id": "typeignore",
+      "action": "type",
+      "text": ".env\n",
+      "label": "one line",
+      "marks": [
+        {
+          "id": "ignored",
+          "text": ".env"
+        }
+      ]
+    },
+    {
+      "id": "saveignore",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "openagent",
+      "action": "openFile",
+      "file": "agent.py",
+      "label": "the last file"
+    },
+    {
+      "id": "ag1",
+      "action": "type",
+      "text": "import asyncio\nimport json\nimport os\nimport sys\n\nfrom dotenv import load_dotenv\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\nfrom openai import OpenAI\n\nload_dotenv()\n\n\nasync def main(question: str) -> None:\n    params = StdioServerParameters(command=\".venv/bin/python\", args=[\"server.py\"])\n\n    async with stdio_client(params) as (read, write):\n        async with ClientSession(read, write) as session:\n            await session.initialize()",
+      "label": "start the server, connect to it",
+      "marks": [
+        {
+          "id": "params",
+          "text": "StdioServerParameters"
+        },
+        {
+          "id": "init",
+          "text": "await session.initialize()"
+        }
+      ]
+    },
+    {
+      "id": "ag2",
+      "action": "type",
+      "text": "\n\n            found = await session.list_tools()\n            menu = [\n                {\n                    \"type\": \"function\",\n                    \"function\": {\n                        \"name\": tool.name,\n                        \"description\": tool.description,\n                        \"parameters\": tool.input_schema,\n                    },\n                }\n                for tool in found.tools\n            ]\n            print(f\"the model can see {len(menu)} tools\\n\")",
+      "label": "ask what tools exist",
+      "marks": [
+        {
+          "id": "list",
+          "text": "await session.list_tools()"
+        },
+        {
+          "id": "schema",
+          "text": "tool.input_schema"
+        }
+      ]
+    },
+    {
+      "id": "ag3",
+      "action": "type",
+      "text": "\n\n            client = OpenAI(\n                base_url=os.getenv(\"AI_BASE_URL\"),\n                api_key=os.getenv(\"AI_API_KEY\"),\n            )\n            messages = [{\"role\": \"user\", \"content\": question}]\n\n            answer = client.chat.completions.create(\n                model=os.getenv(\"AI_MODEL\"), messages=messages, tools=menu\n            )\n            picked = answer.choices[0].message",
+      "label": "hand the menu to the model",
+      "marks": [
+        {
+          "id": "tools",
+          "text": "tools=menu"
+        }
+      ]
+    },
+    {
+      "id": "ag4",
+      "action": "type",
+      "text": "\n\n            messages.append(picked)\n            for call in picked.tool_calls:\n                args = json.loads(call.function.arguments)\n                print(f\"it chose {call.function.name}({args})\")\n                result = await session.call_tool(call.function.name, args)\n                messages.append(\n                    {\n                        \"role\": \"tool\",\n                        \"tool_call_id\": call.id,\n                        \"content\": result.content[0].text,\n                    }\n                )",
+      "label": "run whatever it picked",
+      "marks": [
+        {
+          "id": "call",
+          "text": "await session.call_tool"
+        },
+        {
+          "id": "role",
+          "text": "\"role\": \"tool\""
+        }
+      ]
+    },
+    {
+      "id": "ag5",
+      "action": "type",
+      "text": "\n\n            final = client.chat.completions.create(\n                model=os.getenv(\"AI_MODEL\"), messages=messages\n            )\n            print()\n            print(final.choices[0].message.content)\n\n\nasyncio.run(main(sys.argv[1]))",
+      "label": "and let it answer",
+      "marks": [
+        {
+          "id": "final",
+          "text": "final.choices[0].message.content"
+        }
+      ]
+    },
+    {
+      "id": "saveagent",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "runagent",
+      "action": "run",
+      "cmd": "uv run python agent.py \"our checkout is misbehaving - what does the log say, and how bad is it?\"",
+      "label": "asking in plain English",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {
+        "contains": "it chose",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "sees",
+          "text": "the model can see"
+        },
+        {
+          "id": "chose",
+          "text": "it chose"
+        }
+      ]
+    }
+  ]
+}
