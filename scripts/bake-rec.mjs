@@ -130,6 +130,11 @@ for (const [si, scene] of scenes.entries()) {
     // and nobody opened the footage. Nothing in the spec could have said otherwise — a clip
     // carried an id, a frame count, a bbox and marks, and not one word about its content.
     if (step.heading) clip.shows = step.heading;
+    // `shows` is what the step IS; `said` is what it SAYS. A spoken figure can only be
+    // checked against the second one (see screenTextFor in lib/record/runner.mjs, and
+    // the FIGURES check in check-recordings.mjs). Recordings made before that capture
+    // existed simply have no `said`, which reads as "not measured" rather than "empty".
+    if (step.screenText) clip.said = String(step.screenText).slice(0, 6000);
     // The KEYS the runner actually pressed. Carried through so a KEYCAP overlay is a
     // record of what happened, never a hand-typed guess that can drift from the take.
     if (step.keys) clip.keys = step.keys;

@@ -560,6 +560,27 @@ declared, drawn, and invisible.** Whenever something moves by transform, ask wha
 other side of it too. The same sweep applies to `translateX` on a wide cut, to a pill that
 overshoots its track, and to any `landAt` overshoot near a container edge.
 
+### Corollary — A VERIFICATION RUN IS NOT THE TAKE (2026-09-04)
+
+LAW 0m says capture the artefact by running the tool. This says WHICH run the numbers come
+from: **the one that ships.** Building the MCP agent course, the project was run once to
+verify it worked and recorded separately for the video. Same code, different dice — and the
+script was written from the first run. On screen: `/checkout failed 7 times`, one tool call,
+a 976ms error. In the presenter's mouth: five times, two tool calls, "nearly two seconds",
+and a quoted answer nobody ever gave. **The payoff beat of the whole video described tool
+calls that never happened**, and lint, sync-audit, hold-check and the recording preflight all
+passed, because `heading` captured the last COMMAND and nothing had ever captured the OUTPUT.
+
+- **Read the frames before you write the number.**
+  `ffmpeg -sseof -0.2 -i public/rec/<slug>/seg-NN.mp4 -frames:v 1 out.png` costs a second, and
+  it is the only source for anything the viewer will see and hear at the same time.
+- **A rerun of the same program is a different take.** Anything random — a timing, a count, a
+  model's choice of tool — changes. Nothing derived from the earlier run survives.
+- **Enforced.** `screenTextFor()` captures the visible terminal and editor text per step,
+  `bake-rec` bakes it as `clips[].said`, and `check-recordings` reports **FIGURES SPOKEN THAT
+  THE FOOTAGE DOES NOT SHOW** for every recorded beat. Recordings predating the capture report
+  *not measured* rather than passing.
+
 ### Corollary — NEVER FIX PACING WITH THE VOICE SPEED (owner, 2026-09-04)
 
 Owner, on a cut voiced at -10%: *"why does ava sound slow!!! it was perfect before… I need

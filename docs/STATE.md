@@ -111,6 +111,96 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-09-04 — coding an AI agent with MCP, and a cushion that covered half its job
+
+`topics/code-an-ai-agent-with-mcp` — 50 scenes, ~21:15, built from `briefs/mcpagent/build.mjs`
+against two recordings (`public/rec/mcp-agent`, 40 steps of live typing; `public/rec/mcp-official`,
+4 browser steps of modelcontextprotocol.io and the SDK repo). Five files are typed on camera —
+`api.py`, `traffic.py`, `tools.py`, `server.py`, `agent.py` — and the agent then picks two tools
+by itself against a log the app wrote during the recording.
+
+**The interesting failure was the OVER-RELIANCE cap, and the way out of it is worth writing down.**
+A live-coding tutorial is mostly screen recording: 18 `RECORDED_STEP` beats against a cap of
+`ceil(0.35 × scenes)`. There were two ways to satisfy it and only one of them was honest.
+
+- **Merging footage beats** shrinks numerator and denominator together, so it converges fastest —
+  and every merge deletes a distinct teaching moment. I did three merges, the owner caught it
+  (*"i dont want you to take any sort of easy path"*), and he was right: the ratio was satisfied
+  and the video was worse.
+- **Adding drawn beats** only moves the denominator, so it costs ~2 new scenes per footage beat —
+  and every one of them is a thing the viewer now understands. Fourteen went in, all on
+  purpose-built components rather than another bordered box: `MCP_REACH` (what a model cannot
+  touch, before any code), `MCP_MESH` (the M×N problem), `MCP_SCHEMA` (the docstring becoming the
+  JSON), `MCP_CONTROL` (tool vs resource — who pulls the trigger), `MCP_TRANSPORT`, `MCP_WIRE`
+  (the actual JSON-RPC envelopes), `MCP_LOOP`, plus `LOG_STREAM`, `DATABASE_TABLE`,
+  `API_REQUEST_RESPONSE`, `SPEC_COMPARE`, `FILE_TREE`, `LAYERED_STACK`.
+
+**The cap is not the point; what the cap is measuring is.** It exists to catch one component
+standing in for several different ideas. When it fires on a screencast, the reading is "this video
+explains less than it shows", and the fix is always more explanation — never less footage.
+
+#### The gap cushion was sized for one of its two jobs
+
+`solveAnchors` places clips PRE-VOICE at `FPW = 12` frames/word. The house voice
+(`en-US-AvaMultilingualNeural`, `+8%`) delivers **9.65**. `GAP_MARGIN` was `1.25`, and
+`12 / 9.65 = 1.243` — so the entire cushion was consumed by that systematic slip before local
+word speed was considered at all. Measured here: **11 clips solved clean and failed the linter
+after sync, nine of them by fewer than twelve frames.** It is now written as the product it
+always was — `RATE_SLIP × LOCAL_CUSHION` — so the two reasons stay visible and it cannot be
+re-tuned back to one number that merely looks large. Sealed as correction 29.
+
+#### The script described a run the viewer never sees — and nothing could see it
+
+The worst defect of the session, caught by pulling one frame out of the footage rather than by
+any gate. The narration was written from a **verification run** of the project
+(`/tmp/mcp-build`) while the video is a **separate recording** of the same code. Same program,
+different dice:
+
+| the script said | the terminal on screen said |
+|---|---|
+| "checkout failed **five** times" | `/checkout failed 7 times` |
+| "it chose recent errors — **and then slowest routes as well**" | `it chose recent_errors({})`, once |
+| "it averages well over a second, and everything else comes back in one millisecond" | *"…has failed 7 times. It would be beneficial to investigate the specific error messages…"* |
+| checkout "took nearly **two seconds**" | `ERROR /checkout 500 976ms` |
+| the middleware is "only **six** lines" | ten lines on screen |
+| the loop "is a **while**, not an if" | `for call in picked.tool_calls:` — one round |
+
+The payoff beat — the one the whole video builds to — described tool calls that never happened.
+Lint passed, sync audit passed, hold check passed, recording preflight passed.
+
+**Why nothing caught it:** `headingFor()` captures the last *command* (`$ cat pyproject.toml`),
+so the pipeline had never once looked at the *output*. A spoken figure had nothing to be checked
+against. `screenTextFor()` now captures the visible terminal rows and editor lines verbatim,
+`bake-rec` bakes them onto each clip as `said`, and `check-recordings` prints
+**FIGURES SPOKEN THAT THE FOOTAGE DOES NOT SHOW** per scene. Proved by fixture: a scene saying
+"five times / 1543ms" over footage saying "7 times / 1589ms" is flagged, and one saying
+"seven times / 1589 milliseconds" over the same footage is clean — the first tokenizer had a
+trailing `\b` that made `1589ms` and `1589` disagree, which the fixture caught. Recordings made
+before the capture report **"not measured"**, never a false pass. Sealed as correction 30.
+
+**The rule: a verification run is not the take.** Numbers go into a script from the frames that
+will actually ship, pulled with `ffmpeg -sseof -0.2 -i seg-NN.mp4 -frames:v 1 out.png` and read.
+
+#### PIPELINE marches on a fixed interval — LAW 0i.1, unguarded
+
+`src/scenes/Pipeline.tsx` lights its stages on `igStep = 22` frames from a single scene anchor,
+so stage four arrives whether or not the voice has reached it. That is exactly the pattern
+LAW 0i.1 forbids, in a shipped component, and **nothing gates it** — the middleware beat here was
+re-cast to a `DIAGRAM` flow (five nodes and four edges, each on its own word) instead. The general
+scan for fixed frame intervals inside explanatory components is still owed.
+
+#### Smaller things this cut paid for
+
+- **`headingFor()` reads the terminal on an editor surface.** Every editor clip baked
+  `shows: "$ cat pyproject.toml"` — the last terminal command, not the file on screen. The
+  label-vs-screen preflight is therefore blind on editor beats; it still works on browser ones.
+- **The title claimed a runtime the cut does not have.** The brief was *"under 20 minutes"*;
+  teaching it properly took 21:15, so the time claim came off the thumbnail rather than the
+  content coming out of the video.
+- **Two `saved` keystroke clips were dropped from the `.env` beat**, not to save time but because
+  a 38-frame save with three fast words after it cannot satisfy the gap rule, and the same action
+  is already shown on the file that matters.
+
 ### 2026-09-03 (evening) — "Point AI At It" begins, and four measurements that failed soft
 
 A six-part tutorial series is in flight: **Point AI At It**, teaching someone in IT to point

@@ -146,8 +146,22 @@ export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], s
       //
       // MEASURED, 2026-09-04: six clips passed this solve and failed the linter after
       // sync, the worst by 71 frames — `openignore` needed 215f and got 144f across the
-      // words "and we add one line to it". A 25% cushion covers every case in that cut.
-      const GAP_MARGIN = 1.25;
+      // words "and we add one line to it". A 25% cushion covered every case in that cut.
+      //
+      // AND THEN IT DID NOT, ON THE NEXT ONE (2026-09-04, the MCP agent cut: 11 clips cut
+      // off, nine of them by fewer than 12 frames). The cushion has TWO jobs and was sized
+      // for only one of them:
+      //   (a) the SYSTEMATIC gap between what this solver assumes and what the voice does.
+      //       This pass runs pre-voice at FPW = 12 frames/word; en-US-AvaMultilingualNeural
+      //       at the house +8% delivers 9.65. That is a ratio of 1.243 — so a 1.25 cushion
+      //       is spent almost entirely before local variation is considered at all.
+      //   (b) LOCAL variation: "and we add one line to it" runs far under the average and a
+      //       spelled-out AZURE_OPENAI_API_KEY far over.
+      // So the cushion is the PRODUCT of the two, not the larger of them. The nine clips
+      // that failed by under 12 frames are exactly what (a) eating (b) looks like.
+      const RATE_SLIP = 12 / 9.65;   // solver's FPW vs the measured voice rate
+      const LOCAL_CUSHION = 1.25;    // the 2026-09-04 measurement above
+      const GAP_MARGIN = RATE_SLIP * LOCAL_CUSHION;
       const floor = i === 0 ? start : starts[i - 1] + clipFrames[i - 1] * GAP_MARGIN;
       const after = clipFrames.slice(i).reduce((a, b) => a + b, 0);
       const tailOk = asked + after <= Math.max(auto + after, total * LAW8_TAIL - FPW);

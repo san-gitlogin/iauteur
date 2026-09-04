@@ -81,33 +81,31 @@
     {
       "id": "added",
       "action": "run",
-      "cmd": "uv pip list | grep -E \"^(mcp|fastapi|openai|httpx|uvicorn|python-dotenv) \"",
-      "label": "six libraries, and their versions",
+      "cmd": "cat pyproject.toml",
+      "label": "the six, written into the project",
       "focus": "terminal",
       "clearFirst": true,
       "expect": {
-        "contains": "mcp",
+        "contains": "mcp[cli]",
         "exitCode": 0
       },
       "marks": [
         {
-          "id": "mcp",
-          "text": "mcp"
-        },
-        {
-          "id": "fastapi",
-          "text": "fastapi"
-        },
-        {
-          "id": "openai",
-          "text": "openai"
+          "id": "deps",
+          "text": "mcp[cli]"
         }
       ]
     },
     {
       "id": "openapi",
       "action": "openFile",
-      "file": "api.py",
+      "path": "api.py",
+      "label": "an empty file"
+    },
+    {
+      "id": "openapiSettle",
+      "action": "pause",
+      "ms": 1200,
       "label": "an empty file"
     },
     {
@@ -195,8 +193,14 @@
     {
       "id": "opentraffic",
       "action": "openFile",
-      "file": "traffic.py",
+      "path": "traffic.py",
       "label": "something to call it with"
+    },
+    {
+      "id": "opentrafficSettle",
+      "action": "pause",
+      "ms": 1200,
+      "label": "an empty file"
     },
     {
       "id": "traffic1",
@@ -258,8 +262,14 @@
     {
       "id": "opentools",
       "action": "openFile",
-      "file": "tools.py",
+      "path": "tools.py",
       "label": "plain Python, no AI yet"
+    },
+    {
+      "id": "opentoolsSettle",
+      "action": "pause",
+      "ms": 1200,
+      "label": "an empty file"
     },
     {
       "id": "t1",
@@ -331,8 +341,14 @@
     {
       "id": "openserver",
       "action": "openFile",
-      "file": "server.py",
+      "path": "server.py",
       "label": "the MCP server"
+    },
+    {
+      "id": "openserverSettle",
+      "action": "pause",
+      "ms": 1200,
+      "label": "an empty file"
     },
     {
       "id": "s1",
@@ -390,8 +406,14 @@
     {
       "id": "openenv",
       "action": "openFile",
-      "file": ".env",
+      "path": ".env",
       "label": "the three settings"
+    },
+    {
+      "id": "openenvSettle",
+      "action": "pause",
+      "ms": 1200,
+      "label": "an empty file"
     },
     {
       "id": "typeenv",
@@ -421,8 +443,14 @@
     {
       "id": "openignore",
       "action": "openFile",
-      "file": ".gitignore",
+      "path": ".gitignore",
       "label": "and git never sees it"
+    },
+    {
+      "id": "openignoreSettle",
+      "action": "pause",
+      "ms": 1200,
+      "label": "an empty file"
     },
     {
       "id": "typeignore",
@@ -444,13 +472,31 @@
     {
       "id": "openagent",
       "action": "openFile",
-      "file": "agent.py",
+      "path": "agent.py",
       "label": "the last file"
+    },
+    {
+      "id": "openagentSettle",
+      "action": "pause",
+      "ms": 1200,
+      "label": "an empty file"
     },
     {
       "id": "ag1",
       "action": "type",
-      "text": "import asyncio\nimport json\nimport os\nimport sys\n\nfrom dotenv import load_dotenv\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\nfrom openai import OpenAI\n\nload_dotenv()\n\n\nasync def main(question: str) -> None:\n    params = StdioServerParameters(command=\".venv/bin/python\", args=[\"server.py\"])\n\n    async with stdio_client(params) as (read, write):\n        async with ClientSession(read, write) as session:\n            await session.initialize()",
+      "text": "import asyncio\nimport json\nimport os\nimport sys\n\nfrom dotenv import load_dotenv\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\nfrom openai import OpenAI\n\nload_dotenv()",
+      "label": "the imports",
+      "marks": [
+        {
+          "id": "imports",
+          "text": "from mcp import ClientSession, StdioServerParameters"
+        }
+      ]
+    },
+    {
+      "id": "ag1b",
+      "action": "type",
+      "text": "\n\n\nasync def main(question: str) -> None:\n    params = StdioServerParameters(command=\".venv/bin/python\", args=[\"server.py\"])\n\n    async with stdio_client(params) as (read, write):\n        async with ClientSession(read, write) as session:\n            await session.initialize()",
       "label": "start the server, connect to it",
       "marks": [
         {
@@ -527,7 +573,7 @@
     {
       "id": "runagent",
       "action": "run",
-      "cmd": "uv run python agent.py \"our checkout is misbehaving - what does the log say, and how bad is it?\"",
+      "cmd": "uv run python agent.py \"our checkout is misbehaving - what does the log say? Two sentences.\"",
       "label": "asking in plain English",
       "focus": "terminal",
       "clearFirst": true,

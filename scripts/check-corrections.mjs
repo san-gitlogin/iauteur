@@ -129,6 +129,31 @@ const CORRECTIONS = [
   ['one generic card carrying every explanatory beat', 'SEAL',
    '"Not a graph but something different. I need variations."',
    () => has('scripts/lint-spec.mjs', 'beats that explain something')],
+
+  // ── the solver's cushion, sized for the wrong thing ────────────────────────
+  // The anchor solver runs PRE-VOICE at 12 frames/word; the house voice delivers
+  // 9.65. Its inter-clip cushion was 1.25 — almost exactly that 1.243 ratio — so
+  // the whole cushion was spent on the systematic slip and nothing was left for
+  // local word speed. Eleven clips passed the solve and were cut off mid-action
+  // after sync, nine of them by under twelve frames. The cushion is the PRODUCT
+  // of the two factors, and writing it as a product is what stops it being
+  // re-tuned back to a single number that looks big enough.
+  // ── the script described a run the viewer never sees ───────────────────────
+  // The narration was written from a VERIFICATION run and the video was a separate
+  // recording of the same project — same code, different dice. "Checkout failed five
+  // times" over a terminal reading 7; "it chose recent_errors AND slowest_routes" over
+  // footage where it chose one. Every gate passed, because `heading` captured the last
+  // COMMAND and nothing had ever captured the OUTPUT.
+  ['a spoken figure that the footage never showed', 'SEAL',
+   'the payoff beat described a different run of the same project, and nothing could see it',
+   () => has('scripts/lib/record/runner.mjs', 'screenTextFor') &&
+         has('scripts/bake-rec.mjs', 'clip.said') &&
+         has('scripts/check-recordings.mjs', 'FIGURES SPOKEN THAT THE FOOTAGE')],
+
+  ['a clip cut off because the cushion covered only half its job', 'STRUCT',
+   'eleven clips solved clean and failed the linter after sync, nine by <12 frames',
+   () => has('scripts/lib/record/anchors.mjs', 'RATE_SLIP') &&
+         has('scripts/lib/record/anchors.mjs', 'LOCAL_CUSHION')],
 ];
 
 let missing = [];

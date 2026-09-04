@@ -1,14 +1,71 @@
 {
   "meta": {
-    "topic": "Code an AI agent with MCP",
+    "topic": "Building an AI agent that calls your own tools, with MCP",
+    "subject": "Python",
     "format": "long",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO",
-    "subject": "Python",
+    "audience": "beginner",
+    "onePayoff": "wrap plain Python functions as MCP tools and let a model choose between them",
+    "openLoop": "what does it actually take to code an AI agent?",
+    "analogy": "a menu you hand the model, instead of telling it what to order",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "skill-build",
+      "sovereignty"
+    ],
     "seo": {
-      "pinned": "What would you point an agent at first?"
+      "title": "Code An AI Agent With MCP — Python, Every Line Typed",
+      "altTitles": [
+        "Build Your First MCP Server And Agent — Python, For Beginners",
+        "MCP Explained By Building One — Python, Every Line Typed"
+      ],
+      "hook": "What does it actually take to code an AI agent?",
+      "breakdown": "a small service, the log it writes, three plain Python functions, an MCP server that describes them to a model, and the agent loop that picks one — typed line by line",
+      "queries": [
+        "mcp python tutorial",
+        "model context protocol python example",
+        "how to build an mcp server",
+        "ai agent python tutorial for beginners",
+        "mcp tool calling example",
+        "fastmcp mcpserver difference",
+        "openai function calling with mcp",
+        "azure openai python agent",
+        "mcp server stdio transport",
+        "how does an ai agent choose a tool"
+      ],
+      "hashtags": [
+        "#python",
+        "#mcp",
+        "#ai",
+        "#tutorial"
+      ],
+      "pinned": "What would you point this at first — a log, or an API?",
+      "tags": [
+        "mcp",
+        "model context protocol",
+        "python",
+        "ai agent",
+        "mcp server",
+        "tool calling",
+        "openai",
+        "azure openai",
+        "fastapi",
+        "beginner python",
+        "ai tutorial",
+        "mcp python sdk",
+        "agent loop",
+        "function calling"
+      ],
+      "sources": [
+        "Model Context Protocol — https://modelcontextprotocol.io",
+        "mcp, the official Python SDK — https://github.com/modelcontextprotocol/python-sdk",
+        "fastapi — https://fastapi.tiangolo.com",
+        "uvicorn — https://www.uvicorn.org",
+        "httpx — https://www.python-httpx.org",
+        "openai Python SDK — https://github.com/openai/openai-python",
+        "python-dotenv — https://github.com/theskumar/python-dotenv",
+        "uv — https://docs.astral.sh/uv/"
+      ]
     }
   },
   "brand": {
@@ -20,16 +77,54 @@
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles"
+    "title": "Code An AI Agent With MCP",
+    "badge": "Python · MCP · Beginners",
+    "note": "five files, from an empty folder",
+    "asset": "si:python",
+    "logos": [
+      "si:python",
+      "si:openai",
+      "si:fastapi",
+      "si:anthropic"
+    ]
   },
   "scenes": [
     {
       "id": "s01",
+      "type": "HOOK",
+      "narration": "An AI agent, in Python, that reads your logs and answers you. Five files. Let's write them.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "CODE AN AI AGENT",
+        "subtext": "Python + MCP, five files, every line typed",
+        "hookVariant": "statement",
+        "headlineAtWord": 1
+      },
+      "durationFrames": 221,
+      "audio": "audio/mcpagent_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "Welcome to THE NBX STUDIO. Today we build an AI agent in Python — a program handed a question in plain English, that works out which of your own tools answers it, runs that tool, and replies. MCP is what makes it possible. So what does that take?",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "title": "Code an AI agent with MCP",
+        "subtitle": "from an empty folder, every line typed"
+      },
+      "durationFrames": 476,
+      "audio": "audio/mcpagent_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
       "type": "DIAGRAM",
-      "durationFrames": 700,
-      "narration": "Here is the whole thing we are about to build, and it is five files. At the top, your question, typed in plain English. That goes to agent dot py, the loop you write yourself. The loop asks Azure OpenAI which tool to use \u2014 and I am using Azure here, but any API you like will do. The tools live in server dot py, your MCP server. It wraps tools dot py, three ordinary Python functions. One of them reads service dot log, which your own app wrote. The other calls the orders API, running on port eight thousand. Five files, top to bottom, and we type every line of them.",
+      "narration": "Here's everything we're about to build, and it's five files. At the top: your question, typed in plain English. That goes into agent dot py, the loop you write yourself. The loop asks a model which tool to use — I am using Azure OpenAI here, and any API you like will do just as well. The tools themselves live in server dot py, which is your MCP server. Server dot py wraps tools dot py: three ordinary Python functions, nothing clever. Two of them read service dot log, a log file your own app wrote. The other calls the orders API, a small web service running on your machine. Five files, top to bottom, and we type every line of all of them.",
+      "transition": "slide",
+      "background": "zoneC",
       "data": {
         "diagram": {
           "layout": "tree",
@@ -39,96 +134,5524 @@
               "label": "Your question",
               "sub": "in plain English",
               "color": "blue",
-              "atWord": 14
+              "atWord": 11.083
             },
             {
               "id": "agent",
               "label": "agent.py",
               "sub": "the loop you write",
               "color": "purple",
-              "atWord": 21,
-              "parent": "q"
+              "parent": "q",
+              "atWord": 18.75
             },
             {
               "id": "model",
               "label": "Azure OpenAI",
               "sub": "picks a tool",
               "color": "orange",
-              "atWord": 31,
-              "parent": "agent"
+              "parent": "agent",
+              "atWord": 34.5
             },
             {
               "id": "server",
               "label": "server.py",
               "sub": "your MCP server",
               "color": "green",
-              "atWord": 50,
-              "parent": "agent"
+              "parent": "agent",
+              "atWord": 48.083
             },
             {
               "id": "tools",
               "label": "tools.py",
               "sub": "three functions",
               "color": "blue",
-              "atWord": 57,
-              "parent": "server"
+              "parent": "server",
+              "atWord": 59.583
             },
             {
               "id": "log",
               "label": "service.log",
               "sub": "your app wrote it",
               "color": "purple",
-              "atWord": 66,
-              "parent": "tools"
+              "parent": "tools",
+              "atWord": 75.583
             },
             {
               "id": "api",
               "label": "the orders API",
-              "sub": "FastAPI on :8000",
+              "sub": "a small web service",
               "color": "orange",
-              "atWord": 74,
-              "parent": "tools"
+              "parent": "tools",
+              "atWord": 83.333
             }
           ],
           "edges": [
             {
               "from": "q",
               "to": "agent",
-              "atWord": 21
+              "label": "you ask",
+              "atWord": 22.25
             },
             {
               "from": "agent",
               "to": "model",
               "label": "which tool?",
-              "atWord": 31
+              "atWord": 28.5
             },
             {
               "from": "agent",
               "to": "server",
               "label": "run it",
-              "atWord": 50
+              "atWord": 46.167
             },
             {
               "from": "server",
               "to": "tools",
               "label": "wraps",
-              "atWord": 57
+              "atWord": 58.75
             },
             {
               "from": "tools",
               "to": "log",
-              "atWord": 66
+              "label": "reads",
+              "atWord": 72.333
             },
             {
               "from": "tools",
               "to": "api",
-              "atWord": 74
+              "label": "calls",
+              "atWord": 82.083
             }
           ]
         }
       },
+      "durationFrames": 1242,
+      "audio": "audio/mcpagent_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "MCP_REACH",
+      "narration": "Before we type a single line, here's the thing that makes an agent necessary at all. A model runs on somebody else's machines. The model can't open your log file, it can't call your service, and it can't see your database, because none of those are text it was given. Everything useful is on your side of that line. The only thing that ever crosses is code you write — which is exactly what we spend the next twenty minutes doing.",
+      "transition": "zoom",
       "background": "zoneA",
-      "transition": "fade"
+      "data": {
+        "mcpReach": {
+          "headline": "What a model [cannot touch]",
+          "caption": "the hard line",
+          "premise": "The model runs on a provider's servers. Everything on the right is on your machine, and the line between them is real.",
+          "color": "purple",
+          "atWord": 1,
+          "ends": [
+            {
+              "label": "THE MODEL"
+            },
+            {
+              "label": "YOUR MACHINE"
+            }
+          ],
+          "cells": [
+            {
+              "label": "your log file",
+              "sub": "service.log, written by your app",
+              "icon": "lucide:file-text",
+              "text": "out",
+              "atWord": 21.417
+            },
+            {
+              "label": "your service",
+              "sub": "the API on port 8000",
+              "icon": "lucide:server",
+              "text": "out",
+              "atWord": 24.833
+            },
+            {
+              "label": "your database",
+              "sub": "every row behind your app",
+              "icon": "lucide:database",
+              "text": "out",
+              "atWord": 27.917
+            },
+            {
+              "label": "your code",
+              "sub": "the one thing that reaches both",
+              "icon": "lucide:terminal",
+              "text": "bridge",
+              "atWord": 45
+            }
+          ]
+        }
+      },
+      "durationFrames": 694,
+      "audio": "audio/mcpagent_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "CHAPTER",
+      "narration": "Nothing installed yet. Let's go from an empty folder to a running service.",
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "From an empty folder",
+          "subtitle": "one command, and six libraries"
+        }
+      },
+      "durationFrames": 161,
+      "audio": "audio/mcpagent_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "RECORDED_STEP",
+      "narration": "Here's the folder, and there's nothing in it but seven empty files. uv init makes it a Python project — that's the pyproject file and the lock file. Then one command brings in everything we need. mcp is the official Python SDK for the Model Context Protocol, written and maintained by the people who designed the protocol, and we'll look at their own page for it in a few minutes. FastAPI and uvicorn give us a small web service to point the agent at. httpx makes HTTP calls, openai talks to the model, and python-dotenv reads our settings out of a file.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "an empty folder, and six libraries",
+          "premise": "The project, and the packages the whole video is built on.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#look",
+              "label": "seven empty files",
+              "focus": true,
+              "id": "look",
+              "src": "rec/mcp-agent/seg-01.mp4",
+              "frames": 65,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "files": {
+                  "x": 668,
+                  "y": 646,
+                  "w": 56,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 996,
+                  "y": 646,
+                  "w": 19,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 843,
+                  "h": 58
+                }
+              ],
+              "shows": "$ ls",
+              "atWord": 2.75
+            },
+            {
+              "ref": "rec:mcp-agent#init",
+              "label": "uv init",
+              "focus": true,
+              "wantAtWord": 10.5,
+              "callouts": [
+                {
+                  "text": "now it is a project",
+                  "mark": "made",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 17.417,
+                  "atWord": 17.417
+                }
+              ],
+              "id": "init",
+              "src": "rec/mcp-agent/seg-02.mp4",
+              "frames": 97,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "made": {
+                  "x": 368,
+                  "y": 685,
+                  "w": 178,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 666,
+                  "w": 122,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 843,
+                  "h": 96
+                }
+              ],
+              "shows": "$ uv init --app",
+              "atWord": 10.5
+            },
+            {
+              "ref": "rec:mcp-agent#add",
+              "label": "the libraries",
+              "focus": true,
+              "wantAtWord": 24.25,
+              "id": "add",
+              "src": "rec/mcp-agent/seg-03.mp4",
+              "frames": 195,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 499,
+                  "y": 613,
+                  "w": 675,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 613,
+                  "w": 806,
+                  "h": 265
+                }
+              ],
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "atWord": 24.25
+            },
+            {
+              "ref": "rec:mcp-agent#added",
+              "label": "written into the project",
+              "focus": true,
+              "wantAtWord": 35.75,
+              "callouts": [
+                {
+                  "text": "the official MCP SDK",
+                  "side": "top",
+                  "color": "purple",
+                  "wantAtWord": 32.917,
+                  "atWord": 56.833
+                },
+                {
+                  "text": "a service to point at",
+                  "side": "bottom",
+                  "color": "blue",
+                  "wantAtWord": 56.833,
+                  "atWord": 60.417
+                }
+              ],
+              "id": "added",
+              "src": "rec/mcp-agent/seg-04.mp4",
+              "frames": 99,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "deps": {
+                  "x": 415,
+                  "y": 627,
+                  "w": 75,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 626,
+                  "w": 169,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 626,
+                  "w": 300,
+                  "h": 97
+                },
+                {
+                  "x": 368,
+                  "y": 743,
+                  "w": 262,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 801,
+                  "w": 366,
+                  "h": 77
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 47.75
+            }
+          ],
+          "sourceNote": "mcp — the official Python SDK: github.com/modelcontextprotocol/python-sdk",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1018,
+      "audio": "audio/mcpagent_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "narration": "First the thing an agent would investigate: a service, and the log it leaves behind.",
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "A service to ask about",
+          "subtitle": "and the log it writes itself"
+        }
+      },
+      "durationFrames": 169,
+      "audio": "audio/mcpagent_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RECORDED_STEP",
+      "narration": "New file, api dot py. Api dot py is a tiny web service, and FastAPI makes one in a few lines. We import it, we create the app, and we keep three orders in a plain Python dictionary — no database, because a database isn't what this video is about. Notice the third one: SO one thousand and three, lost in transit. One of these three is not fine, and that is deliberate — we want the log to have something in it worth asking about. And if you've never used FastAPI before, that's fine — the whole idea is that you write an ordinary Python function, put one line above it saying which web address should call it, and FastAPI does the web part for you.",
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "a small service, in a few lines",
+          "premise": "The app the agent will later be asked about.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#openapi",
+              "label": "an empty file",
+              "focus": true,
+              "id": "openapi",
+              "src": "rec/mcp-agent/seg-05.mp4",
+              "frames": 214,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 626,
+                  "w": 300,
+                  "h": 97
+                },
+                {
+                  "x": 368,
+                  "y": 743,
+                  "w": 262,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 801,
+                  "w": 366,
+                  "h": 77
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 3.917
+            },
+            {
+              "ref": "rec:mcp-agent#api1",
+              "label": "the app, and three orders",
+              "focus": true,
+              "wantAtWord": 20.083,
+              "zooms": [
+                {
+                  "mark": "app",
+                  "wantAtWord": 22,
+                  "atWord": 64.75
+                },
+                {
+                  "mark": "orders",
+                  "wantAtWord": 41.333,
+                  "atWord": 75.167
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "no database needed",
+                  "mark": "orders",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 29.167,
+                  "atWord": 69
+                }
+              ],
+              "id": "api1",
+              "src": "rec/mcp-agent/seg-07.mp4",
+              "frames": 568,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "app": {
+                  "x": 433,
+                  "y": 203,
+                  "w": 158,
+                  "h": 21
+                },
+                "orders": {
+                  "x": 475,
+                  "y": 338,
+                  "w": 95,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 137,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 149,
+                  "w": 538,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 203,
+                  "w": 158,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 865,
+                  "h": 129
+                },
+                {
+                  "x": 368,
+                  "y": 626,
+                  "w": 300,
+                  "h": 97
+                },
+                {
+                  "x": 368,
+                  "y": 743,
+                  "w": 262,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 801,
+                  "w": 366,
+                  "h": 77
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 25.083
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1149,
+      "audio": "audio/mcpagent_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "RECORDED_STEP",
+      "narration": "Now the part that matters most, and it's only ten lines. A middleware is a piece of code that runs on every single request, before and after the real work. We note the time, we let the request happen, we measure how long it took, and we write one line to a file called service dot log. That's it. That's where our log comes from — the app writes it, request by request, exactly like yours does at work. No fixture, no sample file, nothing downloaded. Ten lines, and the service starts keeping its own diary.",
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "the app writes its own log",
+          "premise": "A middleware that records one line per request.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#api2",
+              "label": "a line per request",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "mw",
+                  "wantAtWord": 10.5,
+                  "atWord": 49.083
+                },
+                {
+                  "mark": "write",
+                  "wantAtWord": 35.833,
+                  "atWord": 53
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "runs on every request",
+                  "mark": "mw",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 15.583,
+                  "atWord": 50.583
+                },
+                {
+                  "text": "one line, per request",
+                  "mark": "write",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 38.25,
+                  "atWord": 56.167
+                }
+              ],
+              "id": "api2",
+              "src": "rec/mcp-agent/seg-08.mp4",
+              "frames": 707,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "mw": {
+                  "x": 433,
+                  "y": 257,
+                  "w": 243,
+                  "h": 21
+                },
+                "write": {
+                  "x": 517,
+                  "y": 446,
+                  "w": 95,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 865,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 843,
+                  "h": 264
+                },
+                {
+                  "x": 368,
+                  "y": 626,
+                  "w": 300,
+                  "h": 97
+                },
+                {
+                  "x": 368,
+                  "y": 743,
+                  "w": 262,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 801,
+                  "w": 366,
+                  "h": 77
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 1.667
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 944,
+      "audio": "audio/mcpagent_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "DIAGRAM",
+      "narration": "So here's the journey every single request now takes. A request arrives, the middleware starts a clock, the route does the actual work, the middleware stops the clock, and one line drops into the log. Five steps, whether the request took one millisecond or two seconds, which means the log is complete by construction rather than by luck.",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "diagram": {
+          "layout": "flow",
+          "direction": "horizontal",
+          "nodes": [
+            {
+              "id": "rq",
+              "label": "a request",
+              "sub": "GET /orders",
+              "color": "blue",
+              "atWord": 10.417
+            },
+            {
+              "id": "m1",
+              "label": "middleware",
+              "sub": "start the clock",
+              "color": "purple",
+              "atWord": 13.667
+            },
+            {
+              "id": "rt",
+              "label": "the route",
+              "sub": "your actual code",
+              "color": "blue",
+              "atWord": 16.25
+            },
+            {
+              "id": "m2",
+              "label": "middleware",
+              "sub": "stop the clock",
+              "color": "purple",
+              "atWord": 21.25
+            },
+            {
+              "id": "lg",
+              "label": "one log line",
+              "sub": "into service.log",
+              "color": "green",
+              "atWord": 25.167
+            }
+          ],
+          "edges": [
+            {
+              "from": "rq",
+              "to": "m1",
+              "label": "every one",
+              "atWord": 12.417
+            },
+            {
+              "from": "m1",
+              "to": "rt",
+              "label": "then the work",
+              "atWord": 18.583
+            },
+            {
+              "from": "rt",
+              "to": "m2",
+              "label": "and back out",
+              "atWord": 22.333
+            },
+            {
+              "from": "m2",
+              "to": "lg",
+              "label": "one line",
+              "atWord": 26.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 597,
+      "audio": "audio/mcpagent_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "RECORDED_STEP",
+      "narration": "And three routes. Slash orders lists them. Slash orders slash an id returns one, or a four oh four if there's no such order. And slash checkout is deliberately awful: it sleeps for anywhere from under a second to nearly two and a half, and more than half the time it fails outright with a five hundred. That's on purpose, because we're manufacturing a real problem — so that later the agent has something true to find, rather than us pretending it found something. A checkout that's slow and flaky is about the most ordinary production complaint there is, which is exactly why it makes a good example. Nobody has ever opened a log looking for the route that works.",
+      "transition": "slide",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "three routes, one of them bad on purpose",
+          "premise": "The endpoints, including the one that will misbehave.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#api3",
+              "label": "the routes",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "checkout",
+                  "wantAtWord": 25.25,
+                  "atWord": 56.333
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 47.75,
+                  "atWord": 64.417
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "slow on purpose",
+                  "mark": "checkout",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 30.75,
+                  "atWord": 61.667
+                },
+                {
+                  "text": "and fails half the time",
+                  "mark": "flaky",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 37.333,
+                  "atWord": 68.917
+                }
+              ],
+              "id": "api3",
+              "src": "rec/mcp-agent/seg-09.mp4",
+              "frames": 738,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "checkout": {
+                  "x": 433,
+                  "y": 365,
+                  "w": 232,
+                  "h": 21
+                },
+                "flaky": {
+                  "x": 507,
+                  "y": 446,
+                  "w": 232,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 337,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 717,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 748,
+                  "h": 156
+                },
+                {
+                  "x": 368,
+                  "y": 626,
+                  "w": 300,
+                  "h": 97
+                },
+                {
+                  "x": 368,
+                  "y": 743,
+                  "w": 262,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 801,
+                  "w": 366,
+                  "h": 77
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 3.667
+            },
+            {
+              "ref": "rec:mcp-agent#saveapi",
+              "label": "saved",
+              "focus": true,
+              "wantAtWord": 50.25,
+              "id": "saveapi",
+              "src": "rec/mcp-agent/seg-10.mp4",
+              "frames": 38,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 337,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 717,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 748,
+                  "h": 156
+                },
+                {
+                  "x": 368,
+                  "y": 626,
+                  "w": 300,
+                  "h": 97
+                },
+                {
+                  "x": 368,
+                  "y": 743,
+                  "w": 262,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 801,
+                  "w": 366,
+                  "h": 77
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "S"
+              ],
+              "atWord": 72.917
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1122,
+      "audio": "audio/mcpagent_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "API_REQUEST_RESPONSE",
+      "narration": "And if the word route is new to you, that's all a route is. A web address on the left, a Python function behind it, and whatever that function returns comes back as JSON on the right. Nothing more mysterious than that, so if routes felt intimidating, they should not.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "api": {
+          "headline": "A route is [an address plus a function]",
+          "method": "GET",
+          "path": "/orders/SO-1003",
+          "requestLines": [
+            "GET /orders/SO-1003"
+          ],
+          "status": "200",
+          "statusText": "OK",
+          "responseLines": [
+            "{\"id\": \"SO-1003\",",
+            " \"status\": \"lost\"}"
+          ],
+          "clientLabel": "anything",
+          "serverLabel": "api.py",
+          "atWord": 9.167
+        }
+      },
+      "durationFrames": 472,
+      "audio": "audio/mcpagent_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "RECORDED_STEP",
+      "narration": "Start it. The ampersand at the end puts it in the background, so the service keeps running and we get our prompt back — without that ampersand the terminal would sit there serving, and we would have nowhere left to type. Six seconds later, uvicorn says application startup complete. Uvicorn is the little web server FastAPI runs on, and that line is it telling us our service is live on port eight thousand. So the service is up and listening, and so far it has served exactly nobody.",
+      "transition": "wipe",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "the service goes live",
+          "premise": "Starting the API in the background.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#serve",
+              "label": "into the background",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "& keeps it running",
+                  "mark": null,
+                  "side": "top",
+                  "color": "green",
+                  "wantAtWord": 6,
+                  "atWord": 19.417
+                }
+              ],
+              "id": "serve",
+              "src": "rec/mcp-agent/seg-11.mp4",
+              "frames": 159,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 499,
+                  "y": 627,
+                  "w": 506,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 337,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 717,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 748,
+                  "h": 156
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 637,
+                  "h": 58
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 2.583
+            },
+            {
+              "ref": "rec:mcp-agent#serveup",
+              "label": "the service is live",
+              "focus": true,
+              "wantAtWord": 27.917,
+              "callouts": [
+                {
+                  "text": "up on port 8000",
+                  "mark": "up",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 56,
+                  "atWord": 49.083
+                }
+              ],
+              "id": "serveup",
+              "src": "rec/mcp-agent/seg-12.mp4",
+              "frames": 167,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "up": {
+                  "x": 462,
+                  "y": 704,
+                  "w": 262,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 666,
+                  "w": 272,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 337,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 717,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 748,
+                  "h": 156
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 684,
+                  "h": 135
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 27.917
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 833,
+      "audio": "audio/mcpagent_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "RECORDED_STEP",
+      "narration": "So it needs some traffic, and we're going to write something that makes some. Sixty requests, split between listing orders, fetching one, and checking out, and a random number decides which of the three each request goes to. Run it, and every single one of those requests goes through our middleware and lands as a line in service dot log, because the middleware sees every one of them. Look at the last few. A checkout that failed after nearly a second, and orders that came back in one millisecond. That file isn't a fixture. Our own app just wrote it, one line per request, while we watched. And that matters, because everything we build from here reads this file — so if the log is honest, the answers will be too. This is the part people skip, and then wonder why their agent keeps making things up. Give it something true to read, and half the problem is already solved. And look at the shape of a line while it's on screen: a timestamp, a level, a route, a status code, and a duration in milliseconds. Five fields, separated by spaces. Every function we write next reads exactly that.",
+      "transition": "dip",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "real traffic, and a real log",
+          "premise": "Generating traffic, and reading what the app recorded.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#opentraffic",
+              "label": "something to call it with",
+              "focus": true,
+              "id": "opentraffic",
+              "src": "rec/mcp-agent/seg-13.mp4",
+              "frames": 217,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 684,
+                  "h": 135
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 1.75
+            },
+            {
+              "ref": "rec:mcp-agent#traffic1",
+              "label": "sixty requests",
+              "focus": true,
+              "wantAtWord": 9.417,
+              "zooms": [
+                {
+                  "mark": "loop",
+                  "wantAtWord": 12.167,
+                  "atWord": 64.583
+                }
+              ],
+              "id": "traffic1",
+              "src": "rec/mcp-agent/seg-15.mp4",
+              "frames": 511,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "loop": {
+                  "x": 433,
+                  "y": 230,
+                  "w": 190,
+                  "h": 21
+                },
+                "post": {
+                  "x": 707,
+                  "y": 419,
+                  "w": 95,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 127,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 306,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 230,
+                  "w": 443,
+                  "h": 210
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 369,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 684,
+                  "h": 135
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 23.917
+            },
+            {
+              "ref": "rec:mcp-agent#savetraffic",
+              "label": "saved",
+              "focus": true,
+              "id": "savetraffic",
+              "src": "rec/mcp-agent/seg-16.mp4",
+              "frames": 38,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 127,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 306,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 230,
+                  "w": 443,
+                  "h": 210
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 369,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 684,
+                  "h": 135
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "S"
+              ],
+              "atWord": 75.167
+            },
+            {
+              "ref": "rec:mcp-agent#runtraffic",
+              "label": "making the traffic",
+              "focus": true,
+              "wantAtWord": 28.833,
+              "callouts": [
+                {
+                  "text": "each one becomes a log line",
+                  "mark": null,
+                  "side": "top",
+                  "color": "blue",
+                  "wantAtWord": 37.5,
+                  "atWord": 100.417
+                }
+              ],
+              "id": "runtraffic",
+              "src": "rec/mcp-agent/seg-17.mp4",
+              "frames": 270,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "done": {
+                  "x": 368,
+                  "y": 762,
+                  "w": 37,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 743,
+                  "w": 225,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 127,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 306,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 230,
+                  "w": 443,
+                  "h": 210
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 369,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 684,
+                  "h": 173
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 81
+            },
+            {
+              "ref": "rec:mcp-agent#seelog",
+              "label": "the log it wrote",
+              "focus": true,
+              "wantAtWord": 48.25,
+              "zooms": [
+                {
+                  "mark": "line",
+                  "wantAtWord": 51.667,
+                  "atWord": 112.833
+                }
+              ],
+              "id": "seelog",
+              "src": "rec/mcp-agent/seg-18.mp4",
+              "frames": 101,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "line": {
+                  "x": 509,
+                  "y": 685,
+                  "w": 84,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 627,
+                  "w": 178,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 127,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 306,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 230,
+                  "w": 443,
+                  "h": 210
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 369,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 384,
+                  "h": 154
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 104.333
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1829,
+      "audio": "audio/mcpagent_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "LOG_STREAM",
+      "narration": "Here's what our app actually wrote, close up. Every line is one request: the time, the level, the route, the status code, and how long it took. Look at the difference — orders came back in a millisecond, and that one checkout took the best part of a second and then failed anyway.",
+      "transition": "morph",
+      "background": "zoneC",
+      "data": {
+        "logs": {
+          "rate": "per request",
+          "highlight": 4,
+          "atWord": 31.75,
+          "lines": [
+            {
+              "level": "info",
+              "tag": "the 5 fields",
+              "text": "19:38:51 INFO  /orders/SO-1001  200 1ms"
+            },
+            {
+              "level": "info",
+              "tag": "1ms",
+              "text": "19:38:51 INFO  /orders  200 1ms"
+            },
+            {
+              "level": "warn",
+              "tag": "failed, slow",
+              "text": "19:38:52 ERROR /checkout  500 976ms"
+            },
+            {
+              "level": "info",
+              "tag": "1ms",
+              "text": "19:38:52 INFO  /orders  200 1ms"
+            },
+            {
+              "level": "info",
+              "tag": "1ms",
+              "text": "19:38:52 INFO  /orders  200 1ms"
+            }
+          ]
+        }
+      },
+      "durationFrames": 491,
+      "audio": "audio/mcpagent_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "CHAPTER",
+      "narration": "Now three plain Python functions. No AI anywhere near them yet.",
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "Three plain functions",
+          "subtitle": "the ones you probably already have"
+        }
+      },
+      "durationFrames": 168,
+      "audio": "audio/mcpagent_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "RECORDED_STEP",
+      "narration": "New file, tools dot py, and there's nothing clever in it. The first function counts errors. That function walks the log a line at a time, splits each line into its five pieces — time, level, route, status, duration — keeps the ones where the level is ERROR, and tallies them up by route using a Counter. That's eight lines of ordinary Python, and it's the kind of function you've almost certainly written before. Counter is the one piece worth naming: it's a dictionary that counts for you, so you never have to check whether a key already exists before adding one to it. Everything else here is a split, a comparison, and a loop — nothing you would need to look up, and nothing that knows anything at all about AI.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "count the errors",
+          "premise": "Plain Python over the log. No AI involved.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#opentools",
+              "label": "plain Python, no AI yet",
+              "focus": true,
+              "id": "opentools",
+              "src": "rec/mcp-agent/seg-19.mp4",
+              "frames": 213,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 384,
+                  "h": 154
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 3.333
+            },
+            {
+              "ref": "rec:mcp-agent#t1",
+              "label": "count the errors",
+              "focus": true,
+              "wantAtWord": 9.917,
+              "zooms": [
+                {
+                  "mark": "split5",
+                  "wantAtWord": 21.083,
+                  "atWord": 74.333
+                },
+                {
+                  "mark": "counter",
+                  "wantAtWord": 42.167,
+                  "atWord": 79.167
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "five pieces per line",
+                  "mark": "split5",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 35.833,
+                  "atWord": 76.167
+                },
+                {
+                  "text": "counted, not guessed",
+                  "mark": "counter",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 47.417,
+                  "atWord": 81.5
+                }
+              ],
+              "id": "t1",
+              "src": "rec/mcp-agent/seg-21.mp4",
+              "frames": 700,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "split5": {
+                  "x": 887,
+                  "y": 392,
+                  "w": 127,
+                  "h": 21
+                },
+                "counter": {
+                  "x": 560,
+                  "y": 446,
+                  "w": 169,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 327,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 127,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 306,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 284,
+                  "w": 886,
+                  "h": 210
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 384,
+                  "h": 154
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 24.333
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1201,
+      "audio": "audio/mcpagent_long_s17.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s18",
+      "type": "DATABASE_TABLE",
+      "narration": "And this is what that function does to the file. It reads every line, and keeps only the ones marked ERROR. Out of sixty requests, exactly one route ever failed — so the whole answer it hands back is a single sentence: checkout failed seven times. Sixty lines in, one line out, in a form a model can read in one go.",
+      "transition": "push",
+      "background": "zoneC",
+      "data": {
+        "database": {
+          "headline": "Keep the ERROR lines, count the routes",
+          "tableName": "service.log",
+          "query": "level == ERROR, tallied by route",
+          "columns": [
+            "time",
+            "level",
+            "route",
+            "took"
+          ],
+          "rows": [
+            [
+              "19:38:51",
+              "INFO",
+              "/orders/SO-1001",
+              "1ms"
+            ],
+            [
+              "19:38:51",
+              "INFO",
+              "/orders",
+              "1ms"
+            ],
+            [
+              "19:38:52",
+              "ERROR",
+              "/checkout",
+              "976ms"
+            ],
+            [
+              "19:38:52",
+              "INFO",
+              "/orders",
+              "1ms"
+            ],
+            [
+              "19:38:52",
+              "INFO",
+              "/orders",
+              "1ms"
+            ]
+          ],
+          "highlight": [
+            2,
+            2
+          ],
+          "highlightAtWords": [
+            14.833,
+            36.083
+          ],
+          "atWord": 7
+        }
+      },
+      "durationFrames": 611,
+      "audio": "audio/mcpagent_long_s18.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s19",
+      "type": "RECORDED_STEP",
+      "narration": "The second function measures speed. Same walk through the same file, but this time we collect every duration per route, average them, and sort so the slowest route comes out first. And the third function doesn't touch the log at all — it calls the API we just built, over HTTP, using a library called httpx, and hands back whatever the service says. So one function reads a file, and one calls a service. Between them, that's most of the tools you'll ever write: something you already have on disk, and something you already run. Neither of them knows anything about AI, and neither of them needs to. If httpx is new to you, it's just a library for making web requests from Python — the same thing your browser does when you type an address, except your code is doing it and reading the answer back as data.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "measure it, and call it",
+          "premise": "The other two functions: one reads, one calls.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#t2",
+              "label": "measure the speed",
+              "focus": true,
+              "wantAtWord": 1,
+              "zooms": [
+                {
+                  "mark": "avg",
+                  "wantAtWord": 16.667,
+                  "atWord": 56
+                }
+              ],
+              "id": "t2",
+              "src": "rec/mcp-agent/seg-22.mp4",
+              "frames": 660,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "avg": {
+                  "x": 781,
+                  "y": 500,
+                  "w": 169,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 844,
+                  "h": 183
+                },
+                {
+                  "x": 433,
+                  "y": 311,
+                  "w": 865,
+                  "h": 210
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 384,
+                  "h": 154
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 3.167
+            },
+            {
+              "ref": "rec:mcp-agent#t3",
+              "label": "and one that calls the API",
+              "focus": true,
+              "wantAtWord": 26.833,
+              "zooms": [
+                {
+                  "mark": "httpx",
+                  "wantAtWord": 44.833,
+                  "atWord": 93.417
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "a file, or a service",
+                  "mark": "httpx",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 71.667,
+                  "atWord": 93.417
+                }
+              ],
+              "id": "t3",
+              "src": "rec/mcp-agent/seg-23.mp4",
+              "frames": 444,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "httpx": {
+                  "x": 560,
+                  "y": 419,
+                  "w": 95,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 95,
+                  "w": 865,
+                  "h": 210
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 664,
+                  "h": 156
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 384,
+                  "h": 154
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 64.333
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1372,
+      "audio": "audio/mcpagent_long_s19.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s20",
+      "type": "RECORDED_STEP",
+      "narration": "Save the file, and then run both of them straight from the terminal, before any of this goes near a model. They work. Checkout failed several times, and it's well over a second slower than everything else. Now notice what we didn't do there. No AI has been involved so far, and none is needed yet. These are plain functions, and you can run them, test them, and trust them long before a model ever sees them. Hold on to that, because when your agent eventually does something strange — and it will — this is the layer you can check on its own, with no model anywhere in the way. That's a genuinely useful habit, not just a tidy one.",
+      "transition": "zoom",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "and they already work",
+          "premise": "Running the functions on their own, before any model.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#savetools",
+              "label": "saved",
+              "focus": true,
+              "id": "savetools",
+              "src": "rec/mcp-agent/seg-24.mp4",
+              "frames": 38,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 95,
+                  "w": 865,
+                  "h": 210
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 664,
+                  "h": 156
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 384,
+                  "h": 154
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "S"
+              ],
+              "atWord": 2.75
+            },
+            {
+              "ref": "rec:mcp-agent#runtools",
+              "label": "they already work",
+              "focus": true,
+              "wantAtWord": 6.417,
+              "zooms": [
+                {
+                  "mark": "failed",
+                  "wantAtWord": 17,
+                  "atWord": 35.583
+                },
+                {
+                  "mark": "slow",
+                  "wantAtWord": 24.083,
+                  "atWord": 57.833
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "over a second slower",
+                  "mark": "slow",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 26.583,
+                  "atWord": 46.333
+                }
+              ],
+              "id": "runtools",
+              "src": "rec/mcp-agent/seg-25.mp4",
+              "frames": 232,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "failed": {
+                  "x": 462,
+                  "y": 646,
+                  "w": 56,
+                  "h": 19
+                },
+                "slow": {
+                  "x": 602,
+                  "y": 704,
+                  "w": 94,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 627,
+                  "w": 862,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 95,
+                  "w": 865,
+                  "h": 210
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 664,
+                  "h": 156
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 6.417
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1062,
+      "audio": "audio/mcpagent_long_s20.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s21",
+      "type": "SPEC_COMPARE",
+      "narration": "So put the two side by side. You already know this function's name and its arguments. A model knows neither, and it needs one more thing you've never written: a description of the function, in a shape it was trained to read.",
+      "transition": "wipe",
+      "background": "zoneC",
+      "data": {
+        "compare": {
+          "headline": "What a model needs that you do not",
+          "atWord": 2,
+          "a": {
+            "name": "you call it",
+            "color": "blue"
+          },
+          "b": {
+            "name": "a model calls it",
+            "color": "green"
+          },
+          "rows": [
+            {
+              "label": "knows the name",
+              "a": "yes",
+              "b": "only if told",
+              "winner": "a"
+            },
+            {
+              "label": "knows the arguments",
+              "a": "yes",
+              "b": "only if told",
+              "winner": "a"
+            },
+            {
+              "label": "needs a description",
+              "a": "no",
+              "b": "yes",
+              "winner": "b"
+            }
+          ]
+        }
+      },
+      "durationFrames": 397,
+      "audio": "audio/mcpagent_long_s21.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s22",
+      "type": "CHAPTER",
+      "narration": "So here's the problem. Those functions work, and a model can't touch them.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "What MCP actually is",
+          "subtitle": "a standard way to hand over your tools"
+        }
+      },
+      "durationFrames": 169,
+      "audio": "audio/mcpagent_long_s22.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s23",
+      "type": "DIAGRAM",
+      "narration": "A model is a text machine: it reads text, and it writes text. So a model can't open your log file, and it can't call your API, because neither of those is text. So to let it use a function, somebody has to describe that function to it: the name, what it does, and every argument it takes, in a very particular JSON shape. You can write that by hand. People did, for years, for every function, and then again for every provider, because each one wanted it slightly differently. MCP is the agreement that ended that. One standard shape for describing a tool, so anything that speaks it can use anything else that speaks it.",
+      "transition": "morph",
+      "background": "zoneB",
+      "data": {
+        "diagram": {
+          "layout": "flow",
+          "direction": "horizontal",
+          "nodes": [
+            {
+              "id": "f",
+              "label": "your function",
+              "sub": "plain Python",
+              "color": "blue",
+              "atWord": 27.583
+            },
+            {
+              "id": "d",
+              "label": "a description",
+              "sub": "name, args, purpose",
+              "color": "orange",
+              "atWord": 31.083
+            },
+            {
+              "id": "m",
+              "label": "the model",
+              "sub": "reads text only",
+              "color": "purple",
+              "atWord": 1
+            },
+            {
+              "id": "s",
+              "label": "MCP",
+              "sub": "one agreed shape",
+              "color": "green",
+              "atWord": 74
+            }
+          ],
+          "edges": [
+            {
+              "from": "f",
+              "to": "d",
+              "label": "somebody writes",
+              "atWord": 51.167
+            },
+            {
+              "from": "d",
+              "to": "m",
+              "label": "in JSON",
+              "atWord": 46
+            },
+            {
+              "from": "s",
+              "to": "d",
+              "label": "fixes the shape",
+              "atWord": 79.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 1120,
+      "audio": "audio/mcpagent_long_s23.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s24",
+      "type": "MCP_MESH",
+      "narration": "And here's why that description became a standard rather than a habit. Before MCP, every app that wanted tools wrote its own wiring to every service it cared about — an editor, a chat client, an agent, times your files, your database, your ticket tracker. That's a line for every pair, and somebody maintains all of them. MCP is the hub in the middle. One connection each, instead of one connection per pair — multiplication turned into addition.",
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "mcpMesh": {
+          "headline": "Why a standard [had to exist]",
+          "caption": "the multiplication",
+          "premise": "Apps on the left, the things they need on the right. Every line is an integration somebody writes and then maintains.",
+          "color": "orange",
+          "atWord": 1,
+          "cells": [
+            {
+              "label": "editor",
+              "icon": "lucide:file-code",
+              "text": "client",
+              "atWord": 25.667
+            },
+            {
+              "label": "chat client",
+              "icon": "lucide:message-square",
+              "text": "client",
+              "atWord": 26.417
+            },
+            {
+              "label": "agent",
+              "icon": "lucide:bot",
+              "text": "client",
+              "atWord": 30
+            },
+            {
+              "label": "your files",
+              "icon": "lucide:folder",
+              "text": "server",
+              "atWord": 32.25
+            },
+            {
+              "label": "your database",
+              "icon": "lucide:database",
+              "text": "server",
+              "atWord": 34.5
+            },
+            {
+              "label": "ticket tracker",
+              "icon": "lucide:ticket",
+              "text": "server",
+              "atWord": 37.417
+            },
+            {
+              "label": "MCP",
+              "icon": "lucide:git-fork",
+              "text": "hub",
+              "atWord": 50.25
+            }
+          ]
+        }
+      },
+      "durationFrames": 830,
+      "audio": "audio/mcpagent_long_s24.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s25",
+      "type": "CHAPTER",
+      "narration": "And this is the whole trick: you don't write that description. A decorator does.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "05",
+          "title": "Your first MCP server",
+          "subtitle": "the docstring becomes the schema"
+        }
+      },
+      "durationFrames": 170,
+      "audio": "audio/mcpagent_long_s25.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s26",
+      "type": "RECORDED_STEP",
+      "narration": "New file, server dot py. Two imports, and one object. A quick note on the import, because this changed recently: in version one of the SDK this class was called FastMCP. In version two it is MCPServer. If you follow a tutorial written last year, that's the line that will break, and the error message tells you exactly this. Now watch what happens to our function. The function is unchanged — we literally call the one in tools dot py — but above it goes at mcp dot tool. And that's it. That decorator reads the function's name, reads its type hints, reads its docstring, and builds the JSON description we just talked about, for you. The docstring isn't a comment any more. The docstring is the tool's description, and it's what the model reads to decide whether this is the tool it wants. So write that sentence carefully, because it is the only thing the model will ever see about your function, and a vague one gets your tool ignored.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "the docstring becomes the schema",
+          "premise": "The same three functions, wrapped as MCP tools.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#openserver",
+              "label": "the MCP server",
+              "focus": true,
+              "id": "openserver",
+              "src": "rec/mcp-agent/seg-26.mp4",
+              "frames": 215,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 3.25
+            },
+            {
+              "ref": "rec:mcp-agent#s1",
+              "label": "one import, one decorator",
+              "focus": true,
+              "wantAtWord": 12.667,
+              "zooms": [
+                {
+                  "mark": "imp",
+                  "wantAtWord": 24.25,
+                  "atWord": 62.417
+                },
+                {
+                  "mark": "dec",
+                  "wantAtWord": 76.083,
+                  "atWord": 76.083
+                },
+                {
+                  "mark": "doc",
+                  "wantAtWord": 95.833,
+                  "atWord": 101.583
+                }
+              ],
+              "overlay": {
+                "kind": "swap",
+                "atWord": 86.75,
+                "from": "def recent_errors() -> str:",
+                "to": "{ \"name\": \"recent_errors\", ... }"
+              },
+              "callouts": [
+                {
+                  "text": "v1 called this FastMCP",
+                  "mark": "imp",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 27.833,
+                  "atWord": 71.5
+                },
+                {
+                  "text": "the model reads this",
+                  "mark": "doc",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 108.25,
+                  "atWord": 108.25
+                }
+              ],
+              "id": "s1",
+              "src": "rec/mcp-agent/seg-28.mp4",
+              "frames": 384,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "imp": {
+                  "x": 433,
+                  "y": 68,
+                  "w": 443,
+                  "h": 21
+                },
+                "dec": {
+                  "x": 433,
+                  "y": 257,
+                  "w": 116,
+                  "h": 21
+                },
+                "doc": {
+                  "x": 507,
+                  "y": 311,
+                  "w": 369,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 443,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 127,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 338,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 675,
+                  "h": 102
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 27.833
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1622,
+      "audio": "audio/mcpagent_long_s26.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s27",
+      "type": "RECORDED_STEP",
+      "narration": "The other two get the same treatment. Look at get order, though, because it takes an argument. Order id, typed as a string. That type hint isn't decoration — it becomes a required field in the description, so the model knows it must supply an order id, and that it has to be text. Then one more thing, and it's not a tool at all: a resource. A tool is something the model can DO. A resource is something it can READ. The resource hands over the whole log at a name, log colon slash slash today. And at the bottom, mcp dot run. That's a complete MCP server, in about thirty lines. Save it, and notice what we didn't have to write: not one line of JSON, and not one line of protocol.",
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "arguments, and a resource",
+          "premise": "The remaining tools, and the difference between a tool and a resource.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#s2",
+              "label": "the other two",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "arg",
+                  "wantAtWord": 11,
+                  "atWord": 37.75
+                }
+              ],
+              "overlay": {
+                "kind": "split",
+                "atWord": 55.583,
+                "left": "tool",
+                "right": "resource",
+                "leftNote": "something it can DO",
+                "rightNote": "something it can READ"
+              },
+              "callouts": [
+                {
+                  "text": "the hint becomes a required field",
+                  "mark": "arg",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 26.75,
+                  "atWord": 43.75
+                }
+              ],
+              "id": "s2",
+              "src": "rec/mcp-agent/seg-29.mp4",
+              "frames": 463,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "arg": {
+                  "x": 433,
+                  "y": 446,
+                  "w": 380,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 95,
+                  "w": 675,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 706,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 419,
+                  "w": 622,
+                  "h": 102
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 2.667
+            },
+            {
+              "ref": "rec:mcp-agent#s3",
+              "label": "a resource, and run",
+              "focus": true,
+              "wantAtWord": 49.583,
+              "zooms": [
+                {
+                  "mark": "res",
+                  "wantAtWord": 74.917,
+                  "atWord": 74.917
+                },
+                {
+                  "mark": "run",
+                  "wantAtWord": 77.75,
+                  "atWord": 77.75
+                }
+              ],
+              "id": "s3",
+              "src": "rec/mcp-agent/seg-30.mp4",
+              "frames": 317,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "res": {
+                  "x": 433,
+                  "y": 311,
+                  "w": 295,
+                  "h": 21
+                },
+                "run": {
+                  "x": 475,
+                  "y": 500,
+                  "w": 95,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 306,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 149,
+                  "w": 622,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 311,
+                  "w": 422,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 49.583
+            },
+            {
+              "ref": "rec:mcp-agent#saveserver",
+              "label": "saved",
+              "focus": true,
+              "wantAtWord": 90.333,
+              "id": "saveserver",
+              "src": "rec/mcp-agent/seg-31.mp4",
+              "frames": 38,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 306,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 149,
+                  "w": 622,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 311,
+                  "w": 422,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "S"
+              ],
+              "atWord": 84.167
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1271,
+      "audio": "audio/mcpagent_long_s27.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s28",
+      "type": "MCP_SCHEMA",
+      "narration": "Let me show you what that decorator actually produced, because it's the single most important idea in the video. The function name became the tool name. The type hint became the argument type. And the docstring — that sentence you wrote for a human — became the description the model reads when it decides whether to call this at all. So write that docstring like you're telling a new colleague what the function is for.",
+      "transition": "zoom",
+      "background": "zoneA",
+      "data": {
+        "mcpSchema": {
+          "headline": "The docstring [is the description]",
+          "caption": "what the decorator built",
+          "premise": "On the left, the function you wrote. On the right, the JSON the model is handed.",
+          "color": "green",
+          "atWord": 1,
+          "codeTitle": "server.py",
+          "cells": [
+            {
+              "label": "@mcp.tool()",
+              "sub": "registers what follows",
+              "text": "reg",
+              "atWord": 2.417
+            },
+            {
+              "label": "name",
+              "sub": "get_order",
+              "atWord": 14.917
+            },
+            {
+              "label": "parameters",
+              "sub": "order_id — string, required",
+              "atWord": 20.083
+            },
+            {
+              "label": "description",
+              "sub": "Look up one order by its id, for example SO-1003.",
+              "atWord": 25.667
+            }
+          ],
+          "lines": [
+            {
+              "text": "@mcp.tool()",
+              "detail": "This one line does all of the registering.",
+              "atWord": 2.417
+            },
+            {
+              "text": "def get_order(order_id: str) -> str:",
+              "detail": "The name becomes the tool name; the type hint becomes the argument type.",
+              "atWord": 14.917
+            },
+            {
+              "text": "    \"\"\"Look up one order by its id, for example SO-1003.\"\"\"",
+              "detail": "This sentence is what the model reads to decide whether to call it.",
+              "atWord": 25.667
+            },
+            {
+              "text": "    return tools.get_order(order_id)"
+            }
+          ]
+        }
+      },
+      "durationFrames": 643,
+      "audio": "audio/mcpagent_long_s28.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s29",
+      "type": "MCP_CONTROL",
+      "narration": "One more distinction, and beginners trip on it constantly. A tool is something the model decides to run. A resource is something your code goes and fetches, the way an app opens a file. Same server, same file, completely different trigger, which means the two are never interchangeable — and that's the only difference worth remembering.",
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "mcpControl": {
+          "headline": "Who pulls [the trigger]",
+          "caption": "tool, or resource",
+          "premise": "Both live in server.py. The only question is who decides when they run.",
+          "color": "blue",
+          "atWord": 1,
+          "cells": [
+            {
+              "label": "a tool",
+              "sub": "the model decides to run it",
+              "owner": "ai",
+              "icon": "lucide:wrench",
+              "atWord": 9.083
+            },
+            {
+              "label": "a resource",
+              "sub": "your code asks for it, like opening a file",
+              "owner": "code",
+              "icon": "lucide:file-text",
+              "atWord": 15.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 594,
+      "audio": "audio/mcpagent_long_s29.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s30",
+      "type": "CHAPTER",
+      "narration": "Before we use it — this is somebody's work, and it's worth knowing whose.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
+        "chapter": {
+          "number": "06",
+          "title": "Where this comes from",
+          "subtitle": "the protocol, and the SDK"
+        }
+      },
+      "durationFrames": 169,
+      "audio": "audio/mcpagent_long_s30.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s31",
+      "type": "RECORDED_STEP",
+      "narration": "MCP is an open protocol, and this is its own site. MCP isn't an OpenAI thing or an Anthropic thing you have to buy into — it's a published specification, and anyone can implement it. The getting started pages here are genuinely good, and they are the place to go next. And this is the package we installed: the official Python SDK for MCP servers and clients, on GitHub, MIT licensed, in their own words right there under the name. If you build anything on this, that repository is where the source lives, where the issues go, and where the examples are. Both links are in the description.",
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "the protocol, and the SDK",
+          "premise": "The Model Context Protocol’s own site, and the official Python SDK.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-official#site",
+              "label": "the protocol’s own site",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "name",
+                  "wantAtWord": 7.833,
+                  "atWord": 7.833
+                }
+              ],
+              "id": "site",
+              "src": "rec/mcp-official/seg-01.mp4",
+              "frames": 72,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "name": {
+                  "x": 474,
+                  "y": 300,
+                  "w": 178,
+                  "h": 20
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 1,
+                  "w": 160,
+                  "h": 20
+                },
+                {
+                  "x": 0,
+                  "y": 18,
+                  "w": 330,
+                  "h": 28
+                },
+                {
+                  "x": 289,
+                  "y": 19,
+                  "w": 89,
+                  "h": 20
+                },
+                {
+                  "x": 0,
+                  "y": 23,
+                  "w": 517,
+                  "h": 46
+                },
+                {
+                  "x": 900,
+                  "y": 23,
+                  "w": 89,
+                  "h": 17
+                },
+                {
+                  "x": 614,
+                  "y": 23,
+                  "w": 59,
+                  "h": 17
+                },
+                {
+                  "x": 1394,
+                  "y": 23,
+                  "w": 46,
+                  "h": 17
+                },
+                {
+                  "x": 1340,
+                  "y": 23,
+                  "w": 30,
+                  "h": 17
+                },
+                {
+                  "x": 590,
+                  "y": 24,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 878,
+                  "y": 24,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1464,
+                  "y": 24,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 112,
+                  "y": 80,
+                  "w": 102,
+                  "h": 17
+                },
+                {
+                  "x": 238,
+                  "y": 80,
+                  "w": 88,
+                  "h": 17
+                },
+                {
+                  "x": 584,
+                  "y": 80,
+                  "w": 77,
+                  "h": 17
+                },
+                {
+                  "x": 350,
+                  "y": 80,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 447,
+                  "y": 80,
+                  "w": 55,
+                  "h": 17
+                },
+                {
+                  "x": 526,
+                  "y": 80,
+                  "w": 34,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 148,
+                  "w": 76,
+                  "h": 17
+                },
+                {
+                  "x": 427,
+                  "y": 156,
+                  "w": 437,
+                  "h": 110
+                },
+                {
+                  "x": 1260,
+                  "y": 156,
+                  "w": 85,
+                  "h": 17
+                },
+                {
+                  "x": 1240,
+                  "y": 184,
+                  "w": 154,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 188,
+                  "w": 92,
+                  "h": 17
+                },
+                {
+                  "x": 1240,
+                  "y": 216,
+                  "w": 156,
+                  "h": 17
+                },
+                {
+                  "x": 1029,
+                  "y": 216,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 1005,
+                  "y": 216,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1240,
+                  "y": 248,
+                  "w": 170,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 250,
+                  "w": 77,
+                  "h": 17
+                },
+                {
+                  "x": 1240,
+                  "y": 280,
+                  "w": 89,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 290,
+                  "w": 81,
+                  "h": 17
+                },
+                {
+                  "x": 427,
+                  "y": 300,
+                  "w": 692,
+                  "h": 48
+                },
+                {
+                  "x": 1240,
+                  "y": 312,
+                  "w": 76,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 327,
+                  "w": 51,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 364,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 427,
+                  "y": 376,
+                  "w": 682,
+                  "h": 76
+                },
+                {
+                  "x": 112,
+                  "y": 401,
+                  "w": 70,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 463,
+                  "w": 124,
+                  "h": 17
+                },
+                {
+                  "x": 427,
+                  "y": 480,
+                  "w": 720,
+                  "h": 76
+                },
+                {
+                  "x": 112,
+                  "y": 503,
+                  "w": 197,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 540,
+                  "w": 214,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 577,
+                  "w": 146,
+                  "h": 17
+                },
+                {
+                  "x": 435,
+                  "y": 581,
+                  "w": 705,
+                  "h": 282
+                },
+                {
+                  "x": 112,
+                  "y": 614,
+                  "w": 135,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 651,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 688,
+                  "w": 36,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 725,
+                  "w": 55,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 787,
+                  "w": 106,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 827,
+                  "w": 62,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 864,
+                  "w": 73,
+                  "h": 17
+                }
+              ],
+              "shows": "What is the Model Context Protocol (MCP)?",
+              "atWord": 2.917
+            },
+            {
+              "ref": "rec:mcp-official#intro",
+              "label": "their getting started",
+              "focus": true,
+              "wantAtWord": 28,
+              "id": "intro",
+              "src": "rec/mcp-official/seg-02.mp4",
+              "frames": 105,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 1,
+                  "w": 160,
+                  "h": 20
+                },
+                {
+                  "x": 0,
+                  "y": 18,
+                  "w": 330,
+                  "h": 28
+                },
+                {
+                  "x": 289,
+                  "y": 19,
+                  "w": 89,
+                  "h": 20
+                },
+                {
+                  "x": 0,
+                  "y": 23,
+                  "w": 517,
+                  "h": 46
+                },
+                {
+                  "x": 900,
+                  "y": 23,
+                  "w": 89,
+                  "h": 17
+                },
+                {
+                  "x": 614,
+                  "y": 23,
+                  "w": 59,
+                  "h": 17
+                },
+                {
+                  "x": 1394,
+                  "y": 23,
+                  "w": 46,
+                  "h": 17
+                },
+                {
+                  "x": 1340,
+                  "y": 23,
+                  "w": 30,
+                  "h": 17
+                },
+                {
+                  "x": 590,
+                  "y": 24,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 878,
+                  "y": 24,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1464,
+                  "y": 24,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 112,
+                  "y": 80,
+                  "w": 102,
+                  "h": 17
+                },
+                {
+                  "x": 238,
+                  "y": 80,
+                  "w": 88,
+                  "h": 17
+                },
+                {
+                  "x": 584,
+                  "y": 80,
+                  "w": 77,
+                  "h": 17
+                },
+                {
+                  "x": 350,
+                  "y": 80,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 447,
+                  "y": 80,
+                  "w": 55,
+                  "h": 17
+                },
+                {
+                  "x": 526,
+                  "y": 80,
+                  "w": 34,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 148,
+                  "w": 76,
+                  "h": 17
+                },
+                {
+                  "x": 427,
+                  "y": 156,
+                  "w": 437,
+                  "h": 110
+                },
+                {
+                  "x": 1260,
+                  "y": 156,
+                  "w": 85,
+                  "h": 17
+                },
+                {
+                  "x": 1240,
+                  "y": 184,
+                  "w": 154,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 188,
+                  "w": 92,
+                  "h": 17
+                },
+                {
+                  "x": 1240,
+                  "y": 216,
+                  "w": 156,
+                  "h": 17
+                },
+                {
+                  "x": 1029,
+                  "y": 216,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 1005,
+                  "y": 216,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1240,
+                  "y": 248,
+                  "w": 170,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 250,
+                  "w": 77,
+                  "h": 17
+                },
+                {
+                  "x": 1240,
+                  "y": 280,
+                  "w": 89,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 290,
+                  "w": 81,
+                  "h": 17
+                },
+                {
+                  "x": 427,
+                  "y": 300,
+                  "w": 692,
+                  "h": 48
+                },
+                {
+                  "x": 1240,
+                  "y": 312,
+                  "w": 76,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 327,
+                  "w": 51,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 364,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 427,
+                  "y": 376,
+                  "w": 682,
+                  "h": 76
+                },
+                {
+                  "x": 112,
+                  "y": 401,
+                  "w": 70,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 463,
+                  "w": 124,
+                  "h": 17
+                },
+                {
+                  "x": 427,
+                  "y": 480,
+                  "w": 720,
+                  "h": 76
+                },
+                {
+                  "x": 112,
+                  "y": 503,
+                  "w": 197,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 540,
+                  "w": 214,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 577,
+                  "w": 146,
+                  "h": 17
+                },
+                {
+                  "x": 435,
+                  "y": 581,
+                  "w": 705,
+                  "h": 282
+                },
+                {
+                  "x": 112,
+                  "y": 614,
+                  "w": 135,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 651,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 688,
+                  "w": 36,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 725,
+                  "w": 55,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 787,
+                  "w": 106,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 827,
+                  "w": 62,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 864,
+                  "w": 73,
+                  "h": 17
+                }
+              ],
+              "shows": "What is the Model Context Protocol (MCP)?",
+              "atWord": 28
+            },
+            {
+              "ref": "rec:mcp-official#repo",
+              "label": "the official SDK",
+              "focus": true,
+              "wantAtWord": 40.833,
+              "id": "repo",
+              "src": "rec/mcp-official/seg-03.mp4",
+              "frames": 125,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "repo": {
+                  "x": 262,
+                  "y": 91,
+                  "w": 107,
+                  "h": 24
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 184,
+                  "h": 50
+                },
+                {
+                  "x": 413,
+                  "y": 27,
+                  "w": 99,
+                  "h": 19
+                },
+                {
+                  "x": 297,
+                  "y": 27,
+                  "w": 80,
+                  "h": 19
+                },
+                {
+                  "x": 547,
+                  "y": 27,
+                  "w": 79,
+                  "h": 19
+                },
+                {
+                  "x": 189,
+                  "y": 27,
+                  "w": 71,
+                  "h": 19
+                },
+                {
+                  "x": 662,
+                  "y": 27,
+                  "w": 53,
+                  "h": 19
+                },
+                {
+                  "x": 56,
+                  "y": 91,
+                  "w": 192,
+                  "h": 24
+                },
+                {
+                  "x": 262,
+                  "y": 91,
+                  "w": 107,
+                  "h": 24
+                },
+                {
+                  "x": 1216,
+                  "y": 95,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 666,
+                  "y": 150,
+                  "w": 128,
+                  "h": 17
+                },
+                {
+                  "x": 284,
+                  "y": 150,
+                  "w": 83,
+                  "h": 17
+                },
+                {
+                  "x": 561,
+                  "y": 150,
+                  "w": 53,
+                  "h": 17
+                },
+                {
+                  "x": 363,
+                  "y": 214,
+                  "w": 62,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 245,
+                  "w": 262,
+                  "h": 43
+                },
+                {
+                  "x": 959,
+                  "y": 272,
+                  "w": 115,
+                  "h": 65
+                },
+                {
+                  "x": 192,
+                  "y": 273,
+                  "w": 122,
+                  "h": 187
+                },
+                {
+                  "x": 303,
+                  "y": 273,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 1160,
+                  "y": 304,
+                  "w": 219,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 305,
+                  "w": 183,
+                  "h": 406
+                },
+                {
+                  "x": 570,
+                  "y": 320,
+                  "w": 422,
+                  "h": 17
+                },
+                {
+                  "x": 1295,
+                  "y": 341,
+                  "w": 69,
+                  "h": 14
+                },
+                {
+                  "x": 1203,
+                  "y": 341,
+                  "w": 64,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 361,
+                  "w": 366,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 402,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 443,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 484,
+                  "w": 467,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 484,
+                  "w": 61,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 525,
+                  "w": 349,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 566,
+                  "w": 290,
+                  "h": 17
+                },
+                {
+                  "x": 860,
+                  "y": 568,
+                  "w": 94,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 607,
+                  "w": 388,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 648,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 689,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 730,
+                  "w": 337,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 730,
+                  "w": 146,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 749,
+                  "w": 68,
+                  "h": 53
+                },
+                {
+                  "x": 861,
+                  "y": 771,
+                  "w": 144,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 771,
+                  "w": 83,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 771,
+                  "w": 75,
+                  "h": 17
+                },
+                {
+                  "x": 760,
+                  "y": 773,
+                  "w": 101,
+                  "h": 14
+                },
+                {
+                  "x": 645,
+                  "y": 773,
+                  "w": 94,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 812,
+                  "w": 458,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 812,
+                  "w": 61,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 837,
+                  "w": 77,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 853,
+                  "w": 436,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 853,
+                  "w": 160,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 890,
+                  "w": 96,
+                  "h": 11
+                },
+                {
+                  "x": 570,
+                  "y": 894,
+                  "w": 196,
+                  "h": 7
+                }
+              ],
+              "shows": "About",
+              "atWord": 40.833
+            },
+            {
+              "ref": "rec:mcp-official#about",
+              "label": "in their own words",
+              "focus": true,
+              "wantAtWord": 54.417,
+              "callouts": [
+                {
+                  "text": "their description, not mine",
+                  "mark": "official",
+                  "side": "left",
+                  "color": "green",
+                  "wantAtWord": 58.583,
+                  "atWord": 62.167
+                }
+              ],
+              "id": "about",
+              "src": "rec/mcp-official/seg-04.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "official": {
+                  "x": 1136,
+                  "y": 245,
+                  "w": 171,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 184,
+                  "h": 50
+                },
+                {
+                  "x": 413,
+                  "y": 27,
+                  "w": 99,
+                  "h": 19
+                },
+                {
+                  "x": 297,
+                  "y": 27,
+                  "w": 80,
+                  "h": 19
+                },
+                {
+                  "x": 547,
+                  "y": 27,
+                  "w": 79,
+                  "h": 19
+                },
+                {
+                  "x": 189,
+                  "y": 27,
+                  "w": 71,
+                  "h": 19
+                },
+                {
+                  "x": 662,
+                  "y": 27,
+                  "w": 53,
+                  "h": 19
+                },
+                {
+                  "x": 56,
+                  "y": 91,
+                  "w": 192,
+                  "h": 24
+                },
+                {
+                  "x": 262,
+                  "y": 91,
+                  "w": 107,
+                  "h": 24
+                },
+                {
+                  "x": 1216,
+                  "y": 95,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 666,
+                  "y": 150,
+                  "w": 128,
+                  "h": 17
+                },
+                {
+                  "x": 284,
+                  "y": 150,
+                  "w": 83,
+                  "h": 17
+                },
+                {
+                  "x": 561,
+                  "y": 150,
+                  "w": 53,
+                  "h": 17
+                },
+                {
+                  "x": 363,
+                  "y": 214,
+                  "w": 62,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 245,
+                  "w": 262,
+                  "h": 43
+                },
+                {
+                  "x": 959,
+                  "y": 272,
+                  "w": 115,
+                  "h": 65
+                },
+                {
+                  "x": 192,
+                  "y": 273,
+                  "w": 122,
+                  "h": 187
+                },
+                {
+                  "x": 303,
+                  "y": 273,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 1160,
+                  "y": 304,
+                  "w": 219,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 305,
+                  "w": 183,
+                  "h": 406
+                },
+                {
+                  "x": 570,
+                  "y": 320,
+                  "w": 422,
+                  "h": 17
+                },
+                {
+                  "x": 1295,
+                  "y": 341,
+                  "w": 69,
+                  "h": 14
+                },
+                {
+                  "x": 1203,
+                  "y": 341,
+                  "w": 64,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 361,
+                  "w": 366,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 402,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 443,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 484,
+                  "w": 467,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 484,
+                  "w": 61,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 525,
+                  "w": 349,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 566,
+                  "w": 290,
+                  "h": 17
+                },
+                {
+                  "x": 860,
+                  "y": 568,
+                  "w": 94,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 607,
+                  "w": 388,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 648,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 689,
+                  "w": 456,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 730,
+                  "w": 337,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 730,
+                  "w": 146,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 749,
+                  "w": 68,
+                  "h": 53
+                },
+                {
+                  "x": 861,
+                  "y": 771,
+                  "w": 144,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 771,
+                  "w": 83,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 771,
+                  "w": 75,
+                  "h": 17
+                },
+                {
+                  "x": 760,
+                  "y": 773,
+                  "w": 101,
+                  "h": 14
+                },
+                {
+                  "x": 645,
+                  "y": 773,
+                  "w": 94,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 812,
+                  "w": 458,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 812,
+                  "w": 61,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 837,
+                  "w": 77,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 853,
+                  "w": 436,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 853,
+                  "w": 160,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 890,
+                  "w": 96,
+                  "h": 11
+                },
+                {
+                  "x": 570,
+                  "y": 894,
+                  "w": 196,
+                  "h": 7
+                }
+              ],
+              "shows": "About",
+              "atWord": 57.25
+            }
+          ],
+          "sourceNote": "modelcontextprotocol.io · github.com/modelcontextprotocol/python-sdk — read 2026-09-04",
+          "card": {
+            "place": "right",
+            "width": 0.24
+          },
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2.083
+        }
+      },
+      "durationFrames": 1011,
+      "audio": "audio/mcpagent_long_s31.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s32",
+      "type": "CHAPTER",
+      "narration": "Two small files before the agent, and they keep your key out of your code.",
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "07",
+          "title": "Where the key lives",
+          "subtitle": "never in the code, not once"
+        }
+      },
+      "durationFrames": 136,
+      "audio": "audio/mcpagent_long_s32.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s33",
+      "type": "RECORDED_STEP",
+      "narration": "Three settings, in a file called dot env. The address you're talking to, the key, and which model you want. Mine is an Azure OpenAI deployment; yours can be any provider that speaks this API. I have masked my key with asterisks, because a key on screen is a key you have to go and change. Then dot gitignore, with one line in it: dot env. That's the whole protection. Git now walks past your settings file as though it were not there. Thirty seconds of work, once, and the difference between a key that's yours and a key that's public. And do this before your first commit, not after, because once a key has been pushed anywhere it is no longer yours, whether or not you delete the commit afterwards.",
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "settings in a file, never in the code",
+          "premise": "The two files that keep a key out of a repository.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#openenv",
+              "label": "the three settings",
+              "focus": true,
+              "id": "openenv",
+              "src": "rec/mcp-agent/seg-32.mp4",
+              "frames": 208,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 2.667
+            },
+            {
+              "ref": "rec:mcp-agent#typeenv",
+              "label": "masked on purpose",
+              "focus": true,
+              "wantAtWord": 7.667,
+              "zooms": [
+                {
+                  "mark": "url",
+                  "wantAtWord": 7.667,
+                  "atWord": 40.333
+                },
+                {
+                  "mark": "masked",
+                  "wantAtWord": 31,
+                  "atWord": 49.083
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "yours goes here",
+                  "mark": "masked",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 33.333,
+                  "atWord": 46.583
+                }
+              ],
+              "id": "typeenv",
+              "src": "rec/mcp-agent/seg-34.mp4",
+              "frames": 221,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "url": {
+                  "x": 433,
+                  "y": 68,
+                  "w": 116,
+                  "h": 21
+                },
+                "masked": {
+                  "x": 433,
+                  "y": 95,
+                  "w": 105,
+                  "h": 21
+                },
+                "model": {
+                  "x": 433,
+                  "y": 122,
+                  "w": 84,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 643,
+                  "h": 75
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 26.083
+            },
+            {
+              "ref": "rec:mcp-agent#openignore",
+              "label": "and git never sees it",
+              "focus": true,
+              "wantAtWord": 52.75,
+              "id": "openignore",
+              "src": "rec/mcp-agent/seg-36.mp4",
+              "frames": 216,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 52.75
+            },
+            {
+              "ref": "rec:mcp-agent#typeignore",
+              "label": "one line",
+              "focus": true,
+              "wantAtWord": 56.25,
+              "callouts": [
+                {
+                  "text": "git walks past it now",
+                  "mark": "ignored",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 62.333,
+                  "atWord": 79.583
+                }
+              ],
+              "id": "typeignore",
+              "src": "rec/mcp-agent/seg-38.mp4",
+              "frames": 50,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "ignored": {
+                  "x": 433,
+                  "y": 68,
+                  "w": 42,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 42,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 74.833
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1211,
+      "audio": "audio/mcpagent_long_s33.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s34",
+      "type": "CHAPTER",
+      "narration": "Now the agent itself, and it's the only genuinely new idea in the video.",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "08",
+          "title": "The loop",
+          "subtitle": "ask, choose, run, answer"
+        }
+      },
+      "durationFrames": 168,
+      "audio": "audio/mcpagent_long_s34.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s35",
+      "type": "FILE_TREE",
+      "narration": "Quick check on where we are. Only agent dot py is left, and it's the one file that talks to a model. Api dot py is the service, traffic dot py filled the log, tools dot py holds the functions, server dot py describes them.",
+      "transition": "slide",
+      "background": "zoneB",
+      "data": {
+        "fileTree": {
+          "headline": "Four done, [one to go]",
+          "atWord": 4.833,
+          "highlight": 4,
+          "nodes": [
+            {
+              "name": "api.py",
+              "depth": 0,
+              "kind": "file"
+            },
+            {
+              "name": "traffic.py",
+              "depth": 0,
+              "kind": "file"
+            },
+            {
+              "name": "tools.py",
+              "depth": 0,
+              "kind": "file"
+            },
+            {
+              "name": "server.py",
+              "depth": 0,
+              "kind": "file"
+            },
+            {
+              "name": "agent.py",
+              "depth": 0,
+              "kind": "file",
+              "color": "green"
+            }
+          ]
+        }
+      },
+      "durationFrames": 454,
+      "audio": "audio/mcpagent_long_s35.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s36",
+      "type": "RECORDED_STEP",
+      "narration": "Last file, agent dot py. The first block starts our server and connects to it. Stdio server parameters means: run this program, and talk to it through its standard input and output — the same pipes you use when you pipe one command into another. The server is just another program, started by ours; there's no port and no network. Then initialize, which is the handshake: the two sides tell each other what they can do before anything else happens. Think of it like the first ten seconds of a phone call. Our side says which version of the protocol it speaks, the server says the same and lists what it offers, and only then does either of them get down to business. You'll never write that handshake yourself — the library does it, and that's most of why MCP is worth using. Notice too that we never told our agent where the tools live, or what they are called, or what arguments they take. We told it which program to start, and the protocol handles the rest, which is precisely the part you would otherwise be writing by hand.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "start the server, connect to it",
+          "premise": "The client half: launching the server and shaking hands.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#openagent",
+              "label": "the last file",
+              "focus": true,
+              "id": "openagent",
+              "src": "rec/mcp-agent/seg-40.mp4",
+              "frames": 214,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 3.667
+            },
+            {
+              "ref": "rec:mcp-agent#ag1",
+              "label": "the imports",
+              "focus": true,
+              "wantAtWord": 6.417,
+              "id": "ag1",
+              "src": "rec/mcp-agent/seg-42.mp4",
+              "frames": 373,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "imports": {
+                  "x": 433,
+                  "y": 230,
+                  "w": 548,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 148,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 203,
+                  "w": 548,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 338,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 26.833
+            },
+            {
+              "ref": "rec:mcp-agent#ag1b",
+              "label": "connect over stdio",
+              "focus": true,
+              "wantAtWord": 13.667,
+              "zooms": [
+                {
+                  "mark": "params",
+                  "wantAtWord": 19.417,
+                  "atWord": 96.417
+                },
+                {
+                  "mark": "init",
+                  "wantAtWord": 53.333,
+                  "atWord": 110.75
+                }
+              ],
+              "overlay": {
+                "kind": "chain",
+                "atWord": 57.167,
+                "steps": [
+                  "agent.py",
+                  "starts server.py",
+                  "stdin / stdout",
+                  "ready"
+                ]
+              },
+              "callouts": [
+                {
+                  "text": "no port, no network",
+                  "mark": "params",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 50.833,
+                  "atWord": 103.25
+                }
+              ],
+              "id": "ag1b",
+              "src": "rec/mcp-agent/seg-43.mp4",
+              "frames": 466,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "params": {
+                  "x": 570,
+                  "y": 392,
+                  "w": 221,
+                  "h": 21
+                },
+                "init": {
+                  "x": 560,
+                  "y": 500,
+                  "w": 274,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 105,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 548,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 865,
+                  "h": 48
+                },
+                {
+                  "x": 475,
+                  "y": 446,
+                  "w": 559,
+                  "h": 75
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 66.667
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1712,
+      "audio": "audio/mcpagent_long_s36.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s37",
+      "type": "MCP_TRANSPORT",
+      "narration": "A word on that choice, because you'll meet the other one soon. Stdio means the two programs share a machine and pass text through a pipe. Streamable HTTP means the server lives elsewhere, reached over the network. The messages are identical either way. Start with stdio, because there's nothing to deploy and nothing to secure, and you can move to HTTP later without touching a single tool.",
+      "transition": "wipe",
+      "background": "zoneA",
+      "data": {
+        "mcpTransport": {
+          "headline": "Same room, or [a phone call]",
+          "caption": "two transports",
+          "premise": "Both move identical JSON. The only difference is whether the two programs share a machine.",
+          "color": "green",
+          "atWord": 1,
+          "vars": [
+            {
+              "label": "messages=same",
+              "sub": "both transports",
+              "atWord": 33.75
+            }
+          ],
+          "cells": [
+            {
+              "label": "stdio",
+              "sub": "what we are using",
+              "out": [
+                "same machine",
+                "nothing to deploy",
+                "nothing to secure"
+              ],
+              "atWord": 8.75
+            },
+            {
+              "label": "streamable-http",
+              "sub": "when the server lives elsewhere",
+              "text": "remote",
+              "out": [
+                "a remote server",
+                "many clients at once",
+                "now you own the security"
+              ],
+              "atWord": 18.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 699,
+      "audio": "audio/mcpagent_long_s37.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s38",
+      "type": "MCP_WIRE",
+      "narration": "And this is what is actually travelling down that pipe. Not magic, and not English — plain JSON messages, one per line. We send tools slash list, and the server sends back three tool definitions. Later we send tools slash call, with a name and arguments, and back comes whatever the function returned. Every MCP server on earth speaks exactly these messages, which is the entire reason yours can be used by something you didn't write.",
+      "transition": "dip",
+      "background": "zoneB",
+      "data": {
+        "mcpWire": {
+          "headline": "Every arrow is [one message]",
+          "caption": "what crosses the pipe",
+          "premise": "The client is agent.py. The server is server.py. Each arrow is one JSON-RPC message.",
+          "color": "blue",
+          "atWord": 1,
+          "codeTitle": "agent.py",
+          "ends": [
+            {
+              "label": "AGENT"
+            },
+            {
+              "label": "SERVER"
+            }
+          ],
+          "cells": [
+            {
+              "label": "tools/list",
+              "sub": "what can you do?",
+              "dir": "out",
+              "atWord": 23.667,
+              "out": [
+                "{\"method\":\"tools/list\",\"id\":1}"
+              ]
+            },
+            {
+              "label": "3 tools",
+              "sub": "recent_errors · slowest_routes · get_order",
+              "dir": "back",
+              "atWord": 27.417,
+              "out": [
+                "{\"result\":{\"tools\":[",
+                "  {\"name\":\"recent_errors\", …},",
+                "  {\"name\":\"get_order\", …}]}}"
+              ]
+            },
+            {
+              "label": "tools/call",
+              "sub": "run recent_errors, no arguments",
+              "dir": "out",
+              "atWord": 35.583,
+              "out": [
+                "{\"method\":\"tools/call\",",
+                " \"params\":{\"name\":\"recent_errors\",",
+                "  \"arguments\":{}}}"
+              ]
+            }
+          ],
+          "lines": [
+            {
+              "text": "tools = await session.list_tools()",
+              "detail": "Ask the server what it can do.",
+              "atWord": 23.667
+            },
+            {
+              "text": "result = await session.call_tool(",
+              "detail": "Run one of them, by name.",
+              "atWord": 35.583
+            },
+            {
+              "text": "    \"recent_errors\", {})"
+            }
+          ]
+        }
+      },
+      "durationFrames": 790,
+      "audio": "audio/mcpagent_long_s38.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s39",
+      "type": "RECORDED_STEP",
+      "narration": "Then we ask the server what it has. List tools comes back with all three, each one carrying the description and the schema that the decorator built. We reshape them into the format the OpenAI library expects — and that's genuinely all this block does, it's a rename, not a translation. Notice input underscore schema there: in version one of the SDK that was inputSchema, in camel case. Then we print how many tools the model can see, because when this goes wrong that number is the first thing you want.",
+      "transition": "morph",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "ask what tools exist",
+          "premise": "Fetching the tool list and handing it to the model.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#ag2",
+              "label": "list, then reshape",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "list",
+                  "wantAtWord": 6.083,
+                  "atWord": 55.25
+                },
+                {
+                  "mark": "schema",
+                  "wantAtWord": 44.583,
+                  "atWord": 59.083
+                }
+              ],
+              "overlay": {
+                "kind": "chain",
+                "atWord": 22.583,
+                "steps": [
+                  "server.py",
+                  "list_tools()",
+                  "3 schemas",
+                  "the model"
+                ]
+              },
+              "callouts": [
+                {
+                  "text": "v1 spelled it inputSchema",
+                  "mark": "schema",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 55.25,
+                  "atWord": 57.667
+                }
+              ],
+              "id": "ag2",
+              "src": "rec/mcp-agent/seg-44.mp4",
+              "frames": 725,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "list": {
+                  "x": 644,
+                  "y": 176,
+                  "w": 274,
+                  "h": 21
+                },
+                "schema": {
+                  "x": 834,
+                  "y": 365,
+                  "w": 179,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 517,
+                  "y": 68,
+                  "w": 517,
+                  "h": 48
+                },
+                {
+                  "x": 560,
+                  "y": 176,
+                  "w": 496,
+                  "h": 345
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 1.667
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 874,
+      "audio": "audio/mcpagent_long_s39.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s40",
+      "type": "RECORDED_STEP",
+      "narration": "Now the model. Same client as any other OpenAI call, same messages list — and one new argument: tools. Tools is the menu we just built. We're not telling it which tool to use. We're telling it what exists. What comes back is different from a normal reply: instead of text, the model may hand us tool calls — the name of a function it wants run, and the arguments it wants passed. Nothing has been executed at that point. The model has only asked. Running it is still entirely our job, which is exactly the safety property you want in something that can reach your data.",
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "hand it the menu",
+          "premise": "The call, with the tool list attached.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#ag3",
+              "label": "one new argument",
+              "focus": true,
+              "wantAtWord": 1.167,
+              "zooms": [
+                {
+                  "mark": "tools",
+                  "wantAtWord": 18.833,
+                  "atWord": 52.083
+                }
+              ],
+              "overlay": {
+                "kind": "split",
+                "atWord": 36.5,
+                "left": "a normal reply",
+                "right": "tool_calls",
+                "leftNote": "here is some text",
+                "rightNote": "run this, with these arguments"
+              },
+              "callouts": [
+                {
+                  "text": "what exists, not what to use",
+                  "mark": "tools",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 33.833,
+                  "atWord": 60
+                }
+              ],
+              "id": "ag3",
+              "src": "rec/mcp-agent/seg-45.mp4",
+              "frames": 637,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "tools": {
+                  "x": 1108,
+                  "y": 446,
+                  "w": 105,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 644,
+                  "y": 68,
+                  "w": 21,
+                  "h": 21
+                },
+                {
+                  "x": 602,
+                  "y": 95,
+                  "w": 243,
+                  "h": 48
+                },
+                {
+                  "x": 560,
+                  "y": 149,
+                  "w": 496,
+                  "h": 48
+                },
+                {
+                  "x": 560,
+                  "y": 257,
+                  "w": 527,
+                  "h": 129
+                },
+                {
+                  "x": 560,
+                  "y": 419,
+                  "w": 654,
+                  "h": 102
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 4
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 999,
+      "audio": "audio/mcpagent_long_s40.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s41",
+      "type": "MCP_LOOP",
+      "narration": "Before we write it, hold the shape in your head, because every agent you'll ever read is some version of this ring. Ask the model, with the tool list attached. Read what it asked for. Run that tool. Hand the result back. Then ask once more, and this time it answers in words. Ours goes round exactly once, which is all this question needs. Wrap those four steps in a while loop instead, and the model can go round as many times as it likes — read the errors, then go and fetch the order behind one of them. That one change is the whole difference between a helper and an agent.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "mcpLoop": {
+          "headline": "Ask, run, [ask again]",
+          "caption": "the agent loop",
+          "premise": "agent.py sits between the model and the server, relaying until the model answers in words instead of tool calls.",
+          "color": "orange",
+          "atWord": 1,
+          "codeTitle": "agent.py",
+          "cells": [
+            {
+              "label": "ask the model",
+              "sub": "+ the tool list",
+              "atWord": 16.5
+            },
+            {
+              "label": "tool_calls",
+              "sub": "what it wants run",
+              "atWord": 24.583
+            },
+            {
+              "label": "call_tool",
+              "sub": "you run it",
+              "atWord": 26.917
+            },
+            {
+              "label": "role: tool",
+              "sub": "the result goes back",
+              "atWord": 29.917
+            },
+            {
+              "label": "it answers",
+              "sub": "words, not tool calls",
+              "text": "exit",
+              "atWord": 39.667
+            }
+          ],
+          "lines": [
+            {
+              "text": "answer = client.chat.completions.create(",
+              "detail": "One ask, with the menu attached.",
+              "atWord": 16.5
+            },
+            {
+              "text": "    model=..., messages=messages, tools=menu)"
+            },
+            {
+              "text": "for call in picked.tool_calls:",
+              "detail": "Run every tool it asked for. Ours needs one pass.",
+              "atWord": 26.917
+            },
+            {
+              "text": "    result = await session.call_tool(...)",
+              "atWord": 19.833
+            },
+            {
+              "text": "final = client.chat.completions.create(",
+              "detail": "Ask again with the results in the conversation.",
+              "atWord": 34.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 1023,
+      "audio": "audio/mcpagent_long_s41.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s42",
+      "type": "RECORDED_STEP",
+      "narration": "So we run whatever it picked. For each tool call: read the arguments it chose, print them so we can watch it think, and call that tool through MCP. Then we hand the result back, with role tool, which is how you tell the model this is what your function returned. And finally we ask it once more, with the results now in the conversation, and this time it just answers. That's the loop. Ask, choose, run, answer. Notice the for: it runs every tool the model asked for in this one round. Put a while around those four steps and the model gets to come back — read the errors, then go after the order behind one of them — and that is the upgrade I would make first. Either way, the difference from a chatbot is the same: a chatbot answers from what it already knows, and an agent goes and gets what it does not. Save the file. That is every line of code in this project, and agent dot py — the only file here that talks to a model — comes to about seventy lines, most of which is connecting and reshaping. MCP is carrying everything else. No parsing, no schema wrangling, no if-statement per tool — which is the whole reason this fits in one screen.",
+      "transition": "push",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "run it, and feed the answer back",
+          "premise": "The loop: execute the chosen tool and return the result.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#ag4",
+              "label": "run whatever it picked",
+              "focus": true,
+              "wantAtWord": 2.75,
+              "zooms": [
+                {
+                  "mark": "call",
+                  "wantAtWord": 6.75,
+                  "atWord": 61.083
+                },
+                {
+                  "mark": "role",
+                  "wantAtWord": 25.583,
+                  "atWord": 73.333
+                }
+              ],
+              "overlay": {
+                "kind": "chain",
+                "atWord": 50.667,
+                "steps": [
+                  "question",
+                  "it chooses",
+                  "we run it",
+                  "it answers"
+                ]
+              },
+              "callouts": [
+                {
+                  "text": "this is what your function said",
+                  "mark": "role",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 32.833,
+                  "atWord": 66.667
+                }
+              ],
+              "id": "ag4",
+              "src": "rec/mcp-agent/seg-46.mp4",
+              "frames": 815,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "call": {
+                  "x": 697,
+                  "y": 311,
+                  "w": 243,
+                  "h": 21
+                },
+                "role": {
+                  "x": 686,
+                  "y": 392,
+                  "w": 148,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 602,
+                  "y": 68,
+                  "w": 612,
+                  "h": 21
+                },
+                {
+                  "x": 560,
+                  "y": 95,
+                  "w": 359,
+                  "h": 48
+                },
+                {
+                  "x": 560,
+                  "y": 203,
+                  "w": 654,
+                  "h": 318
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 2.75
+            },
+            {
+              "ref": "rec:mcp-agent#ag5",
+              "label": "and let it answer",
+              "focus": true,
+              "wantAtWord": 35.25,
+              "id": "ag5",
+              "src": "rec/mcp-agent/seg-47.mp4",
+              "frames": 386,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "final": {
+                  "x": 623,
+                  "y": 419,
+                  "w": 338,
+                  "h": 21
+                }
+              },
+              "ink": [
+                {
+                  "x": 602,
+                  "y": 68,
+                  "w": 169,
+                  "h": 48
+                },
+                {
+                  "x": 686,
+                  "y": 122,
+                  "w": 359,
+                  "h": 75
+                },
+                {
+                  "x": 644,
+                  "y": 203,
+                  "w": 11,
+                  "h": 21
+                },
+                {
+                  "x": 602,
+                  "y": 230,
+                  "w": 11,
+                  "h": 21
+                },
+                {
+                  "x": 560,
+                  "y": 311,
+                  "w": 527,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 500,
+                  "w": 316,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 79.583
+            },
+            {
+              "ref": "rec:mcp-agent#saveagent",
+              "label": "saved",
+              "focus": true,
+              "wantAtWord": 110.5,
+              "id": "saveagent",
+              "src": "rec/mcp-agent/seg-48.mp4",
+              "frames": 38,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 602,
+                  "y": 68,
+                  "w": 169,
+                  "h": 48
+                },
+                {
+                  "x": 686,
+                  "y": 122,
+                  "w": 359,
+                  "h": 75
+                },
+                {
+                  "x": 644,
+                  "y": 203,
+                  "w": 11,
+                  "h": 21
+                },
+                {
+                  "x": 602,
+                  "y": 230,
+                  "w": 11,
+                  "h": 21
+                },
+                {
+                  "x": 560,
+                  "y": 311,
+                  "w": 527,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 500,
+                  "w": 316,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 116
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "keys": [
+                "Ctrl",
+                "S"
+              ],
+              "atWord": 113.417
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1915,
+      "audio": "audio/mcpagent_long_s42.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s43",
+      "type": "CHAPTER",
+      "narration": "Everything is written. Let's ask it something we never told it how to answer.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "09",
+          "title": "Ask it a question",
+          "subtitle": "in plain English"
+        }
+      },
+      "durationFrames": 146,
+      "audio": "audio/mcpagent_long_s43.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s44",
+      "type": "RECORDED_STEP",
+      "narration": "Our checkout is misbehaving. What does the log say? Two sentences. Nobody wired that question to anything. The model can see three tools, and it picks one. Recent errors. Nobody told it which — it read three descriptions, and decided that was the one that answers a question about the log. Then the answer comes back in plain English: the checkout process has failed seven times, and it suggests looking at the error messages next. That's our log, read by our function, chosen by the model, and none of that plumbing was hand-written. That's what MCP bought us.",
+      "transition": "zoom",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "it picks the tools itself",
+          "premise": "The finished agent, answering a question nobody scripted.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:mcp-agent#runagent",
+              "label": "asking in plain English",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "sees",
+                  "wantAtWord": 20.333,
+                  "atWord": 41.917
+                },
+                {
+                  "mark": "chose",
+                  "wantAtWord": 26.167,
+                  "atWord": 58.417
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 47.083,
+                  "atWord": 68.083
+                }
+              ],
+              "overlay": {
+                "kind": "split",
+                "atWord": 36.5,
+                "left": "three tools offered",
+                "right": "one tool chosen",
+                "leftNote": "recent_errors · slowest_routes · get_order",
+                "rightNote": "recent_errors — nobody told it which"
+              },
+              "callouts": [
+                {
+                  "text": "it chose this one itself",
+                  "mark": "chose",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 30.25,
+                  "atWord": 48.583
+                }
+              ],
+              "id": "runagent",
+              "src": "rec/mcp-agent/seg-49.mp4",
+              "frames": 366,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "sees": {
+                  "x": 368,
+                  "y": 646,
+                  "w": 159,
+                  "h": 19
+                },
+                "chose": {
+                  "x": 368,
+                  "y": 685,
+                  "w": 75,
+                  "h": 19
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 627,
+                  "w": 862,
+                  "h": 19
+                }
+              },
+              "ink": [
+                {
+                  "x": 602,
+                  "y": 68,
+                  "w": 169,
+                  "h": 48
+                },
+                {
+                  "x": 686,
+                  "y": 122,
+                  "w": 359,
+                  "h": 75
+                },
+                {
+                  "x": 644,
+                  "y": 203,
+                  "w": 11,
+                  "h": 21
+                },
+                {
+                  "x": 602,
+                  "y": 230,
+                  "w": 11,
+                  "h": 21
+                },
+                {
+                  "x": 560,
+                  "y": 311,
+                  "w": 527,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 500,
+                  "w": 316,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 627,
+                  "w": 993,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 685,
+                  "w": 244,
+                  "h": 19
+                },
+                {
+                  "x": 368,
+                  "y": 724,
+                  "w": 1209,
+                  "h": 57
+                }
+              ],
+              "shows": "$ cat pyproject.toml",
+              "atWord": 2.667
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1026,
+      "audio": "audio/mcpagent_long_s44.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s45",
+      "type": "LAYERED_STACK",
+      "narration": "And notice the shape you've ended up with. Plain Python at the bottom, a layer that only describes it, and any client at all on top. Swap that top layer and the other two never change.",
+      "transition": "wipe",
+      "background": "zoneC",
+      "data": {
+        "stack": {
+          "headline": "Three layers, [one of them swappable]",
+          "signal": "down",
+          "atWord": 9.333,
+          "layers": [
+            {
+              "label": "any MCP client",
+              "sub": "ours, an editor, a desktop",
+              "color": "green"
+            },
+            {
+              "label": "server.py",
+              "sub": "describes them, nothing else",
+              "color": "purple"
+            },
+            {
+              "label": "tools.py",
+              "sub": "plain Python, no AI in it",
+              "color": "blue"
+            }
+          ]
+        }
+      },
+      "durationFrames": 350,
+      "audio": "audio/mcpagent_long_s45.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s46",
+      "type": "CHAPTER",
+      "narration": "That's a working agent. Here's how it grows, and where to read next.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "10",
+          "title": "Where this goes",
+          "subtitle": "from one file to fifty tools"
+        }
+      },
+      "durationFrames": 150,
+      "audio": "audio/mcpagent_long_s46.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s47",
+      "type": "LIST_BUILD",
+      "narration": "Four things worth knowing before you build on this. First: one server object. Every tool registers on the same mcp, and they register the moment the file is imported. Second: when server dot py gets long, split it, so the server file stays a description and never becomes a codebase. Put your tools in their own modules, import mcp from the server, decorate there, and import those modules before you call run, because a tool that is never imported is a tool that never registers. Six tools become fifty, and the server file never grows at all. One object, many modules, and nothing surprising in between.",
+      "transition": "morph",
+      "background": "zoneB",
+      "data": {
+        "heading": "Growing past one file",
+        "items": [
+          {
+            "text": "One mcp object — tools register at import",
+            "atWord": 7
+          },
+          {
+            "text": "Split tools into their own modules",
+            "atWord": 26.25
+          },
+          {
+            "text": "Import those modules before mcp.run()",
+            "atWord": 60.333
+          },
+          {
+            "text": "Six tools become fifty, same server file",
+            "atWord": 71.083
+          },
+          {
+            "text": "server.py stays a description, not code",
+            "atWord": 38.333
+          },
+          {
+            "text": "Import mcp from the server, decorate there",
+            "atWord": 53.75
+          }
+        ]
+      },
+      "durationFrames": 1120,
+      "audio": "audio/mcpagent_long_s47.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s48",
+      "type": "LIST_BUILD",
+      "narration": "Third, the trap that will cost you an evening: if you launch the server as a script and your modules import it by package name, Python loads that file twice, and every tool registers on the copy nobody is serving. Your tools just vanish. Run it as a module instead, and the problem never appears. And fourth: build something small this week and break it on purpose, because that is genuinely the fastest way through. Then read the SDK's own guide, kept current by the people who wrote the library, and better than mine. That is where I would go next.",
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "heading": "The trap, and what to read next",
+        "items": [
+          {
+            "text": "Double import — tools silently vanish",
+            "atWord": 19.333
+          },
+          {
+            "text": "Launch it as a module, not a script",
+            "atWord": 35.167
+          },
+          {
+            "text": "Then read the SDK guide and keep going",
+            "atWord": 62.583
+          },
+          {
+            "text": "Kept current by the people who wrote it",
+            "atWord": 64
+          },
+          {
+            "text": "Build something small — break it on purpose",
+            "atWord": 46.333
+          }
+        ]
+      },
+      "durationFrames": 948,
+      "audio": "audio/mcpagent_long_s48.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s49",
+      "type": "RECAP",
+      "narration": "So that's the whole thing: a service, a log, three ordinary functions, a decorator that describes them, and a loop that lets a model choose. The protocol is open and the SDK is on GitHub, both linked below — go and read their getting started, because it's better than mine. And there's a lot more in there: prompts, resources you can subscribe to, and running a server over HTTP instead of stdio.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "heading": "What you built",
+        "points": [
+          {
+            "text": "a service that logs itself",
+            "atWord": 3.917
+          },
+          {
+            "text": "three plain Python functions",
+            "atWord": 8.583
+          },
+          {
+            "text": "an MCP server that describes them",
+            "atWord": 11.083
+          },
+          {
+            "text": "an agent loop that chooses",
+            "atWord": 15.833
+          }
+        ]
+      },
+      "durationFrames": 691,
+      "audio": "audio/mcpagent_long_s49.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s50",
+      "type": "OUTRO_CTA",
+      "narration": "Point it at something of your own tonight. A log you already have, an API you already run. Change the three functions, keep everything else, and see what it does. If this got you started, subscribe — and tell me what you pointed it at.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "message": "Change the three functions. Keep the rest.",
+        "sub": "modelcontextprotocol.io · github.com/modelcontextprotocol/python-sdk"
+      },
+      "durationFrames": 395,
+      "audio": "audio/mcpagent_long_s50.mp3",
+      "timingSource": "tts"
     }
   ]
 }

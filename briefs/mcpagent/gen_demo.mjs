@@ -185,7 +185,9 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from openai import OpenAI
 
-load_dotenv()
+load_dotenv()`;
+
+const AGENT_1B = `
 
 
 async def main(question: str) -> None:
@@ -299,15 +301,14 @@ const demo = {
      cmd: 'uv add "mcp[cli]" fastapi "uvicorn[standard]" httpx openai python-dotenv',
      label: 'the SDK, the web framework, and the client', focus: 'terminal', clearFirst: true,
      timeout: 240000, expect: {exitCode: 0}},
-    {id: 'added', action: 'run',
-     cmd: 'uv pip list | grep -E "^(mcp|fastapi|openai|httpx|uvicorn|python-dotenv) "',
-     label: 'six libraries, and their versions', focus: 'terminal', clearFirst: true,
-     expect: {contains: 'mcp', exitCode: 0},
-     marks: [{id: 'mcp', text: 'mcp'}, {id: 'fastapi', text: 'fastapi'},
-             {id: 'openai', text: 'openai'}]},
+    {id: 'added', action: 'run', cmd: 'cat pyproject.toml',
+     label: 'the six, written into the project', focus: 'terminal', clearFirst: true,
+     expect: {contains: 'mcp[cli]', exitCode: 0},
+     marks: [{id: 'deps', text: 'mcp[cli]'}]},
 
     // ── api.py, and the log it writes ──────────────────────────────────────────
-    {id: 'openapi', action: 'openFile', file: 'api.py', label: 'an empty file'},
+    {id: 'openapi', action: 'openFile', path: 'api.py', label: 'an empty file'},
+    {id: 'openapiSettle', action: 'pause', ms: 1200, label: 'an empty file'},
     {id: 'api1', action: 'type', text: API_1, label: 'the app, and three orders',
      marks: [{id: 'app', text: 'app = FastAPI()'}, {id: 'orders', text: '"SO-1003"'}]},
     {id: 'api2', action: 'type', text: API_2, label: 'a middleware that writes the log',
@@ -330,7 +331,8 @@ const demo = {
      label: 'the service is up', focus: 'terminal', timeout: 60000,
      expect: {contains: 'Application startup complete', exitCode: 0},
      marks: [{id: 'up', text: 'Application startup complete'}]},
-    {id: 'opentraffic', action: 'openFile', file: 'traffic.py', label: 'something to call it with'},
+    {id: 'opentraffic', action: 'openFile', path: 'traffic.py', label: 'something to call it with'},
+    {id: 'opentrafficSettle', action: 'pause', ms: 1200, label: 'an empty file'},
     {id: 'traffic1', action: 'type', text: TRAFFIC, label: 'sixty requests',
      marks: [{id: 'loop', text: 'for _ in range(60)'}, {id: 'post', text: '/checkout'}]},
     {id: 'savetraffic', action: 'save', label: 'saved'},
@@ -343,7 +345,8 @@ const demo = {
      marks: [{id: 'line', text: '/checkout'}]},
 
     // ── three plain functions ──────────────────────────────────────────────────
-    {id: 'opentools', action: 'openFile', file: 'tools.py', label: 'plain Python, no AI yet'},
+    {id: 'opentools', action: 'openFile', path: 'tools.py', label: 'plain Python, no AI yet'},
+    {id: 'opentoolsSettle', action: 'pause', ms: 1200, label: 'an empty file'},
     {id: 't1', action: 'type', text: TOOLS_1, label: 'count the errors',
      marks: [{id: 'split5', text: 'line.split()'}, {id: 'counter', text: 'hits[route] += 1'}]},
     {id: 't2', action: 'type', text: TOOLS_2, label: 'average the response times',
@@ -358,7 +361,8 @@ const demo = {
      marks: [{id: 'failed', text: 'failed'}, {id: 'slow', text: 'on average'}]},
 
     // ── the same functions, as MCP tools ───────────────────────────────────────
-    {id: 'openserver', action: 'openFile', file: 'server.py', label: 'the MCP server'},
+    {id: 'openserver', action: 'openFile', path: 'server.py', label: 'the MCP server'},
+    {id: 'openserverSettle', action: 'pause', ms: 1200, label: 'an empty file'},
     {id: 's1', action: 'type', text: SERVER_1, label: 'one import, one decorator',
      marks: [{id: 'imp', text: 'from mcp.server.mcpserver import MCPServer'},
              {id: 'dec', text: '@mcp.tool()'},
@@ -371,19 +375,24 @@ const demo = {
     {id: 'saveserver', action: 'save', label: 'saved'},
 
     // ── the settings file ──────────────────────────────────────────────────────
-    {id: 'openenv', action: 'openFile', file: '.env', label: 'the three settings'},
+    {id: 'openenv', action: 'openFile', path: '.env', label: 'the three settings'},
+    {id: 'openenvSettle', action: 'pause', ms: 1200, label: 'an empty file'},
     {id: 'typeenv', action: 'type', text: ENV, label: 'masked, and never in the code',
      marks: [{id: 'url', text: 'AI_BASE_URL'}, {id: 'masked', text: 'AI_API_KEY'},
              {id: 'model', text: 'AI_MODEL'}]},
     {id: 'saveenv', action: 'save', label: 'saved'},
-    {id: 'openignore', action: 'openFile', file: '.gitignore', label: 'and git never sees it'},
+    {id: 'openignore', action: 'openFile', path: '.gitignore', label: 'and git never sees it'},
+    {id: 'openignoreSettle', action: 'pause', ms: 1200, label: 'an empty file'},
     {id: 'typeignore', action: 'type', text: '.env\n', label: 'one line',
      marks: [{id: 'ignored', text: '.env'}]},
     {id: 'saveignore', action: 'save', label: 'saved'},
 
     // ── the agent ──────────────────────────────────────────────────────────────
-    {id: 'openagent', action: 'openFile', file: 'agent.py', label: 'the last file'},
-    {id: 'ag1', action: 'type', text: AGENT_1, label: 'start the server, connect to it',
+    {id: 'openagent', action: 'openFile', path: 'agent.py', label: 'the last file'},
+    {id: 'openagentSettle', action: 'pause', ms: 1200, label: 'an empty file'},
+    {id: 'ag1', action: 'type', text: AGENT_1, label: 'the imports',
+     marks: [{id: 'imports', text: 'from mcp import ClientSession, StdioServerParameters'}]},
+    {id: 'ag1b', action: 'type', text: AGENT_1B, label: 'start the server, connect to it',
      marks: [{id: 'params', text: 'StdioServerParameters'},
              {id: 'init', text: 'await session.initialize()'}]},
     {id: 'ag2', action: 'type', text: AGENT_2, label: 'ask what tools exist',
@@ -400,7 +409,7 @@ const demo = {
 
     // ── the payoff ─────────────────────────────────────────────────────────────
     {id: 'runagent', action: 'run',
-     cmd: 'uv run python agent.py "our checkout is misbehaving - what does the log say, and how bad is it?"',
+     cmd: 'uv run python agent.py "our checkout is misbehaving - what does the log say? Two sentences."',
      label: 'asking in plain English', focus: 'terminal', clearFirst: true,
      timeout: 300000, expect: {contains: 'it chose', exitCode: 0},
      marks: [{id: 'sees', text: 'the model can see'}, {id: 'chose', text: 'it chose'}]},

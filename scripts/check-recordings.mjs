@@ -245,6 +245,59 @@ if (slugArg && !quiet) {
     }
     console.log('  If a label and the screen disagree, the clip was cast from its name, not its content.');
   }
+
+  // ── FIGURES: every number the narration speaks over footage, against the footage ──
+  //
+  // PAID FOR, 2026-09-04. The MCP agent script was written from a VERIFICATION run and
+  // the video was a SEPARATE recording of the same project. Same code, different dice:
+  // "checkout failed five times" over a terminal reading "failed 7 times", "it chose
+  // recent_errors and then slowest_routes" over footage where it chose one, and a
+  // quoted answer nobody on screen ever gave. The linter passed, the sync audit passed,
+  // the hold check passed, and the payoff beat described a run the viewer never sees.
+  //
+  // Nothing could have caught it, because `shows` captured the last COMMAND and never
+  // the OUTPUT. Now that clips carry `said`, the figures a scene SPEAKS can be held
+  // against the text its own footage DISPLAYS. This is a report, not a rejection: most
+  // spoken numbers are legitimately not on screen ("five files", "three routes"), so it
+  // prints what it could not find and leaves the judgement to a person — which is the
+  // same contract as the label/screen table above.
+  const WORD = {one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7',
+                eight: '8', nine: '9', ten: '10', eleven: '11', twelve: '12', twenty: '20',
+                thirty: '30', forty: '40', fifty: '50', sixty: '60', seventy: '70',
+                eighty: '80', ninety: '90', hundred: '100', thousand: '1000'};
+  const spoken = (text) => {
+    const out = new Set();
+    // NOT \b at the end: the screen writes "1589ms" and the mouth says "1589            // milliseconds", and a trailing word boundary makes those two disagree.
+    for (const m of String(text).matchAll(/\d[\d,]*/g)) out.add(m[0].replace(/[,.]+$/, ''));
+    for (const m of String(text).toLowerCase().matchAll(/\b[a-z]+\b/g))
+      if (WORD[m[0]]) out.add(WORD[m[0]]);
+    return [...out];
+  };
+  const rows = [];
+  let measured = 0;
+  for (const file of specs) {
+    let spec; try { spec = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { continue; }
+    for (const sc of spec.scenes ?? []) {
+      const clips = sc.data?.recordedStep?.clips ?? [];
+      const said = clips.map((c) => c.said).filter(Boolean).join('\n');
+      if (!said) continue;
+      measured++;
+      const onScreen = new Set(spoken(said));
+      const missing = spoken(sc.narration ?? '').filter((n) => !onScreen.has(n));
+      if (missing.length) rows.push({id: sc.id, missing});
+    }
+  }
+  if (!measured && pairs.length) {
+    console.log('\n  FIGURES: not measured — this recording predates the screen-text capture.');
+    console.log('  Re-record to populate clips[].said, then every spoken number is checkable.');
+  } else if (rows.length) {
+    console.log('\n  FIGURES SPOKEN THAT THE FOOTAGE DOES NOT SHOW');
+    for (const r of rows) console.log(`    ${r.id}  ${r.missing.join(', ')}`);
+    console.log('  Some of these are fine (counts of files, of routes). Any that name a RESULT');
+    console.log('  are the script describing a different run from the one on camera.');
+  } else if (measured) {
+    console.log(`\n  FIGURES: every number spoken over footage appears in it (${measured} scene(s)).`);
+  }
 }
 
 if (!quiet) {

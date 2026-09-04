@@ -1156,7 +1156,7 @@ export const SchemaBind: React.FC<McpVizProps> = ({items, accent}) => {
         padding: `${10 * v.scale}px ${13 * v.scale}px`,
       }}>
         <div style={{...v.mono(m.sub), letterSpacing: 1.1, color: hexA(v.a, 0.95),
-                     fontWeight: 800, marginBottom: 6 * v.scale}}>WHAT CLAUDE ACTUALLY SEES</div>
+                     fontWeight: 800, marginBottom: 6 * v.scale}}>WHAT THE MODEL ACTUALLY SEES</div>
         {props.map((it, i) => {
           const on = liveAt(frame, it.atWord, 10);
           return (

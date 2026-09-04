@@ -273,6 +273,41 @@ export const inkFor = async (page) => {
 //     {label: 'scrolling to the table', shows: 'A new performance frontier'}
 // which is a contradiction you cannot skim past. LAW 0k's remedy is "audit by still, not by
 // render"; this is the same argument made cheap enough to be automatic.
+// WHAT THE SCREEN ACTUALLY SAID, verbatim.
+//
+// PAID FOR, 2026-09-04 (the MCP agent cut): the narration was written from a
+// VERIFICATION run of the same project and the video was a SEPARATE recording of it.
+// Same code, different dice: the script said the checkout "failed five times" over a
+// terminal reading "failed 7 times", claimed the model "chose recent_errors and then
+// slowest_routes" over footage where it chose one tool, and quoted an answer nobody
+// on screen ever gave. Every gate passed — `heading` only ever captured the last
+// COMMAND, so nothing in the pipeline had ever seen the OUTPUT the viewer reads.
+//
+// `heading` answers "what is this step". This answers "what does it say", which is the
+// only thing a spoken figure can be checked against.
+export const screenTextFor = async (page) => {
+  const txt = await page.evaluate(() => {
+    const clean = (s) => String(s || '').replace(/[ \t]+/g, ' ').trimEnd();
+    const out = [];
+    for (const r of document.querySelectorAll('.xterm-rows > div')) {
+      const t = clean(r.innerText);
+      if (t) out.push(t);
+    }
+    // The editor is virtualised, so this is the VISIBLE lines — which is also exactly
+    // what the viewer can read, so the two agree by construction.
+    for (const l of document.querySelectorAll('.view-lines .view-line')) {
+      const t = clean(l.innerText);
+      if (t) out.push(t);
+    }
+    if (!out.length) {
+      const b = document.body ? clean(document.body.innerText) : '';
+      if (b) out.push(...b.split('\n').map(clean).filter(Boolean).slice(0, 120));
+    }
+    return out.join('\n');
+  }).catch(() => '');
+  return String(txt || '').slice(0, 6000);
+};
+
 export const headingFor = async (page) => {
   const h = await page.evaluate(() => {
     const vis = (el) => {
@@ -1208,10 +1243,12 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
       // Measured at the same instant as the marks, so the card knows what the frame holds.
       const ink = await inkFor(page);
       const heading = await headingFor(page);
+      const screenText = await screenTextFor(page);
       steps.push({
         marks,
         ink,
         heading,
+        screenText,
         id: step.id ?? `step-${i + 1}`,
         index: i,
         action: step.action,

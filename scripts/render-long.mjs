@@ -90,8 +90,13 @@ execFileSync('node', [path.resolve('scripts/build-audio-track.mjs'), specPath,
 
 const final = path.join(outDir, `${comp.replace(`${slug}-`, '')}.mp4`);
 console.log('muxing ...');
+// NO `-shortest`. LAW 12: it silently truncated a finished render to the audio track and
+// cost four frames, which the frame-count verifier below then reported as a MISMATCH on an
+// otherwise perfect hour of rendering. build-audio-track pads every scene to its exact
+// durationFrames, so the two streams are the same length by construction — and if they ever
+// are not, the verifier should SAY so rather than have the mux quietly paper over it.
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', mute, '-i', track,
-  '-c', 'copy', '-shortest', final], {stdio: 'inherit'});
+  '-c', 'copy', final], {stdio: 'inherit'});
 
 // VERIFY, do not assume. Frame count must equal the spec's, and drift must be ~0 — both were
 // wrong once and both were only caught because they were measured.
@@ -114,5 +119,17 @@ console.log(`\n${final}`);
 console.log(`  frames: ${vFrames} (spec says ${total})  ${vFrames === total ? 'EXACT' : 'MISMATCH'}`);
 console.log(`  drift : ${Math.round((vDur - aDur) * 1000)} ms`);
 console.log(`  free  : ${free()} GB`);
-fs.rmSync(work, {recursive: true, force: true});
-if (vFrames !== total) process.exitCode = 1;
+if (vFrames !== total) {
+  // The segments and the audio track are the expensive part; a mismatch is almost always a
+  // MUX problem, which is seconds to redo. Deleting the inputs here turned that into a
+  // full re-render, so on failure the work directory stays.
+  console.log(`  kept ${work} — re-mux from seg-*.mp4 + track.m4a rather than re-rendering.`);
+  process.exitCode = 1;
+}
+
+// KEEP THE SEGMENTS. Deleting them on success saved ~250MB and cost a full re-render the
+// first time a single beat needed fixing: one component was drawing an empty pane, the fix
+// touched one scene in one segment, and the other five had to be rendered again to get it.
+// The segment cache is what makes a one-beat correction a ten-minute job. `--fresh` is the
+// explicit way to start over, and it already exists above.
+console.log(`  segments kept in ${work} — a re-run re-renders only what changed (--fresh to reset).`);
