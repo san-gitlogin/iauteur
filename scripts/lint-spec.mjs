@@ -506,6 +506,50 @@ if (spec.thumbnail && subject) {
   }
 }
 
+// ── CREDIT WHAT YOU INSTALL ON CAMERA ───────────────────────────────────────
+//
+// Owner, 2026-09-04: *"you must also credit the library. If they have official git make
+// sure to address in our video and ask users to look into documentation or the github
+// page."*
+//
+// A tutorial that types `uv add mcp` is standing on somebody's unpaid work, and the
+// viewer's next question — where do I read more? — has one right answer: the maintainers'
+// own page. `meta.seo.sources` is what carries that into the video description, where it
+// can actually be clicked.
+//
+// The install command is already ON the baked clip: `shows` records the screen's own words
+// for each step, so a `uv add` is visible here without reading the demo file. Package names
+// are compared case-insensitively and with `-`/`_` folded, because `python-dotenv` gets
+// credited as often as `python_dotenv`.
+{
+  const INSTALL = /(?:uv\s+add|uv\s+pip\s+install|pip3?\s+install|npm\s+(?:i|install)|pnpm\s+add|yarn\s+add)\s+(.+)/i;
+  const norm = (x) => String(x).toLowerCase().replace(/[-_]/g, '');
+  const installed = new Set();
+  for (const sc of spec.scenes ?? []) {
+    for (const c of sc.data?.recordedStep?.clips ?? []) {
+      const m = INSTALL.exec(String(c.shows ?? '').replace(/^\s*\$\s*/, ''));
+      if (!m) continue;
+      for (const raw of m[1].split(/\s+/)) {
+        // Skip flags, and strip extras/versions: mcp[cli]>=1.8 -> mcp
+        if (raw.startsWith('-')) continue;
+        const name = raw.replace(/[[<>=!~;].*$/, '').replace(/^["']|["']$/g, '').trim();
+        if (name) installed.add(name);
+      }
+    }
+  }
+  if (installed.size) {
+    const credited = norm((spec.meta?.seo?.sources ?? []).join(' '));
+    const missing = [...installed].filter((p) => !credited.includes(norm(p)));
+    if (missing.length) {
+      E(`INSTALLED BUT NOT CREDITED: ${missing.map((p) => `"${p}"`).join(', ')} ` +
+        `${missing.length === 1 ? 'is' : 'are'} installed on camera but named nowhere in ` +
+        `meta.seo.sources. A tutorial that types an install command owes the maintainers a ` +
+        `link the viewer can click — their docs site or their repo — and it belongs in the ` +
+        `description, not only in the narration.`);
+    }
+  }
+}
+
 // ── AN OVERLAY DEPICTS; A CALLOUT ONLY NAMES ────────────────────────────────
 //
 // Owner, 2026-09-04: *"when you are explaining about a code line, if needed, the overlay

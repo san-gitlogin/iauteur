@@ -1135,6 +1135,10 @@ const spec = {
         'llm tutorial', 'ai for testers', 'ai for analysts', 'local ai',
       ],
       sources: [
+        // The packages typed on camera owe their maintainers a clickable link.
+        'openai Python SDK — https://github.com/openai/openai-python',
+        'python-dotenv — https://github.com/theskumar/python-dotenv',
+        'uv — https://docs.astral.sh/uv/',
         'https://ollama.com',
         'https://ai.google.dev/gemini-api/docs/pricing',
         'https://console.groq.com/docs/rate-limits',

@@ -587,6 +587,30 @@ the fix was always WORDS OVER THE CLIP, never playback speed.
 step from the capture. `scripts/check-holds.mjs` measures the thing you are actually fixing.
 Sealed in `check-corrections.mjs` — the rate cannot be edited without the gate going red.
 
+### Corollary — CREDIT THE LIBRARY YOU INSTALL ON CAMERA (owner, 2026-09-04)
+
+Owner: *"you must also credit the library. If they have official git make sure to address in
+our video and ask users to look into documentation or the github page etc."*
+
+A tutorial that types `uv add mcp` is standing on somebody's unpaid work, and the viewer's
+next question — *where do I read more?* — has exactly one right answer: the maintainers' own
+page, not a summary of it. So every package installed on camera earns three things:
+
+1. **Its name and what it is, said out loud** — *"the official Python SDK for the Model
+   Context Protocol"*, not "a library".
+2. **Its own page ON SCREEN at least once**, recorded like any other quotation (LAW 0f):
+   the docs site or the GitHub repo, with `recordedStep.sourceNote` under it.
+3. **A line in `meta.seo.sources`**, which is what puts it in the video description where
+   somebody can click it.
+
+Say where to go next in the outro too: the docs for learning, the repo for the source and
+the issue tracker.
+
+**Enforced.** `lint-spec.mjs` reads every clip's baked `shows` for an install command
+(`uv add`, `pip install`, `npm install`), extracts the package names, and REJECTS the spec
+when a package installed on camera is not named in `meta.seo.sources`. It cannot be
+satisfied by a vague note — the package's own name has to be in the credit line.
+
 ### Corollary — AN OVERLAY ON A CODE LINE DEPICTS WHAT THE LINE DOES (owner, 2026-09-04)
 
 Owner: *"when you are explaining about a code line, if needed, the overlay component is meant

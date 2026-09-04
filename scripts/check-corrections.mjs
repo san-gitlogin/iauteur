@@ -36,6 +36,9 @@ const CORRECTIONS = [
    '"the on screen typing and highlighting just flashes only for a few seconds"',
    () => has('scripts/check-holds.mjs', 'hold = \\(next anchor') &&
          has('scripts/check-holds.mjs', 'TOO FAST TO READ')],
+  ['a library installed on camera and never credited', 'SEAL',
+   '"you must also credit the library. If they have official git make sure to address in our video"',
+   () => has('scripts/lint-spec.mjs', 'INSTALLED BUT NOT CREDITED')],
   ['a code line explained with a text label instead of a depiction', 'SEAL',
    '"the overlay component is meant to have components animated and display what the line does graphically instead of just showing text"',
    () => has('scripts/lint-spec.mjs', 'NO ANIMATED OVERLAYS')],
