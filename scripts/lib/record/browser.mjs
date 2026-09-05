@@ -11,6 +11,7 @@
 // the live DOM. If something cannot be confirmed, the step THROWS — no step ever reports
 // a state it did not observe.
 import {chromium} from 'playwright';
+import path from 'node:path';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -86,23 +87,48 @@ export const setupBrowser = async (demo) => {
   // 204KB at native 3200. Bytes were never the constraint; the downscale was.
   const viewport = demo.viewport ?? {width: 1600, height: 900};
   const dsf = demo.deviceScaleFactor ?? 4;
-  const browser = await chromium.launch({
-    headless: demo.headless ?? true,
-    // WITHOUT THESE, CHROME SILENTLY CAPS THE FACTOR AT 2. Measured: a context asking for
-    // dsf 4 produced 3200x1800 frames (i.e. dsf 2) until the flags were passed, so the
-    // capture quietly ignored the setting and nothing reported it. The VS Code surface has
-    // passed them since it was fixed; this surface never did.
-    args: ['--hide-scrollbars', `--force-device-scale-factor=${dsf}`, '--high-dpi-support=1'],
-  });
-  const ctx = await browser.newContext({
+  // WITHOUT THESE, CHROME SILENTLY CAPS THE FACTOR AT 2. Measured: a context asking for
+  // dsf 4 produced 3200x1800 frames (i.e. dsf 2) until the flags were passed, so the
+  // capture quietly ignored the setting and nothing reported it. The VS Code surface has
+  // passed them since it was fixed; this surface never did.
+  const args = ['--hide-scrollbars', `--force-device-scale-factor=${dsf}`, '--high-dpi-support=1'];
+  const ctxOpts = {
     viewport,
     deviceScaleFactor: dsf,
     // A recording is a performance, not a research session: block the noise that would
     // otherwise land in the frame or make two takes differ.
     reducedMotion: demo.reducedMotion === false ? 'no-preference' : 'reduce',
     colorScheme: (demo.theme ?? 'dark') === 'light' ? 'light' : 'dark',
-  });
-  const page = await ctx.newPage();
+  };
+
+  // SOME PAGES ARE BEHIND A HUMAN CHECK, AND A HUMAN HAS TO PASS IT ONCE.
+  //
+  // openai.com sits behind Cloudflare and reddit.com behind its own "prove your humanity"
+  // interstitial. Both answer a fresh automated context with a challenge page, so the
+  // recorder's read-back verification correctly refuses to write the take — there is
+  // genuinely nothing on screen to record. Neither is a bug to code around.
+  //
+  // `profile` points the take at a PERSISTENT Chrome profile the owner has already opened
+  // and cleared by hand. The clearance cookie lives in that directory, so the recording is
+  // still of the real page, in the owner's own logged-in browser. This surface used to call
+  // `chromium.launch()`, which keeps nothing, so a cleared challenge was thrown away the
+  // moment the take ended and the page could never be recorded at all.
+  //
+  // Prefer no profile. Reach for one only when a site will not serve a clean context.
+  let browser = null;
+  let ctx;
+  if (demo.profile) {
+    ctx = await chromium.launchPersistentContext(path.resolve(demo.profile), {
+      headless: demo.headless ?? false,   // a challenge cannot be cleared headless
+      channel: demo.channel ?? 'chrome',
+      args,
+      ...ctxOpts,
+    });
+  } else {
+    browser = await chromium.launch({headless: demo.headless ?? true, args});
+    ctx = await browser.newContext(ctxOpts);
+  }
+  const page = ctx.pages()[0] ?? await ctx.newPage();
   if (demo.blockAnalytics !== false) {
     await page.route('**/*', (route) => {
       const u = route.request().url();
@@ -117,7 +143,7 @@ export const setupBrowser = async (demo) => {
   }
   return {
     page,
-    teardown: async () => { await ctx.close().catch(() => {}); await browser.close().catch(() => {}); },
+    teardown: async () => { await ctx.close().catch(() => {}); await browser?.close().catch(() => {}); },
   };
 };
 

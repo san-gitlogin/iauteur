@@ -245,3 +245,55 @@ claims. I'd treat the creator links as demos worth studying, not final evidence.
 # 14. AVAILABILITY (review FAQ, agrees with §10)
 Limited orgs first -> ChatGPT Plus, Pro, Business, Enterprise -> OpenAI API, Microsoft Azure,
 AWS Bedrock. API name `gpt-6-astra`. Fast mode: up to 2x faster, 2x the price.
+
+---
+
+# 15. ARC-AGI-3 — FULL DETAIL (read off the live page 2026-09-05)
+**Author: Greg Kamradt. Published 03 Sep 2026.** https://arcprize.org/blog/astra
+
+## The summary, verbatim
+> "GPT-6 Astra scores 62.7% for $26K on ARC-AGI-3 Semi-Private with our Standard harness,
+> and 99.9% for $19K with a Provider Adapter harness."
+> "GPT-6 Astra surpasses the human baseline in action efficiency on ARC-AGI-3. It used fewer
+> actions than the median tested human on 96% of levels."
+> "A key behavior observed in GPT-6 Astra was its ability to turn unfamiliar environments into
+> compact symbolic world models. It represented game mechanics as logical rules and developed
+> its own domain-specific language shorthand to track state and plan actions."
+
+## Per-effort, BOTH harnesses (this is the beat)
+| effort | Standard | cost | Provider Adapter | cost |
+|---|---|---|---|---|
+| max | 62.7% | $26,098 | 98.6% | $17,332 |
+| xhigh | 59.3% | $37,317 | 98.4% | $18,147 |
+| high | 54.8% | $40,705 | **99.9%** | $18,817 |
+| medium | 38.6% | $48,090 | 98.4% | — |
+| low | 17.5% | $38,166 | 98.0% | $21,298 |
+| none | 35.2% | $49,791 | 96.7% | — |
+(Re-read these off the page before speaking any single cell; the sweep above was scraped.)
+
+## *** THE NUMBER THAT REFRAMES THE HEADLINE ***
+> "Humans can solve 100% of the environments."
+Human cost: **~$12.78 per attempted game.**
+So on the PROVIDER-NEUTRAL harness: humans 100% at $12.78; Astra 62.7% at $26,098.
+Fortune printed "99.9% vs GPT-5.6 Sol's 7.8%" with no harness and no cost.
+The Medium review printed 99.9% too.
+NOBODY in the coverage put 62.7% next to 100%. That is the video's spine.
+
+## What ARC-AGI-3 actually is (needed to make the number mean anything)
+- "a benchmark for studying agentic intelligence through novel, abstract, turn-based
+  environments. Agents must explore, infer goals, and build internal models of environments
+  to effectively plan actions without explicit instructions."
+- Environments "only contain core knowledge priors and are difficulty-calibrated through
+  controlled testing with human participants."
+- Tests four components: Exploration, (+ three more — READ THEM OFF THE PAGE before scripting)
+- ARC Prize's stated goal: measure the "residual gap" between current AI and AGI. They define
+  AGI as "a system's ability to acquire any skill a human can, as efficiently as a human can."
+- Harnesses: Standard = "provider-neutral interface" with visible note-taking.
+  Provider Adapter = "opaque reasoning state between requests" + "compaction".
+  NOTE the link to Wikipedia's "recurrent depth" / monitorability point — the adapter harness
+  is what lets the model keep hidden reasoning state across calls. SAME STORY, TWO SOURCES.
+
+# 16. OPENROUTER LIVE TABLE (scraped 2026-09-05 — verify on camera before speaking)
+Astra row: $10.00 in / $50.00 out / $1.00 cache read · a provider row showed 4.77s, 50 tps, 99.99%
+Other rows on the page carry $20/$100 and $5/$25 models for comparison. The page also shows
+per-provider latency/throughput/uptime. Use it for the "what it costs in practice" beat.

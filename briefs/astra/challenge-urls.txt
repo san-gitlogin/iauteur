@@ -1,0 +1,4 @@
+# Pages that will not serve an automated browser: a human clears the check once here,
+# and the recorder reuses the profile. See scripts/open-rec-profile.mjs.
+https://openai.com/index/gpt-6-astra/
+https://www.reddit.com/r/developersIndia/comments/1w6x5eq/gpt_6o_astra_is_insanely_good_good_alternative/

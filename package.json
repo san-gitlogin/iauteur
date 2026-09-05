@@ -84,7 +84,8 @@
     "check-fonts": "node scripts/check-fonts.mjs",
     "check-hooks": "node scripts/check-hooks.mjs",
     "check-sync": "node scripts/check-sync.mjs",
-    "test-rec-zoomres": "node scripts/test-rec-zoomres.mjs"
+    "test-rec-zoomres": "node scripts/test-rec-zoomres.mjs",
+    "open-rec-profile": "node scripts/open-rec-profile.mjs"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
