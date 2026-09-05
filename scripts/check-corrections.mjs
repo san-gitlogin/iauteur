@@ -144,6 +144,19 @@ const CORRECTIONS = [
   // times" over a terminal reading 7; "it chose recent_errors AND slowest_routes" over
   // footage where it chose one. Every gate passed, because `heading` captured the last
   // COMMAND and nothing had ever captured the OUTPUT.
+  // ── 2026-09-05: three complaints about the same 21-minute cut ─────────────
+  ['an overlay gone before it can be read', 'STRUCT',
+   '"displayed just for a second which is hard for viewer to catch" — ~1.1s legible after the fades',
+   () => has('src/scenes/RecordedStep.tsx', 'TAIL_AFTER_LAST') &&
+         has('src/scenes/RecordedStep.tsx', 'MIN_WINDOW')],
+  ['an overlay sitting flush on the frame edge', 'STRUCT',
+   '"positioning it at the very bottom without any gap from bottom" — the floor was 20*scale',
+   () => has('src/scenes/RecordedStep.tsx', 'EDGE_MIN')],
+  ['a label wider than its own pill, and arrows inside the node', 'STRUCT',
+   '"proper padding with the content… arrows must not go inside the container"',
+   () => has('src/mcpViz.tsx', 'PAD_X') && has('src/mcpViz.tsx', 'STANDOFF') &&
+         has('src/mcpViz.tsx', 'edgePath')],
+
   // ── a whole cut shipped silent, and every number was perfect ───────────────
   // render-long guesses the voice prefix from the slug's FIRST hyphen-segment;
   // `code-an-ai-agent-with-mcp` gave `code_long`, the files were `mcpagent_long_*`,

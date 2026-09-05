@@ -143,6 +143,25 @@ what failure should return, and what the project looks like at fifty tools.
 `documentary` (28–60). The owner's best-performing video is the uv course, which is exactly
 this shape.
 
+#### Rewriting a chapter as one block silently deleted a beat
+
+Chapter 8 was replaced by slicing the file between two markers and writing new content in.
+The new content did not include `MCP_LOOP` — the agent-loop ring — so the beat vanished. The
+spec still built, still passed the linter, still synced, and the **component fix the owner
+had just asked for (padding, and arrows that stop at the border) would have shipped in a
+video that no longer used it.** Nothing downstream can notice a beat that was never
+authored.
+
+Caught by reading the type census by hand while looking for something else. `build.mjs` now
+prints that census on every run, which is the only cheap moment to see it:
+
+    76 scenes, 6887 words (~36m54s)
+    RECORDED_STEP:27 CHAPTER:10 SPEC_COMPARE:7 … MCP_LOOP:1 …
+
+**The rule: after any large builder edit, read the census diff before running anything
+else.** It is the same argument as LAW 0p's "a builder that is behind its output is a trap",
+pointed at the builder rather than the JSON.
+
 **Still owed:** carrying the camera between clips so a zoom does not pull out and back in
 across a clip boundary (owner marked it low priority); a general scan for fixed frame
 intervals inside explanatory components (LAW 0i.1 — `Pipeline.tsx` is a known offender).

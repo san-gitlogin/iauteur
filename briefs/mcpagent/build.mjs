@@ -433,13 +433,12 @@ scenes.push(chapter(
   scenes.push(rec(n, 'sixty requests, not all the same',
     'A tiny script that gives the service something to do.',
     [A('opentraffic', 'something to call it with'),
-     A('traffic1', 'sixty requests', {wantAtWord: at(n, 'Sixty'),
+     A('traffic1', 'sixty requests', {wantAtWord: at(n, 'checking'),
        zooms: [{mark: 'loop', atWord: at(n, 'random')}],
        callouts: [{text: 'picks one of the three routes', mark: 'loop', side: 'right',
                    color: 'blue', atWord: at(n, 'four')},
                   {text: 'so the timings vary like real traffic', mark: 'post', side: 'right',
-                   color: 'purple', atWord: at(n, 'afternoon')}]}),
-     A('savetraffic', 'saved')]));
+                   color: 'purple', atWord: at(n, 'afternoon')}]})]));
 }
 
 {
@@ -1209,7 +1208,7 @@ scenes.push(chapter(
   scenes.push(rec(n, 'eight imports, eight jobs',
     'The imports, and what each one is actually for.',
     [A('openagent', 'the last file'),
-     A('ag1', 'the imports', {wantAtWord: at(n, 'imports'),
+     A('ag1', 'the imports', {wantAtWord: at(n, 'beginner'),
        zooms: [{mark: 'imports', atWord: at(n, 'Asyncio')}],
        callouts: [{text: 'reads .env into the environment', mark: 'imports', side: 'right',
                    color: 'green', atWord: at(n, 'dotenv')},
@@ -1439,6 +1438,46 @@ scenes.push(chapter(
        text: 'out', atWord: at(n, 'executed')},
       {label: 'your code runs it', sub: 'or refuses to', icon: 'lucide:terminal',
        text: 'bridge', atWord: at(n, 'job')},
+    ],
+  }}));
+}
+
+{
+  const n =
+    "Before we write the next block, hold the shape in your head, " +
+    "because every agent you will ever read is some version of this ring. " +
+    "You ask the model, with the tool list attached. " +
+    "You read what it asked for. You run that tool. You hand the result back. " +
+    "Then you ask once more, and this time it answers in words instead of tool calls. " +
+    "Ours goes round exactly once, which is all this question needs. " +
+    "Wrap those four steps in a while loop instead, " +
+    "and the model can go round as many times as it likes — " +
+    "read the errors, then go and fetch the order behind one of them. " +
+    "That one change is the whole difference between a helper and an agent, " +
+    "and it is the first upgrade I would make to this file.";
+  scenes.push(scene('MCP_LOOP', n, {mcpLoop: {
+    headline: 'Ask, run, [ask again]',
+    caption: 'the agent loop',
+    premise: 'agent.py sits between the model and the server, relaying until the model answers in words instead of tool calls.',
+    color: 'orange',
+    atWord: 1,
+    codeTitle: 'agent.py',
+    cells: [
+      {label: 'ask the model', sub: '+ the tool list', atWord: at(n, 'ask')},
+      {label: 'tool_calls', sub: 'what it wants run', atWord: at(n, 'asked')},
+      {label: 'call_tool', sub: 'you run it', atWord: at(n, 'run')},
+      {label: 'role: tool', sub: 'the result goes back', atWord: at(n, 'hand')},
+      {label: 'it answers', sub: 'words, not tool calls', text: 'exit', atWord: at(n, 'words')},
+    ],
+    lines: [
+      {text: 'answer = client.chat.completions.create(',
+       detail: 'One ask, with the menu attached.', atWord: at(n, 'attached')},
+      {text: '    model=..., messages=messages, tools=menu)'},
+      {text: 'for call in picked.tool_calls:',
+       detail: 'Run every tool it asked for. Ours needs one pass.', atWord: at(n, 'asked')},
+      {text: '    result = await session.call_tool(...)', atWord: at(n, 'tool', 2)},
+      {text: 'final = client.chat.completions.create(',
+       detail: 'Ask again, with the results in the conversation.', atWord: at(n, 'more')},
     ],
   }}));
 }
@@ -1883,7 +1922,7 @@ const spec = {
     screenplay: 'masterclass',
     topicAxes: ['skill-build', 'sovereignty'],
     seo: {
-      title: 'Code An AI Agent With MCP — Python, Every Line Typed',
+      title: 'Learn MCP Properly — Build An AI Agent In Python, Under 40 Minutes (2026)',
       altTitles: [
         'Build Your First MCP Server And Agent — Python, For Beginners',
         'MCP Explained By Building One — Python, Every Line Typed',
@@ -1925,9 +1964,9 @@ const spec = {
     background: 'plain', channel: CH, logo: 'img:channel_logo.png',
   },
   thumbnail: {
-    title: 'Code An AI Agent With MCP',
-    badge: 'Python · MCP · Beginners',
-    note: 'five files, from an empty folder',
+    title: 'Learn MCP Properly — Build An AI Agent',
+    badge: 'Python · Under 40 Mins · Beginners',
+    note: 'five files, every line typed, from empty',
     asset: 'si:python',
     logos: ['si:python', 'si:openai', 'si:fastapi', 'si:anthropic'],
   },
@@ -1938,3 +1977,16 @@ fs.writeFileSync('topics/code-an-ai-agent-with-mcp/long.json', JSON.stringify(sp
 const words = scenes.reduce((a, s) => a + s.narration.trim().split(/\s+/).length, 0);
 console.log(`wrote topics/code-an-ai-agent-with-mcp/long.json — ${scenes.length} scenes, ` +
             `${words} words (~${Math.floor(words / 3.11 / 60)}m${String(Math.round((words / 3.11) % 60)).padStart(2, '0')}s)`);
+
+// PRINT THE CENSUS, EVERY BUILD.
+//
+// PAID FOR, 2026-09-05: rewriting chapter 8 as one block replaced a region by index and
+// silently took MCP_LOOP with it. The spec still built, still passed the linter, still
+// synced — and the ring beat the owner had just asked me to FIX was no longer in the
+// video, so the fix would have shipped unused. Nothing downstream can notice a beat that
+// was never authored; the only cheap moment to catch it is here, in the diff between one
+// build and the next.
+const census = {};
+for (const s of scenes) census[s.type] = (census[s.type] ?? 0) + 1;
+console.log('  ' + Object.entries(census).sort((a, b) => b[1] - a[1])
+  .map(([k, v]) => `${k}:${v}`).join(' '));
