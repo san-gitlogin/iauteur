@@ -1161,6 +1161,12 @@ const spec = {
   meta: {
     topic: 'Building an AI agent that calls your own tools, with MCP',
     subject: 'Python',
+    // The audio files are mcpagent_long_sNN.mp3, NOT code_long_sNN.mp3 — render-long
+    // guesses the prefix from the FIRST HYPHEN-SEGMENT of the slug when this is absent,
+    // and this slug starts "code-", so every scene fell through to anullsrc and a
+    // 21-minute silent track shipped. Whenever the voice prefix is not `<first>_long`,
+    // it has to be stated here.
+    audioPrefix: 'mcpagent_long',
     format: 'long',
     fps: 30,
     audience: 'beginner',

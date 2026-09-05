@@ -2,6 +2,7 @@
   "meta": {
     "topic": "Building an AI agent that calls your own tools, with MCP",
     "subject": "Python",
+    "audioPrefix": "mcpagent_long",
     "format": "long",
     "fps": 30,
     "audience": "beginner",

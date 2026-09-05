@@ -16,7 +16,7 @@
 // Usage: node scripts/render-long.mjs <slug> <composition> <segments>
 import fs from 'node:fs';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {execFileSync, spawnSync} from 'node:child_process';
 
 const [slug, comp, segArg] = process.argv.slice(2);
 if (!slug || !comp) {
@@ -115,11 +115,30 @@ const vDur = probe(['-v', 'error', '-show_entries', 'format=duration', '-of', 'c
 const aDur = probe(['-v', 'error', '-select_streams', 'a:0',
   '-show_entries', 'stream=duration', '-of', 'csv=p=0', final]);
 
+// IS THERE ANY SOUND IN IT? PAID FOR 2026-09-05: a 21-minute cut shipped in total
+// silence and every number above was perfect — frames EXACT, drift 0ms — because a
+// silent track is exactly as long as a spoken one. Duration proves synchronisation;
+// it says nothing about content. `volumedetect` over the whole file is cheap and is
+// the only check here that would have caught it.
+// ffmpeg writes volumedetect to STDERR and exits 0, so execFileSync (which returns only
+// stdout, and only throws on failure) reads nothing and the check silently reports
+// NOT MEASURED — which is how a check meant to catch a soft failure fails soft itself.
+// spawnSync hands back both streams.
+const meanDb = (() => {
+  const r = spawnSync('ffmpeg', ['-hide_banner', '-i', final, '-vn',
+    '-af', 'volumedetect', '-f', 'null', '-'], {encoding: 'utf8'});
+  const m = /mean_volume:\s*(-?[\d.]+) dB/.exec(`${r.stderr ?? ''}${r.stdout ?? ''}`);
+  return m ? Number(m[1]) : NaN;
+})();
+const SILENT_DB = -70;   // digital silence measures about -91; real speech about -20
+
 console.log(`\n${final}`);
 console.log(`  frames: ${vFrames} (spec says ${total})  ${vFrames === total ? 'EXACT' : 'MISMATCH'}`);
 console.log(`  drift : ${Math.round((vDur - aDur) * 1000)} ms`);
+console.log(`  audio : ${Number.isNaN(meanDb) ? 'NOT MEASURED' : `mean ${meanDb} dB`}` +
+  `${meanDb <= SILENT_DB ? '  ← SILENT, the track has no voice in it' : ''}`);
 console.log(`  free  : ${free()} GB`);
-if (vFrames !== total) {
+if (vFrames !== total || meanDb <= SILENT_DB) {
   // The segments and the audio track are the expensive part; a mismatch is almost always a
   // MUX problem, which is seconds to redo. Deleting the inputs here turned that into a
   // full re-render, so on failure the work directory stays.

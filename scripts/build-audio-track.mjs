@@ -25,6 +25,7 @@ const fps = spec.meta?.fps ?? 30;
 const inputs = [];
 const filters = [];
 let missing = 0;
+const silentButSpoken = [];
 spec.scenes.forEach((s, i) => {
   const dur = (s.durationFrames ?? 0) / fps;
   const mp3 = `public/audio/${prefix}_${s.id}.mp3`;
@@ -34,6 +35,13 @@ spec.scenes.forEach((s, i) => {
     // a scene with no narration is silence of exactly its own length
     inputs.push('-f', 'lavfi', '-t', dur.toFixed(4), '-i', 'anullsrc=r=48000:cl=stereo');
     missing++;
+    // ...but a scene WITH narration and no mp3 is a bug, not a design. PAID FOR
+    // 2026-09-05: render-long guesses the prefix from the slug's first hyphen-segment,
+    // `code-an-ai-agent-with-mcp` gave `code_long`, the files were `mcpagent_long_*`,
+    // and all fifty scenes silently became anullsrc. This printed "50 silent" and then
+    // reported ✓ because the only thing it verified was DURATION. A silent track is
+    // exactly as long as a spoken one.
+    if ((s.narration ?? '').trim()) silentButSpoken.push(`${s.id} -> ${mp3}`);
   }
   filters.push(
     `[${i}:a]aresample=48000,apad=whole_dur=${dur.toFixed(4)},atrim=0:${dur.toFixed(4)},asetpts=N/SR/TB[a${i}]`
@@ -46,6 +54,15 @@ const script = filters.join(';\n') + ';\n' + concat;
 const scriptFile = path.join(path.dirname(outPath), '.audio-filter.txt');
 fs.mkdirSync(path.dirname(outPath), {recursive: true});
 fs.writeFileSync(scriptFile, script);
+
+if (silentButSpoken.length) {
+  console.error(`\n✗ ${silentButSpoken.length} scene(s) have narration but no audio file:`);
+  for (const m of silentButSpoken.slice(0, 6)) console.error(`    ${m}`);
+  if (silentButSpoken.length > 6) console.error(`    …and ${silentButSpoken.length - 6} more`);
+  console.error(`  The prefix is probably wrong. It is "${prefix}"; set meta.audioPrefix in`);
+  console.error(`  the spec to whatever scripts/voiceover.py was given, and build again.`);
+  process.exit(1);
+}
 
 const total = spec.scenes.reduce((a, s) => a + (s.durationFrames ?? 0), 0) / fps;
 console.log(`${spec.scenes.length} scenes · ${missing} silent · target ${(total / 60).toFixed(2)} min`);

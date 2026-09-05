@@ -144,6 +144,17 @@ const CORRECTIONS = [
   // times" over a terminal reading 7; "it chose recent_errors AND slowest_routes" over
   // footage where it chose one. Every gate passed, because `heading` captured the last
   // COMMAND and nothing had ever captured the OUTPUT.
+  // ── a whole cut shipped silent, and every number was perfect ───────────────
+  // render-long guesses the voice prefix from the slug's FIRST hyphen-segment;
+  // `code-an-ai-agent-with-mcp` gave `code_long`, the files were `mcpagent_long_*`,
+  // so all fifty scenes fell through to anullsrc. build-audio-track printed
+  // "50 silent" and then reported ✓ — because the only thing it checked was
+  // DURATION, and a silent track is exactly as long as a spoken one.
+  ['a video that renders and verifies perfectly with no voice in it', 'SEAL',
+   'frames EXACT, drift 0ms, and 21 minutes of digital silence',
+   () => has('scripts/build-audio-track.mjs', 'silentButSpoken') &&
+         has('scripts/render-long.mjs', 'SILENT_DB')],
+
   ['a spoken figure that the footage never showed', 'SEAL',
    'the payoff beat described a different run of the same project, and nothing could see it',
    () => has('scripts/lib/record/runner.mjs', 'screenTextFor') &&
