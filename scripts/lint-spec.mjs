@@ -556,6 +556,34 @@ if (spec.thumbnail && subject) {
 // component is meant to have components animated and display what the line does
 // graphically instead of just showing text."*
 //
+// ── ONE MARK, ONE CALLOUT ────────────────────────────────────────────────────
+//
+// OWNER, 2026-09-05, with a screenshot: two callouts on the same clip, one pointing at the
+// shell prompt and one floating at the left edge of the frame pointing at nothing at all.
+// Both had been authored onto the same `mark`, because it was the only mark the step had.
+//
+// A leader line goes from the label to the mark's rectangle. Two labels cannot both sit
+// beside one rectangle, so the layout pushes the second somewhere it fits — which is how a
+// callout ends up in empty space. The fix is not smarter layout: it is that a mark can only
+// answer for one label. If a beat needs to name three things, the capture needs three marks.
+for (const sc of spec.scenes ?? []) {
+  for (const [ci, c] of (sc.data?.recordedStep?.clips ?? []).entries()) {
+    const byMark = {};
+    for (const co of c.callouts ?? []) {
+      if (co?.mark == null) continue;   // an unmarked callout is a top-placed label, no leader
+      (byMark[co.mark] ??= []).push(co.text ?? '');
+    }
+    for (const [mark, texts] of Object.entries(byMark)) {
+      if (texts.length > 1) {
+        E(`${sc.id}: clip ${ci + 1} puts ${texts.length} callouts on the single mark "${mark}" ` +
+          `(${texts.map((t) => JSON.stringify(String(t).slice(0, 24))).join(', ')}). ` +
+          `Only one can sit beside it; the rest get pushed into empty frame. ` +
+          `Give the capture a mark per thing you name, or set mark:null on the others.`);
+      }
+    }
+  }
+}
+
 // MEASURED on the cut that prompted it: 45 callouts, ZERO overlays, across a 19-minute
 // coding tutorial. `clips[].overlay` has existed since RecordedStep was built, is wired,
 // and three other topics use it — and every explanation in that video was a text label on

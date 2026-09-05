@@ -187,7 +187,7 @@ scenes.push(chapter(
        zooms: [{mark: 'made', atWord: at(n, 'writes')}],
        callouts: [{text: 'the list of what this needs', mark: 'made', side: 'right',
                    color: 'blue', atWord: at(n, 'pyproject')},
-                  {text: 'pins the exact versions', mark: 'made', side: 'right',
+                  {text: 'pins the exact versions', mark: null, side: 'right',
                    color: 'green', atWord: at(n, 'lock')}]})]));
 }
 
@@ -214,9 +214,9 @@ scenes.push(chapter(
        zooms: [{mark: 'deps', atWord: at(n, 'FastAPI')}],
        callouts: [{text: 'the official MCP SDK', mark: 'deps', side: 'right',
                    color: 'green', atWord: at(n, 'official')},
-                  {text: 'serves what FastAPI defines', mark: 'deps', side: 'right',
+                  {text: 'serves what FastAPI defines', mark: null, side: 'right',
                    color: 'blue', atWord: at(n, 'uvicorn', 2)},
-                  {text: 'keeps the key out of the code', mark: 'deps', side: 'right',
+                  {text: 'keeps the key out of the code', mark: null, side: 'right',
                    color: 'purple', atWord: at(n, 'python-dotenv')}]})]));
 }
 
@@ -469,7 +469,7 @@ scenes.push(chapter(
        zooms: [{mark: 'line', atWord: at(n, 'checkout')}],
        callouts: [{text: 'written by the app, not by us', mark: 'line', side: 'right',
                    color: 'green', atWord: at(n, 'fixture')},
-                  {text: 'time · level · route · code · ms', mark: 'line', side: 'right',
+                  {text: 'time · level · route · code · ms', mark: null, side: 'right',
                    color: 'orange', atWord: at(n, 'timestamp')}]})]));
 }
 
@@ -1212,7 +1212,7 @@ scenes.push(chapter(
        zooms: [{mark: 'imports', atWord: at(n, 'Asyncio')}],
        callouts: [{text: 'reads .env into the environment', mark: 'imports', side: 'right',
                    color: 'green', atWord: at(n, 'dotenv')},
-                  {text: 'three from MCP, one from OpenAI', mark: 'imports', side: 'right',
+                  {text: 'three from MCP, one from OpenAI', mark: null, side: 'right',
                    color: 'purple', atWord: at(n, 'three')}]})]));
 }
 
@@ -1282,7 +1282,7 @@ scenes.push(chapter(
                    color: 'blue', atWord: at(n, 'args')},
                   {text: 'stdin = read · stdout = write', mark: 'init', side: 'right',
                    color: 'orange', atWord: at(n, 'born')},
-                  {text: 'no port, no network', mark: 'params', side: 'right', color: 'purple',
+                  {text: 'no port, no network', mark: null, side: 'right', color: 'purple',
                    atWord: at(n, 'network')}]})]));
 }
 
@@ -1362,7 +1362,7 @@ scenes.push(chapter(
                    color: 'blue', atWord: at(n, 'comprehension')},
                   {text: 'built by the decorator, back in server.py', mark: 'schema',
                    side: 'right', color: 'green', atWord: at(n, 'decorator')},
-                  {text: 'v1 spelled it inputSchema', mark: 'schema', side: 'right',
+                  {text: 'v1 spelled it inputSchema', mark: null, side: 'right',
                    color: 'orange', atWord: at(n, 'camel')}]})]));
 }
 
@@ -1409,7 +1409,7 @@ scenes.push(chapter(
                  rightNote: 'any instruction about which one to use'},
        callouts: [{text: 'the address makes it portable', mark: 'tools', side: 'right',
                    color: 'green', atWord: at(n, 'Azure')},
-                  {text: 'what exists, not what to use', mark: 'tools', side: 'right',
+                  {text: 'what exists, not what to use', mark: null, side: 'right',
                    color: 'blue', atWord: at(n, 'exists')}]})]));
 }
 
@@ -1505,7 +1505,7 @@ scenes.push(chapter(
                  steps: ['"{}" as text', 'json.loads', 'a real dict', 'call_tool()']},
        callouts: [{text: 'arguments arrive as TEXT', mark: 'call', side: 'right',
                    color: 'orange', atWord: at(n, 'string')},
-                  {text: 'it may ask for more than one', mark: 'call', side: 'right',
+                  {text: 'it may ask for more than one', mark: null, side: 'right',
                    color: 'blue', atWord: at(n, 'Second')}]})]));
 }
 
@@ -1532,7 +1532,7 @@ scenes.push(chapter(
                         {text: 'role: tool — what your function returned', state: 'new'}]},
        callouts: [{text: 'ties the answer to the request', mark: 'final', side: 'right',
                    color: 'blue', atWord: at(n, 'id')},
-                  {text: 'a list, because a tool could return anything', mark: 'final',
+                  {text: 'a list, because a tool could return anything', mark: null,
                    side: 'right', color: 'purple', atWord: at(n, 'pieces')}]})]));
 }
 
@@ -1562,7 +1562,7 @@ scenes.push(chapter(
                  rightNote: 'messages only — give me words'},
        callouts: [{text: 'now holds your function\'s answer', mark: 'final', side: 'right',
                    color: 'blue', atWord: at(n, 'produced')},
-                  {text: 'no tools = give me words', mark: 'final', side: 'right',
+                  {text: 'no tools = give me words', mark: null, side: 'right',
                    color: 'green', atWord: at(n, 'missing')}]}),
      A('saveagent', 'saved', {wantAtWord: at(n, 'Save'),
        callouts: [{text: 'the question you type goes here', mark: null, side: 'top',
@@ -1637,7 +1637,7 @@ scenes.push(chapter(
                  rightNote: 'recent_errors — nobody told it which'},
        callouts: [{text: 'it chose this one itself', mark: 'chose', side: 'right', color: 'green',
                    atWord: at(n, 'told')},
-                  {text: 'written by the model, from YOUR log', mark: 'chose', side: 'right',
+                  {text: 'written by the model, from YOUR log', mark: null, side: 'right',
                    color: 'green', atWord: at(n, 'paragraph')}]})]));
 }
 

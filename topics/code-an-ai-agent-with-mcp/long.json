@@ -378,7 +378,7 @@
                 },
                 {
                   "text": "pins the exact versions",
-                  "mark": "made",
+                  "mark": null,
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 58.5,
@@ -500,7 +500,7 @@
                 },
                 {
                   "text": "serves what FastAPI defines",
-                  "mark": "deps",
+                  "mark": null,
                   "side": "right",
                   "color": "blue",
                   "wantAtWord": 61.833,
@@ -508,7 +508,7 @@
                 },
                 {
                   "text": "keeps the key out of the code",
-                  "mark": "deps",
+                  "mark": null,
                   "side": "right",
                   "color": "purple",
                   "wantAtWord": 95.083,
@@ -1658,7 +1658,7 @@
                 },
                 {
                   "text": "time · level · route · code · ms",
-                  "mark": "line",
+                  "mark": null,
                   "side": "right",
                   "color": "orange",
                   "wantAtWord": 96.917,
@@ -10149,7 +10149,7 @@
                 },
                 {
                   "text": "three from MCP, one from OpenAI",
-                  "mark": "imports",
+                  "mark": null,
                   "side": "right",
                   "color": "purple",
                   "wantAtWord": 68.417,
@@ -10345,7 +10345,7 @@
                 },
                 {
                   "text": "no port, no network",
-                  "mark": "params",
+                  "mark": null,
                   "side": "right",
                   "color": "purple",
                   "wantAtWord": 123.75,
@@ -10558,7 +10558,7 @@
                 },
                 {
                   "text": "v1 spelled it inputSchema",
-                  "mark": "schema",
+                  "mark": null,
                   "side": "right",
                   "color": "orange",
                   "wantAtWord": 109.417,
@@ -10701,7 +10701,7 @@
                 },
                 {
                   "text": "what exists, not what to use",
-                  "mark": "tools",
+                  "mark": null,
                   "side": "right",
                   "color": "blue",
                   "wantAtWord": 102.25,
@@ -10945,7 +10945,7 @@
                 },
                 {
                   "text": "it may ask for more than one",
-                  "mark": "call",
+                  "mark": null,
                   "side": "right",
                   "color": "blue",
                   "wantAtWord": 33.75,
@@ -11069,7 +11069,7 @@
                 },
                 {
                   "text": "a list, because a tool could return anything",
-                  "mark": "final",
+                  "mark": null,
                   "side": "right",
                   "color": "purple",
                   "wantAtWord": 60.667,
@@ -11195,7 +11195,7 @@
                 },
                 {
                   "text": "no tools = give me words",
-                  "mark": "final",
+                  "mark": null,
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 25.583,
@@ -11480,7 +11480,7 @@
                 },
                 {
                   "text": "written by the model, from YOUR log",
-                  "mark": "chose",
+                  "mark": null,
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 58.333,

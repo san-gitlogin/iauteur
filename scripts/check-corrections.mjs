@@ -144,6 +144,15 @@ const CORRECTIONS = [
   // times" over a terminal reading 7; "it chose recent_errors AND slowest_routes" over
   // footage where it chose one. Every gate passed, because `heading` captured the last
   // COMMAND and nothing had ever captured the OUTPUT.
+  // ── a callout pointing at the wrong words ─────────────────────────────────
+  ['a mark that resolved to the wrong rectangle', 'STRUCT',
+   '"highlighting shit and explaining something that doesnt relate to whats highlighted"',
+   () => has('scripts/lib/record/runner.mjs', 'covers ') &&
+         has('scripts/lib/record/runner.mjs', "via \\${box.via}")],
+  ['two callouts sharing one mark, one landing in empty frame', 'SEAL',
+   '11 clips did it; the second label had nothing to point at',
+   () => has('scripts/lint-spec.mjs', 'callouts on the single mark')],
+
   // ── a cached segment from a DIFFERENT spec, adopted as this one's ─────────
   // The skip test was "the file exists and is non-empty", which is true of a leftover from
   // any previous run. A 75-scene cut's segments are 6304 frames; the 76-scene cut's are

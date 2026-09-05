@@ -560,6 +560,35 @@ declared, drawn, and invisible.** Whenever something moves by transform, ask wha
 other side of it too. The same sweep applies to `translateX` on a wide cut, to a pill that
 overshoots its track, and to any `landAt` overshoot near a container edge.
 
+### Corollary — A MARK MUST PROVE WHAT IT COVERS (owner, 2026-09-05)
+
+Owner, with a screenshot of a callout reading *"the official MCP SDK"* pointing at the shell
+prompt: *"Why aren't we fixing this upright once and for all so that the mistake never
+happens. You have zoomed in but highlighting shit and explaining something that doesn't
+relate to what's highlighted."*
+
+Two independent defects produced it, and neither was checked anywhere:
+
+1. **The mark resolved to the wrong rectangle, silently.** `marksFor` finds the ROW
+   containing the needle (`innerText`), then walks the row's TEXT NODES to draw a tight
+   rectangle around the matched characters. When those two disagree the index is `-1` and
+   the code fell back to `hit.getBoundingClientRect()` — the whole line. It also takes the
+   **last** matching row, which on a terminal is often the prompt rather than the output, so
+   a needle sharing a prefix with the prompt (`mcp` in `mcp-agent>`) lands on the prompt.
+   **A mark now reports the text under its rectangle, and the runner throws when that text
+   is not what was asked for.** Same contract as every other step: a recording that cannot
+   be verified is not written.
+2. **Two callouts on one mark.** A leader line runs from the label to the mark's rectangle.
+   Two labels cannot both sit beside one rectangle, so the layout pushes the second wherever
+   it fits — which is how a callout ends up in empty frame pointing at nothing. Measured on
+   this cut: **11 clips** had it. `lint-spec.mjs` rejects it now. If a beat names three
+   things, the capture needs three marks; anything else takes `mark: null`, which renders a
+   top-placed label with no leader and therefore cannot point at the wrong thing.
+
+**The general rule: anything that POINTS must be able to say what it is pointing at.** The
+same argument as `inkFor()` failing soft and as a spoken figure with no footage behind it —
+a measurement that cannot be read back is a guess wearing a rectangle.
+
 ### Corollary — RUNTIME IS FREE; THE TITLE IS WHERE THE PROMISE LIVES (owner, 2026-09-05)
 
 Owner: *"it need not be under 20 minutes or under any minutes. Whatever time you take, you

@@ -428,6 +428,8 @@ export const assertNoIdentity = async (page, stepId) => {
 
 export const marksFor = async (page, marks = []) => {
   const out = {};
+  // what each mark's rectangle actually covers, so a wrong one is visible rather than drawn
+  const markText = {};
   for (const m of marks) {
     if (!m?.id) continue;
     let box = null;
@@ -508,9 +510,39 @@ export const marksFor = async (page, marks = []) => {
         }
         if (!r) r = hit.getBoundingClientRect();
         if (r.width < 2 || r.height < 2) return null;
-        return {x: r.x, y: r.y, w: r.width, h: r.height};
+        // WHAT DID THIS RECTANGLE ACTUALLY LAND ON?
+        //
+        // OWNER, 2026-09-05, with a screenshot: a callout reading "the official MCP SDK"
+        // was pointing at the shell PROMPT — `mcp-agent>` — while the narration talked
+        // about the mcp dependency. The mark had asked for "mcp[cli]".
+        //
+        // Two ways that happens and neither was checked. The row test uses innerText and
+        // the tight Range uses the text NODES, and when those disagree `idx` is -1 and the
+        // code silently fell back to the whole row: a rectangle that contains the needle's
+        // row but is not the needle. And `.pop()` takes the LAST matching row, which on a
+        // terminal can be the prompt line rather than the output.
+        //
+        // So the mark now reports the text under it. A rectangle whose own text does not
+        // contain what was asked for is not a mark, and the runner refuses to write one —
+        // the same contract every other step already has.
+        const matched = idx >= 0 ? acc.slice(idx, idx + needle.length) : null;
+        return {x: r.x, y: r.y, w: r.width, h: r.height,
+                matched, via: idx >= 0 ? 'range' : 'row',
+                rowText: flat(hit.innerText).trim().slice(0, 120)};
       }, m.text).catch(() => null);
-      if (box) box = {x: box.x, y: box.y, width: box.w, height: box.h};
+      if (box) {
+        // A row-rect fallback means the tight range failed, so the box is the whole line
+        // and the leader will point at the middle of it rather than at the words.
+        if (box.via !== 'range' || box.matched !== String(m.text).split(String.fromCharCode(160)).join(' ')) {
+          throw new Error(
+            `Mark "${m.id}" asked for ${JSON.stringify(m.text)} but the rectangle it resolved to ` +
+            `covers ${JSON.stringify(box.matched ?? box.rowText)} (via ${box.via}). ` +
+            `A callout that points at the wrong words is worse than no callout — ` +
+            `pick text that is uniquely on screen at this step, or drop the mark.`);
+        }
+        markText[m.id] = box.matched;
+        box = {x: box.x, y: box.y, width: box.w, height: box.h};
+      }
     }
     if (!box) {
       throw new Error(
@@ -520,6 +552,7 @@ export const marksFor = async (page, marks = []) => {
     out[m.id] = {
       x: Math.round(box.x), y: Math.round(box.y),
       w: Math.round(box.width), h: Math.round(box.height),
+      ...(markText[m.id] ? {covers: markText[m.id]} : {}),
     };
   }
   return Object.keys(out).length ? out : null;
