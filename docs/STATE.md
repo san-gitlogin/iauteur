@@ -111,6 +111,78 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-09-05 — GPT-6 Astra review (56 scenes, 18:43) · sharp footage, at last
+
+`topics/gpt-6-astra` — an honest review of OpenAI's GPT-6 Astra built entirely from primary
+sources recorded on camera. The editorial spine is a number nobody printed: ARC Prize scored
+Astra at **99.9%** with a provider adapter and **62.7%** on their neutral harness, the same
+day, and their own page says humans solve **100%** of those environments for about **$12.78**.
+
+**The recording fix, which is the transferable part.** Owner: *"your recording is just sitting
+at 1080p or 720p or even less... even zooming in, panning in does not degrade the quality."*
+Two silent bugs:
+
+1. `capture.mjs` downscaled every segment to 1920. That is a supersample only for a camera
+   that never moves — `RecordedStep` frames a mark at `capW/3.2` and stretches the master to
+   `capW * (stageW/view.w)`, so a 1920 master is a **3.2x upscale** at the deepest zoom.
+2. `browser.mjs` defaulted to `deviceScaleFactor: 1.2` — *exactly* 1920x1080 — and omitted
+   Chrome's high-DPI flags. **Without them Chrome silently caps the factor at 2**: an explicit
+   request for 4 produced 3200x1800 and reported success.
+
+The factor is now derived, not chosen (`3.2 x 1920 / 1600 = 4`). Geometry is unaffected and
+that was verified rather than assumed: the same page at dsf 1.2 / 2 / 4 gives byte-identical
+`bbox` and a matching 48-rect ink set, because everything is in CSS pixels.
+
+**Then the other end of it.** A 6400x3600 master is cheap on disk (103MB for the whole shoot)
+and expensive at RENDER time — Remotion decodes every frame through Chrome, and the first
+19-minute render died at frame 2144 with *"Chrome rejecting the request because the disk space
+is low"* on a 100%-full disk. `scripts/fit-rec-master.mjs` fits each segment DOWN to what its
+own beats ask for. The gate's threshold now comes off a measured curve rather than an ideal:
+
+| master | upscale @3.2x | SSIM | PSNR |
+|---|---|---|---|
+| 4800 | 1.47x | 0.9955 | 33.0 dB |
+| 3200 | 2.20x | 0.9901 | 30.2 dB |
+| 1920 | 3.67x | 0.9788 | 27.0 dB |
+
+`TOLERANCE = 2.0`, just inside where SSIM leaves 0.99. `test-rec-zoomres.mjs` pins both sides
+of that boundary (6/6).
+
+**New gate: does the voice talk about what is on screen?** Owner, on the MCP cut: *"too many
+places where the voice does not speak whats shown."* Every existing gate checks WHEN a thing
+lands, never WHETHER it is the thing being discussed — `check-narration-visual.mjs` closes
+that, and found **305 scenes repo-wide**, including two in the Fable 5.1 cut.
+
+**16 new depictions** in `src/astraViz.tsx` behind one `ASTRA_STAGE` type (LAW 0n), counted
+per `kind` in `subTypeOf` exactly as UV_STAGE is. None is a card with a number on it:
+harness-split, cost-plane, operator-desk, bench-row, page-stack, threshold-ladder,
+sealed-trace, task-clock, rate-plate, thread-votes, world-model, proof-scales,
+verdict-balance, rollout-queue, axiom-stack, token-split.
+
+**Two authoring tools worth reusing.** `briefs/astra/_budget.py` turns the builder's
+motion-earned ceiling into a word budget per beat, so an over-long beat is caught while
+writing — where the fix is more anchored elements or a split — instead of after voicing,
+where the only cheap fix is trimming, which the laws forbid. It split four beats and was
+right each time. And `briefs/astra/build_long.mjs` estimates at the **measured** 3.05 words/s
+for Ava at +8%, never the production bible's human 150 wpm.
+
+**Landmines paid for here:**
+- A scene with no `durationFrames` leaves its composition at NaN and Remotion throws while
+  building the ROOT — an unfinished `shorts.json` took the wide render down with it, 3,000
+  frames in, with an error naming only the shorts.
+- `anchor-spec` runs BEFORE voice and sync. After a sync, `atWord` holds a frame.
+- Markers fill stage items IN ORDER, so a stage array ordered differently from the narration
+  crosses every anchor. That was 7 of 17 sync mismatches in one pass.
+- A mark needle must live inside ONE element's own text nodes; `"62.7% for $26K"` is split
+  across formatting spans and fails the take. Probe the DOM for resolvable needles before
+  writing a demo.
+- openai.com, medium.com and reddit.com only serve a browser that has passed their human
+  check, and the clearance is **fingerprint-bound**: the same cookies fail headless and pass
+  headful. `scripts/open-rec-profile.mjs` opens a profile for a person to clear once; it drives
+  Playwright's own Chromium, because macOS Chrome hands a second `--user-data-dir` launch to
+  the session already open and exits 0.
+
+
 ### 2026-09-05 — the MCP course, rebuilt for a beginner (76 scenes, 35:40) ✅ SHIPPED
 
 Owner watched the 21-minute cut and gave fourteen corrections. The short version: it was
