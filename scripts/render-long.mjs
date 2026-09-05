@@ -55,12 +55,34 @@ for (let i = 0; i < segments; i++) {
   const end = Math.min(total - 1, start + per - 1);
   if (start > end) break;
   const part = path.join(work, `seg-${String(i).padStart(2, '0')}.mp4`);
-  // Already done on an earlier run? Keep it. A segment is only written once ffmpeg has finished
-  // it, so a file being present means it is complete rather than half-written.
+  // Already done on an earlier run? Keep it — but only if it is the RIGHT segment.
+  //
+  // PAID FOR, 2026-09-05. The test used to be "the file exists and is non-empty", which is
+  // true of a segment left over from a DIFFERENT spec. A 75-scene cut had been rendered
+  // minutes earlier; its segment boundaries were 6304 frames, this one's are 6421. An
+  // orphaned remotion child (LAW 12: killing the npm wrapper does not stop the child) wrote
+  // its seg-01 back into the directory a second after `rm -rf` removed it, and this skip
+  // then adopted 6304 frames of the previous script into the middle of the new video.
+  // Forty minutes later the frame-count verifier would have said MISMATCH with no clue why.
+  //
+  // A cached segment now has to BE the segment: its frame count must equal the range it
+  // claims. Anything else is re-rendered, which costs one segment instead of a whole cut.
   if (fs.existsSync(part) && fs.statSync(part).size > 0) {
-    console.log(`[${i + 1}/${segments}] frames ${start}-${end}  — already rendered, skipping`);
-    parts.push(part);
-    continue;
+    const want = end - start + 1;
+    const got = (() => {
+      const r = spawnSync('ffprobe', ['-v', 'error', '-select_streams', 'v', '-count_frames',
+        '-show_entries', 'stream=nb_read_frames', '-of', 'csv=p=0', part], {encoding: 'utf8'});
+      const m = /\d+/.exec(String(r.stdout ?? ''));
+      return m ? Number(m[0]) : NaN;
+    })();
+    if (got === want) {
+      console.log(`[${i + 1}/${segments}] frames ${start}-${end}  — already rendered, skipping`);
+      parts.push(part);
+      continue;
+    }
+    console.log(`[${i + 1}/${segments}] frames ${start}-${end}  — cached segment is ${got} frames, ` +
+                `needs ${want}: re-rendering (stale, from another spec or a killed run)`);
+    fs.rmSync(part, {force: true});
   }
   console.log(`\n[${i + 1}/${segments}] frames ${start}-${end}  (free ${free()} GB)`);
   execFileSync('node', [REMOTION, 'render', comp, part,

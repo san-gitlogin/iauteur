@@ -144,6 +144,18 @@ const CORRECTIONS = [
   // times" over a terminal reading 7; "it chose recent_errors AND slowest_routes" over
   // footage where it chose one. Every gate passed, because `heading` captured the last
   // COMMAND and nothing had ever captured the OUTPUT.
+  // ── a cached segment from a DIFFERENT spec, adopted as this one's ─────────
+  // The skip test was "the file exists and is non-empty", which is true of a leftover from
+  // any previous run. A 75-scene cut's segments are 6304 frames; the 76-scene cut's are
+  // 6421. An orphaned remotion child (killing the wrapper does not stop it) rewrote seg-01
+  // one second after `rm -rf`, and the skip adopted 6304 frames of the OLD script into the
+  // middle of the new video. The frame verifier would have caught it forty minutes later
+  // with no indication of the cause.
+  ['a stale render segment adopted from another spec', 'STRUCT',
+   'seg-01 was 6304 frames where the new cut needed 6421, and the cache said "skipping"',
+   () => has('scripts/render-long.mjs', 'cached segment is') &&
+         has('scripts/render-long.mjs', 'nb_read_frames')],
+
   // ── 2026-09-05: three complaints about the same 21-minute cut ─────────────
   ['an overlay gone before it can be read', 'STRUCT',
    '"displayed just for a second which is hard for viewer to catch" — ~1.1s legible after the fades',
