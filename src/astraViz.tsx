@@ -97,6 +97,34 @@ const Cap: React.FC<{v: V; children: React.ReactNode; size?: number; tone?: stri
                textAlign: 'center', lineHeight: 1.35, maxWidth: '100%'}}>{children}</div>
 );
 
+/**
+ * A COMPARISON IS A SET OF SERIES, NOT A WINNER AND SOME LEFTOVERS.
+ *
+ * PAID FOR (owner, on a SHIPPED cut): *"Every single data comparison component which you
+ * created, only has the colour for the top one and rest all had no colour at all but simply
+ * percentage text, then at places where you compare with something else I see red."*
+ *
+ * Two defects, and the first is why the bars were literally not there:
+ *
+ * 1. `hexA` PARSES A HEX STRING. Feed it something already alpha'd and it does
+ *    `parseInt('rg', 16)` on `rgba(...)` and returns NaN — so `hexA(hexA(muted, .85), .5)`
+ *    is `rgba(NaN,NaN,NaN,0.5)`, which paints NOTHING. Every non-winner row took that
+ *    branch. It rendered, it passed tsc, it passed every gate, and the bar was invisible.
+ *    **So a colour is kept RAW here and alpha is applied once, at the point of use.**
+ *    Never build a colour with hexA and then pass it to hexA again.
+ *
+ * 2. Colour was carrying a VERDICT (green = good, red = bad) when the beat is a
+ *    comparison. Four models on one benchmark are four series; painting one green, two
+ *    nothing and one red tells the viewer a story the data does not.
+ *
+ * So: `win` keeps the emphasis colour, an explicitly authored `color` is always obeyed, and
+ * everything else takes the next hue from a theme-derived categorical ramp. Red is NOT in
+ * that ramp — it stays reserved for something that is actually wrong.
+ */
+const SERIES: SemColor[] = ['blue', 'purple', 'orange', 'yellow'];
+const seriesColor = (v: V, it: AstraVizItem, i: number): string =>
+  it.win ? v.sem('green') : it.color ? v.sem(it.color) : v.sem(SERIES[i % SERIES.length]);
+
 // ── 1. HARNESS SPLIT ─────────────────────────────────────────────────────────
 /**
  * ONE model, TWO harnesses, two different answers — the argument the whole video rests on.
@@ -441,27 +469,27 @@ const BenchRow: React.FC<AstraVizProps> = ({items, accent, token}) => {
       <div style={{display: 'flex', flexDirection: 'column', gap, marginTop: token ? 10 * v.scale : 0}}>
         {rows.map((it, i) => {
           const on = soft(liveAt(frame, it.atWord, 16));
-          const col = it.win ? v.sem('green') : it.color ? v.sem(it.color) : hexA(v.t.colors.muted, 0.85);
+          const col = seriesColor(v, it, i);
           const w = ((it.value ?? 0) / max) * trackW * on;
           return (
             <div key={i} style={{display: 'flex', alignItems: 'center', gap: 11 * v.scale}}>
               <div style={{
                 width: labW, textAlign: 'right', ...v.mono(Math.max(11, barH * 0.24)),
-                color: it.win ? v.text : v.dim, fontWeight: it.win ? 800 : 600,
+                color: it.win ? v.text : hexA(col, 0.95), fontWeight: it.win ? 800 : 700,
                 whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
               }}>{it.label}</div>
               <div style={{width: trackW, height: barH, position: 'relative',
                            background: hexA(v.t.colors.panelBorder, 0.18), borderRadius: v.rad(5)}}>
                 <div style={{
                   position: 'absolute', left: 0, top: 0, bottom: 0, width: w,
-                  background: hexA(col, it.win ? 0.85 : 0.5), borderRadius: v.rad(5),
+                  background: hexA(col, it.win ? 0.9 : 0.72), borderRadius: v.rad(5),
                   boxShadow: it.win ? `0 0 ${12 * v.scale}px ${hexA(col, 0.4)}` : undefined,
                 }} />
                 <div style={{
                   position: 'absolute', left: w + 9 * v.scale, top: '50%',
                   transform: 'translateY(-50%)', opacity: on,
                   ...v.mono(Math.max(12, barH * 0.30)), fontWeight: 800,
-                  color: it.win ? col : v.text, whiteSpace: 'nowrap',
+                  color: hexA(col, 0.98), whiteSpace: 'nowrap',
                 }}>
                   {it.text}
                 </div>
@@ -734,12 +762,12 @@ const TaskClock: React.FC<AstraVizProps> = ({items, accent, token}) => {
           // anchors — `detailAtWord` falls back to the bar's when a beat says both at once.
           const clockOn = soft(liveAt(frame, (it as {detailAtWord?: number}).detailAtWord ?? it.atWord, 16));
           const mins = Number(String(it.detail ?? '0').replace(/[^0-9.]/g, '')) || 0;
-          const col = it.win ? v.sem('green') : hexA(v.t.colors.muted, 0.85);
+          const col = seriesColor(v, it, i);
           const timeFrac = mins / maxMin;
           return (
             <div key={i} style={{display: 'flex', flexDirection: 'column', gap: 5 * v.scale}}>
               <div style={{display: 'flex', justifyContent: 'space-between', width: trackW}}>
-                <div style={{...v.mono(12), fontWeight: 800, color: it.win ? v.text : v.dim}}>{it.label}</div>
+                <div style={{...v.mono(12), fontWeight: 800, color: hexA(col, 0.98)}}>{it.label}</div>
                 <div style={{...v.mono(12), color: hexA(col, 0.95), fontWeight: 700}}>
                   <span style={{opacity: on}}>{it.text}</span>
                   <span style={{opacity: clockOn}}> · {it.detail}</span>
@@ -751,7 +779,7 @@ const TaskClock: React.FC<AstraVizProps> = ({items, accent, token}) => {
                 <div style={{
                   position: 'absolute', left: 0, top: 0, bottom: 0,
                   width: trackW * ((it.value ?? 0) / 100) * on,
-                  background: hexA(col, it.win ? 0.8 : 0.45), borderRadius: v.rad(5),
+                  background: hexA(col, it.win ? 0.88 : 0.7), borderRadius: v.rad(5),
                 }} />
                 {/* the finish flag sits where the clock stopped */}
                 <div style={{
@@ -875,7 +903,7 @@ const ThreadVotes: React.FC<AstraVizProps> = ({items, accent, token}) => {
       <div style={{display: 'flex', flexDirection: 'column', gap}}>
         {rows.map((it, i) => {
           const on = soft(liveAt(frame, it.atWord, 16));
-          const col = it.win ? v.sem('orange') : hexA(v.t.colors.muted, 0.8);
+          const col = it.win ? v.sem('orange') : v.sem(SERIES[i % SERIES.length]);
           return (
             <div key={i} style={{
               width: W, minHeight: rowH, boxSizing: 'border-box', position: 'relative',
@@ -899,7 +927,7 @@ const ThreadVotes: React.FC<AstraVizProps> = ({items, accent, token}) => {
                            gap: 1 * v.scale, minWidth: 46 * v.scale}}>
                 <AssetIcon bare asset="lucide:arrow-big-up" size={rowH * 0.26} tint={hexA(col, 0.95)} />
                 <div style={{...v.mono(Math.max(12, rowH * 0.22)), fontWeight: 800,
-                             color: it.win ? v.sem('orange') : v.text}}>{it.text}</div>
+                             color: hexA(col, 0.98)}}>{it.text}</div>
               </div>
               <div style={{minWidth: 0, flex: 1}}>
                 <div style={{...v.mono(Math.max(10, rowH * 0.15)), color: v.dim,
@@ -1033,7 +1061,7 @@ const ProofScales: React.FC<AstraVizProps> = ({items, accent, token}) => {
     <div style={{display: 'flex', flexDirection: 'column', gap: 6 * v.scale, width: panW}}>
       {list.map((it, i) => {
         const on = soft(liveAt(frame, it.atWord, 14));
-        const col = heavy ? v.sem('green') : hexA(v.t.colors.muted, 0.85);
+        const col = heavy ? v.sem('green') : v.sem(SERIES[i % SERIES.length]);
         return (
           <div key={i} style={{
             minHeight: chipH, boxSizing: 'border-box',

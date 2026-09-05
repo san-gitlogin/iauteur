@@ -325,7 +325,7 @@ beat(id="s27", key="astraStage", type="ASTRA_STAGE", background="zoneC",
     {"label": "Claude Fable 5.1", "text": "65.0%", "value": 65.0, "win": True},
     {"label": "Claude Fable 5", "text": "63.8%", "value": 63.8},
     {"label": "Claude Opus 5", "text": "63.6%", "value": 63.6},
-    {"label": "GPT-6 Astra", "text": "57.2%", "value": 57.2, "color": "red"}))
+    {"label": "GPT-6 Astra", "text": "57.2%", "value": 57.2}))
 
 beat(id="s28", type="RECORDED_STEP", background="zoneC", transition="dip",
   narration="+Here is that row, on OpenAI's own page, and it is worth seeing with your own eyes. +Humanity's Last Exam, with tools. Fifty-seven point two in the Astra column, sixty-five in Fable 5.1's. +A launch page that prints the rows where it comes second is a page you can trust a little more on the rows where it comes first.",
