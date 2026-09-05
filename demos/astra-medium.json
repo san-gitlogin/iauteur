@@ -1,0 +1,31 @@
+{
+  "slug": "astra-medium",
+  "surface": "browser",
+  "theme": "light",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 0,
+  "quality": 96,
+  "crf": 18,
+  "preset": "slow",
+  "fps": 30,
+  "profile": "out/rec-profile-web",
+  "headless": false,
+  "prep": {"url": "https://medium.com/@unicodeveloper/gpt-6-astra-a-taste-of-agi-938515afc5c7",
+           "settleMs": 6000,
+           "dismiss": ["Reject all cookies", "Accept all cookies", "Accept", "No thanks"]},
+  "steps": [
+    {"id": "byline", "action": "expect", "text": "A taste of AGI",
+     "label": "the review this leans on, and who wrote it",
+     "marks": [{"id": "title", "text": "GPT-6 Astra. A taste of AGI?"}],
+     "holdMs": 3000},
+    {"id": "operator", "action": "scroll", "target": "text=Astra feels like an operator",
+     "label": "the sentence that frames the whole model",
+     "marks": [{"id": "op", "text": "Astra feels like an operator. Fable feels like a craftsperson."}],
+     "holdMs": 3000},
+    {"id": "notwin", "action": "scroll", "target": "text=OpenAI’s own table has places where Astra does not win",
+     "label": "and the author's own caveat",
+     "holdMs": 3000}
+  ],
+  "maxHoldMs": 1800
+}

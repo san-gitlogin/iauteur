@@ -325,3 +325,57 @@ Bar values, left to right, highest first:
 Also on that frame: "For output speed, the fastest model is GPT-6 Astra (max) at 63 t/s."
 Knowledge cutoff Apr 30, 2026 · Context window 1M.
 *** This CONFIRMS ON CAMERA, from the neutral scoreboard, that Fable 5.1 leads Astra. ***
+
+---
+# 19. OPENAI'S OWN TABLE — READ OFF THE RECORDED FRAME (astra-openai seg-06)
+Columns: GPT-6 Astra · GPT-5.6 Sol · Claude Fable 5.1 · Claude Fable 5 · Claude Opus 5 · Gemini 3.8 Flash
+
+## Academic
+| row | Astra | Sol | Fable 5.1 | Fable 5 | Opus 5 | Gemini 3.8 F |
+|---|---|---|---|---|---|---|
+| Terminal-Bench Science 0.1 | **64.6%** | 22.4% | 52.6% | 21.4% | 30.0% | – |
+| FrontierMath Tier 4 (v2) | **97.6%** | 83.0% | 87.8% | 87.8% | 73.2% | – |
+| GPQA Diamond | **96.0%** | 94.6% | 93.7% | 92.6% | 93.7% | 95.3% |
+| Humanity's Last Exam (w/ tools) | 57.2% | – | **65.0%** | 63.8% | 63.6% | – |
+
+*** ASTRA LOSES HLE TO ALL THREE CLAUDES — 57.2 against 65.0 / 63.8 / 63.6, printed by OpenAI. ***
+
+## Science and Health
+| row | Astra | Sol | Fable 5.1 | Fable 5 | Opus 5 | Gemini 3.8 F |
+|---|---|---|---|---|---|---|
+| GeneBench Pro | 37.1% | 32.3% | – | – | – | – |
+| MedChemBench (Internal) | 49.3% | 47.4% | – | – | – | – |
+| LifeSciBench | 60.3% | 59.9% | – | – | – | – |
+| HealthBench Professional (length-adj.) | **63.4%** | 60.5% | 58.1% | 60.9% | 56.4% | 52.1% |
+
+Note how NARROW the science margins are: 37.1 vs 32.3, 49.3 vs 47.4, 60.3 vs 59.9.
+"Generational leap" is not what those three rows look like. Worth saying plainly.
+
+Other verified positions on that page: "The world's best computer use model" (their heading),
+"Critical threshold", OSWorld 2.0 (v2026.08.08, offline set, partial score) 72.6%, BenchCAD 95.9%.
+
+# 20. REDDIT — r/developersIndia (recorded, astra-reddit) *** THE HUMAN BEAT ***
+Post by **PsyberShade**, 1d ago — **651 upvotes, 313 comments**
+> "GPT 6.O Astra is insanely good, good alternative career paths for us SDEs?"
+> "First, we were told AI would just be an aid. Then they said developers would still be
+>  needed to architect, review, and debug."
+> "But Astra feels different. It's insanely capable across the entire development loop."
+> "At this point, we would not need even 20% of the current number of software engineers anymore."
+> "The layoffs we're hearing about will only increase. Where do we go from here?"
+
+## The replies — and the vote counts are the story
+| upvotes | who | what |
+|---|---|---|
+| **1.1K** | PassionateStalker | "And here we go again, every few months a model give a life changing experience" |
+| 605 | logseventyseven | "bro hasn't even tried it and is already yapping" |
+| 512 | brainer121 | "Remember how Devin was gonna replace all software engineers 3 years ago?" |
+| 227 | Appropriate_Jump_504 | "How you guys are using it? I don't see it in my personal & enterprise pro subscriptions." |
+| 63 | RockiestHades45 | "How many models has this been said about by now" |
+| 51 | Bugged_IRL | "uhh its still rolling out gradually, some enterprises are getting it earlier than others" |
+| 21 | confused_cat44 | "All of them lol" |
+| – | saswat001 | "What is the reference point here? Or are you going by their ads." |
+
+*** THE TOP REPLY OUTSCORES THE POST 1.1K to 651. The most-upvoted developer response to
+this launch is weariness, and the second is a reminder about Devin. Also note 227 people
+upvoted "I can't even get it yet" — the rollout is staged, so most of the audience watching
+this video CANNOT run Astra today. Say that out loud. ***

@@ -1,0 +1,24 @@
+{
+  "slug": "astra-reddit",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 0,
+  "quality": 96,
+  "crf": 18,
+  "preset": "slow",
+  "fps": 30,
+  "profile": "out/rec-profile-web",
+  "headless": false,
+  "prep": {"url": "https://www.reddit.com/r/developersIndia/comments/1w6x5eq/gpt_6o_astra_is_insanely_good_good_alternative/",
+           "settleMs": 6000,
+           "dismiss": ["Reject all cookies", "Accept all cookies", "Accept"]},
+  "steps": [
+    {"id": "thread", "action": "expect", "text": "developersIndia",
+     "label": "what working developers are saying", "holdMs": 3000},
+    {"id": "comments", "action": "scroll", "by": 900,
+     "label": "down into the replies", "holdMs": 3000}
+  ],
+  "maxHoldMs": 1800
+}
