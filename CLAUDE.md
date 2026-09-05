@@ -2,6 +2,14 @@
 
 This repo is a video factory: JSON specs in `topics/<slug>/` → Remotion renders them. You (Claude) write specs and run scripts. You NEVER hand-edit component code during video production, never hand-write derived files, never overwrite an existing topic.
 
+> **Then read [`docs/VIDEO_METHOD.md`](docs/VIDEO_METHOD.md) before making any video.**
+> CLAUDE.md is the LAWS and STATE.md is the SITUATION; VIDEO_METHOD is the ORDER OF WORK and
+> the judgement calls — recording before scripting, casting by naming the object, checking
+> every claim against a FRAME rather than against intent, what each gate does and does not
+> prove, and what to do when the owner sends a screenshot. Written after a session the owner
+> called *"perfect"* was followed by one that had the same code and did not reproduce it. The
+> code was never the missing part.
+>
 > **Then read [`docs/STATE.md`](docs/STATE.md).** This file is the LAWS (what you must always do);
 > STATE.md is the CURRENT SITUATION (what exists today, where it lives, which gotchas have already
 > cost time, and what's in flight). Update STATE.md in the same commit as the work it describes —
