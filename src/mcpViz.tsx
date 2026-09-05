@@ -692,7 +692,10 @@ export const AgenticLoop: React.FC<McpVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const n = Math.max(items.length, 1);
-  const R = 31, CX = 50, CY = 38, SQUASH = 0.86;
+  // CY sits low enough that the TOP node's sub-label, which now hangs above its pill,
+  // still clears the viewBox: top node y = CY - R*SQUASH = 13.3, sub at 4.7, glyph tops
+  // near 2.5. At CY = 38 that was 0.5 and the ascenders clipped.
+  const R = 31, CX = 50, CY = 40, SQUASH = 0.86;
 
   // ── GEOMETRY, MEASURED FROM THE TEXT ────────────────────────────────────────
   // OWNER, 2026-09-05: *"there must be proper padding with the content and the rounded
@@ -745,7 +748,7 @@ export const AgenticLoop: React.FC<McpVizProps> = ({items, accent}) => {
   const exit = items.findIndex((x) => x.text === 'exit');
   return (
     <div style={{display: 'flex', flex: 1, minHeight: 0, padding: `${10 * v.scale}px`}}>
-      <svg viewBox="0 0 100 82" preserveAspectRatio="xMidYMid meet"
+      <svg viewBox="0 0 100 86" preserveAspectRatio="xMidYMid meet"
            style={{width: '100%', flex: 1, minHeight: 0}}>
         <defs>
           <marker id="mcp-loop-arrow" viewBox="0 0 10 10" refX="9" refY="5"
@@ -780,10 +783,24 @@ export const AgenticLoop: React.FC<McpVizProps> = ({items, accent}) => {
               <text x={px(i)} y={py(i) + FS * 0.36} textAnchor="middle" fontSize={FS} fontWeight={800}
                 fill={on > 0.4 ? '#fff' : hexA(v.t.colors.muted, 0.85)}
                 fontFamily={v.t.fonts.mono}>{it.label}</text>
-              {it.sub ? (
-                <text x={px(i)} y={py(i) + H / 2 + 4.2} textAnchor="middle" fontSize={2.9}
-                  fill={hexA(col, on > 0.5 ? 0.95 : 0.35)} fontFamily={v.t.fonts.mono}>{it.sub}</text>
-              ) : null}
+              {/* THE SUB SITS OUTSIDE THE RING, ALWAYS.
+                *
+                * Pinned under the pill, a sub-label on a top or side node lands INSIDE the
+                * ring — which is exactly where the chords run, so "what it wants run" had
+                * an edge drawn straight through it. Push it along the radius instead:
+                * above the pill for the upper half, below for the lower, and nudged out
+                * sideways. Nothing then shares space with an edge. */}
+              {it.sub ? (() => {
+                const above = py(i) < CY;
+                const ux = Math.cos(ang(i));
+                return (
+                  <text x={px(i) + ux * 3.2}
+                    y={py(i) + (above ? -(H / 2 + 2.6) : H / 2 + 4.2)}
+                    textAnchor="middle" fontSize={2.9}
+                    fill={hexA(col, on > 0.5 ? 0.95 : 0.35)}
+                    fontFamily={v.t.fonts.mono}>{it.sub}</text>
+                );
+              })() : null}
             </g>
           );
         })}

@@ -173,4 +173,7 @@ if (vFrames !== total || meanDb <= SILENT_DB) {
 // touched one scene in one segment, and the other five had to be rendered again to get it.
 // The segment cache is what makes a one-beat correction a ten-minute job. `--fresh` is the
 // explicit way to start over, and it already exists above.
-console.log(`  segments kept in ${work} — a re-run re-renders only what changed (--fresh to reset).`);
+console.log(`  segments kept in ${work} — a re-run re-renders only what changed.`);
+console.log('  NOTE: the cache keys on FRAME COUNT, so it catches a segment left by a spec');
+console.log('  with different boundaries, but NOT one whose components changed underneath');
+console.log('  it. After editing anything in src/, re-run with --fresh.');
