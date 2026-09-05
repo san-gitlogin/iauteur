@@ -57,10 +57,18 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
                  gap: 20, flex: '0 0 auto'}}>
       {/* the rejected thing, when it is not already in the title */}
-      {r.from ? (
-        <div style={{display: 'flex', alignItems: 'center', gap: 14, opacity: 0.78}}>
-          {r.fromAsset ? <AssetIcon asset={r.fromAsset} size={64} bare tint={t.colors.text} /> : null}
-          <Struck text={r.from} size={96} color={t.colors.text} font={t.fonts.mono} />
+      {r.from || (r.fromAsset && !r.from) ? (
+        <div style={{display: 'flex', alignItems: 'center', gap: 14,
+                     opacity: r.from ? 0.78 : 1, position: 'relative'}}>
+          {r.fromAsset ? <AssetIcon asset={r.fromAsset} size={r.from ? 64 : 150} bare tint={t.colors.text} /> : null}
+          {r.from ? <Struck text={r.from} size={96} color={t.colors.text} font={t.fonts.mono} /> : null}
+          {/* MARK-ONLY REJECTION: the bar crosses the glyph itself. Overhung on both sides
+              so it reads as struck THROUGH rather than as a rule sitting on top of it. */}
+          {!r.from && r.fromAsset ? (
+            <div style={{position: 'absolute', left: -22, right: -22, top: '50%', height: 17,
+                         borderRadius: 999, background: STRIKE, transform: 'translateY(-50%)',
+                         boxShadow: `0 0 30px ${STRIKE}`}} />
+          ) : null}
         </div>
       ) : null}
       {/* the destination, lit */}
@@ -69,8 +77,8 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
                    background: `${t.colors.accent}22`,
                    border: `3px solid ${t.colors.accent}`,
                    boxShadow: t.style.glow > 0 ? `0 0 46px ${t.colors.glowSoft}` : 'none'}}>
-        {r.toAsset ? <AssetIcon asset={r.toAsset} size={92} bare tint={t.colors.text} /> : null}
-        {word(r.to, 118, t.colors.text)}
+        {r.toAsset ? <AssetIcon asset={r.toAsset} size={r.to ? 92 : 150} bare tint={t.colors.text} /> : null}
+        {r.to ? word(r.to, 118, t.colors.text) : null}
       </div>
     </div>
   );
@@ -188,7 +196,7 @@ const ThumbInner: React.FC<{
                     fontSize: 30,
                     letterSpacing: '0.16em',
                     textTransform: 'uppercase',
-                    color: t.colors.muted,
+                    color: t.colors.accent2,
                     whiteSpace: 'nowrap',
                   }}
                 >

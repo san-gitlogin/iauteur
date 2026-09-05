@@ -622,8 +622,17 @@ meta = {
       "abyssal-living-deep source — https://github.com/emollick/abyssal-living-deep"]
   }
 }
-thumbnail = {"title": "GPT-6 ASTRA", "badge": "99.9% or 62.7%?",
-             "note": "the number nobody printed", "asset": "si:openai"}
+thumbnail = {
+    "title": "Everything You Need To Know: GPT-6 ASTRA",
+    "badge": "IS AGI FINALLY HERE?",
+    "note": "IS IT BETTER THAN CLAUDE FABLE 5.1?",
+    "asset": "si:openai",
+    "replaces": {
+        "fromAsset": "si:openai",
+        "to": "",
+        "toAsset": "si:anthropic"
+    }
+}
 cover = {"title": "GPT-6 Astra", "subtitle": "everything, from the primary sources"}
 
 if PROBLEMS:
