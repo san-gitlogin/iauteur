@@ -1,22 +1,403 @@
 {
   "meta": {
-    "topic": "GPT-6 Astra",
+    "topic": "The GPT-6 Astra number the launch coverage left out",
+    "subject": "GPT-6 Astra",
     "format": "short",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "onePayoff": "the same benchmark scored Astra at 99.9% and at 62.7% on the same day",
+    "openLoop": "Which number is the real one?",
+    "analogy": "Two exam results for one candidate, sat on the same morning under different rules.",
+    "screenplay": "explainer",
+    "topicAxes": [
+      "entity-novelty",
+      "tribal-conflict"
+    ],
+    "seo": {
+      "title": "The GPT-6 Astra number nobody printed #gpt6 #openai #ai",
+      "description": "ARC Prize scored GPT-6 Astra at 99.9% with a provider adapter and 62.7% on their neutral harness, the same day. Humans solve 100% of those environments for about $12.78.",
+      "queries": [
+        "gpt-6 astra arc-agi-3",
+        "gpt-6 astra benchmark",
+        "is gpt-6 astra agi"
+      ],
+      "tags": [
+        "gpt-6 astra",
+        "openai",
+        "arc-agi-3",
+        "ai benchmarks"
+      ],
+      "pinned": "Full breakdown on the channel — every figure read off its source page on camera.",
+      "sources": [
+        "ARC Prize — OpenAI's GPT-6 Astra on ARC-AGI-3 — https://arcprize.org/blog/astra",
+        "OpenAI — GPT-6 Astra — https://openai.com/index/gpt-6-astra/"
+      ]
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
-    "channel": "YOUR CHANNEL",
     "logo": "img:channel_logo.png"
   },
-  "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
-    "frames": 2
+  "thumbnail": {
+    "title": "GPT-6 ASTRA",
+    "badge": "99.9% or 62.7%?",
+    "note": "the number nobody printed",
+    "asset": "si:openai"
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Everyone printed that GPT-6 Astra scored ninety-nine point nine percent. Nobody printed the other number.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "GPT-6 ASTRA: 99.9%",
+        "subtext": "and the number nobody printed",
+        "heroAsset": "si:openai",
+        "hookVariant": "figure",
+        "headlineAtWord": 5,
+        "heroAtWord": 3
+      }
+    },
+    {
+      "id": "s02",
+      "type": "ASTRA_STAGE",
+      "narration": "That score came from ARC-AGI-3, a test built to measure how far models still are from us. Run on the neutral harness, the same model on the same day scored sixty-two point seven — for twenty-six thousand dollars.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "astraStage": {
+          "headline": "One model, [two answers]",
+          "kind": "harness-split",
+          "color": "blue",
+          "premise": "Same model, same benchmark, same day. Only the rules about what it may carry changed.",
+          "stageTitle": "how ARC Prize measured it",
+          "token": "GPT-6 Astra",
+          "stage": [
+            {
+              "label": "Standard harness",
+              "text": "62.7%",
+              "detail": "$26,098",
+              "sub": "notes written in the open",
+              "atWord": 21
+            },
+            {
+              "label": "Provider Adapter",
+              "text": "99.9%",
+              "detail": "$18,817",
+              "sub": "private state kept between turns",
+              "win": true,
+              "atWord": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "narration": "It is on ARC Prize's own page, in one sentence. Both numbers, both costs.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "both numbers, one sentence",
+          "premise": "ARC Prize's report on GPT-6 Astra.",
+          "sourceNote": "arcprize.org/blog/astra — ARC Prize, by Greg Kamradt",
+          "layout": "full",
+          "color": "blue",
+          "card": {
+            "place": "top",
+            "width": 0.86
+          },
+          "clips": [
+            {
+              "ref": "rec:astra-arc#table",
+              "label": "the summary line",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "standard",
+                  "atWord": 6
+                }
+              ],
+              "id": "table",
+              "src": "rec/astra-arc/seg-03.mp4",
+              "frames": 90,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "standard": {
+                  "x": 685,
+                  "y": 729,
+                  "w": 103,
+                  "h": 18,
+                  "covers": "62.7%, $26,098"
+                }
+              },
+              "ink": [
+                {
+                  "x": 349,
+                  "y": 7,
+                  "w": 921,
+                  "h": 488
+                },
+                {
+                  "x": 241,
+                  "y": 29,
+                  "w": 98,
+                  "h": 11
+                },
+                {
+                  "x": 1306,
+                  "y": 29,
+                  "w": 50,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 58,
+                  "w": 105,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 73,
+                  "w": 42,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 86,
+                  "w": 91,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 117,
+                  "w": 35,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 123,
+                  "w": 140,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 161,
+                  "w": 49,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 204,
+                  "w": 28,
+                  "h": 11
+                },
+                {
+                  "x": 487,
+                  "y": 507,
+                  "w": 625,
+                  "h": 60
+                },
+                {
+                  "x": 635,
+                  "y": 596,
+                  "w": 536,
+                  "h": 42
+                },
+                {
+                  "x": 452,
+                  "y": 596,
+                  "w": 183,
+                  "h": 66
+                },
+                {
+                  "x": 781,
+                  "y": 596,
+                  "w": 289,
+                  "h": 18
+                },
+                {
+                  "x": 424,
+                  "y": 596,
+                  "w": 63,
+                  "h": 66
+                },
+                {
+                  "x": 613,
+                  "y": 596,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 694,
+                  "w": 183,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 694,
+                  "w": 126,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 694,
+                  "w": 119,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 729,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 729,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 729,
+                  "w": 32,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 764,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 764,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 764,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 799,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 799,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 799,
+                  "w": 31,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 834,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 834,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 834,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 869,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 869,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 869,
+                  "w": 25,
+                  "h": 18
+                }
+              ],
+              "shows": "Standard harness"
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      }
+    },
+    {
+      "id": "s04",
+      "type": "ASTRA_STAGE",
+      "narration": "And the same page says humans solve one hundred percent of those environments, for about twelve dollars seventy-eight a game. Astra is impressive. It is not a person yet.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "astraStage": {
+          "headline": "Now put a [person on it]",
+          "kind": "cost-plane",
+          "color": "blue",
+          "premise": "Score up the side, cost per attempt along the bottom, multiplying by ten each step.",
+          "stageTitle": "score against cost, ARC-AGI-3",
+          "stage": [
+            {
+              "label": "humans",
+              "value": 100,
+              "text": "$12.78",
+              "win": true,
+              "atWord": 6
+            },
+            {
+              "label": "Astra · standard",
+              "value": 62.7,
+              "text": "$26,098",
+              "color": "orange",
+              "atWord": 21
+            }
+          ],
+          "verdict": "Humans: 100%, for about $12.78",
+          "verdictAtWord": 23
+        }
+      }
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "The full breakdown is on the channel — every number checked against its source.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "message": "Full breakdown on the channel",
+        "sub": "every number checked at source"
+      }
+    }
+  ]
 }

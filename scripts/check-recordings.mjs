@@ -83,6 +83,29 @@ const probeWidth = (file) => {
 const DELIVERY_W = 1920;   // wide cut. 9:16 delivers 1080 wide at a 4.2 divisor => less demanding.
 const TIGHTEST = 3.2;      // RecordedStep's wide, non-split, non-gentle divisor.
 
+// HOW MUCH UPSCALE IS ACTUALLY A DEFECT — measured, not chosen.
+//
+// The first version of this gate demanded 1:1 (master >= zoom x delivery). That is the
+// ideal, and as a PASS/FAIL line it is wrong: it fails a master that is a hair under and
+// says nothing about how bad the miss is. Master pixels are also paid for at render time —
+// Remotion decodes every frame through Chrome — so demanding 1:1 everywhere is what made a
+// 19-minute cut of 6400px footage die at frame 2144 with 4GB free.
+//
+// So the threshold comes off a curve. One page, one CSS region, the pipeline's deepest zoom
+// (a 500px window delivered at 1920), each master compared against a 6400px reference:
+//
+//     master   upscale   SSIM     PSNR
+//     4800     1.47x     0.9955   33.0 dB
+//     3200     2.20x     0.9901   30.2 dB
+//     1920     3.67x     0.9788   27.0 dB
+//     (and the real shipped pipeline, 1920 from a 1.2x-upscaled capture: 0.969 / 24.7 dB)
+//
+// Degradation is gradual, so the line goes where SSIM leaves 0.99 — the usual
+// "visually near-identical" bar — which is a ~2.2x upscale. TOLERANCE is set just inside it.
+// This still rejects, loudly, every case the gate was written for: the Fable 5.1 cut's 3.2x,
+// and the 174 clips found repo-wide.
+const TOLERANCE = 2.0;
+
 const zoomFactorFor = (clip, capW) => {
   const rectOf = (z) => {
     if (z.at === 'full') return null;
@@ -213,14 +236,16 @@ for (const sp of specs) {
         const zf = zoomFactorFor(clip, capW);
         if (zf > 1.01) {
           const haveW = probeWidth(abs);
-          const needW = Math.ceil((zf * DELIVERY_W) / 2) * 2;
+          const idealW = Math.ceil((zf * DELIVERY_W) / 2) * 2;
+          const needW = Math.ceil((idealW / TOLERANCE) / 2) * 2;
           if (haveW != null && haveW < needW) {
             const slug = String(clip.src).split('/')[1];
-            const dsf = Math.ceil((needW / capW) * 100) / 100;
+            const dsf = Math.ceil((idealW / capW) * 100) / 100;
             softZoom.push(
               `${sp}: SOFT ZOOM — clip "${clip.id ?? clip.src}" zooms ${zf.toFixed(2)}x, so the ` +
-              `renderer stretches its master to ${needW}px, but the file is only ${haveW}px wide.\n` +
-              `      The camera is upscaling ${(needW / haveW).toFixed(2)}x and the sharpness is ` +
+              `renderer stretches its master to ${idealW}px, but the file is only ${haveW}px wide ` +
+              `(the floor, at the measured ${TOLERANCE}x tolerance, is ${needW}px).\n` +
+              `      The camera is upscaling ${(idealW / haveW).toFixed(2)}x and the sharpness is ` +
               `already gone before the render starts.\n` +
               `      fix: raise the capture — set "deviceScaleFactor": ${Math.max(2, Math.ceil(dsf))} ` +
               `and "masterWidth": 0 in demos/${demoBySlug.get(slug) ? path.basename(demoBySlug.get(slug)) : `<${slug}>.json`}, ` +

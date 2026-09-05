@@ -73,11 +73,18 @@ const findings = () => {
 };
 
 // [master width, how many SOFT ZOOM findings we require, why]
+// The gate allows a MEASURED tolerance of 2.0x rather than demanding 1:1 — see the curve in
+// check-recordings.mjs. So the boundary, for this fixture's 6144px ideal, sits at 3072px.
+// Both sides of that line are pinned here: a guard whose threshold nobody tests is a
+// threshold that drifts.
+const FLOOR = Math.ceil(NEED_W / 2.0 / 2) * 2;   // 3072
 const CASES = [
   [NEED_W,     0, `exactly the ${EXPECT_ZOOM}x the spec asks for — nothing to report`],
   [NEED_W * 2, 0, 'more than enough — a bigger master must never be an error'],
+  [FLOOR + 128, 0, 'just inside the measured 2.0x tolerance (SSIM 0.990) — allowed'],
+  [FLOOR - 128, 1, 'just outside the tolerance — the first width that must be caught'],
   [1920,       1, 'the OLD pipeline default — a 3.20x upscale, and it must be caught'],
-  [3200,       1, 'dsf 2 native — better, still short of what this zoom needs'],
+  [2048,       1, 'still a 3x upscale — caught'],
 ];
 
 let bad = 0;
