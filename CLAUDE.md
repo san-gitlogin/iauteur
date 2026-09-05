@@ -560,6 +560,97 @@ declared, drawn, and invisible.** Whenever something moves by transform, ask wha
 other side of it too. The same sweep applies to `translateX` on a wide cut, to a pill that
 overshoots its track, and to any `landAt` overshoot near a container edge.
 
+### Corollary — RUNTIME IS FREE; THE TITLE IS WHERE THE PROMISE LIVES (owner, 2026-09-05)
+
+Owner: *"it need not be under 20 minutes or under any minutes. Whatever time you take, you
+can take, but at the end the youtube thumb or title must be attracting viewers where it can
+say under n minutes while our video can be n+x minutes. Example if our video takes 38
+minutes, we can say under 40 minutes. So be very generous with the time you take to explain,
+and we will work out the thumb, title based on the video."*
+
+This REVERSES the instinct to trim, and it removes the excuse that produced a rushed cut.
+**A beat is never shortened to protect a runtime target.** There is no target.
+
+- **Explain first, measure after.** Author every beat at the length the explanation needs,
+  then read the finished runtime and choose the title.
+- **The claim is the NEXT round number up.** 38 min → *"under 40 minutes"*. 21 min →
+  *"under 25 minutes"*. Never a claim the cut does not keep.
+- **Proof it works:** *Learn uv Properly — The Complete Python Packaging Course for Absolute
+  Beginners (2026)* is the channel's best performer. Long, complete, and titled to promise
+  completeness. That is the shape to copy.
+
+### Corollary — TEACH THE LINE, NOT THE FILE (owner, 2026-09-05)
+
+Owner, on the MCP agent cut: *"Your explanation on agent.py is not at all beginner friendly.
+You are not explaining it line by line rather you are just speaking and moving on very
+rapidly… I felt left out with so much stdout or something related code lines were shown and
+I was clueless on what, and why it was needed."*
+
+LAW 0e.2 already says code the viewer must read is taught line by line. This is that law
+applied to the lines an author finds OBVIOUS, which are exactly the lines a beginner does not.
+
+1. **Every unexplained noun is a hole.** `stdio`, `async`, `await`, `stdin`/`stdout`,
+   a context manager, a decorator, `f"..."`, `json.loads` — if the word is on screen and the
+   viewer has not been told what it is, they are lost for the rest of the beat. Name it in
+   the same breath, in plain English, the FIRST time it appears.
+2. **Say WHY the line exists, not what it says.** Reading `params = StdioServerParameters(...)`
+   aloud teaches nothing. *"This line says: the server is a program on this machine, start it
+   like this, and talk to it through the same pipe you'd use to send one command's output
+   into another."*
+3. **A block of imports is not a beat to skip.** Each import is a promise about what the file
+   is going to do; name what each one is FOR.
+4. **The test:** could someone who has written a for-loop and nothing else follow this?
+   If a sentence assumes they have seen the pattern before, rewrite it.
+
+### Corollary — A GAP IS THE TEACHING, AND THE VIEWER MUST BE INVITED INTO IT (owner, 2026-09-05)
+
+Owner: *"At places, say pause here, have a look and understand at key places which you think
+the users must be seeing and understanding concepts, they would need gap to process. Leaving
+gap is the master or key to success of teaching a good concept, letting users grasp things.
+That doesn't mean everywhere you should say pause here, pause here. Right, genuine places."*
+
+LAW 0e-q established this for quizzes; it is general. **A pause invitation is a teaching
+instrument with a dosage.**
+
+- **Where it belongs:** a finished block of code the viewer will retype; the first sight of
+  the JSON a decorator generated; an output that answers the question the video opened with;
+  the one diagram the rest of the video depends on. Roughly **one per chapter, never more.**
+- **How it reads:** *"Pause here for a second and read the whole block before we run it."*
+  Then leave WORDS after it — the gap is bought with narration that gives nothing away, the
+  same way a quiz gap is (there is no silence available inside a scene's TTS block).
+- **The anti-pattern is repetition.** Said at every beat it becomes a verbal tic and the
+  viewer stops hearing it.
+
+### Corollary — AN OVERLAY IS READ, SO IT NEEDS TIME AND ROOM (owner, 2026-09-05)
+
+Owner: *"the component overlay displayed with components are just displayed just for a second
+which is hard for viewer to catch. And positioning them is also not right, you are positioning
+it at the very bottom without any gap from bottom."*
+
+Two separate defects, and the first is the one that keeps recurring under different names —
+sync is not comprehension (LAW 0f), and an overlay is subject to the same HOLD arithmetic as
+a clip.
+
+1. **An overlay earns dwell like anything else.** It appears on its `atWord` and must still be
+   on screen long enough to be READ — treat ~2.5s as the floor, and buy it with words after
+   the anchor, never by slowing the voice.
+2. **Nothing sits flush against an edge.** An overlay parked at the bottom of the frame with no
+   clearance reads as a rendering bug. It needs real margin from the frame edge, and from the
+   footage's own content.
+
+### Corollary — PADDING IS PART OF THE DRAWING, AND AN ARROW STOPS AT THE BORDER (owner, 2026-09-05)
+
+Owner, on the agent-loop ring: *"there must be proper padding with the content and the rounded
+rectangle container. The arrows must not go inside the container, but just touch the border."*
+
+An arrowhead that lands INSIDE the shape it points at is the tell that the edge was drawn
+centre-to-centre and never trimmed to the geometry. Two rules for any node-and-edge picture:
+
+- **Trim every edge to the node's boundary**, so the head touches the border and stops. For a
+  rounded rectangle that means intersecting with the rounded rect, not with a circle around it.
+- **Label text gets its own padding from the container.** Content pressed against a rounded
+  border reads as unfinished whatever the type does.
+
 ### Corollary — A VERIFICATION RUN IS NOT THE TAKE (2026-09-04)
 
 LAW 0m says capture the artefact by running the tool. This says WHICH run the numbers come

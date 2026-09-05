@@ -65,6 +65,7 @@ const intent = (o = {}) => {
 };
 const A = (id, label, opts = {}) => ({ref: `rec:mcp-agent#${id}`, label, focus: true, ...intent(opts)});
 const W = (id, label, opts = {}) => ({ref: `rec:mcp-official#${id}`, label, focus: true, ...intent(opts)});
+const D = (id, label, opts = {}) => ({ref: `rec:mcp-docs#${id}`, label, focus: true, ...intent(opts)});
 
 const scenes = [];
 
@@ -172,33 +173,52 @@ scenes.push(chapter(
 {
   const n =
     "Here's the folder, and there's nothing in it but seven empty files. " +
-    "uv init makes it a Python project — that's the pyproject file and the lock file. " +
+    "We are using uv here, which is a tool that manages Python projects and packages. " +
+    "If you have used pip before, uv does the same job and does it much faster — " +
+    "and if you have not, you only need the two commands you are about to see. " +
+    "uv init makes this folder a Python project. " +
+    "That writes pyproject dot toml, which is the list of what this project needs, " +
+    "and a lock file, which pins the exact versions " +
+    "so it installs the same way on your machine as it does on mine.";
+  scenes.push(rec(n, 'an empty folder, and one command',
+    'Turning a folder into a Python project.',
+    [A('look', 'nothing here yet'),
+     A('init', 'now it is a project', {wantAtWord: at(n, 'init'),
+       zooms: [{mark: 'made', atWord: at(n, 'writes')}],
+       callouts: [{text: 'the list of what this needs', mark: 'made', side: 'right',
+                   color: 'blue', atWord: at(n, 'pyproject')},
+                  {text: 'pins the exact versions', mark: 'made', side: 'right',
+                   color: 'green', atWord: at(n, 'lock')}]})]));
+}
+
+{
+  const n =
     "Then one command brings in everything we need. " +
+    "uv add downloads them and writes them into that list, in one step. " +
     "mcp is the official Python SDK for the Model Context Protocol, " +
     "written and maintained by the people who designed the protocol, " +
     "and we'll look at their own page for it in a few minutes. " +
-    "FastAPI and uvicorn give us a small web service to point the agent at. " +
-    "httpx makes HTTP calls, openai talks to the model, " +
-    "and python-dotenv reads our settings out of a file.";
-  scenes.push(rec(n, 'an empty folder, and six libraries',
-    'The project, and the packages the whole video is built on.',
-    [A('look', 'seven empty files'),
-     A('init', 'uv init', {wantAtWord: at(n, 'init'),
-       callouts: [{text: 'now it is a project', mark: 'made', side: 'right', color: 'green',
-                   atWord: at(n, 'pyproject')}]}),
-     A('add', 'the libraries', {wantAtWord: at(n, 'command')}),
-     A('added', 'written into the project', {wantAtWord: at(n, 'SDK'),
-       callouts: [{text: 'the official MCP SDK', side: 'top', color: 'purple',
-                   atWord: at(n, 'official')},
-                  {text: 'a service to point at', side: 'bottom', color: 'blue',
-                   atWord: at(n, 'FastAPI')}]})],
-    {sourceNote: 'mcp — the official Python SDK: github.com/modelcontextprotocol/python-sdk'}));
+    "FastAPI and uvicorn give us a small web service to point the agent at — " +
+    "FastAPI is the framework you write the routes in, " +
+    "and uvicorn is the program that actually serves them. " +
+    "httpx is how Python makes web requests — the same thing your browser does " +
+    "when you type an address, except from code. " +
+    "openai is the library for talking to the model. " +
+    "And python-dotenv reads our settings out of a file " +
+    "so that a key never has to be typed into the code. " +
+    "Six libraries, one command, and that is the whole setup.";
+  scenes.push(rec(n, 'six libraries, and what each is for',
+    'One install command, and the job each package does.',
+    [A('add', 'one command', {wantAtWord: at(n, 'add')}),
+     A('added', 'all six, installed', {wantAtWord: at(n, 'mcp'),
+       zooms: [{mark: 'deps', atWord: at(n, 'FastAPI')}],
+       callouts: [{text: 'the official MCP SDK', mark: 'deps', side: 'right',
+                   color: 'green', atWord: at(n, 'official')},
+                  {text: 'serves what FastAPI defines', mark: 'deps', side: 'right',
+                   color: 'blue', atWord: at(n, 'uvicorn', 2)},
+                  {text: 'keeps the key out of the code', mark: 'deps', side: 'right',
+                   color: 'purple', atWord: at(n, 'python-dotenv')}]})]));
 }
-
-// ═══ CHAPTER 2 — a service, and the log it writes ════════════════════════════
-scenes.push(chapter(
-  "First the thing an agent would investigate: a service, and the log it leaves behind.",
-  2, 'A service to ask about', 'and the log it writes itself'));
 
 {
   const n =
@@ -220,6 +240,31 @@ scenes.push(chapter(
        zooms: [{mark: 'app', atWord: at(n, 'create')}, {mark: 'orders', atWord: at(n, 'third')}],
        callouts: [{text: 'no database needed', mark: 'orders', side: 'right', color: 'green',
                    atWord: at(n, 'dictionary')}]})]));
+}
+
+{
+  const n =
+    "That dictionary is worth looking at on its own, " +
+    "because everything later in the video comes back to it. " +
+    "Three orders. Two of them delivered and perfectly boring. " +
+    "And SO one thousand and three, sitting in Remote, lost in transit. " +
+    "In a real system this would be a database table with a million rows. " +
+    "Here it is three lines of Python, " +
+    "because the point of the video is what happens around the data, not the data itself.";
+  scenes.push(scene('DATABASE_TABLE', n, {database: {
+    headline: 'Three orders, one of them a problem',
+    tableName: 'ORDERS in api.py',
+    query: 'a plain Python dictionary',
+    columns: ['id', 'region', 'status'],
+    rows: [
+      ['SO-1001', 'North', 'delivered'],
+      ['SO-1002', 'Central', 'delivered'],
+      ['SO-1003', 'Remote', 'lost_in_transit'],
+    ],
+    highlight: [0, 1, 2],
+    highlightAtWords: [at(n, 'Three'), at(n, 'delivered'), at(n, 'lost')],
+    atWord: at(n, 'dictionary'),
+  }}));
 }
 
 {
@@ -326,6 +371,34 @@ scenes.push(chapter(
 
 {
   const n =
+    "One thing to be clear about before we start it, " +
+    "because two names get confused constantly. " +
+    "FastAPI is the library you write in — the decorators, the routes, the functions. " +
+    "Uvicorn is the program that listens on a port and hands requests to it. " +
+    "FastAPI on its own serves nothing. " +
+    "Uvicorn on its own has nothing to serve. " +
+    "You need both, and the command we are about to run starts the second one " +
+    "and points it at the first.";
+  scenes.push(scene('DIAGRAM', n, {diagram: {
+    layout: 'flow',
+    direction: 'horizontal',
+    nodes: [
+      {id: 'net', label: 'a request', sub: 'browser, or httpx', color: 'blue',
+       atWord: at(n, 'requests')},
+      {id: 'uv', label: 'uvicorn', sub: 'listens on port 8000', color: 'purple',
+       atWord: at(n, 'Uvicorn')},
+      {id: 'fa', label: 'FastAPI', sub: 'your routes in api.py', color: 'green',
+       atWord: at(n, 'FastAPI')},
+    ],
+    edges: [
+      {from: 'net', to: 'uv', label: 'hits the port', atWord: at(n, 'listens')},
+      {from: 'uv', to: 'fa', label: 'to your function', atWord: at(n, 'hands')},
+    ],
+  }}));
+}
+
+{
+  const n =
     "Start it. The ampersand at the end puts it in the background, " +
     "so the service keeps running and we get our prompt back — " +
     "without that ampersand the terminal would sit there serving, " +
@@ -350,6 +423,27 @@ scenes.push(chapter(
     "So it needs some traffic, and we're going to write something that makes some. " +
     "Sixty requests, split between listing orders, fetching one, and checking out, " +
     "and a random number decides which of the three each request goes to. " +
+    "Random dot random gives a number between zero and one, " +
+    "so under nought point four goes to orders, " +
+    "under nought point seven fetches a single order, " +
+    "and everything left over hits checkout. " +
+    "That is roughly forty percent, thirty percent, thirty percent — " +
+    "which is only there so the log looks like a real afternoon " +
+    "rather than sixty identical lines.";
+  scenes.push(rec(n, 'sixty requests, not all the same',
+    'A tiny script that gives the service something to do.',
+    [A('opentraffic', 'something to call it with'),
+     A('traffic1', 'sixty requests', {wantAtWord: at(n, 'Sixty'),
+       zooms: [{mark: 'loop', atWord: at(n, 'random')}],
+       callouts: [{text: 'picks one of the three routes', mark: 'loop', side: 'right',
+                   color: 'blue', atWord: at(n, 'four')},
+                  {text: 'so the timings vary like real traffic', mark: 'post', side: 'right',
+                   color: 'purple', atWord: at(n, 'afternoon')}]}),
+     A('savetraffic', 'saved')]));
+}
+
+{
+  const n =
     "Run it, and every single one of those requests goes through our middleware " +
     "and lands as a line in service dot log, because the middleware sees every one of them. " +
     "Look at the last few. A checkout that failed after nearly a second, " +
@@ -364,18 +458,20 @@ scenes.push(chapter(
     "And look at the shape of a line while it's on screen: " +
     "a timestamp, a level, a route, a status code, and a duration in milliseconds. " +
     "Five fields, separated by spaces. " +
-    "Every function we write next reads exactly that.";
-  scenes.push(rec(n, 'real traffic, and a real log',
-    'Generating traffic, and reading what the app recorded.',
-    [A('opentraffic', 'something to call it with'),
-     A('traffic1', 'sixty requests', {wantAtWord: at(n, 'Sixty'),
-       zooms: [{mark: 'loop', atWord: at(n, 'split')}]}),
-     A('savetraffic', 'saved'),
-     A('runtraffic', 'making the traffic', {wantAtWord: at(n, 'Run'),
-       callouts: [{text: 'each one becomes a log line', mark: null, side: 'top',
+    "Pause here and learn that shape, " +
+    "because every function we write next reads exactly that, " +
+    "and if you ever adapt this to your own log, this is the line you change.";
+  scenes.push(rec(n, 'a real log, written by your own app',
+    'Running the traffic, and reading what the service recorded.',
+    [A('runtraffic', 'making the traffic', {
+       callouts: [{text: 'each one becomes a log line', mark: 'done', side: 'top',
                    color: 'blue', atWord: at(n, 'lands')}]}),
      A('seelog', 'the log it wrote', {wantAtWord: at(n, 'Look'),
-       zooms: [{mark: 'line', atWord: at(n, 'checkout')}]})]));
+       zooms: [{mark: 'line', atWord: at(n, 'checkout')}],
+       callouts: [{text: 'written by the app, not by us', mark: 'line', side: 'right',
+                   color: 'green', atWord: at(n, 'fixture')},
+                  {text: 'time · level · route · code · ms', mark: 'line', side: 'right',
+                   color: 'orange', atWord: at(n, 'timestamp')}]})]));
 }
 
 {
@@ -399,19 +495,209 @@ scenes.push(chapter(
   }}));
 }
 
+{
+  const n =
+    "One more piece of vocabulary, and then we press some buttons. " +
+    "Every web response carries a number, and you only need three of them today. " +
+    "Two hundred means it worked. " +
+    "Four oh four means you asked for something that is not there. " +
+    "Five hundred means the server itself broke. " +
+    "You are about to see all three come back from your own code, " +
+    "and they end up in your log file too, " +
+    "which is how the agent will eventually tell good requests from bad ones.";
+  scenes.push(scene('SPEC_COMPARE', n, {compare: {
+    headline: 'The three status codes you need',
+    source: 'HTTP status codes — RFC 9110, and the ones this service returns',
+    atWord: at(n, 'number'),
+    a: {name: 'what happened', color: 'blue'},
+    b: {name: 'in the log as', color: 'orange'},
+    rows: [
+      {label: '200 — it worked', a: 'normal', b: 'INFO', winner: 'a',
+       atWord: at(n, 'worked')},
+      {label: '404 — not there', a: 'your ask', b: 'INFO', winner: 'tie',
+       atWord: at(n, 'four')},
+      {label: '500 — server broke', a: 'their fault', b: 'ERROR', winner: 'b',
+       atWord: at(n, 'broke')},
+    ],
+  }}));
+}
+
+{
+  const n =
+    "Before we type any code, here is what those six libraries are for, in one place. " +
+    "Two of them build the service: FastAPI writes the routes, uvicorn serves them. " +
+    "One makes web requests out: httpx. " +
+    "One talks to the model: openai. " +
+    "One keeps your key out of the code: python-dotenv. " +
+    "And one is the whole reason we are here: mcp. " +
+    "Nothing else gets installed for the rest of this video.";
+  scenes.push(scene('LIST_BUILD', n, {
+    heading: 'Six libraries, six jobs',
+    items: [
+      {text: 'fastapi — write the routes', atWord: at(n, 'FastAPI')},
+      {text: 'uvicorn — actually serve them', atWord: at(n, 'uvicorn')},
+      {text: 'httpx — make web requests from code', atWord: at(n, 'httpx')},
+      {text: 'openai — talk to the model', atWord: at(n, 'openai')},
+      {text: 'python-dotenv — keep the key out', atWord: at(n, 'python-dotenv')},
+      {text: 'mcp — the protocol itself', atWord: at(n, 'mcp')},
+    ],
+  }));
+}
+
+// ═══ CHAPTER 2b — the service, proven in a browser ═══════════════════════════
+//
+// OWNER, 2026-09-05: *"I need you to show if the api server is running, how it is run, how
+// it is served. Open the /docs of the server and show example api calls actually being made
+// and how response comes back."* FastAPI ships Swagger UI at /docs for free, so the viewer
+// can see the routes they just typed, press Execute, and watch a real response arrive —
+// including the 500 from the route we broke on purpose.
+scenes.push(chapter(
+  "Before we go near AI, let's prove the service is real. It has a web page of its own.",
+  3, 'Your service, in a browser', 'press a button, watch a real request go'));
+
+{
+  const n =
+    "Our service is still running in the background from earlier, on port eight thousand. " +
+    "So open a browser and go to that address, slash docs. " +
+    "And there it is — a page we did not write. " +
+    "FastAPI builds this for you out of the routes in api dot py, " +
+    "and it is genuinely one of the best reasons to use it. " +
+    "Look at what is listed: slash orders, slash orders slash order id, and slash checkout. " +
+    "Those are the three functions we typed, " +
+    "with the exact names and the exact arguments we gave them. " +
+    "Nobody wrote this documentation. It was read out of the code.";
+  scenes.push(rec(n, 'the page FastAPI writes for you',
+    'The service running on port 8000, documenting itself.',
+    [D('docs', 'a page we did not write', {
+       callouts: [{text: 'generated from api.py', mark: 'title', side: 'right',
+                   color: 'green', atWord: at(n, 'builds')}]}),
+     D('routes', 'the three routes we typed', {wantAtWord: at(n, 'listed'),
+       overlay: {kind: 'chain', atWord: at(n, 'code'),
+                 steps: ['api.py', 'FastAPI reads it', 'OpenAPI schema', '/docs page']},
+       callouts: [{text: 'the same names you typed', mark: null, side: 'top',
+                   color: 'blue', atWord: at(n, 'arguments')}]})], {sourceNote: 'Your own machine — 127.0.0.1:8000'}));
+}
+
+{
+  const n =
+    "Now let's actually call one. Click slash orders to open it, " +
+    "then Try it out, then Execute. " +
+    "And watch what comes back. " +
+    "There is the curl command it sent, so you can see the request in plain form. " +
+    "There is the request URL. " +
+    "Two hundred, which is HTTP for it worked. " +
+    "And the response body: our three orders, as JSON, " +
+    "straight out of that dictionary we typed into api dot py. " +
+    "This is worth sitting with for a second. " +
+    "You wrote a Python function, and it is now answering web requests. " +
+    "That is the whole of what a web service is.";
+  scenes.push(rec(n, 'press Execute, get a real answer',
+    'A real HTTP request, and the JSON that comes back.',
+    [D('openlist', 'open the route', {wantAtWord: at(n, 'Click')}),
+     D('tryit', 'try it out', {wantAtWord: at(n, 'Try')}),
+     D('exec', 'send it', {wantAtWord: at(n, 'Execute')}),
+     D('scrollresp', 'down to the answer'),
+     D('resp', 'three orders, as JSON', {wantAtWord: at(n, 'curl'),
+       zooms: [{mark: 'json', atWord: at(n, 'body')}],
+       callouts: [{text: 'the dict from api.py, as JSON', mark: 'json', side: 'right',
+                   color: 'blue', atWord: at(n, 'dictionary')}]}),
+     D('closelist', 'close it')], {sourceNote: 'Your own machine — 127.0.0.1:8000'}));
+}
+
+{
+  const n =
+    "Let's do one more, the one that takes an argument. " +
+    "Slash orders slash order id. Try it out, " +
+    "and this time there is a box to fill in, because that route needs to know which order. " +
+    "Type SO one thousand and three — the one we made lost in transit — and Execute. " +
+    "And there is the row, on its own: " +
+    "id SO one thousand and three, region Remote, status lost in transit. " +
+    "Look at the request URL while it is up: slash orders slash SO one thousand and three. " +
+    "The order id you typed became part of the address. " +
+    "That is what those curly braces in the route meant.";
+  scenes.push(rec(n, 'one order, by its id',
+    'A path parameter, and the single row it returns.',
+    [D('openone', 'open the route', {wantAtWord: at(n, 'Slash')}),
+     D('tryone', 'try it out', {wantAtWord: at(n, 'Try')}),
+     D('fillid', 'the id goes in', {wantAtWord: at(n, 'Type')}),
+     D('execone', 'send it', {wantAtWord: at(n, 'Execute')}),
+     D('scrollone', 'down to the answer'),
+     D('lost', 'lost in transit', {wantAtWord: at(n, 'row'),
+       zooms: [{mark: 'status', atWord: at(n, 'status')}],
+       callouts: [{text: 'the id became part of the URL', mark: 'status', side: 'right',
+                   color: 'purple', atWord: at(n, 'address')}]}),
+     D('closeone', 'close it')], {sourceNote: 'Your own machine — 127.0.0.1:8000'}));
+}
+
+{
+  const n =
+    "And now the interesting one. Slash checkout, the route we deliberately broke. " +
+    "Try it out, Execute — and notice it takes a moment, " +
+    "because that route sleeps for up to two and a half seconds before it does anything. " +
+    "And there is the answer: five hundred, internal server error. " +
+    "That is not a mistake in our code. That is our code doing exactly what we told it to. " +
+    "More than half the time this route fails, " +
+    "and every one of those failures has just been written into service dot log " +
+    "by the middleware, with the status and how long it took. " +
+    "That is the problem our agent is going to investigate.";
+  scenes.push(rec(n, 'the route that fails on purpose',
+    'A live 500, and the log line it just wrote.',
+    [D('opencheckout', 'open the route', {wantAtWord: at(n, 'Slash')}),
+     D('trycheckout', 'try it out', {wantAtWord: at(n, 'Try')}),
+     D('execcheckout', 'and wait for it', {wantAtWord: at(n, 'Execute')}),
+     D('scrollcheckout', 'down to the answer'),
+     D('checkoutresp', 'five hundred, live', {wantAtWord: at(n, 'answer'),
+       overlay: {kind: 'split', atWord: at(n, 'mistake'),
+                 left: 'a bug', right: 'on purpose',
+                 leftNote: 'something you would fix',
+                 rightNote: 'something for the agent to find'},
+       callouts: [{text: 'written to service.log just now', mark: null, side: 'top',
+                   color: 'orange', atWord: at(n, 'middleware')}]})], {sourceNote: 'Your own machine — 127.0.0.1:8000'}));
+}
+
+{
+  const n =
+    "One last idea before we leave the browser, " +
+    "because it is the hinge the whole video turns on. " +
+    "A normal web page sends back HTML, which is shaped for a human to look at. " +
+    "Our routes send back JSON, which is shaped for a program to read. " +
+    "Same request, same server, completely different audience. " +
+    "And that is exactly why a model can eventually use this: " +
+    "JSON is text with a known structure, " +
+    "and text with a known structure is the only thing a model can work with.";
+  scenes.push(scene('SPEC_COMPARE', n, {compare: {
+    headline: 'HTML is for eyes, JSON is for code',
+    atWord: at(n, 'HTML'),
+    a: {name: 'a web page', color: 'blue'},
+    b: {name: 'our API', color: 'green'},
+    rows: [
+      {label: 'sends back', a: 'HTML', b: 'JSON', winner: 'tie', atWord: at(n, 'JSON')},
+      {label: 'meant for', a: 'a person', b: 'a program', winner: 'tie',
+       atWord: at(n, 'audience')},
+      {label: 'a model can read it', a: 'barely', b: 'yes', winner: 'b',
+       atWord: at(n, 'structure')},
+    ],
+  }}));
+}
+
 // ═══ CHAPTER 3 — three ordinary functions ════════════════════════════════════
 scenes.push(chapter(
   "Now three plain Python functions. No AI anywhere near them yet.",
-  3, 'Three plain functions', 'the ones you probably already have'));
+  4, 'Three plain functions', 'the ones you probably already have'));
 
 {
   const n =
     "New file, tools dot py, and there's nothing clever in it. " +
     "The first function counts errors. " +
-    "That function walks the log a line at a time, " +
-    "splits each line into its five pieces — time, level, route, status, duration — " +
-    "keeps the ones where the level is ERROR, " +
-    "and tallies them up by route using a Counter. " +
+    "That function walks the log a line at a time. " +
+    "Line dot split with nothing in the brackets " +
+    "chops a line wherever there is whitespace, " +
+    "which is why the log was written with spaces between the fields. " +
+    "We hand the five pieces straight into five names — " +
+    "time, level, route, status, duration — in one line, " +
+    "and that is a genuinely nice piece of Python called unpacking. " +
+    "Then we keep only the lines where level is ERROR, " +
+    "and tally them up by route using a Counter. " +
     "That's eight lines of ordinary Python, and it's the kind of function " +
     "you've almost certainly written before. " +
     "Counter is the one piece worth naming: it's a dictionary that counts for you, " +
@@ -423,8 +709,8 @@ scenes.push(chapter(
     'Plain Python over the log. No AI involved.',
     [A('opentools', 'plain Python, no AI yet'),
      A('t1', 'count the errors', {wantAtWord: at(n, 'first'),
-       zooms: [{mark: 'split5', atWord: at(n, 'splits')},
-               {mark: 'counter', atWord: at(n, 'tallies')}],
+       zooms: [{mark: 'split5', atWord: at(n, 'chops')},
+               {mark: 'counter', atWord: at(n, 'tally')}],
        callouts: [{text: 'five pieces per line', mark: 'split5', side: 'right', color: 'blue',
                    atWord: at(n, 'duration')},
                   {text: 'counted, not guessed', mark: 'counter', side: 'right', color: 'green',
@@ -526,10 +812,36 @@ scenes.push(chapter(
   }}));
 }
 
+{
+  const n =
+    "And the second function gives back this. " +
+    "Every route, with how long it took on average, slowest first. " +
+    "Checkout at fifteen hundred and eighty nine milliseconds, " +
+    "and everything else at one. " +
+    "Two numbers is all it takes to see which route is the problem — " +
+    "and notice that neither function needed to be clever. " +
+    "One counted. One averaged. " +
+    "That is genuinely the level of code we are handing to a model.";
+  scenes.push(scene('DATABASE_TABLE', n, {database: {
+    headline: 'Slowest first, and it is not close',
+    tableName: 'slowest_routes()',
+    query: 'average duration per route',
+    columns: ['route', 'average'],
+    rows: [
+      ['/checkout', '1589ms'],
+      ['/orders', '1ms'],
+      ['/orders/SO-1001', '1ms'],
+    ],
+    highlight: [0, 1],
+    highlightAtWords: [at(n, 'Checkout'), at(n, 'else')],
+    atWord: at(n, 'route'),
+  }}));
+}
+
 // ═══ CHAPTER 4 — the problem, and what MCP is ════════════════════════════════
 scenes.push(chapter(
   "So here's the problem. Those functions work, and a model can't touch them.",
-  4, 'What MCP actually is', 'a standard way to hand over your tools'));
+  5, 'What MCP actually is', 'a standard way to hand over your tools'));
 
 {
   const n =
@@ -592,10 +904,37 @@ scenes.push(chapter(
   }}));
 }
 
+{
+  const n =
+    "It is worth being concrete about what MCP is saving you, " +
+    "because you can absolutely do this without it. " +
+    "By hand, you write the JSON description of every function yourself, " +
+    "you keep it in step with the code every time an argument changes, " +
+    "and you write a different version for each provider you want to support. " +
+    "With MCP, you write a decorator, " +
+    "and the description is generated from the function that is already there. " +
+    "It is the difference between maintaining a second copy of your code " +
+    "and not having one.";
+  scenes.push(scene('SPEC_COMPARE', n, {compare: {
+    headline: 'By hand, or by decorator',
+    atWord: at(n, 'concrete'),
+    a: {name: 'by hand', color: 'orange'},
+    b: {name: 'with MCP', color: 'green'},
+    rows: [
+      {label: 'write the JSON', a: 'you do', b: 'generated', winner: 'b',
+       atWord: at(n, 'yourself')},
+      {label: 'when args change', a: 'edit twice', b: 'edit once', winner: 'b',
+       atWord: at(n, 'step')},
+      {label: 'per provider', a: 'one each', b: 'one, total', winner: 'b',
+       atWord: at(n, 'provider')},
+    ],
+  }}));
+}
+
 // ═══ CHAPTER 5 — the server ══════════════════════════════════════════════════
 scenes.push(chapter(
   "And this is the whole trick: you don't write that description. A decorator does.",
-  5, 'Your first MCP server', 'the docstring becomes the schema'));
+  6, 'Your first MCP server', 'the docstring becomes the schema'));
 
 {
   const n =
@@ -615,7 +954,9 @@ scenes.push(chapter(
     "and it's what the model reads to decide whether this is the tool it wants. " +
     "So write that sentence carefully, because it is the only thing " +
     "the model will ever see about your function, " +
-    "and a vague one gets your tool ignored.";
+    "and a vague one gets your tool ignored. " +
+    "Pause here and compare the two halves of this file for a second — " +
+    "the function underneath is untouched, and the line above it is the entire change.";
   scenes.push(rec(n, 'the docstring becomes the schema',
     'The same three functions, wrapped as MCP tools.',
     [A('openserver', 'the MCP server'),
@@ -723,10 +1064,36 @@ scenes.push(chapter(
   }}));
 }
 
+{
+  const n =
+    "MCP has three of these building blocks, and we have used two. " +
+    "A tool is something the model decides to run. " +
+    "A resource is something your code fetches, like opening a file. " +
+    "And the third is a prompt — a canned instruction the server can offer, " +
+    "which we are not using today but you will see mentioned everywhere. " +
+    "The difference between all three is only ever who pulls the trigger: " +
+    "the AI, your code, or the person sitting there.";
+  scenes.push(scene('MCP_CONTROL', n, {mcpControl: {
+    headline: 'Three primitives, [three triggers]',
+    caption: 'who decides',
+    premise: 'All three live in the same server file. The only question is who starts them.',
+    color: 'purple',
+    atWord: 1,
+    cells: [
+      {label: 'tool', sub: 'the model decides to run it', owner: 'ai',
+       icon: 'lucide:wrench', atWord: at(n, 'tool')},
+      {label: 'resource', sub: 'your code fetches it', owner: 'code',
+       icon: 'lucide:file-text', atWord: at(n, 'resource')},
+      {label: 'prompt', sub: 'the person picks it', owner: 'user',
+       icon: 'lucide:message-square', atWord: at(n, 'prompt')},
+    ],
+  }}));
+}
+
 // ═══ CHAPTER 6 — the official pages ══════════════════════════════════════════
 scenes.push(chapter(
   "Before we use it — this is somebody's work, and it's worth knowing whose.",
-  6, 'Where this comes from', 'the protocol, and the SDK'));
+  7, 'Where this comes from', 'the protocol, and the SDK'));
 
 {
   const n =
@@ -756,7 +1123,7 @@ scenes.push(chapter(
 // ═══ CHAPTER 7 — settings ════════════════════════════════════════════════════
 scenes.push(chapter(
   "Two small files before the agent, and they keep your key out of your code.",
-  7, 'Where the key lives', 'never in the code, not once'));
+  8, 'Where the key lives', 'never in the code, not once'));
 
 {
   const n =
@@ -785,275 +1152,484 @@ scenes.push(chapter(
                    atWord: at(n, 'there')}]})]));
 }
 
-// ═══ CHAPTER 8 — the agent ═══════════════════════════════════════════════════
+{
+  const n =
+    "One more word on that key, because it is the mistake that costs people real money. " +
+    "A key in your code is a key in your git history, " +
+    "and a key in git history is a key on the internet the moment you push. " +
+    "Deleting the line later does not help — git remembers. " +
+    "A key in dot env, with dot env in dot gitignore, never enters history at all. " +
+    "That is the entire difference, and it takes thirty seconds.";
+  scenes.push(scene('SPEC_COMPARE', n, {compare: {
+    headline: 'Where the key lives decides everything',
+    atWord: at(n, 'key'),
+    a: {name: 'in the code', color: 'red'},
+    b: {name: 'in .env', color: 'green'},
+    rows: [
+      {label: 'enters git history', a: 'yes', b: 'never', winner: 'b',
+       atWord: at(n, 'history')},
+      {label: 'deleting fixes it', a: 'no', b: 'n/a', winner: 'b',
+       atWord: at(n, 'Deleting')},
+      {label: 'cost if pushed', a: 'your bill', b: 'nothing', winner: 'b',
+       atWord: at(n, 'internet')},
+    ],
+  }}));
+}
+
+// ═══ CHAPTER 8 — the agent, one line at a time ═══════════════════════════════
+//
+// OWNER, 2026-09-05: *"Your explanation on agent.py is not at all beginner friendly. You are
+// not explaining it line by line rather you are just speaking and moving on very rapidly…
+// I felt left out with so much stdout or something related code lines were shown and I was
+// clueless on what, and why it was needed."*
+//
+// So this chapter is rebuilt from six beats to fourteen. Every import is named and given a
+// job. `async`, `await`, `stdin`/`stdout`, a context manager, a list comprehension, an
+// f-string and `json.loads` are each defined the first time they appear, in the same breath,
+// in plain English. Runtime is free (the title rounds up afterwards) — the only thing that
+// matters here is that somebody who has written a for-loop and nothing else can follow it.
 scenes.push(chapter(
-  "Now the agent itself, and it's the only genuinely new idea in the video.",
-  8, 'The loop', 'ask, choose, run, answer'));
+  "Now the agent itself. This is the only genuinely new idea in the video, so we go slowly.",
+  9, 'The agent, line by line', 'ask, run, answer'));
 
 {
   const n =
-    "Quick check on where we are. Only agent dot py is left, " +
-    "and it's the one file that talks to a model. " +
-    "Api dot py is the service, traffic dot py filled the log, " +
-    "tools dot py holds the functions, server dot py describes them.";
-  scenes.push(scene('FILE_TREE', n, {fileTree: {
-    headline: 'Four done, [one to go]',
-    atWord: at(n, 'agent'),
-    highlight: 4,
-    nodes: [
-      {name: 'api.py', depth: 0, kind: 'file'},
-      {name: 'traffic.py', depth: 0, kind: 'file'},
-      {name: 'tools.py', depth: 0, kind: 'file'},
-      {name: 'server.py', depth: 0, kind: 'file'},
-      {name: 'agent.py', depth: 0, kind: 'file', color: 'green'},
+    "Last file, agent dot py, and we start with the imports. " +
+    "I want to name all eight of these, because every one of them does a job here " +
+    "and a list of imports you cannot read is where a beginner gets left behind. " +
+    "Asyncio is Python's library for doing things that involve waiting. " +
+    "Json turns text into Python data and back. " +
+    "Os reads settings from the environment. " +
+    "Sys gives us the question typed on the command line. " +
+    "Load dotenv is the one that opens our dot env file and puts those three settings " +
+    "into the environment, so os can find them. " +
+    "Then three pieces from the MCP library, and one from OpenAI. " +
+    "We will meet each of those three the moment we use it, " +
+    "so do not worry about them yet.";
+  scenes.push(rec(n, 'eight imports, eight jobs',
+    'The imports, and what each one is actually for.',
+    [A('openagent', 'the last file'),
+     A('ag1', 'the imports', {wantAtWord: at(n, 'imports'),
+       zooms: [{mark: 'imports', atWord: at(n, 'Asyncio')}],
+       callouts: [{text: 'reads .env into the environment', mark: 'imports', side: 'right',
+                   color: 'green', atWord: at(n, 'dotenv')},
+                  {text: 'three from MCP, one from OpenAI', mark: 'imports', side: 'right',
+                   color: 'purple', atWord: at(n, 'three')}]})]));
+}
+
+{
+  const n =
+    "Before the next block, two words that are about to appear everywhere. " +
+    "Async, and await. " +
+    "Normally Python runs one line, finishes it, then runs the next. " +
+    "But talking to another program means waiting — waiting for it to start, " +
+    "waiting for it to reply. " +
+    "A function marked async is one that is allowed to pause in the middle. " +
+    "And await is the word that marks the pause: " +
+    "it means go and do this, and wake me up when there is an answer. " +
+    "That is the whole idea. " +
+    "You will see await on every line that talks to the server, and nowhere else. " +
+    "If you have never written async Python, you do not need to understand it deeply today. " +
+    "You need to know that await means waiting for something outside this program.";
+  scenes.push(scene('SPEC_COMPARE', n, {compare: {
+    headline: 'What async and await actually mean',
+    atWord: at(n, 'Normally'),
+    a: {name: 'ordinary code', color: 'blue'},
+    b: {name: 'async code', color: 'green'},
+    rows: [
+      {label: 'runs top to bottom', a: 'yes', b: 'yes', winner: 'a',
+       atWord: at(n, 'Normally')},
+      {label: 'can pause mid-way', a: 'no', b: 'yes', winner: 'b',
+       atWord: at(n, 'pause')},
+      {label: 'written as', a: 'def', b: 'async def', winner: 'b',
+       atWord: at(n, 'marked')},
+      {label: 'marks the wait', a: '—', b: 'await', winner: 'b',
+       atWord: at(n, 'await', 2)},
+      {label: 'used for', a: 'the rest', b: 'talking out', winner: 'b',
+       atWord: at(n, 'server')},
+      {label: 'needed today?', a: 'yes', b: 'just the word', winner: 'a',
+       atWord: at(n, 'deeply')},
     ],
   }}));
 }
 
 {
   const n =
-    "Last file, agent dot py. " +
-    "The first block starts our server and connects to it. " +
-    "Stdio server parameters means: run this program, " +
-    "and talk to it through its standard input and output — " +
-    "the same pipes you use when you pipe one command into another. " +
-    "The server is just another program, started by ours; there's no port and no network. " +
-    "Then initialize, which is the handshake: " +
-    "the two sides tell each other what they can do before anything else happens. " +
-    "Think of it like the first ten seconds of a phone call. " +
-    "Our side says which version of the protocol it speaks, " +
-    "the server says the same and lists what it offers, " +
-    "and only then does either of them get down to business. " +
-    "You'll never write that handshake yourself — " +
-    "the library does it, and that's most of why MCP is worth using. " +
-    "Notice too that we never told our agent where the tools live, " +
-    "or what they are called, or what arguments they take. " +
-    "We told it which program to start, and the protocol handles the rest, " +
-    "which is precisely the part you would otherwise be writing by hand.";
-  scenes.push(rec(n, 'start the server, connect to it',
-    'The client half: launching the server and shaking hands.',
-    [A('openagent', 'the last file'),
-     A('ag1', 'the imports', {wantAtWord: at(n, 'first')}),
-     A('ag1b', 'connect over stdio', {wantAtWord: at(n, 'Stdio'),
-       zooms: [{mark: 'params', atWord: at(n, 'run')},
-               {mark: 'init', atWord: at(n, 'initialize')}],
-       overlay: {kind: 'chain', atWord: at(n, 'handshake'),
-                 steps: ['agent.py', 'starts server.py', 'stdin / stdout', 'ready']},
-       callouts: [{text: 'no port, no network', mark: 'params', side: 'right', color: 'purple',
+    "Now the block that starts the server, and there is a lot in five lines. " +
+    "Async def main means: here is our program, and it is allowed to wait. " +
+    "Stdio server parameters is us describing how to start the server. " +
+    "Command is which Python to run, and args is which file to hand it — server dot py. " +
+    "So we are not connecting to something already running. " +
+    "We are saying: start this program for me. " +
+    "Then stdio client, and this is the word I owe you an explanation for. " +
+    "Stdio is short for standard input and standard output. " +
+    "Every program on your machine is born with two pipes: " +
+    "one it reads from, and one it writes to. " +
+    "When you type a command and see output, you are using them. " +
+    "That is all the connection is here — our program writes a question into the server's " +
+    "input pipe, and reads the answer out of its output pipe. " +
+    "No port. No network. No server to deploy. " +
+    "Pause here for a moment and look at those five lines, " +
+    "because that is the entire connection, and it never gets more complicated than this.";
+  scenes.push(rec(n, 'start it, and talk through two pipes',
+    'Launching server.py and connecting to it over standard input and output.',
+    [A('ag1b', 'connect over stdio', {
+       zooms: [{mark: 'params', atWord: at(n, 'Command')},
+               {mark: 'init', atWord: at(n, 'pipes')}],
+       releases: [{atWord: at(n, 'input')}],
+       overlay: {kind: 'chain', atWord: at(n, 'Stdio', 2),
+                 steps: ['agent.py', 'starts server.py', 'stdin / stdout', 'connected']},
+       callouts: [{text: 'which program to start', mark: 'params', side: 'right',
+                   color: 'blue', atWord: at(n, 'args')},
+                  {text: 'stdin = read · stdout = write', mark: 'init', side: 'right',
+                   color: 'orange', atWord: at(n, 'born')},
+                  {text: 'no port, no network', mark: 'params', side: 'right', color: 'purple',
                    atWord: at(n, 'network')}]})]));
 }
 
 {
   const n =
-    "A word on that choice, because you'll meet the other one soon. " +
-    "Stdio means the two programs share a machine and pass text through a pipe. " +
-    "Streamable HTTP means the server lives elsewhere, reached over the network. " +
-    "The messages are identical either way. " +
-    "Start with stdio, because there's nothing to deploy and nothing to secure, " +
-    "and you can move to HTTP later without touching a single tool.";
-  scenes.push(scene('MCP_TRANSPORT', n, {mcpTransport: {
-    headline: 'Same room, or [a phone call]',
-    caption: 'two transports',
-    premise: 'Both move identical JSON. The only difference is whether the two programs share a machine.',
-    color: 'green',
-    atWord: 1,
-    vars: [{label: 'messages=same', sub: 'both transports', atWord: at(n, 'identical')}],
-    cells: [
-      {label: 'stdio', sub: 'what we are using',
-       out: ['same machine', 'nothing to deploy', 'nothing to secure'],
-       atWord: at(n, 'Stdio')},
-      {label: 'streamable-http', sub: 'when the server lives elsewhere', text: 'remote',
-       out: ['a remote server', 'many clients at once', 'now you own the security'],
-       atWord: at(n, 'Streamable')},
-    ],
-  }}));
-}
-
-{
-  const n =
-    "And this is what is actually travelling down that pipe. " +
-    "Not magic, and not English — plain JSON messages, one per line. " +
-    "We send tools slash list, and the server sends back three tool definitions. " +
-    "Later we send tools slash call, with a name and arguments, " +
-    "and back comes whatever the function returned. " +
-    "Every MCP server on earth speaks exactly these messages, " +
-    "which is the entire reason yours can be used by something you didn't write.";
+    "Two more pieces of that block, and both are Python you will meet again. " +
+    "Async with means: open this thing, and close it properly when we are done, " +
+    "even if something goes wrong in between. " +
+    "It is the same idea as opening a file with the word with. " +
+    "The two names in brackets, read and write, are those two pipes. " +
+    "Client session wraps them into a conversation, " +
+    "so instead of writing raw text down a pipe we get to call methods with names. " +
+    "And then await session dot initialize — the handshake. " +
+    "Both sides say which version of the protocol they speak " +
+    "and what they can do, before anything else happens. " +
+    "You will never write that yourself. The library does it, " +
+    "and honestly that is a large part of what MCP is worth.";
   scenes.push(scene('MCP_WIRE', n, {mcpWire: {
-    headline: 'Every arrow is [one message]',
+    headline: 'The handshake, [before anything else]',
     caption: 'what crosses the pipe',
-    premise: 'The client is agent.py. The server is server.py. Each arrow is one JSON-RPC message.',
+    premise: 'agent.py wrote into server.py\'s input pipe and read its output. Each arrow is one JSON-RPC message.',
     color: 'blue',
     atWord: 1,
     codeTitle: 'agent.py',
     ends: [{label: 'AGENT'}, {label: 'SERVER'}],
     cells: [
-      {label: 'tools/list', sub: 'what can you do?', dir: 'out', atWord: at(n, 'list'),
-       out: ['{"method":"tools/list","id":1}']},
-      {label: '3 tools', sub: 'recent_errors · slowest_routes · get_order', dir: 'back',
-       atWord: at(n, 'three'),
-       out: ['{"result":{"tools":[', '  {"name":"recent_errors", …},', '  {"name":"get_order", …}]}}']},
-      {label: 'tools/call', sub: 'run recent_errors, no arguments', dir: 'out',
-       atWord: at(n, 'call'),
-       out: ['{"method":"tools/call",', ' "params":{"name":"recent_errors",', '  "arguments":{}}}']},
+      {label: 'initialize', sub: 'which version do you speak?', dir: 'out',
+       atWord: at(n, 'initialize'),
+       out: ['{"method":"initialize",', ' "params":{"protocolVersion":…}}']},
+      {label: 'ready', sub: 'and here is what I can do', dir: 'back',
+       atWord: at(n, 'handshake'),
+       out: ['{"result":{"capabilities":', '  {"tools":{}, "resources":{}}}}']},
     ],
     lines: [
-      {text: 'tools = await session.list_tools()', detail: 'Ask the server what it can do.',
-       atWord: at(n, 'list')},
-      {text: 'result = await session.call_tool(', detail: 'Run one of them, by name.',
-       atWord: at(n, 'call')},
-      {text: '    "recent_errors", {})'},
+      {text: 'async with stdio_client(params) as (read, write):',
+       detail: 'Open the two pipes, and close them properly afterwards.',
+       atWord: at(n, 'read')},
+      {text: '    async with ClientSession(read, write) as session:',
+       detail: 'Wrap the pipes into a conversation with named methods.',
+       atWord: at(n, 'session')},
+      {text: '        await session.initialize()',
+       detail: 'The handshake. The library writes it, not you.',
+       atWord: at(n, 'initialize')},
+      {text: '        # from here on, session is the server',
+       detail: 'Everything after this line talks through those two pipes.',
+       atWord: at(n, 'version')},
     ],
   }}));
 }
 
 {
   const n =
-    "Then we ask the server what it has. List tools comes back with all three, " +
-    "each one carrying the description and the schema that the decorator built. " +
-    "We reshape them into the format the OpenAI library expects — " +
-    "and that's genuinely all this block does, it's a rename, not a translation. " +
-    "Notice input underscore schema there: " +
-    "in version one of the SDK that was inputSchema, in camel case. " +
-    "Then we print how many tools the model can see, " +
-    "because when this goes wrong that number is the first thing you want.";
-  scenes.push(rec(n, 'ask what tools exist',
-    'Fetching the tool list and handing it to the model.',
+    "Next, we ask the server what it has, and reshape the answer. " +
+    "Await session dot list tools goes down the pipe and comes back with all three, " +
+    "each one carrying the name, the description and the schema " +
+    "that our decorator built back in server dot py. " +
+    "Then this block in square brackets is a list comprehension. " +
+    "If that is new to you, it is Python's short way of writing a for loop " +
+    "that builds a list: for every tool in what came back, make one dictionary. " +
+    "And what we are building is the exact shape the OpenAI library wants — " +
+    "a type, a name, a description, and the parameters. " +
+    "This is genuinely all this block does. It is a rename, not a translation. " +
+    "One thing to notice: input underscore schema, with an underscore. " +
+    "In version one of the SDK that was inputSchema, in camel case, " +
+    "and it is the single most common line to break when you follow an older tutorial. " +
+    "Then the last line prints how many tools the model can see. " +
+    "That f before the quote makes it an f-string, " +
+    "which just means Python drops the value of len menu straight into the text.";
+  scenes.push(rec(n, 'ask what exists, then reshape it',
+    'Fetching the tool list and putting it in the shape the model expects.',
     [A('ag2', 'list, then reshape', {
-       zooms: [{mark: 'list', atWord: at(n, 'List')},
+       zooms: [{mark: 'list', atWord: at(n, 'list')},
                {mark: 'schema', atWord: at(n, 'input')}],
-       overlay: {kind: 'chain', atWord: at(n, 'reshape'),
-                 steps: ['server.py', 'list_tools()', '3 schemas', 'the model']},
-       callouts: [{text: 'v1 spelled it inputSchema', mark: 'schema', side: 'right',
+       overlay: {kind: 'chain', atWord: at(n, 'comprehension'),
+                 steps: ['server.py', 'list_tools()', '3 tool schemas', 'the menu']},
+       callouts: [{text: 'a for-loop that builds a list', mark: 'list', side: 'right',
+                   color: 'blue', atWord: at(n, 'comprehension')},
+                  {text: 'built by the decorator, back in server.py', mark: 'schema',
+                   side: 'right', color: 'green', atWord: at(n, 'decorator')},
+                  {text: 'v1 spelled it inputSchema', mark: 'schema', side: 'right',
                    color: 'orange', atWord: at(n, 'camel')}]})]));
 }
 
 {
   const n =
-    "Now the model. Same client as any other OpenAI call, " +
-    "same messages list — and one new argument: tools. " +
-    "Tools is the menu we just built. " +
-    "We're not telling it which tool to use. We're telling it what exists. " +
-    "What comes back is different from a normal reply: " +
-    "instead of text, the model may hand us tool calls — " +
-    "the name of a function it wants run, and the arguments it wants passed. " +
-    "Nothing has been executed at that point. The model has only asked. " +
-    "Running it is still entirely our job, which is exactly the safety property " +
-    "you want in something that can reach your data.";
-  scenes.push(rec(n, 'hand it the menu',
-    'The call, with the tool list attached.',
-    [A('ag3', 'one new argument', {wantAtWord: at(n, 'model'),
-       zooms: [{mark: 'tools', atWord: at(n, 'tools')}],
-       overlay: {kind: 'split', atWord: at(n, 'different'),
-                 left: 'a normal reply', right: 'tool_calls',
-                 leftNote: 'here is some text', rightNote: 'run this, with these arguments'},
-       callouts: [{text: 'what exists, not what to use', mark: 'tools', side: 'right',
-                   color: 'green', atWord: at(n, 'exists')}]})]));
-}
-
-{
-  const n =
-    "Before we write it, hold the shape in your head, " +
-    "because every agent you'll ever read is some version of this ring. " +
-    "Ask the model, with the tool list attached. " +
-    "Read what it asked for. Run that tool. Hand the result back. " +
-    "Then ask once more, and this time it answers in words. " +
-    "Ours goes round exactly once, which is all this question needs. " +
-    "Wrap those four steps in a while loop instead, " +
-    "and the model can go round as many times as it likes — " +
-    "read the errors, then go and fetch the order behind one of them. " +
-    "That one change is the whole difference between a helper and an agent.";
-  scenes.push(scene('MCP_LOOP', n, {mcpLoop: {
-    headline: 'Ask, run, [ask again]',
-    caption: 'the agent loop',
-    premise: 'agent.py sits between the model and the server, relaying until the model answers in words instead of tool calls.',
-    color: 'orange',
-    atWord: 1,
-    codeTitle: 'agent.py',
-    cells: [
-      {label: 'ask the model', sub: '+ the tool list', atWord: at(n, 'Ask')},
-      {label: 'tool_calls', sub: 'what it wants run', atWord: at(n, 'asked')},
-      {label: 'call_tool', sub: 'you run it', atWord: at(n, 'Run')},
-      {label: 'role: tool', sub: 'the result goes back', atWord: at(n, 'Hand')},
-      {label: 'it answers', sub: 'words, not tool calls', text: 'exit', atWord: at(n, 'words')},
-    ],
+    "That number is the first thing to look at when something goes wrong. " +
+    "Zero means the server started but registered nothing. " +
+    "Three means everything up to here is working.";
+  scenes.push(scene('LOG_STREAM', n, {logs: {
+    rate: 'check first',
+    highlight: 2,
+    atWord: at(n, 'zero'),
     lines: [
-      {text: 'answer = client.chat.completions.create(',
-       detail: 'One ask, with the menu attached.', atWord: at(n, 'Ask')},
-      {text: '    model=..., messages=messages, tools=menu)'},
-      {text: 'for call in picked.tool_calls:',
-       detail: 'Run every tool it asked for. Ours needs one pass.', atWord: at(n, 'Run')},
-      {text: '    result = await session.call_tool(...)', atWord: at(n, 'tool')},
-      {text: 'final = client.chat.completions.create(',
-       detail: 'Ask again with the results in the conversation.', atWord: at(n, 'once')},
+      {level: 'warn', tag: 'registered 0', text: 'the model can see 0 tools'},
+      {level: 'warn', tag: 'never started', text: 'connection closed'},
+      {level: 'info', tag: 'all good', text: 'the model can see 3 tools'},
     ],
   }}));
 }
 
 {
   const n =
-    "So we run whatever it picked. For each tool call: " +
-    "read the arguments it chose, print them so we can watch it think, " +
-    "and call that tool through MCP. " +
-    "Then we hand the result back, with role tool, " +
-    "which is how you tell the model this is what your function returned. " +
-    "And finally we ask it once more, with the results now in the conversation, " +
-    "and this time it just answers. That's the loop. " +
-    "Ask, choose, run, answer. " +
-    "Notice the for: it runs every tool the model asked for in this one round. " +
-    "Put a while around those four steps and the model gets to come back — " +
-    "read the errors, then go after the order behind one of them — " +
-    "and that is the upgrade I would make first. " +
-    "Either way, the difference from a chatbot is the same: " +
-    "a chatbot answers from what it already knows, " +
-    "and an agent goes and gets what it does not. " +
+    "Now the model. " +
+    "OpenAI here is the client object, and we hand it two things out of our dot env file: " +
+    "the address to talk to, and the key. " +
+    "Because the address is configurable, this same code points at Azure OpenAI, " +
+    "or at OpenAI directly, or at anything else that speaks the same API. " +
+    "Messages is the conversation, and it starts with one entry: " +
+    "role user, content the question. " +
+    "Role is just who is speaking — user is you, assistant is the model, " +
+    "and there is a third one we will meet in a minute. " +
+    "Then the call itself. Same create you would use for any chat, " +
+    "same messages list, and one new argument: tools, which is our menu. " +
+    "We are not telling it which tool to use. We are telling it what exists. " +
+    "And picked is us digging the reply out of the response object — " +
+    "choices, the first one, its message.";
+  scenes.push(rec(n, 'hand it the menu',
+    'The model call, with the tool list attached.',
+    [A('ag3', 'one new argument', {wantAtWord: at(n, 'OpenAI'),
+       zooms: [{mark: 'tools', atWord: at(n, 'tools')}],
+       overlay: {kind: 'split', atWord: at(n, 'exists'),
+                 left: 'what we send', right: 'what we do NOT send',
+                 leftNote: 'the question + all three tools',
+                 rightNote: 'any instruction about which one to use'},
+       callouts: [{text: 'the address makes it portable', mark: 'tools', side: 'right',
+                   color: 'green', atWord: at(n, 'Azure')},
+                  {text: 'what exists, not what to use', mark: 'tools', side: 'right',
+                   color: 'blue', atWord: at(n, 'exists')}]})]));
+}
+
+{
+  const n =
+    "What comes back is different from a normal reply, and this is the heart of it. " +
+    "Instead of text, the model may hand us tool calls — " +
+    "the name of a function it wants run, and the arguments it wants passed. " +
+    "Nothing has been executed at that point. The model has only asked. " +
+    "It cannot reach your log, it cannot reach your service, " +
+    "and it certainly cannot run anything on your machine. " +
+    "Running it is still entirely our job — " +
+    "which is exactly the safety property you want " +
+    "in something that can reach your data.";
+  scenes.push(scene('MCP_REACH', n, {mcpReach: {
+    headline: 'It asks. [You run it.]',
+    caption: 'who does what',
+    premise: 'The model returns a request. Your code decides whether to honour it. That boundary never moves.',
+    color: 'purple',
+    atWord: 1,
+    ends: [{label: 'THE MODEL'}, {label: 'YOUR CODE'}],
+    cells: [
+      {label: 'names a tool', sub: 'recent_errors', icon: 'lucide:message-square',
+       text: 'out', atWord: at(n, 'name')},
+      {label: 'runs nothing', sub: 'it has no hands', icon: 'lucide:ban',
+       text: 'out', atWord: at(n, 'executed')},
+      {label: 'your code runs it', sub: 'or refuses to', icon: 'lucide:terminal',
+       text: 'bridge', atWord: at(n, 'job')},
+    ],
+  }}));
+}
+
+{
+  const n =
+    "So we run whatever it picked, and there are five lines here worth going through one by one. " +
+    "First, messages dot append picked. " +
+    "We put the model's own message back into the conversation, " +
+    "because the next time we ask, it needs to remember what it just asked for. " +
+    "Second, for call in picked dot tool calls — " +
+    "it may have asked for more than one, so we loop over all of them. " +
+    "Third, json dot loads. " +
+    "The arguments arrive as a string of text, not as Python data, " +
+    "so this is the line that turns that text into a real dictionary we can pass along. " +
+    "Fourth, we print what it chose, purely so we can watch it think. " +
+    "And fifth, await session dot call tool — " +
+    "the name it asked for, the arguments it chose, sent down that same pipe. " +
+    "That is the line where the model's request finally becomes your function running.";
+  scenes.push(rec(n, 'read the request, run the tool',
+    'Turning what the model asked for into a real function call.',
+    [A('ag4', 'run whatever it picked', {
+       zooms: [{mark: 'call', atWord: at(n, 'fifth')}],
+       overlay: {kind: 'chain', atWord: at(n, 'loads'),
+                 steps: ['"{}" as text', 'json.loads', 'a real dict', 'call_tool()']},
+       callouts: [{text: 'arguments arrive as TEXT', mark: 'call', side: 'right',
+                   color: 'orange', atWord: at(n, 'string')},
+                  {text: 'it may ask for more than one', mark: 'call', side: 'right',
+                   color: 'blue', atWord: at(n, 'Second')}]})]));
+}
+
+{
+  const n =
+    "Then we hand the result back, and the shape of this matters. " +
+    "Role tool — that is the third role I promised you. " +
+    "User is you, assistant is the model, and tool means " +
+    "this is what your function returned. " +
+    "Tool call id is how the model knows which of its requests this answers, " +
+    "which is why we loop with the id rather than just appending an answer. " +
+    "And result dot content zero dot text — " +
+    "MCP hands back a list of content pieces, because a tool could return " +
+    "text or an image or a file. Ours returns one piece of text, so we take the first. " +
+    "Pause here and read the whole block, " +
+    "because this is the part people get wrong when they write it from memory.";
+  scenes.push(rec(n, 'feed the answer back',
+    'The result returns to the conversation as a tool message.',
+    [A('ag5', 'and let it answer', {
+       zooms: [{mark: 'final', atWord: at(n, 'Role')}],
+       overlay: {kind: 'rows', atWord: at(n, 'assistant'),
+                 rows: [{text: 'role: user — the question you typed', state: 'kept'},
+                        {text: 'role: assistant — the tool it wants', state: 'kept'},
+                        {text: 'role: tool — what your function returned', state: 'new'}]},
+       callouts: [{text: 'ties the answer to the request', mark: 'final', side: 'right',
+                   color: 'blue', atWord: at(n, 'id')},
+                  {text: 'a list, because a tool could return anything', mark: 'final',
+                   side: 'right', color: 'purple', atWord: at(n, 'pieces')}]})]));
+}
+
+{
+  const n =
+    "And finally we ask one more time. " +
+    "Same client, same model, the same messages list — " +
+    "except the list now contains the answer your function produced. " +
+    "Notice what is missing from this second call: tools. " +
+    "We do not offer the menu again, because we want words this time, not another request. " +
+    "Then we print what it says. " +
+    "The very last line, asyncio dot run of main of sys argv one, " +
+    "is what actually starts everything: " +
+    "asyncio dot run is how you launch an async function, " +
+    "and sys argv one is the question you type after the file name. " +
     "Save the file. That is every line of code in this project, " +
     "and agent dot py — the only file here that talks to a model — " +
     "comes to about seventy lines, most of which is connecting and reshaping. " +
-    "MCP is carrying everything else. " +
-    "No parsing, no schema wrangling, no if-statement per tool — " +
-    "which is the whole reason this fits in one screen.";
-  scenes.push(rec(n, 'run it, and feed the answer back',
-    'The loop: execute the chosen tool and return the result.',
-    [A('ag4', 'run whatever it picked', {wantAtWord: at(n, 'picked'),
-       zooms: [{mark: 'call', atWord: at(n, 'call')}, {mark: 'role', atWord: at(n, 'role')}],
-       overlay: {kind: 'chain', atWord: at(n, 'loop'),
-                 steps: ['question', 'it chooses', 'we run it', 'it answers']},
-       callouts: [{text: 'this is what your function said', mark: 'role', side: 'right',
-                   color: 'blue', atWord: at(n, 'returned')}]}),
-     A('ag5', 'and let it answer', {wantAtWord: at(n, 'finally')}),
-     A('saveagent', 'saved', {wantAtWord: at(n, 'Save')})]));
+    "MCP is carrying everything else.";
+  scenes.push(rec(n, 'ask again, and print the answer',
+    'The second call, this time without the menu.',
+    [A('ag5', 'the second call', {
+       zooms: [{mark: 'final', atWord: at(n, 'again')}],
+       overlay: {kind: 'split', atWord: at(n, 'Notice'),
+                 left: 'first call', right: 'second call',
+                 leftNote: 'messages + tools=menu',
+                 rightNote: 'messages only — give me words'},
+       callouts: [{text: 'now holds your function\'s answer', mark: 'final', side: 'right',
+                   color: 'blue', atWord: at(n, 'produced')},
+                  {text: 'no tools = give me words', mark: 'final', side: 'right',
+                   color: 'green', atWord: at(n, 'missing')}]}),
+     A('saveagent', 'saved', {wantAtWord: at(n, 'Save'),
+       callouts: [{text: 'the question you type goes here', mark: null, side: 'top',
+                   color: 'purple', atWord: at(n, 'argv')}]})]));
+}
+
+{
+  const n =
+    "And one honest warning before we run it. " +
+    "A tool is your code, and it runs with your permissions. " +
+    "Ours only reads a log file and calls a service next door, " +
+    "which is about as harmless as it gets. " +
+    "But a tool that deletes files would delete files, " +
+    "and a tool that spends money would spend money. " +
+    "The model does not run anything — your code does — " +
+    "so the question is never what will the model do, " +
+    "it is what did I give it the ability to do.";
+  scenes.push(scene('MCP_REACH', n, {mcpReach: {
+    headline: 'A tool runs with [your permissions]',
+    caption: 'the honest warning',
+    premise: 'The model only ever names a tool. Whatever that tool can reach, it reaches as you.',
+    color: 'red',
+    atWord: 1,
+    ends: [{label: 'THE MODEL'}, {label: 'YOUR MACHINE'}],
+    cells: [
+      {label: 'reads service.log', sub: 'what ours does', icon: 'lucide:file-text',
+       text: 'in', atWord: at(n, 'reads')},
+      {label: 'deletes files', sub: 'if you wrote that tool', icon: 'lucide:trash-2',
+       text: 'out', atWord: at(n, 'deletes')},
+      {label: 'spends money', sub: 'if you wrote that tool', icon: 'lucide:credit-card',
+       text: 'out', atWord: at(n, 'spend')},
+      {label: 'your code decides', sub: 'the only real gate', icon: 'lucide:shield',
+       text: 'bridge', atWord: at(n, 'ability')},
+    ],
+  }}));
 }
 
 // ═══ CHAPTER 9 — the payoff ══════════════════════════════════════════════════
 scenes.push(chapter(
   "Everything is written. Let's ask it something we never told it how to answer.",
-  9, 'Ask it a question', 'in plain English'));
+  10, 'Ask it a question', 'in plain English'));
 
 {
   const n =
-    "Our checkout is misbehaving. What does the log say? Two sentences. " +
+    "Our checkout is misbehaving. What does the log say? Two sentences, " +
+    "typed the way you would say them to a colleague. " +
     "Nobody wired that question to anything. " +
     "The model can see three tools, and it picks one. Recent errors. " +
     "Nobody told it which — it read three descriptions, " +
     "and decided that was the one that answers a question about the log. " +
-    "Then the answer comes back in plain English: " +
-    "the checkout process has failed seven times, " +
+    "And now look at the last line, because this is the moment. " +
+    "That paragraph is written by the model, " +
+    "and the number in it — seven — came out of your log file, " +
+    "read by your function, through your MCP server. " +
+    "The checkout process has failed seven times, it says, " +
     "and it suggests looking at the error messages next. " +
-    "That's our log, read by our function, chosen by the model, " +
-    "and none of that plumbing was hand-written. " +
-    "That's what MCP bought us.";
+    "Pause here and read that sentence properly. " +
+    "Nothing in this project was hand-wired to answer that question. " +
+    "You have taken an ordinary Python application and made it AI capable — " +
+    "it can now be asked things in English, " +
+    "and it goes and finds the answer in your own data. " +
+    "That is what MCP bought us.";
   scenes.push(rec(n, 'it picks the tools itself',
     'The finished agent, answering a question nobody scripted.',
     [A('runagent', 'asking in plain English', {
        zooms: [{mark: 'sees', atWord: at(n, 'three')},
                {mark: 'chose', atWord: at(n, 'Recent')},
-               {at: 'full', atWord: at(n, 'answer')}],
+               {at: 'full', atWord: at(n, 'moment')}],
        overlay: {kind: 'split', atWord: at(n, 'descriptions'),
                  left: 'three tools offered', right: 'one tool chosen',
                  leftNote: 'recent_errors · slowest_routes · get_order',
                  rightNote: 'recent_errors — nobody told it which'},
        callouts: [{text: 'it chose this one itself', mark: 'chose', side: 'right', color: 'green',
-                   atWord: at(n, 'told')}]})]));
+                   atWord: at(n, 'told')},
+                  {text: 'written by the model, from YOUR log', mark: 'chose', side: 'right',
+                   color: 'green', atWord: at(n, 'paragraph')}]})]));
+}
+
+{
+  const n =
+    "And here is the part that makes this worth the trouble. " +
+    "Nothing in server dot py knows what model we used. " +
+    "Go and read it again — there is no OpenAI in there, no Azure, no API key. " +
+    "It only describes three functions in the one shape the protocol agreed on. " +
+    "Which means the same file, unchanged, " +
+    "works with Claude Desktop, with an editor like Cursor or VS Code, " +
+    "with somebody else's agent, or with the one we just wrote. " +
+    "You write the tool once, and every client that speaks MCP can use it. " +
+    "That is the whole reason a standard was worth having, " +
+    "and it is why this is a genuinely useful thing to have built.";
+  scenes.push(scene('MCP_MESH', n, {mcpMesh: {
+    headline: 'One server, [every client]',
+    caption: 'why the standard pays',
+    premise: 'server.py names no model and holds no key. Anything that speaks MCP can pick it up as it is.',
+    color: 'green',
+    atWord: 1,
+    cells: [
+      {label: 'Claude Desktop', icon: 'si:anthropic', text: 'client', atWord: at(n, 'Claude')},
+      {label: 'Cursor / VS Code', icon: 'lucide:file-code', text: 'client', atWord: at(n, 'editor')},
+      {label: 'our agent.py', icon: 'lucide:bot', text: 'client', atWord: at(n, 'wrote')},
+      {label: 'recent_errors', icon: 'lucide:file-text', text: 'server', atWord: at(n, 'describes')},
+      {label: 'slowest_routes', icon: 'lucide:timer', text: 'server', atWord: at(n, 'functions')},
+      {label: 'get_order', icon: 'lucide:package', text: 'server', atWord: at(n, 'shape')},
+      {label: 'server.py', icon: 'lucide:git-fork', text: 'hub', atWord: at(n, 'once')},
+    ],
+  }}));
 }
 
 {
@@ -1074,10 +1650,95 @@ scenes.push(chapter(
   }}));
 }
 
+{
+  const n =
+    "Let's follow one question all the way through, now that every piece exists. " +
+    "You type a sentence. " +
+    "Agent dot py sends it to the model along with three tool descriptions. " +
+    "The model picks one and sends the name back. " +
+    "Agent dot py runs it through the MCP server, " +
+    "which calls the plain Python function, which reads your log file. " +
+    "The answer goes back into the conversation, " +
+    "the model is asked once more, and it replies in English. " +
+    "Seven steps. You wrote six of them.";
+  scenes.push(scene('DIAGRAM', n, {diagram: {
+    layout: 'flow',
+    direction: 'horizontal',
+    nodes: [
+      {id: 'q', label: 'your question', sub: 'plain English', color: 'blue',
+       atWord: at(n, 'sentence')},
+      {id: 'ag', label: 'agent.py', sub: 'sends it with the menu', color: 'purple',
+       atWord: at(n, 'descriptions')},
+      {id: 'md', label: 'the model', sub: 'names one tool', color: 'orange',
+       atWord: at(n, 'picks')},
+      {id: 'sv', label: 'server.py', sub: 'runs the function', color: 'green',
+       atWord: at(n, 'server')},
+      {id: 'lg', label: 'service.log', sub: 'your own data', color: 'blue',
+       atWord: at(n, 'log')},
+    ],
+    edges: [
+      {from: 'q', to: 'ag', label: 'you type it', atWord: at(n, 'type')},
+      {from: 'ag', to: 'md', label: '+ the menu', atWord: at(n, 'three')},
+      {from: 'md', to: 'sv', label: 'run this one', atWord: at(n, 'back')},
+      {from: 'sv', to: 'lg', label: 'reads it', atWord: at(n, 'reads')},
+    ],
+  }}));
+}
+
+{
+  const n =
+    "What a tool call looks like on the wire is worth one last look. " +
+    "The model does not send code. It does not send a command. " +
+    "It sends a small piece of JSON with two fields: " +
+    "a name, and the arguments. " +
+    "That is the entire mechanism. " +
+    "Everything else in this video is us deciding what to do about it.";
+  scenes.push(scene('API_REQUEST_RESPONSE', n, {api: {
+    headline: 'A tool call is [two fields]',
+    method: 'TOOL',
+    path: 'recent_errors',
+    requestLines: ['what the model sent:'],
+    status: 'JSON',
+    statusText: 'that is all',
+    responseLines: ['{"name":"recent_errors",', ' "arguments":"{}"}'],
+    clientLabel: 'the model',
+    serverLabel: 'agent.py',
+    atWord: at(n, 'JSON'),
+  }}));
+}
+
+{
+  const n =
+    "One question you will hit within a day of building your own: " +
+    "what happens when a tool fails? " +
+    "Ours cannot really — it reads a file that is definitely there. " +
+    "But if get order is handed an id that does not exist, " +
+    "it returns the words there is no order called that, as text. " +
+    "And that is the pattern worth copying: " +
+    "a tool that fails should return a sentence explaining what went wrong, " +
+    "not raise an exception. " +
+    "The model reads that sentence, understands it, and can try something else. " +
+    "An exception just kills your program.";
+  scenes.push(scene('SPEC_COMPARE', n, {compare: {
+    headline: 'When a tool fails, hand back words',
+    atWord: at(n, 'fails'),
+    a: {name: 'raise an error', color: 'red'},
+    b: {name: 'return words', color: 'green'},
+    rows: [
+      {label: 'the program', a: 'stops', b: 'carries on', winner: 'b',
+       atWord: at(n, 'exception')},
+      {label: 'the model', a: 'sees nothing', b: 'reads why', winner: 'b',
+       atWord: at(n, 'reads')},
+      {label: 'it can retry', a: 'no', b: 'yes', winner: 'b',
+       atWord: at(n, 'else')},
+    ],
+  }}));
+}
+
 // ═══ CHAPTER 10 — where to go next ═══════════════════════════════════════════
 scenes.push(chapter(
   "That's a working agent. Here's how it grows, and where to read next.",
-  10, 'Where this goes', 'from one file to fifty tools'));
+  11, 'Where this goes', 'from one file to fifty tools'));
 
 {
   const n =
@@ -1134,6 +1795,52 @@ scenes.push(chapter(
     "go and read their getting started, because it's better than mine. " +
     "And there's a lot more in there: prompts, resources you can subscribe to, " +
     "and running a server over HTTP instead of stdio.";
+{
+  const n =
+    "Here is what this project looks like once it grows, " +
+    "so the shape is not a surprise later. " +
+    "Tools becomes a folder instead of a file, with one module per subject — " +
+    "logs, orders, whatever your work actually is. " +
+    "Server dot py stays small, because all it does is import those modules " +
+    "so their decorators run. " +
+    "And agent dot py may well disappear, " +
+    "because by then you point a real client at the server instead.";
+  scenes.push(scene('FILE_TREE', n, {fileTree: {
+    headline: 'What it looks like [at fifty tools]',
+    atWord: at(n, 'grows'),
+    highlight: 1,
+    nodes: [
+      {name: 'server.py', depth: 0, kind: 'file', color: 'green'},
+      {name: 'tools', depth: 0, kind: 'folder', color: 'purple'},
+      {name: 'logs.py', depth: 1, kind: 'file'},
+      {name: 'orders.py', depth: 1, kind: 'file'},
+      {name: 'billing.py', depth: 1, kind: 'file'},
+      {name: '.env', depth: 0, kind: 'file'},
+    ],
+  }}));
+}
+
+{
+  const n =
+    "And three things to actually go and do, " +
+    "because reading about this does not make it stick. " +
+    "First, change a docstring to something vague and run the agent again — " +
+    "watch it pick the wrong tool, and you will never forget " +
+    "that the description is what it reads. " +
+    "Second, add a fourth tool of your own, over a file you already have. " +
+    "Third, point Claude Desktop or your editor at this same server, " +
+    "and watch your functions turn up somewhere you did not write.";
+  scenes.push(scene('LIST_BUILD', n, {
+    heading: 'Three things to try this week',
+    items: [
+      {text: 'Break a docstring — watch it choose wrong', atWord: at(n, 'vague')},
+      {text: 'Add a fourth tool over your own file', atWord: at(n, 'Second')},
+      {text: 'Point a real client at the same server', atWord: at(n, 'Third')},
+      {text: 'The description is what it reads', atWord: at(n, 'description')},
+    ],
+  }));
+}
+
   scenes.push(scene('RECAP', n, {
     heading: 'What you built',
     points: [
@@ -1173,7 +1880,7 @@ const spec = {
     onePayoff: 'wrap plain Python functions as MCP tools and let a model choose between them',
     openLoop: 'what does it actually take to code an AI agent?',
     analogy: 'a menu you hand the model, instead of telling it what to order',
-    screenplay: 'documentary',
+    screenplay: 'masterclass',
     topicAxes: ['skill-build', 'sovereignty'],
     seo: {
       title: 'Code An AI Agent With MCP — Python, Every Line Typed',

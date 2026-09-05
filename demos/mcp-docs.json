@@ -1,0 +1,188 @@
+{
+  "slug": "mcp-docs",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2,
+  "fps": 30,
+  "prep": {
+    "url": "http://127.0.0.1:8000/docs",
+    "settleMs": 2500
+  },
+  "steps": [
+    {
+      "id": "docs",
+      "action": "expect",
+      "text": "FastAPI",
+      "label": "the docs page FastAPI built",
+      "holdMs": 3000,
+      "marks": [
+        {
+          "id": "title",
+          "text": "FastAPI"
+        }
+      ]
+    },
+    {
+      "id": "routes",
+      "action": "expect",
+      "target": "#operations-default-list_orders_orders_get",
+      "label": "the three routes we typed",
+      "holdMs": 3000
+    },
+    {
+      "id": "openlist",
+      "action": "click",
+      "target": "#operations-default-list_orders_orders_get .opblock-summary",
+      "label": "open GET /orders",
+      "holdMs": 1800,
+      "settleMs": 1100
+    },
+    {
+      "id": "tryit",
+      "action": "click",
+      "target": "#operations-default-list_orders_orders_get button.try-out__btn",
+      "label": "try it out",
+      "holdMs": 1600,
+      "settleMs": 900
+    },
+    {
+      "id": "exec",
+      "action": "click",
+      "target": "#operations-default-list_orders_orders_get button.execute",
+      "label": "send a real request",
+      "holdMs": 1800,
+      "settleMs": 2200
+    },
+    {
+      "id": "scrollresp",
+      "action": "scroll",
+      "target": "#operations-default-list_orders_orders_get .live-responses-table",
+      "label": "down to the answer",
+      "holdMs": 900
+    },
+    {
+      "id": "resp",
+      "action": "expect",
+      "target": "#operations-default-list_orders_orders_get .live-responses-table .microlight",
+      "label": "three orders, straight from your code",
+      "holdMs": 4200,
+      "marks": [
+        {
+          "id": "json",
+          "text": "SO-1001"
+        }
+      ]
+    },
+    {
+      "id": "closelist",
+      "action": "click",
+      "target": "#operations-default-list_orders_orders_get .opblock-summary",
+      "label": "close it again",
+      "holdMs": 900,
+      "settleMs": 800
+    },
+    {
+      "id": "openone",
+      "action": "click",
+      "target": "#operations-default-get_order_orders__order_id__get .opblock-summary",
+      "label": "open GET /orders/{order_id}",
+      "holdMs": 1700,
+      "settleMs": 1100
+    },
+    {
+      "id": "tryone",
+      "action": "click",
+      "target": "#operations-default-get_order_orders__order_id__get button.try-out__btn",
+      "label": "try it out",
+      "holdMs": 1400,
+      "settleMs": 800
+    },
+    {
+      "id": "fillid",
+      "action": "fill",
+      "target": "#operations-default-get_order_orders__order_id__get tr[data-param-name=\"order_id\"] input",
+      "value": "SO-1003",
+      "label": "the order id goes in",
+      "holdMs": 2000,
+      "typeDelay": 95
+    },
+    {
+      "id": "execone",
+      "action": "click",
+      "target": "#operations-default-get_order_orders__order_id__get button.execute",
+      "label": "ask for that one order",
+      "holdMs": 1800,
+      "settleMs": 2000
+    },
+    {
+      "id": "scrollone",
+      "action": "scroll",
+      "target": "#operations-default-get_order_orders__order_id__get .live-responses-table",
+      "label": "down to the answer",
+      "holdMs": 900
+    },
+    {
+      "id": "lost",
+      "action": "expect",
+      "target": "#operations-default-get_order_orders__order_id__get .live-responses-table .microlight",
+      "label": "lost in transit — the row from api.py",
+      "holdMs": 4600,
+      "marks": [
+        {
+          "id": "status",
+          "text": "lost_in_transit"
+        }
+      ]
+    },
+    {
+      "id": "closeone",
+      "action": "click",
+      "target": "#operations-default-get_order_orders__order_id__get .opblock-summary",
+      "label": "close it again",
+      "holdMs": 900,
+      "settleMs": 800
+    },
+    {
+      "id": "opencheckout",
+      "action": "click",
+      "target": "#operations-default-checkout_checkout_post .opblock-summary",
+      "label": "open POST /checkout",
+      "holdMs": 1700,
+      "settleMs": 1100
+    },
+    {
+      "id": "trycheckout",
+      "action": "click",
+      "target": "#operations-default-checkout_checkout_post button.try-out__btn",
+      "label": "try it out",
+      "holdMs": 1400,
+      "settleMs": 800
+    },
+    {
+      "id": "execcheckout",
+      "action": "click",
+      "target": "#operations-default-checkout_checkout_post button.execute",
+      "label": "the slow one, live",
+      "holdMs": 3600,
+      "settleMs": 3400
+    },
+    {
+      "id": "scrollcheckout",
+      "action": "scroll",
+      "target": "#operations-default-checkout_checkout_post .live-responses-table",
+      "label": "down to the answer",
+      "holdMs": 900
+    },
+    {
+      "id": "checkoutresp",
+      "action": "expect",
+      "target": "#operations-default-checkout_checkout_post .live-responses-table",
+      "label": "whatever it gave us this time",
+      "holdMs": 4600
+    }
+  ]
+}

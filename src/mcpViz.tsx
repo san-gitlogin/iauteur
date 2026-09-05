@@ -692,17 +692,63 @@ export const AgenticLoop: React.FC<McpVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const n = Math.max(items.length, 1);
-  const R = 33, CX = 50, CY = 38;
+  const R = 31, CX = 50, CY = 38, SQUASH = 0.86;
+
+  // ── GEOMETRY, MEASURED FROM THE TEXT ────────────────────────────────────────
+  // OWNER, 2026-09-05: *"there must be proper padding with the content and the rounded
+  // rectangle container. The arrows must not go inside the container, but just touch the
+  // border."* Both were true and both had the same cause: the picture was drawn from
+  // constants instead of from its own content.
+  //   · the pill was `label.length * 1.5 + 5` wide while the mono text at 3.6px needs
+  //     ~2.16 per character, so "ask the model" (13 chars) wanted 28 units and got 24.5 —
+  //     the label hung outside its own container.
+  //   · every edge ran centre-to-centre, so the arrowhead finished deep inside the node
+  //     it pointed at.
+  const FS = 3.6;                 // node label size
+  const CHAR = FS * 0.6;          // mono advance width
+  const PAD_X = 3.4, PAD_Y = 4.2; // content-to-border padding, both axes
+  const wOf = (i: number) => Math.max(15, (items[i].label ?? '').length * CHAR + PAD_X * 2);
+  const H = FS + PAD_Y * 2;
+
   const ang = (i: number) => (-Math.PI / 2) + (i / n) * Math.PI * 2;
   const px = (i: number) => CX + R * Math.cos(ang(i));
-  const py = (i: number) => CY + R * Math.sin(ang(i)) * 0.86;
+  const py = (i: number) => CY + R * Math.sin(ang(i)) * SQUASH;
+
+  // A point is "inside" a node once it is within the pill plus a standoff, so the arrow
+  // tip lands ON the border rather than crossing it. `orient=auto-start-reverse` puts the
+  // tip at the path end, and the marker scales with strokeWidth, hence the extra unit.
+  const STANDOFF = 1.9;
+  const inside = (x: number, y: number, i: number, extra = 0) =>
+    Math.abs(x - px(i)) <= wOf(i) / 2 + STANDOFF + extra &&
+    Math.abs(y - py(i)) <= H / 2 + STANDOFF + extra;
+
+  // Sample the quadratic and keep only the span that lies outside BOTH endpoints.
+  const SAMPLES = 96;
+  const edgePath = (a: number, b: number) => {
+    const mx = (px(a) + px(b)) / 2 + (CX - (px(a) + px(b)) / 2) * 0.22;
+    const my = (py(a) + py(b)) / 2 + (CY - (py(a) + py(b)) / 2) * 0.22;
+    const at = (t: number) => {
+      const u = 1 - t;
+      return [u * u * px(a) + 2 * u * t * mx + t * t * px(b),
+              u * u * py(a) + 2 * u * t * my + t * t * py(b)] as const;
+    };
+    let s0 = 0, s1 = SAMPLES;
+    while (s0 < SAMPLES) { const [x, y] = at(s0 / SAMPLES); if (!inside(x, y, a)) break; s0++; }
+    // the head needs clearance for the marker itself, so the TIP touches the border
+    while (s1 > s0) { const [x, y] = at(s1 / SAMPLES); if (!inside(x, y, b, 1.2)) break; s1--; }
+    if (s1 <= s0) return null;
+    const pts: string[] = [];
+    for (let k = s0; k <= s1; k++) { const [x, y] = at(k / SAMPLES); pts.push(`${x.toFixed(2)},${y.toFixed(2)}`); }
+    return `M${pts.join(' L')}`;
+  };
+
   const exit = items.findIndex((x) => x.text === 'exit');
   return (
-    <div style={{display: 'flex', flex: 1, minHeight: 0, padding: `${4 * v.scale}px`}}>
-      <svg viewBox="0 0 100 78" preserveAspectRatio="xMidYMid meet"
+    <div style={{display: 'flex', flex: 1, minHeight: 0, padding: `${10 * v.scale}px`}}>
+      <svg viewBox="0 0 100 82" preserveAspectRatio="xMidYMid meet"
            style={{width: '100%', flex: 1, minHeight: 0}}>
         <defs>
-          <marker id="mcp-loop-arrow" viewBox="0 0 10 10" refX="8" refY="5"
+          <marker id="mcp-loop-arrow" viewBox="0 0 10 10" refX="9" refY="5"
                   markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
             <path d="M0,1 L9,5 L0,9 z" fill={hexA(v.a, 0.9)} />
           </marker>
@@ -710,12 +756,13 @@ export const AgenticLoop: React.FC<McpVizProps> = ({items, accent}) => {
         {items.map((_, i) => {
           const a = i, b = (i + 1) % n;
           const on = Math.min(liveAt(frame, items[a].atWord, 8), liveAt(frame, items[b].atWord, 8));
-          const mx = (px(a) + px(b)) / 2 + (CX - (px(a) + px(b)) / 2) * 0.22;
-          const my = (py(a) + py(b)) / 2 + (CY - (py(a) + py(b)) / 2) * 0.22;
+          const d = edgePath(a, b);
+          if (!d) return null;
           return (
-            <path key={`e${i}`} d={`M${px(a)},${py(a)} Q${mx},${my} ${px(b)},${py(b)}`}
+            <path key={`e${i}`} d={d}
               fill="none" stroke={on > 0.5 ? hexA(v.a, 0.9) : hexA(v.t.colors.text, 0.28)}
-              strokeWidth={on > 0.5 ? 0.8 : 0.5} markerEnd="url(#mcp-loop-arrow)" />
+              strokeWidth={on > 0.5 ? 0.8 : 0.5} strokeLinecap="round"
+              markerEnd="url(#mcp-loop-arrow)" />
           );
         })}
         {items.map((it, i) => {
@@ -723,17 +770,18 @@ export const AgenticLoop: React.FC<McpVizProps> = ({items, accent}) => {
           const p = pulseAt(frame, it.atWord);
           const isExit = i === exit;
           const col = isExit ? v.sem('green') : v.a;
-          const w = Math.max(15, (it.label ?? '').length * 1.5 + 5);
+          const w = wOf(i);
           return (
             <g key={i} opacity={0.32 + on * 0.68}>
-              <rect x={px(i) - w / 2} y={py(i) - 6 - p} width={w} height={12 + p * 2} rx={6}
+              <rect x={px(i) - w / 2} y={py(i) - H / 2 - p} width={w} height={H + p * 2}
+                rx={H / 2}
                 fill={hexA(col, on > 0.4 ? 0.4 : 0.08)}
                 stroke={hexA(col, on > 0.4 ? 1 : 0.4)} strokeWidth={on > 0.4 ? 0.75 : 0.5} />
-              <text x={px(i)} y={py(i) + 0.6} textAnchor="middle" fontSize={3.6} fontWeight={800}
+              <text x={px(i)} y={py(i) + FS * 0.36} textAnchor="middle" fontSize={FS} fontWeight={800}
                 fill={on > 0.4 ? '#fff' : hexA(v.t.colors.muted, 0.85)}
                 fontFamily={v.t.fonts.mono}>{it.label}</text>
               {it.sub ? (
-                <text x={px(i)} y={py(i) + 10} textAnchor="middle" fontSize={2.9}
+                <text x={px(i)} y={py(i) + H / 2 + 4.2} textAnchor="middle" fontSize={2.9}
                   fill={hexA(col, on > 0.5 ? 0.95 : 0.35)} fontFamily={v.t.fonts.mono}>{it.sub}</text>
               ) : null}
             </g>
@@ -742,7 +790,7 @@ export const AgenticLoop: React.FC<McpVizProps> = ({items, accent}) => {
         <text x={CX} y={CY - 2} textAnchor="middle" fontSize={4} fontWeight={800}
           fill={hexA(v.t.colors.text, 0.9)} fontFamily={v.t.fonts.mono}>the loop</text>
         <text x={CX} y={CY + 4} textAnchor="middle" fontSize={2.9}
-          fill={hexA(v.t.colors.muted, 0.9)} fontFamily={v.t.fonts.mono}>until no tool_use</text>
+          fill={hexA(v.t.colors.muted, 0.9)} fontFamily={v.t.fonts.mono}>until it answers</text>
       </svg>
     </div>
   );

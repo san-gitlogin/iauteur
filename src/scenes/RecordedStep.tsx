@@ -458,9 +458,16 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // NEVER START ABOVE THE GAP. Centring is right when the cluster fits; when it does not, the
   // overflow must go DOWN into whatever slack is left, never up onto the work. An estimate can
   // still be wrong — this makes being wrong harmless in the direction that matters.
+  // NOTHING SITS FLUSH AGAINST THE FRAME. Owner, 2026-09-05: *"positioning them is also
+  // not right, you are positioning it at the very bottom without any gap from bottom."*
+  // The floor was 20 * scale — under 2% of a 1080 frame — so whenever the cluster filled its
+  // band the card landed effectively on the edge. The card's own gutter elsewhere in this
+  // component is `pad = 42 * scale`; the frame edge deserves at least that, and a little
+  // more at the bottom where a card reads as "falling off" rather than "docked".
+  const EDGE_MIN = 48 * scale;
   const clusterInset = hasGap
-    ? Math.max(gapTop + 6 * scale, gapTop + (gapH - clusterH) / 2)
-    : Math.max(20 * scale, (band - clusterH) / 2);
+    ? Math.max(gapTop + 14 * scale, gapTop + (gapH - clusterH) / 2)
+    : Math.max(EDGE_MIN, (band - clusterH) / 2);
 
   // ── WHEN IS THE CARD THE SUBJECT, AND HOW MUCH? ─────────────────────────────
   //
@@ -504,9 +511,23 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     const authored = at.filter((f) => Math.abs(f - st) > 2);
 
     if (authored.length) {
+      // AN OVERLAY IS READ, SO IT IS HELD. Owner, 2026-09-05: *"the component overlay
+      // displayed with components are just displayed just for a second which is hard for
+      // viewer to catch."* Measured on that cut: an overlay with one authored anchor got
+      // `last + 40` frames with a floor of 60 — and the card fades in over 14 and out over
+      // 12, so what remained fully legible was about 1.1 SECONDS for a depiction the viewer
+      // is supposed to study. This is the same arithmetic as check-holds.mjs applies to a
+      // clip: arriving on the right word is not the same as being readable.
+      //
+      // 110 after the last anchor, floor 150 total: ~3.7s of steady card after the fades,
+      // still bounded by the next clip so it can never run over the following step.
+      const TAIL_AFTER_LAST = 110;
+      const MIN_WINDOW = 150;
+      const CLEAR_BEFORE_NEXT = 20;
       const on = Math.max(st, Math.min(...authored) - 10);
-      const off = Math.min(nx, Math.max(...authored) + 40);
-      return {on, off: Math.max(on + 60, off), owns: !!ov};
+      const room = Math.max(nx - CLEAR_BEFORE_NEXT, on + 60);
+      const off = Math.min(room, Math.max(on + MIN_WINDOW, Math.max(...authored) + TAIL_AFTER_LAST));
+      return {on, off, owns: !!ov};
     }
     // THE DEFAULT: appear when the footage freezes, leave before the next step.
     const settle = st + Math.max(0, Number(c0.frames ?? 0) - 2);

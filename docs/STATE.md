@@ -111,6 +111,42 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-09-05 — the MCP course, rebuilt for a beginner (75 scenes, ~36 min)
+
+Owner watched the 21-minute cut and gave fourteen corrections. The short version: it was
+*shown* properly and *explained* too fast. `topics/code-an-ai-agent-with-mcp` is now a
+**masterclass-format course** — 75 scenes, 6,751 words — and the runtime is deliberately
+unconstrained (see the new CLAUDE.md corollary: the title rounds up afterwards).
+
+**What changed, and why**
+
+| owner said | what it became |
+|---|---|
+| *"not at all beginner friendly… not explaining it line by line"* (agent.py) | chapter 8 went from 6 beats to 14. `async`/`await`, `stdin`/`stdout`, context managers, list comprehensions, f-strings and `json.loads` are each defined the first time they appear |
+| *"I was clueless on what, and why it was needed"* (stdio) | a dedicated beat: every program is born with two pipes, and that is the whole connection |
+| *"show if the api server is running… open the /docs"* | **a new browser recording**, `demos/mcp-docs.json` → `public/rec/mcp-docs` (20 steps). Swagger UI, Try it out, Execute, and real responses — including `/checkout` returning a live 500 |
+| *"highlight the response from AI… they have programmed their application which is now AI capable"* | the payoff beat names it outright, with a callout on the model's own paragraph |
+| *"explain how it is cross functional… any AI model can connect"* | a new `MCP_MESH` beat: server.py names no model and holds no key, so Claude Desktop / an editor / our agent all pick it up unchanged |
+| *"overlay… displayed just for a second"* | `cardWindow` gave an authored overlay `last + 40` frames, floor 60 — about **1.1s legible** after the fades. Now `+110`, floor 150 |
+| *"positioning… at the very bottom without any gap"* | `clusterInset` floored at `20 * scale`, under 2% of a 1080 frame. Now `EDGE_MIN = 48 * scale` |
+| *"agent loop… proper padding… arrows must not go inside the container"* | `AgenticLoop` rewritten: pill width measured from the mono advance (it was `len*1.5+5` while the text needed `len*2.16`, so labels hung outside their own pills), and every edge is now trimmed by sampling the Bézier against the node rect so the arrowhead touches the border |
+| *"say pause here… genuine places"* | five pause invitations, roughly one per chapter |
+| *"running too fast"* elsewhere | uv, the six libraries, `line.split()`, unpacking and `Counter` all explained; the setup and traffic beats split in two |
+
+**The over-reliance cap fired again, and the answer was the same one.** 27 recorded beats
+needs 75+ scenes. Fifteen drawn teaching beats went in rather than merging footage — status
+codes, HTML vs JSON, uvicorn vs FastAPI, the orders table, by-hand vs decorator, the three
+primitives, where the key lives, what a tool can do to your machine, the end-to-end journey,
+what failure should return, and what the project looks like at fifty tools.
+
+**Format note:** `meta.screenplay` is now `masterclass` (60–240 scenes) rather than
+`documentary` (28–60). The owner's best-performing video is the uv course, which is exactly
+this shape.
+
+**Still owed:** carrying the camera between clips so a zoom does not pull out and back in
+across a clip boundary (owner marked it low priority); a general scan for fixed frame
+intervals inside explanatory components (LAW 0i.1 — `Pipeline.tsx` is a known offender).
+
 ### 2026-09-04 — coding an AI agent with MCP, and a cushion that covered half its job
 
 `topics/code-an-ai-agent-with-mcp` — 50 scenes, ~21:15, built from `briefs/mcpagent/build.mjs`
