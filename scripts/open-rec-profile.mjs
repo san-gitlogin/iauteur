@@ -73,7 +73,26 @@ try {
     ...(channel ? {channel} : {}),
     viewport: {width: 1600, height: 900},
     deviceScaleFactor: DSF,
-    args: ['--force-device-scale-factor=' + DSF, '--high-dpi-support=1'],
+    // A CHALLENGE THAT NEVER PASSES IS A CHALLENGE THAT CAN SEE THE AUTOMATION.
+    //
+    // Observed: reddit.com cleared on the first try, openai.com "again and again looping to
+    // check". That asymmetry is the tell. Cloudflare reads `navigator.webdriver` and the
+    // --enable-automation banner flag; when it finds them it re-issues the interstitial
+    // forever instead of ever accepting, so a human can sit there clicking indefinitely.
+    //
+    // This does not defeat the check — a person still has to pass it, by hand, in a visible
+    // window. It removes the signals that stop the check from ever COMPLETING for them.
+    ignoreDefaultArgs: ['--enable-automation'],
+    args: [
+      '--force-device-scale-factor=' + DSF,
+      '--high-dpi-support=1',
+      '--disable-blink-features=AutomationControlled',
+    ],
+  });
+  // navigator.webdriver is set by the driver itself, after the flags, so it needs deleting
+  // in every document rather than arguing with a launch argument.
+  await ctx.addInitScript(() => {
+    Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
   });
 } catch (e) {
   const msg = String(e?.message ?? e);

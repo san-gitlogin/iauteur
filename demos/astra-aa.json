@@ -1,0 +1,38 @@
+{
+  "slug": "astra-aa",
+  "surface": "browser",
+  "theme": "light",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 0,
+  "quality": 96,
+  "crf": 18,
+  "preset": "slow",
+  "fps": 30,
+  "prep": {
+    "url": "https://artificialanalysis.ai/models/releases/gpt-6-astra",
+    "dismiss": ["Reject all cookies", "Accept all cookies", "Accept"],
+    "settleMs": 3500
+  },
+  "steps": [
+    {
+      "id": "open",
+      "action": "expect",
+      "text": "GPT-6 Astra",
+      "label": "the independent scoreboard",
+      "holdMs": 1600
+    },
+    {
+      "id": "index",
+      "action": "scroll",
+      "by": 700,
+      "label": "the intelligence index, by reasoning effort",
+      "marks": [
+        {"id": "max", "text": "GPT-6 Astra (max)"},
+        {"id": "low", "text": "GPT-6 Astra (low)"}
+      ],
+      "holdMs": 2000
+    }
+  ],
+  "maxHoldMs": 1600
+}

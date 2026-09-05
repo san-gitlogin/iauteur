@@ -1,0 +1,19 @@
+{
+  "slug": "astra-abyssal",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 0,
+  "quality": 96,
+  "crf": 18,
+  "preset": "slow",
+  "fps": 30,
+  "reducedMotion": false,
+  "prep": {"url": "https://abyssal-living-deep.netlify.app", "settleMs": 6000},
+  "steps": [
+    {"id": "world", "action": "expect", "text": "ABYSSAL",
+     "label": "a thing somebody actually built with it", "holdMs": 4000}
+  ],
+  "maxHoldMs": 4000
+}

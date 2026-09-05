@@ -297,3 +297,31 @@ NOBODY in the coverage put 62.7% next to 100%. That is the video's spine.
 Astra row: $10.00 in / $50.00 out / $1.00 cache read · a provider row showed 4.77s, 50 tps, 99.99%
 Other rows on the page carry $20/$100 and $5/$25 models for comparison. The page also shows
 per-provider latency/throughput/uptime. Use it for the "what it costs in practice" beat.
+
+---
+# 17. ARC-AGI-3 TABLE — EXACT, read off the live DOM 2026-09-05 (supersedes the scrape in §15)
+| effort | Standard harness | Provider Adapter harness |
+|---|---|---|
+| max    | **62.7%, $26,098** | 98.6%, $17,332 |
+| xhigh  | 59.3%, $37,317 | 98.4%, $18,147 |
+| high   | 54.8%, $40,705 | **99.9%, $18,817** |
+| medium | 38.6%, $48,090 | 98.4%, $19,285 |
+| low    | 17.5%, $38,166 | 98.0%, $21,298 |
+| none   | 35.2%, $49,791 | 96.7%, $23,457 |
+Verbatim on the page: "scores 62.7% on ARC-AGI-3 Semi-Private" and "solve 100% of the environments".
+
+# 18. AA INTELLIGENCE INDEX — READ OFF THE RECORDED FRAME (astra-aa seg-02)
+Chart title "Artificial Analysis Intelligence Index", v4.2, "23 of 643 models".
+Bar values, left to right, highest first:
+  **Claude Fable 5.1 (max, with fallback) 57**  <- LEADS
+  GPT-6 Astra (max) 55 · GPT-6 Astra (xhigh) 54 · Claude Opus 5 (max) 54
+  Claude Opus 5 (xhigh) 53 · GPT-6 Astra (high) 53 · Claude Fable 5 (with fallback) 53
+  Muse Spark 1.3 (max) 53 · GPT-6 Astra (medium) 52 · Claude Opus 5 (high) 52
+  Muse Spark 1.3 (high) 52 · GPT-5.6 Sol (max) 51 · Grok 4.6 (high) 51
+  Kimi K3 (max) 50 · GPT-5.6 Sol (xhigh) 50 · Claude Opus 5 (medium) 50
+  GPT-6 Astra (low) 49 · GLM-5.3 (high) 49 · GPT-5.6 Sol (high) 48
+  GPT-6 Astra (Non-reasoning) 48 · Gemini 3.8 Flash (high) 47 · Qwen3.8 Max 47
+  Muse Spark 1.2 (high) 47
+Also on that frame: "For output speed, the fastest model is GPT-6 Astra (max) at 63 t/s."
+Knowledge cutoff Apr 30, 2026 · Context window 1M.
+*** This CONFIRMS ON CAMERA, from the neutral scoreboard, that Fable 5.1 leads Astra. ***

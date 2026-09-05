@@ -1,4 +1,9 @@
 # Pages that will not serve an automated browser: a human clears the check once here,
 # and the recorder reuses the profile. See scripts/open-rec-profile.mjs.
+#
+# reddit  — cleared 2026-09-05, cookies saved.
+# openai  — a cf_clearance cookie exists but has not been verified yet.
+# medium  — started clean, then Cloudflare-blocked after repeated automated fetches
+#           ("Sorry, you have been blocked"). Needs a human pass like the others.
 https://openai.com/index/gpt-6-astra/
-https://www.reddit.com/r/developersIndia/comments/1w6x5eq/gpt_6o_astra_is_insanely_good_good_alternative/
+https://medium.com/@unicodeveloper/gpt-6-astra-a-taste-of-agi-938515afc5c7

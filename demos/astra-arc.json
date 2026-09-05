@@ -1,0 +1,31 @@
+{
+  "slug": "astra-arc",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 0,
+  "quality": 96,
+  "crf": 18,
+  "preset": "slow",
+  "fps": 30,
+  "prep": {"url": "https://arcprize.org/blog/astra", "settleMs": 3000,
+           "dismiss": ["Reject all cookies", "Accept all cookies", "Accept"]},
+  "steps": [
+    {"id": "open", "action": "expect", "text": "GPT-6 Astra on ARC-AGI-3",
+     "label": "ARC Prize's own write-up", "holdMs": 1600},
+    {"id": "human", "action": "scroll", "by": 620,
+     "label": "what a person scores on the same test",
+     "marks": [{"id": "humans", "text": "solve 100% of the environments"}],
+     "holdMs": 2400},
+    {"id": "table", "action": "scroll", "by": 900,
+     "label": "the same model, two harnesses",
+     "marks": [{"id": "standard", "text": "62.7%, $26,098"}],
+     "holdMs": 2600},
+    {"id": "adapter", "action": "scroll", "by": 0,
+     "label": "and the number everyone quoted",
+     "marks": [{"id": "adapter", "text": "99.9%, $18,817"}],
+     "holdMs": 2600}
+  ],
+  "maxHoldMs": 1600
+}

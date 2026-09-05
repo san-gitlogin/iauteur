@@ -1,0 +1,23 @@
+{
+  "slug": "astra-openrouter",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 0,
+  "quality": 96,
+  "crf": 18,
+  "preset": "slow",
+  "fps": 30,
+  "prep": {"url": "https://openrouter.ai/openai/gpt-6-astra", "settleMs": 3000,
+           "dismiss": ["Reject all cookies", "Accept all cookies", "Accept"]},
+  "steps": [
+    {"id": "open", "action": "expect", "text": "OpenAI: GPT-6 Astra",
+     "label": "what it costs to actually call it", "holdMs": 1800,
+     "marks": [{"id": "price", "text": "$10 / $50"}]},
+    {"id": "providers", "action": "scroll", "by": 500,
+     "label": "who serves it, and how fast",
+     "holdMs": 2200}
+  ],
+  "maxHoldMs": 1600
+}
