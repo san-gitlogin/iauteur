@@ -26,7 +26,7 @@
         "arc-agi-3",
         "ai benchmarks"
       ],
-      "pinned": "Full breakdown on the channel — every figure read off its source page on camera.",
+      "pinned": "Full breakdown on the channel, every figure read off its source page. Which number had you seen before — 99.9%, or 62.7%?",
       "sources": [
         "ARC Prize — OpenAI's GPT-6 Astra on ARC-AGI-3 — https://arcprize.org/blog/astra",
         "OpenAI — GPT-6 Astra — https://openai.com/index/gpt-6-astra/"
@@ -47,6 +47,8 @@
       "id": "s01",
       "type": "HOOK",
       "narration": "Everyone printed that GPT-6 Astra scored ninety-nine point nine percent. Nobody printed the other number.",
+      "durationFrames": 239,
+      "timingSource": "tts",
       "transition": "fade",
       "background": "zoneA",
       "data": {
@@ -54,14 +56,17 @@
         "subtext": "and the number nobody printed",
         "heroAsset": "si:openai",
         "hookVariant": "figure",
-        "headlineAtWord": 5,
-        "heroAtWord": 3
-      }
+        "headlineAtWord": 6,
+        "heroAtWord": 2.25
+      },
+      "audio": "audio/gpt-6-astra-shorts_s01.mp3"
     },
     {
       "id": "s02",
       "type": "ASTRA_STAGE",
       "narration": "That score came from ARC-AGI-3, a test built to measure how far models still are from us. Run on the neutral harness, the same model on the same day scored sixty-two point seven — for twenty-six thousand dollars.",
+      "durationFrames": 421,
+      "timingSource": "tts",
       "transition": "push",
       "background": "zoneB",
       "data": {
@@ -78,7 +83,7 @@
               "text": "62.7%",
               "detail": "$26,098",
               "sub": "notes written in the open",
-              "atWord": 21
+              "atWord": 16.583
             },
             {
               "label": "Provider Adapter",
@@ -86,16 +91,19 @@
               "detail": "$18,817",
               "sub": "private state kept between turns",
               "win": true,
-              "atWord": 2
+              "atWord": 1
             }
           ]
         }
-      }
+      },
+      "audio": "audio/gpt-6-astra-shorts_s02.mp3"
     },
     {
       "id": "s03",
       "type": "RECORDED_STEP",
-      "narration": "It is on ARC Prize's own page, in one sentence. Both numbers, both costs.",
+      "narration": "Both numbers sit on ARC Prize's own page, in a single sentence, with the cost of each one beside it.",
+      "durationFrames": 205,
+      "timingSource": "tts",
       "transition": "zoom",
       "background": "zoneC",
       "data": {
@@ -117,7 +125,7 @@
               "zooms": [
                 {
                   "mark": "standard",
-                  "atWord": 6
+                  "atWord": 10
                 }
               ],
               "id": "table",
@@ -344,20 +352,25 @@
                   "h": 18
                 }
               ],
-              "shows": "Standard harness"
+              "shows": "Standard harness",
+              "atWord": 2.417
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
-      }
+      },
+      "audio": "audio/gpt-6-astra-shorts_s03.mp3"
     },
     {
       "id": "s04",
       "type": "ASTRA_STAGE",
       "narration": "And the same page says humans solve one hundred percent of those environments, for about twelve dollars seventy-eight a game. Astra is impressive. It is not a person yet.",
+      "durationFrames": 308,
+      "timingSource": "tts",
       "transition": "dip",
       "background": "zoneA",
       "data": {
@@ -373,31 +386,35 @@
               "value": 100,
               "text": "$12.78",
               "win": true,
-              "atWord": 6
+              "atWord": 3.583
             },
             {
               "label": "Astra · standard",
               "value": 62.7,
               "text": "$26,098",
               "color": "orange",
-              "atWord": 21
+              "atWord": 16
             }
           ],
           "verdict": "Humans: 100%, for about $12.78",
-          "verdictAtWord": 23
+          "verdictAtWord": 17.833
         }
-      }
+      },
+      "audio": "audio/gpt-6-astra-shorts_s04.mp3"
     },
     {
       "id": "s05",
       "type": "OUTRO_CTA",
       "narration": "The full breakdown is on the channel — every number checked against its source.",
+      "durationFrames": 140,
+      "timingSource": "tts",
       "transition": "fade",
       "background": "zoneB",
       "data": {
         "message": "Full breakdown on the channel",
         "sub": "every number checked at source"
-      }
+      },
+      "audio": "audio/gpt-6-astra-shorts_s05.mp3"
     }
   ]
 }

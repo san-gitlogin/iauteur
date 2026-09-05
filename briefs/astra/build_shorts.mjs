@@ -18,8 +18,16 @@ const at = (narration, word, nth = 1) => {
 const TRANS = ['fade', 'push', 'zoom', 'dip'];
 const BG = ['zoneA', 'zoneB', 'zoneC'];
 let i = 0;
+// EVERY SCENE CARRIES A DURATION FROM THE START. A scene with none leaves the composition
+// at NaN frames, and Remotion throws while BUILDING THE ROOT — which takes the wide cut down
+// with it, even though nothing is wrong with the wide cut. Estimated here at the measured
+// Ava rate and overwritten by sync.mjs from the real audio.
+const WORDS_PER_SEC = 3.05;
 const scene = (type, narration, data) => {
+  const words = narration.split(/\s+/).filter(Boolean).length;
   const s = {id: `s${String(i + 1).padStart(2, '0')}`, type, narration,
+             durationFrames: Math.round((words / WORDS_PER_SEC) * 30) + 26,
+             timingSource: 'estimated',
              transition: TRANS[i % TRANS.length], background: BG[i % BG.length], data};
   i++;
   return s;
@@ -50,7 +58,7 @@ scenes.push(scene('HOOK',
 }
 
 scenes.push(scene('RECORDED_STEP',
-  "It is on ARC Prize's own page, in one sentence. Both numbers, both costs.",
+  "Both numbers sit on ARC Prize's own page, in a single sentence, with the cost of each one beside it.",
   {recordedStep: {
     caption: 'both numbers, one sentence',
     premise: "ARC Prize's report on GPT-6 Astra.",
@@ -100,7 +108,7 @@ const spec = {
         'neutral harness, the same day. Humans solve 100% of those environments for about $12.78.',
       queries: ['gpt-6 astra arc-agi-3', 'gpt-6 astra benchmark', 'is gpt-6 astra agi'],
       tags: ['gpt-6 astra', 'openai', 'arc-agi-3', 'ai benchmarks'],
-      pinned: 'Full breakdown on the channel — every figure read off its source page on camera.',
+      pinned: 'Full breakdown on the channel, every figure read off its source page. Which number had you seen before — 99.9%, or 62.7%?',
       sources: [
         "ARC Prize — OpenAI's GPT-6 Astra on ARC-AGI-3 — https://arcprize.org/blog/astra",
         'OpenAI — GPT-6 Astra — https://openai.com/index/gpt-6-astra/',
