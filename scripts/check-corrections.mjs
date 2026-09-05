@@ -204,6 +204,20 @@ const CORRECTIONS = [
    'eleven clips solved clean and failed the linter after sync, nine by <12 frames',
    () => has('scripts/lib/record/anchors.mjs', 'RATE_SLIP') &&
          has('scripts/lib/record/anchors.mjs', 'LOCAL_CUSHION')],
+  ['footage too soft to survive its own zoom', 'SEAL',
+   '"the recording is just sitting at 1080p or 720p or even less" / "even zooming in, panning in does not degrade the quality of my video"',
+   () => has('scripts/check-recordings.mjs', 'SOFT ZOOM') &&
+         has('scripts/check-recordings.mjs', 'required master width') &&
+         fs.existsSync('scripts/test-rec-zoomres.mjs')],
+  ['the browser surface capturing at exactly the delivery size', 'STRUCT',
+   '"why do I see the browser window cut" / a camera move on a 1920 master is an upscale, not a supersample',
+   () => has('scripts/lib/record/browser.mjs', 'deviceScaleFactor \\?\\? 4') &&
+         has('scripts/lib/record/browser.mjs', 'force-device-scale-factor') &&
+         has('scripts/lib/record/browser.mjs', 'CHROME SILENTLY CAPS THE FACTOR AT 2')],
+  ['the encoder throwing away the pixels a zoom needs', 'STRUCT',
+   'capture.mjs downscaled every segment to 1920 and called it a supersample',
+   () => has('scripts/lib/record/capture.mjs', 'MASTER WIDTH IS A MEASUREMENT, NOT A CONSTANT') &&
+         has('scripts/lib/record/capture.mjs', 'masterWidth')],
 ];
 
 let missing = [];

@@ -69,11 +69,30 @@ export const setupBrowser = async (demo) => {
   // site was designed around, so nothing reflows or clips — and renders at 1.2x device
   // pixels, so the screencast comes out at a native 1920x1080 with no resampling at all.
   // Sharp AND full-frame, instead of choosing.
+  //
+  // AMENDED 2026-09-05 — 1.2 WAS ONLY EVER RIGHT FOR A CAMERA THAT NEVER MOVES.
+  // Owner: *"even zooming in, panning in does not degrade the quality of my video."*
+  // dsf 1.2 lands the capture at exactly 1920x1080, so a beat framed on the whole page is
+  // pixel-perfect — and that is the only beat it is right for. `RecordedStep` frames a mark
+  // with `winW = max(bw*1.08, capW/3.2)`, so the tightest window the pipeline can ask for is
+  // capW/3.2 and the camera stretches the master to `capW * (stageW / view.w)`. At 1600 CSS
+  // wide that is a 3.2x blow-up of a 1920 master — 6144 delivered pixels drawn from 1920.
+  // No encoder setting recovers that; the pixels were never captured.
+  //
+  // So the factor is DERIVED from the deepest zoom, not chosen:
+  //     dsf = (deepest zoom) x (delivery width) / (CSS viewport width)
+  //         = 3.2 x 1920 / 1600 = 3.84  ->  4
+  // Measured cost on a dense page (artificialanalysis.ai, 1.6s take): 108KB at 1920,
+  // 204KB at native 3200. Bytes were never the constraint; the downscale was.
   const viewport = demo.viewport ?? {width: 1600, height: 900};
-  const dsf = demo.deviceScaleFactor ?? 1.2;
+  const dsf = demo.deviceScaleFactor ?? 4;
   const browser = await chromium.launch({
     headless: demo.headless ?? true,
-    args: ['--hide-scrollbars'],
+    // WITHOUT THESE, CHROME SILENTLY CAPS THE FACTOR AT 2. Measured: a context asking for
+    // dsf 4 produced 3200x1800 frames (i.e. dsf 2) until the flags were passed, so the
+    // capture quietly ignored the setting and nothing reported it. The VS Code surface has
+    // passed them since it was fixed; this surface never did.
+    args: ['--hide-scrollbars', `--force-device-scale-factor=${dsf}`, '--high-dpi-support=1'],
   });
   const ctx = await browser.newContext({
     viewport,

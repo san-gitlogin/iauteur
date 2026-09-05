@@ -90,7 +90,8 @@ export const startCapture = async (page, {dir, quality = 92, maxWidth, maxHeight
  * Build one CFR segment. Returns {out, frames, fps, source} or throws with a reason.
  * `t0`/`t1` are wall-clock ms.
  */
-export const writeSegment = ({frames, dir, t0, t1, out, fps = 30, minFrames = 2, maxHoldMs = 1200}) => {
+export const writeSegment = ({frames, dir, t0, t1, out, fps = 30, minFrames = 2, maxHoldMs = 1200,
+                             masterWidth = 1920, crf = 20, preset = 'veryfast'}) => {
   if (!frames.length) throw new Error('No captured frames — was the screencast started?');
   const durMs = t1 - t0;
   if (durMs <= 0) throw new Error(`Segment has non-positive duration (${durMs}ms)`);
@@ -162,7 +163,7 @@ export const writeSegment = ({frames, dir, t0, t1, out, fps = 30, minFrames = 2,
     // frames — measured 32 out for a 30-frame plan. Pin the count explicitly.
     '-frames:v', String(count2),
     '-vsync', 'cfr', '-r', String(fps),
-    '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20',
+    '-c:v', 'libx264', '-preset', preset, '-crf', String(crf),
     '-pix_fmt', 'yuv420p',
     // even dimensions are required by yuv420p; screen captures are often odd-sized
     // DOWNSCALE TO THE DELIVERY SIZE, ONCE, HERE.
@@ -174,7 +175,24 @@ export const writeSegment = ({frames, dir, t0, t1, out, fps = 30, minFrames = 2,
     // 3200 -> 1920 is a DOWNscale, which is sharper than the 1600 -> 1920 upscale this
     // replaced. Anything already at or below 1920 wide is left exactly as it is, so terminal
     // and editor captures are untouched.
-    '-vf', "scale='if(gt(iw,1920),1920,trunc(iw/2)*2)':'if(gt(iw,1920),-2,trunc(ih/2)*2)':flags=lanczos",
+    // MASTER WIDTH IS A MEASUREMENT, NOT A CONSTANT (owner, 2026-09-05: *"even zooming in,
+    // panning in does not degrade the quality"*).
+    //
+    // The old code pinned this at 1920 and called the result a supersample. It IS one — but
+    // only for a beat whose camera never moves. `RecordedStep` computes `k = stageW / view.w`
+    // and stretches the segment to `capW * k`, so a zoom onto the pipeline's tightest window
+    // (`capW / 3.2`) blows a 1920 master up to 6144px: a 3.2x UPSCALE of an already-resampled
+    // image. That is the softness, and no encoder setting can undo it — the pixels are gone
+    // before the renderer ever sees them.
+    //
+    // So the master keeps whatever resolution the zoom plan actually needs.
+    //   masterWidth = N  -> downscale to N when wider (lanczos), pass through when not
+    //   masterWidth = 0  -> keep native capture resolution, only rounding to even dimensions
+    // Anything at or below the target is still left exactly as it is, so terminal and editor
+    // captures are untouched.
+    '-vf', masterWidth
+      ? `scale='if(gt(iw,${masterWidth}),${masterWidth},trunc(iw/2)*2)':'if(gt(iw,${masterWidth}),-2,trunc(ih/2)*2)':flags=lanczos`
+      : "scale='trunc(iw/2)*2':'trunc(ih/2)*2'",
     outAbs,
   ], {cwd: dir, stdio: ['ignore', 'ignore', 'inherit']});
 

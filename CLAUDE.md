@@ -943,6 +943,60 @@ Two separate causes, both in the recorder, both invisible in code review:
 defects came from treating a capture as a sequence of screenshots that happen to be stored
 in an mp4. Ask of every recorder action: *what does this look like at 30 frames a second?*
 
+### Corollary — THE MASTER MUST OUTLIVE THE ZOOM (owner, 2026-09-05)
+
+Owner: *"When you are recording the browser, your recording is just sitting at 1080p or 720p
+or even less. recently I asked for an improvement but i still see degraded quality in the
+final video... I would like to see an optimal difference in clarity so that even zooming in,
+panning in does not degrade the quality of my video."*
+
+**The corollary directly above this one is where the mistake was made.** It concluded that
+`3200 -> 1920` is "a supersample, sharper than either" — and that is true for exactly one
+kind of beat: one whose camera never moves. `RecordedStep` frames a target with
+`winW = max(bw*1.08, capW / 3.2)` and then stretches the master to `capW * (stageW / view.w)`,
+so the tightest window the pipeline can ask for is a **3.2x push**. A 1920 master delivered
+into that window is 6144 painted pixels drawn from 1920 — and no encoder setting recovers it,
+because the pixels were discarded before the renderer ever ran.
+
+**The number is derived, not chosen:**
+
+    required master width = (deepest zoom) x (delivery width)
+                          = 3.2 x 1920 = 6144   ->  dsf 3.84 on a 1600px viewport  ->  4
+
+Two independent bugs produced the complaint, and BOTH were silent — valid manifest, green
+linter, clean render:
+
+1. **`capture.mjs` hard-downscaled every segment to 1920.** Parameterised now
+   (`masterWidth`, `0` = keep native); `crf` and `preset` came with it.
+2. **`browser.mjs` defaulted to `deviceScaleFactor: 1.2`** — landing at exactly 1920x1080,
+   i.e. the delivery size, which is the worst possible choice for a camera that moves — and
+   omitted Chrome's high-DPI flags. **Without `--force-device-scale-factor`, Chrome silently
+   caps the factor at 2:** a context asking for 4 produced 3200x1800 frames and reported
+   success. The VS Code surface has passed those flags since it was fixed; this one never did.
+
+**Measured, on artificialanalysis.ai (dense type + charts), a 1.6s take:**
+
+| master | SSIM vs truth | PSNR | file |
+|---|---|---|---|
+| 1920 (the old default) | 0.969 | **24.70 dB** | 108 KB |
+| 3200 (dsf 2, native) | 0.985 | 28.16 dB | 204 KB |
+| 6400 (dsf 4, native) | ground truth | — | 536 KB |
+
+**Bytes were never the constraint** — the entire recording library was 39 MB, and 24.70 dB is
+plainly visible degradation. The constraint was a constant nobody had questioned.
+
+**Enforced.** `check-recordings.mjs` computes, per clip, the zoom the spec actually authors
+and the master width that zoom requires, then measures the file: **SOFT ZOOM** is fatal for
+the topic being rendered (`--slug`, which `render-topic.mjs` runs) and a notice repo-wide,
+because 174 clips across already-shipped cuts carry the defect and a permanently-red gate is
+one you learn to ignore. `scripts/test-rec-zoomres.mjs` break-tests it in BOTH directions —
+a guard that always fires is as useless as one that never does.
+
+**Geometry is unaffected, and this was verified rather than assumed.** Marks, bboxes and ink
+are all measured in CSS pixels (`bake-rec` writes `capture` from the manifest VIEWPORT), so
+the mp4's own dimensions enter no calculation. The same page recorded at dsf 1.2, 2 and 4
+produced byte-identical `bbox` `{0,0,1600,900}` and an identical 48-rect ink set.
+
 ### Corollary — FIVE OF THE SAME CARD IS NOT A DESIGN (owner, 2026-09-03)
 
 Owner, on the pricing beat: *"this one too. Not a graph but something different. I need

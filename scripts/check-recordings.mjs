@@ -53,6 +53,62 @@ if (fs.existsSync('topics')) {
   }
 }
 
+const probeWidth = (file) => {
+  try {
+    const out = execFileSync('ffprobe',
+      ['-v', 'error', '-select_streams', 'v:0',
+       '-show_entries', 'stream=width', '-of', 'csv=p=0', file]).toString().trim();
+    return Number(out.split(/\r?\n/)[0]);
+  } catch { return null; }
+};
+
+// THE MASTER MUST OUTLIVE THE ZOOM (owner, 2026-09-05: *"even zooming in, panning in does
+// not degrade the quality of my video"*).
+//
+// Two bugs put soft footage on screen and NOTHING reported either one:
+//   1. capture.mjs downscaled every segment to 1920, which is a supersample only for a
+//      camera that never moves;
+//   2. browser.mjs asked for deviceScaleFactor 1.2 (i.e. exactly 1920) and omitted Chrome's
+//      high-DPI flags, so even an explicit request for dsf 4 was SILENTLY capped at 2.
+// Both produced a valid manifest, a green linter and a clean render.
+//
+// `RecordedStep` frames a target with `winW = max(bw*1.08, capW / 3.2)` and then stretches
+// the master to `capW * (stageW / view.w)`. So a clip's deepest authored zoom fixes exactly
+// how many real pixels its master must carry:
+//
+//     required master width = (capW / winW) x 1920
+//
+// Below that the renderer is upscaling and the sharpness is gone before it starts. This is
+// the arithmetic, run against the artefact — never against the setting we asked for.
+const DELIVERY_W = 1920;   // wide cut. 9:16 delivers 1080 wide at a 4.2 divisor => less demanding.
+const TIGHTEST = 3.2;      // RecordedStep's wide, non-split, non-gentle divisor.
+
+const zoomFactorFor = (clip, capW) => {
+  const rectOf = (z) => {
+    if (z.at === 'full') return null;
+    if (z.marks?.length) {
+      const rs = z.marks.map((m) => clip.marks?.[m]).filter(Boolean);
+      if (!rs.length) return null;
+      const x = Math.min(...rs.map((r) => Number(r.x)));
+      const x1 = Math.max(...rs.map((r) => Number(r.x) + Number(r.w)));
+      return {w: x1 - x};
+    }
+    if (z.mark) return clip.marks?.[z.mark] ?? null;
+    return clip.bbox ?? null;
+  };
+  // A clip with `focus` and no authored zooms is still punched in by the default path.
+  const entries = (clip.zooms ?? []).length ? clip.zooms : (clip.focus ? [{}] : []);
+  let worst = 1;
+  for (const z of entries) {
+    const r = rectOf(z);
+    const bw = r ? Number(r.w) : capW;
+    if (!Number.isFinite(bw) || bw <= 0) continue;
+    const winW = Math.max(bw * 1.08, capW / TIGHTEST);
+    worst = Math.max(worst, capW / winW);
+  }
+  return worst;
+};
+
 const probeFrames = (file) => {
   try {
     const out = execFileSync('ffprobe',
@@ -63,6 +119,12 @@ const probeFrames = (file) => {
 };
 
 const problems = [];
+// SOFT ZOOM is scoped like absent footage: FATAL for the topic you are about to render
+// (--slug), a NOTICE for the repo-wide sweep. 174 clips across already-shipped cuts carry
+// this defect; failing the whole gate on them would make `npm run gate` permanently red,
+// which is precisely the "gate you learn to ignore" docs/STATE.md warns about. The footage
+// that ships NEXT is the footage that has to be right.
+const softZoom = [];
 // A recording whose public/rec/<slug>/ is not on this machine is a DIFFERENT condition from
 // a spec defect, and conflating them made `npm run gate` permanently red on a fresh clone —
 // which is the "gate you learn to ignore" that docs/STATE.md warns about in its own
@@ -142,6 +204,29 @@ for (const sp of specs) {
           `${sp}: STALE — clip "${clip.id ?? clip.src}" was baked at ${clip.frames} frames, the file has ${real}\n` +
           `      fix: node scripts/bake-rec.mjs ${sp}` +
           (demoBySlug.has(slug) ? `   (or re-record: npm run record -- ${demoBySlug.get(slug)})` : ''));
+      }
+
+      // ── THE MASTER MUST OUTLIVE THE ZOOM ────────────────────────────────────
+      // Measured, per clip, against the file on disk. See the note on `zoomFactorFor`.
+      const capW = Number(scene?.data?.recordedStep?.capture?.width ?? 0);
+      if (capW > 0) {
+        const zf = zoomFactorFor(clip, capW);
+        if (zf > 1.01) {
+          const haveW = probeWidth(abs);
+          const needW = Math.ceil((zf * DELIVERY_W) / 2) * 2;
+          if (haveW != null && haveW < needW) {
+            const slug = String(clip.src).split('/')[1];
+            const dsf = Math.ceil((needW / capW) * 100) / 100;
+            softZoom.push(
+              `${sp}: SOFT ZOOM — clip "${clip.id ?? clip.src}" zooms ${zf.toFixed(2)}x, so the ` +
+              `renderer stretches its master to ${needW}px, but the file is only ${haveW}px wide.\n` +
+              `      The camera is upscaling ${(needW / haveW).toFixed(2)}x and the sharpness is ` +
+              `already gone before the render starts.\n` +
+              `      fix: raise the capture — set "deviceScaleFactor": ${Math.max(2, Math.ceil(dsf))} ` +
+              `and "masterWidth": 0 in demos/${demoBySlug.get(slug) ? path.basename(demoBySlug.get(slug)) : `<${slug}>.json`}, ` +
+              `then re-record and re-bake.`);
+          }
+        }
       }
     }
   }
@@ -306,6 +391,28 @@ if (!quiet) {
   for (const [slug, steps] of used) {
     const ok = fs.existsSync(path.resolve('public/rec', slug, 'manifest.json'));
     console.log(`  ${ok ? 'ok  ' : 'MISS'} ${slug}  (${[...steps].join(', ')})`);
+  }
+}
+
+// Master too small for the zoom: fatal for a render (--slug), a notice repo-wide.
+if (softZoom.length) {
+  const mine = slugArg
+    ? softZoom.filter((l) => l.includes(`/${slugArg}/`) || l.includes(`${slugArg}.json`))
+    : [];
+  if (slugArg && mine.length) {
+    console.error(`\n\u2717 RECORDING CHECK FAILED: ${mine.length} clip(s) in "${slugArg}" zoom ` +
+      `further than their footage can carry:`);
+    for (const l of mine) console.error(`  \u2022 ${l}`);
+    console.error(`\n  The camera is upscaling. Re-record the demo at a higher deviceScaleFactor`);
+    console.error(`  with "masterWidth": 0, then re-bake. Bytes are not the constraint — measured`);
+    console.error(`  on a dense page, native 6400px cost 536KB against 108KB at 1920.`);
+    process.exit(1);
+  }
+  if (!quiet) {
+    console.error(`\nNOTE: ${softZoom.length} clip(s) zoom further than their master can carry.`);
+    console.error(`  These cuts already shipped; re-record before re-rendering any of them.`);
+    for (const l of softZoom.slice(0, 5)) console.error(`  \u2022 ${l.split('\n')[0]}`);
+    if (softZoom.length > 5) console.error(`  ... and ${softZoom.length - 5} more (run with --slug <topic> to see one topic's).`);
   }
 }
 

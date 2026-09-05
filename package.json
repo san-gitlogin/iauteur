@@ -2,7 +2,7 @@
   "name": "iauteur",
   "version": "1.0.0",
   "private": true,
-  "description": "iAuteur — an AI-directed, JSON-driven Remotion video factory: a topic becomes a spec, any LLM directs it, and it renders as tech-explainer video (162 components, 30 design packs, dark/light).",
+  "description": "iAuteur \u2014 an AI-directed, JSON-driven Remotion video factory: a topic becomes a spec, any LLM directs it, and it renders as tech-explainer video (162 components, 30 design packs, dark/light).",
   "license": "MIT",
   "homepage": "https://github.com/san-gitlogin/iauteur#readme",
   "repository": {
@@ -67,7 +67,7 @@
     "publish-safety:all": "node scripts/check-publish-safety.mjs --tracked",
     "rec-fixture": "node scripts/gen-rec-fixture.mjs",
     "bake-rec": "node scripts/bake-rec.mjs",
-    "test-rec": "node scripts/test-rec-lint.mjs && node scripts/test-rec-anchors.mjs && node scripts/test-rec-capture.mjs && node scripts/test-rec-contract.mjs && node scripts/test-rec-sync.mjs",
+    "test-rec": "node scripts/test-rec-lint.mjs && node scripts/test-rec-anchors.mjs && node scripts/test-rec-capture.mjs && node scripts/test-rec-contract.mjs && node scripts/test-rec-sync.mjs && node scripts/test-rec-zoomres.mjs",
     "test-rec-lint": "node scripts/test-rec-lint.mjs",
     "test-rec-contract": "node scripts/test-rec-contract.mjs",
     "test-rec-surface": "node scripts/test-rec-surface.mjs",
@@ -83,7 +83,8 @@
     "captures-check": "node scripts/gen-captures.mjs sqlite sqlite-act1 sqlite-act2 sqlite-act3 --check",
     "check-fonts": "node scripts/check-fonts.mjs",
     "check-hooks": "node scripts/check-hooks.mjs",
-    "check-sync": "node scripts/check-sync.mjs"
+    "check-sync": "node scripts/check-sync.mjs",
+    "test-rec-zoomres": "node scripts/test-rec-zoomres.mjs"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",

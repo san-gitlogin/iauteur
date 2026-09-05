@@ -1370,7 +1370,8 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
       const file = `seg-${String(i + 1).padStart(2, '0')}.mp4`;
       const step = (demo.steps ?? [])[i] ?? {};
       const info = capture.segment({t0: s.tStart, t1: s.tEnd, out: path.join(rec, file), fps,
-        maxHoldMs: step.maxHoldMs ?? demo.maxHoldMs});
+        maxHoldMs: step.maxHoldMs ?? demo.maxHoldMs,
+        masterWidth: demo.masterWidth ?? 1920, crf: demo.crf ?? 20, preset: demo.preset ?? 'veryfast'});
       s.trimmedFrames = info.trimmedFrames;
       s.segment = file;
       s.segmentFrames = info.frames;
@@ -1487,7 +1488,8 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
       const file = `seg-${String(i + 1).padStart(2, '0')}.mp4`;
       const step = (demo.steps ?? [])[i] ?? {};
       const info = capture.segment({t0: st.tStart, t1: st.tEnd, out: path.join(rec, file), fps,
-        maxHoldMs: step.maxHoldMs ?? demo.maxHoldMs});
+        maxHoldMs: step.maxHoldMs ?? demo.maxHoldMs,
+        masterWidth: demo.masterWidth ?? 1920, crf: demo.crf ?? 20, preset: demo.preset ?? 'veryfast'});
       st.trimmedFrames = info.trimmedFrames;
       st.segment = file;
       st.segmentFrames = info.frames;
