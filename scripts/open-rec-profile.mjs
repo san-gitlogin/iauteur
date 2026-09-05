@@ -28,7 +28,7 @@ const argv = process.argv.slice(2);
 const pIdx = argv.indexOf('--profile');
 const profile = pIdx >= 0 ? argv[pIdx + 1] : 'out/rec-profile-web';
 const fIdx = argv.indexOf('--from');
-const skip = new Set([pIdx + 1, fIdx + 1].filter((i) => i > 0));
+const skip = new Set([pIdx + 1, fIdx + 1, argv.indexOf('--channel') + 1].filter((i) => i > 0));
 let urls = argv.filter((a, i) => !a.startsWith('--') && !skip.has(i));
 if (fIdx >= 0) {
   const file = argv[fIdx + 1];
@@ -49,13 +49,47 @@ if (!urls.length) {
 
 // Match the recorder's own geometry so what you clear is what it will later record.
 const DSF = 4;
-const ctx = await chromium.launchPersistentContext(path.resolve(profile), {
-  headless: false,
-  channel: 'chrome',
-  viewport: {width: 1600, height: 900},
-  deviceScaleFactor: DSF,
-  args: ['--force-device-scale-factor=' + DSF, '--high-dpi-support=1'],
-});
+// USE PLAYWRIGHT'S OWN CHROMIUM, NOT THE INSTALLED CHROME.
+//
+// PAID FOR: `channel: 'chrome'` looks like the friendlier choice — the owner's real browser,
+// their real extensions. It cannot work while Chrome is already running. macOS Chrome sees a
+// second launch with a different --user-data-dir, hands the request to the SESSION ALREADY
+// OPEN, and the process it just started exits 0 immediately:
+//     "[out] Opening in existing browser session."
+// Playwright then throws, nothing opens, and the terminal prints a 40-line call log with the
+// one relevant sentence buried in the middle. Observed exactly that on the first handover.
+//
+// The bundled Chromium is a different binary with its own profile, so it collides with
+// nothing and needs no one to quit anything. A human clearing a challenge in it sets the
+// clearance cookie just the same. `--channel chrome` is still available for the rare case
+// that a site needs branded Chrome — but it requires Chrome to be FULLY QUIT first.
+const channelIdx = argv.indexOf('--channel');
+const channel = channelIdx >= 0 ? argv[channelIdx + 1] : undefined;
+
+let ctx;
+try {
+  ctx = await chromium.launchPersistentContext(path.resolve(profile), {
+    headless: false,
+    ...(channel ? {channel} : {}),
+    viewport: {width: 1600, height: 900},
+    deviceScaleFactor: DSF,
+    args: ['--force-device-scale-factor=' + DSF, '--high-dpi-support=1'],
+  });
+} catch (e) {
+  const msg = String(e?.message ?? e);
+  if (/existing browser session/i.test(msg)) {
+    console.error(`
+Chrome is already running, so it handed this launch to the session already open and the
+new process exited before Playwright could attach. Nothing opened.
+
+  - Simplest: drop "--channel ${channel}" and use Playwright's bundled Chromium, which
+    collides with nothing.
+  - Or quit Google Chrome completely (Cmd-Q, and check it is gone from the Dock) and rerun.
+`);
+    process.exit(3);
+  }
+  throw e;
+}
 
 console.log(`profile: ${path.resolve(profile)}`);
 console.log(`opening ${urls.length} page(s) at 1600x900 @dsf${DSF}\n`);

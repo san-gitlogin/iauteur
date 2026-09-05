@@ -120,7 +120,11 @@ export const setupBrowser = async (demo) => {
   if (demo.profile) {
     ctx = await chromium.launchPersistentContext(path.resolve(demo.profile), {
       headless: demo.headless ?? false,   // a challenge cannot be cleared headless
-      channel: demo.channel ?? 'chrome',
+      // Playwright's own Chromium by default — the installed Chrome cannot be driven with a
+      // custom --user-data-dir while it is already running (it hands off to the open session
+      // and exits). Opt in with demo.channel only when a site genuinely needs branded Chrome,
+      // and only with Chrome fully quit.
+      ...(demo.channel ? {channel: demo.channel} : {}),
       args,
       ...ctxOpts,
     });
