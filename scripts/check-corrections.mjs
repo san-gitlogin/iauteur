@@ -204,6 +204,11 @@ const CORRECTIONS = [
    'eleven clips solved clean and failed the linter after sync, nine by <12 frames',
    () => has('scripts/lib/record/anchors.mjs', 'RATE_SLIP') &&
          has('scripts/lib/record/anchors.mjs', 'LOCAL_CUSHION')],
+  ['the voice discussing something other than what is on screen', 'SEAL',
+   '"the last video we did on MCP had too many places where the voice does not speak whats shown in the video"',
+   () => has('scripts/check-narration-visual.mjs', 'IS THE VOICE TALKING ABOUT THIS') &&
+         has('scripts/check-narration-visual.mjs', 'TALKING OVER THE PICTURE') &&
+         has('scripts/render-topic.mjs', 'check-narration-visual')],
   ['footage too soft to survive its own zoom', 'SEAL',
    '"the recording is just sitting at 1080p or 720p or even less" / "even zooming in, panning in does not degrade the quality of my video"',
    () => has('scripts/check-recordings.mjs', 'SOFT ZOOM') &&

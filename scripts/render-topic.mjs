@@ -88,6 +88,11 @@ if (fs.existsSync(specPath)) {
 if (variant !== 'thumb' && variant !== 'cover') {
   try {
     execSync(`node scripts/check-recordings.mjs --quiet --slug ${slug}`, {stdio: 'inherit'});
+    // DOES THE VOICE TALK ABOUT THIS PICTURE? Owner, 2026-09-05: *"the last video we did on
+    // MCP had too many places where the voice does not speak whats shown in the video."*
+    // Every other gate checks WHEN a thing lands, never WHETHER it is the thing being
+    // discussed, so this shipped repeatedly while lint, sync and holds were all green.
+    execSync(`node scripts/check-narration-visual.mjs --spec ${specPath}`, {stdio: 'inherit'});
     // Same question, for the voice: are this cut's anchors real word times or estimates?
     execSync(`node scripts/check-sync.mjs --quiet --slug ${slug}`, {stdio: 'inherit'});
   } catch {
