@@ -111,11 +111,11 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
-### 2026-09-05 — the MCP course, rebuilt for a beginner (75 scenes, ~36 min)
+### 2026-09-05 — the MCP course, rebuilt for a beginner (76 scenes, 35:40) ✅ SHIPPED
 
 Owner watched the 21-minute cut and gave fourteen corrections. The short version: it was
 *shown* properly and *explained* too fast. `topics/code-an-ai-agent-with-mcp` is now a
-**masterclass-format course** — 75 scenes, 6,751 words — and the runtime is deliberately
+**masterclass-format course** — 76 scenes, 6,887 words, 35:40 — and the runtime is deliberately
 unconstrained (see the new CLAUDE.md corollary: the title rounds up afterwards).
 
 **What changed, and why**
@@ -162,9 +162,55 @@ prints that census on every run, which is the only cheap moment to see it:
 else.** It is the same argument as LAW 0p's "a builder that is behind its output is a trap",
 pointed at the builder rather than the JSON.
 
-**Still owed:** carrying the camera between clips so a zoom does not pull out and back in
-across a clip boundary (owner marked it low priority); a general scan for fixed frame
+#### THE ROOT CAUSE BEHIND EVERY MIS-POINTED CALLOUT
+
+Owner, with a screenshot: *"You have zoomed in but highlighting shit and explaining
+something that doesn't relate to what's highlighted… Why aren't we fixing this upright once
+and for all."* Three diagnostic takes to find, and it was not the obvious answer.
+
+**xterm and Monaco keep rows in the DOM after they scroll out of view, and those rows
+measure `0×0` at `0,0`.** On the install step `mcp[cli]` is on screen TWICE — in the visible
+dependency list, and in the scrolled-out echo of `uv add "mcp[cli]" fastapi …`. `marksFor`
+takes the LAST match in DOM order, so it chose the invisible one and the collapsed rectangle
+landed on the prompt line. Hence a callout reading "the official MCP SDK" pointing at
+`mcp-agent>`.
+
+  · `marksFor` now filters to rows that are **actually laid out** before matching
+  · every mark records the text it `covers`, and the runner THROWS when the rectangle does
+    not cover what was asked for (54/54 verified on the shipped capture)
+  · the measurement error is no longer swallowed by `.catch(() => null)` — it reports the
+    rows it searched and what they read
+  · `lint-spec` rejects **two callouts on one mark**: only one can sit beside a rectangle,
+    so the rest get pushed into empty frame. 11 clips were doing it.
+  · the install step is `sed -n 10,17p pyproject.toml`, not `cat` — all six libraries stay
+    on screen, each callout gets its own mark, and the `authors` stanza (a real name and
+    email) never reaches the frame
+
+**Diagnose with a 4-step demo, not the 49-step one.** The last three iterations reproduced
+the same failure in about a minute each instead of ten.
+
+#### Two more that shipped and were caught
+
+  · **A 21-minute cut rendered in total silence** while every number said perfect. The voice
+    prefix is guessed from the slug's first hyphen-segment when `meta.audioPrefix` is
+    absent; `code-an-ai-agent-with-mcp` gave `code_long`, the files were `mcpagent_long_*`.
+    Duration proves synchronisation and says nothing about content. `build-audio-track` now
+    exits 1 on a narrated scene with no mp3, and `render-long` measures `mean_volume` and
+    fails at ≤ −70 dB.
+  · **A cached render segment from a different spec** was adopted mid-video, because the
+    cache tested only "file exists and is non-empty". It keys on frame count now — though
+    note that catches a spec with different boundaries, NOT a component change underneath
+    it, so after editing `src/` use `--fresh`.
+
+**Still owed:** callout labels drift LEFT over the terminal text even when authored
+`side: 'right'`, while the right half of the frame sits empty — information correct,
+placement wasteful; carrying the camera between clips so a zoom does not pull out and back
+in across a clip boundary (owner marked it low priority); a general scan for fixed frame
 intervals inside explanatory components (LAW 0i.1 — `Pipeline.tsx` is a known offender).
+
+**Delivered:** `topics/code-an-ai-agent-with-mcp/out/wide-dark.mp4` — 64,204 frames EXACT,
+0 ms drift, audio mean −22.6 dB. Thumbnail *"Learn MCP Properly — Build An AI Agent"*,
+badge `PYTHON · UNDER 40 MINS · BEGINNERS`.
 
 ### 2026-09-04 — coding an AI agent with MCP, and a cushion that covered half its job
 
