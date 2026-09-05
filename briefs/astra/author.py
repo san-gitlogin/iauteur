@@ -600,7 +600,8 @@ meta = {
   "analogy": "A new hire who cannot out-think your best analyst, but will drive the software all night without complaining.",
   "topicAxes": ["entity-novelty", "tribal-conflict"],
   "seo": {
-    "title": "GPT-6 Astra: Everything You Need To Know (Honest Review, 2026)",
+    # runtime is an OUTPUT: the cut measured 18:47, so the promise rounds UP to 20.
+    "title": "GPT-6 Astra: Everything You Need To Know in Under 20 Minutes (2026)",
     "altTitles": ["GPT-6 Astra explained — the numbers nobody printed",
                   "GPT-6 Astra vs Claude Fable 5.1: what the benchmarks actually say"],
     "description": "A full breakdown of OpenAI's GPT-6 Astra from the primary sources: the official announcement, the model card, ARC Prize's ARC-AGI-3 report, Artificial Analysis, OpenRouter, and what developers are saying. What it is, what it costs, where it wins, where it loses, and who can actually run it today.",

@@ -26,10 +26,10 @@
         "arc-agi-3",
         "ai benchmarks"
       ],
-      "pinned": "Full breakdown on the channel, every figure read off its source page. Which number had you seen before — 99.9%, or 62.7%?",
+      "pinned": "Full breakdown on the channel, every figure read off its source page. Which number had you seen before \u2014 99.9%, or 62.7%?",
       "sources": [
-        "ARC Prize — OpenAI's GPT-6 Astra on ARC-AGI-3 — https://arcprize.org/blog/astra",
-        "OpenAI — GPT-6 Astra — https://openai.com/index/gpt-6-astra/"
+        "ARC Prize \u2014 OpenAI's GPT-6 Astra on ARC-AGI-3 \u2014 https://arcprize.org/blog/astra",
+        "OpenAI \u2014 GPT-6 Astra \u2014 https://openai.com/index/gpt-6-astra/"
       ]
     }
   },
@@ -64,7 +64,7 @@
     {
       "id": "s02",
       "type": "ASTRA_STAGE",
-      "narration": "That score came from ARC-AGI-3, a test built to measure how far models still are from us. Run on the neutral harness, the same model on the same day scored sixty-two point seven — for twenty-six thousand dollars.",
+      "narration": "That score came from ARC-AGI-3, a test built to measure how far models still are from us. Run on the neutral harness, the same model on the same day scored sixty-two point seven \u2014 for twenty-six thousand dollars.",
       "durationFrames": 421,
       "timingSource": "tts",
       "transition": "push",
@@ -110,7 +110,7 @@
         "recordedStep": {
           "caption": "both numbers, one sentence",
           "premise": "ARC Prize's report on GPT-6 Astra.",
-          "sourceNote": "arcprize.org/blog/astra — ARC Prize, by Greg Kamradt",
+          "sourceNote": "arcprize.org/blog/astra \u2014 ARC Prize, by Greg Kamradt",
           "layout": "full",
           "color": "blue",
           "card": {
@@ -389,7 +389,7 @@
               "atWord": 3.583
             },
             {
-              "label": "Astra · standard",
+              "label": "Astra \u00b7 standard",
               "value": 62.7,
               "text": "$26,098",
               "color": "orange",
@@ -405,7 +405,7 @@
     {
       "id": "s05",
       "type": "OUTRO_CTA",
-      "narration": "The full breakdown is on the channel — every number checked against its source.",
+      "narration": "The full breakdown is on the channel \u2014 every number checked against its source.",
       "durationFrames": 140,
       "timingSource": "tts",
       "transition": "fade",
@@ -416,5 +416,10 @@
       },
       "audio": "audio/gpt-6-astra-shorts_s05.mp3"
     }
-  ]
+  ],
+  "cover": {
+    "title": "GPT-6 Astra",
+    "badge": "99.9% or 62.7%?",
+    "asset": "si:openai"
+  }
 }

@@ -118,6 +118,8 @@ const spec = {
   brand: {logo: 'img:channel_logo.png'},
   thumbnail: {title: 'GPT-6 ASTRA', badge: '99.9% or 62.7%?',
               note: 'the number nobody printed', asset: 'si:openai'},
+  // The <slug>-cover composition is registered from the SHORTS spec, not the long one.
+  cover: {title: 'GPT-6 Astra', badge: '99.9% or 62.7%?', asset: 'si:openai'},
   scenes,
 };
 

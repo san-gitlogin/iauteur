@@ -14,9 +14,9 @@
       "tribal-conflict"
     ],
     "seo": {
-      "title": "GPT-6 Astra: Everything You Need To Know (Honest Review, 2026)",
+      "title": "GPT-6 Astra: Everything You Need To Know in Under 20 Minutes (2026)",
       "altTitles": [
-        "GPT-6 Astra explained — the numbers nobody printed",
+        "GPT-6 Astra explained \u2014 the numbers nobody printed",
         "GPT-6 Astra vs Claude Fable 5.1: what the benchmarks actually say"
       ],
       "description": "A full breakdown of OpenAI's GPT-6 Astra from the primary sources: the official announcement, the model card, ARC Prize's ARC-AGI-3 report, Artificial Analysis, OpenRouter, and what developers are saying. What it is, what it costs, where it wins, where it loses, and who can actually run it today.",
@@ -39,17 +39,17 @@
         "gpt-6 astra price",
         "is gpt-6 astra agi"
       ],
-      "pinned": "Every number here came off its source page on camera — links below. Which surprised you more: the 62.7%, or all three Claudes beating Astra on Humanity's Last Exam?",
+      "pinned": "Every number here came off its source page on camera \u2014 links below. Which surprised you more: the 62.7%, or all three Claudes beating Astra on Humanity's Last Exam?",
       "sources": [
-        "OpenAI — GPT-6 Astra: A new generation of intelligence — https://openai.com/index/gpt-6-astra/",
-        "OpenAI — gpt-6-astra model card — https://developers.openai.com/api/docs/models/gpt-6-astra",
-        "ARC Prize — OpenAI's GPT-6 Astra on ARC-AGI-3, by Greg Kamradt — https://arcprize.org/blog/astra",
-        "Artificial Analysis — GPT-6 Astra release — https://artificialanalysis.ai/models/releases/gpt-6-astra",
-        "OpenRouter — openai/gpt-6-astra — https://openrouter.ai/openai/gpt-6-astra",
-        "unicodeveloper — GPT-6 Astra. A taste of AGI? — https://medium.com/@unicodeveloper/gpt-6-astra-a-taste-of-agi-938515afc5c7",
-        "r/developersIndia — GPT 6.O Astra is insanely good — https://www.reddit.com/r/developersIndia/comments/1w6x5eq/gpt_6o_astra_is_insanely_good_good_alternative/",
-        "ABYSSAL — The Living Deep, by Ethan Mollick — https://abyssal-living-deep.netlify.app",
-        "abyssal-living-deep source — https://github.com/emollick/abyssal-living-deep"
+        "OpenAI \u2014 GPT-6 Astra: A new generation of intelligence \u2014 https://openai.com/index/gpt-6-astra/",
+        "OpenAI \u2014 gpt-6-astra model card \u2014 https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "ARC Prize \u2014 OpenAI's GPT-6 Astra on ARC-AGI-3, by Greg Kamradt \u2014 https://arcprize.org/blog/astra",
+        "Artificial Analysis \u2014 GPT-6 Astra release \u2014 https://artificialanalysis.ai/models/releases/gpt-6-astra",
+        "OpenRouter \u2014 openai/gpt-6-astra \u2014 https://openrouter.ai/openai/gpt-6-astra",
+        "unicodeveloper \u2014 GPT-6 Astra. A taste of AGI? \u2014 https://medium.com/@unicodeveloper/gpt-6-astra-a-taste-of-agi-938515afc5c7",
+        "r/developersIndia \u2014 GPT 6.O Astra is insanely good \u2014 https://www.reddit.com/r/developersIndia/comments/1w6x5eq/gpt_6o_astra_is_insanely_good_good_alternative/",
+        "ABYSSAL \u2014 The Living Deep, by Ethan Mollick \u2014 https://abyssal-living-deep.netlify.app",
+        "abyssal-living-deep source \u2014 https://github.com/emollick/abyssal-living-deep"
       ]
     }
   },
@@ -103,7 +103,7 @@
       "type": "LIST_BUILD",
       "durationFrames": 454,
       "timingSource": "tts",
-      "narration": "That's the question this video answers. By the end you'll know what Astra costs to run, what it genuinely beats, where it loses — and there are places it loses badly — plus whether you can get hold of it yet. Every figure came off its source page, on camera, so you can check any of it.",
+      "narration": "That's the question this video answers. By the end you'll know what Astra costs to run, what it genuinely beats, where it loses \u2014 and there are places it loses badly \u2014 plus whether you can get hold of it yet. Every figure came off its source page, on camera, so you can check any of it.",
       "data": {
         "heading": "What this video covers",
         "items": [
@@ -159,7 +159,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 911,
       "timingSource": "tts",
-      "narration": "For three years a language model has been a thing you ask. You type, it writes back, and acting on the answer stays your job, because a chat box has no hands. Astra aims at the other half, because the answer was never the hard part. OpenAI describes it opening a browser and researching for you. Filling in a form. Updating a CRM — the customer database a sales team lives in. Running a check across a website's front end to find what broke. None of those are questions — they are chores, and chores are what fill a working day.",
+      "narration": "For three years a language model has been a thing you ask. You type, it writes back, and acting on the answer stays your job, because a chat box has no hands. Astra aims at the other half, because the answer was never the hard part. OpenAI describes it opening a browser and researching for you. Filling in a form. Updating a CRM \u2014 the customer database a sales team lives in. Running a check across a website's front end to find what broke. None of those are questions \u2014 they are chores, and chores are what fill a working day.",
       "data": {
         "astraStage": {
           "headline": "Answers, or [actions]",
@@ -207,11 +207,11 @@
       "type": "RECORDED_STEP",
       "durationFrames": 585,
       "timingSource": "tts",
-      "narration": "Here is OpenAI's own announcement page. Their heading for that section reads: the world's best computer use model. Computer use is the industry's phrase for a model that drives software the way you do — moving a pointer, clicking, typing, and reading the screen back to itself. Pause on that heading, because it tells you what they think they built.",
+      "narration": "Here is OpenAI's own announcement page. Their heading for that section reads: the world's best computer use model. Computer use is the industry's phrase for a model that drives software the way you do \u2014 moving a pointer, clicking, typing, and reading the screen back to itself. Pause on that heading, because it tells you what they think they built.",
       "data": {
         "recordedStep": {
           "premise": "OpenAI's announcement page for GPT-6 Astra.",
-          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "sourceNote": "openai.com/index/gpt-6-astra \u2014 OpenAI's official announcement",
           "layout": "full",
           "color": "blue",
           "caption": "their own words for what it is",
@@ -246,7 +246,7 @@
                   "y": 248,
                   "w": 505,
                   "h": 36,
-                  "covers": "The world’s best computer use model"
+                  "covers": "The world\u2019s best computer use model"
                 }
               },
               "ink": [
@@ -431,7 +431,7 @@
                   "h": 16
                 }
               ],
-              "shows": "The world’s best computer use model",
+              "shows": "The world\u2019s best computer use model",
               "atWord": 4.167
             }
           ],
@@ -496,7 +496,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 676,
       "timingSource": "tts",
-      "narration": "GPT-5.6 Sol — the model Astra replaces — finishes sixty-five point seven percent of those jobs, at roughly seventy-five minutes each. Astra finishes seventy-two point six percent, in about forty minutes. Read the two together rather than separately, because separately they undersell it. More of the work lands, in half the time, because it stops less often to check in.",
+      "narration": "GPT-5.6 Sol \u2014 the model Astra replaces \u2014 finishes sixty-five point seven percent of those jobs, at roughly seventy-five minutes each. Astra finishes seventy-two point six percent, in about forty minutes. Read the two together rather than separately, because separately they undersell it. More of the work lands, in half the time, because it stops less often to check in.",
       "data": {
         "astraStage": {
           "headline": "More done, in [half the time]",
@@ -537,11 +537,11 @@
       "type": "RECORDED_STEP",
       "durationFrames": 641,
       "timingSource": "tts",
-      "narration": "Here is that row on OpenAI's own table, so you can read it rather than take my word for it. OSWorld 2.0, offline set, partial score — seventy-two point six percent, in the Astra column. A business reading this page cares less about which model is cleverer. A business cares that a job which cost seventy-five minutes now costs forty.",
+      "narration": "Here is that row on OpenAI's own table, so you can read it rather than take my word for it. OSWorld 2.0, offline set, partial score \u2014 seventy-two point six percent, in the Astra column. A business reading this page cares less about which model is cleverer. A business cares that a job which cost seventy-five minutes now costs forty.",
       "data": {
         "recordedStep": {
           "premise": "The benchmark table on OpenAI's announcement page.",
-          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "sourceNote": "openai.com/index/gpt-6-astra \u2014 OpenAI's official announcement",
           "layout": "full",
           "color": "green",
           "caption": "the OSWorld row, on the page itself",
@@ -905,7 +905,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 852,
       "timingSource": "tts",
-      "narration": "Two terms carry the rest of this chapter, so here they are on a real sentence. A model doesn't read words. Models read tokens, and a token is a chunk of text. Common words come through whole, because they are common — Astra, can. Longer ones break up: oper, ate. Punctuation counts too. Six short words came apart into seven pieces. So a token averages about three quarters of an English word, and that is the unit every price is quoted in.",
+      "narration": "Two terms carry the rest of this chapter, so here they are on a real sentence. A model doesn't read words. Models read tokens, and a token is a chunk of text. Common words come through whole, because they are common \u2014 Astra, can. Longer ones break up: oper, ate. Punctuation counts too. Six short words came apart into seven pieces. So a token averages about three quarters of an English word, and that is the unit every price is quoted in.",
       "data": {
         "astraStage": {
           "headline": "A token is not [a word]",
@@ -994,7 +994,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 869,
       "timingSource": "tts",
-      "narration": "Now the price, and these are the numbers you pay per million tokens. Text going in costs ten dollars. Text coming out costs fifty. Output runs at five times the input rate, because generating text is the expensive half. Cached input drops to one dollar — caching means the model re-reads something it has already seen, and you are billed a tenth for the privilege. Writing that cache costs twelve fifty once. Reading is cheap and writing is not, so a long conversation costs less than a long answer.",
+      "narration": "Now the price, and these are the numbers you pay per million tokens. Text going in costs ten dollars. Text coming out costs fifty. Output runs at five times the input rate, because generating text is the expensive half. Cached input drops to one dollar \u2014 caching means the model re-reads something it has already seen, and you are billed a tenth for the privilege. Writing that cache costs twelve fifty once. Reading is cheap and writing is not, so a long conversation costs less than a long answer.",
       "data": {
         "astraStage": {
           "headline": "What a million tokens [costs]",
@@ -1044,11 +1044,11 @@
       "type": "RECORDED_STEP",
       "durationFrames": 540,
       "timingSource": "tts",
-      "narration": "OpenRouter lists the same rates, and it is useful precisely because it is not OpenAI's own page. Ten dollars and fifty dollars, per million tokens. OpenRouter also tracks who serves the model and how fast — OpenAI and Azure, with live throughput and uptime beside each one.",
+      "narration": "OpenRouter lists the same rates, and it is useful precisely because it is not OpenAI's own page. Ten dollars and fifty dollars, per million tokens. OpenRouter also tracks who serves the model and how fast \u2014 OpenAI and Azure, with live throughput and uptime beside each one.",
       "data": {
         "recordedStep": {
           "premise": "OpenRouter's model page for openai/gpt-6-astra.",
-          "sourceNote": "openrouter.ai/openai/gpt-6-astra — independent listing",
+          "sourceNote": "openrouter.ai/openai/gpt-6-astra \u2014 independent listing",
           "layout": "full",
           "color": "orange",
           "caption": "the same prices, elsewhere",
@@ -1721,13 +1721,13 @@
               "atWord": 21.333
             },
             {
-              "label": "Plus · Pro · Business",
+              "label": "Plus \u00b7 Pro \u00b7 Business",
               "sub": "the days after",
               "icon": "lucide:users",
               "atWord": 27.083
             },
             {
-              "label": "API · Azure · Bedrock",
+              "label": "API \u00b7 Azure \u00b7 Bedrock",
               "sub": "for developers",
               "icon": "lucide:plug",
               "atWord": 39.75
@@ -1817,11 +1817,11 @@
       "type": "RECORDED_STEP",
       "durationFrames": 473,
       "timingSource": "tts",
-      "narration": "Ninety-five point nine is on their page too. Ninety-five point nine percent, on the BenchCAD row. And it is the number behind the demo everyone shared that week — Astra modelling a house in Blender, then turning it into a scene you can walk through in Unreal Engine.",
+      "narration": "Ninety-five point nine is on their page too. Ninety-five point nine percent, on the BenchCAD row. And it is the number behind the demo everyone shared that week \u2014 Astra modelling a house in Blender, then turning it into a scene you can walk through in Unreal Engine.",
       "data": {
         "recordedStep": {
           "premise": "The BenchCAD row on OpenAI's benchmark table.",
-          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "sourceNote": "openai.com/index/gpt-6-astra \u2014 OpenAI's official announcement",
           "layout": "full",
           "color": "purple",
           "caption": "the 3D result, on the source page",
@@ -2169,7 +2169,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 906,
       "timingSource": "tts",
-      "narration": "FrontierMath sits at the other end, where the questions are meant to defeat a model. Its problems are written by working mathematicians to be hard for models specifically, and Tier 4 is the hardest band, which means a high score there is unusual. Astra takes ninety-seven point six percent. Fable 5.1 and Fable 5 both land on eighty-seven point eight. Opus 5, seventy-three point two. When a score climbs that high, people say the benchmark is saturated — it's stopped telling models apart.",
+      "narration": "FrontierMath sits at the other end, where the questions are meant to defeat a model. Its problems are written by working mathematicians to be hard for models specifically, and Tier 4 is the hardest band, which means a high score there is unusual. Astra takes ninety-seven point six percent. Fable 5.1 and Fable 5 both land on eighty-seven point eight. Opus 5, seventy-three point two. When a score climbs that high, people say the benchmark is saturated \u2014 it's stopped telling models apart.",
       "data": {
         "astraStage": {
           "headline": "Maths at the [research end]",
@@ -2218,7 +2218,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 925,
       "timingSource": "tts",
-      "narration": "OpenAI also says an internal Astra made progress on ten long-standing problems in mathematics, and published a repository for one of them. A bound on prime gaps, formalised in Lean, which is software that checks a proof line by line. Here is the part worth keeping. Its own repository says the result rests on three explicit input axioms — one, two, three — an axiom being something you assume rather than prove. Serious work, still waiting on expert review, which is a fair thing to say out loud.",
+      "narration": "OpenAI also says an internal Astra made progress on ten long-standing problems in mathematics, and published a repository for one of them. A bound on prime gaps, formalised in Lean, which is software that checks a proof line by line. Here is the part worth keeping. Its own repository says the result rests on three explicit input axioms \u2014 one, two, three \u2014 an axiom being something you assume rather than prove. Serious work, still waiting on expert review, which is a fair thing to say out loud.",
       "data": {
         "astraStage": {
           "headline": "A proof that [leans on three]",
@@ -2231,7 +2231,7 @@
           "verdictSub": "the repository says so itself",
           "stage": [
             {
-              "label": "liminf (p n+1 − p n) ≤ 186",
+              "label": "liminf (p n+1 \u2212 p n) \u2264 186",
               "sub": "formalised in Lean",
               "atWord": 21
             },
@@ -2259,7 +2259,7 @@
       "type": "CHAPTER",
       "durationFrames": 239,
       "timingSource": "tts",
-      "narration": "Here's the chapter I opened with — ninety-nine point nine and sixty-two point seven, from the same test measured two ways.",
+      "narration": "Here's the chapter I opened with \u2014 ninety-nine point nine and sixty-two point seven, from the same test measured two ways.",
       "data": {
         "chapter": {
           "number": "04",
@@ -2276,7 +2276,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 866,
       "timingSource": "tts",
-      "narration": "ARC-AGI-3 comes from the ARC Prize foundation, and it's built differently, because the others measure knowledge. A model is dropped into a small world it has never seen, with no instructions at all. A model has to poke at things, notice what changed, work out what the goal even is, then plan. ARC Prize call that agentic intelligence — acting sensibly with nobody explaining the task. So the puzzle isn't solving the game. Working out what the game even is — that's the test.",
+      "narration": "ARC-AGI-3 comes from the ARC Prize foundation, and it's built differently, because the others measure knowledge. A model is dropped into a small world it has never seen, with no instructions at all. A model has to poke at things, notice what changed, work out what the goal even is, then plan. ARC Prize call that agentic intelligence \u2014 acting sensibly with nobody explaining the task. So the puzzle isn't solving the game. Working out what the game even is \u2014 that's the test.",
       "data": {
         "astraStage": {
           "headline": "A game with [no instructions]",
@@ -2293,7 +2293,7 @@
               "atWord": 21.5
             },
             {
-              "label": "press this → that moves",
+              "label": "press this \u2192 that moves",
               "atWord": 35.833
             },
             {
@@ -2320,7 +2320,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 619,
       "timingSource": "tts",
-      "narration": "ARC Prize ran Astra twice and published both runs. Their first run uses the standard harness — a neutral interface where the notes a model keeps get written out in the open. Their second uses a provider adapter, letting the model hold its reasoning privately between requests. So the room changed, and the model did not, which means the score describes the room.",
+      "narration": "ARC Prize ran Astra twice and published both runs. Their first run uses the standard harness \u2014 a neutral interface where the notes a model keeps get written out in the open. Their second uses a provider adapter, letting the model hold its reasoning privately between requests. So the room changed, and the model did not, which means the score describes the room.",
       "data": {
         "astraStage": {
           "headline": "One model, [two answers]",
@@ -2363,7 +2363,7 @@
       "data": {
         "recordedStep": {
           "premise": "ARC Prize's report on GPT-6 Astra, published 3 September 2026.",
-          "sourceNote": "arcprize.org/blog/astra — ARC Prize, by Greg Kamradt",
+          "sourceNote": "arcprize.org/blog/astra \u2014 ARC Prize, by Greg Kamradt",
           "layout": "full",
           "color": "blue",
           "caption": "both numbers, in one sentence",
@@ -2881,14 +2881,14 @@
               "atWord": 15.667
             },
             {
-              "label": "Astra · standard",
+              "label": "Astra \u00b7 standard",
               "value": 62.7,
               "text": "$26,098",
               "color": "orange",
               "atWord": 30.75
             },
             {
-              "label": "Astra · adapter",
+              "label": "Astra \u00b7 adapter",
               "value": 99.9,
               "text": "$18,817",
               "color": "purple",
@@ -2906,7 +2906,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 897,
       "timingSource": "tts",
-      "narration": "Now the part I find far more interesting than either score. ARC Prize describe what Astra did inside those games. Astra turned unfamiliar environments into compact symbolic world models — meaning it worked out the underlying rules and wrote them down as logic. Then it invented its own shorthand, a private little notation, to track the state of the game and plan its moves. Nobody designed that shorthand. Astra built that notation because the notation was useful, which is a striking thing to read.",
+      "narration": "Now the part I find far more interesting than either score. ARC Prize describe what Astra did inside those games. Astra turned unfamiliar environments into compact symbolic world models \u2014 meaning it worked out the underlying rules and wrote them down as logic. Then it invented its own shorthand, a private little notation, to track the state of the game and plan its moves. Nobody designed that shorthand. Astra built that notation because the notation was useful, which is a striking thing to read.",
       "data": {
         "astraStage": {
           "headline": "The finding [under the score]",
@@ -2923,7 +2923,7 @@
               "atWord": 17.833
             },
             {
-              "label": "press → the block slides",
+              "label": "press \u2192 the block slides",
               "atWord": 28.917
             },
             {
@@ -2950,7 +2950,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 611,
       "timingSource": "tts",
-      "narration": "One more from that report, and it is a genuine result. On ninety-six percent of levels, Astra reached the goal using fewer actions than the median person tested. Across all levels it used fifty-one point seven percent fewer actions on average — about half. Getting there matters, and getting there without flailing is a different skill entirely.",
+      "narration": "One more from that report, and it is a genuine result. On ninety-six percent of levels, Astra reached the goal using fewer actions than the median person tested. Across all levels it used fifty-one point seven percent fewer actions on average \u2014 about half. Getting there matters, and getting there without flailing is a different skill entirely.",
       "data": {
         "astraStage": {
           "headline": "Fewer moves than [the humans]",
@@ -2987,7 +2987,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 762,
       "timingSource": "tts",
-      "narration": "And ARC Prize themselves are careful about what it means. ARC Prize call Astra a noticeable step-function change in frontier model capability — that is their phrase, and it isn't faint praise. In the same report they say saturating this benchmark would not represent proof of achieving AGI, they point at the tightly bounded scope of these environments, and they publish the human baseline beside it. So the people who built the test are the ones telling you where its edges are.",
+      "narration": "And ARC Prize themselves are careful about what it means. ARC Prize call Astra a noticeable step-function change in frontier model capability \u2014 that is their phrase, and it isn't faint praise. In the same report they say saturating this benchmark would not represent proof of achieving AGI, they point at the tightly bounded scope of these environments, and they publish the human baseline beside it. So the people who built the test are the ones telling you where its edges are.",
       "data": {
         "astraStage": {
           "headline": "What ARC Prize [actually said]",
@@ -3108,7 +3108,7 @@
       "data": {
         "recordedStep": {
           "premise": "The Academic table on OpenAI's announcement page.",
-          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "sourceNote": "openai.com/index/gpt-6-astra \u2014 OpenAI's official announcement",
           "layout": "full",
           "color": "red",
           "caption": "the row where Astra comes fourth",
@@ -3460,7 +3460,7 @@
       "data": {
         "recordedStep": {
           "premise": "Artificial Analysis, an independent benchmarking service, on GPT-6 Astra.",
-          "sourceNote": "artificialanalysis.ai/models/releases/gpt-6-astra — independent measurement",
+          "sourceNote": "artificialanalysis.ai/models/releases/gpt-6-astra \u2014 independent measurement",
           "layout": "full",
           "color": "blue",
           "caption": "the independent scoreboard",
@@ -4089,7 +4089,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 817,
       "timingSource": "tts",
-      "narration": "Here are the top four of a much longer board, side by side. Claude Fable 5.1 at fifty-seven. Astra at max effort, fifty-five. Astra at high effort, fifty-three. GPT-5.6 Sol at max, fifty-one. Three separate sources agree on the ordering — this board, OpenAI's own table, and the review I will come to shortly. Astra is excellent here, and it is second, and both halves of that matter.",
+      "narration": "Here are the top four of a much longer board, side by side. Claude Fable 5.1 at fifty-seven. Astra at max effort, fifty-five. Astra at high effort, fifty-three. GPT-5.6 Sol at max, fifty-one. Three separate sources agree on the ordering \u2014 this board, OpenAI's own table, and the review I will come to shortly. Astra is excellent here, and it is second, and both halves of that matter.",
       "data": {
         "astraStage": {
           "headline": "Second, on the [neutral board]",
@@ -4138,7 +4138,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 781,
       "timingSource": "tts",
-      "narration": "One more table, because it complicates the story in a way worth knowing about. On science and health, GeneBench Pro moves from thirty-two point three to thirty-seven point one. MedChemBench, forty-seven point four to forty-nine point three. LifeSciBench, fifty-nine point nine to sixty point three — under half a point. HealthBench Professional gains three. Every one of those is an improvement, and none of them is a leap.",
+      "narration": "One more table, because it complicates the story in a way worth knowing about. On science and health, GeneBench Pro moves from thirty-two point three to thirty-seven point one. MedChemBench, forty-seven point four to forty-nine point three. LifeSciBench, fifty-nine point nine to sixty point three \u2014 under half a point. HealthBench Professional gains three. Every one of those is an improvement, and none of them is a leap.",
       "data": {
         "astraStage": {
           "headline": "The margins nobody [quoted]",
@@ -4257,7 +4257,7 @@
       "data": {
         "recordedStep": {
           "premise": "The safety section of OpenAI's announcement page.",
-          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "sourceNote": "openai.com/index/gpt-6-astra \u2014 OpenAI's official announcement",
           "layout": "full",
           "color": "red",
           "caption": "their own classification",
@@ -4573,7 +4573,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 639,
       "timingSource": "tts",
-      "narration": "Recent reasoning models think in text. Models write steps out, and you can read them — which is how researchers check whether a model reasons honestly. Astra uses recurrent depth, looping internally instead, thinking without writing any of it down. Researchers call that a monitorability problem, because you cannot audit reasoning you cannot see, and nobody has solved that yet.",
+      "narration": "Recent reasoning models think in text. Models write steps out, and you can read them \u2014 which is how researchers check whether a model reasons honestly. Astra uses recurrent depth, looping internally instead, thinking without writing any of it down. Researchers call that a monitorability problem, because you cannot audit reasoning you cannot see, and nobody has solved that yet.",
       "data": {
         "astraStage": {
           "headline": "Reasoning you [cannot read]",
@@ -4711,11 +4711,11 @@
       "type": "RECORDED_STEP",
       "durationFrames": 655,
       "timingSource": "tts",
-      "narration": "So here is one of the second kind. Here's ABYSSAL, built by Ethan Mollick — a procedural underwater world running in an ordinary browser tab. Procedural means the reefs, the kelp and the creatures are generated by code from a seed rather than modelled by hand. Watch the water for a moment. Nothing here is a recording of a demo; the page is doing this live.",
+      "narration": "So here is one of the second kind. Here's ABYSSAL, built by Ethan Mollick \u2014 a procedural underwater world running in an ordinary browser tab. Procedural means the reefs, the kelp and the creatures are generated by code from a seed rather than modelled by hand. Watch the water for a moment. Nothing here is a recording of a demo; the page is doing this live.",
       "data": {
         "recordedStep": {
-          "premise": "ABYSSAL — The Living Deep, running in a browser.",
-          "sourceNote": "abyssal-living-deep.netlify.app — built by Ethan Mollick",
+          "premise": "ABYSSAL \u2014 The Living Deep, running in a browser.",
+          "sourceNote": "abyssal-living-deep.netlify.app \u2014 built by Ethan Mollick",
           "layout": "full",
           "color": "blue",
           "caption": "generated by code, running live",
@@ -4966,7 +4966,7 @@
       "data": {
         "recordedStep": {
           "premise": "The public repository behind ABYSSAL.",
-          "sourceNote": "github.com/emollick/abyssal-living-deep — public source",
+          "sourceNote": "github.com/emollick/abyssal-living-deep \u2014 public source",
           "layout": "full",
           "color": "green",
           "caption": "open source, so it can be checked",
@@ -5325,7 +5325,7 @@
       "data": {
         "recordedStep": {
           "premise": "A thread on r/developersIndia, in the days after launch.",
-          "sourceNote": "reddit.com/r/developersIndia — community discussion",
+          "sourceNote": "reddit.com/r/developersIndia \u2014 community discussion",
           "layout": "full",
           "color": "orange",
           "caption": "the question, and how it landed",
@@ -5513,7 +5513,7 @@
       "type": "ASTRA_STAGE",
       "durationFrames": 925,
       "timingSource": "tts",
-      "narration": "Here is the shape of that thread, and the votes tell the story better than any quote. Six hundred and fifty-one people upvoted that post. Its top reply — here we go again, every few months a model gives a life-changing experience — took eleven hundred. Another asked whether people remember Devin, which was going to replace all software engineers three years ago. And another reply, on two hundred and twenty-seven, from somebody who can't even find Astra yet. Weariness won that thread, because most of these people have watched this exact launch cycle before.",
+      "narration": "Here is the shape of that thread, and the votes tell the story better than any quote. Six hundred and fifty-one people upvoted that post. Its top reply \u2014 here we go again, every few months a model gives a life-changing experience \u2014 took eleven hundred. Another asked whether people remember Devin, which was going to replace all software engineers three years ago. And another reply, on two hundred and twenty-seven, from somebody who can't even find Astra yet. Weariness won that thread, because most of these people have watched this exact launch cycle before.",
       "data": {
         "astraStage": {
           "headline": "The room [voted]",
@@ -5529,7 +5529,7 @@
               "label": "the post",
               "text": "651",
               "value": 651,
-              "sub": "Astra is insanely good — where do we go from here?",
+              "sub": "Astra is insanely good \u2014 where do we go from here?",
               "atWord": 17.417
             },
             {
@@ -5587,7 +5587,7 @@
       "data": {
         "recordedStep": {
           "premise": "A launch-week review of GPT-6 Astra, by unicodeveloper.",
-          "sourceNote": "GPT-6 Astra. A taste of AGI? — by unicodeveloper, on Medium",
+          "sourceNote": "GPT-6 Astra. A taste of AGI? \u2014 by unicodeveloper, on Medium",
           "layout": "full",
           "color": "purple",
           "caption": "the framing this chapter borrows",
@@ -6065,23 +6065,23 @@
           "verdictSub": "four times the cost, six points of score",
           "stage": [
             {
-              "label": "low · scores 49",
+              "label": "low \u00b7 scores 49",
               "text": "$0.63",
               "win": true,
               "atWord": 14.75
             },
             {
-              "label": "medium · scores 52",
+              "label": "medium \u00b7 scores 52",
               "text": "$1.16",
               "atWord": 26.083
             },
             {
-              "label": "high · scores 53",
+              "label": "high \u00b7 scores 53",
               "text": "$1.41",
               "atWord": 31.917
             },
             {
-              "label": "max · scores 55",
+              "label": "max \u00b7 scores 55",
               "text": "$2.57",
               "atWord": 39.5
             }
@@ -6182,7 +6182,7 @@
       "type": "OUTRO_CTA",
       "durationFrames": 472,
       "timingSource": "tts",
-      "narration": "Every source I used is linked below — OpenAI's page, the ARC Prize report, Artificial Analysis, and unicodeveloper's review. Go and read the ARC Prize one in particular — it's the best-written of them. And if you want more breakdowns built this way, subscribe.",
+      "narration": "Every source I used is linked below \u2014 OpenAI's page, the ARC Prize report, Artificial Analysis, and unicodeveloper's review. Go and read the ARC Prize one in particular \u2014 it's the best-written of them. And if you want more breakdowns built this way, subscribe.",
       "data": {
         "message": "Subscribe for more breakdowns like this",
         "sub": "every number checked against its source"
