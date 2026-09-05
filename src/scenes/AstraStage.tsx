@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
-import {Scene} from '../types';
+import {Scene, AstraStageData} from '../types';
 import {Headline, SourceFooter, useScale, hexA} from '../ui';
 import {useTheme} from '../themes';
 import {PaneBudget} from '../dsaViz';
@@ -27,7 +27,7 @@ import {AstraViz} from '../astraViz';
 export const AstraStage: React.FC<{scene: Scene}> = ({scene}) => {
   const {scale, vertical} = useScale();
   const t = useTheme();
-  const d = (scene.data as any).astraStage;
+  const d = scene.data.astraStage as AstraStageData | undefined;
   if (!d) return <AbsoluteFill />;
 
   const accent = (d.color ?? 'blue') as any;
@@ -115,7 +115,7 @@ export const AstraStage: React.FC<{scene: Scene}> = ({scene}) => {
           </div>
         ) : null}
       </div>
-      {(scene.data as any).source ? <SourceFooter text={(scene.data as any).source} /> : null}
+      {scene.data.source ? <SourceFooter text={scene.data.source} /> : null}
     </AbsoluteFill>
   );
 };

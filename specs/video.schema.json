@@ -467,6 +467,7 @@
               "CMD_DD",
               "CMD_IP",
               "UV_STAGE",
+              "ASTRA_STAGE",
               "CMD_PING",
               "CMD_TRACEROUTE",
               "CMD_MTR",

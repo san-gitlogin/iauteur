@@ -6579,6 +6579,42 @@ export interface CmdIpData {
   atWord?: number;
   color?: SemColor;
 }
+export interface AstraStageItem {
+  label?: string;
+  text?: string;
+  sub?: string;
+  /** A second figure beside the first — a cost next to a score, a struck-through price,
+   *  the minutes a task took. Kept distinct from `text` so a picture can carry both. */
+  detail?: string;
+  /** The number the GEOMETRY uses: a score 0-100, a vote count, a token count. */
+  value?: number;
+  color?: SemColor;
+  atWord?: number;
+  /** `lucide:<name>` / `si:<brand>` — four things on screen must be four recognisable
+   *  OBJECTS, not four boxes with different words in them (LAW 0n). */
+  icon?: string;
+  /** Marks the element the beat argues FOR — the leader, the human baseline, the sealed
+   *  harness, the heavy side of a balance. Authored, never derived from the maximum,
+   *  because a beat sometimes argues about second place. */
+  win?: boolean;
+}
+
+export interface AstraStageData {
+  headline?: string;
+  /** Which astra depiction to draw. Must exist in astraViz ASTRA_VIZ — the seal checks it. */
+  kind?: string;
+  /** LAW 0l — what the viewer is looking at and what stands for what. Unanchored. */
+  premise?: string;
+  stage?: AstraStageItem[];
+  /** Mode switch or caption for the depiction. verdict-balance splits it on `|`. */
+  token?: string;
+  stageTitle?: string;
+  verdict?: string;
+  verdictSub?: string;
+  verdictAtWord?: number;
+  color?: SemColor;
+}
+
 export interface UvStageItem {
   label?: string;
   text?: string;
@@ -10927,6 +10963,7 @@ export interface SceneData {
   cmdTraceroute?: CmdTracerouteData;
   cmdPing?: CmdPingData;
   uvStage?: UvStageData;
+  astraStage?: AstraStageData;
   cmdIp?: CmdIpData;
   cmdDd?: CmdDdData;
   cmdUmount?: CmdUmountData;
