@@ -379,3 +379,12 @@ Post by **PsyberShade**, 1d ago — **651 upvotes, 313 comments**
 this launch is weariness, and the second is a reminder about Devin. Also note 227 people
 upvoted "I can't even get it yet" — the rollout is staged, so most of the audience watching
 this video CANNOT run Astra today. Say that out loud. ***
+
+---
+# 21. THE MEMORY THIS SESSION SHOULD LEAVE BEHIND
+- The recording quality complaint had TWO causes, both silent, and the second was the real
+  one: `browser.mjs` asked for `deviceScaleFactor: 1.2` (exactly the delivery size) and
+  Chrome silently caps the factor at 2 without `--force-device-scale-factor`.
+- Master resolution is paid for twice — on disk, and at render time through Chrome's decoder.
+  The floor comes from the deepest zoom; the CAP comes from what the machine can render.
+- The owner's laptop runs at 99-100% disk. Any render plan has to account for that.
