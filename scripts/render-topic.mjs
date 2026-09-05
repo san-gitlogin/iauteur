@@ -112,9 +112,21 @@ if (variant !== 'thumb' && variant !== 'cover') {
 // resolver we do not need: the CLI is a dependency, its path is known, and `node <path>`
 // has no npm layer to be broken by. One less moving part between a finished spec and a file.
 const REMOTION_CLI = 'node_modules/@remotion/cli/remotion-cli.js';
+
+// CONCURRENCY IS A DISK SETTING, NOT ONLY A SPEED ONE.
+//
+// PAID FOR (2026-09-05): a 19-minute cut carrying 4800px browser footage died twice, both
+// times with Remotion's own diagnosis — *"Chrome rejecting the request because the disk space
+// is low"* — on a machine sitting at 99% full. Every concurrent worker is a Chrome tab holding
+// its own decoded frames, so peak scratch scales with the worker count. Halving concurrency
+// roughly halves the peak and costs wall-clock time, which is the correct trade when the
+// alternative is no file at all.
+//
+// RENDER_CONCURRENCY overrides it; unset means Remotion's default (one worker per core).
+const conc = process.env.RENDER_CONCURRENCY ? ` --concurrency=${process.env.RENDER_CONCURRENCY}` : '';
 const cmd = variant === 'thumb' || variant === 'cover'
   ? `node ${REMOTION_CLI} still ${id} ${out}`
-  : `node ${REMOTION_CLI} render ${id} ${out}`;
+  : `node ${REMOTION_CLI} render ${id} ${out}${conc}`;
 console.log('→ ' + cmd);
 execSync(cmd, {stdio: 'inherit'});
 
