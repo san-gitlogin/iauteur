@@ -6581,6 +6581,10 @@ export interface CmdIpData {
 }
 export interface AstraStageItem {
   label?: string;
+  /** A SECOND moment for this item, when the beat says its two facts in two clauses:
+   *  the clock flag on task-clock, the paper caption on page-stack. Falls back to
+   *  `atWord`, so a beat that says both at once still works. */
+  detailAtWord?: number;
   text?: string;
   sub?: string;
   /** A second figure beside the first — a cost next to a score, a struck-through price,

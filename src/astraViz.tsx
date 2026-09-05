@@ -112,8 +112,8 @@ const HarnessSplit: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const [left, right] = [items[0], items[1]];
-  const colW = Math.min(budget * 0.62, v.vertical ? 400 : 330);
-  const bookH = Math.min(budget * 0.30, v.vertical ? 190 : 132);
+  const colW = Math.min(budget * 0.72, v.vertical ? 470 : 440);
+  const bookH = Math.min(budget * 0.38, v.vertical ? 250 : 208);
 
   const Lane: React.FC<{it?: AstraVizItem; sealed: boolean}> = ({it, sealed}) => {
     if (!it) return null;
@@ -221,9 +221,9 @@ const CostPlane: React.FC<AstraVizProps> = ({items, accent}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const H = Math.min(budget * 0.80, v.vertical ? 520 : 360);
-  const W = Math.min(budget * 1.45, v.vertical ? 620 : 700);
-  const padL = 54 * v.scale, padB = 34 * v.scale, padT = 16 * v.scale, padR = 20 * v.scale;
+  const H = Math.min(budget * 0.96, v.vertical ? 640 : 540);
+  const W = Math.min(budget * 3.0, v.vertical ? 720 : 1560);
+  const padL = 64 * v.scale, padB = 52 * v.scale, padT = 18 * v.scale, padR = 150 * v.scale;
   const plotW = W - padL - padR, plotH = H - padT - padB;
 
   const cost = (it: AstraVizItem) => Number(String(it.text ?? '0').replace(/[^0-9.]/g, '')) || 0.01;
@@ -240,32 +240,32 @@ const CostPlane: React.FC<AstraVizProps> = ({items, accent}) => {
           {[0, 25, 50, 75, 100].map((s) => (
             <g key={s}>
               <line x1={padL} x2={padL + plotW} y1={padT + y(s)} y2={padT + y(s)}
-                    stroke={hexA(v.t.colors.panelBorder, s === 100 ? 0.75 : 0.35)}
+                    stroke={hexA(v.t.colors.panelBorder, s === 100 ? 1 : 0.55)}
                     strokeWidth={1 * v.scale} strokeDasharray={s === 100 ? undefined : `${3 * v.scale} ${5 * v.scale}`} />
               <text x={padL - 9 * v.scale} y={padT + y(s) + 4 * v.scale} textAnchor="end"
-                    fontFamily={v.t.fonts.mono} fontSize={11 * v.scale} fill={v.dim}>{s}%</text>
+                    fontFamily={v.t.fonts.mono} fontSize={13 * v.scale} fill={v.dim}>{s}%</text>
             </g>
           ))}
           {TICKS.map((c) => (
             <g key={c}>
               <line x1={padL + x(c)} x2={padL + x(c)} y1={padT} y2={padT + plotH}
-                    stroke={hexA(v.t.colors.panelBorder, 0.22)} strokeWidth={1 * v.scale} />
-              <text x={padL + x(c)} y={H - padB + 17 * v.scale} textAnchor="middle"
-                    fontFamily={v.t.fonts.mono} fontSize={11 * v.scale} fill={v.dim}>
+                    stroke={hexA(v.t.colors.panelBorder, 0.4)} strokeWidth={1 * v.scale} />
+              <text x={padL + x(c)} y={H - padB + 22 * v.scale} textAnchor="middle"
+                    fontFamily={v.t.fonts.mono} fontSize={13 * v.scale} fill={v.dim}>
                 {c >= 1000 ? `$${c / 1000}k` : `$${c}`}
               </text>
             </g>
           ))}
-          <text x={padL + plotW / 2} y={H - 2 * v.scale} textAnchor="middle"
-                fontFamily={v.t.fonts.mono} fontSize={11 * v.scale} fill={v.dim}
-                letterSpacing={0.8}>cost per attempt →</text>
+          <text x={padL + plotW / 2} y={H - 6 * v.scale} textAnchor="middle"
+                fontFamily={v.t.fonts.mono} fontSize={12 * v.scale} fill={v.dim}
+                letterSpacing={1.2}>cost per attempt, log scale →</text>
         </svg>
         {/* the dots are HTML over the plot: a circle in a stretched viewBox is an ellipse */}
         {items.map((it, i) => {
           const on = soft(liveAt(frame, it.atWord, 16));
           const col = it.win ? v.sem('green') : it.color ? v.sem(it.color) : v.a;
           const px = padL + x(cost(it)), py = padT + y(it.value ?? 0);
-          const r = (it.win ? 11 : 9) * v.scale;
+          const r = (it.win ? 15 : 12) * v.scale;
           return (
             <div key={i} style={{position: 'absolute', left: px, top: py, opacity: on}}>
               <div style={{
@@ -278,8 +278,8 @@ const CostPlane: React.FC<AstraVizProps> = ({items, accent}) => {
                 position: 'absolute', left: r + 7 * v.scale, top: -9 * v.scale,
                 whiteSpace: 'nowrap',
               }}>
-                <div style={{...v.mono(12), fontWeight: 800, color: v.text}}>{it.label}</div>
-                <div style={{...v.mono(11), color: hexA(col, 0.95)}}>
+                <div style={{...v.mono(14), fontWeight: 800, color: v.text}}>{it.label}</div>
+                <div style={{...v.mono(13), color: hexA(col, 0.95)}}>
                   {it.value}% · {it.text}
                 </div>
               </div>
@@ -306,8 +306,8 @@ const OperatorDesk: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const winH = Math.min(budget * 0.24, v.vertical ? 150 : 104);
-  const winW = Math.min(budget * 0.52, v.vertical ? 330 : 250);
+  const winH = Math.min(budget * 0.34, v.vertical ? 210 : 172);
+  const winW = Math.min(budget * 0.64, v.vertical ? 420 : 330);
   const apps = items.slice(0, 4);
 
   // The cursor sits on whichever window has most recently come alive, and travels there.
@@ -429,10 +429,10 @@ const BenchRow: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const rows = items.slice(0, 6);
   const gap = 9 * v.scale;
-  const barH = Math.min((budget * 0.86 - gap * (rows.length - 1)) / Math.max(1, rows.length),
-                        v.vertical ? 96 : 62);
-  const labW = Math.min(budget * 0.42, v.vertical ? 250 : 205);
-  const trackW = Math.min(budget * 1.05, v.vertical ? 460 : 430);
+  const barH = Math.min((budget * 0.88 - gap * (rows.length - 1)) / Math.max(1, rows.length),
+                        v.vertical ? 132 : 104);
+  const labW = Math.min(budget * 0.44, v.vertical ? 300 : 280);
+  const trackW = Math.min(budget * 1.32, v.vertical ? 560 : 640);
   const max = Math.max(100, ...rows.map((r) => r.value ?? 0));
 
   return (
@@ -495,11 +495,14 @@ const PageStack: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const H = Math.min(budget * 0.86, v.vertical ? 560 : 380);
+  const H = Math.min(budget * 0.94, v.vertical ? 660 : 520);
   const it = items[0] ?? {};
   const on = soft(liveAt(frame, it.atWord, 34));
+  // "1,050,000 tokens" and "about 1500 A4 pages" are two sentences, so the caption above
+  // the stack lands on its own word rather than riding in with the count.
+  const capOn = soft(liveAt(frame, (it as {detailAtWord?: number}).detailAtWord ?? it.atWord, 18));
   const sheets = 26;
-  const sheetW = Math.min(budget * 0.30, v.vertical ? 190 : 132);
+  const sheetW = Math.min(budget * 0.36, v.vertical ? 240 : 196);
   const sheetH = H / sheets;
   const shown = Math.round(sheets * on);
   const count = Math.round((it.value ?? 0) * on);
@@ -531,7 +534,7 @@ const PageStack: React.FC<AstraVizProps> = ({items, accent, token}) => {
             );
           })}
           <div style={{position: 'absolute', left: '50%', top: -26 * v.scale,
-                       transform: 'translateX(-50%)', whiteSpace: 'nowrap', opacity: on}}>
+                       transform: 'translateX(-50%)', whiteSpace: 'nowrap', opacity: capOn}}>
             <Cap v={v} size={12} tone={hexA(v.a, 0.95)}>{token ?? 'about 1500 A4 pages'}</Cap>
           </div>
         </div>
@@ -565,9 +568,9 @@ const ThresholdLadder: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const rungs = items.slice(0, 5);
   const gap = 8 * v.scale;
-  const rungH = Math.min((budget * 0.80 - gap * (rungs.length - 1)) / Math.max(1, rungs.length),
-                         v.vertical ? 92 : 60);
-  const W = Math.min(budget * 0.95, v.vertical ? 420 : 380);
+  const rungH = Math.min((budget * 0.86 - gap * (rungs.length - 1)) / Math.max(1, rungs.length),
+                         v.vertical ? 126 : 98);
+  const W = Math.min(budget * 1.12, v.vertical ? 500 : 560);
 
   return (
     <Field v={v}>
@@ -635,8 +638,8 @@ const SealedTrace: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const boxH = Math.min(budget * 0.62, v.vertical ? 340 : 236);
-  const boxW = Math.min(budget * 0.66, v.vertical ? 340 : 264);
+  const boxH = Math.min(budget * 0.72, v.vertical ? 420 : 344);
+  const boxW = Math.min(budget * 0.76, v.vertical ? 420 : 396);
   const openIt = items[0], sealedIt = items[1];
   const openOn = soft(liveAt(frame, openIt?.atWord, 16));
   const sealOn = soft(liveAt(frame, sealedIt?.atWord, 16));
@@ -716,8 +719,8 @@ const TaskClock: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const lanes = items.slice(0, 2);
-  const trackW = Math.min(budget * 1.25, v.vertical ? 500 : 520);
-  const laneH = Math.min(budget * 0.22, v.vertical ? 120 : 78);
+  const trackW = Math.min(budget * 1.62, v.vertical ? 600 : 800);
+  const laneH = Math.min(budget * 0.30, v.vertical ? 160 : 132);
   const maxMin = Math.max(...lanes.map((l) => Number(String(l.detail ?? '0').replace(/[^0-9.]/g, '')) || 0), 80);
 
   return (
@@ -726,6 +729,10 @@ const TaskClock: React.FC<AstraVizProps> = ({items, accent, token}) => {
       <div style={{display: 'flex', flexDirection: 'column', gap: 16 * v.scale}}>
         {lanes.map((it, i) => {
           const on = soft(liveAt(frame, it.atWord, 22));
+          // THE TIME IS ITS OWN MOMENT. "finishes 65.7% of them, at roughly 75 minutes a
+          // task" is two facts in two clauses, so the bar and the flag get their own
+          // anchors — `detailAtWord` falls back to the bar's when a beat says both at once.
+          const clockOn = soft(liveAt(frame, (it as {detailAtWord?: number}).detailAtWord ?? it.atWord, 16));
           const mins = Number(String(it.detail ?? '0').replace(/[^0-9.]/g, '')) || 0;
           const col = it.win ? v.sem('green') : hexA(v.t.colors.muted, 0.85);
           const timeFrac = mins / maxMin;
@@ -733,8 +740,9 @@ const TaskClock: React.FC<AstraVizProps> = ({items, accent, token}) => {
             <div key={i} style={{display: 'flex', flexDirection: 'column', gap: 5 * v.scale}}>
               <div style={{display: 'flex', justifyContent: 'space-between', width: trackW}}>
                 <div style={{...v.mono(12), fontWeight: 800, color: it.win ? v.text : v.dim}}>{it.label}</div>
-                <div style={{...v.mono(12), color: hexA(col, 0.95), fontWeight: 700, opacity: on}}>
-                  {it.text} · {it.detail}
+                <div style={{...v.mono(12), color: hexA(col, 0.95), fontWeight: 700}}>
+                  <span style={{opacity: on}}>{it.text}</span>
+                  <span style={{opacity: clockOn}}> · {it.detail}</span>
                 </div>
               </div>
               {/* the lane: fills to the SCORE, and stops at the TIME it took */}
@@ -748,10 +756,10 @@ const TaskClock: React.FC<AstraVizProps> = ({items, accent, token}) => {
                 {/* the finish flag sits where the clock stopped */}
                 <div style={{
                   position: 'absolute', left: trackW * timeFrac, top: -7 * v.scale, bottom: -7 * v.scale,
-                  width: 2 * v.scale, background: hexA(col, 0.9), opacity: on,
+                  width: 2 * v.scale, background: hexA(col, 0.9), opacity: clockOn,
                 }} />
                 <div style={{position: 'absolute', left: trackW * timeFrac, top: -22 * v.scale,
-                             transform: 'translateX(-50%)', opacity: on}}>
+                             transform: 'translateX(-50%)', opacity: clockOn}}>
                   <AssetIcon bare asset="lucide:flag" size={14 * v.scale} tint={hexA(col, 0.95)} />
                 </div>
               </div>
@@ -786,8 +794,8 @@ const RatePlate: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const tags = items.slice(0, 4);
-  const tagW = Math.min(budget * 0.42, v.vertical ? 260 : 190);
-  const tagH = Math.min(budget * 0.30, v.vertical ? 180 : 128);
+  const tagW = Math.min(budget * 0.46, v.vertical ? 300 : 262);
+  const tagH = Math.min(budget * 0.44, v.vertical ? 240 : 218);
 
   return (
     <Field v={v} gap={12}>
@@ -856,9 +864,9 @@ const ThreadVotes: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const rows = items.slice(0, 5);
   const gap = 10 * v.scale;
-  const rowH = Math.min((budget * 0.84 - gap * (rows.length - 1)) / Math.max(1, rows.length),
-                        v.vertical ? 110 : 74);
-  const W = Math.min(budget * 1.35, v.vertical ? 560 : 600);
+  const rowH = Math.min((budget * 0.90 - gap * (rows.length - 1)) / Math.max(1, rows.length),
+                        v.vertical ? 150 : 122);
+  const W = Math.min(budget * 1.66, v.vertical ? 640 : 880);
   const max = Math.max(...rows.map((r) => r.value ?? 0), 1);
 
   return (
@@ -870,15 +878,22 @@ const ThreadVotes: React.FC<AstraVizProps> = ({items, accent, token}) => {
           const col = it.win ? v.sem('orange') : hexA(v.t.colors.muted, 0.8);
           return (
             <div key={i} style={{
-              width: W, minHeight: rowH, boxSizing: 'border-box',
+              width: W, minHeight: rowH, boxSizing: 'border-box', position: 'relative',
               display: 'flex', alignItems: 'center', gap: 12 * v.scale,
               padding: `${7 * v.scale}px ${12 * v.scale}px`,
               borderLeft: `${3 * v.scale}px solid ${hexA(col, 0.3 + on * 0.6)}`,
-              background: hexA(col, 0.05 + on * 0.06),
+              background: hexA(col, 0.04),
               borderRadius: `0 ${v.rad(7)}px ${v.rad(7)}px 0`,
-              opacity: 0.3 + on * 0.7,
-              marginLeft: (it.value != null && i > 0 ? 22 : 0) * v.scale,
+              opacity: 0.3 + on * 0.7, overflow: 'hidden',
+              marginLeft: (it.value != null && i > 0 ? 26 : 0) * v.scale,
             }}>
+              {/* THE COUNT IS A LENGTH. The row fills to its share of the biggest vote, so
+                  "the reply outscored the post" is visible before anybody reads a digit. */}
+              <div style={{
+                position: 'absolute', left: 0, top: 0, bottom: 0,
+                width: `${((it.value ?? 0) / max) * 100 * on}%`,
+                background: hexA(col, 0.16 + on * 0.1), pointerEvents: 'none',
+              }} />
               {/* the arrow and the count — the unit of agreement on that site */}
               <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
                            gap: 1 * v.scale, minWidth: 46 * v.scale}}>
@@ -893,12 +908,7 @@ const ThreadVotes: React.FC<AstraVizProps> = ({items, accent, token}) => {
                   {it.sub}
                 </div>
               </div>
-              {/* the bar behind the row, so the sizes are comparable at a glance */}
-              <div style={{
-                position: 'absolute', pointerEvents: 'none',
-              }} />
-              <div style={{width: W * 0.16 * ((it.value ?? 0) / max) * on, height: 4 * v.scale,
-                           background: hexA(col, 0.8), borderRadius: 999, flex: '0 0 auto'}} />
+
             </div>
           );
         })}
@@ -921,7 +931,7 @@ const WorldModel: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const cell = Math.min(budget * 0.075, v.vertical ? 46 : 30);
+  const cell = Math.min(budget * 0.098, v.vertical ? 60 : 48);
   const gridOn = soft(liveAt(frame, items[0]?.atWord, 18));
   const rules = items.slice(1, 4);
   const symOn = soft(liveAt(frame, items[items.length - 1]?.atWord, 18));
@@ -1013,8 +1023,8 @@ const ProofScales: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const left = items.filter((i) => !i.win).slice(0, 4);
   const right = items.filter((i) => i.win).slice(0, 4);
-  const panW = Math.min(budget * 0.60, v.vertical ? 330 : 260);
-  const chipH = Math.min(budget * 0.11, v.vertical ? 62 : 40);
+  const panW = Math.min(budget * 0.70, v.vertical ? 400 : 380);
+  const chipH = Math.min(budget * 0.145, v.vertical ? 84 : 68);
   const lw = left.reduce((a, it) => a + soft(liveAt(frame, it.atWord, 14)), 0);
   const rw = right.reduce((a, it) => a + soft(liveAt(frame, it.atWord, 14)), 0);
   const tilt = Math.max(-7, Math.min(7, (rw - lw) * 2.6));
@@ -1085,8 +1095,8 @@ const VerdictBalance: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
-  const colW = Math.min(budget * 0.62, v.vertical ? 340 : 290);
-  const chipH = Math.min(budget * 0.115, v.vertical ? 64 : 42);
+  const colW = Math.min(budget * 0.72, v.vertical ? 410 : 400);
+  const chipH = Math.min(budget * 0.148, v.vertical ? 88 : 70);
   const sides = [items.filter((i) => !i.win), items.filter((i) => i.win)];
   const heads = [token?.split('|')[0]?.trim() ?? 'reach for this', token?.split('|')[1]?.trim() ?? 'or this'];
 
@@ -1145,8 +1155,8 @@ const RolloutQueue: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const stops = items.slice(0, 4);
-  const stopW = Math.min(budget * 0.42, v.vertical ? 230 : 176);
-  const stopH = Math.min(budget * 0.30, v.vertical ? 175 : 124);
+  const stopW = Math.min(budget * 0.47, v.vertical ? 270 : 244);
+  const stopH = Math.min(budget * 0.40, v.vertical ? 230 : 196);
 
   return (
     <Field v={v} gap={12}>
@@ -1210,9 +1220,9 @@ const AxiomStack: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const budget = stackBudget(v);
   const result = items[0];
   const axioms = items.slice(1, 4);
-  const W = Math.min(budget * 1.05, v.vertical ? 460 : 440);
-  const slabH = Math.min(budget * 0.22, v.vertical ? 120 : 84);
-  const blockH = Math.min(budget * 0.20, v.vertical ? 110 : 76);
+  const W = Math.min(budget * 1.30, v.vertical ? 540 : 640);
+  const slabH = Math.min(budget * 0.30, v.vertical ? 160 : 138);
+  const blockH = Math.min(budget * 0.28, v.vertical ? 150 : 128);
   const resOn = soft(liveAt(frame, result?.atWord, 16));
 
   return (
@@ -1274,7 +1284,7 @@ const TokenSplit: React.FC<AstraVizProps> = ({items, accent, token}) => {
   const frame = useCurrentFrame();
   const budget = stackBudget(v);
   const chips = items.slice(0, 8);
-  const chipH = Math.min(budget * 0.20, v.vertical ? 104 : 70);
+  const chipH = Math.min(budget * 0.26, v.vertical ? 140 : 118);
   const split = soft(liveAt(frame, chips[0]?.atWord, 18));
 
   return (

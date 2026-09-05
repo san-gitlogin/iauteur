@@ -78,10 +78,15 @@ for (const row of brief.scenes) {
       if (row[k] != null) d[k] = row[k];
     }
     // stage items flagged mark:true consume the ^ queue, in spoken order
+    // `mark: true` consumes one ^ for the item's own moment; `mark2: true` consumes a
+    // SECOND for its second fact (the clock flag, the paper caption), in spoken order.
     const take = (arr, queue) => {
       const out = JSON.parse(JSON.stringify(arr ?? []));
       let i = 0;
-      for (const x of out) if (x.mark) { if (queue[i] != null) x.atWord = queue[i]; i++; delete x.mark; }
+      for (const x of out) {
+        if (x.mark) { if (queue[i] != null) x.atWord = queue[i]; i++; delete x.mark; }
+        if (x.mark2) { if (queue[i] != null) x.detailAtWord = queue[i]; i++; delete x.mark2; }
+      }
       return [out, i];
     };
     const [stage, nCell] = take(row.stage, q.cell);

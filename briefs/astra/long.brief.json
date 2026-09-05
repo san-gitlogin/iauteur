@@ -71,7 +71,7 @@
    "id": "s01",
    "type": "HOOK",
    "background": "zoneA",
-   "narration": "One benchmark scored GPT-6 Astra ninety-nine point nine percent. The same test, the same day, scored it sixty-two point seven.",
+   "narration": "One test scored GPT-6 Astra ninety-nine point nine percent, and sixty-two point seven.",
    "data": {
     "headline": "GPT-6 ASTRA: 99.9% AND 62.7%",
     "subtext": "one test, one day, two answers",
@@ -271,14 +271,15 @@
    "token": "what each model finished, and the clock it ran against",
    "verdict": "More finished, in half the time",
    "verdictSub": "OSWorld 2.0, as published by OpenAI",
-   "narration": "^GPT-5.6 Sol \u2014 the model Astra replaces \u2014 finishes sixty-five point seven percent of those jobs, at roughly seventy-five minutes each. ^Astra finishes seventy-two point six percent, in about forty minutes. Read the two together rather than separately, because separately they undersell it. ~More of the work lands, in half the time, because it stops less often to check in.",
+   "narration": "^GPT-5.6 Sol \u2014 the model Astra replaces \u2014 finishes sixty-five point seven percent of those jobs, at roughly ^seventy-five minutes each. ^Astra finishes seventy-two point six percent, in about ^forty minutes. Read the two together rather than separately, because separately they undersell it. ~More of the work lands, in half the time, because it stops less often to check in.",
    "stage": [
     {
      "label": "GPT-5.6 Sol",
      "text": "65.7%",
      "detail": "75 min",
      "value": 65.7,
-     "mark": true
+     "mark": true,
+     "mark2": true
     },
     {
      "label": "GPT-6 Astra",
@@ -286,7 +287,8 @@
      "detail": "40 min",
      "value": 72.6,
      "win": true,
-     "mark": true
+     "mark": true,
+     "mark2": true
     }
    ]
   },
@@ -401,13 +403,14 @@
    "token": "about 1500 A4 pages",
    "verdict": "Roughly 1500 A4 pages, at once",
    "verdictSub": "Artificial Analysis makes that comparison",
-   "narration": "Its context window is how many of those tokens a model holds at one time. ^Astra's window is one million, fifty thousand tokens. Artificial Analysis turns that into paper: fifteen hundred A4 pages. ~A contract, a codebase and a year of email, all open at once.",
+   "narration": "Its context window is how many of those tokens a model holds at one time. ^Astra's window is one million, fifty thousand tokens. Artificial Analysis turns that into ^paper: fifteen hundred A4 pages. ~A contract, a codebase and a year of email, all open at once.",
    "stage": [
     {
      "label": "tokens it can hold at once",
      "value": 1050000,
      "sub": "one million, fifty thousand",
-     "mark": true
+     "mark": true,
+     "mark2": true
     }
    ]
   },
@@ -506,7 +509,7 @@
    "token": "access, stage by stage",
    "verdict": "Most of us are still waiting",
    "verdictSub": "which is worth knowing before you go looking",
-   "narration": "One more practical thing, and it is the question I would ask first. Can you actually use it? On day one, access went to a ^limited set of organisations. Then ^ChatGPT Plus, Pro, Business and Enterprise, over the following days. Then the ^API, and Microsoft Azure, and Amazon Bedrock. ^If you are on a normal subscription and cannot find it, there's nothing wrong with your account. ~Access is simply staged, and most people watching this are still in the queue.",
+   "narration": "One more practical thing, and it is the question I would ask first. Can you actually use it? On day one, access went to a ^limited set of organisations. Then ^ChatGPT Plus, Pro, Business and Enterprise, over the following days. Then the ^API, and Microsoft Azure, and Amazon Bedrock. So if you're on a normal subscription and cannot find it, you are ^waiting like everyone else, and nothing is wrong with your account. ~Access is simply staged, and most people watching this are still in the queue.",
    "stage": [
     {
      "label": "Limited orgs",
@@ -680,7 +683,7 @@
    "token": "an axiom is something assumed, not proved",
    "verdict": "Real work. Not a finished proof.",
    "verdictSub": "the repository says so itself",
-   "narration": "OpenAI also says an internal Astra made progress on ten long-standing problems in mathematics, and published a repository for one of them. ^A bound on prime gaps, formalised in Lean, which is software that checks a proof line by line. Here is the part worth keeping. Its own repository says the result rests on ^three explicit input ^axioms \u2014 an axiom being something you assume rather than prove \u2014 and a ^conditional proof isn't a closed one. ~Serious work, still waiting on expert review, which is a fair thing to say out loud.",
+   "narration": "OpenAI also says an internal Astra made progress on ten long-standing problems in mathematics, and published a repository for one of them. ^A bound on prime gaps, formalised in Lean, which is software that checks a proof line by line. Here is the part worth keeping. Its own repository says the result rests on three explicit input axioms \u2014 ^one, ^two, ^three \u2014 an axiom being something you assume rather than prove. ~Serious work, still waiting on expert review, which is a fair thing to say out loud.",
    "stage": [
     {
      "label": "liminf (p n+1 \u2212 p n) \u2264 186",
@@ -833,7 +836,7 @@
    "background": "zoneB",
    "headline": "Now put a [person on it]",
    "kind": "cost-plane",
-   "color": "green",
+   "color": "blue",
    "premise": "Score up the side, cost per attempt along the bottom. The cost axis multiplies by ten each step.",
    "stageTitle": "score against cost, ARC-AGI-3",
    "token": "humans included",
@@ -842,7 +845,7 @@
    "narration": "Here is the context that changes how both numbers read. ARC Prize tested people on the same environments, and ^humans solve one hundred percent of them, at roughly twelve dollars seventy-eight a game. Against that, ^Astra on the neutral harness reaches sixty-two point seven percent and spends twenty-six thousand dollars. ^With the adapter it reaches ninety-nine point nine, for nineteen thousand. ~A person's cheaper and still perfect, which is worth holding on to for a moment.",
    "stage": [
     {
-     "label": "a person",
+     "label": "humans",
      "value": 100,
      "text": "$12.78",
      "win": true,
@@ -852,6 +855,7 @@
      "label": "Astra \u00b7 standard",
      "value": 62.7,
      "text": "$26,098",
+     "color": "orange",
      "mark": true
     },
     {
@@ -879,7 +883,7 @@
    "narration": "Now the part I find far more interesting than either score. ARC Prize describe what Astra did inside those ^games. Astra turned unfamiliar environments into compact symbolic world ^models \u2014 meaning it worked out the underlying ^rules and wrote them down as logic. Then it invented its own ^shorthand, a private little notation, to track the state of the game and plan its moves. ^Nobody designed that shorthand. ~Astra built that notation because the notation was useful, which is a striking thing to read.",
    "stage": [
     {
-     "label": "a world it has never seen",
+     "label": "the games it was dropped into",
      "mark": true
     },
     {
@@ -943,18 +947,12 @@
    "token": "their words, both halves",
    "verdict": "A step change. Not a proof.",
    "verdictSub": "the people who own the benchmark say so",
-   "narration": "And ARC Prize themselves are careful about what it means. ARC Prize call Astra a ^noticeable step-function change in frontier model capability \u2014 that is their phrase, and it isn't faint praise. In the same report they say ^saturating this benchmark would ^not represent proof of achieving AGI, and they point at the ^tightly bounded scope of the environments. ~So the people who built the test are the ones telling you where its edges are.",
+   "narration": "And ARC Prize themselves are careful about what it means. ARC Prize call Astra a ^noticeable step-function change in frontier model capability \u2014 that is their phrase, and it isn't faint praise. In the same report they say saturating this benchmark would ^not represent proof of achieving AGI, they point at the ^tightly bounded scope of these environments, and they publish the ^human baseline beside it. ~So the people who built the test are the ones telling you where its edges are.",
    "stage": [
     {
      "label": "a step-function change",
      "sub": "their phrase, in the report",
      "icon": "lucide:trending-up",
-     "mark": true
-    },
-    {
-     "label": "tightly bounded scope",
-     "sub": "deterministic, closed-ended",
-     "icon": "lucide:frame",
      "mark": true
     },
     {
@@ -965,8 +963,14 @@
      "mark": true
     },
     {
-     "label": "measured against people",
-     "sub": "the human baseline is published",
+     "label": "tightly bounded scope",
+     "sub": "deterministic, closed-ended",
+     "icon": "lucide:frame",
+     "mark": true
+    },
+    {
+     "label": "the human baseline",
+     "sub": "published beside every score",
      "icon": "lucide:users",
      "win": true,
      "mark": true
@@ -1615,7 +1619,7 @@
    "token": "how many people agreed with each",
    "verdict": "The pushback outscored the panic",
    "verdictSub": "1.1K against 651",
-   "narration": "Here is the shape of that thread, and the votes tell the story better than any quote. Six hundred and fifty-one people upvoted that ^post. Its top ^reply \u2014 here we go again, every few months a model gives a life-changing experience \u2014 took eleven hundred. ^Another asked whether people remember Devin, which was going to replace all software engineers three years ago. ^Two hundred and twenty-seven upvoted somebody who can't even find Astra yet. ~Weariness won that thread, because most of these people have watched this exact launch cycle before.",
+   "narration": "Here is the shape of that thread, and the votes tell the story better than any quote. Six hundred and fifty-one people upvoted that ^post. Its top ^reply \u2014 here we go again, every few months a model gives a life-changing experience \u2014 took eleven hundred. ^Another asked whether people remember Devin, which was going to replace all software engineers three years ago. And another ^reply, on two hundred and twenty-seven, from somebody who can't even find Astra yet. ~Weariness won that thread, because most of these people have watched this exact launch cycle before.",
    "stage": [
     {
      "label": "the post",
@@ -1805,7 +1809,7 @@
    "token": "weighing the AGI claim",
    "verdict": "It moves the argument. It does not settle it.",
    "verdictSub": "which is a real result on its own",
-   "narration": "Which brings us back to the question in the title. On one side, Astra ^operates software better than anything before it, and it ^invented its own notation to solve worlds nobody explained. On the other, it ^loses to Claude Fable 5.1 on expert reasoning and on the neutral index, and the people who own the ^benchmark say saturating it would not be proof of anything. ~My reading is that Astra is the best operator available, rather than the smartest model available, and those are genuinely different titles.",
+   "narration": "Which brings us back to the question in the title. On one side, Astra ^operates software better than anything before it, and it ^invented its own notation to solve worlds nobody explained. On the other, it comes ^second to Claude Fable 5.1 on expert reasoning, and the people who own that benchmark say it would not be ^proof of anything. ~My reading is that Astra is the best operator available, rather than the smartest model available, and those are different titles.",
    "stage": [
     {
      "label": "best at operating software",
@@ -1828,7 +1832,7 @@
      "mark": true
     },
     {
-     "label": "not proof of AGI",
+     "label": "proof of nothing yet",
      "sub": "ARC Prize, in their own report",
      "icon": "lucide:shield-x",
      "mark": true

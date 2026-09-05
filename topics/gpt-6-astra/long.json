@@ -70,37 +70,39 @@
     {
       "id": "s01",
       "type": "HOOK",
-      "durationFrames": 223,
-      "timingSource": "estimated",
-      "narration": "One benchmark scored GPT-6 Astra ninety-nine point nine percent. The same test, the same day, scored it sixty-two point seven.",
+      "durationFrames": 211,
+      "timingSource": "tts",
+      "narration": "One test scored GPT-6 Astra ninety-nine point nine percent, and sixty-two point seven.",
       "data": {
         "headline": "GPT-6 ASTRA: 99.9% AND 62.7%",
         "subtext": "one test, one day, two answers",
         "heroAsset": "si:openai",
-        "headlineAtWord": 4,
-        "heroAtWord": 3,
+        "headlineAtWord": 2.417,
+        "heroAtWord": 1.583,
         "hookVariant": "figure"
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s01.mp3"
     },
     {
       "id": "s02",
       "type": "TITLE_CARD",
-      "durationFrames": 311,
-      "timingSource": "estimated",
+      "durationFrames": 334,
+      "timingSource": "tts",
       "narration": "Hello, and welcome back. Both of those numbers about GPT-6 Astra are real, and both came from the same organisation on the same day. So which one is true?",
       "data": {
         "title": "GPT-6 Astra",
         "subtitle": "what it is, what it costs, where it loses"
       },
       "transition": "fade",
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s02.mp3"
     },
     {
       "id": "s02b",
       "type": "LIST_BUILD",
-      "durationFrames": 587,
-      "timingSource": "estimated",
+      "durationFrames": 454,
+      "timingSource": "tts",
       "narration": "That's the question this video answers. By the end you'll know what Astra costs to run, what it genuinely beats, where it loses — and there are places it loses badly — plus whether you can get hold of it yet. Every figure came off its source page, on camera, so you can check any of it.",
       "data": {
         "heading": "What this video covers",
@@ -109,36 +111,37 @@
             "icon": "lucide:banknote",
             "text": "What it costs",
             "detail": "per million tokens",
-            "atWord": 14
+            "atWord": 9.333
           },
           {
             "icon": "lucide:trophy",
             "text": "What it beats",
             "detail": "computer use, 3D, security",
-            "atWord": 20
+            "atWord": 13.75
           },
           {
             "icon": "lucide:trending-down",
             "text": "Where it loses",
             "detail": "reasoning, and to whom",
-            "atWord": 23
+            "atWord": 15.5
           },
           {
             "icon": "lucide:key-round",
             "text": "Whether you can run it",
             "detail": "the rollout, in order",
-            "atWord": 37
+            "atWord": 24.25
           }
         ]
       },
       "transition": "dip",
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s02b.mp3"
     },
     {
       "id": "s03",
       "type": "CHAPTER",
-      "durationFrames": 242,
-      "timingSource": "estimated",
+      "durationFrames": 192,
+      "timingSource": "tts",
       "narration": "Start with the thing that actually changed, because Astra is a different shape of model from the ones you have been using.",
       "data": {
         "chapter": {
@@ -148,13 +151,14 @@
         }
       },
       "transition": "wipe",
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s03.mp3"
     },
     {
       "id": "s04",
       "type": "ASTRA_STAGE",
-      "durationFrames": 1019,
-      "timingSource": "estimated",
+      "durationFrames": 911,
+      "timingSource": "tts",
       "narration": "For three years a language model has been a thing you ask. You type, it writes back, and acting on the answer stays your job, because a chat box has no hands. Astra aims at the other half, because the answer was never the hard part. OpenAI describes it opening a browser and researching for you. Filling in a form. Updating a CRM — the customer database a sales team lives in. Running a check across a website's front end to find what broke. None of those are questions — they are chores, and chores are what fill a working day.",
       "data": {
         "astraStage": {
@@ -171,37 +175,38 @@
               "label": "Chrome",
               "sub": "researching online",
               "icon": "lucide:globe",
-              "atWord": 52
+              "atWord": 36.25
             },
             {
               "label": "Forms",
               "sub": "filling one in",
               "icon": "lucide:clipboard-list",
-              "atWord": 60
+              "atWord": 42.75
             },
             {
               "label": "CRM",
               "sub": "updating records",
               "icon": "lucide:contact",
-              "atWord": 63
+              "atWord": 46
             },
             {
               "label": "QA",
               "sub": "checking the front end",
               "icon": "lucide:bug",
-              "atWord": 75
+              "atWord": 56.417
             }
           ],
-          "verdictAtWord": 85
+          "verdictAtWord": 64.333
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s04.mp3"
     },
     {
       "id": "s05",
       "type": "RECORDED_STEP",
-      "durationFrames": 765,
-      "timingSource": "estimated",
+      "durationFrames": 585,
+      "timingSource": "tts",
       "narration": "Here is OpenAI's own announcement page. Their heading for that section reads: the world's best computer use model. Computer use is the industry's phrase for a model that drives software the way you do — moving a pointer, clicking, typing, and reading the screen back to itself. Pause on that heading, because it tells you what they think they built.",
       "data": {
         "recordedStep": {
@@ -218,11 +223,11 @@
               "zooms": [
                 {
                   "mark": "cu",
-                  "atWord": 34
+                  "atWord": 26.667
                 },
                 {
                   "at": "full",
-                  "atWord": 49
+                  "atWord": 40
                 }
               ],
               "wantAtWord": 1,
@@ -427,24 +432,25 @@
                 }
               ],
               "shows": "The world’s best computer use model",
-              "atWord": 5
+              "atWord": 4.167
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.25
         }
       },
       "transition": "wipe",
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s05.mp3"
     },
     {
       "id": "s06",
       "type": "ASTRA_STAGE",
-      "durationFrames": 636,
-      "timingSource": "estimated",
+      "durationFrames": 600,
+      "timingSource": "tts",
       "narration": "How do you even score that kind of work? There's a benchmark for it, called OSWorld. Rather than asking a model questions, OSWorld sits it at a real desktop, hands it a real job, lets it work, and then inspects the machine afterwards to see whether the job got done. No credit for describing the answer, because describing is the easy half.",
       "data": {
         "astraStage": {
@@ -459,36 +465,37 @@
               "label": "Desktop",
               "sub": "a real machine, real apps",
               "icon": "lucide:monitor",
-              "atWord": 29
+              "atWord": 21.583
             },
             {
               "label": "The job",
               "sub": "what a person would be asked",
               "icon": "lucide:list-checks",
-              "atWord": 34
+              "atWord": 25.583
             },
             {
               "label": "It works",
               "sub": "clicking and typing, unattended",
               "icon": "lucide:mouse-pointer-2",
-              "atWord": 40
+              "atWord": 30.333
             },
             {
               "label": "Marked",
               "sub": "did the job actually get done",
               "icon": "lucide:badge-check",
-              "atWord": 50
+              "atWord": 36.75
             }
           ]
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s06.mp3"
     },
     {
       "id": "s06b",
       "type": "ASTRA_STAGE",
-      "durationFrames": 616,
-      "timingSource": "estimated",
+      "durationFrames": 676,
+      "timingSource": "tts",
       "narration": "GPT-5.6 Sol — the model Astra replaces — finishes sixty-five point seven percent of those jobs, at roughly seventy-five minutes each. Astra finishes seventy-two point six percent, in about forty minutes. Read the two together rather than separately, because separately they undersell it. More of the work lands, in half the time, because it stops less often to check in.",
       "data": {
         "astraStage": {
@@ -506,7 +513,8 @@
               "text": "65.7%",
               "detail": "75 min",
               "value": 65.7,
-              "atWord": 1
+              "atWord": 1,
+              "detailAtWord": 19.083
             },
             {
               "label": "GPT-6 Astra",
@@ -514,19 +522,21 @@
               "detail": "40 min",
               "value": 72.6,
               "win": true,
-              "atWord": 22
+              "atWord": 23.583,
+              "detailAtWord": 31.25
             }
           ],
-          "verdictAtWord": 44
+          "verdictAtWord": 43.75
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s06b.mp3"
     },
     {
       "id": "s07",
       "type": "RECORDED_STEP",
-      "durationFrames": 765,
-      "timingSource": "estimated",
+      "durationFrames": 641,
+      "timingSource": "tts",
       "narration": "Here is that row on OpenAI's own table, so you can read it rather than take my word for it. OSWorld 2.0, offline set, partial score — seventy-two point six percent, in the Astra column. A business reading this page cares less about which model is cleverer. A business cares that a job which cost seventy-five minutes now costs forty.",
       "data": {
         "recordedStep": {
@@ -543,11 +553,11 @@
               "zooms": [
                 {
                   "mark": "osworld",
-                  "atWord": 34
+                  "atWord": 28.333
                 },
                 {
                   "at": "full",
-                  "atWord": 49
+                  "atWord": 41.167
                 }
               ],
               "wantAtWord": 1,
@@ -860,23 +870,24 @@
                 }
               ],
               "shows": "Computer Use",
-              "atWord": 5
+              "atWord": 2.917
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.083
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s07.mp3"
     },
     {
       "id": "s08",
       "type": "CHAPTER",
-      "durationFrames": 213,
-      "timingSource": "estimated",
+      "durationFrames": 207,
+      "timingSource": "tts",
       "narration": "Before any benchmark, the plain facts. What it holds, what it costs, and whether you can run it today.",
       "data": {
         "chapter": {
@@ -886,13 +897,14 @@
         }
       },
       "transition": "dip",
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s08.mp3"
     },
     {
       "id": "s09",
       "type": "ASTRA_STAGE",
-      "durationFrames": 833,
-      "timingSource": "estimated",
+      "durationFrames": 852,
+      "timingSource": "tts",
       "narration": "Two terms carry the rest of this chapter, so here they are on a real sentence. A model doesn't read words. Models read tokens, and a token is a chunk of text. Common words come through whole, because they are common — Astra, can. Longer ones break up: oper, ate. Punctuation counts too. Six short words came apart into seven pieces. So a token averages about three quarters of an English word, and that is the unit every price is quoted in.",
       "data": {
         "astraStage": {
@@ -907,49 +919,50 @@
           "stage": [
             {
               "label": "Astra",
-              "atWord": 43
+              "atWord": 33.917
             },
             {
               "label": " can",
-              "atWord": 44
+              "atWord": 35.917
             },
             {
               "label": " oper",
               "sub": "fragment",
               "win": true,
-              "atWord": 49
+              "atWord": 40.917
             },
             {
               "label": "ate",
               "sub": "fragment",
               "win": true,
-              "atWord": 50
+              "atWord": 42.417
             },
             {
               "label": " a",
-              "atWord": 51
+              "atWord": 44.083
             },
             {
               "label": " computer",
-              "atWord": 52
+              "atWord": 45
             },
             {
               "label": ".",
               "sub": "still a token",
               "win": true,
-              "atWord": 60
+              "atWord": 52
             }
           ],
-          "verdictAtWord": 62
+          "verdictAtWord": 55.167
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s09.mp3"
     },
     {
       "id": "s09b",
       "type": "ASTRA_STAGE",
-      "durationFrames": 478,
-      "timingSource": "estimated",
+      "durationFrames": 549,
+      "timingSource": "tts",
       "narration": "Its context window is how many of those tokens a model holds at one time. Astra's window is one million, fifty thousand tokens. Artificial Analysis turns that into paper: fifteen hundred A4 pages. A contract, a codebase and a year of email, all open at once.",
       "data": {
         "astraStage": {
@@ -966,19 +979,21 @@
               "label": "tokens it can hold at once",
               "value": 1050000,
               "sub": "one million, fifty thousand",
-              "atWord": 16
+              "atWord": 10.833,
+              "detailAtWord": 24.167
             }
           ],
-          "verdictAtWord": 34
+          "verdictAtWord": 32.417
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s09b.mp3"
     },
     {
       "id": "s10",
       "type": "ASTRA_STAGE",
-      "durationFrames": 901,
-      "timingSource": "estimated",
+      "durationFrames": 869,
+      "timingSource": "tts",
       "narration": "Now the price, and these are the numbers you pay per million tokens. Text going in costs ten dollars. Text coming out costs fifty. Output runs at five times the input rate, because generating text is the expensive half. Cached input drops to one dollar — caching means the model re-reads something it has already seen, and you are billed a tenth for the privilege. Writing that cache costs twelve fifty once. Reading is cheap and writing is not, so a long conversation costs less than a long answer.",
       "data": {
         "astraStage": {
@@ -995,13 +1010,13 @@
               "label": "input",
               "text": "$10",
               "sub": "text you send it",
-              "atWord": 16
+              "atWord": 10.917
             },
             {
               "label": "output",
               "text": "$50",
               "sub": "text it writes back",
-              "atWord": 22
+              "atWord": 16.5
             },
             {
               "label": "cached input",
@@ -1009,25 +1024,26 @@
               "detail": "$10",
               "sub": "re-reading what it saw",
               "win": true,
-              "atWord": 40
+              "atWord": 33.083
             },
             {
               "label": "cache write",
               "text": "$12.50",
               "sub": "paid once, to store it",
-              "atWord": 66
+              "atWord": 51.75
             }
           ],
-          "verdictAtWord": 73
+          "verdictAtWord": 58.333
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s10.mp3"
     },
     {
       "id": "s11",
       "type": "RECORDED_STEP",
-      "durationFrames": 609,
-      "timingSource": "estimated",
+      "durationFrames": 540,
+      "timingSource": "tts",
       "narration": "OpenRouter lists the same rates, and it is useful precisely because it is not OpenAI's own page. Ten dollars and fifty dollars, per million tokens. OpenRouter also tracks who serves the model and how fast — OpenAI and Azure, with live throughput and uptime beside each one.",
       "data": {
         "recordedStep": {
@@ -1044,11 +1060,11 @@
               "zooms": [
                 {
                   "mark": "price",
-                  "atWord": 20
+                  "atWord": 16.833
                 },
                 {
                   "at": "full",
-                  "atWord": 31
+                  "atWord": 27.833
                 }
               ],
               "wantAtWord": 1,
@@ -1361,12 +1377,12 @@
                 }
               ],
               "shows": "OpenAI: GPT-6 Astra",
-              "atWord": 5
+              "atWord": 3.083
             },
             {
               "ref": "rec:astra-openrouter#providers",
               "label": "who serves it",
-              "wantAtWord": 37,
+              "wantAtWord": 33.833,
               "id": "providers",
               "src": "rec/astra-openrouter/seg-02.mp4",
               "frames": 84,
@@ -1667,25 +1683,26 @@
                 }
               ],
               "shows": "Pricing",
-              "atWord": 31
+              "atWord": 27.833
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.417
         }
       },
       "transition": "fade",
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s11.mp3"
     },
     {
       "id": "s12",
       "type": "ASTRA_STAGE",
-      "durationFrames": 813,
-      "timingSource": "estimated",
-      "narration": "One more practical thing, and it is the question I would ask first. Can you actually use it? On day one, access went to a limited set of organisations. Then ChatGPT Plus, Pro, Business and Enterprise, over the following days. Then the API, and Microsoft Azure, and Amazon Bedrock. If you are on a normal subscription and cannot find it, there's nothing wrong with your account. Access is simply staged, and most people watching this are still in the queue.",
+      "durationFrames": 938,
+      "timingSource": "tts",
+      "narration": "One more practical thing, and it is the question I would ask first. Can you actually use it? On day one, access went to a limited set of organisations. Then ChatGPT Plus, Pro, Business and Enterprise, over the following days. Then the API, and Microsoft Azure, and Amazon Bedrock. So if you're on a normal subscription and cannot find it, you are waiting like everyone else, and nothing is wrong with your account. Access is simply staged, and most people watching this are still in the queue.",
       "data": {
         "astraStage": {
           "headline": "Who can run it [today]",
@@ -1701,38 +1718,39 @@
               "label": "Limited orgs",
               "sub": "day one",
               "icon": "lucide:building-2",
-              "atWord": 26
+              "atWord": 21.333
             },
             {
               "label": "Plus · Pro · Business",
               "sub": "the days after",
               "icon": "lucide:users",
-              "atWord": 31
+              "atWord": 27.083
             },
             {
               "label": "API · Azure · Bedrock",
               "sub": "for developers",
               "icon": "lucide:plug",
-              "atWord": 43
+              "atWord": 39.75
             },
             {
               "label": "Everyone else",
               "sub": "still waiting",
               "icon": "lucide:hourglass",
               "win": true,
-              "atWord": 50
+              "atWord": 57
             }
           ],
-          "verdictAtWord": 67
+          "verdictAtWord": 65.5
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s12.mp3"
     },
     {
       "id": "s13",
       "type": "CHAPTER",
-      "durationFrames": 183,
-      "timingSource": "estimated",
+      "durationFrames": 202,
+      "timingSource": "tts",
       "narration": "Now the numbers OpenAI led with, and what each benchmark on their table is actually measuring.",
       "data": {
         "chapter": {
@@ -1742,13 +1760,14 @@
         }
       },
       "transition": "iris",
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s13.mp3"
     },
     {
       "id": "s14",
       "type": "ASTRA_STAGE",
-      "durationFrames": 823,
-      "timingSource": "estimated",
+      "durationFrames": 997,
+      "timingSource": "tts",
       "narration": "Start with BenchCAD, because it tests something models have historically been poor at. Given photographs of an object, can the model rebuild it as real geometry? Rebuilding needs a sense of scale, of what sits behind what, of how parts fit together. Astra scores ninety-five point nine percent. Claude Fable 5.1 gets eighty-four point three. GPT-5.6 Sol, eighty-three point three. Claude Opus 5, eighty-two point one. That's the widest gap on the table, because 3D is where models have always struggled.",
       "data": {
         "astraStage": {
@@ -1766,37 +1785,38 @@
               "text": "95.9%",
               "value": 95.9,
               "win": true,
-              "atWord": 43
+              "atWord": 36.75
             },
             {
               "label": "Claude Fable 5.1",
               "text": "84.3%",
               "value": 84.3,
-              "atWord": 49
+              "atWord": 44.083
             },
             {
               "label": "GPT-5.6 Sol",
               "text": "83.3%",
               "value": 83.3,
-              "atWord": 56
+              "atWord": 52.75
             },
             {
               "label": "Claude Opus 5",
               "text": "82.1%",
               "value": 82.1,
-              "atWord": 61
+              "atWord": 60
             }
           ],
-          "verdictAtWord": 67
+          "verdictAtWord": 67.667
         }
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s14.mp3"
     },
     {
       "id": "s15",
       "type": "RECORDED_STEP",
-      "durationFrames": 621,
-      "timingSource": "estimated",
+      "durationFrames": 473,
+      "timingSource": "tts",
       "narration": "Ninety-five point nine is on their page too. Ninety-five point nine percent, on the BenchCAD row. And it is the number behind the demo everyone shared that week — Astra modelling a house in Blender, then turning it into a scene you can walk through in Unreal Engine.",
       "data": {
         "recordedStep": {
@@ -1813,11 +1833,11 @@
               "zooms": [
                 {
                   "mark": "cad",
-                  "atWord": 26
+                  "atWord": 22
                 },
                 {
                   "at": "full",
-                  "atWord": 39
+                  "atWord": 31.833
                 }
               ],
               "wantAtWord": 1,
@@ -2130,24 +2150,25 @@
                 }
               ],
               "shows": "Professional",
-              "atWord": 5
+              "atWord": 3.583
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.583
         }
       },
       "transition": "push",
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s15.mp3"
     },
     {
       "id": "s16",
       "type": "ASTRA_STAGE",
-      "durationFrames": 842,
-      "timingSource": "estimated",
+      "durationFrames": 906,
+      "timingSource": "tts",
       "narration": "FrontierMath sits at the other end, where the questions are meant to defeat a model. Its problems are written by working mathematicians to be hard for models specifically, and Tier 4 is the hardest band, which means a high score there is unusual. Astra takes ninety-seven point six percent. Fable 5.1 and Fable 5 both land on eighty-seven point eight. Opus 5, seventy-three point two. When a score climbs that high, people say the benchmark is saturated — it's stopped telling models apart.",
       "data": {
         "astraStage": {
@@ -2165,38 +2186,39 @@
               "text": "97.6%",
               "value": 97.6,
               "win": true,
-              "atWord": 44
+              "atWord": 32.5
             },
             {
               "label": "Claude Fable 5.1",
               "text": "87.8%",
               "value": 87.8,
-              "atWord": 50
+              "atWord": 40.083
             },
             {
               "label": "Claude Fable 5",
               "text": "87.8%",
               "value": 87.8,
-              "atWord": 53
+              "atWord": 43.917
             },
             {
               "label": "Claude Opus 5",
               "text": "73.2%",
               "value": 73.2,
-              "atWord": 61
+              "atWord": 52
             }
           ],
-          "verdictAtWord": 66
+          "verdictAtWord": 58.667
         }
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s16.mp3"
     },
     {
       "id": "s17",
       "type": "ASTRA_STAGE",
-      "durationFrames": 941,
-      "timingSource": "estimated",
-      "narration": "OpenAI also says an internal Astra made progress on ten long-standing problems in mathematics, and published a repository for one of them. A bound on prime gaps, formalised in Lean, which is software that checks a proof line by line. Here is the part worth keeping. Its own repository says the result rests on three explicit input axioms — an axiom being something you assume rather than prove — and a conditional proof isn't a closed one. Serious work, still waiting on expert review, which is a fair thing to say out loud.",
+      "durationFrames": 925,
+      "timingSource": "tts",
+      "narration": "OpenAI also says an internal Astra made progress on ten long-standing problems in mathematics, and published a repository for one of them. A bound on prime gaps, formalised in Lean, which is software that checks a proof line by line. Here is the part worth keeping. Its own repository says the result rests on three explicit input axioms — one, two, three — an axiom being something you assume rather than prove. Serious work, still waiting on expert review, which is a fair thing to say out loud.",
       "data": {
         "astraStage": {
           "headline": "A proof that [leans on three]",
@@ -2211,31 +2233,32 @@
             {
               "label": "liminf (p n+1 − p n) ≤ 186",
               "sub": "formalised in Lean",
-              "atWord": 23
+              "atWord": 21
             },
             {
               "label": "input axiom 1",
-              "atWord": 55
+              "atWord": 53.083
             },
             {
               "label": "input axiom 2",
-              "atWord": 58
+              "atWord": 54.5
             },
             {
               "label": "input axiom 3",
-              "atWord": 72
+              "atWord": 55.583
             }
           ],
-          "verdictAtWord": 78
+          "verdictAtWord": 65.333
         }
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s17.mp3"
     },
     {
       "id": "s18",
       "type": "CHAPTER",
-      "durationFrames": 233,
-      "timingSource": "estimated",
+      "durationFrames": 239,
+      "timingSource": "tts",
       "narration": "Here's the chapter I opened with — ninety-nine point nine and sixty-two point seven, from the same test measured two ways.",
       "data": {
         "chapter": {
@@ -2245,13 +2268,14 @@
         }
       },
       "transition": "zoom",
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s18.mp3"
     },
     {
       "id": "s19",
       "type": "ASTRA_STAGE",
-      "durationFrames": 852,
-      "timingSource": "estimated",
+      "durationFrames": 866,
+      "timingSource": "tts",
       "narration": "ARC-AGI-3 comes from the ARC Prize foundation, and it's built differently, because the others measure knowledge. A model is dropped into a small world it has never seen, with no instructions at all. A model has to poke at things, notice what changed, work out what the goal even is, then plan. ARC Prize call that agentic intelligence — acting sensibly with nobody explaining the task. So the puzzle isn't solving the game. Working out what the game even is — that's the test.",
       "data": {
         "astraStage": {
@@ -2266,35 +2290,36 @@
           "stage": [
             {
               "label": "no instructions",
-              "atWord": 24
+              "atWord": 21.5
             },
             {
               "label": "press this → that moves",
-              "atWord": 43
+              "atWord": 35.833
             },
             {
               "label": "walls block, gaps do not",
-              "atWord": 48
+              "atWord": 39.167
             },
             {
               "label": "reach the marked square",
-              "atWord": 52
+              "atWord": 42.167
             },
             {
               "label": "shorthand it invented",
-              "atWord": 66
+              "atWord": 58.5
             }
           ],
-          "verdictAtWord": 67
+          "verdictAtWord": 58.833
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s19.mp3"
     },
     {
       "id": "s20",
       "type": "ASTRA_STAGE",
-      "durationFrames": 646,
-      "timingSource": "estimated",
+      "durationFrames": 619,
+      "timingSource": "tts",
       "narration": "ARC Prize ran Astra twice and published both runs. Their first run uses the standard harness — a neutral interface where the notes a model keeps get written out in the open. Their second uses a provider adapter, letting the model hold its reasoning privately between requests. So the room changed, and the model did not, which means the score describes the room.",
       "data": {
         "astraStage": {
@@ -2312,7 +2337,7 @@
               "text": "62.7%",
               "detail": "$26,098",
               "sub": "provider-neutral, notes in the open",
-              "atWord": 15
+              "atWord": 12.25
             },
             {
               "label": "Provider Adapter",
@@ -2320,19 +2345,20 @@
               "detail": "$18,817",
               "sub": "private state kept between requests",
               "win": true,
-              "atWord": 37
+              "atWord": 28.25
             }
           ],
-          "verdictAtWord": 48
+          "verdictAtWord": 39.333
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s20.mp3"
     },
     {
       "id": "s21",
       "type": "RECORDED_STEP",
-      "durationFrames": 705,
-      "timingSource": "estimated",
+      "durationFrames": 645,
+      "timingSource": "tts",
       "narration": "Here's ARC Prize's own write-up, by Greg Kamradt, published the day Astra launched. Their summary line carries both numbers and both costs. Sixty-two point seven percent, for twenty-six thousand dollars, on the standard harness. Ninety-nine point nine for nineteen thousand with the adapter. Read that slowly, because it's been on the internet since day one.",
       "data": {
         "recordedStep": {
@@ -2349,7 +2375,7 @@
               "zooms": [
                 {
                   "mark": "standard",
-                  "atWord": 18
+                  "atWord": 16.417
                 }
               ],
               "wantAtWord": 1,
@@ -2578,7 +2604,7 @@
                 }
               ],
               "shows": "Standard harness",
-              "atWord": 5
+              "atWord": 3.25
             },
             {
               "ref": "rec:astra-arc#adapter",
@@ -2587,10 +2613,10 @@
               "zooms": [
                 {
                   "mark": "adapter",
-                  "atWord": 36
+                  "atWord": 37.083
                 }
               ],
-              "wantAtWord": 23,
+              "wantAtWord": 21.75,
               "id": "adapter",
               "src": "rec/astra-arc/seg-04.mp4",
               "frames": 48,
@@ -2816,24 +2842,25 @@
                 }
               ],
               "shows": "Standard harness",
-              "atWord": 23
+              "atWord": 21.75
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
       "transition": "slide",
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s21.mp3"
     },
     {
       "id": "s22",
       "type": "ASTRA_STAGE",
-      "durationFrames": 774,
-      "timingSource": "estimated",
+      "durationFrames": 825,
+      "timingSource": "tts",
       "narration": "Here is the context that changes how both numbers read. ARC Prize tested people on the same environments, and humans solve one hundred percent of them, at roughly twelve dollars seventy-eight a game. Against that, Astra on the neutral harness reaches sixty-two point seven percent and spends twenty-six thousand dollars. With the adapter it reaches ninety-nine point nine, for nineteen thousand. A person's cheaper and still perfect, which is worth holding on to for a moment.",
       "data": {
         "astraStage": {
@@ -2842,41 +2869,43 @@
           "premise": "Score up the side, cost per attempt along the bottom. The cost axis multiplies by ten each step.",
           "stageTitle": "score against cost, ARC-AGI-3",
           "token": "humans included",
-          "color": "green",
+          "color": "blue",
           "verdict": "Humans: 100%, for about $12.78",
           "verdictSub": "ARC Prize measured that too",
           "stage": [
             {
-              "label": "a person",
+              "label": "humans",
               "value": 100,
               "text": "$12.78",
               "win": true,
-              "atWord": 20
+              "atWord": 15.667
             },
             {
               "label": "Astra · standard",
               "value": 62.7,
               "text": "$26,098",
-              "atWord": 36
+              "color": "orange",
+              "atWord": 30.75
             },
             {
               "label": "Astra · adapter",
               "value": 99.9,
               "text": "$18,817",
               "color": "purple",
-              "atWord": 51
+              "atWord": 46.333
             }
           ],
-          "verdictAtWord": 62
+          "verdictAtWord": 56.5
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s22.mp3"
     },
     {
       "id": "s23",
       "type": "ASTRA_STAGE",
-      "durationFrames": 852,
-      "timingSource": "estimated",
+      "durationFrames": 897,
+      "timingSource": "tts",
       "narration": "Now the part I find far more interesting than either score. ARC Prize describe what Astra did inside those games. Astra turned unfamiliar environments into compact symbolic world models — meaning it worked out the underlying rules and wrote them down as logic. Then it invented its own shorthand, a private little notation, to track the state of the game and plan its moves. Nobody designed that shorthand. Astra built that notation because the notation was useful, which is a striking thing to read.",
       "data": {
         "astraStage": {
@@ -2890,36 +2919,37 @@
           "verdictSub": "nobody asked it to, and nobody designed it",
           "stage": [
             {
-              "label": "a world it has never seen",
-              "atWord": 20
+              "label": "the games it was dropped into",
+              "atWord": 17.833
             },
             {
               "label": "press → the block slides",
-              "atWord": 29
+              "atWord": 28.917
             },
             {
               "label": "two blocks cannot overlap",
-              "atWord": 37
+              "atWord": 34.75
             },
             {
               "label": "the marked square ends it",
-              "atWord": 49
+              "atWord": 44.333
             },
             {
               "label": "its own shorthand",
-              "atWord": 65
+              "atWord": 58.25
             }
           ],
-          "verdictAtWord": 69
+          "verdictAtWord": 62.5
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s23.mp3"
     },
     {
       "id": "s24",
       "type": "ASTRA_STAGE",
-      "durationFrames": 587,
-      "timingSource": "estimated",
+      "durationFrames": 611,
+      "timingSource": "tts",
       "narration": "One more from that report, and it is a genuine result. On ninety-six percent of levels, Astra reached the goal using fewer actions than the median person tested. Across all levels it used fifty-one point seven percent fewer actions on average — about half. Getting there matters, and getting there without flailing is a different skill entirely.",
       "data": {
         "astraStage": {
@@ -2937,26 +2967,27 @@
               "text": "96.0%",
               "value": 96,
               "win": true,
-              "atWord": 13
+              "atWord": 10.167
             },
             {
               "label": "fewer actions per level",
               "text": "51.7%",
               "value": 51.7,
-              "atWord": 34
+              "atWord": 28.417
             }
           ],
-          "verdictAtWord": 45
+          "verdictAtWord": 38.333
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s24.mp3"
     },
     {
       "id": "s25",
       "type": "ASTRA_STAGE",
-      "durationFrames": 764,
-      "timingSource": "estimated",
-      "narration": "And ARC Prize themselves are careful about what it means. ARC Prize call Astra a noticeable step-function change in frontier model capability — that is their phrase, and it isn't faint praise. In the same report they say saturating this benchmark would not represent proof of achieving AGI, and they point at the tightly bounded scope of the environments. So the people who built the test are the ones telling you where its edges are.",
+      "durationFrames": 762,
+      "timingSource": "tts",
+      "narration": "And ARC Prize themselves are careful about what it means. ARC Prize call Astra a noticeable step-function change in frontier model capability — that is their phrase, and it isn't faint praise. In the same report they say saturating this benchmark would not represent proof of achieving AGI, they point at the tightly bounded scope of these environments, and they publish the human baseline beside it. So the people who built the test are the ones telling you where its edges are.",
       "data": {
         "astraStage": {
           "headline": "What ARC Prize [actually said]",
@@ -2972,39 +3003,40 @@
               "label": "a step-function change",
               "sub": "their phrase, in the report",
               "icon": "lucide:trending-up",
-              "atWord": 16
-            },
-            {
-              "label": "tightly bounded scope",
-              "sub": "deterministic, closed-ended",
-              "icon": "lucide:frame",
-              "atWord": 39
+              "atWord": 12
             },
             {
               "label": "not proof of AGI",
               "sub": "even if fully saturated",
               "icon": "lucide:shield-x",
               "win": true,
-              "atWord": 43
+              "atWord": 34.25
             },
             {
-              "label": "measured against people",
-              "sub": "the human baseline is published",
+              "label": "tightly bounded scope",
+              "sub": "deterministic, closed-ended",
+              "icon": "lucide:frame",
+              "atWord": 42.25
+            },
+            {
+              "label": "the human baseline",
+              "sub": "published beside every score",
               "icon": "lucide:users",
               "win": true,
-              "atWord": 54
+              "atWord": 49.333
             }
           ],
-          "verdictAtWord": 60
+          "verdictAtWord": 53.083
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s25.mp3"
     },
     {
       "id": "s26",
       "type": "CHAPTER",
-      "durationFrames": 213,
-      "timingSource": "estimated",
+      "durationFrames": 204,
+      "timingSource": "tts",
       "narration": "Every launch post picks its own battles. What makes this one unusual is the fights it prints and loses.",
       "data": {
         "chapter": {
@@ -3014,13 +3046,14 @@
         }
       },
       "transition": "whippan",
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s26.mp3"
     },
     {
       "id": "s27",
       "type": "ASTRA_STAGE",
-      "durationFrames": 557,
-      "timingSource": "estimated",
+      "durationFrames": 761,
+      "timingSource": "tts",
       "narration": "Humanity's Last Exam collects expert-level questions from across the sciences, written specifically to be hard for models. On that row, Claude Fable 5.1 scores sixty-five percent. Claude Fable 5, sixty-three point eight. Claude Opus 5, sixty-three point six. Astra scores fifty-seven point two. All three Claude models finish ahead, and OpenAI printed that themselves.",
       "data": {
         "astraStage": {
@@ -3038,38 +3071,39 @@
               "text": "65.0%",
               "value": 65,
               "win": true,
-              "atWord": 21
+              "atWord": 20.5
             },
             {
               "label": "Claude Fable 5",
               "text": "63.8%",
               "value": 63.8,
-              "atWord": 27
+              "atWord": 29
             },
             {
               "label": "Claude Opus 5",
               "text": "63.6%",
               "value": 63.6,
-              "atWord": 33
+              "atWord": 36.583
             },
             {
               "label": "GPT-6 Astra",
               "text": "57.2%",
               "value": 57.2,
               "color": "red",
-              "atWord": 39
+              "atWord": 44.25
             }
           ],
-          "verdictAtWord": 44
+          "verdictAtWord": 50.417
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s27.mp3"
     },
     {
       "id": "s28",
       "type": "RECORDED_STEP",
-      "durationFrames": 765,
-      "timingSource": "estimated",
+      "durationFrames": 596,
+      "timingSource": "tts",
       "narration": "Here is that row, on OpenAI's own page, and it is worth seeing with your own eyes. Humanity's Last Exam, with tools. Fifty-seven point two in the Astra column, sixty-five in Fable 5.1's. A launch page that prints the rows where it comes second is a page you can trust a little more on the rows where it comes first.",
       "data": {
         "recordedStep": {
@@ -3086,11 +3120,11 @@
               "zooms": [
                 {
                   "mark": "astrahle",
-                  "atWord": 34
+                  "atWord": 29.75
                 },
                 {
                   "at": "full",
-                  "atWord": 49
+                  "atWord": 39.333
                 }
               ],
               "wantAtWord": 1,
@@ -3403,24 +3437,25 @@
                 }
               ],
               "shows": "Academic",
-              "atWord": 5
+              "atWord": 2.667
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
       "transition": "dip",
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s28.mp3"
     },
     {
       "id": "s29",
       "type": "RECORDED_STEP",
-      "durationFrames": 597,
-      "timingSource": "estimated",
+      "durationFrames": 599,
+      "timingSource": "tts",
       "narration": "And a second opinion, from Artificial Analysis, who benchmark models independently and don't sell one. Their intelligence index blends ten separate evaluations into one score. Look at the ordering rather than the digits. Claude Fable 5.1 sits at fifty-seven, on top. Astra's best setting reaches fifty-five.",
       "data": {
         "recordedStep": {
@@ -3734,7 +3769,7 @@
                 }
               ],
               "shows": "GPT-6 Astra: Release Intelligence, Performance & Price",
-              "atWord": 5
+              "atWord": 3
             },
             {
               "ref": "rec:astra-aa#index",
@@ -3746,10 +3781,10 @@
                     "max",
                     "low"
                   ],
-                  "atWord": 31
+                  "atWord": 29.917
                 }
               ],
-              "wantAtWord": 16,
+              "wantAtWord": 15.5,
               "id": "index",
               "src": "rec/astra-aa/seg-02.mp4",
               "frames": 98,
@@ -4036,23 +4071,24 @@
                 }
               ],
               "shows": "Intelligence",
-              "atWord": 16
+              "atWord": 15.5
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s29.mp3"
     },
     {
       "id": "s30",
       "type": "ASTRA_STAGE",
-      "durationFrames": 695,
-      "timingSource": "estimated",
+      "durationFrames": 817,
+      "timingSource": "tts",
       "narration": "Here are the top four of a much longer board, side by side. Claude Fable 5.1 at fifty-seven. Astra at max effort, fifty-five. Astra at high effort, fifty-three. GPT-5.6 Sol at max, fifty-one. Three separate sources agree on the ordering — this board, OpenAI's own table, and the review I will come to shortly. Astra is excellent here, and it is second, and both halves of that matter.",
       "data": {
         "astraStage": {
@@ -4070,37 +4106,38 @@
               "text": "57",
               "value": 57,
               "win": true,
-              "atWord": 14
+              "atWord": 8.917
             },
             {
               "label": "GPT-6 Astra (max)",
               "text": "55",
               "value": 55,
-              "atWord": 19
+              "atWord": 16.667
             },
             {
               "label": "GPT-6 Astra (high)",
               "text": "53",
               "value": 53,
-              "atWord": 24
+              "atWord": 23.417
             },
             {
               "label": "GPT-5.6 Sol (max)",
               "text": "51",
               "value": 51,
-              "atWord": 29
+              "atWord": 29.417
             }
           ],
-          "verdictAtWord": 55
+          "verdictAtWord": 53.083
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s30.mp3"
     },
     {
       "id": "s31",
       "type": "ASTRA_STAGE",
-      "durationFrames": 695,
-      "timingSource": "estimated",
+      "durationFrames": 781,
+      "timingSource": "tts",
       "narration": "One more table, because it complicates the story in a way worth knowing about. On science and health, GeneBench Pro moves from thirty-two point three to thirty-seven point one. MedChemBench, forty-seven point four to forty-nine point three. LifeSciBench, fifty-nine point nine to sixty point three — under half a point. HealthBench Professional gains three. Every one of those is an improvement, and none of them is a leap.",
       "data": {
         "astraStage": {
@@ -4119,40 +4156,41 @@
               "detail": "was 32.3",
               "value": 37.1,
               "win": true,
-              "atWord": 19
+              "atWord": 15
             },
             {
               "label": "MedChemBench",
               "text": "49.3%",
               "detail": "was 47.4",
               "value": 49.3,
-              "atWord": 30
+              "atWord": 25.583
             },
             {
               "label": "LifeSciBench",
               "text": "60.3%",
               "detail": "was 59.9",
               "value": 60.3,
-              "atWord": 38
+              "atWord": 36.167
             },
             {
               "label": "HealthBench Pro",
               "text": "63.4%",
               "detail": "was 60.5",
               "value": 63.4,
-              "atWord": 51
+              "atWord": 50.167
             }
           ],
-          "verdictAtWord": 55
+          "verdictAtWord": 54.917
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s31.mp3"
     },
     {
       "id": "s32",
       "type": "CHAPTER",
-      "durationFrames": 282,
-      "timingSource": "estimated",
+      "durationFrames": 272,
+      "timingSource": "tts",
       "narration": "Now for the Critical threshold, where the tone of the launch changes and OpenAI's own language gets careful. Astra is the first model to reach it.",
       "data": {
         "chapter": {
@@ -4162,13 +4200,14 @@
         }
       },
       "transition": "morph",
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s32.mp3"
     },
     {
       "id": "s33",
       "type": "ASTRA_STAGE",
-      "durationFrames": 567,
-      "timingSource": "estimated",
+      "durationFrames": 633,
+      "timingSource": "tts",
       "narration": "OpenAI run something called the Preparedness Framework, which grades how dangerous a model's capabilities are in a given area. Grades run Low, Medium, High, and Critical. Astra is the first model they have graded Critical for cybersecurity, which means the capability is real enough to fence. Every model before Astra stopped lower down that ladder.",
       "data": {
         "astraStage": {
@@ -4184,35 +4223,36 @@
             {
               "label": "Low",
               "sub": "no meaningful uplift",
-              "atWord": 22
+              "atWord": 19.083
             },
             {
               "label": "Medium",
               "sub": "some assistance",
-              "atWord": 23
+              "atWord": 20.5
             },
             {
               "label": "High",
               "sub": "significant uplift",
-              "atWord": 24
+              "atWord": 22.5
             },
             {
               "label": "Critical",
               "sub": "novel vulnerabilities, unattended",
               "win": true,
-              "atWord": 26
+              "atWord": 24.083
             }
           ],
-          "verdictAtWord": 47
+          "verdictAtWord": 43.333
         }
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s33.mp3"
     },
     {
       "id": "s34",
       "type": "RECORDED_STEP",
-      "durationFrames": 741,
-      "timingSource": "estimated",
+      "durationFrames": 681,
+      "timingSource": "tts",
       "narration": "Critical appears on their page, in the safety section. Critical threshold. Their description of what that means is worth reading in full: with the right tools and access, Astra can find previously unknown security flaws and develop new ways to exploit them, across well-protected systems, without a person guiding each step. Pause here and read that sentence again.",
       "data": {
         "recordedStep": {
@@ -4229,11 +4269,11 @@
               "zooms": [
                 {
                   "mark": "crit",
-                  "atWord": 36
+                  "atWord": 32.667
                 },
                 {
                   "at": "full",
-                  "atWord": 47
+                  "atWord": 43.333
                 }
               ],
               "wantAtWord": 1,
@@ -4402,24 +4442,25 @@
                 }
               ],
               "shows": "Cybersecurity",
-              "atWord": 5
+              "atWord": 2.75
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.167
         }
       },
       "transition": "iris",
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s34.mp3"
     },
     {
       "id": "s35",
       "type": "ASTRA_STAGE",
-      "durationFrames": 587,
-      "timingSource": "estimated",
+      "durationFrames": 709,
+      "timingSource": "tts",
       "narration": "Numbers behind that grade look nothing like the science ones. On ExploitBench, Astra scores one hundred percent against Sol's seventy-eight point five. On SRE-Bench it solves eighty-eight percent of tasks first try, where Sol managed fifty-five point nine. On ExploitGym, forty-two point four against thirty point three. Compare that with the half-point gains on the science table.",
       "data": {
         "astraStage": {
@@ -4438,33 +4479,34 @@
               "detail": "was 78.5",
               "value": 100,
               "win": true,
-              "atWord": 12
+              "atWord": 9.5
             },
             {
               "label": "SRE-Bench (1 try)",
               "text": "88.0%",
               "detail": "was 55.9",
               "value": 88,
-              "atWord": 24
+              "atWord": 24.167
             },
             {
               "label": "ExploitGym",
               "text": "42.4%",
               "detail": "was 30.3",
               "value": 42.4,
-              "atWord": 40
+              "atWord": 39.583
             }
           ],
-          "verdictAtWord": 48
+          "verdictAtWord": 49.25
         }
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s35.mp3"
     },
     {
       "id": "s36",
       "type": "ASTRA_STAGE",
-      "durationFrames": 685,
-      "timingSource": "estimated",
+      "durationFrames": 724,
+      "timingSource": "tts",
       "narration": "Which is why the release looks the way it does. Their public version ships restricted, refusing advanced cyber requests outright. Advanced access went to vetted testers first. Defenders get in through a programme called Daybreak Blue. And OpenAI added delays before launch to build extra safeguards after an incident earlier in the year. A model that can operate computers this well stops being only a productivity tool.",
       "data": {
         "astraStage": {
@@ -4481,38 +4523,39 @@
               "label": "Restricted build",
               "sub": "refuses the hard requests",
               "icon": "lucide:shield",
-              "atWord": 15
+              "atWord": 9.583
             },
             {
               "label": "Vetted testers",
               "sub": "advanced access, case by case",
               "icon": "lucide:user-check",
-              "atWord": 25
+              "atWord": 21.75
             },
             {
               "label": "Daybreak Blue",
               "sub": "for defensive work",
               "icon": "lucide:shield-check",
-              "atWord": 35
+              "atWord": 30.583
             },
             {
               "label": "Extra safeguards",
               "sub": "added before launch",
               "icon": "lucide:lock",
               "win": true,
-              "atWord": 40
+              "atWord": 36
             }
           ],
-          "verdictAtWord": 54
+          "verdictAtWord": 47.083
         }
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s36.mp3"
     },
     {
       "id": "s37",
       "type": "CHAPTER",
-      "durationFrames": 233,
-      "timingSource": "estimated",
+      "durationFrames": 215,
+      "timingSource": "tts",
       "narration": "Now something almost none of the coverage touched, even though it may be the most consequential change in the whole release.",
       "data": {
         "chapter": {
@@ -4522,13 +4565,14 @@
         }
       },
       "transition": "blinds",
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s37.mp3"
     },
     {
       "id": "s38",
       "type": "ASTRA_STAGE",
-      "durationFrames": 616,
-      "timingSource": "estimated",
+      "durationFrames": 639,
+      "timingSource": "tts",
       "narration": "Recent reasoning models think in text. Models write steps out, and you can read them — which is how researchers check whether a model reasons honestly. Astra uses recurrent depth, looping internally instead, thinking without writing any of it down. Researchers call that a monitorability problem, because you cannot audit reasoning you cannot see, and nobody has solved that yet.",
       "data": {
         "astraStage": {
@@ -4544,24 +4588,25 @@
             {
               "label": "reasoning in text",
               "sub": "every step legible",
-              "atWord": 9
+              "atWord": 7.5
             },
             {
               "label": "recurrent depth",
               "sub": "the loop runs, nothing comes out",
-              "atWord": 34
+              "atWord": 30.667
             }
           ],
-          "verdictAtWord": 48
+          "verdictAtWord": 41.667
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s38.mp3"
     },
     {
       "id": "s39",
       "type": "ASTRA_STAGE",
-      "durationFrames": 626,
-      "timingSource": "estimated",
+      "durationFrames": 612,
+      "timingSource": "tts",
       "narration": "Hold that next to chapter four, because the two facts are the same fact. A neutral harness makes a model write its notes in the open, and there Astra scores sixty-two point seven. Their adapter lets it keep that private state between requests, and there it scores ninety-nine point nine. So the thirty-seven points live in the part you cannot inspect.",
       "data": {
         "astraStage": {
@@ -4578,26 +4623,27 @@
               "label": "notes in the open",
               "text": "62.7%",
               "sub": "standard harness",
-              "atWord": 16
+              "atWord": 10.833
             },
             {
               "label": "private state kept",
               "text": "99.9%",
               "sub": "provider adapter",
               "win": true,
-              "atWord": 35
+              "atWord": 26.167
             }
           ],
-          "verdictAtWord": 51
+          "verdictAtWord": 40.417
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s39.mp3"
     },
     {
       "id": "s40",
       "type": "CHAPTER",
-      "durationFrames": 242,
-      "timingSource": "estimated",
+      "durationFrames": 221,
+      "timingSource": "tts",
       "narration": "Benchmarks are one kind of evidence. Things you can open in a browser and use are another, and launch week produced plenty.",
       "data": {
         "chapter": {
@@ -4607,13 +4653,14 @@
         }
       },
       "transition": "push",
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s40.mp3"
     },
     {
       "id": "s41",
       "type": "ASTRA_STAGE",
-      "durationFrames": 774,
-      "timingSource": "estimated",
+      "durationFrames": 716,
+      "timingSource": "tts",
       "narration": "Sorting these matters, because launch week is full of impressive video and very little proof. A clip of a kart racer is a claim, because you cannot run it yourself. A thread showing a house built in Blender is a claim. Neither one is checkable. But a page you can open and use is different, and source code you can read is different again. One kind you can verify. Whereas the other you take on trust.",
       "data": {
         "astraStage": {
@@ -4630,39 +4677,40 @@
               "label": "kart racer clip",
               "sub": "a video of it working",
               "icon": "lucide:play",
-              "atWord": 17
+              "atWord": 14.5
             },
             {
               "label": "Blender house thread",
               "sub": "screenshots and a claim",
               "icon": "lucide:play",
-              "atWord": 35
+              "atWord": 26.333
             },
             {
               "label": "a page you can open",
               "sub": "running right now",
               "icon": "lucide:globe",
               "win": true,
-              "atWord": 51
+              "atWord": 37.75
             },
             {
               "label": "source you can read",
               "sub": "public on GitHub",
               "icon": "lucide:file-code-2",
               "win": true,
-              "atWord": 57
+              "atWord": 42.25
             }
           ],
-          "verdictAtWord": 65
+          "verdictAtWord": 48.083
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s41.mp3"
     },
     {
       "id": "s42",
       "type": "RECORDED_STEP",
-      "durationFrames": 837,
-      "timingSource": "estimated",
+      "durationFrames": 655,
+      "timingSource": "tts",
       "narration": "So here is one of the second kind. Here's ABYSSAL, built by Ethan Mollick — a procedural underwater world running in an ordinary browser tab. Procedural means the reefs, the kelp and the creatures are generated by code from a seed rather than modelled by hand. Watch the water for a moment. Nothing here is a recording of a demo; the page is doing this live.",
       "data": {
         "recordedStep": {
@@ -4679,15 +4727,15 @@
               "zooms": [
                 {
                   "at": "full",
-                  "atWord": 29
+                  "atWord": 25.75
                 },
                 {
                   "at": "full",
-                  "atWord": 41
+                  "atWord": 34.25
                 },
                 {
                   "at": "full",
-                  "atWord": 54
+                  "atWord": 44.583
                 }
               ],
               "wantAtWord": 1,
@@ -4895,24 +4943,25 @@
                 }
               ],
               "shows": "The breathing sea",
-              "atWord": 5
+              "atWord": 2.417
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
       "transition": "morph",
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s42.mp3"
     },
     {
       "id": "s43",
       "type": "RECORDED_STEP",
-      "durationFrames": 645,
-      "timingSource": "estimated",
+      "durationFrames": 458,
+      "timingSource": "tts",
       "narration": "And the source sits on GitHub, which is what turns a demo into evidence. Anyone can read how the reefs and the kelp forests get generated, and check for themselves that the page does what it claims. Openness like that is the bar I would hold every launch-week demo to.",
       "data": {
         "recordedStep": {
@@ -4929,11 +4978,11 @@
               "zooms": [
                 {
                   "at": "full",
-                  "atWord": 25
+                  "atWord": 15.667
                 },
                 {
                   "at": "full",
-                  "atWord": 41
+                  "atWord": 27.917
                 }
               ],
               "wantAtWord": 1,
@@ -5237,23 +5286,24 @@
                 }
               ],
               "shows": "About",
-              "atWord": 5
+              "atWord": 2.5
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "background": "zoneC"
+      "background": "zoneC",
+      "audio": "audio/gpt-6-astra_s43.mp3"
     },
     {
       "id": "s44",
       "type": "CHAPTER",
-      "durationFrames": 183,
-      "timingSource": "estimated",
+      "durationFrames": 202,
+      "timingSource": "tts",
       "narration": "Away from the launch coverage, developers were having a rather different conversation about the same model.",
       "data": {
         "chapter": {
@@ -5263,13 +5313,14 @@
         }
       },
       "transition": "slide",
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s44.mp3"
     },
     {
       "id": "s45",
       "type": "RECORDED_STEP",
-      "durationFrames": 669,
-      "timingSource": "estimated",
+      "durationFrames": 535,
+      "timingSource": "tts",
       "narration": "Over on the developersIndia subreddit, this thread ran days after launch, and it caught a real mood. Its author says Astra feels different, that it is capable across the whole development loop, and asks whether software engineering is still a career worth being in. Six hundred and fifty-one people upvoted the question.",
       "data": {
         "recordedStep": {
@@ -5286,11 +5337,11 @@
               "zooms": [
                 {
                   "at": "full",
-                  "atWord": 26
+                  "atWord": 20.667
                 },
                 {
                   "at": "full",
-                  "atWord": 43
+                  "atWord": 32.917
                 }
               ],
               "wantAtWord": 1,
@@ -5444,24 +5495,25 @@
                 }
               ],
               "shows": "GPT 6.O Astra is insanely good, good alternative career paths for us SDEs?",
-              "atWord": 5
+              "atWord": 3.167
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s45.mp3"
     },
     {
       "id": "s46",
       "type": "ASTRA_STAGE",
-      "durationFrames": 921,
-      "timingSource": "estimated",
-      "narration": "Here is the shape of that thread, and the votes tell the story better than any quote. Six hundred and fifty-one people upvoted that post. Its top reply — here we go again, every few months a model gives a life-changing experience — took eleven hundred. Another asked whether people remember Devin, which was going to replace all software engineers three years ago. Two hundred and twenty-seven upvoted somebody who can't even find Astra yet. Weariness won that thread, because most of these people have watched this exact launch cycle before.",
+      "durationFrames": 925,
+      "timingSource": "tts",
+      "narration": "Here is the shape of that thread, and the votes tell the story better than any quote. Six hundred and fifty-one people upvoted that post. Its top reply — here we go again, every few months a model gives a life-changing experience — took eleven hundred. Another asked whether people remember Devin, which was going to replace all software engineers three years ago. And another reply, on two hundred and twenty-seven, from somebody who can't even find Astra yet. Weariness won that thread, because most of these people have watched this exact launch cycle before.",
       "data": {
         "astraStage": {
           "headline": "The room [voted]",
@@ -5478,7 +5530,7 @@
               "text": "651",
               "value": 651,
               "sub": "Astra is insanely good — where do we go from here?",
-              "atWord": 25
+              "atWord": 17.417
             },
             {
               "label": "top reply",
@@ -5486,33 +5538,34 @@
               "value": 1100,
               "win": true,
               "sub": "here we go again, every few months a model gives a life-changing experience",
-              "atWord": 28
+              "atWord": 20.417
             },
             {
               "label": "reply",
               "text": "512",
               "value": 512,
               "sub": "remember how Devin was gonna replace all software engineers three years ago?",
-              "atWord": 47
+              "atWord": 36.417
             },
             {
               "label": "reply",
               "text": "227",
               "value": 227,
               "sub": "how are you using it? I do not see it in my subscriptions",
-              "atWord": 64
+              "atWord": 52.25
             }
           ],
-          "verdictAtWord": 76
+          "verdictAtWord": 64.917
         }
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s46.mp3"
     },
     {
       "id": "s47",
       "type": "CHAPTER",
-      "durationFrames": 262,
-      "timingSource": "estimated",
+      "durationFrames": 229,
+      "timingSource": "tts",
       "narration": "So which one should you reach for? That gets sorted by the job in front of you, rather than by whose launch was louder.",
       "data": {
         "chapter": {
@@ -5522,13 +5575,14 @@
         }
       },
       "transition": "clock",
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s47.mp3"
     },
     {
       "id": "s48",
       "type": "RECORDED_STEP",
-      "durationFrames": 717,
-      "timingSource": "estimated",
+      "durationFrames": 554,
+      "timingSource": "tts",
       "narration": "Now, the sharpest line I read on this came from a developer writing as unicodeveloper, in a review called A taste of AGI. Their framing runs to a single sentence. Astra feels like an operator; Fable feels like a craftsperson. Their same piece points out the rows where Astra loses, which is why I trust it.",
       "data": {
         "recordedStep": {
@@ -5545,7 +5599,7 @@
               "zooms": [
                 {
                   "mark": "title",
-                  "atWord": 20
+                  "atWord": 13.667
                 }
               ],
               "wantAtWord": 1,
@@ -5762,7 +5816,7 @@
                 }
               ],
               "shows": "GPT-6 Astra. A taste of AGI?",
-              "atWord": 5
+              "atWord": 3.417
             },
             {
               "ref": "rec:astra-medium#operator",
@@ -5771,10 +5825,10 @@
               "zooms": [
                 {
                   "mark": "op",
-                  "atWord": 44
+                  "atWord": 35.333
                 }
               ],
-              "wantAtWord": 31,
+              "wantAtWord": 23.667,
               "id": "operator",
               "src": "rec/astra-medium/seg-02.mp4",
               "frames": 129,
@@ -5922,24 +5976,25 @@
                 }
               ],
               "shows": "Creations and demos worth checking out",
-              "atWord": 31
+              "atWord": 23.667
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.417
         }
       },
       "transition": "zoom",
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s48.mp3"
     },
     {
       "id": "s49",
       "type": "ASTRA_STAGE",
-      "durationFrames": 842,
-      "timingSource": "estimated",
+      "durationFrames": 992,
+      "timingSource": "tts",
       "narration": "So sort the work rather than the models, because the honest answer changes per job. Driving a browser or a desktop unattended, Astra. Three-D and CAD reasoning, Astra, by twelve points. Long multi-step jobs that run for hours, Astra. Now the other column. Code you intend to review and merge, Fable 5.1. Expert reasoning under Humanity's Last Exam, Fable by eight points. Front-end design taste, Fable. Neither answer is a loyalty, so pick per job and change your mind when the job changes.",
       "data": {
         "astraStage": {
@@ -5955,47 +6010,48 @@
             {
               "label": "browser and desktop work",
               "icon": "lucide:mouse-pointer-2",
-              "atWord": 18
+              "atWord": 13
             },
             {
               "label": "3D and CAD reasoning",
               "icon": "lucide:box",
-              "atWord": 24
+              "atWord": 21.083
             },
             {
               "label": "long multi-step jobs",
               "icon": "lucide:workflow",
-              "atWord": 33
+              "atWord": 31.75
             },
             {
               "label": "code you will merge",
               "icon": "lucide:git-merge",
               "win": true,
-              "atWord": 44
+              "atWord": 42.333
             },
             {
               "label": "expert reasoning",
               "icon": "lucide:brain",
               "win": true,
-              "atWord": 53
+              "atWord": 51.667
             },
             {
               "label": "front-end design taste",
               "icon": "lucide:palette",
               "win": true,
-              "atWord": 63
+              "atWord": 62.667
             }
           ],
-          "verdictAtWord": 67
+          "verdictAtWord": 68.25
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s49.mp3"
     },
     {
       "id": "s50",
       "type": "ASTRA_STAGE",
-      "durationFrames": 626,
-      "timingSource": "estimated",
+      "durationFrames": 745,
+      "timingSource": "tts",
       "narration": "One practical note before the verdict, because Astra has an effort dial and it changes the bill. At low effort a task costs sixty-three cents and scores forty-nine. Medium runs one dollar sixteen. High, one dollar forty-one, for fifty-three. Max costs two dollars fifty-seven and scores fifty-five. Four times the price, for six points. Most work doesn't need the top setting.",
       "data": {
         "astraStage": {
@@ -6012,35 +6068,36 @@
               "label": "low · scores 49",
               "text": "$0.63",
               "win": true,
-              "atWord": 19
+              "atWord": 14.75
             },
             {
               "label": "medium · scores 52",
               "text": "$1.16",
-              "atWord": 29
+              "atWord": 26.083
             },
             {
               "label": "high · scores 53",
               "text": "$1.41",
-              "atWord": 34
+              "atWord": 31.917
             },
             {
               "label": "max · scores 55",
               "text": "$2.57",
-              "atWord": 40
+              "atWord": 39.5
             }
           ],
-          "verdictAtWord": 48
+          "verdictAtWord": 48.917
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s50.mp3"
     },
     {
       "id": "s51",
       "type": "ASTRA_STAGE",
-      "durationFrames": 882,
-      "timingSource": "estimated",
-      "narration": "Which brings us back to the question in the title. On one side, Astra operates software better than anything before it, and it invented its own notation to solve worlds nobody explained. On the other, it loses to Claude Fable 5.1 on expert reasoning and on the neutral index, and the people who own the benchmark say saturating it would not be proof of anything. My reading is that Astra is the best operator available, rather than the smartest model available, and those are genuinely different titles.",
+      "durationFrames": 780,
+      "timingSource": "tts",
+      "narration": "Which brings us back to the question in the title. On one side, Astra operates software better than anything before it, and it invented its own notation to solve worlds nobody explained. On the other, it comes second to Claude Fable 5.1 on expert reasoning, and the people who own that benchmark say it would not be proof of anything. My reading is that Astra is the best operator available, rather than the smartest model available, and those are different titles.",
       "data": {
         "astraStage": {
           "headline": "So is it [AGI?]",
@@ -6057,45 +6114,46 @@
               "sub": "OSWorld, and computer use",
               "icon": "lucide:mouse-pointer-2",
               "win": true,
-              "atWord": 15
+              "atWord": 10.333
             },
             {
               "label": "built its own notation",
               "sub": "ARC Prize watched it happen",
               "icon": "lucide:pencil-ruler",
               "win": true,
-              "atWord": 24
+              "atWord": 18.083
             },
             {
               "label": "second on expert reasoning",
               "sub": "Fable 5.1 leads by eight points",
               "icon": "lucide:brain",
-              "atWord": 37
+              "atWord": 29.417
             },
             {
-              "label": "not proof of AGI",
+              "label": "proof of nothing yet",
               "sub": "ARC Prize, in their own report",
               "icon": "lucide:shield-x",
-              "atWord": 56
+              "atWord": 42.833
             }
           ],
-          "verdictAtWord": 66
+          "verdictAtWord": 46.167
         }
       },
-      "background": "zoneB"
+      "background": "zoneB",
+      "audio": "audio/gpt-6-astra_s51.mp3"
     },
     {
       "id": "s52",
       "type": "RECAP",
-      "durationFrames": 528,
-      "timingSource": "estimated",
+      "durationFrames": 544,
+      "timingSource": "tts",
       "narration": "So, five things worth keeping. Astra is an operator first. Astra costs ten dollars in and fifty out. Astra leads on computer use and on 3D, and comes second to Fable 5.1 on reasoning. And most of us are still queueing, which is worth remembering before you go hunting for it.",
       "data": {
         "heading": "GPT-6 Astra, in five lines",
         "points": [
           {
             "text": "An operator, not a better chatbot",
-            "atWord": 6
+            "atWord": 5.667
           },
           {
             "text": "$10 in, $50 out, per million tokens",
@@ -6103,32 +6161,34 @@
           },
           {
             "text": "Leads on computer use and 3D",
-            "atWord": 22
+            "atWord": 20.667
           },
           {
             "text": "Second to Fable 5.1 on reasoning",
-            "atWord": 31
+            "atWord": 27.583
           },
           {
             "text": "Most of us are still queueing",
-            "atWord": 39
+            "atWord": 34.667
           }
         ]
       },
       "transition": "fade",
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s52.mp3"
     },
     {
       "id": "s53",
       "type": "OUTRO_CTA",
-      "durationFrames": 459,
-      "timingSource": "estimated",
+      "durationFrames": 472,
+      "timingSource": "tts",
       "narration": "Every source I used is linked below — OpenAI's page, the ARC Prize report, Artificial Analysis, and unicodeveloper's review. Go and read the ARC Prize one in particular — it's the best-written of them. And if you want more breakdowns built this way, subscribe.",
       "data": {
         "message": "Subscribe for more breakdowns like this",
         "sub": "every number checked against its source"
       },
-      "background": "zoneA"
+      "background": "zoneA",
+      "audio": "audio/gpt-6-astra_s53.mp3"
     }
   ]
 }
