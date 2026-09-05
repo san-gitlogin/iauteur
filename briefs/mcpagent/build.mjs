@@ -210,13 +210,17 @@ scenes.push(chapter(
   scenes.push(rec(n, 'six libraries, and what each is for',
     'One install command, and the job each package does.',
     [A('add', 'one command', {wantAtWord: at(n, 'add')}),
+     // The capture now marks each dependency line separately, so every callout has its own
+     // rectangle to sit beside — which is what the one-mark-one-callout rule asks for.
      A('added', 'all six, installed', {wantAtWord: at(n, 'mcp'),
-       zooms: [{mark: 'deps', atWord: at(n, 'FastAPI')}],
+       zooms: [{mark: 'deps', atWord: at(n, 'official')}],
        callouts: [{text: 'the official MCP SDK', mark: 'deps', side: 'right',
                    color: 'green', atWord: at(n, 'official')},
-                  {text: 'serves what FastAPI defines', mark: null, side: 'right',
+                  {text: 'you write the routes in this', mark: 'web', side: 'right',
+                   color: 'blue', atWord: at(n, 'FastAPI')},
+                  {text: 'serves what FastAPI defines', mark: 'serve', side: 'right',
                    color: 'blue', atWord: at(n, 'uvicorn', 2)},
-                  {text: 'keeps the key out of the code', mark: null, side: 'right',
+                  {text: 'keeps the key out of the code', mark: 'envlib', side: 'right',
                    color: 'purple', atWord: at(n, 'python-dotenv')}]})]));
 }
 
@@ -435,10 +439,10 @@ scenes.push(chapter(
     [A('opentraffic', 'something to call it with'),
      A('traffic1', 'sixty requests', {wantAtWord: at(n, 'checking'),
        zooms: [{mark: 'loop', atWord: at(n, 'random')}],
+       // One callout, not two: the second described timings the rewritten narration no
+       // longer mentions, and its anchor sat past the end of the footage anyway.
        callouts: [{text: 'picks one of the three routes', mark: 'loop', side: 'right',
-                   color: 'blue', atWord: at(n, 'four')},
-                  {text: 'so the timings vary like real traffic', mark: 'post', side: 'right',
-                   color: 'purple', atWord: at(n, 'afternoon')}]})]));
+                   color: 'blue', atWord: at(n, 'four')}]})]));
 }
 
 {

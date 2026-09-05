@@ -433,6 +433,10 @@ export const marksFor = async (page, marks = []) => {
   for (const m of marks) {
     if (!m?.id) continue;
     let box = null;
+    // WHY it could not be measured, not just THAT it could not. A bare `.catch(() => null)`
+    // here turned every cause — no matching row, a thrown selector, a null element — into
+    // the same four words, and a 10-minute take is too expensive to spend on a guess.
+    let evalErr = null;
     if (m.selector) {
       box = await page.locator(m.selector).first().boundingBox({timeout: 3000}).catch(() => null);
     } else if (m.text) {
@@ -460,9 +464,25 @@ export const marksFor = async (page, marks = []) => {
         // fall back to the document, where the FIRST match is the right one because a page
         // is read top to bottom. Smallest matching element, so the range is tight to the
         // phrase rather than to a section wrapper that happens to contain it.
-        const rows = Array.from(document.querySelectorAll('.xterm-rows > div, .view-lines .view-line'));
+        const all = Array.from(document.querySelectorAll('.xterm-rows > div, .view-lines .view-line'));
+        // ONLY ROWS THAT ARE ACTUALLY LAID OUT.
+        //
+        // THE ROOT CAUSE, found 2026-09-05 after the owner photographed a callout reading
+        // "the official MCP SDK" pointing at the shell prompt. xterm and Monaco both keep
+        // rows in the DOM after they leave the viewport, and those rows measure 0x0 at 0,0.
+        // `mcp[cli]` appears twice on this step: in the VISIBLE dependency list, and in the
+        // SCROLLED-OUT echo of the previous command, `uv add "mcp[cli]" fastapi ...`. The
+        // scrollback row is later in DOM order, so last-match-wins picked the invisible one
+        // and the rectangle collapsed onto whatever sat at the origin of the panel.
+        //
+        // A mark exists to point at something a VIEWER can see. A row with no box is not
+        // something anyone can see, so it is not a candidate.
+        const rows = all.filter((r) => {
+          const rr = r.getBoundingClientRect();
+          return rr.width > 1 && rr.height > 1 && rr.bottom > 0 && rr.top < window.innerHeight;
+        });
         let hit = rows.filter((r) => flat(r.innerText).includes(needle)).pop();
-        if (!hit && !rows.length) {
+        if (!hit && !all.length) {
           const cands = Array.from(document.querySelectorAll('body *')).filter((el) => {
             if (!el.childNodes.length) return false;
             // only elements whose OWN text carries the needle, not every ancestor of one
@@ -477,7 +497,11 @@ export const marksFor = async (page, marks = []) => {
             return (ra.width * ra.height) - (rb.width * rb.height);
           })[0] ?? null;
         }
-        if (!hit) return null;
+        if (!hit) {
+          // Say WHAT was on screen, or the next person pays for another take to find out.
+          return {noHit: true, rows: rows.length,
+                  sample: rows.map((r) => flat(r.innerText).trim()).filter(Boolean).slice(-6)};
+        }
         // TIGHT to the TEXT, not to the row. An xterm row is a full-width div, so using
         // its rect drew a highlight stretching the whole terminal instead of around the
         // words. A Range over the matched characters gives the real glyph extent — and
@@ -509,7 +533,12 @@ export const marksFor = async (page, marks = []) => {
           } catch { /* fall through to the row rect */ }
         }
         if (!r) r = hit.getBoundingClientRect();
-        if (r.width < 2 || r.height < 2) return null;
+        if (r.width < 2 || r.height < 2) {
+          const hr = hit.getBoundingClientRect();
+          return {tiny: true, w: r.width, h: r.height,
+                  rowRect: {x: hr.x, y: hr.y, w: hr.width, h: hr.height},
+                  rowText: flat(hit.innerText).trim().slice(0, 80), idx};
+        }
         // WHAT DID THIS RECTANGLE ACTUALLY LAND ON?
         //
         // OWNER, 2026-09-05, with a screenshot: a callout reading "the official MCP SDK"
@@ -526,14 +555,51 @@ export const marksFor = async (page, marks = []) => {
         // contain what was asked for is not a mark, and the runner refuses to write one —
         // the same contract every other step already has.
         const matched = idx >= 0 ? acc.slice(idx, idx + needle.length) : null;
+        // AND WHAT IS ACTUALLY RENDERED THERE?
+        //
+        // Checking the matched SUBSTRING is not enough, and a frame proved it: xterm keeps
+        // rows in the DOM after they scroll out of the terminal panel, so `mcp[cli]` was
+        // found in a row that is clipped and invisible, and the rectangle came back sitting
+        // on the prompt line. The substring check passed; the callout pointed at
+        // `mcp-agent>`.
+        //
+        // The only honest question is what a viewer sees at those coordinates. Ask the
+        // document: whatever element is at the middle of this rectangle has to carry the
+        // needle. A clipped row is not at its own coordinates, so this catches it.
+        const cx = r.x + r.width / 2, cy = r.y + r.height / 2;
+        const atPoint = document.elementFromPoint(cx, cy);
+        const row = atPoint && atPoint.closest ? atPoint.closest('.xterm-rows > div, .view-line') : null;
+        const onScreen = flat(row ? row.innerText : (atPoint ? atPoint.innerText : ''));
         return {x: r.x, y: r.y, w: r.width, h: r.height,
                 matched, via: idx >= 0 ? 'range' : 'row',
+                onScreen: String(onScreen).trim().slice(0, 160),
                 rowText: flat(hit.innerText).trim().slice(0, 120)};
-      }, m.text).catch(() => null);
+      }, m.text).catch((e) => { evalErr = e?.message ?? String(e); return null; });
+      if (box && box.tiny) {
+        throw new Error(
+          `Mark "${m.id}" found ${JSON.stringify(m.text)} in the row ${JSON.stringify(box.rowText)} ` +
+          `(index ${box.idx}) but the rectangle measured ${box.w}x${box.h} — the row itself is ` +
+          `${box.rowRect.w}x${box.rowRect.h} at ${box.rowRect.x},${box.rowRect.y}. ` +
+          `The text is in the DOM but not laid out where it appears.`);
+      }
+      if (box && box.noHit) {
+        throw new Error(
+          `Mark "${m.id}" asked for ${JSON.stringify(m.text)} and no rendered row carries it. ` +
+          `${box.rows} row(s) were searched; the last few read: ` +
+          `${box.sample.map((t) => JSON.stringify(t.slice(0, 60))).join(' | ') || '(all empty)'}`);
+      }
       if (box) {
         // A row-rect fallback means the tight range failed, so the box is the whole line
         // and the leader will point at the middle of it rather than at the words.
-        if (box.via !== 'range' || box.matched !== String(m.text).split(String.fromCharCode(160)).join(' ')) {
+        const want = String(m.text).split(String.fromCharCode(160)).join(' ');
+        if (box.onScreen && !box.onScreen.includes(want)) {
+          throw new Error(
+            `Mark "${m.id}" asked for ${JSON.stringify(m.text)} and its rectangle sits on ` +
+            `${JSON.stringify(box.onScreen)} — the text it matched has SCROLLED OUT of view, ` +
+            `so the callout would point at whatever happens to be at those coordinates. ` +
+            `Make the step show it (fewer output lines), or mark something still on screen.`);
+        }
+        if (box.via !== 'range' || box.matched !== want) {
           throw new Error(
             `Mark "${m.id}" asked for ${JSON.stringify(m.text)} but the rectangle it resolved to ` +
             `covers ${JSON.stringify(box.matched ?? box.rowText)} (via ${box.via}). ` +
@@ -547,6 +613,7 @@ export const marksFor = async (page, marks = []) => {
     if (!box) {
       throw new Error(
         `Mark "${m.id}" could not be measured (${m.selector ? `selector ${m.selector}` : `text ${JSON.stringify(m.text)}`}). ` +
+        (evalErr ? `The page threw: ${evalErr}. ` : `No rendered row or element carries that text right now. `) +
         `A callout must point at something that is REALLY on screen — the runner will not invent a rectangle.`);
     }
     out[m.id] = {

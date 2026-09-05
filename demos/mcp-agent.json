@@ -81,7 +81,7 @@
     {
       "id": "added",
       "action": "run",
-      "cmd": "cat pyproject.toml",
+      "cmd": "sed -n 10,17p pyproject.toml",
       "label": "the six, written into the project",
       "focus": "terminal",
       "clearFirst": true,
@@ -93,6 +93,18 @@
         {
           "id": "deps",
           "text": "mcp[cli]"
+        },
+        {
+          "id": "web",
+          "text": "fastapi"
+        },
+        {
+          "id": "serve",
+          "text": "uvicorn[standard]"
+        },
+        {
+          "id": "envlib",
+          "text": "python-dotenv"
         }
       ]
     },

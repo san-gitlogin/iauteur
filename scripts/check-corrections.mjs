@@ -145,10 +145,15 @@ const CORRECTIONS = [
   // footage where it chose one. Every gate passed, because `heading` captured the last
   // COMMAND and nothing had ever captured the OUTPUT.
   // ── a callout pointing at the wrong words ─────────────────────────────────
-  ['a mark that resolved to the wrong rectangle', 'STRUCT',
+  // ROOT CAUSE: xterm and Monaco keep rows in the DOM after they scroll out, and those
+  // measure 0x0 at 0,0. `mcp[cli]` was on screen in the dependency list AND in the
+  // scrolled-out echo of `uv add "mcp[cli]" ...`; last-match-wins picked the invisible one
+  // and the rectangle collapsed onto the prompt. A mark now only considers rows that are
+  // actually laid out, and reports the text it covers.
+  ['a mark that resolved to a scrolled-out row', 'STRUCT',
    '"highlighting shit and explaining something that doesnt relate to whats highlighted"',
-   () => has('scripts/lib/record/runner.mjs', 'covers ') &&
-         has('scripts/lib/record/runner.mjs', "via \\${box.via}")],
+   () => has('scripts/lib/record/runner.mjs', 'ONLY ROWS THAT ARE ACTUALLY LAID OUT') &&
+         has('scripts/lib/record/runner.mjs', 'covers')],
   ['two callouts sharing one mark, one landing in empty frame', 'SEAL',
    '11 clips did it; the second label had nothing to point at',
    () => has('scripts/lint-spec.mjs', 'callouts on the single mark')],

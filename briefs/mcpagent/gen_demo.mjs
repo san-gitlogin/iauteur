@@ -301,10 +301,18 @@ const demo = {
      cmd: 'uv add "mcp[cli]" fastapi "uvicorn[standard]" httpx openai python-dotenv',
      label: 'the SDK, the web framework, and the client', focus: 'terminal', clearFirst: true,
      timeout: 240000, expect: {exitCode: 0}},
-    {id: 'added', action: 'run', cmd: 'cat pyproject.toml',
+    // `cat pyproject.toml` printed the whole file, so the dependency block scrolled off the
+    // top and the only thing left on screen was the tail — while the mark for `mcp[cli]`
+    // still resolved against the clipped row and drew a box on the PROMPT. Print just the
+    // block: every library the narration names is then visible and markable, and the
+    // authors stanza (a real name and email on a real machine) never reaches the frame.
+    {id: 'added', action: 'run', cmd: 'sed -n 10,17p pyproject.toml',
      label: 'the six, written into the project', focus: 'terminal', clearFirst: true,
      expect: {contains: 'mcp[cli]', exitCode: 0},
-     marks: [{id: 'deps', text: 'mcp[cli]'}]},
+     marks: [{id: 'deps', text: 'mcp[cli]'},
+             {id: 'web', text: 'fastapi'},
+             {id: 'serve', text: 'uvicorn[standard]'},
+             {id: 'envlib', text: 'python-dotenv'}]},
 
     // ── api.py, and the log it writes ──────────────────────────────────────────
     {id: 'openapi', action: 'openFile', path: 'api.py', label: 'an empty file'},

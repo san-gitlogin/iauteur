@@ -323,7 +323,7 @@
               "focus": true,
               "id": "look",
               "src": "rec/mcp-agent/seg-01.mp4",
-              "frames": 65,
+              "frames": 66,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -335,13 +335,15 @@
                   "x": 668,
                   "y": 646,
                   "w": 56,
-                  "h": 19
+                  "h": 19,
+                  "covers": "api.py"
                 },
                 "__cmd": {
                   "x": 996,
                   "y": 646,
                   "w": 19,
-                  "h": 19
+                  "h": 19,
+                  "covers": "ls"
                 }
               },
               "ink": [
@@ -353,6 +355,7 @@
                 }
               ],
               "shows": "$ ls",
+              "said": "PS mcp-agent> ls\n__pycache__ agent.py api.py server.py tools.py traffic.py\nPS mcp-agent>",
               "atWord": 2.75
             },
             {
@@ -387,7 +390,7 @@
               ],
               "id": "init",
               "src": "rec/mcp-agent/seg-02.mp4",
-              "frames": 97,
+              "frames": 100,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -399,13 +402,15 @@
                   "x": 368,
                   "y": 685,
                   "w": 178,
-                  "h": 19
+                  "h": 19,
+                  "covers": "Initialized project"
                 },
                 "__cmd": {
                   "x": 499,
                   "y": 666,
                   "w": 122,
-                  "h": 19
+                  "h": 19,
+                  "covers": "uv init --app"
                 }
               },
               "ink": [
@@ -417,6 +422,7 @@
                 }
               ],
               "shows": "$ uv init --app",
+              "said": "PS mcp-agent> ls\n__pycache__ agent.py api.py server.py tools.py traffic.py\nPS mcp-agent> uv init --app\nInitialized project `mcp-agent`\nPS mcp-agent>",
               "atWord": 42.083
             }
           ],
@@ -451,7 +457,7 @@
               "wantAtWord": 8.75,
               "id": "add",
               "src": "rec/mcp-agent/seg-03.mp4",
-              "frames": 195,
+              "frames": 184,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -463,7 +469,8 @@
                   "x": 499,
                   "y": 613,
                   "w": 675,
-                  "h": 19
+                  "h": 19,
+                  "covers": "uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv"
                 }
               },
               "ink": [
@@ -475,6 +482,7 @@
                 }
               ],
               "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": " + shellingham==1.5.4\n + sniffio==1.3.1\n + sse-starlette==3.4.10\n + starlette==1.6.0\n + truststore==0.10.4\n + typer==0.27.2\n + typing-extensions==4.16.0\n + typing-inspection==0.4.4\n + uvicorn==0.52.4\n + uvloop==0.22.1\n + watchfiles==1.2.0\n + websockets==17.1\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
               "atWord": 8.75
             },
             {
@@ -485,7 +493,7 @@
               "zooms": [
                 {
                   "mark": "deps",
-                  "wantAtWord": 43.333,
+                  "wantAtWord": 20.5,
                   "atWord": 43.333
                 }
               ],
@@ -496,19 +504,27 @@
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 20.5,
-                  "atWord": 57.667
+                  "atWord": 52.333
+                },
+                {
+                  "text": "you write the routes in this",
+                  "mark": "web",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 43.333,
+                  "atWord": 62.167
                 },
                 {
                   "text": "serves what FastAPI defines",
-                  "mark": null,
+                  "mark": "serve",
                   "side": "right",
                   "color": "blue",
                   "wantAtWord": 61.833,
-                  "atWord": 61.833
+                  "atWord": 74.917
                 },
                 {
                   "text": "keeps the key out of the code",
-                  "mark": null,
+                  "mark": "envlib",
                   "side": "right",
                   "color": "purple",
                   "wantAtWord": 95.083,
@@ -517,7 +533,7 @@
               ],
               "id": "added",
               "src": "rec/mcp-agent/seg-04.mp4",
-              "frames": 99,
+              "frames": 107,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -527,39 +543,51 @@
               "marks": {
                 "deps": {
                   "x": 415,
-                  "y": 627,
+                  "y": 704,
                   "w": 75,
-                  "h": 19
+                  "h": 19,
+                  "covers": "mcp[cli]"
+                },
+                "web": {
+                  "x": 415,
+                  "y": 666,
+                  "w": 66,
+                  "h": 19,
+                  "covers": "fastapi"
+                },
+                "serve": {
+                  "x": 415,
+                  "y": 762,
+                  "w": 159,
+                  "h": 19,
+                  "covers": "uvicorn[standard]"
+                },
+                "envlib": {
+                  "x": 415,
+                  "y": 743,
+                  "w": 122,
+                  "h": 19,
+                  "covers": "python-dotenv"
                 },
                 "__cmd": {
                   "x": 499,
-                  "y": 626,
-                  "w": 169,
-                  "h": 19
+                  "y": 627,
+                  "w": 262,
+                  "h": 19,
+                  "covers": "sed -n 10,17p pyproject.toml"
                 }
               },
               "ink": [
                 {
                   "x": 368,
-                  "y": 626,
-                  "w": 300,
-                  "h": 97
-                },
-                {
-                  "x": 368,
-                  "y": 743,
-                  "w": 262,
-                  "h": 38
-                },
-                {
-                  "x": 368,
-                  "y": 801,
-                  "w": 366,
-                  "h": 77
+                  "y": 627,
+                  "w": 394,
+                  "h": 193
                 }
               ],
-              "shows": "$ cat pyproject.toml",
-              "atWord": 31.667
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> sed -n 10,17p pyproject.toml\ndependencies = [\n \"fastapi>=0.141.1\",\n \"httpx>=0.28.1\",\n \"mcp[cli]>=2.1.1\",\n \"openai>=3.8.0\",\n \"python-dotenv>=1.2.3\",\n \"uvicorn[standard]>=0.52.4\",\n]\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
+              "atWord": 29.917
             }
           ],
           "capture": {
@@ -602,24 +630,13 @@
               "ink": [
                 {
                   "x": 368,
-                  "y": 626,
-                  "w": 300,
-                  "h": 97
-                },
-                {
-                  "x": 368,
-                  "y": 743,
-                  "w": 262,
-                  "h": 38
-                },
-                {
-                  "x": 368,
-                  "y": 801,
-                  "w": 366,
-                  "h": 77
+                  "y": 627,
+                  "w": 394,
+                  "h": 193
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> sed -n 10,17p pyproject.toml\ndependencies = [\n \"fastapi>=0.141.1\",\n \"httpx>=0.28.1\",\n \"mcp[cli]>=2.1.1\",\n \"openai>=3.8.0\",\n \"python-dotenv>=1.2.3\",\n \"uvicorn[standard]>=0.52.4\",\n]\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
               "keys": [
                 "Ctrl",
                 "P"
@@ -655,7 +672,7 @@
               ],
               "id": "api1",
               "src": "rec/mcp-agent/seg-07.mp4",
-              "frames": 568,
+              "frames": 567,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -667,13 +684,15 @@
                   "x": 433,
                   "y": 203,
                   "w": 158,
-                  "h": 21
+                  "h": 21,
+                  "covers": "app = FastAPI()"
                 },
                 "orders": {
                   "x": 475,
                   "y": 338,
                   "w": 95,
-                  "h": 21
+                  "h": 21,
+                  "covers": "\"SO-1003\""
                 }
               },
               "ink": [
@@ -703,24 +722,13 @@
                 },
                 {
                   "x": 368,
-                  "y": 626,
-                  "w": 300,
-                  "h": 97
-                },
-                {
-                  "x": 368,
-                  "y": 743,
-                  "w": 262,
-                  "h": 38
-                },
-                {
-                  "x": 368,
-                  "y": 801,
-                  "w": 366,
-                  "h": 77
+                  "y": 627,
+                  "w": 394,
+                  "h": 193
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> sed -n 10,17p pyproject.toml\ndependencies = [\n \"fastapi>=0.141.1\",\n \"httpx>=0.28.1\",\n \"mcp[cli]>=2.1.1\",\n \"openai>=3.8.0\",\n \"python-dotenv>=1.2.3\",\n \"uvicorn[standard]>=0.52.4\",\n]\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nimport random\nimport time\nfrom fastapi import FastAPI, HTTPException, Request\napp = FastAPI()\nORDERS = {\n    \"SO-1001\": {\"id\": \"SO-1001\", \"region\": \"North\", \"status\": \"delivered\"},\n    \"SO-1002\": {\"id\": \"SO-1002\", \"region\": \"Central\", \"status\": \"delivered\"},\n    \"SO-1003\": {\"id\": \"SO-1003\", \"region\": \"Remote\", \"status\": \"lost_in_transit\"},\n}",
               "atWord": 25.083
             }
           ],
@@ -806,7 +814,7 @@
                 {
                   "mark": "mw",
                   "wantAtWord": 10.5,
-                  "atWord": 49.083
+                  "atWord": 49.333
                 },
                 {
                   "mark": "write",
@@ -834,7 +842,7 @@
               ],
               "id": "api2",
               "src": "rec/mcp-agent/seg-08.mp4",
-              "frames": 707,
+              "frames": 716,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -846,13 +854,15 @@
                   "x": 433,
                   "y": 257,
                   "w": 243,
-                  "h": 21
+                  "h": 21,
+                  "covers": "@app.middleware(\"http\")"
                 },
                 "write": {
                   "x": 517,
                   "y": 446,
                   "w": 95,
-                  "h": 21
+                  "h": 21,
+                  "covers": "log.write"
                 }
               },
               "ink": [
@@ -870,24 +880,13 @@
                 },
                 {
                   "x": 368,
-                  "y": 626,
-                  "w": 300,
-                  "h": 97
-                },
-                {
-                  "x": 368,
-                  "y": 743,
-                  "w": 262,
-                  "h": 38
-                },
-                {
-                  "x": 368,
-                  "y": 801,
-                  "w": 366,
-                  "h": 77
+                  "y": 627,
+                  "w": 394,
+                  "h": 193
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> sed -n 10,17p pyproject.toml\ndependencies = [\n \"fastapi>=0.141.1\",\n \"httpx>=0.28.1\",\n \"mcp[cli]>=2.1.1\",\n \"openai>=3.8.0\",\n \"python-dotenv>=1.2.3\",\n \"uvicorn[standard]>=0.52.4\",\n]\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nORDERS = {\n    \"SO-1001\": {\"id\": \"SO-1001\", \"region\": \"North\", \"status\": \"delivered\"},\n    \"SO-1002\": {\"id\": \"SO-1002\", \"region\": \"Central\", \"status\": \"delivered\"},\n    \"SO-1003\": {\"id\": \"SO-1003\", \"region\": \"Remote\", \"status\": \"lost_in_transit\"},\n}\n@app.middleware(\"http\")\nasync def write_a_log_line(request: Request, call_next):\n    started = time.time()\n    reply = await call_next(request)\n    took = max(1, int((time.time() - started) * 1000))\n    level = \"ERROR\" if reply.status_code >= 400 else \"INFO \"\n    with open(\"service.log\", \"a\") as log:\n        log.write(f\"{time.strftime('%H:%M:%S')} {level} {request.url.path:<16} \"\n                  f\"{reply.status_code} {took}ms\\n\")\n    return reply",
               "atWord": 1.667
             }
           ],
@@ -1030,7 +1029,7 @@
               ],
               "id": "api3",
               "src": "rec/mcp-agent/seg-09.mp4",
-              "frames": 738,
+              "frames": 740,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -1042,13 +1041,15 @@
                   "x": 433,
                   "y": 365,
                   "w": 232,
-                  "h": 21
+                  "h": 21,
+                  "covers": "@app.post(\"/checkout\")"
                 },
                 "flaky": {
                   "x": 507,
                   "y": 446,
                   "w": 232,
-                  "h": 21
+                  "h": 21,
+                  "covers": "random.random() < 0.55"
                 }
               },
               "ink": [
@@ -1072,24 +1073,13 @@
                 },
                 {
                   "x": 368,
-                  "y": 626,
-                  "w": 300,
-                  "h": 97
-                },
-                {
-                  "x": 368,
-                  "y": 743,
-                  "w": 262,
-                  "h": 38
-                },
-                {
-                  "x": 368,
-                  "y": 801,
-                  "w": 366,
-                  "h": 77
+                  "y": 627,
+                  "w": 394,
+                  "h": 193
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> sed -n 10,17p pyproject.toml\ndependencies = [\n \"fastapi>=0.141.1\",\n \"httpx>=0.28.1\",\n \"mcp[cli]>=2.1.1\",\n \"openai>=3.8.0\",\n \"python-dotenv>=1.2.3\",\n \"uvicorn[standard]>=0.52.4\",\n]\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\ndef list_orders():\n    return list(ORDERS.values())\n@app.get(\"/orders/{order_id}\")\ndef get_order(order_id: str):\n    if order_id not in ORDERS:\n        raise HTTPException(status_code=404, detail=\"no such order\")\n    return ORDERS[order_id]\n@app.post(\"/checkout\")\ndef checkout():\n    time.sleep(random.uniform(0.8, 2.4))\n    if random.random() < 0.55:\n        raise HTTPException(status_code=500, detail=\"upstream timeout\")\n    return {\"ok\": True}",
               "atWord": 3.667
             },
             {
@@ -1127,24 +1117,13 @@
                 },
                 {
                   "x": 368,
-                  "y": 626,
-                  "w": 300,
-                  "h": 97
-                },
-                {
-                  "x": 368,
-                  "y": 743,
-                  "w": 262,
-                  "h": 38
-                },
-                {
-                  "x": 368,
-                  "y": 801,
-                  "w": 366,
-                  "h": 77
+                  "y": 627,
+                  "w": 394,
+                  "h": 193
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> sed -n 10,17p pyproject.toml\ndependencies = [\n \"fastapi>=0.141.1\",\n \"httpx>=0.28.1\",\n \"mcp[cli]>=2.1.1\",\n \"openai>=3.8.0\",\n \"python-dotenv>=1.2.3\",\n \"uvicorn[standard]>=0.52.4\",\n]\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\ndef list_orders():\n    return list(ORDERS.values())\n@app.get(\"/orders/{order_id}\")\ndef get_order(order_id: str):\n    if order_id not in ORDERS:\n        raise HTTPException(status_code=404, detail=\"no such order\")\n    return ORDERS[order_id]\n@app.post(\"/checkout\")\ndef checkout():\n    time.sleep(random.uniform(0.8, 2.4))\n    if random.random() < 0.55:\n        raise HTTPException(status_code=500, detail=\"upstream timeout\")\n    return {\"ok\": True}",
               "keys": [
                 "Ctrl",
                 "S"
@@ -1269,12 +1248,12 @@
                   "side": "top",
                   "color": "green",
                   "wantAtWord": 6,
-                  "atWord": 19.417
+                  "atWord": 19.167
                 }
               ],
               "id": "serve",
               "src": "rec/mcp-agent/seg-11.mp4",
-              "frames": 159,
+              "frames": 151,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -1286,7 +1265,8 @@
                   "x": 499,
                   "y": 627,
                   "w": 506,
-                  "h": 19
+                  "h": 19,
+                  "covers": "uv run uvicorn api:app --port 8000 > server.log 2>&1 &"
                 }
               },
               "ink": [
@@ -1315,7 +1295,8 @@
                   "h": 58
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run uvicorn api:app --port 8000 > server.log 2>&1 &\n[1] 4569\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\ndef list_orders():\n    return list(ORDERS.values())\n@app.get(\"/orders/{order_id}\")\ndef get_order(order_id: str):\n    if order_id not in ORDERS:\n        raise HTTPException(status_code=404, detail=\"no such order\")\n    return ORDERS[order_id]\n@app.post(\"/checkout\")\ndef checkout():\n    time.sleep(random.uniform(0.8, 2.4))\n    if random.random() < 0.55:\n        raise HTTPException(status_code=500, detail=\"upstream timeout\")\n    return {\"ok\": True}",
               "atWord": 2.583
             },
             {
@@ -1335,7 +1316,7 @@
               ],
               "id": "serveup",
               "src": "rec/mcp-agent/seg-12.mp4",
-              "frames": 167,
+              "frames": 169,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -1347,13 +1328,15 @@
                   "x": 462,
                   "y": 704,
                   "w": 262,
-                  "h": 19
+                  "h": 19,
+                  "covers": "Application startup complete"
                 },
                 "__cmd": {
                   "x": 499,
                   "y": 666,
                   "w": 272,
-                  "h": 19
+                  "h": 19,
+                  "covers": "sleep 6 && tail -3 server.log"
                 }
               },
               "ink": [
@@ -1382,7 +1365,8 @@
                   "h": 135
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run uvicorn api:app --port 8000 > server.log 2>&1 &\n[1] 4569\nPS mcp-agent> sleep 6 && tail -3 server.log\nINFO: Waiting for application startup.\nINFO: Application startup complete.\nINFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\ndef list_orders():\n    return list(ORDERS.values())\n@app.get(\"/orders/{order_id}\")\ndef get_order(order_id: str):\n    if order_id not in ORDERS:\n        raise HTTPException(status_code=404, detail=\"no such order\")\n    return ORDERS[order_id]\n@app.post(\"/checkout\")\ndef checkout():\n    time.sleep(random.uniform(0.8, 2.4))\n    if random.random() < 0.55:\n        raise HTTPException(status_code=500, detail=\"upstream timeout\")\n    return {\"ok\": True}",
               "atWord": 27.917
             }
           ],
@@ -1416,7 +1400,7 @@
               "focus": true,
               "id": "opentraffic",
               "src": "rec/mcp-agent/seg-13.mp4",
-              "frames": 217,
+              "frames": 216,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -1431,7 +1415,8 @@
                   "h": 135
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run uvicorn api:app --port 8000 > server.log 2>&1 &\n[1] 4569\nPS mcp-agent> sleep 6 && tail -3 server.log\nINFO: Waiting for application startup.\nINFO: Application startup complete.\nINFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
               "keys": [
                 "Ctrl",
                 "P"
@@ -1447,7 +1432,7 @@
                 {
                   "mark": "loop",
                   "wantAtWord": 21.75,
-                  "atWord": 60
+                  "atWord": 60.583
                 }
               ],
               "callouts": [
@@ -1457,20 +1442,12 @@
                   "side": "right",
                   "color": "blue",
                   "wantAtWord": 40.917,
-                  "atWord": 60.583
-                },
-                {
-                  "text": "so the timings vary like real traffic",
-                  "mark": "post",
-                  "side": "right",
-                  "color": "purple",
-                  "wantAtWord": 72.25,
                   "atWord": 62.833
                 }
               ],
               "id": "traffic1",
               "src": "rec/mcp-agent/seg-15.mp4",
-              "frames": 511,
+              "frames": 516,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -1482,13 +1459,15 @@
                   "x": 433,
                   "y": 230,
                   "w": 190,
-                  "h": 21
+                  "h": 21,
+                  "covers": "for _ in range(60)"
                 },
                 "post": {
                   "x": 707,
                   "y": 419,
                   "w": 95,
-                  "h": 21
+                  "h": 21,
+                  "covers": "/checkout"
                 }
               },
               "ink": [
@@ -1529,7 +1508,8 @@
                   "h": 135
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run uvicorn api:app --port 8000 > server.log 2>&1 &\n[1] 4569\nPS mcp-agent> sleep 6 && tail -3 server.log\nINFO: Waiting for application startup.\nINFO: Application startup complete.\nINFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nimport random\nimport httpx\nAPI = \"http://127.0.0.1:8000\"\nfor _ in range(60):\n    roll = random.random()\n    if roll < 0.4:\n        httpx.get(f\"{API}/orders\")\n    elif roll < 0.7:\n        httpx.get(f\"{API}/orders/SO-1001\")\n    else:\n        httpx.post(f\"{API}/checkout\")\nprint(\"done - look at service.log\")",
               "atWord": 25.25
             }
           ],
@@ -1568,12 +1548,12 @@
                   "side": "top",
                   "color": "blue",
                   "wantAtWord": 9.25,
-                  "atWord": 20.583
+                  "atWord": 17.417
                 }
               ],
               "id": "runtraffic",
               "src": "rec/mcp-agent/seg-17.mp4",
-              "frames": 270,
+              "frames": 209,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -1585,13 +1565,15 @@
                   "x": 368,
                   "y": 762,
                   "w": 37,
-                  "h": 19
+                  "h": 19,
+                  "covers": "done"
                 },
                 "__cmd": {
                   "x": 499,
                   "y": 743,
                   "w": 225,
-                  "h": 19
+                  "h": 19,
+                  "covers": "uv run python traffic.py"
                 }
               },
               "ink": [
@@ -1632,7 +1614,8 @@
                   "h": 173
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run uvicorn api:app --port 8000 > server.log 2>&1 &\n[1] 4569\nPS mcp-agent> sleep 6 && tail -3 server.log\nINFO: Waiting for application startup.\nINFO: Application startup complete.\nINFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nPS mcp-agent> uv run python traffic.py\ndone - look at service.log\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nimport random\nimport httpx\nAPI = \"http://127.0.0.1:8000\"\nfor _ in range(60):\n    roll = random.random()\n    if roll < 0.4:\n        httpx.get(f\"{API}/orders\")\n    elif roll < 0.7:\n        httpx.get(f\"{API}/orders/SO-1001\")\n    else:\n        httpx.post(f\"{API}/checkout\")\nprint(\"done - look at service.log\")",
               "atWord": 2.167
             },
             {
@@ -1644,7 +1627,7 @@
                 {
                   "mark": "line",
                   "wantAtWord": 23.417,
-                  "atWord": 54.25
+                  "atWord": 48.833
                 }
               ],
               "callouts": [
@@ -1654,7 +1637,7 @@
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 38.417,
-                  "atWord": 70.333
+                  "atWord": 68.667
                 },
                 {
                   "text": "time · level · route · code · ms",
@@ -1667,7 +1650,7 @@
               ],
               "id": "seelog",
               "src": "rec/mcp-agent/seg-18.mp4",
-              "frames": 101,
+              "frames": 94,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -1677,15 +1660,17 @@
               "marks": {
                 "line": {
                   "x": 509,
-                  "y": 685,
+                  "y": 724,
                   "w": 84,
-                  "h": 19
+                  "h": 19,
+                  "covers": "/checkout"
                 },
                 "__cmd": {
                   "x": 499,
                   "y": 627,
                   "w": 178,
-                  "h": 19
+                  "h": 19,
+                  "covers": "tail -6 service.log"
                 }
               },
               "ink": [
@@ -1722,12 +1707,13 @@
                 {
                   "x": 368,
                   "y": 627,
-                  "w": 384,
+                  "w": 394,
                   "h": 154
                 }
               ],
-              "shows": "$ cat pyproject.toml",
-              "atWord": 25.917
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> tail -6 service.log\n11:14:43 INFO /orders/SO-1001 200 1ms\n11:14:45 ERROR /checkout 500 1536ms\n11:14:45 INFO /orders 200 1ms\n11:14:45 INFO /orders/SO-1001 200 1ms\n11:14:47 INFO /checkout 200 1777ms\n11:14:47 INFO /orders 200 1ms\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nimport random\nimport httpx\nAPI = \"http://127.0.0.1:8000\"\nfor _ in range(60):\n    roll = random.random()\n    if roll < 0.4:\n        httpx.get(f\"{API}/orders\")\n    elif roll < 0.7:\n        httpx.get(f\"{API}/orders/SO-1001\")\n    else:\n        httpx.post(f\"{API}/checkout\")\nprint(\"done - look at service.log\")",
+              "atWord": 20.417
             }
           ],
           "capture": {
@@ -7193,11 +7179,12 @@
                 {
                   "x": 368,
                   "y": 627,
-                  "w": 384,
+                  "w": 394,
                   "h": 154
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> tail -6 service.log\n11:14:43 INFO /orders/SO-1001 200 1ms\n11:14:45 ERROR /checkout 500 1536ms\n11:14:45 INFO /orders 200 1ms\n11:14:45 INFO /orders/SO-1001 200 1ms\n11:14:47 INFO /checkout 200 1777ms\n11:14:47 INFO /orders 200 1ms\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
               "keys": [
                 "Ctrl",
                 "P"
@@ -7241,7 +7228,7 @@
               ],
               "id": "t1",
               "src": "rec/mcp-agent/seg-21.mp4",
-              "frames": 700,
+              "frames": 698,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -7253,13 +7240,15 @@
                   "x": 887,
                   "y": 392,
                   "w": 127,
-                  "h": 21
+                  "h": 21,
+                  "covers": "line.split()"
                 },
                 "counter": {
                   "x": 560,
                   "y": 446,
                   "w": 169,
-                  "h": 21
+                  "h": 21,
+                  "covers": "hits[route] += 1"
                 }
               },
               "ink": [
@@ -7290,11 +7279,12 @@
                 {
                   "x": 368,
                   "y": 627,
-                  "w": 384,
+                  "w": 394,
                   "h": 154
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> tail -6 service.log\n11:14:43 INFO /orders/SO-1001 200 1ms\n11:14:45 ERROR /checkout 500 1536ms\n11:14:45 INFO /orders 200 1ms\n11:14:45 INFO /orders/SO-1001 200 1ms\n11:14:47 INFO /checkout 200 1777ms\n11:14:47 INFO /orders 200 1ms\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nfrom collections import Counter\nimport httpx\nLOG = \"service.log\"\nAPI = \"http://127.0.0.1:8000\"\ndef recent_errors() -> str:\n    \"\"\"Count the errors in the service log, grouped by route.\"\"\"\n    hits = Counter()\n    for line in open(LOG):\n        time, level, route, status, took = line.split()\n        if level == \"ERROR\":\n            hits[route] += 1\n    return \"\\n\".join(f\"{route} failed {n} times\" for route, n in hits.most_common())",
               "atWord": 25.917
             }
           ],
@@ -7395,12 +7385,12 @@
                 {
                   "mark": "avg",
                   "wantAtWord": 16.667,
-                  "atWord": 56
+                  "atWord": 56.667
                 }
               ],
               "id": "t2",
               "src": "rec/mcp-agent/seg-22.mp4",
-              "frames": 660,
+              "frames": 681,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -7412,7 +7402,8 @@
                   "x": 781,
                   "y": 500,
                   "w": 169,
-                  "h": 21
+                  "h": 21,
+                  "covers": "sum(v) // len(v)"
                 }
               },
               "ink": [
@@ -7431,11 +7422,12 @@
                 {
                   "x": 368,
                   "y": 627,
-                  "w": 384,
+                  "w": 394,
                   "h": 154
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> tail -6 service.log\n11:14:43 INFO /orders/SO-1001 200 1ms\n11:14:45 ERROR /checkout 500 1536ms\n11:14:45 INFO /orders 200 1ms\n11:14:45 INFO /orders/SO-1001 200 1ms\n11:14:47 INFO /checkout 200 1777ms\n11:14:47 INFO /orders 200 1ms\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n    \"\"\"Count the errors in the service log, grouped by route.\"\"\"\n    hits = Counter()\n    for line in open(LOG):\n        time, level, route, status, took = line.split()\n        if level == \"ERROR\":\n            hits[route] += 1\n    return \"\\n\".join(f\"{route} failed {n} times\" for route, n in hits.most_common())\ndef slowest_routes() -> str:\n    \"\"\"Report each route's average response time, slowest first.\"\"\"\n    times = {}\n    for line in open(LOG):\n        time, level, route, status, took = line.split()\n        times.setdefault(route, []).append(int(took.removesuffix(\"ms\")))\n    rows = sorted(times.items(), key=lambda kv: -sum(kv[1]) / len(kv[1]))\n    return \"\\n\".join(f\"{r} took {sum(v) // len(v)}ms on average\" for r, v in rows)",
               "atWord": 3.167
             },
             {
@@ -7462,7 +7454,7 @@
               ],
               "id": "t3",
               "src": "rec/mcp-agent/seg-23.mp4",
-              "frames": 444,
+              "frames": 424,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -7474,7 +7466,8 @@
                   "x": 560,
                   "y": 419,
                   "w": 95,
-                  "h": 21
+                  "h": 21,
+                  "covers": "httpx.get"
                 }
               },
               "ink": [
@@ -7493,12 +7486,13 @@
                 {
                   "x": 368,
                   "y": 627,
-                  "w": 384,
+                  "w": 394,
                   "h": 154
                 }
               ],
-              "shows": "$ cat pyproject.toml",
-              "atWord": 64.333
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> tail -6 service.log\n11:14:43 INFO /orders/SO-1001 200 1ms\n11:14:45 ERROR /checkout 500 1536ms\n11:14:45 INFO /orders 200 1ms\n11:14:45 INFO /orders/SO-1001 200 1ms\n11:14:47 INFO /checkout 200 1777ms\n11:14:47 INFO /orders 200 1ms\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\ndef slowest_routes() -> str:\n    \"\"\"Report each route's average response time, slowest first.\"\"\"\n    times = {}\n    for line in open(LOG):\n        time, level, route, status, took = line.split()\n        times.setdefault(route, []).append(int(took.removesuffix(\"ms\")))\n    rows = sorted(times.items(), key=lambda kv: -sum(kv[1]) / len(kv[1]))\n    return \"\\n\".join(f\"{r} took {sum(v) // len(v)}ms on average\" for r, v in rows)\ndef get_order(order_id: str) -> str:\n    \"\"\"Look up one order by its id, from the orders service.\"\"\"\n    reply = httpx.get(f\"{API}/orders/{order_id}\")\n    if reply.status_code == 404:\n        return f\"there is no order called {order_id}\"\n    return str(reply.json())",
+              "atWord": 65.417
             }
           ],
           "capture": {
@@ -7554,11 +7548,12 @@
                 {
                   "x": 368,
                   "y": 627,
-                  "w": 384,
+                  "w": 394,
                   "h": 154
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> tail -6 service.log\n11:14:43 INFO /orders/SO-1001 200 1ms\n11:14:45 ERROR /checkout 500 1536ms\n11:14:45 INFO /orders 200 1ms\n11:14:45 INFO /orders/SO-1001 200 1ms\n11:14:47 INFO /checkout 200 1777ms\n11:14:47 INFO /orders 200 1ms\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\ndef slowest_routes() -> str:\n    \"\"\"Report each route's average response time, slowest first.\"\"\"\n    times = {}\n    for line in open(LOG):\n        time, level, route, status, took = line.split()\n        times.setdefault(route, []).append(int(took.removesuffix(\"ms\")))\n    rows = sorted(times.items(), key=lambda kv: -sum(kv[1]) / len(kv[1]))\n    return \"\\n\".join(f\"{r} took {sum(v) // len(v)}ms on average\" for r, v in rows)\ndef get_order(order_id: str) -> str:\n    \"\"\"Look up one order by its id, from the orders service.\"\"\"\n    reply = httpx.get(f\"{API}/orders/{order_id}\")\n    if reply.status_code == 404:\n        return f\"there is no order called {order_id}\"\n    return str(reply.json())",
               "keys": [
                 "Ctrl",
                 "S"
@@ -7574,7 +7569,7 @@
                 {
                   "mark": "failed",
                   "wantAtWord": 17,
-                  "atWord": 35.583
+                  "atWord": 35.417
                 },
                 {
                   "mark": "slow",
@@ -7594,7 +7589,7 @@
               ],
               "id": "runtools",
               "src": "rec/mcp-agent/seg-25.mp4",
-              "frames": 232,
+              "frames": 223,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -7606,19 +7601,22 @@
                   "x": 462,
                   "y": 646,
                   "w": 56,
-                  "h": 19
+                  "h": 19,
+                  "covers": "failed"
                 },
                 "slow": {
                   "x": 602,
                   "y": 704,
                   "w": 94,
-                  "h": 19
+                  "h": 19,
+                  "covers": "on average"
                 },
                 "__cmd": {
                   "x": 499,
                   "y": 627,
                   "w": 862,
-                  "h": 19
+                  "h": 19,
+                  "covers": "uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\""
                 }
               },
               "ink": [
@@ -7641,7 +7639,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\ndef slowest_routes() -> str:\n    \"\"\"Report each route's average response time, slowest first.\"\"\"\n    times = {}\n    for line in open(LOG):\n        time, level, route, status, took = line.split()\n        times.setdefault(route, []).append(int(took.removesuffix(\"ms\")))\n    rows = sorted(times.items(), key=lambda kv: -sum(kv[1]) / len(kv[1]))\n    return \"\\n\".join(f\"{r} took {sum(v) // len(v)}ms on average\" for r, v in rows)\ndef get_order(order_id: str) -> str:\n    \"\"\"Look up one order by its id, from the orders service.\"\"\"\n    reply = httpx.get(f\"{API}/orders/{order_id}\")\n    if reply.status_code == 404:\n        return f\"there is no order called {order_id}\"\n    return str(reply.json())",
               "atWord": 6.417
             }
           ],
@@ -7988,7 +7987,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
               "keys": [
                 "Ctrl",
                 "P"
@@ -8004,7 +8004,7 @@
                 {
                   "mark": "imp",
                   "wantAtWord": 24.583,
-                  "atWord": 65.5
+                  "atWord": 66.167
                 },
                 {
                   "mark": "dec",
@@ -8043,7 +8043,7 @@
               ],
               "id": "s1",
               "src": "rec/mcp-agent/seg-28.mp4",
-              "frames": 384,
+              "frames": 393,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -8055,19 +8055,22 @@
                   "x": 433,
                   "y": 68,
                   "w": 443,
-                  "h": 21
+                  "h": 21,
+                  "covers": "from mcp.server.mcpserver import MCPServer"
                 },
                 "dec": {
                   "x": 433,
                   "y": 257,
                   "w": 116,
-                  "h": 21
+                  "h": 21,
+                  "covers": "@mcp.tool()"
                 },
                 "doc": {
                   "x": 507,
                   "y": 311,
                   "w": 369,
-                  "h": 21
+                  "h": 21,
+                  "covers": "Count the errors in the service log"
                 }
               },
               "ink": [
@@ -8102,7 +8105,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nfrom mcp.server.mcpserver import MCPServer\nimport tools\nmcp = MCPServer(\"service-tools\")\n@mcp.tool()\ndef recent_errors() -> str:\n    \"\"\"Count the errors in the service log, grouped by route.\"\"\"\n    return tools.recent_errors()",
               "atWord": 28.167
             }
           ],
@@ -8161,7 +8165,7 @@
               ],
               "id": "s2",
               "src": "rec/mcp-agent/seg-29.mp4",
-              "frames": 463,
+              "frames": 472,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -8173,7 +8177,8 @@
                   "x": 433,
                   "y": 446,
                   "w": 380,
-                  "h": 21
+                  "h": 21,
+                  "covers": "def get_order(order_id: str) -> str:"
                 }
               },
               "ink": [
@@ -8202,7 +8207,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n@mcp.tool()\ndef recent_errors() -> str:\n    \"\"\"Count the errors in the service log, grouped by route.\"\"\"\n    return tools.recent_errors()\n@mcp.tool()\ndef slowest_routes() -> str:\n    \"\"\"Report each route's average response time, slowest first.\"\"\"\n    return tools.slowest_routes()\n@mcp.tool()\ndef get_order(order_id: str) -> str:\n    \"\"\"Look up one order by its id, for example SO-1003.\"\"\"\n    return tools.get_order(order_id)",
               "atWord": 2.667
             },
             {
@@ -8224,7 +8230,7 @@
               ],
               "id": "s3",
               "src": "rec/mcp-agent/seg-30.mp4",
-              "frames": 317,
+              "frames": 315,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -8236,13 +8242,15 @@
                   "x": 433,
                   "y": 311,
                   "w": 295,
-                  "h": 21
+                  "h": 21,
+                  "covers": "@mcp.resource(\"log://today\")"
                 },
                 "run": {
                   "x": 475,
                   "y": 500,
                   "w": 95,
-                  "h": 21
+                  "h": 21,
+                  "covers": "mcp.run()"
                 }
               },
               "ink": [
@@ -8277,7 +8285,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n    return tools.slowest_routes()\n@mcp.tool()\ndef get_order(order_id: str) -> str:\n    \"\"\"Look up one order by its id, for example SO-1003.\"\"\"\n    return tools.get_order(order_id)\n@mcp.resource(\"log://today\")\ndef todays_log() -> str:\n    \"\"\"The raw service log for today.\"\"\"\n    return open(\"service.log\").read()\nif __name__ == \"__main__\":\n    mcp.run()",
               "atWord": 49.583
             },
             {
@@ -8326,12 +8335,13 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n    return tools.slowest_routes()\n@mcp.tool()\ndef get_order(order_id: str) -> str:\n    \"\"\"Look up one order by its id, for example SO-1003.\"\"\"\n    return tools.get_order(order_id)\n@mcp.resource(\"log://today\")\ndef todays_log() -> str:\n    \"\"\"The raw service log for today.\"\"\"\n    return open(\"service.log\").read()\nif __name__ == \"__main__\":\n    mcp.run()",
               "keys": [
                 "Ctrl",
                 "S"
               ],
-              "atWord": 84.167
+              "atWord": 83
             }
           ],
           "capture": {
@@ -9851,7 +9861,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
               "keys": [
                 "Ctrl",
                 "P"
@@ -9887,7 +9898,7 @@
               ],
               "id": "typeenv",
               "src": "rec/mcp-agent/seg-34.mp4",
-              "frames": 221,
+              "frames": 211,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -9899,19 +9910,22 @@
                   "x": 433,
                   "y": 68,
                   "w": 116,
-                  "h": 21
+                  "h": 21,
+                  "covers": "AI_BASE_URL"
                 },
                 "masked": {
                   "x": 433,
                   "y": 95,
                   "w": 105,
-                  "h": 21
+                  "h": 21,
+                  "covers": "AI_API_KEY"
                 },
                 "model": {
                   "x": 433,
                   "y": 122,
                   "w": 84,
-                  "h": 21
+                  "h": 21,
+                  "covers": "AI_MODEL"
                 }
               },
               "ink": [
@@ -9928,7 +9942,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nAI_BASE_URL=https://YOUR-RESOURCE.openai.azure.com/openai/v1/\nAI_API_KEY=****************************\nAI_MODEL=gpt-4o",
               "atWord": 26.083
             },
             {
@@ -9953,7 +9968,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
               "keys": [
                 "Ctrl",
                 "P"
@@ -9989,7 +10005,8 @@
                   "x": 433,
                   "y": 68,
                   "w": 42,
-                  "h": 21
+                  "h": 21,
+                  "covers": ".env"
                 }
               },
               "ink": [
@@ -10006,7 +10023,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n.env",
               "atWord": 74.833
             }
           ],
@@ -10119,7 +10137,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv",
               "keys": [
                 "Ctrl",
                 "P"
@@ -10158,7 +10177,7 @@
               ],
               "id": "ag1",
               "src": "rec/mcp-agent/seg-42.mp4",
-              "frames": 373,
+              "frames": 369,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -10170,7 +10189,8 @@
                   "x": 433,
                   "y": 230,
                   "w": 548,
-                  "h": 21
+                  "h": 21,
+                  "covers": "from mcp import ClientSession, StdioServerParameters"
                 }
               },
               "ink": [
@@ -10199,7 +10219,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nimport asyncio\nimport json\nimport os\nimport sys\nfrom dotenv import load_dotenv\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\nfrom openai import OpenAI\nload_dotenv()",
               "atWord": 24.583
             }
           ],
@@ -10354,7 +10375,7 @@
               ],
               "id": "ag1b",
               "src": "rec/mcp-agent/seg-43.mp4",
-              "frames": 466,
+              "frames": 461,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -10366,13 +10387,15 @@
                   "x": 570,
                   "y": 392,
                   "w": 221,
-                  "h": 21
+                  "h": 21,
+                  "covers": "StdioServerParameters"
                 },
                 "init": {
                   "x": 560,
                   "y": 500,
                   "w": 274,
-                  "h": 21
+                  "h": 21,
+                  "covers": "await session.initialize()"
                 }
               },
               "ink": [
@@ -10413,7 +10436,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\nimport sys\nfrom dotenv import load_dotenv\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\nfrom openai import OpenAI\nload_dotenv()\nasync def main(question: str) -> None:\n    params = StdioServerParameters(command=\".venv/bin/python\", args=[\"server.py\"])\n    async with stdio_client(params) as (read, write):\n        async with ClientSession(read, write) as session:\n            await session.initialize()",
               "atWord": 1.833
             }
           ],
@@ -10567,7 +10591,7 @@
               ],
               "id": "ag2",
               "src": "rec/mcp-agent/seg-44.mp4",
-              "frames": 725,
+              "frames": 724,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -10579,13 +10603,15 @@
                   "x": 644,
                   "y": 176,
                   "w": 274,
-                  "h": 21
+                  "h": 21,
+                  "covers": "await session.list_tools()"
                 },
                 "schema": {
                   "x": 834,
                   "y": 365,
                   "w": 179,
-                  "h": 21
+                  "h": 21,
+                  "covers": "tool.input_schema"
                 }
               },
               "ink": [
@@ -10608,7 +10634,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n        async with ClientSession(read, write) as session:\n            await session.initialize()\n            found = await session.list_tools()\n            menu = [\n                {\n                    \"type\": \"function\",\n                    \"function\": {\n                        \"name\": tool.name,\n                        \"description\": tool.description,\n                        \"parameters\": tool.input_schema,\n                    },\n                }\n                for tool in found.tools\n            ]\n            print(f\"the model can see {len(menu)} tools\\n\")",
               "atWord": 2.667
             }
           ],
@@ -10710,7 +10737,7 @@
               ],
               "id": "ag3",
               "src": "rec/mcp-agent/seg-45.mp4",
-              "frames": 637,
+              "frames": 633,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -10722,7 +10749,8 @@
                   "x": 1108,
                   "y": 446,
                   "w": 105,
-                  "h": 21
+                  "h": 21,
+                  "covers": "tools=menu"
                 }
               },
               "ink": [
@@ -10763,7 +10791,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n                    },\n                }\n                for tool in found.tools\n            ]\n            print(f\"the model can see {len(menu)} tools\\n\")\n            client = OpenAI(\n                base_url=os.getenv(\"AI_BASE_URL\"),\n                api_key=os.getenv(\"AI_API_KEY\"),\n            )\n            messages = [{\"role\": \"user\", \"content\": question}]\n            answer = client.chat.completions.create(\n                model=os.getenv(\"AI_MODEL\"), messages=messages, tools=menu\n            )\n            picked = answer.choices[0].message",
               "atWord": 4.417
             }
           ],
@@ -10941,7 +10970,7 @@
                   "side": "right",
                   "color": "orange",
                   "wantAtWord": 55.917,
-                  "atWord": 66.5
+                  "atWord": 65.833
                 },
                 {
                   "text": "it may ask for more than one",
@@ -10949,12 +10978,12 @@
                   "side": "right",
                   "color": "blue",
                   "wantAtWord": 33.75,
-                  "atWord": 76.083
+                  "atWord": 74.333
                 }
               ],
               "id": "ag4",
               "src": "rec/mcp-agent/seg-46.mp4",
-              "frames": 815,
+              "frames": 802,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -10966,13 +10995,15 @@
                   "x": 697,
                   "y": 311,
                   "w": 243,
-                  "h": 21
+                  "h": 21,
+                  "covers": "await session.call_tool"
                 },
                 "role": {
                   "x": 686,
                   "y": 392,
                   "w": 148,
-                  "h": 21
+                  "h": 21,
+                  "covers": "\"role\": \"tool\""
                 }
               },
               "ink": [
@@ -11001,7 +11032,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n                model=os.getenv(\"AI_MODEL\"), messages=messages, tools=menu\n            )\n            picked = answer.choices[0].message\n            messages.append(picked)\n            for call in picked.tool_calls:\n                args = json.loads(call.function.arguments)\n                print(f\"it chose {call.function.name}({args})\")\n                result = await session.call_tool(call.function.name, args)\n                messages.append(\n                    {\n                        \"role\": \"tool\",\n                        \"tool_call_id\": call.id,\n                        \"content\": result.content[0].text,\n                    }\n                )",
               "atWord": 1.667
             }
           ],
@@ -11078,7 +11110,7 @@
               ],
               "id": "ag5",
               "src": "rec/mcp-agent/seg-47.mp4",
-              "frames": 386,
+              "frames": 388,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -11090,7 +11122,8 @@
                   "x": 623,
                   "y": 419,
                   "w": 338,
-                  "h": 21
+                  "h": 21,
+                  "covers": "final.choices[0].message.content"
                 }
               },
               "ink": [
@@ -11137,7 +11170,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n                messages.append(\n                    {\n                        \"role\": \"tool\",\n                        \"tool_call_id\": call.id,\n                        \"content\": result.content[0].text,\n                    }\n                )\n            final = client.chat.completions.create(\n                model=os.getenv(\"AI_MODEL\"), messages=messages\n            )\n            print()\n            print(final.choices[0].message.content)\nasyncio.run(main(sys.argv[1]))",
               "atWord": 1.917
             }
           ],
@@ -11204,7 +11238,7 @@
               ],
               "id": "ag5",
               "src": "rec/mcp-agent/seg-47.mp4",
-              "frames": 386,
+              "frames": 388,
               "bbox": {
                 "x": 348,
                 "y": 65,
@@ -11216,7 +11250,8 @@
                   "x": 623,
                   "y": 419,
                   "w": 338,
-                  "h": 21
+                  "h": 21,
+                  "covers": "final.choices[0].message.content"
                 }
               },
               "ink": [
@@ -11263,7 +11298,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n                messages.append(\n                    {\n                        \"role\": \"tool\",\n                        \"tool_call_id\": call.id,\n                        \"content\": result.content[0].text,\n                    }\n                )\n            final = client.chat.completions.create(\n                model=os.getenv(\"AI_MODEL\"), messages=messages\n            )\n            print()\n            print(final.choices[0].message.content)\nasyncio.run(main(sys.argv[1]))",
               "atWord": 2
             },
             {
@@ -11334,7 +11370,8 @@
                   "h": 116
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python -c \"import tools; print(tools.recent_errors()); print(tools.slowest_routes())\"\n/checkout failed 13 times\n/checkout took 1569ms on average\n/orders took 1ms on average\n/orders/SO-1001 took 1ms on average\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n                messages.append(\n                    {\n                        \"role\": \"tool\",\n                        \"tool_call_id\": call.id,\n                        \"content\": result.content[0].text,\n                    }\n                )\n            final = client.chat.completions.create(\n                model=os.getenv(\"AI_MODEL\"), messages=messages\n            )\n            print()\n            print(final.choices[0].message.content)\nasyncio.run(main(sys.argv[1]))",
               "keys": [
                 "Ctrl",
                 "S"
@@ -11448,12 +11485,12 @@
                 {
                   "mark": "sees",
                   "wantAtWord": 25,
-                  "atWord": 45.083
+                  "atWord": 25
                 },
                 {
                   "mark": "chose",
                   "wantAtWord": 29.833,
-                  "atWord": 73.583
+                  "atWord": 72
                 },
                 {
                   "at": "full",
@@ -11476,7 +11513,7 @@
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 33.833,
-                  "atWord": 59.5
+                  "atWord": 33.833
                 },
                 {
                   "text": "written by the model, from YOUR log",
@@ -11484,12 +11521,12 @@
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 58.333,
-                  "atWord": 93.417
+                  "atWord": 92
                 }
               ],
               "id": "runagent",
               "src": "rec/mcp-agent/seg-49.mp4",
-              "frames": 366,
+              "frames": 333,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -11501,19 +11538,22 @@
                   "x": 368,
                   "y": 646,
                   "w": 159,
-                  "h": 19
+                  "h": 19,
+                  "covers": "the model can see"
                 },
                 "chose": {
                   "x": 368,
-                  "y": 685,
+                  "y": 704,
                   "w": 75,
-                  "h": 19
+                  "h": 19,
+                  "covers": "it chose"
                 },
                 "__cmd": {
                   "x": 499,
                   "y": 627,
                   "w": 862,
-                  "h": 19
+                  "h": 19,
+                  "covers": "uv run python agent.py \"our checkout is misbehaving - what does the log say? Two sentences.\""
                 }
               },
               "ink": [
@@ -11562,17 +11602,18 @@
                 {
                   "x": 368,
                   "y": 685,
-                  "w": 244,
-                  "h": 19
+                  "w": 253,
+                  "h": 38
                 },
                 {
                   "x": 368,
-                  "y": 724,
+                  "y": 743,
                   "w": 1209,
                   "h": 57
                 }
               ],
-              "shows": "$ cat pyproject.toml",
+              "shows": "$ uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-",
+              "said": "PS mcp-agent> uv run python agent.py \"our checkout is misbehaving - what does the log say? Two sentences.\"\nthe model can see 3 tools\nit chose recent_errors({})\nit chose slowest_routes({})\nThe log indicates that the `/checkout` endpoint failed 13 times. Additionally, the `/checkout` process is taking an average of 15\n69ms, which is significantly longer than other routes.\nPS mcp-agent>\nPS mcp-agent> uv add \"mcp[cli]\" fastapi \"uvicorn[standard]\" httpx openai python-dotenv\n                messages.append(\n                    {\n                        \"role\": \"tool\",\n                        \"tool_call_id\": call.id,\n                        \"content\": result.content[0].text,\n                    }\n                )\n            final = client.chat.completions.create(\n                model=os.getenv(\"AI_MODEL\"), messages=messages\n            )\n            print()\n            print(final.choices[0].message.content)\nasyncio.run(main(sys.argv[1]))",
               "atWord": 2.583
             }
           ],
