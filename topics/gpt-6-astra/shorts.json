@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "topic": "GPT-6 Astra",
+    "format": "short",
+    "fps": 30,
+    "onePayoff": "TODO",
+    "openLoop": "TODO",
+    "analogy": "TODO"
+  },
+  "brand": {
+    "theme": "CHOOSE_DARK_THEME",
+    "channel": "YOUR CHANNEL",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "TODO",
+    "badge": "TODO",
+    "asset": "lucide:sparkles",
+    "frames": 2
+  },
+  "scenes": []
+}

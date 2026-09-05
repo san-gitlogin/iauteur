@@ -1,0 +1,6134 @@
+{
+  "meta": {
+    "slug": "gpt-6-astra",
+    "subject": "GPT-6 Astra",
+    "topic": "What GPT-6 Astra actually is, what it does better, where it loses, and who can run it",
+    "format": "long",
+    "fps": 30,
+    "screenplay": "documentary",
+    "onePayoff": "the same benchmark scored Astra at 99.9% and 62.7% on the same day, and which number you saw depended on the harness",
+    "openLoop": "Is this a taste of AGI, or a very good operator?",
+    "analogy": "A new hire who cannot out-think your best analyst, but will drive the software all night without complaining.",
+    "topicAxes": [
+      "entity-novelty",
+      "tribal-conflict"
+    ],
+    "seo": {
+      "title": "GPT-6 Astra: Everything You Need To Know (Honest Review, 2026)",
+      "altTitles": [
+        "GPT-6 Astra explained — the numbers nobody printed",
+        "GPT-6 Astra vs Claude Fable 5.1: what the benchmarks actually say"
+      ],
+      "description": "A full breakdown of OpenAI's GPT-6 Astra from the primary sources: the official announcement, the model card, ARC Prize's ARC-AGI-3 report, Artificial Analysis, OpenRouter, and what developers are saying. What it is, what it costs, where it wins, where it loses, and who can actually run it today.",
+      "tags": [
+        "gpt-6 astra",
+        "openai",
+        "gpt-6",
+        "astra",
+        "claude fable 5.1",
+        "arc-agi-3",
+        "ai benchmarks",
+        "computer use",
+        "ai model comparison",
+        "artificial analysis"
+      ],
+      "queries": [
+        "what is gpt-6 astra",
+        "gpt-6 astra benchmarks",
+        "gpt-6 astra vs claude fable 5.1",
+        "gpt-6 astra price",
+        "is gpt-6 astra agi"
+      ],
+      "pinned": "Every number here came off its source page on camera — links below. Which surprised you more: the 62.7%, or all three Claudes beating Astra on Humanity's Last Exam?",
+      "sources": [
+        "OpenAI — GPT-6 Astra: A new generation of intelligence — https://openai.com/index/gpt-6-astra/",
+        "OpenAI — gpt-6-astra model card — https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "ARC Prize — OpenAI's GPT-6 Astra on ARC-AGI-3, by Greg Kamradt — https://arcprize.org/blog/astra",
+        "Artificial Analysis — GPT-6 Astra release — https://artificialanalysis.ai/models/releases/gpt-6-astra",
+        "OpenRouter — openai/gpt-6-astra — https://openrouter.ai/openai/gpt-6-astra",
+        "unicodeveloper — GPT-6 Astra. A taste of AGI? — https://medium.com/@unicodeveloper/gpt-6-astra-a-taste-of-agi-938515afc5c7",
+        "r/developersIndia — GPT 6.O Astra is insanely good — https://www.reddit.com/r/developersIndia/comments/1w6x5eq/gpt_6o_astra_is_insanely_good_good_alternative/",
+        "ABYSSAL — The Living Deep, by Ethan Mollick — https://abyssal-living-deep.netlify.app",
+        "abyssal-living-deep source — https://github.com/emollick/abyssal-living-deep"
+      ]
+    }
+  },
+  "brand": {
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "GPT-6 Astra",
+    "subtitle": "everything, from the primary sources"
+  },
+  "thumbnail": {
+    "title": "GPT-6 ASTRA",
+    "badge": "99.9% or 62.7%?",
+    "note": "the number nobody printed",
+    "asset": "si:openai"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "durationFrames": 223,
+      "timingSource": "estimated",
+      "narration": "One benchmark scored GPT-6 Astra ninety-nine point nine percent. The same test, the same day, scored it sixty-two point seven.",
+      "data": {
+        "headline": "GPT-6 ASTRA: 99.9% AND 62.7%",
+        "subtext": "one test, one day, two answers",
+        "heroAsset": "si:openai",
+        "headlineAtWord": 4,
+        "heroAtWord": 3,
+        "hookVariant": "figure"
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "durationFrames": 311,
+      "timingSource": "estimated",
+      "narration": "Hello, and welcome back. Both of those numbers about GPT-6 Astra are real, and both came from the same organisation on the same day. So which one is true?",
+      "data": {
+        "title": "GPT-6 Astra",
+        "subtitle": "what it is, what it costs, where it loses"
+      },
+      "transition": "fade",
+      "background": "zoneA"
+    },
+    {
+      "id": "s02b",
+      "type": "LIST_BUILD",
+      "durationFrames": 587,
+      "timingSource": "estimated",
+      "narration": "That's the question this video answers. By the end you'll know what Astra costs to run, what it genuinely beats, where it loses — and there are places it loses badly — plus whether you can get hold of it yet. Every figure came off its source page, on camera, so you can check any of it.",
+      "data": {
+        "heading": "What this video covers",
+        "items": [
+          {
+            "icon": "lucide:banknote",
+            "text": "What it costs",
+            "detail": "per million tokens",
+            "atWord": 14
+          },
+          {
+            "icon": "lucide:trophy",
+            "text": "What it beats",
+            "detail": "computer use, 3D, security",
+            "atWord": 20
+          },
+          {
+            "icon": "lucide:trending-down",
+            "text": "Where it loses",
+            "detail": "reasoning, and to whom",
+            "atWord": 23
+          },
+          {
+            "icon": "lucide:key-round",
+            "text": "Whether you can run it",
+            "detail": "the rollout, in order",
+            "atWord": 37
+          }
+        ]
+      },
+      "transition": "dip",
+      "background": "zoneA"
+    },
+    {
+      "id": "s03",
+      "type": "CHAPTER",
+      "durationFrames": 242,
+      "timingSource": "estimated",
+      "narration": "Start with the thing that actually changed, because Astra is a different shape of model from the ones you have been using.",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Astra is an operator",
+          "subtitle": "the chatbot era was about answers"
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneB"
+    },
+    {
+      "id": "s04",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 1019,
+      "timingSource": "estimated",
+      "narration": "For three years a language model has been a thing you ask. You type, it writes back, and acting on the answer stays your job, because a chat box has no hands. Astra aims at the other half, because the answer was never the hard part. OpenAI describes it opening a browser and researching for you. Filling in a form. Updating a CRM — the customer database a sales team lives in. Running a check across a website's front end to find what broke. None of those are questions — they are chores, and chores are what fill a working day.",
+      "data": {
+        "astraStage": {
+          "headline": "Answers, or [actions]",
+          "kind": "operator-desk",
+          "premise": "On the left, a model you ask. On the right, one that opens your software and works inside it.",
+          "stageTitle": "two different jobs",
+          "token": "it answers you",
+          "color": "blue",
+          "verdict": "Chores, not questions",
+          "verdictSub": "and chores are what eat a working day",
+          "stage": [
+            {
+              "label": "Chrome",
+              "sub": "researching online",
+              "icon": "lucide:globe",
+              "atWord": 52
+            },
+            {
+              "label": "Forms",
+              "sub": "filling one in",
+              "icon": "lucide:clipboard-list",
+              "atWord": 60
+            },
+            {
+              "label": "CRM",
+              "sub": "updating records",
+              "icon": "lucide:contact",
+              "atWord": 63
+            },
+            {
+              "label": "QA",
+              "sub": "checking the front end",
+              "icon": "lucide:bug",
+              "atWord": 75
+            }
+          ],
+          "verdictAtWord": 85
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s05",
+      "type": "RECORDED_STEP",
+      "durationFrames": 765,
+      "timingSource": "estimated",
+      "narration": "Here is OpenAI's own announcement page. Their heading for that section reads: the world's best computer use model. Computer use is the industry's phrase for a model that drives software the way you do — moving a pointer, clicking, typing, and reading the screen back to itself. Pause on that heading, because it tells you what they think they built.",
+      "data": {
+        "recordedStep": {
+          "premise": "OpenAI's announcement page for GPT-6 Astra.",
+          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "layout": "full",
+          "color": "blue",
+          "caption": "their own words for what it is",
+          "clips": [
+            {
+              "ref": "rec:astra-openai#operator",
+              "label": "the heading they chose",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "cu",
+                  "atWord": 34
+                },
+                {
+                  "at": "full",
+                  "atWord": 49
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "operator",
+              "src": "rec/astra-openai/seg-02.mp4",
+              "frames": 175,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "cu": {
+                  "x": 462,
+                  "y": 248,
+                  "w": 505,
+                  "h": 36,
+                  "covers": "The world’s best computer use model"
+                }
+              },
+              "ink": [
+                {
+                  "x": 642,
+                  "y": 24,
+                  "w": 185,
+                  "h": 31
+                },
+                {
+                  "x": 1370,
+                  "y": 24,
+                  "w": 82,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 24,
+                  "w": 64,
+                  "h": 17
+                },
+                {
+                  "x": 659,
+                  "y": 24,
+                  "w": 68,
+                  "h": 16
+                },
+                {
+                  "x": 470,
+                  "y": 24,
+                  "w": 67,
+                  "h": 16
+                },
+                {
+                  "x": 569,
+                  "y": 24,
+                  "w": 58,
+                  "h": 16
+                },
+                {
+                  "x": 212,
+                  "y": 24,
+                  "w": 56,
+                  "h": 16
+                },
+                {
+                  "x": 299,
+                  "y": 24,
+                  "w": 54,
+                  "h": 16
+                },
+                {
+                  "x": 385,
+                  "y": 24,
+                  "w": 53,
+                  "h": 16
+                },
+                {
+                  "x": 1266,
+                  "y": 24,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 1310,
+                  "y": 26,
+                  "w": 12,
+                  "h": 12
+                },
+                {
+                  "x": 1419,
+                  "y": 30,
+                  "w": 157,
+                  "h": 17
+                },
+                {
+                  "x": 462,
+                  "y": 248,
+                  "w": 505,
+                  "h": 36
+                },
+                {
+                  "x": 462,
+                  "y": 314,
+                  "w": 670,
+                  "h": 216
+                },
+                {
+                  "x": 620,
+                  "y": 619,
+                  "w": 121,
+                  "h": 17
+                },
+                {
+                  "x": 781,
+                  "y": 619,
+                  "w": 102,
+                  "h": 17
+                },
+                {
+                  "x": 923,
+                  "y": 619,
+                  "w": 57,
+                  "h": 17
+                },
+                {
+                  "x": 483,
+                  "y": 709,
+                  "w": 146,
+                  "h": 20
+                },
+                {
+                  "x": 1097,
+                  "y": 709,
+                  "w": 20,
+                  "h": 20
+                },
+                {
+                  "x": 496,
+                  "y": 748,
+                  "w": 55,
+                  "h": 17
+                },
+                {
+                  "x": 738,
+                  "y": 786,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 873,
+                  "y": 786,
+                  "w": 92,
+                  "h": 17
+                },
+                {
+                  "x": 505,
+                  "y": 786,
+                  "w": 76,
+                  "h": 17
+                },
+                {
+                  "x": 623,
+                  "y": 786,
+                  "w": 73,
+                  "h": 17
+                },
+                {
+                  "x": 483,
+                  "y": 786,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 601,
+                  "y": 786,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 716,
+                  "y": 786,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 851,
+                  "y": 786,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 484,
+                  "y": 826,
+                  "w": 633,
+                  "h": 74
+                },
+                {
+                  "x": 483,
+                  "y": 826,
+                  "w": 28,
+                  "h": 16
+                }
+              ],
+              "shows": "The world’s best computer use model",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "transition": "wipe",
+      "background": "zoneB"
+    },
+    {
+      "id": "s06",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 636,
+      "timingSource": "estimated",
+      "narration": "How do you even score that kind of work? There's a benchmark for it, called OSWorld. Rather than asking a model questions, OSWorld sits it at a real desktop, hands it a real job, lets it work, and then inspects the machine afterwards to see whether the job got done. No credit for describing the answer, because describing is the easy half.",
+      "data": {
+        "astraStage": {
+          "headline": "The exam is a [real desktop]",
+          "kind": "operator-desk",
+          "premise": "OSWorld hands a model a working computer and a job, then checks whether the job actually got done.",
+          "stageTitle": "how OSWorld scores a model",
+          "token": "asked, not acted",
+          "color": "green",
+          "stage": [
+            {
+              "label": "Desktop",
+              "sub": "a real machine, real apps",
+              "icon": "lucide:monitor",
+              "atWord": 29
+            },
+            {
+              "label": "The job",
+              "sub": "what a person would be asked",
+              "icon": "lucide:list-checks",
+              "atWord": 34
+            },
+            {
+              "label": "It works",
+              "sub": "clicking and typing, unattended",
+              "icon": "lucide:mouse-pointer-2",
+              "atWord": 40
+            },
+            {
+              "label": "Marked",
+              "sub": "did the job actually get done",
+              "icon": "lucide:badge-check",
+              "atWord": 50
+            }
+          ]
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s06b",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 616,
+      "timingSource": "estimated",
+      "narration": "GPT-5.6 Sol — the model Astra replaces — finishes sixty-five point seven percent of those jobs, at roughly seventy-five minutes each. Astra finishes seventy-two point six percent, in about forty minutes. Read the two together rather than separately, because separately they undersell it. More of the work lands, in half the time, because it stops less often to check in.",
+      "data": {
+        "astraStage": {
+          "headline": "More done, in [half the time]",
+          "kind": "task-clock",
+          "premise": "Each lane fills to the score that model reached; the flag marks how long its average task took.",
+          "stageTitle": "OSWorld 2.0, offline set",
+          "token": "what each model finished, and the clock it ran against",
+          "color": "green",
+          "verdict": "More finished, in half the time",
+          "verdictSub": "OSWorld 2.0, as published by OpenAI",
+          "stage": [
+            {
+              "label": "GPT-5.6 Sol",
+              "text": "65.7%",
+              "detail": "75 min",
+              "value": 65.7,
+              "atWord": 1
+            },
+            {
+              "label": "GPT-6 Astra",
+              "text": "72.6%",
+              "detail": "40 min",
+              "value": 72.6,
+              "win": true,
+              "atWord": 22
+            }
+          ],
+          "verdictAtWord": 44
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s07",
+      "type": "RECORDED_STEP",
+      "durationFrames": 765,
+      "timingSource": "estimated",
+      "narration": "Here is that row on OpenAI's own table, so you can read it rather than take my word for it. OSWorld 2.0, offline set, partial score — seventy-two point six percent, in the Astra column. A business reading this page cares less about which model is cleverer. A business cares that a job which cost seventy-five minutes now costs forty.",
+      "data": {
+        "recordedStep": {
+          "premise": "The benchmark table on OpenAI's announcement page.",
+          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "layout": "full",
+          "color": "green",
+          "caption": "the OSWorld row, on the page itself",
+          "clips": [
+            {
+              "ref": "rec:astra-openai#table",
+              "label": "the OSWorld row",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "osworld",
+                  "atWord": 34
+                },
+                {
+                  "at": "full",
+                  "atWord": 49
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "table",
+              "src": "rec/astra-openai/seg-04.mp4",
+              "frames": 176,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "osworld": {
+                  "x": 607,
+                  "y": 435,
+                  "w": 39,
+                  "h": 17,
+                  "covers": "72.6%"
+                }
+              },
+              "ink": [
+                {
+                  "x": 512,
+                  "y": 0,
+                  "w": 576,
+                  "h": 136
+                },
+                {
+                  "x": 1370,
+                  "y": 24,
+                  "w": 82,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 24,
+                  "w": 64,
+                  "h": 17
+                },
+                {
+                  "x": 470,
+                  "y": 24,
+                  "w": 67,
+                  "h": 16
+                },
+                {
+                  "x": 212,
+                  "y": 24,
+                  "w": 56,
+                  "h": 16
+                },
+                {
+                  "x": 299,
+                  "y": 24,
+                  "w": 54,
+                  "h": 16
+                },
+                {
+                  "x": 385,
+                  "y": 24,
+                  "w": 53,
+                  "h": 16
+                },
+                {
+                  "x": 1266,
+                  "y": 24,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 1419,
+                  "y": 30,
+                  "w": 157,
+                  "h": 17
+                },
+                {
+                  "x": 229,
+                  "y": 259,
+                  "w": 110,
+                  "h": 20
+                },
+                {
+                  "x": 1247,
+                  "y": 340,
+                  "w": 106,
+                  "h": 17
+                },
+                {
+                  "x": 860,
+                  "y": 340,
+                  "w": 103,
+                  "h": 17
+                },
+                {
+                  "x": 994,
+                  "y": 340,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 1120,
+                  "y": 340,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 340,
+                  "w": 92,
+                  "h": 17
+                },
+                {
+                  "x": 607,
+                  "y": 340,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 733,
+                  "y": 340,
+                  "w": 75,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 388,
+                  "w": 116,
+                  "h": 17
+                },
+                {
+                  "x": 607,
+                  "y": 388,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 733,
+                  "y": 388,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 994,
+                  "y": 388,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 1120,
+                  "y": 388,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 435,
+                  "w": 323,
+                  "h": 17
+                },
+                {
+                  "x": 607,
+                  "y": 435,
+                  "w": 39,
+                  "h": 17
+                },
+                {
+                  "x": 733,
+                  "y": 435,
+                  "w": 39,
+                  "h": 17
+                },
+                {
+                  "x": 1120,
+                  "y": 435,
+                  "w": 39,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 483,
+                  "w": 161,
+                  "h": 17
+                },
+                {
+                  "x": 733,
+                  "y": 483,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 229,
+                  "y": 624,
+                  "w": 93,
+                  "h": 20
+                },
+                {
+                  "x": 1239,
+                  "y": 704,
+                  "w": 106,
+                  "h": 17
+                },
+                {
+                  "x": 830,
+                  "y": 704,
+                  "w": 103,
+                  "h": 17
+                },
+                {
+                  "x": 972,
+                  "y": 704,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 1105,
+                  "y": 704,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 704,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 697,
+                  "y": 704,
+                  "w": 52,
+                  "h": 17
+                },
+                {
+                  "x": 563,
+                  "y": 704,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 752,
+                  "w": 114,
+                  "h": 17
+                },
+                {
+                  "x": 1105,
+                  "y": 752,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 800,
+                  "w": 69,
+                  "h": 17
+                },
+                {
+                  "x": 830,
+                  "y": 800,
+                  "w": 44,
+                  "h": 17
+                },
+                {
+                  "x": 563,
+                  "y": 800,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 697,
+                  "y": 800,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 1105,
+                  "y": 800,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 848,
+                  "w": 85,
+                  "h": 17
+                },
+                {
+                  "x": 697,
+                  "y": 848,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 1105,
+                  "y": 848,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 972,
+                  "y": 848,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 896,
+                  "w": 266,
+                  "h": 4
+                }
+              ],
+              "shows": "Computer Use",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "durationFrames": 213,
+      "timingSource": "estimated",
+      "narration": "Before any benchmark, the plain facts. What it holds, what it costs, and whether you can run it today.",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "The specifications",
+          "subtitle": "in plain English"
+        }
+      },
+      "transition": "dip",
+      "background": "zoneC"
+    },
+    {
+      "id": "s09",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 833,
+      "timingSource": "estimated",
+      "narration": "Two terms carry the rest of this chapter, so here they are on a real sentence. A model doesn't read words. Models read tokens, and a token is a chunk of text. Common words come through whole, because they are common — Astra, can. Longer ones break up: oper, ate. Punctuation counts too. Six short words came apart into seven pieces. So a token averages about three quarters of an English word, and that is the unit every price is quoted in.",
+      "data": {
+        "astraStage": {
+          "headline": "A token is not [a word]",
+          "kind": "token-split",
+          "premise": "The sentence above, cut the way a model actually cuts it before reading anything.",
+          "stageTitle": "what you are billed for",
+          "token": "Astra can operate a computer.",
+          "color": "blue",
+          "verdict": "Roughly three quarters of a word",
+          "verdictSub": "which is why prices are quoted per million",
+          "stage": [
+            {
+              "label": "Astra",
+              "atWord": 43
+            },
+            {
+              "label": " can",
+              "atWord": 44
+            },
+            {
+              "label": " oper",
+              "sub": "fragment",
+              "win": true,
+              "atWord": 49
+            },
+            {
+              "label": "ate",
+              "sub": "fragment",
+              "win": true,
+              "atWord": 50
+            },
+            {
+              "label": " a",
+              "atWord": 51
+            },
+            {
+              "label": " computer",
+              "atWord": 52
+            },
+            {
+              "label": ".",
+              "sub": "still a token",
+              "win": true,
+              "atWord": 60
+            }
+          ],
+          "verdictAtWord": 62
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s09b",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 478,
+      "timingSource": "estimated",
+      "narration": "Its context window is how many of those tokens a model holds at one time. Astra's window is one million, fifty thousand tokens. Artificial Analysis turns that into paper: fifteen hundred A4 pages. A contract, a codebase and a year of email, all open at once.",
+      "data": {
+        "astraStage": {
+          "headline": "A million tokens, [as paper]",
+          "kind": "page-stack",
+          "premise": "Every sheet in the stack is text Astra can keep in mind at once while it works.",
+          "stageTitle": "the context window",
+          "token": "about 1500 A4 pages",
+          "color": "blue",
+          "verdict": "Roughly 1500 A4 pages, at once",
+          "verdictSub": "Artificial Analysis makes that comparison",
+          "stage": [
+            {
+              "label": "tokens it can hold at once",
+              "value": 1050000,
+              "sub": "one million, fifty thousand",
+              "atWord": 16
+            }
+          ],
+          "verdictAtWord": 34
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s10",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 901,
+      "timingSource": "estimated",
+      "narration": "Now the price, and these are the numbers you pay per million tokens. Text going in costs ten dollars. Text coming out costs fifty. Output runs at five times the input rate, because generating text is the expensive half. Cached input drops to one dollar — caching means the model re-reads something it has already seen, and you are billed a tenth for the privilege. Writing that cache costs twelve fifty once. Reading is cheap and writing is not, so a long conversation costs less than a long answer.",
+      "data": {
+        "astraStage": {
+          "headline": "What a million tokens [costs]",
+          "kind": "rate-plate",
+          "premise": "Each tag is the price of one million tokens, which is roughly 750,000 words in or out.",
+          "stageTitle": "the API price list",
+          "token": "per million tokens",
+          "color": "orange",
+          "verdict": "Reading is cheap. Writing is not.",
+          "verdictSub": "output runs five times the input rate",
+          "stage": [
+            {
+              "label": "input",
+              "text": "$10",
+              "sub": "text you send it",
+              "atWord": 16
+            },
+            {
+              "label": "output",
+              "text": "$50",
+              "sub": "text it writes back",
+              "atWord": 22
+            },
+            {
+              "label": "cached input",
+              "text": "$1",
+              "detail": "$10",
+              "sub": "re-reading what it saw",
+              "win": true,
+              "atWord": 40
+            },
+            {
+              "label": "cache write",
+              "text": "$12.50",
+              "sub": "paid once, to store it",
+              "atWord": 66
+            }
+          ],
+          "verdictAtWord": 73
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s11",
+      "type": "RECORDED_STEP",
+      "durationFrames": 609,
+      "timingSource": "estimated",
+      "narration": "OpenRouter lists the same rates, and it is useful precisely because it is not OpenAI's own page. Ten dollars and fifty dollars, per million tokens. OpenRouter also tracks who serves the model and how fast — OpenAI and Azure, with live throughput and uptime beside each one.",
+      "data": {
+        "recordedStep": {
+          "premise": "OpenRouter's model page for openai/gpt-6-astra.",
+          "sourceNote": "openrouter.ai/openai/gpt-6-astra — independent listing",
+          "layout": "full",
+          "color": "orange",
+          "caption": "the same prices, elsewhere",
+          "clips": [
+            {
+              "ref": "rec:astra-openrouter#open",
+              "label": "the price line",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "price",
+                  "atWord": 20
+                },
+                {
+                  "at": "full",
+                  "atWord": 31
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "open",
+              "src": "rec/astra-openrouter/seg-01.mp4",
+              "frames": 48,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "price": {
+                  "x": 440,
+                  "y": 286,
+                  "w": 72,
+                  "h": 20,
+                  "covers": "$10 / $50"
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 163,
+                  "h": 37
+                },
+                {
+                  "x": 1032,
+                  "y": 19,
+                  "w": 84,
+                  "h": 18
+                },
+                {
+                  "x": 1365,
+                  "y": 19,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 1188,
+                  "y": 19,
+                  "w": 61,
+                  "h": 18
+                },
+                {
+                  "x": 1513,
+                  "y": 19,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 963,
+                  "y": 19,
+                  "w": 50,
+                  "h": 18
+                },
+                {
+                  "x": 288,
+                  "y": 19,
+                  "w": 47,
+                  "h": 18
+                },
+                {
+                  "x": 204,
+                  "y": 69,
+                  "w": 227,
+                  "h": 39
+                },
+                {
+                  "x": 1330,
+                  "y": 69,
+                  "w": 82,
+                  "h": 36
+                },
+                {
+                  "x": 1204,
+                  "y": 69,
+                  "w": 77,
+                  "h": 18
+                },
+                {
+                  "x": 1087,
+                  "y": 69,
+                  "w": 64,
+                  "h": 18
+                },
+                {
+                  "x": 1182,
+                  "y": 70,
+                  "w": 83,
+                  "h": 35
+                },
+                {
+                  "x": 1306,
+                  "y": 70,
+                  "w": 22,
+                  "h": 34
+                },
+                {
+                  "x": 1059,
+                  "y": 72,
+                  "w": 64,
+                  "h": 33
+                },
+                {
+                  "x": 229,
+                  "y": 123,
+                  "w": 81,
+                  "h": 18
+                },
+                {
+                  "x": 176,
+                  "y": 123,
+                  "w": 47,
+                  "h": 18
+                },
+                {
+                  "x": 176,
+                  "y": 172,
+                  "w": 1238,
+                  "h": 47
+                },
+                {
+                  "x": 189,
+                  "y": 262,
+                  "w": 74,
+                  "h": 15
+                },
+                {
+                  "x": 943,
+                  "y": 264,
+                  "w": 89,
+                  "h": 42
+                },
+                {
+                  "x": 440,
+                  "y": 264,
+                  "w": 88,
+                  "h": 42
+                },
+                {
+                  "x": 691,
+                  "y": 264,
+                  "w": 58,
+                  "h": 42
+                },
+                {
+                  "x": 516,
+                  "y": 288,
+                  "w": 45,
+                  "h": 18
+                },
+                {
+                  "x": 400,
+                  "y": 385,
+                  "w": 643,
+                  "h": 93
+                },
+                {
+                  "x": 208,
+                  "y": 393,
+                  "w": 64,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 429,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 464,
+                  "w": 87,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 500,
+                  "w": 49,
+                  "h": 18
+                },
+                {
+                  "x": 1167,
+                  "y": 528,
+                  "w": 140,
+                  "h": 18
+                },
+                {
+                  "x": 434,
+                  "y": 528,
+                  "w": 62,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 536,
+                  "w": 84,
+                  "h": 18
+                },
+                {
+                  "x": 981,
+                  "y": 584,
+                  "w": 72,
+                  "h": 17
+                },
+                {
+                  "x": 1202,
+                  "y": 584,
+                  "w": 72,
+                  "h": 17
+                },
+                {
+                  "x": 438,
+                  "y": 584,
+                  "w": 53,
+                  "h": 17
+                },
+                {
+                  "x": 1110,
+                  "y": 584,
+                  "w": 50,
+                  "h": 17
+                },
+                {
+                  "x": 1340,
+                  "y": 584,
+                  "w": 46,
+                  "h": 17
+                },
+                {
+                  "x": 878,
+                  "y": 584,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 208,
+                  "y": 607,
+                  "w": 50,
+                  "h": 18
+                },
+                {
+                  "x": 470,
+                  "y": 626,
+                  "w": 80,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 626,
+                  "w": 52,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 670,
+                  "w": 52,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 679,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 714,
+                  "w": 52,
+                  "h": 18
+                },
+                {
+                  "x": 470,
+                  "y": 714,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 470,
+                  "y": 758,
+                  "w": 67,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 758,
+                  "w": 52,
+                  "h": 18
+                },
+                {
+                  "x": 470,
+                  "y": 801,
+                  "w": 82,
+                  "h": 18
+                },
+                {
+                  "x": 1326,
+                  "y": 801,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 893,
+                  "y": 801,
+                  "w": 46,
+                  "h": 18
+                }
+              ],
+              "shows": "OpenAI: GPT-6 Astra",
+              "atWord": 5
+            },
+            {
+              "ref": "rec:astra-openrouter#providers",
+              "label": "who serves it",
+              "wantAtWord": 37,
+              "id": "providers",
+              "src": "rec/astra-openrouter/seg-02.mp4",
+              "frames": 84,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 163,
+                  "h": 37
+                },
+                {
+                  "x": 1167,
+                  "y": 19,
+                  "w": 140,
+                  "h": 27
+                },
+                {
+                  "x": 1365,
+                  "y": 19,
+                  "w": 69,
+                  "h": 26
+                },
+                {
+                  "x": 1032,
+                  "y": 19,
+                  "w": 84,
+                  "h": 18
+                },
+                {
+                  "x": 1188,
+                  "y": 19,
+                  "w": 61,
+                  "h": 18
+                },
+                {
+                  "x": 1513,
+                  "y": 19,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 963,
+                  "y": 19,
+                  "w": 50,
+                  "h": 18
+                },
+                {
+                  "x": 288,
+                  "y": 19,
+                  "w": 47,
+                  "h": 18
+                },
+                {
+                  "x": 1324,
+                  "y": 19,
+                  "w": 30,
+                  "h": 27
+                },
+                {
+                  "x": 434,
+                  "y": 20,
+                  "w": 62,
+                  "h": 26
+                },
+                {
+                  "x": 1202,
+                  "y": 69,
+                  "w": 79,
+                  "h": 32
+                },
+                {
+                  "x": 204,
+                  "y": 69,
+                  "w": 139,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 69,
+                  "w": 78,
+                  "h": 32
+                },
+                {
+                  "x": 1087,
+                  "y": 69,
+                  "w": 73,
+                  "h": 32
+                },
+                {
+                  "x": 981,
+                  "y": 84,
+                  "w": 72,
+                  "h": 17
+                },
+                {
+                  "x": 438,
+                  "y": 84,
+                  "w": 53,
+                  "h": 17
+                },
+                {
+                  "x": 878,
+                  "y": 84,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 470,
+                  "y": 126,
+                  "w": 80,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 126,
+                  "w": 52,
+                  "h": 18
+                },
+                {
+                  "x": 901,
+                  "y": 126,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 135,
+                  "w": 64,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 170,
+                  "w": 52,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 170,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 799,
+                  "y": 170,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 901,
+                  "y": 170,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 206,
+                  "w": 87,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 214,
+                  "w": 52,
+                  "h": 18
+                },
+                {
+                  "x": 470,
+                  "y": 214,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 799,
+                  "y": 214,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 901,
+                  "y": 214,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 242,
+                  "w": 49,
+                  "h": 18
+                },
+                {
+                  "x": 470,
+                  "y": 258,
+                  "w": 67,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 258,
+                  "w": 52,
+                  "h": 18
+                },
+                {
+                  "x": 799,
+                  "y": 258,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 901,
+                  "y": 258,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 278,
+                  "w": 84,
+                  "h": 18
+                },
+                {
+                  "x": 470,
+                  "y": 301,
+                  "w": 82,
+                  "h": 18
+                },
+                {
+                  "x": 1326,
+                  "y": 301,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 893,
+                  "y": 301,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 208,
+                  "y": 349,
+                  "w": 50,
+                  "h": 18
+                },
+                {
+                  "x": 400,
+                  "y": 394,
+                  "w": 649,
+                  "h": 71
+                },
+                {
+                  "x": 208,
+                  "y": 421,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 421,
+                  "y": 504,
+                  "w": 124,
+                  "h": 18
+                },
+                {
+                  "x": 937,
+                  "y": 548,
+                  "w": 181,
+                  "h": 76
+                },
+                {
+                  "x": 438,
+                  "y": 548,
+                  "w": 167,
+                  "h": 76
+                },
+                {
+                  "x": 421,
+                  "y": 672,
+                  "w": 183,
+                  "h": 18
+                },
+                {
+                  "x": 417,
+                  "y": 706,
+                  "w": 986,
+                  "h": 194
+                },
+                {
+                  "x": 432,
+                  "y": 706,
+                  "w": 52,
+                  "h": 15
+                }
+              ],
+              "shows": "Pricing",
+              "atWord": 31
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "transition": "fade",
+      "background": "zoneC"
+    },
+    {
+      "id": "s12",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 813,
+      "timingSource": "estimated",
+      "narration": "One more practical thing, and it is the question I would ask first. Can you actually use it? On day one, access went to a limited set of organisations. Then ChatGPT Plus, Pro, Business and Enterprise, over the following days. Then the API, and Microsoft Azure, and Amazon Bedrock. If you are on a normal subscription and cannot find it, there's nothing wrong with your account. Access is simply staged, and most people watching this are still in the queue.",
+      "data": {
+        "astraStage": {
+          "headline": "Who can run it [today]",
+          "kind": "rollout-queue",
+          "premise": "A staged rollout, in the order OpenAI published it. Most people watching are standing in the queue.",
+          "stageTitle": "the rollout, in order",
+          "token": "access, stage by stage",
+          "color": "purple",
+          "verdict": "Most of us are still waiting",
+          "verdictSub": "which is worth knowing before you go looking",
+          "stage": [
+            {
+              "label": "Limited orgs",
+              "sub": "day one",
+              "icon": "lucide:building-2",
+              "atWord": 26
+            },
+            {
+              "label": "Plus · Pro · Business",
+              "sub": "the days after",
+              "icon": "lucide:users",
+              "atWord": 31
+            },
+            {
+              "label": "API · Azure · Bedrock",
+              "sub": "for developers",
+              "icon": "lucide:plug",
+              "atWord": 43
+            },
+            {
+              "label": "Everyone else",
+              "sub": "still waiting",
+              "icon": "lucide:hourglass",
+              "win": true,
+              "atWord": 50
+            }
+          ],
+          "verdictAtWord": 67
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "durationFrames": 183,
+      "timingSource": "estimated",
+      "narration": "Now the numbers OpenAI led with, and what each benchmark on their table is actually measuring.",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The numbers they led with",
+          "subtitle": "and what each benchmark measures"
+        }
+      },
+      "transition": "iris",
+      "background": "zoneA"
+    },
+    {
+      "id": "s14",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 823,
+      "timingSource": "estimated",
+      "narration": "Start with BenchCAD, because it tests something models have historically been poor at. Given photographs of an object, can the model rebuild it as real geometry? Rebuilding needs a sense of scale, of what sits behind what, of how parts fit together. Astra scores ninety-five point nine percent. Claude Fable 5.1 gets eighty-four point three. GPT-5.6 Sol, eighty-three point three. Claude Opus 5, eighty-two point one. That's the widest gap on the table, because 3D is where models have always struggled.",
+      "data": {
+        "astraStage": {
+          "headline": "Reading a house, [not drawing one]",
+          "kind": "bench-row",
+          "premise": "BenchCAD scores whether a model can rebuild a 3D object correctly from pictures of it.",
+          "stageTitle": "BenchCAD, from OpenAI's table",
+          "token": "rebuilding 3D objects from photographs",
+          "color": "purple",
+          "verdict": "A twelve-point lead on 3D",
+          "verdictSub": "the widest margin on OpenAI's own table",
+          "stage": [
+            {
+              "label": "GPT-6 Astra",
+              "text": "95.9%",
+              "value": 95.9,
+              "win": true,
+              "atWord": 43
+            },
+            {
+              "label": "Claude Fable 5.1",
+              "text": "84.3%",
+              "value": 84.3,
+              "atWord": 49
+            },
+            {
+              "label": "GPT-5.6 Sol",
+              "text": "83.3%",
+              "value": 83.3,
+              "atWord": 56
+            },
+            {
+              "label": "Claude Opus 5",
+              "text": "82.1%",
+              "value": 82.1,
+              "atWord": 61
+            }
+          ],
+          "verdictAtWord": 67
+        }
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s15",
+      "type": "RECORDED_STEP",
+      "durationFrames": 621,
+      "timingSource": "estimated",
+      "narration": "Ninety-five point nine is on their page too. Ninety-five point nine percent, on the BenchCAD row. And it is the number behind the demo everyone shared that week — Astra modelling a house in Blender, then turning it into a scene you can walk through in Unreal Engine.",
+      "data": {
+        "recordedStep": {
+          "premise": "The BenchCAD row on OpenAI's benchmark table.",
+          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "layout": "full",
+          "color": "purple",
+          "caption": "the 3D result, on the source page",
+          "clips": [
+            {
+              "ref": "rec:astra-openai#cad",
+              "label": "the BenchCAD row",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "cad",
+                  "atWord": 26
+                },
+                {
+                  "at": "full",
+                  "atWord": 39
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "cad",
+              "src": "rec/astra-openai/seg-05.mp4",
+              "frames": 84,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "cad": {
+                  "x": 563,
+                  "y": 420,
+                  "w": 41,
+                  "h": 17,
+                  "covers": "95.9%"
+                }
+              },
+              "ink": [
+                {
+                  "x": 241,
+                  "y": 8,
+                  "w": 116,
+                  "h": 32
+                },
+                {
+                  "x": 733,
+                  "y": 8,
+                  "w": 42,
+                  "h": 32
+                },
+                {
+                  "x": 607,
+                  "y": 8,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 994,
+                  "y": 8,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 1120,
+                  "y": 8,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 642,
+                  "y": 24,
+                  "w": 185,
+                  "h": 48
+                },
+                {
+                  "x": 1370,
+                  "y": 24,
+                  "w": 82,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 24,
+                  "w": 64,
+                  "h": 17
+                },
+                {
+                  "x": 470,
+                  "y": 24,
+                  "w": 67,
+                  "h": 16
+                },
+                {
+                  "x": 569,
+                  "y": 24,
+                  "w": 58,
+                  "h": 16
+                },
+                {
+                  "x": 212,
+                  "y": 24,
+                  "w": 56,
+                  "h": 16
+                },
+                {
+                  "x": 385,
+                  "y": 24,
+                  "w": 53,
+                  "h": 16
+                },
+                {
+                  "x": 1266,
+                  "y": 24,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 1419,
+                  "y": 30,
+                  "w": 157,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 55,
+                  "w": 323,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 103,
+                  "w": 161,
+                  "h": 17
+                },
+                {
+                  "x": 733,
+                  "y": 103,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 229,
+                  "y": 244,
+                  "w": 93,
+                  "h": 20
+                },
+                {
+                  "x": 1239,
+                  "y": 324,
+                  "w": 106,
+                  "h": 17
+                },
+                {
+                  "x": 830,
+                  "y": 324,
+                  "w": 103,
+                  "h": 17
+                },
+                {
+                  "x": 972,
+                  "y": 324,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 1105,
+                  "y": 324,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 324,
+                  "w": 78,
+                  "h": 17
+                },
+                {
+                  "x": 697,
+                  "y": 324,
+                  "w": 52,
+                  "h": 17
+                },
+                {
+                  "x": 563,
+                  "y": 324,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 372,
+                  "w": 114,
+                  "h": 17
+                },
+                {
+                  "x": 1105,
+                  "y": 372,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 420,
+                  "w": 69,
+                  "h": 17
+                },
+                {
+                  "x": 830,
+                  "y": 420,
+                  "w": 44,
+                  "h": 17
+                },
+                {
+                  "x": 563,
+                  "y": 420,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 697,
+                  "y": 420,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 468,
+                  "w": 85,
+                  "h": 17
+                },
+                {
+                  "x": 697,
+                  "y": 468,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 1105,
+                  "y": 468,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 516,
+                  "w": 266,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 564,
+                  "w": 132,
+                  "h": 17
+                },
+                {
+                  "x": 563,
+                  "y": 564,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 612,
+                  "w": 172,
+                  "h": 17
+                },
+                {
+                  "x": 563,
+                  "y": 612,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 660,
+                  "w": 255,
+                  "h": 17
+                },
+                {
+                  "x": 229,
+                  "y": 801,
+                  "w": 55,
+                  "h": 20
+                },
+                {
+                  "x": 1238,
+                  "y": 881,
+                  "w": 106,
+                  "h": 17
+                },
+                {
+                  "x": 828,
+                  "y": 881,
+                  "w": 103,
+                  "h": 17
+                },
+                {
+                  "x": 970,
+                  "y": 881,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 1104,
+                  "y": 881,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 694,
+                  "y": 881,
+                  "w": 52,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 881,
+                  "w": 46,
+                  "h": 17
+                },
+                {
+                  "x": 560,
+                  "y": 881,
+                  "w": 41,
+                  "h": 17
+                }
+              ],
+              "shows": "Professional",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "transition": "push",
+      "background": "zoneA"
+    },
+    {
+      "id": "s16",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 842,
+      "timingSource": "estimated",
+      "narration": "FrontierMath sits at the other end, where the questions are meant to defeat a model. Its problems are written by working mathematicians to be hard for models specifically, and Tier 4 is the hardest band, which means a high score there is unusual. Astra takes ninety-seven point six percent. Fable 5.1 and Fable 5 both land on eighty-seven point eight. Opus 5, seventy-three point two. When a score climbs that high, people say the benchmark is saturated — it's stopped telling models apart.",
+      "data": {
+        "astraStage": {
+          "headline": "Maths at the [research end]",
+          "kind": "bench-row",
+          "premise": "FrontierMath Tier 4 is the hardest tier of a benchmark written by working mathematicians.",
+          "stageTitle": "FrontierMath Tier 4, version 2",
+          "token": "problems written to defeat models",
+          "color": "purple",
+          "verdict": "Close to saturated",
+          "verdictSub": "when a test stops separating models, it stops being useful",
+          "stage": [
+            {
+              "label": "GPT-6 Astra",
+              "text": "97.6%",
+              "value": 97.6,
+              "win": true,
+              "atWord": 44
+            },
+            {
+              "label": "Claude Fable 5.1",
+              "text": "87.8%",
+              "value": 87.8,
+              "atWord": 50
+            },
+            {
+              "label": "Claude Fable 5",
+              "text": "87.8%",
+              "value": 87.8,
+              "atWord": 53
+            },
+            {
+              "label": "Claude Opus 5",
+              "text": "73.2%",
+              "value": 73.2,
+              "atWord": 61
+            }
+          ],
+          "verdictAtWord": 66
+        }
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s17",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 941,
+      "timingSource": "estimated",
+      "narration": "OpenAI also says an internal Astra made progress on ten long-standing problems in mathematics, and published a repository for one of them. A bound on prime gaps, formalised in Lean, which is software that checks a proof line by line. Here is the part worth keeping. Its own repository says the result rests on three explicit input axioms — an axiom being something you assume rather than prove — and a conditional proof isn't a closed one. Serious work, still waiting on expert review, which is a fair thing to say out loud.",
+      "data": {
+        "astraStage": {
+          "headline": "A proof that [leans on three]",
+          "kind": "axiom-stack",
+          "premise": "The slab is the published result. The blocks under it are assumptions it has not proved.",
+          "stageTitle": "openai/PrimeGaps186",
+          "token": "an axiom is something assumed, not proved",
+          "color": "orange",
+          "verdict": "Real work. Not a finished proof.",
+          "verdictSub": "the repository says so itself",
+          "stage": [
+            {
+              "label": "liminf (p n+1 − p n) ≤ 186",
+              "sub": "formalised in Lean",
+              "atWord": 23
+            },
+            {
+              "label": "input axiom 1",
+              "atWord": 55
+            },
+            {
+              "label": "input axiom 2",
+              "atWord": 58
+            },
+            {
+              "label": "input axiom 3",
+              "atWord": 72
+            }
+          ],
+          "verdictAtWord": 78
+        }
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s18",
+      "type": "CHAPTER",
+      "durationFrames": 233,
+      "timingSource": "estimated",
+      "narration": "Here's the chapter I opened with — ninety-nine point nine and sixty-two point seven, from the same test measured two ways.",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "99.9% and 62.7%",
+          "subtitle": "the same test, measured two ways"
+        }
+      },
+      "transition": "zoom",
+      "background": "zoneB"
+    },
+    {
+      "id": "s19",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 852,
+      "timingSource": "estimated",
+      "narration": "ARC-AGI-3 comes from the ARC Prize foundation, and it's built differently, because the others measure knowledge. A model is dropped into a small world it has never seen, with no instructions at all. A model has to poke at things, notice what changed, work out what the goal even is, then plan. ARC Prize call that agentic intelligence — acting sensibly with nobody explaining the task. So the puzzle isn't solving the game. Working out what the game even is — that's the test.",
+      "data": {
+        "astraStage": {
+          "headline": "A game with [no instructions]",
+          "kind": "world-model",
+          "premise": "Each ARC-AGI-3 environment is a small world the model has never seen and is told nothing about.",
+          "stageTitle": "what ARC-AGI-3 asks of a model",
+          "token": "rules it worked out",
+          "color": "blue",
+          "verdict": "Nobody explains the game",
+          "verdictSub": "working out the rules is the test",
+          "stage": [
+            {
+              "label": "no instructions",
+              "atWord": 24
+            },
+            {
+              "label": "press this → that moves",
+              "atWord": 43
+            },
+            {
+              "label": "walls block, gaps do not",
+              "atWord": 48
+            },
+            {
+              "label": "reach the marked square",
+              "atWord": 52
+            },
+            {
+              "label": "shorthand it invented",
+              "atWord": 66
+            }
+          ],
+          "verdictAtWord": 67
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s20",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 646,
+      "timingSource": "estimated",
+      "narration": "ARC Prize ran Astra twice and published both runs. Their first run uses the standard harness — a neutral interface where the notes a model keeps get written out in the open. Their second uses a provider adapter, letting the model hold its reasoning privately between requests. So the room changed, and the model did not, which means the score describes the room.",
+      "data": {
+        "astraStage": {
+          "headline": "One model, [two answers]",
+          "kind": "harness-split",
+          "premise": "Same model, same benchmark, same day. What changed is what each setup let it carry between turns.",
+          "stageTitle": "how ARC Prize measured it",
+          "token": "GPT-6 Astra",
+          "color": "blue",
+          "verdict": "The rules of the room changed",
+          "verdictSub": "the model did not",
+          "stage": [
+            {
+              "label": "Standard harness",
+              "text": "62.7%",
+              "detail": "$26,098",
+              "sub": "provider-neutral, notes in the open",
+              "atWord": 15
+            },
+            {
+              "label": "Provider Adapter",
+              "text": "99.9%",
+              "detail": "$18,817",
+              "sub": "private state kept between requests",
+              "win": true,
+              "atWord": 37
+            }
+          ],
+          "verdictAtWord": 48
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s21",
+      "type": "RECORDED_STEP",
+      "durationFrames": 705,
+      "timingSource": "estimated",
+      "narration": "Here's ARC Prize's own write-up, by Greg Kamradt, published the day Astra launched. Their summary line carries both numbers and both costs. Sixty-two point seven percent, for twenty-six thousand dollars, on the standard harness. Ninety-nine point nine for nineteen thousand with the adapter. Read that slowly, because it's been on the internet since day one.",
+      "data": {
+        "recordedStep": {
+          "premise": "ARC Prize's report on GPT-6 Astra, published 3 September 2026.",
+          "sourceNote": "arcprize.org/blog/astra — ARC Prize, by Greg Kamradt",
+          "layout": "full",
+          "color": "blue",
+          "caption": "both numbers, in one sentence",
+          "clips": [
+            {
+              "ref": "rec:astra-arc#table",
+              "label": "the standard harness",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "standard",
+                  "atWord": 18
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "table",
+              "src": "rec/astra-arc/seg-03.mp4",
+              "frames": 90,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "standard": {
+                  "x": 685,
+                  "y": 729,
+                  "w": 103,
+                  "h": 18,
+                  "covers": "62.7%, $26,098"
+                }
+              },
+              "ink": [
+                {
+                  "x": 349,
+                  "y": 7,
+                  "w": 921,
+                  "h": 488
+                },
+                {
+                  "x": 241,
+                  "y": 29,
+                  "w": 98,
+                  "h": 11
+                },
+                {
+                  "x": 1306,
+                  "y": 29,
+                  "w": 50,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 58,
+                  "w": 105,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 73,
+                  "w": 42,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 86,
+                  "w": 91,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 117,
+                  "w": 35,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 123,
+                  "w": 140,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 161,
+                  "w": 49,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 204,
+                  "w": 28,
+                  "h": 11
+                },
+                {
+                  "x": 487,
+                  "y": 507,
+                  "w": 625,
+                  "h": 60
+                },
+                {
+                  "x": 635,
+                  "y": 596,
+                  "w": 536,
+                  "h": 42
+                },
+                {
+                  "x": 452,
+                  "y": 596,
+                  "w": 183,
+                  "h": 66
+                },
+                {
+                  "x": 781,
+                  "y": 596,
+                  "w": 289,
+                  "h": 18
+                },
+                {
+                  "x": 424,
+                  "y": 596,
+                  "w": 63,
+                  "h": 66
+                },
+                {
+                  "x": 613,
+                  "y": 596,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 694,
+                  "w": 183,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 694,
+                  "w": 126,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 694,
+                  "w": 119,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 729,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 729,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 729,
+                  "w": 32,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 764,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 764,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 764,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 799,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 799,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 799,
+                  "w": 31,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 834,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 834,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 834,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 869,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 869,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 869,
+                  "w": 25,
+                  "h": 18
+                }
+              ],
+              "shows": "Standard harness",
+              "atWord": 5
+            },
+            {
+              "ref": "rec:astra-arc#adapter",
+              "label": "and the adapter",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "adapter",
+                  "atWord": 36
+                }
+              ],
+              "wantAtWord": 23,
+              "id": "adapter",
+              "src": "rec/astra-arc/seg-04.mp4",
+              "frames": 48,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "adapter": {
+                  "x": 936,
+                  "y": 799,
+                  "w": 103,
+                  "h": 18,
+                  "covers": "99.9%, $18,817"
+                }
+              },
+              "ink": [
+                {
+                  "x": 349,
+                  "y": 7,
+                  "w": 921,
+                  "h": 488
+                },
+                {
+                  "x": 241,
+                  "y": 29,
+                  "w": 98,
+                  "h": 11
+                },
+                {
+                  "x": 1306,
+                  "y": 29,
+                  "w": 50,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 58,
+                  "w": 105,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 73,
+                  "w": 42,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 86,
+                  "w": 91,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 117,
+                  "w": 35,
+                  "h": 11
+                },
+                {
+                  "x": 241,
+                  "y": 123,
+                  "w": 140,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 161,
+                  "w": 49,
+                  "h": 11
+                },
+                {
+                  "x": 147,
+                  "y": 204,
+                  "w": 28,
+                  "h": 11
+                },
+                {
+                  "x": 487,
+                  "y": 507,
+                  "w": 625,
+                  "h": 60
+                },
+                {
+                  "x": 635,
+                  "y": 596,
+                  "w": 536,
+                  "h": 42
+                },
+                {
+                  "x": 452,
+                  "y": 596,
+                  "w": 183,
+                  "h": 66
+                },
+                {
+                  "x": 781,
+                  "y": 596,
+                  "w": 289,
+                  "h": 18
+                },
+                {
+                  "x": 424,
+                  "y": 596,
+                  "w": 63,
+                  "h": 66
+                },
+                {
+                  "x": 613,
+                  "y": 596,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 694,
+                  "w": 183,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 694,
+                  "w": 126,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 694,
+                  "w": 119,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 729,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 729,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 729,
+                  "w": 32,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 764,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 764,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 764,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 799,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 799,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 799,
+                  "w": 31,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 834,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 834,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 834,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 685,
+                  "y": 869,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 936,
+                  "y": 869,
+                  "w": 103,
+                  "h": 18
+                },
+                {
+                  "x": 435,
+                  "y": 869,
+                  "w": 25,
+                  "h": 18
+                }
+              ],
+              "shows": "Standard harness",
+              "atWord": 23
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "transition": "slide",
+      "background": "zoneB"
+    },
+    {
+      "id": "s22",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 774,
+      "timingSource": "estimated",
+      "narration": "Here is the context that changes how both numbers read. ARC Prize tested people on the same environments, and humans solve one hundred percent of them, at roughly twelve dollars seventy-eight a game. Against that, Astra on the neutral harness reaches sixty-two point seven percent and spends twenty-six thousand dollars. With the adapter it reaches ninety-nine point nine, for nineteen thousand. A person's cheaper and still perfect, which is worth holding on to for a moment.",
+      "data": {
+        "astraStage": {
+          "headline": "Now put a [person on it]",
+          "kind": "cost-plane",
+          "premise": "Score up the side, cost per attempt along the bottom. The cost axis multiplies by ten each step.",
+          "stageTitle": "score against cost, ARC-AGI-3",
+          "token": "humans included",
+          "color": "green",
+          "verdict": "Humans: 100%, for about $12.78",
+          "verdictSub": "ARC Prize measured that too",
+          "stage": [
+            {
+              "label": "a person",
+              "value": 100,
+              "text": "$12.78",
+              "win": true,
+              "atWord": 20
+            },
+            {
+              "label": "Astra · standard",
+              "value": 62.7,
+              "text": "$26,098",
+              "atWord": 36
+            },
+            {
+              "label": "Astra · adapter",
+              "value": 99.9,
+              "text": "$18,817",
+              "color": "purple",
+              "atWord": 51
+            }
+          ],
+          "verdictAtWord": 62
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s23",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 852,
+      "timingSource": "estimated",
+      "narration": "Now the part I find far more interesting than either score. ARC Prize describe what Astra did inside those games. Astra turned unfamiliar environments into compact symbolic world models — meaning it worked out the underlying rules and wrote them down as logic. Then it invented its own shorthand, a private little notation, to track the state of the game and plan its moves. Nobody designed that shorthand. Astra built that notation because the notation was useful, which is a striking thing to read.",
+      "data": {
+        "astraStage": {
+          "headline": "The finding [under the score]",
+          "kind": "world-model",
+          "premise": "What ARC Prize watched Astra do, rather than what it eventually scored.",
+          "stageTitle": "how it got there",
+          "token": "rules it inferred",
+          "color": "purple",
+          "verdict": "It wrote its own notation",
+          "verdictSub": "nobody asked it to, and nobody designed it",
+          "stage": [
+            {
+              "label": "a world it has never seen",
+              "atWord": 20
+            },
+            {
+              "label": "press → the block slides",
+              "atWord": 29
+            },
+            {
+              "label": "two blocks cannot overlap",
+              "atWord": 37
+            },
+            {
+              "label": "the marked square ends it",
+              "atWord": 49
+            },
+            {
+              "label": "its own shorthand",
+              "atWord": 65
+            }
+          ],
+          "verdictAtWord": 69
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s24",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 587,
+      "timingSource": "estimated",
+      "narration": "One more from that report, and it is a genuine result. On ninety-six percent of levels, Astra reached the goal using fewer actions than the median person tested. Across all levels it used fifty-one point seven percent fewer actions on average — about half. Getting there matters, and getting there without flailing is a different skill entirely.",
+      "data": {
+        "astraStage": {
+          "headline": "Fewer moves than [the humans]",
+          "kind": "bench-row",
+          "premise": "How often Astra reached the goal in fewer actions than the median person tested.",
+          "stageTitle": "action efficiency, ARC-AGI-3",
+          "token": "measured against people, level by level",
+          "color": "green",
+          "verdict": "It is efficient, not just able",
+          "verdictSub": "ARC Prize's own measurement",
+          "stage": [
+            {
+              "label": "levels where it beat the human",
+              "text": "96.0%",
+              "value": 96,
+              "win": true,
+              "atWord": 13
+            },
+            {
+              "label": "fewer actions per level",
+              "text": "51.7%",
+              "value": 51.7,
+              "atWord": 34
+            }
+          ],
+          "verdictAtWord": 45
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s25",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 764,
+      "timingSource": "estimated",
+      "narration": "And ARC Prize themselves are careful about what it means. ARC Prize call Astra a noticeable step-function change in frontier model capability — that is their phrase, and it isn't faint praise. In the same report they say saturating this benchmark would not represent proof of achieving AGI, and they point at the tightly bounded scope of the environments. So the people who built the test are the ones telling you where its edges are.",
+      "data": {
+        "astraStage": {
+          "headline": "What ARC Prize [actually said]",
+          "kind": "proof-scales",
+          "premise": "On one side, what the benchmark's own authors claim. On the other, what they explicitly rule out.",
+          "stageTitle": "the foundation's verdict",
+          "token": "their words, both halves",
+          "color": "orange",
+          "verdict": "A step change. Not a proof.",
+          "verdictSub": "the people who own the benchmark say so",
+          "stage": [
+            {
+              "label": "a step-function change",
+              "sub": "their phrase, in the report",
+              "icon": "lucide:trending-up",
+              "atWord": 16
+            },
+            {
+              "label": "tightly bounded scope",
+              "sub": "deterministic, closed-ended",
+              "icon": "lucide:frame",
+              "atWord": 39
+            },
+            {
+              "label": "not proof of AGI",
+              "sub": "even if fully saturated",
+              "icon": "lucide:shield-x",
+              "win": true,
+              "atWord": 43
+            },
+            {
+              "label": "measured against people",
+              "sub": "the human baseline is published",
+              "icon": "lucide:users",
+              "win": true,
+              "atWord": 54
+            }
+          ],
+          "verdictAtWord": 60
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s26",
+      "type": "CHAPTER",
+      "durationFrames": 213,
+      "timingSource": "estimated",
+      "narration": "Every launch post picks its own battles. What makes this one unusual is the fights it prints and loses.",
+      "data": {
+        "chapter": {
+          "number": "05",
+          "title": "Where Astra loses",
+          "subtitle": "published by OpenAI, on OpenAI's page"
+        }
+      },
+      "transition": "whippan",
+      "background": "zoneC"
+    },
+    {
+      "id": "s27",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 557,
+      "timingSource": "estimated",
+      "narration": "Humanity's Last Exam collects expert-level questions from across the sciences, written specifically to be hard for models. On that row, Claude Fable 5.1 scores sixty-five percent. Claude Fable 5, sixty-three point eight. Claude Opus 5, sixty-three point six. Astra scores fifty-seven point two. All three Claude models finish ahead, and OpenAI printed that themselves.",
+      "data": {
+        "astraStage": {
+          "headline": "Beaten by [all three]",
+          "kind": "bench-row",
+          "premise": "Humanity's Last Exam is a set of expert questions written to be hard for models, answered with tools.",
+          "stageTitle": "Humanity's Last Exam, with tools",
+          "token": "from OpenAI's own Academic table",
+          "color": "red",
+          "verdict": "Three Claudes ahead of Astra",
+          "verdictSub": "on the row OpenAI printed themselves",
+          "stage": [
+            {
+              "label": "Claude Fable 5.1",
+              "text": "65.0%",
+              "value": 65,
+              "win": true,
+              "atWord": 21
+            },
+            {
+              "label": "Claude Fable 5",
+              "text": "63.8%",
+              "value": 63.8,
+              "atWord": 27
+            },
+            {
+              "label": "Claude Opus 5",
+              "text": "63.6%",
+              "value": 63.6,
+              "atWord": 33
+            },
+            {
+              "label": "GPT-6 Astra",
+              "text": "57.2%",
+              "value": 57.2,
+              "color": "red",
+              "atWord": 39
+            }
+          ],
+          "verdictAtWord": 44
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s28",
+      "type": "RECORDED_STEP",
+      "durationFrames": 765,
+      "timingSource": "estimated",
+      "narration": "Here is that row, on OpenAI's own page, and it is worth seeing with your own eyes. Humanity's Last Exam, with tools. Fifty-seven point two in the Astra column, sixty-five in Fable 5.1's. A launch page that prints the rows where it comes second is a page you can trust a little more on the rows where it comes first.",
+      "data": {
+        "recordedStep": {
+          "premise": "The Academic table on OpenAI's announcement page.",
+          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "layout": "full",
+          "color": "red",
+          "caption": "the row where Astra comes fourth",
+          "clips": [
+            {
+              "ref": "rec:astra-openai#loses",
+              "label": "Humanity's Last Exam",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "astrahle",
+                  "atWord": 34
+                },
+                {
+                  "at": "full",
+                  "atWord": 49
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "loses",
+              "src": "rec/astra-openai/seg-06.mp4",
+              "frames": 155,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "astrahle": {
+                  "x": 509,
+                  "y": 255,
+                  "w": 39,
+                  "h": 17,
+                  "covers": "57.2%"
+                }
+              },
+              "ink": [
+                {
+                  "x": 642,
+                  "y": 24,
+                  "w": 185,
+                  "h": 56
+                },
+                {
+                  "x": 1370,
+                  "y": 24,
+                  "w": 82,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 24,
+                  "w": 64,
+                  "h": 17
+                },
+                {
+                  "x": 659,
+                  "y": 24,
+                  "w": 68,
+                  "h": 16
+                },
+                {
+                  "x": 470,
+                  "y": 24,
+                  "w": 67,
+                  "h": 16
+                },
+                {
+                  "x": 569,
+                  "y": 24,
+                  "w": 58,
+                  "h": 16
+                },
+                {
+                  "x": 212,
+                  "y": 24,
+                  "w": 56,
+                  "h": 16
+                },
+                {
+                  "x": 299,
+                  "y": 24,
+                  "w": 54,
+                  "h": 16
+                },
+                {
+                  "x": 385,
+                  "y": 24,
+                  "w": 53,
+                  "h": 16
+                },
+                {
+                  "x": 1419,
+                  "y": 30,
+                  "w": 157,
+                  "h": 17
+                },
+                {
+                  "x": 1229,
+                  "y": 63,
+                  "w": 106,
+                  "h": 17
+                },
+                {
+                  "x": 794,
+                  "y": 63,
+                  "w": 103,
+                  "h": 17
+                },
+                {
+                  "x": 944,
+                  "y": 63,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 1087,
+                  "y": 63,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 63,
+                  "w": 64,
+                  "h": 17
+                },
+                {
+                  "x": 509,
+                  "y": 63,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 111,
+                  "w": 171,
+                  "h": 17
+                },
+                {
+                  "x": 509,
+                  "y": 111,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 1087,
+                  "y": 111,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 159,
+                  "w": 149,
+                  "h": 17
+                },
+                {
+                  "x": 651,
+                  "y": 159,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 207,
+                  "w": 99,
+                  "h": 17
+                },
+                {
+                  "x": 509,
+                  "y": 207,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 651,
+                  "y": 207,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 255,
+                  "w": 202,
+                  "h": 17
+                },
+                {
+                  "x": 794,
+                  "y": 255,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 1087,
+                  "y": 255,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 229,
+                  "y": 395,
+                  "w": 147,
+                  "h": 20
+                },
+                {
+                  "x": 241,
+                  "y": 476,
+                  "w": 123,
+                  "h": 17
+                },
+                {
+                  "x": 1240,
+                  "y": 476,
+                  "w": 106,
+                  "h": 17
+                },
+                {
+                  "x": 834,
+                  "y": 476,
+                  "w": 103,
+                  "h": 17
+                },
+                {
+                  "x": 975,
+                  "y": 476,
+                  "w": 94,
+                  "h": 17
+                },
+                {
+                  "x": 1107,
+                  "y": 476,
+                  "w": 93,
+                  "h": 17
+                },
+                {
+                  "x": 702,
+                  "y": 476,
+                  "w": 52,
+                  "h": 17
+                },
+                {
+                  "x": 569,
+                  "y": 476,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 524,
+                  "w": 97,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 572,
+                  "w": 166,
+                  "h": 17
+                },
+                {
+                  "x": 569,
+                  "y": 572,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 620,
+                  "w": 83,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 667,
+                  "w": 273,
+                  "h": 17
+                },
+                {
+                  "x": 975,
+                  "y": 667,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 1107,
+                  "y": 667,
+                  "w": 44,
+                  "h": 17
+                },
+                {
+                  "x": 229,
+                  "y": 808,
+                  "w": 106,
+                  "h": 20
+                },
+                {
+                  "x": 1228,
+                  "y": 888,
+                  "w": 106,
+                  "h": 12
+                },
+                {
+                  "x": 787,
+                  "y": 888,
+                  "w": 103,
+                  "h": 12
+                },
+                {
+                  "x": 939,
+                  "y": 888,
+                  "w": 94,
+                  "h": 12
+                },
+                {
+                  "x": 1083,
+                  "y": 888,
+                  "w": 93,
+                  "h": 12
+                },
+                {
+                  "x": 241,
+                  "y": 888,
+                  "w": 90,
+                  "h": 12
+                }
+              ],
+              "shows": "Academic",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "transition": "dip",
+      "background": "zoneC"
+    },
+    {
+      "id": "s29",
+      "type": "RECORDED_STEP",
+      "durationFrames": 597,
+      "timingSource": "estimated",
+      "narration": "And a second opinion, from Artificial Analysis, who benchmark models independently and don't sell one. Their intelligence index blends ten separate evaluations into one score. Look at the ordering rather than the digits. Claude Fable 5.1 sits at fifty-seven, on top. Astra's best setting reaches fifty-five.",
+      "data": {
+        "recordedStep": {
+          "premise": "Artificial Analysis, an independent benchmarking service, on GPT-6 Astra.",
+          "sourceNote": "artificialanalysis.ai/models/releases/gpt-6-astra — independent measurement",
+          "layout": "full",
+          "color": "blue",
+          "caption": "the independent scoreboard",
+          "clips": [
+            {
+              "ref": "rec:astra-aa#open",
+              "label": "the release page",
+              "wantAtWord": 1,
+              "id": "open",
+              "src": "rec/astra-aa/seg-01.mp4",
+              "frames": 48,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 136,
+                  "y": 32,
+                  "w": 124,
+                  "h": 21
+                },
+                {
+                  "x": 519,
+                  "y": 33,
+                  "w": 141,
+                  "h": 18
+                },
+                {
+                  "x": 399,
+                  "y": 33,
+                  "w": 96,
+                  "h": 18
+                },
+                {
+                  "x": 769,
+                  "y": 33,
+                  "w": 91,
+                  "h": 18
+                },
+                {
+                  "x": 684,
+                  "y": 33,
+                  "w": 61,
+                  "h": 18
+                },
+                {
+                  "x": 946,
+                  "y": 33,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 1167,
+                  "y": 33,
+                  "w": 58,
+                  "h": 18
+                },
+                {
+                  "x": 327,
+                  "y": 33,
+                  "w": 48,
+                  "h": 18
+                },
+                {
+                  "x": 298,
+                  "y": 130,
+                  "w": 324,
+                  "h": 69
+                },
+                {
+                  "x": 116,
+                  "y": 130,
+                  "w": 67,
+                  "h": 16
+                },
+                {
+                  "x": 308,
+                  "y": 130,
+                  "w": 60,
+                  "h": 16
+                },
+                {
+                  "x": 441,
+                  "y": 130,
+                  "w": 52,
+                  "h": 16
+                },
+                {
+                  "x": 100,
+                  "y": 132,
+                  "w": 318,
+                  "h": 107
+                },
+                {
+                  "x": 1347,
+                  "y": 135,
+                  "w": 116,
+                  "h": 18
+                },
+                {
+                  "x": 1248,
+                  "y": 135,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 1396,
+                  "y": 176,
+                  "w": 104,
+                  "h": 16
+                },
+                {
+                  "x": 128,
+                  "y": 298,
+                  "w": 75,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 339,
+                  "w": 118,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 339,
+                  "w": 118,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 339,
+                  "w": 112,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 371,
+                  "w": 141,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 371,
+                  "w": 123,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 371,
+                  "w": 117,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 403,
+                  "w": 117,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 403,
+                  "w": 117,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 403,
+                  "w": 110,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 435,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 435,
+                  "w": 141,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 435,
+                  "w": 123,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 467,
+                  "w": 141,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 467,
+                  "w": 123,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 467,
+                  "w": 110,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 499,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 499,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 499,
+                  "w": 116,
+                  "h": 18
+                },
+                {
+                  "x": 116,
+                  "y": 543,
+                  "w": 193,
+                  "h": 16
+                },
+                {
+                  "x": 1060,
+                  "y": 543,
+                  "w": 147,
+                  "h": 16
+                },
+                {
+                  "x": 588,
+                  "y": 543,
+                  "w": 76,
+                  "h": 16
+                },
+                {
+                  "x": 100,
+                  "y": 616,
+                  "w": 631,
+                  "h": 38
+                },
+                {
+                  "x": 931,
+                  "y": 617,
+                  "w": 180,
+                  "h": 21
+                },
+                {
+                  "x": 116,
+                  "y": 672,
+                  "w": 623,
+                  "h": 110
+                },
+                {
+                  "x": 1279,
+                  "y": 676,
+                  "w": 163,
+                  "h": 81
+                },
+                {
+                  "x": 952,
+                  "y": 676,
+                  "w": 91,
+                  "h": 18
+                },
+                {
+                  "x": 952,
+                  "y": 717,
+                  "w": 102,
+                  "h": 18
+                },
+                {
+                  "x": 952,
+                  "y": 756,
+                  "w": 113,
+                  "h": 18
+                },
+                {
+                  "x": 1415,
+                  "y": 756,
+                  "w": 84,
+                  "h": 18
+                },
+                {
+                  "x": 952,
+                  "y": 792,
+                  "w": 102,
+                  "h": 18
+                },
+                {
+                  "x": 1279,
+                  "y": 794,
+                  "w": 230,
+                  "h": 35
+                }
+              ],
+              "shows": "GPT-6 Astra: Release Intelligence, Performance & Price",
+              "atWord": 5
+            },
+            {
+              "ref": "rec:astra-aa#index",
+              "label": "the intelligence index",
+              "focus": true,
+              "zooms": [
+                {
+                  "marks": [
+                    "max",
+                    "low"
+                  ],
+                  "atWord": 31
+                }
+              ],
+              "wantAtWord": 16,
+              "id": "index",
+              "src": "rec/astra-aa/seg-02.mp4",
+              "frames": 98,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "max": {
+                  "x": 432,
+                  "y": 713,
+                  "w": 40,
+                  "h": 61,
+                  "covers": "GPT-6 Astra (max)"
+                },
+                "low": {
+                  "x": 1135,
+                  "y": 713,
+                  "w": 38,
+                  "h": 57,
+                  "covers": "GPT-6 Astra (low)"
+                }
+              },
+              "ink": [
+                {
+                  "x": 112,
+                  "y": 0,
+                  "w": 548,
+                  "h": 53
+                },
+                {
+                  "x": 1279,
+                  "y": 0,
+                  "w": 163,
+                  "h": 57
+                },
+                {
+                  "x": 946,
+                  "y": 17,
+                  "w": 119,
+                  "h": 57
+                },
+                {
+                  "x": 1443,
+                  "y": 17,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1463,
+                  "y": 17,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1483,
+                  "y": 17,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 932,
+                  "y": 18,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 116,
+                  "y": 33,
+                  "w": 629,
+                  "h": 49
+                },
+                {
+                  "x": 769,
+                  "y": 33,
+                  "w": 91,
+                  "h": 18
+                },
+                {
+                  "x": 1167,
+                  "y": 33,
+                  "w": 58,
+                  "h": 18
+                },
+                {
+                  "x": 1054,
+                  "y": 33,
+                  "w": 45,
+                  "h": 18
+                },
+                {
+                  "x": 884,
+                  "y": 33,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 1253,
+                  "y": 33,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 1415,
+                  "y": 34,
+                  "w": 84,
+                  "h": 40
+                },
+                {
+                  "x": 1434,
+                  "y": 34,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 932,
+                  "y": 57,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 952,
+                  "y": 92,
+                  "w": 102,
+                  "h": 18
+                },
+                {
+                  "x": 1464,
+                  "y": 92,
+                  "w": 17,
+                  "h": 18
+                },
+                {
+                  "x": 932,
+                  "y": 93,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1279,
+                  "y": 94,
+                  "w": 230,
+                  "h": 35
+                },
+                {
+                  "x": 116,
+                  "y": 252,
+                  "w": 64,
+                  "h": 16
+                },
+                {
+                  "x": 370,
+                  "y": 267,
+                  "w": 148,
+                  "h": 39
+                },
+                {
+                  "x": 116,
+                  "y": 280,
+                  "w": 26,
+                  "h": 16
+                },
+                {
+                  "x": 116,
+                  "y": 308,
+                  "w": 94,
+                  "h": 16
+                },
+                {
+                  "x": 116,
+                  "y": 336,
+                  "w": 96,
+                  "h": 16
+                },
+                {
+                  "x": 116,
+                  "y": 364,
+                  "w": 102,
+                  "h": 16
+                },
+                {
+                  "x": 371,
+                  "y": 371,
+                  "w": 454,
+                  "h": 79
+                },
+                {
+                  "x": 684,
+                  "y": 376,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1371,
+                  "y": 378,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1407,
+                  "y": 378,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1443,
+                  "y": 378,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1147,
+                  "y": 417,
+                  "w": 113,
+                  "h": 18
+                },
+                {
+                  "x": 365,
+                  "y": 418,
+                  "w": 1102,
+                  "h": 373
+                },
+                {
+                  "x": 1366,
+                  "y": 418,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1407,
+                  "y": 418,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 387,
+                  "y": 816,
+                  "w": 193,
+                  "h": 16
+                },
+                {
+                  "x": 1451,
+                  "y": 816,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 371,
+                  "y": 818,
+                  "w": 12,
+                  "h": 12
+                },
+                {
+                  "x": 547,
+                  "y": 847,
+                  "w": 872,
+                  "h": 32
+                },
+                {
+                  "x": 371,
+                  "y": 847,
+                  "w": 219,
+                  "h": 32
+                },
+                {
+                  "x": 590,
+                  "y": 847,
+                  "w": 55,
+                  "h": 16
+                },
+                {
+                  "x": 1418,
+                  "y": 847,
+                  "w": 28,
+                  "h": 16
+                },
+                {
+                  "x": 1548,
+                  "y": 848,
+                  "w": 16,
+                  "h": 16
+                }
+              ],
+              "shows": "Intelligence",
+              "atWord": 16
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s30",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 695,
+      "timingSource": "estimated",
+      "narration": "Here are the top four of a much longer board, side by side. Claude Fable 5.1 at fifty-seven. Astra at max effort, fifty-five. Astra at high effort, fifty-three. GPT-5.6 Sol at max, fifty-one. Three separate sources agree on the ordering — this board, OpenAI's own table, and the review I will come to shortly. Astra is excellent here, and it is second, and both halves of that matter.",
+      "data": {
+        "astraStage": {
+          "headline": "Second, on the [neutral board]",
+          "kind": "bench-row",
+          "premise": "The Artificial Analysis Intelligence Index, version 4.2, blending ten separate evaluations.",
+          "stageTitle": "Artificial Analysis Intelligence Index v4.2",
+          "token": "an independent, cross-model score",
+          "color": "orange",
+          "verdict": "Astra does not lead this one",
+          "verdictSub": "three sources agree on that",
+          "stage": [
+            {
+              "label": "Claude Fable 5.1 (max)",
+              "text": "57",
+              "value": 57,
+              "win": true,
+              "atWord": 14
+            },
+            {
+              "label": "GPT-6 Astra (max)",
+              "text": "55",
+              "value": 55,
+              "atWord": 19
+            },
+            {
+              "label": "GPT-6 Astra (high)",
+              "text": "53",
+              "value": 53,
+              "atWord": 24
+            },
+            {
+              "label": "GPT-5.6 Sol (max)",
+              "text": "51",
+              "value": 51,
+              "atWord": 29
+            }
+          ],
+          "verdictAtWord": 55
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s31",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 695,
+      "timingSource": "estimated",
+      "narration": "One more table, because it complicates the story in a way worth knowing about. On science and health, GeneBench Pro moves from thirty-two point three to thirty-seven point one. MedChemBench, forty-seven point four to forty-nine point three. LifeSciBench, fifty-nine point nine to sixty point three — under half a point. HealthBench Professional gains three. Every one of those is an improvement, and none of them is a leap.",
+      "data": {
+        "astraStage": {
+          "headline": "The margins nobody [quoted]",
+          "kind": "bench-row",
+          "premise": "Astra against the model it replaces, on OpenAI's Science and Health table.",
+          "stageTitle": "Science and Health, Astra vs GPT-5.6 Sol",
+          "token": "the gap, row by row",
+          "color": "orange",
+          "verdict": "Real gains. Small ones.",
+          "verdictSub": "worth knowing before you switch for science work",
+          "stage": [
+            {
+              "label": "GeneBench Pro",
+              "text": "37.1%",
+              "detail": "was 32.3",
+              "value": 37.1,
+              "win": true,
+              "atWord": 19
+            },
+            {
+              "label": "MedChemBench",
+              "text": "49.3%",
+              "detail": "was 47.4",
+              "value": 49.3,
+              "atWord": 30
+            },
+            {
+              "label": "LifeSciBench",
+              "text": "60.3%",
+              "detail": "was 59.9",
+              "value": 60.3,
+              "atWord": 38
+            },
+            {
+              "label": "HealthBench Pro",
+              "text": "63.4%",
+              "detail": "was 60.5",
+              "value": 63.4,
+              "atWord": 51
+            }
+          ],
+          "verdictAtWord": 55
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s32",
+      "type": "CHAPTER",
+      "durationFrames": 282,
+      "timingSource": "estimated",
+      "narration": "Now for the Critical threshold, where the tone of the launch changes and OpenAI's own language gets careful. Astra is the first model to reach it.",
+      "data": {
+        "chapter": {
+          "number": "06",
+          "title": "The Critical threshold",
+          "subtitle": "the first model to reach it"
+        }
+      },
+      "transition": "morph",
+      "background": "zoneA"
+    },
+    {
+      "id": "s33",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 567,
+      "timingSource": "estimated",
+      "narration": "OpenAI run something called the Preparedness Framework, which grades how dangerous a model's capabilities are in a given area. Grades run Low, Medium, High, and Critical. Astra is the first model they have graded Critical for cybersecurity, which means the capability is real enough to fence. Every model before Astra stopped lower down that ladder.",
+      "data": {
+        "astraStage": {
+          "headline": "The first to reach [the top rung]",
+          "kind": "threshold-ladder",
+          "premise": "OpenAI grade a model's capability in each risk area, and act differently at each grade.",
+          "stageTitle": "OpenAI's Preparedness Framework",
+          "token": "the cybersecurity ladder",
+          "color": "red",
+          "verdict": "First model to hit Critical",
+          "verdictSub": "for cybersecurity, on OpenAI's own scale",
+          "stage": [
+            {
+              "label": "Low",
+              "sub": "no meaningful uplift",
+              "atWord": 22
+            },
+            {
+              "label": "Medium",
+              "sub": "some assistance",
+              "atWord": 23
+            },
+            {
+              "label": "High",
+              "sub": "significant uplift",
+              "atWord": 24
+            },
+            {
+              "label": "Critical",
+              "sub": "novel vulnerabilities, unattended",
+              "win": true,
+              "atWord": 26
+            }
+          ],
+          "verdictAtWord": 47
+        }
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s34",
+      "type": "RECORDED_STEP",
+      "durationFrames": 741,
+      "timingSource": "estimated",
+      "narration": "Critical appears on their page, in the safety section. Critical threshold. Their description of what that means is worth reading in full: with the right tools and access, Astra can find previously unknown security flaws and develop new ways to exploit them, across well-protected systems, without a person guiding each step. Pause here and read that sentence again.",
+      "data": {
+        "recordedStep": {
+          "premise": "The safety section of OpenAI's announcement page.",
+          "sourceNote": "openai.com/index/gpt-6-astra — OpenAI's official announcement",
+          "layout": "full",
+          "color": "red",
+          "caption": "their own classification",
+          "clips": [
+            {
+              "ref": "rec:astra-openai#critical",
+              "label": "the Critical threshold",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "crit",
+                  "atWord": 36
+                },
+                {
+                  "at": "full",
+                  "atWord": 47
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "critical",
+              "src": "rec/astra-openai/seg-03.mp4",
+              "frames": 232,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "crit": {
+                  "x": 542,
+                  "y": 651,
+                  "w": 130,
+                  "h": 20,
+                  "covers": "Critical threshold"
+                }
+              },
+              "ink": [
+                {
+                  "x": 642,
+                  "y": 24,
+                  "w": 198,
+                  "h": 113
+                },
+                {
+                  "x": 1370,
+                  "y": 24,
+                  "w": 82,
+                  "h": 17
+                },
+                {
+                  "x": 112,
+                  "y": 24,
+                  "w": 64,
+                  "h": 17
+                },
+                {
+                  "x": 659,
+                  "y": 24,
+                  "w": 68,
+                  "h": 16
+                },
+                {
+                  "x": 470,
+                  "y": 24,
+                  "w": 67,
+                  "h": 16
+                },
+                {
+                  "x": 569,
+                  "y": 24,
+                  "w": 58,
+                  "h": 16
+                },
+                {
+                  "x": 212,
+                  "y": 24,
+                  "w": 56,
+                  "h": 16
+                },
+                {
+                  "x": 299,
+                  "y": 24,
+                  "w": 54,
+                  "h": 16
+                },
+                {
+                  "x": 385,
+                  "y": 24,
+                  "w": 53,
+                  "h": 16
+                },
+                {
+                  "x": 1266,
+                  "y": 24,
+                  "w": 40,
+                  "h": 17
+                },
+                {
+                  "x": 1310,
+                  "y": 26,
+                  "w": 12,
+                  "h": 12
+                },
+                {
+                  "x": 1419,
+                  "y": 30,
+                  "w": 157,
+                  "h": 17
+                },
+                {
+                  "x": 1135,
+                  "y": 309,
+                  "w": 16,
+                  "h": 23
+                },
+                {
+                  "x": 405,
+                  "y": 313,
+                  "w": 37,
+                  "h": 17
+                },
+                {
+                  "x": 455,
+                  "y": 313,
+                  "w": 37,
+                  "h": 17
+                },
+                {
+                  "x": 369,
+                  "y": 313,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1175,
+                  "y": 313,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1215,
+                  "y": 313,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 355,
+                  "y": 392,
+                  "w": 891,
+                  "h": 40
+                },
+                {
+                  "x": 462,
+                  "y": 557,
+                  "w": 189,
+                  "h": 36
+                },
+                {
+                  "x": 462,
+                  "y": 623,
+                  "w": 670,
+                  "h": 132
+                },
+                {
+                  "x": 462,
+                  "y": 623,
+                  "w": 210,
+                  "h": 48
+                },
+                {
+                  "x": 637,
+                  "y": 623,
+                  "w": 104,
+                  "h": 20
+                },
+                {
+                  "x": 462,
+                  "y": 787,
+                  "w": 670,
+                  "h": 104
+                }
+              ],
+              "shows": "Cybersecurity",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "transition": "iris",
+      "background": "zoneA"
+    },
+    {
+      "id": "s35",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 587,
+      "timingSource": "estimated",
+      "narration": "Numbers behind that grade look nothing like the science ones. On ExploitBench, Astra scores one hundred percent against Sol's seventy-eight point five. On SRE-Bench it solves eighty-eight percent of tasks first try, where Sol managed fifty-five point nine. On ExploitGym, forty-two point four against thirty point three. Compare that with the half-point gains on the science table.",
+      "data": {
+        "astraStage": {
+          "headline": "The security scores, [in order]",
+          "kind": "bench-row",
+          "premise": "Three security benchmarks, Astra against the model it replaces.",
+          "stageTitle": "Astra vs GPT-5.6 Sol on security",
+          "token": "the jump that earned the grade",
+          "color": "red",
+          "verdict": "Not an incremental gain",
+          "verdictSub": "which is why the access is gated",
+          "stage": [
+            {
+              "label": "ExploitBench",
+              "text": "100%",
+              "detail": "was 78.5",
+              "value": 100,
+              "win": true,
+              "atWord": 12
+            },
+            {
+              "label": "SRE-Bench (1 try)",
+              "text": "88.0%",
+              "detail": "was 55.9",
+              "value": 88,
+              "atWord": 24
+            },
+            {
+              "label": "ExploitGym",
+              "text": "42.4%",
+              "detail": "was 30.3",
+              "value": 42.4,
+              "atWord": 40
+            }
+          ],
+          "verdictAtWord": 48
+        }
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s36",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 685,
+      "timingSource": "estimated",
+      "narration": "Which is why the release looks the way it does. Their public version ships restricted, refusing advanced cyber requests outright. Advanced access went to vetted testers first. Defenders get in through a programme called Daybreak Blue. And OpenAI added delays before launch to build extra safeguards after an incident earlier in the year. A model that can operate computers this well stops being only a productivity tool.",
+      "data": {
+        "astraStage": {
+          "headline": "So they [gated it]",
+          "kind": "rollout-queue",
+          "premise": "What OpenAI put between that capability and the public, in the order it applies.",
+          "stageTitle": "how the capability is fenced",
+          "token": "the safeguards, as published",
+          "color": "orange",
+          "verdict": "Capability first. Access second.",
+          "verdictSub": "the public model refuses the hard cases",
+          "stage": [
+            {
+              "label": "Restricted build",
+              "sub": "refuses the hard requests",
+              "icon": "lucide:shield",
+              "atWord": 15
+            },
+            {
+              "label": "Vetted testers",
+              "sub": "advanced access, case by case",
+              "icon": "lucide:user-check",
+              "atWord": 25
+            },
+            {
+              "label": "Daybreak Blue",
+              "sub": "for defensive work",
+              "icon": "lucide:shield-check",
+              "atWord": 35
+            },
+            {
+              "label": "Extra safeguards",
+              "sub": "added before launch",
+              "icon": "lucide:lock",
+              "win": true,
+              "atWord": 40
+            }
+          ],
+          "verdictAtWord": 54
+        }
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s37",
+      "type": "CHAPTER",
+      "durationFrames": 233,
+      "timingSource": "estimated",
+      "narration": "Now something almost none of the coverage touched, even though it may be the most consequential change in the whole release.",
+      "data": {
+        "chapter": {
+          "number": "07",
+          "title": "Recurrent depth",
+          "subtitle": "the change nobody covered"
+        }
+      },
+      "transition": "blinds",
+      "background": "zoneB"
+    },
+    {
+      "id": "s38",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 616,
+      "timingSource": "estimated",
+      "narration": "Recent reasoning models think in text. Models write steps out, and you can read them — which is how researchers check whether a model reasons honestly. Astra uses recurrent depth, looping internally instead, thinking without writing any of it down. Researchers call that a monitorability problem, because you cannot audit reasoning you cannot see, and nobody has solved that yet.",
+      "data": {
+        "astraStage": {
+          "headline": "Reasoning you [cannot read]",
+          "kind": "sealed-trace",
+          "premise": "On the left, thinking written out in steps. On the right, the same work happening inside a loop that emits nothing.",
+          "stageTitle": "what changed inside the model",
+          "token": "no trace",
+          "color": "purple",
+          "verdict": "Harder to watch it think",
+          "verdictSub": "researchers call that a monitorability problem",
+          "stage": [
+            {
+              "label": "reasoning in text",
+              "sub": "every step legible",
+              "atWord": 9
+            },
+            {
+              "label": "recurrent depth",
+              "sub": "the loop runs, nothing comes out",
+              "atWord": 34
+            }
+          ],
+          "verdictAtWord": 48
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s39",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 626,
+      "timingSource": "estimated",
+      "narration": "Hold that next to chapter four, because the two facts are the same fact. A neutral harness makes a model write its notes in the open, and there Astra scores sixty-two point seven. Their adapter lets it keep that private state between requests, and there it scores ninety-nine point nine. So the thirty-seven points live in the part you cannot inspect.",
+      "data": {
+        "astraStage": {
+          "headline": "And that connects [back]",
+          "kind": "harness-split",
+          "premise": "The harness that scored 99.9% is the one that lets the model keep its private state between requests.",
+          "stageTitle": "why the two scores differ",
+          "token": "the same split, seen again",
+          "color": "purple",
+          "verdict": "The gap is the hidden state",
+          "verdictSub": "which is exactly what recurrent depth produces",
+          "stage": [
+            {
+              "label": "notes in the open",
+              "text": "62.7%",
+              "sub": "standard harness",
+              "atWord": 16
+            },
+            {
+              "label": "private state kept",
+              "text": "99.9%",
+              "sub": "provider adapter",
+              "win": true,
+              "atWord": 35
+            }
+          ],
+          "verdictAtWord": 51
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s40",
+      "type": "CHAPTER",
+      "durationFrames": 242,
+      "timingSource": "estimated",
+      "narration": "Benchmarks are one kind of evidence. Things you can open in a browser and use are another, and launch week produced plenty.",
+      "data": {
+        "chapter": {
+          "number": "08",
+          "title": "What people built with it",
+          "subtitle": "and which demos count as evidence"
+        }
+      },
+      "transition": "push",
+      "background": "zoneC"
+    },
+    {
+      "id": "s41",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 774,
+      "timingSource": "estimated",
+      "narration": "Sorting these matters, because launch week is full of impressive video and very little proof. A clip of a kart racer is a claim, because you cannot run it yourself. A thread showing a house built in Blender is a claim. Neither one is checkable. But a page you can open and use is different, and source code you can read is different again. One kind you can verify. Whereas the other you take on trust.",
+      "data": {
+        "astraStage": {
+          "headline": "A demo, or [something you can run]",
+          "kind": "proof-scales",
+          "premise": "Left: things somebody filmed. Right: things you can open, read and check yourself.",
+          "stageTitle": "how much a demo is worth",
+          "token": "two kinds of evidence",
+          "color": "green",
+          "verdict": "A repository outweighs a clip",
+          "verdictSub": "one you can check, one you cannot",
+          "stage": [
+            {
+              "label": "kart racer clip",
+              "sub": "a video of it working",
+              "icon": "lucide:play",
+              "atWord": 17
+            },
+            {
+              "label": "Blender house thread",
+              "sub": "screenshots and a claim",
+              "icon": "lucide:play",
+              "atWord": 35
+            },
+            {
+              "label": "a page you can open",
+              "sub": "running right now",
+              "icon": "lucide:globe",
+              "win": true,
+              "atWord": 51
+            },
+            {
+              "label": "source you can read",
+              "sub": "public on GitHub",
+              "icon": "lucide:file-code-2",
+              "win": true,
+              "atWord": 57
+            }
+          ],
+          "verdictAtWord": 65
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s42",
+      "type": "RECORDED_STEP",
+      "durationFrames": 837,
+      "timingSource": "estimated",
+      "narration": "So here is one of the second kind. Here's ABYSSAL, built by Ethan Mollick — a procedural underwater world running in an ordinary browser tab. Procedural means the reefs, the kelp and the creatures are generated by code from a seed rather than modelled by hand. Watch the water for a moment. Nothing here is a recording of a demo; the page is doing this live.",
+      "data": {
+        "recordedStep": {
+          "premise": "ABYSSAL — The Living Deep, running in a browser.",
+          "sourceNote": "abyssal-living-deep.netlify.app — built by Ethan Mollick",
+          "layout": "full",
+          "color": "blue",
+          "caption": "generated by code, running live",
+          "clips": [
+            {
+              "ref": "rec:astra-abyssal#world",
+              "label": "the living deep",
+              "focus": true,
+              "zooms": [
+                {
+                  "at": "full",
+                  "atWord": 29
+                },
+                {
+                  "at": "full",
+                  "atWord": 41
+                },
+                {
+                  "at": "full",
+                  "atWord": 54
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "world",
+              "src": "rec/astra-abyssal/seg-01.mp4",
+              "frames": 142,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 34,
+                  "y": 35,
+                  "w": 138,
+                  "h": 26
+                },
+                {
+                  "x": 1121,
+                  "y": 41,
+                  "w": 15,
+                  "h": 15
+                },
+                {
+                  "x": 1327,
+                  "y": 41,
+                  "w": 15,
+                  "h": 15
+                },
+                {
+                  "x": 1430,
+                  "y": 41,
+                  "w": 15,
+                  "h": 15
+                },
+                {
+                  "x": 1453,
+                  "y": 42,
+                  "w": 55,
+                  "h": 13
+                },
+                {
+                  "x": 1240,
+                  "y": 42,
+                  "w": 50,
+                  "h": 13
+                },
+                {
+                  "x": 1350,
+                  "y": 42,
+                  "w": 43,
+                  "h": 13
+                },
+                {
+                  "x": 1144,
+                  "y": 42,
+                  "w": 42,
+                  "h": 13
+                },
+                {
+                  "x": 1223,
+                  "y": 42,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 1545,
+                  "y": 42,
+                  "w": 6,
+                  "h": 13
+                },
+                {
+                  "x": 1517,
+                  "y": 335,
+                  "w": 35,
+                  "h": 33
+                },
+                {
+                  "x": 1552,
+                  "y": 353,
+                  "w": 12,
+                  "h": 12
+                },
+                {
+                  "x": 1450,
+                  "y": 376,
+                  "w": 114,
+                  "h": 10
+                },
+                {
+                  "x": 40,
+                  "y": 571,
+                  "w": 458,
+                  "h": 72
+                },
+                {
+                  "x": 40,
+                  "y": 655,
+                  "w": 307,
+                  "h": 15
+                },
+                {
+                  "x": 40,
+                  "y": 689,
+                  "w": 358,
+                  "h": 12
+                },
+                {
+                  "x": 59,
+                  "y": 740,
+                  "w": 114,
+                  "h": 14
+                },
+                {
+                  "x": 1453,
+                  "y": 822,
+                  "w": 15,
+                  "h": 15
+                },
+                {
+                  "x": 1496,
+                  "y": 822,
+                  "w": 15,
+                  "h": 15
+                },
+                {
+                  "x": 1539,
+                  "y": 822,
+                  "w": 15,
+                  "h": 15
+                },
+                {
+                  "x": 1377,
+                  "y": 823,
+                  "w": 48,
+                  "h": 13
+                },
+                {
+                  "x": 1319,
+                  "y": 823,
+                  "w": 30,
+                  "h": 13
+                },
+                {
+                  "x": 1265,
+                  "y": 823,
+                  "w": 26,
+                  "h": 13
+                },
+                {
+                  "x": 340,
+                  "y": 842,
+                  "w": 71,
+                  "h": 14
+                },
+                {
+                  "x": 190,
+                  "y": 842,
+                  "w": 64,
+                  "h": 14
+                },
+                {
+                  "x": 490,
+                  "y": 842,
+                  "w": 56,
+                  "h": 14
+                },
+                {
+                  "x": 40,
+                  "y": 842,
+                  "w": 50,
+                  "h": 14
+                },
+                {
+                  "x": 1318,
+                  "y": 860,
+                  "w": 81,
+                  "h": 10
+                },
+                {
+                  "x": 1485,
+                  "y": 860,
+                  "w": 81,
+                  "h": 10
+                },
+                {
+                  "x": 1404,
+                  "y": 860,
+                  "w": 75,
+                  "h": 10
+                },
+                {
+                  "x": 1254,
+                  "y": 860,
+                  "w": 40,
+                  "h": 10
+                },
+                {
+                  "x": 1294,
+                  "y": 860,
+                  "w": 23,
+                  "h": 10
+                }
+              ],
+              "shows": "The breathing sea",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "transition": "morph",
+      "background": "zoneC"
+    },
+    {
+      "id": "s43",
+      "type": "RECORDED_STEP",
+      "durationFrames": 645,
+      "timingSource": "estimated",
+      "narration": "And the source sits on GitHub, which is what turns a demo into evidence. Anyone can read how the reefs and the kelp forests get generated, and check for themselves that the page does what it claims. Openness like that is the bar I would hold every launch-week demo to.",
+      "data": {
+        "recordedStep": {
+          "premise": "The public repository behind ABYSSAL.",
+          "sourceNote": "github.com/emollick/abyssal-living-deep — public source",
+          "layout": "full",
+          "color": "green",
+          "caption": "open source, so it can be checked",
+          "clips": [
+            {
+              "ref": "rec:astra-abyssal-src#repo",
+              "label": "the public repository",
+              "focus": true,
+              "zooms": [
+                {
+                  "at": "full",
+                  "atWord": 25
+                },
+                {
+                  "at": "full",
+                  "atWord": 41
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "repo",
+              "src": "rec/astra-abyssal-src/seg-01.mp4",
+              "frames": 51,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 184,
+                  "h": 50
+                },
+                {
+                  "x": 413,
+                  "y": 27,
+                  "w": 99,
+                  "h": 19
+                },
+                {
+                  "x": 297,
+                  "y": 27,
+                  "w": 80,
+                  "h": 19
+                },
+                {
+                  "x": 547,
+                  "y": 27,
+                  "w": 79,
+                  "h": 19
+                },
+                {
+                  "x": 189,
+                  "y": 27,
+                  "w": 71,
+                  "h": 19
+                },
+                {
+                  "x": 662,
+                  "y": 27,
+                  "w": 53,
+                  "h": 19
+                },
+                {
+                  "x": 142,
+                  "y": 91,
+                  "w": 182,
+                  "h": 24
+                },
+                {
+                  "x": 56,
+                  "y": 91,
+                  "w": 72,
+                  "h": 24
+                },
+                {
+                  "x": 1250,
+                  "y": 95,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 581,
+                  "y": 150,
+                  "w": 128,
+                  "h": 17
+                },
+                {
+                  "x": 241,
+                  "y": 150,
+                  "w": 83,
+                  "h": 17
+                },
+                {
+                  "x": 475,
+                  "y": 150,
+                  "w": 53,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 245,
+                  "w": 261,
+                  "h": 115
+                },
+                {
+                  "x": 977,
+                  "y": 272,
+                  "w": 106,
+                  "h": 38
+                },
+                {
+                  "x": 192,
+                  "y": 273,
+                  "w": 123,
+                  "h": 187
+                },
+                {
+                  "x": 298,
+                  "y": 273,
+                  "w": 305,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 320,
+                  "w": 344,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 361,
+                  "w": 352,
+                  "h": 17
+                },
+                {
+                  "x": 1160,
+                  "y": 376,
+                  "w": 210,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 402,
+                  "w": 305,
+                  "h": 17
+                },
+                {
+                  "x": 1160,
+                  "y": 409,
+                  "w": 53,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 410,
+                  "w": 183,
+                  "h": 248
+                },
+                {
+                  "x": 570,
+                  "y": 443,
+                  "w": 371,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 484,
+                  "w": 371,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 525,
+                  "w": 371,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 525,
+                  "w": 61,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 566,
+                  "w": 210,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 566,
+                  "w": 163,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 607,
+                  "w": 417,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 607,
+                  "w": 129,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 648,
+                  "w": 210,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 648,
+                  "w": 57,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 689,
+                  "w": 371,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 689,
+                  "w": 81,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 696,
+                  "w": 68,
+                  "h": 19
+                },
+                {
+                  "x": 570,
+                  "y": 730,
+                  "w": 305,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 730,
+                  "w": 67,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 731,
+                  "w": 125,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 771,
+                  "w": 371,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 771,
+                  "w": 71,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 783,
+                  "w": 96,
+                  "h": 105
+                },
+                {
+                  "x": 570,
+                  "y": 812,
+                  "w": 371,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 812,
+                  "w": 118,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 853,
+                  "w": 371,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 853,
+                  "w": 85,
+                  "h": 17
+                },
+                {
+                  "x": 1176,
+                  "y": 864,
+                  "w": 99,
+                  "h": 17
+                },
+                {
+                  "x": 1279,
+                  "y": 864,
+                  "w": 92,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 894,
+                  "w": 210,
+                  "h": 6
+                }
+              ],
+              "shows": "About",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "background": "zoneC"
+    },
+    {
+      "id": "s44",
+      "type": "CHAPTER",
+      "durationFrames": 183,
+      "timingSource": "estimated",
+      "narration": "Away from the launch coverage, developers were having a rather different conversation about the same model.",
+      "data": {
+        "chapter": {
+          "number": "09",
+          "title": "What developers said",
+          "subtitle": "and how the room voted"
+        }
+      },
+      "transition": "slide",
+      "background": "zoneA"
+    },
+    {
+      "id": "s45",
+      "type": "RECORDED_STEP",
+      "durationFrames": 669,
+      "timingSource": "estimated",
+      "narration": "Over on the developersIndia subreddit, this thread ran days after launch, and it caught a real mood. Its author says Astra feels different, that it is capable across the whole development loop, and asks whether software engineering is still a career worth being in. Six hundred and fifty-one people upvoted the question.",
+      "data": {
+        "recordedStep": {
+          "premise": "A thread on r/developersIndia, in the days after launch.",
+          "sourceNote": "reddit.com/r/developersIndia — community discussion",
+          "layout": "full",
+          "color": "orange",
+          "caption": "the question, and how it landed",
+          "clips": [
+            {
+              "ref": "rec:astra-reddit#thread",
+              "label": "the post itself",
+              "focus": true,
+              "zooms": [
+                {
+                  "at": "full",
+                  "atWord": 26
+                },
+                {
+                  "at": "full",
+                  "atWord": 43
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "thread",
+              "src": "rec/astra-reddit/seg-01.mp4",
+              "frames": 54,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 24,
+                  "y": 17,
+                  "w": 76,
+                  "h": 22
+                },
+                {
+                  "x": 1554,
+                  "y": 18,
+                  "w": 20,
+                  "h": 20
+                },
+                {
+                  "x": 1395,
+                  "y": 20,
+                  "w": 53,
+                  "h": 17
+                },
+                {
+                  "x": 1482,
+                  "y": 20,
+                  "w": 41,
+                  "h": 17
+                },
+                {
+                  "x": 1564,
+                  "y": 38,
+                  "w": 37,
+                  "h": 17
+                },
+                {
+                  "x": 0,
+                  "y": 57,
+                  "w": 743,
+                  "h": 827
+                },
+                {
+                  "x": 1130,
+                  "y": 80,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1194,
+                  "y": 88,
+                  "w": 20,
+                  "h": 20
+                },
+                {
+                  "x": 1222,
+                  "y": 89,
+                  "w": 164,
+                  "h": 19
+                },
+                {
+                  "x": 422,
+                  "y": 108,
+                  "w": 715,
+                  "h": 56
+                },
+                {
+                  "x": 1194,
+                  "y": 138,
+                  "w": 223,
+                  "h": 17
+                },
+                {
+                  "x": 1194,
+                  "y": 166,
+                  "w": 273,
+                  "h": 117
+                },
+                {
+                  "x": 422,
+                  "y": 182,
+                  "w": 715,
+                  "h": 37
+                },
+                {
+                  "x": 422,
+                  "y": 230,
+                  "w": 526,
+                  "h": 17
+                },
+                {
+                  "x": 422,
+                  "y": 258,
+                  "w": 628,
+                  "h": 17
+                },
+                {
+                  "x": 1194,
+                  "y": 300,
+                  "w": 119,
+                  "h": 17
+                },
+                {
+                  "x": 1169,
+                  "y": 334,
+                  "w": 356,
+                  "h": 566
+                },
+                {
+                  "x": 1130,
+                  "y": 409,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 422,
+                  "y": 443,
+                  "w": 729,
+                  "h": 136
+                },
+                {
+                  "x": 1077,
+                  "y": 604,
+                  "w": 66,
+                  "h": 14
+                },
+                {
+                  "x": 454,
+                  "y": 758,
+                  "w": 556,
+                  "h": 17
+                },
+                {
+                  "x": 478,
+                  "y": 866,
+                  "w": 531,
+                  "h": 17
+                },
+                {
+                  "x": 498,
+                  "y": 893,
+                  "w": 14,
+                  "h": 7
+                }
+              ],
+              "shows": "GPT 6.O Astra is insanely good, good alternative career paths for us SDEs?",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s46",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 921,
+      "timingSource": "estimated",
+      "narration": "Here is the shape of that thread, and the votes tell the story better than any quote. Six hundred and fifty-one people upvoted that post. Its top reply — here we go again, every few months a model gives a life-changing experience — took eleven hundred. Another asked whether people remember Devin, which was going to replace all software engineers three years ago. Two hundred and twenty-seven upvoted somebody who can't even find Astra yet. Weariness won that thread, because most of these people have watched this exact launch cycle before.",
+      "data": {
+        "astraStage": {
+          "headline": "The room [voted]",
+          "kind": "thread-votes",
+          "premise": "Vote counts from the same thread. On that site, an upvote is how a room says it agrees.",
+          "stageTitle": "the post, and the replies above it",
+          "token": "how many people agreed with each",
+          "color": "orange",
+          "verdict": "The pushback outscored the panic",
+          "verdictSub": "1.1K against 651",
+          "stage": [
+            {
+              "label": "the post",
+              "text": "651",
+              "value": 651,
+              "sub": "Astra is insanely good — where do we go from here?",
+              "atWord": 25
+            },
+            {
+              "label": "top reply",
+              "text": "1.1K",
+              "value": 1100,
+              "win": true,
+              "sub": "here we go again, every few months a model gives a life-changing experience",
+              "atWord": 28
+            },
+            {
+              "label": "reply",
+              "text": "512",
+              "value": 512,
+              "sub": "remember how Devin was gonna replace all software engineers three years ago?",
+              "atWord": 47
+            },
+            {
+              "label": "reply",
+              "text": "227",
+              "value": 227,
+              "sub": "how are you using it? I do not see it in my subscriptions",
+              "atWord": 64
+            }
+          ],
+          "verdictAtWord": 76
+        }
+      },
+      "background": "zoneA"
+    },
+    {
+      "id": "s47",
+      "type": "CHAPTER",
+      "durationFrames": 262,
+      "timingSource": "estimated",
+      "narration": "So which one should you reach for? That gets sorted by the job in front of you, rather than by whose launch was louder.",
+      "data": {
+        "chapter": {
+          "number": "10",
+          "title": "Which one to reach for",
+          "subtitle": "sorted by the job, not by the launch"
+        }
+      },
+      "transition": "clock",
+      "background": "zoneB"
+    },
+    {
+      "id": "s48",
+      "type": "RECORDED_STEP",
+      "durationFrames": 717,
+      "timingSource": "estimated",
+      "narration": "Now, the sharpest line I read on this came from a developer writing as unicodeveloper, in a review called A taste of AGI. Their framing runs to a single sentence. Astra feels like an operator; Fable feels like a craftsperson. Their same piece points out the rows where Astra loses, which is why I trust it.",
+      "data": {
+        "recordedStep": {
+          "premise": "A launch-week review of GPT-6 Astra, by unicodeveloper.",
+          "sourceNote": "GPT-6 Astra. A taste of AGI? — by unicodeveloper, on Medium",
+          "layout": "full",
+          "color": "purple",
+          "caption": "the framing this chapter borrows",
+          "clips": [
+            {
+              "ref": "rec:astra-medium#byline",
+              "label": "the review, and its author",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "title",
+                  "atWord": 20
+                }
+              ],
+              "wantAtWord": 1,
+              "id": "byline",
+              "src": "rec/astra-medium/seg-01.mp4",
+              "frames": 54,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "title": {
+                  "x": 460,
+                  "y": 128,
+                  "w": 530,
+                  "h": 54,
+                  "covers": "GPT-6 Astra. A taste of AGI?"
+                }
+              },
+              "ink": [
+                {
+                  "x": 1544,
+                  "y": 10,
+                  "w": 32,
+                  "h": 32
+                },
+                {
+                  "x": 24,
+                  "y": 16,
+                  "w": 112,
+                  "h": 25
+                },
+                {
+                  "x": 172,
+                  "y": 16,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 1158,
+                  "y": 16,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 1271,
+                  "y": 16,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 1186,
+                  "y": 19,
+                  "w": 49,
+                  "h": 18
+                },
+                {
+                  "x": 1446,
+                  "y": 19,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 1303,
+                  "y": 19,
+                  "w": 33,
+                  "h": 18
+                },
+                {
+                  "x": 1373,
+                  "y": 20,
+                  "w": 44,
+                  "h": 17
+                },
+                {
+                  "x": 850,
+                  "y": 95,
+                  "w": 98,
+                  "h": 17
+                },
+                {
+                  "x": 472,
+                  "y": 95,
+                  "w": 66,
+                  "h": 17
+                },
+                {
+                  "x": 762,
+                  "y": 95,
+                  "w": 32,
+                  "h": 17
+                },
+                {
+                  "x": 595,
+                  "y": 95,
+                  "w": 31,
+                  "h": 17
+                },
+                {
+                  "x": 683,
+                  "y": 95,
+                  "w": 21,
+                  "h": 17
+                },
+                {
+                  "x": 460,
+                  "y": 97,
+                  "w": 530,
+                  "h": 85
+                },
+                {
+                  "x": 555,
+                  "y": 97,
+                  "w": 12,
+                  "h": 12
+                },
+                {
+                  "x": 643,
+                  "y": 97,
+                  "w": 12,
+                  "h": 12
+                },
+                {
+                  "x": 722,
+                  "y": 97,
+                  "w": 12,
+                  "h": 12
+                },
+                {
+                  "x": 810,
+                  "y": 97,
+                  "w": 12,
+                  "h": 12
+                },
+                {
+                  "x": 462,
+                  "y": 215,
+                  "w": 32,
+                  "h": 32
+                },
+                {
+                  "x": 508,
+                  "y": 223,
+                  "w": 97,
+                  "h": 18
+                },
+                {
+                  "x": 630,
+                  "y": 223,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 695,
+                  "y": 224,
+                  "w": 71,
+                  "h": 18
+                },
+                {
+                  "x": 786,
+                  "y": 224,
+                  "w": 58,
+                  "h": 18
+                },
+                {
+                  "x": 1049,
+                  "y": 253,
+                  "w": 35,
+                  "h": 17
+                },
+                {
+                  "x": 1003,
+                  "y": 296,
+                  "w": 25,
+                  "h": 25
+                },
+                {
+                  "x": 468,
+                  "y": 297,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 524,
+                  "y": 297,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 580,
+                  "y": 297,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 1054,
+                  "y": 297,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 1106,
+                  "y": 297,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 0,
+                  "y": 379,
+                  "w": 1600,
+                  "h": 521
+                }
+              ],
+              "shows": "GPT-6 Astra. A taste of AGI?",
+              "atWord": 5
+            },
+            {
+              "ref": "rec:astra-medium#operator",
+              "label": "operator and craftsperson",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "op",
+                  "atWord": 44
+                }
+              ],
+              "wantAtWord": 31,
+              "id": "operator",
+              "src": "rec/astra-medium/seg-02.mp4",
+              "frames": 129,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "op": {
+                  "x": 460,
+                  "y": 254,
+                  "w": 514,
+                  "h": 25,
+                  "covers": "Astra feels like an operator. Fable feels like a craftsperson."
+                }
+              },
+              "ink": [
+                {
+                  "x": 204,
+                  "y": 0,
+                  "w": 1192,
+                  "h": 173
+                },
+                {
+                  "x": 1544,
+                  "y": 10,
+                  "w": 32,
+                  "h": 32
+                },
+                {
+                  "x": 24,
+                  "y": 16,
+                  "w": 112,
+                  "h": 25
+                },
+                {
+                  "x": 172,
+                  "y": 16,
+                  "w": 24,
+                  "h": 24
+                },
+                {
+                  "x": 1446,
+                  "y": 19,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 1373,
+                  "y": 20,
+                  "w": 44,
+                  "h": 17
+                },
+                {
+                  "x": 679,
+                  "y": 184,
+                  "w": 242,
+                  "h": 18
+                },
+                {
+                  "x": 460,
+                  "y": 254,
+                  "w": 514,
+                  "h": 25
+                },
+                {
+                  "x": 460,
+                  "y": 320,
+                  "w": 435,
+                  "h": 103
+                },
+                {
+                  "x": 784,
+                  "y": 366,
+                  "w": 215,
+                  "h": 25
+                },
+                {
+                  "x": 999,
+                  "y": 366,
+                  "w": 116,
+                  "h": 25
+                },
+                {
+                  "x": 460,
+                  "y": 451,
+                  "w": 226,
+                  "h": 66
+                },
+                {
+                  "x": 460,
+                  "y": 557,
+                  "w": 246,
+                  "h": 25
+                },
+                {
+                  "x": 789,
+                  "y": 626,
+                  "w": 176,
+                  "h": 21
+                },
+                {
+                  "x": 667,
+                  "y": 626,
+                  "w": 122,
+                  "h": 21
+                },
+                {
+                  "x": 635,
+                  "y": 626,
+                  "w": 32,
+                  "h": 21
+                },
+                {
+                  "x": 640,
+                  "y": 660,
+                  "w": 319,
+                  "h": 18
+                },
+                {
+                  "x": 909,
+                  "y": 705,
+                  "w": 63,
+                  "h": 18
+                },
+                {
+                  "x": 716,
+                  "y": 750,
+                  "w": 195,
+                  "h": 18
+                },
+                {
+                  "x": 460,
+                  "y": 829,
+                  "w": 214,
+                  "h": 25
+                },
+                {
+                  "x": 460,
+                  "y": 895,
+                  "w": 562,
+                  "h": 5
+                }
+              ],
+              "shows": "Creations and demos worth checking out",
+              "atWord": 31
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "transition": "zoom",
+      "background": "zoneB"
+    },
+    {
+      "id": "s49",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 842,
+      "timingSource": "estimated",
+      "narration": "So sort the work rather than the models, because the honest answer changes per job. Driving a browser or a desktop unattended, Astra. Three-D and CAD reasoning, Astra, by twelve points. Long multi-step jobs that run for hours, Astra. Now the other column. Code you intend to review and merge, Fable 5.1. Expert reasoning under Humanity's Last Exam, Fable by eight points. Front-end design taste, Fable. Neither answer is a loyalty, so pick per job and change your mind when the job changes.",
+      "data": {
+        "astraStage": {
+          "headline": "An operator, or [a craftsperson]",
+          "kind": "verdict-balance",
+          "premise": "Each job slides to the model I would hand it to, based on the measurements in this video.",
+          "stageTitle": "picking by the job",
+          "token": "reach for Astra | reach for Fable 5.1",
+          "color": "blue",
+          "verdict": "Pick per job, not per launch",
+          "verdictSub": "one drives the machine, one writes the work",
+          "stage": [
+            {
+              "label": "browser and desktop work",
+              "icon": "lucide:mouse-pointer-2",
+              "atWord": 18
+            },
+            {
+              "label": "3D and CAD reasoning",
+              "icon": "lucide:box",
+              "atWord": 24
+            },
+            {
+              "label": "long multi-step jobs",
+              "icon": "lucide:workflow",
+              "atWord": 33
+            },
+            {
+              "label": "code you will merge",
+              "icon": "lucide:git-merge",
+              "win": true,
+              "atWord": 44
+            },
+            {
+              "label": "expert reasoning",
+              "icon": "lucide:brain",
+              "win": true,
+              "atWord": 53
+            },
+            {
+              "label": "front-end design taste",
+              "icon": "lucide:palette",
+              "win": true,
+              "atWord": 63
+            }
+          ],
+          "verdictAtWord": 67
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s50",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 626,
+      "timingSource": "estimated",
+      "narration": "One practical note before the verdict, because Astra has an effort dial and it changes the bill. At low effort a task costs sixty-three cents and scores forty-nine. Medium runs one dollar sixteen. High, one dollar forty-one, for fifty-three. Max costs two dollars fifty-seven and scores fifty-five. Four times the price, for six points. Most work doesn't need the top setting.",
+      "data": {
+        "astraStage": {
+          "headline": "What it costs [per job]",
+          "kind": "rate-plate",
+          "premise": "Artificial Analysis run the same evaluation set at each effort setting and publish the bill.",
+          "stageTitle": "cost per index task, by effort",
+          "token": "the same work, at four settings",
+          "color": "green",
+          "verdict": "Effort is a dial, and it is yours",
+          "verdictSub": "four times the cost, six points of score",
+          "stage": [
+            {
+              "label": "low · scores 49",
+              "text": "$0.63",
+              "win": true,
+              "atWord": 19
+            },
+            {
+              "label": "medium · scores 52",
+              "text": "$1.16",
+              "atWord": 29
+            },
+            {
+              "label": "high · scores 53",
+              "text": "$1.41",
+              "atWord": 34
+            },
+            {
+              "label": "max · scores 55",
+              "text": "$2.57",
+              "atWord": 40
+            }
+          ],
+          "verdictAtWord": 48
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s51",
+      "type": "ASTRA_STAGE",
+      "durationFrames": 882,
+      "timingSource": "estimated",
+      "narration": "Which brings us back to the question in the title. On one side, Astra operates software better than anything before it, and it invented its own notation to solve worlds nobody explained. On the other, it loses to Claude Fable 5.1 on expert reasoning and on the neutral index, and the people who own the benchmark say saturating it would not be proof of anything. My reading is that Astra is the best operator available, rather than the smartest model available, and those are genuinely different titles.",
+      "data": {
+        "astraStage": {
+          "headline": "So is it [AGI?]",
+          "kind": "proof-scales",
+          "premise": "What sits on each side of the question, from the sources in this video rather than from the launch.",
+          "stageTitle": "the honest answer",
+          "token": "weighing the AGI claim",
+          "color": "purple",
+          "verdict": "It moves the argument. It does not settle it.",
+          "verdictSub": "which is a real result on its own",
+          "stage": [
+            {
+              "label": "best at operating software",
+              "sub": "OSWorld, and computer use",
+              "icon": "lucide:mouse-pointer-2",
+              "win": true,
+              "atWord": 15
+            },
+            {
+              "label": "built its own notation",
+              "sub": "ARC Prize watched it happen",
+              "icon": "lucide:pencil-ruler",
+              "win": true,
+              "atWord": 24
+            },
+            {
+              "label": "second on expert reasoning",
+              "sub": "Fable 5.1 leads by eight points",
+              "icon": "lucide:brain",
+              "atWord": 37
+            },
+            {
+              "label": "not proof of AGI",
+              "sub": "ARC Prize, in their own report",
+              "icon": "lucide:shield-x",
+              "atWord": 56
+            }
+          ],
+          "verdictAtWord": 66
+        }
+      },
+      "background": "zoneB"
+    },
+    {
+      "id": "s52",
+      "type": "RECAP",
+      "durationFrames": 528,
+      "timingSource": "estimated",
+      "narration": "So, five things worth keeping. Astra is an operator first. Astra costs ten dollars in and fifty out. Astra leads on computer use and on 3D, and comes second to Fable 5.1 on reasoning. And most of us are still queueing, which is worth remembering before you go hunting for it.",
+      "data": {
+        "heading": "GPT-6 Astra, in five lines",
+        "points": [
+          {
+            "text": "An operator, not a better chatbot",
+            "atWord": 6
+          },
+          {
+            "text": "$10 in, $50 out, per million tokens",
+            "atWord": 12
+          },
+          {
+            "text": "Leads on computer use and 3D",
+            "atWord": 22
+          },
+          {
+            "text": "Second to Fable 5.1 on reasoning",
+            "atWord": 31
+          },
+          {
+            "text": "Most of us are still queueing",
+            "atWord": 39
+          }
+        ]
+      },
+      "transition": "fade",
+      "background": "zoneA"
+    },
+    {
+      "id": "s53",
+      "type": "OUTRO_CTA",
+      "durationFrames": 459,
+      "timingSource": "estimated",
+      "narration": "Every source I used is linked below — OpenAI's page, the ARC Prize report, Artificial Analysis, and unicodeveloper's review. Go and read the ARC Prize one in particular — it's the best-written of them. And if you want more breakdowns built this way, subscribe.",
+      "data": {
+        "message": "Subscribe for more breakdowns like this",
+        "sub": "every number checked against its source"
+      },
+      "background": "zoneA"
+    }
+  ]
+}

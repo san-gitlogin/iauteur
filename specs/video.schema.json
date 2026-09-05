@@ -7425,6 +7425,72 @@
             "if": {
               "properties": {
                 "type": {
+                  "const": "ASTRA_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "astraStage": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "description": "Scene headline, <=38 chars, one [accent] phrase. 38 not 48: measured off a MAX still, 48 wraps onto the premise and the stage border at 16:9."
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "Depiction kind from astraViz ASTRA_VIZ: harness-split | cost-plane | operator-desk | bench-row | page-stack | threshold-ladder | sealed-trace | task-clock | rate-plate | thread-votes | world-model | proof-scales | verdict-balance | rollout-queue | axiom-stack | token-split. An unregistered kind renders LOUDLY in semantic red rather than substituting a plausible picture."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "LAW 0l. One plain sentence naming what the viewer is looking at and what stands for what, <=120 chars. Unanchored, constant for the whole scene, re-readable by somebody who looked away. NOT the same field as stageTitle."
+                        },
+                        "stage": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The elements of the depiction, capped by what each picture can hold: harness-split 2, cost-plane 5, operator-desk 4, bench-row 6, page-stack 1, threshold-ladder 5, sealed-trace 2, task-clock 2, rate-plate 4, thread-votes 5, world-model 5, proof-scales 8, verdict-balance 10, rollout-queue 4, axiom-stack 4, token-split 8. label (<=34) = the name of the thing; text (<=16) = its headline figure; sub (<=54) = a caption under it; detail (<=22) = a second figure (a cost beside a score, a struck-through price, minutes on task-clock); value = the number the geometry uses (a score 0-100, a vote count, a token count); icon = lucide:/si: glyph; color; win = true marks the element the beat argues FOR (the leader, the human baseline, the sealed harness, the side of a balance); atWord = the word it lands on."
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "Mode switch or caption for the depiction, <=44 chars. harness-split reads it as the model name on the trunk; page-stack as the paper equivalent; verdict-balance splits it on | for the two column headings; others use it as the picture's own caption."
+                        },
+                        "stageTitle": {
+                          "type": "string",
+                          "description": "Caption above the stage, <=30 chars. Authored PER BEAT from that beat's subject — one generic title repeated across a cut is LAW 0j's defect in miniature."
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "description": "The one-line conclusion chip, <=40 chars."
+                        },
+                        "verdictSub": {
+                          "type": "string",
+                          "description": "Supporting line under the verdict, <=48 chars."
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "Word the verdict lands on (retargeted by sync like any atWord)."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic accent: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
                   "const": "UV_STAGE"
                 }
               }

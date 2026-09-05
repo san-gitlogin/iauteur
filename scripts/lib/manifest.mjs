@@ -1791,6 +1791,37 @@ export const MANIFEST = {  LIVE_CODE: {
     },
     example: {cmdTraceroute: {"stageTitle":"hop by hop","headline":"traceroute makes each hop [answer]","color":"blue","promptLabel":"dev@box","cwd":"~","atWord":1,"steps":[{"label":"traceroute 1.1.1.1","text":"7  * * *","detail":"the stars are the problem"}],"stage":[{"label":"send a packet","sub":"allowed one hop only"},{"label":"it expires","sub":"and that router reports back"},{"label":"hop 1","sub":"your own router"},{"label":"allow two hops","sub":"and repeat"},{"label":"hop 4","sub":"your internet provider"},{"label":"hop 7","sub":"replies with nothing at all"},{"label":"hop 9","sub":"the destination, finally"}],"verdict":"Stars are not automatically a fault","verdictSub":"plenty of routers are configured never to reply, and traffic passes anyway","verdictAtWord":1}},
   },
+  ASTRA_STAGE: {
+    category: "diagram", family: "diagram", data_key: "astraStage",
+    purpose: "Every DRAWN beat of a frontier-model review on one scene type. The picture takes the whole stage \u2014 no terminal pane, because a review's evidence is a published table, a benchmark harness or a price list, not a command. `kind` chooses the depiction from the astraViz registry. One type, many pictures: registering a scene type is plumbing, the depiction is the picture (LAW 0n).",
+    use_when: "Any beat of a model review, comparison or launch analysis that is NOT footage of a source page. Pick `kind` for the OBJECT the beat is about: harness-split (one model measured two ways), cost-plane (score against cost, with a human plotted on it), operator-desk (a chatbot that answers vs an agent that acts), bench-row (one published benchmark row as a race), page-stack (a context window as a height of paper), threshold-ladder (a safety grade with the top rung lit), sealed-trace (reasoning you can read vs reasoning sealed inside a loop), task-clock (more finished in less time), rate-plate (per-million prices as hanging tags, the cached one struck through), thread-votes (what a forum actually thinks, by vote count), world-model (an unfamiliar environment becoming rules and a private notation), proof-scales (official evidence weighed against a posted demo), verdict-balance (which model to reach for, sorted per job), rollout-queue (who can run it today), axiom-stack (a result standing on the assumptions it needs), token-split (what a token is, shown on a real sentence coming apart).",
+    fields: {
+      headline: {t: "string", note: "Scene headline, <=38 chars, one [accent] phrase. 38 not 48: measured off a MAX still, 48 wraps onto the premise and the stage border at 16:9."},
+      kind: {t: "string", req: true, note: "Depiction kind from astraViz ASTRA_VIZ: harness-split | cost-plane | operator-desk | bench-row | page-stack | threshold-ladder | sealed-trace | task-clock | rate-plate | thread-votes | world-model | proof-scales | verdict-balance | rollout-queue | axiom-stack | token-split. An unregistered kind renders LOUDLY in semantic red rather than substituting a plausible picture."},
+      premise: {t: "string", note: "LAW 0l. One plain sentence naming what the viewer is looking at and what stands for what, <=120 chars. Unanchored, constant for the whole scene, re-readable by somebody who looked away. NOT the same field as stageTitle."},
+      stage: {t: "items", note: "The elements of the depiction, capped by what each picture can hold: harness-split 2, cost-plane 5, operator-desk 4, bench-row 6, page-stack 1, threshold-ladder 5, sealed-trace 2, task-clock 2, rate-plate 4, thread-votes 5, world-model 5, proof-scales 8, verdict-balance 10, rollout-queue 4, axiom-stack 4, token-split 8. label (<=34) = the name of the thing; text (<=16) = its headline figure; sub (<=54) = a caption under it; detail (<=22) = a second figure (a cost beside a score, a struck-through price, minutes on task-clock); value = the number the geometry uses (a score 0-100, a vote count, a token count); icon = lucide:/si: glyph; color; win = true marks the element the beat argues FOR (the leader, the human baseline, the sealed harness, the side of a balance); atWord = the word it lands on."},
+      token: {t: "string", note: "Mode switch or caption for the depiction, <=44 chars. harness-split reads it as the model name on the trunk; page-stack as the paper equivalent; verdict-balance splits it on | for the two column headings; others use it as the picture's own caption."},
+      stageTitle: {t: "string", note: "Caption above the stage, <=30 chars. Authored PER BEAT from that beat's subject \u2014 one generic title repeated across a cut is LAW 0j's defect in miniature."},
+      verdict: {t: "string", note: "The one-line conclusion chip, <=40 chars."},
+      verdictSub: {t: "string", note: "Supporting line under the verdict, <=48 chars."},
+      verdictAtWord: {t: "number", note: "Word the verdict lands on (retargeted by sync like any atWord)."},
+      color: {t: "string", note: "Semantic accent: blue|green|red|orange|purple|yellow."}
+    },
+    example: {
+      headline: "One model, [two answers]",
+      kind: "harness-split",
+      premise: "The same model on the same benchmark, run twice, with different rules about what it may carry between turns.",
+      stageTitle: "how ARC Prize measured it",
+      token: "GPT-6 Astra",
+      stage: [
+        {label: "Standard harness", text: "62.7%", detail: "$26,098", sub: "provider-neutral, notes on the page", atWord: 6},
+        {label: "Provider Adapter", text: "99.9%", detail: "$18,817", sub: "opaque state kept between requests", win: true, atWord: 14}
+      ],
+      verdict: "Same model. Same test. Same day.",
+      verdictAtWord: 22,
+      color: "blue"
+    }
+  },
   UV_STAGE: {
     category: "diagram", family: "diagram", data_key: "uvStage",
     purpose: "Every beat of the uv course on one scene type. A live terminal types each real command on the word it is spoken, and the stage beside it draws the OBJECT the beat is about — a parcel, a shelf, a wall going up — chosen by `kind` from the uvViz registry. Set layout:'terminal' to drop the stage entirely when the beat is one screen and nothing else. One type, many pictures: registering a scene type is plumbing, the depiction is the picture (LAW 0n).",

@@ -283,6 +283,7 @@ import {CmdDd} from './scenes/CmdDd';
 import {CmdIp} from './scenes/CmdIp';
 import {CmdPing} from './scenes/CmdPing';
 import {UvStage} from './scenes/UvStage';
+import {AstraStage} from './scenes/AstraStage';
 import {CmdTraceroute} from './scenes/CmdTraceroute';
 import {CmdMtr} from './scenes/CmdMtr';
 import {CmdNetstat} from './scenes/CmdNetstat';
@@ -463,6 +464,7 @@ const registry: Record<string, React.FC<{scene: Scene}>> = {  LIVE_CODE: LiveCod
   CMD_TRACEROUTE: CmdTraceroute,
   CMD_PING: CmdPing,
   UV_STAGE: UvStage,
+  ASTRA_STAGE: AstraStage,
   CMD_IP: CmdIp,
   CMD_DD: CmdDd,
   CMD_UMOUNT: CmdUmount,

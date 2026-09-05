@@ -103,6 +103,7 @@ const figures = (s) => (String(s || '').match(/\$[\d,]+(?:\.\d+)?|\d+\.\d+%?|\d+
   .map((f) => f.replace(/,/g, ''));
 
 const problems = [];
+const unmeasured = [];
 const notes = [];
 let scanned = 0;
 
@@ -132,6 +133,21 @@ for (const sp of specs) {
     }
 
     // 2) A MEASUREMENT SPOKEN THAT THE PICTURE NEVER SHOWS.
+    //
+    // NOT MEASURED IS NOT THE SAME AS MEASURED AND EMPTY. For a RECORDED_STEP the picture
+    // is FOOTAGE, and the only way to know what is written on it is the screen text the
+    // capture baked into `clips[].said`. The browser surface does not capture that yet
+    // (only the editor and terminal surfaces do), so on a page recording this rule would
+    // be judging the spec's own caption text and calling every figure in the footage
+    // missing — the exact fail-soft-into-a-wrong-answer shape that `inkFor()` returning []
+    // was corrected for. So: if a scene carries clips and NONE of them baked screen text,
+    // the figure rule cannot be evaluated. Report it, do not fail on it.
+    const clips = sc.data?.recordedStep?.clips ?? [];
+    if (clips.length && !clips.some((c) => c.said)) {
+      unmeasured.push(`${sp}  ${sc.id}: footage carries no baked screen text — figures over ` +
+        `this beat are unchecked (re-record to populate clips[].said).`);
+      continue;
+    }
     const shownFigs = new Set(figures(visText));
     const missing = [...new Set(figures(nar))].filter((f) => {
       if (shownFigs.has(f)) return false;
@@ -157,6 +173,8 @@ if (!quiet) {
   console.log(`NARRATION/VISUAL CHECK: ${scanned} scene(s) with both narration and drawn text, ` +
     `across ${specs.length} spec(s).`);
   for (const n of notes.slice(0, 12)) console.log(`  thin  ${n}`);
+  for (const u of unmeasured.slice(0, 8)) console.log(`  n/m   ${u}`);
+  if (unmeasured.length > 8) console.log(`  ... and ${unmeasured.length - 8} more unmeasured.`);
   if (notes.length > 12) console.log(`  ... and ${notes.length - 12} more thin scene(s).`);
 }
 
