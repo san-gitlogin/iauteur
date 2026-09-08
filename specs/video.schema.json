@@ -526,6 +526,7 @@
               "MCP_WIRE",
               "MCP_SCHEMA",
               "MCP_LOOP",
+              "ALLURE_STAGE",
               "MCP_URI",
               "MCP_MENTION",
               "MCP_SAMPLING",
@@ -2620,6 +2621,82 @@
                         "color": {
                           "type": "string",
                           "description": "Semantic colour: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "ALLURE_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "allureStage": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "Scene headline, <=44 chars, one [accent] phrase."
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "Which picture: outcome-bins | fail-vs-broken | step-binding | evidence-shelf | attachment-router"
+                        },
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-12 elements. label = what is written on it (<=26). sub = the gloss beside it (<=40). text = a per-kind role. value = a number the beat states. icon = lucide:/si: glyph. color, atWord."
+                        },
+                        "lines": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The code, one item per line. text = the line INCLUDING indentation (<=52). detail = the plain-English note under it while lit (<=120). atWord."
+                        },
+                        "vars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "Caption above the picture, <=30 chars, specific to THIS beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 150,
+                          "description": "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at and what stands for what. Carries NO marker."
+                        },
+                        "codeTitle": {
+                          "type": "string",
+                          "maxLength": 22,
+                          "description": "Filename in the editor chrome when `lines` is used."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Accent SemColor: blue|green|red|orange|purple|yellow."
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "The word the picture itself resolves on."
                         }
                       }
                     }

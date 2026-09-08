@@ -10877,7 +10877,34 @@ export interface LiveCodeData {
   atWord?: number;
   color?: SemColor;
 }
+export interface AllureStageItem {
+  label?: string;
+  text?: string;
+  title?: string;
+  sub?: string;
+  detail?: string;
+  value?: number | string;
+  icon?: string;
+  color?: SemColor;
+  asset?: string;
+  atWord?: number;
+}
+
+export interface AllureStageData {
+  headline?: string;
+  kind?: string;
+  cells?: AllureStageItem[];
+  lines?: AllureStageItem[];
+  vars?: AllureStageItem[];
+  caption?: string;
+  premise?: string;
+  codeTitle?: string;
+  color?: SemColor;
+  atWord?: number;
+}
+
 export interface SceneData {
+  allureStage?: AllureStageData;
   liveCode?: LiveCodeData;
   columnSplit?: ColumnSplitData;
   claimCheck?: ClaimCheckData;

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Allure Report Viewer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body data-api-base-url="{{ api_base_url }}">
+
+<header class="app-header">
+  <div class="app-shell">
+    <h1>Allure AI Report Analyser</h1>
+    <p>Every report, decoded, stored, served, and now explained by an AI - built chapter by chapter.</p>
+  </div>
+</header>
+
+<main class="layout app-shell">
+  <section class="panel" id="reports-panel">
+    <h2>Reports</h2>
+
+    <input type="search" id="report-search" placeholder="Search reports by name...">
+
+    <form id="upload-form">
+      <input type="text" id="upload-report-name" placeholder="Name this report..." required>
+      <input type="file" id="upload-file" accept=".html" required>
+      <button type="submit">Upload report</button>
+      <p id="upload-status"></p>
+    </form>
+
+    <ul id="reports-list" class="reports-grid"></ul>
+  </section>
+
+  <section class="panel" id="test-cases-panel">
+    <h2>Test Cases</h2>
+    <ul id="test-cases-list"></ul>
+  </section>
+
+  <section class="panel wide" id="ai-summary-panel">
+    <h2>AI Summary</h2>
+    <div id="ai-summary-content">
+      <p class="placeholder">Pick a report to see an automatic AI summary here.</p>
+    </div>
+  </section>
+
+  <section class="panel wide" id="detail-panel">
+    <h2>Test Case Detail</h2>
+    <div id="detail-content">
+      <p class="placeholder">Pick a report, then a test case, to see it here.</p>
+    </div>
+  </section>
+
+  <section class="panel wide" id="chat-panel">
+    <h2>Ask the AI about this test</h2>
+    <div id="chat-messages"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="Ask a question about the selected test..." autocomplete="off">
+      <button type="submit">Send</button>
+    </form>
+  </section>
+</main>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+<script src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+</html>

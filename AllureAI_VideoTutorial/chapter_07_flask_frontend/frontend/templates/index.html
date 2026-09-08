@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Allure Report Viewer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body data-api-base-url="{{ api_base_url }}">
+
+<header class="app-header">
+  <div class="app-shell">
+    <h1>Allure Report Viewer</h1>
+    <p>Reports decoded from Chapter 2, stored in Chapter 4, served by the API from Chapter 6.</p>
+  </div>
+</header>
+
+<main class="layout app-shell">
+  <section class="panel" id="reports-panel">
+    <h2>Reports</h2>
+    <ul id="reports-list"></ul>
+  </section>
+
+  <section class="panel" id="test-cases-panel">
+    <h2>Test Cases</h2>
+    <ul id="test-cases-list"></ul>
+  </section>
+
+  <section class="panel wide" id="detail-panel">
+    <h2>Test Case Detail</h2>
+    <div id="detail-content">
+      <p class="placeholder">Pick a report, then a test case, to see it here.</p>
+    </div>
+  </section>
+</main>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

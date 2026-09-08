@@ -1,0 +1,8 @@
+# Generated Allure/pytest artifacts — regenerate by running the chapter scripts, never hand-edit
+**/allure-results*/
+**/report-legacy/
+**/report-combine/
+**/.pytest_cache/
+**/__pycache__/
+*.db
+*.log

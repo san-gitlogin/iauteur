@@ -1,0 +1,353 @@
+/*
+ * style.css - a small, deliberate design system.
+ *
+ * Every color, spacing value, and radius used anywhere on this page
+ * comes from ONE list of variables below. That's the whole trick to
+ * making a plain HTML/CSS page look considered instead of thrown
+ * together: decide your few building blocks once, then only ever use
+ * those, never a one-off color or size picked in the moment.
+ *
+ * Palette is deliberately restrained: neutrals for almost everything,
+ * one accent color for anything interactive (links, buttons, the
+ * selected list item), and ONE warning color reserved only for
+ * things that need attention (a failed or broken test). Nothing else
+ * gets colored - a calmer page is easier to read, not harder.
+ */
+
+:root {
+  --color-bg: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-border: #e3e5e9;
+  --color-text: #1a1d23;
+  --color-text-muted: #6b7280;
+  --color-text-faint: #9aa1ac;
+
+  --color-accent: #2f5fd8;
+  --color-accent-soft: #eef2fd;
+
+  --color-attention: #b3261e;
+  --color-attention-soft: #fbeceb;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.04);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-shell { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------------------------------------------------------------- */
+/* Header                                                            */
+/* ---------------------------------------------------------------- */
+.app-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 22px 0;
+}
+.app-header h1 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+.app-header p { margin: 4px 0 0; font-size: 13px; color: var(--color-text-muted); }
+
+/* ---------------------------------------------------------------- */
+/* Layout - responsive grid, collapses to one column on small screens */
+/* ---------------------------------------------------------------- */
+.layout {
+  display: grid;
+  grid-template-columns: 240px 300px 1fr;
+  grid-template-areas:
+    "reports cases detail"
+    "summary summary summary"
+    "chat    chat   chat";
+  gap: 20px;
+  padding: 24px 0 40px;
+  align-items: start;
+}
+#reports-panel { grid-area: reports; }
+#test-cases-panel { grid-area: cases; }
+#ai-summary-panel { grid-area: summary; }
+#detail-panel { grid-area: detail; }
+#chat-panel { grid-area: chat; }
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: "reports" "cases" "summary" "detail" "chat";
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Panels                                                             */
+/* ---------------------------------------------------------------- */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  min-height: 120px;
+  /* Grid items default to min-width: auto, which lets long unbroken
+     content (like a raw HTML attachment dump) stretch the whole grid
+     track wider than the viewport. Without this line, a single long
+     line of text can force the ENTIRE page to scroll sideways. */
+  min-width: 0;
+}
+.panel h2 {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin: 0 0 14px;
+}
+
+.panel ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.panel li {
+  padding: 9px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  transition: background-color 120ms ease;
+}
+.panel li:hover { background: #f0f1f4; }
+.panel li.selected { background: var(--color-accent-soft); color: var(--color-accent); font-weight: 500; }
+
+.placeholder { color: var(--color-text-faint); font-size: 13.5px; }
+
+/* ---------------------------------------------------------------- */
+/* Report search + upload                                             */
+/* ---------------------------------------------------------------- */
+#report-search {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: inherit;
+  margin-bottom: 12px;
+}
+#report-search:focus { outline: none; border-color: var(--color-accent); }
+
+#upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  margin-bottom: 14px;
+  background: var(--color-bg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+}
+#upload-form input[type="text"], #upload-form input[type="file"] {
+  font-size: 12.5px;
+  font-family: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+#upload-form button {
+  padding: 7px 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#upload-form button:hover { background: #2650b8; }
+#upload-status { margin: 0; font-size: 12px; }
+#upload-status.upload-status-ok { color: #166534; }
+#upload-status.upload-status-error { color: var(--color-attention); }
+
+/* Report grid - a responsive card grid, not a plain list */
+ul.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+li.report-card {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border: 1px solid var(--color-border);
+}
+.report-card-name { margin: 0; font-weight: 500; font-size: 13px; }
+.report-card-stats { margin: 0; font-size: 12px; color: var(--color-text-muted); }
+
+/* ---------------------------------------------------------------- */
+/* AI summary panel                                                    */
+/* ---------------------------------------------------------------- */
+.ai-summary-text { margin: 0 0 12px; font-size: 13.5px; line-height: 1.5; }
+.failure-box-heading { margin: 0 0 8px; font-weight: 600; font-size: 13px; }
+ul.failing-tests-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+ul.failing-tests-list li {
+  /* .panel li is display:flex by default (for icon+text rows elsewhere on
+     this page) - that flex layout stops a <br> from actually starting a
+     new line, since flex lays children out in a row, not stacked text.
+     This list needs the name on one line and the reason on the next. */
+  display: block;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 0;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* Status - a small dot plus a word, not a loud colored pill.        */
+/* Neutral gray for ordinary states; the single attention color is   */
+/* reserved for "failed" and "broken" only.                          */
+/* ---------------------------------------------------------------- */
+.status-badge, .step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.status-badge::before, .step-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-text-faint);
+}
+.status-badge.failed, .step-badge.failed,
+.status-badge.broken, .step-badge.broken {
+  color: var(--color-attention);
+}
+.status-badge.failed::before, .step-badge.failed::before,
+.status-badge.broken::before, .step-badge.broken::before {
+  background: var(--color-attention);
+}
+
+/* ---------------------------------------------------------------- */
+/* Test case detail                                                   */
+/* ---------------------------------------------------------------- */
+#detail-content h3 {
+  font-size: 14.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 8px;
+}
+#detail-content h3:first-child { margin-top: 0; }
+
+.failure-box {
+  background: var(--color-attention-soft);
+  border: 1px solid #f2c9c6;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  color: #7a1d17;
+}
+
+.step-block { margin-bottom: 14px; padding-left: 12px; border-left: 2px solid var(--color-border); }
+
+.attachment { margin: 8px 0 4px 20px; }
+.attachment-name { font-size: 12px; color: var(--color-text-muted); margin: 0 0 5px; }
+
+img.attachment-image { max-width: 100%; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-top: 4px; }
+
+pre.attachment-text, pre.attachment-html {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: 12px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+
+table.csv-table { border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+table.csv-table td { border: 1px solid var(--color-border); padding: 5px 12px; }
+
+a.attachment-download-link, a.attachment-download {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--color-accent);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+}
+a.attachment-download-link:hover, a.attachment-download:hover { border-color: var(--color-accent); }
+
+/* ---------------------------------------------------------------- */
+/* Chat                                                                */
+/* ---------------------------------------------------------------- */
+#chat-messages {
+  min-height: 140px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 4px 2px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chat-bubble {
+  max-width: 70%;
+  padding: 9px 13px;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+.chat-bubble.user {
+  background: var(--color-accent);
+  color: #fff;
+  margin-left: auto;
+  border-bottom-right-radius: 2px;
+}
+.chat-bubble.assistant {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  margin-right: auto;
+  border-bottom-left-radius: 2px;
+}
+
+#chat-form { display: flex; gap: 8px; }
+#chat-input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-family: inherit;
+}
+#chat-input:focus { outline: none; border-color: var(--color-accent); }
+#chat-form button {
+  padding: 9px 18px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#chat-form button:hover { background: #2650b8; }

@@ -226,6 +226,7 @@ export const TYPES = [
   'MCP_WIRE',
   'MCP_SCHEMA',
   'MCP_LOOP',
+  'ALLURE_STAGE',
   'MCP_URI',
   'MCP_MENTION',
   'MCP_SAMPLING',

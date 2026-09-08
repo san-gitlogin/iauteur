@@ -306,7 +306,7 @@
   {
     "index": 38,
     "id": "sc39",
-    "type": "WHEN_NOT_SQLITE",
+    "type": "LIVE_CODE",
     "durationFrames": 200,
     "startFrame": 9320,
     "midFrame": 9430
@@ -314,7 +314,7 @@
   {
     "index": 39,
     "id": "sc40",
-    "type": "INDEX_LEDGER",
+    "type": "COLUMN_SPLIT",
     "durationFrames": 200,
     "startFrame": 9520,
     "midFrame": 9630
@@ -322,7 +322,7 @@
   {
     "index": 40,
     "id": "sc41",
-    "type": "WHERE_IT_RUNS",
+    "type": "CLAIM_CHECK",
     "durationFrames": 200,
     "startFrame": 9720,
     "midFrame": 9830
@@ -330,7 +330,7 @@
   {
     "index": 41,
     "id": "sc42",
-    "type": "TABLE_SPLIT",
+    "type": "MODEL_SHRUG",
     "durationFrames": 200,
     "startFrame": 9920,
     "midFrame": 10030
@@ -338,7 +338,7 @@
   {
     "index": 42,
     "id": "sc43",
-    "type": "GROUP_BUCKETS",
+    "type": "WHEN_NOT_SQLITE",
     "durationFrames": 200,
     "startFrame": 10120,
     "midFrame": 10230
@@ -346,7 +346,7 @@
   {
     "index": 43,
     "id": "sc44",
-    "type": "TRANSACTION_DOOR",
+    "type": "INDEX_LEDGER",
     "durationFrames": 200,
     "startFrame": 10320,
     "midFrame": 10430
@@ -354,63 +354,63 @@
   {
     "index": 44,
     "id": "sc45",
-    "type": "KEY_CHORD",
-    "durationFrames": 220,
+    "type": "WHERE_IT_RUNS",
+    "durationFrames": 200,
     "startFrame": 10520,
-    "midFrame": 10641
+    "midFrame": 10630
   },
   {
     "index": 45,
     "id": "sc46",
-    "type": "BROWSER_STEALS",
-    "durationFrames": 220,
-    "startFrame": 10740,
-    "midFrame": 10861
+    "type": "TABLE_SPLIT",
+    "durationFrames": 200,
+    "startFrame": 10720,
+    "midFrame": 10830
   },
   {
     "index": 46,
     "id": "sc47",
-    "type": "CURSOR_WALK",
-    "durationFrames": 220,
-    "startFrame": 10960,
-    "midFrame": 11081
+    "type": "GROUP_BUCKETS",
+    "durationFrames": 200,
+    "startFrame": 10920,
+    "midFrame": 11030
   },
   {
     "index": 47,
     "id": "sc48",
-    "type": "TYPE_GATE",
+    "type": "TRANSACTION_DOOR",
     "durationFrames": 200,
-    "startFrame": 11180,
-    "midFrame": 11290
+    "startFrame": 11120,
+    "midFrame": 11230
   },
   {
     "index": 48,
     "id": "sc49",
-    "type": "DB_TWO_WAYS",
-    "durationFrames": 200,
-    "startFrame": 11380,
-    "midFrame": 11490
+    "type": "KEY_CHORD",
+    "durationFrames": 220,
+    "startFrame": 11320,
+    "midFrame": 11441
   },
   {
     "index": 49,
     "id": "sc50",
-    "type": "JOIN_MERGE",
-    "durationFrames": 200,
-    "startFrame": 11580,
-    "midFrame": 11690
+    "type": "BROWSER_STEALS",
+    "durationFrames": 220,
+    "startFrame": 11540,
+    "midFrame": 11661
   },
   {
     "index": 50,
     "id": "sc51",
-    "type": "PLACEHOLDER_SEAL",
-    "durationFrames": 200,
-    "startFrame": 11780,
-    "midFrame": 11890
+    "type": "CURSOR_WALK",
+    "durationFrames": 220,
+    "startFrame": 11760,
+    "midFrame": 11881
   },
   {
     "index": 51,
     "id": "sc52",
-    "type": "SCAN_VS_SEEK",
+    "type": "TYPE_GATE",
     "durationFrames": 200,
     "startFrame": 11980,
     "midFrame": 12090
@@ -418,7 +418,7 @@
   {
     "index": 52,
     "id": "sc53",
-    "type": "MCP_MESH",
+    "type": "DB_TWO_WAYS",
     "durationFrames": 200,
     "startFrame": 12180,
     "midFrame": 12290
@@ -426,7 +426,7 @@
   {
     "index": 53,
     "id": "sc54",
-    "type": "MCP_REACH",
+    "type": "JOIN_MERGE",
     "durationFrames": 200,
     "startFrame": 12380,
     "midFrame": 12490
@@ -434,7 +434,7 @@
   {
     "index": 54,
     "id": "sc55",
-    "type": "MCP_DEPRECATED",
+    "type": "PLACEHOLDER_SEAL",
     "durationFrames": 200,
     "startFrame": 12580,
     "midFrame": 12690
@@ -442,7 +442,7 @@
   {
     "index": 55,
     "id": "sc56",
-    "type": "MCP_ELICIT",
+    "type": "SCAN_VS_SEEK",
     "durationFrames": 200,
     "startFrame": 12780,
     "midFrame": 12890
@@ -450,7 +450,7 @@
   {
     "index": 56,
     "id": "sc57",
-    "type": "MCP_TERMINAL",
+    "type": "MCP_MESH",
     "durationFrames": 200,
     "startFrame": 12980,
     "midFrame": 13090
@@ -458,7 +458,7 @@
   {
     "index": 57,
     "id": "sc58",
-    "type": "MCP_FLAGS",
+    "type": "MCP_REACH",
     "durationFrames": 200,
     "startFrame": 13180,
     "midFrame": 13290
@@ -466,7 +466,7 @@
   {
     "index": 58,
     "id": "sc59",
-    "type": "MCP_TRANSPORT",
+    "type": "MCP_DEPRECATED",
     "durationFrames": 200,
     "startFrame": 13380,
     "midFrame": 13490
@@ -474,7 +474,7 @@
   {
     "index": 59,
     "id": "sc60",
-    "type": "MCP_PROGRESS",
+    "type": "MCP_ELICIT",
     "durationFrames": 200,
     "startFrame": 13580,
     "midFrame": 13690
@@ -482,7 +482,7 @@
   {
     "index": 60,
     "id": "sc61",
-    "type": "MCP_ROOTS",
+    "type": "MCP_TERMINAL",
     "durationFrames": 200,
     "startFrame": 13780,
     "midFrame": 13890
@@ -490,7 +490,7 @@
   {
     "index": 61,
     "id": "sc62",
-    "type": "MCP_SAMPLING",
+    "type": "MCP_FLAGS",
     "durationFrames": 200,
     "startFrame": 13980,
     "midFrame": 14090
@@ -498,7 +498,7 @@
   {
     "index": 62,
     "id": "sc63",
-    "type": "MCP_MENTION",
+    "type": "MCP_TRANSPORT",
     "durationFrames": 200,
     "startFrame": 14180,
     "midFrame": 14290
@@ -506,7 +506,7 @@
   {
     "index": 63,
     "id": "sc64",
-    "type": "MCP_URI",
+    "type": "MCP_PROGRESS",
     "durationFrames": 200,
     "startFrame": 14380,
     "midFrame": 14490
@@ -514,7 +514,7 @@
   {
     "index": 64,
     "id": "sc65",
-    "type": "MCP_LOOP",
+    "type": "MCP_ROOTS",
     "durationFrames": 200,
     "startFrame": 14580,
     "midFrame": 14690
@@ -522,7 +522,7 @@
   {
     "index": 65,
     "id": "sc66",
-    "type": "MCP_SCHEMA",
+    "type": "MCP_SAMPLING",
     "durationFrames": 200,
     "startFrame": 14780,
     "midFrame": 14890
@@ -530,7 +530,7 @@
   {
     "index": 66,
     "id": "sc67",
-    "type": "MCP_WIRE",
+    "type": "MCP_MENTION",
     "durationFrames": 200,
     "startFrame": 14980,
     "midFrame": 15090
@@ -538,7 +538,7 @@
   {
     "index": 67,
     "id": "sc68",
-    "type": "MCP_CONTROL",
+    "type": "MCP_URI",
     "durationFrames": 200,
     "startFrame": 15180,
     "midFrame": 15290
@@ -546,7 +546,7 @@
   {
     "index": 68,
     "id": "sc69",
-    "type": "MCP_API_ANATOMY",
+    "type": "ALLURE_STAGE",
     "durationFrames": 200,
     "startFrame": 15380,
     "midFrame": 15490
@@ -554,7 +554,7 @@
   {
     "index": 69,
     "id": "sc70",
-    "type": "DSA_FRAMEWORK",
+    "type": "MCP_LOOP",
     "durationFrames": 200,
     "startFrame": 15580,
     "midFrame": 15690
@@ -562,7 +562,7 @@
   {
     "index": 70,
     "id": "sc71",
-    "type": "DSA_COST",
+    "type": "MCP_SCHEMA",
     "durationFrames": 200,
     "startFrame": 15780,
     "midFrame": 15890
@@ -570,7 +570,7 @@
   {
     "index": 71,
     "id": "sc72",
-    "type": "DSA_SIGNALS",
+    "type": "MCP_WIRE",
     "durationFrames": 200,
     "startFrame": 15980,
     "midFrame": 16090
@@ -578,7 +578,7 @@
   {
     "index": 72,
     "id": "sc73",
-    "type": "DSA_TRACE_LIST",
+    "type": "MCP_CONTROL",
     "durationFrames": 200,
     "startFrame": 16180,
     "midFrame": 16290
@@ -586,7 +586,7 @@
   {
     "index": 73,
     "id": "sc74",
-    "type": "DSA_TRACE_INTERVALS",
+    "type": "MCP_API_ANATOMY",
     "durationFrames": 200,
     "startFrame": 16380,
     "midFrame": 16490
@@ -594,7 +594,7 @@
   {
     "index": 74,
     "id": "sc75",
-    "type": "DSA_TRACE_DP",
+    "type": "DSA_FRAMEWORK",
     "durationFrames": 200,
     "startFrame": 16580,
     "midFrame": 16690
@@ -602,7 +602,7 @@
   {
     "index": 75,
     "id": "sc76",
-    "type": "DSA_TRACE_TREE",
+    "type": "DSA_COST",
     "durationFrames": 200,
     "startFrame": 16780,
     "midFrame": 16890
@@ -610,7 +610,7 @@
   {
     "index": 76,
     "id": "sc77",
-    "type": "DSA_TRACE_GRID",
+    "type": "DSA_SIGNALS",
     "durationFrames": 200,
     "startFrame": 16980,
     "midFrame": 17090
@@ -618,7 +618,7 @@
   {
     "index": 77,
     "id": "sc78",
-    "type": "DSA_TRACE_STACK",
+    "type": "DSA_TRACE_LIST",
     "durationFrames": 200,
     "startFrame": 17180,
     "midFrame": 17290
@@ -626,7 +626,7 @@
   {
     "index": 78,
     "id": "sc79",
-    "type": "DSA_TRACE_HASH",
+    "type": "DSA_TRACE_INTERVALS",
     "durationFrames": 200,
     "startFrame": 17380,
     "midFrame": 17490
@@ -634,7 +634,7 @@
   {
     "index": 79,
     "id": "sc80",
-    "type": "DSA_TRACE_BSEARCH",
+    "type": "DSA_TRACE_DP",
     "durationFrames": 200,
     "startFrame": 17580,
     "midFrame": 17690
@@ -642,7 +642,7 @@
   {
     "index": 80,
     "id": "sc81",
-    "type": "DSA_TRACE_WINDOW",
+    "type": "DSA_TRACE_TREE",
     "durationFrames": 200,
     "startFrame": 17780,
     "midFrame": 17890
@@ -650,7 +650,7 @@
   {
     "index": 81,
     "id": "sc82",
-    "type": "DSA_TRACE_PTRS",
+    "type": "DSA_TRACE_GRID",
     "durationFrames": 200,
     "startFrame": 17980,
     "midFrame": 18090
@@ -658,7 +658,7 @@
   {
     "index": 82,
     "id": "sc83",
-    "type": "CMD_LSUSB",
+    "type": "DSA_TRACE_STACK",
     "durationFrames": 200,
     "startFrame": 18180,
     "midFrame": 18290
@@ -666,7 +666,7 @@
   {
     "index": 83,
     "id": "sc84",
-    "type": "CMD_LSPCI",
+    "type": "DSA_TRACE_HASH",
     "durationFrames": 200,
     "startFrame": 18380,
     "midFrame": 18490
@@ -674,7 +674,7 @@
   {
     "index": 84,
     "id": "sc85",
-    "type": "CMD_CHEAT",
+    "type": "DSA_TRACE_BSEARCH",
     "durationFrames": 200,
     "startFrame": 18580,
     "midFrame": 18690
@@ -682,7 +682,7 @@
   {
     "index": 85,
     "id": "sc86",
-    "type": "CMD_TLDR",
+    "type": "DSA_TRACE_WINDOW",
     "durationFrames": 200,
     "startFrame": 18780,
     "midFrame": 18890
@@ -690,7 +690,7 @@
   {
     "index": 86,
     "id": "sc87",
-    "type": "CMD_APROPOS",
+    "type": "DSA_TRACE_PTRS",
     "durationFrames": 200,
     "startFrame": 18980,
     "midFrame": 19090
@@ -698,7 +698,7 @@
   {
     "index": 87,
     "id": "sc88",
-    "type": "CMD_MAN",
+    "type": "CMD_LSUSB",
     "durationFrames": 200,
     "startFrame": 19180,
     "midFrame": 19290
@@ -706,7 +706,7 @@
   {
     "index": 88,
     "id": "sc89",
-    "type": "CMD_DMESG",
+    "type": "CMD_LSPCI",
     "durationFrames": 200,
     "startFrame": 19380,
     "midFrame": 19490
@@ -714,7 +714,7 @@
   {
     "index": 89,
     "id": "sc90",
-    "type": "CMD_JOURNALCTL",
+    "type": "CMD_CHEAT",
     "durationFrames": 200,
     "startFrame": 19580,
     "midFrame": 19690
@@ -722,7 +722,7 @@
   {
     "index": 90,
     "id": "sc91",
-    "type": "CMD_SYSTEMCTL",
+    "type": "CMD_TLDR",
     "durationFrames": 200,
     "startFrame": 19780,
     "midFrame": 19890
@@ -730,7 +730,7 @@
   {
     "index": 91,
     "id": "sc92",
-    "type": "CMD_TMUX",
+    "type": "CMD_APROPOS",
     "durationFrames": 200,
     "startFrame": 19980,
     "midFrame": 20090
@@ -738,7 +738,7 @@
   {
     "index": 92,
     "id": "sc93",
-    "type": "CMD_SCREEN",
+    "type": "CMD_MAN",
     "durationFrames": 200,
     "startFrame": 20180,
     "midFrame": 20290
@@ -746,7 +746,7 @@
   {
     "index": 93,
     "id": "sc94",
-    "type": "CMD_HISTORY",
+    "type": "CMD_DMESG",
     "durationFrames": 200,
     "startFrame": 20380,
     "midFrame": 20490
@@ -754,7 +754,7 @@
   {
     "index": 94,
     "id": "sc95",
-    "type": "CMD_ENV",
+    "type": "CMD_JOURNALCTL",
     "durationFrames": 200,
     "startFrame": 20580,
     "midFrame": 20690
@@ -762,7 +762,7 @@
   {
     "index": 95,
     "id": "sc96",
-    "type": "CMD_ALIAS",
+    "type": "CMD_SYSTEMCTL",
     "durationFrames": 200,
     "startFrame": 20780,
     "midFrame": 20890
@@ -770,7 +770,7 @@
   {
     "index": 96,
     "id": "sc97",
-    "type": "CMD_BASHSCRIPT",
+    "type": "CMD_TMUX",
     "durationFrames": 200,
     "startFrame": 20980,
     "midFrame": 21090
@@ -778,7 +778,7 @@
   {
     "index": 97,
     "id": "sc98",
-    "type": "CMD_CRONTAB",
+    "type": "CMD_SCREEN",
     "durationFrames": 200,
     "startFrame": 21180,
     "midFrame": 21290
@@ -786,7 +786,7 @@
   {
     "index": 98,
     "id": "sc99",
-    "type": "CMD_CRON",
+    "type": "CMD_HISTORY",
     "durationFrames": 200,
     "startFrame": 21380,
     "midFrame": 21490
@@ -794,7 +794,7 @@
   {
     "index": 99,
     "id": "sc100",
-    "type": "CMD_ZIP",
+    "type": "CMD_ENV",
     "durationFrames": 200,
     "startFrame": 21580,
     "midFrame": 21690
@@ -802,7 +802,7 @@
   {
     "index": 100,
     "id": "sc101",
-    "type": "CMD_BZIP2",
+    "type": "CMD_ALIAS",
     "durationFrames": 200,
     "startFrame": 21780,
     "midFrame": 21890
@@ -810,7 +810,7 @@
   {
     "index": 101,
     "id": "sc102",
-    "type": "CMD_GZIP",
+    "type": "CMD_BASHSCRIPT",
     "durationFrames": 200,
     "startFrame": 21980,
     "midFrame": 22090
@@ -818,7 +818,7 @@
   {
     "index": 102,
     "id": "sc103",
-    "type": "CMD_TAR",
+    "type": "CMD_CRONTAB",
     "durationFrames": 200,
     "startFrame": 22180,
     "midFrame": 22290
@@ -826,7 +826,7 @@
   {
     "index": 103,
     "id": "sc104",
-    "type": "CMD_CURL",
+    "type": "CMD_CRON",
     "durationFrames": 200,
     "startFrame": 22380,
     "midFrame": 22490
@@ -834,7 +834,7 @@
   {
     "index": 104,
     "id": "sc105",
-    "type": "CMD_WGET",
+    "type": "CMD_ZIP",
     "durationFrames": 200,
     "startFrame": 22580,
     "midFrame": 22690
@@ -842,7 +842,7 @@
   {
     "index": 105,
     "id": "sc106",
-    "type": "CMD_NC",
+    "type": "CMD_BZIP2",
     "durationFrames": 200,
     "startFrame": 22780,
     "midFrame": 22890
@@ -850,7 +850,7 @@
   {
     "index": 106,
     "id": "sc107",
-    "type": "CMD_RSYNC",
+    "type": "CMD_GZIP",
     "durationFrames": 200,
     "startFrame": 22980,
     "midFrame": 23090
@@ -858,7 +858,7 @@
   {
     "index": 107,
     "id": "sc108",
-    "type": "CMD_SCP",
+    "type": "CMD_TAR",
     "durationFrames": 200,
     "startFrame": 23180,
     "midFrame": 23290
@@ -866,7 +866,7 @@
   {
     "index": 108,
     "id": "sc109",
-    "type": "CMD_SSH",
+    "type": "CMD_CURL",
     "durationFrames": 200,
     "startFrame": 23380,
     "midFrame": 23490
@@ -874,7 +874,7 @@
   {
     "index": 109,
     "id": "sc110",
-    "type": "CMD_WHOIS",
+    "type": "CMD_WGET",
     "durationFrames": 200,
     "startFrame": 23580,
     "midFrame": 23690
@@ -882,7 +882,7 @@
   {
     "index": 110,
     "id": "sc111",
-    "type": "CMD_NSLOOKUP",
+    "type": "CMD_NC",
     "durationFrames": 200,
     "startFrame": 23780,
     "midFrame": 23890
@@ -890,7 +890,7 @@
   {
     "index": 111,
     "id": "sc112",
-    "type": "CMD_HOST",
+    "type": "CMD_RSYNC",
     "durationFrames": 200,
     "startFrame": 23980,
     "midFrame": 24090
@@ -898,7 +898,7 @@
   {
     "index": 112,
     "id": "sc113",
-    "type": "CMD_DIG",
+    "type": "CMD_SCP",
     "durationFrames": 200,
     "startFrame": 24180,
     "midFrame": 24290
@@ -906,7 +906,7 @@
   {
     "index": 113,
     "id": "sc114",
-    "type": "CMD_NLOAD",
+    "type": "CMD_SSH",
     "durationFrames": 200,
     "startFrame": 24380,
     "midFrame": 24490
@@ -914,7 +914,7 @@
   {
     "index": 114,
     "id": "sc115",
-    "type": "CMD_NETHOGS",
+    "type": "CMD_WHOIS",
     "durationFrames": 200,
     "startFrame": 24580,
     "midFrame": 24690
@@ -922,7 +922,7 @@
   {
     "index": 115,
     "id": "sc116",
-    "type": "CMD_IFTOP",
+    "type": "CMD_NSLOOKUP",
     "durationFrames": 200,
     "startFrame": 24780,
     "midFrame": 24890
@@ -930,7 +930,7 @@
   {
     "index": 116,
     "id": "sc117",
-    "type": "CMD_NMCLI",
+    "type": "CMD_HOST",
     "durationFrames": 200,
     "startFrame": 24980,
     "midFrame": 25090
@@ -938,7 +938,7 @@
   {
     "index": 117,
     "id": "sc118",
-    "type": "CMD_SS",
+    "type": "CMD_DIG",
     "durationFrames": 200,
     "startFrame": 25180,
     "midFrame": 25290
@@ -946,7 +946,7 @@
   {
     "index": 118,
     "id": "sc119",
-    "type": "CMD_NETSTAT",
+    "type": "CMD_NLOAD",
     "durationFrames": 200,
     "startFrame": 25380,
     "midFrame": 25490
@@ -954,7 +954,7 @@
   {
     "index": 119,
     "id": "sc120",
-    "type": "UV_STAGE",
+    "type": "CMD_NETHOGS",
     "durationFrames": 200,
     "startFrame": 25580,
     "midFrame": 25690
@@ -962,7 +962,7 @@
   {
     "index": 120,
     "id": "sc121",
-    "type": "UV_STAGE",
+    "type": "CMD_IFTOP",
     "durationFrames": 200,
     "startFrame": 25780,
     "midFrame": 25890
@@ -970,7 +970,7 @@
   {
     "index": 121,
     "id": "sc122",
-    "type": "UV_STAGE",
+    "type": "CMD_NMCLI",
     "durationFrames": 200,
     "startFrame": 25980,
     "midFrame": 26090
@@ -978,7 +978,7 @@
   {
     "index": 122,
     "id": "sc123",
-    "type": "UV_STAGE",
+    "type": "CMD_SS",
     "durationFrames": 200,
     "startFrame": 26180,
     "midFrame": 26290
@@ -986,7 +986,7 @@
   {
     "index": 123,
     "id": "sc124",
-    "type": "UV_STAGE",
+    "type": "CMD_NETSTAT",
     "durationFrames": 200,
     "startFrame": 26380,
     "midFrame": 26490
@@ -1018,7 +1018,7 @@
   {
     "index": 127,
     "id": "sc128",
-    "type": "CMD_MTR",
+    "type": "UV_STAGE",
     "durationFrames": 200,
     "startFrame": 27180,
     "midFrame": 27290
@@ -1026,7 +1026,7 @@
   {
     "index": 128,
     "id": "sc129",
-    "type": "CMD_TRACEROUTE",
+    "type": "UV_STAGE",
     "durationFrames": 200,
     "startFrame": 27380,
     "midFrame": 27490
@@ -1034,7 +1034,7 @@
   {
     "index": 129,
     "id": "sc130",
-    "type": "CMD_PING",
+    "type": "UV_STAGE",
     "durationFrames": 200,
     "startFrame": 27580,
     "midFrame": 27690
@@ -1042,7 +1042,7 @@
   {
     "index": 130,
     "id": "sc131",
-    "type": "CMD_IP",
+    "type": "UV_STAGE",
     "durationFrames": 200,
     "startFrame": 27780,
     "midFrame": 27890
@@ -1050,7 +1050,7 @@
   {
     "index": 131,
     "id": "sc132",
-    "type": "CMD_DD",
+    "type": "UV_STAGE",
     "durationFrames": 200,
     "startFrame": 27980,
     "midFrame": 28090
@@ -1058,7 +1058,7 @@
   {
     "index": 132,
     "id": "sc133",
-    "type": "CMD_UMOUNT",
+    "type": "CMD_MTR",
     "durationFrames": 200,
     "startFrame": 28180,
     "midFrame": 28290
@@ -1066,7 +1066,7 @@
   {
     "index": 133,
     "id": "sc134",
-    "type": "CMD_MOUNT",
+    "type": "CMD_TRACEROUTE",
     "durationFrames": 200,
     "startFrame": 28380,
     "midFrame": 28490
@@ -1074,7 +1074,7 @@
   {
     "index": 134,
     "id": "sc135",
-    "type": "CMD_FSCK",
+    "type": "CMD_PING",
     "durationFrames": 200,
     "startFrame": 28580,
     "midFrame": 28690
@@ -1082,7 +1082,7 @@
   {
     "index": 135,
     "id": "sc136",
-    "type": "CMD_MKFS",
+    "type": "CMD_IP",
     "durationFrames": 200,
     "startFrame": 28780,
     "midFrame": 28890
@@ -1090,7 +1090,7 @@
   {
     "index": 136,
     "id": "sc137",
-    "type": "CMD_BLKID",
+    "type": "CMD_DD",
     "durationFrames": 200,
     "startFrame": 28980,
     "midFrame": 29090
@@ -1098,7 +1098,7 @@
   {
     "index": 137,
     "id": "sc138",
-    "type": "CMD_PARTED",
+    "type": "CMD_UMOUNT",
     "durationFrames": 200,
     "startFrame": 29180,
     "midFrame": 29290
@@ -1106,7 +1106,7 @@
   {
     "index": 138,
     "id": "sc139",
-    "type": "CMD_FDISK",
+    "type": "CMD_MOUNT",
     "durationFrames": 200,
     "startFrame": 29380,
     "midFrame": 29490
@@ -1114,7 +1114,7 @@
   {
     "index": 139,
     "id": "sc140",
-    "type": "CMD_NCDU",
+    "type": "CMD_FSCK",
     "durationFrames": 200,
     "startFrame": 29580,
     "midFrame": 29690
@@ -1122,7 +1122,7 @@
   {
     "index": 140,
     "id": "sc141",
-    "type": "CMD_DU",
+    "type": "CMD_MKFS",
     "durationFrames": 200,
     "startFrame": 29780,
     "midFrame": 29890
@@ -1130,7 +1130,7 @@
   {
     "index": 141,
     "id": "sc142",
-    "type": "CMD_DF",
+    "type": "CMD_BLKID",
     "durationFrames": 200,
     "startFrame": 29980,
     "midFrame": 30090
@@ -1138,7 +1138,7 @@
   {
     "index": 142,
     "id": "sc143",
-    "type": "CMD_WATCH",
+    "type": "CMD_PARTED",
     "durationFrames": 200,
     "startFrame": 30180,
     "midFrame": 30290
@@ -1146,7 +1146,7 @@
   {
     "index": 143,
     "id": "sc144",
-    "type": "CMD_SAR",
+    "type": "CMD_FDISK",
     "durationFrames": 200,
     "startFrame": 30380,
     "midFrame": 30490
@@ -1154,7 +1154,7 @@
   {
     "index": 144,
     "id": "sc145",
-    "type": "CMD_DSTAT",
+    "type": "CMD_NCDU",
     "durationFrames": 200,
     "startFrame": 30580,
     "midFrame": 30690
@@ -1162,7 +1162,7 @@
   {
     "index": 145,
     "id": "sc146",
-    "type": "CMD_IOTOP",
+    "type": "CMD_DU",
     "durationFrames": 200,
     "startFrame": 30780,
     "midFrame": 30890
@@ -1170,7 +1170,7 @@
   {
     "index": 146,
     "id": "sc147",
-    "type": "CMD_IOSTAT",
+    "type": "CMD_DF",
     "durationFrames": 200,
     "startFrame": 30980,
     "midFrame": 31090
@@ -1178,7 +1178,7 @@
   {
     "index": 147,
     "id": "sc148",
-    "type": "CMD_VMSTAT",
+    "type": "CMD_WATCH",
     "durationFrames": 200,
     "startFrame": 31180,
     "midFrame": 31290
@@ -1186,7 +1186,7 @@
   {
     "index": 148,
     "id": "sc149",
-    "type": "CMD_FREE",
+    "type": "CMD_SAR",
     "durationFrames": 200,
     "startFrame": 31380,
     "midFrame": 31490
@@ -1194,7 +1194,7 @@
   {
     "index": 149,
     "id": "sc150",
-    "type": "CMD_UPTIME",
+    "type": "CMD_DSTAT",
     "durationFrames": 200,
     "startFrame": 31580,
     "midFrame": 31690
@@ -1202,7 +1202,7 @@
   {
     "index": 150,
     "id": "sc151",
-    "type": "CMD_STRACE",
+    "type": "CMD_IOTOP",
     "durationFrames": 200,
     "startFrame": 31780,
     "midFrame": 31890
@@ -1210,7 +1210,7 @@
   {
     "index": 151,
     "id": "sc152",
-    "type": "CMD_LSOF",
+    "type": "CMD_IOSTAT",
     "durationFrames": 200,
     "startFrame": 31980,
     "midFrame": 32090
@@ -1218,7 +1218,7 @@
   {
     "index": 152,
     "id": "sc153",
-    "type": "CMD_WAIT",
+    "type": "CMD_VMSTAT",
     "durationFrames": 200,
     "startFrame": 32180,
     "midFrame": 32290
@@ -1226,7 +1226,7 @@
   {
     "index": 153,
     "id": "sc154",
-    "type": "CMD_SLEEP",
+    "type": "CMD_FREE",
     "durationFrames": 200,
     "startFrame": 32380,
     "midFrame": 32490
@@ -1234,7 +1234,7 @@
   {
     "index": 154,
     "id": "sc155",
-    "type": "CMD_NOHUP",
+    "type": "CMD_UPTIME",
     "durationFrames": 200,
     "startFrame": 32580,
     "midFrame": 32690
@@ -1242,7 +1242,7 @@
   {
     "index": 155,
     "id": "sc156",
-    "type": "CMD_KILLALL",
+    "type": "CMD_STRACE",
     "durationFrames": 200,
     "startFrame": 32780,
     "midFrame": 32890
@@ -1250,7 +1250,7 @@
   {
     "index": 156,
     "id": "sc157",
-    "type": "CMD_KILL",
+    "type": "CMD_LSOF",
     "durationFrames": 200,
     "startFrame": 32980,
     "midFrame": 33090
@@ -1258,7 +1258,7 @@
   {
     "index": 157,
     "id": "sc158",
-    "type": "CMD_NMON",
+    "type": "CMD_WAIT",
     "durationFrames": 200,
     "startFrame": 33180,
     "midFrame": 33290
@@ -1266,7 +1266,7 @@
   {
     "index": 158,
     "id": "sc159",
-    "type": "CMD_GLANCES",
+    "type": "CMD_SLEEP",
     "durationFrames": 200,
     "startFrame": 33380,
     "midFrame": 33490
@@ -1274,7 +1274,7 @@
   {
     "index": 159,
     "id": "sc160",
-    "type": "CMD_ATOP",
+    "type": "CMD_NOHUP",
     "durationFrames": 200,
     "startFrame": 33580,
     "midFrame": 33690
@@ -1282,7 +1282,7 @@
   {
     "index": 160,
     "id": "sc161",
-    "type": "CMD_BTOP",
+    "type": "CMD_KILLALL",
     "durationFrames": 200,
     "startFrame": 33780,
     "midFrame": 33890
@@ -1290,7 +1290,7 @@
   {
     "index": 161,
     "id": "sc162",
-    "type": "CMD_HTOP",
+    "type": "CMD_KILL",
     "durationFrames": 200,
     "startFrame": 33980,
     "midFrame": 34090
@@ -1298,7 +1298,7 @@
   {
     "index": 162,
     "id": "sc163",
-    "type": "CMD_TOP",
+    "type": "CMD_NMON",
     "durationFrames": 200,
     "startFrame": 34180,
     "midFrame": 34290
@@ -1306,7 +1306,7 @@
   {
     "index": 163,
     "id": "sc164",
-    "type": "CMD_PSTREE",
+    "type": "CMD_GLANCES",
     "durationFrames": 200,
     "startFrame": 34380,
     "midFrame": 34490
@@ -1314,7 +1314,7 @@
   {
     "index": 164,
     "id": "sc165",
-    "type": "CMD_PS",
+    "type": "CMD_ATOP",
     "durationFrames": 200,
     "startFrame": 34580,
     "midFrame": 34690
@@ -1322,7 +1322,7 @@
   {
     "index": 165,
     "id": "sc166",
-    "type": "CMD_CHROOT",
+    "type": "CMD_BTOP",
     "durationFrames": 200,
     "startFrame": 34780,
     "midFrame": 34890
@@ -1330,7 +1330,7 @@
   {
     "index": 166,
     "id": "sc167",
-    "type": "CMD_LAST",
+    "type": "CMD_HTOP",
     "durationFrames": 200,
     "startFrame": 34980,
     "midFrame": 35090
@@ -1338,7 +1338,7 @@
   {
     "index": 167,
     "id": "sc168",
-    "type": "CMD_W",
+    "type": "CMD_TOP",
     "durationFrames": 200,
     "startFrame": 35180,
     "midFrame": 35290
@@ -1346,7 +1346,7 @@
   {
     "index": 168,
     "id": "sc169",
-    "type": "CMD_CHPASSWD",
+    "type": "CMD_PSTREE",
     "durationFrames": 200,
     "startFrame": 35380,
     "midFrame": 35490
@@ -1354,7 +1354,7 @@
   {
     "index": 169,
     "id": "sc170",
-    "type": "CMD_PASSWD",
+    "type": "CMD_PS",
     "durationFrames": 200,
     "startFrame": 35580,
     "midFrame": 35690
@@ -1362,7 +1362,7 @@
   {
     "index": 170,
     "id": "sc171",
-    "type": "CMD_USERDEL",
+    "type": "CMD_CHROOT",
     "durationFrames": 200,
     "startFrame": 35780,
     "midFrame": 35890
@@ -1370,7 +1370,7 @@
   {
     "index": 171,
     "id": "sc172",
-    "type": "CMD_USERMOD",
+    "type": "CMD_LAST",
     "durationFrames": 200,
     "startFrame": 35980,
     "midFrame": 36090
@@ -1378,7 +1378,7 @@
   {
     "index": 172,
     "id": "sc173",
-    "type": "CMD_USERADD",
+    "type": "CMD_W",
     "durationFrames": 200,
     "startFrame": 36180,
     "midFrame": 36290
@@ -1386,7 +1386,7 @@
   {
     "index": 173,
     "id": "sc174",
-    "type": "CMD_SUDO",
+    "type": "CMD_CHPASSWD",
     "durationFrames": 200,
     "startFrame": 36380,
     "midFrame": 36490
@@ -1394,7 +1394,7 @@
   {
     "index": 174,
     "id": "sc175",
-    "type": "CMD_UMASK",
+    "type": "CMD_PASSWD",
     "durationFrames": 200,
     "startFrame": 36580,
     "midFrame": 36690
@@ -1402,7 +1402,7 @@
   {
     "index": 175,
     "id": "sc176",
-    "type": "CMD_CHOWN",
+    "type": "CMD_USERDEL",
     "durationFrames": 200,
     "startFrame": 36780,
     "midFrame": 36890
@@ -1410,7 +1410,7 @@
   {
     "index": 176,
     "id": "sc177",
-    "type": "CMD_CHMOD",
+    "type": "CMD_USERMOD",
     "durationFrames": 200,
     "startFrame": 36980,
     "midFrame": 37090
@@ -1418,7 +1418,7 @@
   {
     "index": 177,
     "id": "sc178",
-    "type": "CMD_XARGS",
+    "type": "CMD_USERADD",
     "durationFrames": 200,
     "startFrame": 37180,
     "midFrame": 37290
@@ -1426,7 +1426,7 @@
   {
     "index": 178,
     "id": "sc179",
-    "type": "CMD_SED",
+    "type": "CMD_SUDO",
     "durationFrames": 200,
     "startFrame": 37380,
     "midFrame": 37490
@@ -1434,7 +1434,7 @@
   {
     "index": 179,
     "id": "sc180",
-    "type": "CMD_AWK",
+    "type": "CMD_UMASK",
     "durationFrames": 200,
     "startFrame": 37580,
     "midFrame": 37690
@@ -1442,7 +1442,7 @@
   {
     "index": 180,
     "id": "sc181",
-    "type": "CMD_GREP",
+    "type": "CMD_CHOWN",
     "durationFrames": 200,
     "startFrame": 37780,
     "midFrame": 37890
@@ -1450,7 +1450,7 @@
   {
     "index": 181,
     "id": "sc182",
-    "type": "CMD_LOCATE",
+    "type": "CMD_CHMOD",
     "durationFrames": 200,
     "startFrame": 37980,
     "midFrame": 38090
@@ -1458,7 +1458,7 @@
   {
     "index": 182,
     "id": "sc183",
-    "type": "CMD_FIND",
+    "type": "CMD_XARGS",
     "durationFrames": 200,
     "startFrame": 38180,
     "midFrame": 38290
@@ -1466,7 +1466,7 @@
   {
     "index": 183,
     "id": "sc184",
-    "type": "CMD_DIFF",
+    "type": "CMD_SED",
     "durationFrames": 200,
     "startFrame": 38380,
     "midFrame": 38490
@@ -1474,7 +1474,7 @@
   {
     "index": 184,
     "id": "sc185",
-    "type": "CMD_VI",
+    "type": "CMD_AWK",
     "durationFrames": 200,
     "startFrame": 38580,
     "midFrame": 38690
@@ -1482,7 +1482,7 @@
   {
     "index": 185,
     "id": "sc186",
-    "type": "CMD_TAIL",
+    "type": "CMD_GREP",
     "durationFrames": 200,
     "startFrame": 38780,
     "midFrame": 38890
@@ -1490,7 +1490,7 @@
   {
     "index": 186,
     "id": "sc187",
-    "type": "CMD_LESS",
+    "type": "CMD_LOCATE",
     "durationFrames": 200,
     "startFrame": 38980,
     "midFrame": 39090
@@ -1498,7 +1498,7 @@
   {
     "index": 187,
     "id": "sc188",
-    "type": "CMD_MORE",
+    "type": "CMD_FIND",
     "durationFrames": 200,
     "startFrame": 39180,
     "midFrame": 39290
@@ -1506,7 +1506,7 @@
   {
     "index": 188,
     "id": "sc189",
-    "type": "CMD_TAC",
+    "type": "CMD_DIFF",
     "durationFrames": 200,
     "startFrame": 39380,
     "midFrame": 39490
@@ -1514,7 +1514,7 @@
   {
     "index": 189,
     "id": "sc190",
-    "type": "CMD_CAT",
+    "type": "CMD_VI",
     "durationFrames": 200,
     "startFrame": 39580,
     "midFrame": 39690
@@ -1522,7 +1522,7 @@
   {
     "index": 190,
     "id": "sc191",
-    "type": "CMD_TOUCH",
+    "type": "CMD_TAIL",
     "durationFrames": 200,
     "startFrame": 39780,
     "midFrame": 39890
@@ -1530,7 +1530,7 @@
   {
     "index": 191,
     "id": "sc192",
-    "type": "CMD_CLEAR",
+    "type": "CMD_LESS",
     "durationFrames": 200,
     "startFrame": 39980,
     "midFrame": 40090
@@ -1538,7 +1538,7 @@
   {
     "index": 192,
     "id": "sc193",
-    "type": "CMD_LN",
+    "type": "CMD_MORE",
     "durationFrames": 200,
     "startFrame": 40180,
     "midFrame": 40290
@@ -1546,7 +1546,7 @@
   {
     "index": 193,
     "id": "sc194",
-    "type": "CMD_RM",
+    "type": "CMD_TAC",
     "durationFrames": 200,
     "startFrame": 40380,
     "midFrame": 40490
@@ -1554,7 +1554,7 @@
   {
     "index": 194,
     "id": "sc195",
-    "type": "CMD_MV",
+    "type": "CMD_CAT",
     "durationFrames": 200,
     "startFrame": 40580,
     "midFrame": 40690
@@ -1562,7 +1562,7 @@
   {
     "index": 195,
     "id": "sc196",
-    "type": "CMD_CP",
+    "type": "CMD_TOUCH",
     "durationFrames": 200,
     "startFrame": 40780,
     "midFrame": 40890
@@ -1570,7 +1570,7 @@
   {
     "index": 196,
     "id": "sc197",
-    "type": "CMD_MKDIR",
+    "type": "CMD_CLEAR",
     "durationFrames": 200,
     "startFrame": 40980,
     "midFrame": 41090
@@ -1578,7 +1578,7 @@
   {
     "index": 197,
     "id": "sc198",
-    "type": "CMD_PWD",
+    "type": "CMD_LN",
     "durationFrames": 200,
     "startFrame": 41180,
     "midFrame": 41290
@@ -1586,7 +1586,7 @@
   {
     "index": 198,
     "id": "sc199",
-    "type": "CMD_CD",
+    "type": "CMD_RM",
     "durationFrames": 200,
     "startFrame": 41380,
     "midFrame": 41490
@@ -1594,7 +1594,7 @@
   {
     "index": 199,
     "id": "sc200",
-    "type": "CMD_LS",
+    "type": "CMD_MV",
     "durationFrames": 200,
     "startFrame": 41580,
     "midFrame": 41690
@@ -1602,7 +1602,7 @@
   {
     "index": 200,
     "id": "sc201",
-    "type": "COPY_FORK",
+    "type": "CMD_CP",
     "durationFrames": 200,
     "startFrame": 41780,
     "midFrame": 41890
@@ -1610,7 +1610,7 @@
   {
     "index": 201,
     "id": "sc202",
-    "type": "TOOL_BENCH",
+    "type": "CMD_MKDIR",
     "durationFrames": 200,
     "startFrame": 41980,
     "midFrame": 42090
@@ -1618,7 +1618,7 @@
   {
     "index": 202,
     "id": "sc203",
-    "type": "DELETION_GUARD",
+    "type": "CMD_PWD",
     "durationFrames": 200,
     "startFrame": 42180,
     "midFrame": 42290
@@ -1626,7 +1626,7 @@
   {
     "index": 203,
     "id": "sc204",
-    "type": "LINK_PAIR",
+    "type": "CMD_CD",
     "durationFrames": 200,
     "startFrame": 42380,
     "midFrame": 42490
@@ -1634,7 +1634,7 @@
   {
     "index": 204,
     "id": "sc205",
-    "type": "LISTING_ROW",
+    "type": "CMD_LS",
     "durationFrames": 200,
     "startFrame": 42580,
     "midFrame": 42690
@@ -1642,7 +1642,7 @@
   {
     "index": 205,
     "id": "sc206",
-    "type": "PATH_WALK",
+    "type": "COPY_FORK",
     "durationFrames": 200,
     "startFrame": 42780,
     "midFrame": 42890
@@ -1650,7 +1650,7 @@
   {
     "index": 206,
     "id": "sc207",
-    "type": "RECORD_DRAFT",
+    "type": "TOOL_BENCH",
     "durationFrames": 200,
     "startFrame": 42980,
     "midFrame": 43090
@@ -1658,7 +1658,7 @@
   {
     "index": 207,
     "id": "sc208",
-    "type": "FROZEN_FRAME",
+    "type": "DELETION_GUARD",
     "durationFrames": 200,
     "startFrame": 43180,
     "midFrame": 43290
@@ -1666,7 +1666,7 @@
   {
     "index": 208,
     "id": "sc209",
-    "type": "ORDER_ROULETTE",
+    "type": "LINK_PAIR",
     "durationFrames": 200,
     "startFrame": 43380,
     "midFrame": 43490
@@ -1674,7 +1674,7 @@
   {
     "index": 209,
     "id": "sc210",
-    "type": "WORKER_SPREAD",
+    "type": "LISTING_ROW",
     "durationFrames": 200,
     "startFrame": 43580,
     "midFrame": 43690
@@ -1682,7 +1682,7 @@
   {
     "index": 210,
     "id": "sc211",
-    "type": "SEALED_BOX",
+    "type": "PATH_WALK",
     "durationFrames": 200,
     "startFrame": 43780,
     "midFrame": 43890
@@ -1690,7 +1690,7 @@
   {
     "index": 211,
     "id": "sc212",
-    "type": "SET_LOGIC",
+    "type": "RECORD_DRAFT",
     "durationFrames": 200,
     "startFrame": 43980,
     "midFrame": 44090
@@ -1698,7 +1698,7 @@
   {
     "index": 212,
     "id": "sc213",
-    "type": "SEARCH_NARROW",
+    "type": "FROZEN_FRAME",
     "durationFrames": 200,
     "startFrame": 44180,
     "midFrame": 44290
@@ -1706,7 +1706,7 @@
   {
     "index": 213,
     "id": "sc214",
-    "type": "STAGE_HANDOFF",
+    "type": "ORDER_ROULETTE",
     "durationFrames": 200,
     "startFrame": 44380,
     "midFrame": 44490
@@ -1714,7 +1714,7 @@
   {
     "index": 214,
     "id": "sc215",
-    "type": "BACKSTAGE_PHONE",
+    "type": "WORKER_SPREAD",
     "durationFrames": 200,
     "startFrame": 44580,
     "midFrame": 44690
@@ -1722,7 +1722,7 @@
   {
     "index": 215,
     "id": "sc216",
-    "type": "SCOPE_LADDER",
+    "type": "SEALED_BOX",
     "durationFrames": 200,
     "startFrame": 44780,
     "midFrame": 44890
@@ -1730,7 +1730,7 @@
   {
     "index": 216,
     "id": "sc217",
-    "type": "HAND_STAMP",
+    "type": "SET_LOGIC",
     "durationFrames": 200,
     "startFrame": 44980,
     "midFrame": 45090
@@ -1738,7 +1738,7 @@
   {
     "index": 217,
     "id": "sc218",
-    "type": "SAD_PATHS",
+    "type": "SEARCH_NARROW",
     "durationFrames": 200,
     "startFrame": 45180,
     "midFrame": 45290
@@ -1746,7 +1746,7 @@
   {
     "index": 218,
     "id": "sc219",
-    "type": "MAIL_ROOM",
+    "type": "STAGE_HANDOFF",
     "durationFrames": 200,
     "startFrame": 45380,
     "midFrame": 45490
@@ -1754,7 +1754,7 @@
   {
     "index": 219,
     "id": "sc220",
-    "type": "TRACE_SCRUB",
+    "type": "BACKSTAGE_PHONE",
     "durationFrames": 200,
     "startFrame": 45580,
     "midFrame": 45690
@@ -1762,7 +1762,7 @@
   {
     "index": 220,
     "id": "sc221",
-    "type": "FLAG_HARVEST",
+    "type": "SCOPE_LADDER",
     "durationFrames": 200,
     "startFrame": 45780,
     "midFrame": 45890
@@ -1770,7 +1770,7 @@
   {
     "index": 221,
     "id": "sc222",
-    "type": "SHOT_SCOPE",
+    "type": "HAND_STAMP",
     "durationFrames": 200,
     "startFrame": 45980,
     "midFrame": 46090
@@ -1778,7 +1778,7 @@
   {
     "index": 222,
     "id": "sc223",
-    "type": "PICKER_BYPASS",
+    "type": "SAD_PATHS",
     "durationFrames": 200,
     "startFrame": 46180,
     "midFrame": 46290
@@ -1786,7 +1786,7 @@
   {
     "index": 223,
     "id": "sc224",
-    "type": "DIALOG_GATE",
+    "type": "MAIL_ROOM",
     "durationFrames": 200,
     "startFrame": 46380,
     "midFrame": 46490
@@ -1794,7 +1794,7 @@
   {
     "index": 224,
     "id": "sc225",
-    "type": "FRAME_BOUNDARY",
+    "type": "TRACE_SCRUB",
     "durationFrames": 200,
     "startFrame": 46580,
     "midFrame": 46690
@@ -1802,7 +1802,7 @@
   {
     "index": 225,
     "id": "sc226",
-    "type": "TRAP_TRIGGER",
+    "type": "FLAG_HARVEST",
     "durationFrames": 200,
     "startFrame": 46780,
     "midFrame": 46890
@@ -1810,7 +1810,7 @@
   {
     "index": 226,
     "id": "sc227",
-    "type": "INDEX_DRIFT",
+    "type": "SHOT_SCOPE",
     "durationFrames": 200,
     "startFrame": 46980,
     "midFrame": 47090
@@ -1818,7 +1818,7 @@
   {
     "index": 227,
     "id": "sc228",
-    "type": "ROW_FILTER",
+    "type": "PICKER_BYPASS",
     "durationFrames": 200,
     "startFrame": 47180,
     "midFrame": 47290
@@ -1826,7 +1826,7 @@
   {
     "index": 228,
     "id": "sc229",
-    "type": "CROWD_MATCH",
+    "type": "DIALOG_GATE",
     "durationFrames": 200,
     "startFrame": 47380,
     "midFrame": 47490
@@ -1834,7 +1834,7 @@
   {
     "index": 229,
     "id": "sc230",
-    "type": "RESPONSIBILITY_SPLIT",
+    "type": "FRAME_BOUNDARY",
     "durationFrames": 200,
     "startFrame": 47580,
     "midFrame": 47690
@@ -1842,7 +1842,7 @@
   {
     "index": 230,
     "id": "sc231",
-    "type": "SAVED_SEARCH",
+    "type": "TRAP_TRIGGER",
     "durationFrames": 200,
     "startFrame": 47780,
     "midFrame": 47890
@@ -1850,7 +1850,7 @@
   {
     "index": 231,
     "id": "sc232",
-    "type": "RULE_TEST",
+    "type": "INDEX_DRIFT",
     "durationFrames": 200,
     "startFrame": 47980,
     "midFrame": 48090
@@ -1858,7 +1858,7 @@
   {
     "index": 232,
     "id": "sc233",
-    "type": "CHANGE_RIPPLE",
+    "type": "ROW_FILTER",
     "durationFrames": 200,
     "startFrame": 48180,
     "midFrame": 48290
@@ -1866,7 +1866,7 @@
   {
     "index": 233,
     "id": "sc234",
-    "type": "FIXTURE_CREW",
+    "type": "CROWD_MATCH",
     "durationFrames": 200,
     "startFrame": 48380,
     "midFrame": 48490
@@ -1874,7 +1874,7 @@
   {
     "index": 234,
     "id": "sc235",
-    "type": "OVERLAY_BLOCK",
+    "type": "RESPONSIBILITY_SPLIT",
     "durationFrames": 200,
     "startFrame": 48580,
     "midFrame": 48690
@@ -1882,7 +1882,7 @@
   {
     "index": 235,
     "id": "sc236",
-    "type": "BROWSER_STEP",
+    "type": "SAVED_SEARCH",
     "durationFrames": 200,
     "startFrame": 48780,
     "midFrame": 48890
@@ -1890,7 +1890,7 @@
   {
     "index": 236,
     "id": "sc237",
-    "type": "RECORDED_STEP",
+    "type": "RULE_TEST",
     "durationFrames": 200,
     "startFrame": 48980,
     "midFrame": 49090
@@ -1898,7 +1898,7 @@
   {
     "index": 237,
     "id": "sc238",
-    "type": "CODE_RUN",
+    "type": "CHANGE_RIPPLE",
     "durationFrames": 200,
     "startFrame": 49180,
     "midFrame": 49290
@@ -1906,7 +1906,7 @@
   {
     "index": 238,
     "id": "sc239",
-    "type": "QUIZ_CARD",
+    "type": "FIXTURE_CREW",
     "durationFrames": 200,
     "startFrame": 49380,
     "midFrame": 49490
@@ -1914,7 +1914,7 @@
   {
     "index": 239,
     "id": "sc240",
-    "type": "THEATER_STAGE",
+    "type": "OVERLAY_BLOCK",
     "durationFrames": 200,
     "startFrame": 49580,
     "midFrame": 49690
@@ -1922,7 +1922,7 @@
   {
     "index": 240,
     "id": "sc241",
-    "type": "INTRO_CARD",
+    "type": "BROWSER_STEP",
     "durationFrames": 200,
     "startFrame": 49780,
     "midFrame": 49890
@@ -1930,7 +1930,7 @@
   {
     "index": 241,
     "id": "sc242",
-    "type": "REPO_CTA",
+    "type": "RECORDED_STEP",
     "durationFrames": 200,
     "startFrame": 49980,
     "midFrame": 50090
@@ -1938,7 +1938,7 @@
   {
     "index": 242,
     "id": "sc243",
-    "type": "AUTO_RUN",
+    "type": "CODE_RUN",
     "durationFrames": 200,
     "startFrame": 50180,
     "midFrame": 50290
@@ -1946,7 +1946,7 @@
   {
     "index": 243,
     "id": "sc244",
-    "type": "COMPONENT_LAB",
+    "type": "QUIZ_CARD",
     "durationFrames": 200,
     "startFrame": 50380,
     "midFrame": 50490
@@ -1954,7 +1954,7 @@
   {
     "index": 244,
     "id": "sc245",
-    "type": "BEAT_BOARD",
+    "type": "THEATER_STAGE",
     "durationFrames": 200,
     "startFrame": 50580,
     "midFrame": 50690
@@ -1962,7 +1962,7 @@
   {
     "index": 245,
     "id": "sc246",
-    "type": "PRODUCTION_GRIND",
+    "type": "INTRO_CARD",
     "durationFrames": 200,
     "startFrame": 50780,
     "midFrame": 50890
@@ -1970,7 +1970,7 @@
   {
     "index": 246,
     "id": "sc247",
-    "type": "SCENE_FORGE",
+    "type": "REPO_CTA",
     "durationFrames": 200,
     "startFrame": 50980,
     "midFrame": 51090
@@ -1978,7 +1978,7 @@
   {
     "index": 247,
     "id": "sc248",
-    "type": "VIDEO_PLAYER",
+    "type": "AUTO_RUN",
     "durationFrames": 200,
     "startFrame": 51180,
     "midFrame": 51290
@@ -1986,7 +1986,7 @@
   {
     "index": 248,
     "id": "sc249",
-    "type": "CHAT_TRIO",
+    "type": "COMPONENT_LAB",
     "durationFrames": 200,
     "startFrame": 51380,
     "midFrame": 51490
@@ -1994,7 +1994,7 @@
   {
     "index": 249,
     "id": "sc250",
-    "type": "PROMPT_HANDOUT",
+    "type": "BEAT_BOARD",
     "durationFrames": 200,
     "startFrame": 51580,
     "midFrame": 51690
@@ -2002,7 +2002,7 @@
   {
     "index": 250,
     "id": "sc251",
-    "type": "APP_WINDOW",
+    "type": "PRODUCTION_GRIND",
     "durationFrames": 200,
     "startFrame": 51780,
     "midFrame": 51890
@@ -2010,7 +2010,7 @@
   {
     "index": 251,
     "id": "sc252",
-    "type": "CHECK_SWEEP",
+    "type": "SCENE_FORGE",
     "durationFrames": 200,
     "startFrame": 51980,
     "midFrame": 52090
@@ -2018,7 +2018,7 @@
   {
     "index": 252,
     "id": "sc253",
-    "type": "PROMPT_HANDOFF",
+    "type": "VIDEO_PLAYER",
     "durationFrames": 200,
     "startFrame": 52180,
     "midFrame": 52290
@@ -2026,7 +2026,7 @@
   {
     "index": 253,
     "id": "sc254",
-    "type": "TOPIC_INTAKE",
+    "type": "CHAT_TRIO",
     "durationFrames": 200,
     "startFrame": 52380,
     "midFrame": 52490
@@ -2034,7 +2034,7 @@
   {
     "index": 254,
     "id": "sc255",
-    "type": "PIPELINE_GATE",
+    "type": "PROMPT_HANDOUT",
     "durationFrames": 200,
     "startFrame": 52580,
     "midFrame": 52690
@@ -2042,7 +2042,7 @@
   {
     "index": 255,
     "id": "sc256",
-    "type": "ASPECT_TWIN",
+    "type": "APP_WINDOW",
     "durationFrames": 200,
     "startFrame": 52780,
     "midFrame": 52890
@@ -2050,7 +2050,7 @@
   {
     "index": 256,
     "id": "sc257",
-    "type": "RESKIN_CAROUSEL",
+    "type": "CHECK_SWEEP",
     "durationFrames": 200,
     "startFrame": 52980,
     "midFrame": 53090
@@ -2058,7 +2058,7 @@
   {
     "index": 257,
     "id": "sc258",
-    "type": "WORD_ANCHOR_RAIL",
+    "type": "PROMPT_HANDOFF",
     "durationFrames": 200,
     "startFrame": 53180,
     "midFrame": 53290
@@ -2066,7 +2066,7 @@
   {
     "index": 258,
     "id": "sc259",
-    "type": "BUDGET_METER_ROW",
+    "type": "TOPIC_INTAKE",
     "durationFrames": 200,
     "startFrame": 53380,
     "midFrame": 53490
@@ -2074,7 +2074,7 @@
   {
     "index": 259,
     "id": "sc260",
-    "type": "LAB_ASSEMBLY",
+    "type": "PIPELINE_GATE",
     "durationFrames": 200,
     "startFrame": 53580,
     "midFrame": 53690
@@ -2082,7 +2082,7 @@
   {
     "index": 260,
     "id": "sc261",
-    "type": "CAST_BOARD",
+    "type": "ASPECT_TWIN",
     "durationFrames": 200,
     "startFrame": 53780,
     "midFrame": 53890
@@ -2090,7 +2090,7 @@
   {
     "index": 261,
     "id": "sc262",
-    "type": "SPEC_TO_FRAME",
+    "type": "RESKIN_CAROUSEL",
     "durationFrames": 200,
     "startFrame": 53980,
     "midFrame": 54090
@@ -2098,7 +2098,7 @@
   {
     "index": 262,
     "id": "sc263",
-    "type": "BATCH_SWEEP",
+    "type": "WORD_ANCHOR_RAIL",
     "durationFrames": 200,
     "startFrame": 54180,
     "midFrame": 54290
@@ -2106,7 +2106,7 @@
   {
     "index": 263,
     "id": "sc264",
-    "type": "PIPELINE_GANTT",
+    "type": "BUDGET_METER_ROW",
     "durationFrames": 200,
     "startFrame": 54380,
     "midFrame": 54490
@@ -2114,7 +2114,7 @@
   {
     "index": 264,
     "id": "sc265",
-    "type": "STICKY_NOTE",
+    "type": "LAB_ASSEMBLY",
     "durationFrames": 200,
     "startFrame": 54580,
     "midFrame": 54690
@@ -2122,1003 +2122,1099 @@
   {
     "index": 265,
     "id": "sc266",
-    "type": "STICKY_NOTE",
-    "durationFrames": 220,
+    "type": "CAST_BOARD",
+    "durationFrames": 200,
     "startFrame": 54780,
-    "midFrame": 54901
+    "midFrame": 54890
   },
   {
     "index": 266,
     "id": "sc267",
-    "type": "TITLE_CARD",
-    "durationFrames": 150,
-    "startFrame": 55000,
-    "midFrame": 55082
+    "type": "SPEC_TO_FRAME",
+    "durationFrames": 200,
+    "startFrame": 54980,
+    "midFrame": 55090
   },
   {
     "index": 267,
     "id": "sc268",
-    "type": "TRADEOFF_SCALE",
+    "type": "BATCH_SWEEP",
     "durationFrames": 200,
-    "startFrame": 55150,
-    "midFrame": 55260
+    "startFrame": 55180,
+    "midFrame": 55290
   },
   {
     "index": 268,
     "id": "sc269",
-    "type": "KINETIC_TEXT",
-    "durationFrames": 150,
-    "startFrame": 55350,
-    "midFrame": 55432
+    "type": "PIPELINE_GANTT",
+    "durationFrames": 200,
+    "startFrame": 55380,
+    "midFrame": 55490
   },
   {
     "index": 269,
     "id": "sc270",
-    "type": "KINETIC_TEXT",
-    "durationFrames": 140,
-    "startFrame": 55500,
-    "midFrame": 55577
+    "type": "STICKY_NOTE",
+    "durationFrames": 200,
+    "startFrame": 55580,
+    "midFrame": 55690
   },
   {
     "index": 270,
     "id": "sc271",
-    "type": "KINETIC_TEXT",
-    "durationFrames": 140,
-    "startFrame": 55640,
-    "midFrame": 55717
-  },
-  {
-    "index": 271,
-    "id": "sc272",
-    "type": "DIAGRAM",
+    "type": "STICKY_NOTE",
     "durationFrames": 220,
     "startFrame": 55780,
     "midFrame": 55901
   },
   {
+    "index": 271,
+    "id": "sc272",
+    "type": "TITLE_CARD",
+    "durationFrames": 150,
+    "startFrame": 56000,
+    "midFrame": 56082
+  },
+  {
     "index": 272,
     "id": "sc273",
-    "type": "CONCEPT_DIAGRAM",
-    "durationFrames": 180,
-    "startFrame": 56000,
-    "midFrame": 56099
+    "type": "TRADEOFF_SCALE",
+    "durationFrames": 200,
+    "startFrame": 56150,
+    "midFrame": 56260
   },
   {
     "index": 273,
     "id": "sc274",
-    "type": "BITS",
-    "durationFrames": 200,
-    "startFrame": 56180,
-    "midFrame": 56290
+    "type": "KINETIC_TEXT",
+    "durationFrames": 150,
+    "startFrame": 56350,
+    "midFrame": 56432
   },
   {
     "index": 274,
     "id": "sc275",
-    "type": "MEMORY",
-    "durationFrames": 200,
-    "startFrame": 56380,
-    "midFrame": 56490
+    "type": "KINETIC_TEXT",
+    "durationFrames": 140,
+    "startFrame": 56500,
+    "midFrame": 56577
   },
   {
     "index": 275,
     "id": "sc276",
-    "type": "PACKET",
-    "durationFrames": 240,
-    "startFrame": 56580,
-    "midFrame": 56712
+    "type": "KINETIC_TEXT",
+    "durationFrames": 140,
+    "startFrame": 56640,
+    "midFrame": 56717
   },
   {
     "index": 276,
     "id": "sc277",
-    "type": "PIPELINE",
-    "durationFrames": 210,
-    "startFrame": 56820,
-    "midFrame": 56935
+    "type": "DIAGRAM",
+    "durationFrames": 220,
+    "startFrame": 56780,
+    "midFrame": 56901
   },
   {
     "index": 277,
     "id": "sc278",
-    "type": "PIPELINE",
-    "variant": "ci",
-    "durationFrames": 200,
-    "startFrame": 57030,
-    "midFrame": 57140
+    "type": "CONCEPT_DIAGRAM",
+    "durationFrames": 180,
+    "startFrame": 57000,
+    "midFrame": 57099
   },
   {
     "index": 278,
     "id": "sc279",
-    "type": "PIPELINE",
-    "variant": "boot",
+    "type": "BITS",
     "durationFrames": 200,
-    "startFrame": 57230,
-    "midFrame": 57340
+    "startFrame": 57180,
+    "midFrame": 57290
   },
   {
     "index": 279,
     "id": "sc280",
-    "type": "PIPELINE",
-    "variant": "serverless",
+    "type": "MEMORY",
     "durationFrames": 200,
-    "startFrame": 57430,
-    "midFrame": 57540
+    "startFrame": 57380,
+    "midFrame": 57490
   },
   {
     "index": 280,
     "id": "sc281",
-    "type": "PIPELINE",
-    "variant": "journey",
-    "durationFrames": 200,
-    "startFrame": 57630,
-    "midFrame": 57740
+    "type": "PACKET",
+    "durationFrames": 240,
+    "startFrame": 57580,
+    "midFrame": 57712
   },
   {
     "index": 281,
     "id": "sc282",
-    "type": "LAYERED_STACK",
+    "type": "PIPELINE",
     "durationFrames": 210,
-    "startFrame": 57830,
-    "midFrame": 57945
+    "startFrame": 57820,
+    "midFrame": 57935
   },
   {
     "index": 282,
     "id": "sc283",
-    "type": "GRID_ARRAY",
+    "type": "PIPELINE",
+    "variant": "ci",
     "durationFrames": 200,
-    "startFrame": 58040,
-    "midFrame": 58150
+    "startFrame": 58030,
+    "midFrame": 58140
   },
   {
     "index": 283,
     "id": "sc284",
-    "type": "SPEC_COMPARE",
-    "durationFrames": 210,
-    "startFrame": 58240,
-    "midFrame": 58355
+    "type": "PIPELINE",
+    "variant": "boot",
+    "durationFrames": 200,
+    "startFrame": 58230,
+    "midFrame": 58340
   },
   {
     "index": 284,
     "id": "sc285",
-    "type": "DIE_SHOT",
-    "durationFrames": 210,
-    "startFrame": 58450,
-    "midFrame": 58565
+    "type": "PIPELINE",
+    "variant": "serverless",
+    "durationFrames": 200,
+    "startFrame": 58430,
+    "midFrame": 58540
   },
   {
     "index": 285,
     "id": "sc286",
-    "type": "NEURAL_NET",
+    "type": "PIPELINE",
+    "variant": "journey",
     "durationFrames": 200,
-    "startFrame": 58660,
-    "midFrame": 58770
+    "startFrame": 58630,
+    "midFrame": 58740
   },
   {
     "index": 286,
     "id": "sc287",
-    "type": "DATACENTER",
+    "type": "LAYERED_STACK",
     "durationFrames": 210,
-    "startFrame": 58860,
-    "midFrame": 58975
+    "startFrame": 58830,
+    "midFrame": 58945
   },
   {
     "index": 287,
     "id": "sc288",
-    "type": "DATACENTER",
-    "durationFrames": 210,
-    "startFrame": 59070,
-    "midFrame": 59185
+    "type": "GRID_ARRAY",
+    "durationFrames": 200,
+    "startFrame": 59040,
+    "midFrame": 59150
   },
   {
     "index": 288,
     "id": "sc289",
-    "type": "TRANSFORMER_BLOCK",
-    "durationFrames": 210,
-    "startFrame": 59280,
-    "midFrame": 59395
+    "type": "RATE_SHEET",
+    "durationFrames": 240,
+    "startFrame": 59240,
+    "midFrame": 59372
   },
   {
     "index": 289,
     "id": "sc290",
-    "type": "CACHE_PYRAMID",
-    "durationFrames": 200,
-    "startFrame": 59490,
-    "midFrame": 59600
+    "type": "SPEC_COMPARE",
+    "durationFrames": 210,
+    "startFrame": 59480,
+    "midFrame": 59595
   },
   {
     "index": 290,
     "id": "sc291",
-    "type": "CALL_STACK",
-    "durationFrames": 200,
+    "type": "DIE_SHOT",
+    "durationFrames": 210,
     "startFrame": 59690,
-    "midFrame": 59800
+    "midFrame": 59805
   },
   {
     "index": 291,
     "id": "sc292",
-    "type": "TOKENIZER",
-    "durationFrames": 210,
-    "startFrame": 59890,
-    "midFrame": 60005
+    "type": "NEURAL_NET",
+    "durationFrames": 200,
+    "startFrame": 59900,
+    "midFrame": 60010
   },
   {
     "index": 292,
     "id": "sc293",
-    "type": "FILE_TREE",
-    "durationFrames": 200,
+    "type": "DATACENTER",
+    "durationFrames": 210,
     "startFrame": 60100,
-    "midFrame": 60210
+    "midFrame": 60215
   },
   {
     "index": 293,
     "id": "sc294",
-    "type": "DATABASE_TABLE",
+    "type": "DATACENTER",
     "durationFrames": 210,
-    "startFrame": 60300,
-    "midFrame": 60415
+    "startFrame": 60310,
+    "midFrame": 60425
   },
   {
     "index": 294,
     "id": "sc295",
-    "type": "GIT_BRANCH",
+    "type": "TRANSFORMER_BLOCK",
     "durationFrames": 210,
-    "startFrame": 60510,
-    "midFrame": 60625
+    "startFrame": 60520,
+    "midFrame": 60635
   },
   {
     "index": 295,
     "id": "sc296",
-    "type": "STATE_MACHINE",
+    "type": "CACHE_PYRAMID",
     "durationFrames": 200,
-    "startFrame": 60720,
-    "midFrame": 60830
+    "startFrame": 60730,
+    "midFrame": 60840
   },
   {
     "index": 296,
     "id": "sc297",
-    "type": "EMBEDDING_SPACE",
+    "type": "CALL_STACK",
     "durationFrames": 200,
-    "startFrame": 60920,
-    "midFrame": 61030
+    "startFrame": 60930,
+    "midFrame": 61040
   },
   {
     "index": 297,
     "id": "sc298",
-    "type": "QUEUE",
-    "durationFrames": 190,
-    "startFrame": 61120,
-    "midFrame": 61224
+    "type": "TOKENIZER",
+    "durationFrames": 210,
+    "startFrame": 61130,
+    "midFrame": 61245
   },
   {
     "index": 298,
     "id": "sc299",
-    "type": "API_REQUEST_RESPONSE",
+    "type": "FILE_TREE",
     "durationFrames": 200,
-    "startFrame": 61310,
-    "midFrame": 61420
+    "startFrame": 61340,
+    "midFrame": 61450
   },
   {
     "index": 299,
     "id": "sc300",
-    "type": "BOOLEAN_LOGIC_GATES",
-    "durationFrames": 200,
-    "startFrame": 61510,
-    "midFrame": 61620
+    "type": "DATABASE_TABLE",
+    "durationFrames": 210,
+    "startFrame": 61540,
+    "midFrame": 61655
   },
   {
     "index": 300,
     "id": "sc301",
-    "type": "HASH_FUNCTION",
-    "durationFrames": 200,
-    "startFrame": 61710,
-    "midFrame": 61820
+    "type": "GIT_BRANCH",
+    "durationFrames": 210,
+    "startFrame": 61750,
+    "midFrame": 61865
   },
   {
     "index": 301,
     "id": "sc302",
-    "type": "SORTING_VISUAL",
+    "type": "STATE_MACHINE",
     "durationFrames": 200,
-    "startFrame": 61910,
-    "midFrame": 62020
+    "startFrame": 61960,
+    "midFrame": 62070
   },
   {
     "index": 302,
     "id": "sc303",
-    "type": "CLOCK_SIGNAL",
+    "type": "EMBEDDING_SPACE",
     "durationFrames": 200,
-    "startFrame": 62110,
-    "midFrame": 62220
+    "startFrame": 62160,
+    "midFrame": 62270
   },
   {
     "index": 303,
     "id": "sc304",
-    "type": "GPU_CLUSTER",
-    "durationFrames": 200,
-    "startFrame": 62310,
-    "midFrame": 62420
+    "type": "QUEUE",
+    "durationFrames": 190,
+    "startFrame": 62360,
+    "midFrame": 62464
   },
   {
     "index": 304,
     "id": "sc305",
-    "type": "ZOOM_SCALE",
-    "durationFrames": 210,
-    "startFrame": 62510,
-    "midFrame": 62625
+    "type": "API_REQUEST_RESPONSE",
+    "durationFrames": 200,
+    "startFrame": 62550,
+    "midFrame": 62660
   },
   {
     "index": 305,
     "id": "sc306",
-    "type": "ENCRYPTION",
-    "variant": "encrypt",
+    "type": "BOOLEAN_LOGIC_GATES",
     "durationFrames": 200,
-    "startFrame": 62720,
-    "midFrame": 62830
+    "startFrame": 62750,
+    "midFrame": 62860
   },
   {
     "index": 306,
     "id": "sc307",
-    "type": "POINTER_DIAGRAM",
+    "type": "HASH_FUNCTION",
     "durationFrames": 200,
-    "startFrame": 62920,
-    "midFrame": 63030
+    "startFrame": 62950,
+    "midFrame": 63060
   },
   {
     "index": 307,
     "id": "sc308",
-    "type": "NUMBER_BASE",
+    "type": "SORTING_VISUAL",
     "durationFrames": 200,
-    "startFrame": 63120,
-    "midFrame": 63230
+    "startFrame": 63150,
+    "midFrame": 63260
   },
   {
     "index": 308,
     "id": "sc309",
-    "type": "CODE_EDITOR",
+    "type": "CLOCK_SIGNAL",
     "durationFrames": 200,
-    "startFrame": 63320,
-    "midFrame": 63430
+    "startFrame": 63350,
+    "midFrame": 63460
   },
   {
     "index": 309,
     "id": "sc310",
-    "type": "CODE_EDITOR",
-    "variant": "split",
+    "type": "GPU_CLUSTER",
     "durationFrames": 200,
-    "startFrame": 63520,
-    "midFrame": 63630
+    "startFrame": 63550,
+    "midFrame": 63660
   },
   {
     "index": 310,
     "id": "sc311",
-    "type": "TERMINAL_SESSION",
-    "durationFrames": 200,
-    "startFrame": 63720,
-    "midFrame": 63830
+    "type": "ZOOM_SCALE",
+    "durationFrames": 210,
+    "startFrame": 63750,
+    "midFrame": 63865
   },
   {
     "index": 311,
     "id": "sc312",
-    "type": "LOG_STREAM",
+    "type": "ENCRYPTION",
+    "variant": "encrypt",
     "durationFrames": 200,
-    "startFrame": 63920,
-    "midFrame": 64030
+    "startFrame": 63960,
+    "midFrame": 64070
   },
   {
     "index": 312,
     "id": "sc313",
-    "type": "CODE_DIFF",
+    "type": "POINTER_DIAGRAM",
     "durationFrames": 200,
-    "startFrame": 64120,
-    "midFrame": 64230
+    "startFrame": 64160,
+    "midFrame": 64270
   },
   {
     "index": 313,
     "id": "sc314",
-    "type": "ERROR_TRACE",
+    "type": "NUMBER_BASE",
     "durationFrames": 200,
-    "startFrame": 64320,
-    "midFrame": 64430
+    "startFrame": 64360,
+    "midFrame": 64470
   },
   {
     "index": 314,
     "id": "sc315",
-    "type": "WINDOW_FRAME",
-    "variant": "browser",
+    "type": "CODE_EDITOR",
     "durationFrames": 200,
-    "startFrame": 64520,
-    "midFrame": 64630
+    "startFrame": 64560,
+    "midFrame": 64670
   },
   {
     "index": 315,
     "id": "sc316",
-    "type": "WINDOW_FRAME",
-    "variant": "mac",
+    "type": "CODE_EDITOR",
+    "variant": "split",
     "durationFrames": 200,
-    "startFrame": 64720,
-    "midFrame": 64830
+    "startFrame": 64760,
+    "midFrame": 64870
   },
   {
     "index": 316,
     "id": "sc317",
-    "type": "AUTOMATION_RUN",
-    "durationFrames": 210,
-    "startFrame": 64920,
-    "midFrame": 65035
+    "type": "TERMINAL_SESSION",
+    "durationFrames": 200,
+    "startFrame": 64960,
+    "midFrame": 65070
   },
   {
     "index": 317,
     "id": "sc318",
-    "type": "DOM_INSPECT",
+    "type": "LOG_STREAM",
     "durationFrames": 200,
-    "startFrame": 65130,
-    "midFrame": 65240
+    "startFrame": 65160,
+    "midFrame": 65270
   },
   {
     "index": 318,
     "id": "sc319",
-    "type": "NETWORK_WATERFALL",
+    "type": "CODE_DIFF",
     "durationFrames": 200,
-    "startFrame": 65330,
-    "midFrame": 65440
+    "startFrame": 65360,
+    "midFrame": 65470
   },
   {
     "index": 319,
     "id": "sc320",
-    "type": "DEVICE_FRAME",
+    "type": "ERROR_TRACE",
     "durationFrames": 200,
-    "startFrame": 65530,
-    "midFrame": 65640
+    "startFrame": 65560,
+    "midFrame": 65670
   },
   {
     "index": 320,
     "id": "sc321",
-    "type": "CLOUD_ARCH",
-    "durationFrames": 220,
-    "startFrame": 65730,
-    "midFrame": 65851
+    "type": "WINDOW_FRAME",
+    "variant": "browser",
+    "durationFrames": 200,
+    "startFrame": 65760,
+    "midFrame": 65870
   },
   {
     "index": 321,
     "id": "sc322",
-    "type": "K8S_CLUSTER",
-    "variant": "rollout",
-    "durationFrames": 220,
-    "startFrame": 65950,
-    "midFrame": 66071
+    "type": "WINDOW_FRAME",
+    "variant": "mac",
+    "durationFrames": 200,
+    "startFrame": 65960,
+    "midFrame": 66070
   },
   {
     "index": 322,
     "id": "sc323",
-    "type": "COST_METER",
-    "durationFrames": 190,
-    "startFrame": 66170,
-    "midFrame": 66274
+    "type": "AUTOMATION_RUN",
+    "durationFrames": 210,
+    "startFrame": 66160,
+    "midFrame": 66275
   },
   {
     "index": 323,
     "id": "sc324",
-    "type": "SLO_GAUGE",
+    "type": "DOM_INSPECT",
     "durationFrames": 200,
-    "startFrame": 66360,
-    "midFrame": 66470
+    "startFrame": 66370,
+    "midFrame": 66480
   },
   {
     "index": 324,
     "id": "sc325",
-    "type": "IAC_PLAN",
-    "durationFrames": 210,
-    "startFrame": 66560,
-    "midFrame": 66675
+    "type": "NETWORK_WATERFALL",
+    "durationFrames": 200,
+    "startFrame": 66570,
+    "midFrame": 66680
   },
   {
     "index": 325,
     "id": "sc326",
-    "type": "ERD",
-    "durationFrames": 210,
+    "type": "DEVICE_FRAME",
+    "durationFrames": 200,
     "startFrame": 66770,
-    "midFrame": 66885
+    "midFrame": 66880
   },
   {
     "index": 326,
     "id": "sc327",
-    "type": "LAYERED_STACK",
-    "variant": "imageLayers",
-    "durationFrames": 210,
-    "startFrame": 66980,
-    "midFrame": 67095
+    "type": "CLOUD_ARCH",
+    "durationFrames": 220,
+    "startFrame": 66970,
+    "midFrame": 67091
   },
   {
     "index": 327,
     "id": "sc328",
-    "type": "PACKET",
-    "variant": "container",
-    "durationFrames": 210,
+    "type": "K8S_CLUSTER",
+    "variant": "rollout",
+    "durationFrames": 220,
     "startFrame": 67190,
-    "midFrame": 67305
+    "midFrame": 67311
   },
   {
     "index": 328,
     "id": "sc329",
-    "type": "DIAGRAM",
-    "variant": "mesh",
-    "durationFrames": 210,
-    "startFrame": 67400,
-    "midFrame": 67515
+    "type": "COST_METER",
+    "durationFrames": 190,
+    "startFrame": 67410,
+    "midFrame": 67514
   },
   {
     "index": 329,
     "id": "sc330",
-    "type": "PROCESS_TABLE",
-    "durationFrames": 210,
-    "startFrame": 67610,
-    "midFrame": 67725
+    "type": "SLO_GAUGE",
+    "durationFrames": 200,
+    "startFrame": 67600,
+    "midFrame": 67710
   },
   {
     "index": 330,
     "id": "sc331",
-    "type": "KERNEL_BOUNDARY",
-    "durationFrames": 220,
-    "startFrame": 67820,
-    "midFrame": 67941
+    "type": "IAC_PLAN",
+    "durationFrames": 210,
+    "startFrame": 67800,
+    "midFrame": 67915
   },
   {
     "index": 331,
     "id": "sc332",
-    "type": "BITS",
-    "variant": "permissions",
+    "type": "ERD",
     "durationFrames": 210,
-    "startFrame": 68040,
-    "midFrame": 68155
+    "startFrame": 68010,
+    "midFrame": 68125
   },
   {
     "index": 332,
     "id": "sc333",
-    "type": "TEST_RUNNER",
-    "durationFrames": 220,
-    "startFrame": 68250,
-    "midFrame": 68371
+    "type": "LAYERED_STACK",
+    "variant": "imageLayers",
+    "durationFrames": 210,
+    "startFrame": 68220,
+    "midFrame": 68335
   },
   {
     "index": 333,
     "id": "sc334",
-    "type": "TEST_MATRIX",
+    "type": "PACKET",
+    "variant": "container",
     "durationFrames": 210,
-    "startFrame": 68470,
-    "midFrame": 68585
+    "startFrame": 68430,
+    "midFrame": 68545
   },
   {
     "index": 334,
     "id": "sc335",
-    "type": "CACHE_PYRAMID",
-    "variant": "pyramid",
+    "type": "DIAGRAM",
+    "variant": "mesh",
     "durationFrames": 210,
-    "startFrame": 68680,
-    "midFrame": 68795
+    "startFrame": 68640,
+    "midFrame": 68755
   },
   {
     "index": 335,
     "id": "sc336",
-    "type": "STATE_MACHINE",
-    "variant": "lifecycle",
-    "durationFrames": 230,
-    "startFrame": 68890,
-    "midFrame": 69016
+    "type": "PROCESS_TABLE",
+    "durationFrames": 210,
+    "startFrame": 68850,
+    "midFrame": 68965
   },
   {
     "index": 336,
     "id": "sc337",
-    "type": "CONTEXT_METER",
-    "durationFrames": 210,
-    "startFrame": 69120,
-    "midFrame": 69235
+    "type": "KERNEL_BOUNDARY",
+    "durationFrames": 220,
+    "startFrame": 69060,
+    "midFrame": 69181
   },
   {
     "index": 337,
     "id": "sc338",
-    "type": "AGENT_HARNESS",
-    "durationFrames": 230,
-    "startFrame": 69330,
-    "midFrame": 69456
+    "type": "BITS",
+    "variant": "permissions",
+    "durationFrames": 210,
+    "startFrame": 69280,
+    "midFrame": 69395
   },
   {
     "index": 338,
     "id": "sc339",
-    "type": "KNOWLEDGE_GRAPH",
+    "type": "TEST_RUNNER",
     "durationFrames": 220,
-    "startFrame": 69560,
-    "midFrame": 69681
+    "startFrame": 69490,
+    "midFrame": 69611
   },
   {
     "index": 339,
     "id": "sc340",
-    "type": "RETRIEVAL_RANK",
-    "durationFrames": 230,
-    "startFrame": 69780,
-    "midFrame": 69906
+    "type": "TEST_MATRIX",
+    "durationFrames": 210,
+    "startFrame": 69710,
+    "midFrame": 69825
   },
   {
     "index": 340,
     "id": "sc341",
-    "type": "MODEL_STAGES",
-    "durationFrames": 220,
-    "startFrame": 70010,
-    "midFrame": 70131
+    "type": "CACHE_PYRAMID",
+    "variant": "pyramid",
+    "durationFrames": 210,
+    "startFrame": 69920,
+    "midFrame": 70035
   },
   {
     "index": 341,
     "id": "sc342",
-    "type": "CONFIDENCE_GATE",
-    "variant": "block",
-    "durationFrames": 200,
-    "startFrame": 70230,
-    "midFrame": 70340
+    "type": "STATE_MACHINE",
+    "variant": "lifecycle",
+    "durationFrames": 230,
+    "startFrame": 70130,
+    "midFrame": 70256
   },
   {
     "index": 342,
     "id": "sc343",
-    "type": "SANDBOX_BOX",
+    "type": "CONTEXT_METER",
     "durationFrames": 210,
-    "startFrame": 70430,
-    "midFrame": 70545
+    "startFrame": 70360,
+    "midFrame": 70475
   },
   {
     "index": 343,
     "id": "sc344",
-    "type": "DRILL_IN",
-    "durationFrames": 240,
-    "startFrame": 70640,
-    "midFrame": 70772
+    "type": "AGENT_HARNESS",
+    "durationFrames": 230,
+    "startFrame": 70570,
+    "midFrame": 70696
   },
   {
     "index": 344,
     "id": "sc345",
-    "type": "EVAL_DASHBOARD",
-    "durationFrames": 210,
-    "startFrame": 70880,
-    "midFrame": 70995
+    "type": "KNOWLEDGE_GRAPH",
+    "durationFrames": 220,
+    "startFrame": 70800,
+    "midFrame": 70921
   },
   {
     "index": 345,
     "id": "sc346",
-    "type": "VIDEO_HERO",
-    "durationFrames": 210,
-    "startFrame": 71090,
-    "midFrame": 71205
+    "type": "RETRIEVAL_RANK",
+    "durationFrames": 230,
+    "startFrame": 71020,
+    "midFrame": 71146
   },
   {
     "index": 346,
     "id": "sc347",
-    "type": "VIDEO_SPOTLIGHT",
-    "durationFrames": 210,
-    "startFrame": 71300,
-    "midFrame": 71415
+    "type": "MODEL_STAGES",
+    "durationFrames": 220,
+    "startFrame": 71250,
+    "midFrame": 71371
   },
   {
     "index": 347,
     "id": "sc348",
-    "type": "MEDIA_CALLOUT",
-    "durationFrames": 210,
-    "startFrame": 71510,
-    "midFrame": 71625
+    "type": "CONFIDENCE_GATE",
+    "variant": "block",
+    "durationFrames": 200,
+    "startFrame": 71470,
+    "midFrame": 71580
   },
   {
     "index": 348,
     "id": "sc349",
-    "type": "MEDIA_COMPARE",
+    "type": "SANDBOX_BOX",
     "durationFrames": 210,
-    "startFrame": 71720,
-    "midFrame": 71835
+    "startFrame": 71670,
+    "midFrame": 71785
   },
   {
     "index": 349,
     "id": "sc350",
-    "type": "MEDIA_STAT_OVERLAY",
-    "durationFrames": 210,
-    "startFrame": 71930,
-    "midFrame": 72045
+    "type": "DRILL_IN",
+    "durationFrames": 240,
+    "startFrame": 71880,
+    "midFrame": 72012
   },
   {
     "index": 350,
     "id": "sc351",
-    "type": "DEVICE_FRAME",
+    "type": "EVAL_DASHBOARD",
     "durationFrames": 210,
-    "startFrame": 72140,
-    "midFrame": 72255
+    "startFrame": 72120,
+    "midFrame": 72235
   },
   {
     "index": 351,
     "id": "sc352",
-    "type": "GALLERY",
+    "type": "VIDEO_HERO",
     "durationFrames": 210,
-    "startFrame": 72350,
-    "midFrame": 72465
+    "startFrame": 72330,
+    "midFrame": 72445
   },
   {
     "index": 352,
     "id": "sc353",
-    "type": "SCREENSHOT_CASCADE",
+    "type": "VIDEO_SPOTLIGHT",
     "durationFrames": 210,
-    "startFrame": 72560,
-    "midFrame": 72675
+    "startFrame": 72540,
+    "midFrame": 72655
   },
   {
     "index": 353,
     "id": "sc354",
-    "type": "FLOATING_QUOTE_PILL",
+    "type": "MEDIA_CALLOUT",
     "durationFrames": 210,
-    "startFrame": 72770,
-    "midFrame": 72885
+    "startFrame": 72750,
+    "midFrame": 72865
   },
   {
     "index": 354,
     "id": "sc355",
-    "type": "OVERLAY_SPLIT_DEFINITIONS",
+    "type": "MEDIA_COMPARE",
     "durationFrames": 210,
-    "startFrame": 72980,
-    "midFrame": 73095
+    "startFrame": 72960,
+    "midFrame": 73075
   },
   {
     "index": 355,
     "id": "sc356",
-    "type": "CYCLE_LOOP",
-    "durationFrames": 220,
-    "startFrame": 73190,
-    "midFrame": 73311
+    "type": "MEDIA_STAT_OVERLAY",
+    "durationFrames": 210,
+    "startFrame": 73170,
+    "midFrame": 73285
   },
   {
     "index": 356,
     "id": "sc357",
-    "type": "STEP_STACK_OVERLAY",
+    "type": "DEVICE_FRAME",
     "durationFrames": 210,
-    "startFrame": 73410,
-    "midFrame": 73525
+    "startFrame": 73380,
+    "midFrame": 73495
   },
   {
     "index": 357,
     "id": "sc358",
-    "type": "TITLE_BANNER_FOCUS",
+    "type": "GALLERY",
     "durationFrames": 210,
-    "startFrame": 73620,
-    "midFrame": 73735
+    "startFrame": 73590,
+    "midFrame": 73705
   },
   {
     "index": 358,
     "id": "sc359",
-    "type": "CHANNEL_CARD",
-    "durationFrames": 200,
-    "startFrame": 73830,
-    "midFrame": 73940
+    "type": "SCREENSHOT_CASCADE",
+    "durationFrames": 210,
+    "startFrame": 73800,
+    "midFrame": 73915
   },
   {
     "index": 359,
     "id": "sc360",
-    "type": "TALKING_POINTS",
+    "type": "FLOATING_QUOTE_PILL",
     "durationFrames": 210,
-    "startFrame": 74030,
-    "midFrame": 74145
+    "startFrame": 74010,
+    "midFrame": 74125
   },
   {
     "index": 360,
     "id": "sc361",
-    "type": "SLIDE_BULLETS_PIP",
-    "durationFrames": 220,
-    "startFrame": 74240,
-    "midFrame": 74361
+    "type": "OVERLAY_SPLIT_DEFINITIONS",
+    "durationFrames": 210,
+    "startFrame": 74220,
+    "midFrame": 74335
   },
   {
     "index": 361,
     "id": "sc362",
-    "type": "CAPTION_KINETIC_OVERLAY",
-    "durationFrames": 200,
-    "startFrame": 74460,
-    "midFrame": 74570
+    "type": "CYCLE_LOOP",
+    "durationFrames": 220,
+    "startFrame": 74430,
+    "midFrame": 74551
   },
   {
     "index": 362,
     "id": "sc363",
-    "type": "PHOTO_TIMELINE",
-    "durationFrames": 220,
-    "startFrame": 74660,
-    "midFrame": 74781
+    "type": "STEP_STACK_OVERLAY",
+    "durationFrames": 210,
+    "startFrame": 74650,
+    "midFrame": 74765
   },
   {
     "index": 363,
     "id": "sc364",
-    "type": "DIAGRAM",
-    "variant": "agentMesh",
+    "type": "TITLE_BANNER_FOCUS",
     "durationFrames": 210,
-    "startFrame": 74880,
-    "midFrame": 74995
+    "startFrame": 74860,
+    "midFrame": 74975
   },
   {
     "index": 364,
     "id": "sc365",
-    "type": "LINE_CHART",
-    "durationFrames": 210,
-    "startFrame": 75090,
-    "midFrame": 75205
+    "type": "CHANNEL_CARD",
+    "durationFrames": 200,
+    "startFrame": 75070,
+    "midFrame": 75180
   },
   {
     "index": 365,
     "id": "sc366",
-    "type": "DIAGRAM",
-    "variant": "auth",
-    "durationFrames": 220,
-    "startFrame": 75300,
-    "midFrame": 75421
+    "type": "TALKING_POINTS",
+    "durationFrames": 210,
+    "startFrame": 75270,
+    "midFrame": 75385
   },
   {
     "index": 366,
     "id": "sc367",
-    "type": "REVEAL",
-    "durationFrames": 200,
-    "startFrame": 75520,
-    "midFrame": 75630
+    "type": "SLIDE_BULLETS_PIP",
+    "durationFrames": 220,
+    "startFrame": 75480,
+    "midFrame": 75601
   },
   {
     "index": 367,
     "id": "sc368",
-    "type": "LIST_BUILD",
-    "durationFrames": 220,
-    "startFrame": 75720,
-    "midFrame": 75841
+    "type": "CAPTION_KINETIC_OVERLAY",
+    "durationFrames": 200,
+    "startFrame": 75700,
+    "midFrame": 75810
   },
   {
     "index": 368,
     "id": "sc369",
-    "type": "STAT_CALLOUT",
-    "durationFrames": 150,
-    "startFrame": 75940,
-    "midFrame": 76022
+    "type": "PHOTO_TIMELINE",
+    "durationFrames": 220,
+    "startFrame": 75900,
+    "midFrame": 76021
   },
   {
     "index": 369,
     "id": "sc370",
-    "type": "CAROUSEL",
-    "durationFrames": 200,
-    "startFrame": 76090,
-    "midFrame": 76200
+    "type": "DIAGRAM",
+    "variant": "agentMesh",
+    "durationFrames": 210,
+    "startFrame": 76120,
+    "midFrame": 76235
   },
   {
     "index": 370,
     "id": "sc371",
-    "type": "ACTIVITY_CARD",
-    "durationFrames": 180,
-    "startFrame": 76290,
-    "midFrame": 76389
+    "type": "LINE_CHART",
+    "durationFrames": 210,
+    "startFrame": 76330,
+    "midFrame": 76445
   },
   {
     "index": 371,
     "id": "sc372",
-    "type": "LOCATION_MAP",
+    "type": "DIAGRAM",
+    "variant": "auth",
     "durationFrames": 220,
-    "startFrame": 76470,
-    "midFrame": 76591
+    "startFrame": 76540,
+    "midFrame": 76661
   },
   {
     "index": 372,
     "id": "sc373",
-    "type": "SOUND_WAVE",
-    "durationFrames": 150,
-    "startFrame": 76690,
-    "midFrame": 76772
+    "type": "REVEAL",
+    "durationFrames": 200,
+    "startFrame": 76760,
+    "midFrame": 76870
   },
   {
     "index": 373,
     "id": "sc374",
-    "type": "LOGO_REVEAL",
-    "durationFrames": 170,
-    "startFrame": 76840,
-    "midFrame": 76933
+    "type": "LIST_BUILD",
+    "durationFrames": 220,
+    "startFrame": 76960,
+    "midFrame": 77081
   },
   {
     "index": 374,
     "id": "sc375",
-    "type": "PHOTO",
-    "durationFrames": 180,
-    "startFrame": 77010,
-    "midFrame": 77109
+    "type": "STAT_CALLOUT",
+    "durationFrames": 150,
+    "startFrame": 77180,
+    "midFrame": 77262
   },
   {
     "index": 375,
     "id": "sc376",
-    "type": "SUBSCRIBE_REMINDER",
-    "durationFrames": 150,
-    "startFrame": 77190,
-    "midFrame": 77272
+    "type": "CAROUSEL",
+    "durationFrames": 200,
+    "startFrame": 77330,
+    "midFrame": 77440
   },
   {
     "index": 376,
     "id": "sc377",
-    "type": "CREDITS_ROLL",
-    "durationFrames": 200,
-    "startFrame": 77340,
-    "midFrame": 77450
+    "type": "ACTIVITY_CARD",
+    "durationFrames": 180,
+    "startFrame": 77530,
+    "midFrame": 77629
   },
   {
     "index": 377,
     "id": "sc378",
-    "type": "LOWER_THIRD",
-    "durationFrames": 186,
-    "startFrame": 77540,
-    "midFrame": 77642
+    "type": "LOCATION_MAP",
+    "durationFrames": 220,
+    "startFrame": 77710,
+    "midFrame": 77831
   },
   {
     "index": 378,
     "id": "sc379",
-    "type": "CHAPTER",
-    "durationFrames": 180,
-    "startFrame": 77726,
-    "midFrame": 77825
+    "type": "SOUND_WAVE",
+    "durationFrames": 150,
+    "startFrame": 77930,
+    "midFrame": 78012
   },
   {
     "index": 379,
     "id": "sc380",
-    "type": "NOTIFICATION",
-    "durationFrames": 190,
-    "startFrame": 77906,
-    "midFrame": 78010
+    "type": "LOGO_REVEAL",
+    "durationFrames": 170,
+    "startFrame": 78080,
+    "midFrame": 78173
   },
   {
     "index": 380,
     "id": "sc381",
-    "type": "COUNTDOWN",
-    "durationFrames": 190,
-    "startFrame": 78096,
-    "midFrame": 78200
+    "type": "PHOTO",
+    "durationFrames": 180,
+    "startFrame": 78250,
+    "midFrame": 78349
   },
   {
     "index": 381,
     "id": "sc382",
-    "type": "FLIP_CARD",
-    "durationFrames": 210,
-    "startFrame": 78286,
-    "midFrame": 78401
+    "type": "SUBSCRIBE_REMINDER",
+    "durationFrames": 150,
+    "startFrame": 78430,
+    "midFrame": 78512
   },
   {
     "index": 382,
     "id": "sc383",
-    "type": "GALLERY",
-    "durationFrames": 220,
-    "startFrame": 78496,
-    "midFrame": 78617
+    "type": "CREDITS_ROLL",
+    "durationFrames": 200,
+    "startFrame": 78580,
+    "midFrame": 78690
   },
   {
     "index": 383,
     "id": "sc384",
-    "type": "COMPARISON_SLIDER",
-    "durationFrames": 200,
-    "startFrame": 78716,
-    "midFrame": 78826
+    "type": "CHAPTER",
+    "durationFrames": 150,
+    "startFrame": 78780,
+    "midFrame": 78862
   },
   {
     "index": 384,
     "id": "sc385",
-    "type": "PHOTO_STACK",
-    "durationFrames": 200,
-    "startFrame": 78916,
-    "midFrame": 79026
+    "type": "CHAPTER",
+    "durationFrames": 150,
+    "startFrame": 78930,
+    "midFrame": 79012
   },
   {
     "index": 385,
     "id": "sc386",
-    "type": "IMAGE_SCENE",
-    "durationFrames": 180,
-    "startFrame": 79116,
-    "midFrame": 79215
+    "type": "CHAPTER",
+    "durationFrames": 150,
+    "startFrame": 79080,
+    "midFrame": 79162
   },
   {
     "index": 386,
     "id": "sc387",
-    "type": "IMAGE_SCENE",
-    "durationFrames": 180,
-    "startFrame": 79296,
-    "midFrame": 79395
+    "type": "CHAPTER",
+    "durationFrames": 150,
+    "startFrame": 79230,
+    "midFrame": 79312
   },
   {
     "index": 387,
     "id": "sc388",
+    "type": "CHAPTER",
+    "durationFrames": 150,
+    "startFrame": 79380,
+    "midFrame": 79462
+  },
+  {
+    "index": 388,
+    "id": "sc389",
+    "type": "CHAPTER",
+    "durationFrames": 150,
+    "startFrame": 79530,
+    "midFrame": 79612
+  },
+  {
+    "index": 389,
+    "id": "sc390",
+    "type": "LOWER_THIRD",
+    "durationFrames": 186,
+    "startFrame": 79680,
+    "midFrame": 79782
+  },
+  {
+    "index": 390,
+    "id": "sc391",
+    "type": "CHAPTER",
+    "durationFrames": 180,
+    "startFrame": 79866,
+    "midFrame": 79965
+  },
+  {
+    "index": 391,
+    "id": "sc392",
+    "type": "NOTIFICATION",
+    "durationFrames": 190,
+    "startFrame": 80046,
+    "midFrame": 80150
+  },
+  {
+    "index": 392,
+    "id": "sc393",
+    "type": "COUNTDOWN",
+    "durationFrames": 190,
+    "startFrame": 80236,
+    "midFrame": 80340
+  },
+  {
+    "index": 393,
+    "id": "sc394",
+    "type": "FLIP_CARD",
+    "durationFrames": 210,
+    "startFrame": 80426,
+    "midFrame": 80541
+  },
+  {
+    "index": 394,
+    "id": "sc395",
+    "type": "GALLERY",
+    "durationFrames": 220,
+    "startFrame": 80636,
+    "midFrame": 80757
+  },
+  {
+    "index": 395,
+    "id": "sc396",
+    "type": "COMPARISON_SLIDER",
+    "durationFrames": 200,
+    "startFrame": 80856,
+    "midFrame": 80966
+  },
+  {
+    "index": 396,
+    "id": "sc397",
+    "type": "PHOTO_STACK",
+    "durationFrames": 200,
+    "startFrame": 81056,
+    "midFrame": 81166
+  },
+  {
+    "index": 397,
+    "id": "sc398",
+    "type": "IMAGE_SCENE",
+    "durationFrames": 180,
+    "startFrame": 81256,
+    "midFrame": 81355
+  },
+  {
+    "index": 398,
+    "id": "sc399",
+    "type": "IMAGE_SCENE",
+    "durationFrames": 180,
+    "startFrame": 81436,
+    "midFrame": 81535
+  },
+  {
+    "index": 399,
+    "id": "sc400",
     "type": "OUTRO_CTA",
     "durationFrames": 200,
-    "startFrame": 79476,
-    "midFrame": 79586
+    "startFrame": 81616,
+    "midFrame": 81726
   }
 ]

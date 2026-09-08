@@ -1,0 +1,611 @@
+{
+  "slug": "allure-01",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "allure-01",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "fps": 30,
+  "maximizePanel": false,
+  "prep": {
+    "files": {
+      "features/homepage_checks.feature": "",
+      "features/environment.py": "",
+      "features/steps/homepage_steps.py": "",
+      "build_simple_html_report.py": ""
+    },
+    "commands": [
+      "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/",
+      "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
+      "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
+      "export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig",
+      "rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git allure-results-bdd report-python-only.html"
+    ]
+  },
+  "steps": [
+    {
+      "id": "look",
+      "action": "run",
+      "cmd": "ls -R",
+      "label": "four empty files, nothing else",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "feat",
+          "text": "homepage_checks.feature"
+        }
+      ]
+    },
+    {
+      "id": "init",
+      "action": "run",
+      "cmd": "uv init --bare",
+      "label": "one command makes it a project",
+      "focus": "terminal",
+      "expect": {
+        "contains": "Initialized project",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "made",
+          "text": "Initialized project"
+        }
+      ]
+    },
+    {
+      "id": "add",
+      "action": "run",
+      "cmd": "uv add behave allure-behave playwright requests",
+      "label": "the four libraries",
+      "focus": "terminal",
+      "expect": {
+        "exitCode": 0
+      },
+      "holdMs": 1200
+    },
+    {
+      "id": "deps",
+      "action": "run",
+      "cmd": "sed -n '/dependencies/,/]/p' pyproject.toml",
+      "label": "what landed in the project",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "behave",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "behave",
+          "text": "behave"
+        },
+        {
+          "id": "allure",
+          "text": "allure-behave"
+        },
+        {
+          "id": "pw",
+          "text": "playwright"
+        },
+        {
+          "id": "req",
+          "text": "requests"
+        }
+      ]
+    },
+    {
+      "id": "browser",
+      "action": "run",
+      "cmd": "uv run playwright install chromium",
+      "label": "and one real browser",
+      "focus": "terminal",
+      "expect": {
+        "exitCode": 0
+      },
+      "holdMs": 1400
+    },
+    {
+      "id": "openfeat",
+      "action": "openFile",
+      "path": "features/homepage_checks.feature",
+      "label": "plain English, before any Python"
+    },
+    {
+      "id": "openfeatSettle",
+      "action": "pause",
+      "ms": 1800
+    },
+    {
+      "id": "feat1",
+      "action": "type",
+      "path": "features/homepage_checks.feature",
+      "text": "Feature: Python.org homepage health checks\r\n  As a website owner\r\n  I want automated checks against the homepage\r\n  So that I know quickly if something on the site breaks\r\n\r\n  Background:\r\n    Given the target website is \"https://www.python.org\"\r",
+      "label": "the feature, and one shared setup line",
+      "focus": "editor"
+    },
+    {
+      "id": "feat2",
+      "action": "type",
+      "path": "features/homepage_checks.feature",
+      "text": "\n\r\n  @critical\r\n  Scenario: Homepage responds successfully\r\n    When I send a GET request to the homepage\r\n    Then the response status code should be 200\r\n\r\n  Scenario: Homepage mentions Python\r\n    When I download the homepage HTML\r\n    Then the page text should contain \"Python\"\r",
+      "label": "the first two checks",
+      "focus": "editor"
+    },
+    {
+      "id": "feat3",
+      "action": "type",
+      "path": "features/homepage_checks.feature",
+      "text": "\n\r\n  @critical\r\n  Scenario: Homepage screenshot is captured\r\n    When I visit the homepage in a real browser\r\n    Then a full page screenshot should be attached\r\n\r\n  Scenario: Homepage response time is measured 3 times\r\n    When I send the homepage request 3 times and record the timing\r\n    Then every attempt should respond within 5000 milliseconds\r\n\r\n  Scenario: Homepage screenshot is also captured as a JPEG\r",
+      "label": "a screenshot, and a timing table",
+      "focus": "editor"
+    },
+    {
+      "id": "feat4",
+      "action": "type",
+      "path": "features/homepage_checks.feature",
+      "text": "\n    When I visit the homepage in a real browser and capture a JPEG screenshot\r\n    Then a JPEG screenshot should be attached\r\n\r\n  Scenario: Homepage evidence is archived into a zip file\r\n    When I download the homepage HTML\r\n    Then the evidence should be archived into a zip attachment\r\n\r\n  Scenario: Homepage check summary is recorded in three formats\r\n    When I download the homepage HTML\r",
+      "label": "a zip, and three ways to write a summary",
+      "focus": "editor"
+    },
+    {
+      "id": "feat5",
+      "action": "type",
+      "path": "features/homepage_checks.feature",
+      "text": "\n    Then a JSON summary should be attached\r\n    And an XML summary should be attached\r\n    And a YAML summary should be attached\r\n\r\n  Scenario: This check is written to fail on purpose\r\n    When I download the homepage HTML\r\n    Then the page text should contain \"This text will never appear on python.org\"\r\n\r\n  Scenario: This check is broken by an unexpected error\r\n    When something unexpected goes wrong while checking the homepage\r\n\r\n  @skip_this\r\n  Scenario: This check is skipped on purpose\r\n    When I skip this check on purpose",
+      "label": "the three nobody shows you",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "broken",
+          "text": "This check is broken by an unexpected error"
+        },
+        {
+          "id": "skip",
+          "text": "This check is skipped on purpose"
+        }
+      ]
+    },
+    {
+      "id": "savefeat",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "special",
+      "action": "run",
+      "cmd": "grep -A2 \"Scenario: This check\" features/homepage_checks.feature",
+      "label": "the three that teach the chapter",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "skipped on purpose"
+      },
+      "holdMs": 3400,
+      "marks": [
+        {
+          "id": "sfail",
+          "text": "This check is written to fail on purpose"
+        },
+        {
+          "id": "sbrok",
+          "text": "This check is broken by an unexpected error"
+        },
+        {
+          "id": "sskip",
+          "text": "This check is skipped on purpose"
+        }
+      ]
+    },
+    {
+      "id": "opensteps",
+      "action": "openFile",
+      "path": "features/steps/homepage_steps.py",
+      "label": "now the Python behind each line"
+    },
+    {
+      "id": "openstepsSettle",
+      "action": "pause",
+      "ms": 1800
+    },
+    {
+      "id": "st1",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\"\"\"\r\nStep definitions for homepage_checks.feature.\r\n\r\nEvery Gherkin step below automatically becomes a step in the Allure\r\nreport just by being a behave step - allure-behave wires that up for us.\r\nWe only need `allure.attach(...)` ourselves for the extra evidence\r\n(screenshots, logs, tables) that Gherkin text alone can't carry.\r\n\r\nAllure actually supports 20 attachment types (check allure.attachment_type\r",
+      "label": "a note to whoever opens this next",
+      "focus": "editor"
+    },
+    {
+      "id": "st1b",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\nyourself - TEXT, CSV, TSV, URI_LIST, HTML, XML, JSON, YAML, PCAP, ZIP,\r\nPNG, JPG, SVG, GIF, BMP, TIFF, MP4, OGG, WEBM, PDF). We don't attach all\r\n20 here - that would be padding, not teaching - but we now cover a real\r\nexample from each broad family: plain text, a table (CSV), structured\r\ntext in three flavors (JSON/XML/YAML), a second image format (JPEG),\r\nand a compressed archive (ZIP). Video/PDF/etc. follow the exact same\r\n\"binary bytes with a mime type\" pattern as the screenshot and zip below,\r\nso there's nothing new to learn from adding more of them.\r\n\"\"\"\r",
+      "label": "twenty attachment types exist",
+      "focus": "editor"
+    },
+    {
+      "id": "st1c",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\nimport csv\r\nimport io\r\nimport json\r\nimport zipfile\r\nimport time\r\n\r\nimport allure\r\nimport requests\r\nfrom behave import given, when, then\r",
+      "label": "the imports, and what each is for",
+      "focus": "editor"
+    },
+    {
+      "id": "st2",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\n\r\n\r\n@given('the target website is \"{url}\"')\r\ndef step_set_target(context, url):\r\n    context.target_url = url\r\n\r\n\r\n@when('I send a GET request to the homepage')\r\ndef step_get_homepage(context):\r\n    context.response = requests.get(context.target_url, timeout=10)\r\n    allure.attach(\r\n        \"\\n\".join(f\"{k}: {v}\" for k, v in context.response.headers.items()),\r\n        name=\"response_headers.txt\",\r\n        attachment_type=allure.attachment_type.TEXT,\r\n    )\r\n\r\n\r\n@then('the response status code should be {expected_code:d}')\r\ndef step_check_status(context, expected_code):\r\n    assert context.response.status_code == expected_code\r\n\r",
+      "label": "a target, a request, a status check",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "assertline",
+          "text": "assert context.response.status_code"
+        }
+      ]
+    },
+    {
+      "id": "st3",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\n\r\n@when('I download the homepage HTML')\r\ndef step_download_html(context):\r\n    context.response = requests.get(context.target_url, timeout=10)\r\n    allure.attach(\r\n        context.response.text[:2000],\r\n        name=\"homepage_snippet.html\",\r\n        attachment_type=allure.attachment_type.HTML,\r\n    )\r\n\r\n\r\n@then('the page text should contain \"{expected_text}\"')\r\ndef step_check_text_contains(context, expected_text):\r\n    assert expected_text in context.response.text\r\n\r\n\r",
+      "label": "the page HTML, attached as evidence",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "contains",
+          "text": "assert expected_text in context.response.text"
+        }
+      ]
+    },
+    {
+      "id": "st4",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\n@when('I visit the homepage in a real browser')\r\ndef step_visit_browser(context):\r\n    page = context.browser.new_page(viewport={\"width\": 1280, \"height\": 800})\r\n    page.goto(context.target_url, wait_until=\"load\")\r\n    context.screenshot_bytes = page.screenshot(full_page=True)\r\n    page.close()\r\n\r\n\r\n@then('a full page screenshot should be attached')\r\ndef step_attach_screenshot(context):\r\n    allure.attach(\r\n        context.screenshot_bytes,\r\n        name=\"homepage_screenshot.png\",\r\n        attachment_type=allure.attachment_type.PNG,\r\n    )\r\n    assert len(context.screenshot_bytes) > 1000\r\n\r",
+      "label": "a real browser, and a screenshot",
+      "focus": "editor"
+    },
+    {
+      "id": "st5",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\n\r\n@when('I send the homepage request {times:d} times and record the timing')\r\ndef step_timing_table(context, times):\r\n    context.timings = []\r\n    for attempt in range(1, times + 1):\r\n        start = time.perf_counter()\r\n        response = requests.get(context.target_url, timeout=10)\r\n        duration_ms = round((time.perf_counter() - start) * 1000, 1)\r\n        context.timings.append((attempt, response.status_code, duration_ms))\r\n\r\n    buffer = io.StringIO()\r\n    writer = csv.writer(buffer)\r\n    writer.writerow([\"attempt\", \"status_code\", \"duration_ms\"])\r\n    writer.writerows(context.timings)\r\n    allure.attach(\r\n        buffer.getvalue(),\r\n        name=\"timing_results.csv\",\r\n        attachment_type=allure.attachment_type.CSV,\r\n    )\r\n\r\n\r\n@then('every attempt should respond within {max_ms:d} milliseconds')\r\ndef step_check_timing(context, max_ms):\r\n    for attempt, status_code, duration_ms in context.timings:\r\n        assert status_code == 200\r\n        assert duration_ms < max_ms\r\n\r",
+      "label": "three timed requests, as a table",
+      "focus": "editor"
+    },
+    {
+      "id": "st6",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\n\r\n@when('I visit the homepage in a real browser and capture a JPEG screenshot')\r\ndef step_visit_browser_jpeg(context):\r\n    page = context.browser.new_page(viewport={\"width\": 1280, \"height\": 800})\r\n    page.goto(context.target_url, wait_until=\"load\")\r\n    context.jpeg_screenshot_bytes = page.screenshot(full_page=True, type=\"jpeg\")\r\n    page.close()\r\n\r\n\r\n@then('a JPEG screenshot should be attached')\r\ndef step_attach_jpeg_screenshot(context):\r\n    allure.attach(\r\n        context.jpeg_screenshot_bytes,\r\n        name=\"homepage_screenshot.jpg\",\r\n        attachment_type=allure.attachment_type.JPG,\r\n    )\r\n    assert len(context.jpeg_screenshot_bytes) > 1000\r\n\r",
+      "label": "the same page as a JPEG",
+      "focus": "editor"
+    },
+    {
+      "id": "st7",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\n\r\n@then('the evidence should be archived into a zip attachment')\r\ndef step_attach_zip_archive(context):\r\n    buffer = io.BytesIO()\r\n    with zipfile.ZipFile(buffer, mode=\"w\", compression=zipfile.ZIP_DEFLATED) as archive:\r\n        archive.writestr(\"homepage.html\", context.response.text)\r\n        archive.writestr(\"note.txt\", \"Zipped evidence for the homepage check.\")\r\n    allure.attach(\r\n        buffer.getvalue(),\r\n        name=\"homepage_evidence.zip\",\r\n        attachment_type=allure.attachment_type.ZIP,\r\n    )\r\n\r\n\r\n@then('a JSON summary should be attached')\r\ndef step_attach_json_summary(context):\r\n    summary = {\"url\": context.target_url, \"status_code\": context.response.status_code,\r\n               \"page_length\": len(context.response.text)}\r\n    allure.attach(\r\n        json.dumps(summary, indent=2),\r\n        name=\"summary.json\",\r\n        attachment_type=allure.attachment_type.JSON,\r",
+      "label": "a zip, built in memory",
+      "focus": "editor"
+    },
+    {
+      "id": "st8",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\n    )\r\n\r\n\r\n@then('an XML summary should be attached')\r\ndef step_attach_xml_summary(context):\r\n    xml_text = (\r\n        \"<summary>\\n\"\r\n        f\"  <url>{context.target_url}</url>\\n\"\r\n        f\"  <statusCode>{context.response.status_code}</statusCode>\\n\"\r\n        f\"  <pageLength>{len(context.response.text)}</pageLength>\\n\"\r\n        \"</summary>\\n\"\r\n    )\r\n    allure.attach(xml_text, name=\"summary.xml\", attachment_type=allure.attachment_type.XML)\r\n\r\n\r\n@then('a YAML summary should be attached')\r\ndef step_attach_yaml_summary(context):\r\n    yaml_text = (\r\n        f\"url: {context.target_url}\\n\"\r\n        f\"status_code: {context.response.status_code}\\n\"\r\n        f\"page_length: {len(context.response.text)}\\n\"\r\n    )\r\n    allure.attach(yaml_text, name=\"summary.yaml\", attachment_type=allure.attachment_type.YAML)\r\n\r",
+      "label": "one summary, three formats",
+      "focus": "editor"
+    },
+    {
+      "id": "st9",
+      "action": "type",
+      "path": "features/steps/homepage_steps.py",
+      "text": "\n\r\n@when('something unexpected goes wrong while checking the homepage')\r\ndef step_something_unexpected_breaks(context):\r\n    response = requests.get(context.target_url, timeout=10)\r\n    # Deliberately reads a header that does not exist. This is NOT an\r\n    # assertion failing - it's a genuine bug in the check itself, which\r\n    # is exactly what Allure calls a \"broken\" test rather than \"failed\".\r\n    _ = response.headers[\"X-Definitely-Not-A-Real-Header\"]\r\n\r\n\r\n@when('I skip this check on purpose')\r\ndef step_skip_on_purpose(context):\r\n    context.scenario.skip(\"Skipping deliberately to demonstrate the 'skipped' status\")",
+      "label": "the broken one, and the skipped one",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "keyerror",
+          "text": "X-Definitely-Not-A-Real-Header"
+        },
+        {
+          "id": "skipcall",
+          "text": "context.scenario.skip"
+        }
+      ]
+    },
+    {
+      "id": "savesteps",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "openenv",
+      "action": "openFile",
+      "path": "features/environment.py",
+      "label": "one browser for the whole run"
+    },
+    {
+      "id": "openenvSettle",
+      "action": "pause",
+      "ms": 1800
+    },
+    {
+      "id": "env1",
+      "action": "type",
+      "path": "features/environment.py",
+      "text": "\"\"\"\r\nBehave lifecycle hooks.\r\n\r\nWe launch ONE real Playwright/Chromium browser for the whole run and\r\nreuse it across scenarios, closing it cleanly at the end. This is the\r\nBDD equivalent of pytest fixtures.\r\n\"\"\"\r\nfrom playwright.sync_api import sync_playwright\r\n\r",
+      "label": "why this file exists",
+      "focus": "editor"
+    },
+    {
+      "id": "env2",
+      "action": "type",
+      "path": "features/environment.py",
+      "text": "\n\r\ndef before_all(context):\r\n    context.playwright = sync_playwright().start()\r\n    context.browser = context.playwright.chromium.launch()\r\n\r\n\r\ndef after_all(context):\r\n    context.browser.close()\r\n    context.playwright.stop()",
+      "label": "open it once, close it once",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "beforeall",
+          "text": "def before_all"
+        }
+      ]
+    },
+    {
+      "id": "saveenv",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "behave",
+      "action": "run",
+      "cmd": "uv run python -m behave -f allure_behave.formatter:AllureFormatter -o allure-results-bdd features",
+      "label": "all four outcomes, in one run",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "1 skipped"
+      },
+      "holdMs": 2600,
+      "marks": [
+        {
+          "id": "tally",
+          "text": "7 scenarios passed, 1 failed, 1 error, 1 skipped"
+        }
+      ]
+    },
+    {
+      "id": "rawcount",
+      "action": "run",
+      "cmd": "ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+      "label": "what behave actually wrote",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "result.json"
+      },
+      "holdMs": 2400,
+      "marks": [
+        {
+          "id": "results",
+          "text": "result.json"
+        }
+      ]
+    },
+    {
+      "id": "statuses",
+      "action": "run",
+      "cmd": "grep -ho '\"status\": \"[a-z]*\"' allure-results-bdd/*result.json | sort -u",
+      "label": "four outcomes, in the files themselves",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "broken"
+      },
+      "holdMs": 3200,
+      "marks": [
+        {
+          "id": "sbroken",
+          "text": "\"status\": \"broken\""
+        },
+        {
+          "id": "sskipped",
+          "text": "\"status\": \"skipped\""
+        }
+      ]
+    },
+    {
+      "id": "messages",
+      "action": "run",
+      "cmd": "grep -ho '\"message\": \"[^\"]*\"' allure-results-bdd/*result.json | sort -u",
+      "label": "two different kinds of breakage",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "KeyError"
+      },
+      "holdMs": 3400,
+      "marks": [
+        {
+          "id": "assertmsg",
+          "text": "AssertionError"
+        },
+        {
+          "id": "keymsg",
+          "text": "KeyError"
+        }
+      ]
+    },
+    {
+      "id": "openrpt",
+      "action": "openFile",
+      "path": "build_simple_html_report.py",
+      "label": "the part that replaces the Java tool"
+    },
+    {
+      "id": "openrptSettle",
+      "action": "pause",
+      "ms": 1800
+    },
+    {
+      "id": "rpt1",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\"\"\"\r\nbuild_simple_html_report.py\r\n\r\nA small, pure-Python Allure-results-to-HTML report builder.\r\n\r\nNo Java. No Node. No external report-generator binary of any kind -\r\njust the Python standard library reading the exact same *-result.json\r\nand *-attachment.* files that allure-behave / allure-pytest already\r\nwrite to disk. This exists so this tutorial series never needs Java\r\ninstalled to produce something you can open in a browser.\r",
+      "label": "what this script is for",
+      "focus": "editor"
+    },
+    {
+      "id": "rpt2",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\n\r\nIt is NOT a clone of the official Allure report - it's deliberately\r\nsmall enough to read top to bottom in five minutes, so you can see\r\nevery decision it makes about what to show and how.\r\n\r\nUsage:\r\n    python build_simple_html_report.py allure-results-bdd -o report.html\r\n\"\"\"\r\nimport argparse\r\nimport base64\r\nimport csv\r\nimport html\r\nimport io\r\nimport json\r\nfrom pathlib import Path\r\n\r",
+      "label": "the rule it uses to classify evidence",
+      "focus": "editor"
+    },
+    {
+      "id": "rpt3",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\n\r\ndef load_results(results_dir: Path) -> list[dict]:\r\n    \"\"\"Read every *-result.json file and return them sorted by start time.\"\"\"\r\n    results = []\r\n    for result_file in results_dir.glob(\"*-result.json\"):\r\n        with open(result_file, \"r\", encoding=\"utf-8\") as f:\r\n            results.append(json.load(f))\r\n    results.sort(key=lambda r: r.get(\"start\", 0))\r\n    return results\r\n\r\n\r",
+      "label": "read every result file",
+      "focus": "editor"
+    },
+    {
+      "id": "rpt4",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\ndef render_attachment(attachment: dict, results_dir: Path) -> str:\r\n    \"\"\"Turn one Allure attachment reference into an HTML fragment.\"\"\"\r\n    source_path = results_dir / attachment[\"source\"]\r\n    mime_type = attachment.get(\"type\", \"application/octet-stream\")\r\n    name = html.escape(attachment.get(\"name\", source_path.name))\r\n\r\n    if not source_path.exists():\r\n        return f'<div class=\"attachment missing\">Attachment file missing: {name}</div>'\r\n\r\n    raw_bytes = source_path.read_bytes()\r\n\r\n    if mime_type.startswith(\"image/\"):\r\n        encoded = base64.b64encode(raw_bytes).decode(\"ascii\")\r\n        return (\r\n            f'<div class=\"attachment\"><p class=\"attachment-name\">{name}</p>'\r\n            f'<img src=\"data:{mime_type};base64,{encoded}\" alt=\"{name}\"></div>'\r\n        )\r\n\r\n    if mime_type == \"text/csv\":\r\n        text = raw_bytes.decode(\"utf-8\", errors=\"replace\")\r\n        rows = list(csv.reader(io.StringIO(text)))\r\n        table_rows = \"\".join(\r\n            \"<tr>\" + \"\".join(f\"<td>{html.escape(cell)}</td>\" for cell in row) + \"</tr>\"\r\n            for row in rows\r\n        )\r\n        return (\r\n            f'<div class=\"attachment\"><p class=\"attachment-name\">{name}</p>'\r\n            f'<table class=\"csv-table\">{table_rows}</table></div>'\r\n        )\r\n\r\n    if mime_type == \"text/html\":\r",
+      "label": "is it an image?",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "csvtable",
+          "text": "csv-table"
+        }
+      ]
+    },
+    {
+      "id": "rpt5",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\n        text = raw_bytes.decode(\"utf-8\", errors=\"replace\")\r\n        return (\r\n            f'<div class=\"attachment\"><p class=\"attachment-name\">{name}</p>'\r\n            f'<pre class=\"attachment-html\">{html.escape(text)}</pre></div>'\r\n        )\r\n\r\n    # Anything else that is genuinely text-shaped (json/xml/yaml/plain\r\n    # text all count, even though json/xml/yaml don't start with\r\n    # \"text/\") gets shown as readable text. Anything truly binary that\r\n    # isn't an image (a zip, for example) can't be usefully shown\r\n    # inline, so it gets an honest download link instead of a garbled\r\n    # attempt at decoding it as text.\r\n    text_like_application_types = {\"application/json\", \"application/xml\", \"application/yaml\"}\r\n    if mime_type.startswith(\"text/\") or mime_type in text_like_application_types:\r\n        text = raw_bytes.decode(\"utf-8\", errors=\"replace\")\r\n        return (\r\n            f'<div class=\"attachment\"><p class=\"attachment-name\">{name}</p>'\r\n            f'<pre class=\"attachment-text\">{html.escape(text)}</pre></div>'\r\n        )\r\n\r\n    encoded = base64.b64encode(raw_bytes).decode(\"ascii\")\r\n    return (\r\n        f'<div class=\"attachment\"><p class=\"attachment-name\">{name}</p>'\r\n        f'<a class=\"attachment-download\" href=\"data:{mime_type};base64,{encoded}\" '\r\n        f'download=\"{name}\">Download {name} ({mime_type})</a></div>'\r\n    )\r\n\r\n\r",
+      "label": "is it text-shaped? otherwise, a link",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "download",
+          "text": "Download"
+        }
+      ]
+    },
+    {
+      "id": "rpt6",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\ndef render_step(step: dict, results_dir: Path, depth: int = 0) -> str:\r\n    status = step.get(\"status\", \"unknown\")\r\n    name = html.escape(step.get(\"name\", \"\"))\r\n    indent_class = f\"depth-{min(depth, 3)}\"\r\n\r\n    attachments_html = \"\".join(\r\n        render_attachment(a, results_dir) for a in step.get(\"attachments\", [])\r\n    )\r\n    nested_html = \"\".join(\r\n        render_step(s, results_dir, depth + 1) for s in step.get(\"steps\", [])\r\n    )\r\n\r\n    return (\r\n        f'<li class=\"step {status} {indent_class}\">'\r\n        f'<span class=\"step-badge {status}\">{status}</span> {name}'\r\n        f\"{attachments_html}{nested_html}\"\r\n        f\"</li>\"\r\n    )\r\n\r\n\r",
+      "label": "one step, and the steps inside it",
+      "focus": "editor"
+    },
+    {
+      "id": "rpt7",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\ndef render_test(result: dict, results_dir: Path) -> str:\r\n    status = result.get(\"status\", \"unknown\")\r\n    name = html.escape(result.get(\"name\", \"Unnamed test\"))\r\n    steps_html = \"\".join(render_step(s, results_dir) for s in result.get(\"steps\", []))\r\n\r\n    failure_html = \"\"\r\n    details = result.get(\"statusDetails\")\r\n    if details:\r\n        message = html.escape(details.get(\"message\", \"\"))\r\n        trace = html.escape(details.get(\"trace\", \"\"))\r\n        failure_html = (\r\n            f'<div class=\"failure-box\">'\r\n            f\"<p class=\\\"failure-message\\\">{message}</p>\"\r\n            f\"<pre class=\\\"failure-trace\\\">{trace}</pre>\"\r\n            f\"</div>\"\r\n        )\r\n\r\n    return (\r\n        f'<section class=\"test-case {status}\">'\r\n        f'<h2><span class=\"status-badge {status}\">{status}</span> {name}</h2>'\r\n        f\"{failure_html}\"\r\n        f'<ol class=\"steps\">{steps_html}</ol>'\r\n        f\"</section>\"\r\n    )\r",
+      "label": "one test, and its status",
+      "focus": "editor"
+    },
+    {
+      "id": "rpt8",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\n\r\n\r\nPAGE_TEMPLATE = \"\"\"<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n<meta charset=\"utf-8\">\r\n<title>{title}</title>\r\n<style>\r\n  body {{ font-family: Segoe UI, Arial, sans-serif; margin: 0; background: #f5f6f8; color: #1c1c1e; }}\r\n  header {{ background: #1c1c1e; color: #fff; padding: 20px 30px; }}\r\n  header h1 {{ margin: 0 0 6px 0; font-size: 22px; }}\r\n  .summary {{ display: flex; gap: 16px; margin-top: 10px; }}\r\n  .summary span {{ padding: 4px 10px; border-radius: 12px; font-size: 13px; }}\r\n  .summary .passed {{ background: #1e7e34; }}\r\n  .summary .failed {{ background: #a71d2a; }}\r\n  .summary .broken {{ background: #d97706; }}\r\n  .summary .skipped {{ background: #6b7280; }}\r\n  main {{ max-width: 900px; margin: 24px auto; padding: 0 16px; }}\r\n  .test-case {{ background: #fff; border-radius: 8px; padding: 18px 22px; margin-bottom: 18px;\r\n                box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 6px solid #ccc; }}\r\n  .test-case.passed {{ border-left-color: #1e7e34; }}\r\n  .test-case.failed {{ border-left-color: #a71d2a; }}\r\n  .test-case.broken {{ border-left-color: #d97706; }}\r\n  .test-case.skipped {{ border-left-color: #6b7280; }}\r\n  .test-case h2 {{ font-size: 17px; margin: 0 0 10px 0; }}\r",
+      "label": "its message, when it has one",
+      "focus": "editor"
+    },
+    {
+      "id": "rpt9",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\n  .status-badge, .step-badge {{ display: inline-block; font-size: 11px; padding: 2px 8px;\r\n                                 border-radius: 10px; color: #fff; margin-right: 8px; text-transform: uppercase; }}\r\n  .status-badge.passed, .step-badge.passed {{ background: #1e7e34; }}\r\n  .status-badge.failed, .step-badge.failed {{ background: #a71d2a; }}\r\n  .status-badge.broken, .step-badge.broken {{ background: #d97706; }}\r\n  .status-badge.skipped, .step-badge.skipped {{ background: #6b7280; }}\r\n  ol.steps {{ list-style: none; margin: 0; padding: 0; }}\r\n  li.step {{ padding: 6px 0 6px 10px; border-left: 2px solid #eee; margin-left: 4px; font-size: 14px; }}\r\n  li.step.depth-1 {{ margin-left: 20px; }}\r\n  li.step.depth-2 {{ margin-left: 40px; }}\r\n  .attachment {{ margin: 10px 0 6px 20px; }}\r\n  .attachment-name {{ font-size: 12px; color: #555; margin: 0 0 4px 0; }}\r\n  .attachment img {{ max-width: 100%; border: 1px solid #ddd; border-radius: 4px; }}\r\n  pre.attachment-text, pre.attachment-html {{ background: #f0f0f2; padding: 10px; border-radius: 4px;\r\n                                               overflow-x: auto; font-size: 12px; }}\r\n  table.csv-table {{ border-collapse: collapse; font-size: 13px; }}\r\n  table.csv-table td {{ border: 1px solid #ddd; padding: 4px 10px; }}\r\n  a.attachment-download {{ display: inline-block; margin-top: 4px; font-size: 13px; color: #1f6feb;\r\n                            text-decoration: none; border: 1px solid #d0d7de; border-radius: 6px; padding: 6px 10px; }}\r\n  a.attachment-download:hover {{ background: #f0f4ff; }}\r\n  .failure-box {{ background: #fdecea; border: 1px solid #f3c2c2; border-radius: 6px;\r\n                  padding: 10px 14px; margin-bottom: 12px; }}\r\n  .failure-message {{ font-weight: 600; color: #a71d2a; margin: 0 0 6px 0; }}\r\n  pre.failure-trace {{ font-size: 12px; white-space: pre-wrap; margin: 0; }}\r\n</style>\r",
+      "label": "its steps and its evidence",
+      "focus": "editor"
+    },
+    {
+      "id": "rpt10",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\n</head>\r\n<body>\r\n<header>\r\n  <h1>{title}</h1>\r\n  <div class=\"summary\">\r\n    <span class=\"passed\">{passed_count} passed</span>\r\n    <span class=\"failed\">{failed_count} failed</span>\r\n    <span class=\"broken\">{broken_count} broken</span>\r\n    <span class=\"skipped\">{skipped_count} skipped</span>\r\n  </div>\r\n</header>\r\n<main>\r\n{body}\r\n</main>\r\n</body>\r\n</html>\r\n\"\"\"\r\n\r\n\r",
+      "label": "the shell of the page",
+      "focus": "editor"
+    },
+    {
+      "id": "rpt11",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\ndef build_report(results_dir: Path, output_file: Path, title: str) -> None:\r\n    results = load_results(results_dir)\r\n    if not results:\r\n        raise SystemExit(f\"No *-result.json files found under {results_dir}\")\r\n\r\n    passed_count = sum(1 for r in results if r.get(\"status\") == \"passed\")\r\n    failed_count = sum(1 for r in results if r.get(\"status\") == \"failed\")\r\n    broken_count = sum(1 for r in results if r.get(\"status\") == \"broken\")\r\n    skipped_count = sum(1 for r in results if r.get(\"status\") == \"skipped\")\r\n\r\n    body = \"\\n\".join(render_test(r, results_dir) for r in results)\r\n    page = PAGE_TEMPLATE.format(\r\n        title=html.escape(title),\r\n        passed_count=passed_count,\r\n        failed_count=failed_count,\r\n        broken_count=broken_count,\r\n        skipped_count=skipped_count,\r\n        body=body,\r\n    )\r\n    output_file.write_text(page, encoding=\"utf-8\")\r\n    print(f\"Report written to: {output_file.resolve()}\")\r\n    print(f\"{passed_count} passed, {failed_count} failed, {broken_count} broken, \"\r\n          f\"{skipped_count} skipped, {len(results)} total\")\r\n\r\n\r",
+      "label": "count all four, then write it out",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "counts",
+          "text": "broken_count"
+        }
+      ]
+    },
+    {
+      "id": "rpt12",
+      "action": "type",
+      "path": "build_simple_html_report.py",
+      "text": "\ndef main():\r\n    parser = argparse.ArgumentParser(description=__doc__)\r\n    parser.add_argument(\"results_dir\", type=Path, help=\"Folder containing *-result.json files\")\r\n    parser.add_argument(\"-o\", \"--output\", type=Path, default=Path(\"report.html\"))\r\n    parser.add_argument(\"-t\", \"--title\", default=\"Test Report\")\r\n    args = parser.parse_args()\r\n    build_report(args.results_dir, args.output, args.title)\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    main()",
+      "label": "the command line entry point",
+      "focus": "editor"
+    },
+    {
+      "id": "savertp",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "build",
+      "action": "run",
+      "cmd": "uv run python build_simple_html_report.py allure-results-bdd -o report-python-only.html -t \"Python.org Homepage Health Checks\"",
+      "label": "four counts, correctly separated",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "10 total"
+      },
+      "holdMs": 3000,
+      "marks": [
+        {
+          "id": "tally2",
+          "text": "7 passed, 1 failed, 1 broken, 1 skipped, 10 total"
+        }
+      ]
+    },
+    {
+      "id": "size",
+      "action": "run",
+      "cmd": "ls -lh report-python-only.html",
+      "label": "one file, everything inside it",
+      "focus": "terminal",
+      "expect": {
+        "exitCode": 0
+      },
+      "holdMs": 2000
+    }
+  ]
+}
