@@ -1,0 +1,1701 @@
+{
+  "meta": {
+    "topic": "Building a real Allure test report in pure Python, with no Java",
+    "subject": "Allure",
+    "format": "long",
+    "fps": 30,
+    "audience": "beginner",
+    "series": "Allure AI",
+    "chapterNumber": 1,
+    "onePayoff": "write ten BDD checks, run them, and build your own clickable report — all in Python",
+    "openLoop": "what does a test report look like when it has four outcomes instead of two?",
+    "analogy": "four trays a result can land in, rather than a pass/fail switch",
+    "screenplay": "masterclass",
+    "audioPrefix": "allure01_long",
+    "topicAxes": [
+      "skill-build",
+      "craft"
+    ],
+    "seo": {
+      "title": "Allure AI #1 — Build a Real Test Report in Pure Python (No Java)",
+      "altTitles": [
+        "Allure Reports Without Java — Python, Playwright and BDD From Scratch",
+        "Your First Allure Report in Pure Python — Every Line Typed"
+      ],
+      "hook": "What does a test report look like when it has four outcomes instead of two?",
+      "breakdown": "ten BDD checks in plain English, a real browser, nine kinds of evidence, all four Allure outcomes, and a report builder written from nothing in one Python file",
+      "queries": [
+        "allure report python",
+        "allure report without java",
+        "behave allure tutorial",
+        "allure behave playwright",
+        "bdd python allure report",
+        "allure attachment types python",
+        "allure broken vs failed",
+        "generate allure html report python",
+        "python test report from scratch",
+        "gherkin behave beginners tutorial"
+      ],
+      "hashtags": [
+        "#python",
+        "#testing",
+        "#allure",
+        "#bdd"
+      ],
+      "pinned": "Which outcome surprised you — broken, or skipped?",
+      "tags": [
+        "allure",
+        "allure report",
+        "python",
+        "behave",
+        "bdd",
+        "gherkin",
+        "playwright",
+        "test automation",
+        "test reporting",
+        "allure behave",
+        "python testing",
+        "qa automation",
+        "uv python",
+        "html report"
+      ],
+      "sources": [
+        "behave — https://github.com/behave/behave",
+        "allure-behave, the Allure adapter for behave — https://github.com/allure-framework/allure-python",
+        "Allure Report — https://allurereport.org",
+        "playwright, the Python browser automation library — https://playwright.dev/python/",
+        "requests — https://requests.readthedocs.io",
+        "uv — https://docs.astral.sh/uv/"
+      ]
+    }
+  },
+  "brand": {
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png",
+    "theme": "moderndark",
+    "design": "moderndark",
+    "background": "zoneA"
+  },
+  "thumbnail": {
+    "title": "Build a Real Allure Report",
+    "badge": "Python · No Java · Beginners",
+    "note": "ten checks, four outcomes, one file",
+    "asset": "si:python",
+    "logos": [
+      "si:python",
+      "si:qameta",
+      "si:cucumber",
+      "si:playwright"
+    ]
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "An empty folder, and a test report you can click through. Allure, in Python — no Java anywhere.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "A REAL ALLURE REPORT",
+        "subtext": "pure Python, from an empty folder",
+        "hookVariant": "statement",
+        "headlineAtWord": 12
+      }
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "narration": "Welcome to THE NBX STUDIO. Today we're building an Allure test report in Python, starting from a folder with nothing in it. Allure is a way of writing down test results so a person actually wants to read them — steps in plain English, with the evidence attached to each one. Almost every guide you'll find says you need Java for this part. We're not going to use any.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "title": "A real Allure report, in pure Python",
+        "subtitle": "ten checks, four outcomes, nine kinds of evidence"
+      }
+    },
+    {
+      "id": "s03",
+      "type": "ALLURE_STAGE",
+      "narration": "Before we write a line, here's the idea the whole chapter rests on. Most people think a test either passes or fails. Allure tracks four outcomes, and the difference between them is genuinely useful. Passed means the check ran and got what it expected. Failed means the check ran and got something else — your software misbehaved. Broken means the test itself fell over before it could check anything — that's a bug in your test, not in your software. And skipped means it never ran at all, on purpose. We're going to write ten checks today that land in all four of those trays, because you cannot understand a report that only ever shows you two.",
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "allureStage": {
+          "kind": "outcome-bins",
+          "headline": "Four outcomes, [not two]",
+          "caption": "what a result can be",
+          "premise": "Every scenario in a run lands in exactly one of these four trays. The count under each tray is what actually dropped into it.",
+          "color": "blue",
+          "atWord": 1,
+          "cells": [
+            {
+              "label": "Homepage responds",
+              "text": "passed",
+              "atWord": 35
+            },
+            {
+              "label": "Mentions Python",
+              "text": "passed",
+              "atWord": 39
+            },
+            {
+              "label": "Screenshot captured",
+              "text": "passed",
+              "atWord": 44
+            },
+            {
+              "label": "Response time",
+              "text": "passed",
+              "atWord": 45
+            },
+            {
+              "label": "JPEG screenshot",
+              "text": "passed",
+              "atWord": 53
+            },
+            {
+              "label": "Zipped evidence",
+              "text": "passed",
+              "atWord": 57
+            },
+            {
+              "label": "Three summaries",
+              "text": "passed",
+              "atWord": 58
+            },
+            {
+              "label": "Written to fail",
+              "text": "failed",
+              "atWord": 63
+            },
+            {
+              "label": "Unexpected error",
+              "text": "broken",
+              "atWord": 73
+            },
+            {
+              "label": "Skipped on purpose",
+              "text": "skipped",
+              "atWord": 82
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s04",
+      "type": "CHAPTER",
+      "narration": "Let's start where every project starts: an empty folder and one command.",
+      "transition": "zoom",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "From an empty folder",
+          "subtitle": "uv, and four libraries"
+        }
+      }
+    },
+    {
+      "id": "s05",
+      "type": "RECORDED_STEP",
+      "narration": "Here's everything we have. Four empty files, and no code in any of them. We're going to use uv to set this up. If uv is new to you, it's a tool that manages Python projects and packages — the same job pip does, quite a lot faster, and you only need the two commands you're about to watch. uv init makes this folder into a Python project, which writes a file called pyproject dot toml. That file is the list of what this project needs to run.",
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "an empty folder, and one command",
+          "premise": "Four empty files, and the command that turns the folder into a project.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#look",
+              "label": "nothing written yet",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "four files, all empty",
+                  "mark": "feat",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 7
+                }
+              ]
+            },
+            {
+              "ref": "rec:allure-01#init",
+              "label": "now it is a project",
+              "focus": true,
+              "wantAtWord": 61,
+              "callouts": [
+                {
+                  "text": "the list of what this needs",
+                  "mark": "made",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 74
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s06",
+      "type": "RECORDED_STEP",
+      "narration": "Then one command brings in the four libraries this chapter needs, and I want to name each one, because a list of installs you can't read is where a beginner gets left behind. behave is the BDD runner — it reads tests written as plain English sentences. allure-behave is the bridge that turns what behave did into Allure's evidence files. playwright drives a real browser, which is how we'll take a screenshot. And requests fetches web pages from Python. Four libraries, one command, and every one of them is pure Python.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "four libraries, four jobs",
+          "premise": "One install command, and the job each package does.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#add",
+              "label": "one command",
+              "focus": true,
+              "wantAtWord": 3
+            },
+            {
+              "ref": "rec:allure-01#deps",
+              "label": "what landed in the project",
+              "focus": true,
+              "wantAtWord": 34,
+              "callouts": [
+                {
+                  "text": "reads plain-English tests",
+                  "mark": "behave",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 37
+                },
+                {
+                  "text": "turns the run into evidence files",
+                  "mark": "allure",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 51
+                },
+                {
+                  "text": "drives a real browser",
+                  "mark": "pw",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 62
+                },
+                {
+                  "text": "fetches pages from Python",
+                  "mark": "req",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 75
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s07",
+      "type": "RECORDED_STEP",
+      "narration": "One more install, and it's a browser rather than a library. playwright needs an actual copy of Chromium to drive, so this downloads one and keeps it somewhere shared on your machine. You run this once, ever. After that, every project on the machine uses the same copy.",
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "and one real browser",
+          "premise": "Playwright fetching the browser it will drive.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#browser",
+              "label": "downloaded once, used everywhere",
+              "focus": true,
+              "wantAtWord": 18
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "narration": "Before any Python, we describe what we want to check — in English.",
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Plain English first",
+          "subtitle": "ten checks, written as sentences"
+        }
+      }
+    },
+    {
+      "id": "s09",
+      "type": "RECORDED_STEP",
+      "narration": "This is BDD, which stands for behaviour driven development, and the idea behind the name is simpler than the name is. You write down what the software should do, as ordinary sentences, before you write any code to check it. The sentences follow a small pattern called Gherkin: Given sets the scene, When does the thing, and Then checks the result. Three words, and you already know the whole grammar. Feature names what we're testing. Background is a line that runs before every single check, so we don't repeat ourselves ten times.",
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "a feature, and one shared setup line",
+          "premise": "The first lines of the feature file: what we are testing, and what every check starts with.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#openfeat",
+              "label": "an empty file",
+              "focus": true
+            },
+            {
+              "ref": "rec:allure-01#feat1",
+              "label": "Feature, and Background",
+              "focus": true,
+              "wantAtWord": 71
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s10",
+      "type": "RECORDED_STEP",
+      "narration": "Now the checks themselves, and each one is three lines at most. The first sends a plain web request to the Python homepage and expects the number two hundred back, which is what the web says when something worked. The second downloads the page and checks the word Python is somewhere in it. Notice what these sentences do NOT contain: any Python at all. Somebody who has never programmed could read this file and tell you what it checks, and that is the entire point of writing tests this way.",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "the first two checks",
+          "premise": "Two scenarios, written as sentences anyone can read.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#feat2",
+              "label": "a request, and a word on the page",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "no Python in this file yet",
+                  "mark": null,
+                  "side": "top",
+                  "color": "green",
+                  "wantAtWord": 60
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s11",
+      "type": "RECORDED_STEP",
+      "narration": "Three more, and now we're asking for evidence. One opens a real browser and takes a full page screenshot. One sends the same request three times and records how long each took, which gives us a small table. And one takes the same screenshot again as a JPEG instead of a PNG, so we can see later that the report handles both without caring which is which.",
+      "transition": "slide",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "a screenshot, and a timing table",
+          "premise": "Checks that produce evidence rather than just a yes or no.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#feat3",
+              "label": "three checks that leave proof behind",
+              "focus": true,
+              "wantAtWord": 13
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s12",
+      "type": "RECORDED_STEP",
+      "narration": "Two more. One archives the page into a zip file, which matters because a zip is binary — it is not text, and you'll see the report treat it differently at the end. And one writes the same three facts as JSON, as XML, and as YAML. Same information, three shapes, so we can watch one rule handle all three without a special case for each.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "a zip, and three ways to write a summary",
+          "premise": "Evidence in a binary format, and the same summary in three text formats.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#feat4",
+              "label": "binary, and three text shapes",
+              "focus": true,
+              "wantAtWord": 9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s13",
+      "type": "RECORDED_STEP",
+      "narration": "And now the three that carry this chapter. One is written to fail — a normal check that asks for text the page will never contain. One is written to break, which is a different thing, and we'll come back to it in a second. And one carries a tag that tells behave to skip it, so it never runs at all. Every tutorial writes tests that pass. Writing tests that deliberately do the other three is the only way to see what those outcomes actually look like.",
+      "transition": "wipe",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "the three nobody shows you",
+          "premise": "A check written to fail, one written to break, and one written to be skipped.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#feat5",
+              "label": "fail, break, skip",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "never runs at all",
+                  "mark": "skip",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 50
+                }
+              ]
+            },
+            {
+              "ref": "rec:allure-01#savefeat",
+              "label": "saved",
+              "focus": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s14",
+      "type": "RECORDED_STEP",
+      "narration": "All ten are written, so let's put those three side by side and read them properly. The first one asks the page to contain a sentence that isn't there. That's an ordinary check, getting an ordinary no. The second says something unexpected goes wrong — and the word unexpected is doing real work in that sentence. The third has that skip tag above it. Pause here for a moment and read all three, because the difference between the first two is the thing most people never learn about test reports.",
+      "transition": "dip",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "the three, side by side",
+          "premise": "The three deliberate scenarios, printed together.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#special",
+              "label": "read these three properly",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "sbrok",
+                  "wantAtWord": 42
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "an ordinary check, getting a no",
+                  "mark": "sfail",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 32
+                },
+                {
+                  "text": "never runs",
+                  "mark": "sskip",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 58
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s15",
+      "type": "ALLURE_STAGE",
+      "narration": "So here's that difference, drawn. On the left, a check that fails. The test runs, it reaches the assert — that's the line that does the checking — and the assert looks at what came back and says no, this isn't what I was promised. The check was reached, and the check said no. On the right, a check that breaks. The test falls over before it ever gets to the assert. Reading a header that doesn't exist throws an error, and the checking line is never reached at all. That's the whole distinction, and it's worth holding on to: failed means your software is wrong, broken means your test is wrong. Two completely different problems, and two different people who need to fix them.",
+      "transition": "morph",
+      "background": "zoneC",
+      "data": {
+        "allureStage": {
+          "kind": "fail-vs-broken",
+          "headline": "Failed, or [broken]?",
+          "caption": "was the check ever reached?",
+          "premise": "Both tests travel toward the same assert. The one on the left arrives and is refused. The one on the right never gets there.",
+          "color": "red",
+          "atWord": 1,
+          "cells": [
+            {
+              "label": "AssertionError",
+              "sub": "the page did not contain the text",
+              "text": "failed",
+              "atWord": 8
+            },
+            {
+              "label": "KeyError: 'x-definitely-not-a-real-header'",
+              "sub": "the test itself threw",
+              "text": "broken",
+              "atWord": 57
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s16",
+      "type": "CHAPTER",
+      "narration": "Those sentences do nothing on their own. Now we give each one some Python.",
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "03",
+          "title": "The Python behind the English",
+          "subtitle": "one function per sentence"
+        }
+      }
+    },
+    {
+      "id": "s17",
+      "type": "ALLURE_STAGE",
+      "narration": "Here's how a sentence and a function find each other. You write a normal Python function. Above it you put a decorator — that's the line starting with an at sign — and inside the decorator you put the sentence it answers. When behave reads your feature file and hits that sentence, it looks for the function whose decorator matches, and runs it. The curly braces you'll see are placeholders: whatever the sentence has in that position gets handed to the function as an argument. So one function can answer a whole family of sentences.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "allureStage": {
+          "kind": "step-binding",
+          "headline": "How a sentence finds [its code]",
+          "caption": "the decorator is the wire",
+          "premise": "The English line lives in the feature file, the function lives in the steps file, and the decorator is what joins them.",
+          "color": "green",
+          "atWord": 1,
+          "cells": [
+            {
+              "label": "Given the target website is \"https://www.python.org\"",
+              "text": "@given(...)",
+              "sub": "def step_set_target(context, url)",
+              "atWord": 22
+            },
+            {
+              "label": "When I send a GET request to the homepage",
+              "text": "@when(...)",
+              "sub": "def step_get_homepage(context)",
+              "atWord": 60
+            },
+            {
+              "label": "Then the response status code should be 200",
+              "text": "@then(...)",
+              "sub": "def step_check_status(context, expected_code)",
+              "atWord": 66
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s18",
+      "type": "RECORDED_STEP",
+      "narration": "New file, and it opens with a long comment. I'm leaving it there on purpose, because a note explaining why a file exists is worth more than the file being three lines shorter. It says something worth knowing: Allure supports twenty attachment types. We're using nine of them, which is enough to cover every SHAPE evidence comes in — a picture, a table, plain text, structured text, and a compressed archive. Adding the other eleven would be padding, since they all work the same way.",
+      "transition": "push",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "a note to whoever opens this next",
+          "premise": "The steps file, and the comment at the top of it.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#opensteps",
+              "label": "the second file",
+              "focus": true
+            },
+            {
+              "ref": "rec:allure-01#st1",
+              "label": "why this file exists",
+              "focus": true,
+              "wantAtWord": 9
+            },
+            {
+              "ref": "rec:allure-01#st1b",
+              "label": "twenty types exist, we use nine",
+              "focus": true,
+              "wantAtWord": 41
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s19",
+      "type": "RECORDED_STEP",
+      "narration": "Then the imports, and each one is a promise about what this file is going to do. csv and io build the timing table in memory. json, zipfile and time are what they sound like. allure is the library that attaches evidence. requests fetches pages. And from behave we take given, when and then — the three decorators that let a function claim an English sentence.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "the imports, and what each is for",
+          "premise": "Seven imports, and the job each one has in this file.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st1c",
+              "label": "seven imports",
+              "focus": true,
+              "wantAtWord": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s20",
+      "type": "RECORDED_STEP",
+      "narration": "Now the first three functions, and I'll go line by line. The Given stores the address on something called context. context is a box behave hands to every step in a scenario, so anything you put on it in one step is still there in the next one. That's how the When knows which website to visit. The When calls requests dot get, which fetches the page, and stores the answer on context as well. It also attaches every response header as a text file, which is our first piece of evidence. And the Then does the actual checking: assert, then the thing that must be true. If it is true, nothing happens and the test carries on. If it isn't, Python raises an AssertionError, and that is the exact word you'll see in the report later.",
+      "transition": "zoom",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "a target, a request, a check",
+          "premise": "The first three step functions, and the context object that connects them.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st2",
+              "label": "given, when, then",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "assertline",
+                  "wantAtWord": 100
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "a box that survives between steps",
+                  "mark": null,
+                  "side": "top",
+                  "color": "blue",
+                  "wantAtWord": 24
+                },
+                {
+                  "text": "raises AssertionError when false",
+                  "mark": "assertline",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 125
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s21",
+      "type": "RECORDED_STEP",
+      "narration": "The next pair downloads the page and keeps a piece of it. allure dot attach is the line to learn in this whole file, so let's read its three arguments properly. First, the thing you're attaching — here, the first two thousand characters of the page. Second, a name, which is what you'll click on in the report. Third, the type, which tells Allure how to treat those bytes. Attachment type dot HTML means show it as a web snippet. Change that third argument and the same bytes get shown a completely different way. Then the check underneath is another assert — is the expected text somewhere in the page we downloaded?",
+      "transition": "wipe",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "attaching your first evidence",
+          "premise": "allure.attach, and the three arguments that decide what the report does with it.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st3",
+              "label": "what, called what, of what type",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "contains",
+                  "wantAtWord": 98
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the name you click in the report",
+                  "mark": null,
+                  "side": "top",
+                  "color": "green",
+                  "wantAtWord": 49
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s22",
+      "type": "RECORDED_STEP",
+      "narration": "This one opens a real browser. context dot browser is a Chromium that's already running — we set that up in a moment, in a separate file. new page opens a fresh tab at a fixed size, goto navigates to the address, and wait until load means: don't carry on until the page has finished loading. Then screenshot with full page true captures the whole page, not just the part that fits on screen, and hands us raw bytes. We close the tab, keep the bytes, and attach them as a PNG in the step below.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "a real browser, and a screenshot",
+          "premise": "Opening a tab, navigating, capturing the full page, closing it again.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st4",
+              "label": "open, go, capture, close",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "the whole page, not just the visible part",
+                  "mark": null,
+                  "side": "top",
+                  "color": "purple",
+                  "wantAtWord": 72
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s23",
+      "type": "RECORDED_STEP",
+      "narration": "Now a loop that measures. For each of three attempts we note the clock, send the request, and work out how many milliseconds it took. perf counter is a timer built for measuring short durations. Each result goes into a list as a small row: attempt, status code, duration. Then we write those rows as CSV — comma separated values, which is just a table as text — using a buffer in memory, so nothing is ever written to disk. The whole table becomes one attachment.",
+      "transition": "morph",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "three timed requests, as a table",
+          "premise": "A loop that records timings, and turns them into a CSV attachment.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st5",
+              "label": "measure, collect, attach",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "built in memory, never written to disk",
+                  "mark": null,
+                  "side": "top",
+                  "color": "blue",
+                  "wantAtWord": 71
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s24",
+      "type": "RECORDED_STEP",
+      "narration": "The same page again, and only one thing changed. type equals jpeg on the screenshot call, and attachment type dot JPG on the attach call. Everything else is identical. I'm doing this deliberately, because at the end you'll watch our report render both of these without ever asking which format it's looking at.",
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "the same page, as a JPEG",
+          "premise": "A second image format, changed in exactly two places.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st6",
+              "label": "two words different",
+              "focus": true,
+              "wantAtWord": 12
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s25",
+      "type": "RECORDED_STEP",
+      "narration": "A zip, built entirely in memory. BytesIO is a file that lives in memory rather than on disk. We open a ZipFile writing into it, write str puts a named file inside the archive — here the whole page, and a small note beside it — and then we hand the finished bytes to allure dot attach with type ZIP. This is the one attachment in the chapter that is genuinely binary. Hold on to that, because it's the one that behaves differently at the end.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "a zip, built in memory",
+          "premise": "An archive assembled without ever touching the disk.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st7",
+              "label": "the one that is truly binary",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "a file that lives in memory",
+                  "mark": null,
+                  "side": "top",
+                  "color": "orange",
+                  "wantAtWord": 7
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s26",
+      "type": "RECORDED_STEP",
+      "narration": "Three functions, and they all say the same three facts. The address, the status code, and how long the page was. The first writes them as JSON, using json dot dumps with an indent so it's readable. The second writes the same facts as XML, with angle brackets, built with an f-string — that's the f before the quote, which lets you drop a value straight into the text. The third writes them as YAML, which is just name colon value on each line. Same facts, three formats, three attachment types.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "one summary, three formats",
+          "premise": "The same three facts written as JSON, XML and YAML.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st8",
+              "label": "json, xml, yaml",
+              "focus": true,
+              "wantAtWord": 27
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s27",
+      "type": "RECORDED_STEP",
+      "narration": "And the last two, which are the ones this chapter is really about. The broken one fetches the page, then reads a header called X dash Definitely Not A Real Header. That header does not exist, so Python raises a KeyError. Read that line again: there's no assert here at all. Nothing is being checked. The test simply falls over — and that is exactly what Allure calls broken. The skipped one calls context dot scenario dot skip, with a reason, and behave stops before running anything.",
+      "transition": "slide",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "the broken one, and the skipped one",
+          "premise": "A test that throws before it checks, and a test that never runs.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#st9",
+              "label": "no assert anywhere in this one",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "keyerror",
+                  "wantAtWord": 31
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "no assert — nothing is being checked",
+                  "mark": "keyerror",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 48
+                },
+                {
+                  "text": "stops before it runs",
+                  "mark": "skipcall",
+                  "side": "right",
+                  "color": "purple",
+                  "wantAtWord": 81
+                }
+              ]
+            },
+            {
+              "ref": "rec:allure-01#savesteps",
+              "label": "saved",
+              "focus": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s28",
+      "type": "ALLURE_STAGE",
+      "narration": "Step back for a second and look at what we just attached. Nine kinds of evidence, from one test run. Response headers as text. A page snippet as HTML. A timing table as CSV. A screenshot as PNG, and the same one as JPEG. An archive as ZIP. And the same summary as JSON, XML and YAML. Allure has twenty of these types in total, but the nine here cover every family — so once the report can handle these, it can handle the rest.",
+      "transition": "zoom",
+      "background": "zoneA",
+      "data": {
+        "allureStage": {
+          "kind": "evidence-shelf",
+          "headline": "Nine kinds of [evidence]",
+          "caption": "from a single run",
+          "premise": "Each of these came from one allure.attach call in the steps file, and each will be rendered by the report we are about to write.",
+          "color": "purple",
+          "atWord": 1,
+          "cells": [
+            {
+              "label": "response_headers.txt",
+              "sub": "TEXT",
+              "icon": "lucide:file-text",
+              "color": "blue",
+              "atWord": 22
+            },
+            {
+              "label": "homepage_snippet.html",
+              "sub": "HTML",
+              "icon": "lucide:code",
+              "color": "blue",
+              "atWord": 27
+            },
+            {
+              "label": "timing_results.csv",
+              "sub": "CSV",
+              "icon": "lucide:table",
+              "color": "green",
+              "atWord": 31
+            },
+            {
+              "label": "homepage_screenshot.png",
+              "sub": "PNG",
+              "icon": "lucide:image",
+              "color": "purple",
+              "atWord": 36
+            },
+            {
+              "label": "homepage_screenshot.jpg",
+              "sub": "JPG",
+              "icon": "lucide:image",
+              "color": "purple",
+              "atWord": 44
+            },
+            {
+              "label": "homepage_evidence.zip",
+              "sub": "ZIP",
+              "icon": "lucide:archive",
+              "color": "orange",
+              "atWord": 46
+            },
+            {
+              "label": "summary.json",
+              "sub": "JSON",
+              "icon": "lucide:braces",
+              "color": "yellow",
+              "atWord": 54
+            },
+            {
+              "label": "summary.xml",
+              "sub": "XML",
+              "icon": "lucide:file-code",
+              "color": "yellow",
+              "atWord": 55
+            },
+            {
+              "label": "summary.yaml",
+              "sub": "YAML",
+              "icon": "lucide:list",
+              "color": "yellow",
+              "atWord": 57
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s29",
+      "type": "CHAPTER",
+      "narration": "One small file left before we can run any of this.",
+      "transition": "wipe",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "04",
+          "title": "One browser, shared",
+          "subtitle": "setup and teardown"
+        }
+      }
+    },
+    {
+      "id": "s30",
+      "type": "RECORDED_STEP",
+      "narration": "Opening a fresh browser for every scenario would be slow, so we open one at the start of the run and share it. This file has a name behave looks for — environment dot py — and behave calls the functions inside it automatically. before all runs once, before anything else. It starts Playwright and launches Chromium, and parks both on context, which is why every step could reach context dot browser. after all runs once at the very end, and closes them cleanly. If you've used pytest, this is the same idea as a fixture.",
+      "transition": "dip",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "open it once, close it once",
+          "premise": "The lifecycle file behave looks for by name.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#openenv",
+              "label": "the third file",
+              "focus": true
+            },
+            {
+              "ref": "rec:allure-01#env1",
+              "label": "why this file exists",
+              "focus": true,
+              "wantAtWord": 33
+            },
+            {
+              "ref": "rec:allure-01#env2",
+              "label": "before all, and after all",
+              "focus": true,
+              "wantAtWord": 45,
+              "callouts": [
+                {
+                  "text": "closed cleanly, even after a failure",
+                  "mark": null,
+                  "side": "top",
+                  "color": "green",
+                  "wantAtWord": 84
+                }
+              ]
+            },
+            {
+              "ref": "rec:allure-01#saveenv",
+              "label": "saved",
+              "focus": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s31",
+      "type": "CHAPTER",
+      "narration": "Three files written. Let's run them and see all four outcomes at once.",
+      "transition": "morph",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "05",
+          "title": "The first run",
+          "subtitle": "and the files it leaves behind"
+        }
+      }
+    },
+    {
+      "id": "s32",
+      "type": "RECORDED_STEP",
+      "narration": "This command is longer than most, so let's read it. uv run python dash m behave runs behave inside the project we made. Dash f picks a formatter, and the formatter is the allure one — that's the part that writes evidence instead of just printing to the screen. Dash o says where to put it. And features on the end is the folder to read tests from. Now look at the last line. Seven scenarios passed. One failed. One errored — that's our broken one, and behave calls it an error while Allure calls it broken, same thing. One skipped. All four outcomes, from one run, and not one mention of Java in that output.",
+      "transition": "iris",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "all four outcomes, in one run",
+          "premise": "behave running the ten scenarios, with the Allure formatter attached.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#behave",
+              "label": "seven, one, one, one",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "tally",
+                  "wantAtWord": 75
+                }
+              ],
+              "overlay": {
+                "kind": "tally",
+                "atWord": 103,
+                "value": 4,
+                "label": "outcomes, one run"
+              },
+              "callouts": [
+                {
+                  "text": "behave says error, Allure says broken",
+                  "mark": "tally",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 81
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s33",
+      "type": "RECORDED_STEP",
+      "narration": "Before we build anything that looks nice, let's see what behave actually wrote. Ten result files, one per scenario. Then the attachments: four HTML snippets, and one each of zip, yaml, xml, text, png, json, jpg and csv. These are ordinary files sitting in a folder. No database, no server, nothing running. That's worth knowing, because it means anything that can read JSON can build a report from this — including the script we're about to write.",
+      "transition": "fade",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "what behave actually wrote",
+          "premise": "The results folder: one file per scenario, plus every attachment.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#rawcount",
+              "label": "ten results, thirteen attachments",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "results",
+                  "wantAtWord": 14
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "plain files, nothing running",
+                  "mark": null,
+                  "side": "top",
+                  "color": "green",
+                  "wantAtWord": 48
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s34",
+      "type": "RECORDED_STEP",
+      "narration": "And here's the proof for everything I claimed at the start. This pulls every status out of those files and shows each one once. Broken. Failed. Passed. Skipped. Four words, in the actual data, written by the library rather than by me. The word broken is genuinely in there, and now you've seen exactly which file it comes from.",
+      "transition": "push",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "four outcomes, in the files themselves",
+          "premise": "Every distinct status in the raw result files.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#statuses",
+              "label": "the four words, in the data",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "sbroken",
+                  "wantAtWord": 25
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "written by the library, not by us",
+                  "mark": "sskipped",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 38
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s35",
+      "type": "RECORDED_STEP",
+      "narration": "And the two failure messages, side by side. AssertionError — the check ran and refused what it got. KeyError, on a header that was never there — the test fell over first. That's the same distinction we drew earlier, except now it's a real message from a real file, and you can see why one report line saying failed would have hidden it completely.",
+      "transition": "slide",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "two kinds of breakage, in the data",
+          "premise": "The two distinct failure messages the run produced.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#messages",
+              "label": "assertion, and exception",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "keymsg",
+                  "wantAtWord": 19
+                }
+              ],
+              "overlay": {
+                "kind": "split",
+                "atWord": 36,
+                "left": "AssertionError",
+                "right": "KeyError",
+                "leftNote": "your software was wrong",
+                "rightNote": "your test was wrong"
+              },
+              "callouts": [
+                {
+                  "text": "the check ran, and refused",
+                  "mark": "assertmsg",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 15
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s36",
+      "type": "CHAPTER",
+      "narration": "Now the part that replaces the Java tool entirely — and it's one Python file.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "chapter": {
+          "number": "06",
+          "title": "Our own report builder",
+          "subtitle": "from JSON files to one HTML page"
+        }
+      }
+    },
+    {
+      "id": "s37",
+      "type": "RECORDED_STEP",
+      "narration": "Last file. It opens with a docstring saying what the script does, and then the rule it uses to decide what to do with each piece of evidence. I want you to read that rule now, because it's the cleverest thing in the chapter and it fits in two questions. There's no lookup table of twenty types anywhere in this file.",
+      "transition": "wipe",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "what this script is for",
+          "premise": "The report builder, and the rule stated at the top of it.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#openrpt",
+              "label": "the last file",
+              "focus": true
+            },
+            {
+              "ref": "rec:allure-01#rpt1",
+              "label": "a docstring, and a promise",
+              "focus": true,
+              "wantAtWord": 7
+            },
+            {
+              "ref": "rec:allure-01#rpt2",
+              "label": "two questions, no lookup table",
+              "focus": true,
+              "wantAtWord": 35
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s38",
+      "type": "RECORDED_STEP",
+      "narration": "Then the imports and the first function. load results walks the folder, opens every file ending in result dot json, and returns them as a list of Python dictionaries. Path comes from pathlib, and glob finds files by pattern. Ten files in, ten dictionaries out. That's the whole function.",
+      "transition": "dip",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "read every result file",
+          "premise": "Loading the ten result files into memory.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#rpt3",
+              "label": "ten files in, ten dictionaries out",
+              "focus": true,
+              "wantAtWord": 10
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s39",
+      "type": "RECORDED_STEP",
+      "narration": "Here's the first question, and it's one line. Does this attachment's type start with the word image slash? Every image type does — image slash png, image slash jpeg, image slash gif — so one check covers all of them, including formats we haven't used. If it's an image, we read the bytes, encode them as base64, and drop them straight into an img tag. base64 is a way of writing binary data using only ordinary letters and numbers, which is what lets a picture live inside an HTML file instead of sitting next to it as a separate file. That's why the report ends up being a single page you can send to somebody.",
+      "transition": "morph",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "is it a picture?",
+          "premise": "One check that covers every image format, and how the picture gets inside the page.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#rpt4",
+              "label": "one line, every image format",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "binary written as ordinary letters",
+                  "mark": null,
+                  "side": "top",
+                  "color": "purple",
+                  "wantAtWord": 57
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s40",
+      "type": "RECORDED_STEP",
+      "narration": "The second question, and then the honest answer for everything else. Is this text-shaped? Plain text and HTML and CSV obviously are. So are JSON, XML and YAML — even though their types don't start with the word text, which is exactly the trap this check is written to avoid. If it's text-shaped, we decode it and show it. And if it's neither — our zip file — we don't guess. We write a download link instead. Trying to show a zip as text would produce a screen of garbage, and a link that works is worth more than a preview that doesn't. Pause here and read those two questions together, because that pair is the entire attachment system.",
+      "transition": "iris",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "is it text? otherwise, a link",
+          "premise": "The second question, and the fallback for anything that is neither.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#rpt5",
+              "label": "text, or an honest link",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "download",
+                  "wantAtWord": 75
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "JSON and XML are not text/* — hence the check",
+                  "mark": null,
+                  "side": "top",
+                  "color": "orange",
+                  "wantAtWord": 44
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s41",
+      "type": "ALLURE_STAGE",
+      "narration": "Now the rule, drawn. An attachment arrives. Question one: does its type start with image slash? Yes — it gets shown as a picture, and the PNG and the JPEG both take that route without the code ever knowing which is which. No — question two: is it text-shaped? Yes for text, HTML, CSV, JSON, XML and YAML — all six shown as readable text. And no for the zip, which takes the third route and comes out as a download link. Two questions. Three outcomes. Nine kinds of evidence handled, and it would handle the other eleven the same way.",
+      "transition": "fade",
+      "background": "zoneB",
+      "data": {
+        "allureStage": {
+          "kind": "attachment-router",
+          "headline": "Two questions, [three fates]",
+          "caption": "no lookup table anywhere",
+          "premise": "Every attachment enters here. The first question sorts out pictures, the second sorts out anything readable, and whatever is left gets a link.",
+          "color": "orange",
+          "atWord": 1,
+          "cells": [
+            {
+              "label": "image/png",
+              "text": "image",
+              "atWord": 24
+            },
+            {
+              "label": "image/jpeg",
+              "text": "image",
+              "atWord": 30
+            },
+            {
+              "label": "text/plain",
+              "text": "text",
+              "atWord": 64
+            },
+            {
+              "label": "text/html",
+              "text": "text",
+              "atWord": 53
+            },
+            {
+              "label": "text/csv",
+              "text": "text",
+              "atWord": 54
+            },
+            {
+              "label": "application/json",
+              "text": "text",
+              "atWord": 55
+            },
+            {
+              "label": "application/xml",
+              "text": "text",
+              "atWord": 56
+            },
+            {
+              "label": "application/x-yaml",
+              "text": "text",
+              "atWord": 58
+            },
+            {
+              "label": "application/zip",
+              "text": "download",
+              "atWord": 70
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s42",
+      "type": "RECORDED_STEP",
+      "narration": "The next three functions build the page, one layer at a time. render step draws a single step and then calls itself for any steps nested inside it, which is how a step with sub-steps comes out indented correctly. render test draws one scenario: its name, a coloured badge for its status, and the message if it has one. Look at how the status is used — it picks a CSS class, and that class is what gives passed its green and broken its amber. Four statuses, four colours, and nothing else on the page is coloured at all.",
+      "transition": "push",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "a step, then a whole test",
+          "premise": "The two functions that turn one result into HTML.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#rpt6",
+              "label": "a step, and the steps inside it",
+              "focus": true,
+              "wantAtWord": 13
+            },
+            {
+              "ref": "rec:allure-01#rpt7",
+              "label": "one test, and its status",
+              "focus": true,
+              "wantAtWord": 44
+            },
+            {
+              "ref": "rec:allure-01#rpt8",
+              "label": "its message, when it has one",
+              "focus": true,
+              "wantAtWord": 55,
+              "callouts": [
+                {
+                  "text": "the status picks the colour",
+                  "mark": null,
+                  "side": "top",
+                  "color": "blue",
+                  "wantAtWord": 75
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s43",
+      "type": "RECORDED_STEP",
+      "narration": "Then its evidence, and the shell of the page around everything. The style block is deliberately small — four status colours, a readable font, and enough spacing to breathe. I'm not going to read CSS to you line by line, but do notice there are no other colours in it. A report that colours everything tells you nothing about anything.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "its evidence, and the page around it",
+          "premise": "Attachments rendered into the test, and the page shell they sit in.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#rpt9",
+              "label": "the evidence for one test",
+              "focus": true,
+              "wantAtWord": 3
+            },
+            {
+              "ref": "rec:allure-01#rpt10",
+              "label": "four colours, and nothing else",
+              "focus": true,
+              "wantAtWord": 13
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s44",
+      "type": "RECORDED_STEP",
+      "narration": "And the last two pieces. build report counts each status as it goes — and this is where a lot of homemade reports quietly go wrong. It counts four things, separately. An earlier version of this script counted passed and failed only, and silently reported the wrong total, because the broken and skipped ones had nowhere to go. Then main is the command line part: which folder to read, where to write, and what to call the report. Save it, and that's every line of code in this chapter.",
+      "transition": "zoom",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "caption": "count all four, then write it out",
+          "premise": "The counting, and the command-line entry point.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#rpt11",
+              "label": "four counters, not two",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "counts",
+                  "wantAtWord": 29
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "two counters would lose two outcomes",
+                  "mark": "counts",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 26
+                }
+              ]
+            },
+            {
+              "ref": "rec:allure-01#rpt12",
+              "label": "the command line entry point",
+              "focus": true,
+              "wantAtWord": 60
+            },
+            {
+              "ref": "rec:allure-01#savertp",
+              "label": "saved",
+              "focus": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s45",
+      "type": "CHAPTER",
+      "narration": "Everything is written. Let's build the report and see what we made.",
+      "transition": "wipe",
+      "background": "zoneC",
+      "data": {
+        "chapter": {
+          "number": "07",
+          "title": "The report",
+          "subtitle": "one file, everything inside it"
+        }
+      }
+    },
+    {
+      "id": "s46",
+      "type": "RECORDED_STEP",
+      "narration": "We point the script at the results folder, give it a title, and run it. The output name has a sensible default, so we can leave it out. And there's the line that matters: seven passed, one failed, one broken, one skipped, ten total. Four counts, each separate, adding up correctly. Compare that to the run from earlier and every number agrees. Then look at the file — nearly a megabyte, and that's because both screenshots are inside it. One file. You could email this to somebody and they'd see every screenshot, every table and every message, with nothing to install.",
+      "transition": "dip",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "caption": "four counts, and one file",
+          "premise": "Building the report, and the size of what comes out.",
+          "layout": "full",
+          "color": "blue",
+          "clips": [
+            {
+              "ref": "rec:allure-01#build",
+              "label": "seven, one, one, one, ten",
+              "focus": true,
+              "zooms": [
+                {
+                  "mark": "tally2",
+                  "wantAtWord": 35
+                }
+              ],
+              "overlay": {
+                "kind": "rows",
+                "atWord": 62,
+                "rows": [
+                  {
+                    "text": "behave said: 7 passed, 1 failed, 1 error, 1 skipped",
+                    "state": "kept"
+                  },
+                  {
+                    "text": "our report says: 7 passed, 1 failed, 1 broken, 1 skipped",
+                    "state": "kept"
+                  },
+                  {
+                    "text": "ten scenarios, counted four ways",
+                    "state": "new"
+                  }
+                ]
+              },
+              "callouts": [
+                {
+                  "text": "every number agrees with the run",
+                  "mark": "tally2",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 52
+                }
+              ]
+            },
+            {
+              "ref": "rec:allure-01#size",
+              "label": "both screenshots are inside it",
+              "focus": true,
+              "wantAtWord": 71
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s47",
+      "type": "RECAP",
+      "narration": "So look at what happened here. We wrote ten checks as English sentences. We gave each sentence a small Python function, and attached nine different kinds of evidence along the way. We ran it once and got all four outcomes — including the two most tutorials pretend don't exist. We read the raw files before any report existed, and found the word broken sitting in the data. And then we wrote our own report builder, in one Python file, with a rule that fits in two questions. Java was never involved. Neither was Node, or any separate program. Next chapter, we take a real Allure report — the official kind, the sort you'd actually meet at work — and write the code that opens it back up.",
+      "transition": "morph",
+      "background": "zoneB",
+      "data": {
+        "recap": {
+          "heading": "What you built",
+          "points": [
+            {
+              "text": "Ten checks, written as plain English",
+              "atWord": 13
+            },
+            {
+              "text": "A Python function behind every sentence",
+              "atWord": 21
+            },
+            {
+              "text": "Nine kinds of evidence, one run",
+              "atWord": 28
+            },
+            {
+              "text": "All four outcomes, including broken",
+              "atWord": 40
+            },
+            {
+              "text": "Your own report builder, in one file",
+              "atWord": 75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "s48",
+      "type": "OUTRO_CTA",
+      "narration": "If this was useful, subscribe — the next chapter is already coming. The links to behave, allure-behave, Playwright and requests are in the description, and every one of them is worth reading properly. See you in chapter two.",
+      "transition": "iris",
+      "background": "zoneC",
+      "data": {
+        "outro": {
+          "heading": "Chapter 2: opening a real report back up",
+          "sub": "links in the description"
+        }
+      }
+    }
+  ]
+}

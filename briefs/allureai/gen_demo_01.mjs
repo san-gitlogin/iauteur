@@ -10,7 +10,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const CH = '/Users/santhu/iauteur/AllureAI_VideoTutorial/chapter_01_generate_allure_report';
-const lines = (rel) => fs.readFileSync(path.join(CH, rel), 'utf8').replace(/\s+$/, '').split('\n');
+// The chapter folder is CRLF. Monaco normalises line endings as it types, so a slice
+// carrying \r can never match what the editor shows — the recorder caught it, but the
+// fix belongs here, at the source.
+const lines = (rel) => fs.readFileSync(path.join(CH, rel), 'utf8')
+  .replace(/\r\n/g, '\n').replace(/\s+$/, '').split('\n');
 /** 1-indexed, inclusive — the same numbers `grep -n` prints. */
 const src = (rel, from, to) => lines(rel).slice(from - 1, to).join('\n');
 
@@ -167,15 +171,25 @@ const demo = {
     {id: 'savertp', action: 'save', label: 'saved'},
 
     // ══ build it, and look at it ════════════════════════════════════════════
-    run('build', 'uv run python build_simple_html_report.py allure-results-bdd -o report-python-only.html -t "Python.org Homepage Health Checks"',
+    run('build', 'uv run python build_simple_html_report.py allure-results-bdd -t "Homepage Health"',
         'four counts, correctly separated',
         {clearFirst: true, expect: {contains: '10 total'}, holdMs: 3000,
          marks: [{id: 'tally2', text: '7 passed, 1 failed, 1 broken, 1 skipped, 10 total'}]}),
-    run('size', 'ls -lh report-python-only.html', 'one file, everything inside it',
+    run('size', 'ls -lh report.html', 'one file, everything inside it',
         {expect: {exitCode: 0}, holdMs: 2000}),
   ],
 };
 
+
+const PROMPT_COLS = 14, TERM_COLS = 125;
+for (const st of demo.steps) {
+  if (st.action !== 'run') continue;
+  const w = PROMPT_COLS + st.cmd.length;
+  if (w > TERM_COLS - 4) {
+    throw new Error(`step "${st.id}": the command is ${st.cmd.length} chars, which wraps at ` +
+      `${TERM_COLS} columns — the implicit __cmd mark cannot resolve across two rows. Shorten it.`);
+  }
+}
 fs.writeFileSync('/Users/santhu/iauteur/demos/allure-01.json', JSON.stringify(demo, null, 2) + '\n');
 const typing = demo.steps.filter((s) => s.action === 'type');
 console.log(`wrote demos/allure-01.json — ${demo.steps.length} steps, ${typing.length} typing blocks`);
