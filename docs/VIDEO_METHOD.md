@@ -201,3 +201,38 @@ He is not asking for that instance to be patched. He is asking why the class was
 4. Test the seal by breaking something on purpose.
 5. Write the argument into CLAUDE.md — the guard goes on the ARGUMENT, not the surface.
    Finish the sentence *"the same reasoning also applies to ___"* before you stop.
+
+## The over-reliance cap is arithmetic, so do it before you write
+
+`RECORDED_STEP` (or any sub-type) is capped at `ceil(0.35 × scenes)`. Read that backwards
+before authoring: **a chapter with R typing beats needs at least `R / 0.35` scenes in
+total**, so 36 recorded beats needs 101 scenes and therefore ~65 drawn ones. Discovering
+this after the script is written costs a full authoring pass; deciding it first makes the
+drawn beats part of the plan, which is where they belong anyway — a picture between every
+two typing blocks is better teaching than a wall of screen recording.
+
+The fix is never to merge footage into fewer scenes. It is always to add drawings.
+
+## Two solver traps that no amount of rewriting fixes
+
+**The word round-trip.** `anchor-spec` places a clip at a FRAME and stores it as a WORD, and
+`wordOf` ROUNDS. A clip placed at frame 279 comes back as word 24 = frame 276, and the
+previous clip ships three frames short — reported as "243f of footage but only 240f of
+narration before the next step". Adding words moves both numbers and the error survives.
+Fixed 2026-09-09 by ceiling the automatic path to a whole word, the way the override path
+already did.
+
+**Callouts live in the HOLD, and the hold ends at 80% of the read.** A callout must land
+after its clip's footage AND before `0.8 × narration`. So a clip of F frames needs a beat of
+at least `(F/12 + callouts + 3) / 0.8` words — for 1417 frames and one callout, ~152 words,
+not the ~127 the error message quotes. Budget with the 0.8 in the arithmetic or you will
+expand the same beat twice.
+
+## An explanatory component must step on WORDS, not on a cadence
+
+`LayeredStack`, `FileTree` and `LogStream` all revealed their rows on a fixed frame interval
+(26, 7 and 7 frames). On a forty-second beat that means the picture completes inside the
+first second and then sits still while the voice is still explaining it. All three now take
+an optional per-element `atWord` and fall back to the old cadence when it is absent, so
+existing specs are untouched. When you add a drawn beat, anchor every element: the lint's
+dwell warning ("that earns 16s") is measuring exactly this.

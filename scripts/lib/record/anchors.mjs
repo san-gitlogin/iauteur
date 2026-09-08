@@ -190,6 +190,16 @@ export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], s
         overridden.push(i);
       }
     }
+    // ROUND-TRIP GUARD — `at` is stored as a WORD via `wordOf`, which ROUNDS. A position
+    // that is not already on a word boundary therefore comes back up to half a word
+    // EARLIER than it was placed, and the clip before it ships cut off by those few
+    // frames. That is exactly the linter's "243f of footage but only 240f of narration
+    // before the next step", which no amount of rewriting the script can fix, because the
+    // three missing frames are created by the rounding and not by the words.
+    // PAID FOR on Allure chapter 1: `openrpt` (243f) placed at frame 279 came back as
+    // word 24 = frame 276, and the beat was rejected however many words were added to it.
+    // The override branch above already ceils for this reason; the automatic path did not.
+    at = Math.ceil(at / FPW) * FPW;
     starts.push(at);
     clips.push({atWord: wordOf(at), callouts: []});
     cursor = at + clipFrames[i] + (i < lead ? Math.round((slack * weights[i]) / wsum) : 0);

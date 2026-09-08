@@ -34,8 +34,17 @@ export const FileTree: React.FC<{scene: Scene}> = ({scene}) => {
   const hz = vertical ? 340 : 210;
   const padV = 36 * scale;
   const rowH = Math.min((vertical ? 92 : 74) * scale, ((frameH - 2 * hz) - padV) / n);
+  // A NODE CAN NAME ITS OWN WORD (LAW 0i.1). The tree used to unroll on a fixed 7-frame
+  // cadence, so the whole thing was on screen within a quarter of a second and then sat
+  // still for however long the narration ran. When nodes carry `atWord` each row arrives on
+  // the word that names it; with none, the original cadence stands untouched.
   const per = 7;
-  const revealed = interpolate(frame, [start, start + per * n], [0, n], clamp);
+  const anchored = nodes.some((nd) => nd.atWord != null);
+  const nodeFrame = (i: number) =>
+    nodes[i].atWord != null ? wordToFrame(nodes[i].atWord as number) : start + per * i;
+  const revealed = anchored
+    ? nodes.reduce((k, _, i) => (frame >= nodeFrame(i) ? i + 1 : k), 0)
+    : interpolate(frame, [start, start + per * n], [0, n], clamp);
   const rad = 14 * scale * t.style.cornerRadius;
 
   return (
@@ -54,7 +63,9 @@ export const FileTree: React.FC<{scene: Scene}> = ({scene}) => {
       >
         {nodes.map((node, i) => {
           const shown = i < revealed;
-          const rowE = interpolate(revealed, [i, i + 1], [0, 1], clamp);
+          const rowE = anchored
+            ? interpolate(frame, [nodeFrame(i), nodeFrame(i) + 10], [0, 1], clamp)
+            : interpolate(revealed, [i, i + 1], [0, 1], clamp);
           const isFolder = node.kind !== 'file';
           const active = i === highlight;
           const c = node.color ? sem(node.color) : accent;

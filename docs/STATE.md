@@ -1918,3 +1918,42 @@ count the breaks before cutting content.
 - `HANDOFF.md` is a stale program tracker (Session 7, 2026-07-12; still says "manifest 17→136", now
   148) and references `/memories/repo/*` paths that don't exist outside one machine. Treat this
   file as current instead.
+
+
+## Allure AI — a nine-chapter course (started 2026-09-09)
+
+Source material: `AllureAI_VideoTutorial/chapter_01..09` plus `docs/chapter_*.md`. The docs
+were written on a DIFFERENT machine — Python 3.14.6, playwright 1.61.0, three html
+attachments. This machine has Python 3.12.2, playwright 1.62.0 and produces FOUR html
+attachments. Every number spoken in chapter 1 was re-measured here (LAW 0m); do the same
+for every chapter rather than quoting the doc.
+
+Measured for chapter 1, and used in the script:
+`7 scenarios passed, 1 failed, 1 error, 1 skipped` / `27 steps passed, 1 failed, 1 error,
+1 skipped`; ten `*-result.json` and thirteen attachment files; the report prints
+`7 passed, 1 failed, 1 broken, 1 skipped, 10 total` and is ~994 KB.
+
+**Chapter 1** — `topics/allure-ai-01-first-report`. Recording `rec/allure-01` (54 steps, 50
+verified by read-back, deviceScaleFactor 4). Builders: `briefs/allureai/build_01.mjs`,
+`briefs/allureai/build_01_short.mjs`, `briefs/allureai/gen_demo_01.mjs`. 101 scenes, ~11k
+words, ~59 minutes — the length is the over-reliance arithmetic, not padding: 36 typing
+beats force ≥101 scenes, and every added scene is a drawing that explains a specific idea.
+
+New pictures this chapter (`src/allureViz.tsx`, one scene type `ALLURE_STAGE`, nine kinds):
+`outcome-bins`, `fail-vs-broken`, `step-binding`, `evidence-shelf`, `attachment-router`,
+`toolbelt`, `import-shelf`, `command-anatomy`, `rule-fix`.
+
+Chapters 2–9 still to do: verify on this machine → record → author → voice → render, plus
+one short each, then the combined series cut the owner asked for.
+
+**Chapter 2 verified on this machine (2026-09-09), before authoring:**
+`build_single_file_report.py` over chapter 1's committed `allure-results-bdd` (22 files):
+raw JSON `965,820` characters (matches the doc), gzip **647,981** bytes (doc says 660,296),
+base64 **863,976** characters (doc says 880,396). `decode_report.py` returns
+`10 test cases — passed: 7  failed: 1  broken: 1  skipped: 1`, the failed one carrying
+`AssertionError`. Use the measured numbers, never the doc's.
+
+**Chapter 2 recording plan is written** — `briefs/allureai/gen_demo_02.mjs` → `demos/allure-02.json`
+(26 steps, 14 typing blocks). It copies chapter 1's `allure-results-bdd` in during prep
+rather than re-running behave on camera, and it asserts that the typed blocks reconstruct
+both source files byte-for-byte. Not yet recorded.

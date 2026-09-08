@@ -32,11 +32,19 @@ export const LogStream: React.FC<{scene: Scene}> = ({scene}) => {
   const held = 30;
   const viewport = vertical ? 9 : 7;
 
+  // A LINE CAN NAME ITS OWN WORD (LAW 0i.1). The stream used to run on a fixed 7-frame
+  // cadence with one pause at the highlight, so a four-line log finished inside a second
+  // and the picture then sat still for the rest of a thirty-second beat. When lines carry
+  // `atWord`, each one arrives as the voice reaches it; with none, the cadence is unchanged.
+  const anchored = lines.some((l) => l.atWord != null);
+  const lineFrame = (i: number) =>
+    lines[i].atWord != null ? wordToFrame(lines[i].atWord as number) : start + per * i;
   // reveal count with a pause when the highlighted line lands
   const f = frame - start;
   const tReach = hi >= 0 ? hi * per : Infinity;
   let revealed;
-  if (f < tReach) revealed = f / per;
+  if (anchored) revealed = lines.reduce((k, _, i) => (frame >= lineFrame(i) ? i + 1 : k), 0);
+  else if (f < tReach) revealed = f / per;
   else revealed = hi + Math.max(0, f - tReach - held) / per;
   revealed = Math.max(0, Math.min(n, revealed));
   const shownCount = Math.floor(revealed);

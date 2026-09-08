@@ -1,0 +1,338 @@
+{
+  "slug": "allure-02",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "allure-02",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "fps": 30,
+  "maximizePanel": false,
+  "prep": {
+    "files": {
+      "build_single_file_report.py": "",
+      "decode_report.py": ""
+    },
+    "commands": [
+      "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/",
+      "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
+      "rm -rf allure-results-bdd bundle.html",
+      "cp -R /Users/santhu/iauteur/AllureAI_VideoTutorial/chapter_01_generate_allure_report/allure-results-bdd ./allure-results-bdd"
+    ]
+  },
+  "steps": [
+    {
+      "id": "look",
+      "action": "run",
+      "cmd": "ls allure-results-bdd | wc -l",
+      "label": "twenty-two files from last time",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      },
+      "holdMs": 2200,
+      "marks": [
+        {
+          "id": "count",
+          "text": "22"
+        }
+      ]
+    },
+    {
+      "id": "kinds",
+      "action": "run",
+      "cmd": "ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+      "label": "ten results, and their evidence",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "result.json"
+      },
+      "holdMs": 2600,
+      "marks": [
+        {
+          "id": "results",
+          "text": "result.json"
+        }
+      ]
+    },
+    {
+      "id": "openpack",
+      "action": "openFile",
+      "path": "build_single_file_report.py",
+      "label": "the five-step trick, written down"
+    },
+    {
+      "id": "openpackSettle",
+      "action": "pause",
+      "ms": 1800
+    },
+    {
+      "id": "pk1",
+      "action": "type",
+      "path": "build_single_file_report.py",
+      "text": "\"\"\"\nbuild_single_file_report.py\n\nPacks an entire allure-results folder (every *-result.json and every\nattachment file next to it) into ONE html file, the same trick real\ntest-report tools use so you can email or upload a single file instead\nof a folder full of hundreds of small files.\n\nThe trick is simple once you see it:\n  1. Build one big Python dictionary holding every result + every\n     attachment (attachments as raw bytes).\n  2. Turn that dictionary into JSON text.\n  3. Compress the JSON text with gzip (it shrinks a lot - JSON repeats\n     the same field names over and over).\n  4. Turn the compressed bytes into base64 text (base64 is just a way\n     to write raw bytes using only safe, ordinary keyboard characters,\n     so they survive being pasted inside an HTML file).\n  5. Drop that base64 text inside a <script> tag.\n\nNothing here is unique to Allure. This is the same idea behind every\n\"single file\" report format you'll ever come across.\n\nUsage:\n    python build_single_file_report.py allure-results-bdd -o bundle.html\n\"\"\"",
+      "label": "the trick, in five lines of English",
+      "focus": "editor"
+    },
+    {
+      "id": "pk2",
+      "action": "type",
+      "path": "build_single_file_report.py",
+      "text": "\nimport argparse\nimport base64\nimport gzip\nimport json\nfrom pathlib import Path\n",
+      "label": "four imports, all built in",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "gzip",
+          "text": "import gzip"
+        }
+      ]
+    },
+    {
+      "id": "pk3",
+      "action": "type",
+      "path": "build_single_file_report.py",
+      "text": "\n\ndef collect_bundle(results_dir: Path) -> dict:\n    \"\"\"Read every result file and every attachment file into one dict.\"\"\"\n    bundle = {\"results\": [], \"attachments\": {}}\n\n    for result_file in sorted(results_dir.glob(\"*-result.json\")):\n        with open(result_file, \"r\", encoding=\"utf-8\") as f:\n            bundle[\"results\"].append(json.load(f))\n\n    for attachment_file in sorted(results_dir.glob(\"*-attachment.*\")):\n        raw_bytes = attachment_file.read_bytes()\n        bundle[\"attachments\"][attachment_file.name] = base64.b64encode(raw_bytes).decode(\"ascii\")\n\n    return bundle\n",
+      "label": "one dictionary, everything in it",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "b64line",
+          "text": "base64.b64encode"
+        }
+      ]
+    },
+    {
+      "id": "pk4",
+      "action": "type",
+      "path": "build_single_file_report.py",
+      "text": "\n\ndef build_single_file(results_dir: Path, output_file: Path) -> None:\n    bundle = collect_bundle(results_dir)\n\n    json_text = json.dumps(bundle)\n    compressed_bytes = gzip.compress(json_text.encode(\"utf-8\"))\n    encoded_text = base64.b64encode(compressed_bytes).decode(\"ascii\")\n\n    print(f\"Raw JSON size:        {len(json_text):,} characters\")\n    print(f\"Gzip-compressed size: {len(compressed_bytes):,} bytes\")\n    print(f\"Base64 (final) size:  {len(encoded_text):,} characters\")\n",
+      "label": "json, then gzip, then base64",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "compress",
+          "text": "gzip.compress"
+        }
+      ]
+    },
+    {
+      "id": "pk5",
+      "action": "type",
+      "path": "build_single_file_report.py",
+      "text": "\n    html = f\"\"\"<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidden inside the script tag below.</p>\n<script id=\"report-bundle\" type=\"application/octet-stream\">{encoded_text}</script>\n</body>\n</html>\n\"\"\"\n    output_file.write_text(html, encoding=\"utf-8\")\n    print(f\"Single-file report written to: {output_file.resolve()}\")\n",
+      "label": "and drop it inside a script tag",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "scripttag",
+          "text": "id=\"report-bundle\""
+        }
+      ]
+    },
+    {
+      "id": "pk6",
+      "action": "type",
+      "path": "build_single_file_report.py",
+      "text": "\n\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"results_dir\", type=Path)\n    parser.add_argument(\"-o\", \"--output\", type=Path, default=Path(\"bundle.html\"))\n    args = parser.parse_args()\n    build_single_file(args.results_dir, args.output)\n\n\nif __name__ == \"__main__\":\n    main()",
+      "label": "the command line part",
+      "focus": "editor"
+    },
+    {
+      "id": "savepack",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "pack",
+      "action": "run",
+      "cmd": "uv run --no-project python build_single_file_report.py allure-results-bdd",
+      "label": "three numbers, one file",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Single-file report"
+      },
+      "holdMs": 3400,
+      "marks": [
+        {
+          "id": "raw",
+          "text": "Raw JSON size"
+        },
+        {
+          "id": "gz",
+          "text": "Gzip-compressed size"
+        },
+        {
+          "id": "b64",
+          "text": "Base64 (final) size"
+        }
+      ]
+    },
+    {
+      "id": "bundlesize",
+      "action": "run",
+      "cmd": "ls -lh bundle.html",
+      "label": "one file on disk",
+      "focus": "terminal",
+      "expect": {
+        "exitCode": 0
+      },
+      "holdMs": 2000
+    },
+    {
+      "id": "peek",
+      "action": "run",
+      "cmd": "head -c 300 bundle.html",
+      "label": "and it is unreadable on purpose",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      },
+      "holdMs": 2800,
+      "marks": [
+        {
+          "id": "notice",
+          "text": "packed test evidence"
+        }
+      ]
+    },
+    {
+      "id": "opendec",
+      "action": "openFile",
+      "path": "decode_report.py",
+      "label": "now open it back up"
+    },
+    {
+      "id": "opendecSettle",
+      "action": "pause",
+      "ms": 1800
+    },
+    {
+      "id": "dc1",
+      "action": "type",
+      "path": "decode_report.py",
+      "text": "\"\"\"\ndecode_report.py\n\nThe reverse of build_single_file_report.py. Given ONE html file that has\ntest evidence packed inside it, this pulls it back apart into clean\nPython objects:\n\n    Report\n      -> TestCase (name, status, failure message/trace)\n           -> Step (name, status)\n                -> Attachment (name, mime type, raw bytes)\n\nThis is the exact shape later chapters store into SQLite and serve\nthrough FastAPI, so getting this shape right here matters a lot.\n\nUsage:\n    python decode_report.py bundle.html\n\"\"\"\nimport argparse\nimport base64\nimport gzip\nimport json\nimport re\nfrom dataclasses import dataclass, field\nfrom pathlib import Path\nfrom typing import Optional\n",
+      "label": "the shape we are decoding into",
+      "focus": "editor"
+    },
+    {
+      "id": "dc2",
+      "action": "type",
+      "path": "decode_report.py",
+      "text": "\n\n@dataclass\nclass Attachment:\n    name: str\n    mime_type: str\n    data: bytes\n\n\n@dataclass\nclass Step:\n    name: str\n    status: str\n    attachments: list = field(default_factory=list)\n\n\n@dataclass\nclass TestCase:\n    name: str\n    status: str\n    failure_message: Optional[str]\n    failure_trace: Optional[str]\n    steps: list = field(default_factory=list)\n",
+      "label": "three dataclasses, three levels",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "dcls",
+          "text": "@dataclass"
+        }
+      ]
+    },
+    {
+      "id": "dc3",
+      "action": "type",
+      "path": "decode_report.py",
+      "text": "\n\ndef extract_bundle_json(html_text: str) -> dict:\n    \"\"\"Pull the base64+gzip blob out of the <script> tag and turn it back into a dict.\"\"\"\n    match = re.search(\n        r'<script id=\"report-bundle\"[^>]*>([^<]+)</script>',\n        html_text,\n    )\n    if not match:\n        raise ValueError(\"No report-bundle script tag found in this HTML file\")\n\n    encoded_text = match.group(1)\n    compressed_bytes = base64.b64decode(encoded_text)\n    json_text = gzip.decompress(compressed_bytes).decode(\"utf-8\")\n    return json.loads(json_text)\n",
+      "label": "the same five steps, backwards",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "decompress",
+          "text": "gzip.decompress"
+        }
+      ]
+    },
+    {
+      "id": "dc4",
+      "action": "type",
+      "path": "decode_report.py",
+      "text": "\n\ndef guess_mime_type(attachment_filename: str) -> str:\n    extension = Path(attachment_filename).suffix.lower()\n    return {\n        \".png\": \"image/png\",\n        \".jpg\": \"image/jpeg\",\n        \".csv\": \"text/csv\",\n        \".html\": \"text/html\",\n        \".txt\": \"text/plain\",\n    }.get(extension, \"application/octet-stream\")\n",
+      "label": "a guess, when the type is missing",
+      "focus": "editor"
+    },
+    {
+      "id": "dc5",
+      "action": "type",
+      "path": "decode_report.py",
+      "text": "\n\ndef build_test_cases(bundle: dict) -> list:\n    attachments_raw = bundle[\"attachments\"]\n    test_cases = []\n\n    for result in bundle[\"results\"]:\n        details = result.get(\"statusDetails\", {})\n        test_case = TestCase(\n            name=result.get(\"name\", \"Unnamed test\"),\n            status=result.get(\"status\", \"unknown\"),\n            failure_message=details.get(\"message\"),\n            failure_trace=details.get(\"trace\"),\n        )\n\n        for raw_step in result.get(\"steps\", []):\n            step = Step(name=raw_step.get(\"name\", \"\"), status=raw_step.get(\"status\", \"unknown\"))\n            for raw_attachment in raw_step.get(\"attachments\", []):\n                source_name = raw_attachment[\"source\"]\n                encoded_data = attachments_raw.get(source_name)",
+      "label": "one result becomes one object",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "loop",
+          "text": "for raw_step in result.get"
+        }
+      ]
+    },
+    {
+      "id": "dc5b",
+      "action": "type",
+      "path": "decode_report.py",
+      "text": "\n                if encoded_data is None:\n                    continue\n                step.attachments.append(\n                    Attachment(\n                        name=raw_attachment.get(\"name\", source_name),\n                        mime_type=raw_attachment.get(\"type\", guess_mime_type(source_name)),\n                        data=base64.b64decode(encoded_data),\n                    )\n                )\n            test_case.steps.append(step)\n\n        test_cases.append(test_case)\n\n    return test_cases\n",
+      "label": "and its evidence comes back as bytes",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "b64dec",
+          "text": "base64.b64decode"
+        }
+      ]
+    },
+    {
+      "id": "dc6",
+      "action": "type",
+      "path": "decode_report.py",
+      "text": "\n\ndef decode_report(html_file: Path) -> list:\n    html_text = html_file.read_text(encoding=\"utf-8\")\n    bundle = extract_bundle_json(html_text)\n    return build_test_cases(bundle)\n\n\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"html_file\", type=Path)\n    args = parser.parse_args()\n\n    test_cases = decode_report(args.html_file)\n\n    passed = sum(1 for t in test_cases if t.status == \"passed\")\n    failed = sum(1 for t in test_cases if t.status == \"failed\")\n    broken = sum(1 for t in test_cases if t.status == \"broken\")\n    skipped = sum(1 for t in test_cases if t.status == \"skipped\")\n    print(f\"Decoded {len(test_cases)} test cases from {args.html_file}\")\n    print(f\"  passed: {passed}  failed: {failed}  broken: {broken}  skipped: {skipped}\")\n",
+      "label": "count the four outcomes again",
+      "focus": "editor",
+      "marks": [
+        {
+          "id": "counts",
+          "text": "broken = sum"
+        }
+      ]
+    },
+    {
+      "id": "dc7",
+      "action": "type",
+      "path": "decode_report.py",
+      "text": "\n    for test_case in test_cases:\n        attachment_count = sum(len(s.attachments) for s in test_case.steps)\n        print(f\"  - [{test_case.status:6}] {test_case.name}  \"\n              f\"({len(test_case.steps)} steps, {attachment_count} attachments)\")\n        if test_case.status == \"failed\":\n            print(f\"        reason: {test_case.failure_message.strip()}\")\n\n\nif __name__ == \"__main__\":\n    main()",
+      "label": "and print one line per test",
+      "focus": "editor"
+    },
+    {
+      "id": "savedec",
+      "action": "save",
+      "label": "saved"
+    },
+    {
+      "id": "decode",
+      "action": "run",
+      "cmd": "uv run --no-project python decode_report.py bundle.html",
+      "label": "the same ten, back out again",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Decoded 10 test cases"
+      },
+      "holdMs": 4200,
+      "marks": [
+        {
+          "id": "tally",
+          "text": "passed: 7  failed: 1  broken: 1  skipped: 1"
+        },
+        {
+          "id": "reason",
+          "text": "reason: AssertionError"
+        }
+      ]
+    }
+  ]
+}

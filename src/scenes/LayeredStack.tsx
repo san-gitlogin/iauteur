@@ -72,10 +72,22 @@ export const LayeredStack: React.FC<{scene: Scene}> = ({scene}) => {
   const barH = Math.min((vertical ? 150 : 118) * scale, (availH - (n - 1) * gap) / n);
   const rad = 16 * scale * t.style.cornerRadius;
 
-  // signal position p ∈ [0, n-1] in visual (top→bottom) order
+  // A LAYER CAN NAME ITS OWN WORD (LAW 0i.1). The signal used to walk the stack on a fixed
+  // 26-frame cadence, so on a forty-second beat every layer had arrived inside the first
+  // three seconds and the picture then sat still while the voice was still explaining it.
+  // When a layer carries `atWord`, it appears and lights up on THAT word; when none of them
+  // do, the old fixed cadence stands unchanged, which is what every existing spec expects.
   const per = 26;
+  const anchored = layers.some((ly) => ly.atWord != null);
+  const atOf = (vi: number) => start + (signal === 'up' ? n - 1 - vi : vi) * per;
+  const layerFrame = (vi: number) => (layers[vi].atWord != null ? wordToFrame(layers[vi].atWord) : atOf(vi));
   const prog = interpolate(frame, [start, start + per * n], [0, n - 1], clamp);
-  const activeVisual = signal === 'up' ? n - 1 - Math.round(prog) : Math.round(prog);
+  let activeVisual = signal === 'up' ? n - 1 - Math.round(prog) : Math.round(prog);
+  if (anchored) {
+    // the active layer is the last one whose word has been spoken
+    activeVisual = 0;
+    for (let vi = 0; vi < n; vi++) if (frame >= layerFrame(vi)) activeVisual = vi;
+  }
   const showSignal = signal !== 'none' && frame >= start;
 
   return (
@@ -93,7 +105,8 @@ export const LayeredStack: React.FC<{scene: Scene}> = ({scene}) => {
         {layers.map((ly, vi) => {
           const c = ly.color ? sem(ly.color) : accent;
           const on = showSignal && activeVisual === vi;
-          const e = spring({frame: frame - (start + vi * 4), fps, config: {damping: 15, mass: 0.7}});
+          const e = spring({frame: frame - (anchored ? layerFrame(vi) : start + vi * 4), fps,
+                            config: {damping: 15, mass: 0.7}});
           return (
             <div
               key={vi}

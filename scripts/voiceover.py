@@ -28,8 +28,26 @@ async def main():
     spec = json.load(open(spec_path, encoding="utf-8"))
     os.makedirs("public/audio", exist_ok=True)
     os.makedirs("out/tts", exist_ok=True)
+    out = f"out/tts/{prefix}_timestamps.json"
+    # RE-VOICE JUST THE LINES THAT CHANGED.
+    #
+    # PAID FOR on Allure chapter 1: four narrations were corrected while an hour-long TTS
+    # run was already in flight, so those four scenes were spoken with the OLD words while
+    # the spec carried the new ones — a mismatch no gate can see, because every gate reads
+    # the spec. Re-voicing the whole cut to fix four lines costs another hour.
+    #
+    #   ONLY=s51,s52 python3 scripts/voiceover.py <spec> <prefix>
+    #
+    # regenerates only those mp3s and MERGES their timings into the existing timestamps
+    # file, leaving every other scene's audio and word times exactly as they were.
+    only = {s.strip() for s in os.environ.get("ONLY", "").split(",") if s.strip()}
     result = {}
+    if only and os.path.exists(out):
+        result = json.load(open(out, encoding="utf-8"))
+        print(f"  merging into {out} — re-voicing only {sorted(only)}")
     for scene in spec["scenes"]:
+        if only and scene["id"] not in only:
+            continue
         sid, text = scene["id"], scene["narration"]
         mp3 = f"public/audio/{prefix}_{sid}.mp3"
         words = []
@@ -89,7 +107,6 @@ async def main():
             words = [round(i / n * speech_end, 3) for i in range(n)]
         result[sid] = {"duration": round(speech_end + 0.35, 3), "words": words}
         print(f"  {sid}: {len(words)} words, {result[sid]['duration']}s → {mp3}")
-    out = f"out/tts/{prefix}_timestamps.json"
     json.dump(result, open(out, "w"), indent=2)
     print(f"✓ Timestamps → {out}. Next: node scripts/sync.mjs {spec_path} {out} {prefix}")
 

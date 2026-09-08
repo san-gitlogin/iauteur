@@ -542,6 +542,7 @@ export interface StackLayer {
   label: string;
   sub?: string;
   color?: SemColor;
+  atWord?: number;         // the word this layer arrives on; omit and the fixed cadence stands
   size?: string;           // IMAGE_LAYERS: layer size chip, e.g. "124 MB"
   cached?: boolean;        // IMAGE_LAYERS: dimmed + "cached" badge
   rebuilt?: boolean;       // IMAGE_LAYERS: the glowing rebuilt layer
@@ -756,6 +757,7 @@ export interface LogLine {
   level?: 'debug' | 'info' | 'warn' | 'error';
   tag?: string;
   text: string;
+  atWord?: number;         // the word this line arrives on; omit and the stream cadence stands
 }
 export interface LogStreamData {
   headline?: string;
@@ -1027,6 +1029,7 @@ export interface FileNode {
   depth: number;           // 0 = root level, ≤4
   kind?: 'folder' | 'file';
   color?: SemColor;
+  atWord?: number;         // the word this row arrives on; omit and the cadence stands
 }
 export interface FileTreeData {
   headline?: string;

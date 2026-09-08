@@ -1,22 +1,209 @@
 {
   "meta": {
-    "topic": "Allure AI 01 First Report",
+    "topic": "Failed and broken are not the same thing",
+    "subject": "Allure",
     "format": "short",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "audioPrefix": "allure01_short",
+    "series": "Allure AI",
+    "chapterNumber": 1,
+    "onePayoff": "failed means your software is wrong; broken means your test is wrong",
+    "openLoop": "Which one are you actually looking at?",
+    "analogy": "Two runners: one is refused at the line, one trips before it.",
+    "screenplay": "explainer",
+    "topicAxes": [
+      "concept-distinction"
+    ],
+    "seo": {
+      "title": "Failed vs broken in your test report #python #testing",
+      "description": "Allure tracks four outcomes, not two. Failed means the check ran and said no. Broken means the test fell over first. One is your software, the other is your test.",
+      "queries": [
+        "allure failed vs broken",
+        "what does broken mean in allure",
+        "behave error vs failure"
+      ],
+      "tags": [
+        "allure",
+        "python",
+        "testing",
+        "behave",
+        "bdd",
+        "qa",
+        "shorts",
+        "test report"
+      ],
+      "sources": [
+        "https://allurereport.org/docs/",
+        "https://behave.readthedocs.io/"
+      ],
+      "pinned": "Which one bites you more often \u2014 a failed check, or a broken test? And does your current report tell the two apart?"
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
-    "channel": "YOUR CHANNEL",
-    "logo": "img:channel_logo.png"
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png",
+    "theme": "moderndark",
+    "design": "moderndark",
+    "background": "grid"
   },
   "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
+    "title": "FAILED \u2260 BROKEN",
+    "badge": "Allure \u00b7 Python",
+    "asset": "si:python",
     "frames": 2
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Allure says one test failed and one broke. Those are two different problems, and most reports never tell you which.",
+      "transition": "fade",
+      "background": "zoneA",
+      "data": {
+        "headline": "ALLURE: FAILED \u2260 BROKEN",
+        "subtext": "four outcomes, not two",
+        "hookVariant": "statement",
+        "headlineAtWord": 1
+      },
+      "durationFrames": 223
+    },
+    {
+      "id": "s02",
+      "type": "ALLURE_STAGE",
+      "narration": "Failed means the check ran and got the wrong answer. Your software is what is wrong. Broken means the test fell over before it ever reached the check \u2014 so the software was never even asked. Your test is what is wrong. One sends you to the app. The other sends you to the test file.",
+      "transition": "push",
+      "background": "zoneB",
+      "data": {
+        "allureStage": {
+          "kind": "fail-vs-broken",
+          "headline": "Two lanes, [two answers]",
+          "caption": "where the run stops",
+          "premise": "The left run reaches its check and is refused. The right run never gets there.",
+          "color": "orange",
+          "atWord": 1,
+          "cells": [
+            {
+              "label": "reaches the assert",
+              "text": "failed",
+              "color": "red",
+              "atWord": 1
+            },
+            {
+              "label": "falls over first",
+              "text": "broken",
+              "color": "orange",
+              "atWord": 17
+            }
+          ]
+        }
+      },
+      "durationFrames": 570
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "narration": "And it is in the raw data, not just the picture. One grep across the result files this run wrote gives back exactly four statuses: passed, failed, broken, skipped. Four, where most people only ever count two.",
+      "transition": "zoom",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "caption": "four statuses, in the files",
+          "premise": "The result files from a real behave run.",
+          "layout": "full",
+          "color": "green",
+          "card": {
+            "place": "top",
+            "width": 0.9
+          },
+          "clips": [
+            {
+              "ref": "rec:allure-01#statuses",
+              "label": "exactly four",
+              "focus": true,
+              "wantAtWord": 13,
+              "id": "statuses",
+              "src": "rec/allure-01/seg-36.mp4",
+              "frames": 197,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "sbroken": {
+                  "x": 368,
+                  "y": 650,
+                  "w": 169,
+                  "h": 19,
+                  "covers": "\"status\": \"broken\""
+                },
+                "sskipped": {
+                  "x": 368,
+                  "y": 707,
+                  "w": 178,
+                  "h": 19,
+                  "covers": "\"status\": \"skipped\""
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 631,
+                  "w": 665,
+                  "h": 19,
+                  "covers": "grep -ho '\"status\": \"[a-z]*\"' allure-results-bdd/*result.json | sort -u"
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 95,
+                  "w": 728,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 311,
+                  "w": 612,
+                  "h": 75
+                },
+                {
+                  "x": 433,
+                  "y": 446,
+                  "w": 306,
+                  "h": 75
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 797,
+                  "h": 114
+                }
+              ],
+              "shows": "$ uv run python -m behave -f allure_behave.formatter:AllureFormatter",
+              "said": "PS allure-01> grep -ho '\"status\": \"[a-z]*\"' allure-results-bdd/*result.json | sort -u\n\"status\": \"broken\"\n\"status\": \"failed\"\n\"status\": \"passed\"\n\"status\": \"skipped\"\nPS allure-01>\nPS allure-01> uv run python -m behave -f allure_behave.formatter:AllureFormatter -o allure-results-bdd features\nWe\u00a0launch\u00a0ONE\u00a0real\u00a0Playwright/Chromium\u00a0browser\u00a0for\u00a0the\u00a0whole\u00a0run\u00a0and\nreuse\u00a0it\u00a0across\u00a0scenarios,\u00a0closing\u00a0it\u00a0cleanly\u00a0at\u00a0the\u00a0end.\u00a0This\u00a0is\u00a0the\nBDD\u00a0equivalent\u00a0of\u00a0pytest\u00a0fixtures.\n\"\"\"\nfrom\u00a0playwright.sync_api\u00a0import\u00a0sync_playwright\ndef\u00a0before_all(context):\n\u00a0\u00a0\u00a0\u00a0context.playwright\u00a0=\u00a0sync_playwright().start()\n\u00a0\u00a0\u00a0\u00a0context.browser\u00a0=\u00a0context.playwright.chromium.launch()\ndef\u00a0after_all(context):\n\u00a0\u00a0\u00a0\u00a0context.browser.close()\n\u00a0\u00a0\u00a0\u00a0context.playwright.stop()",
+              "atWord": 13
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 583
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "narration": "The full build is on the channel \u2014 ten checks, four outcomes, and a report written in Python with no Java anywhere.",
+      "transition": "slide",
+      "background": "zoneA",
+      "data": {
+        "message": "Full build on the channel",
+        "sub": "Allure in pure Python"
+      },
+      "durationFrames": 242
+    }
+  ]
 }

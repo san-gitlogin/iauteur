@@ -3857,15 +3857,23 @@ for (const s of spec.scenes ?? []) {
   }
   if (d.allureStage) {
     const x = d.allureStage;
-    const KINDS = ['outcome-bins', 'fail-vs-broken', 'step-binding', 'evidence-shelf', 'attachment-router'];
+    const KINDS = ['outcome-bins', 'fail-vs-broken', 'step-binding', 'evidence-shelf',
+                   'attachment-router', 'toolbelt', 'import-shelf', 'command-anatomy', 'rule-fix'];
     if (!x.kind) E(`${id}: ALLURE_STAGE needs a kind`);
     else if (!KINDS.includes(x.kind)) E(`${id}: ALLURE_STAGE unknown kind ${JSON.stringify(x.kind)} — one of ${KINDS.join(', ')}`);
     if (len(x.headline) > 44) E(`${id}: ALLURE_STAGE headline > 44 chars`);
     if (len(x.caption) > 30) E(`${id}: ALLURE_STAGE caption > 30 chars`);
     if (len(x.premise) > 150) E(`${id}: ALLURE_STAGE premise > 150 chars`);
     if (len(x.codeTitle) > 22) E(`${id}: ALLURE_STAGE codeTitle > 22 chars`);
+    // TWO KINDS CARRY A LONGER LABEL BY DESIGN, and a flat 26 would force a lie:
+    //   · `import-shelf` splits a comma list into one chip per name, so the label IS the
+    //     list ("csv, io, json, zipfile, time") and the component lays the chips out.
+    //   · `command-anatomy` prints real segments of a real command; trimming
+    //     "-f allure_behave.formatter:AllureFormatter" would show a flag nobody can run.
+    // Everything else keeps the 26 that stops a cell becoming a sentence.
+    const LABEL_CAP = x.kind === 'import-shelf' ? 34 : x.kind === 'command-anatomy' ? 46 : 26;
     for (const c of x.cells ?? []) {
-      if (len(c.label) > 26) E(`${id}: ALLURE_STAGE cell label ${JSON.stringify(c.label)} > 26 chars`);
+      if (len(c.label) > LABEL_CAP) E(`${id}: ALLURE_STAGE cell label ${JSON.stringify(c.label)} > ${LABEL_CAP} chars`);
       if (len(c.sub) > 40) E(`${id}: ALLURE_STAGE cell sub ${JSON.stringify(c.sub)} > 40 chars`);
     }
     for (const l of x.lines ?? []) {

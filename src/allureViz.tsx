@@ -383,6 +383,237 @@ const AttachmentRouter: React.FC<Props> = ({items, accent}) => {
   );
 };
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 6 · TOOLBELT — four libraries as four tools on a belt, in two pouches.
+//
+// "Four libraries, four jobs" as a bulleted list is four sentences a viewer reads. The
+// claim underneath it is that two of them RUN the tests and two of them MAKE the evidence,
+// and a list cannot show a grouping. A belt with two pouches can: the tool swings into the
+// pouch it belongs to, and the split is visible before a word of the label is read.
+// ─────────────────────────────────────────────────────────────────────────────
+const Toolbelt: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+
+  const POUCH = [
+    {id: 'run', label: 'runs the tests', icon: 'lucide:play', c: 'blue' as SemColor},
+    {id: 'evidence', label: 'makes the evidence', icon: 'lucide:camera', c: 'green' as SemColor},
+  ];
+  const rowH = Math.max(96 * v.scale, (budget - 40 * v.scale) / 2 - 14 * v.scale);
+
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0,
+                 gap: 16 * v.scale}}>
+      {POUCH.map((pouch) => {
+        const mine = items.filter((it) => (it.text ?? 'run') === pouch.id);
+        const col = v.sem(pouch.c);
+        const anyOn = mine.some((it) => liveAt(frame, it.atWord, 12) > 0.5);
+        return (
+          <div key={pouch.id} style={{
+            display: 'flex', alignItems: 'stretch', gap: 14 * v.scale, flex: 1, minHeight: rowH,
+            borderRadius: v.rad(12), padding: 14 * v.scale,
+            border: `${1.5 * v.scale}px solid ${hexA(col, anyOn ? 0.8 : 0.22)}`,
+            background: hexA(col, anyOn ? 0.08 : 0.02),
+          }}>
+            {/* the pouch itself — named once, on the left, so the group reads before the tools */}
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
+                         justifyContent: 'safe center', gap: 6 * v.scale,
+                         width: 168 * v.scale, flexShrink: 0}}>
+              <AssetIcon asset={pouch.icon} size={34 * v.scale} tint={hexA(col, anyOn ? 1 : 0.45)} />
+              <div style={{...v.body(17), color: anyOn ? v.t.colors.text : v.dim, textAlign: 'center'}}>
+                {pouch.label}
+              </div>
+            </div>
+            <div style={{display: 'flex', flex: 1, gap: 10 * v.scale, minWidth: 0}}>
+              {mine.map((it, i) => {
+                const on = liveAt(frame, it.atWord, 14);
+                const pl = pulseAt(frame, it.atWord, 30);
+                const tc = it.color ? v.sem(it.color) : col;
+                return (
+                  <div key={i} style={{
+                    flex: 1, minWidth: 0, borderRadius: v.rad(10), padding: 9 * v.scale,
+                    border: `${1.5 * v.scale}px solid ${hexA(tc, on > 0.5 ? 0.95 : 0.25)}`,
+                    background: hexA(tc, on > 0.5 ? 0.13 : 0.03),
+                    boxShadow: pl > 0.05 && v.t.style.glow ? `0 0 ${20 * pl * v.scale}px ${hexA(tc, 0.4 * pl)}` : 'none',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center',
+                    justifyContent: 'safe center', gap: 5 * v.scale,
+                    // the tool SWINGS in and settles — the object moves, not a label about it
+                    transform: `translateY(${(1 - on) * -22 * v.scale}px) rotate(${(1 - on) * -9}deg)`,
+                    transformOrigin: 'top center', opacity: 0.28 + on * 0.72,
+                  }}>
+                    <AssetIcon asset={it.icon ?? 'lucide:wrench'} size={30 * v.scale}
+                               tint={hexA(tc, on > 0.5 ? 1 : 0.5)} />
+                    <div style={{...v.mono(19), color: v.t.colors.text, textAlign: 'center',
+                                 wordBreak: 'break-word'}}>{it.label}</div>
+                    {it.sub ? <div style={{...v.body(14), color: v.dim, textAlign: 'center'}}>{it.sub}</div> : null}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 7 · IMPORT SHELF — seven imports, sorted into the three crates they come from.
+//
+// The teaching point is not the seven names; it is that four ship with Python, two were
+// installed, and one is a different KIND of thing (decorators, not functions). Three crates
+// with the imports dropping into them says that without a sentence.
+// ─────────────────────────────────────────────────────────────────────────────
+const ImportShelf: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const crates = items.length;
+  const crateH = Math.max(88 * v.scale, (budget - 30 * v.scale) / Math.max(crates, 1) - 12 * v.scale);
+
+  return (
+    <div style={{display: 'flex', flexDirection: v.vertical ? 'column' : 'row', flex: 1, minHeight: 0,
+                 justifyContent: 'safe center', alignItems: 'stretch', gap: 12 * v.scale}}>
+      {items.map((it, i) => {
+        const on = liveAt(frame, it.atWord, 14);
+        const pl = pulseAt(frame, it.atWord, 30);
+        const col = it.color ? v.sem(it.color) : v.a;
+        const names = (it.label ?? '').split(',').map((x) => x.trim()).filter(Boolean);
+        return (
+          <div key={i} style={{
+            flex: 1, minHeight: v.vertical ? crateH : undefined, minWidth: 0,
+            borderRadius: v.rad(12), padding: 16 * v.scale,
+            border: `${1.5 * v.scale}px solid ${hexA(col, on > 0.5 ? 0.9 : 0.24)}`,
+            background: hexA(col, on > 0.5 ? 0.09 : 0.025),
+            boxShadow: pl > 0.05 && v.t.style.glow ? `0 0 ${22 * pl * v.scale}px ${hexA(col, 0.38 * pl)}` : 'none',
+            display: 'flex', flexDirection: 'column', gap: 8 * v.scale,
+            justifyContent: 'safe center', opacity: 0.32 + on * 0.68,
+          }}>
+            <div style={{...v.body(16), color: v.dim, textAlign: 'center'}}>{it.sub}</div>
+            <div style={{display: 'flex', flexWrap: 'wrap', gap: 8 * v.scale, justifyContent: 'center'}}>
+              {names.map((nm, j) => (
+                <div key={j} style={{
+                  ...v.mono(17), color: v.t.colors.text,
+                  padding: `${6 * v.scale}px ${12 * v.scale}px`, borderRadius: 999,
+                  border: `${1 * v.scale}px solid ${hexA(col, 0.55)}`,
+                  background: hexA(col, 0.10),
+                  // each name settles into the crate rather than appearing on it
+                  transform: `translateY(${(1 - on) * (10 + j * 3) * v.scale}px)`,
+                }}>{nm}</div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 8 · COMMAND ANATOMY — one command line, cut into the parts it is made of.
+//
+// A long command is the single most common place a beginner stops following, because it
+// arrives as one undifferentiated string. Drawn as segments of the real line with a bracket
+// under each, the sentence "these four parts do four things" becomes the picture itself.
+// ─────────────────────────────────────────────────────────────────────────────
+const CommandAnatomy: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const barH = Math.max(56 * v.scale, Math.min(110 * v.scale, budget * 0.22));
+
+  // ONE COLUMN PER PART, so the bracket is physically under the segment it names.
+  // A separate row of evenly divided brackets drifts away from segments of unequal
+  // width — the first draft did exactly that, and the "-o" label sat under the wrong flag.
+  return (
+    <div style={{display: 'flex', flex: 1, minHeight: 0, alignItems: 'stretch',
+                 justifyContent: 'center', gap: 8 * v.scale, padding: 10 * v.scale}}>
+      {items.map((it, i) => {
+        const on = liveAt(frame, it.atWord, 14);
+        const pl = pulseAt(frame, it.atWord, 30);
+        const col = it.color ? v.sem(it.color) : v.a;
+        return (
+          <div key={i} style={{display: 'flex', flexDirection: 'column', alignItems: 'center',
+                               justifyContent: 'safe center', gap: 12 * v.scale, minWidth: 0}}>
+            {/* the segment of the real command */}
+            <div style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              minHeight: barH, padding: `${10 * v.scale}px ${14 * v.scale}px`,
+              borderRadius: v.rad(9),
+              border: `${1.5 * v.scale}px solid ${hexA(col, on > 0.5 ? 0.95 : 0.2)}`,
+              background: hexA(col, on > 0.5 ? 0.16 : 0.03),
+              boxShadow: pl > 0.05 && v.t.style.glow ? `0 0 ${22 * pl * v.scale}px ${hexA(col, 0.4 * pl)}` : 'none',
+              ...v.mono(20), color: on > 0.5 ? v.t.colors.text : v.dim,
+              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%',
+            }}>{it.label}</div>
+            {/* the bracket, growing under it as the voice explains this part */}
+            <div style={{width: '78%', height: 2.5 * v.scale, background: hexA(col, 0.25 + on * 0.75),
+                         transformOrigin: 'center', transform: `scaleX(${0.1 + on * 0.9})`}} />
+            <div style={{...v.body(16), color: on > 0.5 ? v.t.colors.text : v.dim,
+                         textAlign: 'center', opacity: 0.3 + on * 0.7,
+                         transform: `translateY(${(1 - on) * 12 * v.scale}px)`}}>{it.sub}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 9 · RULE FIX — a stylesheet rule, and the specific ugly thing it prevents.
+//
+// "Three rules, three problems" is a list until you can SEE the problem. Each card holds
+// the broken shape on the left, the rule in the middle, and the fixed shape on the right,
+// so the rule reads as a repair rather than as a line of CSS.
+// ─────────────────────────────────────────────────────────────────────────────
+const RuleFix: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const rowH = Math.max(76 * v.scale, (budget - 24 * v.scale) / Math.max(items.length, 1) - 12 * v.scale);
+
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0,
+                 gap: 14 * v.scale}}>
+      {items.map((it, i) => {
+        const on = liveAt(frame, it.atWord, 16);
+        const pl = pulseAt(frame, it.atWord, 30);
+        const col = it.color ? v.sem(it.color) : v.a;
+        const bad = v.sem('red');
+        return (
+          <div key={i} style={{
+            display: 'flex', alignItems: 'center', gap: 18 * v.scale, flex: 1, minHeight: rowH,
+            borderRadius: v.rad(11), padding: 16 * v.scale,
+            border: `${1.5 * v.scale}px solid ${hexA(col, on > 0.5 ? 0.85 : 0.2)}`,
+            background: hexA(col, on > 0.5 ? 0.08 : 0.02),
+            boxShadow: pl > 0.05 && v.t.style.glow ? `0 0 ${20 * pl * v.scale}px ${hexA(col, 0.35 * pl)}` : 'none',
+            opacity: 0.32 + on * 0.68,
+          }}>
+            {/* the problem, drawn as a shape that overflows its box until the rule lands */}
+            <div style={{width: 190 * v.scale, height: rowH * 0.5, flexShrink: 0, position: 'relative',
+                         borderRadius: v.rad(7), overflow: 'hidden',
+                         border: `${1 * v.scale}px dashed ${hexA(bad, 0.5)}`}}>
+              <div style={{position: 'absolute', left: 5 * v.scale, top: 5 * v.scale,
+                           height: rowH * 0.26,
+                           width: `${(1 - on) * 210 + 60}%`,
+                           borderRadius: v.rad(4),
+                           background: hexA(on > 0.5 ? col : bad, 0.45)}} />
+            </div>
+            <div style={{flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 * v.scale}}>
+              <div style={{...v.mono(21), color: v.t.colors.text}}>{it.label}</div>
+              <div style={{...v.body(16), color: v.dim}}>{it.sub}</div>
+            </div>
+            <AssetIcon asset={on > 0.5 ? 'lucide:check' : 'lucide:alert-triangle'}
+                       size={30 * v.scale} tint={hexA(on > 0.5 ? col : bad, 0.9)} />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 // An unregistered kind must be LOUD (LAW 0n corollary) — never a plausible substitute.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -392,6 +623,10 @@ const KINDS: Record<string, React.FC<Props>> = {
   'step-binding': StepBinding,
   'evidence-shelf': EvidenceShelf,
   'attachment-router': AttachmentRouter,
+  'toolbelt': Toolbelt,
+  'import-shelf': ImportShelf,
+  'command-anatomy': CommandAnatomy,
+  'rule-fix': RuleFix,
 };
 
 export const AllureViz: React.FC<Props & {kind: string}> = ({kind, ...rest}) => {
