@@ -2773,6 +2773,24 @@ const spec = {
   scenes,
 };
 
+// ESTIMATE A DURATION FOR EVERY SCENE, ALWAYS.
+//
+// A scene with no `durationFrames` makes its composition NaN, and Remotion refuses to build
+// the WHOLE bundle when any single composition is invalid — so one un-voiced spec sitting in
+// topics/ blocks the render of every other topic in the repo. That is exactly what happened
+// while chapter 2 was authored and chapter 1's short was queued behind it.
+//
+// 9.65 frames per word is the measured voice rate; `sync.mjs` overwrites all of this with
+// real audio timings and sets timingSource:'tts', and render-topic still refuses to ship a
+// narrated spec that has not been synced. This only makes the spec previewable.
+for (const s of scenes) {
+  if (s.durationFrames == null) {
+    const w = s.narration.trim().split(/\s+/).length;
+    s.durationFrames = Math.max(90, Math.round(w * 9.65) + 30);
+    s.timingSource = 'estimated';
+  }
+}
+
 fs.writeFileSync(`topics/${SLUG}/long.json`, JSON.stringify(spec, null, 2) + '\n');
 const words = scenes.reduce((a, s) => a + s.narration.trim().split(/\s+/).length, 0);
 console.log(`wrote topics/${SLUG}/long.json — ${scenes.length} scenes, ` +

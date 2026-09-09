@@ -65,7 +65,9 @@
         "hookVariant": "statement",
         "headlineAtWord": 1
       },
-      "durationFrames": 223
+      "durationFrames": 235,
+      "audio": "audio/allure01_short_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -92,12 +94,14 @@
               "label": "falls over first",
               "text": "broken",
               "color": "orange",
-              "atWord": 17
+              "atWord": 13.333
             }
           ]
         }
       },
-      "durationFrames": 570
+      "durationFrames": 513,
+      "audio": "audio/allure01_short_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
@@ -120,7 +124,7 @@
               "ref": "rec:allure-01#statuses",
               "label": "exactly four",
               "focus": true,
-              "wantAtWord": 13,
+              "wantAtWord": 8.167,
               "id": "statuses",
               "src": "rec/allure-01/seg-36.mp4",
               "frames": 190,
@@ -181,17 +185,19 @@
               ],
               "shows": "$ uv run python -m behave -f allure_behave.formatter:AllureFormatter",
               "said": "PS allure-01> grep -ho '\"status\": \"[a-z]*\"' allure-results-bdd/*result.json | sort -u\n\"status\": \"broken\"\n\"status\": \"failed\"\n\"status\": \"passed\"\n\"status\": \"skipped\"\nPS allure-01>\nPS allure-01> uv run python -m behave -f allure_behave.formatter:AllureFormatter -o allure-results-bdd features\nWe launch ONE real Playwright/Chromium browser for the whole run and\nreuse it across scenarios, closing it cleanly at the end. This is the\nBDD equivalent of pytest fixtures.\n\"\"\"\nfrom playwright.sync_api import sync_playwright\ndef before_all(context):\n    context.playwright = sync_playwright().start()\n    context.browser = context.playwright.chromium.launch()\ndef after_all(context):\n    context.browser.close()\n    context.playwright.stop()",
-              "atWord": 13
+              "atWord": 8.167
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.333
         }
       },
-      "durationFrames": 583
+      "durationFrames": 425,
+      "audio": "audio/allure01_short_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -203,7 +209,9 @@
         "message": "Full build on the channel",
         "sub": "Allure in pure Python"
       },
-      "durationFrames": 242
+      "durationFrames": 223,
+      "audio": "audio/allure01_short_s04.mp3",
+      "timingSource": "tts"
     }
   ]
 }

@@ -67,7 +67,9 @@
         "subtext": "gzip, base64, and a decoder you write",
         "hookVariant": "statement",
         "headlineAtWord": 2
-      }
+      },
+      "durationFrames": 252,
+      "timingSource": "estimated"
     },
     {
       "id": "s02",
@@ -78,7 +80,9 @@
       "data": {
         "title": "What is inside a report, and how to open it",
         "subtitle": "gzip, base64, and a decoder written from nothing"
-      }
+      },
+      "durationFrames": 734,
+      "timingSource": "estimated"
     },
     {
       "id": "s03",
@@ -207,7 +211,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1043,
+      "timingSource": "estimated"
     },
     {
       "id": "s04",
@@ -221,7 +227,9 @@
           "title": "The folder from last time",
           "subtitle": "ten results, twelve attachments"
         }
-      }
+      },
+      "durationFrames": 175,
+      "timingSource": "estimated"
     },
     {
       "id": "s05",
@@ -253,7 +261,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 667,
+      "timingSource": "estimated"
     },
     {
       "id": "s06",
@@ -297,7 +307,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 831,
+      "timingSource": "estimated"
     },
     {
       "id": "s07",
@@ -336,7 +348,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 985,
+      "timingSource": "estimated"
     },
     {
       "id": "s08",
@@ -388,7 +402,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 870,
+      "timingSource": "estimated"
     },
     {
       "id": "s09",
@@ -402,7 +418,9 @@
           "title": "The five-step trick",
           "subtitle": "gather, compress, encode, hide"
         }
-      }
+      },
+      "durationFrames": 175,
+      "timingSource": "estimated"
     },
     {
       "id": "s10",
@@ -434,7 +452,9 @@
             "atWord": 80
           }
         ]
-      }
+      },
+      "durationFrames": 1101,
+      "timingSource": "estimated"
     },
     {
       "id": "s11",
@@ -495,7 +515,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 802,
+      "timingSource": "estimated"
     },
     {
       "id": "s12",
@@ -532,7 +554,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 831,
+      "timingSource": "estimated"
     },
     {
       "id": "s13",
@@ -564,7 +588,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 763,
+      "timingSource": "estimated"
     },
     {
       "id": "s14",
@@ -602,7 +628,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1342,
+      "timingSource": "estimated"
     },
     {
       "id": "s15",
@@ -642,7 +670,9 @@
           ],
           "atWord": 8
         }
-      }
+      },
+      "durationFrames": 985,
+      "timingSource": "estimated"
     },
     {
       "id": "s16",
@@ -676,7 +706,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1140,
+      "timingSource": "estimated"
     },
     {
       "id": "s17",
@@ -714,7 +746,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1034,
+      "timingSource": "estimated"
     },
     {
       "id": "s18",
@@ -754,7 +788,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 812,
+      "timingSource": "estimated"
     },
     {
       "id": "s19",
@@ -786,7 +822,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 831,
+      "timingSource": "estimated"
     },
     {
       "id": "s20",
@@ -824,7 +862,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1082,
+      "timingSource": "estimated"
     },
     {
       "id": "s21",
@@ -858,7 +898,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 937,
+      "timingSource": "estimated"
     },
     {
       "id": "s22",
@@ -872,7 +914,9 @@
           "title": "Three numbers",
           "subtitle": "what compression actually did"
         }
-      }
+      },
+      "durationFrames": 165,
+      "timingSource": "estimated"
     },
     {
       "id": "s23",
@@ -910,7 +954,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 908,
+      "timingSource": "estimated"
     },
     {
       "id": "s24",
@@ -944,7 +990,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 879,
+      "timingSource": "estimated"
     },
     {
       "id": "s25",
@@ -984,7 +1032,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1014,
+      "timingSource": "estimated"
     },
     {
       "id": "s26",
@@ -1036,7 +1086,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1101,
+      "timingSource": "estimated"
     },
     {
       "id": "s27",
@@ -1083,7 +1135,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1313,
+      "timingSource": "estimated"
     },
     {
       "id": "s28",
@@ -1107,7 +1161,9 @@
             "atWord": 77
           }
         ]
-      }
+      },
+      "durationFrames": 773,
+      "timingSource": "estimated"
     },
     {
       "id": "s29",
@@ -1144,7 +1200,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 976,
+      "timingSource": "estimated"
     },
     {
       "id": "s30",
@@ -1167,7 +1225,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 551,
+      "timingSource": "estimated"
     },
     {
       "id": "s31",
@@ -1199,7 +1259,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 995,
+      "timingSource": "estimated"
     },
     {
       "id": "s32",
@@ -1258,7 +1320,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 918,
+      "timingSource": "estimated"
     },
     {
       "id": "s33",
@@ -1272,7 +1336,9 @@
           "title": "The shape, first",
           "subtitle": "three classes, three levels"
         }
-      }
+      },
+      "durationFrames": 194,
+      "timingSource": "estimated"
     },
     {
       "id": "s34",
@@ -1309,7 +1375,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1217,
+      "timingSource": "estimated"
     },
     {
       "id": "s35",
@@ -1346,7 +1414,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 734,
+      "timingSource": "estimated"
     },
     {
       "id": "s36",
@@ -1393,7 +1463,9 @@
           ],
           "atWord": 7
         }
-      }
+      },
+      "durationFrames": 870,
+      "timingSource": "estimated"
     },
     {
       "id": "s37",
@@ -1431,7 +1503,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1661,
+      "timingSource": "estimated"
     },
     {
       "id": "s38",
@@ -1476,7 +1550,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1101,
+      "timingSource": "estimated"
     },
     {
       "id": "s39",
@@ -1490,7 +1566,9 @@
           "title": "Backwards",
           "subtitle": "find, decode, decompress, parse, build"
         }
-      }
+      },
+      "durationFrames": 165,
+      "timingSource": "estimated"
     },
     {
       "id": "s40",
@@ -1528,7 +1606,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1275,
+      "timingSource": "estimated"
     },
     {
       "id": "s41",
@@ -1568,7 +1648,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 985,
+      "timingSource": "estimated"
     },
     {
       "id": "s42",
@@ -1600,7 +1682,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1207,
+      "timingSource": "estimated"
     },
     {
       "id": "s43",
@@ -1645,7 +1729,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 956,
+      "timingSource": "estimated"
     },
     {
       "id": "s44",
@@ -1683,7 +1769,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1246,
+      "timingSource": "estimated"
     },
     {
       "id": "s45",
@@ -1711,7 +1799,9 @@
             "atWord": 76
           }
         ]
-      }
+      },
+      "durationFrames": 1082,
+      "timingSource": "estimated"
     },
     {
       "id": "s46",
@@ -1749,7 +1839,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1101,
+      "timingSource": "estimated"
     },
     {
       "id": "s47",
@@ -1808,7 +1900,9 @@
           ],
           "atWord": 4
         }
-      }
+      },
+      "durationFrames": 802,
+      "timingSource": "estimated"
     },
     {
       "id": "s48",
@@ -1822,7 +1916,9 @@
           "title": "A summary that lied",
           "subtitle": "the data was right the whole time"
         }
-      }
+      },
+      "durationFrames": 165,
+      "timingSource": "estimated"
     },
     {
       "id": "s49",
@@ -1860,7 +1956,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1198,
+      "timingSource": "estimated"
     },
     {
       "id": "s50",
@@ -1900,7 +1998,9 @@
           ],
           "atWord": 6
         }
-      }
+      },
+      "durationFrames": 937,
+      "timingSource": "estimated"
     },
     {
       "id": "s51",
@@ -1938,7 +2038,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 899,
+      "timingSource": "estimated"
     },
     {
       "id": "s52",
@@ -1952,7 +2054,9 @@
           "title": "Proof, not a claim",
           "subtitle": "ten out, ten back"
         }
-      }
+      },
+      "durationFrames": 155,
+      "timingSource": "estimated"
     },
     {
       "id": "s53",
@@ -1990,7 +2094,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1207,
+      "timingSource": "estimated"
     },
     {
       "id": "s54",
@@ -2044,7 +2150,9 @@
           ],
           "atWord": 2
         }
-      }
+      },
+      "durationFrames": 715,
+      "timingSource": "estimated"
     },
     {
       "id": "s55",
@@ -2072,7 +2180,9 @@
             "atWord": 87
           }
         ]
-      }
+      },
+      "durationFrames": 1053,
+      "timingSource": "estimated"
     },
     {
       "id": "s56",
@@ -2117,7 +2227,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1034,
+      "timingSource": "estimated"
     },
     {
       "id": "s57",
@@ -2151,7 +2263,9 @@
             }
           ]
         }
-      }
+      },
+      "durationFrames": 1178,
+      "timingSource": "estimated"
     },
     {
       "id": "s58",
@@ -2162,7 +2276,9 @@
       "data": {
         "message": "Chapter 3: into a database",
         "sub": "the whole series on the channel"
-      }
+      },
+      "durationFrames": 358,
+      "timingSource": "estimated"
     }
   ]
 }
