@@ -614,6 +614,209 @@ const RuleFix: React.FC<Props> = ({items, accent}) => {
   );
 };
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 10 · FILES MERGE — twenty-two loose files sliding into one.
+//
+// "Why would anyone squash a folder into a single file?" is answered by watching it happen,
+// not by hearing the reason. Each tile travels from its own place in the grid to the middle
+// and disappears into one document; the count under the tray is derived from the tiles that
+// have actually arrived, so the picture cannot claim a number the animation has not reached.
+// ─────────────────────────────────────────────────────────────────────────────
+const FilesMerge: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const tile = Math.max(16 * v.scale, Math.min(34 * v.scale, budget * 0.055));
+  const per = v.vertical ? 6 : 11;
+  const arrived = items.reduce((n, it) => n + (liveAt(frame, it.atWord, 14) > 0.85 ? 1 : 0), 0);
+
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0,
+                 justifyContent: 'safe center', gap: 20 * v.scale}}>
+      <div style={{display: 'grid', gridTemplateColumns: `repeat(${per}, 1fr)`,
+                   gap: 8 * v.scale, justifyItems: 'center'}}>
+        {items.map((it, i) => {
+          const on = liveAt(frame, it.atWord, 14);
+          const col = it.color ? v.sem(it.color) : v.a;
+          // the tile's own column decides which way it travels, so they converge
+          const dx = ((i % per) - (per - 1) / 2) * -tile * 2.2 * on;
+          const dy = 46 * v.scale * on;
+          return (
+            <div key={i} style={{
+              width: tile, height: tile * 1.25, borderRadius: v.rad(4),
+              border: `${1.2 * v.scale}px solid ${hexA(col, 0.75 - on * 0.6)}`,
+              background: hexA(col, 0.12 - on * 0.1),
+              transform: `translate(${dx}px, ${dy}px) scale(${1 - on * 0.65})`,
+              opacity: 1 - on * 0.92,
+            }} />
+          );
+        })}
+      </div>
+      {/* the one file everything lands in */}
+      <div style={{alignSelf: 'center', display: 'flex', flexDirection: 'column',
+                   alignItems: 'center', gap: 8 * v.scale,
+                   padding: `${14 * v.scale}px ${26 * v.scale}px`, borderRadius: v.rad(12),
+                   border: `${2 * v.scale}px solid ${hexA(v.a, 0.35 + (arrived / Math.max(items.length, 1)) * 0.6)}`,
+                   background: hexA(v.a, 0.06)}}>
+        <AssetIcon asset="lucide:file-code" size={40 * v.scale} tint={hexA(v.a, 0.95)} />
+        <div style={{...v.mono(18), color: v.t.colors.text}}>bundle.html</div>
+        <div style={{...v.body(14), color: v.dim, fontVariantNumeric: 'tabular-nums'}}>
+          {arrived} of {items.length} files inside
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 11 · SIZE BAR — one quantity, measured three times, drawn to scale.
+//
+// The chapter's headline number is a shape, not a sentence: the JSON shrinks under gzip and
+// then GROWS again under base64. A bar whose width is the real ratio makes the surprise
+// land — most people expect base64 to shrink it too. Widths come from the values, so a
+// mistyped number is visible rather than merely wrong.
+// ─────────────────────────────────────────────────────────────────────────────
+const SizeBar: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const nums = items.map((it) => Number(it.value ?? 0));
+  const max = Math.max(...nums, 1);
+  const rowH = Math.max(52 * v.scale, Math.min(120 * v.scale,
+                        (budget - 24 * v.scale) / Math.max(items.length, 1) - 14 * v.scale));
+
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0,
+                 justifyContent: 'safe center', gap: 14 * v.scale, padding: 6 * v.scale}}>
+      {items.map((it, i) => {
+        const on = liveAt(frame, it.atWord, 18);
+        const pl = pulseAt(frame, it.atWord, 30);
+        const col = it.color ? v.sem(it.color) : v.a;
+        const frac = nums[i] / max;
+        return (
+          <div key={i} style={{display: 'flex', alignItems: 'center', gap: 14 * v.scale,
+                               minHeight: rowH}}>
+            <div style={{width: 170 * v.scale, flexShrink: 0, textAlign: 'right',
+                         ...v.body(15), color: on > 0.4 ? v.t.colors.text : v.dim}}>
+              {it.label}
+            </div>
+            <div style={{flex: 1, minWidth: 0, height: rowH * 0.58, borderRadius: v.rad(7),
+                         background: hexA(col, 0.06), position: 'relative', overflow: 'hidden'}}>
+              <div style={{position: 'absolute', inset: 0, width: `${frac * 100 * on}%`,
+                           borderRadius: v.rad(7), background: hexA(col, 0.42),
+                           borderRight: `${2.5 * v.scale}px solid ${hexA(col, 0.95)}`,
+                           boxShadow: pl > 0.05 && v.t.style.glow
+                             ? `0 0 ${24 * pl * v.scale}px ${hexA(col, 0.45 * pl)}` : 'none'}} />
+            </div>
+            <div style={{width: 190 * v.scale, flexShrink: 0, ...v.mono(19),
+                         color: on > 0.4 ? v.t.colors.text : v.dim,
+                         fontVariantNumeric: 'tabular-nums', opacity: 0.25 + on * 0.75}}>
+              {nums[i].toLocaleString('en-US')}
+            </div>
+            {it.sub ? (
+              <div style={{width: 130 * v.scale, flexShrink: 0, ...v.body(13), color: v.dim,
+                           opacity: on}}>{it.sub}</div>
+            ) : null}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 12 · NESTED BOXES — a shape decided before the code that fills it.
+//
+// TestCase holds Steps, a Step holds Attachments. The decoder is boring to write precisely
+// because this was settled first, and it is the shape every later chapter stores in SQLite
+// and serves over HTTP. Drawn as boxes inside boxes, each arriving on its own word.
+// ─────────────────────────────────────────────────────────────────────────────
+const NestedBoxes: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const pad = Math.max(14 * v.scale, budget * 0.035);
+
+  const draw = (i: number): React.ReactNode => {
+    if (i >= items.length) return null;
+    const it = items[i];
+    const on = liveAt(frame, it.atWord, 16);
+    const col = it.color ? v.sem(it.color) : v.a;
+    return (
+      <div style={{
+        flex: 1, minHeight: 0, borderRadius: v.rad(12), padding: pad,
+        border: `${2 * v.scale}px solid ${hexA(col, on > 0.4 ? 0.9 : 0.18)}`,
+        background: hexA(col, on > 0.4 ? 0.07 : 0.02),
+        display: 'flex', flexDirection: 'column', gap: 8 * v.scale,
+        opacity: 0.25 + on * 0.75,
+        transform: `scale(${0.96 + on * 0.04})`,
+      }}>
+        <div style={{display: 'flex', alignItems: 'baseline', gap: 10 * v.scale}}>
+          <div style={{...v.mono(20), color: v.t.colors.text}}>{it.label}</div>
+          {it.sub ? <div style={{...v.body(14), color: v.dim}}>{it.sub}</div> : null}
+        </div>
+        {draw(i + 1)}
+      </div>
+    );
+  };
+
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0,
+                 padding: 4 * v.scale}}>
+      {draw(0)}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 13 · COMPRESSION RATIO — what gzip does to each kind of thing.
+//
+// "gzip shrinks repetitive text and does nothing for already-compressed bytes" is a claim
+// until you see a zip bar sitting at 99% next to JSON at 19%. Each row is a measured pair,
+// and the remaining-size bar is drawn from the ratio rather than from a hand-set width.
+// ─────────────────────────────────────────────────────────────────────────────
+const CompressionRatio: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const rowH = Math.max(50 * v.scale, (budget - 20 * v.scale) / Math.max(items.length, 1) - 12 * v.scale);
+
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0,
+                 justifyContent: 'safe center', gap: 12 * v.scale}}>
+      {items.map((it, i) => {
+        const on = liveAt(frame, it.atWord, 16);
+        const pct = Math.max(0, Math.min(100, Number(it.value ?? 100)));
+        // green when gzip earned its keep, red when it found nothing to do
+        const col = it.color ? v.sem(it.color) : (pct <= 40 ? v.sem('green') : pct >= 85 ? v.sem('red') : v.sem('orange'));
+        return (
+          <div key={i} style={{display: 'flex', alignItems: 'center', gap: 14 * v.scale,
+                               minHeight: rowH}}>
+            <div style={{width: 150 * v.scale, flexShrink: 0, ...v.mono(17),
+                         color: on > 0.4 ? v.t.colors.text : v.dim}}>{it.label}</div>
+            <div style={{flex: 1, minWidth: 0, height: rowH * 0.5, borderRadius: v.rad(6),
+                         background: hexA(col, 0.07), position: 'relative', overflow: 'hidden',
+                         border: `${1 * v.scale}px solid ${hexA(col, 0.25)}`}}>
+              <div style={{position: 'absolute', inset: 0, width: `${pct * on}%`,
+                           background: hexA(col, 0.45),
+                           borderRight: `${2.5 * v.scale}px solid ${hexA(col, 0.95)}`}} />
+            </div>
+            <div style={{width: 90 * v.scale, flexShrink: 0, ...v.mono(19), color: hexA(col, 0.95),
+                         fontVariantNumeric: 'tabular-nums', opacity: 0.25 + on * 0.75}}>
+              {pct}%
+            </div>
+            {it.sub ? (
+              <div style={{width: 200 * v.scale, flexShrink: 0, ...v.body(13.5), color: v.dim,
+                           opacity: on}}>{it.sub}</div>
+            ) : null}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 // An unregistered kind must be LOUD (LAW 0n corollary) — never a plausible substitute.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -627,6 +830,10 @@ const KINDS: Record<string, React.FC<Props>> = {
   'import-shelf': ImportShelf,
   'command-anatomy': CommandAnatomy,
   'rule-fix': RuleFix,
+  'files-merge': FilesMerge,
+  'size-bar': SizeBar,
+  'nested-boxes': NestedBoxes,
+  'compression-ratio': CompressionRatio,
 };
 
 export const AllureViz: React.FC<Props & {kind: string}> = ({kind, ...rest}) => {

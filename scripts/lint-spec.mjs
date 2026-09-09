@@ -3858,7 +3858,8 @@ for (const s of spec.scenes ?? []) {
   if (d.allureStage) {
     const x = d.allureStage;
     const KINDS = ['outcome-bins', 'fail-vs-broken', 'step-binding', 'evidence-shelf',
-                   'attachment-router', 'toolbelt', 'import-shelf', 'command-anatomy', 'rule-fix'];
+                   'attachment-router', 'toolbelt', 'import-shelf', 'command-anatomy', 'rule-fix',
+                   'files-merge', 'size-bar', 'nested-boxes', 'compression-ratio'];
     if (!x.kind) E(`${id}: ALLURE_STAGE needs a kind`);
     else if (!KINDS.includes(x.kind)) E(`${id}: ALLURE_STAGE unknown kind ${JSON.stringify(x.kind)} — one of ${KINDS.join(', ')}`);
     if (len(x.headline) > 44) E(`${id}: ALLURE_STAGE headline > 44 chars`);
@@ -3880,7 +3881,10 @@ for (const s of spec.scenes ?? []) {
       if (len(l.text) > 52) E(`${id}: ALLURE_STAGE code line ${JSON.stringify(l.text)} > 52 chars`);
       if (len(l.detail) > 120) E(`${id}: ALLURE_STAGE line detail > 120 chars`);
     }
-    if ((x.cells ?? []).length > 12) E(`${id}: ALLURE_STAGE takes at most 12 cells`);
+    // `files-merge` IS the count — its whole argument is that a folder holds twenty-two
+    // separate things. Twelve would make the picture lie about the number it is drawing.
+    const CELL_CAP = x.kind === 'files-merge' ? 24 : 12;
+    if ((x.cells ?? []).length > CELL_CAP) E(`${id}: ALLURE_STAGE takes at most ${CELL_CAP} cells`);
   }
   if (d.compare) {
     const rw = d.compare.rows ?? [];
