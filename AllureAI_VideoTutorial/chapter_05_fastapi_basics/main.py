@@ -37,7 +37,7 @@ def say_hello():
 # ---------------------------------------------------------------------------
 @app.get("/greet/{name}")
 def greet_someone(name: str):
-    """Visiting /greet/Santhosh sends "Santhosh" straight into this function."""
+    """Visiting /greet/Ada sends "Ada" straight into this function."""
     return {"message": f"hello, {name}"}
 
 

@@ -25,8 +25,8 @@ def demo_basic_endpoints():
     print("--- /hello ---")
     print(requests.get(f"{BASE_URL}/hello").json())
 
-    print("--- /greet/Santhosh ---")
-    print(requests.get(f"{BASE_URL}/greet/Santhosh").json())
+    print("--- /greet/Ada ---")
+    print(requests.get(f"{BASE_URL}/greet/Ada").json())
 
     print("--- /add?a=4&b=5 ---")
     print(requests.get(f"{BASE_URL}/add", params={"a": 4, "b": 5}).json())

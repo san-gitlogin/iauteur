@@ -84,7 +84,7 @@ def greet_someone(name: str):
 
 **SAY:**
 
-"This one reads a value straight out of the web address itself. Visit `/greet/Santhosh`, and 'Santhosh' lands directly in the `name` variable. This is called a path parameter."
+"This one reads a value straight out of the web address itself. Visit `/greet/Ada`, and 'Ada' lands directly in the `name` variable. This is called a path parameter."
 
 ```python
 @app.get("/add")
@@ -206,7 +206,7 @@ Next time, we're going to connect this backend to the database we built back in 
 
 - Environment: fastapi 0.141.1, uvicorn 0.51.0, requests 2.34.2.
 - Port 8000 failed to bind on this machine with a real Windows permissions error (`WinError 10013`) — port 8834 was used instead and worked cleanly.
-- Every endpoint was exercised live: `/hello`, `/greet/Santhosh`, `/add?a=4&b=5`, `POST /messages`, `GET /messages` all returned the exact JSON shown above, confirmed via `test_client_demo.py` against a real running server.
+- Every endpoint was exercised live: `/hello`, `/greet/Ada`, `/add?a=4&b=5`, `POST /messages`, `GET /messages` all returned the exact JSON shown above, confirmed via `test_client_demo.py` against a real running server.
 - `/docs` and `/openapi.json` both returned HTTP 200, and the OpenAPI schema genuinely listed all six real paths (`/hello`, `/greet/{name}`, `/add`, `/messages`, `/slow-bad`, `/slow-good`).
 - The async timing test is real, not illustrative: two concurrent requests to `/slow-bad` genuinely took `6.0 seconds` total, and two concurrent requests to `/slow-good` genuinely took `3.0 seconds` total, measured with `time.perf_counter()` around both requests running through a `ThreadPoolExecutor`.
 
