@@ -105,7 +105,13 @@ async def main():
                   f"Anchors in this scene will be estimates, not real word times.")
             n = max(1, len(text.split()))
             words = [round(i / n * speech_end, 3) for i in range(n)]
-        result[sid] = {"duration": round(speech_end + 0.35, 3), "words": words}
+        # STORE WHAT WAS SPOKEN, not just how long it took. Without this there is no way to
+        # ask "which scenes changed since the voice was made?" except by eyeballing word
+        # counts, which misses a rewrite that happens to be the same length and flags
+        # tokenisation noise that is not a change at all. scripts/voice-diff.mjs reads it.
+        import hashlib
+        result[sid] = {"duration": round(speech_end + 0.35, 3), "words": words,
+                       "sha": hashlib.sha1(" ".join(text.split()).encode("utf-8")).hexdigest()[:12]}
         print(f"  {sid}: {len(words)} words, {result[sid]['duration']}s → {mp3}")
     json.dump(result, open(out, "w"), indent=2)
     print(f"✓ Timestamps → {out}. Next: node scripts/sync.mjs {spec_path} {out} {prefix}")

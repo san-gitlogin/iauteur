@@ -31,6 +31,11 @@ const demo = {
   workspace: 'allure-02',
   viewport: {width: 1600, height: 900},
   deviceScaleFactor: 4,
+  // AND KEEP WHAT WAS CAPTURED. `masterWidth` defaults to 1920, so a dsf-4 capture was
+  // being downscaled from 6400 back to 1920 before it was ever written — the deep zooms
+  // then upscaled 3.2x from that, and `check-recordings` refused to render eleven clips.
+  // 0 means: write the native capture, only rounding to even dimensions.
+  masterWidth: 0,
   fps: 30,
   maximizePanel: false,
   prep: {

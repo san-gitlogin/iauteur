@@ -2,7 +2,7 @@
   "name": "iauteur",
   "version": "1.0.0",
   "private": true,
-  "description": "iAuteur \u2014 an AI-directed, JSON-driven Remotion video factory: a topic becomes a spec, any LLM directs it, and it renders as tech-explainer video (162 components, 30 design packs, dark/light).",
+  "description": "iAuteur — an AI-directed, JSON-driven Remotion video factory: a topic becomes a spec, any LLM directs it, and it renders as tech-explainer video (162 components, 30 design packs, dark/light).",
   "license": "MIT",
   "homepage": "https://github.com/san-gitlogin/iauteur#readme",
   "repository": {
@@ -100,6 +100,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.12",
+    "allure-commandline": "^2.43.0",
     "playwright": "^1.62.1",
     "typescript": "^5.6.3"
   }

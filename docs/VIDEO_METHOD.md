@@ -236,3 +236,32 @@ first second and then sits still while the voice is still explaining it. All thr
 an optional per-element `atWord` and fall back to the old cadence when it is absent, so
 existing specs are untouched. When you add a drawn beat, anchor every element: the lint's
 dwell warning ("that earns 16s") is measuring exactly this.
+
+## Run every audio-free gate BEFORE you voice — `scripts/preflight.mjs`
+
+Typecheck, `check-recordings`, `anchor-spec`, `lint-spec` and `check-narration-visual` can
+all answer before a single word is spoken. `render-topic` runs some of them, but that is an
+hour too late: on Allure chapter 1 the capture had been silently downscaled to 1920 while
+the spec zoomed 3.2x into it, and nothing said so until after 101 scenes had been voiced and
+synced. The fix was a re-record, which changes every clip length, which invalidates the
+sync, which means re-voicing whatever no longer fits.
+
+    node scripts/preflight.mjs <slug>      # must pass before scripts/voiceover.py
+
+`masterWidth` is the specific trap: it defaults to **1920**, so raising `deviceScaleFactor`
+alone changes nothing about what is written to disk. A demo that zooms past 2x needs
+`deviceScaleFactor: 4` AND `masterWidth: 0`.
+
+## The report you build is not the report the tool builds — say which is which
+
+The Allure course produces genuine `allure-results` (the official `allure-behave` adapter
+writes them) and then renders them with a Python script of our own, because the official
+renderer is Java. Both halves of that are worth saying out loud, because a viewer who
+half-notices will assume the whole thing is a mock-up.
+
+The proof costs one command. `npm i -D allure-commandline` needs no admin rights, and with
+a JRE present `allure generate <results> -o <dir>` produces the official report from the
+same folder; `widgets/summary.json` carries its own counts. On this machine both readers
+return `7 passed, 1 failed, 1 broken, 1 skipped, 10 total`. Run the reference implementation
+beside your own and show them agreeing — it is the strongest thing a "build it yourself"
+chapter can do, and it takes ninety seconds of screen time.

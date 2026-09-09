@@ -8,6 +8,7 @@
     "height": 900
   },
   "deviceScaleFactor": 4,
+  "masterWidth": 0,
   "fps": 30,
   "maximizePanel": false,
   "prep": {

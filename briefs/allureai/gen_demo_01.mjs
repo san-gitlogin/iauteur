@@ -39,6 +39,11 @@ const demo = {
   // THE MASTER MUST OUTLIVE THE ZOOM: RecordedStep can push to 3.2x, so a 1920 master is
   // 6144 painted pixels drawn from 1920. dsf 4 on a 1600 viewport gives a 6400px master.
   deviceScaleFactor: 4,
+  // AND KEEP WHAT WAS CAPTURED. `masterWidth` defaults to 1920, so a dsf-4 capture was
+  // being downscaled from 6400 back to 1920 before it was ever written — the deep zooms
+  // then upscaled 3.2x from that, and `check-recordings` refused to render eleven clips.
+  // 0 means: write the native capture, only rounding to even dimensions.
+  masterWidth: 0,
   fps: 30,
   maximizePanel: false,
   prep: {
@@ -50,13 +55,20 @@ const demo = {
     },
     commands: [
       'mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/',
+      // THE OFFICIAL ALLURE CLI, so the chapter can prove its own numbers.
+      // The owner's doc skipped this because the org machine could not install Java; this
+      // machine has OpenJDK 21 and `npm i -D allure-commandline` needs no admin rights at
+      // all. Symlinking it onto PATH lets the take run the real tool over the real results
+      // and show that the Python report and the Java report agree, which is the strongest
+      // possible answer to "is this a real Allure report or a sample?".
+      'ln -sf /Users/santhu/iauteur/node_modules/.bin/allure /tmp/iauteur-bin/allure',
       'export PATH="/tmp/iauteur-bin:$PATH" UV_NO_MODIFY_PATH=1',
       // uv init stamps the local git identity into pyproject.toml; a recording must never
       // carry the operator's name or email (LAW 0m.2).
       "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
       'export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig',
       // Idempotent: take two starts from the same empty folder as take one.
-      'rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git allure-results-bdd report-python-only.html',
+      'rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git allure-results-bdd report-python-only.html report.html allure-official',
     ],
   },
   steps: [
@@ -177,6 +189,18 @@ const demo = {
          marks: [{id: 'tally2', text: '7 passed, 1 failed, 1 broken, 1 skipped, 10 total'}]}),
     run('size', 'ls -lh report.html', 'one file, everything inside it',
         {expect: {exitCode: 0}, holdMs: 2000}),
+
+    // ══ and the official tool, over the same folder ═════════════════════════
+    // This is the proof that the results are genuine Allure output: the official Java
+    // report reads the same directory and arrives at the same four numbers.
+    run('official', 'allure generate allure-results-bdd -o allure-official --clean',
+        'the official Java tool, same folder',
+        {clearFirst: true, expect: {contains: 'successfully generated'}, holdMs: 2600,
+         marks: [{id: 'gen', text: 'Report successfully generated'}]}),
+    run('officialnums', "grep -o '\"statistic\":{[^}]*}' allure-official/widgets/summary.json",
+        'and it agrees, number for number',
+        {clearFirst: true, expect: {contains: 'passed'}, holdMs: 3600,
+         marks: [{id: 'stat', text: 'statistic'}]}),
   ],
 };
 

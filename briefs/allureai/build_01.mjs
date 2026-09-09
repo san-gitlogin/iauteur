@@ -50,6 +50,11 @@ const intent = (o = {}) => {
   return out;
 };
 const A = (id, label, opts = {}) => ({ref: `rec:allure-01#${id}`, label, focus: true, ...intent(opts)});
+// A "saved" flash is punctuation, not a payoff — but it is the LAST clip, so LAW 8 judges the
+// beat by where it lands. Left to the automatic spread it inherits all the leading slack and
+// drifts to 90% of the read. Naming a FRACTION of the narration puts it back where it belongs;
+// the solver still refuses anything that would cut the previous clip off.
+const atFrac = (n, f) => Math.max(1, Math.round(n.trim().split(/\s+/).length * f));
 const stage = (narration, kind, data) => scene('ALLURE_STAGE', narration, {allureStage: {kind, ...data}});
 
 // ── DRAWN BEATS ──────────────────────────────────────────────────────────────
@@ -85,7 +90,9 @@ const logs    = (n, d) => scene('LOG_STREAM', n, {logs: d});
     "Allure is a way of writing down test results so a person actually wants to read them — " +
     "steps in plain English, with the evidence attached to each one. " +
     "Almost every guide you'll find says you need Java for this part. " +
-    "We're not going to use any.";
+    "We're going to build the whole thing without it — " +
+    "and then, at the end, run the official Java tool over the same folder " +
+    "to check that our numbers are the real ones.";
   scenes.push(scene('TITLE_CARD', n, {
     title: 'A real Allure report, in pure Python',
     subtitle: 'ten checks, four outcomes, nine kinds of evidence',
@@ -451,7 +458,9 @@ scenes.push(chapter(
     "One sends the same request three times and records how long each took, " +
     "which gives us a small table. " +
     "And one takes the same screenshot again as a JPEG instead of a PNG, " +
-    "so we can see later that the report handles both without caring which is which.";
+    "so we can see later that the report handles both without caring which is which. " +
+    "Three scenarios, three different kinds of evidence, " +
+    "and each one is a shape a report has to know how to draw.";
   scenes.push(rec(n, 'a screenshot, and a timing table',
     'Checks that produce evidence rather than just a yes or no.',
     [A('feat3', 'checks that leave proof', {wantAtWord: at(n, 'Chromium')})]));
@@ -488,7 +497,9 @@ scenes.push(chapter(
     "it is not text, and you'll see the report treat it differently at the end. " +
     "And one writes the same three facts as JSON, as XML, and as YAML. " +
     "Same information, three shapes, " +
-    "so we can watch one rule handle all three without a special case for each.";
+    "so we can watch one rule handle all three without a special case for each. " +
+    "JSON, XML and YAML are the three you will meet coming out of other tools, " +
+    "so a report that handles one of them should handle all three.";
   scenes.push(rec(n, 'a zip, and three ways to write a summary',
     'Evidence in a binary format, and the same summary in three text formats.',
     [A('feat4', 'binary, and text shapes', {wantAtWord: at(n, 'zip')})]));
@@ -532,13 +543,18 @@ scenes.push(chapter(
     "between a test that found a problem and a test that had a problem, " +
     "and you can only learn to read that difference " +
     "by deliberately producing all four outcomes " +
-    "and looking at what the report does with each of them.";
+    "and looking at what the report does with each of them. " +
+    "So that is the feature file finished: ten scenarios, " +
+    "seven of them ordinary and three of them deliberate. " +
+    "Save it, and notice that not one line of Python exists yet. " +
+    "Everything you have read so far is a sentence " +
+    "that a person who has never opened an editor could still follow.";
   scenes.push(rec(n, 'the three nobody shows you',
     'A check written to fail, one written to break, and one written to be skipped.',
     [A('feat5', 'fail, break, skip', {
        callouts: [{text: 'never runs at all', mark: 'skip', side: 'right',
                    color: 'purple', atWord: at(n, 'outcomes')}]}),
-     A('savefeat', 'saved')]));
+     A('savefeat', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
 }
 
 {
@@ -721,7 +737,15 @@ scenes.push(chapter(
     "which means that by the end of this chapter " +
     "you will have seen the report handle every kind of thing it can be handed. " +
     "Adding the other eleven types would be padding — " +
-    "each one would travel down a path you have already watched work.";
+    "each one would travel down a path you have already watched work. " +
+    "And there is a second reason that comment is there. " +
+    "A file like this gets copied. " +
+    "Somebody on your team will lift these step definitions into their own project, " +
+    "and the note travels with them, " +
+    "answering the question they would otherwise have to come and ask you: " +
+    "why nine, and why these nine? " +
+    "A comment that answers a predictable question " +
+    "earns its place three times over.";
   scenes.push(rec(n, 'a note to whoever opens this next',
     'The steps file, and the comment at the top of it.',
     [A('opensteps', 'the second file'),
@@ -1159,7 +1183,13 @@ scenes.push(chapter(
     "and that is precisely what Allure calls broken. " +
     "The skipped scenario never even got that far. " +
     "It reached a decision, stepped aside, " +
-    "and left a reason behind for whoever reads the report.";
+    "and left a reason behind for whoever reads the report. " +
+    "Save the file. " +
+    "That is the steps file done — a hundred and eighty five lines, " +
+    "ten English sentences given Python behind them, " +
+    "and nine pieces of evidence attached along the way. " +
+    "Every one of those attachments is going to come back at us in the last chapter, " +
+    "when we write the thing that has to display them all.";
   scenes.push(rec(n, 'the broken one, and the skipped one',
     'A test that throws before it checks, and a test that never runs.',
     [A('st9', 'no assert anywhere', {
@@ -1168,7 +1198,7 @@ scenes.push(chapter(
                    side: 'right', color: 'orange', atWord: at(n, 'checked')},
                   {text: 'stops before it runs', mark: 'skipcall', side: 'right',
                    color: 'purple', atWord: at(n, 'reason', 2)}]}),
-     A('savesteps', 'saved')]));
+     A('savesteps', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
 }
 
 {
@@ -1313,7 +1343,12 @@ scenes.push(chapter(
     "And it runs even when a scenario has failed, which is the part that matters — " +
     "a browser process left alive after a failed test " +
     "is how a machine slowly fills up with ghosts. " +
-    "If you've used pytest, this is the same idea as a fixture.";
+    "If you've used pytest, this is the same idea as a fixture: " +
+    "something expensive, set up once, handed to everything that needs it, " +
+    "and torn down whatever happens. " +
+    "Save it. Three files written, " +
+    "and we have not run a single test yet. " +
+    "That changes in about ten seconds.";
   scenes.push(rec(n, 'open it once, close it once',
     'The lifecycle file behave looks for by name.',
     [A('openenv', 'the third file'),
@@ -1321,7 +1356,7 @@ scenes.push(chapter(
      A('env2', 'before all, and after all', {wantAtWord: at(n, 'before'),
        callouts: [{text: 'closed cleanly, even after a failure', mark: null, side: 'top',
                    color: 'green', atWord: at(n, 'ghosts')}]}),
-     A('saveenv', 'saved')]));
+     A('saveenv', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
 }
 
 {
@@ -1661,7 +1696,8 @@ scenes.push(chapter(
     "csv for reading the timing table, html for escaping, " +
     "io for the in-memory buffers, json for the result files, " +
     "and Path for walking the folder. " +
-    "Seven imports, and every single one ships with Python itself.";
+    "Seven imports, and every single one ships with Python itself. " +
+    "There is nothing to install for this file at all.";
   scenes.push(rec(n, 'what this script is for',
     'The report builder, and the rule stated at the top of it.',
     [A('openrpt', 'the last file'),
@@ -1736,7 +1772,9 @@ scenes.push(chapter(
     "That is what lets an entire screenshot live inside the HTML file itself, " +
     "instead of sitting beside it as a separate file, " +
     "and it is the reason the report you open at the end " +
-    "is one single page you can email to somebody.";
+    "is one single page you can email to somebody. " +
+    "One check for every image format, " +
+    "and one trick that puts the image inside the page.";
   scenes.push(rec(n, 'is it a picture?',
     'One check that covers every image format, and how the picture gets inside the page.',
     [A('rpt4', 'one line, every image', {
@@ -2274,13 +2312,17 @@ scenes.push(chapter(
     "Save the file. " +
     "That is every line of code in this chapter — " +
     "four files, four hundred and ninety eight lines, " +
-    "all of it typed in front of you.";
+    "all of it typed in front of you. " +
+    "Save it, and take a second to notice what we did not need: " +
+    "no Java runtime, no Node, no report generator, " +
+    "no configuration file, and no framework. " +
+    "Seven imports that ship with Python, and a folder of JSON.";
   scenes.push(rec(n, 'the command line entry point',
     'argparse, and the line that makes a file both runnable and importable.',
     [A('rpt12', 'one required, two optional', {wantAtWord: at(n, 'argparse'),
        callouts: [{text: 'runnable, and importable', mark: null, side: 'top',
                    color: 'purple', atWord: at(n, 'imports')}]}),
-     A('savertp', 'saved')]));
+     A('savertp', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
 }
 
 {
@@ -2499,6 +2541,118 @@ scenes.push(chapter(
 
 {
   const n =
+    "Before we finish, there is a fair question to answer, " +
+    "and it is probably the one you have been holding since the start. " +
+    "Is this a real Allure report, or something that merely looks like one? " +
+    "The honest answer has two halves. " +
+    "The evidence in that folder is real Allure output. " +
+    "It was written by allure-behave, " +
+    "which is the official adapter the Allure project publishes for Python, " +
+    "and it is exactly the format the official tool reads. " +
+    "The HTML page is ours. " +
+    "We wrote every line of the thing that turned those files into a page. " +
+    "So: real data, our viewer. " +
+    "Which raises the obvious follow-up — " +
+    "would the official viewer, reading the same folder, agree with us?";
+  scenes.push(diagram(n, {
+    nodes: [
+      {id: 'run', label: 'behave + Playwright', sub: 'the run that happened', color: 'blue',
+       atWord: at(n, 'evidence')},
+      {id: 'ad', label: 'allure-behave', sub: 'the official adapter', color: 'purple',
+       parent: 'run', atWord: at(n, 'adapter')},
+      {id: 'dir', label: 'allure-results-bdd', sub: 'real Allure format', color: 'green',
+       parent: 'ad', atWord: at(n, 'format')},
+      {id: 'ours', label: 'our Python page', sub: 'we wrote this', color: 'orange',
+       parent: 'dir', atWord: at(n, 'ours')},
+      {id: 'off', label: 'the official viewer', sub: 'would it agree?', color: 'blue',
+       parent: 'dir', atWord: at(n, 'agree')},
+    ],
+  }));
+}
+
+{
+  const n =
+    "So let's settle it, on camera. " +
+    "The official tool is a program called allure, " +
+    "and one command turns a results folder into its own report. " +
+    "Watch what it says when it finishes, " +
+    "and then watch the numbers it puts in its own summary file. " +
+    "Seven passed. One failed. One broken. One skipped. Ten total. " +
+    "That is the same four numbers our script printed, " +
+    "from the same folder, with neither one knowing the other exists. " +
+    "Our report is not an imitation of an Allure report. " +
+    "It is a different reader of the same real evidence, " +
+    "and the official reader agrees with it line for line.";
+  scenes.push(rec(n, 'the official tool, same folder',
+    'The official Allure report, generated over the exact same results.',
+    [A('official', 'one command, real Allure', {wantAtWord: at(n, 'command')}),
+     A('officialnums', 'and it agrees', {wantAtWord: at(n, 'summary'),
+       callouts: [{text: 'the same four numbers', mark: 'stat', side: 'top',
+                   color: 'green', atWord: at(n, 'agrees')}]})]));
+}
+
+{
+  const n =
+    "Both of them, side by side. " +
+    "Seven passed, one failed, one broken, one skipped, ten total, " +
+    "printed twice by two completely different programs. " +
+    "One is a Java application maintained by the Allure project. " +
+    "The other is two hundred and forty five lines of Python you watched get typed. " +
+    "They agree because they are reading the same files, " +
+    "and those files were written by the official adapter " +
+    "at the moment the tests ran. " +
+    "This is the check to do whenever you build a tool of your own " +
+    "against a format somebody else defined: " +
+    "run the reference implementation beside yours and compare the output.";
+  scenes.push(table(n, {
+    headline: 'Two readers, [one answer]',
+    tableName: 'allure-results-bdd',
+    query: 'both run on this machine, minutes apart',
+    columns: ['outcome', 'our Python', 'official'],
+    rows: [
+      ['passed', '7', '7'],
+      ['failed', '1', '1'],
+      ['broken', '1', '1'],
+      ['skipped', '1', '1'],
+      ['total', '10', '10'],
+    ],
+    highlight: [0, 1, 2, 3, 4],
+    highlightAtWords: [at(n, 'passed'), at(n, 'failed'), at(n, 'broken'),
+                       at(n, 'skipped'), at(n, 'total')],
+    atWord: at(n, 'side'),
+  }));
+}
+
+{
+  const n =
+    "So when should you use which? " +
+    "If you have a Java runtime available, the official report is better, " +
+    "and getting it is easier than the internet makes it sound: " +
+    "you do not need an installer or admin rights on your machine. " +
+    "One npm command puts the tool in your project folder, " +
+    "and it needs a Java runtime to run — that is the only real requirement. " +
+    "If Java is not available, or you are on a locked-down work machine, " +
+    "or you want a single file you can email, " +
+    "the script we just wrote does the job and you can read all of it. " +
+    "Neither one is a toy. They are reading the same evidence.";
+  scenes.push(compare(n, {
+    headline: 'Which one [should you run]',
+    source: 'allure-commandline 2.43.0 and OpenJDK 21, both on this machine',
+    atWord: at(n, 'which'),
+    a: {name: 'official', color: 'blue'},
+    b: {name: 'our script', color: 'green'},
+    rows: [
+      {label: 'needs Java', a: 'yes', b: 'no', winner: 'b', atWord: at(n, 'runtime')},
+      {label: 'admin rights', a: 'no', b: 'no', winner: 'tie', atWord: at(n, 'admin')},
+      {label: 'how to get it', a: 'npm i allure', b: 'you wrote it', winner: 'tie',
+       atWord: at(n, 'npm')},
+      {label: 'output', a: 'a folder', b: 'one file', winner: 'b', atWord: at(n, 'email')},
+    ],
+  }));
+}
+
+{
+  const n =
     "So look at what happened here. " +
     "We wrote ten checks as English sentences. " +
     "We gave each sentence a small Python function, " +
@@ -2509,9 +2663,11 @@ scenes.push(chapter(
     "and found the word broken sitting in the data. " +
     "And then we wrote our own report builder, " +
     "in one Python file, with a rule that fits in two questions. " +
-    "Java was never involved. Neither was Node, or any separate program. " +
-    "Next chapter, we take a real Allure report — the official kind, " +
-    "the sort you'd actually meet at work — and write the code that opens it back up.";
+    "Building that report needed no Java and no separate program at all. " +
+    "And then we checked ourselves against the official tool, " +
+    "and it returned the same four numbers from the same folder. " +
+    "Next chapter, we take that real Allure evidence " +
+    "and write the code that packs it into one file and opens it back up.";
   scenes.push(scene('RECAP', n, {
     recap: {
       heading: 'What you built',

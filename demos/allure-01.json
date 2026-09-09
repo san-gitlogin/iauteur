@@ -8,6 +8,7 @@
     "height": 900
   },
   "deviceScaleFactor": 4,
+  "masterWidth": 0,
   "fps": 30,
   "maximizePanel": false,
   "prep": {
@@ -19,10 +20,11 @@
     },
     "commands": [
       "mkdir -p /tmp/iauteur-bin && cp {{TOOLS}}/uv/uv /tmp/iauteur-bin/",
+      "ln -sf /Users/santhu/iauteur/node_modules/.bin/allure /tmp/iauteur-bin/allure",
       "export PATH=\"/tmp/iauteur-bin:$PATH\" UV_NO_MODIFY_PATH=1",
       "printf '[user]\\n\\tname = dev\\n\\temail = dev@example.com\\n' > /tmp/iauteur-gitconfig",
       "export GIT_CONFIG_GLOBAL=/tmp/iauteur-gitconfig",
-      "rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git allure-results-bdd report-python-only.html"
+      "rm -rf .venv uv.lock pyproject.toml README.md .python-version main.py .git allure-results-bdd report-python-only.html report.html allure-official"
     ]
   },
   "steps": [
@@ -606,6 +608,42 @@
         "exitCode": 0
       },
       "holdMs": 2000
+    },
+    {
+      "id": "official",
+      "action": "run",
+      "cmd": "allure generate allure-results-bdd -o allure-official --clean",
+      "label": "the official Java tool, same folder",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "successfully generated"
+      },
+      "holdMs": 2600,
+      "marks": [
+        {
+          "id": "gen",
+          "text": "Report successfully generated"
+        }
+      ]
+    },
+    {
+      "id": "officialnums",
+      "action": "run",
+      "cmd": "grep -o '\"statistic\":{[^}]*}' allure-official/widgets/summary.json",
+      "label": "and it agrees, number for number",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "passed"
+      },
+      "holdMs": 3600,
+      "marks": [
+        {
+          "id": "stat",
+          "text": "statistic"
+        }
+      ]
     }
   ]
 }

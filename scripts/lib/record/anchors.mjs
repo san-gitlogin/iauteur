@@ -202,7 +202,23 @@ export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], s
     at = Math.ceil(at / FPW) * FPW;
     starts.push(at);
     clips.push({atWord: wordOf(at), callouts: []});
-    cursor = at + clipFrames[i] + (i < lead ? Math.round((slack * weights[i]) / wsum) : 0);
+    // THE ADVANCE CARRIES THE SAME MARGIN THE FLOOR DOES.
+    //
+    // This whole solve runs at FPW = 12, and the voice delivers 9.65 — so a gap laid out
+    // here as "exactly this clip's footage" comes back from sync about a quarter short,
+    // and the clip before it ships cut off mid-action. The FLOOR above was given
+    // GAP_MARGIN for precisely this reason; the AUTOMATIC advance was not, so every
+    // multi-clip beat was tight by construction and only found out after voicing, where
+    // the fix costs a re-voice instead of a rewrite.
+    //
+    // MEASURED on Allure chapter 1: six beats passed this solve and failed the post-sync
+    // lint — s31 wanted 228f before its second clip and had 161f of narration, s69 wanted
+    // 243f and had 183f. Both ratios are ~0.75, which is 9.65/12 almost exactly.
+    const ADVANCE_MARGIN = (12 / 9.65) * 1.05;   // rate slip, plus a little for local variation
+    // ceil, not multiply-and-hope: `durationFrames` is derived from this cursor and
+    // Remotion rejects a fractional duration outright.
+    cursor = at + Math.ceil(clipFrames[i] * ADVANCE_MARGIN) +
+             (i < lead ? Math.round((slack * weights[i]) / wsum) : 0);
   }
 
   // LAW 8: the last anchor must not sit in the final 15% of the read.
