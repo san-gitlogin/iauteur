@@ -17,6 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync, spawnSync} from 'node:child_process';
+import crypto from 'node:crypto';
 
 const [slug, comp, segArg] = process.argv.slice(2);
 if (!slug || !comp) {
@@ -27,6 +28,32 @@ const segments = Number(segArg || 4);
 const specPath = `topics/${slug}/long.json`;
 const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 const total = spec.scenes.reduce((a, s) => a + s.durationFrames, 0);
+// A RENDER OWNS ITS SPEC FOR THE DURATION.
+//
+// PAID FOR on Allure chapter 1: a figure in the narration was corrected while segment 1 was
+// rendering. Rebuilding the spec wiped every `durationFrames` and `timingSource` that sync
+// had written, so the file on disk no longer described the video being made — an hour of
+// rendering that could only have produced a cut nobody wanted. Nothing said a word.
+//
+// The lock is advisory (bake-rec, anchor-spec and sync refuse while it exists) and the hash
+// below is the real seal: every segment re-reads the spec and stops if it has moved.
+const lockPath = path.resolve(`topics/${slug}/.rendering`);
+const specHash = () => crypto.createHash('sha1').update(fs.readFileSync(specPath)).digest('hex');
+const startedWith = specHash();
+fs.writeFileSync(lockPath, JSON.stringify({pid: process.pid, sha: startedWith, at: new Date().toISOString()}, null, 2));
+const releaseLock = () => { try { fs.unlinkSync(lockPath); } catch {} };
+process.on('exit', releaseLock);
+for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) process.on(sig, () => { releaseLock(); process.exit(1); });
+const assertSpecUnchanged = (where) => {
+  if (specHash() === startedWith) return;
+  releaseLock();
+  console.error(`\n✗ ${specPath} CHANGED while rendering (${where}).`);
+  console.error('  The frames already written describe the old spec and the ones after this');
+  console.error('  would describe the new one, so the cut would be silently inconsistent.');
+  console.error('  Re-run the pipeline (bake -> anchor -> sync) and start the render again.');
+  process.exit(1);
+};
+
 const outDir = path.resolve(`topics/${slug}/out`);
 const work = path.resolve(`out/render-${slug}`);
 fs.mkdirSync(outDir, {recursive: true});
@@ -51,6 +78,7 @@ console.log(`${slug} / ${comp} — ${total} frames in ${segments} segment(s). Fr
 const per = Math.ceil(total / segments);
 const parts = [];
 for (let i = 0; i < segments; i++) {
+  assertSpecUnchanged(`before segment ${i + 1}/${segments}`);
   const start = i * per;
   const end = Math.min(total - 1, start + per - 1);
   if (start > end) break;
@@ -85,9 +113,19 @@ for (let i = 0; i < segments; i++) {
     fs.rmSync(part, {force: true});
   }
   console.log(`\n[${i + 1}/${segments}] frames ${start}-${end}  (free ${free()} GB)`);
+  // CONCURRENCY IS A SETTING, NOT A CONSTANT. The comment above explains why it is kept
+  // low (each worker is a Chrome tab holding its own decoded frames, so peak scratch and
+  // peak MEMORY both scale with it) — but it was then hardcoded to 2, which silently
+  // ignored RENDER_CONCURRENCY and left nine of eleven cores idle on a two-hour render.
+  // Measured on the Allure cut: one worker is ~0.9 GB resident against 6400px sources.
+  //
+  // AND THE PROGRESS HAS TO BE VISIBLE. `--log=error` prints nothing at all when stdout is
+  // not a TTY, so a backgrounded render is a black box for hours — there is no way to tell
+  // a slow segment from a hung one. `info` prints plain progress lines that survive a pipe.
   execFileSync('node', [REMOTION, 'render', comp, part,
-    `--frames=${start}-${end}`, '--muted', '--concurrency=2',
-    '--log=error'], {stdio: 'inherit'});
+    `--frames=${start}-${end}`, '--muted',
+    `--concurrency=${process.env.RENDER_CONCURRENCY || 2}`,
+    '--log=info'], {stdio: 'inherit'});
   parts.push(part);
   // DELETE THE SCRATCH BETWEEN PASSES. Peak usage is then one segment, not the whole timeline —
   // which is the entire point of segmenting.

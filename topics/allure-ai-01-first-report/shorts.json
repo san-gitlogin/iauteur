@@ -36,7 +36,7 @@
         "https://allurereport.org/docs/",
         "https://behave.readthedocs.io/"
       ],
-      "pinned": "Which one bites you more often \u2014 a failed check, or a broken test? And does your current report tell the two apart?"
+      "pinned": "Which one bites you more often — a failed check, or a broken test? And does your current report tell the two apart?"
     }
   },
   "brand": {
@@ -47,8 +47,8 @@
     "background": "grid"
   },
   "cover": {
-    "title": "FAILED \u2260 BROKEN",
-    "badge": "Allure \u00b7 Python",
+    "title": "FAILED ≠ BROKEN",
+    "badge": "Allure · Python",
     "asset": "si:python",
     "frames": 2
   },
@@ -60,7 +60,7 @@
       "transition": "fade",
       "background": "zoneA",
       "data": {
-        "headline": "ALLURE: FAILED \u2260 BROKEN",
+        "headline": "ALLURE: FAILED ≠ BROKEN",
         "subtext": "four outcomes, not two",
         "hookVariant": "statement",
         "headlineAtWord": 1
@@ -70,7 +70,7 @@
     {
       "id": "s02",
       "type": "ALLURE_STAGE",
-      "narration": "Failed means the check ran and got the wrong answer. Your software is what is wrong. Broken means the test fell over before it ever reached the check \u2014 so the software was never even asked. Your test is what is wrong. One sends you to the app. The other sends you to the test file.",
+      "narration": "Failed means the check ran and got the wrong answer. Your software is what is wrong. Broken means the test fell over before it ever reached the check — so the software was never even asked. Your test is what is wrong. One sends you to the app. The other sends you to the test file.",
       "transition": "push",
       "background": "zoneB",
       "data": {
@@ -123,7 +123,7 @@
               "wantAtWord": 13,
               "id": "statuses",
               "src": "rec/allure-01/seg-36.mp4",
-              "frames": 197,
+              "frames": 190,
               "bbox": {
                 "x": 348,
                 "y": 578,
@@ -180,7 +180,7 @@
                 }
               ],
               "shows": "$ uv run python -m behave -f allure_behave.formatter:AllureFormatter",
-              "said": "PS allure-01> grep -ho '\"status\": \"[a-z]*\"' allure-results-bdd/*result.json | sort -u\n\"status\": \"broken\"\n\"status\": \"failed\"\n\"status\": \"passed\"\n\"status\": \"skipped\"\nPS allure-01>\nPS allure-01> uv run python -m behave -f allure_behave.formatter:AllureFormatter -o allure-results-bdd features\nWe\u00a0launch\u00a0ONE\u00a0real\u00a0Playwright/Chromium\u00a0browser\u00a0for\u00a0the\u00a0whole\u00a0run\u00a0and\nreuse\u00a0it\u00a0across\u00a0scenarios,\u00a0closing\u00a0it\u00a0cleanly\u00a0at\u00a0the\u00a0end.\u00a0This\u00a0is\u00a0the\nBDD\u00a0equivalent\u00a0of\u00a0pytest\u00a0fixtures.\n\"\"\"\nfrom\u00a0playwright.sync_api\u00a0import\u00a0sync_playwright\ndef\u00a0before_all(context):\n\u00a0\u00a0\u00a0\u00a0context.playwright\u00a0=\u00a0sync_playwright().start()\n\u00a0\u00a0\u00a0\u00a0context.browser\u00a0=\u00a0context.playwright.chromium.launch()\ndef\u00a0after_all(context):\n\u00a0\u00a0\u00a0\u00a0context.browser.close()\n\u00a0\u00a0\u00a0\u00a0context.playwright.stop()",
+              "said": "PS allure-01> grep -ho '\"status\": \"[a-z]*\"' allure-results-bdd/*result.json | sort -u\n\"status\": \"broken\"\n\"status\": \"failed\"\n\"status\": \"passed\"\n\"status\": \"skipped\"\nPS allure-01>\nPS allure-01> uv run python -m behave -f allure_behave.formatter:AllureFormatter -o allure-results-bdd features\nWe launch ONE real Playwright/Chromium browser for the whole run and\nreuse it across scenarios, closing it cleanly at the end. This is the\nBDD equivalent of pytest fixtures.\n\"\"\"\nfrom playwright.sync_api import sync_playwright\ndef before_all(context):\n    context.playwright = sync_playwright().start()\n    context.browser = context.playwright.chromium.launch()\ndef after_all(context):\n    context.browser.close()\n    context.playwright.stop()",
               "atWord": 13
             }
           ],
@@ -196,7 +196,7 @@
     {
       "id": "s04",
       "type": "OUTRO_CTA",
-      "narration": "The full build is on the channel \u2014 ten checks, four outcomes, and a report written in Python with no Java anywhere.",
+      "narration": "The full build is on the channel — ten checks, four outcomes, and a report written in Python with no Java anywhere.",
       "transition": "slide",
       "background": "zoneA",
       "data": {

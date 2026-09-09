@@ -1494,11 +1494,13 @@ scenes.push(chapter(
 
 {
   const n =
-    "Ten result files and thirteen attachment files, " +
+    "Ten result files and twelve attachment files, " +
     "and the arithmetic there rewards a second of attention. " +
     "Ten scenarios means ten result files — that one is easy. " +
-    "The thirteen is nine attachments from the evidence scenarios, " +
-    "plus the extra ones behave writes for the HTML snippets. " +
+    "The twelve is the nine kinds of evidence we attached, " +
+    "plus three more HTML snippets, " +
+    "because four different scenarios each attached a piece of the page. " +
+    "Count the file extensions on screen and they come to twelve. " +
     "What matters is the shape: " +
     "the result files are small and describe what happened, " +
     "and the attachment files are large and hold the actual evidence. " +
@@ -1506,17 +1508,17 @@ scenes.push(chapter(
     "No database, no server, no state anywhere else — " +
     "which is exactly why a plain Python script can read it.";
   scenes.push(table(n, {
-    headline: 'Ten and thirteen, [in one folder]',
+    headline: 'Ten and twelve, [in one folder]',
     tableName: 'allure-results-bdd',
     query: 'measured on this machine after the run',
     columns: ['what', 'how many', 'holds'],
     rows: [
       ['*-result.json', '10', 'one per scenario'],
-      ['*-attachment.*', '13', 'evidence bytes'],
+      ['*-attachment.*', '12', 'evidence bytes'],
       ['anything else', '0', 'no server, no db'],
     ],
     highlight: [0, 1, 2],
-    highlightAtWords: [at(n, 'Ten'), at(n, 'thirteen', 2), at(n, 'database')],
+    highlightAtWords: [at(n, 'Ten'), at(n, 'twelve', 2), at(n, 'database')],
     atWord: at(n, 'rewards'),
   }));
 }
@@ -1682,8 +1684,9 @@ scenes.push(chapter(
 
 {
   const n =
-    "Last file of the four, and it is comfortably the biggest one. " +
-    "Open it, and give it a second to settle. " +
+    "Last file of the four, and it is comfortably the biggest one — " +
+    "two hundred and forty five lines, against fifty for the feature file. " +
+    "Open it, and give it a second to settle on screen. " +
     "It opens with a docstring — that's the block of text in triple quotes " +
     "at the top of a Python file — and this one is doing real work. " +
     "It says what the script is, and then what the script deliberately avoids. " +
@@ -1958,7 +1961,9 @@ scenes.push(chapter(
     "where it is genuinely the simplest answer rather than a clever one. " +
     "The depth argument goes up by one each time it descends a level, " +
     "and min depth three stops the indentation from marching " +
-    "off the right hand edge of the page on a deeply nested test.";
+    "off the right hand edge of the page on a deeply nested test. " +
+    "Three levels of indent is as far as it will ever go, " +
+    "however deep the steps themselves are.";
   scenes.push(rec(n, 'one step, and the steps inside it',
     'A function that draws a step, then draws whatever is nested inside it.',
     [A('rpt6', 'it calls itself', {wantAtWord: at(n, 'row'),
@@ -2013,7 +2018,8 @@ scenes.push(chapter(
     "and the page gets nothing extra at all — " +
     "rather than an empty red box sitting under every passing test, " +
     "which is exactly the sort of detail " +
-    "that makes people quietly stop trusting a report.";
+    "that makes people quietly stop trusting a report. " +
+    "Draw what is there, and only what is there.";
   scenes.push(rec(n, 'one test, its badge, its message',
     'The scenario header, where its colour comes from, and the box that only sometimes exists.',
     [A('rpt7', 'status names its class', {wantAtWord: at(n, 'badge'),
@@ -2543,20 +2549,20 @@ scenes.push(chapter(
   const n =
     "Before we finish, there is a fair question to answer, " +
     "and it is probably the one you have been holding since the start. " +
-    "Is this a real Allure report, or something that merely looks like one? " +
-    "The honest answer has two halves. " +
-    "The evidence in that folder is real Allure output. " +
-    "It was written by allure-behave, " +
+    "Is this an Allure report, or something that merely looks like one? " +
+    "The answer has two halves, and both matter. " +
+    "The evidence in that folder was written by allure-behave, " +
     "which is the official adapter the Allure project publishes for Python, " +
-    "and it is exactly the format the official tool reads. " +
-    "The HTML page is ours. " +
-    "We wrote every line of the thing that turned those files into a page. " +
-    "So: real data, our viewer. " +
+    "in the format the official tool reads. " +
+    "We did not invent that format or hand-write a line of it. " +
+    "The HTML page, on the other hand, is entirely ours — " +
+    "we wrote every line of the thing that turned those files into a page. " +
+    "So: their format, our viewer. " +
     "Which raises the obvious follow-up — " +
     "would the official viewer, reading the same folder, agree with us?";
   scenes.push(diagram(n, {
     nodes: [
-      {id: 'run', label: 'behave + Playwright', sub: 'the run that happened', color: 'blue',
+      {id: 'run', label: 'the test run', sub: 'behave and Playwright', color: 'blue',
        atWord: at(n, 'evidence')},
       {id: 'ad', label: 'allure-behave', sub: 'the official adapter', color: 'purple',
        parent: 'run', atWord: at(n, 'adapter')},
@@ -2564,7 +2570,7 @@ scenes.push(chapter(
        parent: 'ad', atWord: at(n, 'format')},
       {id: 'ours', label: 'our Python page', sub: 'we wrote this', color: 'orange',
        parent: 'dir', atWord: at(n, 'ours')},
-      {id: 'off', label: 'the official viewer', sub: 'would it agree?', color: 'blue',
+      {id: 'off', label: 'official viewer', sub: 'would it agree?', color: 'blue',
        parent: 'dir', atWord: at(n, 'agree')},
     ],
   }));

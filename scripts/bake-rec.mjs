@@ -18,6 +18,24 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 
+// A SPEC THAT IS BEING RENDERED IS NOT SAFE TO REWRITE — see scripts/render-long.mjs.
+// The lock is written when a render starts and removed when it ends (or is killed).
+import fsLock from 'node:fs';
+import pathLock from 'node:path';
+const __lock = (specArg) => {
+  if (!specArg) return;
+  const lp = pathLock.join(pathLock.dirname(specArg), '.rendering');
+  if (!fsLock.existsSync(lp)) return;
+  let who = '';
+  try { who = ` (started ${JSON.parse(fsLock.readFileSync(lp, 'utf8')).at})`; } catch {}
+  console.error(`\u2717 ${specArg} is being RENDERED right now${who}.`);
+  console.error('  Rewriting it mid-render makes the finished cut inconsistent with itself:');
+  console.error('  the frames already written follow the old timings and the rest would not.');
+  console.error('  Wait for the render, or stop it, then run this again.');
+  process.exit(1);
+};
+__lock(process.argv[2]);
+
 const args = process.argv.slice(2);
 const specPath = args[0];
 if (!specPath) {

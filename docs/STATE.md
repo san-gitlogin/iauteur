@@ -1957,3 +1957,35 @@ base64 **863,976** characters (doc says 880,396). `decode_report.py` returns
 (26 steps, 14 typing blocks). It copies chapter 1's `allure-results-bdd` in during prep
 rather than re-running behave on camera, and it asserts that the typed blocks reconstruct
 both source files byte-for-byte. Not yet recorded.
+
+## RESUME HERE — Allure chapter 1 (left rendering 2026-09-09 ~09:15)
+
+A render is in flight as a detached process. It owns the spec: `topics/allure-ai-01-first-report/.rendering`
+is its lock, and `bake-rec` / `anchor-spec` / `sync` refuse to run while it exists. Do not
+delete the lock by hand unless the render is genuinely dead (`pgrep -f render-long`).
+
+**Check it:**
+
+    tr '\r' '\n' < <the render log> | grep -a "Rendered\|^\[" | tail -3
+    ls -la topics/allure-ai-01-first-report/out/          # wide-dark.mp4 appears at the end
+
+10 segments, ~12 min each at RENDER_CONCURRENCY=4, so ~2 hours from 09:15.
+Resumable: finished segments in `out/render-allure-ai-01-first-report/` are kept and
+skipped, so an interrupted render restarts cheaply — WITHOUT `--fresh`.
+
+**When it lands, in order:**
+
+1. Verify the file: duration ~61.8 min, and `ffprobe` the audio track is not silent
+   (`mean_volume` must be well above -70 dB — a silent 21-minute render shipped once).
+2. Voice + render the short: `topics/allure-ai-01-first-report/shorts.json` is written and
+   green, prefix `allure01_short`, 4 scenes, ~43s. Same pipeline: voiceover -> sync -> lint
+   -> `render-topic.mjs <slug> short-dark`.
+3. Thumbnail + upload kit: `render-topic.mjs <slug> thumb`, then `gen-upload-kit.mjs`.
+4. Chapter 2: `briefs/allureai/PLAN_02.md` has the measured facts and the beat plan, and
+   `demos/allure-02.json` is written and self-asserting. Record it, then author against the
+   footage — never before.
+
+**State of chapter 1:** 105 scenes, 111,306 frames (61.8 min), all gates green (lint, holds,
+recordings, narration/visual, sync). Voice is Ava at +8%, prefix `allure01_long`, and every
+scene's narration hash is NOT yet stored for the original 101 — `voice-diff.mjs` will say so.
+Re-voice a scene once and it becomes exact.
