@@ -35,7 +35,17 @@ const demo = {
   // being downscaled from 6400 back to 1920 before it was ever written — the deep zooms
   // then upscaled 3.2x from that, and `check-recordings` refused to render eleven clips.
   // 0 means: write the native capture, only rounding to even dimensions.
-  masterWidth: 0,
+  // 3840, NOT NATIVE — and the number comes from arithmetic, not taste.
+  //
+  // A zoom of Nx fills a 1920 frame from a master of N x 1920 pixels, so 1:1 at 2x needs
+  // 3840. Chapter 1 was captured native (6400, enough for a 3.2x zoom with nothing to
+  // spare) and rendered at 4.6 fps — 5.8 hours for one chapter, almost all of it spent
+  // decoding source frames three times larger than any zoom actually reads.
+  //
+  // So: capture at deviceScaleFactor 4 and DOWNSAMPLE to 3840 with lanczos, which is
+  // sharper than capturing at 3840 directly, then keep the spec's zooms at or under 2x.
+  // check-recordings measures this and will say so if any clip asks for more.
+  masterWidth: 3840,
   fps: 30,
   maximizePanel: false,
   prep: {

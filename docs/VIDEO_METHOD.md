@@ -265,3 +265,18 @@ same folder; `widgets/summary.json` carries its own counts. On this machine both
 return `7 passed, 1 failed, 1 broken, 1 skipped, 10 total`. Run the reference implementation
 beside your own and show them agreeing — it is the strongest thing a "build it yourself"
 chapter can do, and it takes ninety seconds of screen time.
+
+## Capture width is a RENDER-TIME cost, and 1:1 has a formula
+
+A zoom of Nx fills the 1920 frame from `N x 1920` master pixels, so 1:1 at 2x needs 3840 and
+at 3.2x needs 6144. `check-recordings` enforces a floor at half that (a 2x tolerance).
+
+What the floor does not tell you is the price. Chapter 1 was captured native at 6400x3600
+and rendered at **4.6 fps — 5.8 hours for 62 minutes of video**, almost all of it spent
+decoding source frames far larger than any zoom actually reads. The same cut from a 3840
+master decodes under a third of the pixels.
+
+So the default is: `deviceScaleFactor: 4` with **`masterWidth: 3840`** — capture high and
+downsample with lanczos, which is sharper than capturing at 3840 directly — and keep the
+spec's zooms at or under 2x. Go native only when a beat genuinely needs to read one word of
+a terminal, and know you are buying it with hours.
