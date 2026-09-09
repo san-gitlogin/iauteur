@@ -59,7 +59,7 @@
     {
       "id": "s01",
       "type": "HOOK",
-      "narration": "An Allure run leaves twenty-two files. We squash them into one you can email, then write the decoder that opens it back up.",
+      "narration": "An Allure run leaves twenty-two files. We squash them into one, then write the decoder that opens it.",
       "transition": "fade",
       "background": "zoneA",
       "data": {
@@ -68,7 +68,7 @@
         "hookVariant": "statement",
         "headlineAtWord": 2
       },
-      "durationFrames": 252,
+      "durationFrames": 204,
       "timingSource": "estimated"
     },
     {
@@ -255,14 +255,56 @@
                   "mark": "count",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 66
+                  "wantAtWord": 66,
+                  "atWord": 38
                 }
-              ]
+              ],
+              "id": "look",
+              "src": "rec/allure-02/seg-01.mp4",
+              "frames": 116,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "count": {
+                  "x": 424,
+                  "y": 650,
+                  "w": 19,
+                  "h": 19,
+                  "covers": "22"
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 631,
+                  "w": 272,
+                  "h": 19,
+                  "covers": "ls allure-results-bdd | wc -l"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 403,
+                  "h": 57
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | wc -l",
+              "said": "PS allure-02> ls allure-results-bdd | wc -l\n 22\nPS allure-02>",
+              "atWord": 12
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 667,
+      "durationFrames": 837,
       "timingSource": "estimated"
     },
     {
@@ -335,21 +377,64 @@
                   "mark": "results",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 70
+                  "wantAtWord": 70,
+                  "atWord": 70
                 },
                 {
                   "text": "large and mostly binary",
                   "mark": null,
                   "side": "top",
                   "color": "orange",
-                  "wantAtWord": 78
+                  "wantAtWord": 78,
+                  "atWord": 78
                 }
-              ]
+              ],
+              "id": "kinds",
+              "src": "rec/allure-02/seg-02.mp4",
+              "frames": 181,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "results": {
+                  "x": 415,
+                  "y": 650,
+                  "w": 103,
+                  "h": 19,
+                  "covers": "result.json"
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 631,
+                  "w": 609,
+                  "h": 19,
+                  "covers": "ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 985,
+      "durationFrames": 1233,
       "timingSource": "estimated"
     },
     {
@@ -522,7 +607,7 @@
     {
       "id": "s12",
       "type": "RECORDED_STEP",
-      "narration": "New file, and it opens with the docstring that says exactly that. I want you to read it rather than skip it, because the last paragraph is the point of the whole chapter: nothing here is unique to Allure. This is the same idea behind every single-file format you will ever meet — a saved web page, a notebook with its outputs, a crash report with its logs attached. Learn it once here on something small, and you will recognise it everywhere afterwards.",
+      "narration": "New file, and it opens with the docstring that says exactly that. I want you to read it rather than skip it, because the last paragraph is the point of the whole chapter: nothing here is unique to Allure. This is the same idea behind every single-file format you will ever meet — a saved web page, a notebook with its outputs, a crash report with its logs attached. Learn it once here on something small, and you will recognise it everywhere afterwards. And notice the shape of the docstring itself. It opens with what the file does in one sentence. Then the five steps, numbered, in the order they happen. Then a usage line showing exactly how to run it. That is a template you can copy for anything you write. Somebody opening this file — including you, months from now — gets the what, the how and the command before reading a single line of Python. Most files make you read the code to find out what the code is for, and that is a tax you pay every time you come back to it. Twenty-five lines of English at the top is the cheapest documentation there is, because it lives in the same file and moves when the file moves. One more thing before the code. Notice that the docstring says what this is NOT, as well as what it is. It says nothing here is unique to Allure. Telling a reader what a thing is not is often more useful than another sentence about what it is, because it heads off the wrong assumption before they make it.",
       "transition": "zoom",
       "background": "zoneC",
       "data": {
@@ -535,7 +620,31 @@
             {
               "ref": "rec:allure-02#openpack",
               "label": "a new file",
-              "focus": true
+              "focus": true,
+              "id": "openpack",
+              "src": "rec/allure-02/seg-03.mp4",
+              "frames": 245,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 5
             },
             {
               "ref": "rec:allure-02#pk1",
@@ -548,14 +657,70 @@
                   "mark": null,
                   "side": "top",
                   "color": "green",
-                  "wantAtWord": 82
+                  "wantAtWord": 82,
+                  "atWord": 199
                 }
-              ]
+              ],
+              "id": "pk1",
+              "src": "rec/allure-02/seg-05.mp4",
+              "frames": 1706,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 739,
+                  "h": 264
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 717,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 446,
+                  "w": 63,
+                  "h": 21
+                },
+                {
+                  "x": 475,
+                  "y": 473,
+                  "w": 717,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 500,
+                  "w": 32,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>\nThe trick is simple once you see it:\n  1. Build one big Python dictionary holding every result + every\n     attachment (attachments as raw bytes).\n  2. Turn that dictionary into JSON text.\n  3. Compress the JSON text with gzip (it shrinks a lot - JSON repeats\n     the same field names over and over).\n  4. Turn the compressed bytes into base64 text (base64 is just a way\n     to write raw bytes using only safe, ordinary keyboard characters,\n     so they survive being pasted inside an HTML file).\n  5. Drop that base64 text inside a <script> tag.\nNothing here is unique to Allure. This is the same idea behind every\n\"single file\" report format you'll ever come across.\nUsage:\n    python build_single_file_report.py allure-results-bdd -o bundle.html\n\"\"\"",
+              "atWord": 37
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 831,
+      "durationFrames": 4411,
       "timingSource": "estimated"
     },
     {
@@ -582,14 +747,85 @@
                   "mark": "gzip",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 44
+                  "wantAtWord": 44,
+                  "atWord": 44
                 }
-              ]
+              ],
+              "id": "pk2",
+              "src": "rec/allure-02/seg-06.mp4",
+              "frames": 182,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "gzip": {
+                  "x": 433,
+                  "y": 419,
+                  "w": 116,
+                  "h": 21,
+                  "covers": "import gzip"
+                }
+              },
+              "ink": [
+                {
+                  "x": 454,
+                  "y": 68,
+                  "w": 718,
+                  "h": 75
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 717,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 63,
+                  "h": 21
+                },
+                {
+                  "x": 475,
+                  "y": 284,
+                  "w": 717,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 311,
+                  "w": 32,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 365,
+                  "w": 253,
+                  "h": 129
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>\n     to write raw bytes using only safe, ordinary keyboard characters,\n     so they survive being pasted inside an HTML file).\n  5. Drop that base64 text inside a <script> tag.\nNothing here is unique to Allure. This is the same idea behind every\n\"single file\" report format you'll ever come across.\nUsage:\n    python build_single_file_report.py allure-results-bdd -o bundle.html\n\"\"\"\nimport argparse\nimport base64\nimport gzip\nimport json\nfrom pathlib import Path",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 763,
+      "durationFrames": 957,
       "timingSource": "estimated"
     },
     {
@@ -607,13 +843,14 @@
           "clips": [
             {
               "ref": "rec:allure-02#pk3",
-              "label": "bytes become text at the door",
+              "label": "bytes become text",
               "focus": true,
               "wantAtWord": 11,
               "zooms": [
                 {
                   "mark": "b64line",
-                  "wantAtWord": 78
+                  "wantAtWord": 78,
+                  "atWord": 98
                 }
               ],
               "callouts": [
@@ -622,14 +859,73 @@
                   "mark": "b64line",
                   "side": "right",
                   "color": "orange",
-                  "wantAtWord": 115
+                  "wantAtWord": 115,
+                  "atWord": 104
                 }
-              ]
+              ],
+              "id": "pk3",
+              "src": "rec/allure-02/seg-07.mp4",
+              "frames": 972,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "b64line": {
+                  "x": 1003,
+                  "y": 419,
+                  "w": 169,
+                  "h": 21,
+                  "covers": "base64.b64encode"
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 149,
+                  "w": 770,
+                  "h": 75
+                },
+                {
+                  "x": 475,
+                  "y": 257,
+                  "w": 643,
+                  "h": 75
+                },
+                {
+                  "x": 475,
+                  "y": 365,
+                  "w": 981,
+                  "h": 75
+                },
+                {
+                  "x": 475,
+                  "y": 473,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>\ndef collect_bundle(results_dir: Path) -> dict:\n    \"\"\"Read every result file and every attachment file into one dict.\"\"\"\n    bundle = {\"results\": [], \"attachments\": {}}\n    for result_file in sorted(results_dir.glob(\"*-result.json\")):\n        with open(result_file, \"r\", encoding=\"utf-8\") as f:\n            bundle[\"results\"].append(json.load(f))\n    for attachment_file in sorted(results_dir.glob(\"*-attachment.*\")):\n        raw_bytes = attachment_file.read_bytes()\n        bundle[\"attachments\"][attachment_file.name] = base64.b64encode(raw_bytes).decode(\"ascii\")\n    return bundle",
+              "atWord": 11
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1342,
+      "durationFrames": 2407,
       "timingSource": "estimated"
     },
     {
@@ -641,8 +937,8 @@
       "data": {
         "database": {
           "headline": "Two keys, [two shapes]",
-          "tableName": "the bundle dictionary",
-          "query": "a list where order matters, a map where names do",
+          "tableName": "the bundle dict",
+          "query": "a list for order, a map for names",
           "columns": [
             "key",
             "shape",
@@ -652,12 +948,12 @@
             [
               "results",
               "list",
-              "order, and there are 10"
+              "order matters"
             ],
             [
               "attachments",
               "map",
-              "looked up by file name"
+              "found by name"
             ]
           ],
           "highlight": [
@@ -731,7 +1027,8 @@
               "zooms": [
                 {
                   "mark": "compress",
-                  "wantAtWord": 26
+                  "wantAtWord": 26,
+                  "atWord": 82
                 }
               ],
               "callouts": [
@@ -740,14 +1037,79 @@
                   "mark": "compress",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 49
+                  "wantAtWord": 49,
+                  "atWord": 83
                 }
-              ]
+              ],
+              "id": "pk4",
+              "src": "rec/allure-02/seg-08.mp4",
+              "frames": 822,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "compress": {
+                  "x": 676,
+                  "y": 338,
+                  "w": 137,
+                  "h": 21,
+                  "covers": "gzip.compress"
+                }
+              },
+              "ink": [
+                {
+                  "x": 517,
+                  "y": 68,
+                  "w": 939,
+                  "h": 21
+                },
+                {
+                  "x": 475,
+                  "y": 122,
+                  "w": 137,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 230,
+                  "w": 717,
+                  "h": 48
+                },
+                {
+                  "x": 475,
+                  "y": 311,
+                  "w": 686,
+                  "h": 75
+                },
+                {
+                  "x": 475,
+                  "y": 419,
+                  "w": 675,
+                  "h": 75
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>\n        bundle[\"attachments\"][attachment_file.name] = base64.b64encode(raw_bytes).decode(\"ascii\")\n    return bundle\ndef build_single_file(results_dir: Path, output_file: Path) -> None:\n    bundle = collect_bundle(results_dir)\n    json_text = json.dumps(bundle)\n    compressed_bytes = gzip.compress(json_text.encode(\"utf-8\"))\n    encoded_text = base64.b64encode(compressed_bytes).decode(\"ascii\")\n    print(f\"Raw JSON size:        {len(json_text):,} characters\")\n    print(f\"Gzip-compressed size: {len(compressed_bytes):,} bytes\")\n    print(f\"Base64 (final) size:  {len(encoded_text):,} characters\")",
+              "atWord": 13
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1034,
+      "durationFrames": 2085,
       "timingSource": "estimated"
     },
     {
@@ -795,7 +1157,7 @@
     {
       "id": "s19",
       "type": "RECORDED_STEP",
-      "narration": "And then the three print lines, which are the reason this script teaches anything. It could have done its job silently. Instead it prints the size at each stage, so the person running it can see what the compression actually bought. This is a small habit worth stealing: when your code does something whose effect is invisible, print the number that makes it visible. Then the script stops being a black box you trust and starts being a thing you can reason about.",
+      "narration": "And then the three print lines, which are the reason this script teaches anything. It could have done its job silently. Instead it prints the size at each stage, so the person running it can see what the compression actually bought. This is a small habit worth stealing: when your code does something whose effect is invisible, print the number that makes it visible. Then the script stops being a black box you trust and starts being a thing you can reason about, and argue with when the number looks wrong. The three lines cost nothing to write and they are the reason the next two minutes of this video are about real measurements instead of a claim that compression helps. Print the number. It is almost always worth it.",
       "transition": "slide",
       "background": "zoneA",
       "data": {
@@ -816,14 +1178,67 @@
                   "mark": "scripttag",
                   "side": "right",
                   "color": "purple",
-                  "wantAtWord": 64
+                  "wantAtWord": 64,
+                  "atWord": 96
                 }
-              ]
+              ],
+              "id": "pk5",
+              "src": "rec/allure-02/seg-09.mp4",
+              "frames": 972,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "scripttag": {
+                  "x": 517,
+                  "y": 338,
+                  "w": 190,
+                  "h": 21,
+                  "covers": "id=\"report-bundle\""
+                }
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 675,
+                  "h": 21
+                },
+                {
+                  "x": 475,
+                  "y": 149,
+                  "w": 274,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 176,
+                  "w": 865,
+                  "h": 318
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>\n    print(f\"Base64 (final) size:  {len(encoded_text):,} characters\")\n    html = f\"\"\"<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidden inside the script tag below.</p>\n<script id=\"report-bundle\" type=\"application/octet-stream\">{encoded_text}</script>\n</body>\n</html>\n\"\"\"\n    output_file.write_text(html, encoding=\"utf-8\")\n    print(f\"Single-file report written to: {output_file.resolve()}\")",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 831,
+      "durationFrames": 2335,
       "timingSource": "estimated"
     },
     {
@@ -850,20 +1265,118 @@
                   "mark": null,
                   "side": "top",
                   "color": "red",
-                  "wantAtWord": 90
+                  "wantAtWord": 90,
+                  "atWord": 75
                 }
-              ]
+              ],
+              "id": "pk6",
+              "src": "rec/allure-02/seg-10.mp4",
+              "frames": 584,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 74,
+                  "h": 48
+                },
+                {
+                  "x": 475,
+                  "y": 122,
+                  "w": 675,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 854,
+                  "h": 156
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>\n</html>\n\"\"\"\n    output_file.write_text(html, encoding=\"utf-8\")\n    print(f\"Single-file report written to: {output_file.resolve()}\")\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"results_dir\", type=Path)\n    parser.add_argument(\"-o\", \"--output\", type=Path, default=Path(\"bundle.html\"))\n    args = parser.parse_args()\n    build_single_file(args.results_dir, args.output)\nif __name__ == \"__main__\":\n    main()",
+              "atWord": 13
             },
             {
               "ref": "rec:allure-02#savepack",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 65
+              "wantAtWord": 65,
+              "id": "savepack",
+              "src": "rec/allure-02/seg-11.mp4",
+              "frames": 39,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 74,
+                  "h": 48
+                },
+                {
+                  "x": 475,
+                  "y": 122,
+                  "w": 675,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 854,
+                  "h": 156
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 740,
+                  "h": 228
+                }
+              ],
+              "shows": "$ ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn",
+              "said": "PS allure-02> ls allure-results-bdd | sed 's/.*-//' | sort | uniq -c | sort -rn\n 10 result.json\n 4 attachment.html\n 1 attachment.zip\n 1 attachment.yaml\n 1 attachment.xml\n 1 attachment.txt\n 1 attachment.png\n 1 attachment.json\n 1 attachment.jpg\n 1 attachment.csv\nPS allure-02>\n</html>\n\"\"\"\n    output_file.write_text(html, encoding=\"utf-8\")\n    print(f\"Single-file report written to: {output_file.resolve()}\")\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"results_dir\", type=Path)\n    parser.add_argument(\"-o\", \"--output\", type=Path, default=Path(\"bundle.html\"))\n    args = parser.parse_args()\n    build_single_file(args.results_dir, args.output)\nif __name__ == \"__main__\":\n    main()",
+              "keys": [
+                "Ctrl",
+                "S"
+              ],
+              "atWord": 89
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1082,
+      "durationFrames": 1353,
       "timingSource": "estimated"
     },
     {
@@ -891,7 +1404,7 @@
               "atWord": 21
             },
             {
-              "label": "<script id=\"report-bundle\">",
+              "label": "<script id=report-bundle>",
               "sub": "the payload",
               "color": "purple",
               "atWord": 46
@@ -939,7 +1452,8 @@
               "zooms": [
                 {
                   "mark": "gz",
-                  "wantAtWord": 26
+                  "wantAtWord": 26,
+                  "atWord": 26
                 }
               ],
               "callouts": [
@@ -948,14 +1462,94 @@
                   "mark": "b64",
                   "side": "right",
                   "color": "orange",
-                  "wantAtWord": 81
+                  "wantAtWord": 81,
+                  "atWord": 57
                 }
-              ]
+              ],
+              "id": "pack",
+              "src": "rec/allure-02/seg-12.mp4",
+              "frames": 211,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "raw": {
+                  "x": 368,
+                  "y": 650,
+                  "w": 122,
+                  "h": 19,
+                  "covers": "Raw JSON size"
+                },
+                "gz": {
+                  "x": 368,
+                  "y": 669,
+                  "w": 187,
+                  "h": 19,
+                  "covers": "Gzip-compressed size"
+                },
+                "b64": {
+                  "x": 368,
+                  "y": 688,
+                  "w": 178,
+                  "h": 19,
+                  "covers": "Base64 (final) size"
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 631,
+                  "w": 684,
+                  "h": 19,
+                  "covers": "uv run --no-project python build_single_file_report.py allure-results-bdd"
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 74,
+                  "h": 48
+                },
+                {
+                  "x": 475,
+                  "y": 122,
+                  "w": 675,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 854,
+                  "h": 156
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 815,
+                  "h": 114
+                }
+              ],
+              "shows": "$ uv run --no-project python build_single_file_report.py allure-resu",
+              "said": "PS allure-02> uv run --no-project python build_single_file_report.py allure-results-bdd\nRaw JSON size: 965,820 characters\nGzip-compressed size: 647,981 bytes\nBase64 (final) size: 863,976 characters\nSingle-file report written to: /private/tmp/iauteur-rec/allure-02/bundle.html\nPS allure-02>\n</html>\n\"\"\"\n    output_file.write_text(html, encoding=\"utf-8\")\n    print(f\"Single-file report written to: {output_file.resolve()}\")\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"results_dir\", type=Path)\n    parser.add_argument(\"-o\", \"--output\", type=Path, default=Path(\"bundle.html\"))\n    args = parser.parse_args()\n    build_single_file(args.results_dir, args.output)\nif __name__ == \"__main__\":\n    main()",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 908,
+      "durationFrames": 1137,
       "timingSource": "estimated"
     },
     {
@@ -1193,7 +1787,7 @@
             {
               "id": "media",
               "label": "jpeg, mp4, zip",
-              "sub": "already eaten — will not",
+              "sub": "already eaten",
               "color": "red",
               "parent": "rep",
               "atWord": 60
@@ -1221,12 +1815,70 @@
               "ref": "rec:allure-02#bundlesize",
               "label": "one file, 860 KB",
               "focus": true,
-              "wantAtWord": 6
+              "wantAtWord": 6,
+              "id": "bundlesize",
+              "src": "rec/allure-02/seg-13.mp4",
+              "frames": 96,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 499,
+                  "y": 726,
+                  "w": 169,
+                  "h": 19,
+                  "covers": "ls -lh bundle.html"
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 74,
+                  "h": 48
+                },
+                {
+                  "x": 475,
+                  "y": 122,
+                  "w": 675,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 854,
+                  "h": 156
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 815,
+                  "h": 152
+                }
+              ],
+              "shows": "$ ls -lh bundle.html",
+              "said": "PS allure-02> uv run --no-project python build_single_file_report.py allure-results-bdd\nRaw JSON size: 965,820 characters\nGzip-compressed size: 647,981 bytes\nBase64 (final) size: 863,976 characters\nSingle-file report written to: /private/tmp/iauteur-rec/allure-02/bundle.html\nPS allure-02> ls -lh bundle.html\n-rw-r--r-- 1 santhu wheel 844K Sep 9 18:23 bundle.html\nPS allure-02>\n</html>\n\"\"\"\n    output_file.write_text(html, encoding=\"utf-8\")\n    print(f\"Single-file report written to: {output_file.resolve()}\")\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"results_dir\", type=Path)\n    parser.add_argument(\"-o\", \"--output\", type=Path, default=Path(\"bundle.html\"))\n    args = parser.parse_args()\n    build_single_file(args.results_dir, args.output)\nif __name__ == \"__main__\":\n    main()",
+              "atWord": 6
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 551,
+      "durationFrames": 693,
       "timingSource": "estimated"
     },
     {
@@ -1244,7 +1896,7 @@
           "clips": [
             {
               "ref": "rec:allure-02#peek",
-              "label": "built to travel, not to read",
+              "label": "built to travel",
               "focus": true,
               "wantAtWord": 4,
               "callouts": [
@@ -1253,14 +1905,80 @@
                   "mark": "notice",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 61
+                  "wantAtWord": 61,
+                  "atWord": 61
                 }
-              ]
+              ],
+              "id": "peek",
+              "src": "rec/allure-02/seg-14.mp4",
+              "frames": 100,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "notice": {
+                  "x": 574,
+                  "y": 726,
+                  "w": 187,
+                  "h": 19,
+                  "covers": "packed test evidence"
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 631,
+                  "w": 216,
+                  "h": 19,
+                  "covers": "head -c 300 bundle.html"
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 68,
+                  "w": 74,
+                  "h": 48
+                },
+                {
+                  "x": 475,
+                  "y": 122,
+                  "w": 675,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 854,
+                  "h": 156
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n</html>\n\"\"\"\n    output_file.write_text(html, encoding=\"utf-8\")\n    print(f\"Single-file report written to: {output_file.resolve()}\")\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"results_dir\", type=Path)\n    parser.add_argument(\"-o\", \"--output\", type=Path, default=Path(\"bundle.html\"))\n    args = parser.parse_args()\n    build_single_file(args.results_dir, args.output)\nif __name__ == \"__main__\":\n    main()",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 995,
+      "durationFrames": 1245,
       "timingSource": "estimated"
     },
     {
@@ -1350,7 +2068,7 @@
         "allureStage": {
           "kind": "nested-boxes",
           "headline": "Three levels, [decided first]",
-          "caption": "the shape everything later uses",
+          "caption": "used by every later chapter",
           "premise": "A TestCase holds Steps. A Step holds Attachments. Everything after this chapter is built on these three boxes.",
           "color": "purple",
           "atWord": 1,
@@ -1382,7 +2100,7 @@
     {
       "id": "s35",
       "type": "RECORDED_STEP",
-      "narration": "Second file. It opens with the same courtesy as the first: a docstring that draws the shape in text, so anyone opening this file knows what it produces before reading a line of code. Then the imports. Seven this time, and again every one is standard library. re is new — that is regular expressions, for finding the script tag. dataclass is new too, and it is about to save us thirty lines.",
+      "narration": "Second file. It opens with the same courtesy as the first: a docstring that draws the shape in text, so anyone opening this file knows what it produces before reading a line of code. Then the imports. Seven this time, and again every one is standard library. re is new — that is regular expressions, for finding the script tag. dataclass is new too, and it is about to save us thirty lines. And Optional, from typing, which is how you say this field holds a string, or it holds nothing at all. That matters here because a passing test has no failure message, and the type should say so rather than pretending every test has one and leaving it empty. Read the docstring's little diagram once more before we start typing. Report, holding test cases, holding steps, holding attachments. Four words, and they are the whole architecture of the next six chapters. Notice the file does that drawing in plain text, with arrows made of dashes. There is no diagram tool involved and nothing to keep in sync. A shape you can draw in six lines of a docstring is a shape simple enough to be worth having.",
       "transition": "slide",
       "background": "zoneB",
       "data": {
@@ -1395,11 +2113,35 @@
             {
               "ref": "rec:allure-02#opendec",
               "label": "the second file",
-              "focus": true
+              "focus": true,
+              "id": "opendec",
+              "src": "rec/allure-02/seg-15.mp4",
+              "frames": 230,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>",
+              "keys": [
+                "Ctrl",
+                "P"
+              ],
+              "atWord": 5
             },
             {
               "ref": "rec:allure-02#dc1",
-              "label": "seven imports, all built in",
+              "label": "seven built-in imports",
               "focus": true,
               "wantAtWord": 13,
               "callouts": [
@@ -1408,14 +2150,70 @@
                   "mark": null,
                   "side": "top",
                   "color": "purple",
-                  "wantAtWord": 73
+                  "wantAtWord": 73,
+                  "atWord": 145
                 }
-              ]
+              ],
+              "id": "dc1",
+              "src": "rec/allure-02/seg-17.mp4",
+              "frames": 1126,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 602,
+                  "y": 68,
+                  "w": 443,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 696,
+                  "h": 48
+                },
+                {
+                  "x": 433,
+                  "y": 203,
+                  "w": 63,
+                  "h": 21
+                },
+                {
+                  "x": 475,
+                  "y": 230,
+                  "w": 369,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 422,
+                  "h": 237
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n                -> Attachment (name, mime type, raw bytes)\nThis is the exact shape later chapters store into SQLite and serve\nthrough FastAPI, so getting this shape right here matters a lot.\nUsage:\n    python decode_report.py bundle.html\n\"\"\"\nimport argparse\nimport base64\nimport gzip\nimport json\nimport re\nfrom dataclasses import dataclass, field\nfrom pathlib import Path\nfrom typing import Optional",
+              "atWord": 35
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 734,
+      "durationFrames": 3050,
       "timingSource": "estimated"
     },
     {
@@ -1482,13 +2280,14 @@
           "clips": [
             {
               "ref": "rec:allure-02#dc2",
-              "label": "thirty lines you do not write",
+              "label": "thirty lines you skip",
               "focus": true,
               "wantAtWord": 2,
               "zooms": [
                 {
                   "mark": "dcls",
-                  "wantAtWord": 52
+                  "wantAtWord": 52,
+                  "atWord": 84
                 }
               ],
               "callouts": [
@@ -1497,14 +2296,61 @@
                   "mark": null,
                   "side": "top",
                   "color": "red",
-                  "wantAtWord": 143
+                  "wantAtWord": 143,
+                  "atWord": 110
                 }
-              ]
+              ],
+              "id": "dc2",
+              "src": "rec/allure-02/seg-18.mp4",
+              "frames": 632,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "dcls": {
+                  "x": 433,
+                  "y": 311,
+                  "w": 105,
+                  "h": 21,
+                  "covers": "@dataclass"
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 122,
+                  "w": 538,
+                  "h": 129
+                },
+                {
+                  "x": 433,
+                  "y": 311,
+                  "w": 474,
+                  "h": 183
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n@dataclass\nclass Step:\n    name: str\n    status: str\n    attachments: list = field(default_factory=list)\n@dataclass\nclass TestCase:\n    name: str\n    status: str\n    failure_message: Optional[str]\n    failure_trace: Optional[str]\n    steps: list = field(default_factory=list)",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1661,
+      "durationFrames": 2073,
       "timingSource": "estimated"
     },
     {
@@ -1529,7 +2375,7 @@
           "rows": [
             {
               "label": "made when",
-              "a": "once, at import",
+              "a": "once at import",
               "b": "every instance",
               "winner": "b",
               "atWord": 35
@@ -1557,7 +2403,7 @@
     {
       "id": "s39",
       "type": "CHAPTER",
-      "narration": "And now the unpacking, which is the five steps we already know, in reverse.",
+      "narration": "And now backwards: find it, decode it, decompress it, parse it, build the objects.",
       "transition": "morph",
       "background": "zoneC",
       "data": {
@@ -1591,7 +2437,8 @@
               "zooms": [
                 {
                   "mark": "decompress",
-                  "wantAtWord": 53
+                  "wantAtWord": 53,
+                  "atWord": 92
                 }
               ],
               "callouts": [
@@ -1600,14 +2447,61 @@
                   "mark": null,
                   "side": "top",
                   "color": "orange",
-                  "wantAtWord": 80
+                  "wantAtWord": 80,
+                  "atWord": 98
                 }
-              ]
+              ],
+              "id": "dc3",
+              "src": "rec/allure-02/seg-19.mp4",
+              "frames": 896,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "decompress": {
+                  "x": 602,
+                  "y": 446,
+                  "w": 158,
+                  "h": 21,
+                  "covers": "gzip.decompress"
+                }
+              },
+              "ink": [
+                {
+                  "x": 433,
+                  "y": 149,
+                  "w": 938,
+                  "h": 210
+                },
+                {
+                  "x": 475,
+                  "y": 392,
+                  "w": 643,
+                  "h": 102
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\ndef extract_bundle_json(html_text: str) -> dict:\n    \"\"\"Pull the base64+gzip blob out of the <script> tag and turn it back into a dict.\"\"\"\n    match = re.search(\n        r'<script id=\"report-bundle\"[^>]*>([^<]+)</script>',\n        html_text,\n    )\n    if not match:\n        raise ValueError(\"No report-bundle script tag found in this HTML file\")\n    encoded_text = match.group(1)\n    compressed_bytes = base64.b64decode(encoded_text)\n    json_text = gzip.decompress(compressed_bytes).decode(\"utf-8\")\n    return json.loads(json_text)",
+              "atWord": 11
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1275,
+      "durationFrames": 2231,
       "timingSource": "estimated"
     },
     {
@@ -1676,14 +2570,52 @@
                   "mark": null,
                   "side": "top",
                   "color": "purple",
-                  "wantAtWord": 122
+                  "wantAtWord": 122,
+                  "atWord": 75
                 }
-              ]
+              ],
+              "id": "dc4",
+              "src": "rec/allure-02/seg-20.mp4",
+              "frames": 556,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 643,
+                  "h": 102
+                },
+                {
+                  "x": 433,
+                  "y": 257,
+                  "w": 590,
+                  "h": 237
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n    encoded_text = match.group(1)\n    compressed_bytes = base64.b64decode(encoded_text)\n    json_text = gzip.decompress(compressed_bytes).decode(\"utf-8\")\n    return json.loads(json_text)\ndef guess_mime_type(attachment_filename: str) -> str:\n    extension = Path(attachment_filename).suffix.lower()\n    return {\n        \".png\": \"image/png\",\n        \".jpg\": \"image/jpeg\",\n        \".csv\": \"text/csv\",\n        \".html\": \"text/html\",\n        \".txt\": \"text/plain\",\n    }.get(extension, \"application/octet-stream\")",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1207,
+      "durationFrames": 1509,
       "timingSource": "estimated"
     },
     {
@@ -1736,7 +2668,7 @@
     {
       "id": "s44",
       "type": "RECORDED_STEP",
-      "narration": "And now the assembly, which is where the shape we decided pays off. For every result in the bundle, we make a TestCase, pulling the name, the status, and the two failure fields out of status details. Notice get with a default everywhere, rather than square brackets. Square brackets on a missing key raise an error; get returns a sensible default and carries on. When you are reading someone else's data format, get is almost always what you want, because their file will one day have a field yours does not expect. Read this function and notice how boring it is. There are no clever tricks in it at all. That is the payoff for deciding the shape before writing the code: the code becomes obvious.",
+      "narration": "And now the assembly, which is where the shape we decided pays off. For every result in the bundle, we make a TestCase, pulling the name, the status, and the two failure fields out of status details. Notice get with a default everywhere, rather than square brackets. Square brackets on a missing key raise an error; get returns a sensible default and carries on. When you are reading someone else's data format, get is almost always what you want, because their file will one day have a field yours does not expect. Read this function and notice how boring it is. There are no clever tricks in it at all. That is the payoff for deciding the shape before writing the code: the code becomes obvious. There is no cleverness to admire and nothing to puzzle over, which is exactly what you want in the part of a system that reads somebody else's file format. Clever code is where the bugs hide, and a decoder is the last place you want a bug, because everything downstream believes whatever it hands over.",
       "transition": "zoom",
       "background": "zoneB",
       "data": {
@@ -1748,13 +2680,14 @@
           "clips": [
             {
               "ref": "rec:allure-02#dc5",
-              "label": "boring, and that is the point",
+              "label": "boring, and that is right",
               "focus": true,
               "wantAtWord": 4,
               "zooms": [
                 {
                   "mark": "loop",
-                  "wantAtWord": 15
+                  "wantAtWord": 15,
+                  "atWord": 123
                 }
               ],
               "callouts": [
@@ -1763,14 +2696,67 @@
                   "mark": null,
                   "side": "top",
                   "color": "green",
-                  "wantAtWord": 92
+                  "wantAtWord": 92,
+                  "atWord": 134
                 }
-              ]
+              ],
+              "id": "dc5",
+              "src": "rec/allure-02/seg-21.mp4",
+              "frames": 1271,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "loop": {
+                  "x": 517,
+                  "y": 392,
+                  "w": 274,
+                  "h": 21,
+                  "covers": "for raw_step in result.get"
+                }
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 411,
+                  "h": 48
+                },
+                {
+                  "x": 475,
+                  "y": 149,
+                  "w": 507,
+                  "h": 210
+                },
+                {
+                  "x": 517,
+                  "y": 392,
+                  "w": 929,
+                  "h": 129
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n    attachments_raw = bundle[\"attachments\"]\n    test_cases = []\n    for result in bundle[\"results\"]:\n        details = result.get(\"statusDetails\", {})\n        test_case = TestCase(\n            name=result.get(\"name\", \"Unnamed test\"),\n            status=result.get(\"status\", \"unknown\"),\n            failure_message=details.get(\"message\"),\n            failure_trace=details.get(\"trace\"),\n        )\n        for raw_step in result.get(\"steps\", []):\n            step = Step(name=raw_step.get(\"name\", \"\"), status=raw_step.get(\"status\", \"unknown\"))\n            for raw_attachment in raw_step.get(\"attachments\", []):\n                source_name = raw_attachment[\"source\"]\n                encoded_data = attachments_raw.get(source_name)",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1246,
+      "durationFrames": 3024,
       "timingSource": "estimated"
     },
     {
@@ -1824,7 +2810,8 @@
               "zooms": [
                 {
                   "mark": "b64dec",
-                  "wantAtWord": 25
+                  "wantAtWord": 25,
+                  "atWord": 80
                 }
               ],
               "callouts": [
@@ -1833,14 +2820,73 @@
                   "mark": null,
                   "side": "top",
                   "color": "blue",
-                  "wantAtWord": 109
+                  "wantAtWord": 109,
+                  "atWord": 85
                 }
-              ]
+              ],
+              "id": "dc5b",
+              "src": "rec/allure-02/seg-22.mp4",
+              "frames": 838,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "b64dec": {
+                  "x": 739,
+                  "y": 284,
+                  "w": 169,
+                  "h": 21,
+                  "covers": "base64.b64decode"
+                }
+              },
+              "ink": [
+                {
+                  "x": 602,
+                  "y": 68,
+                  "w": 496,
+                  "h": 21
+                },
+                {
+                  "x": 560,
+                  "y": 122,
+                  "w": 833,
+                  "h": 264
+                },
+                {
+                  "x": 517,
+                  "y": 419,
+                  "w": 295,
+                  "h": 21
+                },
+                {
+                  "x": 475,
+                  "y": 473,
+                  "w": 179,
+                  "h": 21
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n                encoded_data = attachments_raw.get(source_name)\n                if encoded_data is None:\n                    continue\n                step.attachments.append(\n                    Attachment(\n                        name=raw_attachment.get(\"name\", source_name),\n                        mime_type=raw_attachment.get(\"type\", guess_mime_type(source_name)),\n                        data=base64.b64decode(encoded_data),\n                    )\n                )\n            test_case.steps.append(step)\n        test_cases.append(test_case)\n    return test_cases",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1101,
+      "durationFrames": 2026,
       "timingSource": "estimated"
     },
     {
@@ -1852,8 +2898,8 @@
       "data": {
         "database": {
           "headline": "Evidence, [scenario by scenario]",
-          "tableName": "decoded from bundle.html",
-          "query": "the counts the decoder printed on this machine",
+          "tableName": "decoded objects",
+          "query": "counts the decoder printed here",
           "columns": [
             "scenario",
             "steps",
@@ -1871,7 +2917,7 @@
               "2"
             ],
             [
-              "screenshot / JPEG",
+              "screenshot, JPEG",
               "3",
               "1"
             ],
@@ -1907,7 +2953,7 @@
     {
       "id": "s48",
       "type": "CHAPTER",
-      "narration": "The counting, and a bug that is worth more than the code around it.",
+      "narration": "Now the counting, and a summary that lied while the data underneath it was right.",
       "transition": "iris",
       "background": "zoneC",
       "data": {
@@ -1917,13 +2963,13 @@
           "subtitle": "the data was right the whole time"
         }
       },
-      "durationFrames": 165,
+      "durationFrames": 175,
       "timingSource": "estimated"
     },
     {
       "id": "s49",
       "type": "RECORDED_STEP",
-      "narration": "Four counters, one per outcome, and then a line per test case. You have seen this pattern before — chapter one ended on it. But this time the lesson is a different one, and it is the most useful thing in this chapter. The first version of this script counted only passed and failed. It printed a summary. The summary looked completely normal. And it was wrong, because two of the ten test cases were not represented in it anywhere. Here is the part worth sitting with: the decode was correct the entire time. Every one of the ten objects was built properly, with the right status on each. The data was never wrong. Only the summary printed from it was.",
+      "narration": "Four counters, one per outcome, and then a line per test case. You have seen this pattern before — chapter one ended on it. But this time the lesson is a different one, and it is the most useful thing in this chapter. The first version of this script counted only passed and failed. It printed a summary. The summary looked completely normal. And it was wrong, because two of the ten test cases were not represented in it anywhere. Here is the part worth sitting with: the decode was correct the entire time. Every one of the ten objects was built properly, with the right status on each. The data was never wrong. Only the summary printed from it was. Sit with how uncomfortable that is for a second. Every test you could have written against the decoder would have passed. The objects were right. The statuses were right. The counts of everything the code actually counted were right. And the person reading the output still got a false picture, because two categories were missing from the report entirely.",
       "transition": "fade",
       "background": "zoneA",
       "data": {
@@ -1935,13 +2981,14 @@
           "clips": [
             {
               "ref": "rec:allure-02#dc6",
-              "label": "the data was right; the print was not",
+              "label": "right data, wrong print",
               "focus": true,
               "wantAtWord": 2,
               "zooms": [
                 {
                   "mark": "counts",
-                  "wantAtWord": 46
+                  "wantAtWord": 46,
+                  "atWord": 124
                 }
               ],
               "callouts": [
@@ -1950,14 +2997,73 @@
                   "mark": "counts",
                   "side": "right",
                   "color": "red",
-                  "wantAtWord": 117
+                  "wantAtWord": 117,
+                  "atWord": 134
                 }
-              ]
+              ],
+              "id": "dc6",
+              "src": "rec/allure-02/seg-23.mp4",
+              "frames": 1294,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "marks": {
+                "counts": {
+                  "x": 475,
+                  "y": 392,
+                  "w": 127,
+                  "h": 21,
+                  "covers": "broken = sum"
+                }
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 327,
+                  "h": 21
+                },
+                {
+                  "x": 433,
+                  "y": 149,
+                  "w": 601,
+                  "h": 102
+                },
+                {
+                  "x": 475,
+                  "y": 284,
+                  "w": 443,
+                  "h": 21
+                },
+                {
+                  "x": 475,
+                  "y": 338,
+                  "w": 886,
+                  "h": 156
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n    return build_test_cases(bundle)\ndef main():\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"html_file\", type=Path)\n    args = parser.parse_args()\n    test_cases = decode_report(args.html_file)\n    passed = sum(1 for t in test_cases if t.status == \"passed\")\n    failed = sum(1 for t in test_cases if t.status == \"failed\")\n    broken = sum(1 for t in test_cases if t.status == \"broken\")\n    skipped = sum(1 for t in test_cases if t.status == \"skipped\")\n    print(f\"Decoded {len(test_cases)} test cases from {args.html_file}\")\n    print(f\"  passed: {passed}  failed: {failed}  broken: {broken}  skipped: {skipped}\")",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1198,
+      "durationFrames": 3077,
       "timingSource": "estimated"
     },
     {
@@ -1969,12 +3075,12 @@
       "data": {
         "database": {
           "headline": "Eight, [out of ten]",
-          "tableName": "the same decoded data",
+          "tableName": "the same objects",
           "query": "counted two ways, from identical objects",
           "columns": [
             "version",
             "summary says",
-            "actually decoded"
+            "really there"
           ],
           "rows": [
             [
@@ -1983,7 +3089,7 @@
               "10"
             ],
             [
-              "all four statuses",
+              "all four",
               "10",
               "10"
             ]
@@ -2005,7 +3111,7 @@
     {
       "id": "s51",
       "type": "RECORDED_STEP",
-      "narration": "And the last few lines print one row per test case: the status in brackets, the name, then how many steps and how many attachments it carried. For a failed one, it also prints the reason. None of that is required to make the script work. All of it is required to make the script trustworthy, because it is what lets you check the output against something you already know. Save the file. That is a hundred and forty one lines, and two hundred and twenty four for the chapter.",
+      "narration": "And the last few lines print one row per test case: the status in brackets, the name, then how many steps and how many attachments it carried. For a failed one, it also prints the reason. None of that is required to make the script work. All of it is required to make the script trustworthy, because it is what lets you check the output against something you already know. Save the file. That is a hundred and forty one lines, and two hundred and twenty four for the chapter — a packer and a decoder, both of them standard library only. Two files, and between them they can take a folder of test evidence, turn it into something you can email, and turn it back into objects a program can work with. That is a genuinely useful pair of scripts and you now know every line in both of them.",
       "transition": "slide",
       "background": "zoneC",
       "data": {
@@ -2026,26 +3132,112 @@
                   "mark": null,
                   "side": "top",
                   "color": "green",
-                  "wantAtWord": 56
+                  "wantAtWord": 56,
+                  "atWord": 79
                 }
-              ]
+              ],
+              "id": "dc7",
+              "src": "rec/allure-02/seg-24.mp4",
+              "frames": 692,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 886,
+                  "h": 129
+                },
+                {
+                  "x": 475,
+                  "y": 257,
+                  "w": 802,
+                  "h": 156
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n    failed = sum(1 for t in test_cases if t.status == \"failed\")\n    broken = sum(1 for t in test_cases if t.status == \"broken\")\n    skipped = sum(1 for t in test_cases if t.status == \"skipped\")\n    print(f\"Decoded {len(test_cases)} test cases from {args.html_file}\")\n    print(f\"  passed: {passed}  failed: {failed}  broken: {broken}  skipped: {skipped}\")\n    for test_case in test_cases:\n        attachment_count = sum(len(s.attachments) for s in test_case.steps)\n        print(f\"  - [{test_case.status:6}] {test_case.name}  \"\n              f\"({len(test_case.steps)} steps, {attachment_count} attachments)\")\n        if test_case.status == \"failed\":\n            print(f\"        reason: {test_case.failure_message.strip()}\")\nif __name__ == \"__main__\":\n    main()",
+              "atWord": 5
             },
             {
               "ref": "rec:allure-02#savedec",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 54
+              "wantAtWord": 91,
+              "id": "savedec",
+              "src": "rec/allure-02/seg-25.mp4",
+              "frames": 39,
+              "bbox": {
+                "x": 348,
+                "y": 65,
+                "w": 1252,
+                "h": 513
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 886,
+                  "h": 129
+                },
+                {
+                  "x": 475,
+                  "y": 257,
+                  "w": 802,
+                  "h": 156
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 722,
+                  "h": 171
+                }
+              ],
+              "shows": "$ head -c 300 bundle.html",
+              "said": "PS allure-02> head -c 300 bundle.html\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><title>Packed Test Report Bundle</title></head>\n<body>\n<p>This file contains packed test evidence. Run <code>decode_report.py</code>\non it to open it up. Opening this file directly in a browser will not show\nyou anything readable - the data is hidde%\nPS allure-02>\n    failed = sum(1 for t in test_cases if t.status == \"failed\")\n    broken = sum(1 for t in test_cases if t.status == \"broken\")\n    skipped = sum(1 for t in test_cases if t.status == \"skipped\")\n    print(f\"Decoded {len(test_cases)} test cases from {args.html_file}\")\n    print(f\"  passed: {passed}  failed: {failed}  broken: {broken}  skipped: {skipped}\")\n    for test_case in test_cases:\n        attachment_count = sum(len(s.attachments) for s in test_case.steps)\n        print(f\"  - [{test_case.status:6}] {test_case.name}  \"\n              f\"({len(test_case.steps)} steps, {attachment_count} attachments)\")\n        if test_case.status == \"failed\":\n            print(f\"        reason: {test_case.failure_message.strip()}\")\nif __name__ == \"__main__\":\n    main()",
+              "keys": [
+                "Ctrl",
+                "S"
+              ],
+              "atWord": 95
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 899,
+      "durationFrames": 1857,
       "timingSource": "estimated"
     },
     {
       "id": "s52",
       "type": "CHAPTER",
-      "narration": "Now run it, and check every number against the run that produced them.",
+      "narration": "Run it, and check the numbers: ten out, ten back. Proof, not a claim.",
       "transition": "zoom",
       "background": "zoneA",
       "data": {
@@ -2055,13 +3247,13 @@
           "subtitle": "ten out, ten back"
         }
       },
-      "durationFrames": 155,
+      "durationFrames": 165,
       "timingSource": "estimated"
     },
     {
       "id": "s53",
       "type": "RECORDED_STEP",
-      "narration": "Ten test cases decoded. Seven passed, one failed, one broken, one skipped. Then every scenario by name, with its step count and its attachment count. And the failed one carries its reason: AssertionError. Now compare that against chapter one. behave reported seven passed, one failed, one error, one skipped. The official Allure tool reported seven, one, one, one. Our Python report printed seven, one, one, one. And now this decoder, having gone through JSON, gzip, base sixty four, an HTML file, and all the way back, returns seven, one, one, one. Four independent readings of the same run, and they all agree. That is what proof looks like: not one program saying it worked, but several arriving at the same number separately.",
+      "narration": "Seven passed, one failed, one broken, one skipped — and then a row for every scenario, by name, with its step count and its attachment count beside it. Count the rows: there are ten of them, one per scenario. And the failed one carries its reason: AssertionError. Now compare that against chapter one. behave reported seven passed, one failed, one error, one skipped. The official Allure tool reported seven, one, one, one. Our Python report printed seven, one, one, one. And now this decoder, having gone through JSON, gzip, base sixty four, an HTML file, and all the way back, returns seven, one, one, one. Four independent readings of the same run, and they all agree. That is what proof looks like: not one program saying it worked, but several arriving at the same number separately.",
       "transition": "wipe",
       "background": "zoneB",
       "data": {
@@ -2075,11 +3267,12 @@
               "ref": "rec:allure-02#decode",
               "label": "seven, one, one, one",
               "focus": true,
-              "wantAtWord": 4,
+              "wantAtWord": 1,
               "zooms": [
                 {
                   "mark": "tally",
-                  "wantAtWord": 35
+                  "wantAtWord": 49,
+                  "atWord": 49
                 }
               ],
               "callouts": [
@@ -2088,14 +3281,81 @@
                   "mark": "tally",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 122
+                  "wantAtWord": 136,
+                  "atWord": 80
                 }
-              ]
+              ],
+              "id": "decode",
+              "src": "rec/allure-02/seg-26.mp4",
+              "frames": 190,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "tally": {
+                  "x": 387,
+                  "y": 631,
+                  "w": 403,
+                  "h": 19,
+                  "covers": "passed: 7  failed: 1  broken: 1  skipped: 1"
+                },
+                "reason": {
+                  "x": 443,
+                  "y": 745,
+                  "w": 206,
+                  "h": 19,
+                  "covers": "reason: AssertionError"
+                },
+                "__cmd": {
+                  "x": 499,
+                  "y": 613,
+                  "w": 515,
+                  "h": 19,
+                  "covers": "uv run --no-project python decode_report.py bundle.html"
+                }
+              },
+              "ink": [
+                {
+                  "x": 475,
+                  "y": 68,
+                  "w": 886,
+                  "h": 129
+                },
+                {
+                  "x": 475,
+                  "y": 257,
+                  "w": 802,
+                  "h": 156
+                },
+                {
+                  "x": 433,
+                  "y": 473,
+                  "w": 274,
+                  "h": 48
+                },
+                {
+                  "x": 368,
+                  "y": 613,
+                  "w": 844,
+                  "h": 265
+                }
+              ],
+              "shows": "$ uv run --no-project python decode_report.py bundle.html",
+              "said": " passed: 7 failed: 1 broken: 1 skipped: 1\n - [passed] Homepage screenshot is captured (3 steps, 1 attachments)\n - [passed] Homepage check summary is recorded in three formats (5 steps, 4 attachments)\n - [passed] Homepage response time is measured 3 times (3 steps, 1 attachments)\n - [skipped] This check is skipped on purpose (2 steps, 0 attachments)\n - [failed] This check is written to fail on purpose (3 steps, 1 attachments)\n reason: AssertionError\n - [passed] Homepage evidence is archived into a zip file (3 steps, 2 attachments)\n - [passed] Homepage mentions Python (3 steps, 1 attachments)\n - [passed] Homepage screenshot is also captured as a JPEG (3 steps, 1 attachments)\n - [broken] This check is broken by an unexpected error (2 steps, 0 attachments)\n - [passed] Homepage responds successfully (3 steps, 1 attachments)\nPS allure-02>\nPS allure-02> uv run --no-project python decode_report.py bundle.html\n    failed = sum(1 for t in test_cases if t.status == \"failed\")\n    broken = sum(1 for t in test_cases if t.status == \"broken\")\n    skipped = sum(1 for t in test_cases if t.status == \"skipped\")\n    print(f\"Decoded {len(test_cases)} test cases from {args.html_file}\")\n    print(f\"  passed: {passed}  failed: {failed}  broken: {broken}  skipped: {skipped}\")\n    for test_case in test_cases:\n        attachment_count = sum(len(s.attachments) for s in test_case.steps)\n        print(f\"  - [{test_case.status:6}] {test_case.name}  \"\n              f\"({len(test_case.steps)} steps, {attachment_count} attachments)\")\n        if test_case.status == \"failed\":\n            print(f\"        reason: {test_case.failure_message.strip()}\")\nif __name__ == \"__main__\":\n    main()",
+              "atWord": 5
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 1207,
+      "durationFrames": 1677,
       "timingSource": "estimated"
     },
     {
@@ -2107,18 +3367,18 @@
       "data": {
         "database": {
           "headline": "Four readings, [one answer]",
-          "tableName": "the same ten scenarios",
+          "tableName": "ten scenarios",
           "query": "four programs, measured on this machine",
           "columns": [
             "who",
             "passed",
-            "the other three"
+            "the other 3"
           ],
           "rows": [
             [
               "behave",
               "7",
-              "1 failed, 1 error, 1 skipped"
+              "1 / 1 err / 1"
             ],
             [
               "official Allure",

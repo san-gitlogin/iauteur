@@ -60,8 +60,7 @@ const logs    = (n, d) => scene('LOG_STREAM', n, {logs: d});
 // ═══ OPENING ═════════════════════════════════════════════════════════════════
 {
   const n = "An Allure run leaves twenty-two files. " +
-            "We squash them into one you can email, " +
-            "then write the decoder that opens it back up.";
+            "We squash them into one, then write the decoder that opens it.";
   scenes.push(scene('HOOK', n, {
     headline: 'ALLURE, PACKED INTO ONE FILE',
     subtext: 'gzip, base64, and a decoder you write',
@@ -273,7 +272,26 @@ scenes.push(chapter(
     "This is the same idea behind every single-file format you will ever meet — " +
     "a saved web page, a notebook with its outputs, a crash report with its logs attached. " +
     "Learn it once here on something small, " +
-    "and you will recognise it everywhere afterwards.";
+    "and you will recognise it everywhere afterwards. " +
+    "And notice the shape of the docstring itself. " +
+    "It opens with what the file does in one sentence. " +
+    "Then the five steps, numbered, in the order they happen. " +
+    "Then a usage line showing exactly how to run it. " +
+    "That is a template you can copy for anything you write. " +
+    "Somebody opening this file — including you, months from now — " +
+    "gets the what, the how and the command " +
+    "before reading a single line of Python. " +
+    "Most files make you read the code to find out what the code is for, " +
+    "and that is a tax you pay every time you come back to it. " +
+    "Twenty-five lines of English at the top " +
+    "is the cheapest documentation there is, " +
+    "because it lives in the same file and moves when the file moves. " +
+    "One more thing before the code. " +
+    "Notice that the docstring says what this is NOT, as well as what it is. " +
+    "It says nothing here is unique to Allure. " +
+    "Telling a reader what a thing is not " +
+    "is often more useful than another sentence about what it is, " +
+    "because it heads off the wrong assumption before they make it.";
   scenes.push(rec(n, 'the trick, written down first',
     'The packer, and the five steps stated in English at the top of it.',
     [A('openpack', 'a new file'),
@@ -317,7 +335,7 @@ scenes.push(chapter(
     "or they could never go into the bundle in the first place.";
   scenes.push(rec(n, 'one dictionary, everything in it',
     'Reading every result and every attachment into a single structure.',
-    [A('pk3', 'bytes become text at the door', {wantAtWord: at(n, 'collect'),
+    [A('pk3', 'bytes become text', {wantAtWord: at(n, 'collect'),
        zooms: [{mark: 'b64line', atWord: at(n, 'immediately')}],
        callouts: [{text: 'JSON cannot hold raw bytes', mark: 'b64line', side: 'right',
                    color: 'orange', atWord: at(n, 'list', 3)}]})]));
@@ -337,12 +355,12 @@ scenes.push(chapter(
     "and picking the right one costs nothing at the time.";
   scenes.push(table(n, {
     headline: 'Two keys, [two shapes]',
-    tableName: 'the bundle dictionary',
-    query: 'a list where order matters, a map where names do',
+    tableName: 'the bundle dict',
+    query: 'a list for order, a map for names',
     columns: ['key', 'shape', 'why'],
     rows: [
-      ['results', 'list', 'order, and there are 10'],
-      ['attachments', 'map', 'looked up by file name'],
+      ['results', 'list', 'order matters'],
+      ['attachments', 'map', 'found by name'],
     ],
     highlight: [0, 1],
     highlightAtWords: [at(n, 'results'), at(n, 'attachments')],
@@ -435,7 +453,12 @@ scenes.push(chapter(
     "when your code does something whose effect is invisible, " +
     "print the number that makes it visible. " +
     "Then the script stops being a black box you trust " +
-    "and starts being a thing you can reason about.";
+    "and starts being a thing you can reason about, " +
+    "and argue with when the number looks wrong. " +
+    "The three lines cost nothing to write " +
+    "and they are the reason the next two minutes of this video " +
+    "are about real measurements instead of a claim that compression helps. " +
+    "Print the number. It is almost always worth it.";
   scenes.push(rec(n, 'print what would be invisible',
     'Three print lines that turn compression into something you can see.',
     [A('pk5', 'the numbers, on purpose', {wantAtWord: at(n, 'print'),
@@ -484,7 +507,7 @@ scenes.push(chapter(
        atWord: at(n, 'head')},
       {label: 'a paragraph of English', sub: 'what this is, how to open it', color: 'green',
        atWord: at(n, 'paragraph')},
-      {label: '<script id="report-bundle">', sub: 'the payload', color: 'purple',
+      {label: '<script id=report-bundle>', sub: 'the payload', color: 'purple',
        atWord: at(n, 'payload')},
     ],
   }));
@@ -667,7 +690,7 @@ scenes.push(chapter(
        atWord: at(n, 'repetition')},
       {id: 'text', label: 'text and code', sub: 'full of it — shrinks', color: 'green',
        parent: 'rep', atWord: at(n, 'code')},
-      {id: 'media', label: 'jpeg, mp4, zip', sub: 'already eaten — will not', color: 'red',
+      {id: 'media', label: 'jpeg, mp4, zip', sub: 'already eaten', color: 'red',
        parent: 'rep', atWord: at(n, 'video')},
     ],
   }));
@@ -697,7 +720,7 @@ scenes.push(chapter(
     "So we are going to write the thing that opens it.";
   scenes.push(rec(n, 'unreadable, on purpose',
     'The head of the bundle: a human note, and then the payload.',
-    [A('peek', 'built to travel, not to read', {wantAtWord: at(n, 'open'),
+    [A('peek', 'built to travel', {wantAtWord: at(n, 'open'),
        callouts: [{text: 'intact, just not readable', mark: 'notice', side: 'right',
                    color: 'blue', atWord: at(n, 'travelling')}]})]));
 }
@@ -753,7 +776,7 @@ scenes.push(chapter(
     "and saves a rewrite in four chapters' time.";
   scenes.push(stage(n, 'nested-boxes', {
     headline: 'Three levels, [decided first]',
-    caption: 'the shape everything later uses',
+    caption: 'used by every later chapter',
     premise: 'A TestCase holds Steps. A Step holds Attachments. Everything after this chapter is built on these three boxes.',
     color: 'purple',
     atWord: 1,
@@ -773,11 +796,23 @@ scenes.push(chapter(
     "Then the imports. " +
     "Seven this time, and again every one is standard library. " +
     "re is new — that is regular expressions, for finding the script tag. " +
-    "dataclass is new too, and it is about to save us thirty lines.";
+    "dataclass is new too, and it is about to save us thirty lines. " +
+    "And Optional, from typing, which is how you say " +
+    "this field holds a string, or it holds nothing at all. " +
+    "That matters here because a passing test has no failure message, " +
+    "and the type should say so rather than pretending " +
+    "every test has one and leaving it empty. " +
+    "Read the docstring's little diagram once more before we start typing. " +
+    "Report, holding test cases, holding steps, holding attachments. " +
+    "Four words, and they are the whole architecture of the next six chapters. " +
+    "Notice the file does that drawing in plain text, with arrows made of dashes. " +
+    "There is no diagram tool involved and nothing to keep in sync. " +
+    "A shape you can draw in six lines of a docstring " +
+    "is a shape simple enough to be worth having.";
   scenes.push(rec(n, 'the shape, stated in the file',
     'The decoder, and the model drawn in its docstring.',
     [A('opendec', 'the second file'),
-     A('dc1', 'seven imports, all built in', {wantAtWord: at(n, 'docstring'),
+     A('dc1', 'seven built-in imports', {wantAtWord: at(n, 'docstring'),
        callouts: [{text: 're for finding, dataclass for holding', mark: null,
                    side: 'top', color: 'purple', atWord: at(n, 'lines')}]})]));
 }
@@ -830,7 +865,7 @@ scenes.push(chapter(
     "default factory makes a fresh one each time.";
   scenes.push(rec(n, 'three dataclasses, three levels',
     'The model in code, and the two decorator details that matter.',
-    [A('dc2', 'thirty lines you do not write', {wantAtWord: at(n, 'classes'),
+    [A('dc2', 'thirty lines you skip', {wantAtWord: at(n, 'classes'),
        zooms: [{mark: 'dcls', atWord: at(n, 'dataclass')}],
        callouts: [{text: 'a shared default list is a classic bug', mark: null,
                    side: 'top', color: 'red', atWord: at(n, 'shared')}]})]));
@@ -855,7 +890,7 @@ scenes.push(chapter(
     a: {name: '= []', color: 'red'},
     b: {name: 'default_factory', color: 'green'},
     rows: [
-      {label: 'made when', a: 'once, at import', b: 'every instance', winner: 'b',
+      {label: 'made when', a: 'once at import', b: 'every instance', winner: 'b',
        atWord: at(n, 'defined')},
       {label: 'shared', a: 'by all objects', b: 'never', winner: 'b', atWord: at(n, 'same')},
       {label: 'symptom', a: 'stray data', b: 'none', winner: 'b', atWord: at(n, 'mysteriously')},
@@ -865,7 +900,7 @@ scenes.push(chapter(
 
 // ═══ CHAPTER 5 — the same five steps, backwards ══════════════════════════════
 scenes.push(chapter(
-  "And now the unpacking, which is the five steps we already know, in reverse.",
+  "And now backwards: find it, decode it, decompress it, parse it, build the objects.",
   5, 'Backwards', 'find, decode, decompress, parse, build'));
 
 {
@@ -981,10 +1016,16 @@ scenes.push(chapter(
     "Read this function and notice how boring it is. " +
     "There are no clever tricks in it at all. " +
     "That is the payoff for deciding the shape before writing the code: " +
-    "the code becomes obvious.";
+    "the code becomes obvious. " +
+    "There is no cleverness to admire and nothing to puzzle over, " +
+    "which is exactly what you want in the part of a system " +
+    "that reads somebody else's file format. " +
+    "Clever code is where the bugs hide, " +
+    "and a decoder is the last place you want a bug, " +
+    "because everything downstream believes whatever it hands over.";
   scenes.push(rec(n, 'one result becomes one object',
     'Turning each raw result into a TestCase, field by field.',
-    [A('dc5', 'boring, and that is the point', {wantAtWord: at(n, 'assembly'),
+    [A('dc5', 'boring, and that is right', {wantAtWord: at(n, 'assembly'),
        zooms: [{mark: 'loop', atWord: at(n, 'every')}],
        callouts: [{text: 'get, not square brackets', mark: null, side: 'top',
                    color: 'green', atWord: at(n, 'expect')}]})]));
@@ -1047,13 +1088,13 @@ scenes.push(chapter(
     "you are almost certainly reading the data correctly.";
   scenes.push(table(n, {
     headline: 'Evidence, [scenario by scenario]',
-    tableName: 'decoded from bundle.html',
-    query: 'the counts the decoder printed on this machine',
+    tableName: 'decoded objects',
+    query: 'counts the decoder printed here',
     columns: ['scenario', 'steps', 'attachments'],
     rows: [
       ['three formats', '5', '4'],
       ['zipped evidence', '3', '2'],
-      ['screenshot / JPEG', '3', '1'],
+      ['screenshot, JPEG', '3', '1'],
       ['broken', '2', '0'],
       ['skipped', '2', '0'],
     ],
@@ -1065,7 +1106,7 @@ scenes.push(chapter(
 
 // ═══ CHAPTER 6 — the summary that lied ═══════════════════════════════════════
 scenes.push(chapter(
-  "The counting, and a bug that is worth more than the code around it.",
+  "Now the counting, and a summary that lied while the data underneath it was right.",
   6, 'A summary that lied', 'the data was right the whole time'));
 
 {
@@ -1082,10 +1123,16 @@ scenes.push(chapter(
     "the decode was correct the entire time. " +
     "Every one of the ten objects was built properly, " +
     "with the right status on each. " +
-    "The data was never wrong. Only the summary printed from it was.";
+    "The data was never wrong. Only the summary printed from it was. " +
+    "Sit with how uncomfortable that is for a second. " +
+    "Every test you could have written against the decoder would have passed. " +
+    "The objects were right. The statuses were right. " +
+    "The counts of everything the code actually counted were right. " +
+    "And the person reading the output still got a false picture, " +
+    "because two categories were missing from the report entirely.";
   scenes.push(rec(n, 'count all four, not two',
     'The four counters, and the version of this that had two.',
-    [A('dc6', 'the data was right; the print was not', {wantAtWord: at(n, 'counters'),
+    [A('dc6', 'right data, wrong print', {wantAtWord: at(n, 'counters'),
        zooms: [{mark: 'counts', atWord: at(n, 'version')}],
        callouts: [{text: 'correct data, wrong summary', mark: 'counts', side: 'right',
                    color: 'red', atWord: at(n, 'summary', 3)}]})]));
@@ -1106,12 +1153,12 @@ scenes.push(chapter(
     "count the whole as well, and let the two disagree out loud.";
   scenes.push(table(n, {
     headline: 'Eight, [out of ten]',
-    tableName: 'the same decoded data',
+    tableName: 'the same objects',
     query: 'counted two ways, from identical objects',
-    columns: ['version', 'summary says', 'actually decoded'],
+    columns: ['version', 'summary says', 'really there'],
     rows: [
       ['passed + failed', '8', '10'],
-      ['all four statuses', '10', '10'],
+      ['all four', '10', '10'],
     ],
     highlight: [0, 1],
     highlightAtWords: [at(n, 'Eight'), at(n, 'total')],
@@ -1129,7 +1176,13 @@ scenes.push(chapter(
     "All of it is required to make the script trustworthy, " +
     "because it is what lets you check the output against something you already know. " +
     "Save the file. That is a hundred and forty one lines, " +
-    "and two hundred and twenty four for the chapter.";
+    "and two hundred and twenty four for the chapter — " +
+    "a packer and a decoder, both of them standard library only. " +
+    "Two files, and between them they can take a folder of test evidence, " +
+    "turn it into something you can email, " +
+    "and turn it back into objects a program can work with. " +
+    "That is a genuinely useful pair of scripts " +
+    "and you now know every line in both of them.";
   scenes.push(rec(n, 'one row per test case',
     'The per-test output, and why it exists.',
     [A('dc7', 'output you can check', {wantAtWord: at(n, 'lines'),
@@ -1140,14 +1193,15 @@ scenes.push(chapter(
 
 // ═══ CHAPTER 7 — the proof ═══════════════════════════════════════════════════
 scenes.push(chapter(
-  "Now run it, and check every number against the run that produced them.",
+  "Run it, and check the numbers: ten out, ten back. Proof, not a claim.",
   7, 'Proof, not a claim', 'ten out, ten back'));
 
 {
   const n =
-    "Ten test cases decoded. " +
-    "Seven passed, one failed, one broken, one skipped. " +
-    "Then every scenario by name, with its step count and its attachment count. " +
+    "Seven passed, one failed, one broken, one skipped — " +
+    "and then a row for every scenario, by name, " +
+    "with its step count and its attachment count beside it. " +
+    "Count the rows: there are ten of them, one per scenario. " +
     "And the failed one carries its reason: AssertionError. " +
     "Now compare that against chapter one. " +
     "behave reported seven passed, one failed, one error, one skipped. " +
@@ -1162,7 +1216,7 @@ scenes.push(chapter(
     "not one program saying it worked, but several arriving at the same number separately.";
   scenes.push(rec(n, 'ten out, ten back',
     'The decoder\'s output, against the run that produced it.',
-    [A('decode', 'seven, one, one, one', {wantAtWord: at(n, 'decoded'),
+    [A('decode', 'seven, one, one, one', {wantAtWord: at(n, 'Seven'),
        zooms: [{mark: 'tally', atWord: at(n, 'compare')}],
        callouts: [{text: 'the same four numbers, a fourth time', mark: 'tally',
                    side: 'right', color: 'green', atWord: at(n, 'separately')}]})]));
@@ -1182,11 +1236,11 @@ scenes.push(chapter(
     "and every count identical.";
   scenes.push(table(n, {
     headline: 'Four readings, [one answer]',
-    tableName: 'the same ten scenarios',
+    tableName: 'ten scenarios',
     query: 'four programs, measured on this machine',
-    columns: ['who', 'passed', 'the other three'],
+    columns: ['who', 'passed', 'the other 3'],
     rows: [
-      ['behave', '7', '1 failed, 1 error, 1 skipped'],
+      ['behave', '7', '1 / 1 err / 1'],
       ['official Allure', '7', '1 / 1 / 1'],
       ['our HTML report', '7', '1 / 1 / 1'],
       ['this decoder', '7', '1 / 1 / 1'],

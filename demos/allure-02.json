@@ -321,7 +321,7 @@
       "focus": "terminal",
       "clearFirst": true,
       "expect": {
-        "contains": "Decoded 10 test cases"
+        "contains": "passed: 7"
       },
       "holdMs": 4200,
       "marks": [

@@ -120,9 +120,13 @@ const demo = {
     {id: 'savedec', action: 'save', label: 'saved'},
 
     // ══ prove it ════════════════════════════════════════════════════════════
+    // EXPECT SOMETHING THAT IS STILL ON SCREEN. The decoder prints fourteen lines and the
+    // panel holds twelve, so "Decoded 10 test cases" scrolls off the top by one line — the
+    // take was rejected for a run that had worked perfectly. The counts line survives, and
+    // it is the line the beat is actually about; the ten rows below it are countable.
     run('decode', 'uv run --no-project python decode_report.py bundle.html',
         'the same ten, back out again',
-        {clearFirst: true, expect: {contains: 'Decoded 10 test cases'}, holdMs: 4200,
+        {clearFirst: true, expect: {contains: 'passed: 7'}, holdMs: 4200,
          marks: [{id: 'tally', text: 'passed: 7  failed: 1  broken: 1  skipped: 1'},
                  {id: 'reason', text: 'reason: AssertionError'}]}),
   ],
