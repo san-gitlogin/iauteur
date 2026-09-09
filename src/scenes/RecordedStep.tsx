@@ -62,10 +62,48 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   const cur = clips[active];
   const curStart = starts[active];
   const curFrames = Math.max(1, Number(cur.frames ?? 1));
+
+  // ── TYPING PLAYS AT THE SPEED OF THE EXPLANATION, NOT THE SPEED IT WAS TYPED ──────
+  //
+  // OWNER, on the finished chapter 1: *"There is absolutely no sync between the screen
+  // recording content and the voice over... you are just displaying the screen recording
+  // halfway when you already have typed so many, and the voice is actually ahead of what's
+  // shown. There is no pause between. There is no explaining of lines."*
+  //
+  // He was right, and the measurement is stark. The feature-file beat "the first two
+  // checks" is 15.9s of typing under 27.5s of narration; "the three nobody shows you" is
+  // 29.6s of typing under 63.3s. Played at 1x the lines race past in the first half and
+  // the screen then sits frozen for the rest — so the voice explains line seven while the
+  // picture finished line nine twenty seconds ago. Every recorded beat in the course had
+  // this shape, because a person types faster than a person explains.
+  //
+  // The fix is not to record slower typing (that wastes a take and cannot be tuned) and
+  // not to trim the explanation (LAW: an explanation is never trimmed to fit). It is to
+  // spread the footage across the airtime the beat actually owns, so a line appears as it
+  // is being talked about and the viewer gets the pauses in between.
+  //
+  //   rate = footage / (airtime * READ_TAIL)
+  //
+  // READ_TAIL leaves a slice at the end frozen, so the finished block can be read whole
+  // before the beat cuts. The rate is clamped to [MIN_RATE, 1]: never faster than recorded
+  // (that would cut typing off), and never slower than MIN_RATE, past which a long tail is
+  // better spent frozen on the finished code than crawling through it.
+  const nextStart = active + 1 < starts.length
+    ? starts[active + 1]
+    : (scene.durationFrames ?? curStart + curFrames);
+  const airtime = Math.max(1, nextStart - curStart);
+  const READ_TAIL = 0.86;
+  const MIN_RATE = 0.4;
+  const rate = Math.max(MIN_RATE, Math.min(1, curFrames / (airtime * READ_TAIL)));
+  // Everything downstream must ask how long the footage takes ON SCREEN, not how many
+  // frames it holds — stretching moves the freeze point, and the callouts and the zoom
+  // settle are timed off it.
+  const shownFrames = Math.round(curFrames / rate);
+
   // How far into its own footage this segment is, and whether it has run out and is
   // now HOLDING for the voice. `held` drives the honest on-screen "holding" state.
   const into = frame - curStart;
-  const held = into >= curFrames;
+  const held = into >= shownFrames;
 
   const capW = Number(d.capture?.width ?? 960);
   const capH = Number(d.capture?.height ?? 540);
@@ -530,7 +568,9 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
       return {on, off, owns: !!ov};
     }
     // THE DEFAULT: appear when the footage freezes, leave before the next step.
-    const settle = st + Math.max(0, Number(c0.frames ?? 0) - 2);
+    // `shownFrames`, not `c0.frames` — the footage is stretched to the airtime it owns,
+    // so the freeze it lands on is later than the raw frame count suggests.
+    const settle = st + Math.max(0, shownFrames - 2);
     const TAIL = 20;              // ~0.7s of clean frame before the next step takes over
     const MAX = 260;              // and never more than ~8.5s of card in one go
     const on = Math.min(settle, Math.max(st, nx - 90));   // a very short gap still gets a card
@@ -706,6 +746,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                 src={cur.src}
                 fit="cover"
                 muted
+                playbackRate={rate}
                 endBehavior="freeze"
                 placeholderLabel={cur.src ? 'CLIP MISSING' : 'NOT BAKED'}
                 style={{background: t.colors.panel}}
@@ -762,7 +803,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             // segment runs out and the last frame freezes, which is when the geometry it was
             // measured against is what is actually on screen — and it then holds for the whole
             // rest of the step, which is the part the owner asked for.
-            const settleAt = curStart + Math.max(0, Number(cur.frames ?? 0) - 2);
+            const settleAt = curStart + Math.max(0, shownFrames - 2);
             const on = interpolate(frame, [settleAt, settleAt + 10], [0, 1], clamp);
             if (on <= 0.001) return null;
             const c = sem(d.color ?? 'blue');

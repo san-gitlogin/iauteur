@@ -554,7 +554,7 @@ scenes.push(chapter(
     [A('feat5', 'fail, break, skip', {
        callouts: [{text: 'never runs at all', mark: 'skip', side: 'right',
                    color: 'purple', atWord: at(n, 'outcomes')}]}),
-     A('savefeat', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
+     A('savefeat', 'saved', {wantAtWord: atFrac(n, 0.93)})]));
 }
 
 {
@@ -1198,7 +1198,7 @@ scenes.push(chapter(
                    side: 'right', color: 'orange', atWord: at(n, 'checked')},
                   {text: 'stops before it runs', mark: 'skipcall', side: 'right',
                    color: 'purple', atWord: at(n, 'reason', 2)}]}),
-     A('savesteps', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
+     A('savesteps', 'saved', {wantAtWord: atFrac(n, 0.93)})]));
 }
 
 {
@@ -1356,7 +1356,7 @@ scenes.push(chapter(
      A('env2', 'before all, and after all', {wantAtWord: at(n, 'before'),
        callouts: [{text: 'closed cleanly, even after a failure', mark: null, side: 'top',
                    color: 'green', atWord: at(n, 'ghosts')}]}),
-     A('saveenv', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
+     A('saveenv', 'saved', {wantAtWord: atFrac(n, 0.93)})]));
 }
 
 {
@@ -2328,7 +2328,7 @@ scenes.push(chapter(
     [A('rpt12', 'one required, two optional', {wantAtWord: at(n, 'argparse'),
        callouts: [{text: 'runnable, and importable', mark: null, side: 'top',
                    color: 'purple', atWord: at(n, 'imports')}]}),
-     A('savertp', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
+     A('savertp', 'saved', {wantAtWord: atFrac(n, 0.93)})]));
 }
 
 {

@@ -484,7 +484,7 @@ scenes.push(chapter(
     [A('pk6', 'an id, and a type', {wantAtWord: at(n, 'HTML'),
        callouts: [{text: 'do not run this as JavaScript', mark: null, side: 'top',
                    color: 'red', atWord: at(n, 'execute')}]}),
-     A('savepack', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
+     A('savepack', 'saved', {wantAtWord: atFrac(n, 0.93)})]));
 }
 
 {
@@ -1188,7 +1188,7 @@ scenes.push(chapter(
     [A('dc7', 'output you can check', {wantAtWord: at(n, 'lines'),
        callouts: [{text: 'checkable beats minimal', mark: null, side: 'top',
                    color: 'green', atWord: at(n, 'trustworthy')}]}),
-     A('savedec', 'saved', {wantAtWord: atFrac(n, 0.6)})]));
+     A('savedec', 'saved', {wantAtWord: atFrac(n, 0.93)})]));
 }
 
 // ═══ CHAPTER 7 — the proof ═══════════════════════════════════════════════════

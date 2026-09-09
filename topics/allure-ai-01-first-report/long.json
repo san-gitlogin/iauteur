@@ -102,8 +102,8 @@
         "headlineAtWord": 8.417
       },
       "durationFrames": 202,
-      "audio": "audio/allure01_long_s01.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s01.mp3"
     },
     {
       "id": "s02",
@@ -116,8 +116,8 @@
         "subtitle": "ten checks, four outcomes, nine kinds of evidence"
       },
       "durationFrames": 823,
-      "audio": "audio/allure01_long_s02.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s02.mp3"
     },
     {
       "id": "s03",
@@ -188,8 +188,8 @@
         }
       },
       "durationFrames": 1082,
-      "audio": "audio/allure01_long_s03.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s03.mp3"
     },
     {
       "id": "s04",
@@ -205,8 +205,8 @@
         }
       },
       "durationFrames": 161,
-      "audio": "audio/allure01_long_s04.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s04.mp3"
     },
     {
       "id": "s05",
@@ -357,8 +357,8 @@
         }
       },
       "durationFrames": 782,
-      "audio": "audio/allure01_long_s05.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s05.mp3"
     },
     {
       "id": "s06",
@@ -394,8 +394,8 @@
         }
       },
       "durationFrames": 1149,
-      "audio": "audio/allure01_long_s06.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s06.mp3"
     },
     {
       "id": "s07",
@@ -449,8 +449,8 @@
         }
       },
       "durationFrames": 914,
-      "audio": "audio/allure01_long_s07.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s07.mp3"
     },
     {
       "id": "s08",
@@ -606,8 +606,8 @@
         }
       },
       "durationFrames": 911,
-      "audio": "audio/allure01_long_s08.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s08.mp3"
     },
     {
       "id": "s09",
@@ -660,8 +660,8 @@
         }
       },
       "durationFrames": 987,
-      "audio": "audio/allure01_long_s09.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s09.mp3"
     },
     {
       "id": "s10",
@@ -720,8 +720,8 @@
         }
       },
       "durationFrames": 495,
-      "audio": "audio/allure01_long_s10.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s10.mp3"
     },
     {
       "id": "s11",
@@ -768,8 +768,8 @@
         }
       },
       "durationFrames": 987,
-      "audio": "audio/allure01_long_s11.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s11.mp3"
     },
     {
       "id": "s12",
@@ -815,8 +815,8 @@
         }
       },
       "durationFrames": 577,
-      "audio": "audio/allure01_long_s12.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s12.mp3"
     },
     {
       "id": "s13",
@@ -832,8 +832,8 @@
         }
       },
       "durationFrames": 138,
-      "audio": "audio/allure01_long_s13.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s13.mp3"
     },
     {
       "id": "s14",
@@ -880,8 +880,8 @@
         }
       },
       "durationFrames": 1095,
-      "audio": "audio/allure01_long_s14.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s14.mp3"
     },
     {
       "id": "s15",
@@ -972,8 +972,8 @@
         }
       },
       "durationFrames": 886,
-      "audio": "audio/allure01_long_s15.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s15.mp3"
     },
     {
       "id": "s16",
@@ -1020,8 +1020,8 @@
         }
       },
       "durationFrames": 1127,
-      "audio": "audio/allure01_long_s16.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s16.mp3"
     },
     {
       "id": "s17",
@@ -1104,8 +1104,8 @@
         }
       },
       "durationFrames": 835,
-      "audio": "audio/allure01_long_s17.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s17.mp3"
     },
     {
       "id": "s18",
@@ -1132,8 +1132,8 @@
         }
       },
       "durationFrames": 837,
-      "audio": "audio/allure01_long_s18.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s18.mp3"
     },
     {
       "id": "s19",
@@ -1213,8 +1213,8 @@
         }
       },
       "durationFrames": 825,
-      "audio": "audio/allure01_long_s19.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s19.mp3"
     },
     {
       "id": "s20",
@@ -1263,8 +1263,8 @@
         }
       },
       "durationFrames": 852,
-      "audio": "audio/allure01_long_s20.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s20.mp3"
     },
     {
       "id": "s21",
@@ -1350,8 +1350,8 @@
         }
       },
       "durationFrames": 845,
-      "audio": "audio/allure01_long_s21.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s21.mp3"
     },
     {
       "id": "s22",
@@ -1381,8 +1381,8 @@
         ]
       },
       "durationFrames": 994,
-      "audio": "audio/allure01_long_s22.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s22.mp3"
     },
     {
       "id": "s23",
@@ -1408,7 +1408,7 @@
                   "side": "right",
                   "color": "purple",
                   "wantAtWord": 110.75,
-                  "atWord": 74
+                  "atWord": 110.75
                 }
               ],
               "id": "feat5",
@@ -1482,7 +1482,7 @@
               "ref": "rec:allure-01#savefeat",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 90.75,
+              "wantAtWord": 145.5,
               "id": "savefeat",
               "src": "rec/allure-01/seg-13.mp4",
               "frames": 40,
@@ -1536,7 +1536,7 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 90.75
+              "atWord": 137.917
             }
           ],
           "capture": {
@@ -1547,8 +1547,8 @@
         }
       },
       "durationFrames": 1898,
-      "audio": "audio/allure01_long_s23.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s23.mp3"
     },
     {
       "id": "s24",
@@ -1574,8 +1574,8 @@
         ]
       },
       "durationFrames": 1002,
-      "audio": "audio/allure01_long_s24.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s24.mp3"
     },
     {
       "id": "s25",
@@ -1721,8 +1721,8 @@
         }
       },
       "durationFrames": 833,
-      "audio": "audio/allure01_long_s25.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s25.mp3"
     },
     {
       "id": "s26",
@@ -1778,8 +1778,8 @@
         }
       },
       "durationFrames": 861,
-      "audio": "audio/allure01_long_s26.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s26.mp3"
     },
     {
       "id": "s27",
@@ -1812,8 +1812,8 @@
         }
       },
       "durationFrames": 1089,
-      "audio": "audio/allure01_long_s27.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s27.mp3"
     },
     {
       "id": "s28",
@@ -1829,8 +1829,8 @@
         }
       },
       "durationFrames": 156,
-      "audio": "audio/allure01_long_s28.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s28.mp3"
     },
     {
       "id": "s29",
@@ -1869,8 +1869,8 @@
         }
       },
       "durationFrames": 894,
-      "audio": "audio/allure01_long_s29.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s29.mp3"
     },
     {
       "id": "s30",
@@ -1917,8 +1917,8 @@
         }
       },
       "durationFrames": 972,
-      "audio": "audio/allure01_long_s30.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s30.mp3"
     },
     {
       "id": "s31",
@@ -2095,8 +2095,8 @@
         }
       },
       "durationFrames": 2100,
-      "audio": "audio/allure01_long_s31.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s31.mp3"
     },
     {
       "id": "s32",
@@ -2176,8 +2176,8 @@
         }
       },
       "durationFrames": 693,
-      "audio": "audio/allure01_long_s32.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s32.mp3"
     },
     {
       "id": "s33",
@@ -2216,8 +2216,8 @@
         }
       },
       "durationFrames": 1051,
-      "audio": "audio/allure01_long_s33.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s33.mp3"
     },
     {
       "id": "s34",
@@ -2330,8 +2330,8 @@
         }
       },
       "durationFrames": 1251,
-      "audio": "audio/allure01_long_s34.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s34.mp3"
     },
     {
       "id": "s35",
@@ -2371,8 +2371,8 @@
         }
       },
       "durationFrames": 916,
-      "audio": "audio/allure01_long_s35.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s35.mp3"
     },
     {
       "id": "s36",
@@ -2471,8 +2471,8 @@
         }
       },
       "durationFrames": 1051,
-      "audio": "audio/allure01_long_s36.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s36.mp3"
     },
     {
       "id": "s37",
@@ -2508,8 +2508,8 @@
         }
       },
       "durationFrames": 1035,
-      "audio": "audio/allure01_long_s37.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s37.mp3"
     },
     {
       "id": "s38",
@@ -2592,8 +2592,8 @@
         }
       },
       "durationFrames": 1595,
-      "audio": "audio/allure01_long_s38.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s38.mp3"
     },
     {
       "id": "s39",
@@ -2640,8 +2640,8 @@
         }
       },
       "durationFrames": 902,
-      "audio": "audio/allure01_long_s39.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s39.mp3"
     },
     {
       "id": "s40",
@@ -2724,8 +2724,8 @@
         }
       },
       "durationFrames": 1820,
-      "audio": "audio/allure01_long_s40.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s40.mp3"
     },
     {
       "id": "s41",
@@ -2779,8 +2779,8 @@
         }
       },
       "durationFrames": 922,
-      "audio": "audio/allure01_long_s41.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s41.mp3"
     },
     {
       "id": "s42",
@@ -2854,8 +2854,8 @@
         }
       },
       "durationFrames": 1235,
-      "audio": "audio/allure01_long_s42.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s42.mp3"
     },
     {
       "id": "s43",
@@ -2902,8 +2902,8 @@
         }
       },
       "durationFrames": 1030,
-      "audio": "audio/allure01_long_s43.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s43.mp3"
     },
     {
       "id": "s44",
@@ -2986,8 +2986,8 @@
         }
       },
       "durationFrames": 2061,
-      "audio": "audio/allure01_long_s44.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s44.mp3"
     },
     {
       "id": "s45",
@@ -3023,8 +3023,8 @@
         }
       },
       "durationFrames": 1023,
-      "audio": "audio/allure01_long_s45.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s45.mp3"
     },
     {
       "id": "s46",
@@ -3104,8 +3104,8 @@
         }
       },
       "durationFrames": 1358,
-      "audio": "audio/allure01_long_s46.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s46.mp3"
     },
     {
       "id": "s47",
@@ -3154,8 +3154,8 @@
         }
       },
       "durationFrames": 930,
-      "audio": "audio/allure01_long_s47.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s47.mp3"
     },
     {
       "id": "s48",
@@ -3178,7 +3178,7 @@
                 {
                   "mark": "keyerror",
                   "wantAtWord": 54.417,
-                  "atWord": 73.167
+                  "atWord": 82.917
                 }
               ],
               "callouts": [
@@ -3188,7 +3188,7 @@
                   "side": "right",
                   "color": "orange",
                   "wantAtWord": 68.75,
-                  "atWord": 81.25
+                  "atWord": 102.833
                 },
                 {
                   "text": "stops before it runs",
@@ -3196,7 +3196,7 @@
                   "side": "right",
                   "color": "purple",
                   "wantAtWord": 103,
-                  "atWord": 90.917
+                  "atWord": 122.583
                 }
               ],
               "id": "st9",
@@ -3270,7 +3270,7 @@
               "ref": "rec:allure-01#savesteps",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 89.917,
+              "wantAtWord": 140.417,
               "id": "savesteps",
               "src": "rec/allure-01/seg-28.mp4",
               "frames": 39,
@@ -3324,7 +3324,7 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 102
+              "atWord": 139.583
             }
           ],
           "capture": {
@@ -3335,8 +3335,8 @@
         }
       },
       "durationFrames": 1817,
-      "audio": "audio/allure01_long_s48.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s48.mp3"
     },
     {
       "id": "s49",
@@ -3383,8 +3383,8 @@
         }
       },
       "durationFrames": 1217,
-      "audio": "audio/allure01_long_s49.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s49.mp3"
     },
     {
       "id": "s50",
@@ -3468,8 +3468,8 @@
         }
       },
       "durationFrames": 889,
-      "audio": "audio/allure01_long_s50.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s50.mp3"
     },
     {
       "id": "s51",
@@ -3522,8 +3522,8 @@
         }
       },
       "durationFrames": 997,
-      "audio": "audio/allure01_long_s51.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s51.mp3"
     },
     {
       "id": "s52",
@@ -3539,8 +3539,8 @@
         }
       },
       "durationFrames": 155,
-      "audio": "audio/allure01_long_s52.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s52.mp3"
     },
     {
       "id": "s53",
@@ -3587,8 +3587,8 @@
         }
       },
       "durationFrames": 1202,
-      "audio": "audio/allure01_long_s53.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s53.mp3"
     },
     {
       "id": "s54",
@@ -3773,7 +3773,7 @@
               "ref": "rec:allure-01#saveenv",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 90.083,
+              "wantAtWord": 140,
               "id": "saveenv",
               "src": "rec/allure-01/seg-33.mp4",
               "frames": 39,
@@ -3827,7 +3827,7 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 112.583
+              "atWord": 125.167
             }
           ],
           "capture": {
@@ -3838,8 +3838,8 @@
         }
       },
       "durationFrames": 1821,
-      "audio": "audio/allure01_long_s54.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s54.mp3"
     },
     {
       "id": "s55",
@@ -3886,8 +3886,8 @@
         }
       },
       "durationFrames": 984,
-      "audio": "audio/allure01_long_s55.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s55.mp3"
     },
     {
       "id": "s56",
@@ -3903,8 +3903,8 @@
         }
       },
       "durationFrames": 154,
-      "audio": "audio/allure01_long_s56.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s56.mp3"
     },
     {
       "id": "s57",
@@ -3949,8 +3949,8 @@
         }
       },
       "durationFrames": 1190,
-      "audio": "audio/allure01_long_s57.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s57.mp3"
     },
     {
       "id": "s58",
@@ -4074,8 +4074,8 @@
         }
       },
       "durationFrames": 1125,
-      "audio": "audio/allure01_long_s58.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s58.mp3"
     },
     {
       "id": "s59",
@@ -4117,8 +4117,8 @@
         }
       },
       "durationFrames": 1037,
-      "audio": "audio/allure01_long_s59.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s59.mp3"
     },
     {
       "id": "s60",
@@ -4218,8 +4218,8 @@
         }
       },
       "durationFrames": 887,
-      "audio": "audio/allure01_long_s60.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s60.mp3"
     },
     {
       "id": "s61",
@@ -4268,8 +4268,8 @@
         }
       },
       "durationFrames": 1164,
-      "audio": "audio/allure01_long_s61.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s61.mp3"
     },
     {
       "id": "s62",
@@ -4376,8 +4376,8 @@
         }
       },
       "durationFrames": 642,
-      "audio": "audio/allure01_long_s62.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s62.mp3"
     },
     {
       "id": "s63",
@@ -4433,8 +4433,8 @@
         }
       },
       "durationFrames": 1057,
-      "audio": "audio/allure01_long_s63.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s63.mp3"
     },
     {
       "id": "s64",
@@ -4549,8 +4549,8 @@
         }
       },
       "durationFrames": 596,
-      "audio": "audio/allure01_long_s64.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s64.mp3"
     },
     {
       "id": "s65",
@@ -4597,8 +4597,8 @@
         }
       },
       "durationFrames": 1034,
-      "audio": "audio/allure01_long_s65.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s65.mp3"
     },
     {
       "id": "s66",
@@ -4653,8 +4653,8 @@
         }
       },
       "durationFrames": 992,
-      "audio": "audio/allure01_long_s66.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s66.mp3"
     },
     {
       "id": "s67",
@@ -4670,8 +4670,8 @@
         }
       },
       "durationFrames": 177,
-      "audio": "audio/allure01_long_s67.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s67.mp3"
     },
     {
       "id": "s68",
@@ -4726,8 +4726,8 @@
         }
       },
       "durationFrames": 927,
-      "audio": "audio/allure01_long_s68.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s68.mp3"
     },
     {
       "id": "s69",
@@ -4874,8 +4874,8 @@
         }
       },
       "durationFrames": 1861,
-      "audio": "audio/allure01_long_s69.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s69.mp3"
     },
     {
       "id": "s70",
@@ -4937,8 +4937,8 @@
         }
       },
       "durationFrames": 783,
-      "audio": "audio/allure01_long_s70.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s70.mp3"
     },
     {
       "id": "s71",
@@ -4974,8 +4974,8 @@
         }
       },
       "durationFrames": 863,
-      "audio": "audio/allure01_long_s71.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s71.mp3"
     },
     {
       "id": "s72",
@@ -5067,8 +5067,8 @@
         }
       },
       "durationFrames": 2216,
-      "audio": "audio/allure01_long_s72.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s72.mp3"
     },
     {
       "id": "s73",
@@ -5115,8 +5115,8 @@
         }
       },
       "durationFrames": 1175,
-      "audio": "audio/allure01_long_s73.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s73.mp3"
     },
     {
       "id": "s74",
@@ -5211,8 +5211,8 @@
         }
       },
       "durationFrames": 2781,
-      "audio": "audio/allure01_long_s74.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s74.mp3"
     },
     {
       "id": "s75",
@@ -5276,8 +5276,8 @@
         }
       },
       "durationFrames": 1149,
-      "audio": "audio/allure01_long_s75.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s75.mp3"
     },
     {
       "id": "s76",
@@ -5343,8 +5343,8 @@
         }
       },
       "durationFrames": 1071,
-      "audio": "audio/allure01_long_s76.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s76.mp3"
     },
     {
       "id": "s77",
@@ -5400,8 +5400,8 @@
         }
       },
       "durationFrames": 826,
-      "audio": "audio/allure01_long_s77.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s77.mp3"
     },
     {
       "id": "s78",
@@ -5491,8 +5491,8 @@
         }
       },
       "durationFrames": 1375,
-      "audio": "audio/allure01_long_s78.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s78.mp3"
     },
     {
       "id": "s79",
@@ -5539,8 +5539,8 @@
         }
       },
       "durationFrames": 1040,
-      "audio": "audio/allure01_long_s79.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s79.mp3"
     },
     {
       "id": "s80",
@@ -5624,8 +5624,8 @@
         }
       },
       "durationFrames": 1654,
-      "audio": "audio/allure01_long_s80.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s80.mp3"
     },
     {
       "id": "s81",
@@ -5661,8 +5661,8 @@
         }
       },
       "durationFrames": 984,
-      "audio": "audio/allure01_long_s81.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s81.mp3"
     },
     {
       "id": "s82",
@@ -5728,8 +5728,8 @@
         }
       },
       "durationFrames": 2408,
-      "audio": "audio/allure01_long_s82.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s82.mp3"
     },
     {
       "id": "s83",
@@ -5776,8 +5776,8 @@
         }
       },
       "durationFrames": 1107,
-      "audio": "audio/allure01_long_s83.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s83.mp3"
     },
     {
       "id": "s84",
@@ -5843,8 +5843,8 @@
         }
       },
       "durationFrames": 3533,
-      "audio": "audio/allure01_long_s84.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s84.mp3"
     },
     {
       "id": "s85",
@@ -5883,8 +5883,8 @@
         }
       },
       "durationFrames": 902,
-      "audio": "audio/allure01_long_s85.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s85.mp3"
     },
     {
       "id": "s86",
@@ -5950,8 +5950,8 @@
         }
       },
       "durationFrames": 830,
-      "audio": "audio/allure01_long_s86.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s86.mp3"
     },
     {
       "id": "s87",
@@ -5987,8 +5987,8 @@
         }
       },
       "durationFrames": 854,
-      "audio": "audio/allure01_long_s87.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s87.mp3"
     },
     {
       "id": "s88",
@@ -6076,8 +6076,8 @@
         }
       },
       "durationFrames": 1770,
-      "audio": "audio/allure01_long_s88.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s88.mp3"
     },
     {
       "id": "s89",
@@ -6119,8 +6119,8 @@
         }
       },
       "durationFrames": 1013,
-      "audio": "audio/allure01_long_s89.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s89.mp3"
     },
     {
       "id": "s90",
@@ -6193,7 +6193,7 @@
               "ref": "rec:allure-01#savertp",
               "label": "saved",
               "focus": true,
-              "wantAtWord": 67.5,
+              "wantAtWord": 106.25,
               "id": "savertp",
               "src": "rec/allure-01/seg-52.mp4",
               "frames": 39,
@@ -6235,7 +6235,7 @@
                 "Ctrl",
                 "S"
               ],
-              "atWord": 79.75
+              "atWord": 106.25
             }
           ],
           "capture": {
@@ -6246,8 +6246,8 @@
         }
       },
       "durationFrames": 1384,
-      "audio": "audio/allure01_long_s90.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s90.mp3"
     },
     {
       "id": "s91",
@@ -6307,8 +6307,8 @@
         }
       },
       "durationFrames": 962,
-      "audio": "audio/allure01_long_s91.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s91.mp3"
     },
     {
       "id": "s92",
@@ -6324,8 +6324,8 @@
         }
       },
       "durationFrames": 132,
-      "audio": "audio/allure01_long_s92.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s92.mp3"
     },
     {
       "id": "s93",
@@ -6359,8 +6359,8 @@
         ]
       },
       "durationFrames": 912,
-      "audio": "audio/allure01_long_s93.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s93.mp3"
     },
     {
       "id": "s94",
@@ -6531,8 +6531,8 @@
         }
       },
       "durationFrames": 1035,
-      "audio": "audio/allure01_long_s94.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s94.mp3"
     },
     {
       "id": "s95",
@@ -6588,8 +6588,8 @@
         }
       },
       "durationFrames": 1084,
-      "audio": "audio/allure01_long_s95.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s95.mp3"
     },
     {
       "id": "s96",
@@ -6643,8 +6643,8 @@
         }
       },
       "durationFrames": 1076,
-      "audio": "audio/allure01_long_s96.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s96.mp3"
     },
     {
       "id": "s97",
@@ -6674,8 +6674,8 @@
         }
       },
       "durationFrames": 717,
-      "audio": "audio/allure01_long_s97.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s97.mp3"
     },
     {
       "id": "s98",
@@ -6722,8 +6722,8 @@
         }
       },
       "durationFrames": 784,
-      "audio": "audio/allure01_long_s98.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s98.mp3"
     },
     {
       "id": "s99",
@@ -6753,8 +6753,8 @@
         ]
       },
       "durationFrames": 871,
-      "audio": "audio/allure01_long_s99.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s99.mp3"
     },
     {
       "id": "s100",
@@ -6809,8 +6809,8 @@
         }
       },
       "durationFrames": 1218,
-      "audio": "audio/allure01_long_s100.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s100.mp3"
     },
     {
       "id": "s101",
@@ -6964,8 +6964,8 @@
         }
       },
       "durationFrames": 1016,
-      "audio": "audio/allure01_long_s101.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s101.mp3"
     },
     {
       "id": "s102",
@@ -7028,8 +7028,8 @@
         }
       },
       "durationFrames": 981,
-      "audio": "audio/allure01_long_s102.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s102.mp3"
     },
     {
       "id": "s103",
@@ -7083,8 +7083,8 @@
         }
       },
       "durationFrames": 967,
-      "audio": "audio/allure01_long_s103.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s103.mp3"
     },
     {
       "id": "s104",
@@ -7120,8 +7120,8 @@
         }
       },
       "durationFrames": 1318,
-      "audio": "audio/allure01_long_s104.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s104.mp3"
     },
     {
       "id": "s105",
@@ -7136,8 +7136,8 @@
         }
       },
       "durationFrames": 408,
-      "audio": "audio/allure01_long_s105.mp3",
-      "timingSource": "tts"
+      "timingSource": "tts",
+      "audio": "audio/allure01_long_s105.mp3"
     }
   ]
 }

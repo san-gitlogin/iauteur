@@ -306,10 +306,29 @@ export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], s
   if (overflow) {
     return {ok: false, reason: overflow, durationFrames, clips};
   }
-  if (lastFrame > durationFrames * 0.85) {
+  // A PUNCTUATION CLIP IS NOT A PAYOFF, AND TREATING IT AS ONE WRECKS THE PACING.
+  //
+  // LAW 8 bounds where the PAYOFF lands, and a 1.3-second "saved" flash is not a payoff —
+  // it is a full stop. But it is the LAST clip, so this check forced it into the first 70%,
+  // which meant it OWNED the whole remaining airtime of the beat.
+  //
+  // OWNER, on chapter 1: *"There is no pause between. There is no explaining of lines."*
+  // Measured on that cut: the feature-file beat ran 63s, the save flash was anchored at 60%,
+  // so 29.6s of typing was crushed into the first half and the viewer then watched a frozen
+  // file for 33 seconds while the voice explained it. That is the whole complaint, and this
+  // rule is what caused it.
+  //
+  // So a trailing clip shorter than PUNCTUATION_FRAMES is placed LATE on purpose and exempt
+  // from the payoff bound. The clip before it — the one that is actually the payoff — is
+  // still judged, because it becomes the last clip this check looks at.
+  const PUNCTUATION_FRAMES = 60;   // two seconds: a save flash, a cursor blink, a tab switch
+  let judged = n - 1;
+  while (judged > 0 && clipFrames[judged] <= PUNCTUATION_FRAMES) judged--;
+  const lastJudgedFrame = frameOf(clips[judged].atWord);
+  if (lastJudgedFrame > durationFrames * 0.85) {
     return {
       ok: false,
-      reason: `the last clip lands at ${Math.round((lastFrame / durationFrames) * 100)}% of the ` +
+      reason: `the last clip lands at ${Math.round((lastJudgedFrame / durationFrames) * 100)}% of the ` +
         `scene — LAW 8 wants the payoff named in the first ~70%. Move a step to the next beat, ` +
         `or give the earlier steps less airtime.`,
       durationFrames,
