@@ -1,0 +1,94 @@
+{
+  "slug": "apple-18-pro-page",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 0,
+  "prep": {
+    "url": "https://www.apple.com/iphone-18-pro/"
+  },
+  "steps": [
+    {
+      "id": "hero",
+      "action": "expect",
+      "target": "text=Pro further.",
+      "label": "the product page as it opens",
+      "marks": [
+        {
+          "id": "title",
+          "text": "Pro further."
+        }
+      ],
+      "holdMs": 1400
+    },
+    {
+      "id": "aperture-line",
+      "action": "scroll",
+      "by": 1200,
+      "label": "Apple's own line about the variable aperture",
+      "marks": [
+        {
+          "id": "aperture",
+          "text": "variable aperture"
+        }
+      ],
+      "holdMs": 1800
+    },
+    {
+      "id": "camera-system",
+      "action": "scroll",
+      "by": 3600,
+      "label": "the Pro camera system section",
+      "marks": [
+        {
+          "id": "camhead",
+          "text": "Pro camera system"
+        }
+      ],
+      "holdMs": 1600
+    },
+    {
+      "id": "battery",
+      "action": "scroll",
+      "by": 6000,
+      "label": "the battery life section",
+      "marks": [
+        {
+          "id": "batthead",
+          "text": "Battery life"
+        }
+      ],
+      "holdMs": 1600
+    },
+    {
+      "id": "performance",
+      "action": "scroll",
+      "by": 2400,
+      "label": "the performance section",
+      "marks": [
+        {
+          "id": "perfhead",
+          "text": "Performance"
+        }
+      ],
+      "holdMs": 1600
+    },
+    {
+      "id": "vapor",
+      "action": "scroll",
+      "by": 1200,
+      "label": "the vapor chamber claim",
+      "marks": [
+        {
+          "id": "vaporhead",
+          "text": "vapor chamber"
+        }
+      ],
+      "holdMs": 1800
+    }
+  ]
+}

@@ -732,59 +732,75 @@ const PriceLadder: React.FC<Props> = ({items, accent}) => {
 // ---------------------------------------------------------------------------
 const RISE_PARTS = ['rise'];
 
+// A GRAPH, not a table of struck-through numbers. Owner, 2026-09-10: "I would like you to
+// show a graph with clear indication of the increases, instead of texts." Each model gets
+// ONE track: a dim bar out to what it used to cost, then a LIT extension for the rise,
+// with the delta written on the extension. The increase is the thing that moves and the
+// thing that glows, which is the argument of the beat.
+//
+// It also closes the gap the owner saw in widescreen — the old layout put the name hard
+// left and the price hard right with a third of the pane empty between them. The track now
+// spans that distance and carries meaning across it.
 const PriceRise: React.FC<Props> = ({items, accent, token}) => {
   const v = useViz(accent);
   const frame = useCurrentFrame();
   const budget = stackBudget(v) * v.scale;
   const rows = items.filter((i) => i.text === 'rise');
   if (!rows.length) return null;
-  const cur = token || '';                       // currency prefix, e.g. "₹" or "$"
+  const cur = token || '';
+  const money = (n: number) => `${cur}${n.toLocaleString(cur === '₹' ? 'en-IN' : 'en-US')}`;
+
+  const max = Math.max(...rows.map((r) => Number(r.value) || 0), 1);
   const rowH = Math.max(46 * v.scale,
-    Math.min(budget / Math.max(rows.length, 1) - 6 * v.scale, (v.vertical ? 190 : 120) * v.scale));
-  const fmt = (n: number) => `${cur}${n.toLocaleString(cur === '₹' ? 'en-IN' : 'en-US')}`;
+    Math.min(budget / Math.max(rows.length, 1) - 6 * v.scale, (v.vertical ? 190 : 128) * v.scale));
 
   return (
     <div style={{
-      display: 'flex', flexDirection: 'column', gap: 6 * v.scale, width: '100%',
+      display: 'flex', flexDirection: 'column', gap: 10 * v.scale, width: '100%',
       height: '100%', minHeight: 0, justifyContent: 'safe center',
     }}>
       {rows.map((r, i) => {
-        const p = liveAt(frame, r.atWord, 12);
+        const p = liveAt(frame, r.atWord, 14);
         const now = Number(r.value) || 0;
         const was = Number(r.sub) || 0;
         const up = now - was;
+        const wasFrac = (was / max) * 88;
+        const upFrac = ((now - was) / max) * 88 * Math.min(1, p * 1.25);
+        const bar = Math.max(10 * v.scale, rowH * 0.28);
         return (
           <div key={i} style={{
-            height: rowH, display: 'flex', alignItems: 'center', gap: 10 * v.scale,
-            opacity: 0.36 + p * 0.64,
-            borderTop: i ? `1px solid ${hexA(v.t.colors.panelBorder, 0.5)}` : 'none',
+            height: rowH, display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            gap: 7 * v.scale, opacity: 0.4 + p * 0.6,
           }}>
-            <div style={{minWidth: 0, flex: '1 1 auto'}}>
-              <div style={{...v.body(v.vertical ? 24 : 19.5), fontWeight: 700,
-                color: p > 0.02 ? v.t.colors.text : v.dim,
-                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{r.label}</div>
-              {/* the old price, with the strike DRAWN across it */}
-              <div style={{position: 'relative', display: 'inline-block', marginTop: 3 * v.scale}}>
-                <span style={{...v.mono(v.vertical ? 20 : 16.5), color: v.dim,
-                  whiteSpace: 'nowrap'}}>{fmt(was)}</span>
-                <span style={{
-                  position: 'absolute', left: 0, top: '52%', height: Math.max(1.6, 2 * v.scale),
-                  width: `${Math.min(1, p * 1.6) * 100}%`, background: v.sem('red'),
-                  borderRadius: 999, transform: 'translateY(-50%)',
-                }} />
+            <div style={{display: 'flex', alignItems: 'baseline', gap: 10 * v.scale}}>
+              <span style={{...v.body(v.vertical ? 23 : 19), fontWeight: 700, whiteSpace: 'nowrap',
+                color: p > 0.02 ? v.t.colors.text : v.dim}}>{r.label}</span>
+              <span style={{...v.mono(v.vertical ? 18 : 15), color: v.dim, whiteSpace: 'nowrap'}}>
+                {`was ${money(was)}`}
+              </span>
+            </div>
+            <div style={{position: 'relative', height: bar, width: '100%'}}>
+              <div style={{
+                position: 'absolute', left: 0, top: 0, bottom: 0, width: `${wasFrac}%`,
+                background: hexA(v.t.colors.muted, 0.34), borderRadius: 999,
+              }} />
+              <div style={{
+                position: 'absolute', left: `${wasFrac}%`, top: 0, bottom: 0,
+                width: `${Math.max(0, upFrac)}%`,
+                background: v.sem('red'), borderRadius: 999,
+                boxShadow: p > 0.02 ? `0 0 ${16 * v.scale}px ${hexA(v.sem('red'), 0.8)}` : 'none',
+              }} />
+              <div style={{
+                position: 'absolute', left: `${wasFrac + Math.max(0, upFrac)}%`, top: '50%',
+                transform: `translate(${10 * v.scale}px, -50%)`, display: 'flex',
+                alignItems: 'baseline', gap: 8 * v.scale, whiteSpace: 'nowrap', opacity: p,
+              }}>
+                <span style={{...v.mono(v.vertical ? 17 : 14.5), fontWeight: 800,
+                  color: v.sem('red')}}>{`+${money(up)}`}</span>
+                <span style={{...v.mono(v.vertical ? 24 : 20), fontWeight: 800,
+                  color: v.t.colors.text}}>{money(now)}</span>
               </div>
             </div>
-            <span style={{
-              ...v.mono(v.vertical ? 19 : 16), fontWeight: 700, whiteSpace: 'nowrap',
-              color: p > 0.02 ? v.sem('red') : v.dim, opacity: p,
-              padding: `${3 * v.scale}px ${9 * v.scale}px`, borderRadius: 999,
-              border: `1px solid ${hexA(v.sem('red'), 0.5)}`,
-            }}>{`+${fmt(up)}`}</span>
-            <span style={{...v.mono(v.vertical ? 28 : 23), fontWeight: 800, whiteSpace: 'nowrap',
-              color: p > 0.02 ? v.t.colors.text : v.dim,
-              textShadow: p > 0.02 ? `0 0 ${12 * v.scale}px ${hexA(v.a, 0.55)}` : 'none'}}>
-              {fmt(now)}
-            </span>
           </div>
         );
       })}

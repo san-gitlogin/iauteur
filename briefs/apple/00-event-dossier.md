@@ -20,6 +20,7 @@ because the dollar figures are what every other channel quotes and what the News
 | S7 | iPhone 18 Pro buy page (price ladder, finish order) | `apple.com/shop/buy-iphone/iphone-18-pro` |
 | S8 | **Apple Accessory Design Guidelines**, sheet 62.1 "iPhone 17 Pro Max, 1 of 4" | Apple's own dimensioned CAD drawing |
 | S9 | India price revisions after 9 Sep | supplied in-session, 2026-09-10 |
+| S10 | iPhone 18 Pro vs iPhone 17 Pro, everything new | `9to5mac.com/2026/09/09/iphone-18-pro-vs-iphone-17-pro-heres-everything-new/` |
 
 ---
 
@@ -45,6 +46,56 @@ because the dollar figures are what every other channel quotes and what the News
 Editing features (S6, to verify on the page before narrating): Clean Up, Extend, Spatial
 Reframing. Also **iPhone Handoff** — one number live across two iPhones, T-Mobile (US) and
 Telekom (Germany) at launch (S2).
+
+### ⚠ WRITE FROM THE DIFF, NOT FROM THE SPEC SHEET (owner, 2026-09-10)
+
+The first cut of the iPhone 18 Pro video presented **two things that did not change** as
+headline changes, in a video whose spine is "four things that changed":
+
+- *"That camera plateau NOW runs almost the whole width"* — the full-width plateau was
+  **introduced on the iPhone 17 Pro**. The 18 Pro retains it. The only change is that it is
+  about **2mm thicker** to fit the variable-aperture module.
+- *"The bezel is 2.6mm all round"* — a figure **I derived** from Apple's body size and pixel
+  count, never announced by Apple, describing a border that is **identical to the 17 Pro**
+  (same 150.0 x 71.9 body, same 6.3in 2622x1206 panel). It is also not uniform: 2.66mm on
+  the sides against 2.61mm top and bottom.
+
+**Root cause: the script was written from the 18 Pro's spec sheet instead of from a diff
+against the 17 Pro.** That describes the phone; it does not describe the change. Every
+"what's new" video in this series is written from the table below, and a claim that a thing
+is new needs a row in CHANGED — not merely a row in the spec sheet.
+
+**Corollary: separate WHAT APPLE SAID from WHAT I WORKED OUT.** The aperture light-ratio
+(f/4 passes about a fourteenth of f/1.48) is physics stated as a consequence, which is
+fine. A derived number presented as an announcement is not.
+
+### iPHONE 18 PRO vs iPHONE 17 PRO — the authoritative split (S10)
+
+**CHANGED**
+
+| Area | What actually moved |
+|---|---|
+| Camera | 48MP Fusion Main with **variable aperture** f/1.48 · f/1.8 · f/2.8 · f/4; new sensor, better low light |
+| Camera app | Updated Photographic Styles, pro controls (aperture, shutter, white balance), live histogram, Smart focus tracking, Cinematic effects, **Apple Reference Image** |
+| Chip | **A20 Pro** replaces A19 Pro, on 2nm |
+| CPU | 6 cores, **two new super cores**, 20% faster |
+| GPU | **7 cores**, 40% faster graphics, Neural Accelerators at 2x FP8 |
+| Neural Engine | **32 cores, double the A19 Pro's 16** |
+| Memory | **50% more bandwidth** |
+| Thermals | **Second-generation vapor chamber**, ~40% better sustained performance |
+| Battery | 18 Pro **33h → 36h**; Pro Max **39h → 45h** video playback |
+| Charging | **50% in 15 minutes**, faster wired |
+| Modem | **Apple's own C2** replaces Qualcomm; ~15% less energy, faster uploads |
+| Colour | Four finishes, and the **two-tone back is gone** — rear glass now blends into the frame |
+| Dynamic Island | **Smaller**, and holds **three Live Activities** at once |
+| Price | **+$100** on both, and +$100 across the older lineup the same day |
+
+**UNCHANGED — never call these new**
+
+- The camera plateau itself (17 Pro introduced it; 18 Pro's is ~2mm thicker)
+- Display specs and therefore the bezel
+- Telephoto and ultra-wide
+- Form factor and overall dimensions
 
 ### THE CAMERA ISLAND — from Apple's own CAD (S8), not from a photograph
 

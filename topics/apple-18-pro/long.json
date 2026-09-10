@@ -9,33 +9,33 @@
       "economic-pain"
     ],
     "screenplay": "documentary",
-    "onePayoff": "what genuinely changed on the iPhone 18 Pro, and why it costs $100 more",
-    "openLoop": "What are you really paying for this year?",
+    "onePayoff": "what genuinely changed on the iPhone 18 Pro versus the 17 Pro, and why it costs $100 more",
+    "openLoop": "What are you actually paying a hundred dollars more for?",
     "analogy": "A camera that signs its own work.",
     "seo": {
       "title": "Apple September 2026 — iPhone 18 Pro, explained",
-      "description": "Everything that actually changed on the iPhone 18 Pro: the variable aperture, Apple Reference Image, the A20 Pro, and the $100 price rise that hit the whole lineup.",
-      "breakdown": "variable aperture, Apple Reference Image, A20 Pro, and the price rise",
+      "description": "What actually changed on the iPhone 18 Pro versus the 17 Pro: the variable aperture, Apple Reference Image, the A20 Pro and the C2 modem — and what only looks new.",
+      "breakdown": "the variable aperture, Apple Reference Image, the A20 Pro, and the price rise",
       "pinned": "Is a camera that can prove a photo is real worth $100 more to you?",
       "tags": [
         "iPhone 18 Pro",
+        "iPhone 18 Pro vs 17 Pro",
         "Apple September 2026",
         "A20 Pro",
         "Apple Reference Image",
         "variable aperture",
         "iPhone 18 Pro price",
-        "Apple event",
-        "iOS 27"
+        "Apple event"
       ],
       "queries": [
         "what is new in iPhone 18 Pro",
-        "iPhone 18 Pro variable aperture explained",
+        "iPhone 18 Pro vs iPhone 17 Pro",
         "what is Apple Reference Image",
         "why did iPhone prices go up"
       ],
       "sources": [
         "apple.com/newsroom — iPhone 18 Pro and iPhone 18 Pro Max",
-        "apple.com/iphone-18-pro/specs",
+        "apple.com/iphone-18-pro and its specs page",
         "apple.com/shop/buy-iphone/iphone-18-pro",
         "Apple Accessory Design Guidelines, sheet 62.1"
       ]
@@ -66,174 +66,158 @@
         "subtext": "A camera that signs its own work",
         "kicker": "September 2026",
         "variant": "plaque",
-        "atWord": 4.583
+        "atWord": 6
       },
-      "durationFrames": 177,
-      "audio": "audio/apple18_long_s01.mp3",
-      "timingSource": "tts"
+      "durationFrames": 163
     },
     {
       "id": "s02",
       "type": "TITLE_CARD",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "Welcome back. Apple's September event ran long, and the iPhone 18 Pro took the front half of it. Today we're going through four changes you'll actually feel, and one you won't like. So what are you really paying for this year?",
+      "narration": "Welcome back. Apple's September event ran long, and the iPhone 18 Pro took the front half of it. Today we're going through what genuinely changed since the 17 Pro, and what only looks new. So what are you actually paying a hundred dollars more for?",
       "data": {
-        "title": "Four changes, and one price",
-        "subtitle": "The body, the camera, the chip, the bill",
-        "atWord": 12.333
+        "title": "What changed, and what did not",
+        "subtitle": "iPhone 18 Pro against iPhone 17 Pro",
+        "atWord": 18
       },
-      "durationFrames": 412,
-      "audio": "audio/apple18_long_s02.mp3",
-      "timingSource": "tts"
+      "durationFrames": 458
     },
     {
       "id": "s03",
       "type": "APPLE_STAGE",
       "transition": "wipe",
       "background": "zoneA",
-      "narration": "Start with the back, because that's the part you notice across a room. That camera plateau now runs almost the whole width of the enclosure, and the three lenses sit in their triangle at one end of it. Flash and lidar scanner take the other end, which is why the plateau had to grow. Camera Control stayed on the right edge under the side button, and the Action Button is still on the left, where your thumb already expects it.",
+      "narration": "Start with the outside, because that's where most write-ups go wrong. That full width camera plateau isn't new. Apple introduced it on the 17 Pro, and the 18 Pro keeps it, along with the same body size, the same six point three inch screen and the same borders. One thing did move: the plateau is about two millimetres deeper, and that room is there for the new camera module.",
       "data": {
         "appleStage": {
-          "headline": "The [plateau] runs edge to edge",
+          "headline": "The [shape] carried over",
           "kind": "pro-back",
-          "caption": "150.0 by 71.9 millimetres",
-          "premise": "Drawn to Apple's published dimensions, so the proportions are the phone's own.",
+          "caption": "150.0 by 71.9 millimetres, unchanged",
+          "premise": "Same body, same screen, same plateau as the iPhone 17 Pro. Only the depth changed.",
           "color": "blue",
           "cells": [
             {
               "label": "Camera plateau",
               "text": "plateau",
-              "sub": "nearly the full width",
-              "atWord": 6.417
+              "sub": "introduced on the 17 Pro",
+              "atWord": 11
             },
             {
-              "label": "Three lenses",
+              "label": "Same body",
+              "text": "body",
+              "sub": "150.0 x 71.9 mm",
+              "atWord": 28
+            },
+            {
+              "label": "About 2 mm deeper",
               "text": "lens",
-              "sub": "48MP Fusion Main",
-              "atWord": 16.25
+              "sub": "room for the new module",
+              "atWord": 43
             },
             {
-              "label": "Flash and lidar",
-              "text": "flash",
-              "sub": "the far end",
-              "atWord": 24.167
-            },
-            {
-              "label": "Camera Control",
-              "text": "control",
-              "sub": "right edge",
-              "atWord": 31.917
-            },
-            {
-              "label": "Action Button",
-              "text": "action",
-              "sub": "left edge",
-              "atWord": 39.333
+              "label": "Same 6.3-inch screen",
+              "text": "screen",
+              "sub": "and the same borders",
+              "atWord": 35
             }
           ]
         }
       },
-      "durationFrames": 693,
-      "audio": "audio/apple18_long_s03.mp3",
-      "timingSource": "tts"
+      "durationFrames": 686
     },
     {
       "id": "s04",
       "type": "APPLE_STAGE",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Four finishes this year. Black and Silver carry over, Glacier is the cool one, and Burgundy is the genuinely new colour — a deep red that photographs almost brown indoors. Apple builds the enclosure from eighty five percent recycled aluminium, and the front and back are both Ceramic Shield now, so a bad drop is the difference between a repair bill and a shrug.",
+      "narration": "Colour is where the outside did change. Four finishes, and Burgundy is the new one, a deep red reading almost brown indoors. Quieter, and easier to miss: that two tone back is gone, so the rear glass now blends into the frame instead of sitting in a panel. Ceramic Shield covers front and back, which decides whether a bad drop costs you a repair or a shrug.",
       "data": {
         "appleStage": {
-          "headline": "Four [finishes]",
+          "headline": "Four [finishes], and the two-tone back is gone",
           "kind": "finish-palette",
-          "caption": "Black, Silver, Glacier, Burgundy",
-          "premise": "Ceramic Shield front and back, over an enclosure of 85% recycled aluminium.",
+          "caption": "Burgundy, Glacier, Silver, Black",
+          "premise": "The rear glass now blends into the frame. Ceramic Shield front and back.",
           "color": "purple",
           "cells": [
             {
               "label": "Burgundy",
               "sub": "#2a1618,#a16974",
               "text": "finish",
-              "atWord": 15.5
+              "atWord": 9
             },
             {
               "label": "Glacier",
               "sub": "#2c3238,#f8fbff",
               "text": "finish",
-              "atWord": 2.167
+              "atWord": 5
             },
             {
               "label": "Silver",
               "sub": "#3a3d40,#fdfdfd",
               "text": "finish",
-              "atWord": 6.167
+              "atWord": 7
             },
             {
               "label": "Black",
               "sub": "#141414,#c0c0c0",
               "text": "finish",
-              "atWord": 10.667
+              "atWord": 8
             }
           ]
         }
       },
-      "durationFrames": 640,
-      "audio": "audio/apple18_long_s04.mp3",
-      "timingSource": "tts"
+      "durationFrames": 667
     },
     {
       "id": "s05",
       "type": "APPLE_STAGE",
       "transition": "push",
       "background": "zoneB",
-      "narration": "Turn the phone over and the interesting number is the border. Its screen measures six point three inches, and the bezel around it comes to two point six millimetres on all four sides. Dynamic Island got smaller, which sounds cosmetic until you use it, because the island now holds three Live Activities at once. A timer, a flight and a match can share that space instead of taking turns.",
+      "narration": "The front looks identical, and mostly it is. Its screen is the same six point three inches at the same resolution, so the borders measure exactly what they did last year. What changed sits in the middle of them. Dynamic Island got smaller, and it now carries three Live Activities at once, so a timer, a flight and a match can share it instead of taking turns. That's the one change on this face you will actually notice.",
       "data": {
         "appleStage": {
-          "headline": "The bezel is [2.6 mm] all round",
+          "headline": "The [Dynamic Island] shrank",
           "kind": "pro-front",
-          "caption": "6.3-inch, 2622 by 1206",
-          "premise": "The screen size comes from Apple's pixel count and ppi, so the border is a consequence, not a guess.",
+          "caption": "Three Live Activities at once",
+          "premise": "Same 6.3-inch panel as the 17 Pro, so the borders are unchanged. The island is not.",
           "color": "green",
           "cells": [
             {
-              "label": "Super Retina XDR",
+              "label": "Same panel",
               "text": "screen",
-              "sub": "2622 x 1206 at 460 ppi",
-              "atWord": 8.167
+              "sub": "2622 x 1206, unchanged",
+              "atWord": 14
             },
             {
-              "label": "Uniform bezel",
+              "label": "Same borders",
               "text": "body",
-              "sub": "2.6 mm, every side",
-              "atWord": 16.167
+              "sub": "identical to the 17 Pro",
+              "atWord": 28
             },
             {
               "label": "Dynamic Island",
               "text": "island",
               "sub": "three Live Activities",
-              "atWord": 29.917
+              "atWord": 45
             },
             {
-              "label": "Ceramic Shield 2",
-              "text": "body",
-              "sub": "front and back",
-              "atWord": 36.083
+              "label": "A timer, a flight, a match",
+              "text": "island",
+              "sub": "sharing one space",
+              "atWord": 54
             }
           ]
         }
       },
-      "durationFrames": 696,
-      "audio": "audio/apple18_long_s05.mp3",
-      "timingSource": "tts"
+      "durationFrames": 771
     },
     {
       "id": "s06",
       "type": "APPLE_STAGE",
       "transition": "fade",
       "background": "zoneC",
-      "narration": "Here's the headline feature, and it's an old idea arriving late. Apple gave the main camera a variable aperture: six laser cut blades that open right up to f one point four eight. Wide open, the sensor drinks light, so a dim room stops looking like one. Close a stop to f one point eight and you've traded some of that glow for a steadier edge.",
+      "narration": "Now the camera, and this is the real headline. Apple gave the main camera a variable aperture: six laser cut blades that open right up to f one point four eight. Wide open, the sensor drinks light, so a dim room stops looking like one. Close a stop to f one point eight and you've traded some of that glow for a steadier edge.",
       "data": {
         "appleStage": {
           "headline": "Six blades, [four] stops",
@@ -247,19 +231,19 @@
               "text": "stop",
               "value": 1.48,
               "sub": "widest",
-              "atWord": 16.5
+              "atWord": 22
             },
             {
               "label": "f/1.8",
               "text": "stop",
               "value": 1.8,
-              "atWord": 28.667
+              "atWord": 42
             },
             {
               "label": "f/2.8",
               "text": "stop",
               "value": 2.8,
-              "atWord": 36
+              "atWord": 44
             },
             {
               "label": "f/4",
@@ -270,16 +254,155 @@
           ]
         }
       },
-      "durationFrames": 622,
-      "audio": "audio/apple18_long_s06.mp3",
-      "timingSource": "tts"
+      "durationFrames": 638
     },
     {
       "id": "s07",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneC",
+      "narration": "You don't have to take my word for the aperture. This is Apple's own iPhone 18 Pro page, and the line under the lens says it outright: forty eight megapixel Fusion Main camera with variable aperture, improved low light photos and video, impressive depth of field.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-18-pro-page#aperture-line",
+              "label": "the variable aperture line",
+              "focus": true,
+              "atWord": 7,
+              "zooms": [
+                {
+                  "mark": "aperture",
+                  "wantAtWord": 16
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 28
+                }
+              ],
+              "id": "aperture-line",
+              "src": "rec/apple-18-pro-page/seg-02.mp4",
+              "frames": 259,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "aperture": {
+                  "x": 524,
+                  "y": 97,
+                  "w": 212,
+                  "h": 34,
+                  "covers": "variable aperture"
+                }
+              },
+              "ink": [
+                {
+                  "x": 170,
+                  "y": 0,
+                  "w": 1260,
+                  "h": 630
+                },
+                {
+                  "x": 1423,
+                  "y": 0,
+                  "w": 177,
+                  "h": 630
+                },
+                {
+                  "x": 345,
+                  "y": 0,
+                  "w": 76,
+                  "h": 42
+                },
+                {
+                  "x": 1428,
+                  "y": 0,
+                  "w": 72,
+                  "h": 42
+                },
+                {
+                  "x": 1161,
+                  "y": 0,
+                  "w": 64,
+                  "h": 42
+                },
+                {
+                  "x": 503,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 643,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 909,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 776,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 1042,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 876,
+                  "y": 678,
+                  "w": 56,
+                  "h": 56
+                },
+                {
+                  "x": 760,
+                  "y": 695,
+                  "w": 81,
+                  "h": 20
+                },
+                {
+                  "x": 716,
+                  "y": 695,
+                  "w": 60,
+                  "h": 20
+                },
+                {
+                  "x": 832,
+                  "y": 695,
+                  "w": 24,
+                  "h": 20
+                }
+              ],
+              "shows": "iPhone 18 Pro"
+            }
+          ],
+          "sourceNote": "Apple, iPhone 18 Pro product page, captured 10 September 2026",
+          "caption": "Apple's own words for it",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 467
+    },
+    {
+      "id": "s08",
       "type": "APPLE_STAGE",
       "transition": "zoom",
       "background": "zoneC",
-      "narration": "Ask for f four instead and those blades close in. Less light reaches the sensor, so the exposure gets slower, and in exchange the depth of field stretches. A landscape holds focus from the rocks at your feet to the hills behind, because depth of field is set by the hole and not by software. Every phone before this one faked that trade with software, and the 18 Pro makes it with metal, which is why the result survives a crop.",
+      "narration": "Ask for f four instead and those blades close in. Less light reaches the sensor, so the exposure gets slower, and in exchange depth of field stretches. A landscape holds focus from the rocks at your feet to the hills behind, because depth of field is set by the hole and not by software.",
       "data": {
         "appleStage": {
           "headline": "Stopped down to [f/4]",
@@ -298,30 +421,28 @@
               "label": "f/1.8",
               "text": "stop",
               "value": 1.8,
-              "atWord": 1
+              "atWord": 2
             },
             {
               "label": "f/2.8",
               "text": "stop",
               "value": 2.8,
-              "atWord": 1.333
+              "atWord": 3
             },
             {
               "label": "f/4",
               "text": "stop",
               "value": 4,
               "sub": "deepest focus",
-              "atWord": 13
+              "atWord": 12
             }
           ]
         }
       },
-      "durationFrames": 735,
-      "audio": "audio/apple18_long_s07.mp3",
-      "timingSource": "tts"
+      "durationFrames": 543
     },
     {
-      "id": "s08",
+      "id": "s09",
       "type": "APPLE_STAGE",
       "transition": "fade",
       "background": "zoneA",
@@ -337,36 +458,34 @@
             {
               "label": "capture",
               "text": "capture",
-              "atWord": 6.083
+              "atWord": 11
             },
             {
               "label": "signed",
               "text": "sign",
-              "atWord": 12.167
+              "atWord": 19
             },
             {
               "label": "edited",
               "text": "edit",
-              "atWord": 23.167
+              "atWord": 34
             },
             {
               "label": "checked",
               "text": "check",
-              "atWord": 31.333
+              "atWord": 44
             }
           ]
         }
       },
-      "durationFrames": 656,
-      "audio": "audio/apple18_long_s08.mp3",
-      "timingSource": "tts"
+      "durationFrames": 676
     },
     {
-      "id": "s09",
+      "id": "s10",
       "type": "APPLE_STAGE",
       "transition": "slide",
       "background": "zoneB",
-      "narration": "None of that runs on hope, so open the A20 Pro. Six CPU cores: two large ones Apple calls super cores, running twenty percent faster than last year, and four efficiency cores underneath handling the rest, because most of what a phone does all day is waiting. It's also the first two nanometre chip in a phone, which is how Apple could spend transistors this freely.",
+      "narration": "None of that runs on hope, so open the A20 Pro. Six CPU cores: two large ones Apple calls super cores, twenty percent faster than last year, and four efficiency cores handling the rest, because most of what a phone does all day is waiting. It's the first two nanometre chip in a phone, which is how Apple could spend transistors this freely.",
       "data": {
         "appleStage": {
           "headline": "A20 Pro: [six] CPU cores",
@@ -380,33 +499,31 @@
               "label": "Super cores",
               "text": "cpu",
               "sub": "20% faster",
-              "atWord": 12.667
+              "atWord": 14
             },
             {
               "label": "Efficiency cores",
               "text": "cpu",
               "sub": "four of them",
-              "atWord": 22.833
+              "atWord": 26
             },
             {
               "label": "First 2nm phone chip",
               "text": "io",
               "sub": "more transistors to spend",
-              "atWord": 32.75
+              "atWord": 39
             }
           ]
         }
       },
-      "durationFrames": 630,
-      "audio": "audio/apple18_long_s09.mp3",
-      "timingSource": "tts"
+      "durationFrames": 629
     },
     {
-      "id": "s10",
+      "id": "s11",
       "type": "APPLE_STAGE",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Beside the CPU sit seven GPU cores, forty percent quicker at graphics than the last generation. Each of those seven carries a Neural Accelerator, and together they double FP8 throughput. FP8 is the low precision maths that generative models lean on, so the gain lands in photo editing and in games rather than in a benchmark you'll never open.",
+      "narration": "Beside the CPU sit seven GPU cores, forty percent quicker at graphics than the A19 Pro. Each of those seven carries a Neural Accelerator, and together they double FP8 throughput, which is the low precision maths generative models lean on, so the gain lands in photo editing and in games rather than in a benchmark you'll never open.",
       "data": {
         "appleStage": {
           "headline": "Seven [GPU] cores, one per column",
@@ -419,34 +536,32 @@
             {
               "label": "GPU cores",
               "text": "gpu",
-              "sub": "40% faster graphics",
-              "atWord": 5.667
+              "sub": "40% faster than A19 Pro",
+              "atWord": 7
             },
             {
               "label": "Neural Accelerators",
               "text": "gpu",
               "sub": "2x FP8 throughput",
-              "atWord": 17.833
+              "atWord": 21
             },
             {
               "label": "Where it lands",
               "text": "io",
               "sub": "editing and games",
-              "atWord": 34.083
+              "atWord": 36
             }
           ]
         }
       },
-      "durationFrames": 630,
-      "audio": "audio/apple18_long_s10.mp3",
-      "timingSource": "tts"
+      "durationFrames": 581
     },
     {
-      "id": "s11",
+      "id": "s12",
       "type": "APPLE_STAGE",
       "transition": "iris",
       "background": "zoneC",
-      "narration": "Here's the figure that actually moved. Apple's Neural Engine went from sixteen cores to thirty two. Both the A19 Pro and the A18 Pro carried sixteen, so this is the first real doubling in three years, and it is why Siri can reach across your apps and answer from your own mail without sending any of it away.",
+      "narration": "Here's the figure that actually moved. The Neural Engine went from sixteen cores to thirty two. Both the A19 Pro and the A18 Pro carried sixteen, so this is the first real doubling in three years. Memory bandwidth rose fifty percent alongside it, which matters because a starved core is an idle core, and together that is why Siri can answer from your own mail without sending it away.",
       "data": {
         "appleStage": {
           "headline": "The Neural Engine [doubled]",
@@ -460,33 +575,136 @@
               "label": "Neural Engine",
               "text": "neural",
               "sub": "32 total cores",
-              "atWord": 10.583
+              "atWord": 11
             },
             {
               "label": "A19 Pro and A18 Pro",
               "text": "io",
               "sub": "sixteen apiece",
-              "atWord": 24.25
+              "atWord": 25
             },
             {
-              "label": "On-device Siri",
+              "label": "50% more bandwidth",
+              "text": "io",
+              "sub": "a starved core is idle",
+              "atWord": 39
+            },
+            {
+              "label": "Siri, on the phone",
               "text": "io",
               "sub": "your mail stays yours",
-              "atWord": 31.5
+              "atWord": 48
             }
           ]
         }
       },
-      "durationFrames": 555,
-      "audio": "audio/apple18_long_s11.mp3",
-      "timingSource": "tts"
+      "durationFrames": 686
     },
     {
-      "id": "s12",
+      "id": "s13",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "Apple's page puts the same numbers on the record. Scroll to the performance section and the copy names a dual sixteen core Neural Engine and fifty percent higher memory bandwidth, right under the chip itself.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-18-pro-page#performance",
+              "label": "the A20 Pro section",
+              "focus": true,
+              "atWord": 6,
+              "zooms": [
+                {
+                  "mark": "perfhead",
+                  "wantAtWord": 12
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 21
+                }
+              ],
+              "id": "performance",
+              "src": "rec/apple-18-pro-page/seg-05.mp4",
+              "frames": 290,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "perfhead": {
+                  "x": 739,
+                  "y": 515,
+                  "w": 121,
+                  "h": 25,
+                  "covers": "Performance"
+                }
+              },
+              "ink": [
+                {
+                  "x": 80,
+                  "y": 0,
+                  "w": 1440,
+                  "h": 469
+                },
+                {
+                  "x": 1573,
+                  "y": 0,
+                  "w": 27,
+                  "h": 42
+                },
+                {
+                  "x": 1578,
+                  "y": 55,
+                  "w": 22,
+                  "h": 17
+                },
+                {
+                  "x": 368,
+                  "y": 507,
+                  "w": 97,
+                  "h": 23
+                },
+                {
+                  "x": 481,
+                  "y": 515,
+                  "w": 638,
+                  "h": 251
+                },
+                {
+                  "x": 368,
+                  "y": 558,
+                  "w": 171,
+                  "h": 23
+                },
+                {
+                  "x": 385,
+                  "y": 791,
+                  "w": 830,
+                  "h": 109
+                }
+              ],
+              "shows": "iPhone 18 Pro"
+            }
+          ],
+          "sourceNote": "Apple, iPhone 18 Pro product page, captured 10 September 2026",
+          "caption": "Dual 16-core, 50% more bandwidth",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 363
+    },
+    {
+      "id": "s14",
       "type": "APPLE_STAGE",
-      "transition": "fade",
+      "transition": "push",
       "background": "zoneA",
-      "narration": "Apple showed sustained performance rather than peak, and sustained is the honest measure, because hitting a number for one second is easy and holding it through a long export is not. Against the iPhone 17 Pro, the 18 Pro holds forty percent more. Against the 16 Pro, double. A redesigned vapor chamber tripled the cooling area underneath, and that is what pays for it.",
+      "narration": "Apple showed sustained performance rather than peak, and sustained is the honest measure, because hitting a number for one second is easy and holding it through a long export is not. Against the iPhone 17 Pro, the 18 Pro holds forty percent more. Against the 16 Pro, double. A second generation vapor chamber underneath is what pays for that.",
       "data": {
         "appleStage": {
           "headline": "Sustained, across [three] generations",
@@ -500,70 +718,439 @@
               "text": "bar",
               "sub": "A20 Pro",
               "value": 100,
-              "atWord": 13.75
+              "atWord": 18
             },
             {
               "label": "iPhone 17 Pro",
               "text": "bar",
               "sub": "A19 Pro — 40% more",
               "value": 71,
-              "atWord": 18.833
+              "atWord": 27
             },
             {
               "label": "iPhone 16 Pro",
               "text": "bar",
               "sub": "A18 Pro — 2x more",
               "value": 50,
-              "atWord": 28.333
+              "atWord": 35
             }
           ]
         }
       },
-      "durationFrames": 670,
-      "audio": "audio/apple18_long_s12.mp3",
-      "timingSource": "tts"
+      "durationFrames": 591
     },
     {
-      "id": "s13",
-      "type": "APPLE_STAGE",
-      "transition": "push",
+      "id": "s15",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
       "background": "zoneA",
-      "narration": "Battery moved too. The Pro Max reaches forty five hours of video playback, six hours longer than the 17 Pro Max managed, which means a long flight stops being a calculation.",
+      "narration": "Apple gives that its own headline further down the page: bigger vapor chamber, let the heat drop. The copy beside it says the packaging improves heat flow for better thermal performance, which is the unglamorous half of every speed claim.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-18-pro-page#vapor",
+              "label": "the vapor chamber section",
+              "focus": true,
+              "atWord": 6,
+              "zooms": [
+                {
+                  "mark": "vaporhead",
+                  "wantAtWord": 14
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 24
+                }
+              ],
+              "id": "vapor",
+              "src": "rec/apple-18-pro-page/seg-06.mp4",
+              "frames": 242,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "vaporhead": {
+                  "x": 683,
+                  "y": 275,
+                  "w": 414,
+                  "h": 77,
+                  "covers": "vapor chamber"
+                }
+              },
+              "ink": [
+                {
+                  "x": 860,
+                  "y": 0,
+                  "w": 365,
+                  "h": 144
+                },
+                {
+                  "x": 383,
+                  "y": 0,
+                  "w": 366,
+                  "h": 135
+                },
+                {
+                  "x": 308,
+                  "y": 0,
+                  "w": 118,
+                  "h": 90
+                },
+                {
+                  "x": 1289,
+                  "y": 0,
+                  "w": 77,
+                  "h": 42
+                },
+                {
+                  "x": 1428,
+                  "y": 0,
+                  "w": 72,
+                  "h": 42
+                },
+                {
+                  "x": 503,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 909,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 776,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 1042,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 1573,
+                  "y": 0,
+                  "w": 27,
+                  "h": 42
+                },
+                {
+                  "x": 1214,
+                  "y": 29,
+                  "w": 68,
+                  "h": 15
+                },
+                {
+                  "x": 1423,
+                  "y": 55,
+                  "w": 82,
+                  "h": 17
+                },
+                {
+                  "x": 1288,
+                  "y": 55,
+                  "w": 79,
+                  "h": 17
+                },
+                {
+                  "x": 763,
+                  "y": 55,
+                  "w": 63,
+                  "h": 17
+                },
+                {
+                  "x": 1578,
+                  "y": 55,
+                  "w": 22,
+                  "h": 17
+                },
+                {
+                  "x": 1273,
+                  "y": 112,
+                  "w": 29,
+                  "h": 29
+                },
+                {
+                  "x": 489,
+                  "y": 275,
+                  "w": 623,
+                  "h": 150
+                },
+                {
+                  "x": 368,
+                  "y": 329,
+                  "w": 100,
+                  "h": 45
+                },
+                {
+                  "x": 170,
+                  "y": 405,
+                  "w": 1260,
+                  "h": 495
+                }
+              ],
+              "shows": "iPhone 18 Pro"
+            }
+          ],
+          "sourceNote": "Apple, iPhone 18 Pro product page, captured 10 September 2026",
+          "caption": "The unglamorous half of speed",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 410
+    },
+    {
+      "id": "s16",
+      "type": "APPLE_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Battery moved on both models. The Pro reaches thirty six hours of video playback, up from thirty three, and the Pro Max forty five, up from thirty nine. Charging's quicker too: fifty percent in fifteen minutes. And the modem's Apple's own C2 now rather than a Qualcomm part, drawing about fifteen percent less energy, so that is battery you gain without a bigger cell.",
       "data": {
         "appleStage": {
-          "headline": "[45 hours] on the Pro Max",
+          "headline": "Both models gained [hours]",
           "kind": "compare-bars",
-          "caption": "Video playback",
-          "premise": "Apple's stated video playback figures, generation against generation.",
+          "caption": "Video playback, generation on generation",
+          "premise": "Apple's stated video playback figures. The Pro gains three hours, the Pro Max six.",
           "color": "green",
           "cells": [
             {
               "label": "iPhone 18 Pro Max",
               "text": "bar",
-              "sub": "45 hours",
+              "sub": "45 hours, was 39",
               "value": 45,
-              "atWord": 3.833
+              "atWord": 19
             },
             {
-              "label": "iPhone 17 Pro Max",
+              "label": "iPhone 18 Pro",
               "text": "bar",
-              "sub": "39 hours",
-              "value": 39,
-              "atWord": 8.75
+              "sub": "36 hours, was 33",
+              "value": 36,
+              "atWord": 9
+            },
+            {
+              "label": "C2 modem",
+              "text": "bar",
+              "sub": "~15% less energy",
+              "value": 15,
+              "atWord": 40
             }
           ]
         }
       },
-      "durationFrames": 348,
-      "audio": "audio/apple18_long_s13.mp3",
-      "timingSource": "tts"
+      "durationFrames": 638
     },
     {
-      "id": "s14",
+      "id": "s17",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneC",
+      "narration": "Apple isn't shy about it either. Scroll to the battery section on that same page and the heading reads, simply, best iPhone battery life. That claim is doing a lot of work for the Pro Max in particular, because the Max is where the six extra hours landed and the smaller Pro only gained three. Worth knowing which of the two that headline is really describing.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-18-pro-page#battery",
+              "label": "the battery section",
+              "focus": true,
+              "atWord": 5,
+              "zooms": [
+                {
+                  "mark": "batthead",
+                  "wantAtWord": 17
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 34
+                }
+              ],
+              "id": "battery",
+              "src": "rec/apple-18-pro-page/seg-04.mp4",
+              "frames": 351,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "batthead": {
+                  "x": 749,
+                  "y": 168,
+                  "w": 102,
+                  "h": 25,
+                  "covers": "Battery life"
+                }
+              },
+              "ink": [
+                {
+                  "x": 308,
+                  "y": 0,
+                  "w": 118,
+                  "h": 90
+                },
+                {
+                  "x": 1143,
+                  "y": 0,
+                  "w": 82,
+                  "h": 72
+                },
+                {
+                  "x": 1289,
+                  "y": 0,
+                  "w": 77,
+                  "h": 42
+                },
+                {
+                  "x": 1428,
+                  "y": 0,
+                  "w": 72,
+                  "h": 42
+                },
+                {
+                  "x": 503,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 643,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 909,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 776,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 1042,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 1573,
+                  "y": 0,
+                  "w": 27,
+                  "h": 42
+                },
+                {
+                  "x": 1214,
+                  "y": 29,
+                  "w": 68,
+                  "h": 15
+                },
+                {
+                  "x": 934,
+                  "y": 55,
+                  "w": 172,
+                  "h": 49
+                },
+                {
+                  "x": 474,
+                  "y": 55,
+                  "w": 97,
+                  "h": 35
+                },
+                {
+                  "x": 1423,
+                  "y": 55,
+                  "w": 82,
+                  "h": 17
+                },
+                {
+                  "x": 1288,
+                  "y": 55,
+                  "w": 79,
+                  "h": 17
+                },
+                {
+                  "x": 892,
+                  "y": 55,
+                  "w": 70,
+                  "h": 17
+                },
+                {
+                  "x": 628,
+                  "y": 55,
+                  "w": 67,
+                  "h": 17
+                },
+                {
+                  "x": 763,
+                  "y": 55,
+                  "w": 63,
+                  "h": 17
+                },
+                {
+                  "x": 1578,
+                  "y": 55,
+                  "w": 22,
+                  "h": 17
+                },
+                {
+                  "x": 1106,
+                  "y": 87,
+                  "w": 60,
+                  "h": 57
+                },
+                {
+                  "x": 1273,
+                  "y": 112,
+                  "w": 29,
+                  "h": 29
+                },
+                {
+                  "x": 314,
+                  "y": 168,
+                  "w": 959,
+                  "h": 257
+                },
+                {
+                  "x": 170,
+                  "y": 223,
+                  "w": 1260,
+                  "h": 677
+                }
+              ],
+              "shows": "iPhone 18 Pro"
+            }
+          ],
+          "sourceNote": "Apple, iPhone 18 Pro product page, captured 10 September 2026",
+          "caption": "Best iPhone battery life",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 657
+    },
+    {
+      "id": "s18",
       "type": "APPLE_STAGE",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "So what does the iPhone 18 Pro cost? Two hundred and fifty six gigabytes starts at eleven ninety nine. Then the rungs get steep. Two hundred dollars takes you to five twelve, four hundred more buys a terabyte, and two terabytes costs six hundred on top of that. Every step up that ladder costs two hundred more than the step below it, which is how a phone quietly becomes a laptop.",
+      "narration": "So what does the iPhone 18 Pro cost? Two hundred and fifty six gigabytes starts at eleven ninety nine. Then the rungs get steep. Two hundred dollars takes you to five twelve, four hundred more buys a terabyte, and two terabytes costs six hundred on top of that. Every step up that ladder costs two hundred more than the step below it.",
       "data": {
         "appleStage": {
           "headline": "Each step costs [more] than the last",
@@ -576,35 +1163,33 @@
               "label": "256GB",
               "text": "tier",
               "value": 1199,
-              "atWord": 8.583
+              "atWord": 10
             },
             {
               "label": "512GB",
               "text": "tier",
               "value": 1399,
-              "atWord": 21.833
+              "atWord": 25
             },
             {
               "label": "1TB",
               "text": "tier",
               "value": 1799,
-              "atWord": 27.833
+              "atWord": 32
             },
             {
               "label": "2TB",
               "text": "tier",
               "value": 2399,
-              "atWord": 33.833
+              "atWord": 40
             }
           ]
         }
       },
-      "durationFrames": 652,
-      "audio": "audio/apple18_long_s14.mp3",
-      "timingSource": "tts"
+      "durationFrames": 619
     },
     {
-      "id": "s15",
+      "id": "s19",
       "type": "APPLE_STAGE",
       "transition": "whippan",
       "background": "zoneC",
@@ -615,7 +1200,7 @@
           "kind": "price-rise",
           "token": "$",
           "caption": "Same day as the 18 Pro launch",
-          "premise": "Old price struck through, new price beside it. A launch normally makes these fall.",
+          "premise": "The grey bar is what each one used to cost. The red is the rise, on the day the new one landed.",
           "color": "orange",
           "cells": [
             {
@@ -623,38 +1208,36 @@
               "text": "rise",
               "value": 1099,
               "sub": "999",
-              "atWord": 23.083
+              "atWord": 31
             },
             {
               "label": "iPhone 17",
               "text": "rise",
               "value": 899,
               "sub": "799",
-              "atWord": 25
+              "atWord": 35
             },
             {
               "label": "iPhone 16",
               "text": "rise",
               "value": 799,
               "sub": "699",
-              "atWord": 30.25
+              "atWord": 39
             },
             {
               "label": "iPhone 17e",
               "text": "rise",
               "value": 699,
               "sub": "599",
-              "atWord": 35.25
+              "atWord": 43
             }
           ]
         }
       },
-      "durationFrames": 698,
-      "audio": "audio/apple18_long_s15.mp3",
-      "timingSource": "tts"
+      "durationFrames": 667
     },
     {
-      "id": "s16",
+      "id": "s20",
       "type": "APPLE_STAGE",
       "transition": "fade",
       "background": "zoneC",
@@ -672,63 +1255,39 @@
               "text": "bar",
               "sub": "up ~400% year on year",
               "value": 400,
-              "atWord": 7.833
+              "atWord": 13
             },
             {
               "label": "Bill of materials",
               "text": "bar",
               "sub": "up ~38% on a Pro",
               "value": 38,
-              "atWord": 16
+              "atWord": 26
             },
             {
               "label": "What you pay",
               "text": "bar",
               "sub": "$1,099 to $1,199",
               "value": 9,
-              "atWord": 18.833
+              "atWord": 34
             }
           ]
         }
       },
-      "durationFrames": 554,
-      "audio": "audio/apple18_long_s16.mp3",
-      "timingSource": "tts"
+      "durationFrames": 600
     },
     {
-      "id": "s17",
-      "type": "PHOTO",
-      "transition": "letterbox",
-      "background": "zoneB",
-      "narration": "You can read those prices yourself, by the way. This is Apple's own iPhone 18 Pro page, and the pre-order date and the starting figure both sit right there under the headline, so you're never taking my word for it.",
-      "data": {
-        "photo": {
-          "asset": "img:apple_iphone18pro_hero.png",
-          "caption": "Apple's iPhone 18 Pro page, captured 10 September 2026",
-          "kicker": "apple.com",
-          "pan": "in",
-          "atWord": 10.583
-        },
-        "source": "apple.com/iphone-18-pro"
-      },
-      "durationFrames": 326,
-      "audio": "audio/apple18_long_s17.mp3",
-      "timingSource": "tts"
-    },
-    {
-      "id": "s18",
+      "id": "s21",
       "type": "OUTRO_CTA",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "That's the iPhone 18 Pro: a camera that vouches for its own pictures, a chip built for the AI it runs, and a hundred dollars that memory explains. The Duo, the watches and AirPods each get their own video.",
+      "narration": "So: the shell carried over, the camera and the chip did the work, and a hundred dollars went on the price because memory did. The Duo, the watches and AirPods each get their own video.",
       "data": {
-        "headline": "iPhone 18 Pro",
-        "subtext": "Duo, the watches and AirPods next",
-        "atWord": 13.833
+        "headline": "Duo, the watches and AirPods next",
+        "subtext": "Which one do you want first?",
+        "atWord": 18
       },
-      "durationFrames": 401,
-      "audio": "audio/apple18_long_s18.mp3",
-      "timingSource": "tts"
+      "durationFrames": 363
     }
   ]
 }
