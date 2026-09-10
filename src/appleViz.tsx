@@ -792,7 +792,188 @@ const PriceRise: React.FC<Props> = ({items, accent, token}) => {
   );
 };
 
+// ---------------------------------------------------------------------------
+// APERTURE IRIS — six laser-cut blades actually opening and closing.
+//
+// Apple gives four stops on the 18 Pro: f/1.48, f/1.8, f/2.8, f/4, cut by six blades.
+// The MECHANISM is the beat (LAW 0j), so the blades are six real rotating leaves whose
+// overlap sets the hole, not a circle that changes radius — and the hole's AREA follows
+// the physics: light gathered goes as 1/N^2, so f/4 lets in about a fourteenth of f/1.48.
+// A viewer who knows apertures will check that, and it has to survive the check.
+//
+// Each stop is an item with its own atWord. The iris walks to whichever stop is latest.
+// ---------------------------------------------------------------------------
+const IRIS_PARTS = ['stop'];
+
+const ApertureIris: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const stops = items.filter((i) => i.text === 'stop');
+  if (!stops.length) return null;
+
+  // The live stop is the LAST one whose anchor has passed; before any, the widest.
+  let idx = 0;
+  stops.forEach((s, i) => { if (liveAt(frame, s.atWord, 8) > 0.5) idx = i; });
+  const fNow = Number(stops[idx].value) || 1.48;
+  const fWidest = Math.min(...stops.map((s) => Number(s.value) || 1.48));
+
+  // Hole DIAMETER scales as 1/N, so area scales as 1/N^2 — the real relationship.
+  const openFrac = fWidest / fNow;
+  // Ease between stops rather than jumping, because a physical iris travels.
+  const prog = liveAt(frame, stops[idx].atWord, 16);
+  const prevF = idx > 0 ? Number(stops[idx - 1].value) || fWidest : fNow;
+  const shown = (fWidest / prevF) + ((fWidest / fNow) - (fWidest / prevF)) * prog;
+
+  const R = 44;                                  // iris outer radius, in its own units
+  const hole = R * 0.86 * Math.max(0.12, idx === 0 ? openFrac : shown);
+  const size = Math.min(budget * (v.vertical ? 0.52 : 0.92), (v.vertical ? 470 : 400) * v.scale);
+  const blades = 6;
+
+  return (
+    <div style={{
+      display: 'flex', flexDirection: v.vertical ? 'column' : 'row',
+      gap: (v.vertical ? 16 : 40) * v.scale, alignItems: 'center',
+      justifyContent: 'safe center', width: '100%', height: '100%', minHeight: 0,
+    }}>
+      <svg width={size} height={size} viewBox={`${-R * 1.2} ${-R * 1.2} ${R * 2.4} ${R * 2.4}`}
+        style={{flex: '0 0 auto', overflow: 'visible'}}>
+        <circle cx={0} cy={0} r={R * 1.06} fill="none"
+          stroke={hexA(v.t.colors.muted, 0.5)} strokeWidth={1.4} />
+        {Array.from({length: blades}).map((_, i) => {
+          const a = (i * 360) / blades + (1 - (hole / (R * 0.86))) * 26;
+          // Each blade is a leaf whose inner edge is tangent to the hole.
+          const d = `M ${R * 1.02} 0 A ${R * 1.02} ${R * 1.02} 0 0 1 ` +
+            `${R * 1.02 * Math.cos((Math.PI * 2) / blades)} ${R * 1.02 * Math.sin((Math.PI * 2) / blades)} ` +
+            `L ${hole * Math.cos((Math.PI * 2) / blades)} ${hole * Math.sin((Math.PI * 2) / blades)} ` +
+            `L ${hole} 0 Z`;
+          return (
+            <path key={i} d={d} transform={`rotate(${a})`}
+              fill={hexA(v.a, 0.10)} stroke={v.a} strokeWidth={1.1}
+              style={{filter: `drop-shadow(0 0 ${2.2}px ${hexA(v.a, 0.5)})`}} />
+          );
+        })}
+        <circle cx={0} cy={0} r={hole} fill={hexA(v.t.colors.bg, 0.9)}
+          stroke={hexA(v.a, 0.85)} strokeWidth={1.2} />
+      </svg>
+
+      <div style={{
+        display: 'flex', flexDirection: v.vertical ? 'row' : 'column',
+        gap: (v.vertical ? 14 : 12) * v.scale, flex: '0 1 auto',
+        justifyContent: 'safe center', flexWrap: 'wrap',
+      }}>
+        {stops.map((s, i) => {
+          const on = i === idx;
+          return (
+            <div key={i} style={{
+              display: 'flex', alignItems: 'baseline', gap: 8 * v.scale,
+              opacity: on ? 1 : 0.42,
+            }}>
+              <span style={{...v.mono(v.vertical ? 30 : 27), fontWeight: 800,
+                color: on ? v.a : v.dim, whiteSpace: 'nowrap',
+                textShadow: on ? `0 0 ${14 * v.scale}px ${hexA(v.a, 0.7)}` : 'none'}}>
+                {s.label}
+              </span>
+              {s.sub && !v.vertical && (
+                <span style={{...v.body(15), color: v.dim, whiteSpace: 'nowrap'}}>{s.sub}</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// REFERENCE IMAGE — a signature bound into the pixels at capture, and what happens
+// to it when a copy is edited.
+//
+// Apple Reference Image signs photo data AT THE PIXEL LEVEL during capture. The beat is
+// that one copy still verifies and the other cannot, so the picture is two frames side by
+// side with the SAME seal, and the seal breaking on exactly one of them. Stages are named
+// by item: capture | sign | edit | check.
+// ---------------------------------------------------------------------------
+const REF_PARTS = ['capture', 'sign', 'edit', 'check'];
+
+const ReferenceImage: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const at = (k: string) => {
+    const ps = items.filter((i) => i.text === k).map((i) => liveAt(frame, i.atWord, 12));
+    return ps.length ? Math.max(...ps) : 0;
+  };
+  const cap = at('capture'), sig = at('sign'), edt = at('edit'), chk = at('check');
+
+  // The ceiling must not be the binding term in the ordinary case (LAW 0n corollary) —
+  // at 300 it bound against a ~430 budget and both frames floated in a half-empty pane.
+  const frameW = Math.min(budget * (v.vertical ? 0.44 : 0.86), (v.vertical ? 470 : 430) * v.scale);
+  const frameH = frameW * 0.72;
+  const seal = (broken: boolean, p: number) => (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 6 * v.scale, opacity: p,
+      color: broken ? v.sem('red') : v.sem('green'),
+    }}>
+      <AssetIcon asset={broken ? 'lucide:shield-off' : 'lucide:shield-check'}
+        size={(v.vertical ? 26 : 22) * v.scale} bare
+        tint={broken ? v.sem('red') : v.sem('green')} />
+      <span style={{...v.body(v.vertical ? 18 : 15.5), fontWeight: 700, whiteSpace: 'nowrap'}}>
+        {broken ? 'cannot verify' : 'verified'}
+      </span>
+    </div>
+  );
+
+  const pane = (label: string, edited: boolean, show: number) => (
+    <div style={{
+      display: 'flex', flexDirection: 'column', gap: 8 * v.scale, alignItems: 'center',
+      opacity: 0.25 + show * 0.75,
+    }}>
+      <div style={{
+        width: frameW, height: frameH, borderRadius: v.rad(10),
+        border: `${2 * v.scale}px solid ${hexA(edited && chk > 0.02 ? v.sem('red') : v.a, 0.85)}`,
+        position: 'relative', overflow: 'hidden',
+        background: hexA(v.a, 0.05),
+      }}>
+        {/* the signed pixel grid, bound in at capture */}
+        <div style={{
+          position: 'absolute', inset: 0, opacity: sig * (edited ? 1 : 1) * 0.55,
+          backgroundImage:
+            `linear-gradient(${hexA(v.a, 0.5)} 1px, transparent 1px),` +
+            `linear-gradient(90deg, ${hexA(v.a, 0.5)} 1px, transparent 1px)`,
+          backgroundSize: `${9 * v.scale}px ${9 * v.scale}px`,
+        }} />
+        {/* the edit: a patch of the grid replaced, which is what breaks the signature */}
+        {edited && (
+          <div style={{
+            position: 'absolute', left: '34%', top: '28%',
+            width: `${34 * Math.min(1, edt)}%`, height: `${38 * Math.min(1, edt)}%`,
+            background: hexA(v.sem('red'), 0.22),
+            border: `${1.6 * v.scale}px dashed ${hexA(v.sem('red'), 0.9)}`,
+            borderRadius: v.rad(6),
+          }} />
+        )}
+      </div>
+      <div style={{...v.body(v.vertical ? 19 : 16), color: v.dim, whiteSpace: 'nowrap'}}>{label}</div>
+      {seal(edited, edited ? chk : chk)}
+    </div>
+  );
+
+  return (
+    <div style={{
+      display: 'flex', gap: (v.vertical ? 20 : 34) * v.scale, alignItems: 'center',
+      justifyContent: 'safe center', width: '100%', height: '100%', minHeight: 0,
+      flexDirection: v.vertical ? 'column' : 'row',
+    }}>
+      {pane('the original', false, cap)}
+      {pane('an edited copy', true, edt)}
+    </div>
+  );
+};
+
 const KINDS: Record<string, React.FC<Props>> = {
+  'aperture-iris': ApertureIris,
+  'reference-image': ReferenceImage,
   'price-rise': PriceRise,
   'die-floorplan': DieFloorplan,
   'compare-bars': CompareBars,

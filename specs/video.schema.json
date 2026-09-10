@@ -2653,14 +2653,14 @@
                         },
                         "kind": {
                           "type": "string",
-                          "description": "Which picture: pro-back | pro-front | duo-pair | watch-face | airpods | die-floorplan | compare-bars | price-ladder | price-rise"
+                          "description": "Which picture: pro-back | pro-front | duo-pair | watch-face | airpods | die-floorplan | compare-bars | price-ladder | price-rise | aperture-iris | reference-image"
                         },
                         "cells": {
                           "type": "array",
                           "items": {
                             "type": "object"
                           },
-                          "description": "0-8 elements. label = what is written (<=26). text = the ROLE key this cell plays in the chosen kind - for the phone kinds one of plateau|lens|flash|lidar|logo|control|action|volume|body|screen|island; for watch-face screen|crown|side|case|band|action; for airpods case|bud|stem|hinge|light; for duo-pair outer|inner|hinge|body|lens; for die-floorplan cpu|gpu|neural|io; for compare-bars every row is text:'bar' with value = the magnitude; for price-ladder every row is text:'tier' with value = the price and the STEP between tiers derived from it; for price-rise every row is text:'rise' with value = the NEW price and sub = the OLD price, the delta derived from the pair; for duo-pair also 'selfie' (the under-display inner camera), and an unrecognised key deliberately lights NOTHING rather than lighting the wrong part. sub = the gloss beside it (<=40). value = a number the beat states. icon = lucide:/si: glyph. color, atWord."
+                          "description": "0-8 elements. label = what is written (<=26). text = the ROLE key this cell plays in the chosen kind - for the phone kinds one of plateau|lens|flash|lidar|logo|control|action|volume|body|screen|island; for watch-face screen|crown|side|case|band|action; for airpods case|bud|stem|hinge|light; for duo-pair outer|inner|hinge|body|lens; for die-floorplan cpu|gpu|neural|io; for compare-bars every row is text:'bar' with value = the magnitude; for price-ladder every row is text:'tier' with value = the price and the STEP between tiers derived from it; for price-rise every row is text:'rise' with value = the NEW price and sub = the OLD price, the delta derived from the pair; for duo-pair also 'selfie' (the under-display inner camera); for aperture-iris every row is text:'stop' with label = the f-number as written and value = its numeric N; for reference-image the stage keys capture|sign|edit|check, and an unrecognised key deliberately lights NOTHING rather than lighting the wrong part. sub = the gloss beside it (<=40). value = a number the beat states. icon = lucide:/si: glyph. color, atWord."
                         },
                         "vars": {
                           "type": "array",
