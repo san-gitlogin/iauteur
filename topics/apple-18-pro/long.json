@@ -66,9 +66,11 @@
         "subtext": "A camera that signs its own work",
         "kicker": "September 2026",
         "variant": "plaque",
-        "atWord": 6
+        "atWord": 4.583
       },
-      "durationFrames": 163
+      "durationFrames": 177,
+      "audio": "audio/apple18_long_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -79,9 +81,11 @@
       "data": {
         "title": "What changed, and what did not",
         "subtitle": "iPhone 18 Pro against iPhone 17 Pro",
-        "atWord": 18
+        "atWord": 13.583
       },
-      "durationFrames": 458
+      "durationFrames": 457,
+      "audio": "audio/apple18_long_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
@@ -101,30 +105,32 @@
               "label": "Camera plateau",
               "text": "plateau",
               "sub": "introduced on the 17 Pro",
-              "atWord": 11
+              "atWord": 8.167
             },
             {
               "label": "Same body",
               "text": "body",
               "sub": "150.0 x 71.9 mm",
-              "atWord": 28
+              "atWord": 22.833
             },
             {
               "label": "About 2 mm deeper",
               "text": "lens",
               "sub": "room for the new module",
-              "atWord": 43
+              "atWord": 33.083
             },
             {
               "label": "Same 6.3-inch screen",
               "text": "screen",
               "sub": "and the same borders",
-              "atWord": 35
+              "atWord": 27.083
             }
           ]
         }
       },
-      "durationFrames": 686
+      "durationFrames": 668,
+      "audio": "audio/apple18_long_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -144,30 +150,32 @@
               "label": "Burgundy",
               "sub": "#2a1618,#a16974",
               "text": "finish",
-              "atWord": 9
+              "atWord": 7.167
             },
             {
               "label": "Glacier",
               "sub": "#2c3238,#f8fbff",
               "text": "finish",
-              "atWord": 5
+              "atWord": 2.5
             },
             {
               "label": "Silver",
               "sub": "#3a3d40,#fdfdfd",
               "text": "finish",
-              "atWord": 7
+              "atWord": 4.333
             },
             {
               "label": "Black",
               "sub": "#141414,#c0c0c0",
               "text": "finish",
-              "atWord": 8
+              "atWord": 6.833
             }
           ]
         }
       },
-      "durationFrames": 667
+      "durationFrames": 665,
+      "audio": "audio/apple18_long_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -187,30 +195,32 @@
               "label": "Same panel",
               "text": "screen",
               "sub": "2622 x 1206, unchanged",
-              "atWord": 14
+              "atWord": 10.667
             },
             {
               "label": "Same borders",
               "text": "body",
               "sub": "identical to the 17 Pro",
-              "atWord": 28
+              "atWord": 21.083
             },
             {
               "label": "Dynamic Island",
               "text": "island",
               "sub": "three Live Activities",
-              "atWord": 45
+              "atWord": 34.083
             },
             {
               "label": "A timer, a flight, a match",
               "text": "island",
               "sub": "sharing one space",
-              "atWord": 54
+              "atWord": 40.917
             }
           ]
         }
       },
-      "durationFrames": 771
+      "durationFrames": 747,
+      "audio": "audio/apple18_long_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
@@ -231,19 +241,19 @@
               "text": "stop",
               "value": 1.48,
               "sub": "widest",
-              "atWord": 22
+              "atWord": 17.417
             },
             {
               "label": "f/1.8",
               "text": "stop",
               "value": 1.8,
-              "atWord": 42
+              "atWord": 31.75
             },
             {
               "label": "f/2.8",
               "text": "stop",
               "value": 2.8,
-              "atWord": 44
+              "atWord": 33.833
             },
             {
               "label": "f/4",
@@ -254,7 +264,9 @@
           ]
         }
       },
-      "durationFrames": 638
+      "durationFrames": 597,
+      "audio": "audio/apple18_long_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
@@ -269,15 +281,15 @@
               "ref": "rec:apple-18-pro-page#aperture-line",
               "label": "the variable aperture line",
               "focus": true,
-              "atWord": 7,
+              "atWord": 2,
               "zooms": [
                 {
                   "mark": "aperture",
-                  "wantAtWord": 16
+                  "wantAtWord": 8.833
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 28
+                  "wantAtWord": 17.583
                 }
               ],
               "id": "aperture-line",
@@ -395,7 +407,9 @@
           }
         }
       },
-      "durationFrames": 467
+      "durationFrames": 455,
+      "audio": "audio/apple18_long_s07.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s08",
@@ -421,25 +435,27 @@
               "label": "f/1.8",
               "text": "stop",
               "value": 1.8,
-              "atWord": 2
+              "atWord": 1
             },
             {
               "label": "f/2.8",
               "text": "stop",
               "value": 2.8,
-              "atWord": 3
+              "atWord": 1.417
             },
             {
               "label": "f/4",
               "text": "stop",
               "value": 4,
               "sub": "deepest focus",
-              "atWord": 12
+              "atWord": 9.583
             }
           ]
         }
       },
-      "durationFrames": 543
+      "durationFrames": 521,
+      "audio": "audio/apple18_long_s08.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s09",
@@ -458,27 +474,29 @@
             {
               "label": "capture",
               "text": "capture",
-              "atWord": 11
+              "atWord": 6.083
             },
             {
               "label": "signed",
               "text": "sign",
-              "atWord": 19
+              "atWord": 12.167
             },
             {
               "label": "edited",
               "text": "edit",
-              "atWord": 34
+              "atWord": 23.167
             },
             {
               "label": "checked",
               "text": "check",
-              "atWord": 44
+              "atWord": 31.333
             }
           ]
         }
       },
-      "durationFrames": 676
+      "durationFrames": 656,
+      "audio": "audio/apple18_long_s09.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s10",
@@ -499,24 +517,26 @@
               "label": "Super cores",
               "text": "cpu",
               "sub": "20% faster",
-              "atWord": 14
+              "atWord": 9.75
             },
             {
               "label": "Efficiency cores",
               "text": "cpu",
               "sub": "four of them",
-              "atWord": 26
+              "atWord": 21.333
             },
             {
               "label": "First 2nm phone chip",
               "text": "io",
               "sub": "more transistors to spend",
-              "atWord": 39
+              "atWord": 30.917
             }
           ]
         }
       },
-      "durationFrames": 629
+      "durationFrames": 604,
+      "audio": "audio/apple18_long_s10.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s11",
@@ -537,24 +557,26 @@
               "label": "GPU cores",
               "text": "gpu",
               "sub": "40% faster than A19 Pro",
-              "atWord": 7
+              "atWord": 5.5
             },
             {
               "label": "Neural Accelerators",
               "text": "gpu",
               "sub": "2x FP8 throughput",
-              "atWord": 21
+              "atWord": 18.083
             },
             {
               "label": "Where it lands",
               "text": "io",
               "sub": "editing and games",
-              "atWord": 36
+              "atWord": 31.083
             }
           ]
         }
       },
-      "durationFrames": 581
+      "durationFrames": 596,
+      "audio": "audio/apple18_long_s11.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s12",
@@ -575,30 +597,32 @@
               "label": "Neural Engine",
               "text": "neural",
               "sub": "32 total cores",
-              "atWord": 11
+              "atWord": 7.833
             },
             {
               "label": "A19 Pro and A18 Pro",
               "text": "io",
               "sub": "sixteen apiece",
-              "atWord": 25
+              "atWord": 20.583
             },
             {
               "label": "50% more bandwidth",
               "text": "io",
               "sub": "a starved core is idle",
-              "atWord": 39
+              "atWord": 32.667
             },
             {
               "label": "Siri, on the phone",
               "text": "io",
               "sub": "your mail stays yours",
-              "atWord": 48
+              "atWord": 38.917
             }
           ]
         }
       },
-      "durationFrames": 686
+      "durationFrames": 683,
+      "audio": "audio/apple18_long_s12.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s13",
@@ -613,15 +637,15 @@
               "ref": "rec:apple-18-pro-page#performance",
               "label": "the A20 Pro section",
               "focus": true,
-              "atWord": 6,
+              "atWord": 3.833,
               "zooms": [
                 {
                   "mark": "perfhead",
-                  "wantAtWord": 12
+                  "wantAtWord": 8.083
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 21
+                  "wantAtWord": 13.75
                 }
               ],
               "id": "performance",
@@ -697,7 +721,9 @@
           }
         }
       },
-      "durationFrames": 363
+      "durationFrames": 354,
+      "audio": "audio/apple18_long_s13.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s14",
@@ -718,26 +744,28 @@
               "text": "bar",
               "sub": "A20 Pro",
               "value": 100,
-              "atWord": 18
+              "atWord": 13.583
             },
             {
               "label": "iPhone 17 Pro",
               "text": "bar",
               "sub": "A19 Pro — 40% more",
               "value": 71,
-              "atWord": 27
+              "atWord": 18.833
             },
             {
               "label": "iPhone 16 Pro",
               "text": "bar",
               "sub": "A18 Pro — 2x more",
               "value": 50,
-              "atWord": 35
+              "atWord": 25.333
             }
           ]
         }
       },
-      "durationFrames": 591
+      "durationFrames": 626,
+      "audio": "audio/apple18_long_s14.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s15",
@@ -752,15 +780,15 @@
               "ref": "rec:apple-18-pro-page#vapor",
               "label": "the vapor chamber section",
               "focus": true,
-              "atWord": 6,
+              "atWord": 3.25,
               "zooms": [
                 {
                   "mark": "vaporhead",
-                  "wantAtWord": 14
+                  "wantAtWord": 10.75
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 24
+                  "wantAtWord": 16.833
                 }
               ],
               "id": "vapor",
@@ -908,7 +936,9 @@
           }
         }
       },
-      "durationFrames": 410
+      "durationFrames": 413,
+      "audio": "audio/apple18_long_s15.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16",
@@ -929,26 +959,28 @@
               "text": "bar",
               "sub": "45 hours, was 39",
               "value": 45,
-              "atWord": 19
+              "atWord": 15.5
             },
             {
               "label": "iPhone 18 Pro",
               "text": "bar",
               "sub": "36 hours, was 33",
               "value": 36,
-              "atWord": 9
+              "atWord": 6.917
             },
             {
               "label": "C2 modem",
               "text": "bar",
               "sub": "~15% less energy",
               "value": 15,
-              "atWord": 40
+              "atWord": 34.333
             }
           ]
         }
       },
-      "durationFrames": 638
+      "durationFrames": 668,
+      "audio": "audio/apple18_long_s16.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s17",
@@ -963,15 +995,15 @@
               "ref": "rec:apple-18-pro-page#battery",
               "label": "the battery section",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.583,
               "zooms": [
                 {
                   "mark": "batthead",
-                  "wantAtWord": 17
+                  "wantAtWord": 11.75
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 34
+                  "wantAtWord": 24.75
                 }
               ],
               "id": "battery",
@@ -1143,7 +1175,9 @@
           }
         }
       },
-      "durationFrames": 657
+      "durationFrames": 625,
+      "audio": "audio/apple18_long_s17.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s18",
@@ -1163,30 +1197,32 @@
               "label": "256GB",
               "text": "tier",
               "value": 1199,
-              "atWord": 10
+              "atWord": 7.917
             },
             {
               "label": "512GB",
               "text": "tier",
               "value": 1399,
-              "atWord": 25
+              "atWord": 21
             },
             {
               "label": "1TB",
               "text": "tier",
               "value": 1799,
-              "atWord": 32
+              "atWord": 25.083
             },
             {
               "label": "2TB",
               "text": "tier",
               "value": 2399,
-              "atWord": 40
+              "atWord": 30.75
             }
           ]
         }
       },
-      "durationFrames": 619
+      "durationFrames": 584,
+      "audio": "audio/apple18_long_s18.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s19",
@@ -1208,33 +1244,35 @@
               "text": "rise",
               "value": 1099,
               "sub": "999",
-              "atWord": 31
+              "atWord": 23.083
             },
             {
               "label": "iPhone 17",
               "text": "rise",
               "value": 899,
               "sub": "799",
-              "atWord": 35
+              "atWord": 25
             },
             {
               "label": "iPhone 16",
               "text": "rise",
               "value": 799,
               "sub": "699",
-              "atWord": 39
+              "atWord": 30.25
             },
             {
               "label": "iPhone 17e",
               "text": "rise",
               "value": 699,
               "sub": "599",
-              "atWord": 43
+              "atWord": 35.25
             }
           ]
         }
       },
-      "durationFrames": 667
+      "durationFrames": 698,
+      "audio": "audio/apple18_long_s19.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s20",
@@ -1255,26 +1293,28 @@
               "text": "bar",
               "sub": "up ~400% year on year",
               "value": 400,
-              "atWord": 13
+              "atWord": 7.833
             },
             {
               "label": "Bill of materials",
               "text": "bar",
               "sub": "up ~38% on a Pro",
               "value": 38,
-              "atWord": 26
+              "atWord": 16
             },
             {
               "label": "What you pay",
               "text": "bar",
               "sub": "$1,099 to $1,199",
               "value": 9,
-              "atWord": 34
+              "atWord": 21.333
             }
           ]
         }
       },
-      "durationFrames": 600
+      "durationFrames": 554,
+      "audio": "audio/apple18_long_s20.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s21",
@@ -1285,9 +1325,11 @@
       "data": {
         "headline": "Duo, the watches and AirPods next",
         "subtext": "Which one do you want first?",
-        "atWord": 18
+        "atWord": 12.25
       },
-      "durationFrames": 363
+      "durationFrames": 341,
+      "audio": "audio/apple18_long_s21.mp3",
+      "timingSource": "tts"
     }
   ]
 }
