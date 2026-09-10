@@ -26,6 +26,12 @@
 //  8. THE HOOK stays at or under 15 words — the 8s cap is only checked AFTER sync, so a
 //     hook two words too long costs a whole extra TTS pass to discover.
 //  9. `meta.seo.pinned` is REQUIRED and should contain a question.
+// 10. THE OUTRO CARD MUST SHARE A CONTENT WORD WITH ITS OWN NARRATION — the
+//     narration/visual gate in render-topic refuses the render otherwise, and it is right
+//     to: the viewer hears one thing and reads another. But do NOT solve it by repeating
+//     the subject, because chapters are derived from headlines and the outro then
+//     duplicates the opening chapter in the description. Name WHAT IS NEXT instead
+//     ("Duo, the watches and AirPods next"), which the closing sentence already says.
 //
 // ── HOUSE VOICE, for this series specifically (owner, 2026-09-10) ────────────
 // "See how naturally reviewers review products. I need in that way." And: avoid "nothing

@@ -42,12 +42,12 @@
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "IT SIGNS YOUR PHOTOS",
+    "title": "SIGNS EVERY PHOTO",
     "badge": "iPhone 18 Pro",
     "asset": "si:apple"
   },
   "cover": {
-    "title": "IT SIGNS YOUR PHOTOS",
+    "title": "SIGNS EVERY PHOTO",
     "badge": "iPhone 18 Pro",
     "asset": "si:apple",
     "frames": 2
@@ -78,9 +78,9 @@
       "narration": "Apple Reference Image signs the picture while the sensor is still reading it, and that signature binds to the pixels themselves.",
       "data": {
         "appleStage": {
-          "headline": "Signed at [capture]",
+          "headline": "Bound to the [pixels]",
           "kind": "reference-image",
-          "caption": "Not a file header",
+          "caption": "Apple Reference Image",
           "color": "blue",
           "cells": [
             {
@@ -108,9 +108,9 @@
       "narration": "Copy it, paint something out of the middle, and the copy stops matching its own signature. So the original stays provable and the edit cannot borrow that.",
       "data": {
         "appleStage": {
-          "headline": "Edit it and the seal [breaks]",
+          "headline": "Edit it and the [signature] breaks",
           "kind": "reference-image",
-          "caption": "One verifies, one cannot",
+          "caption": "The original still holds",
           "color": "blue",
           "cells": [
             {
