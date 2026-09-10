@@ -2653,14 +2653,14 @@
                         },
                         "kind": {
                           "type": "string",
-                          "description": "Which picture: pro-outline"
+                          "description": "Which picture: pro-back | pro-front | duo-pair | watch-face | airpods"
                         },
                         "cells": {
                           "type": "array",
                           "items": {
                             "type": "object"
                           },
-                          "description": "0-8 elements. label = what is written (<=26). text = the ROLE key this cell plays in the chosen kind - for pro-outline one of plateau|lens|flash|logo|control|action|body, and an unrecognised key deliberately lights NOTHING rather than lighting the wrong part. sub = the gloss beside it (<=40). value = a number the beat states. icon = lucide:/si: glyph. color, atWord."
+                          "description": "0-8 elements. label = what is written (<=26). text = the ROLE key this cell plays in the chosen kind - for the phone kinds one of plateau|lens|flash|lidar|logo|control|action|volume|body|screen|island; for watch-face screen|crown|side|case|band|action; for airpods case|bud|stem|hinge|light; for duo-pair outer|inner|hinge|body|lens, and an unrecognised key deliberately lights NOTHING rather than lighting the wrong part. sub = the gloss beside it (<=40). value = a number the beat states. icon = lucide:/si: glyph. color, atWord."
                         },
                         "vars": {
                           "type": "array",

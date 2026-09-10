@@ -582,8 +582,8 @@ export const MANIFEST = {  LIVE_CODE: {
     use_when: "a beat names a part of an Apple product, its finishes, its price ladder, or a mechanism inside it that the viewer should SEE happen rather than be told about",
     fields: {
       headline: {t: 'string', req: true, max: 44, note: "Scene headline, <=44 chars, one [accent] phrase."},
-      kind: {t: 'string', req: true, note: "Which picture: pro-outline"},
-      cells: {t: 'items', note: "0-8 elements. label = what is written (<=26). text = the ROLE key this cell plays in the chosen kind - for pro-outline one of plateau|lens|flash|logo|control|action|body, and an unrecognised key deliberately lights NOTHING rather than lighting the wrong part. sub = the gloss beside it (<=40). value = a number the beat states. icon = lucide:/si: glyph. color, atWord."},
+      kind: {t: 'string', req: true, note: "Which picture: pro-back | pro-front | duo-pair | watch-face | airpods"},
+      cells: {t: 'items', note: "0-8 elements. label = what is written (<=26). text = the ROLE key this cell plays in the chosen kind - for the phone kinds one of plateau|lens|flash|lidar|logo|control|action|volume|body|screen|island; for watch-face screen|crown|side|case|band|action; for airpods case|bud|stem|hinge|light; for duo-pair outer|inner|hinge|body|lens, and an unrecognised key deliberately lights NOTHING rather than lighting the wrong part. sub = the gloss beside it (<=40). value = a number the beat states. icon = lucide:/si: glyph. color, atWord."},
       vars: {t: 'items', note: "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."},
       caption: {t: 'string', max: 30, note: "Caption above the picture, <=30 chars, specific to THIS beat."},
       premise: {t: 'string', max: 150, note: "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at. Carries NO marker."},
@@ -591,7 +591,7 @@ export const MANIFEST = {  LIVE_CODE: {
       color: {t: 'string', note: "Accent SemColor: blue|green|red|orange|purple|yellow."},
       atWord: {t: 'anchor', note: "The word the picture itself resolves on."},
     },
-    example: {"appleStage": {"headline": "The [plateau] everyone noticed", "kind": "pro-outline", "cells": [{"label": "Camera plateau", "text": "plateau", "sub": "spans the full width", "atWord": 3}, {"label": "Three lenses", "text": "lens", "sub": "48MP Fusion Main", "atWord": 8}], "caption": "iPhone 18 Pro, from the back", "premise": "A schematic of the real thing: the outline is drawn to the phone's own proportions.", "color": "blue", "atWord": 1}},
+    example: {"appleStage": {"headline": "The [plateau] everyone noticed", "kind": "pro-back", "cells": [{"label": "Camera plateau", "text": "plateau", "sub": "spans the full width", "atWord": 3}, {"label": "Three lenses", "text": "lens", "sub": "48MP Fusion Main", "atWord": 8}], "caption": "iPhone 18 Pro, from the back", "premise": "A schematic of the real thing: the outline is drawn to the phone's own proportions.", "color": "blue", "atWord": 1}},
   },
   ALLURE_STAGE: {
     category: 'diagram', family: 'diagram', data_key: 'allureStage',
