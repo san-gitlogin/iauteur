@@ -1,0 +1,55 @@
+{
+  "slug": "apple-watch-page",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 0,
+  "prep": {
+    "url": "https://www.apple.com/apple-watch-ultra-4/"
+  },
+  "steps": [
+    {
+      "id": "health",
+      "action": "scroll",
+      "by": 2800,
+      "label": "health and fitness tracking",
+      "marks": [
+        {
+          "id": "healthhead",
+          "text": "Advanced Health and Fitness Tracking"
+        }
+      ],
+      "holdMs": 1700
+    },
+    {
+      "id": "heart",
+      "action": "scroll",
+      "by": 2800,
+      "label": "the heart sensor section",
+      "marks": [
+        {
+          "id": "hearthead",
+          "text": "Heartcore innovation"
+        }
+      ],
+      "holdMs": 1700
+    },
+    {
+      "id": "ai",
+      "action": "scroll",
+      "by": 9800,
+      "label": "the wearable AI assistant",
+      "marks": [
+        {
+          "id": "aihead",
+          "text": "Wearable AI Assistant"
+        }
+      ],
+      "holdMs": 1700
+    }
+  ]
+}

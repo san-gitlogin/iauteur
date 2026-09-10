@@ -49,6 +49,20 @@
 // Same for `cover` on a short. And author MANY tags, not a handful: they are free, and
 // they are how the video gets found at all.
 
+// ── WRITE NARRATION IN DOUBLE-QUOTED JS STRINGS ─────────────────────────────
+// Paid for four times in one session. English narration is full of apostrophes — "it's",
+// "don't", "you'll", "last year's" — and the voice guard actively REQUIRES them above 1.2%.
+// A single-quoted JS string therefore breaks the moment the writing gets good, and the
+// failure is a parse error several lines away from the real cause.
+//
+// Two rules that cost nothing and save a round trip each time:
+//   1. Narration lines use "double quotes". Reserve 'single' for field values and keys.
+//   2. Run `node --check <builder>` before `node <builder>`. It reports the offending line
+//      directly; running the builder reports a confusing "missing ) after argument list".
+//
+// And prefer rewriting a whole builder over splicing strings into one with a patch script.
+// A patch that half-applies leaves a file that neither parses nor matches its own patterns.
+
 // ── HOUSE VOICE, for this series specifically (owner, 2026-09-10) ────────────
 // "See how naturally reviewers review products. I need in that way." And: avoid "nothing
 // much", "no more" and similar tics. So: write as somebody who has read the spec sheet and
