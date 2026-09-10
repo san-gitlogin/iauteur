@@ -162,5 +162,14 @@
     "note": "DERIVED from the_internet_login.png — cropped to the form area (crop=930:523:460:20) so the page content fills a 16:9 frame; no pixels altered. Screenshot used nominatively for tutorial commentary.",
     "bytes": 29529,
     "capturedAt": "2026-08-12T12:49:57.806Z"
+  },
+  {
+    "file": "apple_iphone18pro_hero.png",
+    "url": "https://www.apple.com/iphone-18-pro/",
+    "note": "screenshot for commentary — Apple product page, iPhone 18 Pro, captured 2026-09-10 for nominative commentary",
+    "bytes": 213591,
+    "capturedAt": "2026-09-10T05:20:57.109Z",
+    "engine": "playwright 1.62.1",
+    "viewport": "1600x1000"
   }
 ]
