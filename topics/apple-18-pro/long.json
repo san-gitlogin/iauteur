@@ -66,9 +66,11 @@
         "subtext": "A camera that signs its own work",
         "kicker": "September 2026",
         "variant": "plaque",
-        "atWord": 6
+        "atWord": 4.583
       },
-      "durationFrames": 163
+      "durationFrames": 177,
+      "audio": "audio/apple18_long_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -79,9 +81,11 @@
       "data": {
         "title": "Four changes, and one price",
         "subtitle": "The body, the camera, the chip, the bill",
-        "atWord": 16
+        "atWord": 12.333
       },
-      "durationFrames": 420
+      "durationFrames": 412,
+      "audio": "audio/apple18_long_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
@@ -101,36 +105,38 @@
               "label": "Camera plateau",
               "text": "plateau",
               "sub": "nearly the full width",
-              "atWord": 11
+              "atWord": 6.417
             },
             {
               "label": "Three lenses",
               "text": "lens",
               "sub": "48MP Fusion Main",
-              "atWord": 24
+              "atWord": 16.25
             },
             {
               "label": "Flash and lidar",
               "text": "flash",
               "sub": "the far end",
-              "atWord": 35
+              "atWord": 24.167
             },
             {
               "label": "Camera Control",
               "text": "control",
               "sub": "right edge",
-              "atWord": 46
+              "atWord": 31.917
             },
             {
               "label": "Action Button",
               "text": "action",
               "sub": "left edge",
-              "atWord": 56
+              "atWord": 39.333
             }
           ]
         }
       },
-      "durationFrames": 790
+      "durationFrames": 693,
+      "audio": "audio/apple18_long_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -150,30 +156,32 @@
               "label": "Burgundy",
               "sub": "#2a1618,#a16974",
               "text": "finish",
-              "atWord": 19
+              "atWord": 15.5
             },
             {
               "label": "Glacier",
               "sub": "#2c3238,#f8fbff",
               "text": "finish",
-              "atWord": 4
+              "atWord": 2.167
             },
             {
               "label": "Silver",
               "sub": "#3a3d40,#fdfdfd",
               "text": "finish",
-              "atWord": 8
+              "atWord": 6.167
             },
             {
               "label": "Black",
               "sub": "#141414,#c0c0c0",
               "text": "finish",
-              "atWord": 13
+              "atWord": 10.667
             }
           ]
         }
       },
-      "durationFrames": 638
+      "durationFrames": 640,
+      "audio": "audio/apple18_long_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -193,30 +201,32 @@
               "label": "Super Retina XDR",
               "text": "screen",
               "sub": "2622 x 1206 at 460 ppi",
-              "atWord": 12
+              "atWord": 8.167
             },
             {
               "label": "Uniform bezel",
               "text": "body",
               "sub": "2.6 mm, every side",
-              "atWord": 23
+              "atWord": 16.167
             },
             {
               "label": "Dynamic Island",
               "text": "island",
               "sub": "three Live Activities",
-              "atWord": 39
+              "atWord": 29.917
             },
             {
               "label": "Ceramic Shield 2",
               "text": "body",
               "sub": "front and back",
-              "atWord": 47
+              "atWord": 36.083
             }
           ]
         }
       },
-      "durationFrames": 686
+      "durationFrames": 696,
+      "audio": "audio/apple18_long_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
@@ -237,19 +247,19 @@
               "text": "stop",
               "value": 1.48,
               "sub": "widest",
-              "atWord": 20
+              "atWord": 16.5
             },
             {
               "label": "f/1.8",
               "text": "stop",
               "value": 1.8,
-              "atWord": 37
+              "atWord": 28.667
             },
             {
               "label": "f/2.8",
               "text": "stop",
               "value": 2.8,
-              "atWord": 46
+              "atWord": 36
             },
             {
               "label": "f/4",
@@ -260,7 +270,9 @@
           ]
         }
       },
-      "durationFrames": 657
+      "durationFrames": 622,
+      "audio": "audio/apple18_long_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
@@ -286,25 +298,27 @@
               "label": "f/1.8",
               "text": "stop",
               "value": 1.8,
-              "atWord": 2
+              "atWord": 1
             },
             {
               "label": "f/2.8",
               "text": "stop",
               "value": 2.8,
-              "atWord": 3
+              "atWord": 1.333
             },
             {
               "label": "f/4",
               "text": "stop",
               "value": 4,
               "sub": "deepest focus",
-              "atWord": 18
+              "atWord": 13
             }
           ]
         }
       },
-      "durationFrames": 800
+      "durationFrames": 735,
+      "audio": "audio/apple18_long_s07.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s08",
@@ -323,27 +337,29 @@
             {
               "label": "capture",
               "text": "capture",
-              "atWord": 11
+              "atWord": 6.083
             },
             {
               "label": "signed",
               "text": "sign",
-              "atWord": 19
+              "atWord": 12.167
             },
             {
               "label": "edited",
               "text": "edit",
-              "atWord": 34
+              "atWord": 23.167
             },
             {
               "label": "checked",
               "text": "check",
-              "atWord": 44
+              "atWord": 31.333
             }
           ]
         }
       },
-      "durationFrames": 676
+      "durationFrames": 656,
+      "audio": "audio/apple18_long_s08.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s09",
@@ -364,24 +380,26 @@
               "label": "Super cores",
               "text": "cpu",
               "sub": "20% faster",
-              "atWord": 15
+              "atWord": 12.667
             },
             {
               "label": "Efficiency cores",
               "text": "cpu",
               "sub": "four of them",
-              "atWord": 28
+              "atWord": 22.833
             },
             {
               "label": "First 2nm phone chip",
               "text": "io",
               "sub": "more transistors to spend",
-              "atWord": 41
+              "atWord": 32.75
             }
           ]
         }
       },
-      "durationFrames": 657
+      "durationFrames": 630,
+      "audio": "audio/apple18_long_s09.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s10",
@@ -402,24 +420,26 @@
               "label": "GPU cores",
               "text": "gpu",
               "sub": "40% faster graphics",
-              "atWord": 7
+              "atWord": 5.667
             },
             {
               "label": "Neural Accelerators",
               "text": "gpu",
               "sub": "2x FP8 throughput",
-              "atWord": 21
+              "atWord": 17.833
             },
             {
               "label": "Where it lands",
               "text": "io",
               "sub": "editing and games",
-              "atWord": 37
+              "atWord": 34.083
             }
           ]
         }
       },
-      "durationFrames": 591
+      "durationFrames": 630,
+      "audio": "audio/apple18_long_s10.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s11",
@@ -440,24 +460,26 @@
               "label": "Neural Engine",
               "text": "neural",
               "sub": "32 total cores",
-              "atWord": 13
+              "atWord": 10.583
             },
             {
               "label": "A19 Pro and A18 Pro",
               "text": "io",
               "sub": "sixteen apiece",
-              "atWord": 27
+              "atWord": 24.25
             },
             {
               "label": "On-device Siri",
               "text": "io",
               "sub": "your mail stays yours",
-              "atWord": 38
+              "atWord": 31.5
             }
           ]
         }
       },
-      "durationFrames": 581
+      "durationFrames": 555,
+      "audio": "audio/apple18_long_s11.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s12",
@@ -478,26 +500,28 @@
               "text": "bar",
               "sub": "A20 Pro",
               "value": 100,
-              "atWord": 19
+              "atWord": 13.75
             },
             {
               "label": "iPhone 17 Pro",
               "text": "bar",
               "sub": "A19 Pro — 40% more",
               "value": 71,
-              "atWord": 28
+              "atWord": 18.833
             },
             {
               "label": "iPhone 16 Pro",
               "text": "bar",
               "sub": "A18 Pro — 2x more",
               "value": 50,
-              "atWord": 37
+              "atWord": 28.333
             }
           ]
         }
       },
-      "durationFrames": 638
+      "durationFrames": 670,
+      "audio": "audio/apple18_long_s12.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s13",
@@ -518,19 +542,21 @@
               "text": "bar",
               "sub": "45 hours",
               "value": 45,
-              "atWord": 5
+              "atWord": 3.833
             },
             {
               "label": "iPhone 17 Pro Max",
               "text": "bar",
               "sub": "39 hours",
               "value": 39,
-              "atWord": 11
+              "atWord": 8.75
             }
           ]
         }
       },
-      "durationFrames": 325
+      "durationFrames": 348,
+      "audio": "audio/apple18_long_s13.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s14",
@@ -550,30 +576,32 @@
               "label": "256GB",
               "text": "tier",
               "value": 1199,
-              "atWord": 11
+              "atWord": 8.583
             },
             {
               "label": "512GB",
               "text": "tier",
               "value": 1399,
-              "atWord": 27
+              "atWord": 21.833
             },
             {
               "label": "1TB",
               "text": "tier",
               "value": 1799,
-              "atWord": 36
+              "atWord": 27.833
             },
             {
               "label": "2TB",
               "text": "tier",
               "value": 2399,
-              "atWord": 44
+              "atWord": 33.833
             }
           ]
         }
       },
-      "durationFrames": 705
+      "durationFrames": 652,
+      "audio": "audio/apple18_long_s14.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s15",
@@ -595,33 +623,35 @@
               "text": "rise",
               "value": 1099,
               "sub": "999",
-              "atWord": 31
+              "atWord": 23.083
             },
             {
               "label": "iPhone 17",
               "text": "rise",
               "value": 899,
               "sub": "799",
-              "atWord": 35
+              "atWord": 25
             },
             {
               "label": "iPhone 16",
               "text": "rise",
               "value": 799,
               "sub": "699",
-              "atWord": 39
+              "atWord": 30.25
             },
             {
               "label": "iPhone 17e",
               "text": "rise",
               "value": 699,
               "sub": "599",
-              "atWord": 43
+              "atWord": 35.25
             }
           ]
         }
       },
-      "durationFrames": 667
+      "durationFrames": 698,
+      "audio": "audio/apple18_long_s15.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16",
@@ -642,26 +672,28 @@
               "text": "bar",
               "sub": "up ~400% year on year",
               "value": 400,
-              "atWord": 13
+              "atWord": 7.833
             },
             {
               "label": "Bill of materials",
               "text": "bar",
               "sub": "up ~38% on a Pro",
               "value": 38,
-              "atWord": 26
+              "atWord": 16
             },
             {
               "label": "What you pay",
               "text": "bar",
               "sub": "$1,099 to $1,199",
               "value": 9,
-              "atWord": 32
+              "atWord": 18.833
             }
           ]
         }
       },
-      "durationFrames": 600
+      "durationFrames": 554,
+      "audio": "audio/apple18_long_s16.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s17",
@@ -675,11 +707,13 @@
           "caption": "Apple's iPhone 18 Pro page, captured 10 September 2026",
           "kicker": "apple.com",
           "pan": "in",
-          "atWord": 16
+          "atWord": 10.583
         },
         "source": "apple.com/iphone-18-pro"
       },
-      "durationFrames": 410
+      "durationFrames": 326,
+      "audio": "audio/apple18_long_s17.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s18",
@@ -688,11 +722,13 @@
       "background": "zoneA",
       "narration": "That's the iPhone 18 Pro: a camera that vouches for its own pictures, a chip built for the AI it runs, and a hundred dollars that memory explains. The Duo, the watches and AirPods each get their own video.",
       "data": {
-        "headline": "Worth it?",
-        "subtext": "Tell me where you land in the comments",
-        "atWord": 20
+        "headline": "iPhone 18 Pro",
+        "subtext": "Duo, the watches and AirPods next",
+        "atWord": 13.833
       },
-      "durationFrames": 401
+      "durationFrames": 401,
+      "audio": "audio/apple18_long_s18.mp3",
+      "timingSource": "tts"
     }
   ]
 }

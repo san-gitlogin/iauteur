@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "topic": "Apple September 2026 — iPhone 18 Pro",
+    "format": "shorts",
+    "fps": 30,
+    "subject": "iPhone 18 Pro",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "screenplay": "documentary",
+    "onePayoff": "the iPhone 18 Pro signs its photos at capture, so an edited copy cannot pass as the original",
+    "openLoop": "How can a photo prove it is a photo?",
+    "seo": {
+      "title": "Your iPhone photo can now prove it is real #apple #iphone18pro",
+      "description": "Apple Reference Image signs the picture at capture, so an edited copy stops matching its own signature. Plus a real six-blade variable aperture, and the $100 rise across the old lineup.",
+      "breakdown": "Apple Reference Image, the variable aperture, and the price rise",
+      "pinned": "Would a camera that can prove a photo is real change what you trust online?",
+      "tags": [
+        "iPhone 18 Pro",
+        "Apple Reference Image",
+        "variable aperture",
+        "Apple September 2026",
+        "shorts"
+      ],
+      "queries": [
+        "what is Apple Reference Image",
+        "iPhone 18 Pro variable aperture"
+      ],
+      "sources": [
+        "apple.com/newsroom — iPhone 18 Pro and iPhone 18 Pro Max",
+        "apple.com/iphone-18-pro/specs"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT SIGNS YOUR PHOTOS",
+    "badge": "iPhone 18 Pro",
+    "asset": "si:apple"
+  },
+  "cover": {
+    "title": "IT SIGNS YOUR PHOTOS",
+    "badge": "iPhone 18 Pro",
+    "asset": "si:apple",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Your iPhone 18 Pro photo can now prove that it is real.",
+      "data": {
+        "headline": "Your photo proves it is real",
+        "subtext": "iPhone 18 Pro",
+        "kicker": "September 2026",
+        "variant": "plaque",
+        "atWord": 3.917
+      },
+      "durationFrames": 123,
+      "audio": "audio/apple18_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Apple Reference Image signs the picture while the sensor is still reading it, and that signature binds to the pixels themselves.",
+      "data": {
+        "appleStage": {
+          "headline": "Signed at [capture]",
+          "kind": "reference-image",
+          "caption": "Not a file header",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "capture",
+              "text": "capture",
+              "atWord": 2.083
+            },
+            {
+              "label": "signed",
+              "text": "sign",
+              "atWord": 5.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 223,
+      "audio": "audio/apple18_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "APPLE_STAGE",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Copy it, paint something out of the middle, and the copy stops matching its own signature. So the original stays provable and the edit cannot borrow that.",
+      "data": {
+        "appleStage": {
+          "headline": "Edit it and the seal [breaks]",
+          "kind": "reference-image",
+          "caption": "One verifies, one cannot",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "capture",
+              "text": "capture",
+              "atWord": 1
+            },
+            {
+              "label": "signed",
+              "text": "sign",
+              "atWord": 1.083
+            },
+            {
+              "label": "edited",
+              "text": "edit",
+              "atWord": 3.917
+            },
+            {
+              "label": "checked",
+              "text": "check",
+              "atWord": 9.667
+            }
+          ]
+        }
+      },
+      "durationFrames": 280,
+      "audio": "audio/apple18_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "APPLE_STAGE",
+      "transition": "zoom",
+      "background": "zoneC",
+      "narration": "The lens under it opens to f one point four eight on six real blades, and closes to f four when you want the whole scene sharp.",
+      "data": {
+        "appleStage": {
+          "headline": "Six blades, [four] stops",
+          "kind": "aperture-iris",
+          "caption": "A real variable aperture",
+          "color": "green",
+          "cells": [
+            {
+              "label": "f/1.48",
+              "text": "stop",
+              "value": 1.48,
+              "sub": "widest",
+              "atWord": 4.083
+            },
+            {
+              "label": "f/1.8",
+              "text": "stop",
+              "value": 1.8
+            },
+            {
+              "label": "f/2.8",
+              "text": "stop",
+              "value": 2.8
+            },
+            {
+              "label": "f/4",
+              "text": "stop",
+              "value": 4,
+              "sub": "deepest",
+              "atWord": 10.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 227,
+      "audio": "audio/apple18_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "APPLE_STAGE",
+      "transition": "whippan",
+      "background": "zoneC",
+      "narration": "The 18 Pro starts at eleven ninety nine, and every older iPhone went up a hundred dollars that day.",
+      "data": {
+        "appleStage": {
+          "headline": "And the old ones went [up]",
+          "kind": "price-rise",
+          "token": "$",
+          "caption": "Same day",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "iPhone 17",
+              "text": "rise",
+              "value": 899,
+              "sub": "799",
+              "atWord": 7.583
+            },
+            {
+              "label": "iPhone 16",
+              "text": "rise",
+              "value": 799,
+              "sub": "699",
+              "atWord": 10.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 199,
+      "audio": "audio/apple18_short_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Full breakdown of the iPhone 18 Pro is on the channel.",
+      "data": {
+        "headline": "Worth it?",
+        "subtext": "Full breakdown on the channel",
+        "atWord": 3.667
+      },
+      "durationFrames": 126,
+      "audio": "audio/apple18_short_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}
