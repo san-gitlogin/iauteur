@@ -38,7 +38,15 @@ const frameOf = (word) => Math.max(0, Math.round((word - 1) * FPW));
  * @param {number}   [o.settle]   frames of tail after the last clip finishes
  * @returns {{ok:boolean, reason?:string, durationFrames:number, clips:{atWord:number, callouts:number[]}[]}}
  */
-export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], settle = 45,
+// THE RENDERER'S PACING RULES, IMPORTED RATHER THAN GUESSED. `RecordedStep` does not play
+// a clip at 1:1 — it spreads it across the airtime the beat owns. This solver used to assume
+// 1:1, so it placed a callout "after the footage" that was in fact still 187 frames from
+// settling, and the label sat on screen pointing at a page that had not arrived yet (owner,
+// 2026-09-11: *"the highlight already comes into the screen before the to-be-highlighted text
+// appears… somehow it matches later"*). One shared module, so the two cannot disagree again.
+import {planWarp} from '../../../src/recWarp.mjs';
+
+export const solveAnchors = ({words, clipFrames, clipChanges = [], callouts = [], releases = [], settle = 45,
                              want = [], eventWant = []}) => {
   const n = clipFrames.length;
   if (!n) return {ok: false, reason: 'no clips', durationFrames: 0, clips: []};
@@ -250,7 +258,13 @@ export const solveAnchors = ({words, clipFrames, callouts = [], releases = [], s
     const cn = callouts[i] ?? 0;
     if (!cn) continue;
     const winEnd = i + 1 < n ? starts[i + 1] : Math.min(durationFrames - settle, lastWordFrame);
-    const afterFootage = starts[i] + clipFrames[i];
+    // WHEN THE PICTURE STOPS CHANGING, not when the file runs out of frames. With the
+    // motion map this is the end of the last moving run; without one it falls back to the
+    // old uniform stretch, which is still later than `starts[i] + clipFrames[i]` was.
+    const airtime = Math.max(1, (i + 1 < n ? starts[i + 1] : durationFrames) - starts[i]);
+    const afterFootage = starts[i] + planWarp({
+      frames: clipFrames[i], changes: clipChanges[i], airtime,
+    }).settle;
     const room = winEnd - afterFootage;
     if (room < FPW * cn) {
       // Not enough spoken words left after this clip's footage to hold its callouts.
@@ -375,6 +389,8 @@ export const anchorScene = (scene, {settle = 45} = {}) => {
   const solve = (plan) => solveAnchors({
     words,
     clipFrames: d.clips.map((c) => Number(c.frames)),
+    // The motion map from the bake, so the solver knows when each clip's picture settles.
+    clipChanges: d.clips.map((c) => (Array.isArray(c.changes) ? c.changes : undefined)),
     callouts: plan.map((seq) => seq.length),
     releases: plan.map(isRelease),
     settle,

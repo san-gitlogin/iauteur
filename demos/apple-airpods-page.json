@@ -1,0 +1,50 @@
+{
+  "slug": "apple-airpods-page",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "prep": {
+    "url": "https://www.apple.com/airpods-5/"
+  },
+  "steps": [
+    {
+      "id": "noise-out",
+      "action": "scroll",
+      "by": 4200,
+      "label": "noise out, magic in",
+      "marks": [
+        {
+          "id": "noisehead",
+          "text": "Noise out"
+        },
+        {
+          "id": "noisebody",
+          "text": "Powered by advanced computational audio"
+        }
+      ],
+      "holdMs": 1700
+    },
+    {
+      "id": "spatial",
+      "action": "scroll",
+      "by": 2800,
+      "label": "personalised spatial audio",
+      "marks": [
+        {
+          "id": "spathead",
+          "text": "Personalized Spatial Audio"
+        },
+        {
+          "id": "spatbody",
+          "text": "AirPods 5 feature even better sound quality"
+        }
+      ],
+      "holdMs": 1700
+    }
+  ]
+}

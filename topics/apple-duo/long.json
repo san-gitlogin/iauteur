@@ -19,25 +19,13 @@
       "pinned": "Would you carry a folding iPhone at $1,999, or wait for the second one?",
       "tags": [
         "iPhone Duo",
-        "iPhone Duo review",
         "foldable iPhone",
-        "Apple foldable",
         "Apple September 2026",
-        "Apple event 2026",
         "iPhone Duo price",
-        "iPhone Duo specs",
-        "under display camera",
-        "iPhone Duo vs iPhone 18 Pro",
+        "under-display camera",
         "A20 Pro",
-        "is the iPhone Duo worth it",
-        "folding phone 2026",
-        "iPhone Duo hands on",
-        "Apple keynote",
-        "iOS 27",
-        "Smart Take",
-        "Duo Preview",
-        "thinnest iPhone",
-        "iPhone Duo camera"
+        "Apple event",
+        "iPhone Duo specs"
       ],
       "queries": [
         "iPhone Duo specs and price",
@@ -63,8 +51,8 @@
   "thumbnail": {
     "title": "EVERYTHING YOU NEED TO KNOW",
     "badge": "iPhone Duo",
-    "asset": "si:apple",
-    "note": "the first foldable iPhone"
+    "note": "the first foldable iPhone",
+    "asset": "si:apple"
   },
   "scenes": [
     {
@@ -117,13 +105,13 @@
               "label": "Closed",
               "text": "outer",
               "sub": "84.1 mm across",
-              "atWord": 7.167
+              "atWord": 13.25
             },
             {
               "label": "Open",
               "text": "inner",
               "sub": "164.6 mm across",
-              "atWord": 16.583
+              "atWord": 21.833
             },
             {
               "label": "The hinge",
@@ -151,15 +139,25 @@
               "ref": "rec:apple-duo-page#thin-fold",
               "label": "the display claim",
               "focus": true,
-              "atWord": 4.75,
+              "atWord": 2.917,
               "zooms": [
                 {
                   "mark": "disp",
-                  "wantAtWord": 9.75
+                  "wantAtWord": 8.167,
+                  "atWord": 19.833
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 18.167
+                  "wantAtWord": 13,
+                  "atWord": 24.583
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Apple's claim for the display",
+                  "mark": "disp",
+                  "wantAtWord": 18.75,
+                  "atWord": 22.833
                 }
               ],
               "id": "thin-fold",
@@ -280,7 +278,8 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
       "durationFrames": 403,
@@ -306,21 +305,21 @@
               "text": "bar",
               "sub": "5.2 mm",
               "value": 5.2,
-              "atWord": 7.833
+              "atWord": 11.833
             },
             {
               "label": "iPhone Air",
               "text": "bar",
               "sub": "5.6 mm",
               "value": 5.6,
-              "atWord": 18.75
+              "atWord": 20.583
             },
             {
               "label": "iPhone Duo, closed",
               "text": "bar",
               "sub": "11.3 mm",
               "value": 11.3,
-              "atWord": 24.833
+              "atWord": 25.833
             }
           ]
         }
@@ -360,7 +359,7 @@
               "label": "Under the screen",
               "text": "selfie",
               "sub": "no notch, no cutout",
-              "atWord": 24.917
+              "atWord": 1.667
             }
           ]
         }
@@ -388,7 +387,7 @@
               "label": "Under-display camera",
               "text": "selfie",
               "sub": "appears only when needed",
-              "atWord": 8.833
+              "atWord": 10.833
             },
             {
               "label": "No cutout",
@@ -428,19 +427,19 @@
               "label": "Two apps at once",
               "text": "inner",
               "sub": "side by side",
-              "atWord": 14
+              "atWord": 20.917
             },
             {
               "label": "Two home pages",
               "text": "outer",
               "sub": "or one big grid",
-              "atWord": 19.417
+              "atWord": 26.333
             },
             {
               "label": "Apps see the fold",
               "text": "hinge",
               "sub": "continuous, not relaunched",
-              "atWord": 26
+              "atWord": 28.75
             }
           ]
         }
@@ -454,7 +453,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneC",
-      "narration": "Round the back, a pair rather than the Pro trio: a forty eight megapixel Fusion main and a forty eight megapixel ultra wide, in a pill shaped housing with the flash beside them.",
+      "narration": "Round the back, a pair rather than the Pro trio: a forty eight megapixel Fusion main and a forty eight megapixel ultra wide, in a pill shaped housing with the flash beside them. Two lenses rather than three is a choice the hinge forces, because a telephoto needs depth and depth is the one dimension a folding phone spends twice. What that costs you is optical reach, which is the next thing worth looking at.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -466,11 +465,21 @@
               "zooms": [
                 {
                   "mark": "camhead",
-                  "wantAtWord": 7.583
+                  "wantAtWord": 14.333,
+                  "atWord": 28.167
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 13.5
+                  "wantAtWord": 21.583,
+                  "atWord": 44.833
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "The camera section, in full",
+                  "mark": "camhead",
+                  "wantAtWord": 32.583,
+                  "atWord": 32.583
                 }
               ],
               "id": "camera",
@@ -609,10 +618,11 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 328,
+      "durationFrames": 669,
       "audio": "audio/duo_long_s09.mp3",
       "timingSource": "tts"
     },
@@ -640,13 +650,13 @@
               "label": "The good lenses",
               "text": "lens",
               "sub": "dual 48MP Fusion",
-              "atWord": 18.417
+              "atWord": 13.5
             },
             {
               "label": "Smart Take",
               "text": "body",
               "sub": "fires when everyone is ready",
-              "atWord": 23.25
+              "atWord": 24.667
             }
           ]
         }
@@ -674,13 +684,13 @@
               "label": "Neural Engine",
               "text": "neural",
               "sub": "32 cores, as the Pro",
-              "atWord": 9.667
+              "atWord": 14.25
             },
             {
               "label": "Thermal system",
               "text": "io",
               "sub": "a 5.2 mm body traps heat",
-              "atWord": 19.417
+              "atWord": 24.75
             },
             {
               "label": "Same AI workloads",
@@ -700,7 +710,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Apple's page says it in its own words: the A20 Pro with the dual sixteen core Neural Engine, purpose built for intensive AI workloads. Same chip as the Pro, different body around it.",
+      "narration": "Apple's page says it in its own words: the A20 Pro with the dual sixteen core Neural Engine, purpose built for intensive AI workloads. Same chip as the Pro, different body around it, and that matters more than it sounds. A first generation product usually ships with last year's silicon, and you feel that every day for two years. This one gets the fastest chip Apple makes on the day it goes on sale.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -708,15 +718,25 @@
               "ref": "rec:apple-duo-page#chip",
               "label": "the A20 Pro section",
               "focus": true,
-              "atWord": 2.667,
+              "atWord": 2.833,
               "zooms": [
                 {
                   "mark": "chiphead",
-                  "wantAtWord": 7.667
+                  "wantAtWord": 16.333,
+                  "atWord": 30.75
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 14.75
+                  "wantAtWord": 25.75,
+                  "atWord": 49.25
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Dual 16-core Neural Engine",
+                  "mark": "chiphead",
+                  "wantAtWord": 35.25,
+                  "atWord": 35.25
                 }
               ],
               "id": "chip",
@@ -891,10 +911,11 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 370,
+      "durationFrames": 732,
       "audio": "audio/duo_long_s12.mp3",
       "timingSource": "tts"
     },
@@ -911,15 +932,25 @@
               "ref": "rec:apple-duo-page#battery",
               "label": "the dual-battery system",
               "focus": true,
-              "atWord": 4.75,
+              "atWord": 2.417,
               "zooms": [
                 {
                   "mark": "batt",
-                  "wantAtWord": 9.75
+                  "wantAtWord": 7.833,
+                  "atWord": 19.5
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 19.25
+                  "wantAtWord": 12.417,
+                  "atWord": 25.833
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Two cells, one phone",
+                  "mark": "batt",
+                  "wantAtWord": 19.5,
+                  "atWord": 22.833
                 }
               ],
               "id": "battery",
@@ -992,7 +1023,8 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1.083
         }
       },
       "durationFrames": 399,
@@ -1017,7 +1049,7 @@
               "label": "Three on the Pro",
               "text": "lens",
               "sub": "main, ultra wide, telephoto",
-              "atWord": 7.917
+              "atWord": 11.167
             },
             {
               "label": "Two on the Duo",
@@ -1057,21 +1089,21 @@
               "text": "bar",
               "sub": "254 g",
               "value": 254,
-              "atWord": 8
+              "atWord": 9
             },
             {
               "label": "iPhone 18 Pro Max",
               "text": "bar",
               "sub": "249 g",
               "value": 249,
-              "atWord": 22.917
+              "atWord": 19.5
             },
             {
               "label": "iPhone 18 Pro",
               "text": "bar",
               "sub": "211 g",
               "value": 211,
-              "atWord": 15.75
+              "atWord": 21.417
             }
           ]
         }
@@ -1099,21 +1131,21 @@
               "text": "bar",
               "sub": "$1,999",
               "value": 1999,
-              "atWord": 5.417
+              "atWord": 4.417
             },
             {
               "label": "iPhone 18 Pro Max",
               "text": "bar",
               "sub": "$1,299",
               "value": 1299,
-              "atWord": 13.167
+              "atWord": 20
             },
             {
               "label": "iPhone 18 Pro",
               "text": "bar",
               "sub": "$1,199",
               "value": 1199,
-              "atWord": 18.333
+              "atWord": 22
             }
           ]
         }
@@ -1127,7 +1159,7 @@
       "type": "APPLE_STAGE",
       "transition": "whippan",
       "background": "zoneC",
-      "narration": "Then the practical stuff, which matters more on a phone that bends. Titanium frame, Ceramic Shield front and back, and IP sixty eight — dust as well as water, which is the harder half for a hinge. Touch ID sits in the side button, and it takes the seventy nine dollar USB C Apple Pencil only, not the Pencil Pro.",
+      "narration": "Then the practical stuff, which matters more on a phone that bends. Titanium frame, Ceramic Shield front and back, and IP sixty eight — dust as well as water, which is the harder half for a hinge. The seventy nine dollar USB C Apple Pencil works on it, though the Pencil Pro does not, and Touch ID sits in the side button rather than under the glass, which is what you would expect on a phone with nowhere convenient to hide a reader.",
       "data": {
         "appleStage": {
           "headline": "[IP68], Touch ID, and one Pencil",
@@ -1140,24 +1172,24 @@
               "label": "Titanium and IP68",
               "text": "body",
               "sub": "dust as well as water",
-              "atWord": 10.417
+              "atWord": 10.75
             },
             {
               "label": "Touch ID",
               "text": "outer",
               "sub": "in the side button",
-              "atWord": 25.417
+              "atWord": 43.75
             },
             {
               "label": "USB-C Apple Pencil",
               "text": "inner",
               "sub": "not the Pencil Pro",
-              "atWord": 32.75
+              "atWord": 45
             }
           ]
         }
       },
-      "durationFrames": 591,
+      "durationFrames": 732,
       "audio": "audio/duo_long_s17.mp3",
       "timingSource": "tts"
     },

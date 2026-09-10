@@ -139,6 +139,12 @@ for (const [si, scene] of scenes.entries()) {
     // the overlay card can be placed where it covers nothing. Derived, like marks: it is
     // refreshed on every bake and must never be hand-authored.
     if (step.ink) clip.ink = step.ink;
+    // THE MOTION MAP — which of this clip's frames are a new picture (see capture.mjs and
+    // src/recWarp.mjs). It is what lets the renderer stretch the PAUSES to fill the beat
+    // instead of slowing the motion down with them, and what tells `anchor-spec` the frame
+    // the picture actually settles on. Derived on every bake, like marks and ink; a clip
+    // baked before this existed simply has none and falls back to the old uniform stretch.
+    if (Array.isArray(step.changes)) clip.changes = step.changes;
     // WHAT THIS STEP ACTUALLY SHOWS, in the page's own words — its heading, or the largest
     // type on screen when there is none. Derived, never hand-authored, and its whole job is
     // to sit next to the label the AUTHOR wrote so a contradiction is unmissable:

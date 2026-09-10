@@ -1,11 +1,12 @@
 import React from 'react';
-import {AbsoluteFill, Sequence, useCurrentFrame, interpolate} from 'remotion';
+import {AbsoluteFill, Freeze, Sequence, useCurrentFrame, interpolate} from 'remotion';
 import {Scene} from '../types';
 import {useTheme, wordToFrame} from '../themes';
 import {StepOverlay, minCardWidth} from '../recordedOverlay';
 import {Headline, SourceFooter, useScale, useSem, hexA} from '../ui';
 import {ClipVideo} from '../video';
 import {easeInOutCubic} from '../motion/util';
+import {planWarp} from '../recWarp.mjs';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -92,13 +93,24 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     ? starts[active + 1]
     : (scene.durationFrames ?? curStart + curFrames);
   const airtime = Math.max(1, nextStart - curStart);
-  const READ_TAIL = 0.86;
-  const MIN_RATE = 0.4;
-  const rate = Math.max(MIN_RATE, Math.min(1, curFrames / (airtime * READ_TAIL)));
+  // AMENDED 2026-09-11 — STRETCH THE PAUSES, NOT THE MOTION.
+  //
+  // The paragraphs above are still the reason this exists, and the behaviour they describe
+  // is unchanged: the footage still spreads across the airtime so a line lands as it is
+  // being talked about. What changed is that ONE `playbackRate` over the whole file slowed
+  // the moving parts down along with the still ones. Owner, on a browser take: *"why are
+  // the screen recordings laggy"* — measured, the Apple beats ran at 0.40x-0.79x, and a
+  // capture that already only manages ~3 distinct pictures a second became ~1.2 on screen.
+  //
+  // `planWarp` reads the bake's motion map and gives back a list of MOUNTS: every moving
+  // run at its recorded speed, the slack absorbed by the pauses. A clip baked before that
+  // map existed has no `changes` and gets exactly the old uniform rate, so nothing already
+  // rendered changes. See src/recWarp.mjs.
+  const warp = planWarp({frames: curFrames, changes: (cur as {changes?: number[]}).changes, airtime});
   // Everything downstream must ask how long the footage takes ON SCREEN, not how many
   // frames it holds — stretching moves the freeze point, and the callouts and the zoom
   // settle are timed off it.
-  const shownFrames = Math.round(curFrames / rate);
+  const shownFrames = warp.shown;
 
   // How far into its own footage this segment is, and whether it has run out and is
   // now HOLDING for the voice. `held` drives the honest on-screen "holding" state.
@@ -741,17 +753,41 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             {/* Sequence.from = this segment's OWN anchor, so the clip's internal
                 time starts at 0 exactly when its word is spoken. endBehavior
                 'freeze' holds the last decoded frame once the footage runs out. */}
-            <Sequence from={curStart} layout="none">
-              <ClipVideo
-                src={cur.src}
-                fit="cover"
-                muted
-                playbackRate={rate}
-                endBehavior="freeze"
-                placeholderLabel={cur.src ? 'CLIP MISSING' : 'NOT BAKED'}
-                style={{background: t.colors.panel}}
-              />
-            </Sequence>
+            {/* ONE MOUNT PER MOVING RUN, AND A FREEZE FOR EACH PAUSE BETWEEN THEM.
+                Each piece plays [from,to) of the source at its recorded speed starting at
+                its own timeline offset; the pause that follows is a `Freeze` parked on the
+                run's last frame, which is the same picture the capture actually held. The
+                pieces are absolutely positioned siblings, so the later one simply paints
+                over the earlier — no cut, no gap, no blank frame between them.
+                A clip with no motion map yields exactly one piece at the old uniform rate. */}
+            {warp.pieces.map((p, pi) => {
+              const playLen = Math.max(1, p.to - p.from);
+              const nextAt = pi + 1 < warp.pieces.length ? warp.pieces[pi + 1].at : warp.shown;
+              const holdLen = Math.max(0, nextAt - p.at - playLen);
+              const clip = (extra: Record<string, unknown>) => (
+                <ClipVideo
+                  src={cur.src}
+                  fit="cover"
+                  muted
+                  endBehavior="freeze"
+                  placeholderLabel={cur.src ? 'CLIP MISSING' : 'NOT BAKED'}
+                  style={{background: t.colors.panel, position: 'absolute', inset: 0}}
+                  {...extra}
+                />
+              );
+              return (
+                <React.Fragment key={pi}>
+                  <Sequence from={curStart + p.at} durationInFrames={playLen} layout="none">
+                    {clip({startFrom: p.from, playbackRate: p.rate})}
+                  </Sequence>
+                  {holdLen > 0 && (
+                    <Sequence from={curStart + p.at + playLen} durationInFrames={holdLen} layout="none">
+                      <Freeze frame={0}>{clip({startFrom: Math.max(0, p.to - 1)})}</Freeze>
+                    </Sequence>
+                  )}
+                </React.Fragment>
+              );
+            })}
           {/* THE RUNNING COMMAND STAYS LIT FOR THE WHOLE STEP.
 
               Owner: *"I would like you to highlight the queries each and every time you are

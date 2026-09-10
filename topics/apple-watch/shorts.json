@@ -1,22 +1,230 @@
 {
   "meta": {
-    "topic": "Apple September 2026 — Apple Watch, explained",
-    "format": "short",
+    "topic": "Apple September 2026 — Apple Watch",
+    "format": "shorts",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "subject": "Apple Watch",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "screenplay": "documentary",
+    "onePayoff": "the new sensor samples often enough to turn sleep, activity and HRV into one daily readiness score",
+    "openLoop": "What can one number on your wrist actually tell you?",
+    "seo": {
+      "title": "Your watch now answers the morning question #apple #applewatch",
+      "description": "Apple Watch Series 12 and Ultra 4: the new Health Sensing System samples often enough for a daily Readiness score. Plus 50-hour Ultra battery, and the prices.",
+      "breakdown": "the Readiness score, the new sensor, Ultra battery, and the prices",
+      "pinned": "Series 12 or Ultra 4 — which one would you actually wear every day?",
+      "tags": [
+        "Apple Watch Series 12",
+        "Apple Watch Ultra 4",
+        "Apple Watch 2026",
+        "Readiness score",
+        "Apple September 2026",
+        "Apple event 2026",
+        "shorts"
+      ],
+      "queries": [
+        "Apple Watch readiness score",
+        "Apple Watch Ultra 4 battery life"
+      ],
+      "sources": [
+        "apple.com/newsroom — Apple September 2026 event",
+        "apple.com/apple-watch-ultra-4"
+      ]
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
     "channel": "THE NBX STUDIO",
     "logo": "img:channel_logo.png"
   },
+  "thumbnail": {
+    "title": "EVERYTHING YOU NEED TO KNOW",
+    "badge": "Apple Watch",
+    "note": "Series 12 and Ultra 4",
+    "asset": "si:apple"
+  },
   "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
+    "title": "EVERYTHING YOU NEED TO KNOW",
+    "badge": "Apple Watch",
+    "asset": "si:apple",
     "frames": 2
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "The new Apple Watch answers the only question you have in the morning. One number.",
+      "data": {
+        "headline": "One number, every morning",
+        "subtext": "Apple Watch Series 12 and Ultra 4",
+        "kicker": "September 2026",
+        "variant": "stack",
+        "atWord": 4.833
+      },
+      "durationFrames": 156,
+      "audio": "audio/apple-watch_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The Vitals app reads your sleep, your activity and your heart rate variability, and turns all three into one daily readiness score: pace yourself, ready, or go for it.",
+      "data": {
+        "appleStage": {
+          "headline": "One number: [Readiness]",
+          "kind": "watch-face",
+          "caption": "Vitals, on the face",
+          "color": "green",
+          "cells": [
+            {
+              "label": "Sleep, activity, HRV",
+              "text": "screen",
+              "sub": "read overnight",
+              "atWord": 3.667
+            },
+            {
+              "label": "A daily score",
+              "text": "case",
+              "sub": "pace, ready, or go",
+              "atWord": 15.333
+            }
+          ]
+        }
+      },
+      "durationFrames": 305,
+      "audio": "audio/apple-watch_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "APPLE_STAGE",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Why does that work? A trend, not a moment: both watches — Series 12 and the bigger Ultra 4 — get a new Health Sensing System that reads your heart often enough to see one.",
+      "data": {
+        "appleStage": {
+          "headline": "Enough samples to [see a trend]",
+          "kind": "watch-face",
+          "token": "ultra",
+          "caption": "The new Health Sensing System",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "A trend, not a moment",
+              "text": "band",
+              "sub": "why the score works",
+              "atWord": 4.583
+            },
+            {
+              "label": "Ultra 4",
+              "text": "case",
+              "sub": "49 mm, and the same sensor",
+              "atWord": 15
+            }
+          ]
+        }
+      },
+      "durationFrames": 331,
+      "audio": "audio/apple-watch_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "APPLE_STAGE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Battery, meanwhile: fifty hours of everyday use on the Ultra 4, eighty four in low power, and ten hours of workout tracking with GPS running the whole way.",
+      "data": {
+        "appleStage": {
+          "headline": "Ultra 4: [50 hours] everyday",
+          "kind": "compare-bars",
+          "caption": "Battery, by mode",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "Everyday use",
+              "text": "bar",
+              "sub": "50 hours",
+              "value": 50,
+              "atWord": 6.667
+            },
+            {
+              "label": "Low Power Mode",
+              "text": "bar",
+              "sub": "84 hours",
+              "value": 84,
+              "atWord": 13.5
+            },
+            {
+              "label": "Outdoor workout",
+              "text": "bar",
+              "sub": "10 hours",
+              "value": 10,
+              "atWord": 17.583
+            }
+          ]
+        }
+      },
+      "durationFrames": 310,
+      "audio": "audio/apple-watch_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "APPLE_STAGE",
+      "transition": "whippan",
+      "background": "zoneC",
+      "narration": "Series 12 starts at three ninety nine, and the Ultra 4 held last year's seven ninety nine.",
+      "data": {
+        "appleStage": {
+          "headline": "The Ultra [held] its price",
+          "kind": "price-ladder",
+          "caption": "US pricing",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "Series 12",
+              "text": "tier",
+              "value": 399,
+              "atWord": 1.25
+            },
+            {
+              "label": "Ultra 4",
+              "text": "tier",
+              "value": 799,
+              "atWord": 8.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 200,
+      "audio": "audio/apple-watch_shorts_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Full breakdown on the channel.",
+      "data": {
+        "headline": "Which one would you wear?",
+        "subtext": "Full breakdown on the channel",
+        "atWord": 2.167
+      },
+      "durationFrames": 90,
+      "audio": "audio/apple-watch_shorts_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
 }

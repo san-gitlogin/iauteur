@@ -1258,7 +1258,7 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
 
     // ── TAKE ─────────────────────────────────────────────────────────────────
     console.log('  TAKE: capture started');
-    capture = await startCapture(page, {dir: framesDir, quality: demo.quality ?? 92});
+    capture = await startCapture(page, {dir: framesDir, quality: demo.quality ?? 80});
     await sleep(400); // let the first frame land so t0 always has something behind it
 
     for (const [i, step] of (demo.steps ?? []).entries()) {
@@ -1371,8 +1371,9 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
       const step = (demo.steps ?? [])[i] ?? {};
       const info = capture.segment({t0: s.tStart, t1: s.tEnd, out: path.join(rec, file), fps,
         maxHoldMs: step.maxHoldMs ?? demo.maxHoldMs,
-        masterWidth: demo.masterWidth ?? 1920, crf: demo.crf ?? 20, preset: demo.preset ?? 'veryfast'});
+        masterWidth: demo.masterWidth ?? 3840, crf: demo.crf ?? 20, preset: demo.preset ?? 'veryfast'});
       s.trimmedFrames = info.trimmedFrames;
+      s.changes = info.changes;
       s.segment = file;
       s.segmentFrames = info.frames;
       s.durationMs = s.tEnd - s.tStart;
@@ -1456,7 +1457,7 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
     await sleep(400);
 
     console.log('  TAKE: capture started');
-    capture = await startCapture(page, {dir: framesDir, quality: demo.quality ?? 92});
+    capture = await startCapture(page, {dir: framesDir, quality: demo.quality ?? 80});
     await sleep(400);
 
     for (const [i, step] of (demo.steps ?? []).entries()) {
@@ -1489,8 +1490,9 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
       const step = (demo.steps ?? [])[i] ?? {};
       const info = capture.segment({t0: st.tStart, t1: st.tEnd, out: path.join(rec, file), fps,
         maxHoldMs: step.maxHoldMs ?? demo.maxHoldMs,
-        masterWidth: demo.masterWidth ?? 1920, crf: demo.crf ?? 20, preset: demo.preset ?? 'veryfast'});
+        masterWidth: demo.masterWidth ?? 3840, crf: demo.crf ?? 20, preset: demo.preset ?? 'veryfast'});
       st.trimmedFrames = info.trimmedFrames;
+      st.changes = info.changes;
       st.segment = file;
       st.segmentFrames = info.frames;
       console.log(`  ${file}  ${info.frames} frames @${fps}fps` +

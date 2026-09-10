@@ -171,6 +171,66 @@ for Ava at +8%, never the production bible's human 150 wpm.
   building the ROOT — an unfinished `shorts.json` took the wide render down with it, 3,000
   frames in, with an error naming only the shorts.
 - `anchor-spec` runs BEFORE voice and sync. After a sync, `atWord` holds a frame.
+- **SKIPPING `anchor-spec` LEAVES EVERY CAMERA MOVE DEAD, SILENTLY.** `RecordedStep`
+  reads `zooms[].atWord`; the author writes `wantAtWord`; only that pass converts one
+  to the other. Miss it and every zoom falls back to the CLIP's anchor, so all the
+  targets collapse onto one frame and the camera sits punched in on the mark for the
+  whole beat — the page is never shown whole. Lint passes, sync passes, the render is
+  clean. Found on 2026-09-10 with all four Apple cuts already voiced (one delivered),
+  by rendering a still mid-beat. Audit for it with:
+  `node -e "...scenes...clips...zooms.filter(z=>z.atWord==null)"` — a zoom carrying only
+  `wantAtWord` in a SYNCED spec has never been anchored.
+- **A PUNCH-IN TAKES THE PARAGRAPH'S MARK, NOT THE HEADING'S, ON A CENTRED PAGE.**
+  `windowFor` frames a mark from its LEADING edge (right for a terminal, wrong for
+  apple.com): a 102px heading mark put the window's left edge inside a centred 644px
+  paragraph, so the frame read *"Noise out / Powered by advanced co"*. Mark the body
+  text as well as the heading — the wide rect frames the block, and the heading mark
+  is what the callout points at.
+- **BACK UP `public/rec/<slug>/` BEFORE RE-RECORDING.** The recorder empties the
+  directory as it starts, so a failed take leaves no footage at all. Paid for the same day:
+  three demos were re-recorded with an extra paragraph mark, the needle did not resolve on
+  any of them (`0 row(s) were searched`), the recorder correctly refused to write — and all
+  three cuts were left with no footage until the backups went back.
+- **AN ANCHOR AUTHORED AS A FRACTION IS A GUESS, AND `scripts/retarget-anchors.mjs` IS THE
+  MEASUREMENT.** After sync the real word timings exist, so every drawn element can be moved
+  onto the word that names it. Measured before it existed: 13 of 50 elements on the iPhone
+  18 Pro cut, 9 of 33 on the Duo, 9 of 26 on the Watch, 11 of 30 on AirPods — all four
+  lint-clean and one already delivered. It refuses to touch `recordedStep` (anchor-spec owns
+  that), will not move an anchor past 70%, and ignores a word the scene says more than twice
+  (a chart's bars are deliberately never read aloud — LAW 0f.3 — so matching them is a worse
+  guess than the author's spread).
+- **THE CAPTURE RATE IS SET BY `deviceScaleFactor`, AND NOTHING DOWNSTREAM CAN FIX IT.**
+  Owner, 2026-09-11: *"why are the screen recordings laggy… is it because I am connected to
+  a 4K TV?"* No — takes are headless, so the page rasterises offscreen and the display never
+  enters the path. `Page.startScreencast` is a request/ack loop, so the frame rate is set by
+  how fast Chrome can PAINT one frame. Measured with `scripts/test-capture-rate.mjs`, same
+  page, same 1200px scroll: **dsf 1.2 → 21.6 fps · dsf 2 → 9.9 · dsf 2.4 → 7.7 · dsf 4 → 2.9**.
+  A shipped take at dsf 4 (`apple-airpods-page/seg-01.mp4`) is 269 frames long and contains
+  **70 distinct pictures**. Two dead ends worth not re-walking: `maxWidth` (which downscales
+  inside the browser) cut bytes per frame from 1444KB to 278KB and moved fps by 0.8, because
+  the cost is painting, not transport; and GPU flags bought nothing at dsf 4. Headful roughly
+  doubles it at dsf 2 (9.9 → 17.4) and is worth reaching for when a beat has no punch-in.
+  **The default is now 2.4** — the smallest factor that still feeds a 2x punch at 1920
+  delivery (1600 × 2.4 = 3840) — with JPEG quality 80 and `masterWidth` 3840.
+- **A CLIP'S PAUSES ABSORB THE STRETCH; ITS MOTION NEVER DOES** (`src/recWarp.mjs`).
+  `RecordedStep` spreads a clip across the airtime a beat owns so a typed line lands as it is
+  discussed — worth keeping. It used to do that with ONE `playbackRate` over the whole file,
+  which slowed the moving parts along with the still ones: measured 0.40x-0.79x across the
+  thirteen Apple beats, turning ~3 captured fps into ~1.2 on screen. Now the bake records
+  which frames are a new picture (`clip.changes`) and the renderer mounts one piece per
+  moving run at 1.0x, putting the slack into the pauses. A clip baked before that map existed
+  has no `changes` and takes the old uniform path, so nothing already rendered moves.
+- **`anchor-spec` ASKS `recWarp` WHEN THE PICTURE SETTLES, NOT WHEN THE FILE ENDS.** It used
+  to place a callout after `start + clip.frames`, i.e. assuming 1:1 playback. On the AirPods
+  cut that put a highlight on screen at frame 2047 pointing at a page that did not arrive
+  until ~2120 — the owner's *"the highlight already comes into the screen before the
+  to-be-highlighted text appears… somehow it matches later"*. Both the renderer and the
+  solver now import the same module, so they cannot drift apart again.
+- **RUN `retarget-anchors --preflight` BEFORE VOICING.** It needs no audio: it reads the
+  narration and the labels out of the built spec and names every cell whose own word is only
+  spoken past 70% of its beat. Those are rewrites, and a rewrite discovered after the voice
+  exists costs a re-voice, a re-sync and another audit — three of them, one at a time, is how
+  this got written.
 - Markers fill stage items IN ORDER, so a stage array ordered differently from the narration
   crosses every anchor. That was 7 of 17 sync mismatches in one pass.
 - A mark needle must live inside ONE element's own text nodes; `"62.7% for $26K"` is split
@@ -1957,6 +2017,48 @@ base64 **863,976** characters (doc says 880,396). `decode_report.py` returns
 (26 steps, 14 typing blocks). It copies chapter 1's `allure-results-bdd` in during prep
 rather than re-running behave on camera, and it asserts that the typed blocks reconstruct
 both source files byte-for-byte. Not yet recorded.
+
+## Apple September 2026 — five cuts (started 2026-09-10)
+
+The owner asked for a video per product plus a combined cut, wide AND shorts, in a wireframe
+style rather than photoreal, with the price rises drawn as a graph. Everything factual lives in
+`briefs/apple/00-event-dossier.md`, which opens with the rule that produced it: **write from the
+DIFF against last year, not from this year's spec sheet.** Two beats shipped in the first pass
+describing things that had not changed (the bezel, the full-width plateau), and the owner caught
+both.
+
+**One scene type, `APPLE_STAGE`, dispatching twelve depictions** in `src/appleViz.tsx`
+(`pro-back`, `pro-front`, `duo-pair`, `watch-face`, `airpods`, `die-floorplan`, `compare-bars`,
+`price-ladder`, `price-rise`, `aperture-iris`, `reference-image`, `finish-palette`) — the
+`uvViz`/`astraViz` shape, and the reason `subTypeOf` in the linter has an `APPLE_STAGE` branch:
+without it eleven distinct pictures count as one over-used component.
+
+**Every device is drawn from real millimetres** — `src/appleGeom.ts`, with the camera island
+taken off Apple's own Accessory Design Guidelines (sheet 62.1) after the owner sent the CAD.
+Lens spacing is 1.45 lens diameters centre to centre and the inner ring sits at 0.80 of the
+outer radius; the first draft packed them at 1.08 with a bullseye and he rejected it on sight.
+
+**Shared harness:** `scripts/lib/apple-build.mjs` (FPW 9.5, PAD 30, the thumbnail contract, the
+house voice for this series, and the FINISHES table with honest provenance — only Burgundy is
+measured). The nine topic builders live in `briefs/apple/build_*.mjs` — `topics/*/` tracks only
+`long.json` and `shorts.json`, so a builder left there is ignored by git and the spec ends up
+committed without the source that generates it.
+
+**Title contract:** `Apple September 2026 — <product>`. **Thumbnail contract:** badge = the
+product, title = the promise in plain words ("EVERYTHING YOU NEED TO KNOW"), note = the
+qualifier. The owner's words: *"Why the fuck do you say small shitty words that users wont even
+touch."*
+
+| topic | wide | short | notes |
+|---|---|---|---|
+| `apple-18-pro` | 6:29, delivered | delivered | re-anchor + re-render pending (dead zooms) |
+| `apple-duo` | 4:30, rendered | built, voiced, synced (42.0s) | re-anchor + re-render pending |
+| `apple-watch` | 4:14, synced | built, voiced, synced (45.2s) | script had a duplicated clause; re-voice |
+| `apple-airpods` | 4:24 | built, voiced, synced (35.7s) | 13 scenes, from apple.com/airpods-5/specs |
+| `apple-event` | 5:45 est, voiced | — | the combined cut; one quoted page beat |
+
+**The defect that touched all four:** see the recording landmines above — `anchor-spec` was never
+run, so every camera move was dead and the page was never shown whole.
 
 ## RESUME HERE — Allure chapter 1 (left rendering 2026-09-09 ~09:15)
 

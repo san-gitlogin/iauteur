@@ -204,5 +204,18 @@ export const writeSegment = ({frames, dir, t0, t1, out, fps = 30, minFrames = 2,
      '-show_entries', 'stream=nb_read_frames', '-of', 'csv=p=0', outAbs],
   ).toString().trim().split(/\r?\n/)[0]);
 
-  return {out: outAbs, frames: real, planned: count2, beforeTrim: count, trimmedFrames: trimmed, fps, sourceFrames: new Set(plan).size};
+  // ── THE MOTION MAP ─────────────────────────────────────────────────────────
+  // Which output frames are a NEW picture. The resampler repeats a source file across a
+  // still stretch, so a change of filename is a change of picture — free to compute here
+  // and impossible to recover later without decoding the mp4 and diffing it.
+  //
+  // `src/recWarp.mjs` turns this into pacing: moving runs play at their recorded speed and
+  // the PAUSES absorb whatever slack the beat has, instead of one uniform slow-down that
+  // drags the motion down with the stills. `anchor-spec` reads the same map to know when
+  // the picture actually settles, so a callout never lands on a page that is still moving.
+  const changes = [];
+  for (let i = 0; i < plan.length; i++) if (i === 0 || plan[i] !== plan[i - 1]) changes.push(i);
+
+  return {out: outAbs, frames: real, planned: count2, beforeTrim: count, trimmedFrames: trimmed,
+    fps, sourceFrames: new Set(plan).size, changes};
 };

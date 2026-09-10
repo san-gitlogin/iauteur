@@ -1,0 +1,742 @@
+{
+  "meta": {
+    "topic": "Apple September 2026 — AirPods 5, explained",
+    "format": "long",
+    "fps": 30,
+    "subject": "AirPods 5",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "screenplay": "documentary",
+    "onePayoff": "what open-ear noise cancellation means on AirPods 5, and which of the two models to buy",
+    "openLoop": "Can you cancel noise without plugging the hole?",
+    "analogy": "Cancelling noise with no seal to help you.",
+    "seo": {
+      "title": "Apple September 2026 — AirPods 5, explained",
+      "description": "AirPods 5 bring Active Noise Cancellation to an open-ear design — up to 1.5x more than AirPods 4, per Apple. The sensors doing it, the four listening modes, the battery figures, and what separates the $129 and $149 models.",
+      "breakdown": "open-ear noise cancellation, the sensors, spatial audio, battery, and the two prices",
+      "pinned": "Would you trade a sealed tip for an open ear if the noise cancelling kept up?",
+      "tags": [
+        "AirPods 5",
+        "AirPods 5 review",
+        "AirPods 5 price",
+        "AirPods 5 vs AirPods 4",
+        "Apple September 2026",
+        "Apple event 2026",
+        "open-ear ANC",
+        "Active Noise Cancellation",
+        "Personalized Spatial Audio",
+        "Adaptive Audio",
+        "Conversation Awareness",
+        "Live Translation AirPods",
+        "AirPods stem volume",
+        "AirPods 5 battery life",
+        "AirPods 5 specs",
+        "H2 chip",
+        "Adaptive EQ",
+        "Voice Isolation",
+        "best earbuds 2026",
+        "should I buy AirPods 5",
+        "AirPods 5 wireless charging case",
+        "Apple keynote 2026"
+      ],
+      "queries": [
+        "AirPods 5 price and features",
+        "what is open-ear noise cancellation",
+        "AirPods 5 vs AirPods 4",
+        "AirPods 5 battery life with ANC"
+      ],
+      "sources": [
+        "apple.com/newsroom — Apple September 2026 event",
+        "apple.com/airpods-5 and apple.com/airpods-5/specs",
+        "apple.com/airpods-5 product page, captured 10 September 2026"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "EVERYTHING YOU NEED TO KNOW",
+    "badge": "AirPods 5",
+    "note": "open-ear noise cancellation",
+    "asset": "si:apple"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "AirPods 5 cancel noise without sealing your ear shut. That's the part worth explaining.",
+      "data": {
+        "headline": "AirPods 5",
+        "subtext": "Noise cancelling, open ear",
+        "kicker": "September 2026",
+        "variant": "plaque",
+        "atWord": 6.167
+      },
+      "durationFrames": 179,
+      "audio": "audio/apple-airpods_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Welcome back. AirPods 5 landed alongside the new iPhones, and the interesting part isn't the sound — it's where the quiet comes from. Today we're going through the noise cancelling, the features underneath it, and the two prices. So can you cancel noise without plugging the hole?",
+      "data": {
+        "title": "Open ear, and still quiet",
+        "subtitle": "AirPods 5, in numbers",
+        "atWord": 16.333
+      },
+      "durationFrames": 486,
+      "audio": "audio/apple-airpods_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "APPLE_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Start with the objects, because the size explains a lot of the engineering. Each bud weighs four point three grams and stands thirty millimetres tall. The case is fifty millimetres across, which is small enough to forget in a pocket. The lid closes over the pair and charges them, one light on the front is the whole readout you get, and the stem hanging below the bud is where the microphones live — which turns out to matter more than anything else here. All of it is rated I P fifty-seven, so dust and a sweaty run are not a problem.",
+      "data": {
+        "appleStage": {
+          "headline": "A bud that weighs [4.3 grams]",
+          "kind": "airpods",
+          "caption": "Case 50.1 mm, bud 30.2 mm",
+          "premise": "Case and bud drawn to the same scale, from Apple's published dimensions.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "The bud",
+              "text": "bud",
+              "sub": "30.2 x 18.3 mm, 4.3 g",
+              "atWord": 12.083
+            },
+            {
+              "label": "Charging case",
+              "text": "case",
+              "sub": "50.1 mm across",
+              "atWord": 22.5
+            },
+            {
+              "label": "The lid",
+              "text": "hinge",
+              "sub": "closes and charges",
+              "atWord": 33.5
+            },
+            {
+              "label": "Status light",
+              "text": "light",
+              "sub": "the whole readout",
+              "atWord": 41.25
+            },
+            {
+              "label": "The stem",
+              "text": "stem",
+              "sub": "where the mics live",
+              "atWord": 47.083
+            }
+          ]
+        }
+      },
+      "durationFrames": 901,
+      "audio": "audio/apple-airpods_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "Here's the claim, in Apple's words, on Apple's own product page. Noise out, magic in. Up to one and a half times more active noise cancellation than AirPods 4 — and Apple calls it the industry's best noise cancellation in an open-ear design. Read that last phrase twice, because open-ear means there is no rubber tip sealing your ear canal, which is the whole story of this product, and the reason it is a chip problem rather than a foam one.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-airpods-page#noise-out",
+              "label": "Apple's own ANC claim",
+              "focus": true,
+              "atWord": 3.333,
+              "zooms": [
+                {
+                  "mark": "noisebody",
+                  "wantAtWord": 19.333,
+                  "atWord": 33.333
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 27.25,
+                  "atWord": 51.75
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Apple's claim, in Apple's words",
+                  "mark": "noisehead",
+                  "wantAtWord": 41.083,
+                  "atWord": 41.083
+                }
+              ],
+              "id": "noise-out",
+              "src": "rec/apple-airpods-page/seg-01.mp4",
+              "frames": 269,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "noisehead": {
+                  "x": 696,
+                  "y": 302,
+                  "w": 102,
+                  "h": 29,
+                  "covers": "Noise out"
+                },
+                "noisebody": {
+                  "x": 526,
+                  "y": 330,
+                  "w": 463,
+                  "h": 29,
+                  "covers": "Powered by advanced computational audio"
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 1600,
+                  "h": 203
+                },
+                {
+                  "x": 478,
+                  "y": 302,
+                  "w": 644,
+                  "h": 169
+                },
+                {
+                  "x": 985,
+                  "y": 599,
+                  "w": 60,
+                  "h": 60
+                },
+                {
+                  "x": 665,
+                  "y": 599,
+                  "w": 53,
+                  "h": 60
+                },
+                {
+                  "x": 344,
+                  "y": 599,
+                  "w": 43,
+                  "h": 60
+                },
+                {
+                  "x": 985,
+                  "y": 673,
+                  "w": 268,
+                  "h": 132
+                },
+                {
+                  "x": 665,
+                  "y": 673,
+                  "w": 267,
+                  "h": 132
+                },
+                {
+                  "x": 344,
+                  "y": 673,
+                  "w": 257,
+                  "h": 111
+                },
+                {
+                  "x": 985,
+                  "y": 673,
+                  "w": 197,
+                  "h": 20
+                },
+                {
+                  "x": 665,
+                  "y": 673,
+                  "w": 121,
+                  "h": 20
+                },
+                {
+                  "x": 344,
+                  "y": 673,
+                  "w": 109,
+                  "h": 20
+                }
+              ],
+              "shows": "Noise out. Magic in."
+            }
+          ],
+          "sourceNote": "Apple, AirPods 5 product page, captured 10 September 2026",
+          "caption": "Noise out. Magic in.",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 752,
+      "audio": "audio/apple-airpods_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "APPLE_STAGE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So why is open ear the hard version? A sealed tip blocks sound with rubber, physically, before any chip is involved. An open bud has no seal at all, which means every decibel you don't hear was cancelled by computation instead.",
+      "data": {
+        "appleStage": {
+          "headline": "No seal means [no head start]",
+          "kind": "compare-bars",
+          "caption": "Where the quiet comes from",
+          "premise": "Apple's own relative figure: AirPods 4 as the baseline, AirPods 5 against it.",
+          "color": "purple",
+          "cells": [
+            {
+              "label": "AirPods 5",
+              "text": "bar",
+              "sub": "up to 1.5x more ANC",
+              "value": 150,
+              "atWord": 7.917
+            },
+            {
+              "label": "AirPods 4",
+              "text": "bar",
+              "sub": "the baseline",
+              "value": 100,
+              "atWord": 3.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 434,
+      "audio": "audio/apple-airpods_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "APPLE_STAGE",
+      "transition": "iris",
+      "background": "zoneC",
+      "narration": "What does the listening, though? Two beamforming microphones face outwards — beamforming just means the pair work out which direction a sound came from. A third microphone points inwards, into your ear, checking what actually got through. An optical sensor knows when the bud is in. And a second accelerometer feels your jaw move as you talk, so the H2 chip can tell your voice from everybody else's in a noisy room.",
+      "data": {
+        "appleStage": {
+          "headline": "Five sensors, [one H2 chip]",
+          "kind": "airpods",
+          "caption": "What the H2 chip hears",
+          "premise": "Dual beamforming mics, an inward mic, an optical sensor and two accelerometers.",
+          "color": "green",
+          "cells": [
+            {
+              "label": "Two beamforming mics",
+              "text": "stem",
+              "sub": "they hear direction",
+              "atWord": 5.5
+            },
+            {
+              "label": "Inward-facing mic",
+              "text": "bud",
+              "sub": "checks what got through",
+              "atWord": 26.083
+            },
+            {
+              "label": "Optical in-ear sensor",
+              "text": "bud",
+              "sub": "knows when you wear it",
+              "atWord": 28.333
+            },
+            {
+              "label": "Speech accelerometer",
+              "text": "stem",
+              "sub": "feels your jaw move",
+              "atWord": 41.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 713,
+      "audio": "audio/apple-airpods_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "APPLE_STAGE",
+      "transition": "slide",
+      "background": "zoneC",
+      "narration": "All of that feeds four things you'll use without thinking about them. Transparency lets the room back in, which means you still hear a platform announcement. Adaptive Audio blends the two as your surroundings change, because a train is not a library. Conversation Awareness drops the volume the moment you start talking. And Live Translation runs hands-free, so a language you don't speak arrives in your ear while the other person is still saying it, without you touching anything at all.",
+      "data": {
+        "appleStage": {
+          "headline": "Four modes, [no menu]",
+          "kind": "airpods",
+          "caption": "Transparency, Adaptive, Awareness, Translation",
+          "premise": "Four listening behaviours on one pair of buds, switched by the chip, not by you.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "Transparency",
+              "text": "bud",
+              "sub": "the room comes back",
+              "atWord": 9.833
+            },
+            {
+              "label": "Adaptive Audio",
+              "text": "stem",
+              "sub": "blends the two, live",
+              "atWord": 22.75
+            },
+            {
+              "label": "Conversation Awareness",
+              "text": "stem",
+              "sub": "drops when you speak",
+              "atWord": 36
+            },
+            {
+              "label": "Live Translation",
+              "text": "bud",
+              "sub": "hands-free",
+              "atWord": 46.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 823,
+      "audio": "audio/apple-airpods_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "Further down the same page, Apple lists what changed underneath. A redesigned multiport acoustic architecture, a next-generation Adaptive EQ, Personalized Spatial Audio with dynamic head tracking, and Voice Isolation, which is the one that helps the person on the other end of a call rather than you. Four names for four separate jobs, and the section is worth pausing on if you're deciding between these and the Pro.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-airpods-page#spatial",
+              "label": "the audio section",
+              "focus": true,
+              "atWord": 2.333,
+              "zooms": [
+                {
+                  "mark": "spathead",
+                  "wantAtWord": 20.167,
+                  "atWord": 35.583
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 30.167,
+                  "atWord": 48.25
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Sound placed in the room",
+                  "mark": "spathead",
+                  "wantAtWord": 38.917,
+                  "atWord": 38.917
+                }
+              ],
+              "id": "spatial",
+              "src": "rec/apple-airpods-page/seg-02.mp4",
+              "frames": 233,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "spathead": {
+                  "x": 894,
+                  "y": 839,
+                  "w": 212,
+                  "h": 20,
+                  "covers": "Personalized Spatial Audio"
+                },
+                "spatbody": {
+                  "x": 543,
+                  "y": -28,
+                  "w": 463,
+                  "h": 29,
+                  "covers": "AirPods 5 feature even better sound quality"
+                }
+              },
+              "ink": [
+                {
+                  "x": 252,
+                  "y": 0,
+                  "w": 1096,
+                  "h": 814
+                },
+                {
+                  "x": 100,
+                  "y": 234,
+                  "w": 372,
+                  "h": 580
+                },
+                {
+                  "x": 1276,
+                  "y": 234,
+                  "w": 324,
+                  "h": 580
+                },
+                {
+                  "x": 502,
+                  "y": 839,
+                  "w": 309,
+                  "h": 61
+                },
+                {
+                  "x": 894,
+                  "y": 839,
+                  "w": 292,
+                  "h": 61
+                },
+                {
+                  "x": 1286,
+                  "y": 839,
+                  "w": 288,
+                  "h": 61
+                },
+                {
+                  "x": 110,
+                  "y": 839,
+                  "w": 272,
+                  "h": 61
+                },
+                {
+                  "x": 502,
+                  "y": 839,
+                  "w": 233,
+                  "h": 20
+                },
+                {
+                  "x": 894,
+                  "y": 839,
+                  "w": 212,
+                  "h": 20
+                },
+                {
+                  "x": 1286,
+                  "y": 839,
+                  "w": 116,
+                  "h": 20
+                }
+              ],
+              "shows": "Personalized Spatial Audio"
+            }
+          ],
+          "sourceNote": "Apple, AirPods 5 product page, captured 10 September 2026",
+          "caption": "What changed underneath",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 724,
+      "audio": "audio/apple-airpods_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "APPLE_STAGE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Two of those deserve plain English. Adaptive EQ measures what's actually reaching your eardrum and corrects the low end for the shape of your ear, which is why a loosely fitting bud still sounds full. And spatial audio with head tracking places the sound in the room instead of inside your skull, so when you turn to look at something, the dialogue stays on the screen.",
+      "data": {
+        "appleStage": {
+          "headline": "Sound placed in [the room]",
+          "kind": "airpods",
+          "caption": "Adaptive EQ and head tracking",
+          "premise": "Both run inside the bud: the inward mic corrects the sound, the motion sensor anchors it.",
+          "color": "purple",
+          "cells": [
+            {
+              "label": "Adaptive EQ",
+              "text": "bud",
+              "sub": "tuned to your ear",
+              "atWord": 6.917
+            },
+            {
+              "label": "Personalized Spatial Audio",
+              "text": "bud",
+              "sub": "placed in the room",
+              "atWord": 28.917
+            },
+            {
+              "label": "Dynamic head tracking",
+              "text": "bud",
+              "sub": "the sound stays put",
+              "atWord": 31
+            }
+          ]
+        }
+      },
+      "durationFrames": 603,
+      "audio": "audio/apple-airpods_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "APPLE_STAGE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Battery is where the two models separate for the first time, and the gap is narrower than the price makes it sound. With noise cancellation running, the Wireless Charging Case pair buys you about an extra hour in the ear and two more from the case. Both do the same trick when you're late out of the door: five minutes sitting in the case is worth roughly an hour of listening, which in practice is the number that matters most.",
+      "data": {
+        "appleStage": {
+          "headline": "An hour apart, [not a day]",
+          "kind": "compare-bars",
+          "caption": "Hours with noise cancellation on",
+          "premise": "Apple's figures, ANC enabled: time in the ear, and total time with the case.",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "With the case, $149",
+              "text": "bar",
+              "sub": "22 hours",
+              "value": 22,
+              "atWord": 15
+            },
+            {
+              "label": "With the case, $129",
+              "text": "bar",
+              "sub": "20 hours",
+              "value": 20,
+              "atWord": 8
+            },
+            {
+              "label": "In the ear, $149",
+              "text": "bar",
+              "sub": "5 hours",
+              "value": 5,
+              "atWord": 27.917
+            },
+            {
+              "label": "In the ear, $129",
+              "text": "bar",
+              "sub": "4 hours",
+              "value": 4,
+              "atWord": 21.417
+            }
+          ]
+        }
+      },
+      "durationFrames": 672,
+      "audio": "audio/apple-airpods_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "APPLE_STAGE",
+      "transition": "whippan",
+      "background": "zoneC",
+      "narration": "The controls all sit on the stem, and they're worth learning, because the alternative is digging your phone out. Press once to play or pause, twice to skip forward, three times to go back, and press and hold to switch listening modes. Then there's the one that isn't on both models: on the higher-priced pair you swipe up or down the stem to change the volume, which sounds minor until you've spent a month reaching into a pocket to turn something down.",
+      "data": {
+        "appleStage": {
+          "headline": "Swipe the [stem] for volume",
+          "kind": "airpods",
+          "caption": "Press, hold, swipe",
+          "premise": "Every control is a force sensor in the stem. The swipe ships on one model only.",
+          "color": "green",
+          "cells": [
+            {
+              "label": "Press once, twice, three times",
+              "text": "stem",
+              "sub": "play, skip, back",
+              "atWord": 14
+            },
+            {
+              "label": "Press and hold",
+              "text": "stem",
+              "sub": "switch listening mode",
+              "atWord": 25.917
+            },
+            {
+              "label": "Swipe up or down",
+              "text": "stem",
+              "sub": "volume, without your phone",
+              "atWord": 42.833
+            },
+            {
+              "label": "On one model only",
+              "text": "case",
+              "sub": "the Wireless Charging Case pair",
+              "atWord": 39.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 731,
+      "audio": "audio/apple-airpods_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Now, the money. AirPods 5 start at a hundred and twenty-nine dollars, and the Wireless Charging Case model is a hundred and forty-nine. Twenty dollars buys wireless charging, an extra hour of battery, and that swipe.",
+      "data": {
+        "appleStage": {
+          "headline": "Twenty dollars [apart]",
+          "kind": "price-ladder",
+          "caption": "AirPods 5, US pricing",
+          "premise": "The step beside the row is the difference between the two models.",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "AirPods 5",
+              "text": "tier",
+              "value": 129,
+              "atWord": 4.667
+            },
+            {
+              "label": "With Wireless Charging Case",
+              "text": "tier",
+              "value": 149,
+              "atWord": 12.75
+            }
+          ]
+        }
+      },
+      "durationFrames": 398,
+      "audio": "audio/apple-airpods_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That's the pair: noise cancelling that works without a seal, four listening modes you never have to switch by hand, and twenty dollars between the two models. The whole event, in one video, is next.",
+      "data": {
+        "headline": "The whole event, next",
+        "subtext": "Would you give up the seal?",
+        "atWord": 12
+      },
+      "durationFrames": 365,
+      "audio": "audio/apple-airpods_long_s13.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

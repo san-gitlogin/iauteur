@@ -1,22 +1,224 @@
 {
   "meta": {
-    "topic": "Apple September 2026 — iPhone Duo, explained",
-    "format": "short",
+    "topic": "Apple September 2026 — iPhone Duo",
+    "format": "shorts",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "subject": "iPhone Duo",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "screenplay": "documentary",
+    "onePayoff": "the iPhone Duo puts its selfie camera under the inner display, so the big screen has no cutout",
+    "openLoop": "Where did the selfie camera go?",
+    "seo": {
+      "title": "The foldable iPhone hides its camera under the screen #apple #iphoneduo",
+      "description": "iPhone Duo puts the FaceTime camera under the inner display — no notch, no punch hole. Plus the two numbers that decide it: 254 grams, and $1,999 to start.",
+      "breakdown": "the under-display camera, the two screens, the weight and the price",
+      "pinned": "Would you carry 254 grams for a screen that folds?",
+      "tags": [
+        "iPhone Duo",
+        "foldable iPhone",
+        "iPhone Duo price",
+        "Apple September 2026",
+        "under-display camera",
+        "Apple event 2026",
+        "shorts"
+      ],
+      "queries": [
+        "iPhone Duo price",
+        "iPhone Duo under display camera"
+      ],
+      "sources": [
+        "apple.com/newsroom — Apple September 2026 event",
+        "apple.com/iphone-duo"
+      ]
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
     "channel": "THE NBX STUDIO",
     "logo": "img:channel_logo.png"
   },
+  "thumbnail": {
+    "title": "EVERYTHING YOU NEED TO KNOW",
+    "badge": "iPhone Duo",
+    "note": "the first foldable iPhone",
+    "asset": "si:apple"
+  },
   "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
+    "title": "EVERYTHING YOU NEED TO KNOW",
+    "badge": "iPhone Duo",
+    "asset": "si:apple",
     "frames": 2
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "The iPhone Duo hides its selfie camera under the screen. No notch, no hole.",
+      "data": {
+        "headline": "The camera is under it",
+        "subtext": "iPhone Duo",
+        "kicker": "September 2026",
+        "variant": "stack",
+        "atWord": 4.667
+      },
+      "durationFrames": 166,
+      "audio": "audio/apple-duo_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "On the inner display the FaceTime camera sits beneath the panel, so nothing breaks the surface. Every rival foldable still punches a hole in its big screen.",
+      "data": {
+        "appleStage": {
+          "headline": "Nothing breaks [the surface]",
+          "kind": "duo-pair",
+          "caption": "Under-display FaceTime camera",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "Under-display camera",
+              "text": "selfie",
+              "sub": "appears when needed",
+              "atWord": 2.833
+            },
+            {
+              "label": "No cutout",
+              "text": "inner",
+              "sub": "an uninterrupted panel",
+              "atWord": 9.5
+            }
+          ]
+        }
+      },
+      "durationFrames": 307,
+      "audio": "audio/apple-duo_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "APPLE_STAGE",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Open the Duo and you get a small tablet with two apps side by side. Shut it, and the outer screen is a whole phone.",
+      "data": {
+        "appleStage": {
+          "headline": "A phone, then [a tablet]",
+          "kind": "duo-pair",
+          "caption": "Two screens, one device",
+          "color": "purple",
+          "cells": [
+            {
+              "label": "Inner display",
+              "text": "inner",
+              "sub": "two apps at once",
+              "atWord": 2.333
+            },
+            {
+              "label": "Outer display",
+              "text": "outer",
+              "sub": "a whole phone, shut",
+              "atWord": 7.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 218,
+      "audio": "audio/apple-duo_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "APPLE_STAGE",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Two halves and a hinge weigh something: two hundred and fifty four grams, against two hundred and eleven for an iPhone 18 Pro.",
+      "data": {
+        "appleStage": {
+          "headline": "[254 grams], and you feel it",
+          "kind": "compare-bars",
+          "caption": "Weight, in grams",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "iPhone Duo",
+              "text": "bar",
+              "sub": "254 g",
+              "value": 254,
+              "atWord": 6.917
+            },
+            {
+              "label": "iPhone 18 Pro",
+              "text": "bar",
+              "sub": "211 g",
+              "value": 211,
+              "atWord": 11
+            }
+          ]
+        }
+      },
+      "durationFrames": 251,
+      "audio": "audio/apple-duo_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "APPLE_STAGE",
+      "transition": "whippan",
+      "background": "zoneC",
+      "narration": "The Duo starts at one thousand nine hundred and ninety nine dollars, which is eight hundred more than an iPhone 18 Pro.",
+      "data": {
+        "appleStage": {
+          "headline": "[$1,999] to start",
+          "kind": "compare-bars",
+          "caption": "$800 more than the 18 Pro",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "iPhone Duo",
+              "text": "bar",
+              "sub": "$1,999",
+              "value": 1999,
+              "atWord": 3
+            },
+            {
+              "label": "iPhone 18 Pro",
+              "text": "bar",
+              "sub": "$1,199",
+              "value": 1199,
+              "atWord": 8.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 212,
+      "audio": "audio/apple-duo_shorts_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The full iPhone Duo breakdown is on the channel.",
+      "data": {
+        "headline": "Worth two thousand?",
+        "subtext": "Full breakdown on the channel",
+        "atWord": 2.917
+      },
+      "durationFrames": 107,
+      "audio": "audio/apple-duo_shorts_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
 }

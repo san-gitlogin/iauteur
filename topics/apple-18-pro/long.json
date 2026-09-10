@@ -19,25 +19,13 @@
       "pinned": "Is a camera that can prove a photo is real worth $100 more to you?",
       "tags": [
         "iPhone 18 Pro",
-        "iPhone 18 Pro review",
-        "iPhone 18 Pro vs iPhone 17 Pro",
+        "iPhone 18 Pro vs 17 Pro",
         "Apple September 2026",
-        "Apple event 2026",
         "A20 Pro",
-        "A20 Pro vs A19 Pro",
         "Apple Reference Image",
-        "variable aperture iPhone",
-        "iPhone 18 Pro camera",
+        "variable aperture",
         "iPhone 18 Pro price",
-        "iPhone price increase",
-        "iPhone 18 Pro Max",
-        "should I upgrade to iPhone 18 Pro",
-        "iOS 27",
-        "Dynamic Island",
-        "C2 modem",
-        "iPhone 18 Pro specs",
-        "Apple keynote",
-        "best iPhone 2026"
+        "Apple event"
       ],
       "queries": [
         "what is new in iPhone 18 Pro",
@@ -64,8 +52,8 @@
   "thumbnail": {
     "title": "EVERYTHING THAT ACTUALLY CHANGED",
     "badge": "iPhone 18 Pro",
-    "asset": "si:apple",
-    "note": "and what only looks new"
+    "note": "and what only looks new",
+    "asset": "si:apple"
   },
   "scenes": [
     {
@@ -118,7 +106,7 @@
               "label": "Camera plateau",
               "text": "plateau",
               "sub": "introduced on the 17 Pro",
-              "atWord": 8.167
+              "atWord": 13.167
             },
             {
               "label": "Same body",
@@ -130,7 +118,7 @@
               "label": "About 2 mm deeper",
               "text": "lens",
               "sub": "room for the new module",
-              "atWord": 33.083
+              "atWord": 39.667
             },
             {
               "label": "Same 6.3-inch screen",
@@ -163,7 +151,7 @@
               "label": "Burgundy",
               "sub": "#2a1618,#a16974",
               "text": "finish",
-              "atWord": 7.167
+              "atWord": 10.25
             },
             {
               "label": "Glacier",
@@ -214,19 +202,19 @@
               "label": "Same borders",
               "text": "body",
               "sub": "identical to the 17 Pro",
-              "atWord": 21.083
+              "atWord": 15.083
             },
             {
               "label": "Dynamic Island",
               "text": "island",
               "sub": "three Live Activities",
-              "atWord": 34.083
+              "atWord": 30.5
             },
             {
               "label": "A timer, a flight, a match",
               "text": "island",
               "sub": "sharing one space",
-              "atWord": 40.917
+              "atWord": 42
             }
           ]
         }
@@ -294,15 +282,25 @@
               "ref": "rec:apple-18-pro-page#aperture-line",
               "label": "the variable aperture line",
               "focus": true,
-              "atWord": 2,
+              "atWord": 1.167,
               "zooms": [
                 {
                   "mark": "aperture",
-                  "wantAtWord": 8.833
+                  "wantAtWord": 7.167,
+                  "atWord": 18.917
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 17.583
+                  "wantAtWord": 11.75,
+                  "atWord": 27.417
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "The aperture line, in full",
+                  "mark": "aperture",
+                  "wantAtWord": 18.5,
+                  "atWord": 23.083
                 }
               ],
               "id": "aperture-line",
@@ -417,7 +415,8 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
       "durationFrames": 455,
@@ -475,7 +474,7 @@
       "type": "APPLE_STAGE",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "And this is the one I did not see coming. Apple Reference Image signs a photo while the sensor is still reading it, and that signature binds to the pixels themselves rather than sitting in a file header. Copy the photo, paint something out of the middle, and the copy stops matching its own signature. So the original stays provable, and the edited version cannot borrow its credibility.",
+      "narration": "And this is the one I did not see coming. Apple Reference Image signs a photo while the sensor is still reading it, and that signature binds to the pixels themselves rather than sitting in a file header. Copy the photo, then edit it — paint something out of the middle — and the copy stops matching its own signature when anything checks. So the original stays provable, and the version somebody altered cannot borrow that credibility.",
       "data": {
         "appleStage": {
           "headline": "A photo that can [prove] it is a photo",
@@ -487,27 +486,27 @@
             {
               "label": "capture",
               "text": "capture",
-              "atWord": 6.083
+              "atWord": 6.5
             },
             {
               "label": "signed",
               "text": "sign",
-              "atWord": 12.167
+              "atWord": 12.917
             },
             {
               "label": "edited",
               "text": "edit",
-              "atWord": 23.167
+              "atWord": 26
             },
             {
               "label": "checked",
               "text": "check",
-              "atWord": 31.333
+              "atWord": 32
             }
           ]
         }
       },
-      "durationFrames": 656,
+      "durationFrames": 716,
       "audio": "audio/apple18_long_s09.mp3",
       "timingSource": "tts"
     },
@@ -542,7 +541,7 @@
               "label": "First 2nm phone chip",
               "text": "io",
               "sub": "more transistors to spend",
-              "atWord": 30.917
+              "atWord": 32.083
             }
           ]
         }
@@ -576,13 +575,13 @@
               "label": "Neural Accelerators",
               "text": "gpu",
               "sub": "2x FP8 throughput",
-              "atWord": 18.083
+              "atWord": 20.167
             },
             {
               "label": "Where it lands",
               "text": "io",
               "sub": "editing and games",
-              "atWord": 31.083
+              "atWord": 36.833
             }
           ]
         }
@@ -596,7 +595,7 @@
       "type": "APPLE_STAGE",
       "transition": "iris",
       "background": "zoneC",
-      "narration": "Here's the figure that actually moved. The Neural Engine went from sixteen cores to thirty two. Both the A19 Pro and the A18 Pro carried sixteen, so this is the first real doubling in three years. Memory bandwidth rose fifty percent alongside it, which matters because a starved core is an idle core, and together that is why Siri can answer from your own mail without sending it away.",
+      "narration": "Here's the figure that actually moved. The Neural Engine went from sixteen cores to thirty two. Both the A19 Pro and the A18 Pro carried sixteen, so this is the first real doubling in three years. Memory bandwidth rose fifty percent alongside it, and that pair is what lets Siri answer from your own mail on the phone itself. It matters because a starved core is an idle core, so doubling the engine without feeding it would have bought nothing at all.",
       "data": {
         "appleStage": {
           "headline": "The Neural Engine [doubled]",
@@ -610,30 +609,30 @@
               "label": "Neural Engine",
               "text": "neural",
               "sub": "32 total cores",
-              "atWord": 7.833
+              "atWord": 6.5
             },
             {
               "label": "A19 Pro and A18 Pro",
               "text": "io",
               "sub": "sixteen apiece",
-              "atWord": 20.583
+              "atWord": 15.333
             },
             {
               "label": "50% more bandwidth",
               "text": "io",
               "sub": "a starved core is idle",
-              "atWord": 32.667
+              "atWord": 32.583
             },
             {
               "label": "Siri, on the phone",
               "text": "io",
               "sub": "your mail stays yours",
-              "atWord": 38.917
+              "atWord": 41.417
             }
           ]
         }
       },
-      "durationFrames": 683,
+      "durationFrames": 774,
       "audio": "audio/apple18_long_s12.mp3",
       "timingSource": "tts"
     },
@@ -642,7 +641,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Apple's page puts the same numbers on the record. Scroll to the performance section and the copy names a dual sixteen core Neural Engine and fifty percent higher memory bandwidth, right under the chip itself.",
+      "narration": "Apple's page puts the same numbers on the record. Scroll to the performance section and the copy names a dual sixteen core Neural Engine and fifty percent higher memory bandwidth, right under the chip itself. Bandwidth is the quiet half of that pair, and it decides how fast data reaches the cores. A core waiting on memory is a core doing nothing, which is why Apple lists the two figures together rather than leading with the core count on its own.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -650,15 +649,25 @@
               "ref": "rec:apple-18-pro-page#performance",
               "label": "the A20 Pro section",
               "focus": true,
-              "atWord": 3.833,
+              "atWord": 2.833,
               "zooms": [
                 {
                   "mark": "perfhead",
-                  "wantAtWord": 8.083
+                  "wantAtWord": 16.833,
+                  "atWord": 31.417
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 13.75
+                  "wantAtWord": 25.333,
+                  "atWord": 48.833
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Apple's own claim for the A20 Pro",
+                  "mark": "perfhead",
+                  "wantAtWord": 37.75,
+                  "atWord": 37.75
                 }
               ],
               "id": "performance",
@@ -731,10 +740,11 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 354,
+      "durationFrames": 728,
       "audio": "audio/apple18_long_s13.mp3",
       "timingSource": "tts"
     },
@@ -757,7 +767,7 @@
               "text": "bar",
               "sub": "A20 Pro",
               "value": 100,
-              "atWord": 13.583
+              "atWord": 25.083
             },
             {
               "label": "iPhone 17 Pro",
@@ -793,15 +803,25 @@
               "ref": "rec:apple-18-pro-page#vapor",
               "label": "the vapor chamber section",
               "focus": true,
-              "atWord": 3.25,
+              "atWord": 2.583,
               "zooms": [
                 {
                   "mark": "vaporhead",
-                  "wantAtWord": 10.75
+                  "wantAtWord": 8.583,
+                  "atWord": 20.75
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 16.833
+                  "wantAtWord": 11.75,
+                  "atWord": 25.333
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Three times the surface area",
+                  "mark": "vaporhead",
+                  "wantAtWord": 18.167,
+                  "atWord": 21.75
                 }
               ],
               "id": "vapor",
@@ -946,7 +966,8 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
       "durationFrames": 413,
@@ -972,14 +993,14 @@
               "text": "bar",
               "sub": "45 hours, was 39",
               "value": 45,
-              "atWord": 15.5
+              "atWord": 6.25
             },
             {
               "label": "iPhone 18 Pro",
               "text": "bar",
               "sub": "36 hours, was 33",
               "value": 36,
-              "atWord": 6.917
+              "atWord": 17
             },
             {
               "label": "C2 modem",
@@ -1012,11 +1033,21 @@
               "zooms": [
                 {
                   "mark": "batthead",
-                  "wantAtWord": 11.75
+                  "wantAtWord": 9.333,
+                  "atWord": 29.25
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 24.75
+                  "wantAtWord": 17.167,
+                  "atWord": 38.667
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "The battery figure, on the page",
+                  "mark": "batthead",
+                  "wantAtWord": 25.667,
+                  "atWord": 33
                 }
               ],
               "id": "battery",
@@ -1185,7 +1216,8 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
       "durationFrames": 625,
@@ -1257,7 +1289,7 @@
               "text": "rise",
               "value": 1099,
               "sub": "999",
-              "atWord": 23.083
+              "atWord": 9.417
             },
             {
               "label": "iPhone 17",
@@ -1278,7 +1310,7 @@
               "text": "rise",
               "value": 699,
               "sub": "599",
-              "atWord": 35.25
+              "atWord": 33.333
             }
           ]
         }
@@ -1306,14 +1338,14 @@
               "text": "bar",
               "sub": "up ~400% year on year",
               "value": 400,
-              "atWord": 7.833
+              "atWord": 1.083
             },
             {
               "label": "Bill of materials",
               "text": "bar",
               "sub": "up ~38% on a Pro",
               "value": 38,
-              "atWord": 16
+              "atWord": 29.75
             },
             {
               "label": "What you pay",

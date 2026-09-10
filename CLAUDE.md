@@ -1277,6 +1277,15 @@ When the topic names a company / product / person / place, gather its art DURING
 - Validate: `npm run lint` (all topics + gallery; NOTHING renders until it passes)
 - Voiceover text: `npm run voiceover -- <slug>` (derived from spec — NEVER write these files yourself)
 - TTS: `python scripts/voiceover.py topics/<slug>/long.json <slug>_long` then `node scripts/sync.mjs topics/<slug>/long.json out/tts/<slug>_long_timestamps.json <slug>_long`
+- Anchors, for any spec with recorded footage or drawn cells:
+  `node scripts/bake-rec.mjs <spec>` → `node scripts/anchor-spec.mjs <spec>` (BEFORE voicing) →
+  `node scripts/retarget-anchors.mjs <spec> --preflight` (names every cell whose own label is
+  spoken too late to anchor — rewrite those sentences while a re-voice is still free) → voice →
+  sync → `node scripts/retarget-anchors.mjs <spec>` (replaces every authored fraction with the
+  measured moment) → lint → `node scripts/audit-sync.mjs <spec>`.
+  **Skipping `anchor-spec` leaves every camera move dead and the page never shown whole; skipping
+  `retarget-anchors` leaves a quarter to a third of the elements landing off their own words.**
+  Both were measured on four lint-clean, already-voiced cuts (2026-09-10).
 - Preview: `npm run dev` (Studio shows `<slug>-wide-dark|wide-light|short-dark|short-light` + stills per topic)
 - Proof stills: `node scripts/proof.mjs <slug>-wide-dark topics/<slug>/long.json`
 - Package standalone: `npm run package -- <slug>` (self-contained dist/<slug>-video/ + zip: extract → npm install → npm run dev)

@@ -78,9 +78,11 @@
         "subtext": "Series 12 and Ultra 4",
         "kicker": "September 2026",
         "variant": "plaque",
-        "atWord": 8
+        "atWord": 3.75
       },
-      "durationFrames": 173
+      "durationFrames": 148,
+      "audio": "audio/watch_long_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -91,16 +93,18 @@
       "data": {
         "title": "Two watches, one sensor",
         "subtitle": "Series 12 against Ultra 4",
-        "atWord": 16
+        "atWord": 14.333
       },
-      "durationFrames": 420
+      "durationFrames": 400,
+      "audio": "audio/watch_long_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
       "type": "APPLE_STAGE",
       "transition": "wipe",
       "background": "zoneA",
-      "narration": "Start with the big one. Apple Watch Ultra 4 is a forty nine by forty four millimetre case in grade five titanium, twelve millimetres deep, with a flat sapphire front. The Action button sits on the left, where a gloved hand finds it, and the Crown and side button share the right edge. It's built for people who'll actually go somewhere with it.",
+      "narration": "Start with the big one. Apple Watch Ultra 4 is a forty nine by forty four millimetre case in grade five titanium, twelve millimetres deep, with a flat sapphire front. The Action button sits on the left, where a gloved hand finds it, and the Crown and side button share the right edge. The Ultra 4 is built for people who'll actually go somewhere with it.",
       "data": {
         "appleStage": {
           "headline": "Ultra 4: [49 by 44] millimetres",
@@ -114,24 +118,26 @@
               "label": "Titanium case",
               "text": "case",
               "sub": "49 x 44 x 12 mm",
-              "atWord": 13
+              "atWord": 12.667
             },
             {
               "label": "Action Button",
               "text": "action",
               "sub": "left edge, Ultra only",
-              "atWord": 29
+              "atWord": 26.75
             },
             {
               "label": "Digital Crown",
               "text": "crown",
               "sub": "and the side button",
-              "atWord": 37
+              "atWord": 36.167
             }
           ]
         }
       },
-      "durationFrames": 629
+      "durationFrames": 627,
+      "audio": "audio/watch_long_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -151,24 +157,26 @@
               "label": "46 mm and 42 mm",
               "text": "case",
               "sub": "two sizes",
-              "atWord": 8
+              "atWord": 6.667
             },
             {
               "label": "Ceramic",
               "text": "screen",
               "sub": "new this year",
-              "atWord": 20
+              "atWord": 18.5
             },
             {
               "label": "A millimetre taller",
               "text": "band",
               "sub": "ceramic needs the material",
-              "atWord": 30
+              "atWord": 8.25
             }
           ]
         }
       },
-      "durationFrames": 496
+      "durationFrames": 542,
+      "audio": "audio/watch_long_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -183,19 +191,25 @@
               "ref": "rec:apple-watch-page#health",
               "label": "the health section",
               "focus": true,
-              "atWord": 10,
+              "atWord": 2.667,
               "zooms": [
                 {
                   "mark": "healthhead",
-                  "wantAtWord": 22
+                  "wantAtWord": 13.917,
+                  "atWord": 30.833
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 35
-                },
+                  "wantAtWord": 20.167,
+                  "atWord": 39.083
+                }
+              ],
+              "callouts": [
                 {
+                  "text": "Apple's own health section",
                   "mark": "healthhead",
-                  "wantAtWord": 48
+                  "wantAtWord": 29.5,
+                  "atWord": 35.25
                 }
               ],
               "id": "health",
@@ -238,17 +252,20 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 724
+      "durationFrames": 626,
+      "audio": "audio/watch_long_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneC",
-      "narration": "The detail sits further down, and that's the part worth reading. An all new Health Sensing System, working with the S11 chip, taking higher frequency heart readings. Larger, more power efficient green LEDs, so the watch can measure more often without spending the battery it used to.",
+      "narration": "The detail sits further down, and that's the part worth reading. An all new Health Sensing System, working with the S11 chip, taking higher frequency heart readings. Larger, more power efficient green LEDs, which means the watch can measure more often without spending the battery it used to. That trade is the whole story of this year: a sensor reading more often gives you a trend instead of a snapshot, and a trend is the thing you can act on. And it explains why the software arrived now rather than a year ago.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -256,19 +273,25 @@
               "ref": "rec:apple-watch-page#heart",
               "label": "the heart sensor section",
               "focus": true,
-              "atWord": 7,
+              "atWord": 2.917,
               "zooms": [
                 {
                   "mark": "hearthead",
-                  "wantAtWord": 14
+                  "wantAtWord": 21.583,
+                  "atWord": 41.833
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 23
-                },
+                  "wantAtWord": 33.417,
+                  "atWord": 58.25
+                }
+              ],
+              "callouts": [
                 {
+                  "text": "Why heart data leads the page",
                   "mark": "hearthead",
-                  "wantAtWord": 31
+                  "wantAtWord": 45.583,
+                  "atWord": 45.583
                 }
               ],
               "id": "heart",
@@ -317,17 +340,20 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 477
+      "durationFrames": 883,
+      "audio": "audio/watch_long_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
       "type": "APPLE_STAGE",
       "transition": "iris",
       "background": "zoneC",
-      "narration": "That extra sampling pays off in one feature above the rest. The Vitals app now reads your recent activity, your sleep and your heart rate variability, and turns them into a single recent activity, your sleep and your heart rate variability, and turns them into a single daily readiness score: pace yourself, ready, or go for it. That works because the sensor now samples often enough to see a trend, which means one number on the face can answer the only question you actually have in the morning.",
+      "narration": "All that extra sampling pays off in one feature above the rest. Reading often enough gives you a trend rather than a moment, and the Vitals app turns that into something you can act on: your recent activity, your sleep and your heart rate variability become a single daily readiness score, and the score sits on the watch face — pace yourself, ready, or go for it — so there is no app to open. One number, answering the only question you have in the morning.",
       "data": {
         "appleStage": {
           "headline": "One number: [Readiness]",
@@ -337,33 +363,35 @@
           "color": "green",
           "cells": [
             {
+              "label": "A trend, not a moment",
+              "text": "band",
+              "sub": "why the score works",
+              "atWord": 14.167
+            },
+            {
               "label": "Vitals app",
               "text": "screen",
               "sub": "sleep, activity, HRV",
-              "atWord": 23
+              "atWord": 18.167
             },
             {
               "label": "A daily score",
               "text": "case",
               "sub": "pace, ready, or go",
-              "atWord": 44
+              "atWord": 33.75
             },
             {
               "label": "On the face",
               "text": "crown",
               "sub": "no app to open",
-              "atWord": 58
-            },
-            {
-              "label": "Enough samples to trend",
-              "text": "band",
-              "sub": "why it works at all",
-              "atWord": 39
+              "atWord": 40.417
             }
           ]
         }
       },
-      "durationFrames": 866
+      "durationFrames": 732,
+      "audio": "audio/watch_long_s07.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s08",
@@ -383,24 +411,26 @@
               "label": "Step in place",
               "text": "screen",
               "sub": "in front of the camera",
-              "atWord": 14
+              "atWord": 12.167
             },
             {
               "label": "The watch tracks",
               "text": "case",
               "sub": "pace and form, live",
-              "atWord": 26
+              "atWord": 17.667
             },
             {
               "label": "Two devices, one test",
               "text": "crown",
               "sub": "a lab used to charge for this",
-              "atWord": 35
+              "atWord": 23.083
             }
           ]
         }
       },
-      "durationFrames": 515
+      "durationFrames": 426,
+      "audio": "audio/watch_long_s08.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s09",
@@ -421,33 +451,35 @@
               "text": "bar",
               "sub": "84 hours",
               "value": 84,
-              "atWord": 22
+              "atWord": 17.333
             },
             {
               "label": "Everyday use",
               "text": "bar",
               "sub": "50 hours",
               "value": 50,
-              "atWord": 12
+              "atWord": 9.667
             },
             {
               "label": "Outdoor workout",
               "text": "bar",
               "sub": "10 hours, 25% more",
               "value": 10,
-              "atWord": 32
+              "atWord": 21.75
             }
           ]
         }
       },
-      "durationFrames": 610
+      "durationFrames": 619,
+      "audio": "audio/watch_long_s09.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s10",
       "type": "APPLE_STAGE",
       "transition": "zoom",
       "background": "zoneB",
-      "narration": "Max Extended Workout mode tracks an outdoor run, walk or hike for forty five hours, still taking a GPS reading every second. Apple frames that as enough to finish a hundred mile race. And to be clear, that forty five is the Ultra's tracking figure — the other forty five you'll read about this month is the iPhone 18 Pro Max's video playback. Different products, one number.",
+      "narration": "Max Extended Workout mode tracks an outdoor run, walk or hike for forty five hours, still taking a GPS reading every second, which Apple frames as enough to finish a hundred mile race. And to be clear, that forty five is the Ultra's tracking figure — the other forty five you'll read about this month is the iPhone 18 Pro Max's video playback. Different products, one number.",
       "data": {
         "appleStage": {
           "headline": "[45 hours] of tracking, not playback",
@@ -461,26 +493,28 @@
               "text": "bar",
               "sub": "45 h, GPS every second",
               "value": 45,
-              "atWord": 11
+              "atWord": 35.75
             },
             {
               "label": "A hundred-mile race",
               "text": "bar",
               "sub": "Apple's own framing",
               "value": 45,
-              "atWord": 23
+              "atWord": 20.083
             },
             {
               "label": "iPhone 18 Pro Max",
               "text": "bar",
               "sub": "45 h, video playback",
               "value": 45,
-              "atWord": 39
+              "atWord": 32.583
             }
           ]
         }
       },
-      "durationFrames": 667
+      "durationFrames": 684,
+      "audio": "audio/watch_long_s10.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s11",
@@ -495,19 +529,25 @@
               "ref": "rec:apple-watch-page#ai",
               "label": "the Siri AI section",
               "focus": true,
-              "atWord": 11,
+              "atWord": 3.5,
               "zooms": [
                 {
                   "mark": "aihead",
-                  "wantAtWord": 25
+                  "wantAtWord": 16.083,
+                  "atWord": 35.917
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 39
-                },
+                  "wantAtWord": 23.75,
+                  "atWord": 48.417
+                }
+              ],
+              "callouts": [
                 {
+                  "text": "Siri AI, on the wrist",
                   "mark": "aihead",
-                  "wantAtWord": 54
+                  "wantAtWord": 33.417,
+                  "atWord": 41.083
                 }
               ],
               "id": "ai",
@@ -562,10 +602,13 @@
           "capture": {
             "width": 1600,
             "height": 900
-          }
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 809
+      "durationFrames": 784,
+      "audio": "audio/watch_long_s11.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s12",
@@ -585,30 +628,32 @@
               "label": "42 mm aluminium",
               "text": "tier",
               "value": 399,
-              "atWord": 10
+              "atWord": 18.333
             },
             {
               "label": "46 mm aluminium",
               "text": "tier",
               "value": 449,
-              "atWord": 18
+              "atWord": 12.917
             },
             {
               "label": "42 mm cellular",
               "text": "tier",
               "value": 499,
-              "atWord": 25
+              "atWord": 26.083
             },
             {
               "label": "42 mm titanium",
               "text": "tier",
               "value": 699,
-              "atWord": 31
+              "atWord": 30.25
             }
           ]
         }
       },
-      "durationFrames": 524
+      "durationFrames": 530,
+      "audio": "audio/watch_long_s12.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s13",
@@ -629,26 +674,28 @@
               "text": "bar",
               "sub": "$799, unchanged",
               "value": 799,
-              "atWord": 10
+              "atWord": 7.667
             },
             {
               "label": "Ultra 3, last year",
               "text": "bar",
               "sub": "$799, the same",
               "value": 799,
-              "atWord": 22
+              "atWord": 17.083
             },
             {
               "label": "Series 12",
               "text": "bar",
               "sub": "from $399",
               "value": 399,
-              "atWord": 39
+              "atWord": 37.667
             }
           ]
         }
       },
-      "durationFrames": 648
+      "durationFrames": 642,
+      "audio": "audio/watch_long_s13.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s14",
@@ -659,9 +706,11 @@
       "data": {
         "headline": "AirPods next, then the whole event",
         "subtext": "Series 12 or Ultra 4?",
-        "atWord": 14
+        "atWord": 10.417
       },
-      "durationFrames": 287
+      "durationFrames": 284,
+      "audio": "audio/watch_long_s14.mp3",
+      "timingSource": "tts"
     }
   ]
 }

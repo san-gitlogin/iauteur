@@ -86,7 +86,28 @@ export const setupBrowser = async (demo) => {
   // Measured cost on a dense page (artificialanalysis.ai, 1.6s take): 108KB at 1920,
   // 204KB at native 3200. Bytes were never the constraint; the downscale was.
   const viewport = demo.viewport ?? {width: 1600, height: 900};
-  const dsf = demo.deviceScaleFactor ?? 4;
+  // AMENDED 2026-09-11 — 4 WAS SHARP AND UNWATCHABLE ON THIS MACHINE.
+  //
+  // `deviceScaleFactor` decides how many pixels Chrome must PAINT for every captured
+  // frame, and `Page.startScreencast` is a request/ack loop: no frame is sent until the
+  // last one is encoded, transferred and acknowledged. At 4 on a 1600x900 viewport that is
+  // 6400x3600 — 23 megapixels a frame. Measured here with scripts/test-capture-rate.mjs,
+  // same page, same 1200px scroll:
+  //
+  //     dsf 1.2 (1920)   21.6 captured fps        dsf 2.4 (3840)    7.7 fps
+  //     dsf 2   (3200)    9.9 fps                 dsf 4   (6400)    2.9 fps
+  //
+  // Three fps is a slideshow, and it is not fixable downstream: the pictures were never
+  // taken. Two things it is NOT: the physical display (these takes are headless, so the
+  // page is rasterised offscreen and a 4K monitor never enters the path), and the transfer
+  // size (`maxWidth` cut bytes per frame from 1444KB to 278KB and moved fps by 0.8).
+  //
+  // 2.4 is the smallest factor that still satisfies the zoom rule: the deepest punch-in a
+  // full-bleed beat can ask for is 2x, and 2 x 1920 delivery = 3840 = 1600 x 2.4. So the
+  // master still outlives the camera (LAW 0f) at three times the frame rate.
+  //
+  // Going lower is a legitimate choice when a beat has no punch-in — set it per demo.
+  const dsf = demo.deviceScaleFactor ?? 2.4;
   // WITHOUT THESE, CHROME SILENTLY CAPS THE FACTOR AT 2. Measured: a context asking for
   // dsf 4 produced 3200x1800 frames (i.e. dsf 2) until the flags were passed, so the
   // capture quietly ignored the setting and nothing reported it. The VS Code surface has
