@@ -126,7 +126,13 @@ const Rig: React.FC<{
   const v = useViz(accent);
   const budget = stackBudget(v) * v.scale;
   const hasCallouts = items.some((i) => i.label && parts.includes(i.text ?? ''));
-  const svgH = budget * (v.vertical ? (hasCallouts ? 0.62 : 0.9) : fill);
+  // A near-square drawing (the die) wastes far less vertical room than a 2.1:1 phone, so
+  // it gets a bigger share of the budget even with callouts under it. Sizing every kind by
+  // one constant left the die floating in the middle of a tall pane.
+  const squarish = vh / vw < 1.35;
+  const svgH = budget * (v.vertical
+    ? (hasCallouts ? (squarish ? 0.74 : 0.62) : 0.9)
+    : fill);
   const svgW = (svgH * vw) / vh;
   return (
     <div style={{
@@ -415,7 +421,214 @@ const AirPods: React.FC<Props> = ({items, accent}) => {
   );
 };
 
+// ---------------------------------------------------------------------------
+// A20 PRO DIE — Apple's own keynote floorplan, which is ALREADY a wireframe, so it
+// belongs in this style natively. `token` lights one block group at a time.
+//
+// THE COUNTS ARE THE POINT, so the picture counts correctly: two super cores and four
+// efficiency cores, seven GPU columns, thirty-two Neural Engine cells. A viewer can pause
+// and count them and the drawing will not be lying (LAW 0k.3 — the answer goes ON the
+// object). Apple's figures: 6-core CPU with 2 new super cores and 4 new efficiency cores,
+// 20% faster; 7-core GPU, 40% faster graphics, Neural Accelerators at 2x FP8; 32-core
+// Neural Engine.
+// ---------------------------------------------------------------------------
+const DIE_PARTS = ['cpu', 'gpu', 'neural', 'io'];
+
+const DieFloorplan: React.FC<Props> = ({items, accent, token}) => {
+  const {v, frame, lit, idle, on, glow} = useSkin(accent, items);
+  const base = baseDraw(frame);
+  const D = 100, pad = 4;
+  // A group is lit either by its callout or by the scene's token, whichever is stronger.
+  const grp = (k: string) => Math.max(lit(k), token === k ? base : 0);
+  // A block on Apple's slide is not an empty box — it carries fine internal structure, and
+  // that sub-detail is most of what makes the drawing read as SILICON rather than as a
+  // wireframe of some boxes. The pattern is deterministic from the block's own position, so
+  // it is stable across frames (a random one would crawl from still to still).
+  const cell = (x: number, y: number, w: number, h: number, k: string, i = 0) => {
+    const p = grp(k);
+    const col = p > 0.02 ? v.a : idle;
+    const o = baseDraw(frame, 4 + i);
+    const cols = w > 12 ? 3 : w > 7 ? 2 : 1;
+    const rows = h > 18 ? 4 : h > 10 ? 3 : 2;
+    return (
+      <g key={`${k}${i}`} opacity={o} style={{filter: glow(p)}}>
+        <rect x={x} y={y} width={w} height={h} rx={0.8}
+          fill={p > 0.02 ? hexA(v.a, 0.14) : 'none'}
+          stroke={col} strokeWidth={p > 0.02 ? 0.7 : 0.35} />
+        <g opacity={p > 0.02 ? 0.55 : 0.32}>
+          {Array.from({length: cols - 1}).map((_, c) => (
+            <line key={`c${c}`} x1={x + (w * (c + 1)) / cols} y1={y + h * 0.16}
+              x2={x + (w * (c + 1)) / cols} y2={y + h * 0.84}
+              stroke={col} strokeWidth={0.18} />
+          ))}
+          {Array.from({length: rows - 1}).map((_, r) => (
+            <line key={`r${r}`} x1={x + w * 0.14} y1={y + (h * (r + 1)) / rows}
+              x2={x + w * 0.86} y2={y + (h * (r + 1)) / rows}
+              stroke={col} strokeWidth={0.18} />
+          ))}
+        </g>
+      </g>
+    );
+  };
+
+  return (
+    <Rig vw={D + pad * 2} vh={D + pad * 2} accent={accent} items={items} parts={DIE_PARTS} fill={0.98}>
+      <g transform={`translate(${pad} ${pad})`}>
+        <rect x={0.6} y={0.6} width={D - 1.2} height={D - 1.2} rx={2}
+          fill="none" stroke={on(0)} strokeWidth={1.6} {...draw(base)} />
+
+        {/* the name plate, top left, exactly where Apple puts it */}
+        <rect x={4} y={4} width={40} height={12} rx={1} fill="none" stroke={idle} strokeWidth={0.4}
+          opacity={base} />
+        <foreignObject x={4} y={4} width={40} height={12}>
+          <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', gap: 1.6}}>
+            <AssetIcon asset="si:apple" size={6.5} bare tint={v.dim} />
+            <span style={{fontFamily: v.t.fonts.mono, fontSize: 7, color: v.dim,
+              letterSpacing: '0.02em', fontWeight: 700}}>A20 PRO</span>
+          </div>
+        </foreignObject>
+
+        {/* CPU: two super cores over four efficiency cores */}
+        {[0, 1].map((i) => cell(4 + i * 20.5, 19, 19, 20, 'cpu', i))}
+        {[0, 1, 2, 3].map((i) => cell(4 + i * 10.25, 41.5, 9, 13, 'cpu', 2 + i))}
+
+        {/* GPU: seven columns */}
+        {Array.from({length: 7}).map((_, i) => cell(48 + i * 7.2, 19, 6, 35, 'gpu', i))}
+
+        {/* Neural Engine: 32 cells, 8 across and 4 down */}
+        {Array.from({length: 32}).map((_, i) =>
+          cell(4 + (i % 8) * 5.3, 57 + Math.floor(i / 8) * 6.1, 4.4, 5, 'neural', i))}
+
+        {/* memory and IO, bottom right — unlabelled furniture, dim by design */}
+        {[[48, 57, 22, 12], [72, 57, 24, 12], [48, 72, 20, 24], [70, 72, 26, 11], [70, 85, 26, 11]]
+          .map(([x, y, w, h], i) => cell(x, y, w, h, 'io', i))}
+      </g>
+    </Rig>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// COMPARISON BARS — one labelled track per thing, drawn from a DECLARED value.
+// Used for Apple's sustained-performance chart and for the cost-versus-price beat,
+// where the whole argument is that the two bars are on wildly different scales.
+// ---------------------------------------------------------------------------
+const BAR_PARTS = ['bar'];
+
+const CompareBars: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const rows = items.filter((i) => i.text === 'bar');
+  if (!rows.length) return null;
+  const max = Math.max(...rows.map((r) => Number(r.value) || 0), 1);
+  // Take the real share of the real budget. Capped at 132 in vertical, three bars drew a
+  // 400px cluster in a 1300px pane and the beat read as unfinished (LAW 0o rule 2 — a cap
+  // is not a layout; the ceiling exists only to stop a two-row beat becoming two billboards).
+  const rowH = Math.max(38 * v.scale,
+    Math.min(budget / Math.max(rows.length, 1) - 8 * v.scale, (v.vertical ? 260 : 150) * v.scale));
+
+  return (
+    <div style={{
+      display: 'flex', flexDirection: 'column', gap: 8 * v.scale, width: '100%',
+      height: '100%', minHeight: 0, justifyContent: 'safe center',
+    }}>
+      {rows.map((r, i) => {
+        const p = liveAt(frame, r.atWord, 14);
+        const frac = ((Number(r.value) || 0) / max) * p;
+        const hero = i === 0;
+        return (
+          <div key={i} style={{height: rowH, display: 'flex', flexDirection: 'column',
+            justifyContent: 'center', gap: 6 * v.scale}}>
+            <div style={{display: 'flex', alignItems: 'baseline', gap: 8 * v.scale, minWidth: 0}}>
+              <span style={{...v.body(v.vertical ? 25 : 21), fontWeight: 700,
+                color: p > 0.02 ? v.t.colors.text : v.dim, whiteSpace: 'nowrap'}}>{r.label}</span>
+              {r.sub && <span style={{...v.body(v.vertical ? 19 : 16), color: v.dim,
+                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{r.sub}</span>}
+            </div>
+            <div style={{position: 'relative', height: Math.max(7 * v.scale, rowH * 0.16),
+              borderRadius: 999, background: hexA(v.t.colors.muted, 0.22), overflow: 'hidden'}}>
+              {/* A value that is tiny against the biggest one must still read as A SLIVER,
+                  not as a missing bar. On the cost beat the point IS that 9% next to 400%
+                  is almost nothing — but "almost nothing" and "broken" look identical at
+                  zero width, so the floor is 1.5% once the bar is live at all. */}
+              <div style={{
+                position: 'absolute', inset: 0,
+                width: `${Math.max(frac > 0.001 ? 1.5 : 0, Math.min(1, frac) * 100)}%`,
+                borderRadius: 999,
+                background: hero ? v.a : hexA(v.t.colors.muted, 0.85),
+                boxShadow: hero && p > 0.02 ? `0 0 ${14 * v.scale}px ${hexA(v.a, 0.75)}` : 'none',
+              }} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// PRICE LADDER — the storage tiers, and the STEP between them, which is the fact.
+// Each step up costs $200 more than the step before it, so the last one is three
+// times the first. The steps are DERIVED from the prices, never restated, so the
+// picture cannot disagree with itself.
+// ---------------------------------------------------------------------------
+const LADDER_PARTS = ['tier'];
+
+const PriceLadder: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const tiers = items.filter((i) => i.text === 'tier');
+  if (!tiers.length) return null;
+  const rowH = Math.max(40 * v.scale,
+    Math.min(budget / Math.max(tiers.length, 1) - 6 * v.scale, (v.vertical ? 150 : 104) * v.scale));
+  const money = (n: number) => `$${n.toLocaleString('en-US')}`;
+
+  return (
+    <div style={{
+      display: 'flex', flexDirection: 'column', gap: 6 * v.scale, width: '100%',
+      height: '100%', minHeight: 0, justifyContent: 'safe center',
+    }}>
+      {tiers.map((t, i) => {
+        const p = liveAt(frame, t.atWord, 12);
+        const price = Number(t.value) || 0;
+        const prev = i > 0 ? Number(tiers[i - 1].value) || 0 : 0;
+        const step = i > 0 ? price - prev : 0;
+        return (
+          <div key={i} style={{
+            height: rowH, display: 'flex', alignItems: 'center', gap: 12 * v.scale,
+            opacity: 0.38 + p * 0.62,
+            borderTop: i ? `1px solid ${hexA(v.t.colors.panelBorder, 0.55)}` : 'none',
+          }}>
+            <span style={{...v.mono(v.vertical ? 27 : 22), fontWeight: 700, minWidth: 0,
+              color: p > 0.02 ? v.t.colors.text : v.dim, whiteSpace: 'nowrap'}}>{t.label}</span>
+            <span style={{flex: '1 1 auto'}} />
+            {step > 0 && (
+              <span style={{
+                ...v.mono(v.vertical ? 20 : 16.5), fontWeight: 700,
+                color: p > 0.02 ? v.a : v.dim, whiteSpace: 'nowrap',
+                padding: `${3 * v.scale}px ${9 * v.scale}px`, borderRadius: 999,
+                border: `1px solid ${hexA(p > 0.02 ? v.a : v.t.colors.muted, 0.55)}`,
+                opacity: p,
+              }}>{`+${money(step)}`}</span>
+            )}
+            <span style={{...v.mono(v.vertical ? 30 : 25), fontWeight: 800,
+              color: p > 0.02 ? v.t.colors.text : v.dim, whiteSpace: 'nowrap',
+              textShadow: p > 0.02 ? `0 0 ${12 * v.scale}px ${hexA(v.a, 0.6)}` : 'none'}}>
+              {money(price)}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 const KINDS: Record<string, React.FC<Props>> = {
+  'die-floorplan': DieFloorplan,
+  'compare-bars': CompareBars,
+  'price-ladder': PriceLadder,
   'pro-back': ProBack,
   'pro-front': ProFront,
   'duo-pair': DuoPair,
