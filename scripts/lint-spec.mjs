@@ -94,6 +94,12 @@ const subTypeOf = (s) => {
   // pictures as one component used sixteen times, which inverts what the over-reliance
   // cap exists to catch (a generic card standing in for several different ideas).
   if (s.type === 'ASTRA_STAGE') return `ASTRA_STAGE:${s.data?.astraStage?.kind ?? '?'}`;
+  // APPLE_STAGE, same shape again: one registered type dispatching a different DEPICTION
+  // per `kind` — a phone drawn from its own dimensions, a six-blade iris, a chip
+  // floorplan, a price ladder. Counting the type alone would read ten distinct pictures
+  // as one component used ten times, and reject a spec for the opposite of the defect the
+  // over-reliance cap exists to catch.
+  if (s.type === 'APPLE_STAGE') return `APPLE_STAGE:${s.data?.appleStage?.kind ?? '?'}`;
   if (s.type === 'PIPELINE' && s.data?.pipeline?.variant) return `PIPELINE:${s.data.pipeline.variant}`;
   if (s.type === 'CODE_EDITOR' && s.data?.editor?.variant) return `CODE_EDITOR:${s.data.editor.variant}`;
   if (s.type === 'WINDOW_FRAME' && s.data?.window?.variant) return `WINDOW_FRAME:${s.data.window.variant}`;

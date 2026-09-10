@@ -1,0 +1,698 @@
+{
+  "meta": {
+    "topic": "Apple September 2026 — iPhone 18 Pro, explained",
+    "format": "long",
+    "fps": 30,
+    "subject": "iPhone 18 Pro",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "screenplay": "documentary",
+    "onePayoff": "what genuinely changed on the iPhone 18 Pro, and why it costs $100 more",
+    "openLoop": "What are you really paying for this year?",
+    "analogy": "A camera that signs its own work.",
+    "seo": {
+      "title": "Apple September 2026 — iPhone 18 Pro, explained",
+      "description": "Everything that actually changed on the iPhone 18 Pro: the variable aperture, Apple Reference Image, the A20 Pro, and the $100 price rise that hit the whole lineup.",
+      "breakdown": "variable aperture, Apple Reference Image, A20 Pro, and the price rise",
+      "pinned": "Is a camera that can prove a photo is real worth $100 more to you?",
+      "tags": [
+        "iPhone 18 Pro",
+        "Apple September 2026",
+        "A20 Pro",
+        "Apple Reference Image",
+        "variable aperture",
+        "iPhone 18 Pro price",
+        "Apple event",
+        "iOS 27"
+      ],
+      "queries": [
+        "what is new in iPhone 18 Pro",
+        "iPhone 18 Pro variable aperture explained",
+        "what is Apple Reference Image",
+        "why did iPhone prices go up"
+      ],
+      "sources": [
+        "apple.com/newsroom — iPhone 18 Pro and iPhone 18 Pro Max",
+        "apple.com/iphone-18-pro/specs",
+        "apple.com/shop/buy-iphone/iphone-18-pro",
+        "Apple Accessory Design Guidelines, sheet 62.1"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT SIGNS YOUR PHOTOS",
+    "badge": "iPhone 18 Pro",
+    "asset": "si:apple"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "The iPhone 18 Pro can prove that a photograph is a photograph. Start there.",
+      "data": {
+        "headline": "iPhone 18 Pro",
+        "subtext": "A camera that signs its own work",
+        "kicker": "September 2026",
+        "variant": "plaque",
+        "atWord": 6
+      },
+      "durationFrames": 163
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Welcome back. Apple's September event ran long, and the iPhone 18 Pro took the front half of it. Today we're going through four changes you'll actually feel, and one you won't like. So what are you really paying for this year?",
+      "data": {
+        "title": "Four changes, and one price",
+        "subtitle": "The body, the camera, the chip, the bill",
+        "atWord": 16
+      },
+      "durationFrames": 420
+    },
+    {
+      "id": "s03",
+      "type": "APPLE_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Start with the back, because that's the part you notice across a room. That camera plateau now runs almost the whole width of the enclosure, and the three lenses sit in their triangle at one end of it. Flash and lidar scanner take the other end, which is why the plateau had to grow. Camera Control stayed on the right edge under the side button, and the Action Button is still on the left, where your thumb already expects it.",
+      "data": {
+        "appleStage": {
+          "headline": "The [plateau] runs edge to edge",
+          "kind": "pro-back",
+          "caption": "150.0 by 71.9 millimetres",
+          "premise": "Drawn to Apple's published dimensions, so the proportions are the phone's own.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "Camera plateau",
+              "text": "plateau",
+              "sub": "nearly the full width",
+              "atWord": 11
+            },
+            {
+              "label": "Three lenses",
+              "text": "lens",
+              "sub": "48MP Fusion Main",
+              "atWord": 24
+            },
+            {
+              "label": "Flash and lidar",
+              "text": "flash",
+              "sub": "the far end",
+              "atWord": 35
+            },
+            {
+              "label": "Camera Control",
+              "text": "control",
+              "sub": "right edge",
+              "atWord": 46
+            },
+            {
+              "label": "Action Button",
+              "text": "action",
+              "sub": "left edge",
+              "atWord": 56
+            }
+          ]
+        }
+      },
+      "durationFrames": 790
+    },
+    {
+      "id": "s04",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Four finishes this year. Black and Silver carry over, Glacier is the cool one, and Burgundy is the genuinely new colour — a deep red that photographs almost brown indoors. Apple builds the enclosure from eighty five percent recycled aluminium, and the front and back are both Ceramic Shield now, so a bad drop is the difference between a repair bill and a shrug.",
+      "data": {
+        "appleStage": {
+          "headline": "Four [finishes]",
+          "kind": "finish-palette",
+          "caption": "Black, Silver, Glacier, Burgundy",
+          "premise": "Ceramic Shield front and back, over an enclosure of 85% recycled aluminium.",
+          "color": "purple",
+          "cells": [
+            {
+              "label": "Burgundy",
+              "sub": "#2a1618,#a16974",
+              "text": "finish",
+              "atWord": 19
+            },
+            {
+              "label": "Glacier",
+              "sub": "#2c3238,#f8fbff",
+              "text": "finish",
+              "atWord": 4
+            },
+            {
+              "label": "Silver",
+              "sub": "#3a3d40,#fdfdfd",
+              "text": "finish",
+              "atWord": 8
+            },
+            {
+              "label": "Black",
+              "sub": "#141414,#c0c0c0",
+              "text": "finish",
+              "atWord": 13
+            }
+          ]
+        }
+      },
+      "durationFrames": 638
+    },
+    {
+      "id": "s05",
+      "type": "APPLE_STAGE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Turn the phone over and the interesting number is the border. Its screen measures six point three inches, and the bezel around it comes to two point six millimetres on all four sides. Dynamic Island got smaller, which sounds cosmetic until you use it, because the island now holds three Live Activities at once. A timer, a flight and a match can share that space instead of taking turns.",
+      "data": {
+        "appleStage": {
+          "headline": "The bezel is [2.6 mm] all round",
+          "kind": "pro-front",
+          "caption": "6.3-inch, 2622 by 1206",
+          "premise": "The screen size comes from Apple's pixel count and ppi, so the border is a consequence, not a guess.",
+          "color": "green",
+          "cells": [
+            {
+              "label": "Super Retina XDR",
+              "text": "screen",
+              "sub": "2622 x 1206 at 460 ppi",
+              "atWord": 12
+            },
+            {
+              "label": "Uniform bezel",
+              "text": "body",
+              "sub": "2.6 mm, every side",
+              "atWord": 23
+            },
+            {
+              "label": "Dynamic Island",
+              "text": "island",
+              "sub": "three Live Activities",
+              "atWord": 39
+            },
+            {
+              "label": "Ceramic Shield 2",
+              "text": "body",
+              "sub": "front and back",
+              "atWord": 47
+            }
+          ]
+        }
+      },
+      "durationFrames": 686
+    },
+    {
+      "id": "s06",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneC",
+      "narration": "Here's the headline feature, and it's an old idea arriving late. Apple gave the main camera a variable aperture: six laser cut blades that open right up to f one point four eight. Wide open, the sensor drinks light, so a dim room stops looking like one. Close a stop to f one point eight and you've traded some of that glow for a steadier edge.",
+      "data": {
+        "appleStage": {
+          "headline": "Six blades, [four] stops",
+          "kind": "aperture-iris",
+          "caption": "Wide open at f/1.48",
+          "premise": "Six blades set the hole. Area follows one over N squared, so f/4 passes a fourteenth of the light f/1.48 does.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "f/1.48",
+              "text": "stop",
+              "value": 1.48,
+              "sub": "widest",
+              "atWord": 20
+            },
+            {
+              "label": "f/1.8",
+              "text": "stop",
+              "value": 1.8,
+              "atWord": 37
+            },
+            {
+              "label": "f/2.8",
+              "text": "stop",
+              "value": 2.8,
+              "atWord": 46
+            },
+            {
+              "label": "f/4",
+              "text": "stop",
+              "value": 4,
+              "sub": "deepest focus"
+            }
+          ]
+        }
+      },
+      "durationFrames": 657
+    },
+    {
+      "id": "s07",
+      "type": "APPLE_STAGE",
+      "transition": "zoom",
+      "background": "zoneC",
+      "narration": "Ask for f four instead and those blades close in. Less light reaches the sensor, so the exposure gets slower, and in exchange the depth of field stretches. A landscape holds focus from the rocks at your feet to the hills behind, because depth of field is set by the hole and not by software. Every phone before this one faked that trade with software, and the 18 Pro makes it with metal, which is why the result survives a crop.",
+      "data": {
+        "appleStage": {
+          "headline": "Stopped down to [f/4]",
+          "kind": "aperture-iris",
+          "caption": "The blades close in",
+          "premise": "The same six blades, walked to the narrow end. All four stops are real positions.",
+          "color": "green",
+          "cells": [
+            {
+              "label": "f/1.48",
+              "text": "stop",
+              "value": 1.48,
+              "atWord": 1
+            },
+            {
+              "label": "f/1.8",
+              "text": "stop",
+              "value": 1.8,
+              "atWord": 2
+            },
+            {
+              "label": "f/2.8",
+              "text": "stop",
+              "value": 2.8,
+              "atWord": 3
+            },
+            {
+              "label": "f/4",
+              "text": "stop",
+              "value": 4,
+              "sub": "deepest focus",
+              "atWord": 18
+            }
+          ]
+        }
+      },
+      "durationFrames": 800
+    },
+    {
+      "id": "s08",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And this is the one I did not see coming. Apple Reference Image signs a photo while the sensor is still reading it, and that signature binds to the pixels themselves rather than sitting in a file header. Copy the photo, paint something out of the middle, and the copy stops matching its own signature. So the original stays provable, and the edited version cannot borrow its credibility.",
+      "data": {
+        "appleStage": {
+          "headline": "A photo that can [prove] it is a photo",
+          "kind": "reference-image",
+          "caption": "Signed at capture",
+          "premise": "The signature is bound to the pixels, so changing them breaks it.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "capture",
+              "text": "capture",
+              "atWord": 11
+            },
+            {
+              "label": "signed",
+              "text": "sign",
+              "atWord": 19
+            },
+            {
+              "label": "edited",
+              "text": "edit",
+              "atWord": 34
+            },
+            {
+              "label": "checked",
+              "text": "check",
+              "atWord": 44
+            }
+          ]
+        }
+      },
+      "durationFrames": 676
+    },
+    {
+      "id": "s09",
+      "type": "APPLE_STAGE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "None of that runs on hope, so open the A20 Pro. Six CPU cores: two large ones Apple calls super cores, running twenty percent faster than last year, and four efficiency cores underneath handling the rest, because most of what a phone does all day is waiting. It's also the first two nanometre chip in a phone, which is how Apple could spend transistors this freely.",
+      "data": {
+        "appleStage": {
+          "headline": "A20 Pro: [six] CPU cores",
+          "kind": "die-floorplan",
+          "token": "cpu",
+          "caption": "Two super cores, four efficiency",
+          "premise": "Apple's own floorplan. Count the blocks — the drawing has exactly as many as the chip does.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "Super cores",
+              "text": "cpu",
+              "sub": "20% faster",
+              "atWord": 15
+            },
+            {
+              "label": "Efficiency cores",
+              "text": "cpu",
+              "sub": "four of them",
+              "atWord": 28
+            },
+            {
+              "label": "First 2nm phone chip",
+              "text": "io",
+              "sub": "more transistors to spend",
+              "atWord": 41
+            }
+          ]
+        }
+      },
+      "durationFrames": 657
+    },
+    {
+      "id": "s10",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Beside the CPU sit seven GPU cores, forty percent quicker at graphics than the last generation. Each of those seven carries a Neural Accelerator, and together they double FP8 throughput. FP8 is the low precision maths that generative models lean on, so the gain lands in photo editing and in games rather than in a benchmark you'll never open.",
+      "data": {
+        "appleStage": {
+          "headline": "Seven [GPU] cores, one per column",
+          "kind": "die-floorplan",
+          "token": "gpu",
+          "caption": "40% faster graphics",
+          "premise": "Seven columns on the die, seven GPU cores, each with its own Neural Accelerator.",
+          "color": "green",
+          "cells": [
+            {
+              "label": "GPU cores",
+              "text": "gpu",
+              "sub": "40% faster graphics",
+              "atWord": 7
+            },
+            {
+              "label": "Neural Accelerators",
+              "text": "gpu",
+              "sub": "2x FP8 throughput",
+              "atWord": 21
+            },
+            {
+              "label": "Where it lands",
+              "text": "io",
+              "sub": "editing and games",
+              "atWord": 37
+            }
+          ]
+        }
+      },
+      "durationFrames": 591
+    },
+    {
+      "id": "s11",
+      "type": "APPLE_STAGE",
+      "transition": "iris",
+      "background": "zoneC",
+      "narration": "Here's the figure that actually moved. Apple's Neural Engine went from sixteen cores to thirty two. Both the A19 Pro and the A18 Pro carried sixteen, so this is the first real doubling in three years, and it is why Siri can reach across your apps and answer from your own mail without sending any of it away.",
+      "data": {
+        "appleStage": {
+          "headline": "The Neural Engine [doubled]",
+          "kind": "die-floorplan",
+          "token": "neural",
+          "caption": "16 cores to 32",
+          "premise": "Thirty-two cells drawn, thirty-two cores on the chip. A19 Pro and A18 Pro both had sixteen.",
+          "color": "purple",
+          "cells": [
+            {
+              "label": "Neural Engine",
+              "text": "neural",
+              "sub": "32 total cores",
+              "atWord": 13
+            },
+            {
+              "label": "A19 Pro and A18 Pro",
+              "text": "io",
+              "sub": "sixteen apiece",
+              "atWord": 27
+            },
+            {
+              "label": "On-device Siri",
+              "text": "io",
+              "sub": "your mail stays yours",
+              "atWord": 38
+            }
+          ]
+        }
+      },
+      "durationFrames": 581
+    },
+    {
+      "id": "s12",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Apple showed sustained performance rather than peak, and sustained is the honest measure, because hitting a number for one second is easy and holding it through a long export is not. Against the iPhone 17 Pro, the 18 Pro holds forty percent more. Against the 16 Pro, double. A redesigned vapor chamber tripled the cooling area underneath, and that is what pays for it.",
+      "data": {
+        "appleStage": {
+          "headline": "Sustained, across [three] generations",
+          "kind": "compare-bars",
+          "caption": "Apple's own comparison",
+          "premise": "Bar lengths derive from Apple's claims: 40% more than A19 Pro, twice the A18 Pro.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "iPhone 18 Pro",
+              "text": "bar",
+              "sub": "A20 Pro",
+              "value": 100,
+              "atWord": 19
+            },
+            {
+              "label": "iPhone 17 Pro",
+              "text": "bar",
+              "sub": "A19 Pro — 40% more",
+              "value": 71,
+              "atWord": 28
+            },
+            {
+              "label": "iPhone 16 Pro",
+              "text": "bar",
+              "sub": "A18 Pro — 2x more",
+              "value": 50,
+              "atWord": 37
+            }
+          ]
+        }
+      },
+      "durationFrames": 638
+    },
+    {
+      "id": "s13",
+      "type": "APPLE_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Battery moved too. The Pro Max reaches forty five hours of video playback, six hours longer than the 17 Pro Max managed, which means a long flight stops being a calculation.",
+      "data": {
+        "appleStage": {
+          "headline": "[45 hours] on the Pro Max",
+          "kind": "compare-bars",
+          "caption": "Video playback",
+          "premise": "Apple's stated video playback figures, generation against generation.",
+          "color": "green",
+          "cells": [
+            {
+              "label": "iPhone 18 Pro Max",
+              "text": "bar",
+              "sub": "45 hours",
+              "value": 45,
+              "atWord": 5
+            },
+            {
+              "label": "iPhone 17 Pro Max",
+              "text": "bar",
+              "sub": "39 hours",
+              "value": 39,
+              "atWord": 11
+            }
+          ]
+        }
+      },
+      "durationFrames": 325
+    },
+    {
+      "id": "s14",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "So what does the iPhone 18 Pro cost? Two hundred and fifty six gigabytes starts at eleven ninety nine. Then the rungs get steep. Two hundred dollars takes you to five twelve, four hundred more buys a terabyte, and two terabytes costs six hundred on top of that. Every step up that ladder costs two hundred more than the step below it, which is how a phone quietly becomes a laptop.",
+      "data": {
+        "appleStage": {
+          "headline": "Each step costs [more] than the last",
+          "kind": "price-ladder",
+          "caption": "iPhone 18 Pro, US pricing",
+          "premise": "Read off Apple's own buy page. The chip beside each row is its difference from the row above.",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "256GB",
+              "text": "tier",
+              "value": 1199,
+              "atWord": 11
+            },
+            {
+              "label": "512GB",
+              "text": "tier",
+              "value": 1399,
+              "atWord": 27
+            },
+            {
+              "label": "1TB",
+              "text": "tier",
+              "value": 1799,
+              "atWord": 36
+            },
+            {
+              "label": "2TB",
+              "text": "tier",
+              "value": 2399,
+              "atWord": 44
+            }
+          ]
+        }
+      },
+      "durationFrames": 705
+    },
+    {
+      "id": "s15",
+      "type": "APPLE_STAGE",
+      "transition": "whippan",
+      "background": "zoneC",
+      "narration": "And here the event got strange. Normally last year's iPhones drop in price the morning a new one arrives. This time Apple raised every one of them by a hundred dollars on the same afternoon: the 16, the 17, the 17e and the Air. Apple discontinued the 17 Pro and the 17 Pro Max outright, which means the cheapest Pro on sale is now the new one.",
+      "data": {
+        "appleStage": {
+          "headline": "The old iPhones got [more expensive]",
+          "kind": "price-rise",
+          "token": "$",
+          "caption": "Same day as the 18 Pro launch",
+          "premise": "Old price struck through, new price beside it. A launch normally makes these fall.",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "iPhone Air",
+              "text": "rise",
+              "value": 1099,
+              "sub": "999",
+              "atWord": 31
+            },
+            {
+              "label": "iPhone 17",
+              "text": "rise",
+              "value": 899,
+              "sub": "799",
+              "atWord": 35
+            },
+            {
+              "label": "iPhone 16",
+              "text": "rise",
+              "value": 799,
+              "sub": "699",
+              "atWord": 39
+            },
+            {
+              "label": "iPhone 17e",
+              "text": "rise",
+              "value": 699,
+              "sub": "599",
+              "atWord": 43
+            }
+          ]
+        }
+      },
+      "durationFrames": 667
+    },
+    {
+      "id": "s16",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneC",
+      "narration": "Memory is the reason, and the scale of it is worth seeing. A two hundred and fifty six gigabyte memory chip costs close to four hundred percent more than a year ago, because AI data centres are buying the same parts. The bill of materials rose about thirty eight percent. Your price went up nine, so Apple carried the rest.",
+      "data": {
+        "appleStage": {
+          "headline": "You pay [9%] more. Memory costs 400% more.",
+          "kind": "compare-bars",
+          "caption": "What actually moved",
+          "premise": "Year on year. The price you pay and the cost Apple pays are not on the same scale.",
+          "color": "red",
+          "cells": [
+            {
+              "label": "Memory chip cost",
+              "text": "bar",
+              "sub": "up ~400% year on year",
+              "value": 400,
+              "atWord": 13
+            },
+            {
+              "label": "Bill of materials",
+              "text": "bar",
+              "sub": "up ~38% on a Pro",
+              "value": 38,
+              "atWord": 26
+            },
+            {
+              "label": "What you pay",
+              "text": "bar",
+              "sub": "$1,099 to $1,199",
+              "value": 9,
+              "atWord": 32
+            }
+          ]
+        }
+      },
+      "durationFrames": 600
+    },
+    {
+      "id": "s17",
+      "type": "PHOTO",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "You can read those prices yourself, by the way. This is Apple's own iPhone 18 Pro page, and the pre-order date and the starting figure both sit right there under the headline, so you're never taking my word for it.",
+      "data": {
+        "photo": {
+          "asset": "img:apple_iphone18pro_hero.png",
+          "caption": "Apple's iPhone 18 Pro page, captured 10 September 2026",
+          "kicker": "apple.com",
+          "pan": "in",
+          "atWord": 16
+        },
+        "source": "apple.com/iphone-18-pro"
+      },
+      "durationFrames": 410
+    },
+    {
+      "id": "s18",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That's the iPhone 18 Pro: a camera that vouches for its own pictures, a chip built for the AI it runs, and a hundred dollars that memory explains. The Duo, the watches and AirPods each get their own video.",
+      "data": {
+        "headline": "Worth it?",
+        "subtext": "Tell me where you land in the comments",
+        "atWord": 20
+      },
+      "durationFrames": 401
+    }
+  ]
+}

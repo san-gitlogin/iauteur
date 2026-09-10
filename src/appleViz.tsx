@@ -813,8 +813,16 @@ const ApertureIris: React.FC<Props> = ({items, accent}) => {
   if (!stops.length) return null;
 
   // The live stop is the LAST one whose anchor has passed; before any, the widest.
+  //
+  // A STOP WITH NO ANCHOR HAS NOT BEEN REACHED. `liveAt` returns 1 for a missing atWord,
+  // which is right for a thing that should simply be present — and exactly wrong here,
+  // where an unanchored stop would mean the iris jumps to the narrow end on frame one. A
+  // beat that wants to sit wide open lists all four stops and anchors only the one it is
+  // talking about, so the absence has to mean "not yet".
   let idx = 0;
-  stops.forEach((s, i) => { if (liveAt(frame, s.atWord, 8) > 0.5) idx = i; });
+  stops.forEach((s, i) => {
+    if (s.atWord != null && liveAt(frame, s.atWord, 8) > 0.5) idx = i;
+  });
   const fNow = Number(stops[idx].value) || 1.48;
   const fWidest = Math.min(...stops.map((s) => Number(s.value) || 1.48));
 
@@ -971,7 +979,66 @@ const ReferenceImage: React.FC<Props> = ({items, accent}) => {
   );
 };
 
+// ---------------------------------------------------------------------------
+// FINISH PALETTE — where colour lives, since the device itself is a line drawing.
+//
+// Owner, 2026-09-10: "we can show colour palette components to show the colours". A finish
+// is a RAMP, not a flat fill — that is what an anodised surface is, and the measured
+// Burgundy proves it (#2a1618 shadow through #a16974 specular). Each chip therefore takes
+// its two stops FROM THE SPEC as "deep,light" in `sub`, so no colour is invented in code
+// and the honest provenance of each one lives in the brief beside it.
+//
+// Every chip carries a ring, because a dark finish on a near-black ground is otherwise not
+// an object at all — which is the whole reason the phone is drawn rather than filled.
+// ---------------------------------------------------------------------------
+const PALETTE_PARTS = ['finish'];
+
+const FinishPalette: React.FC<Props> = ({items, accent}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const chips = items.filter((i) => i.text === 'finish');
+  if (!chips.length) return null;
+
+  const per = Math.min(budget * (v.vertical ? 0.30 : 0.62),
+    (v.vertical ? 250 : 210) * v.scale);
+
+  return (
+    <div style={{
+      display: 'flex', gap: (v.vertical ? 16 : 24) * v.scale, flexWrap: 'wrap',
+      alignItems: 'center', justifyContent: 'safe center',
+      width: '100%', height: '100%', minHeight: 0,
+    }}>
+      {chips.map((c, i) => {
+        const p = liveAt(frame, c.atWord, 12);
+        const [deep = '#333', light = '#999'] = String(c.sub ?? '').split(',').map((x) => x.trim());
+        return (
+          <div key={i} style={{
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            gap: 9 * v.scale, opacity: 0.34 + p * 0.66,
+            transform: `translateY(${(1 - p) * 10 * v.scale}px)`,
+          }}>
+            <div style={{
+              width: per, height: per, borderRadius: v.rad(18),
+              background: `linear-gradient(150deg, ${light} 0%, ${deep} 62%, ${deep} 100%)`,
+              border: `${2 * v.scale}px solid ${hexA(v.t.colors.text, p > 0.02 ? 0.45 : 0.16)}`,
+              boxShadow: p > 0.02
+                ? `0 0 ${22 * v.scale}px ${hexA(light, 0.32)}, inset 0 ${2 * v.scale}px ${8 * v.scale}px ${hexA('#ffffff', 0.14)}`
+                : 'none',
+            }} />
+            <div style={{
+              ...v.body(v.vertical ? 22 : 18), fontWeight: 700, whiteSpace: 'nowrap',
+              color: p > 0.02 ? v.t.colors.text : v.dim,
+            }}>{c.label}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 const KINDS: Record<string, React.FC<Props>> = {
+  'finish-palette': FinishPalette,
   'aperture-iris': ApertureIris,
   'reference-image': ReferenceImage,
   'price-rise': PriceRise,
