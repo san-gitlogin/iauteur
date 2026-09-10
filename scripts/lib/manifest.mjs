@@ -584,7 +584,7 @@ export const MANIFEST = {  LIVE_CODE: {
       headline: {t: 'string', req: true, max: 44, note: "Scene headline, <=44 chars, one [accent] phrase."},
       kind: {t: 'string', req: true, note: "Which picture: outcome-bins | fail-vs-broken | step-binding | evidence-shelf | attachment-router"},
       cells: {t: 'items', note: "0-12 elements. label = what is written on it (<=26). sub = the gloss beside it (<=40). text = a per-kind role. value = a number the beat states. icon = lucide:/si: glyph. color, atWord."},
-      lines: {t: 'items', note: "The code, one item per line. text = the line INCLUDING indentation (<=52). detail = the plain-English note under it while lit (<=120). atWord."},
+      lines: {t: 'items', preserveWs: true, note: "The code, one item per line. text = the line INCLUDING indentation (<=52). detail = the plain-English note under it while lit (<=120). atWord."},
       vars: {t: 'items', note: "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."},
       caption: {t: 'string', max: 30, note: "Caption above the picture, <=30 chars, specific to THIS beat."},
       premise: {t: 'string', max: 150, note: "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at and what stands for what. Carries NO marker."},
