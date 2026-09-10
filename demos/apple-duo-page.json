@@ -1,0 +1,81 @@
+{
+  "slug": "apple-duo-page",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 0,
+  "prep": {
+    "url": "https://www.apple.com/iphone-duo/"
+  },
+  "steps": [
+    {
+      "id": "hero",
+      "action": "expect",
+      "target": "text=Hello, hello.",
+      "label": "the page as it opens",
+      "marks": [
+        {
+          "id": "hi",
+          "text": "Hello, hello."
+        }
+      ],
+      "holdMs": 900
+    },
+    {
+      "id": "thin-fold",
+      "action": "scroll",
+      "by": 1200,
+      "label": "the display claim",
+      "marks": [
+        {
+          "id": "disp",
+          "text": "largest iPhone display ever"
+        }
+      ],
+      "holdMs": 1700
+    },
+    {
+      "id": "camera",
+      "action": "scroll",
+      "by": 7200,
+      "label": "the camera system",
+      "marks": [
+        {
+          "id": "camhead",
+          "text": "Advanced camera system"
+        }
+      ],
+      "holdMs": 1600
+    },
+    {
+      "id": "chip",
+      "action": "scroll",
+      "by": 4800,
+      "label": "the A20 Pro section",
+      "marks": [
+        {
+          "id": "chiphead",
+          "text": "Dual 16"
+        }
+      ],
+      "holdMs": 1700
+    },
+    {
+      "id": "battery",
+      "action": "scroll",
+      "by": 1200,
+      "label": "the dual-battery system",
+      "marks": [
+        {
+          "id": "batt",
+          "text": "dual-battery system"
+        }
+      ],
+      "holdMs": 1700
+    }
+  ]
+}

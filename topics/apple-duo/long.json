@@ -1,0 +1,1131 @@
+{
+  "meta": {
+    "topic": "Apple September 2026 — iPhone Duo, explained",
+    "format": "long",
+    "fps": 30,
+    "subject": "iPhone Duo",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "screenplay": "documentary",
+    "onePayoff": "what folding actually buys you on the iPhone Duo, and what it costs",
+    "openLoop": "Is a two thousand dollar iPhone a real product or a statement?",
+    "analogy": "A phone closed, a small tablet open.",
+    "seo": {
+      "title": "Apple September 2026 — iPhone Duo, explained",
+      "description": "Apple's first foldable iPhone: the width doubles and the height does not, the selfie camera hides under the inner screen, and it starts at $1,999. Every figure from Apple.",
+      "breakdown": "the fold, the under-display camera, the A20 Pro, and the $1,999 price",
+      "pinned": "Would you carry a folding iPhone at $1,999, or wait for the second one?",
+      "tags": [
+        "iPhone Duo",
+        "foldable iPhone",
+        "Apple September 2026",
+        "iPhone Duo price",
+        "under-display camera",
+        "A20 Pro",
+        "Apple event",
+        "iPhone Duo specs"
+      ],
+      "queries": [
+        "iPhone Duo specs and price",
+        "is the iPhone Duo worth it",
+        "iPhone Duo under display camera",
+        "how thin is the iPhone Duo"
+      ],
+      "sources": [
+        "apple.com/newsroom — Apple unveils iPhone Duo",
+        "apple.com/iphone-duo and its specs page",
+        "apple.com/iphone-duo product page, captured 10 September 2026"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "THE CAMERA IS HIDDEN",
+    "badge": "iPhone Duo",
+    "asset": "si:apple"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "The iPhone Duo folds, and its selfie camera hides underneath the screen. Really.",
+      "data": {
+        "headline": "iPhone Duo",
+        "subtext": "Apple's first foldable iPhone",
+        "kicker": "September 2026",
+        "variant": "plaque",
+        "atWord": 7
+      },
+      "durationFrames": 154
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Welcome back. Apple's finally made a folding iPhone, and it's called the Duo. Today we're going through what actually unfolds, what it costs, and the one design decision nobody else has managed. So is a two thousand dollar iPhone a real product, or a statement?",
+      "data": {
+        "title": "What folding actually buys you",
+        "subtitle": "iPhone Duo, in numbers",
+        "atWord": 18
+      },
+      "durationFrames": 458
+    },
+    {
+      "id": "s03",
+      "type": "APPLE_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Start with the geometry, because that decides whether a fold is useful or a gimmick. Closed, the Duo's eighty four millimetres across. Open it and the width doubles to one sixty five, while the height never moves. So it doesn't become a taller phone. It becomes a wider one.",
+      "data": {
+        "appleStage": {
+          "headline": "The width [doubles]. The height does not.",
+          "kind": "duo-pair",
+          "caption": "84.1 mm closed, 164.6 mm open",
+          "premise": "Both states drawn to the same scale, from the published dimensions.",
+          "color": "purple",
+          "cells": [
+            {
+              "label": "Closed",
+              "text": "outer",
+              "sub": "84.1 mm across",
+              "atWord": 11
+            },
+            {
+              "label": "Open",
+              "text": "inner",
+              "sub": "164.6 mm across",
+              "atWord": 20
+            },
+            {
+              "label": "The hinge",
+              "text": "hinge",
+              "sub": "down the centre",
+              "atWord": 28
+            }
+          ]
+        }
+      },
+      "durationFrames": 496
+    },
+    {
+      "id": "s04",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "Apple leads on exactly that. Its own page calls this the largest iPhone display ever, in a thin foldable design, and those two halves are the whole product: a screen that would never fit a pocket, folded until it does.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-duo-page#thin-fold",
+              "label": "the display claim",
+              "focus": true,
+              "atWord": 6,
+              "zooms": [
+                {
+                  "mark": "disp",
+                  "wantAtWord": 13
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 23
+                }
+              ],
+              "id": "thin-fold",
+              "src": "rec/apple-duo-page/seg-02.mp4",
+              "frames": 201,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "disp": {
+                  "x": 657,
+                  "y": 61,
+                  "w": 333,
+                  "h": 34,
+                  "covers": "largest iPhone display ever"
+                }
+              },
+              "ink": [
+                {
+                  "x": 170,
+                  "y": 0,
+                  "w": 1260,
+                  "h": 626
+                },
+                {
+                  "x": 1423,
+                  "y": 0,
+                  "w": 177,
+                  "h": 626
+                },
+                {
+                  "x": 345,
+                  "y": 0,
+                  "w": 76,
+                  "h": 42
+                },
+                {
+                  "x": 1428,
+                  "y": 0,
+                  "w": 72,
+                  "h": 42
+                },
+                {
+                  "x": 1161,
+                  "y": 0,
+                  "w": 64,
+                  "h": 42
+                },
+                {
+                  "x": 503,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 643,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 909,
+                  "y": 0,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 776,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 1042,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 900,
+                  "y": 674,
+                  "w": 56,
+                  "h": 56
+                },
+                {
+                  "x": 760,
+                  "y": 691,
+                  "w": 81,
+                  "h": 20
+                },
+                {
+                  "x": 692,
+                  "y": 691,
+                  "w": 56,
+                  "h": 20
+                },
+                {
+                  "x": 832,
+                  "y": 691,
+                  "w": 56,
+                  "h": 20
+                },
+                {
+                  "x": 736,
+                  "y": 691,
+                  "w": 27,
+                  "h": 20
+                }
+              ],
+              "shows": "iPhone Duo"
+            }
+          ],
+          "sourceNote": "Apple, iPhone Duo product page, captured 10 September 2026",
+          "caption": "Largest iPhone display ever",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 410
+    },
+    {
+      "id": "s05",
+      "type": "APPLE_STAGE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "That thinness claim needs care, because it's true in one state only. Open, the Duo is five point two millimetres, beating the iPhone Air at five point six. Closed, you hold two of those plus a hinge, so it's eleven point three. Both numbers are honest; one gets advertised.",
+      "data": {
+        "appleStage": {
+          "headline": "Thinnest iPhone ever, [when open]",
+          "kind": "compare-bars",
+          "caption": "Depth, in millimetres",
+          "premise": "The claim is true open and false closed, so both states belong on screen.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "iPhone Duo, open",
+              "text": "bar",
+              "sub": "5.2 mm",
+              "value": 5.2,
+              "atWord": 11
+            },
+            {
+              "label": "iPhone Air",
+              "text": "bar",
+              "sub": "5.6 mm",
+              "value": 5.6,
+              "atWord": 21
+            },
+            {
+              "label": "iPhone Duo, closed",
+              "text": "bar",
+              "sub": "11.3 mm",
+              "value": 11.3,
+              "atWord": 29
+            }
+          ]
+        }
+      },
+      "durationFrames": 496
+    },
+    {
+      "id": "s06",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Two screens, doing different jobs. Outside there's a five point four inch panel carrying ninety percent of an iPhone 18 Pro screen area, so the closed phone is a whole phone rather than a preview window. Open it and you get seven point six inches with a nano texture finish.",
+      "data": {
+        "appleStage": {
+          "headline": "A whole phone, [then] a small tablet",
+          "kind": "duo-pair",
+          "token": "open",
+          "caption": "5.4-inch outside, 7.6-inch inside",
+          "premise": "The outer panel carries 90% of an iPhone 18 Pro screen area. The inner one is nano-texture.",
+          "color": "green",
+          "cells": [
+            {
+              "label": "Outer display",
+              "text": "outer",
+              "sub": "5.4-inch, 1398 x 2034",
+              "atWord": 9
+            },
+            {
+              "label": "Inner display",
+              "text": "inner",
+              "sub": "7.6-inch, nano-texture",
+              "atWord": 28
+            },
+            {
+              "label": "Under the screen",
+              "text": "selfie",
+              "sub": "no notch, no cutout",
+              "atWord": 34
+            }
+          ]
+        }
+      },
+      "durationFrames": 505
+    },
+    {
+      "id": "s07",
+      "type": "APPLE_STAGE",
+      "transition": "iris",
+      "background": "zoneC",
+      "narration": "Here's the part I opened with. On that inner screen the FaceTime camera sits underneath the display, so there’s no notch, no punch hole and no island breaking the surface, because the camera only appears when it’s needed. Every rival foldable puts a hole in its big screen.",
+      "data": {
+        "appleStage": {
+          "headline": "The camera is [under] the screen",
+          "kind": "duo-pair",
+          "token": "open",
+          "caption": "It appears only when needed",
+          "premise": "No notch and no cutout in the inner display: the camera sits beneath the surface.",
+          "color": "purple",
+          "cells": [
+            {
+              "label": "Under-display camera",
+              "text": "selfie",
+              "sub": "appears only when needed",
+              "atWord": 12
+            },
+            {
+              "label": "No cutout",
+              "text": "inner",
+              "sub": "an uninterrupted panel",
+              "atWord": 24
+            },
+            {
+              "label": "Outer Center Stage",
+              "text": "outer",
+              "sub": "12MP, on the cover",
+              "atWord": 32
+            }
+          ]
+        }
+      },
+      "durationFrames": 486
+    },
+    {
+      "id": "s08",
+      "type": "APPLE_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "All that width has to earn itself, and iOS 27 is where it does. Unfold the Duo and the system adapts as it opens, so you can run two apps side by side, or hold two home screen pages at once. Apps notice the fold happening, which is why the handoff feels continuous rather than like a relaunch.",
+      "data": {
+        "appleStage": {
+          "headline": "Two apps, [side by side]",
+          "kind": "duo-pair",
+          "token": "open",
+          "caption": "iOS 27 adapts as it opens",
+          "premise": "The inner panel is close to 4:3, which is what makes two full-height apps practical.",
+          "color": "green",
+          "cells": [
+            {
+              "label": "Two apps at once",
+              "text": "inner",
+              "sub": "side by side",
+              "atWord": 20
+            },
+            {
+              "label": "Two home pages",
+              "text": "outer",
+              "sub": "or one big grid",
+              "atWord": 29
+            },
+            {
+              "label": "Apps see the fold",
+              "text": "hinge",
+              "sub": "continuous, not relaunched",
+              "atWord": 38
+            }
+          ]
+        }
+      },
+      "durationFrames": 581
+    },
+    {
+      "id": "s09",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneC",
+      "narration": "Round the back, a pair rather than the Pro trio: a forty eight megapixel Fusion main and a forty eight megapixel ultra wide, in a pill shaped housing with the flash beside them.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-duo-page#camera",
+              "label": "the camera system",
+              "focus": true,
+              "atWord": 5,
+              "zooms": [
+                {
+                  "mark": "camhead",
+                  "wantAtWord": 11
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 19
+                }
+              ],
+              "id": "camera",
+              "src": "rec/apple-duo-page/seg-03.mp4",
+              "frames": 265,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "camhead": {
+                  "x": 275,
+                  "y": 558,
+                  "w": 244,
+                  "h": 25,
+                  "covers": "Advanced camera system"
+                }
+              },
+              "ink": [
+                {
+                  "x": 170,
+                  "y": 0,
+                  "w": 833,
+                  "h": 176
+                },
+                {
+                  "x": 1023,
+                  "y": 0,
+                  "w": 577,
+                  "h": 176
+                },
+                {
+                  "x": 934,
+                  "y": 87,
+                  "w": 165,
+                  "h": 17
+                },
+                {
+                  "x": 186,
+                  "y": 209,
+                  "w": 588,
+                  "h": 62
+                },
+                {
+                  "x": 1039,
+                  "y": 209,
+                  "w": 561,
+                  "h": 41
+                },
+                {
+                  "x": 186,
+                  "y": 209,
+                  "w": 178,
+                  "h": 20
+                },
+                {
+                  "x": 1039,
+                  "y": 209,
+                  "w": 49,
+                  "h": 20
+                },
+                {
+                  "x": 368,
+                  "y": 329,
+                  "w": 100,
+                  "h": 45
+                },
+                {
+                  "x": 1340,
+                  "y": 332,
+                  "w": 36,
+                  "h": 36
+                },
+                {
+                  "x": 1394,
+                  "y": 332,
+                  "w": 36,
+                  "h": 36
+                },
+                {
+                  "x": 773,
+                  "y": 354,
+                  "w": 129,
+                  "h": 20
+                },
+                {
+                  "x": 570,
+                  "y": 354,
+                  "w": 70,
+                  "h": 20
+                },
+                {
+                  "x": 570,
+                  "y": 405,
+                  "w": 102,
+                  "h": 20
+                },
+                {
+                  "x": 773,
+                  "y": 405,
+                  "w": 95,
+                  "h": 20
+                },
+                {
+                  "x": 388,
+                  "y": 405,
+                  "w": 55,
+                  "h": 20
+                },
+                {
+                  "x": 368,
+                  "y": 507,
+                  "w": 97,
+                  "h": 23
+                },
+                {
+                  "x": 275,
+                  "y": 558,
+                  "w": 587,
+                  "h": 302
+                },
+                {
+                  "x": 275,
+                  "y": 881,
+                  "w": 775,
+                  "h": 19
+                }
+              ],
+              "shows": "iPhone Duo"
+            }
+          ],
+          "sourceNote": "Apple, iPhone Duo product page, captured 10 September 2026",
+          "caption": "Dual 48MP, not the Pro trio",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 344
+    },
+    {
+      "id": "s10",
+      "type": "APPLE_STAGE",
+      "transition": "zoom",
+      "background": "zoneC",
+      "narration": "Folding does buy the camera something real, though. Because the outer screen faces you while the good rear lenses face out, you can frame a selfie on the cover display and shoot it on the main camera. Smart Take goes further and fires the shutter itself once everyone's ready.",
+      "data": {
+        "appleStage": {
+          "headline": "Selfies on the [rear] camera",
+          "kind": "duo-pair",
+          "caption": "Frame on the cover, shoot on the good lens",
+          "premise": "The cover display is a viewfinder for the rear cameras. Smart Take releases the shutter.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "Duo Preview",
+              "text": "outer",
+              "sub": "frame on the cover screen",
+              "atWord": 17
+            },
+            {
+              "label": "The good lenses",
+              "text": "lens",
+              "sub": "dual 48MP Fusion",
+              "atWord": 25
+            },
+            {
+              "label": "Smart Take",
+              "text": "body",
+              "sub": "fires when everyone is ready",
+              "atWord": 33
+            }
+          ]
+        }
+      },
+      "durationFrames": 496
+    },
+    {
+      "id": "s11",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Inside sits the same A20 Pro that runs the 18 Pro, with the same dual sixteen core Neural Engine, so the folding phone isn't the slow one in the range. What differs is the plumbing: an advanced thermal system, because a five millimetre body has nowhere to put heat.",
+      "data": {
+        "appleStage": {
+          "headline": "The [same] A20 Pro as the 18 Pro",
+          "kind": "die-floorplan",
+          "token": "neural",
+          "caption": "Dual 16-core Neural Engine",
+          "premise": "Thirty-two Neural Engine cells drawn, thirty-two on the chip. The same silicon as the Pro.",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "Neural Engine",
+              "text": "neural",
+              "sub": "32 cores, as the Pro",
+              "atWord": 13
+            },
+            {
+              "label": "Thermal system",
+              "text": "io",
+              "sub": "a 5.2 mm body traps heat",
+              "atWord": 28
+            },
+            {
+              "label": "Same AI workloads",
+              "text": "io",
+              "sub": "no second-tier silicon",
+              "atWord": 34
+            }
+          ]
+        }
+      },
+      "durationFrames": 496
+    },
+    {
+      "id": "s12",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "Apple's page says it in its own words: the A20 Pro with the dual sixteen core Neural Engine, purpose built for intensive AI workloads. Same chip as the Pro, different body around it.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-duo-page#chip",
+              "label": "the A20 Pro section",
+              "focus": true,
+              "atWord": 5,
+              "zooms": [
+                {
+                  "mark": "chiphead",
+                  "wantAtWord": 11
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 19
+                }
+              ],
+              "id": "chip",
+              "src": "rec/apple-duo-page/seg-04.mp4",
+              "frames": 279,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "chiphead": {
+                  "x": 511,
+                  "y": 109,
+                  "w": 68,
+                  "h": 25,
+                  "covers": "Dual 16"
+                }
+              },
+              "ink": [
+                {
+                  "x": 275,
+                  "y": 0,
+                  "w": 707,
+                  "h": 90
+                },
+                {
+                  "x": 1143,
+                  "y": 0,
+                  "w": 82,
+                  "h": 72
+                },
+                {
+                  "x": 1289,
+                  "y": 0,
+                  "w": 77,
+                  "h": 42
+                },
+                {
+                  "x": 1428,
+                  "y": 0,
+                  "w": 72,
+                  "h": 42
+                },
+                {
+                  "x": 1042,
+                  "y": 0,
+                  "w": 36,
+                  "h": 42
+                },
+                {
+                  "x": 1573,
+                  "y": 0,
+                  "w": 27,
+                  "h": 42
+                },
+                {
+                  "x": 1214,
+                  "y": 29,
+                  "w": 68,
+                  "h": 15
+                },
+                {
+                  "x": 934,
+                  "y": 55,
+                  "w": 172,
+                  "h": 49
+                },
+                {
+                  "x": 1423,
+                  "y": 55,
+                  "w": 82,
+                  "h": 17
+                },
+                {
+                  "x": 1288,
+                  "y": 55,
+                  "w": 79,
+                  "h": 17
+                },
+                {
+                  "x": 1578,
+                  "y": 55,
+                  "w": 22,
+                  "h": 17
+                },
+                {
+                  "x": 431,
+                  "y": 87,
+                  "w": 769,
+                  "h": 57
+                },
+                {
+                  "x": 275,
+                  "y": 109,
+                  "w": 935,
+                  "h": 83
+                },
+                {
+                  "x": 275,
+                  "y": 109,
+                  "w": 40,
+                  "h": 25
+                },
+                {
+                  "x": 1273,
+                  "y": 112,
+                  "w": 29,
+                  "h": 29
+                },
+                {
+                  "x": 273,
+                  "y": 244,
+                  "w": 209,
+                  "h": 130
+                },
+                {
+                  "x": 616,
+                  "y": 284,
+                  "w": 210,
+                  "h": 81
+                },
+                {
+                  "x": 773,
+                  "y": 354,
+                  "w": 129,
+                  "h": 20
+                },
+                {
+                  "x": 570,
+                  "y": 354,
+                  "w": 70,
+                  "h": 20
+                },
+                {
+                  "x": 570,
+                  "y": 405,
+                  "w": 102,
+                  "h": 20
+                },
+                {
+                  "x": 773,
+                  "y": 405,
+                  "w": 95,
+                  "h": 20
+                },
+                {
+                  "x": 388,
+                  "y": 405,
+                  "w": 55,
+                  "h": 20
+                },
+                {
+                  "x": 368,
+                  "y": 507,
+                  "w": 97,
+                  "h": 23
+                },
+                {
+                  "x": 368,
+                  "y": 558,
+                  "w": 171,
+                  "h": 23
+                }
+              ],
+              "shows": "iPhone Duo"
+            }
+          ],
+          "sourceNote": "Apple, iPhone Duo product page, captured 10 September 2026",
+          "caption": "The same silicon as the Pro",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 344
+    },
+    {
+      "id": "s13",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneA",
+      "narration": "Battery gets its own passage, and it’s the more interesting one. An iPhone first dual battery system, paired with an internal eSIM design that reclaims the space a SIM tray used to take, so that room goes to the cells instead.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:apple-duo-page#battery",
+              "label": "the dual-battery system",
+              "focus": true,
+              "atWord": 6,
+              "zooms": [
+                {
+                  "mark": "batt",
+                  "wantAtWord": 13
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 24
+                }
+              ],
+              "id": "battery",
+              "src": "rec/apple-duo-page/seg-05.mp4",
+              "frames": 194,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "batt": {
+                  "x": 520,
+                  "y": 425,
+                  "w": 181,
+                  "h": 25,
+                  "covers": "dual-battery system"
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 1600,
+                  "h": 166
+                },
+                {
+                  "x": 368,
+                  "y": 262,
+                  "w": 516,
+                  "h": 391
+                },
+                {
+                  "x": 773,
+                  "y": 354,
+                  "w": 129,
+                  "h": 20
+                },
+                {
+                  "x": 1008,
+                  "y": 356,
+                  "w": 283,
+                  "h": 81
+                },
+                {
+                  "x": 625,
+                  "y": 405,
+                  "w": 274,
+                  "h": 74
+                },
+                {
+                  "x": 1008,
+                  "y": 470,
+                  "w": 284,
+                  "h": 81
+                },
+                {
+                  "x": 744,
+                  "y": 799,
+                  "w": 112,
+                  "h": 20
+                }
+              ],
+              "shows": "iPhone Duo"
+            }
+          ],
+          "sourceNote": "Apple, iPhone Duo product page, captured 10 September 2026",
+          "caption": "eSIM buys room for the cells",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 420
+    },
+    {
+      "id": "s14",
+      "type": "APPLE_STAGE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Worth being clear about what the fold costs you, though. An iPhone 18 Pro carries three rear lenses; the Duo carries two, and the one it drops is the telephoto. So there's no optical reach here — if you shoot a lot at distance, that's the compromise you're buying into.",
+      "data": {
+        "appleStage": {
+          "headline": "The [telephoto] is what you give up",
+          "kind": "pro-back",
+          "caption": "Three lenses on the Pro, two on the Duo",
+          "premise": "This is the 18 Pro's island. The Duo keeps the main and the ultra wide, and drops the third.",
+          "color": "red",
+          "cells": [
+            {
+              "label": "Three on the Pro",
+              "text": "lens",
+              "sub": "main, ultra wide, telephoto",
+              "atWord": 11
+            },
+            {
+              "label": "Two on the Duo",
+              "text": "plateau",
+              "sub": "no optical reach",
+              "atWord": 21
+            },
+            {
+              "label": "The trade",
+              "text": "flash",
+              "sub": "reach, for a bigger screen",
+              "atWord": 31
+            }
+          ]
+        }
+      },
+      "durationFrames": 505
+    },
+    {
+      "id": "s15",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One number the keynote skipped past: weight. The Duo is two hundred and fifty four grams, against two hundred and eleven for an iPhone 18 Pro. That's forty three grams, which sounds trivial written down and is very much not trivial in a shirt pocket. Two halves and a hinge have to weigh something.",
+      "data": {
+        "appleStage": {
+          "headline": "[254 grams], and you notice",
+          "kind": "compare-bars",
+          "caption": "Against the Pro",
+          "premise": "Apple's published weights. Two halves and a hinge cost 43 grams over an 18 Pro.",
+          "color": "red",
+          "cells": [
+            {
+              "label": "iPhone Duo",
+              "text": "bar",
+              "sub": "254 g",
+              "value": 254,
+              "atWord": 9
+            },
+            {
+              "label": "iPhone 18 Pro Max",
+              "text": "bar",
+              "sub": "249 g",
+              "value": 249,
+              "atWord": 28
+            },
+            {
+              "label": "iPhone 18 Pro",
+              "text": "bar",
+              "sub": "211 g",
+              "value": 211,
+              "atWord": 19
+            }
+          ]
+        }
+      },
+      "durationFrames": 543
+    },
+    {
+      "id": "s16",
+      "type": "APPLE_STAGE",
+      "transition": "fade",
+      "background": "zoneC",
+      "narration": "Now the number. The Duo starts at one thousand nine hundred and ninety nine dollars for two fifty six gigabytes, which is eight hundred more than an iPhone 18 Pro. Two colours, pre orders on the sixteenth of October, and it arrives on the twenty third.",
+      "data": {
+        "appleStage": {
+          "headline": "[$1,999] to start",
+          "kind": "compare-bars",
+          "caption": "Against the rest of the lineup",
+          "premise": "Entry price, 256GB, US. The Duo sits above every other iPhone on sale.",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "iPhone Duo",
+              "text": "bar",
+              "sub": "$1,999",
+              "value": 1999,
+              "atWord": 8
+            },
+            {
+              "label": "iPhone 18 Pro Max",
+              "text": "bar",
+              "sub": "$1,299",
+              "value": 1299,
+              "atWord": 20
+            },
+            {
+              "label": "iPhone 18 Pro",
+              "text": "bar",
+              "sub": "$1,199",
+              "value": 1199,
+              "atWord": 26
+            }
+          ]
+        }
+      },
+      "durationFrames": 467
+    },
+    {
+      "id": "s17",
+      "type": "APPLE_STAGE",
+      "transition": "whippan",
+      "background": "zoneC",
+      "narration": "Then the practical stuff, which matters more on a phone that bends. Titanium frame, Ceramic Shield front and back, and IP sixty eight — dust as well as water, which is the harder half for a hinge. Touch ID sits in the side button, and it takes the seventy nine dollar USB C Apple Pencil only, not the Pencil Pro.",
+      "data": {
+        "appleStage": {
+          "headline": "[IP68], Touch ID, and one Pencil",
+          "kind": "duo-pair",
+          "caption": "The practical small print",
+          "premise": "Titanium frame, Ceramic Shield, IP68. Touch ID in the side button; USB-C Pencil only.",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "Titanium and IP68",
+              "text": "body",
+              "sub": "dust as well as water",
+              "atWord": 14
+            },
+            {
+              "label": "Touch ID",
+              "text": "outer",
+              "sub": "in the side button",
+              "atWord": 31
+            },
+            {
+              "label": "USB-C Apple Pencil",
+              "text": "inner",
+              "sub": "not the Pencil Pro",
+              "atWord": 42
+            }
+          ]
+        }
+      },
+      "durationFrames": 600
+    },
+    {
+      "id": "s18",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So the Duo's a real phone closed, a small tablet open, and the only one of these without a hole in its big screen. Whether that’s worth two thousand dollars is genuinely your call. The watches and AirPods are next.",
+      "data": {
+        "headline": "The watches and AirPods next",
+        "subtext": "Would you carry a folding iPhone?",
+        "atWord": 20
+      },
+      "durationFrames": 410
+    }
+  ]
+}
