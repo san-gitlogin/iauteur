@@ -143,37 +143,39 @@ body colour, in narration or on screen.
 | AirPods 5 ANC | Open-ear ANC, "up to **50% more** external noise removed than AirPods 4". |
 | iPhone Duo price | **$1,999.** |
 
-### THE PRICE STORY IS THE OPPOSITE OF THE USUAL ONE (S9)
+### THE PRICE STORY IS THE OPPOSITE OF THE USUAL ONE
 
-Owner, correcting an earlier misreading: the interesting comparison is not 17 Pro against 18 Pro.
-It is **what happened to the older models on the day the new one launched.** Normally they get
-cheaper. This time Apple **raised** them.
+Normally the older models get CHEAPER when a new iPhone lands. On 9 September Apple **raised**
+them, worldwide, and this is the ending the video should land on.
 
-India, after 9 September:
+**US, and the series uses US throughout** — an earlier draft built this beat in rupees before it
+was confirmed the same rise happened in dollars. Never mix currencies inside one video.
 
 | Model | Was | Now | Rise |
 |---|---|---|---|
-| iPhone Air, 1TB | ₹1,59,900 | **₹2,24,900** | **+₹65,000** |
-| iPhone Air, 512GB | ₹1,39,900 | ₹1,74,900 | +₹35,000 |
-| iPhone Air, 256GB | ₹1,19,900 | ₹1,49,900 | +₹30,000 |
-| iPhone 17, 512GB | ₹1,02,900 | ₹1,24,900 | +₹22,000 |
-| iPhone 17, 256GB | ₹82,900 | ₹99,900 | +₹17,000 |
-| iPhone 16, 128GB | ₹69,900 | ₹89,900 | +₹20,000 |
-| iPhone 17e, 512GB | ₹84,900 | ₹1,04,900 | +₹20,000 |
-| iPhone 17e, 256GB | ₹64,900 | ₹79,900 | +₹15,000 |
+| iPhone Air | $999 | **$1,099** | +$100 |
+| iPhone 17 | $799 | **$899** | +$100 |
+| iPhone 16 | $699 | **$799** | +$100 |
+| iPhone 17e | $599 | **$699** | +$100 |
+| iPhone 18 Pro | $1,099 (17 Pro) | **$1,199** | +$100 |
+| iPhone 18 Pro Max | $1,199 (17 Pro Max) | **$1,299** | +$100 |
+| iPhone Duo | — | **$1,999** | new |
 
-iPhone 18 Pro starts at **₹1,64,900**; Pro Max at **₹1,79,900**.
+iPhone 17 Pro and 17 Pro Max are **discontinued**. India saw the same move at larger absolute
+figures (iPhone Air 1TB ₹1,59,900 → ₹2,24,900); use it only if the whole video is in rupees.
 
-**Why.** Memory. A 256GB memory chip costs nearly **400%** more year on year and the bill of
-materials on a 256GB Pro is up ~**38%**; TSMC's 2nm costs materially more per die than 3nm; AI
-datacentre demand is eating memory supply. Tim Cook, to the Wall Street Journal in June: *"price
-increases are unavoidable… we've tried to shield our customers from them. However, the situation
-has become unsustainable."* ⚠ The supplied text calls him "then-CEO"; **do not state or imply
-anything about who currently runs Apple without checking it** — quote the words, not the title.
+**Why.** Memory. A 256GB memory chip costs nearly **400%** more year on year, the bill of
+materials on a 256GB Pro is up ~**38%**, TSMC's 2nm costs materially more per die than 3nm, and AI
+datacentre demand is eating memory supply.
 
-⚠ **CURRENCY.** This table is INDIA. The rest of the dossier is US (the owner's earlier choice).
-A single video must not mix them silently — either the price beats are all rupees, or the rise is
-introduced explicitly as Indian pricing.
+**WHO SAID IT, AND WHAT THEY WERE AT THE TIME.** *"Price increases are unavoidable… we've tried to
+shield our customers from them. However, the situation has become unsustainable."* — **Tim Cook,
+then Apple's chief executive**, to the Wall Street Journal in June.
+
+⚠ **APPLE'S CEO IS JOHN TERNUS**, since **1 September 2026**. Cook stepped down after ~15 years
+and is now executive chairman. Any sentence that calls Cook "Apple's CEO" in the present tense is
+WRONG, and this is exactly the kind of error a viewer catches instantly. Quote his words, and give
+him his title *at the time of the quote*.
 
 ---
 

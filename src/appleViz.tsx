@@ -7,7 +7,7 @@ import {AssetIcon} from './AssetIcon';
 import {UnknownKind} from './unknownKind';
 import {
   IPHONE_18_PRO, IPHONE_DUO_OPEN, IPHONE_DUO_FOLDED, WATCH_S12_46, WATCH_ULTRA_4,
-  AIRPODS_5, CAM, BUTTONS, ISLAND, lensCentres, plateau, Device,
+  AIRPODS_5, CAM, DUO_CAM, BUTTONS, ISLAND, lensCentres, plateau, Device,
 } from './appleGeom';
 
 // APPLE VIZ — the pictures for the September 2026 Apple series.
@@ -316,12 +316,37 @@ const DuoPair: React.FC<Props> = ({items, accent, token}) => {
             rx={fold.screen.r} ry={fold.screen.r} fill="none"
             stroke={on(lit('outer'))} strokeWidth={sw * (lit('outer') > 0.02 ? 1.5 : 0.85)}
             style={{filter: glow(lit('outer'))}} {...draw(baseDraw(frame, 8))} />
-          {/* dual 48MP Fusion, stacked, upper left */}
-          {[0, 1].map((i) => (
-            <circle key={i} cx={fold.screen.bezel + 7} cy={12 + i * 13} r={4.2} fill="none"
-              stroke={on(lit('lens'))} strokeWidth={sw * 1.1}
-              style={{filter: glow(lit('lens'))}} {...draw(baseDraw(frame, 12 + i * 3))} />
-          ))}
+          {/* THE DUO'S BUMP IS A HORIZONTAL PILL, not the Pro's triangle. Dual 48MP Fusion
+              means TWO lenses, level with each other, with the flash to their right and a
+              mic slit above it. Drawing the Pro's island here would be a different phone. */}
+          {(() => {
+            const pl2 = lit('lens'), B = DUO_CAM.bump;
+            return (
+              <>
+                <rect x={B.x} y={B.y} width={B.w} height={B.h} rx={B.r} ry={B.r} fill="none"
+                  stroke={on(pl2)} strokeWidth={sw * (pl2 > 0.02 ? 1.6 : 0.95)}
+                  style={{filter: glow(pl2)}} {...draw(baseDraw(frame, 10))} />
+                {DUO_CAM.lenses.map((l, i) => (
+                  <g key={i}>
+                    <circle cx={l.cx} cy={l.cy} r={l.r} fill="none" stroke={on(pl2)}
+                      strokeWidth={sw * (pl2 > 0.02 ? 1.6 : 1.1)}
+                      style={{filter: glow(pl2)}} {...draw(baseDraw(frame, 12 + i * 3))} />
+                    <circle cx={l.cx} cy={l.cy} r={l.r * CAM.innerRing} fill="none"
+                      stroke={on(pl2)} strokeWidth={sw * 0.5} opacity={0.72}
+                      {...draw(baseDraw(frame, 14 + i * 3))} />
+                    <circle cx={l.cx} cy={l.cy} r={l.r * CAM.core} fill={on(pl2)}
+                      opacity={0.55 * baseDraw(frame, 16 + i * 3)} />
+                  </g>
+                ))}
+                <circle cx={DUO_CAM.flash.cx} cy={DUO_CAM.flash.cy} r={DUO_CAM.flash.r}
+                  fill="none" stroke={on(pl2)} strokeWidth={sw * 0.9}
+                  {...draw(baseDraw(frame, 18))} />
+                <rect x={DUO_CAM.mic.x} y={DUO_CAM.mic.y} width={DUO_CAM.mic.w}
+                  height={DUO_CAM.mic.h} rx={DUO_CAM.mic.h / 2}
+                  fill={idle} opacity={baseDraw(frame, 20)} />
+              </>
+            );
+          })()}
         </g>
       )}
 
@@ -716,7 +741,7 @@ const PriceRise: React.FC<Props> = ({items, accent, token}) => {
   const cur = token || '';                       // currency prefix, e.g. "₹" or "$"
   const rowH = Math.max(46 * v.scale,
     Math.min(budget / Math.max(rows.length, 1) - 6 * v.scale, (v.vertical ? 190 : 120) * v.scale));
-  const fmt = (n: number) => `${cur}${n.toLocaleString('en-IN')}`;
+  const fmt = (n: number) => `${cur}${n.toLocaleString(cur === '₹' ? 'en-IN' : 'en-US')}`;
 
   return (
     <div style={{

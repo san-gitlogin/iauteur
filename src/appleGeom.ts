@@ -131,14 +131,38 @@ export const CAM = {
    *  almost on top of the body's own corner radius (11.7mm) — the two curves collided and
    *  the plateau read as falling off the edge of the phone. Owner: "The palette kinda also
    *  falls to the edge of the phone." Clearing the body radius is the constraint. */
-  inset: 4.6,
-  top: 8.5,
+  /** THE PLATEAU IS A BOX AROUND THE CAMERAS, NOT A SHRINK-WRAP. Owner, 2026-09-10: "the
+   *  box which contains the camera the lidar and flash must not be that much near to the
+   *  cameras. It must be extended further just a few mm away from the edge of the phone."
+   *  At inset 4.6 / height 38 the lens triangle sat hard against the plateau's top, left
+   *  and bottom edges. The box now runs to 3.2mm from the body edge and is 44 tall, which
+   *  leaves ~5mm of clearance around the cluster on every side. It still clears the body's
+   *  own 11.7mm corner radius, which was the constraint that pushed it inward last time. */
+  inset: 3.2,
+  top: 7.5,
   /** Apple's drawing gives the plateau as 64.16 x 32.36 on a 77.98mm body. The 18 Pro's
    *  plateau runs the full width, so only the HEIGHT carries over: 32.36 scaled to this
    *  body is 29.8 — but at Ø14 lenses the triangle needs 34.3mm of it, so the plateau is
    *  38 and the cluster clears top and bottom by 1.85mm. */
-  height: 38,
-  radius: 11,
+  height: 44,
+  radius: 13,
+};
+
+/** iPhone Duo's rear camera bump — a HORIZONTAL PILL with two lenses side by side, a flash
+ *  to their right and a mic slit above it. Read off Apple's own Duo product photography.
+ *  Owner: "Iphone duo camera bump also needs corrections."
+ *
+ *  Not the Pro's triangle: the Duo is a DUAL 48MP Fusion system (main + ultra wide), so
+ *  there are two lenses, they sit level with each other, and the housing is a pill rather
+ *  than a rounded square. Drawing the Pro's island on it would be a different phone.
+ *  Coordinates are millimetres on the FOLDED body (84.1 x 117.8). */
+export const DUO_CAM = {
+  // The pill is 52 wide, not 48: at 48 the flash overlapped the second lens's ring and sat
+  // hard against the housing edge. On the real thing the flash is clear of both.
+  bump: {x: 5, y: 7, w: 52, h: 24, r: 12},
+  lenses: [{cx: 18, cy: 19, r: 8.2}, {cx: 35, cy: 19, r: 8.2}],
+  flash: {cx: 47.5, cy: 21.5, r: 2.6},
+  mic: {x: 45.2, y: 12.4, w: 4.6, h: 1.4},
 };
 
 /** The three lens centres of the Pro triangle, in body millimetres.
