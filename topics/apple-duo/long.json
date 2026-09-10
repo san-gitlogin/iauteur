@@ -19,13 +19,25 @@
       "pinned": "Would you carry a folding iPhone at $1,999, or wait for the second one?",
       "tags": [
         "iPhone Duo",
+        "iPhone Duo review",
         "foldable iPhone",
+        "Apple foldable",
         "Apple September 2026",
+        "Apple event 2026",
         "iPhone Duo price",
-        "under-display camera",
+        "iPhone Duo specs",
+        "under display camera",
+        "iPhone Duo vs iPhone 18 Pro",
         "A20 Pro",
-        "Apple event",
-        "iPhone Duo specs"
+        "is the iPhone Duo worth it",
+        "folding phone 2026",
+        "iPhone Duo hands on",
+        "Apple keynote",
+        "iOS 27",
+        "Smart Take",
+        "Duo Preview",
+        "thinnest iPhone",
+        "iPhone Duo camera"
       ],
       "queries": [
         "iPhone Duo specs and price",
@@ -49,9 +61,10 @@
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "THE CAMERA IS HIDDEN",
+    "title": "EVERYTHING YOU NEED TO KNOW",
     "badge": "iPhone Duo",
-    "asset": "si:apple"
+    "asset": "si:apple",
+    "note": "the first foldable iPhone"
   },
   "scenes": [
     {
@@ -65,9 +78,11 @@
         "subtext": "Apple's first foldable iPhone",
         "kicker": "September 2026",
         "variant": "plaque",
-        "atWord": 7
+        "atWord": 4.917
       },
-      "durationFrames": 154
+      "durationFrames": 174,
+      "audio": "audio/duo_long_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -78,9 +93,11 @@
       "data": {
         "title": "What folding actually buys you",
         "subtitle": "iPhone Duo, in numbers",
-        "atWord": 18
+        "atWord": 14.583
       },
-      "durationFrames": 458
+      "durationFrames": 447,
+      "audio": "audio/duo_long_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
@@ -100,24 +117,26 @@
               "label": "Closed",
               "text": "outer",
               "sub": "84.1 mm across",
-              "atWord": 11
+              "atWord": 7.167
             },
             {
               "label": "Open",
               "text": "inner",
               "sub": "164.6 mm across",
-              "atWord": 20
+              "atWord": 16.583
             },
             {
               "label": "The hinge",
               "text": "hinge",
               "sub": "down the centre",
-              "atWord": 28
+              "atWord": 23.583
             }
           ]
         }
       },
-      "durationFrames": 496
+      "durationFrames": 521,
+      "audio": "audio/duo_long_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -132,15 +151,15 @@
               "ref": "rec:apple-duo-page#thin-fold",
               "label": "the display claim",
               "focus": true,
-              "atWord": 6,
+              "atWord": 4.75,
               "zooms": [
                 {
                   "mark": "disp",
-                  "wantAtWord": 13
+                  "wantAtWord": 9.75
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 23
+                  "wantAtWord": 18.167
                 }
               ],
               "id": "thin-fold",
@@ -264,7 +283,9 @@
           }
         }
       },
-      "durationFrames": 410
+      "durationFrames": 403,
+      "audio": "audio/duo_long_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -285,26 +306,28 @@
               "text": "bar",
               "sub": "5.2 mm",
               "value": 5.2,
-              "atWord": 11
+              "atWord": 7.833
             },
             {
               "label": "iPhone Air",
               "text": "bar",
               "sub": "5.6 mm",
               "value": 5.6,
-              "atWord": 21
+              "atWord": 18.75
             },
             {
               "label": "iPhone Duo, closed",
               "text": "bar",
               "sub": "11.3 mm",
               "value": 11.3,
-              "atWord": 29
+              "atWord": 24.833
             }
           ]
         }
       },
-      "durationFrames": 496
+      "durationFrames": 521,
+      "audio": "audio/duo_long_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
@@ -325,24 +348,26 @@
               "label": "Outer display",
               "text": "outer",
               "sub": "5.4-inch, 1398 x 2034",
-              "atWord": 9
+              "atWord": 7
             },
             {
               "label": "Inner display",
               "text": "inner",
               "sub": "7.6-inch, nano-texture",
-              "atWord": 28
+              "atWord": 21.667
             },
             {
               "label": "Under the screen",
               "text": "selfie",
               "sub": "no notch, no cutout",
-              "atWord": 34
+              "atWord": 24.917
             }
           ]
         }
       },
-      "durationFrames": 505
+      "durationFrames": 495,
+      "audio": "audio/duo_long_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
@@ -363,24 +388,26 @@
               "label": "Under-display camera",
               "text": "selfie",
               "sub": "appears only when needed",
-              "atWord": 12
+              "atWord": 8.833
             },
             {
               "label": "No cutout",
               "text": "inner",
               "sub": "an uninterrupted panel",
-              "atWord": 24
+              "atWord": 19.5
             },
             {
               "label": "Outer Center Stage",
               "text": "outer",
               "sub": "12MP, on the cover",
-              "atWord": 32
+              "atWord": 25
             }
           ]
         }
       },
-      "durationFrames": 486
+      "durationFrames": 478,
+      "audio": "audio/duo_long_s07.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s08",
@@ -401,24 +428,26 @@
               "label": "Two apps at once",
               "text": "inner",
               "sub": "side by side",
-              "atWord": 20
+              "atWord": 14
             },
             {
               "label": "Two home pages",
               "text": "outer",
               "sub": "or one big grid",
-              "atWord": 29
+              "atWord": 19.417
             },
             {
               "label": "Apps see the fold",
               "text": "hinge",
               "sub": "continuous, not relaunched",
-              "atWord": 38
+              "atWord": 26
             }
           ]
         }
       },
-      "durationFrames": 581
+      "durationFrames": 545,
+      "audio": "audio/duo_long_s08.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s09",
@@ -433,15 +462,15 @@
               "ref": "rec:apple-duo-page#camera",
               "label": "the camera system",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.75,
               "zooms": [
                 {
                   "mark": "camhead",
-                  "wantAtWord": 11
+                  "wantAtWord": 7.583
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 19
+                  "wantAtWord": 13.5
                 }
               ],
               "id": "camera",
@@ -583,7 +612,9 @@
           }
         }
       },
-      "durationFrames": 344
+      "durationFrames": 328,
+      "audio": "audio/duo_long_s09.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s10",
@@ -603,24 +634,26 @@
               "label": "Duo Preview",
               "text": "outer",
               "sub": "frame on the cover screen",
-              "atWord": 17
+              "atWord": 12.5
             },
             {
               "label": "The good lenses",
               "text": "lens",
               "sub": "dual 48MP Fusion",
-              "atWord": 25
+              "atWord": 18.417
             },
             {
               "label": "Smart Take",
               "text": "body",
               "sub": "fires when everyone is ready",
-              "atWord": 33
+              "atWord": 23.25
             }
           ]
         }
       },
-      "durationFrames": 496
+      "durationFrames": 473,
+      "audio": "audio/duo_long_s10.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s11",
@@ -641,24 +674,26 @@
               "label": "Neural Engine",
               "text": "neural",
               "sub": "32 cores, as the Pro",
-              "atWord": 13
+              "atWord": 9.667
             },
             {
               "label": "Thermal system",
               "text": "io",
               "sub": "a 5.2 mm body traps heat",
-              "atWord": 28
+              "atWord": 19.417
             },
             {
               "label": "Same AI workloads",
               "text": "io",
               "sub": "no second-tier silicon",
-              "atWord": 34
+              "atWord": 23.583
             }
           ]
         }
       },
-      "durationFrames": 496
+      "durationFrames": 479,
+      "audio": "audio/duo_long_s11.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s12",
@@ -673,15 +708,15 @@
               "ref": "rec:apple-duo-page#chip",
               "label": "the A20 Pro section",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.667,
               "zooms": [
                 {
                   "mark": "chiphead",
-                  "wantAtWord": 11
+                  "wantAtWord": 7.667
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 19
+                  "wantAtWord": 14.75
                 }
               ],
               "id": "chip",
@@ -859,7 +894,9 @@
           }
         }
       },
-      "durationFrames": 344
+      "durationFrames": 370,
+      "audio": "audio/duo_long_s12.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s13",
@@ -874,15 +911,15 @@
               "ref": "rec:apple-duo-page#battery",
               "label": "the dual-battery system",
               "focus": true,
-              "atWord": 6,
+              "atWord": 4.75,
               "zooms": [
                 {
                   "mark": "batt",
-                  "wantAtWord": 13
+                  "wantAtWord": 9.75
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 24
+                  "wantAtWord": 19.25
                 }
               ],
               "id": "battery",
@@ -958,7 +995,9 @@
           }
         }
       },
-      "durationFrames": 420
+      "durationFrames": 399,
+      "audio": "audio/duo_long_s13.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s14",
@@ -978,24 +1017,26 @@
               "label": "Three on the Pro",
               "text": "lens",
               "sub": "main, ultra wide, telephoto",
-              "atWord": 11
+              "atWord": 7.917
             },
             {
               "label": "Two on the Duo",
               "text": "plateau",
               "sub": "no optical reach",
-              "atWord": 21
+              "atWord": 16.667
             },
             {
               "label": "The trade",
               "text": "flash",
               "sub": "reach, for a bigger screen",
-              "atWord": 31
+              "atWord": 24.917
             }
           ]
         }
       },
-      "durationFrames": 505
+      "durationFrames": 468,
+      "audio": "audio/duo_long_s14.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s15",
@@ -1016,26 +1057,28 @@
               "text": "bar",
               "sub": "254 g",
               "value": 254,
-              "atWord": 9
+              "atWord": 8
             },
             {
               "label": "iPhone 18 Pro Max",
               "text": "bar",
               "sub": "249 g",
               "value": 249,
-              "atWord": 28
+              "atWord": 22.917
             },
             {
               "label": "iPhone 18 Pro",
               "text": "bar",
               "sub": "211 g",
               "value": 211,
-              "atWord": 19
+              "atWord": 15.75
             }
           ]
         }
       },
-      "durationFrames": 543
+      "durationFrames": 582,
+      "audio": "audio/duo_long_s15.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16",
@@ -1056,26 +1099,28 @@
               "text": "bar",
               "sub": "$1,999",
               "value": 1999,
-              "atWord": 8
+              "atWord": 5.417
             },
             {
               "label": "iPhone 18 Pro Max",
               "text": "bar",
               "sub": "$1,299",
               "value": 1299,
-              "atWord": 20
+              "atWord": 13.167
             },
             {
               "label": "iPhone 18 Pro",
               "text": "bar",
               "sub": "$1,199",
               "value": 1199,
-              "atWord": 26
+              "atWord": 18.333
             }
           ]
         }
       },
-      "durationFrames": 467
+      "durationFrames": 459,
+      "audio": "audio/duo_long_s16.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s17",
@@ -1095,24 +1140,26 @@
               "label": "Titanium and IP68",
               "text": "body",
               "sub": "dust as well as water",
-              "atWord": 14
+              "atWord": 10.417
             },
             {
               "label": "Touch ID",
               "text": "outer",
               "sub": "in the side button",
-              "atWord": 31
+              "atWord": 25.417
             },
             {
               "label": "USB-C Apple Pencil",
               "text": "inner",
               "sub": "not the Pencil Pro",
-              "atWord": 42
+              "atWord": 32.75
             }
           ]
         }
       },
-      "durationFrames": 600
+      "durationFrames": 591,
+      "audio": "audio/duo_long_s17.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s18",
@@ -1123,9 +1170,11 @@
       "data": {
         "headline": "The watches and AirPods next",
         "subtext": "Would you carry a folding iPhone?",
-        "atWord": 20
+        "atWord": 10.917
       },
-      "durationFrames": 410
+      "durationFrames": 373,
+      "audio": "audio/duo_long_s18.mp3",
+      "timingSource": "tts"
     }
   ]
 }

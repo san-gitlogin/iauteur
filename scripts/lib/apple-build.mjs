@@ -33,6 +33,22 @@
 //     duplicates the opening chapter in the description. Name WHAT IS NEXT instead
 //     ("Duo, the watches and AirPods next"), which the closing sentence already says.
 //
+// ── THE THUMBNAIL IS A REASON TO CLICK, NOT A RIDDLE (owner, 2026-09-10) ────
+// "Why the fuck do you say small shitty words that users wont even touch. Put something
+// like: Everything that has changed in iPhone 18 pro, or everything you need to know."
+//
+// He is right, and it is the same argument as LAW 0f's THE THUMBNAIL NAMES THE THING,
+// pushed one step further. "SIGNS EVERY PHOTO" names no product and promises no payoff;
+// a stranger scrolling has to decode it before they can want it. The cap is 40 characters,
+// which is room for a whole promise:
+//
+//    badge  = the product, so the name is unmissable   ("iPhone 18 Pro")
+//    title  = the PROMISE, in plain words              ("EVERYTHING THAT ACTUALLY CHANGED")
+//    note   = the qualifier that earns the click       ("and what only looks new")
+//
+// Same for `cover` on a short. And author MANY tags, not a handful: they are free, and
+// they are how the video gets found at all.
+
 // ── HOUSE VOICE, for this series specifically (owner, 2026-09-10) ────────────
 // "See how naturally reviewers review products. I need in that way." And: avoid "nothing
 // much", "no more" and similar tics. So: write as somebody who has read the spec sheet and
