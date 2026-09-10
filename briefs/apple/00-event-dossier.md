@@ -18,6 +18,8 @@ because the dollar figures are what every other channel quotes and what the News
 | S5 | Event recap | `macrumors.com/2026/09/09/apple-september-2026-event-recap/` |
 | S6 | Owner's feature brief | supplied in-session, 2026-09-10 |
 | S7 | iPhone 18 Pro buy page (price ladder, finish order) | `apple.com/shop/buy-iphone/iphone-18-pro` |
+| S8 | **Apple Accessory Design Guidelines**, sheet 62.1 "iPhone 17 Pro Max, 1 of 4" | Apple's own dimensioned CAD drawing |
+| S9 | India price revisions after 9 Sep | supplied in-session, 2026-09-10 |
 
 ---
 
@@ -43,6 +45,26 @@ because the dollar figures are what every other channel quotes and what the News
 Editing features (S6, to verify on the page before narrating): Clean Up, Extend, Spatial
 Reframing. Also **iPhone Handoff** — one number live across two iPhones, T-Mobile (US) and
 Telekom (Germany) at launch (S2).
+
+### THE CAMERA ISLAND — from Apple's own CAD (S8), not from a photograph
+
+Sheet 62.1, detail D, iPhone 17 Pro Max (77.98mm wide body):
+
+| Feature | Apple's figure |
+|---|---|
+| Rear cameras | **3X Ø16.20** |
+| Flash | **Ø6.80** |
+| Rear sensor | **Ø6.65** |
+| Rear mic | **Ø1.15** |
+| Plateau | **64.16 x 32.36** |
+
+A lens is therefore **0.208 of the body's width**. The first pass measured 9.5mm off an ANGLED
+marketing photo — 0.13 of the width — so every object in the island came out around half size and
+the back read as wrong without it being obvious why. **A dimensioned drawing beats a photograph.**
+
+Scaled to the 18 Pro's 71.9mm body a lens is 14.9mm; held at **14.0** so the triangle clears the
+plateau edges. Plateau height raised to **38** to fit the cluster with margin. Note the drawing is
+the 17 Pro Max, whose plateau is NOT full width — only the ratios carry over, not the positions.
 
 ### THE PRICE LADDER — read off Apple's own buy page (S7)
 
@@ -108,6 +130,50 @@ surface is and what the Burgundy measurement demonstrates. Chips carry a ring so
 still an object on a dark ground, and the NAME does the identifying work. Glacier is given its
 measurable blue bias against Silver's neutral. Do not present any of the three as a measured
 body colour, in narration or on screen.
+
+### VERIFIED 2026-09-10 — everything that was marked "to verify" now has a source
+
+| Claim | Verdict |
+|---|---|
+| Clean Up / Extend / Spatial Reframing | **REAL.** iOS 27 Photos. Clean Up is upgraded and cloud-assisted; Extend fills beyond the frame; Spatial Reframing shifts perspective after capture, built on Vision Pro spatial models. Ships **14 Sep**. |
+| Duo side-button Touch ID | **REAL.** Touch ID is in the side button. |
+| Smart Take | **REAL.** Captures the operator as well as the subjects. |
+| Duo inner FaceTime camera | **REAL, and under the display** — "appears only when needed". No notch, no cutout. Drawn as a dashed ring BENEATH the screen, never a punched hole. |
+| AirPods 5 tiers | **REAL.** **$129** standard; **$149** with Wireless Charging Case, and the stem-swipe volume is exclusive to the $149. |
+| AirPods 5 ANC | Open-ear ANC, "up to **50% more** external noise removed than AirPods 4". |
+| iPhone Duo price | **$1,999.** |
+
+### THE PRICE STORY IS THE OPPOSITE OF THE USUAL ONE (S9)
+
+Owner, correcting an earlier misreading: the interesting comparison is not 17 Pro against 18 Pro.
+It is **what happened to the older models on the day the new one launched.** Normally they get
+cheaper. This time Apple **raised** them.
+
+India, after 9 September:
+
+| Model | Was | Now | Rise |
+|---|---|---|---|
+| iPhone Air, 1TB | ₹1,59,900 | **₹2,24,900** | **+₹65,000** |
+| iPhone Air, 512GB | ₹1,39,900 | ₹1,74,900 | +₹35,000 |
+| iPhone Air, 256GB | ₹1,19,900 | ₹1,49,900 | +₹30,000 |
+| iPhone 17, 512GB | ₹1,02,900 | ₹1,24,900 | +₹22,000 |
+| iPhone 17, 256GB | ₹82,900 | ₹99,900 | +₹17,000 |
+| iPhone 16, 128GB | ₹69,900 | ₹89,900 | +₹20,000 |
+| iPhone 17e, 512GB | ₹84,900 | ₹1,04,900 | +₹20,000 |
+| iPhone 17e, 256GB | ₹64,900 | ₹79,900 | +₹15,000 |
+
+iPhone 18 Pro starts at **₹1,64,900**; Pro Max at **₹1,79,900**.
+
+**Why.** Memory. A 256GB memory chip costs nearly **400%** more year on year and the bill of
+materials on a 256GB Pro is up ~**38%**; TSMC's 2nm costs materially more per die than 3nm; AI
+datacentre demand is eating memory supply. Tim Cook, to the Wall Street Journal in June: *"price
+increases are unavoidable… we've tried to shield our customers from them. However, the situation
+has become unsustainable."* ⚠ The supplied text calls him "then-CEO"; **do not state or imply
+anything about who currently runs Apple without checking it** — quote the words, not the title.
+
+⚠ **CURRENCY.** This table is INDIA. The rest of the dossier is US (the owner's earlier choice).
+A single video must not mix them silently — either the price beats are all rupees, or the rise is
+introduced explicitly as Indian pricing.
 
 ---
 

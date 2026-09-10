@@ -189,15 +189,23 @@ const ProBack: React.FC<Props> = ({items, accent}) => {
           </g>
         ))}
 
-        {/* right of the cluster, top to bottom: flash, microphone, lidar */}
-        <circle cx={dev.w - CAM.inset - 7.5} cy={pl.y + 8.5} r={CAM.flashR} fill="none"
-          stroke={on(lit('flash'))} strokeWidth={sw * 0.9}
-          style={{filter: glow(lit('flash'))}} {...draw(baseDraw(frame, 16))} />
-        <circle cx={dev.w - CAM.inset - 7.5} cy={pl.y + pl.h / 2} r={CAM.micR} fill={idle}
-          opacity={baseDraw(frame, 18)} />
-        <circle cx={dev.w - CAM.inset - 7.5} cy={pl.y + pl.h - 8.5} r={CAM.lidarR} fill="none"
-          stroke={on(lit('lidar'))} strokeWidth={sw * 0.9}
-          style={{filter: glow(lit('lidar'))}} {...draw(baseDraw(frame, 20))} />
+        {/* Right of the cluster, top to bottom: flash, microphone, lidar — the column and
+            the order are both off Apple's drawing (flash Ø6.80, sensor Ø6.65, mic Ø1.15). */}
+        {(() => {
+          const cx = dev.w - CAM.inset - 9.5;
+          return (
+            <>
+              <circle cx={cx} cy={pl.y + 10} r={CAM.flashR} fill="none"
+                stroke={on(lit('flash'))} strokeWidth={sw * 0.9}
+                style={{filter: glow(lit('flash'))}} {...draw(baseDraw(frame, 16))} />
+              <circle cx={cx} cy={pl.y + pl.h / 2} r={CAM.micR} fill={idle}
+                opacity={baseDraw(frame, 18)} />
+              <circle cx={cx} cy={pl.y + pl.h - 10} r={CAM.lidarR} fill="none"
+                stroke={on(lit('lidar'))} strokeWidth={sw * 0.9}
+                style={{filter: glow(lit('lidar'))}} {...draw(baseDraw(frame, 20))} />
+            </>
+          );
+        })()}
 
         <g opacity={base} style={{filter: glow(lit('logo'))}}>
           <foreignObject x={dev.w / 2 - 5} y={dev.h * 0.52 - 5} width={10} height={10}>
@@ -273,7 +281,7 @@ const ProFront: React.FC<Props> = ({items, accent}) => {
 // iPHONE DUO — folded beside open, to scale with each other, because the whole
 // point of the product is the relationship between those two states.
 // ---------------------------------------------------------------------------
-const DUO_PARTS = ['outer', 'inner', 'hinge', 'body', 'lens', 'island'];
+const DUO_PARTS = ['outer', 'inner', 'hinge', 'body', 'lens', 'selfie'];
 
 const DuoPair: React.FC<Props> = ({items, accent, token}) => {
   const {v, frame, lit, idle, on, glow} = useSkin(accent, items);
@@ -281,14 +289,26 @@ const DuoPair: React.FC<Props> = ({items, accent, token}) => {
   const sw = 0.62, pad = 3, gap = 10;
   const base = baseDraw(frame);
   const onlyOpen = token === 'open';
-  const vw = onlyOpen ? open.w + pad * 2 : fold.w + gap + open.w + pad * 2;
-  const vh = open.h + pad * 2;
-  const openX = onlyOpen ? pad : pad + fold.w + gap;
+  const {vertical} = v;
+
+  // SIDE BY SIDE IS A WIDE-ONLY COMPOSITION. Closed plus open is 259mm across and 118 tall
+  // — a 2.2:1 landscape block, which in a 9:16 pane is height-bound to almost nothing and
+  // the labels collide with it. Owner: "The vert duo in shorts screen is not aligned
+  // properly and gets hidden." In vertical the two states STACK instead, which is also the
+  // more honest reading of a fold: one thing becoming taller, not two things in a row.
+  const stack = vertical && !onlyOpen;
+  const vw = onlyOpen ? open.w + pad * 2
+    : stack ? open.w + pad * 2
+    : fold.w + gap + open.w + pad * 2;
+  const vh = stack ? fold.h + gap + open.h + pad * 2 : open.h + pad * 2;
+  const openX = onlyOpen || stack ? pad : pad + fold.w + gap;
+  const openY = stack ? pad + fold.h + gap : pad;
+  const foldX = stack ? pad + (open.w - fold.w) / 2 : pad;
 
   return (
     <Rig vw={vw} vh={vh} accent={accent} items={items} parts={DUO_PARTS} fill={0.85}>
       {!onlyOpen && (
-        <g transform={`translate(${pad} ${pad})`}>
+        <g transform={`translate(${foldX} ${pad})`}>
           <rect x={sw / 2} y={sw / 2} width={fold.w - sw} height={fold.h - sw} rx={fold.r} ry={fold.r}
             fill="none" stroke={on(lit('body'))} strokeWidth={sw * (lit('body') > 0.02 ? 1.8 : 1)}
             style={{filter: glow(lit('body'))}} {...draw(base)} />
@@ -305,7 +325,7 @@ const DuoPair: React.FC<Props> = ({items, accent, token}) => {
         </g>
       )}
 
-      <g transform={`translate(${openX} ${pad})`}>
+      <g transform={`translate(${openX} ${openY})`}>
         <rect x={sw / 2} y={sw / 2} width={open.w - sw} height={open.h - sw} rx={open.r} ry={open.r}
           fill="none" stroke={on(lit('body'))} strokeWidth={sw * (lit('body') > 0.02 ? 1.8 : 1)}
           style={{filter: glow(lit('body'))}} {...draw(baseDraw(frame, 4))} />
@@ -318,6 +338,25 @@ const DuoPair: React.FC<Props> = ({items, accent, token}) => {
           stroke={on(lit('hinge'))} strokeWidth={sw * (lit('hinge') > 0.02 ? 1.4 : 0.7)}
           strokeDasharray={lit('hinge') > 0.02 ? undefined : '2 2'}
           style={{filter: glow(lit('hinge'))}} opacity={baseDraw(frame, 14)} />
+
+        {/* THE INNER SELFIE CAMERA IS UNDER THE DISPLAY — it has no cutout and no island,
+            which is the whole point of it, so it is drawn as a dashed ring BENEATH the
+            screen surface rather than as a hole punched through it. Apple: "under-display
+            inner camera". Owner: "we must also be highlighting the selfie camera in duo
+            when opened, which is underneath the screen." */}
+        {(() => {
+          const p = lit('selfie');
+          const cx = open.w * 0.74, cy = open.screen.bezel + 11;
+          return (
+            <g style={{filter: glow(p)}} opacity={baseDraw(frame, 16)}>
+              <circle cx={cx} cy={cy} r={3.2} fill="none"
+                stroke={p > 0.02 ? v.a : hexA(v.t.colors.muted, 0.42)}
+                strokeWidth={sw * (p > 0.02 ? 1.2 : 0.6)} strokeDasharray="1.4 1.4" />
+              <circle cx={cx} cy={cy} r={1.2} fill={p > 0.02 ? v.a : hexA(v.t.colors.muted, 0.42)}
+                opacity={0.5 + p * 0.5} />
+            </g>
+          );
+        })()}
       </g>
     </Rig>
   );
@@ -403,19 +442,48 @@ const AirPods: React.FC<Props> = ({items, accent}) => {
           style={{filter: glow(lit('light'))}} {...draw(baseDraw(frame, 14))} />
       </g>
 
-      {/* the bud: the housing, and the stem the volume swipe lives on */}
+      {/* The bud, drawn from Apple's own product shot: a rounded HOUSING that is wider than
+          it is tall, an oval speaker grille facing into the ear, the small oval sensor on
+          the outer face, a second grille at the top, and a short stem with a rounded foot.
+          The first pass was a plain ellipse on a rectangle, which is a lollipop, not an
+          AirPod — the grille and the sensor are what make the silhouette recognisable. */}
       <g transform={`translate(${bx} ${pad + (vh - pad * 2 - b.h * 1.25) / 2})`}>
-        <ellipse cx={b.w / 2} cy={b.w / 2 + 1} rx={b.w / 2 - sw / 2} ry={b.w / 2 + 1}
-          fill="none" stroke={on(lit('bud'))} strokeWidth={sw * (lit('bud') > 0.02 ? 1.8 : 1.1)}
-          style={{filter: glow(lit('bud'))}} {...draw(base)} />
-        <rect x={b.w / 2 - 2.6} y={b.w / 2 + 4} width={5.2} height={b.h - b.w / 2 - 2} rx={2.6}
-          fill="none" stroke={on(lit('stem'))} strokeWidth={sw * (lit('stem') > 0.02 ? 1.7 : 1.05)}
-          style={{filter: glow(lit('stem'))}} {...draw(baseDraw(frame, 10))} />
-        {/* the swipe: two ticks on the stem, drawn only when the stem is named */}
-        {[0, 1].map((i) => (
-          <line key={i} x1={b.w / 2 - 1.5} y1={b.h * 0.66 + i * 3} x2={b.w / 2 + 1.5} y2={b.h * 0.66 + i * 3}
-            stroke={on(lit('stem'))} strokeWidth={sw * 0.7} opacity={lit('stem') * 0.9} />
-        ))}
+        {(() => {
+          const hw = b.w * 0.62, cx = b.w / 2, cy = hw * 0.92;
+          const pb = lit('bud'), ps = lit('stem');
+          const col = (p: number) => on(p);
+          return (
+            <>
+              <ellipse cx={cx} cy={cy} rx={hw} ry={hw * 0.94} fill="none"
+                stroke={col(pb)} strokeWidth={sw * (pb > 0.02 ? 1.8 : 1.15)}
+                style={{filter: glow(pb)}} {...draw(base)} />
+              {/* speaker grille, angled into the ear */}
+              <ellipse cx={cx - hw * 0.42} cy={cy + hw * 0.05} rx={hw * 0.33} ry={hw * 0.46}
+                transform={`rotate(-16 ${cx - hw * 0.42} ${cy + hw * 0.05})`}
+                fill={pb > 0.02 ? hexA(v.a, 0.18) : 'none'}
+                stroke={col(pb)} strokeWidth={sw * 0.7} opacity={0.9}
+                {...draw(baseDraw(frame, 8))} />
+              {/* the small oval sensor on the outer face */}
+              <ellipse cx={cx + hw * 0.36} cy={cy - hw * 0.06} rx={hw * 0.13} ry={hw * 0.19}
+                fill={col(pb)} opacity={0.55 * baseDraw(frame, 12)} />
+              {/* top grille */}
+              <ellipse cx={cx + hw * 0.30} cy={cy - hw * 0.76} rx={hw * 0.22} ry={hw * 0.11}
+                transform={`rotate(-24 ${cx + hw * 0.30} ${cy - hw * 0.76})`}
+                fill="none" stroke={col(pb)} strokeWidth={sw * 0.55} opacity={0.75}
+                {...draw(baseDraw(frame, 14))} />
+              {/* the stem, and the swipe that changes volume on the higher model */}
+              <rect x={cx - 2.5} y={cy + hw * 0.68} width={5} height={b.h - cy - hw * 0.68 - 0.5}
+                rx={2.5} fill="none" stroke={col(ps)}
+                strokeWidth={sw * (ps > 0.02 ? 1.7 : 1.05)}
+                style={{filter: glow(ps)}} {...draw(baseDraw(frame, 10))} />
+              {[0, 1].map((i) => (
+                <line key={i} x1={cx - 1.4} y1={b.h * 0.74 + i * 2.6}
+                  x2={cx + 1.4} y2={b.h * 0.74 + i * 2.6}
+                  stroke={col(ps)} strokeWidth={sw * 0.7} opacity={ps * 0.95} />
+              ))}
+            </>
+          );
+        })()}
       </g>
     </Rig>
   );
@@ -625,7 +693,82 @@ const PriceLadder: React.FC<Props> = ({items, accent}) => {
   );
 };
 
+// ---------------------------------------------------------------------------
+// PRICE RISE — the old price struck through, the new one beside it, and the delta.
+//
+// This is the beat where the ending actually lives, and it is the opposite of what
+// everyone expects: when a new iPhone lands the previous ones normally get CHEAPER.
+// This year Apple RAISED them. So the picture is not a ladder, it is a set of befores
+// and afters, and the strike is drawn as a gesture rather than faded in, because a
+// strike is something that HAPPENS to a price.
+//
+// `value` is the new price, `sub` is the old one. The delta is derived from the pair,
+// so the chip beside a row can never disagree with the two numbers next to it.
+// ---------------------------------------------------------------------------
+const RISE_PARTS = ['rise'];
+
+const PriceRise: React.FC<Props> = ({items, accent, token}) => {
+  const v = useViz(accent);
+  const frame = useCurrentFrame();
+  const budget = stackBudget(v) * v.scale;
+  const rows = items.filter((i) => i.text === 'rise');
+  if (!rows.length) return null;
+  const cur = token || '';                       // currency prefix, e.g. "₹" or "$"
+  const rowH = Math.max(46 * v.scale,
+    Math.min(budget / Math.max(rows.length, 1) - 6 * v.scale, (v.vertical ? 190 : 120) * v.scale));
+  const fmt = (n: number) => `${cur}${n.toLocaleString('en-IN')}`;
+
+  return (
+    <div style={{
+      display: 'flex', flexDirection: 'column', gap: 6 * v.scale, width: '100%',
+      height: '100%', minHeight: 0, justifyContent: 'safe center',
+    }}>
+      {rows.map((r, i) => {
+        const p = liveAt(frame, r.atWord, 12);
+        const now = Number(r.value) || 0;
+        const was = Number(r.sub) || 0;
+        const up = now - was;
+        return (
+          <div key={i} style={{
+            height: rowH, display: 'flex', alignItems: 'center', gap: 10 * v.scale,
+            opacity: 0.36 + p * 0.64,
+            borderTop: i ? `1px solid ${hexA(v.t.colors.panelBorder, 0.5)}` : 'none',
+          }}>
+            <div style={{minWidth: 0, flex: '1 1 auto'}}>
+              <div style={{...v.body(v.vertical ? 24 : 19.5), fontWeight: 700,
+                color: p > 0.02 ? v.t.colors.text : v.dim,
+                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{r.label}</div>
+              {/* the old price, with the strike DRAWN across it */}
+              <div style={{position: 'relative', display: 'inline-block', marginTop: 3 * v.scale}}>
+                <span style={{...v.mono(v.vertical ? 20 : 16.5), color: v.dim,
+                  whiteSpace: 'nowrap'}}>{fmt(was)}</span>
+                <span style={{
+                  position: 'absolute', left: 0, top: '52%', height: Math.max(1.6, 2 * v.scale),
+                  width: `${Math.min(1, p * 1.6) * 100}%`, background: v.sem('red'),
+                  borderRadius: 999, transform: 'translateY(-50%)',
+                }} />
+              </div>
+            </div>
+            <span style={{
+              ...v.mono(v.vertical ? 19 : 16), fontWeight: 700, whiteSpace: 'nowrap',
+              color: p > 0.02 ? v.sem('red') : v.dim, opacity: p,
+              padding: `${3 * v.scale}px ${9 * v.scale}px`, borderRadius: 999,
+              border: `1px solid ${hexA(v.sem('red'), 0.5)}`,
+            }}>{`+${fmt(up)}`}</span>
+            <span style={{...v.mono(v.vertical ? 28 : 23), fontWeight: 800, whiteSpace: 'nowrap',
+              color: p > 0.02 ? v.t.colors.text : v.dim,
+              textShadow: p > 0.02 ? `0 0 ${12 * v.scale}px ${hexA(v.a, 0.55)}` : 'none'}}>
+              {fmt(now)}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 const KINDS: Record<string, React.FC<Props>> = {
+  'price-rise': PriceRise,
   'die-floorplan': DieFloorplan,
   'compare-bars': CompareBars,
   'price-ladder': PriceLadder,

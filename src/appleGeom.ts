@@ -100,17 +100,32 @@ export const AIRPODS_5 = {
 //    at 0.46 - a fat bullseye that exists on no iPhone. Owner: "Camera doesnt have that
 //    much bigger inner circle, its kinda thin near to the border of the outer circle."
 export const CAM = {
-  /** Lens outer diameter, mm. */
-  lensD: 9.5,
-  /** Centre-to-centre of the equilateral triangle, as a multiple of lens diameter. */
-  spacing: 1.53,
+  /** Lens outer diameter, mm.
+   *
+   *  FROM APPLE'S OWN ENGINEERING DRAWING (Accessory Design Guidelines, sheet 62.1
+   *  "iPhone 17 Pro Max, 1 of 4", detail D): rear cameras are **3X Ø16.20**, the flash is
+   *  **Ø6.80**, the rear sensor **Ø6.65** and the rear mic **Ø1.15**, on a 77.98mm-wide
+   *  body — so a lens is 0.208 of the body's width.
+   *
+   *  The first pass used 9.5mm, i.e. 0.13 of the width, measured by eye off an ANGLED
+   *  marketing photograph. Everything in the island came out around half size and the back
+   *  read as wrong without it being obvious why. Owner: "Still the back of the phone doesnt
+   *  look right." A dimensioned drawing beats a photograph, every time.
+   *
+   *  Scaled to the 18 Pro's narrower 71.9mm body: 16.20 x (71.9/77.98) = 14.9. Held at 14.0
+   *  so the triangle clears the plateau's top and bottom edges with real margin. */
+  lensD: 14.0,
+  /** Centre-to-centre of the triangle, as a multiple of lens diameter. */
+  spacing: 1.45,
   /** Thin inner ring, as a fraction of the outer radius. */
   innerRing: 0.80,
   /** The bright centre element, as a fraction of the outer radius. */
   core: 0.20,
-  flashR: 1.9,
-  lidarR: 1.7,
-  micR: 0.4,
+  /** Ø6.80 and Ø6.65 scaled to this body: near enough the same size as each other, and
+   *  both far larger than the 3.8/3.4mm the first pass guessed. */
+  flashR: 3.13,
+  lidarR: 3.07,
+  micR: 0.53,
   /** Plateau inset from the body's side edges, and from its top, mm.
    *  These were 3.6 and 6.5 on the first pass, which put the plateau's top-left corner
    *  almost on top of the body's own corner radius (11.7mm) — the two curves collided and
@@ -118,8 +133,12 @@ export const CAM = {
    *  falls to the edge of the phone." Clearing the body radius is the constraint. */
   inset: 4.6,
   top: 8.5,
-  height: 30,
-  radius: 9,
+  /** Apple's drawing gives the plateau as 64.16 x 32.36 on a 77.98mm body. The 18 Pro's
+   *  plateau runs the full width, so only the HEIGHT carries over: 32.36 scaled to this
+   *  body is 29.8 — but at Ø14 lenses the triangle needs 34.3mm of it, so the plateau is
+   *  38 and the cluster clears top and bottom by 1.85mm. */
+  height: 38,
+  radius: 11,
 };
 
 /** The three lens centres of the Pro triangle, in body millimetres.
@@ -129,7 +148,7 @@ export const lensCentres = (dev: Device) => {
   const plateauTop = CAM.top, plateauH = CAM.height;
   const clusterH = side + d;
   const top = plateauTop + (plateauH - clusterH) / 2 + r;
-  const left = CAM.inset + 3.0 + r + 3.5;
+  const left = CAM.inset + 2.5 + r;
   return [
     {cx: left, cy: top, r},                                  // upper left
     {cx: left, cy: top + side, r},                           // lower left
