@@ -342,6 +342,7 @@ import {McpWire} from './scenes/McpWire';
 import {McpSchema} from './scenes/McpSchema';
 import {McpLoop} from './scenes/McpLoop';
 import {AllureStage} from './scenes/AllureStage';
+import {AppleStage} from './scenes/AppleStage';
 import {McpUri} from './scenes/McpUri';
 import {McpMention} from './scenes/McpMention';
 import {McpSampling} from './scenes/McpSampling';
@@ -408,6 +409,7 @@ const registry: Record<string, React.FC<{scene: Scene}>> = {  LIVE_CODE: LiveCod
   MCP_URI: McpUri,
   MCP_LOOP: McpLoop,
   ALLURE_STAGE: AllureStage,
+  APPLE_STAGE: AppleStage,
   MCP_SCHEMA: McpSchema,
   MCP_WIRE: McpWire,
   MCP_CONTROL: McpControl,

@@ -576,6 +576,23 @@ export const MANIFEST = {  LIVE_CODE: {
     },
     example: {mcpUri: {"headline":"A [protocol] step","color":"orange","atWord":1,"caption":"what just crossed","premise":"The client is your app. The server is somebody else’s code. Every arrow is one JSON-RPC message.","cells":[{"label":"list_tools","sub":"what can you do?","dir":"out","atWord":2},{"label":"3 tools","sub":"read_note, edit_note, list_notes","dir":"back","atWord":5}],"ends":[{"label":"CLIENT"},{"label":"SERVER"}],"codeTitle":"server.py","lines":[{"text":"@mcp.tool()","atWord":2},{"text":"def read_note(note_id: str):","detail":"A normal Python function. The decorator did the registering.","atWord":4}]}},
   },
+  APPLE_STAGE: {
+    category: 'diagram', family: 'diagram', data_key: 'appleStage',
+    purpose: "One beat of the September 2026 Apple series, drawn as a SCHEMATIC rather than a photograph: a luminous line drawing of the device that draws itself path by path and lights the PART being named, a finish palette where a colour is the subject instead of the backdrop, a storage ladder whose steps grow, an aperture that irises through its real stops. The house style is a wireframe because the pack is dark (a deep product colour is a dark shape on a near-black ground) and because a stroke can DRAW ITSELF where a fill can only fade in.",
+    use_when: "a beat names a part of an Apple product, its finishes, its price ladder, or a mechanism inside it that the viewer should SEE happen rather than be told about",
+    fields: {
+      headline: {t: 'string', req: true, max: 44, note: "Scene headline, <=44 chars, one [accent] phrase."},
+      kind: {t: 'string', req: true, note: "Which picture: pro-outline"},
+      cells: {t: 'items', note: "0-8 elements. label = what is written (<=26). text = the ROLE key this cell plays in the chosen kind - for pro-outline one of plateau|lens|flash|logo|control|action|body, and an unrecognised key deliberately lights NOTHING rather than lighting the wrong part. sub = the gloss beside it (<=40). value = a number the beat states. icon = lucide:/si: glyph. color, atWord."},
+      vars: {t: 'items', note: "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."},
+      caption: {t: 'string', max: 30, note: "Caption above the picture, <=30 chars, specific to THIS beat."},
+      premise: {t: 'string', max: 150, note: "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at. Carries NO marker."},
+      token: {t: 'string', max: 28, note: "Per-kind variant switch, when a kind has a second state to hold."},
+      color: {t: 'string', note: "Accent SemColor: blue|green|red|orange|purple|yellow."},
+      atWord: {t: 'anchor', note: "The word the picture itself resolves on."},
+    },
+    example: {"appleStage": {"headline": "The [plateau] everyone noticed", "kind": "pro-outline", "cells": [{"label": "Camera plateau", "text": "plateau", "sub": "spans the full width", "atWord": 3}, {"label": "Three lenses", "text": "lens", "sub": "48MP Fusion Main", "atWord": 8}], "caption": "iPhone 18 Pro, from the back", "premise": "A schematic of the real thing: the outline is drawn to the phone's own proportions.", "color": "blue", "atWord": 1}},
+  },
   ALLURE_STAGE: {
     category: 'diagram', family: 'diagram', data_key: 'allureStage',
     purpose: "One beat of the Allure + AI course, drawn as the OBJECT the beat is about rather than a labelled card: four outcome trays that scenarios physically drop into and tally; an assertion refusing a value beside a test that falls over before any check runs; an English sentence socketed into the Python function that answers it; a shelf of evidence objects arriving one kind at a time; an attachment token routed through two honest questions into one of three fates. Every element times from its own atWord so the picture lands on the spoken word.",

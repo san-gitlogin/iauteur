@@ -527,6 +527,7 @@
               "MCP_SCHEMA",
               "MCP_LOOP",
               "ALLURE_STAGE",
+              "APPLE_STAGE",
               "MCP_URI",
               "MCP_MENTION",
               "MCP_SAMPLING",
@@ -2621,6 +2622,75 @@
                         "color": {
                           "type": "string",
                           "description": "Semantic colour: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "APPLE_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "appleStage": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "Scene headline, <=44 chars, one [accent] phrase."
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "Which picture: pro-outline"
+                        },
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-8 elements. label = what is written (<=26). text = the ROLE key this cell plays in the chosen kind - for pro-outline one of plateau|lens|flash|logo|control|action|body, and an unrecognised key deliberately lights NOTHING rather than lighting the wrong part. sub = the gloss beside it (<=40). value = a number the beat states. icon = lucide:/si: glyph. color, atWord."
+                        },
+                        "vars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "Caption above the picture, <=30 chars, specific to THIS beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 150,
+                          "description": "THE STANDING SETUP, <=150 chars: one plain sentence naming what the viewer is looking at. Carries NO marker."
+                        },
+                        "token": {
+                          "type": "string",
+                          "maxLength": 28,
+                          "description": "Per-kind variant switch, when a kind has a second state to hold."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Accent SemColor: blue|green|red|orange|purple|yellow."
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "The word the picture itself resolves on."
                         }
                       }
                     }

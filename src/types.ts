@@ -10880,6 +10880,28 @@ export interface LiveCodeData {
   atWord?: number;
   color?: SemColor;
 }
+export interface AppleStageItem {
+  label?: string;
+  text?: string;
+  sub?: string;
+  value?: number | string;
+  icon?: string;
+  color?: SemColor;
+  atWord?: number;
+}
+
+export interface AppleStageData {
+  headline?: string;
+  kind?: string;
+  cells?: AppleStageItem[];
+  vars?: AppleStageItem[];
+  caption?: string;
+  premise?: string;
+  token?: string;
+  color?: SemColor;
+  atWord?: number;
+}
+
 export interface AllureStageItem {
   label?: string;
   text?: string;
@@ -10907,6 +10929,7 @@ export interface AllureStageData {
 }
 
 export interface SceneData {
+  appleStage?: AppleStageData;
   allureStage?: AllureStageData;
   liveCode?: LiveCodeData;
   columnSplit?: ColumnSplitData;
