@@ -269,6 +269,34 @@ gives a 3840 master (2× delivery), so the seal failed on a string, not on a reg
 the default and requires ≥ 2, which is the guard's actual intent: the master is never the delivery
 size itself. Run the whole `gate` before pushing, not just the checks for the files you touched.
 
+### 2026-09-12 — Archify (17 scenes, 7:06) · a live agent demo, driven and proven
+
+`topics/archify-live-map` — Archify (github.com/tt-a1i/archify, MIT) is an agent SKILL: the agent
+writes typed JSON IR and archify's Node CLI compiles it to one checked, interactive HTML map.
+Four takes: `archify-gh` (the repository), `archify-live` (Claude Code running the skill in VS Code
+for the Web — the only take that costs model tokens), `archify-verify` (files, receipt, typed
+source) and `archify-artifact` (driving the generated HTML). The demo maps THIS repository.
+
+What this cut paid for, all of it now law (CLAUDE.md corollaries):
+- **An interaction must be performed and proven.** The story only plays after a chapter is
+  selected; the take clicks it, presses P, and marks the counter reaching `1 / 3`. The finder take
+  presses Enter so the map really jumps to `sync.mjs`.
+- **Field names are a contract.** RECAP reads `heading`/`points`; authored as `title`/`items` it
+  rendered 22 SECONDS OF BLANK FRAME with voice over it, and every gate passed. CHAPTER needs
+  `number` or it draws an empty box.
+- **A take is an asset.** `freshRecDir()` archives the previous take to `public/rec/_prev/` — a
+  re-record had destroyed a paid 9-minute agent session.
+- **Vertical is a reframe:** recorded clips in a short carry `focus: false`, or half the capture is
+  off-screen until a punch-in happens to travel there.
+- **`waitFor` matches TOOL output** (a receipt, a sha256), never a sentinel written into the prompt —
+  the TUI echoes the prompt and the take is cut at second 44.
+- Recorder fixes this cut: the VS Code workspace-bind check accepted a Windows hyphen title, the
+  identity guard learned the msys `/c/Users/<name>` spelling (with `IAUTEUR_ALLOW_IDENTITY=1` as the
+  owner's override), `interrupt` escalates Ctrl+C twice then Ctrl+D, and the browser surface gained
+  `key` and `type` actions so a keyboard-driven artifact can be demonstrated at all.
+- **A new topic needs `gen-index` before it renders**, and `meta.audioPrefix` when the audio prefix
+  is not the slug — both cost a silent render failure here.
+
 ### 2026-09-05 — GPT-6 Astra review (56 scenes, 18:43) · sharp footage, at last
 
 `topics/gpt-6-astra` — an honest review of OpenAI's GPT-6 Astra built entirely from primary

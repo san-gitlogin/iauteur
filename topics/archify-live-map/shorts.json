@@ -1,0 +1,843 @@
+{
+  "meta": {
+    "topic": "Archify — one prompt, one checked architecture map",
+    "format": "shorts",
+    "fps": 30,
+    "subject": "Archify",
+    "audioPrefix": "archify-live-map_shorts",
+    "onePayoff": "an architecture map generated from your own source and validated before you see it",
+    "openLoop": "Can an agent draw your architecture and prove it is right?",
+    "topicAxes": [
+      "entity-novelty"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "System architects, you are missing this #architecture #softwareengineering",
+      "hook": "Archify is an MIT-licensed agent skill: your coding agent writes a typed JSON file, and Archify compiles it into one self-contained interactive architecture map — validated before you ever see it.",
+      "description": "Nine checks, zero errors, one HTML file you can search and trace. Full walkthrough on the channel.",
+      "breakdown": "the validation receipt and the map you can interrogate",
+      "pinned": "Write the prompt like a spec: scope, node budget, evidence files. What would you map first?",
+      "tags": [
+        "Archify",
+        "architecture diagram",
+        "diagrams as code",
+        "system design",
+        "Claude Code",
+        "agent skills",
+        "software architecture",
+        "developer tools",
+        "shorts"
+      ],
+      "queries": [
+        "how to generate architecture diagrams from code",
+        "Archify tutorial"
+      ],
+      "sources": [
+        "github.com/tt-a1i/archify — Archify by tt-a1i (MIT)",
+        "github.com/san-gitlogin/iauteur — the repository mapped in the demo"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ARCHITECTS ARE MISSING THIS",
+    "badge": "Archify",
+    "note": "MAPPED LIVE · MIT",
+    "asset": "img:archify_map_hero.png",
+    "art": "img:archify_map_hero.png"
+  },
+  "cover": {
+    "title": "ARCHITECTS ARE MISSING THIS",
+    "badge": "Archify",
+    "asset": "img:archify_map_hero.png",
+    "art": "img:archify_map_hero.png",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Archify draws your architecture from your own code.",
+      "data": {
+        "headline": "Archify: your system, drawn",
+        "subtext": "One prompt, one checked map",
+        "heroAsset": "lucide:workflow",
+        "hookVariant": "ask",
+        "atWord": 2.667
+      },
+      "durationFrames": 109,
+      "audio": "audio/archify-live-map_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "You ask your coding agent for a map. It writes a typed JSON file, and Archify checks that file before it draws anything — nine checks here, zero errors, zero warnings. A map that fails never replaces the good one.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:archify-verify#receipt",
+              "label": "the validation receipt",
+              "focus": false,
+              "atWord": 2.333,
+              "zooms": [
+                {
+                  "marks": [
+                    "checks"
+                  ],
+                  "band": true,
+                  "wantAtWord": 18.25,
+                  "atWord": 20.583
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 26.333,
+                  "atWord": 26.333
+                }
+              ],
+              "callouts": [],
+              "id": "receipt",
+              "src": "rec/archify-verify/seg-02.mp4",
+              "frames": 298,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "ok": {
+                  "x": 368,
+                  "y": 92,
+                  "w": 132,
+                  "h": 19,
+                  "covers": "ok architecture"
+                },
+                "checks": {
+                  "x": 1072,
+                  "y": 92,
+                  "w": 150,
+                  "h": 19,
+                  "covers": "9 artifact checks"
+                },
+                "__cmd": {
+                  "x": 518,
+                  "y": 73,
+                  "w": 1047,
+                  "h": 19,
+                  "covers": "node .claude/skills/archify/bin/archify.mjs validate architecture iauteur-pipeline.architecture.json --quality showcase"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 73,
+                  "w": 1214,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                8,
+                10,
+                11,
+                12,
+                14,
+                15,
+                17,
+                18,
+                21,
+                22,
+                25,
+                26,
+                27,
+                28,
+                29,
+                31,
+                33,
+                34,
+                36,
+                39,
+                42,
+                44,
+                46,
+                48,
+                49,
+                50,
+                52,
+                54,
+                56,
+                58,
+                60,
+                62,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                74,
+                77,
+                79,
+                80,
+                81,
+                82,
+                83,
+                85,
+                86,
+                88,
+                89,
+                91,
+                92,
+                94,
+                97,
+                98,
+                99,
+                100,
+                102,
+                103,
+                104,
+                106,
+                108,
+                110,
+                111,
+                112,
+                114,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                123,
+                124,
+                125,
+                127,
+                128,
+                129,
+                130,
+                132,
+                133,
+                134,
+                136,
+                138,
+                139,
+                141,
+                144,
+                145,
+                146,
+                148,
+                149,
+                150,
+                151,
+                152,
+                154,
+                156,
+                157,
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                166,
+                167,
+                170,
+                172,
+                174,
+                176,
+                177,
+                179,
+                180,
+                182,
+                183,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191,
+                193,
+                195,
+                196,
+                198,
+                199,
+                201,
+                202,
+                204,
+                205,
+                207,
+                209,
+                210,
+                211,
+                212,
+                214,
+                215,
+                218,
+                220,
+                221,
+                224,
+                225,
+                226,
+                228,
+                229,
+                230,
+                232,
+                234,
+                236,
+                238,
+                248,
+                258,
+                259,
+                262
+              ],
+              "shows": "$ node .claude/skills/archify/bin/archify.mjs validate architectu",
+              "said": "PS archify-live> node .claude/skills/archify/bin/archify.mjs validate architecture iauteur-pipeline.architecture.json --quality showcase\nok architecture C:\\iauteur-rec\\archify-live\\iauteur-pipeline.architecture.json (9 artifact checks; composition showcase: 0 errors, 0 warni\nngs)\nPS archify-live>"
+            }
+          ],
+          "sourceNote": null,
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 421,
+      "audio": "audio/archify-live-map_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "And what you get is one HTML file you can actually interrogate — this is our own video pipeline, drawn from our own source. Press slash, type a name, and the map jumps straight to that node and shows you what it connects to, with every relationship on screen coming out of the typed file the agent wrote. Nothing was invented later to make the picture look tidier than the system really is. That is the difference between a diagram you present once and a map your team can actually rely on.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:archify-artifact#map",
+              "label": "one HTML file",
+              "focus": false,
+              "atWord": 2.083,
+              "wantAtWord": 1,
+              "zooms": [
+                {
+                  "at": "full",
+                  "wantAtWord": 9.25,
+                  "atWord": 9.25
+                }
+              ],
+              "callouts": [],
+              "id": "map",
+              "src": "rec/archify-artifact/seg-01.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "title": {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 63,
+                  "covers": "iAuteur — Topic Spec to Rendered Video",
+                  "block": {
+                    "x": 347,
+                    "y": 6,
+                    "w": 442,
+                    "h": 63
+                  }
+                },
+                "spec": {
+                  "x": 485,
+                  "y": 6,
+                  "w": 138,
+                  "h": 32,
+                  "covers": "Topic Spec",
+                  "block": {
+                    "x": 347,
+                    "y": 6,
+                    "w": 442,
+                    "h": 63
+                  }
+                },
+                "render": {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13,
+                  "covers": "Remotion render",
+                  "block": {
+                    "x": 1107,
+                    "y": 98,
+                    "w": 90,
+                    "h": 13
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 137,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 700,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 904,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 581,
+                  "y": 98,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 335,
+                  "y": 99,
+                  "w": 930,
+                  "h": 587
+                },
+                {
+                  "x": 566,
+                  "y": 99,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 681,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 821,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 834,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 847,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 884,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1024,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1037,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1051,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1088,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1228,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1241,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 973,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1044,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1192,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1012,
+                  "y": 710,
+                  "w": 17,
+                  "h": 12
+                },
+                {
+                  "x": 678,
+                  "y": 775,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1004,
+                  "y": 775,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 353,
+                  "y": 775,
+                  "w": 134,
+                  "h": 18
+                },
+                {
+                  "x": 988,
+                  "y": 805,
+                  "w": 274,
+                  "h": 95
+                },
+                {
+                  "x": 337,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                },
+                {
+                  "x": 662,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            },
+            {
+              "ref": "rec:archify-artifact#findhit",
+              "label": "type a name",
+              "focus": false,
+              "atWord": 17.5,
+              "wantAtWord": 17.5,
+              "zooms": [],
+              "callouts": [],
+              "id": "findhit",
+              "src": "rec/archify-artifact/seg-06.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "sync": {
+                  "x": 1103,
+                  "y": 240,
+                  "w": 43,
+                  "h": 12,
+                  "covers": "sync.mjs",
+                  "block": {
+                    "x": 1103,
+                    "y": 240,
+                    "w": 43,
+                    "h": 12
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 137,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 700,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 904,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 581,
+                  "y": 98,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 149,
+                  "y": 99,
+                  "w": 1116,
+                  "h": 695
+                },
+                {
+                  "x": 566,
+                  "y": 99,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 681,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 821,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 834,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 847,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 884,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1024,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1037,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1051,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1088,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1228,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1241,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 988,
+                  "y": 805,
+                  "w": 274,
+                  "h": 95
+                },
+                {
+                  "x": 337,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                },
+                {
+                  "x": 662,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            }
+          ],
+          "sourceNote": "Generated by Archify · one self-contained HTML file",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 789,
+      "audio": "audio/archify-live-map_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Archify is MIT licensed, and the full walkthrough is on the channel. What would you map first?",
+      "data": {
+        "headline": "What would you map first?",
+        "subtext": "github.com/tt-a1i/archify — MIT",
+        "atWord": 7.417
+      },
+      "durationFrames": 183,
+      "audio": "audio/archify-live-map_shorts_s04.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

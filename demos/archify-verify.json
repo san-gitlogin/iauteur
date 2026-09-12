@@ -1,0 +1,70 @@
+{
+  "slug": "archify-verify",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "archify-live",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "maximizePanel": true,
+  "steps": [
+    {
+      "id": "files",
+      "action": "run",
+      "cmd": "Get-ChildItem iauteur-pipeline.architecture.* -Name",
+      "label": "what the agent produced",
+      "focus": "terminal",
+      "clearFirst": true,
+      "marks": [
+        {
+          "id": "json",
+          "text": "iauteur-pipeline.architecture.json"
+        },
+        {
+          "id": "html",
+          "text": "iauteur-pipeline.architecture.html"
+        }
+      ]
+    },
+    {
+      "id": "receipt",
+      "action": "run",
+      "cmd": "node .claude/skills/archify/bin/archify.mjs validate architecture iauteur-pipeline.architecture.json --quality showcase",
+      "label": "the validation receipt",
+      "focus": "terminal",
+      "clearFirst": true,
+      "marks": [
+        {
+          "id": "ok",
+          "text": "ok architecture"
+        },
+        {
+          "id": "checks",
+          "text": "9 artifact checks"
+        }
+      ]
+    },
+    {
+      "id": "ir",
+      "action": "run",
+      "cmd": "Get-Content iauteur-pipeline.architecture.json -TotalCount 18",
+      "label": "the typed source the agent wrote",
+      "focus": "terminal",
+      "clearFirst": true,
+      "marks": [
+        {
+          "id": "bake",
+          "text": "bake-rec.mjs"
+        },
+        {
+          "id": "voice",
+          "text": "voiceover.py"
+        }
+      ]
+    }
+  ]
+}

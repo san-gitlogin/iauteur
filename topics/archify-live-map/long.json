@@ -1,0 +1,6521 @@
+{
+  "meta": {
+    "topic": "Archify — the agent skill that draws your system",
+    "format": "long",
+    "fps": 30,
+    "subject": "Archify",
+    "audioPrefix": "archify-live-map_long",
+    "onePayoff": "how one plain-English prompt becomes a checked, explorable architecture map of a real repository",
+    "openLoop": "Can an agent draw your architecture and prove it is right?",
+    "topicAxes": [
+      "entity-novelty",
+      "workflow"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "If You Design Systems, You Are Missing This — Archify, Tested Live",
+      "altTitles": [
+        "Archify: One Prompt, One Checked Architecture Map (Live Demo)",
+        "System Architects Are Going To Love This — Archify On A Real Repo",
+        "Everything A System Architect Needs In One File — Archify"
+      ],
+      "hook": "Architecture diagrams rot the moment they are drawn. Archify takes a different route: your coding agent writes a small typed JSON file, and Archify deterministically compiles it into one self-contained, interactive HTML map — validated before you ever see it. We install the skill, point Claude Code at a real open-source repository, and drive the result: node finder, guided story, exports and themes.",
+      "description": "Archify is an MIT-licensed agent skill by tt-a1i for architecture, workflow, sequence, data-flow and lifecycle diagrams. In this tutorial we install it into a project, ask Claude Code to map a real repository, read the validation receipt, review the typed JSON source, and explore the generated HTML.",
+      "breakdown": "what Archify actually is, the one-line install, choosing between the five diagram types, a live mapping run on a real repository, the validation receipt, the typed source your team reviews, and the viewer: node finder, guided story, share cards and themes",
+      "pinned": "Write the prompt like a spec: scope, node budget, one primary path, and the files that count as evidence. What will you map first?",
+      "tags": [
+        "Archify",
+        "architecture diagram",
+        "system architecture",
+        "software architecture",
+        "diagrams as code",
+        "architecture as code",
+        "Claude Code",
+        "agent skills",
+        "AI coding agent",
+        "Mermaid alternative",
+        "system design",
+        "sequence diagram",
+        "data flow diagram",
+        "developer tools",
+        "code visualization",
+        "technical documentation",
+        "VS Code",
+        "open source",
+        "software engineering",
+        "solution architect"
+      ],
+      "queries": [
+        "how to generate architecture diagrams from code",
+        "Archify tutorial",
+        "Mermaid alternative for architecture diagrams",
+        "Claude Code skills explained",
+        "diagrams as code for system design"
+      ],
+      "sources": [
+        "github.com/tt-a1i/archify — Archify by tt-a1i (MIT)",
+        "tt-a1i.github.io/archify — project page, scenario guide and Proof Lab",
+        "github.com/san-gitlogin/iauteur — the repository mapped in the demo"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "ARCHITECTS ARE MISSING THIS",
+    "badge": "Archify",
+    "note": "MAPPED LIVE · MIT",
+    "asset": "img:archify_map_hero.png",
+    "art": "img:archify_map_hero.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Archify turns one sentence into a system map you can actually explore.",
+      "data": {
+        "headline": "Archify: your system, drawn",
+        "subtext": "The agent skill architects have been waiting for",
+        "heroAsset": "lucide:workflow",
+        "hookVariant": "ask",
+        "atWord": 5.083
+      },
+      "durationFrames": 152,
+      "audio": "audio/archify-live-map_long_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Welcome back. Today we're going to install Archify, point it at a real repository, and watch it produce an architecture map you can search, trace and hand to your team. And the interesting part isn't the picture. It's that the picture is checked before you ever see it.",
+      "data": {
+        "title": "One prompt. One checked map.",
+        "subtitle": "Archify, installed and driven live",
+        "atWord": 13.417
+      },
+      "durationFrames": 445,
+      "audio": "audio/archify-live-map_long_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "So, what is Archify? This is its page on GitHub, and the description is refreshingly plain: an agent skill for architecture, workflow, sequence, data-flow and lifecycle diagrams. Read the line under the title and you get the whole idea in one sentence — your agent writes a small typed file, and Archify compiles that file into an interactive map. Typed simply means every field has a declared shape, so the tool can check the file instead of trusting it. Installing Archify is one line, and that's the entire setup: no service to sign up for, no server to run. Scroll to the installation table and you'll see where the skill lands for each agent. For Claude Code it's a skills folder, either in your home directory or inside the project itself, and I'll use the project, because a skill that travels with the repository is a skill your teammates get for free.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:archify-gh#repo",
+              "label": "the repository",
+              "focus": true,
+              "atWord": 5.417,
+              "zooms": [
+                {
+                  "marks": [
+                    "what"
+                  ],
+                  "band": true,
+                  "wantAtWord": 10.25,
+                  "atWord": 10.25
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 31,
+                  "atWord": 31
+                }
+              ],
+              "callouts": [],
+              "id": "repo",
+              "src": "rec/archify-gh/seg-01.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "what": {
+                  "x": 1136,
+                  "y": 243,
+                  "w": 236,
+                  "h": 45,
+                  "covers": "Agent skill for beautiful, verifiable architecture",
+                  "block": {
+                    "x": 1136,
+                    "y": 243,
+                    "w": 267,
+                    "h": 117
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 1,
+                  "w": 189,
+                  "h": 51
+                },
+                {
+                  "x": 405,
+                  "y": 25,
+                  "w": 96,
+                  "h": 21
+                },
+                {
+                  "x": 294,
+                  "y": 25,
+                  "w": 75,
+                  "h": 21
+                },
+                {
+                  "x": 537,
+                  "y": 25,
+                  "w": 75,
+                  "h": 21
+                },
+                {
+                  "x": 189,
+                  "y": 25,
+                  "w": 70,
+                  "h": 21
+                },
+                {
+                  "x": 119,
+                  "y": 90,
+                  "w": 61,
+                  "h": 27
+                },
+                {
+                  "x": 744,
+                  "y": 149,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 267,
+                  "y": 149,
+                  "w": 79,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 243,
+                  "w": 267,
+                  "h": 117
+                },
+                {
+                  "x": 974,
+                  "y": 269,
+                  "w": 106,
+                  "h": 67
+                },
+                {
+                  "x": 192,
+                  "y": 272,
+                  "w": 124,
+                  "h": 187
+                },
+                {
+                  "x": 274,
+                  "y": 272,
+                  "w": 390,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 318,
+                  "w": 441,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 359,
+                  "w": 449,
+                  "h": 18
+                },
+                {
+                  "x": 1160,
+                  "y": 375,
+                  "w": 147,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 376,
+                  "w": 128,
+                  "h": 85
+                },
+                {
+                  "x": 570,
+                  "y": 400,
+                  "w": 227,
+                  "h": 18
+                },
+                {
+                  "x": 315,
+                  "y": 400,
+                  "w": 131,
+                  "h": 18
+                },
+                {
+                  "x": 1238,
+                  "y": 411,
+                  "w": 112,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 441,
+                  "w": 441,
+                  "h": 18
+                },
+                {
+                  "x": 1149,
+                  "y": 478,
+                  "w": 99,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 482,
+                  "w": 441,
+                  "h": 18
+                },
+                {
+                  "x": 1255,
+                  "y": 511,
+                  "w": 102,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 523,
+                  "w": 441,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 523,
+                  "w": 76,
+                  "h": 18
+                },
+                {
+                  "x": 1149,
+                  "y": 544,
+                  "w": 97,
+                  "h": 16
+                },
+                {
+                  "x": 1274,
+                  "y": 544,
+                  "w": 85,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 563,
+                  "w": 441,
+                  "h": 18
+                },
+                {
+                  "x": 1149,
+                  "y": 577,
+                  "w": 93,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 604,
+                  "w": 422,
+                  "h": 18
+                },
+                {
+                  "x": 314,
+                  "y": 604,
+                  "w": 111,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 604,
+                  "w": 79,
+                  "h": 18
+                },
+                {
+                  "x": 1149,
+                  "y": 610,
+                  "w": 98,
+                  "h": 16
+                },
+                {
+                  "x": 1149,
+                  "y": 644,
+                  "w": 111,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 645,
+                  "w": 449,
+                  "h": 18
+                },
+                {
+                  "x": 1278,
+                  "y": 677,
+                  "w": 116,
+                  "h": 16
+                },
+                {
+                  "x": 1149,
+                  "y": 677,
+                  "w": 101,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 686,
+                  "w": 441,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 710,
+                  "w": 185,
+                  "h": 190
+                },
+                {
+                  "x": 1255,
+                  "y": 710,
+                  "w": 87,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 727,
+                  "w": 390,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 727,
+                  "w": 102,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 768,
+                  "w": 441,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 768,
+                  "w": 78,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 808,
+                  "w": 329,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 849,
+                  "w": 432,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 849,
+                  "w": 104,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 890,
+                  "w": 390,
+                  "h": 10
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "About"
+            },
+            {
+              "ref": "rec:archify-gh#pitch",
+              "label": "the idea in one line",
+              "focus": true,
+              "atWord": 31,
+              "wantAtWord": 31,
+              "zooms": [
+                {
+                  "marks": [
+                    "turn"
+                  ],
+                  "band": true,
+                  "wantAtWord": 40.167,
+                  "atWord": 40.167
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 54.583,
+                  "atWord": 54.583
+                }
+              ],
+              "callouts": [],
+              "id": "pitch",
+              "src": "rec/archify-gh/seg-02.mp4",
+              "frames": 87,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "turn": {
+                  "x": 225,
+                  "y": 252,
+                  "w": 788,
+                  "h": 85,
+                  "covers": "Turn a codebase or system description into a polished, interactive system map — directly in chat. Archify is a Node.js rendering and validation system for Cursor, Claude Code, Codex CLI, and OpenCode. Agents produce typed JSON IR; Archify deterministically compiles it into HTML/SVG."
+                }
+              },
+              "ink": [
+                {
+                  "x": 225,
+                  "y": 0,
+                  "w": 838,
+                  "h": 154
+                },
+                {
+                  "x": 193,
+                  "y": 16,
+                  "w": 290,
+                  "h": 41
+                },
+                {
+                  "x": 1063,
+                  "y": 16,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 183,
+                  "w": 103,
+                  "h": 43
+                },
+                {
+                  "x": 201,
+                  "y": 196,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 252,
+                  "w": 701,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 292,
+                  "w": 788,
+                  "h": 45
+                },
+                {
+                  "x": 257,
+                  "y": 356,
+                  "w": 806,
+                  "h": 201
+                },
+                {
+                  "x": 257,
+                  "y": 356,
+                  "w": 308,
+                  "h": 49
+                },
+                {
+                  "x": 388,
+                  "y": 574,
+                  "w": 132,
+                  "h": 20
+                },
+                {
+                  "x": 225,
+                  "y": 574,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 307,
+                  "y": 574,
+                  "w": 76,
+                  "h": 20
+                },
+                {
+                  "x": 225,
+                  "y": 617,
+                  "w": 216,
+                  "h": 21
+                },
+                {
+                  "x": 591,
+                  "y": 617,
+                  "w": 77,
+                  "h": 21
+                },
+                {
+                  "x": 553,
+                  "y": 617,
+                  "w": 37,
+                  "h": 21
+                },
+                {
+                  "x": 450,
+                  "y": 622,
+                  "w": 97,
+                  "h": 16
+                },
+                {
+                  "x": 328,
+                  "y": 657,
+                  "w": 108,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 657,
+                  "w": 91,
+                  "h": 21
+                },
+                {
+                  "x": 448,
+                  "y": 657,
+                  "w": 70,
+                  "h": 21
+                },
+                {
+                  "x": 316,
+                  "y": 657,
+                  "w": 12,
+                  "h": 21
+                },
+                {
+                  "x": 436,
+                  "y": 657,
+                  "w": 12,
+                  "h": 21
+                },
+                {
+                  "x": 1031,
+                  "y": 710,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 241,
+                  "y": 714,
+                  "w": 239,
+                  "h": 16
+                },
+                {
+                  "x": 564,
+                  "y": 765,
+                  "w": 284,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 765,
+                  "w": 173,
+                  "h": 21
+                },
+                {
+                  "x": 398,
+                  "y": 765,
+                  "w": 166,
+                  "h": 21
+                },
+                {
+                  "x": 411,
+                  "y": 805,
+                  "w": 273,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 805,
+                  "w": 186,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 851,
+                  "w": 139,
+                  "h": 32
+                },
+                {
+                  "x": 201,
+                  "y": 858,
+                  "w": 16,
+                  "h": 16
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                6,
+                7,
+                9,
+                10,
+                11,
+                12,
+                14,
+                15,
+                16,
+                18,
+                19,
+                20,
+                23,
+                24,
+                26,
+                27,
+                28,
+                29,
+                31,
+                33,
+                34,
+                35,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                46,
+                47,
+                49,
+                50,
+                51
+              ],
+              "shows": "Archify"
+            },
+            {
+              "ref": "rec:archify-gh#install",
+              "label": "one line to install",
+              "focus": true,
+              "atWord": 69.667,
+              "wantAtWord": 69.667,
+              "zooms": [
+                {
+                  "marks": [
+                    "cmd"
+                  ],
+                  "band": true,
+                  "wantAtWord": 69.667,
+                  "atWord": 71.667
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 78.667,
+                  "atWord": 78.667
+                }
+              ],
+              "callouts": [],
+              "id": "install",
+              "src": "rec/archify-gh/seg-03.mp4",
+              "frames": 57,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "cmd": {
+                  "x": 241,
+                  "y": 201,
+                  "w": 239,
+                  "h": 16,
+                  "covers": "npx skills add tt-a1i/archify -g",
+                  "block": {
+                    "x": 241,
+                    "y": 201,
+                    "w": 239,
+                    "h": 16
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 495,
+                  "y": 0,
+                  "w": 551,
+                  "h": 33
+                },
+                {
+                  "x": 257,
+                  "y": 0,
+                  "w": 238,
+                  "h": 33
+                },
+                {
+                  "x": 257,
+                  "y": 15,
+                  "w": 317,
+                  "h": 29
+                },
+                {
+                  "x": 233,
+                  "y": 15,
+                  "w": 56,
+                  "h": 18
+                },
+                {
+                  "x": 193,
+                  "y": 16,
+                  "w": 327,
+                  "h": 65
+                },
+                {
+                  "x": 1063,
+                  "y": 16,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 104,
+                  "w": 216,
+                  "h": 21
+                },
+                {
+                  "x": 591,
+                  "y": 104,
+                  "w": 77,
+                  "h": 21
+                },
+                {
+                  "x": 553,
+                  "y": 104,
+                  "w": 37,
+                  "h": 21
+                },
+                {
+                  "x": 450,
+                  "y": 109,
+                  "w": 97,
+                  "h": 16
+                },
+                {
+                  "x": 328,
+                  "y": 144,
+                  "w": 108,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 144,
+                  "w": 91,
+                  "h": 21
+                },
+                {
+                  "x": 448,
+                  "y": 144,
+                  "w": 70,
+                  "h": 21
+                },
+                {
+                  "x": 316,
+                  "y": 144,
+                  "w": 12,
+                  "h": 21
+                },
+                {
+                  "x": 436,
+                  "y": 144,
+                  "w": 12,
+                  "h": 21
+                },
+                {
+                  "x": 1031,
+                  "y": 197,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 241,
+                  "y": 201,
+                  "w": 239,
+                  "h": 16
+                },
+                {
+                  "x": 564,
+                  "y": 252,
+                  "w": 284,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 252,
+                  "w": 173,
+                  "h": 21
+                },
+                {
+                  "x": 398,
+                  "y": 252,
+                  "w": 166,
+                  "h": 21
+                },
+                {
+                  "x": 411,
+                  "y": 292,
+                  "w": 273,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 292,
+                  "w": 186,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 338,
+                  "w": 139,
+                  "h": 32
+                },
+                {
+                  "x": 201,
+                  "y": 345,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 479,
+                  "y": 401,
+                  "w": 563,
+                  "h": 150
+                },
+                {
+                  "x": 479,
+                  "y": 401,
+                  "w": 75,
+                  "h": 21
+                },
+                {
+                  "x": 245,
+                  "y": 441,
+                  "w": 200,
+                  "h": 73
+                },
+                {
+                  "x": 245,
+                  "y": 581,
+                  "w": 182,
+                  "h": 21
+                },
+                {
+                  "x": 427,
+                  "y": 581,
+                  "w": 142,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 627,
+                  "w": 223,
+                  "h": 32
+                },
+                {
+                  "x": 201,
+                  "y": 634,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 683,
+                  "w": 838,
+                  "h": 217
+                }
+              ],
+              "changes": [
+                0,
+                4,
+                5,
+                7,
+                9,
+                11,
+                13,
+                14,
+                15,
+                17,
+                19,
+                21
+              ],
+              "shows": "❤️ Sponsors"
+            },
+            {
+              "ref": "rec:archify-gh#installs",
+              "label": "the installation table",
+              "focus": true,
+              "atWord": 86.25,
+              "wantAtWord": 86.25,
+              "zooms": [
+                {
+                  "marks": [
+                    "cc"
+                  ],
+                  "band": true,
+                  "wantAtWord": 97.5,
+                  "atWord": 97.5
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 113.917,
+                  "atWord": 102.917
+                }
+              ],
+              "callouts": [],
+              "id": "installs",
+              "src": "rec/archify-gh/seg-06.mp4",
+              "frames": 59,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "cc": {
+                  "x": 239,
+                  "y": 412,
+                  "w": 788,
+                  "h": 45,
+                  "covers": "Claude Code ~/.claude/skills/ or .claude/skills/ Full renderer + validation workflow"
+                }
+              },
+              "ink": [
+                {
+                  "x": 233,
+                  "y": 0,
+                  "w": 183,
+                  "h": 33
+                },
+                {
+                  "x": 467,
+                  "y": 15,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 193,
+                  "y": 16,
+                  "w": 290,
+                  "h": 41
+                },
+                {
+                  "x": 400,
+                  "y": 16,
+                  "w": 262,
+                  "h": 38
+                },
+                {
+                  "x": 239,
+                  "y": 70,
+                  "w": 100,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 117,
+                  "w": 221,
+                  "h": 68
+                },
+                {
+                  "x": 275,
+                  "y": 121,
+                  "w": 257,
+                  "h": 65
+                },
+                {
+                  "x": 613,
+                  "y": 121,
+                  "w": 288,
+                  "h": 41
+                },
+                {
+                  "x": 495,
+                  "y": 121,
+                  "w": 280,
+                  "h": 40
+                },
+                {
+                  "x": 906,
+                  "y": 121,
+                  "w": 131,
+                  "h": 40
+                },
+                {
+                  "x": 225,
+                  "y": 205,
+                  "w": 377,
+                  "h": 21
+                },
+                {
+                  "x": 607,
+                  "y": 210,
+                  "w": 120,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 251,
+                  "w": 210,
+                  "h": 32
+                },
+                {
+                  "x": 460,
+                  "y": 314,
+                  "w": 187,
+                  "h": 21
+                },
+                {
+                  "x": 879,
+                  "y": 314,
+                  "w": 72,
+                  "h": 21
+                },
+                {
+                  "x": 256,
+                  "y": 314,
+                  "w": 54,
+                  "h": 21
+                },
+                {
+                  "x": 353,
+                  "y": 351,
+                  "w": 116,
+                  "h": 21
+                },
+                {
+                  "x": 359,
+                  "y": 355,
+                  "w": 302,
+                  "h": 41
+                },
+                {
+                  "x": 781,
+                  "y": 363,
+                  "w": 246,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 363,
+                  "w": 44,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 412,
+                  "w": 50,
+                  "h": 45
+                },
+                {
+                  "x": 781,
+                  "y": 424,
+                  "w": 246,
+                  "h": 21
+                },
+                {
+                  "x": 359,
+                  "y": 429,
+                  "w": 127,
+                  "h": 16
+                },
+                {
+                  "x": 520,
+                  "y": 429,
+                  "w": 112,
+                  "h": 16
+                },
+                {
+                  "x": 781,
+                  "y": 473,
+                  "w": 246,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 473,
+                  "w": 72,
+                  "h": 21
+                },
+                {
+                  "x": 359,
+                  "y": 477,
+                  "w": 127,
+                  "h": 16
+                },
+                {
+                  "x": 520,
+                  "y": 477,
+                  "w": 112,
+                  "h": 16
+                },
+                {
+                  "x": 359,
+                  "y": 514,
+                  "w": 194,
+                  "h": 41
+                },
+                {
+                  "x": 572,
+                  "y": 514,
+                  "w": 127,
+                  "h": 16
+                },
+                {
+                  "x": 781,
+                  "y": 522,
+                  "w": 246,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 522,
+                  "w": 72,
+                  "h": 21
+                },
+                {
+                  "x": 781,
+                  "y": 571,
+                  "w": 237,
+                  "h": 45
+                },
+                {
+                  "x": 502,
+                  "y": 571,
+                  "w": 229,
+                  "h": 21
+                },
+                {
+                  "x": 353,
+                  "y": 571,
+                  "w": 56,
+                  "h": 45
+                },
+                {
+                  "x": 414,
+                  "y": 576,
+                  "w": 82,
+                  "h": 16
+                },
+                {
+                  "x": 239,
+                  "y": 583,
+                  "w": 66,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 632,
+                  "w": 81,
+                  "h": 45
+                },
+                {
+                  "x": 781,
+                  "y": 644,
+                  "w": 249,
+                  "h": 21
+                },
+                {
+                  "x": 502,
+                  "y": 644,
+                  "w": 100,
+                  "h": 21
+                },
+                {
+                  "x": 353,
+                  "y": 644,
+                  "w": 56,
+                  "h": 21
+                },
+                {
+                  "x": 414,
+                  "y": 648,
+                  "w": 82,
+                  "h": 16
+                },
+                {
+                  "x": 781,
+                  "y": 693,
+                  "w": 216,
+                  "h": 93
+                },
+                {
+                  "x": 353,
+                  "y": 729,
+                  "w": 67,
+                  "h": 44
+                },
+                {
+                  "x": 353,
+                  "y": 733,
+                  "w": 396,
+                  "h": 89
+                },
+                {
+                  "x": 781,
+                  "y": 745,
+                  "w": 267,
+                  "h": 113
+                },
+                {
+                  "x": 239,
+                  "y": 753,
+                  "w": 72,
+                  "h": 45
+                },
+                {
+                  "x": 225,
+                  "y": 890,
+                  "w": 225,
+                  "h": 10
+                }
+              ],
+              "changes": [
+                0,
+                4,
+                5,
+                6,
+                7,
+                8,
+                10,
+                12,
+                13,
+                16,
+                17,
+                18,
+                20,
+                21,
+                23
+              ],
+              "shows": "Installation options"
+            }
+          ],
+          "sourceNote": "tt-a1i · github.com/tt-a1i/archify · MIT",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2.25
+        }
+      },
+      "durationFrames": 1503,
+      "audio": "audio/archify-live-map_long_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Before we run anything, two tables are worth your attention. The first one tells you which diagram to ask for: architecture for components and boundaries, workflow for approvals and runbooks, sequence for one interaction over time, data flow for pipelines and sensitivity, lifecycle for states and retries. Pick the wrong one and you'll fight the layout all afternoon. The second table is the part most diagram tools never give you: everything the reader can do once the map exists — find a node, trace what reaches it, probe a route between two things, compare roles.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:archify-gh#types",
+              "label": "five diagram types",
+              "focus": true,
+              "atWord": 5.083,
+              "zooms": [
+                {
+                  "marks": [
+                    "table"
+                  ],
+                  "band": true,
+                  "wantAtWord": 12.5,
+                  "atWord": 12.5
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 46.083,
+                  "atWord": 46.083
+                }
+              ],
+              "callouts": [],
+              "id": "types",
+              "src": "rec/archify-gh/seg-04.mp4",
+              "frames": 87,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "table": {
+                  "x": 239,
+                  "y": 351,
+                  "w": 742,
+                  "h": 169,
+                  "covers": "Architecture Components, services, storage, boundaries Scope, core components, primary path Workflow CI/CD, approvals, tool calls, runbooks Participants, order, branches, exceptions Sequence API calls, cache fallback, auth, async traces Callers, callees, returns, timing Data Flow Pipelines, lineage, PII, consumers Sources, transforms, stores, boundaries Lifecycle States, retries, waits, terminal outcomes States, events, retry and cancellation paths"
+                }
+              },
+              "ink": [
+                {
+                  "x": 225,
+                  "y": 0,
+                  "w": 335,
+                  "h": 33
+                },
+                {
+                  "x": 586,
+                  "y": 15,
+                  "w": 49,
+                  "h": 18
+                },
+                {
+                  "x": 241,
+                  "y": 16,
+                  "w": 703,
+                  "h": 81
+                },
+                {
+                  "x": 193,
+                  "y": 16,
+                  "w": 290,
+                  "h": 41
+                },
+                {
+                  "x": 1063,
+                  "y": 16,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1031,
+                  "y": 38,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 138,
+                  "w": 145,
+                  "h": 27
+                },
+                {
+                  "x": 201,
+                  "y": 143,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 181,
+                  "w": 283,
+                  "h": 21
+                },
+                {
+                  "x": 1002,
+                  "y": 181,
+                  "w": 57,
+                  "h": 21
+                },
+                {
+                  "x": 762,
+                  "y": 181,
+                  "w": 27,
+                  "h": 21
+                },
+                {
+                  "x": 586,
+                  "y": 181,
+                  "w": 8,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 186,
+                  "w": 385,
+                  "h": 40
+                },
+                {
+                  "x": 794,
+                  "y": 186,
+                  "w": 202,
+                  "h": 16
+                },
+                {
+                  "x": 599,
+                  "y": 186,
+                  "w": 157,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 251,
+                  "w": 278,
+                  "h": 32
+                },
+                {
+                  "x": 201,
+                  "y": 258,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 748,
+                  "y": 314,
+                  "w": 167,
+                  "h": 21
+                },
+                {
+                  "x": 477,
+                  "y": 314,
+                  "w": 56,
+                  "h": 21
+                },
+                {
+                  "x": 266,
+                  "y": 314,
+                  "w": 34,
+                  "h": 21
+                },
+                {
+                  "x": 354,
+                  "y": 351,
+                  "w": 301,
+                  "h": 21
+                },
+                {
+                  "x": 682,
+                  "y": 351,
+                  "w": 272,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 351,
+                  "w": 89,
+                  "h": 21
+                },
+                {
+                  "x": 682,
+                  "y": 388,
+                  "w": 282,
+                  "h": 21
+                },
+                {
+                  "x": 354,
+                  "y": 388,
+                  "w": 263,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 388,
+                  "w": 70,
+                  "h": 21
+                },
+                {
+                  "x": 354,
+                  "y": 425,
+                  "w": 297,
+                  "h": 21
+                },
+                {
+                  "x": 682,
+                  "y": 425,
+                  "w": 212,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 425,
+                  "w": 70,
+                  "h": 21
+                },
+                {
+                  "x": 682,
+                  "y": 462,
+                  "w": 275,
+                  "h": 21
+                },
+                {
+                  "x": 354,
+                  "y": 462,
+                  "w": 231,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 462,
+                  "w": 72,
+                  "h": 21
+                },
+                {
+                  "x": 682,
+                  "y": 498,
+                  "w": 299,
+                  "h": 21
+                },
+                {
+                  "x": 354,
+                  "y": 498,
+                  "w": 277,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 498,
+                  "w": 62,
+                  "h": 21
+                },
+                {
+                  "x": 549,
+                  "y": 545,
+                  "w": 486,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 545,
+                  "w": 164,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 550,
+                  "w": 810,
+                  "h": 64
+                },
+                {
+                  "x": 225,
+                  "y": 633,
+                  "w": 837,
+                  "h": 45
+                },
+                {
+                  "x": 225,
+                  "y": 702,
+                  "w": 838,
+                  "h": 198
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                25,
+                26,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                44,
+                46,
+                47,
+                48,
+                49,
+                51
+              ],
+              "shows": "Choose the right diagram"
+            },
+            {
+              "ref": "rec:archify-gh#keys",
+              "label": "the second table",
+              "focus": true,
+              "atWord": 54.167,
+              "wantAtWord": 54.167,
+              "zooms": [
+                {
+                  "marks": [
+                    "controls"
+                  ],
+                  "band": true,
+                  "wantAtWord": 69.167,
+                  "atWord": 66.083
+                }
+              ],
+              "callouts": [],
+              "id": "keys",
+              "src": "rec/archify-gh/seg-05.mp4",
+              "frames": 86,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "controls": {
+                  "x": 239,
+                  "y": 388,
+                  "w": 322,
+                  "h": 132,
+                  "covers": "Find and focus a semantic node Trace upstream/downstream authored reach Probe a directed route and inspect its journey Compare one or two semantic roles"
+                }
+              },
+              "ink": [
+                {
+                  "x": 241,
+                  "y": 0,
+                  "w": 15,
+                  "h": 23
+                },
+                {
+                  "x": 233,
+                  "y": 7,
+                  "w": 68,
+                  "h": 26
+                },
+                {
+                  "x": 301,
+                  "y": 7,
+                  "w": 28,
+                  "h": 25
+                },
+                {
+                  "x": 338,
+                  "y": 15,
+                  "w": 78,
+                  "h": 18
+                },
+                {
+                  "x": 467,
+                  "y": 15,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 586,
+                  "y": 15,
+                  "w": 49,
+                  "h": 18
+                },
+                {
+                  "x": 193,
+                  "y": 16,
+                  "w": 295,
+                  "h": 106
+                },
+                {
+                  "x": 385,
+                  "y": 157,
+                  "w": 421,
+                  "h": 21
+                },
+                {
+                  "x": 847,
+                  "y": 157,
+                  "w": 186,
+                  "h": 45
+                },
+                {
+                  "x": 225,
+                  "y": 161,
+                  "w": 632,
+                  "h": 65
+                },
+                {
+                  "x": 230,
+                  "y": 161,
+                  "w": 150,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 251,
+                  "w": 316,
+                  "h": 32
+                },
+                {
+                  "x": 805,
+                  "y": 314,
+                  "w": 54,
+                  "h": 21
+                },
+                {
+                  "x": 427,
+                  "y": 314,
+                  "w": 47,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 351,
+                  "w": 228,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 388,
+                  "w": 223,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 425,
+                  "w": 313,
+                  "h": 21
+                },
+                {
+                  "x": 688,
+                  "y": 425,
+                  "w": 116,
+                  "h": 21
+                },
+                {
+                  "x": 875,
+                  "y": 425,
+                  "w": 15,
+                  "h": 21
+                },
+                {
+                  "x": 896,
+                  "y": 429,
+                  "w": 75,
+                  "h": 16
+                },
+                {
+                  "x": 810,
+                  "y": 429,
+                  "w": 60,
+                  "h": 16
+                },
+                {
+                  "x": 239,
+                  "y": 462,
+                  "w": 322,
+                  "h": 21
+                },
+                {
+                  "x": 704,
+                  "y": 462,
+                  "w": 24,
+                  "h": 21
+                },
+                {
+                  "x": 733,
+                  "y": 466,
+                  "w": 30,
+                  "h": 16
+                },
+                {
+                  "x": 239,
+                  "y": 499,
+                  "w": 251,
+                  "h": 21
+                },
+                {
+                  "x": 704,
+                  "y": 499,
+                  "w": 24,
+                  "h": 21
+                },
+                {
+                  "x": 733,
+                  "y": 503,
+                  "w": 30,
+                  "h": 16
+                },
+                {
+                  "x": 239,
+                  "y": 536,
+                  "w": 202,
+                  "h": 21
+                },
+                {
+                  "x": 704,
+                  "y": 536,
+                  "w": 24,
+                  "h": 21
+                },
+                {
+                  "x": 733,
+                  "y": 540,
+                  "w": 22,
+                  "h": 16
+                },
+                {
+                  "x": 239,
+                  "y": 573,
+                  "w": 259,
+                  "h": 21
+                },
+                {
+                  "x": 704,
+                  "y": 573,
+                  "w": 15,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 610,
+                  "w": 173,
+                  "h": 21
+                },
+                {
+                  "x": 400,
+                  "y": 647,
+                  "w": 262,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 647,
+                  "w": 142,
+                  "h": 21
+                },
+                {
+                  "x": 704,
+                  "y": 647,
+                  "w": 15,
+                  "h": 21
+                },
+                {
+                  "x": 735,
+                  "y": 647,
+                  "w": 15,
+                  "h": 21
+                },
+                {
+                  "x": 239,
+                  "y": 684,
+                  "w": 100,
+                  "h": 21
+                },
+                {
+                  "x": 704,
+                  "y": 684,
+                  "w": 15,
+                  "h": 21
+                },
+                {
+                  "x": 735,
+                  "y": 684,
+                  "w": 15,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 731,
+                  "w": 221,
+                  "h": 69
+                },
+                {
+                  "x": 275,
+                  "y": 735,
+                  "w": 257,
+                  "h": 65
+                },
+                {
+                  "x": 613,
+                  "y": 735,
+                  "w": 288,
+                  "h": 41
+                },
+                {
+                  "x": 495,
+                  "y": 735,
+                  "w": 280,
+                  "h": 41
+                },
+                {
+                  "x": 906,
+                  "y": 735,
+                  "w": 131,
+                  "h": 41
+                },
+                {
+                  "x": 225,
+                  "y": 819,
+                  "w": 377,
+                  "h": 21
+                },
+                {
+                  "x": 607,
+                  "y": 824,
+                  "w": 120,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 865,
+                  "w": 210,
+                  "h": 32
+                }
+              ],
+              "changes": [
+                0,
+                4,
+                5,
+                7,
+                8,
+                9,
+                10,
+                12,
+                13,
+                14,
+                17,
+                18,
+                19,
+                22,
+                23,
+                25,
+                27,
+                29,
+                30,
+                32,
+                33,
+                34,
+                36,
+                38,
+                40,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                49,
+                50
+              ],
+              "shows": "Explore and share the output"
+            }
+          ],
+          "sourceNote": "tt-a1i · github.com/tt-a1i/archify · MIT",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1.167
+        }
+      },
+      "durationFrames": 981,
+      "audio": "audio/archify-live-map_long_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "PIPELINE",
+      "transition": "iris",
+      "background": "zoneA",
+      "narration": "The whole mechanism is four moves. You describe what you want, the agent writes typed JSON, Archify validates it against schema and layout rules, and only a passing candidate is delivered as HTML.",
+      "data": {
+        "pipeline": {
+          "headline": "How a request becomes a map",
+          "stages": [
+            {
+              "label": "You ask",
+              "sub": "plain English"
+            },
+            {
+              "label": "Agent writes",
+              "sub": "typed JSON IR"
+            },
+            {
+              "label": "Validate",
+              "sub": "schema + layout"
+            },
+            {
+              "label": "Deliver",
+              "sub": "one HTML file",
+              "color": "green"
+            }
+          ],
+          "tokenLabel": "your request",
+          "atWord": 6.417
+        }
+      },
+      "durationFrames": 379,
+      "audio": "audio/archify-live-map_long_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "CHAPTER",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Right. Enough reading — let's point Archify at a real codebase and see what comes out.",
+      "data": {
+        "chapter": {
+          "number": "I",
+          "title": "Mapping a real repository",
+          "subtitle": "Claude Code, in VS Code for the web",
+          "atWord": 5.833
+        }
+      },
+      "durationFrames": 183,
+      "audio": "audio/archify-live-map_long_s06.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s07",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "This is the repository we're going to map: iauteur, the open-source project that renders the videos on this channel. Nobody has ever drawn its architecture, including me. And here's the skill sitting inside that project, in a dot-claude folder: there's a SKILL.md, which is the instruction file the agent reads, and a schemas folder, which is what makes the checking possible.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:archify-gh#target",
+              "label": "the repository",
+              "focus": true,
+              "atWord": 3.167,
+              "wantAtWord": 1,
+              "sourceNote": "github.com/san-gitlogin/iauteur — the repository being mapped",
+              "zooms": [
+                {
+                  "marks": [
+                    "name"
+                  ],
+                  "band": true,
+                  "wantAtWord": 6.333,
+                  "atWord": 6.333
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 16.167,
+                  "atWord": 16.167
+                }
+              ],
+              "callouts": [],
+              "id": "target",
+              "src": "rec/archify-gh/seg-08.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "name": {
+                  "x": 178,
+                  "y": 90,
+                  "w": 64,
+                  "h": 27,
+                  "covers": "iauteur",
+                  "block": {
+                    "x": 178,
+                    "y": 90,
+                    "w": 64,
+                    "h": 27
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 1,
+                  "w": 189,
+                  "h": 51
+                },
+                {
+                  "x": 405,
+                  "y": 25,
+                  "w": 96,
+                  "h": 21
+                },
+                {
+                  "x": 294,
+                  "y": 25,
+                  "w": 75,
+                  "h": 21
+                },
+                {
+                  "x": 537,
+                  "y": 25,
+                  "w": 75,
+                  "h": 21
+                },
+                {
+                  "x": 189,
+                  "y": 25,
+                  "w": 70,
+                  "h": 21
+                },
+                {
+                  "x": 648,
+                  "y": 25,
+                  "w": 52,
+                  "h": 21
+                },
+                {
+                  "x": 1466,
+                  "y": 27,
+                  "w": 50,
+                  "h": 18
+                },
+                {
+                  "x": 1387,
+                  "y": 27,
+                  "w": 45,
+                  "h": 18
+                },
+                {
+                  "x": 56,
+                  "y": 90,
+                  "w": 106,
+                  "h": 27
+                },
+                {
+                  "x": 178,
+                  "y": 90,
+                  "w": 64,
+                  "h": 27
+                },
+                {
+                  "x": 1271,
+                  "y": 94,
+                  "w": 70,
+                  "h": 16
+                },
+                {
+                  "x": 556,
+                  "y": 149,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 232,
+                  "y": 149,
+                  "w": 79,
+                  "h": 18
+                },
+                {
+                  "x": 456,
+                  "y": 149,
+                  "w": 49,
+                  "h": 18
+                },
+                {
+                  "x": 728,
+                  "y": 149,
+                  "w": 48,
+                  "h": 18
+                },
+                {
+                  "x": 361,
+                  "y": 149,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 207,
+                  "w": 45,
+                  "h": 21
+                },
+                {
+                  "x": 1136,
+                  "y": 243,
+                  "w": 269,
+                  "h": 117
+                },
+                {
+                  "x": 974,
+                  "y": 269,
+                  "w": 106,
+                  "h": 43
+                },
+                {
+                  "x": 192,
+                  "y": 271,
+                  "w": 180,
+                  "h": 188
+                },
+                {
+                  "x": 432,
+                  "y": 272,
+                  "w": 455,
+                  "h": 18
+                },
+                {
+                  "x": 241,
+                  "y": 272,
+                  "w": 110,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 318,
+                  "w": 446,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 359,
+                  "w": 357,
+                  "h": 18
+                },
+                {
+                  "x": 1160,
+                  "y": 375,
+                  "w": 262,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 376,
+                  "w": 90,
+                  "h": 85
+                },
+                {
+                  "x": 570,
+                  "y": 400,
+                  "w": 432,
+                  "h": 18
+                },
+                {
+                  "x": 1186,
+                  "y": 411,
+                  "w": 84,
+                  "h": 16
+                },
+                {
+                  "x": 1298,
+                  "y": 411,
+                  "w": 68,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 441,
+                  "w": 332,
+                  "h": 18
+                },
+                {
+                  "x": 1323,
+                  "y": 445,
+                  "w": 54,
+                  "h": 16
+                },
+                {
+                  "x": 1204,
+                  "y": 445,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 478,
+                  "w": 185,
+                  "h": 309
+                },
+                {
+                  "x": 1250,
+                  "y": 478,
+                  "w": 94,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 482,
+                  "w": 415,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 523,
+                  "w": 404,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 563,
+                  "w": 446,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 604,
+                  "w": 446,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 645,
+                  "w": 164,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 645,
+                  "w": 137,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 686,
+                  "w": 446,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 727,
+                  "w": 446,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 768,
+                  "w": 446,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 808,
+                  "w": 446,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 822,
+                  "w": 61,
+                  "h": 21
+                },
+                {
+                  "x": 570,
+                  "y": 849,
+                  "w": 446,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 858,
+                  "w": 117,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 890,
+                  "w": 446,
+                  "h": 10
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "About"
+            },
+            {
+              "ref": "rec:archify-live#skill",
+              "label": "the skill, in the project",
+              "focus": true,
+              "atWord": 24.5,
+              "wantAtWord": 24.5,
+              "sourceNote": "VS Code for the Web · this project",
+              "zooms": [
+                {
+                  "marks": [
+                    "skillmd"
+                  ],
+                  "band": true,
+                  "wantAtWord": 34.083,
+                  "atWord": 37.917
+                },
+                {
+                  "marks": [
+                    "schemas"
+                  ],
+                  "band": true,
+                  "wantAtWord": 43.333,
+                  "atWord": 41.833
+                }
+              ],
+              "callouts": [],
+              "id": "skill",
+              "src": "rec/archify-live/seg-01.mp4",
+              "frames": 146,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "skillmd": {
+                  "x": 368,
+                  "y": 399,
+                  "w": 70,
+                  "h": 19,
+                  "covers": "SKILL.md"
+                },
+                "schemas": {
+                  "x": 368,
+                  "y": 265,
+                  "w": 62,
+                  "h": 19,
+                  "covers": "schemas"
+                },
+                "__cmd": {
+                  "x": 518,
+                  "y": 73,
+                  "w": 370,
+                  "h": 19,
+                  "covers": "Get-ChildItem .claude/skills/archify -Name"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 73,
+                  "w": 519,
+                  "h": 383
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                5,
+                6,
+                7,
+                8,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                30,
+                31,
+                32,
+                33,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                49,
+                52,
+                54,
+                56,
+                58,
+                61,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                72,
+                74,
+                75,
+                76,
+                79,
+                81,
+                82,
+                83,
+                85,
+                96,
+                110
+              ],
+              "shows": "$ Get-ChildItem .claude/skills/archify -Name",
+              "said": "PS archify-live> Get-ChildItem .claude/skills/archify -Name\nassets\nbin\nbrand-marks\ndelta\nexamples\nmigrations\nrecipes\nreferences\nrenderers\nschemas\nscripts\ntest\nLICENSE\npackage-lock.json\npackage.json\nskill-release.json\nSKILL.md\nTHIRD_PARTY_NOTICES.md\nPS archify-live>"
+            }
+          ],
+          "sourceNote": "github.com/san-gitlogin/iauteur — the repository being mapped",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 640,
+      "audio": "audio/archify-live-map_long_s07.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s08",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Now watch this, because it is the part I want you to take away. I'm asking Claude Code, in plain English, to use the Archify skill on this repository. Notice how specific the request is: map the video pipeline, keep it to ten nodes, show one primary path, and read these particular files as evidence. That specificity is not decoration — it is the specification. A vague prompt gives you a vague diagram, every single time. The agent loads the skill, then reads the schema so it knows the exact shape it is allowed to produce. It writes a typed JSON file describing the system, and then validates that file. Where the checker complains — a label sitting too close to a route, a node that needs more room — the agent repairs it and validates again, and keeps going until every check passes. Nothing here is drawn by hand. The agent writes a specification, and Archify compiles it. And that difference is why this scales past a whiteboard: the map is derived from the source, so when the code moves, you run the same sentence again and get a map that matches.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:archify-live#ask",
+              "label": "one sentence to the agent",
+              "focus": true,
+              "atWord": 4.75,
+              "wantAtWord": 1,
+              "zooms": [],
+              "callouts": [],
+              "id": "ask",
+              "src": "rec/archify-live/seg-02.mp4",
+              "frames": 1665,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 92,
+                  "w": 818,
+                  "h": 19
+                },
+                {
+                  "x": 368,
+                  "y": 130,
+                  "w": 1214,
+                  "h": 134
+                },
+                {
+                  "x": 368,
+                  "y": 284,
+                  "w": 537,
+                  "h": 19
+                },
+                {
+                  "x": 368,
+                  "y": 322,
+                  "w": 933,
+                  "h": 134
+                },
+                {
+                  "x": 368,
+                  "y": 475,
+                  "w": 669,
+                  "h": 115
+                },
+                {
+                  "x": 368,
+                  "y": 610,
+                  "w": 1108,
+                  "h": 38
+                },
+                {
+                  "x": 386,
+                  "y": 667,
+                  "w": 1170,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 725,
+                  "w": 299,
+                  "h": 19
+                },
+                {
+                  "x": 368,
+                  "y": 763,
+                  "w": 1214,
+                  "h": 96
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                4,
+                5,
+                6,
+                8,
+                11,
+                12,
+                14,
+                15,
+                18,
+                19,
+                21,
+                22,
+                23,
+                25,
+                26,
+                28,
+                29,
+                30,
+                31,
+                33,
+                34,
+                35,
+                36,
+                37,
+                39,
+                40,
+                42,
+                43,
+                45,
+                46,
+                49,
+                50,
+                52,
+                53,
+                54,
+                55,
+                57,
+                59,
+                60,
+                62,
+                63,
+                64,
+                65,
+                66,
+                68,
+                69,
+                71,
+                73,
+                76,
+                78,
+                79,
+                81,
+                82,
+                84,
+                85,
+                87,
+                89,
+                90,
+                93,
+                95,
+                96,
+                98,
+                99,
+                101,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                118,
+                119,
+                120,
+                122,
+                123,
+                124,
+                126,
+                127,
+                128,
+                130,
+                132,
+                134,
+                135,
+                138,
+                139,
+                141,
+                143,
+                146,
+                147,
+                149,
+                150,
+                151,
+                153,
+                154,
+                156,
+                158,
+                159,
+                160,
+                162,
+                163,
+                165,
+                168,
+                169,
+                171,
+                174,
+                177,
+                178,
+                179,
+                181,
+                182,
+                184,
+                185,
+                188,
+                189,
+                191,
+                193,
+                194,
+                196,
+                197,
+                198,
+                200,
+                201,
+                203,
+                205,
+                206,
+                207,
+                208,
+                210,
+                213,
+                214,
+                217,
+                220,
+                221,
+                223,
+                224,
+                225,
+                228,
+                230,
+                231,
+                234,
+                235,
+                237,
+                238,
+                239,
+                240,
+                241,
+                243,
+                246,
+                247,
+                249,
+                250,
+                251,
+                253,
+                255,
+                256,
+                258,
+                259,
+                260,
+                261,
+                262,
+                264,
+                265,
+                266,
+                267,
+                268,
+                270,
+                271,
+                273,
+                275,
+                276,
+                277,
+                278,
+                281,
+                283,
+                284,
+                285,
+                287,
+                289,
+                290,
+                291,
+                292,
+                294,
+                295,
+                296,
+                297,
+                298,
+                299,
+                300,
+                301,
+                302,
+                303,
+                305,
+                307,
+                308,
+                309,
+                310,
+                311,
+                312,
+                314,
+                315,
+                317,
+                318,
+                320,
+                321,
+                323,
+                324,
+                326,
+                328,
+                329,
+                330,
+                332,
+                333,
+                336,
+                337,
+                338,
+                340,
+                341,
+                343,
+                344,
+                346,
+                348,
+                351,
+                352,
+                353,
+                356,
+                357,
+                359,
+                361,
+                363,
+                365,
+                366,
+                369,
+                372,
+                373,
+                376,
+                377,
+                379,
+                380,
+                381,
+                384,
+                386,
+                389,
+                392,
+                393,
+                396,
+                397,
+                399,
+                400,
+                402,
+                403,
+                406,
+                408,
+                410,
+                413,
+                414,
+                416,
+                418,
+                420,
+                421,
+                423,
+                426,
+                428,
+                429,
+                431,
+                434,
+                435,
+                437,
+                440,
+                443,
+                444,
+                445,
+                447,
+                449,
+                450,
+                452,
+                454,
+                455,
+                457,
+                460,
+                462,
+                464,
+                467,
+                469,
+                472,
+                474,
+                476,
+                477,
+                480,
+                482,
+                484,
+                486,
+                488,
+                490,
+                491,
+                492,
+                495,
+                496,
+                498,
+                500,
+                503,
+                505,
+                507,
+                510,
+                512,
+                514,
+                516,
+                523,
+                524,
+                525,
+                527,
+                530,
+                532,
+                533,
+                534,
+                537,
+                538,
+                539,
+                541,
+                543,
+                544,
+                545,
+                546,
+                547,
+                548,
+                550,
+                551,
+                553,
+                554,
+                556,
+                557,
+                560,
+                561,
+                571,
+                572,
+                581,
+                582,
+                586,
+                592,
+                593,
+                594,
+                596,
+                597,
+                614,
+                615,
+                618,
+                619,
+                624,
+                633,
+                645,
+                646,
+                647,
+                649,
+                656,
+                661,
+                667,
+                668,
+                671,
+                674,
+                675,
+                678,
+                684,
+                685,
+                688,
+                691,
+                692,
+                697,
+                698,
+                701,
+                703,
+                705,
+                708,
+                709,
+                711,
+                714,
+                715,
+                717,
+                718,
+                721,
+                722,
+                724,
+                725,
+                728,
+                729,
+                731,
+                732,
+                735,
+                738,
+                741,
+                743,
+                744,
+                745,
+                748,
+                751,
+                755,
+                758,
+                759,
+                760,
+                761,
+                762,
+                765,
+                766,
+                768,
+                769,
+                771,
+                772,
+                774,
+                775,
+                778,
+                779,
+                782,
+                784,
+                785,
+                788,
+                789,
+                790,
+                792,
+                795,
+                797,
+                798,
+                809,
+                810,
+                812,
+                815,
+                816,
+                818,
+                819,
+                822,
+                825,
+                826,
+                828,
+                832,
+                835,
+                836,
+                839,
+                842,
+                846,
+                847,
+                850,
+                851,
+                852,
+                854,
+                855,
+                857,
+                858,
+                859,
+                862,
+                866,
+                867,
+                870,
+                873,
+                875,
+                876,
+                879,
+                882,
+                883,
+                885,
+                886,
+                887,
+                889,
+                890,
+                893,
+                896,
+                899,
+                900,
+                902,
+                903,
+                904,
+                905,
+                907,
+                908,
+                909,
+                910,
+                914,
+                915,
+                917,
+                919,
+                920,
+                921,
+                922,
+                924,
+                926,
+                929,
+                930,
+                933,
+                936,
+                939,
+                940,
+                941,
+                943,
+                946,
+                947,
+                950,
+                952,
+                953,
+                954,
+                958,
+                959,
+                960,
+                962,
+                966,
+                967,
+                970,
+                973,
+                974,
+                976,
+                977,
+                980,
+                981,
+                983,
+                984,
+                986,
+                987,
+                990,
+                991,
+                992,
+                994,
+                997,
+                1000,
+                1001,
+                1003,
+                1004,
+                1006,
+                1007,
+                1010,
+                1011,
+                1013,
+                1014,
+                1017,
+                1018,
+                1020,
+                1021,
+                1024,
+                1027,
+                1030,
+                1031,
+                1034,
+                1035,
+                1041,
+                1044,
+                1047,
+                1048,
+                1049,
+                1052,
+                1054,
+                1055,
+                1057,
+                1058,
+                1061,
+                1064,
+                1065,
+                1068,
+                1069,
+                1072,
+                1075,
+                1077,
+                1081,
+                1082,
+                1085,
+                1087,
+                1089,
+                1090,
+                1092,
+                1095,
+                1096,
+                1098,
+                1101,
+                1102,
+                1103,
+                1106,
+                1107,
+                1109,
+                1111,
+                1112,
+                1115,
+                1118,
+                1122,
+                1124,
+                1125,
+                1128,
+                1129,
+                1132,
+                1135,
+                1136,
+                1138,
+                1141,
+                1145,
+                1148,
+                1151,
+                1152,
+                1155,
+                1156,
+                1158,
+                1159,
+                1160,
+                1161,
+                1162,
+                1164,
+                1165,
+                1168,
+                1171,
+                1172,
+                1175,
+                1178,
+                1181,
+                1182,
+                1185,
+                1188,
+                1192,
+                1194,
+                1195,
+                1196,
+                1198,
+                1199,
+                1202,
+                1206,
+                1207,
+                1209,
+                1212,
+                1215,
+                1216,
+                1218,
+                1219,
+                1221,
+                1222,
+                1225,
+                1226,
+                1228,
+                1229,
+                1232,
+                1235,
+                1236,
+                1239,
+                1242,
+                1243,
+                1246,
+                1249,
+                1250,
+                1252,
+                1253,
+                1255,
+                1256,
+                1259,
+                1260,
+                1261,
+                1262,
+                1265,
+                1269,
+                1270,
+                1272,
+                1273,
+                1275,
+                1276,
+                1278,
+                1279,
+                1281,
+                1282,
+                1283,
+                1284,
+                1286,
+                1287,
+                1289,
+                1292,
+                1293,
+                1295,
+                1296,
+                1297,
+                1298,
+                1299,
+                1300,
+                1301,
+                1302,
+                1304,
+                1305,
+                1308,
+                1309,
+                1311,
+                1312,
+                1313,
+                1315,
+                1316,
+                1317,
+                1318,
+                1319,
+                1320,
+                1322,
+                1323,
+                1326,
+                1329,
+                1330,
+                1333,
+                1336,
+                1337,
+                1340,
+                1343,
+                1346,
+                1349,
+                1350,
+                1351,
+                1352,
+                1353,
+                1354,
+                1356,
+                1357,
+                1360,
+                1363,
+                1365,
+                1366,
+                1367,
+                1369,
+                1370,
+                1372,
+                1373,
+                1374,
+                1375,
+                1376,
+                1377,
+                1378,
+                1380,
+                1382,
+                1383,
+                1384,
+                1385,
+                1386,
+                1388,
+                1389,
+                1390,
+                1392,
+                1393,
+                1395,
+                1396,
+                1398,
+                1399,
+                1401,
+                1404,
+                1406,
+                1407,
+                1408,
+                1409,
+                1410,
+                1411,
+                1412,
+                1413,
+                1414,
+                1415,
+                1416,
+                1417,
+                1418,
+                1420,
+                1421,
+                1424,
+                1427,
+                1430,
+                1431,
+                1433,
+                1434,
+                1435,
+                1436,
+                1437,
+                1439,
+                1440,
+                1442,
+                1443,
+                1445,
+                1446,
+                1447,
+                1448,
+                1451,
+                1452,
+                1454,
+                1455,
+                1460,
+                1461,
+                1463,
+                1464,
+                1467,
+                1469,
+                1470,
+                1471,
+                1472,
+                1473,
+                1475,
+                1476,
+                1481,
+                1482,
+                1484,
+                1485,
+                1487,
+                1488,
+                1490,
+                1491,
+                1493,
+                1494,
+                1496,
+                1497,
+                1498,
+                1499,
+                1500,
+                1501,
+                1502,
+                1504,
+                1505,
+                1507,
+                1508,
+                1510,
+                1511,
+                1512,
+                1514,
+                1515,
+                1517,
+                1518,
+                1521,
+                1524,
+                1525,
+                1528,
+                1529,
+                1531,
+                1532,
+                1535,
+                1538,
+                1539,
+                1541,
+                1543,
+                1544,
+                1545,
+                1547,
+                1548,
+                1551,
+                1552,
+                1554,
+                1555,
+                1557,
+                1558,
+                1560,
+                1561,
+                1562,
+                1564,
+                1565,
+                1567,
+                1568,
+                1570,
+                1571,
+                1573,
+                1574,
+                1576,
+                1577,
+                1579,
+                1580,
+                1582,
+                1584,
+                1585,
+                1588,
+                1591,
+                1592,
+                1595,
+                1596,
+                1601,
+                1602,
+                1605,
+                1608,
+                1611,
+                1612,
+                1615,
+                1618,
+                1621,
+                1622,
+                1625,
+                1626,
+                1629,
+                1632,
+                1634,
+                1635,
+                1638,
+                1639,
+                1643,
+                1644,
+                1646,
+                1658,
+                1659,
+                1661,
+                1662,
+                1663
+              ],
+              "shows": "EXPLORER",
+              "said": "● Composition passes. Let me confirm the full artifact check list (all 9) and overall status.\n● Bash(node .claude/skills/archify/bin/archify.mjs validate architecture iauteur-pipeline.architecture.json --quality showcase --json 2>&1\n | head -60; echo \"EXIT=$?\")\n ⎿  {\n \"schemaVersion\": 1,\n \"ok\": true,\n … +58 lines (ctrl+o to expand)\n ⎿  Allowed by auto mode classifier\n● All 9 checks pass with 0 errors/0 warnings. Now delivering.\n● Bash(node .claude/skills/archify/bin/archify.mjs deliver architecture iauteur-pipeline.architecture.json\n iauteur-pipeline.architecture.html --quality showcase --json…)\n ⎿  {\n \"schemaVersion\": 1,\n \"ok\": true,\n … +22 lines (ctrl+o to expand)\n ⎿  Allowed by auto mode classifier\n● Bash(node .claude/skills/archify/scripts/check-update.mjs 2>&1 | head -30)\n ⎿  {\n \"status\": \"silent\",\n \"reason\": \"current\"\n }\n ⎿  Allowed by auto mode classifier\n● Validated iauteur-pipeline.architecture.json at showcase quality — 9/9 artifact checks, 0 errors, 0 warnings — and delivered\n iauteur-pipeline.architecture.html (deliver exit 0; spec sha256 dd01f173… 5,629 B, artifact sha256 86610956… 818,749 B).\n Per your instruction I skipped visual-check, so there is no browser evidence and no perceptual visual review for this artifact — only\n the deterministic artifact checks above.\n✻ Cogitated for 33s · done 2:41 PM\n──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to kee…\n ⏵⏵ auto mode on (shift+tab to cycle) /rc"
+            }
+          ],
+          "sourceNote": null,
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1902,
+      "audio": "audio/archify-live-map_long_s08.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s09",
+      "type": "CODE_WINDOW",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "This is what it wrote. Each node is a few fields: a stable id, a type, the label you see on the map, and where it sits. That's the whole trick — your architecture becomes lines you can read in a pull request, diff against last month, and argue about properly.",
+      "data": {
+        "code": {
+          "filename": "pipeline.architecture.json",
+          "language": "json",
+          "lines": [
+            {
+              "text": "{ \"id\": \"spec\", \"type\": \"edge\","
+            },
+            {
+              "text": "  \"label\": \"Topic Spec\","
+            },
+            {
+              "text": "  \"sub\": \"long.json · shorts.json\" },"
+            },
+            {
+              "text": "{ \"id\": \"bake\", \"type\": \"backend\","
+            },
+            {
+              "text": "  \"label\": \"bake-rec.mjs\" },"
+            },
+            {
+              "text": "{ \"id\": \"voice\", \"type\": \"backend\","
+            },
+            {
+              "text": "  \"label\": \"voiceover.py\" }"
+            }
+          ],
+          "runLabel": "the typed source",
+          "atWord": 10.667
+        }
+      },
+      "durationFrames": 459,
+      "audio": "audio/archify-live-map_long_s09.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s10",
+      "type": "RECORDED_STEP",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "When the run finishes you have two files: the typed JSON source, and one HTML file. And here's the receipt that matters. Archify validated the source at showcase quality, and reports nine artifact checks with zero errors and zero warnings. That is the whole argument for this tool. A map that fails its checks never replaces the good one on disk, so you cannot accidentally ship a broken diagram. And the source itself stays readable, which is the part your reviewers care about, because a map nobody can check is just a picture with confidence. Look at the names it chose: here's bake-rec, and here's voiceover — the same steps that turn a script into the video you are watching right now.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:archify-verify#files",
+              "label": "what it produced",
+              "focus": true,
+              "atWord": 2.5,
+              "zooms": [
+                {
+                  "marks": [
+                    "json"
+                  ],
+                  "band": true,
+                  "wantAtWord": 5.667,
+                  "atWord": 14.5
+                },
+                {
+                  "marks": [
+                    "html"
+                  ],
+                  "band": true,
+                  "wantAtWord": 9,
+                  "atWord": 15.417
+                }
+              ],
+              "callouts": [],
+              "id": "files",
+              "src": "rec/archify-verify/seg-01.mp4",
+              "frames": 167,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "json": {
+                  "x": 368,
+                  "y": 111,
+                  "w": 299,
+                  "h": 19,
+                  "covers": "iauteur-pipeline.architecture.json"
+                },
+                "html": {
+                  "x": 368,
+                  "y": 92,
+                  "w": 299,
+                  "h": 19,
+                  "covers": "iauteur-pipeline.architecture.html"
+                },
+                "__cmd": {
+                  "x": 518,
+                  "y": 73,
+                  "w": 449,
+                  "h": 19,
+                  "covers": "Get-ChildItem iauteur-pipeline.architecture.* -Name"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 73,
+                  "w": 598,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                4,
+                5,
+                6,
+                8,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                18,
+                20,
+                22,
+                23,
+                24,
+                25,
+                28,
+                30,
+                31,
+                33,
+                35,
+                36,
+                37,
+                39,
+                40,
+                43,
+                46,
+                48,
+                50,
+                52,
+                54,
+                55,
+                57,
+                58,
+                59,
+                60,
+                62,
+                64,
+                65,
+                66,
+                69,
+                70,
+                72,
+                74,
+                75,
+                76,
+                77,
+                79,
+                80,
+                81,
+                83,
+                85,
+                87,
+                88,
+                90,
+                91,
+                92,
+                94,
+                96,
+                97,
+                98,
+                99,
+                101,
+                102,
+                103,
+                105,
+                106,
+                108,
+                116,
+                117,
+                118,
+                131
+              ],
+              "shows": "$ Get-ChildItem iauteur-pipeline.architecture.* -Name",
+              "said": "PS archify-live> Get-ChildItem iauteur-pipeline.architecture.* -Name\niauteur-pipeline.architecture.html\niauteur-pipeline.architecture.json\nPS archify-live>"
+            },
+            {
+              "ref": "rec:archify-verify#receipt",
+              "label": "the validation receipt",
+              "focus": true,
+              "atWord": 22.667,
+              "wantAtWord": 14.5,
+              "zooms": [
+                {
+                  "marks": [
+                    "checks"
+                  ],
+                  "band": true,
+                  "wantAtWord": 27,
+                  "atWord": 41.5
+                }
+              ],
+              "callouts": [],
+              "id": "receipt",
+              "src": "rec/archify-verify/seg-02.mp4",
+              "frames": 298,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "ok": {
+                  "x": 368,
+                  "y": 92,
+                  "w": 132,
+                  "h": 19,
+                  "covers": "ok architecture"
+                },
+                "checks": {
+                  "x": 1072,
+                  "y": 92,
+                  "w": 150,
+                  "h": 19,
+                  "covers": "9 artifact checks"
+                },
+                "__cmd": {
+                  "x": 518,
+                  "y": 73,
+                  "w": 1047,
+                  "h": 19,
+                  "covers": "node .claude/skills/archify/bin/archify.mjs validate architecture iauteur-pipeline.architecture.json --quality showcase"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 73,
+                  "w": 1214,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                8,
+                10,
+                11,
+                12,
+                14,
+                15,
+                17,
+                18,
+                21,
+                22,
+                25,
+                26,
+                27,
+                28,
+                29,
+                31,
+                33,
+                34,
+                36,
+                39,
+                42,
+                44,
+                46,
+                48,
+                49,
+                50,
+                52,
+                54,
+                56,
+                58,
+                60,
+                62,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                74,
+                77,
+                79,
+                80,
+                81,
+                82,
+                83,
+                85,
+                86,
+                88,
+                89,
+                91,
+                92,
+                94,
+                97,
+                98,
+                99,
+                100,
+                102,
+                103,
+                104,
+                106,
+                108,
+                110,
+                111,
+                112,
+                114,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                123,
+                124,
+                125,
+                127,
+                128,
+                129,
+                130,
+                132,
+                133,
+                134,
+                136,
+                138,
+                139,
+                141,
+                144,
+                145,
+                146,
+                148,
+                149,
+                150,
+                151,
+                152,
+                154,
+                156,
+                157,
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                166,
+                167,
+                170,
+                172,
+                174,
+                176,
+                177,
+                179,
+                180,
+                182,
+                183,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191,
+                193,
+                195,
+                196,
+                198,
+                199,
+                201,
+                202,
+                204,
+                205,
+                207,
+                209,
+                210,
+                211,
+                212,
+                214,
+                215,
+                218,
+                220,
+                221,
+                224,
+                225,
+                226,
+                228,
+                229,
+                230,
+                232,
+                234,
+                236,
+                238,
+                248,
+                258,
+                259,
+                262
+              ],
+              "shows": "$ node .claude/skills/archify/bin/archify.mjs validate architectu",
+              "said": "PS archify-live> node .claude/skills/archify/bin/archify.mjs validate architecture iauteur-pipeline.architecture.json --quality showcase\nok architecture C:\\iauteur-rec\\archify-live\\iauteur-pipeline.architecture.json (9 artifact checks; composition showcase: 0 errors, 0 warni\nngs)\nPS archify-live>"
+            },
+            {
+              "ref": "rec:archify-verify#ir",
+              "label": "the typed source",
+              "focus": true,
+              "atWord": 57.75,
+              "wantAtWord": 57.75,
+              "zooms": [
+                {
+                  "marks": [
+                    "bake",
+                    "voice"
+                  ],
+                  "band": true,
+                  "wantAtWord": 75.083,
+                  "atWord": 75.083
+                }
+              ],
+              "callouts": [],
+              "id": "ir",
+              "src": "rec/archify-verify/seg-03.mp4",
+              "frames": 180,
+              "bbox": {
+                "x": 348,
+                "y": 30,
+                "w": 1252,
+                "h": 848
+              },
+              "marks": {
+                "bake": {
+                  "x": 799,
+                  "y": 475,
+                  "w": 106,
+                  "h": 19,
+                  "covers": "bake-rec.mjs"
+                },
+                "voice": {
+                  "x": 808,
+                  "y": 514,
+                  "w": 106,
+                  "h": 19,
+                  "covers": "voiceover.py"
+                },
+                "__cmd": {
+                  "x": 518,
+                  "y": 73,
+                  "w": 537,
+                  "h": 19,
+                  "covers": "Get-Content iauteur-pipeline.architecture.json -TotalCount 18"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 73,
+                  "w": 1214,
+                  "h": 498
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                5,
+                6,
+                8,
+                11,
+                12,
+                14,
+                15,
+                16,
+                19,
+                20,
+                22,
+                23,
+                24,
+                26,
+                28,
+                29,
+                30,
+                32,
+                33,
+                35,
+                36,
+                38,
+                39,
+                42,
+                43,
+                45,
+                47,
+                49,
+                50,
+                52,
+                53,
+                54,
+                55,
+                56,
+                58,
+                59,
+                61,
+                62,
+                65,
+                66,
+                67,
+                68,
+                70,
+                71,
+                73,
+                74,
+                76,
+                78,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                88,
+                89,
+                91,
+                93,
+                94,
+                95,
+                96,
+                98,
+                100,
+                103,
+                104,
+                107,
+                110,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                120,
+                129,
+                130,
+                131,
+                132,
+                144
+              ],
+              "shows": "$ Get-Content iauteur-pipeline.architecture.json -TotalCount 18",
+              "said": "PS archify-live> Get-Content iauteur-pipeline.architecture.json -TotalCount 18\n{\n \"schema_version\": 1,\n \"diagram_type\": \"architecture\",\n \"meta\": {\n \"title\": \"iAuteur â€” Topic Spec to Rendered Video\",\n \"output\": \"iauteur-pipeline.architecture.html\",\n \"quality_profile\": \"showcase\",\n \"viewBox\": [1380, 800],\n \"views\": [\n { \"id\": \"spec-preparation\", \"label\": \"Spec preparation\", \"focus\": [\"spec\", \"bake\", \"voice\", \"sync\"], \"note\": \"The authored spec is b\naked against real footage, voiced, then re-timed from the real audio.\" },\n { \"id\": \"pre-render-gates\", \"label\": \"Pre-render gates\", \"focus\": [\"render\", \"lint\", \"footage\"], \"note\": \"render-topic.mjs refuses t\no render until the spec gates and the footage gates both pass.\" },\n { \"id\": \"remotion-render\", \"label\": \"Remotion render\", \"focus\": [\"index\", \"root\", \"main\", \"cli\", \"mp4\"], \"note\": \"Compositions resol\nve per slug and variant, then the CLI encodes the frames.\" }\n ]\n },\n \"components\": [\n { \"id\": \"spec\", \"type\": \"external\", \"label\": \"Topic Spec\", \"sublabel\": \"long.json Â· shorts.json\", \"tag\": \"short* reads shorts.json\",\n\"pos\": [70, 90], \"size\": [200, 78] },\n { \"id\": \"bake\", \"type\": \"backend\", \"label\": \"bake-rec.mjs\", \"sublabel\": \"resolve rec:<slug>#<step>\", \"tag\": \"refuses non read-back\", \"\npos\": [415, 90], \"size\": [200, 78] },\n { \"id\": \"voice\", \"type\": \"backend\", \"label\": \"voiceover.py\", \"sublabel\": \"edge-tts WordBoundary\", \"tag\": \"public/audio + out/tts\", \"po\ns\": [760, 90], \"size\": [200, 78] },\nPS archify-live>"
+            }
+          ],
+          "sourceNote": null,
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 1144,
+      "audio": "audio/archify-live-map_long_s10.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s11",
+      "type": "STAT_PANELS",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Three numbers are worth holding on to from that receipt. Nine checks ran. Zero of them failed. And what you hand to a colleague is a single file — no server, no account, no login wall between them and the diagram.",
+      "data": {
+        "stats": [
+          {
+            "kicker": "Checks run",
+            "value": "9",
+            "atWord": 7
+          },
+          {
+            "kicker": "Failures",
+            "value": "0",
+            "color": "green",
+            "atWord": 17.083
+          },
+          {
+            "kicker": "Files to share",
+            "value": "1",
+            "color": "green",
+            "atWord": 20.5
+          }
+        ],
+        "verdict": {
+          "text": "Validated before you see it",
+          "color": "green",
+          "atWord": 21.417
+        },
+        "source": "archify deliver --json, this run"
+      },
+      "durationFrames": 416,
+      "audio": "audio/archify-live-map_long_s11.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s12",
+      "type": "CHAPTER",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "So that's the map made. Now let's open it, because this is where Archify stops being a diagram tool.",
+      "data": {
+        "chapter": {
+          "number": "II",
+          "title": "The map you can interrogate",
+          "subtitle": "One file, no server, no account",
+          "atWord": 5.25
+        }
+      },
+      "durationFrames": 204,
+      "audio": "audio/archify-live-map_long_s12.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s13",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "There it is — our pipeline, drawn from our own source. A topic spec goes in on the left, and a rendered video comes out on the right. Look at the panel on the side: the agent also authored guided views, small chapters through the system, so a newcomer can be walked through it instead of being handed a wall of boxes. Press the slash key and you get a node finder. I'll type sync, hit enter, and the map jumps straight to the sync step and shows you exactly what it connects to. That sounds small until you're staring at somebody else's platform diagram with sixty components on it, hunting for the one service you were paged about at two in the morning. And here is the part I trust: every relationship you can trace was written by the agent into that typed source — the viewer never invents a connection to make the picture tidier. Play the story and those chapters run in order, chapter one, spec preparation, with the diagram itself moving rather than a slide sitting beside it. Exports are the last piece: a share card sized for a README or a release post, the full diagram as a picture for people who will never open the HTML, and one key that flips the whole thing to a light theme, which matters more than it should when your deck is white. And every export carries the whole diagram, not the part you happened to be looking at when you pressed the key.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:archify-artifact#map",
+              "label": "the generated map",
+              "focus": true,
+              "atWord": 1.75,
+              "wantAtWord": 1,
+              "zooms": [
+                {
+                  "marks": [
+                    "spec"
+                  ],
+                  "band": true,
+                  "wantAtWord": 7.833,
+                  "atWord": 7.833
+                },
+                {
+                  "marks": [
+                    "render"
+                  ],
+                  "band": true,
+                  "wantAtWord": 16.25,
+                  "atWord": 16.25
+                }
+              ],
+              "callouts": [],
+              "id": "map",
+              "src": "rec/archify-artifact/seg-01.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "title": {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 63,
+                  "covers": "iAuteur — Topic Spec to Rendered Video",
+                  "block": {
+                    "x": 347,
+                    "y": 6,
+                    "w": 442,
+                    "h": 63
+                  }
+                },
+                "spec": {
+                  "x": 485,
+                  "y": 6,
+                  "w": 138,
+                  "h": 32,
+                  "covers": "Topic Spec",
+                  "block": {
+                    "x": 347,
+                    "y": 6,
+                    "w": 442,
+                    "h": 63
+                  }
+                },
+                "render": {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13,
+                  "covers": "Remotion render",
+                  "block": {
+                    "x": 1107,
+                    "y": 98,
+                    "w": 90,
+                    "h": 13
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 137,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 700,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 904,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 581,
+                  "y": 98,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 335,
+                  "y": 99,
+                  "w": 930,
+                  "h": 587
+                },
+                {
+                  "x": 566,
+                  "y": 99,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 681,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 821,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 834,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 847,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 884,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1024,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1037,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1051,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1088,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1228,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1241,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 973,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1044,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1192,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1012,
+                  "y": 710,
+                  "w": 17,
+                  "h": 12
+                },
+                {
+                  "x": 678,
+                  "y": 775,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1004,
+                  "y": 775,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 353,
+                  "y": 775,
+                  "w": 134,
+                  "h": 18
+                },
+                {
+                  "x": 988,
+                  "y": 805,
+                  "w": 274,
+                  "h": 95
+                },
+                {
+                  "x": 337,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                },
+                {
+                  "x": 662,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            },
+            {
+              "ref": "rec:archify-artifact#chapters",
+              "label": "the panel on the side",
+              "focus": true,
+              "atWord": 19,
+              "wantAtWord": 19,
+              "zooms": [
+                {
+                  "marks": [
+                    "views"
+                  ],
+                  "band": true,
+                  "wantAtWord": 22.833,
+                  "atWord": 22.833
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 37.333,
+                  "atWord": 37.333
+                }
+              ],
+              "callouts": [],
+              "id": "chapters",
+              "src": "rec/archify-artifact/seg-02.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "views": {
+                  "x": 336,
+                  "y": 90,
+                  "w": 861,
+                  "h": 32,
+                  "covers": "Guided views 0 / 3 Explore this system ▶ Play story 01 Spec preparation =0 +4 −0 02 Pre-render gates =0 +3 −0 03 Remotion render"
+                }
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 137,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 700,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 904,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 581,
+                  "y": 98,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 335,
+                  "y": 99,
+                  "w": 930,
+                  "h": 587
+                },
+                {
+                  "x": 566,
+                  "y": 99,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 681,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 821,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 834,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 847,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 884,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1024,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1037,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1051,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1088,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1228,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1241,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 973,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1044,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1192,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1012,
+                  "y": 710,
+                  "w": 17,
+                  "h": 12
+                },
+                {
+                  "x": 678,
+                  "y": 775,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1004,
+                  "y": 775,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 353,
+                  "y": 775,
+                  "w": 134,
+                  "h": 18
+                },
+                {
+                  "x": 988,
+                  "y": 805,
+                  "w": 274,
+                  "h": 95
+                },
+                {
+                  "x": 337,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                },
+                {
+                  "x": 662,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            },
+            {
+              "ref": "rec:archify-artifact#findtype",
+              "label": "type a name",
+              "focus": true,
+              "atWord": 50.833,
+              "wantAtWord": 50.833,
+              "zooms": [],
+              "callouts": [],
+              "id": "findtype",
+              "src": "rec/archify-artifact/seg-04.mp4",
+              "frames": 76,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 137,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 700,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 904,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 581,
+                  "y": 98,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 335,
+                  "y": 99,
+                  "w": 930,
+                  "h": 587
+                },
+                {
+                  "x": 566,
+                  "y": 99,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 681,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 821,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 834,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 847,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 884,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1024,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1037,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1051,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1088,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1228,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1241,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 973,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1044,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1192,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1012,
+                  "y": 710,
+                  "w": 17,
+                  "h": 12
+                },
+                {
+                  "x": 678,
+                  "y": 775,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1004,
+                  "y": 775,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 353,
+                  "y": 775,
+                  "w": 134,
+                  "h": 18
+                },
+                {
+                  "x": 988,
+                  "y": 805,
+                  "w": 274,
+                  "h": 95
+                },
+                {
+                  "x": 337,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                },
+                {
+                  "x": 662,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                4,
+                7,
+                10,
+                26,
+                42,
+                58,
+                74
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            },
+            {
+              "ref": "rec:archify-artifact#findhit",
+              "label": "straight to that node",
+              "focus": true,
+              "atWord": 57.917,
+              "wantAtWord": 55.417,
+              "zooms": [
+                {
+                  "marks": [
+                    "sync"
+                  ],
+                  "band": true,
+                  "wantAtWord": 57.917,
+                  "atWord": 58.167
+                }
+              ],
+              "callouts": [],
+              "id": "findhit",
+              "src": "rec/archify-artifact/seg-06.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "sync": {
+                  "x": 1103,
+                  "y": 240,
+                  "w": 43,
+                  "h": 12,
+                  "covers": "sync.mjs",
+                  "block": {
+                    "x": 1103,
+                    "y": 240,
+                    "w": 43,
+                    "h": 12
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 137,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 700,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 904,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 581,
+                  "y": 98,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 149,
+                  "y": 99,
+                  "w": 1116,
+                  "h": 695
+                },
+                {
+                  "x": 566,
+                  "y": 99,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 681,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 821,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 834,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 847,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 884,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1024,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1037,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1051,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1088,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1228,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1241,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 988,
+                  "y": 805,
+                  "w": 274,
+                  "h": 95
+                },
+                {
+                  "x": 337,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                },
+                {
+                  "x": 662,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            },
+            {
+              "ref": "rec:archify-artifact#storygo",
+              "label": "play the story",
+              "focus": true,
+              "atWord": 111.75,
+              "wantAtWord": 111.75,
+              "zooms": [],
+              "callouts": [],
+              "id": "storygo",
+              "src": "rec/archify-artifact/seg-08.mp4",
+              "frames": 51,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 385,
+                  "y": 89,
+                  "w": 546,
+                  "h": 45
+                },
+                {
+                  "x": 385,
+                  "y": 89,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 345,
+                  "y": 116,
+                  "w": 7,
+                  "h": 16
+                },
+                {
+                  "x": 978,
+                  "y": 116,
+                  "w": 7,
+                  "h": 16
+                },
+                {
+                  "x": 1036,
+                  "y": 118,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 1216,
+                  "y": 118,
+                  "w": 48,
+                  "h": 13
+                },
+                {
+                  "x": 1021,
+                  "y": 118,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 1132,
+                  "y": 119,
+                  "w": 62,
+                  "h": 12
+                },
+                {
+                  "x": 513,
+                  "y": 142,
+                  "w": 67,
+                  "h": 12
+                },
+                {
+                  "x": 626,
+                  "y": 142,
+                  "w": 67,
+                  "h": 12
+                },
+                {
+                  "x": 411,
+                  "y": 142,
+                  "w": 56,
+                  "h": 12
+                },
+                {
+                  "x": 740,
+                  "y": 142,
+                  "w": 45,
+                  "h": 12
+                },
+                {
+                  "x": 362,
+                  "y": 193,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 678,
+                  "y": 193,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 993,
+                  "y": 193,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 335,
+                  "y": 194,
+                  "w": 930,
+                  "h": 592
+                },
+                {
+                  "x": 598,
+                  "y": 194,
+                  "w": 34,
+                  "h": 11
+                },
+                {
+                  "x": 343,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 659,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 911,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 924,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 937,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 974,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1226,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1240,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 962,
+                  "y": 810,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1033,
+                  "y": 810,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1198,
+                  "y": 810,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1000,
+                  "y": 810,
+                  "w": 17,
+                  "h": 12
+                },
+                {
+                  "x": 1176,
+                  "y": 811,
+                  "w": 19,
+                  "h": 9
+                },
+                {
+                  "x": 678,
+                  "y": 875,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1004,
+                  "y": 875,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 353,
+                  "y": 875,
+                  "w": 134,
+                  "h": 18
+                }
+              ],
+              "changes": [
+                0,
+                15
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            },
+            {
+              "ref": "rec:archify-artifact#story",
+              "label": "the story plays",
+              "focus": true,
+              "atWord": 119.667,
+              "wantAtWord": 119.667,
+              "zooms": [
+                {
+                  "marks": [
+                    "ch1"
+                  ],
+                  "band": true,
+                  "wantAtWord": 123.917,
+                  "atWord": 123.917
+                }
+              ],
+              "callouts": [],
+              "id": "story",
+              "src": "rec/archify-artifact/seg-10.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "counter": {
+                  "x": 471,
+                  "y": 89,
+                  "w": 32,
+                  "h": 12,
+                  "covers": "1 / 3",
+                  "block": {
+                    "x": 471,
+                    "y": 89,
+                    "w": 32,
+                    "h": 12
+                  }
+                },
+                "ch1": {
+                  "x": 385,
+                  "y": 105,
+                  "w": 115,
+                  "h": 16,
+                  "covers": "Spec preparation",
+                  "block": {
+                    "x": 385,
+                    "y": 105,
+                    "w": 115,
+                    "h": 16
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 385,
+                  "y": 89,
+                  "w": 546,
+                  "h": 45
+                },
+                {
+                  "x": 385,
+                  "y": 89,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 345,
+                  "y": 116,
+                  "w": 7,
+                  "h": 16
+                },
+                {
+                  "x": 978,
+                  "y": 116,
+                  "w": 7,
+                  "h": 16
+                },
+                {
+                  "x": 1036,
+                  "y": 118,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 1216,
+                  "y": 118,
+                  "w": 48,
+                  "h": 13
+                },
+                {
+                  "x": 1021,
+                  "y": 118,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 1132,
+                  "y": 119,
+                  "w": 62,
+                  "h": 12
+                },
+                {
+                  "x": 513,
+                  "y": 142,
+                  "w": 67,
+                  "h": 12
+                },
+                {
+                  "x": 626,
+                  "y": 142,
+                  "w": 67,
+                  "h": 12
+                },
+                {
+                  "x": 411,
+                  "y": 142,
+                  "w": 56,
+                  "h": 12
+                },
+                {
+                  "x": 740,
+                  "y": 142,
+                  "w": 45,
+                  "h": 12
+                },
+                {
+                  "x": 362,
+                  "y": 193,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 678,
+                  "y": 193,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 993,
+                  "y": 193,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 335,
+                  "y": 194,
+                  "w": 930,
+                  "h": 592
+                },
+                {
+                  "x": 598,
+                  "y": 194,
+                  "w": 34,
+                  "h": 11
+                },
+                {
+                  "x": 343,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 659,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 911,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 924,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 937,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 974,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1226,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1240,
+                  "y": 194,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 962,
+                  "y": 810,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1033,
+                  "y": 810,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1198,
+                  "y": 810,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1000,
+                  "y": 810,
+                  "w": 17,
+                  "h": 12
+                },
+                {
+                  "x": 1176,
+                  "y": 811,
+                  "w": 19,
+                  "h": 9
+                },
+                {
+                  "x": 678,
+                  "y": 875,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1004,
+                  "y": 875,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 353,
+                  "y": 875,
+                  "w": 134,
+                  "h": 18
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            },
+            {
+              "ref": "rec:archify-artifact#export",
+              "label": "canonical exports",
+              "focus": true,
+              "atWord": 133.5,
+              "wantAtWord": 133.5,
+              "zooms": [
+                {
+                  "marks": [
+                    "share"
+                  ],
+                  "band": true,
+                  "wantAtWord": 138,
+                  "atWord": 138
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 146.083,
+                  "atWord": 146.083
+                }
+              ],
+              "callouts": [],
+              "id": "export",
+              "src": "rec/archify-artifact/seg-12.mp4",
+              "frames": 43,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "share": {
+                  "x": 1326,
+                  "y": 160,
+                  "w": 67,
+                  "h": 15,
+                  "covers": "Share Card",
+                  "block": {
+                    "x": 1326,
+                    "y": 160,
+                    "w": 67,
+                    "h": 15
+                  }
+                },
+                "png": {
+                  "x": 1326,
+                  "y": 176,
+                  "w": 63,
+                  "h": 12,
+                  "covers": "1200×630 PNG",
+                  "block": {
+                    "x": 1326,
+                    "y": 176,
+                    "w": 63,
+                    "h": 12
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 30,
+                  "w": 29,
+                  "h": 16
+                },
+                {
+                  "x": 1299,
+                  "y": 84,
+                  "w": 124,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 137,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 700,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 904,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 581,
+                  "y": 98,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 335,
+                  "y": 99,
+                  "w": 930,
+                  "h": 587
+                },
+                {
+                  "x": 566,
+                  "y": 99,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 681,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 821,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 834,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 847,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 884,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1024,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1037,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1051,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1088,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1228,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1241,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1299,
+                  "y": 130,
+                  "w": 31,
+                  "h": 11
+                },
+                {
+                  "x": 1326,
+                  "y": 160,
+                  "w": 67,
+                  "h": 28
+                },
+                {
+                  "x": 1326,
+                  "y": 214,
+                  "w": 101,
+                  "h": 28
+                },
+                {
+                  "x": 1326,
+                  "y": 264,
+                  "w": 84,
+                  "h": 29
+                },
+                {
+                  "x": 1299,
+                  "y": 321,
+                  "w": 31,
+                  "h": 11
+                },
+                {
+                  "x": 1326,
+                  "y": 348,
+                  "w": 74,
+                  "h": 28
+                },
+                {
+                  "x": 1326,
+                  "y": 399,
+                  "w": 69,
+                  "h": 28
+                },
+                {
+                  "x": 1326,
+                  "y": 450,
+                  "w": 63,
+                  "h": 28
+                },
+                {
+                  "x": 1299,
+                  "y": 506,
+                  "w": 93,
+                  "h": 11
+                },
+                {
+                  "x": 1326,
+                  "y": 533,
+                  "w": 79,
+                  "h": 29
+                },
+                {
+                  "x": 1326,
+                  "y": 584,
+                  "w": 48,
+                  "h": 28
+                },
+                {
+                  "x": 973,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1044,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1192,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1012,
+                  "y": 710,
+                  "w": 17,
+                  "h": 12
+                },
+                {
+                  "x": 678,
+                  "y": 775,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1004,
+                  "y": 775,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 353,
+                  "y": 775,
+                  "w": 134,
+                  "h": 18
+                },
+                {
+                  "x": 988,
+                  "y": 805,
+                  "w": 274,
+                  "h": 95
+                },
+                {
+                  "x": 337,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                },
+                {
+                  "x": 662,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                4,
+                6,
+                7
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            },
+            {
+              "ref": "rec:archify-artifact#theme",
+              "focus": true,
+              "atWord": 153.917,
+              "wantAtWord": 156.083,
+              "zooms": [],
+              "callouts": [],
+              "id": "theme",
+              "src": "rec/archify-artifact/seg-14.mp4",
+              "frames": 47,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 347,
+                  "y": 6,
+                  "w": 442,
+                  "h": 64
+                },
+                {
+                  "x": 1298,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1424,
+                  "y": 30,
+                  "w": 50,
+                  "h": 16
+                },
+                {
+                  "x": 1511,
+                  "y": 30,
+                  "w": 43,
+                  "h": 16
+                },
+                {
+                  "x": 1209,
+                  "y": 30,
+                  "w": 36,
+                  "h": 16
+                },
+                {
+                  "x": 1299,
+                  "y": 84,
+                  "w": 124,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 137,
+                  "h": 31
+                },
+                {
+                  "x": 336,
+                  "y": 90,
+                  "w": 78,
+                  "h": 12
+                },
+                {
+                  "x": 700,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 904,
+                  "y": 98,
+                  "w": 96,
+                  "h": 13
+                },
+                {
+                  "x": 1107,
+                  "y": 98,
+                  "w": 90,
+                  "h": 13
+                },
+                {
+                  "x": 581,
+                  "y": 98,
+                  "w": 60,
+                  "h": 13
+                },
+                {
+                  "x": 335,
+                  "y": 99,
+                  "w": 930,
+                  "h": 587
+                },
+                {
+                  "x": 566,
+                  "y": 99,
+                  "w": 9,
+                  "h": 13
+                },
+                {
+                  "x": 681,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 821,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 834,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 847,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 884,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1024,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1037,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1051,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1088,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1228,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1241,
+                  "y": 99,
+                  "w": 10,
+                  "h": 11
+                },
+                {
+                  "x": 1299,
+                  "y": 130,
+                  "w": 31,
+                  "h": 11
+                },
+                {
+                  "x": 1326,
+                  "y": 160,
+                  "w": 67,
+                  "h": 28
+                },
+                {
+                  "x": 1326,
+                  "y": 214,
+                  "w": 101,
+                  "h": 28
+                },
+                {
+                  "x": 1326,
+                  "y": 264,
+                  "w": 84,
+                  "h": 29
+                },
+                {
+                  "x": 1299,
+                  "y": 321,
+                  "w": 31,
+                  "h": 11
+                },
+                {
+                  "x": 1326,
+                  "y": 348,
+                  "w": 74,
+                  "h": 28
+                },
+                {
+                  "x": 1326,
+                  "y": 399,
+                  "w": 69,
+                  "h": 28
+                },
+                {
+                  "x": 1326,
+                  "y": 450,
+                  "w": 63,
+                  "h": 28
+                },
+                {
+                  "x": 1299,
+                  "y": 506,
+                  "w": 93,
+                  "h": 11
+                },
+                {
+                  "x": 1326,
+                  "y": 533,
+                  "w": 79,
+                  "h": 29
+                },
+                {
+                  "x": 1326,
+                  "y": 584,
+                  "w": 48,
+                  "h": 28
+                },
+                {
+                  "x": 973,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1044,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1192,
+                  "y": 710,
+                  "w": 22,
+                  "h": 12
+                },
+                {
+                  "x": 1012,
+                  "y": 710,
+                  "w": 17,
+                  "h": 12
+                },
+                {
+                  "x": 678,
+                  "y": 775,
+                  "w": 185,
+                  "h": 18
+                },
+                {
+                  "x": 1004,
+                  "y": 775,
+                  "w": 168,
+                  "h": 18
+                },
+                {
+                  "x": 353,
+                  "y": 775,
+                  "w": 134,
+                  "h": 18
+                },
+                {
+                  "x": 988,
+                  "y": 805,
+                  "w": 274,
+                  "h": 95
+                },
+                {
+                  "x": 337,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                },
+                {
+                  "x": 662,
+                  "y": 805,
+                  "w": 266,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                4,
+                5,
+                7,
+                8,
+                9,
+                11
+              ],
+              "shows": "iAuteur — Topic Spec to Rendered Video"
+            }
+          ],
+          "sourceNote": "Generated by Archify from that repository · one self-contained HTML file",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 2172,
+      "audio": "audio/archify-live-map_long_s13.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s14",
+      "type": "QUOTE_SPOTLIGHT",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "I like that the project says this in its own README: Archify is not a drawing editor. So if you want to nudge a box three pixels left with a mouse, this is the wrong tool — you change the typed source and compile again.",
+      "data": {
+        "quote": "…general-purpose auto-layout, hosted sharing, and WYSIWYG editing are intentionally outside the current scope.",
+        "attribution": "Archify README — tt-a1i",
+        "source": "github.com/tt-a1i/archify — README",
+        "atWord": 9.917
+      },
+      "durationFrames": 387,
+      "audio": "audio/archify-live-map_long_s14.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s15",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So here's what to take away. Install the skill next to your code, not just on your laptop, so your teammates inherit it. Write the prompt like a specification — name the scope, the node budget, and the files that count as evidence. Review the typed JSON in the pull request, the way you review anything else. And let the checks fail loudly, because a diagram nobody trusts is worse than no diagram at all.",
+      "data": {
+        "heading": "Four things to take away",
+        "points": [
+          {
+            "text": "Install the skill in the repository",
+            "atWord": 7.833
+          },
+          {
+            "text": "Prompt like a spec: scope, budget, evidence",
+            "atWord": 24.667
+          },
+          {
+            "text": "Review the typed JSON, not the picture",
+            "atWord": 38
+          },
+          {
+            "text": "Let validation fail loudly",
+            "atWord": 38.25
+          }
+        ]
+      },
+      "durationFrames": 706,
+      "audio": "audio/archify-live-map_long_s15.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s16",
+      "type": "REPO_CTA",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Archify is on GitHub under the MIT licence, written by tt-a1i. The repository carries the skill, the schemas and a gallery of checked examples, so you can read exactly what your agent will be asked to produce.",
+      "data": {
+        "repoCta": {
+          "headline": "Read it, then point it at your own system",
+          "mark": "si:github",
+          "owner": "tt-a1i",
+          "repo": "archify",
+          "description": "Agent skill for architecture, workflow, sequence, data-flow and lifecycle diagrams.",
+          "facts": [
+            {
+              "label": "MIT licence",
+              "atWord": 5.167
+            },
+            {
+              "label": "Five diagram types",
+              "atWord": 21.5
+            }
+          ],
+          "url": "github.com/tt-a1i/archify",
+          "atWord": 2
+        }
+      },
+      "durationFrames": 405,
+      "audio": "audio/archify-live-map_long_s16.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s17",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Archify is MIT licensed and the link is in the description — go and point it at something you own. And tell me what you map first: a service you inherited, or the one nobody has ever drawn?",
+      "data": {
+        "headline": "What will you map first?",
+        "subtext": "github.com/tt-a1i/archify — MIT",
+        "atWord": 13.5
+      },
+      "durationFrames": 368,
+      "audio": "audio/archify-live-map_long_s17.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

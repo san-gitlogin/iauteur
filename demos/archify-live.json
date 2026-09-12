@@ -1,0 +1,46 @@
+{
+  "slug": "archify-live",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "archify-live",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "maximizePanel": true,
+  "steps": [
+    {
+      "id": "skill",
+      "action": "run",
+      "cmd": "Get-ChildItem .claude/skills/archify -Name",
+      "label": "the archify skill, installed for Claude Code",
+      "focus": "terminal",
+      "clearFirst": true,
+      "marks": [
+        {
+          "id": "skillmd",
+          "text": "SKILL.md"
+        },
+        {
+          "id": "schemas",
+          "text": "schemas"
+        }
+      ]
+    },
+    {
+      "id": "ask",
+      "action": "run",
+      "background": true,
+      "waitFor": "sha256",
+      "timeout": 900000,
+      "settleMs": 4000,
+      "focus": "terminal",
+      "clearFirst": true,
+      "label": "one sentence to Claude Code",
+      "cmd": "claude 'Use the archify skill. Validate iauteur-pipeline.architecture.json at showcase quality, then deliver iauteur-pipeline.architecture.html with --json. Do not run visual-check. Then summarise what you did in two short lines.' --allowedTools 'Read,Glob,Grep,Write,Bash(node:*)'"
+    }
+  ]
+}

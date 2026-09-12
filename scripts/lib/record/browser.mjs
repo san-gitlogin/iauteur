@@ -291,6 +291,32 @@ export const browserActions = {
     return {sent: step.target ?? `wheel ${step.by ?? 600}`, output: '', truth: 'no-output', verified: 'nothing to verify'};
   },
 
+  /** Type into whatever has focus, at a readable speed. `fill` needs a selector, and a
+   *  keyboard-opened panel (a node finder behind `/`) has no stable one — the keystrokes
+   *  ARE the demo. Verify with an `expect` step on what the typing should have found. */
+  async type(page, step) {
+    const text = String(step.text ?? '');
+    if (!text) throw new Error(`Step "${step.id}": a type step needs "text".`);
+    await page.keyboard.type(text, {delay: step.delay ?? 90});
+    await page.waitForTimeout(step.settleMs ?? 900);
+    return {sent: text, output: '', truth: 'no-output', verified: 'nothing to verify'};
+  },
+
+  /** Press keys on the page. A generated artifact can be driven entirely from the keyboard
+   *  (Archify: `/` finder, `R` route probe, `L` lens, `P` story, `T` theme, `E` export), and
+   *  a demo that can only click is blind to that half of the product. Verification is the
+   *  caller's: follow with an `expect` step naming what the key was supposed to open. */
+  async key(page, step) {
+    const keys = [].concat(step.keys ?? step.key ?? []);
+    if (!keys.length) throw new Error(`Step "${step.id}": a key step needs "key" or "keys".`);
+    for (const k of keys) {
+      await page.keyboard.press(String(k));
+      await sleep(step.gapMs ?? 600);
+    }
+    await page.waitForTimeout(step.settleMs ?? 700);
+    return {sent: keys.join(' '), output: '', truth: 'no-output', verified: 'nothing to verify'};
+  },
+
   /** A deliberate look-at-it beat (LAW 0e rule 4). */
   async pause(page, step) {
     await sleep(step.ms ?? 1500);

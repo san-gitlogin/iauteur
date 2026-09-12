@@ -378,6 +378,11 @@ export const headingFor = async (page) => {
 // Reads what is actually rendered, per step, and throws rather than letting a take finish
 // and be discovered later at render time (LAW 0m corollary 2, LAW 11).
 export const assertNoIdentity = async (page, stepId) => {
+  // OWNER OVERRIDE. The guard protects a PUBLISHED frame, and the owner is the one who
+  // decides what ships: 2026-09-12, on the archify take — *"Let the username be there,
+  // whats the problem, as long as the output is beautiful."* Re-recording a paid agent
+  // session to hide a home path is the more expensive mistake.
+  if (process.env.IAUTEUR_ALLOW_IDENTITY === '1') return;
   const home = (process.env.USERPROFILE || process.env.HOME || '').split(path.sep).join('/');
   const repo = path.resolve('.').split(path.sep).join('/');
   // A PATH IS NOT THE ONLY SHAPE IDENTITY TAKES.
@@ -399,8 +404,13 @@ export const assertNoIdentity = async (page, stepId) => {
   let user = '';
   try { user = String(os.userInfo().username || ''); } catch { /* container with no passwd entry */ }
   const host = String(os.hostname() || '').split('.')[0];
+  // AND A PATH HAS MORE THAN ONE SPELLING ON WINDOWS. Git Bash, MSYS and anything built on
+  // them print a Windows home path as `/c/Users/<name>`, which shares no prefix with the
+  // needle built from USERPROFILE — so a recorded agent session printed that spelling in
+  // almost every frame and this guard passed it (measured 2026-09-12, the archify take).
+  const msys = (p) => p.replace(/^([A-Za-z]):\//, (_, d) => `/${d.toLowerCase()}/`);
   const needles = [
-    ...[home, repo].filter((n) => n && n.length > 8),
+    ...[home, repo, msys(home), msys(repo)].filter((n) => n && n.length > 8),
     ...(user.length >= 3 ? [`${user}@`] : []),
     ...(host.length >= 6 ? [host] : []),
   ];
@@ -1066,19 +1076,30 @@ const actions = {
   async interrupt(page, step) {
     await palette(page, 'Terminal: Focus Terminal');
     await sleep(500);
-    await page.keyboard.press('Control+C');
-    await sleep(step.settleMs ?? 1200);
     // The shell is only really back when it prints a prompt again.
-    const back = await (async () => {
-      for (let i = 0; i < 24; i++) {
+    const promptBack = async (tries) => {
+      for (let i = 0; i < tries; i++) {
         const buf = await readBuffer(page);
         const rows = String(buf || '').split(String.fromCharCode(10)).map((l) => l.trimEnd()).filter((l) => l.trim());
         if (rows.length && /[>$#]\s*$/.test(rows[rows.length - 1])) return rows[rows.length - 1];
         await sleep(500);
       }
       return null;
-    })();
-    if (!back) throw new Error(`Step "${step.id}": sent Ctrl+C but the shell never returned to a prompt`);
+    };
+    // ONE Ctrl+C IS NOT AN EXIT IN A TUI. Claude Code, a Node or Python REPL and a pager all
+    // read the first Ctrl+C as "discard what I typed" and stay open; the step then failed with
+    // "the shell never returned to a prompt" on a session that was perfectly healthy. Escalate
+    // the way a person does — interrupt, interrupt again, then end the input stream.
+    await page.keyboard.press('Control+C');
+    await sleep(step.settleMs ?? 1200);
+    let back = await promptBack(12);
+    for (const key of ['Control+C', 'Control+D']) {
+      if (back) break;
+      await page.keyboard.press(key);
+      await sleep(1200);
+      back = await promptBack(12);
+    }
+    if (!back) throw new Error(`Step "${step.id}": sent Ctrl+C twice and Ctrl+D, but the shell never returned to a prompt`);
     return {sent: '(Ctrl+C)', output: back, keys: ['Ctrl', 'C'], truth: 'read-back',
             verified: 'prompt observed after the interrupt'};
   },
@@ -1334,6 +1355,38 @@ export const recWsRoot = () => {
   return path.join('/tmp', 'iauteur-rec');
 };
 
+/**
+ * A TAKE IS EXPENSIVE, AND DELETING ONE SILENTLY IS NOT ACCEPTABLE.
+ *
+ * Recording a slug used to WIPE that slug's folder first, and recordings are gitignored — so a
+ * re-record destroyed the previous take with no copy anywhere. Measured 2026-09-12 on the
+ * archify cut: a 505-second live agent session, paid for in model tokens, was lost to a
+ * re-record started for a cosmetic reason. Owner: *"You do so much hardwork and waste it like
+ * its nothing!"*
+ *
+ * The previous take is MOVED aside instead. Cheap (a rename), and it makes the mistake
+ * recoverable rather than final.
+ */
+const freshRecDir = (rec, slug) => {
+  const hadTake = fs.existsSync(rec) &&
+    fs.readdirSync(rec).some((f) => /^seg-\d+\.mp4$/i.test(f));
+  if (hadTake) {
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const keep = path.join(path.dirname(rec), '_prev', `${slug}-${stamp}`);
+    fs.mkdirSync(path.dirname(keep), {recursive: true});
+    try {
+      fs.renameSync(rec, keep);
+    } catch {
+      fs.cpSync(rec, keep, {recursive: true});
+      fs.rmSync(rec, {recursive: true, force: true, maxRetries: 20, retryDelay: 250});
+    }
+    console.log(`  previous take kept at ${path.relative(process.cwd(), keep)}`);
+  } else {
+    fs.rmSync(rec, {recursive: true, force: true, maxRetries: 20, retryDelay: 250});
+  }
+  fs.mkdirSync(rec, {recursive: true});
+};
+
 export const recordDemo = async (demo, {outDir, keepFrames = false, headless = false} = {}) => {
   const fps = demo.fps ?? 30;
   const theme = demo.theme ?? 'dark'; // owner D7: dark unless asked otherwise
@@ -1369,8 +1422,7 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
   }
 
   const rec = path.resolve(outDir || path.join('public/rec', slug));
-  fs.rmSync(rec, {recursive: true, force: true, maxRetries: 20, retryDelay: 250});
-  fs.mkdirSync(rec, {recursive: true});
+  freshRecDir(rec, slug);
   const framesDir = path.join(rec, '.frames');
 
   // Clear orphaned servers from earlier runs BEFORE starting one. They accumulate silently and
@@ -1539,11 +1591,21 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
       // the finished cut: the `where` mark suppressed `__cmd`, and its callout arrives eleven
       // seconds later, so the running command carried no highlight for eleven seconds. The
       // runner never sees the spec and cannot know that; RecordedStep does, and decides there.
-      const implicit = [...(step.marks ?? [])];
-      if (step.action === 'run' && step.cmd) implicit.push({id: '__cmd', text: String(step.cmd)});
-      // Marks are measured AFTER the step settles, so they point at the finished state.
+      // ...AND IT DEGRADES, BECAUSE IT IS DECORATION. An AUTHORED mark must prove itself or
+      // the take is refused; `__cmd` is added by the runner, and a long-running command scrolls
+      // its own prompt line out of the panel (measured: a 9-minute agent run filled all 42 rows
+      // and the take was thrown away for a missing highlight, after the work was already done).
+      // So the band is measured SEPARATELY and simply does not exist when the line is gone.
       await assertNoIdentity(page, step.id ?? `step-${i + 1}`);
-      const marks = await marksFor(page, implicit);
+      let marks = await marksFor(page, step.marks ?? []);
+      if (step.action === 'run' && step.cmd) {
+        const band = await marksFor(page, [{id: '__cmd', text: String(step.cmd)}]).catch((e) => {
+          console.log(`  note: ${step.id ?? `step-${i + 1}`} — no standing command band ` +
+            `(${String(e.message).split('\n')[0].slice(0, 90)})`);
+          return null;
+        });
+        if (band?.__cmd) marks = {...(marks ?? {}), __cmd: band.__cmd};
+      }
       // Measured at the same instant as the marks, so the card knows what the frame holds.
       const ink = await inkFor(page);
       const heading = await headingFor(page);
@@ -1629,8 +1691,7 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
   const slug = demo.slug;
   const viewport = demo.viewport ?? {width: 1600, height: 900};
   const rec = path.resolve(outDir || path.join('public/rec', slug));
-  fs.rmSync(rec, {recursive: true, force: true, maxRetries: 20, retryDelay: 250});
-  fs.mkdirSync(rec, {recursive: true});
+  freshRecDir(rec, slug);
   const framesDir = path.join(rec, '.frames');
 
   const {page, teardown} = await setupBrowser({...demo, headless: headless ?? demo.headless ?? true});

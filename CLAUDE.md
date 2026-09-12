@@ -1225,6 +1225,65 @@ covered or put within a rounded rectangle container as you have now. i want it t
   `meta.openLoop` — a bare one-line question — so a cut with only `description` authored ships a
   description that opens on nothing. Author `hook` per cut, wide AND shorts.
 
+### Corollary — A LIVE DEMONSTRATION IS THE LESSON, AND IT MUST ACTUALLY HAPPEN ON CAMERA (owner, 2026-09-12, the Archify cut)
+
+Owner, commissioning it: *"I want a live demonstration to be recorded and explained clearly on
+the repo, and instructions and takeaway."* Then, reviewing it: *"I see you are saying about playing
+the story, but I see it is never getting played. And when you say hit slash and search for sync, it
+shows in the search, you say it will take you direct to it, but you yourself are not clicking at
+it."* Both defects passed every gate, because a gate can prove a mark exists and cannot prove a
+PRODUCT DID THE THING.
+
+1. **NARRATION MAY ONLY CLAIM WHAT THE FOOTAGE PERFORMS.** "It jumps straight to that node"
+   requires a frame where it jumped. If the take does not contain the action, the sentence is a
+   lie however good it sounds — re-record the action or rewrite the sentence.
+2. **DRIVE THE PRODUCT, THEN PROVE THE STATE CHANGED.** Pressing a key is not evidence. The
+   Archify story only plays after a chapter is selected, so the take clicks the chapter, presses
+   P, and marks the on-screen counter moving to `1 / 3`. Every interaction beat ends on a mark
+   that only exists when the interaction worked.
+3. **PROBE THE UI BEFORE AUTHORING THE DEMO.** One headless pass that presses each control and
+   prints the visible strings costs seconds and tells you what is a real button, what is disabled,
+   and what text proves success. Two refused takes were authored from the README's description of
+   the UI instead of the UI.
+4. **A RECORDED TAKE IS AN ASSET, NOT A TEMP FILE.** Recording a slug used to wipe that slug's
+   folder, and recordings are gitignored — a re-record for a cosmetic reason destroyed a paid
+   9-minute agent session with no copy anywhere. `freshRecDir()` archives the previous take to
+   `public/rec/_prev/<slug>-<stamp>/` instead. Before re-recording anything expensive, ask whether
+   the reason is worth the take; the owner decides what ships, not the guard.
+5. **SPLIT THE EXPENSIVE TAKE FROM THE CHEAP ONES.** A demo that spends the owner's model tokens
+   (a live agent run) is recorded in its own slug so every later fix — framing, marks, interaction —
+   re-records only the free browser takes beside it.
+6. **`waitFor` MATCHES TOOL OUTPUT, NEVER YOUR OWN PROMPT.** An interactive agent echoes the
+   request on screen, so waiting for a sentinel you wrote into the prompt resolves instantly and
+   cuts the take at second 44. Wait for something the TOOL prints — a receipt line, a sha256.
+7. **PRINT MODE IS INVISIBLE.** `claude -p` buffers and shows nothing for the whole run; the
+   interactive TUI streams tool calls and is what a viewer recognises. Owner: *"I dont see any
+   streaming output and it is just blank. Why so?"*
+
+### Corollary — A SCENE'S FIELD NAMES ARE A CONTRACT; READ THE MANIFEST, NOT YOUR MEMORY (2026-09-12)
+
+Twenty-two seconds of the Archify cut rendered EMPTY — voice over a blank frame — because the
+RECAP beat was authored with `title` + `items` while the component reads `heading` + `points`.
+The linter passed it, sync passed it, the camera gate passed it: **an unknown key is not an error
+anywhere, it is simply never drawn.** The same session shipped CHAPTER cards with an empty box
+because `number` is REQUIRED and was never passed.
+
+- **Before authoring any scene type you have not used this session, print its fields** from
+  `scripts/lib/manifest.mjs` (`purpose`, `fields`, `example`) and author against that.
+- **After the first render of a new type, look at that beat.** A silently dropped field is
+  invisible in the spec and obvious in one still.
+- This is LAW 0n's field-dropping failure, arriving from the AUTHOR's side rather than the
+  component's: the same bug, the other direction.
+
+### Corollary — VERTICAL IS A REFRAME, NOT A CROP (owner, 2026-09-12)
+
+Owner on the short: *"initially when you are explaining something, the video you are showing
+displays only half the recording, and half is hidden until you try to zoom in to focus."* A 16:9
+capture in a 9:16 frame with `focus: true` fills the height and throws away the sides, so the
+viewer meets a half-picture and only sees the rest when a punch-in happens to travel there. In a
+vertical cut a recorded clip carries `focus: false` and shows the WHOLE capture; the camera moves
+in afterwards, on the words, if it moves at all.
+
 ## LAW 0e-q — A QUIZ WITHOUT A GAP IS NOT A QUIZ (owner, 2026-08-17)
 Owner, on a shipped episode: *"there is no gap at all between you asking the question and the
 answer getting highlighted."* Correct, and it made the quiz beat worthless — a viewer who is never

@@ -442,8 +442,13 @@ export const openWorkbench = async (page, serverUrl, {timeout = 90000, workspace
     // this check called that a bind failure. VS Code titles a bound window
     // "<file> — <folder> — Visual Studio Code" and an unbound one has no folder segment.
     const leaf = path.basename(workspace);
+    // THE SEPARATOR IS PLATFORM-SPECIFIC. macOS titles with an EM DASH and Windows with a
+    // plain hyphen, so splitting on '\u2014' alone reported "did not bind" on Windows for a
+    // window whose title literally read "Welcome - archify-smoke - Visual Studio Code" \u2014
+    // the check's own message contradicted its verdict. Split on either, spaced, so a
+    // folder name that contains a hyphen ("archify-smoke") still compares as one segment.
     const bound = await page.waitForFunction(
-      (name) => document.title.split('\u2014').some((p) => p.trim() === name),
+      (name) => document.title.split(/\s[\u2014-]\s/).some((p) => p.trim() === name),
       leaf, {timeout: 30000},
     ).then(() => true).catch(() => false);
     if (!bound) {

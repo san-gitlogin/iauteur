@@ -1,0 +1,125 @@
+{
+  "slug": "archify-gh",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "https://github.com/tt-a1i/archify",
+    "settleMs": 3500
+  },
+  "steps": [
+    {
+      "id": "repo",
+      "action": "pause",
+      "ms": 1200,
+      "label": "the archify repository",
+      "marks": [
+        {
+          "id": "what",
+          "text": "Agent skill for beautiful, verifiable architecture"
+        }
+      ]
+    },
+    {
+      "id": "pitch",
+      "action": "scroll",
+      "target": "text=Turn a codebase or system description",
+      "settleMs": 1600,
+      "label": "what archify is for",
+      "marks": [
+        {
+          "id": "turn",
+          "text": "Turn a codebase or system description into a polished, interactive system map",
+          "to": "Agents produce typed JSON IR; Archify deterministically compiles it into HTML/SVG."
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "action": "scroll",
+      "target": "text=Quick start",
+      "settleMs": 1600,
+      "label": "one line to install",
+      "marks": [
+        {
+          "id": "cmd",
+          "text": "npx skills add tt-a1i/archify -g"
+        }
+      ]
+    },
+    {
+      "id": "types",
+      "action": "scroll",
+      "target": "text=Choose the right diagram",
+      "settleMs": 1800,
+      "label": "five diagram types",
+      "marks": [
+        {
+          "id": "table",
+          "text": "Architecture",
+          "to": "States, events, retry and cancellation paths"
+        }
+      ]
+    },
+    {
+      "id": "keys",
+      "action": "scroll",
+      "target": "text=Explore and share the output",
+      "settleMs": 1800,
+      "label": "what the reader can do",
+      "marks": [
+        {
+          "id": "controls",
+          "text": "Find and focus a semantic node",
+          "to": "Compare one or two semantic roles"
+        }
+      ]
+    },
+    {
+      "id": "installs",
+      "action": "scroll",
+      "target": "text=Installation options",
+      "settleMs": 1800,
+      "label": "where it installs",
+      "marks": [
+        {
+          "id": "cc",
+          "text": "Claude Code",
+          "to": "Full renderer + validation workflow"
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "action": "scroll",
+      "target": "text=Automatic Mermaid parsing",
+      "settleMs": 1600,
+      "label": "what it deliberately is not",
+      "marks": [
+        {
+          "id": "out",
+          "text": "Automatic Mermaid parsing, general-purpose auto-layout, hosted sharing, and WYSIWYG editing are intentionally outside the current scope."
+        }
+      ]
+    },
+    {
+      "id": "target",
+      "action": "goto",
+      "url": "https://github.com/san-gitlogin/iauteur",
+      "settleMs": 3000,
+      "label": "the repository we will map",
+      "marks": [
+        {
+          "id": "name",
+          "text": "iauteur"
+        }
+      ]
+    }
+  ]
+}

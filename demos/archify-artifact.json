@@ -1,0 +1,156 @@
+{
+  "slug": "archify-artifact",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "file:///C:/iauteur-rec/archify-live/iauteur-pipeline.architecture.html",
+    "settleMs": 3500
+  },
+  "steps": [
+    {
+      "id": "map",
+      "action": "pause",
+      "ms": 1500,
+      "label": "the generated map",
+      "marks": [
+        {
+          "id": "title",
+          "text": "iAuteur — Topic Spec to Rendered Video"
+        },
+        {
+          "id": "spec",
+          "text": "Topic Spec"
+        },
+        {
+          "id": "render",
+          "text": "Remotion render"
+        }
+      ]
+    },
+    {
+      "id": "chapters",
+      "action": "pause",
+      "ms": 1200,
+      "label": "the guided views",
+      "marks": [
+        {
+          "id": "views",
+          "text": "Guided views",
+          "to": "Remotion render"
+        }
+      ]
+    },
+    {
+      "id": "find",
+      "action": "key",
+      "key": "Slash",
+      "label": "the node finder",
+      "settleMs": 1000
+    },
+    {
+      "id": "findtype",
+      "action": "type",
+      "text": "sync",
+      "label": "type a name",
+      "settleMs": 1400
+    },
+    {
+      "id": "findgo",
+      "action": "key",
+      "key": "Enter",
+      "label": "open the match",
+      "settleMs": 2500
+    },
+    {
+      "id": "findhit",
+      "action": "pause",
+      "ms": 3500,
+      "label": "straight to the node",
+      "marks": [
+        {
+          "id": "sync",
+          "text": "sync.mjs"
+        }
+      ]
+    },
+    {
+      "id": "findesc",
+      "action": "key",
+      "key": "Escape",
+      "settleMs": 800
+    },
+    {
+      "id": "storygo",
+      "action": "click",
+      "target": "text=Spec preparation",
+      "label": "pick a chapter",
+      "settleMs": 1200
+    },
+    {
+      "id": "storyplay",
+      "action": "key",
+      "key": "KeyP",
+      "label": "play the guided story",
+      "settleMs": 2500
+    },
+    {
+      "id": "story",
+      "action": "pause",
+      "ms": 6000,
+      "label": "the story plays",
+      "marks": [
+        {
+          "id": "counter",
+          "text": "1 / 3"
+        },
+        {
+          "id": "ch1",
+          "text": "Spec preparation"
+        }
+      ]
+    },
+    {
+      "id": "storyesc",
+      "action": "key",
+      "key": "Escape",
+      "settleMs": 800
+    },
+    {
+      "id": "export",
+      "action": "key",
+      "key": "KeyE",
+      "label": "canonical exports",
+      "settleMs": 1400,
+      "marks": [
+        {
+          "id": "share",
+          "text": "Share Card"
+        },
+        {
+          "id": "png",
+          "text": "1200×630 PNG"
+        }
+      ]
+    },
+    {
+      "id": "exportesc",
+      "action": "key",
+      "key": "Escape",
+      "settleMs": 800
+    },
+    {
+      "id": "theme",
+      "action": "key",
+      "key": "KeyT",
+      "label": "dark to light",
+      "settleMs": 1800
+    }
+  ]
+}
