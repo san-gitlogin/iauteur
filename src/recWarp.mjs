@@ -76,7 +76,13 @@ export const planWarp = ({frames, changes, airtime}) => {
     const shown = Math.round(len / rate);
     return {pieces: [{at: 0, from: 0, to: len, rate}], shown, settle: shown, rate, mode: why};
   };
-  if (!Array.isArray(changes) || changes.length < 2) return uniform('uniform:no-map');
+  // A ONE-ENTRY MAP IS A MEASUREMENT, NOT A MISSING ONE. `[0]` says the picture changed on
+  // its first frame and never again — a page that finished loading before its segment began
+  // (the browser runner cuts a `goto` after paint). Read as "no map", a still picture was
+  // slowed to 0.4x and reported settling at frame 90 of a 36-frame clip, so the solver
+  // refused every camera move asked for in the first three seconds (FluidRAM s28/s32,
+  // 2026-09-11: moves landed 14-20 words after the line numbers that named them).
+  if (!Array.isArray(changes) || changes.length < 1) return uniform('uniform:no-map');
   if (len >= budget) return uniform('uniform:no-slack');
 
   // ── WHERE ARE THE PAUSES? ──────────────────────────────────────────────────

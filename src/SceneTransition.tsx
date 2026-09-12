@@ -177,6 +177,21 @@ export const SceneTransition: React.FC<{
       style = {opacity: fadeIn * outFade};
   }
 
+  // THE ENTRANCE IS OVER, SO THE TRANSFORM GOES (2026-09-11, fluidram-tested).
+  //
+  // `zoom` settled at `scale(1)` and `morph` at `blur(0px)`, both still set for the rest of
+  // the scene. A transform or filter that is present at all keeps the scene on its own
+  // compositor layer, and a scene that had been rasterised at 1.15x during its entrance came
+  // back RE-SCALED on later frames: the SVG memory pictures jumped size and position between
+  // consecutive frames for the whole beat (measured: 282 of 310 settled frames changed on
+  // s18, 301 of 340 on s33, and 60 of 60 in a re-render from the scene's first frame, while
+  // the same frames rendered without the entrance showed 0 of 59). Removing the property
+  // once the entrance has finished drops the layer and the stale raster with it.
+  if (frame >= IN + 2) {
+    const {transform: _t, filter: _f, ...settled} = style;
+    style = settled;
+  }
+
   return (
     <AbsoluteFill>
       <AbsoluteFill style={style}>{children}</AbsoluteFill>

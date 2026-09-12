@@ -528,6 +528,7 @@
               "MCP_LOOP",
               "ALLURE_STAGE",
               "APPLE_STAGE",
+              "MEM_STAGE",
               "MCP_URI",
               "MCP_MENTION",
               "MCP_SAMPLING",
@@ -2683,6 +2684,75 @@
                           "type": "string",
                           "maxLength": 28,
                           "description": "Per-kind variant switch: watch-face takes 'ultra'; duo-pair takes 'open'; die-floorplan takes cpu|gpu|neural to light one block group; price-rise takes the currency symbol to prefix."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Accent SemColor: blue|green|red|orange|purple|yellow."
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "The word the picture itself resolves on."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "MEM_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "memStage": {
+                      "type": "object",
+                      "properties": {
+                        "headline": {
+                          "type": "string",
+                          "maxLength": 44,
+                          "description": "Scene headline, <=44 chars, one [accent] phrase."
+                        },
+                        "kind": {
+                          "type": "string",
+                          "description": "Which picture: host-guest | page-wall | evict-paths | oom-kill | pool-borrow | gf-xor | sparse-encode | dense-fallback | chart-literals | sim-constants | declared-vs-real | test-rig | codec-bars | page-mix | sparsity-ruler | slab-buckets | decode-race | no-cap | abba-lock | fault-path | xbzrle-delta | memory-contract | fast-path | roadmap | verdict"
+                        },
+                        "cells": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-12 elements. text = the ROLE key this cell plays in the chosen kind (each kind's header comment in src/memVizA.tsx / memVizB.tsx lists its roles, e.g. host-guest host|process|guest|ram|hostram|truth; codec-bars uses text = the group and label = the codec). label = what is written (<=44). sub = the gloss (<=60). value = the number the picture is drawn from (bytes, ns, %, MB, ratio) or the stamp word for verdict. icon = lucide:/si: glyph. color, atWord."
+                        },
+                        "vars": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "0-6 live values. label = name=value (<=16). sub = short gloss (<=18). atWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "Caption above the picture, <=30 chars, specific to THIS beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 120,
+                          "description": "THE STANDING SETUP, <=120 chars: one plain sentence naming what the viewer is looking at. Carries NO marker."
+                        },
+                        "token": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "Per-kind caption: page-wall's wall title, pool-borrow's quota tag, codec-bars' 1x caption, sparsity-ruler's axis caption."
                         },
                         "color": {
                           "type": "string",

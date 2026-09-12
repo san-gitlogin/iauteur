@@ -310,9 +310,20 @@ export const solveAnchors = ({words, clipFrames, clipChanges = [], callouts = []
     for (let j = 0; j < spread.length; j++) {
       const isRel = rel && j === spread.length - 1;
       const asked = wants[j] == null ? null : frameOf(wants[j]);
-      // A release is the camera letting go; it stays pinned to the end of the window.
+      // An UNAUTHORED release is the camera letting go; it stays pinned to the end of the window.
       const ceil = winEnd - FPW * (spread.length - 1 - j);
-      const at = (!isRel && asked != null && asked >= floor && asked <= ceil) ? asked : spread[j];
+      // ASKED TOO EARLY MEANS "AS SOON AS IT LEGALLY CAN", NOT "NEVER MIND" — the lesson
+      // pass 1 already paid for with clips. This test used to drop any request outside
+      // [floor, ceil] onto the even spread, so on FluidRAM (2026-09-11) a move asked for at
+      // "the Linux comparisons are modeled values" landed eleven words later, past its
+      // sentence, and a pull-back asked for at "zram doesn't run a check" was held to 80% of
+      // the read — the camera sat on one line while the voice talked about another. A request
+      // is clamped into the window instead; the spread is only for events that named no word.
+      // An authored release is honoured the same way: the author wrote where the voice moves
+      // on, and MIN_DWELL below still drops it if it would leave too soon.
+      const at = asked != null
+        ? Math.min(ceil, Math.max(Math.ceil(floor / FPW) * FPW, asked))
+        : spread[j];
       clips[i].callouts.push(wordOf(at));
       floor = at + FPW;
     }

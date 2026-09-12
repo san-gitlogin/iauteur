@@ -171,5 +171,13 @@
     "capturedAt": "2026-09-10T05:20:57.109Z",
     "engine": "playwright 1.62.1",
     "viewport": "1600x1000"
+  },
+  {
+    "file": "fluidram_setpiece.png",
+    "url": "(own render)",
+    "note": "our own MEM_STAGE page-mix picture (browser pages by encoder outcome, measured in briefs/fluidram/00-dossier.md) with the simple-icons Linux mark; thumbnail set-piece for topics/fluidram-tested",
+    "bytes": 480689,
+    "capturedAt": "2026-09-11T11:11:07.150Z",
+    "engine": "remotion still + playwright compose"
   }
 ]

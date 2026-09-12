@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {ThemeProvider, useTheme} from './themes';
 import {Background} from './Background';
 import {AssetIcon} from './AssetIcon';
@@ -87,8 +87,8 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
 const ThumbInner: React.FC<{
   title: string; badge: string; asset: string; logo?: string;
   logos?: string[]; logoTint?: string; note?: string; replaces?: Replaces;
-  titleStruck?: string;
-}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck}) => {
+  titleStruck?: string; art?: string;
+}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art}) => {
   const t = useTheme();
 
   // FIT THE TITLE. The size used to be a constant, so a longer title simply wrapped
@@ -113,7 +113,8 @@ const ThumbInner: React.FC<{
   // block is a second COLUMN and takes real width away, so the same constant let the
   // title wrap to a line more than the fitter predicted and pushed the badge off the top
   // edge — LAW 0o's "never size to a constant", one layer further in. Scale, do not guess.
-  const fitWidth = replaces ? 1584 * (0.56 / 0.88) : 1584;
+  // A free picture takes the right half, so the title fits a 50% column.
+  const fitWidth = replaces ? 1584 * (0.56 / 0.88) : art ? 1584 * (0.5 / 0.88) : 1584;
   const titleSize =
     [base, base - 10, base - 20, base - 28, base - 36, base - 44].find(
       (size) => wrapAt(Math.max(6, Math.floor(fitWidth / size))) * size * 1.02 <= budget,
@@ -124,6 +125,17 @@ const ThumbInner: React.FC<{
   return (
     <AbsoluteFill>
       <Background zone="zoneA" />
+      {/* THE FREE PICTURE (owner, 2026-09-12: *"I dont want the component to be covered or put
+          within a rounded rectangle container ... i want it to flow free"*). AssetIcon crops an
+          img: into a rounded square with a shadow box; this draws the whole transparent PNG at
+          size, behind the text so a title that reaches it stays on top. */}
+      {art ? (
+        <Img
+          src={staticFile('assets/' + art.replace(/^img:/, ''))}
+          style={{position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)',
+                   width: 800, height: 'auto'}}
+        />
+      ) : null}
       <AbsoluteFill
         style={{
           flexDirection: 'row',
@@ -140,7 +152,7 @@ const ThumbInner: React.FC<{
             yield real width to it. Without this the left column kept the 88% it takes
             when a logo wall is present and the swap ran straight off the right edge. */}
         <div style={{display: 'flex', flexDirection: 'column', gap: 28,
-                     maxWidth: replaces ? '56%' : logos?.length ? '88%' : '62%'}}>
+                     maxWidth: replaces ? '56%' : art ? '50%' : logos?.length ? '88%' : '62%'}}>
           <div
             style={{
               alignSelf: 'flex-start',
@@ -206,7 +218,7 @@ const ThumbInner: React.FC<{
             ) : null}
           </div>
         </div>
-        {replaces ? <ReplacesBlock r={replaces} /> : logos?.length ? null : <AssetIcon asset={asset} size={300} />}
+        {replaces ? <ReplacesBlock r={replaces} /> : logos?.length || art ? null : <AssetIcon asset={asset} size={300} />}
       </AbsoluteFill>
       {/* THE LOGO WALL. Bare glyphs on the background itself — no chip, no card, no
           tinted container. Tinted uniformly: Anthropic (#191919), SpaceX (#000000)
@@ -254,6 +266,7 @@ export const Thumbnail: React.FC<{
   note?: string;
   replaces?: Replaces;
   titleStruck?: string;
+  art?: string;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>
     <ThumbInner {...props} />

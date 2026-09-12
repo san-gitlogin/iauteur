@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "topic": "FluidRAM 4x RAM claim, tested",
+    "format": "shorts",
+    "fps": 30,
+    "subject": "FluidRAM",
+    "topicAxes": [
+      "entity-novelty",
+      "myth-busting"
+    ],
+    "screenplay": "documentary",
+    "onePayoff": "FluidRAM's zero-dropping trick fits sparse test pages, not a browser's memory",
+    "openLoop": "Does four times more RAM survive a browser?",
+    "seo": {
+      "title": "Did FluidRAM Just Solve the RAM Crisis? #linux #programming",
+      "description": "FluidRAM promises 4× more RAM on Linux. Its encoder drops zero bytes and stores the rest as 3-byte tuples: great on sparse test pages, below 1× on a browser. And where 35× comes from.",
+      "breakdown": "the sparse trick, a browser page, the kmalloc count, and the 35× number",
+      "pinned": "Would you trust a benchmark chart without its results file?",
+      "tags": [
+        "RAM prices",
+        "memory crisis",
+        "AI memory",
+        "more RAM",
+        "FluidRAM",
+        "Linux memory",
+        "zram",
+        "memory compression",
+        "LZ4",
+        "Linux kernel",
+        "benchmark",
+        "computer science",
+        "shorts"
+      ],
+      "queries": [
+        "does FluidRAM really give 4x RAM",
+        "FluidRAM vs zram",
+        "will RAM prices go down"
+      ],
+      "sources": [
+        "github.com/adityarajIITj/fluidram — FluidRAM by Aditya Raj (GPL-2.0)",
+        "github.com/adityarajIITj/adios — AdiOS by Aditya Raj (MIT)"
+      ],
+      "hook": "RAM prices are climbing with AI buying up memory, and FluidRAM, an open-source Linux project by Aditya Raj, promises 4× more of it from the RAM you already have. Here is what its encoder does to a browser’s memory."
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "THE END OF THE RAM CRISIS?",
+    "badge": "FluidRAM",
+    "note": "BY ADITYA RAJ · TESTED",
+    "asset": "img:fluidram_ram_hero.png",
+    "art": "img:fluidram_ram_hero.png"
+  },
+  "cover": {
+    "title": "THE END OF THE RAM CRISIS?",
+    "badge": "FluidRAM",
+    "asset": "img:fluidram_ram_hero.png",
+    "art": "img:fluidram_ram_hero.png",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "FluidRAM says Linux gets four times more memory. I tested it on a browser.",
+      "data": {
+        "headline": "FluidRAM: 4× more RAM?",
+        "subtext": "Tested on live memory",
+        "heroAsset": "si:linux",
+        "hookVariant": "stack",
+        "atWord": 6.5
+      },
+      "durationFrames": 180,
+      "audio": "audio/fluidram-tested_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "MEM_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "FluidRAM's trick: drop every zero byte in a page, and store each byte that's left as three, two for where and one for what.",
+      "data": {
+        "memStage": {
+          "headline": "Zeros vanish, [survivors cost 3]",
+          "kind": "sparse-encode",
+          "caption": "The sparse mode",
+          "color": "blue",
+          "cells": [
+            {
+              "label": "a page",
+              "text": "page",
+              "value": 40,
+              "atWord": 8.167
+            },
+            {
+              "label": "zero bytes dropped",
+              "text": "zeros",
+              "atWord": 11.833
+            },
+            {
+              "label": "each byte left → 3 bytes",
+              "text": "tuple",
+              "atWord": 12.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 268,
+      "audio": "audio/fluidram-tested_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "MEM_STAGE",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "That only works below a thousand and twenty four non-zero bytes. The test pages sat at a hundred and twenty seven. A browser's typical page? Eleven hundred and seventy nine.",
+      "data": {
+        "memStage": {
+          "headline": "Browser pages are [too full]",
+          "kind": "sparsity-ruler",
+          "token": "non-zero bytes per 4 KB page",
+          "caption": "How sparse is a page?",
+          "color": "orange",
+          "cells": [
+            {
+              "label": "the limit",
+              "text": "limit",
+              "value": 1024,
+              "atWord": 2.167
+            },
+            {
+              "label": "test pages",
+              "text": "pop",
+              "value": 127,
+              "color": "green",
+              "atWord": 11.083
+            },
+            {
+              "label": "browser",
+              "text": "pop",
+              "value": 1179,
+              "sub": "stored raw, most of the time",
+              "atWord": 18.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 349,
+      "audio": "audio/fluidram-tested_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "MEM_STAGE",
+      "transition": "zoom",
+      "background": "zoneC",
+      "narration": "Counted the way the kernel allocates, FluidRAM saved less than nothing on that browser: zero point nine five times. LZ4 got four point three.",
+      "data": {
+        "memStage": {
+          "headline": "Live memory: [below 1×]",
+          "kind": "codec-bars",
+          "token": "1× = no saving",
+          "caption": "A browser, three tabs",
+          "color": "red",
+          "cells": [
+            {
+              "text": "Browser",
+              "label": "FluidRAM",
+              "value": 0.95,
+              "color": "red",
+              "atWord": 6.083
+            },
+            {
+              "text": "Browser",
+              "label": "LZ4",
+              "value": 4.33,
+              "color": "green",
+              "atWord": 14.917
+            }
+          ]
+        }
+      },
+      "durationFrames": 295,
+      "audio": "audio/fluidram-tested_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "MEM_STAGE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "And the famous thirty five times? A declared gigabyte that's never allocated, divided by twenty nine megabytes.",
+      "data": {
+        "memStage": {
+          "headline": "35× is [1,024 ÷ 29.2]",
+          "kind": "declared-vs-real",
+          "caption": "How 35× is computed",
+          "color": "red",
+          "cells": [
+            {
+              "label": "declared",
+              "text": "declared",
+              "value": 1024,
+              "sub": "never allocated",
+              "atWord": 6.917
+            },
+            {
+              "label": "resident",
+              "text": "resident",
+              "value": 29.2,
+              "atWord": 8.417
+            },
+            {
+              "label": "35.07×",
+              "text": "ratio",
+              "atWord": 9.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 236,
+      "audio": "audio/fluidram-tested_shorts_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The full test, and three ideas that could work, are on the channel.",
+      "data": {
+        "headline": "Three ideas that could work",
+        "subtext": "Full test on the channel",
+        "atWord": 4.5
+      },
+      "durationFrames": 132,
+      "audio": "audio/fluidram-tested_shorts_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

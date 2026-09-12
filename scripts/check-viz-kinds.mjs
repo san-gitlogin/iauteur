@@ -22,6 +22,7 @@ const REGISTRIES = [
   { file: 'src/dsaViz.tsx', start: 'const VIZ', label: 'dsaViz VIZ' },
   { file: 'src/mcpViz.tsx', start: 'const MCP_VIZ', label: 'mcpViz MCP_VIZ' },
   { file: 'src/uvViz.tsx', start: 'const UV_VIZ', label: 'uvViz UV_VIZ' },
+  { file: 'src/memViz.tsx', start: 'const MEM_VIZ', label: 'memViz MEM_VIZ' },
 ];
 
 const known = new Map(); // kind -> registry label

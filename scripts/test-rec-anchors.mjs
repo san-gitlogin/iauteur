@@ -7,6 +7,7 @@
 //
 // It sweeps clip counts, clip lengths and narration lengths, and asserts on every solve.
 import {solveAnchors, FPW, BASE_MAX} from './lib/record/anchors.mjs';
+import {planWarp} from '../src/recWarp.mjs';
 
 const results = [];
 const check = (name, ok, detail = '') => {
@@ -96,6 +97,34 @@ if (uneven.ok) {
 } else {
   check('a long clip gets more airtime than a short one', false, uneven.reason);
 }
+
+// ── a still clip is SETTLED, not unmeasured (FluidRAM, 2026-09-11) ──────────
+// `changes: [0]` is a page that finished loading before its segment began. Read as "no map"
+// it was slowed to 0.4x and reported settling at frame 90 of 36, which refused every camera
+// move asked for in the clip's first three seconds.
+const still = planWarp({frames: 36, changes: [0], airtime: 400});
+check('a one-entry motion map settles on its first frame', still.settle === 1 && still.mode === 'warp',
+  `mode ${still.mode}, settle ${still.settle}`);
+const noMap = planWarp({frames: 36, airtime: 400});
+check('a clip with NO map keeps the uniform fallback (old bakes render as before)',
+  noMap.mode === 'uniform:no-map', `mode ${noMap.mode}`);
+
+// ── an asked-for camera word is a word, not a suggestion (FluidRAM, 2026-09-11) ──
+// One still clip, three events: two moves and a pull-back, each asked for by word. They
+// must land ON those words — including the pull-back, which used to be pinned to 80% of
+// the read — and a move asked for before the floor lands AT the floor, never on the spread.
+const asked = solveAnchors({words: 80, clipFrames: [36], clipChanges: [[0]], callouts: [3],
+  releases: [true], eventWant: [[10, 20, 40]]});
+const got = asked.ok ? asked.clips[0].callouts.map((w) => Math.round(w)) : [];
+check('asked-for moves and an asked-for pull-back land on their own words',
+  asked.ok && got.join() === '10,20,40', asked.ok ? `landed on words ${got.join(', ')}` : asked.reason);
+const early = solveAnchors({words: 80, clipFrames: [36], clipChanges: [[0]], callouts: [2],
+  releases: [false], eventWant: [[1, 30]]});
+const e0 = early.ok ? early.clips[0].callouts[0] : null;
+const clip0 = early.ok ? early.clips[0].atWord : null;
+check('a move asked for before the footage settles waits for the FLOOR, not the even spread',
+  early.ok && e0 >= clip0 && e0 - clip0 <= 2,
+  early.ok ? `clip at word ${clip0}, move at word ${e0}` : early.reason);
 
 const bad = results.filter((r) => !r.ok);
 console.log('');

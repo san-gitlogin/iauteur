@@ -37,16 +37,26 @@ export const smoothWheel = async (page, total, ms) => {
   // ~1.1s per 1000px, floored at 420ms so a small nudge still reads, capped at 1600ms so a
   // long page does not spend the beat travelling.
   const dur = ms ?? Math.max(420, Math.min(1600, Math.round(dist * 1.1)));
-  const steps = Math.max(14, Math.round(dur / 16));
+  // THE CURVE RUNS ON THE WALL CLOCK, NOT ON A STEP COUNT. This used to take dur/16 steps
+  // and sleep dur/steps after each — never counting the time `mouse.wheel()` itself takes.
+  // On a heavy page at deviceScaleFactor 2.4 each wheel event costs ~25ms to dispatch and
+  // paint, so a "1.6s" glide ran for 4.3s (FluidRAM, 2026-09-11: 128 frames of motion on
+  // the audit table) and the voice named the rows while the page was still travelling.
+  // Now each tick asks "how far along should we be by NOW" — a slow page gets fewer,
+  // larger steps and still arrives on time; a fast one gets the full 60Hz of increments.
+  const t0 = Date.now();
   let done = 0;
-  for (let i = 1; i <= steps; i++) {
-    const target = Math.round(total * easeInOutCubic(i / steps));
+  for (;;) {
+    const t = Math.min(1, (Date.now() - t0) / dur);
+    const target = Math.round(total * easeInOutCubic(t));
     const d = target - done;
     if (d !== 0) {
       await page.mouse.wheel(0, d);
       done = target;
     }
-    await sleep(dur / steps);
+    if (t >= 1) break;
+    const next = t0 + Math.ceil((Date.now() - t0 + 1) / 16) * 16;
+    await sleep(Math.max(0, next - Date.now()));
   }
 };
 

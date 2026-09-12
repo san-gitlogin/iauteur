@@ -275,9 +275,14 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     // follows it, which is what a viewer is actually reading.
     // A target WIDER than the window still anchors its own left edge (same reason).
     const LEAD_MARGIN = 0.12;
+    // THE LEAD NEVER EXCEEDS THE SLACK. The window is only ~8% wider than a wide target, and
+    // a fixed 12% lead then pushed the target's own right end out of frame — measured on the
+    // FluidRAM stills: "…Without Disk Sw|", "…radically different|", "mm/oom_k|". Lead by up
+    // to 12%, but never by more than half the room the window actually has spare.
+    const lead = Math.min(winW * LEAD_MARGIN, Math.max(0, (winW - bw) / 2));
     let cx = bw > winW
       ? Number(r.x) + winW / 2
-      : Number(r.x) - winW * LEAD_MARGIN + winW / 2;
+      : Number(r.x) - lead + winW / 2;
     let cy = bh > winH ? Number(r.y) + winH / 2 : Number(r.y) + bh / 2;
     // NEVER CUT THE START OF A LINE. Zooming to a mark in the MIDDLE of a terminal frames
     // that mark, and the window's left edge then lands inside the text — measured on the
@@ -332,7 +337,8 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // What full bleed still refuses is AUTOMATIC focus — the punch-in nobody asked for, which
   // is what cropped commands off the right edge. An authored move is honoured, at the
   // gentler `windowFor` floor so it leans in rather than re-frames.
-  const targets = [{at: curStart, win: wantFocus ? windowFor(bb) : wide}];
+  type Target = {at: number; win: typeof wide; rect?: {x: number; y: number; w: number; h: number}; band?: boolean};
+  const targets: Target[] = [{at: curStart, win: wantFocus ? windowFor(bb) : wide}];
   // A move may name SEVERAL marks, and then it frames their union. A pan across a table row
   // is one gesture, not two: zooming to the 178px row LABEL alone crops off the columns the
   // row is being compared against, so the viewer is shown the question without the answer.
@@ -353,9 +359,8 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     ? {x: Math.min(...inkRects.map((r) => Number(r.x))), w: 0}
     : (bb as {x: number; w: number} | undefined);
 
-  const unionOf = (names: string[]) => {
-    const rs = names.map((m) => cur.marks?.[m]).filter(Boolean) as
-      {x: number; y: number; w: number; h: number}[];
+  type Box = {x: number; y: number; w: number; h: number};
+  const unionBoxes = (rs: Box[]) => {
     if (!rs.length) return undefined;
     const x = Math.min(...rs.map((r) => Number(r.x)));
     const y = Math.min(...rs.map((r) => Number(r.y)));
@@ -363,14 +368,26 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     const y1 = Math.max(...rs.map((r) => Number(r.y) + Number(r.h)));
     return {x, y, w: x1 - x, h: y1 - y};
   };
+  const unionOf = (names: string[]) =>
+    unionBoxes(names.map((m) => cur.marks?.[m]).filter(Boolean) as Box[]);
+  // THE CAMERA FRAMES THE WHOLE LINE; THE BAND POINTS AT THE WORDS (owner, 2026-09-11, on
+  // stills where the frame read "dRAM: Linux Memory Subsystem" and a band stopped half-way
+  // through a sentence). The runner measures each mark's `block` — the full text of the
+  // heading, cell or code line it sits in — so the window is sized to what is being READ,
+  // while the band stays on the exact words the voice names.
+  const frameOfMarks = (names: string[]) =>
+    unionBoxes(names.flatMap((m) => {
+      const b = cur.marks?.[m];
+      return b ? [b as Box, ...(b.block ? [b.block] : [])] : [];
+    }));
   for (const z of cur.zooms ?? []) {
     const at = wordToFrame(z.atWord ?? cur.atWord ?? 1);
-    const r = z.at === 'full'
-      ? undefined
-      : z.marks?.length ? unionOf(z.marks)
-      : z.mark ? cur.marks?.[z.mark]
-      : bb;
-    targets.push({at, win: z.at === 'full' ? wide : windowFor(r, keepLeft, fullBleed)});
+    const names = z.at === 'full' ? [] : z.marks?.length ? z.marks : z.mark ? [z.mark] : [];
+    const r = z.at === 'full' ? undefined : names.length ? unionOf(names) : bb;
+    const framed = names.length ? frameOfMarks(names) : r;
+    targets.push({at, win: z.at === 'full' ? wide : windowFor(framed, keepLeft, fullBleed),
+      rect: z.at === 'full' ? undefined : (r as Target['rect']),
+      band: z.at !== 'full' && !!(z as {band?: boolean}).band});
   }
   targets.sort((a, b) => a.at - b.at);
 
@@ -584,7 +601,9 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
     // so the freeze it lands on is later than the raw frame count suggests.
     const settle = st + Math.max(0, shownFrames - 2);
     const TAIL = 20;              // ~0.7s of clean frame before the next step takes over
-    const MAX = 260;              // and never more than ~8.5s of card in one go
+    // A CAPTION ALONE IS FURNITURE: read it and go. Owner, 2026-09-11: *"sometimes even worst
+    // stays there constantly until next scene comes. No use"*. A depiction keeps the long read.
+    const MAX = c0.overlay ? 260 : 120;   // ~8.5s for a depiction, ~4s for a caption
     const on = Math.min(settle, Math.max(st, nx - 90));   // a very short gap still gets a card
     const off = Math.min(nx - TAIL, on + MAX);
     if (off - on < 45) return null;   // no room to show and read one — leave the frame alone
@@ -682,7 +701,9 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             its attribution. It sits under everything else in the stack but above the video,
             is never anchored (it is on from frame 0), and is deliberately quiet: small, mono,
             dimmed, with its own scrim so it survives a light page underneath it. */}
-        {d.sourceNote ? (
+        {/* A clip may quote a DIFFERENT page from the beat's other clips (FluidRAM s19 cuts
+            from AdiOS to the FluidRAM repo): its own `sourceNote` wins while it is on screen. */}
+        {(cur?.sourceNote ?? d.sourceNote) ? (
           <div style={{
             position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 3,
             display: 'flex', justifyContent: 'center', alignItems: 'flex-end',
@@ -701,7 +722,7 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-            }}>{String(d.sourceNote)}</div>
+            }}>{String(cur?.sourceNote ?? d.sourceNote)}</div>
           </div>
         ) : null}
 
@@ -761,8 +782,16 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                 over the earlier — no cut, no gap, no blank frame between them.
                 A clip with no motion map yields exactly one piece at the old uniform rate. */}
             {warp.pieces.map((p, pi) => {
-              const playLen = Math.max(1, p.to - p.from);
-              const nextAt = pi + 1 < warp.pieces.length ? warp.pieces[pi + 1].at : warp.shown;
+              // A piece plays `to - from` SOURCE frames at `rate`, so it lasts
+              // (to - from) / rate TIMELINE frames. Sizing it by source frames cut a 0.4x
+              // piece off after a third of its footage (fluidram-tested s03, 2026-09-11).
+              const playLen = Math.max(1, Math.ceil((p.to - p.from) / (p.rate || 1)));
+              // The LAST piece holds its final frame for the rest of the clip's airtime
+              // (until the next clip or the end of the scene), not just to `warp.shown`.
+              // `shown` is where the planned motion ends; the READ_TAIL after it still has
+              // to show the finished picture. Ending the freeze at `shown` left nothing
+              // mounted, and the stage painted its empty panel for the rest of the beat.
+              const nextAt = pi + 1 < warp.pieces.length ? warp.pieces[pi + 1].at : Math.max(warp.shown, airtime);
               const holdLen = Math.max(0, nextAt - p.at - playLen);
               const clip = (extra: Record<string, unknown>) => (
                 <ClipVideo
@@ -853,6 +882,34 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
                   {/* The bar is the "you are here" — it reads at a glance even when the
                       band itself is washed out by bright syntax colouring underneath. */}
                   <rect x={x} y={y} width={3.5 / k} height={h} rx={2 / k} fill={c} />
+                </svg>
+              </AbsoluteFill>
+            );
+          })()}
+
+          {/* THE SPOKEN-ABOUT BAND (owner, 2026-09-11: "zooming in at a irrelevant place, then
+              trying to highlight something irrelevant from what you are speaking").
+
+              A zoom used to frame a mark and leave the eye to guess which lines in the window
+              were meant. When a move asks for `band: true`, the block it frames gets the same
+              quiet treatment as the standing command band — a filled band and a left accent
+              bar, no label — for exactly as long as the camera is on it, and it goes when the
+              camera moves on. The authoring rule that makes this honest lives in
+              scripts/check-camera.mjs: a move may only frame text the voice is saying. */}
+          {(() => {
+            const tz = targets[zi];
+            if (!tz?.band || !tz.rect) return null;
+            const on = interpolate(frame, [tz.at + 12, tz.at + 22], [0, 1], clamp);
+            if (on <= 0.001) return null;
+            const c = sem(d.color ?? 'blue');
+            const r = tz.rect;
+            const x = Number(r.x) - 6, y = Number(r.y) - 4, w = Number(r.w) + 12, h = Number(r.h) + 8;
+            return (
+              <AbsoluteFill style={{pointerEvents: 'none', opacity: on}}>
+                <svg width="100%" height="100%" viewBox={`0 0 ${capW} ${capH}`} preserveAspectRatio="none">
+                  <rect x={x} y={y} width={w} height={h} rx={6}
+                    fill={hexA(c, 0.12)} stroke={hexA(c, 0.7)} strokeWidth={2 / k} />
+                  <rect x={x} y={y} width={4 / k} height={h} rx={2 / k} fill={c} />
                 </svg>
               </AbsoluteFill>
             );
@@ -1243,6 +1300,9 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
           // The window is computed once, above, so the card and the blur behind it cannot
           // disagree about when the handover happens.
           if (!cardWindow) return null;
+          // NOTHING TO SAY, NO CARD. With no caption, no premise to carry and no depiction, the
+          // card used to render as an empty pane of glass over the footage.
+          if (!d.caption && !(d.premise && fullBleed) && !cur.overlay) return null;
           const IN = 14, OUT = 12;
           const life = interpolate(
             frame,
@@ -1356,7 +1416,17 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
             pos.top = 0; pos.bottom = 0;
           } else if (place === 'auto') {
             if (fullBleed) {
-              const edgeKey = hasGap || clusterAtTop ? 'top' : 'bottom';
+              let edgeKey: 'top' | 'bottom' = hasGap || clusterAtTop ? 'top' : 'bottom';
+              // NEVER OVER THE THING BEING SHOWN. Owner, 2026-09-11: *"its only sitting at center
+              // hiding most of the highlights performed on the video"*. The ink solver picks a band
+              // for the page as a whole; the camera's CURRENT target is what the viewer is being
+              // shown, so when it sits in the half the card chose, the card takes the other edge.
+              const hot = targets[zi]?.rect;
+              if (hot) {
+                const rel = ((Number(hot.y) + Number(hot.h) / 2) - to.y) / Math.max(1, to.h);
+                if (edgeKey === 'bottom' && rel > 0.5) edgeKey = 'top';
+                else if (edgeKey === 'top' && rel < 0.5) edgeKey = 'bottom';
+              }
               pos.left = 0; pos.right = 0;
               pos[edgeKey] = clusterInset + (edgeKey === 'bottom' ? sourceInset : 0);
             }

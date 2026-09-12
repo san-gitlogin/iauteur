@@ -430,6 +430,8 @@ export const marksFor = async (page, marks = []) => {
   const out = {};
   // what each mark's rectangle actually covers, so a wrong one is visible rather than drawn
   const markText = {};
+  // the text lines around each page mark (see blockBox in the resolver), for the camera
+  const markBlock = {};
   for (const m of marks) {
     if (!m?.id) continue;
     let box = null;
@@ -439,8 +441,16 @@ export const marksFor = async (page, marks = []) => {
     let evalErr = null;
     if (m.selector) {
       box = await page.locator(m.selector).first().boundingBox({timeout: 3000}).catch(() => null);
+      // a box is in DOCUMENT space only while it is on screen; off it, a camera move would
+      // frame whatever sits at those coordinates instead
+      const vp = page.viewportSize();
+      if (box && vp && (box.y < 0 || box.x < 0 || box.y + box.height > vp.height || box.x + box.width > vp.width)) {
+        throw new Error(`Mark "${m.id}" (selector ${m.selector}) measures ${Math.round(box.x)},${Math.round(box.y)} ` +
+          `${Math.round(box.width)}x${Math.round(box.height)}, outside the ${vp.width}x${vp.height} viewport. ` +
+          `Scroll the step so it is on screen.`);
+      }
     } else if (m.text) {
-      box = await page.evaluate((rawNeedle) => {
+      box = await page.evaluate(([rawNeedle, wantCopy, rawTo, wantToCopy]) => {
         // PAID FOR: MONACO RENDERS EVERY SPACE AS U+00A0 (measured — a probe dumped the
         // char codes of a .view-line and `includes(" ")` was false on all seven lines).
         // xterm uses ordinary spaces, so terminal marks worked and the FIRST editor mark
@@ -465,6 +475,183 @@ export const marksFor = async (page, marks = []) => {
         // is read top to bottom. Smallest matching element, so the range is tight to the
         // phrase rather than to a section wrapper that happens to contain it.
         const all = Array.from(document.querySelectorAll('.xterm-rows > div, .view-lines .view-line'));
+        // ── A WEB PAGE: EVERY OCCURRENCE, AND THE ONE A VIEWER CAN SEE ────────────────────
+        //
+        // OWNER, 2026-09-11, on the FluidRAM cut: *"Our recording mechanism must be robust …
+        // adaptive, universal, and must handle any types of requirements."* The old page
+        // path took the smallest ELEMENT whose own text held the needle and whose box merely
+        // touched the viewport. Three ways that went wrong, all met on one README:
+        //   - a phrase said twice ("co-designed primitives", once in the intro and once in
+        //     the section scrolled to) resolved to the copy that had scrolled away;
+        //   - a phrase split across inline tags (`<code>`, `<strong>`, a link) was never an
+        //     element's OWN text, so it could not be marked at all;
+        //   - a phrase the browser wrapped onto two lines failed the centre-point test.
+        // So a page is now read as a reader reads it: the whole visible text, whitespace
+        // collapsed the way it renders, block boundaries kept so a match cannot straddle
+        // two paragraphs. Every occurrence gets its own Range, and the one chosen is the
+        // first that is ENTIRELY inside the viewport and not painted over (GitHub's sticky
+        // file header covers the top lines of a file). Nothing else qualifies, and when
+        // nothing qualifies the error says what happened to each copy.
+        if (!all.length) {
+          const needleC = needle.replace(/\s+/g, ' ').trim();
+          const display = new Map();
+          const blockFor = (el) => {
+            for (let e = el; e && e !== document.body; e = e.parentElement) {
+              let d = display.get(e);
+              if (d === undefined) { d = getComputedStyle(e).display; display.set(e, d); }
+              if (!d.startsWith('inline') && d !== 'contents') return e;
+            }
+            return document.body;
+          };
+          const SKIP = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA', 'TEMPLATE']);
+          const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+            acceptNode: (n) => (n.parentElement && !SKIP.has(n.parentElement.tagName)
+              ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+          });
+          let str = '';
+          const at = []; // per emitted char: [text node, offset] (null at a block boundary)
+          let prevBlock = null, space = true;
+          while (walker.nextNode()) {
+            const n = walker.currentNode, v = n.nodeValue;
+            if (!v) continue;
+            const b = blockFor(n.parentElement);
+            if (b !== prevBlock) { str += String.fromCharCode(1); at.push(null); space = true; prevBlock = b; }
+            for (let i = 0; i < v.length; i++) {
+              if (/\s/.test(v[i])) { if (space) continue; str += ' '; at.push([n, i]); space = true; }
+              else { str += v[i]; at.push([n, i]); space = false; }
+            }
+          }
+          const W = window.innerWidth, H = window.innerHeight;
+          const painted = (x, y) => document.elementFromPoint(Math.min(W - 1, Math.max(0, x)), Math.min(H - 1, Math.max(0, y)));
+          // Every copy of `nd` from `startAt` on, each with its fate. Usable only when it is
+          // wholly inside the viewport and nothing is painted over it.
+          const scan = (nd, startAt = 0) => {
+            const copies = [];
+            for (let from = str.indexOf(nd, startAt); from >= 0; from = str.indexOf(nd, from + 1)) {
+              const s = at[from], e = at[from + nd.length - 1];
+              if (!s || !e) continue;
+              const range = document.createRange();
+              try { range.setStart(s[0], s[1]); range.setEnd(e[0], e[1] + 1); } catch { continue; }
+              const frags = Array.from(range.getClientRects()).filter((q) => q.width > 1 && q.height > 1);
+              const u = range.getBoundingClientRect();
+              const text = range.toString().replace(/\s+/g, ' ').trim();
+              if (!frags.length) { copies.push({state: 'not laid out (hidden or collapsed)'}); continue; }
+              if (u.bottom <= 0 || u.top >= H || u.right <= 0 || u.left >= W) {
+                copies.push({state: u.bottom <= 0 ? 'scrolled away above' : 'further down the page'}); continue;
+              }
+              if (u.top < 0 || u.bottom > H || u.left < 0 || u.right > W) {
+                copies.push({state: `cut by the viewport edge (y ${Math.round(u.top)}..${Math.round(u.bottom)})`}); continue;
+              }
+              // What is PAINTED on each line fragment must be this text (or the transparent
+              // overlay a code view lays over it, which carries the same text as its value).
+              const owner = blockFor(s[0].parentElement);
+              let coveredBy = null;
+              for (const q of frags) {
+                const p = painted(q.x + q.width / 2, q.y + q.height / 2);
+                const ok = p && (p.contains(s[0]) || owner.contains(p) ||
+                  String(p.value ?? p.innerText ?? '').replace(/\s+/g, ' ').includes(nd));
+                if (!ok) { coveredBy = p ? `${p.tagName.toLowerCase()}${p.className && typeof p.className === 'string' ? '.' + p.className.split(/\s+/)[0] : ''}` : 'nothing'; break; }
+              }
+              if (coveredBy) { copies.push({state: `painted over by <${coveredBy}>`}); continue; }
+              copies.push({state: 'ok', x: u.x, y: u.y, w: u.width, h: u.height, text,
+                           i0: from, i1: from + nd.length - 1, s, e});
+            }
+            return copies;
+          };
+          // ── WHAT IS BEING READ, not just the words named (owner, 2026-09-11, on stills where
+          // a band sliced `che|ck_crc` and a frame read "dRAM: Linux Memory Subsystem"). A band
+          // around the matched characters cuts every line it does not fully contain, and a
+          // camera sized to them crops the rest of the sentence. So the recorder measures the
+          // TEXT LINES around a mark, which only it can: the renderer has pixels, not a DOM.
+          const nodesIn = (el) => {
+            const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+            const out = [];
+            while (w.nextNode()) out.push(w.currentNode);
+            return out;
+          };
+          // one rect per rendered line of each text node — never an element box, which for a
+          // code line or a paragraph is the full column width whatever the text does
+          const fragsOf = (nodes) => nodes.flatMap((n) => {
+            if (!n.nodeValue || !n.nodeValue.trim() || !n.parentElement || SKIP.has(n.parentElement.tagName)) return [];
+            const r = document.createRange();
+            r.selectNodeContents(n);
+            return Array.from(r.getClientRects()).filter((q) => q.width > 1 && q.height > 1).map((q) => ({n, q}));
+          });
+          const boxOf = (fs) => {
+            if (!fs.length) return null;
+            const x0 = Math.max(0, Math.min(...fs.map((f) => f.q.left)));
+            const y0 = Math.max(0, Math.min(...fs.map((f) => f.q.top)));
+            const x1 = Math.min(W, Math.max(...fs.map((f) => f.q.right)));
+            const y1 = Math.min(H, Math.max(...fs.map((f) => f.q.bottom)));
+            return x1 - x0 > 1 && y1 - y0 > 1 ? {x: x0, y: y0, w: x1 - x0, h: y1 - y0} : null;
+          };
+          // A mark's BLOCK: all of a short one (a heading, a table cell, a code line, a
+          // two-line paragraph); in a long one, only the lines the mark sits on.
+          const blockBox = (c) => {
+            const fs = fragsOf(nodesIn(blockFor(c.s[0].parentElement)));
+            const whole = boxOf(fs);
+            if (whole && whole.h <= Math.max(c.h, 14) * 4.5) return whole;
+            return boxOf(fs.filter((f) => f.q.bottom > c.y + 1 && f.q.top < c.y + c.h - 1));
+          };
+          // A SPAN: every line from the start of `a`'s block to the end of `b`'s — so a band
+          // over lines 308-311 covers 309 too, which neither end mentions. A line that STARTS
+          // inside the column belongs to it even when it runs on past (a long line of code);
+          // a cell that starts right of the column's last cell is another column of a table.
+          const spanOf = (a, b) => {
+            const aEl = blockFor(a.s[0].parentElement), bEl = blockFor(b.e[0].parentElement);
+            const seen = new Set(), nodes = [];
+            const add = (n) => { if (n && !seen.has(n)) { seen.add(n); nodes.push(n); } };
+            nodesIn(aEl).forEach(add);
+            for (let i = a.i0; i <= b.i1; i++) if (at[i]) add(at[i][0]);
+            nodesIn(bEl).forEach(add);
+            const ends = fragsOf([...nodesIn(aEl), ...nodesIn(bEl)]);
+            if (!ends.length) return {box: null, text: ''};
+            const coreL = Math.min(...ends.map((f) => f.q.left)), coreR = Math.max(...ends.map((f) => f.q.right));
+            // DECIDED PER LINE, NOT PER TOKEN. GitHub renders every syntax token as its own
+            // text node, so testing fragments one by one dropped the tail of a long line (the
+            // tokens that start past the column's edge) and the band sliced it. Group by the
+            // block each fragment is read in — a code line, a table cell, a paragraph — and
+            // keep or drop the whole group.
+            const groups = new Map();
+            for (const f of fragsOf(nodes)) {
+              const g = blockFor(f.n.parentElement);
+              if (!groups.has(g)) groups.set(g, []);
+              groups.get(g).push(f);
+            }
+            const fs = [...groups.values()].filter((g) =>
+              Math.min(...g.map((f) => f.q.left)) < coreR - 2 &&
+              Math.max(...g.map((f) => f.q.right)) > coreL + 2).flat();
+            const kept = [...new Set(fs.map((f) => f.n))];
+            return {box: boxOf(fs), text: kept.map((n) => n.nodeValue).join(' ').replace(/\s+/g, ' ').trim()};
+          };
+          // `copy: n` on the mark picks the nth VISIBLE copy (a table can say "0 killed" in two
+          // columns of one row); the default is the first, top of the page. A copy that is not
+          // there is a refusal, never a quiet fall back to another. `to` / `toCopy` do the same
+          // for a span's last line, counted from the span's start.
+          const copies = scan(needleC);
+          const oks = copies.filter((c) => c.state === 'ok');
+          const pick = oks[wantCopy - 1];
+          if (!pick) {
+            return {doc: true, fail: true, copies: copies.map((c) => c.state),
+                    ...(oks.length ? {wantCopy, have: oks.length} : {})};
+          }
+          if (rawTo) {
+            const toC = flat(rawTo).replace(/\s+/g, ' ').trim();
+            const tail = scan(toC, pick.i1 + 1);
+            const tOks = tail.filter((c) => c.state === 'ok');
+            const end = tOks[wantToCopy - 1];
+            if (!end) {
+              return {doc: true, fail: true, spanEnd: true, copies: tail.map((c) => c.state),
+                      ...(tOks.length ? {wantCopy: wantToCopy, have: tOks.length} : {})};
+            }
+            const sp = spanOf(pick, end);
+            if (!sp.box) return {doc: true, fail: true, spanEnd: true, copies: ['the span has no laid-out text']};
+            return {doc: true, ...sp.box, matched: sp.text, span: true, visibleCopies: oks.length, copy: wantCopy};
+          }
+          const blk = blockBox(pick);
+          return {doc: true, x: pick.x, y: pick.y, w: pick.w, h: pick.h, matched: pick.text,
+                  ...(blk ? {block: blk} : {}), visibleCopies: oks.length, copy: wantCopy};
+        }
         // ONLY ROWS THAT ARE ACTUALLY LAID OUT.
         //
         // THE ROOT CAUSE, found 2026-09-05 after the owner photographed a callout reading
@@ -481,22 +668,7 @@ export const marksFor = async (page, marks = []) => {
           const rr = r.getBoundingClientRect();
           return rr.width > 1 && rr.height > 1 && rr.bottom > 0 && rr.top < window.innerHeight;
         });
-        let hit = rows.filter((r) => flat(r.innerText).includes(needle)).pop();
-        if (!hit && !all.length) {
-          const cands = Array.from(document.querySelectorAll('body *')).filter((el) => {
-            if (!el.childNodes.length) return false;
-            // only elements whose OWN text carries the needle, not every ancestor of one
-            const own = Array.from(el.childNodes)
-              .filter((n) => n.nodeType === 3).map((n) => n.nodeValue).join('');
-            if (!flat(own).includes(needle)) return false;
-            const r = el.getBoundingClientRect();
-            return r.width > 2 && r.height > 2 && r.bottom > 0 && r.top < window.innerHeight;
-          });
-          hit = cands.sort((a, b) => {
-            const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
-            return (ra.width * ra.height) - (rb.width * rb.height);
-          })[0] ?? null;
-        }
+        const hit = rows.filter((r) => flat(r.innerText).includes(needle)).pop();
         if (!hit) {
           // Say WHAT was on screen, or the next person pays for another take to find out.
           return {noHit: true, rows: rows.length,
@@ -572,9 +744,11 @@ export const marksFor = async (page, marks = []) => {
         const onScreen = flat(row ? row.innerText : (atPoint ? atPoint.innerText : ''));
         return {x: r.x, y: r.y, w: r.width, h: r.height,
                 matched, via: idx >= 0 ? 'range' : 'row',
-                onScreen: String(onScreen).trim().slice(0, 160),
+                // compared IN FULL: cutting to 160 chars first refused any needle that sat
+                // late in a long line, which a wrapped paragraph always is
+                onScreen: String(onScreen).trim(),
                 rowText: flat(hit.innerText).trim().slice(0, 120)};
-      }, m.text).catch((e) => { evalErr = e?.message ?? String(e); return null; });
+      }, [m.text, m.copy ?? 1, m.to ?? null, m.toCopy ?? 1]).catch((e) => { evalErr = e?.message ?? String(e); return null; });
       if (box && box.tiny) {
         throw new Error(
           `Mark "${m.id}" found ${JSON.stringify(m.text)} in the row ${JSON.stringify(box.rowText)} ` +
@@ -582,20 +756,48 @@ export const marksFor = async (page, marks = []) => {
           `${box.rowRect.w}x${box.rowRect.h} at ${box.rowRect.x},${box.rowRect.y}. ` +
           `The text is in the DOM but not laid out where it appears.`);
       }
-      if (box && box.noHit) {
+      if (box && box.doc && box.fail && box.wantCopy) {
+        throw new Error(
+          `Mark "${m.id}" asked for copy ${box.wantCopy} of ` +
+          `${box.spanEnd ? `the span's end ${JSON.stringify(m.to)}` : JSON.stringify(m.text)}, and only ` +
+          `${box.have} cop${box.have === 1 ? 'y is' : 'ies are'} wholly visible. ` +
+          `Fix \`${box.spanEnd ? 'toCopy' : 'copy'}\` or the step's scroll.`);
+      }
+      if (box && box.doc && box.fail) {
+        throw new Error(
+          `Mark "${m.id}" asked for ` +
+          `${box.spanEnd ? `a span ending at ${JSON.stringify(m.to)}` : JSON.stringify(m.text)} ` +
+          `and no copy of it is wholly visible${box.spanEnd ? ' after the span\'s start' : ''}. ` +
+          (box.copies.length
+            ? `The page has ${box.copies.length}: ${box.copies.map((s, i) => `#${i + 1} ${s}`).join('; ')}. `
+            : `The page does not contain that text (whitespace-collapsed, within one block). `) +
+          `Scroll the step so it shows the words, or mark words that are on screen.`);
+      }
+      // the page resolver has already proved what is painted there; the row checks below
+      // are for xterm and Monaco rows, whose DOM outlives their on-screen position
+      const fromDoc = !!(box && box.doc);
+      if (fromDoc) {
+        if (box.visibleCopies > 1) {
+          console.log(`  note: mark "${m.id}" — ${box.visibleCopies} copies on screen, took #${box.copy}` +
+            `${box.copy === 1 ? ' (top of the page; set `copy` on the mark to choose another)' : ''}`);
+        }
+        markText[m.id] = String(box.matched).slice(0, 600);
+        if (box.block) markBlock[m.id] = box.block;
+        box = {x: box.x, y: box.y, width: box.w, height: box.h};
+      } else if (box && box.noHit) {
         throw new Error(
           `Mark "${m.id}" asked for ${JSON.stringify(m.text)} and no rendered row carries it. ` +
           `${box.rows} row(s) were searched; the last few read: ` +
           `${box.sample.map((t) => JSON.stringify(t.slice(0, 60))).join(' | ') || '(all empty)'}`);
       }
-      if (box) {
+      if (box && !fromDoc) {
         // A row-rect fallback means the tight range failed, so the box is the whole line
         // and the leader will point at the middle of it rather than at the words.
         const want = String(m.text).split(String.fromCharCode(160)).join(' ');
         if (box.onScreen && !box.onScreen.includes(want)) {
           throw new Error(
             `Mark "${m.id}" asked for ${JSON.stringify(m.text)} and its rectangle sits on ` +
-            `${JSON.stringify(box.onScreen)} — the text it matched has SCROLLED OUT of view, ` +
+            `${JSON.stringify(box.onScreen.slice(0, 160))} — the text it matched has SCROLLED OUT of view, ` +
             `so the callout would point at whatever happens to be at those coordinates. ` +
             `Make the step show it (fewer output lines), or mark something still on screen.`);
         }
@@ -620,6 +822,8 @@ export const marksFor = async (page, marks = []) => {
       x: Math.round(box.x), y: Math.round(box.y),
       w: Math.round(box.width), h: Math.round(box.height),
       ...(markText[m.id] ? {covers: markText[m.id]} : {}),
+      ...(markBlock[m.id] ? {block: Object.fromEntries(
+        Object.entries(markBlock[m.id]).map(([k, v]) => [k, Math.round(v)]))} : {}),
     };
   }
   return Object.keys(out).length ? out : null;
@@ -1467,9 +1671,17 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
           `Known: ${Object.keys(browserActions).join(', ')}`);
       }
       await painted(page);
-      const t0 = Date.now();
+      // A PAGE LOAD IS A CUT, NOT A PERFORMANCE (owner, 2026-09-11: "Try to record properly").
+      // A `goto` was captured from the moment it was issued, so every clip opened on the new
+      // page painting at the top of the file and then JUMPING to its `#L` lines. Nobody
+      // performs a page load; they arrive at it. A cut step's segment starts once the action
+      // has settled, so the clip opens on the view it exists to show. A scroll keeps its
+      // motion (that is the viewer's eye travelling); `cut` overrides either way per step.
+      const cut = step.cut ?? step.action === 'goto';
+      let t0 = Date.now();
       const res = await fn(page, step);
-      await sleep(step.holdMs ?? 700);
+      if (cut) { await painted(page); t0 = Date.now(); }
+      await sleep(step.holdMs ?? (cut ? 1200 : 700));
       await painted(page);
       const t1 = Date.now();
 

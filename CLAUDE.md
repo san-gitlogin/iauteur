@@ -1155,6 +1155,76 @@ full build → voiceover → sync loop.
 chains. It caps a CLAUSE, not a sentence. A 25-word sentence with commas, an em-dash and a natural
 breath point is good spoken English; a 15-word sentence with no pause is not.
 
+### Corollary — THE CAMERA FOLLOWS THE VOICE, AND EVERY POINTER PROVES ITSELF (owner, 2026-09-11 → 2026-09-12)
+
+Owner, on the first FluidRAM cut: *"zooming in is absolute shot. You zoom in at a specific place
+only, and you are speaking about something which is not in focus ... I see at several places the
+component overlay is simply used for no purpose ... Our recording mechanism must be robust ...
+adaptive, universal. I look at perfection!"* On the rebuilt one: *"The zoom ins are great. The cuts
+are great."* **Eight defects sat between those two sentences and NOT ONE was in the spec** — every
+one lived in the recorder, the solver or a component, so each fix and each gate now protects every
+future video.
+
+1. **A CAMERA MOVE IS SCRIPTED BY THE PHRASE THAT NAMES IT**, never by a position. A recorded beat
+   authors `{at: '<exact words from the narration>', frame: <mark>, band: true}`, and `'full'`
+   pulls back when the sentence leaves the page. **Enforced:** `scripts/check-camera.mjs` (run by
+   `render-topic`) reads each zoom's framed text from the TAKE (`marks[*].covers`) and rejects any
+   move whose words are not spoken within 10 words ahead / 7 behind. It caught 8 of 16 moves on the
+   first pass; the shipped cut lands 32 of 32 within two words of their phrase.
+2. **A PAGE MARK IS FOUND THE WAY A READER FINDS IT.** The browser resolver reads the page's whole
+   text (whitespace collapsed as rendered, block boundaries kept), builds a Range for EVERY copy of
+   the needle, and takes the first wholly inside the viewport and not painted over — a refusal names
+   each copy's fate. `copy: n` picks a repeated cell; `{text, to, toCopy}` is a SPAN covering every
+   line from the first line's block to the last's, because a union of two single-line marks slices
+   the lines between them. Every mark also carries `block` — the full lines it is read in — and the
+   CAMERA frames that, so the line being read is never cropped.
+3. **A STILL CLIP IS MEASURED, NOT UNMEASURED.** `planWarp` read a one-entry motion map (`[0]`, a
+   page that loaded before its segment began) as "no map", slowed the still picture to 0.4x and
+   reported it settling at frame 90 of 36 — so the solver refused every move asked for in a clip's
+   first three seconds. One entry means it settles on frame 1.
+4. **AN ASKED-FOR WORD IS CLAMPED INTO ITS WINDOW, NEVER DISCARDED.** A move or pull-back outside
+   its legal window used to fall back to the even spread and land 11-20 words late — the camera sat
+   on a line the voice had left. The spread is only for events that named no word at all.
+5. **A GLIDE RUNS ON THE WALL CLOCK.** `smoothWheel` slept `dur/steps` and never counted the wheel
+   event itself (~25 ms on a heavy page at scale 2.4), so a "1.6 s" scroll ran 4.3 s and the voice
+   named the table's rows while the page was still travelling.
+6. **A CLIP QUOTES ITS OWN PAGE.** `clips[].sourceNote` overrides the scene's while that clip is on
+   screen: a beat cutting from one repo to another credited the wrong repo and licence for half its
+   length, under footage that was plainly the other project.
+7. **AN ENTRANCE RELEASES ITS TRANSFORM.** `SceneTransition` left `scale(1)` / `blur(0)` set after a
+   zoom/morph entrance and SVG pictures re-scaled on later frames — the "glitching constantly from
+   its place" the owner reported. **A still cannot see a flicker: measure settled frames with
+   `ffmpeg tblend=all_mode=difference,signalstats` before shipping any cut.**
+8. **PROOF IS A CONTACT SHEET OF EVERY CAMERA MOMENT, NOT THE FINISHED RENDER.** Shoot a still at
+   each zoom/band anchor and each recorded scene's tail, tile them, and READ them. Three rounds of
+   that found a band slicing `che|ck_crc`, a frame reading "dRAM: Linux Memory...", table cells cut
+   mid-word and a 12% lead margin pushing wide targets off frame — every one of them lint-clean,
+   gate-green, and invisible in the spec.
+
+### Corollary — THE THUMBNAIL'S SUBJECT IS AN OBJECT, AND IT IS DRAWN FREE (owner, 2026-09-12)
+
+Owner: *"Make sure to put the component in the THUMB to be more attractive rather than just boxes.
+Generate it with a RAM component (detailed yet fits in the view) ... I dont want the component to be
+covered or put within a rounded rectangle container as you have now. i want it to flow free."* Then:
+*"I love the thumb instead of dumber thumbs we had so far."*
+
+- **Draw the THING the video is about**, as an object with real detail — FluidRAM's thumbnail is a
+  DDR5 module drawn in SVG (eight packages, gold contacts with the key notch, passives, a label, PCB
+  traces) with the claim set over it. A `lucide:` glyph, or a screenshot in a tile, is the
+  placeholder — never the plan (LAW 0b).
+- **`thumbnail.art` / `cover.art` draw it FREE**: full size, no crop, no rounded tile, no shadow box.
+  `asset` goes through `AssetIcon`, which crops every `img:` into a rounded square — that is where
+  every boxed thumbnail came from.
+- **Glow is a blurred COPY of the glyphs, never a filter.** A `drop-shadow` on a 3D-transformed or
+  gradient-clipped element rasterises into stepped rings.
+- **Sell the STAKES, and keep it honest.** What the viewer cares about ("THE END OF THE RAM
+  CRISIS?") beats the method ("I tested the code") — and when the video's own answer is "not yet",
+  the claim is a QUESTION, which is what makes it attractive AND true. Name the subject, claim
+  underneath, credit the author on the face of it.
+- **`meta.seo.hook` is what the description OPENS with.** `gen-upload-kit` falls back to
+  `meta.openLoop` — a bare one-line question — so a cut with only `description` authored ships a
+  description that opens on nothing. Author `hook` per cut, wide AND shorts.
+
 ## LAW 0e-q — A QUIZ WITHOUT A GAP IS NOT A QUIZ (owner, 2026-08-17)
 Owner, on a shipped episode: *"there is no gap at all between you asking the question and the
 answer getting highlighted."* Correct, and it made the quiz beat worthless — a viewer who is never

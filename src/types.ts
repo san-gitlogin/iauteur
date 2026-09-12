@@ -2108,6 +2108,11 @@ export interface RecordedBBox {
   y: number;
   w: number;
   h: number;
+  /** Baked, page marks only: the full text lines the mark is READ in (its heading, table
+   *  cell or code line), so the camera frames the line rather than cropping it. */
+  block?: {x: number; y: number; w: number; h: number};
+  /** Baked: the text actually under this rectangle, as the runner read it back. */
+  covers?: string;
 }
 /** A label with a leader line, pointing at a rectangle the RUNNER measured. */
 export interface RecordedCallout {
@@ -2174,8 +2179,12 @@ export interface RecordedClip {
    * cast from its name rather than its content is visible in the spec and in review.
    */
   shows?: string;
-  /** `atWord` is SOLVED; `wantAtWord` is the author's word, honoured when it fits. */
-  zooms?: Array<{mark?: string; marks?: string[]; at?: 'full'; atWord?: number; wantAtWord?: number}>;
+  /** This clip's own credit line, when it quotes a different page from the beat's other
+   *  clips. Wins over the scene's `sourceNote` while the clip is on screen. */
+  sourceNote?: string;
+  /** `atWord` is SOLVED; `wantAtWord` is the author's word, honoured when it fits.
+   *  `band` lays the quiet highlight on the framed marks while the camera is there. */
+  zooms?: Array<{mark?: string; marks?: string[]; at?: 'full'; atWord?: number; wantAtWord?: number; band?: boolean}>;
   /**
    * An ANIMATED explainer that floats over this clip's footage, in the same measured
    * ink-free band as the caption — so it annotates the recording instead of hiding it.
@@ -10902,6 +10911,28 @@ export interface AppleStageData {
   atWord?: number;
 }
 
+export interface MemStageItem {
+  label?: string;
+  text?: string;
+  sub?: string;
+  value?: number | string;
+  icon?: string;
+  color?: SemColor;
+  atWord?: number;
+}
+
+export interface MemStageData {
+  headline?: string;
+  kind?: string;
+  cells?: MemStageItem[];
+  vars?: MemStageItem[];
+  caption?: string;
+  premise?: string;
+  token?: string;
+  color?: SemColor;
+  atWord?: number;
+}
+
 export interface AllureStageItem {
   label?: string;
   text?: string;
@@ -10930,6 +10961,7 @@ export interface AllureStageData {
 
 export interface SceneData {
   appleStage?: AppleStageData;
+  memStage?: MemStageData;
   allureStage?: AllureStageData;
   liveCode?: LiveCodeData;
   columnSplit?: ColumnSplitData;
@@ -12314,6 +12346,8 @@ export interface CoverConfig {
   title: string;
   badge?: string;
   asset?: string | null;
+  /** A transparent `img:` picture drawn free, full width, with no tile around it. */
+  art?: string;
   frames?: number;
 }
 
@@ -12356,6 +12390,11 @@ export interface VideoSpec {
      *  the video rather than a footnote beside it — the title then reads as a lead-in to
      *  it, and the swap block on the right carries only the destination. */
     titleStruck?: string;
+    /** A PICTURE drawn free on the right: an `img:` asset at full size, no crop, no rounded
+     *  tile, no shadow box (owner, 2026-09-12: *"I dont want the component to be covered or
+     *  put within a rounded rectangle container ... i want it to flow free"*). Author it as a
+     *  transparent PNG; the title column narrows to make room. `asset` stays the fallback. */
+    art?: string;
   };
   scenes: Scene[];
 }

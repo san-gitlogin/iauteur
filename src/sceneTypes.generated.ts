@@ -35,6 +35,7 @@ export type SceneTypeName =
   | 'MCP_MENTION'
   | 'MCP_URI'
   | 'APPLE_STAGE'
+  | 'MEM_STAGE'
   | 'ALLURE_STAGE'
   | 'MCP_LOOP'
   | 'MCP_SCHEMA'
@@ -840,6 +841,20 @@ export type McpUriScene = SceneCommon<'MCP_URI'> & { data: {
 
 export type AppleStageScene = SceneCommon<'APPLE_STAGE'> & { data: {
     appleStage: {
+      headline: string;
+      kind: string;
+      cells?: Array<Record<string, unknown>>;
+      vars?: Array<Record<string, unknown>>;
+      caption?: string;
+      premise?: string;
+      token?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type MemStageScene = SceneCommon<'MEM_STAGE'> & { data: {
+    memStage: {
       headline: string;
       kind: string;
       cells?: Array<Record<string, unknown>>;
@@ -5578,6 +5593,7 @@ export interface SceneByType {
   MCP_MENTION: McpMentionScene;
   MCP_URI: McpUriScene;
   APPLE_STAGE: AppleStageScene;
+  MEM_STAGE: MemStageScene;
   ALLURE_STAGE: AllureStageScene;
   MCP_LOOP: McpLoopScene;
   MCP_SCHEMA: McpSchemaScene;
@@ -5950,6 +5966,7 @@ export type TypedScene =
   | McpMentionScene
   | McpUriScene
   | AppleStageScene
+  | MemStageScene
   | AllureStageScene
   | McpLoopScene
   | McpSchemaScene

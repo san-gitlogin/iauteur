@@ -216,7 +216,14 @@ const CORRECTIONS = [
          fs.existsSync('scripts/test-rec-zoomres.mjs')],
   ['the browser surface capturing at exactly the delivery size', 'STRUCT',
    '"why do I see the browser window cut" / a camera move on a 1920 master is an upscale, not a supersample',
-   () => has('scripts/lib/record/browser.mjs', 'deviceScaleFactor \\?\\? 4') &&
+   // MOVED, NOT REMOVED (2026-09-11): the default went from 4 to 2.4 in 3de7c90, measured:
+   // 2.9 captured fps at dsf 4 against 7.7 at 2.4, and 2.4 still gives a 3840 master, 2x the
+   // delivery width. The literal `?? 4` stopped matching; the guard is about the FACTOR, so it
+   // now requires a default of 2 or more (never the delivery size itself, which is dsf 1.2).
+   () => (() => {
+     const m = fs.readFileSync('scripts/lib/record/browser.mjs', 'utf8').match(/deviceScaleFactor \?\? ([0-9.]+)/);
+     return !!m && Number(m[1]) >= 2;
+   })() &&
          has('scripts/lib/record/browser.mjs', 'force-device-scale-factor') &&
          has('scripts/lib/record/browser.mjs', 'CHROME SILENTLY CAPS THE FACTOR AT 2')],
   ['the encoder throwing away the pixels a zoom needs', 'STRUCT',

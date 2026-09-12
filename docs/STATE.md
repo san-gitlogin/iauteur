@@ -111,6 +111,164 @@ node --input-type=module -e "import {MANIFEST_TYPES} from './scripts/lib/manifes
 
 ## Recent work
 
+### 2026-09-11 — FluidRAM, read and tested (38 scenes) · `MEM_STAGE`, 25 new pictures
+
+`topics/fluidram-tested` is a fair expert review of Aditya Raj's FluidRAM and the AdiOS project it
+grew out of. Only the author and his two repositories are credited, per the owner's instruction. The
+research lives in `briefs/fluidram/00-dossier.md`: every sentence the video says is traced to a file
+and line in the author's repos, to a primary source (zram in Linux v6.6, QEMU's XBZRLE, madvise(2)),
+or to a measurement we ran. The builders are `briefs/fluidram/build_long.mjs` and `build_short.mjs`;
+the footage is `demos/fluidram-repos.json`, 15 commit-pinned GitHub `#L` views.
+
+**The measurement.** The author's `fluid_galois.c` was compiled unmodified in userspace, beside LZ4 and
+zstd, over the same 4 KB pages:
+- It reproduces the author's own 9.45× on his synthetic sparse pages.
+- On memory from a running browser it lands at 0.95×, and from a Python program at 0.51×, once each
+  page is charged at its kmalloc size class.
+- 0 mismatches across 151,334 pages: the encoder is correct.
+- The scatter decode is 159 ns, faster than LZ4. The per-read CRC is the cost.
+
+**One scene type, 25 pictures.** `MEM_STAGE` → `src/memViz.tsx` (registry) + `memVizKit.tsx` (the
+design-px canvas: the viewBox IS the pane's inner box, so type set at 20 is 20px × scale in both
+aspects) + `memVizA.tsx` / `memVizB.tsx` (the kinds). It is wired into all 8 touchpoints plus
+`check-viz-kinds`. Every kind is an object, not a card, for example:
+- host-guest, a whole OS inside one program window
+- page-wall
+- sparse-encode, where zeros vanish and survivors fly out as 3-byte tuples
+- chart-literals, strings tied from a chart's bar to the literal that drew it
+- slab-buckets, kmalloc cups
+- abba-lock
+- fault-path, where the error stops in reclaim
+
+The lint block has per-kind ceilings.
+
+**Three things this cut paid for:**
+1. **A second clip in a recorded beat needs a `pivot`.** anchor-spec plans at 12 frames a word and
+   places clip 2 wherever clip 1's slack runs out. That left five beats with *"0 word(s) of script
+   after its footage ends"*. The builder's `rec()` now pins each later clip to the phrase that turns
+   to it, via a clip-level `wantAtWord`, which the solver honours.
+2. **Same-file `#L` jumps don't navigate.** `goto` from `file.c#L134` to `file.c#L65` is a hash change,
+   so GitHub stayed at the top of the file and the mark resolved to the whole 6,480px code block. A
+   dummy query (`?view=mul#L65`) forces a real load. Check every mark's `w×h` after recording, not just
+   the step count.
+3. **A 60% proof never shows the finished picture.** Many anchors sit at 60–70%. The pictures were
+   proofed at 55% AND 95% at both aspects by passing a one-scene spec as `inputProps` to the topic's
+   wide and short compositions. The short composition is otherwise sized from `shorts.json`, so the
+   long cut's pictures can't be seen at 9:16 any other way. This found the hook `figure` variant
+   eating the "4" out of "4×", roadmap labels clipped at the pane edge, the OOM crosshair left aiming
+   at the wrong block, the chart-literals cable running through the code box at 9:16, and the
+   `-ENOMEM` bubble parked over the node label it was pointing at.
+
+4. **The footage-pacing warp (`recWarp`, 2026-09-11 morning) blanked recorded footage.** It first
+   shipped in this cut and was caught by proofing camera frames before rendering. `RecordedStep`
+   had two defects:
+   - It sized each piece's `Sequence` by SOURCE frames. A 0.4x piece therefore stopped after a
+     third of its footage.
+   - It ended the last freeze at `warp.shown`. Everything after that, the READ_TAIL and any gap
+     before the next clip, painted the empty panel.
+
+   Measured on s03: the page vanished from frame 782 until the next clip started at 1172, under a
+   live zoom and callout. The last ~14% of every recorded beat was dark too. The fix is to play
+   each piece for `(to − from) / rate` timeline frames, and to hold the last piece until the clip's
+   full airtime. Everything rendered before recWarp (the Apple series) never had the bug.
+   **Proof tails, not just anchors:** shoot `scene end − 12` for every recorded beat.
+5. **A second clip, or a label spoken twice, beats `retarget-anchors`.** The sync audit found 40 of
+   164 elements landing off their words. Retarget refuses to choose when a label word is spoken
+   twice, and clamps anything named after 70% of the read back to 70%. The builder now snaps each
+   anchor onto the nearest occurrence of its own words, or pins it with `at: '<phrase>'` or
+   `sayAt:` on a callout. Where a word falls past 70%, the sentence is rewritten. Result: 0 drift,
+   every hold ≥ 2.4s.
+
+6. **The owner's review of the first render, and what it changed repo-wide.** The complaint:
+   *"you zoom in at a specific place only, and you are speaking about something which is not in
+   focus"*, and cards *"only sitting at center hiding most of the highlights … stays there constantly
+   until next scene comes"*. Plus a visible jump in two picture scenes. Six changes:
+   - **Entrance transitions release their transform.** `SceneTransition` left `scale(1)` / `blur(0)`
+     set after a `zoom` / `morph` entrance, and SVG pictures behind it re-scaled on later frames.
+     Measured: 282 of 310 settled frames changed on s18, 301 of 340 on s33, 112 of 112 on the short's
+     codec-bars. A re-render from the scene's first frame reproduced it at 60 of 60, and 0 of 60
+     after the fix. The transform and filter are now dropped once the entrance has finished.
+     **Measure settled frames with `tblend` before shipping a cut**; a still cannot see a flicker.
+   - **The camera follows the voice.** A recorded beat now scripts its moves by the exact phrase
+     that names what they frame. A move frames one mark or a block (the union of its first and last
+     line marks), `band: true` lays a quiet highlight on it while the camera is there, and `'full'`
+     pulls back when the sentence leaves the page. No callout labels and no caption card on these
+     beats.
+   - **`scripts/check-camera.mjs` gates it**, and `render-topic` runs it. Every zoom's framed text is
+     read from the take (`marks[*].covers`), and at least one of its words must be spoken within ±7
+     words of the move.
+   - **Cards:** an empty card is never drawn; a caption-only card leaves after ~4 s instead of
+     lingering to the next step; a card takes the edge opposite the camera's current target.
+   - **A page load is a cut.** The browser runner starts a `goto` step's segment after the page has
+     settled, so a clip opens on its `#L` lines instead of painting the top of the file and jumping.
+     Scrolls keep their motion; `cut` on a step overrides either way.
+   - **A page mark is found the way a reader finds it.** The browser-surface resolver in
+     `runner.mjs` used to take the smallest element whose own text held the needle. That refused a
+     phrase split across inline tags, a phrase wrapped onto two lines, and (by cutting the on-screen
+     text to 160 characters before comparing) any phrase late in a long paragraph. It now reads the
+     page's whole text with whitespace collapsed and block boundaries kept, builds a Range for EVERY
+     copy of the needle, and takes the first copy that is wholly inside the viewport and not painted
+     over (GitHub's sticky header covers the top lines of a file). When no copy qualifies, the error
+     names each copy's fate: scrolled away, cut by the edge, painted over by `<element>`. Selector
+     marks outside the viewport are refused too. `copy: n` on a mark picks the nth visible copy (the
+     claims table says "0 killed" in two columns of one row) and is refused if that copy is absent.
+   - **The camera lands on its word, and three bugs were stopping it.** Found when `check-camera`
+     flagged 4 of 23 moves on the re-take, and every one of them traced to the solver, not the plan:
+     (1) `planWarp` read a one-entry motion map `[0]` (a page that loaded before its segment began)
+     as "no map", slowed the still picture to 0.4x and reported it settling at frame 90 of 36 — so
+     every move asked for in a clip's first three seconds was refused; (2) a refused move fell to
+     the EVEN SPREAD rather than the earliest legal word, landing 11-20 words late; (3) an authored
+     pull-back was ignored and pinned to 80% of the read, so the camera held a line the voice had
+     left. A request is now clamped into its legal window, releases included (MIN_DWELL still
+     drops one that would leave too soon). `check-camera` lets a move LEAD its words by up to 10
+     and TRAIL by 7, and maps spoken units to the screen's abbreviations (gigabyte ↔ GB).
+   - **A scroll arrives on time.** `smoothWheel` slept `dur/steps` after each wheel event and never
+     counted the event itself (~25ms on a heavy page at scale 2.4), so a "1.6s" glide took 4.3s and
+     the voice named the table's rows while the page was still moving. The curve now runs on the
+     wall clock. `test-rec-anchors` fails one BASE check at HEAD too — pre-existing, not this change.
+   - **A band covers whole lines; the camera frames whole lines.** Stills of every move showed a
+     band slicing `che|ck_crc`, a frame reading "dRAM: Linux Memory…", table cells cut mid-word —
+     because a band drawn round the UNION of two single-line marks cannot know about the lines
+     between them, and a frame sized to the matched words crops the rest of the sentence. The
+     recorder (the only stage with a DOM) now measures both: a SPAN mark
+     (`{"text": first, "to": last, "toCopy"?: n}`) unions every text line from the start of the
+     first line's block to the end of the last's, keeping lines that start inside the column
+     (long code lines) and dropping cells of columns further right; and every page mark carries a
+     `block` — the whole heading, cell or code line it is read in — which the camera frames while
+     the band stays on the named words. The FluidRAM demo authors its blocks as spans now.
+     Two follow-ups the second set of stills caught: a span is decided PER LINE (GitHub renders
+     each syntax token as its own text node, so a per-token test dropped the tail of a long line),
+     and `windowFor`'s 12% lead is capped at half the window's real slack — on a wide target the
+     window is only ~8% wider, and the fixed lead pushed the target's right end out of frame.
+   - **A clip carries its own credit.** `clips[].sourceNote` wins over the scene's while the clip
+     is on screen: s19 cuts from AdiOS to the FluidRAM repo, and the footer named the wrong repo and
+     licence under the second clip.
+
+7. **Thumbnail art flows free (owner, 2026-09-12).** *"I dont want the component to be covered or
+   put within a rounded rectangle container ... i want it to flow free."* The box was structural:
+   `AssetIcon` crops every `img:` into a rounded square with a shadow — the thumbnail's 300px slot
+   and the Shorts cover both. `thumbnail.art` / `cover.art` (a transparent `img:` PNG) now draw the
+   whole picture at size with no tile; the title column narrows to 50% to make room, and `asset`
+   stays the fallback for every other topic. FluidRAM's art is a DDR5 stick drawn in SVG
+   (`public/assets/fluidram_ram_hero.png`) with 4× MORE MEMORY? over it; the title and SEO now sell
+   the stakes (the RAM crisis) as a QUESTION, since the video tests the claim. Glow in a transparent
+   art PNG must be a blurred copy layer, never a `drop-shadow` filter on a 3D-transformed or
+   gradient-clipped element — those rasterise into stepped rings.
+
+**This machine's npm is broken** (a corrupted `npm-bundled/package.json` inside the Node 24.13.1
+install), which is why `npx` and `npm install` fail here (`npm run <script>` still works). Call CLIs
+directly instead of through npx: `node node_modules/typescript/bin/tsc`,
+`node node_modules/@remotion/cli/remotion-cli.js`. Renders here also need their scratch OFF the
+system drive (it runs ~11 GB free): point `TEMP` and `TMP` at a scratch directory on a roomier
+volume and keep `RENDER_CONCURRENCY` at 2-4. A long render buffers frames before encoding (LAW 12),
+so the scratch volume, not the output size, is what runs out.
+
+**The gate was red at `3de7c90`, and nothing noticed.** `check-corrections` sealed the capture scale
+with the literal `deviceScaleFactor ?? 4`. 3de7c90 lowered the default to a measured 2.4, which still
+gives a 3840 master (2× delivery), so the seal failed on a string, not on a regression. It now parses
+the default and requires ≥ 2, which is the guard's actual intent: the master is never the delivery
+size itself. Run the whole `gate` before pushing, not just the checks for the files you touched.
+
 ### 2026-09-05 — GPT-6 Astra review (56 scenes, 18:43) · sharp footage, at last
 
 `topics/gpt-6-astra` — an honest review of OpenAI's GPT-6 Astra built entirely from primary

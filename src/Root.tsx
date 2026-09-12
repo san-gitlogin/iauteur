@@ -84,7 +84,7 @@ export const RemotionRoot: React.FC = () => {
                 fps={30}
                 width={1280}
                 height={720}
-                defaultProps={{themeName: darkTheme, title: long.thumbnail.title, badge: long.thumbnail.badge, asset: long.thumbnail.asset, logo: long.brand?.logo, logos: long.thumbnail.logos, logoTint: long.thumbnail.logoTint, note: long.thumbnail.note, replaces: long.thumbnail.replaces, titleStruck: long.thumbnail.titleStruck}}
+                defaultProps={{themeName: darkTheme, title: long.thumbnail.title, badge: long.thumbnail.badge, asset: long.thumbnail.asset, logo: long.brand?.logo, logos: long.thumbnail.logos, logoTint: long.thumbnail.logoTint, note: long.thumbnail.note, replaces: long.thumbnail.replaces, titleStruck: long.thumbnail.titleStruck, art: long.thumbnail.art}}
               />
             ) : null}
             {shorts?.cover ? (
@@ -95,7 +95,7 @@ export const RemotionRoot: React.FC = () => {
                 fps={30}
                 width={1080}
                 height={1920}
-                defaultProps={{themeName: shortsDark, title: shorts.cover.title, badge: shorts.cover.badge ?? '', asset: shorts.cover.asset ?? 'lucide:sparkles', logo: shorts.brand?.logo}}
+                defaultProps={{themeName: shortsDark, title: shorts.cover.title, badge: shorts.cover.badge ?? '', asset: shorts.cover.asset ?? 'lucide:sparkles', logo: shorts.brand?.logo, art: shorts.cover.art}}
               />
             ) : null}
           </React.Fragment>

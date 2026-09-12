@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Img, staticFile, useVideoConfig} from 'remotion';
 import {ThemeProvider, useTheme} from './themes';
 import {Background} from './Background';
 import {AssetIcon} from './AssetIcon';
@@ -44,7 +44,11 @@ export const CoverCard: React.FC<{cover: CoverConfig}> = ({cover}) => {
             {cover.badge}
           </div>
         ) : null}
-        {cover.asset ? <AssetIcon asset={cover.asset} size={(vertical ? 240 : 200) * scale} /> : null}
+        {/* `art` is drawn free at full width — no rounded tile (owner, 2026-09-12) */}
+        {cover.art ? (
+          <Img src={staticFile('assets/' + cover.art.replace(/^img:/, ''))}
+            style={{width: '100%', height: 'auto'}} />
+        ) : cover.asset ? <AssetIcon asset={cover.asset} size={(vertical ? 240 : 200) * scale} /> : null}
         <div
           style={{
             fontFamily: t.fonts.display,
@@ -81,9 +85,10 @@ export const ThemedCover: React.FC<{
   badge: string;
   asset: string;
   logo?: string;
-}> = ({themeName, title, badge, asset, logo}) => (
+  art?: string;
+}> = ({themeName, title, badge, asset, logo, art}) => (
   <ThemeProvider themeName={themeName}>
-    <CoverCard cover={{title, badge, asset}} />
+    <CoverCard cover={{title, badge, asset, art}} />
     {logo ? (
       <div style={{position: 'absolute', top: 48, left: 44, opacity: 0.9}}>
         <AssetIcon asset={logo} size={104} bare />

@@ -93,6 +93,10 @@ if (variant !== 'thumb' && variant !== 'cover') {
     // Every other gate checks WHEN a thing lands, never WHETHER it is the thing being
     // discussed, so this shipped repeatedly while lint, sync and holds were all green.
     execSync(`node scripts/check-narration-visual.mjs --spec ${specPath}`, {stdio: 'inherit'});
+    // MAY THE CAMERA GO THERE? Only onto text the voice is saying (owner, 2026-09-11:
+    // "you zoom in at a specific place only, and you are speaking about something which is
+    // not in focus"). scripts/check-camera.mjs reads every zoom's framed text from the take.
+    execSync(`node scripts/check-camera.mjs --spec ${specPath}`, {stdio: 'inherit'});
     // Same question, for the voice: are this cut's anchors real word times or estimates?
     execSync(`node scripts/check-sync.mjs --quiet --slug ${slug}`, {stdio: 'inherit'});
   } catch {

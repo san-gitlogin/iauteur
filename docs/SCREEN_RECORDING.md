@@ -610,6 +610,23 @@ silently corrupting what a recording claimed to be true.
     is brittle where the words are not. The VS Code rows still match first and keep
     "last match wins"; only when there are none does it fall back to the document, taking the
     SMALLEST element whose own text carries the needle so the range stays tight to the phrase.
+    *(Superseded by 77 — the smallest-element rule could not see a phrase said twice, split
+    across tags, or wrapped.)*
+
+77. **A PAGE MARK IS FOUND THE WAY A READER FINDS IT, AND IT MEASURES THE LINES AROUND IT**
+    (2026-09-11, FluidRAM). Owner: *"Our recording mechanism must be robust … adaptive,
+    universal, and must handle any types of requirements."* The browser resolver now reads the
+    page's whole text, whitespace collapsed as rendered and block boundaries kept, builds a Range
+    for EVERY copy of the needle, and takes the first copy wholly inside the viewport and not
+    painted over; a refusal names each copy's fate. Authoring surface for a page mark:
+    - `{"id", "text"}` — one phrase. Also records `block`: the whole heading, table cell or code
+      line it is read in, which the camera frames so the sentence is never cropped.
+    - `"copy": n` — the nth VISIBLE copy, when a row says the same thing in two columns.
+    - `"to": "<last line>"` (+ `"toCopy": n`) — a SPAN: every text line from the start of the
+      first line's block to the end of the last's. Use it for any block of code or rows; a
+      union of two single-line marks cannot know about the lines between and slices them.
+    A band (`zooms[].band`) is drawn on the mark's own rectangle — tight on a phrase, whole
+    lines on a span.
 
 ### THE SETTINGS RECIPE (solved 2026-08-26 — this is the load-bearing trick)
 

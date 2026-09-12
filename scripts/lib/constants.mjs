@@ -228,6 +228,7 @@ export const TYPES = [
   'MCP_LOOP',
   'ALLURE_STAGE',
   'APPLE_STAGE',
+  'MEM_STAGE',
   'MCP_URI',
   'MCP_MENTION',
   'MCP_SAMPLING',
