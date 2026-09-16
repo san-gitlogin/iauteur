@@ -41,18 +41,19 @@ const rec = (defTake) => (transition, bg, narration, source, clips) =>
   }));
 
 const gh = rec('archify-gh');
+const setup = rec('archify-setup');
 const live = rec('archify-live');
 const verify = rec('archify-verify');
 const art = rec('archify-artifact');
 
 // ── 1 · HOOK ─────────────────────────────────────────────────────────────────────────
 c.add('HOOK', 'dip', 'zoneA',
-  "Archify turns one sentence into a system map you can actually explore.",
+  "Archify turns one prompt into a system map you can actually explore.",
   (A) => ({
     headline: 'Archify: your system, drawn',
     subtext: 'The agent skill architects have been waiting for',
-    heroAsset: 'lucide:workflow',
-    hookVariant: 'ask',
+    heroAsset: 'img:archify_map_hero.png',
+    hookVariant: 'reveal',
     atWord: A(0.5),
   }));
 
@@ -68,6 +69,8 @@ c.add('TITLE_CARD', 'fade', 'zoneA',
   }));
 
 // ═══ I · WHAT IT IS ═══════════════════════════════════════════════════════════════════
+// The repository page and its two tables, one beat: short browser clips share a scene comfortably,
+// and it keeps RECORDED_STEP under the over-reliance cap now the live run needs three beats.
 gh('letterbox', 'zoneB',
   "So, what is Archify? This is its page on GitHub, and the description is refreshingly plain: an agent skill for " +
   "architecture, workflow, sequence, data-flow and lifecycle diagrams. Read the line under the title and you get " +
@@ -76,7 +79,14 @@ gh('letterbox', 'zoneB',
   "trusting it. Installing Archify is one line, and that's the entire setup: no service to sign up for, no server " +
   "to run. Scroll to the installation table and you'll see where the skill lands for each agent. For Claude Code " +
   "it's a skills folder, either in your home directory or inside the project itself, and I'll use the project, " +
-  "because a skill that travels with the repository is a skill your teammates get for free.",
+  "because a skill that travels with the repository is a skill your teammates get for free. " +
+  "Before we run anything, two more tables are worth your attention. The first one tells you which diagram to ask " +
+  "for: architecture for components and boundaries, workflow for approvals and runbooks, sequence for one " +
+  "interaction over time, data flow for pipelines and sensitivity, lifecycle for states and retries. Pick the wrong " +
+  "one and you'll fight the layout all afternoon. The second table is the part most diagram tools never give you: " +
+  "everything the reader can do once the map exists — find a node, trace what reaches it, probe a route between " +
+  "two things, compare roles. Keep that second table in mind, because we'll use those exact controls on our own " +
+  "map in a few minutes.",
   ARCHIFY,
   [
     {step: 'repo', label: 'the repository', camera: [
@@ -91,23 +101,10 @@ gh('letterbox', 'zoneB',
     {step: 'installs', pivot: 'Scroll to the installation table', label: 'the installation table', camera: [
       {at: 'For Claude Code', frame: 'cc', band: true},
       {at: 'because a skill that travels', frame: 'full'}]},
-  ]);
-
-gh('fade', 'zoneA',
-  "Before we run anything, two tables are worth your attention. The first one tells you which diagram to ask for: " +
-  "architecture for components and boundaries, workflow for approvals and runbooks, sequence for one interaction " +
-  "over time, data flow for pipelines and sensitivity, lifecycle for states and retries. Pick the wrong one and " +
-  "you'll fight the layout all afternoon. The second table is the part most diagram tools never give you: " +
-  "everything the reader can do once the map exists — find a node, trace what reaches it, probe a route between " +
-  "two things, compare roles.",
-  ARCHIFY,
-  [
-    {step: 'types', label: 'five diagram types', camera: [
-      {at: 'which diagram to ask for', frame: 'table', band: true},
+    {step: 'types', pivot: 'Before we run anything', label: 'two more tables', camera: [
+      {at: 'which diagram to ask', frame: 'table', band: true},
       {at: 'Pick the wrong one', frame: 'full'}]},
-    {step: 'keys', pivot: 'The second table', label: 'the second table', camera: [
-      {at: 'find a node, trace what reaches it', frame: 'controls', band: true},
-      {at: 'compare roles', frame: 'full'}]},
+    {step: 'keys', pivot: 'The second table', label: 'the second table'},
   ]);
 
 // The mechanism, drawn: this is what the next ten minutes actually does.
@@ -136,53 +133,99 @@ c.add('CHAPTER', 'push', 'zoneA',
     atWord: A(0.4),
   }));
 
-live('letterbox', 'zoneB',
-  "This is the repository we're going to map: iauteur, the open-source project that renders the videos on this " +
-  "channel. Nobody has ever drawn its architecture, including me. And here's the skill sitting inside that " +
-  "project, in a dot-claude folder: there's a SKILL.md, which is the instruction file the agent reads, and a " +
-  "schemas folder, which is what makes the checking possible.",
-  IAUTEUR,
+setup('letterbox', 'zoneB',
+  "As you can see, we've already cloned the iauteur repository from GitHub, and it's sitting right here in our " +
+  "workspace. iauteur is the open-source project that renders the videos on this channel, and nobody has ever " +
+  "drawn its architecture, including me. You can see its name at the top of package.json. Down here is a " +
+  "terminal, and I'll give it the whole screen, because Claude Code is going to need all the room it can get. " +
+  "Archify is already installed in this workspace, in a dot-claude skills folder, and listing that folder shows " +
+  "you everything the agent gets. There's a SKILL.md, which is the instruction file the agent reads, and a schemas " +
+  "folder, which is what makes the checking possible. Put that folder inside your own repository and commit it, " +
+  "and everyone who clones the project gets the same skill and the same checks, without installing a thing. " +
+  "That's the project option from the installation table we just looked at.",
+  LOCALDEV,
   [
-    {step: 'target', take: 'archify-gh', pivot: 'This is the repository', label: 'the repository', source: IAUTEUR, camera: [
-      {at: 'iauteur, the open-source project', frame: 'name', band: true},
-      {at: 'Nobody has ever drawn', frame: 'full'}]},
-    {step: 'skill', pivot: "And here's the skill sitting", label: 'the skill, in the project', source: LOCALDEV, camera: [
-      {at: "there's a SKILL.md", frame: 'skillmd', band: true},
-      {at: 'and a schemas', frame: 'schemas', band: true}]},
+    {step: 'repo', pivot: 'As you can see', label: 'iauteur, already cloned', camera: [
+      {at: 'its name at the top of package.json', frame: 'name', band: true}]},
+    {step: 'max', pivot: 'Down here is a terminal', label: 'a terminal'},
+    {step: 'skill', pivot: 'Archify is already installed', label: 'Archify, installed here', camera: [
+      {at: "There's a SKILL.md", frame: 'skillmd', band: true},
+      {at: 'and a schemas folder', frame: 'schemas', band: true}]},
+  ]);
+
+// The prompt below is read off the take itself (demos/archify-live.json) — the narration may only
+// describe what that prompt asks for. See briefs/archify/00-dossier.md, THE PROMPT IS THE SPEC.
+live('fade', 'zoneB',
+  "Now let's ask Claude Code to use Archify and give us architectural insights for this project. Watch the prompt " +
+  "as it goes in, because the prompt is the specification. It names the skill, the repository and the question: " +
+  "how a topic spec becomes a rendered video. It sets a budget, at most twelve nodes with one primary path, and " +
+  "it asks for three guided views. Then it lists the files that count as evidence: the README, Root dot tsx, and " +
+  "five scripts from the pipeline. It says exactly what to hand back, too — write the JSON, validate it at " +
+  "showcase quality, deliver the HTML — and it ends by asking for three short insights a system architect would " +
+  "care about. Every one of those constraints shapes what comes back, so it's worth reading them slowly. A vague " +
+  "prompt gives you a vague diagram, every single time. If you design systems for a living, you can do " +
+  "exactly the same with your own codebase: swap in your repository, your question and your own evidence files.",
+  LOCALDEV,
+  [
+    {step: 'prompt', pivot: "Now let's ask Claude Code", label: 'asking Claude Code'},
+  ]);
+
+// Jump cuts from the one recorded run (scripts/split-rec-step.mjs). 45-62s is left out: Claude
+// Code's weekly-usage warning is on screen there.
+live('fade', 'zoneB',
+  "Claude Code starts by loading the Archify skill, and the first thing the skill tells it to do is read the " +
+  "schema, so the agent knows the exact shape of the file it's allowed to write before it writes anything. Then " +
+  "it goes through the evidence I named: it counts the lines in each file, pulls the section headings out of the " +
+  "README, and reads the top of the linter to learn what a spec has to pass. It even opens Archify's own notes on " +
+  "repository evidence, which is the skill teaching the agent how to be careful with your code. That's the " +
+  "groundwork a careful engineer would do before drawing a single box. " +
+  "I've cut about a minute of thinking out of this next part. Here it writes iauteur dot architecture dot json — " +
+  "watch the file appear in the explorer on the left — and it validates that file straight away. The first " +
+  "attempt fails. Honestly, that's the most useful thing to see in this whole run. The validator doesn't just say " +
+  "no; it reports which check failed, so the agent adjusts a label on one of the connections and runs the check " +
+  "again. It fails again, on a different connection, and the agent fixes that one too, one diagnosed change at a " +
+  "time. It took three rounds of fixes before every check passed. In its own report, it moved two labels, set the " +
+  "connection points on the render-checks edge, and narrowed the canvas so the small text stays readable on a " +
+  "laptop screen. That is a layout review done by a checker, before a person ever looks at the picture. " +
+  "Nothing on that map is drawn by hand: the agent " +
+  "writes a specification, and Archify compiles it and refuses anything that doesn't pass.",
+  LOCALDEV,
+  [
+    {step: 'reading', pivot: 'Claude Code starts by loading', label: 'skill, schema, evidence'},
+    {step: 'write', pivot: "I've cut about a minute", label: 'a minute of thinking, cut'},
   ]);
 
 live('fade', 'zoneB',
-  "Now watch this, because it is the part I want you to take away. I'm asking Claude Code, in plain English, to " +
-  "use the Archify skill on this repository. Notice how specific the request is: map the video pipeline, keep it " +
-  "to ten nodes, show one primary path, and read these particular files as evidence. That specificity is not " +
-  "decoration — it is the specification. A vague prompt gives you a vague diagram, every single time. The agent " +
-  "loads the skill, then reads the schema so it knows the exact shape it is allowed to produce. It writes a typed " +
-  "JSON file describing the system, and then validates that file. Where the checker complains — a label sitting " +
-  "too close to a route, a node that needs more room — the agent repairs it and validates again, and keeps going " +
-  "until every check passes. Nothing here is drawn by hand. The agent writes a specification, and Archify " +
-  "compiles it. And that difference is why this scales past a whiteboard: the map is derived from the source, so " +
-  "when the code moves, you run the same sentence again and get a map that matches.",
-  null,
+  "When the checks finally pass, it delivers the HTML and reports back in plain language: eleven nodes, ten " +
+  "connections, three summary cards, and a SHA-256 hash for both files, so you know exactly which bytes were " +
+  "checked. It's upfront about what it didn't do, as well — it skipped the visual check because I told it to, " +
+  "and it says so rather than pretending. Then come the insights, and this is where the tool earns its keep. One: " +
+  "the spec is shared state — two scripts rewrite that file in place, and only a lock file stops them clashing. " +
+  "Two: the safety checks live in a single script, so anyone who calls Remotion directly skips every one of them. " +
+  "Three: timing comes from recorded audio and captures rather than estimates, which is great for accuracy, and " +
+  "it means reproducibility depends on keeping those files stable. That's a useful architecture review of this " +
+  "project, from one prompt.",
+  LOCALDEV,
   [
-    {step: 'ask', pivot: 'Now watch this', label: 'one sentence to the agent'},
+    {step: 'result', pivot: 'When the checks finally pass', label: 'the report and insights'},
   ]);
 
-// The artefact the team reviews — real lines from the file the agent wrote.
+// The artefact the team reviews — lines 65-77 of the file the agent wrote on camera.
 c.add('CODE_WINDOW', 'fade', 'zoneB',
-  "This is what it wrote. Each node is a few fields: a stable id, a type, the label you see on the map, and where " +
-  "it sits. That's the whole trick — your architecture becomes lines you can read in a pull request, diff against " +
-  "last month, and argue about properly.",
+  "This is what it wrote. Each node is a few fields: a stable id, a type, the label you see on the map, a " +
+  "short note under it, and where it sits. That's the whole trick — your architecture becomes lines you can read " +
+  "in a pull request and diff against last month.",
   (A) => ({
-    filename: 'pipeline.architecture.json',
+    filename: 'iauteur.architecture.json',
     language: 'json',
     lines: [
-      {text: '{ "id": "spec", "type": "edge",'},
-      {text: '  "label": "Topic Spec",'},
-      {text: '  "sub": "long.json · shorts.json" },'},
-      {text: '{ "id": "bake", "type": "backend",'},
-      {text: '  "label": "bake-rec.mjs" },'},
-      {text: '{ "id": "voice", "type": "backend",'},
-      {text: '  "label": "voiceover.py" }'},
+      {text: '{ "id": "bake",'},
+      {text: '  "type": "backend",'},
+      {text: '  "label": "bake-rec.mjs",'},
+      {text: '  "sublabel": "resolve rec: refs",'},
+      {text: '  "tag": "read-back only",'},
+      {text: '  "pos": [240, 120],'},
+      {text: '  "size": [160, 70] },'},
     ],
     runLabel: 'the typed source',
     atWord: A(0.3),
@@ -194,8 +237,8 @@ verify('iris', 'zoneB',
   "and zero warnings. That is the whole argument for this tool. A map that fails its checks never replaces the good " +
   "one on disk, so you cannot accidentally ship a broken diagram. And the source itself stays readable, which " +
   "is the part your reviewers care about, because a map nobody can check is just a picture with confidence. " +
-  "Look at the names it chose: here's bake-rec, and here's voiceover — the same steps that turn a script into " +
-  "the video you are watching right now.",
+  "Look at the names it chose: here's bake-rec, and here's lint-spec — the step that bakes recordings into a " +
+  "spec, and the linter that refuses a bad one.",
   null,
   [
     {step: 'files', label: 'what it produced', camera: [
@@ -205,7 +248,7 @@ verify('iris', 'zoneB',
       {at: 'nine artifact checks', frame: 'checks', band: true},
       {at: 'That is the whole argument', frame: 'full'}]},
     {step: 'ir', pivot: 'And the source itself stays readable', label: 'the typed source', camera: [
-      {at: 'Look at the names it chose', frame: ['bake', 'voice'], band: true}]},
+      {at: 'Look at the names it chose', frame: ['bake', 'lint'], band: true}]},
   ]);
 
 c.add('STAT_PANELS', 'fade', 'zoneA',
@@ -232,32 +275,33 @@ c.add('CHAPTER', 'push', 'zoneA',
   }));
 
 art('letterbox', 'zoneB',
-  "There it is — our pipeline, drawn from our own source. A topic spec goes in on the left, and a rendered video " +
-  "comes out on the right. Look at the panel on the side: the agent also authored guided views, small chapters " +
+  "There it is — our pipeline, drawn from our own source. A topic spec goes in, and the primary path " +
+  "carries it all the way to a rendered video. Look at the panel on the side: the three guided views I asked for, small chapters " +
   "through the system, so a newcomer can be walked through it instead of being handed a wall of boxes. Press the " +
-  "slash key and you get a node finder. I'll type sync, hit enter, and the map jumps straight to the sync " +
-  "step and shows you exactly what it connects to. That sounds small until you're staring at somebody else's platform diagram with " +
-  "sixty components on it, hunting for the one service you were paged about at two in the morning. And here is " +
+  "slash key and you get a node finder. I'll type sync dot mjs, hit enter, and Archify jumps to that node, lights it up, and opens its " +
+  "passport: what it reaches upstream, and what it reaches downstream. That sounds small until you're staring at somebody else's platform diagram with " +
+  "sixty components on it, hunting for the one service you were paged about. And here is " +
   "the part I trust: every relationship you can trace was written by the agent into that typed source — the " +
   "viewer never invents a connection to make the picture tidier. Play the story and those chapters run in order, " +
-  "chapter one, spec preparation, with the diagram itself moving rather than a slide sitting beside it. Exports " +
+  "chapter one, the primary render path, with the diagram itself moving rather than a slide sitting beside it. Exports " +
   "are the last piece: a share card sized for a README or a release post, the full diagram as a picture for " +
-  "people who will never open the HTML, and one key that flips the whole thing to a light theme, which matters " +
-  "more than it should when your deck is white. And every export carries the whole diagram, not the part you " +
-  "happened to be looking at when you pressed the key.",
+  "people who will never open the HTML, and one key that flips the whole thing to a light theme. " +
+  "And every export carries the whole diagram, not the part you " +
+  "happened to be looking at when you pressed the key. That is the whole system, in one file, wherever you " +
+  "choose to send it.",
   LOCAL,
   [
     {step: 'map', pivot: 'There it is', label: 'the generated map', camera: [
       {at: 'A topic spec goes in', frame: 'spec', band: true},
-      {at: 'comes out on the right', frame: 'render', band: true}]},
+      {at: 'all the way to a rendered video', frame: 'render', band: true}]},
     {step: 'chapters', pivot: 'Look at the panel on the side', label: 'the panel on the side', camera: [
-      {at: 'the agent also authored guided views', frame: 'views', band: true},
+      {at: 'the three guided views I asked for', frame: 'views', band: true},
       {at: 'instead of being handed', frame: 'full'}]},
-    {step: 'findtype', pivot: "I'll type sync", label: 'type a name'},
-    {step: 'findhit', pivot: 'and the map jumps straight', label: 'straight to that node', camera: [
-      {at: 'to the sync step', frame: 'sync', band: true}]},
+    {step: 'findtype', pivot: "I'll type sync dot mjs", label: 'type a name'},
+    {step: 'findhit', pivot: 'hit enter, and Archify jumps', label: 'straight to that node', camera: [
+      {at: 'lights it up', frame: 'node'}]},
     {step: 'storygo', pivot: 'Play the story', label: 'play the story'},
-    {step: 'story', pivot: 'chapter one, spec preparation', label: 'the story plays', camera: [
+    {step: 'story', pivot: 'chapter one, the primary render path', label: 'the story plays', camera: [
       {at: 'with the diagram itself moving', frame: 'ch1', band: true}]},
     {step: 'export', pivot: 'Exports are the last piece', label: 'canonical exports', camera: [
       {at: 'a share card sized for a', frame: 'share', band: true},

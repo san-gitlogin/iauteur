@@ -10,7 +10,7 @@
   "masterWidth": 3840,
   "deviceScaleFactor": 2.4,
   "prep": {
-    "url": "file:///C:/iauteur-rec/archify-live/iauteur-pipeline.architecture.html",
+    "url": "file:///C:/iauteur-rec/archify-live/iauteur.architecture.html",
     "settleMs": 3500
   },
   "steps": [
@@ -22,15 +22,15 @@
       "marks": [
         {
           "id": "title",
-          "text": "iAuteur — Topic Spec to Rendered Video"
+          "text": "iAuteur: Topic Spec to Rendered Video"
         },
         {
           "id": "spec",
-          "text": "Topic Spec"
+          "text": "Topic spec"
         },
         {
           "id": "render",
-          "text": "Remotion render"
+          "text": "Rendered video"
         }
       ]
     },
@@ -43,7 +43,7 @@
         {
           "id": "views",
           "text": "Guided views",
-          "to": "Remotion render"
+          "to": "Voice and footage baking"
         }
       ]
     },
@@ -57,7 +57,7 @@
     {
       "id": "findtype",
       "action": "type",
-      "text": "sync",
+      "text": "sync.mjs",
       "label": "type a name",
       "settleMs": 1400
     },
@@ -75,8 +75,9 @@
       "label": "straight to the node",
       "marks": [
         {
-          "id": "sync",
-          "text": "sync.mjs"
+          "id": "node",
+          "text": "sync.mjs",
+          "to": "retime from real audio"
         }
       ]
     },
@@ -89,7 +90,7 @@
     {
       "id": "storygo",
       "action": "click",
-      "target": "text=Spec preparation",
+      "target": "text=Primary render path",
       "label": "pick a chapter",
       "settleMs": 1200
     },
@@ -112,7 +113,7 @@
         },
         {
           "id": "ch1",
-          "text": "Spec preparation"
+          "text": "Primary render path"
         }
       ]
     },

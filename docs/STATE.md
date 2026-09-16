@@ -9,6 +9,40 @@ the same commit — that is what makes the next session on a different machine c
 
 ---
 
+## 2026-09-16 — Archify, second pass: the live run re-shot, and two review defects
+
+The owner's review of the shipped cut: *"I absolutely like the way how this video begins, and slowly
+walks through the git repository, explains, then demos beautiful work, which needs to be the same for
+future projects too."* That shape — repo first, then explanation, then a live demonstration — is the
+standing one for iauteur videos now.
+
+What was wrong with the first cut, and what changed:
+- **The run never showed how the JSON was made.** The take validated a file that already existed, and
+  the narration drifted from the prompt that was on screen. Re-recorded as ONE uninterrupted run
+  (226.7s): the prompt typed in full, the skill loading, the schema and evidence reads, the JSON
+  written, validation FAILING, three repair rounds, delivery, and three architecture insights.
+  `demos/archify-live.json` carries that prompt; `briefs/archify/00-dossier.md` quotes it verbatim.
+- **A long take cannot sit under one beat** — `src/recWarp.mjs` caps playback at 1x. `scripts/split-rec-step.mjs`
+  cuts one recorded step into named pieces (contiguous ranges, no reordering, no speed change), keeps
+  the original step, and archives the pre-split manifest. Only a piece that reaches the original end
+  keeps marks and screenText; the others carry none rather than a stale rectangle.
+- **Claude Code's weekly-usage warning was on screen 55-60s into the run.** The cuts exclude 45-62s
+  entirely. Check the footer of any agent take before choosing cut points.
+- **The clone's own CLAUDE.md and .claude are set aside during a take** and restored after, so the
+  agent does not load this repo's production laws while reading it.
+- **`openFile` learned `typePath`** — a basename is ambiguous in a real repository (four README.md in
+  iauteur) and quick open picks one silently.
+- **STATE OF THE SPEC, 2026-09-16:** the uploaded cut is the render in `topics/archify-live-map/out/`
+  (17,392 frames, 9:40). The spec in the repo is ONE REVISION AHEAD of it: it carries the two review
+  fixes below plus the re-shot artifact take, and it is gate-clean (lint, audit-sync, camera 18/18) —
+  but it has NOT been rendered: the owner had already published the cut and asked for the learnings
+  without a re-render. Re-rendering this topic reproduces the shipped video plus the two fixes; the
+  fixes themselves live in the builder, the demos and the linter, which is what the next video uses.
+- **Two review defects**, both gate-clean when they shipped and both now laws: the camera framed a summary-card bullet
+  instead of the node Archify lit up (the search term was ambiguous too), and the HOOK drew a huge
+  question mark over a headline that asked nothing. `lint-spec.mjs` now rejects `ask` without a
+  question, and the artifact demo marks the focused node as a span.
+
 ## Starting fresh on another machine?
 
 `docs/CONTINUE_HERE.md` holds a paste-ready prompt for a new Claude Code session —

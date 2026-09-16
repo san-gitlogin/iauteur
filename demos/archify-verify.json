@@ -15,25 +15,25 @@
     {
       "id": "files",
       "action": "run",
-      "cmd": "Get-ChildItem iauteur-pipeline.architecture.* -Name",
+      "cmd": "Get-ChildItem iauteur.architecture.* -Name",
       "label": "what the agent produced",
       "focus": "terminal",
       "clearFirst": true,
       "marks": [
         {
           "id": "json",
-          "text": "iauteur-pipeline.architecture.json"
+          "text": "iauteur.architecture.json"
         },
         {
           "id": "html",
-          "text": "iauteur-pipeline.architecture.html"
+          "text": "iauteur.architecture.html"
         }
       ]
     },
     {
       "id": "receipt",
       "action": "run",
-      "cmd": "node .claude/skills/archify/bin/archify.mjs validate architecture iauteur-pipeline.architecture.json --quality showcase",
+      "cmd": "node .claude/skills/archify/bin/archify.mjs validate architecture iauteur.architecture.json --quality showcase",
       "label": "the validation receipt",
       "focus": "terminal",
       "clearFirst": true,
@@ -51,7 +51,7 @@
     {
       "id": "ir",
       "action": "run",
-      "cmd": "Get-Content iauteur-pipeline.architecture.json -TotalCount 18",
+      "cmd": "Get-Content iauteur.architecture.json | Select-Object -Skip 62 -First 30",
       "label": "the typed source the agent wrote",
       "focus": "terminal",
       "clearFirst": true,
@@ -61,8 +61,8 @@
           "text": "bake-rec.mjs"
         },
         {
-          "id": "voice",
-          "text": "voiceover.py"
+          "id": "lint",
+          "text": "lint-spec.mjs"
         }
       ]
     }

@@ -1284,6 +1284,76 @@ viewer meets a half-picture and only sees the rest when a punch-in happens to tr
 vertical cut a recorded clip carries `focus: false` and shows the WHOLE capture; the camera moves
 in afterwards, on the words, if it moves at all.
 
+### Corollary — WHEN THE SOFTWARE ANSWERS, THE CAMERA FRAMES THE SOFTWARE'S ANSWER (owner, 2026-09-16)
+
+Owner, on the Archify cut: *"You do slash and then type sync and hit enter, the archify HTML itself
+highlights the sync related node in the flow, but what you did, you just randomly zoomed into a text
+at the bottom which says sync. This is a pure AI-ish behaviour and I dont like it. When something is
+already being shown and what we must show and speak about to the viewer is not done, instead you are
+speaking nice, but what you display is a random sync text at the bottom."*
+
+Two defects, and every gate passed both — the mark proved what it covered (LAW: A MARK MUST PROVE
+WHAT IT COVERS) and the camera gate proved the word was spoken. Neither can prove the rectangle is
+the one the PRODUCT lit up.
+
+1. **AN AMBIGUOUS SEARCH MAKES THE PRODUCT ANSWER A DIFFERENT QUESTION.** Typing `sync` focused the
+   node whose SUBLABEL reads "recordings · sync · camera", not the `sync.mjs` node the narration
+   named — so the sentence described something the viewer never saw happen. Search for the exact
+   string the sentence names, and confirm what got focused.
+2. **A TEXT NEEDLE IS NOT A TARGET.** `sync.mjs` occurs SIX times in that page: three invisible SVG
+   `<title>` tooltips, the finder's own result row, the node label, and a bullet in a summary card
+   at the bottom of the frame. The resolver takes the first VISIBLE copy in reader order, and that
+   was the card — a rectangle at y=790 of a 900px frame, while the lit node sat at y=508. Mark the
+   node with a SPAN over its own lines (`{text: 'sync.mjs', to: 'retime from real audio'}`), and
+   drop `band: true` there: a second highlight competing with the product's own reads as noise.
+
+**The rule: probe the interaction headlessly BEFORE authoring the beat, and print what changed** —
+which element carries the focus ring, which panel opened, where the lit node actually is. Then frame
+that. `scripts/probe-artifact-ui.mjs` is the tool: it drives the real keys, lists every copy of
+the needle with its rectangle and visibility in reader order, and dumps whatever the page marks
+focused/active/selected.
+
+### Corollary — A VARIANT WITH NOTHING TO SAY READS AS A PLACEHOLDER (owner, 2026-09-16)
+
+Owner, on the same cut: *"I see a big question mark under the first video segment of the video. The
+question mark I see is meant to be a question mark or something else. Needs clarity and correction,
+if it was a placeholder and you missed it."*
+
+`hookVariant: 'ask'` bleeds a huge question mark off the corner, and the manifest says in so many
+words that it NEEDS a question in the headline. Ours read *"Archify: your system, drawn"* — a
+statement — so the glyph had nothing to ask and a viewer reads it as art somebody forgot to replace.
+The same beat set `heroAsset: 'lucide:workflow'`, the generic glyph LAW 0b calls the placeholder,
+never the plan; it opens on the map artwork now, under `reveal`.
+
+**Enforced.** `lint-spec.mjs` already rejected `figure` without a number in the copy and `reveal`
+without a `heroAsset`. `ask` was missing from that guard and is in it now — the guard goes on the
+ARGUMENT (a variant whose copy cannot support it), so when you add a variant, add its condition.
+
+### Corollary — SHOW THE RESULT BEFORE THE METHOD (owner, 2026-09-16) — APPLIES TO EVERY VIDEO
+
+Owner: *"On all our future videos, it would be great if we include a part of the demo at the initial
+stage of the video itself stating something like this is what we obtain as a result or this is what
+we would achieve at the end, which would hook the viewers to see how we achieve this. And it must
+also follow design patterns, animated components, or the live recorded demo (part of it)."*
+
+LAW 0g settles what the opening SAYS (name the subject, then open a loop). This settles what the
+opening SHOWS: **the finished thing, before the method**. A viewer decides in twenty seconds whether
+the next ten minutes are worth it, and the honest way to win that is to show them the end state.
+
+- **Right after the subject is named**, put the payoff on screen: a slice of the live demo — the map
+  being searched, the suite going green, the app doing the thing — or a purpose-built ANIMATED
+  component that draws the end state. Say it plainly: *"this is what we'll have by the end."*
+- **Footage or a component, never a caption.** A title card describing the result is the LAW 0d
+  defect wearing a teaser's clothes. If the demo is recorded, the teaser costs nothing: reference the
+  same `rec:<slug>#<step>` from a second clip and cut three to six seconds of the best moment.
+- **Keep it short and do not explain it.** The teaser answers *is this worth my time*; the body
+  answers *how*. Explaining it here spends the curiosity you just bought.
+- **Then pay it off.** The ending must show the same artefact finished, so the loop visibly closes.
+
+**Enforced.** `lint-spec.mjs`: a long cut that contains recorded footage must place a RECORDED_STEP
+within its first three scenes. A spec with no footage at all is exempt — but it still owes the viewer
+an animated component showing the end state, which no linter can judge for you.
+
 ## LAW 0e-q — A QUIZ WITHOUT A GAP IS NOT A QUIZ (owner, 2026-08-17)
 Owner, on a shipped episode: *"there is no gap at all between you asking the question and the
 answer getting highlighted."* Correct, and it made the quiz beat worthless — a viewer who is never

@@ -21,18 +21,37 @@ the teachable point — the diagram is downstream of the request, the typed JSON
 reviewable artifact, and a vague prompt yields a vague map.
 
 So the narration MUST:
-- put the prompt on screen and read its constraints aloud ("ten nodes, one primary path");
+- put the prompt on screen and read its constraints aloud (at most twelve nodes, one primary path,
+  three guided views, the evidence files, validate then deliver, three insights);
 - say the agent wrote the typed source, and archify compiled and checked it;
-- never imply the map appeared from nothing, and never claim the on-camera run re-read the
-  whole repository. The shipped take shows: check the source against `render-topic.mjs`,
-  validate at showcase quality, deliver with `--json`.
+- describe only what the recorded run performs, and say so when a stretch of thinking is cut;
 - teach the viewer to write the prompt as a spec: scope, node budget, one primary path,
   the files that count as evidence.
 
-## Production facts (what actually happened, for truth-to-footage)
-- The first full mapping run (7 files, 10 nodes) wrote the typed JSON, then the account hit
-  its daily limit mid-run; that take was discarded, and the limit screen must never ship.
-- The shipped agent take is scoped to check + validate + deliver, for cost. The JSON on screen
-  is the agent's own work from the mapping run.
-- Recording surface: VS Code for Web (`code serve-web`) with a real terminal, Claude Code v2.1.269
-  running interactively so the agent's tool calls stream on camera.
+## The prompt on camera (demos/archify-live.json, verbatim)
+Use the archify skill to map the architecture of the iauteur repository in this workspace: how a
+topic spec becomes a rendered video. Keep it to at most 12 nodes with one primary path, and add
+three guided views. Use iauteur/README.md, iauteur/src/Root.tsx and these files in iauteur/scripts
+as evidence: render-topic.mjs, bake-rec.mjs, voiceover.py, sync.mjs and lint-spec.mjs. Write
+iauteur.architecture.json, validate it at showcase quality, then deliver iauteur.architecture.html
+with --json. Skip visual-check. Finish with three short architectural insights for a system architect.
+
+## Production facts (the shipped take, 2026-09-13, for truth-to-footage)
+- One uninterrupted run, recorded whole: 226.7s of footage, Claude Code v2.1.270, "Cogitated for
+  2m 59s". The skill loaded, the agent read the architecture schema, ran wc -l over the evidence,
+  grepped README headings, read the top of lint-spec.mjs and Archify's authoring-contract notes on
+  repository evidence, then wrote the JSON with a heredoc.
+- The first validation returned ok: false; three rounds of fixes followed (two labels moved, ports
+  set on the render-checks edge, canvas narrowed 1640 -> 1380) before deliver passed.
+- Result: 11 nodes, 10 connections, 3 summary cards, 3 guided views (Primary render path,
+  Pre-render gates, Voice and footage baking); spec 5,899 bytes, HTML 813,146 bytes.
+- Insights it gave: the spec is shared mutable state guarded by a lock file; the render gates live
+  only in render-topic.mjs; timing depends on recorded inputs, so reproducibility rests on keeping
+  timestamps and capture manifests stable.
+- The cut uses jump cuts (scripts/split-rec-step.mjs): prompt 0-45s, reading 62-90s, write
+  158-200s, result 200s-end. 45-62s is excluded because Claude Code's weekly-usage warning is on
+  screen there; that warning must never ship.
+- The clone's own CLAUDE.md and .claude were set aside for the take so the agent would not load
+  iauteur's production laws while reading the repository, and restored afterwards.
+- Recording surface: VS Code for Web (code serve-web) with a real terminal, Claude Code running
+  interactively so the agent's tool calls stream on camera.

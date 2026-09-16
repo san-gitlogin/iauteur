@@ -931,7 +931,9 @@ const actions = {
     await sleep(200);
     await palette(page, 'Go to File');
     await sleep(600);
-    await page.keyboard.type(path.basename(step.path), {delay: 45});
+    // A basename is ambiguous in a real repository (four README.md files in iauteur), and
+    // quick open would pick one silently. `typePath` types the relative path instead.
+    await page.keyboard.type(step.typePath ? step.path : path.basename(step.path), {delay: 45});
     await sleep(1100);
     await page.keyboard.press('Enter');
     await sleep(1600);

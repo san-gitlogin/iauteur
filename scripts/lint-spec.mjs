@@ -514,6 +514,28 @@ if (spec.thumbnail && subject) {
         `silhouette renders. Put the figure in the copy, or pick a variant that fits it.`);
     }
   }
+  // THE OPENING SHOWS THE RESULT (owner, 2026-09-16). A long cut that HAS a demo must put a piece
+  // of it in the first three scenes, so the viewer sees what they are working towards before the
+  // method. A spec with no recorded footage is exempt here and owes an animated end-state instead.
+  {
+    const scenes = spec.scenes ?? [];
+    const isShort = (spec.meta?.format ?? 'long') === 'shorts';
+    const rec = scenes.filter((sc) => sc.type === 'RECORDED_STEP');
+    if (!isShort && rec.length && !scenes.slice(0, 3).some((sc) => sc.type === 'RECORDED_STEP')) {
+      E(`the opening never shows the result: this cut has ${rec.length} recorded beat(s) but none in ` +
+        `its first three scenes. Open with a slice of the demo — the end state, before the method — ` +
+        `then earn it (CLAUDE.md: SHOW THE RESULT BEFORE THE METHOD).`);
+    }
+  }
+  if (v === 'ask') {
+    const copy = `${hook.data?.headline ?? ''} ${hook.data?.subtext ?? ''}`;
+    if (!copy.includes('?')) {
+      E(`${hook.id}: hookVariant "ask" bleeds a HUGE QUESTION MARK off the corner, and neither the ` +
+        `headline nor the subtext asks anything — so the glyph reads as a placeholder somebody ` +
+        `forgot to replace (owner, 2026-09-16, the Archify cut). Ask the question in the copy, or ` +
+        `pick a variant that fits it.`);
+    }
+  }
   if (v === 'reveal' && !hook?.data?.heroAsset) {
     E(`${hook.id}: hookVariant "reveal" lands the MARK first and needs a \`heroAsset\` to land ` +
       `— without one the variant is silently discarded (LAW 0b: fetch the topic's art).`);

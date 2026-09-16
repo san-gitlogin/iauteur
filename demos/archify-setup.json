@@ -1,0 +1,52 @@
+{
+  "slug": "archify-setup",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "archify-live",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "steps": [
+    {
+      "id": "repo",
+      "action": "openFile",
+      "path": "iauteur/package.json",
+      "typePath": true,
+      "focus": "window",
+      "label": "iauteur, cloned into the workspace",
+      "marks": [
+        {
+          "id": "name",
+          "text": "\"name\": \"iauteur\""
+        }
+      ]
+    },
+    {
+      "id": "max",
+      "action": "maximizePanel",
+      "label": "a terminal, full height"
+    },
+    {
+      "id": "skill",
+      "action": "run",
+      "cmd": "Get-ChildItem .claude/skills/archify -Name",
+      "label": "the archify skill, installed for Claude Code",
+      "focus": "terminal",
+      "clearFirst": true,
+      "marks": [
+        {
+          "id": "skillmd",
+          "text": "SKILL.md"
+        },
+        {
+          "id": "schemas",
+          "text": "schemas"
+        }
+      ]
+    }
+  ]
+}
