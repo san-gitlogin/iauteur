@@ -1,0 +1,27 @@
+{
+  "slug": "ctxmode-probe",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ctxmode-ws",
+  "viewport": { "width": 1600, "height": 900 },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "maximizePanel": true,
+  "steps": [
+    {
+      "id": "max",
+      "action": "maximizePanel",
+      "label": "a terminal, full height"
+    },
+    {
+      "id": "size",
+      "action": "run",
+      "cmd": "ls -lh access.log",
+      "label": "the log we will analyse",
+      "focus": "terminal",
+      "clearFirst": true,
+      "marks": [{ "id": "bytes", "text": "access.log" }]
+    }
+  ]
+}

@@ -185,3 +185,28 @@ where the Haiku code-comprehension cell showed a 25% saving.
 - Two README claims are **not** repeatable on screen: the "used across teams at Microsoft /
   Google / Meta…" badge wall links to `#` with no evidence, and the 98% headline is the vendor
   benchmarking its own tool on its own fixtures.
+
+## Correction — `--plugin-dir` is NOT fully isolated
+
+The validation runs were described as leaving `~/.claude` untouched. That was wrong, and it was
+caught by hashing the config rather than by reasoning about it.
+
+context-mode's postinstall writes a **global `SessionStart` hook** —
+`~/.claude/hooks/context-mode-cache-heal.mjs`, plus the matching entry in `settings.json` — the
+first time it loads, including under `--plugin-dir`. It is a real fix for a real Claude Code
+issue (auto-update breaking `CLAUDE_PLUGIN_ROOT`), not anything sinister, but it means:
+
+1. **A `--plugin-dir` load still writes outside the workspace.** `CONTEXT_MODE_DIR` redirects its
+   SQLite stores and nothing else.
+2. **`plugin uninstall` does not remove it.** After uninstalling the plugin and removing the
+   marketplace, the hook, the `enabledPlugins` / `extraKnownMarketplaces` entries, the 157 MB
+   plugin cache and `~/.claude/context-mode/` all remained. A hook pointing at a deleted plugin
+   is a liability, so all of it was removed by hand and the config re-verified.
+
+**The measurements are unaffected** — the hook heals cache paths and touches no token accounting —
+but the isolation claim needed correcting, and a viewer installing this should know that removing
+it is not a one-liner.
+
+**Method lesson:** a hash proves a file changed; it cannot restore it. The baseline here was
+snapshotted as a hash and the *content* copy was taken later, so the original bytes were
+unrecoverable and the file had to be reconstructed field by field. Snapshot the CONTENT.

@@ -1,0 +1,34 @@
+{
+  "slug": "ctxmode-before",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ctxmode-ws",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "maximizePanel": true,
+  "maxHoldMs": 1400,
+  "steps": [
+    {
+      "id": "max",
+      "action": "maximizePanel",
+      "label": "a terminal, full height"
+    },
+    {
+      "id": "ask",
+      "action": "run",
+      "background": true,
+      "waitFor": "10.0.1.4",
+      "timeout": 900000,
+      "settleMs": 9000,
+      "focus": "terminal",
+      "clearFirst": true,
+      "label": "the same question, with no plugin at all",
+      "cmd": "claude 'Find every request in access.log that failed with HTTP status 500, and summarise which IP addresses they came from with a count for each. State the total number of failed requests.' --model claude-haiku-4-5-20251001"
+    }
+  ]
+}

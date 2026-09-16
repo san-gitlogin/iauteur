@@ -1,0 +1,31 @@
+{
+  "slug": "ctxmode-proof",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ctxmode-ws",
+  "viewport": { "width": 1600, "height": 900 },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "maximizePanel": true,
+  "maxHoldMs": 1400,
+  "steps": [
+    { "id": "max", "action": "maximizePanel", "label": "a terminal, full height" },
+    {
+      "id": "table",
+      "action": "run",
+      "cmd": "node ctx-summary.mjs runs/t1-opus.json",
+      "label": "three runs each, from Claude Code's own books",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 120000,
+      "expect": { "contains": "context-mode plugin", "exitCode": 0 },
+      "marks": [
+        { "id": "plainbytes", "text": "43.1KB" },
+        { "id": "onbytes", "text": "19.2KB" },
+        { "id": "factor", "text": "2.2× less" },
+        { "id": "noisy", "text": "cost (NOISY)" }
+      ]
+    }
+  ]
+}

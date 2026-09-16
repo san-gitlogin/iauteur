@@ -1,0 +1,98 @@
+{
+  "slug": "ctxmode-install",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ctxmode-ws",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "maximizePanel": true,
+  "maxHoldMs": 1200,
+  "steps": [
+    {
+      "id": "max",
+      "action": "maximizePanel",
+      "label": "a terminal, full height"
+    },
+    {
+      "id": "logsize",
+      "action": "run",
+      "cmd": "wc -lc access.log",
+      "label": "the file we will analyse",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "access.log",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "bytes",
+          "text": "547720"
+        }
+      ]
+    },
+    {
+      "id": "market",
+      "action": "run",
+      "cmd": "claude plugin marketplace add mksglu/context-mode",
+      "label": "add the marketplace",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {
+        "contains": "Successfully added marketplace"
+      },
+      "marks": [
+        {
+          "id": "added",
+          "text": "Successfully added marketplace"
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "action": "run",
+      "cmd": "claude plugin install context-mode@context-mode",
+      "label": "install the plugin",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 600000,
+      "expect": {
+        "contains": "Successfully installed plugin"
+      },
+      "marks": [
+        {
+          "id": "ok",
+          "text": "Successfully installed plugin"
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "action": "run",
+      "cmd": "claude plugin details context-mode@context-mode | sed -n '1,13p'",
+      "label": "what it costs every session",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {
+        "contains": "Always-on"
+      },
+      "marks": [
+        {
+          "id": "alwayson",
+          "text": "~970 tok"
+        },
+        {
+          "id": "hooks",
+          "text": "Hooks (6)"
+        }
+      ]
+    }
+  ]
+}
